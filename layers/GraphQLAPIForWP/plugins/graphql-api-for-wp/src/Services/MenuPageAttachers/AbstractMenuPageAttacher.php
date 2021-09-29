@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPageAttachers;
 
-use GraphQLAPI\GraphQLAPI\Services\Menus\AbstractMenu;
+use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -22,14 +22,7 @@ abstract class AbstractMenuPageAttacher extends AbstractAutomaticallyInstantiate
         $this->instanceManager = $instanceManager;
     }
 
-    abstract public function getMenuClass(): string;
-
-    protected function getMenu(): AbstractMenu
-    {
-        $menuClass = $this->getMenuClass();
-        /** @var AbstractMenu */
-        return $this->instanceManager->getInstance($menuClass);
-    }
+    abstract public function getMenu(): MenuInterface;
 
     protected function getMenuName(): string
     {

@@ -6,14 +6,10 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
-use GraphQLAPI\GraphQLAPI\Services\Menus\AbstractMenu;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use Symfony\Contracts\Service\Attribute\Required;
 
-/**
- * Menu page
- */
 abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService implements MenuPageInterface
 {
     protected ?string $hookName = null;
@@ -37,15 +33,6 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
     public function getHookName(): ?string
     {
         return $this->hookName;
-    }
-
-    abstract public function getMenuClass(): string;
-
-    protected function getMenu(): AbstractMenu
-    {
-        $menuClass = $this->getMenuClass();
-        /** @var AbstractMenu */
-        return $this->instanceManager->getInstance($menuClass);
     }
 
     /**
@@ -74,8 +61,6 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
     {
         return $this->getMenu()->getName();
     }
-
-    abstract public function getMenuPageSlug(): string;
 
     protected function isCurrentScreen(): bool
     {

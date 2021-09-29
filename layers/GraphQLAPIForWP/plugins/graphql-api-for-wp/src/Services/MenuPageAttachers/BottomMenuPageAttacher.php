@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\MenuPageInterface;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModuleDocumentationMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ReleaseNotesAboutMenuPage;
@@ -23,6 +23,10 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     protected ModuleRegistryInterface $moduleRegistry;
     protected UserAuthorizationInterface $userAuthorization;
     protected SettingsMenuPage $settingsMenuPage;
+    protected ModuleDocumentationMenuPage $moduleDocumentationMenuPage;
+    protected ModulesMenuPage $modulesMenuPage;
+    protected ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage;
+    protected AboutMenuPage $aboutMenuPage;
 
     #[Required]
     public function autowireBottomMenuPageAttacher(
@@ -30,11 +34,19 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         SettingsMenuPage $settingsMenuPage,
+        ModuleDocumentationMenuPage $moduleDocumentationMenuPage,
+        ModulesMenuPage $modulesMenuPage,
+        ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage,
+        AboutMenuPage $aboutMenuPage,
     ): void {
         $this->menuPageHelper = $menuPageHelper;
         $this->moduleRegistry = $moduleRegistry;
         $this->userAuthorization = $userAuthorization;
         $this->settingsMenuPage = $settingsMenuPage;
+        $this->moduleDocumentationMenuPage = $moduleDocumentationMenuPage;
+        $this->modulesMenuPage = $modulesMenuPage;
+        $this->releaseNotesAboutMenuPage = $releaseNotesAboutMenuPage;
+        $this->aboutMenuPage = $aboutMenuPage;
     }
 
     /**
@@ -47,11 +59,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 
     public function addMenuPages(): void
     {
-        $menuPageClass = $this->getModuleMenuPageClass();
-        /**
-         * @var AbstractMenuPage
-         */
-        $modulesMenuPage = $this->instanceManager->getInstance($menuPageClass);
+        $modulesMenuPage = $this->getModuleMenuPage();
         /**
          * @var callable
          */
@@ -107,11 +115,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
          * So it doesn't appear on the menu, but it's still available
          * to display the release notes on the modal window
          */
-        $aboutPageClass = $this->getAboutMenuPageClass();
-        /**
-         * @var AbstractMenuPage
-         */
-        $aboutMenuPage = $this->instanceManager->getInstance($aboutPageClass);
+        $aboutMenuPage = $this->getAboutMenuPage();
         if (isset($_GET['page']) && $_GET['page'] == $aboutMenuPage->getScreenID()) {
             if (
                 $hookName = \add_submenu_page(
@@ -132,23 +136,23 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
      * Either the Modules menu page, or the Module Documentation menu page,
      * based on parameter ?tab="docs" or not
      */
-    protected function getModuleMenuPageClass(): string
+    protected function getModuleMenuPage(): MenuPageInterface
     {
         return
             $this->menuPageHelper->isDocumentationScreen() ?
-                ModuleDocumentationMenuPage::class
-                : ModulesMenuPage::class;
+                $this->moduleDocumentationMenuPage
+                : $this->modulesMenuPage;
     }
 
     /**
      * Either the About menu page, or the Release Notes menu page,
      * based on parameter ?tab="docs" or not
      */
-    protected function getAboutMenuPageClass(): string
+    protected function getAboutMenuPage(): MenuPageInterface
     {
         return
             $this->menuPageHelper->isDocumentationScreen() ?
-                ReleaseNotesAboutMenuPage::class
-                : AboutMenuPage::class;
+                $this->releaseNotesAboutMenuPage
+                : $this->aboutMenuPage;
     }
 }
