@@ -59,15 +59,15 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
 
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
-        $types = [
+        return match($fieldName) {
             'comments' => $this->commentObjectTypeResolver,
             'commentsForAdmin' => $this->commentObjectTypeResolver,
             'areCommentsOpen' => $this->booleanScalarTypeResolver,
             'hasComments' => $this->booleanScalarTypeResolver,
             'commentCount' => $this->intScalarTypeResolver,
             'commentCountForAdmin' => $this->intScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
+            default => parent::getFieldTypeResolver($fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int

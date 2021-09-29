@@ -44,12 +44,12 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
 
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
-        $types = [
+        return match($fieldName) {
             'url' => $this->urlScalarTypeResolver,
             'urlPath' => $this->stringScalarTypeResolver,
             'slug' => $this->stringScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
+            default => parent::getFieldTypeResolver($fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int

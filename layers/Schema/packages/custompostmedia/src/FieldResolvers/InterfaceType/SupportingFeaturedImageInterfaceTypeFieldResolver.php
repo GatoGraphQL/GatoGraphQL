@@ -47,11 +47,11 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
 
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
-        $types = [
+        return match($fieldName) {
             'featuredImage' => $this->mediaObjectTypeResolver,
             'hasFeaturedImage' => $this->booleanScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
+            default => parent::getFieldTypeResolver($fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int
