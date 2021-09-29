@@ -50,9 +50,24 @@ class InterfaceSchemaDefinitionResolverAdapter implements ObjectTypeFieldSchemaD
         return $this->interfaceTypeFieldSchemaDefinitionResolver->getSchemaFieldDescription($fieldName);
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        return $this->interfaceTypeFieldSchemaDefinitionResolver->getSchemaFieldArgs($fieldName);
+        return $this->interfaceTypeFieldSchemaDefinitionResolver->getSchemaFieldArgNameResolvers($fieldName);
+    }
+
+    public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        return $this->interfaceTypeFieldSchemaDefinitionResolver->getSchemaFieldArgDescription($fieldName, $fieldArgName);
+    }
+
+    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    {
+        return $this->interfaceTypeFieldSchemaDefinitionResolver->getSchemaFieldArgDefaultValue($fieldName, $fieldArgName);
+    }
+
+    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
+    {
+        return $this->interfaceTypeFieldSchemaDefinitionResolver->getSchemaFieldArgTypeModifiers($fieldName, $fieldArgName);
     }
 
     public function getSchemaFieldDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?string
