@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks;
 
-use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\Engine\ComponentConfiguration;
+use PoP\Hooks\AbstractHookSet;
 
 class VarsHookSet extends AbstractHookSet
 {

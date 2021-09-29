@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\SiteBuilderAPI\Hooks;
 
-use PoP\Hooks\AbstractHookSet;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\StratumManagerFactory;
+use PoP\Hooks\AbstractHookSet;
 
 class ApplicationStateHookSet extends AbstractHookSet
 {

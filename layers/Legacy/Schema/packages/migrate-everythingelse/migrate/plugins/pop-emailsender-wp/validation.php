@@ -1,7 +1,7 @@
 <?php
 namespace PoP\EmailSender\WP;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 define('POP_EMAILSENDERWP_POP_EMAILSENDER_MIN_VERSION', 0.1);
 

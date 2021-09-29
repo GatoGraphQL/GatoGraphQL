@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\CheckpointProcessors;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCheckpointProcessor implements CheckpointProcessorInterface
 {

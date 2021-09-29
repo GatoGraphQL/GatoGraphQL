@@ -1,11 +1,11 @@
 <?php
 
-use PoP\Routing\RouteNatures;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
+use PoP\Routing\RouteNatures;
+use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 
 class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {

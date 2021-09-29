@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 define('WSLPOPWEBPLATFORM_POP_SOCIALLOGINWEBPLATFORM_MIN_VERSION', 0.1);
 define('WSLPOPWEBPLATFORM_WSL_POP_MIN_VERSION', 0.1);

@@ -7,8 +7,8 @@ namespace PoPSchema\Pages\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
-use PoPSchema\Pages\Routing\RouteNatures;
 use PoPSchema\Pages\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPSchema\Pages\Routing\RouteNatures;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {

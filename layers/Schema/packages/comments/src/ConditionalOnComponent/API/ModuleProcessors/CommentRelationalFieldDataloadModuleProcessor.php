@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\ConditionalOnComponent\API\ModuleProcessors;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {

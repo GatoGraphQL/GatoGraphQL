@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\PluginConstants;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
@@ -12,6 +11,7 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use InvalidArgumentException;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\Root\Environment as RootEnvironment;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractContentParser implements ContentParserInterface
 {

@@ -5,8 +5,8 @@ namespace Guzzle\Http;
 use Guzzle\Common\Collection;
 use Guzzle\Common\Exception\RuntimeException;
 use Guzzle\Http\QueryAggregator\DuplicateAggregator;
-use Guzzle\Http\QueryAggregator\QueryAggregatorInterface;
 use Guzzle\Http\QueryAggregator\PhpAggregator;
+use Guzzle\Http\QueryAggregator\QueryAggregatorInterface;
 
 /**
  * Query string object to handle managing query string parameters and aggregating those parameters together as a string.

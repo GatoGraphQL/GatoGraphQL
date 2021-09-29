@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SystemMutations\MutationResolverBridges;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\SystemMutations\MutationResolvers\GenerateThemeMutationResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolverBridges;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\MutationResolverBridges\AbstractCRUDComponentMutationResolverBridge;
 use PoP\EditPosts\HelperAPIFactory;
@@ -13,6 +12,7 @@ use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\Posts\Constants\InputNames;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\MutationInputProperties;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends AbstractCRUDComponentMutationResolverBridge
 {

@@ -2,10 +2,10 @@
 
 namespace Guzzle\Service\Resource;
 
-use Guzzle\Common\AbstractHasDispatcher;
 use Guzzle\Batch\BatchBuilder;
-use Guzzle\Batch\BatchSizeDivisor;
 use Guzzle\Batch\BatchClosureTransfer;
+use Guzzle\Batch\BatchSizeDivisor;
+use Guzzle\Common\AbstractHasDispatcher;
 use Guzzle\Common\Version;
 
 /**

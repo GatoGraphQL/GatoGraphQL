@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserMeta\Facades;
 
-use PoPSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoPSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface;
 
 class UserMetaTypeAPIFacade
 {

@@ -1,6 +1,6 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Modules\ModuleUtils;
 
 trait PoP_Engine_Module_Processor_InnerModules_Trait
 {

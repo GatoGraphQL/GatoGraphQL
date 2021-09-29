@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\Facades;
 
-use PoPSchema\Stances\TypeAPIs\StanceTypeAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoPSchema\Stances\TypeAPIs\StanceTypeAPIInterface;
 
 class StanceTypeAPIFacade
 {

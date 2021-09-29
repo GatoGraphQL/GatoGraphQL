@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 define('PTWAE_POP_APPLICATIONPROCESSORS_MIN_VERSION', 0.1);
 define('PTWAE_POP_COMMONAUTOMATEDEMAILS_MIN_VERSION', 0.1);

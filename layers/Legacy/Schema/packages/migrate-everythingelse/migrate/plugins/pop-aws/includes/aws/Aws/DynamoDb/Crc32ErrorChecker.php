@@ -19,8 +19,8 @@ namespace Aws\DynamoDb;
 use Guzzle\Http\Exception\HttpException;
 use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\Response;
-use Guzzle\Plugin\Backoff\BackoffStrategyInterface;
 use Guzzle\Plugin\Backoff\AbstractBackoffStrategy;
+use Guzzle\Plugin\Backoff\BackoffStrategyInterface;
 use Guzzle\Stream\Stream;
 
 /**

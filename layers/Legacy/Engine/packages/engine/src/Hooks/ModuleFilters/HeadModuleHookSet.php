@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Hooks\ModuleFilters;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\Hooks\AbstractHookSet;
-use PoP\Engine\ModuleFilters\HeadModule;
+use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\ModelInstance\ModelInstance;
+use PoP\Engine\ModuleFilters\HeadModule;
+use PoP\Hooks\AbstractHookSet;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class HeadModuleHookSet extends AbstractHookSet
 {

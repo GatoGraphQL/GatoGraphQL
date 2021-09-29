@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ApplicationTaxonomies\FunctionAPIFactory;
-use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\SubscribeToTagMutationResolver;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
+use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\SubscribeToTagMutationResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class SubscribeToTagMutationResolverBridge extends AbstractTagUpdateUserMetaValueMutationResolverBridge
 {

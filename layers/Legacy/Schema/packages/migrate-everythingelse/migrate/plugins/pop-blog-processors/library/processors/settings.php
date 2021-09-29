@@ -1,10 +1,10 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoPSchema\PostTags\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
-use PoPSchema\PostTags\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
-use PoPSchema\Posts\ModuleProcessors\FieldDataloadModuleProcessor as PostFieldDataloads;
-use PoPSchema\Users\ModuleProcessors\FieldDataloadModuleProcessor as UserFieldDataloads;
 use PoPSchema\Posts\ConditionalOnComponent\Users\ModuleProcessors\FieldDataloadModuleProcessor as UserPostFieldDataloads;
+use PoPSchema\Posts\ModuleProcessors\FieldDataloadModuleProcessor as PostFieldDataloads;
+use PoPSchema\PostTags\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
+use PoPSchema\PostTags\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
+use PoPSchema\Users\ModuleProcessors\FieldDataloadModuleProcessor as UserFieldDataloads;
 
 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 $moduleprocessor_manager->overrideProcessorClass(

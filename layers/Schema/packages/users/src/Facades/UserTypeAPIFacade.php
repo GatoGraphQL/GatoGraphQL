@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\Facades;
 
-use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class UserTypeAPIFacade
 {

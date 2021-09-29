@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModulePath;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\Tokens\ModulePath;
 use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\Tokens\ModulePath;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class ModulePathHelpers implements ModulePathHelpersInterface
 {

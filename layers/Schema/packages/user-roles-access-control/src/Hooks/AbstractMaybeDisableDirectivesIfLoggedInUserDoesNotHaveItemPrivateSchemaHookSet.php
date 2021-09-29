@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesAccessControl\Hooks;
 
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\AccessControl\Hooks\AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHookSet;
+use PoP\ComponentModel\State\ApplicationState;
 
 abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivateSchemaHookSet extends AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHookSet
 {

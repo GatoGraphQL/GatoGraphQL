@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\QueriedObject\Hooks;
 
-use Symfony\Contracts\Service\Attribute\Required;
+use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalObjectTypeFieldResolver;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
-use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalObjectTypeFieldResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class ApplicationStateHookSet extends AbstractHookSet
 {

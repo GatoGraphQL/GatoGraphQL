@@ -1,9 +1,9 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Application\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Application\QueryInputOutputHandlers\Utils;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataModuleProcessorBase
 {

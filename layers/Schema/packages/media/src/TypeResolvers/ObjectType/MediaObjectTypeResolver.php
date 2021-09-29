@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\TypeResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\Media\RelationalTypeDataLoaders\ObjectType\MediaTypeDataLoader;
+use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class MediaObjectTypeResolver extends AbstractObjectTypeResolver
 {

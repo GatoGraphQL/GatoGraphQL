@@ -16,8 +16,8 @@
 
 namespace Aws\S3;
 
-use Aws\Common\Signature\SignatureV4;
 use Aws\Common\Signature\SignatureInterface;
+use Aws\Common\Signature\SignatureV4;
 use Guzzle\Common\Event;
 use Guzzle\Service\Command\CommandInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

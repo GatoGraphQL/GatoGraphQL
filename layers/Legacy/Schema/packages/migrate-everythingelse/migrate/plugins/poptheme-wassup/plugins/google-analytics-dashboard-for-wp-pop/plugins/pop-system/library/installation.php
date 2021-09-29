@@ -1,6 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 class PoPTheme_Wassup_GADWP_Installation
 {
     public function __construct()

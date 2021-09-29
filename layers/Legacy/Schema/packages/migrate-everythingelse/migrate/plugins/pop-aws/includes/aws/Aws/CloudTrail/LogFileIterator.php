@@ -2,9 +2,9 @@
 
 namespace Aws\CloudTrail;
 
+use Aws\CloudTrail\Exception\CloudTrailException;
 use Aws\Common\Exception\InvalidArgumentException;
 use Aws\S3\S3Client;
-use Aws\CloudTrail\Exception\CloudTrailException;
 use Guzzle\Iterator\FilterIterator;
 
 /**

@@ -11,9 +11,9 @@
 
 namespace Monolog\Handler;
 
-use Monolog\Logger;
-use Monolog\Formatter\NormalizerFormatter;
 use Doctrine\CouchDB\CouchDBClient;
+use Monolog\Formatter\NormalizerFormatter;
+use Monolog\Logger;
 
 /**
  * CouchDB handler for Doctrine CouchDB ODM

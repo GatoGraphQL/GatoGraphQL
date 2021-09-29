@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeResolvers\UnionType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\AbstractUnionTypeResolver;
 use PoPSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
 {

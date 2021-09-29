@@ -1,9 +1,9 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Engine\Route\RouteUtils;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Engine\Route\RouteUtils;
+use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks extends PoP_CommonAutomatedEmails_Module_Processor_SectionBlocksBase
 {

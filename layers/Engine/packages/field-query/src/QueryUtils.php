@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\FieldQuery;
 
-use PoP\QueryParsing\QueryParserOptions;
 use PoP\QueryParsing\Facades\QueryParserFacade;
+use PoP\QueryParsing\QueryParserOptions;
 
 class QueryUtils
 {

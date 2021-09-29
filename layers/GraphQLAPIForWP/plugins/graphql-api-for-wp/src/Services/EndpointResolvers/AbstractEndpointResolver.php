@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointResolvers;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractEndpointResolver extends AbstractAutomaticallyInstantiatedService
 {

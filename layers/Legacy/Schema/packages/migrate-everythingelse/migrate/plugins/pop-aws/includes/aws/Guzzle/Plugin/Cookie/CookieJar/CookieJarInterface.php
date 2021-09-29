@@ -2,9 +2,9 @@
 
 namespace Guzzle\Plugin\Cookie\CookieJar;
 
-use Guzzle\Plugin\Cookie\Cookie;
 use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\Response;
+use Guzzle\Plugin\Cookie\Cookie;
 
 /**
  * Interface for persisting cookies

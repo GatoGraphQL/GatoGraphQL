@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMeta;
 
-use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
+use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class ComponentConfiguration

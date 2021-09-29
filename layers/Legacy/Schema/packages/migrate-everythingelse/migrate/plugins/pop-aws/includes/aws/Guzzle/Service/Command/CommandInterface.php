@@ -4,12 +4,12 @@ namespace Guzzle\Service\Command;
 
 use Guzzle\Common\Collection;
 use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Http\Message\Response;
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Service\Exception\CommandException;
-use Guzzle\Service\Description\OperationInterface;
-use Guzzle\Service\ClientInterface;
 use Guzzle\Common\ToArrayInterface;
+use Guzzle\Http\Message\RequestInterface;
+use Guzzle\Http\Message\Response;
+use Guzzle\Service\ClientInterface;
+use Guzzle\Service\Description\OperationInterface;
+use Guzzle\Service\Exception\CommandException;
 
 /**
  * A command object that contains parameters that can be modified and accessed like an array and turned into an array

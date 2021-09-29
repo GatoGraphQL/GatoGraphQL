@@ -3,9 +3,9 @@
 namespace Aws\Common\Command;
 
 use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Service\Description\Parameter;
 use Guzzle\Service\Command\CommandInterface;
 use Guzzle\Service\Command\LocationVisitor\Request\AbstractRequestVisitor;
+use Guzzle\Service\Description\Parameter;
 
 /**
  * Location visitor used to serialize AWS query parameters (e.g. EC2, SES, SNS, SQS, etc) as POST fields

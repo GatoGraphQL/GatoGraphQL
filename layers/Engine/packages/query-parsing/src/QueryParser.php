@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\QueryParsing;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use Exception;
 use PoP\Translation\TranslationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class QueryParser implements QueryParserInterface
 {

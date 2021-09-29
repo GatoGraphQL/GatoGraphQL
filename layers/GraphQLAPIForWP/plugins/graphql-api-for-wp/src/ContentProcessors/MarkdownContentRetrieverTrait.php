@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
-use InvalidArgumentException;
 use GraphQLAPI\GraphQLAPI\Facades\ContentProcessors\MarkdownContentParserFacade;
+use InvalidArgumentException;
 
 trait MarkdownContentRetrieverTrait
 {

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMeta\FieldResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CommentMeta\TypeAPIs\CommentMetaTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModulePath;
 
-use PoP\ComponentModel\Tokens\ModulePath;
-use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
+use PoP\ComponentModel\ModuleFilters\ModulePaths;
+use PoP\ComponentModel\Tokens\ModulePath;
 
 class ModulePathUtils
 {

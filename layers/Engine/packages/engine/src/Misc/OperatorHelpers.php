@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Misc;
 
-use PoP\Engine\Constants\OperationSymbols;
 use Exception;
+use PoP\Engine\Constants\OperationSymbols;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
 class OperatorHelpers

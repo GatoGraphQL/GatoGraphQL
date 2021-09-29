@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars\Facades\RuntimeRegistries;
 
-use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
 
 class UserAvatarRuntimeRegistryFacade
 {

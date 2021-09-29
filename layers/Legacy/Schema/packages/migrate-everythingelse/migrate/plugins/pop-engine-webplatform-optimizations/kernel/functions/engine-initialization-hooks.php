@@ -1,6 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_WebPlatformEngineOptimizations_EngineInitialization_Hooks
 {

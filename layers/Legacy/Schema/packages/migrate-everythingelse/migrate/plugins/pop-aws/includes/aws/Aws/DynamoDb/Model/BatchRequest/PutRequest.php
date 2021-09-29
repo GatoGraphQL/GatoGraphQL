@@ -16,8 +16,8 @@
 
 namespace Aws\DynamoDb\Model\BatchRequest;
 
-use Aws\DynamoDb\Model\Item;
 use Aws\Common\Exception\InvalidArgumentException;
+use Aws\DynamoDb\Model\Item;
 use Guzzle\Service\Command\AbstractCommand;
 
 /**

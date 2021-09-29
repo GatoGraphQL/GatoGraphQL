@@ -1,8 +1,8 @@
 <?php
+use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
+use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 use PoPSitesWassup\LocationMutations\MutationResolverBridges\CreateLocationMutationResolverBridge;
 
 class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processor_DataloadsBase

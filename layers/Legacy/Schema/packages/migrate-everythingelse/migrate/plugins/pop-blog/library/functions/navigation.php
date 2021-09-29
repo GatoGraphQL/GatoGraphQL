@@ -1,9 +1,9 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
+use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 /**
  * Implementation of the icons

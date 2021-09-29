@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PoP\GuzzleHelpers;
 
 use GuzzleHttp\Client;
-use PoP\ComponentModel\ErrorHandling\Error;
-use GuzzleHttp\RequestOptions;
-use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use GuzzleHttp\Promise\Utils;
+use GuzzleHttp\RequestOptions;
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use Psr\Http\Message\ResponseInterface;
 
 class GuzzleHelpers
 {

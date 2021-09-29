@@ -1,11 +1,11 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Application\ModuleProcessors\AbstractQueryDataModuleProcessor;
-use PoP\Definitions\Facades\DefinitionManagerFacade;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Definitions\Facades\DefinitionManagerFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQueryDataModuleProcessor
 {

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Cache;
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class CacheUtils
 {

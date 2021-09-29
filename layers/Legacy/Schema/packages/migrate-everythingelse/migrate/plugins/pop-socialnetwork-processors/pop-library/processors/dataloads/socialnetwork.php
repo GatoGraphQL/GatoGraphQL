@@ -1,10 +1,10 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
 use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
-use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 
 class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_DataloadsBase
 {

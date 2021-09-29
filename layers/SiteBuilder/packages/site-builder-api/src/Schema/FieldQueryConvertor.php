@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\SiteBuilderAPI\Schema;
 
-use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\API\Schema\FieldQueryConvertor as UpstreamFieldQueryConvertor;
+use PoP\ConfigurationComponentModel\Constants\Params;
 
 class FieldQueryConvertor extends UpstreamFieldQueryConvertor
 {

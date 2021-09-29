@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\API\ModuleProcessors;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\ObjectModels\Root;
 use PoP\Engine\Schema\SchemaDefinitionServiceInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {

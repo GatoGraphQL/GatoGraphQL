@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Hooks;
 
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\Hooks\AbstractHookSet;
-use PoP\ComponentModel\State\ApplicationState;
 
 class SchemaCacheHookSet extends AbstractHookSet
 {

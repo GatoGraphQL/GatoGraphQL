@@ -1,7 +1,7 @@
 <?php
 namespace PoP\EditPosts;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 define('POP_EDITPOSTS_POP_POSTS_MIN_VERSION', 0.1);
 

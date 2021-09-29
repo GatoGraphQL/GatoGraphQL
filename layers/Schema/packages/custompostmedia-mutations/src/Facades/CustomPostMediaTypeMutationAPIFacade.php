@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\Facades;
 
-use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 
 class CustomPostMediaTypeMutationAPIFacade
 {

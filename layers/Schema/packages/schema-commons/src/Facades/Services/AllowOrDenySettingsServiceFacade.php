@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\Facades\Services;
 
-use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 
 class AllowOrDenySettingsServiceFacade
 {

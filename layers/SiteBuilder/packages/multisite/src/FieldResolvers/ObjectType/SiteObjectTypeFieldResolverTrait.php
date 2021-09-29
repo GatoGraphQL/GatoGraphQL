@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Multisite\FieldResolvers\ObjectType;
 
-use PoP\Engine\FunctionAPIFactory;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\FunctionAPIFactory;
 use PoP\Multisite\ObjectModels\Site;
 
 trait SiteObjectTypeFieldResolverTrait

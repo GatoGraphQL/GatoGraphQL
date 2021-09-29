@@ -18,8 +18,8 @@ namespace Aws\S3\Sync;
 
 use Aws\Common\Exception\RuntimeException;
 use Aws\Common\Exception\UnexpectedValueException;
-use Aws\S3\S3Client;
 use Aws\S3\Iterator\OpendirIterator;
+use Aws\S3\S3Client;
 use Guzzle\Common\Event;
 use Guzzle\Common\HasDispatcherInterface;
 use Guzzle\Iterator\FilterIterator;

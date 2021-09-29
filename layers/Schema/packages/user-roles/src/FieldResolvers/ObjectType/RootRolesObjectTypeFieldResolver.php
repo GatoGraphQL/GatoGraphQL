@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

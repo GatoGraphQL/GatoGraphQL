@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\PackageUtils;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Package\CustomPackageProvider;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\PackageUtils;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\CustomPackage;
 
 final class SourcePackagesProvider

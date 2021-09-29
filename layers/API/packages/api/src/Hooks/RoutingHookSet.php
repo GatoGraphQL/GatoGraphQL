@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\API\Hooks;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\ComponentConfiguration;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\AbstractHookSet;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class RoutingHookSet extends AbstractHookSet
 {

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\ObjectTypeResolverPickers;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractPostObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {

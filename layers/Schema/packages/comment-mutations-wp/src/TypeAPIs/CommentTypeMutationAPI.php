@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutationsWP\TypeAPIs;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 use PoPSchema\CommentMutations\ComponentConfiguration;
+use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

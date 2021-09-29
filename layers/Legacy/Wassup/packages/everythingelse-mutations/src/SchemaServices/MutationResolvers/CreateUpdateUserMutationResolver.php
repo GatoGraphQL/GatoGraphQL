@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\EditUsers\FunctionAPIFactory;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\EditUsers\FunctionAPIFactory;
 
 class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 {

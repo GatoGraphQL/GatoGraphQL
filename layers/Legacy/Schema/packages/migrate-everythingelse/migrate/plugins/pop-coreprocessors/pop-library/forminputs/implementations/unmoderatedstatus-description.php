@@ -1,7 +1,7 @@
 <?php
+use PoP\Engine\FormInputs\SelectFormInput;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
-use PoP\Engine\FormInputs\SelectFormInput;
 
 class GD_FormInput_UnmoderatedStatusDescription extends SelectFormInput
 {

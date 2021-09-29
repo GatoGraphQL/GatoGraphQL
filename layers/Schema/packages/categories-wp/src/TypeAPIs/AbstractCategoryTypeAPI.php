@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\CategoriesWP\TypeAPIs;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use Symfony\Contracts\Service\Attribute\Required;
 use WP_Error;
 use WP_Taxonomy;
 use WP_Term;

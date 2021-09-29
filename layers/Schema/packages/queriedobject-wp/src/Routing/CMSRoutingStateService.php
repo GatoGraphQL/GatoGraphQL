@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\QueriedObjectWP\Routing;
 
-use WP_Query;
 use PoP\RoutingWP\RoutingManagerTrait;
 use PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
+use WP_Query;
 
 class CMSRoutingStateService implements CMSRoutingStateServiceInterface
 {

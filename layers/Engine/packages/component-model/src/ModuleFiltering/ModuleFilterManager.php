@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleFiltering;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class ModuleFilterManager implements ModuleFilterManagerInterface
 {

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\API;
 
-use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
+use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
 class ComponentConfiguration
 {

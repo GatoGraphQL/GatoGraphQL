@@ -2,8 +2,8 @@
 
 namespace Guzzle\Service\Command\Factory;
 
-use Guzzle\Service\Description\ServiceDescriptionInterface;
 use Guzzle\Inflection\InflectorInterface;
+use Guzzle\Service\Description\ServiceDescriptionInterface;
 
 /**
  * Command factory used to create commands based on service descriptions

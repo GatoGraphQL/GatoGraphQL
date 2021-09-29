@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 define('POP_AVATARAWS_POP_AVATAR_MIN_VERSION', 0.1);
 define('POP_AVATARAWS_POP_AWS_MIN_VERSION', 0.1);

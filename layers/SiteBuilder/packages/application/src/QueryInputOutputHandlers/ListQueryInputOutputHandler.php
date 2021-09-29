@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\Application\QueryInputOutputHandlers;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Params;
+use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler as UpstreamListQueryInputOutputHandler;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler as UpstreamListQueryInputOutputHandler;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
 {

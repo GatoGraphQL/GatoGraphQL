@@ -1,6 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 class PoP_UserStanceWP_Installation
 {
     public function __construct()

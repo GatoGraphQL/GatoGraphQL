@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\MutationResolvers;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -12,6 +11,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\UserState\State\ApplicationStateUtils;
 use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class LoginMutationResolver extends AbstractMutationResolver
 {

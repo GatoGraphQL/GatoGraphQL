@@ -7,13 +7,13 @@ namespace GraphQLByPoP\GraphQLServer;
 use GraphQLByPoP\GraphQLRequest\Component as GraphQLRequestComponent;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
+use PoP\AccessControl\Component as AccessControlComponent;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
+use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\Engine\Component as EngineComponent;
 use PoP\Engine\Environment as EngineEnvironment;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
-use PoP\AccessControl\Component as AccessControlComponent;
-use PoP\CacheControl\Component as CacheControlComponent;
 
 /**
  * Initialize component

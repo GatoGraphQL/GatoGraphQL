@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('icon_dirs', 'gdMediaIconDirs', 100);
 

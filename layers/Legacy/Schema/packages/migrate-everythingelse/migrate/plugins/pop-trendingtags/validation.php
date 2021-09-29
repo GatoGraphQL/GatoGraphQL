@@ -1,7 +1,7 @@
 <?php
 namespace PoP\TrendingTags;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 define('POP_TRENDINGTAGS_POP_TAXONOMIES_MIN_VERSION', 0.1);
 

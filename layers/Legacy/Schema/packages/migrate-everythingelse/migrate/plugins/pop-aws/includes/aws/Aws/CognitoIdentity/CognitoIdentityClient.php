@@ -10,8 +10,8 @@ use Aws\Common\Signature\SignatureListener;
 use Guzzle\Common\Collection;
 use Guzzle\Service\Command\AbstractCommand;
 use Guzzle\Service\Resource\Model;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Client to interact with Amazon Cognito Identity

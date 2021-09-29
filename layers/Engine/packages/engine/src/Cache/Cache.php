@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Cache;
 
-use Symfony\Contracts\Service\Attribute\Required;
+use PoP\ComponentModel\Cache\Cache as UpstreamCache;
 use PoP\Hooks\HooksAPIInterface;
 use Psr\Cache\CacheItemInterface;
-use PoP\ComponentModel\Cache\Cache as UpstreamCache;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class Cache extends UpstreamCache
 {

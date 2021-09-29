@@ -2,11 +2,11 @@
 
 namespace Guzzle\Http\Message;
 
-use Guzzle\Common\Version;
-use Guzzle\Common\ToArrayInterface;
 use Guzzle\Common\Exception\RuntimeException;
-use Guzzle\Http\EntityBodyInterface;
+use Guzzle\Common\ToArrayInterface;
+use Guzzle\Common\Version;
 use Guzzle\Http\EntityBody;
+use Guzzle\Http\EntityBodyInterface;
 use Guzzle\Http\Exception\BadResponseException;
 use Guzzle\Http\RedirectPlugin;
 use Guzzle\Parser\ParserRegistry;

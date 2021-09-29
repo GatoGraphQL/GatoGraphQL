@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPSchema\UserState\CheckpointProcessors;
 
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\State\ApplicationState;
 
 class UserStateCheckpointProcessor extends AbstractCheckpointProcessor
 {

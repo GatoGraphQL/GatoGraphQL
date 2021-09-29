@@ -17,10 +17,10 @@
 namespace Aws\S3\Model;
 
 use Aws\Common\Client\AwsClientInterface;
-use Guzzle\Common\AbstractHasDispatcher;
-use Guzzle\Batch\FlushingBatch;
 use Guzzle\Batch\ExceptionBufferingBatch;
+use Guzzle\Batch\FlushingBatch;
 use Guzzle\Batch\NotifyingBatch;
+use Guzzle\Common\AbstractHasDispatcher;
 use Guzzle\Common\Exception\ExceptionCollection;
 
 /**

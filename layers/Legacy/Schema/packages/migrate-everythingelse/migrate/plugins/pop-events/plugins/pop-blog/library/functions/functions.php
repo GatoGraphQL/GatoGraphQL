@@ -1,6 +1,6 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('wassup_section_taxonomyterms', 'popEmSectionTaxonomyterms', 0);

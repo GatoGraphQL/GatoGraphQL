@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ErrorHandling;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Translation\TranslationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class ErrorProvider implements ErrorProviderInterface
 {

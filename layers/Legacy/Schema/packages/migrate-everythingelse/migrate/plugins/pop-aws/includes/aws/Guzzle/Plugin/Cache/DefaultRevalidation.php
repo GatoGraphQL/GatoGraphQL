@@ -2,9 +2,9 @@
 
 namespace Guzzle\Plugin\Cache;
 
+use Guzzle\Http\Exception\BadResponseException;
 use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\Response;
-use Guzzle\Http\Exception\BadResponseException;
 
 /**
  * Default revalidation strategy

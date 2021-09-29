@@ -1,7 +1,7 @@
 <?php
+use PoP\Definitions\Facades\DefinitionManagerFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\DefinitionGroups;
-use PoP\Definitions\Facades\DefinitionManagerFacade;
 $definitionManager = DefinitionManagerFacade::getInstance();
 
 // System Pages

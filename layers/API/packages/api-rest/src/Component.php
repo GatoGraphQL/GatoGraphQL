@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\RESTAPI;
 
+use PoP\API\Component as APIComponent;
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Component\CanDisableComponentTrait;
-use PoP\API\Component as APIComponent;
 
 /**
  * Initialize component

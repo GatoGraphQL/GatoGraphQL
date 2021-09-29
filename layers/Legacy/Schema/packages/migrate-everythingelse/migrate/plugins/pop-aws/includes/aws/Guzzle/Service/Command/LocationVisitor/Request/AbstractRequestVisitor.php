@@ -2,8 +2,8 @@
 
 namespace Guzzle\Service\Command\LocationVisitor\Request;
 
-use Guzzle\Service\Command\CommandInterface;
 use Guzzle\Http\Message\RequestInterface;
+use Guzzle\Service\Command\CommandInterface;
 use Guzzle\Service\Description\Parameter;
 
 abstract class AbstractRequestVisitor implements RequestVisitorInterface

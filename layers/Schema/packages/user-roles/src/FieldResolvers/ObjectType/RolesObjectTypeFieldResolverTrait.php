@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
 trait RolesObjectTypeFieldResolverTrait

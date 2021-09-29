@@ -16,8 +16,8 @@
 
 namespace Aws\S3\Model;
 
-use Aws\S3\Enum\Permission;
 use Aws\Common\Exception\InvalidArgumentException;
+use Aws\S3\Enum\Permission;
 use Guzzle\Common\ToArrayInterface;
 
 /**

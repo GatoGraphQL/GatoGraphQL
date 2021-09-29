@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\TypeResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\Users\RelationalTypeDataLoaders\ObjectType\UserTypeDataLoader;
+use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class UserObjectTypeResolver extends AbstractObjectTypeResolver
 {

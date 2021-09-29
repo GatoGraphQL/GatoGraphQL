@@ -2,8 +2,8 @@
 
 namespace Guzzle\Http;
 
-use Guzzle\Stream\StreamRequestFactoryInterface;
 use Guzzle\Stream\PhpStreamRequestFactory;
+use Guzzle\Stream\StreamRequestFactoryInterface;
 
 /**
  * Simplified interface to Guzzle that does not require a class to be instantiated

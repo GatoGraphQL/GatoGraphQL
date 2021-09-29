@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Menus;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Main plugin's admin menu

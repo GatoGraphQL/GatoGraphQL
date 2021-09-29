@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutationsWP\LooseContracts;
 
-use PoPSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 use PoP\LooseContracts\AbstractLooseContractResolutionSet;
+use PoPSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 
 class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
 {

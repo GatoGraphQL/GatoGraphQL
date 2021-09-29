@@ -1,7 +1,7 @@
 <?php
 namespace PoP\ApplicationTaxonomies;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 define('POP_APPLICATIONTAXONOMIES_POP_ENGINE_MIN_VERSION', 0.1);
 

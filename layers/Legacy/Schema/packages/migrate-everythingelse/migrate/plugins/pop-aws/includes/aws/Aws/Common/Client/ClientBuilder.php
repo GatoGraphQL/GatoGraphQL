@@ -33,6 +33,9 @@ use Aws\Common\Signature\SignatureV2;
 use Aws\Common\Signature\SignatureV3Https;
 use Aws\Common\Signature\SignatureV4;
 use Guzzle\Common\Collection;
+use Guzzle\Log\ClosureLogAdapter;
+use Guzzle\Log\LogAdapterInterface;
+use Guzzle\Plugin\Backoff\BackoffLogger;
 use Guzzle\Plugin\Backoff\BackoffPlugin;
 use Guzzle\Plugin\Backoff\CurlBackoffStrategy;
 use Guzzle\Plugin\Backoff\ExponentialBackoffStrategy;
@@ -40,9 +43,6 @@ use Guzzle\Plugin\Backoff\HttpBackoffStrategy;
 use Guzzle\Plugin\Backoff\TruncatedBackoffStrategy;
 use Guzzle\Service\Description\ServiceDescription;
 use Guzzle\Service\Resource\ResourceIteratorClassFactory;
-use Guzzle\Log\LogAdapterInterface;
-use Guzzle\Log\ClosureLogAdapter;
-use Guzzle\Plugin\Backoff\BackoffLogger;
 
 /**
  * Builder for creating AWS service clients

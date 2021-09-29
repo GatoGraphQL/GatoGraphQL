@@ -11,9 +11,9 @@
 
 namespace Monolog;
 
+use Monolog\Handler\AbstractHandler;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
-use Monolog\Handler\AbstractHandler;
 
 /**
  * Monolog error handler

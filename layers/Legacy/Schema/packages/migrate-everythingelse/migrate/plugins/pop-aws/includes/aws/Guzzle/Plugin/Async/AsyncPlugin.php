@@ -3,8 +3,8 @@
 namespace Guzzle\Plugin\Async;
 
 use Guzzle\Common\Event;
-use Guzzle\Http\Message\Response;
 use Guzzle\Http\Exception\CurlException;
+use Guzzle\Http\Message\Response;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**

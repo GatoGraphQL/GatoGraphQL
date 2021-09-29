@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\Application\HelperAPIFactory;
 use PoP\Application\FunctionAPIFactory;
+use PoP\Application\HelperAPIFactory;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 
 

@@ -1,8 +1,8 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\URLParams;
-use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
+use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class PoP_CDN_Blog_CDNHooks
 {

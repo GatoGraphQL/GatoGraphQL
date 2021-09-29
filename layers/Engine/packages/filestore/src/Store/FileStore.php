@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\FileStore\Store;
 
-use RuntimeException;
 use PoP\FileStore\File\AbstractFile;
+use RuntimeException;
 
 class FileStore implements FileStoreInterface
 {

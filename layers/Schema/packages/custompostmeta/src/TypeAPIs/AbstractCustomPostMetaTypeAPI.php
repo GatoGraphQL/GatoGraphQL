@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMeta\TypeAPIs;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoPSchema\CustomPostMeta\ComponentConfiguration;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostMetaTypeAPI implements CustomPostMetaTypeAPIInterface
 {

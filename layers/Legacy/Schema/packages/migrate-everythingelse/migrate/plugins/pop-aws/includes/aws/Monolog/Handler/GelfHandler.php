@@ -12,11 +12,11 @@
 namespace Monolog\Handler;
 
 use Gelf\IMessagePublisher;
-use Gelf\PublisherInterface;
 use Gelf\Publisher;
+use Gelf\PublisherInterface;
 use InvalidArgumentException;
-use Monolog\Logger;
 use Monolog\Formatter\GelfMessageFormatter;
+use Monolog\Logger;
 
 /**
  * Handler to send messages to a Graylog2 (http://www.graylog2.org) server

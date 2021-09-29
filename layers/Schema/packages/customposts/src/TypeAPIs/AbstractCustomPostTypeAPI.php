@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeAPIs;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
 {

@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
 {

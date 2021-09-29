@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\RoutingWP\Hooks;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use Brain\Cortex\Route\QueryRoute;
 use Brain\Cortex\Route\RouteCollectionInterface;
 use Brain\Cortex\Route\RouteInterface;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Routing\RoutingManagerInterface;
 use PoP\RoutingWP\WPQueries;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class SetupCortexHookSet extends AbstractHookSet
 {

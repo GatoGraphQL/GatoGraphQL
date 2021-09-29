@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\Facades;
 
-use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 
 class PostTypeAPIFacade
 {

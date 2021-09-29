@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\FieldQuery\QueryUtils;
-use PoP\FieldQuery\QueryHelpers;
 use PoP\API\ComponentConfiguration;
-use PoP\QueryParsing\QueryParserInterface;
-use PoP\Translation\TranslationAPIInterface;
-use PoP\API\Schema\QuerySyntax as APIQuerySyntax;
 use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
+use PoP\API\Schema\FieldQueryInterpreterInterface as APIFieldQueryInterpreterInterface;
+use PoP\API\Schema\QuerySyntax as APIQuerySyntax;
 use PoP\ComponentModel\Constants\Params;
-use PoP\FieldQuery\QuerySyntax as FieldQueryQuerySyntax;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\API\Schema\FieldQueryInterpreterInterface as APIFieldQueryInterpreterInterface;
+use PoP\FieldQuery\QueryHelpers;
+use PoP\FieldQuery\QuerySyntax as FieldQueryQuerySyntax;
+use PoP\FieldQuery\QueryUtils;
+use PoP\QueryParsing\QueryParserInterface;
+use PoP\Translation\TranslationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 use function count;
 use function strlen;

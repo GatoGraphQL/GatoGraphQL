@@ -1,9 +1,9 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Engine\Route\RouteUtils;
-use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
+use PoP\Engine\Route\RouteUtils;
+use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_Processor_UserTypeaheadComponentFormInputsBase
 {

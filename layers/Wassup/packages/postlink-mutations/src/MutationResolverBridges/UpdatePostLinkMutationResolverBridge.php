@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\PostLinkMutations\MutationResolverBridges;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\PostLinkMutations\MutationResolvers\UpdatePostLinkMutationResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class UpdatePostLinkMutationResolverBridge extends AbstractCreateUpdatePostLinkMutationResolverBridge
 {

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Hooks;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\Hooks\AbstractHookSet;
-use PoP\API\Response\Schemes as APISchemes;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use PoP\API\Response\Schemes as APISchemes;
+use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoP\Hooks\AbstractHookSet;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {

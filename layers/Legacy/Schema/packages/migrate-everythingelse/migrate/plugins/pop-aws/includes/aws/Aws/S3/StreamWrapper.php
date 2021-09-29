@@ -17,15 +17,15 @@
 namespace Aws\S3;
 
 use Aws\Common\Exception\RuntimeException;
-use Aws\S3\Exception\S3Exception;
 use Aws\S3\Exception\NoSuchKeyException;
+use Aws\S3\Exception\S3Exception;
 use Aws\S3\Iterator\ListObjectsIterator;
-use Guzzle\Http\EntityBody;
 use Guzzle\Http\CachingEntityBody;
+use Guzzle\Http\EntityBody;
 use Guzzle\Http\Mimetypes;
 use Guzzle\Iterator\FilterIterator;
-use Guzzle\Stream\PhpStreamRequestFactory;
 use Guzzle\Service\Command\CommandInterface;
+use Guzzle\Stream\PhpStreamRequestFactory;
 
 /**
  * Amazon S3 stream wrapper to use "s3://<bucket>/<key>" files with PHP streams, supporting "r", "w", "a", "x".

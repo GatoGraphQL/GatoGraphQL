@@ -1,7 +1,7 @@
 <?php
-use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Engine\FormInputs\SelectFormInput;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\Engine\FormInputs\SelectFormInput;
+use PoP\LooseContracts\Facades\NameResolverFacade;
 
 class GD_FormInput_EM_LocationCountries extends SelectFormInput
 {

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolverBridges;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoPSitesWassup\UserStateMutations\MutationResolvers\LoginMutationResolver;
-use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
+use PoPSitesWassup\UserStateMutations\MutationResolvers\LoginMutationResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class LoginMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

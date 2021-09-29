@@ -3,11 +3,11 @@
 namespace Aws\S3;
 
 use Guzzle\Http\Exception\HttpException;
-use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\Response;
-use Guzzle\Plugin\Backoff\BackoffStrategyInterface;
 use Guzzle\Plugin\Backoff\AbstractBackoffStrategy;
+use Guzzle\Plugin\Backoff\BackoffStrategyInterface;
 
 /**
  * Retries CompleteMultipartUpload requests in the case of failure.

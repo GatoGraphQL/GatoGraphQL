@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel;
 
+use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
+use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Tokens\Param;
-use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
-use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\Root\Environment as RootEnvironment;
 
 class ComponentConfiguration

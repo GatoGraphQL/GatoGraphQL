@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatars\Facades;
 
-use PoPSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoPSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
 
 class UserAvatarTypeAPIFacade
 {

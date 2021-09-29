@@ -3,10 +3,10 @@
 namespace Guzzle\Cache;
 
 use Doctrine\Common\Cache\Cache;
-use Guzzle\Common\Version;
 use Guzzle\Common\Exception\InvalidArgumentException;
 use Guzzle\Common\Exception\RuntimeException;
 use Guzzle\Common\FromConfigInterface;
+use Guzzle\Common\Version;
 use Zend\Cache\Storage\StorageInterface;
 
 /**

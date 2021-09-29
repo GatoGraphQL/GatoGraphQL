@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRolesWP\TypeResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
-use PoPSchema\UserRolesWP\RelationalTypeDataLoaders\ObjectType\UserRoleTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
+use PoPSchema\UserRolesWP\RelationalTypeDataLoaders\ObjectType\UserRoleTypeDataLoader;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
 {

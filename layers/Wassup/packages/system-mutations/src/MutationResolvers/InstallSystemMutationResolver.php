@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SystemMutations\MutationResolvers;
 
-use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class InstallSystemMutationResolver extends AbstractMutationResolver
 {

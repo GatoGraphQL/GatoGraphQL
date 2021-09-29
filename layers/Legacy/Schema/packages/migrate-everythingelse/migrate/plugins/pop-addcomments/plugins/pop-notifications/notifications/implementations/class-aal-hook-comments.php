@@ -1,8 +1,8 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 if (! defined('ABSPATH')) {
     exit;

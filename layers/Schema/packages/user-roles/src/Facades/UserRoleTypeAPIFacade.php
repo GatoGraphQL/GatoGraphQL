@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\Facades;
 
-use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 
 class UserRoleTypeAPIFacade
 {

@@ -19,8 +19,8 @@ namespace Aws\S3;
 use Aws\Common\Exception\RuntimeException;
 use Aws\Common\Exception\UnexpectedValueException;
 use Guzzle\Http\EntityBody;
-use Guzzle\Http\ReadLimitEntityBody;
 use Guzzle\Http\EntityBodyInterface;
+use Guzzle\Http\ReadLimitEntityBody;
 use Guzzle\Service\Resource\Model;
 
 /**

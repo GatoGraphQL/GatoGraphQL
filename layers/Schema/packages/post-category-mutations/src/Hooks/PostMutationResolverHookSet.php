@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategoryMutations\Hooks;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPSchema\CustomPostCategoryMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
 use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
@@ -13,6 +12,7 @@ use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeReso
 use PoPSchema\PostCategoryMutations\Facades\PostCategoryTypeMutationAPIFacade;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {

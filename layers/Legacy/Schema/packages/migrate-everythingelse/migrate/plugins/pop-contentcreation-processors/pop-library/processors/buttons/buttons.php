@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 {

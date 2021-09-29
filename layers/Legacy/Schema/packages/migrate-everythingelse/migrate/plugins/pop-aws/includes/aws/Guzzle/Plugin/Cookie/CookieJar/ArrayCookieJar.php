@@ -2,10 +2,10 @@
 
 namespace Guzzle\Plugin\Cookie\CookieJar;
 
-use Guzzle\Plugin\Cookie\Cookie;
 use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\Response;
 use Guzzle\Parser\ParserRegistry;
+use Guzzle\Plugin\Cookie\Cookie;
 use Guzzle\Plugin\Cookie\Exception\InvalidCookieException;
 
 /**

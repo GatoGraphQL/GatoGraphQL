@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
-use PoP\ComponentModel\ModuleProcessors\AbstractModuleDecoratorProcessor;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\ModuleProcessors\AbstractModuleDecoratorProcessor;
+use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 
 class PoP_UserStateModuleDecoratorProcessor extends AbstractModuleDecoratorProcessor
 {

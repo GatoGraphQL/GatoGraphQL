@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Settings\Facades;
 
-use PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 
 class SettingsTypeAPIFacade
 {

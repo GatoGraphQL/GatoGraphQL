@@ -2,13 +2,13 @@
 
 namespace Guzzle\Http\Curl;
 
+use Guzzle\Common\Collection;
 use Guzzle\Common\Exception\InvalidArgumentException;
 use Guzzle\Common\Exception\RuntimeException;
-use Guzzle\Common\Collection;
 use Guzzle\Http\Message\EntityEnclosingRequest;
 use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Parser\ParserRegistry;
 use Guzzle\Http\Url;
+use Guzzle\Parser\ParserRegistry;
 
 /**
  * Immutable wrapper for a cURL handle

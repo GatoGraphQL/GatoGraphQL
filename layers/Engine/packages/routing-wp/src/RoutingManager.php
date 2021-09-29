@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\RoutingWP;
 
-use WP_Query;
-use PoP\Routing\RouteNatures;
 use PoP\Routing\AbstractRoutingManager;
+use PoP\Routing\RouteNatures;
+use WP_Query;
 
 class RoutingManager extends AbstractRoutingManager
 {

@@ -1,9 +1,9 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Comments\Facades\CommentTypeAPIFacade;
+use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class PoP_AddComments_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
 {

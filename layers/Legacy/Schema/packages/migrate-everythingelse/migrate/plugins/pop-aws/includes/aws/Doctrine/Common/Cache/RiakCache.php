@@ -20,8 +20,8 @@
 namespace Doctrine\Common\Cache;
 
 use Riak\Bucket;
-use Riak\Input;
 use Riak\Exception;
+use Riak\Input;
 use Riak\Object;
 
 /**

@@ -1,7 +1,7 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 HooksAPIFacade::getInstance()->addAction('show_user_profile', 'extraUserProfileFields', 1);
 HooksAPIFacade::getInstance()->addAction('edit_user_profile', 'extraUserProfileFields', 1);

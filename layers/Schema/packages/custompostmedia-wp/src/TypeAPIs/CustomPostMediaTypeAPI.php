@@ -6,8 +6,8 @@ namespace PoPSchema\CustomPostMediaWP\TypeAPIs;
 
 use PoPSchema\CustomPostMedia\TypeAPIs\CustomPostMediaTypeAPIInterface;
 
-use function has_post_thumbnail;
 use function get_post_thumbnail_id;
+use function has_post_thumbnail;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

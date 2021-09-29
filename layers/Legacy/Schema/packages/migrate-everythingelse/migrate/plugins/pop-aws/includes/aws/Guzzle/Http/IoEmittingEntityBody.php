@@ -5,8 +5,8 @@ namespace Guzzle\Http;
 use Guzzle\Common\Event;
 use Guzzle\Common\HasDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * EntityBody decorator that emits events for read and write methods

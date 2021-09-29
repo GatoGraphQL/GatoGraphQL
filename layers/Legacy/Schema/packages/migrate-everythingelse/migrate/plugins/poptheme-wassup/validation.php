@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 define('PTW_POP_APPLICATIONPROCESSORS_MIN_VERSION', 0.1);
 // define('PTW_POP_GENERICFORMS_MIN_VERSION', 0.1);

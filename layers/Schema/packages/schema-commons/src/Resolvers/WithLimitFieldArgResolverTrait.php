@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\Resolvers;
 
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 trait WithLimitFieldArgResolverTrait
 {

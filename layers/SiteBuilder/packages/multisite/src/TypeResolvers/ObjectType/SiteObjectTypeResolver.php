@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\Multisite\TypeResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\Multisite\ObjectModels\Site;
 use PoP\Multisite\RelationalTypeDataLoaders\ObjectType\SiteTypeDataLoader;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 {

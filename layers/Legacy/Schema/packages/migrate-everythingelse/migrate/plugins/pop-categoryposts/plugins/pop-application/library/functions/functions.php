@@ -1,10 +1,10 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
+use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 HooksAPIFacade::getInstance()->addFilter('gd_postname', 'blogPostname', 10, 3);
 function blogPostname($name, $post_id, $format)

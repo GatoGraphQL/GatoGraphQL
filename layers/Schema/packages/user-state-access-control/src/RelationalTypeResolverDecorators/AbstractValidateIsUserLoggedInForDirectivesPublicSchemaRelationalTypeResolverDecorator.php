@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractPublicSchemaRelationalTypeResolverDecorator;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInForDirectivesDirectiveResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelationalTypeResolverDecorator extends AbstractPublicSchemaRelationalTypeResolverDecorator
 {

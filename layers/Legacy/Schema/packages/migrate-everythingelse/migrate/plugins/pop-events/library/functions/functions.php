@@ -1,7 +1,7 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\Constants;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
 // HooksAPIFacade::getInstance()->addFilter('gd_dataload:post_types', 'gdEmAddEventPosttype');

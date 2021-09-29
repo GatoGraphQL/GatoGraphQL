@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPSitesWassup\PostLinkMutations\MutationResolvers;
 
 use PoPSchema\CustomPostMeta\Utils;
-use PoPSitesWassup\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolver;
 use PoPSitesWassup\CustomPostLinkMutations\MutationResolvers\MutationResolverUtils;
+use PoPSitesWassup\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolver;
 
 abstract class AbstractCreateUpdatePostLinkMutationResolver extends AbstractCreateUpdatePostMutationResolver
 {

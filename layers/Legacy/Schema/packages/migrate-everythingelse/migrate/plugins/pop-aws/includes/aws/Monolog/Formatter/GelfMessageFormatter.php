@@ -11,8 +11,8 @@
 
 namespace Monolog\Formatter;
 
-use Monolog\Logger;
 use Gelf\Message;
+use Monolog\Logger;
 
 /**
  * Serializes a log message to GELF

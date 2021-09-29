@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\RelationalTypeDataLoaders\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\Constants\CommentTypes;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {

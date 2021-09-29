@@ -21,8 +21,8 @@ use Aws\Sns\MessageValidator\Exception\CannotGetPublicKeyFromCertificateExceptio
 use Aws\Sns\MessageValidator\Exception\CertificateFromUnrecognizedSourceException;
 use Aws\Sns\MessageValidator\Exception\InvalidMessageSignatureException;
 use Aws\Sns\MessageValidator\Exception\SnsMessageValidatorException;
-use Guzzle\Http\Url;
 use Guzzle\Http\Client;
+use Guzzle\Http\Url;
 
 /**
  * This class uses openssl to verify SNS messages to ensure that they were sent by AWS.

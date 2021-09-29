@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\EngineWP\Hooks;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
 use PoP\EngineWP\Templates\TemplateHelpers;
 use PoP\Hooks\AbstractHookSet;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class TemplateHookSet extends AbstractHookSet
 {

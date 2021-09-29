@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTagMutations\Hooks;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\CustomPostTagMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
 use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {

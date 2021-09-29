@@ -2,12 +2,12 @@
 
 namespace Guzzle\Plugin\Mock;
 
+use Guzzle\Common\AbstractHasDispatcher;
 use Guzzle\Common\Event;
 use Guzzle\Common\Exception\InvalidArgumentException;
-use Guzzle\Common\AbstractHasDispatcher;
 use Guzzle\Http\Exception\CurlException;
-use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\Response;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

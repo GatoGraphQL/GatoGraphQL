@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Pages\Facades;
 
-use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
+use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 
 class PageTypeAPIFacade
 {

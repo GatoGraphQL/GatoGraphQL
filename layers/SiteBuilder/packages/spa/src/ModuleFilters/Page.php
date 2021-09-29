@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\SPA\ModuleFilters;
 
-use PoP\SPA\Modules\PageInterface;
 use PoP\ComponentModel\ModuleFilters\AbstractModuleFilter;
+use PoP\SPA\Modules\PageInterface;
 
 class Page extends AbstractModuleFilter
 {

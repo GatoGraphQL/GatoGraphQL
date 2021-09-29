@@ -16,11 +16,11 @@
 
 namespace Aws\S3\Model;
 
-use Aws\S3\Enum\Group;
-use Aws\S3\Enum\GranteeType;
 use Aws\Common\Exception\InvalidArgumentException;
-use Aws\Common\Exception\UnexpectedValueException;
 use Aws\Common\Exception\LogicException;
+use Aws\Common\Exception\UnexpectedValueException;
+use Aws\S3\Enum\GranteeType;
+use Aws\S3\Enum\Group;
 use Guzzle\Common\ToArrayInterface;
 
 /**

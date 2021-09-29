@@ -16,8 +16,8 @@
 
 namespace Aws\S3\Iterator;
 
-use Guzzle\Service\Resource\Model;
 use Aws\Common\Iterator\AwsResourceIterator;
+use Guzzle\Service\Resource\Model;
 
 /**
  * Iterator for the S3 ListMultipartUploads command

@@ -3,8 +3,8 @@
 namespace Guzzle\Log;
 
 use Guzzle\Http\Curl\CurlHandle;
-use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\Message\Response;
 
 /**

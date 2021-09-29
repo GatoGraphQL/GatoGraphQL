@@ -3,10 +3,10 @@ define('GD_CONSTANT_AUTHORPOSITION_ABOVETHUMB', 'abovethumb');
 define('GD_CONSTANT_AUTHORPOSITION_ABOVETITLE', 'abovetitle');
 define('GD_CONSTANT_AUTHORPOSITION_BELOWCONTENT', 'belowcontent');
 
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Processor_PreviewObjectLayoutsBase
 {

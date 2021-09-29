@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryEndpointBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * GraphiQL block

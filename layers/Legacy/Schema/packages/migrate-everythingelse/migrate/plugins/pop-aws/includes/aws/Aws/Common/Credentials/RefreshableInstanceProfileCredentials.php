@@ -16,8 +16,8 @@
 
 namespace Aws\Common\Credentials;
 
-use Aws\Common\InstanceMetadata\InstanceMetadataClient;
 use Aws\Common\Exception\InstanceProfileCredentialsException;
+use Aws\Common\InstanceMetadata\InstanceMetadataClient;
 
 /**
  * Credentials decorator used to implement retrieving credentials from the

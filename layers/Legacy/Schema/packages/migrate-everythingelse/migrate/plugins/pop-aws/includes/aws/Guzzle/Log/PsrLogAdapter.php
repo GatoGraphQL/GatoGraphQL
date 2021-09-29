@@ -2,8 +2,8 @@
 
 namespace Guzzle\Log;
 
-use Psr\Log\LogLevel;
 use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 
 /**
  * PSR-3 log adapter

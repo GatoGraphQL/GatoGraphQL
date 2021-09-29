@@ -1,11 +1,11 @@
 <?php
 
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
-use PoP\ComponentModel\Facades\Cache\MemoryManagerFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\Facades\Cache\MemoryManagerFacade;
+use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
+use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 

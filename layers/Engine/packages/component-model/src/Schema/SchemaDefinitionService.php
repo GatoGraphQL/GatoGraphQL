@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionService implements SchemaDefinitionServiceInterface
 {

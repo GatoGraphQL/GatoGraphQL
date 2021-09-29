@@ -2,8 +2,8 @@
 
 namespace Guzzle\Service\Command\LocationVisitor\Response;
 
-use Guzzle\Service\Command\CommandInterface;
 use Guzzle\Http\Message\Response;
+use Guzzle\Service\Command\CommandInterface;
 use Guzzle\Service\Description\Parameter;
 
 /**

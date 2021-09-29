@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\Hooks;
 
-use PoPSchema\Comments\Constants\Params;
-use PoP\Hooks\AbstractHookSet;
 use PoP\ComponentModel\ModuleProcessors\Constants;
+use PoP\Hooks\AbstractHookSet;
+use PoPSchema\Comments\Constants\Params;
 
 class WhitelistParamHookSet extends AbstractHookSet
 {

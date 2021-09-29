@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoPSchema\Users\Constants\InputNames;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\Users\Constants\InputNames;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\EditMembershipMutationResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class EditMembershipMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
 
-use PoP\Routing\RouteNatures;
 use PoP\API\Response\Schemes as APISchemes;
-use PoPSchema\Posts\ComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\Posts\ConditionalOnComponent\API\ModuleProcessors\FieldDataloadModuleProcessor;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoP\Routing\RouteNatures;
 use PoPSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
+use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\Posts\ComponentConfiguration;
+use PoPSchema\Posts\ConditionalOnComponent\API\ModuleProcessors\FieldDataloadModuleProcessor;
 
 class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModuleProcessor
 {

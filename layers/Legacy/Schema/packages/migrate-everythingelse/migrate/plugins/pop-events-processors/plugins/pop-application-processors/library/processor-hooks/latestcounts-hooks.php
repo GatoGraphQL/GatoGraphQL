@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\Events\Constants\Scopes;
+use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
 class PoP_Events_Events_LatestCounts_Hooks
 {

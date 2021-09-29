@@ -2,9 +2,9 @@
 
 namespace Guzzle\Http;
 
+use Guzzle\Common\Exception\InvalidArgumentException;
 use Guzzle\Common\Version;
 use Guzzle\Stream\Stream;
-use Guzzle\Common\Exception\InvalidArgumentException;
 
 /**
  * Entity body used with an HTTP request or response

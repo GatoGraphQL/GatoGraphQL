@@ -1,7 +1,7 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
+use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 class PoPTheme_Wassup_AE_NewsletterWeeklyLatestContent extends PoPTheme_Wassup_AE_NewsletterRecipientsBase
 {

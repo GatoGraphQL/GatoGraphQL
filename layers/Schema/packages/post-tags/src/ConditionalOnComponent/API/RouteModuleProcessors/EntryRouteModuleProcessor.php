@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTags\ConditionalOnComponent\API\RouteModuleProcessors;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
@@ -14,6 +13,7 @@ use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\PostTagFieldD
 use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
 use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\API\Registries;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\Cache\CacheTypes;
 use PoP\API\ComponentConfiguration;
 use PoP\ComponentModel\Cache\CacheInterface;
@@ -18,6 +17,7 @@ use PoP\Engine\Cache\CacheUtils;
 use PoP\Engine\ObjectModels\Root;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Translation\TranslationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
 {

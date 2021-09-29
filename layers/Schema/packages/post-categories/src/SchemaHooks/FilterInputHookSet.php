@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategories\SchemaHooks;
 
 use PoP\Hooks\AbstractHookSet;
-use PoPSchema\Posts\ModuleProcessors\AbstractPostFilterInputContainerModuleProcessor;
 use PoPSchema\Categories\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPSchema\Posts\ModuleProcessors\AbstractPostFilterInputContainerModuleProcessor;
 
 class FilterInputHookSet extends AbstractHookSet
 {

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Notifications\TypeResolvers\ObjectType;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\Notifications\RelationalTypeDataLoaders\ObjectType\NotificationTypeDataLoader;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
 {

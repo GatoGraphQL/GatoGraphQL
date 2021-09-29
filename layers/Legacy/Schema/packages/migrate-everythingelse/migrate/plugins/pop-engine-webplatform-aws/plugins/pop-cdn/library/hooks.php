@@ -1,7 +1,7 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-
 use Aws\Common\Aws;
+
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 // use Aws\S3\Exception\S3Exception;
 

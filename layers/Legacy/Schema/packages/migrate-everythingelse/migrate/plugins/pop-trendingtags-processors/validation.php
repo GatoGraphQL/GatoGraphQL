@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 
 define('POP_TRENDINGTAGSPROCESSORS_POP_APPLICATIONPROCESSORS_MIN_VERSION', 0.1);
 define('POP_TRENDINGTAGSPROCESSORS_POP_TRENDINGTAGS_MIN_VERSION', 0.1);

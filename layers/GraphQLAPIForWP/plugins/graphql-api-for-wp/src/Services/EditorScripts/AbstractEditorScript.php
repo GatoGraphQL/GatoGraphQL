@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
-use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\AbstractScript;
+use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Base class for a Gutenberg script.

@@ -2,8 +2,8 @@
 
 namespace Guzzle\Http\Message;
 
-use Guzzle\Common\Version;
 use Guzzle\Common\Collection;
+use Guzzle\Common\Version;
 use Guzzle\Http\Message\Header\HeaderCollection;
 use Guzzle\Http\Message\Header\HeaderFactory;
 use Guzzle\Http\Message\Header\HeaderFactoryInterface;
