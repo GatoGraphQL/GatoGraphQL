@@ -9,12 +9,12 @@ use Psr\Cache\CacheItemPoolInterface;
 
 class PersistentCacheItemPoolFacade
 {
-    public static function getInstance(): ?CacheItemPoolInterface
+    public static function getInstance(): CacheItemPoolInterface
     {
-        $containerBuilderFactory = ContainerBuilderFactory::getInstance();
-        if ($containerBuilderFactory->has('persistent_cache_item_pool')) {
-            return $containerBuilderFactory->get('persistent_cache_item_pool');
-        }
-        return null;
+        /**
+         * @var CacheItemPoolInterface
+         */
+        $service = ContainerBuilderFactory::getInstance()->get('persistent_cache_item_pool');
+        return $service;
     }
 }
