@@ -17,9 +17,8 @@ use GraphQLByPoP\GraphQLServer\Schema\SchemaHelpers;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\API\Registries\SchemaDefinitionRegistryInterface;
-use PoP\ComponentModel\Cache\CacheInterface;
+use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\State\ApplicationState;
@@ -29,7 +28,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegistryInterface
 {
-    protected CacheInterface $persistentCache;
+    protected PersistentCacheInterface $persistentCache;
     /**
      * @var array<string, mixed>
      */
@@ -56,13 +55,14 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
         SchemaDefinitionRegistryInterface $schemaDefinitionRegistry,
         GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
+        PersistentCacheInterface $persistentCache,
     ): void {
         $this->translationAPI = $translationAPI;
         $this->schemaDefinitionService = $schemaDefinitionService;
         $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
         $this->schemaDefinitionRegistry = $schemaDefinitionRegistry;
         $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
-        $this->persistentCache = PersistentCacheFacade::getInstance();
+        $this->persistentCache = $persistentCache;
     }
 
     /**
