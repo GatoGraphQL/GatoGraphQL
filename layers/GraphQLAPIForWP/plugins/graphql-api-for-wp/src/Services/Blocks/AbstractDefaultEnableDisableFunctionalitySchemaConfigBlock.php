@@ -39,7 +39,7 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock extend
         EOT;
         return sprintf(
             $blockContentPlaceholder,
-            $className . ' ' . $this->getAlignClass(),
+            $className . ' ' . $this->getAlignClassName(),
             $className . '__title',
             $this->getBlockTitle(),
             $blockContent

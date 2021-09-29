@@ -126,7 +126,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     {
         $content = sprintf(
             '<div class="%s">',
-            $this->getBlockClassName() . ' ' . $this->getAlignClass()
+            $this->getBlockClassName() . ' ' . $this->getAlignClassName()
         );
         $query = $attributes[self::ATTRIBUTE_NAME_QUERY] ?? '';
         $variables = $attributes[self::ATTRIBUTE_NAME_VARIABLES] ?? null;

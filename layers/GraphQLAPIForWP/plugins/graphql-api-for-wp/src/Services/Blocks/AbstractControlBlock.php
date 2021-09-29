@@ -34,7 +34,7 @@ abstract class AbstractControlBlock extends AbstractBlock
     /**
      * Block align class
      */
-    public function getAlignClass(): string
+    public function getAlignClassName(): string
     {
         return 'alignwide';
     }
@@ -138,7 +138,7 @@ EOT;
 EOT;
         return sprintf(
             $blockContentPlaceholder,
-            $className . ' ' . $this->getAlignClass(),
+            $className . ' ' . $this->getAlignClassName(),
             $className . '__data',
             $className . '__title',
             $this->getBlockDataTitle(),

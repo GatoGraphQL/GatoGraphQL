@@ -59,7 +59,7 @@ class SchemaConfigMutationSchemeBlock extends AbstractSchemaConfigBlock
         EOT;
         return sprintf(
             $blockContentPlaceholder,
-            $className . ' ' . $this->getAlignClass(),
+            $className . ' ' . $this->getAlignClassName(),
             $className . '__title',
             \__('Mutation Scheme', 'graphql-api'),
             $blockContent

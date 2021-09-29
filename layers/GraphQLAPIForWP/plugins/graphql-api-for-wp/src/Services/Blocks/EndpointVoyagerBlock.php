@@ -72,7 +72,7 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
         EOT;
         return sprintf(
             $blockContentPlaceholder,
-            $className . ' ' . $this->getAlignClass(),
+            $className . ' ' . $this->getAlignClassName(),
             $className . '__title',
             \__('Interactive Schema', 'graphql-api'),
             $blockContent

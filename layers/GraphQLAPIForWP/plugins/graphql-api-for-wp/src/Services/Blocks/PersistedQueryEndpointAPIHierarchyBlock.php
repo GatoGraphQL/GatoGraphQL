@@ -116,7 +116,7 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
 
         return sprintf(
             $blockContentPlaceholder,
-            $className . ' ' . $this->getAlignClass(),
+            $className . ' ' . $this->getAlignClassName(),
             $className . '__title',
             \__('API Hierarchy', 'graphql-api'),
             $blockContent

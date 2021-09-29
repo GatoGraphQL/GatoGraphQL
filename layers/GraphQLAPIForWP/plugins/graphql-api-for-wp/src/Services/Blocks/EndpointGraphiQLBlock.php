@@ -72,7 +72,7 @@ class EndpointGraphiQLBlock extends AbstractBlock implements EndpointEditorBlock
         EOT;
         return sprintf(
             $blockContentPlaceholder,
-            $className . ' ' . $this->getAlignClass(),
+            $className . ' ' . $this->getAlignClassName(),
             $className . '__title',
             \__('GraphiQL', 'graphql-api'),
             $blockContent

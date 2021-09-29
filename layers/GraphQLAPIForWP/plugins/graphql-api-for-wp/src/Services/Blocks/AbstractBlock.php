@@ -167,9 +167,9 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
 
     /**
-     * Block align class
+     * Block align class name
      */
-    public function getAlignClass(): string
+    public function getAlignClassName(): string
     {
         return '';
     }

@@ -33,7 +33,7 @@ abstract class AbstractEndpointOptionsBlock extends AbstractBlock
         EOT;
         return sprintf(
             $blockContentPlaceholder,
-            $className . ' ' . $this->getAlignClass(),
+            $className . ' ' . $this->getAlignClassName(),
             $className . '__title',
             \__('Options', 'graphql-api'),
             $this->getBlockContent($attributes, $content)

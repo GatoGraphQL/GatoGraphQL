@@ -58,7 +58,7 @@ class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigBlock
         EOT;
         return sprintf(
             $blockContentPlaceholder,
-            $className . ' ' . $this->getAlignClass(),
+            $className . ' ' . $this->getAlignClassName(),
             $className . '__title',
             \__('Public/Private Schema', 'graphql-api'),
             $blockContent

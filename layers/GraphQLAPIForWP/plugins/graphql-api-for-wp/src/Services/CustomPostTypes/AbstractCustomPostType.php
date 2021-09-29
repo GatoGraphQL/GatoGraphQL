@@ -261,7 +261,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     /**
      * Block align class
      */
-    public function getAlignClass(): string
+    public function getAlignClassName(): string
     {
         return 'aligncenter';
     }
@@ -289,7 +289,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 if ($excerpt = $this->cptUtils->getCustomPostDescription($customPost)) {
                     $content = \sprintf(
                         \__('<p class="%s"><strong>Description: </strong>%s</p>'),
-                        $this->getAlignClass(),
+                        $this->getAlignClassName(),
                         $excerpt
                     ) . $content;
                 }
