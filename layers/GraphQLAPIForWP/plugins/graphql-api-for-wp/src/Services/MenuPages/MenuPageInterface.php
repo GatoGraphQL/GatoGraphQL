@@ -17,4 +17,7 @@ interface MenuPageInterface
     public function print(): void;
     public function getScreenID(): string;
     public function getMenu(): MenuInterface;
+    public function setHookName(string $hookName): void;
+    public function getHookName(): ?string;
+    public function getMenuPageSlug(): string;
 }

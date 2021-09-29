@@ -10,9 +10,6 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use Symfony\Contracts\Service\Attribute\Required;
 
-/**
- * Menu page
- */
 abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService implements MenuPageInterface
 {
     protected ?string $hookName = null;
@@ -64,8 +61,6 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
     {
         return $this->getMenu()->getName();
     }
-
-    abstract public function getMenuPageSlug(): string;
 
     protected function isCurrentScreen(): bool
     {
