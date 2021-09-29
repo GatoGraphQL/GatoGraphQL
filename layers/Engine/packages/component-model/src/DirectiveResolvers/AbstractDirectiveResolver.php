@@ -24,6 +24,7 @@ use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -620,13 +621,43 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return true;
     }
 
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
+    /**
+     * @return array<string, ConcreteTypeResolverInterface>
+     */
+    public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaDirectiveArgs($relationalTypeResolver);
+            return $schemaDefinitionResolver->getSchemaDirectiveArgNameResolvers($relationalTypeResolver);
         }
         return [];
+    }
+
+    public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName);
+        }
+        return null;
+    }
+
+    public function getSchemaDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName);
+        }
+        return null;
+    }
+
+    public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
+        }
+        return null;
     }
 
     /**

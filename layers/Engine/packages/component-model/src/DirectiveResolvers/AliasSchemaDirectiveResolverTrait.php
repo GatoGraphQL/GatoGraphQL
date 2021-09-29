@@ -53,11 +53,47 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getSchemaDirectiveArgs(
+        return $aliasedDirectiveResolver->getSchemaDirectiveArgNameResolvers(
             $relationalTypeResolver
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased DirectiveResolver
+     */
+    public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    {
+        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
+        return $aliasedDirectiveResolver->getSchemaDirectiveArgDescription(
+            $relationalTypeResolver,
+            $directiveArgName
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased DirectiveResolver
+     */
+    public function getSchemaDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
+    {
+        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
+        return $aliasedDirectiveResolver->getSchemaDirectiveArgDefaultValue(
+            $relationalTypeResolver,
+            $directiveArgName
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased DirectiveResolver
+     */
+    public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
+    {
+        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
+        return $aliasedDirectiveResolver->getSchemaDirectiveArgTypeModifiers(
+            $relationalTypeResolver,
+            $directiveArgName
         );
     }
 
