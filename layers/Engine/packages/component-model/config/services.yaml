@@ -4,7 +4,7 @@ services:
         autowire: true
         autoconfigure: true
 
-    memory_cache_item_pool:
+    transient_cache_item_pool:
         class: \Symfony\Component\Cache\Adapter\ArrayAdapter
 
     PoP\ComponentModel\Cache\CacheConfigurationManagerInterface:
@@ -29,10 +29,10 @@ services:
     PoP\ComponentModel\Engine\DataloadingEngineInterface:
         class: \PoP\ComponentModel\Engine\DataloadingEngine
 
-    memory_cache:
+    transient_cache:
         class: \PoP\ComponentModel\Cache\Cache
         arguments:
-            $cacheItemPool: '@memory_cache_item_pool'
+            $cacheItemPool: '@transient_cache_item_pool'
 
     PoP\ComponentModel\ModelInstance\ModelInstanceInterface:
         class: \PoP\ComponentModel\ModelInstance\ModelInstance

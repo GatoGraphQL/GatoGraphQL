@@ -9,10 +9,10 @@ services:
         arguments:
             $cacheItemPool: '@persistent_cache_item_pool'
 
-    memory_cache:
+    transient_cache:
         class: \PoP\Engine\Cache\Cache
         arguments:
-            $cacheItemPool: '@memory_cache_item_pool'
+            $cacheItemPool: '@transient_cache_item_pool'
 
     PoP\Engine\ObjectModels\Root:
         class: \PoP\Engine\ObjectModels\Root

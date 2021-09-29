@@ -14,7 +14,7 @@ class MemoryManagerItemPoolFacade
         /**
          * @var CacheItemPoolInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get('memory_cache_item_pool');
+        $service = ContainerBuilderFactory::getInstance()->get('transient_cache_item_pool');
         return $service;
     }
 }

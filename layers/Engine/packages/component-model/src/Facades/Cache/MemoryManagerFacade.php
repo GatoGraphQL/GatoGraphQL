@@ -14,7 +14,7 @@ class MemoryManagerFacade
         /**
          * @var CacheInterface
          */
-        $service = ContainerBuilderFactory::getInstance()->get('memory_cache');
+        $service = ContainerBuilderFactory::getInstance()->get('transient_cache');
         return $service;
     }
 }
