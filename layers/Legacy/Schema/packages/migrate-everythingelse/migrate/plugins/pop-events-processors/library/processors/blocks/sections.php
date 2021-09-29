@@ -104,7 +104,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_BLOCK_AUTHOREVENTS_CAROUSEL => POP_EVENTS_ROUTE_EVENTS,
             self::MODULE_BLOCK_AUTHOREVENTS_SCROLL_DETAILS => POP_EVENTS_ROUTE_EVENTS,
             self::MODULE_BLOCK_AUTHOREVENTS_SCROLL_FULLVIEW => POP_EVENTS_ROUTE_EVENTS,
@@ -150,8 +150,8 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             self::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_LIST => POP_EVENTS_ROUTE_PASTEVENTS,
             self::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_SIMPLEVIEW => POP_EVENTS_ROUTE_PASTEVENTS,
             self::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_THUMBNAIL => POP_EVENTS_ROUTE_PASTEVENTS,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     protected function getInnerSubmodule(array $module)

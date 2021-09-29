@@ -44,12 +44,12 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
 
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
-        $types = [
+        return match ($fieldName) {
             'url' => $this->urlScalarTypeResolver,
             'urlPath' => $this->stringScalarTypeResolver,
             'slug' => $this->stringScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
+            default => parent::getFieldTypeResolver($fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int
@@ -66,11 +66,11 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        $descriptions = [
+        return match ($fieldName) {
             'url' => $this->translationAPI->__('URL to query the object', 'queriedobject'),
             'urlPath' => $this->translationAPI->__('URL path to query the object', 'queriedobject'),
             'slug' => $this->translationAPI->__('URL\'s slug', 'queriedobject'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
+            default => parent::getSchemaFieldDescription($fieldName),
+        };
     }
 }

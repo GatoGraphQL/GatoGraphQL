@@ -67,14 +67,14 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match ($fieldName) {
             'parentPage' => $this->translationAPI->__('Parent page', 'pages'),
             'childPages' => $this->translationAPI->__('Child pages', 'pages'),
             'childPageCount' => $this->translationAPI->__('Number of child pages', 'pages'),
             'childPagesForAdmin' => $this->translationAPI->__('[Unrestricted] Child pages', 'pages'),
             'childPageCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of child pages', 'pages'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
@@ -85,11 +85,11 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             case 'childPagesForAdmin':
                 return $this->pageObjectTypeResolver;
         }
-        $types = [
+        return match ($fieldName) {
             'childPageCount' => $this->intScalarTypeResolver,
             'childPageCountForAdmin' => $this->intScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

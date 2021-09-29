@@ -16,11 +16,11 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL,
             self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     protected function getInnerSubmodules(array $module): array

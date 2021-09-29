@@ -45,12 +45,12 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP => POP_BLOG_ROUTE_SEARCHUSERS,
             self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP => UsersComponentConfiguration::getUsersRoute(),
             self::MODULE_DATALOAD_USERS_SCROLLMAP => UsersComponentConfiguration::getUsersRoute(),
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     public function getInnerSubmodule(array $module)

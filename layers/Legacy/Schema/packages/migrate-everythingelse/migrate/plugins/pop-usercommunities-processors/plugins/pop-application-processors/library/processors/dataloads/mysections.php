@@ -19,11 +19,11 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW => POP_USERCOMMUNITIES_ROUTE_MYMEMBERS,
             self::MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT => POP_USERCOMMUNITIES_ROUTE_MYMEMBERS,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     protected function getInnerSubmodules(array $module): array

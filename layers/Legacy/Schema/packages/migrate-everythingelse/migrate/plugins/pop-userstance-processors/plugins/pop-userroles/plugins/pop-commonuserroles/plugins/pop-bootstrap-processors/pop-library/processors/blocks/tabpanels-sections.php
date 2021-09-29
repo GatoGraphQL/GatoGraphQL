@@ -15,11 +15,11 @@ class UserStance_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_P
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS => POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS,
             self::MODULE_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS => POP_USERSTANCE_ROUTE_STANCES_BYORGANIZATIONS,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     protected function getInnerSubmodules(array $module): array

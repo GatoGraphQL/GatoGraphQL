@@ -15,11 +15,11 @@ class PoP_Module_Processor_CommentsBlocks extends PoP_Module_Processor_BlocksBas
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_BLOCK_ADDCOMMENT => POP_ADDCOMMENTS_ROUTE_ADDCOMMENT,
             self::MODULE_BLOCK_COMMENTS_SCROLL => POP_BLOG_ROUTE_COMMENTS,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     protected function getControlgroupTopSubmodule(array $module)

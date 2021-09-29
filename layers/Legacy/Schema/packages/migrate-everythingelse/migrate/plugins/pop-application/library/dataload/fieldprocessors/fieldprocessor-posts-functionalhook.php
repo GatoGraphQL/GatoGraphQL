@@ -34,7 +34,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
-        $types = [
+        return match($fieldName) {
 			'multilayoutKeys' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'latestcountsTriggerValues' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'catsByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
@@ -43,8 +43,8 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
             'addCommentURL' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
             'topicsByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'appliestoByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
@@ -66,7 +66,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
 			'multilayoutKeys' => $translationAPI->__('', ''),
             'latestcountsTriggerValues' => $translationAPI->__('', ''),
             'catsByName' => $translationAPI->__('', ''),
@@ -75,8 +75,8 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
             'addCommentURL' => $translationAPI->__('', ''),
             'topicsByName' => $translationAPI->__('', ''),
             'appliestoByName' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

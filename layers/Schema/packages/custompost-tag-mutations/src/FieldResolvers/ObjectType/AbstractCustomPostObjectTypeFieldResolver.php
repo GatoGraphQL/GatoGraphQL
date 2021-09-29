@@ -32,13 +32,13 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match ($fieldName) {
             'setTags' => sprintf(
                 $this->translationAPI->__('Set tags on the %s', 'custompost-tag-mutations'),
                 $this->getEntityName()
-            )
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            ),
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

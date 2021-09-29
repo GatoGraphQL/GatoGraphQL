@@ -74,7 +74,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
             'editUserMembershipURL' => $translationAPI->__('', ''),
             'communityMembersURL' => $translationAPI->__('', ''),
             'memberstatus' => $translationAPI->__('', ''),
@@ -86,8 +86,8 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
             'icon' => $translationAPI->__('', ''),
             'url' => $translationAPI->__('', ''),
             'message' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

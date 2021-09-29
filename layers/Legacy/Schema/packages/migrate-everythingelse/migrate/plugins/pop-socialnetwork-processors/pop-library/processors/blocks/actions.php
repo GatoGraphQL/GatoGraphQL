@@ -31,7 +31,7 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_BLOCK_DOWNVOTEPOST => POP_SOCIALNETWORK_ROUTE_DOWNVOTEPOST,
             self::MODULE_BLOCK_FOLLOWUSER => POP_SOCIALNETWORK_ROUTE_FOLLOWUSER,
             self::MODULE_BLOCK_RECOMMENDPOST => POP_SOCIALNETWORK_ROUTE_RECOMMENDPOST,
@@ -42,8 +42,8 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
             self::MODULE_BLOCK_UNRECOMMENDPOST => POP_SOCIALNETWORK_ROUTE_UNRECOMMENDPOST,
             self::MODULE_BLOCK_UNSUBSCRIBEFROMTAG => POP_SOCIALNETWORK_ROUTE_UNSUBSCRIBEFROMTAG,
             self::MODULE_BLOCK_UPVOTEPOST => POP_SOCIALNETWORK_ROUTE_UPVOTEPOST,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     protected function getInnerSubmodules(array $module): array

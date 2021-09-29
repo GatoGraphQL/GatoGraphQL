@@ -41,7 +41,7 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_ADDONS => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
             self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_DETAILS => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
             self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
@@ -56,8 +56,8 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
             self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR => POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS ,
             self::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_THUMBNAIL => POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS ,
             self::MODULE_DATALOAD_ORGANIZATIONS_TYPEAHEAD => POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS ,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     public function getInnerSubmodule(array $module)

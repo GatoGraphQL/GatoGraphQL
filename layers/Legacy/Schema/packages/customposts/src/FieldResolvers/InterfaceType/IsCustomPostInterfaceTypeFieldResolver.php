@@ -44,10 +44,10 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
 
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
-        $types = [
+        return match($fieldName) {
             'datetime' => $this->dateScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($fieldName);
+            default => parent::getFieldTypeResolver($fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int
@@ -65,10 +65,10 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'datetime' => $this->translationAPI->__('Custom post published date and time', 'customposts'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
+            default => parent::getSchemaFieldDescription($fieldName),
+        };
     }
     public function getSchemaFieldArgs(string $fieldName): array
     {

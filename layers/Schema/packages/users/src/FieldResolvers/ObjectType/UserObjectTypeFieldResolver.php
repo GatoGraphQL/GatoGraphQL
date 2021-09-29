@@ -72,7 +72,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $types = [
+        return match ($fieldName) {
             'username' => $this->stringScalarTypeResolver,
             'name' => $this->stringScalarTypeResolver,
             'displayName' => $this->stringScalarTypeResolver,
@@ -81,8 +81,8 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'email' => $this->emailScalarTypeResolver,
             'description' => $this->stringScalarTypeResolver,
             'websiteURL' => $this->urlScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
@@ -99,7 +99,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match ($fieldName) {
             'url' => $this->translationAPI->__('URL of the user\'s profile in the website', 'pop-users'),
             'urlPath' => $this->translationAPI->__('URL path of the user\'s profile in the website', 'pop-users'),
             'slug' => $this->translationAPI->__('Slug of the URL of the user\'s profile in the website', 'pop-users'),
@@ -111,8 +111,8 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'email' => $this->translationAPI->__('User\'s email', 'pop-users'),
             'description' => $this->translationAPI->__('Description of the user', 'pop-users'),
             'websiteURL' => $this->translationAPI->__('User\'s own website\'s URL', 'pop-users'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

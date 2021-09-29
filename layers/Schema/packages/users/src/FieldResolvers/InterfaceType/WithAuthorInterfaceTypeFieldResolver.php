@@ -47,10 +47,10 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        $descriptions = [
+        return match ($fieldName) {
             'author' => $this->translationAPI->__('The entity\'s author', 'queriedobject'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
+            default => parent::getSchemaFieldDescription($fieldName),
+        };
     }
 
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface

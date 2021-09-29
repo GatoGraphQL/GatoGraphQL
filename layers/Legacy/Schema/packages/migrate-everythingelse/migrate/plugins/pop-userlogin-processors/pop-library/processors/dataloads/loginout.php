@@ -24,13 +24,13 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_DATALOAD_LOGOUT => POP_USERLOGIN_ROUTE_LOGOUT,
             self::MODULE_DATALOAD_LOSTPWD => POP_USERLOGIN_ROUTE_LOSTPWD,
             self::MODULE_DATALOAD_LOSTPWDRESET => POP_USERLOGIN_ROUTE_LOSTPWDRESET,
             self::MODULE_DATALOAD_LOGIN => POP_USERLOGIN_ROUTE_LOGIN,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     public function getRelevantRouteCheckpointTarget(array $module, array &$props): string

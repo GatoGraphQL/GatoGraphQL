@@ -15,10 +15,10 @@ class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_Form
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_DATALOAD_CONTACTUS => POP_CONTACTUS_ROUTE_CONTACTUS,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     public function getRelevantRouteCheckpointTarget(array $module, array &$props): string

@@ -55,15 +55,15 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
             'titleEdit' => $translationAPI->__('', ''),
             'contentEditor' => $translationAPI->__('', ''),
             'contentEdit' => $translationAPI->__('', ''),
             'editURL' => $translationAPI->__('', ''),
             'deleteURL' => $translationAPI->__('', ''),
             'coauthors' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

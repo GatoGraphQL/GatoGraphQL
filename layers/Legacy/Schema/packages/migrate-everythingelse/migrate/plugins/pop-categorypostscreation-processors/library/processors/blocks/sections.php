@@ -133,7 +133,7 @@ class LPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySecti
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_BLOCK_MYCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS00,
             self::MODULE_BLOCK_MYCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS00,
             self::MODULE_BLOCK_MYCATEGORYPOSTS00_TABLE_EDIT => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS00,
@@ -194,8 +194,8 @@ class LPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySecti
             self::MODULE_BLOCK_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS19,
             self::MODULE_BLOCK_MYCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS19,
             self::MODULE_BLOCK_MYCATEGORYPOSTS19_TABLE_EDIT => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS19,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     protected function getInnerSubmodule(array $module)

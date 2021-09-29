@@ -99,7 +99,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $types = [
+        return match($fieldName) {
             'user' => $this->userObjectTypeResolver,
             'action' => $this->stringScalarTypeResolver,
             'objectType' => $this->stringScalarTypeResolver,
@@ -127,8 +127,8 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
             'isCommentNotification' => $this->booleanScalarTypeResolver,
             'isTaxonomyNotification' => $this->booleanScalarTypeResolver,
             'isAction' => $this->booleanScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
@@ -160,7 +160,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match($fieldName) {
             'action' => $this->translationAPI->__('', ''),
             'objectType' => $this->translationAPI->__('', ''),
             'objectSubtype' => $this->translationAPI->__('', ''),
@@ -188,8 +188,8 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
             'isCommentNotification' => $this->translationAPI->__('', ''),
             'isTaxonomyNotification' => $this->translationAPI->__('', ''),
             'isAction' => $this->translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array

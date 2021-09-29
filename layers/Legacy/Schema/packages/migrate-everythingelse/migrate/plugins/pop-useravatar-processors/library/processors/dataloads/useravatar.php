@@ -19,10 +19,10 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_DATALOAD_USERAVATAR_UPDATE => POP_USERAVATAR_ROUTE_EDITAVATAR,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array

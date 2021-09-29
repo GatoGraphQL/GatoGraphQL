@@ -71,11 +71,11 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
             case 'postCategories':
                 return $this->postCategoryObjectTypeResolver;
         }
-        $types = [
+        return match ($fieldName) {
             'postCategoryCount' => $this->intScalarTypeResolver,
             'postCategoryNames' => $this->stringScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
@@ -93,14 +93,14 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match ($fieldName) {
             'postCategory' => $this->translationAPI->__('Post category with a specific ID', 'post-categories'),
             'postCategoryBySlug' => $this->translationAPI->__('Post category with a specific slug', 'post-categories'),
             'postCategories' => $this->translationAPI->__('Post categories', 'post-categories'),
             'postCategoryCount' => $this->translationAPI->__('Number of post categories', 'post-categories'),
             'postCategoryNames' => $this->translationAPI->__('Names of the post categories', 'post-categories'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array

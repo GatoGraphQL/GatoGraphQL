@@ -31,15 +31,15 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
-        $types = [
+        return match($fieldName) {
             'excerpt' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'content' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'linkcontent' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'linkAccessByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'linkCategoriesByName' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'hasLinkCategories' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
@@ -59,7 +59,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
             'excerpt' => $translationAPI->__('', ''),
             'content' => $translationAPI->__('', ''),
             'linkcontent' => $translationAPI->__('', ''),
@@ -68,8 +68,8 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
             'linkcategories' => $translationAPI->__('', ''),
             'linkCategoriesByName' => $translationAPI->__('', ''),
             'hasLinkCategories' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     // @todo: Migrate to returning an EnumTypeResolverClass in getFieldTypeResolver, then delete this function

@@ -20,13 +20,13 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE => POP_USERSTANCE_ROUTE_ADDOREDITSTANCE,
             self::MODULE_BLOCK_STANCE_CREATE => POP_USERSTANCE_ROUTE_ADDSTANCE,
             self::MODULE_BLOCK_STANCE_CREATEORUPDATE => POP_USERSTANCE_ROUTE_ADDOREDITSTANCE,
             self::MODULE_BLOCK_STANCE_UPDATE => POP_USERSTANCE_ROUTE_EDITSTANCE,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     protected function getControlgroupTopSubmodule(array $module)

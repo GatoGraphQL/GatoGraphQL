@@ -72,7 +72,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $types = [
+        return match ($fieldName) {
             'src' => $this->urlScalarTypeResolver,
             'srcSet' => $this->stringScalarTypeResolver,
             'width' => $this->intScalarTypeResolver,
@@ -85,8 +85,8 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             'date' => $this->dateScalarTypeResolver,
             'modified' => $this->dateScalarTypeResolver,
             'mimeType' => $this->stringScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
@@ -104,7 +104,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match ($fieldName) {
             'src' => $this->translationAPI->__('Media element URL source', 'pop-media'),
             'srcSet' => $this->translationAPI->__('Media element URL srcset', 'pop-media'),
             'width' => $this->translationAPI->__('Media element\'s width', 'pop-media'),
@@ -117,8 +117,8 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             'date' => $this->translationAPI->__('Media element\'s published date', 'pop-media'),
             'modified' => $this->translationAPI->__('Media element\'s modified date', 'pop-media'),
             'mimeType' => $this->translationAPI->__('Media element\'s mime type', 'pop-media'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array

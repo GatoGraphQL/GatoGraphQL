@@ -29,14 +29,14 @@ class ObjectTypeFieldResolver_OrganizationUsers extends AbstractObjectTypeFieldR
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
-        $types = [
+        return match($fieldName) {
 			'contactPerson' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'contactNumber' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'organizationtypes' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'organizationcategories' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'hasOrganizationDetails' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
@@ -55,14 +55,14 @@ class ObjectTypeFieldResolver_OrganizationUsers extends AbstractObjectTypeFieldR
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
 			'contactPerson' => $translationAPI->__('', ''),
             'contactNumber' => $translationAPI->__('', ''),
             'organizationtypes' => $translationAPI->__('', ''),
             'organizationcategories' => $translationAPI->__('', ''),
             'hasOrganizationDetails' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

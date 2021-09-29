@@ -26,11 +26,11 @@ class ObjectTypeFieldResolver_IndividualUsers extends AbstractObjectTypeFieldRes
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
-        $types = [
+        return match($fieldName) {
 			'individualinterests' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'hasIndividualDetails' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
@@ -45,11 +45,11 @@ class ObjectTypeFieldResolver_IndividualUsers extends AbstractObjectTypeFieldRes
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match($fieldName) {
 			'individualinterests' => $translationAPI->__('', ''),
             'hasIndividualDetails' => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

@@ -64,11 +64,11 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
             case 'usersForAdmin':
                 return $this->userObjectTypeResolver;
         }
-        $types = [
+        return match ($fieldName) {
             'userCount' => $this->intScalarTypeResolver,
             'userCountForAdmin' => $this->intScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
@@ -86,13 +86,13 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match ($fieldName) {
             'users' => $this->translationAPI->__('Users', 'pop-users'),
             'userCount' => $this->translationAPI->__('Number of users', 'pop-users'),
             'usersForAdmin' => $this->translationAPI->__('[Unrestricted] Users', 'pop-users'),
             'userCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of users', 'pop-users'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array

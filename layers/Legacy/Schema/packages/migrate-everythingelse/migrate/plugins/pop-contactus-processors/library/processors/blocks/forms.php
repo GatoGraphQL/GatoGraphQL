@@ -13,10 +13,10 @@ class PoP_ContactUs_Module_Processor_Blocks extends PoP_Module_Processor_FormBlo
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_BLOCK_CONTACTUS => POP_CONTACTUS_ROUTE_CONTACTUS,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     protected function getInnerSubmodules(array $module): array

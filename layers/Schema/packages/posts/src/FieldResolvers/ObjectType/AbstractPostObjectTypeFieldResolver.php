@@ -64,11 +64,11 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
             case 'postsForAdmin':
                 return $this->postObjectTypeResolver;
         }
-        $types = [
+        return match ($fieldName) {
             'postCount' => $this->intScalarTypeResolver,
             'postCountForAdmin' => $this->intScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
@@ -87,13 +87,13 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match ($fieldName) {
             'posts' => $this->translationAPI->__('Posts', 'pop-posts'),
             'postCount' => $this->translationAPI->__('Number of posts', 'pop-posts'),
             'postsForAdmin' => $this->translationAPI->__('[Unrestricted] Posts', 'pop-posts'),
             'postCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of posts', 'pop-posts'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array

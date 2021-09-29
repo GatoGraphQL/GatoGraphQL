@@ -158,7 +158,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match ($fieldName) {
             'content' => $this->translationAPI->__('Comment\'s content', 'pop-comments'),
             'authorName' => $this->translationAPI->__('Comment author\'s name', 'pop-comments'),
             'authorURL' => $this->translationAPI->__('Comment author\'s URL', 'pop-comments'),
@@ -174,8 +174,8 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'responseCount' => $this->translationAPI->__('Number of responses to the comment', 'pop-comments'),
             'responsesForAdmin' => $this->translationAPI->__('[Unrestricted] Responses to the comment', 'pop-comments'),
             'responseCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of responses to the comment', 'pop-comments'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array

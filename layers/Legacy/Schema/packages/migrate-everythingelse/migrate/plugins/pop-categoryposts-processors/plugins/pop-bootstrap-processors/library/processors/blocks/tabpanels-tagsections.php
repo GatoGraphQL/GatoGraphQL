@@ -51,7 +51,7 @@ class CPP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS00 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
             self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS01 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01,
             self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS02 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02,
@@ -72,8 +72,8 @@ class CPP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
             self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS17 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS17,
             self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS18 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18,
             self::MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS19 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     public function getInnerSubmodules(array $module): array

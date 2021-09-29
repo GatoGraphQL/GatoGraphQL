@@ -20,10 +20,10 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_DATALOAD_CREATELOCATION => POP_ADDLOCATIONS_ROUTE_ADDLOCATION,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     public function getRelevantRouteCheckpointTarget(array $module, array &$props): string

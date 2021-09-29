@@ -102,7 +102,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     public function getName(array $module): string
     {
         // Add a nice name, so that the URL params when filtering make sense
-        $names = array(
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_ORDER => 'order',
             self::MODULE_FILTERINPUT_LIMIT => 'limit',
             self::MODULE_FILTERINPUT_OFFSET => 'offset',
@@ -118,8 +118,8 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_SLUG => 'slug',
             self::MODULE_FILTERINPUT_DATEFORMAT => 'format',
             self::MODULE_FILTERINPUT_GMT => 'gmt',
-        );
-        return $names[$module[1]] ?? parent::getName($module);
+            default => parent::getName($module),
+        };
     }
 
     public function getSchemaFilterInputType(array $module): string

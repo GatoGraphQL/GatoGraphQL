@@ -19,10 +19,10 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_DATALOAD_FLAG => POP_CONTENTCREATION_ROUTE_FLAG,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     public function getRelevantRouteCheckpointTarget(array $module, array &$props): string

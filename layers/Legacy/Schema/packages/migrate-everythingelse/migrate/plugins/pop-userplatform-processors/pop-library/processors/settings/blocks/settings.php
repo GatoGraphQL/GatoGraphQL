@@ -13,10 +13,10 @@ class PoP_Module_Processor_CustomSettingsBlocks extends PoP_Module_Processor_Blo
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_BLOCK_SETTINGS => POP_USERPLATFORM_ROUTE_SETTINGS,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     protected function getInnerSubmodules(array $module): array

@@ -118,7 +118,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
 
     public function getSchemaFieldDescription(string $fieldName): ?string
     {
-        $descriptions = [
+        return match ($fieldName) {
             'url' => $this->translationAPI->__('Custom post URL', 'customposts'),
             'urlPath' => $this->translationAPI->__('Custom post URL path', 'customposts'),
             'slug' => $this->translationAPI->__('Custom post slug', 'customposts'),
@@ -130,8 +130,8 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'title' => $this->translationAPI->__('Custom post title', 'customposts'),
             'excerpt' => $this->translationAPI->__('Custom post excerpt', 'customposts'),
             'customPostType' => $this->translationAPI->__('Custom post type', 'customposts'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($fieldName);
+            default => parent::getSchemaFieldDescription($fieldName),
+        };
     }
     public function getSchemaFieldArgs(string $fieldName): array
     {

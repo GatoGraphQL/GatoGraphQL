@@ -33,13 +33,13 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
     public function getRelevantRoute(array $module, array &$props): ?string
     {
         // $vars = ApplicationState::getVars();
-        $routes = array(
+        return match($module[1]) {
             // The Page Content block uses whichever is the current page
             self::MODULE_DATALOAD_PAGE_CONTENT => POP_ROUTE_DESCRIPTION,//$vars['route'],
             self::MODULE_DATALOAD_AUTHOR_CONTENT => POP_ROUTE_DESCRIPTION,
             self::MODULE_DATALOAD_TAG_CONTENT => POP_ROUTE_DESCRIPTION,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     protected function getInnerSubmodules(array $module): array

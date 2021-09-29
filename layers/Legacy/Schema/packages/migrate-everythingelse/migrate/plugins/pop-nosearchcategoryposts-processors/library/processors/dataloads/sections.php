@@ -1120,7 +1120,7 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        $routes = array(
+        return match($module[1]) {
             self::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS00_CAROUSEL => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00,
             self::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00,
             self::MODULE_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEW => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00,
@@ -1621,8 +1621,8 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
             self::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_LIST => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19,
             self::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_SIMPLEVIEW => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19,
             self::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_THUMBNAIL => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     public function getInnerSubmodule(array $module)

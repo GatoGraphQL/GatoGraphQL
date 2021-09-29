@@ -69,7 +69,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match ($fieldName) {
             'genericCustomPost' => $this->translationAPI->__('Custom post with a specific ID', 'generic-customposts'),
             'genericCustomPostBySlug' => $this->translationAPI->__('Custom post with a specific slug', 'generic-customposts'),
             'genericCustomPosts' => $this->translationAPI->__('Custom posts', 'generic-customposts'),
@@ -78,8 +78,8 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
             'genericCustomPostBySlugForAdmin' => $this->translationAPI->__('[Unrestricted] Custom post with a specific slug', 'generic-customposts'),
             'genericCustomPostsForAdmin' => $this->translationAPI->__('[Unrestricted] Custom posts', 'generic-customposts'),
             'genericCustomPostCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of custom posts', 'generic-customposts'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
@@ -93,11 +93,11 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
             case 'genericCustomPostsForAdmin':
                 return $this->genericCustomPostObjectTypeResolver;
         }
-        $types = [
+        return match ($fieldName) {
             'genericCustomPostCount' => $this->intScalarTypeResolver,
             'genericCustomPostCountForAdmin' => $this->intScalarTypeResolver,
-        ];
-        return $types[$fieldName] ?? parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int

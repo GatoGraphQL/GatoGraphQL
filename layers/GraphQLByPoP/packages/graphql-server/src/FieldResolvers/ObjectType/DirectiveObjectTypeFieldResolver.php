@@ -82,14 +82,14 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $descriptions = [
+        return match ($fieldName) {
             'name' => $this->translationAPI->__('Directive\'s name', 'graphql-server'),
             'description' => $this->translationAPI->__('Directive\'s description', 'graphql-server'),
             'args' => $this->translationAPI->__('Directive\'s arguments', 'graphql-server'),
             'locations' => $this->translationAPI->__('The locations where the directive may be placed', 'graphql-server'),
             'isRepeatable' => $this->translationAPI->__('Can the directive be executed more than once in the same field?', 'graphql-server'),
-        ];
-        return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($objectTypeResolver, $fieldName);
+            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+        };
     }
 
     /**

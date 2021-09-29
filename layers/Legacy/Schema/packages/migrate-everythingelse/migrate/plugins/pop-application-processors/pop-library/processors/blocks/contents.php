@@ -26,13 +26,13 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
     public function getRelevantRoute(array $module, array &$props): ?string
     {
         // $vars = ApplicationState::getVars();
-        $routes = array(
+        return match($module[1]) {
             // The Page Content block uses whichever is the current page
             self::MODULE_BLOCK_PAGE_CONTENT => POP_ROUTE_DESCRIPTION,//$vars['route'],
             self::MODULE_BLOCK_AUTHOR_CONTENT => POP_ROUTE_DESCRIPTION,
             self::MODULE_BLOCK_TAG_CONTENT => POP_ROUTE_DESCRIPTION,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
+            default => parent::getRelevantRoute($module, $props),
+        };
     }
 
     protected function getDescriptionBottom(array $module, array &$props)
