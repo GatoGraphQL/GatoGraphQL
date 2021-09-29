@@ -19,7 +19,6 @@ use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\API\Registries\SchemaDefinitionRegistryInterface;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\State\ApplicationState;
@@ -56,13 +55,14 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
         SchemaDefinitionRegistryInterface $schemaDefinitionRegistry,
         GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
+        PersistentCacheInterface $persistentCache,
     ): void {
         $this->translationAPI = $translationAPI;
         $this->schemaDefinitionService = $schemaDefinitionService;
         $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
         $this->schemaDefinitionRegistry = $schemaDefinitionRegistry;
         $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
-        $this->persistentCache = PersistentCacheFacade::getInstance();
+        $this->persistentCache = $persistentCache;
     }
 
     /**
