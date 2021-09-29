@@ -573,14 +573,14 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
                     // Lazy load the object
                     if (is_null(self::$dynamic_module_resources)) {
 
+                        $cachemanager = null;
                         if ($useCache = ComponentModelComponentConfiguration::useComponentModelCache()) {
                             $cachemanager = PersistentCacheFacade::getInstance();
-                            $useCache = !is_null($cachemanager);
                         }
 
                         // Check if results are already on the cache
                         if ($useCache) {
-                            self::$dynamic_module_resources = $cachemanager->getComponentModelCacheByModelInstance(POP_CACHETYPE_DYNAMICMODULERESOURCES);
+                            self::$dynamic_module_resources = $cachemanager->getCacheByModelInstance(POP_CACHETYPE_DYNAMICMODULERESOURCES);
                         }
                         if (!self::$dynamic_module_resources) {
 
@@ -593,11 +593,12 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
                             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
                             $processor = $moduleprocessor_manager->getProcessor($entryModule);
                             $processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($processor);
-                            self::$dynamic_module_resources = $processorresourcedecorator->getDynamicResourcesMergedmoduletree($entryModule, $props);
+                            // @todo Check where $props comes from. Temporarily replaced with [] to avoid IDE error
+                            self::$dynamic_module_resources = $processorresourcedecorator->getDynamicResourcesMergedmoduletree($entryModule, []/*$props*/);
 
                             // And store them on the cache
                             if ($useCache) {
-                                $cachemanager->storeComponentModelCacheByModelInstance(POP_CACHETYPE_DYNAMICMODULERESOURCES, self::$dynamic_module_resources);
+                                $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_DYNAMICMODULERESOURCES, self::$dynamic_module_resources);
                             }
                         }
                     }
