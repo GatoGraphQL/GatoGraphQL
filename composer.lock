@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "018b8d42cc955abe45d2370c88730868",
+    "content-hash": "378ac630796d5b6d2879067bf630db73",
     "packages": [
         {
             "name": "boxuk/wp-muplugin-loader",
@@ -4358,16 +4358,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.11.55",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "fe8c0e8c986661e21f0724d01532c8a0a9506840"
+                "reference": "c0c12d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/fe8c0e8c986661e21f0724d01532c8a0a9506840",
-                "reference": "fe8c0e8c986661e21f0724d01532c8a0a9506840",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/c0c12d0",
+                "reference": "c0c12d0",
                 "shasum": ""
             },
             "require": {
@@ -4384,6 +4384,7 @@
                 "rector/rector-prefixed": "*",
                 "rector/rector-symfony": "*"
             },
+            "default-branch": true,
             "bin": [
                 "bin/rector"
             ],
@@ -4405,7 +4406,7 @@
             "description": "Prefixed and PHP 7.1 downgraded version of rector/rector",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.11.55"
+                "source": "https://github.com/rectorphp/rector/tree/main"
             },
             "funding": [
                 {
@@ -4413,7 +4414,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-09-27T16:07:45+00:00"
+            "time": "2021-09-28T22:42:45+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -7191,7 +7192,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "rector/rector": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
