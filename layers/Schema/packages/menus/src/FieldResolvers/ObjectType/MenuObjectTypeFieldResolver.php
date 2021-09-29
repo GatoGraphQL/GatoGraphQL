@@ -9,6 +9,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
@@ -23,6 +24,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
     protected MenuItemObjectTypeResolver $menuItemObjectTypeResolver;
     protected MenuTypeAPIInterface $menuTypeAPI;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
 
     #[Required]
     public function autowireMenuObjectTypeFieldResolver(
@@ -30,11 +32,13 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         MenuItemObjectTypeResolver $menuItemObjectTypeResolver,
         MenuTypeAPIInterface $menuTypeAPI,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {
         $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         $this->menuItemObjectTypeResolver = $menuItemObjectTypeResolver;
         $this->menuTypeAPI = $menuTypeAPI;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

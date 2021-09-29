@@ -11,11 +11,22 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
+use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements SetCategoriesOnCustomPostObjectTypeFieldResolverInterface
 {
     use SetCategoriesOnCustomPostObjectTypeFieldResolverTrait;
+
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    
+    #[Required]
+    public function autowireAbstractRootObjectTypeFieldResolver(
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+    ): void {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

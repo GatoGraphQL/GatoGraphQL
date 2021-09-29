@@ -18,6 +18,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -28,6 +29,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
     protected PersistedFragmentManagerInterface $fragmentCatalogueManager;
     protected PersistedQueryManagerInterface $queryCatalogueManager;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
 
     #[Required]
     public function autowireRootObjectTypeFieldResolver(
@@ -36,12 +38,14 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         PersistedFragmentManagerInterface $fragmentCatalogueManager,
         PersistedQueryManagerInterface $queryCatalogueManager,
         PersistentCacheInterface $persistentCache,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {
         $this->schemaOutputShapeEnumTypeResolver = $schemaOutputShapeEnumTypeResolver;
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         $this->fragmentCatalogueManager = $fragmentCatalogueManager;
         $this->queryCatalogueManager = $queryCatalogueManager;
         $this->persistentCache = $persistentCache;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

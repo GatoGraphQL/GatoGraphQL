@@ -8,10 +8,21 @@ use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
     use FilterIDsSatisfyingConditionDirectiveResolverTrait;
+
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+
+    #[Required]
+    public function autowireSkipDirectiveResolver(
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+    ): void {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
 
     public function getDirectiveName(): string
     {

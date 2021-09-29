@@ -5,6 +5,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPostMedia\Misc\MediaHelpers as CustomPostMediaHelpers;
@@ -16,12 +17,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     
     #[Required]
     public function autowirePoP_Application_DataLoad_ObjectTypeFieldResolver_Posts(
         StringScalarTypeResolver $stringScalarTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

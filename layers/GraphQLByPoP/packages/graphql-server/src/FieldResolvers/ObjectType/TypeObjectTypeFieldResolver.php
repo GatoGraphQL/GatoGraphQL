@@ -21,6 +21,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -28,6 +29,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
     protected FieldObjectTypeResolver $fieldObjectTypeResolver;
     protected TypeObjectTypeResolver $typeObjectTypeResolver;
@@ -38,6 +40,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     #[Required]
     public function autowireTypeObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         FieldObjectTypeResolver $fieldObjectTypeResolver,
         TypeObjectTypeResolver $typeObjectTypeResolver,
@@ -46,6 +49,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         TypeKindEnumTypeResolver $typeKindEnumTypeResolver,
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         $this->fieldObjectTypeResolver = $fieldObjectTypeResolver;
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;

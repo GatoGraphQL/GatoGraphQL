@@ -11,18 +11,22 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
 
     #[Required]
     public function autowireNamespacedTypeObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
