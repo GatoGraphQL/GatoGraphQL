@@ -6,7 +6,6 @@ namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 

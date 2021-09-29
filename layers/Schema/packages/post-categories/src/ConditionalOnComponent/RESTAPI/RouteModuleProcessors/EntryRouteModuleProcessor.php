@@ -6,17 +6,13 @@ namespace PoPSchema\PostCategories\ConditionalOnComponent\RESTAPI\RouteModulePro
 
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\Response\Schemes as APISchemes;
-use PoP\API\Schema\FieldQueryConvertorInterface;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
 use PoP\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Routing\RouteNatures;
 use PoPSchema\Categories\Routing\RouteNatures as CategoryRouteNatures;
 use PoPSchema\PostCategories\ComponentConfiguration;
 use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\CategoryPostFieldDataloadModuleProcessor;
 use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
-use PoPSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 

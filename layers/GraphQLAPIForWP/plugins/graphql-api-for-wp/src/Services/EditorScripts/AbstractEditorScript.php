@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\AbstractScript;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
  * Base class for a Gutenberg script.

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\EnqueueReactMenuPageTrait;
 
 /**
  * Voyager page

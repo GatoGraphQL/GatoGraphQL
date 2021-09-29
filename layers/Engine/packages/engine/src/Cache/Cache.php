@@ -6,9 +6,7 @@ namespace PoP\Engine\Cache;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
-use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\CacheItemInterface;
-use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
 use PoP\ComponentModel\Cache\Cache as UpstreamCache;
 
 class Cache extends UpstreamCache

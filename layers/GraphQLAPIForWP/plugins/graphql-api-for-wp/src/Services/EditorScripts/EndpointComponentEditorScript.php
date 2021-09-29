@@ -6,12 +6,8 @@ namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
  * Components required to edit a GraphQL endpoint CPT

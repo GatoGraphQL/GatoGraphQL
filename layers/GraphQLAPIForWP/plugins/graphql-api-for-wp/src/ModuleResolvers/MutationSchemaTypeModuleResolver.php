@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\Plugin;
 
 class MutationSchemaTypeModuleResolver extends AbstractModuleResolver

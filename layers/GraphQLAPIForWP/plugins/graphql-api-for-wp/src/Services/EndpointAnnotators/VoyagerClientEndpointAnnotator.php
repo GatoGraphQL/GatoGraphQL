@@ -7,12 +7,8 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
 use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointVoyagerBlock;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use WP_Post;
 
 class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator implements CustomEndpointAnnotatorServiceTagInterface

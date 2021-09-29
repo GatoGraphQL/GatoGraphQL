@@ -5,15 +5,9 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\AccessControlRuleBlockRegistryFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\AccessControlRuleBlockRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlBlock;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\AbstractCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
 {

@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_ResourceLoaderProcessor {
 

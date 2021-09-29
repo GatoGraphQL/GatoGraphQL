@@ -2,7 +2,6 @@
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
-use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 

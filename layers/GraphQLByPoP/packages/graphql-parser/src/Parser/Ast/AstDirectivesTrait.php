@@ -8,7 +8,6 @@
 
 namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
 
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Directive;
 
 trait AstDirectivesTrait
 {

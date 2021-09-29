@@ -6,7 +6,6 @@ namespace PoP\Engine\DirectiveResolvers;
 
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\Facades\Schema\FeedbackMessageStoreFacade;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;

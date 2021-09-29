@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\PagesWP\TypeAPIs;
 
 use WP_Post;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Pages\ComponentConfiguration;
 use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;

@@ -5,26 +5,13 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\ModuleProcessors\FormInputs;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\Facades\HelperServices\FormInputHelperServiceFacade;
-use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface;
-use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
-use PoP\ComponentModel\ModuleFilters\ModulePaths;
-use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
-use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\LooseContracts\NameResolverInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 
 class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface

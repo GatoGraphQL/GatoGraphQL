@@ -5,24 +5,12 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\Engine\DataloadingEngineInterface;
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
-use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use GraphQLByPoP\GraphQLServer\Helpers\TypeResolverHelperInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\MutationRootTypeDataLoader;
-use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
-use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 
 class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObjectTypeResolver
 {

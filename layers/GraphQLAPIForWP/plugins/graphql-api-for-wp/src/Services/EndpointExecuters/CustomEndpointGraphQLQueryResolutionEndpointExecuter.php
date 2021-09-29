@@ -6,11 +6,9 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use WP_Post;
 
 class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraphQLQueryResolutionEndpointExecuter implements CustomEndpointExecuterServiceTagInterface

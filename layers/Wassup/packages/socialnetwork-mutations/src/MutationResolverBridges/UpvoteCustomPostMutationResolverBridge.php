@@ -5,13 +5,7 @@ declare(strict_types=1);
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSitesWassup\SocialNetworkMutations\MutationResolvers\UpvoteCustomPostMutationResolver;
 
 class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge

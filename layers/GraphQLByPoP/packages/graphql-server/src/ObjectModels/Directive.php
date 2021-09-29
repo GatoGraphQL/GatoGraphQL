@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
-use GraphQLByPoP\GraphQLServer\ObjectModels\DirectiveLocations;
-use GraphQLByPoP\GraphQLServer\ObjectModels\HasArgsSchemaDefinitionReferenceTrait;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\State\ApplicationState;

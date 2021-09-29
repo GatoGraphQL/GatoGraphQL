@@ -7,7 +7,6 @@ namespace PoP\API\Registries;
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\API\Cache\CacheTypes;
 use PoP\API\ComponentConfiguration;
-use PoP\API\Registries\SchemaDefinitionRegistryInterface;
 use PoP\ComponentModel\Cache\CacheInterface;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;

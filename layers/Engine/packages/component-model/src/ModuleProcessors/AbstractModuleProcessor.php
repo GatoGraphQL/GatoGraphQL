@@ -17,8 +17,6 @@ use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;

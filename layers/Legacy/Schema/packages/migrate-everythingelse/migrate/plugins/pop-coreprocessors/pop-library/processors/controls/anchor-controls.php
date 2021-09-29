@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
 class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase

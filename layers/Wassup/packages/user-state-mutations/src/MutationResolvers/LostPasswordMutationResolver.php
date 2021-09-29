@@ -9,10 +9,7 @@ use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtils;
 

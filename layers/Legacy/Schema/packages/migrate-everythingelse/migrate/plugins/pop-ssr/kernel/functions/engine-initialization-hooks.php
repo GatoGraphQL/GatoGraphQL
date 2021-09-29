@@ -7,7 +7,6 @@ use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\HelperServices\DataloadHelperService;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;

@@ -5,7 +5,6 @@ use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 use PoPSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;

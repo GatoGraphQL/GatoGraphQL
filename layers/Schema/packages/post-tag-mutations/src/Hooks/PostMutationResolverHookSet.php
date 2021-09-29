@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\PostTagMutations\Hooks;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
-use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\CustomPostTagMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
 use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;

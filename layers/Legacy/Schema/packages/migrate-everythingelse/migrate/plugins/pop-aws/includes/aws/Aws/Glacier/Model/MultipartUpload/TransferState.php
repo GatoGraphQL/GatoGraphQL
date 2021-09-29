@@ -16,7 +16,6 @@
 
 namespace Aws\Glacier\Model\MultipartUpload;
 
-use Aws\Glacier\Model\MultipartUpload\UploadPartGenerator;
 use Aws\Common\Client\AwsClientInterface;
 use Aws\Common\Model\MultipartUpload\AbstractTransferState;
 use Aws\Common\Model\MultipartUpload\UploadIdInterface;

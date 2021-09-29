@@ -5,11 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\RelationalTypeDataLoaders\ObjectType;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\LooseContracts\NameResolverInterface;
 use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\Constants\CommentTypes;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;

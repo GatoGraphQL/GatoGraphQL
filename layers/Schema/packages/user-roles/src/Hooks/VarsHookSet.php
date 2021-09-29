@@ -5,14 +5,10 @@ declare(strict_types=1);
 namespace PoPSchema\UserRoles\Hooks;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\AbstractHookSet;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\UserRoles\Constants\ModelInstanceComponentTypes;
-use PoPSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPSchema\Users\Routing\RouteNatures;
 

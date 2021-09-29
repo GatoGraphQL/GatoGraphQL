@@ -5,22 +5,12 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
-use PoP\ComponentModel\Engine\EngineInterface;
-use PoP\ComponentModel\FieldResolvers\ObjectType\QueryableObjectTypeFieldSchemaDefinitionResolverInterface;
-use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModuleProcessors\FilterDataModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\FilterInputContainerModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableInterfaceSchemaDefinitionResolverAdapter;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\LooseContracts\NameResolverInterface;
-use PoP\Translation\TranslationAPIInterface;
 
 abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements QueryableObjectTypeFieldSchemaDefinitionResolverInterface
 {

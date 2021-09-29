@@ -7,7 +7,6 @@ namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 use PoPSchema\UserMeta\Utils;
 use PoP\ApplicationTaxonomies\FunctionAPIFactory;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\PostTags\Facades\PostTagTypeAPIFacade;
 
 class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFromTagMutationResolver
 {

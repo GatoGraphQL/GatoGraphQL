@@ -6,9 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\PluginMarkdownContentRetrieverTrait;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
  * Release notes menu page

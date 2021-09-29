@@ -6,17 +6,11 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\CacheControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\AbstractGraphQLQueryConfigurator;
 use PoP\CacheControl\Managers\CacheControlManagerInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
-use PoP\ComponentModel\Registries\TypeRegistryInterface;
-use PoP\Hooks\HooksAPIInterface;
 
 class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigurator
 {

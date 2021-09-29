@@ -6,8 +6,6 @@ namespace PoP\LooseContracts;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
-use PoP\LooseContracts\LooseContractManagerInterface;
-use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractLooseContractResolutionSet extends AbstractAutomaticallyInstantiatedService

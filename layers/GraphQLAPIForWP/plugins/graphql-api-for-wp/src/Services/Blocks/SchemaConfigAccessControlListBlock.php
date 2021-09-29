@@ -6,15 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
  * Cache Control block

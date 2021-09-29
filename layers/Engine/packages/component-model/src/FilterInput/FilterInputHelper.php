@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FilterInput;
 
-use PoP\ComponentModel\Facades\FilterInputProcessors\FilterInputProcessorManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 

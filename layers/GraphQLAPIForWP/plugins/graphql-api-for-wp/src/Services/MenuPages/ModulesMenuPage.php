@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Admin\Tables\ModuleListTable;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractTableMenuPage;
 
 /**
  * Module menu page

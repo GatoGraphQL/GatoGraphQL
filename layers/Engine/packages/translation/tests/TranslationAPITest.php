@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\Translation;
 
 use PHPUnit\Framework\TestCase;
-use PoP\Translation\TranslationAPIInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Translation\ContractImplementations\TranslationAPI;

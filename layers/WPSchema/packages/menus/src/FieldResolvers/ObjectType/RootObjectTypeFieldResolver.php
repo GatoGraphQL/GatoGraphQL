@@ -5,21 +5,11 @@ declare(strict_types=1);
 namespace PoPWPSchema\Menus\FieldResolvers\ObjectType;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
-use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
-use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\LooseContracts\NameResolverInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver

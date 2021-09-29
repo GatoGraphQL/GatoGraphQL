@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ShareMutations\MutationResolvers;
 
-use PoP\Translation\TranslationAPIInterface;
-use PoP\Hooks\HooksAPIInterface;
 use PoP\Application\FunctionAPIFactory;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class ShareByEmailMutationResolver extends AbstractMutationResolver

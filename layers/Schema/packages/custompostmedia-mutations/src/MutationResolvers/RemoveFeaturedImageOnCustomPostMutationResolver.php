@@ -6,8 +6,6 @@ namespace PoPSchema\CustomPostMediaMutations\MutationResolvers;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 

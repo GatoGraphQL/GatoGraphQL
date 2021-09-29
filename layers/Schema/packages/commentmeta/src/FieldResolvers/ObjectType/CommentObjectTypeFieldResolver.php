@@ -5,17 +5,8 @@ declare(strict_types=1);
 namespace PoPSchema\CommentMeta\FieldResolvers\ObjectType;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\LooseContracts\NameResolverInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CommentMeta\TypeAPIs\CommentMetaTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolver;

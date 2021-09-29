@@ -8,15 +8,11 @@ use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use PoP\AccessControl\Schema\SchemaModes;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\Translation\TranslationAPIInterface;
 use WP_Post;
 
 class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver

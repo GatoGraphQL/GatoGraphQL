@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 
 class SchemaConfigMutationSchemeBlock extends AbstractSchemaConfigBlock

@@ -11,7 +11,6 @@ use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractDynamicType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractSchemaDefinitionReferenceObject;
-use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;

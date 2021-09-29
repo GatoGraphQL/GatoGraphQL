@@ -1,7 +1,6 @@
 <?php
 
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
-use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_CDN_ThumbprintManager
 {

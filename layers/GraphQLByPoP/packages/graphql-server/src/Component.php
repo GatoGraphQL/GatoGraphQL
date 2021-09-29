@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer;
 
 use GraphQLByPoP\GraphQLRequest\Component as GraphQLRequestComponent;
-use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
-use GraphQLByPoP\GraphQLServer\Environment;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
 use PoP\Engine\Component as EngineComponent;
 use PoP\Engine\Environment as EngineEnvironment;

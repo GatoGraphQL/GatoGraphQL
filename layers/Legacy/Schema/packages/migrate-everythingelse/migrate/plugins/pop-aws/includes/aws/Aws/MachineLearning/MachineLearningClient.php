@@ -6,7 +6,6 @@ use Aws\Common\Client\AbstractClient;
 use Aws\Common\Client\ClientBuilder;
 use Aws\Common\Enum\ClientOptions as Options;
 use Aws\Common\Exception\Parser\JsonQueryExceptionParser;
-use Aws\MachineLearning\PredictEndpointListener;
 use Guzzle\Common\Collection;
 use Guzzle\Service\Resource\Model;
 

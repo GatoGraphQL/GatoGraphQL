@@ -7,8 +7,6 @@ namespace PoPSitesWassup\ContactUserMutations\MutationResolvers;
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class ContactUserMutationResolver extends AbstractMutationResolver

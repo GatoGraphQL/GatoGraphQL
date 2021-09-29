@@ -5,13 +5,9 @@ declare(strict_types=1);
 namespace PoPSitesWassup\SystemMutations\MutationResolvers;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 
 class ActivatePluginsMutationResolver extends AbstractMutationResolver
 {

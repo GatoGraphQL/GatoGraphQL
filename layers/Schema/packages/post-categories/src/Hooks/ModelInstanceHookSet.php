@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategories\Hooks;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\AbstractHookSet;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPosts\Routing\RouteNatures;
 use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;

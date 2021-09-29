@@ -6,9 +6,7 @@ namespace PoPSchema\UserStateAccessControl\ConditionalOnComponent\CacheControl\R
 
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\CacheControl\Helpers\CacheControlHelper;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\AbstractRelationalTypeResolverDecorator;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInDirectiveResolver;

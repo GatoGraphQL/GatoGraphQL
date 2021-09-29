@@ -10,8 +10,6 @@ use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtils;
 

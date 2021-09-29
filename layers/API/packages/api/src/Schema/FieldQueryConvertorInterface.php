@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
-use PoP\API\Schema\FieldQuerySet;
 
 interface FieldQueryConvertorInterface
 {

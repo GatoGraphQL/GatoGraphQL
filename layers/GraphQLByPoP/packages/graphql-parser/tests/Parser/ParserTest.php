@@ -21,9 +21,6 @@ use GraphQLByPoP\GraphQLParser\Parser\Ast\FragmentReference;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Mutation;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Query;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\TypedFragmentReference;
-use GraphQLByPoP\GraphQLParser\Parser\Location;
-use GraphQLByPoP\GraphQLParser\Parser\Parser;
-use GraphQLByPoP\GraphQLParser\Parser\Token;
 use PHPUnit\Framework\TestCase;
 
 class ParserTest extends TestCase

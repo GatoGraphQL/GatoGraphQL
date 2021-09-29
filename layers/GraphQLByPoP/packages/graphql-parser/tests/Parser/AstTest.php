@@ -18,7 +18,6 @@ use GraphQLByPoP\GraphQLParser\Parser\Ast\Fragment;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\FragmentReference;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Query;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\TypedFragmentReference;
-use GraphQLByPoP\GraphQLParser\Parser\Location;
 use PHPUnit\Framework\TestCase;
 
 class AstTest extends TestCase

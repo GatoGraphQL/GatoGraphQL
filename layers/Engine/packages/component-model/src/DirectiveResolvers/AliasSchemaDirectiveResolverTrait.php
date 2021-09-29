@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\DirectiveResolvers\AbstractDirectiveResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 /**

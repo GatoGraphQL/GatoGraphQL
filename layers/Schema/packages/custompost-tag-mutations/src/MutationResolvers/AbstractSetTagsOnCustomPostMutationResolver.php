@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostTagMutations\MutationResolvers;
 
-use PoP\Translation\TranslationAPIInterface;
-use PoP\Hooks\HooksAPIInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;

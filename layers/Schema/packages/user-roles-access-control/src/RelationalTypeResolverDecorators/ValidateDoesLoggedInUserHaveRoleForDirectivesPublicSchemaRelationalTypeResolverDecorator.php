@@ -6,10 +6,7 @@ namespace PoPSchema\UserRolesAccessControl\RelationalTypeResolverDecorators;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator;
-use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoPSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver;
 use PoPSchema\UserRolesAccessControl\Services\AccessControlGroups;
 

@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace PoP\Multisite\RelationalTypeDataLoaders\ObjectType;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\LooseContracts\NameResolverInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoP\Engine\FunctionAPIFactory;
 use PoP\Multisite\ObjectModels\Site;

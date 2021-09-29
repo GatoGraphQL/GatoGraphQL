@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\MainPluginBlockTrait;
 
 class SchemaConfigAdminFieldsBlock extends AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock
 {

@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\ModelInstance;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\HooksAPIInterface;
-use PoP\Definitions\Facades\DefinitionManagerFacade;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\State\ApplicationState;

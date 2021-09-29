@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait RemoveIDsDataFieldsDirectiveResolverTrait

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 interface EngineInterface

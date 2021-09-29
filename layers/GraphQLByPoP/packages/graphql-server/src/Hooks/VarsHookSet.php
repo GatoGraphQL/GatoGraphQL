@@ -8,13 +8,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
 use PoP\API\Response\Schemes as APISchemes;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Hooks\AbstractHookSet;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 
 class VarsHookSet extends AbstractHookSet
 {

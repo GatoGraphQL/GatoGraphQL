@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;

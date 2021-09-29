@@ -5,18 +5,10 @@ declare(strict_types=1);
 namespace PoPSchema\EverythingElse\FieldResolvers\ObjectType;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoP\Translation\TranslationAPIInterface;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\LooseContracts\NameResolverInterface;
-use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoP\SiteBuilderAPI\Helpers\APIUtils;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 

@@ -8,12 +8,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractDocsMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use InvalidArgumentException;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
  * Module Documentation menu page

@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoPSchema\Media\Facades\MediaTypeAPIFacade;

@@ -7,7 +7,6 @@ namespace PoPSchema\CategoriesWP\TypeAPIs;
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;

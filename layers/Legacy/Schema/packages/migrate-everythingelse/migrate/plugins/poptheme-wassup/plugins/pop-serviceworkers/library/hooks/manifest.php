@@ -1,6 +1,5 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Misc\GeneralUtils;
 
 class PoPTheme_Wassup_ServiceWorkers_Hooks_Manifest
 {

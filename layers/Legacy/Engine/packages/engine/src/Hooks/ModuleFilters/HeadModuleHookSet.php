@@ -6,13 +6,10 @@ namespace PoP\Engine\Hooks\ModuleFilters;
 
 use Symfony\Contracts\Service\Attribute\Required;
 use PoP\Hooks\AbstractHookSet;
-use PoP\Hooks\HooksAPIInterface;
 use PoP\Engine\ModuleFilters\HeadModule;
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Translation\TranslationAPIInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 class HeadModuleHookSet extends AbstractHookSet
 {

@@ -19,7 +19,6 @@ namespace Aws\DynamoDb\Model\BatchRequest;
 use Aws\Common\Client\AwsClientInterface;
 use Aws\Common\Exception\InvalidArgumentException;
 use Aws\DynamoDb\Exception\UnprocessedWriteRequestsException;
-use Aws\DynamoDb\Model\Item;
 use Guzzle\Batch\AbstractBatchDecorator;
 use Guzzle\Batch\BatchBuilder;
 use Guzzle\Batch\BatchSizeDivisor;

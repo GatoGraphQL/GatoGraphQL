@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\AbstractValidateDirectiveResolver;
 
 abstract class AbstractValidateConditionDirectiveResolver extends AbstractValidateDirectiveResolver
 {

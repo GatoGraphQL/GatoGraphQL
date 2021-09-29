@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\QueryInputOutputHandlers;
 
 use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\QueryInputOutputHandlers\AbstractQueryInputOutputHandler;
 
 class ListQueryInputOutputHandler extends AbstractQueryInputOutputHandler
 {

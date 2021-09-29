@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace PoPSchema\Settings\TypeAPIs;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoPSchema\SchemaCommons\Facades\Services\AllowOrDenySettingsServiceFacade;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPSchema\Settings\ComponentConfiguration;
-use PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 
 abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
 {

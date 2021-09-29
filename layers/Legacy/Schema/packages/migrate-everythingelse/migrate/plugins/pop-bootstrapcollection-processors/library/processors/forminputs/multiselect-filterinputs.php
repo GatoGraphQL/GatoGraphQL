@@ -6,8 +6,6 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\EverythingElse\Enums\CustomPostModeratedStatusEnum;
-use PoPSchema\EverythingElse\Enums\CustomPostUnmoderatedStatusEnum;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\CustomPostModeratedStatusEnumTypeResolver;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\CustomPostUnmoderatedStatusEnumTypeResolver;
 

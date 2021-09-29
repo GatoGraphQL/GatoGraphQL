@@ -8,13 +8,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 use Brain\Cortex\Route\QueryRoute;
 use Brain\Cortex\Route\RouteCollectionInterface;
 use Brain\Cortex\Route\RouteInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\AbstractHookSet;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Routing\Facades\RoutingManagerFacade;
 use PoP\Routing\RoutingManagerInterface;
 use PoP\RoutingWP\WPQueries;
-use PoP\Translation\TranslationAPIInterface;
 
 class SetupCortexHookSet extends AbstractHookSet
 {

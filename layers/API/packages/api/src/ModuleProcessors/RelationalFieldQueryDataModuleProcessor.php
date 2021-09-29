@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\API\ModuleProcessors;
 
-use PoP\API\ModuleProcessors\AbstractRelationalFieldQueryDataModuleProcessor;
 
 class RelationalFieldQueryDataModuleProcessor extends AbstractRelationalFieldQueryDataModuleProcessor
 {

@@ -1,6 +1,5 @@
 <?php
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
-use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 define('GD_URLPARAM_RSSCAMPAIGN_UPCOMINGEVENTS_3DAYS', 'events-3days');

@@ -9,19 +9,7 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
 use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
-use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
-use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
-use PoP\ComponentModel\ModuleFilters\ModulePaths;
-use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
-use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\LooseContracts\NameResolverInterface;
-use PoP\Translation\TranslationAPIInterface;
 
 class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {

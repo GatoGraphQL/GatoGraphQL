@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\QueriedObject\Hooks;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Hooks\AbstractHookSet;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
 use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalObjectTypeFieldResolver;
 

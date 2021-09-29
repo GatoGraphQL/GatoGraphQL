@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Users\Constants\InputNames;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 

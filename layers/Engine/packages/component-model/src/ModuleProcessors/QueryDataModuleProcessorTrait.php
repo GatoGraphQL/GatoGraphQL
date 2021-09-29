@@ -7,11 +7,9 @@ namespace PoP\ComponentModel\ModuleProcessors;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderInterface;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 trait QueryDataModuleProcessorTrait

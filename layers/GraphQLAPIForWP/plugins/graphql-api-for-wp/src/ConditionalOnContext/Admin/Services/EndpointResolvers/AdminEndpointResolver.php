@@ -8,7 +8,6 @@ use Symfony\Contracts\Service\Attribute\Required;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\AbstractEndpointResolver;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLByPoP\GraphQLRequest\ComponentConfiguration as GraphQLRequestComponentConfiguration;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
 use PoP\EngineWP\Templates\TemplateHelpers;

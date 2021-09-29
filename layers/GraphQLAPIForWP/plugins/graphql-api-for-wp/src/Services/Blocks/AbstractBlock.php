@@ -8,7 +8,6 @@ use Symfony\Contracts\Service\Attribute\Required;
 use Error;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AbstractBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\EditorScripts\HasDocumentationScriptTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;

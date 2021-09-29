@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InterfaceType;
 
-use PoP\ComponentModel\TypeResolvers\InterfaceType\AbstractInterfaceTypeResolver;
 
 class ElementalInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 {

@@ -5,19 +5,10 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Registries\TypeRegistryInterface;
-use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
-use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\ElementalInterfaceTypeResolver;
-use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\LooseContracts\NameResolverInterface;
-use PoP\Translation\TranslationAPIInterface;
 
 class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {

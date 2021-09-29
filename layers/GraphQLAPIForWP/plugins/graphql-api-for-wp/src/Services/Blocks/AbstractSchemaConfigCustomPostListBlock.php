@@ -5,14 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use Symfony\Contracts\Service\Attribute\Required;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use WP_Post;
 
 abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaConfigBlock

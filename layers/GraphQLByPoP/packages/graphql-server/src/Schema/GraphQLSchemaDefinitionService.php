@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
-use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;

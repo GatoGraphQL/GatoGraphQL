@@ -10,11 +10,8 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 
 /**
  * Settings menu page

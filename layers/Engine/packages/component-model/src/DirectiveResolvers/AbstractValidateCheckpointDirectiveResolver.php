@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;

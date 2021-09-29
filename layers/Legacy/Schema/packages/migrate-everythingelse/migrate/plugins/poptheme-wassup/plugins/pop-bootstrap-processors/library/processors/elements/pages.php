@@ -1,5 +1,4 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\SPA\Modules\PageInterface;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;

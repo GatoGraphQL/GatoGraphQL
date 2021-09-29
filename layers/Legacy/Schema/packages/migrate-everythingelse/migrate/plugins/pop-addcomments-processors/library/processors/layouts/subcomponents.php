@@ -1,5 +1,4 @@
 <?php
-use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 
 class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Processor_SubcomponentLayoutsBase
 {
