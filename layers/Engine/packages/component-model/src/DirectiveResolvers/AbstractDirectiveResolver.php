@@ -1055,18 +1055,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             if ($limitedToFields = $this->getFieldNamesToApplyTo()) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_DIRECTIVE_LIMITED_TO_FIELDS] = $limitedToFields;
             }
-            $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
-            if ($description = $schemaDefinitionResolver->getSchemaDirectiveDescription($relationalTypeResolver)) {
+            if ($description = $this->getSchemaDirectiveDescription($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
             }
-            if ($expressions = $schemaDefinitionResolver->getSchemaDirectiveExpressions($relationalTypeResolver)) {
+            if ($expressions = $this->getSchemaDirectiveExpressions($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_DIRECTIVE_EXPRESSIONS] = $expressions;
             }
-            if ($deprecationDescription = $schemaDefinitionResolver->getSchemaDirectiveDeprecationDescription($relationalTypeResolver)) {
+            if ($deprecationDescription = $this->getSchemaDirectiveDeprecationDescription($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
                 $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
             }
-            if ($args = $schemaDefinitionResolver->getSchemaDirectiveArgs($relationalTypeResolver)) {
+            if ($args = $this->getSchemaDirectiveArgs($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $this->getFilteredSchemaDirectiveArgs(
                     $relationalTypeResolver,
                     $args
