@@ -76,7 +76,7 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
 
     public function getMenu(array $module)
     {
-        $menus = array(
+        return match($module[1]) {
             self::MODULE_DATALOAD_MENU_SIDEBAR_ABOUT => GD_MENU_SIDEBAR_ABOUT,
             self::MODULE_DATALOAD_MENU_TOPNAV_USERLOGGEDIN => GD_MENU_TOPNAV_USERLOGGEDIN,
             self::MODULE_DATALOAD_MENU_TOPNAV_USERNOTLOGGEDIN => GD_MENU_TOPNAV_USERNOTLOGGEDIN,
@@ -91,8 +91,8 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
             self::MODULE_DATALOAD_MENU_BODY_SECTIONS => GD_MENU_SIDENAV_SECTIONS,
             self::MODULE_DATALOAD_MENU_BODY_MYSECTIONS => GD_MENU_SIDENAV_MYSECTIONS,
             self::MODULE_DATALOAD_MENU_BODY_ABOUT => GD_MENU_TOPNAV_ABOUT,
-        );
-        return $menus[$module[1]] ?? parent::getMenu($module);
+            default => parent::getMenu($module),
+        };
     }
 }
 
