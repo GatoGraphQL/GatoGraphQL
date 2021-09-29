@@ -46,20 +46,19 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
 
     public function getInputSubnames(array $module): array
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_DATES:
-                return ['from', 'to'];
-        }
-        return [];
+        return match ($module[1]) {
+            self::MODULE_FILTERINPUT_DATES => ['from', 'to'],
+            default => [],
+        };
     }
 
     public function getName(array $module): string
     {
         // Add a nice name, so that the URL params when filtering make sense
-        $names = array(
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_DATES => 'date',
-        );
-        return $names[$module[1]] ?? parent::getName($module);
+            default => parent::getName($module),
+        };
     }
 
     protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module): void

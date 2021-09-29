@@ -46,10 +46,10 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getName(array $module): string
     {
         // Add a nice name, so that the URL params when filtering make sense
-        $names = array(
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_MIME_TYPES => 'mimeTypes',
-        );
-        return $names[$module[1]] ?? parent::getName($module);
+            default => parent::getName($module),
+        };
     }
 
     public function getSchemaFilterInputType(array $module): string
