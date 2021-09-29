@@ -240,7 +240,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     {
         $schemaFieldArgs = [];
         foreach ($this->getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName) as $fieldArgName => $fieldArgConcreteTypeResolver) {
-            $schemaFieldArgs[] = $this->getFieldOrDirectiveArgSchemaDefinition(
+            $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
                 $fieldArgName,
                 $fieldArgConcreteTypeResolver,
                 $this->getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
