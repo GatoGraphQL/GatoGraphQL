@@ -6,7 +6,6 @@ namespace PoP\FunctionFields\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -133,6 +132,56 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
+            'concat' => [
+                'values' => $this->stringScalarTypeResolver,
+            ],
+            'divide' => [
+                'number' => $this->floatScalarTypeResolver,
+                'by' => $this->floatScalarTypeResolver,
+            ],
+            'arrayRandom' => [
+                'array' => $this->mixedScalarTypeResolver,
+            ],
+            'arrayJoin' => [
+                'array' => $this->stringScalarTypeResolver,
+                'separator' => $this->stringScalarTypeResolver,
+            ],
+            'arrayItem' => [
+                'array' => $this->mixedScalarTypeResolver,
+                'position' => $this->stringScalarTypeResolver,
+            ],
+            'arraySearch' => [
+                'array' => $this->mixedScalarTypeResolver,
+                'element' => $this->stringScalarTypeResolver,
+            ],
+            'arrayFill' => [
+                'target' => $this->mixedScalarTypeResolver,
+                'source' => $this->mixedScalarTypeResolver,
+                'index' => $this->stringScalarTypeResolver,
+                'properties' => $this->stringScalarTypeResolver,
+            ],
+            'arrayValues' => [
+                'array' => $this->mixedScalarTypeResolver,
+            ],
+            'arrayUnique' => [
+                'array' => $this->mixedScalarTypeResolver,
+            ],
+            'arrayDiff' => [
+                'arrays' => $this->mixedScalarTypeResolver,
+            ],
+            'arrayAddItem' => [
+                'array' => $this->mixedScalarTypeResolver,
+                'value' => $this->mixedScalarTypeResolver,
+                'key' => $this->arrayKeyScalarTypeResolver,
+            ],
+            'arrayAsQueryStr' => [
+                'array' => $this->mixedScalarTypeResolver,
+            ],
+            'upperCase',
+            'lowerCase',
+            'titleCase' => [
+                'text' => $this->stringScalarTypeResolver,
+            ],
             default => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
@@ -140,264 +189,64 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
+            ['concat' => 'values'] => $this->translationAPI->__('Strings to concatenate', 'function-fields'),
+            ['divide' => 'number'] => $this->translationAPI->__('Number to divide', 'function-fields'),
+            ['divide' => 'by'] => $this->translationAPI->__('The division operandum', 'function-fields'),
+            ['arrayRandom' => 'array'] => $this->translationAPI->__('Array of elements from which to randomly select one', 'function-fields'),
+            ['arrayJoin' => 'array'] => $this->translationAPI->__('Array of strings to be joined all together', 'function-fields'),
+            ['arrayJoin' => 'separator'] => $this->translationAPI->__('Separator with which to join all strings in the array', 'function-fields'),
+            ['arrayItem' => 'array'] => $this->translationAPI->__('Array containing the element to retrieve', 'function-fields'),
+            ['arrayItem' => 'position'] => $this->translationAPI->__('Position where the element is placed in the array, starting from 0', 'function-fields'),
+            ['arraySearch' => 'array'] => $this->translationAPI->__('Array containing the element to search', 'function-fields'),
+            ['arraySearch' => 'element'] => $this->translationAPI->__('Element to search in the array and retrieve its position', 'function-fields'),
+            ['arrayFill' => 'target'] => $this->translationAPI->__('Array to be added elements coming from the source array', 'function-fields'),
+            ['arrayFill' => 'source'] => $this->translationAPI->__('Array whose elements will be added to the target array', 'function-fields'),
+            ['arrayFill' => 'index'] => $this->translationAPI->__('Property whose value must be the same on both arrays', 'function-fields'),
+            ['arrayFill' => 'properties'] => $this->translationAPI->__('Properties to copy from the source to the target array. If empty, all properties in the source array will be copied', 'function-fields'),
+            ['arrayValues' => 'array'] => $this->translationAPI->__('The array from which to retrieve the values', 'function-fields'),
+            ['arrayUnique' => 'array'] => $this->translationAPI->__('The array to operate on', 'function-fields'),
+            ['arrayDiff' => 'arrays'] => $this->translationAPI->__('The array containing all the arrays. It must have at least 2 elements', 'function-fields'),
+            ['arrayAddItem' => 'array'] => $this->translationAPI->__('The array to add an item on', 'function-fields'),
+            ['arrayAddItem' => 'value'] => $this->translationAPI->__('The value to add to the array', 'function-fields'),
+            ['arrayAddItem' => 'key'] => $this->translationAPI->__('Key (string or integer) under which to add the value to the array. If not provided, the value is added without key', 'function-fields'),
+            ['arrayAsQueryStr' => 'array'] => $this->translationAPI->__('The array to be represented as a string', 'function-fields'),
+            ['upperCase' => 'text'],
+            ['lowerCase' => 'text'],
+            ['titleCase' => 'text'] => $this->translationAPI->__('The string to be transformed', 'function-fields'),
             default => parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
-        };
-    }
-    
-    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            default => parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
     
     public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
     {
         return match ([$fieldName => $fieldArgName]) {
+            ['concat' => 'values'],
+            ['arrayRandom' => 'array'],
+            ['arrayJoin' => 'array'],
+            ['arrayItem' => 'array'],
+            ['arraySearch' => 'array'],
+            ['arrayFill' => 'target'],
+            ['arrayFill' => 'source'],
+            ['arrayValues' => 'array'],
+            ['arrayUnique' => 'array'],
+            ['arrayDiff' => 'arrays'],
+            ['arrayAddItem' => 'array'],
+            ['arrayAsQueryStr' => 'array']
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::MANDATORY,
+            ['divide' => 'number'],
+            ['divide' => 'by'],
+            ['arrayItem' => 'position'],
+            ['arraySearch' => 'element'],
+            ['arrayFill' => 'index'],
+            ['arrayAddItem' => 'value']
+                => SchemaTypeModifiers::MANDATORY,
+            ['arrayFill' => 'properties'],
+            ['upperCase' => 'text'],
+            ['lowerCase' => 'text'],
+            ['titleCase' => 'text']
+                => SchemaTypeModifiers::IS_ARRAY,
             default => parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
-    }
-
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'concat':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'values',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Strings to concatenate', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-
-            case 'divide':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'number',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_FLOAT,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Number to divide', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'by',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_FLOAT,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The division operandum', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-
-            case 'arrayRandom':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'array',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array of elements from which to randomly select one', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ]
-                    ]
-                );
-
-            case 'arrayJoin':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'array',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array of strings to be joined all together', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'separator',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Separator with which to join all strings in the array', 'function-fields'),
-                        ],
-                    ]
-                );
-
-            case 'arrayItem':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'array',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array containing the element to retrieve', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'position',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Position where the element is placed in the array, starting from 0', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-
-            case 'arraySearch':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'array',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array containing the element to search', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'element',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Element to search in the array and retrieve its position', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-
-            case 'arrayFill':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'target',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array to be added elements coming from the source array', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'source',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Array whose elements will be added to the target array', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'index',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Property whose value must be the same on both arrays', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'properties',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Properties to copy from the source to the target array. If empty, all properties in the source array will be copied', 'function-fields'),
-                        ],
-                    ]
-                );
-
-            case 'arrayValues':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'array',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The array from which to retrieve the values', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-
-            case 'arrayUnique':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'array',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The array to operate on', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-
-            case 'arrayDiff':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'arrays',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The array containing all the arrays. It must have at least 2 elements', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-
-            case 'arrayAddItem':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'array',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The array to add an item on', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'value',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The value to add to the array', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'key',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ARRAY_KEY,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Key (string or integer) under which to add the value to the array. If not provided, the value is added without key', 'function-fields'),
-                        ],
-                    ]
-                );
-
-            case 'arrayAsQueryStr':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'array',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The array to be represented as a string', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-            case 'upperCase':
-            case 'lowerCase':
-            case 'titleCase':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'text',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The string to be transformed', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-        }
-
-        return $schemaFieldArgs;
     }
 
     protected function doResolveSchemaValidationErrorDescriptions(
