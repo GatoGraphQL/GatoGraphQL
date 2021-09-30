@@ -6,7 +6,6 @@ namespace PoPSchema\CustomPostTagMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -70,6 +69,10 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
+            'setTags' => [
+                MutationInputProperties::TAGS => $this->stringScalarTypeResolver,
+                MutationInputProperties::APPEND => $this->booleanScalarTypeResolver,
+            ],
             default => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
@@ -77,6 +80,8 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
+            ['setTags' => MutationInputProperties::TAGS] => $this->translationAPI->__('The tags to set', 'custompost-tag-mutations'),
+            ['setTags' => MutationInputProperties::APPEND] => $this->translationAPI->__('Append the tags to the existing ones?', 'custompost-tag-mutations'),
             default => parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -84,6 +89,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         return match ([$fieldName => $fieldArgName]) {
+            ['setTags' => MutationInputProperties::APPEND] => false,
             default => parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -91,31 +97,9 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
     {
         return match ([$fieldName => $fieldArgName]) {
+            ['setTags' => MutationInputProperties::TAGS] => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::MANDATORY,
             default => parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
-    }
-
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
-    {
-        switch ($fieldName) {
-            case 'setTags':
-                return [
-                    [
-                        SchemaDefinition::ARGNAME_NAME => MutationInputProperties::TAGS,
-                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                        SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The tags to set', 'custompost-tag-mutations'),
-                        SchemaDefinition::ARGNAME_MANDATORY => true,
-                    ],
-                    [
-                        SchemaDefinition::ARGNAME_NAME => MutationInputProperties::APPEND,
-                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Append the tags to the existing ones?', 'custompost-tag-mutations'),
-                        SchemaDefinition::ARGNAME_DEFAULT_VALUE => false,
-                    ],
-                ];
-        }
-        return parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
     }
 
     /**
