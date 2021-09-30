@@ -128,12 +128,9 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             'width',
             'height',
             'sizes'
-                => array_merge(
-                    parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
-                    [
-                        'size' => $this->stringScalarTypeResolver,
-                    ]
-                ),
+                => [
+                    'size' => $this->stringScalarTypeResolver,
+                ],
             default
                 => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
