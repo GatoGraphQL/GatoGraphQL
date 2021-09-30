@@ -7,7 +7,7 @@ namespace PoP\API\DirectiveResolvers;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -57,48 +57,27 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
     public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-
+            'properties' => $this->stringScalarTypeResolver,
+            'expressions' => $this->stringScalarTypeResolver,
         ];
     }
 
     public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
+            'properties' => $this->translationAPI->__('The property in the current object from which to copy the data into the expressions', 'component-model'),
+            'expressions' => $this->translationAPI->__('Name of the expressions. Default value: Same name as the properties', 'component-model'),
             default => parent::getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
-        };
-    }
-
-    public function getSchemaDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
-    {
-        return match ($directiveArgName) {
-            default => parent::getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
         };
     }
 
     public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
     {
         return match ($directiveArgName) {
+            'properties' => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::MANDATORY,
+            'expressions' => SchemaTypeModifiers::IS_ARRAY,
             default => parent::getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
         };
-    }
-
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
-    {
-        return [
-            [
-                SchemaDefinition::ARGNAME_NAME => 'properties',
-                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The property in the current object from which to copy the data into the expressions', 'component-model'),
-                SchemaDefinition::ARGNAME_MANDATORY => true,
-            ],
-            [
-                SchemaDefinition::ARGNAME_NAME => 'expressions',
-                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Name of the expressions. Default value: Same name as the properties', 'component-model'),
-            ],
-        ];
     }
 
     /**
