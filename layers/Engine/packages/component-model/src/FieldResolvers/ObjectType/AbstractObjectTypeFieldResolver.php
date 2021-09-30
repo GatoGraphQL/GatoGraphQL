@@ -561,7 +561,15 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
         } elseif ($fieldTypeResolver instanceof EnumTypeResolverInterface) {
             $type = SchemaDefinition::TYPE_ENUM;
-            $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $fieldTypeResolver->getMaybeNamespacedTypeName();
+            /** @var EnumTypeResolverInterface */
+            $fieldEnumTypeResolver = $fieldTypeResolver;
+            $this->doAddSchemaDefinitionEnumValuesForField(
+                $schemaDefinition,
+                $fieldEnumTypeResolver->getEnumValues(),
+                $fieldEnumTypeResolver->getEnumValueDeprecationMessages(),
+                $fieldEnumTypeResolver->getEnumValueDescriptions(),
+                $fieldEnumTypeResolver->getMaybeNamespacedTypeName()
+            );
         } else {
             // Scalar type
             $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
