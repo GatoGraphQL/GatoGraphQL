@@ -10,13 +10,14 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\CommentMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    use AddCommentToCustomPostObjectTypeFieldResolverTrait;
+
     protected CommentObjectTypeResolver $commentObjectTypeResolver;
     protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver;
 
@@ -54,38 +55,25 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
+            'addComment' => $this->getAddCommentToCustomPostSchemaFieldArgNameResolvers(false, true),
             default => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
     
     public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
-        return match ([$fieldName => $fieldArgName]) {
+        return match ($fieldName) {
+            'addComment' => $this->getAddCommentToCustomPostSchemaFieldArgDescription($fieldArgName),
             default => parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
-        };
-    }
-    
-    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            default => parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
     
     public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
     {
-        return match ([$fieldName => $fieldArgName]) {
+        return match ($fieldName) {
+            'addComment' => $this->getAddCommentToCustomPostSchemaFieldArgTypeModifiers($fieldArgName),
             default => parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
-    }
-
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
-    {
-        switch ($fieldName) {
-            case 'addComment':
-                return SchemaDefinitionHelpers::getAddCommentToCustomPostSchemaFieldArgs($objectTypeResolver, $fieldName, false, true);
-        }
-        return parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
     }
 
     /**
