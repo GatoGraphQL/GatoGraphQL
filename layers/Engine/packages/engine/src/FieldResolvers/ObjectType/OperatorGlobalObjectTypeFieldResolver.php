@@ -10,7 +10,6 @@ use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -135,6 +134,42 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
+            'if' => [
+                'condition' => $this->booleanScalarTypeResolver,
+                'then' => $this->mixedScalarTypeResolver,
+                'else' => $this->mixedScalarTypeResolver,
+            ],
+            'not' => [
+                'value' => $this->booleanScalarTypeResolver,
+            ],
+            'and',
+            'or' => [
+                'values' => $this->booleanScalarTypeResolver,
+            ],
+            'equals' => [
+                'value1' => $this->mixedScalarTypeResolver,
+                'value2' => $this->mixedScalarTypeResolver,
+            ],
+            'empty' => [
+                'value' => $this->mixedScalarTypeResolver,
+            ],
+            'isNull' => [
+                'value' => $this->mixedScalarTypeResolver,
+            ],
+            'var' => [
+                'name' => $this->stringScalarTypeResolver,
+            ],
+            'extract' => [
+                'object' => $this->objectScalarTypeResolver,
+                'path' => $this->stringScalarTypeResolver,
+            ],
+            'echo' => [
+                'value' => $this->mixedScalarTypeResolver,
+            ],
+            'sprintf' => [
+                'string' => $this->stringScalarTypeResolver,
+                'values' => $this->stringScalarTypeResolver,
+            ],
             default => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
@@ -142,194 +177,51 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
+            ['if' => 'condition'] => $this->translationAPI->__('The condition to check if its value is `true` or `false`', 'component-model'),
+            ['if' => 'then'] => $this->translationAPI->__('The value to return if the condition evals to `true`', 'component-model'),
+            ['if' => 'else'] => $this->translationAPI->__('The value to return if the condition evals to `false`', 'component-model'),
+            ['not' => 'value'] => $this->translationAPI->__('The value from which to return its opposite value', 'component-model'),
+            ['and' => 'values'],
+            ['or' => 'values'] => sprintf(
+                $this->translationAPI->__('The array of values on which to execute the `%s` operation', 'component-model'),
+                strtoupper($fieldName)
+            ),
+            ['equals' => 'value1'] => $this->translationAPI->__('The first value to compare', 'component-model'),
+            ['equals' => 'value2'] => $this->translationAPI->__('The second value to compare', 'component-model'),
+            ['empty' => 'value'] => $this->translationAPI->__('The value to check if it is empty', 'component-model'),
+            ['isNull' => 'value'] => $this->translationAPI->__('The value to check if it is null', 'component-model'),
+            ['var' => 'name'] => $this->translationAPI->__('The name of the variable to retrieve from the `$vars` context object', 'component-model'),
+            ['extract' => 'object'] => $this->translationAPI->__('The object to retrieve the data from', 'pop-component-model'),
+            ['extract' => 'path'] => $this->translationAPI->__('The path to retrieve data from the object. Paths are separated with \'.\' for each sublevel', 'pop-component-model'),
+            ['echo' => 'value'] => $this->translationAPI->__('The input to be echoed back', 'function-fields'),
+            ['sprintf' => 'string'] => $this->translationAPI->__('The string containing the placeholders', 'function-fields'),
+            ['sprintf' => 'values'] => $this->translationAPI->__('The values to replace the placeholders with inside the string', 'function-fields'),
             default => parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
-        };
-    }
-    
-    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            default => parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
     
     public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
     {
         return match ([$fieldName => $fieldArgName]) {
-            default => parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+            ['if' => 'condition'],
+            ['if' => 'then'],
+            ['not' => 'value'],
+            ['equals' => 'value1'],
+            ['equals' => 'value2'],
+            ['empty' => 'value'],
+            ['var' => 'name'],
+            ['extract' => 'object'],
+            ['extract' => 'path'],
+            ['echo' => 'value'],
+            ['sprintf' => 'string']
+                => SchemaTypeModifiers::MANDATORY,
+            ['and' => 'values'],
+            ['or' => 'values'],
+            ['sprintf' => 'values']
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::MANDATORY,
+            default
+                => parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
-    }
-
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'if':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'condition',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The condition to check if its value is `true` or `false`', 'component-model'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'then',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The value to return if the condition evals to `true`', 'component-model'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'else',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The value to return if the condition evals to `false`', 'component-model'),
-                        ],
-                    ]
-                );
-
-            case 'not':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'value',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The value from which to return its opposite value', 'component-model'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-
-            case 'and':
-            case 'or':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'values',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $this->translationAPI->__('The array of values on which to execute the `%s` operation', 'component-model'),
-                                strtoupper($fieldName)
-                            ),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-
-            case 'equals':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'value1',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The first value to compare', 'component-model'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'value2',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The second value to compare', 'component-model'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-
-            case 'empty':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'value',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The value to check if it is empty', 'component-model'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-
-            case 'isNull':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'value',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The value to check if it is null', 'component-model'),
-                        ],
-                    ]
-                );
-
-            case 'var':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'name',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The name of the variable to retrieve from the `$vars` context object', 'component-model'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-
-            case 'extract':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'object',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_OBJECT,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The object to retrieve the data from', 'pop-component-model'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'path',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The path to retrieve data from the object. Paths are separated with \'.\' for each sublevel', 'pop-component-model'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-
-            case 'echo':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'value',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The input to be echoed back', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-
-            case 'sprintf':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'string',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The string containing the placeholders', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'values',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The values to replace the placeholders with inside the string', 'function-fields'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-        }
-
-        return $schemaFieldArgs;
     }
 
     protected function doResolveSchemaValidationErrorDescriptions(
