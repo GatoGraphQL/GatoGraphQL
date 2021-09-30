@@ -33,7 +33,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
     }
 
-    protected function getAddCommentToCustomPostSchemaFieldArgNameResolvers(
+    private function getAddCommentToCustomPostSchemaFieldArgNameResolvers(
         bool $addCustomPostID,
         bool $addParentCommentID,
     ): array {
@@ -54,7 +54,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         return $schemaFieldArgNameResolvers;
     }
     
-    protected function getAddCommentToCustomPostSchemaFieldArgDescription(
+    private function getAddCommentToCustomPostSchemaFieldArgDescription(
         string $fieldArgName,
     ): ?string {
         return match ($fieldArgName) {
@@ -68,7 +68,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         };
     }
     
-    protected function getAddCommentToCustomPostSchemaFieldArgTypeModifiers(
+    private function getAddCommentToCustomPostSchemaFieldArgTypeModifiers(
         string $fieldArgName,
         bool $isParentCommentMandatory = false,
     ): ?int {
