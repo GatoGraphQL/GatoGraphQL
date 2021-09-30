@@ -236,7 +236,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    final public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $schemaFieldArgs = [];
         foreach ($this->getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName) as $fieldArgName => $fieldArgConcreteTypeResolver) {
