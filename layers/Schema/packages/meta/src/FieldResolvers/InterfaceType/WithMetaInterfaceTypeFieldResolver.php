@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Meta\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
@@ -61,51 +60,28 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getSchemaFieldArgNameResolvers(string $fieldName): array
     {
         return match ($fieldName) {
+            'metaValue',
+            'metaValues' => [
+                'key' => $this->stringScalarTypeResolver,
+            ],
             default => parent::getSchemaFieldArgNameResolvers($fieldName),
         };
     }
     
     public function getSchemaFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
-        return match ([$fieldName => $fieldArgName]) {
+        return match ($fieldArgName) {
+            'key' => $this->translationAPI->__('The meta key', 'meta'),
             default => parent::getSchemaFieldArgDescription($fieldName, $fieldArgName),
-        };
-    }
-    
-    public function getSchemaFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            default => parent::getSchemaFieldArgDefaultValue($fieldName, $fieldArgName),
         };
     }
     
     public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): ?int
     {
-        return match ([$fieldName => $fieldArgName]) {
+        return match ($fieldArgName) {
+            'key' => SchemaTypeModifiers::MANDATORY,
             default => parent::getSchemaFieldArgTypeModifiers($fieldName, $fieldArgName),
         };
-    }
-
-    public function getSchemaFieldArgs(string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($fieldName);
-        switch ($fieldName) {
-            case 'metaValue':
-            case 'metaValues':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'key',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The meta key', 'meta'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-        }
-
-        return $schemaFieldArgs;
     }
 
     public function getSchemaFieldDescription(string $fieldName): ?string
