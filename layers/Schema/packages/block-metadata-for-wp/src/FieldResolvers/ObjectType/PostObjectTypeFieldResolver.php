@@ -71,6 +71,10 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
+            'blockMetadata' => [
+                'blockName' => $this->stringScalarTypeResolver,
+                // 'filterBy' => $this->inputObjectTypeResolver,
+            ],
             default => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
@@ -78,60 +82,10 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
+            ['blockMetadata' => 'blockName'] => $this->translationAPI->__('Fetch only the block with this name in the post, filtering out all other blocks', 'block-metadata'),
+            // ['blockMetadata' => 'filterBy'] => $this->translationAPI->__('Filter the block results based on different properties', 'block-metadata'),
             default => parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
-    }
-    
-    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            default => parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
-        };
-    }
-    
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            default => parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
-        };
-    }
-
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'blockMetadata':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'blockName',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Fetch only the block with this name in the post, filtering out all other blocks', 'block-metadata'),
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'filterBy',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_INPUT_OBJECT,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Filter the block results based on different properties', 'block-metadata'),
-                            SchemaDefinition::ARGNAME_ARGS => [
-                                [
-                                    SchemaDefinition::ARGNAME_NAME => 'blockNameStartsWith',
-                                    SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                                    SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Include only blocks with the given name', 'block-metadata'),
-                                ],
-                                [
-                                    SchemaDefinition::ARGNAME_NAME => 'metaProperties',
-                                    SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                                    SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                                    SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Include only these block properties in the meta entry from the block', 'block-metadata'),
-                                ]
-                            ]
-                        ],
-                    ]
-                );
-        }
-
-        return $schemaFieldArgs;
     }
 
     // @todo Commented to keep code for "filterBy", which must still be migrated to TypeResolver
