@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FieldResolvers\InterfaceType;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -77,6 +76,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
     public function getSchemaFieldArgNameResolvers(string $fieldName): array
     {
         return match ($fieldName) {
+            'datetime' => [
+                'format' => $this->stringScalarTypeResolver,
+            ],
             default => parent::getSchemaFieldArgNameResolvers($fieldName),
         };
     }
@@ -84,46 +86,13 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
     public function getSchemaFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
+            ['datetime' => 'format'] => sprintf(
+                $this->translationAPI->__('Date and time format, as defined in %s. Default value: \'%s\' (for current year date) or \'%s\' (otherwise)', 'customposts'),
+                'https://www.php.net/manual/en/function.date.php',
+                'j M, H:i',
+                'j M Y, H:i'
+            ),
             default => parent::getSchemaFieldArgDescription($fieldName, $fieldArgName),
         };
-    }
-    
-    public function getSchemaFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            default => parent::getSchemaFieldArgDefaultValue($fieldName, $fieldArgName),
-        };
-    }
-    
-    public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): ?int
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            default => parent::getSchemaFieldArgTypeModifiers($fieldName, $fieldArgName),
-        };
-    }
-
-    public function getSchemaFieldArgs(string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($fieldName);
-        switch ($fieldName) {
-            case 'datetime':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'format',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $this->translationAPI->__('Date and time format, as defined in %s. Default value: \'%s\' (for current year date) or \'%s\' (otherwise)', 'customposts'),
-                                'https://www.php.net/manual/en/function.date.php',
-                                'j M, H:i',
-                                'j M Y, H:i'
-                            ),
-                        ],
-                    ]
-                );
-        }
-
-        return $schemaFieldArgs;
     }
 }

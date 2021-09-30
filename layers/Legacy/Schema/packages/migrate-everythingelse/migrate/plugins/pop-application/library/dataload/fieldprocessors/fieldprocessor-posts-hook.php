@@ -2,12 +2,10 @@
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPostMedia\Misc\MediaHelpers as CustomPostMediaHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPSchema\Media\Facades\MediaTypeAPIFacade;
@@ -99,18 +97,17 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return match($fieldName) {
-			'favicon' => $translationAPI->__('', ''),
-            'thumb' => $translationAPI->__('', ''),
-            'thumbFullSrc' => $translationAPI->__('', ''),
-            'authors' => $translationAPI->__('', ''),
-            'topics' => $translationAPI->__('', ''),
-            'hasTopics' => $translationAPI->__('', ''),
-            'appliesto' => $translationAPI->__('', ''),
-            'hasAppliesto' => $translationAPI->__('', ''),
-            'hasUserpostactivity' => $translationAPI->__('', ''),
-            'userPostActivityCount' => $translationAPI->__('', ''),
+			'favicon' => $this->translationAPI->__('', ''),
+            'thumb' => $this->translationAPI->__('', ''),
+            'thumbFullSrc' => $this->translationAPI->__('', ''),
+            'authors' => $this->translationAPI->__('', ''),
+            'topics' => $this->translationAPI->__('', ''),
+            'hasTopics' => $this->translationAPI->__('', ''),
+            'appliesto' => $this->translationAPI->__('', ''),
+            'hasAppliesto' => $this->translationAPI->__('', ''),
+            'hasUserpostactivity' => $this->translationAPI->__('', ''),
+            'userPostActivityCount' => $this->translationAPI->__('', ''),
             default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -118,58 +115,31 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
     public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
+            'favicon',
+            'thumb' => [
+                'size' => $this->stringScalarTypeResolver,
+                'addDescription' => $this->booleanScalarTypeResolver,
+            ],
             default => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
     
     public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
-        return match ([$fieldName => $fieldArgName]) {
+        return match ($fieldArgName) {
+            'size' => $this->translationAPI->__('Thumbnail size', 'pop-posts'),
+            'addDescription' => $this->translationAPI->__('Add description on the thumb', 'pop-posts'),
             default => parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
     
     public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
-        return match ([$fieldName => $fieldArgName]) {
+        return match ($fieldArgName) {
+            'size' => $this->getDefaultThumbSize(),
+            'addDescription' => false,
             default => parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
         };
-    }
-    
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            default => parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
-        };
-    }
-
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
-        switch ($fieldName) {
-            case 'favicon':
-            case 'thumb':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'size',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Thumbnail size', 'pop-posts'),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->getDefaultThumbSize(),
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'addDescription',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Add description on the thumb', 'pop-posts'),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => false,
-                        ],
-                    ]
-                );
-        }
-
-        return $schemaFieldArgs;
     }
 
     protected function getDefaultThumbSize(): string
