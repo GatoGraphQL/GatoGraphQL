@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\CacheControl\DirectiveResolvers;
 
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
-use PoP\CacheControl\Schema\SchemaDefinition;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -70,40 +69,16 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-
+            'maxAge' => $this->intScalarTypeResolver,
         ];
     }
 
     public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
+            'maxAge' => $this->translationAPI->__('Use a specific max-age value for the field, instead of the one configured in the directive', 'cache-control'),
             default => parent::getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
-    }
-
-    public function getSchemaDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
-    {
-        return match ($directiveArgName) {
-            default => parent::getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
-        };
-    }
-
-    public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
-    {
-        return match ($directiveArgName) {
-            default => parent::getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
-        };
-    }
-
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
-    {
-        return [
-            [
-                SchemaDefinition::ARGNAME_NAME => 'maxAge',
-                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_INT,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Use a specific max-age value for the field, instead of the one configured in the directive', 'cache-control'),
-            ],
-        ];
     }
 
     /**
