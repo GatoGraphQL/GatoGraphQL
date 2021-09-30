@@ -134,6 +134,40 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $schemaFieldArgs;
     }
 
+    // @todo Commented to keep code for "filterBy", which must still be migrated to TypeResolver
+    // public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    // {
+    //     $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
+    //     switch ($fieldName) {
+    //         case 'blockMetadata':
+    //             return array_merge(
+    //                 $schemaFieldArgs,
+    //                 [
+    //                     [
+    //                         SchemaDefinition::ARGNAME_NAME => 'filterBy',
+    //                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_INPUT_OBJECT,
+    //                         SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Filter the block results based on different properties', 'block-metadata'),
+    //                         SchemaDefinition::ARGNAME_ARGS => [
+    //                             [
+    //                                 SchemaDefinition::ARGNAME_NAME => 'blockNameStartsWith',
+    //                                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+    //                                 SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Include only blocks with the given name', 'block-metadata'),
+    //                             ],
+    //                             [
+    //                                 SchemaDefinition::ARGNAME_NAME => 'metaProperties',
+    //                                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+    //                                 SchemaDefinition::ARGNAME_IS_ARRAY => true,
+    //                                 SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Include only these block properties in the meta entry from the block', 'block-metadata'),
+    //                             ]
+    //                         ]
+    //                     ],
+    //                 ]
+    //             );
+    //     }
+
+    //     return $schemaFieldArgs;
+    // }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
