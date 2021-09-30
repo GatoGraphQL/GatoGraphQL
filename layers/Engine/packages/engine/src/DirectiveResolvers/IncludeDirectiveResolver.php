@@ -68,6 +68,34 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
     {
         return $this->translationAPI->__('Include the field value in the output only if the argument \'if\' evals to `true`', 'api');
     }
+    public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
+    {
+        return [
+
+        ];
+    }
+
+    public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    {
+        return match ($directiveArgName) {
+            default => parent::getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+        };
+    }
+
+    public function getSchemaDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
+    {
+        return match ($directiveArgName) {
+            default => parent::getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
+        };
+    }
+
+    public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
+    {
+        return match ($directiveArgName) {
+            default => parent::getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
+        };
+    }
+
     public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [

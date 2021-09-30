@@ -67,6 +67,34 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     {
         return $this->translationAPI->__('HTTP caching (https://tools.ietf.org/html/rfc7234): Cache the response by setting a Cache-Control header with a max-age value; this value is calculated as the minimum max-age value among all requested fields. If any field has max-age: 0, a corresponding \'no-store\' value is sent, indicating to not cache the response', 'cache-control');
     }
+    public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
+    {
+        return [
+
+        ];
+    }
+
+    public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    {
+        return match ($directiveArgName) {
+            default => parent::getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+        };
+    }
+
+    public function getSchemaDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
+    {
+        return match ($directiveArgName) {
+            default => parent::getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
+        };
+    }
+
+    public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
+    {
+        return match ($directiveArgName) {
+            default => parent::getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
+        };
+    }
+
     public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
