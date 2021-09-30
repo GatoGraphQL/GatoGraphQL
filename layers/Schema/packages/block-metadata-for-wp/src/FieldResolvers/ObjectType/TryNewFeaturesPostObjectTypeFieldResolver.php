@@ -52,11 +52,10 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
-        switch ($fieldName) {
-            case 'content':
-                return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'content' => SchemaTypeModifiers::NON_NULLABLE,
+            default => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

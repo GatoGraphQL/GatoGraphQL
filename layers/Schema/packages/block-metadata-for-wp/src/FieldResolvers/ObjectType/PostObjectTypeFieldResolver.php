@@ -54,11 +54,10 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
-        switch ($fieldName) {
-            case 'blockMetadata':
-                return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'blockMetadata' => SchemaTypeModifiers::NON_NULLABLE,
+            default => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

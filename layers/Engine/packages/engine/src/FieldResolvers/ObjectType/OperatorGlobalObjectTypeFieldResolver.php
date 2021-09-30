@@ -96,19 +96,20 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
-        switch ($fieldName) {
-            case 'not':
-            case 'and':
-            case 'or':
-            case 'equals':
-            case 'empty':
-            case 'isNull':
-            case 'context':
-            case 'time':
-            case 'sprintf':
-                return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'not',
+            'and',
+            'or',
+            'equals',
+            'empty',
+            'isNull',
+            'context',
+            'time',
+            'sprintf'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            default
+                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
