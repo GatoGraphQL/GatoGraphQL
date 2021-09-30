@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
@@ -61,6 +61,10 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
+            'getSelfProp' => [
+                'self' => $this->objectScalarTypeResolver,
+                'property' => $this->stringScalarTypeResolver,
+            ],
             default => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
@@ -68,49 +72,21 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
+            ['getSelfProp' => 'self'] => $this->translationAPI->__('The `$self` object containing all data for the current object', 'component-model'),
+            ['getSelfProp' => 'property'] => $this->translationAPI->__('The property to access from the current object', 'component-model'),
             default => parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
-        };
-    }
-    
-    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            default => parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
     
     public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
     {
         return match ([$fieldName => $fieldArgName]) {
-            default => parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+            ['getSelfProp' => 'self'],
+            ['getSelfProp' => 'property']
+                => SchemaTypeModifiers::MANDATORY,
+            default
+                => parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
-    }
-
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'getSelfProp':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'self',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_OBJECT,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The `$self` object containing all data for the current object', 'component-model'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'property',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The property to access from the current object', 'component-model'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-        }
-
-        return $schemaFieldArgs;
     }
 
     /**

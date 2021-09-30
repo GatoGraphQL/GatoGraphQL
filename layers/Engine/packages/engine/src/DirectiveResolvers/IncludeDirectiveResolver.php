@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
@@ -68,43 +68,27 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
     {
         return $this->translationAPI->__('Include the field value in the output only if the argument \'if\' evals to `true`', 'api');
     }
+    
     public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-
+            'if' => $this->booleanScalarTypeResolver,
         ];
     }
 
     public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
+            'if' => $this->translationAPI->__('Argument that must evaluate to `true` to include the field value in the output', 'api'),
             default => parent::getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
-        };
-    }
-
-    public function getSchemaDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
-    {
-        return match ($directiveArgName) {
-            default => parent::getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
         };
     }
 
     public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
     {
         return match ($directiveArgName) {
+            'if' => SchemaTypeModifiers::MANDATORY,
             default => parent::getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
         };
-    }
-
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
-    {
-        return [
-            [
-                SchemaDefinition::ARGNAME_NAME => 'if',
-                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Argument that must evaluate to `true` to include the field value in the output', 'api'),
-                SchemaDefinition::ARGNAME_MANDATORY => true,
-            ],
-        ];
     }
 }
