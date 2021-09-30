@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Media\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -124,51 +123,28 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            default => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            'src',
+            'srcSet',
+            'width',
+            'height',
+            'sizes'
+                => array_merge(
+                    parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
+                    [
+                        'size' => $this->stringScalarTypeResolver,
+                    ]
+                ),
+            default
+                => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
     
     public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
-        return match ([$fieldName => $fieldArgName]) {
+        return match ($fieldArgName) {
+            'size' => $this->translationAPI->__('Size of the image', 'pop-media'),
             default => parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
-    }
-    
-    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            default => parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
-        };
-    }
-    
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            default => parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
-        };
-    }
-
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
-    {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'src':
-            case 'srcSet':
-            case 'width':
-            case 'height':
-            case 'sizes':
-                return [
-                    ...$schemaFieldArgs,
-                    [
-                        SchemaDefinition::ARGNAME_NAME => 'size',
-                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Size of the image', 'pop-media'),
-                    ],
-                ];
-        }
-
-        return $schemaFieldArgs;
     }
 
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
