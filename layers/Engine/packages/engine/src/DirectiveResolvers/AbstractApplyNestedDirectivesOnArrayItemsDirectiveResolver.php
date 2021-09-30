@@ -9,7 +9,7 @@ use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
@@ -40,14 +40,26 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
 
     public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
+        if (!ComponentConfiguration::enablePassingExpressionsByArgInNestedDirectives()) {
+            return [];
+        }
         return [
-
+            'addExpressions' => $this->mixedScalarTypeResolver,
+            'appendExpressions' => $this->mixedScalarTypeResolver,
         ];
     }
 
     public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
+            'addExpressions' => sprintf(
+                $this->translationAPI->__('Expressions to inject to the composed directive. The value of the affected field can be provided under special expression `%s`', 'component-model'),
+                QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)
+            ),
+            'appendExpressions' => sprintf(
+                $this->translationAPI->__('Append a value to an expression which must be an array, to inject to the composed directive. If the array has not been set, it is initialized as an empty array. The value of the affected field can be provided under special expression `%s`', 'component-model'),
+                QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)
+            ),
             default => parent::getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }
@@ -62,32 +74,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
     public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
     {
         return match ($directiveArgName) {
-            default => parent::getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
+            'addExpressions',
+            'appendExpressions'
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
         };
-    }
-
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
-    {
-        return ComponentConfiguration::enablePassingExpressionsByArgInNestedDirectives() ? [
-            [
-                SchemaDefinition::ARGNAME_NAME => 'addExpressions',
-                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                    $this->translationAPI->__('Expressions to inject to the composed directive. The value of the affected field can be provided under special expression `%s`', 'component-model'),
-                    QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)
-                ),
-            ],
-            [
-                SchemaDefinition::ARGNAME_NAME => 'appendExpressions',
-                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                    $this->translationAPI->__('Append a value to an expression which must be an array, to inject to the composed directive. If the array has not been set, it is initialized as an empty array. The value of the affected field can be provided under special expression `%s`', 'component-model'),
-                    QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)
-                ),
-            ],
-        ] : [];
     }
 
     public function getSchemaDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array

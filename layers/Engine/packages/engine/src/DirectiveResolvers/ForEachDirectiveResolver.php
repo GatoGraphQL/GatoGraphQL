@@ -8,7 +8,6 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
@@ -43,44 +42,20 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
 
     public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        return [
-
-        ];
+        return array_merge(
+            parent::getSchemaDirectiveArgNameResolvers($relationalTypeResolver),
+            [
+                'if' => $this->booleanScalarTypeResolver,
+            ]
+        );
     }
 
     public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
+            'if' => $this->translationAPI->__('If provided, iterate only those items that satisfy this condition `%s`', 'component-model'),
             default => parent::getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
-    }
-
-    public function getSchemaDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
-    {
-        return match ($directiveArgName) {
-            default => parent::getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
-        };
-    }
-
-    public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
-    {
-        return match ($directiveArgName) {
-            default => parent::getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
-        };
-    }
-
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
-    {
-        return array_merge(
-            parent::getSchemaDirectiveArgs($relationalTypeResolver),
-            [
-                [
-                    SchemaDefinition::ARGNAME_NAME => 'if',
-                    SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                    SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('If provided, iterate only those items that satisfy this condition `%s`', 'component-model'),
-                ],
-            ]
-        );
     }
 
     public function getSchemaDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array

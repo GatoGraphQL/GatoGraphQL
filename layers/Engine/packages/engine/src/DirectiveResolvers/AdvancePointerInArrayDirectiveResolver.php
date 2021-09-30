@@ -7,7 +7,7 @@ namespace PoP\Engine\DirectiveResolvers;
 use Exception;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Misc\OperatorHelpers;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -49,45 +49,28 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
 
     public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        return [
-
-        ];
+        return array_merge(
+            parent::getSchemaDirectiveArgNameResolvers($relationalTypeResolver),
+            [
+                'path' => $this->stringScalarTypeResolver,
+            ]
+        );
     }
 
     public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
+            'path' => $this->translationAPI->__('Path to the element in the array', 'component-model'),
             default => parent::getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
-        };
-    }
-
-    public function getSchemaDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
-    {
-        return match ($directiveArgName) {
-            default => parent::getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
         };
     }
 
     public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
     {
         return match ($directiveArgName) {
+            'path' => SchemaTypeModifiers::MANDATORY,
             default => parent::getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
         };
-    }
-
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
-    {
-        return array_merge(
-            [
-                [
-                    SchemaDefinition::ARGNAME_NAME => 'path',
-                    SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                    SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Path to the element in the array', 'component-model'),
-                    SchemaDefinition::ARGNAME_MANDATORY => true,
-                ],
-            ],
-            parent::getSchemaDirectiveArgs($relationalTypeResolver)
-        );
     }
 
     /**

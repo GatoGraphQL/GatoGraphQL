@@ -9,7 +9,7 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
@@ -58,55 +58,32 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-
+            'function' => $this->stringScalarTypeResolver,
+            'addArguments' => $this->mixedScalarTypeResolver,
+            'target' => $this->stringScalarTypeResolver,
         ];
     }
 
     public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
+            'function' => $this->translationAPI->__('Function to execute on the affected fields', 'component-model'),
+            'addArguments' => sprintf(
+                $this->translationAPI->__('Arguments to inject to the function. The value of the affected field can be provided under special expression `%s`', 'component-model'),
+                QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)
+            ),
+            'target' => $this->translationAPI->__('Property from the current object where to store the results of the function. If the result must not be stored, pass an empty value. Default value: Same property as the affected field', 'component-model'),
             default => parent::getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
-        };
-    }
-
-    public function getSchemaDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
-    {
-        return match ($directiveArgName) {
-            default => parent::getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
         };
     }
 
     public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
     {
         return match ($directiveArgName) {
+            'function' => SchemaTypeModifiers::MANDATORY,
+            'addArguments' => SchemaTypeModifiers::IS_ARRAY,
             default => parent::getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
         };
-    }
-
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
-    {
-        return [
-            [
-                SchemaDefinition::ARGNAME_NAME => 'function',
-                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Function to execute on the affected fields', 'component-model'),
-                SchemaDefinition::ARGNAME_MANDATORY => true,
-            ],
-            [
-                SchemaDefinition::ARGNAME_NAME => 'addArguments',
-                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                    $this->translationAPI->__('Arguments to inject to the function. The value of the affected field can be provided under special expression `%s`', 'component-model'),
-                    QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)
-                ),
-            ],
-            [
-                SchemaDefinition::ARGNAME_NAME => 'target',
-                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Property from the current object where to store the results of the function. If the result must not be stored, pass an empty value. Default value: Same property as the affected field', 'component-model'),
-            ],
-        ];
     }
 
     public function getSchemaDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
