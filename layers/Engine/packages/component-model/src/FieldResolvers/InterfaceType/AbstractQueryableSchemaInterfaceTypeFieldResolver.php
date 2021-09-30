@@ -29,21 +29,21 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
     
     public function getSchemaFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
-        return match ($fieldName) {
+        return match ([$fieldName => $fieldArgName]) {
             default => parent::getSchemaFieldArgDescription($fieldName, $fieldArgName),
         };
     }
     
     public function getSchemaFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
     {
-        return match ($fieldName) {
+        return match ([$fieldName => $fieldArgName]) {
             default => parent::getSchemaFieldArgDefaultValue($fieldName, $fieldArgName),
         };
     }
     
     public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): ?int
     {
-        return match ($fieldName) {
+        return match ([$fieldName => $fieldArgName]) {
             default => parent::getSchemaFieldArgTypeModifiers($fieldName, $fieldArgName),
         };
     }
