@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 trait SchemaFilterInputModuleProcessorTrait
 {
-    public function getSchemaFilterInputType(array $module): InputTypeResolverInterface
+    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return $this->getDefaultSchemaFilterInputTypeResolver();
     }

@@ -41,8 +41,8 @@ trait FilterInputModuleProcessorTrait
             SchemaDefinition::ARGNAME_NAME => $this->getName($module),
         ];
         if ($filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module)) {
-            $type = $filterSchemaDefinitionResolver->getSchemaFilterInputType($module);
-            $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
+            $type = $filterSchemaDefinitionResolver->getSchemaFilterInputTypeResolver($module);
+            $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type->getTypeOutputName();
             if ($description = $filterSchemaDefinitionResolver->getSchemaFilterInputDescription($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
             }
