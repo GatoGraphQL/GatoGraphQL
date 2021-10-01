@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoPSchema\CustomPostMediaMutations\Component::class,
-            \PoPSchema\PostMedia\Component::class,
+            \PoPSchema\PostMutations\Component::class,
         ];
     }
 
