@@ -71,13 +71,13 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 $objectTypeResolver,
                 $fieldName,
                 false,
-                $this->postObjectTypeResolver
+                $this->getFieldTypeResolver($objectTypeResolver, $fieldName)
             ),
             'updatePost' => $this->getCreateOrUpdateCustomPostSchemaFieldArgNameResolvers(
                 $objectTypeResolver,
                 $fieldName,
                 true,
-                $this->postObjectTypeResolver
+                $this->getFieldTypeResolver($objectTypeResolver, $fieldName)
             ),
             default => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
