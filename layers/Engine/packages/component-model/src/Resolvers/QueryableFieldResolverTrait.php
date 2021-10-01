@@ -4,29 +4,35 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Resolvers;
 
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\FilterInputContainerModuleProcessorInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait QueryableFieldResolverTrait
 {
+    protected ModuleProcessorManagerInterface $moduleProcessorManager;
+
+    #[Required]
+    public function autowireQueryableFieldResolverTrait(
+        ModuleProcessorManagerInterface $moduleProcessorManager,
+    ): void {
+        $this->moduleProcessorManager = $moduleProcessorManager;
+    }
+
     protected function getFilterSchemaDefinitionItems(array $filterDataloadingModule): array
     {
-        $moduleProcessorManager = ModuleProcessorManagerFacade::getInstance();
         /** @var FilterInputContainerModuleProcessorInterface */
-        $filterDataModuleProcessor = $moduleProcessorManager->getProcessor($filterDataloadingModule);
+        $filterDataModuleProcessor = $this->moduleProcessorManager->getProcessor($filterDataloadingModule);
         $filterQueryArgsModules = $filterDataModuleProcessor->getDataloadQueryArgsFilteringModules($filterDataloadingModule);
-        $schemaFieldArgs = GeneralUtils::arrayFlatten(
-            array_map(
-                function (array $module) use ($moduleProcessorManager) {
-                    /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
-                    $dataloadQueryArgsFilterInputModuleProcessor = $moduleProcessorManager->getProcessor($module);
-                    return $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputSchemaDefinition($module);
-                },
-                $filterQueryArgsModules
-            )
+        $schemaFieldArgs = array_map(
+            function (array $module): array {
+                /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
+                $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
+                return $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputSchemaDefinition($module);
+            },
+            $filterQueryArgsModules
         );
         return $this->getSchemaFieldArgsWithCustomFilterInputData(
             $schemaFieldArgs,
