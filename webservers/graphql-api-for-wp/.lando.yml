@@ -165,6 +165,8 @@ services:
         - >-
           ../../layers/Schema/packages/post-tags:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/post-tags
         - >-
+          ../../layers/Schema/packages/postmedia-mutations:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/postmedia-mutations
+        - >-
           ../../layers/Schema/packages/posts-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/posts-wp
         - >-
           ../../layers/Schema/packages/posts:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-schema/posts

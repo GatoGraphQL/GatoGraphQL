@@ -139,6 +139,8 @@ services:
           ../../layers/Schema/packages/post-tags-wp:/app/vendor/pop-schema/post-tags-wp
         - >-
           ../../layers/Schema/packages/post-tags:/app/vendor/pop-schema/post-tags
+        - >-
+          ../../layers/Schema/packages/postmedia-mutations:/app/vendor/pop-schema/postmedia-mutations
         - '../../layers/Schema/packages/posts-wp:/app/vendor/pop-schema/posts-wp'
         - '../../layers/Schema/packages/posts:/app/vendor/pop-schema/posts'
         - >-
