@@ -73,8 +73,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_TAG_SLUGS => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_TAG_IDS => SchemaDefinition::TYPE_ID,
+            self::MODULE_FILTERINPUT_TAG_SLUGS => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_TAG_IDS => $this->idScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }

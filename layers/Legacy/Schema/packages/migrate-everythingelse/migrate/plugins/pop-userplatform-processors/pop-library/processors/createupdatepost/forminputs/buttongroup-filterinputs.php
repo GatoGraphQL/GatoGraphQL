@@ -108,9 +108,9 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
     public function getSchemaFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
     {
         return match($module[1]) {
-            self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES => SchemaDefinition::TYPE_ID,
-            self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => SchemaDefinition::TYPE_ID,
-            self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => SchemaDefinition::TYPE_ID,
+            self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => $this->idScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }

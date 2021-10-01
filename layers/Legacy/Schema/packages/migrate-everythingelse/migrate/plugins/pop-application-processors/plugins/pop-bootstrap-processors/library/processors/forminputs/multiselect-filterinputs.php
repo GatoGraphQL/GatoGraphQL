@@ -112,10 +112,10 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
     public function getSchemaFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
     {
         return match($module[1]) {
-            self::MODULE_FILTERINPUT_APPLIESTO => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_CATEGORIES => SchemaDefinition::TYPE_ID,
-            self::MODULE_FILTERINPUT_CONTENTSECTIONS => SchemaDefinition::TYPE_ID,
-            self::MODULE_FILTERINPUT_POSTSECTIONS => SchemaDefinition::TYPE_ID,
+            self::MODULE_FILTERINPUT_APPLIESTO => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_CATEGORIES => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_CONTENTSECTIONS => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_POSTSECTIONS => $this->idScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }

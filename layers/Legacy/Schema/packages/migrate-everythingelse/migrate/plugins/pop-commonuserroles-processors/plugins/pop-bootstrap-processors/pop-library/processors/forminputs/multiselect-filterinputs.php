@@ -115,9 +115,9 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
     public function getSchemaFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
     {
         return match($module[1]) {
-            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => SchemaDefinition::TYPE_STRING,
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => SchemaDefinition::TYPE_STRING,
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => SchemaDefinition::TYPE_STRING,
+            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => $this->stringScalarTypeResolver,
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => $this->stringScalarTypeResolver,
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => $this->stringScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }

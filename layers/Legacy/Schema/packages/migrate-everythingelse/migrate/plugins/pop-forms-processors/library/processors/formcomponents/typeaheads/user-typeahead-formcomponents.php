@@ -108,7 +108,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
     public function getSchemaFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
     {
         return match($module[1]) {
-            self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => SchemaDefinition::TYPE_ID,
+            self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => $this->idScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }

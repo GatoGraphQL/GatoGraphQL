@@ -103,8 +103,8 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
     public function getSchemaFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
     {
         return match($module[1]) {
-            self::MODULE_FILTERINPUT_LINKCATEGORIES => SchemaDefinition::TYPE_ID,
-            self::MODULE_FILTERINPUT_LINKACCESS => SchemaDefinition::TYPE_STRING,
+            self::MODULE_FILTERINPUT_LINKCATEGORIES => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_LINKACCESS => $this->stringScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }

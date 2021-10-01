@@ -80,7 +80,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
     public function getSchemaFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
     {
         return match($module[1]) {
-            self::MODULE_FILTERINPUT_STANCE_MULTISELECT => SchemaDefinition::TYPE_ID,
+            self::MODULE_FILTERINPUT_STANCE_MULTISELECT => $this->idScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }

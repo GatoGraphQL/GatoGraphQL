@@ -108,10 +108,10 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
     public function getSchemaFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
     {
         return match($module[1]) {
-            self::MODULE_FILTERINPUT_ORDERUSER => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_ORDERPOST => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_ORDERTAG => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_ORDERCOMMENT => SchemaDefinition::TYPE_STRING,
+            self::MODULE_FILTERINPUT_ORDERUSER => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_ORDERPOST => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_ORDERTAG => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_ORDERCOMMENT => $this->stringScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
