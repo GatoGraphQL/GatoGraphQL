@@ -84,11 +84,11 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
         };
     }
 
-    public function getSchemaFilterInputTypeModifiers(array $module): ?int
+    public function getSchemaFilterInputTypeModifiers(array $module): int
     {
         return match($module[1]) {
             self::MODULE_FILTERINPUT_STANCE_MULTISELECT => SchemaTypeModifiers::IS_ARRAY,
-            default => null,
+            default => 0,
         };
     }
 

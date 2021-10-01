@@ -112,11 +112,11 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         };
     }
 
-    public function getSchemaFilterInputTypeModifiers(array $module): ?int
+    public function getSchemaFilterInputTypeModifiers(array $module): int
     {
         return match($module[1]) {
             self::MODULE_FILTERINPUT_LINKCATEGORIES => SchemaTypeModifiers::IS_ARRAY,
-            default => null,
+            default => 0,
         };
     }
 

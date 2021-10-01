@@ -114,7 +114,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
         };
     }
 
-    public function getSchemaFilterInputTypeModifiers(array $module): ?int
+    public function getSchemaFilterInputTypeModifiers(array $module): int
     {
         return match($module[1]) {
             self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES,
@@ -122,7 +122,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
             self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS
                 => SchemaTypeModifiers::IS_ARRAY,
             default
-                => null,
+                => 0,
         };
     }
 

@@ -88,11 +88,11 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
         };
     }
 
-    public function getSchemaFilterInputTypeModifiers(array $module): ?int
+    public function getSchemaFilterInputTypeModifiers(array $module): int
     {
         return match($module[1]) {
             self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => SchemaTypeModifiers::IS_ARRAY,
-            default => null,
+            default => 0,
         };
     }
 

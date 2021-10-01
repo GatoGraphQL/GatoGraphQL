@@ -70,11 +70,11 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function getSchemaFilterInputTypeModifiers(array $module): ?int
+    public function getSchemaFilterInputTypeModifiers(array $module): int
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_MIME_TYPES => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            default => null,
+            default => 0,
         };
     }
 

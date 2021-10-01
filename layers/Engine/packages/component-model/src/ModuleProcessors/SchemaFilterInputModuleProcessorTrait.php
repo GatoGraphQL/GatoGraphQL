@@ -56,12 +56,12 @@ trait SchemaFilterInputModuleProcessorTrait
         return null;
     }
 
-    public function getSchemaFilterInputTypeModifiers(array $module): ?int
+    public function getSchemaFilterInputTypeModifiers(array $module): int
     {
         $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
         if ($filterSchemaDefinitionResolver !== $this) {
             return $filterSchemaDefinitionResolver->getSchemaFilterInputTypeModifiers($module);
         }
-        return null;
+        return 0;
     }
 }

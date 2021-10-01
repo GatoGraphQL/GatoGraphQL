@@ -99,14 +99,14 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
         };
     }
 
-    public function getSchemaFilterInputTypeModifiers(array $module): ?int
+    public function getSchemaFilterInputTypeModifiers(array $module): int
     {
         return match($module[1]) {
             self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS,
             self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS
                 => SchemaTypeModifiers::IS_ARRAY,
             default
-                => null,
+                => 0,
         };
     }
 

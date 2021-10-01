@@ -121,7 +121,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         };
     }
 
-    public function getSchemaFilterInputTypeModifiers(array $module): ?int
+    public function getSchemaFilterInputTypeModifiers(array $module): int
     {
         return match($module[1]) {
             self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS,
@@ -129,7 +129,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES
                 => SchemaTypeModifiers::IS_ARRAY,
             default
-                => null,
+                => 0,
         };
     }
 
