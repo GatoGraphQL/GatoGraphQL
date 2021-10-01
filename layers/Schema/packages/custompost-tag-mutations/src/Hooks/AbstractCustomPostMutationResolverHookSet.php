@@ -6,7 +6,7 @@ namespace PoPSchema\CustomPostTagMutations\Hooks;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
@@ -49,7 +49,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 
     public function maybeAddSchemaFieldArgs(
         array $fieldArgs,
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         ?ConcreteTypeResolverInterface $concreteTypeResolver
     ): array {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMediaMutations\Hooks;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
@@ -50,7 +50,7 @@ class CustomPostMutationResolverHookSet extends AbstractHookSet
 
     public function getSchemaFieldArgs(
         array $fieldArgs,
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): array {
         $fieldArgs[] = [
