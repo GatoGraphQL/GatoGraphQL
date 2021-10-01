@@ -31,13 +31,10 @@ class PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
-            'isLinkEmbeddable',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'isLinkEmbeddable' => SchemaTypeModifiers::NON_NULLABLE,
+            default => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

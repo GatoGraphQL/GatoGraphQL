@@ -68,13 +68,10 @@ class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
-            'name',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'name' => SchemaTypeModifiers::NON_NULLABLE,
+            default => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

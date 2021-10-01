@@ -64,14 +64,13 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
-        $nonNullableFieldNames = [
+        return match ($fieldName) {
             'content',
-            'highlightedpost',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName);
+            'highlightedpost'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            default
+                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
