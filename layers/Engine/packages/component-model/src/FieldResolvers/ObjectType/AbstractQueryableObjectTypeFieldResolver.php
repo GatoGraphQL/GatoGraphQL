@@ -59,7 +59,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         return parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
     }
     
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
+    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
             return $this->getFilterSchemaFieldArgTypeModifiers($filterDataloadingModule, $fieldArgName);

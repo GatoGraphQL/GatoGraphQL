@@ -76,7 +76,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
         };
     }
     
-    public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): ?int
+    public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
     {
         return match ($fieldArgName) {
             'key' => SchemaTypeModifiers::MANDATORY,

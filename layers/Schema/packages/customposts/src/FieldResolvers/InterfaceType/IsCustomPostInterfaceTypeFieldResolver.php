@@ -161,7 +161,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         };
     }
     
-    public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): ?int
+    public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
             ['isStatus' => 'status'] => SchemaTypeModifiers::MANDATORY,

@@ -99,7 +99,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         };
     }
     
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
+    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         $setCategoriesFieldName = $this->getSetCategoriesFieldName();
         return match ([$fieldName => $fieldArgName]) {

@@ -185,13 +185,13 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return null;
     }
     
-    public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): ?int
+    public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldArgTypeModifiers($fieldName, $fieldArgName);
         }
-        return null;
+        return 0;
     }
 
     public function getSchemaFieldDeprecationDescription(string $fieldName, array $fieldArgs = []): ?string

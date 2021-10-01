@@ -97,7 +97,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         };
     }
     
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
+    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
             ['setCategories' => MutationInputProperties::CATEGORY_IDS] => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::MANDATORY,

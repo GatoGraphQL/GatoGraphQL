@@ -44,7 +44,7 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
         return parent::getSchemaFieldArgDefaultValue($fieldName, $fieldArgName);
     }
     
-    public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): ?int
+    public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($fieldName)) {
             return $this->getFilterSchemaFieldArgTypeModifiers($filterDataloadingModule, $fieldArgName);

@@ -209,7 +209,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         };
     }
     
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
+    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
             ['isAction' => 'action'] => SchemaTypeModifiers::MANDATORY,

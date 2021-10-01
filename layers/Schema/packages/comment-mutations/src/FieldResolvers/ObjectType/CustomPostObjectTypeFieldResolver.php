@@ -68,7 +68,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
     
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
+    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ($fieldName) {
             'addComment' => $this->getAddCommentToCustomPostSchemaFieldArgTypeModifiers($fieldArgName),

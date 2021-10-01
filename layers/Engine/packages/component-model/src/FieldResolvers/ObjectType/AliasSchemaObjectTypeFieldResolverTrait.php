@@ -242,7 +242,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
+    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->getSchemaFieldArgTypeModifiers(

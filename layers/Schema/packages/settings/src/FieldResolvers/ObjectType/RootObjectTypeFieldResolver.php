@@ -79,7 +79,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
     
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
+    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
             ['option' => 'name'] => SchemaTypeModifiers::MANDATORY,
