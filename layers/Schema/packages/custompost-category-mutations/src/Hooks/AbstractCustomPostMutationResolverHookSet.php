@@ -84,10 +84,9 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if ($fieldArgName !== MutationInputProperties::CATEGORY_IDS || !$this->mustAddSchemaFieldArgs($objectTypeResolver, $fieldName)) {
             return $schemaFieldArgDescription;
         }
-        $categoryTypeResolver = $this->getCategoryTypeResolver();
         return sprintf(
             $this->translationAPI->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
-            $categoryTypeResolver->getMaybeNamespacedTypeName()
+            $this->getCategoryTypeResolver()->getMaybeNamespacedTypeName()
         );
     }
 
