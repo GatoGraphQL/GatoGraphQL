@@ -107,7 +107,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         };
     }
 
-    protected function getFieldFilterInputDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         switch ($fieldName) {
             case 'posts':
@@ -116,11 +116,12 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
-                return [
-                    $limitFilterInputName => ComponentConfiguration::getPostListDefaultLimit(),
-                ];
+                if ($fieldArgName === $limitFilterInputName) {
+                    return ComponentConfiguration::getPostListDefaultLimit();
+                }
+                break;
         }
-        return parent::getFieldFilterInputDefaultValues($objectTypeResolver, $fieldName);
+        return parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
     }
 
     /**

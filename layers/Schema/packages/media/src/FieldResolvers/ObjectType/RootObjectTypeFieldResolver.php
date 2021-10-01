@@ -100,32 +100,33 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         };
     }
 
-    protected function getFieldFilterInputDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
-        // Assign a default value to "mimeTypes"
-        $mimeTypeFilterInputName = FilterInputHelper::getFilterInputName([
-            FilterInputModuleProcessor::class,
-            FilterInputModuleProcessor::MODULE_FILTERINPUT_MIME_TYPES
-        ]);
-        $filterInputNameDefaultValues = [
-            $mimeTypeFilterInputName => ['image'],
-        ];
+        switch ($fieldName) {
+            case 'mediaItems':
+            case 'mediaItemCount':
+                // Assign a default value to "mimeTypes"
+                $mimeTypeFilterInputName = FilterInputHelper::getFilterInputName([
+                    FilterInputModuleProcessor::class,
+                    FilterInputModuleProcessor::MODULE_FILTERINPUT_MIME_TYPES
+                ]);
+                if ($fieldArgName === $mimeTypeFilterInputName) {
+                    return ['image'];
+                }
+                break;
+        }
         switch ($fieldName) {
             case 'mediaItems':
                 $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
-                return array_merge(
-                    $filterInputNameDefaultValues,
-                    [
-                        $limitFilterInputName => ComponentConfiguration::getMediaListDefaultLimit(),
-                    ]
-                );
-            case 'mediaItemCount':
-                return $filterInputNameDefaultValues;
+                if ($fieldArgName === $limitFilterInputName) {
+                    return ComponentConfiguration::getMediaListDefaultLimit();
+                }
+                break;
         }
-        return parent::getFieldFilterInputDefaultValues($objectTypeResolver, $fieldName);
+        return parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
     }
 
     /**

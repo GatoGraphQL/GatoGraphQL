@@ -93,7 +93,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         };
     }
 
-    protected function getFieldFilterInputDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         switch ($fieldName) {
             case 'comments':
@@ -102,19 +102,22 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
+                if ($fieldArgName === $limitFilterInputName) {
+                    return ComponentConfiguration::getRootCommentListDefaultLimit();
+                }
                 // Order by descending date
                 $orderFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
                 ]);
-                $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
-                $order = 'DESC';
-                return [
-                    $orderFilterInputName => $orderBy . OrderFormInput::SEPARATOR . $order,
-                    $limitFilterInputName => ComponentConfiguration::getRootCommentListDefaultLimit(),
-                ];
+                if ($fieldArgName === $orderFilterInputName) {
+                    $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
+                    $order = 'DESC';
+                    return $orderBy . OrderFormInput::SEPARATOR . $order;
+                }
+                break;
         }
-        return parent::getFieldFilterInputDefaultValues($objectTypeResolver, $fieldName);
+        return parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
     }
 
     /**

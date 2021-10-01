@@ -115,7 +115,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
         };
     }
 
-    protected function getFieldFilterInputDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         switch ($fieldName) {
             case 'postTags':
@@ -124,11 +124,12 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
-                return [
-                    $limitFilterInputName => ComponentConfiguration::getTagListDefaultLimit(),
-                ];
+                if ($fieldArgName === $limitFilterInputName) {
+                    return ComponentConfiguration::getTagListDefaultLimit();
+                }
+                break;
         }
-        return parent::getFieldFilterInputDefaultValues($objectTypeResolver, $fieldName);
+        return parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
     }
 
     /**

@@ -129,7 +129,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         };
     }
 
-    protected function getFieldFilterInputDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         switch ($fieldName) {
             case 'childPages':
@@ -138,11 +138,12 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
-                return [
-                    $limitFilterInputName => ComponentConfiguration::getPageListDefaultLimit(),
-                ];
+                if ($fieldArgName === $limitFilterInputName) {
+                    return ComponentConfiguration::getPageListDefaultLimit();
+                }
+                break;
         }
-        return parent::getFieldFilterInputDefaultValues($objectTypeResolver, $fieldName);
+        return parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
     }
 
     /**

@@ -80,7 +80,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
         };
     }
 
-    protected function getFieldFilterInputDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         switch ($fieldName) {
             case 'tags':
@@ -89,11 +89,12 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
-                return [
-                    $limitFilterInputName => ComponentConfiguration::getTagListDefaultLimit(),
-                ];
+                if ($fieldArgName === $limitFilterInputName) {
+                    return ComponentConfiguration::getTagListDefaultLimit();
+                }
+                break;
         }
-        return parent::getFieldFilterInputDefaultValues($objectTypeResolver, $fieldName);
+        return parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
     }
 
     /**

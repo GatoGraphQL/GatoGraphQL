@@ -113,7 +113,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         };
     }
 
-    protected function getFieldFilterInputDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         switch ($fieldName) {
             case 'customPosts':
@@ -122,11 +122,12 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
-                return [
-                    $limitFilterInputName => ComponentConfiguration::getCustomPostListDefaultLimit(),
-                ];
+                if ($fieldArgName === $limitFilterInputName) {
+                    return ComponentConfiguration::getCustomPostListDefaultLimit();
+                }
+                break;
         }
-        return parent::getFieldFilterInputDefaultValues($objectTypeResolver, $fieldName);
+        return parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
     }
 
     /**

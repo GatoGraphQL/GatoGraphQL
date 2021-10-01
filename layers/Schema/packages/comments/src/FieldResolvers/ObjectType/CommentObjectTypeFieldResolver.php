@@ -190,7 +190,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         };
     }
 
-    protected function getFieldFilterInputDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         switch ($fieldName) {
             case 'responses':
@@ -199,19 +199,22 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
+                if ($fieldArgName === $limitFilterInputName) {
+                    return ComponentConfiguration::getCustomPostCommentOrCommentResponseListDefaultLimit();
+                }
                 // Order by descending date
                 $orderFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
                 ]);
-                $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
-                $order = 'DESC';
-                return [
-                    $limitFilterInputName => ComponentConfiguration::getCustomPostCommentOrCommentResponseListDefaultLimit(),
-                    $orderFilterInputName => $orderBy . OrderFormInput::SEPARATOR . $order,
-                ];
+                if ($fieldArgName === $orderFilterInputName) {
+                    $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
+                    $order = 'DESC';
+                    return $orderBy . OrderFormInput::SEPARATOR . $order;
+                }
+                break;
         }
-        return parent::getFieldFilterInputDefaultValues($objectTypeResolver, $fieldName);
+        return parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
     }
 
     /**
