@@ -124,9 +124,9 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
         };
     }
 
-    public function getSchemaFieldArgTypeModifiers(array $module, string $fieldArgName): int
+    public function getFieldFilterInputTypeModifiers(array $module, string $fieldArgName): int
     {
-        $schemaFieldArgTypeModifiers = parent::getSchemaFieldArgTypeModifiers($module, $fieldArgName);
+        $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($module, $fieldArgName);
         switch ($module[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS:
                 $idFilterInputName = FilterInputHelper::getFilterInputName([
@@ -134,11 +134,11 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID
                 ]);
                 if ($fieldArgName === $idFilterInputName) {
-                    return $schemaFieldArgTypeModifiers | SchemaTypeModifiers::MANDATORY;
+                    return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
                 }
                 break;
         }
-        return $schemaFieldArgTypeModifiers;
+        return $fieldFilterInputTypeModifiers;
     }
 
     /**

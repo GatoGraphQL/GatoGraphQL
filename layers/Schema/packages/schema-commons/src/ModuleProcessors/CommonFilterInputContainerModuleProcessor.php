@@ -47,7 +47,7 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
         };
     }
 
-    public function getSchemaFieldArgDefaultValue(array $module, string $fieldArgName): mixed
+    public function getFieldFilterInputDefaultValue(array $module, string $fieldArgName): mixed
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING:
@@ -72,12 +72,12 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
                 }
                 break;
         }
-        return parent::getSchemaFieldArgDefaultValue($module, $fieldArgName);
+        return parent::getFieldFilterInputDefaultValue($module, $fieldArgName);
     }
 
-    public function getSchemaFieldArgTypeModifiers(array $module, string $fieldArgName): int
+    public function getFieldFilterInputTypeModifiers(array $module, string $fieldArgName): int
     {
-        $schemaFieldArgTypeModifiers = parent::getSchemaFieldArgTypeModifiers($module, $fieldArgName);
+        $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($module, $fieldArgName);
         switch ($module[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID:
                 $idFilterInputName = FilterInputHelper::getFilterInputName([
@@ -85,7 +85,7 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID
                 ]);
                 if ($fieldArgName === $idFilterInputName) {
-                    return $schemaFieldArgTypeModifiers | SchemaTypeModifiers::MANDATORY;
+                    return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
                 }
                 break;
             case self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG:
@@ -94,11 +94,11 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SLUG
                 ]);
                 if ($fieldArgName === $slugFilterInputName) {
-                    return $schemaFieldArgTypeModifiers | SchemaTypeModifiers::MANDATORY;
+                    return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
                 }
                 break;
         }
-        return $schemaFieldArgTypeModifiers;
+        return $fieldFilterInputTypeModifiers;
     }
 
     /**

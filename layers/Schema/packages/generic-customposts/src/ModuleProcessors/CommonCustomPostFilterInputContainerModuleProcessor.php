@@ -55,9 +55,9 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
         };
     }
 
-    public function getSchemaFieldArgTypeModifiers(array $module, string $fieldArgName): int
+    public function getFieldFilterInputTypeModifiers(array $module, string $fieldArgName): int
     {
-        $schemaFieldArgTypeModifiers = parent::getSchemaFieldArgTypeModifiers($module, $fieldArgName);
+        $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($module, $fieldArgName);
         switch ($module[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_GENERICTYPE:
             case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS_GENERICTYPE:
@@ -66,7 +66,7 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID
                 ]);
                 if ($fieldArgName === $idFilterInputName) {
-                    return $schemaFieldArgTypeModifiers | SchemaTypeModifiers::MANDATORY;
+                    return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
                 }
                 break;
             case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_GENERICTYPE:
@@ -76,11 +76,11 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SLUG
                 ]);
                 if ($fieldArgName === $slugFilterInputName) {
-                    return $schemaFieldArgTypeModifiers | SchemaTypeModifiers::MANDATORY;
+                    return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
                 }
                 break;
         }
-        return $schemaFieldArgTypeModifiers;
+        return $fieldFilterInputTypeModifiers;
     }
 
     /**

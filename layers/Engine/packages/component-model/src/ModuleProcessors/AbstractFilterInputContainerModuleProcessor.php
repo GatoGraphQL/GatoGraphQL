@@ -38,22 +38,22 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
         ];
     }
     
-    public function getSchemaFieldArgNameResolvers(array $module): array
+    public function getFieldFilterInputNameResolvers(array $module): array
     {
         return [];
     }
     
-    public function getSchemaFieldArgDescription(array $module, string $fieldArgName): ?string
+    public function getFieldFilterInputDescription(array $module, string $fieldArgName): ?string
     {
         return null;
     }
     
-    public function getSchemaFieldArgDefaultValue(array $module, string $fieldArgName): mixed
+    public function getFieldFilterInputDefaultValue(array $module, string $fieldArgName): mixed
     {
         return null;
     }
     
-    public function getSchemaFieldArgTypeModifiers(array $module, string $fieldArgName): int
+    public function getFieldFilterInputTypeModifiers(array $module, string $fieldArgName): int
     {
         return 0;
     }
