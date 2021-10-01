@@ -9,14 +9,12 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
 trait FieldOrDirectiveResolverTrait
 {
+    use FieldOrDirectiveSchemaDefinitionResolverTrait;
+    
     /**
      * @var array<array|null>
      */
@@ -507,52 +505,5 @@ trait FieldOrDirectiveResolverTrait
                 $deprecationItemDescription
             );
         }
-    }
-
-    final public function getFieldOrDirectiveArgSchemaDefinition(
-        string $argName,
-        InputTypeResolverInterface $argInputTypeResolver,
-        ?string $argDescription,
-        mixed $argDefaultValue,
-        ?int $argTypeModifiers,
-    ): array {
-        $schemaFieldOrDirectiveArgDefinition = [
-            SchemaDefinition::ARGNAME_NAME => $argName,
-        ];
-        if ($argInputTypeResolver instanceof EnumTypeResolverInterface) {
-            $type = SchemaDefinition::TYPE_ENUM;
-        } else {
-            $type = $argInputTypeResolver->getMaybeNamespacedTypeName();
-        }
-        $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
-        if ($argDescription !== null) {
-            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $argDescription;
-        }
-        if ($argDefaultValue !== null) {
-            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $argDefaultValue;
-        }
-        if ($argTypeModifiers !== null) {
-            if ($argTypeModifiers & SchemaTypeModifiers::MANDATORY) {
-                $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_MANDATORY] = true;
-            }
-            // If setting the "array of arrays" flag, there's no need to set the "array" flag
-            $isArrayOfArrays = $argTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-            if (
-                $argTypeModifiers & SchemaTypeModifiers::IS_ARRAY
-                || $isArrayOfArrays
-            ) {
-                $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
-                if ($argTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) {
-                    $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
-                }
-                if ($isArrayOfArrays) {
-                    $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] = true;
-                    if ($argTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) {
-                        $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;
-                    }
-                }
-            }
-        }
-        return $schemaFieldOrDirectiveArgDefinition;
     }
 }
