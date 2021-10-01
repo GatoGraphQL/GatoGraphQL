@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Resolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -22,11 +23,16 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
             SchemaDefinition::ARGNAME_NAME => $argName,
         ];
         if ($argInputTypeResolver instanceof EnumTypeResolverInterface) {
-            $type = SchemaDefinition::TYPE_ENUM;
+            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_TYPE] = SchemaDefinition::TYPE_ENUM;
+            /** @var EnumTypeResolverInterface */
+            $argEnumTypeResolver = $argInputTypeResolver;
+            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $argEnumTypeResolver->getMaybeNamespacedTypeName();
+            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
+                $argEnumTypeResolver
+            );
         } else {
-            $type = $argInputTypeResolver->getMaybeNamespacedTypeName();
+            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_TYPE] = $argInputTypeResolver->getMaybeNamespacedTypeName();
         }
-        $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
         if ($argDescription !== null) {
             $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $argDescription;
         }
