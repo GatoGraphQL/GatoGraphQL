@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostCategoryMutations\Hooks;
 
+use PoP\ComponentModel\FieldResolvers\ObjectType\HookNames;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
@@ -14,9 +14,7 @@ use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInte
 use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
-use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
@@ -36,10 +34,22 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     protected function init(): void
     {
         $this->hooksAPI->addFilter(
-            SchemaDefinitionHelpers::HOOK_UPDATE_SCHEMA_FIELD_ARGS,
-            array($this, 'maybeAddSchemaFieldArgs'),
+            HookNames::SCHEMA_FIELD_ARG_NAME_RESOLVERS,
+            array($this, 'maybeAddSchemaFieldArgNameResolvers'),
             10,
             4
+        );
+        $this->hooksAPI->addFilter(
+            HookNames::SCHEMA_FIELD_ARG_DESCRIPTION,
+            array($this, 'maybeAddSchemaFieldArgDescription'),
+            10,
+            5
+        );
+        $this->hooksAPI->addFilter(
+            HookNames::SCHEMA_FIELD_ARG_TYPE_MODIFIERS,
+            array($this, 'maybeAddSchemaFieldArgTypeModifiers'),
+            10,
+            5
         );
         $this->hooksAPI->addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
@@ -49,27 +59,50 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    public function maybeAddSchemaFieldArgs(
-        array $fieldArgs,
+    public function maybeAddSchemaFieldArgNameResolvers(
+        array $schemaFieldArgNameResolvers,
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
     ): array {
         // Only for the specific combinations of Type and fieldName
         if (!$this->mustAddSchemaFieldArgs($objectTypeResolver, $fieldName)) {
-            return $fieldArgs;
+            return $schemaFieldArgNameResolvers;
+        }
+        $schemaFieldArgNameResolvers[MutationInputProperties::CATEGORY_IDS] = $this->idScalarTypeResolver;
+        return $schemaFieldArgNameResolvers;
+    }
+
+    public function maybeAddSchemaFieldArgDescription(
+        ?string $schemaFieldArgDescription,
+        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        string $fieldArgName,
+    ): ?string {
+        // Only for the newly added fieldArgName
+        if ($fieldArgName !== MutationInputProperties::CATEGORY_IDS || !$this->mustAddSchemaFieldArgs($objectTypeResolver, $fieldName)) {
+            return $schemaFieldArgDescription;
         }
         $categoryTypeResolver = $this->getCategoryTypeResolver();
-        $fieldArgs[] = [
-            SchemaDefinition::ARGNAME_NAME => MutationInputProperties::CATEGORY_IDS,
-            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-            SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                $this->translationAPI->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
-                $categoryTypeResolver->getMaybeNamespacedTypeName()
-            )
-        ];
-        return $fieldArgs;
+        return sprintf(
+            $this->translationAPI->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
+            $categoryTypeResolver->getMaybeNamespacedTypeName()
+        );
+    }
+
+    public function maybeAddSchemaFieldArgTypeModifiers(
+        int $schemaFieldArgTypeModifiers,
+        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        string $fieldArgName,
+    ): int {
+        // Only for the newly added fieldArgName
+        if ($fieldArgName !== MutationInputProperties::CATEGORY_IDS || !$this->mustAddSchemaFieldArgs($objectTypeResolver, $fieldName)) {
+            return $schemaFieldArgTypeModifiers;
+        }
+        return SchemaTypeModifiers::IS_ARRAY;
     }
 
     abstract protected function mustAddSchemaFieldArgs(
