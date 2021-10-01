@@ -48,9 +48,7 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
     ): array {
         $schemaFieldArgNameResolvers = array_merge(
             $addCustomPostID ? [
-                [
-                    MutationInputProperties::ID => $this->idScalarTypeResolver,
-                ],
+                MutationInputProperties::ID => $this->idScalarTypeResolver,
             ] : [],
             [
                 MutationInputProperties::TITLE => $this->stringScalarTypeResolver,
