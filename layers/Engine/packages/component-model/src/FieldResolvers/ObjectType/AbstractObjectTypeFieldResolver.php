@@ -237,16 +237,56 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return 0;
     }
 
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
     final public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $schemaFieldArgs = [];
-        foreach ($this->getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName) as $fieldArgName => $fieldArgInputTypeResolver) {
+        /**
+         * Allow to override/extend the inputs (eg: module "Post Categories" can add
+         * input "categories" to field "Root.createPost")
+         */
+        $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
+        $schemaFieldArgNameResolvers = $this->hooksAPI->applyFilters(
+            HookNames::SCHEMA_FIELD_ARG_NAME_RESOLVERS,
+            $this->getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            $objectTypeResolver,
+            $fieldName,
+            $fieldTypeResolver
+        );
+        foreach ($schemaFieldArgNameResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
+            $schemaFieldArgDescription = $this->hooksAPI->applyFilters(
+                HookNames::SCHEMA_FIELD_ARG_DESCRIPTION,
+                $this->getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+                $objectTypeResolver,
+                $fieldName,
+                $fieldArgName,
+                $fieldTypeResolver,
+            );
+            $schemaFieldArgDefaultValue = $this->hooksAPI->applyFilters(
+                HookNames::SCHEMA_FIELD_ARG_DEFAULT_VALUE,
+                $this->getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
+                $objectTypeResolver,
+                $fieldName,
+                $fieldArgName,
+                $fieldTypeResolver,
+            );
+            $schemaFieldArgTypeModifiers = $this->hooksAPI->applyFilters(
+                HookNames::SCHEMA_FIELD_ARG_TYPE_MODIFIERS,
+                $this->getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+                $objectTypeResolver,
+                $fieldName,
+                $fieldArgName,
+                $fieldTypeResolver,
+            );
             $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
                 $fieldArgName,
                 $fieldArgInputTypeResolver,
-                $this->getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
-                $this->getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
-                $this->getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName)
+                $schemaFieldArgDescription,
+                $schemaFieldArgDefaultValue,
+                $schemaFieldArgTypeModifiers,
             );
         }
         return $schemaFieldArgs;
