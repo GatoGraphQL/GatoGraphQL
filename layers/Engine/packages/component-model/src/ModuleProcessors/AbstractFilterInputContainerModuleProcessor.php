@@ -37,14 +37,25 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
             self::HOOK_FILTER_INPUTS,
         ];
     }
-
-    /**
-     * Provide default values for modules in the FilterInputContainer
-     * @return array<string,mixed> A list of filterInputName as key, and its value
-     */
-    public function getFieldFilterInputDefaultValues(array $module): array
+    
+    public function getSchemaFieldArgNameResolvers(array $module): array
     {
         return [];
+    }
+    
+    public function getSchemaFieldArgDescription(array $module, string $fieldArgName): ?string
+    {
+        return null;
+    }
+    
+    public function getSchemaFieldArgDefaultValue(array $module, string $fieldArgName): mixed
+    {
+        return null;
+    }
+    
+    public function getSchemaFieldArgTypeModifiers(array $module, string $fieldArgName): int
+    {
+        return 0;
     }
 
     /**
