@@ -136,12 +136,12 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
     public function getSchemaFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => $translationAPI->__('', ''),
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => $translationAPI->__('', ''),
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            default => null,
+        };
     }
 }
 

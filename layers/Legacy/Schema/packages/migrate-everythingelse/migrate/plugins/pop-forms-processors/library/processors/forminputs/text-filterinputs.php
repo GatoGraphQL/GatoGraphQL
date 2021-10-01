@@ -102,12 +102,12 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
     public function getSchemaFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_SEARCH => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_HASHTAGS => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_NAME => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            default => null,
+        };
     }
 }
 

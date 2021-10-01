@@ -95,10 +95,10 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
     public function getSchemaFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            default => null,
+        };
     }
 }
 

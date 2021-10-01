@@ -80,10 +80,10 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
     public function getSchemaFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_EVENTSCOPE => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            default => null,
+        };
     }
 }
 

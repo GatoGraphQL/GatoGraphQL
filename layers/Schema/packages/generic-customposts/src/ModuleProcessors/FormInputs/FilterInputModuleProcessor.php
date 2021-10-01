@@ -92,9 +92,9 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public function getSchemaFilterInputDescription(array $module): ?string
     {
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->translationAPI->__('Return results from Custom Post Types', 'customposts'),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            default => null,
+        };
     }
 }

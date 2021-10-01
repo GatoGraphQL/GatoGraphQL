@@ -80,9 +80,9 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public function getSchemaFilterInputDescription(array $module): ?string
     {
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_MIME_TYPES => $this->translationAPI->__('Limit results to elements with the given mime types', 'media'),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            default => null,
+        };
     }
 }

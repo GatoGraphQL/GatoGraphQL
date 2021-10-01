@@ -139,13 +139,13 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
     public function getSchemaFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_APPLIESTO => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_CATEGORIES => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_CONTENTSECTIONS => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_POSTSECTIONS => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            default => null,
+        };
     }
 }
 

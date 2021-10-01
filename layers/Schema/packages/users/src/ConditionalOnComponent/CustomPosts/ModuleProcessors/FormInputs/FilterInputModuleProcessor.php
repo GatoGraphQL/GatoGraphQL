@@ -84,11 +84,11 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public function getSchemaFilterInputDescription(array $module): ?string
     {
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_AUTHOR_IDS => $this->translationAPI->__('Get results from the authors with given IDs', 'pop-users'),
             self::MODULE_FILTERINPUT_AUTHOR_SLUG => $this->translationAPI->__('Get results from the authors with given slug', 'pop-users'),
             self::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS => $this->translationAPI->__('Get results excluding the ones from authors with given IDs', 'pop-users'),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            default => null,
+        };
     }
 }

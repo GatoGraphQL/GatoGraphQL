@@ -95,10 +95,10 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
     public function getSchemaFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_STANCE_MULTISELECT => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            default => null,
+        };
     }
 }
 

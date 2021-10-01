@@ -117,13 +117,13 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
     public function getSchemaFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_ORDERUSER => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_ORDERPOST => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_ORDERTAG => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_ORDERCOMMENT => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            default => null,
+        };
     }
 }
 
