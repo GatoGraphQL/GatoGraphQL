@@ -11,6 +11,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
 trait FieldOrDirectiveResolverTrait
@@ -509,14 +510,14 @@ trait FieldOrDirectiveResolverTrait
 
     final public function getFieldOrDirectiveArgSchemaDefinition(
         string $argName,
-        ConcreteTypeResolverInterface $argConcreateTypeResolver,
+        InputTypeResolverInterface $argInputTypeResolver,
         ?string $argDescription,
         mixed $argDefaultValue,
         ?int $argTypeModifiers,
     ): array {
         $schemaDirectiveArg = [
             SchemaDefinition::ARGNAME_NAME => $argName,
-            SchemaDefinition::ARGNAME_TYPE => $argConcreateTypeResolver->getTypeOutputName(),
+            SchemaDefinition::ARGNAME_TYPE => $argInputTypeResolver->getTypeOutputName(),
         ];
         if ($argDescription !== null) {
             $schemaDirectiveArg[SchemaDefinition::ARGNAME_DESCRIPTION] = $argDescription;

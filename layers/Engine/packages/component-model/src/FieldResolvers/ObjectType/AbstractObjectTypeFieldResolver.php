@@ -28,6 +28,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -198,7 +199,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     
     /**
-     * @return array<string, ConcreteTypeResolverInterface>
+     * @return array<string, InputTypeResolverInterface>
      */
     public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
@@ -239,10 +240,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     final public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $schemaFieldArgs = [];
-        foreach ($this->getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName) as $fieldArgName => $fieldArgConcreteTypeResolver) {
+        foreach ($this->getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName) as $fieldArgName => $fieldArgInputTypeResolver) {
             $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
                 $fieldArgName,
-                $fieldArgConcreteTypeResolver,
+                $fieldArgInputTypeResolver,
                 $this->getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
                 $this->getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
                 $this->getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName)

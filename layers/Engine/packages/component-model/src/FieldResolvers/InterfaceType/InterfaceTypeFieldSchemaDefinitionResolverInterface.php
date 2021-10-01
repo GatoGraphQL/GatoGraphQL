@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 interface InterfaceTypeFieldSchemaDefinitionResolverInterface
 {
@@ -12,7 +13,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
     public function getSchemaFieldTypeModifiers(string $fieldName): ?int;
     public function getSchemaFieldDescription(string $fieldName): ?string;
     /**
-     * @return array<string, ConcreteTypeResolverInterface>
+     * @return array<string, InputTypeResolverInterface>
      */
     public function getSchemaFieldArgNameResolvers(string $fieldName): array;
     public function getSchemaFieldArgDescription(string $fieldName, string $fieldArgName): ?string;
