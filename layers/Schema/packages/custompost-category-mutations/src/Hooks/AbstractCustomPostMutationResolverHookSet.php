@@ -65,7 +65,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
             SchemaDefinition::ARGNAME_IS_ARRAY => true,
             SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
                 $this->translationAPI->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
-                $categoryTypeResolver->getTypeName()
+                $categoryTypeResolver->getMaybeNamespacedTypeName()
             )
         ];
         return $fieldArgs;

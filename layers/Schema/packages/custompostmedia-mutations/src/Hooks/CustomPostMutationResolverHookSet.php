@@ -58,7 +58,7 @@ class CustomPostMutationResolverHookSet extends AbstractHookSet
             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
             SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
                 $this->translationAPI->__('The ID of the featured image (of type %s)', 'custompost-mutations'),
-                $this->mediaTypeResolver->getTypeName()
+                $this->mediaTypeResolver->getMaybeNamespacedTypeName()
             ),
         ];
         return $fieldArgs;
