@@ -608,11 +608,15 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
         }
         if ($args = $this->getSchemaFieldArgs($objectTypeResolver, $fieldName)) {
-            $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $this->getFilteredSchemaFieldArgs(
-                $objectTypeResolver,
-                $fieldName,
-                $args
+            /**
+             * Add the "versionConstraint" param. Add it at the end,
+             * so it doesn't affect the order of params for "orderedSchemaFieldArgs"
+             */
+            $this->maybeAddVersionConstraintSchemaFieldOrDirectiveArg(
+                $args,
+                $this->hasSchemaFieldVersion($objectTypeResolver, $fieldName)
             );
+            $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $args;
         }
         $this->addSchemaDefinitionForField($schemaDefinition, $objectTypeResolver, $fieldName);
 
@@ -637,40 +641,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected function getInterfaceSchemaDefinitionResolverAdapterClass(): string
     {
         return InterfaceSchemaDefinitionResolverAdapter::class;
-    }
-
-    /**
-     * Processes the field args:
-     *
-     * 1. Adds the version constraint (if enabled)
-     * 2. Places all entries under their own name
-     * 3. If any entry has no name, it is skipped
-     *
-     * @return array<string, array>
-     */
-    protected function getFilteredSchemaFieldArgs(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $schemaFieldArgs
-    ): array {
-        /**
-         * Add the "versionConstraint" param. Add it at the end, so it doesn't affect the order of params for "orderedSchemaFieldArgs"
-         */
-        $this->maybeAddVersionConstraintSchemaFieldOrDirectiveArg(
-            $schemaFieldArgs,
-            $this->hasSchemaFieldVersion($objectTypeResolver, $fieldName)
-        );
-
-        // Add the args under their name. Watch out: the name is mandatory!
-        // If it hasn't been set, then skip the entry
-        $schemaFieldArgsByName = [];
-        foreach ($schemaFieldArgs as $arg) {
-            if (!isset($arg[SchemaDefinition::ARGNAME_NAME])) {
-                continue;
-            }
-            $schemaFieldArgsByName[$arg[SchemaDefinition::ARGNAME_NAME]] = $arg;
-        }
-        return $schemaFieldArgsByName;
     }
 
     public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
