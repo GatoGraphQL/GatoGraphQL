@@ -248,38 +248,37 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
          */
-        $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
         $schemaFieldArgNameResolvers = $this->hooksAPI->applyFilters(
             HookNames::SCHEMA_FIELD_ARG_NAME_RESOLVERS,
             $this->getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            $this,
             $objectTypeResolver,
             $fieldName,
-            $fieldTypeResolver
         );
         foreach ($schemaFieldArgNameResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
             $schemaFieldArgDescription = $this->hooksAPI->applyFilters(
                 HookNames::SCHEMA_FIELD_ARG_DESCRIPTION,
                 $this->getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+                $this,
                 $objectTypeResolver,
                 $fieldName,
                 $fieldArgName,
-                $fieldTypeResolver,
             );
             $schemaFieldArgDefaultValue = $this->hooksAPI->applyFilters(
                 HookNames::SCHEMA_FIELD_ARG_DEFAULT_VALUE,
                 $this->getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
+                $this,
                 $objectTypeResolver,
                 $fieldName,
                 $fieldArgName,
-                $fieldTypeResolver,
             );
             $schemaFieldArgTypeModifiers = $this->hooksAPI->applyFilters(
                 HookNames::SCHEMA_FIELD_ARG_TYPE_MODIFIERS,
                 $this->getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+                $this,
                 $objectTypeResolver,
                 $fieldName,
                 $fieldArgName,
-                $fieldTypeResolver,
             );
             $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
                 $fieldArgName,

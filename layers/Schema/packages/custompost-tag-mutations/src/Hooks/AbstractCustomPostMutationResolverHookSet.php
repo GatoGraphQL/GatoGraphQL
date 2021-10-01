@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostTagMutations\Hooks;
 
+use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -49,12 +50,13 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 
     public function maybeAddSchemaFieldArgs(
         array $fieldArgs,
+        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
-        ?ConcreteTypeResolverInterface $concreteTypeResolver
     ): array {
         // Only for the specific CPT
-        if ($concreteTypeResolver === null || get_class($concreteTypeResolver) !== get_class($this->getCustomPostTypeResolver())) {
+        $fieldTypeResolver = $objectTypeFieldResolver->getFieldTypeResolver($objectTypeResolver, $fieldName);
+        if ($fieldTypeResolver === null || get_class($fieldTypeResolver) !== get_class($this->getCustomPostTypeResolver())) {
             return $fieldArgs;
         }
         $fieldArgs[] = [

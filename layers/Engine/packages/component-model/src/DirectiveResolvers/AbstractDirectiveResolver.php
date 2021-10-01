@@ -672,24 +672,28 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         $schemaDirectiveArgNameResolvers = $this->hooksAPI->applyFilters(
             HookNames::SCHEMA_DIRECTIVE_ARG_NAME_RESOLVERS,
             $this->getSchemaDirectiveArgNameResolvers($relationalTypeResolver),
+            $this,
             $relationalTypeResolver
         );
         foreach ($schemaDirectiveArgNameResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
             $schemaDirectiveArgDescription = $this->hooksAPI->applyFilters(
                 HookNames::SCHEMA_DIRECTIVE_ARG_DESCRIPTION,
                 $this->getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+                $this,
                 $relationalTypeResolver,
                 $directiveArgName,
             );
             $schemaDirectiveArgDefaultValue = $this->hooksAPI->applyFilters(
                 HookNames::SCHEMA_DIRECTIVE_ARG_DEFAULT_VALUE,
                 $this->getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
+                $this,
                 $relationalTypeResolver,
                 $directiveArgName,
             );
             $schemaDirectiveArgTypeModifiers = $this->hooksAPI->applyFilters(
                 HookNames::SCHEMA_DIRECTIVE_ARG_TYPE_MODIFIERS,
                 $this->getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
+                $this,
                 $relationalTypeResolver,
                 $directiveArgName,
             );
