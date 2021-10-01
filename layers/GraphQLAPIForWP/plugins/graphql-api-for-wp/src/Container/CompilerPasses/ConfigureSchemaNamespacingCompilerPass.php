@@ -32,6 +32,7 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
             \PoPSchema\CustomPostMedia\Component::class,
             \PoPSchema\CustomPostMedia\Component::class,
             \PoPSchema\CustomPostMediaMutations\Component::class,
+            \PoPSchema\PostMediaMutations\Component::class,
             \PoPSchema\CustomPostMeta\Component::class,
             \PoPSchema\CustomPosts\Component::class,
             \PoPSchema\CustomPostsWP\Component::class,
