@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 
 trait FilterInputModuleProcessorTrait
 {
@@ -42,7 +43,12 @@ trait FilterInputModuleProcessorTrait
         ];
         if ($filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module)) {
             $inputTypeResolver = $filterSchemaDefinitionResolver->getSchemaFilterInputTypeResolver($module);
-            $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $inputTypeResolver->getMaybeNamespacedTypeName();
+            if ($inputTypeResolver instanceof EnumTypeResolverInterface) {
+                $type = SchemaDefinition::TYPE_ENUM;
+            } else {
+                $type = $inputTypeResolver->getMaybeNamespacedTypeName();
+            }
+            $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
             if ($description = $filterSchemaDefinitionResolver->getSchemaFilterInputDescription($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
             }
