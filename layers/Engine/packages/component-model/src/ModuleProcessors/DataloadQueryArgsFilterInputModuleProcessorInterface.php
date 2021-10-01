@@ -10,5 +10,5 @@ interface DataloadQueryArgsFilterInputModuleProcessorInterface
     public function isInputSetInSource(array $module, ?array $source = null): mixed;
     public function getFilterInput(array $module): ?array;
     public function getFilterInputSchemaDefinitionItems(array $module): array;
-    public function getFilterInputSchemaDefinitionResolver(array $module): ?DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
+    public function getFilterInputSchemaDefinitionResolver(array $module): DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 }

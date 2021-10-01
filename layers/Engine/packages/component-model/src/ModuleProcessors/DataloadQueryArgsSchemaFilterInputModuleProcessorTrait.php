@@ -9,7 +9,7 @@ trait DataloadQueryArgsSchemaFilterInputModuleProcessorTrait
     use FilterInputModuleProcessorTrait;
     use SchemaFilterInputModuleProcessorTrait;
 
-    public function getFilterInputSchemaDefinitionResolver(array $module): ?DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
+    public function getFilterInputSchemaDefinitionResolver(array $module): DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
     {
         return $this;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 
@@ -29,6 +30,8 @@ trait FilterInputModuleProcessorTrait
     protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module): void
     {
     }
+
+    abstract public function getFilterInputSchemaDefinitionResolver(array $module): DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 
     /**
      * Documentation for the module
