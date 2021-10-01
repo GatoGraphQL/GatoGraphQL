@@ -22,53 +22,34 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
     
     public function getSchemaFieldArgNameResolvers(string $fieldName): array
     {
-        return match ($fieldName) {
-            default => parent::getSchemaFieldArgNameResolvers($fieldName),
-        };
+        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($fieldName)) {
+            return $this->getFilterSchemaFieldArgNameResolvers($filterDataloadingModule);
+        }
+        return parent::getSchemaFieldArgNameResolvers($fieldName);
     }
     
     public function getSchemaFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
-        return match ([$fieldName => $fieldArgName]) {
-            default => parent::getSchemaFieldArgDescription($fieldName, $fieldArgName),
-        };
+        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($fieldName)) {
+            return $this->getFilterSchemaFieldArgDescription($filterDataloadingModule);
+        }
+        return parent::getSchemaFieldArgDescription($fieldName, $fieldArgName);
     }
     
     public function getSchemaFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
     {
-        return match ([$fieldName => $fieldArgName]) {
-            default => parent::getSchemaFieldArgDefaultValue($fieldName, $fieldArgName),
-        };
+        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($fieldName)) {
+            return $this->getFilterSchemaFieldArgDefaultValue($filterDataloadingModule);
+        }
+        return parent::getSchemaFieldArgDefaultValue($fieldName, $fieldArgName);
     }
     
     public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): ?int
     {
-        return match ([$fieldName => $fieldArgName]) {
-            default => parent::getSchemaFieldArgTypeModifiers($fieldName, $fieldArgName),
-        };
-    }
-
-    public function getSchemaFieldArgs(string $fieldName): array
-    {
-        // Get the Schema Field Args from the FilterInput modules
-        return array_merge(
-            parent::getSchemaFieldArgs($fieldName),
-            $this->getFieldArgumentsSchemaDefinitions($fieldName)
-        );
-    }
-
-    protected function getFieldArgumentsSchemaDefinitions(string $fieldName): array
-    {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($fieldName)) {
-            $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
-            return $this->getSchemaFieldArgsWithCustomFilterInputData(
-                $schemaFieldArgs,
-                $this->getFieldFilterInputDefaultValues($fieldName),
-                $this->getFieldFilterInputMandatoryArgs($fieldName)
-            );
+            return $this->getFilterSchemaFieldArgTypeModifiers($filterDataloadingModule);
         }
-
-        return [];
+        return parent::getSchemaFieldArgTypeModifiers($fieldName, $fieldArgName);
     }
 
     /**
