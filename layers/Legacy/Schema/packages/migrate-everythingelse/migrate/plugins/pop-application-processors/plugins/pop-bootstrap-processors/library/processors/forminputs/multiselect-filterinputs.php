@@ -3,6 +3,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProces
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -123,14 +124,16 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+    public function getSchemaFilterInputTypeModifiers(array $module): ?int
     {
         return match($module[1]) {
-            self::MODULE_FILTERINPUT_APPLIESTO => true,
-            self::MODULE_FILTERINPUT_CATEGORIES => true,
-            self::MODULE_FILTERINPUT_CONTENTSECTIONS => true,
-            self::MODULE_FILTERINPUT_POSTSECTIONS => true,
-            default => false,
+            self::MODULE_FILTERINPUT_APPLIESTO,
+            self::MODULE_FILTERINPUT_CATEGORIES,
+            self::MODULE_FILTERINPUT_CONTENTSECTIONS,
+            self::MODULE_FILTERINPUT_POSTSECTIONS
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => null,
         };
     }
 

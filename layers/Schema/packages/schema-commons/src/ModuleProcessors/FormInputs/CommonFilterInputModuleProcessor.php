@@ -10,6 +10,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProces
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Tokens\Param;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\FormInputs\BooleanFormInput;
@@ -166,7 +167,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+    public function getSchemaFilterInputTypeModifiers(array $module): ?int
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_IDS,
@@ -174,23 +175,9 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_PARENT_IDS,
             self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS,
             self::MODULE_FILTERINPUT_SLUGS
-                => true,
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
-                => false,
-        };
-    }
-
-    public function getSchemaFilterInputIsNonNullableItemsInArrayType(array $module): bool
-    {
-        return match ($module[1]) {
-            self::MODULE_FILTERINPUT_IDS,
-            self::MODULE_FILTERINPUT_EXCLUDE_IDS,
-            self::MODULE_FILTERINPUT_PARENT_IDS,
-            self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS,
-            self::MODULE_FILTERINPUT_SLUGS
-                => true,
-            default
-                => false,
+                => null,
         };
     }
 

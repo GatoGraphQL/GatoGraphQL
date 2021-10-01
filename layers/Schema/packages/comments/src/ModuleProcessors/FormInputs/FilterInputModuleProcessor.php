@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\ModuleProcessors\FormInputs;
 
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
@@ -13,6 +11,9 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\Constants\CommentTypes;
 use PoPSchema\Comments\FilterInputProcessors\FilterInputProcessor;
@@ -106,29 +107,16 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+    public function getSchemaFilterInputTypeModifiers(array $module): ?int
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOST_IDS,
             self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS,
             self::MODULE_FILTERINPUT_COMMENT_TYPES,
             self::MODULE_FILTERINPUT_COMMENT_STATUS
-                => true,
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
-                => false,
-        };
-    }
-
-    public function getSchemaFilterInputIsNonNullableItemsInArrayType(array $module): bool
-    {
-        return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOST_IDS,
-            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS,
-            self::MODULE_FILTERINPUT_COMMENT_TYPES,
-            self::MODULE_FILTERINPUT_COMMENT_STATUS
-                => true,
-            default
-                => false,
+                => null,
         };
     }
 

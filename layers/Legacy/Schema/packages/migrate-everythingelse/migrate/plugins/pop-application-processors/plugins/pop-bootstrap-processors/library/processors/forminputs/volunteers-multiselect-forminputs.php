@@ -2,6 +2,7 @@
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -83,11 +84,11 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+    public function getSchemaFilterInputTypeModifiers(array $module): ?int
     {
         return match($module[1]) {
-            self::MODULE_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT => true,
-            default => false,
+            self::MODULE_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT => SchemaTypeModifiers::IS_ARRAY,
+            default => null,
         };
     }
 

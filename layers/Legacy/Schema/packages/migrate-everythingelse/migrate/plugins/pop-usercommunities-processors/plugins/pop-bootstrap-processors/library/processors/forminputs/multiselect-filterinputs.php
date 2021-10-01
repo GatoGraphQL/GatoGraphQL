@@ -4,6 +4,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberPrivilegeEnumTypeResolver;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberStatusEnumTypeResolver;
@@ -120,13 +121,15 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+    public function getSchemaFilterInputTypeModifiers(array $module): ?int
     {
         return match($module[1]) {
-            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => true,
-            self::MODULE_URE_FILTERINPUT_MEMBERTAGS => true,
-            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => true,
-            default => false,
+            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES,
+            self::MODULE_URE_FILTERINPUT_MEMBERTAGS,
+            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => null,
         };
     }
 

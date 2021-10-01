@@ -3,6 +3,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -113,13 +114,15 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+    public function getSchemaFilterInputTypeModifiers(array $module): ?int
     {
         return match($module[1]) {
-            self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES => true,
-            self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => true,
-            self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => true,
-            default => false,
+            self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES,
+            self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS,
+            self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => null,
         };
     }
 

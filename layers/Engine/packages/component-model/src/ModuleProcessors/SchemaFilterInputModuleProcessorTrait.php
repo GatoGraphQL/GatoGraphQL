@@ -30,25 +30,9 @@ trait SchemaFilterInputModuleProcessorTrait
     {
         return null;
     }
-    public function getSchemaFilterInputMandatory(array $module): bool
+    public function getSchemaFilterInputTypeModifiers(array $module): ?int
     {
-        return false;
-    }
-    public function getSchemaFilterInputIsArrayType(array $module): bool
-    {
-        return false;
-    }
-    public function getSchemaFilterInputIsNonNullableItemsInArrayType(array $module): bool
-    {
-        return false;
-    }
-    public function getSchemaFilterInputIsArrayOfArraysType(array $module): bool
-    {
-        return false;
-    }
-    public function getSchemaFilterInputIsNonNullableItemsInArrayOfArraysType(array $module): bool
-    {
-        return false;
+        return null;
     }
     public function addSchemaDefinitionForFilter(array &$schemaDefinition, array $module): void
     {

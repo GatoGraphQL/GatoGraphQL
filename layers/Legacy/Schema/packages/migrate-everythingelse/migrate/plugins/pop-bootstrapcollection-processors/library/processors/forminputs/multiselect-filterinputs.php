@@ -4,6 +4,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\CustomPostModeratedStatusEnumTypeResolver;
@@ -100,12 +101,14 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+    public function getSchemaFilterInputTypeModifiers(array $module): ?int
     {
         return match($module[1]) {
-            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => true,
-            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => true,
-            default => false,
+            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS,
+            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => null,
         };
     }
 

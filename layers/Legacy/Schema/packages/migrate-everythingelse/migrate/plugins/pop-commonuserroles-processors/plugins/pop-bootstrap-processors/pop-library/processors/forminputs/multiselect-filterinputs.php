@@ -2,6 +2,7 @@
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Hooks\Facades\HooksAPIFacade;
@@ -120,13 +121,15 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+    public function getSchemaFilterInputTypeModifiers(array $module): ?int
     {
         return match($module[1]) {
-            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => true,
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => true,
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => true,
-            default => false,
+            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS,
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES,
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => null,
         };
     }
 
