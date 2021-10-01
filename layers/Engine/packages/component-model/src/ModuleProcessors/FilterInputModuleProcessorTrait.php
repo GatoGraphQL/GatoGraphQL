@@ -20,15 +20,7 @@ trait FilterInputModuleProcessorTrait
         $schemaDefinitionItems = [
             $this->getFilterInputSchemaDefinition($module),
         ];
-        $this->modifyFilterSchemaDefinitionItems($schemaDefinitionItems, $module);
         return $schemaDefinitionItems;
-    }
-
-    /**
-     * Function to override
-     */
-    protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module): void
-    {
     }
 
     abstract public function getFilterInputSchemaDefinitionResolver(array $module): DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;

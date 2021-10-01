@@ -2,8 +2,6 @@
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberPrivilegeEnumTypeResolver;
@@ -142,30 +140,6 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
             self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => $translationAPI->__('', ''),
         ];
         return $descriptions[$module[1]] ?? null;
-    }
-
-    protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module): void
-    {
-        switch ($module[1]) {
-            case self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES:
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $this->memberPrivilegeEnumTypeResolver->getTypeName();
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $this->memberPrivilegeEnumTypeResolver
-                );
-                break;
-            case self::MODULE_URE_FILTERINPUT_MEMBERTAGS:
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $this->memberTagEnumTypeResolver->getTypeName();
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $this->memberTagEnumTypeResolver
-                );
-                break;
-            case self::MODULE_URE_FILTERINPUT_MEMBERSTATUS:
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $this->memberStatusEnumTypeResolver->getTypeName();
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $this->memberStatusEnumTypeResolver
-                );
-                break;
-        }
     }
 }
 
