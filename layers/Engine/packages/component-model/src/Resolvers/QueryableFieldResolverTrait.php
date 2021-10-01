@@ -23,7 +23,7 @@ trait QueryableFieldResolverTrait
                 function (array $module) use ($moduleProcessorManager) {
                     /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
                     $dataloadQueryArgsFilterInputModuleProcessor = $moduleProcessorManager->getProcessor($module);
-                    return $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputSchemaDefinitionItems($module);
+                    return $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputSchemaDefinition($module);
                 },
                 $filterQueryArgsModules
             )

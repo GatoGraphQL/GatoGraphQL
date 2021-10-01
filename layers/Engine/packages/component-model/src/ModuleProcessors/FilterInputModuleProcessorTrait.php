@@ -12,17 +12,6 @@ trait FilterInputModuleProcessorTrait
 {
     use FieldOrDirectiveSchemaDefinitionResolverTrait;
 
-    /**
-     * Return an array of elements, instead of a single element, to enable filters with several inputs (such as "date", with inputs "date-from" and "date-to") to document all of them
-     */
-    public function getFilterInputSchemaDefinitionItems(array $module): array
-    {
-        $schemaDefinitionItems = [
-            $this->getFilterInputSchemaDefinition($module),
-        ];
-        return $schemaDefinitionItems;
-    }
-
     abstract public function getFilterInputSchemaDefinitionResolver(array $module): DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 
     /**
