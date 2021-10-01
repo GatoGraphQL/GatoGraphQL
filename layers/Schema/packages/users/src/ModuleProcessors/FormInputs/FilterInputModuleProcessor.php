@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\ModuleProcessors\FormInputs;
 
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\Users\FilterInputProcessors\FilterInputProcessor;
 
 class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
@@ -21,14 +20,14 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_NAME = 'filterinput-name';
     public const MODULE_FILTERINPUT_EMAILS = 'filterinput-emails';
 
-    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected EmailScalarTypeResolver $emailScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     public function autowireFilterInputModuleProcessor(
-        IDScalarTypeResolver $idScalarTypeResolver,
+        EmailScalarTypeResolver $emailScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
@@ -69,7 +68,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_NAME => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_EMAILS => SchemaDefinition::TYPE_EMAIL,
+            self::MODULE_FILTERINPUT_EMAILS => $this->emailScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }

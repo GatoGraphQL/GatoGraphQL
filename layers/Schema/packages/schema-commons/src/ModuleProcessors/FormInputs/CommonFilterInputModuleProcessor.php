@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\ModuleProcessors\FormInputs;
 
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
@@ -14,7 +11,12 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Tokens\Param;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\FormInputs\BooleanFormInput;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\SchemaCommons\FormInputs\MultiValueFromStringFormInput;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
@@ -39,14 +41,20 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     public const MODULE_FILTERINPUT_DATEFORMAT = 'filterinput-date-format';
     public const MODULE_FILTERINPUT_GMT = 'filterinput-date-gmt';
 
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     public function autowireCommonFilterInputModuleProcessor(
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
@@ -140,8 +148,8 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     {
         return match ((string)$module[1]) {
             self::MODULE_FILTERINPUT_ORDER => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_LIMIT => SchemaDefinition::TYPE_INT,
-            self::MODULE_FILTERINPUT_OFFSET => SchemaDefinition::TYPE_INT,
+            self::MODULE_FILTERINPUT_LIMIT => $this->intScalarTypeResolver,
+            self::MODULE_FILTERINPUT_OFFSET => $this->intScalarTypeResolver,
             self::MODULE_FILTERINPUT_SEARCH => $this->stringScalarTypeResolver,
             self::MODULE_FILTERINPUT_IDS => $this->idScalarTypeResolver,
             self::MODULE_FILTERINPUT_ID => $this->idScalarTypeResolver,
@@ -153,7 +161,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_SLUGS => $this->stringScalarTypeResolver,
             self::MODULE_FILTERINPUT_SLUG => $this->stringScalarTypeResolver,
             self::MODULE_FILTERINPUT_DATEFORMAT => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_GMT => SchemaDefinition::TYPE_BOOL,
+            self::MODULE_FILTERINPUT_GMT => $this->booleanScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }

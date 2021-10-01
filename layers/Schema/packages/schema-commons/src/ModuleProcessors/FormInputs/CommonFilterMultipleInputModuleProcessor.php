@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\ModuleProcessors\FormInputs;
 
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
@@ -14,7 +11,9 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
@@ -25,18 +24,15 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
     public const MODULE_FILTERINPUT_DATES = 'filterinput-dates';
 
     protected FormInputHelperServiceInterface $formInputHelperService;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected DateScalarTypeResolver $dateScalarTypeResolver;
 
     #[Required]
     public function autowireCommonFilterMultipleInputModuleProcessor(
         FormInputHelperServiceInterface $formInputHelperService,
-        IDScalarTypeResolver $idScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
+        DateScalarTypeResolver $dateScalarTypeResolver,
     ): void {
         $this->formInputHelperService = $formInputHelperService;
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
     }
 
     public function getModulesToProcess(): array
@@ -116,7 +112,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
     public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_DATES => SchemaDefinition::TYPE_DATE,
+            self::MODULE_FILTERINPUT_DATES => $this->dateScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }

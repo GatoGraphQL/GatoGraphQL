@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\ModuleProcessors\FormInputs;
 
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
@@ -28,17 +27,14 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
     
     protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
     public function autowireFilterInputModuleProcessor(
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
@@ -88,7 +84,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => SchemaDefinition::TYPE_ENUM,
+            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => $this->customPostStatusEnumTypeResolver,
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->stringScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };

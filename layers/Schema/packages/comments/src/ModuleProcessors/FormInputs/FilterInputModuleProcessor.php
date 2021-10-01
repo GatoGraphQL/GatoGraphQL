@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\ModuleProcessors\FormInputs;
 
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
@@ -34,19 +33,16 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     protected CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver;
     protected CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver;
     protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
     public function autowireFilterInputModuleProcessor(
         CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver,
         CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->commentTypeEnumTypeResolver = $commentTypeEnumTypeResolver;
         $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
         $this->idScalarTypeResolver = $idScalarTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
     public function getModulesToProcess(): array
@@ -104,8 +100,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             self::MODULE_FILTERINPUT_CUSTOMPOST_IDS => $this->idScalarTypeResolver,
             self::MODULE_FILTERINPUT_CUSTOMPOST_ID => $this->idScalarTypeResolver,
             self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_COMMENT_TYPES => SchemaDefinition::TYPE_ENUM,
-            self::MODULE_FILTERINPUT_COMMENT_STATUS => SchemaDefinition::TYPE_ENUM,
+            self::MODULE_FILTERINPUT_COMMENT_TYPES => $this->commentTypeEnumTypeResolver,
+            self::MODULE_FILTERINPUT_COMMENT_STATUS => $this->commentStatusEnumTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
