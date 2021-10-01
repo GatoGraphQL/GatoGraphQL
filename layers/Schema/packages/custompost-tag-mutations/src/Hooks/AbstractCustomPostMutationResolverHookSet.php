@@ -51,10 +51,10 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         array $fieldArgs,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldName,
-        ?ConcreteTypeResolverInterface $entityTypeResolver
+        ?ConcreteTypeResolverInterface $concreteTypeResolver
     ): array {
         // Only for the specific CPT
-        if ($entityTypeResolver === null || get_class($entityTypeResolver) !== get_class($this->getCustomPostTypeResolver())) {
+        if ($concreteTypeResolver === null || get_class($concreteTypeResolver) !== get_class($this->getCustomPostTypeResolver())) {
             return $fieldArgs;
         }
         $fieldArgs[] = [

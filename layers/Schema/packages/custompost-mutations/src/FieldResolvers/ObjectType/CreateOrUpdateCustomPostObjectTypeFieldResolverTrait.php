@@ -44,7 +44,7 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         bool $addCustomPostID,
-        ?ConcreteTypeResolverInterface $entityTypeResolver = null,
+        ?ConcreteTypeResolverInterface $concreteTypeResolver = null,
     ): array {
         $schemaFieldArgNameResolvers = array_merge(
             $addCustomPostID ? [
@@ -61,7 +61,7 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
             $schemaFieldArgNameResolvers,
             $objectTypeResolver,
             $fieldName,
-            $entityTypeResolver
+            $concreteTypeResolver
         );
     }
     
