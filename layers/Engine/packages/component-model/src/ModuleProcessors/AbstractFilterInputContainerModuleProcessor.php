@@ -60,10 +60,9 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
             /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
             $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
             $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
-            if ($filterInputName !== $fieldArgName) {
-                continue;
+            if ($filterInputName === $fieldArgName) {
+                return $dataloadQueryArgsFilterInputModuleProcessor->getSchemaFilterInputDescription($module);
             }
-            return $dataloadQueryArgsFilterInputModuleProcessor->getSchemaFilterInputDescription($module);
         }
         return null;
     }
@@ -75,10 +74,9 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
             /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
             $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
             $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
-            if ($filterInputName !== $fieldArgName) {
-                continue;
+            if ($filterInputName === $fieldArgName) {
+                return $dataloadQueryArgsFilterInputModuleProcessor->getSchemaFilterInputDefaultValue($module);
             }
-            return $dataloadQueryArgsFilterInputModuleProcessor->getSchemaFilterInputDefaultValue($module);
         }
         return null;
     }
@@ -90,10 +88,9 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
             /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
             $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
             $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
-            if ($filterInputName !== $fieldArgName) {
-                continue;
+            if ($filterInputName === $fieldArgName) {
+                return $dataloadQueryArgsFilterInputModuleProcessor->getSchemaFilterInputTypeModifiers($module);
             }
-            return $dataloadQueryArgsFilterInputModuleProcessor->getSchemaFilterInputTypeModifiers($module);
         }
         return 0;
     }
