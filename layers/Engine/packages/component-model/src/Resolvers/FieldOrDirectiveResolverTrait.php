@@ -11,6 +11,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
@@ -515,19 +516,24 @@ trait FieldOrDirectiveResolverTrait
         mixed $argDefaultValue,
         ?int $argTypeModifiers,
     ): array {
-        $schemaDirectiveArg = [
+        $schemaFieldOrDirectiveArgDefinition = [
             SchemaDefinition::ARGNAME_NAME => $argName,
-            SchemaDefinition::ARGNAME_TYPE => $argInputTypeResolver->getMaybeNamespacedTypeName(),
         ];
+        if ($argInputTypeResolver instanceof EnumTypeResolverInterface) {
+            $type = SchemaDefinition::TYPE_ENUM;
+        } else {
+            $type = $argInputTypeResolver->getMaybeNamespacedTypeName();
+        }
+        $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
         if ($argDescription !== null) {
-            $schemaDirectiveArg[SchemaDefinition::ARGNAME_DESCRIPTION] = $argDescription;
+            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $argDescription;
         }
         if ($argDefaultValue !== null) {
-            $schemaDirectiveArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $argDefaultValue;
+            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $argDefaultValue;
         }
         if ($argTypeModifiers !== null) {
             if ($argTypeModifiers & SchemaTypeModifiers::MANDATORY) {
-                $schemaDirectiveArg[SchemaDefinition::ARGNAME_MANDATORY] = true;
+                $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_MANDATORY] = true;
             }
             // If setting the "array of arrays" flag, there's no need to set the "array" flag
             $isArrayOfArrays = $argTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
@@ -535,18 +541,18 @@ trait FieldOrDirectiveResolverTrait
                 $argTypeModifiers & SchemaTypeModifiers::IS_ARRAY
                 || $isArrayOfArrays
             ) {
-                $schemaDirectiveArg[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
+                $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
                 if ($argTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) {
-                    $schemaDirectiveArg[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
+                    $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
                 }
                 if ($isArrayOfArrays) {
-                    $schemaDirectiveArg[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] = true;
+                    $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] = true;
                     if ($argTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) {
-                        $schemaDirectiveArg[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;
+                        $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;
                     }
                 }
             }
         }
-        return $schemaDirectiveArg;
+        return $schemaFieldOrDirectiveArgDefinition;
     }
 }
