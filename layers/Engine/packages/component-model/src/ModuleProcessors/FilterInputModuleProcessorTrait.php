@@ -52,6 +52,17 @@ trait FilterInputModuleProcessorTrait
             if ($description = $filterSchemaDefinitionResolver->getSchemaFilterInputDescription($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
             }
+            if ($deprecationDescription = $filterSchemaDefinitionResolver->getSchemaFilterInputDeprecationDescription($module)) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
+                $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
+            }
+            $defaultValue = $filterSchemaDefinitionResolver->getSchemaFilterInputDefaultValue($module);
+            if ($defaultValue !== null) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $defaultValue;
+            }
+            if ($filterSchemaDefinitionResolver->getSchemaFilterInputMandatory($module)) {
+                $schemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] = true;
+            }
             // If setting the "array of arrays" flag, there's no need to set the "array" flag
             $isArrayOfArrays = $filterSchemaDefinitionResolver->getSchemaFilterInputIsArrayOfArraysType($module);
             if (
@@ -68,17 +79,6 @@ trait FilterInputModuleProcessorTrait
                         $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;
                     }
                 }
-            }
-            $defaultValue = $filterSchemaDefinitionResolver->getSchemaFilterInputDefaultValue($module);
-            if ($defaultValue !== null) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_DEFAULT_VALUE] = $defaultValue;
-            }
-            if ($filterSchemaDefinitionResolver->getSchemaFilterInputMandatory($module)) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] = true;
-            }
-            if ($deprecationDescription = $filterSchemaDefinitionResolver->getSchemaFilterInputDeprecationDescription($module)) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
-                $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
             }
             $filterSchemaDefinitionResolver->addSchemaDefinitionForFilter($schemaDefinition, $module);
         }
