@@ -84,7 +84,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
             ),
             [$setCategoriesFieldName => MutationInputProperties::CATEGORY_IDS] => sprintf(
                 $this->translationAPI->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
-                $this->getCategoryTypeResolver()->getTypeOutputName()
+                $this->getCategoryTypeResolver()->getMaybeNamespacedTypeName()
             ),
             [$setCategoriesFieldName => MutationInputProperties::APPEND] => $this->translationAPI->__('Append the categories to the existing ones?', 'custompost-category-mutations'),
             default => parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),

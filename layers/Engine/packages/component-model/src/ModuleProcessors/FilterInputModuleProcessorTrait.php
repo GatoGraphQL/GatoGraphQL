@@ -42,7 +42,7 @@ trait FilterInputModuleProcessorTrait
         ];
         if ($filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module)) {
             $type = $filterSchemaDefinitionResolver->getSchemaFilterInputTypeResolver($module);
-            $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type->getTypeOutputName();
+            $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type->getMaybeNamespacedTypeName();
             if ($description = $filterSchemaDefinitionResolver->getSchemaFilterInputDescription($module)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
             }

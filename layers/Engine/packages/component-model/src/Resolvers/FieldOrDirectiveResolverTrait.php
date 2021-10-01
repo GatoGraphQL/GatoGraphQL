@@ -517,7 +517,7 @@ trait FieldOrDirectiveResolverTrait
     ): array {
         $schemaDirectiveArg = [
             SchemaDefinition::ARGNAME_NAME => $argName,
-            SchemaDefinition::ARGNAME_TYPE => $argInputTypeResolver->getTypeOutputName(),
+            SchemaDefinition::ARGNAME_TYPE => $argInputTypeResolver->getMaybeNamespacedTypeName(),
         ];
         if ($argDescription !== null) {
             $schemaDirectiveArg[SchemaDefinition::ARGNAME_DESCRIPTION] = $argDescription;

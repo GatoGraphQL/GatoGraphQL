@@ -127,7 +127,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 throw new Exception(
                     sprintf(
                         $this->translationAPI->__('The Union Type \'%s\' does not provide a target ObjectTypeResolver for the object', 'component-model'),
-                        $relationalTypeResolver->getTypeOutputName()
+                        $relationalTypeResolver->getMaybeNamespacedTypeName()
                     )
                 );
             }
