@@ -122,7 +122,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
         };
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getSchemaFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
     {
         return match ((string)$module[1]) {
             self::MODULE_FILTERINPUT_ORDER => SchemaDefinition::TYPE_STRING,

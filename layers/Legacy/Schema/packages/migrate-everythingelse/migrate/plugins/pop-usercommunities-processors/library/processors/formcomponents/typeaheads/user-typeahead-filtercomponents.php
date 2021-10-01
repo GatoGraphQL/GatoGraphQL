@@ -88,7 +88,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Mo
         return parent::getTriggerLayoutSubmodule($module);
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getSchemaFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
     {
         return match($module[1]) {
             self::MODULE_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST => SchemaDefinition::TYPE_ID,

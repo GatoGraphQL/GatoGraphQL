@@ -60,7 +60,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getSchemaFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
     {
         return match($module[1]) {
             self::MODULE_FILTERINPUT_EVENTSCOPE => SchemaDefinition::TYPE_DATE,

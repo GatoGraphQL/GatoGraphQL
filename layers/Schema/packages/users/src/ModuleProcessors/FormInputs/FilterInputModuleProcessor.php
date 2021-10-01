@@ -51,7 +51,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getSchemaFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_NAME => SchemaDefinition::TYPE_STRING,

@@ -80,7 +80,7 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getSchemaFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
     {
         return match($module[1]) {
             self::MODULE_FILTERINPUT_SEARCH => SchemaDefinition::TYPE_STRING,
