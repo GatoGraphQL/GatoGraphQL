@@ -51,13 +51,4 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
         }
         return parent::getSchemaFieldArgTypeModifiers($fieldName, $fieldArgName);
     }
-
-    /**
-     * Provide the names of the args which are mandatory in the FilterInput
-     * @return string[]
-     */
-    protected function getFieldFilterInputMandatoryArgs(string $fieldName): array
-    {
-        return [];
-    }
 }

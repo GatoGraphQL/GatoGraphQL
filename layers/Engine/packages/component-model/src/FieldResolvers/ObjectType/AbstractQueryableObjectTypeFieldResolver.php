@@ -67,15 +67,6 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         return parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
     }
 
-    /**
-     * Provide the names of the args which are mandatory in the FilterInput
-     * @return string[]
-     */
-    protected function getFieldFilterInputMandatoryArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
-    {
-        return [];
-    }
-
     protected function getInterfaceSchemaDefinitionResolverAdapterClass(): string
     {
         return QueryableInterfaceSchemaDefinitionResolverAdapter::class;
