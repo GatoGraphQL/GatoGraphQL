@@ -101,7 +101,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
             self::MODULE_FILTERINPUT_ORDERPOST => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_ORDERTAG => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_ORDERCOMMENT => SchemaDefinition::TYPE_STRING,
-            default => $this->getDefaultSchemaFilterInputType(),
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 

@@ -11,9 +11,9 @@ trait SchemaFilterInputModuleProcessorTrait
 {
     public function getSchemaFilterInputType(array $module): InputTypeResolverInterface
     {
-        return $this->getDefaultSchemaFilterInputType();
+        return $this->getDefaultSchemaFilterInputTypeResolver();
     }
-    protected function getDefaultSchemaFilterInputType(): InputTypeResolverInterface
+    protected function getDefaultSchemaFilterInputTypeResolver(): InputTypeResolverInterface
     {
         $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
         return $schemaDefinitionService->getDefaultInputTypeResolver();

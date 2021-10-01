@@ -49,7 +49,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_USER_ROLES => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => SchemaDefinition::TYPE_STRING,
-            default => $this->getDefaultSchemaFilterInputType(),
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 

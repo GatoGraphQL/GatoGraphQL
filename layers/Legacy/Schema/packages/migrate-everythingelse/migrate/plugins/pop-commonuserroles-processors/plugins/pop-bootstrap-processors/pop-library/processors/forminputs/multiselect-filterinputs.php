@@ -107,7 +107,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
             self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => SchemaDefinition::TYPE_STRING,
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => SchemaDefinition::TYPE_STRING,
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => SchemaDefinition::TYPE_STRING,
-            default => $this->getDefaultSchemaFilterInputType(),
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 

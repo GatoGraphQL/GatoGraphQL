@@ -94,7 +94,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         return match($module[1]) {
             self::MODULE_FILTERINPUT_LINKCATEGORIES => SchemaDefinition::TYPE_ID,
             self::MODULE_FILTERINPUT_LINKACCESS => SchemaDefinition::TYPE_STRING,
-            default => $this->getDefaultSchemaFilterInputType(),
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 

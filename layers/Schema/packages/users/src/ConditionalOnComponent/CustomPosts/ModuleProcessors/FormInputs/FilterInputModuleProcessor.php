@@ -54,7 +54,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             self::MODULE_FILTERINPUT_AUTHOR_IDS => SchemaDefinition::TYPE_ID,
             self::MODULE_FILTERINPUT_AUTHOR_SLUG => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS => SchemaDefinition::TYPE_ID,
-            default => $this->getDefaultSchemaFilterInputType(),
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 

@@ -100,7 +100,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
             self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES => SchemaDefinition::TYPE_ID,
             self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => SchemaDefinition::TYPE_ID,
             self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => SchemaDefinition::TYPE_ID,
-            default => $this->getDefaultSchemaFilterInputType(),
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 

@@ -86,7 +86,7 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
             self::MODULE_FILTERINPUT_SEARCH => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_HASHTAGS => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_NAME => SchemaDefinition::TYPE_STRING,
-            default => $this->getDefaultSchemaFilterInputType(),
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 

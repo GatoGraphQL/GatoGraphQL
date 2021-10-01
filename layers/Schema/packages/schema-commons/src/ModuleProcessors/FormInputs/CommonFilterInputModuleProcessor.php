@@ -140,7 +140,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_SLUG => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_DATEFORMAT => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_GMT => SchemaDefinition::TYPE_BOOL,
-            default => $this->getDefaultSchemaFilterInputType(),
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 

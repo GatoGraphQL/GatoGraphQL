@@ -70,7 +70,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
     {
         return match($module[1]) {
             self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT => SchemaDefinition::TYPE_STRING,
-            default => $this->getDefaultSchemaFilterInputType(),
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 

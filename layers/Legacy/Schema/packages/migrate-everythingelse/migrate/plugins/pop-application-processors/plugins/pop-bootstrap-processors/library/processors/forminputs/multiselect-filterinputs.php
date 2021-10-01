@@ -105,7 +105,7 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
             self::MODULE_FILTERINPUT_CATEGORIES => SchemaDefinition::TYPE_ID,
             self::MODULE_FILTERINPUT_CONTENTSECTIONS => SchemaDefinition::TYPE_ID,
             self::MODULE_FILTERINPUT_POSTSECTIONS => SchemaDefinition::TYPE_ID,
-            default => $this->getDefaultSchemaFilterInputType(),
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 

@@ -107,7 +107,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_DATES => SchemaDefinition::TYPE_DATE,
-            default => $this->getDefaultSchemaFilterInputType(),
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 

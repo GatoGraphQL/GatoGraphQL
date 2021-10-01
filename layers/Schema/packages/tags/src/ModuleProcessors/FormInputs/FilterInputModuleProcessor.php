@@ -61,7 +61,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_TAG_SLUGS => SchemaDefinition::TYPE_STRING,
             self::MODULE_FILTERINPUT_TAG_IDS => SchemaDefinition::TYPE_ID,
-            default => $this->getDefaultSchemaFilterInputType(),
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
