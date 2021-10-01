@@ -13,7 +13,7 @@ use PoPSchema\PostTagMutations\MutationResolvers\SetTagsOnPostMutationResolver;
 
 trait SetTagsOnPostObjectTypeFieldResolverTrait
 {
-    public function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface
+    public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         return $instanceManager->getInstance(PostObjectTypeResolver::class);

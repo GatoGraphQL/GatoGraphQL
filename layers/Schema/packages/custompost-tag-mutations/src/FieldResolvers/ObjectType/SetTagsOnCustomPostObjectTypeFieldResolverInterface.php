@@ -9,6 +9,6 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverI
 
 interface SetTagsOnCustomPostObjectTypeFieldResolverInterface
 {
-    public function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface;
+    public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface;
     public function getSetTagsMutationResolver(): MutationResolverInterface;
 }
