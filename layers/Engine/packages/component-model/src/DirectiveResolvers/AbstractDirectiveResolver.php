@@ -673,36 +673,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return $schemaDirectiveArgs;
     }
 
-    /**
-     * Processes the directive args:
-     *
-     * 1. Adds the version constraint (if enabled)
-     * 2. Places all entries under their own name
-     * 3. If any entry has no name, it is skipped
-     *
-     * @return array<string, array>
-     */
-    protected function getFilteredSchemaDirectiveArgs(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        array $schemaDirectiveArgs
-    ): array {
-        $this->maybeAddVersionConstraintSchemaFieldOrDirectiveArg(
-            $schemaDirectiveArgs,
-            !empty($this->getSchemaDirectiveVersion($relationalTypeResolver))
-        );
-
-        // Add the args under their name. Watch out: the name is mandatory!
-        // If it hasn't been set, then skip the entry
-        $schemaDirectiveArgsByName = [];
-        foreach ($schemaDirectiveArgs as $arg) {
-            if (!isset($arg[SchemaDefinition::ARGNAME_NAME])) {
-                continue;
-            }
-            $schemaDirectiveArgsByName[$arg[SchemaDefinition::ARGNAME_NAME]] = $arg;
-        }
-        return $schemaDirectiveArgsByName;
-    }
-
     public function resolveSchemaDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): ?string
     {
         $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($relationalTypeResolver);
@@ -1079,10 +1049,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
             }
             if ($args = $this->getSchemaDirectiveArgs($relationalTypeResolver)) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $this->getFilteredSchemaDirectiveArgs(
-                    $relationalTypeResolver,
-                    $args
+                // Add the version constraint (if enabled)
+                $this->maybeAddVersionConstraintSchemaFieldOrDirectiveArg(
+                    $args,
+                    !empty($this->getSchemaDirectiveVersion($relationalTypeResolver))
                 );
+                $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $args;
             }
             /**
              * Please notice: the version always comes from the directiveResolver, and not from the schemaDefinitionResolver
