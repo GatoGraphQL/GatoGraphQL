@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -31,15 +32,15 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
      * The `AnyScalar` type is a wildcard type,
      * representing *any* type (string, int, bool, etc)
      */
-    public function getDefaultType(): string
+    public function getDefaultConcreteTypeResolver(): ConcreteTypeResolverInterface
     {
-        return SchemaDefinition::TYPE_ANY_SCALAR;
+        return $this->anyScalarScalarTypeResolver;
     }
     /**
      * The `AnyScalar` type is a wildcard type,
      * representing *any* type (string, int, bool, etc)
      */
-    public function getDefaultTypeResolver(): ConcreteTypeResolverInterface
+    public function getDefaultInputTypeResolver(): InputTypeResolverInterface
     {
         return $this->anyScalarScalarTypeResolver;
     }

@@ -269,7 +269,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldTypeResolver($objectTypeResolver, $fieldName);
         }
-        return $this->schemaDefinitionService->getDefaultTypeResolver();
+        return $this->schemaDefinitionService->getDefaultConcreteTypeResolver();
     }
 
     /**

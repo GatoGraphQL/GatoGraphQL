@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 interface SchemaDefinitionServiceInterface
@@ -14,10 +15,10 @@ interface SchemaDefinitionServiceInterface
      * Field types, and field/directive argument types are mandatory.
      * When not defined, the default type will be used.
      */
-    public function getDefaultType(): string;
+    public function getDefaultConcreteTypeResolver(): ConcreteTypeResolverInterface;
     /**
      * Field types, and field/directive argument types are mandatory.
      * When not defined, the default type will be used.
      */
-    public function getDefaultTypeResolver(): ConcreteTypeResolverInterface;
+    public function getDefaultInputTypeResolver(): InputTypeResolverInterface;
 }

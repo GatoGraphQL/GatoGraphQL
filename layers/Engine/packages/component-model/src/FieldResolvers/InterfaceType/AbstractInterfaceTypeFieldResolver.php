@@ -211,7 +211,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldTypeResolver($fieldName);
         }
-        return $this->schemaDefinitionService->getDefaultTypeResolver();
+        return $this->schemaDefinitionService->getDefaultConcreteTypeResolver();
     }
 
     /**

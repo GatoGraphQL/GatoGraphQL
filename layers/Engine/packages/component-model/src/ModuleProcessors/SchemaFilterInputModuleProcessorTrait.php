@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 trait SchemaFilterInputModuleProcessorTrait
 {
-    public function getSchemaFilterInputType(array $module): string
+    public function getSchemaFilterInputType(array $module): InputTypeResolverInterface
     {
         return $this->getDefaultSchemaFilterInputType();
     }
-    protected function getDefaultSchemaFilterInputType(): string
+    protected function getDefaultSchemaFilterInputType(): InputTypeResolverInterface
     {
         $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        return $schemaDefinitionService->getDefaultType();
+        return $schemaDefinitionService->getDefaultInputTypeResolver();
     }
     public function getSchemaFilterInputDescription(array $module): ?string
     {
