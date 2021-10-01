@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\ModuleProcessors\FormInputs;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
@@ -51,7 +52,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
+    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_NAME => SchemaDefinition::TYPE_STRING,

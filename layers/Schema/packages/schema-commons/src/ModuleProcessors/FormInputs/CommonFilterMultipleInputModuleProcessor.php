@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\ModuleProcessors\FormInputs;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
@@ -103,7 +104,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
         }
     }
 
-    public function getSchemaFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
+    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_DATES => SchemaDefinition::TYPE_DATE,

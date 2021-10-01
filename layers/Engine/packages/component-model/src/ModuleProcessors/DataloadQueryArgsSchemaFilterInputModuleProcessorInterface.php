@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+
 interface DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
-    public function getSchemaFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface;
     public function getSchemaFilterInputDescription(array $module): ?string;
     public function getSchemaFilterInputDeprecationDescription(array $module): ?string;
     public function getSchemaFilterInputIsArrayType(array $module): bool;
