@@ -12,6 +12,17 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
 
     public const MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES = 'filtercomponent-selectabletypeahead-profiles';
 
+    protected \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver $idScalarTypeResolver;
+    protected \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver $stringScalarTypeResolver;
+
+    public function autowirePoP_Module_Processor_UserSelectableTypeaheadFilterInputs(
+        \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver $idScalarTypeResolver,
+        \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver $stringScalarTypeResolver,
+    ): void {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+
     public function getModulesToProcess(): array
     {
         return array(

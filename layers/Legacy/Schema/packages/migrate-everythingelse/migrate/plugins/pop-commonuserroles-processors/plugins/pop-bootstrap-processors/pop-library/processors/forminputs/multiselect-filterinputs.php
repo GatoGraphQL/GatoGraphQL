@@ -14,6 +14,17 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
     public const MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES = 'filterinput-organizationcategories';
     public const MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES = 'filterinput-organizationtypes';
 
+    protected \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver $idScalarTypeResolver;
+    protected \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver $stringScalarTypeResolver;
+
+    public function autowireGD_URE_Module_Processor_MultiSelectFilterInputs(
+        \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver $idScalarTypeResolver,
+        \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver $stringScalarTypeResolver,
+    ): void {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+
     public function getModulesToProcess(): array
     {
         return array(

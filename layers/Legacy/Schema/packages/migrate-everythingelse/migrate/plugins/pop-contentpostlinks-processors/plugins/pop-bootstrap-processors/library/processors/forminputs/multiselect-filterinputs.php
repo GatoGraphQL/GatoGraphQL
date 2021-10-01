@@ -12,6 +12,17 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
     public const MODULE_FILTERINPUT_LINKCATEGORIES = 'filterinput-linkcategories';
     public const MODULE_FILTERINPUT_LINKACCESS = 'filterinput-linkaccess';
 
+    protected \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver $idScalarTypeResolver;
+    protected \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver $stringScalarTypeResolver;
+
+    public function autowirePoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputs(
+        \PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver $idScalarTypeResolver,
+        \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver $stringScalarTypeResolver,
+    ): void {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+
     public function getModulesToProcess(): array
     {
         return array(
