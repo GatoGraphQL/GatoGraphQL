@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\Hooks;
 
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\FieldResolvers\ObjectType\HookNames;
+use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
-use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class CustomPostMutationResolverHookSet extends AbstractHookSet
+abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
     protected MediaObjectTypeResolver $mediaTypeResolver;
     protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
     protected IDScalarTypeResolver $idScalarTypeResolver;
 
     #[Required]
-    public function autowireCustomPostMutationResolverHookSet(
+    public function autowireAbstractCustomPostMutationResolverHookSet(
         MediaObjectTypeResolver $mediaTypeResolver,
         CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
         IDScalarTypeResolver $idScalarTypeResolver,
@@ -35,10 +35,16 @@ class CustomPostMutationResolverHookSet extends AbstractHookSet
     protected function init(): void
     {
         $this->hooksAPI->addFilter(
-            SchemaDefinitionHelpers::HOOK_UPDATE_SCHEMA_FIELD_ARGS,
-            array($this, 'getSchemaFieldArgs'),
+            HookNames::SCHEMA_FIELD_ARG_NAME_RESOLVERS,
+            array($this, 'maybeAddSchemaFieldArgNameResolvers'),
             10,
-            3
+            4
+        );
+        $this->hooksAPI->addFilter(
+            HookNames::SCHEMA_FIELD_ARG_DESCRIPTION,
+            array($this, 'maybeAddSchemaFieldArgDescription'),
+            10,
+            5
         );
         $this->hooksAPI->addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
@@ -48,21 +54,41 @@ class CustomPostMutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    public function getSchemaFieldArgs(
-        array $fieldArgs,
+    public function maybeAddSchemaFieldArgNameResolvers(
+        array $schemaFieldArgNameResolvers,
+        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
+        string $fieldName,
     ): array {
-        $fieldArgs[] = [
-            SchemaDefinition::ARGNAME_NAME => MutationInputProperties::FEATUREDIMAGE_ID,
-            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ID,
-            SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                $this->translationAPI->__('The ID of the featured image (of type %s)', 'custompost-mutations'),
-                $this->mediaTypeResolver->getMaybeNamespacedTypeName()
-            ),
-        ];
-        return $fieldArgs;
+        // Only for the specific combinations of Type and fieldName
+        if (!$this->mustAddSchemaFieldArgs($objectTypeResolver, $fieldName)) {
+            return $schemaFieldArgNameResolvers;
+        }
+        $schemaFieldArgNameResolvers[MutationInputProperties::FEATUREDIMAGE_ID] = $this->idScalarTypeResolver;
+        return $schemaFieldArgNameResolvers;
     }
+
+    public function maybeAddSchemaFieldArgDescription(
+        ?string $schemaFieldArgDescription,
+        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        string $fieldArgName,
+    ): ?string {
+        // Only for the newly added fieldArgName
+        if ($fieldArgName !== MutationInputProperties::FEATUREDIMAGE_ID || !$this->mustAddSchemaFieldArgs($objectTypeResolver, $fieldName)) {
+            return $schemaFieldArgDescription;
+        }
+        return sprintf(
+            $this->translationAPI->__('The ID of the featured image (of type %s)', 'custompost-mutations'),
+            $this->mediaTypeResolver->getMaybeNamespacedTypeName()
+        );
+    }
+
+    abstract protected function mustAddSchemaFieldArgs(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+    ): bool;
 
     /**
      * If entry "featuredImageID" has an ID, set it. If it is null, remove it
