@@ -658,16 +658,47 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return null;
     }
 
+    /**
+     * Consolidation of the schema directive arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
     final public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $schemaDirectiveArgs = [];
-        foreach ($this->getSchemaDirectiveArgNameResolvers($relationalTypeResolver) as $directiveArgName => $directiveArgInputTypeResolver) {
+        /**
+         * Allow to override/extend the inputs (eg: module "Post Categories" can add
+         * input "categories" to field "Root.createPost")
+         */
+        $schemaDirectiveArgNameResolvers = $this->hooksAPI->applyFilters(
+            HookNames::SCHEMA_DIRECTIVE_ARG_NAME_RESOLVERS,
+            $this->getSchemaDirectiveArgNameResolvers($relationalTypeResolver),
+            $relationalTypeResolver
+        );
+        foreach ($schemaDirectiveArgNameResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
+            $schemaDirectiveArgDescription = $this->hooksAPI->applyFilters(
+                HookNames::SCHEMA_DIRECTIVE_ARG_DESCRIPTION,
+                $this->getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+                $relationalTypeResolver,
+                $directiveArgName,
+            );
+            $schemaDirectiveArgDefaultValue = $this->hooksAPI->applyFilters(
+                HookNames::SCHEMA_DIRECTIVE_ARG_DEFAULT_VALUE,
+                $this->getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
+                $relationalTypeResolver,
+                $directiveArgName,
+            );
+            $schemaDirectiveArgTypeModifiers = $this->hooksAPI->applyFilters(
+                HookNames::SCHEMA_DIRECTIVE_ARG_TYPE_MODIFIERS,
+                $this->getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
+                $relationalTypeResolver,
+                $directiveArgName,
+            );
             $schemaDirectiveArgs[$directiveArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
                 $directiveArgName,
                 $directiveArgInputTypeResolver,
-                $this->getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
-                $this->getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
-                $this->getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName)
+                $schemaDirectiveArgDescription,
+                $schemaDirectiveArgDefaultValue,
+                $schemaDirectiveArgTypeModifiers,
             );
         }
         return $schemaDirectiveArgs;
