@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
-interface EnumTypeResolverInterface extends ConcreteTypeResolverInterface
+interface EnumTypeResolverInterface extends ConcreteTypeResolverInterface, InputTypeResolverInterface
 {
     /**
      * The values in the enum
