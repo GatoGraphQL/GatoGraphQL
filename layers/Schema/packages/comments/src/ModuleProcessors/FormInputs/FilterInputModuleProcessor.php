@@ -9,8 +9,6 @@ use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
@@ -143,23 +141,5 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             self::MODULE_FILTERINPUT_COMMENT_STATUS => $this->translationAPI->__('Status of the comment', 'comments'),
             default => null,
         };
-    }
-
-    public function addSchemaDefinitionForFilter(array &$schemaDefinition, array $module): void
-    {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_COMMENT_TYPES:
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $this->commentTypeEnumTypeResolver->getTypeName();
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $this->commentTypeEnumTypeResolver
-                );
-                break;
-            case self::MODULE_FILTERINPUT_COMMENT_STATUS:
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $this->commentStatusEnumTypeResolver->getTypeName();
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $this->commentStatusEnumTypeResolver
-                );
-                break;
-        }
     }
 }

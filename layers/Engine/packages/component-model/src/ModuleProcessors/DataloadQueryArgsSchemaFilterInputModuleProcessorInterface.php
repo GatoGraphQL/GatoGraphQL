@@ -13,5 +13,4 @@ interface DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
     public function getSchemaFilterInputDeprecationDescription(array $module): ?string;
     public function getSchemaFilterInputDefaultValue(array $module): mixed;
     public function getSchemaFilterInputTypeModifiers(array $module): ?int;
-    public function addSchemaDefinitionForFilter(array &$schemaDefinition, array $module): void;
 }

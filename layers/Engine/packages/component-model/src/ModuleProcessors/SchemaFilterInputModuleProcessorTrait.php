@@ -34,8 +34,4 @@ trait SchemaFilterInputModuleProcessorTrait
     {
         return null;
     }
-    public function addSchemaDefinitionForFilter(array &$schemaDefinition, array $module): void
-    {
-        // Override
-    }
 }

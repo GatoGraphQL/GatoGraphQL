@@ -9,8 +9,6 @@ use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -111,18 +109,6 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => CustomPostUnionTypeHelpers::getTargetObjectTypeResolverCustomPostTypes(),
             default => null,
         };
-    }
-
-    public function addSchemaDefinitionForFilter(array &$schemaDefinition, array $module): void
-    {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS:
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $this->customPostStatusEnumTypeResolver->getTypeName();
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $this->customPostStatusEnumTypeResolver
-                );
-                break;
-        }
     }
 
     public function getSchemaFilterInputDescription(array $module): ?string

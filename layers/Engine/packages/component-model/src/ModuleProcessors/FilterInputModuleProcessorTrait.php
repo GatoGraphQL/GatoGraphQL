@@ -51,7 +51,6 @@ trait FilterInputModuleProcessorTrait
             $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
             $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
         }
-        $filterSchemaDefinitionResolver->addSchemaDefinitionForFilter($schemaDefinition, $module);
         
         return $schemaDefinition;
     }
