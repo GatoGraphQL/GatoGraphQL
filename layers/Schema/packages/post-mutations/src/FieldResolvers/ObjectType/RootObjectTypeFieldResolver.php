@@ -67,18 +67,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            'createPost' => $this->getCreateOrUpdateCustomPostSchemaFieldArgNameResolvers(
-                $objectTypeResolver,
-                $fieldName,
-                false,
-                $this->getFieldTypeResolver($objectTypeResolver, $fieldName)
-            ),
-            'updatePost' => $this->getCreateOrUpdateCustomPostSchemaFieldArgNameResolvers(
-                $objectTypeResolver,
-                $fieldName,
-                true,
-                $this->getFieldTypeResolver($objectTypeResolver, $fieldName)
-            ),
+            'createPost' => $this->getCreateOrUpdateCustomPostSchemaFieldArgNameResolvers(false),
+            'updatePost' => $this->getCreateOrUpdateCustomPostSchemaFieldArgNameResolvers(true),
             default => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }

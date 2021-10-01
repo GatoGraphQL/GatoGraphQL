@@ -41,12 +41,9 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
     }
 
     private function getCreateOrUpdateCustomPostSchemaFieldArgNameResolvers(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
         bool $addCustomPostID,
-        ?ConcreteTypeResolverInterface $concreteTypeResolver = null,
     ): array {
-        $schemaFieldArgNameResolvers = array_merge(
+        return array_merge(
             $addCustomPostID ? [
                 MutationInputProperties::ID => $this->idScalarTypeResolver,
             ] : [],
@@ -55,13 +52,6 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
                 MutationInputProperties::CONTENT => $this->stringScalarTypeResolver,
                 MutationInputProperties::STATUS => $this->customPostStatusEnumTypeResolver,
             ]
-        );
-        return $this->hooksAPI->applyFilters(
-            SchemaDefinitionHelpers::HOOK_UPDATE_SCHEMA_FIELD_ARGS,
-            $schemaFieldArgNameResolvers,
-            $objectTypeResolver,
-            $fieldName,
-            $concreteTypeResolver
         );
     }
     
