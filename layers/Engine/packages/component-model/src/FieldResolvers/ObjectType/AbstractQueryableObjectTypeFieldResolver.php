@@ -46,7 +46,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
     public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
-            return $this->getFilterSchemaFieldArgDescription($filterDataloadingModule);
+            return $this->getFilterSchemaFieldArgDescription($filterDataloadingModule, $fieldArgName);
         }
         return parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName);
     }
@@ -54,7 +54,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
     public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
-            return $this->getFilterSchemaFieldArgDefaultValue($filterDataloadingModule);
+            return $this->getFilterSchemaFieldArgDefaultValue($filterDataloadingModule, $fieldArgName);
         }
         return parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
     }
@@ -62,7 +62,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
     public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?int
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
-            return $this->getFilterSchemaFieldArgTypeModifiers($filterDataloadingModule);
+            return $this->getFilterSchemaFieldArgTypeModifiers($filterDataloadingModule, $fieldArgName);
         }
         return parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
     }

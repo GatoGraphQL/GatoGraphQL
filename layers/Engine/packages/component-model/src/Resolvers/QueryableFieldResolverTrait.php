@@ -36,49 +36,55 @@ trait QueryableFieldResolverTrait
         return $schemaFieldArgNameResolvers;
     }
 
-    protected function getFilterSchemaFieldArgDescription(array $filterDataloadingModule): array
+    protected function getFilterSchemaFieldArgDescription(array $filterDataloadingModule, string $fieldArgName): ?string
     {
         /** @var FilterInputContainerModuleProcessorInterface */
         $filterDataModuleProcessor = $this->moduleProcessorManager->getProcessor($filterDataloadingModule);
         $filterQueryArgsModules = $filterDataModuleProcessor->getDataloadQueryArgsFilteringModules($filterDataloadingModule);
-        $schemaFieldArgNameResolvers = [];
         foreach ($filterQueryArgsModules as $module) {
             /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
             $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
             $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
-            $schemaFieldArgNameResolvers[$filterInputName] = $dataloadQueryArgsFilterInputModuleProcessor->getSchemaFilterInputDescription($module);
+            if ($filterInputName !== $fieldArgName) {
+                continue;
+            }
+            return $dataloadQueryArgsFilterInputModuleProcessor->getSchemaFilterInputDescription($module);
         }
-        return $schemaFieldArgNameResolvers;
+        return null;
     }
 
-    protected function getFilterSchemaFieldArgDefaultValue(array $filterDataloadingModule): array
+    protected function getFilterSchemaFieldArgDefaultValue(array $filterDataloadingModule, string $fieldArgName): mixed
     {
         /** @var FilterInputContainerModuleProcessorInterface */
         $filterDataModuleProcessor = $this->moduleProcessorManager->getProcessor($filterDataloadingModule);
         $filterQueryArgsModules = $filterDataModuleProcessor->getDataloadQueryArgsFilteringModules($filterDataloadingModule);
-        $schemaFieldArgNameResolvers = [];
         foreach ($filterQueryArgsModules as $module) {
             /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
             $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
             $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
-            $schemaFieldArgNameResolvers[$filterInputName] = $dataloadQueryArgsFilterInputModuleProcessor->getSchemaFilterInputDefaultValue($module);
+            if ($filterInputName !== $fieldArgName) {
+                continue;
+            }
+            return $dataloadQueryArgsFilterInputModuleProcessor->getSchemaFilterInputDefaultValue($module);
         }
-        return $schemaFieldArgNameResolvers;
+        return null;
     }
 
-    protected function getFilterSchemaFieldArgTypeModifiers(array $filterDataloadingModule): array
+    protected function getFilterSchemaFieldArgTypeModifiers(array $filterDataloadingModule, string $fieldArgName): ?int
     {
         /** @var FilterInputContainerModuleProcessorInterface */
         $filterDataModuleProcessor = $this->moduleProcessorManager->getProcessor($filterDataloadingModule);
         $filterQueryArgsModules = $filterDataModuleProcessor->getDataloadQueryArgsFilteringModules($filterDataloadingModule);
-        $schemaFieldArgNameResolvers = [];
         foreach ($filterQueryArgsModules as $module) {
             /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
             $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
             $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
-            $schemaFieldArgNameResolvers[$filterInputName] = $dataloadQueryArgsFilterInputModuleProcessor->getSchemaFilterInputTypeModifiers($module);
+            if ($filterInputName !== $fieldArgName) {
+                continue;
+            }
+            return $dataloadQueryArgsFilterInputModuleProcessor->getSchemaFilterInputTypeModifiers($module);
         }
-        return $schemaFieldArgNameResolvers;
+        return null;
     }
 
     /**
