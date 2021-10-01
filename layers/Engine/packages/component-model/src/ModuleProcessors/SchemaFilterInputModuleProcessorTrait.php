@@ -26,6 +26,14 @@ trait SchemaFilterInputModuleProcessorTrait
     {
         return null;
     }
+    public function getSchemaFilterInputDefaultValue(array $module): mixed
+    {
+        return null;
+    }
+    public function getSchemaFilterInputMandatory(array $module): bool
+    {
+        return false;
+    }
     public function getSchemaFilterInputIsArrayType(array $module): bool
     {
         return false;
@@ -41,14 +49,6 @@ trait SchemaFilterInputModuleProcessorTrait
     public function getSchemaFilterInputIsNonNullableItemsInArrayOfArraysType(array $module): bool
     {
         return false;
-    }
-    public function getSchemaFilterInputMandatory(array $module): bool
-    {
-        return false;
-    }
-    public function getSchemaFilterInputDefaultValue(array $module): mixed
-    {
-        return null;
     }
     public function addSchemaDefinitionForFilter(array &$schemaDefinition, array $module): void
     {
