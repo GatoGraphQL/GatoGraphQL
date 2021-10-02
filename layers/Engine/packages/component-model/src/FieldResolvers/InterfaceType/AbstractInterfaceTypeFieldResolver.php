@@ -137,6 +137,27 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return null;
     }
 
+    /**
+     * By default, the field is a scalar of type AnyScalar
+     */
+    public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getFieldTypeResolver($fieldName);
+        }
+        return $this->schemaDefinitionService->getDefaultConcreteTypeResolver();
+    }
+
+    public function getFieldDescription(string $fieldName): ?string
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getFieldDescription($fieldName);
+        }
+        return null;
+    }
+
     public function getFieldTypeModifiers(string $fieldName): ?int
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
@@ -146,11 +167,11 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return null;
     }
 
-    public function getFieldDescription(string $fieldName): ?string
+    public function getFieldDeprecationDescription(string $fieldName, array $fieldArgs = []): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldDescription($fieldName);
+            return $schemaDefinitionResolver->getFieldDeprecationDescription($fieldName, $fieldArgs);
         }
         return null;
     }
@@ -194,25 +215,43 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return 0;
     }
 
-    public function getFieldDeprecationDescription(string $fieldName, array $fieldArgs = []): ?string
+    /**
+     * @return array<string, InputTypeResolverInterface>
+     */
+    public function getSchemaFieldArgNameResolvers(string $fieldName): array
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldDeprecationDescription($fieldName, $fieldArgs);
+            return $schemaDefinitionResolver->getSchemaFieldArgNameResolvers($fieldName);
+        }
+        return [];
+    }
+
+    public function getSchemaFieldArgDescription(string $fieldName, string $fieldArgName): ?string
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getSchemaFieldArgDescription($fieldName, $fieldArgName);
         }
         return null;
     }
 
-    /**
-     * By default, the field is a scalar of type AnyScalar
-     */
-    public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
+    public function getSchemaFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldTypeResolver($fieldName);
+            return $schemaDefinitionResolver->getSchemaFieldArgDefaultValue($fieldName, $fieldArgName);
         }
-        return $this->schemaDefinitionService->getDefaultConcreteTypeResolver();
+        return null;
+    }
+
+    public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getSchemaFieldArgTypeModifiers($fieldName, $fieldArgName);
+        }
+        return 0;
     }
 
     /**
