@@ -753,7 +753,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return !empty($this->getSchemaFieldVersion($objectTypeResolver, $fieldName));
     }
 
-    public function resolveSchemaValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
+    public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $warnings = [];
         if (Environment::enableSemanticVersionConstraints()) {

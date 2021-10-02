@@ -1757,7 +1757,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
         // If the result fieldArgValue is a field, then validate it and resolve it
         if ($this->isFieldArgumentValueAField($fieldArgValue)) {
-            return $objectTypeResolver->resolveSchemaValidationWarningDescriptions($fieldArgValue, $variables);
+            return $objectTypeResolver->resolveFieldValidationWarningDescriptions($fieldArgValue, $variables);
         }
 
         return [];
@@ -1774,7 +1774,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
         // If the result fieldArgValue is a field, then validate it and resolve it
         if ($this->isFieldArgumentValueAField($fieldArgValue)) {
-            return $objectTypeResolver->resolveSchemaDeprecationDescriptions($fieldArgValue, $variables);
+            return $objectTypeResolver->resolveFieldDeprecationDescriptions($fieldArgValue, $variables);
         }
 
         return [];

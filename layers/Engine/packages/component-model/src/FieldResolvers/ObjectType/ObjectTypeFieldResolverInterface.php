@@ -79,7 +79,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ?MutationResolverInterface;
-    public function resolveSchemaValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array;
+    public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array;
     /**
      * @param array<string, mixed> $fieldArgs
      */

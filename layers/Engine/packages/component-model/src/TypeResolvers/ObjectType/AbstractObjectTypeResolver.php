@@ -193,7 +193,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ];
     }
 
-    final public function resolveSchemaValidationWarningDescriptions(string $field, array &$variables = null): array
+    final public function resolveFieldValidationWarningDescriptions(string $field, array &$variables = null): array
     {
         // Get the value from a fieldResolver, from the first one that resolves it
         if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
@@ -204,7 +204,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $schemaErrors,
                 $schemaWarnings,
             ) = $this->dissectFieldForSchema($field);
-            if ($maybeWarnings = $objectTypeFieldResolvers[0]->resolveSchemaValidationWarningDescriptions($this, $fieldName, $fieldArgs)) {
+            if ($maybeWarnings = $objectTypeFieldResolvers[0]->resolveFieldValidationWarningDescriptions($this, $fieldName, $fieldArgs)) {
                 foreach ($maybeWarnings as $warning) {
                     $schemaWarnings[] = [
                         Tokens::PATH => [$field],
@@ -218,7 +218,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return [];
     }
 
-    final public function resolveSchemaDeprecationDescriptions(string $field, array &$variables = null): array
+    final public function resolveFieldDeprecationDescriptions(string $field, array &$variables = null): array
     {
         // Get the value from a fieldResolver, from the first one that resolves it
         if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {

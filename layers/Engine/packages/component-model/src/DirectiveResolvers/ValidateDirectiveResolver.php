@@ -74,13 +74,13 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
             );
             $success = false;
         }
-        if ($schemaValidationWarnings = $objectTypeResolver->resolveSchemaValidationWarningDescriptions($field, $variables)) {
+        if ($schemaValidationWarnings = $objectTypeResolver->resolveFieldValidationWarningDescriptions($field, $variables)) {
             $schemaWarnings = array_merge(
                 $schemaWarnings,
                 $schemaValidationWarnings
             );
         }
-        if ($schemaValidationDeprecations = $objectTypeResolver->resolveSchemaDeprecationDescriptions($field, $variables)) {
+        if ($schemaValidationDeprecations = $objectTypeResolver->resolveFieldDeprecationDescriptions($field, $variables)) {
             $schemaDeprecations = array_merge(
                 $schemaDeprecations,
                 $schemaValidationDeprecations

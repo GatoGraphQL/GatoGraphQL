@@ -1644,8 +1644,8 @@ class Engine implements EngineInterface
         // Executing the following query will produce duplicates on SchemaWarnings:
         // ?query=posts(limit:3.5).title,posts(limit:extract(posts(limit:4.5),saraza)).title
         // This is unavoidable, since add schemaWarnings (and, correspondingly, errors and deprecations) in functions
-        // `resolveSchemaValidationWarningDescriptions` and `resolveValue` from the AbstractObjectTypeResolver
-        // Ideally, doing it in `resolveValue` is not needed, since it already went through the validation in `resolveSchemaValidationWarningDescriptions`, so it's a duplication
+        // `resolveFieldValidationWarningDescriptions` and `resolveValue` from the AbstractObjectTypeResolver
+        // Ideally, doing it in `resolveValue` is not needed, since it already went through the validation in `resolveFieldValidationWarningDescriptions`, so it's a duplication
         // However, when having composed fields, the warnings are caught only in `resolveValue`, hence we need to add it there too
         // Then, we will certainly have duplicates. Remove them now
         // Because these are arrays of arrays, we use the method taken from https://stackoverflow.com/a/2561283
