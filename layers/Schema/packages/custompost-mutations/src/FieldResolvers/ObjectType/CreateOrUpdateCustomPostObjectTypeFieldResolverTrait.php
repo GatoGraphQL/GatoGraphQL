@@ -63,12 +63,6 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
         };
     }
     
-    private function getCreateOrUpdateCustomPostSchemaFieldArgDefaultValue(
-        string $fieldArgName,
-    ): mixed {
-        return null;
-    }
-    
     private function getCreateOrUpdateCustomPostSchemaFieldArgTypeModifiers(
         string $fieldArgName,
     ): ?int {

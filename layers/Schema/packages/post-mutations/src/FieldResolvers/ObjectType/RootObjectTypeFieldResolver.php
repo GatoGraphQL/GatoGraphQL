@@ -84,17 +84,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
     
-    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
-    {
-        return match ($fieldName) {
-            'createPost',
-            'updatePost'
-                => $this->getCreateOrUpdateCustomPostSchemaFieldArgDefaultValue($fieldArgName),
-            default
-                => parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
-        };
-    }
-    
     public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ($fieldName) {

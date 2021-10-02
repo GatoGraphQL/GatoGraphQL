@@ -43,14 +43,6 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         };
     }
     
-    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
-    {
-        return match ($fieldName) {
-            'update' => $this->getCreateOrUpdateCustomPostSchemaFieldArgDefaultValue($fieldArgName),
-            default => parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
-        };
-    }
-    
     public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ($fieldName) {
