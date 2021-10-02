@@ -139,7 +139,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      */
     public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool;
 
-    public function resolveSchemaValidationErrorDescriptions(
+    public function resolveFieldValidationErrorDescriptions(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs = []

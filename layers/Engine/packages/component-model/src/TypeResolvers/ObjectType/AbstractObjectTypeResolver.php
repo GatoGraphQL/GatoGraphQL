@@ -133,7 +133,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return false;
     }
 
-    final public function resolveSchemaValidationErrorDescriptions(string $field, array &$variables = null): array
+    final public function resolveFieldValidationErrorDescriptions(string $field, array &$variables = null): array
     {
         // Get the value from a fieldResolver, from the first one that resolves it
         list(
@@ -147,7 +147,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return $schemaErrors;
         }
         if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
-            if ($maybeErrors = $objectTypeFieldResolvers[0]->resolveSchemaValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
+            if ($maybeErrors = $objectTypeFieldResolvers[0]->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
                 foreach ($maybeErrors as $error) {
                     $schemaErrors[] = [
                         Tokens::PATH => [$field],
@@ -238,7 +238,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 ];
             }
             // Check for deprecations in the enums
-            if ($maybeDeprecations = $objectTypeFieldResolvers[0]->resolveSchemaValidationDeprecationDescriptions($this, $fieldName, $fieldArgs)) {
+            if ($maybeDeprecations = $objectTypeFieldResolvers[0]->resolveFieldValidationDeprecationDescriptions($this, $fieldName, $fieldArgs)) {
                 foreach ($maybeDeprecations as $deprecation) {
                     $schemaDeprecations[] = [
                         Tokens::PATH => [$field],
@@ -379,10 +379,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 // Also send the typeResolver along, as to get the id of the $object being passed
                 if ($objectTypeFieldResolver->resolveCanProcessObject($this, $object, $fieldName, $fieldArgs)) {
                     if ($validateSchemaOnObject) {
-                        if ($maybeErrors = $objectTypeFieldResolver->resolveSchemaValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
+                        if ($maybeErrors = $objectTypeFieldResolver->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
                             return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $maybeErrors);
                         }
-                        if ($maybeDeprecations = $objectTypeFieldResolver->resolveSchemaValidationDeprecationDescriptions($this, $fieldName, $fieldArgs)) {
+                        if ($maybeDeprecations = $objectTypeFieldResolver->resolveFieldValidationDeprecationDescriptions($this, $fieldName, $fieldArgs)) {
                             $id = $this->getID($object);
                             foreach ($maybeDeprecations as $deprecation) {
                                 $objectDeprecations[(string)$id][] = [

@@ -1740,7 +1740,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             }
 
             // If it reached here, it's a field! Validate it, or show an error
-            return $objectTypeResolver->resolveSchemaValidationErrorDescriptions($fieldArgValue, $variables);
+            return $objectTypeResolver->resolveFieldValidationErrorDescriptions($fieldArgValue, $variables);
         }
 
         return [];
