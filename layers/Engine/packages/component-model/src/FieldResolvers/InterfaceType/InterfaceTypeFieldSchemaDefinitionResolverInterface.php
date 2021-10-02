@@ -19,7 +19,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
     public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string;
     public function getFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed;
     public function getFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int;
-    public function getSchemaFieldDeprecationDescription(string $fieldName, array $fieldArgs = []): ?string;
+    public function getFieldDeprecationDescription(string $fieldName, array $fieldArgs = []): ?string;
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface;
     /**
      * Validate the constraints for a field argument

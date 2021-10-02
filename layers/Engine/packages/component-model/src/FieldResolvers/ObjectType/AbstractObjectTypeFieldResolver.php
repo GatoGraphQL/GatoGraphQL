@@ -347,11 +347,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return $schemaFieldArgs;
     }
 
-    public function getSchemaFieldDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function getFieldDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgs);
+            return $schemaDefinitionResolver->getFieldDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgs);
         }
         return null;
     }
@@ -698,7 +698,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($description = $this->getSchemaFieldDescription($objectTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
         }
-        if ($deprecationDescription = $this->getSchemaFieldDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgs)) {
+        if ($deprecationDescription = $this->getFieldDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgs)) {
             $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
             $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
         }
