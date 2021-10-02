@@ -129,7 +129,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         };
     }
 
-    public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
             'concat' => [
@@ -182,11 +182,11 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'titleCase' => [
                 'text' => $this->stringScalarTypeResolver,
             ],
-            default => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
     
-    public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
             ['concat' => 'values'] => $this->translationAPI->__('Strings to concatenate', 'function-fields'),
@@ -213,11 +213,11 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             ['upperCase' => 'text'],
             ['lowerCase' => 'text'],
             ['titleCase' => 'text'] => $this->translationAPI->__('The string to be transformed', 'function-fields'),
-            default => parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
     
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
             ['concat' => 'values'],
@@ -245,7 +245,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             ['lowerCase' => 'text'],
             ['titleCase' => 'text']
                 => SchemaTypeModifiers::IS_ARRAY,
-            default => parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 

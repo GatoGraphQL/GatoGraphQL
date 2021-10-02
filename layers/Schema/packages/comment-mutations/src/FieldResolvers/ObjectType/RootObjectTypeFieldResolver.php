@@ -57,32 +57,32 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         };
     }
 
-    public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
             'addCommentToCustomPost' => $this->getAddCommentToCustomPostSchemaFieldArgNameResolvers(true, true),
             'replyComment' => $this->getAddCommentToCustomPostSchemaFieldArgNameResolvers(false, true),
-            default => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
     
-    public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldName) {
             'addCommentToCustomPost',
             'replyComment'
                 => $this->getAddCommentToCustomPostSchemaFieldArgDescription($fieldArgName),
             default
-                => parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+                => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
     
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ($fieldName) {
             'addCommentToCustomPost' => $this->getAddCommentToCustomPostSchemaFieldArgTypeModifiers($fieldArgName),
             'replyComment' => $this->getAddCommentToCustomPostSchemaFieldArgTypeModifiers($fieldArgName, true),
-            default => parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 

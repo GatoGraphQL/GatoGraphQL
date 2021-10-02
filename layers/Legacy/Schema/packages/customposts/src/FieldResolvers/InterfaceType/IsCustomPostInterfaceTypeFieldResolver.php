@@ -73,17 +73,17 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
             default => parent::getSchemaFieldDescription($fieldName),
         };
     }
-    public function getSchemaFieldArgNameResolvers(string $fieldName): array
+    public function getFieldArgNameResolvers(string $fieldName): array
     {
         return match ($fieldName) {
             'datetime' => [
                 'format' => $this->stringScalarTypeResolver,
             ],
-            default => parent::getSchemaFieldArgNameResolvers($fieldName),
+            default => parent::getFieldArgNameResolvers($fieldName),
         };
     }
     
-    public function getSchemaFieldArgDescription(string $fieldName, string $fieldArgName): ?string
+    public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
             ['datetime' => 'format'] => sprintf(
@@ -92,7 +92,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
                 'j M, H:i',
                 'j M Y, H:i'
             ),
-            default => parent::getSchemaFieldArgDescription($fieldName, $fieldArgName),
+            default => parent::getFieldArgDescription($fieldName, $fieldArgName),
         };
     }
 }

@@ -72,29 +72,29 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
     /**
      * Change the type from mixed to string
      */
-    public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
             'echoStr' => [
                 'value' => $this->stringScalarTypeResolver,
             ],
-            default => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
     
-    public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
             ['echoStr' => 'value'] => $this->translationAPI->__('The input string to be echoed back', 'graphql-api'),
-            default => parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
     
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
             ['echoStr' => 'value'] => SchemaTypeModifiers::MANDATORY,
-            default => parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 

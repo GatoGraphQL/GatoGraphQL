@@ -106,7 +106,7 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         };
     }
 
-    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         switch ($fieldName) {
             case 'users':
@@ -120,7 +120,7 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
                 }
                 break;
         }
-        return parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
+        return parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
     }
 
     /**

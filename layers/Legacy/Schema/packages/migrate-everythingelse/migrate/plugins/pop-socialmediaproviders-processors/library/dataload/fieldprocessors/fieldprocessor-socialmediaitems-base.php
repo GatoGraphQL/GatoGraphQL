@@ -56,29 +56,29 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
         };
     }
 
-    public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
             'shareURL' => [
                 'provider' => $this->socialMediaProviderEnumTypeResolver,
             ],
-            default => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
     
-    public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
             ['shareURL' => 'provider'] => $this->translationAPI->__('What provider service to get the URL from', ''),
-            default => parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
     
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
             ['shareURL' => 'provider'] => SchemaTypeModifiers::MANDATORY,
-            default => parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 

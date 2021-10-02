@@ -205,20 +205,20 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * @return array<string, InputTypeResolverInterface>
      */
-    public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName);
+            return $schemaDefinitionResolver->getFieldArgNameResolvers($objectTypeResolver, $fieldName);
         }
         return [];
     }
     
-    public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName);
+            return $schemaDefinitionResolver->getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName);
         }
         // Version constraint (possibly enabled)
         if ($fieldArgName === SchemaDefinition::ARGNAME_VERSION_CONSTRAINT) {
@@ -227,20 +227,20 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
     
-    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
+            return $schemaDefinitionResolver->getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
         }
         return null;
     }
     
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
+            return $schemaDefinitionResolver->getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
         }
         return 0;
     }
@@ -258,7 +258,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          */
         $schemaFieldArgNameResolvers = $this->hooksAPI->applyFilters(
             HookNames::SCHEMA_FIELD_ARG_NAME_RESOLVERS,
-            $this->getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            $this->getFieldArgNameResolvers($objectTypeResolver, $fieldName),
             $this,
             $objectTypeResolver,
             $fieldName,
@@ -280,7 +280,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             foreach ($schemaFieldArgNameResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
                 $schemaFieldArgDescription = $this->hooksAPI->applyFilters(
                     HookNames::SCHEMA_FIELD_ARG_DESCRIPTION,
-                    $this->getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+                    $this->getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
                     $this,
                     $objectTypeResolver,
                     $fieldName,
@@ -288,7 +288,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 );
                 $schemaFieldArgDefaultValue = $this->hooksAPI->applyFilters(
                     HookNames::SCHEMA_FIELD_ARG_DEFAULT_VALUE,
-                    $this->getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
+                    $this->getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
                     $this,
                     $objectTypeResolver,
                     $fieldName,
@@ -296,7 +296,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 );
                 $schemaFieldArgTypeModifiers = $this->hooksAPI->applyFilters(
                     HookNames::SCHEMA_FIELD_ARG_TYPE_MODIFIERS,
-                    $this->getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+                    $this->getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
                     $this,
                     $objectTypeResolver,
                     $fieldName,

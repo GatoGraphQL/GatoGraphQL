@@ -69,7 +69,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         };
     }
 
-    public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
             'setFeaturedImageOnCustomPost' => [
@@ -79,11 +79,11 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'removeFeaturedImageFromCustomPost' => [
                 MutationInputProperties::CUSTOMPOST_ID => $this->idScalarTypeResolver,
             ],
-            default => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
     
-    public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
             ['setFeaturedImageOnCustomPost' => MutationInputProperties::CUSTOMPOST_ID],
@@ -95,18 +95,18 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                     $this->mediaTypeResolver->getTypeName()
                 ),
             default
-                => parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+                => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
     
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
             ['setFeaturedImageOnCustomPost' => MutationInputProperties::CUSTOMPOST_ID],
             ['removeFeaturedImageFromCustomPost' => MutationInputProperties::CUSTOMPOST_ID],
             ['setFeaturedImageOnCustomPost' => MutationInputProperties::MEDIA_ITEM_ID]
                 => SchemaTypeModifiers::MANDATORY,
-            default => parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 

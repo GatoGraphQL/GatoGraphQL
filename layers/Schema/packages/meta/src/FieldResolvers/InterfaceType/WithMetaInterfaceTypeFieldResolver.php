@@ -57,30 +57,30 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
         };
     }
 
-    public function getSchemaFieldArgNameResolvers(string $fieldName): array
+    public function getFieldArgNameResolvers(string $fieldName): array
     {
         return match ($fieldName) {
             'metaValue',
             'metaValues' => [
                 'key' => $this->stringScalarTypeResolver,
             ],
-            default => parent::getSchemaFieldArgNameResolvers($fieldName),
+            default => parent::getFieldArgNameResolvers($fieldName),
         };
     }
     
-    public function getSchemaFieldArgDescription(string $fieldName, string $fieldArgName): ?string
+    public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldArgName) {
             'key' => $this->translationAPI->__('The meta key', 'meta'),
-            default => parent::getSchemaFieldArgDescription($fieldName, $fieldArgName),
+            default => parent::getFieldArgDescription($fieldName, $fieldArgName),
         };
     }
     
-    public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
+    public function getFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
     {
         return match ($fieldArgName) {
             'key' => SchemaTypeModifiers::MANDATORY,
-            default => parent::getSchemaFieldArgTypeModifiers($fieldName, $fieldArgName),
+            default => parent::getFieldArgTypeModifiers($fieldName, $fieldArgName),
         };
     }
 

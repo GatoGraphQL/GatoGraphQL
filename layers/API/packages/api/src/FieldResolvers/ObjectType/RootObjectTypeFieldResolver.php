@@ -85,7 +85,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
             'fullSchema' => [
@@ -94,11 +94,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 'compressed' => $this->booleanScalarTypeResolver,
                 'useTypeName' => $this->booleanScalarTypeResolver,
             ],
-            default => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
     
-    public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
             ['fullSchema' => 'deep'] => $this->translationAPI->__('Make a deep introspection of the fields, for all nested objects', 'api'),
@@ -112,18 +112,18 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 $this->translationAPI->__('Replace type \'%s\' with the actual type name (such as \'Post\')', 'api'),
                 SchemaDefinition::TYPE_ID
             ),
-            default => parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
     
-    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         return match ([$fieldName => $fieldArgName]) {
             ['fullSchema' => 'deep'] => true,
             ['fullSchema' => 'shape'] => SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
             ['fullSchema' => 'compressed'] => false,
             ['fullSchema' => 'useTypeName'] => true,
-            default => parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
+            default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 

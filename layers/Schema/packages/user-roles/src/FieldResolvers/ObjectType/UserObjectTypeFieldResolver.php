@@ -108,7 +108,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
             'hasRole' => [
@@ -123,22 +123,22 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'hasAnyCapability' => [
                 'capabilities' => $this->stringScalarTypeResolver,
             ],
-            default => parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
     
-    public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
             ['hasRole' => 'role'] => $this->translationAPI->__('User role to check against', 'user-roles'),
             ['hasAnyRole' => 'roles'] => $this->translationAPI->__('User roles to check against', 'user-roles'),
             ['hasCapability' => 'capability'] => $this->translationAPI->__('User capability to check against', 'user-roles'),
             ['hasAnyCapability' => 'capabilities'] => $this->translationAPI->__('User capabilities to check against', 'user-roles'),
-            default => parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
     
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
             ['hasRole' => 'role'],
@@ -148,7 +148,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             ['hasAnyCapability' => 'capabilities']
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY | SchemaTypeModifiers::MANDATORY,
             default
-                => parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+                => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 

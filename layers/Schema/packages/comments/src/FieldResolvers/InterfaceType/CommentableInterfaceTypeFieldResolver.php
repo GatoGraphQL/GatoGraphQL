@@ -122,7 +122,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         };
     }
 
-    public function getSchemaFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
+    public function getFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
     {
         switch ($fieldName) {
             case 'comments':
@@ -161,7 +161,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
                 }
                 break;
         }
-        return parent::getSchemaFieldArgDefaultValue($fieldName, $fieldArgName);
+        return parent::getFieldArgDefaultValue($fieldName, $fieldArgName);
     }
 
     /**

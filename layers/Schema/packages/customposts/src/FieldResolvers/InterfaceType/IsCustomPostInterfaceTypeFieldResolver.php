@@ -131,7 +131,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         };
     }
     
-    public function getSchemaFieldArgNameResolvers(string $fieldName): array
+    public function getFieldArgNameResolvers(string $fieldName): array
     {
         return match ($fieldName) {
             'isStatus' => [
@@ -140,32 +140,32 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'content' => [
                 'format' => $this->customPostContentFormatEnumTypeResolver,
             ],
-            default => parent::getSchemaFieldArgNameResolvers($fieldName),
+            default => parent::getFieldArgNameResolvers($fieldName),
         };
     }
     
-    public function getSchemaFieldArgDescription(string $fieldName, string $fieldArgName): ?string
+    public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
             ['isStatus' => 'status'] => $this->translationAPI->__('The status to check if the post has', 'customposts'),
             ['content' => 'format'] => $this->translationAPI->__('The format of the content', 'customposts'),
-            default => parent::getSchemaFieldArgDescription($fieldName, $fieldArgName),
+            default => parent::getFieldArgDescription($fieldName, $fieldArgName),
         };
     }
     
-    public function getSchemaFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
+    public function getFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
     {
         return match ([$fieldName => $fieldArgName]) {
             ['content' => 'format'] => $this->getDefaultContentFormatValue(),
-            default => parent::getSchemaFieldArgDefaultValue($fieldName, $fieldArgName),
+            default => parent::getFieldArgDefaultValue($fieldName, $fieldArgName),
         };
     }
     
-    public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
+    public function getFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
             ['isStatus' => 'status'] => SchemaTypeModifiers::MANDATORY,
-            default => parent::getSchemaFieldArgTypeModifiers($fieldName, $fieldArgName),
+            default => parent::getFieldArgTypeModifiers($fieldName, $fieldArgName),
         };
     }
 

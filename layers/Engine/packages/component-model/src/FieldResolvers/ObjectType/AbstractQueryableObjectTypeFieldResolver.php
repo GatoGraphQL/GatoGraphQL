@@ -35,36 +35,36 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         return null;
     }
     
-    public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
             return $this->getFilterSchemaFieldArgNameResolvers($filterDataloadingModule);
         }
-        return parent::getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName);
+        return parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName);
     }
     
-    public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
             return $this->getFilterSchemaFieldArgDescription($filterDataloadingModule, $fieldArgName);
         }
-        return parent::getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName);
+        return parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName);
     }
     
-    public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
             return $this->getFilterSchemaFieldArgDefaultValue($filterDataloadingModule, $fieldArgName);
         }
-        return parent::getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
+        return parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
     }
     
-    public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
             return $this->getFilterSchemaFieldArgTypeModifiers($filterDataloadingModule, $fieldArgName);
         }
-        return parent::getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
+        return parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
     }
 
     protected function getInterfaceSchemaDefinitionResolverAdapterClass(): string
