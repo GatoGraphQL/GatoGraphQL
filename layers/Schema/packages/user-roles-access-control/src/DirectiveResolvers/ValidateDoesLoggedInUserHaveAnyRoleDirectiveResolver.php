@@ -92,7 +92,7 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
         };
     }
 
-    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
+    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
     {
         return match ($directiveArgName) {
             'roles' => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::MANDATORY,

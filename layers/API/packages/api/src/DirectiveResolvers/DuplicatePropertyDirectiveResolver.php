@@ -64,7 +64,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
         };
     }
 
-    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
+    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
     {
         return match ($directiveArgName) {
             'to' => SchemaTypeModifiers::MANDATORY,

@@ -71,7 +71,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
         };
     }
 
-    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
+    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
     {
         return match ($directiveArgName) {
             'addExpressions',

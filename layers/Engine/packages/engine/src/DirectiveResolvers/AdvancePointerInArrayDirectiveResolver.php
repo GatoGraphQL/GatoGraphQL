@@ -65,7 +65,7 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
         };
     }
 
-    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
+    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
     {
         return match ($directiveArgName) {
             'path' => SchemaTypeModifiers::MANDATORY,

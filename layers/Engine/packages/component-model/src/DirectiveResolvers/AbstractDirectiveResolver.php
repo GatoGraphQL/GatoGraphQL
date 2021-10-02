@@ -668,13 +668,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return null;
     }
 
-    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
+    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
         }
-        return null;
+        return 0;
     }
 
     /**

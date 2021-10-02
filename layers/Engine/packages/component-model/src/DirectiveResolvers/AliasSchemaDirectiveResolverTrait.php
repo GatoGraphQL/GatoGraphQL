@@ -88,7 +88,7 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
+    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         return $aliasedDirectiveResolver->getDirectiveArgTypeModifiers(

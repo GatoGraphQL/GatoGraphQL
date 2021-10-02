@@ -84,7 +84,7 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
         };
     }
 
-    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
+    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
     {
         return match ($directiveArgName) {
             'if' => SchemaTypeModifiers::MANDATORY,
