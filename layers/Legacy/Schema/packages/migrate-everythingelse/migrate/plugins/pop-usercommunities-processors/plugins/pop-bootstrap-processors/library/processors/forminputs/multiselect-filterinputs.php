@@ -7,6 +7,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberPrivilegeEnumTypeResolver;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberStatusEnumTypeResolver;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberTagEnumTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -20,6 +21,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
     protected MemberTagEnumTypeResolver $memberTagEnumTypeResolver;
     protected MemberStatusEnumTypeResolver $memberStatusEnumTypeResolver;
 
+    #[Required]
     public function autowireGD_URE_Module_Processor_ProfileMultiSelectFilterInputs(
         MemberPrivilegeEnumTypeResolver $memberPrivilegeEnumTypeResolver,
         MemberTagEnumTypeResolver $memberTagEnumTypeResolver,

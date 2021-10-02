@@ -7,6 +7,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\CustomPostModeratedStatusEnumTypeResolver;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\CustomPostUnmoderatedStatusEnumTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -18,6 +19,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
     protected CustomPostModeratedStatusEnumTypeResolver $customPostModeratedStatusEnumTypeResolver;
     protected CustomPostUnmoderatedStatusEnumTypeResolver $customPostUnmoderatedStatusEnumTypeResolver;
 
+    #[Required]
     public function autowirePoP_Module_Processor_MultiSelectFilterInputs(
         CustomPostModeratedStatusEnumTypeResolver $customPostModeratedStatusEnumTypeResolver,
         CustomPostUnmoderatedStatusEnumTypeResolver $customPostUnmoderatedStatusEnumTypeResolver,

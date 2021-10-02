@@ -7,6 +7,7 @@ use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\Users\FilterInputProcessors\FilterInputProcessor as UserFilterInputProcessor;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -18,6 +19,7 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
 
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
+    #[Required]
     public function autowirePoP_Module_Processor_TextFilterInputs(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {

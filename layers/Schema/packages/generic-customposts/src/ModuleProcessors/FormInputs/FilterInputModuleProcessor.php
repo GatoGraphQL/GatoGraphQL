@@ -14,6 +14,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 use PoPSchema\GenericCustomPosts\FilterInputProcessors\FilterInputProcessor;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -23,6 +24,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
+    #[Required]
     public function autowireFilterInputModuleProcessor(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {

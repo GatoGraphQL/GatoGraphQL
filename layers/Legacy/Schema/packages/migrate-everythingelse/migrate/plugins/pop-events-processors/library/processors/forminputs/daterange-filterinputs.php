@@ -5,6 +5,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Processor_DateRangeFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -14,6 +15,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
 
     protected DateScalarTypeResolver $dateScalarTypeResolver;
 
+    #[Required]
     public function autowirePoP_Events_Module_Processor_DateRangeComponentFilterInputs(
         DateScalarTypeResolver $dateScalarTypeResolver,
     ): void {

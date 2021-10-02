@@ -12,6 +12,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoPSchema\Comments\ConditionalOnComponent\Users\FilterInputProcessors\FilterInputProcessor;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -22,6 +23,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     protected IDScalarTypeResolver $idScalarTypeResolver;
 
+    #[Required]
     public function autowireFilterInputModuleProcessor(
         IDScalarTypeResolver $idScalarTypeResolver,
     ): void {

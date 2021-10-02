@@ -6,6 +6,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -15,6 +16,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
 
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
+    #[Required]
     public function autowireUserStance_URE_Module_Processor_MultiSelectFilterInputs(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
