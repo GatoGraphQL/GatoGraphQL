@@ -31,7 +31,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
         return 'Root';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->hooksAPI->applyFilters(
             self::HOOK_DESCRIPTION,

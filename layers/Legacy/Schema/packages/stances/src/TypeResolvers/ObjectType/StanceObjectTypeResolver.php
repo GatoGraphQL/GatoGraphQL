@@ -26,7 +26,7 @@ class StanceObjectTypeResolver extends AbstractObjectTypeResolver
         return 'Stance';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('A stance by the user (from among “positive”, “neutral” or “negative”) and why', 'stances');
     }

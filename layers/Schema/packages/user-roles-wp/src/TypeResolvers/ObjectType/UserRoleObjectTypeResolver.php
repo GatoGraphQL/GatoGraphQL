@@ -25,7 +25,7 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
         return 'UserRole';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('User roles', 'user-roles');
     }

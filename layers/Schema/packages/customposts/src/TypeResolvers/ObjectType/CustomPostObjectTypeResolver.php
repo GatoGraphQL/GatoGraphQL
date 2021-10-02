@@ -30,7 +30,7 @@ class CustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
         return 'CustomPost';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Representation of a custom post', 'customposts');
     }

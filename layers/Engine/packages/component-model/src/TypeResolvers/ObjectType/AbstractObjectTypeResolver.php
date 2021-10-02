@@ -612,7 +612,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 SchemaDefinition::ARGNAME_NAME => $interfaceName,
                 SchemaDefinition::ARGNAME_NAMESPACED_NAME => $interfaceTypeResolver->getNamespacedTypeName(),
                 SchemaDefinition::ARGNAME_ELEMENT_NAME => $interfaceTypeResolver->getTypeName(),
-                SchemaDefinition::ARGNAME_DESCRIPTION => $interfaceTypeResolver->getSchemaTypeDescription(),
+                SchemaDefinition::ARGNAME_DESCRIPTION => $interfaceTypeResolver->getTypeDescription(),
                 SchemaDefinition::ARGNAME_FIELDS => $interfaceFields,
                 SchemaDefinition::ARGNAME_INTERFACES => $interfaceImplementedInterfaceNames,
                 // The list of types that implement this interface

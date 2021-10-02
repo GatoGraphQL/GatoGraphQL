@@ -29,7 +29,7 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
         return 'Comment';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Comments added to custom posts', 'comments');
     }

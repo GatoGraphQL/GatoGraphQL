@@ -29,7 +29,7 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
         return 'Menu';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Representation of a navigation menu', 'menus');
     }

@@ -26,7 +26,7 @@ class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
         return 'MenuItem';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Items (links, pages, etc) added to a menu', 'menus');
     }

@@ -418,7 +418,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_NAME] = $this->getMaybeNamespacedTypeName();
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_NAMESPACED_NAME] = $this->getNamespacedTypeName();
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_ELEMENT_NAME] = $this->getTypeName();
-        if ($description = $this->getSchemaTypeDescription()) {
+        if ($description = $this->getTypeDescription()) {
             $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
         }
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_IS_UNION] = true;

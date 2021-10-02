@@ -26,7 +26,7 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
         return 'Highlight';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('A highlighted piece of text, extracted from a post', 'highlights');
     }

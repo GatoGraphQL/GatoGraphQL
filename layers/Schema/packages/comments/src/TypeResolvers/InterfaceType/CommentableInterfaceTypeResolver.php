@@ -13,7 +13,7 @@ class CommentableInterfaceTypeResolver extends AbstractInterfaceTypeResolver
         return 'Commentable';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('The entity can receive comments', 'comments');
     }

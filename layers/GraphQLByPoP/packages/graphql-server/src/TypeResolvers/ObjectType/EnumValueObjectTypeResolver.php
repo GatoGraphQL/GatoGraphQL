@@ -25,7 +25,7 @@ class EnumValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
         return '__EnumValue';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Representation of an Enum value in GraphQL', 'graphql-server');
     }

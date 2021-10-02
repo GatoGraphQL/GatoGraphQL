@@ -25,7 +25,7 @@ class FieldObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
         return '__Field';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Representation of a GraphQL type\'s field', 'graphql-server');
     }

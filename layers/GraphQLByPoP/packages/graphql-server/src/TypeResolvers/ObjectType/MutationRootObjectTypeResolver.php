@@ -38,7 +38,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
         return 'MutationRoot';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Mutation type, starting from which mutations are executed', 'graphql-server');
     }

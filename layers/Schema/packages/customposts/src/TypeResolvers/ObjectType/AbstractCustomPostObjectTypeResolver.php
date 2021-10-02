@@ -19,7 +19,7 @@ abstract class AbstractCustomPostObjectTypeResolver extends AbstractObjectTypeRe
         $this->customPostTypeAPI = $customPostTypeAPI;
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Representation of a custom post', 'customposts');
     }

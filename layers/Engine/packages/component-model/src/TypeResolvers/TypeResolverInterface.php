@@ -11,6 +11,6 @@ interface TypeResolverInterface
     public function getNamespacedTypeName(): string;
     public function getMaybeNamespacedTypeName(): string;
     public function getTypeOutputName(): string;
-    public function getSchemaTypeDescription(): ?string;
+    public function getTypeDescription(): ?string;
     public function getSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = []): array;
 }

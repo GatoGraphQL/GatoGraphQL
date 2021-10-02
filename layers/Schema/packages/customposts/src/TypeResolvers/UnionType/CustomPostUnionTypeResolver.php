@@ -29,7 +29,7 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
         return 'CustomPostUnion';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Union of \'custom post\' type resolvers', 'customposts');
     }
