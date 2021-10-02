@@ -39,7 +39,7 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
         return $this->customPostUnionTypeDataLoader;
     }
 
-    public function getSchemaTypeInterfaceTypeResolver(): ?InterfaceTypeResolverInterface
+    public function getUnionTypeInterfaceTypeResolver(): ?InterfaceTypeResolverInterface
     {
         return $this->interfaceTypeResolver;
     }
