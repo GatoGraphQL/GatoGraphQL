@@ -2,38 +2,36 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategoryMutations\Hooks;
+namespace PoPSchema\PostTagMutations\SchemaHooks;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
-use PoPSchema\CustomPostCategoryMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
-use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
-use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
-use PoPSchema\PostCategoryMutations\Facades\PostCategoryTypeMutationAPIFacade;
+use PoPSchema\CustomPostTagMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
+use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoPSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
     protected RootObjectTypeResolver $rootObjectTypeResolver;
     protected PostObjectTypeResolver $postObjectTypeResolver;
-    protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
     protected PostTypeAPIInterface $postTypeAPI;
+    protected PostTagTypeMutationAPIInterface $postTagTypeMutationAPI;
 
     #[Required]
     public function autowirePostMutationResolverHookSet(
         RootObjectTypeResolver $rootObjectTypeResolver,
         PostObjectTypeResolver $postObjectTypeResolver,
-        PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
         PostTypeAPIInterface $postTypeAPI,
+        PostTagTypeMutationAPIInterface $postTagTypeMutationAPI,
     ): void {
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
         $this->postObjectTypeResolver = $postObjectTypeResolver;
-        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
         $this->postTypeAPI = $postTypeAPI;
+        $this->postTagTypeMutationAPI = $postTagTypeMutationAPI;
     }
 
     protected function mustAddSchemaFieldArgs(
@@ -46,18 +44,18 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
             || ($objectTypeResolver === $this->postObjectTypeResolver && $fieldName === 'update');
     }
 
+    protected function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
+    {
+        return $this->postObjectTypeResolver;
+    }
+
     protected function getCustomPostType(): string
     {
         return $this->postTypeAPI->getPostCustomPostType();
     }
 
-    protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
+    protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface
     {
-        return $this->postCategoryObjectTypeResolver;
-    }
-
-    protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface
-    {
-        return PostCategoryTypeMutationAPIFacade::getInstance();
+        return $this->postTagTypeMutationAPI;
     }
 }
