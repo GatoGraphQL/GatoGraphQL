@@ -53,7 +53,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected array $schemaFieldArgNameResolversCache = [];
     /** @var array<string, string|null> */
     protected array $schemaFieldArgDescriptionCache = [];
-    /** @var array<string, array<string, mixed> */
+    /** @var array<string, mixed> */
     protected array $schemaFieldArgDefaultValueCache = [];
     /** @var array<string, int> */
     protected array $schemaFieldArgTypeModifiersCache = [];
