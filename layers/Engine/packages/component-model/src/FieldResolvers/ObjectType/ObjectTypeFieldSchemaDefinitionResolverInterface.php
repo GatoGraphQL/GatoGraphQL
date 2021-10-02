@@ -15,6 +15,7 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int;
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
     public function getFieldDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?string;
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface;
     /**
      * Define Schema Field Arguments
      * 
@@ -33,7 +34,6 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
     public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string;
     public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed;
     public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int;
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface;
     /**
      * Validate the constraints for a field argument
      *
