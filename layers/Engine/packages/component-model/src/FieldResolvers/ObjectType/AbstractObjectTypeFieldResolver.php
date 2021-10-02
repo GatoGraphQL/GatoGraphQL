@@ -448,7 +448,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * inside the schemaDefinition object.
              * If this field is tagged with a version...
              */
-            if ($schemaFieldVersion = $this->getSchemaFieldVersion($objectTypeResolver, $fieldName)) {
+            if ($schemaFieldVersion = $this->getFieldVersion($objectTypeResolver, $fieldName)) {
                 $vars = ApplicationState::getVars();
                 /**
                  * Get versionConstraint in this order:
@@ -708,7 +708,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $this->addSchemaDefinitionForField($schemaDefinition, $objectTypeResolver, $fieldName);
 
         if (Environment::enableSemanticVersionConstraints()) {
-            if ($version = $this->getSchemaFieldVersion($objectTypeResolver, $fieldName)) {
+            if ($version = $this->getFieldVersion($objectTypeResolver, $fieldName)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_VERSION] = $version;
             }
         }
@@ -743,14 +743,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * In particular, Interfaces are schemaDefinitionResolver, but they must not indicate the version...
      * it's really not their responsibility
      */
-    public function getSchemaFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return null;
     }
 
     protected function hasSchemaFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
-        return !empty($this->getSchemaFieldVersion($objectTypeResolver, $fieldName));
+        return !empty($this->getFieldVersion($objectTypeResolver, $fieldName));
     }
 
     public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
@@ -768,7 +768,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                     $warnings[] = sprintf(
                         $this->translationAPI->__('The ObjectTypeFieldResolver used to process field with name \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
                         $fieldName,
-                        $this->getSchemaFieldVersion($objectTypeResolver, $fieldName) ?? '',
+                        $this->getFieldVersion($objectTypeResolver, $fieldName) ?? '',
                         $versionConstraint
                     );
                 }

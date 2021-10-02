@@ -327,10 +327,10 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function getSchemaDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getSchemaDirectiveVersion(
+        return $aliasedDirectiveResolver->getDirectiveVersion(
             $relationalTypeResolver
         );
     }

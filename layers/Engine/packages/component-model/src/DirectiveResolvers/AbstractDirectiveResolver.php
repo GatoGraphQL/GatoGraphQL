@@ -387,7 +387,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
              * inside the schemaDefinition object.
              * If this directive is tagged with a version...
              */
-            if ($schemaDirectiveVersion = $this->getSchemaDirectiveVersion($relationalTypeResolver)) {
+            if ($schemaDirectiveVersion = $this->getDirectiveVersion($relationalTypeResolver)) {
                 $vars = ApplicationState::getVars();
                 /**
                  * Get versionConstraint in this order:
@@ -609,7 +609,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return false;
     }
 
-    public function getSchemaDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return null;
     }
@@ -690,7 +690,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
              * and it can be kept empty for simplicity
              */
             if (Environment::enableSemanticVersionConstraints()) {
-                $hasVersion = !empty($this->getSchemaDirectiveVersion($relationalTypeResolver));
+                $hasVersion = !empty($this->getDirectiveVersion($relationalTypeResolver));
                 if ($hasVersion) {
                     $schemaDirectiveArgNameResolvers[SchemaDefinition::ARGNAME_VERSION_CONSTRAINT] = $this->stringScalarTypeResolver;
                 }
@@ -814,7 +814,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     return sprintf(
                         $this->translationAPI->__('The DirectiveResolver used to process directive \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
                         $this->getDirectiveName(),
-                        $this->getSchemaDirectiveVersion($relationalTypeResolver) ?? '',
+                        $this->getDirectiveVersion($relationalTypeResolver) ?? '',
                         $versionConstraint
                     );
                 }
@@ -1150,7 +1150,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
              * it's really not their responsibility
              */
             if (Environment::enableSemanticVersionConstraints()) {
-                if ($version = $this->getSchemaDirectiveVersion($relationalTypeResolver)) {
+                if ($version = $this->getDirectiveVersion($relationalTypeResolver)) {
                     $schemaDefinition[SchemaDefinition::ARGNAME_VERSION] = $version;
                 }
             }

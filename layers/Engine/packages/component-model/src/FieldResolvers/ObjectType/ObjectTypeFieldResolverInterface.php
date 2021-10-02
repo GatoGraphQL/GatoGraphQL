@@ -36,7 +36,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
      */
     public function skipAddingToSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
     public function getSchemaDefinitionForField(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array;
-    public function getSchemaFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
+    public function getFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
     /**
      * Indicate if the fields are global (i.e. they apply to all typeResolvers)
      */

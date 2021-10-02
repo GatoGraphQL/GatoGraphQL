@@ -132,7 +132,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
     /**
      * The version of the directive, using semantic versioning
      */
-    public function getSchemaDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
+    public function getDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
     public function enableOrderedSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): bool;
     /**
      * Indicate if the directive is global (i.e. it can be applied to all fields, for all typeResolvers)
