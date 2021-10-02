@@ -58,7 +58,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
         return true;
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('Copy the data from a relational object (which is one level below) to the current object', 'component-model');
     }

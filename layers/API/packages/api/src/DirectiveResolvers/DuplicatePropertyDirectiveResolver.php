@@ -44,7 +44,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
         return true;
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('Duplicate a property in the current object', 'component-model');
     }

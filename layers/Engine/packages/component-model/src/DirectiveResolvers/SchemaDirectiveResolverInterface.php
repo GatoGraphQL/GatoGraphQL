@@ -12,7 +12,7 @@ interface SchemaDirectiveResolverInterface
     /**
      * Description of the directive, to be output as documentation in the schema
      */
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
+    public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
     /**
      * Indicates if the directive argument names can be omitted from the query, deducing them from the order in which they were defined in the schema
      */
@@ -38,15 +38,15 @@ interface SchemaDirectiveResolverInterface
     /**
      * Expressions set by the directive
      */
-    public function getSchemaDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array;
+    public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array;
     /**
      * Raise warnings concerning the directive
      */
-    public function getSchemaDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
+    public function getDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
     /**
      * Indicate if the directive has been deprecated, why, when, and/or how it must be replaced
      */
-    public function getSchemaDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
+    public function getDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
     /**
      * Indicate if the directive is global (i.e. it can be applied to all fields, for all typeResolvers)
      */

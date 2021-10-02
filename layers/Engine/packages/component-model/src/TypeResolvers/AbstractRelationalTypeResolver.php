@@ -465,7 +465,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
 
                 // Check for deprecations
-                if ($deprecationDescription = $directiveResolverInstance->getSchemaDirectiveDeprecationDescription($this)) {
+                if ($deprecationDescription = $directiveResolverInstance->getDirectiveDeprecationDescription($this)) {
                     $schemaDeprecations[] = [
                         Tokens::PATH => [$fieldDirective],
                         Tokens::MESSAGE => $deprecationDescription,

@@ -35,7 +35,7 @@ class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpoint
         );
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('It validates if the user is logged-in', 'component-model');
     }

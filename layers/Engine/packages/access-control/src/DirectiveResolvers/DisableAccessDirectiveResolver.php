@@ -33,7 +33,7 @@ class DisableAccessDirectiveResolver extends AbstractValidateConditionDirectiveR
         );
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('It disables access to the field', 'access-control');
     }

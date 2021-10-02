@@ -86,7 +86,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         };
     }
 
-    public function getSchemaDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             Expressions::NAME_VALUE => $this->translationAPI->__('Element being transformed', 'component-model'),
