@@ -41,6 +41,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     const MESSAGE_EXPRESSIONS = 'expressions';
 
     protected string $directive;
+    /** @var array<string, array<string, InputTypeResolverInterface>> */
+    protected array $schemaDirectiveArgNameResolversCache = [];
+    /** @var array<string, string|null> */
+    protected array $schemaDirectiveArgDescriptionCache = [];
+    /** @var array<string, array<string, mixed> */
+    protected array $schemaDirectiveArgDefaultValueCache = [];
+    /** @var array<string, int> */
+    protected array $schemaDirectiveArgTypeModifiersCache = [];
+    /** @var array<string, array<string, mixed>> */
+    protected array $schemaDirectiveArgsCache = [];
+
     protected TranslationAPIInterface $translationAPI;
     protected HooksAPIInterface $hooksAPI;
     protected InstanceManagerInterface $instanceManager;
@@ -672,6 +683,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      */
     final public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
+        // Cache the result
+        $cacheKey = $relationalTypeResolver::class;
+        if (array_key_exists($cacheKey, $this->schemaDirectiveArgNameResolversCache)) {
+            return $this->schemaDirectiveArgNameResolversCache[$cacheKey];
+        }
         /**
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
@@ -696,7 +712,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 }
             }
         }
-        return $schemaDirectiveArgNameResolvers;
+        $this->schemaDirectiveArgNameResolversCache[$cacheKey] = $schemaDirectiveArgNameResolvers;
+        return $this->schemaDirectiveArgNameResolversCache[$cacheKey];
     }
 
     /**
@@ -705,13 +722,19 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      */
     final public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
-        return $this->hooksAPI->applyFilters(
+        // Cache the result
+        $cacheKey = $relationalTypeResolver::class . '(' . $directiveArgName . ':)';
+        if (array_key_exists($cacheKey, $this->schemaDirectiveArgDescriptionCache)) {
+            return $this->schemaDirectiveArgDescriptionCache[$cacheKey];
+        }
+        $this->schemaDirectiveArgDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
             HookNames::SCHEMA_DIRECTIVE_ARG_DESCRIPTION,
             $this->getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
             $this,
             $relationalTypeResolver,
             $directiveArgName,
         );
+        return $this->schemaDirectiveArgDescriptionCache[$cacheKey];
     }
 
     /**
@@ -720,13 +743,19 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      */
     final public function getSchemaDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
     {
-        return $this->hooksAPI->applyFilters(
+        // Cache the result
+        $cacheKey = $relationalTypeResolver::class . '(' . $directiveArgName . ':)';
+        if (array_key_exists($cacheKey, $this->schemaDirectiveArgDefaultValueCache)) {
+            return $this->schemaDirectiveArgDefaultValueCache[$cacheKey];
+        }
+        $this->schemaDirectiveArgDefaultValueCache[$cacheKey] = $this->hooksAPI->applyFilters(
             HookNames::SCHEMA_DIRECTIVE_ARG_DEFAULT_VALUE,
             $this->getDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
             $this,
             $relationalTypeResolver,
             $directiveArgName,
         );
+        return $this->schemaDirectiveArgDefaultValueCache[$cacheKey];
     }
 
     /**
@@ -735,13 +764,19 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      */
     final public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
     {
-        return $this->hooksAPI->applyFilters(
+        // Cache the result
+        $cacheKey = $relationalTypeResolver::class . '(' . $directiveArgName . ':)';
+        if (array_key_exists($cacheKey, $this->schemaDirectiveArgTypeModifiersCache)) {
+            return $this->schemaDirectiveArgTypeModifiersCache[$cacheKey];
+        }
+        $this->schemaDirectiveArgTypeModifiersCache[$cacheKey] = $this->hooksAPI->applyFilters(
             HookNames::SCHEMA_DIRECTIVE_ARG_TYPE_MODIFIERS,
             $this->getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
             $this,
             $relationalTypeResolver,
             $directiveArgName,
         );
+        return $this->schemaDirectiveArgTypeModifiersCache[$cacheKey];
     }
 
     /**
@@ -750,6 +785,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      */
     final public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
+        // Cache the result
+        $cacheKey = $relationalTypeResolver::class;
+        if (array_key_exists($cacheKey, $this->schemaDirectiveArgsCache)) {
+            return $this->schemaDirectiveArgsCache[$cacheKey];
+        }
         $schemaDirectiveArgs = [];
         $schemaDirectiveArgNameResolvers = $this->getSchemaDirectiveArgNameResolvers($relationalTypeResolver);
         foreach ($schemaDirectiveArgNameResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
@@ -761,7 +801,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 $this->getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
             );
         }
-        return $schemaDirectiveArgs;
+        $this->schemaDirectiveArgsCache[$cacheKey] = $schemaDirectiveArgs;
+        return $this->schemaDirectiveArgsCache[$cacheKey];
     }
 
     public function resolveDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): ?string
