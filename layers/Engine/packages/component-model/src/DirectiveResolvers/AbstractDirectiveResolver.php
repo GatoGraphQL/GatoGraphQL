@@ -45,7 +45,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     protected array $schemaDirectiveArgNameResolversCache = [];
     /** @var array<string, string|null> */
     protected array $schemaDirectiveArgDescriptionCache = [];
-    /** @var array<string, array<string, mixed> */
+    /** @var array<string, mixed> */
     protected array $schemaDirectiveArgDefaultValueCache = [];
     /** @var array<string, int> */
     protected array $schemaDirectiveArgTypeModifiersCache = [];

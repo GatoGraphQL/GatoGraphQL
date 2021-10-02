@@ -295,7 +295,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return null;
     }
 
-    final protected function dissectFieldForSchema(string $field): ?array
+    final protected function dissectFieldForSchema(string $field): array
     {
         if (!isset($this->dissectedFieldForSchemaCache[$field])) {
             $this->dissectedFieldForSchemaCache[$field] = $this->doDissectFieldForSchema($field);
@@ -303,7 +303,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->dissectedFieldForSchemaCache[$field];
     }
 
-    private function doDissectFieldForSchema(string $field): ?array
+    private function doDissectFieldForSchema(string $field): array
     {
         return $this->fieldQueryInterpreter->extractFieldArgumentsForSchema($this, $field);
     }
