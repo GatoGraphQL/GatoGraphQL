@@ -47,29 +47,29 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
         return $this->translationAPI->__('Apply all composed directives on the element found under the \'path\' parameter in the affected array object', 'component-model');
     }
 
-    public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return array_merge(
-            parent::getSchemaDirectiveArgNameResolvers($relationalTypeResolver),
+            parent::getDirectiveArgNameResolvers($relationalTypeResolver),
             [
                 'path' => $this->stringScalarTypeResolver,
             ]
         );
     }
 
-    public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
             'path' => $this->translationAPI->__('Path to the element in the array', 'component-model'),
-            default => parent::getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+            default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }
 
-    public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
+    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
     {
         return match ($directiveArgName) {
             'path' => SchemaTypeModifiers::MANDATORY,
-            default => parent::getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
+            default => parent::getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
         };
     }
 

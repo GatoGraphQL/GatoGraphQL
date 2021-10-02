@@ -67,26 +67,26 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
     {
         return $this->translationAPI->__('Include the field value in the output only if the argument \'if\' evals to `false`', 'engine');
     }
-    public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             'if' => $this->booleanScalarTypeResolver,
         ];
     }
 
-    public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
             'if' => $this->translationAPI->__('Argument that must evaluate to `false` to include the field value in the output', 'engine'),
-            default => parent::getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+            default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }
 
-    public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
+    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
     {
         return match ($directiveArgName) {
             'if' => SchemaTypeModifiers::MANDATORY,
-            default => parent::getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
+            default => parent::getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
         };
     }
 }

@@ -49,26 +49,26 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
         return $this->translationAPI->__('Duplicate a property in the current object', 'component-model');
     }
 
-    public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             'to' => $this->stringScalarTypeResolver,
         ];
     }
 
-    public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
             'to' => $this->translationAPI->__('The new property name', 'component-model'),
-            default => parent::getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+            default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }
 
-    public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
+    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
     {
         return match ($directiveArgName) {
             'to' => SchemaTypeModifiers::MANDATORY,
-            default => parent::getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
+            default => parent::getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
         };
     }
 

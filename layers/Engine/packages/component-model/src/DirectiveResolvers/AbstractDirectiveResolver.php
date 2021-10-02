@@ -626,20 +626,20 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * @return array<string, InputTypeResolverInterface>
      */
-    public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaDirectiveArgNameResolvers($relationalTypeResolver);
+            return $schemaDefinitionResolver->getDirectiveArgNameResolvers($relationalTypeResolver);
         }
         return [];
     }
 
-    public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName);
+            return $schemaDefinitionResolver->getDirectiveArgDescription($relationalTypeResolver, $directiveArgName);
         }
         // Version constraint (possibly enabled)
         if ($directiveArgName === SchemaDefinition::ARGNAME_VERSION_CONSTRAINT) {
@@ -648,20 +648,20 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return null;
     }
 
-    public function getSchemaDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
+    public function getDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName);
+            return $schemaDefinitionResolver->getDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName);
         }
         return null;
     }
 
-    public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
+    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
+            return $schemaDefinitionResolver->getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
         }
         return null;
     }
@@ -679,7 +679,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
          */
         $schemaDirectiveArgNameResolvers = $this->hooksAPI->applyFilters(
             HookNames::SCHEMA_DIRECTIVE_ARG_NAME_RESOLVERS,
-            $this->getSchemaDirectiveArgNameResolvers($relationalTypeResolver),
+            $this->getDirectiveArgNameResolvers($relationalTypeResolver),
             $this,
             $relationalTypeResolver
         );
@@ -700,21 +700,21 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             foreach ($schemaDirectiveArgNameResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
                 $schemaDirectiveArgDescription = $this->hooksAPI->applyFilters(
                     HookNames::SCHEMA_DIRECTIVE_ARG_DESCRIPTION,
-                    $this->getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+                    $this->getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
                     $this,
                     $relationalTypeResolver,
                     $directiveArgName,
                 );
                 $schemaDirectiveArgDefaultValue = $this->hooksAPI->applyFilters(
                     HookNames::SCHEMA_DIRECTIVE_ARG_DEFAULT_VALUE,
-                    $this->getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
+                    $this->getDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
                     $this,
                     $relationalTypeResolver,
                     $directiveArgName,
                 );
                 $schemaDirectiveArgTypeModifiers = $this->hooksAPI->applyFilters(
                     HookNames::SCHEMA_DIRECTIVE_ARG_TYPE_MODIFIERS,
-                    $this->getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
+                    $this->getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
                     $this,
                     $relationalTypeResolver,
                     $directiveArgName,
