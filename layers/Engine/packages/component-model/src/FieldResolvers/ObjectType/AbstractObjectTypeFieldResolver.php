@@ -34,6 +34,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\LooseContracts\NameResolverInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -58,6 +59,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected SemverHelperServiceInterface $semverHelperService;
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
     protected EngineInterface $engine;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
     public function autowireAbstractObjectTypeFieldResolver(
@@ -67,6 +69,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
+        StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
         $this->nameResolver = $nameResolver;
@@ -74,6 +77,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $this->semverHelperService = $semverHelperService;
         $this->schemaDefinitionService = $schemaDefinitionService;
         $this->engine = $engine;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
     final public function getClassesToAttachTo(): array
@@ -216,6 +220,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName);
         }
+        // Version constraint (possibly enabled)
+        if ($fieldArgName === SchemaDefinition::ARGNAME_VERSION_CONSTRAINT) {
+            return $this->getVersionConstraintFieldOrDirectiveArgDescription();
+        }
         return null;
     }
     
@@ -255,38 +263,53 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $objectTypeResolver,
             $fieldName,
         );
-        foreach ($schemaFieldArgNameResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
-            $schemaFieldArgDescription = $this->hooksAPI->applyFilters(
-                HookNames::SCHEMA_FIELD_ARG_DESCRIPTION,
-                $this->getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
-                $this,
-                $objectTypeResolver,
-                $fieldName,
-                $fieldArgName,
-            );
-            $schemaFieldArgDefaultValue = $this->hooksAPI->applyFilters(
-                HookNames::SCHEMA_FIELD_ARG_DEFAULT_VALUE,
-                $this->getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
-                $this,
-                $objectTypeResolver,
-                $fieldName,
-                $fieldArgName,
-            );
-            $schemaFieldArgTypeModifiers = $this->hooksAPI->applyFilters(
-                HookNames::SCHEMA_FIELD_ARG_TYPE_MODIFIERS,
-                $this->getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
-                $this,
-                $objectTypeResolver,
-                $fieldName,
-                $fieldArgName,
-            );
-            $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
-                $fieldArgName,
-                $fieldArgInputTypeResolver,
-                $schemaFieldArgDescription,
-                $schemaFieldArgDefaultValue,
-                $schemaFieldArgTypeModifiers,
-            );
+        if ($schemaFieldArgNameResolvers !== []) {
+            /**
+             * Add the version constraint (if enabled)
+             * Only add the argument if this field or directive has a version
+             * If it doesn't, then there will only be one version of it,
+             * and it can be kept empty for simplicity
+             */
+            if (Environment::enableSemanticVersionConstraints()) {
+                $hasVersion = $this->hasSchemaFieldVersion($objectTypeResolver, $fieldName);
+                if ($hasVersion) {
+                    $schemaDirectiveArgNameResolvers[SchemaDefinition::ARGNAME_VERSION_CONSTRAINT] = $this->stringScalarTypeResolver;
+                }
+            }
+
+            foreach ($schemaFieldArgNameResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
+                $schemaFieldArgDescription = $this->hooksAPI->applyFilters(
+                    HookNames::SCHEMA_FIELD_ARG_DESCRIPTION,
+                    $this->getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+                    $this,
+                    $objectTypeResolver,
+                    $fieldName,
+                    $fieldArgName,
+                );
+                $schemaFieldArgDefaultValue = $this->hooksAPI->applyFilters(
+                    HookNames::SCHEMA_FIELD_ARG_DEFAULT_VALUE,
+                    $this->getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
+                    $this,
+                    $objectTypeResolver,
+                    $fieldName,
+                    $fieldArgName,
+                );
+                $schemaFieldArgTypeModifiers = $this->hooksAPI->applyFilters(
+                    HookNames::SCHEMA_FIELD_ARG_TYPE_MODIFIERS,
+                    $this->getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+                    $this,
+                    $objectTypeResolver,
+                    $fieldName,
+                    $fieldArgName,
+                );
+                $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
+                    $fieldArgName,
+                    $fieldArgInputTypeResolver,
+                    $schemaFieldArgDescription,
+                    $schemaFieldArgDefaultValue,
+                    $schemaFieldArgTypeModifiers,
+                );
+            }
         }
         return $schemaFieldArgs;
     }
@@ -647,14 +670,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
         }
         if ($args = $this->getSchemaFieldArgs($objectTypeResolver, $fieldName)) {
-            /**
-             * Add the "versionConstraint" param. Add it at the end,
-             * so it doesn't affect the order of params for "orderedSchemaFieldArgs"
-             */
-            $this->maybeAddVersionConstraintSchemaFieldOrDirectiveArg(
-                $args,
-                $this->hasSchemaFieldVersion($objectTypeResolver, $fieldName)
-            );
             $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $args;
         }
         $this->addSchemaDefinitionForField($schemaDefinition, $objectTypeResolver, $fieldName);

@@ -25,6 +25,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -46,6 +47,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected SemverHelperServiceInterface $semverHelperService;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
     /**
      * @var array<string, mixed>
      */
@@ -94,6 +96,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         SemverHelperServiceInterface $semverHelperService,
+        StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
@@ -101,6 +104,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->semverHelperService = $semverHelperService;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
     final public function getClassesToAttachTo(): array
@@ -637,6 +641,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName);
         }
+        // Version constraint (possibly enabled)
+        if ($directiveArgName === SchemaDefinition::ARGNAME_VERSION_CONSTRAINT) {
+            return $this->getVersionConstraintFieldOrDirectiveArgDescription();
+        }
         return null;
     }
 
@@ -675,35 +683,50 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $this,
             $relationalTypeResolver
         );
-        foreach ($schemaDirectiveArgNameResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
-            $schemaDirectiveArgDescription = $this->hooksAPI->applyFilters(
-                HookNames::SCHEMA_DIRECTIVE_ARG_DESCRIPTION,
-                $this->getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
-                $this,
-                $relationalTypeResolver,
-                $directiveArgName,
-            );
-            $schemaDirectiveArgDefaultValue = $this->hooksAPI->applyFilters(
-                HookNames::SCHEMA_DIRECTIVE_ARG_DEFAULT_VALUE,
-                $this->getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
-                $this,
-                $relationalTypeResolver,
-                $directiveArgName,
-            );
-            $schemaDirectiveArgTypeModifiers = $this->hooksAPI->applyFilters(
-                HookNames::SCHEMA_DIRECTIVE_ARG_TYPE_MODIFIERS,
-                $this->getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
-                $this,
-                $relationalTypeResolver,
-                $directiveArgName,
-            );
-            $schemaDirectiveArgs[$directiveArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
-                $directiveArgName,
-                $directiveArgInputTypeResolver,
-                $schemaDirectiveArgDescription,
-                $schemaDirectiveArgDefaultValue,
-                $schemaDirectiveArgTypeModifiers,
-            );
+        if ($schemaDirectiveArgNameResolvers !== []) {
+            /**
+             * Add the version constraint (if enabled)
+             * Only add the argument if this field or directive has a version
+             * If it doesn't, then there will only be one version of it,
+             * and it can be kept empty for simplicity
+             */
+            if (Environment::enableSemanticVersionConstraints()) {
+                $hasVersion = !empty($this->getSchemaDirectiveVersion($relationalTypeResolver));
+                if ($hasVersion) {
+                    $schemaDirectiveArgNameResolvers[SchemaDefinition::ARGNAME_VERSION_CONSTRAINT] = $this->stringScalarTypeResolver;
+                }
+            }
+            
+            foreach ($schemaDirectiveArgNameResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
+                $schemaDirectiveArgDescription = $this->hooksAPI->applyFilters(
+                    HookNames::SCHEMA_DIRECTIVE_ARG_DESCRIPTION,
+                    $this->getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+                    $this,
+                    $relationalTypeResolver,
+                    $directiveArgName,
+                );
+                $schemaDirectiveArgDefaultValue = $this->hooksAPI->applyFilters(
+                    HookNames::SCHEMA_DIRECTIVE_ARG_DEFAULT_VALUE,
+                    $this->getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
+                    $this,
+                    $relationalTypeResolver,
+                    $directiveArgName,
+                );
+                $schemaDirectiveArgTypeModifiers = $this->hooksAPI->applyFilters(
+                    HookNames::SCHEMA_DIRECTIVE_ARG_TYPE_MODIFIERS,
+                    $this->getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
+                    $this,
+                    $relationalTypeResolver,
+                    $directiveArgName,
+                );
+                $schemaDirectiveArgs[$directiveArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
+                    $directiveArgName,
+                    $directiveArgInputTypeResolver,
+                    $schemaDirectiveArgDescription,
+                    $schemaDirectiveArgDefaultValue,
+                    $schemaDirectiveArgTypeModifiers,
+                );
+            }
         }
         return $schemaDirectiveArgs;
     }
@@ -1084,11 +1107,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
             }
             if ($args = $this->getSchemaDirectiveArgs($relationalTypeResolver)) {
-                // Add the version constraint (if enabled)
-                $this->maybeAddVersionConstraintSchemaFieldOrDirectiveArg(
-                    $args,
-                    !empty($this->getSchemaDirectiveVersion($relationalTypeResolver))
-                );
                 $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $args;
             }
             /**
