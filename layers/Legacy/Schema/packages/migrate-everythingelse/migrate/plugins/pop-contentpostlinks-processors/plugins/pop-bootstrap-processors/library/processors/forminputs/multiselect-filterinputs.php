@@ -103,7 +103,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match($module[1]) {
             self::MODULE_FILTERINPUT_LINKCATEGORIES => $this->idScalarTypeResolver,
@@ -112,7 +112,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         };
     }
 
-    public function getSchemaFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match($module[1]) {
             self::MODULE_FILTERINPUT_LINKCATEGORIES => SchemaTypeModifiers::IS_ARRAY,
@@ -120,7 +120,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($module[1]) {

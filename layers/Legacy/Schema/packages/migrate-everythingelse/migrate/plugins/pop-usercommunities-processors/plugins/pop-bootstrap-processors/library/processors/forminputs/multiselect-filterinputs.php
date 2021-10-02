@@ -109,7 +109,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
     {
         return match($module[1]) {
             self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => $this->memberPrivilegeEnumTypeResolver,
@@ -119,7 +119,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         };
     }
 
-    public function getSchemaFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match($module[1]) {
             self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES,
@@ -131,7 +131,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($module[1]) {

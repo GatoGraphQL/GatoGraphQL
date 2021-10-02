@@ -65,7 +65,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_NAME => $this->stringScalarTypeResolver,
@@ -74,7 +74,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function getSchemaFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_EMAILS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
@@ -82,7 +82,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_NAME => $this->translationAPI->__('Search users whose name contains this string', 'pop-users'),

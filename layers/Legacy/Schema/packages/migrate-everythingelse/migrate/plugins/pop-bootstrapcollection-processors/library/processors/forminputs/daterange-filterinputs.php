@@ -70,7 +70,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => $this->dateScalarTypeResolver,
@@ -78,7 +78,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($module[1]) {

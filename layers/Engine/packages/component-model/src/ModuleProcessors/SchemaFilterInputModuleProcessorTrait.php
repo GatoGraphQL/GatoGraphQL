@@ -14,11 +14,11 @@ trait SchemaFilterInputModuleProcessorTrait
         return $this;
     }
 
-    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
         if ($filterSchemaDefinitionResolver !== $this) {
-            return $filterSchemaDefinitionResolver->getSchemaFilterInputTypeResolver($module);
+            return $filterSchemaDefinitionResolver->getFilterInputTypeResolver($module);
         }
         return $this->getDefaultSchemaFilterInputTypeResolver();
     }
@@ -29,38 +29,38 @@ trait SchemaFilterInputModuleProcessorTrait
         return $schemaDefinitionService->getDefaultInputTypeResolver();
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
         if ($filterSchemaDefinitionResolver !== $this) {
-            return $filterSchemaDefinitionResolver->getSchemaFilterInputDescription($module);
+            return $filterSchemaDefinitionResolver->getFilterInputDescription($module);
         }
         return null;
     }
 
-    public function getSchemaFilterInputDeprecationDescription(array $module): ?string
+    public function getFilterInputDeprecationDescription(array $module): ?string
     {
         $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
         if ($filterSchemaDefinitionResolver !== $this) {
-            return $filterSchemaDefinitionResolver->getSchemaFilterInputDeprecationDescription($module);
+            return $filterSchemaDefinitionResolver->getFilterInputDeprecationDescription($module);
         }
         return null;
     }
 
-    public function getSchemaFilterInputDefaultValue(array $module): mixed
+    public function getFilterInputDefaultValue(array $module): mixed
     {
         $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
         if ($filterSchemaDefinitionResolver !== $this) {
-            return $filterSchemaDefinitionResolver->getSchemaFilterInputDefaultValue($module);
+            return $filterSchemaDefinitionResolver->getFilterInputDefaultValue($module);
         }
         return null;
     }
 
-    public function getSchemaFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $module): int
     {
         $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
         if ($filterSchemaDefinitionResolver !== $this) {
-            return $filterSchemaDefinitionResolver->getSchemaFilterInputTypeModifiers($module);
+            return $filterSchemaDefinitionResolver->getFilterInputTypeModifiers($module);
         }
         return 0;
     }

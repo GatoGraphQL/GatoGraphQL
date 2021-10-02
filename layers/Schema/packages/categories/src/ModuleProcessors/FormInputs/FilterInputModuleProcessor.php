@@ -61,7 +61,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CATEGORY_IDS => $this->idScalarTypeResolver,
@@ -69,7 +69,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function getSchemaFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CATEGORY_IDS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
@@ -77,7 +77,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CATEGORY_IDS => $this->translationAPI->__('Limit results to elements with the given ids', 'categories'),

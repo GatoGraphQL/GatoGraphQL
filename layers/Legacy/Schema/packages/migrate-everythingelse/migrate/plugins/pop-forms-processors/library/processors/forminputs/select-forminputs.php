@@ -103,7 +103,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match($module[1]) {
             self::MODULE_FILTERINPUT_ORDERUSER => $this->stringScalarTypeResolver,
@@ -114,7 +114,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($module[1]) {

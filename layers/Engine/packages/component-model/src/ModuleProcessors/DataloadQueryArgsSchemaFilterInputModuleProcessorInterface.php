@@ -8,9 +8,9 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 interface DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
-    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface;
-    public function getSchemaFilterInputDescription(array $module): ?string;
-    public function getSchemaFilterInputDeprecationDescription(array $module): ?string;
-    public function getSchemaFilterInputDefaultValue(array $module): mixed;
-    public function getSchemaFilterInputTypeModifiers(array $module): int;
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface;
+    public function getFilterInputDescription(array $module): ?string;
+    public function getFilterInputDeprecationDescription(array $module): ?string;
+    public function getFilterInputDefaultValue(array $module): mixed;
+    public function getFilterInputTypeModifiers(array $module): int;
 }

@@ -11,8 +11,8 @@ interface DataloadQueryArgsFilterInputModuleProcessorInterface extends FormCompo
     public function getValue(array $module, ?array $source = null): mixed;
     public function isInputSetInSource(array $module, ?array $source = null): mixed;
     public function getFilterInput(array $module): ?array;
-    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface;
-    public function getSchemaFilterInputDescription(array $module): ?string;
-    public function getSchemaFilterInputDefaultValue(array $module): mixed;
-    public function getSchemaFilterInputTypeModifiers(array $module): int;
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface;
+    public function getFilterInputDescription(array $module): ?string;
+    public function getFilterInputDefaultValue(array $module): mixed;
+    public function getFilterInputTypeModifiers(array $module): int;
 }

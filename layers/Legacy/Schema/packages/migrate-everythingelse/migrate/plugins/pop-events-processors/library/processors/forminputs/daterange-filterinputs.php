@@ -69,7 +69,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match($module[1]) {
             self::MODULE_FILTERINPUT_EVENTSCOPE => $this->dateScalarTypeResolver,
@@ -77,7 +77,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($module[1]) {

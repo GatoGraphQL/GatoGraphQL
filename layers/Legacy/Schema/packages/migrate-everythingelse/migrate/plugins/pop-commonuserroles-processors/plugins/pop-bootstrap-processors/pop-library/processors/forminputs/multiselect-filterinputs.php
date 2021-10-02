@@ -111,7 +111,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match($module[1]) {
             self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => $this->stringScalarTypeResolver,
@@ -121,7 +121,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         };
     }
 
-    public function getSchemaFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match($module[1]) {
             self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS,
@@ -133,7 +133,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($module[1]) {

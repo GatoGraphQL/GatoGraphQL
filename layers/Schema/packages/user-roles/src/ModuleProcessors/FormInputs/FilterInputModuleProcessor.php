@@ -54,7 +54,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_USER_ROLES => $this->stringScalarTypeResolver,
@@ -63,7 +63,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function getSchemaFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_USER_ROLES,
@@ -74,7 +74,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_USER_ROLES => $this->translationAPI->__('Get the users with given roles', 'user-roles'),

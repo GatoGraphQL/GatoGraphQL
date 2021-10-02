@@ -145,7 +145,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
         };
     }
 
-    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ((string)$module[1]) {
             self::MODULE_FILTERINPUT_ORDER => $this->stringScalarTypeResolver,
@@ -167,7 +167,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
         };
     }
 
-    public function getSchemaFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_IDS,
@@ -181,7 +181,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         return match ((string)$module[1]) {
             self::MODULE_FILTERINPUT_ORDER => $this->translationAPI->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'schema-commons'),

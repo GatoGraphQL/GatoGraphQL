@@ -79,7 +79,7 @@ class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcesso
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => $this->dateScalarTypeResolver,
@@ -87,7 +87,7 @@ class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcesso
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_CUSTOMPOSTDATES:

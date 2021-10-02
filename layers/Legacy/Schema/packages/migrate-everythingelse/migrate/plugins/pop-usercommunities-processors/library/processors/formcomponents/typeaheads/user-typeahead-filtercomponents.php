@@ -99,7 +99,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Mo
         return parent::getTriggerLayoutSubmodule($module);
     }
 
-    public function getSchemaFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match($module[1]) {
             self::MODULE_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST => $this->idScalarTypeResolver,
@@ -109,7 +109,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Mo
         };
     }
 
-    public function getSchemaFilterInputTypeModifiers(array $module): int
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match($module[1]) {
             self::MODULE_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST,
@@ -121,7 +121,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Mo
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($module[1]) {
