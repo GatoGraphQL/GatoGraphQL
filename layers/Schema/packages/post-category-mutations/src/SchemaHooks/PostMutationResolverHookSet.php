@@ -16,7 +16,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
     use PostMutationResolverHookSetTrait;
-    
+
     protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
     protected PostTypeAPIInterface $postTypeAPI;
 

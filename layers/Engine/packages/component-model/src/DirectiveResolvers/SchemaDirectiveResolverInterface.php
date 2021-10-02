@@ -19,7 +19,7 @@ interface SchemaDirectiveResolverInterface
     public function enableOrderedSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): bool;
     /**
      * Define Schema Directive Arguments
-     * 
+     *
      * @return array<string, InputTypeResolverInterface>
      */
     public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array;
@@ -28,7 +28,7 @@ interface SchemaDirectiveResolverInterface
     public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int;
     /**
      * Invoke Schema Directive Arguments
-     * 
+     *
      * @return array<string, InputTypeResolverInterface>
      */
     public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array;

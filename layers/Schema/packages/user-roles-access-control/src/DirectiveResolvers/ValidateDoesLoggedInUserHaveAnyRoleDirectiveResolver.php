@@ -76,7 +76,7 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
     {
         return $this->translationAPI->__('It validates if the user has any of the roles provided through directive argument \'roles\'', 'component-model');
     }
-    
+
     public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [

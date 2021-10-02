@@ -77,7 +77,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
     {
         return $this->translationAPI->__('It validates if the user has any capability provided through directive argument \'capabilities\'', 'component-model');
     }
-    
+
     public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [

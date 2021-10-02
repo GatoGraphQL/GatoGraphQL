@@ -17,7 +17,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements SetTagsOnCustomPostObjectTypeFieldResolverInterface
 {
     use SetTagsOnCustomPostObjectTypeFieldResolverTrait;
-    
+
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
 
@@ -73,7 +73,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
             default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
-    
+
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
@@ -82,7 +82,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
-    
+
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         return match ([$fieldName => $fieldArgName]) {
@@ -90,7 +90,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
             default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
-    
+
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {

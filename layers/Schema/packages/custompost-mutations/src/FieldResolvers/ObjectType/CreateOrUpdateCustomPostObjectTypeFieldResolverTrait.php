@@ -50,7 +50,7 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
             ]
         );
     }
-    
+
     private function getCreateOrUpdateCustomPostSchemaFieldArgDescription(
         string $fieldArgName,
     ): ?string {
@@ -62,7 +62,7 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
             default => null,
         };
     }
-    
+
     private function getCreateOrUpdateCustomPostSchemaFieldArgTypeModifiers(
         string $fieldArgName,
     ): ?int {

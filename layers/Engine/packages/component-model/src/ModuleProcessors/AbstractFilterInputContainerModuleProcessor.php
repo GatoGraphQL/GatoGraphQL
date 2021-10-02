@@ -39,7 +39,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
             self::HOOK_FILTER_INPUTS,
         ];
     }
-    
+
     public function getFieldFilterInputNameResolvers(array $module): array
     {
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
@@ -52,7 +52,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
         }
         return $schemaFieldArgNameResolvers;
     }
-    
+
     public function getFieldFilterInputDescription(array $module, string $fieldArgName): ?string
     {
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
@@ -66,7 +66,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
         }
         return null;
     }
-    
+
     public function getFieldFilterInputDefaultValue(array $module, string $fieldArgName): mixed
     {
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
@@ -80,7 +80,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
         }
         return null;
     }
-    
+
     public function getFieldFilterInputTypeModifiers(array $module, string $fieldArgName): int
     {
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);

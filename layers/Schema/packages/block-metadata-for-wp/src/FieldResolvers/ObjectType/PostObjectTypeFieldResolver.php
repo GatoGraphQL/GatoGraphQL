@@ -77,7 +77,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
-    
+
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {

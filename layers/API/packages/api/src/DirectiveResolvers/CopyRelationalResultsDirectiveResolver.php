@@ -29,7 +29,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
-    
+
     public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [

@@ -19,7 +19,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use CreateOrUpdateCustomPostObjectTypeFieldResolverTrait;
-    
+
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected CreatePostMutationResolver $createPostMutationResolver;
     protected UpdatePostMutationResolver $updatePostMutationResolver;
@@ -72,7 +72,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
-    
+
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldName) {
@@ -83,7 +83,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
-    
+
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ($fieldName) {

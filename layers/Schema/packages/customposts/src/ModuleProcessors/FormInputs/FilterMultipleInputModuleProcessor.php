@@ -24,7 +24,7 @@ class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcesso
     use FormMultipleInputModuleProcessorTrait;
 
     public const MODULE_FILTERINPUT_CUSTOMPOSTDATES = 'filterinput-custompostdates';
-    
+
     protected FormInputHelperServiceInterface $formInputHelperService;
     protected DateScalarTypeResolver $dateScalarTypeResolver;
 

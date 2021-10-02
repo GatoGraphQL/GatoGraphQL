@@ -134,7 +134,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
                 => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
-    
+
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldArgName) {

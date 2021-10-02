@@ -22,7 +22,7 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    
+
     public function getDirectiveName(): string
     {
         return 'setPropertiesAsExpressions';

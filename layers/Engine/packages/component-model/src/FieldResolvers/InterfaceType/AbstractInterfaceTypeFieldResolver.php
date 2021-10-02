@@ -166,7 +166,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         }
         return [];
     }
-    
+
     public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
@@ -175,7 +175,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         }
         return null;
     }
-    
+
     public function getFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
@@ -184,7 +184,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         }
         return null;
     }
-    
+
     public function getFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);

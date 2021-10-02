@@ -34,7 +34,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         }
         return null;
     }
-    
+
     public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
@@ -42,7 +42,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         }
         return parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName);
     }
-    
+
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
@@ -50,7 +50,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         }
         return parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName);
     }
-    
+
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
@@ -58,7 +58,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         }
         return parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
     }
-    
+
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {

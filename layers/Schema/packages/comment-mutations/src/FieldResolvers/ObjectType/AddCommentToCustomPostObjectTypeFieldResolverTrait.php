@@ -53,7 +53,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         }
         return $schemaFieldArgNameResolvers;
     }
-    
+
     private function getAddCommentToCustomPostSchemaFieldArgDescription(
         string $fieldArgName,
     ): ?string {
@@ -67,7 +67,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
             default => null,
         };
     }
-    
+
     private function getAddCommentToCustomPostSchemaFieldArgTypeModifiers(
         string $fieldArgName,
         bool $isParentCommentMandatory = false,

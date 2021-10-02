@@ -67,7 +67,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
             default => parent::getFieldArgNameResolvers($fieldName),
         };
     }
-    
+
     public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldArgName) {
@@ -75,7 +75,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
             default => parent::getFieldArgDescription($fieldName, $fieldArgName),
         };
     }
-    
+
     public function getFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
     {
         return match ($fieldArgName) {

@@ -18,7 +18,7 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
     public function getFieldDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?string;
     /**
      * Define Schema Field Arguments
-     * 
+     *
      * @return array<string, InputTypeResolverInterface>
      */
     public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array;
@@ -27,7 +27,7 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int;
     /**
      * Invoke Schema Field Arguments
-     * 
+     *
      * @return array<string, InputTypeResolverInterface>
      */
     public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array;

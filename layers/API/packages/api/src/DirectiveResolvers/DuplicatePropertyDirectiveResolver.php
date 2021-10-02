@@ -22,7 +22,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    
+
     public function getDirectiveName(): string
     {
         return 'duplicateProperty';

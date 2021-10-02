@@ -23,7 +23,7 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    
+
     public function getDirectiveName(): string
     {
         return 'advancePointerInArray';

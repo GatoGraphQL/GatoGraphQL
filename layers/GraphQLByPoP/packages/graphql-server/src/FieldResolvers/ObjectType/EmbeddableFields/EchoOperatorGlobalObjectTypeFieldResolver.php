@@ -17,7 +17,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectTypeFieldResolver
 {
     use EmbeddableFieldsObjectTypeFieldResolverTrait;
-    
+
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
@@ -81,7 +81,7 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
             default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
-    
+
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
@@ -89,7 +89,7 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
-    
+
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {

@@ -68,7 +68,7 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
     {
         return $this->translationAPI->__('Include the field value in the output only if the argument \'if\' evals to `true`', 'api');
     }
-    
+
     public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [

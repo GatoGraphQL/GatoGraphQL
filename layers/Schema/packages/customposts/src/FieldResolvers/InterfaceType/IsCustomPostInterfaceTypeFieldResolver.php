@@ -130,7 +130,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             default => parent::getFieldDescription($fieldName),
         };
     }
-    
+
     public function getFieldArgNameResolvers(string $fieldName): array
     {
         return match ($fieldName) {
@@ -143,7 +143,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             default => parent::getFieldArgNameResolvers($fieldName),
         };
     }
-    
+
     public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
@@ -152,7 +152,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             default => parent::getFieldArgDescription($fieldName, $fieldArgName),
         };
     }
-    
+
     public function getFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
     {
         return match ([$fieldName => $fieldArgName]) {
@@ -160,7 +160,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             default => parent::getFieldArgDefaultValue($fieldName, $fieldArgName),
         };
     }
-    
+
     public function getFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {

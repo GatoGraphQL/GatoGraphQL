@@ -20,7 +20,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements SetTagsOnCustomPostObjectTypeFieldResolverInterface
 {
     use SetTagsOnCustomPostObjectTypeFieldResolverTrait;
-    
+
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected IDScalarTypeResolver $idScalarTypeResolver;
@@ -77,7 +77,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
             default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
-    
+
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         $setTagsFieldName = $this->getSetTagsFieldName();
@@ -91,7 +91,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
-    
+
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         return match ([$fieldName => $fieldArgName]) {
@@ -99,7 +99,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
             default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
-    
+
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         $setTagsFieldName = $this->getSetTagsFieldName();

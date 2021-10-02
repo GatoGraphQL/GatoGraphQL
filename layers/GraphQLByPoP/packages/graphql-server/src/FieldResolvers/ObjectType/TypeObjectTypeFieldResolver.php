@@ -149,7 +149,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
-    
+
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldArgName) {
@@ -157,7 +157,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
-    
+
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         return match ($fieldArgName) {

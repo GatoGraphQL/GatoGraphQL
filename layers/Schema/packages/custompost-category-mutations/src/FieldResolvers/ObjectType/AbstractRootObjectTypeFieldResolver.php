@@ -22,7 +22,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
 
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected IDScalarTypeResolver $idScalarTypeResolver;
-    
+
     #[Required]
     public function autowireAbstractRootObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
@@ -73,7 +73,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
             default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
         };
     }
-    
+
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         $setCategoriesFieldName = $this->getSetCategoriesFieldName();
@@ -90,7 +90,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
-    
+
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         return match ([$fieldName => $fieldArgName]) {
@@ -98,7 +98,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
             default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
-    
+
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         $setCategoriesFieldName = $this->getSetCategoriesFieldName();

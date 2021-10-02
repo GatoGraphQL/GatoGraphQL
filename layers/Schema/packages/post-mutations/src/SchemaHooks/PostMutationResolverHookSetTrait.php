@@ -27,7 +27,7 @@ trait PostMutationResolverHookSetTrait
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
     ): bool {
-        return 
+        return
             ($objectTypeResolver === $this->rootObjectTypeResolver && $fieldName === 'createPost')
             || ($objectTypeResolver === $this->rootObjectTypeResolver && $fieldName === 'updatePost')
             || ($objectTypeResolver === $this->postObjectTypeResolver && $fieldName === 'update');
