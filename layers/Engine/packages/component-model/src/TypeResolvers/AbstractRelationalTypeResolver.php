@@ -457,7 +457,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
 
                 // Check for warnings
-                if ($warningDescription = $directiveResolverInstance->resolveSchemaDirectiveWarningDescription($this)) {
+                if ($warningDescription = $directiveResolverInstance->resolveDirectiveWarningDescription($this)) {
                     $schemaWarnings[] = [
                         Tokens::PATH => [$fieldDirective],
                         Tokens::MESSAGE => $warningDescription,

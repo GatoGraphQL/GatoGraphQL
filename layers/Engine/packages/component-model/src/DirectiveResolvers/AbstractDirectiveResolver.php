@@ -275,7 +275,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     public function validateDirectiveArgumentsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
     {
         if (
-            $maybeDeprecation = $this->resolveSchemaDirectiveDeprecationDescription(
+            $maybeDeprecation = $this->resolveDirectiveDeprecationDescription(
                 $relationalTypeResolver,
                 $directiveName,
                 $directiveArgs
@@ -764,7 +764,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return $schemaDirectiveArgs;
     }
 
-    public function resolveSchemaDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): ?string
+    public function resolveDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): ?string
     {
         $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($relationalTypeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
@@ -800,7 +800,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return null;
     }
 
-    public function resolveSchemaDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function resolveDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         if (Environment::enableSemanticVersionConstraints()) {
             /**

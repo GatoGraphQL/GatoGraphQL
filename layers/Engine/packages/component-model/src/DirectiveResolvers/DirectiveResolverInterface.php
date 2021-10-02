@@ -144,6 +144,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
         string $directiveName,
         array $directiveArgs = []
     ): ?array;
-    public function resolveSchemaDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
+    public function resolveDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
     public function getDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
 }
