@@ -249,9 +249,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    final public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = [];
         /**
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
@@ -276,40 +275,74 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                     $schemaDirectiveArgNameResolvers[SchemaDefinition::ARGNAME_VERSION_CONSTRAINT] = $this->stringScalarTypeResolver;
                 }
             }
+        }
+        return $schemaFieldArgNameResolvers;
+    }
 
-            foreach ($schemaFieldArgNameResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
-                $schemaFieldArgDescription = $this->hooksAPI->applyFilters(
-                    HookNames::SCHEMA_FIELD_ARG_DESCRIPTION,
-                    $this->getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
-                    $this,
-                    $objectTypeResolver,
-                    $fieldName,
-                    $fieldArgName,
-                );
-                $schemaFieldArgDefaultValue = $this->hooksAPI->applyFilters(
-                    HookNames::SCHEMA_FIELD_ARG_DEFAULT_VALUE,
-                    $this->getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
-                    $this,
-                    $objectTypeResolver,
-                    $fieldName,
-                    $fieldArgName,
-                );
-                $schemaFieldArgTypeModifiers = $this->hooksAPI->applyFilters(
-                    HookNames::SCHEMA_FIELD_ARG_TYPE_MODIFIERS,
-                    $this->getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
-                    $this,
-                    $objectTypeResolver,
-                    $fieldName,
-                    $fieldArgName,
-                );
-                $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
-                    $fieldArgName,
-                    $fieldArgInputTypeResolver,
-                    $schemaFieldArgDescription,
-                    $schemaFieldArgDefaultValue,
-                    $schemaFieldArgTypeModifiers,
-                );
-            }
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        return $this->hooksAPI->applyFilters(
+            HookNames::SCHEMA_FIELD_ARG_DESCRIPTION,
+            $this->getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+            $this,
+            $objectTypeResolver,
+            $fieldName,
+            $fieldArgName,
+        );
+    }
+
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    {
+        return $this->hooksAPI->applyFilters(
+            HookNames::SCHEMA_FIELD_ARG_DEFAULT_VALUE,
+            $this->getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
+            $this,
+            $objectTypeResolver,
+            $fieldName,
+            $fieldArgName,
+        );
+    }
+
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return $this->hooksAPI->applyFilters(
+            HookNames::SCHEMA_FIELD_ARG_TYPE_MODIFIERS,
+            $this->getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+            $this,
+            $objectTypeResolver,
+            $fieldName,
+            $fieldArgName,
+        );
+    }
+
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $schemaFieldArgs = [];
+        $schemaFieldArgNameResolvers = $this->getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName);
+        foreach ($schemaFieldArgNameResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
+            $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
+                $fieldArgName,
+                $fieldArgInputTypeResolver,
+                $this->getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+                $this->getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
+                $this->getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+            );
         }
         return $schemaFieldArgs;
     }

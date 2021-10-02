@@ -670,9 +670,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * Consolidation of the schema directive arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
+    final public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        $schemaDirectiveArgs = [];
         /**
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
@@ -696,37 +695,71 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     $schemaDirectiveArgNameResolvers[SchemaDefinition::ARGNAME_VERSION_CONSTRAINT] = $this->stringScalarTypeResolver;
                 }
             }
-            
-            foreach ($schemaDirectiveArgNameResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
-                $schemaDirectiveArgDescription = $this->hooksAPI->applyFilters(
-                    HookNames::SCHEMA_DIRECTIVE_ARG_DESCRIPTION,
-                    $this->getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
-                    $this,
-                    $relationalTypeResolver,
-                    $directiveArgName,
-                );
-                $schemaDirectiveArgDefaultValue = $this->hooksAPI->applyFilters(
-                    HookNames::SCHEMA_DIRECTIVE_ARG_DEFAULT_VALUE,
-                    $this->getDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
-                    $this,
-                    $relationalTypeResolver,
-                    $directiveArgName,
-                );
-                $schemaDirectiveArgTypeModifiers = $this->hooksAPI->applyFilters(
-                    HookNames::SCHEMA_DIRECTIVE_ARG_TYPE_MODIFIERS,
-                    $this->getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
-                    $this,
-                    $relationalTypeResolver,
-                    $directiveArgName,
-                );
-                $schemaDirectiveArgs[$directiveArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
-                    $directiveArgName,
-                    $directiveArgInputTypeResolver,
-                    $schemaDirectiveArgDescription,
-                    $schemaDirectiveArgDefaultValue,
-                    $schemaDirectiveArgTypeModifiers,
-                );
-            }
+        }
+        return $schemaDirectiveArgNameResolvers;
+    }
+
+    /**
+     * Consolidation of the schema directive arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    {
+        return $this->hooksAPI->applyFilters(
+            HookNames::SCHEMA_DIRECTIVE_ARG_DESCRIPTION,
+            $this->getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+            $this,
+            $relationalTypeResolver,
+            $directiveArgName,
+        );
+    }
+
+    /**
+     * Consolidation of the schema directive arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getSchemaDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
+    {
+        return $this->hooksAPI->applyFilters(
+            HookNames::SCHEMA_DIRECTIVE_ARG_DEFAULT_VALUE,
+            $this->getDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
+            $this,
+            $relationalTypeResolver,
+            $directiveArgName,
+        );
+    }
+
+    /**
+     * Consolidation of the schema directive arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
+    {
+        return $this->hooksAPI->applyFilters(
+            HookNames::SCHEMA_DIRECTIVE_ARG_TYPE_MODIFIERS,
+            $this->getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
+            $this,
+            $relationalTypeResolver,
+            $directiveArgName,
+        );
+    }
+
+    /**
+     * Consolidation of the schema directive arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
+    {
+        $schemaDirectiveArgs = [];
+        $schemaDirectiveArgNameResolvers = $this->getSchemaDirectiveArgNameResolvers($relationalTypeResolver);
+        foreach ($schemaDirectiveArgNameResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
+            $schemaDirectiveArgs[$directiveArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
+                $directiveArgName,
+                $directiveArgInputTypeResolver,
+                $this->getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+                $this->getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
+                $this->getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
+            );
         }
         return $schemaDirectiveArgs;
     }
