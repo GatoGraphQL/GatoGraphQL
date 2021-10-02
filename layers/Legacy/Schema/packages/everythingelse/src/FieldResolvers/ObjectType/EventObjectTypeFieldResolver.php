@@ -66,7 +66,7 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match($fieldName) {
             'dates',
@@ -80,11 +80,11 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'categories'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
             'locations' => $this->translationAPI->__('Event\'s locations', 'events'),
@@ -94,7 +94,7 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'startDateReadable' => $this->translationAPI->__('Event\'s start date in human-readable format', 'events'),
             'daterange' => $this->translationAPI->__('Event\'s date range', 'events'),
             'daterangetime' => $this->translationAPI->__('Event\'s date range and time', 'events'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 

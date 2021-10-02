@@ -70,7 +70,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         };
     }
 
-    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
+    public function getFieldTypeModifiers(string $fieldName): ?int
     {
         return match ($fieldName) {
             'areCommentsOpen',
@@ -82,11 +82,11 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
             'commentsForAdmin'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($fieldName),
+                => parent::getFieldTypeModifiers($fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(string $fieldName): ?string
+    public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
             'areCommentsOpen' => $this->translationAPI->__('Are comments open to be added to the custom post', 'pop-comments'),
@@ -95,7 +95,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
             'comments' => $this->translationAPI->__('Comments added to the custom post', 'pop-comments'),
             'commentCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of comments added to the custom post', 'pop-comments'),
             'commentsForAdmin' => $this->translationAPI->__('[Unrestricted] Comments added to the custom post', 'pop-comments'),
-            default => parent::getSchemaFieldDescription($fieldName),
+            default => parent::getFieldDescription($fieldName),
         };
     }
 

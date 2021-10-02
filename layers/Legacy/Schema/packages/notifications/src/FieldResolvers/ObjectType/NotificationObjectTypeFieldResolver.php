@@ -130,7 +130,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         };
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'action',
@@ -153,11 +153,11 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
             'userCaps'
                 => SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
             'action' => $this->translationAPI->__('', ''),
@@ -187,7 +187,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
             'isCommentNotification' => $this->translationAPI->__('', ''),
             'isTaxonomyNotification' => $this->translationAPI->__('', ''),
             'isAction' => $this->translationAPI->__('', ''),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 

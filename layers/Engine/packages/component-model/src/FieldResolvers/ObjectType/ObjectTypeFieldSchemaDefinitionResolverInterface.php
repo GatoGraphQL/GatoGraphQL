@@ -12,11 +12,11 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
 {
     public function getFieldNamesToResolve(): array;
     public function getAdminFieldNames(): array;
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int;
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int;
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
     public function getFieldDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?string;
     /**
-     * Define Schema Directive Arguments
+     * Define Schema Field Arguments
      * 
      * @return array<string, InputTypeResolverInterface>
      */
@@ -25,7 +25,7 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed;
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int;
     /**
-     * Invoke Schema Directive Arguments
+     * Invoke Schema Field Arguments
      * 
      * @return array<string, InputTypeResolverInterface>
      */

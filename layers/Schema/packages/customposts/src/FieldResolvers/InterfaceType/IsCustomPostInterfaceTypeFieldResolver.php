@@ -95,7 +95,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         };
     }
 
-    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
+    public function getFieldTypeModifiers(string $fieldName): ?int
     {
         /**
          * Please notice that the URL, slug, title and excerpt are nullable,
@@ -110,10 +110,10 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             case 'customPostType':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::getSchemaFieldTypeModifiers($fieldName);
+        return parent::getFieldTypeModifiers($fieldName);
     }
 
-    public function getSchemaFieldDescription(string $fieldName): ?string
+    public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
             'url' => $this->translationAPI->__('Custom post URL', 'customposts'),
@@ -127,7 +127,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'title' => $this->translationAPI->__('Custom post title', 'customposts'),
             'excerpt' => $this->translationAPI->__('Custom post excerpt', 'customposts'),
             'customPostType' => $this->translationAPI->__('Custom post type', 'customposts'),
-            default => parent::getSchemaFieldDescription($fieldName),
+            default => parent::getFieldDescription($fieldName),
         };
     }
     

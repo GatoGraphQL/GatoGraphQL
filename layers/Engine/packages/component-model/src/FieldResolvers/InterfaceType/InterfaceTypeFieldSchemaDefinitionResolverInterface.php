@@ -10,8 +10,8 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 interface InterfaceTypeFieldSchemaDefinitionResolverInterface
 {
     public function getFieldNamesToResolve(): array;
-    public function getSchemaFieldTypeModifiers(string $fieldName): ?int;
-    public function getSchemaFieldDescription(string $fieldName): ?string;
+    public function getFieldTypeModifiers(string $fieldName): ?int;
+    public function getFieldDescription(string $fieldName): ?string;
     /**
      * @return array<string, InputTypeResolverInterface>
      */

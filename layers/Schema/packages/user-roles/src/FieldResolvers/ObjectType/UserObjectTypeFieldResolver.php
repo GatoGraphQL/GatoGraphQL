@@ -75,7 +75,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'roles'
@@ -91,11 +91,11 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'hasAnyCapability'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
-                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'roles' => $this->translationAPI->__('User roles', 'user-roles'),
@@ -104,7 +104,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'hasAnyRole' => $this->translationAPI->__('Does the user have any role from a provided list?', 'user-roles'),
             'hasCapability' => $this->translationAPI->__('Does the user have a specific capability?', 'user-roles'),
             'hasAnyCapability' => $this->translationAPI->__('Does the user have any capability from a provided list?', 'user-roles'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 

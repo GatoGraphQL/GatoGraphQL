@@ -53,7 +53,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
         };
     }
 
-    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
+    public function getFieldTypeModifiers(string $fieldName): ?int
     {
         /**
          * Please notice that the URL, slug, title and excerpt are nullable,
@@ -63,14 +63,14 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
             case 'datetime':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::getSchemaFieldTypeModifiers($fieldName);
+        return parent::getFieldTypeModifiers($fieldName);
     }
 
-    public function getSchemaFieldDescription(string $fieldName): ?string
+    public function getFieldDescription(string $fieldName): ?string
     {
         return match($fieldName) {
             'datetime' => $this->translationAPI->__('Custom post published date and time', 'customposts'),
-            default => parent::getSchemaFieldDescription($fieldName),
+            default => parent::getFieldDescription($fieldName),
         };
     }
     public function getFieldArgNameResolvers(string $fieldName): array

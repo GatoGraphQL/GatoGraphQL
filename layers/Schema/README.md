@@ -86,7 +86,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ];
   }
 
-  public function getSchemaFieldDescription(
+  public function getFieldDescription(
     RelationalTypeResolverInterface $relationalTypeResolver,
     string $fieldName
   ): ?string {
@@ -134,7 +134,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
 The definition of a field for the schema, and its resolution, is split into a multitude of functions from the `ObjectTypeFieldResolver`: 
 
-- `getSchemaFieldDescription`
+- `getFieldDescription`
 - `getSchemaFieldType`
 - `resolveValue`
 - `getSchemaFieldArgs`

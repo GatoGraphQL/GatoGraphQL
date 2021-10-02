@@ -49,11 +49,11 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
         };
     }
 
-    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
+    public function getFieldTypeModifiers(string $fieldName): ?int
     {
         return match ($fieldName) {
             'metaValues' => SchemaTypeModifiers::IS_ARRAY,
-            default => parent::getSchemaFieldTypeModifiers($fieldName),
+            default => parent::getFieldTypeModifiers($fieldName),
         };
     }
 
@@ -84,12 +84,12 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
         };
     }
 
-    public function getSchemaFieldDescription(string $fieldName): ?string
+    public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
             'metaValue' => $this->translationAPI->__('Single meta value', 'custompostmeta'),
             'metaValues' => $this->translationAPI->__('List of meta values', 'custompostmeta'),
-            default => parent::getSchemaFieldDescription($fieldName),
+            default => parent::getFieldDescription($fieldName),
         };
     }
 }

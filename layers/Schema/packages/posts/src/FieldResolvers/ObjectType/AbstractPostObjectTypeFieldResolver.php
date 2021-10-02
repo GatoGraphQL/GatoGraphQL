@@ -71,7 +71,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         };
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
     {
         return match ($fieldName) {
             'postCount',
@@ -81,18 +81,18 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
             'postsForAdmin'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'posts' => $this->translationAPI->__('Posts', 'pop-posts'),
             'postCount' => $this->translationAPI->__('Number of posts', 'pop-posts'),
             'postsForAdmin' => $this->translationAPI->__('[Unrestricted] Posts', 'pop-posts'),
             'postCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of posts', 'pop-posts'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
