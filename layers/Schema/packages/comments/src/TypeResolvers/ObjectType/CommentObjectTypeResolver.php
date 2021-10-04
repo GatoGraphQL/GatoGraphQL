@@ -16,7 +16,7 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
     protected CommentTypeDataLoader $commentTypeDataLoader;
 
     #[Required]
-    public function autowireCommentObjectTypeResolver(
+    final public function autowireCommentObjectTypeResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         CommentTypeDataLoader $commentTypeDataLoader,
     ): void {

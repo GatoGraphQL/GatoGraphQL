@@ -19,7 +19,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     protected CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver;
 
     #[Required]
-    public function autowireCustomPostObjectTypeFieldResolver(
+    final public function autowireCustomPostObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver,
     ): void {

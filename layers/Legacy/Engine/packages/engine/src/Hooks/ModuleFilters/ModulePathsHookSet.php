@@ -17,7 +17,7 @@ class ModulePathsHookSet extends AbstractHookSet
     protected ModulePaths $modulePaths;
     
     #[Required]
-    public function autowireModulePathsHookSet(
+    final public function autowireModulePathsHookSet(
         ModulePaths $modulePaths
     ): void {
         $this->modulePaths = $modulePaths;

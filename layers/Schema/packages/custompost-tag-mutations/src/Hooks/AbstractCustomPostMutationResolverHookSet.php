@@ -22,7 +22,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowireAbstractCustomPostMutationResolverHookSet(
+    final public function autowireAbstractCustomPostMutationResolverHookSet(
         CustomPostTypeAPIInterface $customPostTypeAPI,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {

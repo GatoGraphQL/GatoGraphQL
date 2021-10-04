@@ -21,7 +21,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     protected UpdatePostMutationResolver $updatePostMutationResolver;
 
     #[Required]
-    public function autowirePostObjectTypeFieldResolver(
+    final public function autowirePostObjectTypeFieldResolver(
         PostObjectTypeResolver $postObjectTypeResolver,
         UpdatePostMutationResolver $updatePostMutationResolver,
     ): void {

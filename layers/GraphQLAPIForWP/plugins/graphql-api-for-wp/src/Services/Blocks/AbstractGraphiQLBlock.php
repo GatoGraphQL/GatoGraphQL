@@ -23,7 +23,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
 
     #[Required]
-    public function autowireAbstractGraphiQLBlock(
+    final public function autowireAbstractGraphiQLBlock(
         EndpointHelpers $endpointHelpers,
         PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
     ): void {

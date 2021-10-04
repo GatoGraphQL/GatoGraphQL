@@ -14,7 +14,7 @@ class ApplicationStateHookSet extends AbstractHookSet
     protected CMSRoutingStateServiceInterface $cmsRoutingStateService;
 
     #[Required]
-    public function autowireApplicationStateHookSet(
+    final public function autowireApplicationStateHookSet(
         CMSRoutingStateServiceInterface $cmsRoutingStateService,
     ): void {
         $this->cmsRoutingStateService = $cmsRoutingStateService;

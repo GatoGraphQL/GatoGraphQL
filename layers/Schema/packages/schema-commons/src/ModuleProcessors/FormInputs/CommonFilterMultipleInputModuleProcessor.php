@@ -27,7 +27,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
     protected DateScalarTypeResolver $dateScalarTypeResolver;
 
     #[Required]
-    public function autowireCommonFilterMultipleInputModuleProcessor(
+    final public function autowireCommonFilterMultipleInputModuleProcessor(
         FormInputHelperServiceInterface $formInputHelperService,
         DateScalarTypeResolver $dateScalarTypeResolver,
     ): void {

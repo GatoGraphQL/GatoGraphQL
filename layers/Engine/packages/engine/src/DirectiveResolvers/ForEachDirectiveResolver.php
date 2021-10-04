@@ -19,7 +19,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
 
     #[Required]
-    public function autowireForEachDirectiveResolver(
+    final public function autowireForEachDirectiveResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;

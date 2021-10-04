@@ -20,7 +20,7 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     
     #[Required]
-    public function autowireCatEventObjectTypeFieldResolver(
+    final public function autowireCatEventObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;

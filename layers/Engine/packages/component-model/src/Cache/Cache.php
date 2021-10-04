@@ -22,7 +22,7 @@ class Cache implements PersistentCacheInterface, TransientCacheInterface, CacheI
     }
 
     #[Required]
-    public function autowireCache(ModelInstanceInterface $modelInstance): void
+    final public function autowireCache(ModelInstanceInterface $modelInstance): void
     {
         $this->modelInstance = $modelInstance;
     }

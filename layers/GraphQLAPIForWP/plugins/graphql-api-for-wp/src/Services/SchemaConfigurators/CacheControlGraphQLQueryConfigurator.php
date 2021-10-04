@@ -19,7 +19,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
     protected CacheControlManagerInterface $cacheControlManager;
 
     #[Required]
-    public function autowireCacheControlGraphQLQueryConfigurator(
+    final public function autowireCacheControlGraphQLQueryConfigurator(
         CacheControlBlock $cacheControlBlock,
         BlockHelpers $blockHelpers,
         CacheControlManagerInterface $cacheControlManager,

@@ -36,7 +36,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
 
     #[Required]
-    public function autowireRootGenericCustomPostObjectTypeFieldResolver(
+    final public function autowireRootGenericCustomPostObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver,
         CustomPostTypeAPIInterface $customPostTypeAPI,

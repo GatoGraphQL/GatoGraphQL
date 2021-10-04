@@ -19,7 +19,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     protected URLScalarTypeResolver $urlScalarTypeResolver;
 
     #[Required]
-    public function autowireOperatorGlobalObjectTypeFieldResolver(
+    final public function autowireOperatorGlobalObjectTypeFieldResolver(
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         URLScalarTypeResolver $urlScalarTypeResolver,
     ): void {

@@ -14,7 +14,7 @@ class SingleEndpointSchemaConfigurator extends AbstractSchemaConfigurationEndpoi
     protected EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry;
 
     #[Required]
-    public function autowireSingleEndpointSchemaConfigurator(
+    final public function autowireSingleEndpointSchemaConfigurator(
         EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry
     ): void {
         $this->endpointSchemaConfigurationExecuterRegistry = $endpointSchemaConfigurationExecuterRegistry;

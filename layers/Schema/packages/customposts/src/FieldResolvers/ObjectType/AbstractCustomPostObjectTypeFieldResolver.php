@@ -21,7 +21,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     protected IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver;
 
     #[Required]
-    public function autowireAbstractCustomPostObjectTypeFieldResolver(
+    final public function autowireAbstractCustomPostObjectTypeFieldResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,
         DateFormatterInterface $dateFormatter,
         QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,

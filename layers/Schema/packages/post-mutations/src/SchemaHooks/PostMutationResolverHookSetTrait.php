@@ -17,7 +17,7 @@ trait PostMutationResolverHookSetTrait
     protected PostObjectTypeResolver $postObjectTypeResolver;
 
     #[Required]
-    public function autowirePostMutationResolverHookSetTrait(
+    final public function autowirePostMutationResolverHookSetTrait(
         RootObjectTypeResolver $rootObjectTypeResolver,
         MutationRootObjectTypeResolver $mutationRootObjectTypeResolver,
         PostObjectTypeResolver $postObjectTypeResolver,

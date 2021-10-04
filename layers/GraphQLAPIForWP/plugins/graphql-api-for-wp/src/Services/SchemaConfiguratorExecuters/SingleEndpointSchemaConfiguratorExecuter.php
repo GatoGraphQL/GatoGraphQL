@@ -23,7 +23,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     protected GraphQLEndpointHandler $graphQLEndpointHandler;
 
     #[Required]
-    public function autowireSingleEndpointSchemaConfiguratorExecuter(
+    final public function autowireSingleEndpointSchemaConfiguratorExecuter(
         ModuleRegistryInterface $moduleRegistry,
         SingleEndpointSchemaConfigurator $endpointSchemaConfigurator,
         GraphQLEndpointHandler $graphQLEndpointHandler,

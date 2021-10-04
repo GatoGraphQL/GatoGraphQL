@@ -15,7 +15,7 @@ class ConfigurableCacheControlForDirectivesRelationalTypeResolverDecorator exten
     protected CacheControlManagerInterface $cacheControlManager;
 
     #[Required]
-    public function autowireConfigurableCacheControlForDirectivesRelationalTypeResolverDecorator(
+    final public function autowireConfigurableCacheControlForDirectivesRelationalTypeResolverDecorator(
         CacheControlManagerInterface $cacheControlManager,
     ): void {
         $this->cacheControlManager = $cacheControlManager;

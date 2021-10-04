@@ -13,7 +13,7 @@ class CreateUpdateWithCommunityIndividualProfileMutationResolverBridge extends C
     protected CreateUpdateWithCommunityIndividualProfileMutationResolver $createUpdateWithCommunityIndividualProfileMutationResolver;
     
     #[Required]
-    public function autowireCreateUpdateWithCommunityIndividualProfileMutationResolverBridge(
+    final public function autowireCreateUpdateWithCommunityIndividualProfileMutationResolverBridge(
         CreateUpdateWithCommunityIndividualProfileMutationResolver $createUpdateWithCommunityIndividualProfileMutationResolver,
     ): void {
         $this->createUpdateWithCommunityIndividualProfileMutationResolver = $createUpdateWithCommunityIndividualProfileMutationResolver;

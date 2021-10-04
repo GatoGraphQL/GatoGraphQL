@@ -18,7 +18,7 @@ class EndpointGraphiQLBlock extends AbstractBlock implements EndpointEditorBlock
     protected CustomEndpointBlockCategory $customEndpointBlockCategory;
 
     #[Required]
-    public function autowireEndpointGraphiQLBlock(
+    final public function autowireEndpointGraphiQLBlock(
         CustomEndpointBlockCategory $customEndpointBlockCategory,
     ): void {
         $this->customEndpointBlockCategory = $customEndpointBlockCategory;

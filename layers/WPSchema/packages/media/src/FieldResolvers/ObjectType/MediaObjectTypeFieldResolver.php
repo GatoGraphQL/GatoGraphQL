@@ -20,7 +20,7 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
 
     #[Required]
-    public function autowireMediaObjectTypeFieldResolver(
+    final public function autowireMediaObjectTypeFieldResolver(
         CMSHelperServiceInterface $cmsHelperService,
         DateFormatterInterface $dateFormatter,
         QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,

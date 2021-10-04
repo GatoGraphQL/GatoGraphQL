@@ -15,7 +15,7 @@ class ResetLostPasswordMutationResolverBridge extends AbstractComponentMutationR
     protected ResetLostPasswordMutationResolver $resetLostPasswordMutationResolver;
 
     #[Required]
-    public function autowireResetLostPasswordMutationResolverBridge(
+    final public function autowireResetLostPasswordMutationResolverBridge(
         ResetLostPasswordMutationResolver $resetLostPasswordMutationResolver,
     ): void {
         $this->resetLostPasswordMutationResolver = $resetLostPasswordMutationResolver;

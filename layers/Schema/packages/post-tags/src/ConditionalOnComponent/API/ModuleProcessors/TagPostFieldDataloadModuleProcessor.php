@@ -23,7 +23,7 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
     #[Required]
-    public function autowireTagPostFieldDataloadModuleProcessor(
+    final public function autowireTagPostFieldDataloadModuleProcessor(
         PostObjectTypeResolver $postObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ): void {

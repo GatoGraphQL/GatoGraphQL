@@ -20,7 +20,7 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
     protected EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock;
 
     #[Required]
-    public function autowireAbstractCustomPostEndpointSchemaConfigurator(
+    final public function autowireAbstractCustomPostEndpointSchemaConfigurator(
         EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
     ): void {
         $this->endpointSchemaConfigurationBlock = $endpointSchemaConfigurationBlock;

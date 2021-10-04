@@ -19,7 +19,7 @@ class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfiguratio
     protected SchemaConfigCacheControlListBlock $schemaConfigCacheControlListBlock;
 
     #[Required]
-    public function autowireCacheControlSchemaConfigurationExecuter(
+    final public function autowireCacheControlSchemaConfigurationExecuter(
         CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator,
         SchemaConfigCacheControlListBlock $schemaConfigCacheControlListBlock,
     ): void {

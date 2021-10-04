@@ -14,7 +14,7 @@ class EnumValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
     protected SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader;
 
     #[Required]
-    public function autowireEnumValueObjectTypeResolver(
+    final public function autowireEnumValueObjectTypeResolver(
         SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
     ): void {
         $this->schemaDefinitionReferenceTypeDataLoader = $schemaDefinitionReferenceTypeDataLoader;

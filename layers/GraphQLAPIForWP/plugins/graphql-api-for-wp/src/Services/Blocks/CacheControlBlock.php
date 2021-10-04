@@ -19,7 +19,7 @@ class CacheControlBlock extends AbstractControlBlock
     protected CacheControlBlockCategory $cacheControlBlockCategory;
 
     #[Required]
-    public function autowireCacheControlBlock(
+    final public function autowireCacheControlBlock(
         CacheControlBlockCategory $cacheControlBlockCategory,
     ): void {
         $this->cacheControlBlockCategory = $cacheControlBlockCategory;

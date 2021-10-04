@@ -18,7 +18,7 @@ class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigu
     protected SchemaConfigSchemaModeBlock $schemaConfigSchemaModeBlock;
 
     #[Required]
-    public function autowireDefaultSchemaModeSchemaConfigurationExecuter(
+    final public function autowireDefaultSchemaModeSchemaConfigurationExecuter(
         SchemaConfigSchemaModeBlock $schemaConfigSchemaModeBlock,
     ): void {
         $this->schemaConfigSchemaModeBlock = $schemaConfigSchemaModeBlock;

@@ -37,7 +37,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
 
     #[Required]
-    public function autowireAbstractInterfaceTypeFieldResolver(
+    final public function autowireAbstractInterfaceTypeFieldResolver(
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,
         SchemaNamespacingServiceInterface $schemaNamespacingService,

@@ -23,7 +23,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     protected QueryRetrieverInterface $queryRetrieverInterface;
 
     #[Required]
-    public function autowireAdminEndpointResolver(
+    final public function autowireAdminEndpointResolver(
         UserAuthorizationInterface $userAuthorization,
         QueryRetrieverInterface $queryRetrieverInterface,
     ): void {

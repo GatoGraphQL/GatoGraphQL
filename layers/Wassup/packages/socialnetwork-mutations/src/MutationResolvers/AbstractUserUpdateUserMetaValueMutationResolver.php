@@ -13,7 +13,7 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
     protected UserTypeAPIInterface $userTypeAPI;
 
     #[Required]
-    public function autowireAbstractUserUpdateUserMetaValueMutationResolver(
+    final public function autowireAbstractUserUpdateUserMetaValueMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
     ): void {
         $this->userTypeAPI = $userTypeAPI;

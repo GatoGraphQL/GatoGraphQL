@@ -49,7 +49,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService;
 
     #[Required]
-    public function autowireSchemaDefinitionReferenceRegistry(
+    final public function autowireSchemaDefinitionReferenceRegistry(
         TranslationAPIInterface $translationAPI,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         QueryRootObjectTypeResolver $queryRootObjectTypeResolver,

@@ -28,7 +28,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
 
     #[Required]
-    public function autowireIsCustomPostInterfaceTypeFieldResolver(
+    final public function autowireIsCustomPostInterfaceTypeFieldResolver(
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
         CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,

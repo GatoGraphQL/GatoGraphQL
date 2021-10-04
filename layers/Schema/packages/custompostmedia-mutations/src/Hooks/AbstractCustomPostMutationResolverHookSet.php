@@ -22,7 +22,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     protected IDScalarTypeResolver $idScalarTypeResolver;
 
     #[Required]
-    public function autowireAbstractCustomPostMutationResolverHookSet(
+    final public function autowireAbstractCustomPostMutationResolverHookSet(
         MediaObjectTypeResolver $mediaTypeResolver,
         CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
         IDScalarTypeResolver $idScalarTypeResolver,

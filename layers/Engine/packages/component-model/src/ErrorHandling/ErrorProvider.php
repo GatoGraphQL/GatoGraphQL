@@ -12,7 +12,7 @@ class ErrorProvider implements ErrorProviderInterface
     protected TranslationAPIInterface $translationAPI;
 
     #[Required]
-    public function autowireErrorProvider(TranslationAPIInterface $translationAPI): void
+    final public function autowireErrorProvider(TranslationAPIInterface $translationAPI): void
     {
         $this->translationAPI = $translationAPI;
     }

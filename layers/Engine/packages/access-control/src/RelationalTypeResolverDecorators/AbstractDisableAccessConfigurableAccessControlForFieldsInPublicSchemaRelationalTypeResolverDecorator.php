@@ -12,7 +12,7 @@ abstract class AbstractDisableAccessConfigurableAccessControlForFieldsInPublicSc
     protected DisableAccessDirectiveResolver $disableAccessDirectiveResolver;
 
     #[Required]
-    public function autowireAbstractDisableAccessConfigurableAccessControlForFieldsInPublicSchemaRelationalTypeResolverDecorator(
+    final public function autowireAbstractDisableAccessConfigurableAccessControlForFieldsInPublicSchemaRelationalTypeResolverDecorator(
         DisableAccessDirectiveResolver $disableAccessDirectiveResolver,
     ): void {
         $this->disableAccessDirectiveResolver = $disableAccessDirectiveResolver;

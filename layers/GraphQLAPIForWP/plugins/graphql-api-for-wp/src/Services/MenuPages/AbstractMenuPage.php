@@ -18,7 +18,7 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
     protected EndpointHelpers $endpointHelpers;
 
     #[Required]
-    public function autowireAbstractMenuPage(InstanceManagerInterface $instanceManager, MenuPageHelper $menuPageHelper, EndpointHelpers $endpointHelpers): void
+    final public function autowireAbstractMenuPage(InstanceManagerInterface $instanceManager, MenuPageHelper $menuPageHelper, EndpointHelpers $endpointHelpers): void
     {
         $this->instanceManager = $instanceManager;
         $this->menuPageHelper = $menuPageHelper;

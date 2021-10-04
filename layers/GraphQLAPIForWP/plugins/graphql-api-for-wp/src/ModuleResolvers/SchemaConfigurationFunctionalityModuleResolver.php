@@ -36,7 +36,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
      * so the properties will not be null in that situation.
      */
     #[Required]
-    public function autowireSchemaConfigurationFunctionalityModuleResolver(
+    final public function autowireSchemaConfigurationFunctionalityModuleResolver(
         ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
     ): void {
         $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;

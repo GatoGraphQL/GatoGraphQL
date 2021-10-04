@@ -14,7 +14,7 @@ class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
     protected Site $site;
 
     #[Required]
-    public function autowireSiteTypeDataLoader(
+    final public function autowireSiteTypeDataLoader(
         Site $site,
     ): void {
         $this->site = $site;

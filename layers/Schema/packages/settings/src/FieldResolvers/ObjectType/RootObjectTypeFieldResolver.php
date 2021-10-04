@@ -21,7 +21,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected SettingsTypeAPIInterface $settingsTypeAPI;
 
     #[Required]
-    public function autowireRootObjectTypeFieldResolver(
+    final public function autowireRootObjectTypeFieldResolver(
         AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         SettingsTypeAPIInterface $settingsTypeAPI,

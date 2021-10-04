@@ -16,7 +16,7 @@ class SubscribeToTagMutationResolverBridge extends AbstractTagUpdateUserMetaValu
     protected PostTagTypeAPIInterface $postTagTypeAPI;
 
     #[Required]
-    public function autowireSubscribeToTagMutationResolverBridge(
+    final public function autowireSubscribeToTagMutationResolverBridge(
         SubscribeToTagMutationResolver $subscribeToTagMutationResolver,
         PostTagTypeAPIInterface $postTagTypeAPI,
     ): void {

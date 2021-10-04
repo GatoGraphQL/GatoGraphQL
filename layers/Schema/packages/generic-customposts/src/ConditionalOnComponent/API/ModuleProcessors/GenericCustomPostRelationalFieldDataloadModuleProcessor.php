@@ -25,7 +25,7 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
     #[Required]
-    public function autowireGenericCustomPostRelationalFieldDataloadModuleProcessor(
+    final public function autowireGenericCustomPostRelationalFieldDataloadModuleProcessor(
         GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ): void {

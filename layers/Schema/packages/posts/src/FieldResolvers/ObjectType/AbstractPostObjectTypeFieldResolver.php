@@ -29,7 +29,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     protected PostTypeAPIInterface $postTypeAPI;
 
     #[Required]
-    public function autowireAbstractPostObjectTypeFieldResolver(
+    final public function autowireAbstractPostObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         PostObjectTypeResolver $postObjectTypeResolver,
         PostTypeAPIInterface $postTypeAPI,

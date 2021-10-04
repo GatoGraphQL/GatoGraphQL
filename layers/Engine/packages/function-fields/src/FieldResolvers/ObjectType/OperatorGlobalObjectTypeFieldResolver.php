@@ -23,7 +23,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     protected ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver;
 
     #[Required]
-    public function autowireOperatorGlobalObjectTypeFieldResolver(
+    final public function autowireOperatorGlobalObjectTypeFieldResolver(
         FloatScalarTypeResolver $floatScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         MixedScalarTypeResolver $mixedScalarTypeResolver,

@@ -17,7 +17,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
     protected IDScalarTypeResolver $idScalarTypeResolver;
 
     #[Required]
-    public function autowireUserStance_Module_Processor_MultiSelectFilterInputs(
+    final public function autowireUserStance_Module_Processor_MultiSelectFilterInputs(
         IDScalarTypeResolver $idScalarTypeResolver,
     ): void {
         $this->idScalarTypeResolver = $idScalarTypeResolver;

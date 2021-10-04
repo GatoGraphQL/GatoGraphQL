@@ -19,7 +19,7 @@ class ModelInstanceHookSet extends AbstractHookSet
     protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
 
     #[Required]
-    public function autowireModelInstanceHookSet(
+    final public function autowireModelInstanceHookSet(
         PostTypeAPIInterface $postTypeAPI,
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ): void {

@@ -27,7 +27,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     protected CMSServiceInterface $cmsService;
 
     #[Required]
-    public function autowireAbstractCategoryTypeAPI(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService, CMSServiceInterface $cmsService): void
+    final public function autowireAbstractCategoryTypeAPI(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService, CMSServiceInterface $cmsService): void
     {
         $this->hooksAPI = $hooksAPI;
         $this->cmsHelperService = $cmsHelperService;

@@ -18,7 +18,7 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
 
     #[Required]
-    public function autowireIncludeDirectiveResolver(
+    final public function autowireIncludeDirectiveResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;

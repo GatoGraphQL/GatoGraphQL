@@ -20,7 +20,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     protected GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver;
 
     #[Required]
-    public function autowireGravityFormsAddEntryToFormMutationResolverBridge(
+    final public function autowireGravityFormsAddEntryToFormMutationResolverBridge(
         UserTypeAPIInterface $userTypeAPI,
         GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver,
     ): void {

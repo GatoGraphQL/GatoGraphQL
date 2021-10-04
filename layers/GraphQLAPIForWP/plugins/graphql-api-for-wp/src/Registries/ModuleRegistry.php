@@ -15,7 +15,7 @@ class ModuleRegistry implements ModuleRegistryInterface
     protected UserSettingsManagerInterface $userSettingsManager;
 
     #[Required]
-    public function autowireAbstractCacheConfigurationManager(): void
+    final public function autowireAbstractCacheConfigurationManager(): void
     {
         $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }

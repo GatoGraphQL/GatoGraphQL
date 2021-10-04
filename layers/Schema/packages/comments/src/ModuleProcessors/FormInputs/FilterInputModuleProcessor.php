@@ -34,7 +34,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     protected IDScalarTypeResolver $idScalarTypeResolver;
 
     #[Required]
-    public function autowireFilterInputModuleProcessor(
+    final public function autowireFilterInputModuleProcessor(
         CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver,
         CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,

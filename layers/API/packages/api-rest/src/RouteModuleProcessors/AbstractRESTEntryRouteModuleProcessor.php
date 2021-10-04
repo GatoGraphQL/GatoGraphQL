@@ -18,7 +18,7 @@ abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteM
     protected FieldQueryConvertorInterface $fieldQueryConvertor;
 
     #[Required]
-    public function autowireAbstractRESTEntryRouteModuleProcessor(
+    final public function autowireAbstractRESTEntryRouteModuleProcessor(
         RESTDataStructureFormatter $restDataStructureFormatter,
         FieldQueryConvertorInterface $fieldQueryConvertor
     ): void {

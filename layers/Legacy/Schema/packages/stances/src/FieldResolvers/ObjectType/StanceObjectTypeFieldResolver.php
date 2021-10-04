@@ -29,7 +29,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     
     #[Required]
-    public function autowireStanceObjectTypeFieldResolver(
+    final public function autowireStanceObjectTypeFieldResolver(
         IDScalarTypeResolver $idScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,

@@ -15,7 +15,7 @@ abstract class AbstractLooseContractResolutionSet extends AbstractAutomaticallyI
     protected HooksAPIInterface $hooksAPI;
 
     #[Required]
-    public function autowireAbstractLooseContractResolutionSet(LooseContractManagerInterface $looseContractManager, NameResolverInterface $nameResolver, HooksAPIInterface $hooksAPI): void
+    final public function autowireAbstractLooseContractResolutionSet(LooseContractManagerInterface $looseContractManager, NameResolverInterface $nameResolver, HooksAPIInterface $hooksAPI): void
     {
         $this->looseContractManager = $looseContractManager;
         $this->nameResolver = $nameResolver;

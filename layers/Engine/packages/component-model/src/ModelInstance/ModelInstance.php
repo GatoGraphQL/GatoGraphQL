@@ -23,7 +23,7 @@ class ModelInstance implements ModelInstanceInterface
     protected DefinitionManagerInterface $definitionManager;
 
     #[Required]
-    public function autowireModelInstance(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, ApplicationInfoInterface $applicationInfo, DefinitionManagerInterface $definitionManager): void
+    final public function autowireModelInstance(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, ApplicationInfoInterface $applicationInfo, DefinitionManagerInterface $definitionManager): void
     {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;

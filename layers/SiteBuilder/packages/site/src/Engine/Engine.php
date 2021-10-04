@@ -13,7 +13,7 @@ class Engine extends UpstreamEngine
     protected ApplicationStateHelperServiceInterface $applicationStateHelperService;
 
     #[Required]
-    public function autowireSiteEngine(
+    final public function autowireSiteEngine(
         ApplicationStateHelperServiceInterface $applicationStateHelperService
     ): void {
         $this->applicationStateHelperService = $applicationStateHelperService;

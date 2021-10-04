@@ -15,7 +15,7 @@ class CustomEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaC
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
 
     #[Required]
-    public function autowireCustomEndpointSchemaConfiguratorExecuter(
+    final public function autowireCustomEndpointSchemaConfiguratorExecuter(
         CustomEndpointSchemaConfigurator $endpointSchemaConfigurator,
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ): void {

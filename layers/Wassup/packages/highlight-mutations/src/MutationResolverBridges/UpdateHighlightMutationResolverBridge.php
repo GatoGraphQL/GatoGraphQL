@@ -13,7 +13,7 @@ class UpdateHighlightMutationResolverBridge extends AbstractCreateUpdateHighligh
     protected UpdateHighlightMutationResolver $updateHighlightMutationResolver;
 
     #[Required]
-    public function autowireUpdateHighlightMutationResolverBridge(
+    final public function autowireUpdateHighlightMutationResolverBridge(
         UpdateHighlightMutationResolver $updateHighlightMutationResolver,
     ): void {
         $this->updateHighlightMutationResolver = $updateHighlightMutationResolver;

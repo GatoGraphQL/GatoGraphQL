@@ -21,7 +21,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
     protected URLScalarTypeResolver $urlScalarTypeResolver;
 
     #[Required]
-    public function autowireObjectTypeFieldResolverTrait(
+    final public function autowireObjectTypeFieldResolverTrait(
         StringScalarTypeResolver $stringScalarTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,
         EmailScalarTypeResolver $emailScalarTypeResolver,

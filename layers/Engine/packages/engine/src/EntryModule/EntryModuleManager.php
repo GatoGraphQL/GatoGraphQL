@@ -14,7 +14,7 @@ class EntryModuleManager implements EntryModuleManagerInterface
     protected RouteModuleProcessorManagerInterface $routeModuleProcessorManager;
 
     #[Required]
-    public function autowireEntryModuleManager(RouteModuleProcessorManagerInterface $routeModuleProcessorManager): void
+    final public function autowireEntryModuleManager(RouteModuleProcessorManagerInterface $routeModuleProcessorManager): void
     {
         $this->routeModuleProcessorManager = $routeModuleProcessorManager;
     }

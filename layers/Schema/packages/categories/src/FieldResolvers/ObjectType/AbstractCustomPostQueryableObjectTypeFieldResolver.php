@@ -28,7 +28,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     protected IntScalarTypeResolver $intScalarTypeResolver;
 
     #[Required]
-    public function autowireAbstractCustomPostQueryableObjectTypeFieldResolver(
+    final public function autowireAbstractCustomPostQueryableObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
     ): void {

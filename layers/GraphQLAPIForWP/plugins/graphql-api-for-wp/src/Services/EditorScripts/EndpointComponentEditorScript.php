@@ -19,7 +19,7 @@ class EndpointComponentEditorScript extends AbstractEditorScript
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
 
     #[Required]
-    public function autowireEndpointComponentEditorScript(
+    final public function autowireEndpointComponentEditorScript(
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ): void {
         $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;

@@ -17,7 +17,7 @@ class VarsHookSet extends AbstractHookSet
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
 
     #[Required]
-    public function autowireVarsHookSet(
+    final public function autowireVarsHookSet(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ): void {
         $this->customPostTypeAPI = $customPostTypeAPI;

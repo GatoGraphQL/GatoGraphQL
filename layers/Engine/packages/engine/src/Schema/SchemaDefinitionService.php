@@ -15,7 +15,7 @@ class SchemaDefinitionService extends ComponentModelSchemaDefinitionService impl
     protected RootObjectTypeResolver $rootObjectTypeResolver;
 
     #[Required]
-    public function autowireEngineSchemaDefinitionService(RootObjectTypeResolver $rootObjectTypeResolver): void
+    final public function autowireEngineSchemaDefinitionService(RootObjectTypeResolver $rootObjectTypeResolver): void
     {
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
     }

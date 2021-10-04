@@ -21,7 +21,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowirePostObjectTypeFieldResolver(
+    final public function autowirePostObjectTypeFieldResolver(
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {

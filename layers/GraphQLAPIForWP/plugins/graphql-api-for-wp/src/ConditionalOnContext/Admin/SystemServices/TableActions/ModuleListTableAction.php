@@ -27,7 +27,7 @@ class ModuleListTableAction extends AbstractListTableAction
     protected UserSettingsManagerInterface $userSettingsManager;
 
     #[Required]
-    public function autowireModuleListTableAction(): void
+    final public function autowireModuleListTableAction(): void
     {
         $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }

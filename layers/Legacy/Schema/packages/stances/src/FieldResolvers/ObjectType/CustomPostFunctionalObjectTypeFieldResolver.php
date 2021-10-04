@@ -33,7 +33,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
     protected URLScalarTypeResolver $urlScalarTypeResolver;
     
     #[Required]
-    public function autowireCustomPostFunctionalObjectTypeFieldResolver(
+    final public function autowireCustomPostFunctionalObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,

@@ -15,7 +15,7 @@ abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedSe
     protected InstanceManagerInterface $instanceManager;
 
     #[Required]
-    public function autowireAbstractBlockCategory(InstanceManagerInterface $instanceManager): void
+    final public function autowireAbstractBlockCategory(InstanceManagerInterface $instanceManager): void
     {
         $this->instanceManager = $instanceManager;
     }

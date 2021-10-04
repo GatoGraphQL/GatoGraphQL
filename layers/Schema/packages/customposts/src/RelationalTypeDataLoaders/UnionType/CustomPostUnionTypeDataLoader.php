@@ -14,7 +14,7 @@ class CustomPostUnionTypeDataLoader extends AbstractUnionTypeDataLoader
     protected CustomPostUnionTypeResolver $customPostUnionTypeResolver;
 
     #[Required]
-    public function autowireCustomPostUnionTypeDataLoader(
+    final public function autowireCustomPostUnionTypeDataLoader(
         CustomPostUnionTypeResolver $customPostUnionTypeResolver,
     ): void {
         $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;

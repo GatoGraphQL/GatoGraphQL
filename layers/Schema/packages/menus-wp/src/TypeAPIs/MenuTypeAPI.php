@@ -19,7 +19,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
     protected HooksAPIInterface $hooksAPI;
 
     #[Required]
-    public function autowireMenuTypeAPI(HooksAPIInterface $hooksAPI): void
+    final public function autowireMenuTypeAPI(HooksAPIInterface $hooksAPI): void
     {
         $this->hooksAPI = $hooksAPI;
     }

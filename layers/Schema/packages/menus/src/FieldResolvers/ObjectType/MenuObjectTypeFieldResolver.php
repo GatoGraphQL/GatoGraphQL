@@ -26,7 +26,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
 
     #[Required]
-    public function autowireMenuObjectTypeFieldResolver(
+    final public function autowireMenuObjectTypeFieldResolver(
         MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         MenuItemObjectTypeResolver $menuItemObjectTypeResolver,

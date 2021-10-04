@@ -16,7 +16,7 @@ class AdminFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
     protected SchemaConfigAdminFieldsBlock $schemaConfigAdminFieldsBlock;
 
     #[Required]
-    public function autowireAdminFieldsSchemaConfigurationExecuter(
+    final public function autowireAdminFieldsSchemaConfigurationExecuter(
         SchemaConfigAdminFieldsBlock $schemaConfigAdminFieldsBlock,
     ): void {
         $this->schemaConfigAdminFieldsBlock = $schemaConfigAdminFieldsBlock;

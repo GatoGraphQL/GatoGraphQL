@@ -12,7 +12,7 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
     protected PostTagTypeAPIInterface $postTagTypeAPI;
 
     #[Required]
-    public function autowireAbstractSubscribeToOrUnsubscribeFromTagMutationResolver(
+    final public function autowireAbstractSubscribeToOrUnsubscribeFromTagMutationResolver(
         PostTagTypeAPIInterface $postTagTypeAPI,
     ): void {
         $this->postTagTypeAPI = $postTagTypeAPI;

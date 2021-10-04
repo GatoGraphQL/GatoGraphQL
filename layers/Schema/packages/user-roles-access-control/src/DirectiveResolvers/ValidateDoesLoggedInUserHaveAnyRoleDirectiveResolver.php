@@ -18,7 +18,7 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowireValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver(
+    final public function autowireValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver(
         UserRoleTypeAPIInterface $userRoleTypeAPI,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {

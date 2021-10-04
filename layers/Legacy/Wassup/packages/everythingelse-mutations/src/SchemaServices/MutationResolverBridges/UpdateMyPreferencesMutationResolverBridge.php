@@ -15,7 +15,7 @@ class UpdateMyPreferencesMutationResolverBridge extends AbstractComponentMutatio
     protected UpdateMyPreferencesMutationResolver $updateMyPreferencesMutationResolver;
     
     #[Required]
-    public function autowireUpdateMyPreferencesMutationResolverBridge(
+    final public function autowireUpdateMyPreferencesMutationResolverBridge(
         UpdateMyPreferencesMutationResolver $updateMyPreferencesMutationResolver,
     ): void {
         $this->updateMyPreferencesMutationResolver = $updateMyPreferencesMutationResolver;

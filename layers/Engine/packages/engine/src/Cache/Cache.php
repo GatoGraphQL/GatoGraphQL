@@ -14,7 +14,7 @@ class Cache extends UpstreamCache
     protected HooksAPIInterface $hooksAPI;
 
     #[Required]
-    public function autowireEngineCache(
+    final public function autowireEngineCache(
         HooksAPIInterface $hooksAPI,
     ): void {
         $this->hooksAPI = $hooksAPI;

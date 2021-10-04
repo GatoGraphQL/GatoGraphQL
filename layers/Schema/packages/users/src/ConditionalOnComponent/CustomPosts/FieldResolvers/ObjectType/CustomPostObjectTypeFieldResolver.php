@@ -17,7 +17,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver;
 
     #[Required]
-    public function autowireCustomPostObjectTypeFieldResolver(
+    final public function autowireCustomPostObjectTypeFieldResolver(
         CustomPostUserTypeAPIInterface $customPostUserTypeAPI,
         WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver,
     ): void {

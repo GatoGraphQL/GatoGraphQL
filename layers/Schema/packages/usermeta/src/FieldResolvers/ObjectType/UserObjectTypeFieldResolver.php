@@ -17,7 +17,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver;
 
     #[Required]
-    public function autowireUserObjectTypeFieldResolver(
+    final public function autowireUserObjectTypeFieldResolver(
         UserMetaTypeAPIInterface $userMetaAPI,
         WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
     ): void {

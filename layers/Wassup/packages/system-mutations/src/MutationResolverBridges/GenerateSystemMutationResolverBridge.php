@@ -13,7 +13,7 @@ class GenerateSystemMutationResolverBridge extends AbstractSystemComponentMutati
     protected GenerateSystemMutationResolver $generateSystemMutationResolver;
 
     #[Required]
-    public function autowireGenerateSystemMutationResolverBridge(
+    final public function autowireGenerateSystemMutationResolverBridge(
         GenerateSystemMutationResolver $generateSystemMutationResolver,
     ): void {
         $this->generateSystemMutationResolver = $generateSystemMutationResolver;

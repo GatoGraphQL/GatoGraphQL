@@ -27,7 +27,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     protected ModuleRegistryInterface $moduleRegistry;
 
     #[Required]
-    public function autowireSettingsMenuPage(
+    final public function autowireSettingsMenuPage(
         ModuleRegistryInterface $moduleRegistry,
     ): void {
         $this->moduleRegistry = $moduleRegistry;

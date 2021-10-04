@@ -14,7 +14,7 @@ class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeRe
     protected GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader;
 
     #[Required]
-    public function autowireGenericCustomPostObjectTypeResolver(
+    final public function autowireGenericCustomPostObjectTypeResolver(
         GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader,
     ): void {
         $this->genericCustomPostTypeDataLoader = $genericCustomPostTypeDataLoader;

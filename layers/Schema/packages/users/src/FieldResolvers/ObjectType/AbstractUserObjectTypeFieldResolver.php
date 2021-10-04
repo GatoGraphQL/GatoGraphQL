@@ -29,7 +29,7 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     protected UserObjectTypeResolver $userObjectTypeResolver;
 
     #[Required]
-    public function autowireAbstractUserObjectTypeFieldResolver(
+    final public function autowireAbstractUserObjectTypeFieldResolver(
         UserTypeAPIInterface $userTypeAPI,
         IntScalarTypeResolver $intScalarTypeResolver,
         UserObjectTypeResolver $userObjectTypeResolver,

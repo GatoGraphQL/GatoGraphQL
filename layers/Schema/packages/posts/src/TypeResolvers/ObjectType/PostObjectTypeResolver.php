@@ -14,7 +14,7 @@ class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
     protected PostTypeDataLoader $postTypeDataLoader;
 
     #[Required]
-    public function autowirePostObjectTypeResolver(
+    final public function autowirePostObjectTypeResolver(
         PostTypeDataLoader $postTypeDataLoader,
     ): void {
         $this->postTypeDataLoader = $postTypeDataLoader;

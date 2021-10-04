@@ -20,7 +20,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
     protected CustomPostUnmoderatedStatusEnumTypeResolver $customPostUnmoderatedStatusEnumTypeResolver;
 
     #[Required]
-    public function autowirePoP_Module_Processor_MultiSelectFilterInputs(
+    final public function autowirePoP_Module_Processor_MultiSelectFilterInputs(
         CustomPostModeratedStatusEnumTypeResolver $customPostModeratedStatusEnumTypeResolver,
         CustomPostUnmoderatedStatusEnumTypeResolver $customPostUnmoderatedStatusEnumTypeResolver,
     ): void {

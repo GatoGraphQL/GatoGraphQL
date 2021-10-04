@@ -14,7 +14,7 @@ class PersistedQueryEndpointSchemaConfigurator extends AbstractCustomPostEndpoin
     protected PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface $persistedQueryEndpointSchemaConfigurationExecuterRegistry;
 
     #[Required]
-    public function autowirePersistedQueryEndpointSchemaConfigurator(
+    final public function autowirePersistedQueryEndpointSchemaConfigurator(
         PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface $persistedQueryEndpointSchemaConfigurationExecuterRegistry
     ): void {
         $this->persistedQueryEndpointSchemaConfigurationExecuterRegistry = $persistedQueryEndpointSchemaConfigurationExecuterRegistry;

@@ -18,7 +18,7 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
 
     #[Required]
-    public function autowireSkipDirectiveResolver(
+    final public function autowireSkipDirectiveResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;

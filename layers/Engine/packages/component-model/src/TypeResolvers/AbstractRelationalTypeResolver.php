@@ -64,7 +64,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected DirectivePipelineServiceInterface $directivePipelineService;
 
     #[Required]
-    public function autowireAbstractRelationalTypeResolver(
+    final public function autowireAbstractRelationalTypeResolver(
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         ErrorProviderInterface $errorProvider,

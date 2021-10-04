@@ -18,7 +18,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     
     #[Required]
-    public function autowirePoP_Application_DataLoad_ObjectTypeFieldResolver_Posts(
+    final public function autowirePoP_Application_DataLoad_ObjectTypeFieldResolver_Posts(
         StringScalarTypeResolver $stringScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {

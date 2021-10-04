@@ -20,7 +20,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected IntScalarTypeResolver $intScalarTypeResolver;
 
     #[Required]
-    public function autowireMenuObjectTypeFieldResolver(
+    final public function autowireMenuObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
     ): void {

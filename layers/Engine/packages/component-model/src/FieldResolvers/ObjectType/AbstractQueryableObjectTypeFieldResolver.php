@@ -19,7 +19,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
     protected ModuleProcessorManagerInterface $moduleProcessorManager;
 
     #[Required]
-    public function autowireAbstractQueryableObjectTypeFieldResolver(
+    final public function autowireAbstractQueryableObjectTypeFieldResolver(
         ModuleProcessorManagerInterface $moduleProcessorManager,
     ): void {
         $this->moduleProcessorManager = $moduleProcessorManager;

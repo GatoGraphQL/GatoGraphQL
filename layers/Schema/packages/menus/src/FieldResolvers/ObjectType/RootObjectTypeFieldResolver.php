@@ -26,7 +26,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     protected MenuTypeAPIInterface $menuTypeAPI;
 
     #[Required]
-    public function autowireRootObjectTypeFieldResolver(
+    final public function autowireRootObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,
         MenuObjectTypeResolver $menuObjectTypeResolver,

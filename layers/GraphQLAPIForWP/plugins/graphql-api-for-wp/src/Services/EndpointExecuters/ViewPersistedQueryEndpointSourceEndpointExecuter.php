@@ -23,7 +23,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
     protected PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock;
 
     #[Required]
-    public function autowireViewPersistedQueryEndpointSourceEndpointExecuter(
+    final public function autowireViewPersistedQueryEndpointSourceEndpointExecuter(
         GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
         UserAuthorizationInterface $userAuthorization,
         GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,

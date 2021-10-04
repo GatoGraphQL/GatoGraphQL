@@ -13,7 +13,7 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
     protected URLScalarTypeResolver $urlScalarTypeResolver;
 
     #[Required]
-    public function autowirePoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_FunctionalSocialMediaItems(
+    final public function autowirePoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_FunctionalSocialMediaItems(
         SocialMediaProviderEnumTypeResolver $socialMediaProviderEnumTypeResolver,
         URLScalarTypeResolver $urlScalarTypeResolver,
     ): void {

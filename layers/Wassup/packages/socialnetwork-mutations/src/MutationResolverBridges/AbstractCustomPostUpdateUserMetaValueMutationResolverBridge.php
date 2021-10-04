@@ -13,7 +13,7 @@ abstract class AbstractCustomPostUpdateUserMetaValueMutationResolverBridge exten
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
 
     #[Required]
-    public function autowireAbstractCustomPostUpdateUserMetaValueMutationResolverBridge(
+    final public function autowireAbstractCustomPostUpdateUserMetaValueMutationResolverBridge(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ): void {
         $this->customPostTypeAPI = $customPostTypeAPI;

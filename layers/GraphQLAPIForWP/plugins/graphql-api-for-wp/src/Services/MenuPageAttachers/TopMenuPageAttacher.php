@@ -20,7 +20,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     protected GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage;
 
     #[Required]
-    public function autowireTopMenuPageAttacher(
+    final public function autowireTopMenuPageAttacher(
         MenuPageHelper $menuPageHelper,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,

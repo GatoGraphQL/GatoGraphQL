@@ -14,7 +14,7 @@ class SchemaConfigurationBlockCategory extends AbstractBlockCategory
     protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType;
 
     #[Required]
-    public function autowireSchemaConfigurationBlockCategory(
+    final public function autowireSchemaConfigurationBlockCategory(
         GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
     ): void {
         $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;

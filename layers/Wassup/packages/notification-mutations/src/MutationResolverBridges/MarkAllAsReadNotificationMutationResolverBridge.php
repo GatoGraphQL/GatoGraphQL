@@ -15,7 +15,7 @@ class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentM
     protected MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver;
 
     #[Required]
-    public function autowireMarkAllAsReadNotificationMutationResolverBridge(
+    final public function autowireMarkAllAsReadNotificationMutationResolverBridge(
         MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver,
     ): void {
         $this->markAllAsReadNotificationMutationResolver = $markAllAsReadNotificationMutationResolver;

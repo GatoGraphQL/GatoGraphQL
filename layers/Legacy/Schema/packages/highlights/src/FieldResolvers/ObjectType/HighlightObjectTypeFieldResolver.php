@@ -23,7 +23,7 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected URLScalarTypeResolver $urlScalarTypeResolver;
     
     #[Required]
-    public function autowireHighlightObjectTypeFieldResolver(
+    final public function autowireHighlightObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         URLScalarTypeResolver $urlScalarTypeResolver,
     ): void {

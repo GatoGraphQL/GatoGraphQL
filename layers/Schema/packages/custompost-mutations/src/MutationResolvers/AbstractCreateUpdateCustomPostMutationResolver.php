@@ -33,7 +33,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     protected CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI;
 
     #[Required]
-    public function autowireAbstractCreateUpdateCustomPostMutationResolver(
+    final public function autowireAbstractCreateUpdateCustomPostMutationResolver(
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
         NameResolverInterface $nameResolver,
         UserRoleTypeAPIInterface $userRoleTypeAPI,

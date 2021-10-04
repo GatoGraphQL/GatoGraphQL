@@ -21,7 +21,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     protected DirectiveRegistryInterface $directiveRegistry;
 
     #[Required]
-    public function autowireFilterSystemDirectiveSchemaObjectTypeFieldResolver(
+    final public function autowireFilterSystemDirectiveSchemaObjectTypeFieldResolver(
         DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver,
         DirectiveRegistryInterface $directiveRegistry,
     ): void {

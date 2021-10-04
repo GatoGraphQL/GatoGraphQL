@@ -18,7 +18,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
     
     #[Required]
-    public function autowireIsCustomPostInterfaceTypeFieldResolver(
+    final public function autowireIsCustomPostInterfaceTypeFieldResolver(
         DateScalarTypeResolver $dateScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,

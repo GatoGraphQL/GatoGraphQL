@@ -12,7 +12,7 @@ abstract class AbstractUserAvatarTypeAPI implements UserAvatarTypeAPIInterface
     protected HooksAPIInterface $hooksAPI;
 
     #[Required]
-    public function autowireAbstractUserAvatarTypeAPI(HooksAPIInterface $hooksAPI): void
+    final public function autowireAbstractUserAvatarTypeAPI(HooksAPIInterface $hooksAPI): void
     {
         $this->hooksAPI = $hooksAPI;
     }

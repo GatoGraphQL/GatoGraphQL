@@ -14,7 +14,7 @@ class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoad
     protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
 
     #[Required]
-    public function autowireSchemaDefinitionReferenceTypeDataLoader(
+    final public function autowireSchemaDefinitionReferenceTypeDataLoader(
         SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
     ): void {
         $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;

@@ -18,7 +18,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowirePostObjectTypeFieldResolver(
+    final public function autowirePostObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;

@@ -13,7 +13,7 @@ class MutationRootTypeDataLoader extends AbstractObjectTypeDataLoader
     protected MutationRoot $mutationRoot;
 
     #[Required]
-    public function autowireMutationRootTypeDataLoader(
+    final public function autowireMutationRootTypeDataLoader(
         MutationRoot $mutationRoot,
     ): void {
         $this->mutationRoot = $mutationRoot;

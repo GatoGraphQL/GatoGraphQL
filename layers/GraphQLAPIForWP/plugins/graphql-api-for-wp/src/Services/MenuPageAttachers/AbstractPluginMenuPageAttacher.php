@@ -16,7 +16,7 @@ abstract class AbstractPluginMenuPageAttacher extends AbstractMenuPageAttacher
     protected PluginMenu $pluginMenu;
 
     #[Required]
-    public function autowireAbstractPluginMenuPageAttacher(
+    final public function autowireAbstractPluginMenuPageAttacher(
         PluginMenu $pluginMenu,
     ): void {
         $this->pluginMenu = $pluginMenu;

@@ -30,7 +30,7 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
     #[Required]
-    public function autowireCustomPostRelationalFieldDataloadModuleProcessor(
+    final public function autowireCustomPostRelationalFieldDataloadModuleProcessor(
         CustomPostUnionTypeResolver $customPostUnionTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ): void {

@@ -17,7 +17,7 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
     protected URLScalarTypeResolver $urlScalarTypeResolver;
     
     #[Required]
-    public function autowireAbstractLocationFunctionalObjectTypeFieldResolver(
+    final public function autowireAbstractLocationFunctionalObjectTypeFieldResolver(
         URLScalarTypeResolver $urlScalarTypeResolver,
     ): void {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;

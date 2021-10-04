@@ -13,7 +13,7 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
     protected EngineInterface $engine;
 
     #[Required]
-    public function autowireRESTDataStructureFormatter(
+    final public function autowireRESTDataStructureFormatter(
         EngineInterface $engine,
     ): void {
         $this->engine = $engine;

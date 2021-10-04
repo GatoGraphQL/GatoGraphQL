@@ -18,7 +18,7 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     
     #[Required]
-    public function autowireObjectTypeFieldResolver_Users(
+    final public function autowireObjectTypeFieldResolver_Users(
         StringScalarTypeResolver $stringScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {

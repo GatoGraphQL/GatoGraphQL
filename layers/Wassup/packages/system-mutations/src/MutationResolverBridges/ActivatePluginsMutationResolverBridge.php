@@ -13,7 +13,7 @@ class ActivatePluginsMutationResolverBridge extends AbstractSystemComponentMutat
     protected ActivatePluginsMutationResolver $activatePluginsMutationResolver;
 
     #[Required]
-    public function autowireActivatePluginsMutationResolverBridge(
+    final public function autowireActivatePluginsMutationResolverBridge(
         ActivatePluginsMutationResolver $activatePluginsMutationResolver,
     ): void {
         $this->activatePluginsMutationResolver = $activatePluginsMutationResolver;

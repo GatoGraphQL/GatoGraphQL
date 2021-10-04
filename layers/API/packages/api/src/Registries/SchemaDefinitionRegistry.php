@@ -29,7 +29,7 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
     protected Root $root;
 
     #[Required]
-    public function autowireSchemaDefinitionRegistry(
+    final public function autowireSchemaDefinitionRegistry(
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         TranslationAPIInterface $translationAPI,

@@ -15,7 +15,7 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     protected IDScalarTypeResolver $idScalarTypeResolver;
 
     #[Required]
-    public function autowireElementalInterfaceTypeFieldResolver(
+    final public function autowireElementalInterfaceTypeFieldResolver(
         IDScalarTypeResolver $idScalarTypeResolver,
     ): void {
         $this->idScalarTypeResolver = $idScalarTypeResolver;

@@ -13,7 +13,7 @@ class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
     protected PostTypeAPIInterface $postTypeAPI;
 
     #[Required]
-    public function autowirePostTypeDataLoader(
+    final public function autowirePostTypeDataLoader(
         PostTypeAPIInterface $postTypeAPI,
     ): void {
         $this->postTypeAPI = $postTypeAPI;

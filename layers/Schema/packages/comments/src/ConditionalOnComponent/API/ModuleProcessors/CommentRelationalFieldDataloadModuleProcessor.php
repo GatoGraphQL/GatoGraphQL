@@ -19,7 +19,7 @@ class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFi
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
     #[Required]
-    public function autowireCommentRelationalFieldDataloadModuleProcessor(
+    final public function autowireCommentRelationalFieldDataloadModuleProcessor(
         CommentObjectTypeResolver $commentObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ): void {

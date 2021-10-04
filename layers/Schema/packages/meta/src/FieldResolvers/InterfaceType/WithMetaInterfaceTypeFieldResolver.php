@@ -18,7 +18,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowireWithMetaInterfaceTypeFieldResolver(
+    final public function autowireWithMetaInterfaceTypeFieldResolver(
         AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {

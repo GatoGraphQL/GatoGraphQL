@@ -15,7 +15,7 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
     protected UserAvatarTypeDataLoader $userAvatarTypeDataLoader;
 
     #[Required]
-    public function autowireUserAvatarObjectTypeResolver(
+    final public function autowireUserAvatarObjectTypeResolver(
         UserAvatarTypeDataLoader $userAvatarTypeDataLoader,
     ): void {
         $this->userAvatarTypeDataLoader = $userAvatarTypeDataLoader;

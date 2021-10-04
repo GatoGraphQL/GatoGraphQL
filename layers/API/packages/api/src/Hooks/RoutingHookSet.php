@@ -18,7 +18,7 @@ class RoutingHookSet extends AbstractHookSet
     protected RequestHelperServiceInterface $requestHelperService;
 
     #[Required]
-    public function autowireRoutingHookSet(
+    final public function autowireRoutingHookSet(
         CMSServiceInterface $cmsService,
         RequestHelperServiceInterface $requestHelperService,
     ): void {

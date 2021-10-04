@@ -14,7 +14,7 @@ abstract class AbstractConfigurableAccessControlForDirectivesInPrivateSchemaRela
     protected AccessControlManagerInterface $accessControlManager;
 
     #[Required]
-    public function autowireAbstractConfigurableAccessControlForDirectivesInPrivateSchemaRelationalTypeResolverDecorator(
+    final public function autowireAbstractConfigurableAccessControlForDirectivesInPrivateSchemaRelationalTypeResolverDecorator(
         AccessControlManagerInterface $accessControlManager,
     ): void {
         $this->accessControlManager = $accessControlManager;

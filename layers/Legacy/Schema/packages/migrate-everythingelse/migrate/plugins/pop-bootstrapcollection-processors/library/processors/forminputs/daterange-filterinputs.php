@@ -17,7 +17,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
     protected DateScalarTypeResolver $dateScalarTypeResolver;
 
     #[Required]
-    public function autowirePoP_Module_Processor_DateRangeComponentFilterInputs(
+    final public function autowirePoP_Module_Processor_DateRangeComponentFilterInputs(
         DateScalarTypeResolver $dateScalarTypeResolver,
     ): void {
         $this->dateScalarTypeResolver = $dateScalarTypeResolver;

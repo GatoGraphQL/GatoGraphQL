@@ -14,7 +14,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
     protected CreateUpdateWithCommunityOrganizationProfileMutationResolver $createUpdateWithCommunityOrganizationProfileMutationResolver;
     
     #[Required]
-    public function autowireCreateUpdateWithCommunityOrganizationProfileMutationResolverBridge(
+    final public function autowireCreateUpdateWithCommunityOrganizationProfileMutationResolverBridge(
         CreateUpdateWithCommunityOrganizationProfileMutationResolver $createUpdateWithCommunityOrganizationProfileMutationResolver,
     ): void {
         $this->createUpdateWithCommunityOrganizationProfileMutationResolver = $createUpdateWithCommunityOrganizationProfileMutationResolver;

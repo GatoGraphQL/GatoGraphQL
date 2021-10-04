@@ -25,7 +25,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
 
     #[Required]
-    public function autowireUserObjectTypeFieldResolver(
+    final public function autowireUserObjectTypeFieldResolver(
         UserTypeAPIInterface $userTypeAPI,
         EmailScalarTypeResolver $emailScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,

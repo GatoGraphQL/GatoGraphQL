@@ -14,7 +14,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
 
     #[Required]
-    public function autowireFlagCustomPostMutationResolver(
+    final public function autowireFlagCustomPostMutationResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ): void {
         $this->customPostTypeAPI = $customPostTypeAPI;

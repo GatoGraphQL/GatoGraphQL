@@ -24,7 +24,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     protected IDScalarTypeResolver $idScalarTypeResolver;
 
     #[Required]
-    public function autowireAbstractRootObjectTypeFieldResolver(
+    final public function autowireAbstractRootObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,
     ): void {

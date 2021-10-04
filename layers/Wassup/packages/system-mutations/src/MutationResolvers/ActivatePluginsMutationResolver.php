@@ -15,7 +15,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     protected ApplicationInfoInterface $applicationInfo;
 
     #[Required]
-    public function autowireActivatePluginsMutationResolver(
+    final public function autowireActivatePluginsMutationResolver(
         CMSServiceInterface $cmsService,
         ApplicationInfoInterface $applicationInfo,
     ): void {

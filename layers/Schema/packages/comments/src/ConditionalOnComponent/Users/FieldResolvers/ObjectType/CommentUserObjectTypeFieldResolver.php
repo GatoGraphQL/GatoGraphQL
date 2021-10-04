@@ -18,7 +18,7 @@ class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected UserObjectTypeResolver $userObjectTypeResolver;
 
     #[Required]
-    public function autowireCommentUserObjectTypeFieldResolver(
+    final public function autowireCommentUserObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         UserObjectTypeResolver $userObjectTypeResolver,
     ): void {

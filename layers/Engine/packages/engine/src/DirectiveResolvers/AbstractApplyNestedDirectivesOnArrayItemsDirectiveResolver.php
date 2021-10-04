@@ -30,7 +30,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
     protected MixedScalarTypeResolver $mixedScalarTypeResolver;
 
     #[Required]
-    public function autowireAbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver(
+    final public function autowireAbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver(
         DirectivePipelineServiceInterface $directivePipelineService,
         MixedScalarTypeResolver $mixedScalarTypeResolver,
     ): void {

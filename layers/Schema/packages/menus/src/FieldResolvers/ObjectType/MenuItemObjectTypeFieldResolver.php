@@ -27,7 +27,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected MenuItemObjectTypeResolver $menuItemObjectTypeResolver;
 
     #[Required]
-    public function autowireMenuItemObjectTypeFieldResolver(
+    final public function autowireMenuItemObjectTypeFieldResolver(
         MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
         CMSHelperServiceInterface $cmsHelperService,
         URLScalarTypeResolver $urlScalarTypeResolver,

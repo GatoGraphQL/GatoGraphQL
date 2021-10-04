@@ -16,7 +16,7 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
     protected PageTypeAPIInterface $pageTypeAPI;
 
     #[Required]
-    public function autowirePageObjectTypeResolver(
+    final public function autowirePageObjectTypeResolver(
         PageTypeDataLoader $pageTypeDataLoader,
         PageTypeAPIInterface $pageTypeAPI,
     ): void {

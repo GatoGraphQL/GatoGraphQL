@@ -23,7 +23,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver;
 
     #[Required]
-    public function autowireCommentObjectTypeFieldResolver(
+    final public function autowireCommentObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         CommentObjectTypeResolver $commentObjectTypeResolver,
         AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
