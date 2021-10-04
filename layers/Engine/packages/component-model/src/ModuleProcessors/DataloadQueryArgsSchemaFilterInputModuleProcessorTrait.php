@@ -7,5 +7,4 @@ namespace PoP\ComponentModel\ModuleProcessors;
 trait DataloadQueryArgsSchemaFilterInputModuleProcessorTrait
 {
     use FilterInputModuleProcessorTrait;
-    use SchemaFilterInputModuleProcessorTrait;
 }
