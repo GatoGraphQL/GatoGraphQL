@@ -19,7 +19,7 @@ trait FieldOrDirectiveResolverTrait
     protected TranslationAPIInterface $translationAPI;
 
     #[Required]
-    final public function autowireUseObjectDictionaryTypeDataLoaderTrait(
+    final public function autowireFieldOrDirectiveResolverTrait(
         TranslationAPIInterface $translationAPI,
     ): void {
         $this->translationAPI = $translationAPI;

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\Container\ObjectDictionaryInterface;
-use PoP\ComponentModel\Facades\Container\ObjectDictionaryFacade;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 

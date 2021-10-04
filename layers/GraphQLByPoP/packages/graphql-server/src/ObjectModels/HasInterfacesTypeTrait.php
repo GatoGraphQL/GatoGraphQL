@@ -5,13 +5,26 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use Exception;
-use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
+use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Translation\TranslationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait HasInterfacesTypeTrait
 {
+    protected TranslationAPIInterface $translationAPI;
+    protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
+
+    #[Required]
+    final public function autowireHasInterfacesTypeTrait(
+        TranslationAPIInterface $translationAPI,
+        SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
+    ): void {
+        $this->translationAPI = $translationAPI;
+        $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
+    }
+    
     /**
      * @var InterfaceType[]
      */
@@ -28,7 +41,6 @@ trait HasInterfacesTypeTrait
                 SchemaDefinition::ARGNAME_INTERFACES,
             ]
         );
-        $schemaDefinitionReferenceRegistry = SchemaDefinitionReferenceRegistryFacade::getInstance();
         $interfaceSchemaDefinitionPointer = SchemaDefinitionHelpers::advancePointerToPath($fullSchemaDefinition, $interfaceSchemaDefinitionPath);
         foreach ($interfaceSchemaDefinitionPointer as $interfaceName) {
             // The InterfaceType must have already been registered on the root, under "interfaces"
@@ -39,11 +51,10 @@ trait HasInterfacesTypeTrait
                 ]
             );
             // If the interface was not registered, that means that no ObjectTypeFieldResolver implements it
-            $interface = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReference($schemaDefinitionID);
+            $interface = $this->schemaDefinitionReferenceRegistry->getSchemaDefinitionReference($schemaDefinitionID);
             if ($interface === null) {
-                $translationAPI = TranslationAPIFacade::getInstance();
                 throw new Exception(sprintf(
-                    $translationAPI->__('No ObjectTypeFieldResolver resolves Interface \'%s\' for schema definition path \'%s\'', 'graphql-server'),
+                    $this->translationAPI->__('No ObjectTypeFieldResolver resolves Interface \'%s\' for schema definition path \'%s\'', 'graphql-server'),
                     $interfaceName,
                     implode(' => ', $schemaDefinitionPath)
                 ));

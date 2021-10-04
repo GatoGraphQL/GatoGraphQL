@@ -18,7 +18,7 @@ trait SetTagsOnPostObjectTypeFieldResolverTrait
     protected TranslationAPIInterface $translationAPI;
 
     #[Required]
-    final public function autowireWithLimitFieldArgResolverTrait(
+    final public function autowireSetTagsOnPostObjectTypeFieldResolverTrait(
         PostObjectTypeResolver $postObjectTypeResolver,
         SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver,
         TranslationAPIInterface $translationAPI,
