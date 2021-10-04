@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 trait SchemaFilterInputModuleProcessorTrait
@@ -62,6 +63,6 @@ trait SchemaFilterInputModuleProcessorTrait
         if ($filterSchemaDefinitionResolver !== $this) {
             return $filterSchemaDefinitionResolver->getFilterInputTypeModifiers($module);
         }
-        return 0;
+        return SchemaTypeModifiers::NONE;
     }
 }

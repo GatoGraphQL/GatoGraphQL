@@ -124,7 +124,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
             self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS
                 => SchemaTypeModifiers::IS_ARRAY,
             default
-                => 0,
+                => SchemaTypeModifiers::NONE,
         };
     }
 

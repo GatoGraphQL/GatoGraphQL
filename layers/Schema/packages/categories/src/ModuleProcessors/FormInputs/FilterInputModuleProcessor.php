@@ -75,7 +75,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CATEGORY_IDS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            default => 0,
+            default => SchemaTypeModifiers::NONE,
         };
     }
 

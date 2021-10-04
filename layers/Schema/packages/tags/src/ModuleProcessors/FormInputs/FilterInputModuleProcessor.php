@@ -88,7 +88,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             self::MODULE_FILTERINPUT_TAG_IDS
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
-                => 0,
+                => SchemaTypeModifiers::NONE,
         };
     }
 

@@ -83,7 +83,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
             MutationInputProperties::AUTHOR_EMAIL
                 => (ComponentConfiguration::requireCommenterNameAndEmail() ? SchemaTypeModifiers::MANDATORY : 0),
             default
-                => 0,
+                => SchemaTypeModifiers::NONE,
         };
     }
 }

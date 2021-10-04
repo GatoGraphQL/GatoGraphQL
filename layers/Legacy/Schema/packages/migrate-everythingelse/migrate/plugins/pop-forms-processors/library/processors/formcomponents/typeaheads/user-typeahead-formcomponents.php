@@ -118,7 +118,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
     {
         return match($module[1]) {
             self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => SchemaTypeModifiers::IS_ARRAY,
-            default => 0,
+            default => SchemaTypeModifiers::NONE,
         };
     }
 

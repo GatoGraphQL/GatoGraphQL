@@ -11,6 +11,7 @@ use PoP\ComponentModel\Resolvers\EnumTypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -164,7 +165,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldTypeModifiers($fieldName);
         }
-        return 0;
+        return SchemaTypeModifiers::NONE;
     }
 
     public function getFieldDeprecationDescription(string $fieldName, array $fieldArgs = []): ?string
@@ -212,7 +213,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldArgTypeModifiers($fieldName, $fieldArgName);
         }
-        return 0;
+        return SchemaTypeModifiers::NONE;
     }
 
     /**
@@ -251,7 +252,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getSchemaFieldArgTypeModifiers($fieldName, $fieldArgName);
         }
-        return 0;
+        return SchemaTypeModifiers::NONE;
     }
 
     /**

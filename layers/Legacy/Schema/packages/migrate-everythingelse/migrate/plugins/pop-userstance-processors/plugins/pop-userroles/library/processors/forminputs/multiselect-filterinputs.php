@@ -90,7 +90,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
     {
         return match($module[1]) {
             self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT => SchemaTypeModifiers::IS_ARRAY,
-            default => 0,
+            default => SchemaTypeModifiers::NONE,
         };
     }
 
