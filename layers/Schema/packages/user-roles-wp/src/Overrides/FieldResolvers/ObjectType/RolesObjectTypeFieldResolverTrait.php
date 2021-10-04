@@ -14,7 +14,7 @@ trait RolesObjectTypeFieldResolverTrait
     protected UserRoleObjectTypeResolver $userRoleObjectTypeResolver;
 
     #[Required]
-    public function autowireRolesObjectTypeFieldResolverTrait(
+    public function autowireUserRolesWPRolesObjectTypeFieldResolverTrait(
         UserRoleObjectTypeResolver $userRoleObjectTypeResolver,
     ): void {
         $this->userRoleObjectTypeResolver = $userRoleObjectTypeResolver;
