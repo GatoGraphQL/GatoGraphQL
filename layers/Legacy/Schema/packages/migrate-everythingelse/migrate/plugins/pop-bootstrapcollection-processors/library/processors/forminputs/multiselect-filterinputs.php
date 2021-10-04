@@ -108,7 +108,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
             self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS
                 => SchemaTypeModifiers::IS_ARRAY,
             default
-                => 0,
+                => SchemaTypeModifiers::NONE,
         };
     }
 

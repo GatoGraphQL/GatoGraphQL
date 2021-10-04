@@ -134,7 +134,7 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
             self::MODULE_FILTERINPUT_POSTSECTIONS
                 => SchemaTypeModifiers::IS_ARRAY,
             default
-                => 0,
+                => SchemaTypeModifiers::NONE,
         };
     }
 

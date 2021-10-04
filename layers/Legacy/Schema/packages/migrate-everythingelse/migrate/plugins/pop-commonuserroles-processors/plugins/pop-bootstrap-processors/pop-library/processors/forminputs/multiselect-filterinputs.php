@@ -131,7 +131,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES
                 => SchemaTypeModifiers::IS_ARRAY,
             default
-                => 0,
+                => SchemaTypeModifiers::NONE,
         };
     }
 

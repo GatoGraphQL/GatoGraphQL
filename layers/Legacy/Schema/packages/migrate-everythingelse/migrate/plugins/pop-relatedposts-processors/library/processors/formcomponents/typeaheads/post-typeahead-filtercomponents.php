@@ -93,7 +93,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
     {
         return match($module[1]) {
             self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => SchemaTypeModifiers::IS_ARRAY,
-            default => 0,
+            default => SchemaTypeModifiers::NONE,
         };
     }
 

@@ -90,7 +90,7 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
     {
         return match($module[1]) {
             self::MODULE_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT => SchemaTypeModifiers::IS_ARRAY,
-            default => 0,
+            default => SchemaTypeModifiers::NONE,
         };
     }
 

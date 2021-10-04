@@ -118,7 +118,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
     {
         return match($module[1]) {
             self::MODULE_FILTERINPUT_LINKCATEGORIES => SchemaTypeModifiers::IS_ARRAY,
-            default => 0,
+            default => SchemaTypeModifiers::NONE,
         };
     }
 
