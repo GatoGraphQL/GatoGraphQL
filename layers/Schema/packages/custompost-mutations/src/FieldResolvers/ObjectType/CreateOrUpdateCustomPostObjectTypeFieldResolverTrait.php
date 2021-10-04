@@ -68,7 +68,7 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
     ): ?int {
         return match ($fieldArgName) {
             MutationInputProperties::ID => SchemaTypeModifiers::MANDATORY,
-            default => null,
+            default => 0,
         };
     }
 }
