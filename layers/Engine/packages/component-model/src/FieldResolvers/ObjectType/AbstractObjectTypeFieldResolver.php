@@ -837,25 +837,27 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @return array<array>|null A checkpoint set, or null
+     * @return array<array> A set of checkpoint sets
      */
-    protected function getValidationCheckpoints(
+    protected function getValidationCheckpointSets(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
         array $fieldArgs = []
-    ): ?array {
+    ): array {
+        $validationCheckpointSets = [];
         // Check that mutations can be executed
         if ($this->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null) {
-            return CheckpointSets::CAN_EXECUTE_MUTATIONS;
+            $validationCheckpointSets[] = CheckpointSets::CAN_EXECUTE_MUTATIONS;
         }
-        return null;
+        return $validationCheckpointSets;
     }
 
     /**
      * @param array<string, mixed> $fieldArgs
      */
     protected function getValidationCheckpointsErrorMessage(
+        array $checkpointSet,
         Error $error,
         string $errorMessage,
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -876,16 +878,20 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         array $fieldArgs = []
     ): ?array {
         // Can perform validation through checkpoints
-        if ($checkpoints = $this->getValidationCheckpoints($objectTypeResolver, $object, $fieldName, $fieldArgs)) {
-            $validation = $this->engine->validateCheckpoints($checkpoints);
-            if (GeneralUtils::isError($validation)) {
-                /** @var Error */
-                $error = $validation;
-                $errorMessage = $error->getMessageOrCode();
-                // Allow to customize the error message for the failing entity
-                return [
-                    $this->getValidationCheckpointsErrorMessage($error, $errorMessage, $objectTypeResolver, $object, $fieldName, $fieldArgs)
-                ];
+        if ($checkpointSets = $this->getValidationCheckpointSets($objectTypeResolver, $object, $fieldName, $fieldArgs)) {
+            $errorMessages = [];
+            foreach ($checkpointSets as $checkpointSet) {
+                $validation = $this->engine->validateCheckpoints($checkpointSet);
+                if (GeneralUtils::isError($validation)) {
+                    /** @var Error */
+                    $error = $validation;
+                    $errorMessage = $error->getMessageOrCode();
+                    // Allow to customize the error message for the failing entity
+                    $errorMessages[] = $this->getValidationCheckpointsErrorMessage($checkpointSet, $error, $errorMessage, $objectTypeResolver, $object, $fieldName, $fieldArgs);
+                }
+            }
+            if ($errorMessages) {
+                return $errorMessages;
             }
         }
 
