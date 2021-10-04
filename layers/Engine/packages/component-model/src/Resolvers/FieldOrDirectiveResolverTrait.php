@@ -9,11 +9,21 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Translation\TranslationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait FieldOrDirectiveResolverTrait
 {
     use FieldOrDirectiveSchemaDefinitionResolverTrait;
+
+    protected TranslationAPIInterface $translationAPI;
+
+    #[Required]
+    public function autowireFieldOrDirectiveResolverTrait(
+        TranslationAPIInterface $translationAPI,
+    ): void {
+        $this->translationAPI = $translationAPI;
+    }
 
     /**
      * @var array<array|null>
@@ -48,31 +58,30 @@ trait FieldOrDirectiveResolverTrait
         string $type
     ): ?string {
         if ($missing = SchemaHelpers::getMissingFieldArgs($mandatoryFieldOrDirectiveArgNames, $fieldOrDirectiveArgs)) {
-            $translationAPI = TranslationAPIFacade::getInstance();
             $treatUndefinedFieldOrDirectiveArgsAsErrors = ComponentConfiguration::treatUndefinedFieldOrDirectiveArgsAsErrors();
             $errorMessage = count($missing) == 1 ?
                 sprintf(
-                    $translationAPI->__('Argument \'%1$s\' cannot be empty', 'component-model'),
+                    $this->translationAPI->__('Argument \'%1$s\' cannot be empty', 'component-model'),
                     $missing[0]
                 ) :
                 sprintf(
-                    $translationAPI->__('Arguments \'%1$s\' cannot be empty', 'component-model'),
-                    implode($translationAPI->__('\', \''), $missing)
+                    $this->translationAPI->__('Arguments \'%1$s\' cannot be empty', 'component-model'),
+                    implode($this->translationAPI->__('\', \''), $missing)
                 );
             if ($treatUndefinedFieldOrDirectiveArgsAsErrors) {
                 return $errorMessage;
             }
             return count($missing) == 1 ?
                 sprintf(
-                    $translationAPI->__('%s, so %2$s \'%3$s\' has been ignored', 'component-model'),
+                    $this->translationAPI->__('%s, so %2$s \'%3$s\' has been ignored', 'component-model'),
                     $errorMessage,
-                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                     $fieldOrDirectiveName
                 ) :
                 sprintf(
-                    $translationAPI->__('%s, so %2$s \'%3$s\' has been ignored', 'component-model'),
+                    $this->translationAPI->__('%s, so %2$s \'%3$s\' has been ignored', 'component-model'),
                     $errorMessage,
-                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                     $fieldOrDirectiveName
                 );
         }
@@ -101,7 +110,6 @@ trait FieldOrDirectiveResolverTrait
         array $fieldOrDirectiveArgs,
         string $type
     ): ?array {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $errors = [];
         $fieldOrDirectiveArgumentNames = array_keys($fieldOrDirectiveArgsSchemaDefinition);
         foreach ($fieldOrDirectiveArgumentNames as $fieldOrDirectiveArgumentName) {
@@ -144,9 +152,9 @@ trait FieldOrDirectiveResolverTrait
                 && is_array($fieldOrDirectiveArgumentValue)
             ) {
                 $errors[] = sprintf(
-                    $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must not be an array', 'component-model'),
+                    $this->translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must not be an array', 'component-model'),
                     $fieldOrDirectiveArgumentName,
-                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                     $fieldOrDirectiveName
                 );
             } elseif (
@@ -154,9 +162,9 @@ trait FieldOrDirectiveResolverTrait
                 && !is_array($fieldOrDirectiveArgumentValue)
             ) {
                 $errors[] = sprintf(
-                    $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
+                    $this->translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
                     $fieldOrDirectiveArgumentName,
-                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                     $fieldOrDirectiveName
                 );
             } elseif (
@@ -168,9 +176,9 @@ trait FieldOrDirectiveResolverTrait
                 )
             ) {
                 $errors[] = sprintf(
-                    $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
+                    $this->translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
                     $fieldOrDirectiveArgumentName,
-                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                     $fieldOrDirectiveName
                 );
             } elseif (
@@ -183,9 +191,9 @@ trait FieldOrDirectiveResolverTrait
                 )
             ) {
                 $errors[] = sprintf(
-                    $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' must not contain arrays', 'component-model'),
+                    $this->translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' must not contain arrays', 'component-model'),
                     $fieldOrDirectiveArgumentName,
-                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                     $fieldOrDirectiveName
                 );
             } elseif (
@@ -199,9 +207,9 @@ trait FieldOrDirectiveResolverTrait
                 )
             ) {
                 $errors[] = sprintf(
-                    $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array of arrays', 'component-model'),
+                    $this->translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array of arrays', 'component-model'),
                     $fieldOrDirectiveArgumentName,
-                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                     $fieldOrDirectiveName
                 );
             } elseif (
@@ -216,9 +224,9 @@ trait FieldOrDirectiveResolverTrait
                 )
             ) {
                 $errors[] = sprintf(
-                    $translationAPI->__('The array of arrays for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
+                    $this->translationAPI->__('The array of arrays for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
                     $fieldOrDirectiveArgumentName,
-                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                     $fieldOrDirectiveName
                 );
             }
@@ -289,7 +297,6 @@ trait FieldOrDirectiveResolverTrait
         array $fieldOrDirectiveArgs,
         string $type
     ): array {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $errors = $deprecations = [];
         $fieldOrDirectiveArgumentNames = array_keys($enumTypeFieldOrDirectiveArgsSchemaDefinition);
         $schemaFieldArgumentEnumValueDefinitions = SchemaHelpers::getSchemaFieldArgEnumValueDefinitions($enumTypeFieldOrDirectiveArgsSchemaDefinition);
@@ -335,9 +342,9 @@ trait FieldOrDirectiveResolverTrait
                     && is_array($fieldOrDirectiveArgumentValue)
                 ) {
                     $errors[] = sprintf(
-                        $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must not be an array', 'component-model'),
+                        $this->translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must not be an array', 'component-model'),
                         $fieldOrDirectiveArgumentName,
-                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName
                     );
                     continue;
@@ -347,9 +354,9 @@ trait FieldOrDirectiveResolverTrait
                     && !is_array($fieldOrDirectiveArgumentValue)
                 ) {
                     $errors[] = sprintf(
-                        $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
+                        $this->translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array', 'component-model'),
                         $fieldOrDirectiveArgumentName,
-                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName
                     );
                     continue;
@@ -364,9 +371,9 @@ trait FieldOrDirectiveResolverTrait
                     )
                 ) {
                     $errors[] = sprintf(
-                        $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
+                        $this->translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
                         $fieldOrDirectiveArgumentName,
-                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName
                     );
                     continue;
@@ -380,9 +387,9 @@ trait FieldOrDirectiveResolverTrait
                     )
                 ) {
                     $errors[] = sprintf(
-                        $translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' must not contain arrays', 'component-model'),
+                        $this->translationAPI->__('The array for argument \'%1$s\' in %2$s \'%3$s\' must not contain arrays', 'component-model'),
                         $fieldOrDirectiveArgumentName,
-                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName
                     );
                     continue;
@@ -397,9 +404,9 @@ trait FieldOrDirectiveResolverTrait
                     )
                 ) {
                     $errors[] = sprintf(
-                        $translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array of arrays', 'component-model'),
+                        $this->translationAPI->__('The value for argument \'%1$s\' in %2$s \'%3$s\' must be an array of arrays', 'component-model'),
                         $fieldOrDirectiveArgumentName,
-                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName
                     );
                     continue;
@@ -417,9 +424,9 @@ trait FieldOrDirectiveResolverTrait
                     )
                 ) {
                     $errors[] = sprintf(
-                        $translationAPI->__('The array of arrays for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
+                        $this->translationAPI->__('The array of arrays for argument \'%1$s\' in %2$s \'%3$s\' cannot have `null` values', 'component-model'),
                         $fieldOrDirectiveArgumentName,
-                        $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                        $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                         $fieldOrDirectiveName
                     );
                     continue;
@@ -460,7 +467,6 @@ trait FieldOrDirectiveResolverTrait
         string $fieldOrDirectiveName,
         string $type
     ): void {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $errorItems = $deprecationItems = [];
         foreach ($fieldOrDirectiveArgumentValueItems as $fieldOrDirectiveArgumentValueItem) {
             $fieldOrDirectiveArgumentValueDefinition = $schemaFieldOrDirectiveArgumentEnumValues[$fieldOrDirectiveArgumentValueItem] ?? null;
@@ -477,30 +483,30 @@ trait FieldOrDirectiveResolverTrait
             $fieldOrDirectiveArgumentEnumValues = array_keys($fieldOrDirectiveArgumentEnumValues);
             if (count($errorItems) === 1) {
                 $errors[] = sprintf(
-                    $translationAPI->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is not allowed (the only allowed values are: \'%5$s\')', 'component-model'),
-                    implode($translationAPI->__('\', \''), $errorItems),
+                    $this->translationAPI->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is not allowed (the only allowed values are: \'%5$s\')', 'component-model'),
+                    implode($this->translationAPI->__('\', \''), $errorItems),
                     $fieldOrDirectiveArgumentName,
-                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                     $fieldOrDirectiveName,
-                    implode($translationAPI->__('\', \''), $fieldOrDirectiveArgumentEnumValues)
+                    implode($this->translationAPI->__('\', \''), $fieldOrDirectiveArgumentEnumValues)
                 );
             } else {
                 $errors[] = sprintf(
-                    $translationAPI->__('Values \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' are not allowed (the only allowed values are: \'%5$s\')', 'component-model'),
-                    implode($translationAPI->__('\', \''), $errorItems),
+                    $this->translationAPI->__('Values \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' are not allowed (the only allowed values are: \'%5$s\')', 'component-model'),
+                    implode($this->translationAPI->__('\', \''), $errorItems),
                     $fieldOrDirectiveArgumentName,
-                    $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                    $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                     $fieldOrDirectiveName,
-                    implode($translationAPI->__('\', \''), $fieldOrDirectiveArgumentEnumValues)
+                    implode($this->translationAPI->__('\', \''), $fieldOrDirectiveArgumentEnumValues)
                 );
             }
         }
         foreach ($deprecationItems as $fieldOrDirectiveArgumentValueItem => $deprecationItemDescription) {
             $deprecations[] = sprintf(
-                $translationAPI->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is deprecated: \'%5$s\'', 'component-model'),
+                $this->translationAPI->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is deprecated: \'%5$s\'', 'component-model'),
                 $fieldOrDirectiveArgumentValueItem,
                 $fieldOrDirectiveArgumentName,
-                $type == ResolverTypes::FIELD ? $translationAPI->__('field', 'component-model') : $translationAPI->__('directive', 'component-model'),
+                $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                 $fieldOrDirectiveName,
                 $deprecationItemDescription
             );

@@ -4,11 +4,28 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
-use GraphQLAPI\GraphQLAPI\Facades\ContentProcessors\MarkdownContentParserFacade;
 use InvalidArgumentException;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait MarkdownContentRetrieverTrait
 {
+    protected ?MarkdownContentParserInterface $markdownContentParser;
+
+    /**
+     * Make all properties nullable, becase the ModuleRegistry is registered
+     * in the SystemContainer, where there are no typeResolvers so it will be null,
+     * and in the ApplicationContainer, from where the "Modules" page is resolved
+     * and which does have all the typeResolvers.
+     * Function `getDescription` will only be accessed from the Application Container,
+     * so the properties will not be null in that situation.
+     */
+    #[Required]
+    public function autowireMarkdownContentRetrieverTrait(
+        ?MarkdownContentParserInterface $markdownContentParser,
+    ): void {
+        $this->markdownContentParser = $markdownContentParser;
+    }
+    
     /**
      * @param array<string, mixed> $options
      */
@@ -17,12 +34,11 @@ trait MarkdownContentRetrieverTrait
         string $relativePathDir = '',
         array $options = []
     ): ?string {
-        $markdownContentParser = MarkdownContentParserFacade::getInstance();
         // Inject the place to look for the documentation
-        $markdownContentParser->setBaseDir($this->getBaseDir());
-        $markdownContentParser->setBaseURL($this->getBaseURL());
+        $this->markdownContentParser->setBaseDir($this->getBaseDir());
+        $this->markdownContentParser->setBaseURL($this->getBaseURL());
         try {
-            return $markdownContentParser->getContent(
+            return $this->markdownContentParser->getContent(
                 $markdownFilename,
                 $relativePathDir,
                 $options

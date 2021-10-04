@@ -4,12 +4,22 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\AttachableExtensions;
 
-use PoP\ComponentModel\Facades\AttachableExtensions\AttachableExtensionManagerFacade;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\Root\Services\ServiceTrait;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait AttachableExtensionTrait
 {
     use ServiceTrait;
+
+    protected AttachableExtensionManagerInterface $attachableExtensionManager;
+
+    #[Required]
+    public function autowireAttachableExtensionTrait(
+        AttachableExtensionManagerInterface $attachableExtensionManager,
+    ): void {
+        $this->attachableExtensionManager = $attachableExtensionManager;
+    }
 
     /**
      * It is represented through a static class, because the extensions work at class level, not object level
@@ -30,9 +40,8 @@ trait AttachableExtensionTrait
      */
     public function attach(string $group): void
     {
-        $attachableExtensionManager = AttachableExtensionManagerFacade::getInstance();
         foreach ($this->getClassesToAttachTo() as $attachableClass) {
-            $attachableExtensionManager->attachExtensionToClass(
+            $this->attachableExtensionManager->attachExtensionToClass(
                 $attachableClass,
                 $group,
                 $this

@@ -6,20 +6,29 @@ namespace GraphQLAPI\GraphQLAPI\Services\Clients;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
-use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait CustomEndpointClientTrait
 {
+    protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
+    protected RequestHelperServiceInterface $requestHelperService;
+
+    #[Required]
+    public function autowireCustomEndpointClientTrait(
+        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
+        RequestHelperServiceInterface $requestHelperService,
+    ): void {
+        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
+        $this->requestHelperService = $requestHelperService;
+    }
+
     /**
      * Enable only when executing a single CPT
      */
     protected function isClientDisabled(): bool
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var GraphQLCustomEndpointCustomPostType */
-        $customPostTypeService = $instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
-        if (!\is_singular($customPostTypeService->getCustomPostType())) {
+        if (!\is_singular($this->graphQLCustomEndpointCustomPostType->getCustomPostType())) {
             return true;
         }
         return parent::isClientDisabled();
@@ -30,12 +39,11 @@ trait CustomEndpointClientTrait
      */
     protected function getEndpointURL(): string
     {
-        $requestHelperService = RequestHelperServiceFacade::getInstance();
         /**
          * If accessing from Nginx, the server_name might point to localhost
          * instead of the actual server domain. So use the user-requested host
          */
-        $fullURL = $requestHelperService->getRequestedFullURL(true);
+        $fullURL = $this->requestHelperService->getRequestedFullURL(true);
         // Remove the ?view=...
         $endpointURL = \remove_query_arg(RequestParams::VIEW, $fullURL);
         // // Maybe add ?use_namespace=true

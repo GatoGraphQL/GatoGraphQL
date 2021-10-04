@@ -5,10 +5,20 @@ declare(strict_types=1);
 namespace PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait ConfigurableMandatoryDirectivesForDirectivesTrait
 {
+    protected InstanceManagerInterface $instanceManager;
+
+    #[Required]
+    public function autowireConfigurableMandatoryDirectivesForDirectivesTrait(
+        InstanceManagerInterface $instanceManager,
+    ): void {
+        $this->instanceManager = $instanceManager;
+    }
+
     /**
      * Configuration entries
      */
@@ -42,9 +52,8 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
      */
     final protected function getDirectiveResolvers(): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         return array_map(
-            fn (string $directiveResolverClass) => $instanceManager->getInstance($directiveResolverClass),
+            fn (string $directiveResolverClass) => $this->instanceManager->getInstance($directiveResolverClass),
             $this->getDirectiveResolverClasses()
         );
     }

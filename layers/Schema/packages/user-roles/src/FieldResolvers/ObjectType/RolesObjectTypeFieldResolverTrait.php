@@ -7,10 +7,20 @@ namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Translation\TranslationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait RolesObjectTypeFieldResolverTrait
 {
+    protected TranslationAPIInterface $translationAPI;
+
+    #[Required]
+    public function autowireRolesObjectTypeFieldResolverTrait(
+        TranslationAPIInterface $translationAPI,
+    ): void {
+        $this->translationAPI = $translationAPI;
+    }
+
     public function getFieldNamesToResolve(): array
     {
         return [
@@ -39,10 +49,9 @@ trait RolesObjectTypeFieldResolverTrait
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return match ($fieldName) {
-            'roles' => $translationAPI->__('All user roles', 'user-roles'),
-            'capabilities' => $translationAPI->__('All user capabilities', 'user-roles'),
+            'roles' => $this->translationAPI->__('All user roles', 'user-roles'),
+            'capabilities' => $this->translationAPI->__('All user capabilities', 'user-roles'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

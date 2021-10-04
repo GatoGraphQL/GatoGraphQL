@@ -6,10 +6,20 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\BlockConstants;
-use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
+use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait WithTypeFieldControlBlockTrait
 {
+    protected TypeRegistryInterface $typeRegistry;
+
+    #[Required]
+    public function autowireWithTypeFieldControlBlockTrait(
+        TypeRegistryInterface $typeRegistry,
+    ): void {
+        $this->typeRegistry = $typeRegistry;
+    }
+
     /**
      * Convert the typeFields from the format saved in the post: "typeNamespacedName.fieldName",
      * to the one suitable for printing on the page, to show the user: "typeName/fieldName"
@@ -20,16 +30,15 @@ trait WithTypeFieldControlBlockTrait
     public function getTypeFieldsForPrint(array $typeFields): array
     {
         $groupFieldsUnderTypeForPrint = ComponentConfiguration::groupFieldsUnderTypeForPrint();
-        $typeRegistry = TypeRegistryFacade::getInstance();
         // For each class, obtain its namespacedTypeName
-        $objectTypeResolvers = $typeRegistry->getObjectTypeResolvers();
+        $objectTypeResolvers = $this->typeRegistry->getObjectTypeResolvers();
         $namespacedObjectTypeNameNames = [];
         foreach ($objectTypeResolvers as $objectTypeResolver) {
             $objectTypeResolverNamespacedName = $objectTypeResolver->getNamespacedTypeName();
             $namespacedObjectTypeNameNames[$objectTypeResolverNamespacedName] = $objectTypeResolver->getMaybeNamespacedTypeName();
         }
         // For each interface, obtain its namespacedInterfaceName
-        $interfaceTypeResolvers = $typeRegistry->getInterfaceTypeResolvers();
+        $interfaceTypeResolvers = $this->typeRegistry->getInterfaceTypeResolvers();
         $namespacedInterfaceTypeNameNames = [];
         foreach ($interfaceTypeResolvers as $interfaceTypeResolver) {
             $interfaceTypeResolverNamespacedName = $interfaceTypeResolver->getNamespacedTypeName();

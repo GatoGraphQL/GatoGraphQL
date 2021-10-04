@@ -6,15 +6,27 @@ namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderInterface;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Hooks\HooksAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait QueryDataModuleProcessorTrait
 {
     use FilterDataModuleProcessorTrait;
+
+    protected HooksAPIInterface $hooksAPI;
+    protected ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler;
+
+    #[Required]
+    public function autowireQueryDataModuleProcessorTrait(
+        HooksAPIInterface $hooksAPI,
+        ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler,
+    ): void {
+        $this->hooksAPI = $hooksAPI;
+        $this->actionExecutionQueryInputOutputHandler = $actionExecutionQueryInputOutputHandler;
+    }
 
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
@@ -26,8 +38,7 @@ trait QueryDataModuleProcessorTrait
     }
     public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        return $instanceManager->getInstance(ActionExecutionQueryInputOutputHandler::class);
+        return $this->actionExecutionQueryInputOutputHandler;
     }
     // public function getFilter(array $module)
     // {
@@ -85,7 +96,7 @@ trait QueryDataModuleProcessorTrait
         if ($datasource == DataSources::MUTABLEONREQUEST && !($data_properties[DataloadingConstants::IGNOREREQUESTPARAMS] ?? null)) {
             // Merge with $_REQUEST, so that params passed through the URL can be used for the query (eg: ?limit=5)
             // But whitelist the params that can be taken, to avoid hackers peering inside the system and getting custom data (eg: params "include", "post-status" => "draft", etc)
-            $whitelisted_params = (array)HooksAPIFacade::getInstance()->applyFilters(
+            $whitelisted_params = (array)$this->hooksAPI->applyFilters(
                 Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,
                 array(
                     Params::PAGE_NUMBER,
@@ -100,7 +111,7 @@ trait QueryDataModuleProcessorTrait
                 ARRAY_FILTER_USE_KEY
             );
 
-            $params_from_request = HooksAPIFacade::getInstance()->applyFilters(
+            $params_from_request = $this->hooksAPI->applyFilters(
                 'QueryDataModuleProcessorTrait:request:filter_params',
                 $params_from_request
             );

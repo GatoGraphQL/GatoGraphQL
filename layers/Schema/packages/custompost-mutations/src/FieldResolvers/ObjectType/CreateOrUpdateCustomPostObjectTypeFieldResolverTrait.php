@@ -22,7 +22,7 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    final public function autowireCreateOrUpdateCustomPostObjectTypeFieldResolverTrait(
+    public function autowireCreateOrUpdateCustomPostObjectTypeFieldResolverTrait(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,

@@ -4,12 +4,22 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
+use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait SchemaFilterInputModuleProcessorTrait
 {
+    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
+
+    #[Required]
+    public function autowireSchemaFilterInputModuleProcessorTrait(
+        SchemaDefinitionServiceInterface $schemaDefinitionService,
+    ): void {
+        $this->schemaDefinitionService = $schemaDefinitionService;
+    }
+
     protected function getFilterInputSchemaDefinitionResolver(array $module): DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
     {
         return $this;
@@ -26,8 +36,7 @@ trait SchemaFilterInputModuleProcessorTrait
 
     protected function getDefaultSchemaFilterInputTypeResolver(): InputTypeResolverInterface
     {
-        $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        return $schemaDefinitionService->getDefaultInputTypeResolver();
+        return $this->schemaDefinitionService->getDefaultInputTypeResolver();
     }
 
     public function getFilterInputDescription(array $module): ?string

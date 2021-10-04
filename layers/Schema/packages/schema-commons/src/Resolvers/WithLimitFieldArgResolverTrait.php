@@ -5,12 +5,21 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\Resolvers;
 
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait WithLimitFieldArgResolverTrait
 {
     private ?string $limitFilterInputName = null;
+    protected TranslationAPIInterface $translationAPI;
+
+    #[Required]
+    public function autowireWithLimitFieldArgResolverTrait(
+        TranslationAPIInterface $translationAPI,
+    ): void {
+        $this->translationAPI = $translationAPI;
+    }
 
     /**
      * Check the limit is not above the max limit or below -1
@@ -49,13 +58,11 @@ trait WithLimitFieldArgResolverTrait
         string $fieldArgName,
         mixed $fieldArgValue
     ): ?string {
-        $translationAPI = TranslationAPIFacade::getInstance();
-
         // Check the value is not below what is accepted
         $minLimit = $maxLimit === -1 ? -1 : 1;
         if ($fieldArgValue < $minLimit) {
             return sprintf(
-                $translationAPI->__('The value for argument \'%s\' in field \'%s\' cannot be below \'%s\'', 'schema-commons'),
+                $this->translationAPI->__('The value for argument \'%s\' in field \'%s\' cannot be below \'%s\'', 'schema-commons'),
                 $fieldArgName,
                 $fieldName,
                 $minLimit
@@ -65,7 +72,7 @@ trait WithLimitFieldArgResolverTrait
         // Check the value is not below the max limit
         if ($maxLimit !== -1 && $fieldArgValue > $maxLimit) {
             return sprintf(
-                $translationAPI->__('The value for argument \'%s\' in field \'%s\' cannot be above \'%s\'', 'posts'),
+                $this->translationAPI->__('The value for argument \'%s\' in field \'%s\' cannot be above \'%s\'', 'posts'),
                 $fieldArgName,
                 $fieldName,
                 $maxLimit

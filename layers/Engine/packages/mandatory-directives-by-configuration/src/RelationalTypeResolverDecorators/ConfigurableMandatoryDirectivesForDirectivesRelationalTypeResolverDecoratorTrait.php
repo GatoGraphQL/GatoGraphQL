@@ -5,19 +5,28 @@ declare(strict_types=1);
 namespace PoP\MandatoryDirectivesByConfiguration\RelationalTypeResolverDecorators;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForDirectivesTrait;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait
 {
     use ConfigurableMandatoryDirectivesForDirectivesTrait;
 
+    protected InstanceManagerInterface $instanceManager;
+
+    #[Required]
+    public function autowireConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait(
+        InstanceManagerInterface $instanceManager,
+    ): void {
+        $this->instanceManager = $instanceManager;
+    }
+
     abstract protected function getMandatoryDirectives(mixed $entryValue = null): array;
 
     public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
         $mandatoryDirectivesForDirectives = [];
         foreach ($this->getEntries() as $entry) {
             $directiveResolverClass = $entry[0];
@@ -28,13 +37,13 @@ trait ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecorato
              * So check that the instance exists, and if it doesn't, then
              * skip processing the entry
              */
-            if (!$instanceManager->hasInstance($directiveResolverClass)) {
+            if (!$this->instanceManager->hasInstance($directiveResolverClass)) {
                 continue;
             }
             /**
              * Just to be on the safe side, also validate the instance is a directive
              */
-            $directiveResolver = $instanceManager->getInstance($directiveResolverClass);
+            $directiveResolver = $this->instanceManager->getInstance($directiveResolverClass);
             if (!($directiveResolver instanceof DirectiveResolverInterface)) {
                 continue;
             }

@@ -23,6 +23,7 @@ use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
 use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
@@ -101,6 +102,14 @@ class Engine implements EngineInterface
      * @var array<string,array<string,mixed>>
      */
     protected array $relationalTypeResolverNameIDsDataFields = [];
+    
+    /**
+     * Cannot autowire because its calling `getNamespace`
+     * on services.yaml produces an exception of PHP properties not initialized
+     * in its depended services.
+     */
+    protected ?PersistentCacheInterface $persistentCache = null;
+
     protected TranslationAPIInterface $translationAPI;
     protected HooksAPIInterface $hooksAPI;
     protected DataStructureManagerInterface $dataStructureManager;
@@ -116,7 +125,6 @@ class Engine implements EngineInterface
     protected DataloadHelperServiceInterface $dataloadHelperService;
     protected EntryModuleManagerInterface $entryModuleManager;
     protected RequestHelperServiceInterface $requestHelperService;
-    protected PersistentCacheInterface $persistentCache;
 
     #[Required]
     final public function autowireEngine(
@@ -135,7 +143,6 @@ class Engine implements EngineInterface
         DataloadHelperServiceInterface $dataloadHelperService,
         EntryModuleManagerInterface $entryModuleManager,
         RequestHelperServiceInterface $requestHelperService,
-        PersistentCacheInterface $persistentCache,
     ): void {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
@@ -152,7 +159,11 @@ class Engine implements EngineInterface
         $this->dataloadHelperService = $dataloadHelperService;
         $this->entryModuleManager = $entryModuleManager;
         $this->requestHelperService = $requestHelperService;
-        $this->persistentCache = $persistentCache;
+    }
+
+    final public function getPersistentCache(): PersistentCacheInterface {
+        $this->persistentCache ??= PersistentCacheFacade::getInstance();
+        return $this->persistentCache;
     }
 
     public function getOutputData(): array
@@ -321,10 +332,7 @@ class Engine implements EngineInterface
 
     public function getModelPropsModuletree(array $module): array
     {
-        if ($useCache = ComponentConfiguration::useComponentModelCache()) {
-            $useCache = $this->persistentCache !== null;
-        }
-
+        $useCache = ComponentConfiguration::useComponentModelCache();
         $processor = $this->moduleProcessorManager->getProcessor($module);
 
         // Important: cannot use it if doing POST, because the request may have to be handled by a different block than the one whose data was cached
@@ -332,7 +340,7 @@ class Engine implements EngineInterface
         // First check if there's a cache stored
         $model_props = null;
         if ($useCache) {
-            $model_props = $this->persistentCache->getCacheByModelInstance(self::CACHETYPE_PROPS);
+            $model_props = $this->getPersistentCache()->getCacheByModelInstance(self::CACHETYPE_PROPS);
         }
 
         // If there is no cached one, or not using the cache, generate the props and cache it
@@ -341,7 +349,7 @@ class Engine implements EngineInterface
             $processor->initModelPropsModuletree($module, $model_props, [], []);
 
             if ($useCache) {
-                $this->persistentCache->storeCacheByModelInstance(self::CACHETYPE_PROPS, $model_props);
+                $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_PROPS, $model_props);
             }
         }
 
@@ -497,12 +505,8 @@ class Engine implements EngineInterface
 
     public function getModuleDatasetSettings(array $module, $model_props, array &$props): array
     {
-        if ($useCache = ComponentConfiguration::useComponentModelCache()) {
-            $useCache = $this->persistentCache !== null;
-        }
-
         $ret = [];
-
+        $useCache = ComponentConfiguration::useComponentModelCache();
         $processor = $this->moduleProcessorManager->getProcessor($module);
 
         // From the state we know if to process static/staful content or both
@@ -512,7 +516,7 @@ class Engine implements EngineInterface
         // First check if there's a cache stored
         $immutable_datasetsettings = null;
         if ($useCache) {
-            $immutable_datasetsettings = $this->persistentCache->getCacheByModelInstance(self::CACHETYPE_IMMUTABLEDATASETSETTINGS);
+            $immutable_datasetsettings = $this->getPersistentCache()->getCacheByModelInstance(self::CACHETYPE_IMMUTABLEDATASETSETTINGS);
         }
 
         // If there is no cached one, generate the configuration and cache it
@@ -523,7 +527,7 @@ class Engine implements EngineInterface
             $immutable_datasetsettings = $processor->getImmutableSettingsDatasetmoduletree($module, $model_props);
 
             if ($useCache) {
-                $this->persistentCache->storeCacheByModelInstance(self::CACHETYPE_IMMUTABLEDATASETSETTINGS, $immutable_datasetsettings);
+                $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_IMMUTABLEDATASETSETTINGS, $immutable_datasetsettings);
             }
         }
 
@@ -880,10 +884,7 @@ class Engine implements EngineInterface
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
     public function getModuleData(array $root_module, array $root_model_props, array $root_props): array
     {
-        if ($useCache = ComponentConfiguration::useComponentModelCache()) {
-            $useCache = $this->persistentCache !== null;
-        }
-
+        $useCache = ComponentConfiguration::useComponentModelCache();
         $root_processor = $this->moduleProcessorManager->getProcessor($root_module);
 
         // From the state we know if to process static/staful content or both
@@ -919,21 +920,21 @@ class Engine implements EngineInterface
         // First check if there's a cache stored
         $immutable_data_properties = $mutableonmodel_data_properties = null;
         if ($useCache) {
-            $immutable_data_properties = $this->persistentCache->getCacheByModelInstance(self::CACHETYPE_STATICDATAPROPERTIES);
-            $mutableonmodel_data_properties = $this->persistentCache->getCacheByModelInstance(self::CACHETYPE_STATEFULDATAPROPERTIES);
+            $immutable_data_properties = $this->getPersistentCache()->getCacheByModelInstance(self::CACHETYPE_STATICDATAPROPERTIES);
+            $mutableonmodel_data_properties = $this->getPersistentCache()->getCacheByModelInstance(self::CACHETYPE_STATEFULDATAPROPERTIES);
         }
 
         // If there is no cached one, generate the props and cache it
         if ($immutable_data_properties === null) {
             $immutable_data_properties = $root_processor->getImmutableDataPropertiesDatasetmoduletree($root_module, $root_model_props);
             if ($useCache) {
-                $this->persistentCache->storeCacheByModelInstance(self::CACHETYPE_STATICDATAPROPERTIES, $immutable_data_properties);
+                $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_STATICDATAPROPERTIES, $immutable_data_properties);
             }
         }
         if ($mutableonmodel_data_properties === null) {
             $mutableonmodel_data_properties = $root_processor->getMutableonmodelDataPropertiesDatasetmoduletree($root_module, $root_model_props);
             if ($useCache) {
-                $this->persistentCache->storeCacheByModelInstance(self::CACHETYPE_STATEFULDATAPROPERTIES, $mutableonmodel_data_properties);
+                $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_STATEFULDATAPROPERTIES, $mutableonmodel_data_properties);
             }
         }
 

@@ -7,6 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 use GraphQLAPI\GraphQLAPI\Constants\DocumentationConstants;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Add translatable documentation to the script.
@@ -17,6 +18,15 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
  */
 trait HasDocumentationScriptTrait
 {
+    protected LocaleHelper $localeHelper;
+
+    #[Required]
+    public function autowireHasDocumentationScriptTrait(
+        LocaleHelper $localeHelper,
+    ): void {
+        $this->localeHelper = $localeHelper;
+    }
+
     /**
      * Docs are bundled as chunks by webpack, and loaded lazily
      * The `publicPath` property for `config.output` must be provided
@@ -39,10 +49,7 @@ trait HasDocumentationScriptTrait
         $data = [];
         // Add the locale language?
         if ($this->addLocalLanguage()) {
-            $instanceManager = InstanceManagerFacade::getInstance();
-            /** @var LocaleHelper */
-            $localeHelper = $instanceManager->getInstance(LocaleHelper::class);
-            $data[DocumentationConstants::LOCALE_LANG] = $localeHelper->getLocaleLanguage();
+            $data[DocumentationConstants::LOCALE_LANG] = $this->localeHelper->getLocaleLanguage();
         }
         // Add the default language?
         if ($defaultLang = $this->getDefaultLanguage()) {
@@ -103,10 +110,7 @@ trait HasDocumentationScriptTrait
             \wp_enqueue_script($scriptName . '-' . $defaultLang);
         }
         if ($this->addLocalLanguage()) {
-            $instanceManager = InstanceManagerFacade::getInstance();
-            /** @var LocaleHelper */
-            $localeHelper = $instanceManager->getInstance(LocaleHelper::class);
-            $localeLang = $localeHelper->getLocaleLanguage();
+            $localeLang = $this->localeHelper->getLocaleLanguage();
             // Check the current locale has been translated, otherwise if will try to load an unexisting file
             // If the locale lang is the same as the default lang, the file has already been loaded
             if ($localeLang != $defaultLang && in_array($localeLang, $this->getDocLanguages())) {

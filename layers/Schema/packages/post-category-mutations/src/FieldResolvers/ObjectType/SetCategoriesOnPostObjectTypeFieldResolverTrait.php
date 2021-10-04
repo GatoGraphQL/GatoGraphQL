@@ -4,38 +4,52 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostCategoryMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPSchema\PostCategoryMutations\MutationResolvers\SetCategoriesOnPostMutationResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait SetCategoriesOnPostObjectTypeFieldResolverTrait
 {
+    protected PostObjectTypeResolver $postObjectTypeResolver;
+    protected SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver;
+    protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
+    protected TranslationAPIInterface $translationAPI;
+
+    #[Required]
+    public function autowireSetCategoriesOnPostObjectTypeFieldResolverTrait(
+        PostObjectTypeResolver $postObjectTypeResolver,
+        SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver,
+        PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
+        TranslationAPIInterface $translationAPI,
+    ): void {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+        $this->setCategoriesOnPostMutationResolver = $setCategoriesOnPostMutationResolver;
+        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
+        $this->translationAPI = $translationAPI;
+    }
+
     public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        return $instanceManager->getInstance(PostObjectTypeResolver::class);
+        return $this->postObjectTypeResolver;
     }
 
     public function getSetCategoriesMutationResolver(): MutationResolverInterface
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        return $instanceManager->getInstance(SetCategoriesOnPostMutationResolver::class);
+        return $this->setCategoriesOnPostMutationResolver;
     }
 
     public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        return $instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+        return $this->postCategoryObjectTypeResolver;
     }
 
     protected function getEntityName(): string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        return $translationAPI->__('post', 'post-category-mutations');
+        return $this->translationAPI->__('post', 'post-category-mutations');
     }
 }

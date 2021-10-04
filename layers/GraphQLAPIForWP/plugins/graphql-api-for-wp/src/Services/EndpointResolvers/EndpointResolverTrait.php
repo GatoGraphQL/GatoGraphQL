@@ -4,18 +4,33 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointResolvers;
 
-use GraphQLByPoP\GraphQLRequest\Facades\Execution\QueryRetrieverFacade;
-use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet;
+use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
+use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHookSet;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\API\Schema\QueryInputs;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Routing\RouteNatures;
+use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 use WP_Query;
 
 trait EndpointResolverTrait
 {
+    protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
+    protected QueryRetrieverInterface $queryRetriever;
+    protected GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet;
+
+    #[Required]
+    public function autowireEndpointResolverTrait(
+        GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
+        QueryRetrieverInterface $queryRetriever,
+        GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet,
+    ): void {
+        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
+        $this->queryRetriever = $queryRetriever;
+        $this->graphQLRequestVarsHookSet = $graphQLRequestVarsHookSet;
+    }
+
     /**
      * Execute the GraphQL query
      */
@@ -93,15 +108,11 @@ trait EndpointResolverTrait
          */
         unset($_REQUEST[QueryInputs::QUERY]);
 
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var GraphQLDataStructureFormatter */
-        $graphQLDataStructureFormatter = $instanceManager->getInstance(GraphQLDataStructureFormatter::class);
-
         // Indicate it is an API, of type GraphQL. Just by doing is, class
         // \GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet will process the GraphQL request
         [&$vars] = $vars_in_array;
         $vars['scheme'] = APISchemes::API;
-        $vars['datastructure'] = $graphQLDataStructureFormatter->getName();
+        $vars['datastructure'] = $this->graphQLDataStructureFormatter->getName();
 
         /**
          * Enable the AdminEndpointResolver to not load the query,
@@ -141,18 +152,12 @@ trait EndpointResolverTrait
                 );
         }
         // Extract the operationName from the payload, it's not saved on the post!
-        $queryRetriever = QueryRetrieverFacade::getInstance();
         list(
             $unneededGraphQLQuery,
             $unneededVariables,
             $operationName
-        ) = $queryRetriever->extractRequestedGraphQLQueryPayload();
+        ) = $this->queryRetriever->extractRequestedGraphQLQueryPayload();
         // Add the query into $vars
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /**
-         * @var VarsHookSet
-         */
-        $graphQLAPIRequestHookSet = $instanceManager->getInstance(VarsHookSet::class);
-        $graphQLAPIRequestHookSet->addGraphQLQueryToVars($vars, $graphQLQuery, $operationName);
+        $this->graphQLRequestVarsHookSet->addGraphQLQueryToVars($vars, $graphQLQuery, $operationName);
     }
 }

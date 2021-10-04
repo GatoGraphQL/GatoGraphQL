@@ -19,6 +19,7 @@ use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\API\Registries\SchemaDefinitionRegistryInterface;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\State\ApplicationState;
@@ -28,7 +29,6 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegistryInterface
 {
-    protected PersistentCacheInterface $persistentCache;
     /**
      * @var array<string, mixed>
      */
@@ -42,6 +42,14 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * @var AbstractDynamicType[]
      */
     protected array $dynamicTypes = [];
+    
+    /**
+     * Cannot autowire because its calling `getNamespace`
+     * on services.yaml produces an exception of PHP properties not initialized
+     * in its depended services.
+     */
+    protected ?PersistentCacheInterface $persistentCache = null;
+
     protected TranslationAPIInterface $translationAPI;
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
     protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver;
@@ -55,14 +63,17 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
         SchemaDefinitionRegistryInterface $schemaDefinitionRegistry,
         GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
-        PersistentCacheInterface $persistentCache,
     ): void {
         $this->translationAPI = $translationAPI;
         $this->schemaDefinitionService = $schemaDefinitionService;
         $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
         $this->schemaDefinitionRegistry = $schemaDefinitionRegistry;
         $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
-        $this->persistentCache = $persistentCache;
+    }
+
+    final public function getPersistentCache(): PersistentCacheInterface {
+        $this->persistentCache ??= PersistentCacheFacade::getInstance();
+        return $this->persistentCache;
     }
 
     /**
@@ -106,8 +117,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 $cacheKey = hash('md5', json_encode($cacheKeyComponents));
             }
             if ($useCache) {
-                if ($this->persistentCache->hasCache($cacheKey, $cacheType)) {
-                    $this->fullSchemaDefinition = $this->persistentCache->getCache($cacheKey, $cacheType);
+                if ($this->getPersistentCache()->hasCache($cacheKey, $cacheType)) {
+                    $this->fullSchemaDefinition = $this->getPersistentCache()->getCache($cacheKey, $cacheType);
                 }
             }
 
@@ -126,7 +137,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
                 // Store in the cache
                 if ($useCache) {
-                    $this->persistentCache->storeCache($cacheKey, $cacheType, $this->fullSchemaDefinition);
+                    $this->getPersistentCache()->storeCache($cacheKey, $cacheType, $this->fullSchemaDefinition);
                 }
             }
         }

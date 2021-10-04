@@ -4,10 +4,20 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ItemProcessors;
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait ItemProcessorManagerTrait
 {
+    protected InstanceManagerInterface $instanceManager;
+
+    #[Required]
+    public function autowireItemProcessorManagerTrait(
+        InstanceManagerInterface $instanceManager,
+    ): void {
+        $this->instanceManager = $instanceManager;
+    }
+
     /**
      * @var array<string, array>
      */
@@ -49,8 +59,7 @@ trait ItemProcessorManagerTrait
             }
 
             // Get the instance from the InstanceManager
-            $instanceManager = InstanceManagerFacade::getInstance();
-            $processorInstance = $instanceManager->getInstance($itemProcessorClass);
+            $processorInstance = $this->instanceManager->getInstance($itemProcessorClass);
             $this->processors[$itemProcessorClass][$itemName] = $processorInstance;
         }
 
