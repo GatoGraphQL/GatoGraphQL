@@ -857,6 +857,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * @param array<string, mixed> $fieldArgs
      */
     protected function getValidationCheckpointsErrorMessage(
+        array $checkpointSet,
         Error $error,
         string $errorMessage,
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -886,7 +887,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                     $error = $validation;
                     $errorMessage = $error->getMessageOrCode();
                     // Allow to customize the error message for the failing entity
-                    $errorMessages[] = $this->getValidationCheckpointsErrorMessage($error, $errorMessage, $objectTypeResolver, $object, $fieldName, $fieldArgs);
+                    $errorMessages[] = $this->getValidationCheckpointsErrorMessage($checkpointSet, $error, $errorMessage, $objectTypeResolver, $object, $fieldName, $fieldArgs);
                 }
             }
             if ($errorMessages) {
