@@ -9,11 +9,19 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait MarkdownContentRetrieverTrait
 {
-    protected MarkdownContentParserInterface $markdownContentParser;
+    protected ?MarkdownContentParserInterface $markdownContentParser;
 
+    /**
+     * Make all properties nullable, becase the ModuleRegistry is registered
+     * in the SystemContainer, where there are no typeResolvers so it will be null,
+     * and in the ApplicationContainer, from where the "Modules" page is resolved
+     * and which does have all the typeResolvers.
+     * Function `getDescription` will only be accessed from the Application Container,
+     * so the properties will not be null in that situation.
+     */
     #[Required]
     final public function autowireMarkdownContentRetrieverTrait(
-        MarkdownContentParserInterface $markdownContentParser,
+        ?MarkdownContentParserInterface $markdownContentParser,
     ): void {
         $this->markdownContentParser = $markdownContentParser;
     }
