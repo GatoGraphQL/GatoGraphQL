@@ -13,7 +13,7 @@ class CreateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutat
     protected CreateStanceMutationResolver $createStanceMutationResolver;
 
     #[Required]
-    public function autowireCreateStanceMutationResolverBridge(
+    final public function autowireCreateStanceMutationResolverBridge(
         CreateStanceMutationResolver $createStanceMutationResolver,
     ): void {
         $this->createStanceMutationResolver = $createStanceMutationResolver;

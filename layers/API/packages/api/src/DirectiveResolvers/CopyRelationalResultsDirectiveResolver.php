@@ -22,7 +22,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
 
     #[Required]
-    public function autowireCopyRelationalResultsDirectiveResolver(
+    final public function autowireCopyRelationalResultsDirectiveResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {

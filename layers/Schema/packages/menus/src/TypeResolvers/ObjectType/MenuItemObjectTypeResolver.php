@@ -15,7 +15,7 @@ class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
     protected MenuItemTypeDataLoader $menuItemTypeDataLoader;
 
     #[Required]
-    public function autowireMenuItemObjectTypeResolver(
+    final public function autowireMenuItemObjectTypeResolver(
         MenuItemTypeDataLoader $menuItemTypeDataLoader,
     ): void {
         $this->menuItemTypeDataLoader = $menuItemTypeDataLoader;

@@ -20,7 +20,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowireRootPageObjectTypeFieldResolver(
+    final public function autowireRootPageObjectTypeFieldResolver(
         PageObjectTypeResolver $pageObjectTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {

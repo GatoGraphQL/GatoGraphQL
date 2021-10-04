@@ -19,7 +19,7 @@ class LocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     protected URLScalarTypeResolver $urlScalarTypeResolver;
     
     #[Required]
-    public function autowireLocationFunctionalObjectTypeFieldResolver(
+    final public function autowireLocationFunctionalObjectTypeFieldResolver(
         URLScalarTypeResolver $urlScalarTypeResolver,
     ): void {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;

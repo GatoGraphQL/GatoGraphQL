@@ -21,7 +21,7 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowireEchoOperatorGlobalObjectTypeFieldResolver(
+    final public function autowireEchoOperatorGlobalObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;

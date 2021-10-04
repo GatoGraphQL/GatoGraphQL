@@ -20,7 +20,7 @@ class UserAvatarObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected IntScalarTypeResolver $intScalarTypeResolver;
 
     #[Required]
-    public function autowireUserAvatarObjectTypeFieldResolver(
+    final public function autowireUserAvatarObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
     ): void {

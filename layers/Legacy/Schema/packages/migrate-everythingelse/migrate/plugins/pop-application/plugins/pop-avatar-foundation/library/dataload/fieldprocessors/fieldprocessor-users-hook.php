@@ -10,7 +10,7 @@ class PoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users extends 
     protected IntScalarTypeResolver $intScalarTypeResolver;
 
     #[Required]
-    public function autowirePoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users(
+    final public function autowirePoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users(
         IntScalarTypeResolver $intScalarTypeResolver,
     ): void {
         $this->intScalarTypeResolver = $intScalarTypeResolver;

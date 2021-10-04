@@ -18,7 +18,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     protected PageObjectTypeResolver $pageObjectTypeResolver;
 
     #[Required]
-    public function autowireFieldDataloadModuleProcessor(
+    final public function autowireFieldDataloadModuleProcessor(
         PageObjectTypeResolver $pageObjectTypeResolver,
     ): void {
         $this->pageObjectTypeResolver = $pageObjectTypeResolver;

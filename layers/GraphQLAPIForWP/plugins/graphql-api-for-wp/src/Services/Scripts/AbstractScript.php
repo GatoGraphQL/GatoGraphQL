@@ -25,7 +25,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
     protected GeneralUtils $generalUtils;
 
     #[Required]
-    public function autowireAbstractScript(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, GeneralUtils $generalUtils): void
+    final public function autowireAbstractScript(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, GeneralUtils $generalUtils): void
     {
         $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;

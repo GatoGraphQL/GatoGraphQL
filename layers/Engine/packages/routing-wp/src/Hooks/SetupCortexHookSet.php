@@ -17,7 +17,7 @@ class SetupCortexHookSet extends AbstractHookSet
     protected RoutingManagerInterface $routingManager;
 
     #[Required]
-    public function autowireSetupCortexHookSet(
+    final public function autowireSetupCortexHookSet(
         RoutingManagerInterface $routingManager,
     ): void {
         $this->routingManager = $routingManager;

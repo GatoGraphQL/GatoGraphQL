@@ -19,7 +19,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Mo
     protected IDScalarTypeResolver $idScalarTypeResolver;
 
     #[Required]
-    public function autowireGD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs(
+    final public function autowireGD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs(
         IDScalarTypeResolver $idScalarTypeResolver,
     ): void {
         $this->idScalarTypeResolver = $idScalarTypeResolver;

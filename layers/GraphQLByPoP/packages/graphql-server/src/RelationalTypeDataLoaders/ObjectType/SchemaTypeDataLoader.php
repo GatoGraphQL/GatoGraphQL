@@ -20,7 +20,7 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
     protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
 
     #[Required]
-    public function autowireSchemaTypeDataLoader(
+    final public function autowireSchemaTypeDataLoader(
         SchemaObjectTypeResolver $schemaObjectTypeResolver,
         SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
     ): void {

@@ -35,7 +35,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     protected EditorHelpers $editorHelpers;
 
     #[Required]
-    public function autowireAbstractBlock(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, UserAuthorizationInterface $userAuthorization, GeneralUtils $generalUtils, EditorHelpers $editorHelpers): void
+    final public function autowireAbstractBlock(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, UserAuthorizationInterface $userAuthorization, GeneralUtils $generalUtils, EditorHelpers $editorHelpers): void
     {
         $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;

@@ -29,7 +29,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     protected AboutMenuPage $aboutMenuPage;
 
     #[Required]
-    public function autowireBottomMenuPageAttacher(
+    final public function autowireBottomMenuPageAttacher(
         MenuPageHelper $menuPageHelper,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,

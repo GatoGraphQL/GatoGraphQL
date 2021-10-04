@@ -44,7 +44,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
      * so the properties will not be null in that situation.
      */
     #[Required]
-    public function autowireMetaSchemaTypeModuleResolver(
+    final public function autowireMetaSchemaTypeModuleResolver(
         ?CommentObjectTypeResolver $commentTypeResolver,
         ?PostTagObjectTypeResolver $postTagTypeResolver,
         ?PostCategoryObjectTypeResolver $postCategoryTypeResolver,

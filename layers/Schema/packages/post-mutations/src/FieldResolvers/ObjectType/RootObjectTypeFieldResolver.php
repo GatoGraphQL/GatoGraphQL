@@ -25,7 +25,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected UpdatePostMutationResolver $updatePostMutationResolver;
 
     #[Required]
-    public function autowireRootObjectTypeFieldResolver(
+    final public function autowireRootObjectTypeFieldResolver(
         PostObjectTypeResolver $postObjectTypeResolver,
         CreatePostMutationResolver $createPostMutationResolver,
         UpdatePostMutationResolver $updatePostMutationResolver,

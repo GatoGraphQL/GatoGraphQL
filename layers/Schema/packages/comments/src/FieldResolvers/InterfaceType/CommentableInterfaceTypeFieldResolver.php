@@ -28,7 +28,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     protected CommentObjectTypeResolver $commentObjectTypeResolver;
 
     #[Required]
-    public function autowireCommentableInterfaceTypeFieldResolver(
+    final public function autowireCommentableInterfaceTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
         CommentObjectTypeResolver $commentObjectTypeResolver,

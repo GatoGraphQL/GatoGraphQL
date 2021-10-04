@@ -18,7 +18,7 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     
     #[Required]
-    public function autowireTagFunctionalObjectTypeFieldResolver(
+    final public function autowireTagFunctionalObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;

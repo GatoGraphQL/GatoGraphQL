@@ -18,7 +18,7 @@ class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter impl
     protected GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator;
 
     #[Required]
-    public function autowireGraphiQLClientEndpointExecuter(
+    final public function autowireGraphiQLClientEndpointExecuter(
         CustomEndpointGraphiQLClient $customEndpointGraphiQLClient,
         GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator,
     ): void {

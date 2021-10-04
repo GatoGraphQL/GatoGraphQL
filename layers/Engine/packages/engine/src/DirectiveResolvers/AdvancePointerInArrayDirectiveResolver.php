@@ -18,7 +18,7 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowireAdvancePointerInArrayDirectiveResolver(
+    final public function autowireAdvancePointerInArrayDirectiveResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;

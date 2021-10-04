@@ -13,7 +13,7 @@ abstract class AbstractUserMetaTypeAPI implements UserMetaTypeAPIInterface
     protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
 
     #[Required]
-    public function autowireAbstractUserMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
+    final public function autowireAbstractUserMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
     {
         $this->allowOrDenySettingsService = $allowOrDenySettingsService;
     }

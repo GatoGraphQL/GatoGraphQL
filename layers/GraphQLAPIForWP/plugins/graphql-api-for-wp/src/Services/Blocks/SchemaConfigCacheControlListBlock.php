@@ -20,7 +20,7 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigCustomPostLi
     protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType;
 
     #[Required]
-    public function autowireSchemaConfigCacheControlListBlock(
+    final public function autowireSchemaConfigCacheControlListBlock(
         GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
     ): void {
         $this->graphQLCacheControlListCustomPostType = $graphQLCacheControlListCustomPostType;

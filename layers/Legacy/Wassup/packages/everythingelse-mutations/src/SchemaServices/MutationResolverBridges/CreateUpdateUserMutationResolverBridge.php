@@ -17,7 +17,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
     protected CreateUpdateUserMutationResolver $createUpdateUserMutationResolver;
     
     #[Required]
-    public function autowireCreateUpdateUserMutationResolverBridge(
+    final public function autowireCreateUpdateUserMutationResolverBridge(
         CreateUpdateUserMutationResolver $createUpdateUserMutationResolver,
     ): void {
         $this->createUpdateUserMutationResolver = $createUpdateUserMutationResolver;

@@ -22,7 +22,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
     protected EndpointHelpers $endpointHelpers;
 
     #[Required]
-    public function autowireAbstractCacheConfigurationManager(
+    final public function autowireAbstractCacheConfigurationManager(
         EndpointHelpers $endpointHelpers,
     ): void {
         $this->endpointHelpers = $endpointHelpers;

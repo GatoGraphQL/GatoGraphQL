@@ -14,7 +14,7 @@ class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBrid
     protected LogoutMutationResolver $logoutMutationResolver;
 
     #[Required]
-    public function autowireLogoutMutationResolverBridge(
+    final public function autowireLogoutMutationResolverBridge(
         LogoutMutationResolver $logoutMutationResolver,
     ): void {
         $this->logoutMutationResolver = $logoutMutationResolver;

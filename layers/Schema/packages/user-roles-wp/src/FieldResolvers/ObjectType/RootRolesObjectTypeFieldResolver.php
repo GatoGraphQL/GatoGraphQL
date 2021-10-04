@@ -22,7 +22,7 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected UserRoleTypeAPIInterface $userRoleTypeAPI;
 
     #[Required]
-    public function autowireRootRolesObjectTypeFieldResolver(
+    final public function autowireRootRolesObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         UserRoleTypeAPIInterface $userRoleTypeAPI,
     ): void {

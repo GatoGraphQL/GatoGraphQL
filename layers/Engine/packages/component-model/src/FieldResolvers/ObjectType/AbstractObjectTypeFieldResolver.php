@@ -73,7 +73,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowireAbstractObjectTypeFieldResolver(
+    final public function autowireAbstractObjectTypeFieldResolver(
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,

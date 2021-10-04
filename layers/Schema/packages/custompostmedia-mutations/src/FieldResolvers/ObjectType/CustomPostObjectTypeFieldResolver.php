@@ -27,7 +27,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected IDScalarTypeResolver $idScalarTypeResolver;
 
     #[Required]
-    public function autowireCustomPostObjectTypeFieldResolver(
+    final public function autowireCustomPostObjectTypeFieldResolver(
         MediaObjectTypeResolver $mediaTypeResolver,
         CustomPostUnionTypeResolver $customPostUnionTypeResolver,
         SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver,

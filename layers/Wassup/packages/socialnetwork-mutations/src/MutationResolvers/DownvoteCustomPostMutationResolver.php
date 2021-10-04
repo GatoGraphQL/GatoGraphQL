@@ -13,7 +13,7 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
     protected UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver;
 
     #[Required]
-    public function autowireDownvoteCustomPostMutationResolver(
+    final public function autowireDownvoteCustomPostMutationResolver(
         UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver,
     ): void {
         $this->upvoteCustomPostMutationResolver = $upvoteCustomPostMutationResolver;

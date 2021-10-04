@@ -25,7 +25,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowireRootObjectTypeFieldResolver(
+    final public function autowireRootObjectTypeFieldResolver(
         SchemaObjectTypeResolver $schemaObjectTypeResolver,
         TypeObjectTypeResolver $typeObjectTypeResolver,
         SchemaTypeDataLoader $schemaTypeDataLoader,

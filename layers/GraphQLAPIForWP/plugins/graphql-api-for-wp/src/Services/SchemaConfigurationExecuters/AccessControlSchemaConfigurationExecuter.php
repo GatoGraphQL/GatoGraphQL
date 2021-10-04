@@ -16,7 +16,7 @@ class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurati
     protected SchemaConfigAccessControlListBlock $schemaConfigAccessControlListBlock;
 
     #[Required]
-    public function autowireAccessControlSchemaConfigurationExecuter(
+    final public function autowireAccessControlSchemaConfigurationExecuter(
         AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
         SchemaConfigAccessControlListBlock $schemaConfigAccessControlListBlock,
     ): void {

@@ -25,7 +25,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowireFilterInputModuleProcessor(
+    final public function autowireFilterInputModuleProcessor(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;

@@ -13,7 +13,7 @@ class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUse
     protected UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver;
 
     #[Required]
-    public function autowireUpvoteCustomPostMutationResolverBridge(
+    final public function autowireUpvoteCustomPostMutationResolverBridge(
         UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver,
     ): void {
         $this->upvoteCustomPostMutationResolver = $upvoteCustomPostMutationResolver;

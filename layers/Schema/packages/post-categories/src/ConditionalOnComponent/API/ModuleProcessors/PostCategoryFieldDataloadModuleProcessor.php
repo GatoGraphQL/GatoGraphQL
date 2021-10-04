@@ -14,7 +14,7 @@ class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModu
     protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
 
     #[Required]
-    public function autowirePostCategoryFieldDataloadModuleProcessor(
+    final public function autowirePostCategoryFieldDataloadModuleProcessor(
         PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
     ): void {
         $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;

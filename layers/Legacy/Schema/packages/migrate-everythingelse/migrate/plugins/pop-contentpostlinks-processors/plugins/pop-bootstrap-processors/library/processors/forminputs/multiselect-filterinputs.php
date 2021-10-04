@@ -20,7 +20,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowirePoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputs(
+    final public function autowirePoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputs(
         IDScalarTypeResolver $idScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {

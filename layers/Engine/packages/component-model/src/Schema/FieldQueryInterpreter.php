@@ -92,7 +92,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected InstanceManagerInterface $instanceManager;
 
     #[Required]
-    public function autowireComponentModelFieldQueryInterpreter(
+    final public function autowireComponentModelFieldQueryInterpreter(
         TypeCastingExecuterInterface $typeCastingExecuter,
         InstanceManagerInterface $instanceManager,
     ): void {

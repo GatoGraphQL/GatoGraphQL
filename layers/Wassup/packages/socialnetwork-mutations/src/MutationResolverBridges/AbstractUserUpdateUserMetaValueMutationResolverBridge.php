@@ -13,7 +13,7 @@ abstract class AbstractUserUpdateUserMetaValueMutationResolverBridge extends Abs
     protected UserTypeAPIInterface $userTypeAPI;
 
     #[Required]
-    public function autowireAbstractUserUpdateUserMetaValueMutationResolverBridge(
+    final public function autowireAbstractUserUpdateUserMetaValueMutationResolverBridge(
         UserTypeAPIInterface $userTypeAPI,
     ): void {
         $this->userTypeAPI = $userTypeAPI;

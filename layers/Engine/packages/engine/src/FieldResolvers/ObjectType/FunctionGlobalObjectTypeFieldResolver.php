@@ -22,7 +22,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
 
     #[Required]
-    public function autowireFunctionGlobalObjectTypeFieldResolver(
+    final public function autowireFunctionGlobalObjectTypeFieldResolver(
         MixedScalarTypeResolver $mixedScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         ObjectScalarTypeResolver $objectScalarTypeResolver,

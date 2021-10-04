@@ -119,7 +119,7 @@ class Engine implements EngineInterface
     protected PersistentCacheInterface $persistentCache;
 
     #[Required]
-    public function autowireEngine(
+    final public function autowireEngine(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         DataStructureManagerInterface $dataStructureManager,

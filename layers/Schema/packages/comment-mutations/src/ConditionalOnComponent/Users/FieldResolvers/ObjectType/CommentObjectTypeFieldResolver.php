@@ -20,7 +20,7 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
     protected UserTypeAPIInterface $userTypeAPI;
 
     #[Required]
-    public function autowireCommentMutationsCommentObjectTypeFieldResolver(
+    final public function autowireCommentMutationsCommentObjectTypeFieldResolver(
         UserCommentTypeAPIInterface $userCommentTypeAPI,
         UserTypeAPIInterface $userTypeAPI,
     ): void {

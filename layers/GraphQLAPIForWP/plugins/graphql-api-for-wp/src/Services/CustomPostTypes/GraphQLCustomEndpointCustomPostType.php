@@ -27,7 +27,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     protected CustomEndpointOptionsBlock $customEndpointOptionsBlock;
 
     #[Required]
-    public function autowireGraphQLCustomEndpointCustomPostType(
+    final public function autowireGraphQLCustomEndpointCustomPostType(
         EndpointBlockRegistryInterface $endpointBlockRegistry,
         CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface,
         CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface,

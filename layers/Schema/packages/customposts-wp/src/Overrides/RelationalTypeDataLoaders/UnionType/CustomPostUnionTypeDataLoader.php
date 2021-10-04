@@ -21,7 +21,7 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
 
     #[Required]
-    public function autowireCustomPostsWPCustomPostUnionTypeDataLoader(
+    final public function autowireCustomPostsWPCustomPostUnionTypeDataLoader(
         CustomPostTypeDataLoader $customPostTypeDataLoader,
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ): void {

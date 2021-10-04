@@ -19,7 +19,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
     protected URLScalarTypeResolver $urlScalarTypeResolver;
     
     #[Required]
-    public function autowireCustomPostFunctionalObjectTypeFieldResolver(
+    final public function autowireCustomPostFunctionalObjectTypeFieldResolver(
         URLScalarTypeResolver $urlScalarTypeResolver,
     ): void {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;

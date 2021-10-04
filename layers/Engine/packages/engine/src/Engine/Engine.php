@@ -17,7 +17,7 @@ class Engine extends UpstreamEngine implements EngineInterface
     protected CacheControlEngineInterface $cacheControlEngine;
 
     #[Required]
-    public function autowireEngineEngine(
+    final public function autowireEngineEngine(
         LooseContractManagerInterface $looseContractManager,
         CacheControlEngineInterface $cacheControlEngine
     ): void {

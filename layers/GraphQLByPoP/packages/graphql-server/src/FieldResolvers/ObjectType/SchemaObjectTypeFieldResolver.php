@@ -22,7 +22,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowireSchemaObjectTypeFieldResolver(
+    final public function autowireSchemaObjectTypeFieldResolver(
         TypeObjectTypeResolver $typeObjectTypeResolver,
         DirectiveObjectTypeResolver $directiveObjectTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,

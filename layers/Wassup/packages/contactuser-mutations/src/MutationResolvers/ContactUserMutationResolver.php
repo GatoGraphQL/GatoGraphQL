@@ -14,7 +14,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
     protected UserTypeAPIInterface $userTypeAPI;
 
     #[Required]
-    public function autowireContactUserMutationResolver(
+    final public function autowireContactUserMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
     ): void {
         $this->userTypeAPI = $userTypeAPI;

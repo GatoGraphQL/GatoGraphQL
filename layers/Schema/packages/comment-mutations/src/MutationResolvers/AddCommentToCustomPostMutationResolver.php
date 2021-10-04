@@ -27,7 +27,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     protected UserTypeAPIInterface $userTypeAPI;
 
     #[Required]
-    public function autowireAddCommentToCustomPostMutationResolver(
+    final public function autowireAddCommentToCustomPostMutationResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         CommentTypeMutationAPIInterface $commentTypeMutationAPI,
         UserTypeAPIInterface $userTypeAPI,

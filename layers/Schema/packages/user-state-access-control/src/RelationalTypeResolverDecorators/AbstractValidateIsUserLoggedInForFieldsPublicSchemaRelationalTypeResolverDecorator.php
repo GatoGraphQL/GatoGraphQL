@@ -16,7 +16,7 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
     protected ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver;
 
     #[Required]
-    public function autowireAbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalTypeResolverDecorator(
+    final public function autowireAbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalTypeResolverDecorator(
         ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver,
     ): void {
         $this->validateIsUserLoggedInDirectiveResolver = $validateIsUserLoggedInDirectiveResolver;

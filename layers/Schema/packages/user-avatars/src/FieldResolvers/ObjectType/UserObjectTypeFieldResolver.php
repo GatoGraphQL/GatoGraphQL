@@ -24,7 +24,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected IntScalarTypeResolver $intScalarTypeResolver;
 
     #[Required]
-    public function autowireUserObjectTypeFieldResolver(
+    final public function autowireUserObjectTypeFieldResolver(
         UserAvatarTypeAPIInterface $userAvatarTypeAPI,
         UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
         UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver,

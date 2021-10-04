@@ -15,7 +15,7 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
     protected UserTypeAPIInterface $userTypeAPI;
 
     #[Required]
-    public function autowireUserTypeDataLoader(
+    final public function autowireUserTypeDataLoader(
         UserTypeAPIInterface $userTypeAPI,
     ): void {
         $this->userTypeAPI = $userTypeAPI;

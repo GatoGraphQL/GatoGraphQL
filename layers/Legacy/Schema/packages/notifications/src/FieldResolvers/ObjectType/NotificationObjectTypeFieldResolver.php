@@ -36,7 +36,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     protected UserObjectTypeResolver $userObjectTypeResolver;
     
     #[Required]
-    public function autowireNotificationObjectTypeFieldResolver(
+    final public function autowireNotificationObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         DateScalarTypeResolver $dateScalarTypeResolver,

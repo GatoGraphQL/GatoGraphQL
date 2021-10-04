@@ -16,7 +16,7 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
     protected InterfaceTypeResolverInterface $interfaceTypeResolver;
 
     #[Required]
-    public function autowireCustomPostUnionTypeResolver(
+    final public function autowireCustomPostUnionTypeResolver(
         InterfaceTypeResolverInterface $interfaceTypeResolver,
         CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader,
     ): void {

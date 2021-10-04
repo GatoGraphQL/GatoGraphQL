@@ -14,7 +14,7 @@ class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
     protected NotificationTypeDataLoader $notificationTypeDataLoader;
     
     #[Required]
-    public function autowireNotificationObjectTypeResolver(
+    final public function autowireNotificationObjectTypeResolver(
         NotificationTypeDataLoader $notificationTypeDataLoader,
     ): void {
         $this->notificationTypeDataLoader = $notificationTypeDataLoader;

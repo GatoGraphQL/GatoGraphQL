@@ -17,7 +17,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowireDuplicatePropertyDirectiveResolver(
+    final public function autowireDuplicatePropertyDirectiveResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;

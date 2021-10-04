@@ -101,7 +101,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     }
 
     #[Required]
-    public function autowireAbstractDirectiveResolver(
+    final public function autowireAbstractDirectiveResolver(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         InstanceManagerInterface $instanceManager,

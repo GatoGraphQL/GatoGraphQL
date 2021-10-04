@@ -14,7 +14,7 @@ class InputValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolv
     protected SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader;
 
     #[Required]
-    public function autowireInputValueObjectTypeResolver(
+    final public function autowireInputValueObjectTypeResolver(
         SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
     ): void {
         $this->schemaDefinitionReferenceTypeDataLoader = $schemaDefinitionReferenceTypeDataLoader;

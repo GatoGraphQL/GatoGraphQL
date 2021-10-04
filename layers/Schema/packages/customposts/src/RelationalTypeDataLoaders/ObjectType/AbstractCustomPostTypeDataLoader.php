@@ -16,7 +16,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
 
     #[Required]
-    public function autowireAbstractCustomPostTypeDataLoader(
+    final public function autowireAbstractCustomPostTypeDataLoader(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ): void {
         $this->customPostTypeAPI = $customPostTypeAPI;

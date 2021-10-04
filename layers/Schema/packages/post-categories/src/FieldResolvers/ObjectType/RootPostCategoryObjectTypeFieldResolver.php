@@ -33,7 +33,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
 
     #[Required]
-    public function autowireRootPostCategoryObjectTypeFieldResolver(
+    final public function autowireRootPostCategoryObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,

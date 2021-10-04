@@ -17,7 +17,7 @@ class EndpointHelpers
     protected ModuleRegistryInterface $moduleRegistry;
 
     #[Required]
-    public function autowireEndpointHelpers(
+    final public function autowireEndpointHelpers(
         PluginMenu $pluginMenu,
         ModuleRegistryInterface $moduleRegistry,
     ): void {

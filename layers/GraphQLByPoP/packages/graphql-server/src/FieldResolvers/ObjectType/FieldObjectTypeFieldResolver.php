@@ -26,7 +26,7 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected TypeObjectTypeResolver $typeObjectTypeResolver;
 
     #[Required]
-    public function autowireFieldObjectTypeFieldResolver(
+    final public function autowireFieldObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         ObjectScalarTypeResolver $objectScalarTypeResolver,

@@ -22,7 +22,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
 
     #[Required]
-    public function autowireAbstractCustomPostObjectTypeFieldResolver(
+    final public function autowireAbstractCustomPostObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {

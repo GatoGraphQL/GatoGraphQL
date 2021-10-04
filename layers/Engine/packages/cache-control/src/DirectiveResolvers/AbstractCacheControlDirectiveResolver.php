@@ -17,7 +17,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     protected IntScalarTypeResolver $intScalarTypeResolver;
 
     #[Required]
-    public function autowireAbstractCacheControlDirectiveResolver(
+    final public function autowireAbstractCacheControlDirectiveResolver(
         CacheControlEngineInterface $cacheControlEngine,
         IntScalarTypeResolver $intScalarTypeResolver,
     ): void {

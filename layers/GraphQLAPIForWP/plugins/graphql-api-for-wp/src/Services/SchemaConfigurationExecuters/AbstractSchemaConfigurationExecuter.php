@@ -17,7 +17,7 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
     protected BlockHelpers $blockHelpers;
 
     #[Required]
-    public function autowireAbstractSchemaConfigurationExecuter(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, BlockHelpers $blockHelpers): void
+    final public function autowireAbstractSchemaConfigurationExecuter(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, BlockHelpers $blockHelpers): void
     {
         $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;

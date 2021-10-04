@@ -13,7 +13,7 @@ class MarkAsUnreadNotificationMutationResolverBridge extends AbstractMarkAsReadO
     protected MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver;
 
     #[Required]
-    public function autowireMarkAsUnreadNotificationMutationResolverBridge(
+    final public function autowireMarkAsUnreadNotificationMutationResolverBridge(
         MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver,
     ): void {
         $this->markAsUnreadNotificationMutationResolver = $markAsUnreadNotificationMutationResolver;

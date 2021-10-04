@@ -49,7 +49,7 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowireCommonFilterInputModuleProcessor(
+    final public function autowireCommonFilterInputModuleProcessor(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,

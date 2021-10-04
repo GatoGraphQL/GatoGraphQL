@@ -38,7 +38,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     protected ErrorProviderInterface $errorProvider;
 
     #[Required]
-    public function autowireOperatorGlobalObjectTypeFieldResolver(
+    final public function autowireOperatorGlobalObjectTypeFieldResolver(
         MixedScalarTypeResolver $mixedScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         ObjectScalarTypeResolver $objectScalarTypeResolver,

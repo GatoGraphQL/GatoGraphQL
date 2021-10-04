@@ -87,7 +87,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      * so the properties will not be null in that situation.
      */
     #[Required]
-    public function autowireSchemaTypeModuleResolver(
+    final public function autowireSchemaTypeModuleResolver(
         ?CommentObjectTypeResolver $commentTypeResolver,
         ?CustomPostUnionTypeResolver $customPostUnionTypeResolver,
         ?GenericCustomPostObjectTypeResolver $genericCustomPostTypeResolver,

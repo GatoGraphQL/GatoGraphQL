@@ -20,7 +20,7 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
     protected GraphQLRequestVarsHooks $graphQLRequestVarsHooks;
 
     #[Required]
-    public function autowirePersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter(
+    final public function autowirePersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter(
         GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
         GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
         GraphQLRequestVarsHooks $graphQLRequestVarsHooks,

@@ -31,7 +31,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     protected HooksAPIInterface $hooksAPI;
 
     #[Required]
-    public function autowireCommentTypeAPI(
+    final public function autowireCommentTypeAPI(
         HooksAPIInterface $hooksAPI,
     ): void {
         $this->hooksAPI = $hooksAPI;

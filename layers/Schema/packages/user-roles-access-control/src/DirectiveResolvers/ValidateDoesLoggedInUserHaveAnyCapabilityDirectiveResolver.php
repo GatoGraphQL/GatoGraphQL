@@ -19,7 +19,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowireValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver(
+    final public function autowireValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver(
         UserRoleTypeAPIInterface $userRoleTypeAPI,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {

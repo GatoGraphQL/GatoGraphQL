@@ -38,7 +38,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
     protected ModulePathHelpersInterface $modulePathHelpers;
 
     #[Required]
-    public function autowireModuleFilterManager(ModulePathManagerInterface $modulePathManager, ModulePathHelpersInterface $modulePathHelpers): void
+    final public function autowireModuleFilterManager(ModulePathManagerInterface $modulePathManager, ModulePathHelpersInterface $modulePathHelpers): void
     {
         $this->modulePathManager = $modulePathManager;
         $this->modulePathHelpers = $modulePathHelpers;

@@ -21,7 +21,7 @@ class AccessControlBlock extends AbstractControlBlock
     protected AccessControlBlockCategory $accessControlBlockCategory;
 
     #[Required]
-    public function autowireAccessControlBlock(
+    final public function autowireAccessControlBlock(
         AccessControlBlockCategory $accessControlBlockCategory,
     ): void {
         $this->accessControlBlockCategory = $accessControlBlockCategory;

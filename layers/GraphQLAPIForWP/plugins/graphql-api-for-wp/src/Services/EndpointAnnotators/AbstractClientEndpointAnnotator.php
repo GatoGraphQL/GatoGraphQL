@@ -18,7 +18,7 @@ abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
 
     #[Required]
-    public function autowireAbstractClientEndpointAnnotator(
+    final public function autowireAbstractClientEndpointAnnotator(
         BlockHelpers $blockHelpers,
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ): void {

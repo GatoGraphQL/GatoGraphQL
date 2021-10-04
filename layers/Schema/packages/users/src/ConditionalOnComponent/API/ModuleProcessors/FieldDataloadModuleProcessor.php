@@ -26,7 +26,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
     #[Required]
-    public function autowireFieldDataloadModuleProcessor(
+    final public function autowireFieldDataloadModuleProcessor(
         UserObjectTypeResolver $userObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,
     ): void {

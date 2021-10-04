@@ -22,7 +22,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
     protected MemberStatusEnumTypeResolver $memberStatusEnumTypeResolver;
 
     #[Required]
-    public function autowireGD_URE_Module_Processor_ProfileMultiSelectFilterInputs(
+    final public function autowireGD_URE_Module_Processor_ProfileMultiSelectFilterInputs(
         MemberPrivilegeEnumTypeResolver $memberPrivilegeEnumTypeResolver,
         MemberTagEnumTypeResolver $memberTagEnumTypeResolver,
         MemberStatusEnumTypeResolver $memberStatusEnumTypeResolver,

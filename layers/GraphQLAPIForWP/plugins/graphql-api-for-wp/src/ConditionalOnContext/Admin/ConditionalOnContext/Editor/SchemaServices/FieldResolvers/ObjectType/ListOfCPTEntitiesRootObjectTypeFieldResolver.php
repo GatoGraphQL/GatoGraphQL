@@ -20,7 +20,7 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
     protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType;
 
     #[Required]
-    public function autowireListOfCPTEntitiesRootObjectTypeFieldResolver(
+    final public function autowireListOfCPTEntitiesRootObjectTypeFieldResolver(
         GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
         GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
         GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,

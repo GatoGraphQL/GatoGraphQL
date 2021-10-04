@@ -19,7 +19,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
 
     #[Required]
-    public function autowireCoreGlobalObjectTypeFieldResolver(
+    final public function autowireCoreGlobalObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {

@@ -12,7 +12,7 @@ abstract class AbstractFilterInputProcessor implements FilterInputProcessorInter
     protected InstanceManagerInterface $instanceManager;
 
     #[Required]
-    public function autowireAbstractFilterInputProcessor(InstanceManagerInterface $instanceManager): void
+    final public function autowireAbstractFilterInputProcessor(InstanceManagerInterface $instanceManager): void
     {
         $this->instanceManager = $instanceManager;
     }

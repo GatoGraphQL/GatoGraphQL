@@ -17,7 +17,7 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
     protected PostTagTypeDataLoader $postTagTypeDataLoader;
 
     #[Required]
-    public function autowirePostTagObjectTypeResolver(
+    final public function autowirePostTagObjectTypeResolver(
         PostTagTypeDataLoader $postTagTypeDataLoader,
     ): void {
         $this->postTagTypeDataLoader = $postTagTypeDataLoader;

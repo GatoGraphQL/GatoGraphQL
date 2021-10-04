@@ -30,7 +30,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     protected PluginMenu $pluginMenu;
 
     #[Required]
-    public function autowireAbstractCustomPostType(
+    final public function autowireAbstractCustomPostType(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,

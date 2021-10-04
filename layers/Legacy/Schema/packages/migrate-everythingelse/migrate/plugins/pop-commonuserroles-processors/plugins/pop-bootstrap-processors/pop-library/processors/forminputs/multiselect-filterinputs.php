@@ -20,7 +20,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowireGD_URE_Module_Processor_MultiSelectFilterInputs(
+    final public function autowireGD_URE_Module_Processor_MultiSelectFilterInputs(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;

@@ -20,7 +20,7 @@ class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
 
     #[Required]
-    public function autowireNamespacedTypeObjectTypeFieldResolver(
+    final public function autowireNamespacedTypeObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {

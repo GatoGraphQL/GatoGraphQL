@@ -48,7 +48,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     protected DateFormatterInterface $dateFormatter;
 
     #[Required]
-    public function autowireCommentObjectTypeFieldResolver(
+    final public function autowireCommentObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         StringScalarTypeResolver $stringScalarTypeResolver,
         URLScalarTypeResolver $urlScalarTypeResolver,

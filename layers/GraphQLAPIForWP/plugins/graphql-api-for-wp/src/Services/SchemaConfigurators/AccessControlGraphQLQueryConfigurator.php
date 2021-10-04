@@ -22,7 +22,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     protected AccessControlManagerInterface $accessControlManager;
 
     #[Required]
-    public function autowireAccessControlGraphQLQueryConfigurator(
+    final public function autowireAccessControlGraphQLQueryConfigurator(
         AccessControlBlock $accessControlBlock,
         BlockHelpers $blockHelpers,
         AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry,

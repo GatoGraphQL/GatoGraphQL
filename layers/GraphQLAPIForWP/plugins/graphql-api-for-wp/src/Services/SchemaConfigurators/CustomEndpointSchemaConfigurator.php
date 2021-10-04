@@ -14,7 +14,7 @@ class CustomEndpointSchemaConfigurator extends AbstractCustomPostEndpointSchemaC
     protected EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry;
 
     #[Required]
-    public function autowireCustomEndpointSchemaConfigurator(
+    final public function autowireCustomEndpointSchemaConfigurator(
         EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry
     ): void {
         $this->endpointSchemaConfigurationExecuterRegistry = $endpointSchemaConfigurationExecuterRegistry;

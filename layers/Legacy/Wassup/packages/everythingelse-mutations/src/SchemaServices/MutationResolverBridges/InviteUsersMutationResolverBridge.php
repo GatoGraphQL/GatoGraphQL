@@ -13,7 +13,7 @@ class InviteUsersMutationResolverBridge extends AbstractEmailInviteMutationResol
     protected InviteUsersMutationResolver $inviteUsersMutationResolver;
     
     #[Required]
-    public function autowireInviteUsersMutationResolverBridge(
+    final public function autowireInviteUsersMutationResolverBridge(
         InviteUsersMutationResolver $inviteUsersMutationResolver,
     ): void {
         $this->inviteUsersMutationResolver = $inviteUsersMutationResolver;

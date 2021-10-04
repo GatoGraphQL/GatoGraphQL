@@ -13,7 +13,7 @@ class InstallSystemMutationResolverBridge extends AbstractSystemComponentMutatio
     protected InstallSystemMutationResolver $installSystemMutationResolver;
 
     #[Required]
-    public function autowireInstallSystemMutationResolverBridge(
+    final public function autowireInstallSystemMutationResolverBridge(
         InstallSystemMutationResolver $installSystemMutationResolver,
     ): void {
         $this->installSystemMutationResolver = $installSystemMutationResolver;

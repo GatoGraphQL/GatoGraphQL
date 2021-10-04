@@ -14,7 +14,7 @@ class TypeObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
     protected SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader;
 
     #[Required]
-    public function autowireTypeObjectTypeResolver(
+    final public function autowireTypeObjectTypeResolver(
         SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
     ): void {
         $this->schemaDefinitionReferenceTypeDataLoader = $schemaDefinitionReferenceTypeDataLoader;

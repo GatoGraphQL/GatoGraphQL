@@ -21,7 +21,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
     protected ModulesMenuPage $modulesMenuPage;
 
     #[Required]
-    public function autowireModuleDocumentationMenuPage(
+    final public function autowireModuleDocumentationMenuPage(
         ModuleRegistryInterface $moduleRegistry,
         ModulesMenuPage $modulesMenuPage,
     ): void {

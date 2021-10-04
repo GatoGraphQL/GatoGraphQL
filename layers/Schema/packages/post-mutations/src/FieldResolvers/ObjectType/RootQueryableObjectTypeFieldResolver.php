@@ -33,7 +33,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     protected PostTypeAPIInterface $postTypeAPI;
 
     #[Required]
-    public function autowireRootQueryableObjectTypeFieldResolver(
+    final public function autowireRootQueryableObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         PostObjectTypeResolver $postObjectTypeResolver,
         PostTypeAPIInterface $postTypeAPI,

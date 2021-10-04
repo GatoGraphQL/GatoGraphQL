@@ -19,7 +19,7 @@ class PersistedQueryEndpointComponentEditorScript extends AbstractEditorScript
     protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType;
 
     #[Required]
-    public function autowirePersistedQueryEndpointComponentEditorScript(
+    final public function autowirePersistedQueryEndpointComponentEditorScript(
         GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
     ): void {
         $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;

@@ -14,7 +14,7 @@ abstract class AbstractDataStructureFormatter implements DataStructureFormatterI
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
 
     #[Required]
-    public function autowireAbstractDataStructureFormatter(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    final public function autowireAbstractDataStructureFormatter(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;

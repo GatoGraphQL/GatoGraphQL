@@ -11,7 +11,7 @@ class ErrorHelper implements ErrorHelperInterface
     protected ErrorManagerInterface $errorManager;
 
     #[Required]
-    public function autowireErrorHelper(ErrorManagerInterface $errorManager): void
+    final public function autowireErrorHelper(ErrorManagerInterface $errorManager): void
     {
         $this->errorManager = $errorManager;
     }

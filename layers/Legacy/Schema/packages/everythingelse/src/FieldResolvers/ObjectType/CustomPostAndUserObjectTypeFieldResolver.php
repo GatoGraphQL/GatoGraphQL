@@ -21,7 +21,7 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
     protected LocationObjectTypeResolver $locationObjectTypeResolver;
     
     #[Required]
-    public function autowireCustomPostAndUserObjectTypeFieldResolver(
+    final public function autowireCustomPostAndUserObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         LocationObjectTypeResolver $locationObjectTypeResolver,
     ): void {

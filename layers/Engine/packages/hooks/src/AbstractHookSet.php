@@ -16,7 +16,7 @@ abstract class AbstractHookSet extends AbstractAutomaticallyInstantiatedService
     protected InstanceManagerInterface $instanceManager;
 
     #[Required]
-    public function autowireAbstractHookSet(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, InstanceManagerInterface $instanceManager): void
+    final public function autowireAbstractHookSet(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, InstanceManagerInterface $instanceManager): void
     {
         $this->hooksAPI = $hooksAPI;
         $this->translationAPI = $translationAPI;

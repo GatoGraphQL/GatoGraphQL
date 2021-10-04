@@ -14,7 +14,7 @@ class GravityFormsNewsletterUnsubscriptionMutationResolverBridge extends Abstrac
     protected GravityFormsNewsletterUnsubscriptionMutationResolver $gravityFormsNewsletterUnsubscriptionMutationResolver;
     
     #[Required]
-    public function autowireGravityFormsNewsletterUnsubscriptionMutationResolverBridge(
+    final public function autowireGravityFormsNewsletterUnsubscriptionMutationResolverBridge(
         GravityFormsNewsletterUnsubscriptionMutationResolver $gravityFormsNewsletterUnsubscriptionMutationResolver,
     ): void {
         $this->gravityFormsNewsletterUnsubscriptionMutationResolver = $gravityFormsNewsletterUnsubscriptionMutationResolver;

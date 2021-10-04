@@ -14,7 +14,7 @@ class PersistedQueryEndpointBlockCategory extends AbstractBlockCategory
     protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType;
 
     #[Required]
-    public function autowirePersistedQueryEndpointBlockCategory(
+    final public function autowirePersistedQueryEndpointBlockCategory(
         GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
     ): void {
         $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;

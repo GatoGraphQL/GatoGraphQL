@@ -15,7 +15,7 @@ class ConfigurableCacheControlForFieldsRelationalTypeResolverDecorator extends A
     protected CacheControlManagerInterface $cacheControlManager;
 
     #[Required]
-    public function autowireConfigurableCacheControlForFieldsRelationalTypeResolverDecorator(
+    final public function autowireConfigurableCacheControlForFieldsRelationalTypeResolverDecorator(
         CacheControlManagerInterface $cacheControlManager,
     ): void {
         $this->cacheControlManager = $cacheControlManager;

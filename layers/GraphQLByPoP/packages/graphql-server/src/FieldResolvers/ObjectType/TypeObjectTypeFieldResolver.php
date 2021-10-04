@@ -37,7 +37,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected TypeKindEnumTypeResolver $typeKindEnumTypeResolver;
 
     #[Required]
-    public function autowireTypeObjectTypeFieldResolver(
+    final public function autowireTypeObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         ObjectScalarTypeResolver $objectScalarTypeResolver,

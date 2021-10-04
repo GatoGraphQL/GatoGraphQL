@@ -33,7 +33,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     protected PostTagTypeAPIInterface $postTagTypeAPI;
 
     #[Required]
-    public function autowireRootPostTagObjectTypeFieldResolver(
+    final public function autowireRootPostTagObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         PostTagObjectTypeResolver $postTagObjectTypeResolver,

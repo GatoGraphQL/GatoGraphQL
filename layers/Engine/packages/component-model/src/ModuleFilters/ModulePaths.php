@@ -27,7 +27,7 @@ class ModulePaths extends AbstractModuleFilter
     protected ModulePathManagerInterface $modulePathManager;
 
     #[Required]
-    public function autowireModulePaths(ModulePathManagerInterface $modulePathManager): void
+    final public function autowireModulePaths(ModulePathManagerInterface $modulePathManager): void
     {
         $this->modulePathManager = $modulePathManager;
     }

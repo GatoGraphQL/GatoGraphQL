@@ -15,7 +15,7 @@ class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBr
     protected SettingsMutationResolver $settingsMutationResolver;
     
     #[Required]
-    public function autowireSettingsMutationResolverBridge(
+    final public function autowireSettingsMutationResolverBridge(
         SettingsMutationResolver $settingsMutationResolver,
     ): void {
         $this->settingsMutationResolver = $settingsMutationResolver;

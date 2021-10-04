@@ -20,7 +20,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
     protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
 
     #[Required]
-    public function autowireEntryRouteModuleProcessor(
+    final public function autowireEntryRouteModuleProcessor(
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ): void {
         $this->postCategoryTypeAPI = $postCategoryTypeAPI;

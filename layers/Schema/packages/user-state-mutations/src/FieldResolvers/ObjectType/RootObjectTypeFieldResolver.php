@@ -25,7 +25,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
-    public function autowireRootObjectTypeFieldResolver(
+    final public function autowireRootObjectTypeFieldResolver(
         UserObjectTypeResolver $userObjectTypeResolver,
         LoginMutationResolver $loginMutationResolver,
         LogoutMutationResolver $logoutMutationResolver,

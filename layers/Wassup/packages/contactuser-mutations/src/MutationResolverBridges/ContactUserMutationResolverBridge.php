@@ -14,7 +14,7 @@ class ContactUserMutationResolverBridge extends AbstractFormComponentMutationRes
     protected ContactUserMutationResolver $contactUserMutationResolver;
 
     #[Required]
-    public function autowireContactUserMutationResolverBridge(
+    final public function autowireContactUserMutationResolverBridge(
         ContactUserMutationResolver $contactUserMutationResolver,
     ): void {
         $this->contactUserMutationResolver = $contactUserMutationResolver;

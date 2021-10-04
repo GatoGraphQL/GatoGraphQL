@@ -14,7 +14,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
     protected UserTypeAPIInterface $userTypeAPI;
     
     #[Required]
-    public function autowireUpdateMyCommunitiesMutationResolver(
+    final public function autowireUpdateMyCommunitiesMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
     ): void {
         $this->userTypeAPI = $userTypeAPI;

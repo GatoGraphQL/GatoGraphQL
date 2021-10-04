@@ -20,7 +20,7 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
     protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType;
 
     #[Required]
-    public function autowireSchemaConfigAccessControlListBlock(
+    final public function autowireSchemaConfigAccessControlListBlock(
         GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
     ): void {
         $this->graphQLAccessControlListCustomPostType = $graphQLAccessControlListCustomPostType;

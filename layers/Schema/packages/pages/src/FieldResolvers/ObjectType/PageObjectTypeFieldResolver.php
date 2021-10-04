@@ -29,7 +29,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     protected PageTypeAPIInterface $pageTypeAPI;
 
     #[Required]
-    public function autowirePageObjectTypeFieldResolver(
+    final public function autowirePageObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         PageObjectTypeResolver $pageObjectTypeResolver,
         PageTypeAPIInterface $pageTypeAPI,

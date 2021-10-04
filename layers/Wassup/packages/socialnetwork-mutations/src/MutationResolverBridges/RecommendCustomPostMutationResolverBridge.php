@@ -13,7 +13,7 @@ class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdate
     protected RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver;
 
     #[Required]
-    public function autowireRecommendCustomPostMutationResolverBridge(
+    final public function autowireRecommendCustomPostMutationResolverBridge(
         RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver,
     ): void {
         $this->recommendCustomPostMutationResolver = $recommendCustomPostMutationResolver;

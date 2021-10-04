@@ -23,7 +23,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     protected MutationResolutionManagerInterface $mutationResolutionManager;
 
     #[Required]
-    public function autowireAbstractComponentMutationResolverBridge(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, InstanceManagerInterface $instanceManager, MutationResolutionManagerInterface $mutationResolutionManager): void
+    final public function autowireAbstractComponentMutationResolverBridge(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, InstanceManagerInterface $instanceManager, MutationResolutionManagerInterface $mutationResolutionManager): void
     {
         $this->hooksAPI = $hooksAPI;
         $this->translationAPI = $translationAPI;

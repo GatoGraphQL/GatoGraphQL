@@ -19,7 +19,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     protected BlockHelpers $blockHelpers;
 
     #[Required]
-    public function autowireAbstractGraphQLEndpointCustomPostType(
+    final public function autowireAbstractGraphQLEndpointCustomPostType(
         HooksAPIInterface $hooksAPI,
         BlockHelpers $blockHelpers,
     ): void {

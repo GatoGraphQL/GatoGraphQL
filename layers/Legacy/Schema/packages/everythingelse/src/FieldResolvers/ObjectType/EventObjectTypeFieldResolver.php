@@ -23,7 +23,7 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected LocationObjectTypeResolver $locationObjectTypeResolver;
     
     #[Required]
-    public function autowireEventObjectTypeFieldResolver(
+    final public function autowireEventObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         LocationObjectTypeResolver $locationObjectTypeResolver,

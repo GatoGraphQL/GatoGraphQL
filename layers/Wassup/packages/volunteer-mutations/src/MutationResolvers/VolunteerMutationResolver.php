@@ -14,7 +14,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
 
     #[Required]
-    public function autowireVolunteerMutationResolver(
+    final public function autowireVolunteerMutationResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ): void {
         $this->customPostTypeAPI = $customPostTypeAPI;

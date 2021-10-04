@@ -25,7 +25,7 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
 
     #[Required]
-    public function autowireAbstractListOfCPTEntitiesRootObjectTypeFieldResolver(
+    final public function autowireAbstractListOfCPTEntitiesRootObjectTypeFieldResolver(
         CustomPostObjectTypeResolver $customPostObjectTypeResolver,
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ): void {

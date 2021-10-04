@@ -16,7 +16,7 @@ class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutatio
     protected UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver;
     
     #[Required]
-    public function autowireUpdateMyCommunitiesMutationResolverBridge(
+    final public function autowireUpdateMyCommunitiesMutationResolverBridge(
         UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver,
     ): void {
         $this->updateMyCommunitiesMutationResolver = $updateMyCommunitiesMutationResolver;

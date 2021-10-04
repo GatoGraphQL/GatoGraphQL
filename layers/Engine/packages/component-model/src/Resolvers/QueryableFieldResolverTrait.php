@@ -13,7 +13,7 @@ trait QueryableFieldResolverTrait
     protected ModuleProcessorManagerInterface $moduleProcessorManager;
 
     #[Required]
-    public function autowireQueryableFieldResolverTrait(
+    final public function autowireQueryableFieldResolverTrait(
         ModuleProcessorManagerInterface $moduleProcessorManager,
     ): void {
         $this->moduleProcessorManager = $moduleProcessorManager;

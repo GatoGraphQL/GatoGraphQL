@@ -32,7 +32,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     protected MixedScalarTypeResolver $mixedScalarTypeResolver;
 
     #[Required]
-    public function autowireApplyFunctionDirectiveResolver(
+    final public function autowireApplyFunctionDirectiveResolver(
         RootObjectTypeResolver $rootTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         MixedScalarTypeResolver $mixedScalarTypeResolver,

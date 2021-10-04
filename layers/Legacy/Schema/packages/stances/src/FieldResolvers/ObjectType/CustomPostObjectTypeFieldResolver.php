@@ -25,7 +25,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected StanceObjectTypeResolver $stanceObjectTypeResolver;
     
     #[Required]
-    public function autowireCustomPostObjectTypeFieldResolver(
+    final public function autowireCustomPostObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
         StanceObjectTypeResolver $stanceObjectTypeResolver,

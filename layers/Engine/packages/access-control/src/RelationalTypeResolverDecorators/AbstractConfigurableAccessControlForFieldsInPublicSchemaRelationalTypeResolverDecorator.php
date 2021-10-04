@@ -14,7 +14,7 @@ abstract class AbstractConfigurableAccessControlForFieldsInPublicSchemaRelationa
     protected AccessControlManagerInterface $accessControlManager;
 
     #[Required]
-    public function autowireAbstractConfigurableAccessControlForFieldsInPublicSchemaRelationalTypeResolverDecorator(
+    final public function autowireAbstractConfigurableAccessControlForFieldsInPublicSchemaRelationalTypeResolverDecorator(
         AccessControlManagerInterface $accessControlManager,
     ): void {
         $this->accessControlManager = $accessControlManager;

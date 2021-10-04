@@ -15,7 +15,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
 
     #[Required]
-    public function autowireRootRelationalFieldDataloadModuleProcessor(
+    final public function autowireRootRelationalFieldDataloadModuleProcessor(
         SchemaDefinitionServiceInterface $schemaDefinitionService,
     ): void {
         $this->schemaDefinitionService = $schemaDefinitionService;

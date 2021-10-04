@@ -18,7 +18,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
     protected IDScalarTypeResolver $idScalarTypeResolver;
 
     #[Required]
-    public function autowirePoP_Module_Processor_PostSelectableTypeaheadFilterComponents(
+    final public function autowirePoP_Module_Processor_PostSelectableTypeaheadFilterComponents(
         IDScalarTypeResolver $idScalarTypeResolver,
     ): void {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
