@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 
 abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor implements FilterInputContainerModuleProcessorInterface
 {
@@ -92,6 +93,6 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
                 return $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputTypeModifiers($module);
             }
         }
-        return 0;
+        return SchemaTypeModifiers::NONE;
     }
 }

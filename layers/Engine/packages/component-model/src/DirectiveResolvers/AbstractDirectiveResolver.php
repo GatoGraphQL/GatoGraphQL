@@ -19,6 +19,7 @@ use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTr
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -674,7 +675,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
         }
-        return 0;
+        return SchemaTypeModifiers::NONE;
     }
 
     /**
