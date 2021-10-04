@@ -5,18 +5,26 @@ declare(strict_types=1);
 namespace PoPSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDecoratorTrait
 {
+    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+
+    #[Required]
+    final public function autowireUserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDecoratorTrait(
+        FieldQueryInterpreterInterface $fieldQueryInterpreter,
+    ): void {
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $instanceManager = InstanceManagerFacade::getInstance();
         $validateUserStateDirectiveResolver = $this->getValidateUserStateDirectiveResolver();
         $validateUserStateDirectiveName = $validateUserStateDirectiveResolver->getDirectiveName();
-        $validateUserStateDirective = $fieldQueryInterpreter->getDirective(
+        $validateUserStateDirective = $this->fieldQueryInterpreter->getDirective(
             $validateUserStateDirectiveName
         );
         return [

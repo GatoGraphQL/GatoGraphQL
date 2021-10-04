@@ -4,12 +4,22 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
+use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoPSitesWassup\EverythingElseMutations\MutationResolverUtils\MutationResolverUtils;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait CreateUpdateProfileMutationResolverBridgeTrait
 {
+    protected ModuleProcessorManagerInterface $moduleProcessorManager;
+
+    #[Required]
+    final public function autowireCreateUpdateProfileMutationResolverBridgeTrait(
+        ModuleProcessorManagerInterface $moduleProcessorManager,
+    ): void {
+        $this->moduleProcessorManager = $moduleProcessorManager;
+    }
+
     // public function getFormData(): array
     // {
     //     return array_merge(
@@ -19,10 +29,9 @@ trait CreateUpdateProfileMutationResolverBridgeTrait
     // }
     protected function getUsercommunitiesFormData()
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $inputs = MutationResolverUtils::getMyCommunityFormInputs();
         /** @var FormComponentModuleProcessorInterface */
-        $moduleProcessor = $moduleprocessor_manager->getProcessor($inputs['communities']);
+        $moduleProcessor = $this->moduleProcessorManager->getProcessor($inputs['communities']);
         $communities = $moduleProcessor->getValue($inputs['communities']);
         return array(
             'communities' => $communities ?? array(),

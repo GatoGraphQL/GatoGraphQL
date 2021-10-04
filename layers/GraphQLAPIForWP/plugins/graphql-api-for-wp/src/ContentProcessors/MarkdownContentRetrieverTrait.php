@@ -4,11 +4,20 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
-use GraphQLAPI\GraphQLAPI\Facades\ContentProcessors\MarkdownContentParserFacade;
 use InvalidArgumentException;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait MarkdownContentRetrieverTrait
 {
+    protected MarkdownContentParserInterface $markdownContentParser;
+
+    #[Required]
+    final public function autowireMarkdownContentRetrieverTrait(
+        MarkdownContentParserInterface $markdownContentParser,
+    ): void {
+        $this->markdownContentParser = $markdownContentParser;
+    }
+    
     /**
      * @param array<string, mixed> $options
      */
@@ -17,12 +26,11 @@ trait MarkdownContentRetrieverTrait
         string $relativePathDir = '',
         array $options = []
     ): ?string {
-        $markdownContentParser = MarkdownContentParserFacade::getInstance();
         // Inject the place to look for the documentation
-        $markdownContentParser->setBaseDir($this->getBaseDir());
-        $markdownContentParser->setBaseURL($this->getBaseURL());
+        $this->markdownContentParser->setBaseDir($this->getBaseDir());
+        $this->markdownContentParser->setBaseURL($this->getBaseURL());
         try {
-            return $markdownContentParser->getContent(
+            return $this->markdownContentParser->getContent(
                 $markdownFilename,
                 $relativePathDir,
                 $options
