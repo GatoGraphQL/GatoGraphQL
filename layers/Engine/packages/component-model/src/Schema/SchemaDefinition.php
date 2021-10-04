@@ -88,7 +88,7 @@ class SchemaDefinition
      * when providing a `String` to an input of type `ANY_SCALAR`,
      * but the GraphQL server will process the value correctly.
      */
-    const TYPE_ANY_SCALAR = 'any_scalar';
+    const TYPE_ANY_SCALAR = 'AnyScalar';
 
     /**
      * Custom scalar type representing an `object` from PHP:
@@ -121,39 +121,39 @@ class SchemaDefinition
      *
      * It is used to represent array keys, which can only be numeric or strings.
      */
-    const TYPE_ARRAY_KEY = 'array_key';
+    const TYPE_ARRAY_KEY = 'ArrayKey';
 
     /**
      * One of the 5 atomic scalars in GraphQL
      */
-    const TYPE_STRING = 'string';
+    const TYPE_STRING = 'String';
     /**
      * One of the 5 atomic scalars in GraphQL
      */
-    const TYPE_INT = 'int';
+    const TYPE_INT = 'Int';
     /**
      * One of the 5 atomic scalars in GraphQL
      */
-    const TYPE_FLOAT = 'float';
+    const TYPE_FLOAT = 'Float';
     /**
      * One of the 5 atomic scalars in GraphQL
      */
-    const TYPE_BOOL = 'bool';
+    const TYPE_BOOL = 'Boolean';
     /**
      * One of the 5 atomic scalars in GraphQL
      */
-    const TYPE_ID = 'id';
+    const TYPE_ID = 'ID';
 
     /**
      * Custom scalars
      */
-    const TYPE_DATE = 'date';
-    const TYPE_TIME = 'time';
-    const TYPE_URL = 'url';
-    const TYPE_EMAIL = 'email';
-    const TYPE_IP = 'ip';
-    const TYPE_ENUM = 'enum';
-    const TYPE_INPUT_OBJECT = 'input_object';
+    const TYPE_DATE = 'Date';
+    const TYPE_TIME = 'Time';
+    const TYPE_URL = 'URL';
+    const TYPE_EMAIL = 'Email';
+    const TYPE_IP = 'IP';
+    const TYPE_ENUM = 'Enum';
+    const TYPE_INPUT_OBJECT = 'InputObject';
 
     /**
      * Using "/" doesn't work with GraphQL Voyager!
