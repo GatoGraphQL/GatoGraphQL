@@ -31,7 +31,7 @@ trait PostMutationResolverHookSetTrait
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
     ): bool {
-        $isRootMutationType = 
+        $isRootMutationType =
             $objectTypeResolver === $this->rootObjectTypeResolver
             || $objectTypeResolver === $this->mutationRootObjectTypeResolver;
         return
