@@ -8,6 +8,7 @@ use PoP\API\Cache\CacheTypes;
 use PoP\API\ComponentConfiguration;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
@@ -20,7 +21,13 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
 {
-    protected PersistentCacheInterface $persistentCache;
+    /**
+     * Cannot autowire because its calling `getNamespace`
+     * on services.yaml produces an exception of PHP properties not initialized
+     * in its depended services.
+     */
+    protected ?PersistentCacheInterface $persistentCache = null;
+
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
     protected TranslationAPIInterface $translationAPI;
@@ -28,13 +35,17 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
     protected RootObjectTypeResolver $rootTypeResolver;
     protected Root $root;
 
+    /**
+     * @var array<string, array>
+     */
+    protected array $schemaInstances = [];
+
     #[Required]
     final public function autowireSchemaDefinitionRegistry(
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         TranslationAPIInterface $translationAPI,
         InstanceManagerInterface $instanceManager,
-        PersistentCacheInterface $persistentCache,
         RootObjectTypeResolver $rootTypeResolver,
         Root $root,
     ): void {
@@ -42,15 +53,14 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
         $this->translationAPI = $translationAPI;
         $this->instanceManager = $instanceManager;
-        $this->persistentCache = $persistentCache;
         $this->rootTypeResolver = $rootTypeResolver;
         $this->root = $root;
     }
 
-    /**
-     * @var array<string, array>
-     */
-    protected array $schemaInstances = [];
+    final public function getPersistentCache(): PersistentCacheInterface {
+        $this->persistentCache ??= PersistentCacheFacade::getInstance();
+        return $this->persistentCache;
+    }
 
     /**
      * Create a key from the arrays, to cache the results
@@ -86,8 +96,8 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
             }
             $schemaDefinition = null;
             if ($useCache) {
-                if ($this->persistentCache->hasCache($cacheKey, $cacheType)) {
-                    $schemaDefinition = $this->persistentCache->getCache($cacheKey, $cacheType);
+                if ($this->getPersistentCache()->hasCache($cacheKey, $cacheType)) {
+                    $schemaDefinition = $this->getPersistentCache()->getCache($cacheKey, $cacheType);
                 }
             }
             // If either not using cache, or using but the value had not been cached, then calculate the value
@@ -116,7 +126,7 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
                     $schemaDefinition = null;
                 } elseif ($useCache) {
                     // Store in the cache
-                    $this->persistentCache->storeCache($cacheKey, $cacheType, $schemaDefinition);
+                    $this->getPersistentCache()->storeCache($cacheKey, $cacheType, $schemaDefinition);
                 }
             }
             // Assign to in-memory cache

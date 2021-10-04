@@ -11,6 +11,7 @@ use PoP\API\PersistedQueries\PersistedQueryManagerInterface;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\API\TypeResolvers\EnumType\SchemaFieldShapeEnumTypeResolver;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
+use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -23,7 +24,13 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected PersistentCacheInterface $persistentCache;
+    /**
+     * Cannot autowire because its calling `getNamespace`
+     * on services.yaml produces an exception of PHP properties not initialized
+     * in its depended services.
+     */
+    protected ?PersistentCacheInterface $persistentCache = null;
+
     protected SchemaFieldShapeEnumTypeResolver $schemaOutputShapeEnumTypeResolver;
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
     protected PersistedFragmentManagerInterface $fragmentCatalogueManager;
@@ -36,15 +43,18 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         PersistedFragmentManagerInterface $fragmentCatalogueManager,
         PersistedQueryManagerInterface $queryCatalogueManager,
-        PersistentCacheInterface $persistentCache,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {
         $this->schemaOutputShapeEnumTypeResolver = $schemaOutputShapeEnumTypeResolver;
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         $this->fragmentCatalogueManager = $fragmentCatalogueManager;
         $this->queryCatalogueManager = $queryCatalogueManager;
-        $this->persistentCache = $persistentCache;
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+
+    final public function getPersistentCache(): PersistentCacheInterface {
+        $this->persistentCache ??= PersistentCacheFacade::getInstance();
+        return $this->persistentCache;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -156,8 +166,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 }
                 $schemaDefinition = null;
                 if ($useCache) {
-                    if ($this->persistentCache->hasCache($cacheKey, $cacheType)) {
-                        $schemaDefinition = $this->persistentCache->getCache($cacheKey, $cacheType);
+                    if ($this->getPersistentCache()->hasCache($cacheKey, $cacheType)) {
+                        $schemaDefinition = $this->getPersistentCache()->getCache($cacheKey, $cacheType);
                     }
                 }
                 if ($schemaDefinition === null) {
@@ -236,7 +246,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
                     // Store in the cache
                     if ($useCache) {
-                        $this->persistentCache->storeCache($cacheKey, $cacheType, $schemaDefinition);
+                        $this->getPersistentCache()->storeCache($cacheKey, $cacheType, $schemaDefinition);
                     }
                 }
 
