@@ -881,7 +881,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $errorMessages = [];
             foreach ($checkpointSets as $checkpointSet) {
                 $validation = $this->engine->validateCheckpoints($checkpointSet);
-                // var_dump($checkpointSet, $validation);
                 if (GeneralUtils::isError($validation)) {
                     /** @var Error */
                     $error = $validation;
