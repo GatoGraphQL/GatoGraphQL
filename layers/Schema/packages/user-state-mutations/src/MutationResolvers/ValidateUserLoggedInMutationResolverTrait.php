@@ -13,7 +13,7 @@ trait ValidateUserLoggedInMutationResolverTrait
     protected TranslationAPIInterface $translationAPI;
 
     #[Required]
-    final public function autowireValidateUserLoggedInMutationResolverTrait(
+    public function autowireValidateUserLoggedInMutationResolverTrait(
         TranslationAPIInterface $translationAPI,
     ): void {
         $this->translationAPI = $translationAPI;

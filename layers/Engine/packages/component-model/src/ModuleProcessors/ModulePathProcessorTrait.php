@@ -17,7 +17,7 @@ trait ModulePathProcessorTrait
     protected ModuleFilterManagerInterface $moduleFilterManager;
 
     #[Required]
-    final public function autowireModulePathProcessorTrait(
+    public function autowireModulePathProcessorTrait(
         ModuleProcessorManagerInterface $moduleProcessorManager,
         ModuleFilterManagerInterface $moduleFilterManager,
     ): void {

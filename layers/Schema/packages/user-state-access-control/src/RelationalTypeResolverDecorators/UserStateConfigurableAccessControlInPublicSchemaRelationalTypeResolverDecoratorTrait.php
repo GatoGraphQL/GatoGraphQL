@@ -14,7 +14,7 @@ trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDeco
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
 
     #[Required]
-    final public function autowireUserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDecoratorTrait(
+    public function autowireUserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDecoratorTrait(
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
     ): void {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;

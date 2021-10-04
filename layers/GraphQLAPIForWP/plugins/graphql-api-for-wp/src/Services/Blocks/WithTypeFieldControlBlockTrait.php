@@ -14,7 +14,7 @@ trait WithTypeFieldControlBlockTrait
     protected TypeRegistryInterface $typeRegistry;
 
     #[Required]
-    final public function autowireWithTypeFieldControlBlockTrait(
+    public function autowireWithTypeFieldControlBlockTrait(
         TypeRegistryInterface $typeRegistry,
     ): void {
         $this->typeRegistry = $typeRegistry;

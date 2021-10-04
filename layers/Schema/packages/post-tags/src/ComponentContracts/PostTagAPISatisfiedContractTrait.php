@@ -16,7 +16,7 @@ trait PostTagAPISatisfiedContractTrait
     protected PostTagObjectTypeResolver $postTagObjectTypeResolver;
 
     #[Required]
-    final public function autowirePostTagAPISatisfiedContractTrait(
+    public function autowirePostTagAPISatisfiedContractTrait(
         PostTagTypeAPIInterface $postTagTypeAPI,
         PostTagObjectTypeResolver $postTagObjectTypeResolver,
     ): void {

@@ -15,7 +15,7 @@ trait AttachableExtensionTrait
     protected AttachableExtensionManagerInterface $attachableExtensionManager;
 
     #[Required]
-    final public function autowireAttachableExtensionTrait(
+    public function autowireAttachableExtensionTrait(
         AttachableExtensionManagerInterface $attachableExtensionManager,
     ): void {
         $this->attachableExtensionManager = $attachableExtensionManager;

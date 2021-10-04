@@ -15,7 +15,7 @@ trait RolesObjectTypeFieldResolverTrait
     protected TranslationAPIInterface $translationAPI;
 
     #[Required]
-    final public function autowireRolesObjectTypeFieldResolverTrait(
+    public function autowireRolesObjectTypeFieldResolverTrait(
         TranslationAPIInterface $translationAPI,
     ): void {
         $this->translationAPI = $translationAPI;

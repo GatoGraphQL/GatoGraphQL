@@ -21,7 +21,7 @@ trait EndpointResolverTrait
     protected GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet;
 
     #[Required]
-    final public function autowireEndpointResolverTrait(
+    public function autowireEndpointResolverTrait(
         GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
         QueryRetrieverInterface $queryRetriever,
         GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet,

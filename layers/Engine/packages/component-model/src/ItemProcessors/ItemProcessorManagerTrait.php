@@ -12,7 +12,7 @@ trait ItemProcessorManagerTrait
     protected InstanceManagerInterface $instanceManager;
 
     #[Required]
-    final public function autowireItemProcessorManagerTrait(
+    public function autowireItemProcessorManagerTrait(
         InstanceManagerInterface $instanceManager,
     ): void {
         $this->instanceManager = $instanceManager;

@@ -16,7 +16,7 @@ trait PostCategoryAPISatisfiedContractTrait
     protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
 
     #[Required]
-    final public function autowirePostCategoryAPISatisfiedContractTrait(
+    public function autowirePostCategoryAPISatisfiedContractTrait(
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
         PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
     ): void {

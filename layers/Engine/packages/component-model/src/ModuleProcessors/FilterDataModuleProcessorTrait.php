@@ -14,7 +14,7 @@ trait FilterDataModuleProcessorTrait
     protected FilterInputProcessorManagerInterface $filterInputProcessorManager;
 
     #[Required]
-    final public function autowireFilterDataModuleProcessorTrait(
+    public function autowireFilterDataModuleProcessorTrait(
         ModuleProcessorManagerInterface $moduleProcessorManager,
         FilterInputProcessorManagerInterface $filterInputProcessorManager,
     ): void {

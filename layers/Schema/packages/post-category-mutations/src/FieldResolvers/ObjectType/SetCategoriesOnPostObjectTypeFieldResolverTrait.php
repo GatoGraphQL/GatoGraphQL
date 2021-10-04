@@ -21,7 +21,7 @@ trait SetCategoriesOnPostObjectTypeFieldResolverTrait
     protected TranslationAPIInterface $translationAPI;
 
     #[Required]
-    final public function autowireSetCategoriesOnPostObjectTypeFieldResolverTrait(
+    public function autowireSetCategoriesOnPostObjectTypeFieldResolverTrait(
         PostObjectTypeResolver $postObjectTypeResolver,
         SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver,
         PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,

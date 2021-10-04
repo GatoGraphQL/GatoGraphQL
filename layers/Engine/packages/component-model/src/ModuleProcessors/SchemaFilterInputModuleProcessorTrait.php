@@ -14,7 +14,7 @@ trait SchemaFilterInputModuleProcessorTrait
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
 
     #[Required]
-    final public function autowireSchemaFilterInputModuleProcessorTrait(
+    public function autowireSchemaFilterInputModuleProcessorTrait(
         SchemaDefinitionServiceInterface $schemaDefinitionService,
     ): void {
         $this->schemaDefinitionService = $schemaDefinitionService;

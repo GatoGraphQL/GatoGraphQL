@@ -17,7 +17,7 @@ trait ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecorato
     protected InstanceManagerInterface $instanceManager;
 
     #[Required]
-    final public function autowireConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait(
+    public function autowireConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait(
         InstanceManagerInterface $instanceManager,
     ): void {
         $this->instanceManager = $instanceManager;

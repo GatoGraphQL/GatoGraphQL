@@ -12,7 +12,7 @@ trait RoutesTrait
     protected DefinitionManagerInterface $definitionManager;
 
     #[Required]
-    final public function autowireRoutesTrait(
+    public function autowireRoutesTrait(
         DefinitionManagerInterface $definitionManager,
     ): void {
         $this->definitionManager = $definitionManager;

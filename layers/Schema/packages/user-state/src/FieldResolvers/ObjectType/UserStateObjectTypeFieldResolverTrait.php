@@ -15,7 +15,7 @@ trait UserStateObjectTypeFieldResolverTrait
     protected TranslationAPIInterface $translationAPI;
 
     #[Required]
-    final public function autowireUserStateObjectTypeFieldResolverTrait(
+    public function autowireUserStateObjectTypeFieldResolverTrait(
         TranslationAPIInterface $translationAPI,
     ): void {
         $this->translationAPI = $translationAPI;

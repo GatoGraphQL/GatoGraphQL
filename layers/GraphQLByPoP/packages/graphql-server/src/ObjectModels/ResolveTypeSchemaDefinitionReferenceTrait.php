@@ -16,7 +16,7 @@ trait ResolveTypeSchemaDefinitionReferenceTrait
     protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
 
     #[Required]
-    final public function autowireResolveTypeSchemaDefinitionReferenceTrait(
+    public function autowireResolveTypeSchemaDefinitionReferenceTrait(
         SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
     ): void {
         $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;

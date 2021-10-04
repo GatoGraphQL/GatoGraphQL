@@ -13,7 +13,7 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
     protected InstanceManagerInterface $instanceManager;
 
     #[Required]
-    final public function autowireConfigurableMandatoryDirectivesForDirectivesTrait(
+    public function autowireConfigurableMandatoryDirectivesForDirectivesTrait(
         InstanceManagerInterface $instanceManager,
     ): void {
         $this->instanceManager = $instanceManager;

@@ -15,7 +15,7 @@ trait CustomEndpointClientTrait
     protected RequestHelperServiceInterface $requestHelperService;
 
     #[Required]
-    final public function autowireCustomEndpointClientTrait(
+    public function autowireCustomEndpointClientTrait(
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
         RequestHelperServiceInterface $requestHelperService,
     ): void {

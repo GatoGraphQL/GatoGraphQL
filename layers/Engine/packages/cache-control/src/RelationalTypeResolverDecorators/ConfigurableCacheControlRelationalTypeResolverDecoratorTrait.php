@@ -14,7 +14,7 @@ trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
     protected CacheControlDirectiveResolver $cacheControlDirectiveResolver;
 
     #[Required]
-    final public function autowireConfigurableCacheControlRelationalTypeResolverDecoratorTrait(
+    public function autowireConfigurableCacheControlRelationalTypeResolverDecoratorTrait(
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         CacheControlDirectiveResolver $cacheControlDirectiveResolver,
     ): void {

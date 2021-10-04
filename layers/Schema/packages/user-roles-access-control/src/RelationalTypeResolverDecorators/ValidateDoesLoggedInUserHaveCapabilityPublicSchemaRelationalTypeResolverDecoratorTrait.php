@@ -13,7 +13,7 @@ trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDe
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
 
     #[Required]
-    final public function autowireValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDecoratorTrait(
+    public function autowireValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDecoratorTrait(
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
     ): void {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;

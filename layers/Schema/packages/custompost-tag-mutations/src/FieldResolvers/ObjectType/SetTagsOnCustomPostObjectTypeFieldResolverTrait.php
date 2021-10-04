@@ -12,7 +12,7 @@ trait SetTagsOnCustomPostObjectTypeFieldResolverTrait
     protected TranslationAPIInterface $translationAPI;
 
     #[Required]
-    final public function autowireSetTagsOnCustomPostObjectTypeFieldResolverTrait(
+    public function autowireSetTagsOnCustomPostObjectTypeFieldResolverTrait(
         TranslationAPIInterface $translationAPI,
     ): void {
         $this->translationAPI = $translationAPI;

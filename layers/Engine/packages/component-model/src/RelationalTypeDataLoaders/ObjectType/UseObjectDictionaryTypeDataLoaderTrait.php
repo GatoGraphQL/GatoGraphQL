@@ -13,7 +13,7 @@ trait UseObjectDictionaryTypeDataLoaderTrait
     protected ObjectDictionaryInterface $objectDictionary;
 
     #[Required]
-    final public function autowireUseObjectDictionaryTypeDataLoaderTrait(
+    public function autowireUseObjectDictionaryTypeDataLoaderTrait(
         ObjectDictionaryInterface $objectDictionary,
     ): void {
         $this->objectDictionary = $objectDictionary;

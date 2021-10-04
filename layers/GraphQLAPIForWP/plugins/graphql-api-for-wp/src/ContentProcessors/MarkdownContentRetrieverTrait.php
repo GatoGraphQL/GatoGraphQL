@@ -20,7 +20,7 @@ trait MarkdownContentRetrieverTrait
      * so the properties will not be null in that situation.
      */
     #[Required]
-    final public function autowireMarkdownContentRetrieverTrait(
+    public function autowireMarkdownContentRetrieverTrait(
         ?MarkdownContentParserInterface $markdownContentParser,
     ): void {
         $this->markdownContentParser = $markdownContentParser;

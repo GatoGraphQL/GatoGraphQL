@@ -20,7 +20,7 @@ trait QueryDataModuleProcessorTrait
     protected ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler;
 
     #[Required]
-    final public function autowireQueryDataModuleProcessorTrait(
+    public function autowireQueryDataModuleProcessorTrait(
         HooksAPIInterface $hooksAPI,
         ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler,
     ): void {

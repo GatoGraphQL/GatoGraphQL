@@ -14,7 +14,7 @@ trait DataloadModuleProcessorTrait
     protected HooksAPIInterface $hooksAPI;
 
     #[Required]
-    final public function autowireDataloadModuleProcessorTrait(
+    public function autowireDataloadModuleProcessorTrait(
         HooksAPIInterface $hooksAPI,
     ): void {
         $this->hooksAPI = $hooksAPI;

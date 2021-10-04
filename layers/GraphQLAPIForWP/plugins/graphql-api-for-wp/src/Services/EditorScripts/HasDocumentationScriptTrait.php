@@ -21,7 +21,7 @@ trait HasDocumentationScriptTrait
     protected LocaleHelper $localeHelper;
 
     #[Required]
-    final public function autowireHasDocumentationScriptTrait(
+    public function autowireHasDocumentationScriptTrait(
         LocaleHelper $localeHelper,
     ): void {
         $this->localeHelper = $localeHelper;

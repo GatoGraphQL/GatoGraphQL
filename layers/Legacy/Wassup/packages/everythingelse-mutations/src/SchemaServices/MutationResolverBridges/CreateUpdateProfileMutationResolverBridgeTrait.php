@@ -14,7 +14,7 @@ trait CreateUpdateProfileMutationResolverBridgeTrait
     protected ModuleProcessorManagerInterface $moduleProcessorManager;
 
     #[Required]
-    final public function autowireCreateUpdateProfileMutationResolverBridgeTrait(
+    public function autowireCreateUpdateProfileMutationResolverBridgeTrait(
         ModuleProcessorManagerInterface $moduleProcessorManager,
     ): void {
         $this->moduleProcessorManager = $moduleProcessorManager;

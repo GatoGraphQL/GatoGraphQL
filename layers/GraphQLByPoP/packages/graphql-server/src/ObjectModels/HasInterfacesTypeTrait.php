@@ -17,7 +17,7 @@ trait HasInterfacesTypeTrait
     protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
 
     #[Required]
-    final public function autowireHasInterfacesTypeTrait(
+    public function autowireHasInterfacesTypeTrait(
         TranslationAPIInterface $translationAPI,
         SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
     ): void {

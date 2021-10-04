@@ -15,7 +15,7 @@ trait WithLimitFieldArgResolverTrait
     protected TranslationAPIInterface $translationAPI;
 
     #[Required]
-    final public function autowireWithLimitFieldArgResolverTrait(
+    public function autowireWithLimitFieldArgResolverTrait(
         TranslationAPIInterface $translationAPI,
     ): void {
         $this->translationAPI = $translationAPI;

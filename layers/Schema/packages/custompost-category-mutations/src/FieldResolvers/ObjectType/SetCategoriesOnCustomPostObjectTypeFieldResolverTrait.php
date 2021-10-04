@@ -13,7 +13,7 @@ trait SetCategoriesOnCustomPostObjectTypeFieldResolverTrait
     protected TranslationAPIInterface $translationAPI;
 
     #[Required]
-    final public function autowireSetCategoriesOnCustomPostObjectTypeFieldResolverTrait(
+    public function autowireSetCategoriesOnCustomPostObjectTypeFieldResolverTrait(
         TranslationAPIInterface $translationAPI,
     ): void {
         $this->translationAPI = $translationAPI;
