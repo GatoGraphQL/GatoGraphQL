@@ -4,24 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
+use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\Syntax\SyntaxHelpers;
 use PoP\API\Schema\SchemaDefinition;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait ResolveTypeSchemaDefinitionReferenceTrait
 {
-    protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
-
-    #[Required]
-    public function autowireResolveTypeSchemaDefinitionReferenceTrait(
-        SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
-    ): void {
-        $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
-    }
-    
     protected function getTypeFromTypeName(string $typeName): AbstractType
     {
         // Check if the type is non-null
@@ -68,7 +58,8 @@ trait ResolveTypeSchemaDefinitionReferenceTrait
             $typeName,
         ];
         $schemaDefinitionID = SchemaDefinitionHelpers::getID($typeSchemaDefinitionPath);
+        $schemaDefinitionReferenceRegistry = SchemaDefinitionReferenceRegistryFacade::getInstance();
         /** @var AbstractType */
-        return $this->schemaDefinitionReferenceRegistry->getSchemaDefinitionReference($schemaDefinitionID);
+        return $schemaDefinitionReferenceRegistry->getSchemaDefinitionReference($schemaDefinitionID);
     }
 }
