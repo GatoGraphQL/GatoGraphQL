@@ -71,7 +71,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
     private function getAddCommentToCustomPostSchemaFieldArgTypeModifiers(
         string $fieldArgName,
         bool $isParentCommentMandatory = false,
-    ): ?int {
+    ): int {
         return match ($fieldArgName) {
             MutationInputProperties::COMMENT
                 => SchemaTypeModifiers::MANDATORY,
@@ -83,7 +83,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
             MutationInputProperties::AUTHOR_EMAIL
                 => (ComponentConfiguration::requireCommenterNameAndEmail() ? SchemaTypeModifiers::MANDATORY : 0),
             default
-                => null,
+                => 0,
         };
     }
 }
