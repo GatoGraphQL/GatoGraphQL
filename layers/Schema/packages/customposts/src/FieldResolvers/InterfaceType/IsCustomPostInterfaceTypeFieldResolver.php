@@ -95,7 +95,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         };
     }
 
-    public function getFieldTypeModifiers(string $fieldName): ?int
+    public function getFieldTypeModifiers(string $fieldName): int
     {
         /**
          * Please notice that the URL, slug, title and excerpt are nullable,

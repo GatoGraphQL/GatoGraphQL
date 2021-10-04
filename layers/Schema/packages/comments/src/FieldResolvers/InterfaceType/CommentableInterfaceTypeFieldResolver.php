@@ -70,7 +70,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         };
     }
 
-    public function getFieldTypeModifiers(string $fieldName): ?int
+    public function getFieldTypeModifiers(string $fieldName): int
     {
         return match ($fieldName) {
             'areCommentsOpen',

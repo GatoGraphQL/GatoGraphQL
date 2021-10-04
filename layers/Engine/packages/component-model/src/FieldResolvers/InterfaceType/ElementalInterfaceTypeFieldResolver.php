@@ -43,7 +43,7 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
         };
     }
 
-    public function getFieldTypeModifiers(string $fieldName): ?int
+    public function getFieldTypeModifiers(string $fieldName): int
     {
         switch ($fieldName) {
             case 'id':

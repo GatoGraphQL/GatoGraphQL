@@ -158,7 +158,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return null;
     }
 
-    public function getFieldTypeModifiers(string $fieldName): ?int
+    public function getFieldTypeModifiers(string $fieldName): int
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {

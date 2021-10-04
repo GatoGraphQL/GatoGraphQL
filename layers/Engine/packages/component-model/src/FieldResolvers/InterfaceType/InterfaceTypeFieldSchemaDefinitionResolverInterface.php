@@ -12,7 +12,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
     public function getFieldNamesToResolve(): array;
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface;
     public function getFieldDescription(string $fieldName): ?string;
-    public function getFieldTypeModifiers(string $fieldName): ?int;
+    public function getFieldTypeModifiers(string $fieldName): int;
     public function getFieldDeprecationDescription(string $fieldName, array $fieldArgs = []): ?string;
     /**
      * @return array<string, InputTypeResolverInterface>

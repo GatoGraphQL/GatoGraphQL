@@ -54,7 +54,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
         };
     }
 
-    public function getFieldTypeModifiers(string $fieldName): ?int
+    public function getFieldTypeModifiers(string $fieldName): int
     {
         $nonNullableFieldNames = [
             'hasFeaturedImage',

@@ -52,7 +52,7 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
         };
     }
 
-    public function getFieldTypeModifiers(string $fieldName): ?int
+    public function getFieldTypeModifiers(string $fieldName): int
     {
         return match ($fieldName) {
             'url',

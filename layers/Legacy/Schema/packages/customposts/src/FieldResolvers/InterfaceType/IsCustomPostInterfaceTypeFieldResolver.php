@@ -53,7 +53,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
         };
     }
 
-    public function getFieldTypeModifiers(string $fieldName): ?int
+    public function getFieldTypeModifiers(string $fieldName): int
     {
         /**
          * Please notice that the URL, slug, title and excerpt are nullable,
