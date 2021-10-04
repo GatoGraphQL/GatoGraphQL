@@ -42,7 +42,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * @var AbstractDynamicType[]
      */
     protected array $dynamicTypes = [];
-    
+
     /**
      * Cannot autowire because its calling `getNamespace`
      * on services.yaml produces an exception of PHP properties not initialized
@@ -71,7 +71,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
     }
 
-    final public function getPersistentCache(): PersistentCacheInterface {
+    final public function getPersistentCache(): PersistentCacheInterface
+    {
         $this->persistentCache ??= PersistentCacheFacade::getInstance();
         return $this->persistentCache;
     }

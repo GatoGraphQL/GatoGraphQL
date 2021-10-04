@@ -52,7 +52,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
 
-    final public function getPersistentCache(): PersistentCacheInterface {
+    final public function getPersistentCache(): PersistentCacheInterface
+    {
         $this->persistentCache ??= PersistentCacheFacade::getInstance();
         return $this->persistentCache;
     }

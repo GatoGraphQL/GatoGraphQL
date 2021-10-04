@@ -57,7 +57,8 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
         $this->root = $root;
     }
 
-    final public function getPersistentCache(): PersistentCacheInterface {
+    final public function getPersistentCache(): PersistentCacheInterface
+    {
         $this->persistentCache ??= PersistentCacheFacade::getInstance();
         return $this->persistentCache;
     }

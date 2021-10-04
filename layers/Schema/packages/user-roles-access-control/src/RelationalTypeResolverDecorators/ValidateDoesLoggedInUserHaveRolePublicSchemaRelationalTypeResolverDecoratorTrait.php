@@ -18,7 +18,7 @@ trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecorato
     ): void {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
     }
-    
+
     /**
      * By default, only the admin can see the roles from the users
      */

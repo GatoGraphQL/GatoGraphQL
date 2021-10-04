@@ -25,7 +25,7 @@ trait MarkdownContentRetrieverTrait
     ): void {
         $this->markdownContentParser = $markdownContentParser;
     }
-    
+
     /**
      * @param array<string, mixed> $options
      */

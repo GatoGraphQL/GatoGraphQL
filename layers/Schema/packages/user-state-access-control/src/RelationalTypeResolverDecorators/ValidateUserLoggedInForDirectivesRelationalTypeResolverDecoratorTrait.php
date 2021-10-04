@@ -19,7 +19,7 @@ trait ValidateUserLoggedInForDirectivesRelationalTypeResolverDecoratorTrait
     ): void {
         $this->validateIsUserLoggedInForDirectivesDirectiveResolver = $validateIsUserLoggedInForDirectivesDirectiveResolver;
     }
-    
+
     protected function getRequiredEntryValue(): ?string
     {
         return UserStates::IN;

@@ -102,7 +102,7 @@ class Engine implements EngineInterface
      * @var array<string,array<string,mixed>>
      */
     protected array $relationalTypeResolverNameIDsDataFields = [];
-    
+
     /**
      * Cannot autowire because its calling `getNamespace`
      * on services.yaml produces an exception of PHP properties not initialized
@@ -161,7 +161,8 @@ class Engine implements EngineInterface
         $this->requestHelperService = $requestHelperService;
     }
 
-    final public function getPersistentCache(): PersistentCacheInterface {
+    final public function getPersistentCache(): PersistentCacheInterface
+    {
         $this->persistentCache ??= PersistentCacheFacade::getInstance();
         return $this->persistentCache;
     }
