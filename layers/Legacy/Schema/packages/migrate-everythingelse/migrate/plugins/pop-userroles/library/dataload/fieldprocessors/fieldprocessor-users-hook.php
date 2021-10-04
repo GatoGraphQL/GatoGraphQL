@@ -50,7 +50,7 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
         };
     }
 
-    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
             'hasRole' => SchemaTypeModifiers::NON_NULLABLE,

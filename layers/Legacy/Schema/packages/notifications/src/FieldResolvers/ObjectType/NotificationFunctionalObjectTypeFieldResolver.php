@@ -45,7 +45,7 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
         };
     }
 
-    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
             'multilayoutKeys' => SchemaTypeModifiers::IS_ARRAY,

@@ -123,7 +123,7 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
         return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
     }
 
-    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         // TODO: If we are running PHP 7.4, the properties may be typed,
         // so we can already get the type through reflection. Implement this!
