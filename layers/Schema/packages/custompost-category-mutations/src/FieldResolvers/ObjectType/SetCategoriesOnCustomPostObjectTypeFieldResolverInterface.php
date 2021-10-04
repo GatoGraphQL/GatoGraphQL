@@ -10,7 +10,7 @@ use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverI
 
 interface SetCategoriesOnCustomPostObjectTypeFieldResolverInterface
 {
-    public function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface;
+    public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface;
     public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface;
     public function getSetCategoriesMutationResolver(): MutationResolverInterface;
 }

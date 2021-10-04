@@ -9,14 +9,26 @@ use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoPSchema\Categories\FilterInputProcessors\FilterInputProcessor;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 
     public const MODULE_FILTERINPUT_CATEGORY_IDS = 'filterinput-category-ids';
+
+    protected IDScalarTypeResolver $idScalarTypeResolver;
+
+    #[Required]
+    public function autowireFilterInputModuleProcessor(
+        IDScalarTypeResolver $idScalarTypeResolver,
+    ): void {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
 
     public function getModulesToProcess(): array
     {
@@ -51,31 +63,23 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CATEGORY_IDS => SchemaDefinition::TYPE_ID,
-            default => $this->getDefaultSchemaFilterInputType(),
+            self::MODULE_FILTERINPUT_CATEGORY_IDS => $this->idScalarTypeResolver,
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CATEGORY_IDS => true,
-            default => false,
+            self::MODULE_FILTERINPUT_CATEGORY_IDS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default => 0,
         };
     }
 
-    public function getSchemaFilterInputIsNonNullableItemsInArrayType(array $module): bool
-    {
-        return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CATEGORY_IDS => true,
-            default => false,
-        };
-    }
-
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CATEGORY_IDS => $this->translationAPI->__('Limit results to elements with the given ids', 'categories'),

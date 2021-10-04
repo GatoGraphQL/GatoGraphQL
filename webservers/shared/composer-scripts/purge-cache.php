@@ -11,8 +11,7 @@ class ComposerScripts
     public static function deleteDir(
         string $dirPath,
         bool $removeDir = true
-    ): void
-    {
+    ): void {
         if (!is_dir($dirPath)) {
             throw new InvalidArgumentException("$dirPath must be a directory");
         }

@@ -31,7 +31,7 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
             'roles',
@@ -40,7 +40,7 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 | SchemaTypeModifiers::IS_ARRAY
                 | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 

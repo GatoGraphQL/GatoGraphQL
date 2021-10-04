@@ -33,14 +33,14 @@ class PoP_Notifications_UserPlatform_DataLoad_ObjectTypeFieldResolver_Notificati
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match($fieldName) {
             'icon' => $translationAPI->__('', ''),
             'url' => $translationAPI->__('', ''),
             'message' => $translationAPI->__('', ''),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 

@@ -8,8 +8,11 @@ use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\UserRoles\FilterInputProcessors\FilterInputProcessor;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -17,6 +20,15 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public const MODULE_FILTERINPUT_USER_ROLES = 'filterinput-user-roles';
     public const MODULE_FILTERINPUT_EXCLUDE_USER_ROLES = 'filterinput-exclude-user-roles';
+
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+
+    #[Required]
+    public function autowireFilterInputModuleProcessor(
+        StringScalarTypeResolver $stringScalarTypeResolver,
+    ): void {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
 
     public function getModulesToProcess(): array
     {
@@ -44,43 +56,32 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_USER_ROLES => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => SchemaDefinition::TYPE_STRING,
-            default => $this->getDefaultSchemaFilterInputType(),
+            self::MODULE_FILTERINPUT_USER_ROLES => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => $this->stringScalarTypeResolver,
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
-    {
-        return match ($module[1]) {
-            self::MODULE_FILTERINPUT_USER_ROLES,
-            self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES
-                => true,
-            default
-                => false,
-        };
-    }
-
-    public function getSchemaFilterInputIsNonNullableItemsInArrayType(array $module): bool
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_USER_ROLES,
             self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES
-                => true,
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
-                => false,
+                => 0,
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_USER_ROLES => $this->translationAPI->__('Get the users with given roles', 'user-roles'),
             self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => $this->translationAPI->__('Get the users without the given roles', 'user-roles'),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            default => null,
+        };
     }
 }

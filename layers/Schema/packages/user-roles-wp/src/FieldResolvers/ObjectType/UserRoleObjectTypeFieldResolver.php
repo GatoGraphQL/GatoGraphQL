@@ -49,12 +49,12 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
         };
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
             'name' => SchemaTypeModifiers::NON_NULLABLE,
             'capabilities' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
-            default => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
@@ -63,12 +63,12 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
      *
      * @see https://github.com/getpop/component-model/issues/1
      */
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'name' => $this->translationAPI->__('The role name', 'user-roles-wp'),
             'capabilities' => $this->translationAPI->__('Capabilities granted by the role', 'user-roles-wp'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 }

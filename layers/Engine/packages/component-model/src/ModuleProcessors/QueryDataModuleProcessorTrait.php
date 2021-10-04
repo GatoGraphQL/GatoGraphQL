@@ -80,8 +80,6 @@ trait QueryDataModuleProcessorTrait
 
     public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-
         // Prepare the Query to get data from the DB
         $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
         if ($datasource == DataSources::MUTABLEONREQUEST && !($data_properties[DataloadingConstants::IGNOREREQUESTPARAMS] ?? null)) {

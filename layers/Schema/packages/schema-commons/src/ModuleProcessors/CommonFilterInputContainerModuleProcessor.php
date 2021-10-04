@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\ModuleProcessors;
 
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
@@ -46,33 +47,7 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
         };
     }
 
-    public function getFieldFilterInputMandatoryArgs(array $module): array
-    {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID:
-                $idFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID
-                ]);
-                return [
-                    $idFilterInputName,
-                ];
-            case self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG:
-                $slugFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SLUG
-                ]);
-                return [
-                    $slugFilterInputName,
-                ];
-        }
-        return parent::getFieldFilterInputMandatoryArgs($module);
-    }
-
-    /**
-     * @return array<string,mixed> A list of filterInputName as key, and its value
-     */
-    public function getFieldFilterInputDefaultValues(array $module): array
+    public function getFieldFilterInputDefaultValue(array $module, string $fieldArgName): mixed
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING:
@@ -81,20 +56,49 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_DATEFORMAT
                 ]);
-                $filterInputNameDefaultValues = [
-                    $formatFilterInputName => $this->cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat')),
-                ];
-                if ($module[1] === self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING) {
-                    return $filterInputNameDefaultValues;
+                if ($fieldArgName === $formatFilterInputName) {
+                    return $this->cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat'));
                 }
+                break;
+        }
+        switch ($module[1]) {
+            case self::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING:
                 $gmtFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_GMT
                 ]);
-                $filterInputNameDefaultValues[$gmtFilterInputName] = false;
-                return $filterInputNameDefaultValues;
+                if ($fieldArgName === $gmtFilterInputName) {
+                    return false;
+                }
+                break;
         }
-        return parent::getFieldFilterInputMandatoryArgs($module);
+        return parent::getFieldFilterInputDefaultValue($module, $fieldArgName);
+    }
+
+    public function getFieldFilterInputTypeModifiers(array $module, string $fieldArgName): int
+    {
+        $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($module, $fieldArgName);
+        switch ($module[1]) {
+            case self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID:
+                $idFilterInputName = FilterInputHelper::getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID
+                ]);
+                if ($fieldArgName === $idFilterInputName) {
+                    return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
+                }
+                break;
+            case self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG:
+                $slugFilterInputName = FilterInputHelper::getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SLUG
+                ]);
+                if ($fieldArgName === $slugFilterInputName) {
+                    return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
+                }
+                break;
+        }
+        return $fieldFilterInputTypeModifiers;
     }
 
     /**

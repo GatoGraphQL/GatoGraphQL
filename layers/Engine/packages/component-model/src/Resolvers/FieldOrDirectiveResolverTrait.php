@@ -13,6 +13,8 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 
 trait FieldOrDirectiveResolverTrait
 {
+    use FieldOrDirectiveSchemaDefinitionResolverTrait;
+
     /**
      * @var array<array|null>
      */

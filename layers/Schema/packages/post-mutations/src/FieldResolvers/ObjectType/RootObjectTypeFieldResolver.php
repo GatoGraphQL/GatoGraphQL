@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
+use PoPSchema\CustomPostMutations\FieldResolvers\ObjectType\CreateOrUpdateCustomPostObjectTypeFieldResolverTrait;
 use PoPSchema\PostMutations\MutationResolvers\CreatePostMutationResolver;
 use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
@@ -18,6 +18,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    use CreateOrUpdateCustomPostObjectTypeFieldResolverTrait;
+
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected CreatePostMutationResolver $createPostMutationResolver;
     protected UpdatePostMutationResolver $updatePostMutationResolver;
@@ -53,32 +55,44 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         );
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'createPost' => $this->translationAPI->__('Create a post', 'post-mutations'),
             'updatePost' => $this->translationAPI->__('Update a post', 'post-mutations'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        switch ($fieldName) {
-            case 'createPost':
-            case 'updatePost':
-                $addCustomPostIDConfig = [
-                    'createPost' => false,
-                    'updatePost' => true,
-                ];
-                return SchemaDefinitionHelpers::getCreateUpdateCustomPostSchemaFieldArgs(
-                    $objectTypeResolver,
-                    $fieldName,
-                    $addCustomPostIDConfig[$fieldName],
-                    $this->postObjectTypeResolver
-                );
-        }
-        return parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'createPost' => $this->getCreateOrUpdateCustomPostSchemaFieldArgNameResolvers(false),
+            'updatePost' => $this->getCreateOrUpdateCustomPostSchemaFieldArgNameResolvers(true),
+            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        return match ($fieldName) {
+            'createPost',
+            'updatePost'
+                => $this->getCreateOrUpdateCustomPostSchemaFieldArgDescription($fieldArgName),
+            default
+                => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ($fieldName) {
+            'createPost',
+            'updatePost'
+                => $this->getCreateOrUpdateCustomPostSchemaFieldArgTypeModifiers($fieldArgName),
+            default
+                => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+        };
     }
 
     public function getFieldMutationResolver(

@@ -5,21 +5,24 @@ declare(strict_types=1);
 namespace PoP\CacheControl\DirectiveResolvers;
 
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
-use PoP\CacheControl\Schema\SchemaDefinition;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirectiveResolver implements CacheControlDirectiveResolverInterface
 {
     protected CacheControlEngineInterface $cacheControlEngine;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
 
     #[Required]
     public function autowireAbstractCacheControlDirectiveResolver(
         CacheControlEngineInterface $cacheControlEngine,
+        IntScalarTypeResolver $intScalarTypeResolver,
     ): void {
         $this->cacheControlEngine = $cacheControlEngine;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
 
     public function getDirectiveName(): string
@@ -59,19 +62,23 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
         return true;
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('HTTP caching (https://tools.ietf.org/html/rfc7234): Cache the response by setting a Cache-Control header with a max-age value; this value is calculated as the minimum max-age value among all requested fields. If any field has max-age: 0, a corresponding \'no-store\' value is sent, indicating to not cache the response', 'cache-control');
     }
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            [
-                SchemaDefinition::ARGNAME_NAME => 'maxAge',
-                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_INT,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Use a specific max-age value for the field, instead of the one configured in the directive', 'cache-control'),
-            ],
+            'maxAge' => $this->intScalarTypeResolver,
         ];
+    }
+
+    public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    {
+        return match ($directiveArgName) {
+            'maxAge' => $this->translationAPI->__('Use a specific max-age value for the field, instead of the one configured in the directive', 'cache-control'),
+            default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+        };
     }
 
     /**

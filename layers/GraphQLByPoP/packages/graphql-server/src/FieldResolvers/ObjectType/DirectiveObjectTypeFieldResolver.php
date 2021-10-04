@@ -66,7 +66,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
             'name',
@@ -76,11 +76,11 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'args'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'name' => $this->translationAPI->__('Directive\'s name', 'graphql-server'),
@@ -88,7 +88,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'args' => $this->translationAPI->__('Directive\'s arguments', 'graphql-server'),
             'locations' => $this->translationAPI->__('The locations where the directive may be placed', 'graphql-server'),
             'isRepeatable' => $this->translationAPI->__('Can the directive be executed more than once in the same field?', 'graphql-server'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 

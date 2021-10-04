@@ -25,7 +25,7 @@ class TypeObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
         return '__Type';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Representation of each GraphQL type in the graph', 'graphql-server');
     }

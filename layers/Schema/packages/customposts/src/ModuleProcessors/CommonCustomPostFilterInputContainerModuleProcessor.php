@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\ModuleProcessors;
 
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
@@ -65,8 +66,9 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
         };
     }
 
-    public function getFieldFilterInputMandatoryArgs(array $module): array
+    public function getFieldFilterInputTypeModifiers(array $module, string $fieldArgName): int
     {
+        $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($module, $fieldArgName);
         switch ($module[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS:
             case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_UNIONTYPE:
@@ -75,9 +77,10 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID
                 ]);
-                return [
-                    $idFilterInputName,
-                ];
+                if ($fieldArgName === $idFilterInputName) {
+                    return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
+                }
+                break;
             case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS:
             case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_UNIONTYPE:
             case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS_UNIONTYPE:
@@ -85,11 +88,12 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SLUG
                 ]);
-                return [
-                    $slugFilterInputName,
-                ];
+                if ($fieldArgName === $slugFilterInputName) {
+                    return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
+                }
+                break;
         }
-        return parent::getFieldFilterInputMandatoryArgs($module);
+        return $fieldFilterInputTypeModifiers;
     }
 
     /**

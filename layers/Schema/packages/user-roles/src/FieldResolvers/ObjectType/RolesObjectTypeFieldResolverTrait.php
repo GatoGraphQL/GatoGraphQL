@@ -37,13 +37,13 @@ trait RolesObjectTypeFieldResolverTrait
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($fieldName) {
             'roles' => $translationAPI->__('All user roles', 'user-roles'),
             'capabilities' => $translationAPI->__('All user capabilities', 'user-roles'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 }

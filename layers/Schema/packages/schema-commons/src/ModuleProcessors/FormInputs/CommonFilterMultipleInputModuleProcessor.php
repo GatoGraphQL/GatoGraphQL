@@ -11,7 +11,9 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
@@ -20,13 +22,17 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
     use FormMultipleInputModuleProcessorTrait;
 
     public const MODULE_FILTERINPUT_DATES = 'filterinput-dates';
+
     protected FormInputHelperServiceInterface $formInputHelperService;
+    protected DateScalarTypeResolver $dateScalarTypeResolver;
 
     #[Required]
     public function autowireCommonFilterMultipleInputModuleProcessor(
         FormInputHelperServiceInterface $formInputHelperService,
+        DateScalarTypeResolver $dateScalarTypeResolver,
     ): void {
         $this->formInputHelperService = $formInputHelperService;
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
     }
 
     public function getModulesToProcess(): array
@@ -61,57 +67,58 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
         };
     }
 
-    protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module): void
-    {
-        // Replace the "date" item with "date-from" and "date-to"
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_DATES:
-                $name = $this->getName($module);
-                $subnames = $this->getInputSubnames($module);
-                $dateFormat = 'Y-m-d';
-                // Save documentation as template, and remove it
-                $schemaDefinition = $schemaDefinitionItems[0];
-                unset($schemaDefinition[SchemaDefinition::ARGNAME_NAME]);
-                unset($schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION]);
-                array_shift($schemaDefinitionItems);
-                // Add the other elements, using the original documantation as placeholder
-                $schemaDefinitionItems[] = array_merge(
-                    [
-                        SchemaDefinition::ARGNAME_NAME => $this->formInputHelperService->getMultipleInputName($name, $subnames[0]),
-                    ],
-                    $schemaDefinition,
-                    [
-                        SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                            $this->translationAPI->__('Search for elements starting from this date, in format \'%s\'', 'pop-engine'),
-                            $dateFormat
-                        ),
-                    ]
-                );
-                $schemaDefinitionItems[] = array_merge(
-                    [
-                        SchemaDefinition::ARGNAME_NAME => $this->formInputHelperService->getMultipleInputName($name, $subnames[1]),
-                    ],
-                    $schemaDefinition,
-                    [
-                        SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                            $this->translationAPI->__('Search for elements starting until this date, in format \'%s\'', 'pop-engine'),
-                            $dateFormat
-                        ),
-                    ]
-                );
-                break;
-        }
-    }
+    // @todo Fix this, migrate to InputObjectType!
+    // protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module): void
+    // {
+    //     // Replace the "date" item with "date-from" and "date-to"
+    //     switch ($module[1]) {
+    //         case self::MODULE_FILTERINPUT_DATES:
+    //             $name = $this->getName($module);
+    //             $subnames = $this->getInputSubnames($module);
+    //             $dateFormat = 'Y-m-d';
+    //             // Save documentation as template, and remove it
+    //             $schemaDefinition = $schemaDefinitionItems[0];
+    //             unset($schemaDefinition[SchemaDefinition::ARGNAME_NAME]);
+    //             unset($schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION]);
+    //             array_shift($schemaDefinitionItems);
+    //             // Add the other elements, using the original documentation as placeholder
+    //             $schemaDefinitionItems[] = array_merge(
+    //                 [
+    //                     SchemaDefinition::ARGNAME_NAME => $this->formInputHelperService->getMultipleInputName($name, $subnames[0]),
+    //                 ],
+    //                 $schemaDefinition,
+    //                 [
+    //                     SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
+    //                         $this->translationAPI->__('Search for elements starting from this date, in format \'%s\'', 'pop-engine'),
+    //                         $dateFormat
+    //                     ),
+    //                 ]
+    //             );
+    //             $schemaDefinitionItems[] = array_merge(
+    //                 [
+    //                     SchemaDefinition::ARGNAME_NAME => $this->formInputHelperService->getMultipleInputName($name, $subnames[1]),
+    //                 ],
+    //                 $schemaDefinition,
+    //                 [
+    //                     SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
+    //                         $this->translationAPI->__('Search for elements starting until this date, in format \'%s\'', 'pop-engine'),
+    //                         $dateFormat
+    //                     ),
+    //                 ]
+    //             );
+    //             break;
+    //     }
+    // }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_DATES => SchemaDefinition::TYPE_DATE,
-            default => $this->getDefaultSchemaFilterInputType(),
+            self::MODULE_FILTERINPUT_DATES => $this->dateScalarTypeResolver,
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_DATES:

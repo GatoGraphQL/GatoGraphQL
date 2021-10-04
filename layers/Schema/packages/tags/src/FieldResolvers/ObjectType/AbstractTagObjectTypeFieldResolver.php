@@ -60,18 +60,18 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
         };
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
             'name',
             'count'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
-                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'url' => $this->translationAPI->__('Tag URL', 'pop-tags'),
@@ -80,7 +80,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
             'slug' => $this->translationAPI->__('Tag slug', 'pop-tags'),
             'description' => $this->translationAPI->__('Tag description', 'pop-tags'),
             'count' => $this->translationAPI->__('Number of custom posts containing this tag', 'pop-tags'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 

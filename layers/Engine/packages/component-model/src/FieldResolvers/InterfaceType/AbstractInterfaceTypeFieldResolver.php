@@ -13,6 +13,7 @@ use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -136,42 +137,6 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return null;
     }
 
-    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
-    {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldTypeModifiers($fieldName);
-        }
-        return null;
-    }
-
-    public function getSchemaFieldDescription(string $fieldName): ?string
-    {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldDescription($fieldName);
-        }
-        return null;
-    }
-
-    public function getSchemaFieldArgs(string $fieldName): array
-    {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldArgs($fieldName);
-        }
-        return [];
-    }
-
-    public function getSchemaFieldDeprecationDescription(string $fieldName, array $fieldArgs = []): ?string
-    {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldDeprecationDescription($fieldName, $fieldArgs);
-        }
-        return null;
-    }
-
     /**
      * By default, the field is a scalar of type AnyScalar
      */
@@ -181,7 +146,112 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldTypeResolver($fieldName);
         }
-        return $this->schemaDefinitionService->getDefaultTypeResolver();
+        return $this->schemaDefinitionService->getDefaultConcreteTypeResolver();
+    }
+
+    public function getFieldDescription(string $fieldName): ?string
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getFieldDescription($fieldName);
+        }
+        return null;
+    }
+
+    public function getFieldTypeModifiers(string $fieldName): int
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getFieldTypeModifiers($fieldName);
+        }
+        return 0;
+    }
+
+    public function getFieldDeprecationDescription(string $fieldName, array $fieldArgs = []): ?string
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getFieldDeprecationDescription($fieldName, $fieldArgs);
+        }
+        return null;
+    }
+
+    /**
+     * @return array<string, InputTypeResolverInterface>
+     */
+    public function getFieldArgNameResolvers(string $fieldName): array
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getFieldArgNameResolvers($fieldName);
+        }
+        return [];
+    }
+
+    public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getFieldArgDescription($fieldName, $fieldArgName);
+        }
+        return null;
+    }
+
+    public function getFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getFieldArgDefaultValue($fieldName, $fieldArgName);
+        }
+        return null;
+    }
+
+    public function getFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getFieldArgTypeModifiers($fieldName, $fieldArgName);
+        }
+        return 0;
+    }
+
+    /**
+     * @return array<string, InputTypeResolverInterface>
+     */
+    public function getSchemaFieldArgNameResolvers(string $fieldName): array
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getSchemaFieldArgNameResolvers($fieldName);
+        }
+        return [];
+    }
+
+    public function getSchemaFieldArgDescription(string $fieldName, string $fieldArgName): ?string
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getSchemaFieldArgDescription($fieldName, $fieldArgName);
+        }
+        return null;
+    }
+
+    public function getSchemaFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getSchemaFieldArgDefaultValue($fieldName, $fieldArgName);
+        }
+        return null;
+    }
+
+    public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getSchemaFieldArgTypeModifiers($fieldName, $fieldArgName);
+        }
+        return 0;
     }
 
     /**

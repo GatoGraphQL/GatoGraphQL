@@ -13,7 +13,7 @@ class IsCustomPostInterfaceTypeResolver extends AbstractInterfaceTypeResolver
         return 'IsCustomPost';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Entities representing a custom post', 'customposts');
     }

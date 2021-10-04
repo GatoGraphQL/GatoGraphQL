@@ -25,7 +25,7 @@ class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
         return 'Notification';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Notifications for the user', 'notifications');
     }

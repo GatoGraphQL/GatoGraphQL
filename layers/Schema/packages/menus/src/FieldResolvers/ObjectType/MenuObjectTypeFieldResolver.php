@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoPSchema\Menus\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
@@ -23,6 +23,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
     protected MenuItemObjectTypeResolver $menuItemObjectTypeResolver;
     protected MenuTypeAPIInterface $menuTypeAPI;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
 
     #[Required]
     public function autowireMenuObjectTypeFieldResolver(
@@ -30,11 +31,13 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         MenuItemObjectTypeResolver $menuItemObjectTypeResolver,
         MenuTypeAPIInterface $menuTypeAPI,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {
         $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         $this->menuItemObjectTypeResolver = $menuItemObjectTypeResolver;
         $this->menuTypeAPI = $menuTypeAPI;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -61,37 +64,40 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
             'items',
             'itemDataEntries'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
-            default => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        switch ($fieldName) {
-            case 'itemDataEntries':
-                return [
-                    [
-                        SchemaDefinition::ARGNAME_NAME => 'flat',
-                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Flatten the items', 'menus'),
-                    ],
-                ];
-        }
-        return parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'itemDataEntries' => [
+                'flat' => $this->booleanScalarTypeResolver,
+            ],
+            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+        };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['itemDataEntries' => 'flat'] => $this->translationAPI->__('Flatten the items', 'menus'),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'items' => $this->translationAPI->__('The menu items', 'menus'),
             'itemDataEntries' => $this->translationAPI->__('The data for the menu items', 'menus'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 

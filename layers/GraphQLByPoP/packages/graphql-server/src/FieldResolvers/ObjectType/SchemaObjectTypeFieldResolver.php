@@ -8,25 +8,28 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\DirectiveObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
-use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected TypeObjectTypeResolver $typeObjectTypeResolver;
     protected DirectiveObjectTypeResolver $directiveObjectTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
     public function autowireSchemaObjectTypeFieldResolver(
         TypeObjectTypeResolver $typeObjectTypeResolver,
         DirectiveObjectTypeResolver $directiveObjectTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
         $this->directiveObjectTypeResolver = $directiveObjectTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -48,7 +51,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
             'queryType'
@@ -57,11 +60,11 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'directives'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'queryType' => $this->translationAPI->__('The type, accessible from the root, that resolves queries', 'graphql-server'),
@@ -70,29 +73,34 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'types' => $this->translationAPI->__('All types registered in the data graph', 'graphql-server'),
             'directives' => $this->translationAPI->__('All directives registered in the data graph', 'graphql-server'),
             'type' => $this->translationAPI->__('Obtain a specific type from the schema', 'graphql-server'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'type':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'name',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The name of the type', 'graphql-server'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-        }
+        return match ($fieldName) {
+            'type' => [
+                'name' => $this->stringScalarTypeResolver,
+            ],
+            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+        };
+    }
 
-        return $schemaFieldArgs;
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['type' => 'name'] => $this->translationAPI->__('The name of the type', 'graphql-server'),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['type' => 'name'] => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+        };
     }
 
     /**

@@ -10,14 +10,14 @@ use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractInterface;
 
 abstract class AbstractCustomPostListTagObjectTypeFieldResolver extends AbstractCustomPostListObjectTypeFieldResolver implements TagAPIRequestedContractInterface
 {
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'customPosts' => $this->translationAPI->__('Custom posts which contain this tag', 'pop-tags'),
             'customPostCount' => $this->translationAPI->__('Number of custom posts which contain this tag', 'pop-tags'),
             'customPostsForAdmin' => $this->translationAPI->__('[Unrestricted] Custom posts which contain this tag', 'pop-tags'),
             'customPostCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of custom posts which contain this tag', 'pop-tags'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 

@@ -29,7 +29,7 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
         return 'Page';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Representation of a page', 'pages');
     }

@@ -2,9 +2,12 @@
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -13,6 +16,15 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
     public const MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS = 'filterinput-individualinterests';
     public const MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES = 'filterinput-organizationcategories';
     public const MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES = 'filterinput-organizationtypes';
+
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+
+    #[Required]
+    public function autowireGD_URE_Module_Processor_MultiSelectFilterInputs(
+        StringScalarTypeResolver $stringScalarTypeResolver,
+    ): void {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
 
     public function getModulesToProcess(): array
     {
@@ -101,35 +113,37 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match($module[1]) {
-            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => SchemaDefinition::TYPE_STRING,
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => SchemaDefinition::TYPE_STRING,
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => SchemaDefinition::TYPE_STRING,
-            default => $this->getDefaultSchemaFilterInputType(),
+            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => $this->stringScalarTypeResolver,
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => $this->stringScalarTypeResolver,
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => $this->stringScalarTypeResolver,
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match($module[1]) {
-            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => true,
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => true,
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => true,
-            default => false,
+            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS,
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES,
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => 0,
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => $translationAPI->__('', ''),
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => $translationAPI->__('', ''),
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            default => null,
+        };
     }
 }
 

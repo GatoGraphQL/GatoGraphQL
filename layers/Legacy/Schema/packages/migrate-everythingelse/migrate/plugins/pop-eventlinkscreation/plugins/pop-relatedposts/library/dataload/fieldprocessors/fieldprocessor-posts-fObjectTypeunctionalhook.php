@@ -31,12 +31,12 @@ class PoP_EventLinksCreation_DataLoad_FunctionalObjectTypeFieldResolver extends 
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match($fieldName) {
 			'addEventLinkURL' => $translationAPI->__('', ''),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 

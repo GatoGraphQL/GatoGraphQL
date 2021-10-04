@@ -9,15 +9,27 @@ use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 use PoPSchema\GenericCustomPosts\FilterInputProcessors\FilterInputProcessor;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 
     public const MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES = 'filterinput-genericcustomposttypes';
+
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+
+    #[Required]
+    public function autowireFilterInputModuleProcessor(
+        StringScalarTypeResolver $stringScalarTypeResolver,
+    ): void {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
 
     public function getModulesToProcess(): array
     {
@@ -56,31 +68,23 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => SchemaDefinition::TYPE_STRING,
-            default => $this->getDefaultSchemaFilterInputType(),
+            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->stringScalarTypeResolver,
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => true,
-            default => false,
+            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default => 0,
         };
     }
 
-    public function getSchemaFilterInputIsNonNullableItemsInArrayType(array $module): bool
-    {
-        return match ($module[1]) {
-            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => true,
-            default => false,
-        };
-    }
-
-    public function getSchemaFilterInputDefaultValue(array $module): mixed
+    public function getFilterInputDefaultValue(array $module): mixed
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => ComponentConfiguration::getGenericCustomPostTypes(),
@@ -88,11 +92,11 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->translationAPI->__('Return results from Custom Post Types', 'customposts'),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            default => null,
+        };
     }
 }

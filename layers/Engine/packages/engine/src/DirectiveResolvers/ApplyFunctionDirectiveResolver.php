@@ -9,17 +9,18 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
-
     /**
      * "Functions" are global fields, defined in all TypeResolvers.
      * Use RootObjectTypeResolver instead of $relationalTypeResolver
@@ -27,12 +28,18 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
      * but `extractFieldArguments` expects an ObjectTypeResolver
      */
     protected RootObjectTypeResolver $rootTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected MixedScalarTypeResolver $mixedScalarTypeResolver;
 
     #[Required]
     public function autowireApplyFunctionDirectiveResolver(
         RootObjectTypeResolver $rootTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+        MixedScalarTypeResolver $mixedScalarTypeResolver,
     ): void {
         $this->rootTypeResolver = $rootTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
     }
 
     public function getDirectiveName(): string
@@ -48,33 +55,38 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         return DirectiveTypes::SCRIPTING;
     }
 
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            [
-                SchemaDefinition::ARGNAME_NAME => 'function',
-                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Function to execute on the affected fields', 'component-model'),
-                SchemaDefinition::ARGNAME_MANDATORY => true,
-            ],
-            [
-                SchemaDefinition::ARGNAME_NAME => 'addArguments',
-                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_MIXED,
-                SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                    $this->translationAPI->__('Arguments to inject to the function. The value of the affected field can be provided under special expression `%s`', 'component-model'),
-                    QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)
-                ),
-            ],
-            [
-                SchemaDefinition::ARGNAME_NAME => 'target',
-                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Property from the current object where to store the results of the function. If the result must not be stored, pass an empty value. Default value: Same property as the affected field', 'component-model'),
-            ],
+            'function' => $this->stringScalarTypeResolver,
+            'addArguments' => $this->mixedScalarTypeResolver,
+            'target' => $this->stringScalarTypeResolver,
         ];
     }
 
-    public function getSchemaDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    {
+        return match ($directiveArgName) {
+            'function' => $this->translationAPI->__('Function to execute on the affected fields', 'component-model'),
+            'addArguments' => sprintf(
+                $this->translationAPI->__('Arguments to inject to the function. The value of the affected field can be provided under special expression `%s`', 'component-model'),
+                QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)
+            ),
+            'target' => $this->translationAPI->__('Property from the current object where to store the results of the function. If the result must not be stored, pass an empty value. Default value: Same property as the affected field', 'component-model'),
+            default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+        };
+    }
+
+    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
+    {
+        return match ($directiveArgName) {
+            'function' => SchemaTypeModifiers::MANDATORY,
+            'addArguments' => SchemaTypeModifiers::IS_ARRAY,
+            default => parent::getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
+        };
+    }
+
+    public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             Expressions::NAME_VALUE => $this->translationAPI->__('Element being transformed', 'component-model'),

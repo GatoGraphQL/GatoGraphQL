@@ -1,14 +1,13 @@
 <?php
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberPrivilegeEnumTypeResolver;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberStatusEnumTypeResolver;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\MemberTagEnumTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -17,6 +16,21 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
     public const MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES = 'filterinput-memberprivileges';
     public const MODULE_URE_FILTERINPUT_MEMBERTAGS = 'filterinput-membertags';
     public const MODULE_URE_FILTERINPUT_MEMBERSTATUS = 'filterinput-memberstatus';
+
+    protected MemberPrivilegeEnumTypeResolver $memberPrivilegeEnumTypeResolver;
+    protected MemberTagEnumTypeResolver $memberTagEnumTypeResolver;
+    protected MemberStatusEnumTypeResolver $memberStatusEnumTypeResolver;
+
+    #[Required]
+    public function autowireGD_URE_Module_Processor_ProfileMultiSelectFilterInputs(
+        MemberPrivilegeEnumTypeResolver $memberPrivilegeEnumTypeResolver,
+        MemberTagEnumTypeResolver $memberTagEnumTypeResolver,
+        MemberStatusEnumTypeResolver $memberStatusEnumTypeResolver,
+    ): void {
+        $this->memberPrivilegeEnumTypeResolver = $memberPrivilegeEnumTypeResolver;
+        $this->memberTagEnumTypeResolver = $memberTagEnumTypeResolver;
+        $this->memberStatusEnumTypeResolver = $memberStatusEnumTypeResolver;
+    }
 
     public function getModulesToProcess(): array
     {
@@ -97,72 +111,37 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getFilterInputTypeResolver(array $module): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
     {
         return match($module[1]) {
-            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => SchemaDefinition::TYPE_ENUM,
-            self::MODULE_URE_FILTERINPUT_MEMBERTAGS => SchemaDefinition::TYPE_ENUM,
-            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => SchemaDefinition::TYPE_ENUM,
-            default => $this->getDefaultSchemaFilterInputType(),
+            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => $this->memberPrivilegeEnumTypeResolver,
+            self::MODULE_URE_FILTERINPUT_MEMBERTAGS => $this->memberTagEnumTypeResolver,
+            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => $this->memberStatusEnumTypeResolver,
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match($module[1]) {
-            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => true,
-            self::MODULE_URE_FILTERINPUT_MEMBERTAGS => true,
-            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => true,
-            default => false,
+            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES,
+            self::MODULE_URE_FILTERINPUT_MEMBERTAGS,
+            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => 0,
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => $translationAPI->__('', ''),
             self::MODULE_URE_FILTERINPUT_MEMBERTAGS => $translationAPI->__('', ''),
             self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$module[1]] ?? null;
-    }
-
-    protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module): void
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES:
-                /**
-                 * @var MemberPrivilegeEnumTypeResolver
-                 */
-                $memberPrivilegeEnumTypeResolver = $instanceManager->getInstance(MemberPrivilegeEnumTypeResolver::class);
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $memberPrivilegeEnumTypeResolver->getTypeName();
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $memberPrivilegeEnumTypeResolver
-                );
-                break;
-            case self::MODULE_URE_FILTERINPUT_MEMBERTAGS:
-                /**
-                 * @var MemberTagEnumTypeResolver
-                 */
-                $memberTagEnumTypeResolver = $instanceManager->getInstance(MemberTagEnumTypeResolver::class);
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $memberTagEnumTypeResolver->getTypeName();
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $memberTagEnumTypeResolver
-                );
-                break;
-            case self::MODULE_URE_FILTERINPUT_MEMBERSTATUS:
-                /**
-                 * @var MemberStatusEnumTypeResolver
-                 */
-                $memberStatusEnumTypeResolver = $instanceManager->getInstance(MemberStatusEnumTypeResolver::class);
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $memberStatusEnumTypeResolver->getTypeName();
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $memberStatusEnumTypeResolver
-                );
-                break;
-        }
+            default => null,
+        };
     }
 }
 

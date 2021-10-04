@@ -38,7 +38,7 @@ class Component extends AbstractPluginComponent
             \PoPSchema\UserRolesWP\Component::class,
             \PoPSchema\UserStateWP\Component::class,
             \PoPSchema\CustomPostMutationsWP\Component::class,
-            \PoPSchema\PostMutations\Component::class,
+            \PoPSchema\PostMediaMutations\Component::class,
             \PoPSchema\CustomPostMediaMutationsWP\Component::class,
             \PoPSchema\PostTagMutationsWP\Component::class,
             \PoPSchema\PostCategoryMutationsWP\Component::class,

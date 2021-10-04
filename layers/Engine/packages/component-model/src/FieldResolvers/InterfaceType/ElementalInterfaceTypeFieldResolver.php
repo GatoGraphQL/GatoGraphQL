@@ -43,20 +43,20 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
         };
     }
 
-    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
+    public function getFieldTypeModifiers(string $fieldName): int
     {
         switch ($fieldName) {
             case 'id':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::getSchemaFieldTypeModifiers($fieldName);
+        return parent::getFieldTypeModifiers($fieldName);
     }
 
-    public function getSchemaFieldDescription(string $fieldName): ?string
+    public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
             'id' => $this->translationAPI->__('The object\'s unique identifier for its type', 'component-model'),
-            default => parent::getSchemaFieldDescription($fieldName),
+            default => parent::getFieldDescription($fieldName),
         };
     }
 }

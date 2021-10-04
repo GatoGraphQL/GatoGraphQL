@@ -36,20 +36,20 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
         ];
     }
 
-    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
+    public function getFieldTypeModifiers(string $fieldName): int
     {
         switch ($fieldName) {
             case 'author':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::getSchemaFieldTypeModifiers($fieldName);
+        return parent::getFieldTypeModifiers($fieldName);
     }
 
-    public function getSchemaFieldDescription(string $fieldName): ?string
+    public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
             'author' => $this->translationAPI->__('The entity\'s author', 'queriedobject'),
-            default => parent::getSchemaFieldDescription($fieldName),
+            default => parent::getFieldDescription($fieldName),
         };
     }
 

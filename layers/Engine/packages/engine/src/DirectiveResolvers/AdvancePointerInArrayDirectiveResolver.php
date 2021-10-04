@@ -7,12 +7,23 @@ namespace PoP\Engine\DirectiveResolvers;
 use Exception;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Misc\OperatorHelpers;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
 {
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+
+    #[Required]
+    public function autowireAdvancePointerInArrayDirectiveResolver(
+        StringScalarTypeResolver $stringScalarTypeResolver,
+    ): void {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+
     public function getDirectiveName(): string
     {
         return 'advancePointerInArray';
@@ -31,24 +42,35 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
         return true;
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('Apply all composed directives on the element found under the \'path\' parameter in the affected array object', 'component-model');
     }
 
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return array_merge(
+            parent::getDirectiveArgNameResolvers($relationalTypeResolver),
             [
-                [
-                    SchemaDefinition::ARGNAME_NAME => 'path',
-                    SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                    SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Path to the element in the array', 'component-model'),
-                    SchemaDefinition::ARGNAME_MANDATORY => true,
-                ],
-            ],
-            parent::getSchemaDirectiveArgs($relationalTypeResolver)
+                'path' => $this->stringScalarTypeResolver,
+            ]
         );
+    }
+
+    public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    {
+        return match ($directiveArgName) {
+            'path' => $this->translationAPI->__('Path to the element in the array', 'component-model'),
+            default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+        };
+    }
+
+    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
+    {
+        return match ($directiveArgName) {
+            'path' => SchemaTypeModifiers::MANDATORY,
+            default => parent::getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
+        };
     }
 
     /**

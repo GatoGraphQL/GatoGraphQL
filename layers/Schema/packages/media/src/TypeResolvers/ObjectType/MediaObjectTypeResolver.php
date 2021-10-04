@@ -29,7 +29,7 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
         return 'Media';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Media elements (such as images, videos, etc), attached to a post or independent', 'media');
     }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\Media\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -89,20 +88,19 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         };
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
-        $nonNullableFieldNames = [
+        return match ($fieldName) {
             'src',
             'date',
-            'modified',
-        ];
-        if (in_array($fieldName, $nonNullableFieldNames)) {
-            return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName);
+            'modified'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            default
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+        };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'src' => $this->translationAPI->__('Media element URL source', 'pop-media'),
@@ -117,30 +115,32 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             'date' => $this->translationAPI->__('Media element\'s published date', 'pop-media'),
             'modified' => $this->translationAPI->__('Media element\'s modified date', 'pop-media'),
             'mimeType' => $this->translationAPI->__('Media element\'s mime type', 'pop-media'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'src':
-            case 'srcSet':
-            case 'width':
-            case 'height':
-            case 'sizes':
-                return [
-                    ...$schemaFieldArgs,
-                    [
-                        SchemaDefinition::ARGNAME_NAME => 'size',
-                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Size of the image', 'pop-media'),
-                    ],
-                ];
-        }
+        return match ($fieldName) {
+            'src',
+            'srcSet',
+            'width',
+            'height',
+            'sizes'
+                => [
+                    'size' => $this->stringScalarTypeResolver,
+                ],
+            default
+                => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+        };
+    }
 
-        return $schemaFieldArgs;
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        return match ($fieldArgName) {
+            'size' => $this->translationAPI->__('Size of the image', 'pop-media'),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+        };
     }
 
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array

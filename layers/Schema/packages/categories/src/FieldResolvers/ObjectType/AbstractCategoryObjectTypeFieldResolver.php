@@ -65,18 +65,18 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         };
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
             'name',
             'count'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
-                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'url' => $this->translationAPI->__('Category URL', 'pop-categories'),
@@ -86,7 +86,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             'description' => $this->translationAPI->__('Category description', 'pop-categories'),
             'parentCategory' => $this->translationAPI->__('Parent category (if this category is a child of another one)', 'pop-categories'),
             'count' => $this->translationAPI->__('Number of custom posts containing this category', 'pop-categories'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 

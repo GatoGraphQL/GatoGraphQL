@@ -85,7 +85,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
             'username',
@@ -93,11 +93,11 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'displayName'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
-                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'url' => $this->translationAPI->__('URL of the user\'s profile in the website', 'pop-users'),
@@ -111,7 +111,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'email' => $this->translationAPI->__('User\'s email', 'pop-users'),
             'description' => $this->translationAPI->__('Description of the user', 'pop-users'),
             'websiteURL' => $this->translationAPI->__('User\'s own website\'s URL', 'pop-users'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 

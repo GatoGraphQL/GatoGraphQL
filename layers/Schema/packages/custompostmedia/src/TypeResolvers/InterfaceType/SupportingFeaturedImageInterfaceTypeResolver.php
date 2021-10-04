@@ -13,7 +13,7 @@ class SupportingFeaturedImageInterfaceTypeResolver extends AbstractInterfaceType
         return 'SupportingFeaturedImage';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Fields concerning an entity\'s featured image', 'custompostmedia');
     }

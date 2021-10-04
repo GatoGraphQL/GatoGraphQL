@@ -8,13 +8,23 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
 {
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+
+    #[Required]
+    public function autowireForEachDirectiveResolver(
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+    ): void {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+
     public function getDirectiveName(): string
     {
         return 'forEach';
@@ -25,26 +35,30 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
         return DirectiveTypes::INDEXING;
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('Iterate all affected array items and execute the composed directives on them', 'component-model');
     }
 
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return array_merge(
-            parent::getSchemaDirectiveArgs($relationalTypeResolver),
+            parent::getDirectiveArgNameResolvers($relationalTypeResolver),
             [
-                [
-                    SchemaDefinition::ARGNAME_NAME => 'if',
-                    SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                    SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('If provided, iterate only those items that satisfy this condition `%s`', 'component-model'),
-                ],
+                'if' => $this->booleanScalarTypeResolver,
             ]
         );
     }
 
-    public function getSchemaDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    {
+        return match ($directiveArgName) {
+            'if' => $this->translationAPI->__('If provided, iterate only those items that satisfy this condition `%s`', 'component-model'),
+            default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+        };
+    }
+
+    public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             Expressions::NAME_KEY => $this->translationAPI->__('Key of the array element from the current iteration', 'component-model'),

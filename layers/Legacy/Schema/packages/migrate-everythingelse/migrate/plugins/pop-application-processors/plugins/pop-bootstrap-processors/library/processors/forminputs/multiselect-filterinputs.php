@@ -2,8 +2,12 @@
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -13,6 +17,18 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
     public const MODULE_FILTERINPUT_CATEGORIES = 'filterinput-categories';
     public const MODULE_FILTERINPUT_CONTENTSECTIONS = 'filterinput-contentsections';
     public const MODULE_FILTERINPUT_POSTSECTIONS = 'filterinput-postsections';
+
+    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+
+    #[Required]
+    public function autowirePoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs(
+        IDScalarTypeResolver $idScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+    ): void {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
 
     public function getModulesToProcess(): array
     {
@@ -98,38 +114,40 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match($module[1]) {
-            self::MODULE_FILTERINPUT_APPLIESTO => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_CATEGORIES => SchemaDefinition::TYPE_ID,
-            self::MODULE_FILTERINPUT_CONTENTSECTIONS => SchemaDefinition::TYPE_ID,
-            self::MODULE_FILTERINPUT_POSTSECTIONS => SchemaDefinition::TYPE_ID,
-            default => $this->getDefaultSchemaFilterInputType(),
+            self::MODULE_FILTERINPUT_APPLIESTO => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_CATEGORIES => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_CONTENTSECTIONS => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_POSTSECTIONS => $this->idScalarTypeResolver,
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match($module[1]) {
-            self::MODULE_FILTERINPUT_APPLIESTO => true,
-            self::MODULE_FILTERINPUT_CATEGORIES => true,
-            self::MODULE_FILTERINPUT_CONTENTSECTIONS => true,
-            self::MODULE_FILTERINPUT_POSTSECTIONS => true,
-            default => false,
+            self::MODULE_FILTERINPUT_APPLIESTO,
+            self::MODULE_FILTERINPUT_CATEGORIES,
+            self::MODULE_FILTERINPUT_CONTENTSECTIONS,
+            self::MODULE_FILTERINPUT_POSTSECTIONS
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => 0,
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_APPLIESTO => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_CATEGORIES => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_CONTENTSECTIONS => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_POSTSECTIONS => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            default => null,
+        };
     }
 }
 

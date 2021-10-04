@@ -33,6 +33,7 @@
         "pop-schema/post-mutations": "^0.9",
         "pop-schema/post-tag-mutations-wp": "^0.9",
         "pop-schema/post-tags-wp": "^0.9",
+        "pop-schema/postmedia-mutations": "^0.9",
         "pop-schema/settings-wp": "^0.9",
         "pop-schema/taxonomymeta-wp": "^0.9",
         "pop-schema/taxonomyquery-wp": "^0.9",

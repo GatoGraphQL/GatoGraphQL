@@ -9,8 +9,9 @@ use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\Constants\CommentTypes;
 use PoPSchema\Comments\FilterInputProcessors\FilterInputProcessor;
@@ -27,16 +28,20 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS = 'filterinput-exclude-custompost-ids';
     public const MODULE_FILTERINPUT_COMMENT_TYPES = 'filterinput-comment-types';
     public const MODULE_FILTERINPUT_COMMENT_STATUS = 'filterinput-comment-status';
+
     protected CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver;
     protected CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver;
+    protected IDScalarTypeResolver $idScalarTypeResolver;
 
     #[Required]
     public function autowireFilterInputModuleProcessor(
         CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver,
         CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
+        IDScalarTypeResolver $idScalarTypeResolver,
     ): void {
         $this->commentTypeEnumTypeResolver = $commentTypeEnumTypeResolver;
         $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
     }
 
     public function getModulesToProcess(): array
@@ -88,45 +93,32 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOST_IDS => SchemaDefinition::TYPE_ID,
-            self::MODULE_FILTERINPUT_CUSTOMPOST_ID => SchemaDefinition::TYPE_ID,
-            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => SchemaDefinition::TYPE_ID,
-            self::MODULE_FILTERINPUT_COMMENT_TYPES => SchemaDefinition::TYPE_ENUM,
-            self::MODULE_FILTERINPUT_COMMENT_STATUS => SchemaDefinition::TYPE_ENUM,
-            default => $this->getDefaultSchemaFilterInputType(),
+            self::MODULE_FILTERINPUT_CUSTOMPOST_IDS => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_CUSTOMPOST_ID => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_COMMENT_TYPES => $this->commentTypeEnumTypeResolver,
+            self::MODULE_FILTERINPUT_COMMENT_STATUS => $this->commentStatusEnumTypeResolver,
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
-    {
-        return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOST_IDS,
-            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS,
-            self::MODULE_FILTERINPUT_COMMENT_TYPES,
-            self::MODULE_FILTERINPUT_COMMENT_STATUS
-                => true,
-            default
-                => false,
-        };
-    }
-
-    public function getSchemaFilterInputIsNonNullableItemsInArrayType(array $module): bool
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOST_IDS,
             self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS,
             self::MODULE_FILTERINPUT_COMMENT_TYPES,
             self::MODULE_FILTERINPUT_COMMENT_STATUS
-                => true,
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
-                => false,
+                => 0,
         };
     }
 
-    public function getSchemaFilterInputDefaultValue(array $module): mixed
+    public function getFilterInputDefaultValue(array $module): mixed
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_COMMENT_TYPES => [
@@ -139,7 +131,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOST_IDS => $this->translationAPI->__('Limit results to elements with the given custom post IDs', 'comments'),
@@ -149,23 +141,5 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
             self::MODULE_FILTERINPUT_COMMENT_STATUS => $this->translationAPI->__('Status of the comment', 'comments'),
             default => null,
         };
-    }
-
-    public function addSchemaDefinitionForFilter(array &$schemaDefinition, array $module): void
-    {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_COMMENT_TYPES:
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $this->commentTypeEnumTypeResolver->getTypeName();
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $this->commentTypeEnumTypeResolver
-                );
-                break;
-            case self::MODULE_FILTERINPUT_COMMENT_STATUS:
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $this->commentStatusEnumTypeResolver->getTypeName();
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $this->commentStatusEnumTypeResolver
-                );
-                break;
-        }
     }
 }

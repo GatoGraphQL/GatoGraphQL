@@ -446,7 +446,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
 
                 // Validate against the directiveResolver
-                if ($maybeErrors = $directiveResolverInstance->resolveSchemaValidationErrorDescriptions($this, $directiveName, $directiveArgs)) {
+                if ($maybeErrors = $directiveResolverInstance->resolveFieldValidationErrorDescriptions($this, $directiveName, $directiveArgs)) {
                     foreach ($maybeErrors as $error) {
                         $schemaErrors[] = [
                             Tokens::PATH => [$fieldDirective],
@@ -457,7 +457,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
 
                 // Check for warnings
-                if ($warningDescription = $directiveResolverInstance->resolveSchemaDirectiveWarningDescription($this)) {
+                if ($warningDescription = $directiveResolverInstance->resolveDirectiveWarningDescription($this)) {
                     $schemaWarnings[] = [
                         Tokens::PATH => [$fieldDirective],
                         Tokens::MESSAGE => $warningDescription,
@@ -465,7 +465,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
 
                 // Check for deprecations
-                if ($deprecationDescription = $directiveResolverInstance->getSchemaDirectiveDeprecationDescription($this)) {
+                if ($deprecationDescription = $directiveResolverInstance->getDirectiveDeprecationDescription($this)) {
                     $schemaDeprecations[] = [
                         Tokens::PATH => [$fieldDirective],
                         Tokens::MESSAGE => $deprecationDescription,
@@ -576,7 +576,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             'unresolved-resultitem-id',
             sprintf(
                 $this->translationAPI->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'pop-component-model'),
-                $this->getTypeOutputName(),
+                $this->getMaybeNamespacedTypeName(),
                 $objectID
             )
         );

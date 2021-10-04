@@ -15,7 +15,7 @@ use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 trait SetCategoriesOnPostObjectTypeFieldResolverTrait
 {
-    public function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface
+    public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         return $instanceManager->getInstance(PostObjectTypeResolver::class);

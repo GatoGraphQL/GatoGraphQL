@@ -6,21 +6,26 @@ namespace PoPWPSchema\Menus\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     protected MenuObjectTypeResolver $menuObjectTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
     public function autowireRootObjectTypeFieldResolver(
         MenuObjectTypeResolver $menuObjectTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->menuObjectTypeResolver = $menuObjectTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -38,38 +43,46 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         ];
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'menuByLocation' => $this->translationAPI->__('Get a menu by its location', 'menus'),
             'menuBySlug' => $this->translationAPI->__('Get a menu by its slug', 'menus'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        switch ($fieldName) {
-            case 'menuByLocation':
-                return [
-                    [
-                        SchemaDefinition::ARGNAME_NAME => 'location',
-                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The location of the menu', 'menus'),
-                        SchemaDefinition::ARGNAME_MANDATORY => true,
-                    ],
-                ];
-            case 'menuBySlug':
-                return [
-                    [
-                        SchemaDefinition::ARGNAME_NAME => 'slug',
-                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The slug of the menu', 'menus'),
-                        SchemaDefinition::ARGNAME_MANDATORY => true,
-                    ],
-                ];
-        }
-        return parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'menuByLocation' => [
+                'location' => $this->stringScalarTypeResolver,
+            ],
+            'menuBySlug' => [
+                'slug' => $this->stringScalarTypeResolver,
+            ],
+            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['menuByLocation' => 'location'] => $this->translationAPI->__('The location of the menu', 'menus'),
+            ['menuBySlug' => 'slug'] => $this->translationAPI->__('The slug of the menu', 'menus'),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['menuByLocation' => 'location'],
+            ['menuBySlug' => 'slug']
+                => SchemaTypeModifiers::MANDATORY,
+            default
+                => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+        };
     }
 
     /**

@@ -25,7 +25,7 @@ class DirectiveObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
         return '__Directive';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('A GraphQL directive in the data graph', 'graphql-server');
     }

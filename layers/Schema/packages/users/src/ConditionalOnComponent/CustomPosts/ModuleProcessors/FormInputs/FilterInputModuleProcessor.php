@@ -8,8 +8,12 @@ use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\FilterInputProcessors\FilterInputProcessor;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -18,6 +22,18 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_AUTHOR_IDS = 'filterinput-author-ids';
     public const MODULE_FILTERINPUT_AUTHOR_SLUG = 'filterinput-author-slug';
     public const MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS = 'filterinput-exclude-author-ids';
+
+    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+
+    #[Required]
+    public function autowireFilterInputModuleProcessor(
+        IDScalarTypeResolver $idScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+    ): void {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
 
     public function getModulesToProcess(): array
     {
@@ -48,41 +64,34 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_AUTHOR_IDS => SchemaDefinition::TYPE_ID,
-            self::MODULE_FILTERINPUT_AUTHOR_SLUG => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS => SchemaDefinition::TYPE_ID,
-            default => $this->getDefaultSchemaFilterInputType(),
+            self::MODULE_FILTERINPUT_AUTHOR_IDS => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_AUTHOR_SLUG => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS => $this->idScalarTypeResolver,
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_AUTHOR_IDS => true,
-            self::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS => true,
-            default => false,
+            self::MODULE_FILTERINPUT_AUTHOR_IDS,
+            self::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default
+                => 0,
         };
     }
 
-    public function getSchemaFilterInputIsNonNullableItemsInArrayType(array $module): bool
+    public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_AUTHOR_IDS => true,
-            self::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS => true,
-            default => false,
-        };
-    }
-
-    public function getSchemaFilterInputDescription(array $module): ?string
-    {
-        $descriptions = [
             self::MODULE_FILTERINPUT_AUTHOR_IDS => $this->translationAPI->__('Get results from the authors with given IDs', 'pop-users'),
             self::MODULE_FILTERINPUT_AUTHOR_SLUG => $this->translationAPI->__('Get results from the authors with given slug', 'pop-users'),
             self::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS => $this->translationAPI->__('Get results excluding the ones from authors with given IDs', 'pop-users'),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            default => null,
+        };
     }
 }

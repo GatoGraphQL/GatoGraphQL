@@ -17,10 +17,10 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\FieldObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -28,6 +28,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
     protected FieldObjectTypeResolver $fieldObjectTypeResolver;
     protected TypeObjectTypeResolver $typeObjectTypeResolver;
@@ -38,6 +39,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     #[Required]
     public function autowireTypeObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         FieldObjectTypeResolver $fieldObjectTypeResolver,
         TypeObjectTypeResolver $typeObjectTypeResolver,
@@ -46,6 +48,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         TypeKindEnumTypeResolver $typeKindEnumTypeResolver,
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         $this->fieldObjectTypeResolver = $fieldObjectTypeResolver;
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
@@ -102,7 +105,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
             'kind',
@@ -115,11 +118,11 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'inputFields'
                 => SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'kind' => $this->translationAPI->__('Type\'s kind as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACqBBCvBAtrC)', 'graphql-server'),
@@ -132,30 +135,35 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'inputFields' => $this->translationAPI->__('Type\'s input Fields (available for InputObject type only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-HAJbLAuDABCBIu9N)', 'graphql-server'),
             'ofType' => $this->translationAPI->__('The type of the nested type (available for NonNull and List types only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-HAJbLA4DABCBIu9N)', 'graphql-server'),
             'extensions' => $this->translationAPI->__('Custom metadata added to the field (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'fields':
-            case 'enumValues':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'includeDeprecated',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Include deprecated fields?', 'graphql-server'),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => false,
-                        ],
-                    ]
-                );
-        }
+        return match ($fieldName) {
+            'fields',
+            'enumValues' => [
+                'includeDeprecated' => $this->booleanScalarTypeResolver,
+            ],
+            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+        };
+    }
 
-        return $schemaFieldArgs;
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        return match ($fieldArgName) {
+            'includeDeprecated' => $this->translationAPI->__('Include deprecated fields?', 'graphql-server'),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    {
+        return match ($fieldArgName) {
+            'includeDeprecated' => false,
+            default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
+        };
     }
 
     /**

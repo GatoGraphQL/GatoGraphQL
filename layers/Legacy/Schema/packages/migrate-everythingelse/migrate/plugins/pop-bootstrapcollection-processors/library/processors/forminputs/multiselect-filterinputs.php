@@ -1,13 +1,13 @@
 <?php
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\CustomPostModeratedStatusEnumTypeResolver;
 use PoPSchema\EverythingElse\TypeResolvers\EnumType\CustomPostUnmoderatedStatusEnumTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -15,6 +15,18 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
 
     public const MODULE_FILTERINPUT_MODERATEDPOSTSTATUS = 'filterinput-moderatedpoststatus';
     public const MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS = 'filterinput-unmoderatedpoststatus';
+
+    protected CustomPostModeratedStatusEnumTypeResolver $customPostModeratedStatusEnumTypeResolver;
+    protected CustomPostUnmoderatedStatusEnumTypeResolver $customPostUnmoderatedStatusEnumTypeResolver;
+
+    #[Required]
+    public function autowirePoP_Module_Processor_MultiSelectFilterInputs(
+        CustomPostModeratedStatusEnumTypeResolver $customPostModeratedStatusEnumTypeResolver,
+        CustomPostUnmoderatedStatusEnumTypeResolver $customPostUnmoderatedStatusEnumTypeResolver,
+    ): void {
+        $this->customPostModeratedStatusEnumTypeResolver = $customPostModeratedStatusEnumTypeResolver;
+        $this->customPostUnmoderatedStatusEnumTypeResolver = $customPostUnmoderatedStatusEnumTypeResolver;
+    }
 
     public function getModulesToProcess(): array
     {
@@ -80,59 +92,34 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match($module[1]) {
-            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => SchemaDefinition::TYPE_ENUM,
-            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => SchemaDefinition::TYPE_ENUM,
-            default => $this->getDefaultSchemaFilterInputType(),
+            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => $this->customPostModeratedStatusEnumTypeResolver,
+            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => $this->customPostUnmoderatedStatusEnumTypeResolver,
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match($module[1]) {
-            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => true,
-            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => true,
-            default => false,
+            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS,
+            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => 0,
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$module[1]] ?? null;
-    }
-
-    protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module): void
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS:
-                /**
-                 * @var CustomPostModeratedStatusEnumTypeResolver
-                 */
-                $customPostModeratedStatusEnumTypeResolver = $instanceManager->getInstance(CustomPostModeratedStatusEnumTypeResolver::class);
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $customPostModeratedStatusEnumTypeResolver->getTypeName();
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $customPostModeratedStatusEnumTypeResolver
-                );
-                break;
-            case self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS:
-                /**
-                 * @var CustomPostUnmoderatedStatusEnumTypeResolver
-                 */
-                $customPostUnmoderatedStatusEnumTypeResolver = $instanceManager->getInstance(CustomPostUnmoderatedStatusEnumTypeResolver::class);
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $customPostUnmoderatedStatusEnumTypeResolver->getTypeName();
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $customPostUnmoderatedStatusEnumTypeResolver
-                );
-                break;
-        }
+            default => null,
+        };
     }
 }
 

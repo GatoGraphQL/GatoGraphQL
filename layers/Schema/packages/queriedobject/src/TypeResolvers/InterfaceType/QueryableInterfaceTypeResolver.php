@@ -13,7 +13,7 @@ class QueryableInterfaceTypeResolver extends AbstractInterfaceTypeResolver
         return 'Queryable';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Entities that can be queried through an URL', 'queriedobject');
     }

@@ -109,15 +109,11 @@ services:
         - >-
           ../../layers/Schema/packages/custompost-tag-mutations:/app/vendor/pop-schema/custompost-tag-mutations
         - >-
-          ../../layers/Schema/packages/post-tag-mutations:/app/vendor/pop-schema/post-tag-mutations
-        - >-
-          ../../layers/Schema/packages/post-tag-mutations-wp:/app/vendor/pop-schema/post-tag-mutations-wp
-        - >-
           ../../layers/Schema/packages/custompost-category-mutations:/app/vendor/pop-schema/custompost-category-mutations
         - >-
-          ../../layers/Schema/packages/post-category-mutations:/app/vendor/pop-schema/post-category-mutations
+          ../../layers/Schema/packages/custompost-tags-wp:/app/vendor/pop-schema/custompost-tags-wp
         - >-
-          ../../layers/Schema/packages/post-category-mutations-wp:/app/vendor/pop-schema/post-category-mutations-wp
+          ../../layers/Schema/packages/custompost-categories-wp:/app/vendor/pop-schema/custompost-categories-wp
         - >-
           ../../layers/Schema/packages/customposts:/app/vendor/pop-schema/customposts
         - >-
@@ -143,19 +139,25 @@ services:
         - '../../layers/Schema/packages/pages:/app/vendor/pop-schema/pages'
         - '../../layers/Schema/packages/pages-wp:/app/vendor/pop-schema/pages-wp'
         - >-
+          ../../layers/Schema/packages/post-category-mutations:/app/vendor/pop-schema/post-category-mutations
+        - >-
+          ../../layers/Schema/packages/post-category-mutations-wp:/app/vendor/pop-schema/post-category-mutations-wp
+        - >-
           ../../layers/Schema/packages/post-mutations:/app/vendor/pop-schema/post-mutations
         - >-
-          ../../layers/Schema/packages/custompost-tags-wp:/app/vendor/pop-schema/custompost-tags-wp
+          ../../layers/Schema/packages/post-tag-mutations:/app/vendor/pop-schema/post-tag-mutations
+        - >-
+          ../../layers/Schema/packages/post-tag-mutations-wp:/app/vendor/pop-schema/post-tag-mutations-wp
         - >-
           ../../layers/Schema/packages/post-tags:/app/vendor/pop-schema/post-tags
         - >-
           ../../layers/Schema/packages/post-tags-wp:/app/vendor/pop-schema/post-tags-wp
         - >-
-          ../../layers/Schema/packages/custompost-categories-wp:/app/vendor/pop-schema/custompost-categories-wp
-        - >-
           ../../layers/Schema/packages/post-categories:/app/vendor/pop-schema/post-categories
         - >-
           ../../layers/Schema/packages/post-categories-wp:/app/vendor/pop-schema/post-categories-wp
+        - >-
+          ../../layers/Schema/packages/postmedia-mutations-wp:/app/vendor/pop-schema/postmedia-mutations-wp
         - '../../layers/Schema/packages/posts:/app/vendor/pop-schema/posts'
         - '../../layers/Schema/packages/posts-wp:/app/vendor/pop-schema/posts-wp'
         - >-

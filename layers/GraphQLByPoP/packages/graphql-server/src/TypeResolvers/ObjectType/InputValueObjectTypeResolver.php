@@ -25,7 +25,7 @@ class InputValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolv
         return '__InputValue';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Representation of an input object in GraphQL', 'graphql-server');
     }

@@ -8,3 +8,6 @@ services:
 
     PoP\FunctionFields\DirectiveResolvers\:
         resource: '../src/DirectiveResolvers/*'
+
+    PoP\FunctionFields\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'

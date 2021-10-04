@@ -12,12 +12,12 @@ use PoP\API\Schema\SchemaDefinition;
 use PoP\API\TypeResolvers\EnumType\SchemaFieldShapeEnumTypeResolver;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -28,6 +28,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
     protected PersistedFragmentManagerInterface $fragmentCatalogueManager;
     protected PersistedQueryManagerInterface $queryCatalogueManager;
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
 
     #[Required]
     public function autowireRootObjectTypeFieldResolver(
@@ -36,12 +37,14 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         PersistedFragmentManagerInterface $fragmentCatalogueManager,
         PersistedQueryManagerInterface $queryCatalogueManager,
         PersistentCacheInterface $persistentCache,
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {
         $this->schemaOutputShapeEnumTypeResolver = $schemaOutputShapeEnumTypeResolver;
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         $this->fragmentCatalogueManager = $fragmentCatalogueManager;
         $this->queryCatalogueManager = $queryCatalogueManager;
         $this->persistentCache = $persistentCache;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -66,70 +69,62 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
             'fullSchema' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
-            default => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'fullSchema' => $this->translationAPI->__('The whole API schema, exposing what fields can be queried', 'api'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'fullSchema':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'deep',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Make a deep introspection of the fields, for all nested objects', 'api'),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => true,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'shape',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $this->translationAPI->__('How to shape the schema output: \'%s\', in which case all types are listed together, or \'%s\', in which the types are listed following where they appear in the graph', 'api'),
-                                SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
-                                SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_NESTED
-                            ),
-                            SchemaDefinition::ARGNAME_ENUM_NAME => $this->schemaOutputShapeEnumTypeResolver->getTypeName(),
-                            SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                                $this->schemaOutputShapeEnumTypeResolver
-                            ),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'compressed',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Output each resolver\'s schema data only once to compress the output. Valid only when field \'deep\' is `true`', 'api'),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => false,
-                        ],
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'useTypeName',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                                $this->translationAPI->__('Replace type \'%s\' with the actual type name (such as \'Post\')', 'api'),
-                                SchemaDefinition::TYPE_ID
-                            ),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => true,
-                        ],
-                    ]
-                );
-        }
+        return match ($fieldName) {
+            'fullSchema' => [
+                'deep' => $this->booleanScalarTypeResolver,
+                'shape' => $this->schemaOutputShapeEnumTypeResolver,
+                'compressed' => $this->booleanScalarTypeResolver,
+                'useTypeName' => $this->booleanScalarTypeResolver,
+            ],
+            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+        };
+    }
 
-        return $schemaFieldArgs;
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['fullSchema' => 'deep'] => $this->translationAPI->__('Make a deep introspection of the fields, for all nested objects', 'api'),
+            ['fullSchema' => 'shape'] => sprintf(
+                $this->translationAPI->__('How to shape the schema output: \'%s\', in which case all types are listed together, or \'%s\', in which the types are listed following where they appear in the graph', 'api'),
+                SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
+                SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_NESTED
+            ),
+            ['fullSchema' => 'compressed'] => $this->translationAPI->__('Output each resolver\'s schema data only once to compress the output. Valid only when field \'deep\' is `true`', 'api'),
+            ['fullSchema' => 'useTypeName'] => sprintf(
+                $this->translationAPI->__('Replace type \'%s\' with the actual type name (such as \'Post\')', 'api'),
+                SchemaDefinition::TYPE_ID
+            ),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['fullSchema' => 'deep'] => true,
+            ['fullSchema' => 'shape'] => SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
+            ['fullSchema' => 'compressed'] => false,
+            ['fullSchema' => 'useTypeName'] => true,
+            default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
+        };
     }
 
     /**

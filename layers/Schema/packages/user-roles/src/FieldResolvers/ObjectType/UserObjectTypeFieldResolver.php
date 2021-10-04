@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -76,7 +75,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
             'roles'
@@ -92,11 +91,11 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'hasAnyCapability'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
-                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'roles' => $this->translationAPI->__('User roles', 'user-roles'),
@@ -105,71 +104,53 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'hasAnyRole' => $this->translationAPI->__('Does the user have any role from a provided list?', 'user-roles'),
             'hasCapability' => $this->translationAPI->__('Does the user have a specific capability?', 'user-roles'),
             'hasAnyCapability' => $this->translationAPI->__('Does the user have any capability from a provided list?', 'user-roles'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'hasRole':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'role',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('User role to check against', 'user-roles'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-            case 'hasAnyRole':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'roles',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('User roles to check against', 'user-roles'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY => true,
-                        ],
-                    ]
-                );
-            case 'hasCapability':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'capability',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('User capability to check against', 'user-roles'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
-            case 'hasAnyCapability':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'capabilities',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('User capabilities to check against', 'user-roles'),
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                            SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                            SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY => true,
-                        ],
-                    ]
-                );
-        }
-
-        return $schemaFieldArgs;
+        return match ($fieldName) {
+            'hasRole' => [
+                'role' => $this->stringScalarTypeResolver,
+            ],
+            'hasAnyRole' => [
+                'roles' => $this->stringScalarTypeResolver,
+            ],
+            'hasCapability' => [
+                'capability' => $this->stringScalarTypeResolver,
+            ],
+            'hasAnyCapability' => [
+                'capabilities' => $this->stringScalarTypeResolver,
+            ],
+            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+        };
     }
 
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['hasRole' => 'role'] => $this->translationAPI->__('User role to check against', 'user-roles'),
+            ['hasAnyRole' => 'roles'] => $this->translationAPI->__('User roles to check against', 'user-roles'),
+            ['hasCapability' => 'capability'] => $this->translationAPI->__('User capability to check against', 'user-roles'),
+            ['hasAnyCapability' => 'capabilities'] => $this->translationAPI->__('User capabilities to check against', 'user-roles'),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['hasRole' => 'role'],
+            ['hasCapability' => 'capability']
+                => SchemaTypeModifiers::MANDATORY,
+            ['hasAnyRole' => 'roles'],
+            ['hasAnyCapability' => 'capabilities']
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY | SchemaTypeModifiers::MANDATORY,
+            default
+                => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
 
     /**
      * @param array<string, mixed> $fieldArgs

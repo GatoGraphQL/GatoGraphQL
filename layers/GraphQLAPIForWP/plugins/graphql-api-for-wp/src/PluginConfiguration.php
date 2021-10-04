@@ -729,6 +729,9 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             MutationSchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => [
                 \PoPSchema\CustomPostMediaMutations\Component::class,
             ],
+            MutationSchemaTypeModuleResolver::SCHEMA_POSTMEDIA_MUTATIONS => [
+                \PoPSchema\PostMediaMutations\Component::class,
+            ],
             MutationSchemaTypeModuleResolver::SCHEMA_POST_TAG_MUTATIONS => [
                 \PoPSchema\PostTagMutations\Component::class,
             ],

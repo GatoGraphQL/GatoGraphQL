@@ -11,7 +11,7 @@ class ElementalInterfaceTypeResolver extends AbstractInterfaceTypeResolver
         return 'Elemental';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('The fundamental fields that must be implemented by all objects', 'component-model');
     }

@@ -26,7 +26,7 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
         return 'Site';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Obtain properties belonging to the site (name, domain, configuration options, etc)', 'multisite');
     }

@@ -54,7 +54,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
         };
     }
 
-    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
+    public function getFieldTypeModifiers(string $fieldName): int
     {
         $nonNullableFieldNames = [
             'hasFeaturedImage',
@@ -62,15 +62,15 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
         if (in_array($fieldName, $nonNullableFieldNames)) {
             return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::getSchemaFieldTypeModifiers($fieldName);
+        return parent::getFieldTypeModifiers($fieldName);
     }
 
-    public function getSchemaFieldDescription(string $fieldName): ?string
+    public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
             'hasFeaturedImage' => $this->translationAPI->__('Does the custom post have a featured image?', 'custompostmedia'),
             'featuredImage' => $this->translationAPI->__('Featured image from the custom post', 'custompostmedia'),
-            default => parent::getSchemaFieldDescription($fieldName),
+            default => parent::getFieldDescription($fieldName),
         };
     }
 }

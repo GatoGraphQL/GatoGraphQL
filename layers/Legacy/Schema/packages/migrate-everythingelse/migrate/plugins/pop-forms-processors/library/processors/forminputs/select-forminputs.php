@@ -2,9 +2,11 @@
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_SelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -14,6 +16,15 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
     public const MODULE_FILTERINPUT_ORDERPOST = 'filterinput-order-post';
     public const MODULE_FILTERINPUT_ORDERTAG = 'filterinput-order-tag';
     public const MODULE_FILTERINPUT_ORDERCOMMENT = 'filterinput-order-comment';
+
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+
+    #[Required]
+    public function autowirePoP_Module_Processor_SelectFilterInputs(
+        StringScalarTypeResolver $stringScalarTypeResolver,
+    ): void {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
 
     public function getModulesToProcess(): array
     {
@@ -94,27 +105,27 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match($module[1]) {
-            self::MODULE_FILTERINPUT_ORDERUSER => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_ORDERPOST => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_ORDERTAG => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_ORDERCOMMENT => SchemaDefinition::TYPE_STRING,
-            default => $this->getDefaultSchemaFilterInputType(),
+            self::MODULE_FILTERINPUT_ORDERUSER => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_ORDERPOST => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_ORDERTAG => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_ORDERCOMMENT => $this->stringScalarTypeResolver,
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_ORDERUSER => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_ORDERPOST => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_ORDERTAG => $translationAPI->__('', ''),
             self::MODULE_FILTERINPUT_ORDERCOMMENT => $translationAPI->__('', ''),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            default => null,
+        };
     }
 }
 

@@ -67,20 +67,20 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
 
         // Check for errors first, warnings and deprecations then
         $success = true;
-        if ($schemaValidationErrors = $objectTypeResolver->resolveSchemaValidationErrorDescriptions($field, $variables)) {
+        if ($schemaValidationErrors = $objectTypeResolver->resolveFieldValidationErrorDescriptions($field, $variables)) {
             $schemaErrors = array_merge(
                 $schemaErrors,
                 $schemaValidationErrors
             );
             $success = false;
         }
-        if ($schemaValidationWarnings = $objectTypeResolver->resolveSchemaValidationWarningDescriptions($field, $variables)) {
+        if ($schemaValidationWarnings = $objectTypeResolver->resolveFieldValidationWarningDescriptions($field, $variables)) {
             $schemaWarnings = array_merge(
                 $schemaWarnings,
                 $schemaValidationWarnings
             );
         }
-        if ($schemaValidationDeprecations = $objectTypeResolver->resolveSchemaDeprecationDescriptions($field, $variables)) {
+        if ($schemaValidationDeprecations = $objectTypeResolver->resolveFieldDeprecationDescriptions($field, $variables)) {
             $schemaDeprecations = array_merge(
                 $schemaDeprecations,
                 $schemaValidationDeprecations
@@ -89,7 +89,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
         return $success;
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('It validates the field, filtering out those field arguments that raised a warning, or directly invalidating the field if any field argument raised an error. For instance, if a mandatory field argument is not provided, then it is an error and the field is invalidated and removed from the output; if a field argument can\'t be casted to its intended type, then it is a warning, the affected field argument is removed and the field is executed without it. This directive is already included by the engine, since its execution is mandatory', 'component-model');
     }

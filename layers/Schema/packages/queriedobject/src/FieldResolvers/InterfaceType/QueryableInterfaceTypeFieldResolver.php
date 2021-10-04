@@ -52,7 +52,7 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
         };
     }
 
-    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
+    public function getFieldTypeModifiers(string $fieldName): int
     {
         return match ($fieldName) {
             'url',
@@ -60,17 +60,17 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
             'slug'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
-                => parent::getSchemaFieldTypeModifiers($fieldName),
+                => parent::getFieldTypeModifiers($fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(string $fieldName): ?string
+    public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
             'url' => $this->translationAPI->__('URL to query the object', 'queriedobject'),
             'urlPath' => $this->translationAPI->__('URL path to query the object', 'queriedobject'),
             'slug' => $this->translationAPI->__('URL\'s slug', 'queriedobject'),
-            default => parent::getSchemaFieldDescription($fieldName),
+            default => parent::getFieldDescription($fieldName),
         };
     }
 }

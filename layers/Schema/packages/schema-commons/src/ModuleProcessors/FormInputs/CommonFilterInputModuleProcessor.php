@@ -10,11 +10,18 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProces
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Tokens\Param;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\FormInputs\BooleanFormInput;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\SchemaCommons\FormInputs\MultiValueFromStringFormInput;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -35,6 +42,24 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     public const MODULE_FILTERINPUT_SLUG = 'filterinput-slug';
     public const MODULE_FILTERINPUT_DATEFORMAT = 'filterinput-date-format';
     public const MODULE_FILTERINPUT_GMT = 'filterinput-date-gmt';
+
+    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
+
+    #[Required]
+    public function autowireCommonFilterInputModuleProcessor(
+        BooleanScalarTypeResolver $booleanScalarTypeResolver,
+        IDScalarTypeResolver $idScalarTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
+    ): void {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
 
     public function getModulesToProcess(): array
     {
@@ -122,29 +147,29 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
         };
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ((string)$module[1]) {
-            self::MODULE_FILTERINPUT_ORDER => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_LIMIT => SchemaDefinition::TYPE_INT,
-            self::MODULE_FILTERINPUT_OFFSET => SchemaDefinition::TYPE_INT,
-            self::MODULE_FILTERINPUT_SEARCH => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_IDS => SchemaDefinition::TYPE_ID,
-            self::MODULE_FILTERINPUT_ID => SchemaDefinition::TYPE_ID,
-            self::MODULE_FILTERINPUT_COMMASEPARATED_IDS => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_EXCLUDE_IDS => SchemaDefinition::TYPE_ID,
-            self::MODULE_FILTERINPUT_PARENT_IDS => SchemaDefinition::TYPE_ID,
-            self::MODULE_FILTERINPUT_PARENT_ID => SchemaDefinition::TYPE_ID,
-            self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS => SchemaDefinition::TYPE_ID,
-            self::MODULE_FILTERINPUT_SLUGS => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_SLUG => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_DATEFORMAT => SchemaDefinition::TYPE_STRING,
-            self::MODULE_FILTERINPUT_GMT => SchemaDefinition::TYPE_BOOL,
-            default => $this->getDefaultSchemaFilterInputType(),
+            self::MODULE_FILTERINPUT_ORDER => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_LIMIT => $this->intScalarTypeResolver,
+            self::MODULE_FILTERINPUT_OFFSET => $this->intScalarTypeResolver,
+            self::MODULE_FILTERINPUT_SEARCH => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_IDS => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_ID => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_COMMASEPARATED_IDS => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_EXCLUDE_IDS => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_PARENT_IDS => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_PARENT_ID => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_SLUGS => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_SLUG => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_DATEFORMAT => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_GMT => $this->booleanScalarTypeResolver,
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_IDS,
@@ -152,27 +177,13 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
             self::MODULE_FILTERINPUT_PARENT_IDS,
             self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS,
             self::MODULE_FILTERINPUT_SLUGS
-                => true,
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
-                => false,
+                => 0,
         };
     }
 
-    public function getSchemaFilterInputIsNonNullableItemsInArrayType(array $module): bool
-    {
-        return match ($module[1]) {
-            self::MODULE_FILTERINPUT_IDS,
-            self::MODULE_FILTERINPUT_EXCLUDE_IDS,
-            self::MODULE_FILTERINPUT_PARENT_IDS,
-            self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS,
-            self::MODULE_FILTERINPUT_SLUGS
-                => true,
-            default
-                => false,
-        };
-    }
-
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         return match ((string)$module[1]) {
             self::MODULE_FILTERINPUT_ORDER => $this->translationAPI->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'schema-commons'),

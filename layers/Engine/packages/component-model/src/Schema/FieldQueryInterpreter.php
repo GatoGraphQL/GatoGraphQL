@@ -127,7 +127,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 throw new Exception(
                     sprintf(
                         $this->translationAPI->__('The Union Type \'%s\' does not provide a target ObjectTypeResolver for the object', 'component-model'),
-                        $relationalTypeResolver->getTypeOutputName()
+                        $relationalTypeResolver->getMaybeNamespacedTypeName()
                     )
                 );
             }
@@ -1740,7 +1740,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             }
 
             // If it reached here, it's a field! Validate it, or show an error
-            return $objectTypeResolver->resolveSchemaValidationErrorDescriptions($fieldArgValue, $variables);
+            return $objectTypeResolver->resolveFieldValidationErrorDescriptions($fieldArgValue, $variables);
         }
 
         return [];
@@ -1757,7 +1757,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
         // If the result fieldArgValue is a field, then validate it and resolve it
         if ($this->isFieldArgumentValueAField($fieldArgValue)) {
-            return $objectTypeResolver->resolveSchemaValidationWarningDescriptions($fieldArgValue, $variables);
+            return $objectTypeResolver->resolveFieldValidationWarningDescriptions($fieldArgValue, $variables);
         }
 
         return [];
@@ -1774,7 +1774,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
         // If the result fieldArgValue is a field, then validate it and resolve it
         if ($this->isFieldArgumentValueAField($fieldArgValue)) {
-            return $objectTypeResolver->resolveSchemaDeprecationDescriptions($fieldArgValue, $variables);
+            return $objectTypeResolver->resolveFieldDeprecationDescriptions($fieldArgValue, $variables);
         }
 
         return [];

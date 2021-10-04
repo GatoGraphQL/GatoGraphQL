@@ -26,7 +26,7 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
         return 'UserAvatar';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('User avatar', 'user-avatars');
     }

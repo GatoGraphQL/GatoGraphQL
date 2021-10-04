@@ -9,8 +9,9 @@ use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
@@ -23,13 +24,17 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public const MODULE_FILTERINPUT_CUSTOMPOSTSTATUS = 'filterinput-custompoststatus';
     public const MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
+
     protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
     public function autowireFilterInputModuleProcessor(
-        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver
+        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
+        StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
     public function getModulesToProcess(): array
@@ -75,34 +80,27 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => SchemaDefinition::TYPE_ENUM,
-            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => SchemaDefinition::TYPE_STRING,
-            default => $this->getDefaultSchemaFilterInputType(),
+            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => $this->customPostStatusEnumTypeResolver,
+            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->stringScalarTypeResolver,
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+    public function getFilterInputTypeModifiers(array $module): int
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => true,
-            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => true,
-            default => false,
+            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS,
+            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default
+                => 0,
         };
     }
 
-    public function getSchemaFilterInputIsNonNullableItemsInArrayType(array $module): bool
-    {
-        return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => true,
-            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => true,
-            default => false,
-        };
-    }
-
-    public function getSchemaFilterInputDefaultValue(array $module): mixed
+    public function getFilterInputDefaultValue(array $module): mixed
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => [
@@ -113,24 +111,12 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         };
     }
 
-    public function addSchemaDefinitionForFilter(array &$schemaDefinition, array $module): void
+    public function getFilterInputDescription(array $module): ?string
     {
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS:
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $this->customPostStatusEnumTypeResolver->getTypeName();
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    $this->customPostStatusEnumTypeResolver
-                );
-                break;
-        }
-    }
-
-    public function getSchemaFilterInputDescription(array $module): ?string
-    {
-        $descriptions = [
+        return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => $this->translationAPI->__('Custom Post Status', 'customposts'),
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->translationAPI->__('Return results from Union of the Custom Post Types', 'customposts'),
-        ];
-        return $descriptions[$module[1]] ?? null;
+            default => null,
+        };
     }
 }

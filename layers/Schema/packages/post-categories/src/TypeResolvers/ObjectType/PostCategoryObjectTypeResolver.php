@@ -28,7 +28,7 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
         return 'PostCategory';
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Representation of a category, added to a post', 'post-categories');
     }

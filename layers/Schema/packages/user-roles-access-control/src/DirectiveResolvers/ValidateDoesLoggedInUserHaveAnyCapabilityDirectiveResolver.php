@@ -6,20 +6,25 @@ namespace PoPSchema\UserRolesAccessControl\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends AbstractValidateConditionDirectiveResolver
 {
     protected UserRoleTypeAPIInterface $userRoleTypeAPI;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
     public function autowireValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver(
         UserRoleTypeAPIInterface $userRoleTypeAPI,
+        StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->userRoleTypeAPI = $userRoleTypeAPI;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
     public function getDirectiveName(): string
@@ -68,20 +73,31 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         );
     }
 
-    public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         return $this->translationAPI->__('It validates if the user has any capability provided through directive argument \'capabilities\'', 'component-model');
     }
-    public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
+
+    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            [
-                SchemaDefinition::ARGNAME_NAME => 'capabilities',
-                SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                SchemaDefinition::ARGNAME_IS_ARRAY => true,
-                SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Capabilities to validate if the logged-in user has (any of them)', 'component-model'),
-                SchemaDefinition::ARGNAME_MANDATORY => true,
-            ],
+            'capabilities' => $this->stringScalarTypeResolver,
         ];
+    }
+
+    public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    {
+        return match ($directiveArgName) {
+            'capabilities' => $this->translationAPI->__('Capabilities to validate if the logged-in user has (any of them)', 'component-model'),
+            default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+        };
+    }
+
+    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
+    {
+        return match ($directiveArgName) {
+            'capabilities' => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::MANDATORY,
+            default => parent::getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
+        };
     }
 }

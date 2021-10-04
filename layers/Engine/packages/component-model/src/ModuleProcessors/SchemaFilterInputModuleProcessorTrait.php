@@ -5,52 +5,63 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Facades\Schema\SchemaDefinitionServiceFacade;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 trait SchemaFilterInputModuleProcessorTrait
 {
-    public function getSchemaFilterInputType(array $module): string
+    protected function getFilterInputSchemaDefinitionResolver(array $module): DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
     {
-        return $this->getDefaultSchemaFilterInputType();
+        return $this;
     }
-    protected function getDefaultSchemaFilterInputType(): string
+
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
+    {
+        $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
+        if ($filterSchemaDefinitionResolver !== $this) {
+            return $filterSchemaDefinitionResolver->getFilterInputTypeResolver($module);
+        }
+        return $this->getDefaultSchemaFilterInputTypeResolver();
+    }
+
+    protected function getDefaultSchemaFilterInputTypeResolver(): InputTypeResolverInterface
     {
         $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-        return $schemaDefinitionService->getDefaultType();
+        return $schemaDefinitionService->getDefaultInputTypeResolver();
     }
-    public function getSchemaFilterInputDescription(array $module): ?string
+
+    public function getFilterInputDescription(array $module): ?string
     {
+        $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
+        if ($filterSchemaDefinitionResolver !== $this) {
+            return $filterSchemaDefinitionResolver->getFilterInputDescription($module);
+        }
         return null;
     }
-    public function getSchemaFilterInputDeprecationDescription(array $module): ?string
+
+    public function getFilterInputDeprecationDescription(array $module): ?string
     {
+        $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
+        if ($filterSchemaDefinitionResolver !== $this) {
+            return $filterSchemaDefinitionResolver->getFilterInputDeprecationDescription($module);
+        }
         return null;
     }
-    public function getSchemaFilterInputIsArrayType(array $module): bool
+
+    public function getFilterInputDefaultValue(array $module): mixed
     {
-        return false;
-    }
-    public function getSchemaFilterInputIsNonNullableItemsInArrayType(array $module): bool
-    {
-        return false;
-    }
-    public function getSchemaFilterInputIsArrayOfArraysType(array $module): bool
-    {
-        return false;
-    }
-    public function getSchemaFilterInputIsNonNullableItemsInArrayOfArraysType(array $module): bool
-    {
-        return false;
-    }
-    public function getSchemaFilterInputMandatory(array $module): bool
-    {
-        return false;
-    }
-    public function getSchemaFilterInputDefaultValue(array $module): mixed
-    {
+        $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
+        if ($filterSchemaDefinitionResolver !== $this) {
+            return $filterSchemaDefinitionResolver->getFilterInputDefaultValue($module);
+        }
         return null;
     }
-    public function addSchemaDefinitionForFilter(array &$schemaDefinition, array $module): void
+
+    public function getFilterInputTypeModifiers(array $module): int
     {
-        // Override
+        $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
+        if ($filterSchemaDefinitionResolver !== $this) {
+            return $filterSchemaDefinitionResolver->getFilterInputTypeModifiers($module);
+        }
+        return 0;
     }
 }

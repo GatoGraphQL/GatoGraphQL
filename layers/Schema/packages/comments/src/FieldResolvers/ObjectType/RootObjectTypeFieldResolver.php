@@ -79,7 +79,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         };
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
             'commentCount',
@@ -89,11 +89,11 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'commentsForAdmin'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    protected function getFieldFilterInputDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         switch ($fieldName) {
             case 'comments':
@@ -102,19 +102,22 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
+                if ($fieldArgName === $limitFilterInputName) {
+                    return ComponentConfiguration::getRootCommentListDefaultLimit();
+                }
                 // Order by descending date
                 $orderFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
                 ]);
-                $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
-                $order = 'DESC';
-                return [
-                    $orderFilterInputName => $orderBy . OrderFormInput::SEPARATOR . $order,
-                    $limitFilterInputName => ComponentConfiguration::getRootCommentListDefaultLimit(),
-                ];
+                if ($fieldArgName === $orderFilterInputName) {
+                    $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
+                    $order = 'DESC';
+                    return $orderBy . OrderFormInput::SEPARATOR . $order;
+                }
+                break;
         }
-        return parent::getFieldFilterInputDefaultValues($objectTypeResolver, $fieldName);
+        return parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
     }
 
     /**
@@ -154,7 +157,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return $errors;
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'comment' => $this->translationAPI->__('Comment with a specific ID', 'pop-comments'),
@@ -163,7 +166,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'commentForAdmin' => $this->translationAPI->__('[Unrestricted] Comment with a specific ID', 'pop-comments'),
             'commentCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of comments on the site', 'pop-comments'),
             'commentsForAdmin' => $this->translationAPI->__('[Unrestricted] Comments on the site', 'pop-comments'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 

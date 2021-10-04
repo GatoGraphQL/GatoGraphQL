@@ -10,12 +10,12 @@ use PoP\FieldQuery\QueryHelpers;
 
 class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver
 {
-    // public function getSchemaDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    // public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     // {
     //     return sprintf(
     //         $this->translationAPI->__('%1$s %2$s'),
     //         $this->translationAPI->__('Helper directive to calculate the Cache Control header when the field composes other fields.', 'cache-control'),
-    //         parent::getSchemaDirectiveDescription($relationalTypeResolver)
+    //         parent::getDirectiveDescription($relationalTypeResolver)
     //     );
     // }
 

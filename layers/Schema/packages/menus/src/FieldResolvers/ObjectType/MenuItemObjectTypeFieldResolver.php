@@ -87,17 +87,17 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
             'children',
             'classes'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
-            default => parent::getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'children' => $this->translationAPI->__('Menu item children items', 'menus'),
@@ -111,7 +111,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'objectID' => $this->translationAPI->__('ID of the object linked to by the menu item ', 'menus'),
             'parentID' => $this->translationAPI->__('Menu item\'s parent ID', 'menus'),
             'linkRelationship' => $this->translationAPI->__('Link relationship (XFN)', 'menus'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 

@@ -65,7 +65,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return $this->getMaybeNamespacedTypeName();
     }
 
-    public function getSchemaTypeDescription(): ?string
+    public function getTypeDescription(): ?string
     {
         return null;
     }
@@ -90,7 +90,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_ELEMENT_NAME] = $this->getTypeName();
 
         // Properties
-        if ($description = $this->getSchemaTypeDescription()) {
+        if ($description = $this->getTypeDescription()) {
             $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
         }
     }

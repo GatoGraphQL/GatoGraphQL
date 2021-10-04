@@ -27,7 +27,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return UnionTypeHelpers::getUnionTypeCollectionName(parent::getTypeOutputName());
     }
 
-    public function getSchemaTypeInterfaceTypeResolver(): ?InterfaceTypeResolverInterface
+    public function getUnionTypeInterfaceTypeResolver(): ?InterfaceTypeResolverInterface
     {
         return null;
     }
@@ -285,7 +285,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
          */
         if (ComponentConfiguration::enableUnionTypeImplementingInterfaceType()) {
             // Validate that all typeResolvers implement the required interface
-            if ($interfaceTypeResolver = $this->getSchemaTypeInterfaceTypeResolver()) {
+            if ($interfaceTypeResolver = $this->getUnionTypeInterfaceTypeResolver()) {
                 $objectTypeResolvers = $this->getObjectTypeResolversFromPickers($objectTypeResolverPickers);
                 $interfaceTypeResolverClass = get_class($interfaceTypeResolver);
                 $notImplementingInterfaceTypeResolvers = array_filter(
@@ -418,14 +418,14 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_NAME] = $this->getMaybeNamespacedTypeName();
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_NAMESPACED_NAME] = $this->getNamespacedTypeName();
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_ELEMENT_NAME] = $this->getTypeName();
-        if ($description = $this->getSchemaTypeDescription()) {
+        if ($description = $this->getTypeDescription()) {
             $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
         }
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_IS_UNION] = true;
 
         if (ComponentConfiguration::enableUnionTypeImplementingInterfaceType()) {
             // If it returns an interface as type, add it to the schemaDefinition
-            if ($interfaceTypeResolver = $this->getSchemaTypeInterfaceTypeResolver()) {
+            if ($interfaceTypeResolver = $this->getUnionTypeInterfaceTypeResolver()) {
                 $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_RESULTS_IMPLEMENT_INTERFACE] = $interfaceTypeResolver->getMaybeNamespacedTypeName();
             }
         }

@@ -20,6 +20,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     public const SCHEMA_CUSTOMPOST_MUTATIONS = Plugin::NAMESPACE . '\schema-custompost-mutations';
     public const SCHEMA_POST_MUTATIONS = Plugin::NAMESPACE . '\schema-post-mutations';
     public const SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS = Plugin::NAMESPACE . '\schema-custompostmedia-mutations';
+    public const SCHEMA_POSTMEDIA_MUTATIONS = Plugin::NAMESPACE . '\schema-postmedia-mutations';
     public const SCHEMA_POST_TAG_MUTATIONS = Plugin::NAMESPACE . '\schema-post-tag-mutations';
     public const SCHEMA_POST_CATEGORY_MUTATIONS = Plugin::NAMESPACE . '\schema-post-category-mutations';
     public const SCHEMA_COMMENT_MUTATIONS = Plugin::NAMESPACE . '\schema-comment-mutations';
@@ -35,6 +36,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_CUSTOMPOST_MUTATIONS,
             self::SCHEMA_POST_MUTATIONS,
             self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS,
+            self::SCHEMA_POSTMEDIA_MUTATIONS,
             self::SCHEMA_POST_TAG_MUTATIONS,
             self::SCHEMA_POST_CATEGORY_MUTATIONS,
             self::SCHEMA_COMMENT_MUTATIONS,
@@ -85,6 +87,15 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                         self::SCHEMA_CUSTOMPOST_MUTATIONS,
                     ],
                 ];
+            case self::SCHEMA_POSTMEDIA_MUTATIONS:
+                return [
+                    [
+                        self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS,
+                    ],
+                    [
+                        self::SCHEMA_POST_MUTATIONS,
+                    ],
+                ];
             case self::SCHEMA_POST_TAG_MUTATIONS:
                 return [
                     [
@@ -124,6 +135,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_CUSTOMPOST_MUTATIONS => \__('Schema Custom Post Mutations', 'graphql-api'),
             self::SCHEMA_POST_MUTATIONS => \__('Schema Post Mutations', 'graphql-api'),
             self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => \__('Schema Custom Post Media Mutations', 'graphql-api'),
+            self::SCHEMA_POSTMEDIA_MUTATIONS => \__('Schema Post Media Mutations', 'graphql-api'),
             self::SCHEMA_POST_TAG_MUTATIONS => \__('Schema Post Tag Mutations', 'graphql-api'),
             self::SCHEMA_POST_CATEGORY_MUTATIONS => \__('Schema Post Category Mutations', 'graphql-api'),
             self::SCHEMA_COMMENT_MUTATIONS => \__('Schema Comment Mutations', 'graphql-api'),
@@ -147,6 +159,8 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                 );
             case self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS:
                 return \__('Execute mutations concerning media items on custom posts', 'graphql-api');
+            case self::SCHEMA_POSTMEDIA_MUTATIONS:
+                return \__('Execute mutations concerning media items on posts', 'graphql-api');
             case self::SCHEMA_POST_TAG_MUTATIONS:
                 return \__('Add tags to posts', 'graphql-api');
             case self::SCHEMA_POST_CATEGORY_MUTATIONS:
@@ -166,6 +180,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             case self::SCHEMA_CUSTOMPOST_MUTATIONS:
             case self::SCHEMA_POST_MUTATIONS:
             case self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS:
+            case self::SCHEMA_POSTMEDIA_MUTATIONS:
             case self::SCHEMA_POST_TAG_MUTATIONS:
             case self::SCHEMA_POST_CATEGORY_MUTATIONS:
             case self::SCHEMA_COMMENT_MUTATIONS:

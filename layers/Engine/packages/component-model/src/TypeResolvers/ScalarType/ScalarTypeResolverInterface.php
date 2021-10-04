@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 /**
  * Based on GraphQL custom scalars.
  *
  * @see https://www.graphql.de/blog/scalars-in-depth/
  */
-interface ScalarTypeResolverInterface extends ConcreteTypeResolverInterface
+interface ScalarTypeResolverInterface extends ConcreteTypeResolverInterface, InputTypeResolverInterface
 {
     /**
      * Result coercion. Called by the (GraphQL) engine when printing the response.

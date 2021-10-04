@@ -70,7 +70,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         };
     }
 
-    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
+    public function getFieldTypeModifiers(string $fieldName): int
     {
         return match ($fieldName) {
             'areCommentsOpen',
@@ -82,11 +82,11 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
             'commentsForAdmin'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
-                => parent::getSchemaFieldTypeModifiers($fieldName),
+                => parent::getFieldTypeModifiers($fieldName),
         };
     }
 
-    public function getSchemaFieldDescription(string $fieldName): ?string
+    public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
             'areCommentsOpen' => $this->translationAPI->__('Are comments open to be added to the custom post', 'pop-comments'),
@@ -95,7 +95,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
             'comments' => $this->translationAPI->__('Comments added to the custom post', 'pop-comments'),
             'commentCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of comments added to the custom post', 'pop-comments'),
             'commentsForAdmin' => $this->translationAPI->__('[Unrestricted] Comments added to the custom post', 'pop-comments'),
-            default => parent::getSchemaFieldDescription($fieldName),
+            default => parent::getFieldDescription($fieldName),
         };
     }
 
@@ -122,16 +122,23 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         };
     }
 
-    protected function getFieldFilterInputDefaultValues(string $fieldName): array
+    public function getFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
     {
-        $parentIDFilterInputName = FilterInputHelper::getFilterInputName([
-            CommonFilterInputModuleProcessor::class,
-            CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID
-        ]);
-        $filterInputNameDefaultValues = [
-            // By default retrieve the top level comments (with ID => 0)
-            $parentIDFilterInputName => 0,
-        ];
+        switch ($fieldName) {
+            case 'comments':
+            case 'commentsForAdmin':
+            case 'commentCount':
+            case 'commentCountForAdmin':
+                // By default retrieve the top level comments (with ID => 0)
+                $parentIDFilterInputName = FilterInputHelper::getFilterInputName([
+                    CommonFilterInputModuleProcessor::class,
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID
+                ]);
+                if ($fieldArgName === $parentIDFilterInputName) {
+                    return 0;
+                }
+                break;
+        }
         switch ($fieldName) {
             case 'comments':
             case 'commentsForAdmin':
@@ -139,25 +146,22 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
                 ]);
+                if ($fieldArgName === $limitFilterInputName) {
+                    return ComponentConfiguration::getCustomPostCommentOrCommentResponseListDefaultLimit();
+                }
                 $orderFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
                 ]);
-                // Order by descending date
-                $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
-                $order = 'DESC';
-                return array_merge(
-                    $filterInputNameDefaultValues,
-                    [
-                        $limitFilterInputName => ComponentConfiguration::getCustomPostCommentOrCommentResponseListDefaultLimit(),
-                        $orderFilterInputName => $orderBy . OrderFormInput::SEPARATOR . $order,
-                    ]
-                );
-            case 'commentCount':
-            case 'commentCountForAdmin':
-                return $filterInputNameDefaultValues;
+                if ($fieldArgName === $orderFilterInputName) {
+                    // Order by descending date
+                    $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
+                    $order = 'DESC';
+                    return $orderBy . OrderFormInput::SEPARATOR . $order;
+                }
+                break;
         }
-        return parent::getFieldFilterInputDefaultValues($fieldName);
+        return parent::getFieldArgDefaultValue($fieldName, $fieldArgName);
     }
 
     /**

@@ -35,45 +35,36 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         return null;
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
-    {
-        // Get the Schema Field Args from the FilterInput modules
-        return array_merge(
-            parent::getSchemaFieldArgs($objectTypeResolver, $fieldName),
-            $this->getFieldArgumentsSchemaDefinitions($objectTypeResolver, $fieldName)
-        );
-    }
-
-    protected function getFieldArgumentsSchemaDefinitions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
-            $schemaFieldArgs = $this->getFilterSchemaDefinitionItems($filterDataloadingModule);
-            return $this->getSchemaFieldArgsWithCustomFilterInputData(
-                $schemaFieldArgs,
-                $this->getFieldFilterInputDefaultValues($objectTypeResolver, $fieldName),
-                $this->getFieldFilterInputMandatoryArgs($objectTypeResolver, $fieldName)
-            );
+            return $this->getFilterSchemaFieldArgNameResolvers($filterDataloadingModule);
         }
-
-        return [];
+        return parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName);
     }
 
-    /**
-     * Provide default values for modules in the FilterInputContainer
-     * @return array<string,mixed> A list of filterInputName as key, and its value
-     */
-    protected function getFieldFilterInputDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
-        return [];
+        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
+            return $this->getFilterSchemaFieldArgDescription($filterDataloadingModule, $fieldArgName);
+        }
+        return parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName);
     }
 
-    /**
-     * Provide the names of the args which are mandatory in the FilterInput
-     * @return string[]
-     */
-    protected function getFieldFilterInputMandatoryArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
-        return [];
+        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
+            return $this->getFilterSchemaFieldArgDefaultValue($filterDataloadingModule, $fieldArgName);
+        }
+        return parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
+            return $this->getFilterSchemaFieldArgTypeModifiers($filterDataloadingModule, $fieldArgName);
+        }
+        return parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
     }
 
     protected function getInterfaceSchemaDefinitionResolverAdapterClass(): string

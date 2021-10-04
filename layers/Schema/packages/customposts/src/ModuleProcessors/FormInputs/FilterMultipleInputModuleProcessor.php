@@ -11,7 +11,11 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
@@ -20,13 +24,17 @@ class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcesso
     use FormMultipleInputModuleProcessorTrait;
 
     public const MODULE_FILTERINPUT_CUSTOMPOSTDATES = 'filterinput-custompostdates';
+
     protected FormInputHelperServiceInterface $formInputHelperService;
+    protected DateScalarTypeResolver $dateScalarTypeResolver;
 
     #[Required]
     public function autowireFilterMultipleInputModuleProcessor(
         FormInputHelperServiceInterface $formInputHelperService,
+        DateScalarTypeResolver $dateScalarTypeResolver,
     ): void {
         $this->formInputHelperService = $formInputHelperService;
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
     }
 
     public function getModulesToProcess(): array
@@ -71,15 +79,15 @@ class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcesso
         return parent::getName($module);
     }
 
-    public function getSchemaFilterInputType(array $module): string
+    public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => SchemaDefinition::TYPE_DATE,
-            default => $this->getDefaultSchemaFilterInputType(),
+            self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => $this->dateScalarTypeResolver,
+            default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getSchemaFilterInputDescription(array $module): ?string
+    public function getFilterInputDescription(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_CUSTOMPOSTDATES:

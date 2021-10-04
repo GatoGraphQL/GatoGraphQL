@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\UserAvatars\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\UserAvatars\ComponentConfiguration;
 use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
 use PoPSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
@@ -21,16 +21,19 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected UserAvatarTypeAPIInterface $userAvatarTypeAPI;
     protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry;
     protected UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
 
     #[Required]
     public function autowireUserObjectTypeFieldResolver(
         UserAvatarTypeAPIInterface $userAvatarTypeAPI,
         UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
         UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver,
+        IntScalarTypeResolver $intScalarTypeResolver,
     ): void {
         $this->userAvatarTypeAPI = $userAvatarTypeAPI;
         $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;
         $this->userAvatarObjectTypeResolver = $userAvatarObjectTypeResolver;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -47,33 +50,38 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'avatar' => $this->translationAPI->__('User avatar', 'user-avatars'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
-        switch ($fieldName) {
-            case 'avatar':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'size',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_INT,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Avatar size', 'user-avatars'),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => ComponentConfiguration::getUserAvatarDefaultSize(),
-                        ],
-                    ]
-                );
-        }
+        return match ($fieldName) {
+            'avatar' => [
+                'size' => $this->intScalarTypeResolver,
+            ],
+            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+        };
+    }
 
-        return $schemaFieldArgs;
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['avatar' => 'size'] => $this->translationAPI->__('Avatar size', 'user-avatars'),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['avatar' => 'size'] => ComponentConfiguration::getUserAvatarDefaultSize(),
+            default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
+        };
     }
 
     /**

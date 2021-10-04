@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractQueryableSchemaInterfaceTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
@@ -15,7 +13,6 @@ use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostContentFormatEnumTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\InterfaceType\IsCustomPostInterfaceTypeResolver;
-use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
@@ -98,7 +95,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         };
     }
 
-    public function getSchemaFieldTypeModifiers(string $fieldName): ?int
+    public function getFieldTypeModifiers(string $fieldName): int
     {
         /**
          * Please notice that the URL, slug, title and excerpt are nullable,
@@ -113,10 +110,10 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             case 'customPostType':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }
-        return parent::getSchemaFieldTypeModifiers($fieldName);
+        return parent::getFieldTypeModifiers($fieldName);
     }
 
-    public function getSchemaFieldDescription(string $fieldName): ?string
+    public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
             'url' => $this->translationAPI->__('Custom post URL', 'customposts'),
@@ -130,72 +127,46 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'title' => $this->translationAPI->__('Custom post title', 'customposts'),
             'excerpt' => $this->translationAPI->__('Custom post excerpt', 'customposts'),
             'customPostType' => $this->translationAPI->__('Custom post type', 'customposts'),
-            default => parent::getSchemaFieldDescription($fieldName),
+            default => parent::getFieldDescription($fieldName),
         };
     }
-    public function getSchemaFieldArgs(string $fieldName): array
+
+    public function getFieldArgNameResolvers(string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($fieldName);
-        switch ($fieldName) {
-            case 'isStatus':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'status',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The status to check if the post has', 'customposts'),
-                            SchemaDefinition::ARGNAME_ENUM_NAME => $this->customPostStatusEnumTypeResolver->getTypeName(),
-                            SchemaDefinition::ARGNAME_ENUM_VALUES => [
-                                Status::PUBLISHED => [
-                                    SchemaDefinition::ARGNAME_NAME => Status::PUBLISHED,
-                                ],
-                                Status::PENDING => [
-                                    SchemaDefinition::ARGNAME_NAME => Status::PENDING,
-                                ],
-                                Status::DRAFT => [
-                                    SchemaDefinition::ARGNAME_NAME => Status::DRAFT,
-                                ],
-                                Status::TRASH => [
-                                    SchemaDefinition::ARGNAME_NAME => Status::TRASH,
-                                ],
-                                /**
-                                 * @todo Extract to documentation before deleting this code
-                                 */
-                                // 'trashed' => [
-                                //     SchemaDefinition::ARGNAME_NAME => 'trashed',
-                                //     SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Published content', 'customposts'),
-                                //     SchemaDefinition::ARGNAME_DEPRECATED => true,
-                                //     SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION => sprintf(
-                                //         $this->translationAPI->__('Use \'%s\' instead', 'customposts'),
-                                //         Status::TRASH
-                                //     ),
-                                // ],
-                            ],
-                            SchemaDefinition::ARGNAME_MANDATORY => true,
-                        ],
-                    ]
-                );
+        return match ($fieldName) {
+            'isStatus' => [
+                'status' => $this->customPostStatusEnumTypeResolver,
+            ],
+            'content' => [
+                'format' => $this->customPostContentFormatEnumTypeResolver,
+            ],
+            default => parent::getFieldArgNameResolvers($fieldName),
+        };
+    }
 
-            case 'content':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'format',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('The format of the content', 'customposts'),
-                            SchemaDefinition::ARGNAME_ENUM_NAME => $this->customPostContentFormatEnumTypeResolver->getTypeName(),
-                            SchemaDefinition::ARGNAME_ENUM_VALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                                $this->customPostContentFormatEnumTypeResolver
-                            ),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->getDefaultContentFormatValue(),
-                        ],
-                    ]
-                );
-        }
+    public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['isStatus' => 'status'] => $this->translationAPI->__('The status to check if the post has', 'customposts'),
+            ['content' => 'format'] => $this->translationAPI->__('The format of the content', 'customposts'),
+            default => parent::getFieldArgDescription($fieldName, $fieldArgName),
+        };
+    }
 
-        return $schemaFieldArgs;
+    public function getFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['content' => 'format'] => $this->getDefaultContentFormatValue(),
+            default => parent::getFieldArgDefaultValue($fieldName, $fieldArgName),
+        };
+    }
+
+    public function getFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['isStatus' => 'status'] => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($fieldName, $fieldArgName),
+        };
     }
 
     public function getFieldFilterInputContainerModule(string $fieldName): ?array

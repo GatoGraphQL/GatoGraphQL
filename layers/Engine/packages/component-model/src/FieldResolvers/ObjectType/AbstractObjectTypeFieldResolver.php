@@ -28,11 +28,13 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\LooseContracts\NameResolverInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -47,16 +49,28 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * @var array<string, array>
      */
     protected array $schemaDefinitionForFieldCache = [];
+    /** @var array<string, array<string, InputTypeResolverInterface>> */
+    protected array $schemaFieldArgNameResolversCache = [];
+    /** @var array<string, string|null> */
+    protected array $schemaFieldArgDescriptionCache = [];
+    /** @var array<string, mixed> */
+    protected array $schemaFieldArgDefaultValueCache = [];
+    /** @var array<string, int> */
+    protected array $schemaFieldArgTypeModifiersCache = [];
+    /** @var array<string, array<string, mixed>> */
+    protected array $schemaFieldArgsCache = [];
     /**
      * @var array<string, ObjectTypeFieldSchemaDefinitionResolverInterface>
      */
     protected array $interfaceTypeFieldSchemaDefinitionResolverCache = [];
+
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
     protected NameResolverInterface $nameResolver;
     protected CMSServiceInterface $cmsService;
     protected SemverHelperServiceInterface $semverHelperService;
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
     protected EngineInterface $engine;
+    protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
     public function autowireAbstractObjectTypeFieldResolver(
@@ -66,6 +80,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         SemverHelperServiceInterface $semverHelperService,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
+        StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
         $this->nameResolver = $nameResolver;
@@ -73,6 +88,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $this->semverHelperService = $semverHelperService;
         $this->schemaDefinitionService = $schemaDefinitionService;
         $this->engine = $engine;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
     final public function getClassesToAttachTo(): array
@@ -179,38 +195,204 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
-    public function getSchemaFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?int
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName);
+            return $schemaDefinitionResolver->getFieldTypeModifiers($objectTypeResolver, $fieldName);
+        }
+        return 0;
+    }
+
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getFieldDescription($objectTypeResolver, $fieldName);
         }
         return null;
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    /**
+     * @return array<string, InputTypeResolverInterface>
+     */
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldDescription($objectTypeResolver, $fieldName);
-        }
-        return null;
-    }
-
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
-    {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldArgs($objectTypeResolver, $fieldName);
+            return $schemaDefinitionResolver->getFieldArgNameResolvers($objectTypeResolver, $fieldName);
         }
         return [];
     }
 
-    public function getSchemaFieldDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgs);
+            return $schemaDefinitionResolver->getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName);
+        }
+        // Version constraint (possibly enabled)
+        if ($fieldArgName === SchemaDefinition::ARGNAME_VERSION_CONSTRAINT) {
+            return $this->getVersionConstraintFieldOrDirectiveArgDescription();
+        }
+        return null;
+    }
+
+    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
+        }
+        return null;
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
+        }
+        return 0;
+    }
+
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        // Cache the result
+        $cacheKey = $objectTypeResolver::class . '.' . $fieldName;
+        if (array_key_exists($cacheKey, $this->schemaFieldArgNameResolversCache)) {
+            return $this->schemaFieldArgNameResolversCache[$cacheKey];
+        }
+        /**
+         * Allow to override/extend the inputs (eg: module "Post Categories" can add
+         * input "categories" to field "Root.createPost")
+         */
+        $schemaFieldArgNameResolvers = $this->hooksAPI->applyFilters(
+            HookNames::SCHEMA_FIELD_ARG_NAME_RESOLVERS,
+            $this->getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            $this,
+            $objectTypeResolver,
+            $fieldName,
+        );
+        if ($schemaFieldArgNameResolvers !== []) {
+            /**
+             * Add the version constraint (if enabled)
+             * Only add the argument if this field or directive has a version
+             * If it doesn't, then there will only be one version of it,
+             * and it can be kept empty for simplicity
+             */
+            if (Environment::enableSemanticVersionConstraints()) {
+                $hasVersion = $this->hasSchemaFieldVersion($objectTypeResolver, $fieldName);
+                if ($hasVersion) {
+                    $schemaDirectiveArgNameResolvers[SchemaDefinition::ARGNAME_VERSION_CONSTRAINT] = $this->stringScalarTypeResolver;
+                }
+            }
+        }
+        $this->schemaFieldArgNameResolversCache[$cacheKey] = $schemaFieldArgNameResolvers;
+        return $this->schemaFieldArgNameResolversCache[$cacheKey];
+    }
+
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        // Cache the result
+        $cacheKey = $objectTypeResolver::class . '.' . $fieldName . '(' . $fieldArgName . ':)';
+        if (array_key_exists($cacheKey, $this->schemaFieldArgDescriptionCache)) {
+            return $this->schemaFieldArgDescriptionCache[$cacheKey];
+        }
+        $this->schemaFieldArgDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
+            HookNames::SCHEMA_FIELD_ARG_DESCRIPTION,
+            $this->getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+            $this,
+            $objectTypeResolver,
+            $fieldName,
+            $fieldArgName,
+        );
+        return $this->schemaFieldArgDescriptionCache[$cacheKey];
+    }
+
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    {
+        // Cache the result
+        $cacheKey = $objectTypeResolver::class . '.' . $fieldName . '(' . $fieldArgName . ':)';
+        if (array_key_exists($cacheKey, $this->schemaFieldArgDefaultValueCache)) {
+            return $this->schemaFieldArgDefaultValueCache[$cacheKey];
+        }
+        $this->schemaFieldArgDefaultValueCache[$cacheKey] = $this->hooksAPI->applyFilters(
+            HookNames::SCHEMA_FIELD_ARG_DEFAULT_VALUE,
+            $this->getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
+            $this,
+            $objectTypeResolver,
+            $fieldName,
+            $fieldArgName,
+        );
+        return $this->schemaFieldArgDefaultValueCache[$cacheKey];
+    }
+
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getSchemaFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        // Cache the result
+        $cacheKey = $objectTypeResolver::class . '.' . $fieldName . '(' . $fieldArgName . ':)';
+        if (array_key_exists($cacheKey, $this->schemaFieldArgTypeModifiersCache)) {
+            return $this->schemaFieldArgTypeModifiersCache[$cacheKey];
+        }
+        $this->schemaFieldArgTypeModifiersCache[$cacheKey] = $this->hooksAPI->applyFilters(
+            HookNames::SCHEMA_FIELD_ARG_TYPE_MODIFIERS,
+            $this->getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+            $this,
+            $objectTypeResolver,
+            $fieldName,
+            $fieldArgName,
+        );
+        return $this->schemaFieldArgTypeModifiersCache[$cacheKey];
+    }
+
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        // Cache the result
+        $cacheKey = $objectTypeResolver::class . '.' . $fieldName;
+        if (array_key_exists($cacheKey, $this->schemaFieldArgsCache)) {
+            return $this->schemaFieldArgsCache[$cacheKey];
+        }
+        $schemaFieldArgs = [];
+        $schemaFieldArgNameResolvers = $this->getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName);
+        foreach ($schemaFieldArgNameResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
+            $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
+                $fieldArgName,
+                $fieldArgInputTypeResolver,
+                $this->getSchemaFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+                $this->getSchemaFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
+                $this->getSchemaFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+            );
+        }
+        $this->schemaFieldArgsCache[$cacheKey] = $schemaFieldArgs;
+        return $this->schemaFieldArgsCache[$cacheKey];
+    }
+
+    public function getFieldDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?string
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getFieldDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgs);
         }
         return null;
     }
@@ -224,7 +406,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldTypeResolver($objectTypeResolver, $fieldName);
         }
-        return $this->schemaDefinitionService->getDefaultTypeResolver();
+        return $this->schemaDefinitionService->getDefaultConcreteTypeResolver();
     }
 
     /**
@@ -307,7 +489,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * inside the schemaDefinition object.
              * If this field is tagged with a version...
              */
-            if ($schemaFieldVersion = $this->getSchemaFieldVersion($objectTypeResolver, $fieldName)) {
+            if ($schemaFieldVersion = $this->getFieldVersion($objectTypeResolver, $fieldName)) {
                 $vars = ApplicationState::getVars();
                 /**
                  * Get versionConstraint in this order:
@@ -346,7 +528,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
         return true;
     }
-    public function resolveSchemaValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
+    public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs);
         $fieldSchemaDefinition = $this->getSchemaDefinitionForField($objectTypeResolver, $fieldName, $fieldArgs);
@@ -464,7 +646,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
-    public function resolveSchemaValidationDeprecationDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
+    public function resolveFieldValidationDeprecationDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $fieldSchemaDefinition = $this->getSchemaDefinitionForField($objectTypeResolver, $fieldName, $fieldArgs);
         if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
@@ -510,15 +692,21 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             SchemaDefinition::ARGNAME_NAME => $fieldName,
         ];
 
-        // If we found a resolver for this fieldName, get all its properties from it
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
-        $fieldTypeResolver = $schemaDefinitionResolver->getFieldTypeResolver($objectTypeResolver, $fieldName);
+        $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
         if ($fieldTypeResolver instanceof RelationalTypeResolverInterface) {
             $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
             $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
         } elseif ($fieldTypeResolver instanceof EnumTypeResolverInterface) {
             $type = SchemaDefinition::TYPE_ENUM;
-            $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $fieldTypeResolver->getMaybeNamespacedTypeName();
+            /** @var EnumTypeResolverInterface */
+            $fieldEnumTypeResolver = $fieldTypeResolver;
+            $this->doAddSchemaDefinitionEnumValuesForField(
+                $schemaDefinition,
+                $fieldEnumTypeResolver->getEnumValues(),
+                $fieldEnumTypeResolver->getEnumValueDeprecationMessages(),
+                $fieldEnumTypeResolver->getEnumValueDescriptions(),
+                $fieldEnumTypeResolver->getMaybeNamespacedTypeName()
+            );
         } else {
             // Scalar type
             $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
@@ -527,7 +715,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
         // Use bitwise operators to extract the applied modifiers
         // @see https://www.php.net/manual/en/language.operators.bitwise.php#91291
-        $schemaTypeModifiers = $schemaDefinitionResolver->getSchemaFieldTypeModifiers($objectTypeResolver, $fieldName);
+        $schemaTypeModifiers = $this->getFieldTypeModifiers($objectTypeResolver, $fieldName);
         if ($schemaTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) {
             $schemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] = true;
         }
@@ -548,32 +736,20 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 }
             }
         }
-        if ($description = $schemaDefinitionResolver->getSchemaFieldDescription($objectTypeResolver, $fieldName)) {
+        if ($description = $this->getFieldDescription($objectTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
         }
-        if ($deprecationDescription = $schemaDefinitionResolver->getSchemaFieldDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgs)) {
+        if ($deprecationDescription = $this->getFieldDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgs)) {
             $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
             $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
         }
-        if ($args = $schemaDefinitionResolver->getSchemaFieldArgs($objectTypeResolver, $fieldName)) {
-            $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $this->getFilteredSchemaFieldArgs(
-                $objectTypeResolver,
-                $fieldName,
-                $args
-            );
+        if ($args = $this->getSchemaFieldArgs($objectTypeResolver, $fieldName)) {
+            $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $args;
         }
-        $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $objectTypeResolver, $fieldName);
+        $this->addSchemaDefinitionForField($schemaDefinition, $objectTypeResolver, $fieldName);
 
-        /**
-         * Please notice: the version always comes from the fieldResolver, and not from the schemaDefinitionResolver
-         * That is because it is the implementer the one who knows what version it is, and not the one defining the interface
-         * If the interface changes, the implementer will need to change, so the version will be upgraded
-         * But it could also be that the contract doesn't change, but the implementation changes
-         * In particular, Interfaces are schemaDefinitionResolver, but they must not indicate the version...
-         * it's really not their responsibility
-         */
         if (Environment::enableSemanticVersionConstraints()) {
-            if ($version = $this->getSchemaFieldVersion($objectTypeResolver, $fieldName)) {
+            if ($version = $this->getFieldVersion($objectTypeResolver, $fieldName)) {
                 $schemaDefinition[SchemaDefinition::ARGNAME_VERSION] = $version;
             }
         }
@@ -595,56 +771,30 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return InterfaceSchemaDefinitionResolverAdapter::class;
     }
 
-    /**
-     * Processes the field args:
-     *
-     * 1. Adds the version constraint (if enabled)
-     * 2. Places all entries under their own name
-     * 3. If any entry has no name, it is skipped
-     *
-     * @return array<string, array>
-     */
-    protected function getFilteredSchemaFieldArgs(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $schemaFieldArgs
-    ): array {
-        /**
-         * Add the "versionConstraint" param. Add it at the end, so it doesn't affect the order of params for "orderedSchemaFieldArgs"
-         */
-        $this->maybeAddVersionConstraintSchemaFieldOrDirectiveArg(
-            $schemaFieldArgs,
-            $this->hasSchemaFieldVersion($objectTypeResolver, $fieldName)
-        );
-
-        // Add the args under their name. Watch out: the name is mandatory!
-        // If it hasn't been set, then skip the entry
-        $schemaFieldArgsByName = [];
-        foreach ($schemaFieldArgs as $arg) {
-            if (!isset($arg[SchemaDefinition::ARGNAME_NAME])) {
-                continue;
-            }
-            $schemaFieldArgsByName[$arg[SchemaDefinition::ARGNAME_NAME]] = $arg;
-        }
-        return $schemaFieldArgsByName;
-    }
-
     public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
         return true;
     }
 
-    public function getSchemaFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    /**
+     * Please notice: the version always comes from the fieldResolver, and not from the schemaDefinitionResolver
+     * That is because it is the implementer the one who knows what version it is, and not the one defining the interface
+     * If the interface changes, the implementer will need to change, so the version will be upgraded
+     * But it could also be that the contract doesn't change, but the implementation changes
+     * In particular, Interfaces are schemaDefinitionResolver, but they must not indicate the version...
+     * it's really not their responsibility
+     */
+    public function getFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return null;
     }
 
     protected function hasSchemaFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
-        return !empty($this->getSchemaFieldVersion($objectTypeResolver, $fieldName));
+        return !empty($this->getFieldVersion($objectTypeResolver, $fieldName));
     }
 
-    public function resolveSchemaValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
+    public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $warnings = [];
         if (Environment::enableSemanticVersionConstraints()) {
@@ -659,7 +809,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                     $warnings[] = sprintf(
                         $this->translationAPI->__('The ObjectTypeFieldResolver used to process field with name \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
                         $fieldName,
-                        $this->getSchemaFieldVersion($objectTypeResolver, $fieldName) ?? '',
+                        $this->getFieldVersion($objectTypeResolver, $fieldName) ?? '',
                         $versionConstraint
                     );
                 }

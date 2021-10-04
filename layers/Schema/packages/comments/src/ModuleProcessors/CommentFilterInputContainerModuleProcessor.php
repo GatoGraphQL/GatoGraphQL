@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\ModuleProcessors;
 
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\Comments\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor as CustomPostFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
@@ -123,19 +124,21 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
         };
     }
 
-    public function getFieldFilterInputMandatoryArgs(array $module): array
+    public function getFieldFilterInputTypeModifiers(array $module, string $fieldArgName): int
     {
+        $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($module, $fieldArgName);
         switch ($module[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS:
                 $idFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID
                 ]);
-                return [
-                    $idFilterInputName,
-                ];
+                if ($fieldArgName === $idFilterInputName) {
+                    return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
+                }
+                break;
         }
-        return parent::getFieldFilterInputMandatoryArgs($module);
+        return $fieldFilterInputTypeModifiers;
     }
 
     /**

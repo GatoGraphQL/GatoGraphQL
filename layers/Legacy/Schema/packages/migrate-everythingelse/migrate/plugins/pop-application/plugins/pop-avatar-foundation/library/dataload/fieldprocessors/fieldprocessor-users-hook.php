@@ -1,12 +1,21 @@
 <?php
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class PoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
 {
+    protected IntScalarTypeResolver $intScalarTypeResolver;
+
+    #[Required]
+    public function autowirePoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users(
+        IntScalarTypeResolver $intScalarTypeResolver,
+    ): void {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -29,35 +38,38 @@ class PoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users extends 
         };
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         return match($fieldName) {
-			'avatar' => $translationAPI->__('', ''),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+			'avatar' => $this->translationAPI->__('', ''),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
-        $translationAPI = TranslationAPIFacade::getInstance();
-        switch ($fieldName) {
-            case 'avatar':
-                return array_merge(
-                    $schemaFieldArgs,
-                    [
-                        [
-                            SchemaDefinition::ARGNAME_NAME => 'size',
-                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_INT,
-                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Avatar size, in pixels', ''),
-                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => GD_AVATAR_SIZE_60,
-                        ],
-                    ]
-                );
-        }
-
-        return $schemaFieldArgs;
+        return match ($fieldName) {
+            'avatar' => [
+                'size' => $this->intScalarTypeResolver,
+            ],
+            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+        };
+    }
+    
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['avatar' => 'size'] => $this->translationAPI->__('Avatar size, in pixels', ''),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+    
+    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['avatar' => 'size'] => \GD_AVATAR_SIZE_60,
+            default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
+        };
     }
 
     /**

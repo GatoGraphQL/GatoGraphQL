@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
+
 abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor implements FilterInputContainerModuleProcessorInterface
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
@@ -38,21 +40,58 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
         ];
     }
 
-    /**
-     * Provide default values for modules in the FilterInputContainer
-     * @return array<string,mixed> A list of filterInputName as key, and its value
-     */
-    public function getFieldFilterInputDefaultValues(array $module): array
+    public function getFieldFilterInputNameResolvers(array $module): array
     {
-        return [];
+        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
+        $schemaFieldArgNameResolvers = [];
+        foreach ($filterQueryArgsModules as $module) {
+            /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
+            $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
+            $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
+            $schemaFieldArgNameResolvers[$filterInputName] = $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputTypeResolver($module);
+        }
+        return $schemaFieldArgNameResolvers;
     }
 
-    /**
-     * Provide the names of the args which are mandatory in the FilterInput
-     * @return string[]
-     */
-    public function getFieldFilterInputMandatoryArgs(array $module): array
+    public function getFieldFilterInputDescription(array $module, string $fieldArgName): ?string
     {
-        return [];
+        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
+        foreach ($filterQueryArgsModules as $module) {
+            /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
+            $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
+            $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
+            if ($filterInputName === $fieldArgName) {
+                return $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputDescription($module);
+            }
+        }
+        return null;
+    }
+
+    public function getFieldFilterInputDefaultValue(array $module, string $fieldArgName): mixed
+    {
+        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
+        foreach ($filterQueryArgsModules as $module) {
+            /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
+            $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
+            $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
+            if ($filterInputName === $fieldArgName) {
+                return $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputDefaultValue($module);
+            }
+        }
+        return null;
+    }
+
+    public function getFieldFilterInputTypeModifiers(array $module, string $fieldArgName): int
+    {
+        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
+        foreach ($filterQueryArgsModules as $module) {
+            /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
+            $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
+            $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
+            if ($filterInputName === $fieldArgName) {
+                return $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputTypeModifiers($module);
+            }
+        }
+        return 0;
     }
 }

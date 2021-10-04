@@ -8,3 +8,6 @@ services:
 
     PoPSchema\PostCategoryMutations\MutationResolvers\:
         resource: '../src/MutationResolvers/*'
+
+    PoPSchema\PostCategoryMutations\SchemaHooks\:
+        resource: '../src/SchemaHooks/*'

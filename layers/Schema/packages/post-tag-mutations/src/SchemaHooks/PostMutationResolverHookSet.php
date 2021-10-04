@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostTagMutations\Hooks;
+namespace PoPSchema\PostTagMutations\SchemaHooks;
 
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\CustomPostTagMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
 use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
+use PoPSchema\PostMutations\SchemaHooks\PostMutationResolverHookSetTrait;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
@@ -14,6 +15,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
+    use PostMutationResolverHookSetTrait;
+
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected PostTypeAPIInterface $postTypeAPI;
     protected PostTagTypeMutationAPIInterface $postTagTypeMutationAPI;
@@ -29,7 +32,7 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
         $this->postTagTypeMutationAPI = $postTagTypeMutationAPI;
     }
 
-    protected function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface
+    protected function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
     {
         return $this->postObjectTypeResolver;
     }

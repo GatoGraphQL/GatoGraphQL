@@ -132,18 +132,18 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
     /**
      * The version of the directive, using semantic versioning
      */
-    public function getSchemaDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
+    public function getDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
     public function enableOrderedSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): bool;
     /**
      * Indicate if the directive is global (i.e. it can be applied to all fields, for all typeResolvers)
      */
     public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool;
 
-    public function resolveSchemaValidationErrorDescriptions(
+    public function resolveFieldValidationErrorDescriptions(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs = []
     ): ?array;
-    public function resolveSchemaDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
-    public function getSchemaDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
+    public function resolveDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
+    public function getDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
 }

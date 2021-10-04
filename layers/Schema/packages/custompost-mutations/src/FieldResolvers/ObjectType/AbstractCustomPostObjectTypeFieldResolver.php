@@ -7,10 +7,11 @@ namespace PoPSchema\CustomPostMutations\FieldResolvers\ObjectType;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\CustomPostMutations\Schema\SchemaDefinitionHelpers;
 
 abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    use CreateOrUpdateCustomPostObjectTypeFieldResolverTrait;
+
     public function getFieldNamesToResolve(): array
     {
         return [
@@ -18,26 +19,36 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         ];
     }
 
-    public function getSchemaFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'update' => $this->translationAPI->__('Update the custom post', 'custompost-mutations'),
-            default => parent::getSchemaFieldDescription($objectTypeResolver, $fieldName),
+            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        switch ($fieldName) {
-            case 'update':
-                return SchemaDefinitionHelpers::getCreateUpdateCustomPostSchemaFieldArgs(
-                    $objectTypeResolver,
-                    $fieldName,
-                    false,
-                    $this->getFieldTypeResolver($objectTypeResolver, $fieldName)
-                );
-        }
-        return parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'update' => $this->getCreateOrUpdateCustomPostSchemaFieldArgNameResolvers(false),
+            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        return match ($fieldName) {
+            'update' => $this->getCreateOrUpdateCustomPostSchemaFieldArgDescription($fieldArgName),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ($fieldName) {
+            'update' => $this->getCreateOrUpdateCustomPostSchemaFieldArgTypeModifiers($fieldArgName),
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+        };
     }
 
     /**
