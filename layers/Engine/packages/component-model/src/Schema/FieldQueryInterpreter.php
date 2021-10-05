@@ -930,7 +930,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         array &$schemaOrObjectErrors,
         bool $forSchema
     ): ?array {
-        $fieldArgSchemaDefinition = $this->getFieldSchemaDefinitionArgs($objectTypeResolver, $field);
+        $fieldArgSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $field);
         if ($fieldArgSchemaDefinition === null) {
             $schemaOrObjectErrors[] = [
                 Tokens::PATH => [$field],
@@ -1246,7 +1246,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $directiveArgNameDefaultValues;
     }
 
-    protected function getFieldSchemaDefinitionArgs(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
+    protected function getFieldArgsSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
     {
         $objectTypeResolverClass = get_class($objectTypeResolver);
         if (!array_key_exists($field, $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass] ?? [])) {
@@ -1292,7 +1292,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function doGetFieldArgumentNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
     {
         // Get the field argument types, to know to what type it will cast the value
-        $fieldSchemaDefinitionArgs = $this->getFieldSchemaDefinitionArgs($objectTypeResolver, $field);
+        $fieldSchemaDefinitionArgs = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $field);
         if ($fieldSchemaDefinitionArgs === null) {
             return null;
         }
@@ -1315,7 +1315,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function doGetFieldArgumentNameDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
     {
         // Get the field arguments which have a default value
-        $fieldSchemaDefinitionArgs = $this->getFieldSchemaDefinitionArgs($objectTypeResolver, $field);
+        $fieldSchemaDefinitionArgs = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $field);
         if ($fieldSchemaDefinitionArgs === null) {
             return null;
         }
@@ -1481,7 +1481,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 return $castedFieldArgs;
             }
             /** @var array */
-            $fieldArgNameSchemaDefinition = $this->getFieldSchemaDefinitionArgs($objectTypeResolver, $field);
+            $fieldArgNameSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $field);
             $treatTypeCoercingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
             foreach (array_keys($failedCastingFieldArgErrorMessages) as $failedCastingFieldArgName) {
                 // If it is Error, also show the error message
