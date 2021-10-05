@@ -673,20 +673,19 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     final protected function doGetSchemaDefinitionForField(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
     {
         $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
-        if ($fieldTypeResolver instanceof RelationalTypeResolverInterface) {
-            $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
-            $schemaDefinition[SchemaDefinition::RELATIONAL] = true;
-        } elseif ($fieldTypeResolver instanceof EnumTypeResolverInterface) {
+        $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
+        if ($fieldTypeResolver instanceof EnumTypeResolverInterface) {
             $type = SchemaDefinitionTypes::TYPE_ENUM;
-        } else {
-            // Scalar type
-            $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
         }
         $schemaDefinition = [
             SchemaDefinition::NAME => $fieldName,
             SchemaDefinition::TYPE_RESOLVER => $fieldTypeResolver,
             SchemaDefinition::TYPE_NAME => $type,
         ];
+
+        if ($fieldTypeResolver instanceof RelationalTypeResolverInterface) {
+            $schemaDefinition[SchemaDefinition::RELATIONAL] = true;
+        }
         
         // Check it args can be queried without their name
         if ($this->enableOrderedSchemaFieldArgs($objectTypeResolver, $fieldName)) {
