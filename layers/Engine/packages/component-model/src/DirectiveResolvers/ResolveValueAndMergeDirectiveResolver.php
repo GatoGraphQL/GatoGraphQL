@@ -302,7 +302,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $value
             );
         }
-        
+
         // Otherwise, simply serialize the given value directly
         return $value === null ? null : $fieldScalarTypeResolver->serialize($value);
     }
