@@ -264,7 +264,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             if ($fieldTypeResolver instanceof ScalarTypeResolverInterface) {
                 /** @var ScalarTypeResolverInterface */
                 $fieldScalarTypeResolver = $fieldTypeResolver;
-                // @todo Obtain these from Schema Definition
                 $fieldIsArrayOfArraysType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
                 $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
                 // $value = $fieldScalarTypeResolver->serialize($value);
