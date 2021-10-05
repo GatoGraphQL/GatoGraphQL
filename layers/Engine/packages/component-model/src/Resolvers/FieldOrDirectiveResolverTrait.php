@@ -281,7 +281,15 @@ trait FieldOrDirectiveResolverTrait
         array $fieldOrDirectiveArgs,
         string $type
     ): array {
-        $key = serialize($enumTypeFieldOrDirectiveArgsSchemaDefinition) . '|' . $fieldOrDirectiveName . serialize($fieldOrDirectiveArgs);
+        // Remove the resolver before serialization, or it throws an error
+        $serializableEnumTypeFieldOrDirectiveArgsSchemaDefinition = array_map(
+            function (array $enumTypeFieldOrDirectiveArgSchemaDefinition): array {
+                unset($enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_RESOLVER]);
+                return $enumTypeFieldOrDirectiveArgSchemaDefinition;
+            },
+            $enumTypeFieldOrDirectiveArgsSchemaDefinition
+        );
+        $key = serialize($serializableEnumTypeFieldOrDirectiveArgsSchemaDefinition) . '|' . $fieldOrDirectiveName . serialize($fieldOrDirectiveArgs);
         if (!isset($this->enumValueArgumentValidationCache[$key])) {
             $this->enumValueArgumentValidationCache[$key] = $this->doValidateEnumFieldOrDirectiveArguments($enumTypeFieldOrDirectiveArgsSchemaDefinition, $fieldOrDirectiveName, $fieldOrDirectiveArgs, $type);
         }
