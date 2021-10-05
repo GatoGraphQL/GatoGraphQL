@@ -456,20 +456,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
             if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
                 /**
-                 * Validate array types are provided as arrays. If it produces errors, return immediately
-                 */
-                if (
-                    $maybeErrors = $this->validateArrayTypeFieldOrDirectiveArguments(
-                        $directiveArgsSchemaDefinition,
-                        $directiveName,
-                        $directiveArgs,
-                        ResolverTypes::DIRECTIVE
-                    )
-                ) {
-                    return $maybeErrors;
-                }
-
-                /**
                  * Validate enums
                  */
                 if (
