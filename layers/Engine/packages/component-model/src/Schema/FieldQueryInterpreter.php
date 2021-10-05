@@ -978,7 +978,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                  *
                  * In that case, assign type `MIXED`, which implies "Do not cast"
                  **/
-                $fieldOrDirectiveArgTypeName = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_TYPE_NAME] ?? SchemaDefinition::TYPE_ANY_SCALAR;
+                $fieldOrDirectiveArgTypeName = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_TYPE_NAME];
                 // If not set, the return type is not an array
                 $fieldOrDirectiveArgIsArrayType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
                 $fieldOrDirectiveArgIsNonNullArrayItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
