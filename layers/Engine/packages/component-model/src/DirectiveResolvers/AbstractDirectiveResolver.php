@@ -1186,7 +1186,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     $schemaDefinition[SchemaDefinition::VERSION] = $version;
                 }
             }
-            $this->addSchemaDefinitionForDirective($schemaDefinition);
+            $this->addDirectiveSchemaDefinition($schemaDefinition);
             $this->schemaDefinitionForDirectiveCache[$key] = $schemaDefinition;
         }
         return $this->schemaDefinitionForDirectiveCache[$key];
@@ -1195,7 +1195,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * Function to override
      */
-    protected function addSchemaDefinitionForDirective(array &$schemaDefinition): void
+    protected function addDirectiveSchemaDefinition(array &$schemaDefinition): void
     {
     }
 }
