@@ -10,6 +10,7 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -258,13 +259,14 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         if ($relationalTypeResolver instanceof ObjectTypeResolverInterface) {
             /** @var ObjectTypeResolverInterface */
             $objectTypeResolver = $relationalTypeResolver;
-            $fieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($field);
+            $fieldSchemaDefinition = $objectTypeResolver->getFieldSchemaDefinition($field);
+            $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_RESOLVER];
             if ($fieldTypeResolver instanceof ScalarTypeResolverInterface) {
                 /** @var ScalarTypeResolverInterface */
                 $fieldScalarTypeResolver = $fieldTypeResolver;
                 // @todo Obtain these from Schema Definition
-                $fieldIsArrayOfArraysType = false;
-                $fieldIsArrayType = false;
+                $fieldIsArrayOfArraysType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
+                $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
                 // $value = $fieldScalarTypeResolver->serialize($value);
                 if ($fieldIsArrayOfArraysType) {
                     // If the value is an array of arrays, then serialize each subelement to the item type
