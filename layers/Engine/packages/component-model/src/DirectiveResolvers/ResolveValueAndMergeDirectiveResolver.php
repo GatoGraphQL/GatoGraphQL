@@ -12,6 +12,7 @@ use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
 
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
@@ -252,6 +253,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $field,
             $object,
         );
+        // Custom Scalar Types must be serialized
+        if ($relationalTypeResolver instanceof ScalarTypeResolverInterface) {
+            /** @var ScalarTypeResolverInterface */
+            $scalarTypeResolver = $relationalTypeResolver;
+            $value = $scalarTypeResolver->serialize($value);
+        }
         $dbItems[(string)$id][$fieldOutputKey] = $value;
     }
 
