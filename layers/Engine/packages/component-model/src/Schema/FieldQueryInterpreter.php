@@ -978,6 +978,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                  *
                  * In that case, assign type `MIXED`, which implies "Do not cast"
                  **/
+                /** @var InputTypeResolverInterface */
+                $fieldOrDirectiveArgTypeResolver = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_TYPE_RESOLVER];
                 $fieldOrDirectiveArgTypeName = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_TYPE_NAME];
                 // If not set, the return type is not an array
                 $fieldOrDirectiveArgIsArrayType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
@@ -1115,10 +1117,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     $argValue = $argValue === null ? null : array_map(
                         // If it contains a null value, return it as is
                         fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? null : array_map(
-                            fn (mixed $arrayOfArraysArgValueElem) => $arrayOfArraysArgValueElem === null ? null : $this->typeCastingExecuter->cast(
-                                $fieldOrDirectiveArgTypeName,
-                                $arrayOfArraysArgValueElem
-                            ),
+                            fn (mixed $arrayOfArraysArgValueElem) => $arrayOfArraysArgValueElem === null ? null : $fieldOrDirectiveArgTypeResolver->coerceValue($arrayOfArraysArgValueElem),
                             $arrayArgValueElem
                         ),
                         $argValue
@@ -1133,10 +1132,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 } elseif ($fieldOrDirectiveArgIsArrayType) {
                     // If the value is an array, then cast each element to the item type
                     $argValue = $argValue === null ? null : array_map(
-                        fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $this->typeCastingExecuter->cast(
-                            $fieldOrDirectiveArgTypeName,
-                            $arrayArgValueElem
-                        ),
+                        fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $fieldOrDirectiveArgTypeResolver->coerceValue($arrayArgValueElem),
                         $argValue
                     );
                     $errorArgValues = array_filter(
@@ -1145,7 +1141,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     );
                 } else {
                     // Otherwise, simply cast the given value directly
-                    $argValue = $argValue === null ? null : $this->typeCastingExecuter->cast($fieldOrDirectiveArgTypeName, $argValue);
+                    $argValue = $argValue === null ? null : $fieldOrDirectiveArgTypeResolver->coerceValue($argValue);
                     if (GeneralUtils::isError($argValue)) {
                         /** @var Error $argValue */
                         $errorArgValues[] = $argValue;
