@@ -1250,12 +1250,12 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     {
         $objectTypeResolverClass = get_class($objectTypeResolver);
         if (!array_key_exists($field, $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass] ?? [])) {
-            $fieldSchemaDefinitionArgs = null;
+            $fieldArgsSchemaDefinition = null;
             $fieldSchemaDefinition = $objectTypeResolver->getFieldSchemaDefinition($field);
             if ($fieldSchemaDefinition !== null) {
-                $fieldSchemaDefinitionArgs = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? [];
+                $fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? [];
             }
-            $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass][$field] = $fieldSchemaDefinitionArgs;
+            $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass][$field] = $fieldArgsSchemaDefinition;
         }
         return $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass][$field];
     }
@@ -1292,13 +1292,13 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function doGetFieldArgumentNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
     {
         // Get the field argument types, to know to what type it will cast the value
-        $fieldSchemaDefinitionArgs = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $field);
-        if ($fieldSchemaDefinitionArgs === null) {
+        $fieldArgsSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $field);
+        if ($fieldArgsSchemaDefinition === null) {
             return null;
         }
         $fieldArgNameTypeResolvers = [];
-        foreach ($fieldSchemaDefinitionArgs as $fieldSchemaDefinitionArg) {
-            $fieldArgNameTypeResolvers[$fieldSchemaDefinitionArg[SchemaDefinition::NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::TYPE_RESOLVER];
+        foreach ($fieldArgsSchemaDefinition as $fieldArgSchemaDefinition) {
+            $fieldArgNameTypeResolvers[$fieldArgSchemaDefinition[SchemaDefinition::NAME]] = $fieldArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
         }
         return $fieldArgNameTypeResolvers;
     }
@@ -1315,19 +1315,19 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function doGetFieldArgumentNameDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
     {
         // Get the field arguments which have a default value
-        $fieldSchemaDefinitionArgs = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $field);
-        if ($fieldSchemaDefinitionArgs === null) {
+        $fieldArgsSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $field);
+        if ($fieldArgsSchemaDefinition === null) {
             return null;
         }
         $fieldArgNameDefaultValues = [];
         $fieldSchemaDefinitionArgsWithDefaultValue = array_filter(
-            $fieldSchemaDefinitionArgs,
-            function (array $fieldSchemaDefinitionArg): bool {
-                return \array_key_exists(SchemaDefinition::DEFAULT_VALUE, $fieldSchemaDefinitionArg);
+            $fieldArgsSchemaDefinition,
+            function (array $fieldArgSchemaDefinition): bool {
+                return \array_key_exists(SchemaDefinition::DEFAULT_VALUE, $fieldArgSchemaDefinition);
             }
         );
-        foreach ($fieldSchemaDefinitionArgsWithDefaultValue as $fieldSchemaDefinitionArg) {
-            $fieldArgNameDefaultValues[$fieldSchemaDefinitionArg[SchemaDefinition::NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::DEFAULT_VALUE];
+        foreach ($fieldSchemaDefinitionArgsWithDefaultValue as $fieldArgSchemaDefinition) {
+            $fieldArgNameDefaultValues[$fieldArgSchemaDefinition[SchemaDefinition::NAME]] = $fieldArgSchemaDefinition[SchemaDefinition::DEFAULT_VALUE];
         }
         return $fieldArgNameDefaultValues;
     }
