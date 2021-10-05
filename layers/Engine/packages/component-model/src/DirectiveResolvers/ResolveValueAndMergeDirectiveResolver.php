@@ -275,7 +275,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         /** @var ObjectTypeResolverInterface */
         $objectTypeResolver = $relationalTypeResolver;
         $fieldSchemaDefinition = $objectTypeResolver->getFieldSchemaDefinition($field);
-        $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_RESOLVER];
+        $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
         if (!($fieldTypeResolver instanceof ScalarTypeResolverInterface)) {
             return $value;
         }
@@ -284,7 +284,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         $fieldScalarTypeResolver = $fieldTypeResolver;
 
         // If the value is an array of arrays, then serialize each subelement to the item type
-        if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false) {
+        if ($fieldSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false) {
             return $value === null ? null : array_map(
                 // If it contains a null value, return it as is
                 fn (?array $arrayValueElem) => $arrayValueElem === null ? null : array_map(
@@ -296,7 +296,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         }
 
         // If the value is an array, then serialize each element to the item type
-        if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false) {
+        if ($fieldSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false) {
             return $value === null ? null : array_map(
                 fn (mixed $arrayValueElem) => $arrayValueElem === null ? null : $fieldScalarTypeResolver->serialize($arrayValueElem),
                 $value

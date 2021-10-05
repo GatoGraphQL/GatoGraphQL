@@ -54,7 +54,7 @@ class Schema
         $this->types = [];
         foreach ($scalarTypeNames as $typeName) {
             $typeSchemaDefinitionPath = [
-                SchemaDefinition::ARGNAME_TYPES,
+                SchemaDefinition::TYPES,
                 $typeName,
             ];
             $this->types[] = new ScalarType(
@@ -71,21 +71,21 @@ class Schema
             SchemaDefinitionHelpers::initFieldsFromPath(
                 $fullSchemaDefinition,
                 [
-                    SchemaDefinition::ARGNAME_GLOBAL_FIELDS,
+                    SchemaDefinition::GLOBAL_FIELDS,
                 ]
             );
             // 2. Global connections
             SchemaDefinitionHelpers::initFieldsFromPath(
                 $fullSchemaDefinition,
                 [
-                    SchemaDefinition::ARGNAME_GLOBAL_CONNECTIONS,
+                    SchemaDefinition::GLOBAL_CONNECTIONS,
                 ]
             );
         }
 
         // Initialize the interfaces
         $interfaceSchemaDefinitionPath = [
-            SchemaDefinition::ARGNAME_INTERFACES,
+            SchemaDefinition::INTERFACES,
         ];
         $interfaceSchemaDefinitionPointer = SchemaDefinitionHelpers::advancePointerToPath(
             $fullSchemaDefinition,
@@ -105,9 +105,9 @@ class Schema
 
         // Initialize the directives
         $this->directives = [];
-        foreach ($fullSchemaDefinition[SchemaDefinition::ARGNAME_GLOBAL_DIRECTIVES] as $directiveName => $directiveDefinition) {
+        foreach ($fullSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES] as $directiveName => $directiveDefinition) {
             $directiveSchemaDefinitionPath = [
-                SchemaDefinition::ARGNAME_GLOBAL_DIRECTIVES,
+                SchemaDefinition::GLOBAL_DIRECTIVES,
                 $directiveName,
             ];
             $this->directives[] = $this->getDirectiveInstance($fullSchemaDefinition, $directiveSchemaDefinitionPath);
@@ -119,7 +119,7 @@ class Schema
         // 1. queryType
         $queryTypeSchemaKey = $graphQLSchemaDefinitionService->getQueryRootTypeSchemaKey();
         $queryTypeSchemaDefinitionPath = [
-            SchemaDefinition::ARGNAME_TYPES,
+            SchemaDefinition::TYPES,
             $queryTypeSchemaKey,
         ];
         $this->queryType = $this->getTypeInstance($fullSchemaDefinition, $queryTypeSchemaDefinitionPath);
@@ -127,7 +127,7 @@ class Schema
         // 2. mutationType
         if ($mutationTypeSchemaKey = $graphQLSchemaDefinitionService->getMutationRootTypeSchemaKey()) {
             $mutationTypeSchemaDefinitionPath = [
-                SchemaDefinition::ARGNAME_TYPES,
+                SchemaDefinition::TYPES,
                 $mutationTypeSchemaKey,
             ];
             $this->mutationType = $this->getTypeInstance($fullSchemaDefinition, $mutationTypeSchemaDefinitionPath);
@@ -136,7 +136,7 @@ class Schema
         // 3. subscriptionType
         if ($subscriptionTypeSchemaKey = $graphQLSchemaDefinitionService->getSubscriptionRootTypeSchemaKey()) {
             $subscriptionTypeSchemaDefinitionPath = [
-                SchemaDefinition::ARGNAME_TYPES,
+                SchemaDefinition::TYPES,
                 $subscriptionTypeSchemaKey,
             ];
             $this->subscriptionType = $this->getTypeInstance($fullSchemaDefinition, $subscriptionTypeSchemaDefinitionPath);
@@ -145,17 +145,17 @@ class Schema
         // 2. Initialize the Object and Union types from under "types" and the Interface type from under "interfaces"
         $resolvableTypes = [];
         $resolvableTypeSchemaKeys = array_diff(
-            array_keys($fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES]),
+            array_keys($fullSchemaDefinition[SchemaDefinition::TYPES]),
             $scalarTypeNames
         );
         foreach ($resolvableTypeSchemaKeys as $typeName) {
             $typeSchemaDefinitionPath = [
-                SchemaDefinition::ARGNAME_TYPES,
+                SchemaDefinition::TYPES,
                 $typeName,
             ];
             $resolvableTypes[] = $this->getTypeInstance($fullSchemaDefinition, $typeSchemaDefinitionPath);
         }
-        $interfaceNames = array_keys($fullSchemaDefinition[SchemaDefinition::ARGNAME_INTERFACES]);
+        $interfaceNames = array_keys($fullSchemaDefinition[SchemaDefinition::INTERFACES]);
         // Now we can sort the interfaces, after creating new `InterfaceType`
         // Everything else was already sorted in `SchemaDefinitionReferenceRegistry`
         // Sort the elements in the schema alphabetically
@@ -164,7 +164,7 @@ class Schema
         }
         foreach ($interfaceNames as $interfaceName) {
             $interfaceSchemaDefinitionPath = [
-                SchemaDefinition::ARGNAME_INTERFACES,
+                SchemaDefinition::INTERFACES,
                 $interfaceName,
             ];
             $resolvableTypes[] = new InterfaceType(
@@ -209,7 +209,7 @@ class Schema
         }
         $typeSchemaDefinition = $typeSchemaDefinitionPointer;
         // The type here can either be an ObjectType or a UnionType
-        return ($typeSchemaDefinition[SchemaDefinition::ARGNAME_IS_UNION] ?? null) ?
+        return ($typeSchemaDefinition[SchemaDefinition::IS_UNION] ?? null) ?
             new UnionType($fullSchemaDefinition, $typeSchemaDefinitionPath) :
             new ObjectType($fullSchemaDefinition, $typeSchemaDefinitionPath);
     }

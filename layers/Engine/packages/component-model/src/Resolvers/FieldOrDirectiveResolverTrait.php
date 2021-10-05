@@ -154,7 +154,7 @@ trait FieldOrDirectiveResolverTrait
         // Remove the resolver before serialization, or it throws an error
         $serializableEnumTypeFieldOrDirectiveArgsSchemaDefinition = array_map(
             function (array $enumTypeFieldOrDirectiveArgSchemaDefinition): array {
-                unset($enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_RESOLVER]);
+                unset($enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER]);
                 return $enumTypeFieldOrDirectiveArgSchemaDefinition;
             },
             $enumTypeFieldOrDirectiveArgsSchemaDefinition
@@ -185,8 +185,8 @@ trait FieldOrDirectiveResolverTrait
             }
             // Check if it's an array or not from the schema definition
             $enumTypeFieldOrDirectiveArgSchemaDefinition = $enumTypeFieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgumentName];
-            $enumTypeFieldOrDirectiveArgIsArrayOfArrays = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
-            $enumTypeFieldOrDirectiveArgIsArray = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
+            $enumTypeFieldOrDirectiveArgIsArrayOfArrays = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
+            $enumTypeFieldOrDirectiveArgIsArray = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false;
             $schemaFieldOrDirectiveArgumentEnumValues = $schemaFieldArgumentEnumValueDefinitions[$fieldOrDirectiveArgumentName] ?? [];
 
             /**
@@ -232,9 +232,9 @@ trait FieldOrDirectiveResolverTrait
             if ($fieldOrDirectiveArgumentValueDefinition === null) {
                 // Remove deprecated ones and extract their names
                 $errorItems[] = $fieldOrDirectiveArgumentValueItem;
-            } elseif ($fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::ARGNAME_DEPRECATED] ?? null) {
+            } elseif ($fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::DEPRECATED] ?? null) {
                 // Check if this enumValue is deprecated
-                $deprecationItems[$fieldOrDirectiveArgumentValueItem] = $fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION];
+                $deprecationItems[$fieldOrDirectiveArgumentValueItem] = $fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION];
             }
         }
         if ($errorItems) {

@@ -19,12 +19,12 @@ abstract class AbstractType extends AbstractSchemaDefinitionReferenceObject
 
     public function getNamespacedName(): string
     {
-        return $this->schemaDefinition[SchemaDefinition::ARGNAME_NAMESPACED_NAME];
+        return $this->schemaDefinition[SchemaDefinition::NAMESPACED_NAME];
     }
 
     public function getElementName(): string
     {
-        return $this->schemaDefinition[SchemaDefinition::ARGNAME_ELEMENT_NAME];
+        return $this->schemaDefinition[SchemaDefinition::ELEMENT_NAME];
     }
 
     /**
@@ -33,11 +33,11 @@ abstract class AbstractType extends AbstractSchemaDefinitionReferenceObject
      */
     public function getName(): string
     {
-        return $this->schemaDefinition[SchemaDefinition::ARGNAME_NAME];
+        return $this->schemaDefinition[SchemaDefinition::NAME];
     }
     public function getDescription(): ?string
     {
-        return $this->schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] ?? null;
+        return $this->schemaDefinition[SchemaDefinition::DESCRIPTION] ?? null;
     }
     /**
      * There are no extensions currently implemented for the Type

@@ -54,7 +54,7 @@ trait ResolveTypeSchemaDefinitionReferenceTrait
 
         // By now, it's either an InterfaceType, UnionType, ObjectType or a ScalarType. Since they have all been registered, we can get their references from the registry
         $typeSchemaDefinitionPath = [
-            SchemaDefinition::ARGNAME_TYPES,
+            SchemaDefinition::TYPES,
             $typeName,
         ];
         $schemaDefinitionID = SchemaDefinitionHelpers::getID($typeSchemaDefinitionPath);

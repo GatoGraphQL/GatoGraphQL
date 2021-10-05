@@ -22,16 +22,16 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
     }
     public function getName(): string
     {
-        return $this->schemaDefinition[SchemaDefinition::ARGNAME_NAME];
+        return $this->schemaDefinition[SchemaDefinition::NAME];
     }
     public function getDescription(): ?string
     {
-        return $this->schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] ?? null;
+        return $this->schemaDefinition[SchemaDefinition::DESCRIPTION] ?? null;
     }
     public function getLocations(): array
     {
         $directives = [];
-        $directiveType = $this->schemaDefinition[SchemaDefinition::ARGNAME_DIRECTIVE_TYPE];
+        $directiveType = $this->schemaDefinition[SchemaDefinition::DIRECTIVE_TYPE];
         $vars = ApplicationState::getVars();
         /**
          * There are 3 cases for adding the "Query" type locations:
@@ -66,6 +66,6 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
     }
     public function isRepeatable(): bool
     {
-        return $this->schemaDefinition[SchemaDefinition::ARGNAME_DIRECTIVE_IS_REPEATABLE];
+        return $this->schemaDefinition[SchemaDefinition::DIRECTIVE_IS_REPEATABLE];
     }
 }

@@ -78,17 +78,17 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
     //             $dateFormat = 'Y-m-d';
     //             // Save documentation as template, and remove it
     //             $schemaDefinition = $schemaDefinitionItems[0];
-    //             unset($schemaDefinition[SchemaDefinition::ARGNAME_NAME]);
-    //             unset($schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION]);
+    //             unset($schemaDefinition[SchemaDefinition::NAME]);
+    //             unset($schemaDefinition[SchemaDefinition::DESCRIPTION]);
     //             array_shift($schemaDefinitionItems);
     //             // Add the other elements, using the original documentation as placeholder
     //             $schemaDefinitionItems[] = array_merge(
     //                 [
-    //                     SchemaDefinition::ARGNAME_NAME => $this->formInputHelperService->getMultipleInputName($name, $subnames[0]),
+    //                     SchemaDefinition::NAME => $this->formInputHelperService->getMultipleInputName($name, $subnames[0]),
     //                 ],
     //                 $schemaDefinition,
     //                 [
-    //                     SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
+    //                     SchemaDefinition::DESCRIPTION => sprintf(
     //                         $this->translationAPI->__('Search for elements starting from this date, in format \'%s\'', 'pop-engine'),
     //                         $dateFormat
     //                     ),
@@ -96,11 +96,11 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
     //             );
     //             $schemaDefinitionItems[] = array_merge(
     //                 [
-    //                     SchemaDefinition::ARGNAME_NAME => $this->formInputHelperService->getMultipleInputName($name, $subnames[1]),
+    //                     SchemaDefinition::NAME => $this->formInputHelperService->getMultipleInputName($name, $subnames[1]),
     //                 ],
     //                 $schemaDefinition,
     //                 [
-    //                     SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
+    //                     SchemaDefinition::DESCRIPTION => sprintf(
     //                         $this->translationAPI->__('Search for elements starting until this date, in format \'%s\'', 'pop-engine'),
     //                         $dateFormat
     //                     ),

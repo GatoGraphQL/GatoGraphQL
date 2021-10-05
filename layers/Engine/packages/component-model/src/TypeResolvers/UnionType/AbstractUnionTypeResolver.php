@@ -415,18 +415,18 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
 
         // Properties
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_NAME] = $this->getMaybeNamespacedTypeName();
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_NAMESPACED_NAME] = $this->getNamespacedTypeName();
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_ELEMENT_NAME] = $this->getTypeName();
+        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::NAME] = $this->getMaybeNamespacedTypeName();
+        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::NAMESPACED_NAME] = $this->getNamespacedTypeName();
+        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ELEMENT_NAME] = $this->getTypeName();
         if ($description = $this->getTypeDescription()) {
-            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
+            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::DESCRIPTION] = $description;
         }
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_IS_UNION] = true;
+        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::IS_UNION] = true;
 
         if (ComponentConfiguration::enableUnionTypeImplementingInterfaceType()) {
             // If it returns an interface as type, add it to the schemaDefinition
             if ($interfaceTypeResolver = $this->getUnionTypeInterfaceTypeResolver()) {
-                $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_RESULTS_IMPLEMENT_INTERFACE] = $interfaceTypeResolver->getMaybeNamespacedTypeName();
+                $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::RESULTS_IMPLEMENT_INTERFACE] = $interfaceTypeResolver->getMaybeNamespacedTypeName();
             }
         }
 
@@ -435,7 +435,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             $pickerObjectTypeResolver = $picker->getObjectTypeResolver();
             $pickerObjectTypeSchemaDefinition = $pickerObjectTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, $options);
             $pickerObjectTypeName = $pickerObjectTypeResolver->getMaybeNamespacedTypeName();
-            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_POSSIBLE_TYPES][$pickerObjectTypeName] = $pickerObjectTypeSchemaDefinition[$pickerObjectTypeName];
+            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::POSSIBLE_TYPES][$pickerObjectTypeName] = $pickerObjectTypeSchemaDefinition[$pickerObjectTypeName];
         }
     }
 
@@ -446,8 +446,8 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
 
         // Replace the UnionTypeResolver's types with their typeNames
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_POSSIBLE_TYPES] = array_keys(
-            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_POSSIBLE_TYPES]
+        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::POSSIBLE_TYPES] = array_keys(
+            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::POSSIBLE_TYPES]
         );
     }
 

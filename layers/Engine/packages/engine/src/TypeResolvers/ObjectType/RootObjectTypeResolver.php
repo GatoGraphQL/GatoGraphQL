@@ -59,10 +59,10 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
         $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
 
         // Add the directives (global)
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_GLOBAL_DIRECTIVES] = [];
+        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::GLOBAL_DIRECTIVES] = [];
         $schemaDirectiveResolvers = $this->getSchemaDirectiveResolvers(true);
         foreach ($schemaDirectiveResolvers as $directiveName => $directiveResolver) {
-            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_GLOBAL_DIRECTIVES][$directiveName] = $this->getDirectiveSchemaDefinition($directiveResolver, $options);
+            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::GLOBAL_DIRECTIVES][$directiveName] = $this->getDirectiveSchemaDefinition($directiveResolver, $options);
         }
 
         // Add the fields (global)

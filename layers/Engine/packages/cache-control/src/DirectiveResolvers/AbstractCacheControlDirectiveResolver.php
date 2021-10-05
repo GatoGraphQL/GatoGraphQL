@@ -114,7 +114,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     //     // Further add for which providers it works
     //     $maxAge = $this->getMaxAge();
     //     if (!is_null($maxAge)) {
-    //         $schemaDefinition[SchemaDefinition::ARGNAME_MAX_AGE] = $maxAge;
+    //         $schemaDefinition[SchemaDefinition::MAX_AGE] = $maxAge;
     //     }
     // }
     /**

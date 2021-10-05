@@ -14,18 +14,18 @@ class EnumValue extends AbstractSchemaDefinitionReferenceObject
     }
     public function getValue()
     {
-        return $this->schemaDefinition[SchemaDefinition::ARGNAME_NAME];
+        return $this->schemaDefinition[SchemaDefinition::NAME];
     }
     public function getDescription(): ?string
     {
-        return $this->schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] ?? null;
+        return $this->schemaDefinition[SchemaDefinition::DESCRIPTION] ?? null;
     }
     public function isDeprecated(): bool
     {
-        return $this->schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] ?? false;
+        return $this->schemaDefinition[SchemaDefinition::DEPRECATED] ?? false;
     }
     public function getDeprecatedReason(): ?string
     {
-        return $this->schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] ?? null;
+        return $this->schemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] ?? null;
     }
 }

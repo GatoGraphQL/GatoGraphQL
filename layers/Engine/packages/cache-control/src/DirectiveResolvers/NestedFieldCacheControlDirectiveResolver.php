@@ -21,7 +21,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
 
     // protected function addSchemaDefinitionForDirective(array &$schemaDefinition): void
     // {
-    //     $schemaDefinition[SchemaDefinition::ARGNAME_MAX_AGE] = $this->translationAPI->__('The minimum max-age calculated among the affected fields and all their composed fields.', 'cache-control');
+    //     $schemaDefinition[SchemaDefinition::MAX_AGE] = $this->translationAPI->__('The minimum max-age calculated among the affected fields and all their composed fields.', 'cache-control');
     // }
 
     /**
