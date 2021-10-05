@@ -57,7 +57,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      */
     private array $extractedDirectiveArgumentWarningsCache = [];
     /**
-     * @var array<string, array<string, array<string, array<string, InputTypeResolverInterface>|null>>>
+     * @var array<string, array<string, array<string, InputTypeResolverInterface>|null>>
      */
     private array $fieldArgumentNameTypeResolversCache = [];
     /**
@@ -370,7 +370,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      * If the argument name has not been provided,
      * attempt to deduce it from the schema,
      * or show a warning if not possible
-     * 
+     *
      * @param array<string, InputTypeResolverInterface> $fieldOrDirectiveArgumentNameTypeResolvers
      */
     protected function extractAndValidateFielOrDirectiveArguments(
