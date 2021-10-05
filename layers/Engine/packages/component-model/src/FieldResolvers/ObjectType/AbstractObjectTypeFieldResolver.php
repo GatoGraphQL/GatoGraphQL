@@ -672,22 +672,25 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     final protected function doGetSchemaDefinitionForField(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
     {
+        $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
+        $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
+        if ($fieldTypeResolver instanceof EnumTypeResolverInterface) {
+            $type = SchemaDefinitionTypes::TYPE_ENUM;
+        }
         $schemaDefinition = [
             SchemaDefinition::NAME => $fieldName,
+            SchemaDefinition::TYPE_RESOLVER => $fieldTypeResolver,
+            SchemaDefinition::TYPE_NAME => $type,
         ];
 
-        $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
-        $schemaDefinition[SchemaDefinition::TYPE_RESOLVER] = $fieldTypeResolver;
         if ($fieldTypeResolver instanceof RelationalTypeResolverInterface) {
-            $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
             $schemaDefinition[SchemaDefinition::RELATIONAL] = true;
-        } elseif ($fieldTypeResolver instanceof EnumTypeResolverInterface) {
-            $type = SchemaDefinitionTypes::TYPE_ENUM;
-        } else {
-            // Scalar type
-            $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
         }
-        $schemaDefinition[SchemaDefinition::TYPE_NAME] = $type;
+
+        // Check it args can be queried without their name
+        if ($this->enableOrderedSchemaFieldArgs($objectTypeResolver, $fieldName)) {
+            $schemaDefinition[SchemaDefinition::ENABLE_ORDERED_ARGS] = true;
+        }
 
         // Use bitwise operators to extract the applied modifiers
         // @see https://www.php.net/manual/en/language.operators.bitwise.php#91291

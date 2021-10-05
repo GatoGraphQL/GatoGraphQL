@@ -15,7 +15,6 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface
      * @return array<string,mixed>|null `null` if there are no ObjectTypeFieldResolvers for the field
      */
     public function getSchemaFieldArgs(string $field): ?array;
-    public function enableOrderedSchemaFieldArgs(string $field): bool;
     public function getFieldSchemaDefinition(string $field): ?array;
     public function hasObjectTypeFieldResolversForField(string $field): bool;
     public function resolveFieldValidationErrorDescriptions(string $field, array &$variables = null): array;

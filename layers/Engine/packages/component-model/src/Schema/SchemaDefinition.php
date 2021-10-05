@@ -28,6 +28,7 @@ class SchemaDefinition
     const DEPRECATIONDESCRIPTION = 'deprecationDescription';
     const DEFAULT_VALUE = 'defaultValue';
     const ARGS = 'args';
+    const ENABLE_ORDERED_ARGS = 'enableOrderedArgs';
     const RESULTS_IMPLEMENT_INTERFACE = 'resultsImplementInterface';
     const INTERFACES = 'interfaces';
     const RELATIONAL = 'relational';

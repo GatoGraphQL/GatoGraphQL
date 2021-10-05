@@ -407,7 +407,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $fieldOrDirectiveArgValue,
                         $orderedFieldOrDirectiveArgNamesEnabled ?
                             $this->translationAPI->__('documentation for this argument in the schema definition has not been defined, hence it can\'t be deduced from there', 'pop-component-model') :
-                            $this->translationAPI->__('retrieving this information from the schema definition is disabled for the corresponding “typeResolver”', 'pop-component-model'),
+                            $this->translationAPI->__('retrieving this information from the schema definition is not enabled for the field', 'pop-component-model'),
                         QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR
                     );
                     if ($treatUndefinedFieldOrDirectiveArgsAsErrors) {
@@ -553,7 +553,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         /** @var array */
         $fieldOrDirectiveArgumentNameDefaultValues = $this->getFieldArgumentNameDefaultValues($objectTypeResolver, $field);
         if ($fieldArgElems = QueryHelpers::getFieldArgElements($this->getFieldArgs($field))) {
-            $orderedFieldArgNamesEnabled = $objectTypeResolver->enableOrderedSchemaFieldArgs($field);
+            $fieldSchemaDefinition = $objectTypeResolver->getFieldSchemaDefinition($field);
+            $orderedFieldArgNamesEnabled = $fieldSchemaDefinition[SchemaDefinition::ENABLE_ORDERED_ARGS] ?? false;
             return $this->extractAndValidateFielOrDirectiveArguments(
                 $field,
                 $fieldArgElems,
