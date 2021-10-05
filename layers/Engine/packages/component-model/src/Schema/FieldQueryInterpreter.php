@@ -978,7 +978,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                  *
                  * In that case, assign type `MIXED`, which implies "Do not cast"
                  **/
-                $fieldOrDirectiveArgType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_TYPE] ?? SchemaDefinition::TYPE_MIXED;
+                $fieldOrDirectiveArgType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_TYPE_NAME] ?? SchemaDefinition::TYPE_MIXED;
                 // If not set, the return type is not an array
                 $fieldOrDirectiveArgIsArrayType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
                 $fieldOrDirectiveArgIsNonNullArrayItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
@@ -1217,7 +1217,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $directiveArgNameTypes = [];
         if ($directiveSchemaDefinitionArgs = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $relationalTypeResolver)) {
             foreach ($directiveSchemaDefinitionArgs as $directiveSchemaDefinitionArg) {
-                $directiveArgNameTypes[$directiveSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $directiveSchemaDefinitionArg[SchemaDefinition::ARGNAME_TYPE];
+                $directiveArgNameTypes[$directiveSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $directiveSchemaDefinitionArg[SchemaDefinition::ARGNAME_TYPE_NAME];
             }
         }
         return $directiveArgNameTypes;
@@ -1296,7 +1296,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         }
         $fieldArgNameTypeResolvers = [];
         foreach ($fieldSchemaDefinitionArgs as $fieldSchemaDefinitionArg) {
-            $fieldArgNameTypeResolvers[$fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_TYPE];
+            $fieldArgNameTypeResolvers[$fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_TYPE_NAME];
         }
         return $fieldArgNameTypeResolvers;
     }

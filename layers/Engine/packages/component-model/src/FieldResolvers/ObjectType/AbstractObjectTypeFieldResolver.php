@@ -711,7 +711,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             // Scalar type
             $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
         }
-        $schemaDefinition[SchemaDefinition::ARGNAME_TYPE] = $type;
+        $schemaDefinition[SchemaDefinition::ARGNAME_TYPE_NAME] = $type;
 
         // Use bitwise operators to extract the applied modifiers
         // @see https://www.php.net/manual/en/language.operators.bitwise.php#91291

@@ -449,7 +449,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     } elseif (ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition()) {
                         $fieldSchemaDefinition = $objectTypeFieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
                         // If may be array or not, then there's no validation to do
-                        $fieldType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
+                        $fieldType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_NAME];
                         $fieldMayBeArrayType = in_array($fieldType, [
                             SchemaDefinition::TYPE_INPUT_OBJECT,
                             SchemaDefinition::TYPE_OBJECT,
