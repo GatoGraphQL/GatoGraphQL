@@ -637,7 +637,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldSchemaDefinition[SchemaDefinition::REFERENCED_TYPE] = $typeNames[0];
         }
         $isGlobal = $objectTypeFieldResolver->isGlobal($this, $fieldName);
-        $isConnection = isset($fieldSchemaDefinition[SchemaDefinition::RELATIONAL]) && $fieldSchemaDefinition[SchemaDefinition::RELATIONAL];
+        $isConnection = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER] instanceof RelationalTypeResolverInterface;
         if ($isGlobal) {
             // If it is relational, it is a global connection
             if ($isConnection) {
@@ -654,10 +654,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $entry = $isConnection ?
                 SchemaDefinition::CONNECTIONS :
                 SchemaDefinition::FIELDS;
-        }
-        // Can remove attribute "relational"
-        if ($isConnection) {
-            unset($fieldSchemaDefinition[SchemaDefinition::RELATIONAL]);
         }
         $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
         $this->schemaDefinition[$typeSchemaKey][$entry][$fieldName] = $fieldSchemaDefinition;

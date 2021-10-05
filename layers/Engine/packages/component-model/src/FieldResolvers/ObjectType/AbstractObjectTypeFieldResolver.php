@@ -683,10 +683,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             SchemaDefinition::TYPE_NAME => $type,
         ];
 
-        if ($fieldTypeResolver instanceof RelationalTypeResolverInterface) {
-            $schemaDefinition[SchemaDefinition::RELATIONAL] = true;
-        }
-
         // Check it args can be queried without their name
         if ($this->enableOrderedSchemaFieldArgs($objectTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::ENABLE_ORDERED_ARGS] = true;
