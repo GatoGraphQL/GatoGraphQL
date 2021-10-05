@@ -98,17 +98,17 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     //                 [
     //                     [
     //                         SchemaDefinition::ARGNAME_NAME => 'filterBy',
-    //                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_INPUT_OBJECT,
+    //                         SchemaDefinition::ARGNAME_TYPE_NAME => SchemaDefinition::TYPE_INPUT_OBJECT,
     //                         SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Filter the block results based on different properties', 'block-metadata'),
     //                         SchemaDefinition::ARGNAME_ARGS => [
     //                             [
     //                                 SchemaDefinition::ARGNAME_NAME => 'blockNameStartsWith',
-    //                                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+    //                                 SchemaDefinition::ARGNAME_TYPE_NAME => SchemaDefinition::TYPE_STRING,
     //                                 SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Include only blocks with the given name', 'block-metadata'),
     //                             ],
     //                             [
     //                                 SchemaDefinition::ARGNAME_NAME => 'metaProperties',
-    //                                 SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+    //                                 SchemaDefinition::ARGNAME_TYPE_NAME => SchemaDefinition::TYPE_STRING,
     //                                 SchemaDefinition::ARGNAME_IS_ARRAY => true,
     //                                 SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Include only these block properties in the meta entry from the block', 'block-metadata'),
     //                             ]

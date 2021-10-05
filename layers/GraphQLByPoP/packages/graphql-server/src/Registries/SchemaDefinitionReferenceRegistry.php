@@ -421,9 +421,9 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     protected function introduceSDLNotationToFieldSchemaDefinition(array $fieldSchemaDefinitionPath): void
     {
         $fieldSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinition, $fieldSchemaDefinitionPath);
-        $type = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
-        $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema(
-            $type,
+        $typeName = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_NAME];
+        $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_NAME] = SchemaHelpers::getTypeToOutputInSchema(
+            $typeName,
             $fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? null,
             $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false,
             $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false,
@@ -440,9 +440,9 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         if ($fieldOrDirectiveArgs = $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
             foreach ($fieldOrDirectiveArgs as $fieldOrDirectiveArgName => $fieldOrDirectiveArgSchemaDefinition) {
                 // The type is set always
-                $type = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE];
-                $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema(
-                    $type,
+                $typeName = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_NAME];
+                $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_TYPE_NAME] = SchemaHelpers::getTypeToOutputInSchema(
+                    $typeName,
                     $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null,
                     $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false,
                     $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false,
@@ -450,11 +450,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                     $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false,
                 );
                 // If it is an input object, it may have its own args to also convert
-                if ($type == SchemaDefinition::TYPE_INPUT_OBJECT) {
+                if ($typeName === SchemaDefinition::TYPE_INPUT_OBJECT) {
                     foreach (($fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? []) as $inputFieldArgName => $inputFieldArgDefinition) {
-                        $inputFieldType = $inputFieldArgDefinition[SchemaDefinition::ARGNAME_TYPE];
-                        $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_ARGS][$inputFieldArgName][SchemaDefinition::ARGNAME_TYPE] = SchemaHelpers::getTypeToOutputInSchema(
-                            $inputFieldType,
+                        $inputFieldTypeName = $inputFieldArgDefinition[SchemaDefinition::ARGNAME_TYPE_NAME];
+                        $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_ARGS][$inputFieldArgName][SchemaDefinition::ARGNAME_TYPE_NAME] = SchemaHelpers::getTypeToOutputInSchema(
+                            $inputFieldTypeName,
                             $inputFieldArgDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? null,
                             $inputFieldArgDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false,
                             $inputFieldArgDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false,
@@ -516,7 +516,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ??= [];
         $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][] = [
             SchemaDefinition::ARGNAME_NAME => SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER,
-            SchemaDefinition::ARGNAME_TYPE => GraphQLServerSchemaDefinition::TYPE_INT,
+            SchemaDefinition::ARGNAME_TYPE_NAME => GraphQLServerSchemaDefinition::TYPE_INT,
             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Nest the directive under another one, indicated as a relative position from this one (a negative int)', 'graphql-server'),
         ];
     }

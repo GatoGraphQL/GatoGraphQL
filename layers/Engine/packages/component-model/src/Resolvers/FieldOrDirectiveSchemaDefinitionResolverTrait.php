@@ -21,9 +21,10 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
     ): array {
         $schemaFieldOrDirectiveArgDefinition = [
             SchemaDefinition::ARGNAME_NAME => $argName,
+            SchemaDefinition::ARGNAME_TYPE_RESOLVER => $argInputTypeResolver,
         ];
         if ($argInputTypeResolver instanceof EnumTypeResolverInterface) {
-            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_TYPE] = SchemaDefinition::TYPE_ENUM;
+            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_TYPE_NAME] = SchemaDefinition::TYPE_ENUM;
             /** @var EnumTypeResolverInterface */
             $argEnumTypeResolver = $argInputTypeResolver;
             $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $argEnumTypeResolver->getMaybeNamespacedTypeName();
@@ -31,7 +32,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
                 $argEnumTypeResolver
             );
         } else {
-            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_TYPE] = $argInputTypeResolver->getMaybeNamespacedTypeName();
+            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_TYPE_NAME] = $argInputTypeResolver->getMaybeNamespacedTypeName();
         }
         if ($argDescription !== null) {
             $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $argDescription;

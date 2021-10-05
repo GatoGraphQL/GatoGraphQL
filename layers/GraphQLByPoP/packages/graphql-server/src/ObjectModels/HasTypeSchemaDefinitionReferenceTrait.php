@@ -27,7 +27,7 @@ trait HasTypeSchemaDefinitionReferenceTrait
         // each of which initializes their Fields (we are here), which may reference
         // a different Type that doesn't exist yet, and can't be created here
         // or it creates an endless loop
-        $typeName = $this->schemaDefinition[SchemaDefinition::ARGNAME_TYPE];
+        $typeName = $this->schemaDefinition[SchemaDefinition::ARGNAME_TYPE_NAME];
         $this->type = $this->getTypeFromTypeName($typeName);
     }
     public function getTypeID(): string

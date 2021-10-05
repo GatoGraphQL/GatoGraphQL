@@ -39,7 +39,7 @@ class SchemaHelpers
     {
         return array_filter(
             $fieldOrDirectiveArgsSchemaDefinition,
-            fn ($fieldOrDirectiveArgSchemaDefinition) => $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE] == SchemaDefinition::TYPE_ENUM
+            fn ($fieldOrDirectiveArgSchemaDefinition) => $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_RESOLVER] instanceof EnumTypeResolverInterface
         );
     }
 

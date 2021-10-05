@@ -29,6 +29,7 @@ use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Root\Environment as RootEnvironment;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -987,6 +988,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     $schemaTraces
                 );
             } catch (Exception $e) {
+                if (RootEnvironment::isApplicationEnvironmentDev()) {
+                    throw $e;
+                }
                 $failureMessage = sprintf(
                     $this->translationAPI->__('Resolving directive \'%s\' produced an exception, with message: \'%s\'', 'component-model'),
                     $this->directive,
