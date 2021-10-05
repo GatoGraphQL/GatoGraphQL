@@ -10,6 +10,7 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
@@ -254,10 +255,15 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $object,
         );
         // Custom Scalar Types must be serialized
-        if ($relationalTypeResolver instanceof ScalarTypeResolverInterface) {
-            /** @var ScalarTypeResolverInterface */
-            $scalarTypeResolver = $relationalTypeResolver;
-            $value = $scalarTypeResolver->serialize($value);
+        if ($relationalTypeResolver instanceof ObjectTypeResolverInterface) {
+            /** @var ObjectTypeResolverInterface */
+            $objectTypeResolver = $relationalTypeResolver;
+            $fieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($field);
+            if ($fieldTypeResolver instanceof ScalarTypeResolverInterface) {
+                /** @var ScalarTypeResolverInterface */
+                $fieldScalarTypeResolver = $fieldTypeResolver;
+                $value = $fieldScalarTypeResolver->serialize($value);
+            }
         }
         $dbItems[(string)$id][$fieldOutputKey] = $value;
     }
