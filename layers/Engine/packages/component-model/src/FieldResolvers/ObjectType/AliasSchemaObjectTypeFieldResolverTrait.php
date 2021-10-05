@@ -289,10 +289,10 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
-    public function addSchemaDefinitionForField(array &$schemaDefinition, ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): void
+    public function addFieldSchemaDefinition(array &$schemaDefinition, ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): void
     {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
-        $aliasedObjectTypeFieldResolver->addSchemaDefinitionForField(
+        $aliasedObjectTypeFieldResolver->addFieldSchemaDefinition(
             $schemaDefinition,
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName)

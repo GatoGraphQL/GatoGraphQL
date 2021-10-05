@@ -272,11 +272,11 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return [];
     }
 
-    public function addSchemaDefinitionForField(array &$schemaDefinition, string $fieldName): void
+    public function addFieldSchemaDefinition(array &$schemaDefinition, string $fieldName): void
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $fieldName);
+            $schemaDefinitionResolver->addFieldSchemaDefinition($schemaDefinition, $fieldName);
             return;
         }
 

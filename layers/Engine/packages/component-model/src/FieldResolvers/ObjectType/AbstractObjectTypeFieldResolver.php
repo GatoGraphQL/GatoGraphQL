@@ -428,11 +428,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return [];
     }
 
-    public function addSchemaDefinitionForField(array &$schemaDefinition, ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): void
+    public function addFieldSchemaDefinition(array &$schemaDefinition, ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): void
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $objectTypeResolver, $fieldName);
+            $schemaDefinitionResolver->addFieldSchemaDefinition($schemaDefinition, $objectTypeResolver, $fieldName);
             return;
         }
 
@@ -721,7 +721,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($args = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::ARGS] = $args;
         }
-        $this->addSchemaDefinitionForField($schemaDefinition, $objectTypeResolver, $fieldName);
+        $this->addFieldSchemaDefinition($schemaDefinition, $objectTypeResolver, $fieldName);
 
         if (Environment::enableSemanticVersionConstraints()) {
             if ($version = $this->getFieldVersion($objectTypeResolver, $fieldName)) {
