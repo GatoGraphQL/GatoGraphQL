@@ -45,5 +45,5 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
         string $fieldArgName,
         mixed $fieldArgValue
     ): array;
-    public function addSchemaDefinitionForField(array &$schemaDefinition, ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): void;
+    public function addFieldSchemaDefinition(array &$schemaDefinition, ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): void;
 }

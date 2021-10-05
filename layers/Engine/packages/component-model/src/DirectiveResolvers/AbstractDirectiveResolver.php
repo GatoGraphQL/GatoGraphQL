@@ -438,7 +438,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         array $directiveArgs = []
     ): ?array {
         $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs);
-        $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($relationalTypeResolver);
+        $directiveSchemaDefinition = $this->getDirectiveSchemaDefinition($relationalTypeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
             /**
              * Validate mandatory values. If it produces errors, return immediately
@@ -795,7 +795,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     public function resolveDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): ?string
     {
-        $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($relationalTypeResolver);
+        $directiveSchemaDefinition = $this->getDirectiveSchemaDefinition($relationalTypeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
             if (
                 $maybeDeprecations = $this->getEnumFieldOrDirectiveArgumentDeprecations(
@@ -1145,7 +1145,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return false;
     }
 
-    public function getSchemaDefinitionForDirective(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         // First check if the value was cached
         $key = $relationalTypeResolver->getNamespacedTypeName();
@@ -1186,7 +1186,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                     $schemaDefinition[SchemaDefinition::VERSION] = $version;
                 }
             }
-            $this->addSchemaDefinitionForDirective($schemaDefinition);
+            $this->addDirectiveSchemaDefinition($schemaDefinition);
             $this->schemaDefinitionForDirectiveCache[$key] = $schemaDefinition;
         }
         return $this->schemaDefinitionForDirectiveCache[$key];
@@ -1195,7 +1195,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * Function to override
      */
-    protected function addSchemaDefinitionForDirective(array &$schemaDefinition): void
+    protected function addDirectiveSchemaDefinition(array &$schemaDefinition): void
     {
     }
 }

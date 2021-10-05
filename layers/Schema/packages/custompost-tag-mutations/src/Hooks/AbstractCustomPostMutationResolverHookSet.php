@@ -34,19 +34,19 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     {
         $this->hooksAPI->addFilter(
             HookNames::FIELD_ARG_NAME_RESOLVERS,
-            array($this, 'maybeAddSchemaFieldArgNameResolvers'),
+            array($this, 'maybeAddFieldArgNameResolvers'),
             10,
             4
         );
         $this->hooksAPI->addFilter(
             HookNames::FIELD_ARG_DESCRIPTION,
-            array($this, 'maybeAddSchemaFieldArgDescription'),
+            array($this, 'maybeAddFieldArgDescription'),
             10,
             5
         );
         $this->hooksAPI->addFilter(
             HookNames::FIELD_ARG_TYPE_MODIFIERS,
-            array($this, 'maybeAddSchemaFieldArgTypeModifiers'),
+            array($this, 'maybeAddFieldArgTypeModifiers'),
             10,
             5
         );
@@ -58,49 +58,49 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    public function maybeAddSchemaFieldArgNameResolvers(
-        array $schemaFieldArgNameResolvers,
+    public function maybeAddFieldArgNameResolvers(
+        array $fieldArgNameResolvers,
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
     ): array {
         // Only for the specific combinations of Type and fieldName
-        if (!$this->mustAddSchemaFieldArgs($objectTypeResolver, $fieldName)) {
-            return $schemaFieldArgNameResolvers;
+        if (!$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
+            return $fieldArgNameResolvers;
         }
-        $schemaFieldArgNameResolvers[MutationInputProperties::TAGS] = $this->stringScalarTypeResolver;
-        return $schemaFieldArgNameResolvers;
+        $fieldArgNameResolvers[MutationInputProperties::TAGS] = $this->stringScalarTypeResolver;
+        return $fieldArgNameResolvers;
     }
 
-    public function maybeAddSchemaFieldArgDescription(
-        ?string $schemaFieldArgDescription,
+    public function maybeAddFieldArgDescription(
+        ?string $fieldArgDescription,
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         string $fieldArgName,
     ): ?string {
         // Only for the newly added fieldArgName
-        if ($fieldArgName !== MutationInputProperties::TAGS || !$this->mustAddSchemaFieldArgs($objectTypeResolver, $fieldName)) {
-            return $schemaFieldArgDescription;
+        if ($fieldArgName !== MutationInputProperties::TAGS || !$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
+            return $fieldArgDescription;
         }
         return $this->translationAPI->__('The tags to set', 'custompost-tag-mutations');
     }
 
-    public function maybeAddSchemaFieldArgTypeModifiers(
-        int $schemaFieldArgTypeModifiers,
+    public function maybeAddFieldArgTypeModifiers(
+        int $fieldArgTypeModifiers,
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         string $fieldArgName,
     ): int {
         // Only for the newly added fieldArgName
-        if ($fieldArgName !== MutationInputProperties::TAGS || !$this->mustAddSchemaFieldArgs($objectTypeResolver, $fieldName)) {
-            return $schemaFieldArgTypeModifiers;
+        if ($fieldArgName !== MutationInputProperties::TAGS || !$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
+            return $fieldArgTypeModifiers;
         }
         return SchemaTypeModifiers::IS_ARRAY;
     }
 
-    abstract protected function mustAddSchemaFieldArgs(
+    abstract protected function mustAddFieldArgs(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
     ): bool;

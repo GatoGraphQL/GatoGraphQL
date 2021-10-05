@@ -272,21 +272,21 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return [];
     }
 
-    public function addSchemaDefinitionForField(array &$schemaDefinition, string $fieldName): void
+    public function addFieldSchemaDefinition(array &$schemaDefinition, string $fieldName): void
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            $schemaDefinitionResolver->addSchemaDefinitionForField($schemaDefinition, $fieldName);
+            $schemaDefinitionResolver->addFieldSchemaDefinition($schemaDefinition, $fieldName);
             return;
         }
 
-        $this->addSchemaDefinitionForEnumField($schemaDefinition, $fieldName);
+        $this->addEnumTypeFieldSchemaDefinition($schemaDefinition, $fieldName);
     }
 
     /**
      * Add the enum values in the schema: arrays of enum name, description, deprecated and deprecation description
      */
-    protected function addSchemaDefinitionForEnumField(array &$schemaDefinition, string $fieldName): void
+    protected function addEnumTypeFieldSchemaDefinition(array &$schemaDefinition, string $fieldName): void
     {
         $fieldTypeResolver = $this->getFieldTypeResolver($fieldName);
         if ($fieldTypeResolver instanceof EnumTypeResolverInterface) {
