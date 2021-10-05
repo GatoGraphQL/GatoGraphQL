@@ -31,11 +31,11 @@ class PersistedFragmentManager implements PersistedFragmentManagerInterface
     {
         $this->persistedFragments[$fragmentName] = $fragmentResolution;
         $this->persistedFragmentsForSchema[$fragmentName] = [
-            SchemaDefinition::ARGNAME_NAME => $fragmentName,
+            SchemaDefinition::NAME => $fragmentName,
         ];
         if ($description) {
-            $this->persistedFragmentsForSchema[$fragmentName][SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
+            $this->persistedFragmentsForSchema[$fragmentName][SchemaDefinition::DESCRIPTION] = $description;
         }
-        $this->persistedFragmentsForSchema[$fragmentName][SchemaDefinition::ARGNAME_FRAGMENT_RESOLUTION] = $fragmentResolution;
+        $this->persistedFragmentsForSchema[$fragmentName][SchemaDefinition::FRAGMENT_RESOLUTION] = $fragmentResolution;
     }
 }

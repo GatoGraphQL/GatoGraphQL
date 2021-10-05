@@ -15,6 +15,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterfac
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinitionTypes;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -116,7 +117,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
             $fieldArgs = $this->fieldQueryInterpreter->extractStaticFieldArguments($field);
             $fieldSchemaDefinition = $objectTypeFieldResolvers[0]->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
-            return $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? [];
+            return $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? [];
         }
 
         return null;
@@ -179,7 +180,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          */
         if (
             Environment::enableSemanticVersionConstraints()
-            && ($versionConstraint = $fieldArgs[SchemaDefinition::ARGNAME_VERSION_CONSTRAINT] ?? null)
+            && ($versionConstraint = $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null)
         ) {
             $errorMessage = sprintf(
                 $this->translationAPI->__(
@@ -246,10 +247,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $schemaDeprecations,
             ) = $this->dissectFieldForSchema($field);
             $fieldSchemaDefinition = $objectTypeFieldResolvers[0]->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
-            if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] ?? null) {
+            if ($fieldSchemaDefinition[SchemaDefinition::DEPRECATED] ?? null) {
                 $schemaDeprecations[] = [
                     Tokens::PATH => [$field],
-                    Tokens::MESSAGE => $fieldSchemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION],
+                    Tokens::MESSAGE => $fieldSchemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION],
                 ];
             }
             // Check for deprecations in the enums
@@ -458,20 +459,20 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                      */
                     if ($value === null) {
                         $fieldSchemaDefinition = $objectTypeFieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
-                        if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] ?? false) {
+                        if ($fieldSchemaDefinition[SchemaDefinition::NON_NULLABLE] ?? false) {
                             return $this->errorProvider->getNonNullableFieldError($fieldName);
                         }
                     } elseif (ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition()) {
                         $fieldSchemaDefinition = $objectTypeFieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
                         // If may be array or not, then there's no validation to do
-                        $fieldTypeName = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_NAME];
+                        $fieldTypeName = $fieldSchemaDefinition[SchemaDefinition::TYPE_NAME];
                         $fieldMayBeArrayType = in_array($fieldTypeName, [
-                            SchemaDefinition::TYPE_INPUT_OBJECT,
-                            SchemaDefinition::TYPE_OBJECT,
-                            SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinitionTypes::TYPE_INPUT_OBJECT,
+                            SchemaDefinitionTypes::TYPE_OBJECT,
+                            SchemaDefinitionTypes::TYPE_MIXED,
                         ]);
                         if (!$fieldMayBeArrayType) {
-                            $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
+                            $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false;
                             if (
                                 !$fieldIsArrayType
                                 && is_array($value)
@@ -484,7 +485,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             ) {
                                 return $this->errorProvider->getMustBeArrayFieldError($fieldName, $value);
                             }
-                            $fieldIsNonNullArrayItemsType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
+                            $fieldIsNonNullArrayItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
                             if (
                                 $fieldIsNonNullArrayItemsType
                                 && is_array($value)
@@ -495,7 +496,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             ) {
                                 return $this->errorProvider->getArrayMustNotHaveNullItemsFieldError($fieldName, $value);
                             }
-                            $fieldIsArrayOfArraysType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
+                            $fieldIsArrayOfArraysType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
                             if (
                                 !$fieldIsArrayOfArraysType
                                 && is_array($value)
@@ -517,7 +518,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             ) {
                                 return $this->errorProvider->getMustBeArrayOfArraysFieldError($fieldName, $value);
                             }
-                            $fieldIsNonNullArrayOfArraysItemsType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
+                            $fieldIsNonNullArrayOfArraysItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
                             if (
                                 $fieldIsNonNullArrayOfArraysItemsType
                                 && is_array($value)
@@ -569,14 +570,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $typeName = $this->getMaybeNamespacedTypeName();
 
         // Add the directives (non-global)
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_DIRECTIVES] = [];
+        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::DIRECTIVES] = [];
         $schemaDirectiveResolvers = $this->getSchemaDirectiveResolvers(false);
         foreach ($schemaDirectiveResolvers as $directiveName => $directiveResolver) {
-            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_DIRECTIVES][$directiveName] = $this->getDirectiveSchemaDefinition($directiveResolver, $options);
+            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::DIRECTIVES][$directiveName] = $this->getDirectiveSchemaDefinition($directiveResolver, $options);
         }
 
         // Add the fields (non-global)
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_FIELDS] = [];
+        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::FIELDS] = [];
         $schemaObjectTypeFieldResolvers = $this->getSchemaObjecTypeObjectTypeFieldResolvers(false);
         foreach ($schemaObjectTypeFieldResolvers as $fieldName => $objectTypeFieldResolver) {
             $this->addFieldSchemaDefinition($objectTypeFieldResolver, $fieldName, $stackMessages, $generalMessages, $options);
@@ -594,14 +595,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             // Eg: Interface "Elemental" has field "id" and connection "self"
             // Merge both cases into interface fields
             $interfaceFields = array_filter(
-                $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_FIELDS],
+                $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::FIELDS],
                 function ($fieldName) use ($interfaceFieldNames) {
                     return in_array($fieldName, $interfaceFieldNames);
                 },
                 ARRAY_FILTER_USE_KEY
             );
             $interfaceConnections = array_filter(
-                $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS],
+                $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::CONNECTIONS],
                 function ($connectionName) use ($interfaceFieldNames) {
                     return in_array($connectionName, $interfaceFieldNames);
                 },
@@ -624,17 +625,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             // Add this type to the list of implemented types for this interface
             $interfacePossibleTypes[] = $typeName;
             $typeInterfaceDefinitions[$interfaceSchemaKey] = [
-                SchemaDefinition::ARGNAME_NAME => $interfaceName,
-                SchemaDefinition::ARGNAME_NAMESPACED_NAME => $interfaceTypeResolver->getNamespacedTypeName(),
-                SchemaDefinition::ARGNAME_ELEMENT_NAME => $interfaceTypeResolver->getTypeName(),
-                SchemaDefinition::ARGNAME_DESCRIPTION => $interfaceTypeResolver->getTypeDescription(),
-                SchemaDefinition::ARGNAME_FIELDS => $interfaceFields,
-                SchemaDefinition::ARGNAME_INTERFACES => $interfaceImplementedInterfaceNames,
+                SchemaDefinition::NAME => $interfaceName,
+                SchemaDefinition::NAMESPACED_NAME => $interfaceTypeResolver->getNamespacedTypeName(),
+                SchemaDefinition::ELEMENT_NAME => $interfaceTypeResolver->getTypeName(),
+                SchemaDefinition::DESCRIPTION => $interfaceTypeResolver->getTypeDescription(),
+                SchemaDefinition::FIELDS => $interfaceFields,
+                SchemaDefinition::INTERFACES => $interfaceImplementedInterfaceNames,
                 // The list of types that implement this interface
-                SchemaDefinition::ARGNAME_POSSIBLE_TYPES => &$interfacePossibleTypes,
+                SchemaDefinition::POSSIBLE_TYPES => &$interfacePossibleTypes,
             ];
         }
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_INTERFACES] = $typeInterfaceDefinitions;
+        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::INTERFACES] = $typeInterfaceDefinitions;
     }
 
     final protected function addFieldSchemaDefinition(ObjectTypeFieldResolverInterface $objectTypeFieldResolver, string $fieldName, array $stackMessages, array &$generalMessages, array $options = []): void
@@ -653,37 +654,37 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             // If this field is relational, then add its own schema
             $fieldTypeResolver = $this->getFieldTypeResolver($fieldName);
             if ($fieldTypeResolver instanceof RelationalTypeResolverInterface) {
-                $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_SCHEMA] = $fieldTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, $options);
+                $fieldSchemaDefinition[SchemaDefinition::TYPE_SCHEMA] = $fieldTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, $options);
             }
         }
         // Convert the field type from its internal representation (eg: "array:id") to the type (eg: "array:Post")
-        if (!($options['useTypeName'] ?? null) && ($types = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_SCHEMA] ?? null)) {
+        if (!($options['useTypeName'] ?? null) && ($types = $fieldSchemaDefinition[SchemaDefinition::TYPE_SCHEMA] ?? null)) {
             // Display the type under entry "referencedType"
             $typeNames = array_keys($types);
-            $fieldSchemaDefinition[SchemaDefinition::ARGNAME_REFERENCED_TYPE] = $typeNames[0];
+            $fieldSchemaDefinition[SchemaDefinition::REFERENCED_TYPE] = $typeNames[0];
         }
         $isGlobal = $objectTypeFieldResolver->isGlobal($this, $fieldName);
-        $isConnection = isset($fieldSchemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL]) && $fieldSchemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL];
+        $isConnection = isset($fieldSchemaDefinition[SchemaDefinition::RELATIONAL]) && $fieldSchemaDefinition[SchemaDefinition::RELATIONAL];
         if ($isGlobal) {
             // If it is relational, it is a global connection
             if ($isConnection) {
-                $entry = SchemaDefinition::ARGNAME_GLOBAL_CONNECTIONS;
+                $entry = SchemaDefinition::GLOBAL_CONNECTIONS;
                 // Remove the "types"
                 if ($options['useTypeName'] ?? null) {
-                    unset($fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_SCHEMA]);
+                    unset($fieldSchemaDefinition[SchemaDefinition::TYPE_SCHEMA]);
                 }
             } else {
-                $entry = SchemaDefinition::ARGNAME_GLOBAL_FIELDS;
+                $entry = SchemaDefinition::GLOBAL_FIELDS;
             }
         } else {
             // Split the results into "fields" and "connections"
             $entry = $isConnection ?
-                SchemaDefinition::ARGNAME_CONNECTIONS :
-                SchemaDefinition::ARGNAME_FIELDS;
+                SchemaDefinition::CONNECTIONS :
+                SchemaDefinition::FIELDS;
         }
         // Can remove attribute "relational"
         if ($isConnection) {
-            unset($fieldSchemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL]);
+            unset($fieldSchemaDefinition[SchemaDefinition::RELATIONAL]);
         }
         $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
         $this->schemaDefinition[$typeSchemaKey][$entry][$fieldName] = $fieldSchemaDefinition;

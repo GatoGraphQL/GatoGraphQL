@@ -131,7 +131,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
                             // used when creating a new Directive instance
                             // (which we can't do here, since it has side-effects)
                             $directiveSchemaDefinitionPath = [
-                                SchemaDefinition::ARGNAME_GLOBAL_DIRECTIVES,
+                                SchemaDefinition::GLOBAL_DIRECTIVES,
                                 $directiveResolver->getDirectiveName(),
                             ];
                             return SchemaDefinitionHelpers::getID($directiveSchemaDefinitionPath);

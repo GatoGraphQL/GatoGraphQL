@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
-use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionTypes as GraphQLServerSchemaDefinitionTypes;
+use PoP\ComponentModel\Schema\SchemaDefinitionTypes;
 
 class SchemaHelpers
 {
@@ -57,22 +57,22 @@ class SchemaHelpers
     {
         // If the type is a scalar value, we need to convert it to the official GraphQL type
         $conversionTypes = [
-            SchemaDefinition::TYPE_ID => GraphQLServerSchemaDefinition::TYPE_ID,
-            SchemaDefinition::TYPE_STRING => GraphQLServerSchemaDefinition::TYPE_STRING,
-            SchemaDefinition::TYPE_INT => GraphQLServerSchemaDefinition::TYPE_INT,
-            SchemaDefinition::TYPE_FLOAT => GraphQLServerSchemaDefinition::TYPE_FLOAT,
-            SchemaDefinition::TYPE_BOOL => GraphQLServerSchemaDefinition::TYPE_BOOL,
-            SchemaDefinition::TYPE_OBJECT => GraphQLServerSchemaDefinition::TYPE_OBJECT,
-            SchemaDefinition::TYPE_ANY_SCALAR => GraphQLServerSchemaDefinition::TYPE_ANY_SCALAR,
-            SchemaDefinition::TYPE_MIXED => GraphQLServerSchemaDefinition::TYPE_MIXED,
-            SchemaDefinition::TYPE_ARRAY_KEY => GraphQLServerSchemaDefinition::TYPE_ARRAY_KEY,
-            SchemaDefinition::TYPE_DATE => GraphQLServerSchemaDefinition::TYPE_DATE,
-            SchemaDefinition::TYPE_TIME => GraphQLServerSchemaDefinition::TYPE_TIME,
-            SchemaDefinition::TYPE_URL => GraphQLServerSchemaDefinition::TYPE_URL,
-            SchemaDefinition::TYPE_EMAIL => GraphQLServerSchemaDefinition::TYPE_EMAIL,
-            SchemaDefinition::TYPE_IP => GraphQLServerSchemaDefinition::TYPE_IP,
-            SchemaDefinition::TYPE_ENUM => GraphQLServerSchemaDefinition::TYPE_ENUM,
-            SchemaDefinition::TYPE_INPUT_OBJECT => GraphQLServerSchemaDefinition::TYPE_INPUT_OBJECT,
+            SchemaDefinitionTypes::TYPE_ID => GraphQLServerSchemaDefinitionTypes::TYPE_ID,
+            SchemaDefinitionTypes::TYPE_STRING => GraphQLServerSchemaDefinitionTypes::TYPE_STRING,
+            SchemaDefinitionTypes::TYPE_INT => GraphQLServerSchemaDefinitionTypes::TYPE_INT,
+            SchemaDefinitionTypes::TYPE_FLOAT => GraphQLServerSchemaDefinitionTypes::TYPE_FLOAT,
+            SchemaDefinitionTypes::TYPE_BOOL => GraphQLServerSchemaDefinitionTypes::TYPE_BOOL,
+            SchemaDefinitionTypes::TYPE_OBJECT => GraphQLServerSchemaDefinitionTypes::TYPE_OBJECT,
+            SchemaDefinitionTypes::TYPE_ANY_SCALAR => GraphQLServerSchemaDefinitionTypes::TYPE_ANY_SCALAR,
+            SchemaDefinitionTypes::TYPE_MIXED => GraphQLServerSchemaDefinitionTypes::TYPE_MIXED,
+            SchemaDefinitionTypes::TYPE_ARRAY_KEY => GraphQLServerSchemaDefinitionTypes::TYPE_ARRAY_KEY,
+            SchemaDefinitionTypes::TYPE_DATE => GraphQLServerSchemaDefinitionTypes::TYPE_DATE,
+            SchemaDefinitionTypes::TYPE_TIME => GraphQLServerSchemaDefinitionTypes::TYPE_TIME,
+            SchemaDefinitionTypes::TYPE_URL => GraphQLServerSchemaDefinitionTypes::TYPE_URL,
+            SchemaDefinitionTypes::TYPE_EMAIL => GraphQLServerSchemaDefinitionTypes::TYPE_EMAIL,
+            SchemaDefinitionTypes::TYPE_IP => GraphQLServerSchemaDefinitionTypes::TYPE_IP,
+            SchemaDefinitionTypes::TYPE_ENUM => GraphQLServerSchemaDefinitionTypes::TYPE_ENUM,
+            SchemaDefinitionTypes::TYPE_INPUT_OBJECT => GraphQLServerSchemaDefinitionTypes::TYPE_INPUT_OBJECT,
         ];
         if (isset($conversionTypes[$typeName])) {
             $typeName = $conversionTypes[$typeName];

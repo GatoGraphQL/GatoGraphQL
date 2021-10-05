@@ -85,13 +85,13 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     {
         $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
         $typeName = $this->getMaybeNamespacedTypeName();
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_NAME] = $typeName;
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_NAMESPACED_NAME] = $this->getNamespacedTypeName();
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_ELEMENT_NAME] = $this->getTypeName();
+        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::NAME] = $typeName;
+        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::NAMESPACED_NAME] = $this->getNamespacedTypeName();
+        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ELEMENT_NAME] = $this->getTypeName();
 
         // Properties
         if ($description = $this->getTypeDescription()) {
-            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
+            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::DESCRIPTION] = $description;
         }
     }
 }

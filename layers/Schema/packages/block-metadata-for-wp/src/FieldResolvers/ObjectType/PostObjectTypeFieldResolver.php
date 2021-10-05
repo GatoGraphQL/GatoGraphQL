@@ -97,20 +97,20 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     //                 $schemaFieldArgs,
     //                 [
     //                     [
-    //                         SchemaDefinition::ARGNAME_NAME => 'filterBy',
-    //                         SchemaDefinition::ARGNAME_TYPE_NAME => SchemaDefinition::TYPE_INPUT_OBJECT,
-    //                         SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Filter the block results based on different properties', 'block-metadata'),
-    //                         SchemaDefinition::ARGNAME_ARGS => [
+    //                         SchemaDefinition::NAME => 'filterBy',
+    //                         SchemaDefinition::TYPE_NAME => SchemaDefinitionTypes::TYPE_INPUT_OBJECT,
+    //                         SchemaDefinition::DESCRIPTION => $this->translationAPI->__('Filter the block results based on different properties', 'block-metadata'),
+    //                         SchemaDefinition::ARGS => [
     //                             [
-    //                                 SchemaDefinition::ARGNAME_NAME => 'blockNameStartsWith',
-    //                                 SchemaDefinition::ARGNAME_TYPE_NAME => SchemaDefinition::TYPE_STRING,
-    //                                 SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Include only blocks with the given name', 'block-metadata'),
+    //                                 SchemaDefinition::NAME => 'blockNameStartsWith',
+    //                                 SchemaDefinition::TYPE_NAME => SchemaDefinitionTypes::TYPE_STRING,
+    //                                 SchemaDefinition::DESCRIPTION => $this->translationAPI->__('Include only blocks with the given name', 'block-metadata'),
     //                             ],
     //                             [
-    //                                 SchemaDefinition::ARGNAME_NAME => 'metaProperties',
-    //                                 SchemaDefinition::ARGNAME_TYPE_NAME => SchemaDefinition::TYPE_STRING,
-    //                                 SchemaDefinition::ARGNAME_IS_ARRAY => true,
-    //                                 SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Include only these block properties in the meta entry from the block', 'block-metadata'),
+    //                                 SchemaDefinition::NAME => 'metaProperties',
+    //                                 SchemaDefinition::TYPE_NAME => SchemaDefinitionTypes::TYPE_STRING,
+    //                                 SchemaDefinition::IS_ARRAY => true,
+    //                                 SchemaDefinition::DESCRIPTION => $this->translationAPI->__('Include only these block properties in the meta entry from the block', 'block-metadata'),
     //                             ]
     //                         ]
     //                     ],

@@ -16,12 +16,12 @@ trait HasArgsSchemaDefinitionReferenceTrait
     protected function initArgs(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
         $this->args = [];
-        if ($args = $this->schemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
+        if ($args = $this->schemaDefinition[SchemaDefinition::ARGS] ?? null) {
             foreach (array_keys($args) as $fieldArgName) {
                 $fieldArgSchemaDefinitionPath = array_merge(
                     $schemaDefinitionPath,
                     [
-                        SchemaDefinition::ARGNAME_ARGS,
+                        SchemaDefinition::ARGS,
                         $fieldArgName,
                     ]
                 );

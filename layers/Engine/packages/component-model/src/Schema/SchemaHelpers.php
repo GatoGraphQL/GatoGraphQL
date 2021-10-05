@@ -30,7 +30,7 @@ class SchemaHelpers
         return array_filter(
             $fieldOrDirectiveArgsSchemaDefinition,
             function ($fieldOrDirectiveArgSchemaDefinition) {
-                return $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_MANDATORY] ?? false;
+                return $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::MANDATORY] ?? false;
             }
         );
     }
@@ -39,7 +39,7 @@ class SchemaHelpers
     {
         return array_filter(
             $fieldOrDirectiveArgsSchemaDefinition,
-            fn ($fieldOrDirectiveArgSchemaDefinition) => $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_RESOLVER] instanceof EnumTypeResolverInterface
+            fn ($fieldOrDirectiveArgSchemaDefinition) => $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER] instanceof EnumTypeResolverInterface
         );
     }
 
@@ -52,7 +52,7 @@ class SchemaHelpers
         return array_filter(
             $enumValueDefinitions,
             function ($enumValueDefinition) {
-                if ($enumValueDefinition[SchemaDefinition::ARGNAME_DEPRECATED] ?? null) {
+                if ($enumValueDefinition[SchemaDefinition::DEPRECATED] ?? null) {
                     return false;
                 }
                 return true;
@@ -64,7 +64,7 @@ class SchemaHelpers
     {
         return array_map(
             function ($schemaFieldArg) {
-                return $schemaFieldArg[SchemaDefinition::ARGNAME_ENUM_VALUES];
+                return $schemaFieldArg[SchemaDefinition::ENUM_VALUES];
             },
             $schemaFieldArgs
         );

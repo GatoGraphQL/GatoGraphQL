@@ -24,18 +24,18 @@ trait EnumTypeSchemaDefinitionResolverTrait
         $enumName = $enumTypeResolver->getMaybeNamespacedTypeName();
         foreach ($enumValues as $enumValue) {
             $enum = [
-                SchemaDefinition::ARGNAME_NAME => $enumValue,
-                SchemaDefinition::ARGNAME_ENUM_NAME => $enumName,
+                SchemaDefinition::NAME => $enumValue,
+                SchemaDefinition::ENUM_NAME => $enumName,
             ];
             if ($description = $enumValueDescriptions[$enumValue] ?? null) {
-                $enum[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
+                $enum[SchemaDefinition::DESCRIPTION] = $description;
             }
             if ($deprecationDescription = $enumValueDeprecationDescriptions[$enumValue] ?? null) {
-                $enum[SchemaDefinition::ARGNAME_DEPRECATED] = true;
-                $enum[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
+                $enum[SchemaDefinition::DEPRECATED] = true;
+                $enum[SchemaDefinition::DEPRECATIONDESCRIPTION] = $deprecationDescription;
             }
             $enums[$enumValue] = $enum;
         }
-        $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = $enums;
+        $schemaDefinition[SchemaDefinition::ENUM_VALUES] = $enums;
     }
 }

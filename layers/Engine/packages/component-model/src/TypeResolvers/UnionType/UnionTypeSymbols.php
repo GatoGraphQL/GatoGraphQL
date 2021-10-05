@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\TypeResolvers\UnionType;
 class UnionTypeSymbols
 {
     /**
-     * Watch out! This can't be the same as TOKEN_NAMESPACE_SEPARATOR!
+     * Watch out! This can't be the same as SchemaDefinitionTokens::NAMESPACE_SEPARATOR!
      */
     public const OBJECT_COMPOSED_TYPE_ID_SEPARATOR = '/';
     public const UNION_TYPE_NAME_PREFIX = '*';

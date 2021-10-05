@@ -13,6 +13,8 @@ use PoP\API\TypeResolvers\EnumType\SchemaFieldShapeEnumTypeResolver;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinitionShapes;
+use PoP\ComponentModel\Schema\SchemaDefinitionTypes;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -115,13 +117,13 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             ['fullSchema' => 'deep'] => $this->translationAPI->__('Make a deep introspection of the fields, for all nested objects', 'api'),
             ['fullSchema' => 'shape'] => sprintf(
                 $this->translationAPI->__('How to shape the schema output: \'%s\', in which case all types are listed together, or \'%s\', in which the types are listed following where they appear in the graph', 'api'),
-                SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
-                SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_NESTED
+                SchemaDefinitionShapes::FLAT,
+                SchemaDefinitionShapes::NESTED
             ),
             ['fullSchema' => 'compressed'] => $this->translationAPI->__('Output each resolver\'s schema data only once to compress the output. Valid only when field \'deep\' is `true`', 'api'),
             ['fullSchema' => 'useTypeName'] => sprintf(
                 $this->translationAPI->__('Replace type \'%s\' with the actual type name (such as \'Post\')', 'api'),
-                SchemaDefinition::TYPE_ID
+                SchemaDefinitionTypes::TYPE_ID
             ),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
@@ -131,7 +133,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ([$fieldName => $fieldArgName]) {
             ['fullSchema' => 'deep'] => true,
-            ['fullSchema' => 'shape'] => SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
+            ['fullSchema' => 'shape'] => SchemaDefinitionShapes::FLAT,
             ['fullSchema' => 'compressed'] => false,
             ['fullSchema' => 'useTypeName'] => true,
             default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
@@ -192,58 +194,58 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         ]
                     );
                     // If it is flat shape, all types will be added under $generalMessages
-                    $isFlatShape = $schemaOptions['shape'] == SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT;
+                    $isFlatShape = $schemaOptions['shape'] == SchemaDefinitionShapes::FLAT;
                     if ($isFlatShape) {
-                        $generalMessages[SchemaDefinition::ARGNAME_TYPES] = [];
+                        $generalMessages[SchemaDefinition::TYPES] = [];
                     }
                     $typeSchemaDefinition = $objectTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, $schemaOptions);
-                    $schemaDefinition[SchemaDefinition::ARGNAME_TYPES] = $typeSchemaDefinition;
+                    $schemaDefinition[SchemaDefinition::TYPES] = $typeSchemaDefinition;
 
                     // Add the queryType
-                    $schemaDefinition[SchemaDefinition::ARGNAME_QUERY_TYPE] = $rootTypeSchemaKey;
+                    $schemaDefinition[SchemaDefinition::QUERY_TYPE] = $rootTypeSchemaKey;
 
                     // Move from under Root type to the top: globalDirectives and globalFields (renamed as "functions")
-                    $schemaDefinition[SchemaDefinition::ARGNAME_GLOBAL_FIELDS] = $typeSchemaDefinition[$rootTypeSchemaKey][SchemaDefinition::ARGNAME_GLOBAL_FIELDS] ?? [];
-                    $schemaDefinition[SchemaDefinition::ARGNAME_GLOBAL_CONNECTIONS] = $typeSchemaDefinition[$rootTypeSchemaKey][SchemaDefinition::ARGNAME_GLOBAL_CONNECTIONS] ?? [];
-                    $schemaDefinition[SchemaDefinition::ARGNAME_GLOBAL_DIRECTIVES] = $typeSchemaDefinition[$rootTypeSchemaKey][SchemaDefinition::ARGNAME_GLOBAL_DIRECTIVES] ?? [];
-                    unset($schemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_GLOBAL_FIELDS]);
-                    unset($schemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_GLOBAL_CONNECTIONS]);
-                    unset($schemaDefinition[SchemaDefinition::ARGNAME_TYPES][$rootTypeSchemaKey][SchemaDefinition::ARGNAME_GLOBAL_DIRECTIVES]);
+                    $schemaDefinition[SchemaDefinition::GLOBAL_FIELDS] = $typeSchemaDefinition[$rootTypeSchemaKey][SchemaDefinition::GLOBAL_FIELDS] ?? [];
+                    $schemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS] = $typeSchemaDefinition[$rootTypeSchemaKey][SchemaDefinition::GLOBAL_CONNECTIONS] ?? [];
+                    $schemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES] = $typeSchemaDefinition[$rootTypeSchemaKey][SchemaDefinition::GLOBAL_DIRECTIVES] ?? [];
+                    unset($schemaDefinition[SchemaDefinition::TYPES][$rootTypeSchemaKey][SchemaDefinition::GLOBAL_FIELDS]);
+                    unset($schemaDefinition[SchemaDefinition::TYPES][$rootTypeSchemaKey][SchemaDefinition::GLOBAL_CONNECTIONS]);
+                    unset($schemaDefinition[SchemaDefinition::TYPES][$rootTypeSchemaKey][SchemaDefinition::GLOBAL_DIRECTIVES]);
 
                     // Retrieve the list of all types from under $generalMessages
                     if ($isFlatShape) {
-                        $typeFlatList = $generalMessages[SchemaDefinition::ARGNAME_TYPES];
+                        $typeFlatList = $generalMessages[SchemaDefinition::TYPES];
 
                         // Remove the globals from the Root
-                        unset($typeFlatList[$rootTypeSchemaKey][SchemaDefinition::ARGNAME_GLOBAL_FIELDS]);
-                        unset($typeFlatList[$rootTypeSchemaKey][SchemaDefinition::ARGNAME_GLOBAL_CONNECTIONS]);
-                        unset($typeFlatList[$rootTypeSchemaKey][SchemaDefinition::ARGNAME_GLOBAL_DIRECTIVES]);
+                        unset($typeFlatList[$rootTypeSchemaKey][SchemaDefinition::GLOBAL_FIELDS]);
+                        unset($typeFlatList[$rootTypeSchemaKey][SchemaDefinition::GLOBAL_CONNECTIONS]);
+                        unset($typeFlatList[$rootTypeSchemaKey][SchemaDefinition::GLOBAL_DIRECTIVES]);
 
                         // Because they were added in reverse way, reverse it once again, so that the first types (eg: Root) appear first
-                        $schemaDefinition[SchemaDefinition::ARGNAME_TYPES] = array_reverse($typeFlatList);
+                        $schemaDefinition[SchemaDefinition::TYPES] = array_reverse($typeFlatList);
 
                         // Add the interfaces to the root
                         $interfaces = [];
-                        foreach ($schemaDefinition[SchemaDefinition::ARGNAME_TYPES] as $typeName => $typeDefinition) {
-                            if ($typeInterfaces = $typeDefinition[SchemaDefinition::ARGNAME_INTERFACES] ?? null) {
+                        foreach ($schemaDefinition[SchemaDefinition::TYPES] as $typeName => $typeDefinition) {
+                            if ($typeInterfaces = $typeDefinition[SchemaDefinition::INTERFACES] ?? null) {
                                 $interfaces = array_merge(
                                     $interfaces,
                                     (array)$typeInterfaces
                                 );
                                 // Keep only the name of the interface under the type
-                                $schemaDefinition[SchemaDefinition::ARGNAME_TYPES][$typeName][SchemaDefinition::ARGNAME_INTERFACES] = array_keys((array)$schemaDefinition[SchemaDefinition::ARGNAME_TYPES][$typeName][SchemaDefinition::ARGNAME_INTERFACES]);
+                                $schemaDefinition[SchemaDefinition::TYPES][$typeName][SchemaDefinition::INTERFACES] = array_keys((array)$schemaDefinition[SchemaDefinition::TYPES][$typeName][SchemaDefinition::INTERFACES]);
                             }
                         }
-                        $schemaDefinition[SchemaDefinition::ARGNAME_INTERFACES] = $interfaces;
+                        $schemaDefinition[SchemaDefinition::INTERFACES] = $interfaces;
                     }
 
                     // Add the Fragment Catalogue
                     $persistedFragments = $this->fragmentCatalogueManager->getPersistedFragmentsForSchema();
-                    $schemaDefinition[SchemaDefinition::ARGNAME_PERSISTED_FRAGMENTS] = $persistedFragments;
+                    $schemaDefinition[SchemaDefinition::PERSISTED_FRAGMENTS] = $persistedFragments;
 
                     // Add the Query Catalogue
                     $persistedQueries = $this->queryCatalogueManager->getPersistedQueriesForSchema();
-                    $schemaDefinition[SchemaDefinition::ARGNAME_PERSISTED_QUERIES] = $persistedQueries;
+                    $schemaDefinition[SchemaDefinition::PERSISTED_QUERIES] = $persistedQueries;
 
                     // Store in the cache
                     if ($useCache) {

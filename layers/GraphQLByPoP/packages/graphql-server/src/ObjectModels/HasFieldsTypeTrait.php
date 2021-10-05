@@ -29,7 +29,7 @@ trait HasFieldsTypeTrait
                 array_merge(
                     $schemaDefinitionPath,
                     [
-                        SchemaDefinition::ARGNAME_CONNECTIONS,
+                        SchemaDefinition::CONNECTIONS,
                     ]
                 ),
                 $interfaceNames
@@ -41,7 +41,7 @@ trait HasFieldsTypeTrait
             array_merge(
                 $schemaDefinitionPath,
                 [
-                    SchemaDefinition::ARGNAME_FIELDS,
+                    SchemaDefinition::FIELDS,
                 ]
             ),
             $interfaceNames
@@ -52,7 +52,7 @@ trait HasFieldsTypeTrait
             $this->retrieveFieldsFromPath(
                 $fullSchemaDefinition,
                 [
-                    SchemaDefinition::ARGNAME_GLOBAL_FIELDS,
+                    SchemaDefinition::GLOBAL_FIELDS,
                 ]
             );
             // 2. Global connections
@@ -60,7 +60,7 @@ trait HasFieldsTypeTrait
                 $this->retrieveFieldsFromPath(
                     $fullSchemaDefinition,
                     [
-                        SchemaDefinition::ARGNAME_GLOBAL_CONNECTIONS,
+                        SchemaDefinition::GLOBAL_CONNECTIONS,
                     ]
                 );
             }
@@ -76,7 +76,7 @@ trait HasFieldsTypeTrait
     protected function getInterfaceNames()
     {
         if ($this instanceof HasInterfacesTypeInterface) {
-            return $this->schemaDefinition[SchemaDefinition::ARGNAME_INTERFACES];
+            return $this->schemaDefinition[SchemaDefinition::INTERFACES];
         }
         return [];
     }

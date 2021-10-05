@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
-class SchemaDefinition
+class SchemaDefinitionTypes
 {
     const TYPE_ANY_SCALAR = 'AnyScalar';
     const TYPE_MIXED = 'Mixed';

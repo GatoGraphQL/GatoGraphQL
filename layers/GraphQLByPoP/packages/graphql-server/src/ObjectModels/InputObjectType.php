@@ -25,12 +25,12 @@ class InputObjectType extends AbstractDynamicType
     protected function initInputValues(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
         $this->inputValues = [];
-        if ($inputValues = $this->schemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
+        if ($inputValues = $this->schemaDefinition[SchemaDefinition::ARGS] ?? null) {
             foreach (array_keys($inputValues) as $inputValueName) {
                 $inputValueSchemaDefinitionPath = array_merge(
                     $schemaDefinitionPath,
                     [
-                        SchemaDefinition::ARGNAME_ARGS,
+                        SchemaDefinition::ARGS,
                         $inputValueName,
                     ]
                 );
@@ -44,7 +44,7 @@ class InputObjectType extends AbstractDynamicType
 
     protected function getDynamicTypeNamePropertyInSchema(): string
     {
-        return SchemaDefinition::ARGNAME_INPUT_OBJECT_NAME;
+        return SchemaDefinition::INPUT_OBJECT_NAME;
     }
     public function getKind(): string
     {

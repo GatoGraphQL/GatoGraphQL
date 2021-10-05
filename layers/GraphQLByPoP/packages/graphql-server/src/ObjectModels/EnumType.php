@@ -24,12 +24,12 @@ class EnumType extends AbstractDynamicType
     protected function initEnumValues(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
         $this->enumValues = [];
-        if ($enumValues = $this->schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] ?? null) {
+        if ($enumValues = $this->schemaDefinition[SchemaDefinition::ENUM_VALUES] ?? null) {
             foreach (array_keys($enumValues) as $enumValueName) {
                 $enumValueSchemaDefinitionPath = array_merge(
                     $schemaDefinitionPath,
                     [
-                        SchemaDefinition::ARGNAME_ENUM_VALUES,
+                        SchemaDefinition::ENUM_VALUES,
                         $enumValueName,
                     ]
                 );
@@ -43,7 +43,7 @@ class EnumType extends AbstractDynamicType
 
     protected function getDynamicTypeNamePropertyInSchema(): string
     {
-        return SchemaDefinition::ARGNAME_ENUM_NAME;
+        return SchemaDefinition::ENUM_NAME;
     }
     public function getKind(): string
     {

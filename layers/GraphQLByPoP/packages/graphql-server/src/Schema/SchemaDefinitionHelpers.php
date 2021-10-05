@@ -46,7 +46,7 @@ class SchemaDefinitionHelpers
         $interfaceTypeFields = [];
         if ($interfaceNames) {
             foreach ($interfaceNames as $interfaceName) {
-                $interfaceSchemaDefinition = $fullSchemaDefinition[SchemaDefinition::ARGNAME_INTERFACES][$interfaceName];
+                $interfaceSchemaDefinition = $fullSchemaDefinition[SchemaDefinition::INTERFACES][$interfaceName];
                 // If there is no definition for the interface, that means that it is not resolved by any ObjectTypeFieldResolver
                 // That's an error, so throw a helpful exception
                 if (is_null($interfaceSchemaDefinition)) {
@@ -56,18 +56,18 @@ class SchemaDefinitionHelpers
                         $interfaceName
                     ));
                 }
-                $interfaceFields = array_keys($interfaceSchemaDefinition[SchemaDefinition::ARGNAME_FIELDS]);
+                $interfaceFields = array_keys($interfaceSchemaDefinition[SchemaDefinition::FIELDS]);
                 // Watch out (again)! An interface can itself implement interfaces,
                 // and a field can be shared across them
                 // (eg: field "status" for interfaces CustomPost and ContentEntry)
                 // Then, check if the interface's interface also implements the field!
                 // Then, do not add it yet, leave it for its implemented interface to add it
-                if ($interfaceImplementedInterfaceNames = $fullSchemaDefinition[SchemaDefinition::ARGNAME_INTERFACES][$interfaceName][SchemaDefinition::ARGNAME_INTERFACES] ?? []) {
+                if ($interfaceImplementedInterfaceNames = $fullSchemaDefinition[SchemaDefinition::INTERFACES][$interfaceName][SchemaDefinition::INTERFACES] ?? []) {
                     $interfaceImplementedInterfaceFields = [];
                     foreach ($interfaceImplementedInterfaceNames as $interfaceImplementedInterfaceName) {
                         $interfaceImplementedInterfaceFields = array_merge(
                             $interfaceImplementedInterfaceFields,
-                            array_keys($fullSchemaDefinition[SchemaDefinition::ARGNAME_INTERFACES][$interfaceImplementedInterfaceName][SchemaDefinition::ARGNAME_FIELDS])
+                            array_keys($fullSchemaDefinition[SchemaDefinition::INTERFACES][$interfaceImplementedInterfaceName][SchemaDefinition::FIELDS])
                         );
                     }
                     $interfaceFields = array_diff(
@@ -106,9 +106,9 @@ class SchemaDefinitionHelpers
              */
             // if ($interfaceName = $interfaceTypeFields[$fieldName] ?? null) {
             //     $targetFieldSchemaDefinitionPath = [
-            //         SchemaDefinition::ARGNAME_INTERFACES,
+            //         SchemaDefinition::INTERFACES,
             //         $interfaceName,
-            //         SchemaDefinition::ARGNAME_FIELDS,
+            //         SchemaDefinition::FIELDS,
             //     ];
             // } else {
             $targetFieldSchemaDefinitionPath = $fieldSchemaDefinitionPath;
@@ -121,11 +121,11 @@ class SchemaDefinitionHelpers
              */
             $customDefinition = [];
             if ($addVersionToSchemaFieldDescription) {
-                if ($schemaFieldVersion = $fieldSchemaDefinitionPointer[$fieldName][SchemaDefinition::ARGNAME_VERSION] ?? null) {
-                    $schemaFieldDescription = $fieldSchemaDefinitionPointer[$fieldName][SchemaDefinition::ARGNAME_DESCRIPTION];
+                if ($schemaFieldVersion = $fieldSchemaDefinitionPointer[$fieldName][SchemaDefinition::VERSION] ?? null) {
+                    $schemaFieldDescription = $fieldSchemaDefinitionPointer[$fieldName][SchemaDefinition::DESCRIPTION];
                     $customDefinition = [
-                        SchemaDefinition::ARGNAME_VERSION => $schemaFieldVersion,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $schemaFieldDescription,
+                        SchemaDefinition::VERSION => $schemaFieldVersion,
+                        SchemaDefinition::DESCRIPTION => $schemaFieldDescription,
                     ];
                 }
             }

@@ -25,7 +25,7 @@ trait HasInterfacesTypeTrait
         $interfaceSchemaDefinitionPath = array_merge(
             $schemaDefinitionPath,
             [
-                SchemaDefinition::ARGNAME_INTERFACES,
+                SchemaDefinition::INTERFACES,
             ]
         );
         $schemaDefinitionReferenceRegistry = SchemaDefinitionReferenceRegistryFacade::getInstance();
@@ -34,7 +34,7 @@ trait HasInterfacesTypeTrait
             // The InterfaceType must have already been registered on the root, under "interfaces"
             $schemaDefinitionID = SchemaDefinitionHelpers::getID(
                 [
-                    SchemaDefinition::ARGNAME_INTERFACES,
+                    SchemaDefinition::INTERFACES,
                     $interfaceName
                 ]
             );

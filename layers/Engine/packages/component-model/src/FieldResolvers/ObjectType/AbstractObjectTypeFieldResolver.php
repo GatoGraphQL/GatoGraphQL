@@ -24,6 +24,7 @@ use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTr
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Schema\SchemaDefinitionTypes;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -232,7 +233,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $schemaDefinitionResolver->getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName);
         }
         // Version constraint (possibly enabled)
-        if ($fieldArgName === SchemaDefinition::ARGNAME_VERSION_CONSTRAINT) {
+        if ($fieldArgName === SchemaDefinition::VERSION_CONSTRAINT) {
             return $this->getVersionConstraintFieldOrDirectiveArgDescription();
         }
         return null;
@@ -288,7 +289,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             if (Environment::enableSemanticVersionConstraints()) {
                 $hasVersion = $this->hasSchemaFieldVersion($objectTypeResolver, $fieldName);
                 if ($hasVersion) {
-                    $schemaDirectiveArgNameResolvers[SchemaDefinition::ARGNAME_VERSION_CONSTRAINT] = $this->stringScalarTypeResolver;
+                    $schemaDirectiveArgNameResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->stringScalarTypeResolver;
                 }
             }
         }
@@ -496,7 +497,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                  * 4. Through param `versionConstraint`: applies to all fields and directives in the query
                  */
                 $versionConstraint =
-                    $fieldArgs[SchemaDefinition::ARGNAME_VERSION_CONSTRAINT]
+                    $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT]
                     ?? VersioningHelpers::getVersionConstraintsForField(
                         $objectTypeResolver->getNamespacedTypeName(),
                         $fieldName
@@ -529,7 +530,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     {
         $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs);
         $fieldSchemaDefinition = $this->getSchemaDefinitionForField($objectTypeResolver, $fieldName, $fieldArgs);
-        if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
+        if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
             /**
              * Validate mandatory values. If it produces errors, return immediately
              */
@@ -632,7 +633,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     public function resolveFieldValidationDeprecationDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $fieldSchemaDefinition = $this->getSchemaDefinitionForField($objectTypeResolver, $fieldName, $fieldArgs);
-        if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? null) {
+        if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
             return $this->getEnumFieldOrDirectiveArgumentDeprecations(
                 $fieldArgsSchemaDefinition,
                 $fieldName,
@@ -672,27 +673,27 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     final protected function doGetSchemaDefinitionForField(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
     {
         $schemaDefinition = [
-            SchemaDefinition::ARGNAME_NAME => $fieldName,
+            SchemaDefinition::NAME => $fieldName,
         ];
 
         $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
-        $schemaDefinition[SchemaDefinition::ARGNAME_TYPE_RESOLVER] = $fieldTypeResolver;
+        $schemaDefinition[SchemaDefinition::TYPE_RESOLVER] = $fieldTypeResolver;
         if ($fieldTypeResolver instanceof RelationalTypeResolverInterface) {
             $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
-            $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
+            $schemaDefinition[SchemaDefinition::RELATIONAL] = true;
         } elseif ($fieldTypeResolver instanceof EnumTypeResolverInterface) {
-            $type = SchemaDefinition::TYPE_ENUM;
+            $type = SchemaDefinitionTypes::TYPE_ENUM;
         } else {
             // Scalar type
             $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
         }
-        $schemaDefinition[SchemaDefinition::ARGNAME_TYPE_NAME] = $type;
+        $schemaDefinition[SchemaDefinition::TYPE_NAME] = $type;
 
         // Use bitwise operators to extract the applied modifiers
         // @see https://www.php.net/manual/en/language.operators.bitwise.php#91291
         $schemaTypeModifiers = $this->getFieldTypeModifiers($objectTypeResolver, $fieldName);
         if ($schemaTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) {
-            $schemaDefinition[SchemaDefinition::ARGNAME_NON_NULLABLE] = true;
+            $schemaDefinition[SchemaDefinition::NON_NULLABLE] = true;
         }
         // If setting the "array of arrays" flag, there's no need to set the "array" flag
         $isArrayOfArrays = $schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
@@ -700,36 +701,36 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY
             || $isArrayOfArrays
         ) {
-            $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] = true;
+            $schemaDefinition[SchemaDefinition::IS_ARRAY] = true;
             if ($schemaTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
+                $schemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
             }
             if ($isArrayOfArrays) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] = true;
+                $schemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] = true;
                 if ($schemaTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) {
-                    $schemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;
+                    $schemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;
                 }
             }
         }
         if ($description = $this->getFieldDescription($objectTypeResolver, $fieldName)) {
-            $schemaDefinition[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
+            $schemaDefinition[SchemaDefinition::DESCRIPTION] = $description;
         }
         if ($deprecationDescription = $this->getFieldDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgs)) {
-            $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATED] = true;
-            $schemaDefinition[SchemaDefinition::ARGNAME_DEPRECATIONDESCRIPTION] = $deprecationDescription;
+            $schemaDefinition[SchemaDefinition::DEPRECATED] = true;
+            $schemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] = $deprecationDescription;
         }
         if ($args = $this->getSchemaFieldArgs($objectTypeResolver, $fieldName)) {
-            $schemaDefinition[SchemaDefinition::ARGNAME_ARGS] = $args;
+            $schemaDefinition[SchemaDefinition::ARGS] = $args;
         }
         $this->addSchemaDefinitionForField($schemaDefinition, $objectTypeResolver, $fieldName);
 
         if (Environment::enableSemanticVersionConstraints()) {
             if ($version = $this->getFieldVersion($objectTypeResolver, $fieldName)) {
-                $schemaDefinition[SchemaDefinition::ARGNAME_VERSION] = $version;
+                $schemaDefinition[SchemaDefinition::VERSION] = $version;
             }
         }
         if ($this->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null) {
-            $schemaDefinition[SchemaDefinition::ARGNAME_FIELD_IS_MUTATION] = true;
+            $schemaDefinition[SchemaDefinition::FIELD_IS_MUTATION] = true;
         }
 
         // Hook to override the values, eg: by the Field Deprecation List
@@ -776,7 +777,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             /**
              * If restricting the version, and this fieldResolver doesn't have any version, then show a warning
              */
-            if ($versionConstraint = $fieldArgs[SchemaDefinition::ARGNAME_VERSION_CONSTRAINT] ?? null) {
+            if ($versionConstraint = $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null) {
                 /**
                  * If this fieldResolver doesn't have versioning, then it accepts everything
                  */

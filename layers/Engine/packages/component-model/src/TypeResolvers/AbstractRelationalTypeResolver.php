@@ -16,6 +16,7 @@ use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDe
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinitionShapes;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
@@ -1181,13 +1182,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
 
         // By now, we have the schema definition
-        if (isset($this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS])) {
-            $connections = &$this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ARGNAME_CONNECTIONS];
+        if (isset($this->schemaDefinition[$typeSchemaKey][SchemaDefinition::CONNECTIONS])) {
+            $connections = &$this->schemaDefinition[$typeSchemaKey][SchemaDefinition::CONNECTIONS];
             foreach ($connections as &$connection) {
                 // If it is a recursion or repeated there will be no schema
-                if (isset($connection[SchemaDefinition::ARGNAME_TYPE_SCHEMA])) {
+                if (isset($connection[SchemaDefinition::TYPE_SCHEMA])) {
                     // Remove the typeSchema entry
-                    unset($connection[SchemaDefinition::ARGNAME_TYPE_SCHEMA]);
+                    unset($connection[SchemaDefinition::TYPE_SCHEMA]);
                 }
             }
         }
@@ -1202,18 +1203,18 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         if (in_array($class, $stackMessages['processed'])) {
             return [
                 $typeSchemaKey => [
-                    SchemaDefinition::ARGNAME_RECURSION => true,
+                    SchemaDefinition::RECURSION => true,
                 ]
             ];
         }
 
-        $isFlatShape = isset($options['shape']) && $options['shape'] == SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT;
+        $isFlatShape = isset($options['shape']) && $options['shape'] === SchemaDefinitionShapes::FLAT;
 
         // If "compressed" or printing a flat shape, and the resolver has already been added to the schema, then skip it
         if (($isFlatShape || ($options['compressed'] ?? null)) && in_array($class, $generalMessages['processed'])) {
             return [
                 $typeSchemaKey => [
-                    SchemaDefinition::ARGNAME_REPEATED => true,
+                    SchemaDefinition::REPEATED => true,
                 ]
             ];
         }
@@ -1227,7 +1228,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $this->processFlatShapeSchemaDefinition($options);
                 // Add the type to the list of all types, displayed when doing "shape=>flat"
                 /** @phpstan-ignore-next-line */
-                $generalMessages[SchemaDefinition::ARGNAME_TYPES][$typeSchemaKey] = $this->schemaDefinition[$typeSchemaKey];
+                $generalMessages[SchemaDefinition::TYPES][$typeSchemaKey] = $this->schemaDefinition[$typeSchemaKey];
             }
         }
 

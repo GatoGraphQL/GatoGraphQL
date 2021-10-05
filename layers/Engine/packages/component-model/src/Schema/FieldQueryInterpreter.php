@@ -976,13 +976,13 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                  * In that case, assign type `MIXED`, which implies "Do not cast"
                  **/
                 /** @var InputTypeResolverInterface */
-                $fieldOrDirectiveArgTypeResolver = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_TYPE_RESOLVER];
-                $fieldOrDirectiveArgTypeName = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_TYPE_NAME];
+                $fieldOrDirectiveArgTypeResolver = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::TYPE_RESOLVER];
+                $fieldOrDirectiveArgTypeName = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::TYPE_NAME];
                 // If not set, the return type is not an array
-                $fieldOrDirectiveArgIsArrayType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
-                $fieldOrDirectiveArgIsNonNullArrayItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
-                $fieldOrDirectiveArgIsArrayOfArraysType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
-                $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
+                $fieldOrDirectiveArgIsArrayType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::IS_ARRAY] ?? false;
+                $fieldOrDirectiveArgIsNonNullArrayItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
+                $fieldOrDirectiveArgIsArrayOfArraysType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
+                $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
 
                 /**
                  * This value will not be used with GraphQL, but can be used by PoP.
@@ -999,9 +999,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                  * to check if an input is array or not (and throw an error).
                  */
                 $fieldOrDirectiveArgMayBeArrayType = in_array($fieldOrDirectiveArgTypeName, [
-                    SchemaDefinition::TYPE_INPUT_OBJECT,
-                    SchemaDefinition::TYPE_OBJECT,
-                    SchemaDefinition::TYPE_MIXED,
+                    SchemaDefinitionTypes::TYPE_INPUT_OBJECT,
+                    SchemaDefinitionTypes::TYPE_OBJECT,
+                    SchemaDefinitionTypes::TYPE_MIXED,
                 ]);
                 if (!$fieldOrDirectiveArgMayBeArrayType) {
                     /**
@@ -1210,7 +1210,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $directiveArgNameTypes = [];
         if ($directiveSchemaDefinitionArgs = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $relationalTypeResolver)) {
             foreach ($directiveSchemaDefinitionArgs as $directiveSchemaDefinitionArg) {
-                $directiveArgNameTypes[$directiveSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $directiveSchemaDefinitionArg[SchemaDefinition::ARGNAME_TYPE_RESOLVER];
+                $directiveArgNameTypes[$directiveSchemaDefinitionArg[SchemaDefinition::NAME]] = $directiveSchemaDefinitionArg[SchemaDefinition::TYPE_RESOLVER];
             }
         }
         return $directiveArgNameTypes;
@@ -1234,11 +1234,11 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $directiveSchemaDefinitionArgsWithDefaultValue = array_filter(
                 $directiveSchemaDefinitionArgs,
                 function (array $directiveSchemaDefinitionArg): bool {
-                    return \array_key_exists(SchemaDefinition::ARGNAME_DEFAULT_VALUE, $directiveSchemaDefinitionArg);
+                    return \array_key_exists(SchemaDefinition::DEFAULT_VALUE, $directiveSchemaDefinitionArg);
                 }
             );
             foreach ($directiveSchemaDefinitionArgsWithDefaultValue as $directiveSchemaDefinitionArg) {
-                $directiveArgNameDefaultValues[$directiveSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $directiveSchemaDefinitionArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE];
+                $directiveArgNameDefaultValues[$directiveSchemaDefinitionArg[SchemaDefinition::NAME]] = $directiveSchemaDefinitionArg[SchemaDefinition::DEFAULT_VALUE];
             }
         }
         return $directiveArgNameDefaultValues;
@@ -1259,7 +1259,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $directiveResolverClass = get_class($directiveResolver);
         if (!isset($this->directiveSchemaDefinitionArgsCache[$directiveResolverClass][$relationalTypeResolverClass])) {
             $directiveSchemaDefinition = $directiveResolver->getSchemaDefinitionForDirective($relationalTypeResolver);
-            $directiveSchemaDefinitionArgs = $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? [];
+            $directiveSchemaDefinitionArgs = $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? [];
             $this->directiveSchemaDefinitionArgsCache[$directiveResolverClass][$relationalTypeResolverClass] = $directiveSchemaDefinitionArgs;
         }
         return $this->directiveSchemaDefinitionArgsCache[$directiveResolverClass][$relationalTypeResolverClass];
@@ -1291,7 +1291,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         }
         $fieldArgNameTypeResolvers = [];
         foreach ($fieldSchemaDefinitionArgs as $fieldSchemaDefinitionArg) {
-            $fieldArgNameTypeResolvers[$fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_TYPE_RESOLVER];
+            $fieldArgNameTypeResolvers[$fieldSchemaDefinitionArg[SchemaDefinition::NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::TYPE_RESOLVER];
         }
         return $fieldArgNameTypeResolvers;
     }
@@ -1316,11 +1316,11 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $fieldSchemaDefinitionArgsWithDefaultValue = array_filter(
             $fieldSchemaDefinitionArgs,
             function (array $fieldSchemaDefinitionArg): bool {
-                return \array_key_exists(SchemaDefinition::ARGNAME_DEFAULT_VALUE, $fieldSchemaDefinitionArg);
+                return \array_key_exists(SchemaDefinition::DEFAULT_VALUE, $fieldSchemaDefinitionArg);
             }
         );
         foreach ($fieldSchemaDefinitionArgsWithDefaultValue as $fieldSchemaDefinitionArg) {
-            $fieldArgNameDefaultValues[$fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_DEFAULT_VALUE];
+            $fieldArgNameDefaultValues[$fieldSchemaDefinitionArg[SchemaDefinition::NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::DEFAULT_VALUE];
         }
         return $fieldArgNameDefaultValues;
     }
@@ -1385,8 +1385,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $treatTypeCoercingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
             foreach (array_keys($failedCastingDirectiveArgErrorMessages) as $failedCastingDirectiveArgName) {
                 // If it is Error, also show the error message
-                $directiveArgIsArrayType = $directiveArgNameSchemaDefinition[$failedCastingDirectiveArgName][SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
-                $directiveArgIsArrayOfArraysType = $directiveArgNameSchemaDefinition[$failedCastingDirectiveArgName][SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
+                $directiveArgIsArrayType = $directiveArgNameSchemaDefinition[$failedCastingDirectiveArgName][SchemaDefinition::IS_ARRAY] ?? false;
+                $directiveArgIsArrayOfArraysType = $directiveArgNameSchemaDefinition[$failedCastingDirectiveArgName][SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
                 $composedDirectiveArgTypeResolver = $directiveArgNameTypeResolvers[$failedCastingDirectiveArgName];
                 $composedDirectiveArgTypeName = $composedDirectiveArgTypeResolver->getMaybeNamespacedTypeName();
                 if ($directiveArgIsArrayOfArraysType) {
@@ -1478,8 +1478,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $treatTypeCoercingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
             foreach (array_keys($failedCastingFieldArgErrorMessages) as $failedCastingFieldArgName) {
                 // If it is Error, also show the error message
-                $fieldArgIsArrayType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
-                $fieldArgIsArrayOfArraysType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
+                $fieldArgIsArrayType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::IS_ARRAY] ?? false;
+                $fieldArgIsArrayOfArraysType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
                 $composedFieldArgTypeResolver = $fieldArgNameTypeResolvers[$failedCastingFieldArgName];
                 $composedFieldArgTypeName = $composedFieldArgTypeResolver->getMaybeNamespacedTypeName();
                 if ($fieldArgIsArrayOfArraysType) {

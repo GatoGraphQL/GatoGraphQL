@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\TypeResolvers\EnumType;
 
-use PoP\API\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinitionShapes;
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 
 class SchemaFieldShapeEnumTypeResolver extends AbstractEnumTypeResolver
@@ -19,8 +19,8 @@ class SchemaFieldShapeEnumTypeResolver extends AbstractEnumTypeResolver
     public function getEnumValues(): array
     {
         return [
-            SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
-            SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_NESTED,
+            SchemaDefinitionShapes::FLAT,
+            SchemaDefinitionShapes::NESTED,
         ];
     }
 }

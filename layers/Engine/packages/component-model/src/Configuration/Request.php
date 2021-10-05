@@ -11,7 +11,7 @@ class Request
     /**
      * What version constraint to use for the API
      */
-    public const URLPARAM_VERSION_CONSTRAINT = SchemaDefinition::ARGNAME_VERSION_CONSTRAINT;
+    public const URLPARAM_VERSION_CONSTRAINT = SchemaDefinition::VERSION_CONSTRAINT;
     public const URLPARAM_VERSION_CONSTRAINT_FOR_FIELDS = 'fieldVersionConstraints';
     public const URLPARAM_VERSION_CONSTRAINT_FOR_DIRECTIVES = 'directiveVersionConstraints';
 
