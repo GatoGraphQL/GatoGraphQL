@@ -272,14 +272,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
          */
-        $schemaFieldArgNameResolvers = $this->hooksAPI->applyFilters(
+        $consolidatedFieldArgNameResolvers = $this->hooksAPI->applyFilters(
             HookNames::SCHEMA_FIELD_ARG_NAME_RESOLVERS,
             $this->getFieldArgNameResolvers($objectTypeResolver, $fieldName),
             $this,
             $objectTypeResolver,
             $fieldName,
         );
-        if ($schemaFieldArgNameResolvers !== []) {
+        if ($consolidatedFieldArgNameResolvers !== []) {
             /**
              * Add the version constraint (if enabled)
              * Only add the argument if this field or directive has a version
@@ -293,7 +293,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 }
             }
         }
-        $this->schemaFieldArgNameResolversCache[$cacheKey] = $schemaFieldArgNameResolvers;
+        $this->schemaFieldArgNameResolversCache[$cacheKey] = $consolidatedFieldArgNameResolvers;
         return $this->schemaFieldArgNameResolversCache[$cacheKey];
     }
 
@@ -375,8 +375,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $this->schemaFieldArgsCache[$cacheKey];
         }
         $schemaFieldArgs = [];
-        $schemaFieldArgNameResolvers = $this->getConsolidatedFieldArgNameResolvers($objectTypeResolver, $fieldName);
-        foreach ($schemaFieldArgNameResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
+        $consolidatedFieldArgNameResolvers = $this->getConsolidatedFieldArgNameResolvers($objectTypeResolver, $fieldName);
+        foreach ($consolidatedFieldArgNameResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
             $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
                 $fieldArgName,
                 $fieldArgInputTypeResolver,
