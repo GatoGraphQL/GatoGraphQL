@@ -31,7 +31,6 @@ class SchemaDefinition
     const ENABLE_ORDERED_ARGS = 'enableOrderedArgs';
     const RESULTS_IMPLEMENT_INTERFACE = 'resultsImplementInterface';
     const INTERFACES = 'interfaces';
-    const RELATIONAL = 'relational';
     const FIELDS = 'fields';
     const CONNECTIONS = 'connections';
     const GLOBAL_CONNECTIONS = 'globalConnections';
