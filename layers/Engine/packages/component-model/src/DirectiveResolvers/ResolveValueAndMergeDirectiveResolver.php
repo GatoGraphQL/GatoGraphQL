@@ -262,7 +262,30 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             if ($fieldTypeResolver instanceof ScalarTypeResolverInterface) {
                 /** @var ScalarTypeResolverInterface */
                 $fieldScalarTypeResolver = $fieldTypeResolver;
-                $value = $fieldScalarTypeResolver->serialize($value);
+                // @todo Obtain these from Schema Definition
+                $fieldIsArrayOfArraysType = false;
+                $fieldIsArrayType = false;
+                // $value = $fieldScalarTypeResolver->serialize($value);
+                if ($fieldIsArrayOfArraysType) {
+                    // If the value is an array of arrays, then serialize each subelement to the item type
+                    $value = $value === null ? null : array_map(
+                        // If it contains a null value, return it as is
+                        fn (?array $arrayValueElem) => $arrayValueElem === null ? null : array_map(
+                            fn (mixed $arrayOfArraysValueElem) => $arrayOfArraysValueElem === null ? null : $fieldScalarTypeResolver->serialize($arrayOfArraysValueElem),
+                            $arrayValueElem
+                        ),
+                        $value
+                    );
+                } elseif ($fieldIsArrayType) {
+                    // If the value is an array, then serialize each element to the item type
+                    $value = $value === null ? null : array_map(
+                        fn (mixed $arrayValueElem) => $arrayValueElem === null ? null : $fieldScalarTypeResolver->serialize($arrayValueElem),
+                        $value
+                    );
+                } else {
+                    // Otherwise, simply serialize the given value directly
+                    $value = $value === null ? null : $fieldScalarTypeResolver->serialize($value);
+                }
             }
         }
         $dbItems[(string)$id][$fieldOutputKey] = $value;
