@@ -8,7 +8,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition as UpstreamSchemaDefinition;
 
 class SchemaDefinition extends UpstreamSchemaDefinition
 {
-    const ARGNAME_PERSISTED_FRAGMENTS = 'persistedFragments';
-    const ARGNAME_PERSISTED_QUERIES = 'persistedQueries';
-    const ARGNAME_FRAGMENT_RESOLUTION = 'resolution';
+    const PERSISTED_FRAGMENTS = 'persistedFragments';
+    const PERSISTED_QUERIES = 'persistedQueries';
+    const FRAGMENT_RESOLUTION = 'resolution';
 }
