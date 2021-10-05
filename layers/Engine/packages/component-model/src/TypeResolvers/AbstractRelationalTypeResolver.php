@@ -16,6 +16,7 @@ use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDe
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinitionShapes;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
@@ -1207,7 +1208,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             ];
         }
 
-        $isFlatShape = isset($options['shape']) && $options['shape'] == SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT;
+        $isFlatShape = isset($options['shape']) && $options['shape'] === SchemaDefinitionShapes::FLAT;
 
         // If "compressed" or printing a flat shape, and the resolver has already been added to the schema, then skip it
         if (($isFlatShape || ($options['compressed'] ?? null)) && in_array($class, $generalMessages['processed'])) {

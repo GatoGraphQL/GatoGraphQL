@@ -22,6 +22,7 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Schema\SchemaDefinitionShapes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\Translation\TranslationAPIInterface;
@@ -96,7 +97,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             // These are the configuration options to work with the "full schema"
             $fieldArgs = [
                 'deep' => true,
-                'shape' => SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
+                'shape' => SchemaDefinitionShapes::FLAT,
                 'compressed' => true,
                 'useTypeName' => true,
             ];

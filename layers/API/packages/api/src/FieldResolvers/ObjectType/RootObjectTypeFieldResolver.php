@@ -13,6 +13,7 @@ use PoP\API\TypeResolvers\EnumType\SchemaFieldShapeEnumTypeResolver;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\Schema\SchemaDefinitionShapes;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -115,8 +116,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             ['fullSchema' => 'deep'] => $this->translationAPI->__('Make a deep introspection of the fields, for all nested objects', 'api'),
             ['fullSchema' => 'shape'] => sprintf(
                 $this->translationAPI->__('How to shape the schema output: \'%s\', in which case all types are listed together, or \'%s\', in which the types are listed following where they appear in the graph', 'api'),
-                SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
-                SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_NESTED
+                SchemaDefinitionShapes::FLAT,
+                SchemaDefinitionShapes::NESTED
             ),
             ['fullSchema' => 'compressed'] => $this->translationAPI->__('Output each resolver\'s schema data only once to compress the output. Valid only when field \'deep\' is `true`', 'api'),
             ['fullSchema' => 'useTypeName'] => sprintf(
@@ -131,7 +132,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ([$fieldName => $fieldArgName]) {
             ['fullSchema' => 'deep'] => true,
-            ['fullSchema' => 'shape'] => SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT,
+            ['fullSchema' => 'shape'] => SchemaDefinitionShapes::FLAT,
             ['fullSchema' => 'compressed'] => false,
             ['fullSchema' => 'useTypeName'] => true,
             default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
@@ -192,7 +193,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         ]
                     );
                     // If it is flat shape, all types will be added under $generalMessages
-                    $isFlatShape = $schemaOptions['shape'] == SchemaDefinition::ARGVALUE_SCHEMA_SHAPE_FLAT;
+                    $isFlatShape = $schemaOptions['shape'] == SchemaDefinitionShapes::FLAT;
                     if ($isFlatShape) {
                         $generalMessages[SchemaDefinition::ARGNAME_TYPES] = [];
                     }
