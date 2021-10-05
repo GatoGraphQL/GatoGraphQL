@@ -35,7 +35,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
      * be exposed to the user (eg: "accessControlLists")
      */
     public function skipAddingToSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
-    public function getSchemaDefinitionForField(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array;
+    public function getFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array;
     public function getFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
     /**
      * Indicate if the fields are global (i.e. they apply to all typeResolvers)

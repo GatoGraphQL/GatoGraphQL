@@ -529,7 +529,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
         $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs);
-        $fieldSchemaDefinition = $this->getSchemaDefinitionForField($objectTypeResolver, $fieldName, $fieldArgs);
+        $fieldSchemaDefinition = $this->getFieldSchemaDefinition($objectTypeResolver, $fieldName, $fieldArgs);
         if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
             /**
              * Validate mandatory values. If it produces errors, return immediately
@@ -632,7 +632,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     public function resolveFieldValidationDeprecationDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
-        $fieldSchemaDefinition = $this->getSchemaDefinitionForField($objectTypeResolver, $fieldName, $fieldArgs);
+        $fieldSchemaDefinition = $this->getFieldSchemaDefinition($objectTypeResolver, $fieldName, $fieldArgs);
         if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
             return $this->getEnumFieldOrDirectiveArgumentDeprecations(
                 $fieldArgsSchemaDefinition,
@@ -657,7 +657,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * Get the "schema" properties as for the fieldName
      */
-    final public function getSchemaDefinitionForField(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
+    final public function getFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
     {
         // First check if the value was cached
         $key = $objectTypeResolver->getNamespacedTypeName() . '|' . $fieldName . '|' . json_encode($fieldArgs);
