@@ -81,32 +81,11 @@ class SchemaHelpers
 
     public static function getSchemaFieldArgEnumValueDefinitions(array $schemaFieldArgs)
     {
-        $enumValuesOrDefinitions = array_map(
+        return array_map(
             function ($schemaFieldArg) {
                 return $schemaFieldArg[SchemaDefinition::ARGNAME_ENUM_VALUES];
             },
             $schemaFieldArgs
         );
-        if (!$enumValuesOrDefinitions) {
-            return [];
-        }
-        $enumValueDefinitions = [];
-        foreach ($enumValuesOrDefinitions as $fieldArgName => $fieldArgEnumValuesOrDefinitions) {
-            // The array is either an array of elemValues (eg: ["first", "second"]) or an array of elemValueDefinitions (eg: ["first" => ["name" => "first"], "second" => ["name" => "second"]])
-            // To tell one from the other, check if the first element from the array is itself an array. In that case, it's a definition. Otherwise, it's already the value.
-            $firstElemKey = key($fieldArgEnumValuesOrDefinitions);
-            if (is_array($fieldArgEnumValuesOrDefinitions[$firstElemKey])) {
-                $enumValueDefinitions[$fieldArgName] = $fieldArgEnumValuesOrDefinitions;
-            } else {
-                // Create an array representing the enumValue definition
-                // Since only the enumValues were defined, these have no description/deprecated data, so no need to add these either
-                foreach ($fieldArgEnumValuesOrDefinitions as $enumValue) {
-                    $enumValueDefinitions[$fieldArgName][$enumValue] = [
-                        SchemaDefinition::ARGNAME_NAME => $enumValue,
-                    ];
-                }
-            }
-        }
-        return $enumValueDefinitions;
     }
 }
