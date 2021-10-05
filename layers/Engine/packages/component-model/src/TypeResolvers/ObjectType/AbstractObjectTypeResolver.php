@@ -123,17 +123,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return null;
     }
 
-    final public function enableOrderedSchemaFieldArgs(string $field): bool
-    {
-        // Get the value from a fieldResolver, from the first one that resolves it
-        if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
-            $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
-            return $objectTypeFieldResolvers[0]->enableOrderedSchemaFieldArgs($this, $fieldName);
-        }
-
-        return false;
-    }
-
     /**
      * @return array<string,mixed>|null `null` if there are no objectTypeFieldResolvers for the field
      */
