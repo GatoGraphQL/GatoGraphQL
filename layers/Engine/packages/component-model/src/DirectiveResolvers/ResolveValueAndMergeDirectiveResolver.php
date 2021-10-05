@@ -264,9 +264,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             if ($fieldTypeResolver instanceof ScalarTypeResolverInterface) {
                 /** @var ScalarTypeResolverInterface */
                 $fieldScalarTypeResolver = $fieldTypeResolver;
-                $fieldIsArrayOfArraysType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
-                $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
-                if ($fieldIsArrayOfArraysType) {
+                if ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false) {
                     // If the value is an array of arrays, then serialize each subelement to the item type
                     $value = $value === null ? null : array_map(
                         // If it contains a null value, return it as is
@@ -276,7 +274,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                         ),
                         $value
                     );
-                } elseif ($fieldIsArrayType) {
+                } elseif ($fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false) {
                     // If the value is an array, then serialize each element to the item type
                     $value = $value === null ? null : array_map(
                         fn (mixed $arrayValueElem) => $arrayValueElem === null ? null : $fieldScalarTypeResolver->serialize($arrayValueElem),
