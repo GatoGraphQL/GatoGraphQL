@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Resolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 
 trait EnumTypeSchemaDefinitionResolverTrait
 {
@@ -14,15 +15,17 @@ trait EnumTypeSchemaDefinitionResolverTrait
      */
     protected function doAddSchemaDefinitionEnumValuesForField(
         array &$schemaDefinition,
-        array $enumValues,
-        array $enumValueDeprecationDescriptions,
-        array $enumValueDescriptions,
-        ?string $enumName
+        EnumTypeResolverInterface $enumTypeResolver,
     ): void {
         $enums = [];
+        $enumValues = $enumTypeResolver->getEnumValues();
+        $enumValueDeprecationDescriptions = $enumTypeResolver->getEnumValueDeprecationMessages();
+        $enumValueDescriptions = $enumTypeResolver->getEnumValueDescriptions();
+        $enumName = $enumTypeResolver->getMaybeNamespacedTypeName();
         foreach ($enumValues as $enumValue) {
             $enum = [
                 SchemaDefinition::ARGNAME_NAME => $enumValue,
+                SchemaDefinition::ARGNAME_ENUM_NAME => $enumName,
             ];
             if ($description = $enumValueDescriptions[$enumValue] ?? null) {
                 $enum[SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
@@ -34,9 +37,5 @@ trait EnumTypeSchemaDefinitionResolverTrait
             $enums[$enumValue] = $enum;
         }
         $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = $enums;
-        // Indicate the unique name, to unify all types to the same Enum
-        if ($enumName) {
-            $schemaDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $enumName;
-        }
     }
 }

@@ -448,10 +448,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $fieldEnumTypeResolver = $fieldTypeResolver;
             $this->doAddSchemaDefinitionEnumValuesForField(
                 $schemaDefinition,
-                $fieldEnumTypeResolver->getEnumValues(),
-                $fieldEnumTypeResolver->getEnumValueDeprecationMessages(),
-                $fieldEnumTypeResolver->getEnumValueDescriptions(),
-                $fieldEnumTypeResolver->getMaybeNamespacedTypeName()
+                $fieldEnumTypeResolver,
             );
         }
     }

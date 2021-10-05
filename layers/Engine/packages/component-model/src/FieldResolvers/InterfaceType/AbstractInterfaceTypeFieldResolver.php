@@ -294,10 +294,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             $fieldEnumTypeResolver = $fieldTypeResolver;
             $this->doAddSchemaDefinitionEnumValuesForField(
                 $schemaDefinition,
-                $fieldEnumTypeResolver->getEnumValues(),
-                $fieldEnumTypeResolver->getEnumValueDeprecationMessages(),
-                $fieldEnumTypeResolver->getEnumValueDescriptions(),
-                $fieldEnumTypeResolver->getMaybeNamespacedTypeName()
+                $fieldEnumTypeResolver
             );
         }
     }

@@ -30,10 +30,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
             $argEnumTypeResolver = $argInputTypeResolver;
             $this->doAddSchemaDefinitionEnumValuesForField(
                 $schemaFieldOrDirectiveArgDefinition,
-                $argEnumTypeResolver->getEnumValues(),
-                $argEnumTypeResolver->getEnumValueDeprecationMessages(),
-                $argEnumTypeResolver->getEnumValueDescriptions(),
-                $argEnumTypeResolver->getMaybeNamespacedTypeName()
+                $argEnumTypeResolver,
             );
         } else {
             $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_TYPE_NAME] = $argInputTypeResolver->getMaybeNamespacedTypeName();
