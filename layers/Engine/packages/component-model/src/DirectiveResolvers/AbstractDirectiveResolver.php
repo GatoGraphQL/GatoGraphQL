@@ -438,7 +438,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         array $directiveArgs = []
     ): ?array {
         $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs);
-        $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($relationalTypeResolver);
+        $directiveSchemaDefinition = $this->getDirectiveSchemaDefinition($relationalTypeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
             /**
              * Validate mandatory values. If it produces errors, return immediately
@@ -795,7 +795,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
 
     public function resolveDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): ?string
     {
-        $directiveSchemaDefinition = $this->getSchemaDefinitionForDirective($relationalTypeResolver);
+        $directiveSchemaDefinition = $this->getDirectiveSchemaDefinition($relationalTypeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
             if (
                 $maybeDeprecations = $this->getEnumFieldOrDirectiveArgumentDeprecations(
@@ -1145,7 +1145,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return false;
     }
 
-    public function getSchemaDefinitionForDirective(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         // First check if the value was cached
         $key = $relationalTypeResolver->getNamespacedTypeName();

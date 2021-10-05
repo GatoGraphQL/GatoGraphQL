@@ -1265,7 +1265,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $relationalTypeResolverClass = get_class($relationalTypeResolver);
         $directiveResolverClass = get_class($directiveResolver);
         if (!isset($this->directiveSchemaDefinitionArgsCache[$directiveResolverClass][$relationalTypeResolverClass])) {
-            $directiveSchemaDefinition = $directiveResolver->getSchemaDefinitionForDirective($relationalTypeResolver);
+            $directiveSchemaDefinition = $directiveResolver->getDirectiveSchemaDefinition($relationalTypeResolver);
             $directiveSchemaDefinitionArgs = $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? [];
             $this->directiveSchemaDefinitionArgsCache[$directiveResolverClass][$relationalTypeResolverClass] = $directiveSchemaDefinitionArgs;
         }
