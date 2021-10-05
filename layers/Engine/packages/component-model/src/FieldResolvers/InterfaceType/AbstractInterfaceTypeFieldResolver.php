@@ -219,11 +219,11 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /**
      * @return array<string, InputTypeResolverInterface>
      */
-    public function getSchemaFieldArgNameResolvers(string $fieldName): array
+    public function getConsolidatedFieldArgNameResolvers(string $fieldName): array
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldArgNameResolvers($fieldName);
+            return $schemaDefinitionResolver->getConsolidatedFieldArgNameResolvers($fieldName);
         }
         return [];
     }

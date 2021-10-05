@@ -24,7 +24,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
     /**
      * @return array<string, InputTypeResolverInterface>
      */
-    public function getSchemaFieldArgNameResolvers(string $fieldName): array;
+    public function getConsolidatedFieldArgNameResolvers(string $fieldName): array;
     public function getSchemaFieldArgDescription(string $fieldName, string $fieldArgName): ?string;
     public function getSchemaFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed;
     public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int;

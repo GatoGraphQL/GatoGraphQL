@@ -261,7 +261,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getSchemaFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    final public function getConsolidatedFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         // Cache the result
         $cacheKey = $objectTypeResolver::class . '.' . $fieldName;
@@ -375,7 +375,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $this->schemaFieldArgsCache[$cacheKey];
         }
         $schemaFieldArgs = [];
-        $schemaFieldArgNameResolvers = $this->getSchemaFieldArgNameResolvers($objectTypeResolver, $fieldName);
+        $schemaFieldArgNameResolvers = $this->getConsolidatedFieldArgNameResolvers($objectTypeResolver, $fieldName);
         foreach ($schemaFieldArgNameResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
             $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
                 $fieldArgName,
