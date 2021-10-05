@@ -549,20 +549,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
             if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
                 /**
-                 * Validate array types are provided as arrays. If it produces errors, return immediately
-                 */
-                if (
-                    $maybeErrors = $this->validateArrayTypeFieldOrDirectiveArguments(
-                        $fieldArgsSchemaDefinition,
-                        $fieldName,
-                        $fieldArgs,
-                        ResolverTypes::FIELD
-                    )
-                ) {
-                    return $maybeErrors;
-                }
-
-                /**
                  * Validate enums
                  */
                 if (
