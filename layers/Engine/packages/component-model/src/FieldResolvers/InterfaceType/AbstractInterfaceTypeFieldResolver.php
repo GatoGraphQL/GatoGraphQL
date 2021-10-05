@@ -219,38 +219,38 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /**
      * @return array<string, InputTypeResolverInterface>
      */
-    public function getSchemaFieldArgNameResolvers(string $fieldName): array
+    public function getConsolidatedFieldArgNameResolvers(string $fieldName): array
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldArgNameResolvers($fieldName);
+            return $schemaDefinitionResolver->getConsolidatedFieldArgNameResolvers($fieldName);
         }
         return [];
     }
 
-    public function getSchemaFieldArgDescription(string $fieldName, string $fieldArgName): ?string
+    public function getConsolidatedFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldArgDescription($fieldName, $fieldArgName);
+            return $schemaDefinitionResolver->getConsolidatedFieldArgDescription($fieldName, $fieldArgName);
         }
         return null;
     }
 
-    public function getSchemaFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
+    public function getConsolidatedFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldArgDefaultValue($fieldName, $fieldArgName);
+            return $schemaDefinitionResolver->getConsolidatedFieldArgDefaultValue($fieldName, $fieldArgName);
         }
         return null;
     }
 
-    public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
+    public function getConsolidatedFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldArgTypeModifiers($fieldName, $fieldArgName);
+            return $schemaDefinitionResolver->getConsolidatedFieldArgTypeModifiers($fieldName, $fieldArgName);
         }
         return SchemaTypeModifiers::NONE;
     }
