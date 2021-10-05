@@ -43,25 +43,6 @@ class SchemaHelpers
         );
     }
 
-    public static function convertToSchemaFieldArgEnumValueDefinitions(
-        EnumTypeResolverInterface $enumTypeResolver,
-    ): array {
-        $enumValues = $enumTypeResolver->getEnumOutputValues();
-        $enumValueDescriptions = $enumTypeResolver->getEnumValueDescriptions();
-        $enumValueDefinitions = [];
-        // Create an array representing the enumValue definition
-        // Since only the enumValues were defined, these have no description/deprecated data, so no need to add these either
-        foreach ($enumValues as $enumValue) {
-            $enumValueDefinitions[$enumValue] = [
-                SchemaDefinition::ARGNAME_NAME => $enumValue,
-            ];
-            if ($description = $enumValueDescriptions[$enumValue] ?? null) {
-                $enumValueDefinitions[$enumValue][SchemaDefinition::ARGNAME_DESCRIPTION] = $description;
-            }
-        }
-        return $enumValueDefinitions;
-    }
-
     /**
      * Remove the deprecated enumValues from the schema definition
      */

@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Resolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 trait FieldOrDirectiveSchemaDefinitionResolverTrait
 {
+    use EnumTypeSchemaDefinitionResolverTrait;
+    
     final public function getFieldOrDirectiveArgSchemaDefinition(
         string $argName,
         InputTypeResolverInterface $argInputTypeResolver,
@@ -27,9 +28,12 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
             $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_TYPE_NAME] = SchemaDefinition::TYPE_ENUM;
             /** @var EnumTypeResolverInterface */
             $argEnumTypeResolver = $argInputTypeResolver;
-            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_ENUM_NAME] = $argEnumTypeResolver->getMaybeNamespacedTypeName();
-            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                $argEnumTypeResolver
+            $this->doAddSchemaDefinitionEnumValuesForField(
+                $schemaFieldOrDirectiveArgDefinition,
+                $argEnumTypeResolver->getEnumValues(),
+                $argEnumTypeResolver->getEnumValueDeprecationMessages(),
+                $argEnumTypeResolver->getEnumValueDescriptions(),
+                $argEnumTypeResolver->getMaybeNamespacedTypeName()
             );
         } else {
             $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_TYPE_NAME] = $argInputTypeResolver->getMaybeNamespacedTypeName();
