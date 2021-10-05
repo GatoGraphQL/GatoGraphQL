@@ -1250,7 +1250,12 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     {
         $objectTypeResolverClass = get_class($objectTypeResolver);
         if (!array_key_exists($field, $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass] ?? [])) {
-            $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass][$field] = $objectTypeResolver->getSchemaFieldArgs($field);
+            $fieldSchemaDefinitionArgs = null;
+            $fieldSchemaDefinition = $objectTypeResolver->getFieldSchemaDefinition($field);
+            if ($fieldSchemaDefinition !== null) {
+                $fieldSchemaDefinitionArgs = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? [];
+            }
+            $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass][$field] = $fieldSchemaDefinitionArgs;
         }
         return $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass][$field];
     }
