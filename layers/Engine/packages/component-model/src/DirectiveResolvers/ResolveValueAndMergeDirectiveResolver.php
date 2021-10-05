@@ -244,15 +244,15 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 );
                 $dbItems[(string)$id][$fieldOutputKey] = null;
             }
-        } else {
-            // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-            $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey(
-                $relationalTypeResolver,
-                $field,
-                $object,
-            );
-            $dbItems[(string)$id][$fieldOutputKey] = $value;
+            return;
         }
+        // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
+        $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey(
+            $relationalTypeResolver,
+            $field,
+            $object,
+        );
+        $dbItems[(string)$id][$fieldOutputKey] = $value;
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
