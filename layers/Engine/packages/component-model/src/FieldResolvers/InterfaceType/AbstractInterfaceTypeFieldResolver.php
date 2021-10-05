@@ -237,20 +237,20 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return null;
     }
 
-    public function getSchemaFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
+    public function getConsolidatedFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldArgDefaultValue($fieldName, $fieldArgName);
+            return $schemaDefinitionResolver->getConsolidatedFieldArgDefaultValue($fieldName, $fieldArgName);
         }
         return null;
     }
 
-    public function getSchemaFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
+    public function getConsolidatedFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldArgTypeModifiers($fieldName, $fieldArgName);
+            return $schemaDefinitionResolver->getConsolidatedFieldArgTypeModifiers($fieldName, $fieldArgName);
         }
         return SchemaTypeModifiers::NONE;
     }
