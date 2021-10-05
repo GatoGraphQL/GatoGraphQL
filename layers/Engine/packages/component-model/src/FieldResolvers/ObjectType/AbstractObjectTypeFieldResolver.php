@@ -273,7 +273,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          * input "categories" to field "Root.createPost")
          */
         $consolidatedFieldArgNameResolvers = $this->hooksAPI->applyFilters(
-            HookNames::SCHEMA_FIELD_ARG_NAME_RESOLVERS,
+            HookNames::FIELD_ARG_NAME_RESOLVERS,
             $this->getFieldArgNameResolvers($objectTypeResolver, $fieldName),
             $this,
             $objectTypeResolver,
@@ -309,7 +309,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $this->consolidatedFieldArgDescriptionCache[$cacheKey];
         }
         $this->consolidatedFieldArgDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
-            HookNames::SCHEMA_FIELD_ARG_DESCRIPTION,
+            HookNames::FIELD_ARG_DESCRIPTION,
             $this->getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
             $this,
             $objectTypeResolver,
@@ -331,7 +331,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $this->consolidatedFieldArgDefaultValueCache[$cacheKey];
         }
         $this->consolidatedFieldArgDefaultValueCache[$cacheKey] = $this->hooksAPI->applyFilters(
-            HookNames::SCHEMA_FIELD_ARG_DEFAULT_VALUE,
+            HookNames::FIELD_ARG_DEFAULT_VALUE,
             $this->getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
             $this,
             $objectTypeResolver,
@@ -353,7 +353,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $this->consolidatedFieldArgTypeModifiersCache[$cacheKey];
         }
         $this->consolidatedFieldArgTypeModifiersCache[$cacheKey] = $this->hooksAPI->applyFilters(
-            HookNames::SCHEMA_FIELD_ARG_TYPE_MODIFIERS,
+            HookNames::FIELD_ARG_TYPE_MODIFIERS,
             $this->getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
             $this,
             $objectTypeResolver,
