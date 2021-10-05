@@ -36,13 +36,13 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     {
         $this->hooksAPI->addFilter(
             HookNames::FIELD_ARG_NAME_RESOLVERS,
-            array($this, 'maybeAddSchemaFieldArgNameResolvers'),
+            array($this, 'maybeAddFieldArgNameResolvers'),
             10,
             4
         );
         $this->hooksAPI->addFilter(
             HookNames::FIELD_ARG_DESCRIPTION,
-            array($this, 'maybeAddSchemaFieldArgDescription'),
+            array($this, 'maybeAddFieldArgDescription'),
             10,
             5
         );
@@ -54,22 +54,22 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    public function maybeAddSchemaFieldArgNameResolvers(
-        array $schemaFieldArgNameResolvers,
+    public function maybeAddFieldArgNameResolvers(
+        array $fieldArgNameResolvers,
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
     ): array {
         // Only for the specific combinations of Type and fieldName
         if (!$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
-            return $schemaFieldArgNameResolvers;
+            return $fieldArgNameResolvers;
         }
-        $schemaFieldArgNameResolvers[MutationInputProperties::FEATUREDIMAGE_ID] = $this->idScalarTypeResolver;
-        return $schemaFieldArgNameResolvers;
+        $fieldArgNameResolvers[MutationInputProperties::FEATUREDIMAGE_ID] = $this->idScalarTypeResolver;
+        return $fieldArgNameResolvers;
     }
 
-    public function maybeAddSchemaFieldArgDescription(
-        ?string $schemaFieldArgDescription,
+    public function maybeAddFieldArgDescription(
+        ?string $fieldArgDescription,
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
@@ -77,7 +77,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     ): ?string {
         // Only for the newly added fieldArgName
         if ($fieldArgName !== MutationInputProperties::FEATUREDIMAGE_ID || !$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
-            return $schemaFieldArgDescription;
+            return $fieldArgDescription;
         }
         return sprintf(
             $this->translationAPI->__('The ID of the featured image (of type %s)', 'custompost-mutations'),
