@@ -24,6 +24,7 @@ use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTr
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\ComponentModel\Schema\SchemaDefinitionTypes;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -681,7 +682,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
             $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;
         } elseif ($fieldTypeResolver instanceof EnumTypeResolverInterface) {
-            $type = SchemaDefinition::TYPE_ENUM;
+            $type = SchemaDefinitionTypes::TYPE_ENUM;
         } else {
             // Scalar type
             $type = $fieldTypeResolver->getMaybeNamespacedTypeName();

@@ -15,6 +15,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterfac
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinitionTypes;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -466,9 +467,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         // If may be array or not, then there's no validation to do
                         $fieldTypeName = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_NAME];
                         $fieldMayBeArrayType = in_array($fieldTypeName, [
-                            SchemaDefinition::TYPE_INPUT_OBJECT,
-                            SchemaDefinition::TYPE_OBJECT,
-                            SchemaDefinition::TYPE_MIXED,
+                            SchemaDefinitionTypes::TYPE_INPUT_OBJECT,
+                            SchemaDefinitionTypes::TYPE_OBJECT,
+                            SchemaDefinitionTypes::TYPE_MIXED,
                         ]);
                         if (!$fieldMayBeArrayType) {
                             $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;

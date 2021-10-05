@@ -11,8 +11,8 @@ use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractDynamicType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractSchemaDefinitionReferenceObject;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
-use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
+use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionTypes as GraphQLServerSchemaDefinitionTypes;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaHelpers;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
@@ -23,6 +23,7 @@ use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinitionShapes;
+use PoP\ComponentModel\Schema\SchemaDefinitionTypes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\Translation\TranslationAPIInterface;
@@ -388,20 +389,20 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         // Expand the full schema with more data that is needed for GraphQL
         // Add the scalar types
         $scalarTypeNames = [
-            GraphQLServerSchemaDefinition::TYPE_ID,
-            GraphQLServerSchemaDefinition::TYPE_STRING,
-            GraphQLServerSchemaDefinition::TYPE_INT,
-            GraphQLServerSchemaDefinition::TYPE_FLOAT,
-            GraphQLServerSchemaDefinition::TYPE_BOOL,
-            GraphQLServerSchemaDefinition::TYPE_OBJECT,
-            GraphQLServerSchemaDefinition::TYPE_ANY_SCALAR,
-            GraphQLServerSchemaDefinition::TYPE_MIXED,
-            GraphQLServerSchemaDefinition::TYPE_ARRAY_KEY,
-            GraphQLServerSchemaDefinition::TYPE_DATE,
-            GraphQLServerSchemaDefinition::TYPE_TIME,
-            GraphQLServerSchemaDefinition::TYPE_URL,
-            GraphQLServerSchemaDefinition::TYPE_EMAIL,
-            GraphQLServerSchemaDefinition::TYPE_IP,
+            GraphQLServerSchemaDefinitionTypes::TYPE_ID,
+            GraphQLServerSchemaDefinitionTypes::TYPE_STRING,
+            GraphQLServerSchemaDefinitionTypes::TYPE_INT,
+            GraphQLServerSchemaDefinitionTypes::TYPE_FLOAT,
+            GraphQLServerSchemaDefinitionTypes::TYPE_BOOL,
+            GraphQLServerSchemaDefinitionTypes::TYPE_OBJECT,
+            GraphQLServerSchemaDefinitionTypes::TYPE_ANY_SCALAR,
+            GraphQLServerSchemaDefinitionTypes::TYPE_MIXED,
+            GraphQLServerSchemaDefinitionTypes::TYPE_ARRAY_KEY,
+            GraphQLServerSchemaDefinitionTypes::TYPE_DATE,
+            GraphQLServerSchemaDefinitionTypes::TYPE_TIME,
+            GraphQLServerSchemaDefinitionTypes::TYPE_URL,
+            GraphQLServerSchemaDefinitionTypes::TYPE_EMAIL,
+            GraphQLServerSchemaDefinitionTypes::TYPE_IP,
         ];
         foreach ($scalarTypeNames as $scalarTypeName) {
             $this->fullSchemaDefinition[SchemaDefinition::ARGNAME_TYPES][$scalarTypeName] = [
@@ -451,7 +452,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                     $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false,
                 );
                 // If it is an input object, it may have its own args to also convert
-                if ($typeName === SchemaDefinition::TYPE_INPUT_OBJECT) {
+                if ($typeName === SchemaDefinitionTypes::TYPE_INPUT_OBJECT) {
                     foreach (($fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ?? []) as $inputFieldArgName => $inputFieldArgDefinition) {
                         $inputFieldTypeName = $inputFieldArgDefinition[SchemaDefinition::ARGNAME_TYPE_NAME];
                         $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGNAME_ARGS][$inputFieldArgName][SchemaDefinition::ARGNAME_TYPE_NAME] = SchemaHelpers::getTypeToOutputInSchema(
@@ -517,7 +518,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS] ??= [];
         $directiveSchemaDefinition[SchemaDefinition::ARGNAME_ARGS][] = [
             SchemaDefinition::ARGNAME_NAME => SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER,
-            SchemaDefinition::ARGNAME_TYPE_NAME => GraphQLServerSchemaDefinition::TYPE_INT,
+            SchemaDefinition::ARGNAME_TYPE_NAME => GraphQLServerSchemaDefinitionTypes::TYPE_INT,
             SchemaDefinition::ARGNAME_DESCRIPTION => $this->translationAPI->__('Nest the directive under another one, indicated as a relative position from this one (a negative int)', 'graphql-server'),
         ];
     }

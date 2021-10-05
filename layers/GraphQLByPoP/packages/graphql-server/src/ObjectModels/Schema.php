@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
 use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
-use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
+use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionTypes as GraphQLServerSchemaDefinitionTypes;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionTokens;
@@ -36,20 +36,20 @@ class Schema
         // be references from the ObjectType: Fields/Connections/Directives
         // 1. Initialize all the Scalar types
         $scalarTypeNames = [
-            GraphQLServerSchemaDefinition::TYPE_ID,
-            GraphQLServerSchemaDefinition::TYPE_STRING,
-            GraphQLServerSchemaDefinition::TYPE_INT,
-            GraphQLServerSchemaDefinition::TYPE_FLOAT,
-            GraphQLServerSchemaDefinition::TYPE_BOOL,
-            GraphQLServerSchemaDefinition::TYPE_OBJECT,
-            GraphQLServerSchemaDefinition::TYPE_ANY_SCALAR,
-            GraphQLServerSchemaDefinition::TYPE_MIXED,
-            GraphQLServerSchemaDefinition::TYPE_ARRAY_KEY,
-            GraphQLServerSchemaDefinition::TYPE_DATE,
-            GraphQLServerSchemaDefinition::TYPE_TIME,
-            GraphQLServerSchemaDefinition::TYPE_URL,
-            GraphQLServerSchemaDefinition::TYPE_EMAIL,
-            GraphQLServerSchemaDefinition::TYPE_IP,
+            GraphQLServerSchemaDefinitionTypes::TYPE_ID,
+            GraphQLServerSchemaDefinitionTypes::TYPE_STRING,
+            GraphQLServerSchemaDefinitionTypes::TYPE_INT,
+            GraphQLServerSchemaDefinitionTypes::TYPE_FLOAT,
+            GraphQLServerSchemaDefinitionTypes::TYPE_BOOL,
+            GraphQLServerSchemaDefinitionTypes::TYPE_OBJECT,
+            GraphQLServerSchemaDefinitionTypes::TYPE_ANY_SCALAR,
+            GraphQLServerSchemaDefinitionTypes::TYPE_MIXED,
+            GraphQLServerSchemaDefinitionTypes::TYPE_ARRAY_KEY,
+            GraphQLServerSchemaDefinitionTypes::TYPE_DATE,
+            GraphQLServerSchemaDefinitionTypes::TYPE_TIME,
+            GraphQLServerSchemaDefinitionTypes::TYPE_URL,
+            GraphQLServerSchemaDefinitionTypes::TYPE_EMAIL,
+            GraphQLServerSchemaDefinitionTypes::TYPE_IP,
         ];
         $this->types = [];
         foreach ($scalarTypeNames as $typeName) {

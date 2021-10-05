@@ -14,6 +14,7 @@ use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaDefinitionShapes;
+use PoP\ComponentModel\Schema\SchemaDefinitionTypes;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -122,7 +123,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             ['fullSchema' => 'compressed'] => $this->translationAPI->__('Output each resolver\'s schema data only once to compress the output. Valid only when field \'deep\' is `true`', 'api'),
             ['fullSchema' => 'useTypeName'] => sprintf(
                 $this->translationAPI->__('Replace type \'%s\' with the actual type name (such as \'Post\')', 'api'),
-                SchemaDefinition::TYPE_ID
+                SchemaDefinitionTypes::TYPE_ID
             ),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Resolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinitionTypes;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -25,7 +26,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
             SchemaDefinition::ARGNAME_TYPE_RESOLVER => $argInputTypeResolver,
         ];
         if ($argInputTypeResolver instanceof EnumTypeResolverInterface) {
-            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_TYPE_NAME] = SchemaDefinition::TYPE_ENUM;
+            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_TYPE_NAME] = SchemaDefinitionTypes::TYPE_ENUM;
             /** @var EnumTypeResolverInterface */
             $argEnumTypeResolver = $argInputTypeResolver;
             $this->doAddSchemaDefinitionEnumValuesForField(

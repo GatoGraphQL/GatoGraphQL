@@ -999,9 +999,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                  * to check if an input is array or not (and throw an error).
                  */
                 $fieldOrDirectiveArgMayBeArrayType = in_array($fieldOrDirectiveArgTypeName, [
-                    SchemaDefinition::TYPE_INPUT_OBJECT,
-                    SchemaDefinition::TYPE_OBJECT,
-                    SchemaDefinition::TYPE_MIXED,
+                    SchemaDefinitionTypes::TYPE_INPUT_OBJECT,
+                    SchemaDefinitionTypes::TYPE_OBJECT,
+                    SchemaDefinitionTypes::TYPE_MIXED,
                 ]);
                 if (!$fieldOrDirectiveArgMayBeArrayType) {
                     /**
