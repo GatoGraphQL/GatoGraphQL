@@ -190,7 +190,7 @@ trait FieldOrDirectiveResolverTrait
                 || $enumTypeFieldOrDirectiveArgIsArrayOfArrays;
             // Each fieldArgumentEnumValue is an array with item "name" for sure, and maybe also "description", "deprecated" and "deprecationDescription"
             $schemaFieldOrDirectiveArgumentEnumValues = $schemaFieldArgumentEnumValueDefinitions[$fieldOrDirectiveArgumentName] ?? [];
-            
+
             // Pass all the enum values to be validated, as a list.
             // Possibilities:
             //   1. Single item => [item]
