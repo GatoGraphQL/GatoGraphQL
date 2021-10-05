@@ -10,6 +10,7 @@ class SchemaDefinition
     const ARGNAME_NAME = 'name';
     const ARGNAME_NAMESPACED_NAME = 'namespacedName';
     const ARGNAME_ELEMENT_NAME = 'elementName';
+    const ARGNAME_TYPE_RESOLVER = 'typeResolver';
     const ARGNAME_TYPE_NAME = 'typeName';
     const ARGNAME_NON_NULLABLE = 'nonNullable';
     const ARGNAME_IS_ARRAY = 'isArray';

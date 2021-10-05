@@ -133,8 +133,8 @@ trait FieldOrDirectiveResolverTrait
              * Whenever the value may be an array, the server will skip those validations
              * to check if an input is array or not (and throw an error).
              */
-            $fieldOrDirectiveArgType = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_NAME];
-            $fieldOrDirectiveArgMayBeArray = in_array($fieldOrDirectiveArgType, [
+            $fieldOrDirectiveArgTypeName = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_NAME];
+            $fieldOrDirectiveArgMayBeArray = in_array($fieldOrDirectiveArgTypeName, [
                 SchemaDefinition::TYPE_INPUT_OBJECT,
                 SchemaDefinition::TYPE_OBJECT,
                 SchemaDefinition::TYPE_MIXED,
@@ -322,8 +322,8 @@ trait FieldOrDirectiveResolverTrait
              * Whenever the value may be an array, the server will skip those validations
              * to check if an input is array or not (and throw an error).
              */
-            $enumTypeFieldOrDirectiveArgType = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_NAME];
-            $enumTypeFieldOrDirectiveArgMayBeArray = in_array($enumTypeFieldOrDirectiveArgType, [
+            $enumTypeFieldOrDirectiveArgTypeName = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGNAME_TYPE_NAME];
+            $enumTypeFieldOrDirectiveArgMayBeArray = in_array($enumTypeFieldOrDirectiveArgTypeName, [
                 SchemaDefinition::TYPE_INPUT_OBJECT,
                 SchemaDefinition::TYPE_OBJECT,
                 SchemaDefinition::TYPE_MIXED,

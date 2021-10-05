@@ -693,6 +693,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ];
 
         $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
+        $schemaDefinition[SchemaDefinition::ARGNAME_TYPE_RESOLVER] = $fieldTypeResolver;
         if ($fieldTypeResolver instanceof RelationalTypeResolverInterface) {
             $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
             $schemaDefinition[SchemaDefinition::ARGNAME_RELATIONAL] = true;

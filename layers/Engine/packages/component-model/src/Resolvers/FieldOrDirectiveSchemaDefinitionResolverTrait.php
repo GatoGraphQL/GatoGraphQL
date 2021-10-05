@@ -21,6 +21,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
     ): array {
         $schemaFieldOrDirectiveArgDefinition = [
             SchemaDefinition::ARGNAME_NAME => $argName,
+            SchemaDefinition::ARGNAME_TYPE_RESOLVER => $argInputTypeResolver,
         ];
         if ($argInputTypeResolver instanceof EnumTypeResolverInterface) {
             $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::ARGNAME_TYPE_NAME] = SchemaDefinition::TYPE_ENUM;

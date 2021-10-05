@@ -978,7 +978,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                  *
                  * In that case, assign type `MIXED`, which implies "Do not cast"
                  **/
-                $fieldOrDirectiveArgType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_TYPE_NAME] ?? SchemaDefinition::TYPE_MIXED;
+                $fieldOrDirectiveArgTypeName = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_TYPE_NAME] ?? SchemaDefinition::TYPE_ANY_SCALAR;
                 // If not set, the return type is not an array
                 $fieldOrDirectiveArgIsArrayType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
                 $fieldOrDirectiveArgIsNonNullArrayItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::ARGNAME_IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
@@ -999,7 +999,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                  * Whenever the value may be an array, the server will skip those validations
                  * to check if an input is array or not (and throw an error).
                  */
-                $fieldOrDirectiveArgMayBeArrayType = in_array($fieldOrDirectiveArgType, [
+                $fieldOrDirectiveArgMayBeArrayType = in_array($fieldOrDirectiveArgTypeName, [
                     SchemaDefinition::TYPE_INPUT_OBJECT,
                     SchemaDefinition::TYPE_OBJECT,
                     SchemaDefinition::TYPE_MIXED,
@@ -1116,7 +1116,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         // If it contains a null value, return it as is
                         fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? null : array_map(
                             fn (mixed $arrayOfArraysArgValueElem) => $arrayOfArraysArgValueElem === null ? null : $this->typeCastingExecuter->cast(
-                                $fieldOrDirectiveArgType,
+                                $fieldOrDirectiveArgTypeName,
                                 $arrayOfArraysArgValueElem
                             ),
                             $arrayArgValueElem
@@ -1134,7 +1134,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     // If the value is an array, then cast each element to the item type
                     $argValue = $argValue === null ? null : array_map(
                         fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $this->typeCastingExecuter->cast(
-                            $fieldOrDirectiveArgType,
+                            $fieldOrDirectiveArgTypeName,
                             $arrayArgValueElem
                         ),
                         $argValue
@@ -1145,7 +1145,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     );
                 } else {
                     // Otherwise, simply cast the given value directly
-                    $argValue = $argValue === null ? null : $this->typeCastingExecuter->cast($fieldOrDirectiveArgType, $argValue);
+                    $argValue = $argValue === null ? null : $this->typeCastingExecuter->cast($fieldOrDirectiveArgTypeName, $argValue);
                     if (GeneralUtils::isError($argValue)) {
                         /** @var Error $argValue */
                         $errorArgValues[] = $argValue;
@@ -1217,7 +1217,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $directiveArgNameTypes = [];
         if ($directiveSchemaDefinitionArgs = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $relationalTypeResolver)) {
             foreach ($directiveSchemaDefinitionArgs as $directiveSchemaDefinitionArg) {
-                $directiveArgNameTypes[$directiveSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $directiveSchemaDefinitionArg[SchemaDefinition::ARGNAME_TYPE_NAME];
+                $directiveArgNameTypes[$directiveSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $directiveSchemaDefinitionArg[SchemaDefinition::ARGNAME_TYPE_RESOLVER];
             }
         }
         return $directiveArgNameTypes;
@@ -1296,7 +1296,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         }
         $fieldArgNameTypeResolvers = [];
         foreach ($fieldSchemaDefinitionArgs as $fieldSchemaDefinitionArg) {
-            $fieldArgNameTypeResolvers[$fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_TYPE_NAME];
+            $fieldArgNameTypeResolvers[$fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::ARGNAME_TYPE_RESOLVER];
         }
         return $fieldArgNameTypeResolvers;
     }
