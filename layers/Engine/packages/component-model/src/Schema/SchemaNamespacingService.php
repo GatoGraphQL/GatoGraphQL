@@ -49,11 +49,11 @@ class SchemaNamespacingService implements SchemaNamespacingServiceInterface
 
     protected function convertClassNamespaceToSchemaNamespace(string $classNamespace): string
     {
-        return str_replace('\\', SchemaDefinition::TOKEN_NAMESPACE_SEPARATOR, $classNamespace);
+        return str_replace('\\', SchemaDefinitionTokens::NAMESPACE_SEPARATOR, $classNamespace);
     }
 
     public function getSchemaNamespacedName(string $schemaNamespace, string $name): string
     {
-        return ($schemaNamespace ? $schemaNamespace . SchemaDefinition::TOKEN_NAMESPACE_SEPARATOR : '') . $name;
+        return ($schemaNamespace ? $schemaNamespace . SchemaDefinitionTokens::NAMESPACE_SEPARATOR : '') . $name;
     }
 }

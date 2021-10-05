@@ -10,6 +10,7 @@ use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFaca
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinition as GraphQLServerSchemaDefinition;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaDefinitionTokens;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Facades\Schema\SchemaDefinitionServiceFacade;
 
@@ -281,7 +282,7 @@ class Schema
     public function getType(string $typeName): ?AbstractType
     {
         // If the provided typeName contains the namespace separator, then compare by qualifiedType
-        $useQualifiedName = str_contains($typeName, SchemaDefinition::TOKEN_NAMESPACE_SEPARATOR);
+        $useQualifiedName = str_contains($typeName, SchemaDefinitionTokens::NAMESPACE_SEPARATOR);
         // From all the types, get the one that has this name
         foreach ($this->types as $type) {
             // The provided `$typeName` can include namespaces or not

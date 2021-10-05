@@ -152,9 +152,4 @@ class SchemaDefinition
     const TYPE_IP = 'IP';
     const TYPE_ENUM = 'Enum';
     const TYPE_INPUT_OBJECT = 'InputObject';
-
-    /**
-     * Using "/" doesn't work with GraphQL Voyager!
-     */
-    const TOKEN_NAMESPACE_SEPARATOR = '_';
 }
