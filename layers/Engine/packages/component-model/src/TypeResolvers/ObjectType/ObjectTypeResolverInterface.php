@@ -11,10 +11,6 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface
 {
     public function validateFieldArgumentsForSchema(string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array;
-    /**
-     * @return array<string,mixed>|null `null` if there are no ObjectTypeFieldResolvers for the field
-     */
-    public function getSchemaFieldArgs(string $field): ?array;
     public function getFieldSchemaDefinition(string $field): ?array;
     public function hasObjectTypeFieldResolversForField(string $field): bool;
     public function resolveFieldValidationErrorDescriptions(string $field, array &$variables = null): array;

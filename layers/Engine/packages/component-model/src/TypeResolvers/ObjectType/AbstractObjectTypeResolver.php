@@ -110,19 +110,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * @return array<string,mixed>|null `null` if there are no objectTypeFieldResolvers for the field
      */
-    final public function getSchemaFieldArgs(string $field): ?array
-    {
-        $fieldSchemaDefinition = $this->getFieldSchemaDefinition($field);
-        if ($fieldSchemaDefinition !== null) {
-            return $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? [];
-        }
-
-        return null;
-    }
-
-    /**
-     * @return array<string,mixed>|null `null` if there are no objectTypeFieldResolvers for the field
-     */
     final public function getFieldSchemaDefinition(string $field): ?array
     {
         // Get the value from a fieldResolver, from the first one that resolves it
