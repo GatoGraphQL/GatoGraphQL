@@ -555,11 +555,11 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         if ($fieldArgElems = QueryHelpers::getFieldArgElements($this->getFieldArgs($field))) {
             /** @var array */
             $fieldSchemaDefinition = $objectTypeResolver->getFieldSchemaDefinition($field);
-            $orderedFieldArgNamesEnabled = $fieldSchemaDefinition[SchemaDefinition::ENABLE_ORDERED_ARGS] ?? false;
+            $orderedFieldArgsEnabled = $fieldSchemaDefinition[SchemaDefinition::ORDERED_ARGS_ENABLED] ?? false;
             return $this->extractAndValidateFielOrDirectiveArguments(
                 $field,
                 $fieldArgElems,
-                $orderedFieldArgNamesEnabled,
+                $orderedFieldArgsEnabled,
                 $fieldArgumentNameTypeResolvers,
                 $fieldOrDirectiveArgumentNameDefaultValues,
                 $variables,

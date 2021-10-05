@@ -685,7 +685,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
         // Check it args can be queried without their name
         if ($this->enableOrderedSchemaFieldArgs($objectTypeResolver, $fieldName)) {
-            $schemaDefinition[SchemaDefinition::ENABLE_ORDERED_ARGS] = true;
+            $schemaDefinition[SchemaDefinition::ORDERED_ARGS_ENABLED] = true;
         }
 
         // Use bitwise operators to extract the applied modifiers
