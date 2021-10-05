@@ -161,4 +161,9 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     {
         return null;
     }
+
+    public function coerceValue(mixed $inputValue): mixed
+    {
+        return $inputValue;
+    }
 }
