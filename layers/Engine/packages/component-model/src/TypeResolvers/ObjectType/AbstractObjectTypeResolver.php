@@ -112,11 +112,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     final public function getSchemaFieldArgs(string $field): ?array
     {
-        // Get the value from a fieldResolver, from the first one that resolves it
-        if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
-            $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
-            $fieldArgs = $this->fieldQueryInterpreter->extractStaticFieldArguments($field);
-            $fieldSchemaDefinition = $objectTypeFieldResolvers[0]->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
+        $fieldSchemaDefinition = $this->getFieldSchemaDefinition($field);
+        if ($fieldSchemaDefinition !== null) {
             return $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? [];
         }
 
