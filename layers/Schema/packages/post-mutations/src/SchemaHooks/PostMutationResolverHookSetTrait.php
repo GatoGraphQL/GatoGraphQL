@@ -27,7 +27,7 @@ trait PostMutationResolverHookSetTrait
         $this->postObjectTypeResolver = $postObjectTypeResolver;
     }
 
-    protected function mustAddSchemaFieldArgs(
+    protected function mustAddFieldArgs(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
     ): bool {

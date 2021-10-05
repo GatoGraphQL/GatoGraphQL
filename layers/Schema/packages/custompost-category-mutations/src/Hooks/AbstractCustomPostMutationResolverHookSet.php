@@ -66,7 +66,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         string $fieldName,
     ): array {
         // Only for the specific combinations of Type and fieldName
-        if (!$this->mustAddSchemaFieldArgs($objectTypeResolver, $fieldName)) {
+        if (!$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
             return $schemaFieldArgNameResolvers;
         }
         $schemaFieldArgNameResolvers[MutationInputProperties::CATEGORY_IDS] = $this->idScalarTypeResolver;
@@ -81,7 +81,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         string $fieldArgName,
     ): ?string {
         // Only for the newly added fieldArgName
-        if ($fieldArgName !== MutationInputProperties::CATEGORY_IDS || !$this->mustAddSchemaFieldArgs($objectTypeResolver, $fieldName)) {
+        if ($fieldArgName !== MutationInputProperties::CATEGORY_IDS || !$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
             return $schemaFieldArgDescription;
         }
         return sprintf(
@@ -98,13 +98,13 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         string $fieldArgName,
     ): int {
         // Only for the newly added fieldArgName
-        if ($fieldArgName !== MutationInputProperties::CATEGORY_IDS || !$this->mustAddSchemaFieldArgs($objectTypeResolver, $fieldName)) {
+        if ($fieldArgName !== MutationInputProperties::CATEGORY_IDS || !$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
             return $schemaFieldArgTypeModifiers;
         }
         return SchemaTypeModifiers::IS_ARRAY;
     }
 
-    abstract protected function mustAddSchemaFieldArgs(
+    abstract protected function mustAddFieldArgs(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
     ): bool;

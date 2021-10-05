@@ -65,7 +65,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         string $fieldName,
     ): array {
         // Only for the specific combinations of Type and fieldName
-        if (!$this->mustAddSchemaFieldArgs($objectTypeResolver, $fieldName)) {
+        if (!$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
             return $schemaFieldArgNameResolvers;
         }
         $schemaFieldArgNameResolvers[MutationInputProperties::TAGS] = $this->stringScalarTypeResolver;
@@ -80,7 +80,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         string $fieldArgName,
     ): ?string {
         // Only for the newly added fieldArgName
-        if ($fieldArgName !== MutationInputProperties::TAGS || !$this->mustAddSchemaFieldArgs($objectTypeResolver, $fieldName)) {
+        if ($fieldArgName !== MutationInputProperties::TAGS || !$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
             return $schemaFieldArgDescription;
         }
         return $this->translationAPI->__('The tags to set', 'custompost-tag-mutations');
@@ -94,13 +94,13 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         string $fieldArgName,
     ): int {
         // Only for the newly added fieldArgName
-        if ($fieldArgName !== MutationInputProperties::TAGS || !$this->mustAddSchemaFieldArgs($objectTypeResolver, $fieldName)) {
+        if ($fieldArgName !== MutationInputProperties::TAGS || !$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
             return $schemaFieldArgTypeModifiers;
         }
         return SchemaTypeModifiers::IS_ARRAY;
     }
 
-    abstract protected function mustAddSchemaFieldArgs(
+    abstract protected function mustAddFieldArgs(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
     ): bool;
