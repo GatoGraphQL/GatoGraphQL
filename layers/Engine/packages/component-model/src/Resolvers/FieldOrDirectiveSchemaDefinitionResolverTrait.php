@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 trait FieldOrDirectiveSchemaDefinitionResolverTrait
 {
     use EnumTypeSchemaDefinitionResolverTrait;
-    
+
     final public function getFieldOrDirectiveArgSchemaDefinition(
         string $argName,
         InputTypeResolverInterface $argInputTypeResolver,

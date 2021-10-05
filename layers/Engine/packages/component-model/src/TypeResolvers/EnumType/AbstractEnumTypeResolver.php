@@ -165,7 +165,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     /**
      * The validation that the enum value is valid is done in
      * `doValidateEnumFieldOrDirectiveArgumentsItem`.
-     * 
+     *
      * This function simply returns the same value always.
      */
     public function coerceValue(mixed $inputValue): mixed
