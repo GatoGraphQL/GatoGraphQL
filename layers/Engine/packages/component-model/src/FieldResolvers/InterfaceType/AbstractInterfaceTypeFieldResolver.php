@@ -228,11 +228,11 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return [];
     }
 
-    public function getSchemaFieldArgDescription(string $fieldName, string $fieldArgName): ?string
+    public function getConsolidatedFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getSchemaFieldArgDescription($fieldName, $fieldArgName);
+            return $schemaDefinitionResolver->getConsolidatedFieldArgDescription($fieldName, $fieldArgName);
         }
         return null;
     }

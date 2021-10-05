@@ -75,9 +75,9 @@ class InterfaceSchemaDefinitionResolverAdapter implements ObjectTypeFieldSchemaD
         return $this->interfaceTypeFieldSchemaDefinitionResolver->getConsolidatedFieldArgNameResolvers($fieldName);
     }
 
-    public function getSchemaFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    public function getConsolidatedFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
-        return $this->interfaceTypeFieldSchemaDefinitionResolver->getSchemaFieldArgDescription($fieldName, $fieldArgName);
+        return $this->interfaceTypeFieldSchemaDefinitionResolver->getConsolidatedFieldArgDescription($fieldName, $fieldArgName);
     }
 
     public function getSchemaFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
