@@ -1281,7 +1281,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         if (!array_key_exists($field, $this->fieldArgumentNameTypeResolversCache[$objectTypeResolverClass] ?? [])) {
             $this->fieldArgumentNameTypeResolversCache[$objectTypeResolverClass][$field] = $this->doGetFieldArgumentNameTypeResolvers($objectTypeResolver, $field);
         }
-        return $this->fieldArgumentNameTypeResolversCache[$objectTypeResolverClass][$field];
+        /** @var array<string, InputTypeResolverInterface>|null */
+        $fieldArgumentNameTypeResolvers = $this->fieldArgumentNameTypeResolversCache[$objectTypeResolverClass][$field];
+        return $fieldArgumentNameTypeResolvers;
     }
 
     /**
