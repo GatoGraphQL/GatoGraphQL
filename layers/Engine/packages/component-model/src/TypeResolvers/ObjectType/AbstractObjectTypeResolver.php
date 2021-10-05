@@ -116,7 +116,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
             $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
             $fieldArgs = $this->fieldQueryInterpreter->extractStaticFieldArguments($field);
-            return $objectTypeFieldResolvers[0]->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
+            return $objectTypeFieldResolvers[0]->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
         }
 
         return null;
@@ -219,7 +219,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $schemaWarnings,
                 $schemaDeprecations,
             ) = $this->dissectFieldForSchema($field);
-            $fieldSchemaDefinition = $objectTypeFieldResolvers[0]->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
+            $fieldSchemaDefinition = $objectTypeFieldResolvers[0]->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
             if ($fieldSchemaDefinition[SchemaDefinition::DEPRECATED] ?? null) {
                 $schemaDeprecations[] = [
                     Tokens::PATH => [$field],
@@ -431,12 +431,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                      * All other conditions, check them when enabled by configuration.
                      */
                     if ($value === null) {
-                        $fieldSchemaDefinition = $objectTypeFieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
+                        $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
                         if ($fieldSchemaDefinition[SchemaDefinition::NON_NULLABLE] ?? false) {
                             return $this->errorProvider->getNonNullableFieldError($fieldName);
                         }
                     } elseif (ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition()) {
-                        $fieldSchemaDefinition = $objectTypeFieldResolver->getSchemaDefinitionForField($this, $fieldName, $fieldArgs);
+                        $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
                         // If may be array or not, then there's no validation to do
                         $fieldTypeName = $fieldSchemaDefinition[SchemaDefinition::TYPE_NAME];
                         $fieldMayBeArrayType = in_array($fieldTypeName, [
@@ -621,7 +621,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
 
         // Watch out! We are passing empty $fieldArgs to generate the schema!
-        $fieldSchemaDefinition = $objectTypeFieldResolver->getSchemaDefinitionForField($this, $fieldName, []);
+        $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, []);
         // Add subfield schema if it is deep, and this typeResolver has not been processed yet
         if ($options['deep'] ?? null) {
             // If this field is relational, then add its own schema
