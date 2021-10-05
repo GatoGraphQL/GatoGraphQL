@@ -266,7 +266,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $fieldScalarTypeResolver = $fieldTypeResolver;
                 $fieldIsArrayOfArraysType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY_OF_ARRAYS] ?? false;
                 $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::ARGNAME_IS_ARRAY] ?? false;
-                // $value = $fieldScalarTypeResolver->serialize($value);
                 if ($fieldIsArrayOfArraysType) {
                     // If the value is an array of arrays, then serialize each subelement to the item type
                     $value = $value === null ? null : array_map(
