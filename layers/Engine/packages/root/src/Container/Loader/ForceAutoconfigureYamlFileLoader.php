@@ -22,7 +22,7 @@ class ForceAutoconfigureYamlFileLoader extends YamlFileLoader
      * Override the Symfony class, to always inject the
      * "autoconfigure" property
      */
-    protected function loadFile($file)
+    protected function loadFile(string $file)
     {
         $content = parent::loadFile($file);
         $content['services']['_defaults']['autoconfigure'] = $this->autoconfigure;
