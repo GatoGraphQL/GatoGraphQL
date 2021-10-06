@@ -23,7 +23,7 @@ trait QueryableFieldResolverTrait
     {
         /** @var FilterInputContainerModuleProcessorInterface */
         $filterDataModuleProcessor = $this->moduleProcessorManager->getProcessor($filterDataloadingModule);
-        return $filterDataModuleProcessor->getFieldFilterInputNameResolvers($filterDataloadingModule);
+        return $filterDataModuleProcessor->getFieldFilterInputNameTypeResolvers($filterDataloadingModule);
     }
 
     protected function getFilterFieldArgDescription(array $filterDataloadingModule, string $fieldArgName): ?string
