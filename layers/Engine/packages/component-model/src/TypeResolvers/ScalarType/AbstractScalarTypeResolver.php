@@ -5,10 +5,16 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
 abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implements ScalarTypeResolverInterface
 {
+    public function getSpecifiedByURL(): ?string
+    {
+        return null;
+    }
+
     /**
      * By default, the value is serialized as is
      */
@@ -62,5 +68,17 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
             );
         }
         return null;
+    }
+
+    protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = []): void
+    {
+        parent::addSchemaDefinition($stackMessages, $generalMessages, $options);
+
+        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
+
+        // @todo Fix: this code is never called!
+        if ($specifiedByURL = $this->getSpecifiedByURL()) {
+            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::SPECIFIED_BY_URL] = $specifiedByURL;
+        }
     }
 }

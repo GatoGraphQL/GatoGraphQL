@@ -19,6 +19,11 @@ class DateScalarTypeResolver extends AbstractScalarTypeResolver
         return 'Date';
     }
 
+    public function getSpecifiedByURL(): ?string
+    {
+        return 'https://datatracker.ietf.org/doc/html/rfc3339#section-5.6';
+    }
+
     public function coerceValue(mixed $inputValue): mixed
     {
         if ($error = $this->validateIsNotArrayOrObject($inputValue)) {
