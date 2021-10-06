@@ -54,6 +54,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected array $consolidatedFieldArgNameResolversCache = [];
     /** @var array<string, string|null> */
     protected array $consolidatedFieldArgDescriptionCache = [];
+    /** @var array<string, string|null> */
+    protected array $consolidatedFieldArgDeprecationDescriptionCache = [];
     /** @var array<string, mixed> */
     protected array $consolidatedFieldArgDefaultValueCache = [];
     /** @var array<string, int> */
@@ -239,6 +241,15 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
+    public function getFieldArgDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getFieldArgDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgName);
+        }
+        return null;
+    }
+
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
@@ -317,6 +328,28 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $fieldArgName,
         );
         return $this->consolidatedFieldArgDescriptionCache[$cacheKey];
+    }
+
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedFieldArgDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        // Cache the result
+        $cacheKey = $objectTypeResolver::class . '.' . $fieldName . '(' . $fieldArgName . ':)';
+        if (array_key_exists($cacheKey, $this->consolidatedFieldArgDeprecationDescriptionCache)) {
+            return $this->consolidatedFieldArgDeprecationDescriptionCache[$cacheKey];
+        }
+        $this->consolidatedFieldArgDeprecationDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
+            HookNames::FIELD_ARG_DEPRECATION_MESSAGE,
+            $this->getFieldArgDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgName),
+            $this,
+            $objectTypeResolver,
+            $fieldName,
+            $fieldArgName,
+        );
+        return $this->consolidatedFieldArgDeprecationDescriptionCache[$cacheKey];
     }
 
     /**
