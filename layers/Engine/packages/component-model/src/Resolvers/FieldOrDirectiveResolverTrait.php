@@ -123,6 +123,38 @@ trait FieldOrDirectiveResolverTrait
         return [];
     }
 
+    /**
+     * Deprecations for the field/directive args.
+     * 
+     * Watch out! The GraphQL spec does not include deprecations for arguments,
+     * only for fields and enum values, but here it is added nevertheless.
+     * This message is shown on runtime when executing a query with a deprecated field,
+     * but it's not shown when doing introspection.
+     * 
+     * @see https://spec.graphql.org/draft/#sec-Schema-Introspection.Schema-Introspection-Schema
+     */        
+    protected function getFieldOrDirectiveArgumentDeprecations(
+        array $fieldOrDirectiveArgsSchemaDefinition,
+        string $fieldOrDirectiveName,
+        array $fieldOrDirectiveArgs,
+        string $type
+    ): array {
+        $fieldOrDirectiveDeprecationDescriptions = [];
+        foreach ($fieldOrDirectiveArgs as $fieldOrDirectiveArgName => $directiveArgValue) {
+            $fieldOrDirectiveArgSchemaDefinition = $fieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgName] ?? [];
+            if ($fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::DEPRECATED] ?? null) {
+                $fieldOrDirectiveDeprecationDescriptions[] = sprintf(
+                    $this->translationAPI->__('Argument \'%s\' in %s \'%s\' is deprecated: %s', 'component-model'),
+                    $fieldOrDirectiveArgName,
+                    $type,
+                    $fieldOrDirectiveName,
+                    $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] ?? ''
+                );
+            }
+        }
+        return $fieldOrDirectiveDeprecationDescriptions;
+    }
+
     protected function getEnumFieldOrDirectiveArgumentDeprecations(
         array $fieldOrDirectiveArgsSchemaDefinition,
         string $fieldOrDirectiveName,

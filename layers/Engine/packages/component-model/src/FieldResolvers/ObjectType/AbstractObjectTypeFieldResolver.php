@@ -678,27 +678,16 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             );
         }
         if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
-            /**
-             * Deprecations for the field args.
-             * 
-             * Watch out! The GraphQL spec does not include deprecations for arguments,
-             * only for fields and enum values, but here it is added nevertheless.
-             * This message is shown on runtime when executing a query with a deprecated field,
-             * but it's not shown when doing introspection.
-             * 
-             * @see https://spec.graphql.org/draft/#sec-Schema-Introspection.Schema-Introspection-Schema
-             */        
-            foreach ($fieldArgs as $fieldArgName => $fieldArgValue) {
-                $fieldArgSchemaDefinition = $fieldArgsSchemaDefinition[$fieldArgName] ?? [];
-                if ($fieldArgSchemaDefinition[SchemaDefinition::DEPRECATED] ?? null) {
-                    $fieldDeprecationDescriptions[] = sprintf(
-                        $this->translationAPI->__('Argument \'%s\' in field \'%s\' is deprecated: %s', 'component-model'),
-                        $fieldArgName,
-                        $fieldName,
-                        $fieldArgSchemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] ?? ''
-                    );
-                }
-            }
+            // Deprecations for the field args
+            $fieldDeprecationDescriptions = array_merge(
+                $fieldDeprecationDescriptions,
+                $this->getFieldOrDirectiveArgumentDeprecations(
+                    $fieldArgsSchemaDefinition,
+                    $fieldName,
+                    $fieldArgs,
+                    ResolverTypes::FIELD
+                )
+            );
             // Deprecations for the field args of Enum Type
             $fieldDeprecationDescriptions = array_merge(
                 $fieldDeprecationDescriptions,

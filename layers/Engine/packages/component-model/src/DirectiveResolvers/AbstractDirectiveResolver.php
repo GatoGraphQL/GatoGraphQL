@@ -833,27 +833,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         $directiveDeprecationDescriptions = [];
         $directiveSchemaDefinition = $this->getDirectiveSchemaDefinition($relationalTypeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
-            /**
-             * Deprecations for the directive args.
-             * 
-             * Watch out! The GraphQL spec does not include deprecations for arguments,
-             * only for fields and enum values, but here it is added nevertheless.
-             * This message is shown on runtime when executing a query with a deprecated field,
-             * but it's not shown when doing introspection.
-             * 
-             * @see https://spec.graphql.org/draft/#sec-Schema-Introspection.Schema-Introspection-Schema
-             */        
-            foreach ($directiveArgs as $directiveArgName => $directiveArgValue) {
-                $directiveArgSchemaDefinition = $directiveArgsSchemaDefinition[$directiveArgName] ?? [];
-                if ($directiveArgSchemaDefinition[SchemaDefinition::DEPRECATED] ?? null) {
-                    $directiveDeprecationDescriptions[] = sprintf(
-                        $this->translationAPI->__('Argument \'%s\' in directive \'%s\' is deprecated: %s', 'component-model'),
-                        $directiveArgName,
-                        $directiveName,
-                        $directiveArgSchemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] ?? ''
-                    );
-                }
-            }
+            // Deprecations for the field args
+            $directiveDeprecationDescriptions = array_merge(
+                $directiveDeprecationDescriptions,
+                $this->getFieldOrDirectiveArgumentDeprecations(
+                    $directiveArgsSchemaDefinition,
+                    $directiveName,
+                    $directiveArgs,
+                    ResolverTypes::DIRECTIVE
+                )
+            );
+            // Deprecations for the field args of Enum Type
             $directiveDeprecationDescriptions = array_merge(
                 $directiveDeprecationDescriptions,
                 $this->getEnumFieldOrDirectiveArgumentDeprecations(
