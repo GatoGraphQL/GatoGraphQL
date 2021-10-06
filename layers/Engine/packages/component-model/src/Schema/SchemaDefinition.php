@@ -18,6 +18,7 @@ class SchemaDefinition
     const IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS = 'isNonNullableItemsInArrayOfArrays';
     const REFERENCED_TYPE = 'referencedType';
     const DESCRIPTION = 'description';
+    const SPECIFIED_BY_URL = 'specifiedByURL';
     const VERSION = 'version';
     const VERSION_CONSTRAINT = 'versionConstraint';
     const MANDATORY = 'mandatory';

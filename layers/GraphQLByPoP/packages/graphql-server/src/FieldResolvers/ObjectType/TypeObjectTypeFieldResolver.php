@@ -11,6 +11,7 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\HasFieldsTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasInterfacesTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasPossibleTypesTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\InputObjectType;
+use GraphQLByPoP\GraphQLServer\ObjectModels\ScalarType;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\TypeKindEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\EnumValueObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\FieldObjectTypeResolver;
@@ -76,6 +77,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'enumValues',
             'inputFields',
             'ofType',
+            'specifiedByURL',
             'extensions',
         ];
     }
@@ -83,9 +85,9 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'name'
-                => $this->stringScalarTypeResolver,
-            'description'
+            'name',
+            'description',
+            'specifiedByURL'
                 => $this->stringScalarTypeResolver,
             'extensions'
                 => $this->objectScalarTypeResolver,
@@ -134,6 +136,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'enumValues' => $this->translationAPI->__('Type\'s enum values (available for Enum type only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLAC9CDD_CAA2lB)', 'graphql-server'),
             'inputFields' => $this->translationAPI->__('Type\'s input Fields (available for InputObject type only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-HAJbLAuDABCBIu9N)', 'graphql-server'),
             'ofType' => $this->translationAPI->__('The type of the nested type (available for NonNull and List types only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-HAJbLA4DABCBIu9N)', 'graphql-server'),
+            'specifiedByURL' => $this->translationAPI->__('A scalar specification URL (a String (in the form of a URL) for custom scalars, otherwise must be null) as defined by the GraphQL spec (https://spec.graphql.org/draft/#sel-IAJXNFA0EABABL9N)', 'graphql-server'),
             'extensions' => $this->translationAPI->__('Custom metadata added to the field (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
@@ -230,6 +233,13 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // "should be non-null for NON_NULL and LIST only, must be null for the others"
                 if ($type instanceof AbstractNestableType) {
                     return $type->getNestedTypeID();
+                }
+                return null;
+            case 'specifiedByURL':
+                // From GraphQL spec (https://spec.graphql.org/draft/#sel-GAJXNFACzEDD1EAA_pc):
+                // "may be non-null for custom SCALAR, otherwise null"
+                if ($type instanceof ScalarType) {
+                    return $type->getSpecifiedByURL();
                 }
                 return null;
             case 'extensions':
