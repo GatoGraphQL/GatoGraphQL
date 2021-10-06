@@ -669,7 +669,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * Consolidation of the schema directive arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getSchemaDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
+    final public function getConsolidatedDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         // Cache the result
         $cacheKey = $relationalTypeResolver::class;
@@ -708,7 +708,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * Consolidation of the schema directive arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getSchemaDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    final public function getConsolidatedDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         // Cache the result
         $cacheKey = $relationalTypeResolver::class . '(' . $directiveArgName . ':)';
@@ -729,7 +729,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * Consolidation of the schema directive arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getSchemaDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
+    final public function getConsolidatedDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
     {
         // Cache the result
         $cacheKey = $relationalTypeResolver::class . '(' . $directiveArgName . ':)';
@@ -750,7 +750,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * Consolidation of the schema directive arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getSchemaDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
+    final public function getConsolidatedDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
     {
         // Cache the result
         $cacheKey = $relationalTypeResolver::class . '(' . $directiveArgName . ':)';
@@ -779,14 +779,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             return $this->schemaDirectiveArgsCache[$cacheKey];
         }
         $schemaDirectiveArgs = [];
-        $schemaDirectiveArgNameResolvers = $this->getSchemaDirectiveArgNameResolvers($relationalTypeResolver);
+        $schemaDirectiveArgNameResolvers = $this->getConsolidatedDirectiveArgNameResolvers($relationalTypeResolver);
         foreach ($schemaDirectiveArgNameResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
             $schemaDirectiveArgs[$directiveArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
                 $directiveArgName,
                 $directiveArgInputTypeResolver,
-                $this->getSchemaDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
-                $this->getSchemaDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
-                $this->getSchemaDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
+                $this->getConsolidatedDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+                $this->getConsolidatedDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
+                $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
             );
         }
         $this->schemaDirectiveArgsCache[$cacheKey] = $schemaDirectiveArgs;
