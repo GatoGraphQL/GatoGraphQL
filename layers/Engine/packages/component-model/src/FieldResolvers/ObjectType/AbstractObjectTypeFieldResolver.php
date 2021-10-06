@@ -695,7 +695,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                         $this->translationAPI->__('Argument \'%s\' in field \'%s\' is deprecated: %s', 'component-model'),
                         $fieldArgName,
                         $fieldName,
-                        $fieldArgSchemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION]
+                        $fieldArgSchemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] ?? ''
                     );
                 }
             }
