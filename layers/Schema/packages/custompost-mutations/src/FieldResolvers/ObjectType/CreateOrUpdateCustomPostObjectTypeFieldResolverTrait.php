@@ -36,7 +36,7 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
-    private function getCreateOrUpdateCustomPostSchemaFieldArgNameResolvers(
+    private function getCreateOrUpdateCustomPostSchemaFieldArgNameTypeResolvers(
         bool $addCustomPostID,
     ): array {
         return array_merge(

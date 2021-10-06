@@ -69,7 +69,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         };
     }
 
-    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
             'setFeaturedImageOnCustomPost' => [
@@ -79,7 +79,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'removeFeaturedImageFromCustomPost' => [
                 MutationInputProperties::CUSTOMPOST_ID => $this->idScalarTypeResolver,
             ],
-            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 

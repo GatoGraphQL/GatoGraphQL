@@ -57,14 +57,14 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
         };
     }
 
-    public function getFieldArgNameResolvers(string $fieldName): array
+    public function getFieldArgNameTypeResolvers(string $fieldName): array
     {
         return match ($fieldName) {
             'metaValue',
             'metaValues' => [
                 'key' => $this->stringScalarTypeResolver,
             ],
-            default => parent::getFieldArgNameResolvers($fieldName),
+            default => parent::getFieldArgNameTypeResolvers($fieldName),
         };
     }
 

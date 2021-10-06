@@ -35,12 +35,12 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         return null;
     }
 
-    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
-            return $this->getFilterFieldArgNameResolvers($filterDataloadingModule);
+            return $this->getFilterFieldArgNameTypeResolvers($filterDataloadingModule);
         }
-        return parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName);
+        return parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
     }
 
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string

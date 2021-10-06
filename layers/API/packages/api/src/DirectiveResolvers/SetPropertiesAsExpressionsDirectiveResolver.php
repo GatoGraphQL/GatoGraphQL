@@ -54,7 +54,7 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
         return $this->translationAPI->__('Use directive `getSelfProp` together with field `extract` instead', 'component-model');
     }
 
-    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             'properties' => $this->stringScalarTypeResolver,

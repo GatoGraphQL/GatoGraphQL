@@ -49,7 +49,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
         return $this->translationAPI->__('Duplicate a property in the current object', 'component-model');
     }
 
-    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             'to' => $this->stringScalarTypeResolver,

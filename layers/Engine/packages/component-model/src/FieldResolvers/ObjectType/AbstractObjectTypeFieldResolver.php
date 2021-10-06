@@ -51,7 +51,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     protected array $schemaDefinitionForFieldCache = [];
     /** @var array<string, array<string, InputTypeResolverInterface>> */
-    protected array $consolidatedFieldArgNameResolversCache = [];
+    protected array $consolidatedFieldArgNameTypeResolversCache = [];
     /** @var array<string, string|null> */
     protected array $consolidatedFieldArgDescriptionCache = [];
     /** @var array<string, string|null> */
@@ -219,11 +219,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * @return array<string, InputTypeResolverInterface>
      */
-    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldArgNameResolvers($objectTypeResolver, $fieldName);
+            return $schemaDefinitionResolver->getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         }
         return [];
     }
@@ -272,25 +272,25 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getConsolidatedFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    final public function getConsolidatedFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         // Cache the result
         $cacheKey = $objectTypeResolver::class . '.' . $fieldName;
-        if (array_key_exists($cacheKey, $this->consolidatedFieldArgNameResolversCache)) {
-            return $this->consolidatedFieldArgNameResolversCache[$cacheKey];
+        if (array_key_exists($cacheKey, $this->consolidatedFieldArgNameTypeResolversCache)) {
+            return $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey];
         }
         /**
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
          */
-        $consolidatedFieldArgNameResolvers = $this->hooksAPI->applyFilters(
-            HookNames::FIELD_ARG_NAME_RESOLVERS,
-            $this->getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+        $consolidatedFieldArgNameTypeResolvers = $this->hooksAPI->applyFilters(
+            HookNames::FIELD_ARG_NAME_TYPE_RESOLVERS,
+            $this->getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
             $this,
             $objectTypeResolver,
             $fieldName,
         );
-        if ($consolidatedFieldArgNameResolvers !== []) {
+        if ($consolidatedFieldArgNameTypeResolvers !== []) {
             /**
              * Add the version constraint (if enabled)
              * Only add the argument if this field or directive has a version
@@ -300,12 +300,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             if (Environment::enableSemanticVersionConstraints()) {
                 $hasVersion = $this->hasSchemaFieldVersion($objectTypeResolver, $fieldName);
                 if ($hasVersion) {
-                    $schemaDirectiveArgNameResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->stringScalarTypeResolver;
+                    $consolidatedFieldArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->stringScalarTypeResolver;
                 }
             }
         }
-        $this->consolidatedFieldArgNameResolversCache[$cacheKey] = $consolidatedFieldArgNameResolvers;
-        return $this->consolidatedFieldArgNameResolversCache[$cacheKey];
+        $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey] = $consolidatedFieldArgNameTypeResolvers;
+        return $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey];
     }
 
     /**
@@ -408,8 +408,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $this->schemaFieldArgsCache[$cacheKey];
         }
         $schemaFieldArgs = [];
-        $consolidatedFieldArgNameResolvers = $this->getConsolidatedFieldArgNameResolvers($objectTypeResolver, $fieldName);
-        foreach ($consolidatedFieldArgNameResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
+        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        foreach ($consolidatedFieldArgNameTypeResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
             $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
                 $fieldArgName,
                 $fieldArgInputTypeResolver,

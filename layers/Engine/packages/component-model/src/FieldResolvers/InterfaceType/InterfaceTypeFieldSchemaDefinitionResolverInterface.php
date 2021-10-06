@@ -17,7 +17,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
     /**
      * @return array<string, InputTypeResolverInterface>
      */
-    public function getFieldArgNameResolvers(string $fieldName): array;
+    public function getFieldArgNameTypeResolvers(string $fieldName): array;
     public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string;
     public function getFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed;
     public function getFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int;
@@ -33,7 +33,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
     /**
      * @return array<string, InputTypeResolverInterface>
      */
-    public function getConsolidatedFieldArgNameResolvers(string $fieldName): array;
+    public function getConsolidatedFieldArgNameTypeResolvers(string $fieldName): array;
     public function getConsolidatedFieldArgDescription(string $fieldName, string $fieldArgName): ?string;
     public function getConsolidatedFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed;
     public function getConsolidatedFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int;

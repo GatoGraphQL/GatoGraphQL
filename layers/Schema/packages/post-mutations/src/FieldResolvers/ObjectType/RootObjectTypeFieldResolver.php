@@ -64,12 +64,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            'createPost' => $this->getCreateOrUpdateCustomPostSchemaFieldArgNameResolvers(false),
-            'updatePost' => $this->getCreateOrUpdateCustomPostSchemaFieldArgNameResolvers(true),
-            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            'createPost' => $this->getCreateOrUpdateCustomPostSchemaFieldArgNameTypeResolvers(false),
+            'updatePost' => $this->getCreateOrUpdateCustomPostSchemaFieldArgNameTypeResolvers(true),
+            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 

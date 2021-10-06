@@ -72,13 +72,13 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
     /**
      * Change the type from mixed to string
      */
-    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
             'echoStr' => [
                 'value' => $this->stringScalarTypeResolver,
             ],
-            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 

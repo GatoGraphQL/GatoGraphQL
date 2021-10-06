@@ -20,12 +20,12 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
         return null;
     }
 
-    public function getFieldArgNameResolvers(string $fieldName): array
+    public function getFieldArgNameTypeResolvers(string $fieldName): array
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($fieldName)) {
-            return $this->getFilterFieldArgNameResolvers($filterDataloadingModule);
+            return $this->getFilterFieldArgNameTypeResolvers($filterDataloadingModule);
         }
-        return parent::getFieldArgNameResolvers($fieldName);
+        return parent::getFieldArgNameTypeResolvers($fieldName);
     }
 
     public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string

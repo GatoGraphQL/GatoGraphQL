@@ -41,17 +41,17 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
         ];
     }
 
-    public function getFieldFilterInputNameResolvers(array $module): array
+    public function getFieldFilterInputNameTypeResolvers(array $module): array
     {
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
-        $schemaFieldArgNameResolvers = [];
+        $schemaFieldArgNameTypeResolvers = [];
         foreach ($filterQueryArgsModules as $module) {
             /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
             $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
             $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
-            $schemaFieldArgNameResolvers[$filterInputName] = $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputTypeResolver($module);
+            $schemaFieldArgNameTypeResolvers[$filterInputName] = $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputTypeResolver($module);
         }
-        return $schemaFieldArgNameResolvers;
+        return $schemaFieldArgNameTypeResolvers;
     }
 
     public function getFieldFilterInputDescription(array $module, string $fieldArgName): ?string
