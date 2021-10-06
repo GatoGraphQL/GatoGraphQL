@@ -100,9 +100,9 @@ class InterfaceSchemaDefinitionResolverAdapter implements ObjectTypeFieldSchemaD
         return $this->interfaceTypeFieldSchemaDefinitionResolver->getConsolidatedFieldArgTypeModifiers($fieldName, $fieldArgName);
     }
 
-    public function getFieldDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function getFieldDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        return $this->interfaceTypeFieldSchemaDefinitionResolver->getFieldDeprecationDescription($fieldName, $fieldArgs);
+        return $this->interfaceTypeFieldSchemaDefinitionResolver->getFieldDeprecationDescription($fieldName);
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

@@ -168,11 +168,11 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return SchemaTypeModifiers::NONE;
     }
 
-    public function getFieldDeprecationDescription(string $fieldName, array $fieldArgs = []): ?string
+    public function getFieldDeprecationDescription(string $fieldName): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldDeprecationDescription($fieldName, $fieldArgs);
+            return $schemaDefinitionResolver->getFieldDeprecationDescription($fieldName);
         }
         return null;
     }

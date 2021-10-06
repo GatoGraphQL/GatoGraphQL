@@ -423,11 +423,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return $this->schemaFieldArgsCache[$cacheKey];
     }
 
-    public function getFieldDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function getFieldDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgs);
+            return $schemaDefinitionResolver->getFieldDeprecationDescription($objectTypeResolver, $fieldName);
         }
         return null;
     }
