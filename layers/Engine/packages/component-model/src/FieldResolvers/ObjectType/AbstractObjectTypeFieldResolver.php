@@ -666,16 +666,42 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     public function resolveFieldValidationDeprecationDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
     {
+        $fieldDeprecationDescriptions = [];
         $fieldSchemaDefinition = $this->getFieldSchemaDefinition($objectTypeResolver, $fieldName, $fieldArgs);
-        if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
-            return $this->getEnumFieldOrDirectiveArgumentDeprecations(
-                $fieldArgsSchemaDefinition,
+        
+        // Deprecations for the field
+        if ($fieldSchemaDefinition[SchemaDefinition::DEPRECATED] ?? null) {
+            $fieldDeprecationDescriptions[] = sprintf(
+                $this->translationAPI->__('Field \'%s\' is deprecated: %s', 'component-model'),
                 $fieldName,
-                $fieldArgs,
-                ResolverTypes::FIELD
+                $fieldSchemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION]
             );
         }
-        return null;
+        if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
+            // Deprecations for the field args
+            foreach ($fieldArgs as $fieldArgName => $fieldArgValue) {
+                $fieldArgSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS][$fieldArgName] ?? [];
+                if ($fieldArgSchemaDefinition[SchemaDefinition::DEPRECATED] ?? null) {
+                    $fieldDeprecationDescriptions[] = sprintf(
+                        $this->translationAPI->__('Argument \'%s\' in field \'%s\' is deprecated: %s', 'component-model'),
+                        $fieldArgName,
+                        $fieldName,
+                        $fieldArgSchemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION]
+                    );
+                }
+            }
+            // Deprecations for the field args of Enum Type
+            $fieldDeprecationDescriptions = array_merge(
+                $fieldDeprecationDescriptions,
+                $this->getEnumFieldOrDirectiveArgumentDeprecations(
+                    $fieldArgsSchemaDefinition,
+                    $fieldName,
+                    $fieldArgs,
+                    ResolverTypes::FIELD
+                )
+            );
+        }
+        return $fieldDeprecationDescriptions;
     }
 
     /**
