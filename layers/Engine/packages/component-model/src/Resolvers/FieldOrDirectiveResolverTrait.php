@@ -151,7 +151,7 @@ trait FieldOrDirectiveResolverTrait
                         $fieldOrDirectiveArgName,
                         $type,
                         $fieldOrDirectiveName,
-                        $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] ?? ''
+                        $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] ?? ''
                     );
                 }
             }
@@ -271,7 +271,7 @@ trait FieldOrDirectiveResolverTrait
                 $errorItems[] = $fieldOrDirectiveArgumentValueItem;
             } elseif ($fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::DEPRECATED] ?? null) {
                 // Check if this enumValue is deprecated
-                $deprecationItems[$fieldOrDirectiveArgumentValueItem] = $fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION];
+                $deprecationItems[$fieldOrDirectiveArgumentValueItem] = $fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::DEPRECATION_MESSAGE];
             }
         }
         if ($errorItems) {

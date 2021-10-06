@@ -67,7 +67,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
         }
         if ($argDeprecationMessage !== null) {
             $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::DEPRECATED] = $argDeprecationMessage;
-            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] = $argDeprecationMessage;
+            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::DEPRECATION_MESSAGE] = $argDeprecationMessage;
         }
         return $schemaFieldOrDirectiveArgDefinition;
     }

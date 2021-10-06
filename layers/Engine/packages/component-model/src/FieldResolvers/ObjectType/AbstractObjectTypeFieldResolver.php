@@ -674,7 +674,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $fieldDeprecationMessages[] = sprintf(
                 $this->translationAPI->__('Field \'%s\' is deprecated: %s', 'component-model'),
                 $fieldName,
-                $fieldSchemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION]
+                $fieldSchemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE]
             );
         }
         if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
@@ -774,7 +774,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
         if ($deprecationDescription = $this->getFieldDeprecationMessage($objectTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::DEPRECATED] = true;
-            $schemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] = $deprecationDescription;
+            $schemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationDescription;
         }
         if ($args = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::ARGS] = $args;

@@ -32,7 +32,7 @@ trait EnumTypeSchemaDefinitionResolverTrait
             }
             if ($deprecationDescription = $enumValueDeprecationMessages[$enumValue] ?? null) {
                 $enum[SchemaDefinition::DEPRECATED] = true;
-                $enum[SchemaDefinition::DEPRECATIONDESCRIPTION] = $deprecationDescription;
+                $enum[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationDescription;
             }
             $enums[$enumValue] = $enum;
         }

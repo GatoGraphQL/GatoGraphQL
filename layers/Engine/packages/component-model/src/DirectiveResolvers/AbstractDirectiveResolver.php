@@ -1215,7 +1215,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             }
             if ($deprecationDescription = $this->getDirectiveDeprecationMessage($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::DEPRECATED] = true;
-                $schemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] = $deprecationDescription;
+                $schemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationDescription;
             }
             if ($args = $this->getSchemaDirectiveArgs($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::ARGS] = $args;
