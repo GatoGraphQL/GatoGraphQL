@@ -16,12 +16,12 @@ interface ScalarTypeResolverInterface extends ConcreteTypeResolverInterface, Inp
 {
     /**
      * As specified by the GraphQL spec on directive @specifiedBy:
-     * 
+     *
      *   The @specifiedBy built-in directive is used within
      *   the type system definition language to provide a
      *   scalar specification URL for specifying the behavior
      *   of custom scalar types.
-     *   
+     *
      *   The URL should point to a human-readable specification
      *   of the data format, serialization, and coercion rules.
      *   It must not appear on built-in scalar types.
