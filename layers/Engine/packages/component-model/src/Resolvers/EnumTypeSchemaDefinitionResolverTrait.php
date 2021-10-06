@@ -19,7 +19,7 @@ trait EnumTypeSchemaDefinitionResolverTrait
     ): void {
         $enums = [];
         $enumValues = $enumTypeResolver->getEnumValues();
-        $enumValueDeprecationDescriptions = $enumTypeResolver->getEnumValueDeprecationMessages();
+        $enumValueDeprecationMessages = $enumTypeResolver->getEnumValueDeprecationMessages();
         $enumValueDescriptions = $enumTypeResolver->getEnumValueDescriptions();
         $enumName = $enumTypeResolver->getMaybeNamespacedTypeName();
         foreach ($enumValues as $enumValue) {
@@ -30,7 +30,7 @@ trait EnumTypeSchemaDefinitionResolverTrait
             if ($description = $enumValueDescriptions[$enumValue] ?? null) {
                 $enum[SchemaDefinition::DESCRIPTION] = $description;
             }
-            if ($deprecationDescription = $enumValueDeprecationDescriptions[$enumValue] ?? null) {
+            if ($deprecationDescription = $enumValueDeprecationMessages[$enumValue] ?? null) {
                 $enum[SchemaDefinition::DEPRECATED] = true;
                 $enum[SchemaDefinition::DEPRECATIONDESCRIPTION] = $deprecationDescription;
             }

@@ -15,7 +15,7 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface;
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int;
-    public function getFieldDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
+    public function getFieldDeprecationMessage(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
     /**
      * Define Schema Field Arguments
      *
@@ -33,7 +33,7 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
      *
      * @see https://spec.graphql.org/draft/#sec-Schema-Introspection.Schema-Introspection-Schema
      */
-    public function getFieldArgDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string;
+    public function getFieldArgDeprecationMessage(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string;
     /**
      * Invoke Schema Field Arguments
      *
@@ -43,7 +43,7 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
     public function getConsolidatedFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string;
     public function getConsolidatedFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed;
     public function getConsolidatedFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int;
-    public function getConsolidatedFieldArgDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string;
+    public function getConsolidatedFieldArgDeprecationMessage(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string;
     /**
      * Validate the constraints for a field argument
      *

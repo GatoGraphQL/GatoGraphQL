@@ -33,7 +33,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
     /**
      * No need to use this function anymore
      */
-    public function getDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         /** @var DirectiveResolverInterface */
         $forEachDirectiveResolver = $this->instanceManager->getInstance(ForEachDirectiveResolver::class);

@@ -34,7 +34,7 @@ class Field extends AbstractSchemaDefinitionReferenceObject
     {
         return $this->schemaDefinition[SchemaDefinition::DEPRECATED] ?? false;
     }
-    public function getDeprecationDescription(): ?string
+    public function getDeprecationMessage(): ?string
     {
         return $this->schemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] ?? null;
     }

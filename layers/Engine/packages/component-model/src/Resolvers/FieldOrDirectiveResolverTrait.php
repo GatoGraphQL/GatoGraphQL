@@ -142,11 +142,11 @@ trait FieldOrDirectiveResolverTrait
         string $type
     ): array {
         if (ComponentConfiguration::enableFieldOrDirectiveArgumentDeprecations()) {
-            $fieldOrDirectiveDeprecationDescriptions = [];
+            $fieldOrDirectiveDeprecationMessages = [];
             foreach ($fieldOrDirectiveArgs as $fieldOrDirectiveArgName => $directiveArgValue) {
                 $fieldOrDirectiveArgSchemaDefinition = $fieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgName] ?? [];
                 if ($fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::DEPRECATED] ?? null) {
-                    $fieldOrDirectiveDeprecationDescriptions[] = sprintf(
+                    $fieldOrDirectiveDeprecationMessages[] = sprintf(
                         $this->translationAPI->__('Argument \'%s\' in %s \'%s\' is deprecated: %s', 'component-model'),
                         $fieldOrDirectiveArgName,
                         $type,
@@ -155,7 +155,7 @@ trait FieldOrDirectiveResolverTrait
                     );
                 }
             }
-            return $fieldOrDirectiveDeprecationDescriptions;
+            return $fieldOrDirectiveDeprecationMessages;
         }
         return [];
     }

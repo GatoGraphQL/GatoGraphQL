@@ -33,11 +33,11 @@ trait QueryableFieldResolverTrait
         return $filterDataModuleProcessor->getFieldFilterInputDescription($filterDataloadingModule, $fieldArgName);
     }
 
-    protected function getFilterFieldArgDeprecationDescription(array $filterDataloadingModule, string $fieldArgName): ?string
+    protected function getFilterFieldArgDeprecationMessage(array $filterDataloadingModule, string $fieldArgName): ?string
     {
         /** @var FilterInputContainerModuleProcessorInterface */
         $filterDataModuleProcessor = $this->moduleProcessorManager->getProcessor($filterDataloadingModule);
-        return $filterDataModuleProcessor->getFieldFilterInputDeprecationDescription($filterDataloadingModule, $fieldArgName);
+        return $filterDataModuleProcessor->getFieldFilterInputDeprecationMessage($filterDataloadingModule, $fieldArgName);
     }
 
     protected function getFilterFieldArgDefaultValue(array $filterDataloadingModule, string $fieldArgName): mixed
