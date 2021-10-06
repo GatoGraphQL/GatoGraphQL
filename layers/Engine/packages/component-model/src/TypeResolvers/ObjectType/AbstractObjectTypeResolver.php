@@ -782,9 +782,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $interfaceTypeResolver->getAllInterfaceTypeFieldResolvers(),
                 $implementedInterfaceTypeFieldResolvers,
                 /**
-                 * Don't use arrow function here, or there are 3 chained rules for Rector to downgrade!
-                 * This is not handled currently, so `object` would not be removed, failing for PHP 7.1.
-                 * Also, vars `$a` and `$b` are wrongly added as `use($a, $b)` to the first `fn`,
+                 * Don't use arrow function here, or there's an issue when downgrading to PHP 7.1:
+                 * vars `$a` and `$b` are wrongly added as `use($a, $b)` to the first `fn`,
                  * as if they were present in the original function scope, which they are not
                  */
                 function (object $a, object $b) {
