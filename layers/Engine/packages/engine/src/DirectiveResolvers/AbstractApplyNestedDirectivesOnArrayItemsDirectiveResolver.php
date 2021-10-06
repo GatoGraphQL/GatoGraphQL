@@ -38,7 +38,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
         $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
     }
 
-    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         if (!ComponentConfiguration::enablePassingExpressionsByArgInNestedDirectives()) {
             return [];

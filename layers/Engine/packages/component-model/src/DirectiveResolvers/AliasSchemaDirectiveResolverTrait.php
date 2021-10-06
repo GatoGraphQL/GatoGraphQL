@@ -53,10 +53,10 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getDirectiveArgNameResolvers(
+        return $aliasedDirectiveResolver->getDirectiveArgNameTypeResolvers(
             $relationalTypeResolver
         );
     }

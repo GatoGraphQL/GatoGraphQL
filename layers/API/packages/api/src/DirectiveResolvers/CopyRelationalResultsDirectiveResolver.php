@@ -63,7 +63,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
         return $this->translationAPI->__('Copy the data from a relational object (which is one level below) to the current object', 'component-model');
     }
 
-    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             'copyFromFields' => $this->stringScalarTypeResolver,

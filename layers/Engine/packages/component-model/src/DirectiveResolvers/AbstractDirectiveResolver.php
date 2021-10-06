@@ -626,11 +626,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * @return array<string, InputTypeResolverInterface>
      */
-    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getDirectiveArgNameResolvers($relationalTypeResolver);
+            return $schemaDefinitionResolver->getDirectiveArgNameTypeResolvers($relationalTypeResolver);
         }
         return [];
     }
@@ -692,7 +692,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
          */
         $consolidatedDirectiveArgNameResolvers = $this->hooksAPI->applyFilters(
             HookNames::DIRECTIVE_ARG_NAME_RESOLVERS,
-            $this->getDirectiveArgNameResolvers($relationalTypeResolver),
+            $this->getDirectiveArgNameTypeResolvers($relationalTypeResolver),
             $this,
             $relationalTypeResolver
         );

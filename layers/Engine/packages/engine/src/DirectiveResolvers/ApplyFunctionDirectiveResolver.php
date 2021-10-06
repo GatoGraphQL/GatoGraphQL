@@ -55,7 +55,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         return DirectiveTypes::SCRIPTING;
     }
 
-    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
             'function' => $this->stringScalarTypeResolver,

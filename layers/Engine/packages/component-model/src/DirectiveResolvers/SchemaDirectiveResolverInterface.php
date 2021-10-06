@@ -22,7 +22,7 @@ interface SchemaDirectiveResolverInterface
      *
      * @return array<string, InputTypeResolverInterface>
      */
-    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array;
+    public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array;
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string;
     public function getDirectiveArgDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string;
     public function getDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed;

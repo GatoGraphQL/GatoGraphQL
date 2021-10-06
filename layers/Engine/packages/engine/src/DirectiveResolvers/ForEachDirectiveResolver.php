@@ -40,10 +40,10 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
         return $this->translationAPI->__('Iterate all affected array items and execute the composed directives on them', 'component-model');
     }
 
-    public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return array_merge(
-            parent::getDirectiveArgNameResolvers($relationalTypeResolver),
+            parent::getDirectiveArgNameTypeResolvers($relationalTypeResolver),
             [
                 'if' => $this->booleanScalarTypeResolver,
             ]
