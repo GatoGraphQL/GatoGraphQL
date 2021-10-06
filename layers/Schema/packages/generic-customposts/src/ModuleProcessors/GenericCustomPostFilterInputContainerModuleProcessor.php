@@ -40,15 +40,16 @@ class GenericCustomPostFilterInputContainerModuleProcessor extends AbstractCusto
         $adminGenericCustomPostFilterInputModules = [
             [CustomPostFilterInputModuleProcessor::class, CustomPostFilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
         ];
+        $paginationFilterInputModules = $this->getPaginationFilterInputModules();
         return match ($module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST=> [
                 ...$genericCustomPostFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST => [
                     ...$genericCustomPostFilterInputModules,
                     ...$adminGenericCustomPostFilterInputModules,
-                    ...$this->getPaginationFilterInputModules(),
+                    ...$paginationFilterInputModules,
                 ],
             self::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT => $genericCustomPostFilterInputModules,
             self::MODULE_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT => [

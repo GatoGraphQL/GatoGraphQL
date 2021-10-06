@@ -38,15 +38,16 @@ abstract class AbstractPostFilterInputContainerModuleProcessor extends AbstractC
         $statusFilterInputModules = [
             [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
         ];
+        $paginationFilterInputModules = $this->getPaginationFilterInputModules();
         return match ($module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_POSTS => [
                 ...$postFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_POSTCOUNT => $postFilterInputModules,
             self::MODULE_FILTERINPUTCONTAINER_ADMINPOSTS => [
                 ...$postFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
                 ...$statusFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_ADMINPOSTCOUNT => [

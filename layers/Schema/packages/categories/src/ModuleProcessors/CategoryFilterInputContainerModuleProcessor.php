@@ -36,15 +36,16 @@ class CategoryFilterInputContainerModuleProcessor extends AbstractFilterInputCon
         $topLevelCategoryFilterInputModules = [
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID],
         ];
+        $paginationFilterInputModules = $this->getPaginationFilterInputModules();
         return match ($module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_CATEGORIES => [
                 ...$categoryFilterInputModules,
                 ...$topLevelCategoryFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_CHILDCATEGORIES => [
                 ...$categoryFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT => [
                 ...$categoryFilterInputModules,
