@@ -63,6 +63,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
          * After saving the settings in the DB:
          * - Flush the rewrite rules, so different URL slugs take effect
          * - Update the timestamp
+         * 
+         * This hooks is also triggered the first time the user saves the settings
+         * (i.e. there's no update) thanks to `maybeStoreEmptySettings`
          */
         \add_action(
             "update_option_{$option}",

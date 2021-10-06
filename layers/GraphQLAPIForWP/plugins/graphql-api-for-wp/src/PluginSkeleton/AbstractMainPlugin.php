@@ -10,6 +10,7 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
+use GraphQLAPI\GraphQLAPI\Settings\Options;
 use PoP\Engine\AppLoader;
 use PoP\Root\Environment as RootEnvironment;
 use RuntimeException;
@@ -111,6 +112,23 @@ abstract class AbstractMainPlugin extends AbstractPlugin
         // Regenerate the timestamp
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         $userSettingsManager->storeContainerTimestamp();
+
+        // Store empty settings
+        $this->maybeStoreEmptySettings();
+    }
+
+    /**
+     * If accessing the plugin for first time, save empty settings,
+     * so that hook "update_option_{$option}" is triggered the
+     * first time the user saves the settings and `storeContainerTimestamp`
+     * is called
+     */
+    protected function maybeStoreEmptySettings(): void
+    {
+        $settings = \get_option(Options::SETTINGS);
+        if ($settings === false) {
+            \update_option(Options::SETTINGS, []);
+        }
     }
 
     /**
