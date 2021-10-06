@@ -76,6 +76,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
 
         $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
 
+        // @todo Fix: this code is never called!
         if ($specifiedByURL = $this->getSpecifiedByURL()) {
             $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::SPECIFIED_BY_URL] = $specifiedByURL;
         }
