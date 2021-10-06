@@ -246,6 +246,15 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return null;
     }
 
+    public function getConsolidatedFieldArgDeprecationDescription(string $fieldName, string $fieldArgName): ?string
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getConsolidatedFieldArgDeprecationDescription($fieldName, $fieldArgName);
+        }
+        return null;
+    }
+
     public function getConsolidatedFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
