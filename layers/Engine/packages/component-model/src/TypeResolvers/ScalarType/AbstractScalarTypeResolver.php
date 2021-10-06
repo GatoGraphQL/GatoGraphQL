@@ -9,6 +9,11 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 
 abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implements ScalarTypeResolverInterface
 {
+    public function getSpecifiedByURL(): ?string
+    {
+        return null;
+    }
+    
     /**
      * By default, the value is serialized as is
      */
