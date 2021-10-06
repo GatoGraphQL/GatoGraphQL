@@ -681,7 +681,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
          * input "categories" to field "Root.createPost")
          */
         $consolidatedDirectiveArgNameResolvers = $this->hooksAPI->applyFilters(
-            HookNames::SCHEMA_DIRECTIVE_ARG_NAME_RESOLVERS,
+            HookNames::DIRECTIVE_ARG_NAME_RESOLVERS,
             $this->getDirectiveArgNameResolvers($relationalTypeResolver),
             $this,
             $relationalTypeResolver
@@ -716,7 +716,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             return $this->consolidatedDirectiveArgDescriptionCache[$cacheKey];
         }
         $this->consolidatedDirectiveArgDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
-            HookNames::SCHEMA_DIRECTIVE_ARG_DESCRIPTION,
+            HookNames::DIRECTIVE_ARG_DESCRIPTION,
             $this->getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
             $this,
             $relationalTypeResolver,
@@ -737,7 +737,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             return $this->consolidatedDirectiveArgDefaultValueCache[$cacheKey];
         }
         $this->consolidatedDirectiveArgDefaultValueCache[$cacheKey] = $this->hooksAPI->applyFilters(
-            HookNames::SCHEMA_DIRECTIVE_ARG_DEFAULT_VALUE,
+            HookNames::DIRECTIVE_ARG_DEFAULT_VALUE,
             $this->getDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
             $this,
             $relationalTypeResolver,
@@ -758,7 +758,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             return $this->consolidatedDirectiveArgTypeModifiersCache[$cacheKey];
         }
         $this->consolidatedDirectiveArgTypeModifiersCache[$cacheKey] = $this->hooksAPI->applyFilters(
-            HookNames::SCHEMA_DIRECTIVE_ARG_TYPE_MODIFIERS,
+            HookNames::DIRECTIVE_ARG_TYPE_MODIFIERS,
             $this->getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
             $this,
             $relationalTypeResolver,
