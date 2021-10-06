@@ -64,21 +64,17 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         array $options = []
     ): mixed {
         $media = $object;
-        switch ($fieldName) {
-            case 'author':
-                return $this->userMediaTypeAPI->getMediaAuthorId($media);
-        }
-
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return match ($fieldName) {
+            'author' => $this->userMediaTypeAPI->getMediaAuthorId($media),
+            default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options),
+        };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'author':
-                return $this->userObjectTypeResolver;
-        }
-
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'author' => $this->userObjectTypeResolver,
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }

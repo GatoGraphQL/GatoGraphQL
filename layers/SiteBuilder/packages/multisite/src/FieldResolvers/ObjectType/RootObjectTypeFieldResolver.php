@@ -74,28 +74,28 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ): mixed {
-        $root = $object;
-        switch ($fieldName) {
-            case 'sites':
-                return [
-                    $this->site->getID(),
-                ];
-            case 'site':
-                return $this->site->getID();
+        ): mixed {
+            $root = $object;
+            switch ($fieldName) {
+                case 'sites':
+                    return [
+                        $this->site->getID(),
+                    ];
+                case 'site':
+                    return $this->site->getID();
+            }
+    
+            return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
         }
-
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'sites':
-            case 'site':
-                return $this->siteObjectTypeResolver;
-        }
-
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'sites',
+            'site' =>
+                $this->siteObjectTypeResolver,
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }

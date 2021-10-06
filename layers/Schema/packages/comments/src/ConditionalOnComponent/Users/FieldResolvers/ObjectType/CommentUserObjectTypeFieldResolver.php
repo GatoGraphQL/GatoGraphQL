@@ -62,23 +62,21 @@ class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
-    ): mixed {
-        $comment = $object;
-        switch ($fieldName) {
-            case 'author':
-                return $this->commentTypeAPI->getCommentUserId($comment);
+        ): mixed {
+            $comment = $object;
+            switch ($fieldName) {
+                case 'author':
+                    return $this->commentTypeAPI->getCommentUserId($comment);
+            }
+    
+            return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
         }
-
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-    }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'author':
-                return $this->userObjectTypeResolver;
-        }
-
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'author' => $this->userObjectTypeResolver,
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }

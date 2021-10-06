@@ -66,30 +66,22 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
      */
-    public function resolveValue(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        object $object,
-        string $fieldName,
-        array $fieldArgs = [],
-        ?array $variables = null,
-        ?array $expressions = null,
-        array $options = []
-    ): mixed {
-        switch ($fieldName) {
-            case 'id':
-            case 'self':
-                return $objectTypeResolver->getID($object);
-        }
-
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+    public function resolveValue(ObjectTypeResolverInterface $objectTypeResolver, object $object, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = []): mixed
+    {
+        return match ($fieldName) {
+            'id',
+            'self'
+                => $objectTypeResolver->getID($object),
+            default
+                => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options),
+        };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'self':
-                return $objectTypeResolver;
-        }
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'self' => $objectTypeResolver,
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }

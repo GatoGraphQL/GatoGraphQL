@@ -44,25 +44,19 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
         };
     }
 
-    public function getFieldMutationResolver(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
-    ): ?MutationResolverInterface {
-        switch ($fieldName) {
-            case 'update':
-                return $this->updatePostMutationResolver;
-        }
-
-        return parent::getFieldMutationResolver($objectTypeResolver, $fieldName);
+    public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
+    {
+        return match ($fieldName) {
+            'update' => $this->updatePostMutationResolver,
+            default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'update':
-                return $this->postObjectTypeResolver;
-        }
-
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'update' => $this->postObjectTypeResolver,
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }

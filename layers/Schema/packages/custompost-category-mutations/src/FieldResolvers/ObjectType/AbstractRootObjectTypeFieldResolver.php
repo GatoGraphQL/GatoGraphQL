@@ -109,25 +109,19 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         };
     }
 
-    public function getFieldMutationResolver(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
-    ): ?MutationResolverInterface {
-        switch ($fieldName) {
-            case $this->getSetCategoriesFieldName():
-                return $this->getSetCategoriesMutationResolver();
-        }
-
-        return parent::getFieldMutationResolver($objectTypeResolver, $fieldName);
+    public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
+    {
+        return match ($fieldName) {
+            $this->getSetCategoriesFieldName() => $this->getSetCategoriesMutationResolver(),
+            default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case $this->getSetCategoriesFieldName():
-                return $this->getCustomPostObjectTypeResolver();
-        }
-
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            $this->getSetCategoriesFieldName() => $this->getCustomPostObjectTypeResolver(),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }

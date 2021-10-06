@@ -157,16 +157,17 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         string $fieldName,
         array $fieldArgs = []
     ): array {
-        switch ($fieldName) {
-            case 'myCustomPost':
-            case 'myCustomPosts':
-            case 'myCustomPostCount':
-                $vars = ApplicationState::getVars();
-                return [
+        $vars = ApplicationState::getVars();
+        return match ($fieldName) {
+            'myCustomPost',
+            'myCustomPosts',
+            'myCustomPostCount'
+                => [
                     'authors' => [$vars['global-userstate']['current-user-id']],
-                ];
-        }
-        return [];
+                ],
+            default
+                => [],
+        };
     }
 
     /**

@@ -86,27 +86,25 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         };
     }
 
-    public function getFieldMutationResolver(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
-    ): ?MutationResolverInterface {
-        switch ($fieldName) {
-            case 'addCommentToCustomPost':
-            case 'replyComment':
-                return $this->addCommentToCustomPostMutationResolver;
-        }
-
-        return parent::getFieldMutationResolver($objectTypeResolver, $fieldName);
+    public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
+    {
+        return match ($fieldName) {
+            'addCommentToCustomPost',
+            'replyComment'
+                => $this->addCommentToCustomPostMutationResolver,
+            default
+                => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'addCommentToCustomPost':
-            case 'replyComment':
-                return $this->commentObjectTypeResolver;
-        }
-
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'addCommentToCustomPost',
+            'replyComment'
+                => $this->commentObjectTypeResolver,
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }
