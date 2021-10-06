@@ -772,7 +772,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($description = $this->getFieldDescription($objectTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::DESCRIPTION] = $description;
         }
-        if ($deprecationDescription = $this->getFieldDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgs)) {
+        if ($deprecationDescription = $this->getFieldDeprecationDescription($objectTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::DEPRECATED] = true;
             $schemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] = $deprecationDescription;
         }
