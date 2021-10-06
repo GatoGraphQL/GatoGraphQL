@@ -120,37 +120,23 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         /** @var Schema */
         $schema = $object;
-        switch ($fieldName) {
-            case 'queryType':
-                return $schema->getQueryTypeID();
-            case 'mutationType':
-                return $schema->getMutationTypeID();
-            case 'subscriptionType':
-                return $schema->getSubscriptionTypeID();
-            case 'types':
-                return $schema->getTypeIDs();
-            case 'directives':
-                return $schema->getDirectiveIDs();
-            case 'type':
-                return $schema->getTypeID($fieldArgs['name']);
-        }
-
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return match ($fieldName) {
+            'queryType' => $schema->getQueryTypeID(),
+            'mutationType' => $schema->getMutationTypeID(),
+            'subscriptionType' => $schema->getSubscriptionTypeID(),
+            'types' => $schema->getTypeIDs(),
+            'directives' => $schema->getDirectiveIDs(),
+            'type' => $schema->getTypeID($fieldArgs['name']),
+            default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options),
+        };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'queryType':
-            case 'mutationType':
-            case 'subscriptionType':
-            case 'types':
-            case 'type':
-                return $this->typeObjectTypeResolver;
-            case 'directives':
-                return $this->directiveObjectTypeResolver;
-        }
-
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'queryType', 'mutationType', 'subscriptionType', 'types', 'type' => $this->typeObjectTypeResolver,
+            'directives' => $this->directiveObjectTypeResolver,
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }

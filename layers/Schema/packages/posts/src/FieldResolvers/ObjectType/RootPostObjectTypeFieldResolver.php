@@ -111,14 +111,14 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'post':
-            case 'postForAdmin':
-            case 'postBySlug':
-            case 'postBySlugForAdmin':
-                return $this->postObjectTypeResolver;
-        }
-
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'post',
+            'postForAdmin',
+            'postBySlug',
+            'postBySlugForAdmin'
+                => $this->postObjectTypeResolver,
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }

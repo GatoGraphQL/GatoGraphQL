@@ -110,16 +110,15 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      * is obtained from the same object, so it's not originally
      * present in $form_data
      */
-    public function validateMutationOnObject(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
-    ): bool {
-        switch ($fieldName) {
-            case 'setFeaturedImage':
-            case 'removeFeaturedImage':
-                return true;
-        }
-        return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
+    public function validateMutationOnObject(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
+    {
+        return match ($fieldName) {
+            'setFeaturedImage',
+            'removeFeaturedImage'
+                => true,
+            default
+                => parent::validateMutationOnObject($objectTypeResolver, $fieldName),
+        };
     }
 
     protected function getFieldArgsToExecuteMutation(
@@ -145,28 +144,23 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $fieldArgs;
     }
 
-    public function getFieldMutationResolver(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
-    ): ?MutationResolverInterface {
-        switch ($fieldName) {
-            case 'setFeaturedImage':
-                return $this->setFeaturedImageOnCustomPostMutationResolver;
-            case 'removeFeaturedImage':
-                return $this->removeFeaturedImageOnCustomPostMutationResolver;
-        }
-
-        return parent::getFieldMutationResolver($objectTypeResolver, $fieldName);
+    public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
+    {
+        return match ($fieldName) {
+            'setFeaturedImage' => $this->setFeaturedImageOnCustomPostMutationResolver,
+            'removeFeaturedImage' => $this->removeFeaturedImageOnCustomPostMutationResolver,
+            default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'setFeaturedImage':
-            case 'removeFeaturedImage':
-                return $this->customPostUnionTypeResolver;
-        }
-
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'setFeaturedImage',
+            'removeFeaturedImage'
+                => $this->customPostUnionTypeResolver,
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }

@@ -73,13 +73,10 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'queryRoot':
-                return $this->queryRootObjectTypeResolver;
-            case 'mutationRoot':
-                return $this->mutationRootObjectTypeResolver;
-        }
-
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'queryRoot' => $this->queryRootObjectTypeResolver,
+            'mutationRoot' => $this->mutationRootObjectTypeResolver,
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }

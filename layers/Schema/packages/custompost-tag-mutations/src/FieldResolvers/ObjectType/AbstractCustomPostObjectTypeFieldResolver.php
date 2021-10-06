@@ -104,15 +104,12 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
      * is obtained from the same object, so it's not originally
      * present in $form_data
      */
-    public function validateMutationOnObject(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
-    ): bool {
-        switch ($fieldName) {
-            case 'setTags':
-                return true;
-        }
-        return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
+    public function validateMutationOnObject(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
+    {
+        return match ($fieldName) {
+            'setTags' => true,
+            default => parent::validateMutationOnObject($objectTypeResolver, $fieldName),
+        };
     }
 
     protected function getFieldArgsToExecuteMutation(
@@ -137,25 +134,19 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return $fieldArgs;
     }
 
-    public function getFieldMutationResolver(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
-    ): ?MutationResolverInterface {
-        switch ($fieldName) {
-            case 'setTags':
-                return $this->getSetTagsMutationResolver();
-        }
-
-        return parent::getFieldMutationResolver($objectTypeResolver, $fieldName);
+    public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
+    {
+        return match ($fieldName) {
+            'setTags' => $this->getSetTagsMutationResolver(),
+            default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'setTags':
-                return $this->getCustomPostObjectTypeResolver();
-        }
-
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'setTags' => $this->getCustomPostObjectTypeResolver(),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }

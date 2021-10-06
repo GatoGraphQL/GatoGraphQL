@@ -107,15 +107,12 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
      * is obtained from the same object, so it's not originally
      * present in $form_data
      */
-    public function validateMutationOnObject(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
-    ): bool {
-        switch ($fieldName) {
-            case 'setCategories':
-                return true;
-        }
-        return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
+    public function validateMutationOnObject(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
+    {
+        return match ($fieldName) {
+            'setCategories' => true,
+            default => parent::validateMutationOnObject($objectTypeResolver, $fieldName),
+        };
     }
 
     protected function getFieldArgsToExecuteMutation(
@@ -140,25 +137,19 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return $fieldArgs;
     }
 
-    public function getFieldMutationResolver(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
-    ): ?MutationResolverInterface {
-        switch ($fieldName) {
-            case 'setCategories':
-                return $this->getSetCategoriesMutationResolver();
-        }
-
-        return parent::getFieldMutationResolver($objectTypeResolver, $fieldName);
+    public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
+    {
+        return match ($fieldName) {
+            'setCategories' => $this->getSetCategoriesMutationResolver(),
+            default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'setCategories':
-                return $this->getCustomPostObjectTypeResolver();
-        }
-
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'setCategories' => $this->getCustomPostObjectTypeResolver(),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }

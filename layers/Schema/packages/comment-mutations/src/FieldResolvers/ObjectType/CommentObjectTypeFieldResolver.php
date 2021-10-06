@@ -84,15 +84,12 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      * is obtained from the same object, so it's not originally
      * present in $form_data
      */
-    public function validateMutationOnObject(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
-    ): bool {
-        switch ($fieldName) {
-            case 'reply':
-                return true;
-        }
-        return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
+    public function validateMutationOnObject(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
+    {
+        return match ($fieldName) {
+            'reply' => true,
+            default => parent::validateMutationOnObject($objectTypeResolver, $fieldName),
+        };
     }
 
     protected function getFieldArgsToExecuteMutation(
@@ -118,25 +115,19 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $fieldArgs;
     }
 
-    public function getFieldMutationResolver(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
-    ): ?MutationResolverInterface {
-        switch ($fieldName) {
-            case 'reply':
-                return $this->addCommentToCustomPostMutationResolver;
-        }
-
-        return parent::getFieldMutationResolver($objectTypeResolver, $fieldName);
+    public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
+    {
+        return match ($fieldName) {
+            'reply' => $this->addCommentToCustomPostMutationResolver,
+            default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'reply':
-                return $this->commentObjectTypeResolver;
-        }
-
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'reply' => $this->commentObjectTypeResolver,
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }

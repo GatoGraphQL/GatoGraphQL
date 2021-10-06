@@ -81,15 +81,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      * is obtained from the same object, so it's not originally
      * present in $form_data
      */
-    public function validateMutationOnObject(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
-    ): bool {
-        switch ($fieldName) {
-            case 'addComment':
-                return true;
-        }
-        return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
+    public function validateMutationOnObject(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
+    {
+        return match ($fieldName) {
+            'addComment' => true,
+            default => parent::validateMutationOnObject($objectTypeResolver, $fieldName),
+        };
     }
 
     protected function getFieldArgsToExecuteMutation(
@@ -114,25 +111,19 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $fieldArgs;
     }
 
-    public function getFieldMutationResolver(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName
-    ): ?MutationResolverInterface {
-        switch ($fieldName) {
-            case 'addComment':
-                return $this->addCommentToCustomPostMutationResolver;
-        }
-
-        return parent::getFieldMutationResolver($objectTypeResolver, $fieldName);
+    public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
+    {
+        return match ($fieldName) {
+            'addComment' => $this->addCommentToCustomPostMutationResolver,
+            default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'addComment':
-                return $this->commentObjectTypeResolver;
-        }
-
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'addComment' => $this->commentObjectTypeResolver,
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }

@@ -123,12 +123,12 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'pageByPath':
-            case 'pageByPathForAdmin':
-                return $this->pageObjectTypeResolver;
-        }
-
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'pageByPath',
+            'pageByPathForAdmin'
+                => $this->pageObjectTypeResolver,
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }

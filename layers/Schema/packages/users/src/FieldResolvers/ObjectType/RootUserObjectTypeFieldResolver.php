@@ -150,13 +150,13 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'user':
-            case 'userByUsername':
-            case 'userByEmail':
-                return $this->userObjectTypeResolver;
-        }
-
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'user',
+            'userByUsername',
+            'userByEmail'
+                => $this->userObjectTypeResolver,
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }

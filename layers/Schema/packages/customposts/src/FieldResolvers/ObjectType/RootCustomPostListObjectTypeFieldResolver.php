@@ -107,14 +107,14 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'customPost':
-            case 'customPostBySlug':
-            case 'customPostForAdmin':
-            case 'customPostBySlugForAdmin':
-                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
-        }
-
-        return parent::getFieldTypeResolver($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'customPost',
+            'customPostBySlug',
+            'customPostForAdmin',
+            'customPostBySlugForAdmin'
+                => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
     }
 }

@@ -216,20 +216,21 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
         string $fieldName,
         array $fieldArgs = []
     ): array {
-        switch ($fieldName) {
-            case 'genericCustomPost':
-            case 'genericCustomPostForAdmin':
-            case 'genericCustomPostBySlug':
-            case 'genericCustomPostBySlugForAdmin':
-            case 'genericCustomPosts':
-            case 'genericCustomPostsForAdmin':
-            case 'genericCustomPostCount':
-            case 'genericCustomPostCountForAdmin':
-                return [
+        return match ($fieldName) {
+            'genericCustomPost',
+            'genericCustomPostForAdmin',
+            'genericCustomPostBySlug',
+            'genericCustomPostBySlugForAdmin',
+            'genericCustomPosts',
+            'genericCustomPostsForAdmin',
+            'genericCustomPostCount',
+            'genericCustomPostCountForAdmin'
+                => [
                     'custompost-types' => ComponentConfiguration::getGenericCustomPostTypes(),
-                ];
-        }
-        return [];
+                ],
+            default
+                => [],
+        };
     }
 
     /**
