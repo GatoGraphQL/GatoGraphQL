@@ -47,6 +47,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     protected array $consolidatedDirectiveArgNameResolversCache = [];
     /** @var array<string, string|null> */
     protected array $consolidatedDirectiveArgDescriptionCache = [];
+    /** @var array<string, string|null> */
+    protected array $consolidatedDirectiveArgDeprecationDescriptionCache = [];
     /** @var array<string, mixed> */
     protected array $consolidatedDirectiveArgDefaultValueCache = [];
     /** @var array<string, int> */
@@ -723,6 +725,27 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             $directiveArgName,
         );
         return $this->consolidatedDirectiveArgDescriptionCache[$cacheKey];
+    }
+
+    /**
+     * Consolidation of the schema directive arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedDirectiveArgDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    {
+        // Cache the result
+        $cacheKey = $relationalTypeResolver::class . '(' . $directiveArgName . ':)';
+        if (array_key_exists($cacheKey, $this->consolidatedDirectiveArgDeprecationDescriptionCache)) {
+            return $this->consolidatedDirectiveArgDeprecationDescriptionCache[$cacheKey];
+        }
+        $this->consolidatedDirectiveArgDeprecationDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
+            HookNames::DIRECTIVE_ARG_DEPRECATION_MESSAGE,
+            $this->getDirectiveArgDeprecationDescription($relationalTypeResolver, $directiveArgName),
+            $this,
+            $relationalTypeResolver,
+            $directiveArgName,
+        );
+        return $this->consolidatedDirectiveArgDeprecationDescriptionCache[$cacheKey];
     }
 
     /**

@@ -24,6 +24,7 @@ interface SchemaDirectiveResolverInterface
      */
     public function getDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array;
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string;
+    public function getDirectiveArgDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string;
     public function getDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed;
     public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int;
     /**
@@ -33,6 +34,7 @@ interface SchemaDirectiveResolverInterface
      */
     public function getConsolidatedDirectiveArgNameResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array;
     public function getConsolidatedDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string;
+    public function getConsolidatedDirectiveArgDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string;
     public function getConsolidatedDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed;
     public function getConsolidatedDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int;
     /**
