@@ -8,7 +8,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         $errors = [];
         $histid = $form_data['histid'];

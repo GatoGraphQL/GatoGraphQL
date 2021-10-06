@@ -59,13 +59,10 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'posts':
-            case 'postsForAdmin':
-                return $this->postObjectTypeResolver;
-        }
         return match ($fieldName) {
+            'posts' => $this->postObjectTypeResolver,
             'postCount' => $this->intScalarTypeResolver,
+            'postsForAdmin' => $this->postObjectTypeResolver,
             'postCountForAdmin' => $this->intScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

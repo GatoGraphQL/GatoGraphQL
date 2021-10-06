@@ -47,7 +47,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
     }
 
-    protected function validateCreateErrors(array $form_data): ?array
+    protected function validateCreateErrors(array $form_data): array
     {
         $errors = [];
 
@@ -69,7 +69,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         return $errors;
     }
 
-    protected function validateUpdateErrors(array $form_data): ?array
+    protected function validateUpdateErrors(array $form_data): array
     {
         $errors = [];
 

@@ -23,7 +23,7 @@ class LogoutMutationResolver extends AbstractMutationResolver
         $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;
     }
 
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         $errors = [];
         $this->validateUserIsLoggedIn($errors);

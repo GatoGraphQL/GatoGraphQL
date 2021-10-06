@@ -49,8 +49,14 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
      * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): bool;
-    public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array;
-    public function resolveFieldValidationDeprecationDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array;
+    /**
+     * @return string[]
+     */
+    public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array;
+    /**
+     * @return string[]
+     */
+    public function resolveFieldValidationDeprecationDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array;
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
@@ -79,7 +85,10 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ?MutationResolverInterface;
-    public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array;
+    /**
+     * @return string[]
+     */
+    public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array;
     /**
      * @param array<string, mixed> $fieldArgs
      */
@@ -92,13 +101,14 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
     public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
     /**
      * @param array<string, mixed> $fieldArgs
+     * @return string[]
      */
     public function getValidationErrorDescriptions(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
         array $fieldArgs = []
-    ): ?array;
+    ): array;
     /**
      * Define if to use the version to decide if to process the field or not
      */

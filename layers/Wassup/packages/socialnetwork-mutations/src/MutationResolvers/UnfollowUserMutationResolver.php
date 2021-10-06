@@ -9,7 +9,7 @@ use PoPSchema\UserMeta\Utils;
 
 class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationResolver
 {
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         $errors = parent::validateErrors($form_data);
         if (!$errors) {

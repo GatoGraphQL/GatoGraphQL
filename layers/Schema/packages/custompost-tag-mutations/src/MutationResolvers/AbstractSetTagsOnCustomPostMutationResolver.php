@@ -24,7 +24,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
 
     abstract protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface;
 
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         $errors = [];
 

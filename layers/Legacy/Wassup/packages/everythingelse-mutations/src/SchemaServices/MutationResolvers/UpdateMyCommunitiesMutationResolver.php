@@ -61,7 +61,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         // return $update || empty($banned_communities);
     }
 
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         $errors = [];
         $user_id = $form_data['user_id'];
@@ -73,7 +73,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         return $errors;
     }
 
-    public function validateWarnings(array $form_data): ?array
+    public function validateWarnings(array $form_data): array
     {
         $warnings = [];
         $user_id = $form_data['user_id'];

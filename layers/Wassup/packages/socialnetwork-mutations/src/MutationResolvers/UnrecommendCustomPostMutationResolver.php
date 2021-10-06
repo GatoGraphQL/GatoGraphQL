@@ -9,7 +9,7 @@ use PoPSchema\UserMeta\Utils;
 
 class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecommendCustomPostMutationResolver
 {
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         $errors = parent::validateErrors($form_data);
         if (!$errors) {

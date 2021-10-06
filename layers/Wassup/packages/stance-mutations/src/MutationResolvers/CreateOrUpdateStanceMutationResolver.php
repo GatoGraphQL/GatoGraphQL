@@ -16,7 +16,7 @@ class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMut
         return $this->create($form_data);
     }
 
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         if ($this->isUpdate($form_data)) {
             return $this->validateUpdateErrors($form_data);

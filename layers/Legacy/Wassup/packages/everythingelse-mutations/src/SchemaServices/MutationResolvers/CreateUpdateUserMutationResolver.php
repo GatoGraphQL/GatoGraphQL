@@ -204,7 +204,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         $this->hooksAPI->doAction('gd_createupdate_user:additionalsCreate', $user_id, $form_data);
     }
 
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         $errors = [];
         $this->validateContent($errors, $form_data);

@@ -11,10 +11,10 @@ trait UpdateCustomPostMutationResolverTrait
         return $this->update($form_data);
     }
 
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         return $this->validateUpdateErrors($form_data);
     }
 
-    abstract protected function validateUpdateErrors(array $form_data): ?array;
+    abstract protected function validateUpdateErrors(array $form_data): array;
 }

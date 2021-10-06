@@ -34,6 +34,7 @@ class ComponentConfiguration
     private static bool $removeFieldIfDirectiveFailed = false;
     private static bool $coerceInputFromSingleValueToList = false;
     private static bool $enableUnionTypeImplementingInterfaceType = false;
+    private static bool $enableFieldOrDirectiveArgumentDeprecations = false;
 
     /**
      * Initialize component configuration
@@ -357,6 +358,34 @@ class ComponentConfiguration
         // Define properties
         $envVariable = Environment::ENABLE_UNION_TYPE_IMPLEMENTING_INTERFACE_TYPE;
         $selfProperty = &self::$enableUnionTypeImplementingInterfaceType;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    /**
+     * Deprecations for the field/directive args.
+     *
+     * Watch out! The GraphQL spec does not include deprecations for arguments,
+     * only for fields and enum values, but here it is added nevertheless.
+     * This message is shown on runtime when executing a query with a deprecated field,
+     * but it's not shown when doing introspection.
+     *
+     * @see https://spec.graphql.org/draft/#sec-Schema-Introspection.Schema-Introspection-Schema
+     */
+    public static function enableFieldOrDirectiveArgumentDeprecations(): bool
+    {
+        // Define properties
+        $envVariable = Environment::ENABLE_FIELD_OR_DIRECTIVE_ARGUMENT_DEPRECATIONS;
+        $selfProperty = &self::$enableFieldOrDirectiveArgumentDeprecations;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

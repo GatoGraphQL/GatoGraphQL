@@ -72,7 +72,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         return $message;
     }
 
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         $errors = [];
         $user_login = $form_data[MutationInputProperties::USER_LOGIN];

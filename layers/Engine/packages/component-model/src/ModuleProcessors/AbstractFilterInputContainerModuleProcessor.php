@@ -68,6 +68,20 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
         return null;
     }
 
+    public function getFieldFilterInputDeprecationDescription(array $module, string $fieldArgName): ?string
+    {
+        $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
+        foreach ($filterQueryArgsModules as $module) {
+            /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
+            $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
+            $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
+            if ($filterInputName === $fieldArgName) {
+                return $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputDeprecationDescription($module);
+            }
+        }
+        return null;
+    }
+
     public function getFieldFilterInputDefaultValue(array $module, string $fieldArgName): mixed
     {
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);

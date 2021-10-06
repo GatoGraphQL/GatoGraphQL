@@ -168,11 +168,11 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return SchemaTypeModifiers::NONE;
     }
 
-    public function getFieldDeprecationDescription(string $fieldName, array $fieldArgs = []): ?string
+    public function getFieldDeprecationDescription(string $fieldName): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldDeprecationDescription($fieldName, $fieldArgs);
+            return $schemaDefinitionResolver->getFieldDeprecationDescription($fieldName);
         }
         return null;
     }
@@ -194,6 +194,15 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldArgDescription($fieldName, $fieldArgName);
+        }
+        return null;
+    }
+
+    public function getFieldArgDeprecationDescription(string $fieldName, string $fieldArgName): ?string
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getFieldArgDeprecationDescription($fieldName, $fieldArgName);
         }
         return null;
     }
@@ -233,6 +242,15 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getConsolidatedFieldArgDescription($fieldName, $fieldArgName);
+        }
+        return null;
+    }
+
+    public function getConsolidatedFieldArgDeprecationDescription(string $fieldName, string $fieldArgName): ?string
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getConsolidatedFieldArgDeprecationDescription($fieldName, $fieldArgName);
         }
         return null;
     }

@@ -109,7 +109,7 @@ trait FieldOrDirectiveResolverTrait
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,
         string $type
-    ): ?array {
+    ): array {
         // Iterate all the enum types and check that the provided values is one of them, or throw an error
         if ($enumTypeFieldOrDirectiveArgsSchemaDefinition = SchemaHelpers::getEnumTypeFieldOrDirectiveArgsSchemaDefinition($fieldOrDirectiveArgsSchemaDefinition)) {
             [$maybeErrors] = $this->doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
@@ -120,7 +120,44 @@ trait FieldOrDirectiveResolverTrait
             );
             return $maybeErrors;
         }
-        return null;
+        return [];
+    }
+
+    /**
+     * Deprecations for the field/directive args.
+     *
+     * Watch out! The GraphQL spec does not include deprecations for arguments,
+     * only for fields and enum values, but here it is added nevertheless.
+     * This message is shown on runtime when executing a query with a deprecated field,
+     * but it's not shown when doing introspection.
+     *
+     * It is executed only when enabled by configuration (by default it is not)
+     *
+     * @see https://spec.graphql.org/draft/#sec-Schema-Introspection.Schema-Introspection-Schema
+     */
+    protected function maybeGetFieldOrDirectiveArgumentDeprecations(
+        array $fieldOrDirectiveArgsSchemaDefinition,
+        string $fieldOrDirectiveName,
+        array $fieldOrDirectiveArgs,
+        string $type
+    ): array {
+        if (ComponentConfiguration::enableFieldOrDirectiveArgumentDeprecations()) {
+            $fieldOrDirectiveDeprecationDescriptions = [];
+            foreach ($fieldOrDirectiveArgs as $fieldOrDirectiveArgName => $directiveArgValue) {
+                $fieldOrDirectiveArgSchemaDefinition = $fieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgName] ?? [];
+                if ($fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::DEPRECATED] ?? null) {
+                    $fieldOrDirectiveDeprecationDescriptions[] = sprintf(
+                        $this->translationAPI->__('Argument \'%s\' in %s \'%s\' is deprecated: %s', 'component-model'),
+                        $fieldOrDirectiveArgName,
+                        $type,
+                        $fieldOrDirectiveName,
+                        $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] ?? ''
+                    );
+                }
+            }
+            return $fieldOrDirectiveDeprecationDescriptions;
+        }
+        return [];
     }
 
     protected function getEnumFieldOrDirectiveArgumentDeprecations(

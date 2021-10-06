@@ -219,22 +219,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $schemaWarnings,
                 $schemaDeprecations,
             ) = $this->dissectFieldForSchema($field);
-            $fieldSchemaDefinition = $objectTypeFieldResolvers[0]->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
-            if ($fieldSchemaDefinition[SchemaDefinition::DEPRECATED] ?? null) {
-                $schemaDeprecations[] = [
-                    Tokens::PATH => [$field],
-                    Tokens::MESSAGE => $fieldSchemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION],
-                ];
-            }
+
             // Check for deprecations in the enums
-            if ($maybeDeprecations = $objectTypeFieldResolvers[0]->resolveFieldValidationDeprecationDescriptions($this, $fieldName, $fieldArgs)) {
-                foreach ($maybeDeprecations as $deprecation) {
+            if ($maybeDeprecationMessages = $objectTypeFieldResolvers[0]->resolveFieldValidationDeprecationDescriptions($this, $fieldName, $fieldArgs)) {
+                foreach ($maybeDeprecationMessages as $deprecationMessage) {
                     $schemaDeprecations[] = [
                         Tokens::PATH => [$field],
-                        Tokens::MESSAGE => $deprecation,
+                        Tokens::MESSAGE => $deprecationMessage,
                     ];
                 }
             }
+
             return $schemaDeprecations;
         }
 
