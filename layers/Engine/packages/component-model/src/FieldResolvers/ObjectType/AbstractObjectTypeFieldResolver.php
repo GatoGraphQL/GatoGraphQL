@@ -689,7 +689,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * @see https://spec.graphql.org/draft/#sec-Schema-Introspection.Schema-Introspection-Schema
              */        
             foreach ($fieldArgs as $fieldArgName => $fieldArgValue) {
-                $fieldArgSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS][$fieldArgName] ?? [];
+                $fieldArgSchemaDefinition = $fieldArgsSchemaDefinition[$fieldArgName] ?? [];
                 if ($fieldArgSchemaDefinition[SchemaDefinition::DEPRECATED] ?? null) {
                     $fieldDeprecationDescriptions[] = sprintf(
                         $this->translationAPI->__('Argument \'%s\' in field \'%s\' is deprecated: %s', 'component-model'),
