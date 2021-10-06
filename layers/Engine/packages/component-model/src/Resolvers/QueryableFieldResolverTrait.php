@@ -19,35 +19,35 @@ trait QueryableFieldResolverTrait
         $this->moduleProcessorManager = $moduleProcessorManager;
     }
 
-    protected function getFilterSchemaFieldArgNameResolvers(array $filterDataloadingModule): array
+    protected function getFilterFieldArgNameResolvers(array $filterDataloadingModule): array
     {
         /** @var FilterInputContainerModuleProcessorInterface */
         $filterDataModuleProcessor = $this->moduleProcessorManager->getProcessor($filterDataloadingModule);
         return $filterDataModuleProcessor->getFieldFilterInputNameResolvers($filterDataloadingModule);
     }
 
-    protected function getFilterSchemaFieldArgDescription(array $filterDataloadingModule, string $fieldArgName): ?string
+    protected function getFilterFieldArgDescription(array $filterDataloadingModule, string $fieldArgName): ?string
     {
         /** @var FilterInputContainerModuleProcessorInterface */
         $filterDataModuleProcessor = $this->moduleProcessorManager->getProcessor($filterDataloadingModule);
         return $filterDataModuleProcessor->getFieldFilterInputDescription($filterDataloadingModule, $fieldArgName);
     }
 
-    protected function getFilterSchemaFieldArgDeprecationDescription(array $filterDataloadingModule, string $fieldArgName): ?string
+    protected function getFilterFieldArgDeprecationDescription(array $filterDataloadingModule, string $fieldArgName): ?string
     {
         /** @var FilterInputContainerModuleProcessorInterface */
         $filterDataModuleProcessor = $this->moduleProcessorManager->getProcessor($filterDataloadingModule);
         return $filterDataModuleProcessor->getFieldFilterInputDeprecationDescription($filterDataloadingModule, $fieldArgName);
     }
 
-    protected function getFilterSchemaFieldArgDefaultValue(array $filterDataloadingModule, string $fieldArgName): mixed
+    protected function getFilterFieldArgDefaultValue(array $filterDataloadingModule, string $fieldArgName): mixed
     {
         /** @var FilterInputContainerModuleProcessorInterface */
         $filterDataModuleProcessor = $this->moduleProcessorManager->getProcessor($filterDataloadingModule);
         return $filterDataModuleProcessor->getFieldFilterInputDefaultValue($filterDataloadingModule, $fieldArgName);
     }
 
-    protected function getFilterSchemaFieldArgTypeModifiers(array $filterDataloadingModule, string $fieldArgName): int
+    protected function getFilterFieldArgTypeModifiers(array $filterDataloadingModule, string $fieldArgName): int
     {
         /** @var FilterInputContainerModuleProcessorInterface */
         $filterDataModuleProcessor = $this->moduleProcessorManager->getProcessor($filterDataloadingModule);

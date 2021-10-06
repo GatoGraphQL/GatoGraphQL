@@ -23,7 +23,7 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
     public function getFieldArgNameResolvers(string $fieldName): array
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($fieldName)) {
-            return $this->getFilterSchemaFieldArgNameResolvers($filterDataloadingModule);
+            return $this->getFilterFieldArgNameResolvers($filterDataloadingModule);
         }
         return parent::getFieldArgNameResolvers($fieldName);
     }
@@ -31,7 +31,7 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
     public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($fieldName)) {
-            return $this->getFilterSchemaFieldArgDescription($filterDataloadingModule, $fieldArgName);
+            return $this->getFilterFieldArgDescription($filterDataloadingModule, $fieldArgName);
         }
         return parent::getFieldArgDescription($fieldName, $fieldArgName);
     }
@@ -39,7 +39,7 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
     public function getFieldArgDeprecationDescription(string $fieldName, string $fieldArgName): ?string
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($fieldName)) {
-            return $this->getFilterSchemaFieldArgDeprecationDescription($filterDataloadingModule, $fieldArgName);
+            return $this->getFilterFieldArgDeprecationDescription($filterDataloadingModule, $fieldArgName);
         }
         return parent::getFieldArgDeprecationDescription($fieldName, $fieldArgName);
     }
@@ -47,7 +47,7 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
     public function getFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($fieldName)) {
-            return $this->getFilterSchemaFieldArgDefaultValue($filterDataloadingModule, $fieldArgName);
+            return $this->getFilterFieldArgDefaultValue($filterDataloadingModule, $fieldArgName);
         }
         return parent::getFieldArgDefaultValue($fieldName, $fieldArgName);
     }
@@ -55,7 +55,7 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
     public function getFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($fieldName)) {
-            return $this->getFilterSchemaFieldArgTypeModifiers($filterDataloadingModule, $fieldArgName);
+            return $this->getFilterFieldArgTypeModifiers($filterDataloadingModule, $fieldArgName);
         }
         return parent::getFieldArgTypeModifiers($fieldName, $fieldArgName);
     }
