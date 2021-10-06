@@ -67,7 +67,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
 
         // Check for errors first, warnings and deprecations then
         $success = true;
-        if ($schemaValidationErrors = $objectTypeResolver->resolveFieldValidationErrorDescriptions($field, $variables)) {
+        if ($schemaValidationErrors = $objectTypeResolver->resolveFieldValidationErrorQualifiedEntries($field, $variables)) {
             $schemaErrors = array_merge(
                 $schemaErrors,
                 $schemaValidationErrors

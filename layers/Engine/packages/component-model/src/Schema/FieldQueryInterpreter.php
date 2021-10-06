@@ -726,7 +726,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         if ($fieldOrDirectiveArgs) {
             foreach ($fieldOrDirectiveArgs as $argName => $argValue) {
                 // Validate it
-                if ($maybeErrors = $this->resolveFieldArgumentValueErrorDescriptionsForSchema($objectTypeResolver, $argValue, $variables)) {
+                if ($maybeErrors = $this->resolveFieldArgumentValueErrorQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables)) {
                     foreach ($maybeErrors as $schemaError) {
                         array_unshift($schemaError[Tokens::PATH], $fieldOrDirective);
                         $this->prependPathOnNestedErrors($schemaError, $fieldOrDirective);
@@ -1746,12 +1746,12 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldArgValue;
     }
 
-    protected function resolveFieldArgumentValueErrorDescriptionsForSchema(ObjectTypeResolverInterface $objectTypeResolver, mixed $fieldArgValue, ?array $variables): array
+    protected function resolveFieldArgumentValueErrorQualifiedEntriesForSchema(ObjectTypeResolverInterface $objectTypeResolver, mixed $fieldArgValue, ?array $variables): array
     {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
             return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($objectTypeResolver, $variables) {
-                return $this->resolveFieldArgumentValueErrorDescriptionsForSchema($objectTypeResolver, $fieldArgValueElem, $variables);
+                return $this->resolveFieldArgumentValueErrorQualifiedEntriesForSchema($objectTypeResolver, $fieldArgValueElem, $variables);
             }, $fieldArgValue)));
         }
 
@@ -1771,7 +1771,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             }
 
             // If it reached here, it's a field! Validate it, or show an error
-            return $objectTypeResolver->resolveFieldValidationErrorDescriptions($fieldArgValue, $variables);
+            return $objectTypeResolver->resolveFieldValidationErrorQualifiedEntries($fieldArgValue, $variables);
         }
 
         return [];

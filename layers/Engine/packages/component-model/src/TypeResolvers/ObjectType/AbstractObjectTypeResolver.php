@@ -122,7 +122,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return null;
     }
 
-    final public function resolveFieldValidationErrorDescriptions(string $field, array &$variables = null): array
+    final public function resolveFieldValidationErrorQualifiedEntries(string $field, array &$variables = null): array
     {
         // Get the value from a fieldResolver, from the first one that resolves it
         list(
