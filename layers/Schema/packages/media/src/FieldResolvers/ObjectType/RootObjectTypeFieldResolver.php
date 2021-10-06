@@ -70,14 +70,14 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'mediaItems':
-            case 'mediaItem':
-                return $this->mediaObjectTypeResolver;
-        }
         return match ($fieldName) {
-            'mediaItemCount' => $this->intScalarTypeResolver,
-            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'mediaItems',
+            'mediaItem'
+                => $this->mediaObjectTypeResolver,
+            'mediaItemCount'
+                => $this->intScalarTypeResolver,
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

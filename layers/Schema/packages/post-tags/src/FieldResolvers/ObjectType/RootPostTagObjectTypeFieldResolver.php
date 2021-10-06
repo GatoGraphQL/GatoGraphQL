@@ -65,16 +65,17 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'postTag':
-            case 'postTagBySlug':
-            case 'postTags':
-                return $this->postTagObjectTypeResolver;
-        }
         return match ($fieldName) {
-            'postTagCount' => $this->intScalarTypeResolver,
-            'postTagNames' => $this->stringScalarTypeResolver,
-            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'postTag',
+            'postTagBySlug',
+            'postTags'
+                => $this->postTagObjectTypeResolver,
+            'postTagCount'
+                => $this->intScalarTypeResolver,
+            'postTagNames'
+                => $this->stringScalarTypeResolver,
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

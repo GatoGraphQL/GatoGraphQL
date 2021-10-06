@@ -61,14 +61,14 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'myPosts':
-            case 'myPost':
-                return $this->postObjectTypeResolver;
-        }
         return match ($fieldName) {
-            'myPostCount' => $this->intScalarTypeResolver,
-            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'myPosts',
+            'myPost'
+                => $this->postObjectTypeResolver,
+            'myPostCount'
+                => $this->intScalarTypeResolver,
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

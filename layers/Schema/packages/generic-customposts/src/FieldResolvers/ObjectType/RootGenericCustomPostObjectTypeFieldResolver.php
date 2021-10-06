@@ -84,19 +84,19 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'genericCustomPost':
-            case 'genericCustomPostBySlug':
-            case 'genericCustomPosts':
-            case 'genericCustomPostForAdmin':
-            case 'genericCustomPostBySlugForAdmin':
-            case 'genericCustomPostsForAdmin':
-                return $this->genericCustomPostObjectTypeResolver;
-        }
         return match ($fieldName) {
-            'genericCustomPostCount' => $this->intScalarTypeResolver,
-            'genericCustomPostCountForAdmin' => $this->intScalarTypeResolver,
-            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'genericCustomPost',
+            'genericCustomPostBySlug',
+            'genericCustomPosts',
+            'genericCustomPostForAdmin',
+            'genericCustomPostBySlugForAdmin',
+            'genericCustomPostsForAdmin'
+                => $this->genericCustomPostObjectTypeResolver,
+            'genericCustomPostCount',
+            'genericCustomPostCountForAdmin'
+                => $this->intScalarTypeResolver,
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

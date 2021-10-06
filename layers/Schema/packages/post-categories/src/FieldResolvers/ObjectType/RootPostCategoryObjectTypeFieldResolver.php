@@ -65,16 +65,17 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'postCategory':
-            case 'postCategoryBySlug':
-            case 'postCategories':
-                return $this->postCategoryObjectTypeResolver;
-        }
         return match ($fieldName) {
-            'postCategoryCount' => $this->intScalarTypeResolver,
-            'postCategoryNames' => $this->stringScalarTypeResolver,
-            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'postCategory',
+            'postCategoryBySlug',
+            'postCategories'
+                => $this->postCategoryObjectTypeResolver,
+            'postCategoryCount'
+                => $this->intScalarTypeResolver,
+            'postCategoryNames'
+                => $this->stringScalarTypeResolver,
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

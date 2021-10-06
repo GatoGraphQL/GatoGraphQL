@@ -53,11 +53,8 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'parentCategory':
-                return $this->getCategoryTypeResolver();
-        }
         return match ($fieldName) {
+            'parentCategory' => $this->getCategoryTypeResolver(),
             'name' => $this->stringScalarTypeResolver,
             'description' => $this->stringScalarTypeResolver,
             'count' => $this->intScalarTypeResolver,

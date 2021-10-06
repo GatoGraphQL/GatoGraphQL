@@ -47,11 +47,8 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'categories':
-                return $this->getCategoryTypeResolver();
-        }
         return match ($fieldName) {
+            'categories' => $this->getCategoryTypeResolver(),
             'categoryCount' => $this->intScalarTypeResolver,
             'categoryNames' => $this->stringScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),

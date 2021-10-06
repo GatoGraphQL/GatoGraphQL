@@ -90,19 +90,19 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
-            case 'page':
-            case 'pageBySlug':
-            case 'pages':
-            case 'pageForAdmin':
-            case 'pageBySlugForAdmin':
-            case 'pagesForAdmin':
-                return $this->pageObjectTypeResolver;
-        }
         return match ($fieldName) {
-            'pageCount' => $this->intScalarTypeResolver,
-            'pageCountForAdmin' => $this->intScalarTypeResolver,
-            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'page',
+            'pageBySlug',
+            'pages',
+            'pageForAdmin',
+            'pageBySlugForAdmin',
+            'pagesForAdmin'
+                => $this->pageObjectTypeResolver,
+            'pageCount',
+            'pageCountForAdmin'
+                => $this->intScalarTypeResolver,
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 
