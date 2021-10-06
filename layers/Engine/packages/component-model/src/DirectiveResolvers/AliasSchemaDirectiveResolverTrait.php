@@ -76,6 +76,18 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
+    public function getDirectiveArgDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    {
+        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
+        return $aliasedDirectiveResolver->getDirectiveArgDeprecationDescription(
+            $relationalTypeResolver,
+            $directiveArgName
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased DirectiveResolver
+     */
     public function getDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
