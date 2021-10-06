@@ -781,7 +781,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => array_udiff(
                 $interfaceTypeResolver->getAllInterfaceTypeFieldResolvers(),
                 $implementedInterfaceTypeFieldResolvers,
-                fn (object $a, object $b) => get_class($a) <=> get_class($b)
+                /**
+                 * Don't use arrow function here, or there are 3 chained rules for Rector to downgrade!
+                 * This is not handled currently, so `object` would not be removed, failing for PHP 7.1.
+                 * Also, vars `$a` and `$b` are wrongly added as `use($a, $b)` to the first `fn`,
+                 * as if they were present in the original function scope, which they are not
+                 */
+                function (object $a, object $b) {
+                    return get_class($a) <=> get_class($b);
+                }
             ) === [],
         );
     }
