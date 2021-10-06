@@ -289,16 +289,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      */
     public function validateDirectiveArgumentsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
     {
-        if (
-            $maybeDeprecation = $this->resolveDirectiveDeprecationDescription(
-                $relationalTypeResolver,
-                $directiveName,
-                $directiveArgs
-            )
-        ) {
+        $deprecationMessages = $this->resolveDirectiveDeprecationDescriptions(
+            $relationalTypeResolver,
+            $directiveName,
+            $directiveArgs
+        );
+        foreach ($deprecationMessages as $deprecationMessage) {
             $schemaDeprecations[] = [
                 Tokens::PATH => [$this->directive],
-                Tokens::MESSAGE => $maybeDeprecation,
+                Tokens::MESSAGE => $deprecationMessage,
             ];
         }
         return $directiveArgs;
@@ -826,22 +825,25 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return $this->schemaDirectiveArgsCache[$cacheKey];
     }
 
-    public function resolveDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): ?string
+    /**
+     * @return string[]
+     */
+    public function resolveDirectiveDeprecationDescriptions(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): array
     {
+        $directiveDeprecationDescriptions = [];
         $directiveSchemaDefinition = $this->getDirectiveSchemaDefinition($relationalTypeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
-            if (
-                $maybeDeprecations = $this->getEnumFieldOrDirectiveArgumentDeprecations(
+            $directiveDeprecationDescriptions = array_merge(
+                $directiveDeprecationDescriptions,
+                $this->getEnumFieldOrDirectiveArgumentDeprecations(
                     $directiveArgsSchemaDefinition,
                     $directiveName,
                     $directiveArgs,
                     ResolverTypes::DIRECTIVE
                 )
-            ) {
-                return implode($this->translationAPI->__('. '), $maybeDeprecations);
-            }
+            );
         }
-        return null;
+        return $directiveDeprecationDescriptions;
     }
 
     public function getDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
