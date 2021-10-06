@@ -18,7 +18,7 @@ interface DataloadQueryArgsFilterInputModuleProcessorInterface extends FormCompo
      * only for fields and enum values, but here it is added nevertheless.
      * This message is shown on runtime when executing a query with a deprecated field,
      * but it's not shown when doing introspection.
-     * 
+     *
      * @see https://spec.graphql.org/draft/#sec-Schema-Introspection.Schema-Introspection-Schema
      */
     public function getFilterInputDeprecationDescription(array $module): ?string;

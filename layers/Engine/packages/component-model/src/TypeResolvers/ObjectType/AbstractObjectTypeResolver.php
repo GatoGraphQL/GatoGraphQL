@@ -229,7 +229,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     ];
                 }
             }
-            
+
             return $schemaDeprecations;
         }
 
