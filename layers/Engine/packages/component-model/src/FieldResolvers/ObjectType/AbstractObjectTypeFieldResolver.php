@@ -32,7 +32,6 @@ use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -42,9 +41,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver implements ObjectTypeFieldResolverInterface, ObjectTypeFieldSchemaDefinitionResolverInterface
 {
     use AttachableExtensionTrait;
-    use FieldOrDirectiveResolverTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
-    use EnumTypeSchemaDefinitionResolverTrait;
+    use FieldOrDirectiveResolverTrait, EnumTypeSchemaDefinitionResolverTrait {
+        EnumTypeSchemaDefinitionResolverTrait::doAddSchemaDefinitionEnumValuesForField insteadof FieldOrDirectiveResolverTrait;
+    }
 
     /**
      * @var array<string, array>
