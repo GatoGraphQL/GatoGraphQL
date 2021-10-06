@@ -844,7 +844,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
              * @see https://spec.graphql.org/draft/#sec-Schema-Introspection.Schema-Introspection-Schema
              */        
             foreach ($directiveArgs as $directiveArgName => $directiveArgValue) {
-                $directiveArgSchemaDefinition = $directiveArgsSchemaDefinition[SchemaDefinition::ARGS] ?? [];
+                $directiveArgSchemaDefinition = $directiveArgsSchemaDefinition[$directiveArgName] ?? [];
                 if ($directiveArgSchemaDefinition[SchemaDefinition::DEPRECATED] ?? null) {
                     $directiveDeprecationDescriptions[] = sprintf(
                         $this->translationAPI->__('Argument \'%s\' in directive \'%s\' is deprecated: %s', 'component-model'),
