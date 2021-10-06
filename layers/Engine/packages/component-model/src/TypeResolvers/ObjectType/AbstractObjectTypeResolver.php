@@ -122,7 +122,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return null;
     }
 
-    final public function resolveFieldValidationErrorDescriptions(string $field, array &$variables = null): array
+    final public function resolveFieldValidationErrorQualifiedEntries(string $field, array &$variables = null): array
     {
         // Get the value from a fieldResolver, from the first one that resolves it
         list(
@@ -182,7 +182,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ];
     }
 
-    final public function resolveFieldValidationWarningDescriptions(string $field, array &$variables = null): array
+    final public function resolveFieldValidationWarningQualifiedEntries(string $field, array &$variables = null): array
     {
         // Get the value from a fieldResolver, from the first one that resolves it
         if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
@@ -207,7 +207,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return [];
     }
 
-    final public function resolveFieldDeprecationDescriptions(string $field, array &$variables = null): array
+    final public function resolveFieldDeprecationQualifiedEntries(string $field, array &$variables = null): array
     {
         // Get the value from a fieldResolver, from the first one that resolves it
         if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
