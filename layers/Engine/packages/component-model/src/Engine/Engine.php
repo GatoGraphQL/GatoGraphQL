@@ -700,7 +700,7 @@ class Engine implements EngineInterface
         if ($isUnionTypeResolver) {
             /** @var UnionTypeResolverInterface $relationalTypeResolver */
             // Get the actual type for each entity, and add the entry there
-            $targetObjectTypeResolverNameResolvers = $targetObjectTypeResolverNameDataItems = $targetObjectTypeResolverNameDBKeys = [];
+            $targetObjectTypeResolverNameTypeResolvers = $targetObjectTypeResolverNameDataItems = $targetObjectTypeResolverNameDBKeys = [];
             $noTargetObjectTypeResolverDataItems = [];
             foreach ($dataitems as $objectID => $dataItem) {
                 // Obtain the type of the object
@@ -716,7 +716,7 @@ class Engine implements EngineInterface
                         ) = UnionTypeHelpers::extractDBObjectTypeAndID($objectID);
 
                         $targetObjectTypeResolverName = $targetObjectTypeResolver->getTypeOutputName();
-                        $targetObjectTypeResolverNameResolvers[$targetObjectTypeResolverName] = $targetObjectTypeResolver;
+                        $targetObjectTypeResolverNameTypeResolvers[$targetObjectTypeResolverName] = $targetObjectTypeResolver;
                         $targetObjectTypeResolverNameDBKeys[$targetObjectTypeResolverName] = $objectDBKey;
                         $targetObjectTypeResolverNameDataItems[$targetObjectTypeResolverName][$objectID] = $dataItem;
                     }
@@ -727,7 +727,7 @@ class Engine implements EngineInterface
                 }
             }
             foreach ($targetObjectTypeResolverNameDataItems as $targetObjectTypeResolverName => $convertedDataItems) {
-                $targetObjectTypeResolver = $targetObjectTypeResolverNameResolvers[$targetObjectTypeResolverName];
+                $targetObjectTypeResolver = $targetObjectTypeResolverNameTypeResolvers[$targetObjectTypeResolverName];
                 $targetObjectTypeDBKey = $targetObjectTypeResolverNameDBKeys[$targetObjectTypeResolverName];
                 $this->addDatasetToDatabase($database, $targetObjectTypeResolver, $targetObjectTypeDBKey, $convertedDataItems, $objectIDItems, $addEntryIfError);
             }

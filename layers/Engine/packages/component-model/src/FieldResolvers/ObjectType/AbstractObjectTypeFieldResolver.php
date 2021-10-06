@@ -300,7 +300,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             if (Environment::enableSemanticVersionConstraints()) {
                 $hasVersion = $this->hasSchemaFieldVersion($objectTypeResolver, $fieldName);
                 if ($hasVersion) {
-                    $schemaDirectiveArgNameResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->stringScalarTypeResolver;
+                    $consolidatedFieldArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->stringScalarTypeResolver;
                 }
             }
         }
