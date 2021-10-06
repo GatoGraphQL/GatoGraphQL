@@ -20,6 +20,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
         ?string $argDescription,
         mixed $argDefaultValue,
         ?int $argTypeModifiers,
+        ?string $argDeprecationDescription,
     ): array {
         $schemaFieldOrDirectiveArgDefinition = [
             SchemaDefinition::NAME => $argName,
@@ -63,6 +64,10 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
                     }
                 }
             }
+        }
+        if ($argDeprecationDescription !== null) {
+            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::DEPRECATED] = $argDeprecationDescription;
+            $schemaFieldOrDirectiveArgDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] = $argDeprecationDescription;
         }
         return $schemaFieldOrDirectiveArgDefinition;
     }

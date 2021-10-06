@@ -819,6 +819,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 $this->getConsolidatedDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
                 $this->getConsolidatedDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
                 $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
+                $this->getConsolidatedDirectiveArgDeprecationDescription($relationalTypeResolver, $directiveArgName),
             );
         }
         $this->schemaDirectiveArgsCache[$cacheKey] = $schemaDirectiveArgs;
