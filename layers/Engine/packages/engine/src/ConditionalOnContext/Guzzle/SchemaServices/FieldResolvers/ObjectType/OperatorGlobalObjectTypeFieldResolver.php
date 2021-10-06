@@ -61,7 +61,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         };
     }
 
-    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
             'getJSON' => [
@@ -70,7 +70,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'getAsyncJSON' => [
                 'urls' => $this->urlScalarTypeResolver,
             ],
-            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 

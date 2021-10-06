@@ -191,13 +191,13 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         };
     }
 
-    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
             'isAction' => [
                 'action' => $this->stringScalarTypeResolver,
             ],
-            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
     

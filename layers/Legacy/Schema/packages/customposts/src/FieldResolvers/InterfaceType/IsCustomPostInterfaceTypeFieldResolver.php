@@ -73,13 +73,13 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
             default => parent::getFieldDescription($fieldName),
         };
     }
-    public function getFieldArgNameResolvers(string $fieldName): array
+    public function getFieldArgNameTypeResolvers(string $fieldName): array
     {
         return match ($fieldName) {
             'datetime' => [
                 'format' => $this->stringScalarTypeResolver,
             ],
-            default => parent::getFieldArgNameResolvers($fieldName),
+            default => parent::getFieldArgNameTypeResolvers($fieldName),
         };
     }
     

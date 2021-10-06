@@ -180,11 +180,11 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /**
      * @return array<string, InputTypeResolverInterface>
      */
-    public function getFieldArgNameResolvers(string $fieldName): array
+    public function getFieldArgNameTypeResolvers(string $fieldName): array
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldArgNameResolvers($fieldName);
+            return $schemaDefinitionResolver->getFieldArgNameTypeResolvers($fieldName);
         }
         return [];
     }
@@ -228,11 +228,11 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /**
      * @return array<string, InputTypeResolverInterface>
      */
-    public function getConsolidatedFieldArgNameResolvers(string $fieldName): array
+    public function getConsolidatedFieldArgNameTypeResolvers(string $fieldName): array
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getConsolidatedFieldArgNameResolvers($fieldName);
+            return $schemaDefinitionResolver->getConsolidatedFieldArgNameTypeResolvers($fieldName);
         }
         return [];
     }

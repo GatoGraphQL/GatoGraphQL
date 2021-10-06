@@ -27,11 +27,11 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         };
     }
 
-    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            'update' => $this->getCreateOrUpdateCustomPostSchemaFieldArgNameResolvers(false),
-            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            'update' => $this->getCreateOrUpdateCustomPostSchemaFieldArgNameTypeResolvers(false),
+            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 

@@ -19,7 +19,7 @@ trait QueryableFieldResolverTrait
         $this->moduleProcessorManager = $moduleProcessorManager;
     }
 
-    protected function getFilterFieldArgNameResolvers(array $filterDataloadingModule): array
+    protected function getFilterFieldArgNameTypeResolvers(array $filterDataloadingModule): array
     {
         /** @var FilterInputContainerModuleProcessorInterface */
         $filterDataModuleProcessor = $this->moduleProcessorManager->getProcessor($filterDataloadingModule);

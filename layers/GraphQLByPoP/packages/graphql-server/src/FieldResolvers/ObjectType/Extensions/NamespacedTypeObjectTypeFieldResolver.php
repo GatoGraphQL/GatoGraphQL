@@ -82,13 +82,13 @@ class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
         };
     }
 
-    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
             'name' => [
                 'namespaced' => $this->booleanScalarTypeResolver,
             ],
-            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 

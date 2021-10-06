@@ -33,25 +33,25 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
     }
 
-    private function getAddCommentToCustomPostSchemaFieldArgNameResolvers(
+    private function getAddCommentToCustomPostSchemaFieldArgNameTypeResolvers(
         bool $addCustomPostID,
         bool $addParentCommentID,
     ): array {
-        $schemaFieldArgNameResolvers = [
+        $schemaFieldArgNameTypeResolvers = [
             MutationInputProperties::COMMENT => $this->stringScalarTypeResolver,
         ];
         if ($addParentCommentID) {
-            $schemaFieldArgNameResolvers[MutationInputProperties::PARENT_COMMENT_ID] = $this->idScalarTypeResolver;
+            $schemaFieldArgNameTypeResolvers[MutationInputProperties::PARENT_COMMENT_ID] = $this->idScalarTypeResolver;
         }
         if ($addCustomPostID) {
-            $schemaFieldArgNameResolvers[MutationInputProperties::CUSTOMPOST_ID] = $this->idScalarTypeResolver;
+            $schemaFieldArgNameTypeResolvers[MutationInputProperties::CUSTOMPOST_ID] = $this->idScalarTypeResolver;
         }
         if (!ComponentConfiguration::mustUserBeLoggedInToAddComment()) {
-            $schemaFieldArgNameResolvers[MutationInputProperties::AUTHOR_NAME] = $this->stringScalarTypeResolver;
-            $schemaFieldArgNameResolvers[MutationInputProperties::AUTHOR_EMAIL] = $this->emailScalarTypeResolver;
-            $schemaFieldArgNameResolvers[MutationInputProperties::AUTHOR_URL] = $this->urlScalarTypeResolver;
+            $schemaFieldArgNameTypeResolvers[MutationInputProperties::AUTHOR_NAME] = $this->stringScalarTypeResolver;
+            $schemaFieldArgNameTypeResolvers[MutationInputProperties::AUTHOR_EMAIL] = $this->emailScalarTypeResolver;
+            $schemaFieldArgNameTypeResolvers[MutationInputProperties::AUTHOR_URL] = $this->urlScalarTypeResolver;
         }
-        return $schemaFieldArgNameResolvers;
+        return $schemaFieldArgNameTypeResolvers;
     }
 
     private function getAddCommentToCustomPostSchemaFieldArgDescription(

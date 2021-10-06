@@ -119,7 +119,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         };
     }
 
-    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
             'src',
@@ -131,7 +131,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
                     'size' => $this->stringScalarTypeResolver,
                 ],
             default
-                => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+                => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 

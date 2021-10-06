@@ -66,13 +66,13 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     //     return $descriptions[$fieldName] ?? parent::getFieldDescription($objectTypeResolver, $fieldName);
     // }
 
-    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
             'directives' => [
                 'ofTypes' => $this->directiveTypeEnumTypeResolver,
             ],
-            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 

@@ -57,12 +57,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         };
     }
 
-    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            'addCommentToCustomPost' => $this->getAddCommentToCustomPostSchemaFieldArgNameResolvers(true, true),
-            'replyComment' => $this->getAddCommentToCustomPostSchemaFieldArgNameResolvers(false, true),
-            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            'addCommentToCustomPost' => $this->getAddCommentToCustomPostSchemaFieldArgNameTypeResolvers(true, true),
+            'replyComment' => $this->getAddCommentToCustomPostSchemaFieldArgNameTypeResolvers(false, true),
+            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 

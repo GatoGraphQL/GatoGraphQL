@@ -35,7 +35,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     {
         $this->hooksAPI->addFilter(
             HookNames::FIELD_ARG_NAME_RESOLVERS,
-            array($this, 'maybeAddFieldArgNameResolvers'),
+            array($this, 'maybeAddFieldArgNameTypeResolvers'),
             10,
             4
         );
@@ -59,18 +59,18 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    public function maybeAddFieldArgNameResolvers(
-        array $fieldArgNameResolvers,
+    public function maybeAddFieldArgNameTypeResolvers(
+        array $fieldArgNameTypeResolvers,
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
     ): array {
         // Only for the specific combinations of Type and fieldName
         if (!$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
-            return $fieldArgNameResolvers;
+            return $fieldArgNameTypeResolvers;
         }
-        $fieldArgNameResolvers[MutationInputProperties::CATEGORY_IDS] = $this->idScalarTypeResolver;
-        return $fieldArgNameResolvers;
+        $fieldArgNameTypeResolvers[MutationInputProperties::CATEGORY_IDS] = $this->idScalarTypeResolver;
+        return $fieldArgNameTypeResolvers;
     }
 
     public function maybeAddFieldArgDescription(

@@ -55,11 +55,11 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            'reply' => $this->getAddCommentToCustomPostSchemaFieldArgNameResolvers(false, false),
-            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            'reply' => $this->getAddCommentToCustomPostSchemaFieldArgNameTypeResolvers(false, false),
+            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 

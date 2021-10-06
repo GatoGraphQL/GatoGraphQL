@@ -112,7 +112,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
         };
     }
 
-    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
             'favicon',
@@ -120,7 +120,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
                 'size' => $this->stringScalarTypeResolver,
                 'addDescription' => $this->booleanScalarTypeResolver,
             ],
-            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
     

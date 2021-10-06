@@ -65,7 +65,7 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
         };
     }
 
-    public function getFieldArgNameResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
             'userByUsername' => [
@@ -74,7 +74,7 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
             'userByEmail' => [
                 'email' => $this->stringScalarTypeResolver,
             ],
-            default => parent::getFieldArgNameResolvers($objectTypeResolver, $fieldName),
+            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 
