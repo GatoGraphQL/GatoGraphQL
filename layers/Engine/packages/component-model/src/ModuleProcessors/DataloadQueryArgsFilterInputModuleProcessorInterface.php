@@ -21,7 +21,7 @@ interface DataloadQueryArgsFilterInputModuleProcessorInterface extends FormCompo
      *
      * @see https://spec.graphql.org/draft/#sec-Schema-Introspection.Schema-Introspection-Schema
      */
-    public function getFilterInputDeprecationDescription(array $module): ?string;
+    public function getFilterInputDeprecationMessage(array $module): ?string;
     public function getFilterInputDefaultValue(array $module): mixed;
     public function getFilterInputTypeModifiers(array $module): int;
 }

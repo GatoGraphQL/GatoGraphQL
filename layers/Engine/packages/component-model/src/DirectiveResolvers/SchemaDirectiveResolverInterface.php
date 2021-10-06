@@ -24,7 +24,7 @@ interface SchemaDirectiveResolverInterface
      */
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array;
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string;
-    public function getDirectiveArgDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string;
+    public function getDirectiveArgDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string;
     public function getDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed;
     public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int;
     /**
@@ -34,7 +34,7 @@ interface SchemaDirectiveResolverInterface
      */
     public function getConsolidatedDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array;
     public function getConsolidatedDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string;
-    public function getConsolidatedDirectiveArgDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string;
+    public function getConsolidatedDirectiveArgDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string;
     public function getConsolidatedDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed;
     public function getConsolidatedDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int;
     /**
@@ -48,7 +48,7 @@ interface SchemaDirectiveResolverInterface
     /**
      * Indicate if the directive has been deprecated, why, when, and/or how it must be replaced
      */
-    public function getDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
+    public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
     /**
      * Indicate if the directive is global (i.e. it can be applied to all fields, for all typeResolvers)
      */

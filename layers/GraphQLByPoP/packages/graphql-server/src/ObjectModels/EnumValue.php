@@ -26,6 +26,6 @@ class EnumValue extends AbstractSchemaDefinitionReferenceObject
     }
     public function getDeprecatedReason(): ?string
     {
-        return $this->schemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] ?? null;
+        return $this->schemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] ?? null;
     }
 }

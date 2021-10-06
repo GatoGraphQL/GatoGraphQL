@@ -142,20 +142,20 @@ trait FieldOrDirectiveResolverTrait
         string $type
     ): array {
         if (ComponentConfiguration::enableFieldOrDirectiveArgumentDeprecations()) {
-            $fieldOrDirectiveDeprecationDescriptions = [];
+            $fieldOrDirectiveDeprecationMessages = [];
             foreach ($fieldOrDirectiveArgs as $fieldOrDirectiveArgName => $directiveArgValue) {
                 $fieldOrDirectiveArgSchemaDefinition = $fieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgName] ?? [];
                 if ($fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::DEPRECATED] ?? null) {
-                    $fieldOrDirectiveDeprecationDescriptions[] = sprintf(
+                    $fieldOrDirectiveDeprecationMessages[] = sprintf(
                         $this->translationAPI->__('Argument \'%s\' in %s \'%s\' is deprecated: %s', 'component-model'),
                         $fieldOrDirectiveArgName,
                         $type,
                         $fieldOrDirectiveName,
-                        $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] ?? ''
+                        $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] ?? ''
                     );
                 }
             }
-            return $fieldOrDirectiveDeprecationDescriptions;
+            return $fieldOrDirectiveDeprecationMessages;
         }
         return [];
     }
@@ -271,7 +271,7 @@ trait FieldOrDirectiveResolverTrait
                 $errorItems[] = $fieldOrDirectiveArgumentValueItem;
             } elseif ($fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::DEPRECATED] ?? null) {
                 // Check if this enumValue is deprecated
-                $deprecationItems[$fieldOrDirectiveArgumentValueItem] = $fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION];
+                $deprecationItems[$fieldOrDirectiveArgumentValueItem] = $fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::DEPRECATION_MESSAGE];
             }
         }
         if ($errorItems) {

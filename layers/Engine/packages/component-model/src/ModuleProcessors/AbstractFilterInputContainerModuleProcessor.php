@@ -68,7 +68,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
         return null;
     }
 
-    public function getFieldFilterInputDeprecationDescription(array $module, string $fieldArgName): ?string
+    public function getFieldFilterInputDeprecationMessage(array $module, string $fieldArgName): ?string
     {
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
         foreach ($filterQueryArgsModules as $module) {
@@ -76,7 +76,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
             $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
             $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
             if ($filterInputName === $fieldArgName) {
-                return $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputDeprecationDescription($module);
+                return $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputDeprecationMessage($module);
             }
         }
         return null;

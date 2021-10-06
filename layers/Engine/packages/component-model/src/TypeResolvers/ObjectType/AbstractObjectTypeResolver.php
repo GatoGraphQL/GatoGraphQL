@@ -221,7 +221,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             ) = $this->dissectFieldForSchema($field);
 
             // Check for deprecations in the enums
-            if ($maybeDeprecationMessages = $objectTypeFieldResolvers[0]->resolveFieldValidationDeprecationDescriptions($this, $fieldName, $fieldArgs)) {
+            if ($maybeDeprecationMessages = $objectTypeFieldResolvers[0]->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
                 foreach ($maybeDeprecationMessages as $deprecationMessage) {
                     $schemaDeprecations[] = [
                         Tokens::PATH => [$field],
@@ -366,7 +366,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         if ($maybeErrors = $objectTypeFieldResolver->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
                             return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $maybeErrors);
                         }
-                        if ($maybeDeprecations = $objectTypeFieldResolver->resolveFieldValidationDeprecationDescriptions($this, $fieldName, $fieldArgs)) {
+                        if ($maybeDeprecations = $objectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
                             $id = $this->getID($object);
                             foreach ($maybeDeprecations as $deprecation) {
                                 $objectDeprecations[(string)$id][] = [

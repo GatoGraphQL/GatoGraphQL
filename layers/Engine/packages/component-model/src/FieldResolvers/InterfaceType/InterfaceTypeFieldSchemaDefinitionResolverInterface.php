@@ -13,7 +13,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface;
     public function getFieldDescription(string $fieldName): ?string;
     public function getFieldTypeModifiers(string $fieldName): int;
-    public function getFieldDeprecationDescription(string $fieldName): ?string;
+    public function getFieldDeprecationMessage(string $fieldName): ?string;
     /**
      * @return array<string, InputTypeResolverInterface>
      */
@@ -29,7 +29,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
      *
      * @see https://spec.graphql.org/draft/#sec-Schema-Introspection.Schema-Introspection-Schema
      */
-    public function getFieldArgDeprecationDescription(string $fieldName, string $fieldArgName): ?string;
+    public function getFieldArgDeprecationMessage(string $fieldName, string $fieldArgName): ?string;
     /**
      * @return array<string, InputTypeResolverInterface>
      */
@@ -37,7 +37,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
     public function getConsolidatedFieldArgDescription(string $fieldName, string $fieldArgName): ?string;
     public function getConsolidatedFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed;
     public function getConsolidatedFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int;
-    public function getConsolidatedFieldArgDeprecationDescription(string $fieldName, string $fieldArgName): ?string;
+    public function getConsolidatedFieldArgDeprecationMessage(string $fieldName, string $fieldArgName): ?string;
     /**
      * Validate the constraints for a field argument
      *

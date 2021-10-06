@@ -55,7 +55,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /** @var array<string, string|null> */
     protected array $consolidatedFieldArgDescriptionCache = [];
     /** @var array<string, string|null> */
-    protected array $consolidatedFieldArgDeprecationDescriptionCache = [];
+    protected array $consolidatedFieldArgDeprecationMessageCache = [];
     /** @var array<string, mixed> */
     protected array $consolidatedFieldArgDefaultValueCache = [];
     /** @var array<string, int> */
@@ -241,11 +241,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
-    public function getFieldArgDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    public function getFieldArgDeprecationMessage(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldArgDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgName);
+            return $schemaDefinitionResolver->getFieldArgDeprecationMessage($objectTypeResolver, $fieldName, $fieldArgName);
         }
         return null;
     }
@@ -334,22 +334,22 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getConsolidatedFieldArgDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    final public function getConsolidatedFieldArgDeprecationMessage(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         // Cache the result
         $cacheKey = $objectTypeResolver::class . '.' . $fieldName . '(' . $fieldArgName . ':)';
-        if (array_key_exists($cacheKey, $this->consolidatedFieldArgDeprecationDescriptionCache)) {
-            return $this->consolidatedFieldArgDeprecationDescriptionCache[$cacheKey];
+        if (array_key_exists($cacheKey, $this->consolidatedFieldArgDeprecationMessageCache)) {
+            return $this->consolidatedFieldArgDeprecationMessageCache[$cacheKey];
         }
-        $this->consolidatedFieldArgDeprecationDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
+        $this->consolidatedFieldArgDeprecationMessageCache[$cacheKey] = $this->hooksAPI->applyFilters(
             HookNames::FIELD_ARG_DEPRECATION_MESSAGE,
-            $this->getFieldArgDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgName),
+            $this->getFieldArgDeprecationMessage($objectTypeResolver, $fieldName, $fieldArgName),
             $this,
             $objectTypeResolver,
             $fieldName,
             $fieldArgName,
         );
-        return $this->consolidatedFieldArgDeprecationDescriptionCache[$cacheKey];
+        return $this->consolidatedFieldArgDeprecationMessageCache[$cacheKey];
     }
 
     /**
@@ -416,18 +416,18 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $this->getConsolidatedFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
                 $this->getConsolidatedFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
                 $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
-                $this->getConsolidatedFieldArgDeprecationDescription($objectTypeResolver, $fieldName, $fieldArgName),
+                $this->getConsolidatedFieldArgDeprecationMessage($objectTypeResolver, $fieldName, $fieldArgName),
             );
         }
         $this->schemaFieldArgsCache[$cacheKey] = $schemaFieldArgs;
         return $this->schemaFieldArgsCache[$cacheKey];
     }
 
-    public function getFieldDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    public function getFieldDeprecationMessage(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldDeprecationDescription($objectTypeResolver, $fieldName);
+            return $schemaDefinitionResolver->getFieldDeprecationMessage($objectTypeResolver, $fieldName);
         }
         return null;
     }
@@ -664,23 +664,23 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return [];
     }
 
-    public function resolveFieldValidationDeprecationDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
+    public function resolveFieldValidationDeprecationMessages(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
     {
-        $fieldDeprecationDescriptions = [];
+        $fieldDeprecationMessages = [];
         $fieldSchemaDefinition = $this->getFieldSchemaDefinition($objectTypeResolver, $fieldName, $fieldArgs);
 
         // Deprecations for the field
         if ($fieldSchemaDefinition[SchemaDefinition::DEPRECATED] ?? null) {
-            $fieldDeprecationDescriptions[] = sprintf(
+            $fieldDeprecationMessages[] = sprintf(
                 $this->translationAPI->__('Field \'%s\' is deprecated: %s', 'component-model'),
                 $fieldName,
-                $fieldSchemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION]
+                $fieldSchemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE]
             );
         }
         if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
             // Deprecations for the field args
-            $fieldDeprecationDescriptions = array_merge(
-                $fieldDeprecationDescriptions,
+            $fieldDeprecationMessages = array_merge(
+                $fieldDeprecationMessages,
                 $this->maybeGetFieldOrDirectiveArgumentDeprecations(
                     $fieldArgsSchemaDefinition,
                     $fieldName,
@@ -689,8 +689,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 )
             );
             // Deprecations for the field args of Enum Type
-            $fieldDeprecationDescriptions = array_merge(
-                $fieldDeprecationDescriptions,
+            $fieldDeprecationMessages = array_merge(
+                $fieldDeprecationMessages,
                 $this->getEnumFieldOrDirectiveArgumentDeprecations(
                     $fieldArgsSchemaDefinition,
                     $fieldName,
@@ -699,7 +699,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 )
             );
         }
-        return $fieldDeprecationDescriptions;
+        return $fieldDeprecationMessages;
     }
 
     /**
@@ -772,9 +772,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($description = $this->getFieldDescription($objectTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::DESCRIPTION] = $description;
         }
-        if ($deprecationDescription = $this->getFieldDeprecationDescription($objectTypeResolver, $fieldName)) {
+        if ($deprecationMessage = $this->getFieldDeprecationMessage($objectTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::DEPRECATED] = true;
-            $schemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] = $deprecationDescription;
+            $schemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationMessage;
         }
         if ($args = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::ARGS] = $args;

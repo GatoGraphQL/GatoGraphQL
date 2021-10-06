@@ -48,11 +48,11 @@ trait SchemaFilterInputModuleProcessorTrait
         return null;
     }
 
-    public function getFilterInputDeprecationDescription(array $module): ?string
+    public function getFilterInputDeprecationMessage(array $module): ?string
     {
         $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
         if ($filterSchemaDefinitionResolver !== $this) {
-            return $filterSchemaDefinitionResolver->getFilterInputDeprecationDescription($module);
+            return $filterSchemaDefinitionResolver->getFilterInputDeprecationMessage($module);
         }
         return null;
     }

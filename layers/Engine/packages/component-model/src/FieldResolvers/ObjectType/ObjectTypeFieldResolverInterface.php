@@ -56,7 +56,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
     /**
      * @return string[]
      */
-    public function resolveFieldValidationDeprecationDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array;
+    public function resolveFieldValidationDeprecationMessages(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array;
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables

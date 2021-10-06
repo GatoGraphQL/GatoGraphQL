@@ -132,7 +132,7 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'isDeprecated':
                 return $field->isDeprecated();
             case 'deprecationReason':
-                return $field->getDeprecationDescription();
+                return $field->getDeprecationMessage();
             case 'extensions':
                 return $field->getExtensions();
         }

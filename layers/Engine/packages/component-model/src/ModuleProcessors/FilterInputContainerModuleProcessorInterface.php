@@ -8,7 +8,7 @@ interface FilterInputContainerModuleProcessorInterface extends FilterDataModuleP
 {
     public function getFieldFilterInputNameTypeResolvers(array $module): array;
     public function getFieldFilterInputDescription(array $module, string $fieldArgName): ?string;
-    public function getFieldFilterInputDeprecationDescription(array $module, string $fieldArgName): ?string;
+    public function getFieldFilterInputDeprecationMessage(array $module, string $fieldArgName): ?string;
     public function getFieldFilterInputDefaultValue(array $module, string $fieldArgName): mixed;
     public function getFieldFilterInputTypeModifiers(array $module, string $fieldArgName): int;
     public function getFilterInputModules(array $module): array;

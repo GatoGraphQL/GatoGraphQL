@@ -48,7 +48,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /** @var array<string, string|null> */
     protected array $consolidatedDirectiveArgDescriptionCache = [];
     /** @var array<string, string|null> */
-    protected array $consolidatedDirectiveArgDeprecationDescriptionCache = [];
+    protected array $consolidatedDirectiveArgDeprecationMessageCache = [];
     /** @var array<string, mixed> */
     protected array $consolidatedDirectiveArgDefaultValueCache = [];
     /** @var array<string, int> */
@@ -289,7 +289,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      */
     public function validateDirectiveArgumentsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
     {
-        $deprecationMessages = $this->resolveDirectiveDeprecationDescriptions(
+        $deprecationMessages = $this->resolveDirectiveDeprecationMessages(
             $relationalTypeResolver,
             $directiveName,
             $directiveArgs
@@ -648,11 +648,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return null;
     }
 
-    public function getDirectiveArgDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    public function getDirectiveArgDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getDirectiveArgDeprecationDescription($relationalTypeResolver, $directiveArgName);
+            return $schemaDefinitionResolver->getDirectiveArgDeprecationMessage($relationalTypeResolver, $directiveArgName);
         }
         return null;
     }
@@ -739,21 +739,21 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
      * Consolidation of the schema directive arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getConsolidatedDirectiveArgDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    final public function getConsolidatedDirectiveArgDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         // Cache the result
         $cacheKey = $relationalTypeResolver::class . '(' . $directiveArgName . ':)';
-        if (array_key_exists($cacheKey, $this->consolidatedDirectiveArgDeprecationDescriptionCache)) {
-            return $this->consolidatedDirectiveArgDeprecationDescriptionCache[$cacheKey];
+        if (array_key_exists($cacheKey, $this->consolidatedDirectiveArgDeprecationMessageCache)) {
+            return $this->consolidatedDirectiveArgDeprecationMessageCache[$cacheKey];
         }
-        $this->consolidatedDirectiveArgDeprecationDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
+        $this->consolidatedDirectiveArgDeprecationMessageCache[$cacheKey] = $this->hooksAPI->applyFilters(
             HookNames::DIRECTIVE_ARG_DEPRECATION_MESSAGE,
-            $this->getDirectiveArgDeprecationDescription($relationalTypeResolver, $directiveArgName),
+            $this->getDirectiveArgDeprecationMessage($relationalTypeResolver, $directiveArgName),
             $this,
             $relationalTypeResolver,
             $directiveArgName,
         );
-        return $this->consolidatedDirectiveArgDeprecationDescriptionCache[$cacheKey];
+        return $this->consolidatedDirectiveArgDeprecationMessageCache[$cacheKey];
     }
 
     /**
@@ -818,7 +818,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 $this->getConsolidatedDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
                 $this->getConsolidatedDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
                 $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
-                $this->getConsolidatedDirectiveArgDeprecationDescription($relationalTypeResolver, $directiveArgName),
+                $this->getConsolidatedDirectiveArgDeprecationMessage($relationalTypeResolver, $directiveArgName),
             );
         }
         $this->schemaDirectiveArgsCache[$cacheKey] = $schemaDirectiveArgs;
@@ -828,14 +828,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
     /**
      * @return string[]
      */
-    public function resolveDirectiveDeprecationDescriptions(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): array
+    public function resolveDirectiveDeprecationMessages(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): array
     {
-        $directiveDeprecationDescriptions = [];
+        $directiveDeprecationMessages = [];
         $directiveSchemaDefinition = $this->getDirectiveSchemaDefinition($relationalTypeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
             // Deprecations for the field args
-            $directiveDeprecationDescriptions = array_merge(
-                $directiveDeprecationDescriptions,
+            $directiveDeprecationMessages = array_merge(
+                $directiveDeprecationMessages,
                 $this->maybeGetFieldOrDirectiveArgumentDeprecations(
                     $directiveArgsSchemaDefinition,
                     $directiveName,
@@ -844,8 +844,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 )
             );
             // Deprecations for the field args of Enum Type
-            $directiveDeprecationDescriptions = array_merge(
-                $directiveDeprecationDescriptions,
+            $directiveDeprecationMessages = array_merge(
+                $directiveDeprecationMessages,
                 $this->getEnumFieldOrDirectiveArgumentDeprecations(
                     $directiveArgsSchemaDefinition,
                     $directiveName,
@@ -854,7 +854,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
                 )
             );
         }
-        return $directiveDeprecationDescriptions;
+        return $directiveDeprecationMessages;
     }
 
     public function getDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
@@ -866,11 +866,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         return null;
     }
 
-    public function getDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getDirectiveDeprecationDescription($relationalTypeResolver);
+            return $schemaDefinitionResolver->getDirectiveDeprecationMessage($relationalTypeResolver);
         }
         return null;
     }
@@ -1213,9 +1213,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             if ($expressions = $this->getDirectiveExpressions($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::DIRECTIVE_EXPRESSIONS] = $expressions;
             }
-            if ($deprecationDescription = $this->getDirectiveDeprecationDescription($relationalTypeResolver)) {
+            if ($deprecationMessage = $this->getDirectiveDeprecationMessage($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::DEPRECATED] = true;
-                $schemaDefinition[SchemaDefinition::DEPRECATIONDESCRIPTION] = $deprecationDescription;
+                $schemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationMessage;
             }
             if ($args = $this->getSchemaDirectiveArgs($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::ARGS] = $args;
