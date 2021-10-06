@@ -29,10 +29,11 @@ class TagFilterInputContainerModuleProcessor extends AbstractFilterInputContaine
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SLUGS],
         ];
+        $paginationFilterInputModules = $this->getPaginationFilterInputModules();
         return match ($module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_TAGS => [
                 ...$tagFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_TAGCOUNT => $tagFilterInputModules,
             default => [],

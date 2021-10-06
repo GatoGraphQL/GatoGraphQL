@@ -73,6 +73,7 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
         $adminCommentFilterInputModules = [
             [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
         ];
+        $paginationFilterInputModules = $this->getPaginationFilterInputModules();
         return match ((string)$module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
@@ -81,17 +82,17 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
             self::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT => $responseFilterInputModules,
             self::MODULE_FILTERINPUTCONTAINER_RESPONSES => [
                 ...$responseFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTCOUNT => $customPostCommentFilterInputModules,
             self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTS => [
                 ...$customPostCommentFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT => $rootCommentFilterInputModules,
             self::MODULE_FILTERINPUTCONTAINER_COMMENTS => [
                 ...$rootCommentFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_ADMINRESPONSECOUNT => [
                 ...$responseFilterInputModules,
@@ -99,7 +100,7 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
             ],
             self::MODULE_FILTERINPUTCONTAINER_ADMINRESPONSES => [
                 ...$responseFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
                 ...$adminCommentFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTCOUNT => [
@@ -108,7 +109,7 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
             ],
             self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTS => [
                 ...$customPostCommentFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
                 ...$adminCommentFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTCOUNT => [
@@ -117,7 +118,7 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
             ],
             self::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTS => [
                 ...$rootCommentFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
                 ...$adminCommentFilterInputModules,
             ],
             default => [],

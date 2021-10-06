@@ -29,10 +29,11 @@ class MenuFilterInputContainerModuleProcessor extends AbstractFilterInputContain
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SLUGS],
         ];
+        $paginationFilterInputModules = $this->getPaginationFilterInputModules();
         return match ($module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_MENUS => [
                 ...$menuFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_MENUCOUNT => $menuFilterInputModules,
             default => [],

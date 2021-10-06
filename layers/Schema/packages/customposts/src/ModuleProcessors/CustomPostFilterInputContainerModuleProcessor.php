@@ -48,26 +48,27 @@ class CustomPostFilterInputContainerModuleProcessor extends AbstractCustomPostFi
         $adminCustomPostFilterInputModules = [
             [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
         ];
+        $paginationFilterInputModules = $this->getPaginationFilterInputModules();
         return match ($module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST => [
                 ...$customPostFilterInputModules,
                 ...$unionCustomPostFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTLIST => [
                 ...$customPostFilterInputModules,
                 ...$unionCustomPostFilterInputModules,
                 ...$adminCustomPostFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST => [
                 ...$customPostFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST => [
                 ...$customPostFilterInputModules,
                 ...$adminCustomPostFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT => [
                 ...$customPostFilterInputModules,

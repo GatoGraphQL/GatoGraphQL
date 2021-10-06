@@ -35,15 +35,16 @@ class UserFilterInputContainerModuleProcessor extends AbstractFilterInputContain
         $adminUserFilterInputModules = [
             [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_EMAILS],
         ];
+        $paginationFilterInputModules = $this->getPaginationFilterInputModules();
         return match ($module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_USERS => [
                 ...$userFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_ADMINUSERS => [
                 ...$userFilterInputModules,
                 ...$adminUserFilterInputModules,
-                ...$this->getPaginationFilterInputModules(),
+                ...$paginationFilterInputModules,
             ],
             self::MODULE_FILTERINPUTCONTAINER_USERCOUNT => $userFilterInputModules,
             self::MODULE_FILTERINPUTCONTAINER_ADMINUSERCOUNT => [
