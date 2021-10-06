@@ -691,7 +691,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
          * input "categories" to field "Root.createPost")
          */
         $consolidatedDirectiveArgNameTypeResolvers = $this->hooksAPI->applyFilters(
-            HookNames::DIRECTIVE_ARG_NAME_RESOLVERS,
+            HookNames::DIRECTIVE_ARG_NAME_TYPE_RESOLVERS,
             $this->getDirectiveArgNameTypeResolvers($relationalTypeResolver),
             $this,
             $relationalTypeResolver

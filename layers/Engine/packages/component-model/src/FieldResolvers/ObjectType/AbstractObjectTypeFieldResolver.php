@@ -284,7 +284,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          * input "categories" to field "Root.createPost")
          */
         $consolidatedFieldArgNameTypeResolvers = $this->hooksAPI->applyFilters(
-            HookNames::FIELD_ARG_NAME_RESOLVERS,
+            HookNames::FIELD_ARG_NAME_TYPE_RESOLVERS,
             $this->getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
             $this,
             $objectTypeResolver,
