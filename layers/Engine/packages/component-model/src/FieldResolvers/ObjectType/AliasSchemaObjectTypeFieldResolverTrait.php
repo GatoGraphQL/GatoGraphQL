@@ -228,6 +228,20 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
+    public function getFieldArgDeprecationDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
+        return $aliasedObjectTypeFieldResolver->getFieldArgDeprecationDescription(
+            $objectTypeResolver,
+            $this->getAliasedFieldName($fieldName),
+            $fieldArgName
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
+     * for the aliased $fieldName
+     */
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();

@@ -21,6 +21,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
     public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string;
     public function getFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed;
     public function getFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int;
+    public function getFieldArgDeprecationDescription(string $fieldName, string $fieldArgName): ?string;
     /**
      * @return array<string, InputTypeResolverInterface>
      */
@@ -28,6 +29,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
     public function getConsolidatedFieldArgDescription(string $fieldName, string $fieldArgName): ?string;
     public function getConsolidatedFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed;
     public function getConsolidatedFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int;
+    public function getConsolidatedFieldArgDeprecationDescription(string $fieldName, string $fieldArgName): ?string;
     /**
      * Validate the constraints for a field argument
      *
