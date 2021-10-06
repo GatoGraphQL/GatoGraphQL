@@ -437,7 +437,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs = []
-    ): ?array {
+    ): array {
         $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs);
         $directiveSchemaDefinition = $this->getDirectiveSchemaDefinition($relationalTypeResolver);
         if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
@@ -539,8 +539,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs = []
-    ): ?array {
-        return null;
+    ): array {
+        return [];
     }
 
     /**

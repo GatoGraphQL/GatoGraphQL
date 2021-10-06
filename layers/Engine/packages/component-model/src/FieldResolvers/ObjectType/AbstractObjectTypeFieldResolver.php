@@ -560,7 +560,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
         return true;
     }
-    public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
+    public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
     {
         $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs);
         $fieldSchemaDefinition = $this->getFieldSchemaDefinition($objectTypeResolver, $fieldName, $fieldArgs);
@@ -660,8 +660,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         array $fieldArgs = []
-    ): ?array {
-        return null;
+    ): array {
+        return [];
     }
 
     public function resolveFieldValidationDeprecationDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
@@ -838,7 +838,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return !empty($this->getFieldVersion($objectTypeResolver, $fieldName));
     }
 
-    public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): ?array
+    public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
     {
         $warnings = [];
         if (Environment::enableSemanticVersionConstraints()) {
@@ -920,7 +920,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         object $object,
         string $fieldName,
         array $fieldArgs = []
-    ): ?array {
+    ): array {
         // Can perform validation through checkpoints
         if ($checkpointSets = $this->getValidationCheckpointSets($objectTypeResolver, $object, $fieldName, $fieldArgs)) {
             $errorMessages = [];
@@ -952,7 +952,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $mutationResolver->validateErrors($mutationFieldArgs);
         }
 
-        return null;
+        return [];
     }
 
     /**

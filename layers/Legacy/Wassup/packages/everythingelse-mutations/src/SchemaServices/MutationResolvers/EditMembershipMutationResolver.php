@@ -80,7 +80,7 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
         return $user_id;
     }
 
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         $errors = [];
         $user_id = $form_data['user_id'];

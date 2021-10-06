@@ -139,11 +139,14 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      */
     public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool;
 
+    /**
+     * @return string[]
+     */
     public function resolveFieldValidationErrorDescriptions(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs = []
-    ): ?array;
+    ): array;
     public function resolveDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
     public function getDirectiveDeprecationDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
 }

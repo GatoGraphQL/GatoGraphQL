@@ -29,7 +29,7 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
         return $customPostID;
     }
 
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         $errors = [];
 

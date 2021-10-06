@@ -41,7 +41,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         }
     }
 
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         $errors = [];
         // We validate the captcha apart, since if it fails, then we must not send any invite to anyone (see below: email is sent even if validation fails)
@@ -69,7 +69,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         );
     }
 
-    public function validateWarnings(array $form_data): ?array
+    public function validateWarnings(array $form_data): array
     {
         $warnings = [];
 

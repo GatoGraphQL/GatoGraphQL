@@ -27,7 +27,7 @@ class LoginMutationResolver extends AbstractMutationResolver
         $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;
     }
 
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         $errors = [];
         $username_or_email = $form_data[MutationInputProperties::USERNAME_OR_EMAIL];

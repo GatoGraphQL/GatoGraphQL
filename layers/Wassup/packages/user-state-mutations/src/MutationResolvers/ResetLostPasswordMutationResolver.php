@@ -29,7 +29,7 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
         return ErrorTypes::CODES;
     }
 
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         $errorcodes = array();
         $code = $form_data[MutationInputProperties::CODE];

@@ -8,7 +8,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         $errors = [];
         $target_id = $form_data['target_id'];

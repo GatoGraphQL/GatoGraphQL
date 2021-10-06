@@ -10,7 +10,7 @@ use PoP\UserAccount\FunctionAPIFactory;
 
 class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         $errors = [];
         $cmsuseraccountapi = FunctionAPIFactory::getInstance();

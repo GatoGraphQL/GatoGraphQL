@@ -20,14 +20,14 @@ abstract class AbstractMutationResolver implements MutationResolverInterface
         $this->hooksAPI = $hooksAPI;
     }
 
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
-        return null;
+        return [];
     }
 
-    public function validateWarnings(array $form_data): ?array
+    public function validateWarnings(array $form_data): array
     {
-        return null;
+        return [];
     }
 
     public function getErrorType(): int

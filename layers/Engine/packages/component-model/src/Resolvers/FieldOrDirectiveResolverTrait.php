@@ -109,7 +109,7 @@ trait FieldOrDirectiveResolverTrait
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,
         string $type
-    ): ?array {
+    ): array {
         // Iterate all the enum types and check that the provided values is one of them, or throw an error
         if ($enumTypeFieldOrDirectiveArgsSchemaDefinition = SchemaHelpers::getEnumTypeFieldOrDirectiveArgsSchemaDefinition($fieldOrDirectiveArgsSchemaDefinition)) {
             [$maybeErrors] = $this->doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
@@ -120,7 +120,7 @@ trait FieldOrDirectiveResolverTrait
             );
             return $maybeErrors;
         }
-        return null;
+        return [];
     }
 
     protected function getEnumFieldOrDirectiveArgumentDeprecations(

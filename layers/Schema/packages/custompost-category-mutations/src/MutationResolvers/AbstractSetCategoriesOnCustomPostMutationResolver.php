@@ -24,7 +24,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
 
     abstract protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface;
 
-    public function validateErrors(array $form_data): ?array
+    public function validateErrors(array $form_data): array
     {
         $errors = [];
 
