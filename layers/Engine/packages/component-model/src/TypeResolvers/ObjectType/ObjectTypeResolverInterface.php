@@ -14,7 +14,7 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface
     public function getFieldSchemaDefinition(string $field): ?array;
     public function hasObjectTypeFieldResolversForField(string $field): bool;
     public function resolveFieldValidationErrorQualifiedEntries(string $field, array &$variables = null): array;
-    public function resolveFieldValidationWarningDescriptions(string $field, array &$variables = null): array;
+    public function resolveFieldValidationWarningQualifiedEntries(string $field, array &$variables = null): array;
     public function resolveFieldDeprecationDescriptions(string $field, array &$variables = null): array;
     public function getFieldTypeResolver(string $field): ?ConcreteTypeResolverInterface;
     public function getFieldMutationResolver(string $field): ?MutationResolverInterface;

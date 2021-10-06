@@ -736,7 +736,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     $fieldOrDirectiveArgs[$argName] = null;
                 }
                 // Find warnings and deprecations
-                if ($maybeWarnings = $this->resolveFieldArgumentValueWarningsForSchema($objectTypeResolver, $argValue, $variables)) {
+                if ($maybeWarnings = $this->resolveFieldArgumentValueWarningQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables)) {
                     foreach ($maybeWarnings as $schemaWarning) {
                         array_unshift($schemaWarning[Tokens::PATH], $fieldOrDirective);
                         $schemaWarnings[] = $schemaWarning;
@@ -1777,18 +1777,18 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return [];
     }
 
-    protected function resolveFieldArgumentValueWarningsForSchema(ObjectTypeResolverInterface $objectTypeResolver, mixed $fieldArgValue, ?array $variables): array
+    protected function resolveFieldArgumentValueWarningQualifiedEntriesForSchema(ObjectTypeResolverInterface $objectTypeResolver, mixed $fieldArgValue, ?array $variables): array
     {
         // If it is an array, apply this function on all elements
         if (is_array($fieldArgValue)) {
             return GeneralUtils::arrayFlatten(array_filter(array_map(function ($fieldArgValueElem) use ($objectTypeResolver, $variables) {
-                return $this->resolveFieldArgumentValueWarningsForSchema($objectTypeResolver, $fieldArgValueElem, $variables);
+                return $this->resolveFieldArgumentValueWarningQualifiedEntriesForSchema($objectTypeResolver, $fieldArgValueElem, $variables);
             }, $fieldArgValue)));
         }
 
         // If the result fieldArgValue is a field, then validate it and resolve it
         if ($this->isFieldArgumentValueAField($fieldArgValue)) {
-            return $objectTypeResolver->resolveFieldValidationWarningDescriptions($fieldArgValue, $variables);
+            return $objectTypeResolver->resolveFieldValidationWarningQualifiedEntries($fieldArgValue, $variables);
         }
 
         return [];

@@ -74,7 +74,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
             );
             $success = false;
         }
-        if ($schemaValidationWarnings = $objectTypeResolver->resolveFieldValidationWarningDescriptions($field, $variables)) {
+        if ($schemaValidationWarnings = $objectTypeResolver->resolveFieldValidationWarningQualifiedEntries($field, $variables)) {
             $schemaWarnings = array_merge(
                 $schemaWarnings,
                 $schemaValidationWarnings

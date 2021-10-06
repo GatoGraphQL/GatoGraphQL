@@ -182,7 +182,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ];
     }
 
-    final public function resolveFieldValidationWarningDescriptions(string $field, array &$variables = null): array
+    final public function resolveFieldValidationWarningQualifiedEntries(string $field, array &$variables = null): array
     {
         // Get the value from a fieldResolver, from the first one that resolves it
         if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
