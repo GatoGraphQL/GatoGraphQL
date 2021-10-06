@@ -836,7 +836,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, 
             // Deprecations for the field args
             $directiveDeprecationDescriptions = array_merge(
                 $directiveDeprecationDescriptions,
-                $this->getFieldOrDirectiveArgumentDeprecations(
+                $this->maybeGetFieldOrDirectiveArgumentDeprecations(
                     $directiveArgsSchemaDefinition,
                     $directiveName,
                     $directiveArgs,

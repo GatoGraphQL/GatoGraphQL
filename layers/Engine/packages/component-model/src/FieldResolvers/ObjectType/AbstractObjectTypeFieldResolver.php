@@ -681,7 +681,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             // Deprecations for the field args
             $fieldDeprecationDescriptions = array_merge(
                 $fieldDeprecationDescriptions,
-                $this->getFieldOrDirectiveArgumentDeprecations(
+                $this->maybeGetFieldOrDirectiveArgumentDeprecations(
                     $fieldArgsSchemaDefinition,
                     $fieldName,
                     $fieldArgs,
