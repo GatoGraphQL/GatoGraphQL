@@ -20,12 +20,6 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
      */
     public function getObjectTypeResolverClassesToAttachTo(): array;
     /**
-     * Get an array with the fieldNames that this fieldResolver resolves
-     *
-     * @return string[]
-     */
-    public function getFieldNamesToResolve(): array;
-    /**
      * Obtain the fieldNames from all implemented interfaces
      */
     public function getFieldNamesFromInterfaces(): array;
