@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
-interface DirectiveResolverInterface extends AttachableExtensionInterface
+interface DirectiveResolverInterface extends AttachableExtensionInterface, SchemaDirectiveResolverInterface
 {
     /**
      * The classes of the ObjectTypeResolvers and/or InterfaceTypeResolvers

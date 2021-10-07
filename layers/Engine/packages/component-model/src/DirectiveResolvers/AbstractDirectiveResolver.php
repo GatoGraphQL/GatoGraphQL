@@ -33,7 +33,7 @@ use PoP\Root\Environment as RootEnvironment;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
-abstract class AbstractDirectiveResolver implements DirectiveResolverInterface, SchemaDirectiveResolverInterface
+abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 {
     use AttachableExtensionTrait;
     use RemoveIDsDataFieldsDirectiveResolverTrait;
