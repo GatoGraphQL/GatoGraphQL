@@ -9,7 +9,7 @@ use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
+interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, ObjectTypeFieldSchemaDefinitionResolverInterface
 {
     /**
      * The classes of the ObjectTypeResolvers this ObjectTypeFieldResolver adds fields to.
