@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
-interface DataloadQueryArgsFilterInputModuleProcessorInterface extends FormComponentModuleProcessorInterface
+interface DataloadQueryArgsFilterInputModuleProcessorInterface extends FormComponentModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     public function getValue(array $module, ?array $source = null): mixed;
     public function isInputSetInSource(array $module, ?array $source = null): mixed;
