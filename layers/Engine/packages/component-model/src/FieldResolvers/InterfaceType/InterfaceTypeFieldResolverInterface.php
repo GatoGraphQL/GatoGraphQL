@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 
-interface InterfaceTypeFieldResolverInterface extends FieldResolverInterface
+interface InterfaceTypeFieldResolverInterface extends FieldResolverInterface, InterfaceTypeFieldSchemaDefinitionResolverInterface
 {
     /**
      * The classes of the InterfaceTypeResolvers this InterfaceTypeFieldResolver adds fields to.
