@@ -25,4 +25,12 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     {
         return SchemaTypeModifiers::NONE;
     }
+
+    /**
+     * This function simply returns the same value always.
+     */
+    public function coerceValue(mixed $inputValue): mixed
+    {
+        return $inputValue;
+    }
 }
