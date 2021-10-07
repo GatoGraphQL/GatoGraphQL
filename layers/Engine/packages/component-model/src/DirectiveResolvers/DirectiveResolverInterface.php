@@ -133,7 +133,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * The version of the directive, using semantic versioning
      */
     public function getDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
-    
+
     /**
      * @return string[]
      */
