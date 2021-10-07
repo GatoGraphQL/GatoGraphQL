@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
-interface DirectiveResolverInterface extends AttachableExtensionInterface
+interface DirectiveResolverInterface extends AttachableExtensionInterface, SchemaDirectiveResolverInterface
 {
     /**
      * The classes of the ObjectTypeResolvers and/or InterfaceTypeResolvers
@@ -133,11 +133,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface
      * The version of the directive, using semantic versioning
      */
     public function getDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
-    public function enableOrderedSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): bool;
-    /**
-     * Indicate if the directive is global (i.e. it can be applied to all fields, for all typeResolvers)
-     */
-    public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool;
 
     /**
      * @return string[]

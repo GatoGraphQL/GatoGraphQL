@@ -9,7 +9,7 @@ use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
+interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, ObjectTypeFieldSchemaDefinitionResolverInterface
 {
     /**
      * The classes of the ObjectTypeResolvers this ObjectTypeFieldResolver adds fields to.
@@ -19,12 +19,6 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface
      * @return string[]
      */
     public function getObjectTypeResolverClassesToAttachTo(): array;
-    /**
-     * Get an array with the fieldNames that this fieldResolver resolves
-     *
-     * @return string[]
-     */
-    public function getFieldNamesToResolve(): array;
     /**
      * Obtain the fieldNames from all implemented interfaces
      */
