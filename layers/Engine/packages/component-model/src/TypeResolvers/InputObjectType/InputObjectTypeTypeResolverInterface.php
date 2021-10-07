@@ -13,5 +13,14 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
  */
 interface InputObjectTypeResolverInterface extends InputTypeResolverInterface
 {
-    
+    /**
+     * Define InputObject fields
+     *
+     * @return array<string, InputTypeResolverInterface>
+     */
+    public function getInputObjectFieldNameTypeResolvers(): array;
+    public function getInputObjectFieldDescription(string $inputObjectFieldName): ?string;
+    public function getInputObjectFieldDeprecationMessage(string $inputObjectFieldName): ?string;
+    public function getInputObjectFieldDefaultValue(string $inputObjectFieldName): mixed;
+    public function getInputObjectFieldTypeModifiers(string $inputObjectFieldName): int;
 }
