@@ -19,7 +19,7 @@ use PoPSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
 use PoPSchema\Comments\TypeResolvers\EnumType\CommentTypeEnumTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
+class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 

@@ -18,7 +18,7 @@ use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
+class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
     use FormMultipleInputModuleProcessorTrait;

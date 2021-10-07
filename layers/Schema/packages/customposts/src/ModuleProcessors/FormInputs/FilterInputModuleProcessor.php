@@ -18,7 +18,7 @@ use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolve
 use PoPSchema\CustomPosts\Types\Status;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
+class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 

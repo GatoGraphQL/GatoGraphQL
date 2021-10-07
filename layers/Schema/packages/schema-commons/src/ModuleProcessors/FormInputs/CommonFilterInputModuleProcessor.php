@@ -23,7 +23,7 @@ use PoPSchema\SchemaCommons\FormInputs\MultiValueFromStringFormInput;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
+class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 
