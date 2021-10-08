@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use stdClass;
 
 abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implements ScalarTypeResolverInterface
 {
@@ -15,15 +16,17 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         return null;
     }
 
-    /**
-     * By default, the value is serialized as is
-     */
     public function serialize(mixed $scalarValue): string|int|float|bool|array
     {
-        if (is_object($scalarValue)) {
-            // It's an stdClass, convert to array
+        // Convert stdClass to array
+        if ($scalarValue instanceof stdClass) {
             return (array) $scalarValue;
         }
+        // Convert object to string
+        if (is_object($scalarValue)) {
+            return $scalarValue->__serialize();
+        }
+        // Return as is
         return $scalarValue;
     }
 
