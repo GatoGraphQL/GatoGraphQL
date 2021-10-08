@@ -102,7 +102,7 @@ class Engine implements EngineInterface
      * `mixed` could be string[] for "direct", or array<string,string[]> for "conditional"
      * @var array<string,array<string,mixed>>
      */
-    protected array $relationalTypeResolverNameIDsDataFields = [];
+    protected array $relationalTypeOutputDBKeyIDsDataFields = [];
 
     /**
      * Cannot autowire because its calling `getNamespace`
@@ -630,29 +630,29 @@ class Engine implements EngineInterface
     }
 
     private function combineIDsDatafields(
-        array &$relationalTypeResolverNameIDsDataFields,
+        array &$relationalTypeOutputDBKeyIDsDataFields,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $relationalTypeResolverDBKey,
         array $ids,
         array $data_fields,
         array $conditional_data_fields = []
     ): void {
-        $relationalTypeResolverNameIDsDataFields[$relationalTypeResolverDBKey] ??= [
+        $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeResolverDBKey] ??= [
             'relationalTypeResolver' => $relationalTypeResolver,
             'idsDataFields' => [],
         ];
         foreach ($ids as $id) {
             // Make sure to always add the 'id' data-field, since that's the key for the dbobject in the client database
-            $relationalTypeResolverNameIDsDataFields[$relationalTypeResolverDBKey]['idsDataFields'][(string)$id]['direct'] ??= ['id'];
-            $relationalTypeResolverNameIDsDataFields[$relationalTypeResolverDBKey]['idsDataFields'][(string)$id]['direct'] = array_values(array_unique(array_merge(
-                $relationalTypeResolverNameIDsDataFields[$relationalTypeResolverDBKey]['idsDataFields'][(string)$id]['direct'],
+            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeResolverDBKey]['idsDataFields'][(string)$id]['direct'] ??= ['id'];
+            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeResolverDBKey]['idsDataFields'][(string)$id]['direct'] = array_values(array_unique(array_merge(
+                $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeResolverDBKey]['idsDataFields'][(string)$id]['direct'],
                 $data_fields
             )));
             // The conditional data fields have the condition data fields, as key, and the list of conditional data fields to load if the condition one is successful, as value
-            $relationalTypeResolverNameIDsDataFields[$relationalTypeResolverDBKey]['idsDataFields'][(string)$id]['conditional'] ??= [];
+            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeResolverDBKey]['idsDataFields'][(string)$id]['conditional'] ??= [];
             foreach ($conditional_data_fields as $conditionDataField => $conditionalDataFields) {
-                $relationalTypeResolverNameIDsDataFields[$relationalTypeResolverDBKey]['idsDataFields'][(string)$id]['conditional'][$conditionDataField] = array_merge(
-                    $relationalTypeResolverNameIDsDataFields[$relationalTypeResolverDBKey]['idsDataFields'][(string)$id]['conditional'][$conditionDataField] ?? [],
+                $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeResolverDBKey]['idsDataFields'][(string)$id]['conditional'][$conditionDataField] = array_merge(
+                    $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeResolverDBKey]['idsDataFields'][(string)$id]['conditional'][$conditionDataField] ?? [],
                     $conditionalDataFields
                 );
             }
@@ -907,7 +907,7 @@ class Engine implements EngineInterface
         $this->backgroundload_urls = [];
 
         // Load under global key (shared by all pagesections / blocks)
-        $this->relationalTypeResolverNameIDsDataFields = [];
+        $this->relationalTypeOutputDBKeyIDsDataFields = [];
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         $this->hooksAPI->doAction(
@@ -1082,7 +1082,7 @@ class Engine implements EngineInterface
                     // Store the ids under $data under key dataload_name => id
                     $data_fields = $data_properties['data-fields'] ?? [];
                     $conditional_data_fields = $data_properties['conditional-data-fields'] ?? [];
-                    $this->combineIDsDatafields($this->relationalTypeResolverNameIDsDataFields, $relationalTypeResolver, $relationalTypeResolverDBKey, $typeDBObjectIDs, $data_fields, $conditional_data_fields);
+                    $this->combineIDsDatafields($this->relationalTypeOutputDBKeyIDsDataFields, $relationalTypeResolver, $relationalTypeResolverDBKey, $typeDBObjectIDs, $data_fields, $conditional_data_fields);
 
                     // Add the IDs to the possibly-already produced IDs for this typeResolver
                     $this->initializeTypeResolverEntry($this->dbdata, $relationalTypeResolverDBKey, $module_path_key);
@@ -1111,7 +1111,7 @@ class Engine implements EngineInterface
                         $extend_ids = $extend_data_properties['ids'];
                         $extend_typeResolver = $extend_data_properties['resolver'];
 
-                        $this->combineIDsDatafields($this->relationalTypeResolverNameIDsDataFields, $extend_typeResolver, $extendTypeOutputDBKey, $extend_ids, $extend_data_fields, $extend_conditional_data_fields);
+                        $this->combineIDsDatafields($this->relationalTypeOutputDBKeyIDsDataFields, $extend_typeResolver, $extendTypeOutputDBKey, $extend_ids, $extend_data_fields, $extend_conditional_data_fields);
 
                         // This is needed to add the typeResolver-extend IDs, for if nobody else creates an entry for this typeResolver
                         $this->initializeTypeResolverEntry($this->dbdata, $extendTypeOutputDBKey, $module_path_key);
@@ -1378,16 +1378,16 @@ class Engine implements EngineInterface
         $messages = [];
 
         // Iterate while there are dataloaders with data to be processed
-        while (!empty($this->relationalTypeResolverNameIDsDataFields)) {
+        while (!empty($this->relationalTypeOutputDBKeyIDsDataFields)) {
             // Move the pointer to the first element, and get it
-            reset($this->relationalTypeResolverNameIDsDataFields);
-            $relationalTypeResolverDBKey = key($this->relationalTypeResolverNameIDsDataFields);
-            $relationalTypeResolver = $this->relationalTypeResolverNameIDsDataFields[$relationalTypeResolverDBKey]['relationalTypeResolver'];
-            $ids_data_fields = $this->relationalTypeResolverNameIDsDataFields[$relationalTypeResolverDBKey]['idsDataFields'];
+            reset($this->relationalTypeOutputDBKeyIDsDataFields);
+            $relationalTypeResolverDBKey = key($this->relationalTypeOutputDBKeyIDsDataFields);
+            $relationalTypeResolver = $this->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeResolverDBKey]['relationalTypeResolver'];
+            $ids_data_fields = $this->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeResolverDBKey]['idsDataFields'];
 
             // Remove the typeResolver element from the array, so it doesn't process it anymore
             // Do it immediately, so that subcomponents can load new IDs for this current typeResolver (eg: posts => related)
-            unset($this->relationalTypeResolverNameIDsDataFields[$relationalTypeResolverDBKey]);
+            unset($this->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeResolverDBKey]);
 
             // If no ids to execute, then skip
             if (empty($ids_data_fields)) {
@@ -1827,7 +1827,7 @@ class Engine implements EngineInterface
                             // Eg: /api/?query=posts(id:1).author.posts.comments.post.author.posts.title
                             // In this case, property "title" at the end would not be fetched otherwise (that post was already loaded at the beginning)
                             // if ($id_subcomponent_data_fields) {
-                            $this->combineIDsDatafields($this->relationalTypeResolverNameIDsDataFields, $subcomponentTypeResolver, $subcomponentTypeOutputDBKey, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
+                            $this->combineIDsDatafields($this->relationalTypeOutputDBKeyIDsDataFields, $subcomponentTypeResolver, $subcomponentTypeOutputDBKey, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
                             // }
                         }
                         $this->initializeTypeResolverEntry($this->dbdata, $subcomponentTypeOutputDBKey, $module_path_key);
