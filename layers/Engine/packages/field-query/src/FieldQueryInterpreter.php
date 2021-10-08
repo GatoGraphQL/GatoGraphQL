@@ -303,7 +303,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             $this->isFieldArgumentValueAVariable($fieldArgValue);
     }
 
-    public function isFieldArgumentValueAnArrayRepresentedAsString(mixed $fieldArgValue): bool
+    protected function isFieldArgumentValueAnArrayRepresentedAsString(mixed $fieldArgValue): bool
     {
         // If it starts with "[" and finishes with "]"
         return

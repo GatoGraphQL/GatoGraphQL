@@ -14,7 +14,6 @@ interface FieldQueryInterpreterInterface
     public function isFieldArgumentValueAVariable(mixed $fieldArgValue): bool;
     public function isFieldArgumentValueAnExpression(mixed $fieldArgValue): bool;
     public function isFieldArgumentValueDynamic(mixed $fieldArgValue): bool;
-    public function isFieldArgumentValueAnArrayRepresentedAsString(mixed $fieldArgValue): bool;
     public function createFieldArgValueAsFieldFromFieldName(string $fieldName): string;
     public function getFieldAlias(string $field): ?string;
     /**
