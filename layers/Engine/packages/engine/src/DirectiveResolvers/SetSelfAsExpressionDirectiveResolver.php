@@ -92,7 +92,7 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
         array &$schemaTraces
     ): void {
         // The name of the variable is always set to "self", accessed as $self
-        $dbKey = $relationalTypeResolver->getTypeOutputName();
+        $dbKey = $relationalTypeResolver->getTypeOutputDBKey();
         foreach (array_keys($idsDataFields) as $id) {
             // Make an array of references, pointing to the position of the current object in arrays $dbItems and $previousDBItems;
             // It is extremeley important to make it by reference, so that when the 2 variables are updated later on during the current iteration,

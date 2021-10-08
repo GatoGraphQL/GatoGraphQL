@@ -1063,7 +1063,7 @@ class Engine implements EngineInterface
                 if ($load_data) {
                     $relationalTypeResolver = $processor->getRelationalTypeResolver($module);
                     $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
-                    $relationalTypeResolverName = $relationalTypeResolver->getTypeOutputName();
+                    $relationalTypeResolverName = $relationalTypeResolver->getTypeOutputDBKey();
                     // ------------------------------------------
                     // Data Properties Query Args: add mutableonrequest data
                     // ------------------------------------------
@@ -1404,7 +1404,7 @@ class Engine implements EngineInterface
                 );
             }
 
-            $database_key = $relationalTypeResolver->getTypeOutputName();
+            $database_key = $relationalTypeResolver->getTypeOutputDBKey();
 
             // Execute the typeResolver for all combined ids
             $iterationDBItems = $iterationObjectErrors = $iterationObjectWarnings = $iterationObjectDeprecations = $iterationObjectNotices = $iterationObjectTraces = $iterationSchemaErrors = $iterationSchemaWarnings = $iterationSchemaDeprecations = $iterationSchemaNotices = $iterationSchemaTraces = [];
@@ -1714,7 +1714,7 @@ class Engine implements EngineInterface
         array &$combinedUnionDBKeyIDs,
         array &$objectIDItems,
     ): void {
-        $database_key = $targetObjectTypeResolver->getTypeOutputName();
+        $database_key = $targetObjectTypeResolver->getTypeOutputDBKey();
         foreach ($subcomponents_data_properties as $subcomponent_data_field => $subcomponent_data_properties) {
             // Retrieve the subcomponent typeResolver from the current typeResolver
             // Watch out! When dealing with the UnionDataLoader, we attempt to get the subcomponentType for that field twice: first from the UnionTypeResolver and, if it doesn't handle it, only then from the TargetTypeResolver
@@ -1726,7 +1726,7 @@ class Engine implements EngineInterface
                 $subcomponentTypeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($targetObjectTypeResolver, $subcomponent_data_field);
             }
             if ($subcomponentTypeResolver !== null) {
-                $subcomponentTypeOutputDBKey = $subcomponentTypeResolver->getTypeOutputName();
+                $subcomponentTypeOutputDBKey = $subcomponentTypeResolver->getTypeOutputDBKey();
                 // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
                 $subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? []);
                 $subcomponent_conditional_data_fields = $subcomponent_data_properties['conditional-data-fields'] ?? [];

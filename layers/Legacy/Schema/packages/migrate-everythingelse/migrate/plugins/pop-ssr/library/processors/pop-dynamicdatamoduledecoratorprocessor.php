@@ -49,7 +49,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         if ($relationalTypeResolver = $processor->getRelationalTypeResolver($module)) {
             if ($properties = $this->getDynamicDatasetmoduletreeSectionFlattenedDataFields($module, $props)) {
                 $ret[POP_CONSTANT_DYNAMICDATAPROPERTIES] = array(
-                    $relationalTypeResolver->getTypeOutputName() => [
+                    $relationalTypeResolver->getTypeOutputDBKey() => [
                         'resolver' => $relationalTypeResolver,
                         'properties' => $properties,
                     ],
@@ -98,7 +98,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
     //         if ($properties = $this->getMutableonrequestDynamicDataPropertiesDatasetmoduletreeSection($module, $props)) {
     //             $ret[POP_CONSTANT_DYNAMICDATAPROPERTIES] = array(
-    //                 $typeResolver->getTypeOutputName() => $properties,
+    //                 $typeResolver->getTypeOutputDBKey() => $properties,
     //             );
     //         }
     //     }

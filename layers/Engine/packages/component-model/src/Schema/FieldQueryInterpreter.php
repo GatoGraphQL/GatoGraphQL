@@ -134,7 +134,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             );
         }
         return $this->getUniqueFieldOutputKeyByTypeOutputName(
-            $relationalTypeResolver->getTypeOutputName(),
+            $relationalTypeResolver->getTypeOutputDBKey(),
             $field
         );
     }
@@ -173,7 +173,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         string $field,
     ): string {
         return $this->getUniqueFieldOutputKeyByTypeOutputName(
-            $objectTypeResolver->getTypeOutputName(),
+            $objectTypeResolver->getTypeOutputDBKey(),
             $field
         );
     }

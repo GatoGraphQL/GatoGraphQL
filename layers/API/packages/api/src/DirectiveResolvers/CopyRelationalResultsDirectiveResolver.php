@@ -169,7 +169,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
         $keepRelationalIDs = $this->directiveArgsForSchema['keepRelationalIDs'];
 
         // From the typeResolver, obtain under what type the data for the current object is stored
-        $dbKey = $objectTypeResolver->getTypeOutputName();
+        $dbKey = $objectTypeResolver->getTypeOutputDBKey();
 
         // Copy the data from each of the relational object fields to the current object
         foreach ($idsDataFields as $id => $dataFields) {
@@ -234,7 +234,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
                     continue;
                 }
 
-                $relationalFieldDBKey = $relationalFieldTypeResolver->getTypeOutputName();
+                $relationalFieldDBKey = $relationalFieldTypeResolver->getTypeOutputDBKey();
                 $isUnionRelationalFieldDBKey = $relationalFieldTypeResolver instanceof UnionTypeResolverInterface;
                 for ($i = 0; $i < count($copyFromFields); $i++) {
                     $copyFromField = $copyFromFields[$i];

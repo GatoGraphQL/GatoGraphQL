@@ -116,7 +116,7 @@ class SchemaDefinitionRegistry implements SchemaDefinitionRegistryInterface
                     $error = $schemaDefinition;
                     // Store the error, and reset the definition to empty
                     $this->feedbackMessageStore->addSchemaError(
-                        $this->rootTypeResolver->getTypeOutputName(),
+                        $this->rootTypeResolver->getTypeOutputDBKey(),
                         'fullSchema',
                         sprintf(
                             $this->translationAPI->__('Retrieving the schema data via Introspection failed: \'%s\'. Please contact the admin.', 'pop-component-model'),

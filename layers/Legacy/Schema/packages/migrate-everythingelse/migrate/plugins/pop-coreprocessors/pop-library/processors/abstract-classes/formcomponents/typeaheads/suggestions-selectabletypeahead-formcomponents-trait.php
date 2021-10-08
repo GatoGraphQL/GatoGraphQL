@@ -112,7 +112,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
                     /** @var \PoP_Module_Processor_TriggerLayoutFormComponentValuesBase */
                     $triggerModuleProcessor = $moduleprocessor_manager->getProcessor($trigger_layout);
                     $suggestions_typeResolver = $triggerModuleProcessor->getTriggerRelationalTypeResolver($trigger_layout);
-                    $ret['dbkeys']['suggestions'] = $suggestions_typeResolver->getTypeOutputName();
+                    $ret['dbkeys']['suggestions'] = $suggestions_typeResolver->getTypeOutputDBKey();
                 }
                 if ($suggestions_fontawesome = $this->getSuggestionsFontawesome($module, $props)) {
                     $ret['suggestions-fontawesome'] = $suggestions_fontawesome;
@@ -149,7 +149,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
 
                     // Extend the dataload ids
                     return array(
-                        $suggestions_typeResolver->getTypeOutputName() => array(
+                        $suggestions_typeResolver->getTypeOutputDBKey() => array(
                             'resolver' => $suggestions_typeResolver,
                             'ids' => $suggestions,
                             'data-fields' => $data_properties['data-fields'],

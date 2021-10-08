@@ -504,7 +504,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     {
         $ret = array();
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($module)) {
-            if ($dbkey = $relationalTypeResolver->getTypeOutputName()) {
+            if ($dbkey = $relationalTypeResolver->getTypeOutputDBKey()) {
                 // Place it under "id" because it is for fetching the current object from the DB, which is found through dbObject.id
                 $ret['id'] = $dbkey;
             }
