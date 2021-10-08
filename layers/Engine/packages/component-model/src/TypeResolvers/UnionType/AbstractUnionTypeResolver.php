@@ -22,11 +22,6 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      */
     protected ?array $objectTypeResolverPickers = null;
 
-    final public function getTypeOutputName(): string
-    {
-        return UnionTypeHelpers::getUnionTypeCollectionName(parent::getTypeOutputName());
-    }
-
     public function getUnionTypeInterfaceTypeResolver(): ?InterfaceTypeResolverInterface
     {
         return null;

@@ -8,31 +8,9 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 use function explode;
-use function substr;
 
 class UnionTypeHelpers
 {
-    /**
-     * If the type data resolver starts with "*" then it's union
-     */
-    public static function isUnionType(string $type): bool
-    {
-        return substr($type, 0, strlen(UnionTypeSymbols::UNION_TYPE_NAME_PREFIX)) == UnionTypeSymbols::UNION_TYPE_NAME_PREFIX;
-    }
-
-    public static function getUnionTypeCollectionName(string $type): string
-    {
-        return UnionTypeSymbols::UNION_TYPE_NAME_PREFIX . $type;
-    }
-
-    /**
-     * Extract the original Union type name (i.e. without "*")
-     */
-    public static function removePrefixFromUnionTypeName(string $unionTypeCollectionName): string
-    {
-        return substr($unionTypeCollectionName, strlen(UnionTypeSymbols::UNION_TYPE_NAME_PREFIX));
-    }
-
     /**
      * Extracts the DB key and ID from the object ID
      */
