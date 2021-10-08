@@ -1227,7 +1227,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     // New PUBLIC Functions: Static Data
     //-------------------------------------------------
 
-    public function getModelSupplementaryDbobjectdataModuletree(array $module, array &$props): array
+    public function getModelSupplementaryDBObjectDataModuletree(array $module, array &$props): array
     {
         return $this->executeOnSelfAndMergeWithModules('getModelSupplementaryDBObjectData', __FUNCTION__, $module, $props);
     }

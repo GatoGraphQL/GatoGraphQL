@@ -1097,7 +1097,7 @@ class Engine implements EngineInterface
                     // Eg: Locations Map for the Create Individual Profile: it allows to pre-select locations,
                     // these ones must be fetched even if the block has a static typeResolver
                     // If it has extend, add those ids under its relationalTypeOutputDBKey
-                    $dataload_extend_settings = $processor->getModelSupplementaryDbobjectdataModuletree($module, $model_props);
+                    $dataload_extend_settings = $processor->getModelSupplementaryDBObjectDataModuletree($module, $model_props);
                     if ($datasource == DataSources::MUTABLEONREQUEST) {
                         $dataload_extend_settings = array_merge_recursive(
                             $dataload_extend_settings,
