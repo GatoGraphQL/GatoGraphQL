@@ -44,6 +44,7 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Configuration\Request;
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Root\Helpers\Methods;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -1445,12 +1446,13 @@ class Engine implements EngineInterface
                 // To find out if they were loaded, validate against the DBObject, to see if it has those properties
                 foreach ($ids_data_fields as $id => $data_fields) {
                     foreach ($data_fields['conditional'] as $conditionDataField => $conditionalDataFields) {
+                        $iterationFields = array_keys($iterationDBItems[(string)$id]);
                         $already_loaded_ids_data_fields[$relationalTypeResolverName][(string)$id] = array_merge(
                             $already_loaded_ids_data_fields[$relationalTypeResolverName][(string)$id] ?? [],
-                            array_intersect(
+                            Methods::arrayIntersectAssocRecursive(
                                 $conditionalDataFields,
-                                array_keys($iterationDBItems[(string)$id])
-                            )
+                                $iterationFields
+                            ) ?? []
                         );
                     }
                 }
@@ -1811,11 +1813,9 @@ class Engine implements EngineInterface
                                 );
                                 $id_subcomponent_conditional_data_fields = [];
                                 foreach ($subcomponent_conditional_data_fields as $conditionField => $conditionalFields) {
-                                    $id_subcomponent_conditional_data_fields[$conditionField] = array_values(
-                                        array_diff(
-                                            $conditionalFields,
-                                            $subcomponent_already_loaded_data_fields
-                                        )
+                                    $id_subcomponent_conditional_data_fields[$conditionField] = Methods::arrayDiffRecursive(
+                                        $conditionalFields,
+                                        $subcomponent_already_loaded_data_fields
                                     );
                                 }
                             } else {
