@@ -158,10 +158,10 @@ class AstTest extends TestCase
         $list->setValue(['a']);
         $this->assertEquals(['a'], $list->getValue());
 
-        $inputObject = new InputObject(['a', 'b'], new Location(1, 1));
-        $this->assertEquals(['a', 'b'], $inputObject->getValue());
-        $inputObject->setValue(['a']);
-        $this->assertEquals(['a'], $inputObject->getValue());
+        $inputObject = new InputObject((object) ['a', 'b'], new Location(1, 1));
+        $this->assertEquals((object) ['a', 'b'], $inputObject->getValue());
+        $inputObject->setValue((object) ['a']);
+        $this->assertEquals((object) ['a'], $inputObject->getValue());
 
         $literal = new Literal('text', new Location(1, 1));
         $this->assertEquals('text', $literal->getValue());
