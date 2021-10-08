@@ -10,11 +10,8 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
 
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
@@ -256,56 +253,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $field,
             $object,
         );
-        // Custom Scalar Types must be serialized
-        $value = $this->maybeSerializeValue($relationalTypeResolver, $field, $value);
         $dbItems[(string)$id][$fieldOutputKey] = $value;
-    }
-
-    /**
-     * The response for Custom Scalar Types must be serialized
-     */
-    protected function maybeSerializeValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $field,
-        mixed $value,
-    ): mixed {
-        if (!($relationalTypeResolver instanceof ObjectTypeResolverInterface)) {
-            return $value;
-        }
-
-        /** @var ObjectTypeResolverInterface */
-        $objectTypeResolver = $relationalTypeResolver;
-        $fieldSchemaDefinition = $objectTypeResolver->getFieldSchemaDefinition($field);
-        $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
-        if (!($fieldTypeResolver instanceof ScalarTypeResolverInterface)) {
-            return $value;
-        }
-
-        /** @var ScalarTypeResolverInterface */
-        $fieldScalarTypeResolver = $fieldTypeResolver;
-
-        // If the value is an array of arrays, then serialize each subelement to the item type
-        if ($fieldSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false) {
-            return $value === null ? null : array_map(
-                // If it contains a null value, return it as is
-                fn (?array $arrayValueElem) => $arrayValueElem === null ? null : array_map(
-                    fn (mixed $arrayOfArraysValueElem) => $arrayOfArraysValueElem === null ? null : $fieldScalarTypeResolver->serialize($arrayOfArraysValueElem),
-                    $arrayValueElem
-                ),
-                $value
-            );
-        }
-
-        // If the value is an array, then serialize each element to the item type
-        if ($fieldSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false) {
-            return $value === null ? null : array_map(
-                fn (mixed $arrayValueElem) => $arrayValueElem === null ? null : $fieldScalarTypeResolver->serialize($arrayValueElem),
-                $value
-            );
-        }
-
-        // Otherwise, simply serialize the given value directly
-        return $value === null ? null : $fieldScalarTypeResolver->serialize($value);
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
