@@ -127,6 +127,10 @@ interface FieldQueryInterpreterInterface
      */
     public function getArrayAsStringForQuery(array $fieldArgValue): string;
     /**
+     * @param object $fieldArgValue an instance of stdClass
+     */
+    public function getObjectAsStringForQuery(object $fieldArgValue): string;
+    /**
      * @param array<string, mixed> $fieldArgs
      */
     public function getFieldArgsAsString(

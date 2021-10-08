@@ -50,6 +50,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'arrayDiff',
             'arrayAddItem',
             'arrayAsQueryStr',
+            'objectAsQueryStr',
             'upperCase',
             'lowerCase',
             'titleCase',
@@ -64,6 +65,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'concat',
             'arrayJoin',
             'arrayAsQueryStr',
+            'objectAsQueryStr',
             'upperCase',
             'lowerCase',
             'titleCase'
@@ -92,6 +94,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'arrayItem',
             'arraySearch',
             'arrayAsQueryStr',
+            'objectAsQueryStr',
             'upperCase',
             'lowerCase',
             'titleCase'
@@ -122,6 +125,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'arrayDiff' => $this->translationAPI->__('Return an array containing all the elements from the first array which are not present on any of the other arrays', 'function-fields'),
             'arrayAddItem' => $this->translationAPI->__('Adds an element to the array', 'function-fields'),
             'arrayAsQueryStr' => $this->translationAPI->__('Represent an array as a string', 'function-fields'),
+            'objectAsQueryStr' => $this->translationAPI->__('Represent an object as a string', 'function-fields'),
             'upperCase' => $this->translationAPI->__('Transform a string to upper case', 'function-fields'),
             'lowerCase' => $this->translationAPI->__('Transform a string to lower case', 'function-fields'),
             'titleCase' => $this->translationAPI->__('Transform a string to title case', 'function-fields'),
@@ -177,6 +181,9 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'arrayAsQueryStr' => [
                 'array' => $this->mixedScalarTypeResolver,
             ],
+            'objectAsQueryStr' => [
+                'object' => $this->mixedScalarTypeResolver,
+            ],
             'upperCase',
             'lowerCase',
             'titleCase' => [
@@ -210,6 +217,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             ['arrayAddItem' => 'value'] => $this->translationAPI->__('The value to add to the array', 'function-fields'),
             ['arrayAddItem' => 'key'] => $this->translationAPI->__('Key (string or integer) under which to add the value to the array. If not provided, the value is added without key', 'function-fields'),
             ['arrayAsQueryStr' => 'array'] => $this->translationAPI->__('The array to be represented as a string', 'function-fields'),
+            ['objectAsQueryStr' => 'object'] => $this->translationAPI->__('The object to be represented as a string', 'function-fields'),
             ['upperCase' => 'text'],
             ['lowerCase' => 'text'],
             ['titleCase' => 'text'] => $this->translationAPI->__('The string to be transformed', 'function-fields'),
@@ -238,7 +246,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             ['arrayItem' => 'position'],
             ['arraySearch' => 'element'],
             ['arrayFill' => 'index'],
-            ['arrayAddItem' => 'value']
+            ['arrayAddItem' => 'value'],
+            ['objectAsQueryStr' => 'object']
                 => SchemaTypeModifiers::MANDATORY,
             ['arrayFill' => 'properties'],
             ['upperCase' => 'text'],
@@ -373,6 +382,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 return $array;
             case 'arrayAsQueryStr':
                 return $this->fieldQueryInterpreter->getArrayAsStringForQuery($fieldArgs['array']);
+            case 'objectAsQueryStr':
+                return $this->fieldQueryInterpreter->getObjectAsStringForQuery($fieldArgs['object']);
             case 'arrayUnique':
                 return array_unique($fieldArgs['array']);
             case 'upperCase':

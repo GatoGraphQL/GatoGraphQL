@@ -751,7 +751,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 $fieldArgValue = $this->getArrayAsStringForQuery($fieldArgValue);
             } elseif (is_object($fieldArgValue)) {
                 // Convert from array to its representation of object in a string
-                $fieldArgValue = $this->getSTDClassAsStringForQuery($fieldArgValue);
+                $fieldArgValue = $this->getObjectAsStringForQuery($fieldArgValue);
             } elseif (is_string($fieldArgValue)) {
                 // If it doesn't have them yet, wrap the string between quotes for if there's a special symbol
                 // inside of it (eg: it if has a ",", it will split the element there when decoding again
@@ -823,7 +823,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 $elems[] =
                     $key .
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER .
-                    $this->getSTDClassAsStringForQuery($value);
+                    $this->getObjectAsStringForQuery($value);
             } else {
                 // If it is null, the unquoted `null` string will be represented as null
                 if ($value === null) {
@@ -847,9 +847,9 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     }
 
     /**
-     * @param array<string, mixed> $fieldArgValue
+     * @param object $fieldArgValue an instance of stdClass
      */
-    public function getSTDClassAsStringForQuery(object $fieldArgValue): string
+    public function getObjectAsStringForQuery(object $fieldArgValue): string
     {
         // Iterate through all the elements of the array and, if they are an stdClass themselves,
         // call this function recursively
@@ -865,7 +865,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 $elems[] =
                     $key .
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .
-                    $this->getSTDClassAsStringForQuery($value);
+                    $this->getObjectAsStringForQuery($value);
             } else {
                 // If it is null, the unquoted `null` string will be represented as null
                 if ($value === null) {
