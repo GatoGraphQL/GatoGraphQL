@@ -374,7 +374,9 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         if (!isset($this->fieldAliasPositionSpansCache[$field])) {
             $this->fieldAliasPositionSpansCache[$field] = $this->doGetFieldAliasPositionSpanInField($field);
         }
-        return $this->fieldAliasPositionSpansCache[$field];
+        /** @var array */
+        $fieldAliasPositionSpans = $this->fieldAliasPositionSpansCache[$field];
+        return $fieldAliasPositionSpans;
     }
 
     /**
