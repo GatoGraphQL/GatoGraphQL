@@ -23,6 +23,7 @@ use PoP\FieldQuery\FieldQueryInterpreter as UpstreamFieldQueryInterpreter;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryUtils;
+use stdClass;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements FieldQueryInterpreterInterface
@@ -1665,10 +1666,33 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldArgValue;
     }
 
+    protected function maybeConvertFieldArgumentObjectValueFromStringToObject(string $fieldArgValue): mixed
+    {
+        // If surrounded by {...}, it is an stdClass
+        if ($this->isFieldArgumentValueAnObjectRepresentedAsString($fieldArgValue)) {
+            $objectValue = substr($fieldArgValue, strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING), strlen($fieldArgValue) - strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING) - strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING));
+            $fieldArgValue = new stdClass();
+            // Check if an empty object was provided, as "{}" or "{ }"
+            if (trim($objectValue) === '') {
+                return $fieldArgValue;
+            }
+            // Elements are split by ","
+            $fieldArgValueElems = $this->queryParser->splitElements($objectValue, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_SEPARATOR, [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING], [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING], QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
+            // Iterate all the elements and assign them to the fieldArgValue variable
+            foreach ($fieldArgValueElems as $fieldArgValueElem) {
+                $fieldArgValueElemComponents = $this->queryParser->splitElements($fieldArgValueElem, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER, [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING], [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING], QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
+                $fieldArgValue->$fieldArgValueElemComponents[0] = $this->maybeConvertFieldArgumentValue($fieldArgValueElemComponents[1]);
+            }
+        }
+
+        return $fieldArgValue;
+    }
+
     public function maybeConvertFieldArgumentArrayValue(mixed $fieldArgValue, ?array $variables = null): mixed
     {
         if (is_string($fieldArgValue)) {
             $fieldArgValue = $this->maybeConvertFieldArgumentArrayValueFromStringToArray($fieldArgValue);
+            $fieldArgValue = $this->maybeConvertFieldArgumentObjectValueFromStringToObject($fieldArgValue);
         }
         if (is_array($fieldArgValue)) {
             // Resolve each element the same way
@@ -1676,6 +1700,15 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 array_map(function ($arrayValueElem) use ($variables) {
                     return $this->maybeConvertFieldArgumentValue($arrayValueElem, $variables);
                 }, $fieldArgValue)
+            );
+        }
+        if (is_object($fieldArgValue)) {
+            // Resolve each element the same way
+            // Cast back and forth from array to stdClass
+            return (object) $this->filterFieldOrDirectiveArgs(
+                array_map(function ($arrayValueElem) use ($variables) {
+                    return $this->maybeConvertFieldArgumentValue($arrayValueElem, $variables);
+                }, (array) $fieldArgValue)
             );
         }
 
