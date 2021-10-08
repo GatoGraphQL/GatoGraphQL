@@ -303,7 +303,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             $this->isFieldArgumentValueAVariable($fieldArgValue);
     }
 
-    public function isFieldArgumentValueAnArrayRepresentedAsString(mixed $fieldArgValue): bool
+    protected function isFieldArgumentValueAnArrayRepresentedAsString(mixed $fieldArgValue): bool
     {
         // If it starts with "[" and finishes with "]"
         return
@@ -317,6 +317,22 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 $fieldArgValue,
                 -1 * strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING)
             ) == QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING;
+    }
+
+    protected function isFieldArgumentValueAnObjectRepresentedAsString(mixed $fieldArgValue): bool
+    {
+        // If it starts with "{" and finishes with "}"
+        return
+            is_string($fieldArgValue)
+            && substr(
+                $fieldArgValue,
+                0,
+                strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING)
+            ) == QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING
+            && substr(
+                $fieldArgValue,
+                -1 * strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING)
+            ) == QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING;
     }
 
     public function createFieldArgValueAsFieldFromFieldName(string $fieldName): string
@@ -374,7 +390,9 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         if (!isset($this->fieldAliasPositionSpansCache[$field])) {
             $this->fieldAliasPositionSpansCache[$field] = $this->doGetFieldAliasPositionSpanInField($field);
         }
-        return $this->fieldAliasPositionSpansCache[$field];
+        /** @var array */
+        $fieldAliasPositionSpans = $this->fieldAliasPositionSpansCache[$field];
+        return $fieldAliasPositionSpans;
     }
 
     /**
@@ -749,6 +767,9 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             } elseif (is_array($fieldArgValue)) {
                 // Convert from array to its representation of array in a string
                 $fieldArgValue = $this->getArrayAsStringForQuery($fieldArgValue);
+            } elseif (is_object($fieldArgValue)) {
+                // Convert from array to its representation of object in a string
+                $fieldArgValue = $this->getObjectAsStringForQuery($fieldArgValue);
             } elseif (is_string($fieldArgValue)) {
                 // If it doesn't have them yet, wrap the string between quotes for if there's a special symbol
                 // inside of it (eg: it if has a ",", it will split the element there when decoding again
@@ -816,6 +837,11 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                     $key .
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER .
                     $this->getArrayAsStringForQuery($value);
+            } elseif (is_object($value)) {
+                $elems[] =
+                    $key .
+                    QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER .
+                    $this->getObjectAsStringForQuery($value);
             } else {
                 // If it is null, the unquoted `null` string will be represented as null
                 if ($value === null) {
@@ -836,6 +862,48 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 $elems
             ) .
             QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING;
+    }
+
+    /**
+     * @param object $fieldArgValue an instance of stdClass
+     */
+    public function getObjectAsStringForQuery(object $fieldArgValue): string
+    {
+        // Iterate through all the elements of the array and, if they are an stdClass themselves,
+        // call this function recursively
+        $elems = [];
+        foreach ($fieldArgValue as $key => $value) {
+            // Add the keyValueDelimiter
+            if (is_array($value)) {
+                $elems[] =
+                    $key .
+                    QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .
+                    $this->getArrayAsStringForQuery($value);
+            } elseif (is_object($value)) {
+                $elems[] =
+                    $key .
+                    QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .
+                    $this->getObjectAsStringForQuery($value);
+            } else {
+                // If it is null, the unquoted `null` string will be represented as null
+                if ($value === null) {
+                    $value = 'null';
+                } elseif (is_string($value)) {
+                    // If it doesn't have them yet, wrap the string between quotes for if there's a special symbol
+                    // inside of it (eg: it if has a ",", it will split the element there when decoding again
+                    // from string to array in `getField`)
+                    $value = $this->maybeWrapStringInQuotes($value);
+                }
+                $elems[] = $key . QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER . $value;
+            }
+        }
+        return
+            QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING .
+            implode(
+                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_SEPARATOR,
+                $elems
+            ) .
+            QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING;
     }
 
     protected function getFieldAliasAsString(?string $fieldAlias = null): string

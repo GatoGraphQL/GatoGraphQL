@@ -156,11 +156,13 @@ class QueryHelpers
                     QuerySyntax::SYMBOL_FIELDARGS_ARGSEPARATOR,
                     [
                         QuerySyntax::SYMBOL_FIELDARGS_OPENING,
-                        QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING
+                        QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING,
+                        QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING,
                     ],
                     [
                         QuerySyntax::SYMBOL_FIELDARGS_CLOSING,
-                        QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING
+                        QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING,
+                        QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING,
                     ],
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING,
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING

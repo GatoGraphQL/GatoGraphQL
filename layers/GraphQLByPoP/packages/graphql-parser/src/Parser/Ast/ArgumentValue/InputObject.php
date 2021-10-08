@@ -17,7 +17,7 @@ class InputObject extends AbstractAst implements ValueInterface
 
     protected $object = [];
 
-    public function __construct(array $object, Location $location)
+    public function __construct(object $object, Location $location)
     {
         parent::__construct($location);
 
@@ -25,7 +25,7 @@ class InputObject extends AbstractAst implements ValueInterface
     }
 
     /**
-     * @return array
+     * @return object
      */
     public function getValue()
     {
@@ -33,7 +33,7 @@ class InputObject extends AbstractAst implements ValueInterface
     }
 
     /**
-     * @param array $value
+     * @param object $value
      */
     public function setValue($value): void
     {

@@ -24,6 +24,7 @@ class OneYearCacheControlDirectiveResolver extends AbstractCacheControlDirective
             'arrayDiff',
             'arrayAddItem',
             'arrayAsQueryStr',
+            'objectAsQueryStr',
         ];
     }
 

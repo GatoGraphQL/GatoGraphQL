@@ -902,11 +902,11 @@ GRAPHQL;
                             'users',
                             'allUsers',
                             [
-                                new Argument('object', new InputObject([
+                                new Argument('object', new InputObject((object) [
                                     'a' => 123,
                                     'd' => 'asd',
                                     'b' => [1, 2, 4],
-                                    'c' => new InputObject([
+                                    'c' => new InputObject((object) [
                                         'a' => 123,
                                         'b' => 'asd',
                                     ], new Location(1, 79)),

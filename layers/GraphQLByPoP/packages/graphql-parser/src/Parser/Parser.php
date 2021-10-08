@@ -23,6 +23,7 @@ use GraphQLByPoP\GraphQLParser\Parser\Ast\FragmentReference;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Mutation;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\Query;
 use GraphQLByPoP\GraphQLParser\Parser\Ast\TypedFragmentReference;
+use stdClass;
 
 class Parser extends Tokenizer
 {
@@ -460,7 +461,8 @@ class Parser extends Tokenizer
     {
         $startToken = $this->eat(Token::TYPE_LBRACE);
 
-        $object = [];
+        // Use stdClass instead of array
+        $object = new stdClass();
         while (!$this->match(Token::TYPE_RBRACE) && !$this->end()) {
             $key = $this->expectMulti([Token::TYPE_STRING, Token::TYPE_IDENTIFIER])->getData();
             $this->expect(Token::TYPE_COLON);
@@ -468,7 +470,7 @@ class Parser extends Tokenizer
 
             $this->eat(Token::TYPE_COMMA);
 
-            $object[$key] = $value;
+            $object->$key = $value;
         }
 
         $this->eat(Token::TYPE_RBRACE);

@@ -174,10 +174,17 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 [$this, 'convertArgumentValue'],
                 $value
             );
-        } elseif ($value instanceof InputList || $value instanceof InputObject) {
+        } elseif ($value instanceof InputList) {
             return array_map(
                 [$this, 'convertArgumentValue'],
                 $value->getValue()
+            );
+        } elseif ($value instanceof InputObject) {
+            // Convert from array back to stdClass
+            return (object) array_map(
+                [$this, 'convertArgumentValue'],
+                // Convert from stdClass to array
+                (array) $value->getValue()
             );
         }
         // Otherwise it may be a scalar value

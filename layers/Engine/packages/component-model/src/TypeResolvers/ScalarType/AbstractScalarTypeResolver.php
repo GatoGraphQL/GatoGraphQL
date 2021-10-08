@@ -20,6 +20,10 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
      */
     public function serialize(mixed $scalarValue): string|int|float|bool|array
     {
+        if (is_object($scalarValue)) {
+            // It's an stdClass, convert to array
+            return (array) $scalarValue;
+        }
         return $scalarValue;
     }
 
