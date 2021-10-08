@@ -62,9 +62,10 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$schemaTraces
     ): void {
         // Iterate data, extract into final results
-        if ($objectIDItems) {
-            $this->resolveValueForObjects($relationalTypeResolver, $objectIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        if (!$objectIDItems) {
+            return;
         }
+        $this->resolveValueForObjects($relationalTypeResolver, $objectIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
     }
 
     protected function resolveValueForObjects(
