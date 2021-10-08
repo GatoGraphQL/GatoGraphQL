@@ -11,6 +11,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 final class SerializeScalarTypeDBItemsDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
@@ -61,16 +62,31 @@ final class SerializeScalarTypeDBItemsDirectiveResolver extends AbstractGlobalDi
         if (!$objectIDItems) {
             return;
         }
-        if (!($relationalTypeResolver instanceof ObjectTypeResolverInterface)) {
-            return;
+        $unionTypeResolver = null;
+        $targetObjectTypeResolver = null;
+        $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
+        if ($isUnionTypeResolver) {
+            /** @var UnionTypeResolverInterface */
+            $unionTypeResolver = $relationalTypeResolver;
+        } else {
+            /** @var ObjectTypeResolverInterface */
+            $targetObjectTypeResolver = $relationalTypeResolver;
         }
-        /** @var ObjectTypeResolverInterface */
-        $objectTypeResolver = $relationalTypeResolver;
         
         foreach (array_keys($idsDataFields) as $id) {
+            // Obtain its ID and the required data-fields for that ID
+            $object = (object) $objectIDItems[$id];
+            // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
+            // In that case, simply return a dbError, and set the result as an empty array
+            if ($object === null) {
+                continue;
+            }
+            if ($isUnionTypeResolver) {
+                $targetObjectTypeResolver = $unionTypeResolver->getTargetObjectTypeResolver($object);
+            }
             $dataFields = $idsDataFields[(string)$id]['direct'];
             foreach ($dataFields as $field) {
-                $fieldSchemaDefinition = $objectTypeResolver->getFieldSchemaDefinition($field);
+                $fieldSchemaDefinition = $targetObjectTypeResolver->getFieldSchemaDefinition($field);
                 $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
                 if (!($fieldTypeResolver instanceof ScalarTypeResolverInterface)) {
                     continue;
@@ -79,7 +95,7 @@ final class SerializeScalarTypeDBItemsDirectiveResolver extends AbstractGlobalDi
                 /** @var ScalarTypeResolverInterface */
                 $fieldScalarTypeResolver = $fieldTypeResolver;
                 $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKeyByObjectTypeResolver(
-                    $objectTypeResolver,
+                    $targetObjectTypeResolver,
                     $field,
                 );
                 $value = $dbItems[(string)$id][$fieldOutputKey] ?? null;
