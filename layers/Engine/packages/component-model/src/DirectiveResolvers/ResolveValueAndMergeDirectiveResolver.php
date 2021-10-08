@@ -86,7 +86,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $object = $objectIDItems[$id];
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
             // In that case, simply return a dbError, and set the result as an empty array
-            if (is_null($object)) {
+            if ($object === null) {
                 $objectErrors[(string)$id][] = [
                     Tokens::PATH => ['id'],
                     Tokens::MESSAGE => sprintf(
