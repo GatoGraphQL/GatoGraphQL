@@ -133,7 +133,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $field
             );
         }
-        return $this->getUniqueFieldOutputKeyByTypeOutputName(
+        return $this->getUniqueFieldOutputKeyByTypeOutputDBKey(
             $relationalTypeResolver->getTypeOutputDBKey(),
             $field
         );
@@ -172,7 +172,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
     ): string {
-        return $this->getUniqueFieldOutputKeyByTypeOutputName(
+        return $this->getUniqueFieldOutputKeyByTypeOutputDBKey(
             $objectTypeResolver->getTypeOutputDBKey(),
             $field
         );
@@ -199,7 +199,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      * By keeping a registry of fields to fieldOutputNames, we can always provide
      * a unique name, and avoid overriding the value.
      */
-    public function getUniqueFieldOutputKeyByTypeOutputName(string $typeOutputName, string $field): string
+    public function getUniqueFieldOutputKeyByTypeOutputDBKey(string $typeOutputName, string $field): string
     {
         /**
          * Watch out! The conditional field symbol `?` must be ignored!
