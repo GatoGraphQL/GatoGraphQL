@@ -119,11 +119,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *   1. Validate: to validate that the schema, fieldNames, etc are supported, and filter them out if not
      *   2. ResolveAndMerge: to resolve the field and place the data into the DB object
      *   3. SerializeScalarTypeValuesInDBItems: to serialize Scalar Type values
-     * 
+     *
      * Additionally to these 3, we can add other mandatory directives, such as:
      *   - setSelfAsExpression
      *   - cacheControl
-     * 
+     *
      * Because it may be more convenient to add the directive or the class, there are 2 methods
      */
     protected function getMandatoryDirectives()

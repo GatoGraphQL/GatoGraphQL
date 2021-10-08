@@ -7,7 +7,6 @@ namespace GraphQLByPoP\GraphQLServer\Overrides\DataStructureFormatters;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter as UpstreamGraphQLDataStructureFormatter;
 
 /**
@@ -28,11 +27,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     protected function getTypeName(string $dbKey): string
     {
         // The type name is the same as the $dbKey
-        $typeName = $dbKey;
-        if (UnionTypeHelpers::isUnionType($typeName)) {
-            return UnionTypeHelpers::removePrefixFromUnionTypeName($typeName);
-        }
-        return $typeName;
+        return $dbKey;
     }
 
 
