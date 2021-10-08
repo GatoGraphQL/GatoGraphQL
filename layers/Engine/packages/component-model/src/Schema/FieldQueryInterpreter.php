@@ -1027,6 +1027,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     }
 
                     // Validate that the expected array/non-array input is provided
+                    var_dump($argName, $argValue);
                     $errorMessage = null;
                     if (
                         !$fieldOrDirectiveArgIsArrayType
@@ -1681,7 +1682,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             // Iterate all the elements and assign them to the fieldArgValue variable
             foreach ($fieldArgValueElems as $fieldArgValueElem) {
                 $fieldArgValueElemComponents = $this->queryParser->splitElements($fieldArgValueElem, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER, [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING], [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING], QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
-                $fieldArgValue->$fieldArgValueElemComponents[0] = $this->maybeConvertFieldArgumentValue($fieldArgValueElemComponents[1]);
+                $fieldArgValueElemKey = $fieldArgValueElemComponents[0];
+                $fieldArgValueElemValue = $fieldArgValueElemComponents[1];
+                $fieldArgValue->$fieldArgValueElemKey = $this->maybeConvertFieldArgumentValue($fieldArgValueElemValue);
             }
         }
 
