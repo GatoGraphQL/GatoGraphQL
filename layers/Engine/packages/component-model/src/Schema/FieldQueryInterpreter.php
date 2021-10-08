@@ -1027,7 +1027,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     }
 
                     // Validate that the expected array/non-array input is provided
-                    // var_dump($argName, $argValue);
                     $errorMessage = null;
                     if (
                         !$fieldOrDirectiveArgIsArrayType
