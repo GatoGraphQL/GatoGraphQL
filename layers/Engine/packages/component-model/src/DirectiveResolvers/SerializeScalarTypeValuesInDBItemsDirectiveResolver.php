@@ -113,7 +113,9 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
     }
 
     /**
-     * The response for Custom Scalar Types must be serialized
+     * The response for Custom Scalar Types must be serialized.
+     * The response type is the same as in the ScalarType's
+     * `serialize` method.
      * 
      * @param array<string, mixed> $fieldScalarSchemaDefinition
      */
@@ -121,7 +123,7 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
         ScalarTypeResolverInterface $fieldScalarTypeResolver,
         array $fieldScalarSchemaDefinition,
         mixed $value,
-    ): mixed {
+    ): string|int|float|bool|array {
         // If the value is an array of arrays, then serialize each subelement to the item type
         if ($fieldScalarSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false) {
             return $value === null ? null : array_map(
