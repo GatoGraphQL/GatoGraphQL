@@ -72,7 +72,7 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
             /** @var ObjectTypeResolverInterface */
             $targetObjectTypeResolver = $relationalTypeResolver;
         }
-        
+
         foreach (array_keys($idsDataFields) as $id) {
             // Obtain its ID and the required data-fields for that ID
             $object = $objectIDItems[$id];
@@ -116,7 +116,7 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
      * The response for Custom Scalar Types must be serialized.
      * The response type is the same as in the ScalarType's
      * `serialize` method.
-     * 
+     *
      * @param array<string, mixed> $fieldScalarSchemaDefinition
      */
     private function serializeScalarTypeValue(
