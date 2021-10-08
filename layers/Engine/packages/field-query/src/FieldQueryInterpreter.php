@@ -870,7 +870,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         // Iterate through all the elements of the array and, if they are an stdClass themselves,
         // call this function recursively
         $elems = [];
-        foreach ($fieldArgValue as $key => $value) {
+        foreach ((array) $fieldArgValue as $key => $value) {
             // Add the keyValueDelimiter
             if (is_array($value)) {
                 $elems[] =
