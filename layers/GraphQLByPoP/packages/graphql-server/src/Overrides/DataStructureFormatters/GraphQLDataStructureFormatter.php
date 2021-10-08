@@ -22,16 +22,6 @@ use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter as Upst
 class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatter
 {
     /**
-     * If it is a Union Type, we must remove the "*" from the name
-     */
-    protected function getTypeName(string $dbKey): string
-    {
-        // The type name is the same as the $dbKey
-        return $dbKey;
-    }
-
-
-    /**
      * Indicate if to add entry "extensions" as a top-level entry
      */
     protected function addTopLevelExtensionsEntryToResponse(): bool
@@ -79,7 +69,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
         $vars = ApplicationState::getVars();
         if ($vars['standard-graphql']) {
             $extensions = [
-                'type' => $this->getTypeName($dbKey),
+                'type' => $dbKey,
                 'id' => $id,
             ];
             $this->addFieldOrDirectiveEntryToExtensions($extensions, $item);
@@ -96,7 +86,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
         $vars = ApplicationState::getVars();
         if ($vars['standard-graphql']) {
             $extensions = [
-                'type' => $this->getTypeName($dbKey),
+                'type' => $dbKey,
             ];
             $this->addFieldOrDirectiveEntryToExtensions($extensions, $item);
             return $extensions;
