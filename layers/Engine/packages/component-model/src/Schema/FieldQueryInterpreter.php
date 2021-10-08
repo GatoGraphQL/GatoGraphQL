@@ -1699,7 +1699,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $fieldArgValue = $this->maybeConvertFieldArgumentObjectValueFromStringToObject($fieldArgValue);
             }
         }
-        if (is_array($fieldArgValue) || is_object($fieldArgValue)) {
+        $isObject = $fieldArgValue instanceof stdClass;
+        if (is_array($fieldArgValue) || $isObject) {
             // Resolve each element the same way
             // For object: Cast back and forth from array to stdClass
             $fieldOrDirectiveArgs = $this->filterFieldOrDirectiveArgs(
@@ -1707,7 +1708,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     return $this->maybeConvertFieldArgumentValue($arrayValueElem, $variables);
                 }, (array) $fieldArgValue)
             );
-            if (is_object($fieldArgValue)) {
+            if ($isObject) {
                 return (object) $fieldOrDirectiveArgs;
             }
             return $fieldOrDirectiveArgs;

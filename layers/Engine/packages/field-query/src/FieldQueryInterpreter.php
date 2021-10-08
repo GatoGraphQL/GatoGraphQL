@@ -6,6 +6,7 @@ namespace PoP\FieldQuery;
 
 use PoP\QueryParsing\QueryParserInterface;
 use PoP\Translation\TranslationAPIInterface;
+use stdClass;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class FieldQueryInterpreter implements FieldQueryInterpreterInterface
@@ -767,7 +768,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             } elseif (is_array($fieldArgValue)) {
                 // Convert from array to its representation of array in a string
                 $fieldArgValue = $this->getArrayAsStringForQuery($fieldArgValue);
-            } elseif (is_object($fieldArgValue)) {
+            } elseif ($fieldArgValue instanceof stdClass) {
                 // Convert from array to its representation of object in a string
                 $fieldArgValue = $this->getObjectAsStringForQuery($fieldArgValue);
             } elseif (is_string($fieldArgValue)) {
@@ -837,7 +838,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                     $key .
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER .
                     $this->getArrayAsStringForQuery($value);
-            } elseif (is_object($value)) {
+            } elseif ($value instanceof stdClass) {
                 $elems[] =
                     $key .
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER .
@@ -864,10 +865,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING;
     }
 
-    /**
-     * @param object $fieldArgValue an instance of stdClass
-     */
-    public function getObjectAsStringForQuery(object $fieldArgValue): string
+    public function getObjectAsStringForQuery(stdClass $fieldArgValue): string
     {
         // Iterate through all the elements of the array and, if they are an stdClass themselves,
         // call this function recursively
@@ -879,7 +877,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                     $key .
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .
                     $this->getArrayAsStringForQuery($value);
-            } elseif (is_object($value)) {
+            } elseif ($value instanceof stdClass) {
                 $elems[] =
                     $key .
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .

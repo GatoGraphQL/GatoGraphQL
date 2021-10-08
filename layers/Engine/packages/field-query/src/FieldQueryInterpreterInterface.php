@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\FieldQuery;
 
+use stdClass;
+
 interface FieldQueryInterpreterInterface
 {
     public function getFieldName(string $field): string;
@@ -125,10 +127,7 @@ interface FieldQueryInterpreterInterface
      * @param array<string, mixed> $fieldArgValue
      */
     public function getArrayAsStringForQuery(array $fieldArgValue): string;
-    /**
-     * @param object $fieldArgValue an instance of stdClass
-     */
-    public function getObjectAsStringForQuery(object $fieldArgValue): string;
+    public function getObjectAsStringForQuery(stdClass $fieldArgValue): string;
     /**
      * @param array<string, mixed> $fieldArgs
      */
