@@ -207,10 +207,10 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
          * Watch out! The conditional field symbol `?` must be ignored!
          * Otherwise the same field, with and without ?, will be considered different,
          * but they are the same:
-         * 
+         *
          * - the field without "?" is used to resolve the field
          * - the field with "?" is used to retrieve the value to print in the response
-         * 
+         *
          * Eg:
          *   /?query=post(id:1).id|title
          */
