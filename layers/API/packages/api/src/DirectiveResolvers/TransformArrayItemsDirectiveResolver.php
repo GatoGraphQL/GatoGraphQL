@@ -84,7 +84,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        $dbKey = $relationalTypeResolver->getTypeOutputName();
+        $dbKey = $relationalTypeResolver->getTypeOutputDBKey();
         /**
          * Collect all ID => dataFields for the arrayItems
          */

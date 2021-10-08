@@ -67,9 +67,9 @@ interface ModuleProcessorInterface
     public function shouldExecuteMutation(array $module, array &$props): bool;
     public function getDataloadSource(array $module, array &$props): string;
     public function getModulesToPropagateDataProperties(array $module): array;
-    public function getModelSupplementaryDbobjectdataModuletree(array $module, array &$props): array;
-    public function getModelSupplementaryDbobjectdata(array $module, array &$props): array;
-    public function getMutableonrequestSupplementaryDbobjectdataModuletree(array $module, array &$props): array;
+    public function getModelSupplementaryDBObjectDataModuletree(array $module, array &$props): array;
+    public function getModelSupplementaryDBObjectData(array $module, array &$props): array;
+    public function getMutableonrequestSupplementaryDBObjectDataModuletree(array $module, array &$props): array;
     public function getMutableonrequestSupplementaryDbobjectdata(array $module, array &$props): array;
     public function moduleLoadsData(array $module): bool;
     public function startDataloadingSection(array $module): bool;

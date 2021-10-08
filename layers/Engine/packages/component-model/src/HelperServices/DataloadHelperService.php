@@ -63,7 +63,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
                 // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                 $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($subcomponent_data_field);
                 $this->feedbackMessageStore->addSchemaError(
-                    $objectTypeResolver->getTypeOutputName(),
+                    $objectTypeResolver->getTypeOutputDBKey(),
                     $subcomponent_data_field_outputkey,
                     sprintf(
                         $this->translationAPI->__('Field \'%s\' is not a connection', 'pop-component-model'),

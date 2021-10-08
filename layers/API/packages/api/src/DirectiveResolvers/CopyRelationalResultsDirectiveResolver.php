@@ -169,7 +169,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
         $keepRelationalIDs = $this->directiveArgsForSchema['keepRelationalIDs'];
 
         // From the typeResolver, obtain under what type the data for the current object is stored
-        $dbKey = $objectTypeResolver->getTypeOutputName();
+        $dbKey = $objectTypeResolver->getTypeOutputDBKey();
 
         // Copy the data from each of the relational object fields to the current object
         foreach ($idsDataFields as $id => $dataFields) {
@@ -234,8 +234,8 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
                     continue;
                 }
 
-                $relationalFieldDBKey = $relationalFieldTypeResolver->getTypeOutputName();
-                $isUnionRelationalFieldDBKey = $relationalFieldTypeResolver instanceof UnionTypeResolverInterface;
+                $relationalFieldTypeOutputDBKey = $relationalFieldTypeResolver->getTypeOutputDBKey();
+                $isUnionRelationalFieldTypeResolver = $relationalFieldTypeResolver instanceof UnionTypeResolverInterface;
                 for ($i = 0; $i < count($copyFromFields); $i++) {
                     $copyFromField = $copyFromFields[$i];
                     $copyToField = $copyToFields[$i] ?? $copyFromFields[$i];
@@ -259,7 +259,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
                     $dbItems[(string)$id][$copyToField] = [];
 
                     // Obtain the DBKey under which the relationalField is stored in the database
-                    if ($isUnionRelationalFieldDBKey) {
+                    if ($isUnionRelationalFieldTypeResolver) {
                         // If the relational type data resolver is union, we must use the corresponding IDs from $unionDBKeyIDs, which contain the type in addition to the ID
                         $relationalFieldIDs = $unionDBKeyIDs[$dbKey][(string)$id][$relationalFieldOutputKey];
                     } else {
@@ -277,24 +277,24 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
 
                     foreach ($relationalFieldIDs as $relationalFieldID) {
                         // Validate that the source field has been set.
-                        if (!array_key_exists($copyFromField, $previousDBItems[$relationalFieldDBKey][(string)$relationalFieldID] ?? [])) {
+                        if (!array_key_exists($copyFromField, $previousDBItems[$relationalFieldTypeOutputDBKey][(string)$relationalFieldID] ?? [])) {
                             $objectErrors[(string)$id][] = [
                                 Tokens::PATH => [$this->directive],
                                 Tokens::MESSAGE => sprintf(
                                     $this->translationAPI->__('Field \'%s\' hadn\'t been set for object of entity \'%s\' and ID \'%s\', so no data can be copied', 'component-model'),
                                     $copyFromField,
-                                    $relationalFieldDBKey,
+                                    $relationalFieldTypeOutputDBKey,
                                     $relationalFieldID
                                 ),
                             ];
                             continue;
                         }
                         if ($copyStraight) {
-                            $dbItems[(string)$id][$copyToField] = $previousDBItems[$relationalFieldDBKey][(string)$relationalFieldID][$copyFromField];
+                            $dbItems[(string)$id][$copyToField] = $previousDBItems[$relationalFieldTypeOutputDBKey][(string)$relationalFieldID][$copyFromField];
                         } elseif ($keepRelationalIDs) {
-                            $dbItems[(string)$id][$copyToField][(string)$relationalFieldID] = $previousDBItems[$relationalFieldDBKey][(string)$relationalFieldID][$copyFromField];
+                            $dbItems[(string)$id][$copyToField][(string)$relationalFieldID] = $previousDBItems[$relationalFieldTypeOutputDBKey][(string)$relationalFieldID][$copyFromField];
                         } else {
-                            $dbItems[(string)$id][$copyToField][] = $previousDBItems[$relationalFieldDBKey][(string)$relationalFieldID][$copyFromField];
+                            $dbItems[(string)$id][$copyToField][] = $previousDBItems[$relationalFieldTypeOutputDBKey][(string)$relationalFieldID][$copyFromField];
                         }
                     }
                 }

@@ -59,7 +59,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             $this->getTypeName();
     }
 
-    public function getTypeOutputName(): string
+    final public function getTypeOutputDBKey(): string
     {
         // Do not make the first letter lowercase, or namespaced names look bad
         return $this->getMaybeNamespacedTypeName();

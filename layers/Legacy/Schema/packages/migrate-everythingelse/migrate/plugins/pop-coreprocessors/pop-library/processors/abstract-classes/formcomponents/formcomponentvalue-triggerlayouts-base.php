@@ -92,7 +92,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         // if ($this->getProp($module, $props, 'replicable')) {
 
         if ($triggerTypeResolver = $this->getTriggerRelationalTypeResolver($module)) {
-            $database_key = $triggerTypeResolver->getTypeOutputName();
+            $database_key = $triggerTypeResolver->getTypeOutputDBKey();
 
             // Needed to execute fillInput on the typeahead input to get the value from the request
             $this->mergeProp(
@@ -133,7 +133,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         $ret = parent::getImmutableConfiguration($module, $props);
 
         if ($triggerTypeResolver = $this->getTriggerRelationalTypeResolver($module)) {
-            $ret['dbkey'] = $triggerTypeResolver->getTypeOutputName();
+            $ret['dbkey'] = $triggerTypeResolver->getTypeOutputDBKey();
         }
 
         $trigger_module = $this->getTriggerSubmodule($module);

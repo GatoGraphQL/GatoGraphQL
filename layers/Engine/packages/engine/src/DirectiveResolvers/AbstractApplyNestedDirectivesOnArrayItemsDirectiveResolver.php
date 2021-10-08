@@ -136,7 +136,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
          * Collect all ID => dataFields for the arrayItems
          */
         $arrayItemIdsProperties = [];
-        $dbKey = $relationalTypeResolver->getTypeOutputName();
+        $dbKey = $relationalTypeResolver->getTypeOutputDBKey();
         /**
          * Execute composed directive only if the validations do not fail
          */
@@ -439,7 +439,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
             $object = $objectIDItems[$id];
             $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
             $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
-            $dbKey = $relationalTypeResolver->getTypeOutputName();
+            $dbKey = $relationalTypeResolver->getTypeOutputDBKey();
             $value = $isValueInDBItems ?
                 $dbItems[(string)$id][$fieldOutputKey] :
                 $previousDBItems[$dbKey][(string)$id][$fieldOutputKey];

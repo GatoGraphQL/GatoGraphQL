@@ -504,7 +504,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     {
         $ret = array();
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($module)) {
-            if ($dbkey = $relationalTypeResolver->getTypeOutputName()) {
+            if ($dbkey = $relationalTypeResolver->getTypeOutputDBKey()) {
                 // Place it under "id" because it is for fetching the current object from the DB, which is found through dbObject.id
                 $ret['id'] = $dbkey;
             }
@@ -1227,12 +1227,12 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     // New PUBLIC Functions: Static Data
     //-------------------------------------------------
 
-    public function getModelSupplementaryDbobjectdataModuletree(array $module, array &$props): array
+    public function getModelSupplementaryDBObjectDataModuletree(array $module, array &$props): array
     {
-        return $this->executeOnSelfAndMergeWithModules('getModelSupplementaryDbobjectdata', __FUNCTION__, $module, $props);
+        return $this->executeOnSelfAndMergeWithModules('getModelSupplementaryDBObjectData', __FUNCTION__, $module, $props);
     }
 
-    public function getModelSupplementaryDbobjectdata(array $module, array &$props): array
+    public function getModelSupplementaryDBObjectData(array $module, array &$props): array
     {
         return array();
     }
@@ -1241,7 +1241,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     // New PUBLIC Functions: Stateful Data
     //-------------------------------------------------
 
-    public function getMutableonrequestSupplementaryDbobjectdataModuletree(array $module, array &$props): array
+    public function getMutableonrequestSupplementaryDBObjectDataModuletree(array $module, array &$props): array
     {
         return $this->executeOnSelfAndMergeWithModules('getMutableonrequestSupplementaryDbobjectdata', __FUNCTION__, $module, $props);
     }
