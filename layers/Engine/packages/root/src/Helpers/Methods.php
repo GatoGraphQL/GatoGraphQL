@@ -56,13 +56,12 @@ class Methods
                     if (count($recursiveDiff)) {
                         $outputDiff[$key] = $recursiveDiff;
                     }
-                } else if (!in_array($value, $arr2)) {
+                } elseif (!in_array($value, $arr2)) {
                     $outputDiff[$key] = $value;
                 }
-            }
-            //if the key is not in the second array, check if the value is in
-            //the second array (this is a quirk of how array_diff works)
-            else if (!in_array($value, $arr2)) {
+            } elseif (!in_array($value, $arr2)) {
+                //if the key is not in the second array, check if the value is in
+                //the second array (this is a quirk of how array_diff works)
                 $outputDiff[$key] = $value;
             }
         }
