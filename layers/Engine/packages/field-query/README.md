@@ -891,7 +891,7 @@ Directives can be nested: An outer directive can modify the behaviour of its inn
 
 In the example below, directive `<forEach>` iterates through the elements of the array, for its composed directive `<applyFunction>` to do something with each of them. It passes the array item through pre-defined expression `%value%` (coded within the directive).
 
-_**In PoP** ([View query in browser](https://newapi.getpop.org/api/graphql/?query=echo(%5B%5Bbanana,apple%5D,%5Bstrawberry,grape,melon%5D%5D)@fruitJoin%3CforEach%3CapplyFunction(function:arrayJoin,addArguments:%5Barray:%value%,separator:%22---%22%5D)%3E%3E)):_
+_**In PoP** ([View query in browser](https://nextapi.getpop.org/api/graphql/?query=echo(%5B%5Bbanana,apple%5D,%5Bstrawberry,grape,melon%5D%5D)@fruitJoin%3CforEach%3CapplyFunction(function:arrayJoin,addArguments:%5Barray:%value%,separator:%22---%22%5D)%3E%3E)):_
 
 ```php
 /?query=
@@ -913,7 +913,7 @@ _**In PoP** ([View query in browser](https://newapi.getpop.org/api/graphql/?quer
 
 In the example below, directive `<advancePointerInArray>` communicates to directive `<translate>` the language to translate to through expression `%translateTo%`, which is defined on-the-fly.
 
-_**In PoP** (<a href="https://newapi.getpop.org/api/graphql/?query=echo([[text:Hello my friends,translateTo:fr],[text:How do you like this software so far?,translateTo:es]])@translated<forEach<advancePointerInArray(path:text,appendExpressions:[toLang:extract(%value%,translateTo)])<translateMultiple(from:en,to:%toLang%,oneLanguagePerField:true,override:true)>>>">View query in browser</a>):_
+_**In PoP** (<a href="https://nextapi.getpop.org/api/graphql/?query=echo([[text:Hello my friends,translateTo:fr],[text:How do you like this software so far?,translateTo:es]])@translated<forEach<advancePointerInArray(path:text,appendExpressions:[toLang:extract(%value%,translateTo)])<translateMultiple(from:en,to:%toLang%,oneLanguagePerField:true,override:true)>>>">View query in browser</a>):_
 
 ```php
 /?query=
