@@ -12,6 +12,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -234,7 +235,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
                 }
 
                 $relationalFieldDBKey = $relationalFieldTypeResolver->getTypeOutputName();
-                $isUnionRelationalFieldDBKey = UnionTypeHelpers::isUnionType($relationalFieldDBKey);
+                $isUnionRelationalFieldDBKey = $relationalFieldTypeResolver instanceof UnionTypeResolverInterface;
                 for ($i = 0; $i < count($copyFromFields); $i++) {
                     $copyFromField = $copyFromFields[$i];
                     $copyToField = $copyToFields[$i] ?? $copyFromFields[$i];
