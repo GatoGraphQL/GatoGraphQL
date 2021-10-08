@@ -118,9 +118,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         string $field,
         object $object,
     ): string {
-        $typeOutputName = null;
         if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
-            // Obtain the typeOutputName from the target ObjectTypeResolver
             $targetObjectTypeResolver = $relationalTypeResolver->getTargetObjectTypeResolver($object);
             if ($targetObjectTypeResolver === null) {
                 throw new Exception(
@@ -136,7 +134,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             );
         }
         return $this->getUniqueFieldOutputKeyByTypeOutputName(
-            $typeOutputName ?? $relationalTypeResolver->getTypeOutputName(),
+            $relationalTypeResolver->getTypeOutputName(),
             $field
         );
     }
