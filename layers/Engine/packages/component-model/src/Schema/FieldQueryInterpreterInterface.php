@@ -90,5 +90,5 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
         array $expressions
     ): array;
     public function maybeConvertFieldArgumentValue(mixed $fieldArgValue, ?array $variables = null): mixed;
-    public function maybeConvertFieldArgumentArrayValue(mixed $fieldArgValue, ?array $variables = null): mixed;
+    public function maybeConvertFieldArgumentArrayOrObjectValue(mixed $fieldArgValue, ?array $variables = null): mixed;
 }

@@ -115,7 +115,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
             // If any element is an array represented as a string, like "[time()]"
             // when doing /?query=extract(echo([time()]),0), then extract it and merge it into the main array
             $nestedFields = array_unique(GeneralUtils::arrayFlatten(
-                (array)$this->fieldQueryInterpreter->maybeConvertFieldArgumentArrayValue($fieldArgElems),
+                (array)$this->fieldQueryInterpreter->maybeConvertFieldArgumentArrayOrObjectValue($fieldArgElems),
                 true
             ));
             // Extract the composed fields which are either a field, or an array which contain a field

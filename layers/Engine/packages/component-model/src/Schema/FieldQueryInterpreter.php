@@ -1585,7 +1585,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 // First replace all variables
                 if ($fieldArgValue = $this->maybeConvertFieldArgumentVariableValue($fieldArgValue, $variables)) {
                     // Then convert to arrays
-                    $fieldArgValue = $this->maybeConvertFieldArgumentArrayValue($fieldArgValue, $variables);
+                    $fieldArgValue = $this->maybeConvertFieldArgumentArrayOrObjectValue($fieldArgValue, $variables);
                 }
             }
         }
@@ -1691,7 +1691,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldArgValue;
     }
 
-    public function maybeConvertFieldArgumentArrayValue(mixed $fieldArgValue, ?array $variables = null): mixed
+    public function maybeConvertFieldArgumentArrayOrObjectValue(mixed $fieldArgValue, ?array $variables = null): mixed
     {
         if (is_string($fieldArgValue)) {
             $fieldArgValue = $this->maybeConvertFieldArgumentArrayValueFromStringToArray($fieldArgValue);
