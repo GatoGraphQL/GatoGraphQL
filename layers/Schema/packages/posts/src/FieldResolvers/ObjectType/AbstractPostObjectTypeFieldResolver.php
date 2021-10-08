@@ -10,6 +10,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
@@ -27,16 +28,28 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected PostTypeAPIInterface $postTypeAPI;
+    /**
+     * @todo Temp code to test, keep working on it then delete
+     */
+    protected DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver;
 
     #[Required]
     final public function autowireAbstractPostObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         PostObjectTypeResolver $postObjectTypeResolver,
         PostTypeAPIInterface $postTypeAPI,
+        /**
+         * @todo Temp code to test, keep working on it then delete
+         */
+        DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver,
     ): void {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->postObjectTypeResolver = $postObjectTypeResolver;
         $this->postTypeAPI = $postTypeAPI;
+        /**
+         * @todo Temp code to test, keep working on it then delete
+         */
+        $this->dateQueryInputObjectTypeResolver = $dateQueryInputObjectTypeResolver;
     }
 
     public function getFieldNamesToResolve(): array
@@ -101,6 +114,22 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
             'postsForAdmin' => [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINPOSTS],
             'postCountForAdmin' => [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINPOSTCOUNT],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
+        };
+    }
+
+    /**
+     * @todo Temp code to test, keep working on it then delete
+     */
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        return match ($fieldName) {
+            'posts' => array_merge(
+                parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
+                [
+                    'dateQuery' => $this->dateQueryInputObjectTypeResolver,
+                ]
+            ),
+            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 
