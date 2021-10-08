@@ -223,6 +223,11 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$dbItems,
         array &$objectErrors,
     ): void {
+        $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey(
+            $relationalTypeResolver,
+            $field,
+            $object,
+        );
         // The dataitem can contain both rightful values and also errors (eg: when the field doesn't exist, or the field validation fails)
         // Extract the errors and add them on the other array
         if (GeneralUtils::isError($value)) {
@@ -238,21 +243,11 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
             // For GraphQL, set the response for the failing field as null
             if (ComponentConfiguration::setFailingFieldResponseAsNull()) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey(
-                    $relationalTypeResolver,
-                    $field,
-                    $object,
-                );
                 $dbItems[(string)$id][$fieldOutputKey] = null;
             }
             return;
         }
         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-        $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey(
-            $relationalTypeResolver,
-            $field,
-            $object,
-        );
         $dbItems[(string)$id][$fieldOutputKey] = $value;
     }
 
