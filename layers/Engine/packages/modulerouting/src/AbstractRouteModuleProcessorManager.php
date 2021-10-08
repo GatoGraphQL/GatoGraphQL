@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ModuleRouting;
 
+use PoP\ModuleRouting\Helpers\Methods;
+
 abstract class AbstractRouteModuleProcessorManager implements RouteModuleProcessorManagerInterface
 {
     /**
@@ -60,7 +62,7 @@ abstract class AbstractRouteModuleProcessorManager implements RouteModuleProcess
                     foreach ($vars_properties as $vars_properties_set) {
                         // Check if the all the $vars_properties_set are satisfied <= if all those key/values are also present in $vars
                         $conditions = $vars_properties_set['conditions'] ?? [];
-                        if (Utils::arrayIsSubset($conditions, $vars)) {
+                        if (Methods::arrayIsSubset($conditions, $vars)) {
                             // Check how many matches there are, and if it's the most, this is the most matching module
                             // Check that it is >= instead of >. This is done so that later processors can override the behavior from previous processors,
                             // which makes sense since plugins are loaded in a specific order
@@ -88,7 +90,7 @@ abstract class AbstractRouteModuleProcessorManager implements RouteModuleProcess
                 foreach ($vars_properties as $vars_properties_set) {
                     // Check if the all the $vars_properties are satisfied <= if all those key/values are also present in $vars
                     $conditions = $vars_properties_set['conditions'] ?? [];
-                    if (Utils::arrayIsSubset($conditions, $vars)) {
+                    if (Methods::arrayIsSubset($conditions, $vars)) {
                         // Check how many matches there are, and if it's the most, this is the most matching module
                         if (($matching_properties_count = count($conditions, COUNT_RECURSIVE)) >= $most_matching_properties_count) {
                             $most_matching_module = $vars_properties_set['module'];
@@ -109,7 +111,7 @@ abstract class AbstractRouteModuleProcessorManager implements RouteModuleProcess
                 foreach ($vars_properties as $vars_properties_set) {
                     // Check if the all the $vars_properties are satisfied <= if all those key/values are also present in $vars
                     $conditions = $vars_properties_set['conditions'] ?? [];
-                    if (Utils::arrayIsSubset($conditions, $vars)) {
+                    if (Methods::arrayIsSubset($conditions, $vars)) {
                         // Check how many matches there are, and if it's the most, this is the most matching module
                         if (($matching_properties_count = count($conditions, COUNT_RECURSIVE)) >= $most_matching_properties_count) {
                             $most_matching_module = $vars_properties_set['module'];

@@ -44,7 +44,7 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Configuration\Request;
 use PoP\Hooks\HooksAPIInterface;
-use PoP\ModuleRouting\Utils;
+use PoP\Root\Helpers\Methods;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -1449,7 +1449,7 @@ class Engine implements EngineInterface
                         $iterationFields = array_keys($iterationDBItems[(string)$id]);
                         $already_loaded_ids_data_fields[$relationalTypeResolverName][(string)$id] = array_merge(
                             $already_loaded_ids_data_fields[$relationalTypeResolverName][(string)$id] ?? [],
-                            Utils::arrayIntersectAssocRecursive(
+                            Methods::arrayIntersectAssocRecursive(
                                 $conditionalDataFields,
                                 $iterationFields
                             ) ?? []
@@ -1813,7 +1813,7 @@ class Engine implements EngineInterface
                                 );
                                 $id_subcomponent_conditional_data_fields = [];
                                 foreach ($subcomponent_conditional_data_fields as $conditionField => $conditionalFields) {
-                                    $id_subcomponent_conditional_data_fields[$conditionField] = Utils::arrayDiffRecursive(
+                                    $id_subcomponent_conditional_data_fields[$conditionField] = Methods::arrayDiffRecursive(
                                         $conditionalFields,
                                         $subcomponent_already_loaded_data_fields
                                     );
