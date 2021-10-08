@@ -1027,6 +1027,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     }
 
                     // Validate that the expected array/non-array input is provided
+                    // var_dump($argName, $argValue);
                     $errorMessage = null;
                     if (
                         !$fieldOrDirectiveArgIsArrayType
@@ -1694,7 +1695,10 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     {
         if (is_string($fieldArgValue)) {
             $fieldArgValue = $this->maybeConvertFieldArgumentArrayValueFromStringToArray($fieldArgValue);
-            $fieldArgValue = $this->maybeConvertFieldArgumentObjectValueFromStringToObject($fieldArgValue);
+            // If still not converted, try to convert for object
+            if (is_string($fieldArgValue)) {
+                $fieldArgValue = $this->maybeConvertFieldArgumentObjectValueFromStringToObject($fieldArgValue);
+            }
         }
         if (is_array($fieldArgValue) || is_object($fieldArgValue)) {
             // Resolve each element the same way
