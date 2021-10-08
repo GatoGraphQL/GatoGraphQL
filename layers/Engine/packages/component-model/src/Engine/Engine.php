@@ -1607,7 +1607,8 @@ class Engine implements EngineInterface
                                 $database_key,
                                 $id
                             ) = UnionTypeHelpers::extractDBObjectTypeAndID((string)$composedID);
-                            $targetObjectIDItems[$id] = $objectIDItems[$composedID];
+                            // It's null if the Dataloader couldn't load the item with the given ID
+                            $targetObjectIDItems[$id] = $objectIDItems[$composedID] ?? null;
                             $objectTypeResolver_ids[] = $id;
                         }
 
