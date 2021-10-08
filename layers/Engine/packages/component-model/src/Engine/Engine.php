@@ -716,7 +716,7 @@ class Engine implements EngineInterface
                             $objectID
                         ) = UnionTypeHelpers::extractDBObjectTypeAndID($objectID);
 
-                        $targetObjectTypeResolverName = $targetObjectTypeResolver->getTypeOutputName();
+                        $targetObjectTypeResolverName = $targetObjectTypeResolver->getNamespacedTypeName();
                         $targetObjectTypeResolverNameTypeResolvers[$targetObjectTypeResolverName] = $targetObjectTypeResolver;
                         $targetObjectTypeResolverNameDBKeys[$targetObjectTypeResolverName] = $objectDBKey;
                         $targetObjectTypeResolverNameDataItems[$targetObjectTypeResolverName][$objectID] = $dataItem;
@@ -1622,7 +1622,7 @@ class Engine implements EngineInterface
                         foreach ($objectTypeResolver_ids as $id) {
                             // If there's no resolver, it's an error: the ID can't be processed by anyone
                             if ($targetObjectTypeResolver = $targetObjectTypeResolvers[(string)$id] ?? null) {
-                                $objectTypeResolverName = $targetObjectTypeResolver->getTypeOutputName();
+                                $objectTypeResolverName = $targetObjectTypeResolver->getNamespacedTypeName();
                                 $iterationObjectTypeResolverNameDataItems[$objectTypeResolverName] ??= [
                                     'targetObjectTypeResolver' => $targetObjectTypeResolver,
                                     'objectIDs' => [],
