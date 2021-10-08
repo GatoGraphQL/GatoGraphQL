@@ -1726,7 +1726,7 @@ class Engine implements EngineInterface
                 $subcomponentTypeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($targetObjectTypeResolver, $subcomponent_data_field);
             }
             if ($subcomponentTypeResolver !== null) {
-                $subcomponentTypeResolverDBKey = $subcomponentTypeResolver->getTypeOutputName();
+                $subcomponentTypeOutputDBKey = $subcomponentTypeResolver->getTypeOutputName();
                 // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
                 $subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? []);
                 $subcomponent_conditional_data_fields = $subcomponent_data_properties['conditional-data-fields'] ?? [];
@@ -1734,8 +1734,8 @@ class Engine implements EngineInterface
                     $subcomponentIsUnionTypeResolver = $subcomponentTypeResolver instanceof UnionTypeResolverInterface;
 
                     $subcomponent_already_loaded_ids_data_fields = [];
-                    if ($already_loaded_ids_data_fields && ($already_loaded_ids_data_fields[$subcomponentTypeResolverDBKey] ?? null)) {
-                        $subcomponent_already_loaded_ids_data_fields = $already_loaded_ids_data_fields[$subcomponentTypeResolverDBKey];
+                    if ($already_loaded_ids_data_fields && ($already_loaded_ids_data_fields[$subcomponentTypeOutputDBKey] ?? null)) {
+                        $subcomponent_already_loaded_ids_data_fields = $already_loaded_ids_data_fields[$subcomponentTypeOutputDBKey];
                     }
                     $subcomponentIDs = [];
                     foreach ($typeResolver_ids as $id) {
@@ -1827,20 +1827,20 @@ class Engine implements EngineInterface
                             // Eg: /api/?query=posts(id:1).author.posts.comments.post.author.posts.title
                             // In this case, property "title" at the end would not be fetched otherwise (that post was already loaded at the beginning)
                             // if ($id_subcomponent_data_fields) {
-                            $this->combineIDsDatafields($this->relationalTypeResolverNameIDsDataFields, $subcomponentTypeResolver, $subcomponentTypeResolverDBKey, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
+                            $this->combineIDsDatafields($this->relationalTypeResolverNameIDsDataFields, $subcomponentTypeResolver, $subcomponentTypeOutputDBKey, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
                             // }
                         }
-                        $this->initializeTypeResolverEntry($this->dbdata, $subcomponentTypeResolverDBKey, $module_path_key);
-                        $this->dbdata[$subcomponentTypeResolverDBKey][$module_path_key]['ids'] = array_merge(
-                            $this->dbdata[$subcomponentTypeResolverDBKey][$module_path_key]['ids'] ?? [],
+                        $this->initializeTypeResolverEntry($this->dbdata, $subcomponentTypeOutputDBKey, $module_path_key);
+                        $this->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] = array_merge(
+                            $this->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] ?? [],
                             $field_ids
                         );
-                        $this->integrateSubcomponentDataProperties($this->dbdata, $subcomponent_data_properties, $subcomponentTypeResolverDBKey, $module_path_key);
+                        $this->integrateSubcomponentDataProperties($this->dbdata, $subcomponent_data_properties, $subcomponentTypeOutputDBKey, $module_path_key);
                     }
 
-                    if ($this->dbdata[$subcomponentTypeResolverDBKey][$module_path_key] ?? null) {
-                        $this->dbdata[$subcomponentTypeResolverDBKey][$module_path_key]['ids'] = array_unique($this->dbdata[$subcomponentTypeResolverDBKey][$module_path_key]['ids']);
-                        $this->dbdata[$subcomponentTypeResolverDBKey][$module_path_key]['data-fields'] = array_unique($this->dbdata[$subcomponentTypeResolverDBKey][$module_path_key]['data-fields']);
+                    if ($this->dbdata[$subcomponentTypeOutputDBKey][$module_path_key] ?? null) {
+                        $this->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] = array_unique($this->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids']);
+                        $this->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['data-fields'] = array_unique($this->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['data-fields']);
                     }
                 }
             }
