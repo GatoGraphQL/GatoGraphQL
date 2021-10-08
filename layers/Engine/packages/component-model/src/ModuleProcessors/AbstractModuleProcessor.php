@@ -1241,7 +1241,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     // New PUBLIC Functions: Stateful Data
     //-------------------------------------------------
 
-    public function getMutableonrequestSupplementaryDbobjectdataModuletree(array $module, array &$props): array
+    public function getMutableonrequestSupplementaryDBObjectDataModuletree(array $module, array &$props): array
     {
         return $this->executeOnSelfAndMergeWithModules('getMutableonrequestSupplementaryDbobjectdata', __FUNCTION__, $module, $props);
     }

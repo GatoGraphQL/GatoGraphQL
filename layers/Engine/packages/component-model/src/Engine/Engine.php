@@ -1101,7 +1101,7 @@ class Engine implements EngineInterface
                     if ($datasource == DataSources::MUTABLEONREQUEST) {
                         $dataload_extend_settings = array_merge_recursive(
                             $dataload_extend_settings,
-                            $processor->getMutableonrequestSupplementaryDbobjectdataModuletree($module, $props)
+                            $processor->getMutableonrequestSupplementaryDBObjectDataModuletree($module, $props)
                         );
                     }
                     foreach ($dataload_extend_settings as $extendTypeOutputDBKey => $extend_data_properties) {
