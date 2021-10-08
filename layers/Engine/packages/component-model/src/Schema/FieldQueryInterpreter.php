@@ -1697,22 +1697,18 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $fieldArgValue = $this->maybeConvertFieldArgumentArrayValueFromStringToArray($fieldArgValue);
             $fieldArgValue = $this->maybeConvertFieldArgumentObjectValueFromStringToObject($fieldArgValue);
         }
-        if (is_array($fieldArgValue)) {
+        if (is_array($fieldArgValue) || is_object($fieldArgValue)) {
             // Resolve each element the same way
-            return $this->filterFieldOrDirectiveArgs(
-                array_map(function ($arrayValueElem) use ($variables) {
-                    return $this->maybeConvertFieldArgumentValue($arrayValueElem, $variables);
-                }, $fieldArgValue)
-            );
-        }
-        if (is_object($fieldArgValue)) {
-            // Resolve each element the same way
-            // Cast back and forth from array to stdClass
-            return (object) $this->filterFieldOrDirectiveArgs(
+            // For object: Cast back and forth from array to stdClass
+            $fieldOrDirectiveArgs = $this->filterFieldOrDirectiveArgs(
                 array_map(function ($arrayValueElem) use ($variables) {
                     return $this->maybeConvertFieldArgumentValue($arrayValueElem, $variables);
                 }, (array) $fieldArgValue)
             );
+            if (is_object($fieldArgValue)) {
+                return (object) $fieldOrDirectiveArgs;
+            }
+            return $fieldOrDirectiveArgs;
         }
 
         return $fieldArgValue;
