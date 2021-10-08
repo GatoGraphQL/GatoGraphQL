@@ -10,7 +10,6 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
@@ -28,7 +27,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected PostTypeAPIInterface $postTypeAPI;
-    
+
     #[Required]
     final public function autowireAbstractPostObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
