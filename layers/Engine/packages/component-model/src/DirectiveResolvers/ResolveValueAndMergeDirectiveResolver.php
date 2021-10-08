@@ -10,11 +10,8 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
 
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
@@ -62,9 +59,10 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$schemaTraces
     ): void {
         // Iterate data, extract into final results
-        if ($objectIDItems) {
-            $this->resolveValueForObjects($relationalTypeResolver, $objectIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        if (!$objectIDItems) {
+            return;
         }
+        $this->resolveValueForObjects($relationalTypeResolver, $objectIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
     }
 
     protected function resolveValueForObjects(
@@ -88,7 +86,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $object = $objectIDItems[$id];
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
             // In that case, simply return a dbError, and set the result as an empty array
-            if (is_null($object)) {
+            if ($object === null) {
                 $objectErrors[(string)$id][] = [
                     Tokens::PATH => ['id'],
                     Tokens::MESSAGE => sprintf(
@@ -225,6 +223,11 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$dbItems,
         array &$objectErrors,
     ): void {
+        $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey(
+            $relationalTypeResolver,
+            $field,
+            $object,
+        );
         // The dataitem can contain both rightful values and also errors (eg: when the field doesn't exist, or the field validation fails)
         // Extract the errors and add them on the other array
         if (GeneralUtils::isError($value)) {
@@ -240,71 +243,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
             // For GraphQL, set the response for the failing field as null
             if (ComponentConfiguration::setFailingFieldResponseAsNull()) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey(
-                    $relationalTypeResolver,
-                    $field,
-                    $object,
-                );
                 $dbItems[(string)$id][$fieldOutputKey] = null;
             }
             return;
         }
         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-        $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey(
-            $relationalTypeResolver,
-            $field,
-            $object,
-        );
-        // Custom Scalar Types must be serialized
-        $value = $this->maybeSerializeValue($relationalTypeResolver, $field, $value);
         $dbItems[(string)$id][$fieldOutputKey] = $value;
-    }
-
-    /**
-     * The response for Custom Scalar Types must be serialized
-     */
-    protected function maybeSerializeValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $field,
-        mixed $value,
-    ): mixed {
-        if (!($relationalTypeResolver instanceof ObjectTypeResolverInterface)) {
-            return $value;
-        }
-
-        /** @var ObjectTypeResolverInterface */
-        $objectTypeResolver = $relationalTypeResolver;
-        $fieldSchemaDefinition = $objectTypeResolver->getFieldSchemaDefinition($field);
-        $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
-        if (!($fieldTypeResolver instanceof ScalarTypeResolverInterface)) {
-            return $value;
-        }
-
-        /** @var ScalarTypeResolverInterface */
-        $fieldScalarTypeResolver = $fieldTypeResolver;
-
-        // If the value is an array of arrays, then serialize each subelement to the item type
-        if ($fieldSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false) {
-            return $value === null ? null : array_map(
-                // If it contains a null value, return it as is
-                fn (?array $arrayValueElem) => $arrayValueElem === null ? null : array_map(
-                    fn (mixed $arrayOfArraysValueElem) => $arrayOfArraysValueElem === null ? null : $fieldScalarTypeResolver->serialize($arrayOfArraysValueElem),
-                    $arrayValueElem
-                ),
-                $value
-            );
-        }
-
-        // If the value is an array, then serialize each element to the item type
-        if ($fieldSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false) {
-            return $value === null ? null : array_map(
-                fn (mixed $arrayValueElem) => $arrayValueElem === null ? null : $fieldScalarTypeResolver->serialize($arrayValueElem),
-                $value
-            );
-        }
-
-        // Otherwise, simply serialize the given value directly
-        return $value === null ? null : $fieldScalarTypeResolver->serialize($value);
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
