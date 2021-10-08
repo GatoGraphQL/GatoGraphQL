@@ -105,6 +105,7 @@ final class SerializeScalarTypeDBItemsDirectiveResolver extends AbstractGlobalDi
                 // Serialize the scalar value stored in $dbItems
                 $dbItems[(string)$id][$fieldOutputKey] = $this->serializeScalarTypeValue(
                     $fieldScalarTypeResolver,
+                    $fieldSchemaDefinition,
                     $value
                 );
             }
@@ -113,13 +114,16 @@ final class SerializeScalarTypeDBItemsDirectiveResolver extends AbstractGlobalDi
 
     /**
      * The response for Custom Scalar Types must be serialized
+     * 
+     * @param array<string, mixed> $fieldScalarSchemaDefinition
      */
-    protected function serializeScalarTypeValue(
+    private function serializeScalarTypeValue(
         ScalarTypeResolverInterface $fieldScalarTypeResolver,
+        array $fieldScalarSchemaDefinition,
         mixed $value,
     ): mixed {
         // If the value is an array of arrays, then serialize each subelement to the item type
-        if ($fieldSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false) {
+        if ($fieldScalarSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false) {
             return $value === null ? null : array_map(
                 // If it contains a null value, return it as is
                 fn (?array $arrayValueElem) => $arrayValueElem === null ? null : array_map(
@@ -131,7 +135,7 @@ final class SerializeScalarTypeDBItemsDirectiveResolver extends AbstractGlobalDi
         }
 
         // If the value is an array, then serialize each element to the item type
-        if ($fieldSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false) {
+        if ($fieldScalarSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false) {
             return $value === null ? null : array_map(
                 fn (mixed $arrayValueElem) => $arrayValueElem === null ? null : $fieldScalarTypeResolver->serialize($arrayValueElem),
                 $value
