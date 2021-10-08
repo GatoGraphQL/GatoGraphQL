@@ -82,7 +82,11 @@ final class SerializeScalarTypeDBItemsDirectiveResolver extends AbstractGlobalDi
                     $objectTypeResolver,
                     $field,
                 );
-                $value = $dbItems[(string)$id][$fieldOutputKey];
+                $value = $dbItems[(string)$id][$fieldOutputKey] ?? null;
+                if ($value === null) {
+                    continue;
+                }
+                // Serialize the scalar value stored in $dbItems
                 $dbItems[(string)$id][$fieldOutputKey] = $this->serializeScalarTypeValue(
                     $fieldScalarTypeResolver,
                     $value
