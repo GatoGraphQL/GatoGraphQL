@@ -174,7 +174,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return true;
     }
 
-    protected function getDBEntry(string $dbKey, $id, array $item): array
+    protected function getDBEntry(string $dbKey, string | int $id, array $item): array
     {
         $entry = [];
         if ($message = $item[Tokens::MESSAGE] ?? null) {
