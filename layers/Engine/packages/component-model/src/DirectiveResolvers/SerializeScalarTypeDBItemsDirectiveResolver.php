@@ -75,7 +75,7 @@ final class SerializeScalarTypeDBItemsDirectiveResolver extends AbstractGlobalDi
         
         foreach (array_keys($idsDataFields) as $id) {
             // Obtain its ID and the required data-fields for that ID
-            $object = (object) $objectIDItems[$id];
+            $object = $objectIDItems[$id];
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
             // In that case, simply return a dbError, and set the result as an empty array
             if ($object === null) {
