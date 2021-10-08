@@ -1104,17 +1104,17 @@ class Engine implements EngineInterface
                             $processor->getMutableonrequestSupplementaryDbobjectdataModuletree($module, $props)
                         );
                     }
-                    foreach ($dataload_extend_settings as $extendTypeResolverName => $extend_data_properties) {
+                    foreach ($dataload_extend_settings as $extendTypeOutputDBKey => $extend_data_properties) {
                          // Get the info for the subcomponent typeResolver
                         $extend_data_fields = $extend_data_properties['data-fields'] ? $extend_data_properties['data-fields'] : [];
                         $extend_conditional_data_fields = $extend_data_properties['conditional-data-fields'] ? $extend_data_properties['conditional-data-fields'] : [];
                         $extend_ids = $extend_data_properties['ids'];
                         $extend_typeResolver = $extend_data_properties['resolver'];
 
-                        $this->combineIDsDatafields($this->relationalTypeResolverNameIDsDataFields, $extend_typeResolver, $extendTypeResolverName, $extend_ids, $extend_data_fields, $extend_conditional_data_fields);
+                        $this->combineIDsDatafields($this->relationalTypeResolverNameIDsDataFields, $extend_typeResolver, $extendTypeOutputDBKey, $extend_ids, $extend_data_fields, $extend_conditional_data_fields);
 
                         // This is needed to add the typeResolver-extend IDs, for if nobody else creates an entry for this typeResolver
-                        $this->initializeTypeResolverEntry($this->dbdata, $extendTypeResolverName, $module_path_key);
+                        $this->initializeTypeResolverEntry($this->dbdata, $extendTypeOutputDBKey, $module_path_key);
                     }
 
                     // Keep iterating for its subcomponents
