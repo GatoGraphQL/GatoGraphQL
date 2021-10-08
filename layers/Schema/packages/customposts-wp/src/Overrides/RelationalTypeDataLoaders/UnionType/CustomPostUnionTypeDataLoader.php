@@ -39,9 +39,16 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
         return $query;
     }
 
+
+    public function getUpstreamObjects(array $ids): array
+    {
+        $query = $this->getQueryToRetrieveObjectsForIDs($ids);
+        return $this->customPostTypeDataLoader->executeQuery($query);
+    }
+
     public function getObjects(array $ids): array
     {
-        $customPosts = $this->customPostTypeDataLoader->getObjects($ids);
+        $customPosts = $this->getUpstreamObjects($ids);
 
         // After executing `get_posts` it returns a list of custom posts of class WP_Post,
         // without converting the object to its own post type (eg: EM_Event for an "event" custom post type)
