@@ -129,7 +129,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         return $ret;
     }
 
-    public function getModelSupplementaryDbobjectdata(array $module, array &$props): array
+    public function getModelSupplementaryDBObjectData(array $module, array &$props): array
     {
 
         // Please notice: the IDs to be extended here are permanent, so they can be saved in the configuration for the data-settings
@@ -159,6 +159,6 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
             }
         }
 
-        return parent::getModelSupplementaryDbobjectdata($module, $props);
+        return parent::getModelSupplementaryDBObjectData($module, $props);
     }
 }

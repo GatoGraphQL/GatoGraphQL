@@ -1229,10 +1229,10 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function getModelSupplementaryDbobjectdataModuletree(array $module, array &$props): array
     {
-        return $this->executeOnSelfAndMergeWithModules('getModelSupplementaryDbobjectdata', __FUNCTION__, $module, $props);
+        return $this->executeOnSelfAndMergeWithModules('getModelSupplementaryDBObjectData', __FUNCTION__, $module, $props);
     }
 
-    public function getModelSupplementaryDbobjectdata(array $module, array &$props): array
+    public function getModelSupplementaryDBObjectData(array $module, array &$props): array
     {
         return array();
     }
