@@ -72,6 +72,7 @@ class Component extends AbstractComponent
         if (self::isEnabled()) {
             ComponentConfiguration::setConfiguration($configuration);
             self::initServices(dirname(__DIR__));
+            self::initServices(dirname(__DIR__), '/Overrides');
             self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
             // Conditional packages
