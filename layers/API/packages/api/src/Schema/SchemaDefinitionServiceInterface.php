@@ -8,5 +8,5 @@ use PoP\Engine\Schema\SchemaDefinitionServiceInterface as UpstreamSchemaDefiniti
 
 interface SchemaDefinitionServiceInterface extends UpstreamSchemaDefinitionServiceInterface
 {
-    
+    public function getFullSchemaDefinition(): array;
 }

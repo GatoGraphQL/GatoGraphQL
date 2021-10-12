@@ -8,5 +8,11 @@ use PoP\Engine\Schema\SchemaDefinitionService as UpstreamSchemaDefinitionService
 
 class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements SchemaDefinitionServiceInterface
 {
-    
+    /**
+     * @todo Implement
+     */
+    public function getFullSchemaDefinition(): array
+    {
+        return [];
+    }
 }
