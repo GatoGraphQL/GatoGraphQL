@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\Schema\SchemaDefinitionServiceInterface;
+use PoP\API\Schema\SchemaDefinitionServiceInterface;
 
 interface GraphQLSchemaDefinitionServiceInterface extends SchemaDefinitionServiceInterface
 {

@@ -9,7 +9,7 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResol
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\Schema\SchemaDefinitionService;
+use PoP\API\Schema\SchemaDefinitionService;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements GraphQLSchemaDefinitionServiceInterface
