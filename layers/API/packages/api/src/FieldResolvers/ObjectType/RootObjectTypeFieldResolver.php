@@ -9,6 +9,7 @@ use PoP\API\ComponentConfiguration;
 use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoP\API\PersistedQueries\PersistedQueryManagerInterface;
 use PoP\API\Schema\SchemaDefinition;
+use PoP\API\Schema\SchemaDefinitionServiceInterface;
 use PoP\API\TypeResolvers\EnumType\SchemaFieldShapeEnumTypeResolver;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
@@ -158,6 +159,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $root = $object;
         switch ($fieldName) {
             case 'fullSchema':
+                /** @var SchemaDefinitionServiceInterface */
+                $schemaDefinitionService = $this->schemaDefinitionService;
+                return $schemaDefinitionService->getFullSchemaDefinition();
                 // Attempt to retrieve from the cache, if enabled
                 if ($useCache = ComponentConfiguration::useSchemaDefinitionCache()) {
                     // Use different caches for the normal and namespaced schemas, or
