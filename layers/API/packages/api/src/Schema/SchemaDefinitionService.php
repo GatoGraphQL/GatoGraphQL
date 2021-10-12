@@ -4,14 +4,23 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
+use Exception;
 use PoP\API\Cache\CacheTypes;
 use PoP\API\ComponentConfiguration;
 use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoP\API\PersistedQueries\PersistedQueryManagerInterface;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
+use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\Engine\Schema\SchemaDefinitionService as UpstreamSchemaDefinitionService;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements SchemaDefinitionServiceInterface
@@ -25,14 +34,17 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
 
     protected PersistedFragmentManagerInterface $fragmentCatalogueManager;
     protected PersistedQueryManagerInterface $queryCatalogueManager;
+    protected RootObjectTypeResolver $rootObjectTypeResolver;
 
     #[Required]
     final public function autowireAPISchemaDefinitionService(
         PersistedFragmentManagerInterface $fragmentCatalogueManager,
         PersistedQueryManagerInterface $queryCatalogueManager,
+        RootObjectTypeResolver $rootObjectTypeResolver,
     ): void {
         $this->fragmentCatalogueManager = $fragmentCatalogueManager;
         $this->queryCatalogueManager = $queryCatalogueManager;
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
     }
 
     final public function getPersistentCache(): PersistentCacheInterface
@@ -60,6 +72,46 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
         if ($schemaDefinition === null) {
             $schemaDefinition = [];
+            /**
+             * Starting from the Root TypeResolver, iterate and get the
+             * SchemaDefinition for all TypeResolvers accessed in the schema
+             */
+            $processedTypeResolverNames = [];
+            /** @var TypeResolverInterface[] */
+            $typeResolverStack = $this->getRootObjectTypeResolvers();
+            while (!empty($typeResolverStack)) {
+                $typeResolver = array_pop($typeResolverStack);
+                $typeResolverName = $typeResolver->getMaybeNamespacedTypeName();
+                $processedTypeResolverNames[] = $typeResolverName;
+                // Place different types under different entries
+                $stackMessages = [
+                    'processed' => [],
+                ];
+                $generalMessages = [
+                    'processed' => [],
+                ];
+                $typeResolverSchemaDefinition = $typeResolver->getSchemaDefinition($stackMessages, $generalMessages, []);
+                if ($typeResolver instanceof ObjectTypeResolverInterface) {
+                    $type = SchemaDefinition::TYPE_OBJECT;
+                } elseif ($typeResolver instanceof InterfaceTypeResolverInterface) {
+                    $type = SchemaDefinition::TYPE_INTERFACE;
+                } elseif ($typeResolver instanceof UnionTypeResolverInterface) {
+                    $type = SchemaDefinition::TYPE_UNION;
+                } elseif ($typeResolver instanceof ScalarTypeResolverInterface) {
+                    $type = SchemaDefinition::TYPE_SCALAR;
+                } elseif ($typeResolver instanceof EnumTypeResolverInterface) {
+                    $type = SchemaDefinition::TYPE_ENUM;
+                } elseif ($typeResolver instanceof InputObjectTypeResolverInterface) {
+                    $type = SchemaDefinition::TYPE_INPUT_OBJECT;
+                } else {
+                    throw new Exception(sprintf(
+                        $this->translationAPI->__('No type identified for TypeResolver with class \'%s\'', 'api'),
+                        get_class($typeResolver)
+                    ));
+                }
+                $schemaDefinition[SchemaDefinition::TYPES][$type][$typeResolverName] = $typeResolverSchemaDefinition;
+            }
+            
             // $schemaDefinition[SchemaDefinition::TYPES] = $typeSchemaDefinition;
 
             // // Add the queryType
@@ -80,12 +132,12 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
 
             // // Because they were added in reverse way, reverse it once again, so that the first types (eg: Root) appear first
             // $schemaDefinition[SchemaDefinition::TYPES] = array_reverse($typeFlatList);
-            $schemaDefinition[SchemaDefinition::TYPES][SchemaDefinition::TYPE_OBJECT] = [];
-            $schemaDefinition[SchemaDefinition::TYPES][SchemaDefinition::TYPE_INTERFACE] = [];
-            $schemaDefinition[SchemaDefinition::TYPES][SchemaDefinition::TYPE_UNION] = [];
-            $schemaDefinition[SchemaDefinition::TYPES][SchemaDefinition::TYPE_SCALAR] = [];
-            $schemaDefinition[SchemaDefinition::TYPES][SchemaDefinition::TYPE_ENUM] = [];
-            $schemaDefinition[SchemaDefinition::TYPES][SchemaDefinition::TYPE_INPUT_OBJECT] = [];
+            
+            
+            
+            
+            
+            
 
             // Add the Fragment Catalogue
             $persistedFragments = $this->fragmentCatalogueManager->getPersistedFragmentsForSchema();
@@ -102,5 +154,15 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
 
         return $schemaDefinition;
+    }
+
+    /**
+     * @return ObjectTypeResolverInterface[]
+     */
+    protected function getRootObjectTypeResolvers(): array
+    {
+        return [
+            $this->rootObjectTypeResolver,
+        ];
     }
 }
