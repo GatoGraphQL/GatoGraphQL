@@ -6,7 +6,6 @@ namespace PoP\Engine\Schema;
 
 use PoP\ComponentModel\Schema\SchemaDefinitionService as UpstreamSchemaDefinitionService;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -20,15 +19,10 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
     }
 
-    public function getTypeResolverTypeSchemaKey(RelationalTypeResolverInterface $relationalTypeResolver): string
-    {
-        return $this->getTypeSchemaKey($relationalTypeResolver);
-    }
-
     public function getRootTypeSchemaKey(): string
     {
         $rootTypeResolver = $this->getRootTypeResolver();
-        return $this->getTypeResolverTypeSchemaKey($rootTypeResolver);
+        return $this->getTypeSchemaKey($rootTypeResolver);
     }
 
     public function getRootTypeResolver(): ObjectTypeResolverInterface

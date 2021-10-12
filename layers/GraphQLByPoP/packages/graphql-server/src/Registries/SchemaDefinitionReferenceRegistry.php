@@ -159,7 +159,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             $queryRootTypeSchemaKey = $this->graphQLSchemaDefinitionService->getQueryRootTypeSchemaKey();
         } elseif (ComponentConfiguration::addConnectionFromRootToQueryRootAndMutationRoot()) {
             // Additionally append the QueryRoot and MutationRoot to the schema
-            $queryRootTypeSchemaKey = $this->graphQLSchemaDefinitionService->getTypeResolverTypeSchemaKey($this->queryRootObjectTypeResolver);
+            $queryRootTypeSchemaKey = $this->graphQLSchemaDefinitionService->getTypeSchemaKey($this->queryRootObjectTypeResolver);
             // Remove the fields connecting from Root to QueryRoot and MutationRoot
             unset($this->fullSchemaDefinition[SchemaDefinition::TYPES][$rootTypeSchemaKey][SchemaDefinition::CONNECTIONS]['queryRoot']);
             unset($this->fullSchemaDefinition[SchemaDefinition::TYPES][$rootTypeSchemaKey][SchemaDefinition::CONNECTIONS]['mutationRoot']);

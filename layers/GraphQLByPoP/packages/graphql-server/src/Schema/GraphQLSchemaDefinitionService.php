@@ -27,7 +27,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     public function getQueryRootTypeSchemaKey(): string
     {
         $queryTypeResolver = $this->getQueryRootTypeResolver();
-        return $this->getTypeResolverTypeSchemaKey($queryTypeResolver);
+        return $this->getTypeSchemaKey($queryTypeResolver);
     }
 
     /**
@@ -47,7 +47,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     public function getMutationRootTypeSchemaKey(): ?string
     {
         if ($mutationTypeResolver = $this->getMutationRootTypeResolver()) {
-            return $this->getTypeResolverTypeSchemaKey($mutationTypeResolver);
+            return $this->getTypeSchemaKey($mutationTypeResolver);
         }
         return null;
     }
@@ -72,7 +72,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     public function getSubscriptionRootTypeSchemaKey(): ?string
     {
         if ($subscriptionTypeResolver = $this->getSubscriptionRootTypeResolver()) {
-            return $this->getTypeResolverTypeSchemaKey($subscriptionTypeResolver);
+            return $this->getTypeSchemaKey($subscriptionTypeResolver);
         }
         return null;
     }
