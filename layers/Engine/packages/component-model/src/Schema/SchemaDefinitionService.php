@@ -23,9 +23,11 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
         $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
     }
 
-    public function getTypeSchemaKey(TypeResolverInterface $typeResolver): string
+    /**
+     * Use the type name as schema key
+     */
+    final public function getTypeSchemaKey(TypeResolverInterface $typeResolver): string
     {
-        // By default, use the type name
         return $typeResolver->getMaybeNamespacedTypeName();
     }
     /**
