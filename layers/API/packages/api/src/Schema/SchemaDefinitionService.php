@@ -93,10 +93,10 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $processedTypeAndDirectiveResolverClasses = [];
             $accessedTypeAndDirectiveResolvers = [];
             /** @var array<TypeResolverInterface|DirectiveResolverInterface> */
-            $typeOrDirectiveResolverStack = $this->getRootObjectTypeResolvers();
-            while (!empty($typeOrDirectiveResolverStack)) {
-                /** @var array $typeOrDirectiveResolverStack */
-                $typeOrDirectiveResolver = array_pop($typeOrDirectiveResolverStack);
+            $pendingTypeOrDirectiveResolvers = $this->getRootObjectTypeResolvers();
+            while (!empty($pendingTypeOrDirectiveResolvers)) {
+                /** @var array $pendingTypeOrDirectiveResolvers */
+                $typeOrDirectiveResolver = array_pop($pendingTypeOrDirectiveResolvers);
                 $processedTypeAndDirectiveResolverClasses[] = $typeOrDirectiveResolver::class;                
                 if ($typeOrDirectiveResolver instanceof TypeResolverInterface) {
                     /** @var TypeResolverInterface */
@@ -115,11 +115,11 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
                 }
 
                 // Add accessed TypeResolvers to the stack and keep iterating
-                foreach ($accessedTypeAndDirectiveResolvers as $accessedTypeResolver) {
-                    if (in_array($accessedTypeResolver::class, $processedTypeAndDirectiveResolverClasses)) {
+                foreach ($accessedTypeAndDirectiveResolvers as $accessedTypeOrDirectiveResolver) {
+                    if (in_array($accessedTypeOrDirectiveResolver::class, $processedTypeAndDirectiveResolverClasses)) {
                         continue;
                     }
-                    $typeOrDirectiveResolverStack[] = $accessedTypeResolver;
+                    $pendingTypeOrDirectiveResolvers[] = $accessedTypeOrDirectiveResolver;
                 }
             }
             
