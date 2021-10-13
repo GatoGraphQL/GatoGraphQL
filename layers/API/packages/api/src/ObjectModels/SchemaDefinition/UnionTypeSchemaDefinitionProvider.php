@@ -43,6 +43,14 @@ class UnionTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProv
             }
         }
 
+        // Add the directives (non-global)
+        $schemaDefinition[SchemaDefinition::DIRECTIVES] = [];
+        $schemaDirectiveResolvers = $this->unionTypeResolver->getSchemaDirectiveResolvers(false);
+        foreach ($schemaDirectiveResolvers as $directiveName => $directiveResolver) {
+            $schemaDefinition[SchemaDefinition::DIRECTIVES][] = $directiveName;
+            $this->accessedTypeAndDirectiveResolvers[$directiveResolver::class] = $directiveResolver;
+        }
+
         return $schemaDefinition;
     }
 }
