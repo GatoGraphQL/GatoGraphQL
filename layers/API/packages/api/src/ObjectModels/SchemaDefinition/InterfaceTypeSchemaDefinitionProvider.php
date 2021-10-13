@@ -11,7 +11,8 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
 {
     public function __construct(
         protected InterfaceTypeResolverInterface $interfaceTypeResolver,
-    ) {  
+    ) {
+        parent::__construct($interfaceTypeResolver);
     }
     
     public function getType(): string

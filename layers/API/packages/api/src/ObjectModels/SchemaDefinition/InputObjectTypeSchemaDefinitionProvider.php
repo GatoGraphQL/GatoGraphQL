@@ -11,7 +11,8 @@ class InputObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefiniti
 {
     public function __construct(
         protected InputObjectTypeResolverInterface $inputObjectTypeResolver,
-    ) {  
+    ) {
+        parent::__construct($inputObjectTypeResolver);
     }
     
     public function getType(): string
