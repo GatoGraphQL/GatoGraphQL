@@ -6,9 +6,15 @@ namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
 class HookNames
 {
-    public const FIELD_ARG_NAME_TYPE_RESOLVERS = __CLASS__ . ':field-arg-name-type-resolvers';
-    public const FIELD_ARG_DESCRIPTION = __CLASS__ . ':field-arg-description';
-    public const FIELD_ARG_DEFAULT_VALUE = __CLASS__ . ':field-arg-default-value';
-    public const FIELD_ARG_TYPE_MODIFIERS = __CLASS__ . ':field-arg-type-modifiers';
-    public const FIELD_ARG_DEPRECATION_MESSAGE = __CLASS__ . ':field-arg-deprecation-message';
+    public const OBJECT_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS = __CLASS__ . ':object-type-field-arg-name-type-resolvers';
+    public const OBJECT_TYPE_FIELD_ARG_DESCRIPTION = __CLASS__ . ':object-type-field-arg-description';
+    public const OBJECT_TYPE_FIELD_ARG_DEFAULT_VALUE = __CLASS__ . ':object-type-field-arg-default-value';
+    public const OBJECT_TYPE_FIELD_ARG_TYPE_MODIFIERS = __CLASS__ . ':object-type-field-arg-type-modifiers';
+    public const OBJECT_TYPE_FIELD_ARG_DEPRECATION_MESSAGE = __CLASS__ . ':object-type-field-arg-deprecation-message';
+
+    public const INTERFACE_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS = __CLASS__ . ':interface-type-field-arg-name-type-resolvers';
+    public const INTERFACE_TYPE_FIELD_ARG_DESCRIPTION = __CLASS__ . ':interface-type-field-arg-description';
+    public const INTERFACE_TYPE_FIELD_ARG_DEFAULT_VALUE = __CLASS__ . ':interface-type-field-arg-default-value';
+    public const INTERFACE_TYPE_FIELD_ARG_TYPE_MODIFIERS = __CLASS__ . ':interface-type-field-arg-type-modifiers';
+    public const INTERFACE_TYPE_FIELD_ARG_DEPRECATION_MESSAGE = __CLASS__ . ':interface-type-field-arg-deprecation-message';
 }

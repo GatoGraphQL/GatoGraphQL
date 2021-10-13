@@ -34,19 +34,19 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     protected function init(): void
     {
         $this->hooksAPI->addFilter(
-            HookNames::FIELD_ARG_NAME_TYPE_RESOLVERS,
+            HookNames::OBJECT_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
             array($this, 'maybeAddFieldArgNameTypeResolvers'),
             10,
             4
         );
         $this->hooksAPI->addFilter(
-            HookNames::FIELD_ARG_DESCRIPTION,
+            HookNames::OBJECT_TYPE_FIELD_ARG_DESCRIPTION,
             array($this, 'maybeAddFieldArgDescription'),
             10,
             5
         );
         $this->hooksAPI->addFilter(
-            HookNames::FIELD_ARG_TYPE_MODIFIERS,
+            HookNames::OBJECT_TYPE_FIELD_ARG_TYPE_MODIFIERS,
             array($this, 'maybeAddFieldArgTypeModifiers'),
             10,
             5

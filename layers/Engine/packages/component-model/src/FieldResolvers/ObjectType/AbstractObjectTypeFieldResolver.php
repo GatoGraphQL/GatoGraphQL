@@ -284,7 +284,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          * input "categories" to field "Root.createPost")
          */
         $consolidatedFieldArgNameTypeResolvers = $this->hooksAPI->applyFilters(
-            HookNames::FIELD_ARG_NAME_TYPE_RESOLVERS,
+            HookNames::OBJECT_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
             $this->getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
             $this,
             $objectTypeResolver,
@@ -320,7 +320,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $this->consolidatedFieldArgDescriptionCache[$cacheKey];
         }
         $this->consolidatedFieldArgDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
-            HookNames::FIELD_ARG_DESCRIPTION,
+            HookNames::OBJECT_TYPE_FIELD_ARG_DESCRIPTION,
             $this->getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
             $this,
             $objectTypeResolver,
@@ -342,7 +342,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $this->consolidatedFieldArgDeprecationMessageCache[$cacheKey];
         }
         $this->consolidatedFieldArgDeprecationMessageCache[$cacheKey] = $this->hooksAPI->applyFilters(
-            HookNames::FIELD_ARG_DEPRECATION_MESSAGE,
+            HookNames::OBJECT_TYPE_FIELD_ARG_DEPRECATION_MESSAGE,
             $this->getFieldArgDeprecationMessage($objectTypeResolver, $fieldName, $fieldArgName),
             $this,
             $objectTypeResolver,
@@ -364,7 +364,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $this->consolidatedFieldArgDefaultValueCache[$cacheKey];
         }
         $this->consolidatedFieldArgDefaultValueCache[$cacheKey] = $this->hooksAPI->applyFilters(
-            HookNames::FIELD_ARG_DEFAULT_VALUE,
+            HookNames::OBJECT_TYPE_FIELD_ARG_DEFAULT_VALUE,
             $this->getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
             $this,
             $objectTypeResolver,
@@ -386,7 +386,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $this->consolidatedFieldArgTypeModifiersCache[$cacheKey];
         }
         $this->consolidatedFieldArgTypeModifiersCache[$cacheKey] = $this->hooksAPI->applyFilters(
-            HookNames::FIELD_ARG_TYPE_MODIFIERS,
+            HookNames::OBJECT_TYPE_FIELD_ARG_TYPE_MODIFIERS,
             $this->getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
             $this,
             $objectTypeResolver,
