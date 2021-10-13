@@ -82,6 +82,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
         if ($schemaDefinition === null) {
             $schemaDefinition = [
+                SchemaDefinition::QUERY_TYPE => $this->getRootTypeResolver()->getMaybeNamespacedTypeName(),
                 SchemaDefinition::TYPES => [],
                 SchemaDefinition::DIRECTIVES => [],
             ];
@@ -114,7 +115,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
                     );
                 }
 
-                // Add accessed TypeResolvers to the stack and keep iterating
+                // Add further accessed TypeResolvers and DirectiveResolvers to the stack and keep iterating
                 foreach ($accessedTypeAndDirectiveResolvers as $accessedTypeOrDirectiveResolver) {
                     if (in_array($accessedTypeOrDirectiveResolver::class, $processedTypeAndDirectiveResolverClasses)) {
                         continue;
