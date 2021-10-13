@@ -14,17 +14,17 @@ class InputObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefiniti
     ) {
         parent::__construct($inputObjectTypeResolver);
     }
-    
+
     public function getType(): string
     {
         return SchemaDefinition::TYPE_INPUT_OBJECT;
     }
-    
+
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();
 
-        
+
         return $schemaDefinition;
     }
 }

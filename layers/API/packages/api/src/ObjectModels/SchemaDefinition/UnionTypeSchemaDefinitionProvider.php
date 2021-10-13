@@ -15,12 +15,12 @@ class UnionTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProv
     ) {
         parent::__construct($unionTypeResolver);
     }
-    
+
     public function getType(): string
     {
         return SchemaDefinition::TYPE_UNION;
     }
-    
+
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();

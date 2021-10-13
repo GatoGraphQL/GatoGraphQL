@@ -11,18 +11,18 @@ use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 class EnumTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvider
 {
     use EnumTypeSchemaDefinitionResolverTrait;
-    
+
     public function __construct(
         protected EnumTypeResolverInterface $enumTypeResolver,
     ) {
         parent::__construct($enumTypeResolver);
     }
-    
+
     public function getType(): string
     {
         return SchemaDefinition::TYPE_ENUM;
     }
-    
+
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();

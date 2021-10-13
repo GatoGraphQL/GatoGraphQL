@@ -17,9 +17,9 @@ abstract class AbstractTypeSchemaDefinitionProvider extends AbstractSchemaDefini
 
     public function __construct(
         protected TypeResolverInterface $typeResolver,
-    ) {  
+    ) {
     }
-    
+
     /**
      * @return array<string, RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive
      */
@@ -27,7 +27,7 @@ abstract class AbstractTypeSchemaDefinitionProvider extends AbstractSchemaDefini
     {
         return $this->accessedDirectiveResolverClassRelationalTypeResolvers;
     }
-    
+
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = [

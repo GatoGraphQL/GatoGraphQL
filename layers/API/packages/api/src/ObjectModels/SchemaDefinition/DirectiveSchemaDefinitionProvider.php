@@ -13,9 +13,9 @@ class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider
     public function __construct(
         protected DirectiveResolverInterface $directiveResolver,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
-    ) {  
+    ) {
     }
-    
+
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = $this->directiveResolver->getDirectiveSchemaDefinition($this->relationalTypeResolver);

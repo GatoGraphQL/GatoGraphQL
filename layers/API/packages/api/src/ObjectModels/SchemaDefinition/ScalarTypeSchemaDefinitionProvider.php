@@ -14,12 +14,12 @@ class ScalarTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
     ) {
         parent::__construct($scalarTypeResolver);
     }
-    
+
     public function getType(): string
     {
         return SchemaDefinition::TYPE_SCALAR;
     }
-    
+
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();

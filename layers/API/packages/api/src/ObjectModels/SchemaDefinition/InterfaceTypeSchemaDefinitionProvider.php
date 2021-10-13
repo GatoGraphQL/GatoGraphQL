@@ -14,12 +14,12 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
     ) {
         parent::__construct($interfaceTypeResolver);
     }
-    
+
     public function getType(): string
     {
         return SchemaDefinition::TYPE_INTERFACE;
     }
-    
+
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();

@@ -18,12 +18,12 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
     ) {
         parent::__construct($objectTypeResolver);
     }
-    
+
     public function getType(): string
     {
         return SchemaDefinition::TYPE_OBJECT;
     }
-    
+
     public function getSchemaDefinition(): array
     {
         return array_merge(
@@ -31,7 +31,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
             $this->getObjectTypeSchemaDefinition(false)
         );
     }
-    
+
     /**
      * @return array<TypeResolverInterface|DirectiveResolverInterface> Accessed Type and Directive Resolvers
      */
@@ -88,7 +88,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
             $this->accessedTypeAndDirectiveResolvers[$fieldArgTypeResolver::class] = $fieldArgTypeResolver;
             $this->replaceTypeResolverWithTypeType($fieldSchemaDefinition[SchemaDefinition::ARGS][$fieldArgName]);
         }
-        
+
         // Split the results into "fields" and "connections"
         $isConnection = $fieldTypeResolver instanceof RelationalTypeResolverInterface;
         $entry = $isConnection ?

@@ -46,7 +46,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     private array $pendingTypeOrDirectiveResolvers = [];
     /** @var array<string, RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive */
     private array $accessedDirectiveResolverClassRelationalTypeResolvers = [];
-    
+
     /**
      * Cannot autowire because its calling `getNamespace`
      * on services.yaml produces an exception of PHP properties not initialized
@@ -108,7 +108,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $this->pendingTypeOrDirectiveResolvers = $this->getRootObjectTypeResolvers();
             while (!empty($this->pendingTypeOrDirectiveResolvers)) {
                 $typeOrDirectiveResolver = array_pop($this->pendingTypeOrDirectiveResolvers);
-                $this->processedTypeAndDirectiveResolverClasses[] = $typeOrDirectiveResolver::class;                
+                $this->processedTypeAndDirectiveResolverClasses[] = $typeOrDirectiveResolver::class;
                 if ($typeOrDirectiveResolver instanceof TypeResolverInterface) {
                     /** @var TypeResolverInterface */
                     $typeResolver = $typeOrDirectiveResolver;
