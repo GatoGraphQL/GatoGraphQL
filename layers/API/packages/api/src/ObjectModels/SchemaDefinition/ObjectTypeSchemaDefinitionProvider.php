@@ -39,8 +39,8 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
         $schemaDefinition[SchemaDefinition::DIRECTIVES] = [];
         $schemaDirectiveResolvers = $this->objectTypeResolver->getSchemaDirectiveResolvers($useGlobal);
         foreach ($schemaDirectiveResolvers as $directiveName => $directiveResolver) {
-            // $schemaDefinition[SchemaDefinition::DIRECTIVES][$directiveName] = $this->objectTypeResolver->getDirectiveSchemaDefinition($directiveResolver, $options);
             $schemaDefinition[SchemaDefinition::DIRECTIVES][] = $directiveName;
+            $this->accessedTypeAndDirectiveResolvers[$directiveResolver::class] = $directiveResolver;
         }
 
         // Add the fields (non-global)
