@@ -79,4 +79,11 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      * @return array<string,DirectiveResolverInterface>|null
      */
     public function getDirectiveResolverInstancesForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?array;
+    /**
+     * Array of directive name => resolver
+     *
+     * @param boolean $global
+     * @return array<string, DirectiveResolverInterface>
+     */
+    public function getSchemaDirectiveResolvers(bool $global): array;
 }
