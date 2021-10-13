@@ -67,19 +67,18 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
 
     public function getFullSchemaDefinition(): array
     {
+        $schemaDefinition = null;
         // Attempt to retrieve from the cache, if enabled
         if ($useCache = ComponentConfiguration::useSchemaDefinitionCache()) {
+            $persistentCache = $this->getPersistentCache();
             // Use different caches for the normal and namespaced schemas, or
             // it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
             $cacheType = CacheTypes::FULLSCHEMA_DEFINITION;
             $cacheKeyComponents = CacheUtils::getSchemaCacheKeyComponents();
             // For the persistentCache, use a hash to remove invalid characters (such as "()")
             $cacheKey = hash('md5', json_encode($cacheKeyComponents));
-        }
-        $schemaDefinition = null;
-        if ($useCache) {
-            if ($this->getPersistentCache()->hasCache($cacheKey, $cacheType)) {
-                $schemaDefinition = $this->getPersistentCache()->getCache($cacheKey, $cacheType);
+            if ($persistentCache->hasCache($cacheKey, $cacheType)) {
+                $schemaDefinition = $persistentCache->getCache($cacheKey, $cacheType);
             }
         }
         if ($schemaDefinition === null) {
@@ -139,7 +138,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
 
             // Store in the cache
             if ($useCache) {
-                $this->getPersistentCache()->storeCache($cacheKey, $cacheType, $schemaDefinition);
+                $persistentCache->storeCache($cacheKey, $cacheType, $schemaDefinition);
             }
         }
 
