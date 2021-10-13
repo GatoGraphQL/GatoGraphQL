@@ -7,6 +7,12 @@ namespace PoP\API\Schema;
 use Exception;
 use PoP\API\Cache\CacheTypes;
 use PoP\API\ComponentConfiguration;
+use PoP\API\ObjectModels\SchemaDefinition\EnumTypeSchemaDefinitionProvider;
+use PoP\API\ObjectModels\SchemaDefinition\InputObjectTypeSchemaDefinitionProvider;
+use PoP\API\ObjectModels\SchemaDefinition\InterfaceTypeSchemaDefinitionProvider;
+use PoP\API\ObjectModels\SchemaDefinition\ObjectTypeSchemaDefinitionProvider;
+use PoP\API\ObjectModels\SchemaDefinition\ScalarTypeSchemaDefinitionProvider;
+use PoP\API\ObjectModels\SchemaDefinition\UnionTypeSchemaDefinitionProvider;
 use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoP\API\PersistedQueries\PersistedQueryManagerInterface;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
@@ -76,40 +82,48 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
              * Starting from the Root TypeResolver, iterate and get the
              * SchemaDefinition for all TypeResolvers accessed in the schema
              */
-            $processedTypeResolverNames = [];
+            $processedTypeNames = [];
             /** @var TypeResolverInterface[] */
             $typeResolverStack = $this->getRootObjectTypeResolvers();
             while (!empty($typeResolverStack)) {
                 $typeResolver = array_pop($typeResolverStack);
-                $typeResolverName = $typeResolver->getMaybeNamespacedTypeName();
-                $processedTypeResolverNames[] = $typeResolverName;
-                // Place different types under different entries
-                $stackMessages = [
-                    'processed' => [],
-                ];
-                $generalMessages = [
-                    'processed' => [],
-                ];
-                $typeResolverSchemaDefinition = $typeResolver->getSchemaDefinition($stackMessages, $generalMessages, []);
+                $typeName = $typeResolver->getMaybeNamespacedTypeName();
+                $processedTypeNames[] = $typeName;
+                
+                // Obtain the corresponding Provider for this TypeResolver
+                $typeSchemaDefinitionProvider = null;
                 if ($typeResolver instanceof ObjectTypeResolverInterface) {
-                    $type = SchemaDefinition::TYPE_OBJECT;
+                    $typeSchemaDefinitionProvider = new ObjectTypeSchemaDefinitionProvider($typeResolver);
                 } elseif ($typeResolver instanceof InterfaceTypeResolverInterface) {
-                    $type = SchemaDefinition::TYPE_INTERFACE;
+                    $typeSchemaDefinitionProvider = new InterfaceTypeSchemaDefinitionProvider($typeResolver);
                 } elseif ($typeResolver instanceof UnionTypeResolverInterface) {
-                    $type = SchemaDefinition::TYPE_UNION;
+                    $typeSchemaDefinitionProvider = new UnionTypeSchemaDefinitionProvider($typeResolver);
                 } elseif ($typeResolver instanceof ScalarTypeResolverInterface) {
-                    $type = SchemaDefinition::TYPE_SCALAR;
+                    $typeSchemaDefinitionProvider = new ScalarTypeSchemaDefinitionProvider($typeResolver);
                 } elseif ($typeResolver instanceof EnumTypeResolverInterface) {
-                    $type = SchemaDefinition::TYPE_ENUM;
+                    $typeSchemaDefinitionProvider = new EnumTypeSchemaDefinitionProvider($typeResolver);
                 } elseif ($typeResolver instanceof InputObjectTypeResolverInterface) {
-                    $type = SchemaDefinition::TYPE_INPUT_OBJECT;
+                    $typeSchemaDefinitionProvider = new InputObjectTypeSchemaDefinitionProvider($typeResolver);
                 } else {
                     throw new Exception(sprintf(
                         $this->translationAPI->__('No type identified for TypeResolver with class \'%s\'', 'api'),
                         get_class($typeResolver)
                     ));
                 }
-                $schemaDefinition[SchemaDefinition::TYPES][$type][$typeResolverName] = $typeResolverSchemaDefinition;
+
+                // Add the definition
+                $type = $typeSchemaDefinitionProvider->getType();
+                $typeSchemaDefinition = $typeSchemaDefinitionProvider->getSchemaDefinition();
+                $schemaDefinition[SchemaDefinition::TYPES][$type][$typeName] = $typeSchemaDefinition;
+                
+                // Add accessed TypeResolvers to the stack and keep iterating
+                $accessedTypeResolvers = $typeSchemaDefinitionProvider->getAccessedTypeResolvers();
+                foreach ($accessedTypeResolvers as $accessedTypeName => $accessedTypeResolver) {
+                    if (in_array($accessedTypeName, $processedTypeNames)) {
+                        continue;
+                    }
+                    $typeResolverStack[] = $accessedTypeResolver;
+                }
             }
             
             // $schemaDefinition[SchemaDefinition::TYPES] = $typeSchemaDefinition;
