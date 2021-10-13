@@ -25,6 +25,7 @@ use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
@@ -35,6 +36,17 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements SchemaDefinitionServiceInterface
 {
+    /**
+     * Starting from the Root TypeResolver, iterate and get the
+     * SchemaDefinition for all TypeResolvers and DirectiveResolvers
+     * accessed in the schema
+     */
+    private array $processedTypeAndDirectiveResolverClasses = [];
+    /** @var array<TypeResolverInterface|DirectiveResolverInterface> */
+    private array $pendingTypeOrDirectiveResolvers = [];
+    /** @var array<string, RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive */
+    private array $accessedDirectiveResolverClassRelationalTypeResolvers = [];
+    
     /**
      * Cannot autowire because its calling `getNamespace`
      * on services.yaml produces an exception of PHP properties not initialized
@@ -90,41 +102,27 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
                 SchemaDefinition::GLOBAL_CONNECTIONS => [],
             ];
 
-            /**
-             * Starting from the Root TypeResolver, iterate and get the
-             * SchemaDefinition for all TypeResolvers and DirectiveResolvers
-             * accessed in the schema
-             */
-            $processedTypeAndDirectiveResolverClasses = [];
             $accessedTypeAndDirectiveResolvers = [];
             /** @var array<TypeResolverInterface|DirectiveResolverInterface> */
-            $pendingTypeOrDirectiveResolvers = $this->getRootObjectTypeResolvers();
-            while (!empty($pendingTypeOrDirectiveResolvers)) {
-                /** @var array $pendingTypeOrDirectiveResolvers */
-                $typeOrDirectiveResolver = array_pop($pendingTypeOrDirectiveResolvers);
-                $processedTypeAndDirectiveResolverClasses[] = $typeOrDirectiveResolver::class;                
+            $this->pendingTypeOrDirectiveResolvers = $this->getRootObjectTypeResolvers();
+            while (!empty($this->pendingTypeOrDirectiveResolvers)) {
+                $typeOrDirectiveResolver = array_pop($this->pendingTypeOrDirectiveResolvers);
+                $this->processedTypeAndDirectiveResolverClasses[] = $typeOrDirectiveResolver::class;                
                 if ($typeOrDirectiveResolver instanceof TypeResolverInterface) {
                     /** @var TypeResolverInterface */
                     $typeResolver = $typeOrDirectiveResolver;
-                    $accessedTypeAndDirectiveResolvers = $this->addTypeSchemaDefinition(
-                        $schemaDefinition,
+                    $this->addTypeSchemaDefinition(
                         $typeResolver,
+                        $schemaDefinition,
+                        $accessedTypeAndDirectiveResolvers,
                     );
                 } else {
                     /** @var DirectiveResolverInterface */
                     $directiveResolver = $typeOrDirectiveResolver;
-                    $accessedTypeAndDirectiveResolvers = $this->addDirectiveSchemaDefinition(
-                        $schemaDefinition,
+                    $this->addDirectiveSchemaDefinition(
                         $directiveResolver,
+                        $schemaDefinition,
                     );
-                }
-
-                // Add further accessed TypeResolvers and DirectiveResolvers to the stack and keep iterating
-                foreach ($accessedTypeAndDirectiveResolvers as $accessedTypeOrDirectiveResolver) {
-                    if (in_array($accessedTypeOrDirectiveResolver::class, $processedTypeAndDirectiveResolverClasses)) {
-                        continue;
-                    }
-                    $pendingTypeOrDirectiveResolvers[] = $accessedTypeOrDirectiveResolver;
                 }
             }
 
@@ -143,11 +141,26 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         return $schemaDefinition;
     }
 
+    private function addAccessedTypeAndDirectiveResolvers(
+        array $accessedTypeAndDirectiveResolvers,
+    ): void {
+        // Add further accessed TypeResolvers and DirectiveResolvers to the stack and keep iterating
+        foreach ($accessedTypeAndDirectiveResolvers as $accessedTypeOrDirectiveResolver) {
+            if (in_array($accessedTypeOrDirectiveResolver::class, $this->processedTypeAndDirectiveResolverClasses)) {
+                continue;
+            }
+            $this->pendingTypeOrDirectiveResolvers[] = $accessedTypeOrDirectiveResolver;
+        }
+    }
+
     /**
      * @return array<TypeResolverInterface|DirectiveResolverInterface> Accessed Type and Directive Resolvers
      */
-    private function addTypeSchemaDefinition(array &$schemaDefinition, TypeResolverInterface $typeResolver): array
-    {
+    private function addTypeSchemaDefinition(
+        TypeResolverInterface $typeResolver,
+        array &$schemaDefinition,
+        array &$accessedTypeAndDirectiveResolvers
+    ): void {
         $schemaDefinitionProvider = $this->getTypeResolverSchemaDefinitionProvider($typeResolver);
         $type = $schemaDefinitionProvider->getType();
         $typeName = $typeResolver->getMaybeNamespacedTypeName();
@@ -160,7 +173,14 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $this->moveGlobalTypeSchemaDefinition($schemaDefinition, $typeSchemaDefinition);
         }
         $schemaDefinition[SchemaDefinition::TYPES][$type][$typeName] = $typeSchemaDefinition;
-        return $schemaDefinitionProvider->getAccessedTypeAndDirectiveResolvers();
+
+        $this->addAccessedTypeAndDirectiveResolvers(
+            $schemaDefinitionProvider->getAccessedTypeAndDirectiveResolvers(),
+        );
+        $this->accessedDirectiveResolverClassRelationalTypeResolvers = array_merge(
+            $this->accessedDirectiveResolverClassRelationalTypeResolvers,
+            $schemaDefinitionProvider->getAccessedDirectiveResolverClassRelationalTypeResolvers(),
+        );
     }
 
     /**
@@ -188,13 +208,19 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     /**
      * @return array<TypeResolverInterface|DirectiveResolverInterface> Accessed Type and Directive Resolvers
      */
-    private function addDirectiveSchemaDefinition(array &$schemaDefinition, DirectiveResolverInterface $directiveResolver): array
-    {
-        $schemaDefinitionProvider = new DirectiveSchemaDefinitionProvider($directiveResolver);
+    private function addDirectiveSchemaDefinition(
+        DirectiveResolverInterface $directiveResolver,
+        array &$schemaDefinition,
+    ): void {
+        $relationalTypeResolver = $this->accessedDirectiveResolverClassRelationalTypeResolvers[$directiveResolver::class];
+        $schemaDefinitionProvider = new DirectiveSchemaDefinitionProvider($directiveResolver, $relationalTypeResolver);
         $directiveName = $directiveResolver->getDirectiveName();
         $directiveSchemaDefinition = $schemaDefinitionProvider->getSchemaDefinition();
         $schemaDefinition[SchemaDefinition::DIRECTIVES][$directiveName] = $directiveSchemaDefinition;
-        return $schemaDefinitionProvider->getAccessedTypeAndDirectiveResolvers();
+
+        $this->addAccessedTypeAndDirectiveResolvers(
+            $schemaDefinitionProvider->getAccessedTypeAndDirectiveResolvers()
+        );
     }
 
     /**

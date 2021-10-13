@@ -8,4 +8,8 @@ namespace PoP\API\ObjectModels\SchemaDefinition;
 interface TypeSchemaDefinitionProviderInterface extends SchemaDefinitionProviderInterface
 {
     public function getType(): string;
+    /**
+     * @var array<string, RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive
+     */
+    public function getAccessedDirectiveResolverClassRelationalTypeResolvers(): array;
 }

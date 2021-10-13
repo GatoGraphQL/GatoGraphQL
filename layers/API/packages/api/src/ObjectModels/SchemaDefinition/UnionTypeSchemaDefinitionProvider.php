@@ -49,6 +49,7 @@ class UnionTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProv
         foreach ($schemaDirectiveResolvers as $directiveName => $directiveResolver) {
             $schemaDefinition[SchemaDefinition::DIRECTIVES][] = $directiveName;
             $this->accessedTypeAndDirectiveResolvers[$directiveResolver::class] = $directiveResolver;
+            $this->accessedDirectiveResolverClassRelationalTypeResolvers[$directiveResolver::class] = $this->unionTypeResolver;
         }
 
         return $schemaDefinition;
