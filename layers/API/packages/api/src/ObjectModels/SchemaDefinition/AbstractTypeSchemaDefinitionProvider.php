@@ -21,10 +21,14 @@ abstract class AbstractTypeSchemaDefinitionProvider extends AbstractSchemaDefini
     
     public function getSchemaDefinition(): array
     {
-        return [
+        $schemaDefinition = [
             SchemaDefinition::NAME => $this->typeResolver->getMaybeNamespacedTypeName(),
             SchemaDefinition::NAMESPACED_NAME => $this->typeResolver->getNamespacedTypeName(),
             SchemaDefinition::ELEMENT_NAME => $this->typeResolver->getTypeName(),
         ];
+        if ($description = $this->typeResolver->getTypeDescription()) {
+            $schemaDefinition[SchemaDefinition::DESCRIPTION] = $description;
+        }
+        return $schemaDefinition;
     }
 }
