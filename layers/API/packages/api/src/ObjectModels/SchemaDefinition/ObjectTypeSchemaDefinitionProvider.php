@@ -64,7 +64,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
     }
 
     private function addFieldSchemaDefinition(
-        array &$typeSchemaDefinition,
+        array &$objectTypeSchemaDefinition,
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         string $fieldName
     ): void {
@@ -94,6 +94,6 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
         $entry = $isConnection ?
             SchemaDefinition::CONNECTIONS :
             SchemaDefinition::FIELDS;
-        $typeSchemaDefinition[$entry][$fieldName] = $fieldSchemaDefinition;
+        $objectTypeSchemaDefinition[$entry][$fieldName] = $fieldSchemaDefinition;
     }
 }
