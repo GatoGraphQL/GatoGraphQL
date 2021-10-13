@@ -159,24 +159,32 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
          * global fields, connections and directives
          */
         if (in_array($typeResolver, $this->getRootObjectTypeResolvers())) {
-            $schemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES] = array_merge(
-                $schemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES],
-                $typeSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]
-            );
-            $schemaDefinition[SchemaDefinition::GLOBAL_FIELDS] = array_merge(
-                $schemaDefinition[SchemaDefinition::GLOBAL_FIELDS],
-                $typeSchemaDefinition[SchemaDefinition::GLOBAL_FIELDS]
-            );
-            $schemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS] = array_merge(
-                $schemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS],
-                $typeSchemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS]
-            );
-            unset($typeSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]);
-            unset($typeSchemaDefinition[SchemaDefinition::GLOBAL_FIELDS]);
-            unset($typeSchemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS]);
+            $this->moveGlobalTypeSchemaDefinition($schemaDefinition, $typeSchemaDefinition);
         }
         $schemaDefinition[SchemaDefinition::TYPES][$type][$typeName] = $typeSchemaDefinition;
         return [];
+    }
+
+    /**
+     * Move the definition for the global fields, connections and directives
+     */
+    private function moveGlobalTypeSchemaDefinition(array &$schemaDefinition, array &$rootTypeSchemaDefinition): void
+    {
+        $schemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES] = array_merge(
+            $schemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES],
+            $rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]
+        );
+        $schemaDefinition[SchemaDefinition::GLOBAL_FIELDS] = array_merge(
+            $schemaDefinition[SchemaDefinition::GLOBAL_FIELDS],
+            $rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_FIELDS]
+        );
+        $schemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS] = array_merge(
+            $schemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS],
+            $rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS]
+        );
+        unset($rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]);
+        unset($rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_FIELDS]);
+        unset($rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS]);
     }
 
     /**
