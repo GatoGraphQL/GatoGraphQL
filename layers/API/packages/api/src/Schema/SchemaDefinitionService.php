@@ -9,9 +9,11 @@ use PoP\API\Cache\CacheTypes;
 use PoP\API\ComponentConfiguration;
 use PoP\API\ObjectModels\SchemaDefinition\DirectiveSchemaDefinitionProvider;
 use PoP\API\ObjectModels\SchemaDefinition\EnumTypeSchemaDefinitionProvider;
+use PoP\API\ObjectModels\SchemaDefinition\GlobalRootObjectTypeSchemaDefinitionProvider;
 use PoP\API\ObjectModels\SchemaDefinition\InputObjectTypeSchemaDefinitionProvider;
 use PoP\API\ObjectModels\SchemaDefinition\InterfaceTypeSchemaDefinitionProvider;
 use PoP\API\ObjectModels\SchemaDefinition\ObjectTypeSchemaDefinitionProvider;
+use PoP\API\ObjectModels\SchemaDefinition\RootObjectTypeSchemaDefinitionProvider;
 use PoP\API\ObjectModels\SchemaDefinition\ScalarTypeSchemaDefinitionProvider;
 use PoP\API\ObjectModels\SchemaDefinition\SchemaDefinitionProviderInterface;
 use PoP\API\ObjectModels\SchemaDefinition\TypeSchemaDefinitionProviderInterface;
@@ -81,11 +83,16 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             }
         }
         if ($schemaDefinition === null) {
+            $rootObjectTypeResolver = $this->getRootTypeResolver();
             $schemaDefinition = [
-                SchemaDefinition::QUERY_TYPE => $this->getRootTypeResolver()->getMaybeNamespacedTypeName(),
+                SchemaDefinition::QUERY_TYPE => $rootObjectTypeResolver->getMaybeNamespacedTypeName(),
                 SchemaDefinition::TYPES => [],
                 SchemaDefinition::DIRECTIVES => [],
+                SchemaDefinition::GLOBAL_DIRECTIVES => [],
+                SchemaDefinition::GLOBAL_FIELDS => [],
+                SchemaDefinition::GLOBAL_CONNECTIONS => [],
             ];
+
             /**
              * Starting from the Root TypeResolver, iterate and get the
              * SchemaDefinition for all TypeResolvers and DirectiveResolvers
@@ -123,33 +130,6 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
                     $pendingTypeOrDirectiveResolvers[] = $accessedTypeOrDirectiveResolver;
                 }
             }
-            
-            // $schemaDefinition[SchemaDefinition::TYPES] = $typeSchemaDefinition;
-
-            // // Add the queryType
-            // $schemaDefinition[SchemaDefinition::QUERY_TYPE] = $rootTypeSchemaKey;
-
-            // // Move from under Root type to the top: globalDirectives and globalFields (renamed as "functions")
-            // $schemaDefinition[SchemaDefinition::GLOBAL_FIELDS] = $typeSchemaDefinition[$rootTypeSchemaKey][SchemaDefinition::GLOBAL_FIELDS] ?? [];
-            // $schemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS] = $typeSchemaDefinition[$rootTypeSchemaKey][SchemaDefinition::GLOBAL_CONNECTIONS] ?? [];
-            // $schemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES] = $typeSchemaDefinition[$rootTypeSchemaKey][SchemaDefinition::GLOBAL_DIRECTIVES] ?? [];
-            // unset($schemaDefinition[SchemaDefinition::TYPES][$rootTypeSchemaKey][SchemaDefinition::GLOBAL_FIELDS]);
-            // unset($schemaDefinition[SchemaDefinition::TYPES][$rootTypeSchemaKey][SchemaDefinition::GLOBAL_CONNECTIONS]);
-            // unset($schemaDefinition[SchemaDefinition::TYPES][$rootTypeSchemaKey][SchemaDefinition::GLOBAL_DIRECTIVES]);
-
-            // // Remove the globals from the Root
-            // unset($typeFlatList[$rootTypeSchemaKey][SchemaDefinition::GLOBAL_FIELDS]);
-            // unset($typeFlatList[$rootTypeSchemaKey][SchemaDefinition::GLOBAL_CONNECTIONS]);
-            // unset($typeFlatList[$rootTypeSchemaKey][SchemaDefinition::GLOBAL_DIRECTIVES]);
-
-            // // Because they were added in reverse way, reverse it once again, so that the first types (eg: Root) appear first
-            // $schemaDefinition[SchemaDefinition::TYPES] = array_reverse($typeFlatList);
-            
-            
-            
-            
-            
-            
 
             // Add the Fragment Catalogue
             $persistedFragments = $this->fragmentCatalogueManager->getPersistedFragmentsForSchema();
@@ -177,6 +157,27 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         $type = $schemaDefinitionProvider->getType();
         $typeName = $typeResolver->getMaybeNamespacedTypeName();
         $typeSchemaDefinition = $schemaDefinitionProvider->getSchemaDefinition();
+        /**
+         * The RootObject has the special role of also calculating the
+         * global fields, connections and directives
+         */
+        if (in_array($typeResolver, $this->getRootObjectTypeResolvers())) {
+            $schemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES] = array_merge(
+                $schemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES],
+                $typeSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]
+            );
+            $schemaDefinition[SchemaDefinition::GLOBAL_FIELDS] = array_merge(
+                $schemaDefinition[SchemaDefinition::GLOBAL_FIELDS],
+                $typeSchemaDefinition[SchemaDefinition::GLOBAL_FIELDS]
+            );
+            $schemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS] = array_merge(
+                $schemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS],
+                $typeSchemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS]
+            );
+            unset($typeSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]);
+            unset($typeSchemaDefinition[SchemaDefinition::GLOBAL_FIELDS]);
+            unset($typeSchemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS]);
+        }
         $schemaDefinition[SchemaDefinition::TYPES][$type][$typeName] = $typeSchemaDefinition;
         return [];
     }
@@ -198,6 +199,13 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
      */
     protected function getTypeResolverSchemaDefinitionProvider(TypeResolverInterface $typeResolver): TypeSchemaDefinitionProviderInterface
     {
+        /**
+         * The RootObject has the special role of also calculating the
+         * global fields, connections and directives
+         */
+        if (in_array($typeResolver, $this->getRootObjectTypeResolvers())) {
+            return new RootObjectTypeSchemaDefinitionProvider($typeResolver);
+        }
         if ($typeResolver instanceof ObjectTypeResolverInterface) {
             return new ObjectTypeSchemaDefinitionProvider($typeResolver);
         }

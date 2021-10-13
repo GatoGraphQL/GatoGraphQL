@@ -23,11 +23,16 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
     
     public function getSchemaDefinition(): array
     {
+        return $this->getObjectTypeSchemaDefinition(false);
+    }
+    
+    public function getObjectTypeSchemaDefinition(bool $useGlobal): array
+    {
         $schemaDefinition = parent::getSchemaDefinition();
 
         // Add the directives (non-global)
         $schemaDefinition[SchemaDefinition::DIRECTIVES] = [];
-        $schemaDirectiveResolvers = $this->objectTypeResolver->getSchemaDirectiveResolvers(false);
+        $schemaDirectiveResolvers = $this->objectTypeResolver->getSchemaDirectiveResolvers($useGlobal);
         foreach ($schemaDirectiveResolvers as $directiveName => $directiveResolver) {
             // $schemaDefinition[SchemaDefinition::DIRECTIVES][$directiveName] = $this->objectTypeResolver->getDirectiveSchemaDefinition($directiveResolver, $options);
             $schemaDefinition[SchemaDefinition::DIRECTIVES][] = $directiveName;
@@ -36,7 +41,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
         // Add the fields (non-global)
         $schemaDefinition[SchemaDefinition::FIELDS] = [];
         $schemaDefinition[SchemaDefinition::CONNECTIONS] = [];
-        $schemaObjectTypeFieldResolvers = $this->objectTypeResolver->getObjectTypeFieldResolvers(false);
+        $schemaObjectTypeFieldResolvers = $this->objectTypeResolver->getObjectTypeFieldResolvers($useGlobal);
         foreach ($schemaObjectTypeFieldResolvers as $fieldName => $objectTypeFieldResolver) {
             // Split the results into "fields" and "connections"
             $objectTypeFieldTypeResolver = $objectTypeFieldResolver->getFieldTypeResolver($this->objectTypeResolver, $fieldName);
