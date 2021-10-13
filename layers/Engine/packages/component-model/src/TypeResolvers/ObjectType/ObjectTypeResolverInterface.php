@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 
+use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -23,7 +24,7 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface
     /**
      * Array of field name => resolver
      *
-     * @return array<string, FieldResolverInterface>
+     * @return array<string, ObjectTypeFieldResolverInterface>
      */
     public function getObjectTypeFieldResolvers(bool $global): array;
 }
