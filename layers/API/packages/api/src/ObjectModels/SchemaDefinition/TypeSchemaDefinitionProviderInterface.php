@@ -6,13 +6,9 @@ namespace PoP\API\ObjectModels\SchemaDefinition;
 
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
-interface TypeSchemaDefinitionProviderInterface
+interface TypeSchemaDefinitionProviderInterface extends SchemaDefinitionProviderInterface
 {
     public function getType(): string;
-    /**
-     * @return array<string, mixed>
-     */
-    public function getSchemaDefinition(): array;
     /**
      * An array of typeName => typeResolver
      * 
