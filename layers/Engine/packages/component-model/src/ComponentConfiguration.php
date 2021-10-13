@@ -23,7 +23,6 @@ class ComponentConfiguration
 
     private static bool $enableConfigByParams = false;
     private static bool $useComponentModelCache = false;
-    private static bool $enableSchemaEntityRegistries = false;
     private static bool $namespaceTypesAndInterfaces = false;
     private static bool $useSingleTypeInsteadOfUnionType = false;
     private static bool $enableAdminSchema = false;
@@ -118,31 +117,6 @@ class ComponentConfiguration
         // Define properties
         $envVariable = Environment::USE_COMPONENT_MODEL_CACHE;
         $selfProperty = &self::$useComponentModelCache;
-        $defaultValue = false;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
-
-        // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
-            $envVariable,
-            $selfProperty,
-            $defaultValue,
-            $callback
-        );
-        return $selfProperty;
-    }
-
-    /**
-     * Access layer to the environment variable, enabling to override its value
-     * Indicate if to keep the several entities that make up a schema (types, directives) in a registry
-     * This functionality is not used by PoP itself, hence it defaults to `false`
-     * It can be used by making a mapping from type name to type resolver class, as to reference a type
-     * by a name, if needed (eg: to save in the application's configuration)
-     */
-    public static function enableSchemaEntityRegistries(): bool
-    {
-        // Define properties
-        $envVariable = Environment::ENABLE_SCHEMA_ENTITY_REGISTRIES;
-        $selfProperty = &self::$enableSchemaEntityRegistries;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
