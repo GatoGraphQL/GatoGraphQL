@@ -22,7 +22,10 @@ class InputObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefiniti
     
     public function getSchemaDefinition(): array
     {
-        return [];
+        $schemaDefinition = parent::getSchemaDefinition();
+
+        
+        return $schemaDefinition;
     }
 
     public function getAccessedTypeResolvers(): array

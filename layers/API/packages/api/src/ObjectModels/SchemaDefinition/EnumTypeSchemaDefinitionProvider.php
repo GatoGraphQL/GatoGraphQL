@@ -22,7 +22,10 @@ class EnumTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvi
     
     public function getSchemaDefinition(): array
     {
-        return [];
+        $schemaDefinition = parent::getSchemaDefinition();
+
+        
+        return $schemaDefinition;
     }
 
     public function getAccessedTypeResolvers(): array

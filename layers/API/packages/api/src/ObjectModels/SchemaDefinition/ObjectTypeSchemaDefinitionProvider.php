@@ -22,13 +22,17 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
     
     public function getSchemaDefinition(): array
     {
-        $stackMessages = [
-            'processed' => [],
-        ];
-        $generalMessages = [
-            'processed' => [],
-        ];
-        return $this->objectTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, []);
+        $schemaDefinition = parent::getSchemaDefinition();
+
+        // $stackMessages = [
+        //     'processed' => [],
+        // ];
+        // $generalMessages = [
+        //     'processed' => [],
+        // ];
+        // return $this->objectTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, []);
+        
+        return $schemaDefinition;
     }
 
     public function getAccessedTypeResolvers(): array
