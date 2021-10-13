@@ -9,11 +9,6 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 abstract class AbstractTypeSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider implements TypeSchemaDefinitionProviderInterface
 {
-    /**
-     * @var array<string, TypeResolverInterface|DirectiveResolverInterface> Key: class, Value: Accessed Type and Directive Resolver
-     */
-    protected array $accessedTypeAndDirectiveResolvers = [];
-
     public function __construct(
         protected TypeResolverInterface $typeResolver,
     ) {  
