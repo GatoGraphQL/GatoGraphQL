@@ -48,7 +48,6 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
         InterfaceTypeFieldResolverInterface $interfaceTypeFieldResolver,
         string $fieldName
     ): void {
-        // Watch out! We are passing empty $fieldArgs to generate the schema!
         $fieldSchemaDefinition = $interfaceTypeFieldResolver->getFieldSchemaDefinition($fieldName);
 
         // Extract the typeResolvers
