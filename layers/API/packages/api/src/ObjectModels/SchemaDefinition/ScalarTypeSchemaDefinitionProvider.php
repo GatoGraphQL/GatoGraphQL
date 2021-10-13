@@ -27,9 +27,4 @@ class ScalarTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
         
         return $schemaDefinition;
     }
-
-    public function getAccessedTypeAndDirectiveResolvers(): array
-    {
-        return [];
-    }
 }

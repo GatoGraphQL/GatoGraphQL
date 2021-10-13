@@ -27,9 +27,4 @@ abstract class AbstractTypeSchemaDefinitionProvider extends AbstractSchemaDefini
             SchemaDefinition::ELEMENT_NAME => $this->typeResolver->getTypeName(),
         ];
     }
-    
-    public function getAccessedTypeAndDirectiveResolvers(): array
-    {
-        return array_values($this->accessedTypeAndDirectiveResolvers);
-    }
 }

@@ -27,9 +27,4 @@ class InputObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefiniti
         
         return $schemaDefinition;
     }
-
-    public function getAccessedTypeAndDirectiveResolvers(): array
-    {
-        return [];
-    }
 }

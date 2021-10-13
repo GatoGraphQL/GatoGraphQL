@@ -13,7 +13,7 @@ abstract class AbstractSchemaDefinitionProvider implements SchemaDefinitionProvi
      */
     protected array $accessedTypeAndDirectiveResolvers = [];
     
-    public function getAccessedTypeAndDirectiveResolvers(): array
+    final public function getAccessedTypeAndDirectiveResolvers(): array
     {
         return array_values($this->accessedTypeAndDirectiveResolvers);
     }
