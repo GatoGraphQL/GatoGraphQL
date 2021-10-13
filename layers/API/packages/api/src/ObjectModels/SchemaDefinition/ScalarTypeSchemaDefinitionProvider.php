@@ -24,7 +24,10 @@ class ScalarTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
     {
         $schemaDefinition = parent::getSchemaDefinition();
 
-        
+        if ($specifiedByURL = $this->scalarTypeResolver->getSpecifiedByURL()) {
+            $schemaDefinition[SchemaDefinition::SPECIFIED_BY_URL] = $specifiedByURL;
+        }
+
         return $schemaDefinition;
     }
 }
