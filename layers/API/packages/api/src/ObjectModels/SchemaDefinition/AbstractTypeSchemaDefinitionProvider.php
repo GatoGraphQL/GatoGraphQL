@@ -7,8 +7,13 @@ namespace PoP\API\ObjectModels\SchemaDefinition;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
-abstract class AbstractTypeSchemaDefinitionProvider implements TypeSchemaDefinitionProviderInterface
+abstract class AbstractTypeSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider implements TypeSchemaDefinitionProviderInterface
 {
+    /**
+     * @var array<string, TypeResolverInterface|DirectiveResolverInterface> Key: class, Value: Accessed Type and Directive Resolver
+     */
+    protected array $accessedTypeAndDirectiveResolvers = [];
+
     public function __construct(
         protected TypeResolverInterface $typeResolver,
     ) {  
@@ -25,6 +30,6 @@ abstract class AbstractTypeSchemaDefinitionProvider implements TypeSchemaDefinit
     
     public function getAccessedTypeAndDirectiveResolvers(): array
     {
-        return [];
+        return array_values($this->accessedTypeAndDirectiveResolvers);
     }
 }

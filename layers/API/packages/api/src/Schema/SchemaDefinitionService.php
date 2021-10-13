@@ -162,7 +162,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $this->moveGlobalTypeSchemaDefinition($schemaDefinition, $typeSchemaDefinition);
         }
         $schemaDefinition[SchemaDefinition::TYPES][$type][$typeName] = $typeSchemaDefinition;
-        return [];
+        return $schemaDefinitionProvider->getAccessedTypeAndDirectiveResolvers();
     }
 
     /**
@@ -196,7 +196,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         $directiveName = $directiveResolver->getDirectiveName();
         $directiveSchemaDefinition = $schemaDefinitionProvider->getSchemaDefinition();
         $schemaDefinition[SchemaDefinition::DIRECTIVES][$directiveName] = $directiveSchemaDefinition;
-        return [];
+        return $schemaDefinitionProvider->getAccessedTypeAndDirectiveResolvers();
     }
 
     /**

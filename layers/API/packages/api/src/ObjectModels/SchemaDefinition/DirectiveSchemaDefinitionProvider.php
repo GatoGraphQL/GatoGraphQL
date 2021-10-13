@@ -7,7 +7,7 @@ namespace PoP\API\ObjectModels\SchemaDefinition;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 
-class DirectiveSchemaDefinitionProvider implements SchemaDefinitionProviderInterface
+class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider implements SchemaDefinitionProviderInterface
 {
     public function __construct(
         protected DirectiveResolverInterface $directiveResolver,

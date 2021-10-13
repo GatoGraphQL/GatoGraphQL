@@ -24,13 +24,17 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
     
     public function getSchemaDefinition(): array
     {
-        return $this->getObjectTypeSchemaDefinition(false);
+        return array_merge(
+            parent::getSchemaDefinition(),
+            $this->getObjectTypeSchemaDefinition(false)
+        );
     }
     
-    public function getObjectTypeSchemaDefinition(bool $useGlobal): array
+    /**
+     * @return array<TypeResolverInterface|DirectiveResolverInterface> Accessed Type and Directive Resolvers
+     */
+    protected function getObjectTypeSchemaDefinition(bool $useGlobal): array
     {
-        $schemaDefinition = parent::getSchemaDefinition();
-
         // Add the directives (non-global)
         $schemaDefinition[SchemaDefinition::DIRECTIVES] = [];
         $schemaDirectiveResolvers = $this->objectTypeResolver->getSchemaDirectiveResolvers($useGlobal);
@@ -112,6 +116,9 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
         return $schemaDefinition;
     }
 
+    /**
+     * @return array<TypeResolverInterface|DirectiveResolverInterface> Accessed Type and Directive Resolvers
+     */
     private function addFieldSchemaDefinition(
         array &$typeSchemaDefinition,
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
@@ -121,15 +128,22 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
          * Fields may not be directly visible in the schema
          */
         if ($objectTypeFieldResolver->skipAddingToSchemaDefinition($this->objectTypeResolver, $fieldName)) {
-            return;
+            return [];
         }
 
         // Watch out! We are passing empty $fieldArgs to generate the schema!
         $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this->objectTypeResolver, $fieldName, []);
 
-        // Remove the typeResolver
+        // Extract the typeResolvers
         $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
+        $this->accessedTypeAndDirectiveResolvers[$fieldTypeResolver::class] = $fieldTypeResolver;
         unset($fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER]);
+
+        foreach ($fieldSchemaDefinition[SchemaDefinition::ARGS] ?? [] as $fieldArgName => $fieldArgSchemaDefinition) {
+            $fieldArgTypeResolver = $fieldArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
+            $this->accessedTypeAndDirectiveResolvers[$fieldArgTypeResolver::class] = $fieldArgTypeResolver;
+            unset($fieldArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER]);
+        }
         
         // Split the results into "fields" and "connections"
         $isConnection = $fieldTypeResolver instanceof RelationalTypeResolverInterface;
