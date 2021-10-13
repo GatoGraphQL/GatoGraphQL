@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
+use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
@@ -17,6 +18,14 @@ class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider
     
     public function getSchemaDefinition(): array
     {
-        return $this->directiveResolver->getDirectiveSchemaDefinition($this->relationalTypeResolver);
+        $schemaDefinition = $this->directiveResolver->getDirectiveSchemaDefinition($this->relationalTypeResolver);
+
+        foreach (($schemaDefinition[SchemaDefinition::ARGS] ?? []) as $directiveArgName => &$directiveArgSchemaDefinition) {
+            $directiveArgTypeResolver = $directiveArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
+            $this->accessedTypeAndDirectiveResolvers[$directiveArgTypeResolver::class] = $directiveArgTypeResolver;
+            $this->replaceTypeResolverWithTypeType($schemaDefinition[SchemaDefinition::ARGS][$directiveArgName]);
+        }
+
+        return $schemaDefinition;
     }
 }
