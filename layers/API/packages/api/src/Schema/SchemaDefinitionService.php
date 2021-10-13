@@ -102,7 +102,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
                 SchemaDefinition::GLOBAL_CONNECTIONS => [],
             ];
 
-            $accessedTypeAndDirectiveResolvers = [];
+            $this->processedTypeAndDirectiveResolverClasses = [];
+            $this->accessedDirectiveResolverClassRelationalTypeResolvers = [];
+
             /** @var array<TypeResolverInterface|DirectiveResolverInterface> */
             $this->pendingTypeOrDirectiveResolvers = $this->getRootObjectTypeResolvers();
             while (!empty($this->pendingTypeOrDirectiveResolvers)) {
@@ -114,7 +116,6 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
                     $this->addTypeSchemaDefinition(
                         $typeResolver,
                         $schemaDefinition,
-                        $accessedTypeAndDirectiveResolvers,
                     );
                 } else {
                     /** @var DirectiveResolverInterface */
@@ -159,7 +160,6 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     private function addTypeSchemaDefinition(
         TypeResolverInterface $typeResolver,
         array &$schemaDefinition,
-        array &$accessedTypeAndDirectiveResolvers
     ): void {
         $schemaDefinitionProvider = $this->getTypeResolverSchemaDefinitionProvider($typeResolver);
         $type = $schemaDefinitionProvider->getType();
