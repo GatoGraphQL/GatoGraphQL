@@ -139,10 +139,10 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
         $this->accessedTypeAndDirectiveResolvers[$fieldTypeResolver::class] = $fieldTypeResolver;
         unset($fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER]);
 
-        foreach ($fieldSchemaDefinition[SchemaDefinition::ARGS] ?? [] as $fieldArgName => $fieldArgSchemaDefinition) {
+        foreach (($fieldSchemaDefinition[SchemaDefinition::ARGS] ?? []) as $fieldArgName => &$fieldArgSchemaDefinition) {
             $fieldArgTypeResolver = $fieldArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
             $this->accessedTypeAndDirectiveResolvers[$fieldArgTypeResolver::class] = $fieldArgTypeResolver;
-            unset($fieldArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER]);
+            unset($fieldSchemaDefinition[SchemaDefinition::ARGS][$fieldArgName][SchemaDefinition::TYPE_RESOLVER]);
         }
         
         // Split the results into "fields" and "connections"
