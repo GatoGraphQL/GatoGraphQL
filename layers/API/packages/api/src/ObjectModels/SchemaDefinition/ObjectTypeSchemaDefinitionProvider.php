@@ -128,7 +128,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
          * Fields may not be directly visible in the schema
          */
         if ($objectTypeFieldResolver->skipAddingToSchemaDefinition($this->objectTypeResolver, $fieldName)) {
-            return [];
+            return;
         }
 
         // Watch out! We are passing empty $fieldArgs to generate the schema!
@@ -151,10 +151,5 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
             SchemaDefinition::CONNECTIONS :
             SchemaDefinition::FIELDS;
         $typeSchemaDefinition[$entry][$fieldName] = $fieldSchemaDefinition;
-    }
-
-    public function getAccessedTypeAndDirectiveResolvers(): array
-    {
-        return [];
     }
 }
