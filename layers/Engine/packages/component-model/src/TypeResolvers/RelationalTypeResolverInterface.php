@@ -82,7 +82,6 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
     /**
      * Array of directive name => resolver
      *
-     * @param boolean $global
      * @return array<string, DirectiveResolverInterface>
      */
     public function getSchemaDirectiveResolvers(bool $global): array;

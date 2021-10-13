@@ -20,4 +20,10 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface
     public function getFieldMutationResolver(string $field): ?MutationResolverInterface;
     public function isFieldAMutation(string $field): ?bool;
     public function getAllMandatoryDirectivesForFields(): array;
+    /**
+     * Array of field name => resolver
+     *
+     * @return array<string, FieldResolverInterface>
+     */
+    public function getObjectTypeFieldResolvers(bool $global): array;
 }

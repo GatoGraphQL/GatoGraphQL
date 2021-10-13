@@ -516,7 +516,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->errorProvider->getNoFieldError($this->getID($object), $fieldName, $this->getMaybeNamespacedTypeName());
     }
 
-    final protected function getObjectTypeFieldResolvers(bool $global): array
+    final public function getObjectTypeFieldResolvers(bool $global): array
     {
         $schemaObjectTypeFieldResolvers = [];
         foreach ($this->getAllObjectTypeFieldResolvers() as $fieldName => $objectTypeFieldResolvers) {
