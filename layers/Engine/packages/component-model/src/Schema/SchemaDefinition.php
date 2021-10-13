@@ -32,6 +32,7 @@ class SchemaDefinition
     const ORDERED_ARGS_ENABLED = 'orderedArgsEnabled';
     const RESULTS_IMPLEMENT_INTERFACE = 'resultsImplementInterface';
     const INTERFACES = 'interfaces';
+    const IMPLEMENTED_INTERFACES = 'implementedInterfaces';
     const FIELDS = 'fields';
     const CONNECTIONS = 'connections';
     const GLOBAL_CONNECTIONS = 'globalConnections';

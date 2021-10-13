@@ -51,6 +51,12 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
             $this->addFieldSchemaDefinition($schemaDefinition, $objectTypeFieldResolver, $fieldName);
         }
 
+        $schemaDefinition[SchemaDefinition::IMPLEMENTED_INTERFACES] = [];
+        foreach ($this->objectTypeResolver->getAllImplementedInterfaceTypeResolvers() as $interfaceTypeResolver) {
+            $schemaDefinition[SchemaDefinition::IMPLEMENTED_INTERFACES][] = $interfaceTypeResolver->getMaybeNamespacedTypeName();
+            $this->accessedTypeAndDirectiveResolvers[$interfaceTypeResolver::class] = $interfaceTypeResolver;
+        }
+
         // // Add all the implemented interfaces
         // $typeInterfaceDefinitions = [];
         // foreach ($this->objectTypeResolver->getAllImplementedInterfaceTypeResolvers() as $interfaceTypeResolver) {
