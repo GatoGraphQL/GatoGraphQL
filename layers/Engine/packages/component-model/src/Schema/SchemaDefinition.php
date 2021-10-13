@@ -32,7 +32,6 @@ class SchemaDefinition
     const ORDERED_ARGS_ENABLED = 'orderedArgsEnabled';
     const RESULTS_IMPLEMENT_INTERFACE = 'resultsImplementInterface';
     const INTERFACES = 'interfaces';
-    const IMPLEMENTED_INTERFACES = 'implementedInterfaces';
     const FIELDS = 'fields';
     const CONNECTIONS = 'connections';
     const GLOBAL_CONNECTIONS = 'globalConnections';
@@ -40,12 +39,6 @@ class SchemaDefinition
     const QUERY_TYPE = 'queryType';
     const TYPES = 'types';
     const TYPE_SCHEMA = 'typeSchema';
-    const TYPE_OBJECT = 'object';
-    const TYPE_INTERFACE = 'interface';
-    const TYPE_UNION = 'union';
-    const TYPE_SCALAR = 'scalar';
-    const TYPE_ENUM = 'enum';
-    const TYPE_INPUT_OBJECT = 'inputObject';
     const POSSIBLE_TYPES = 'possibleTypes';
     const BASERESOLVER = 'baseResolver';
     const RECURSION = 'recursion';
