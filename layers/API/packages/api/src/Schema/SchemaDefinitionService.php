@@ -170,7 +170,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     /**
      * @return array<TypeResolverInterface|DirectiveResolverInterface> Accessed Type and Directive Resolvers
      */
-    public function addTypeSchemaDefinition(array &$schemaDefinition, TypeResolverInterface $typeResolver): array
+    private function addTypeSchemaDefinition(array &$schemaDefinition, TypeResolverInterface $typeResolver): array
     {
         $schemaDefinitionProvider = $this->getTypeResolverSchemaDefinitionProvider($typeResolver);
         $type = $schemaDefinitionProvider->getType();
@@ -183,7 +183,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     /**
      * @return array<TypeResolverInterface|DirectiveResolverInterface> Accessed Type and Directive Resolvers
      */
-    public function addDirectiveSchemaDefinition(array &$schemaDefinition, DirectiveResolverInterface $directiveResolver): array
+    private function addDirectiveSchemaDefinition(array &$schemaDefinition, DirectiveResolverInterface $directiveResolver): array
     {
         $schemaDefinitionProvider = new DirectiveSchemaDefinitionProvider($directiveResolver);
         $directiveName = $directiveResolver->getDirectiveName();
@@ -192,6 +192,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         return [];
     }
 
+    /**
+     * @throws Exception If the TypeResolver does not belong to any of the known groups
+     */
     protected function getTypeResolverSchemaDefinitionProvider(TypeResolverInterface $typeResolver): TypeSchemaDefinitionProviderInterface
     {
         if ($typeResolver instanceof ObjectTypeResolverInterface) {
