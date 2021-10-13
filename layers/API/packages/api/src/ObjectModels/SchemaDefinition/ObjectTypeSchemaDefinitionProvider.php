@@ -9,6 +9,7 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvider
 {
@@ -62,9 +63,6 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
         return $schemaDefinition;
     }
 
-    /**
-     * @return array<TypeResolverInterface|DirectiveResolverInterface> Accessed Type and Directive Resolvers
-     */
     private function addFieldSchemaDefinition(
         array &$typeSchemaDefinition,
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 interface TypeSchemaDefinitionProviderInterface extends SchemaDefinitionProviderInterface
 {
