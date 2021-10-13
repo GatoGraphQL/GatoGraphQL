@@ -132,12 +132,10 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             }
 
             // Add the Fragment Catalogue
-            $persistedFragments = $this->fragmentCatalogueManager->getPersistedFragmentsForSchema();
-            $schemaDefinition[SchemaDefinition::PERSISTED_FRAGMENTS] = $persistedFragments;
+            $schemaDefinition[SchemaDefinition::PERSISTED_FRAGMENTS] = $this->fragmentCatalogueManager->getPersistedFragmentsForSchema();
 
             // Add the Query Catalogue
-            $persistedQueries = $this->queryCatalogueManager->getPersistedQueriesForSchema();
-            $schemaDefinition[SchemaDefinition::PERSISTED_QUERIES] = $persistedQueries;
+            $schemaDefinition[SchemaDefinition::PERSISTED_QUERIES] = $this->queryCatalogueManager->getPersistedQueriesForSchema();
 
             // Store in the cache
             if ($useCache) {
