@@ -11,7 +11,6 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -36,6 +35,11 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
         return [
             AbstractObjectTypeResolver::class,
         ];
+    }
+
+    public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool
+    {
+        return true;
     }
 
     public function getDirectiveName(): string
