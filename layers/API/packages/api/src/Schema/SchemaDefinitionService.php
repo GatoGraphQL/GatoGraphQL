@@ -77,14 +77,19 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             }
         }
         if ($schemaDefinition === null) {
-            $schemaDefinition = [];
+            $schemaDefinition = [
+                SchemaDefinition::TYPES => [],
+                SchemaDefinition::DIRECTIVES => [],
+            ];
             /**
              * Starting from the Root TypeResolver, iterate and get the
              * SchemaDefinition for all TypeResolvers accessed in the schema
              */
             $processedTypeNames = [];
+            $processedDirectiveNames = [];
             /** @var TypeResolverInterface[] */
             $typeResolverStack = $this->getRootObjectTypeResolvers();
+            $directiveResolverStack = [];
             while (!empty($typeResolverStack)) {
                 $typeResolver = array_pop($typeResolverStack);
                 $typeName = $typeResolver->getMaybeNamespacedTypeName();
@@ -124,6 +129,20 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
                     }
                     $typeResolverStack[] = $accessedTypeResolver;
                 }
+
+                // Add accessed DirectiveResolvers to the stack and keep iterating
+                $accessedDirectiveResolvers = $typeSchemaDefinitionProvider->getAccessedDirectiveResolvers();
+                foreach ($accessedDirectiveResolvers as $accessedDirectiveName => $accessedDirectiveResolver) {
+                    if (in_array($accessedDirectiveName, $processedDirectiveNames)) {
+                        continue;
+                    }
+                    $directiveResolverStack[] = $accessedDirectiveResolver;
+                }
+            }
+
+            foreach ($directiveResolverStack as $directiveResolver) {
+                $directiveName = $directiveResolver->getDirectiveName();
+                $schemaDefinition[SchemaDefinition::DIRECTIVES][] = $directiveName;
             }
             
             // $schemaDefinition[SchemaDefinition::TYPES] = $typeSchemaDefinition;
