@@ -7,15 +7,19 @@ namespace PoP\API\Schema;
 use Exception;
 use PoP\API\Cache\CacheTypes;
 use PoP\API\ComponentConfiguration;
+use PoP\API\ObjectModels\SchemaDefinition\DirectiveSchemaDefinitionProvider;
 use PoP\API\ObjectModels\SchemaDefinition\EnumTypeSchemaDefinitionProvider;
 use PoP\API\ObjectModels\SchemaDefinition\InputObjectTypeSchemaDefinitionProvider;
 use PoP\API\ObjectModels\SchemaDefinition\InterfaceTypeSchemaDefinitionProvider;
 use PoP\API\ObjectModels\SchemaDefinition\ObjectTypeSchemaDefinitionProvider;
 use PoP\API\ObjectModels\SchemaDefinition\ScalarTypeSchemaDefinitionProvider;
+use PoP\API\ObjectModels\SchemaDefinition\SchemaDefinitionProviderInterface;
+use PoP\API\ObjectModels\SchemaDefinition\TypeSchemaDefinitionProviderInterface;
 use PoP\API\ObjectModels\SchemaDefinition\UnionTypeSchemaDefinitionProvider;
 use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoP\API\PersistedQueries\PersistedQueryManagerInterface;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
@@ -83,66 +87,40 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             ];
             /**
              * Starting from the Root TypeResolver, iterate and get the
-             * SchemaDefinition for all TypeResolvers accessed in the schema
+             * SchemaDefinition for all TypeResolvers and DirectiveResolvers
+             * accessed in the schema
              */
-            $processedTypeNames = [];
-            $processedDirectiveNames = [];
-            /** @var TypeResolverInterface[] */
-            $typeResolverStack = $this->getRootObjectTypeResolvers();
-            $directiveResolverStack = [];
-            while (!empty($typeResolverStack)) {
-                $typeResolver = array_pop($typeResolverStack);
-                $typeName = $typeResolver->getMaybeNamespacedTypeName();
-                $processedTypeNames[] = $typeName;
-                
-                // Obtain the corresponding Provider for this TypeResolver
-                $typeSchemaDefinitionProvider = null;
-                if ($typeResolver instanceof ObjectTypeResolverInterface) {
-                    $typeSchemaDefinitionProvider = new ObjectTypeSchemaDefinitionProvider($typeResolver);
-                } elseif ($typeResolver instanceof InterfaceTypeResolverInterface) {
-                    $typeSchemaDefinitionProvider = new InterfaceTypeSchemaDefinitionProvider($typeResolver);
-                } elseif ($typeResolver instanceof UnionTypeResolverInterface) {
-                    $typeSchemaDefinitionProvider = new UnionTypeSchemaDefinitionProvider($typeResolver);
-                } elseif ($typeResolver instanceof ScalarTypeResolverInterface) {
-                    $typeSchemaDefinitionProvider = new ScalarTypeSchemaDefinitionProvider($typeResolver);
-                } elseif ($typeResolver instanceof EnumTypeResolverInterface) {
-                    $typeSchemaDefinitionProvider = new EnumTypeSchemaDefinitionProvider($typeResolver);
-                } elseif ($typeResolver instanceof InputObjectTypeResolverInterface) {
-                    $typeSchemaDefinitionProvider = new InputObjectTypeSchemaDefinitionProvider($typeResolver);
+            $processedTypeAndDirectiveResolverClasses = [];
+            $accessedTypeAndDirectiveResolvers = [];
+            /** @var array<TypeResolverInterface|DirectiveResolverInterface> */
+            $typeOrDirectiveResolverStack = $this->getRootObjectTypeResolvers();
+            while (!empty($typeOrDirectiveResolverStack)) {
+                /** @var array $typeOrDirectiveResolverStack */
+                $typeOrDirectiveResolver = array_pop($typeOrDirectiveResolverStack);
+                $processedTypeAndDirectiveResolverClasses[] = $typeOrDirectiveResolver::class;                
+                if ($typeOrDirectiveResolver instanceof TypeResolverInterface) {
+                    /** @var TypeResolverInterface */
+                    $typeResolver = $typeOrDirectiveResolver;
+                    $accessedTypeAndDirectiveResolvers = $this->addTypeSchemaDefinition(
+                        $schemaDefinition,
+                        $typeResolver,
+                    );
                 } else {
-                    throw new Exception(sprintf(
-                        $this->translationAPI->__('No type identified for TypeResolver with class \'%s\'', 'api'),
-                        get_class($typeResolver)
-                    ));
+                    /** @var DirectiveResolverInterface */
+                    $directiveResolver = $typeOrDirectiveResolver;
+                    $accessedTypeAndDirectiveResolvers = $this->addDirectiveSchemaDefinition(
+                        $schemaDefinition,
+                        $directiveResolver,
+                    );
                 }
 
-                // Add the definition
-                $type = $typeSchemaDefinitionProvider->getType();
-                $typeSchemaDefinition = $typeSchemaDefinitionProvider->getSchemaDefinition();
-                $schemaDefinition[SchemaDefinition::TYPES][$type][$typeName] = $typeSchemaDefinition;
-                
                 // Add accessed TypeResolvers to the stack and keep iterating
-                $accessedTypeResolvers = $typeSchemaDefinitionProvider->getAccessedTypeResolvers();
-                foreach ($accessedTypeResolvers as $accessedTypeName => $accessedTypeResolver) {
-                    if (in_array($accessedTypeName, $processedTypeNames)) {
+                foreach ($accessedTypeAndDirectiveResolvers as $accessedTypeResolver) {
+                    if (in_array($accessedTypeResolver::class, $processedTypeAndDirectiveResolverClasses)) {
                         continue;
                     }
-                    $typeResolverStack[] = $accessedTypeResolver;
+                    $typeOrDirectiveResolverStack[] = $accessedTypeResolver;
                 }
-
-                // Add accessed DirectiveResolvers to the stack and keep iterating
-                $accessedDirectiveResolvers = $typeSchemaDefinitionProvider->getAccessedDirectiveResolvers();
-                foreach ($accessedDirectiveResolvers as $accessedDirectiveName => $accessedDirectiveResolver) {
-                    if (in_array($accessedDirectiveName, $processedDirectiveNames)) {
-                        continue;
-                    }
-                    $directiveResolverStack[] = $accessedDirectiveResolver;
-                }
-            }
-
-            foreach ($directiveResolverStack as $directiveResolver) {
-                $directiveName = $directiveResolver->getDirectiveName();
-                $schemaDefinition[SchemaDefinition::DIRECTIVES][] = $directiveName;
             }
             
             // $schemaDefinition[SchemaDefinition::TYPES] = $typeSchemaDefinition;
@@ -187,6 +165,57 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
 
         return $schemaDefinition;
+    }
+
+    /**
+     * @return array<TypeResolverInterface|DirectiveResolverInterface> Accessed Type and Directive Resolvers
+     */
+    public function addTypeSchemaDefinition(array &$schemaDefinition, TypeResolverInterface $typeResolver): array
+    {
+        $schemaDefinitionProvider = $this->getTypeResolverSchemaDefinitionProvider($typeResolver);
+        $type = $schemaDefinitionProvider->getType();
+        $typeName = $typeResolver->getMaybeNamespacedTypeName();
+        $typeSchemaDefinition = $schemaDefinitionProvider->getSchemaDefinition();
+        $schemaDefinition[SchemaDefinition::TYPES][$type][$typeName] = $typeSchemaDefinition;
+        return [];
+    }
+
+    /**
+     * @return array<TypeResolverInterface|DirectiveResolverInterface> Accessed Type and Directive Resolvers
+     */
+    public function addDirectiveSchemaDefinition(array &$schemaDefinition, DirectiveResolverInterface $directiveResolver): array
+    {
+        $schemaDefinitionProvider = new DirectiveSchemaDefinitionProvider($directiveResolver);
+        $directiveName = $directiveResolver->getDirectiveName();
+        $directiveSchemaDefinition = $schemaDefinitionProvider->getSchemaDefinition();
+        $schemaDefinition[SchemaDefinition::DIRECTIVES][$directiveName] = $directiveSchemaDefinition;
+        return [];
+    }
+
+    protected function getTypeResolverSchemaDefinitionProvider(TypeResolverInterface $typeResolver): TypeSchemaDefinitionProviderInterface
+    {
+        if ($typeResolver instanceof ObjectTypeResolverInterface) {
+            return new ObjectTypeSchemaDefinitionProvider($typeResolver);
+        }
+        if ($typeResolver instanceof InterfaceTypeResolverInterface) {
+            return new InterfaceTypeSchemaDefinitionProvider($typeResolver);
+        }
+        if ($typeResolver instanceof UnionTypeResolverInterface) {
+            return new UnionTypeSchemaDefinitionProvider($typeResolver);
+        }
+        if ($typeResolver instanceof ScalarTypeResolverInterface) {
+            return new ScalarTypeSchemaDefinitionProvider($typeResolver);
+        }
+        if ($typeResolver instanceof EnumTypeResolverInterface) {
+            return new EnumTypeSchemaDefinitionProvider($typeResolver);
+        }
+        if ($typeResolver instanceof InputObjectTypeResolverInterface) {
+            return new InputObjectTypeSchemaDefinitionProvider($typeResolver);
+        }
+        throw new Exception(sprintf(
+            $this->translationAPI->__('No type identified for TypeResolver with class \'%s\'', 'api'),
+            get_class($typeResolver)
+        ));
     }
 
     /**

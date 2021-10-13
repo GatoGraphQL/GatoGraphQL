@@ -28,7 +28,7 @@ class UnionTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProv
         return $schemaDefinition;
     }
 
-    public function getAccessedTypeResolvers(): array
+    public function getAccessedTypeAndDirectiveResolvers(): array
     {
         return [];
     }

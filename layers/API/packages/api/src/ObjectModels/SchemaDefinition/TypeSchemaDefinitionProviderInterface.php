@@ -11,15 +11,7 @@ interface TypeSchemaDefinitionProviderInterface extends SchemaDefinitionProvider
 {
     public function getType(): string;
     /**
-     * An array of typeName => typeResolver
-     * 
-     * @return array<string, TypeResolverInterface>
+     * @return array<TypeResolverInterface|DirectiveResolverInterface>
      */
-    public function getAccessedTypeResolvers(): array;
-    /**
-     * An array of directiveName => directiveResolver
-     * 
-     * @return array<string, DirectiveResolverInterface>
-     */
-    public function getAccessedDirectiveResolvers(): array;
+    public function getAccessedTypeAndDirectiveResolvers(): array;
 }

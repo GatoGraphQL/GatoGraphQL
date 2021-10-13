@@ -28,7 +28,7 @@ class EnumTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvi
         return $schemaDefinition;
     }
 
-    public function getAccessedTypeResolvers(): array
+    public function getAccessedTypeAndDirectiveResolvers(): array
     {
         return [];
     }

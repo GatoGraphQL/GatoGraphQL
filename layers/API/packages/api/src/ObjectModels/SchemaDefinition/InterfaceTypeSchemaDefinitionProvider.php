@@ -28,7 +28,7 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
         return $schemaDefinition;
     }
 
-    public function getAccessedTypeResolvers(): array
+    public function getAccessedTypeAndDirectiveResolvers(): array
     {
         return [];
     }

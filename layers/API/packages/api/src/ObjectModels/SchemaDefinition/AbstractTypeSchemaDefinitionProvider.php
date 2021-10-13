@@ -23,12 +23,7 @@ abstract class AbstractTypeSchemaDefinitionProvider implements TypeSchemaDefinit
         ];
     }
     
-    public function getAccessedTypeResolvers(): array
-    {
-        return [];
-    }
-    
-    public function getAccessedDirectiveResolvers(): array
+    public function getAccessedTypeAndDirectiveResolvers(): array
     {
         return [];
     }
