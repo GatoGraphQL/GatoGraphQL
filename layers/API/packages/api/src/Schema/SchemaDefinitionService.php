@@ -105,7 +105,6 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $this->processedTypeAndDirectiveResolverClasses = [];
             $this->accessedDirectiveResolverClassRelationalTypeResolvers = [];
 
-            /** @var array<TypeResolverInterface|DirectiveResolverInterface> */
             $this->pendingTypeOrDirectiveResolvers = $this->getRootObjectTypeResolvers();
             while (!empty($this->pendingTypeOrDirectiveResolvers)) {
                 $typeOrDirectiveResolver = array_pop($this->pendingTypeOrDirectiveResolvers);
@@ -154,9 +153,6 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
     }
 
-    /**
-     * @return array<TypeResolverInterface|DirectiveResolverInterface> Accessed Type and Directive Resolvers
-     */
     private function addTypeSchemaDefinition(
         TypeResolverInterface $typeResolver,
         array &$schemaDefinition,
@@ -205,9 +201,6 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         unset($rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS]);
     }
 
-    /**
-     * @return array<TypeResolverInterface|DirectiveResolverInterface> Accessed Type and Directive Resolvers
-     */
     private function addDirectiveSchemaDefinition(
         DirectiveResolverInterface $directiveResolver,
         array &$schemaDefinition,
@@ -226,16 +219,17 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     /**
      * @throws Exception If the TypeResolver does not belong to any of the known groups
      */
-    protected function getTypeResolverSchemaDefinitionProvider(TypeResolverInterface $typeResolver): TypeSchemaDefinitionProviderInterface
-    {
-        /**
-         * The RootObject has the special role of also calculating the
-         * global fields, connections and directives
-         */
-        if (in_array($typeResolver, $this->getRootObjectTypeResolvers())) {
-            return new RootObjectTypeSchemaDefinitionProvider($typeResolver);
-        }
+    protected function getTypeResolverSchemaDefinitionProvider(
+        TypeResolverInterface $typeResolver,
+    ): TypeSchemaDefinitionProviderInterface {
         if ($typeResolver instanceof ObjectTypeResolverInterface) {
+            /**
+             * The RootObject has the special role of also calculating the
+             * global fields, connections and directives
+             */
+            if (in_array($typeResolver, $this->getRootObjectTypeResolvers())) {
+                return new RootObjectTypeSchemaDefinitionProvider($typeResolver);
+            }
             return new ObjectTypeSchemaDefinitionProvider($typeResolver);
         }
         if ($typeResolver instanceof InterfaceTypeResolverInterface) {
