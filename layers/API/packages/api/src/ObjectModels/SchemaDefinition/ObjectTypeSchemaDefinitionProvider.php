@@ -56,7 +56,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
             $schemaDefinition[SchemaDefinition::IMPLEMENTED_INTERFACES][] = $interfaceTypeResolver->getMaybeNamespacedTypeName();
             $this->accessedTypeAndDirectiveResolvers[$interfaceTypeResolver::class] = $interfaceTypeResolver;
         }
-        
+
         return $schemaDefinition;
     }
 
@@ -81,12 +81,12 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
         // Extract the typeResolvers
         $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
         $this->accessedTypeAndDirectiveResolvers[$fieldTypeResolver::class] = $fieldTypeResolver;
-        unset($fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER]);
+        $this->replaceTypeResolverWithTypeType($fieldSchemaDefinition);
 
         foreach (($fieldSchemaDefinition[SchemaDefinition::ARGS] ?? []) as $fieldArgName => &$fieldArgSchemaDefinition) {
             $fieldArgTypeResolver = $fieldArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
             $this->accessedTypeAndDirectiveResolvers[$fieldArgTypeResolver::class] = $fieldArgTypeResolver;
-            unset($fieldSchemaDefinition[SchemaDefinition::ARGS][$fieldArgName][SchemaDefinition::TYPE_RESOLVER]);
+            $this->replaceTypeResolverWithTypeType($fieldSchemaDefinition[SchemaDefinition::ARGS][$fieldArgName]);
         }
         
         // Split the results into "fields" and "connections"
