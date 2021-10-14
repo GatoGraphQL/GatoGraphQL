@@ -26,24 +26,24 @@ abstract class AbstractSchemaDefinitionProvider implements SchemaDefinitionProvi
         return array_values($this->accessedTypeAndDirectiveResolvers);
     }
 
-    protected function replaceTypeResolverWithTypeType(array &$schemaDefinition): void
+    protected function replaceTypeResolverWithTypeProperties(array &$schemaDefinition): void
     {
-        $typeType = null;
+        $typeKind = null;
         $typeResolver = $schemaDefinition[SchemaDefinition::TYPE_RESOLVER];
         if ($typeResolver instanceof ObjectTypeResolverInterface) {
-            $typeType = SchemaDefinition::TYPE_OBJECT;
+            $typeKind = SchemaDefinition::TYPE_OBJECT;
         } elseif ($typeResolver instanceof InterfaceTypeResolverInterface) {
-            $typeType = SchemaDefinition::TYPE_INTERFACE;
+            $typeKind = SchemaDefinition::TYPE_INTERFACE;
         } elseif ($typeResolver instanceof UnionTypeResolverInterface) {
-            $typeType = SchemaDefinition::TYPE_UNION;
+            $typeKind = SchemaDefinition::TYPE_UNION;
         } elseif ($typeResolver instanceof ScalarTypeResolverInterface) {
-            $typeType = SchemaDefinition::TYPE_SCALAR;
+            $typeKind = SchemaDefinition::TYPE_SCALAR;
         } elseif ($typeResolver instanceof EnumTypeResolverInterface) {
-            $typeType = SchemaDefinition::TYPE_ENUM;
+            $typeKind = SchemaDefinition::TYPE_ENUM;
         } elseif ($typeResolver instanceof InputObjectTypeResolverInterface) {
-            $typeType = SchemaDefinition::TYPE_INPUT_OBJECT;
+            $typeKind = SchemaDefinition::TYPE_INPUT_OBJECT;
         }
-        $schemaDefinition[SchemaDefinition::TYPE_TYPE] = $typeType;
+        $schemaDefinition[SchemaDefinition::TYPE_KIND] = $typeKind;
         unset($schemaDefinition[SchemaDefinition::TYPE_RESOLVER]);
     }
 }

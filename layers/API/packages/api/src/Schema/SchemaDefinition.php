@@ -8,7 +8,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition as UpstreamSchemaDefinition;
 
 class SchemaDefinition extends UpstreamSchemaDefinition
 {
-    const TYPE_TYPE = 'typeType';
+    const TYPE_KIND = 'typeKind';
     
     const TYPE_OBJECT = 'Object';
     const TYPE_INTERFACE = 'Interface';

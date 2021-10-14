@@ -68,12 +68,12 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
         // Extract the typeResolvers
         $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
         $this->accessedTypeAndDirectiveResolvers[$fieldTypeResolver::class] = $fieldTypeResolver;
-        $this->replaceTypeResolverWithTypeType($fieldSchemaDefinition);
+        $this->replaceTypeResolverWithTypeProperties($fieldSchemaDefinition);
 
         foreach (($fieldSchemaDefinition[SchemaDefinition::ARGS] ?? []) as $fieldArgName => &$fieldArgSchemaDefinition) {
             $fieldArgTypeResolver = $fieldArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
             $this->accessedTypeAndDirectiveResolvers[$fieldArgTypeResolver::class] = $fieldArgTypeResolver;
-            $this->replaceTypeResolverWithTypeType($fieldSchemaDefinition[SchemaDefinition::ARGS][$fieldArgName]);
+            $this->replaceTypeResolverWithTypeProperties($fieldSchemaDefinition[SchemaDefinition::ARGS][$fieldArgName]);
         }
 
         $interfaceTypeSchemaDefinition[SchemaDefinition::FIELDS][$fieldName] = $fieldSchemaDefinition;

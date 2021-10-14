@@ -23,7 +23,7 @@ class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider
         foreach (($schemaDefinition[SchemaDefinition::ARGS] ?? []) as $directiveArgName => &$directiveArgSchemaDefinition) {
             $directiveArgTypeResolver = $directiveArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
             $this->accessedTypeAndDirectiveResolvers[$directiveArgTypeResolver::class] = $directiveArgTypeResolver;
-            $this->replaceTypeResolverWithTypeType($schemaDefinition[SchemaDefinition::ARGS][$directiveArgName]);
+            $this->replaceTypeResolverWithTypeProperties($schemaDefinition[SchemaDefinition::ARGS][$directiveArgName]);
         }
 
         return $schemaDefinition;
