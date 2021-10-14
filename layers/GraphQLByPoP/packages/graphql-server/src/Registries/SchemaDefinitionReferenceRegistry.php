@@ -116,11 +116,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 // Get the schema definitions
                 $this->fullSchemaDefinition = $this->schemaDefinitionService->getFullSchemaDefinition();
 
-                // If the schemaDefinition is null, it failed generating it. Then do nothing
-                if ($this->fullSchemaDefinition === null) {
-                    return $this->fullSchemaDefinition;
-                }
-
                 // Convert the schema from PoP's format to what GraphQL needs to work with
                 $this->prepareSchemaDefinitionForGraphQL();
 
