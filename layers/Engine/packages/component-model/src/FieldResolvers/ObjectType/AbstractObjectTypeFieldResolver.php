@@ -18,6 +18,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Resolvers\EnumTypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
@@ -44,6 +45,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
     use FieldOrDirectiveResolverTrait, EnumTypeSchemaDefinitionResolverTrait {
         EnumTypeSchemaDefinitionResolverTrait::doAddSchemaDefinitionEnumValuesForField insteadof FieldOrDirectiveResolverTrait;
+    }
+    use FieldOrDirectiveSchemaDefinitionResolverTrait {
+        FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldSchemaDefinition as upstreamGetFieldSchemaDefinition;
     }
 
     /**
@@ -462,32 +466,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return [];
     }
 
-    public function addFieldSchemaDefinition(array &$schemaDefinition, ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): void
-    {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
-        if ($schemaDefinitionResolver !== $this) {
-            $schemaDefinitionResolver->addFieldSchemaDefinition($schemaDefinition, $objectTypeResolver, $fieldName);
-            return;
-        }
-
-        $this->addEnumTypeFieldSchemaDefinition($schemaDefinition, $objectTypeResolver, $fieldName);
-    }
-
-    /**
-     * Add the enum values in the schema: arrays of enum name, description, deprecated and deprecation description
-     */
-    protected function addEnumTypeFieldSchemaDefinition(array &$schemaDefinition, ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): void
-    {
-        $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
-        if ($fieldTypeResolver instanceof EnumTypeResolverInterface) {
-            $fieldEnumTypeResolver = $fieldTypeResolver;
-            $this->doAddSchemaDefinitionEnumValuesForField(
-                $schemaDefinition,
-                $fieldEnumTypeResolver,
-            );
-        }
-    }
-
     public function isGlobal(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
         return false;
@@ -730,56 +708,22 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     final protected function doGetFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
     {
-        $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
-        $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
-        if ($fieldTypeResolver instanceof EnumTypeResolverInterface) {
-            $type = SchemaDefinitionTypes::TYPE_ENUM;
+        $schemaDefinition = $this->upstreamGetFieldSchemaDefinition(
+            $fieldName,
+            $this->getFieldTypeResolver($objectTypeResolver, $fieldName),
+            $this->getFieldDescription($objectTypeResolver, $fieldName),
+            $this->getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            $this->getFieldDeprecationMessage($objectTypeResolver, $fieldName),
+        );
+
+        if ($args = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName)) {
+            $schemaDefinition[SchemaDefinition::ARGS] = $args;
         }
-        $schemaDefinition = [
-            SchemaDefinition::NAME => $fieldName,
-            SchemaDefinition::TYPE_RESOLVER => $fieldTypeResolver,
-            SchemaDefinition::TYPE_NAME => $type,
-        ];
 
         // Check it args can be queried without their name
         if ($this->enableOrderedSchemaFieldArgs($objectTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::ORDERED_ARGS_ENABLED] = true;
         }
-
-        // Use bitwise operators to extract the applied modifiers
-        // @see https://www.php.net/manual/en/language.operators.bitwise.php#91291
-        $schemaTypeModifiers = $this->getFieldTypeModifiers($objectTypeResolver, $fieldName);
-        if ($schemaTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) {
-            $schemaDefinition[SchemaDefinition::NON_NULLABLE] = true;
-        }
-        // If setting the "array of arrays" flag, there's no need to set the "array" flag
-        $isArrayOfArrays = $schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-        if (
-            $schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY
-            || $isArrayOfArrays
-        ) {
-            $schemaDefinition[SchemaDefinition::IS_ARRAY] = true;
-            if ($schemaTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) {
-                $schemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
-            }
-            if ($isArrayOfArrays) {
-                $schemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] = true;
-                if ($schemaTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) {
-                    $schemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;
-                }
-            }
-        }
-        if ($description = $this->getFieldDescription($objectTypeResolver, $fieldName)) {
-            $schemaDefinition[SchemaDefinition::DESCRIPTION] = $description;
-        }
-        if ($deprecationMessage = $this->getFieldDeprecationMessage($objectTypeResolver, $fieldName)) {
-            $schemaDefinition[SchemaDefinition::DEPRECATED] = true;
-            $schemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationMessage;
-        }
-        if ($args = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName)) {
-            $schemaDefinition[SchemaDefinition::ARGS] = $args;
-        }
-        $this->addFieldSchemaDefinition($schemaDefinition, $objectTypeResolver, $fieldName);
 
         if (Environment::enableSemanticVersionConstraints()) {
             if ($version = $this->getFieldVersion($objectTypeResolver, $fieldName)) {

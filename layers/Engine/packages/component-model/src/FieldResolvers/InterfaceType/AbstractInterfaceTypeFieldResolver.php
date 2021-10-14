@@ -13,11 +13,9 @@ use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
-use PoP\ComponentModel\Schema\SchemaDefinitionTypes;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
@@ -29,7 +27,9 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     use AttachableExtensionTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
     use EnumTypeSchemaDefinitionResolverTrait;
-    use FieldOrDirectiveSchemaDefinitionResolverTrait;
+    use FieldOrDirectiveSchemaDefinitionResolverTrait {
+        FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldSchemaDefinition as upstreamGetFieldSchemaDefinition;
+    }
 
     /** @var array<string, array> */
     protected array $schemaDefinitionForFieldCache = [];
@@ -371,33 +371,6 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return [];
     }
 
-    public function addFieldSchemaDefinition(array &$schemaDefinition, string $fieldName): void
-    {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
-        if ($schemaDefinitionResolver !== $this) {
-            $schemaDefinitionResolver->addFieldSchemaDefinition($schemaDefinition, $fieldName);
-            return;
-        }
-
-        $this->addEnumTypeFieldSchemaDefinition($schemaDefinition, $fieldName);
-    }
-
-    /**
-     * Add the enum values in the schema: arrays of enum name, description, deprecated and deprecation description
-     */
-    protected function addEnumTypeFieldSchemaDefinition(array &$schemaDefinition, string $fieldName): void
-    {
-        $fieldTypeResolver = $this->getFieldTypeResolver($fieldName);
-        if ($fieldTypeResolver instanceof EnumTypeResolverInterface) {
-            /** @var EnumTypeResolverInterface */
-            $fieldEnumTypeResolver = $fieldTypeResolver;
-            $this->doAddSchemaDefinitionEnumValuesForField(
-                $schemaDefinition,
-                $fieldEnumTypeResolver
-            );
-        }
-    }
-
     /**
      * Get the "schema" properties as for the fieldName
      */
@@ -415,51 +388,17 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      */
     final protected function doGetFieldSchemaDefinition(string $fieldName): array
     {
-        $fieldTypeResolver = $this->getFieldTypeResolver($fieldName);
-        $type = $fieldTypeResolver->getMaybeNamespacedTypeName();
-        if ($fieldTypeResolver instanceof EnumTypeResolverInterface) {
-            $type = SchemaDefinitionTypes::TYPE_ENUM;
-        }
-        $schemaDefinition = [
-            SchemaDefinition::NAME => $fieldName,
-            SchemaDefinition::TYPE_RESOLVER => $fieldTypeResolver,
-            SchemaDefinition::TYPE_NAME => $type,
-        ];
+        $schemaDefinition = $this->upstreamGetFieldSchemaDefinition(
+            $fieldName,
+            $this->getFieldTypeResolver($fieldName),
+            $this->getFieldDescription($fieldName),
+            $this->getFieldTypeModifiers($fieldName),
+            $this->getFieldDeprecationMessage($fieldName),
+        );
 
-        // Use bitwise operators to extract the applied modifiers
-        // @see https://www.php.net/manual/en/language.operators.bitwise.php#91291
-        $schemaTypeModifiers = $this->getFieldTypeModifiers($fieldName);
-        if ($schemaTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) {
-            $schemaDefinition[SchemaDefinition::NON_NULLABLE] = true;
-        }
-        // If setting the "array of arrays" flag, there's no need to set the "array" flag
-        $isArrayOfArrays = $schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-        if (
-            $schemaTypeModifiers & SchemaTypeModifiers::IS_ARRAY
-            || $isArrayOfArrays
-        ) {
-            $schemaDefinition[SchemaDefinition::IS_ARRAY] = true;
-            if ($schemaTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) {
-                $schemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] = true;
-            }
-            if ($isArrayOfArrays) {
-                $schemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] = true;
-                if ($schemaTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) {
-                    $schemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] = true;
-                }
-            }
-        }
-        if ($description = $this->getFieldDescription($fieldName)) {
-            $schemaDefinition[SchemaDefinition::DESCRIPTION] = $description;
-        }
-        if ($deprecationMessage = $this->getFieldDeprecationMessage($fieldName)) {
-            $schemaDefinition[SchemaDefinition::DEPRECATED] = true;
-            $schemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationMessage;
-        }
         if ($args = $this->getFieldArgsSchemaDefinition($fieldName)) {
             $schemaDefinition[SchemaDefinition::ARGS] = $args;
         }
-        $this->addFieldSchemaDefinition($schemaDefinition, $fieldName);
 
         return $schemaDefinition;
     }
