@@ -60,10 +60,10 @@ class SchemaHelpers
         );
     }
 
-    public static function getSchemaFieldArgEnumValueDefinitions(array $schemaFieldArgs)
+    public static function getSchemaFieldArgEnumValueDefinitions(array $schemaFieldArgs): array
     {
         return array_map(
-            function ($schemaFieldArg) {
+            function (array $schemaFieldArg): array {
                 return $schemaFieldArg[SchemaDefinition::ITEMS];
             },
             $schemaFieldArgs
