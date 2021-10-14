@@ -159,7 +159,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         array &$schemaDefinition,
     ): void {
         $schemaDefinitionProvider = $this->getTypeResolverSchemaDefinitionProvider($typeResolver);
-        $type = $schemaDefinitionProvider->getType();
+        $typeKind = $schemaDefinitionProvider->getTypeKind();
         $typeName = $typeResolver->getMaybeNamespacedTypeName();
         $typeSchemaDefinition = $schemaDefinitionProvider->getSchemaDefinition();
         /**
@@ -169,7 +169,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         if (in_array($typeResolver, $this->getRootObjectTypeResolvers())) {
             $this->moveGlobalTypeSchemaDefinition($schemaDefinition, $typeSchemaDefinition);
         }
-        $schemaDefinition[SchemaDefinition::TYPES][$type][$typeName] = $typeSchemaDefinition;
+        $schemaDefinition[SchemaDefinition::TYPES][$typeKind][$typeName] = $typeSchemaDefinition;
 
         $this->addAccessedTypeAndDirectiveResolvers(
             $schemaDefinitionProvider->getAccessedTypeAndDirectiveResolvers(),

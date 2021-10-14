@@ -8,7 +8,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 interface TypeSchemaDefinitionProviderInterface extends SchemaDefinitionProviderInterface
 {
-    public function getType(): string;
+    public function getTypeKind(): string;
     /**
      * @return array<string, RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive
      */

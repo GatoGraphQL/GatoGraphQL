@@ -18,7 +18,7 @@ class EnumTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvi
         parent::__construct($enumTypeResolver);
     }
 
-    public function getType(): string
+    public function getTypeKind(): string
     {
         return TypeKinds::ENUM;
     }

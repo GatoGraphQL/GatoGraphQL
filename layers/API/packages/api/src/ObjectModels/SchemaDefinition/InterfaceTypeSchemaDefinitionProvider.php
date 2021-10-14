@@ -22,7 +22,7 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
         $this->typeRegistry = TypeRegistryFacade::getInstance();
     }
 
-    public function getType(): string
+    public function getTypeKind(): string
     {
         return TypeKinds::INTERFACE;
     }

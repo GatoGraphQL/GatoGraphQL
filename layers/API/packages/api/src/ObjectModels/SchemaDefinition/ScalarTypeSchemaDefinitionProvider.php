@@ -16,7 +16,7 @@ class ScalarTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
         parent::__construct($scalarTypeResolver);
     }
 
-    public function getType(): string
+    public function getTypeKind(): string
     {
         return TypeKinds::SCALAR;
     }

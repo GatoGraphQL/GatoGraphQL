@@ -20,7 +20,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
         parent::__construct($objectTypeResolver);
     }
 
-    public function getType(): string
+    public function getTypeKind(): string
     {
         return TypeKinds::OBJECT;
     }

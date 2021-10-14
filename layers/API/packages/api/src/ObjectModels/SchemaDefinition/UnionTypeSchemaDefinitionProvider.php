@@ -17,7 +17,7 @@ class UnionTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProv
         parent::__construct($unionTypeResolver);
     }
 
-    public function getType(): string
+    public function getTypeKind(): string
     {
         return TypeKinds::UNION;
     }
