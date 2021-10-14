@@ -26,6 +26,7 @@ class SchemaDefinition
     const ENUM_VALUES = 'enumValues';
     const DEPRECATED = 'deprecated';
     const DEPRECATION_MESSAGE = 'deprecationMessage';
+    const VALUE = 'value';
     const DEFAULT_VALUE = 'defaultValue';
     const ARGS = 'args';
     const ORDERED_ARGS_ENABLED = 'orderedArgsEnabled';

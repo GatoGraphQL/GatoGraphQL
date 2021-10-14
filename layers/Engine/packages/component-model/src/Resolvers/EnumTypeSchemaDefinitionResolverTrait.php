@@ -23,7 +23,7 @@ trait EnumTypeSchemaDefinitionResolverTrait
         $enumValueDescriptions = $enumTypeResolver->getEnumValueDescriptions();
         foreach ($enumValues as $enumValue) {
             $enum = [
-                SchemaDefinition::NAME => $enumValue,
+                SchemaDefinition::VALUE => $enumValue,
             ];
             if ($description = $enumValueDescriptions[$enumValue] ?? null) {
                 $enum[SchemaDefinition::DESCRIPTION] = $description;

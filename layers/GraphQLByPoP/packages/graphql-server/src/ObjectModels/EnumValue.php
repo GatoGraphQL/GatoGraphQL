@@ -14,7 +14,7 @@ class EnumValue extends AbstractSchemaDefinitionReferenceObject
     }
     public function getValue()
     {
-        return $this->schemaDefinition[SchemaDefinition::NAME];
+        return $this->schemaDefinition[SchemaDefinition::VALUE];
     }
     public function getDescription(): ?string
     {
