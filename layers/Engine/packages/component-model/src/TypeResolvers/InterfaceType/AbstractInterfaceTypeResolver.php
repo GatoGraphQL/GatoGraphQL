@@ -47,7 +47,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     private function calculateFieldNamesToImplement(): array
     {
         $fieldNamesToImplement = [];
-        foreach ($this->getAllInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
+        foreach ($this->getInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
             $fieldNamesToImplement = array_merge(
                 $fieldNamesToImplement,
                 $interfaceTypeFieldResolver->getFieldNamesToImplement()
@@ -64,7 +64,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     public function getPartiallyImplementedInterfaceTypeResolvers(): array
     {
         $implementedInterfaceTypeFieldResolvers = [];
-        foreach ($this->getAllInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
+        foreach ($this->getInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
             // Add under class as to mimick `array_unique` for object
             foreach ($interfaceTypeFieldResolver->getImplementedInterfaceTypeFieldResolvers() as $implementedInterfaceTypeFieldResolver) {
                 $implementedInterfaceTypeFieldResolvers[get_class($implementedInterfaceTypeFieldResolver)] = $implementedInterfaceTypeFieldResolver;
@@ -85,7 +85,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      *
      * @return InterfaceTypeFieldResolverInterface[]
      */
-    public function getAllInterfaceTypeFieldResolvers(): array
+    public function getInterfaceTypeFieldResolvers(): array
     {
         if ($this->interfaceTypeFieldResolvers === null) {
             $interfaceTypeFieldResolvers = [];

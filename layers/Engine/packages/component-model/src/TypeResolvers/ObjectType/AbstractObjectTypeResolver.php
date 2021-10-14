@@ -790,7 +790,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return array_filter(
             $interfaceTypeResolvers,
             fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => array_udiff(
-                $interfaceTypeResolver->getAllInterfaceTypeFieldResolvers(),
+                $interfaceTypeResolver->getInterfaceTypeFieldResolvers(),
                 $implementedInterfaceTypeFieldResolvers,
                 /**
                  * Don't use arrow function here, or there's an issue when downgrading to PHP 7.1:

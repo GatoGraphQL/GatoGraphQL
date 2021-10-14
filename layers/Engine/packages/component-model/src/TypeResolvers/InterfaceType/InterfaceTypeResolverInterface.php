@@ -28,7 +28,7 @@ interface InterfaceTypeResolverInterface extends TypeResolverInterface
      *
      * @return InterfaceTypeFieldResolverInterface[]
      */
-    public function getAllInterfaceTypeFieldResolvers(): array;
+    public function getInterfaceTypeFieldResolvers(): array;
     /**
      * Interfaces "partially" implemented by this Interface
      *
