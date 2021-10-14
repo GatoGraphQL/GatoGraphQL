@@ -18,6 +18,10 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      */
     protected ?array $interfaceTypeFieldResolversByField = null;
     /**
+     * @var array<string, InterfaceTypeFieldResolverInterface>|null
+     */
+    protected ?array $excutableInterfaceTypeFieldResolversByField = null;
+    /**
      * @var string[]|null
      */
     protected ?array $fieldNamesToImplement = null;
@@ -98,6 +102,30 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
             $this->interfaceTypeFieldResolvers = array_values($interfaceTypeFieldResolvers);
         }
         return $this->interfaceTypeFieldResolvers;
+    }
+
+    /**
+     * Produce an array of all the interface's fieldNames and, for each,
+     * a list of all the ObjectTypeFieldResolverInterfaces
+     *
+     * @return array<string, InterfaceTypeFieldResolverInterface[]>
+     */
+    final public function getExecutableInterfaceTypeFieldResolversByField(): array
+    {
+        if ($this->excutableInterfaceTypeFieldResolversByField === null) {
+            $this->excutableInterfaceTypeFieldResolversByField = $this->doGetExecutableInterfaceTypeFieldResolversByField();
+        }
+        return $this->excutableInterfaceTypeFieldResolversByField;
+    }
+
+    private function doGetExecutableInterfaceTypeFieldResolversByField(): array
+    {
+        $interfaceTypeFieldResolvers = [];
+        foreach ($this->getInterfaceTypeFieldResolversByField() as $fieldName => $fieldInterfaceTypeFieldResolvers) {
+            // Get the first item from the list of resolvers. That's the one that will be executed
+            $interfaceTypeFieldResolvers[$fieldName] = $fieldInterfaceTypeFieldResolvers[0];
+        }
+        return $interfaceTypeFieldResolvers;
     }
 
     /**

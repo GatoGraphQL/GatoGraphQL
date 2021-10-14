@@ -18,11 +18,19 @@ interface InterfaceTypeResolverInterface extends TypeResolverInterface
     public function getFieldNamesToImplement(): array;
     /**
      * Produce an array of all the interface's fieldNames and, for each,
-     * a list of all the ObjectTypeFieldResolverInterfaces
+     * a list of all the ObjectTypeFieldResolvers
      *
      * @return array<string, InterfaceTypeFieldResolverInterface[]>
      */
     public function getInterfaceTypeFieldResolversByField(): array;
+    /**
+     * Produce an array of all the interface's fieldNames and, for each,
+     * the first ObjectTypeFieldResolver that resolves it, as according
+     * to its priority
+     *
+     * @return array<string, InterfaceTypeFieldResolverInterface>
+     */
+    public function getExecutableInterfaceTypeFieldResolversByField(): array;
     /**
      * Produce an array of all the attached ObjectTypeFieldResolverInterfaces
      *
