@@ -95,14 +95,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         if (!$this->isFullSchemaDefinitionLoaded) {
             $this->isFullSchemaDefinitionLoaded = true;
 
-            // These are the configuration options to work with the "full schema"
-            $fieldArgs = [
-                'deep' => true,
-                'shape' => SchemaDefinitionShapes::FLAT,
-                'compressed' => true,
-                'useTypeName' => true,
-            ];
-
             // Attempt to retrieve from the cache, if enabled
             if ($useCache = APIComponentConfiguration::useSchemaDefinitionCache()) {
                 // Use different caches for the normal and namespaced schemas,
@@ -110,7 +102,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 $vars = ApplicationState::getVars();
                 $cacheType = CacheTypes::GRAPHQL_SCHEMA_DEFINITION;
                 $cacheKeyComponents = array_merge(
-                    $fieldArgs,
                     CacheUtils::getSchemaCacheKeyComponents(),
                     [
                         'edit-schema' => isset($vars['edit-schema']) && $vars['edit-schema'],
@@ -128,7 +119,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             // If either not using cache, or using but the value had not been cached, then calculate the value
             if ($this->fullSchemaDefinition === null) {
                 // Get the schema definitions
-                $this->fullSchemaDefinition = $this->schemaDefinitionRegistry->getSchemaDefinition($fieldArgs);
+                $this->fullSchemaDefinition = $this->schemaDefinitionRegistry->getSchemaDefinition();
 
                 // If the schemaDefinition is null, it failed generating it. Then do nothing
                 if ($this->fullSchemaDefinition === null) {
