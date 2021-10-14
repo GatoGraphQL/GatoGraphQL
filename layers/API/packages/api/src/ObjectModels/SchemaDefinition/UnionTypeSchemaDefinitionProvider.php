@@ -26,10 +26,10 @@ class UnionTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProv
         $schemaDefinition = parent::getSchemaDefinition();
 
         // Iterate through the typeResolvers from all the pickers and get their schema definitions
-        $schemaDefinition[SchemaDefinition::MEMBER_OBJECT_TYPES] = [];
+        $schemaDefinition[SchemaDefinition::POSSIBLE_TYPES] = [];
         foreach ($this->unionTypeResolver->getObjectTypeResolverPickers() as $picker) {
             $pickerObjectTypeResolver = $picker->getObjectTypeResolver();
-            $schemaDefinition[SchemaDefinition::MEMBER_OBJECT_TYPES][] = $pickerObjectTypeResolver->getMaybeNamespacedTypeName();
+            $schemaDefinition[SchemaDefinition::POSSIBLE_TYPES][] = $pickerObjectTypeResolver->getMaybeNamespacedTypeName();
             $this->accessedTypeAndDirectiveResolvers[$pickerObjectTypeResolver::class] = $pickerObjectTypeResolver;
         }
 

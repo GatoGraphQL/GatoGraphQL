@@ -10,7 +10,6 @@ class SchemaDefinition extends UpstreamSchemaDefinition
 {
     const TYPE_TYPE = 'typeType';
     const IMPLEMENTED_INTERFACES = 'implementedInterfaces';
-    const MEMBER_OBJECT_TYPES = 'memberObjectTypes';
 
     const TYPE_OBJECT = 'Object';
     const TYPE_INTERFACE = 'Interface';
