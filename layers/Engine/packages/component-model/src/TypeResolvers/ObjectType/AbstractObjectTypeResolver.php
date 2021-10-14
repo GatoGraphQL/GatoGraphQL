@@ -120,11 +120,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     final public function getFieldSchemaDefinition(string $field): ?array
     {
-        // Get the value from a fieldResolver, from the first one that resolves it
-        if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
+        if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
             $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
             $fieldArgs = $this->fieldQueryInterpreter->extractStaticFieldArguments($field);
-            return $objectTypeFieldResolvers[0]->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
+            return $executableObjectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
         }
 
         return null;
@@ -132,7 +131,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final public function resolveFieldValidationErrorQualifiedEntries(string $field, array &$variables = null): array
     {
-        // Get the value from a fieldResolver, from the first one that resolves it
         list(
             $validField,
             $fieldName,
@@ -143,8 +141,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($schemaErrors) {
             return $schemaErrors;
         }
-        if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
-            if ($maybeErrors = $objectTypeFieldResolvers[0]->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
+        if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
+            if ($maybeErrors = $executableObjectTypeFieldResolver->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
                 foreach ($maybeErrors as $error) {
                     $schemaErrors[] = [
                         Tokens::PATH => [$field],
@@ -192,8 +190,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final public function resolveFieldValidationWarningQualifiedEntries(string $field, array &$variables = null): array
     {
-        // Get the value from a fieldResolver, from the first one that resolves it
-        if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
+        if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
             list(
                 $validField,
                 $fieldName,
@@ -201,7 +198,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $schemaErrors,
                 $schemaWarnings,
             ) = $this->dissectFieldForSchema($field);
-            if ($maybeWarnings = $objectTypeFieldResolvers[0]->resolveFieldValidationWarningDescriptions($this, $fieldName, $fieldArgs)) {
+            if ($maybeWarnings = $executableObjectTypeFieldResolver->resolveFieldValidationWarningDescriptions($this, $fieldName, $fieldArgs)) {
                 foreach ($maybeWarnings as $warning) {
                     $schemaWarnings[] = [
                         Tokens::PATH => [$field],
@@ -217,8 +214,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final public function resolveFieldDeprecationQualifiedEntries(string $field, array &$variables = null): array
     {
-        // Get the value from a fieldResolver, from the first one that resolves it
-        if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
+        if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
             list(
                 $validField,
                 $fieldName,
@@ -229,7 +225,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             ) = $this->dissectFieldForSchema($field);
 
             // Check for deprecations in the enums
-            if ($maybeDeprecationMessages = $objectTypeFieldResolvers[0]->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
+            if ($maybeDeprecationMessages = $executableObjectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
                 foreach ($maybeDeprecationMessages as $deprecationMessage) {
                     $schemaDeprecations[] = [
                         Tokens::PATH => [$field],
@@ -246,13 +242,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final public function getFieldTypeResolver(string $field): ?ConcreteTypeResolverInterface
     {
-        // Get the value from a fieldResolver, from the first one that resolves it
-        if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
+        if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
             list(
                 $validField,
                 $fieldName,
             ) = $this->dissectFieldForSchema($field);
-            return $objectTypeFieldResolvers[0]->getFieldTypeResolver($this, $fieldName);
+            return $executableObjectTypeFieldResolver->getFieldTypeResolver($this, $fieldName);
         }
 
         return null;
@@ -260,13 +255,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final public function getFieldMutationResolver(string $field): ?MutationResolverInterface
     {
-        // Get the value from a fieldResolver, from the first one that resolves it
-        if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
+        if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
             list(
                 $validField,
                 $fieldName,
             ) = $this->dissectFieldForSchema($field);
-            return $objectTypeFieldResolvers[0]->getFieldMutationResolver($this, $fieldName);
+            return $executableObjectTypeFieldResolver->getFieldMutationResolver($this, $fieldName);
         }
 
         return null;
@@ -274,13 +268,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final public function isFieldAMutation(string $field): ?bool
     {
-        // Get the value from a fieldResolver, from the first one that resolves it
-        if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
+        if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
             list(
                 $validField,
                 $fieldName,
             ) = $this->dissectFieldForSchema($field);
-            $fieldMutationResolver = $objectTypeFieldResolvers[0]->getFieldMutationResolver($this, $fieldName);
+            $fieldMutationResolver = $executableObjectTypeFieldResolver->getFieldMutationResolver($this, $fieldName);
             return $fieldMutationResolver !== null;
         }
 
@@ -828,6 +821,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 }
             ) === [],
         );
+    }
+
+    /**
+     * Get the first FieldResolver that resolves the field
+     */
+    final protected function getExecutableObjectTypeFieldResolverForField(string $field): ?ObjectTypeFieldResolverInterface
+    {
+        if ($objectTypeFieldResolversForField = $this->getObjectTypeFieldResolversForField($field)) {
+            return $objectTypeFieldResolversForField[0];
+        }
+        return null;
     }
 
     /**
