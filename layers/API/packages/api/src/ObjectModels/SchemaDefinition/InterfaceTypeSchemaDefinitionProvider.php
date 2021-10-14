@@ -5,15 +5,20 @@ declare(strict_types=1);
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
 use PoP\API\Schema\SchemaDefinition;
+use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
+use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 
 class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvider
 {
+    protected TypeRegistryInterface $typeRegistry;
+
     public function __construct(
         protected InterfaceTypeResolverInterface $interfaceTypeResolver,
     ) {
         parent::__construct($interfaceTypeResolver);
+        $this->typeRegistry = TypeRegistryFacade::getInstance();
     }
 
     public function getType(): string
@@ -29,6 +34,17 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
         $schemaInterfaceTypeFieldResolvers = $this->interfaceTypeResolver->getExecutableInterfaceTypeFieldResolversByField();
         foreach ($schemaInterfaceTypeFieldResolvers as $fieldName => $interfaceTypeFieldResolver) {
             $this->addFieldSchemaDefinition($schemaDefinition, $interfaceTypeFieldResolver, $fieldName);
+        }
+
+        // Obtain all the Object Types that implement this interface
+        $schemaDefinition[SchemaDefinition::POSSIBLE_TYPES] = [];
+        $objectTypeResolvers = $this->typeRegistry->getObjectTypeResolvers();
+        foreach ($objectTypeResolvers as $objectTypeResolver) {
+            if (!in_array($this->interfaceTypeResolver, $objectTypeResolver->getImplementedInterfaceTypeResolvers())) {
+                continue;
+            }
+            $schemaDefinition[SchemaDefinition::POSSIBLE_TYPES][] = $objectTypeResolver->getMaybeNamespacedTypeName();
+            $this->accessedTypeAndDirectiveResolvers[$objectTypeResolver::class] = $objectTypeResolver;
         }
 
         if ($partiallyImplementedInterfaceTypeResolvers = $this->interfaceTypeResolver->getPartiallyImplementedInterfaceTypeResolvers()) {
