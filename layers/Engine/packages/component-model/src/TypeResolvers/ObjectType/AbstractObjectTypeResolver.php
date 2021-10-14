@@ -519,14 +519,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     final public function getExecutableObjectTypeFieldResolvers(bool $global): array
     {
         $objectTypeFieldResolvers = [];
-        foreach ($this->getObjectTypeFieldResolvers($global) as $fieldName => $fieldObjectTypeFieldResolvers) {
+        foreach ($this->getObjectTypeFieldResolversByField($global) as $fieldName => $fieldObjectTypeFieldResolvers) {
             // Get the first item from the list of resolvers. That's the one that will be executed
             $objectTypeFieldResolvers[$fieldName] = $fieldObjectTypeFieldResolvers[0];
         }
         return $objectTypeFieldResolvers;
     }
 
-    final public function getObjectTypeFieldResolvers(bool $global): array
+    final public function getObjectTypeFieldResolversByField(bool $global): array
     {
         $objectTypeFieldResolvers = [];
         foreach ($this->getAllObjectTypeFieldResolversByField() as $fieldName => $fieldObjectTypeFieldResolvers) {
