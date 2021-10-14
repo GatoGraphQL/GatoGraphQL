@@ -529,7 +529,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     final public function getObjectTypeFieldResolvers(bool $global): array
     {
         $objectTypeFieldResolvers = [];
-        foreach ($this->getAllObjectTypeFieldResolvers() as $fieldName => $fieldObjectTypeFieldResolvers) {
+        foreach ($this->getAllObjectTypeFieldResolversByField() as $fieldName => $fieldObjectTypeFieldResolvers) {
             $matchesGlobalFieldObjectTypeFieldResolvers = array_filter(
                 $fieldObjectTypeFieldResolvers,
                 fn (ObjectTypeFieldResolverInterface $objectTypeFieldResolver) => $global === $objectTypeFieldResolver->isGlobal($this, $fieldName)
@@ -689,7 +689,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->fieldNamesResolvedByObjectTypeFieldResolver[$objectTypeFieldResolverClass];
     }
 
-    final protected function getAllObjectTypeFieldResolvers(): array
+    final protected function getAllObjectTypeFieldResolversByField(): array
     {
         if ($this->schemaObjectTypeFieldResolvers === null) {
             $this->schemaObjectTypeFieldResolvers = $this->calculateAllObjectTypeFieldResolvers();
@@ -744,7 +744,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     {
         $interfaceTypeFieldResolvers = [];
         $processedObjectTypeFieldResolverClasses = [];
-        foreach ($this->getAllObjectTypeFieldResolvers() as $fieldName => $objectTypeFieldResolvers) {
+        foreach ($this->getAllObjectTypeFieldResolversByField() as $fieldName => $objectTypeFieldResolvers) {
             foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
                 $objectTypeFieldResolverClass = get_class($objectTypeFieldResolver);
                 if (!in_array($objectTypeFieldResolverClass, $processedObjectTypeFieldResolverClasses)) {
