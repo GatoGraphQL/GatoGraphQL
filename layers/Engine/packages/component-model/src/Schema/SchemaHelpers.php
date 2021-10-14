@@ -64,7 +64,7 @@ class SchemaHelpers
     {
         return array_map(
             function ($schemaFieldArg) {
-                return $schemaFieldArg[SchemaDefinition::ENUM_VALUES];
+                return $schemaFieldArg[SchemaDefinition::ITEMS];
             },
             $schemaFieldArgs
         );

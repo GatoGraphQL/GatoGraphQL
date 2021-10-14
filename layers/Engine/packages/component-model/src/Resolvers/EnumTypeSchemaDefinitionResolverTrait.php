@@ -34,6 +34,6 @@ trait EnumTypeSchemaDefinitionResolverTrait
             }
             $enums[$enumValue] = $enum;
         }
-        $schemaDefinition[SchemaDefinition::ENUM_VALUES] = $enums;
+        $schemaDefinition[SchemaDefinition::ITEMS] = $enums;
     }
 }

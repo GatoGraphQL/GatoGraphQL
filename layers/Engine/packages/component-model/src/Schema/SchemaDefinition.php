@@ -23,7 +23,7 @@ class SchemaDefinition
     const VERSION_CONSTRAINT = 'versionConstraint';
     const MANDATORY = 'mandatory';
     const INPUT_OBJECT_NAME = 'inputObjectName';
-    const ENUM_VALUES = 'enumValues';
+    const ITEMS = 'items';
     const DEPRECATED = 'deprecated';
     const DEPRECATION_MESSAGE = 'deprecationMessage';
     const VALUE = 'value';
