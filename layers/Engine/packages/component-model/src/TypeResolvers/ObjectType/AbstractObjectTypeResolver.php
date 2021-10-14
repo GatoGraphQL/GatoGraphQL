@@ -35,9 +35,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     protected ?array $mandatoryDirectivesForFields = null;
     /**
-     * @var array<string, ObjectTypeFieldResolverInterface>|null
+     * @var array<string, ObjectTypeFieldResolverInterface[]>|null
      */
-    protected ?array $objectTypeFieldResolversByFieldCache = null;
+    protected ?array $allObjectTypeFieldResolversByFieldCache = null;
+    /**
+     * @var array<string, array<string, ObjectTypeFieldResolverInterface[]>>
+     */
+    protected array $objectTypeFieldResolversByFieldCache = [];
+    /**
+     * @var array<string, array<string, ObjectTypeFieldResolverInterface>>
+     */
+    protected array $executableObjectTypeFieldResolversByFieldCache = [];
     /**
      * @var InterfaceTypeResolverInterface[]|null
      */
@@ -518,6 +526,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final public function getExecutableObjectTypeFieldResolversByField(bool $global): array
     {
+        $cacheKey = $global ? 'global' : 'non-global';
+        if (($this->executableObjectTypeFieldResolversByFieldCache[$cacheKey] ?? null) === null) {
+            $this->executableObjectTypeFieldResolversByFieldCache[$cacheKey] = $this->doGetExecutableObjectTypeFieldResolversByField($global);
+        }
+        return $this->executableObjectTypeFieldResolversByFieldCache[$cacheKey];
+    }
+
+    final public function doGetExecutableObjectTypeFieldResolversByField(bool $global): array
+    {
         $objectTypeFieldResolvers = [];
         foreach ($this->getObjectTypeFieldResolversByField($global) as $fieldName => $fieldObjectTypeFieldResolvers) {
             // Get the first item from the list of resolvers. That's the one that will be executed
@@ -527,6 +544,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     final public function getObjectTypeFieldResolversByField(bool $global): array
+    {
+        $cacheKey = $global ? 'global' : 'non-global';
+        if (($this->objectTypeFieldResolversByFieldCache[$cacheKey] ?? null) === null) {
+            $this->objectTypeFieldResolversByFieldCache[$cacheKey] = $this->doGetObjectTypeFieldResolversByField($global);
+        }
+        return $this->objectTypeFieldResolversByFieldCache[$cacheKey];
+    }
+
+    private function doGetObjectTypeFieldResolversByField(bool $global): array
     {
         $objectTypeFieldResolvers = [];
         foreach ($this->getAllObjectTypeFieldResolversByField() as $fieldName => $fieldObjectTypeFieldResolvers) {
@@ -691,10 +717,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final protected function getAllObjectTypeFieldResolversByField(): array
     {
-        if ($this->objectTypeFieldResolversByFieldCache === null) {
-            $this->objectTypeFieldResolversByFieldCache = $this->calculateAllObjectTypeFieldResolvers();
+        if ($this->allObjectTypeFieldResolversByFieldCache === null) {
+            $this->allObjectTypeFieldResolversByFieldCache = $this->calculateAllObjectTypeFieldResolvers();
         }
-        return $this->objectTypeFieldResolversByFieldCache;
+        return $this->allObjectTypeFieldResolversByFieldCache;
     }
 
     private function calculateAllObjectTypeFieldResolvers(): array
