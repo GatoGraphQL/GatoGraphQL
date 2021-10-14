@@ -27,7 +27,7 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface
      * 
      * @return array<string, ObjectTypeFieldResolverInterface> Key: fieldName, Value: FieldResolver
      */
-    public function getExecutableObjectTypeFieldResolvers(bool $global): array;
+    public function getExecutableObjectTypeFieldResolversByField(bool $global): array;
     /**
      * The list of all the FieldResolvers that resolve each field, for
      * every fieldName

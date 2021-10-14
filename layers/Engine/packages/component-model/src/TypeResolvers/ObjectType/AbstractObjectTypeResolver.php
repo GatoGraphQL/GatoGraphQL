@@ -516,7 +516,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->errorProvider->getNoFieldError($this->getID($object), $fieldName, $this->getMaybeNamespacedTypeName());
     }
 
-    final public function getExecutableObjectTypeFieldResolvers(bool $global): array
+    final public function getExecutableObjectTypeFieldResolversByField(bool $global): array
     {
         $objectTypeFieldResolvers = [];
         foreach ($this->getObjectTypeFieldResolversByField($global) as $fieldName => $fieldObjectTypeFieldResolvers) {
@@ -557,7 +557,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         // Add the fields (non-global)
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::FIELDS] = [];
-        $schemaObjectTypeFieldResolvers = $this->getExecutableObjectTypeFieldResolvers(false);
+        $schemaObjectTypeFieldResolvers = $this->getExecutableObjectTypeFieldResolversByField(false);
         foreach ($schemaObjectTypeFieldResolvers as $fieldName => $objectTypeFieldResolver) {
             $this->addFieldSchemaDefinition($objectTypeFieldResolver, $fieldName, $stackMessages, $generalMessages, $options);
         }
