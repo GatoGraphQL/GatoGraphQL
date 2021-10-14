@@ -538,11 +538,6 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
         $componentClassConfiguration = [];
         $componentClassConfiguration[\PoP\ComponentModel\Component::class] = [
             /**
-             * Enable the schema entity registries, as to retrieve the type/directive resolver classes
-             * from the type/directive names, saved in the DB in the ACL/CCL Custom Post Types
-             */
-            ComponentModelEnvironment::ENABLE_SCHEMA_ENTITY_REGISTRIES => true,
-            /**
              * Treat casting failures as errors, not warnings
              */
             ComponentModelEnvironment::TREAT_TYPE_COERCING_FAILURES_AS_ERRORS => true,
