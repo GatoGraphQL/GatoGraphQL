@@ -33,7 +33,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * @var array<string, mixed>
      */
     protected ?array $schemaDefinitionForGraphQL = null;
-    protected bool $isFullSchemaDefinitionLoaded = false;
     /**
      * @var array<string, AbstractSchemaDefinitionReferenceObject>
      */
@@ -86,48 +85,53 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      */
     public function &getGraphQLSchemaDefinition(): ?array
     {
-        // Use a bool flag, because the fullSchemaDefinition can be null!
-        if (!$this->isFullSchemaDefinitionLoaded) {
-            $this->isFullSchemaDefinitionLoaded = true;
+        if ($this->schemaDefinitionForGraphQL === null) {
+            $this->schemaDefinitionForGraphQL = $this->doGetGraphQLSchemaDefinition();
+        }
 
-            // Attempt to retrieve from the cache, if enabled
-            if ($useCache = APIComponentConfiguration::useSchemaDefinitionCache()) {
-                // Use different caches for the normal and namespaced schemas,
-                // or it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
-                $vars = ApplicationState::getVars();
-                $cacheType = CacheTypes::GRAPHQL_SCHEMA_DEFINITION;
-                $cacheKeyComponents = array_merge(
-                    CacheUtils::getSchemaCacheKeyComponents(),
-                    [
-                        'edit-schema' => isset($vars['edit-schema']) && $vars['edit-schema'],
-                    ]
-                );
-                // For the persistentCache, use a hash to remove invalid characters (such as "()")
-                $cacheKey = hash('md5', json_encode($cacheKeyComponents));
-                
-                $persistentCache = $this->getPersistentCache();
-                if ($persistentCache->hasCache($cacheKey, $cacheType)) {
-                    $this->schemaDefinitionForGraphQL = $persistentCache->getCache($cacheKey, $cacheType);
-                }
+        return $this->schemaDefinitionForGraphQL;
+    }
+
+    private function &doGetGraphQLSchemaDefinition(): array
+    {
+        // Attempt to retrieve from the cache, if enabled
+        if ($useCache = APIComponentConfiguration::useSchemaDefinitionCache()) {
+            // Use different caches for the normal and namespaced schemas,
+            // or it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
+            $vars = ApplicationState::getVars();
+            $cacheType = CacheTypes::GRAPHQL_SCHEMA_DEFINITION;
+            $cacheKeyComponents = array_merge(
+                CacheUtils::getSchemaCacheKeyComponents(),
+                [
+                    'edit-schema' => isset($vars['edit-schema']) && $vars['edit-schema'],
+                ]
+            );
+            // For the persistentCache, use a hash to remove invalid characters (such as "()")
+            $cacheKey = hash('md5', json_encode($cacheKeyComponents));
+            
+            $persistentCache = $this->getPersistentCache();
+            if ($persistentCache->hasCache($cacheKey, $cacheType)) {
+                $this->schemaDefinitionForGraphQL = $persistentCache->getCache($cacheKey, $cacheType);
             }
+        }
 
-            // If either not using cache, or using but the value had not been cached, then calculate the value
-            if ($this->schemaDefinitionForGraphQL === null) {
-                // Get the schema definitions
-                $this->schemaDefinitionForGraphQL = $this->schemaDefinitionService->getFullSchemaDefinition();
+        // If either not using cache, or using but the value had not been cached, then calculate the value
+        if ($this->schemaDefinitionForGraphQL === null) {
+            // Get the schema definitions
+            $this->schemaDefinitionForGraphQL = $this->schemaDefinitionService->getFullSchemaDefinition();
 
-                // Convert the schema from PoP's format to what GraphQL needs to work with
-                $this->prepareSchemaDefinitionForGraphQL();
+            // Convert the schema from PoP's format to what GraphQL needs to work with
+            $this->prepareSchemaDefinitionForGraphQL();
 
-                // Store in the cache
-                if ($useCache) {
-                    $persistentCache->storeCache($cacheKey, $cacheType, $this->schemaDefinitionForGraphQL);
-                }
+            // Store in the cache
+            if ($useCache) {
+                $persistentCache->storeCache($cacheKey, $cacheType, $this->schemaDefinitionForGraphQL);
             }
         }
 
         return $this->schemaDefinitionForGraphQL;
     }
+
     protected function prepareSchemaDefinitionForGraphQL(): void
     {
         $vars = ApplicationState::getVars();
