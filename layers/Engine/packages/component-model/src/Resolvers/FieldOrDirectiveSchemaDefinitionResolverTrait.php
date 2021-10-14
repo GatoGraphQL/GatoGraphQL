@@ -62,7 +62,6 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
         $schemaDefinition = [
             SchemaDefinition::NAME => $name,
             SchemaDefinition::TYPE_RESOLVER => $typeResolver,
-            SchemaDefinition::TYPE_NAME => $typeResolver->getMaybeNamespacedTypeName(),
         ];
         if ($description !== null) {
             $schemaDefinition[SchemaDefinition::DESCRIPTION] = $description;

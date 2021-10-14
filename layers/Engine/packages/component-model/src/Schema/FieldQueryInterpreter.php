@@ -990,7 +990,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                  **/
                 /** @var InputTypeResolverInterface */
                 $fieldOrDirectiveArgTypeResolver = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::TYPE_RESOLVER];
-                $fieldOrDirectiveArgTypeName = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::TYPE_NAME];
+                $fieldOrDirectiveArgTypeName = $fieldOrDirectiveArgTypeResolver->getMaybeNamespacedTypeName();
                 // If not set, the return type is not an array
                 $fieldOrDirectiveArgIsArrayType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::IS_ARRAY] ?? false;
                 $fieldOrDirectiveArgIsNonNullArrayItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;

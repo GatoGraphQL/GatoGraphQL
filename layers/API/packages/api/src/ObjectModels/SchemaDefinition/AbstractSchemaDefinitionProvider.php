@@ -26,10 +26,15 @@ abstract class AbstractSchemaDefinitionProvider implements SchemaDefinitionProvi
         return array_values($this->accessedTypeAndDirectiveResolvers);
     }
 
+    /**
+     * Replace the typeResolver with the typeName (maybe namespaced) and kind
+     */
     protected function replaceTypeResolverWithTypeProperties(array &$schemaDefinition): void
     {
-        $typeKind = null;
         $typeResolver = $schemaDefinition[SchemaDefinition::TYPE_RESOLVER];
+        $schemaDefinition[SchemaDefinition::TYPE_NAME] = $typeResolver->getMaybeNamespacedTypeName();
+        
+        $typeKind = null;
         if ($typeResolver instanceof ObjectTypeResolverInterface) {
             $typeKind = SchemaDefinition::TYPE_OBJECT;
         } elseif ($typeResolver instanceof InterfaceTypeResolverInterface) {
@@ -44,6 +49,7 @@ abstract class AbstractSchemaDefinitionProvider implements SchemaDefinitionProvi
             $typeKind = SchemaDefinition::TYPE_INPUT_OBJECT;
         }
         $schemaDefinition[SchemaDefinition::TYPE_KIND] = $typeKind;
+
         unset($schemaDefinition[SchemaDefinition::TYPE_RESOLVER]);
     }
 }
