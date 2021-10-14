@@ -16,12 +16,11 @@ use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionTypes as GraphQLServerSche
 use GraphQLByPoP\GraphQLServer\Schema\SchemaHelpers;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
-use PoP\API\Registries\SchemaDefinitionRegistryInterface;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
+use PoP\API\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinitionTypes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Cache\CacheUtils;
@@ -54,7 +53,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     protected TranslationAPIInterface $translationAPI;
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
     protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver;
-    protected SchemaDefinitionRegistryInterface $schemaDefinitionRegistry;
     protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService;
 
     #[Required]
@@ -62,13 +60,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         TranslationAPIInterface $translationAPI,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
-        SchemaDefinitionRegistryInterface $schemaDefinitionRegistry,
         GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
     ): void {
         $this->translationAPI = $translationAPI;
         $this->schemaDefinitionService = $schemaDefinitionService;
         $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
-        $this->schemaDefinitionRegistry = $schemaDefinitionRegistry;
         $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
     }
 
@@ -118,7 +114,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             // If either not using cache, or using but the value had not been cached, then calculate the value
             if ($this->fullSchemaDefinition === null) {
                 // Get the schema definitions
-                $this->fullSchemaDefinition = $this->schemaDefinitionRegistry->getSchemaDefinition();
+                $this->fullSchemaDefinition = $this->schemaDefinitionService->getFullSchemaDefinition();
 
                 // If the schemaDefinition is null, it failed generating it. Then do nothing
                 if ($this->fullSchemaDefinition === null) {
