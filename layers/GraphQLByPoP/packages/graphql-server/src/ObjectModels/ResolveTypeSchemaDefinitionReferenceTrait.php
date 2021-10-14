@@ -37,7 +37,17 @@ trait ResolveTypeSchemaDefinitionReferenceTrait
         }
 
         // Check if it is an enum type
-        if ($typeName == GraphQLServerSchemaDefinitionTypes::TYPE_ENUM) {
+        // @todo Added temporary hack. Fix this!
+        // if ($typeName == GraphQLServerSchemaDefinitionTypes::TYPE_ENUM) {
+        if (in_array($typeName, [
+            'CommentStatus',
+            'CommentType',
+            'DefaultCondition',
+            'CustomPostStatus',
+            'CustomPostContentFormat',
+            'MediaDevice',
+            'EventScope',
+        ])) {
             return new EnumType(
                 $this->fullSchemaDefinition,
                 $this->schemaDefinitionPath
