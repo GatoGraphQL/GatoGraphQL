@@ -14,11 +14,15 @@ class RootObjectTypeSchemaDefinitionProvider extends ObjectTypeSchemaDefinitionP
 {
     public function getSchemaDefinition(): array
     {
+        $schemaDefinition = parent::getSchemaDefinition();
         $globalSchemaDefinition = $this->getObjectTypeSchemaDefinition(true);
+        $schemaDefinition[SchemaDefinition::DIRECTIVES] = array_merge(
+            $schemaDefinition[SchemaDefinition::DIRECTIVES],
+            $globalSchemaDefinition[SchemaDefinition::DIRECTIVES]
+        );
         return array_merge(
-            parent::getSchemaDefinition(),
+            $schemaDefinition,
             [
-                SchemaDefinition::GLOBAL_DIRECTIVES => $globalSchemaDefinition[SchemaDefinition::DIRECTIVES],
                 SchemaDefinition::GLOBAL_FIELDS => $globalSchemaDefinition[SchemaDefinition::FIELDS],
                 SchemaDefinition::GLOBAL_CONNECTIONS => $globalSchemaDefinition[SchemaDefinition::CONNECTIONS],
             ]

@@ -50,6 +50,7 @@ class SchemaDefinition
     const DIRECTIVE_TYPE = 'directiveType';
     const DIRECTIVE_PIPELINE_POSITION = 'pipelinePosition';
     const DIRECTIVE_IS_REPEATABLE = 'isRepeatable';
+    const DIRECTIVE_IS_GLOBAL = 'isGlobal';
     const DIRECTIVE_NEEDS_DATA_TO_EXECUTE = 'needsDataToExecute';
     const DIRECTIVE_LIMITED_TO_FIELDS = 'limitedToFields';
     const DIRECTIVE_EXPRESSIONS = 'expressions';

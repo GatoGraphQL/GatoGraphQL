@@ -18,6 +18,7 @@ use PoP\API\ObjectModels\SchemaDefinition\TypeSchemaDefinitionProviderInterface;
 use PoP\API\ObjectModels\SchemaDefinition\UnionTypeSchemaDefinitionProvider;
 use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoP\API\PersistedQueries\PersistedQueryManagerInterface;
+use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
@@ -184,10 +185,10 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
      */
     private function moveGlobalTypeSchemaDefinition(array &$schemaDefinition, array &$rootTypeSchemaDefinition): void
     {
-        $schemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES] = array_merge(
-            $schemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES],
-            $rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]
-        );
+        // $schemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES] = array_merge(
+        //     $schemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES],
+        //     $rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]
+        // );
         $schemaDefinition[SchemaDefinition::GLOBAL_FIELDS] = array_merge(
             $schemaDefinition[SchemaDefinition::GLOBAL_FIELDS],
             $rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_FIELDS]
@@ -196,7 +197,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $schemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS],
             $rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS]
         );
-        unset($rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]);
+        // unset($rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]);
         unset($rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_FIELDS]);
         unset($rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS]);
     }
@@ -209,7 +210,10 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         $schemaDefinitionProvider = new DirectiveSchemaDefinitionProvider($directiveResolver, $relationalTypeResolver);
         $directiveName = $directiveResolver->getDirectiveName();
         $directiveSchemaDefinition = $schemaDefinitionProvider->getSchemaDefinition();
-        $schemaDefinition[SchemaDefinition::DIRECTIVES][$directiveName] = $directiveSchemaDefinition;
+        $entry = $directiveSchemaDefinition[SchemaDefinition::DIRECTIVE_IS_GLOBAL]
+            ? SchemaDefinition::GLOBAL_DIRECTIVES
+            : SchemaDefinition::DIRECTIVES;
+        $schemaDefinition[$entry][$directiveName] = $directiveSchemaDefinition;
 
         $this->addAccessedTypeAndDirectiveResolvers(
             $schemaDefinitionProvider->getAccessedTypeAndDirectiveResolvers()
