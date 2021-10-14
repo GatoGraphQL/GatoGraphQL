@@ -53,7 +53,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * @var InterfaceTypeFieldResolverInterface[]|null
      */
-    protected ?array $interfaceTypeFieldResolvers = null;
+    protected ?array $implementedInterfaceTypeFieldResolversCache = null;
 
     /**
      * Watch out! This function will be overridden for the UnionTypeResolver
@@ -731,10 +731,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     final protected function getAllImplementedInterfaceTypeFieldResolvers(): array
     {
-        if ($this->interfaceTypeFieldResolvers === null) {
-            $this->interfaceTypeFieldResolvers = $this->calculateAllImplementedInterfaceTypeFieldResolvers();
+        if ($this->implementedInterfaceTypeFieldResolversCache === null) {
+            $this->implementedInterfaceTypeFieldResolversCache = $this->calculateAllImplementedInterfaceTypeFieldResolvers();
         }
-        return $this->interfaceTypeFieldResolvers;
+        return $this->implementedInterfaceTypeFieldResolversCache;
     }
 
     /**
