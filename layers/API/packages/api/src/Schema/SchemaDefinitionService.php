@@ -75,7 +75,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         return $this->persistentCache;
     }
 
-    public function getFullSchemaDefinition(): array
+    public function &getFullSchemaDefinition(): array
     {
         $schemaDefinition = null;
         // Attempt to retrieve from the cache, if enabled
