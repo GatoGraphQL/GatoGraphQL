@@ -22,9 +22,17 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface
     public function isFieldAMutation(string $field): ?bool;
     public function getAllMandatoryDirectivesForFields(): array;
     /**
-     * Array of field name => resolver
+     * The "executable" FieldResolver is the first one in the list
+     * for each field, as according to their priority.
+     * 
+     * @return array<string, ObjectTypeFieldResolverInterface> Key: fieldName, Value: FieldResolver
+     */
+    public function getExecutableObjectTypeFieldResolvers(bool $global): array;
+    /**
+     * The list of all the FieldResolvers that resolve each field, for
+     * every fieldName
      *
-     * @return array<string, ObjectTypeFieldResolverInterface>
+     * @return array<string, ObjectTypeFieldResolverInterface[]> Key: fieldName, Value: List of FieldResolvers
      */
     public function getObjectTypeFieldResolvers(bool $global): array;
 }

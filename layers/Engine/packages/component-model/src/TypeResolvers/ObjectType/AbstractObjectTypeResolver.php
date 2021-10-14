@@ -516,18 +516,29 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->errorProvider->getNoFieldError($this->getID($object), $fieldName, $this->getMaybeNamespacedTypeName());
     }
 
+    final public function getExecutableObjectTypeFieldResolvers(bool $global): array
+    {
+        $objectTypeFieldResolvers = [];
+        foreach ($this->getObjectTypeFieldResolvers($global) as $fieldName => $fieldObjectTypeFieldResolvers) {
+            // Get the first item from the list of resolvers. That's the one that will be executed
+            $objectTypeFieldResolvers[$fieldName] = $fieldObjectTypeFieldResolvers[0];
+        }
+        return $objectTypeFieldResolvers;
+    }
+
     final public function getObjectTypeFieldResolvers(bool $global): array
     {
-        $schemaObjectTypeFieldResolvers = [];
-        foreach ($this->getAllObjectTypeFieldResolvers() as $fieldName => $objectTypeFieldResolvers) {
-            // Get the documentation from the first element
-            $objectTypeFieldResolver = $objectTypeFieldResolvers[0];
-            $isGlobal = $objectTypeFieldResolver->isGlobal($this, $fieldName);
-            if (($global && $isGlobal) || (!$global && !$isGlobal)) {
-                $schemaObjectTypeFieldResolvers[$fieldName] =  $objectTypeFieldResolver;
+        $objectTypeFieldResolvers = [];
+        foreach ($this->getAllObjectTypeFieldResolvers() as $fieldName => $fieldObjectTypeFieldResolvers) {
+            $matchesGlobalFieldObjectTypeFieldResolvers = array_filter(
+                $fieldObjectTypeFieldResolvers,
+                fn (ObjectTypeFieldResolverInterface $objectTypeFieldResolver) => $global === $objectTypeFieldResolver->isGlobal($this, $fieldName)
+            );
+            if ($matchesGlobalFieldObjectTypeFieldResolvers !== []) {
+                $objectTypeFieldResolvers[$fieldName] = $matchesGlobalFieldObjectTypeFieldResolvers;
             }
         }
-        return $schemaObjectTypeFieldResolvers;
+        return $objectTypeFieldResolvers;
     }
 
     protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = []): void
@@ -546,7 +557,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         // Add the fields (non-global)
         $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::FIELDS] = [];
-        $schemaObjectTypeFieldResolvers = $this->getObjectTypeFieldResolvers(false);
+        $schemaObjectTypeFieldResolvers = $this->getExecutableObjectTypeFieldResolvers(false);
         foreach ($schemaObjectTypeFieldResolvers as $fieldName => $objectTypeFieldResolver) {
             $this->addFieldSchemaDefinition($objectTypeFieldResolver, $fieldName, $stackMessages, $generalMessages, $options);
         }

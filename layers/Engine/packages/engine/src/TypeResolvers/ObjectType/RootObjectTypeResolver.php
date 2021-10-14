@@ -66,7 +66,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
         }
 
         // Add the fields (global)
-        $schemaObjectTypeFieldResolvers = $this->getObjectTypeFieldResolvers(true);
+        $schemaObjectTypeFieldResolvers = $this->getExecutableObjectTypeFieldResolvers(true);
         foreach ($schemaObjectTypeFieldResolvers as $fieldName => $objectTypeFieldResolver) {
             $this->addFieldSchemaDefinition($objectTypeFieldResolver, $fieldName, $stackMessages, $generalMessages, $options);
         }

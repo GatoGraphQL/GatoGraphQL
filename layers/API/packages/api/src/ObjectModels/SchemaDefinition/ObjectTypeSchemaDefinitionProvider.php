@@ -49,7 +49,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
         // Add the fields (non-global)
         $schemaDefinition[SchemaDefinition::FIELDS] = [];
         $schemaDefinition[SchemaDefinition::CONNECTIONS] = [];
-        $schemaObjectTypeFieldResolvers = $this->objectTypeResolver->getObjectTypeFieldResolvers($useGlobal);
+        $schemaObjectTypeFieldResolvers = $this->objectTypeResolver->getExecutableObjectTypeFieldResolvers($useGlobal);
         foreach ($schemaObjectTypeFieldResolvers as $fieldName => $objectTypeFieldResolver) {
             $this->addFieldSchemaDefinition($schemaDefinition, $objectTypeFieldResolver, $fieldName);
         }
