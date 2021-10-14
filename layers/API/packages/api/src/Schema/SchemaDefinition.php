@@ -12,12 +12,12 @@ class SchemaDefinition extends UpstreamSchemaDefinition
     const IMPLEMENTED_INTERFACES = 'implementedInterfaces';
     const MEMBER_OBJECT_TYPES = 'memberObjectTypes';
 
-    const TYPE_OBJECT = 'object';
-    const TYPE_INTERFACE = 'interface';
-    const TYPE_UNION = 'union';
-    const TYPE_SCALAR = 'scalar';
-    const TYPE_ENUM = 'enum';
-    const TYPE_INPUT_OBJECT = 'inputObject';
+    const TYPE_OBJECT = 'Object';
+    const TYPE_INTERFACE = 'Interface';
+    const TYPE_UNION = 'Union';
+    const TYPE_SCALAR = 'Scalar';
+    const TYPE_ENUM = 'Enum';
+    const TYPE_INPUT_OBJECT = 'InputObject';
 
     const PERSISTED_FRAGMENTS = 'persistedFragments';
     const PERSISTED_QUERIES = 'persistedQueries';
