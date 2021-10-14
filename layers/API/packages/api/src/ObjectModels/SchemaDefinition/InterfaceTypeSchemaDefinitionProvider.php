@@ -32,9 +32,9 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
         }
 
         if ($partiallyImplementedInterfaceTypeResolvers = $this->interfaceTypeResolver->getPartiallyImplementedInterfaceTypeResolvers()) {
-            $schemaDefinition[SchemaDefinition::IMPLEMENTED_INTERFACES] = [];
+            $schemaDefinition[SchemaDefinition::INTERFACES] = [];
             foreach ($partiallyImplementedInterfaceTypeResolvers as $interfaceTypeResolver) {
-                $schemaDefinition[SchemaDefinition::IMPLEMENTED_INTERFACES][] = $interfaceTypeResolver->getMaybeNamespacedTypeName();
+                $schemaDefinition[SchemaDefinition::INTERFACES][] = $interfaceTypeResolver->getMaybeNamespacedTypeName();
                 $this->accessedTypeAndDirectiveResolvers[$interfaceTypeResolver::class] = $interfaceTypeResolver;
             }
         }
