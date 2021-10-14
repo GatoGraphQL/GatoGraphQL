@@ -7,9 +7,6 @@ services:
     PoP\API\Schema\FieldQueryConvertorInterface:
         class: \PoP\API\Schema\FieldQueryConvertor
 
-    PoP\API\Registries\SchemaDefinitionRegistryInterface:
-        class: \PoP\API\Registries\SchemaDefinitionRegistry
-
     PoP\API\PersistedQueries\PersistedFragmentManagerInterface:
         class: \PoP\API\PersistedQueries\PersistedFragmentManager
 
