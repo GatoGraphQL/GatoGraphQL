@@ -41,7 +41,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * @var InterfaceTypeResolverInterface[]|null
      */
-    protected ?array $interfaceTypeResolvers = null;
+    protected ?array $implementedInterfaceTypeResolversCache = null;
     /**
      * @var array<string, array>
      */
@@ -764,10 +764,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     final public function getAllImplementedInterfaceTypeResolvers(): array
     {
-        if ($this->interfaceTypeResolvers === null) {
-            $this->interfaceTypeResolvers = $this->calculateAllImplementedInterfaceTypeResolvers();
+        if ($this->implementedInterfaceTypeResolversCache === null) {
+            $this->implementedInterfaceTypeResolversCache = $this->calculateAllImplementedInterfaceTypeResolvers();
         }
-        return $this->interfaceTypeResolvers;
+        return $this->implementedInterfaceTypeResolversCache;
     }
 
     /**
