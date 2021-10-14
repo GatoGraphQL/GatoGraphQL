@@ -29,7 +29,7 @@ trait ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTra
     public function getMandatoryDirectivesForFields(ObjectTypeResolverInterface $objectTypeResolver): array
     {
         $mandatoryDirectivesForFields = [];
-        $interfaceTypeResolvers = $objectTypeResolver->getAllImplementedInterfaceTypeResolvers();
+        $interfaceTypeResolvers = $objectTypeResolver->getImplementedInterfaceTypeResolvers();
         // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
         foreach ($this->getFieldNames() as $fieldName) {
             // Calculate all the interfaces that define this fieldName

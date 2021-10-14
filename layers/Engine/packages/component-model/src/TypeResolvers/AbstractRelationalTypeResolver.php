@@ -791,7 +791,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             ],
             array_map(
                 'get_class',
-                $this->getAllImplementedInterfaceTypeResolvers()
+                $this->getImplementedInterfaceTypeResolvers()
             )
         );
         foreach ($classes as $class) {
@@ -1281,7 +1281,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             ],
             array_map(
                 'get_class',
-                $this->getAllImplementedInterfaceTypeResolvers()
+                $this->getImplementedInterfaceTypeResolvers()
             )
         );
         foreach ($classes as $class) {

@@ -289,7 +289,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                         $interfaceTypeResolverClass,
                         array_map(
                             'get_class',
-                            $objectTypeResolver->getAllImplementedInterfaceTypeResolvers()
+                            $objectTypeResolver->getImplementedInterfaceTypeResolvers()
                         )
                     )
                 );
@@ -452,7 +452,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      *
      * @return InterfaceTypeResolverInterface[]
      */
-    public function getAllImplementedInterfaceTypeResolvers(): array
+    public function getImplementedInterfaceTypeResolvers(): array
     {
         return [];
     }

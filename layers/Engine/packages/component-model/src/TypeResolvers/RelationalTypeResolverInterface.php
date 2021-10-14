@@ -21,7 +21,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
     /**
      * @return InterfaceTypeResolverInterface[]
      */
-    public function getAllImplementedInterfaceTypeResolvers(): array;
+    public function getImplementedInterfaceTypeResolvers(): array;
     /**
      * @param string|int|array<string|int> $dbObjectIDOrIDs
      * @return string|int|array<string|int>
