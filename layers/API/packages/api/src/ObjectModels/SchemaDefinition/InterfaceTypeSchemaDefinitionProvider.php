@@ -26,7 +26,7 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
         $schemaDefinition = parent::getSchemaDefinition();
 
         $schemaDefinition[SchemaDefinition::FIELDS] = [];
-        $schemaInterfaceTypeFieldResolvers = $this->interfaceTypeResolver->getAllInterfaceTypeFieldResolversByField();
+        $schemaInterfaceTypeFieldResolvers = $this->interfaceTypeResolver->getInterfaceTypeFieldResolversByField();
         foreach ($schemaInterfaceTypeFieldResolvers as $fieldName => $interfaceTypeFieldResolvers) {
             $interfaceTypeFieldResolver = $interfaceTypeFieldResolvers[0];
             $this->addFieldSchemaDefinition($schemaDefinition, $interfaceTypeFieldResolver, $fieldName);

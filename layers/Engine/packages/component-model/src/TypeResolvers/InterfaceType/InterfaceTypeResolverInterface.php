@@ -22,7 +22,7 @@ interface InterfaceTypeResolverInterface extends TypeResolverInterface
      *
      * @return array<string, InterfaceTypeFieldResolverInterface[]>
      */
-    public function getAllInterfaceTypeFieldResolversByField(): array;
+    public function getInterfaceTypeFieldResolversByField(): array;
     /**
      * Produce an array of all the attached ObjectTypeFieldResolverInterfaces
      *
