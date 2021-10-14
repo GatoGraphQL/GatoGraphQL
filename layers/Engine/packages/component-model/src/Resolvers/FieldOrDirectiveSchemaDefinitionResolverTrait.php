@@ -62,18 +62,8 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
         $schemaDefinition = [
             SchemaDefinition::NAME => $name,
             SchemaDefinition::TYPE_RESOLVER => $typeResolver,
+            SchemaDefinition::TYPE_NAME => $typeResolver->getMaybeNamespacedTypeName(),
         ];
-        if ($typeResolver instanceof EnumTypeResolverInterface) {
-            $schemaDefinition[SchemaDefinition::TYPE_NAME] = SchemaDefinitionTypes::TYPE_ENUM;
-            /** @var EnumTypeResolverInterface */
-            $enumTypeResolver = $typeResolver;
-            $this->doAddSchemaDefinitionEnumValuesForField(
-                $schemaDefinition,
-                $enumTypeResolver,
-            );
-        } else {
-            $schemaDefinition[SchemaDefinition::TYPE_NAME] = $typeResolver->getMaybeNamespacedTypeName();
-        }
         if ($description !== null) {
             $schemaDefinition[SchemaDefinition::DESCRIPTION] = $description;
         }
