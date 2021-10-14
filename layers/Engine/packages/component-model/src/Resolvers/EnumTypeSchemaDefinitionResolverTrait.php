@@ -21,11 +21,9 @@ trait EnumTypeSchemaDefinitionResolverTrait
         $enumValues = $enumTypeResolver->getEnumValues();
         $enumValueDeprecationMessages = $enumTypeResolver->getEnumValueDeprecationMessages();
         $enumValueDescriptions = $enumTypeResolver->getEnumValueDescriptions();
-        $enumName = $enumTypeResolver->getMaybeNamespacedTypeName();
         foreach ($enumValues as $enumValue) {
             $enum = [
                 SchemaDefinition::NAME => $enumValue,
-                SchemaDefinition::ENUM_NAME => $enumName,
             ];
             if ($description = $enumValueDescriptions[$enumValue] ?? null) {
                 $enum[SchemaDefinition::DESCRIPTION] = $description;
