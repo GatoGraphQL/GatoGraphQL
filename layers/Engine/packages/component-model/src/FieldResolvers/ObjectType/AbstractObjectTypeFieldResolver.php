@@ -718,11 +718,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
         if ($args = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::ARGS] = $args;
-        }
-
-        // Check it args can be queried without their name
-        if ($this->enableOrderedSchemaFieldArgs($objectTypeResolver, $fieldName)) {
-            $schemaDefinition[SchemaDefinition::ORDERED_ARGS_ENABLED] = true;
+            
+            // Check it args can be queried without their name
+            if ($this->enableOrderedSchemaFieldArgs($objectTypeResolver, $fieldName)) {
+                $schemaDefinition[SchemaDefinition::ORDERED_ARGS_ENABLED] = true;
+            }
         }
 
         if (Environment::enableSemanticVersionConstraints()) {
