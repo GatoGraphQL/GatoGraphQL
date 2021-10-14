@@ -25,11 +25,9 @@ use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTr
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
-use PoP\ComponentModel\Schema\SchemaDefinitionTypes;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -718,7 +716,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
         if ($args = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::ARGS] = $args;
-            
+
             // Check it args can be queried without their name
             if ($this->enableOrderedSchemaFieldArgs($objectTypeResolver, $fieldName)) {
                 $schemaDefinition[SchemaDefinition::ORDERED_ARGS_ENABLED] = true;
