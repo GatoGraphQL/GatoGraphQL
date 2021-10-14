@@ -73,17 +73,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         return $this->persistentCache;
     }
 
-    /**
-     * It returns the full schema, expanded with all data required to satisfy
-     * GraphQL's introspection fields (starting from "__schema")
-     *
-     * It can store the value in the cache.
-     * Use cache with care: if the schema is dynamic, it should not be cached.
-     * Public schema: can cache, Private schema: cannot cache.
-     *
-     * Return null if retrieving the schema data via field "fullSchema" failed
-     */
-    public function &getFullSchemaDefinitionForGraphQL(): ?array
+    public function &getFullSchemaDefinitionForGraphQL(): array
     {
         if ($this->fullSchemaDefinitionForGraphQL === null) {
             $this->fullSchemaDefinitionForGraphQL = $this->doGetGraphQLSchemaDefinition();
@@ -92,6 +82,14 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         return $this->fullSchemaDefinitionForGraphQL;
     }
 
+    /**
+     * It can store the value in the cache.
+     * 
+     * Use cache with care: If the schema is dynamic, it should not be cached!
+     * 
+     *   Public schema: can cache
+     *   Private schema: cannot cache
+     */
     private function &doGetGraphQLSchemaDefinition(): array
     {
         // Attempt to retrieve from the cache, if enabled
