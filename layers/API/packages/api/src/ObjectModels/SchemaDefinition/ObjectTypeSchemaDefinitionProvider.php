@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
 use PoP\API\Schema\SchemaDefinition;
+use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -21,7 +22,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
 
     public function getType(): string
     {
-        return SchemaDefinition::TYPE_OBJECT;
+        return TypeKinds::OBJECT;
     }
 
     public function getSchemaDefinition(): array

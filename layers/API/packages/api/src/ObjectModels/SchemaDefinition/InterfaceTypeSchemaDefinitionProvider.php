@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
 use PoP\API\Schema\SchemaDefinition;
+use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
@@ -23,7 +24,7 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
 
     public function getType(): string
     {
-        return SchemaDefinition::TYPE_INTERFACE;
+        return TypeKinds::INTERFACE;
     }
 
     public function getSchemaDefinition(): array

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
 use PoP\API\Schema\SchemaDefinition;
+use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -18,7 +19,7 @@ class UnionTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProv
 
     public function getType(): string
     {
-        return SchemaDefinition::TYPE_UNION;
+        return TypeKinds::UNION;
     }
 
     public function getSchemaDefinition(): array

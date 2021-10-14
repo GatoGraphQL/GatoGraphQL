@@ -8,16 +8,9 @@ use PoP\ComponentModel\Schema\SchemaDefinition as UpstreamSchemaDefinition;
 
 class SchemaDefinition extends UpstreamSchemaDefinition
 {
-    const TYPE_KIND = 'typeKind';
-    
-    const TYPE_OBJECT = 'Object';
-    const TYPE_INTERFACE = 'Interface';
-    const TYPE_UNION = 'Union';
-    const TYPE_SCALAR = 'Scalar';
-    const TYPE_ENUM = 'Enum';
-    const TYPE_INPUT_OBJECT = 'InputObject';
+    public const TYPE_KIND = 'typeKind';
 
-    const PERSISTED_FRAGMENTS = 'persistedFragments';
-    const PERSISTED_QUERIES = 'persistedQueries';
-    const FRAGMENT_RESOLUTION = 'resolution';
+    public const PERSISTED_FRAGMENTS = 'persistedFragments';
+    public const PERSISTED_QUERIES = 'persistedQueries';
+    public const FRAGMENT_RESOLUTION = 'resolution';
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
 use PoP\API\Schema\SchemaDefinition;
+use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
 
 class ScalarTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvider
@@ -17,7 +18,7 @@ class ScalarTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
 
     public function getType(): string
     {
-        return SchemaDefinition::TYPE_SCALAR;
+        return TypeKinds::SCALAR;
     }
 
     public function getSchemaDefinition(): array

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
 use PoP\API\Schema\SchemaDefinition;
+use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
@@ -36,17 +37,17 @@ abstract class AbstractSchemaDefinitionProvider implements SchemaDefinitionProvi
         
         $typeKind = null;
         if ($typeResolver instanceof ObjectTypeResolverInterface) {
-            $typeKind = SchemaDefinition::TYPE_OBJECT;
+            $typeKind = TypeKinds::OBJECT;
         } elseif ($typeResolver instanceof InterfaceTypeResolverInterface) {
-            $typeKind = SchemaDefinition::TYPE_INTERFACE;
+            $typeKind = TypeKinds::INTERFACE;
         } elseif ($typeResolver instanceof UnionTypeResolverInterface) {
-            $typeKind = SchemaDefinition::TYPE_UNION;
+            $typeKind = TypeKinds::UNION;
         } elseif ($typeResolver instanceof ScalarTypeResolverInterface) {
-            $typeKind = SchemaDefinition::TYPE_SCALAR;
+            $typeKind = TypeKinds::SCALAR;
         } elseif ($typeResolver instanceof EnumTypeResolverInterface) {
-            $typeKind = SchemaDefinition::TYPE_ENUM;
+            $typeKind = TypeKinds::ENUM;
         } elseif ($typeResolver instanceof InputObjectTypeResolverInterface) {
-            $typeKind = SchemaDefinition::TYPE_INPUT_OBJECT;
+            $typeKind = TypeKinds::INPUT_OBJECT;
         }
         $schemaDefinition[SchemaDefinition::TYPE_KIND] = $typeKind;
 

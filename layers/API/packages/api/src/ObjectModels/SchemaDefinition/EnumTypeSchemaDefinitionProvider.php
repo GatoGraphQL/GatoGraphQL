@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
-use PoP\API\Schema\SchemaDefinition;
+use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\Resolvers\EnumTypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 
@@ -20,7 +20,7 @@ class EnumTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvi
 
     public function getType(): string
     {
-        return SchemaDefinition::TYPE_ENUM;
+        return TypeKinds::ENUM;
     }
 
     public function getSchemaDefinition(): array
