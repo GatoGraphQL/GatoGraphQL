@@ -29,7 +29,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @var array<string, ObjectTypeFieldResolverInterface[]>
      */
-    protected array $objectTypeFieldResolversByFieldCache = [];
+    protected array $objectTypeFieldResolversForFieldCache = [];
     /**
      * @var array<string, array>|null
      */
@@ -37,7 +37,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * @var array<string, ObjectTypeFieldResolverInterface>|null
      */
-    protected ?array $schemaObjectTypeFieldResolvers = null;
+    protected ?array $objectTypeFieldResolversByFieldCache = null;
     /**
      * @var InterfaceTypeResolverInterface[]|null
      */
@@ -691,10 +691,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final protected function getAllObjectTypeFieldResolversByField(): array
     {
-        if ($this->schemaObjectTypeFieldResolvers === null) {
-            $this->schemaObjectTypeFieldResolvers = $this->calculateAllObjectTypeFieldResolvers();
+        if ($this->objectTypeFieldResolversByFieldCache === null) {
+            $this->objectTypeFieldResolversByFieldCache = $this->calculateAllObjectTypeFieldResolvers();
         }
-        return $this->schemaObjectTypeFieldResolvers;
+        return $this->objectTypeFieldResolversByFieldCache;
     }
 
     private function calculateAllObjectTypeFieldResolvers(): array
@@ -811,11 +811,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     {
         // Calculate the fieldResolver to process this field if not already in the cache
         // If none is found, this value will be set to NULL. This is needed to stop attempting to find the fieldResolver
-        if (!isset($this->objectTypeFieldResolversByFieldCache[$field])) {
-            $this->objectTypeFieldResolversByFieldCache[$field] = $this->calculateObjectTypeFieldResolversForField($field);
+        if (!isset($this->objectTypeFieldResolversForFieldCache[$field])) {
+            $this->objectTypeFieldResolversForFieldCache[$field] = $this->calculateObjectTypeFieldResolversForField($field);
         }
 
-        return $this->objectTypeFieldResolversByFieldCache[$field];
+        return $this->objectTypeFieldResolversForFieldCache[$field];
     }
 
     final public function hasObjectTypeFieldResolversForField(string $field): bool
