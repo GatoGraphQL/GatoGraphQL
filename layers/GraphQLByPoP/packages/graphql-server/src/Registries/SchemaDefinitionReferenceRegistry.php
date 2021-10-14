@@ -84,7 +84,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      *
      * Return null if retrieving the schema data via field "fullSchema" failed
      */
-    public function &getFullSchemaDefinition(): ?array
+    public function &getGraphQLSchemaDefinition(): ?array
     {
         // Use a bool flag, because the fullSchemaDefinition can be null!
         if (!$this->isFullSchemaDefinitionLoaded) {

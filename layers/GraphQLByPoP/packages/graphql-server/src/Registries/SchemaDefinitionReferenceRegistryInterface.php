@@ -13,7 +13,7 @@ interface SchemaDefinitionReferenceRegistryInterface
      *
      * Return null if retrieving the schema data via field "fullSchema" failed
      */
-    public function &getFullSchemaDefinition(): ?array;
+    public function &getGraphQLSchemaDefinition(): ?array;
     public function registerSchemaDefinitionReference(
         AbstractSchemaDefinitionReferenceObject $referenceObject
     ): string;
