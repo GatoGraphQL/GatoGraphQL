@@ -32,7 +32,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     {
         $vars = ApplicationState::getVars();
         if ($vars['nested-mutations-enabled']) {
-            return $this->getRootTypeResolver();
+            return $this->getRootObjectTypeResolver();
         }
 
         return $this->queryRootObjectTypeResolver;
@@ -49,7 +49,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
         }
         $vars = ApplicationState::getVars();
         if ($vars['nested-mutations-enabled']) {
-            return $this->getRootTypeResolver();
+            return $this->getRootObjectTypeResolver();
         }
 
         return $this->mutationRootObjectTypeResolver;

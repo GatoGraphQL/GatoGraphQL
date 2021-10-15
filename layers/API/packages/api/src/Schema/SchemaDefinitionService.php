@@ -95,7 +95,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             }
         }
         if ($schemaDefinition === null) {
-            $rootObjectTypeResolver = $this->getRootTypeResolver();
+            $rootObjectTypeResolver = $this->getRootObjectTypeResolver();
             $schemaDefinition = [
                 SchemaDefinition::QUERY_TYPE => $rootObjectTypeResolver->getMaybeNamespacedTypeName(),
                 SchemaDefinition::TYPES => [],

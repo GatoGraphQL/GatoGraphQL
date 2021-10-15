@@ -19,7 +19,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
     }
 
-    public function getRootTypeResolver(): ObjectTypeResolverInterface
+    public function getRootObjectTypeResolver(): ObjectTypeResolverInterface
     {
         return $this->rootObjectTypeResolver;
     }

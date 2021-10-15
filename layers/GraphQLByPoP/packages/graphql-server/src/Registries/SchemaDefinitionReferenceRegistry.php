@@ -135,7 +135,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $enableNestedMutations = $vars['nested-mutations-enabled'];
         $exposeSchemaIntrospectionFieldInSchema = ComponentConfiguration::exposeSchemaIntrospectionFieldInSchema();
 
-        $rootTypeResolver = $this->graphQLSchemaDefinitionService->getRootTypeResolver();
+        $rootTypeResolver = $this->graphQLSchemaDefinitionService->getRootObjectTypeResolver();
         $rootTypeName = $rootTypeResolver->getMaybeNamespacedTypeName();
         $queryRootTypeName = null;
         if (!$enableNestedMutations) {
