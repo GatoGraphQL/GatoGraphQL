@@ -15,7 +15,6 @@ class SchemaDefinition
     public const IS_NON_NULLABLE_ITEMS_IN_ARRAY = 'isNonNullableItemsInArray';
     public const IS_ARRAY_OF_ARRAYS = 'isArrayOfArrays';
     public const IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS = 'isNonNullableItemsInArrayOfArrays';
-    public const REFERENCED_TYPE = 'referencedType';
     public const DESCRIPTION = 'description';
     public const SPECIFIED_BY_URL = 'specifiedByURL';
     public const VERSION = 'version';
