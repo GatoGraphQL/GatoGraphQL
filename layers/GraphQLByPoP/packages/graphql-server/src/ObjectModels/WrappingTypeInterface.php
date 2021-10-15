@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-interface TypeWrapperInterface extends TypeInterface
+interface WrappingTypeInterface extends TypeInterface
 {
     public function getWrappedType(): TypeInterface;
     public function getWrappedTypeID(): string;
