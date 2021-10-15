@@ -475,7 +475,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
     }
 
-    public function registerSchemaDefinitionReference(
+    public function registerSchemaDefinitionReferenceObject(
         SchemaDefinitionReferenceObjectInterface $schemaDefinitionReferenceObject,
     ): string {
         $schemaDefinitionPath = $schemaDefinitionReferenceObject->getSchemaDefinitionPath();
@@ -489,7 +489,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $this->fullSchemaDefinitionReferenceDictionary[$schemaDefinitionReferenceObjectID] = $schemaDefinitionReferenceObject;
         return $schemaDefinitionReferenceObjectID;
     }
-    public function getSchemaDefinitionReference(
+    public function getSchemaDefinitionReferenceObject(
         string $schemaDefinitionReferenceObjectID
     ): ?SchemaDefinitionReferenceObjectInterface {
         return $this->fullSchemaDefinitionReferenceDictionary[$schemaDefinitionReferenceObjectID] ?? null;

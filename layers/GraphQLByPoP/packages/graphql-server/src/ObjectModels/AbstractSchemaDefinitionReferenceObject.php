@@ -32,7 +32,7 @@ abstract class AbstractSchemaDefinitionReferenceObject implements SchemaDefiniti
 
         // Register the object, and get back its ID
         $schemaDefinitionReferenceRegistry = SchemaDefinitionReferenceRegistryFacade::getInstance();
-        $this->id = $schemaDefinitionReferenceRegistry->registerSchemaDefinitionReference($this);
+        $this->id = $schemaDefinitionReferenceRegistry->registerSchemaDefinitionReferenceObject($this);
     }
 
     public function getSchemaDefinition(): array

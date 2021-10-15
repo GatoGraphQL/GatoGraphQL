@@ -139,7 +139,7 @@ class SchemaDefinitionHelpers
             /**
              * @var Field
              */
-            $field = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReference($schemaDefinitionID);
+            $field = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($schemaDefinitionID);
             $fields[] = $field;
         }
         return $fields;

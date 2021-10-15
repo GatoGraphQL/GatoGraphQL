@@ -60,6 +60,6 @@ class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoad
             );
         }
 
-        return $this->schemaDefinitionReferenceRegistry->getSchemaDefinitionReference($typeID);
+        return $this->schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
     }
 }
