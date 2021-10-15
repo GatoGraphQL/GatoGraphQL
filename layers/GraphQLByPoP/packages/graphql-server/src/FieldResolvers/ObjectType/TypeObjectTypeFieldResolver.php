@@ -9,7 +9,7 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\HasFieldsTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasInterfacesTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasPossibleTypesTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\InputObjectType;
-use GraphQLByPoP\GraphQLServer\ObjectModels\NestableTypeInterface;
+use GraphQLByPoP\GraphQLServer\ObjectModels\TypeWrapperInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\ScalarType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\TypeInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\TypeKindEnumTypeResolver;
@@ -231,7 +231,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'ofType':
                 // From GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-HAJbLA4DABCBIu9N):
                 // "should be non-null for NON_NULL and LIST only, must be null for the others"
-                if ($type instanceof NestableTypeInterface) {
+                if ($type instanceof TypeWrapperInterface) {
                     return $type->getNestedTypeID();
                 }
                 return null;

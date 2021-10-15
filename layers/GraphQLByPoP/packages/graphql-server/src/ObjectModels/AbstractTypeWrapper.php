@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-abstract class AbstractTypeWrapper extends AbstractType implements NestableTypeInterface
+abstract class AbstractTypeWrapper extends AbstractType implements TypeWrapperInterface
 {
     public function __construct(
         array &$fullSchemaDefinition,
