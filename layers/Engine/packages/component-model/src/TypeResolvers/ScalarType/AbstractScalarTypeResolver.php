@@ -29,7 +29,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         return $scalarValue;
     }
 
-    protected function getError(string $message): Error
+    final protected function getError(string $message): Error
     {
         return new Error(
             sprintf('%s-cast', $this->getTypeName()),
@@ -61,7 +61,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         return null;
     }
 
-    protected function validateFilterVar(mixed $inputValue, int $filter): ?Error
+    final protected function validateFilterVar(mixed $inputValue, int $filter): ?Error
     {
         $valid = filter_var($inputValue, $filter);
         if ($valid === false) {
