@@ -13,23 +13,23 @@ use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 use PoPSchema\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
     protected LocationObjectTypeResolver $locationObjectTypeResolver;
     
     #[Required]
     final public function autowireEventObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
-        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
         LocationObjectTypeResolver $locationObjectTypeResolver,
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
         $this->locationObjectTypeResolver = $locationObjectTypeResolver;
     }
 
@@ -59,8 +59,8 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'dates' => $this->stringScalarTypeResolver,
             'times' => $this->stringScalarTypeResolver,
             'startDateReadable' => $this->stringScalarTypeResolver,
-            'daterange' => $this->objectScalarTypeResolver,
-            'daterangetime' => $this->objectScalarTypeResolver,
+            'daterange' => $this->jsonObjectScalarTypeResolver,
+            'daterangetime' => $this->jsonObjectScalarTypeResolver,
             'locations' => $this->locationObjectTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

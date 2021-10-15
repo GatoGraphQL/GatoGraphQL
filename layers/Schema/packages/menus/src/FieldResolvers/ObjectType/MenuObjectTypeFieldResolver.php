@@ -14,13 +14,13 @@ use PoPSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuItemObjectTypeResolver;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry;
-    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
     protected MenuItemObjectTypeResolver $menuItemObjectTypeResolver;
     protected MenuTypeAPIInterface $menuTypeAPI;
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
@@ -28,13 +28,13 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     #[Required]
     final public function autowireMenuObjectTypeFieldResolver(
         MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
-        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
         MenuItemObjectTypeResolver $menuItemObjectTypeResolver,
         MenuTypeAPIInterface $menuTypeAPI,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {
         $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
-        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
         $this->menuItemObjectTypeResolver = $menuItemObjectTypeResolver;
         $this->menuTypeAPI = $menuTypeAPI;
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
@@ -59,7 +59,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'items' => $this->menuItemObjectTypeResolver,
-            'itemDataEntries' => $this->objectScalarTypeResolver,
+            'itemDataEntries' => $this->jsonObjectScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

@@ -9,21 +9,21 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GuzzleHelpers\GuzzleHelpers;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
-    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
     protected URLScalarTypeResolver $urlScalarTypeResolver;
 
     #[Required]
     final public function autowireOperatorGlobalObjectTypeFieldResolver(
-        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
         URLScalarTypeResolver $urlScalarTypeResolver,
     ): void {
-        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
     }
 
@@ -38,8 +38,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'getJSON' => $this->objectScalarTypeResolver,
-            'getAsyncJSON' => $this->objectScalarTypeResolver,
+            'getJSON' => $this->jsonObjectScalarTypeResolver,
+            'getAsyncJSON' => $this->jsonObjectScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

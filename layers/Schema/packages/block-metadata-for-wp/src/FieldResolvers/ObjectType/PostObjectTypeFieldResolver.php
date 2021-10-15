@@ -12,20 +12,20 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
     final public function autowirePostObjectTypeFieldResolver(
-        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
-        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
@@ -46,7 +46,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'blockMetadata' => $this->objectScalarTypeResolver,
+            'blockMetadata' => $this->jsonObjectScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

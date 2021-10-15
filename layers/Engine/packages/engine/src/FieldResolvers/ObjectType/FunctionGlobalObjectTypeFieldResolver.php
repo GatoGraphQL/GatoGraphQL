@@ -12,24 +12,24 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
 
     #[Required]
     final public function autowireFunctionGlobalObjectTypeFieldResolver(
         AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
-        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
     ): void {
         $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
     }
 
     public function getFieldNamesToResolve(): array
@@ -62,7 +62,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         return match ($fieldName) {
             'getSelfProp' => [
-                'self' => $this->objectScalarTypeResolver,
+                'self' => $this->jsonObjectScalarTypeResolver,
                 'property' => $this->stringScalarTypeResolver,
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),

@@ -19,7 +19,7 @@ use PoP\Engine\Misc\OperatorHelpers;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
@@ -32,7 +32,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     protected ?array $safeVars = null;
     protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
     protected IntScalarTypeResolver $intScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected ErrorProviderInterface $errorProvider;
@@ -41,14 +41,14 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     final public function autowireOperatorGlobalObjectTypeFieldResolver(
         AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         ErrorProviderInterface $errorProvider,
     ): void {
         $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
         $this->intScalarTypeResolver = $intScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->errorProvider = $errorProvider;
@@ -84,7 +84,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'empty' => $this->booleanScalarTypeResolver,
             'isNull' => $this->booleanScalarTypeResolver,
             'var' => $this->anyScalarScalarTypeResolver,
-            'context' => $this->objectScalarTypeResolver,
+            'context' => $this->jsonObjectScalarTypeResolver,
             'extract' => $this->anyScalarScalarTypeResolver,
             'time' => $this->intScalarTypeResolver,
             'echo' => $this->anyScalarScalarTypeResolver,
@@ -160,7 +160,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 'name' => $this->stringScalarTypeResolver,
             ],
             'extract' => [
-                'object' => $this->objectScalarTypeResolver,
+                'object' => $this->jsonObjectScalarTypeResolver,
                 'path' => $this->stringScalarTypeResolver,
             ],
             'echo' => [

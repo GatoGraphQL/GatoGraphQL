@@ -12,11 +12,11 @@ use stdClass;
  *
  * @see https://spec.graphql.org/draft/#sec-Scalars.Custom-Scalars
  */
-class ObjectScalarTypeResolver extends AbstractScalarTypeResolver
+class JSONObjectScalarTypeResolver extends AbstractScalarTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'Object';
+        return 'JSONObject';
     }
 
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass

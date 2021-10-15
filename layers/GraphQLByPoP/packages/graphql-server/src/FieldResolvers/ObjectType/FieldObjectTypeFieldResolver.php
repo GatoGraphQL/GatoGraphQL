@@ -14,14 +14,14 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
     protected InputValueObjectTypeResolver $inputValueObjectTypeResolver;
     protected TypeObjectTypeResolver $typeObjectTypeResolver;
 
@@ -29,13 +29,13 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     final public function autowireFieldObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
-        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
         InputValueObjectTypeResolver $inputValueObjectTypeResolver,
         TypeObjectTypeResolver $typeObjectTypeResolver,
     ): void {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
         $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
     }
@@ -67,7 +67,7 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'description' => $this->stringScalarTypeResolver,
             'isDeprecated' => $this->booleanScalarTypeResolver,
             'deprecationReason' => $this->stringScalarTypeResolver,
-            'extensions' => $this->objectScalarTypeResolver,
+            'extensions' => $this->jsonObjectScalarTypeResolver,
             'args' => $this->inputValueObjectTypeResolver,
             'type' => $this->typeObjectTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),

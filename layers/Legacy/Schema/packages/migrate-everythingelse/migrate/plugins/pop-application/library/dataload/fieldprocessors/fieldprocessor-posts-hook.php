@@ -69,8 +69,8 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'favicon' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
-            'thumb' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver::class,
+            'favicon' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver::class,
+            'thumb' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver::class,
             'thumbFullSrc' => \PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver::class,
             'topics' => \PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver::class,
             'hasTopics' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,
