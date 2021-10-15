@@ -200,9 +200,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         // Maybe add param "nestedUnder" on the schema for each directive
         $enableComposableDirectives = GraphQLQueryComponentConfiguration::enableComposableDirectives();
 
-        // Convert the field type from its internal representation (eg: "array:Post") to the GraphQL standard representation (eg: "[Post]")
+        // Modify the schema definitions
         // 1. Global fields, connections and directives
-        if (ComponentConfiguration::addGlobalFieldsToSchema()) {
+        if (($addVersionToSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription)
+            && ComponentConfiguration::addGlobalFieldsToSchema()
+        ) {
             foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_FIELDS]) as $fieldName) {
                 $itemPath = [
                     SchemaDefinition::GLOBAL_FIELDS,
@@ -263,54 +265,56 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             $this->maybeAddTypeToSchemaDirectiveDescription($itemPath);
         }
         // 2. Each type's fields, connections and directives
-        foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES] as $typeName => $typeSchemaDefinition) {
-            // No need for Union types
-            if ($typeSchemaDefinition[SchemaDefinition::IS_UNION] ?? null) {
-                continue;
-            }
-            foreach (array_keys($typeSchemaDefinition[SchemaDefinition::FIELDS]) as $fieldName) {
-                $itemPath = [
-                    SchemaDefinition::TYPES,
-                    $typeName,
-                    SchemaDefinition::FIELDS,
-                    $fieldName
-                ];
-                // $this->introduceSDLNotationToFieldSchemaDefinition($itemPath);
-                if ($addVersionToSchemaFieldDescription) {
-                    $this->addVersionToSchemaFieldDescription($itemPath);
+        if ($addVersionToSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription || $enableComposableDirectives) {
+            foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES] as $typeName => $typeSchemaDefinition) {
+                // No need for Union types
+                if ($typeSchemaDefinition[SchemaDefinition::IS_UNION] ?? null) {
+                    continue;
                 }
-                if ($addMutationLabelToSchemaFieldDescription) {
-                    $this->addMutationLabelToSchemaFieldDescription($itemPath);
+                foreach (array_keys($typeSchemaDefinition[SchemaDefinition::FIELDS]) as $fieldName) {
+                    $itemPath = [
+                        SchemaDefinition::TYPES,
+                        $typeName,
+                        SchemaDefinition::FIELDS,
+                        $fieldName
+                    ];
+                    // $this->introduceSDLNotationToFieldSchemaDefinition($itemPath);
+                    if ($addVersionToSchemaFieldDescription) {
+                        $this->addVersionToSchemaFieldDescription($itemPath);
+                    }
+                    if ($addMutationLabelToSchemaFieldDescription) {
+                        $this->addMutationLabelToSchemaFieldDescription($itemPath);
+                    }
                 }
-            }
-            foreach (array_keys($typeSchemaDefinition[SchemaDefinition::CONNECTIONS]) as $connectionName) {
-                $itemPath = [
-                    SchemaDefinition::TYPES,
-                    $typeName,
-                    SchemaDefinition::CONNECTIONS,
-                    $connectionName
-                ];
-                // $this->introduceSDLNotationToFieldSchemaDefinition($itemPath);
-                if ($addVersionToSchemaFieldDescription) {
-                    $this->addVersionToSchemaFieldDescription($itemPath);
+                foreach (array_keys($typeSchemaDefinition[SchemaDefinition::CONNECTIONS]) as $connectionName) {
+                    $itemPath = [
+                        SchemaDefinition::TYPES,
+                        $typeName,
+                        SchemaDefinition::CONNECTIONS,
+                        $connectionName
+                    ];
+                    // $this->introduceSDLNotationToFieldSchemaDefinition($itemPath);
+                    if ($addVersionToSchemaFieldDescription) {
+                        $this->addVersionToSchemaFieldDescription($itemPath);
+                    }
+                    if ($addMutationLabelToSchemaFieldDescription) {
+                        $this->addMutationLabelToSchemaFieldDescription($itemPath);
+                    }
                 }
-                if ($addMutationLabelToSchemaFieldDescription) {
-                    $this->addMutationLabelToSchemaFieldDescription($itemPath);
-                }
-            }
-            foreach (array_keys($typeSchemaDefinition[SchemaDefinition::DIRECTIVES]) as $directiveName) {
-                $itemPath = [
-                    SchemaDefinition::TYPES,
-                    $typeName,
-                    SchemaDefinition::DIRECTIVES,
-                    $directiveName
-                ];
-                // $this->introduceSDLNotationToFieldOrDirectiveArgs($itemPath);
-                if ($enableComposableDirectives) {
-                    $this->addNestedDirectiveDataToSchemaDirectiveArgs($itemPath);
-                }
-                if ($addVersionToSchemaFieldDescription) {
-                    $this->addVersionToSchemaFieldDescription($itemPath);
+                foreach (array_keys($typeSchemaDefinition[SchemaDefinition::DIRECTIVES]) as $directiveName) {
+                    $itemPath = [
+                        SchemaDefinition::TYPES,
+                        $typeName,
+                        SchemaDefinition::DIRECTIVES,
+                        $directiveName
+                    ];
+                    // $this->introduceSDLNotationToFieldOrDirectiveArgs($itemPath);
+                    if ($enableComposableDirectives) {
+                        $this->addNestedDirectiveDataToSchemaDirectiveArgs($itemPath);
+                    }
+                    if ($addVersionToSchemaFieldDescription) {
+                        $this->addVersionToSchemaFieldDescription($itemPath);
+                    }
                 }
             }
         }
