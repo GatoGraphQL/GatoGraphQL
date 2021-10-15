@@ -16,7 +16,7 @@ trait HasPossibleTypesTypeTrait
     {
         $possibleTypeIDs = [];
         foreach (array_keys($this->schemaDefinition[SchemaDefinition::POSSIBLE_TYPES]) as $objectTypeName) {
-            $possibleTypeIDs[] = SchemaDefinitionHelpers::getID([
+            $possibleTypeIDs[] = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID([
                 SchemaDefinition::TYPES,
                 TypeKinds::OBJECT,
                 $objectTypeName,

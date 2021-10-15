@@ -11,7 +11,7 @@ class SchemaDefinitionHelpers
 {
     public const PATH_SEPARATOR = '.';
 
-    public static function getID(array $schemaDefinitionPath): string
+    public static function getSchemaDefinitionReferenceObjectID(array $schemaDefinitionPath): string
     {
         return implode(
             self::PATH_SEPARATOR,
@@ -57,7 +57,7 @@ class SchemaDefinitionHelpers
         $schemaDefinitionReferenceRegistry = SchemaDefinitionReferenceRegistryFacade::getInstance();
         $fields = [];
         foreach (array_keys($fieldSchemaDefinitionPointer) as $fieldName) {
-            $schemaDefinitionReferenceObjectID = SchemaDefinitionHelpers::getID(array_merge(
+            $schemaDefinitionReferenceObjectID = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID(array_merge(
                 $fieldSchemaDefinitionPath,
                 [
                     $fieldName

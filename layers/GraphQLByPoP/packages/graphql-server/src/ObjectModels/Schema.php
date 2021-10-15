@@ -110,7 +110,7 @@ class Schema
     }
     final protected function getObjectTypeID(ObjectTypeResolverInterface $objectTypeResolver): string
     {
-        return SchemaDefinitionHelpers::getID([
+        return SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID([
             SchemaDefinition::TYPES,
             TypeKinds::OBJECT,
             $objectTypeResolver->getMaybeNamespacedTypeName(),

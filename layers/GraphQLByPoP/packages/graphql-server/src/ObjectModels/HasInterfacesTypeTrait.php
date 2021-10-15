@@ -16,7 +16,7 @@ trait HasInterfacesTypeTrait
     {
         $interfaceIDs = [];
         foreach (array_keys($this->schemaDefinition[SchemaDefinition::INTERFACES]) as $interfaceTypeName) {
-            $interfaceIDs[] = SchemaDefinitionHelpers::getID([
+            $interfaceIDs[] = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID([
                 SchemaDefinition::TYPES,
                 TypeKinds::INTERFACE,
                 $interfaceTypeName,
