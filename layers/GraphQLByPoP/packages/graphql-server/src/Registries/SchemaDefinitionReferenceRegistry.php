@@ -12,17 +12,18 @@ use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinitionReferenceObjectInterface;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
-use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionTypes as GraphQLServerSchemaDefinitionTypes;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
+use PoP\API\Schema\SchemaDefinitionHelpers as APISchemaDefinitionHelpers;
+use PoP\API\Schema\SchemaDefinitionServiceInterface;
+use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\API\Schema\SchemaDefinitionServiceInterface;
-use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Cache\CacheUtils;
+use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -48,6 +49,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
     protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver;
     protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService;
+    protected IntScalarTypeResolver $intScalarTypeResolver;
 
     #[Required]
     final public function autowireSchemaDefinitionReferenceRegistry(
@@ -55,11 +57,13 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
         GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
+        IntScalarTypeResolver $intScalarTypeResolver,
     ): void {
         $this->translationAPI = $translationAPI;
         $this->schemaDefinitionService = $schemaDefinitionService;
         $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
         $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
 
     final public function getPersistentCache(): PersistentCacheInterface
@@ -457,11 +461,13 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     {
         $directiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinitionForGraphQL, $directiveSchemaDefinitionPath);
         $directiveSchemaDefinition[SchemaDefinition::ARGS] ??= [];
-        $directiveSchemaDefinition[SchemaDefinition::ARGS][] = [
+        $directiveArgSchemaDefinition = [
             SchemaDefinition::NAME => SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER,
-            SchemaDefinition::TYPE_NAME => GraphQLServerSchemaDefinitionTypes::TYPE_INT,
+            SchemaDefinition::TYPE_RESOLVER => $this->intScalarTypeResolver,
             SchemaDefinition::DESCRIPTION => $this->translationAPI->__('Nest the directive under another one, indicated as a relative position from this one (a negative int)', 'graphql-server'),
         ];
+        APISchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($directiveArgSchemaDefinition);
+        $directiveSchemaDefinition[SchemaDefinition::ARGS][] = $directiveArgSchemaDefinition;
     }
 
     /**
