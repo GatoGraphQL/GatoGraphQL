@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
+use stdClass;
+
 /**
  * Input types are those that can be provided inputs via field arguments:
  *
@@ -29,5 +31,5 @@ interface InputTypeResolverInterface extends TypeResolverInterface
      *
      * @see https://spec.graphql.org/draft/#sec-Input-Values
      */
-    public function coerceValue(mixed $inputValue): mixed;
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass;
 }

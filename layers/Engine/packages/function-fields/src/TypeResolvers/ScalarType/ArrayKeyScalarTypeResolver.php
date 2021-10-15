@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\FunctionFields\TypeResolvers\ScalarType;
 
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
+use stdClass;
 
 /**
  * GraphQL Custom Scalar
@@ -18,7 +19,7 @@ class ArrayKeyScalarTypeResolver extends AbstractScalarTypeResolver
         return 'ArrayKey';
     }
 
-    public function coerceValue(mixed $inputValue): mixed
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass
     {
         if ($error = $this->validateIsNotArrayOrObject($inputValue)) {
             return $error;

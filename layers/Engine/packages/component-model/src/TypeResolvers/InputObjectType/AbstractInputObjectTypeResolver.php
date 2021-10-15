@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use stdClass;
 
 abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver implements InputObjectTypeResolverInterface
 {
@@ -29,7 +30,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     /**
      * This function simply returns the same value always.
      */
-    public function coerceValue(mixed $inputValue): mixed
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass
     {
         return $inputValue;
     }

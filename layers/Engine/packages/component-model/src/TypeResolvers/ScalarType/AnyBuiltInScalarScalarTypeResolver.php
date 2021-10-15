@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
+use stdClass;
+
 class AnyBuiltInScalarScalarTypeResolver extends AbstractScalarTypeResolver
 {
     public function getTypeName(): string
@@ -19,7 +21,7 @@ class AnyBuiltInScalarScalarTypeResolver extends AbstractScalarTypeResolver
     /**
      * Accept anything and everything, other than arrays and objects
      */
-    public function coerceValue(mixed $inputValue): mixed
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass
     {
         if ($error = $this->validateIsNotArrayOrObject($inputValue)) {
             return $error;
