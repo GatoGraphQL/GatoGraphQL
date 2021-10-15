@@ -131,16 +131,18 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $enableNestedMutations = $vars['nested-mutations-enabled'];
         $exposeSchemaIntrospectionFieldInSchema = ComponentConfiguration::exposeSchemaIntrospectionFieldInSchema();
 
-        $rootTypeSchemaKey = $this->graphQLSchemaDefinitionService->getRootTypeSchemaKey();
-        $queryRootTypeSchemaKey = null;
+        $rootTypeResolver = $this->graphQLSchemaDefinitionService->getRootTypeResolver();
+        $rootTypeName = $rootTypeResolver->getMaybeNamespacedTypeName();
+        $queryRootTypeName = null;
         if (!$enableNestedMutations) {
-            $queryRootTypeSchemaKey = $this->graphQLSchemaDefinitionService->getQueryRootTypeSchemaKey();
+            $queryRootTypeResolver = $this->graphQLSchemaDefinitionService->getQueryRootTypeResolver();
+            $queryRootTypeName = $queryRootTypeResolver->getMaybeNamespacedTypeName();
         } elseif (ComponentConfiguration::addConnectionFromRootToQueryRootAndMutationRoot()) {
             // Additionally append the QueryRoot and MutationRoot to the schema
-            $queryRootTypeSchemaKey = $this->graphQLSchemaDefinitionService->getTypeSchemaKey($this->queryRootObjectTypeResolver);
+            $queryRootTypeName = $this->queryRootObjectTypeResolver->getMaybeNamespacedTypeName();
             // Remove the fields connecting from Root to QueryRoot and MutationRoot
-            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$rootTypeSchemaKey][SchemaDefinition::CONNECTIONS]['queryRoot']);
-            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$rootTypeSchemaKey][SchemaDefinition::CONNECTIONS]['mutationRoot']);
+            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$rootTypeName][SchemaDefinition::CONNECTIONS]['queryRoot']);
+            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$rootTypeName][SchemaDefinition::CONNECTIONS]['mutationRoot']);
         }
 
         /**
@@ -162,11 +164,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
              * > These fields are implicit and do not appear in the fields list in the root type of the query operation.
              * @see http://spec.graphql.org/draft/#sel-FAJXHABcBlB6rF
              */
-            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$rootTypeSchemaKey][SchemaDefinition::CONNECTIONS]['__type']);
-            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$rootTypeSchemaKey][SchemaDefinition::CONNECTIONS]['__schema']);
-            if ($queryRootTypeSchemaKey !== null) {
-                unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$queryRootTypeSchemaKey][SchemaDefinition::CONNECTIONS]['__type']);
-                unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$queryRootTypeSchemaKey][SchemaDefinition::CONNECTIONS]['__schema']);
+            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$rootTypeName][SchemaDefinition::CONNECTIONS]['__type']);
+            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$rootTypeName][SchemaDefinition::CONNECTIONS]['__schema']);
+            if ($queryRootTypeName !== null) {
+                unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$queryRootTypeName][SchemaDefinition::CONNECTIONS]['__type']);
+                unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$queryRootTypeName][SchemaDefinition::CONNECTIONS]['__schema']);
             }
         }
 
@@ -180,16 +182,16 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
              * Check if to remove the "self" field everywhere, or if to keep it just for the Root type
              */
             $keepSelfFieldForRootType = ComponentConfiguration::addSelfFieldForRootTypeToSchema();
-            foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES]) as $typeSchemaKey) {
-                if (!$keepSelfFieldForRootType || ($typeSchemaKey != $rootTypeSchemaKey && ($enableNestedMutations || $typeSchemaKey != $queryRootTypeSchemaKey))) {
-                    unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeSchemaKey][SchemaDefinition::CONNECTIONS]['self']);
+            foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES]) as $typeName) {
+                if (!$keepSelfFieldForRootType || ($typeName !== $rootTypeName && ($enableNestedMutations || $typeName !== $queryRootTypeName))) {
+                    unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeName][SchemaDefinition::CONNECTIONS]['self']);
                 }
             }
         }
         if (!ComponentConfiguration::addFullSchemaFieldToSchema()) {
-            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$rootTypeSchemaKey][SchemaDefinition::FIELDS]['fullSchema']);
-            if ($queryRootTypeSchemaKey !== null) {
-                unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$queryRootTypeSchemaKey][SchemaDefinition::FIELDS]['fullSchema']);
+            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$rootTypeName][SchemaDefinition::FIELDS]['fullSchema']);
+            if ($queryRootTypeName !== null) {
+                unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$queryRootTypeName][SchemaDefinition::FIELDS]['fullSchema']);
             }
         }
 
@@ -263,7 +265,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             $this->maybeAddTypeToSchemaDirectiveDescription($itemPath);
         }
         // 2. Each type's fields, connections and directives
-        foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES] as $typeSchemaKey => $typeSchemaDefinition) {
+        foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES] as $typeName => $typeSchemaDefinition) {
             // No need for Union types
             if ($typeSchemaDefinition[SchemaDefinition::IS_UNION] ?? null) {
                 continue;
@@ -271,7 +273,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             foreach (array_keys($typeSchemaDefinition[SchemaDefinition::FIELDS]) as $fieldName) {
                 $itemPath = [
                     SchemaDefinition::TYPES,
-                    $typeSchemaKey,
+                    $typeName,
                     SchemaDefinition::FIELDS,
                     $fieldName
                 ];
@@ -286,7 +288,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             foreach (array_keys($typeSchemaDefinition[SchemaDefinition::CONNECTIONS]) as $connectionName) {
                 $itemPath = [
                     SchemaDefinition::TYPES,
-                    $typeSchemaKey,
+                    $typeName,
                     SchemaDefinition::CONNECTIONS,
                     $connectionName
                 ];
@@ -301,7 +303,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             foreach (array_keys($typeSchemaDefinition[SchemaDefinition::DIRECTIVES]) as $directiveName) {
                 $itemPath = [
                     SchemaDefinition::TYPES,
-                    $typeSchemaKey,
+                    $typeName,
                     SchemaDefinition::DIRECTIVES,
                     $directiveName
                 ];
@@ -336,15 +338,15 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES]);
 
             // Sort fields, connections and interfaces for each type
-            foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES] as $typeSchemaKey => $typeSchemaDefinition) {
-                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeSchemaKey][SchemaDefinition::FIELDS])) {
-                    ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeSchemaKey][SchemaDefinition::FIELDS]);
+            foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES] as $typeName => $typeSchemaDefinition) {
+                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeName][SchemaDefinition::FIELDS])) {
+                    ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeName][SchemaDefinition::FIELDS]);
                 }
-                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeSchemaKey][SchemaDefinition::CONNECTIONS])) {
-                    ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeSchemaKey][SchemaDefinition::CONNECTIONS]);
+                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeName][SchemaDefinition::CONNECTIONS])) {
+                    ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeName][SchemaDefinition::CONNECTIONS]);
                 }
-                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeSchemaKey][SchemaDefinition::INTERFACES])) {
-                    sort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeSchemaKey][SchemaDefinition::INTERFACES]);
+                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeName][SchemaDefinition::INTERFACES])) {
+                    sort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeName][SchemaDefinition::INTERFACES]);
                 }
             }
 
