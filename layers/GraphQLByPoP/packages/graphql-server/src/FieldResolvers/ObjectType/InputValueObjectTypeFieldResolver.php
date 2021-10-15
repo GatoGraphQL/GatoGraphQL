@@ -101,7 +101,7 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'description':
                 return $inputValue->getDescription();
             case 'type':
-                return $inputValue->getType()->getID();
+                return $inputValue->getTypeID();
             case 'defaultValue':
                 return $inputValue->getDefaultValue();
         }
