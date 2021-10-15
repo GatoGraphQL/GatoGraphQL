@@ -8,8 +8,6 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 
 abstract class AbstractType extends AbstractSchemaDefinitionReferenceObject implements TypeInterface
 {
-    abstract public function getKind(): string;
-
     public function getNamespacedName(): string
     {
         return $this->schemaDefinition[SchemaDefinition::NAMESPACED_NAME];
@@ -24,7 +22,7 @@ abstract class AbstractType extends AbstractSchemaDefinitionReferenceObject impl
     {
         return $this->schemaDefinition[SchemaDefinition::NAME];
     }
-    
+
     public function getDescription(): ?string
     {
         return $this->schemaDefinition[SchemaDefinition::DESCRIPTION] ?? null;
