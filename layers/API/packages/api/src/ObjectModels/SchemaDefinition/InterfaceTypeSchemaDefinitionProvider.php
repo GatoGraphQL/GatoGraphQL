@@ -28,9 +28,21 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
         return TypeKinds::INTERFACE;
     }
 
+    /**
+     * Watch out! The POSSIBLE_TYPES are injected in SchemaDefinitionService,
+     * so that only existing typeResolvers are analyzed.
+     * 
+     * For instance, QueryRoot with nested mutations enabled must be skipped,
+     * yet it would be retrieved if reading the types from the typeRegistry
+     *
+     * @return array<string, mixed>
+     */
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();
+
+        // Initialize it here, but it will be filled in SchemaDefinitionService
+        $schemaDefinition[SchemaDefinition::POSSIBLE_TYPES] = [];
 
         $schemaDefinition[SchemaDefinition::FIELDS] = [];
         $schemaInterfaceTypeFieldResolvers = $this->interfaceTypeResolver->getExecutableInterfaceTypeFieldResolversByField();
@@ -38,33 +50,15 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
             $this->addFieldSchemaDefinition($schemaDefinition, $interfaceTypeFieldResolver, $fieldName);
         }
 
-        // Obtain all the Object Types that implement this interface
-        $schemaDefinition[SchemaDefinition::POSSIBLE_TYPES] = [];
-        $objectTypeResolvers = $this->typeRegistry->getObjectTypeResolvers();
-        foreach ($objectTypeResolvers as $objectTypeResolver) {
-            if (!in_array($this->interfaceTypeResolver, $objectTypeResolver->getImplementedInterfaceTypeResolvers())) {
-                continue;
-            }
-            $objectTypeName = $objectTypeResolver->getMaybeNamespacedTypeName();
-            $objectTypeSchemaDefinition = [
-                SchemaDefinition::TYPE_RESOLVER => $objectTypeResolver,
-            ];
-            SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($objectTypeSchemaDefinition);
-            $schemaDefinition[SchemaDefinition::POSSIBLE_TYPES][$objectTypeName] = $objectTypeSchemaDefinition;
-            $this->accessedTypeAndDirectiveResolvers[$objectTypeResolver::class] = $objectTypeResolver;
-        }
-
         $schemaDefinition[SchemaDefinition::INTERFACES] = [];
-        if ($partiallyImplementedInterfaceTypeResolvers = $this->interfaceTypeResolver->getPartiallyImplementedInterfaceTypeResolvers()) {
-            foreach ($partiallyImplementedInterfaceTypeResolvers as $interfaceTypeResolver) {
-                $interfaceTypeName = $interfaceTypeResolver->getMaybeNamespacedTypeName();
-                $interfaceTypeSchemaDefinition = [
-                    SchemaDefinition::TYPE_RESOLVER => $interfaceTypeResolver,
-                ];
-                SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($interfaceTypeSchemaDefinition);
-                $schemaDefinition[SchemaDefinition::INTERFACES][$interfaceTypeName] = $interfaceTypeSchemaDefinition;
-                $this->accessedTypeAndDirectiveResolvers[$interfaceTypeResolver::class] = $interfaceTypeResolver;
-            }
+        foreach ($this->interfaceTypeResolver->getPartiallyImplementedInterfaceTypeResolvers() as $interfaceTypeResolver) {
+            $interfaceTypeName = $interfaceTypeResolver->getMaybeNamespacedTypeName();
+            $interfaceTypeSchemaDefinition = [
+                SchemaDefinition::TYPE_RESOLVER => $interfaceTypeResolver,
+            ];
+            SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($interfaceTypeSchemaDefinition);
+            $schemaDefinition[SchemaDefinition::INTERFACES][$interfaceTypeName] = $interfaceTypeSchemaDefinition;
+            $this->accessedTypeAndDirectiveResolvers[$interfaceTypeResolver::class] = $interfaceTypeResolver;
         }
 
         return $schemaDefinition;

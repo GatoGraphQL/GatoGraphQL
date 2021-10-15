@@ -161,7 +161,7 @@ class ComponentConfiguration
         // Define properties
         $envVariable = Environment::ENABLE_NESTED_MUTATIONS;
         $selfProperty = &self::$enableNestedMutations;
-        $defaultValue = false;
+        $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook

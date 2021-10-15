@@ -15,10 +15,23 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvider
 {
+    /**
+     * @var InterfaceTypeResolverInterface[] List of the implemented interfaces, to add this Type to the InterfaceType's POSSIBLE_TYPES
+     */
+    protected array $implementedInterfaceTypeResolvers = [];
+
     public function __construct(
         protected ObjectTypeResolverInterface $objectTypeResolver,
     ) {
         parent::__construct($objectTypeResolver);
+    }
+
+    /**
+     * @return InterfaceTypeResolverInterface[] List of the implemented interfaces, to add this Type to the InterfaceType's POSSIBLE_TYPES
+     */
+    final public function getImplementedInterfaceTypeResolvers(): array
+    {
+        return $this->implementedInterfaceTypeResolvers;
     }
 
     public function getTypeKind(): string
@@ -57,14 +70,17 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
         }
 
         $schemaDefinition[SchemaDefinition::INTERFACES] = [];
-        foreach ($this->objectTypeResolver->getImplementedInterfaceTypeResolvers() as $interfaceTypeResolver) {
-            $interfaceTypeName = $interfaceTypeResolver->getMaybeNamespacedTypeName();
-            $interfaceTypeSchemaDefinition = [
-                SchemaDefinition::TYPE_RESOLVER => $interfaceTypeResolver,
-            ];
-            SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($interfaceTypeSchemaDefinition);
-            $schemaDefinition[SchemaDefinition::INTERFACES][$interfaceTypeName] = $interfaceTypeSchemaDefinition;
-            $this->accessedTypeAndDirectiveResolvers[$interfaceTypeResolver::class] = $interfaceTypeResolver;
+        if ($implementedInterfaceTypeResolvers = $this->objectTypeResolver->getImplementedInterfaceTypeResolvers()) {
+            foreach ($implementedInterfaceTypeResolvers as $interfaceTypeResolver) {
+                $interfaceTypeName = $interfaceTypeResolver->getMaybeNamespacedTypeName();
+                $interfaceTypeSchemaDefinition = [
+                    SchemaDefinition::TYPE_RESOLVER => $interfaceTypeResolver,
+                ];
+                SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($interfaceTypeSchemaDefinition);
+                $schemaDefinition[SchemaDefinition::INTERFACES][$interfaceTypeName] = $interfaceTypeSchemaDefinition;
+                $this->accessedTypeAndDirectiveResolvers[$interfaceTypeResolver::class] = $interfaceTypeResolver;
+            }
+            $this->implementedInterfaceTypeResolvers = $implementedInterfaceTypeResolvers;
         }
 
         return $schemaDefinition;

@@ -47,7 +47,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     private array $pendingTypeOrDirectiveResolvers = [];
     /** @var array<string, RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive */
     private array $accessedDirectiveResolverClassRelationalTypeResolvers = [];
-
+    /** @var array<string, ObjectTypeResolverInterface[]> Key: InterfaceType name, Value: List of ObjectType resolvers implementing the interface */
+    private array $accessedInterfaceTypeNameObjectTypeResolvers = [];
+    
     /**
      * Cannot autowire because its calling `getNamespace`
      * on services.yaml produces an exception of PHP properties not initialized
@@ -105,6 +107,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
 
             $this->processedTypeAndDirectiveResolverClasses = [];
             $this->accessedDirectiveResolverClassRelationalTypeResolvers = [];
+            $this->accessedInterfaceTypeNameObjectTypeResolvers = [];
 
             $this->pendingTypeOrDirectiveResolvers = [
                 $this->rootObjectTypeResolver,
@@ -128,6 +131,30 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
                     );
                 }
             }
+
+            /**
+             * Inject this ObjectTypeResolver into the POSSIBLE_TYPES from
+             * its implemented InterfaceTypes.
+             * 
+             * Watch out! This logic is implemented like this,
+             * instead of retrieving them from the typeRegistry already
+             * within InterfaceTypeSchemaDefinitionProvider,
+             * because types which are not registered in the schema
+             * (such as QueryRoot with nested mutations enabled)
+             * must not be processed, yet they are still in typeRegistry
+             */
+            foreach ($this->accessedInterfaceTypeNameObjectTypeResolvers as $interfaceTypeName => $objectTypeResolvers) {
+                $interfaceTypeSchemaDefinition = &$schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$interfaceTypeName];
+                foreach ($objectTypeResolvers as $objectTypeResolver) {
+                    $objectTypeName = $objectTypeResolver->getMaybeNamespacedTypeName();
+                    $objectTypeSchemaDefinition = [
+                        SchemaDefinition::TYPE_RESOLVER => $objectTypeResolver,
+                    ];
+                    SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($objectTypeSchemaDefinition);
+                    $interfaceTypeSchemaDefinition[SchemaDefinition::POSSIBLE_TYPES][$objectTypeName] = $objectTypeSchemaDefinition;
+                }
+            }
+            
 
             // Add the Fragment Catalogue
             $schemaDefinition[SchemaDefinition::PERSISTED_FRAGMENTS] = $this->fragmentCatalogueManager->getPersistedFragmentsForSchema();
@@ -180,6 +207,20 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $this->accessedDirectiveResolverClassRelationalTypeResolvers,
             $schemaDefinitionProvider->getAccessedDirectiveResolverClassRelationalTypeResolvers(),
         );
+        /**
+         * ObjectTypeResolvers must be injected into the POSSIBLE_TYPES of their implemented InterfaceTypes
+         */
+        if ($typeResolver instanceof ObjectTypeResolverInterface) {
+            /** @var ObjectTypeResolverInterface */
+            $objectTypeResolver = $typeResolver;
+            /** @var ObjectTypeSchemaDefinitionProvider */
+            $objectTypeSchemaDefinitionProvider = $schemaDefinitionProvider;
+            foreach ($objectTypeSchemaDefinitionProvider->getImplementedInterfaceTypeResolvers() as $implementedInterfaceTypeResolver) {
+                $implementedInterfaceTypeName = $implementedInterfaceTypeResolver->getMaybeNamespacedTypeName();
+                $this->accessedInterfaceTypeNameObjectTypeResolvers[$implementedInterfaceTypeName] ??= [];
+                $this->accessedInterfaceTypeNameObjectTypeResolvers[$implementedInterfaceTypeName][] = $objectTypeResolver;
+            }
+        }
     }
 
     /**
