@@ -9,6 +9,7 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\HasFieldsTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasInterfacesTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasPossibleTypesTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\InputObjectType;
+use GraphQLByPoP\GraphQLServer\ObjectModels\NamedTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\WrappingTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\ScalarType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\TypeInterface;
@@ -110,14 +111,14 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'kind',
-            'extensions'
+            'kind'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'fields',
             'interfaces',
             'possibleTypes',
             'enumValues',
-            'inputFields'
+            'inputFields',
+            'extensions'
                 => SchemaTypeModifiers::IS_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -243,7 +244,11 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 }
                 return null;
             case 'extensions':
-                return $type->getExtensions();
+                // Custom development: this field is not in GraphQL spec yet!
+                if ($type instanceof NamedTypeInterface) {
+                    return $type->getExtensions();
+                }
+                return null;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
