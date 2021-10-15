@@ -27,7 +27,6 @@ class SchemaDefinition
     public const DEFAULT_VALUE = 'defaultValue';
     public const ARGS = 'args';
     public const ORDERED_ARGS_ENABLED = 'orderedArgsEnabled';
-    public const RESULTS_IMPLEMENT_INTERFACE = 'resultsImplementInterface';
     public const INTERFACES = 'interfaces';
     public const FIELDS = 'fields';
     public const CONNECTIONS = 'connections';
