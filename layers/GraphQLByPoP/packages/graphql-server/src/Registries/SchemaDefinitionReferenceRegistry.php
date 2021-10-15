@@ -492,6 +492,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     public function getSchemaDefinitionReference(
         string $referenceObjectID
     ): ?SchemaDefinitionReferenceObjectInterface {
-        return $this->fullSchemaDefinitionReferenceDictionary[$referenceObjectID];
+        return $this->fullSchemaDefinitionReferenceDictionary[$referenceObjectID] ?? null;
     }
 }
