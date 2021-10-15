@@ -52,8 +52,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         if ($inputValue instanceof stdClass) {
             return $this->getError(
                 sprintf(
-                    $this->translationAPI->__('An %s cannot be casted to type \'%s\'', 'component-model'),
-                    is_array($inputValue) ? 'array' : 'object',
+                    $this->translationAPI->__('An object cannot be casted to type \'%s\'', 'component-model'),
                     $this->getMaybeNamespacedTypeName()
                 )
             );
