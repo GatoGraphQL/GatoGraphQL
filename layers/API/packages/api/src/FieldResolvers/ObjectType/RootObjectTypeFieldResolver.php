@@ -7,7 +7,6 @@ namespace PoP\API\FieldResolvers\ObjectType;
 use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoP\API\PersistedQueries\PersistedQueryManagerInterface;
 use PoP\API\Schema\SchemaDefinitionServiceInterface;
-use PoP\API\TypeResolvers\EnumType\SchemaFieldShapeEnumTypeResolver;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -28,7 +27,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      */
     protected ?PersistentCacheInterface $persistentCache = null;
 
-    protected SchemaFieldShapeEnumTypeResolver $schemaOutputShapeEnumTypeResolver;
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
     protected PersistedFragmentManagerInterface $fragmentCatalogueManager;
     protected PersistedQueryManagerInterface $queryCatalogueManager;
@@ -36,13 +34,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     #[Required]
     final public function autowireRootObjectTypeFieldResolver(
-        SchemaFieldShapeEnumTypeResolver $schemaOutputShapeEnumTypeResolver,
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         PersistedFragmentManagerInterface $fragmentCatalogueManager,
         PersistedQueryManagerInterface $queryCatalogueManager,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {
-        $this->schemaOutputShapeEnumTypeResolver = $schemaOutputShapeEnumTypeResolver;
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         $this->fragmentCatalogueManager = $fragmentCatalogueManager;
         $this->queryCatalogueManager = $queryCatalogueManager;
