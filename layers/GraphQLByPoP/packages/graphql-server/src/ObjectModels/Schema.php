@@ -24,7 +24,6 @@ class Schema
         array $fullSchemaDefinition,
         protected string $id
     ) {
-        // @todo: Check this
         // Enable or not to add the global fields to the schema, since they may pollute the documentation
         if (ComponentConfiguration::addGlobalFieldsToSchema()) {
             // Add the fields in the registry
