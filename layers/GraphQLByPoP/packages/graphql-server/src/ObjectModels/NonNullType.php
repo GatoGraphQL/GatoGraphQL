@@ -14,13 +14,16 @@ class NonNullType extends AbstractWrappingType
         );
     }
 
+    public function getID(): string
+    {
+        return sprintf(
+            '%s!',
+            $this->wrappedType->getID()
+        );
+    }
+
     public function getKind(): string
     {
         return TypeKinds::NON_NULL;
-    }
-
-    public function getDescription(): ?string
-    {
-        return null;
     }
 }

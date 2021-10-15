@@ -14,13 +14,16 @@ class ListType extends AbstractWrappingType
         );
     }
 
+    public function getID(): string
+    {
+        return sprintf(
+            '[%s]',
+            $this->wrappedType->getID()
+        );
+    }
+
     public function getKind(): string
     {
         return TypeKinds::LIST;
-    }
-
-    public function getDescription(): ?string
-    {
-        return null;
     }
 }
