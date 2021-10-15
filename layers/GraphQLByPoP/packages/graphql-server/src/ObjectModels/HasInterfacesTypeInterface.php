@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-interface HasInterfacesTypeInterface
+interface HasInterfacesTypeInterface extends TypeInterface
 {
     public function getInterfaces(): array;
     /**

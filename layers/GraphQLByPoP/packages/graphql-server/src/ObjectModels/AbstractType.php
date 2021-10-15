@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 
-abstract class AbstractType extends AbstractSchemaDefinitionReferenceObject
+abstract class AbstractType extends AbstractSchemaDefinitionReferenceObject implements TypeInterface
 {
     abstract public function getKind(): string;
 

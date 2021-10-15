@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
-use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractType;
+use GraphQLByPoP\GraphQLServer\ObjectModels\TypeInterface;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SchemaDefinitionReferenceTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -32,7 +32,7 @@ class TypeObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 
     public function getID(object $object): string | int | null
     {
-        /** @var AbstractType */
+        /** @var TypeInterface */
         $type = $object;
         return $type->getID();
     }

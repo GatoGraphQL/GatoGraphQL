@@ -24,9 +24,9 @@ class Schema
      * @var Directive[]
      */
     protected array $directives;
-    protected ?AbstractType $queryType = null;
-    protected ?AbstractType $mutationType = null;
-    protected ?AbstractType $subscriptionType = null;
+    protected ?TypeInterface $queryType = null;
+    protected ?TypeInterface $mutationType = null;
+    protected ?TypeInterface $subscriptionType = null;
 
     public function __construct(
         array $fullSchemaDefinition,
@@ -189,7 +189,7 @@ class Schema
             $rootTypeResolver = $schemaDefinitionService->getRootTypeResolver();
             $resolvableTypes = array_filter(
                 $resolvableTypes,
-                fn (AbstractType $objectType) => $objectType->getName() != $rootTypeResolver->getTypeName()
+                fn (TypeInterface $objectType) => $objectType->getName() != $rootTypeResolver->getTypeName()
             );
         }
 
@@ -222,7 +222,7 @@ class Schema
     {
         return $this->id;
     }
-    public function getQueryType(): AbstractType
+    public function getQueryType(): TypeInterface
     {
         return $this->queryType;
     }
@@ -230,7 +230,7 @@ class Schema
     {
         return $this->getQueryType()->getID();
     }
-    public function getMutationType(): ?AbstractType
+    public function getMutationType(): ?TypeInterface
     {
         return $this->mutationType;
     }
@@ -241,7 +241,7 @@ class Schema
         }
         return null;
     }
-    public function getSubscriptionType(): ?AbstractType
+    public function getSubscriptionType(): ?TypeInterface
     {
         return $this->subscriptionType;
     }
@@ -260,7 +260,7 @@ class Schema
     public function getTypeIDs(): array
     {
         return array_map(
-            function (AbstractType $type) {
+            function (TypeInterface $type) {
                 return $type->getID();
             },
             $this->getTypes()
@@ -279,7 +279,7 @@ class Schema
             $this->getDirectives()
         );
     }
-    public function getType(string $typeName): ?AbstractType
+    public function getType(string $typeName): ?TypeInterface
     {
         // If the provided typeName contains the namespace separator, then compare by qualifiedType
         $useQualifiedName = str_contains($typeName, SchemaDefinitionTokens::NAMESPACE_SEPARATOR);

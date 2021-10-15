@@ -12,7 +12,7 @@ use PoP\API\Schema\SchemaDefinition;
 
 trait ResolveTypeSchemaDefinitionReferenceTrait
 {
-    protected function getTypeFromTypeName(string $typeName): AbstractType
+    protected function getTypeFromTypeName(string $typeName): TypeInterface
     {
         // Check if the type is non-null
         if (SyntaxHelpers::isNonNullType($typeName)) {
@@ -69,7 +69,7 @@ trait ResolveTypeSchemaDefinitionReferenceTrait
         ];
         $schemaDefinitionID = SchemaDefinitionHelpers::getID($typeSchemaDefinitionPath);
         $schemaDefinitionReferenceRegistry = SchemaDefinitionReferenceRegistryFacade::getInstance();
-        /** @var AbstractType */
+        /** @var TypeInterface */
         return $schemaDefinitionReferenceRegistry->getSchemaDefinitionReference($schemaDefinitionID);
     }
 }

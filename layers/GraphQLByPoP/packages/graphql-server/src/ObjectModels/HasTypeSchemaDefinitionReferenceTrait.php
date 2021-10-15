@@ -10,9 +10,9 @@ trait HasTypeSchemaDefinitionReferenceTrait
 {
     use ResolveTypeSchemaDefinitionReferenceTrait;
 
-    protected AbstractType $type;
+    protected TypeInterface $type;
 
-    public function getType(): AbstractType
+    public function getType(): TypeInterface
     {
         return $this->type;
     }
