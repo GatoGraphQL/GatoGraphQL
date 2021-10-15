@@ -13,21 +13,23 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
 {
     use HasArgsSchemaDefinitionReferenceTrait;
 
-    public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath, array $customDefinition = [])
+    public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
-        parent::__construct($fullSchemaDefinition, $schemaDefinitionPath, $customDefinition);
+        parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
 
         $this->initArgs($fullSchemaDefinition, $schemaDefinitionPath);
-        $this->initializeArgsTypeDependencies();
     }
+
     public function getName(): string
     {
         return $this->schemaDefinition[SchemaDefinition::NAME];
     }
+
     public function getDescription(): ?string
     {
         return $this->schemaDefinition[SchemaDefinition::DESCRIPTION] ?? null;
     }
+
     public function getLocations(): array
     {
         $directives = [];
@@ -40,9 +42,9 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
          * 3. When the type is "Indexing" and composable directives are enabled
          */
         if (
-            $directiveType == DirectiveTypes::QUERY
-            || ($directiveType == DirectiveTypes::SCHEMA && isset($vars['edit-schema']) && $vars['edit-schema'])
-            || ($directiveType == DirectiveTypes::INDEXING && ComponentConfiguration::enableComposableDirectives())
+            $directiveType === DirectiveTypes::QUERY
+            || ($directiveType === DirectiveTypes::SCHEMA && isset($vars['edit-schema']) && $vars['edit-schema'])
+            || ($directiveType === DirectiveTypes::INDEXING && ComponentConfiguration::enableComposableDirectives())
         ) {
             // Same DirectiveLocations as used by "@skip": https://graphql.github.io/graphql-spec/draft/#sec--skip
             $directives = array_merge(
@@ -54,7 +56,7 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
                 ]
             );
         }
-        if ($directiveType == DirectiveTypes::SCHEMA) {
+        if ($directiveType === DirectiveTypes::SCHEMA) {
             $directives = array_merge(
                 $directives,
                 [
@@ -64,6 +66,7 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
         }
         return $directives;
     }
+
     public function isRepeatable(): bool
     {
         return $this->schemaDefinition[SchemaDefinition::DIRECTIVE_IS_REPEATABLE];

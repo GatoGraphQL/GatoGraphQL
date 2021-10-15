@@ -13,4 +13,13 @@ services:
 
     PoP\CacheControl\Managers\CacheControlManagerInterface:
         class: GraphQLByPoP\GraphQLServer\Overrides\CacheControl\CacheControlManager
+
+    PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface:
+        class: \GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionService
+
+    PoP\Engine\Schema\SchemaDefinitionServiceInterface:
+        class: \GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionService
+
+    PoP\API\Schema\SchemaDefinitionServiceInterface:
+        class: \GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionService
         

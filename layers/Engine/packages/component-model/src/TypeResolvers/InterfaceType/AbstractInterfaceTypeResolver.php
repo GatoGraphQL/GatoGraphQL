@@ -18,6 +18,10 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      */
     protected ?array $interfaceTypeFieldResolversByField = null;
     /**
+     * @var array<string, InterfaceTypeFieldResolverInterface>|null
+     */
+    protected ?array $excutableInterfaceTypeFieldResolversByField = null;
+    /**
      * @var string[]|null
      */
     protected ?array $fieldNamesToImplement = null;
@@ -47,7 +51,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     private function calculateFieldNamesToImplement(): array
     {
         $fieldNamesToImplement = [];
-        foreach ($this->getAllInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
+        foreach ($this->getInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
             $fieldNamesToImplement = array_merge(
                 $fieldNamesToImplement,
                 $interfaceTypeFieldResolver->getFieldNamesToImplement()
@@ -64,7 +68,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     public function getPartiallyImplementedInterfaceTypeResolvers(): array
     {
         $implementedInterfaceTypeFieldResolvers = [];
-        foreach ($this->getAllInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
+        foreach ($this->getInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
             // Add under class as to mimick `array_unique` for object
             foreach ($interfaceTypeFieldResolver->getImplementedInterfaceTypeFieldResolvers() as $implementedInterfaceTypeFieldResolver) {
                 $implementedInterfaceTypeFieldResolvers[get_class($implementedInterfaceTypeFieldResolver)] = $implementedInterfaceTypeFieldResolver;
@@ -85,11 +89,11 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      *
      * @return InterfaceTypeFieldResolverInterface[]
      */
-    public function getAllInterfaceTypeFieldResolvers(): array
+    public function getInterfaceTypeFieldResolvers(): array
     {
         if ($this->interfaceTypeFieldResolvers === null) {
             $interfaceTypeFieldResolvers = [];
-            foreach ($this->getAllInterfaceTypeFieldResolversByField() as $fieldName => $interfaceTypeFieldResolversByField) {
+            foreach ($this->getInterfaceTypeFieldResolversByField() as $fieldName => $interfaceTypeFieldResolversByField) {
                 // Add under class as to mimick `array_unique` for object
                 foreach ($interfaceTypeFieldResolversByField as $interfaceTypeFieldResolver) {
                     $interfaceTypeFieldResolvers[get_class($interfaceTypeFieldResolver)] = $interfaceTypeFieldResolver;
@@ -100,13 +104,31 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
         return $this->interfaceTypeFieldResolvers;
     }
 
+    final public function getExecutableInterfaceTypeFieldResolversByField(): array
+    {
+        if ($this->excutableInterfaceTypeFieldResolversByField === null) {
+            $this->excutableInterfaceTypeFieldResolversByField = $this->doGetExecutableInterfaceTypeFieldResolversByField();
+        }
+        return $this->excutableInterfaceTypeFieldResolversByField;
+    }
+
+    private function doGetExecutableInterfaceTypeFieldResolversByField(): array
+    {
+        $interfaceTypeFieldResolvers = [];
+        foreach ($this->getInterfaceTypeFieldResolversByField() as $fieldName => $fieldInterfaceTypeFieldResolvers) {
+            // Get the first item from the list of resolvers. That's the one that will be executed
+            $interfaceTypeFieldResolvers[$fieldName] = $fieldInterfaceTypeFieldResolvers[0];
+        }
+        return $interfaceTypeFieldResolvers;
+    }
+
     /**
      * Produce an array of all the interface's fieldNames and, for each,
      * a list of all the ObjectTypeFieldResolverInterfaces
      *
      * @return array<string, InterfaceTypeFieldResolverInterface[]>
      */
-    final public function getAllInterfaceTypeFieldResolversByField(): array
+    final public function getInterfaceTypeFieldResolversByField(): array
     {
         if ($this->interfaceTypeFieldResolversByField === null) {
             $this->interfaceTypeFieldResolversByField = $this->calculateAllInterfaceTypeFieldResolversByField();

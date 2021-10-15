@@ -7,14 +7,14 @@ services:
     PoP\API\Schema\FieldQueryConvertorInterface:
         class: \PoP\API\Schema\FieldQueryConvertor
 
-    PoP\API\Registries\SchemaDefinitionRegistryInterface:
-        class: \PoP\API\Registries\SchemaDefinitionRegistry
-
     PoP\API\PersistedQueries\PersistedFragmentManagerInterface:
         class: \PoP\API\PersistedQueries\PersistedFragmentManager
 
     PoP\API\PersistedQueries\PersistedQueryManagerInterface:
         class: \PoP\API\PersistedQueries\PersistedQueryManager
+
+    PoP\API\Schema\SchemaDefinitionServiceInterface:
+        class: \PoP\API\Schema\SchemaDefinitionService
 
     # Override the services from FieldQuery and ComponentModel
     PoP\FieldQuery\FieldQueryInterpreterInterface:

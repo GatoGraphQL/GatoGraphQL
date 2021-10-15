@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
-use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractType;
-use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SchemaDefinitionReferenceTypeDataLoader;
+use GraphQLByPoP\GraphQLServer\ObjectModels\TypeInterface;
+use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class TypeObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
-    protected SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader;
+    protected WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader $wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader;
 
     #[Required]
     final public function autowireTypeObjectTypeResolver(
-        SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
+        WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader $wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader,
     ): void {
-        $this->schemaDefinitionReferenceTypeDataLoader = $schemaDefinitionReferenceTypeDataLoader;
+        $this->wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader = $wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader;
     }
 
     public function getTypeName(): string
@@ -32,13 +32,13 @@ class TypeObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 
     public function getID(object $object): string | int | null
     {
-        /** @var AbstractType */
+        /** @var TypeInterface */
         $type = $object;
         return $type->getID();
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->schemaDefinitionReferenceTypeDataLoader;
+        return $this->wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader;
     }
 }

@@ -30,4 +30,5 @@ interface InterfaceTypeFieldResolverInterface extends FieldResolverInterface, In
      * @return InterfaceTypeResolverInterface[]
      */
     public function getPartiallyImplementedInterfaceTypeResolvers(): array;
+    public function getFieldSchemaDefinition(string $fieldName): array;
 }

@@ -6,21 +6,18 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 
-class InputObjectType extends AbstractDynamicType
+class InputObjectType extends AbstractNamedType
 {
     /**
      * @var InputValue[]
      */
     protected array $inputValues;
 
-    public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath, array $customDefinition = [])
+    public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
-        parent::__construct($fullSchemaDefinition, $schemaDefinitionPath, $customDefinition);
+        parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
 
         $this->initInputValues($fullSchemaDefinition, $schemaDefinitionPath);
-        foreach ($this->inputValues as $inputValue) {
-            $inputValue->initializeTypeDependencies();
-        }
     }
     protected function initInputValues(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
@@ -42,10 +39,6 @@ class InputObjectType extends AbstractDynamicType
         }
     }
 
-    protected function getDynamicTypeNamePropertyInSchema(): string
-    {
-        return SchemaDefinition::INPUT_OBJECT_NAME;
-    }
     public function getKind(): string
     {
         return TypeKinds::INPUT_OBJECT;

@@ -11,16 +11,11 @@ class Field extends AbstractSchemaDefinitionReferenceObject
     use HasTypeSchemaDefinitionReferenceTrait;
     use HasArgsSchemaDefinitionReferenceTrait;
 
-    public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath, array $customDefinition = [])
+    public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
-        parent::__construct($fullSchemaDefinition, $schemaDefinitionPath, $customDefinition);
+        parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
 
         $this->initArgs($fullSchemaDefinition, $schemaDefinitionPath);
-    }
-    public function initializeTypeDependencies(): void
-    {
-        $this->initType();
-        $this->initializeArgsTypeDependencies();
     }
     public function getName(): string
     {

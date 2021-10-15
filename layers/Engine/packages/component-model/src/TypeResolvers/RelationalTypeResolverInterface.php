@@ -21,7 +21,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
     /**
      * @return InterfaceTypeResolverInterface[]
      */
-    public function getAllImplementedInterfaceTypeResolvers(): array;
+    public function getImplementedInterfaceTypeResolvers(): array;
     /**
      * @param string|int|array<string|int> $dbObjectIDOrIDs
      * @return string|int|array<string|int>
@@ -79,4 +79,10 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      * @return array<string,DirectiveResolverInterface>|null
      */
     public function getDirectiveResolverInstancesForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?array;
+    /**
+     * Array of directive name => resolver
+     *
+     * @return array<string, DirectiveResolverInterface>
+     */
+    public function getSchemaDirectiveResolvers(bool $global): array;
 }

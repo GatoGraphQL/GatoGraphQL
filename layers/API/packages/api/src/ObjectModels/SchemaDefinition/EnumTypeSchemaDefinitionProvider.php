@@ -2,18 +2,42 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Resolvers;
+namespace PoP\API\ObjectModels\SchemaDefinition;
 
+use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 
-trait EnumTypeSchemaDefinitionResolverTrait
+class EnumTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvider
 {
+    public function __construct(
+        protected EnumTypeResolverInterface $enumTypeResolver,
+    ) {
+        parent::__construct($enumTypeResolver);
+    }
+
+    public function getTypeKind(): string
+    {
+        return TypeKinds::ENUM;
+    }
+
+    public function getSchemaDefinition(): array
+    {
+        $schemaDefinition = parent::getSchemaDefinition();
+
+        $this->addSchemaDefinitionEnumValuesForField(
+            $schemaDefinition,
+            $this->enumTypeResolver
+        );
+
+        return $schemaDefinition;
+    }
+
     /**
      * Add the enum values in the schema: arrays of enum name,
      * description, deprecated and deprecation description
      */
-    protected function doAddSchemaDefinitionEnumValuesForField(
+    protected function addSchemaDefinitionEnumValuesForField(
         array &$schemaDefinition,
         EnumTypeResolverInterface $enumTypeResolver,
     ): void {
@@ -21,11 +45,9 @@ trait EnumTypeSchemaDefinitionResolverTrait
         $enumValues = $enumTypeResolver->getEnumValues();
         $enumValueDeprecationMessages = $enumTypeResolver->getEnumValueDeprecationMessages();
         $enumValueDescriptions = $enumTypeResolver->getEnumValueDescriptions();
-        $enumName = $enumTypeResolver->getMaybeNamespacedTypeName();
         foreach ($enumValues as $enumValue) {
             $enum = [
-                SchemaDefinition::NAME => $enumValue,
-                SchemaDefinition::ENUM_NAME => $enumName,
+                SchemaDefinition::VALUE => $enumValue,
             ];
             if ($description = $enumValueDescriptions[$enumValue] ?? null) {
                 $enum[SchemaDefinition::DESCRIPTION] = $description;
@@ -36,6 +58,6 @@ trait EnumTypeSchemaDefinitionResolverTrait
             }
             $enums[$enumValue] = $enum;
         }
-        $schemaDefinition[SchemaDefinition::ENUM_VALUES] = $enums;
+        $schemaDefinition[SchemaDefinition::ITEMS] = $enums;
     }
 }

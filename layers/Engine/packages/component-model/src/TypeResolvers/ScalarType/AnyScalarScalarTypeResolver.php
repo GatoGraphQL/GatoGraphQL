@@ -11,6 +11,11 @@ class AnyScalarScalarTypeResolver extends AbstractScalarTypeResolver
         return 'AnyScalar';
     }
 
+    public function getTypeDescription(): ?string
+    {
+        return $this->translationAPI->__('Wildcard type to represent any built-in type (string, int, bool, etc)', 'component-model');
+    }
+
     /**
      * Accept anything and everything, other than arrays and objects
      */

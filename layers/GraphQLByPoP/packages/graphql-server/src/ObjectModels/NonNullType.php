@@ -4,15 +4,21 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-class NonNullType extends AbstractNestableType
+class NonNullType extends AbstractWrappingType
 {
-    use NonDocumentableTypeTrait;
-
     public function getName(): string
     {
         return sprintf(
             '%s!',
-            $this->nestedType->getName()
+            $this->wrappedType->getName()
+        );
+    }
+
+    public function getID(): string
+    {
+        return sprintf(
+            '%s!',
+            $this->wrappedType->getID()
         );
     }
 

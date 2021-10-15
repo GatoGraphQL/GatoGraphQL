@@ -1202,6 +1202,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 SchemaDefinition::DIRECTIVE_TYPE => $this->getDirectiveType(),
                 SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
                 SchemaDefinition::DIRECTIVE_IS_REPEATABLE => $this->isRepeatable(),
+                SchemaDefinition::DIRECTIVE_IS_GLOBAL => $this->isGlobal($relationalTypeResolver),
                 SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsIDsDataFieldsToExecute(),
             ];
             if ($limitedToFields = $this->getFieldNamesToApplyTo()) {

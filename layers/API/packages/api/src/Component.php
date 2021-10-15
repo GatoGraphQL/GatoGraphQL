@@ -51,7 +51,7 @@ class Component extends AbstractComponent
     ): void {
         // If passing ?use_namespace=1, set it on the configuration
         if (Environment::enableSettingNamespacingByURLParam()) {
-            $useNamespacing = Request::namespaceTypesAndInterfaces();
+            $useNamespacing = Request::mustNamespaceTypes();
             if ($useNamespacing !== null) {
                 $componentClassConfiguration[\PoP\ComponentModel\Component::class][\PoP\ComponentModel\Environment::NAMESPACE_TYPES_AND_INTERFACES] = $useNamespacing;
             }
@@ -72,6 +72,7 @@ class Component extends AbstractComponent
         if (self::isEnabled()) {
             ComponentConfiguration::setConfiguration($configuration);
             self::initServices(dirname(__DIR__));
+            self::initServices(dirname(__DIR__), '/Overrides');
             self::initSchemaServices(dirname(__DIR__), $skipSchema);
 
             // Conditional packages

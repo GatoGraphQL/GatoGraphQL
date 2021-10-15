@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\State\ApplicationState;
@@ -68,30 +67,5 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     public function getTypeDescription(): ?string
     {
         return null;
-    }
-
-    public function getSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = []): array
-    {
-        if (is_null($this->schemaDefinition)) {
-            // Important: This line stops the recursion when a type reference each other circularly, so do not remove it!
-            $this->schemaDefinition = [];
-            $this->addSchemaDefinition($stackMessages, $generalMessages, $options);
-        }
-
-        return $this->schemaDefinition;
-    }
-
-    protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = []): void
-    {
-        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
-        $typeName = $this->getMaybeNamespacedTypeName();
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::NAME] = $typeName;
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::NAMESPACED_NAME] = $this->getNamespacedTypeName();
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ELEMENT_NAME] = $this->getTypeName();
-
-        // Properties
-        if ($description = $this->getTypeDescription()) {
-            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::DESCRIPTION] = $description;
-        }
     }
 }

@@ -177,7 +177,7 @@ class ApplicationState
             'version' => $version,
             'variables' => $variables,
             'only-fieldname-as-outputkey' => false,
-            'namespace-types-and-interfaces' => ComponentConfiguration::namespaceTypesAndInterfaces(),
+            'namespace-types-and-interfaces' => ComponentConfiguration::mustNamespaceTypes(),
             'version-constraint' => Request::getVersionConstraint(),
             'field-version-constraints' => Request::getVersionConstraintsForFields(),
             'directive-version-constraints' => Request::getVersionConstraintsForDirectives(),

@@ -6,14 +6,15 @@ namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\HookNames;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
-use PoP\ComponentModel\Resolvers\EnumTypeSchemaDefinitionResolverTrait;
+use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
@@ -24,7 +25,24 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
 {
     use AttachableExtensionTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
-    use EnumTypeSchemaDefinitionResolverTrait;
+    use FieldOrDirectiveSchemaDefinitionResolverTrait {
+        FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldSchemaDefinition as upstreamGetFieldSchemaDefinition;
+    }
+
+    /** @var array<string, array> */
+    protected array $schemaDefinitionForFieldCache = [];
+    /** @var array<string, array<string, InputTypeResolverInterface>> */
+    protected array $consolidatedFieldArgNameTypeResolversCache = [];
+    /** @var array<string, string|null> */
+    protected array $consolidatedFieldArgDescriptionCache = [];
+    /** @var array<string, string|null> */
+    protected array $consolidatedFieldArgDeprecationMessageCache = [];
+    /** @var array<string, mixed> */
+    protected array $consolidatedFieldArgDefaultValueCache = [];
+    /** @var array<string, int> */
+    protected array $consolidatedFieldArgTypeModifiersCache = [];
+    /** @var array<string, array<string, mixed>> */
+    protected array $schemaFieldArgsCache = [];
 
     /**
      * @var InterfaceTypeResolverInterface[]|null
@@ -226,51 +244,112 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
 
     /**
-     * @return array<string, InputTypeResolverInterface>
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
      */
-    public function getConsolidatedFieldArgNameTypeResolvers(string $fieldName): array
+    final public function getConsolidatedFieldArgNameTypeResolvers(string $fieldName): array
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getConsolidatedFieldArgNameTypeResolvers($fieldName);
+        // Cache the result
+        $cacheKey = $fieldName;
+        if (array_key_exists($cacheKey, $this->consolidatedFieldArgNameTypeResolversCache)) {
+            return $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey];
         }
-        return [];
+        /**
+         * Allow to override/extend the inputs (eg: module "Post Categories" can add
+         * input "categories" to field "Root.createPost")
+         */
+        $consolidatedFieldArgNameTypeResolvers = $this->hooksAPI->applyFilters(
+            HookNames::INTERFACE_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
+            $this->getFieldArgNameTypeResolvers($fieldName),
+            $this,
+            $fieldName,
+        );
+        $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey] = $consolidatedFieldArgNameTypeResolvers;
+        return $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey];
     }
 
-    public function getConsolidatedFieldArgDescription(string $fieldName, string $fieldArgName): ?string
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getConsolidatedFieldArgDescription($fieldName, $fieldArgName);
+        // Cache the result
+        $cacheKey = $fieldName . '(' . $fieldArgName . ':)';
+        if (array_key_exists($cacheKey, $this->consolidatedFieldArgDescriptionCache)) {
+            return $this->consolidatedFieldArgDescriptionCache[$cacheKey];
         }
-        return null;
+        $this->consolidatedFieldArgDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
+            HookNames::INTERFACE_TYPE_FIELD_ARG_DESCRIPTION,
+            $this->getFieldArgDescription($fieldName, $fieldArgName),
+            $this,
+            $fieldName,
+            $fieldArgName,
+        );
+        return $this->consolidatedFieldArgDescriptionCache[$cacheKey];
     }
 
-    public function getConsolidatedFieldArgDeprecationMessage(string $fieldName, string $fieldArgName): ?string
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedFieldArgDeprecationMessage(string $fieldName, string $fieldArgName): ?string
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getConsolidatedFieldArgDeprecationMessage($fieldName, $fieldArgName);
+        // Cache the result
+        $cacheKey = $fieldName . '(' . $fieldArgName . ':)';
+        if (array_key_exists($cacheKey, $this->consolidatedFieldArgDeprecationMessageCache)) {
+            return $this->consolidatedFieldArgDeprecationMessageCache[$cacheKey];
         }
-        return null;
+        $this->consolidatedFieldArgDeprecationMessageCache[$cacheKey] = $this->hooksAPI->applyFilters(
+            HookNames::INTERFACE_TYPE_FIELD_ARG_DEPRECATION_MESSAGE,
+            $this->getFieldArgDeprecationMessage($fieldName, $fieldArgName),
+            $this,
+            $fieldName,
+            $fieldArgName,
+        );
+        return $this->consolidatedFieldArgDeprecationMessageCache[$cacheKey];
     }
 
-    public function getConsolidatedFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getConsolidatedFieldArgDefaultValue($fieldName, $fieldArgName);
+        // Cache the result
+        $cacheKey = $fieldName . '(' . $fieldArgName . ':)';
+        if (array_key_exists($cacheKey, $this->consolidatedFieldArgDefaultValueCache)) {
+            return $this->consolidatedFieldArgDefaultValueCache[$cacheKey];
         }
-        return null;
+        $this->consolidatedFieldArgDefaultValueCache[$cacheKey] = $this->hooksAPI->applyFilters(
+            HookNames::INTERFACE_TYPE_FIELD_ARG_DEFAULT_VALUE,
+            $this->getFieldArgDefaultValue($fieldName, $fieldArgName),
+            $this,
+            $fieldName,
+            $fieldArgName,
+        );
+        return $this->consolidatedFieldArgDefaultValueCache[$cacheKey];
     }
 
-    public function getConsolidatedFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getConsolidatedFieldArgTypeModifiers($fieldName, $fieldArgName);
+        // Cache the result
+        $cacheKey = $fieldName . '(' . $fieldArgName . ':)';
+        if (array_key_exists($cacheKey, $this->consolidatedFieldArgTypeModifiersCache)) {
+            return $this->consolidatedFieldArgTypeModifiersCache[$cacheKey];
         }
-        return SchemaTypeModifiers::NONE;
+        $this->consolidatedFieldArgTypeModifiersCache[$cacheKey] = $this->hooksAPI->applyFilters(
+            HookNames::INTERFACE_TYPE_FIELD_ARG_TYPE_MODIFIERS,
+            $this->getFieldArgTypeModifiers($fieldName, $fieldArgName),
+            $this,
+            $fieldName,
+            $fieldArgName,
+        );
+        return $this->consolidatedFieldArgTypeModifiersCache[$cacheKey];
     }
 
     /**
@@ -290,30 +369,62 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return [];
     }
 
-    public function addFieldSchemaDefinition(array &$schemaDefinition, string $fieldName): void
+    /**
+     * Get the "schema" properties as for the fieldName
+     */
+    final public function getFieldSchemaDefinition(string $fieldName): array
     {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
-        if ($schemaDefinitionResolver !== $this) {
-            $schemaDefinitionResolver->addFieldSchemaDefinition($schemaDefinition, $fieldName);
-            return;
+        // First check if the value was cached
+        if (!isset($this->schemaDefinitionForFieldCache[$fieldName])) {
+            $this->schemaDefinitionForFieldCache[$fieldName] = $this->doGetFieldSchemaDefinition($fieldName);
         }
-
-        $this->addEnumTypeFieldSchemaDefinition($schemaDefinition, $fieldName);
+        return $this->schemaDefinitionForFieldCache[$fieldName];
     }
 
     /**
-     * Add the enum values in the schema: arrays of enum name, description, deprecated and deprecation description
+     * Get the "schema" properties as for the fieldName
      */
-    protected function addEnumTypeFieldSchemaDefinition(array &$schemaDefinition, string $fieldName): void
+    final protected function doGetFieldSchemaDefinition(string $fieldName): array
     {
-        $fieldTypeResolver = $this->getFieldTypeResolver($fieldName);
-        if ($fieldTypeResolver instanceof EnumTypeResolverInterface) {
-            /** @var EnumTypeResolverInterface */
-            $fieldEnumTypeResolver = $fieldTypeResolver;
-            $this->doAddSchemaDefinitionEnumValuesForField(
-                $schemaDefinition,
-                $fieldEnumTypeResolver
+        $schemaDefinition = $this->upstreamGetFieldSchemaDefinition(
+            $fieldName,
+            $this->getFieldTypeResolver($fieldName),
+            $this->getFieldDescription($fieldName),
+            $this->getFieldTypeModifiers($fieldName),
+            $this->getFieldDeprecationMessage($fieldName),
+        );
+
+        if ($args = $this->getFieldArgsSchemaDefinition($fieldName)) {
+            $schemaDefinition[SchemaDefinition::ARGS] = $args;
+        }
+
+        return $schemaDefinition;
+    }
+
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getFieldArgsSchemaDefinition(string $fieldName): array
+    {
+        // Cache the result
+        $cacheKey = $fieldName;
+        if (array_key_exists($cacheKey, $this->schemaFieldArgsCache)) {
+            return $this->schemaFieldArgsCache[$cacheKey];
+        }
+        $schemaFieldArgs = [];
+        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($fieldName);
+        foreach ($consolidatedFieldArgNameTypeResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
+            $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
+                $fieldArgName,
+                $fieldArgInputTypeResolver,
+                $this->getConsolidatedFieldArgDescription($fieldName, $fieldArgName),
+                $this->getConsolidatedFieldArgDefaultValue($fieldName, $fieldArgName),
+                $this->getConsolidatedFieldArgTypeModifiers($fieldName, $fieldArgName),
+                $this->getConsolidatedFieldArgDeprecationMessage($fieldName, $fieldArgName),
             );
         }
+        $this->schemaFieldArgsCache[$cacheKey] = $schemaFieldArgs;
+        return $this->schemaFieldArgsCache[$cacheKey];
     }
 }

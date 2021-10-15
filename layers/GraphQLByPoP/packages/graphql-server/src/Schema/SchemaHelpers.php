@@ -10,7 +10,7 @@ use PoP\ComponentModel\Schema\SchemaDefinitionTypes;
 class SchemaHelpers
 {
     /**
-     * Convert the field type from its internal representation (eg: "array:id")
+     * Convert the field type from its internal representation
      * to the GraphQL standard representation (eg: "[Post]")
      *
      * If $isNonNullableOrMandatory is `true`, a "!" is added to the type name,
@@ -19,8 +19,8 @@ class SchemaHelpers
      * - field response: isNonNullable
      * - field argument: isMandatory (its provided value can still be null)
      */
-    public static function getTypeToOutputInSchema(
-        string $type,
+    public static function getTypeNameForGraphQLSchema(
+        string $typeName,
         ?bool $isNonNullableOrMandatory = false,
         ?bool $isArray = false,
         ?bool $isNonNullArrayItems = false,
@@ -28,7 +28,7 @@ class SchemaHelpers
         ?bool $isNonNullArrayOfArraysItems = false,
     ): string {
         // Convert the type name to standards by GraphQL
-        $convertedType = self::convertTypeNameToGraphQLStandard($type);
+        $convertedType = self::convertTypeNameToGraphQLStandard($typeName);
 
         // Wrap the type with the array brackets
         if ($isArray) {

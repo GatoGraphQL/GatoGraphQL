@@ -7,9 +7,6 @@ services:
     GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface:
         class: \GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistry
 
-    PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface:
-        class: \GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionService
-
     GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface:
         class: \GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionService
 

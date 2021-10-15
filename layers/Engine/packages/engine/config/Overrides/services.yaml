@@ -7,3 +7,6 @@ services:
     PoP\ComponentModel\Engine\EngineInterface:
         class: \PoP\Engine\Engine\Engine
 
+    PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface:
+        class: \PoP\Engine\Schema\SchemaDefinitionService
+

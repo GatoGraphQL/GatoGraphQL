@@ -44,28 +44,12 @@ class SchemaHelpers
     }
 
     /**
-     * Remove the deprecated enumValues from the schema definition
+     * @return array<string, EnumTypeResolverInterface>
      */
-    public static function removeDeprecatedEnumValuesFromSchemaDefinition(array $enumValueDefinitions): array
-    {
-        // Remove deprecated ones
-        return array_filter(
-            $enumValueDefinitions,
-            function ($enumValueDefinition) {
-                if ($enumValueDefinition[SchemaDefinition::DEPRECATED] ?? null) {
-                    return false;
-                }
-                return true;
-            }
-        );
-    }
-
-    public static function getSchemaFieldArgEnumValueDefinitions(array $schemaFieldArgs)
+    public static function getSchemaFieldArgEnumTypeResolvers(array $schemaFieldArgs): array
     {
         return array_map(
-            function ($schemaFieldArg) {
-                return $schemaFieldArg[SchemaDefinition::ENUM_VALUES];
-            },
+            fn (array $schemaFieldArg): EnumTypeResolverInterface => $schemaFieldArg[SchemaDefinition::TYPE_RESOLVER],
             $schemaFieldArgs
         );
     }

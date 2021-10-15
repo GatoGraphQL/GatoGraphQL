@@ -9,7 +9,7 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResol
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\Schema\SchemaDefinitionService;
+use PoP\API\Schema\SchemaDefinitionService;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements GraphQLSchemaDefinitionServiceInterface
@@ -24,57 +24,35 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
         $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
     }
 
-    public function getQueryRootTypeSchemaKey(): string
-    {
-        $queryTypeResolver = $this->getQueryRootTypeResolver();
-        return $this->getTypeResolverTypeSchemaKey($queryTypeResolver);
-    }
-
     /**
      * If nested mutations are enabled, use "Root".
      * Otherwise, use "Query"
      */
-    public function getQueryRootTypeResolver(): ObjectTypeResolverInterface
+    public function getQueryRootObjectTypeResolver(): ObjectTypeResolverInterface
     {
         $vars = ApplicationState::getVars();
         if ($vars['nested-mutations-enabled']) {
-            return $this->getRootTypeResolver();
+            return $this->getRootObjectTypeResolver();
         }
 
         return $this->queryRootObjectTypeResolver;
-    }
-
-    public function getMutationRootTypeSchemaKey(): ?string
-    {
-        if ($mutationTypeResolver = $this->getMutationRootTypeResolver()) {
-            return $this->getTypeResolverTypeSchemaKey($mutationTypeResolver);
-        }
-        return null;
     }
 
     /**
      * If nested mutations are enabled, use "Root".
      * Otherwise, use "Mutation"
      */
-    public function getMutationRootTypeResolver(): ?ObjectTypeResolverInterface
+    public function getMutationRootObjectTypeResolver(): ?ObjectTypeResolverInterface
     {
         if (!APIComponentConfiguration::enableMutations()) {
             return null;
         }
         $vars = ApplicationState::getVars();
         if ($vars['nested-mutations-enabled']) {
-            return $this->getRootTypeResolver();
+            return $this->getRootObjectTypeResolver();
         }
 
         return $this->mutationRootObjectTypeResolver;
-    }
-
-    public function getSubscriptionRootTypeSchemaKey(): ?string
-    {
-        if ($subscriptionTypeResolver = $this->getSubscriptionRootTypeResolver()) {
-            return $this->getTypeResolverTypeSchemaKey($subscriptionTypeResolver);
-        }
-        return null;
     }
 
     /**
