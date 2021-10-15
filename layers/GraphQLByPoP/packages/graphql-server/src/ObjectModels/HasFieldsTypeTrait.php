@@ -18,7 +18,6 @@ trait HasFieldsTypeTrait
     protected function initFields(array &$fullSchemaDefinition, array $schemaDefinitionPath, bool $includeConnections): void
     {
         $this->fields = [];
-        $interfaceNames = $this->getInterfaceNames();
 
         // Iterate to the definition of the fields in the schema, and create an object for each of them
         // Print connections and then fields, it looks better in the Interactive Schema
@@ -31,8 +30,7 @@ trait HasFieldsTypeTrait
                     [
                         SchemaDefinition::CONNECTIONS,
                     ]
-                ),
-                $interfaceNames
+                )
             );
         }
         // 2. Fields under this type
@@ -43,8 +41,7 @@ trait HasFieldsTypeTrait
                 [
                     SchemaDefinition::FIELDS,
                 ]
-            ),
-            $interfaceNames
+            )
         );
         if (ComponentConfiguration::addGlobalFieldsToSchema()) {
             // Global fields and connections have already been initialized, simply get the reference to the existing objects from the registryMap
@@ -80,11 +77,11 @@ trait HasFieldsTypeTrait
         }
         return [];
     }
-    protected function initFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath, array $interfaceNames): void
+    protected function initFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
     {
         $this->fields = array_merge(
             $this->fields,
-            SchemaDefinitionHelpers::initFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath, $interfaceNames)
+            SchemaDefinitionHelpers::initFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
         );
     }
     protected function retrieveFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void

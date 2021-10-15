@@ -82,40 +82,15 @@ class SchemaDefinitionHelpers
         }
         return $interfaceTypeFields;
     }
-    public static function initFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath, array $interfaceNames = []): array
+    public static function initFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array
     {
-        // $interfaceTypeFields = self::getInterfaceTypeFields($fullSchemaDefinition, $interfaceNames);
         $fieldSchemaDefinitionPointer = self::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
         $fields = [];
         foreach (array_keys($fieldSchemaDefinitionPointer) as $fieldName) {
-            /**
-             * If an ObjectType implements an interface, and the interface
-             * implements the same field, then we must return the field definition as
-             * from the perspective of the interface!
-             *
-             * @deprecated 0.1.0 Actually, this creates another issue:
-             * the type is unable to override the schema definition for a field
-             * taken from an implemented interface.
-             * All properties (description, isDeprecated, etc) are initially retrieved from
-             * the interface, but then the type must be able to override/customize them.
-             * For instance, the description can be customized to the field,
-             * and the field can be deprecated just for that type (eg: Page.excerpt) and
-             * not everywhere (eg: IsCustomPost.excerpt)
-             */
-            // if ($interfaceName = $interfaceTypeFields[$fieldName] ?? null) {
-            //     $targetFieldSchemaDefinitionPath = [
-            //         SchemaDefinition::INTERFACES,
-            //         $interfaceName,
-            //         SchemaDefinition::FIELDS,
-            //     ];
-            // } else {
-            $targetFieldSchemaDefinitionPath = $fieldSchemaDefinitionPath;
-            // }
-
             $fields[] = new Field(
                 $fullSchemaDefinition,
                 array_merge(
-                    $targetFieldSchemaDefinitionPath,
+                    $fieldSchemaDefinitionPath,
                     [
                         $fieldName
                     ]
