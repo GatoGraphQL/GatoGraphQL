@@ -60,14 +60,13 @@ class SchemaHelpers
         );
     }
 
-    public static function getSchemaFieldArgEnumValueDefinitions(array $schemaFieldArgs): array
+    /**
+     * @return array<string, EnumTypeResolverInterface>
+     */
+    public static function getSchemaFieldArgEnumTypeResolvers(array $schemaFieldArgs): array
     {
         return array_map(
-            function (array $schemaFieldArg): array {
-                /** @var EnumTypeResolverInterface */
-                $enumTypeResolver = $schemaFieldArg[SchemaDefinition::TYPE_RESOLVER];
-                return $enumTypeResolver->getEnumOutputValues();
-            },
+            fn (array $schemaFieldArg): EnumTypeResolverInterface => $schemaFieldArg[SchemaDefinition::TYPE_RESOLVER],
             $schemaFieldArgs
         );
     }
