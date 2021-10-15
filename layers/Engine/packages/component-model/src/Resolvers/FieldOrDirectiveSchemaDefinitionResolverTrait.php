@@ -70,7 +70,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
             $schemaDefinition[SchemaDefinition::DEFAULT_VALUE] = $defaultValue;
         }
         if ($deprecationMessage !== null) {
-            $schemaDefinition[SchemaDefinition::DEPRECATED] = $deprecationMessage;
+            $schemaDefinition[SchemaDefinition::DEPRECATED] = true;
             $schemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationMessage;
         }
         $this->processSchemaDefinitionModifiers(
