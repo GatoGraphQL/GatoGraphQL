@@ -12,26 +12,17 @@ abstract class AbstractSchemaDefinitionReferenceObject implements SchemaDefiniti
     /**
      * @var array<string, mixed>
      */
-    protected array $fullSchemaDefinition;
-    /**
-     * @var string[]
-     */
-    protected array $schemaDefinitionPath;
-    /**
-     * @var array<string, mixed>
-     */
     protected array $schemaDefinition;
+
     /**
      * Build a new Schema Definition Reference Object
      */
     public function __construct(
-        array &$fullSchemaDefinition,
-        array $schemaDefinitionPath
+        /** @var array<string, mixed> */
+        protected array &$fullSchemaDefinition,
+        /** @var string[] */
+        protected array $schemaDefinitionPath,
     ) {
-        // Also save this variable to lazy initi new types in HasTypeSchemaDefinitionReferenceTrait
-        $this->fullSchemaDefinition = $fullSchemaDefinition;
-        $this->schemaDefinitionPath = $schemaDefinitionPath;
-
         // Retrieve this element's schema definition by iterating down its path starting from the root of the full schema definition
         $schemaDefinitionPointer = &$fullSchemaDefinition;
         foreach ($schemaDefinitionPath as $pathLevel) {
