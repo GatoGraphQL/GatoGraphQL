@@ -232,7 +232,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // From GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-HAJbLA4DABCBIu9N):
                 // "should be non-null for NON_NULL and LIST only, must be null for the others"
                 if ($type instanceof TypeWrapperInterface) {
-                    return $type->getNestedTypeID();
+                    return $type->getWrappedTypeID();
                 }
                 return null;
             case 'specifiedByURL':

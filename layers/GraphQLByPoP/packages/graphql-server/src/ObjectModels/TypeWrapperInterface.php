@@ -6,6 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 interface TypeWrapperInterface extends TypeInterface
 {
-    public function getNestedType(): TypeInterface;
-    public function getNestedTypeID(): string;
+    public function getWrappedType(): TypeInterface;
+    public function getWrappedTypeID(): string;
 }

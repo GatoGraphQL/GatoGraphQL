@@ -13,11 +13,11 @@ abstract class AbstractTypeWrapper extends AbstractType implements TypeWrapperIn
     ) {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
     }
-    public function getNestedType(): TypeInterface
+    public function getWrappedType(): TypeInterface
     {
         return $this->nestedType;
     }
-    public function getNestedTypeID(): string
+    public function getWrappedTypeID(): string
     {
         return $this->nestedType->getID();
     }
