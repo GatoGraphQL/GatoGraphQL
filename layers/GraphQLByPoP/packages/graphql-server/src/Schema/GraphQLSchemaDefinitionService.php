@@ -24,12 +24,6 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
         $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
     }
 
-    public function getQueryRootTypeSchemaKey(): string
-    {
-        $queryTypeResolver = $this->getQueryRootTypeResolver();
-        return $this->getTypeSchemaKey($queryTypeResolver);
-    }
-
     /**
      * If nested mutations are enabled, use "Root".
      * Otherwise, use "Query"
@@ -42,14 +36,6 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
         }
 
         return $this->queryRootObjectTypeResolver;
-    }
-
-    public function getMutationRootTypeSchemaKey(): ?string
-    {
-        if ($mutationTypeResolver = $this->getMutationRootTypeResolver()) {
-            return $this->getTypeSchemaKey($mutationTypeResolver);
-        }
-        return null;
     }
 
     /**
@@ -67,14 +53,6 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
         }
 
         return $this->mutationRootObjectTypeResolver;
-    }
-
-    public function getSubscriptionRootTypeSchemaKey(): ?string
-    {
-        if ($subscriptionTypeResolver = $this->getSubscriptionRootTypeResolver()) {
-            return $this->getTypeSchemaKey($subscriptionTypeResolver);
-        }
-        return null;
     }
 
     /**

@@ -8,7 +8,6 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -29,13 +28,6 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
         $this->translationAPI = $translationAPI;
     }
 
-    /**
-     * Use the type name as schema key
-     */
-    final public function getTypeSchemaKey(TypeResolverInterface $typeResolver): string
-    {
-        return $typeResolver->getMaybeNamespacedTypeName();
-    }
     /**
      * The `AnyScalar` type is a wildcard type,
      * representing *any* type (string, int, bool, etc)
