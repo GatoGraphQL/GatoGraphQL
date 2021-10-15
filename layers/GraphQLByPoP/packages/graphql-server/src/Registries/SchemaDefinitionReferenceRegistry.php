@@ -19,6 +19,7 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\API\Schema\SchemaDefinitionServiceInterface;
+use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\Translation\TranslationAPIInterface;
@@ -139,8 +140,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             // Additionally append the QueryRoot and MutationRoot to the schema
             $queryRootTypeName = $this->queryRootObjectTypeResolver->getMaybeNamespacedTypeName();
             // Remove the fields connecting from Root to QueryRoot and MutationRoot
-            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$rootTypeName][SchemaDefinition::CONNECTIONS]['queryRoot']);
-            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$rootTypeName][SchemaDefinition::CONNECTIONS]['mutationRoot']);
+            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::CONNECTIONS]['queryRoot']);
+            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::CONNECTIONS]['mutationRoot']);
         }
 
         /**
@@ -162,11 +163,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
              * > These fields are implicit and do not appear in the fields list in the root type of the query operation.
              * @see http://spec.graphql.org/draft/#sel-FAJXHABcBlB6rF
              */
-            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$rootTypeName][SchemaDefinition::CONNECTIONS]['__type']);
-            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$rootTypeName][SchemaDefinition::CONNECTIONS]['__schema']);
+            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::CONNECTIONS]['__type']);
+            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::CONNECTIONS]['__schema']);
             if ($queryRootTypeName !== null) {
-                unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$queryRootTypeName][SchemaDefinition::CONNECTIONS]['__type']);
-                unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$queryRootTypeName][SchemaDefinition::CONNECTIONS]['__schema']);
+                unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$queryRootTypeName][SchemaDefinition::CONNECTIONS]['__type']);
+                unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$queryRootTypeName][SchemaDefinition::CONNECTIONS]['__schema']);
             }
         }
 
@@ -180,16 +181,18 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
              * Check if to remove the "self" field everywhere, or if to keep it just for the Root type
              */
             $keepSelfFieldForRootType = ComponentConfiguration::addSelfFieldForRootTypeToSchema();
-            foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES]) as $typeName) {
-                if (!$keepSelfFieldForRootType || ($typeName !== $rootTypeName && ($enableNestedMutations || $typeName !== $queryRootTypeName))) {
-                    unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeName][SchemaDefinition::CONNECTIONS]['self']);
+            foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES] as $typeKind => $typeSchemaDefinitions) {
+                foreach (array_keys($typeSchemaDefinitions) as $typeName) {
+                    if (!$keepSelfFieldForRootType || ($typeName !== $rootTypeName && ($enableNestedMutations || $typeName !== $queryRootTypeName))) {
+                        unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeName][SchemaDefinition::CONNECTIONS]['self']);
+                    }
                 }
             }
         }
         if (!ComponentConfiguration::addFullSchemaFieldToSchema()) {
-            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$rootTypeName][SchemaDefinition::FIELDS]['fullSchema']);
+            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::FIELDS]['fullSchema']);
             if ($queryRootTypeName !== null) {
-                unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$queryRootTypeName][SchemaDefinition::FIELDS]['fullSchema']);
+                unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$queryRootTypeName][SchemaDefinition::FIELDS]['fullSchema']);
             }
         }
 
@@ -265,15 +268,12 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             $this->maybeAddTypeToSchemaDirectiveDescription($itemPath);
         }
         // 2. Each type's fields, connections and directives
-        if ($addVersionToSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription || $enableComposableDirectives) {
-            foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES] as $typeName => $typeSchemaDefinition) {
-                // No need for Union types
-                if ($typeSchemaDefinition[SchemaDefinition::IS_UNION] ?? null) {
-                    continue;
-                }
+        if ($addVersionToSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription/* || $enableComposableDirectives*/) {
+            foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT] as $typeName => $typeSchemaDefinition) {
                 foreach (array_keys($typeSchemaDefinition[SchemaDefinition::FIELDS]) as $fieldName) {
                     $itemPath = [
                         SchemaDefinition::TYPES,
+                        TypeKinds::OBJECT,
                         $typeName,
                         SchemaDefinition::FIELDS,
                         $fieldName
@@ -289,6 +289,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 foreach (array_keys($typeSchemaDefinition[SchemaDefinition::CONNECTIONS]) as $connectionName) {
                     $itemPath = [
                         SchemaDefinition::TYPES,
+                        TypeKinds::OBJECT,
                         $typeName,
                         SchemaDefinition::CONNECTIONS,
                         $connectionName
@@ -301,21 +302,22 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                         $this->addMutationLabelToSchemaFieldDescription($itemPath);
                     }
                 }
-                foreach (array_keys($typeSchemaDefinition[SchemaDefinition::DIRECTIVES]) as $directiveName) {
-                    $itemPath = [
-                        SchemaDefinition::TYPES,
-                        $typeName,
-                        SchemaDefinition::DIRECTIVES,
-                        $directiveName
-                    ];
-                    // $this->introduceSDLNotationToFieldOrDirectiveArgs($itemPath);
-                    if ($enableComposableDirectives) {
-                        $this->addNestedDirectiveDataToSchemaDirectiveArgs($itemPath);
-                    }
-                    if ($addVersionToSchemaFieldDescription) {
-                        $this->addVersionToSchemaFieldDescription($itemPath);
-                    }
-                }
+                // foreach (array_keys($typeSchemaDefinition[SchemaDefinition::DIRECTIVES]) as $directiveName) {
+                //     $itemPath = [
+                //         SchemaDefinition::TYPES,
+                //         TypeKinds::OBJECT,
+                //         $typeName,
+                //         SchemaDefinition::DIRECTIVES,
+                //         $directiveName
+                //     ];
+                //     // $this->introduceSDLNotationToFieldOrDirectiveArgs($itemPath);
+                //     if ($enableComposableDirectives) {
+                //         $this->addNestedDirectiveDataToSchemaDirectiveArgs($itemPath);
+                //     }
+                //     if ($addVersionToSchemaFieldDescription) {
+                //         $this->addVersionToSchemaFieldDescription($itemPath);
+                //     }
+                // }
             }
         }
         // 3. Interfaces
