@@ -70,13 +70,6 @@ trait HasFieldsTypeTrait
             });
         }
     }
-    protected function getInterfaceNames()
-    {
-        if ($this instanceof HasInterfacesTypeInterface) {
-            return array_keys($this->schemaDefinition[SchemaDefinition::INTERFACES]);
-        }
-        return [];
-    }
     protected function createFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
     {
         $this->fields = array_merge(
