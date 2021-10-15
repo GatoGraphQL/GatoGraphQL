@@ -35,7 +35,6 @@ class SchemaDefinition
     public const QUERY_TYPE = 'queryType';
     public const TYPES = 'types';
     public const POSSIBLE_TYPES = 'possibleTypes';
-    public const RECURSION = 'recursion';
     public const REPEATED = 'repeated';
     public const DIRECTIVES = 'directives';
     public const GLOBAL_DIRECTIVES = 'globalDirectives';
