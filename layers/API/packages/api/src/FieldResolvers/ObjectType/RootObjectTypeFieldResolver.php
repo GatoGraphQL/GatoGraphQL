@@ -76,7 +76,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'fullSchema' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            'fullSchema' => SchemaTypeModifiers::NON_NULLABLE,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -106,9 +106,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         switch ($fieldName) {
             case 'fullSchema':
+                // Convert from array to stdClass
                 /** @var SchemaDefinitionServiceInterface */
                 $schemaDefinitionService = $this->schemaDefinitionService;
-                return $schemaDefinitionService->getFullSchemaDefinition();
+                return (object) $schemaDefinitionService->getFullSchemaDefinition();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
