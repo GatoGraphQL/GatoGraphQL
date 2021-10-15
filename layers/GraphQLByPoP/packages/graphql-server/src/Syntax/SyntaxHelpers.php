@@ -9,32 +9,32 @@ class SyntaxHelpers
     /**
      * Indicate if the type if of type "LIST"
      */
-    public static function isListWrappingType(string $type): bool
+    public static function isListWrappingType(string $typeNameOrID): bool
     {
-        return substr($type, 0, 1) == '[' && substr($type, -1) == ']';
+        return substr($typeNameOrID, 0, 1) == '[' && substr($typeNameOrID, -1) == ']';
     }
 
     /**
      * Extract the nested types inside the list
      */
-    public static function getListTypeNestedTypeName(string $type): string
+    public static function getListTypeNestedTypeName(string $typeNameOrID): string
     {
-        return substr($type, 1, strlen($type) - 2);
+        return substr($typeNameOrID, 1, strlen($typeNameOrID) - 2);
     }
 
     /**
      * Indicate if the type if of type "NON_NULL"
      */
-    public static function isNonNullWrappingType(string $type): bool
+    public static function isNonNullWrappingType(string $typeNameOrID): bool
     {
-        return substr($type, -1) == '!';
+        return substr($typeNameOrID, -1) == '!';
     }
 
     /**
      * Extract the nested types which are "non null"
      */
-    public static function getNonNullTypeNestedTypeName(string $type): string
+    public static function getNonNullTypeNestedTypeName(string $typeNameOrID): string
     {
-        return substr($type, 0, strlen($type) - 1);
+        return substr($typeNameOrID, 0, strlen($typeNameOrID) - 1);
     }
 }
