@@ -18,7 +18,6 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
 
         $this->initArgs($fullSchemaDefinition, $schemaDefinitionPath);
-        $this->initializeArgsTypeDependencies();
     }
     public function getName(): string
     {

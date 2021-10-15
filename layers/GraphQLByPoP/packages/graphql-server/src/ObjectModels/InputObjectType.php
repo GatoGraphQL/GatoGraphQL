@@ -18,9 +18,6 @@ class InputObjectType extends AbstractType
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
 
         $this->initInputValues($fullSchemaDefinition, $schemaDefinitionPath);
-        foreach ($this->inputValues as $inputValue) {
-            $inputValue->initializeTypeDependencies();
-        }
     }
     protected function initInputValues(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {

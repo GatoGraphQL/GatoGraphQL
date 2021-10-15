@@ -17,11 +17,6 @@ class Field extends AbstractSchemaDefinitionReferenceObject
 
         $this->initArgs($fullSchemaDefinition, $schemaDefinitionPath);
     }
-    public function initializeTypeDependencies(): void
-    {
-        $this->initType();
-        $this->initializeArgsTypeDependencies();
-    }
     public function getName(): string
     {
         return $this->schemaDefinition[SchemaDefinition::NAME];

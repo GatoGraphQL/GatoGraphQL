@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 interface HasInterfacesTypeInterface extends TypeInterface
 {
-    public function getInterfaces(): array;
     /**
      * Return the interfaces through their ID representation: Kind + Name
      */
