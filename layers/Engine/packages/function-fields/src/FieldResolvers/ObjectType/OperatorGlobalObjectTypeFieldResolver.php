@@ -13,6 +13,8 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\FloatScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FunctionFields\TypeResolvers\ScalarType\ArrayKeyScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
+use stdClass;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
@@ -21,6 +23,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
     protected ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver;
+    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
 
     #[Required]
     final public function autowireOperatorGlobalObjectTypeFieldResolver(
@@ -28,11 +31,13 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         StringScalarTypeResolver $stringScalarTypeResolver,
         AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
         ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver,
+        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
     ): void {
         $this->floatScalarTypeResolver = $floatScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
         $this->arrayKeyScalarTypeResolver = $arrayKeyScalarTypeResolver;
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
     }
 
     public function getFieldNamesToResolve(): array
@@ -144,45 +149,45 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 'by' => $this->floatScalarTypeResolver,
             ],
             'arrayRandom' => [
-                'array' => $this->anyScalarScalarTypeResolver,
+                'array' => $this->jsonObjectScalarTypeResolver,
             ],
             'arrayJoin' => [
-                'array' => $this->stringScalarTypeResolver,
+                'array' => $this->jsonObjectScalarTypeResolver,
                 'separator' => $this->stringScalarTypeResolver,
             ],
             'arrayItem' => [
-                'array' => $this->anyScalarScalarTypeResolver,
+                'array' => $this->jsonObjectScalarTypeResolver,
                 'position' => $this->stringScalarTypeResolver,
             ],
             'arraySearch' => [
-                'array' => $this->anyScalarScalarTypeResolver,
+                'array' => $this->jsonObjectScalarTypeResolver,
                 'element' => $this->stringScalarTypeResolver,
             ],
             'arrayFill' => [
-                'target' => $this->anyScalarScalarTypeResolver,
+                'target' => $this->jsonObjectScalarTypeResolver,
                 'source' => $this->anyScalarScalarTypeResolver,
                 'index' => $this->stringScalarTypeResolver,
                 'properties' => $this->stringScalarTypeResolver,
             ],
             'arrayValues' => [
-                'array' => $this->anyScalarScalarTypeResolver,
+                'array' => $this->jsonObjectScalarTypeResolver,
             ],
             'arrayUnique' => [
-                'array' => $this->anyScalarScalarTypeResolver,
+                'array' => $this->jsonObjectScalarTypeResolver,
             ],
             'arrayDiff' => [
-                'arrays' => $this->anyScalarScalarTypeResolver,
+                'arrays' => $this->jsonObjectScalarTypeResolver,
             ],
             'arrayAddItem' => [
-                'array' => $this->anyScalarScalarTypeResolver,
+                'array' => $this->jsonObjectScalarTypeResolver,
                 'value' => $this->anyScalarScalarTypeResolver,
                 'key' => $this->arrayKeyScalarTypeResolver,
             ],
             'arrayAsQueryStr' => [
-                'array' => $this->anyScalarScalarTypeResolver,
+                'array' => $this->jsonObjectScalarTypeResolver,
             ],
             'objectAsQueryStr' => [
-                'object' => $this->anyScalarScalarTypeResolver,
+                'object' => $this->jsonObjectScalarTypeResolver,
             ],
             'upperCase',
             'lowerCase',
@@ -340,17 +345,22 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             case 'divide':
                 return (float)$fieldArgs['number'] / (float)$fieldArgs['by'];
             case 'arrayRandom':
-                return $fieldArgs['array'][array_rand($fieldArgs['array'])];
+                $array = (array) $fieldArgs['array'];
+                return $array[array_rand($array)];
             case 'arrayJoin':
-                return implode($fieldArgs['separator'] ?? '', $fieldArgs['array']);
+                $array = (array) $fieldArgs['array'];
+                return implode($fieldArgs['separator'] ?? '', $array);
             case 'arrayItem':
-                return $fieldArgs['array'][$fieldArgs['position']];
+                $array = (array) $fieldArgs['array'];
+                return $array[$fieldArgs['position']];
             case 'arraySearch':
-                return array_search($fieldArgs['element'], $fieldArgs['array']);
+                $array = (array) $fieldArgs['array'];
+                return array_search($fieldArgs['element'], $array);
             case 'arrayFill':
                 // For each element in the source, iterate all the elements in the target
                 // If the value for the index property is the same, then copy the properties
-                $value = $fieldArgs['target'];
+                // Cast from stdClass to array
+                $value = (array) $fieldArgs['target'];
                 $index = $fieldArgs['index'];
                 foreach ($value as &$targetProps) {
                     foreach ($fieldArgs['source'] as $sourceProps) {
@@ -362,30 +372,35 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                         }
                     }
                 }
-                return $value;
+                // Cast from array to stdClass
+                return (object) $value;
             case 'arrayValues':
-                return array_values($fieldArgs['array']);
+                $array = (array) $fieldArgs['array'];
+                return (object) array_values($array);
             case 'arrayUnique':
-                return array_unique($fieldArgs['array']);
+                $array = (array) $fieldArgs['array'];
+                return (object) array_unique($array);
             case 'arrayDiff':
                 // Diff the first array against all the others
-                $arrays = $fieldArgs['arrays'];
-                $first = (array)array_shift($arrays);
-                return array_diff($first, ...$arrays);
+                $arrays = array_map(
+                    fn (stdClass $object) => (array) $object,
+                    $fieldArgs['arrays']
+                );
+                $first = array_shift($arrays);
+                return (object) array_diff($first, ...$arrays);
             case 'arrayAddItem':
-                $array = $fieldArgs['array'];
+                $array = (array) $fieldArgs['array'];
                 if ($fieldArgs['key'] ?? null) {
                     $array[$fieldArgs['key']] = $fieldArgs['value'];
                 } else {
                     $array[] = $fieldArgs['value'];
                 }
-                return $array;
+                return (object) $array;
             case 'arrayAsQueryStr':
-                return $this->fieldQueryInterpreter->getArrayAsStringForQuery($fieldArgs['array']);
+                $array = (array) $fieldArgs['array'];
+                return $this->fieldQueryInterpreter->getArrayAsStringForQuery($array);
             case 'objectAsQueryStr':
                 return $this->fieldQueryInterpreter->getObjectAsStringForQuery($fieldArgs['object']);
-            case 'arrayUnique':
-                return array_unique($fieldArgs['array']);
             case 'upperCase':
                 return strtoupper($fieldArgs['text']);
             case 'lowerCase':
