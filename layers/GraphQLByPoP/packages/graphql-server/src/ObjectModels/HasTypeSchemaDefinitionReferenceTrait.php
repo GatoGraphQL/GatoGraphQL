@@ -16,7 +16,11 @@ trait HasTypeSchemaDefinitionReferenceTrait
      */
     public function getTypeID(): string
     {
-        $typeID = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID($this->schemaDefinitionPath);
+        $typeID = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID([
+            SchemaDefinition::TYPES,
+            $this->schemaDefinition[SchemaDefinition::TYPE_KIND],
+            $this->schemaDefinition[SchemaDefinition::TYPE_NAME],
+        ]);
         return SchemaHelpers::getTypeToOutputInSchema(
             $typeID,
             $this->schemaDefinition[SchemaDefinition::NON_NULLABLE] ?? null,
