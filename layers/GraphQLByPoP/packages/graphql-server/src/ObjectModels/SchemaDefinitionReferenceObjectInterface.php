@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-interface SchemaDefinitionReferenceObjectInterface extends WrappingTypeOrSchemaDefinitionReferenceObjectInterface
+interface SchemaDefinitionReferenceObjectInterface
 {
     public function getSchemaDefinitionPath(): array;
+
+    public function getID(): string;
 }

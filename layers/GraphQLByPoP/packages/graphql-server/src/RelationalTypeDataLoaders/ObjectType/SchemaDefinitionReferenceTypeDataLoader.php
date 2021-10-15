@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 
-use GraphQLByPoP\GraphQLServer\ObjectModels\ListType;
-use GraphQLByPoP\GraphQLServer\ObjectModels\NonNullType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\WrappingTypeOrSchemaDefinitionReferenceObjectInterface;
-use GraphQLByPoP\GraphQLServer\ObjectModels\TypeInterface;
 use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
-use GraphQLByPoP\GraphQLServer\Syntax\SyntaxHelpers;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -32,31 +28,8 @@ class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoad
     public function getObjects(array $ids): array
     {
         return array_map(
-            fn (string $typeID) => $this->getWrappingTypeOrSchemaDefinitionReferenceObject($typeID),
+            fn (string $typeID) => $this->schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID),
             $ids
         );
-    }
-
-    protected function getWrappingTypeOrSchemaDefinitionReferenceObject(string $typeID): WrappingTypeOrSchemaDefinitionReferenceObjectInterface
-    {
-        // Check if the type is non-null
-        if (SyntaxHelpers::isNonNullType($typeID)) {
-            /** @var TypeInterface */
-            $wrappedType = $this->getWrappingTypeOrSchemaDefinitionReferenceObject(
-                SyntaxHelpers::getNonNullTypeNestedTypeName($typeID)
-            );
-            return new NonNullType($wrappedType);
-        }
-
-        // Check if it is an array
-        if (SyntaxHelpers::isListType($typeID)) {
-            /** @var TypeInterface */
-            $wrappedType = $this->getWrappingTypeOrSchemaDefinitionReferenceObject(
-                SyntaxHelpers::getListTypeNestedTypeName($typeID)
-            );
-            return new ListType($wrappedType);
-        }
-
-        return $this->schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
     }
 }

@@ -12,7 +12,7 @@ trait HasTypeSchemaDefinitionReferenceTrait
 {
     /**
      * Append the GraphQL wrappers to the ID, to select any entity
-     * of type WrappingTypeOrSchemaDefinitionReferenceObjectInterface
+     * of type NamedType or WrappingType
      */
     public function getTypeID(): string
     {
