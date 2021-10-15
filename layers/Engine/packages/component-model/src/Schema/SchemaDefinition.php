@@ -37,7 +37,6 @@ class SchemaDefinition
     public const GLOBAL_FIELDS = 'globalFields';
     public const QUERY_TYPE = 'queryType';
     public const TYPES = 'types';
-    public const TYPE_SCHEMA = 'typeSchema';
     public const POSSIBLE_TYPES = 'possibleTypes';
     public const BASERESOLVER = 'baseResolver';
     public const RECURSION = 'recursion';
