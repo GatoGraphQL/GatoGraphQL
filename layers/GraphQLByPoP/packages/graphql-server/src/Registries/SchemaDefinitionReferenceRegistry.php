@@ -12,7 +12,6 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinitionReferenceObjectInter
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionTypes as GraphQLServerSchemaDefinitionTypes;
-use GraphQLByPoP\GraphQLServer\Schema\SchemaHelpers;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
@@ -20,7 +19,6 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\API\Schema\SchemaDefinitionServiceInterface;
-use PoP\ComponentModel\Schema\SchemaDefinitionTypes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\Translation\TranslationAPIInterface;
