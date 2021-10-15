@@ -82,6 +82,10 @@ class SchemaDefinitionHelpers
         }
         return $interfaceTypeFields;
     }
+    
+    /**
+     * @return Field[]
+     */
     public static function initFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array
     {
         $fieldSchemaDefinitionPointer = self::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
@@ -99,6 +103,10 @@ class SchemaDefinitionHelpers
         }
         return $fields;
     }
+    
+    /**
+     * @return Field[]
+     */
     public static function retrieveFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array
     {
         $fieldSchemaDefinitionPointer = self::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
