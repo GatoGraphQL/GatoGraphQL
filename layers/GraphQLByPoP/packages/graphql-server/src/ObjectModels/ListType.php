@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-class ListType extends AbstractNestableType
+class ListType extends AbstractTypeWrapper
 {
     public function getName(): string
     {
