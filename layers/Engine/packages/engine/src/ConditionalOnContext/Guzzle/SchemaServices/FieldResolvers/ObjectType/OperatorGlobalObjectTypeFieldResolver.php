@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\ConditionalOnContext\Guzzle\SchemaServices\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -109,9 +110,17 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     ): mixed {
         switch ($fieldName) {
             case 'getJSON':
-                return GuzzleHelpers::requestJSON($fieldArgs['url'], [], 'GET');
+                $response = GuzzleHelpers::requestJSON($fieldArgs['url'], [], 'GET');
+                if (GeneralUtils::isError($response)) {
+                    return $response;
+                }
+                return (object) $response;
             case 'getAsyncJSON':
-                return GuzzleHelpers::requestAsyncJSON($fieldArgs['urls'], [], 'GET');
+                $response = GuzzleHelpers::requestAsyncJSON($fieldArgs['urls'], [], 'GET');
+                if (GeneralUtils::isError($response)) {
+                    return $response;
+                }
+                return (object) $response;
         }
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
