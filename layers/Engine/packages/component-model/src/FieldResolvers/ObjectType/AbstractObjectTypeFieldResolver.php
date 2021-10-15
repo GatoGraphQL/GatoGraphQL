@@ -16,7 +16,6 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefi
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\Resolvers\EnumTypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
@@ -41,9 +40,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 {
     use AttachableExtensionTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
-    use FieldOrDirectiveResolverTrait, EnumTypeSchemaDefinitionResolverTrait {
-        EnumTypeSchemaDefinitionResolverTrait::doAddSchemaDefinitionEnumValuesForField insteadof FieldOrDirectiveResolverTrait;
-    }
+    use FieldOrDirectiveResolverTrait;
     use FieldOrDirectiveSchemaDefinitionResolverTrait {
         FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldSchemaDefinition as upstreamGetFieldSchemaDefinition;
     }

@@ -12,8 +12,6 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 trait FieldOrDirectiveSchemaDefinitionResolverTrait
 {
-    use EnumTypeSchemaDefinitionResolverTrait;
-
     final public function getFieldOrDirectiveArgSchemaDefinition(
         string $argName,
         InputTypeResolverInterface $argInputTypeResolver,
