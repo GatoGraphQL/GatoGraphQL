@@ -1180,12 +1180,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         }
     }
 
-    protected function getDirectiveSchemaDefinition(DirectiveResolverInterface $directiveResolver, array $options = []): array
-    {
-        $directiveSchemaDefinition = $directiveResolver->getDirectiveSchemaDefinition($this);
-        return $directiveSchemaDefinition;
-    }
-
     public function getSchemaDirectiveResolvers(bool $global): array
     {
         $directiveResolverInstances = [];
