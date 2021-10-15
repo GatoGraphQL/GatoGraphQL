@@ -39,10 +39,6 @@ class InputObjectType extends AbstractType
         }
     }
 
-    protected function getDynamicTypeNamePropertyInSchema(): string
-    {
-        return SchemaDefinition::INPUT_OBJECT_NAME;
-    }
     public function getKind(): string
     {
         return TypeKinds::INPUT_OBJECT;

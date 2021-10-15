@@ -39,12 +39,6 @@ class EnumType extends AbstractType
         }
     }
 
-    protected function getDynamicTypeNamePropertyInSchema(): string
-    {
-        // @todo Added temporary hack. Fix this!
-        return 'Saronga';
-        // return SchemaDefinition::ENUM_NAME;
-    }
     public function getKind(): string
     {
         return TypeKinds::ENUM;
