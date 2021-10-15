@@ -10,19 +10,16 @@ use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFaca
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionTypes as GraphQLServerSchemaDefinitionTypes;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\SchemaDefinition;
+use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\Schema\SchemaDefinitionTokens;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Facades\Schema\SchemaDefinitionServiceFacade;
 
 class Schema
 {
-    /**
-     * @var ScalarType[]
-     */
+    /** @var TypeInterface[] */
     protected array $types;
-    /**
-     * @var Directive[]
-     */
+    /** @var Directive[] */
     protected array $directives;
     protected ?TypeInterface $queryType = null;
     protected ?TypeInterface $mutationType = null;
@@ -32,38 +29,7 @@ class Schema
         array $fullSchemaDefinition,
         protected string $id
     ) {
-        // Initialize the global elements before anything, since they will
-        // be references from the ObjectType: Fields/Connections/Directives
-        // 1. Initialize all the Scalar types
-        $scalarTypeNames = [
-            GraphQLServerSchemaDefinitionTypes::TYPE_ID,
-            GraphQLServerSchemaDefinitionTypes::TYPE_STRING,
-            GraphQLServerSchemaDefinitionTypes::TYPE_INT,
-            GraphQLServerSchemaDefinitionTypes::TYPE_FLOAT,
-            GraphQLServerSchemaDefinitionTypes::TYPE_BOOL,
-            GraphQLServerSchemaDefinitionTypes::TYPE_OBJECT,
-            GraphQLServerSchemaDefinitionTypes::TYPE_ANY_SCALAR,
-            GraphQLServerSchemaDefinitionTypes::TYPE_MIXED,
-            GraphQLServerSchemaDefinitionTypes::TYPE_ARRAY_KEY,
-            GraphQLServerSchemaDefinitionTypes::TYPE_DATE,
-            GraphQLServerSchemaDefinitionTypes::TYPE_TIME,
-            GraphQLServerSchemaDefinitionTypes::TYPE_URL,
-            GraphQLServerSchemaDefinitionTypes::TYPE_EMAIL,
-            GraphQLServerSchemaDefinitionTypes::TYPE_IP,
-        ];
-        $this->types = [];
-        foreach ($scalarTypeNames as $typeName) {
-            $typeSchemaDefinitionPath = [
-                SchemaDefinition::TYPES,
-                $typeName,
-            ];
-            $this->types[] = new ScalarType(
-                $fullSchemaDefinition,
-                $typeSchemaDefinitionPath,
-                $typeName
-            );
-        }
-
+        // @todo: Check this
         // Enable or not to add the global fields to the schema, since they may pollute the documentation
         if (ComponentConfiguration::addGlobalFieldsToSchema()) {
             // Add the fields in the registry
@@ -83,34 +49,18 @@ class Schema
             );
         }
 
-        // Initialize the interfaces
-        $interfaceSchemaDefinitionPath = [
-            SchemaDefinition::INTERFACES,
-        ];
-        $interfaceSchemaDefinitionPointer = SchemaDefinitionHelpers::advancePointerToPath(
-            $fullSchemaDefinition,
-            $interfaceSchemaDefinitionPath
-        );
-        foreach (array_keys($interfaceSchemaDefinitionPointer) as $interfaceName) {
-            new InterfaceType(
-                $fullSchemaDefinition,
-                array_merge(
-                    $interfaceSchemaDefinitionPath,
-                    [
-                        $interfaceName
-                    ]
-                )
-            );
-        }
-
         // Initialize the directives
         $this->directives = [];
         foreach ($fullSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES] as $directiveName => $directiveDefinition) {
-            $directiveSchemaDefinitionPath = [
-                SchemaDefinition::GLOBAL_DIRECTIVES,
-                $directiveName,
-            ];
-            $this->directives[] = $this->getDirectiveInstance($fullSchemaDefinition, $directiveSchemaDefinitionPath);
+            $this->directives[] = $this->getDirectiveInstance($fullSchemaDefinition, $directiveName);
+        }
+
+        // Initialize the types
+        $this->types = [];
+        foreach ($fullSchemaDefinition[SchemaDefinition::TYPES] as $typeKind => $typeSchemaDefinitions) {
+            foreach (array_keys($typeSchemaDefinitions) as $typeName) {
+                $this->types[] = $this->getTypeInstance($fullSchemaDefinition, $typeKind, $typeName);
+            }
         }
 
         $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
@@ -201,20 +151,29 @@ class Schema
             $schemaDefinitionReferenceRegistry->getDynamicTypes()
         );
     }
-    protected function getTypeInstance(array &$fullSchemaDefinition, array $typeSchemaDefinitionPath)
+    protected function getTypeInstance(array &$fullSchemaDefinition, string $typeKind, string $typeName): TypeInterface
     {
-        $typeSchemaDefinitionPointer = &$fullSchemaDefinition;
-        foreach ($typeSchemaDefinitionPath as $pathLevel) {
-            $typeSchemaDefinitionPointer = &$typeSchemaDefinitionPointer[$pathLevel];
-        }
-        $typeSchemaDefinition = $typeSchemaDefinitionPointer;
+        $typeSchemaDefinitionPath = [
+            SchemaDefinition::TYPES,
+            $typeKind,
+            $typeName,
+        ];
         // The type here can either be an ObjectType or a UnionType
-        return ($typeSchemaDefinition[SchemaDefinition::IS_UNION] ?? null) ?
-            new UnionType($fullSchemaDefinition, $typeSchemaDefinitionPath) :
-            new ObjectType($fullSchemaDefinition, $typeSchemaDefinitionPath);
+        return match ($typeKind) {
+            TypeKinds::OBJECT => new ObjectType($fullSchemaDefinition, $typeSchemaDefinitionPath),
+            TypeKinds::INTERFACE => new InterfaceType($fullSchemaDefinition, $typeSchemaDefinitionPath),
+            TypeKinds::UNION => new UnionType($fullSchemaDefinition, $typeSchemaDefinitionPath),
+            TypeKinds::SCALAR => new ScalarType($fullSchemaDefinition, $typeSchemaDefinitionPath),
+            TypeKinds::ENUM => new EnumType($fullSchemaDefinition, $typeSchemaDefinitionPath),
+            TypeKinds::INPUT_OBJECT => new InputObjectType($fullSchemaDefinition, $typeSchemaDefinitionPath),
+        };
     }
-    protected function getDirectiveInstance(array &$fullSchemaDefinition, array $directiveSchemaDefinitionPath): Directive
+    protected function getDirectiveInstance(array &$fullSchemaDefinition, string $directiveName): Directive
     {
+        $directiveSchemaDefinitionPath = [
+            SchemaDefinition::GLOBAL_DIRECTIVES,
+            $directiveName,
+        ];
         return new Directive($fullSchemaDefinition, $directiveSchemaDefinitionPath);
     }
 
