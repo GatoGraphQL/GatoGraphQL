@@ -51,7 +51,7 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
         }
 
         // Check if it is an array
-        if (SyntaxHelpers::isListType($typeID)) {
+        if (SyntaxHelpers::isListWrappingTypeNameOrID($typeID)) {
             /** @var TypeInterface */
             $wrappedType = $this->getWrappingTypeOrSchemaDefinitionReferenceObject(
                 SyntaxHelpers::getListTypeNestedTypeName($typeID)

@@ -9,7 +9,7 @@ class SyntaxHelpers
     /**
      * Indicate if the type if of type "LIST"
      */
-    public static function isListType(string $type): bool
+    public static function isListWrappingTypeNameOrID(string $type): bool
     {
         return substr($type, 0, 1) == '[' && substr($type, -1) == ']';
     }
