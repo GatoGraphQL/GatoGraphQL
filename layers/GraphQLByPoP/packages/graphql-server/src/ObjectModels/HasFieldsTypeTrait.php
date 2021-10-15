@@ -76,7 +76,7 @@ trait HasFieldsTypeTrait
     protected function getInterfaceNames()
     {
         if ($this instanceof HasInterfacesTypeInterface) {
-            return $this->schemaDefinition[SchemaDefinition::INTERFACES];
+            return array_keys($this->schemaDefinition[SchemaDefinition::INTERFACES]);
         }
         return [];
     }
