@@ -320,18 +320,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 // }
             }
         }
-        // 3. Interfaces
-        foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::INTERFACES] as $interfaceName => $interfaceSchemaDefinition) {
-            foreach (array_keys($interfaceSchemaDefinition[SchemaDefinition::FIELDS]) as $fieldName) {
-                $itemPath = [
-                    SchemaDefinition::INTERFACES,
-                    $interfaceName,
-                    SchemaDefinition::FIELDS,
-                    $fieldName
-                ];
-                // $this->introduceSDLNotationToFieldSchemaDefinition($itemPath);
-            }
-        }
 
         // Sort the elements in the schema alphabetically
         if (ComponentConfiguration::sortSchemaAlphabetically()) {
