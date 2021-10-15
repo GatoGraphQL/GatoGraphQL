@@ -8,7 +8,7 @@ class Request
 {
     public const URLPARAM_USE_NAMESPACE = 'use_namespace';
 
-    public static function namespaceTypesAndInterfaces(): ?bool
+    public static function mustNamespaceTypes(): ?bool
     {
         if (isset($_REQUEST[self::URLPARAM_USE_NAMESPACE])) {
             return in_array(

@@ -14,7 +14,7 @@ abstract class AbstractLoadingCPTSchemaConfiguratorExecuter extends AbstractSche
         if (\is_singular($this->getCustomPostType())) {
             // Watch out! If accessing $vars it triggers setting ComponentConfiguration vars,
             // but we have not set the hooks yet!
-            // For instance for `namespaceTypesAndInterfaces()`,
+            // For instance for `mustNamespaceTypes()`,
             // to be set in `executeSchemaConfigurationOptionsNamespacing()`
             // Hence, code below was commented, and access the $post from the global variable
             // $vars = ApplicationState::getVars();

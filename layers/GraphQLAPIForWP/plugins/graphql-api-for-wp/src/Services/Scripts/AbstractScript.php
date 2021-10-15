@@ -187,7 +187,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
          * Localize the script with custom data
          * Execute on hook "wp_print_scripts" and not now,
          * because `getLocalizedData` might call EndpointHelpers->getAdminConfigurableSchemaGraphQLEndpoint(),
-         * which calls ScriptModelScriptConfiguration::namespaceTypesAndInterfaces(),
+         * which calls ScriptModelScriptConfiguration::mustNamespaceTypes(),
          * which is initialized during "wp"
          */
         \add_action('wp_print_scripts', function () use ($scriptName): void {
