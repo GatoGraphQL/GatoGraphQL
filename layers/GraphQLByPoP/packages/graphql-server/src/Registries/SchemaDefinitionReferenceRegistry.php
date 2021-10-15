@@ -307,22 +307,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                         $this->addMutationLabelToSchemaFieldDescription($itemPath);
                     }
                 }
-                // foreach (array_keys($typeSchemaDefinition[SchemaDefinition::DIRECTIVES]) as $directiveName) {
-                //     $itemPath = [
-                //         SchemaDefinition::TYPES,
-                //         TypeKinds::OBJECT,
-                //         $typeName,
-                //         SchemaDefinition::DIRECTIVES,
-                //         $directiveName
-                //     ];
-                //     // $this->introduceSDLNotationToFieldOrDirectiveArgs($itemPath);
-                //     if ($enableComposableDirectives) {
-                //         $this->addNestedDirectiveDataToSchemaDirectiveArgs($itemPath);
-                //     }
-                //     if ($addVersionToSchemaFieldDescription) {
-                //         $this->addVersionToSchemaFieldDescription($itemPath);
-                //     }
-                // }
             }
         }
 
@@ -362,57 +346,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             }
         }
     }
-    // /**
-    //  * Convert the field type from its internal representation (eg: "array:Post") to the GraphQL standard representation (eg: "[Post]")
-    //  */
-    // protected function introduceSDLNotationToFieldSchemaDefinition(array $fieldSchemaDefinitionPath): void
-    // {
-    //     $fieldSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinitionForGraphQL, $fieldSchemaDefinitionPath);
-    //     $typeName = $fieldSchemaDefinition[SchemaDefinition::TYPE_NAME];
-    //     $fieldSchemaDefinition[SchemaDefinition::TYPE_NAME] = SchemaHelpers::getTypeNameForGraphQLSchema(
-    //         $typeName,
-    //         $fieldSchemaDefinition[SchemaDefinition::NON_NULLABLE] ?? null,
-    //         $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false,
-    //         $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false,
-    //         $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false,
-    //         $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false,
-    //     );
-    //     $this->introduceSDLNotationToFieldOrDirectiveArgs($fieldSchemaDefinitionPath);
-    // }
-    // protected function introduceSDLNotationToFieldOrDirectiveArgs(array $fieldOrDirectiveSchemaDefinitionPath): void
-    // {
-    //     $fieldOrDirectiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinitionForGraphQL, $fieldOrDirectiveSchemaDefinitionPath);
-
-    //     // Also for the fieldOrDirective arguments
-    //     if ($fieldOrDirectiveArgs = $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
-    //         foreach ($fieldOrDirectiveArgs as $fieldOrDirectiveArgName => $fieldOrDirectiveArgSchemaDefinition) {
-    //             // The type is set always
-    //             $typeName = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::TYPE_NAME];
-    //             $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGS][$fieldOrDirectiveArgName][SchemaDefinition::TYPE_NAME] = SchemaHelpers::getTypeNameForGraphQLSchema(
-    //                 $typeName,
-    //                 $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::MANDATORY] ?? null,
-    //                 $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false,
-    //                 $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false,
-    //                 $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false,
-    //                 $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false,
-    //             );
-    //             // If it is an input object, it may have its own args to also convert
-    //             if ($typeName === SchemaDefinitionTypes::TYPE_INPUT_OBJECT) {
-    //                 foreach (($fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGS] ?? []) as $inputFieldArgName => $inputFieldArgDefinition) {
-    //                     $inputFieldTypeName = $inputFieldArgDefinition[SchemaDefinition::TYPE_NAME];
-    //                     $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGS][$inputFieldArgName][SchemaDefinition::TYPE_NAME] = SchemaHelpers::getTypeNameForGraphQLSchema(
-    //                         $inputFieldTypeName,
-    //                         $inputFieldArgDefinition[SchemaDefinition::MANDATORY] ?? null,
-    //                         $inputFieldArgDefinition[SchemaDefinition::IS_ARRAY] ?? false,
-    //                         $inputFieldArgDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false,
-    //                         $inputFieldArgDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false,
-    //                         $inputFieldArgDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false,
-    //                     );
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
 
     /**
      * When doing /?edit_schema=true, "Schema" type directives will also be added the FIELD location,
