@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
-use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractNestableType;
-use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\EnumType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasFieldsTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasInterfacesTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasPossibleTypesTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\InputObjectType;
+use GraphQLByPoP\GraphQLServer\ObjectModels\NamedTypeInterface;
+use GraphQLByPoP\GraphQLServer\ObjectModels\WrappingTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\ScalarType;
+use GraphQLByPoP\GraphQLServer\ObjectModels\TypeInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\TypeKindEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\EnumValueObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\FieldObjectTypeResolver;
@@ -110,14 +111,14 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'kind',
-            'extensions'
+            'kind'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'fields',
             'interfaces',
             'possibleTypes',
             'enumValues',
-            'inputFields'
+            'inputFields',
+            'extensions'
                 => SchemaTypeModifiers::IS_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -184,7 +185,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        /** @var AbstractType */
+        /** @var TypeInterface */
         $type = $object;
         switch ($fieldName) {
             case 'kind':
@@ -231,8 +232,8 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'ofType':
                 // From GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-HAJbLA4DABCBIu9N):
                 // "should be non-null for NON_NULL and LIST only, must be null for the others"
-                if ($type instanceof AbstractNestableType) {
-                    return $type->getNestedTypeID();
+                if ($type instanceof WrappingTypeInterface) {
+                    return $type->getWrappedTypeID();
                 }
                 return null;
             case 'specifiedByURL':
@@ -243,7 +244,11 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 }
                 return null;
             case 'extensions':
-                return $type->getExtensions();
+                // Custom development: this field is not in GraphQL spec yet!
+                if ($type instanceof NamedTypeInterface) {
+                    return $type->getExtensions();
+                }
+                return null;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

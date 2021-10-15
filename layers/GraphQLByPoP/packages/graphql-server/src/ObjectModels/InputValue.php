@@ -10,10 +10,6 @@ class InputValue extends AbstractSchemaDefinitionReferenceObject
 {
     use HasTypeSchemaDefinitionReferenceTrait;
 
-    public function initializeTypeDependencies(): void
-    {
-        $this->initType();
-    }
     public function getName(): string
     {
         return $this->schemaDefinition[SchemaDefinition::NAME];

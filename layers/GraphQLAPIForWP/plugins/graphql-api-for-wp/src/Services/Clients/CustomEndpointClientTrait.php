@@ -47,7 +47,7 @@ trait CustomEndpointClientTrait
         // Remove the ?view=...
         $endpointURL = \remove_query_arg(RequestParams::VIEW, $fullURL);
         // // Maybe add ?use_namespace=true
-        // if (ComponentModelComponentConfiguration::namespaceTypesAndInterfaces()) {
+        // if (ComponentModelComponentConfiguration::mustNamespaceTypes()) {
         //     $endpointURL = \add_query_arg(APIRequest::URLPARAM_USE_NAMESPACE, true, $endpointURL);
         // }
         return $endpointURL;

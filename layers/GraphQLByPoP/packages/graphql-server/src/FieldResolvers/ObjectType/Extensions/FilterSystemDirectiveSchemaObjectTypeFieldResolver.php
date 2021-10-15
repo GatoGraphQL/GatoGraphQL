@@ -134,7 +134,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
                                 SchemaDefinition::GLOBAL_DIRECTIVES,
                                 $directiveResolver->getDirectiveName(),
                             ];
-                            return SchemaDefinitionHelpers::getID($directiveSchemaDefinitionPath);
+                            return SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID($directiveSchemaDefinitionPath);
                         },
                         $ofTypeDirectiveResolvers
                     );

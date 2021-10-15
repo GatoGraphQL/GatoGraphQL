@@ -50,8 +50,5 @@ services:
     PoP\Engine\Formatters\DateFormatterInterface:
         class: \PoP\Engine\Formatters\DateFormatter
 
-    PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface:
-        class: \PoP\Engine\Schema\SchemaDefinitionService
-
     PoP\ComponentModel\EntryModule\EntryModuleManagerInterface:
         class: \PoP\Engine\EntryModule\EntryModuleManager

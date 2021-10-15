@@ -10,11 +10,11 @@ class EnumValue extends AbstractSchemaDefinitionReferenceObject
 {
     public function getName(): string
     {
-        return (string)$this->getValue();
+        return $this->getValue();
     }
-    public function getValue()
+    public function getValue(): string
     {
-        return $this->schemaDefinition[SchemaDefinition::NAME];
+        return $this->schemaDefinition[SchemaDefinition::VALUE];
     }
     public function getDescription(): ?string
     {

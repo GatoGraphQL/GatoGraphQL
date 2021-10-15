@@ -84,7 +84,7 @@ trait ClientTrait
          */
         $endpointURL = preg_replace('#^https?:#', '', $endpointURL);
         // // If namespaced, add /?use_namespace=1 to the endpoint
-        // if (ComponentModelComponentConfiguration::namespaceTypesAndInterfaces()) {
+        // if (ComponentModelComponentConfiguration::mustNamespaceTypes()) {
         //     $endpointURL = GeneralUtils::addQueryArgs(
         //         [
         //             Request::URLPARAM_USE_NAMESPACE => true,

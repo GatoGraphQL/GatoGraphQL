@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\Schema\SchemaDefinitionServiceInterface;
+use PoP\API\Schema\SchemaDefinitionServiceInterface;
 
 interface GraphQLSchemaDefinitionServiceInterface extends SchemaDefinitionServiceInterface
 {
-    public function getQueryRootTypeSchemaKey(): string;
-    public function getQueryRootTypeResolver(): ObjectTypeResolverInterface;
-    public function getMutationRootTypeSchemaKey(): ?string;
-    public function getMutationRootTypeResolver(): ?ObjectTypeResolverInterface;
-    public function getSubscriptionRootTypeSchemaKey(): ?string;
+    public function getQueryRootObjectTypeResolver(): ObjectTypeResolverInterface;
+    public function getMutationRootObjectTypeResolver(): ?ObjectTypeResolverInterface;
     public function getSubscriptionRootTypeResolver(): ?ObjectTypeResolverInterface;
 }

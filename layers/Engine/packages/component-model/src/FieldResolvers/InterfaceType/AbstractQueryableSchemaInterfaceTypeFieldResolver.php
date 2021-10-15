@@ -12,8 +12,15 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
 
     public function getFieldFilterInputContainerModule(string $fieldName): ?array
     {
-        /** @var QueryableInterfaceTypeFieldSchemaDefinitionResolverInterface */
+        /**
+         * An interface may implement another interface which is not Queryable
+         */
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if (!($schemaDefinitionResolver instanceof QueryableInterfaceTypeFieldSchemaDefinitionResolverInterface)) {
+            return null;
+        }
+
+        /** @var QueryableInterfaceTypeFieldSchemaDefinitionResolverInterface $schemaDefinitionResolver */
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldFilterInputContainerModule($fieldName);
         }

@@ -156,7 +156,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                 return $typeName == $objectTypeResolver->getTypeName();
             case 'implements':
                 $interface = $fieldArgs['interface'];
-                $implementedInterfaceTypeResolvers = $objectTypeResolver->getAllImplementedInterfaceTypeResolvers();
+                $implementedInterfaceTypeResolvers = $objectTypeResolver->getImplementedInterfaceTypeResolvers();
                 // If the provided interface contains the namespace separator, then compare by qualifiedInterface
                 $useNamespaced = str_contains($interface, SchemaDefinitionTokens::NAMESPACE_SEPARATOR);
                 $implementedInterfaceNames = array_map(

@@ -6,31 +6,29 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 
-class EnumType extends AbstractDynamicType
+class EnumType extends AbstractNamedType
 {
-    use NonDocumentableTypeTrait;
-
     /**
      * @var EnumValue[]
      */
     protected array $enumValues;
 
-    public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath, array $customDefinition = [])
+    public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
-        parent::__construct($fullSchemaDefinition, $schemaDefinitionPath, $customDefinition);
+        parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
 
         $this->initEnumValues($fullSchemaDefinition, $schemaDefinitionPath);
     }
     protected function initEnumValues(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
         $this->enumValues = [];
-        if ($enumValues = $this->schemaDefinition[SchemaDefinition::ENUM_VALUES] ?? null) {
-            foreach (array_keys($enumValues) as $enumValueName) {
+        if ($enumItems = $this->schemaDefinition[SchemaDefinition::ITEMS] ?? null) {
+            foreach (array_keys($enumItems) as $enumValue) {
                 $enumValueSchemaDefinitionPath = array_merge(
                     $schemaDefinitionPath,
                     [
-                        SchemaDefinition::ENUM_VALUES,
-                        $enumValueName,
+                        SchemaDefinition::ITEMS,
+                        $enumValue,
                     ]
                 );
                 $this->enumValues[] = new EnumValue(
@@ -41,10 +39,6 @@ class EnumType extends AbstractDynamicType
         }
     }
 
-    protected function getDynamicTypeNamePropertyInSchema(): string
-    {
-        return SchemaDefinition::ENUM_NAME;
-    }
     public function getKind(): string
     {
         return TypeKinds::ENUM;

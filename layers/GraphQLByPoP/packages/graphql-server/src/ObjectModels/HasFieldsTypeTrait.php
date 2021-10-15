@@ -18,38 +18,35 @@ trait HasFieldsTypeTrait
     protected function initFields(array &$fullSchemaDefinition, array $schemaDefinitionPath, bool $includeConnections): void
     {
         $this->fields = [];
-        $interfaceNames = $this->getInterfaceNames();
 
         // Iterate to the definition of the fields in the schema, and create an object for each of them
         // Print connections and then fields, it looks better in the Interactive Schema
         // 1. Connections under this type
         if ($includeConnections) {
-            $this->initFieldsFromPath(
+            $this->createFieldsFromPath(
                 $fullSchemaDefinition,
                 array_merge(
                     $schemaDefinitionPath,
                     [
                         SchemaDefinition::CONNECTIONS,
                     ]
-                ),
-                $interfaceNames
+                )
             );
         }
         // 2. Fields under this type
-        $this->initFieldsFromPath(
+        $this->createFieldsFromPath(
             $fullSchemaDefinition,
             array_merge(
                 $schemaDefinitionPath,
                 [
                     SchemaDefinition::FIELDS,
                 ]
-            ),
-            $interfaceNames
+            )
         );
         if (ComponentConfiguration::addGlobalFieldsToSchema()) {
             // Global fields and connections have already been initialized, simply get the reference to the existing objects from the registryMap
             // 1. Global fields
-            $this->retrieveFieldsFromPath(
+            $this->getFieldsFromPath(
                 $fullSchemaDefinition,
                 [
                     SchemaDefinition::GLOBAL_FIELDS,
@@ -57,7 +54,7 @@ trait HasFieldsTypeTrait
             );
             // 2. Global connections
             if ($includeConnections) {
-                $this->retrieveFieldsFromPath(
+                $this->getFieldsFromPath(
                     $fullSchemaDefinition,
                     [
                         SchemaDefinition::GLOBAL_CONNECTIONS,
@@ -73,32 +70,19 @@ trait HasFieldsTypeTrait
             });
         }
     }
-    protected function getInterfaceNames()
-    {
-        if ($this instanceof HasInterfacesTypeInterface) {
-            return $this->schemaDefinition[SchemaDefinition::INTERFACES];
-        }
-        return [];
-    }
-    protected function initFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath, array $interfaceNames): void
+    protected function createFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
     {
         $this->fields = array_merge(
             $this->fields,
-            SchemaDefinitionHelpers::initFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath, $interfaceNames)
+            SchemaDefinitionHelpers::createFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
         );
     }
-    protected function retrieveFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
+    protected function getFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
     {
         $this->fields = array_merge(
             $this->fields,
-            SchemaDefinitionHelpers::retrieveFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
+            SchemaDefinitionHelpers::getFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
         );
-    }
-    public function initializeFieldTypeDependencies(): void
-    {
-        foreach ($this->fields as $field) {
-            $field->initializeTypeDependencies();
-        }
     }
 
     public function getFields(bool $includeDeprecated = false): array

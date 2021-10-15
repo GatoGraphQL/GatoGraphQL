@@ -23,7 +23,7 @@ class ComponentConfiguration
 
     private static bool $enableConfigByParams = false;
     private static bool $useComponentModelCache = false;
-    private static bool $namespaceTypesAndInterfaces = false;
+    private static bool $mustNamespaceTypes = false;
     private static bool $useSingleTypeInsteadOfUnionType = false;
     private static bool $enableAdminSchema = false;
     private static bool $validateFieldTypeResponseWithSchemaDefinition = false;
@@ -130,11 +130,11 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function namespaceTypesAndInterfaces(): bool
+    public static function mustNamespaceTypes(): bool
     {
         // Define properties
         $envVariable = Environment::NAMESPACE_TYPES_AND_INTERFACES;
-        $selfProperty = &self::$namespaceTypesAndInterfaces;
+        $selfProperty = &self::$mustNamespaceTypes;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

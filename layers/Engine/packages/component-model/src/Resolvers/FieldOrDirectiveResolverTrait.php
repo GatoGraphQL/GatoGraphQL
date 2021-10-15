@@ -9,6 +9,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
+use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -214,7 +215,7 @@ trait FieldOrDirectiveResolverTrait
     ): array {
         $errors = $deprecations = [];
         $fieldOrDirectiveArgumentNames = array_keys($enumTypeFieldOrDirectiveArgsSchemaDefinition);
-        $schemaFieldArgumentEnumValueDefinitions = SchemaHelpers::getSchemaFieldArgEnumValueDefinitions($enumTypeFieldOrDirectiveArgsSchemaDefinition);
+        $schemaFieldArgumentEnumTypeResolvers = SchemaHelpers::getSchemaFieldArgEnumTypeResolvers($enumTypeFieldOrDirectiveArgsSchemaDefinition);
         foreach ($fieldOrDirectiveArgumentNames as $fieldOrDirectiveArgumentName) {
             $fieldOrDirectiveArgumentValue = $fieldOrDirectiveArgs[$fieldOrDirectiveArgumentName] ?? null;
             if ($fieldOrDirectiveArgumentValue === null) {
@@ -224,7 +225,8 @@ trait FieldOrDirectiveResolverTrait
             $enumTypeFieldOrDirectiveArgSchemaDefinition = $enumTypeFieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgumentName];
             $enumTypeFieldOrDirectiveArgIsArrayOfArrays = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
             $enumTypeFieldOrDirectiveArgIsArray = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false;
-            $schemaFieldOrDirectiveArgumentEnumValues = $schemaFieldArgumentEnumValueDefinitions[$fieldOrDirectiveArgumentName] ?? [];
+            /** @var EnumTypeResolverInterface */
+            $schemaFieldOrDirectiveArgumentEnumTypeResolver = $schemaFieldArgumentEnumTypeResolvers[$fieldOrDirectiveArgumentName];
 
             /**
              * Pass all the enum values to be validated, as a list.
@@ -243,7 +245,7 @@ trait FieldOrDirectiveResolverTrait
             $this->doValidateEnumFieldOrDirectiveArgumentsItem(
                 $errors,
                 $deprecations,
-                $schemaFieldOrDirectiveArgumentEnumValues,
+                $schemaFieldOrDirectiveArgumentEnumTypeResolver,
                 $fieldOrDirectiveArgumentValueEnums,
                 $fieldOrDirectiveArgumentName,
                 $fieldOrDirectiveName,
@@ -257,26 +259,30 @@ trait FieldOrDirectiveResolverTrait
     private function doValidateEnumFieldOrDirectiveArgumentsItem(
         array &$errors,
         array &$deprecations,
-        array $schemaFieldOrDirectiveArgumentEnumValues,
+        EnumTypeResolverInterface $schemaFieldOrDirectiveArgumentEnumTypeResolver,
         array $fieldOrDirectiveArgumentValueItems,
         string $fieldOrDirectiveArgumentName,
         string $fieldOrDirectiveName,
         string $type
     ): void {
         $errorItems = $deprecationItems = [];
+        $schemaFieldOrDirectiveArgumentEnumTypeValues = $schemaFieldOrDirectiveArgumentEnumTypeResolver->getEnumOutputValues();
+        $schemaFieldOrDirectiveArgumentEnumTypeDeprecationMessages = $schemaFieldOrDirectiveArgumentEnumTypeResolver->getEnumValueDeprecationMessages();
         foreach ($fieldOrDirectiveArgumentValueItems as $fieldOrDirectiveArgumentValueItem) {
-            $fieldOrDirectiveArgumentValueDefinition = $schemaFieldOrDirectiveArgumentEnumValues[$fieldOrDirectiveArgumentValueItem] ?? null;
-            if ($fieldOrDirectiveArgumentValueDefinition === null) {
+            if (!in_array($fieldOrDirectiveArgumentValueItem, $schemaFieldOrDirectiveArgumentEnumTypeValues)) {
                 // Remove deprecated ones and extract their names
                 $errorItems[] = $fieldOrDirectiveArgumentValueItem;
-            } elseif ($fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::DEPRECATED] ?? null) {
+            } elseif ($schemaFieldOrDirectiveArgumentEnumTypeDeprecationMessage = $schemaFieldOrDirectiveArgumentEnumTypeDeprecationMessages[$fieldOrDirectiveArgumentValueItem] ?? null) {
                 // Check if this enumValue is deprecated
-                $deprecationItems[$fieldOrDirectiveArgumentValueItem] = $fieldOrDirectiveArgumentValueDefinition[SchemaDefinition::DEPRECATION_MESSAGE];
+                $deprecationItems[$fieldOrDirectiveArgumentValueItem] = $schemaFieldOrDirectiveArgumentEnumTypeDeprecationMessage;
             }
         }
         if ($errorItems) {
-            $fieldOrDirectiveArgumentEnumValues = SchemaHelpers::removeDeprecatedEnumValuesFromSchemaDefinition($schemaFieldOrDirectiveArgumentEnumValues);
-            $fieldOrDirectiveArgumentEnumValues = array_keys($fieldOrDirectiveArgumentEnumValues);
+            // Remove the deprecated enumValues from the schema definition
+            $fieldOrDirectiveArgumentEnumValues = array_values(array_diff(
+                $schemaFieldOrDirectiveArgumentEnumTypeValues,
+                array_keys($schemaFieldOrDirectiveArgumentEnumTypeDeprecationMessages)
+            ));
             if (count($errorItems) === 1) {
                 $errors[] = sprintf(
                     $this->translationAPI->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is not allowed (the only allowed values are: \'%5$s\')', 'component-model'),
