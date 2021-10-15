@@ -106,7 +106,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $this->processedTypeAndDirectiveResolverClasses = [];
             $this->accessedDirectiveResolverClassRelationalTypeResolvers = [];
 
-            $this->pendingTypeOrDirectiveResolvers = $this->getRootObjectTypeResolvers();
+            $this->pendingTypeOrDirectiveResolvers = [
+                $this->rootObjectTypeResolver,
+            ];
             while (!empty($this->pendingTypeOrDirectiveResolvers)) {
                 $typeOrDirectiveResolver = array_pop($this->pendingTypeOrDirectiveResolvers);
                 $this->processedTypeAndDirectiveResolverClasses[] = $typeOrDirectiveResolver::class;
@@ -166,7 +168,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
          * The RootObject has the special role of also calculating the
          * global fields, connections and directives
          */
-        if (in_array($typeResolver, $this->getRootObjectTypeResolvers())) {
+        if ($typeResolver === $this->rootObjectTypeResolver) {
             $this->moveGlobalTypeSchemaDefinition($schemaDefinition, $typeSchemaDefinition);
         }
         $schemaDefinition[SchemaDefinition::TYPES][$typeKind][$typeName] = $typeSchemaDefinition;
@@ -231,7 +233,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
              * The RootObject has the special role of also calculating the
              * global fields, connections and directives
              */
-            if (in_array($typeResolver, $this->getRootObjectTypeResolvers())) {
+            if ($typeResolver === $this->rootObjectTypeResolver) {
                 return new RootObjectTypeSchemaDefinitionProvider($typeResolver);
             }
             return new ObjectTypeSchemaDefinitionProvider($typeResolver);
@@ -255,15 +257,5 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $this->translationAPI->__('No type identified for TypeResolver with class \'%s\'', 'api'),
             get_class($typeResolver)
         ));
-    }
-
-    /**
-     * @return ObjectTypeResolverInterface[]
-     */
-    protected function getRootObjectTypeResolvers(): array
-    {
-        return [
-            $this->rootObjectTypeResolver,
-        ];
     }
 }
