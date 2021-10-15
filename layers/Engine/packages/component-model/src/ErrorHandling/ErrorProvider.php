@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ErrorHandling;
 
 use PoP\Translation\TranslationAPIInterface;
+use stdClass;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class ErrorProvider implements ErrorProviderInterface
@@ -95,13 +96,20 @@ class ErrorProvider implements ErrorProviderInterface
      */
     public function getMustBeArrayFieldError(string $fieldName, mixed $value): Error
     {
+        if ($value instanceof stdClass) {
+            $valueAsString = json_encode($value);
+        } elseif (is_object($value)) {
+            $valueAsString = $value->__serialize();
+        } else {
+            $valueAsString = (string) $value;
+        }
         return $this->getError(
             $fieldName,
             ErrorCodes::MUST_BE_ARRAY_FIELD,
             sprintf(
                 $this->translationAPI->__('Field \'%s\' must return an array, but returned \'%s\'', 'pop-component-model'),
                 $fieldName,
-                (string) $value
+                $valueAsString
             )
         );
     }
