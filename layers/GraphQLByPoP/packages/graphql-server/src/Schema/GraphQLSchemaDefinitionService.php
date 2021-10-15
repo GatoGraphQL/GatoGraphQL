@@ -42,7 +42,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
      * If nested mutations are enabled, use "Root".
      * Otherwise, use "Mutation"
      */
-    public function getMutationRootTypeResolver(): ?ObjectTypeResolverInterface
+    public function getMutationRootObjectTypeResolver(): ?ObjectTypeResolverInterface
     {
         if (!APIComponentConfiguration::enableMutations()) {
             return null;
