@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
 use Exception;
-use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Field;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -85,7 +84,6 @@ class SchemaDefinitionHelpers
     }
     public static function initFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath, array $interfaceNames = []): array
     {
-        $addVersionToSchemaFieldDescription = ComponentConfiguration::addVersionToSchemaFieldDescription();
         // $interfaceTypeFields = self::getInterfaceTypeFields($fullSchemaDefinition, $interfaceNames);
         $fieldSchemaDefinitionPointer = self::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
         $fields = [];
@@ -114,21 +112,6 @@ class SchemaDefinitionHelpers
             $targetFieldSchemaDefinitionPath = $fieldSchemaDefinitionPath;
             // }
 
-            /**
-             * Watch out! The version comes from the field, not from the interface, so if it is defined, do not override
-             * Same with the field, because in function `addVersionToSchemaFieldDescription` it may've added
-             * the version at the end of the description
-             */
-            $customDefinition = [];
-            if ($addVersionToSchemaFieldDescription) {
-                if ($schemaFieldVersion = $fieldSchemaDefinitionPointer[$fieldName][SchemaDefinition::VERSION] ?? null) {
-                    $schemaFieldDescription = $fieldSchemaDefinitionPointer[$fieldName][SchemaDefinition::DESCRIPTION];
-                    $customDefinition = [
-                        SchemaDefinition::VERSION => $schemaFieldVersion,
-                        SchemaDefinition::DESCRIPTION => $schemaFieldDescription,
-                    ];
-                }
-            }
             $fields[] = new Field(
                 $fullSchemaDefinition,
                 array_merge(
@@ -136,8 +119,7 @@ class SchemaDefinitionHelpers
                     [
                         $fieldName
                     ]
-                ),
-                $customDefinition
+                )
             );
         }
         return $fields;

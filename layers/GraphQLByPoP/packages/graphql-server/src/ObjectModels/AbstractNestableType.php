@@ -10,9 +10,8 @@ abstract class AbstractNestableType extends AbstractType implements NestableType
         array &$fullSchemaDefinition,
         array $schemaDefinitionPath,
         protected TypeInterface $nestedType,
-        array $customDefinition = []
     ) {
-        parent::__construct($fullSchemaDefinition, $schemaDefinitionPath, $customDefinition);
+        parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
     }
     public function getNestedType(): TypeInterface
     {

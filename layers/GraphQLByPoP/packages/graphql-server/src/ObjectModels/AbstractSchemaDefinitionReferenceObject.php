@@ -23,13 +23,10 @@ abstract class AbstractSchemaDefinitionReferenceObject implements SchemaDefiniti
     protected array $schemaDefinition;
     /**
      * Build a new Schema Definition Reference Object
-     *
-     * @param array $customDefinition Pass custom values that will override the ones defined in $schemaDefinition
      */
     public function __construct(
         array &$fullSchemaDefinition,
-        array $schemaDefinitionPath,
-        array $customDefinition = []
+        array $schemaDefinitionPath
     ) {
         // Also save this variable to lazy initi new types in HasTypeSchemaDefinitionReferenceTrait
         $this->fullSchemaDefinition = $fullSchemaDefinition;
@@ -40,10 +37,7 @@ abstract class AbstractSchemaDefinitionReferenceObject implements SchemaDefiniti
         foreach ($schemaDefinitionPath as $pathLevel) {
             $schemaDefinitionPointer = &$schemaDefinitionPointer[$pathLevel];
         }
-        $this->schemaDefinition = array_merge(
-            $schemaDefinitionPointer,
-            $customDefinition
-        );
+        $this->schemaDefinition = $schemaDefinitionPointer;
 
         // Register the object, and get back its ID
         $schemaDefinitionReferenceRegistry = SchemaDefinitionReferenceRegistryFacade::getInstance();

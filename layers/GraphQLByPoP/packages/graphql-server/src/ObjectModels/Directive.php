@@ -13,9 +13,9 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
 {
     use HasArgsSchemaDefinitionReferenceTrait;
 
-    public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath, array $customDefinition = [])
+    public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
-        parent::__construct($fullSchemaDefinition, $schemaDefinitionPath, $customDefinition);
+        parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
 
         $this->initArgs($fullSchemaDefinition, $schemaDefinitionPath);
         $this->initializeArgsTypeDependencies();
