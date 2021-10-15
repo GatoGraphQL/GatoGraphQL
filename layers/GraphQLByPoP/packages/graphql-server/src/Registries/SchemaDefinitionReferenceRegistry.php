@@ -353,37 +353,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_DIRECTIVES]);
             }
         }
-
-        // Expand the full schema with more data that is needed for GraphQL
-        // Add the scalar types
-        $scalarTypeNames = [
-            GraphQLServerSchemaDefinitionTypes::TYPE_ID,
-            GraphQLServerSchemaDefinitionTypes::TYPE_STRING,
-            GraphQLServerSchemaDefinitionTypes::TYPE_INT,
-            GraphQLServerSchemaDefinitionTypes::TYPE_FLOAT,
-            GraphQLServerSchemaDefinitionTypes::TYPE_BOOL,
-            GraphQLServerSchemaDefinitionTypes::TYPE_OBJECT,
-            GraphQLServerSchemaDefinitionTypes::TYPE_ANY_SCALAR,
-            GraphQLServerSchemaDefinitionTypes::TYPE_MIXED,
-            GraphQLServerSchemaDefinitionTypes::TYPE_ARRAY_KEY,
-            GraphQLServerSchemaDefinitionTypes::TYPE_DATE,
-            GraphQLServerSchemaDefinitionTypes::TYPE_TIME,
-            GraphQLServerSchemaDefinitionTypes::TYPE_URL,
-            GraphQLServerSchemaDefinitionTypes::TYPE_EMAIL,
-            GraphQLServerSchemaDefinitionTypes::TYPE_IP,
-        ];
-        foreach ($scalarTypeNames as $scalarTypeName) {
-            $this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$scalarTypeName] = [
-                SchemaDefinition::NAME => $scalarTypeName,
-                SchemaDefinition::NAMESPACED_NAME => $scalarTypeName,
-                SchemaDefinition::ELEMENT_NAME => $scalarTypeName,
-                SchemaDefinition::DESCRIPTION => null,
-                SchemaDefinition::DIRECTIVES => null,
-                SchemaDefinition::FIELDS => null,
-                SchemaDefinition::CONNECTIONS => null,
-                SchemaDefinition::INTERFACES => null,
-            ];
-        }
     }
     // /**
     //  * Convert the field type from its internal representation (eg: "array:Post") to the GraphQL standard representation (eg: "[Post]")
