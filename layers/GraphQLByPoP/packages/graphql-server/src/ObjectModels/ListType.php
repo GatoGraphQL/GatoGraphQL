@@ -6,8 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 class ListType extends AbstractNestableType
 {
-    use NonDocumentableTypeTrait;
-
     public function getName(): string
     {
         return sprintf(
@@ -19,5 +17,10 @@ class ListType extends AbstractNestableType
     public function getKind(): string
     {
         return TypeKinds::LIST;
+    }
+
+    public function getDescription(): ?string
+    {
+        return null;
     }
 }
