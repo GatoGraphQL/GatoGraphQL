@@ -9,7 +9,6 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -403,47 +402,6 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         // Because the schema validation cannot be performed through the UnionTypeResolver, since it depends on each dbObject, indicate that it must be done in resolveValue
         $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] = true;
         return $targetObjectTypeResolver->resolveValue($object, $field, $variables, $expressions, $options);
-    }
-
-    protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = []): void
-    {
-        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
-
-        // Properties
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::NAME] = $this->getMaybeNamespacedTypeName();
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::NAMESPACED_NAME] = $this->getNamespacedTypeName();
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::ELEMENT_NAME] = $this->getTypeName();
-        if ($description = $this->getTypeDescription()) {
-            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::DESCRIPTION] = $description;
-        }
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::IS_UNION] = true;
-
-        if (ComponentConfiguration::enableUnionTypeImplementingInterfaceType()) {
-            // If it returns an interface as type, add it to the schemaDefinition
-            if ($interfaceTypeResolver = $this->getUnionTypeInterfaceTypeResolver()) {
-                $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::RESULTS_IMPLEMENT_INTERFACE] = $interfaceTypeResolver->getMaybeNamespacedTypeName();
-            }
-        }
-
-        // Iterate through the typeResolvers from all the pickers and get their schema definitions
-        foreach ($this->getObjectTypeResolverPickers() as $picker) {
-            $pickerObjectTypeResolver = $picker->getObjectTypeResolver();
-            $pickerObjectTypeSchemaDefinition = $pickerObjectTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, $options);
-            $pickerObjectTypeName = $pickerObjectTypeResolver->getMaybeNamespacedTypeName();
-            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::POSSIBLE_TYPES][$pickerObjectTypeName] = $pickerObjectTypeSchemaDefinition[$pickerObjectTypeName];
-        }
-    }
-
-    protected function processFlatShapeSchemaDefinition(array $options = []): void
-    {
-        parent::processFlatShapeSchemaDefinition($options);
-
-        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
-
-        // Replace the UnionTypeResolver's types with their typeNames
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::POSSIBLE_TYPES] = array_keys(
-            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::POSSIBLE_TYPES]
-        );
     }
 
     /**

@@ -12,5 +12,4 @@ interface TypeResolverInterface
     public function getMaybeNamespacedTypeName(): string;
     public function getTypeOutputDBKey(): string;
     public function getTypeDescription(): ?string;
-    public function getSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = []): array;
 }

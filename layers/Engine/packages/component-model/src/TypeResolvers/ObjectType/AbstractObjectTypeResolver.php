@@ -19,7 +19,6 @@ use PoP\ComponentModel\Schema\SchemaDefinitionTypes;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Root\Environment as RootEnvironment;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
@@ -559,130 +558,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             }
         }
         return $objectTypeFieldResolvers;
-    }
-
-    protected function addSchemaDefinition(array $stackMessages, array &$generalMessages, array $options = []): void
-    {
-        parent::addSchemaDefinition($stackMessages, $generalMessages, $options);
-
-        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
-        $typeName = $this->getMaybeNamespacedTypeName();
-
-        // Add the directives (non-global)
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::DIRECTIVES] = [];
-        $schemaDirectiveResolvers = $this->getSchemaDirectiveResolvers(false);
-        foreach ($schemaDirectiveResolvers as $directiveName => $directiveResolver) {
-            $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::DIRECTIVES][$directiveName] = $this->getDirectiveSchemaDefinition($directiveResolver, $options);
-        }
-
-        // Add the fields (non-global)
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::FIELDS] = [];
-        $schemaObjectTypeFieldResolvers = $this->getExecutableObjectTypeFieldResolversByField(false);
-        foreach ($schemaObjectTypeFieldResolvers as $fieldName => $objectTypeFieldResolver) {
-            $this->addFieldSchemaDefinition($objectTypeFieldResolver, $fieldName, $stackMessages, $generalMessages, $options);
-        }
-
-        // Add all the implemented interfaces
-        $typeInterfaceDefinitions = [];
-        foreach ($this->getImplementedInterfaceTypeResolvers() as $interfaceTypeResolver) {
-            $interfaceSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($interfaceTypeResolver);
-
-            // Conveniently get the fields from the schema, which have already been calculated above
-            // since they also include their interface fields
-            $interfaceFieldNames = $interfaceTypeResolver->getFieldNamesToImplement();
-            // The Interface fields may be implemented as either ObjectTypeFieldResolver fields or ObjectTypeFieldResolver connections,
-            // Eg: Interface "Elemental" has field "id" and connection "self"
-            // Merge both cases into interface fields
-            $interfaceFields = array_filter(
-                $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::FIELDS],
-                function ($fieldName) use ($interfaceFieldNames) {
-                    return in_array($fieldName, $interfaceFieldNames);
-                },
-                ARRAY_FILTER_USE_KEY
-            );
-            $interfaceConnections = array_filter(
-                $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::CONNECTIONS],
-                function ($connectionName) use ($interfaceFieldNames) {
-                    return in_array($connectionName, $interfaceFieldNames);
-                },
-                ARRAY_FILTER_USE_KEY
-            );
-            $interfaceFields = array_merge(
-                $interfaceFields,
-                $interfaceConnections
-            );
-            // An interface can itself implement interfaces!
-            $interfaceImplementedInterfaceNames = [];
-            foreach ($interfaceTypeResolver->getPartiallyImplementedInterfaceTypeResolvers() as $implementedInterfaceTypeResolver) {
-                $interfaceImplementedInterfaceNames[] = $implementedInterfaceTypeResolver->getMaybeNamespacedTypeName();
-            }
-            $interfaceName = $interfaceTypeResolver->getMaybeNamespacedTypeName();
-            // Possible types: Because we are generating this list as we go along resolving all the types, simply have this value point to a reference in $generalMessages
-            // Just by updating that variable, it will eventually be updated everywhere
-            $generalMessages['interfaceGeneralTypes'][$interfaceName] = $generalMessages['interfaceGeneralTypes'][$interfaceName] ?? [];
-            $interfacePossibleTypes = &$generalMessages['interfaceGeneralTypes'][$interfaceName];
-            // Add this type to the list of implemented types for this interface
-            $interfacePossibleTypes[] = $typeName;
-            $typeInterfaceDefinitions[$interfaceSchemaKey] = [
-                SchemaDefinition::NAME => $interfaceName,
-                SchemaDefinition::NAMESPACED_NAME => $interfaceTypeResolver->getNamespacedTypeName(),
-                SchemaDefinition::ELEMENT_NAME => $interfaceTypeResolver->getTypeName(),
-                SchemaDefinition::DESCRIPTION => $interfaceTypeResolver->getTypeDescription(),
-                SchemaDefinition::FIELDS => $interfaceFields,
-                SchemaDefinition::INTERFACES => $interfaceImplementedInterfaceNames,
-                // The list of types that implement this interface
-                SchemaDefinition::POSSIBLE_TYPES => &$interfacePossibleTypes,
-            ];
-        }
-        $this->schemaDefinition[$typeSchemaKey][SchemaDefinition::INTERFACES] = $typeInterfaceDefinitions;
-    }
-
-    final protected function addFieldSchemaDefinition(ObjectTypeFieldResolverInterface $objectTypeFieldResolver, string $fieldName, array $stackMessages, array &$generalMessages, array $options = []): void
-    {
-        /**
-         * Fields may not be directly visible in the schema
-         */
-        if ($objectTypeFieldResolver->skipAddingToSchemaDefinition($this, $fieldName)) {
-            return;
-        }
-
-        // Watch out! We are passing empty $fieldArgs to generate the schema!
-        $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, []);
-        // Add subfield schema if it is deep, and this typeResolver has not been processed yet
-        if ($options['deep'] ?? null) {
-            // If this field is relational, then add its own schema
-            $fieldTypeResolver = $this->getFieldTypeResolver($fieldName);
-            if ($fieldTypeResolver instanceof RelationalTypeResolverInterface) {
-                $fieldSchemaDefinition[SchemaDefinition::TYPE_SCHEMA] = $fieldTypeResolver->getSchemaDefinition($stackMessages, $generalMessages, $options);
-            }
-        }
-        // Convert the field type from its internal representation (eg: "array:id") to the type (eg: "array:Post")
-        if (!($options['useTypeName'] ?? null) && ($types = $fieldSchemaDefinition[SchemaDefinition::TYPE_SCHEMA] ?? null)) {
-            // Display the type under entry "referencedType"
-            $typeNames = array_keys($types);
-            $fieldSchemaDefinition[SchemaDefinition::REFERENCED_TYPE] = $typeNames[0];
-        }
-        $isGlobal = $objectTypeFieldResolver->isGlobal($this, $fieldName);
-        $isConnection = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER] instanceof RelationalTypeResolverInterface;
-        if ($isGlobal) {
-            // If it is relational, it is a global connection
-            if ($isConnection) {
-                $entry = SchemaDefinition::GLOBAL_CONNECTIONS;
-                // Remove the "types"
-                if ($options['useTypeName'] ?? null) {
-                    unset($fieldSchemaDefinition[SchemaDefinition::TYPE_SCHEMA]);
-                }
-            } else {
-                $entry = SchemaDefinition::GLOBAL_FIELDS;
-            }
-        } else {
-            // Split the results into "fields" and "connections"
-            $entry = $isConnection ?
-                SchemaDefinition::CONNECTIONS :
-                SchemaDefinition::FIELDS;
-        }
-        $typeSchemaKey = $this->schemaDefinitionService->getTypeSchemaKey($this);
-        $this->schemaDefinition[$typeSchemaKey][$entry][$fieldName] = $fieldSchemaDefinition;
     }
 
     /**
