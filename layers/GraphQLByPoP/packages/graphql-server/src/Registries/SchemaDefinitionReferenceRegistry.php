@@ -347,6 +347,9 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::FIELDS])) {
                     ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::FIELDS]);
                 }
+                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::INTERFACES])) {
+                    sort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::INTERFACES]);
+                }
             }
 
             // Sort directives
