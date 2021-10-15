@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
-use Exception;
 use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Field;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Translation\Facades\TranslationAPIFacade;
 
 class SchemaDefinitionHelpers
 {
