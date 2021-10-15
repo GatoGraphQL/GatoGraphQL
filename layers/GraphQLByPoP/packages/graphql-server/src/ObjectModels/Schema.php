@@ -76,7 +76,10 @@ class Schema
             TypeKinds::SCALAR => new ScalarType($fullSchemaDefinition, $typeSchemaDefinitionPath),
             TypeKinds::ENUM => new EnumType($fullSchemaDefinition, $typeSchemaDefinitionPath),
             TypeKinds::INPUT_OBJECT => new InputObjectType($fullSchemaDefinition, $typeSchemaDefinitionPath),
-            default => new Exception($this->getTranslationAPI()->__('Unknown type kind \'%s\'', $typeKind), 'graphql-server'),
+            default => new Exception(sprintf(
+                $this->getTranslationAPI()->__('Unknown type kind \'%s\'', 'graphql-server'),
+                $typeKind
+            )),
         };
     }
     protected function getTranslationAPI(): TranslationAPIInterface
