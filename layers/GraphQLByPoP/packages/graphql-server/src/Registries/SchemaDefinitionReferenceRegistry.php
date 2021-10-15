@@ -369,7 +369,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     // {
     //     $fieldSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinitionForGraphQL, $fieldSchemaDefinitionPath);
     //     $typeName = $fieldSchemaDefinition[SchemaDefinition::TYPE_NAME];
-    //     $fieldSchemaDefinition[SchemaDefinition::TYPE_NAME] = SchemaHelpers::getTypeToOutputInSchema(
+    //     $fieldSchemaDefinition[SchemaDefinition::TYPE_NAME] = SchemaHelpers::getTypeNameForGraphQLSchema(
     //         $typeName,
     //         $fieldSchemaDefinition[SchemaDefinition::NON_NULLABLE] ?? null,
     //         $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false,
@@ -388,7 +388,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     //         foreach ($fieldOrDirectiveArgs as $fieldOrDirectiveArgName => $fieldOrDirectiveArgSchemaDefinition) {
     //             // The type is set always
     //             $typeName = $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::TYPE_NAME];
-    //             $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGS][$fieldOrDirectiveArgName][SchemaDefinition::TYPE_NAME] = SchemaHelpers::getTypeToOutputInSchema(
+    //             $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGS][$fieldOrDirectiveArgName][SchemaDefinition::TYPE_NAME] = SchemaHelpers::getTypeNameForGraphQLSchema(
     //                 $typeName,
     //                 $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::MANDATORY] ?? null,
     //                 $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false,
@@ -400,7 +400,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     //             if ($typeName === SchemaDefinitionTypes::TYPE_INPUT_OBJECT) {
     //                 foreach (($fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::ARGS] ?? []) as $inputFieldArgName => $inputFieldArgDefinition) {
     //                     $inputFieldTypeName = $inputFieldArgDefinition[SchemaDefinition::TYPE_NAME];
-    //                     $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGS][$inputFieldArgName][SchemaDefinition::TYPE_NAME] = SchemaHelpers::getTypeToOutputInSchema(
+    //                     $fieldOrDirectiveSchemaDefinition[SchemaDefinition::ARGS][$fieldOrDirectiveArgName][SchemaDefinition::ARGS][$inputFieldArgName][SchemaDefinition::TYPE_NAME] = SchemaHelpers::getTypeNameForGraphQLSchema(
     //                         $inputFieldTypeName,
     //                         $inputFieldArgDefinition[SchemaDefinition::MANDATORY] ?? null,
     //                         $inputFieldArgDefinition[SchemaDefinition::IS_ARRAY] ?? false,
