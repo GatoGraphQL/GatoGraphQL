@@ -15,7 +15,7 @@ abstract class AbstractTypeSchemaDefinitionProvider extends AbstractSchemaDefini
      */
     protected array $accessedDirectiveResolverClassRelationalTypeResolvers = [];
 
-    
+
     public function __construct(
         protected TypeResolverInterface $typeResolver,
     ) {

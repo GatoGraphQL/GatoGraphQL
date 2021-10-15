@@ -31,7 +31,7 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
     /**
      * Watch out! The POSSIBLE_TYPES are injected in SchemaDefinitionService,
      * so that only existing typeResolvers are analyzed.
-     * 
+     *
      * For instance, QueryRoot with nested mutations enabled must be skipped,
      * yet it would be retrieved if reading the types from the typeRegistry
      *

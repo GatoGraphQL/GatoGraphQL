@@ -89,7 +89,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
         if ($typeModifiers & SchemaTypeModifiers::MANDATORY) {
             $schemaDefinition[SchemaDefinition::MANDATORY] = true;
         }
-        
+
         // This value is valid for the field return value
         if ($typeModifiers & SchemaTypeModifiers::NON_NULLABLE) {
             $schemaDefinition[SchemaDefinition::NON_NULLABLE] = true;

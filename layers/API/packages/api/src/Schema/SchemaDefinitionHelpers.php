@@ -20,7 +20,7 @@ class SchemaDefinitionHelpers
     {
         $typeResolver = $schemaDefinition[SchemaDefinition::TYPE_RESOLVER];
         $schemaDefinition[SchemaDefinition::TYPE_NAME] = $typeResolver->getMaybeNamespacedTypeName();
-        
+
         $typeKind = null;
         if ($typeResolver instanceof ObjectTypeResolverInterface) {
             $typeKind = TypeKinds::OBJECT;

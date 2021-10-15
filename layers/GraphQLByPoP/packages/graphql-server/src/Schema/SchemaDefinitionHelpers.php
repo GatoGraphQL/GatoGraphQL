@@ -26,7 +26,7 @@ class SchemaDefinitionHelpers
         }
         return $schemaDefinitionPointer;
     }
-    
+
     /**
      * @return Field[]
      */
@@ -47,7 +47,7 @@ class SchemaDefinitionHelpers
         }
         return $fields;
     }
-    
+
     /**
      * @return Field[]
      */

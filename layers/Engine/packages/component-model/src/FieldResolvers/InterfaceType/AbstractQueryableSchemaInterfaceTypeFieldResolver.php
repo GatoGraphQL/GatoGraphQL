@@ -19,7 +19,7 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
         if (!($schemaDefinitionResolver instanceof QueryableInterfaceTypeFieldSchemaDefinitionResolverInterface)) {
             return null;
         }
-        
+
         /** @var QueryableInterfaceTypeFieldSchemaDefinitionResolverInterface $schemaDefinitionResolver */
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldFilterInputContainerModule($fieldName);

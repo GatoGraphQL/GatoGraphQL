@@ -67,7 +67,7 @@ class Schema
             $typeKind,
             $typeName,
         ];
-        
+
         // The type here can either be an ObjectType or a UnionType
         return match ($typeKind) {
             TypeKinds::OBJECT => new ObjectType($fullSchemaDefinition, $typeSchemaDefinitionPath),

@@ -83,9 +83,9 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
     /**
      * It can store the value in the cache.
-     * 
+     *
      * Use cache with care: If the schema is dynamic, it should not be cached!
-     * 
+     *
      *   Public schema: can cache
      *   Private schema: cannot cache
      */
@@ -105,7 +105,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             );
             // For the persistentCache, use a hash to remove invalid characters (such as "()")
             $cacheKey = hash('md5', json_encode($cacheKeyComponents));
-            
+
             $persistentCache = $this->getPersistentCache();
             if ($persistentCache->hasCache($cacheKey, $cacheType)) {
                 $this->fullSchemaDefinitionForGraphQL = $persistentCache->getCache($cacheKey, $cacheType);
@@ -210,7 +210,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
         // Modify the schema definitions
         // 1. Global fields, connections and directives
-        if (($addVersionToSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription)
+        if (
+            ($addVersionToSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription)
             && ComponentConfiguration::addGlobalFieldsToSchema()
         ) {
             foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_FIELDS]) as $fieldName) {

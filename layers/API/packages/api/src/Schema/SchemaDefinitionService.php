@@ -49,7 +49,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     private array $accessedDirectiveResolverClassRelationalTypeResolvers = [];
     /** @var array<string, ObjectTypeResolverInterface[]> Key: InterfaceType name, Value: List of ObjectType resolvers implementing the interface */
     private array $accessedInterfaceTypeNameObjectTypeResolvers = [];
-    
+
     /**
      * Cannot autowire because its calling `getNamespace`
      * on services.yaml produces an exception of PHP properties not initialized
@@ -135,7 +135,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             /**
              * Inject this ObjectTypeResolver into the POSSIBLE_TYPES from
              * its implemented InterfaceTypes.
-             * 
+             *
              * Watch out! This logic is implemented like this,
              * instead of retrieving them from the typeRegistry already
              * within InterfaceTypeSchemaDefinitionProvider,
@@ -154,7 +154,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
                     $interfaceTypeSchemaDefinition[SchemaDefinition::POSSIBLE_TYPES][$objectTypeName] = $objectTypeSchemaDefinition;
                 }
             }
-            
+
 
             // Add the Fragment Catalogue
             $schemaDefinition[SchemaDefinition::PERSISTED_FRAGMENTS] = $this->fragmentCatalogueManager->getPersistedFragmentsForSchema();

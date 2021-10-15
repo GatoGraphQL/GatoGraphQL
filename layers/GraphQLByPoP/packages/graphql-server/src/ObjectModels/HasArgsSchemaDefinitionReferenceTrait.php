@@ -36,7 +36,7 @@ trait HasArgsSchemaDefinitionReferenceTrait
      * Implementation of "args" field from the Field object
      *
      * @return InputValue[]
-     * 
+     *
      * @see https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACsEIDuEAA-vb
      */
     public function getArgs(): array

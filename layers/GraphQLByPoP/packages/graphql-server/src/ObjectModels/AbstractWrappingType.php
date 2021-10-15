@@ -15,7 +15,7 @@ abstract class AbstractWrappingType implements WrappingTypeInterface
     {
         return $this->wrappedType;
     }
-    
+
     public function getWrappedTypeID(): string
     {
         return $this->wrappedType->getID();
