@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
-use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
 use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
-use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionTypes as GraphQLServerSchemaDefinitionTypes;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\Schema\SchemaDefinitionTokens;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\Engine\Facades\Schema\SchemaDefinitionServiceFacade;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class Schema
 {
@@ -21,9 +18,6 @@ class Schema
     protected array $types;
     /** @var Directive[] */
     protected array $directives;
-    protected ?TypeInterface $queryType = null;
-    protected ?TypeInterface $mutationType = null;
-    protected ?TypeInterface $subscriptionType = null;
 
     public function __construct(
         array $fullSchemaDefinition,
@@ -51,7 +45,7 @@ class Schema
 
         // Initialize the directives
         $this->directives = [];
-        foreach ($fullSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES] as $directiveName => $directiveDefinition) {
+        foreach (array_keys($fullSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]) as $directiveName) {
             $this->directives[] = $this->getDirectiveInstance($fullSchemaDefinition, $directiveName);
         }
 
@@ -62,92 +56,6 @@ class Schema
                 $this->types[] = $this->getTypeInstance($fullSchemaDefinition, $typeKind, $typeName);
             }
         }
-
-        $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
-
-        // Initialize the different types
-        // 1. queryType
-        $queryTypeSchemaKey = $graphQLSchemaDefinitionService->getQueryRootTypeSchemaKey();
-        $queryTypeSchemaDefinitionPath = [
-            SchemaDefinition::TYPES,
-            $queryTypeSchemaKey,
-        ];
-        $this->queryType = $this->getTypeInstance($fullSchemaDefinition, $queryTypeSchemaDefinitionPath);
-
-        // 2. mutationType
-        if ($mutationTypeSchemaKey = $graphQLSchemaDefinitionService->getMutationRootTypeSchemaKey()) {
-            $mutationTypeSchemaDefinitionPath = [
-                SchemaDefinition::TYPES,
-                $mutationTypeSchemaKey,
-            ];
-            $this->mutationType = $this->getTypeInstance($fullSchemaDefinition, $mutationTypeSchemaDefinitionPath);
-        }
-
-        // 3. subscriptionType
-        if ($subscriptionTypeSchemaKey = $graphQLSchemaDefinitionService->getSubscriptionRootTypeSchemaKey()) {
-            $subscriptionTypeSchemaDefinitionPath = [
-                SchemaDefinition::TYPES,
-                $subscriptionTypeSchemaKey,
-            ];
-            $this->subscriptionType = $this->getTypeInstance($fullSchemaDefinition, $subscriptionTypeSchemaDefinitionPath);
-        }
-
-        // 2. Initialize the Object and Union types from under "types" and the Interface type from under "interfaces"
-        $resolvableTypes = [];
-        $resolvableTypeSchemaKeys = array_diff(
-            array_keys($fullSchemaDefinition[SchemaDefinition::TYPES]),
-            $scalarTypeNames
-        );
-        foreach ($resolvableTypeSchemaKeys as $typeName) {
-            $typeSchemaDefinitionPath = [
-                SchemaDefinition::TYPES,
-                $typeName,
-            ];
-            $resolvableTypes[] = $this->getTypeInstance($fullSchemaDefinition, $typeSchemaDefinitionPath);
-        }
-        $interfaceNames = array_keys($fullSchemaDefinition[SchemaDefinition::INTERFACES]);
-        // Now we can sort the interfaces, after creating new `InterfaceType`
-        // Everything else was already sorted in `SchemaDefinitionReferenceRegistry`
-        // Sort the elements in the schema alphabetically
-        if (ComponentConfiguration::sortSchemaAlphabetically()) {
-            sort($interfaceNames);
-        }
-        foreach ($interfaceNames as $interfaceName) {
-            $interfaceSchemaDefinitionPath = [
-                SchemaDefinition::INTERFACES,
-                $interfaceName,
-            ];
-            $resolvableTypes[] = new InterfaceType(
-                $fullSchemaDefinition,
-                $interfaceSchemaDefinitionPath
-            );
-        }
-
-        // 3. Since all types have been initialized by now, we tell them to further initialize their type dependencies, since now they all exist
-        // This step will initialize the dynamic Enum and InputObject types and add them to the registry
-        foreach ($resolvableTypes as $resolvableType) {
-            $resolvableType->initializeTypeDependencies();
-        }
-
-        /**
-         * If nested mutations are disabled, we will use types QueryRoot and MutationRoot,
-         * and the data for type "Root" can be safely not sent
-         */
-        $vars = ApplicationState::getVars();
-        if (!$vars['nested-mutations-enabled']) {
-            $schemaDefinitionService = SchemaDefinitionServiceFacade::getInstance();
-            $rootTypeResolver = $schemaDefinitionService->getRootTypeResolver();
-            $resolvableTypes = array_filter(
-                $resolvableTypes,
-                fn (TypeInterface $objectType) => $objectType->getName() != $rootTypeResolver->getTypeName()
-            );
-        }
-
-        // 4. Add the Object, Union and Interface types under $resolvableTypes
-        $this->types = array_merge(
-            $this->types,
-            $resolvableTypes,
-        );
     }
     protected function getTypeInstance(array &$fullSchemaDefinition, string $typeKind, string $typeName): TypeInterface
     {
@@ -179,61 +87,58 @@ class Schema
     {
         return $this->id;
     }
-    public function getQueryType(): TypeInterface
-    {
-        return $this->queryType;
-    }
     public function getQueryTypeID(): string
     {
-        return $this->getQueryType()->getID();
-    }
-    public function getMutationType(): ?TypeInterface
-    {
-        return $this->mutationType;
+        $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
+        return $this->getObjectTypeID($graphQLSchemaDefinitionService->getQueryRootTypeResolver());
     }
     public function getMutationTypeID(): ?string
     {
-        if ($mutationType = $this->getMutationType()) {
-            return $mutationType->getID();
+        $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
+        if ($mutationRootTypeResolver = $graphQLSchemaDefinitionService->getMutationRootTypeResolver()) {
+            return $this->getObjectTypeID($mutationRootTypeResolver);
         }
         return null;
-    }
-    public function getSubscriptionType(): ?TypeInterface
-    {
-        return $this->subscriptionType;
     }
     public function getSubscriptionTypeID(): ?string
     {
-        if ($subscriptionType = $this->getSubscriptionType()) {
-            return $subscriptionType->getID();
+        $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
+        if ($subscriptionRootTypeResolver = $graphQLSchemaDefinitionService->getSubscriptionRootTypeResolver()) {
+            return $this->getObjectTypeID($subscriptionRootTypeResolver);
         }
         return null;
     }
-
-    public function getTypes()
+    final protected function getObjectTypeID(ObjectTypeResolverInterface $objectTypeResolver): string
     {
-        return $this->types;
+        return SchemaDefinitionHelpers::getID([
+            SchemaDefinition::TYPES,
+            TypeKinds::OBJECT,
+            $objectTypeResolver->getMaybeNamespacedTypeName(),
+        ]);
     }
+
+    /**
+     * @return string[]
+     */
     public function getTypeIDs(): array
     {
         return array_map(
             function (TypeInterface $type) {
                 return $type->getID();
             },
-            $this->getTypes()
+            $this->types
         );
     }
-    public function getDirectives()
-    {
-        return $this->directives;
-    }
+    /**
+     * @return string[]
+     */
     public function getDirectiveIDs(): array
     {
         return array_map(
             function (Directive $directive) {
                 return $directive->getID();
             },
-            $this->getDirectives()
+            $this->directives
         );
     }
     public function getType(string $typeName): ?TypeInterface
@@ -244,8 +149,8 @@ class Schema
         foreach ($this->types as $type) {
             // The provided `$typeName` can include namespaces or not
             $nameMatches = $useQualifiedName ?
-                $typeName == $type->getNamespacedName() :
-                $typeName == $type->getElementName();
+                $typeName === $type->getNamespacedName() :
+                $typeName === $type->getElementName();
             if ($nameMatches) {
                 return $type;
             }
