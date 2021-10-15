@@ -8,7 +8,7 @@ use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentCon
 use GraphQLByPoP\GraphQLQuery\Schema\SchemaElements;
 use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
-use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractSchemaDefinitionReferenceObject;
+use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinitionReferenceObjectInterface;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionTypes as GraphQLServerSchemaDefinitionTypes;
@@ -33,7 +33,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      */
     protected ?array $fullSchemaDefinitionForGraphQL = null;
     /**
-     * @var array<string, AbstractSchemaDefinitionReferenceObject>
+     * @var array<string, SchemaDefinitionReferenceObjectInterface>
      */
     protected array $fullSchemaDefinitionReferenceDictionary = [];
 
@@ -516,7 +516,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     }
 
     public function registerSchemaDefinitionReference(
-        AbstractSchemaDefinitionReferenceObject $referenceObject
+        SchemaDefinitionReferenceObjectInterface $referenceObject
     ): string {
         $schemaDefinitionPath = $referenceObject->getSchemaDefinitionPath();
         $referenceObjectID = SchemaDefinitionHelpers::getID($schemaDefinitionPath);
@@ -532,7 +532,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     }
     public function getSchemaDefinitionReference(
         string $referenceObjectID
-    ): ?AbstractSchemaDefinitionReferenceObject {
+    ): ?SchemaDefinitionReferenceObjectInterface {
         return $this->fullSchemaDefinitionReferenceDictionary[$referenceObjectID];
     }
 }

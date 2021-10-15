@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Registries;
 
-use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractSchemaDefinitionReferenceObject;
+use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinitionReferenceObjectInterface;
 
 interface SchemaDefinitionReferenceRegistryInterface
 {
@@ -13,9 +13,9 @@ interface SchemaDefinitionReferenceRegistryInterface
      */
     public function &getFullSchemaDefinitionForGraphQL(): array;
     public function registerSchemaDefinitionReference(
-        AbstractSchemaDefinitionReferenceObject $referenceObject
+        SchemaDefinitionReferenceObjectInterface $referenceObject
     ): string;
     public function getSchemaDefinitionReference(
         string $referenceObjectID
-    ): ?AbstractSchemaDefinitionReferenceObject;
+    ): ?SchemaDefinitionReferenceObjectInterface;
 }

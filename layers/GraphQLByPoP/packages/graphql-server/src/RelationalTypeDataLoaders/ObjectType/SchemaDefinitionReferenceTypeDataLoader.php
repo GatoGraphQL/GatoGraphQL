@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 
-use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractSchemaDefinitionReferenceObject;
+use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinitionReferenceObjectInterface;
 use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -21,7 +21,7 @@ class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoad
     }
 
     /**
-     * @return AbstractSchemaDefinitionReferenceObject[]
+     * @return SchemaDefinitionReferenceObjectInterface[]
      */
     public function getObjects(array $ids): array
     {
