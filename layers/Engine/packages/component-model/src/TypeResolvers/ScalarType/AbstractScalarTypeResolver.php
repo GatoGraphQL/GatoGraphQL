@@ -46,10 +46,10 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         );
     }
 
-    protected function validateIsNotArrayOrObject(mixed $inputValue): ?Error
+    final protected function validateIsNotStdClass(string|int|float|bool|stdClass $inputValue): ?Error
     {
         // Fail if passing an array for unsupporting types
-        if (is_array($inputValue) || is_object($inputValue)) {
+        if ($inputValue instanceof stdClass) {
             return $this->getError(
                 sprintf(
                     $this->translationAPI->__('An %s cannot be casted to type \'%s\'', 'component-model'),

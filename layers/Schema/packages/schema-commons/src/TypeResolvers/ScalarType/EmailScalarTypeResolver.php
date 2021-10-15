@@ -21,7 +21,7 @@ class EmailScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass
     {
-        if ($error = $this->validateIsNotArrayOrObject($inputValue)) {
+        if ($error = $this->validateIsNotStdClass($inputValue)) {
             return $error;
         }
         if ($error = $this->validateFilterVar($inputValue, \FILTER_VALIDATE_EMAIL)) {
