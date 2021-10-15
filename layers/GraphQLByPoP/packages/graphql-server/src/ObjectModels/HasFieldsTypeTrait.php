@@ -46,7 +46,7 @@ trait HasFieldsTypeTrait
         if (ComponentConfiguration::addGlobalFieldsToSchema()) {
             // Global fields and connections have already been initialized, simply get the reference to the existing objects from the registryMap
             // 1. Global fields
-            $this->retrieveFieldsFromPath(
+            $this->getFieldsFromPath(
                 $fullSchemaDefinition,
                 [
                     SchemaDefinition::GLOBAL_FIELDS,
@@ -54,7 +54,7 @@ trait HasFieldsTypeTrait
             );
             // 2. Global connections
             if ($includeConnections) {
-                $this->retrieveFieldsFromPath(
+                $this->getFieldsFromPath(
                     $fullSchemaDefinition,
                     [
                         SchemaDefinition::GLOBAL_CONNECTIONS,
@@ -84,11 +84,11 @@ trait HasFieldsTypeTrait
             SchemaDefinitionHelpers::createFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
         );
     }
-    protected function retrieveFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
+    protected function getFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
     {
         $this->fields = array_merge(
             $this->fields,
-            SchemaDefinitionHelpers::retrieveFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
+            SchemaDefinitionHelpers::getFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
         );
     }
 
