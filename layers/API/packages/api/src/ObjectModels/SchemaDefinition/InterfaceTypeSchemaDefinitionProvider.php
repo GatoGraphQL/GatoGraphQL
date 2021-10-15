@@ -53,8 +53,8 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
             $this->accessedTypeAndDirectiveResolvers[$objectTypeResolver::class] = $objectTypeResolver;
         }
 
+        $schemaDefinition[SchemaDefinition::INTERFACES] = [];
         if ($partiallyImplementedInterfaceTypeResolvers = $this->interfaceTypeResolver->getPartiallyImplementedInterfaceTypeResolvers()) {
-            $schemaDefinition[SchemaDefinition::INTERFACES] = [];
             foreach ($partiallyImplementedInterfaceTypeResolvers as $interfaceTypeResolver) {
                 $interfaceTypeName = $interfaceTypeResolver->getMaybeNamespacedTypeName();
                 $interfaceTypeSchemaDefinition = [
