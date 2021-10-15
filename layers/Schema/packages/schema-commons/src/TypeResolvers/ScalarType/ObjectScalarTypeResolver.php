@@ -21,11 +21,11 @@ class ObjectScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass
     {
-        if (!(is_array($inputValue) || is_object($inputValue))) {
+        if (!($inputValue instanceof stdClass)) {
             return $this->getError(
                 sprintf(
                     $this->translationAPI->__('Cannot cast value \'%s\' to type \'%s\'', 'component-model'),
-                    json_decode($inputValue),
+                    $inputValue,
                     $this->getMaybeNamespacedTypeName()
                 )
             );
