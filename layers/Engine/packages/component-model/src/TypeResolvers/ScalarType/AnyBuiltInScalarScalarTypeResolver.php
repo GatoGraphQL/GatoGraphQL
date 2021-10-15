@@ -13,7 +13,7 @@ class AnyBuiltInScalarScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Wildcard type to represent any built-in type (string, int, bool, etc)', 'component-model');
+        return $this->translationAPI->__('Wildcard type representing any of GraphQL\'s built-in types (String, Int, Boolean, Float or ID)', 'component-model');
     }
 
     /**

@@ -30,8 +30,8 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
 
     /**
      * The `AnyBuiltInScalar` type is a wildcard type,
-     * representing *any* of GraphQL's built-in types
-     * (string, int, bool, float or ID)
+     * representing any of GraphQL's built-in types
+     * (String, Int, Boolean, Float or ID)
      */
     public function getDefaultConcreteTypeResolver(): ConcreteTypeResolverInterface
     {
@@ -39,8 +39,8 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
     }
     /**
      * The `AnyBuiltInScalar` type is a wildcard type,
-     * representing *any* of GraphQL's built-in types
-     * (string, int, bool, float or ID)
+     * representing any of GraphQL's built-in types
+     * (String, Int, Boolean, Float or ID)
      */
     public function getDefaultInputTypeResolver(): InputTypeResolverInterface
     {
