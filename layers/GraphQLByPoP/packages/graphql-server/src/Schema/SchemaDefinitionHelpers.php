@@ -105,16 +105,14 @@ class SchemaDefinitionHelpers
         $schemaDefinitionReferenceRegistry = SchemaDefinitionReferenceRegistryFacade::getInstance();
         $fields = [];
         foreach (array_keys($fieldSchemaDefinitionPointer) as $fieldName) {
-            $schemaDefinitionID = SchemaDefinitionHelpers::getID(array_merge(
+            $schemaDefinitionReferenceObjectID = SchemaDefinitionHelpers::getID(array_merge(
                 $fieldSchemaDefinitionPath,
                 [
                     $fieldName
                 ]
             ));
-            /**
-             * @var Field
-             */
-            $field = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($schemaDefinitionID);
+            /** @var Field */
+            $field = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($schemaDefinitionReferenceObjectID);
             $fields[] = $field;
         }
         return $fields;
