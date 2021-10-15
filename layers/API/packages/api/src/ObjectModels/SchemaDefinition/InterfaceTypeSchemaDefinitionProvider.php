@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
 use PoP\API\Schema\SchemaDefinition;
+use PoP\API\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
@@ -48,7 +49,7 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
             $objectTypeSchemaDefinition = [
                 SchemaDefinition::TYPE_RESOLVER => $objectTypeResolver,
             ];
-            $this->replaceTypeResolverWithTypeProperties($objectTypeSchemaDefinition);
+            SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($objectTypeSchemaDefinition);
             $schemaDefinition[SchemaDefinition::POSSIBLE_TYPES][$objectTypeName] = $objectTypeSchemaDefinition;
             $this->accessedTypeAndDirectiveResolvers[$objectTypeResolver::class] = $objectTypeResolver;
         }
@@ -60,7 +61,7 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
                 $interfaceTypeSchemaDefinition = [
                     SchemaDefinition::TYPE_RESOLVER => $interfaceTypeResolver,
                 ];
-                $this->replaceTypeResolverWithTypeProperties($interfaceTypeSchemaDefinition);
+                SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($interfaceTypeSchemaDefinition);
                 $schemaDefinition[SchemaDefinition::INTERFACES][$interfaceTypeName] = $interfaceTypeSchemaDefinition;
                 $this->accessedTypeAndDirectiveResolvers[$interfaceTypeResolver::class] = $interfaceTypeResolver;
             }
@@ -79,12 +80,12 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
         // Extract the typeResolvers
         $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
         $this->accessedTypeAndDirectiveResolvers[$fieldTypeResolver::class] = $fieldTypeResolver;
-        $this->replaceTypeResolverWithTypeProperties($fieldSchemaDefinition);
+        SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($fieldSchemaDefinition);
 
         foreach (($fieldSchemaDefinition[SchemaDefinition::ARGS] ?? []) as $fieldArgName => &$fieldArgSchemaDefinition) {
             $fieldArgTypeResolver = $fieldArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
             $this->accessedTypeAndDirectiveResolvers[$fieldArgTypeResolver::class] = $fieldArgTypeResolver;
-            $this->replaceTypeResolverWithTypeProperties($fieldSchemaDefinition[SchemaDefinition::ARGS][$fieldArgName]);
+            SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($fieldSchemaDefinition[SchemaDefinition::ARGS][$fieldArgName]);
         }
 
         $interfaceTypeSchemaDefinition[SchemaDefinition::FIELDS][$fieldName] = $fieldSchemaDefinition;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
 use PoP\API\Schema\SchemaDefinition;
+use PoP\API\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
@@ -34,7 +35,7 @@ class UnionTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProv
             $pickerObjectTypeSchemaDefinition = [
                 SchemaDefinition::TYPE_RESOLVER => $pickerObjectTypeResolver,
             ];
-            $this->replaceTypeResolverWithTypeProperties($pickerObjectTypeSchemaDefinition);
+            SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($pickerObjectTypeSchemaDefinition);
             $schemaDefinition[SchemaDefinition::POSSIBLE_TYPES][$pickerObjectTypeName] = $pickerObjectTypeSchemaDefinition;
             $this->accessedTypeAndDirectiveResolvers[$pickerObjectTypeResolver::class] = $pickerObjectTypeResolver;
         }
@@ -47,7 +48,7 @@ class UnionTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProv
                 $interfaceTypeSchemaDefinition = [
                     SchemaDefinition::TYPE_RESOLVER => $interfaceTypeResolver,
                 ];
-                $this->replaceTypeResolverWithTypeProperties($interfaceTypeSchemaDefinition);
+                SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($interfaceTypeSchemaDefinition);
                 $schemaDefinition[SchemaDefinition::INTERFACES][$interfaceTypeName] = $interfaceTypeSchemaDefinition;
                 $this->accessedTypeAndDirectiveResolvers[$interfaceTypeResolver::class] = $interfaceTypeResolver;
             }
