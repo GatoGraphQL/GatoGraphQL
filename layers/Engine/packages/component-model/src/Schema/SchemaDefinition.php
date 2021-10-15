@@ -10,7 +10,6 @@ class SchemaDefinition
     const NAMESPACED_NAME = 'namespacedName';
     const ELEMENT_NAME = 'elementName';
     const TYPE_RESOLVER = 'typeResolver';
-    const TYPE_NAME = 'typeName';
     const NON_NULLABLE = 'nonNullable';
     const IS_ARRAY = 'isArray';
     const IS_NON_NULLABLE_ITEMS_IN_ARRAY = 'isNonNullableItemsInArray';
