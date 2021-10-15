@@ -23,7 +23,7 @@ trait HasFieldsTypeTrait
         // Print connections and then fields, it looks better in the Interactive Schema
         // 1. Connections under this type
         if ($includeConnections) {
-            $this->initFieldsFromPath(
+            $this->createFieldsFromPath(
                 $fullSchemaDefinition,
                 array_merge(
                     $schemaDefinitionPath,
@@ -34,7 +34,7 @@ trait HasFieldsTypeTrait
             );
         }
         // 2. Fields under this type
-        $this->initFieldsFromPath(
+        $this->createFieldsFromPath(
             $fullSchemaDefinition,
             array_merge(
                 $schemaDefinitionPath,
@@ -77,11 +77,11 @@ trait HasFieldsTypeTrait
         }
         return [];
     }
-    protected function initFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
+    protected function createFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
     {
         $this->fields = array_merge(
             $this->fields,
-            SchemaDefinitionHelpers::initFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
+            SchemaDefinitionHelpers::createFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
         );
     }
     protected function retrieveFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void

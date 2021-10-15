@@ -33,7 +33,7 @@ class SchemaDefinitionHelpers
     /**
      * @return Field[]
      */
-    public static function initFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array
+    public static function createFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array
     {
         $fieldSchemaDefinitionPointer = self::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
         $fields = [];

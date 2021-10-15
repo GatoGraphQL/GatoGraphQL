@@ -28,14 +28,14 @@ class Schema
         if (ComponentConfiguration::addGlobalFieldsToSchema()) {
             // Add the fields in the registry
             // 1. Global fields
-            SchemaDefinitionHelpers::initFieldsFromPath(
+            SchemaDefinitionHelpers::createFieldsFromPath(
                 $fullSchemaDefinition,
                 [
                     SchemaDefinition::GLOBAL_FIELDS,
                 ]
             );
             // 2. Global connections
-            SchemaDefinitionHelpers::initFieldsFromPath(
+            SchemaDefinitionHelpers::createFieldsFromPath(
                 $fullSchemaDefinition,
                 [
                     SchemaDefinition::GLOBAL_CONNECTIONS,
