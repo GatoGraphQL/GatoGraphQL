@@ -479,14 +479,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     ): string {
         $schemaDefinitionPath = $referenceObject->getSchemaDefinitionPath();
         $referenceObjectID = SchemaDefinitionHelpers::getID($schemaDefinitionPath);
-        // Calculate and set the ID. If this is a nested type, its wrapping type will already have been registered under this ID
-        // Hence, register it under another one
-        while (isset($this->fullSchemaDefinitionReferenceDictionary[$referenceObjectID])) {
-            // Append the ID with a distinctive token at the end
-            $referenceObjectID .= '*';
-        }
         $this->fullSchemaDefinitionReferenceDictionary[$referenceObjectID] = $referenceObject;
-
         return $referenceObjectID;
     }
     public function getSchemaDefinitionReference(
