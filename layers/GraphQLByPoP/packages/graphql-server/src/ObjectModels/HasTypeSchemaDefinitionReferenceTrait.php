@@ -11,7 +11,8 @@ use PoP\API\Schema\SchemaDefinition;
 trait HasTypeSchemaDefinitionReferenceTrait
 {
     /**
-     * Append the GraphQL wrappers to the ID
+     * Append the GraphQL wrappers to the ID, to select any entity
+     * of type WrappingTypeOrSchemaDefinitionReferenceObjectInterface
      */
     public function getTypeID(): string
     {
