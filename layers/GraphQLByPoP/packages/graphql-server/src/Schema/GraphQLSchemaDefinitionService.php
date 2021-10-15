@@ -28,7 +28,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
      * If nested mutations are enabled, use "Root".
      * Otherwise, use "Query"
      */
-    public function getQueryRootTypeResolver(): ObjectTypeResolverInterface
+    public function getQueryRootObjectTypeResolver(): ObjectTypeResolverInterface
     {
         $vars = ApplicationState::getVars();
         if ($vars['nested-mutations-enabled']) {
