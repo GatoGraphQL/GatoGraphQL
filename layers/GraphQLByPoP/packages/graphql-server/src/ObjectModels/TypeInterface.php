@@ -16,5 +16,8 @@ interface TypeInterface extends SchemaDefinitionReferenceObjectInterface
 
     public function getDescription(): ?string;
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getExtensions(): array;
 }

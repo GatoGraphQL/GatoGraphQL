@@ -20,21 +20,16 @@ abstract class AbstractType extends AbstractSchemaDefinitionReferenceObject impl
         return $this->schemaDefinition[SchemaDefinition::ELEMENT_NAME];
     }
 
-    /**
-     * Static types: their names are defined under property "name"
-     * from the schema definition
-     */
     public function getName(): string
     {
         return $this->schemaDefinition[SchemaDefinition::NAME];
     }
+    
     public function getDescription(): ?string
     {
         return $this->schemaDefinition[SchemaDefinition::DESCRIPTION] ?? null;
     }
-    /**
-     * There are no extensions currently implemented for the Type
-     */
+
     public function getExtensions(): array
     {
         return [];
