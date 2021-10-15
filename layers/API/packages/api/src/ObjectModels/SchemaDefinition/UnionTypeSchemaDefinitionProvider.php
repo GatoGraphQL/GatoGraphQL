@@ -42,9 +42,13 @@ class UnionTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProv
         if (ComponentConfiguration::enableUnionTypeImplementingInterfaceType()) {
             // If it returns an interface as type, add it to the schemaDefinition
             if ($interfaceTypeResolver = $this->unionTypeResolver->getUnionTypeInterfaceTypeResolver()) {
-                $schemaDefinition[SchemaDefinition::INTERFACES] = [
-                    $interfaceTypeResolver->getMaybeNamespacedTypeName(),
+                $schemaDefinition[SchemaDefinition::INTERFACES] = [];
+                $interfaceTypeName = $interfaceTypeResolver->getMaybeNamespacedTypeName();
+                $interfaceTypeSchemaDefinition = [
+                    SchemaDefinition::TYPE_RESOLVER => $interfaceTypeResolver,
                 ];
+                $this->replaceTypeResolverWithTypeProperties($interfaceTypeSchemaDefinition);
+                $schemaDefinition[SchemaDefinition::INTERFACES][$interfaceTypeName] = $interfaceTypeSchemaDefinition;
                 $this->accessedTypeAndDirectiveResolvers[$interfaceTypeResolver::class] = $interfaceTypeResolver;
             }
         }
