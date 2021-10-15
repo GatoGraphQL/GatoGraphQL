@@ -17,7 +17,7 @@ class SyntaxHelpers
     /**
      * Extract the nested types inside the list
      */
-    public static function getListTypeNestedTypeName(string $typeNameOrID): string
+    public static function extractWrappedTypeFromListWrappingType(string $typeNameOrID): string
     {
         return substr($typeNameOrID, 1, strlen($typeNameOrID) - 2);
     }
@@ -33,7 +33,7 @@ class SyntaxHelpers
     /**
      * Extract the nested types which are "non null"
      */
-    public static function getNonNullTypeNestedTypeName(string $typeNameOrID): string
+    public static function extractWrappedTypeFromNonNullWrappingType(string $typeNameOrID): string
     {
         return substr($typeNameOrID, 0, strlen($typeNameOrID) - 1);
     }

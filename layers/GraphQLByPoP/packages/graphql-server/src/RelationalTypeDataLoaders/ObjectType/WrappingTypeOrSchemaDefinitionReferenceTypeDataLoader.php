@@ -45,7 +45,7 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
         if (SyntaxHelpers::isNonNullWrappingType($typeID)) {
             /** @var TypeInterface */
             $wrappedType = $this->getWrappingTypeOrSchemaDefinitionReferenceObject(
-                SyntaxHelpers::getNonNullTypeNestedTypeName($typeID)
+                SyntaxHelpers::extractWrappedTypeFromNonNullWrappingType($typeID)
             );
             return new NonNullType($wrappedType);
         }
@@ -54,7 +54,7 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
         if (SyntaxHelpers::isListWrappingType($typeID)) {
             /** @var TypeInterface */
             $wrappedType = $this->getWrappingTypeOrSchemaDefinitionReferenceObject(
-                SyntaxHelpers::getListTypeNestedTypeName($typeID)
+                SyntaxHelpers::extractWrappedTypeFromListWrappingType($typeID)
             );
             return new ListType($wrappedType);
         }
