@@ -25,7 +25,7 @@ class SyntaxHelpers
     /**
      * Indicate if the type if of type "NON_NULL"
      */
-    public static function isNonNullType(string $type): bool
+    public static function isNonNullWrappingTypeNameOrID(string $type): bool
     {
         return substr($type, -1) == '!';
     }

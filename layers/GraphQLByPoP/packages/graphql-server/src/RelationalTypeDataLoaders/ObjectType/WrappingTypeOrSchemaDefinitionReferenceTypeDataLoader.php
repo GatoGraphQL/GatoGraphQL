@@ -42,7 +42,7 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
     protected function getWrappingTypeOrSchemaDefinitionReferenceObject(string $typeID): WrappingTypeInterface | SchemaDefinitionReferenceObjectInterface
     {
         // Check if the type is non-null
-        if (SyntaxHelpers::isNonNullType($typeID)) {
+        if (SyntaxHelpers::isNonNullWrappingTypeNameOrID($typeID)) {
             /** @var TypeInterface */
             $wrappedType = $this->getWrappingTypeOrSchemaDefinitionReferenceObject(
                 SyntaxHelpers::getNonNullTypeNestedTypeName($typeID)
