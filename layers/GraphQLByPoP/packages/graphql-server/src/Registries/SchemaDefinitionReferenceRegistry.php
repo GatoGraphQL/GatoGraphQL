@@ -324,18 +324,27 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         // Sort the elements in the schema alphabetically
         if (ComponentConfiguration::sortSchemaAlphabetically()) {
             // Sort types
-            ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES]);
+            foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES]) as $typeKind) {
+                ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeKind]);
+            }
 
-            // Sort fields, connections and interfaces for each type
-            foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES] as $typeName => $typeSchemaDefinition) {
-                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeName][SchemaDefinition::FIELDS])) {
-                    ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeName][SchemaDefinition::FIELDS]);
+            // Sort fields, connections and interfaces for each Object type
+            foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT] as $typeName => $typeSchemaDefinition) {
+                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::FIELDS])) {
+                    ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::FIELDS]);
                 }
-                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeName][SchemaDefinition::CONNECTIONS])) {
-                    ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeName][SchemaDefinition::CONNECTIONS]);
+                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::CONNECTIONS])) {
+                    ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::CONNECTIONS]);
                 }
-                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeName][SchemaDefinition::INTERFACES])) {
-                    sort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeName][SchemaDefinition::INTERFACES]);
+                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::INTERFACES])) {
+                    sort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::INTERFACES]);
+                }
+            }
+
+            // Sort fields for each Interface type
+            foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE] as $typeName => $typeSchemaDefinition) {
+                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::FIELDS])) {
+                    ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::FIELDS]);
                 }
             }
 
@@ -343,16 +352,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_DIRECTIVES])) {
                 ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_DIRECTIVES]);
             }
-            /**
-             * Can NOT sort interfaces yet! Because interfaces may depend on other interfaces,
-             * they must follow their current order to be initialized,
-             * which happens when creating instances of `InterfaceType` in type `Schema`
-             *
-             * @todo Find a workaround if interfaces need to be sorted
-             */
-            // if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::INTERFACES])) {
-            //     ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::INTERFACES]);
-            // }
         }
 
         // Expand the full schema with more data that is needed for GraphQL
