@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\ListType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\NonNullType;
-use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinitionReferenceObjectInterface;
+use GraphQLByPoP\GraphQLServer\ObjectModels\WrappingTypeOrSchemaDefinitionReferenceObjectInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\TypeInterface;
 use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
 use GraphQLByPoP\GraphQLServer\Syntax\SyntaxHelpers;
@@ -27,22 +27,22 @@ class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoad
     /**
      * The IDs can contain GraphQL's type wrappers, such as `[String]!`
      * 
-     * @return SchemaDefinitionReferenceObjectInterface[]
+     * @return WrappingTypeOrSchemaDefinitionReferenceObjectInterface[]
      */
     public function getObjects(array $ids): array
     {
         return array_map(
-            fn (string $typeID) => $this->getSchemaDefinitionReferenceObject($typeID),
+            fn (string $typeID) => $this->getWrappingTypeOrSchemaDefinitionReferenceObject($typeID),
             $ids
         );
     }
 
-    protected function getSchemaDefinitionReferenceObject(string $typeID): SchemaDefinitionReferenceObjectInterface
+    protected function getWrappingTypeOrSchemaDefinitionReferenceObject(string $typeID): WrappingTypeOrSchemaDefinitionReferenceObjectInterface
     {
         // Check if the type is non-null
         if (SyntaxHelpers::isNonNullType($typeID)) {
             /** @var TypeInterface */
-            $wrappedType = $this->getSchemaDefinitionReferenceObject(
+            $wrappedType = $this->getWrappingTypeOrSchemaDefinitionReferenceObject(
                 SyntaxHelpers::getNonNullTypeNestedTypeName($typeID)
             );
             return new NonNullType($wrappedType);
@@ -51,7 +51,7 @@ class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoad
         // Check if it is an array
         if (SyntaxHelpers::isListType($typeID)) {
             /** @var TypeInterface */
-            $wrappedType = $this->getSchemaDefinitionReferenceObject(
+            $wrappedType = $this->getWrappingTypeOrSchemaDefinitionReferenceObject(
                 SyntaxHelpers::getListTypeNestedTypeName($typeID)
             );
             return new ListType($wrappedType);
