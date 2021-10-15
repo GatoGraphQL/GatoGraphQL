@@ -64,7 +64,9 @@ class SchemaHelpers
     {
         return array_map(
             function (array $schemaFieldArg): array {
-                return $schemaFieldArg[SchemaDefinition::ITEMS];
+                /** @var EnumTypeResolverInterface */
+                $enumTypeResolver = $schemaFieldArg[SchemaDefinition::TYPE_RESOLVER];
+                return $enumTypeResolver->getEnumOutputValues();
             },
             $schemaFieldArgs
         );
