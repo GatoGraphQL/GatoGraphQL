@@ -124,7 +124,7 @@ class Schema
     public function getTypeIDs(): array
     {
         return array_map(
-            function (TypeInterface $type) {
+            function (NamedTypeInterface $type) {
                 return $type->getID();
             },
             $this->types
