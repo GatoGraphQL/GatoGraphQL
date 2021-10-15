@@ -10,8 +10,6 @@ use PoP\API\Schema\SchemaDefinition;
 
 trait HasTypeSchemaDefinitionReferenceTrait
 {
-    use ResolveTypeSchemaDefinitionReferenceTrait;
-
     /**
      * Append the GraphQL wrappers to the ID
      */

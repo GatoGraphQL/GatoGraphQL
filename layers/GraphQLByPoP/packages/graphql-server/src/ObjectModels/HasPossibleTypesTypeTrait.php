@@ -9,8 +9,6 @@ use PoP\API\Schema\SchemaDefinition;
 
 trait HasPossibleTypesTypeTrait
 {
-    use ResolveTypeSchemaDefinitionReferenceTrait;
-
     /**
      * @return string[]
      */
