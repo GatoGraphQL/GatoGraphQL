@@ -8,8 +8,6 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 
 class EnumType extends AbstractType
 {
-    use NonDocumentableTypeTrait;
-
     /**
      * @var EnumValue[]
      */

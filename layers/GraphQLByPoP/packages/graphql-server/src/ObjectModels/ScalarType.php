@@ -8,8 +8,6 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 
 class ScalarType extends AbstractType
 {
-    use NonDocumentableTypeTrait;
-
     public function getKind(): string
     {
         return TypeKinds::SCALAR;
