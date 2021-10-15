@@ -104,12 +104,6 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
         return $this->interfaceTypeFieldResolvers;
     }
 
-    /**
-     * Produce an array of all the interface's fieldNames and, for each,
-     * a list of all the ObjectTypeFieldResolverInterfaces
-     *
-     * @return array<string, InterfaceTypeFieldResolverInterface[]>
-     */
     final public function getExecutableInterfaceTypeFieldResolversByField(): array
     {
         if ($this->excutableInterfaceTypeFieldResolversByField === null) {

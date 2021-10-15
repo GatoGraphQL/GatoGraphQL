@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
+use Exception;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
+use GraphQLByPoP\GraphQLServer\ObjectModels\NamedTypeInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\Schema\SchemaDefinitionTokens;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use GraphQLByPoP\GraphQLServer\ObjectModels\NamedTypeInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Translation\TranslationAPIInterface;
 
 class Schema
 {
@@ -64,6 +67,7 @@ class Schema
             $typeKind,
             $typeName,
         ];
+        
         // The type here can either be an ObjectType or a UnionType
         return match ($typeKind) {
             TypeKinds::OBJECT => new ObjectType($fullSchemaDefinition, $typeSchemaDefinitionPath),
@@ -72,8 +76,14 @@ class Schema
             TypeKinds::SCALAR => new ScalarType($fullSchemaDefinition, $typeSchemaDefinitionPath),
             TypeKinds::ENUM => new EnumType($fullSchemaDefinition, $typeSchemaDefinitionPath),
             TypeKinds::INPUT_OBJECT => new InputObjectType($fullSchemaDefinition, $typeSchemaDefinitionPath),
+            default => new Exception($this->getTranslationAPI()->__('Unknown type kind \'%s\'', $typeKind), 'graphql-server'),
         };
     }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return TranslationAPIFacade::getInstance();
+    }
+
     protected function getDirectiveInstance(array &$fullSchemaDefinition, string $directiveName): Directive
     {
         $directiveSchemaDefinitionPath = [

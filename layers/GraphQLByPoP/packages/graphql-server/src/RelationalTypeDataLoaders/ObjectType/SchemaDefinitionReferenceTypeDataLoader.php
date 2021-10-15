@@ -20,11 +20,6 @@ class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoad
         $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
     }
 
-    /**
-     * The IDs can contain GraphQL's type wrappers, such as `[String]!`
-     * 
-     * @return WrappingTypeOrSchemaDefinitionReferenceObjectInterface[]
-     */
     public function getObjects(array $ids): array
     {
         return array_map(
