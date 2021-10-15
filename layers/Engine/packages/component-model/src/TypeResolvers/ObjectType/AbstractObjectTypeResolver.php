@@ -431,6 +431,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         }
                     } elseif (ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition()) {
                         $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
+                        $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
                         $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false;
                         if (
                             !$fieldIsArrayType

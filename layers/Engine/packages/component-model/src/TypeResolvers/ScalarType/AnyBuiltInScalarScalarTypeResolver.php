@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
-class AnyScalarScalarTypeResolver extends AbstractScalarTypeResolver
+class AnyBuiltInScalarScalarTypeResolver extends AbstractScalarTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'AnyScalar';
+        return 'AnyBuiltInScalar';
     }
 
     public function getTypeDescription(): ?string

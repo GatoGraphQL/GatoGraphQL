@@ -156,9 +156,6 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return null;
     }
 
-    /**
-     * By default, the field is a scalar of type AnyScalar
-     */
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
