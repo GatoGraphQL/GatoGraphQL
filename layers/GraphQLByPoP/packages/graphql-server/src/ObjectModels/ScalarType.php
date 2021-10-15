@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 
-class ScalarType extends AbstractType
+class ScalarType extends AbstractNamedType
 {
     public function getKind(): string
     {

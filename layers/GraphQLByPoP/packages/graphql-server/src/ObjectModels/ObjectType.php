@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-class ObjectType extends AbstractType implements HasFieldsTypeInterface, HasInterfacesTypeInterface
+class ObjectType extends AbstractNamedType implements HasFieldsTypeInterface, HasInterfacesTypeInterface
 {
     use HasFieldsTypeTrait;
     use HasInterfacesTypeTrait;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-class UnionType extends AbstractType implements HasPossibleTypesTypeInterface
+class UnionType extends AbstractNamedType implements HasPossibleTypesTypeInterface
 {
     use HasPossibleTypesTypeTrait;
 

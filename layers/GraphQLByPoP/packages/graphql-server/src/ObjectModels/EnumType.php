@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 
-class EnumType extends AbstractType
+class EnumType extends AbstractNamedType
 {
     /**
      * @var EnumValue[]
