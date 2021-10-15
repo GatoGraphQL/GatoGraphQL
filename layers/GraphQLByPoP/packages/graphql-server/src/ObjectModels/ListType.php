@@ -10,7 +10,7 @@ class ListType extends AbstractWrappingType
     {
         return sprintf(
             '[%s]',
-            $this->nestedType->getName()
+            $this->wrappedType->getName()
         );
     }
 

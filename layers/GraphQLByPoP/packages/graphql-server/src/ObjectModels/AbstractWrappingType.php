@@ -9,16 +9,16 @@ abstract class AbstractWrappingType extends AbstractNamedType implements Wrappin
     public function __construct(
         array &$fullSchemaDefinition,
         array $schemaDefinitionPath,
-        protected TypeInterface $nestedType,
+        protected TypeInterface $wrappedType,
     ) {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
     }
     public function getWrappedType(): TypeInterface
     {
-        return $this->nestedType;
+        return $this->wrappedType;
     }
     public function getWrappedTypeID(): string
     {
-        return $this->nestedType->getID();
+        return $this->wrappedType->getID();
     }
 }
