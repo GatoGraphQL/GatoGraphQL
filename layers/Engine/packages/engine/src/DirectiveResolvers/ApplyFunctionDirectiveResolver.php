@@ -12,7 +12,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -29,17 +29,17 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
      */
     protected RootObjectTypeResolver $rootTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected MixedScalarTypeResolver $mixedScalarTypeResolver;
+    protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
 
     #[Required]
     final public function autowireApplyFunctionDirectiveResolver(
         RootObjectTypeResolver $rootTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
-        MixedScalarTypeResolver $mixedScalarTypeResolver,
+        AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
     ): void {
         $this->rootTypeResolver = $rootTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
+        $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
     }
 
     public function getDirectiveName(): string
@@ -59,7 +59,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     {
         return [
             'function' => $this->stringScalarTypeResolver,
-            'addArguments' => $this->mixedScalarTypeResolver,
+            'addArguments' => $this->anyScalarScalarTypeResolver,
             'target' => $this->stringScalarTypeResolver,
         ];
     }

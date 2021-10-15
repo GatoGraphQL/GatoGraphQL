@@ -12,7 +12,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\Engine\ComponentConfiguration;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\FieldQuery\QueryHelpers;
@@ -27,15 +27,15 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
     public const PROPERTY_SEPARATOR = '.';
 
     protected DirectivePipelineServiceInterface $directivePipelineService;
-    protected MixedScalarTypeResolver $mixedScalarTypeResolver;
+    protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
 
     #[Required]
     final public function autowireAbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver(
         DirectivePipelineServiceInterface $directivePipelineService,
-        MixedScalarTypeResolver $mixedScalarTypeResolver,
+        AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
     ): void {
         $this->directivePipelineService = $directivePipelineService;
-        $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
+        $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
     }
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
@@ -44,8 +44,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
             return [];
         }
         return [
-            'addExpressions' => $this->mixedScalarTypeResolver,
-            'appendExpressions' => $this->mixedScalarTypeResolver,
+            'addExpressions' => $this->anyScalarScalarTypeResolver,
+            'appendExpressions' => $this->anyScalarScalarTypeResolver,
         ];
     }
 

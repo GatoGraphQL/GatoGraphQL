@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldRe
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
@@ -17,17 +17,17 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
-    protected MixedScalarTypeResolver $mixedScalarTypeResolver;
+    protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
 
     #[Required]
     final public function autowireFunctionGlobalObjectTypeFieldResolver(
-        MixedScalarTypeResolver $mixedScalarTypeResolver,
+        AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         ObjectScalarTypeResolver $objectScalarTypeResolver,
     ): void {
-        $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
+        $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
     }
@@ -42,7 +42,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'getSelfProp' => $this->mixedScalarTypeResolver,
+            'getSelfProp' => $this->anyScalarScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

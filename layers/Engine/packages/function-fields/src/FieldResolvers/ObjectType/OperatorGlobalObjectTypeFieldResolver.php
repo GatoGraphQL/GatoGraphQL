@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\FloatScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FunctionFields\TypeResolvers\ScalarType\ArrayKeyScalarTypeResolver;
@@ -19,19 +19,19 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
 {
     protected FloatScalarTypeResolver $floatScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected MixedScalarTypeResolver $mixedScalarTypeResolver;
+    protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
     protected ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver;
 
     #[Required]
     final public function autowireOperatorGlobalObjectTypeFieldResolver(
         FloatScalarTypeResolver $floatScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
-        MixedScalarTypeResolver $mixedScalarTypeResolver,
+        AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
         ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver,
     ): void {
         $this->floatScalarTypeResolver = $floatScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
+        $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
         $this->arrayKeyScalarTypeResolver = $arrayKeyScalarTypeResolver;
     }
 
@@ -78,7 +78,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'arrayUnique',
             'arrayDiff',
             'arrayAddItem'
-                => $this->mixedScalarTypeResolver,
+                => $this->anyScalarScalarTypeResolver,
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -144,45 +144,45 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 'by' => $this->floatScalarTypeResolver,
             ],
             'arrayRandom' => [
-                'array' => $this->mixedScalarTypeResolver,
+                'array' => $this->anyScalarScalarTypeResolver,
             ],
             'arrayJoin' => [
                 'array' => $this->stringScalarTypeResolver,
                 'separator' => $this->stringScalarTypeResolver,
             ],
             'arrayItem' => [
-                'array' => $this->mixedScalarTypeResolver,
+                'array' => $this->anyScalarScalarTypeResolver,
                 'position' => $this->stringScalarTypeResolver,
             ],
             'arraySearch' => [
-                'array' => $this->mixedScalarTypeResolver,
+                'array' => $this->anyScalarScalarTypeResolver,
                 'element' => $this->stringScalarTypeResolver,
             ],
             'arrayFill' => [
-                'target' => $this->mixedScalarTypeResolver,
-                'source' => $this->mixedScalarTypeResolver,
+                'target' => $this->anyScalarScalarTypeResolver,
+                'source' => $this->anyScalarScalarTypeResolver,
                 'index' => $this->stringScalarTypeResolver,
                 'properties' => $this->stringScalarTypeResolver,
             ],
             'arrayValues' => [
-                'array' => $this->mixedScalarTypeResolver,
+                'array' => $this->anyScalarScalarTypeResolver,
             ],
             'arrayUnique' => [
-                'array' => $this->mixedScalarTypeResolver,
+                'array' => $this->anyScalarScalarTypeResolver,
             ],
             'arrayDiff' => [
-                'arrays' => $this->mixedScalarTypeResolver,
+                'arrays' => $this->anyScalarScalarTypeResolver,
             ],
             'arrayAddItem' => [
-                'array' => $this->mixedScalarTypeResolver,
-                'value' => $this->mixedScalarTypeResolver,
+                'array' => $this->anyScalarScalarTypeResolver,
+                'value' => $this->anyScalarScalarTypeResolver,
                 'key' => $this->arrayKeyScalarTypeResolver,
             ],
             'arrayAsQueryStr' => [
-                'array' => $this->mixedScalarTypeResolver,
+                'array' => $this->anyScalarScalarTypeResolver,
             ],
             'objectAsQueryStr' => [
-                'object' => $this->mixedScalarTypeResolver,
+                'object' => $this->anyScalarScalarTypeResolver,
             ],
             'upperCase',
             'lowerCase',

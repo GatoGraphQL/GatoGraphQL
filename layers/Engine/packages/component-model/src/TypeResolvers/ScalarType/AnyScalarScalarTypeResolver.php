@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
-class MixedScalarTypeResolver extends AbstractScalarTypeResolver
+class AnyScalarScalarTypeResolver extends AbstractScalarTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'Mixed';
+        return 'AnyScalar';
     }
 
     /**

@@ -14,7 +14,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\Engine\Misc\OperatorHelpers;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
@@ -30,7 +30,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
      * @var array<string, mixed>
      */
     protected ?array $safeVars = null;
-    protected MixedScalarTypeResolver $mixedScalarTypeResolver;
+    protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected ObjectScalarTypeResolver $objectScalarTypeResolver;
     protected IntScalarTypeResolver $intScalarTypeResolver;
@@ -39,14 +39,14 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
 
     #[Required]
     final public function autowireOperatorGlobalObjectTypeFieldResolver(
-        MixedScalarTypeResolver $mixedScalarTypeResolver,
+        AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         ObjectScalarTypeResolver $objectScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         ErrorProviderInterface $errorProvider,
     ): void {
-        $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
+        $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->objectScalarTypeResolver = $objectScalarTypeResolver;
         $this->intScalarTypeResolver = $intScalarTypeResolver;
@@ -76,18 +76,18 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'if' => $this->mixedScalarTypeResolver,
+            'if' => $this->anyScalarScalarTypeResolver,
             'not' => $this->booleanScalarTypeResolver,
             'and' => $this->booleanScalarTypeResolver,
             'or' => $this->booleanScalarTypeResolver,
             'equals' => $this->booleanScalarTypeResolver,
             'empty' => $this->booleanScalarTypeResolver,
             'isNull' => $this->booleanScalarTypeResolver,
-            'var' => $this->mixedScalarTypeResolver,
+            'var' => $this->anyScalarScalarTypeResolver,
             'context' => $this->objectScalarTypeResolver,
-            'extract' => $this->mixedScalarTypeResolver,
+            'extract' => $this->anyScalarScalarTypeResolver,
             'time' => $this->intScalarTypeResolver,
-            'echo' => $this->mixedScalarTypeResolver,
+            'echo' => $this->anyScalarScalarTypeResolver,
             'sprintf' => $this->stringScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -136,8 +136,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         return match ($fieldName) {
             'if' => [
                 'condition' => $this->booleanScalarTypeResolver,
-                'then' => $this->mixedScalarTypeResolver,
-                'else' => $this->mixedScalarTypeResolver,
+                'then' => $this->anyScalarScalarTypeResolver,
+                'else' => $this->anyScalarScalarTypeResolver,
             ],
             'not' => [
                 'value' => $this->booleanScalarTypeResolver,
@@ -147,14 +147,14 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 'values' => $this->booleanScalarTypeResolver,
             ],
             'equals' => [
-                'value1' => $this->mixedScalarTypeResolver,
-                'value2' => $this->mixedScalarTypeResolver,
+                'value1' => $this->anyScalarScalarTypeResolver,
+                'value2' => $this->anyScalarScalarTypeResolver,
             ],
             'empty' => [
-                'value' => $this->mixedScalarTypeResolver,
+                'value' => $this->anyScalarScalarTypeResolver,
             ],
             'isNull' => [
-                'value' => $this->mixedScalarTypeResolver,
+                'value' => $this->anyScalarScalarTypeResolver,
             ],
             'var' => [
                 'name' => $this->stringScalarTypeResolver,
@@ -164,7 +164,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 'path' => $this->stringScalarTypeResolver,
             ],
             'echo' => [
-                'value' => $this->mixedScalarTypeResolver,
+                'value' => $this->anyScalarScalarTypeResolver,
             ],
             'sprintf' => [
                 'string' => $this->stringScalarTypeResolver,
