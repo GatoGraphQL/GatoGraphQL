@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 
-class InputObjectType extends AbstractDynamicType
+class InputObjectType extends AbstractType
 {
     /**
      * @var InputValue[]

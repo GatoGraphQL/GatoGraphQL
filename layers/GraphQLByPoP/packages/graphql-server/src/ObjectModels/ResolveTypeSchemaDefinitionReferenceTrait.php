@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
-use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionTypes as GraphQLServerSchemaDefinitionTypes;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\Syntax\SyntaxHelpers;
 use PoP\API\Schema\SchemaDefinition;
@@ -36,33 +35,7 @@ trait ResolveTypeSchemaDefinitionReferenceTrait
             );
         }
 
-        // Check if it is an enum type
-        // @todo Added temporary hack. Fix this!
-        // if ($typeName == GraphQLServerSchemaDefinitionTypes::TYPE_ENUM) {
-        if (in_array($typeName, [
-            'CommentStatus',
-            'CommentType',
-            'DefaultCondition',
-            'CustomPostStatus',
-            'CustomPostContentFormat',
-            'MediaDevice',
-            'EventScope',
-        ])) {
-            return new EnumType(
-                $this->fullSchemaDefinition,
-                $this->schemaDefinitionPath
-            );
-        }
-
-        // Check if it is an inputObject type
-        if ($typeName == GraphQLServerSchemaDefinitionTypes::TYPE_INPUT_OBJECT) {
-            return new InputObjectType(
-                $this->fullSchemaDefinition,
-                $this->schemaDefinitionPath
-            );
-        }
-
-        // By now, it's either an InterfaceType, UnionType, ObjectType or a ScalarType. Since they have all been registered, we can get their references from the registry
+        // Retrive the type from the registry
         $typeSchemaDefinitionPath = [
             SchemaDefinition::TYPES,
             $typeName,

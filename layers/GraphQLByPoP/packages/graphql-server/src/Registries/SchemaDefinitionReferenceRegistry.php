@@ -8,7 +8,6 @@ use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentCon
 use GraphQLByPoP\GraphQLQuery\Schema\SchemaElements;
 use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
-use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractDynamicType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\AbstractSchemaDefinitionReferenceObject;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
@@ -37,10 +36,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * @var array<string, AbstractSchemaDefinitionReferenceObject>
      */
     protected array $fullSchemaDefinitionReferenceDictionary = [];
-    /**
-     * @var AbstractDynamicType[]
-     */
-    protected array $dynamicTypes = [];
 
     /**
      * Cannot autowire because its calling `getNamespace`
@@ -533,41 +528,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
         $this->fullSchemaDefinitionReferenceDictionary[$referenceObjectID] = $referenceObject;
 
-        // Dynamic types are stored so that the schema can add them to its "types" field
-        if ($referenceObject->isDynamicType()) {
-            /** @var AbstractDynamicType */
-            $referenceObject = $referenceObject;
-            $this->dynamicTypes[] = $referenceObject;
-        }
         return $referenceObjectID;
     }
     public function getSchemaDefinitionReference(
         string $referenceObjectID
     ): ?AbstractSchemaDefinitionReferenceObject {
         return $this->fullSchemaDefinitionReferenceDictionary[$referenceObjectID];
-    }
-
-    public function getDynamicTypes(bool $filterRepeated = true): array
-    {
-        // Watch out! When an ObjectType or InterfaceType implements an interface,
-        // and a field of dynamicType (such as "status", which is an ENUM)
-        // is covered by the interface, then the field definition will be
-        // that one from the interface's perspective.
-        // Hence, this field may be registered several times, as coming
-        // from different ObjectTypes implementing the same interface!
-        // (Eg: both Post and Page have field "status" from interface CustomPost)
-        // If $filterRepeated is true, remove instances with a repeated name
-        if ($filterRepeated) {
-            $dynamicTypes = $typeNames = [];
-            foreach ($this->dynamicTypes as $type) {
-                $typeName = $type->getName();
-                if (!in_array($typeName, $typeNames)) {
-                    $dynamicTypes[] = $type;
-                    $typeNames[] = $typeName;
-                }
-            }
-            return $dynamicTypes;
-        }
-        return $this->dynamicTypes;
     }
 }

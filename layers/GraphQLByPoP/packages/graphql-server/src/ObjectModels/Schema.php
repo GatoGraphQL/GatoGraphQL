@@ -143,12 +143,10 @@ class Schema
             );
         }
 
-        // 4. Add the Object, Union and Interface types under $resolvableTypes, and the dynamic Enum and InputObject types from the registry
-        $schemaDefinitionReferenceRegistry = SchemaDefinitionReferenceRegistryFacade::getInstance();
+        // 4. Add the Object, Union and Interface types under $resolvableTypes
         $this->types = array_merge(
             $this->types,
             $resolvableTypes,
-            $schemaDefinitionReferenceRegistry->getDynamicTypes()
         );
     }
     protected function getTypeInstance(array &$fullSchemaDefinition, string $typeKind, string $typeName): TypeInterface

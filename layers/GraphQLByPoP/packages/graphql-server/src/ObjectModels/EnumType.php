@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 
-class EnumType extends AbstractDynamicType
+class EnumType extends AbstractType
 {
     use NonDocumentableTypeTrait;
 
