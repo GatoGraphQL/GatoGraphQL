@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Registries;
 
+use Exception;
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
 use GraphQLByPoP\GraphQLQuery\Schema\SchemaElements;
 use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
@@ -475,16 +476,22 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     }
 
     public function registerSchemaDefinitionReference(
-        SchemaDefinitionReferenceObjectInterface $referenceObject
+        SchemaDefinitionReferenceObjectInterface $schemaDefinitionReferenceObject,
     ): string {
-        $schemaDefinitionPath = $referenceObject->getSchemaDefinitionPath();
-        $referenceObjectID = SchemaDefinitionHelpers::getID($schemaDefinitionPath);
-        $this->fullSchemaDefinitionReferenceDictionary[$referenceObjectID] = $referenceObject;
-        return $referenceObjectID;
+        $schemaDefinitionPath = $schemaDefinitionReferenceObject->getSchemaDefinitionPath();
+        $schemaDefinitionReferenceObjectID = SchemaDefinitionHelpers::getID($schemaDefinitionPath);
+        if (isset($this->fullSchemaDefinitionReferenceDictionary[$schemaDefinitionReferenceObjectID])) {
+            throw new Exception(sprintf(
+                $this->translationAPI->__('A Schema Definition Reference Object with id \'%s\s has already been registered', 'graphql-server'),
+                $schemaDefinitionReferenceObjectID
+            ));
+        }
+        $this->fullSchemaDefinitionReferenceDictionary[$schemaDefinitionReferenceObjectID] = $schemaDefinitionReferenceObject;
+        return $schemaDefinitionReferenceObjectID;
     }
     public function getSchemaDefinitionReference(
-        string $referenceObjectID
+        string $schemaDefinitionReferenceObjectID
     ): ?SchemaDefinitionReferenceObjectInterface {
-        return $this->fullSchemaDefinitionReferenceDictionary[$referenceObjectID] ?? null;
+        return $this->fullSchemaDefinitionReferenceDictionary[$schemaDefinitionReferenceObjectID] ?? null;
     }
 }
