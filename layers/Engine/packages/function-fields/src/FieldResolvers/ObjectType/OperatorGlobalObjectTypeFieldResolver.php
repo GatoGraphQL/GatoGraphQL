@@ -361,14 +361,19 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 // If the value for the index property is the same, then copy the properties
                 // Cast from stdClass to array
                 $value = (array) $fieldArgs['target'];
+                $source = (array) $fieldArgs['source'];
                 $index = $fieldArgs['index'];
                 foreach ($value as &$targetProps) {
-                    foreach ($fieldArgs['source'] as $sourceProps) {
-                        if (array_key_exists($index, $targetProps) && $targetProps[$index] == $sourceProps[$index]) {
-                            $properties = isset($fieldArgs['properties']) ? $fieldArgs['properties'] : array_keys($sourceProps);
-                            foreach ($properties as $property) {
-                                $targetProps[$property] = $sourceProps[$property];
-                            }
+                    if (!array_key_exists($index, $targetProps)) {
+                        continue;
+                    }
+                    foreach ($source as $sourceProps) {
+                        if ($targetProps[$index] != $sourceProps[$index]) {
+                            continue;
+                        }
+                        $properties = isset($fieldArgs['properties']) ? $fieldArgs['properties'] : array_keys($sourceProps);
+                        foreach ($properties as $property) {
+                            $targetProps[$property] = $sourceProps[$property];
                         }
                     }
                 }
