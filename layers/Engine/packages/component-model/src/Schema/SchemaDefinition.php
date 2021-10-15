@@ -20,7 +20,6 @@ class SchemaDefinition
     public const VERSION = 'version';
     public const VERSION_CONSTRAINT = 'versionConstraint';
     public const MANDATORY = 'mandatory';
-    public const INPUT_OBJECT_NAME = 'inputObjectName';
     public const ITEMS = 'items';
     public const DEPRECATED = 'deprecated';
     public const DEPRECATION_MESSAGE = 'deprecationMessage';
