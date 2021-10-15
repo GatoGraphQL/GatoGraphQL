@@ -42,7 +42,6 @@ class SchemaDefinition
     public const BASERESOLVER = 'baseResolver';
     public const RECURSION = 'recursion';
     public const REPEATED = 'repeated';
-    public const IS_UNION = 'isUnion';
     public const DIRECTIVES = 'directives';
     public const GLOBAL_DIRECTIVES = 'globalDirectives';
     public const FIELD_IS_MUTATION = 'isMutation';
