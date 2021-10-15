@@ -121,9 +121,9 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var Schema */
         $schema = $object;
         return match ($fieldName) {
-            'queryType' => $schema->getQueryTypeID(),
-            'mutationType' => $schema->getMutationTypeID(),
-            'subscriptionType' => $schema->getSubscriptionTypeID(),
+            'queryType' => $schema->getQueryRootObjectTypeID(),
+            'mutationType' => $schema->getMutationRootObjectTypeID(),
+            'subscriptionType' => $schema->getSubscriptionRootObjectTypeID(),
             'types' => $schema->getTypeIDs(),
             'directives' => $schema->getDirectiveIDs(),
             'type' => $schema->getTypeID($fieldArgs['name']),
