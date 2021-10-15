@@ -10,8 +10,6 @@ interface NamedTypeInterface extends TypeInterface
 
     public function getElementName(): string;
 
-    public function getDescription(): ?string;
-
     /**
      * @return array<string, mixed>
      */

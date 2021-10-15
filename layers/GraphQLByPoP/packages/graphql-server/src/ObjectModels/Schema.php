@@ -11,10 +11,11 @@ use PoP\API\Schema\SchemaDefinition;
 use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\Schema\SchemaDefinitionTokens;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use GraphQLByPoP\GraphQLServer\ObjectModels\NamedTypeInterface;
 
 class Schema
 {
-    /** @var TypeInterface[] */
+    /** @var NamedTypeInterface[] */
     protected array $types;
     /** @var Directive[] */
     protected array $directives;
@@ -57,7 +58,7 @@ class Schema
             }
         }
     }
-    protected function getTypeInstance(array &$fullSchemaDefinition, string $typeKind, string $typeName): TypeInterface
+    protected function getTypeInstance(array &$fullSchemaDefinition, string $typeKind, string $typeName): NamedTypeInterface
     {
         $typeSchemaDefinitionPath = [
             SchemaDefinition::TYPES,
@@ -141,7 +142,7 @@ class Schema
             $this->directives
         );
     }
-    public function getType(string $typeName): ?TypeInterface
+    public function getType(string $typeName): ?NamedTypeInterface
     {
         // If the provided typeName contains the namespace separator, then compare by qualifiedType
         $useQualifiedName = str_contains($typeName, SchemaDefinitionTokens::NAMESPACE_SEPARATOR);

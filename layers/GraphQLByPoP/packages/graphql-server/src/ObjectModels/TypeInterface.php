@@ -9,4 +9,6 @@ interface TypeInterface extends SchemaDefinitionReferenceObjectInterface
     public function getKind(): string;
 
     public function getName(): string;
+
+    public function getDescription(): ?string;
 }
