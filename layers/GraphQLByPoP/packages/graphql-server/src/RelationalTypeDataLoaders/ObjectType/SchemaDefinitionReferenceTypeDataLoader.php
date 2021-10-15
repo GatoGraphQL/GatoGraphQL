@@ -7,6 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\ListType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\NonNullType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinitionReferenceObjectInterface;
+use GraphQLByPoP\GraphQLServer\ObjectModels\TypeInterface;
 use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
 use GraphQLByPoP\GraphQLServer\Syntax\SyntaxHelpers;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
@@ -40,24 +41,20 @@ class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoad
     {
         // Check if the type is non-null
         if (SyntaxHelpers::isNonNullType($typeID)) {
-            return new NonNullType(
-                $this->fullSchemaDefinition,
-                $this->schemaDefinitionPath,
-                $this->getSchemaDefinitionReferenceObject(
-                    SyntaxHelpers::getNonNullTypeNestedTypeName($typeID)
-                )
+            /** @var TypeInterface */
+            $wrappedType = $this->getSchemaDefinitionReferenceObject(
+                SyntaxHelpers::getNonNullTypeNestedTypeName($typeID)
             );
+            return new NonNullType($wrappedType);
         }
 
         // Check if it is an array
         if (SyntaxHelpers::isListType($typeID)) {
-            return new ListType(
-                $this->fullSchemaDefinition,
-                $this->schemaDefinitionPath,
-                $this->getSchemaDefinitionReferenceObject(
-                    SyntaxHelpers::getListTypeNestedTypeName($typeID)
-                )
+            /** @var TypeInterface */
+            $wrappedType = $this->getSchemaDefinitionReferenceObject(
+                SyntaxHelpers::getListTypeNestedTypeName($typeID)
             );
+            return new ListType($wrappedType);
         }
 
         return $this->schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
