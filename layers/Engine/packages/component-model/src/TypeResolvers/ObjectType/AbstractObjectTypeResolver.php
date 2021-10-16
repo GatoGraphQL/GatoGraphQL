@@ -456,67 +456,72 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                          * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
                          * these values by types `String` and `[String]`.
                          */
-                        if ($fieldTypeResolver !== $this->dangerouslyDynamicScalarTypeResolver) {
-                            $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false;
-                            if (
-                                !$fieldIsArrayType
-                                && is_array($value)
-                            ) {
-                                return $this->errorProvider->getMustNotBeArrayFieldError($fieldName, $value);
-                            }
-                            if (
-                                $fieldIsArrayType
-                                && !is_array($value)
-                            ) {
-                                return $this->errorProvider->getMustBeArrayFieldError($fieldName, $value);
-                            }
-                            $fieldIsNonNullArrayItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
-                            if (
-                                $fieldIsNonNullArrayItemsType
-                                && is_array($value)
-                                && array_filter(
-                                    $value,
-                                    fn (mixed $arrayItem) => $arrayItem === null
-                                )
-                            ) {
-                                return $this->errorProvider->getArrayMustNotHaveNullItemsFieldError($fieldName, $value);
-                            }
-                            $fieldIsArrayOfArraysType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
-                            if (
-                                !$fieldIsArrayOfArraysType
-                                && is_array($value)
-                                && array_filter(
-                                    $value,
-                                    fn (mixed $arrayItem) => is_array($arrayItem)
-                                )
-                            ) {
-                                return $this->errorProvider->getMustNotBeArrayOfArraysFieldError($fieldName, $value);
-                            }
-                            if (
-                                $fieldIsArrayOfArraysType
-                                && is_array($value)
-                                && array_filter(
-                                    $value,
-                                    // `null` could be accepted as an array! (Validation against null comes next)
-                                    fn (mixed $arrayItem) => !is_array($arrayItem) && $arrayItem !== null
-                                )
-                            ) {
-                                return $this->errorProvider->getMustBeArrayOfArraysFieldError($fieldName, $value);
-                            }
-                            $fieldIsNonNullArrayOfArraysItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
-                            if (
-                                $fieldIsNonNullArrayOfArraysItemsType
-                                && is_array($value)
-                                && array_filter(
-                                    $value,
-                                    fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
-                                        $arrayItem,
-                                        fn (mixed $arrayItemItem) => $arrayItemItem === null
-                                    ) !== [],
-                                )
-                            ) {
-                                return $this->errorProvider->getArrayOfArraysMustNotHaveNullItemsFieldError($fieldName, $value);
-                            }
+                        if ($fieldTypeResolver === $this->dangerouslyDynamicScalarTypeResolver) {
+                            return $value;
+                        }
+
+                        /**
+                         * Execute the validation, return an error if it fails
+                         */
+                        $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false;
+                        if (
+                            !$fieldIsArrayType
+                            && is_array($value)
+                        ) {
+                            return $this->errorProvider->getMustNotBeArrayFieldError($fieldName, $value);
+                        }
+                        if (
+                            $fieldIsArrayType
+                            && !is_array($value)
+                        ) {
+                            return $this->errorProvider->getMustBeArrayFieldError($fieldName, $value);
+                        }
+                        $fieldIsNonNullArrayItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
+                        if (
+                            $fieldIsNonNullArrayItemsType
+                            && is_array($value)
+                            && array_filter(
+                                $value,
+                                fn (mixed $arrayItem) => $arrayItem === null
+                            )
+                        ) {
+                            return $this->errorProvider->getArrayMustNotHaveNullItemsFieldError($fieldName, $value);
+                        }
+                        $fieldIsArrayOfArraysType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
+                        if (
+                            !$fieldIsArrayOfArraysType
+                            && is_array($value)
+                            && array_filter(
+                                $value,
+                                fn (mixed $arrayItem) => is_array($arrayItem)
+                            )
+                        ) {
+                            return $this->errorProvider->getMustNotBeArrayOfArraysFieldError($fieldName, $value);
+                        }
+                        if (
+                            $fieldIsArrayOfArraysType
+                            && is_array($value)
+                            && array_filter(
+                                $value,
+                                // `null` could be accepted as an array! (Validation against null comes next)
+                                fn (mixed $arrayItem) => !is_array($arrayItem) && $arrayItem !== null
+                            )
+                        ) {
+                            return $this->errorProvider->getMustBeArrayOfArraysFieldError($fieldName, $value);
+                        }
+                        $fieldIsNonNullArrayOfArraysItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
+                        if (
+                            $fieldIsNonNullArrayOfArraysItemsType
+                            && is_array($value)
+                            && array_filter(
+                                $value,
+                                fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
+                                    $arrayItem,
+                                    fn (mixed $arrayItemItem) => $arrayItemItem === null
+                                ) !== [],
+                            )
+                        ) {
+                            return $this->errorProvider->getArrayOfArraysMustNotHaveNullItemsFieldError($fieldName, $value);
                         }
                     }
 
