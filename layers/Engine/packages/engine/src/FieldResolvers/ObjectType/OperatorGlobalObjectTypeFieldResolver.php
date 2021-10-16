@@ -321,7 +321,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                         $e->getMessage()
                     );
                 }
-                return (object) $pointerToArrayItemUnderPath;
+                return $pointerToArrayItemUnderPath;
             case 'time':
                 return time();
             case 'echo':
