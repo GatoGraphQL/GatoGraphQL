@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldRe
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
@@ -17,17 +17,17 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
-    protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
+    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
 
     #[Required]
     final public function autowireFunctionGlobalObjectTypeFieldResolver(
-        AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
+        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
     ): void {
-        $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
     }
@@ -42,7 +42,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'getSelfProp' => $this->anyScalarScalarTypeResolver,
+            'getSelfProp' => $this->dangerouslyDynamicScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

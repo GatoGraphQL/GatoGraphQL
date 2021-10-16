@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\FloatScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FunctionFields\TypeResolvers\ScalarType\ArrayKeyScalarTypeResolver;
@@ -20,7 +20,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
 {
     protected FloatScalarTypeResolver $floatScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
+    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
     protected ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver;
     protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
 
@@ -28,13 +28,13 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     final public function autowireOperatorGlobalObjectTypeFieldResolver(
         FloatScalarTypeResolver $floatScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
-        AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
+        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
         ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver,
         JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
     ): void {
         $this->floatScalarTypeResolver = $floatScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
         $this->arrayKeyScalarTypeResolver = $arrayKeyScalarTypeResolver;
         $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
     }
@@ -82,7 +82,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'arrayUnique',
             'arrayDiff',
             'arrayAddItem'
-                => $this->anyScalarScalarTypeResolver,
+                => $this->dangerouslyDynamicScalarTypeResolver,
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -163,7 +163,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             ],
             'arrayFill' => [
                 'target' => $this->jsonObjectScalarTypeResolver,
-                'source' => $this->anyScalarScalarTypeResolver,
+                'source' => $this->dangerouslyDynamicScalarTypeResolver,
                 'index' => $this->stringScalarTypeResolver,
                 'properties' => $this->stringScalarTypeResolver,
             ],
@@ -178,7 +178,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             ],
             'arrayAddItem' => [
                 'array' => $this->jsonObjectScalarTypeResolver,
-                'value' => $this->anyScalarScalarTypeResolver,
+                'value' => $this->dangerouslyDynamicScalarTypeResolver,
                 'key' => $this->arrayKeyScalarTypeResolver,
             ],
             'arrayAsQueryStr' => [

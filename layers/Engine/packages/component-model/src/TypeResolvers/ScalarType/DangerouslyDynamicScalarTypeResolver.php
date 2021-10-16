@@ -7,11 +7,11 @@ namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 use PoP\ComponentModel\ErrorHandling\Error;
 use stdClass;
 
-class AnyScalarScalarTypeResolver extends AbstractScalarTypeResolver
+class DangerouslyDynamicScalarTypeResolver extends AbstractScalarTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'AnyScalar';
+        return 'DangerouslyDynamic';
     }
 
     /**
