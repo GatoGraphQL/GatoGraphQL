@@ -17,9 +17,9 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
 
     public function serialize(string|int|float|bool|stdClass $scalarValue): string|int|float|bool|array
     {
-        // Convert stdClass to array
+        // Convert stdClass to array, recursively (i.e. if the stdClass contains stdClass)
         if ($scalarValue instanceof stdClass) {
-            return (array) $scalarValue;
+            return json_decode(json_encode($scalarValue), true);
         }
         // Return as is
         return $scalarValue;
