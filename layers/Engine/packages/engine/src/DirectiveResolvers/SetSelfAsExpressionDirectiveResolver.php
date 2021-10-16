@@ -97,7 +97,7 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
             // Make an array of references, pointing to the position of the current object in arrays $dbItems and $previousDBItems;
             // It is extremeley important to make it by reference, so that when the 2 variables are updated later on during the current iteration,
             // the new values are immediately available to all fields and directives executed later during the same iteration
-            $value = [
+            $value = (object) [
                 'dbItems' => &$dbItems[(string)$id],
                 'previousDBItems' => &$previousDBItems[$dbKey][(string)$id],
             ];
