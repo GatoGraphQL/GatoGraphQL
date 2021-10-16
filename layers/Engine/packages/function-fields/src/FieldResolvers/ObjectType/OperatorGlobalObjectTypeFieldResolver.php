@@ -14,7 +14,6 @@ use PoP\Engine\TypeResolvers\ScalarType\FloatScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FunctionFields\TypeResolvers\ScalarType\ArrayKeyScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
-use stdClass;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
