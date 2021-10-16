@@ -91,15 +91,12 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      * @var array<string,array<string,string>>
      */
     private array $fieldsByTypeAndFieldOutputKey = [];
-    protected InstanceManagerInterface $instanceManager;
     protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
 
     #[Required]
     final public function autowireComponentModelFieldQueryInterpreter(
-        InstanceManagerInterface $instanceManager,
         DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
     ): void {
-        $this->instanceManager = $instanceManager;
         $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
     }
 
