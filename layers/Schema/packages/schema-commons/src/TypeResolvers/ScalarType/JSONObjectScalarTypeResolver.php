@@ -9,7 +9,8 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use stdClass;
 
 /**
- * GraphQL Custom Scalar
+ * GraphQL Custom Scalar representing a JSON Object on the client-side,
+ * handled via an stdClass object on the server-side
  *
  * @see https://spec.graphql.org/draft/#sec-Scalars.Custom-Scalars
  */
