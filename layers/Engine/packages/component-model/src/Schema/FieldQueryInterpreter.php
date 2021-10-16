@@ -1480,11 +1480,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $composedFieldArgTypeName
                     );
                 }
+                $encodedValue = $fieldArgs[$failedCastingFieldArgName] instanceof stdClass || is_array($fieldArgs[$failedCastingFieldArgName])
+                    ? json_encode($fieldArgs[$failedCastingFieldArgName])
+                    : $fieldArgs[$failedCastingFieldArgName];
                 if ($fieldArgErrorMessage = $failedCastingFieldArgErrorMessages[$failedCastingFieldArgName] ?? null) {
                     $errorMessage = sprintf(
                         $this->translationAPI->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed: %s', 'pop-component-model'),
                         $fieldName,
-                        is_array($fieldArgs[$failedCastingFieldArgName]) ? json_encode($fieldArgs[$failedCastingFieldArgName]) : $fieldArgs[$failedCastingFieldArgName],
+                        $encodedValue,
                         $failedCastingFieldArgName,
                         $composedFieldArgTypeName,
                         $fieldArgErrorMessage
@@ -1493,7 +1496,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     $errorMessage = sprintf(
                         $this->translationAPI->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
                         $fieldName,
-                        is_array($fieldArgs[$failedCastingFieldArgName]) ? json_encode($fieldArgs[$failedCastingFieldArgName]) : $fieldArgs[$failedCastingFieldArgName],
+                        $encodedValue,
                         $failedCastingFieldArgName,
                         $composedFieldArgTypeName
                     );
