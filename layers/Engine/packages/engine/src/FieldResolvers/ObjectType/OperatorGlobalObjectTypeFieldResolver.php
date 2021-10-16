@@ -160,7 +160,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 'name' => $this->stringScalarTypeResolver,
             ],
             'extract' => [
-                'object' => $this->jsonObjectScalarTypeResolver,
+                'object' => $this->dangerouslyDynamicScalarTypeResolver,
                 'path' => $this->stringScalarTypeResolver,
             ],
             'echo' => [
