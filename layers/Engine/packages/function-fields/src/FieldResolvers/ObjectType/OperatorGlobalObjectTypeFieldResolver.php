@@ -153,45 +153,45 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 'by' => $this->floatScalarTypeResolver,
             ],
             'arrayRandom' => [
-                'array' => $this->jsonObjectScalarTypeResolver,
+                'array' => $this->dangerouslyDynamicScalarTypeResolver,
             ],
             'arrayJoin' => [
-                'array' => $this->jsonObjectScalarTypeResolver,
+                'array' => $this->stringScalarTypeResolver,
                 'separator' => $this->stringScalarTypeResolver,
             ],
             'arrayItem' => [
-                'array' => $this->jsonObjectScalarTypeResolver,
+                'array' => $this->dangerouslyDynamicScalarTypeResolver,
                 'position' => $this->stringScalarTypeResolver,
             ],
             'arraySearch' => [
-                'array' => $this->jsonObjectScalarTypeResolver,
+                'array' => $this->dangerouslyDynamicScalarTypeResolver,
                 'element' => $this->stringScalarTypeResolver,
             ],
             'arrayFill' => [
-                'target' => $this->jsonObjectScalarTypeResolver,
+                'target' => $this->dangerouslyDynamicScalarTypeResolver,
                 'source' => $this->dangerouslyDynamicScalarTypeResolver,
                 'index' => $this->stringScalarTypeResolver,
                 'properties' => $this->stringScalarTypeResolver,
             ],
             'arrayValues' => [
-                'array' => $this->jsonObjectScalarTypeResolver,
+                'array' => $this->dangerouslyDynamicScalarTypeResolver,
             ],
             'arrayUnique' => [
-                'array' => $this->jsonObjectScalarTypeResolver,
+                'array' => $this->dangerouslyDynamicScalarTypeResolver,
             ],
             'arrayDiff' => [
-                'arrays' => $this->jsonObjectScalarTypeResolver,
+                'arrays' => $this->dangerouslyDynamicScalarTypeResolver,
             ],
             'arrayAddItem' => [
-                'array' => $this->jsonObjectScalarTypeResolver,
+                'array' => $this->dangerouslyDynamicScalarTypeResolver,
                 'value' => $this->dangerouslyDynamicScalarTypeResolver,
                 'key' => $this->arrayKeyScalarTypeResolver,
             ],
             'arrayAsQueryStr' => [
-                'array' => $this->jsonObjectScalarTypeResolver,
+                'array' => $this->dangerouslyDynamicScalarTypeResolver,
             ],
             'objectAsQueryStr' => [
-                'object' => $this->jsonObjectScalarTypeResolver,
+                'object' => $this->dangerouslyDynamicScalarTypeResolver,
             ],
             'upperCase',
             'lowerCase',
@@ -279,8 +279,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
             switch ($fieldName) {
                 case 'arrayItem':
-                    $array = (array) $fieldArgs['arrays'];
-                    if (count($array) < $fieldArgs['position']) {
+                    if (count($fieldArgs['array']) < $fieldArgs['position']) {
                         return [
                             sprintf(
                                 $this->translationAPI->__('The array contains no element at position \'%s\'', 'function-fields'),
@@ -290,8 +289,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                     };
                     break;
                 case 'arrayDiff':
-                    $array = (array) $fieldArgs['arrays'];
-                    if (count($array) < 2) {
+                    if (count($fieldArgs['arrays']) < 2) {
                         return [
                             sprintf(
                                 $this->translationAPI->__('The array must contain at least 2 elements: \'%s\'', 'function-fields'),
@@ -351,23 +349,19 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             case 'divide':
                 return (float)$fieldArgs['number'] / (float)$fieldArgs['by'];
             case 'arrayRandom':
-                $array = (array) $fieldArgs['array'];
-                return $array[array_rand($array)];
+                return $fieldArgs['array'][array_rand($fieldArgs['array'])];
             case 'arrayJoin':
-                $array = (array) $fieldArgs['array'];
-                return implode($fieldArgs['separator'] ?? '', $array);
+                return implode($fieldArgs['separator'] ?? '', $fieldArgs['array']);
             case 'arrayItem':
-                $array = (array) $fieldArgs['array'];
-                return $array[$fieldArgs['position']];
+                return $fieldArgs['array'][$fieldArgs['position']];
             case 'arraySearch':
-                $array = (array) $fieldArgs['array'];
-                return array_search($fieldArgs['element'], $array);
+                return array_search($fieldArgs['element'], $fieldArgs['array']);
             case 'arrayFill':
                 // For each element in the source, iterate all the elements in the target
                 // If the value for the index property is the same, then copy the properties
                 // Cast from stdClass to array
-                $value = (array) $fieldArgs['target'];
-                $source = (array) $fieldArgs['source'];
+                $value = $fieldArgs['target'];
+                $source = $fieldArgs['source'];
                 $index = $fieldArgs['index'];
                 foreach ($value as &$targetProps) {
                     if (!is_array($targetProps) || !array_key_exists($index, $targetProps)) {
@@ -383,30 +377,26 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                         }
                     }
                 }
-                // Cast from array to stdClass
-                return (object) $value;
+                return $value;
             case 'arrayValues':
-                $array = (array) $fieldArgs['array'];
-                return (object) array_values($array);
+                return array_values($fieldArgs['array']);
             case 'arrayUnique':
-                $array = (array) $fieldArgs['array'];
-                return (object) array_unique($array);
+                return array_unique($fieldArgs['array']);
             case 'arrayDiff':
                 // Diff the first array against all the others
-                $arrays = (array) $fieldArgs['arrays'];
+                $arrays = $fieldArgs['arrays'];
                 $first = (array) array_shift($arrays);
-                return (object) array_diff($first, ...$arrays);
+                return array_diff($first, ...$arrays);
             case 'arrayAddItem':
-                $array = (array) $fieldArgs['array'];
+                $array = $fieldArgs['array'];
                 if ($fieldArgs['key'] ?? null) {
                     $array[$fieldArgs['key']] = $fieldArgs['value'];
                 } else {
                     $array[] = $fieldArgs['value'];
                 }
-                return (object) $array;
+                return $array;
             case 'arrayAsQueryStr':
-                $array = (array) $fieldArgs['array'];
-                return $this->fieldQueryInterpreter->getArrayAsStringForQuery($array);
+                return $this->fieldQueryInterpreter->getArrayAsStringForQuery($fieldArgs['array']);
             case 'objectAsQueryStr':
                 return $this->fieldQueryInterpreter->getObjectAsStringForQuery($fieldArgs['object']);
             case 'upperCase':
