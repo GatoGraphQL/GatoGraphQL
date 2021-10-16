@@ -37,7 +37,7 @@ class DangerouslyDynamicScalarTypeResolver extends AbstractScalarTypeResolver
     /**
      * Convert any contained stdClass to array
      */
-    public function serialize(mixed $scalarValue): string|int|float|bool|array
+    public function serialize(string|int|float|bool|stdClass $scalarValue): string|int|float|bool|array
     {
         if ($scalarValue instanceof stdClass || is_array($scalarValue)) {
             return json_decode(json_encode($scalarValue), true);

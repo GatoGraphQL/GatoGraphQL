@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use stdClass;
 
 /**
  * Based on GraphQL custom scalars.
@@ -40,7 +41,7 @@ interface ScalarTypeResolverInterface extends ConcreteTypeResolverInterface, Inp
      *
      * @return string|int|float|bool|array formatted representation of the custom scalar
      */
-    public function serialize(mixed $scalarValue): string|int|float|bool|array;
+    public function serialize(string|int|float|bool|stdClass $scalarValue): string|int|float|bool|array;
 
     // /**
     //  * Literal input coercion. Called by the (GraphQL) engine to convert an input
