@@ -22,7 +22,7 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
     protected TranslationAPIInterface $translationAPI;
 
     #[Required]
-    final public function autowireEngineSchemaDefinitionService(
+    final public function autowireSchemaDefinitionService(
         RootObjectTypeResolver $rootObjectTypeResolver,
         InstanceManagerInterface $instanceManager,
         AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver,
