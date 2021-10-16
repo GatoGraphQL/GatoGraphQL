@@ -142,6 +142,13 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
          * as according to the applied WrappingType.
          */
         if ($fieldScalarTypeResolver === $this->dangerouslyDynamicScalarTypeResolver) {
+            /**
+             * Array is not supported by `serialize`, but can still be handled
+             * by DangerouslyDynamic. So convert it into stdClass
+             */
+            if (is_array($value)) {
+                $value = (object) $value;
+            }
             return $value === null ? null : $fieldScalarTypeResolver->serialize($value);
         }
 

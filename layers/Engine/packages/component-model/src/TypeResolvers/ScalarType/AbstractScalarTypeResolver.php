@@ -15,15 +15,11 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         return null;
     }
 
-    public function serialize(mixed $scalarValue): string|int|float|bool|array
+    public function serialize(string|int|float|bool|stdClass $scalarValue): string|int|float|bool|array
     {
-        // Convert stdClass to array
+        // Convert stdClass to array, recursively (i.e. if the stdClass contains stdClass)
         if ($scalarValue instanceof stdClass) {
-            return (array) $scalarValue;
-        }
-        // Convert object to string
-        if (is_object($scalarValue)) {
-            return $scalarValue->__serialize();
+            return json_decode(json_encode($scalarValue), true);
         }
         // Return as is
         return $scalarValue;

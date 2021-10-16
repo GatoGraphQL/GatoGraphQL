@@ -27,21 +27,15 @@ class DangerouslyDynamicScalarTypeResolver extends AbstractScalarTypeResolver
     }
 
     /**
-     * This method will never be called
+     * This method will never be called for DangerouslyDynamicScalar
      */
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
     {
         return $inputValue;
     }
 
-    /**
-     * Convert any contained stdClass to array
-     */
-    public function serialize(mixed $scalarValue): string|int|float|bool|array
+    public function getTypeDescription(): ?string
     {
-        if ($scalarValue instanceof stdClass || is_array($scalarValue)) {
-            return json_decode(json_encode($scalarValue), true);
-        }
-        return parent::serialize($scalarValue);
+        return $this->translationAPI->__('Special scalar type which is not coerced or validated. In particular, it does not need to validate if it is an array or not, as GraphQL requires based on the applied WrappingType (such as `[String]`).', 'component-model');
     }
 }
