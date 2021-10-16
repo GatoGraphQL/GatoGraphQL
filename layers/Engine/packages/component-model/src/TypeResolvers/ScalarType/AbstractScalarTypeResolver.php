@@ -21,10 +21,6 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         if ($scalarValue instanceof stdClass) {
             return (array) $scalarValue;
         }
-        // Convert object to string
-        if (is_object($scalarValue)) {
-            return $scalarValue->__serialize();
-        }
         // Return as is
         return $scalarValue;
     }
