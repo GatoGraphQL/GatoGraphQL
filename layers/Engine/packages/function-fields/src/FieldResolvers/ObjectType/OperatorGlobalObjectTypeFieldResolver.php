@@ -102,14 +102,13 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'objectAsQueryStr',
             'upperCase',
             'lowerCase',
-            'titleCase'
-                => SchemaTypeModifiers::NON_NULLABLE,
+            'titleCase',
             'arrayFill',
             'arrayValues',
             'arrayUnique',
             'arrayDiff',
             'arrayAddItem'
-                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+                => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
@@ -349,6 +348,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 return $array[array_rand($array)];
             case 'arrayJoin':
                 $array = (array) $fieldArgs['array'];
+                var_dump($array, $fieldArgs['array'], json_decode(json_encode($fieldArgs['array']), true));
                 return implode($fieldArgs['separator'] ?? '', $array);
             case 'arrayItem':
                 $array = (array) $fieldArgs['array'];
