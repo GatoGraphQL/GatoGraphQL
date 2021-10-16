@@ -1387,11 +1387,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $composedDirectiveArgTypeName
                     );
                 }
+                $encodedValue = $directiveArgs[$failedCastingDirectiveArgName] instanceof stdClass || is_array($directiveArgs[$failedCastingDirectiveArgName])
+                    ? json_encode($directiveArgs[$failedCastingDirectiveArgName])
+                    : $directiveArgs[$failedCastingDirectiveArgName];
                 if ($directiveArgErrorMessage = $failedCastingDirectiveArgErrorMessages[$failedCastingDirectiveArgName] ?? null) {
                     $errorMessage = sprintf(
                         $this->translationAPI->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed: %s', 'pop-component-model'),
                         $directiveName,
-                        is_array($directiveArgs[$failedCastingDirectiveArgName]) ? json_encode($directiveArgs[$failedCastingDirectiveArgName]) : $directiveArgs[$failedCastingDirectiveArgName],
+                        $encodedValue,
                         $failedCastingDirectiveArgName,
                         $composedDirectiveArgTypeName,
                         $directiveArgErrorMessage
@@ -1400,7 +1403,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     $errorMessage = sprintf(
                         $this->translationAPI->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
                         $directiveName,
-                        is_array($directiveArgs[$failedCastingDirectiveArgName]) ? json_encode($directiveArgs[$failedCastingDirectiveArgName]) : $directiveArgs[$failedCastingDirectiveArgName],
+                        $encodedValue,
                         $failedCastingDirectiveArgName,
                         $composedDirectiveArgTypeName
                     );
