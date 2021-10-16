@@ -251,12 +251,12 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             ['arraySearch' => 'element'],
             ['arrayFill' => 'index'],
             ['arrayAddItem' => 'value'],
-            ['objectAsQueryStr' => 'object']
-                => SchemaTypeModifiers::MANDATORY,
-            ['arrayFill' => 'properties'],
+            ['objectAsQueryStr' => 'object'],
             ['upperCase' => 'text'],
             ['lowerCase' => 'text'],
             ['titleCase' => 'text']
+                => SchemaTypeModifiers::MANDATORY,
+            ['arrayFill' => 'properties']
                 => SchemaTypeModifiers::IS_ARRAY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
