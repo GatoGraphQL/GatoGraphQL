@@ -364,7 +364,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 $source = (array) $fieldArgs['source'];
                 $index = $fieldArgs['index'];
                 foreach ($value as &$targetProps) {
-                    if (!array_key_exists($index, $targetProps)) {
+                    if (!is_array($targetProps) || !array_key_exists($index, $targetProps)) {
                         continue;
                     }
                     foreach ($source as $sourceProps) {
