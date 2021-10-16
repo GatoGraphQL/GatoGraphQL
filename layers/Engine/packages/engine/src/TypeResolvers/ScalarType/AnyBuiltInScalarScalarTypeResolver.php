@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\TypeResolvers\ScalarType;
+namespace PoP\Engine\TypeResolvers\ScalarType;
 
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use stdClass;
 
 class AnyBuiltInScalarScalarTypeResolver extends AbstractScalarTypeResolver
