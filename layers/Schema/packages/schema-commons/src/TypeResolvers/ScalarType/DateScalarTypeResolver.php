@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
 use DateTime;
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use stdClass;
 
@@ -25,7 +26,7 @@ class DateScalarTypeResolver extends AbstractScalarTypeResolver
         return 'https://datatracker.ietf.org/doc/html/rfc3339#section-5.6';
     }
 
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
     {
         if ($error = $this->validateIsNotStdClass($inputValue)) {
             return $error;

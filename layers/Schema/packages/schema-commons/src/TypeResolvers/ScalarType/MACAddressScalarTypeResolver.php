@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use stdClass;
 
@@ -19,7 +20,7 @@ class MACAddressScalarTypeResolver extends AbstractScalarTypeResolver
         return 'MACAddress';
     }
 
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
     {
         if ($error = $this->validateIsNotStdClass($inputValue)) {
             return $error;

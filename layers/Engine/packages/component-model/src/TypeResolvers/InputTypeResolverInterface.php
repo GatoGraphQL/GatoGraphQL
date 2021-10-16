@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
+use PoP\ComponentModel\ErrorHandling\Error;
 use stdClass;
 
 /**
@@ -31,5 +32,5 @@ interface InputTypeResolverInterface extends TypeResolverInterface
      *
      * @see https://spec.graphql.org/draft/#sec-Input-Values
      */
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass;
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error;
 }

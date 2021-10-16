@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
+use PoP\ComponentModel\ErrorHandling\Error;
 use stdClass;
 
 class AnyBuiltInScalarScalarTypeResolver extends AbstractScalarTypeResolver
@@ -21,7 +22,7 @@ class AnyBuiltInScalarScalarTypeResolver extends AbstractScalarTypeResolver
     /**
      * Accept anything and everything, other than arrays and objects
      */
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
     {
         if ($error = $this->validateIsNotStdClass($inputValue)) {
             return $error;
