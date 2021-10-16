@@ -125,9 +125,6 @@ services:
     PoP\ComponentModel\Schema\FieldQueryInterpreterInterface:
         class: \PoP\ComponentModel\Schema\FieldQueryInterpreter
 
-    PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface:
-        class: \PoP\ComponentModel\Schema\SchemaDefinitionService
-
     PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface:
         class: \PoP\ComponentModel\Schema\SchemaNamespacingService
 

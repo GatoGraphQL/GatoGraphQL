@@ -4,8 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface:
-        class: \PoP\API\Schema\SchemaDefinitionService
-
     PoP\Engine\Schema\SchemaDefinitionServiceInterface:
         class: \PoP\API\Schema\SchemaDefinitionService
