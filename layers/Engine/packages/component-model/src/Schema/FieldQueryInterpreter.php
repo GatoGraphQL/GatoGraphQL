@@ -970,12 +970,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             // 1. $forSchema = true: Cast all items except fields (eg: hasComments()) or arrays with fields (eg: [hasComments()])
             // 2. $forSchema = false: Should be cast only fields, however by now we can't tell which are fields and which are not, since fields have already been resolved to their value. Hence, cast everything (fieldArgValues that failed at the schema level will not be provided in the input array, so won't be validated twice)
             // Otherwise, simply add the argValue directly, it will be eventually casted by the other function
-            if (!(
+            if (
+                !(
                 !$forSchema
                 // Conditions below are for `$forSchema => true`
                 || (!is_array($argValue) && !$this->isFieldArgumentValueDynamic($argValue))
                 || (is_array($argValue) && !FieldQueryUtils::isAnyFieldArgumentValueDynamic($argValue))
-            )) {
+                )
+            ) {
                 $fieldOrDirectiveArgs[$argName] = $argValue;
                 continue;
             }
@@ -987,10 +989,10 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
              * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
              * In particular, it does not need to validate if it is an array or not,
              * as according to the applied WrappingType.
-             * 
+             *
              * This is to enable it to have an array as value, which is not
              * allowed by GraphQL unless the array is explicitly defined.
-             * 
+             *
              * For instance, type `DangerouslyDynamic` could have values
              * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
              * these values by types `String` and `[String]`.
@@ -1003,7 +1005,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             /**
              * Execute the validation, checking that the WrappingType is respected.
              * Eg: `["hello"]` must be `[String]`, can't be `[[String]]` or `String`.
-             * 
+             *
              * Coerce the value to the appropriate type.
              * Eg: from string to boolean.
              **/

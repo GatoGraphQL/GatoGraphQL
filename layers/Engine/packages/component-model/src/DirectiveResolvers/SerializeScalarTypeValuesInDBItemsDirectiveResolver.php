@@ -144,7 +144,7 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
         if ($fieldScalarTypeResolver === $this->dangerouslyDynamicScalarTypeResolver) {
             return $value === null ? null : $fieldScalarTypeResolver->serialize($value);
         }
-        
+
         // If the value is an array of arrays, then serialize each subelement to the item type
         if ($fieldScalarSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false) {
             return $value === null ? null : array_map(
