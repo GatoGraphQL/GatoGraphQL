@@ -274,7 +274,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
             switch ($fieldName) {
                 case 'arrayItem':
-                    if (count($fieldArgs['array']) < $fieldArgs['position']) {
+                    $array = (array) $fieldArgs['arrays'];
+                    if (count($array) < $fieldArgs['position']) {
                         return [
                             sprintf(
                                 $this->translationAPI->__('The array contains no element at position \'%s\'', 'function-fields'),
@@ -284,7 +285,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                     };
                     break;
                 case 'arrayDiff':
-                    if (count($fieldArgs['arrays']) < 2) {
+                    $array = (array) $fieldArgs['arrays'];
+                    if (count($array) < 2) {
                         return [
                             sprintf(
                                 $this->translationAPI->__('The array must contain at least 2 elements: \'%s\'', 'function-fields'),
@@ -386,11 +388,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 return (object) array_unique($array);
             case 'arrayDiff':
                 // Diff the first array against all the others
-                $arrays = array_map(
-                    fn (stdClass $object) => (array) $object,
-                    $fieldArgs['arrays']
-                );
-                $first = array_shift($arrays);
+                $arrays = (array) $fieldArgs['arrays'];
+                $first = (array) array_shift($arrays);
                 return (object) array_diff($first, ...$arrays);
             case 'arrayAddItem':
                 $array = (array) $fieldArgs['array'];
