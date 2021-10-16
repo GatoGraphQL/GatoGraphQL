@@ -10,7 +10,6 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\ErrorHandling\ErrorDataTokens;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\State\ApplicationState;
@@ -91,6 +90,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      * @var array<string,array<string,string>>
      */
     private array $fieldsByTypeAndFieldOutputKey = [];
+    
     protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
 
     #[Required]
@@ -995,167 +995,168 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                  * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
                  * these values by types `String` and `[String]`.
                  */
+                if ($fieldOrDirectiveArgTypeResolver !== $this->dangerouslyDynamicScalarTypeResolver) {
+                    // If not set, the return type is not an array
+                    $fieldOrDirectiveArgIsArrayType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::IS_ARRAY] ?? false;
+                    $fieldOrDirectiveArgIsNonNullArrayItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
+                    $fieldOrDirectiveArgIsArrayOfArraysType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
+                    $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
 
-                // If not set, the return type is not an array
-                $fieldOrDirectiveArgIsArrayType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::IS_ARRAY] ?? false;
-                $fieldOrDirectiveArgIsNonNullArrayItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
-                $fieldOrDirectiveArgIsArrayOfArraysType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
-                $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
-
-                /**
-                 * Support passing a single value where a list is expected:
-                 * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
-                 *
-                 * Defined in the GraphQL spec.
-                 *
-                 * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
-                 */
-                if (
-                    !is_array($argValue)
-                    && ComponentConfiguration::coerceInputFromSingleValueToList()
-                ) {
-                    if ($fieldOrDirectiveArgIsArrayOfArraysType) {
-                        $argValue = [[$argValue]];
-                    } elseif ($fieldOrDirectiveArgIsArrayType) {
-                        $argValue = [$argValue];
+                    /**
+                     * Support passing a single value where a list is expected:
+                     * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
+                     *
+                     * Defined in the GraphQL spec.
+                     *
+                     * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
+                     */
+                    if (
+                        !is_array($argValue)
+                        && ComponentConfiguration::coerceInputFromSingleValueToList()
+                    ) {
+                        if ($fieldOrDirectiveArgIsArrayOfArraysType) {
+                            $argValue = [[$argValue]];
+                        } elseif ($fieldOrDirectiveArgIsArrayType) {
+                            $argValue = [$argValue];
+                        }
                     }
-                }
 
-                // Validate that the expected array/non-array input is provided
-                $errorMessage = null;
-                if (
-                    !$fieldOrDirectiveArgIsArrayType
-                    && is_array($argValue)
-                ) {
-                    $errorMessage = sprintf(
-                        $this->translationAPI->__('Argument \'%s\' does not expect an array, but array \'%s\' was provided', 'pop-component-model'),
-                        $argName,
-                        json_encode($argValue)
-                    );
-                } elseif (
-                    $fieldOrDirectiveArgIsArrayType
-                    && !is_array($argValue)
-                ) {
-                    $errorMessage = sprintf(
-                        $this->translationAPI->__('Argument \'%s\' expects an array, but value \'%s\' was provided', 'pop-component-model'),
-                        $argName,
-                        $argValue
-                    );
-                } elseif (
-                    $fieldOrDirectiveArgIsNonNullArrayItemsType
-                    && is_array($argValue)
-                    && array_filter(
-                        $argValue,
-                        fn ($arrayItem) => $arrayItem === null
-                    )
-                ) {
-                    $errorMessage = sprintf(
-                        $this->translationAPI->__('Argument \'%s\' cannot receive an array with `null` values', 'pop-component-model'),
-                        $argName
-                    );
-                } elseif (
-                    $fieldOrDirectiveArgIsArrayType
-                    && !$fieldOrDirectiveArgIsArrayOfArraysType
-                    && array_filter(
-                        $argValue,
-                        fn ($arrayItem) => is_array($arrayItem)
-                    )
-                ) {
-                    $errorMessage = sprintf(
-                        $this->translationAPI->__('Argument \'%s\' cannot receive an array containing arrays as elements', 'pop-component-model'),
-                        $argName,
-                        json_encode($argValue)
-                    );
-                } elseif (
-                    $fieldOrDirectiveArgIsArrayOfArraysType
-                    && is_array($argValue)
-                    && array_filter(
-                        $argValue,
-                        // `null` could be accepted as an array! (Validation against null comes next)
-                        fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null
-                    )
-                ) {
-                    $errorMessage = sprintf(
-                        $this->translationAPI->__('Argument \'%s\' expects an array of arrays, but value \'%s\' was provided', 'pop-component-model'),
-                        $argName,
-                        json_encode($argValue)
-                    );
-                } elseif (
-                    $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType
-                    && is_array($argValue)
-                    && array_filter(
-                        $argValue,
-                        fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
-                            $arrayItem,
-                            fn ($arrayItemItem) => $arrayItemItem === null
-                        ) !== [],
-                    )
-                ) {
-                    $errorMessage = sprintf(
-                        $this->translationAPI->__('Argument \'%s\' cannot receive an array of arrays with `null` values', 'pop-component-model'),
-                        $argName
-                    );
-                }
-
-                if ($errorMessage !== null) {
-                    $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $errorMessage;
-                    unset($fieldOrDirectiveArgs[$argName]);
-                    continue;
-                }
-
-                /** @var Error[] */
-                $errorArgValues = [];
-                // Cast (or "coerce" in GraphQL terms) the value
-                if ($fieldOrDirectiveArgIsArrayOfArraysType) {
-                    // If the value is an array of arrays, then cast each subelement to the item type
-                    $argValue = $argValue === null ? null : array_map(
-                        // If it contains a null value, return it as is
-                        fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? null : array_map(
-                            fn (mixed $arrayOfArraysArgValueElem) => $arrayOfArraysArgValueElem === null ? null : $fieldOrDirectiveArgTypeResolver->coerceValue($arrayOfArraysArgValueElem),
-                            $arrayArgValueElem
-                        ),
-                        $argValue
-                    );
-                    $errorArgValues = GeneralUtils::arrayFlatten(array_filter(
-                        $argValue ?? [],
-                        fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? false : array_filter(
-                            $arrayArgValueElem,
-                            fn (mixed $arrayOfArraysArgValueElem) => GeneralUtils::isError($arrayOfArraysArgValueElem)
-                        )
-                    ));
-                } elseif ($fieldOrDirectiveArgIsArrayType) {
-                    // If the value is an array, then cast each element to the item type
-                    $argValue = $argValue === null ? null : array_map(
-                        fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $fieldOrDirectiveArgTypeResolver->coerceValue($arrayArgValueElem),
-                        $argValue
-                    );
-                    $errorArgValues = array_filter(
-                        $argValue ?? [],
-                        fn (mixed $arrayArgValueElem) => GeneralUtils::isError($arrayArgValueElem)
-                    );
-                } else {
-                    // Otherwise, simply cast the given value directly
-                    $argValue = $argValue === null ? null : $fieldOrDirectiveArgTypeResolver->coerceValue($argValue);
-                    if (GeneralUtils::isError($argValue)) {
-                        /** @var Error $argValue */
-                        $errorArgValues[] = $argValue;
-                    }
-                }
-
-                // If the response is an error, extract the error message and set value to null
-                if ($errorArgValues) {
-                    $castingErrorMessage = count($errorArgValues) === 1 ?
-                        $errorArgValues[0]->getMessageOrCode()
-                        : implode(
-                            $this->translationAPI->__('; ', 'pop-component-model'),
-                            array_map(
-                                fn (Error $errorArgValueElem) => $errorArgValueElem->getMessageOrCode(),
-                                $errorArgValues
-                            )
+                    // Validate that the expected array/non-array input is provided
+                    $errorMessage = null;
+                    if (
+                        !$fieldOrDirectiveArgIsArrayType
+                        && is_array($argValue)
+                    ) {
+                        $errorMessage = sprintf(
+                            $this->translationAPI->__('Argument \'%s\' does not expect an array, but array \'%s\' was provided', 'pop-component-model'),
+                            $argName,
+                            json_encode($argValue)
                         );
-                    $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $castingErrorMessage;
-                    unset($fieldOrDirectiveArgs[$argName]);
-                    continue;
+                    } elseif (
+                        $fieldOrDirectiveArgIsArrayType
+                        && !is_array($argValue)
+                    ) {
+                        $errorMessage = sprintf(
+                            $this->translationAPI->__('Argument \'%s\' expects an array, but value \'%s\' was provided', 'pop-component-model'),
+                            $argName,
+                            $argValue
+                        );
+                    } elseif (
+                        $fieldOrDirectiveArgIsNonNullArrayItemsType
+                        && is_array($argValue)
+                        && array_filter(
+                            $argValue,
+                            fn ($arrayItem) => $arrayItem === null
+                        )
+                    ) {
+                        $errorMessage = sprintf(
+                            $this->translationAPI->__('Argument \'%s\' cannot receive an array with `null` values', 'pop-component-model'),
+                            $argName
+                        );
+                    } elseif (
+                        $fieldOrDirectiveArgIsArrayType
+                        && !$fieldOrDirectiveArgIsArrayOfArraysType
+                        && array_filter(
+                            $argValue,
+                            fn ($arrayItem) => is_array($arrayItem)
+                        )
+                    ) {
+                        $errorMessage = sprintf(
+                            $this->translationAPI->__('Argument \'%s\' cannot receive an array containing arrays as elements', 'pop-component-model'),
+                            $argName,
+                            json_encode($argValue)
+                        );
+                    } elseif (
+                        $fieldOrDirectiveArgIsArrayOfArraysType
+                        && is_array($argValue)
+                        && array_filter(
+                            $argValue,
+                            // `null` could be accepted as an array! (Validation against null comes next)
+                            fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null
+                        )
+                    ) {
+                        $errorMessage = sprintf(
+                            $this->translationAPI->__('Argument \'%s\' expects an array of arrays, but value \'%s\' was provided', 'pop-component-model'),
+                            $argName,
+                            json_encode($argValue)
+                        );
+                    } elseif (
+                        $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType
+                        && is_array($argValue)
+                        && array_filter(
+                            $argValue,
+                            fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
+                                $arrayItem,
+                                fn ($arrayItemItem) => $arrayItemItem === null
+                            ) !== [],
+                        )
+                    ) {
+                        $errorMessage = sprintf(
+                            $this->translationAPI->__('Argument \'%s\' cannot receive an array of arrays with `null` values', 'pop-component-model'),
+                            $argName
+                        );
+                    }
+
+                    if ($errorMessage !== null) {
+                        $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $errorMessage;
+                        unset($fieldOrDirectiveArgs[$argName]);
+                        continue;
+                    }
+
+                    /** @var Error[] */
+                    $errorArgValues = [];
+                    // Cast (or "coerce" in GraphQL terms) the value
+                    if ($fieldOrDirectiveArgIsArrayOfArraysType) {
+                        // If the value is an array of arrays, then cast each subelement to the item type
+                        $argValue = $argValue === null ? null : array_map(
+                            // If it contains a null value, return it as is
+                            fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? null : array_map(
+                                fn (mixed $arrayOfArraysArgValueElem) => $arrayOfArraysArgValueElem === null ? null : $fieldOrDirectiveArgTypeResolver->coerceValue($arrayOfArraysArgValueElem),
+                                $arrayArgValueElem
+                            ),
+                            $argValue
+                        );
+                        $errorArgValues = GeneralUtils::arrayFlatten(array_filter(
+                            $argValue ?? [],
+                            fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? false : array_filter(
+                                $arrayArgValueElem,
+                                fn (mixed $arrayOfArraysArgValueElem) => GeneralUtils::isError($arrayOfArraysArgValueElem)
+                            )
+                        ));
+                    } elseif ($fieldOrDirectiveArgIsArrayType) {
+                        // If the value is an array, then cast each element to the item type
+                        $argValue = $argValue === null ? null : array_map(
+                            fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $fieldOrDirectiveArgTypeResolver->coerceValue($arrayArgValueElem),
+                            $argValue
+                        );
+                        $errorArgValues = array_filter(
+                            $argValue ?? [],
+                            fn (mixed $arrayArgValueElem) => GeneralUtils::isError($arrayArgValueElem)
+                        );
+                    } else {
+                        // Otherwise, simply cast the given value directly
+                        $argValue = $argValue === null ? null : $fieldOrDirectiveArgTypeResolver->coerceValue($argValue);
+                        if (GeneralUtils::isError($argValue)) {
+                            /** @var Error $argValue */
+                            $errorArgValues[] = $argValue;
+                        }
+                    }
+
+                    // If the response is an error, extract the error message and set value to null
+                    if ($errorArgValues) {
+                        $castingErrorMessage = count($errorArgValues) === 1 ?
+                            $errorArgValues[0]->getMessageOrCode()
+                            : implode(
+                                $this->translationAPI->__('; ', 'pop-component-model'),
+                                array_map(
+                                    fn (Error $errorArgValueElem) => $errorArgValueElem->getMessageOrCode(),
+                                    $errorArgValues
+                                )
+                            );
+                        $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $castingErrorMessage;
+                        unset($fieldOrDirectiveArgs[$argName]);
+                        continue;
+                    }
                 }
                 $fieldOrDirectiveArgs[$argName] = $argValue;
             }
