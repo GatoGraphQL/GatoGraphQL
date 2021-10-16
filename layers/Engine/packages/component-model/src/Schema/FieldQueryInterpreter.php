@@ -18,6 +18,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\FieldQuery\FieldQueryInterpreter as UpstreamFieldQueryInterpreter;
 use PoP\FieldQuery\QueryHelpers;
@@ -91,12 +92,15 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      */
     private array $fieldsByTypeAndFieldOutputKey = [];
     protected InstanceManagerInterface $instanceManager;
+    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
 
     #[Required]
     final public function autowireComponentModelFieldQueryInterpreter(
         InstanceManagerInterface $instanceManager,
+        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
     ): void {
         $this->instanceManager = $instanceManager;
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
     }
 
     /**
@@ -981,6 +985,20 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                  **/
                 /** @var InputTypeResolverInterface */
                 $fieldOrDirectiveArgTypeResolver = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::TYPE_RESOLVER];
+
+                /**
+                 * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+                 * In particular, it does not need to validate if it is an array or not,
+                 * as according to the applied WrappingType.
+                 * 
+                 * This is to enable it to have an array as value, which is not
+                 * allowed by GraphQL unless the array is explicitly defined.
+                 * 
+                 * For instance, type `DangerouslyDynamic` could have values
+                 * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
+                 * these values by types `String` and `[String]`.
+                 */
+
                 // If not set, the return type is not an array
                 $fieldOrDirectiveArgIsArrayType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::IS_ARRAY] ?? false;
                 $fieldOrDirectiveArgIsNonNullArrayItemsType = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
