@@ -27,7 +27,7 @@ class DangerouslyDynamicScalarTypeResolver extends AbstractScalarTypeResolver
     }
 
     /**
-     * Accept anything and everything
+     * This method will never be called
      */
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
     {
