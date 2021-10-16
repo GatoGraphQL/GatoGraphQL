@@ -12,7 +12,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -29,17 +29,17 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
      */
     protected RootObjectTypeResolver $rootTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected MixedScalarTypeResolver $mixedScalarTypeResolver;
+    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
 
     #[Required]
     final public function autowireApplyFunctionDirectiveResolver(
         RootObjectTypeResolver $rootTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
-        MixedScalarTypeResolver $mixedScalarTypeResolver,
+        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
     ): void {
         $this->rootTypeResolver = $rootTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
     }
 
     public function getDirectiveName(): string
@@ -59,7 +59,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     {
         return [
             'function' => $this->stringScalarTypeResolver,
-            'addArguments' => $this->mixedScalarTypeResolver,
+            'addArguments' => $this->dangerouslyDynamicScalarTypeResolver,
             'target' => $this->stringScalarTypeResolver,
         ];
     }

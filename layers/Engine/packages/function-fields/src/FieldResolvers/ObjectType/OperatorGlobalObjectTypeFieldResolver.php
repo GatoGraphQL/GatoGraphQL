@@ -9,30 +9,38 @@ use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\MixedScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\FloatScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FunctionFields\TypeResolvers\ScalarType\ArrayKeyScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     protected FloatScalarTypeResolver $floatScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected MixedScalarTypeResolver $mixedScalarTypeResolver;
+    protected AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver;
+    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
     protected ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver;
+    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
 
     #[Required]
     final public function autowireOperatorGlobalObjectTypeFieldResolver(
         FloatScalarTypeResolver $floatScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
-        MixedScalarTypeResolver $mixedScalarTypeResolver,
+        AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver,
+        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
         ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver,
+        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
     ): void {
         $this->floatScalarTypeResolver = $floatScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->mixedScalarTypeResolver = $mixedScalarTypeResolver;
+        $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
         $this->arrayKeyScalarTypeResolver = $arrayKeyScalarTypeResolver;
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
     }
 
     public function getFieldNamesToResolve(): array
@@ -70,15 +78,16 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'lowerCase',
             'titleCase'
                 => $this->stringScalarTypeResolver,
+            'arraySearch'
+                => $this->anyBuiltInScalarScalarTypeResolver,
             'arrayRandom',
             'arrayItem',
-            'arraySearch',
             'arrayFill',
             'arrayValues',
             'arrayUnique',
             'arrayDiff',
             'arrayAddItem'
-                => $this->mixedScalarTypeResolver,
+                => $this->dangerouslyDynamicScalarTypeResolver,
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -144,45 +153,45 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 'by' => $this->floatScalarTypeResolver,
             ],
             'arrayRandom' => [
-                'array' => $this->mixedScalarTypeResolver,
+                'array' => $this->dangerouslyDynamicScalarTypeResolver,
             ],
             'arrayJoin' => [
                 'array' => $this->stringScalarTypeResolver,
                 'separator' => $this->stringScalarTypeResolver,
             ],
             'arrayItem' => [
-                'array' => $this->mixedScalarTypeResolver,
+                'array' => $this->dangerouslyDynamicScalarTypeResolver,
                 'position' => $this->stringScalarTypeResolver,
             ],
             'arraySearch' => [
-                'array' => $this->mixedScalarTypeResolver,
+                'array' => $this->dangerouslyDynamicScalarTypeResolver,
                 'element' => $this->stringScalarTypeResolver,
             ],
             'arrayFill' => [
-                'target' => $this->mixedScalarTypeResolver,
-                'source' => $this->mixedScalarTypeResolver,
+                'target' => $this->dangerouslyDynamicScalarTypeResolver,
+                'source' => $this->dangerouslyDynamicScalarTypeResolver,
                 'index' => $this->stringScalarTypeResolver,
                 'properties' => $this->stringScalarTypeResolver,
             ],
             'arrayValues' => [
-                'array' => $this->mixedScalarTypeResolver,
+                'array' => $this->dangerouslyDynamicScalarTypeResolver,
             ],
             'arrayUnique' => [
-                'array' => $this->mixedScalarTypeResolver,
+                'array' => $this->dangerouslyDynamicScalarTypeResolver,
             ],
             'arrayDiff' => [
-                'arrays' => $this->mixedScalarTypeResolver,
+                'arrays' => $this->dangerouslyDynamicScalarTypeResolver,
             ],
             'arrayAddItem' => [
-                'array' => $this->mixedScalarTypeResolver,
-                'value' => $this->mixedScalarTypeResolver,
+                'array' => $this->dangerouslyDynamicScalarTypeResolver,
+                'value' => $this->dangerouslyDynamicScalarTypeResolver,
                 'key' => $this->arrayKeyScalarTypeResolver,
             ],
             'arrayAsQueryStr' => [
-                'array' => $this->mixedScalarTypeResolver,
+                'array' => $this->dangerouslyDynamicScalarTypeResolver,
             ],
             'objectAsQueryStr' => [
-                'object' => $this->mixedScalarTypeResolver,
+                'object' => $this->dangerouslyDynamicScalarTypeResolver,
             ],
             'upperCase',
             'lowerCase',
@@ -247,12 +256,12 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             ['arraySearch' => 'element'],
             ['arrayFill' => 'index'],
             ['arrayAddItem' => 'value'],
-            ['objectAsQueryStr' => 'object']
-                => SchemaTypeModifiers::MANDATORY,
-            ['arrayFill' => 'properties'],
+            ['objectAsQueryStr' => 'object'],
             ['upperCase' => 'text'],
             ['lowerCase' => 'text'],
             ['titleCase' => 'text']
+                => SchemaTypeModifiers::MANDATORY,
+            ['arrayFill' => 'properties']
                 => SchemaTypeModifiers::IS_ARRAY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
@@ -350,15 +359,21 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             case 'arrayFill':
                 // For each element in the source, iterate all the elements in the target
                 // If the value for the index property is the same, then copy the properties
+                // Cast from stdClass to array
                 $value = $fieldArgs['target'];
+                $source = $fieldArgs['source'];
                 $index = $fieldArgs['index'];
                 foreach ($value as &$targetProps) {
-                    foreach ($fieldArgs['source'] as $sourceProps) {
-                        if (array_key_exists($index, $targetProps) && $targetProps[$index] == $sourceProps[$index]) {
-                            $properties = isset($fieldArgs['properties']) ? $fieldArgs['properties'] : array_keys($sourceProps);
-                            foreach ($properties as $property) {
-                                $targetProps[$property] = $sourceProps[$property];
-                            }
+                    if (!is_array($targetProps) || !array_key_exists($index, $targetProps)) {
+                        continue;
+                    }
+                    foreach ($source as $sourceProps) {
+                        if ($targetProps[$index] != $sourceProps[$index]) {
+                            continue;
+                        }
+                        $properties = isset($fieldArgs['properties']) ? $fieldArgs['properties'] : array_keys($sourceProps);
+                        foreach ($properties as $property) {
+                            $targetProps[$property] = $sourceProps[$property];
                         }
                     }
                 }
@@ -370,7 +385,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             case 'arrayDiff':
                 // Diff the first array against all the others
                 $arrays = $fieldArgs['arrays'];
-                $first = (array)array_shift($arrays);
+                $first = (array) array_shift($arrays);
                 return array_diff($first, ...$arrays);
             case 'arrayAddItem':
                 $array = $fieldArgs['array'];
@@ -384,8 +399,6 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 return $this->fieldQueryInterpreter->getArrayAsStringForQuery($fieldArgs['array']);
             case 'objectAsQueryStr':
                 return $this->fieldQueryInterpreter->getObjectAsStringForQuery($fieldArgs['object']);
-            case 'arrayUnique':
-                return array_unique($fieldArgs['array']);
             case 'upperCase':
                 return strtoupper($fieldArgs['text']);
             case 'lowerCase':

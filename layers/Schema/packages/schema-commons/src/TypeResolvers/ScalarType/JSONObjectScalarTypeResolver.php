@@ -4,27 +4,30 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
+use stdClass;
 
 /**
- * GraphQL Custom Scalar
+ * GraphQL Custom Scalar representing a JSON Object on the client-side,
+ * handled via an stdClass object on the server-side
  *
  * @see https://spec.graphql.org/draft/#sec-Scalars.Custom-Scalars
  */
-class ObjectScalarTypeResolver extends AbstractScalarTypeResolver
+class JSONObjectScalarTypeResolver extends AbstractScalarTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'Object';
+        return 'JSONObject';
     }
 
-    public function coerceValue(mixed $inputValue): mixed
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
     {
-        if (!(is_array($inputValue) || is_object($inputValue))) {
+        if (!($inputValue instanceof stdClass)) {
             return $this->getError(
                 sprintf(
                     $this->translationAPI->__('Cannot cast value \'%s\' to type \'%s\'', 'component-model'),
-                    json_decode($inputValue),
+                    $inputValue,
                     $this->getMaybeNamespacedTypeName()
                 )
             );

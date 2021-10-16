@@ -29,7 +29,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         return $scalarValue;
     }
 
-    protected function getError(string $message): Error
+    final protected function getError(string $message): Error
     {
         return new Error(
             sprintf('%s-cast', $this->getTypeName()),
@@ -46,14 +46,13 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         );
     }
 
-    protected function validateIsNotArrayOrObject(mixed $inputValue): ?Error
+    final protected function validateIsNotStdClass(string|int|float|bool|stdClass $inputValue): ?Error
     {
         // Fail if passing an array for unsupporting types
-        if (is_array($inputValue) || is_object($inputValue)) {
+        if ($inputValue instanceof stdClass) {
             return $this->getError(
                 sprintf(
-                    $this->translationAPI->__('An %s cannot be casted to type \'%s\'', 'component-model'),
-                    is_array($inputValue) ? 'array' : 'object',
+                    $this->translationAPI->__('An object cannot be casted to type \'%s\'', 'component-model'),
                     $this->getMaybeNamespacedTypeName()
                 )
             );
@@ -61,7 +60,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         return null;
     }
 
-    protected function validateFilterVar(mixed $inputValue, int $filter): ?Error
+    final protected function validateFilterVar(mixed $inputValue, int $filter): ?Error
     {
         $valid = filter_var($inputValue, $filter);
         if ($valid === false) {

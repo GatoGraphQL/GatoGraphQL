@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\EnumType;
 
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use stdClass;
 
 abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements EnumTypeResolverInterface
 {
@@ -168,7 +170,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      *
      * This function simply returns the same value always.
      */
-    public function coerceValue(mixed $inputValue): mixed
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
     {
         return $inputValue;
     }

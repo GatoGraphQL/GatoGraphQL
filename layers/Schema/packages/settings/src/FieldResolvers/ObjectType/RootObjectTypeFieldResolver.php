@@ -8,7 +8,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
@@ -16,17 +16,17 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
+    protected AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected SettingsTypeAPIInterface $settingsTypeAPI;
 
     #[Required]
     final public function autowireRootObjectTypeFieldResolver(
-        AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
+        AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         SettingsTypeAPIInterface $settingsTypeAPI,
     ): void {
-        $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
+        $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->settingsTypeAPI = $settingsTypeAPI;
     }
@@ -56,7 +56,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'option' => $this->anyScalarScalarTypeResolver,
+            'option' => $this->anyBuiltInScalarScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

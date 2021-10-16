@@ -10,11 +10,22 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
+    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
+
+    #[Required]
+    final public function autowireSerializeScalarTypeValuesInDBItemsDirectiveResolver(
+        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
+    ): void {
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+    }
+
     public function getDirectiveName(): string
     {
         return 'serializeScalarTypeValuesInDBItems';
@@ -124,6 +135,16 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
         array $fieldScalarSchemaDefinition,
         mixed $value,
     ): string|int|float|bool|array {
+        $fieldScalarTypeResolver = $fieldScalarSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
+        /**
+         * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+         * In particular, it does not need to validate if it is an array or not,
+         * as according to the applied WrappingType.
+         */
+        if ($fieldScalarTypeResolver === $this->dangerouslyDynamicScalarTypeResolver) {
+            return $value === null ? null : $fieldScalarTypeResolver->serialize($value);
+        }
+
         // If the value is an array of arrays, then serialize each subelement to the item type
         if ($fieldScalarSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false) {
             return $value === null ? null : array_map(

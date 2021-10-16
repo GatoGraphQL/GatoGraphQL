@@ -24,14 +24,14 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\ObjectScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected ObjectScalarTypeResolver $objectScalarTypeResolver;
+    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
     protected FieldObjectTypeResolver $fieldObjectTypeResolver;
     protected TypeObjectTypeResolver $typeObjectTypeResolver;
     protected EnumValueObjectTypeResolver $enumValueObjectTypeResolver;
@@ -42,7 +42,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     final public function autowireTypeObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        ObjectScalarTypeResolver $objectScalarTypeResolver,
+        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
         FieldObjectTypeResolver $fieldObjectTypeResolver,
         TypeObjectTypeResolver $typeObjectTypeResolver,
         EnumValueObjectTypeResolver $enumValueObjectTypeResolver,
@@ -51,7 +51,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        $this->objectScalarTypeResolver = $objectScalarTypeResolver;
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
         $this->fieldObjectTypeResolver = $fieldObjectTypeResolver;
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
         $this->enumValueObjectTypeResolver = $enumValueObjectTypeResolver;
@@ -91,7 +91,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'specifiedByURL'
                 => $this->stringScalarTypeResolver,
             'extensions'
-                => $this->objectScalarTypeResolver,
+                => $this->jsonObjectScalarTypeResolver,
             'fields'
                 => $this->fieldObjectTypeResolver,
             'interfaces',

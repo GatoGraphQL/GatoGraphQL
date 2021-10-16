@@ -7,41 +7,43 @@ namespace PoP\ComponentModel\Schema;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionService implements SchemaDefinitionServiceInterface
 {
-    protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
+    protected AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver;
     protected InstanceManagerInterface $instanceManager;
     protected TranslationAPIInterface $translationAPI;
 
     #[Required]
     final public function autowireSchemaDefinitionService(
         InstanceManagerInterface $instanceManager,
-        AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
+        AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver,
         TranslationAPIInterface $translationAPI,
     ): void {
         $this->instanceManager = $instanceManager;
-        $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
+        $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
         $this->translationAPI = $translationAPI;
     }
 
     /**
-     * The `AnyScalar` type is a wildcard type,
-     * representing *any* type (string, int, bool, etc)
+     * The `AnyBuiltInScalar` type is a wildcard type,
+     * representing any of GraphQL's built-in types
+     * (String, Int, Boolean, Float or ID)
      */
     public function getDefaultConcreteTypeResolver(): ConcreteTypeResolverInterface
     {
-        return $this->anyScalarScalarTypeResolver;
+        return $this->anyBuiltInScalarScalarTypeResolver;
     }
     /**
-     * The `AnyScalar` type is a wildcard type,
-     * representing *any* type (string, int, bool, etc)
+     * The `AnyBuiltInScalar` type is a wildcard type,
+     * representing any of GraphQL's built-in types
+     * (String, Int, Boolean, Float or ID)
      */
     public function getDefaultInputTypeResolver(): InputTypeResolverInterface
     {
-        return $this->anyScalarScalarTypeResolver;
+        return $this->anyBuiltInScalarScalarTypeResolver;
     }
 }

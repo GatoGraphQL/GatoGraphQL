@@ -7,22 +7,22 @@ namespace PoPSchema\Meta\FieldResolvers\InterfaceType;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Meta\TypeResolvers\InterfaceType\WithMetaInterfaceTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
-    protected AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver;
+    protected AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
 
     #[Required]
     final public function autowireWithMetaInterfaceTypeFieldResolver(
-        AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver,
+        AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
-        $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
+        $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
@@ -43,8 +43,8 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'metaValue' => $this->anyScalarScalarTypeResolver,
-            'metaValues' => $this->anyScalarScalarTypeResolver,
+            'metaValue' => $this->anyBuiltInScalarScalarTypeResolver,
+            'metaValues' => $this->anyBuiltInScalarScalarTypeResolver,
             default => parent::getFieldTypeResolver($fieldName),
         };
     }
