@@ -101,13 +101,14 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'objectAsQueryStr',
             'upperCase',
             'lowerCase',
-            'titleCase',
+            'titleCase'
+                => SchemaTypeModifiers::NON_NULLABLE,
             'arrayFill',
             'arrayValues',
             'arrayUnique',
             'arrayDiff',
             'arrayAddItem'
-                => SchemaTypeModifiers::NON_NULLABLE,
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
