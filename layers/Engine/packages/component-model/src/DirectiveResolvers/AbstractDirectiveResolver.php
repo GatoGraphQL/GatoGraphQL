@@ -1186,7 +1186,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * eg: because their name is duplicated across directives (eg: "cacheControl")
      * or because they are used through code (eg: "validateIsUserLoggedIn")
      */
-    public function skipAddingToSchemaDefinition(): bool
+    public function skipAddingToSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         return false;
     }

@@ -20,7 +20,7 @@ final class CacheControlDirectiveResolver extends AbstractCacheControlDirectiveR
     /**
      * Do add this directive to the schema
      */
-    public function skipAddingToSchemaDefinition(): bool
+    public function skipAddingToSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         return false;
     }

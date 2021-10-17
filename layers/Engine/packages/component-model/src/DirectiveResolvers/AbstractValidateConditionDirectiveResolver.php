@@ -13,7 +13,7 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
     // /**
     //  * Validations are naturally added through code and not through the query, so no need to expose them in the schema
     //  */
-    // public function skipAddingToSchemaDefinition(): bool {
+    // public function skipAddingToSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): bool {
     //     return true;
     // }
 
