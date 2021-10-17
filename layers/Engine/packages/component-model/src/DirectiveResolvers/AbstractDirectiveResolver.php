@@ -1205,14 +1205,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * has any mandatory argument of type `DangerouslyDynamic`
          */
         if (!ComponentConfiguration::enableUsingDangerouslyDynamicScalar()) {
-            // $schemaDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
-            // foreach ($schemaDirectiveArgNameTypeResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
-            //     if ($directiveArgInputTypeResolver !== $this->dangerouslyDynamicScalarTypeResolver) {
-            //         continue;
-            //     }
-            // }
-            $directiveArgsSchemaDefinition = $this->getSchemaDirectiveArgs($relationalTypeResolver);
-            if ($this->hasDangerouslyDynamicScalarTypeResolverAsMandatoryInput($directiveArgsSchemaDefinition)) {
+            $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
+            foreach ($consolidatedDirectiveArgNameTypeResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
+                if ($directiveArgInputTypeResolver !== $this->dangerouslyDynamicScalarTypeResolver) {
+                    continue;
+                }
+                $consolidatedDirectiveArgTypeModifiers = $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
+                if (!($consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::MANDATORY)) {
+                    continue;
+                }
                 return true;
             }
         }

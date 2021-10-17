@@ -703,8 +703,15 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 return true;
             }
 
-            $fieldArgsSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName);
-            if ($this->hasDangerouslyDynamicScalarTypeResolverAsMandatoryInput($fieldArgsSchemaDefinition)) {
+            $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+            foreach ($consolidatedFieldArgNameTypeResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
+                if ($fieldArgInputTypeResolver !== $this->dangerouslyDynamicScalarTypeResolver) {
+                    continue;
+                }
+                $consolidatedFieldArgTypeModifiers = $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
+                if (!($consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::MANDATORY)) {
+                    continue;
+                }
                 return true;
             }
         }
