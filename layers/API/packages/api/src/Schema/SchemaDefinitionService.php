@@ -250,6 +250,12 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         array &$schemaDefinition,
     ): void {
         $relationalTypeResolver = $this->accessedDirectiveResolverClassRelationalTypeResolvers[$directiveResolver::class];
+        /**
+         * Directives may not be directly visible in the schema
+         */
+        if ($directiveResolver->skipExposingDirectiveInSchema($relationalTypeResolver)) {
+            return;
+        }
         $schemaDefinitionProvider = new DirectiveSchemaDefinitionProvider($directiveResolver, $relationalTypeResolver);
         $directiveName = $directiveResolver->getDirectiveName();
         $directiveSchemaDefinition = $schemaDefinitionProvider->getSchemaDefinition();
