@@ -177,7 +177,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
 
         // Remove unneeded data
-        if (!APIComponentConfiguration::addGlobalFieldsToSchema()) {
+        if (!APIComponentConfiguration::exposeGlobalFieldsInSchema()) {
             unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_FIELDS]);
             unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_CONNECTIONS]);
         }
@@ -212,7 +212,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         // 1. Global fields, connections and directives
         if (
             ($addVersionToSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription)
-            && APIComponentConfiguration::addGlobalFieldsToSchema()
+            && APIComponentConfiguration::exposeGlobalFieldsInSchema()
         ) {
             foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_FIELDS]) as $fieldName) {
                 $itemPath = [

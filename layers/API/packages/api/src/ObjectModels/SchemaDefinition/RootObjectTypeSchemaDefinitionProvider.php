@@ -21,7 +21,7 @@ class RootObjectTypeSchemaDefinitionProvider extends ObjectTypeSchemaDefinitionP
             $schemaDefinition[SchemaDefinition::DIRECTIVES],
             $globalSchemaDefinition[SchemaDefinition::DIRECTIVES]
         );
-        if (ComponentConfiguration::addGlobalFieldsToSchema()) {
+        if (ComponentConfiguration::exposeGlobalFieldsInSchema()) {
             return array_merge(
                 $schemaDefinition,
                 [

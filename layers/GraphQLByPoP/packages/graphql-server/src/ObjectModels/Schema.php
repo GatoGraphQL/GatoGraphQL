@@ -28,7 +28,7 @@ class Schema
         protected string $id
     ) {
         // Enable or not to add the global fields to the schema, since they may pollute the documentation
-        if (APIComponentConfiguration::addGlobalFieldsToSchema()) {
+        if (APIComponentConfiguration::exposeGlobalFieldsInSchema()) {
             // Add the fields in the registry
             // 1. Global fields
             SchemaDefinitionHelpers::createFieldsFromPath(
