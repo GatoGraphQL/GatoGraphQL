@@ -41,7 +41,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     /**
      * Because this directive will be implemented several times, make its schema definition be added only once
      */
-    public function skipAddingToSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): bool
+    public function skipExposingDirectiveInSchema(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         return true;
     }
