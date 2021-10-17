@@ -1187,7 +1187,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         foreach ($directiveNameResolvers as $directiveName => $directiveResolvers) {
             foreach ($directiveResolvers as $directiveResolver) {
                 // A directive can decide to not be added to the schema, eg: when it is repeated/implemented several times
-                if ($directiveResolver->skipAddingToSchemaDefinition($this)) {
+                if ($directiveResolver->skipExposingDirectiveInSchema($this)) {
                     continue;
                 }
                 $isGlobal = $directiveResolver->isGlobal($this);

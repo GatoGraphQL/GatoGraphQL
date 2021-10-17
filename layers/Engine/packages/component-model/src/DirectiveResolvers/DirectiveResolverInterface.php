@@ -123,7 +123,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     /**
      * A directive can decide to not be added to the schema, eg: when it is repeated/implemented several times
      */
-    public function skipAddingToSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): bool;
+    public function skipExposingDirectiveInSchema(RelationalTypeResolverInterface $relationalTypeResolver): bool;
     public function getDirectiveSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array;
     /**
      * Define if to use the version to decide if to process the directive or not
