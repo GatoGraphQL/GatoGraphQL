@@ -6,6 +6,7 @@ namespace PoP\CacheControl\DirectiveResolvers;
 
 use PoP\CacheControl\ComponentConfiguration;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 final class CacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
@@ -20,7 +21,7 @@ final class CacheControlDirectiveResolver extends AbstractCacheControlDirectiveR
     /**
      * Do add this directive to the schema
      */
-    public function skipAddingToSchemaDefinition(): bool
+    public function skipAddingToSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         return false;
     }
