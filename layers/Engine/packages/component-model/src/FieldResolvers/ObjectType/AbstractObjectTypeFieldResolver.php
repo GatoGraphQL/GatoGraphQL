@@ -415,11 +415,22 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $this->schemaFieldArgsCache[$cacheKey];
         }
         $schemaFieldArgs = [];
+        $skipExposingDangerouslyDynamicScalarTypeInSchema = ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema();
         $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         foreach ($consolidatedFieldArgNameTypeResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
+            /**
+             * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+             * If disabled, then do not expose the directive args of this type
+             */
+            if ($skipExposingDangerouslyDynamicScalarTypeInSchema
+                && $fieldArgInputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
+            ) {
+                continue;
+            }
             if ($this->skipExposingFieldArgInSchema($objectTypeResolver, $fieldName, $fieldArgName)) {
                 continue;
             }
+            
             $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
                 $fieldArgName,
                 $fieldArgInputTypeResolver,
@@ -729,16 +740,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     public function skipExposingFieldArgInSchema(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): bool
     {
-        /**
-         * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
-         * If disabled, then do not expose the directive args of this type
-         */
-        if (ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
-            $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
-            if ($consolidatedFieldArgNameTypeResolvers[$fieldArgName] === $this->dangerouslyDynamicScalarTypeResolver) {
-                return true;
-            }
-        }
         return false;
     }
 
