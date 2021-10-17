@@ -146,4 +146,22 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
 
         return $fieldOrDirectiveArgNameTypeResolvers;
     }
+
+    /**
+     * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+     * In particular, it does not need to validate if it is an array or not,
+     * as according to the applied WrappingType.
+     * 
+     * This behavior can be disabled. In this case, automatically remove
+     * all directive arguments that are based on this type
+     */
+    protected function hasDangerouslyDynamicScalarTypeResolverAsMandatoryInput(array &$fieldOrDirectiveArgsSchemaDefinition): bool
+    {
+        return array_filter(
+            $fieldOrDirectiveArgsSchemaDefinition,
+            fn (array $fieldOrDirectiveArgSchemaDefinition) => 
+                ($fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::MANDATORY] ?? false)
+                && $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER] === $this->$this->dangerouslyDynamicScalarTypeResolver
+        ) !== [];
+    }
 }

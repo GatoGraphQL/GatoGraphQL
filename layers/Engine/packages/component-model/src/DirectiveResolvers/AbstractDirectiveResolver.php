@@ -25,6 +25,7 @@ use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
@@ -63,6 +64,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected SemverHelperServiceInterface $semverHelperService;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
+    
     /**
      * @var array<string, mixed>
      */
@@ -1197,6 +1199,20 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     public function skipExposingDirectiveInSchema(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
+        /**
+         * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+         * In particular, it does not need to validate if it is an array or not,
+         * as according to the applied WrappingType.
+         * 
+         * If disabled, then do not expose the directive if it
+         * has any mandatory argument of type `DangerouslyDynamic`
+         */
+        if (!ComponentConfiguration::enableUsingDangerouslyDynamicScalar()) {
+            $directiveArgsSchemaDefinition = $this->getSchemaDirectiveArgs($relationalTypeResolver);
+            if ($this->hasDangerouslyDynamicScalarTypeResolverAsMandatoryInput($directiveArgsSchemaDefinition)) {
+                return true;
+            }
+        }
         return false;
     }
 
