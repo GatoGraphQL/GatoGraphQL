@@ -258,7 +258,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         }
 
         $fieldArgNameTypeResolvers = $this->getFieldArgNameTypeResolvers($fieldName);
-        
+
         /**
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
@@ -425,15 +425,16 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
              * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
              * If disabled, then do not expose the directive args of this type
              */
-            if ($skipExposingDangerouslyDynamicScalarTypeInSchema
+            if (
+                $skipExposingDangerouslyDynamicScalarTypeInSchema
                 && $fieldArgInputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
             ) {
                 continue;
-            }            
+            }
             if ($this->skipExposingFieldArgInSchema($fieldName, $fieldArgName)) {
                 continue;
             }
-            
+
             $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
                 $fieldArgName,
                 $fieldArgInputTypeResolver,

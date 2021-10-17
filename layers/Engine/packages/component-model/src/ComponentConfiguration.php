@@ -384,7 +384,7 @@ class ComponentConfiguration
      * For instance, type `DangerouslyDynamic` could have values
      * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
      * these values by types `String` and `[String]`.
-     * 
+     *
      * This config enables to disable this behavior. In this case, all fields,
      * field arguments and directive arguments which use this type will
      * automatically not be added to the schema.

@@ -65,7 +65,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected SemverHelperServiceInterface $semverHelperService;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
-    
+
     /**
      * @var array<string, mixed>
      */
@@ -825,15 +825,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
              * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
              * If disabled, then do not expose the directive args of this type
              */
-            if ($skipExposingDangerouslyDynamicScalarTypeInSchema
+            if (
+                $skipExposingDangerouslyDynamicScalarTypeInSchema
                 && $directiveArgInputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
             ) {
                 continue;
-            }            
+            }
             if ($this->skipExposingDirectiveArgInSchema($relationalTypeResolver, $directiveArgName)) {
                 continue;
             }
-            
+
             $schemaDirectiveArgs[$directiveArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
                 $directiveArgName,
                 $directiveArgInputTypeResolver,
@@ -1214,7 +1215,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
          * In particular, it does not need to validate if it is an array or not,
          * as according to the applied WrappingType.
-         * 
+         *
          * If disabled, then do not expose the directive if it
          * has any mandatory argument of type `DangerouslyDynamic`
          */

@@ -283,9 +283,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldArgNameTypeResolversCache)) {
             return $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey];
         }
-        
+
         $fieldArgNameTypeResolvers = $this->getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
-        
+
         /**
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
@@ -422,7 +422,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
              * If disabled, then do not expose the directive args of this type
              */
-            if ($skipExposingDangerouslyDynamicScalarTypeInSchema
+            if (
+                $skipExposingDangerouslyDynamicScalarTypeInSchema
                 && $fieldArgInputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
             ) {
                 continue;
@@ -430,7 +431,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             if ($this->skipExposingFieldArgInSchema($objectTypeResolver, $fieldName, $fieldArgName)) {
                 continue;
             }
-            
+
             $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
                 $fieldArgName,
                 $fieldArgInputTypeResolver,
@@ -705,9 +706,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
          * In particular, it does not need to validate if it is an array or not,
          * as according to the applied WrappingType.
-         * 
+         *
          * If disabled, then do not expose the field if either:
-         * 
+         *
          * 1. its type is `DangerouslyDynamic`
          * 2. it has any mandatory argument of type `DangerouslyDynamic`
          */
@@ -731,7 +732,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 }
             }
         }
-        
+
         return false;
     }
 
