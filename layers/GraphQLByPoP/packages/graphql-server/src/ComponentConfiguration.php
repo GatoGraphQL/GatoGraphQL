@@ -20,7 +20,6 @@ class ComponentConfiguration
     private static bool $enableProactiveFeedbackLogs = true;
     private static bool $enableNestedMutations = false;
     private static ?bool $enableGraphQLIntrospection = null;
-    private static bool $addGlobalFieldsToSchema = false;
     private static bool $exposeSelfFieldInSchema = false;
     private static bool $addFullSchemaFieldToSchema = false;
     private static bool $addVersionToSchemaFieldDescription = false;
@@ -180,24 +179,6 @@ class ComponentConfiguration
         $envVariable = Environment::ENABLE_GRAPHQL_INTROSPECTION;
         $selfProperty = &self::$enableGraphQLIntrospection;
         $defaultValue = null;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
-
-        // Initialize property from the environment/hook
-        self::maybeInitializeConfigurationValue(
-            $envVariable,
-            $selfProperty,
-            $defaultValue,
-            $callback
-        );
-        return $selfProperty;
-    }
-
-    public static function addGlobalFieldsToSchema(): bool
-    {
-        // Define properties
-        $envVariable = Environment::ADD_GLOBAL_FIELDS_TO_SCHEMA;
-        $selfProperty = &self::$addGlobalFieldsToSchema;
-        $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
