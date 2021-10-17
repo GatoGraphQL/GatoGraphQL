@@ -278,13 +278,22 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldArgNameTypeResolversCache)) {
             return $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey];
         }
+        
+        $fieldArgNameTypeResolvers = $this->getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        
+        /**
+         * If `DangerouslyDynamic` scalar is not enabled,
+         * remove all arguments which are based on this type
+         */
+        $fieldArgNameTypeResolvers = $this->maybeRemoveDangerouslyDynamicScalarInputTypeResolvers($fieldArgNameTypeResolvers);
+
         /**
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
          */
         $consolidatedFieldArgNameTypeResolvers = $this->hooksAPI->applyFilters(
             HookNames::OBJECT_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
-            $this->getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
+            $fieldArgNameTypeResolvers,
             $this,
             $objectTypeResolver,
             $fieldName,
