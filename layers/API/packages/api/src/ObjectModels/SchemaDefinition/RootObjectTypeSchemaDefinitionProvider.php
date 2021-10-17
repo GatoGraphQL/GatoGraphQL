@@ -21,21 +21,15 @@ class RootObjectTypeSchemaDefinitionProvider extends ObjectTypeSchemaDefinitionP
             $schemaDefinition[SchemaDefinition::DIRECTIVES],
             $globalSchemaDefinition[SchemaDefinition::DIRECTIVES]
         );
-        if (!ComponentConfiguration::addGlobalFieldsToSchema()) {
+        if (ComponentConfiguration::addGlobalFieldsToSchema()) {
             return array_merge(
                 $schemaDefinition,
                 [
-                    SchemaDefinition::GLOBAL_FIELDS => [],
-                    SchemaDefinition::GLOBAL_CONNECTIONS => [],
+                    SchemaDefinition::GLOBAL_FIELDS => $globalSchemaDefinition[SchemaDefinition::FIELDS],
+                    SchemaDefinition::GLOBAL_CONNECTIONS => $globalSchemaDefinition[SchemaDefinition::CONNECTIONS],
                 ]
             );
         }
-        return array_merge(
-            $schemaDefinition,
-            [
-                SchemaDefinition::GLOBAL_FIELDS => $globalSchemaDefinition[SchemaDefinition::FIELDS],
-                SchemaDefinition::GLOBAL_CONNECTIONS => $globalSchemaDefinition[SchemaDefinition::CONNECTIONS],
-            ]
-        );
+        return $schemaDefinition;
     }
 }
