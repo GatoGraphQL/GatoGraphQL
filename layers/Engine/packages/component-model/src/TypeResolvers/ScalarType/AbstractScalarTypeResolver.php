@@ -23,7 +23,16 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
          */
         if ($scalarValue instanceof stdClass) {
             return array_map(
-                fn (mixed $scalarValueArrayElem) => $this->serialize($scalarValueArrayElem),
+                function (mixed $scalarValueArrayElem): string|int|float|bool|array {
+                    if ($scalarValueArrayElem === null) {
+                        return null;
+                    }
+                    if (is_array($scalarValueArrayElem)) {
+                        // Convert from array to stdClass
+                        $scalarValueArrayElem = (object) $scalarValueArrayElem;
+                    }
+                    return $this->serialize($scalarValueArrayElem);
+                },
                 (array) $scalarValue
             );
         }
