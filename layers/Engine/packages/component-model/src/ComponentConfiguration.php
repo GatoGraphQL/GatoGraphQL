@@ -34,7 +34,7 @@ class ComponentConfiguration
     private static bool $coerceInputFromSingleValueToList = false;
     private static bool $enableUnionTypeImplementingInterfaceType = false;
     private static bool $enableFieldOrDirectiveArgumentDeprecations = false;
-    private static bool $enableUsingDangerouslyDynamicScalar = false;
+    private static bool $skipExposingDangerouslyDynamicScalarTypeInSchema = false;
 
     /**
      * Initialize component configuration
@@ -389,11 +389,11 @@ class ComponentConfiguration
      * field arguments and directive arguments which use this type will
      * automatically not be added to the schema.
      */
-    public static function enableUsingDangerouslyDynamicScalar(): bool
+    public static function skipExposingDangerouslyDynamicScalarTypeInSchema(): bool
     {
         // Define properties
-        $envVariable = Environment::ENABLE_USING_DANGEROUSLY_DYNAMIC_SCALAR;
-        $selfProperty = &self::$enableUsingDangerouslyDynamicScalar;
+        $envVariable = Environment::SKIP_EXPOSING_DANGEROUSLY_DYNAMIC_SCALAR_TYPE_IN_SCHEMA;
+        $selfProperty = &self::$skipExposingDangerouslyDynamicScalarTypeInSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

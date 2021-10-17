@@ -700,7 +700,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          * 1. its type is `DangerouslyDynamic`
          * 2. it has any mandatory argument of type `DangerouslyDynamic`
          */
-        if (!ComponentConfiguration::enableUsingDangerouslyDynamicScalar()) {
+        if (ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
             // 1. its type is `DangerouslyDynamic`
             $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
             if ($fieldTypeResolver === $this->dangerouslyDynamicScalarTypeResolver) {
@@ -733,7 +733,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
          * If disabled, then do not expose the directive args of this type
          */
-        if (!ComponentConfiguration::enableUsingDangerouslyDynamicScalar()) {
+        if (ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
             $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
             if ($consolidatedFieldArgNameTypeResolvers[$fieldArgName] === $this->dangerouslyDynamicScalarTypeResolver) {
                 return true;

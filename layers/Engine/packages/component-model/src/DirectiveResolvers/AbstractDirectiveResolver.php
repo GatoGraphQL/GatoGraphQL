@@ -1207,7 +1207,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * If disabled, then do not expose the directive if it
          * has any mandatory argument of type `DangerouslyDynamic`
          */
-        if (!ComponentConfiguration::enableUsingDangerouslyDynamicScalar()) {
+        if (ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
             $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
             $dangerouslyDynamicDirectiveArgNameTypeResolvers = array_filter(
                 $consolidatedDirectiveArgNameTypeResolvers,
@@ -1232,7 +1232,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
          * If disabled, then do not expose the directive args of this type
          */
-        if (!ComponentConfiguration::enableUsingDangerouslyDynamicScalar()) {
+        if (ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
             $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
             if ($consolidatedDirectiveArgNameTypeResolvers[$directiveArgName] === $this->dangerouslyDynamicScalarTypeResolver) {
                 return true;
