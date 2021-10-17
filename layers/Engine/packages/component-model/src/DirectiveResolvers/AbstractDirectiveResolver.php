@@ -686,13 +686,22 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if (array_key_exists($cacheKey, $this->consolidatedDirectiveArgNameTypeResolversCache)) {
             return $this->consolidatedDirectiveArgNameTypeResolversCache[$cacheKey];
         }
+
+        $directiveArgNameTypeResolvers = $this->getDirectiveArgNameTypeResolvers($relationalTypeResolver);
+
+        /**
+         * If `DangerouslyDynamic` scalar is not enabled,
+         * remove all arguments which are based on this type
+         */
+        $directiveArgNameTypeResolvers = $this->maybeRemoveDangerouslyDynamicScalarInputTypeResolvers($directiveArgNameTypeResolvers);
+
         /**
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
          */
         $consolidatedDirectiveArgNameTypeResolvers = $this->hooksAPI->applyFilters(
             HookNames::DIRECTIVE_ARG_NAME_TYPE_RESOLVERS,
-            $this->getDirectiveArgNameTypeResolvers($relationalTypeResolver),
+            $directiveArgNameTypeResolvers,
             $this,
             $relationalTypeResolver
         );
