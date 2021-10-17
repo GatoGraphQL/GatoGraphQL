@@ -810,7 +810,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * Consolidation of the schema directive arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
+    final public function getDirectiveArgsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         // Cache the result
         $cacheKey = $relationalTypeResolver::class;
@@ -1268,7 +1268,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 $schemaDefinition[SchemaDefinition::DEPRECATED] = true;
                 $schemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationMessage;
             }
-            if ($args = $this->getSchemaDirectiveArgs($relationalTypeResolver)) {
+            if ($args = $this->getDirectiveArgsSchemaDefinition($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::ARGS] = $args;
             }
             /**
