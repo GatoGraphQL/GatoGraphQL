@@ -4,14 +4,26 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Resolvers;
 
+use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait FieldOrDirectiveSchemaDefinitionResolverTrait
 {
+    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
+
+    #[Required]
+    public function autowireFieldOrDirectiveSchemaDefinitionResolverTrait(
+        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
+    ): void {
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+    }
+
     final public function getFieldOrDirectiveArgSchemaDefinition(
         string $argName,
         InputTypeResolverInterface $argInputTypeResolver,
@@ -113,5 +125,25 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
                 }
             }
         }
+    }
+
+    /**
+     * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+     * In particular, it does not need to validate if it is an array or not,
+     * as according to the applied WrappingType.
+     * 
+     * This behavior can be disabled. In this case, automatically remove
+     * all directive arguments that are based on this type
+     */
+    protected function maybeRemoveDangerouslyDynamicScalarInputTypeResolvers(array $fieldOrDirectiveArgNameTypeResolvers): array
+    {
+        if (!ComponentConfiguration::enableUsingDangerouslyDynamicScalar()) {
+            return array_filter(
+                $fieldOrDirectiveArgNameTypeResolvers,
+                fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver !== $this->dangerouslyDynamicScalarTypeResolver
+            );
+        }
+
+        return $fieldOrDirectiveArgNameTypeResolvers;
     }
 }

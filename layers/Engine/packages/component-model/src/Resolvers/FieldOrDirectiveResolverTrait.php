@@ -10,7 +10,6 @@ use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -314,25 +313,5 @@ trait FieldOrDirectiveResolverTrait
                 $deprecationItemDescription
             );
         }
-    }
-
-    /**
-     * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
-     * In particular, it does not need to validate if it is an array or not,
-     * as according to the applied WrappingType.
-     * 
-     * This behavior can be disabled. In this case, automatically remove
-     * all directive arguments that are based on this type
-     */
-    protected function maybeRemoveDangerouslyDynamicScalarInputTypeResolvers(array $fieldOrDirectiveArgNameTypeResolvers): array
-    {
-        if (!ComponentConfiguration::enableUsingDangerouslyDynamicScalar()) {
-            return array_filter(
-                $fieldOrDirectiveArgNameTypeResolvers,
-                fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver !== $this->dangerouslyDynamicScalarTypeResolver
-            );
-        }
-
-        return $fieldOrDirectiveArgNameTypeResolvers;
     }
 }
