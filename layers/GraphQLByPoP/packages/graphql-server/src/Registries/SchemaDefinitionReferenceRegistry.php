@@ -219,7 +219,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                     SchemaDefinition::GLOBAL_FIELDS,
                     $fieldName
                 ];
-                // $this->introduceSDLNotationToFieldSchemaDefinition($itemPath);
                 if ($addVersionToSchemaFieldDescription) {
                     $this->addVersionToSchemaFieldDescription($itemPath);
                 }
@@ -232,7 +231,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                     SchemaDefinition::GLOBAL_CONNECTIONS,
                     $connectionName
                 ];
-                // $this->introduceSDLNotationToFieldSchemaDefinition($itemPath);
                 if ($addVersionToSchemaFieldDescription) {
                     $this->addVersionToSchemaFieldDescription($itemPath);
                 }
@@ -284,7 +282,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                         SchemaDefinition::FIELDS,
                         $fieldName
                     ];
-                    // $this->introduceSDLNotationToFieldSchemaDefinition($itemPath);
                     if ($addVersionToSchemaFieldDescription) {
                         $this->addVersionToSchemaFieldDescription($itemPath);
                     }
@@ -300,7 +297,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                         SchemaDefinition::CONNECTIONS,
                         $connectionName
                     ];
-                    // $this->introduceSDLNotationToFieldSchemaDefinition($itemPath);
                     if ($addVersionToSchemaFieldDescription) {
                         $this->addVersionToSchemaFieldDescription($itemPath);
                     }
