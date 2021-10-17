@@ -23,7 +23,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
          */
         if ($scalarValue instanceof stdClass) {
             return array_map(
-                function (mixed $scalarValueArrayElem): string|int|float|bool|array {
+                function (mixed $scalarValueArrayElem): string|int|float|bool|array|null {
                     if ($scalarValueArrayElem === null) {
                         return null;
                     }
