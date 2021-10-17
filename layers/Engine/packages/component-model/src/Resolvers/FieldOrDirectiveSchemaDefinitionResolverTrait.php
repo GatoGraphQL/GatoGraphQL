@@ -161,7 +161,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
             $fieldOrDirectiveArgsSchemaDefinition,
             fn (array $fieldOrDirectiveArgSchemaDefinition) => 
                 ($fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::MANDATORY] ?? false)
-                && $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER] === $this->$this->dangerouslyDynamicScalarTypeResolver
+                && $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER] === $this->dangerouslyDynamicScalarTypeResolver
         ) !== [];
     }
 }
