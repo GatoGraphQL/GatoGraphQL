@@ -34,6 +34,7 @@ class ComponentConfiguration
     private static bool $coerceInputFromSingleValueToList = false;
     private static bool $enableUnionTypeImplementingInterfaceType = false;
     private static bool $enableFieldOrDirectiveArgumentDeprecations = false;
+    private static bool $skipExposingDangerouslyDynamicScalarTypeInSchema = false;
 
     /**
      * Initialize component configuration
@@ -360,6 +361,39 @@ class ComponentConfiguration
         // Define properties
         $envVariable = Environment::ENABLE_FIELD_OR_DIRECTIVE_ARGUMENT_DEPRECATIONS;
         $selfProperty = &self::$enableFieldOrDirectiveArgumentDeprecations;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    /**
+     * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+     * In particular, it does not need to validate if it is an array or not,
+     * as according to the applied WrappingType.
+     *
+     * This behavior is not compatible with the GraphQL spec!
+     *
+     * For instance, type `DangerouslyDynamic` could have values
+     * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
+     * these values by types `String` and `[String]`.
+     *
+     * This config enables to disable this behavior. In this case, all fields,
+     * field arguments and directive arguments which use this type will
+     * automatically not be added to the schema.
+     */
+    public static function skipExposingDangerouslyDynamicScalarTypeInSchema(): bool
+    {
+        // Define properties
+        $envVariable = Environment::SKIP_EXPOSING_DANGEROUSLY_DYNAMIC_SCALAR_TYPE_IN_SCHEMA;
+        $selfProperty = &self::$skipExposingDangerouslyDynamicScalarTypeInSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

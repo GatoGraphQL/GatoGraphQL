@@ -25,6 +25,7 @@ use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
@@ -63,6 +64,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected SemverHelperServiceInterface $semverHelperService;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
+
     /**
      * @var array<string, mixed>
      */
@@ -112,6 +115,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         FeedbackMessageStoreInterface $feedbackMessageStore,
         SemverHelperServiceInterface $semverHelperService,
         StringScalarTypeResolver $stringScalarTypeResolver,
+        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
     ): void {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
@@ -120,6 +124,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->semverHelperService = $semverHelperService;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
     }
 
     final public function getClassesToAttachTo(): array
@@ -686,13 +691,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if (array_key_exists($cacheKey, $this->consolidatedDirectiveArgNameTypeResolversCache)) {
             return $this->consolidatedDirectiveArgNameTypeResolversCache[$cacheKey];
         }
+
+        $directiveArgNameTypeResolvers = $this->getDirectiveArgNameTypeResolvers($relationalTypeResolver);
+
         /**
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
          */
         $consolidatedDirectiveArgNameTypeResolvers = $this->hooksAPI->applyFilters(
             HookNames::DIRECTIVE_ARG_NAME_TYPE_RESOLVERS,
-            $this->getDirectiveArgNameTypeResolvers($relationalTypeResolver),
+            $directiveArgNameTypeResolvers,
             $this,
             $relationalTypeResolver
         );
@@ -802,7 +810,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * Consolidation of the schema directive arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): array
+    final public function getDirectiveArgsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         // Cache the result
         $cacheKey = $relationalTypeResolver::class;
@@ -810,8 +818,23 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             return $this->schemaDirectiveArgsCache[$cacheKey];
         }
         $schemaDirectiveArgs = [];
-        $schemaDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
-        foreach ($schemaDirectiveArgNameTypeResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
+        $skipExposingDangerouslyDynamicScalarTypeInSchema = ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema();
+        $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
+        foreach ($consolidatedDirectiveArgNameTypeResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
+            /**
+             * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+             * If disabled, then do not expose the directive args of this type
+             */
+            if (
+                $skipExposingDangerouslyDynamicScalarTypeInSchema
+                && $directiveArgInputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
+            ) {
+                continue;
+            }
+            if ($this->skipExposingDirectiveArgInSchema($relationalTypeResolver, $directiveArgName)) {
+                continue;
+            }
+
             $schemaDirectiveArgs[$directiveArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
                 $directiveArgName,
                 $directiveArgInputTypeResolver,
@@ -1188,6 +1211,35 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     public function skipExposingDirectiveInSchema(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
+        /**
+         * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+         * In particular, it does not need to validate if it is an array or not,
+         * as according to the applied WrappingType.
+         *
+         * If disabled, then do not expose the directive if it
+         * has any mandatory argument of type `DangerouslyDynamic`
+         */
+        if (ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+            $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
+            $dangerouslyDynamicDirectiveArgNameTypeResolvers = array_filter(
+                $consolidatedDirectiveArgNameTypeResolvers,
+                fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
+            );
+            foreach (array_keys($dangerouslyDynamicDirectiveArgNameTypeResolvers) as $directiveArgName) {
+                $consolidatedDirectiveArgTypeModifiers = $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
+                if ($consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::MANDATORY) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Directives args may not be directly visible in the schema
+     */
+    public function skipExposingDirectiveArgInSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): bool
+    {
         return false;
     }
 
@@ -1218,7 +1270,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 $schemaDefinition[SchemaDefinition::DEPRECATED] = true;
                 $schemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationMessage;
             }
-            if ($args = $this->getSchemaDirectiveArgs($relationalTypeResolver)) {
+            if ($args = $this->getDirectiveArgsSchemaDefinition($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::ARGS] = $args;
             }
             /**

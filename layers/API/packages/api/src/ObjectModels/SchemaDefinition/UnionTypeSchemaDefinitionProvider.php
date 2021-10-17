@@ -58,6 +58,10 @@ class UnionTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProv
         $schemaDefinition[SchemaDefinition::DIRECTIVES] = [];
         $schemaDirectiveResolvers = $this->unionTypeResolver->getSchemaDirectiveResolvers(false);
         foreach ($schemaDirectiveResolvers as $directiveName => $directiveResolver) {
+            // Directives may not be directly visible in the schema
+            if ($directiveResolver->skipExposingDirectiveInSchema($this->unionTypeResolver)) {
+                continue;
+            }
             $schemaDefinition[SchemaDefinition::DIRECTIVES][] = $directiveName;
             $this->accessedTypeAndDirectiveResolvers[$directiveResolver::class] = $directiveResolver;
             $this->accessedDirectiveResolverClassRelationalTypeResolvers[$directiveResolver::class] = $this->unionTypeResolver;

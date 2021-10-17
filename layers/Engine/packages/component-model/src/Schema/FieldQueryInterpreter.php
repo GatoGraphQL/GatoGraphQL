@@ -480,6 +480,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                                     $errorMessage
                                 ),
                         ];
+                        continue;
                     } else {
                         $schemaWarnings[] = [
                             Tokens::PATH => [$fieldOrDirective],
@@ -966,6 +967,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     ): array {
         // Cast all argument values
         foreach ($fieldOrDirectiveArgs as $argName => $argValue) {
+            /**
+             * If the arg doesn't exist, there's already a warning about it missing
+             * in the schema (not an error, in that case it's already not added)
+             */
+            if (!array_key_exists($argName, $fieldOrDirectiveArgSchemaDefinition)) {
+                continue;
+            }
+
             // There are 2 possibilities for casting:
             // 1. $forSchema = true: Cast all items except fields (eg: hasComments()) or arrays with fields (eg: [hasComments()])
             // 2. $forSchema = false: Should be cast only fields, however by now we can't tell which are fields and which are not, since fields have already been resolved to their value. Hence, cast everything (fieldArgValues that failed at the schema level will not be provided in the input array, so won't be validated twice)

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\ObjectModels\SchemaDefinition;
 
+use PoP\API\ComponentConfiguration;
 use PoP\API\Schema\SchemaDefinition;
 
 /**
@@ -15,6 +16,15 @@ class RootObjectTypeSchemaDefinitionProvider extends ObjectTypeSchemaDefinitionP
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();
+        if (!ComponentConfiguration::addGlobalFieldsToSchema()) {
+            return array_merge(
+                $schemaDefinition,
+                [
+                    SchemaDefinition::GLOBAL_FIELDS => [],
+                    SchemaDefinition::GLOBAL_CONNECTIONS => [],
+                ]
+            );
+        }
         $globalSchemaDefinition = $this->getObjectTypeSchemaDefinition(true);
         $schemaDefinition[SchemaDefinition::DIRECTIVES] = array_merge(
             $schemaDefinition[SchemaDefinition::DIRECTIVES],

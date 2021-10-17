@@ -17,6 +17,7 @@ class ComponentConfiguration
     private static bool $enableEmbeddableFields = false;
     private static bool $enableMutations = true;
     private static bool $overrideRequestURI = false;
+    private static bool $addGlobalFieldsToSchema = false;
 
     public static function useSchemaDefinitionCache(): bool
     {
@@ -105,6 +106,24 @@ class ComponentConfiguration
         // Define properties
         $envVariable = Environment::OVERRIDE_REQUEST_URI;
         $selfProperty = &self::$overrideRequestURI;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    public static function addGlobalFieldsToSchema(): bool
+    {
+        // Define properties
+        $envVariable = Environment::ADD_GLOBAL_FIELDS_TO_SCHEMA;
+        $selfProperty = &self::$addGlobalFieldsToSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

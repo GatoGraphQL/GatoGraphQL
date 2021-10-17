@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\CheckpointSets\CheckpointSets;
+use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\ErrorHandling\Error;
@@ -30,6 +31,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -73,6 +75,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
     protected EngineInterface $engine;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
 
     #[Required]
     final public function autowireAbstractObjectTypeFieldResolver(
@@ -83,6 +86,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         StringScalarTypeResolver $stringScalarTypeResolver,
+        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
     ): void {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
         $this->nameResolver = $nameResolver;
@@ -91,6 +95,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $this->schemaDefinitionService = $schemaDefinitionService;
         $this->engine = $engine;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
     }
 
     final public function getClassesToAttachTo(): array
@@ -278,13 +283,16 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldArgNameTypeResolversCache)) {
             return $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey];
         }
+
+        $fieldArgNameTypeResolvers = $this->getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+
         /**
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
          */
         $consolidatedFieldArgNameTypeResolvers = $this->hooksAPI->applyFilters(
             HookNames::OBJECT_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
-            $this->getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
+            $fieldArgNameTypeResolvers,
             $this,
             $objectTypeResolver,
             $fieldName,
@@ -407,8 +415,23 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $this->schemaFieldArgsCache[$cacheKey];
         }
         $schemaFieldArgs = [];
+        $skipExposingDangerouslyDynamicScalarTypeInSchema = ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema();
         $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         foreach ($consolidatedFieldArgNameTypeResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
+            /**
+             * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+             * If disabled, then do not expose the directive args of this type
+             */
+            if (
+                $skipExposingDangerouslyDynamicScalarTypeInSchema
+                && $fieldArgInputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
+            ) {
+                continue;
+            }
+            if ($this->skipExposingFieldArgInSchema($objectTypeResolver, $fieldName, $fieldArgName)) {
+                continue;
+            }
+
             $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
                 $fieldArgName,
                 $fieldArgInputTypeResolver,
@@ -678,6 +701,45 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * be exposed to the user (eg: "accessControlLists")
      */
     public function skipExposingFieldInSchema(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
+    {
+        /**
+         * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+         * In particular, it does not need to validate if it is an array or not,
+         * as according to the applied WrappingType.
+         *
+         * If disabled, then do not expose the field if either:
+         *
+         * 1. its type is `DangerouslyDynamic`
+         * 2. it has any mandatory argument of type `DangerouslyDynamic`
+         */
+        if (ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+            // 1. its type is `DangerouslyDynamic`
+            $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
+            if ($fieldTypeResolver === $this->dangerouslyDynamicScalarTypeResolver) {
+                return true;
+            }
+
+            // 2. it has any mandatory argument of type `DangerouslyDynamic`
+            $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+            $dangerouslyDynamicFieldArgNameTypeResolvers = array_filter(
+                $consolidatedFieldArgNameTypeResolvers,
+                fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
+            );
+            foreach (array_keys($dangerouslyDynamicFieldArgNameTypeResolvers) as $fieldArgName) {
+                $consolidatedFieldArgTypeModifiers = $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
+                if ($consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::MANDATORY) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Field args may not be directly visible in the schema
+     */
+    public function skipExposingFieldArgInSchema(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): bool
     {
         return false;
     }
