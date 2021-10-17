@@ -319,10 +319,10 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function skipAddingToSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): bool
+    public function skipExposingDirectiveInSchema(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->skipAddingToSchemaDefinition($relationalTypeResolver);
+        return $aliasedDirectiveResolver->skipExposingDirectiveInSchema($relationalTypeResolver);
     }
 
     /**
