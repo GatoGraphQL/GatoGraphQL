@@ -694,25 +694,27 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          * 
          * If disabled, then do not expose the field if either:
          * 
-         * - its type is `DangerouslyDynamic`
-         * - it has any mandatory argument of type `DangerouslyDynamic`
+         * 1. its type is `DangerouslyDynamic`
+         * 2. it has any mandatory argument of type `DangerouslyDynamic`
          */
         if (!ComponentConfiguration::enableUsingDangerouslyDynamicScalar()) {
+            // 1. its type is `DangerouslyDynamic`
             $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
             if ($fieldTypeResolver === $this->dangerouslyDynamicScalarTypeResolver) {
                 return true;
             }
 
+            // 2. it has any mandatory argument of type `DangerouslyDynamic`
             $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
-            foreach ($consolidatedFieldArgNameTypeResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
-                if ($fieldArgInputTypeResolver !== $this->dangerouslyDynamicScalarTypeResolver) {
-                    continue;
-                }
+            $dangerouslyDynamicFieldArgNameTypeResolvers = array_filter(
+                $consolidatedFieldArgNameTypeResolvers,
+                fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
+            );
+            foreach (array_keys($dangerouslyDynamicFieldArgNameTypeResolvers) as $fieldArgName) {
                 $consolidatedFieldArgTypeModifiers = $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
-                if (!($consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::MANDATORY)) {
-                    continue;
+                if ($consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::MANDATORY) {
+                    return true;
                 }
-                return true;
             }
         }
         
