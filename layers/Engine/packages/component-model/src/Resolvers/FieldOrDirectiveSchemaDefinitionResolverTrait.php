@@ -135,26 +135,6 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
      * This behavior can be disabled. In this case, automatically remove
      * all directive arguments that are based on this type
      */
-    protected function maybeRemoveDangerouslyDynamicScalarInputTypeResolvers(array $fieldOrDirectiveArgNameTypeResolvers): array
-    {
-        if (!ComponentConfiguration::enableUsingDangerouslyDynamicScalar()) {
-            return array_filter(
-                $fieldOrDirectiveArgNameTypeResolvers,
-                fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver !== $this->dangerouslyDynamicScalarTypeResolver
-            );
-        }
-
-        return $fieldOrDirectiveArgNameTypeResolvers;
-    }
-
-    /**
-     * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
-     * In particular, it does not need to validate if it is an array or not,
-     * as according to the applied WrappingType.
-     * 
-     * This behavior can be disabled. In this case, automatically remove
-     * all directive arguments that are based on this type
-     */
     protected function hasDangerouslyDynamicScalarTypeResolverAsMandatoryInput(array &$fieldOrDirectiveArgsSchemaDefinition): bool
     {
         return array_filter(

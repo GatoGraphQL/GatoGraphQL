@@ -287,12 +287,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $fieldArgNameTypeResolvers = $this->getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         
         /**
-         * If `DangerouslyDynamic` scalar is not enabled,
-         * remove all arguments which are based on this type
-         */
-        $fieldArgNameTypeResolvers = $this->maybeRemoveDangerouslyDynamicScalarInputTypeResolvers($fieldArgNameTypeResolvers);
-
-        /**
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
          */

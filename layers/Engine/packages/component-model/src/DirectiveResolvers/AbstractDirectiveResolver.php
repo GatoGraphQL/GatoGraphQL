@@ -64,6 +64,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected SemverHelperServiceInterface $semverHelperService;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
     
     /**
      * @var array<string, mixed>
@@ -114,6 +115,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         FeedbackMessageStoreInterface $feedbackMessageStore,
         SemverHelperServiceInterface $semverHelperService,
         StringScalarTypeResolver $stringScalarTypeResolver,
+        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
     ): void {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
@@ -122,6 +124,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->semverHelperService = $semverHelperService;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
     }
 
     final public function getClassesToAttachTo(): array
@@ -692,12 +695,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $directiveArgNameTypeResolvers = $this->getDirectiveArgNameTypeResolvers($relationalTypeResolver);
 
         /**
-         * If `DangerouslyDynamic` scalar is not enabled,
-         * remove all arguments which are based on this type
-         */
-        $directiveArgNameTypeResolvers = $this->maybeRemoveDangerouslyDynamicScalarInputTypeResolvers($directiveArgNameTypeResolvers);
-
-        /**
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
          */
@@ -1208,6 +1205,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * has any mandatory argument of type `DangerouslyDynamic`
          */
         if (!ComponentConfiguration::enableUsingDangerouslyDynamicScalar()) {
+            // $schemaDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
+            // foreach ($schemaDirectiveArgNameTypeResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
+            //     if ($directiveArgInputTypeResolver !== $this->dangerouslyDynamicScalarTypeResolver) {
+            //         continue;
+            //     }
+            // }
             $directiveArgsSchemaDefinition = $this->getSchemaDirectiveArgs($relationalTypeResolver);
             if ($this->hasDangerouslyDynamicScalarTypeResolverAsMandatoryInput($directiveArgsSchemaDefinition)) {
                 return true;
