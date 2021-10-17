@@ -177,10 +177,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
 
         // Remove unneeded data
-        if (!APIComponentConfiguration::exposeGlobalFieldsInSchema()) {
-            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_FIELDS]);
-            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_CONNECTIONS]);
-        }
         if (!ComponentConfiguration::exposeSelfFieldInSchema()) {
             /**
              * Check if to remove the "self" field everywhere, or if to keep it just for the Root type
