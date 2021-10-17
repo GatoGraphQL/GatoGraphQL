@@ -6,6 +6,7 @@ namespace PoP\CacheControl\DirectiveResolvers;
 
 use PoP\CacheControl\ComponentConfiguration;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 final class CacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
