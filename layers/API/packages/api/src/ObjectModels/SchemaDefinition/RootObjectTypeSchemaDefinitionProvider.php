@@ -16,6 +16,11 @@ class RootObjectTypeSchemaDefinitionProvider extends ObjectTypeSchemaDefinitionP
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();
+        $globalSchemaDefinition = $this->getObjectTypeSchemaDefinition(true);
+        $schemaDefinition[SchemaDefinition::DIRECTIVES] = array_merge(
+            $schemaDefinition[SchemaDefinition::DIRECTIVES],
+            $globalSchemaDefinition[SchemaDefinition::DIRECTIVES]
+        );
         if (!ComponentConfiguration::addGlobalFieldsToSchema()) {
             return array_merge(
                 $schemaDefinition,
@@ -25,11 +30,6 @@ class RootObjectTypeSchemaDefinitionProvider extends ObjectTypeSchemaDefinitionP
                 ]
             );
         }
-        $globalSchemaDefinition = $this->getObjectTypeSchemaDefinition(true);
-        $schemaDefinition[SchemaDefinition::DIRECTIVES] = array_merge(
-            $schemaDefinition[SchemaDefinition::DIRECTIVES],
-            $globalSchemaDefinition[SchemaDefinition::DIRECTIVES]
-        );
         return array_merge(
             $schemaDefinition,
             [
