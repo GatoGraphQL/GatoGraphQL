@@ -109,14 +109,6 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
         return $errors;
     }
 
-    // protected function addDirectiveSchemaDefinition(array &$schemaDefinition): void
-    // {
-    //     // Further add for which providers it works
-    //     $maxAge = $this->getMaxAge();
-    //     if (!is_null($maxAge)) {
-    //         $schemaDefinition[SchemaDefinition::MAX_AGE] = $maxAge;
-    //     }
-    // }
     /**
      * Do not allow dynamic fields, or it may throw an exception
      * Eg: <cacheControl(maxAge:id())>

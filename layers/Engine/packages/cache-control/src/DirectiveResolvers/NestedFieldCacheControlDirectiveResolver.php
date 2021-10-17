@@ -10,20 +10,6 @@ use PoP\FieldQuery\QueryHelpers;
 
 class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver
 {
-    // public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
-    // {
-    //     return sprintf(
-    //         $this->translationAPI->__('%1$s %2$s'),
-    //         $this->translationAPI->__('Helper directive to calculate the Cache Control header when the field composes other fields.', 'cache-control'),
-    //         parent::getDirectiveDescription($relationalTypeResolver)
-    //     );
-    // }
-
-    // protected function addDirectiveSchemaDefinition(array &$schemaDefinition): void
-    // {
-    //     $schemaDefinition[SchemaDefinition::MAX_AGE] = $this->translationAPI->__('The minimum max-age calculated among the affected fields and all their composed fields.', 'cache-control');
-    // }
-
     /**
      * It must execute before anyone else!
      */
