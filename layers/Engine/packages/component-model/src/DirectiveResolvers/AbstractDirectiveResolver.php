@@ -818,8 +818,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             return $this->schemaDirectiveArgsCache[$cacheKey];
         }
         $schemaDirectiveArgs = [];
-        $schemaDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
-        foreach ($schemaDirectiveArgNameTypeResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
+        $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
+        foreach ($consolidatedDirectiveArgNameTypeResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
+            if ($this->skipExposingDirectiveArgInSchema($relationalTypeResolver, $directiveArgName)) {
+                continue;
+            }
             $schemaDirectiveArgs[$directiveArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
                 $directiveArgName,
                 $directiveArgInputTypeResolver,
@@ -1215,6 +1218,24 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 if ($consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::MANDATORY) {
                     return true;
                 }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Directives args may not be directly visible in the schema
+     */
+    public function skipExposingDirectiveArgInSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): bool
+    {
+        /**
+         * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+         * If disabled, then do not expose the directive args of this type
+         */
+        if (!ComponentConfiguration::enableUsingDangerouslyDynamicScalar()) {
+            $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
+            if ($consolidatedDirectiveArgNameTypeResolvers[$directiveArgName] === $this->dangerouslyDynamicScalarTypeResolver) {
+                return true;
             }
         }
         return false;
