@@ -122,7 +122,7 @@ class ComponentConfiguration
     public static function addGlobalFieldsToSchema(): bool
     {
         // Define properties
-        $envVariable = Environment::ADD_GLOBAL_FIELDS_TO_SCHEMA;
+        $envVariable = Environment::EXPOSE_GLOBAL_FIELDS_IN_SCHEMA;
         $selfProperty = &self::$addGlobalFieldsToSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];

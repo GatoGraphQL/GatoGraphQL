@@ -11,7 +11,7 @@ class Environment
     public const ENABLE_EMBEDDABLE_FIELDS = 'ENABLE_EMBEDDABLE_FIELDS';
     public const ENABLE_MUTATIONS = 'ENABLE_MUTATIONS';
     public const OVERRIDE_REQUEST_URI = 'OVERRIDE_REQUEST_URI';
-    public const ADD_GLOBAL_FIELDS_TO_SCHEMA = 'ADD_GLOBAL_FIELDS_TO_SCHEMA';
+    public const EXPOSE_GLOBAL_FIELDS_IN_SCHEMA = 'EXPOSE_GLOBAL_FIELDS_IN_SCHEMA';
 
     public static function disableAPI(): bool
     {
