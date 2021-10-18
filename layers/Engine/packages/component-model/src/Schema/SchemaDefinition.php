@@ -26,6 +26,7 @@ class SchemaDefinition
     public const VALUE = 'value';
     public const DEFAULT_VALUE = 'defaultValue';
     public const ARGS = 'args';
+    public const EXTENSIONS = 'extensions';
     public const ORDERED_ARGS_ENABLED = 'orderedArgsEnabled';
     public const INTERFACES = 'interfaces';
     public const FIELDS = 'fields';
