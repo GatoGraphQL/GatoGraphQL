@@ -41,14 +41,18 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
     {
         $schemaDefinition = parent::getSchemaDefinition();
 
-        // Initialize it here, but it will be filled in SchemaDefinitionService
-        $schemaDefinition[SchemaDefinition::POSSIBLE_TYPES] = [];
-
+        $this->addPossibleTypeSchemaDefinitions($schemaDefinition);
         $this->addDirectiveSchemaDefinitions($schemaDefinition, false);
         $this->addFieldSchemaDefinitions($schemaDefinition, false);
         $this->addInterfaceSchemaDefinitions($schemaDefinition);
 
         return $schemaDefinition;
+    }
+
+    final protected function addPossibleTypeSchemaDefinitions(array &$schemaDefinition): void
+    {
+        // Initialize it here, but it will be filled in SchemaDefinitionService
+        $schemaDefinition[SchemaDefinition::POSSIBLE_TYPES] = [];
     }
 
     final protected function addDirectiveSchemaDefinitions(array &$schemaDefinition, bool $useGlobal): void
