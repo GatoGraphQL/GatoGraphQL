@@ -9,21 +9,23 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\NonNullType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinitionReferenceObjectInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\TypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\WrappingTypeInterface;
-use GraphQLByPoP\GraphQLServer\ObjectModels\WrappingTypeOrSchemaDefinitionReferenceObjectInterface;
 use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
-use GraphQLByPoP\GraphQLServer\Syntax\SyntaxHelpers;
+use GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxServiceInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
+    protected GraphQLSyntaxServiceInterface $graphQLSyntaxService;
 
     #[Required]
     final public function autowireSchemaDefinitionReferenceTypeDataLoader(
         SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
+        GraphQLSyntaxServiceInterface $graphQLSyntaxService,
     ): void {
         $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
+        $this->graphQLSyntaxService = $graphQLSyntaxService;
     }
 
     /**
@@ -42,19 +44,19 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
     protected function getWrappingTypeOrSchemaDefinitionReferenceObject(string $typeID): WrappingTypeInterface | SchemaDefinitionReferenceObjectInterface
     {
         // Check if the type is non-null
-        if (SyntaxHelpers::isNonNullWrappingType($typeID)) {
+        if ($this->graphQLSyntaxService->isNonNullWrappingType($typeID)) {
             /** @var TypeInterface */
             $wrappedType = $this->getWrappingTypeOrSchemaDefinitionReferenceObject(
-                SyntaxHelpers::extractWrappedTypeFromNonNullWrappingType($typeID)
+                $this->graphQLSyntaxService->extractWrappedTypeFromNonNullWrappingType($typeID)
             );
             return new NonNullType($wrappedType);
         }
 
         // Check if it is an array
-        if (SyntaxHelpers::isListWrappingType($typeID)) {
+        if ($this->graphQLSyntaxService->isListWrappingType($typeID)) {
             /** @var TypeInterface */
             $wrappedType = $this->getWrappingTypeOrSchemaDefinitionReferenceObject(
-                SyntaxHelpers::extractWrappedTypeFromListWrappingType($typeID)
+                $this->graphQLSyntaxService->extractWrappedTypeFromListWrappingType($typeID)
             );
             return new ListType($wrappedType);
         }
