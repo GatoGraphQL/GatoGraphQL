@@ -143,16 +143,17 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 }
                 return $pathURL;
             // These are all properties of MenuItem
-            case 'label':
-            case 'title':
-            case 'url':
-            case 'classes':
-            case 'target':
-            case 'description':
-            case 'objectID':
-            case 'parentID':
-            case 'linkRelationship':
-                return $menuItem->$fieldName;
+            // Commented out since this is the default FieldResolver's response
+            // case 'label':
+            // case 'title':
+            // case 'url':
+            // case 'classes':
+            // case 'target':
+            // case 'description':
+            // case 'objectID':
+            // case 'parentID':
+            // case 'linkRelationship':
+            //     return $menuItem->$fieldName;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
