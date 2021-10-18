@@ -14,6 +14,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
@@ -22,6 +23,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected InputValueObjectTypeResolver $inputValueObjectTypeResolver;
     protected DirectiveLocationEnumTypeResolver $directiveLocationEnumTypeResolver;
+    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
 
     #[Required]
     final public function autowireDirectiveObjectTypeFieldResolver(
@@ -29,11 +31,13 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         InputValueObjectTypeResolver $inputValueObjectTypeResolver,
         DirectiveLocationEnumTypeResolver $directiveLocationEnumTypeResolver,
+        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
         $this->directiveLocationEnumTypeResolver = $directiveLocationEnumTypeResolver;
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -51,6 +55,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'args',
             'locations',
             'isRepeatable',
+            'extensions',
         ];
     }
 
@@ -62,6 +67,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'isRepeatable' => $this->booleanScalarTypeResolver,
             'args' => $this->inputValueObjectTypeResolver,
             'locations' => $this->directiveLocationEnumTypeResolver,
+            'extensions' => $this->jsonObjectScalarTypeResolver,
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -70,7 +76,8 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'name',
-            'isRepeatable'
+            'isRepeatable',
+            'extensions'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'locations',
             'args'
@@ -88,6 +95,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'args' => $this->translationAPI->__('Directive\'s arguments', 'graphql-server'),
             'locations' => $this->translationAPI->__('The locations where the directive may be placed', 'graphql-server'),
             'isRepeatable' => $this->translationAPI->__('Can the directive be executed more than once in the same field?', 'graphql-server'),
+            'extensions' => $this->translationAPI->__('Custom metadata added to the directive (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -120,6 +128,8 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $directive->getLocations();
             case 'isRepeatable':
                 return $directive->isRepeatable();
+            case 'extensions':
+                return (object) $directive->getExtensions();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

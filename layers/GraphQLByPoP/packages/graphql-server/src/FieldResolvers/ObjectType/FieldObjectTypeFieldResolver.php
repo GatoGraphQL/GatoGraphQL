@@ -134,7 +134,7 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'deprecationReason':
                 return $field->getDeprecationMessage();
             case 'extensions':
-                return $field->getExtensions();
+                return (object) $field->getExtensions();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

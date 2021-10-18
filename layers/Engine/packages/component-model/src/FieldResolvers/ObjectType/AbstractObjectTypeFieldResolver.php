@@ -781,6 +781,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $schemaDefinition[SchemaDefinition::FIELD_IS_MUTATION] = true;
         }
 
+        if ($extensions = $this->getFieldSchemaDefinitionExtensions($objectTypeResolver, $fieldName, $fieldArgs)) {
+            $schemaDefinition[SchemaDefinition::EXTENSIONS] = $extensions;
+        }
+
         // Hook to override the values, eg: by the Field Deprecation List
         return $this->triggerHookToOverrideSchemaDefinition(
             $schemaDefinition,
@@ -788,6 +792,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $fieldName,
             $fieldArgs
         );
+    }
+
+    public function getFieldSchemaDefinitionExtensions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
+    {
+        return [];
     }
 
     protected function getInterfaceSchemaDefinitionResolverAdapterClass(): string

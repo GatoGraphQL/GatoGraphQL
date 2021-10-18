@@ -71,4 +71,13 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
     {
         return $this->schemaDefinition[SchemaDefinition::DIRECTIVE_IS_REPEATABLE];
     }
+
+    public function getExtensions(): array
+    {
+        $extensions = $this->schemaDefinition[SchemaDefinition::EXTENSIONS] ?? [];
+        if ($version = $this->schemaDefinition[SchemaDefinition::VERSION] ?? null) {
+            $extensions[SchemaDefinition::VERSION] = $version;
+        }
+        return $extensions;
+    }
 }
