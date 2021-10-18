@@ -198,7 +198,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
 
         // Maybe append the field/directive's version to its description, since this field is missing in GraphQL
-        $addVersionToSchemaFieldDescription = ComponentConfiguration::addVersionToSchemaFieldDescription();
+        $addVersionToGraphQLSchemaFieldDescription = ComponentConfiguration::addVersionToGraphQLSchemaFieldDescription();
         // When doing nested mutations, differentiate mutating fields by adding label "[Mutation]" in the description
         $addMutationLabelToSchemaFieldDescription = $enableNestedMutations;
         // Maybe add param "nestedUnder" on the schema for each directive
@@ -207,7 +207,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         // Modify the schema definitions
         // 1. Global fields and directives
         if (
-            ($addVersionToSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription)
+            ($addVersionToGraphQLSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription)
             && ComponentConfiguration::exposeGlobalFieldsInGraphQLSchema()
         ) {
             foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_FIELDS]) as $fieldName) {
@@ -215,8 +215,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                     SchemaDefinition::GLOBAL_FIELDS,
                     $fieldName
                 ];
-                if ($addVersionToSchemaFieldDescription) {
-                    $this->addVersionToSchemaFieldDescription($itemPath);
+                if ($addVersionToGraphQLSchemaFieldDescription) {
+                    $this->addVersionToGraphQLSchemaFieldDescription($itemPath);
                 }
                 if ($addMutationLabelToSchemaFieldDescription) {
                     $this->addMutationLabelToSchemaFieldDescription($itemPath);
@@ -250,13 +250,13 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             if ($enableComposableDirectives) {
                 $this->addNestedDirectiveDataToSchemaDirectiveArgs($itemPath);
             }
-            if ($addVersionToSchemaFieldDescription) {
-                $this->addVersionToSchemaFieldDescription($itemPath);
+            if ($addVersionToGraphQLSchemaFieldDescription) {
+                $this->addVersionToGraphQLSchemaFieldDescription($itemPath);
             }
             $this->maybeAddTypeToSchemaDirectiveDescription($itemPath);
         }
         // 2. Each type's fields and directives
-        if ($addVersionToSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription/* || $enableComposableDirectives*/) {
+        if ($addVersionToGraphQLSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription/* || $enableComposableDirectives*/) {
             foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT] as $typeName => $typeSchemaDefinition) {
                 foreach (array_keys($typeSchemaDefinition[SchemaDefinition::FIELDS]) as $fieldName) {
                     $itemPath = [
@@ -266,8 +266,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                         SchemaDefinition::FIELDS,
                         $fieldName
                     ];
-                    if ($addVersionToSchemaFieldDescription) {
-                        $this->addVersionToSchemaFieldDescription($itemPath);
+                    if ($addVersionToGraphQLSchemaFieldDescription) {
+                        $this->addVersionToGraphQLSchemaFieldDescription($itemPath);
                     }
                     if ($addMutationLabelToSchemaFieldDescription) {
                         $this->addMutationLabelToSchemaFieldDescription($itemPath);
@@ -336,7 +336,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     /**
      * Append the field or directive's version to its description
      */
-    protected function addVersionToSchemaFieldDescription(array $fieldOrDirectiveSchemaDefinitionPath): void
+    protected function addVersionToGraphQLSchemaFieldDescription(array $fieldOrDirectiveSchemaDefinitionPath): void
     {
         $fieldOrDirectiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinitionForGraphQL, $fieldOrDirectiveSchemaDefinitionPath);
         if ($schemaFieldVersion = $fieldOrDirectiveSchemaDefinition[SchemaDefinition::VERSION] ?? null) {
