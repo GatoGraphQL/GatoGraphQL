@@ -56,7 +56,7 @@ class UnionTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProv
             return;
         }
         $schemaDefinition[SchemaDefinition::INTERFACES] = [];
-        
+
         // If it returns an interface as type, add it to the schemaDefinition
         $interfaceTypeResolver = $this->unionTypeResolver->getUnionTypeInterfaceTypeResolver();
         if ($interfaceTypeResolver === null) {
