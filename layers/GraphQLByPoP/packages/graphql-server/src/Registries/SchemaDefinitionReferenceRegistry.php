@@ -208,7 +208,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         // 1. Global fields and directives
         if (
             ($addVersionToSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription)
-            && !APIComponentConfiguration::skipExposingGlobalFieldsInSchema()
+            && ComponentConfiguration::exposeGlobalFieldsInGraphQLSchema()
         ) {
             foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_FIELDS]) as $fieldName) {
                 $itemPath = [

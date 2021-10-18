@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use Exception;
+use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
 use GraphQLByPoP\GraphQLServer\ObjectModels\NamedTypeInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
-use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\Schema\SchemaDefinitionTokens;
@@ -28,7 +28,7 @@ class Schema
         protected string $id
     ) {
         // Enable or not to add the global fields to the schema, since they may pollute the documentation
-        if (!APIComponentConfiguration::skipExposingGlobalFieldsInSchema()) {
+        if (ComponentConfiguration::exposeGlobalFieldsInGraphQLSchema()) {
             // Add the global fields in the registry
             SchemaDefinitionHelpers::createFieldsFromPath(
                 $fullSchemaDefinition,

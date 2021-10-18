@@ -38,7 +38,7 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
 
     // /**
     //  * Higher priority => Process before the global fieldResolver,
-    //  * so this one gets registered (otherwise, since `SKIP_EXPOSING_GLOBAL_FIELDS_IN_SCHEMA`
+    //  * so this one gets registered (otherwise, since `SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA`
     //  * is false, the field would be removed)
     //  */
     // public function getPriorityToAttachToClasses(): int

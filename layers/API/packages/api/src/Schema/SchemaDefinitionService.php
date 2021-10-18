@@ -226,7 +226,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
      */
     private function maybeMoveGlobalTypeSchemaDefinition(array &$schemaDefinition, array &$rootTypeSchemaDefinition): void
     {
-        if (ComponentConfiguration::skipExposingGlobalFieldsInSchema()) {
+        if (ComponentConfiguration::skipExposingGlobalFieldsInFullSchema()) {
             return;
         }
         $schemaDefinition[SchemaDefinition::GLOBAL_FIELDS] = $rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_FIELDS];

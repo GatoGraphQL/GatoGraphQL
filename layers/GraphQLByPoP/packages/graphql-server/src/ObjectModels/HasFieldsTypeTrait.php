@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
-use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\API\Schema\SchemaDefinition;
 
 trait HasFieldsTypeTrait
@@ -30,7 +29,7 @@ trait HasFieldsTypeTrait
                 ]
             )
         );
-        if (!APIComponentConfiguration::skipExposingGlobalFieldsInSchema()) {
+        if (ComponentConfiguration::exposeGlobalFieldsInGraphQLSchema()) {
             // Global fields have already been initialized, simply get the reference to the existing objects from the registryMap
             $this->getFieldsFromPath(
                 $fullSchemaDefinition,
