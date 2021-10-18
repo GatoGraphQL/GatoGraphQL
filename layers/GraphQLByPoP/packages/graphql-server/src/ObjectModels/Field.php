@@ -35,7 +35,7 @@ class Field extends AbstractSchemaDefinitionReferenceObject
     }
     public function getExtensions(): array
     {
-        $extensions = [];
+        $extensions = $this->schemaDefinition[SchemaDefinition::EXTENSIONS] ?? [];
         if ($version = $this->schemaDefinition[SchemaDefinition::VERSION] ?? null) {
             $extensions[SchemaDefinition::VERSION] = $version;
         }
