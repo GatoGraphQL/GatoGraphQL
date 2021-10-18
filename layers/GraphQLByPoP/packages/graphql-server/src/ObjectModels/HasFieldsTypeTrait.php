@@ -40,7 +40,7 @@ trait HasFieldsTypeTrait
         }
 
         // Maybe sort fields and connections all together
-        if (ComponentConfiguration::sortSchemaAlphabetically()) {
+        if (ComponentConfiguration::sortGraphQLSchemaAlphabetically()) {
             uasort($this->fields, function (Field $a, Field $b): int {
                 return $a->getName() <=> $b->getName();
             });

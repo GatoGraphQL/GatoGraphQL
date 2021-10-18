@@ -12,8 +12,8 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static bool $addSelfFieldForRootTypeToSchema = false;
-    private static bool $sortSchemaAlphabetically = true;
+    private static bool $exposeSelfFieldForRootTypeInGraphQLSchema = false;
+    private static bool $sortGraphQLSchemaAlphabetically = true;
     private static bool $enableProactiveFeedback = true;
     private static bool $enableProactiveFeedbackDeprecations = true;
     private static bool $enableProactiveFeedbackNotices = true;
@@ -21,9 +21,9 @@ class ComponentConfiguration
     private static bool $enableProactiveFeedbackLogs = true;
     private static bool $enableNestedMutations = false;
     private static ?bool $enableGraphQLIntrospection = null;
-    private static bool $exposeSelfFieldInSchema = false;
-    private static bool $addFullSchemaFieldToSchema = false;
-    private static bool $addVersionToSchemaFieldDescription = false;
+    private static bool $exposeSelfFieldInGraphQLSchema = false;
+    private static bool $addFullSchemaFieldToGraphQLSchema = false;
+    private static bool $addVersionToGraphQLSchemaFieldDescription = false;
     private static bool $enableSettingMutationSchemeByURLParam = false;
     private static bool $enableEnablingGraphQLIntrospectionByURLParam = false;
     private static bool $addGraphQLIntrospectionPersistedQuery = false;
@@ -31,11 +31,11 @@ class ComponentConfiguration
     private static bool $exposeSchemaIntrospectionFieldInSchema = false;
     private static bool $exposeGlobalFieldsInGraphQLSchema = false;
 
-    public static function addSelfFieldForRootTypeToSchema(): bool
+    public static function exposeSelfFieldForRootTypeInGraphQLSchema(): bool
     {
         // Define properties
-        $envVariable = Environment::ADD_SELF_FIELD_FOR_ROOT_TYPE_TO_SCHEMA;
-        $selfProperty = &self::$addSelfFieldForRootTypeToSchema;
+        $envVariable = Environment::EXPOSE_SELF_FIELD_FOR_ROOT_TYPE_IN_GRAPHQL_SCHEMA;
+        $selfProperty = &self::$exposeSelfFieldForRootTypeInGraphQLSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -49,11 +49,11 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function sortSchemaAlphabetically(): bool
+    public static function sortGraphQLSchemaAlphabetically(): bool
     {
         // Define properties
-        $envVariable = Environment::SORT_SCHEMA_ALPHABETICALLY;
-        $selfProperty = &self::$sortSchemaAlphabetically;
+        $envVariable = Environment::SORT_GRAPHQL_SCHEMA_ALPHABETICALLY;
+        $selfProperty = &self::$sortGraphQLSchemaAlphabetically;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -193,11 +193,11 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function exposeSelfFieldInSchema(): bool
+    public static function exposeSelfFieldInGraphQLSchema(): bool
     {
         // Define properties
-        $envVariable = Environment::EXPOSE_SELF_FIELD_IN_SCHEMA;
-        $selfProperty = &self::$exposeSelfFieldInSchema;
+        $envVariable = Environment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA;
+        $selfProperty = &self::$exposeSelfFieldInGraphQLSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -211,11 +211,11 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function addFullSchemaFieldToSchema(): bool
+    public static function addFullSchemaFieldToGraphQLSchema(): bool
     {
         // Define properties
-        $envVariable = Environment::ADD_FULLSCHEMA_FIELD_TO_SCHEMA;
-        $selfProperty = &self::$addFullSchemaFieldToSchema;
+        $envVariable = Environment::ADD_FULLSCHEMA_FIELD_TO_GRAPHQL_SCHEMA;
+        $selfProperty = &self::$addFullSchemaFieldToGraphQLSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -229,11 +229,11 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function addVersionToSchemaFieldDescription(): bool
+    public static function addVersionToGraphQLSchemaFieldDescription(): bool
     {
         // Define properties
-        $envVariable = Environment::ADD_VERSION_TO_SCHEMA_FIELD_DESCRIPTION;
-        $selfProperty = &self::$addVersionToSchemaFieldDescription;
+        $envVariable = Environment::ADD_VERSION_TO_GRAPHQL_SCHEMA_FIELD_DESCRIPTION;
+        $selfProperty = &self::$addVersionToGraphQLSchemaFieldDescription;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -342,7 +342,7 @@ class ComponentConfiguration
         if (APIComponentConfiguration::skipExposingGlobalFieldsInFullSchema()) {
             return false;
         }
-        
+
         // Define properties
         $envVariable = Environment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA;
         $selfProperty = &self::$exposeGlobalFieldsInGraphQLSchema;

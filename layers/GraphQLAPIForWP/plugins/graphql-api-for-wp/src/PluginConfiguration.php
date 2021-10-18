@@ -388,7 +388,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             // Add "self" fields to the schema?
             [
                 'class' => GraphQLServerComponentConfiguration::class,
-                'envVariable' => GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_SCHEMA,
+                'envVariable' => GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_SELF_FIELDS,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
@@ -576,7 +576,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
         ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class] = [
             // Expose the "self" field when doing Low Level Query Editing
-            GraphQLServerEnvironment::ADD_SELF_FIELD_FOR_ROOT_TYPE_TO_SCHEMA => $moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING),
+            GraphQLServerEnvironment::EXPOSE_SELF_FIELD_FOR_ROOT_TYPE_IN_GRAPHQL_SCHEMA => $moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING),
             // Do not send proactive deprecations
             GraphQLServerEnvironment::ENABLE_PROACTIVE_FEEDBACK_DEPRECATIONS => false,
         ];
@@ -596,7 +596,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             // Enable the "admin" fields
             $componentClassConfiguration[\PoP\ComponentModel\Component::class][ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA] = true;
             // Enable the "self" fields
-            $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class][GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_SCHEMA] = true;
+            $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class][GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA] = true;
             // Enable Nested mutations
             $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class][GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS] = true;
             // Do not disable redundant mutation fields in the root type
