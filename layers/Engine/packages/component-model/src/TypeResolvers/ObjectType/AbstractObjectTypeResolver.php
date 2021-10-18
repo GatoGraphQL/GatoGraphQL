@@ -713,8 +713,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                  * vars `$a` and `$b` are wrongly added as `use($a, $b)` to the first anonymous function,
                  * as if they were present in the original function scope, which they are not.
                  *
-                 * The issue is actually not related to arrow function, but it's been fixed for it,
-                 * but not for anonymous function
+                 * This issue has been fixed for `fn` inside `fn`, but
+                 * but not for anonymous function inside `fn`
                  *
                  * @see https://github.com/rectorphp/rector/issues/6730
                  */
