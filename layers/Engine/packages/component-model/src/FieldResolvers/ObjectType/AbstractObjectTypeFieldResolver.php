@@ -979,6 +979,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             );
             return $mutationResolver->executeMutation($mutationFieldArgs);
         }
+        // Base case: If the fieldName exists as property in the object, then retrieve it
+        if (\property_exists($object, $fieldName)) {
+            return $object->$fieldName;
+        }
         return null;
     }
 

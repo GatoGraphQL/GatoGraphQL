@@ -10,7 +10,6 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
 use PoPSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarObjectTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -69,31 +68,5 @@ class UserAvatarObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'size' => $this->translationAPI->__('Avatar size', 'user-avatars'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
-    }
-
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed>|null $variables
-     * @param array<string, mixed>|null $expressions
-     * @param array<string, mixed> $options
-     */
-    public function resolveValue(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        object $object,
-        string $fieldName,
-        array $fieldArgs = [],
-        ?array $variables = null,
-        ?array $expressions = null,
-        array $options = []
-    ): mixed {
-        /** @var UserAvatar */
-        $userAvatar = $object;
-        switch ($fieldName) {
-            case 'src':
-            case 'size':
-                return $userAvatar->$fieldName;
-        }
-
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
