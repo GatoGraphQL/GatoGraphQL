@@ -282,7 +282,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
 
         // Sort the elements in the schema alphabetically (if not already sorted!)
-        if (!APIComponentConfiguration::sortFullSchemaAlphabetically()
+        if (
+            !APIComponentConfiguration::sortFullSchemaAlphabetically()
             && ComponentConfiguration::sortGraphQLSchemaAlphabetically()
         ) {
             $this->schemaDefinitionService->sortFullSchemaAlphabetically($this->fullSchemaDefinitionForGraphQL);
