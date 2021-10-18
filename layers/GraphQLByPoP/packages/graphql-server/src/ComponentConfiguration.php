@@ -21,7 +21,7 @@ class ComponentConfiguration
     private static bool $enableProactiveFeedbackLogs = true;
     private static bool $enableNestedMutations = false;
     private static ?bool $enableGraphQLIntrospection = null;
-    private static bool $exposeSelfFieldInSchema = false;
+    private static bool $exposeSelfFieldInGraphQLSchema = false;
     private static bool $addFullSchemaFieldToSchema = false;
     private static bool $addVersionToSchemaFieldDescription = false;
     private static bool $enableSettingMutationSchemeByURLParam = false;
@@ -193,11 +193,11 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function exposeSelfFieldInSchema(): bool
+    public static function exposeSelfFieldInGraphQLSchema(): bool
     {
         // Define properties
         $envVariable = Environment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA;
-        $selfProperty = &self::$exposeSelfFieldInSchema;
+        $selfProperty = &self::$exposeSelfFieldInGraphQLSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

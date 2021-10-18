@@ -177,7 +177,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
 
         // Remove unneeded data
-        if (!ComponentConfiguration::exposeSelfFieldInSchema()) {
+        if (!ComponentConfiguration::exposeSelfFieldInGraphQLSchema()) {
             /**
              * Check if to remove the "self" field everywhere, or if to keep it just for the Root type
              */
