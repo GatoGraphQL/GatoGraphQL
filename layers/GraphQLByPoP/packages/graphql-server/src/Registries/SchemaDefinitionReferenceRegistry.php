@@ -190,7 +190,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 }
             }
         }
-        if (!ComponentConfiguration::addFullSchemaFieldToSchema()) {
+        if (!ComponentConfiguration::addFullSchemaFieldToGraphQLSchema()) {
             unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::FIELDS]['fullSchema']);
             if ($queryRootTypeName !== null) {
                 unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$queryRootTypeName][SchemaDefinition::FIELDS]['fullSchema']);

@@ -22,7 +22,7 @@ class ComponentConfiguration
     private static bool $enableNestedMutations = false;
     private static ?bool $enableGraphQLIntrospection = null;
     private static bool $exposeSelfFieldInGraphQLSchema = false;
-    private static bool $addFullSchemaFieldToSchema = false;
+    private static bool $addFullSchemaFieldToGraphQLSchema = false;
     private static bool $addVersionToSchemaFieldDescription = false;
     private static bool $enableSettingMutationSchemeByURLParam = false;
     private static bool $enableEnablingGraphQLIntrospectionByURLParam = false;
@@ -211,11 +211,11 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function addFullSchemaFieldToSchema(): bool
+    public static function addFullSchemaFieldToGraphQLSchema(): bool
     {
         // Define properties
-        $envVariable = Environment::ADD_FULLSCHEMA_FIELD_TO_SCHEMA;
-        $selfProperty = &self::$addFullSchemaFieldToSchema;
+        $envVariable = Environment::ADD_FULLSCHEMA_FIELD_TO_GRAPHQL_SCHEMA;
+        $selfProperty = &self::$addFullSchemaFieldToGraphQLSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
