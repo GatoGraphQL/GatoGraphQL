@@ -98,7 +98,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
             $entry = $isConnection ?
                 SchemaDefinition::CONNECTIONS :
                 SchemaDefinition::FIELDS;
-            $objectTypeSchemaDefinition[$entry][$fieldName] = $fieldSchemaDefinition;
+            $schemaDefinition[$entry][$fieldName] = $fieldSchemaDefinition;
         }
     }
 
