@@ -7,19 +7,14 @@ namespace PoP\API\ObjectModels\SchemaDefinition;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\API\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\TypeKinds;
-use PoP\ComponentModel\Facades\Registries\TypeRegistryFacade;
-use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 
 class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvider
 {
-    protected TypeRegistryInterface $typeRegistry;
-
     public function __construct(
         protected InterfaceTypeResolverInterface $interfaceTypeResolver,
     ) {
         parent::__construct($interfaceTypeResolver);
-        $this->typeRegistry = TypeRegistryFacade::getInstance();
     }
 
     public function getTypeKind(): string
