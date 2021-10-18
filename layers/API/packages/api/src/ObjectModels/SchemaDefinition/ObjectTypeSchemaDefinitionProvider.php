@@ -50,8 +50,11 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
     final protected function addDirectiveSchemaDefinitions(array &$schemaDefinition, bool $useGlobal): void
     {
         // Add the directives (non-global)
-        $schemaDefinition[SchemaDefinition::DIRECTIVES] = [];
         $schemaDirectiveResolvers = $this->objectTypeResolver->getSchemaDirectiveResolvers($useGlobal);
+        if ($schemaDirectiveResolvers === []) {
+            return;
+        }
+        $schemaDefinition[SchemaDefinition::DIRECTIVES] = [];
         foreach ($schemaDirectiveResolvers as $directiveName => $directiveResolver) {
             // Directives may not be directly visible in the schema
             if ($directiveResolver->skipExposingDirectiveInSchema($this->objectTypeResolver)) {
@@ -93,8 +96,11 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
 
     final protected function addInterfaceSchemaDefinitions(array &$schemaDefinition): void
     {
-        $schemaDefinition[SchemaDefinition::INTERFACES] = [];
         $this->implementedInterfaceTypeResolvers = $this->objectTypeResolver->getImplementedInterfaceTypeResolvers();
+        if ($this->implementedInterfaceTypeResolvers === []) {
+            return;
+        }
+        $schemaDefinition[SchemaDefinition::INTERFACES] = [];
         foreach ($this->implementedInterfaceTypeResolvers as $interfaceTypeResolver) {
             $interfaceTypeName = $interfaceTypeResolver->getMaybeNamespacedTypeName();
             $interfaceTypeSchemaDefinition = [

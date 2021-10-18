@@ -99,8 +99,6 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $schemaDefinition = [
                 SchemaDefinition::QUERY_TYPE => $rootObjectTypeResolver->getMaybeNamespacedTypeName(),
                 SchemaDefinition::TYPES => [],
-                SchemaDefinition::DIRECTIVES => [],
-                SchemaDefinition::GLOBAL_DIRECTIVES => [],
             ];
 
             $this->processedTypeAndDirectiveResolverClasses = [];

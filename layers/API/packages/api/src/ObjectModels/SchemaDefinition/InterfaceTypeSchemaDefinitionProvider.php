@@ -76,8 +76,12 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
 
     final protected function addInterfaceSchemaDefinitions(array &$schemaDefinition): void
     {
+        $implementedInterfaceTypeResolvers = $this->interfaceTypeResolver->getPartiallyImplementedInterfaceTypeResolvers();
+        if ($implementedInterfaceTypeResolvers === []) {
+            return;
+        }
         $schemaDefinition[SchemaDefinition::INTERFACES] = [];
-        foreach ($this->interfaceTypeResolver->getPartiallyImplementedInterfaceTypeResolvers() as $interfaceTypeResolver) {
+        foreach ($implementedInterfaceTypeResolvers as $interfaceTypeResolver) {
             $interfaceTypeName = $interfaceTypeResolver->getMaybeNamespacedTypeName();
             $interfaceTypeSchemaDefinition = [
                 SchemaDefinition::TYPE_RESOLVER => $interfaceTypeResolver,

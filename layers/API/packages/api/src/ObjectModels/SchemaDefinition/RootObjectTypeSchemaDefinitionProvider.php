@@ -20,10 +20,14 @@ class RootObjectTypeSchemaDefinitionProvider extends ObjectTypeSchemaDefinitionP
         // The global directives are added always, since those are the "normal" directives in GraphQL
         $globalSchemaDefinition = [];
         $this->addDirectiveSchemaDefinitions($globalSchemaDefinition, true);
-        $schemaDefinition[SchemaDefinition::DIRECTIVES] = array_merge(
-            $schemaDefinition[SchemaDefinition::DIRECTIVES],
-            $globalSchemaDefinition[SchemaDefinition::DIRECTIVES]
-        );
+        if (
+            $directives = array_merge(
+                $schemaDefinition[SchemaDefinition::DIRECTIVES] ?? [],
+                $globalSchemaDefinition[SchemaDefinition::DIRECTIVES] ?? []
+            )
+        ) {
+            $schemaDefinition[SchemaDefinition::DIRECTIVES] = $directives;
+        }
 
         // Global fields are only added if enabled
         if (ComponentConfiguration::skipExposingGlobalFieldsInFullSchema()) {
