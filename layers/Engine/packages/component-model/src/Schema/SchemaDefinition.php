@@ -29,8 +29,6 @@ class SchemaDefinition
     public const ORDERED_ARGS_ENABLED = 'orderedArgsEnabled';
     public const INTERFACES = 'interfaces';
     public const FIELDS = 'fields';
-    public const CONNECTIONS = 'connections';
-    public const GLOBAL_CONNECTIONS = 'globalConnections';
     public const GLOBAL_FIELDS = 'globalFields';
     public const QUERY_TYPE = 'queryType';
     public const TYPES = 'types';

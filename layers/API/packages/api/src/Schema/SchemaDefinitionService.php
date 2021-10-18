@@ -230,9 +230,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             return;
         }
         $schemaDefinition[SchemaDefinition::GLOBAL_FIELDS] = $rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_FIELDS];
-        $schemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS] = $rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS];
         unset($rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_FIELDS]);
-        unset($rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_CONNECTIONS]);
     }
 
     private function addDirectiveSchemaDefinition(

@@ -83,7 +83,6 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
     {
         // Add the fields (non-global)
         $schemaDefinition[SchemaDefinition::FIELDS] = [];
-        $schemaDefinition[SchemaDefinition::CONNECTIONS] = [];
         $schemaObjectTypeFieldResolvers = $this->objectTypeResolver->getExecutableObjectTypeFieldResolversByField($useGlobal);
         foreach ($schemaObjectTypeFieldResolvers as $fieldName => $objectTypeFieldResolver) {
             // Fields may not be directly visible in the schema
@@ -104,13 +103,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
                 $this->accessedTypeAndDirectiveResolvers[$fieldArgTypeResolver::class] = $fieldArgTypeResolver;
                 SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($fieldSchemaDefinition[SchemaDefinition::ARGS][$fieldArgName]);
             }
-
-            // Split the results into "fields" and "connections"
-            $isConnection = $fieldTypeResolver instanceof RelationalTypeResolverInterface;
-            $entry = $isConnection ?
-                SchemaDefinition::CONNECTIONS :
-                SchemaDefinition::FIELDS;
-            $schemaDefinition[$entry][$fieldName] = $fieldSchemaDefinition;
+            $schemaDefinition[SchemaDefinition::FIELDS][$fieldName] = $fieldSchemaDefinition;
         }
     }
 
