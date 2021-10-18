@@ -449,6 +449,47 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
 
     /**
+     * Fields may not be directly visible in the schema,
+     * eg: because they are used only by the application, and must not
+     * be exposed to the user (eg: "accessControlLists")
+     */
+    public function skipExposingFieldInSchema(string $fieldName): bool
+    {
+        /**
+         * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+         * In particular, it does not need to validate if it is an array or not,
+         * as according to the applied WrappingType.
+         *
+         * If disabled, then do not expose the field if either:
+         *
+         * 1. its type is `DangerouslyDynamic`
+         * 2. it has any mandatory argument of type `DangerouslyDynamic`
+         */
+        if (ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+            // 1. its type is `DangerouslyDynamic`
+            $fieldTypeResolver = $this->getFieldTypeResolver($fieldName);
+            if ($fieldTypeResolver === $this->dangerouslyDynamicScalarTypeResolver) {
+                return true;
+            }
+
+            // 2. it has any mandatory argument of type `DangerouslyDynamic`
+            $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($fieldName);
+            $dangerouslyDynamicFieldArgNameTypeResolvers = array_filter(
+                $consolidatedFieldArgNameTypeResolvers,
+                fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
+            );
+            foreach (array_keys($dangerouslyDynamicFieldArgNameTypeResolvers) as $fieldArgName) {
+                $consolidatedFieldArgTypeModifiers = $this->getConsolidatedFieldArgTypeModifiers($fieldName, $fieldArgName);
+                if ($consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::MANDATORY) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Field args may not be directly visible in the schema
      */
     public function skipExposingFieldArgInSchema(string $fieldName, string $fieldArgName): bool
