@@ -51,7 +51,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
         return $schemaDefinition;
     }
 
-    protected function addDirectiveSchemaDefinitions(array &$schemaDefinition, bool $useGlobal): void
+    final protected function addDirectiveSchemaDefinitions(array &$schemaDefinition, bool $useGlobal): void
     {
         // Add the directives (non-global)
         $schemaDefinition[SchemaDefinition::DIRECTIVES] = [];
@@ -67,7 +67,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
         }
     }
 
-    protected function addFieldSchemaDefinitions(array &$schemaDefinition, bool $useGlobal): void
+    final protected function addFieldSchemaDefinitions(array &$schemaDefinition, bool $useGlobal): void
     {
         // Add the fields (non-global)
         $schemaDefinition[SchemaDefinition::FIELDS] = [];
@@ -102,7 +102,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
         }
     }
 
-    protected function addInterfaceSchemaDefinitions(array &$schemaDefinition): void
+    final protected function addInterfaceSchemaDefinitions(array &$schemaDefinition): void
     {
         $schemaDefinition[SchemaDefinition::INTERFACES] = [];
         $this->implementedInterfaceTypeResolvers = $this->objectTypeResolver->getImplementedInterfaceTypeResolvers();

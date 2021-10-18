@@ -34,7 +34,7 @@ class EnumTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvi
      * Add the enum values in the schema: arrays of enum name,
      * description, deprecated and deprecation description
      */
-    protected function addEnumSchemaDefinition(array &$schemaDefinition): void
+    final protected function addEnumSchemaDefinition(array &$schemaDefinition): void
     {
         $enums = [];
         $enumValues = $this->enumTypeResolver->getEnumValues();

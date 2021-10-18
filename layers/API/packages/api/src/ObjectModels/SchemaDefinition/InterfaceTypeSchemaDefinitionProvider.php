@@ -49,7 +49,7 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
         return $schemaDefinition;
     }
 
-    protected function addFieldSchemaDefinitions(array &$schemaDefinition): void
+    final protected function addFieldSchemaDefinitions(array &$schemaDefinition): void
     {
         $schemaDefinition[SchemaDefinition::FIELDS] = [];
         $schemaInterfaceTypeFieldResolvers = $this->interfaceTypeResolver->getExecutableInterfaceTypeFieldResolversByField();
@@ -71,7 +71,7 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
         }
     }
 
-    protected function addInterfaceSchemaDefinitions(array &$schemaDefinition): void
+    final protected function addInterfaceSchemaDefinitions(array &$schemaDefinition): void
     {
         $schemaDefinition[SchemaDefinition::INTERFACES] = [];
         foreach ($this->interfaceTypeResolver->getPartiallyImplementedInterfaceTypeResolvers() as $interfaceTypeResolver) {
