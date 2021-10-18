@@ -559,8 +559,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
     {
         $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs);
-        $fieldSchemaDefinition = $this->getFieldSchemaDefinition($objectTypeResolver, $fieldName, $fieldArgs);
-        if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
+        if ($fieldArgsSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName, $fieldArgs)) {
             /**
              * Validate mandatory values. If it produces errors, return immediately
              */
@@ -663,17 +662,17 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     public function resolveFieldValidationDeprecationMessages(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
     {
         $fieldDeprecationMessages = [];
-        $fieldSchemaDefinition = $this->getFieldSchemaDefinition($objectTypeResolver, $fieldName, $fieldArgs);
 
         // Deprecations for the field
-        if ($fieldSchemaDefinition[SchemaDefinition::DEPRECATED] ?? null) {
+        $fieldDeprecationMessage = $this->getFieldDeprecationMessage($objectTypeResolver, $fieldName);
+        if ($fieldDeprecationMessage !== null) {
             $fieldDeprecationMessages[] = sprintf(
                 $this->translationAPI->__('Field \'%s\' is deprecated: %s', 'component-model'),
                 $fieldName,
-                $fieldSchemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE]
+                $fieldDeprecationMessage
             );
         }
-        if ($fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
+        if ($fieldArgsSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName, $fieldArgs)) {
             // Deprecations for the field args
             $fieldDeprecationMessages = array_merge(
                 $fieldDeprecationMessages,
