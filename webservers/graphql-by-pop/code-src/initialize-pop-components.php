@@ -28,6 +28,7 @@ AppLoader::addComponentClassesToInitialize([
     \PoPSchema\PostCategoryMutationsWP\Component::class,
     \PoPSchema\CommentMutationsWP\Component::class,
     \PoPSchema\UserStateMutationsWP\Component::class,
+    \PoPSchema\UserAvatarsWP\Component::class,
     \PoPSchema\GenericCustomPosts\Component::class,
     \PoPWPSchema\Media\Component::class,
     \PoPWPSchema\Menus\Component::class,
