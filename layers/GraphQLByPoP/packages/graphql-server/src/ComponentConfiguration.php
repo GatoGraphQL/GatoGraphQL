@@ -196,7 +196,7 @@ class ComponentConfiguration
     public static function exposeSelfFieldInSchema(): bool
     {
         // Define properties
-        $envVariable = Environment::EXPOSE_SELF_FIELD_IN_SCHEMA;
+        $envVariable = Environment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA;
         $selfProperty = &self::$exposeSelfFieldInSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
