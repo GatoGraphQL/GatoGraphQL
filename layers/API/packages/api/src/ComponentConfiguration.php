@@ -18,6 +18,7 @@ class ComponentConfiguration
     private static bool $enableMutations = true;
     private static bool $overrideRequestURI = false;
     private static bool $skipExposingGlobalFieldsInFullSchema = false;
+    private static bool $sortFullSchemaAlphabetically = true;
 
     public static function useSchemaDefinitionCache(): bool
     {
@@ -125,6 +126,24 @@ class ComponentConfiguration
         $envVariable = Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA;
         $selfProperty = &self::$skipExposingGlobalFieldsInFullSchema;
         $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
+        );
+        return $selfProperty;
+    }
+
+    public static function sortFullSchemaAlphabetically(): bool
+    {
+        // Define properties
+        $envVariable = Environment::SORT_FULL_SCHEMA_ALPHABETICALLY;
+        $selfProperty = &self::$sortFullSchemaAlphabetically;
+        $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         // Initialize property from the environment/hook
