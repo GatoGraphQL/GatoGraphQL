@@ -1241,7 +1241,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return false;
     }
 
-    public function getDirectiveSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
+    final public function getDirectiveSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         // First check if the value was cached
         $key = $relationalTypeResolver->getNamespacedTypeName();
