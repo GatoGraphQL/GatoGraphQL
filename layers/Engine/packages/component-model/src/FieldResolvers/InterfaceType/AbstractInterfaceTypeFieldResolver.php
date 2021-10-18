@@ -433,7 +433,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
                 continue;
             }
 
-            $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
+            $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgTypeSchemaDefinition(
                 $fieldArgName,
                 $fieldArgInputTypeResolver,
                 $this->getConsolidatedFieldArgDescription($fieldName, $fieldArgName),

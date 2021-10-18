@@ -834,7 +834,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 continue;
             }
 
-            $schemaDirectiveArgs[$directiveArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
+            $schemaDirectiveArgs[$directiveArgName] = $this->getFieldOrDirectiveArgTypeSchemaDefinition(
                 $directiveArgName,
                 $directiveArgInputTypeResolver,
                 $this->getConsolidatedDirectiveArgDescription($relationalTypeResolver, $directiveArgName),

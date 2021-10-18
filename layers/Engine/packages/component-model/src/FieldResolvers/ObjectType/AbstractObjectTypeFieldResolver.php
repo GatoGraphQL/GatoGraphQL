@@ -44,7 +44,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
     use FieldOrDirectiveResolverTrait, FieldOrDirectiveSchemaDefinitionResolverTrait {
         // Avoid trait collisions for PHP 7.1
-        FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldOrDirectiveArgSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
+        FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldOrDirectiveArgTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::getTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::processSchemaDefinitionModifiers insteadof FieldOrDirectiveResolverTrait;
     }
@@ -434,7 +434,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 continue;
             }
 
-            $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgSchemaDefinition(
+            $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgTypeSchemaDefinition(
                 $fieldArgName,
                 $fieldArgInputTypeResolver,
                 $this->getConsolidatedFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),

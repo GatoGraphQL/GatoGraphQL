@@ -24,7 +24,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
         $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
     }
 
-    final public function getFieldOrDirectiveArgSchemaDefinition(
+    final public function getFieldOrDirectiveArgTypeSchemaDefinition(
         string $argName,
         InputTypeResolverInterface $argInputTypeResolver,
         ?string $argDescription,
