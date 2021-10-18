@@ -99,7 +99,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
         $this->implementedInterfaceTypeResolvers = $this->objectTypeResolver->getImplementedInterfaceTypeResolvers();
         if ($this->implementedInterfaceTypeResolvers === []) {
             return;
-    }
+        }
         $schemaDefinition[SchemaDefinition::INTERFACES] = [];
         foreach ($this->implementedInterfaceTypeResolvers as $interfaceTypeResolver) {
             $interfaceTypeName = $interfaceTypeResolver->getMaybeNamespacedTypeName();
