@@ -16,7 +16,7 @@ trait HasFieldsTypeTrait
      */
     protected array $fields;
 
-    protected function initFields(array &$fullSchemaDefinition, array $schemaDefinitionPath, bool $includeConnections): void
+    protected function initFields(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
         $this->fields = [];
 
