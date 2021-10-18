@@ -24,7 +24,10 @@ interface UnionTypeResolverInterface extends RelationalTypeResolverInterface
      * @return ObjectTypeResolverInterface[]
      */
     public function getTargetObjectTypeResolvers(): array;
-    public function getUnionTypeInterfaceTypeResolver(): ?InterfaceTypeResolverInterface;
+    /**
+     * @return InterfaceTypeResolverInterface[]
+     */
+    public function getUnionTypeInterfaceTypeResolvers(): array;
     /**
      * @return ObjectTypeResolverPickerInterface[]
      */

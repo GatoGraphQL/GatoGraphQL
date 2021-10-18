@@ -57,18 +57,20 @@ class UnionTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProv
         }
 
         // If it returns an interface as type, add it to the schemaDefinition
-        $implementedInterfaceTypeResolver = $this->unionTypeResolver->getUnionTypeInterfaceTypeResolver();
-        if ($implementedInterfaceTypeResolver === null) {
+        $implementedInterfaceTypeResolvers = $this->unionTypeResolver->getUnionTypeInterfaceTypeResolvers();
+        if ($implementedInterfaceTypeResolvers === []) {
             return;
         }
         $schemaDefinition[SchemaDefinition::INTERFACES] = [];
-        $interfaceTypeName = $implementedInterfaceTypeResolver->getMaybeNamespacedTypeName();
-        $interfaceTypeSchemaDefinition = [
-            SchemaDefinition::TYPE_RESOLVER => $implementedInterfaceTypeResolver,
-        ];
-        SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($interfaceTypeSchemaDefinition);
-        $schemaDefinition[SchemaDefinition::INTERFACES][$interfaceTypeName] = $interfaceTypeSchemaDefinition;
-        $this->accessedTypeAndDirectiveResolvers[$implementedInterfaceTypeResolver::class] = $implementedInterfaceTypeResolver;
+        foreach ($implementedInterfaceTypeResolvers as $implementedInterfaceTypeResolver) {
+            $interfaceTypeName = $implementedInterfaceTypeResolver->getMaybeNamespacedTypeName();
+            $interfaceTypeSchemaDefinition = [
+                SchemaDefinition::TYPE_RESOLVER => $implementedInterfaceTypeResolver,
+            ];
+            SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($interfaceTypeSchemaDefinition);
+            $schemaDefinition[SchemaDefinition::INTERFACES][$interfaceTypeName] = $interfaceTypeSchemaDefinition;
+            $this->accessedTypeAndDirectiveResolvers[$implementedInterfaceTypeResolver::class] = $implementedInterfaceTypeResolver;
+        }
     }
 
     final protected function addDirectiveSchemaDefinitions(array &$schemaDefinition, bool $useGlobal): void

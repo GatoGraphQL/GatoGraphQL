@@ -5,22 +5,22 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeResolvers\UnionType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
-use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\AbstractUnionTypeResolver;
 use PoPSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader;
+use PoPSchema\CustomPosts\TypeResolvers\InterfaceType\IsCustomPostInterfaceTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
 {
     protected CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader;
-    protected InterfaceTypeResolverInterface $interfaceTypeResolver;
+    protected IsCustomPostInterfaceTypeResolver $isCustomPostInterfaceTypeResolver;
 
     #[Required]
     final public function autowireCustomPostUnionTypeResolver(
-        InterfaceTypeResolverInterface $interfaceTypeResolver,
+        IsCustomPostInterfaceTypeResolver $isCustomPostInterfaceTypeResolver,
         CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader,
     ): void {
-        $this->interfaceTypeResolver = $interfaceTypeResolver;
+        $this->isCustomPostInterfaceTypeResolver = $isCustomPostInterfaceTypeResolver;
         $this->customPostUnionTypeDataLoader = $customPostUnionTypeDataLoader;
     }
 
@@ -39,8 +39,10 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
         return $this->customPostUnionTypeDataLoader;
     }
 
-    public function getUnionTypeInterfaceTypeResolver(): ?InterfaceTypeResolverInterface
+    public function getUnionTypeInterfaceTypeResolvers(): array
     {
-        return $this->interfaceTypeResolver;
+        return [
+            $this->isCustomPostInterfaceTypeResolver,
+        ];
     }
 }
