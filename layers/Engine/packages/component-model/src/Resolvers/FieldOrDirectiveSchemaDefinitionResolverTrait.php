@@ -138,7 +138,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
      * 2. it has any mandatory argument of type `DangerouslyDynamic`
      *
      * @param array<string, InputTypeResolverInterface> $consolidatedFieldArgNameTypeResolvers
-     * @param array<string, int> $consolidatedFieldArgTypeModifiers
+     * @param array<string, int> $consolidatedFieldArgsTypeModifiers
      */
     protected function skipExposingDangerouslyDynamicScalarTypeInSchema(
         TypeResolverInterface $fieldTypeResolver,
