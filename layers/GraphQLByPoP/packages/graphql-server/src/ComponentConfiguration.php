@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer;
 
+use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
@@ -338,6 +339,10 @@ class ComponentConfiguration
 
     public static function exposeGlobalFieldsInGraphQLSchema(): bool
     {
+        if (APIComponentConfiguration::skipExposingGlobalFieldsInFullSchema()) {
+            return false;
+        }
+        
         // Define properties
         $envVariable = Environment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA;
         $selfProperty = &self::$exposeGlobalFieldsInGraphQLSchema;
