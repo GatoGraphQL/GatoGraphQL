@@ -42,7 +42,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
         );
     }
 
-    final public function getFieldSchemaDefinition(
+    final public function getFieldTypeSchemaDefinition(
         string $fieldName,
         ConcreteTypeResolverInterface $fieldTypeResolver,
         ?string $fieldDescription,

@@ -27,9 +27,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
 {
     use AttachableExtensionTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
-    use FieldOrDirectiveSchemaDefinitionResolverTrait {
-        FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldSchemaDefinition as upstreamGetFieldSchemaDefinition;
-    }
+    use FieldOrDirectiveSchemaDefinitionResolverTrait;
 
     /** @var array<string, array> */
     protected array $schemaDefinitionForFieldCache = [];
@@ -391,7 +389,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      */
     final protected function doGetFieldSchemaDefinition(string $fieldName): array
     {
-        $schemaDefinition = $this->upstreamGetFieldSchemaDefinition(
+        $schemaDefinition = $this->getFieldTypeSchemaDefinition(
             $fieldName,
             $this->getFieldTypeResolver($fieldName),
             $this->getFieldDescription($fieldName),
