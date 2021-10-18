@@ -21,9 +21,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      */
     protected ?array $objectTypeResolverPickers = null;
 
-    public function getUnionTypeInterfaceTypeResolver(): ?InterfaceTypeResolverInterface
+    public function getUnionTypeInterfaceTypeResolvers(): array
     {
-        return null;
+        return [];
     }
 
     /**
@@ -279,19 +279,25 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
          */
         if (ComponentConfiguration::enableUnionTypeImplementingInterfaceType()) {
             // Validate that all typeResolvers implement the required interface
-            if ($interfaceTypeResolver = $this->getUnionTypeInterfaceTypeResolver()) {
-                $objectTypeResolvers = $this->getObjectTypeResolversFromPickers($objectTypeResolverPickers);
-                $interfaceTypeResolverClass = get_class($interfaceTypeResolver);
-                $notImplementingInterfaceTypeResolvers = array_filter(
-                    $objectTypeResolvers,
-                    fn (ObjectTypeResolverInterface $objectTypeResolver) => !in_array(
-                        $interfaceTypeResolverClass,
-                        array_map(
-                            'get_class',
-                            $objectTypeResolver->getImplementedInterfaceTypeResolvers()
+            if ($interfaceTypeResolvers = $this->getUnionTypeInterfaceTypeResolvers()) {
+                $notImplementingInterfaceTypeResolvers = [];
+                foreach ($interfaceTypeResolvers as $interfaceTypeResolver) {
+                    $objectTypeResolvers = $this->getObjectTypeResolversFromPickers($objectTypeResolverPickers);
+                    $interfaceTypeResolverClass = get_class($interfaceTypeResolver);
+                    $notImplementingInterfaceTypeResolvers = array_merge(
+                        $notImplementingInterfaceTypeResolvers,
+                        array_filter(
+                            $objectTypeResolvers,
+                            fn (ObjectTypeResolverInterface $objectTypeResolver) => !in_array(
+                                $interfaceTypeResolverClass,
+                                array_map(
+                                    'get_class',
+                                    $objectTypeResolver->getImplementedInterfaceTypeResolvers()
+                                )
+                            )
                         )
-                    )
-                );
+                    );
+                }
                 if ($notImplementingInterfaceTypeResolvers) {
                     throw new Exception(
                         sprintf(
