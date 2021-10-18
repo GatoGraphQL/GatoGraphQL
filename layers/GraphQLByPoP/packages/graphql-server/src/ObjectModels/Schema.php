@@ -76,7 +76,12 @@ class Schema
             TypeKinds::SCALAR => new ScalarType($fullSchemaDefinition, $typeSchemaDefinitionPath),
             TypeKinds::ENUM => new EnumType($fullSchemaDefinition, $typeSchemaDefinitionPath),
             TypeKinds::INPUT_OBJECT => new InputObjectType($fullSchemaDefinition, $typeSchemaDefinitionPath),
-            default => new Exception(sprintf(
+            /**
+             * @todo: This code is not downgraded to PHP 7.1 properly!
+             * Update to Rector v0.11.59 to fix it
+             * @see https://github.com/rectorphp/rector/issues/6750
+             */
+            default => throw new Exception(sprintf(
                 $this->getTranslationAPI()->__('Unknown type kind \'%s\'', 'graphql-server'),
                 $typeKind
             )),
