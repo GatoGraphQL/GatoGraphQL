@@ -160,6 +160,11 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             // Add the Query Catalogue
             $schemaDefinition[SchemaDefinition::PERSISTED_QUERIES] = $this->queryCatalogueManager->getPersistedQueriesForSchema();
 
+            // Sort the elements in the schema alphabetically
+            if (ComponentConfiguration::sortFullSchemaAlphabetically()) {
+                $this->sortFullSchemaAlphabetically($schemaDefinition);
+            }
+
             // Store in the cache
             if ($useCache) {
                 $persistentCache->storeCache($cacheKey, $cacheType, $schemaDefinition);
@@ -167,6 +172,47 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
 
         return $schemaDefinition;
+    }
+
+    public function sortFullSchemaAlphabetically(array &$schemaDefinition): void
+    {
+        // Sort types
+        foreach (array_keys($schemaDefinition[SchemaDefinition::TYPES]) as $typeKind) {
+            ksort($schemaDefinition[SchemaDefinition::TYPES][$typeKind]);
+        }
+
+        // Sort fields and interfaces for each Object type
+        foreach (array_keys($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::OBJECT]) as $typeName) {
+            if (isset($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::FIELDS])) {
+                ksort($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::FIELDS]);
+            }
+            if (isset($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::INTERFACES])) {
+                ksort($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::INTERFACES]);
+            }
+        }
+
+        // Sort global fields
+        if (isset($schemaDefinition[SchemaDefinition::GLOBAL_FIELDS])) {
+            ksort($schemaDefinition[SchemaDefinition::GLOBAL_FIELDS]);
+        }
+
+        // Sort fields for each Interface type
+        foreach (array_keys($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INTERFACE]) as $typeName) {
+            if (isset($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::FIELDS])) {
+                ksort($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::FIELDS]);
+            }
+            if (isset($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::INTERFACES])) {
+                ksort($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::INTERFACES]);
+            }
+        }
+
+        // Sort directives
+        if (isset($schemaDefinition[SchemaDefinition::DIRECTIVES])) {
+            ksort($schemaDefinition[SchemaDefinition::DIRECTIVES]);
+        }
+        if (isset($schemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES])) {
+            ksort($schemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]);
+        }
     }
 
     private function addAccessedTypeAndDirectiveResolvers(

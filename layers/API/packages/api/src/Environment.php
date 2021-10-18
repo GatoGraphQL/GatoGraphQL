@@ -12,6 +12,7 @@ class Environment
     public const ENABLE_MUTATIONS = 'ENABLE_MUTATIONS';
     public const OVERRIDE_REQUEST_URI = 'OVERRIDE_REQUEST_URI';
     public const SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA = 'SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA';
+    public const SORT_FULL_SCHEMA_ALPHABETICALLY = 'SORT_FULL_SCHEMA_ALPHABETICALLY';
 
     public static function disableAPI(): bool
     {

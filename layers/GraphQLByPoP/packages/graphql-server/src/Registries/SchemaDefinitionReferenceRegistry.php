@@ -281,42 +281,12 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             }
         }
 
-        // Sort the elements in the schema alphabetically
-        if (ComponentConfiguration::sortGraphQLSchemaAlphabetically()) {
-            // Sort types
-            foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES]) as $typeKind) {
-                ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeKind]);
-            }
-
-            // Sort fields and interfaces for each Object type
-            foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT]) as $typeName) {
-                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::FIELDS])) {
-                    ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::FIELDS]);
-                }
-                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::INTERFACES])) {
-                    ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::INTERFACES]);
-                }
-            }
-
-            // Sort fields for each Interface type
-            foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE]) as $typeName) {
-                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::FIELDS])) {
-                    ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::FIELDS]);
-                }
-                if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::INTERFACES])) {
-                    ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::INTERFACES]);
-                }
-            }
-
-            // Sort global fields
-            if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_FIELDS])) {
-                ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_FIELDS]);
-            }
-
-            // Sort directives
-            if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_DIRECTIVES])) {
-                ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_DIRECTIVES]);
-            }
+        // Sort the elements in the schema alphabetically (if not already sorted!)
+        if (
+            !APIComponentConfiguration::sortFullSchemaAlphabetically()
+            && ComponentConfiguration::sortGraphQLSchemaAlphabetically()
+        ) {
+            $this->schemaDefinitionService->sortFullSchemaAlphabetically($this->fullSchemaDefinitionForGraphQL);
         }
     }
 
