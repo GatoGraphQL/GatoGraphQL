@@ -558,7 +558,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
     {
         $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs);
-        if ($fieldArgsSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName, $fieldArgs)) {
+        if ($fieldArgsSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName)) {
             /**
              * Validate mandatory values. If it produces errors, return immediately
              */
@@ -671,7 +671,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $fieldDeprecationMessage
             );
         }
-        if ($fieldArgsSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName, $fieldArgs)) {
+        if ($fieldArgsSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName)) {
             // Deprecations for the field args
             $fieldDeprecationMessages = array_merge(
                 $fieldDeprecationMessages,

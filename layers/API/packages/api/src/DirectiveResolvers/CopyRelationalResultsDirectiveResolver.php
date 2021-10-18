@@ -158,7 +158,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
         array &$schemaTraces
     ): void {
         // From the typeResolver, obtain under what type the data for the current object is stored
-        $dbKey = null;
+        $dbKey = $targetObjectTypeResolver = $unionTypeResolver = null;
         $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
         if ($isUnionTypeResolver) {
             /** @var UnionTypeResolverInterface */
