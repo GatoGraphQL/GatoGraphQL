@@ -342,7 +342,7 @@ class ComponentConfiguration
         if (APIComponentConfiguration::skipExposingGlobalFieldsInFullSchema()) {
             return false;
         }
-        
+
         // Define properties
         $envVariable = Environment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA;
         $selfProperty = &self::$exposeGlobalFieldsInGraphQLSchema;
