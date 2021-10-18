@@ -16,25 +16,11 @@ trait HasFieldsTypeTrait
      */
     protected array $fields;
 
-    protected function initFields(array &$fullSchemaDefinition, array $schemaDefinitionPath, bool $includeConnections): void
+    protected function initFields(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
         $this->fields = [];
 
         // Iterate to the definition of the fields in the schema, and create an object for each of them
-        // Print connections and then fields, it looks better in the Interactive Schema
-        // 1. Connections under this type
-        if ($includeConnections) {
-            $this->createFieldsFromPath(
-                $fullSchemaDefinition,
-                array_merge(
-                    $schemaDefinitionPath,
-                    [
-                        SchemaDefinition::CONNECTIONS,
-                    ]
-                )
-            );
-        }
-        // 2. Fields under this type
         $this->createFieldsFromPath(
             $fullSchemaDefinition,
             array_merge(
@@ -45,23 +31,13 @@ trait HasFieldsTypeTrait
             )
         );
         if (!APIComponentConfiguration::skipExposingGlobalFieldsInSchema()) {
-            // Global fields and connections have already been initialized, simply get the reference to the existing objects from the registryMap
-            // 1. Global fields
+            // Global fields have already been initialized, simply get the reference to the existing objects from the registryMap
             $this->getFieldsFromPath(
                 $fullSchemaDefinition,
                 [
                     SchemaDefinition::GLOBAL_FIELDS,
                 ]
             );
-            // 2. Global connections
-            if ($includeConnections) {
-                $this->getFieldsFromPath(
-                    $fullSchemaDefinition,
-                    [
-                        SchemaDefinition::GLOBAL_CONNECTIONS,
-                    ]
-                );
-            }
         }
 
         // Maybe sort fields and connections all together

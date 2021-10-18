@@ -13,7 +13,7 @@ class ObjectType extends AbstractNamedType implements HasFieldsTypeInterface, Ha
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
 
-        $this->initFields($fullSchemaDefinition, $schemaDefinitionPath, true);
+        $this->initFields($fullSchemaDefinition, $schemaDefinitionPath);
     }
 
     public function getKind(): string
