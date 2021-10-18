@@ -296,12 +296,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     protected function prependPathOnNestedErrors(array &$directiveSchemaError, string $directiveField): void
     {
-
-        if (isset($directiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED])) {
-            foreach ($directiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED] as &$nestedDirectiveSchemaError) {
-                array_unshift($nestedDirectiveSchemaError[Tokens::PATH], $directiveField);
-                $this->prependPathOnNestedErrors($nestedDirectiveSchemaError, $directiveField);
-            }
+        if (!isset($directiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED])) {
+            return;
+        }
+        foreach ($directiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED] as &$nestedDirectiveSchemaError) {
+            array_unshift($nestedDirectiveSchemaError[Tokens::PATH], $directiveField);
+            $this->prependPathOnNestedErrors($nestedDirectiveSchemaError, $directiveField);
         }
     }
 
