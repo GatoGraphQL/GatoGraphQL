@@ -1273,6 +1273,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             if ($args = $this->getDirectiveArgsSchemaDefinition($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::ARGS] = $args;
             }
+            if ($extensions = $this->getDirectiveSchemaDefinitionExtensions($relationalTypeResolver)) {
+                $schemaDefinition[SchemaDefinition::EXTENSIONS] = $extensions;
+            }
             /**
              * Please notice: the version always comes from the directiveResolver, and not from the schemaDefinitionResolver
              * That is because it is the implementer the one who knows what version it is, and not the one defining the interface
@@ -1285,16 +1288,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $schemaDefinition[SchemaDefinition::VERSION] = $version;
                 }
             }
-            $this->addDirectiveSchemaDefinition($schemaDefinition);
             $this->schemaDefinitionForDirectiveCache[$key] = $schemaDefinition;
         }
         return $this->schemaDefinitionForDirectiveCache[$key];
     }
 
-    /**
-     * Function to override
-     */
-    protected function addDirectiveSchemaDefinition(array &$schemaDefinition): void
+    public function getDirectiveSchemaDefinitionExtensions(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
+        return [];
     }
 }
