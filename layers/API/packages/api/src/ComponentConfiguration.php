@@ -17,7 +17,7 @@ class ComponentConfiguration
     private static bool $enableEmbeddableFields = false;
     private static bool $enableMutations = true;
     private static bool $overrideRequestURI = false;
-    private static bool $exposeGlobalFieldsInSchema = false;
+    private static bool $skipExposingGlobalFieldsInSchema = false;
 
     public static function useSchemaDefinitionCache(): bool
     {
@@ -119,11 +119,11 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function exposeGlobalFieldsInSchema(): bool
+    public static function skipExposingGlobalFieldsInSchema(): bool
     {
         // Define properties
-        $envVariable = Environment::EXPOSE_GLOBAL_FIELDS_IN_SCHEMA;
-        $selfProperty = &self::$exposeGlobalFieldsInSchema;
+        $envVariable = Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_SCHEMA;
+        $selfProperty = &self::$skipExposingGlobalFieldsInSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

@@ -26,7 +26,7 @@ class RootObjectTypeSchemaDefinitionProvider extends ObjectTypeSchemaDefinitionP
         );
 
         // Global fields are only added if enabled
-        if (!ComponentConfiguration::exposeGlobalFieldsInSchema()) {
+        if (ComponentConfiguration::skipExposingGlobalFieldsInSchema()) {
             return $schemaDefinition;
         }
         $this->addFieldSchemaDefinitions($globalSchemaDefinition, true);

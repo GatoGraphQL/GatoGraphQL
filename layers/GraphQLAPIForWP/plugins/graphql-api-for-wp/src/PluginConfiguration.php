@@ -581,6 +581,8 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             GraphQLServerEnvironment::ENABLE_PROACTIVE_FEEDBACK_DEPRECATIONS => false,
         ];
         $componentClassConfiguration[\PoP\API\Component::class] = [
+            // Do not expose global fields
+            \PoP\API\Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_SCHEMA => true,
             // Enable Mutations?
             \PoP\API\Environment::ENABLE_MUTATIONS => $moduleRegistry->isModuleEnabled(MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS),
         ];
