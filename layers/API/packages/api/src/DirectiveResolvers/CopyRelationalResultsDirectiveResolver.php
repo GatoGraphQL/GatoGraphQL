@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\API\DirectiveResolvers;
 
-use PoP\ComponentModel\DirectiveResolvers\AbstractDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
@@ -16,7 +15,7 @@ use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
+class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
     protected StringScalarTypeResolver $stringScalarTypeResolver;
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
@@ -28,13 +27,6 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
     ): void {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
-
-    public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array
-    {
-        return [
-            AbstractObjectTypeResolver::class,
-        ];
     }
 
     public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool
@@ -165,18 +157,29 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
         array &$schemaNotices,
         array &$schemaTraces
     ): void {
-        /** @var ObjectTypeResolverInterface */
-        $objectTypeResolver = $relationalTypeResolver;
+        // From the typeResolver, obtain under what type the data for the current object is stored
+        $dbKey = $targetObjectTypeResolver = $unionTypeResolver = null;
+        $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
+        if ($isUnionTypeResolver) {
+            /** @var UnionTypeResolverInterface */
+            $unionTypeResolver = $relationalTypeResolver;
+        } else {
+            /** @var ObjectTypeResolverInterface */
+            $targetObjectTypeResolver = $relationalTypeResolver;
+            $dbKey = $targetObjectTypeResolver->getTypeOutputDBKey();
+        }
 
         $copyFromFields = $this->directiveArgsForSchema['copyFromFields'];
         $copyToFields = $this->directiveArgsForSchema['copyToFields'] ?? $copyFromFields;
         $keepRelationalIDs = $this->directiveArgsForSchema['keepRelationalIDs'];
 
-        // From the typeResolver, obtain under what type the data for the current object is stored
-        $dbKey = $objectTypeResolver->getTypeOutputDBKey();
-
         // Copy the data from each of the relational object fields to the current object
         foreach ($idsDataFields as $id => $dataFields) {
+            $object = $objectIDItems[$id];
+            if ($isUnionTypeResolver) {
+                $targetObjectTypeResolver = $unionTypeResolver->getTargetObjectTypeResolver($object);
+                $dbKey = $targetObjectTypeResolver->getTypeOutputDBKey();
+            }
             foreach ($dataFields['direct'] as $relationalField) {
                 /**
                  * The data is stored under the field's output key.
@@ -199,7 +202,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractDirectiveResolver
                 $relationalFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($relationalField);
 
                 // Make sure the field is relational, and not a scalar or enum
-                $fieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($relationalField);
+                $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($relationalField);
                 if (!($fieldTypeResolver instanceof RelationalTypeResolverInterface)) {
                     $objectErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
