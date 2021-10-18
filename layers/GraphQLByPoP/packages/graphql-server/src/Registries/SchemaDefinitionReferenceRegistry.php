@@ -134,6 +134,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $vars = ApplicationState::getVars();
         $enableNestedMutations = $vars['nested-mutations-enabled'];
         $exposeSchemaIntrospectionFieldInSchema = ComponentConfiguration::exposeSchemaIntrospectionFieldInSchema();
+        $exposeGlobalFieldsInGraphQLSchema = ComponentConfiguration::exposeGlobalFieldsInGraphQLSchema();
 
         $rootTypeResolver = $this->graphQLSchemaDefinitionService->getRootObjectTypeResolver();
         $rootTypeName = $rootTypeResolver->getMaybeNamespacedTypeName();
@@ -149,13 +150,17 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::FIELDS]['mutationRoot']);
         }
 
-        /**
-         * Remove the introspection fields that must not be added to the schema:
-         * [GraphQL spec] Field "__typename" from all types.
-         * > This field is implicit and does not appear in the fields list in any defined type.
-         * @see http://spec.graphql.org/draft/#sel-FAJVHCBvBBhC4iC
-         */
-        unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_FIELDS]['__typename']);
+        if ($exposeGlobalFieldsInGraphQLSchema) {
+            /**
+             * Remove the introspection fields that must not be added to the schema:
+             * [GraphQL spec] Field "__typename" from all types.
+             * > This field is implicit and does not appear in the fields list in any defined type.
+             * @see http://spec.graphql.org/draft/#sel-FAJVHCBvBBhC4iC
+             */
+            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_FIELDS]['__typename']);
+        } else {
+            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_FIELDS]);
+        }
 
         /**
          * These fields can be exposed in the schema when configuring ACL,
@@ -208,7 +213,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         // 1. Global fields and directives
         if (
             ($addVersionToGraphQLSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription)
-            && ComponentConfiguration::exposeGlobalFieldsInGraphQLSchema()
+            && $exposeGlobalFieldsInGraphQLSchema
         ) {
             foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_FIELDS]) as $fieldName) {
                 $itemPath = [
@@ -283,8 +288,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeKind]);
             }
 
-            // Sort fields, connections and interfaces for each Object type
-            foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT] as $typeName => $typeSchemaDefinition) {
+            // Sort fields and interfaces for each Object type
+            foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT]) as $typeName) {
                 if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::FIELDS])) {
                     ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::FIELDS]);
                 }
@@ -294,13 +299,18 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             }
 
             // Sort fields for each Interface type
-            foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE] as $typeName => $typeSchemaDefinition) {
+            foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE]) as $typeName) {
                 if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::FIELDS])) {
                     ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::FIELDS]);
                 }
                 if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::INTERFACES])) {
                     ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::INTERFACES]);
                 }
+            }
+
+            // Sort global fields
+            if (isset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_FIELDS])) {
+                ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_FIELDS]);
             }
 
             // Sort directives
