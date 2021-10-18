@@ -582,7 +582,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
         ];
         $componentClassConfiguration[\PoP\API\Component::class] = [
             // Do not expose global fields
-            \PoP\API\Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_SCHEMA => true,
+            \PoP\API\Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA => true,
             // Enable Mutations?
             \PoP\API\Environment::ENABLE_MUTATIONS => $moduleRegistry->isModuleEnabled(MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS),
         ];
