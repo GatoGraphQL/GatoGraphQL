@@ -49,6 +49,14 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
         return $schemaDefinition;
     }
 
+    /**
+     * Watch out! The POSSIBLE_TYPES are injected in SchemaDefinitionService,
+     * so that only typeResolvers accessible from the Root are analyzed,
+     * and not necessarily all of them (as they appear in the TypeRegistry)
+     *
+     * For instance, QueryRoot with nested mutations enabled must be skipped,
+     * yet it would be retrieved if reading the types from the typeRegistry
+     */
     final protected function addPossibleTypeSchemaDefinitions(array &$schemaDefinition): void
     {
         // Initialize it here, but it will be filled in SchemaDefinitionService
