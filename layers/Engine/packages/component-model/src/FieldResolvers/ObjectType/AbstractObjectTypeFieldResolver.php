@@ -42,9 +42,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 {
     use AttachableExtensionTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
-    use FieldOrDirectiveResolverTrait;
-    use FieldOrDirectiveSchemaDefinitionResolverTrait {
+    use FieldOrDirectiveResolverTrait, FieldOrDirectiveSchemaDefinitionResolverTrait {
         FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldSchemaDefinition as upstreamGetFieldSchemaDefinition;
+        // Avoid trait collisions for PHP 7.1
+        FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldOrDirectiveArgSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
+        FieldOrDirectiveSchemaDefinitionResolverTrait::getSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
+        FieldOrDirectiveSchemaDefinitionResolverTrait::processSchemaDefinitionModifiers insteadof FieldOrDirectiveResolverTrait;
     }
 
     /**
