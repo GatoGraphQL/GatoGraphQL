@@ -24,7 +24,13 @@ class InputObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefiniti
     {
         $schemaDefinition = parent::getSchemaDefinition();
 
+        $this->addInputObjectSchemaDefinition($schemaDefinition);
 
         return $schemaDefinition;
+    }
+
+    final protected function addInputObjectSchemaDefinition(array &$schemaDefinition): void
+    {
+        // @todo Complete!
     }
 }

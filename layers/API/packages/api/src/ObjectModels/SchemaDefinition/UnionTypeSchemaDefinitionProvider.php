@@ -27,6 +27,15 @@ class UnionTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProv
     {
         $schemaDefinition = parent::getSchemaDefinition();
 
+        $this->addPossibleTypeSchemaDefinitions($schemaDefinition);
+        $this->addInterfaceSchemaDefinitions($schemaDefinition);
+        $this->addDirectiveSchemaDefinitions($schemaDefinition, false);
+
+        return $schemaDefinition;
+    }
+
+    final protected function addPossibleTypeSchemaDefinitions(array &$schemaDefinition): void
+    {
         // Iterate through the typeResolvers from all the pickers and get their schema definitions
         $schemaDefinition[SchemaDefinition::POSSIBLE_TYPES] = [];
         foreach ($this->unionTypeResolver->getObjectTypeResolverPickers() as $picker) {
@@ -39,21 +48,31 @@ class UnionTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProv
             $schemaDefinition[SchemaDefinition::POSSIBLE_TYPES][$pickerObjectTypeName] = $pickerObjectTypeSchemaDefinition;
             $this->accessedTypeAndDirectiveResolvers[$pickerObjectTypeResolver::class] = $pickerObjectTypeResolver;
         }
+    }
 
-        if (ComponentConfiguration::enableUnionTypeImplementingInterfaceType()) {
-            // If it returns an interface as type, add it to the schemaDefinition
-            if ($interfaceTypeResolver = $this->unionTypeResolver->getUnionTypeInterfaceTypeResolver()) {
-                $schemaDefinition[SchemaDefinition::INTERFACES] = [];
-                $interfaceTypeName = $interfaceTypeResolver->getMaybeNamespacedTypeName();
-                $interfaceTypeSchemaDefinition = [
-                    SchemaDefinition::TYPE_RESOLVER => $interfaceTypeResolver,
-                ];
-                SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($interfaceTypeSchemaDefinition);
-                $schemaDefinition[SchemaDefinition::INTERFACES][$interfaceTypeName] = $interfaceTypeSchemaDefinition;
-                $this->accessedTypeAndDirectiveResolvers[$interfaceTypeResolver::class] = $interfaceTypeResolver;
-            }
+    final protected function addInterfaceSchemaDefinitions(array &$schemaDefinition): void
+    {
+        if (!ComponentConfiguration::enableUnionTypeImplementingInterfaceType()) {
+            return;
         }
+        $schemaDefinition[SchemaDefinition::INTERFACES] = [];
 
+        // If it returns an interface as type, add it to the schemaDefinition
+        $interfaceTypeResolver = $this->unionTypeResolver->getUnionTypeInterfaceTypeResolver();
+        if ($interfaceTypeResolver === null) {
+            return;
+        }
+        $interfaceTypeName = $interfaceTypeResolver->getMaybeNamespacedTypeName();
+        $interfaceTypeSchemaDefinition = [
+            SchemaDefinition::TYPE_RESOLVER => $interfaceTypeResolver,
+        ];
+        SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($interfaceTypeSchemaDefinition);
+        $schemaDefinition[SchemaDefinition::INTERFACES][$interfaceTypeName] = $interfaceTypeSchemaDefinition;
+        $this->accessedTypeAndDirectiveResolvers[$interfaceTypeResolver::class] = $interfaceTypeResolver;
+    }
+
+    final protected function addDirectiveSchemaDefinitions(array &$schemaDefinition, bool $useGlobal): void
+    {
         // Add the directives (non-global)
         $schemaDefinition[SchemaDefinition::DIRECTIVES] = [];
         $schemaDirectiveResolvers = $this->unionTypeResolver->getSchemaDirectiveResolvers(false);
@@ -66,7 +85,5 @@ class UnionTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProv
             $this->accessedTypeAndDirectiveResolvers[$directiveResolver::class] = $directiveResolver;
             $this->accessedDirectiveResolverClassRelationalTypeResolvers[$directiveResolver::class] = $this->unionTypeResolver;
         }
-
-        return $schemaDefinition;
     }
 }

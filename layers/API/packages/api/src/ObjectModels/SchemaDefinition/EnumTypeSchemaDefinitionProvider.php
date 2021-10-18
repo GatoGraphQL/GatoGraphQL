@@ -25,10 +25,7 @@ class EnumTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvi
     {
         $schemaDefinition = parent::getSchemaDefinition();
 
-        $this->addSchemaDefinitionEnumValuesForField(
-            $schemaDefinition,
-            $this->enumTypeResolver
-        );
+        $this->addEnumSchemaDefinition($schemaDefinition);
 
         return $schemaDefinition;
     }
@@ -37,14 +34,12 @@ class EnumTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvi
      * Add the enum values in the schema: arrays of enum name,
      * description, deprecated and deprecation description
      */
-    protected function addSchemaDefinitionEnumValuesForField(
-        array &$schemaDefinition,
-        EnumTypeResolverInterface $enumTypeResolver,
-    ): void {
+    final protected function addEnumSchemaDefinition(array &$schemaDefinition): void
+    {
         $enums = [];
-        $enumValues = $enumTypeResolver->getEnumValues();
-        $enumValueDeprecationMessages = $enumTypeResolver->getEnumValueDeprecationMessages();
-        $enumValueDescriptions = $enumTypeResolver->getEnumValueDescriptions();
+        $enumValues = $this->enumTypeResolver->getEnumValues();
+        $enumValueDeprecationMessages = $this->enumTypeResolver->getEnumValueDeprecationMessages();
+        $enumValueDescriptions = $this->enumTypeResolver->getEnumValueDescriptions();
         foreach ($enumValues as $enumValue) {
             $enum = [
                 SchemaDefinition::VALUE => $enumValue,
