@@ -44,7 +44,7 @@ trait HasFieldsTypeTrait
                 ]
             )
         );
-        if (APIComponentConfiguration::exposeGlobalFieldsInSchema()) {
+        if (!APIComponentConfiguration::skipExposingGlobalFieldsInSchema()) {
             // Global fields and connections have already been initialized, simply get the reference to the existing objects from the registryMap
             // 1. Global fields
             $this->getFieldsFromPath(
