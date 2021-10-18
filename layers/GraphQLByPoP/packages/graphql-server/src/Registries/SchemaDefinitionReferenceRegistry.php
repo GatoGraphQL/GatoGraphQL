@@ -181,7 +181,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             /**
              * Check if to remove the "self" field everywhere, or if to keep it just for the Root type
              */
-            $keepSelfFieldForRootType = ComponentConfiguration::addSelfFieldForRootTypeToSchema();
+            $keepSelfFieldForRootType = ComponentConfiguration::exposeSelfFieldForRootTypeInGraphQLSchema();
             foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES] as $typeKind => $typeSchemaDefinitions) {
                 foreach (array_keys($typeSchemaDefinitions) as $typeName) {
                     if (!$keepSelfFieldForRootType || ($typeName !== $rootTypeName && ($enableNestedMutations || $typeName !== $queryRootTypeName))) {

@@ -12,7 +12,7 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static bool $addSelfFieldForRootTypeToSchema = false;
+    private static bool $exposeSelfFieldForRootTypeInGraphQLSchema = false;
     private static bool $sortSchemaAlphabetically = true;
     private static bool $enableProactiveFeedback = true;
     private static bool $enableProactiveFeedbackDeprecations = true;
@@ -31,11 +31,11 @@ class ComponentConfiguration
     private static bool $exposeSchemaIntrospectionFieldInSchema = false;
     private static bool $exposeGlobalFieldsInGraphQLSchema = false;
 
-    public static function addSelfFieldForRootTypeToSchema(): bool
+    public static function exposeSelfFieldForRootTypeInGraphQLSchema(): bool
     {
         // Define properties
-        $envVariable = Environment::ADD_SELF_FIELD_FOR_ROOT_TYPE_TO_SCHEMA;
-        $selfProperty = &self::$addSelfFieldForRootTypeToSchema;
+        $envVariable = Environment::EXPOSE_SELF_FIELD_FOR_ROOT_TYPE_IN_GRAPHQL_SCHEMA;
+        $selfProperty = &self::$exposeSelfFieldForRootTypeInGraphQLSchema;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
