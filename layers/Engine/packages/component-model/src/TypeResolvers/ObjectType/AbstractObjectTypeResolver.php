@@ -712,10 +712,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                  * Use arrow function here, or there's an issue when downgrading to PHP 7.1:
                  * vars `$a` and `$b` are wrongly added as `use($a, $b)` to the first anonymous function,
                  * as if they were present in the original function scope, which they are not.
-                 * 
+                 *
                  * The issue is actually not related to arrow function, but it's been fixed for it,
                  * but not for anonymous function
-                 * 
+                 *
                  * @see https://github.com/rectorphp/rector/issues/6730
                  */
                 fn (object $a, object $b) => get_class($a) <=> get_class($b),
