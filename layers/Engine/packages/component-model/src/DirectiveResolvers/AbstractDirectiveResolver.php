@@ -444,8 +444,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array $directiveArgs = []
     ): array {
         $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs);
-        $directiveSchemaDefinition = $this->getDirectiveSchemaDefinition($relationalTypeResolver);
-        if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
+        if ($directiveArgsSchemaDefinition = $this->getDirectiveArgsSchemaDefinition($relationalTypeResolver)) {
             /**
              * Validate mandatory values. If it produces errors, return immediately
              */
@@ -854,8 +853,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     public function resolveDirectiveDeprecationMessages(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): array
     {
         $directiveDeprecationMessages = [];
-        $directiveSchemaDefinition = $this->getDirectiveSchemaDefinition($relationalTypeResolver);
-        if ($directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? null) {
+        if ($directiveArgsSchemaDefinition = $this->getDirectiveArgsSchemaDefinition($relationalTypeResolver)) {
             // Deprecations for the field args
             $directiveDeprecationMessages = array_merge(
                 $directiveDeprecationMessages,
