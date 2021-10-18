@@ -10,6 +10,9 @@ services:
     GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface:
         class: \GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionService
 
+    GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxServiceInterface:
+        class: \GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxService
+
     GraphQLByPoP\GraphQLServer\Hooks\:
         resource: '../src/Hooks/*'
 
