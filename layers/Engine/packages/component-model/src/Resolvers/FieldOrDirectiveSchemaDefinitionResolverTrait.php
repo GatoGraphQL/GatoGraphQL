@@ -81,7 +81,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
             $schemaDefinition[SchemaDefinition::DEPRECATED] = true;
             $schemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationMessage;
         }
-        $this->processSchemaDefinitionModifiers(
+        $this->processTypeSchemaDefinitionModifiers(
             $schemaDefinition,
             $typeModifiers
         );
@@ -93,7 +93,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
      *
      * @see https://www.php.net/manual/en/language.operators.bitwise.php#91291
      */
-    private function processSchemaDefinitionModifiers(
+    private function processTypeSchemaDefinitionModifiers(
         array &$schemaDefinition,
         int $typeModifiers,
     ): void {
