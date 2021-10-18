@@ -13,7 +13,7 @@ class ComponentConfiguration
     use ComponentConfigurationTrait;
 
     private static bool $exposeSelfFieldForRootTypeInGraphQLSchema = false;
-    private static bool $sortSchemaAlphabetically = true;
+    private static bool $sortGraphQLSchemaAlphabetically = true;
     private static bool $enableProactiveFeedback = true;
     private static bool $enableProactiveFeedbackDeprecations = true;
     private static bool $enableProactiveFeedbackNotices = true;
@@ -49,11 +49,11 @@ class ComponentConfiguration
         return $selfProperty;
     }
 
-    public static function sortSchemaAlphabetically(): bool
+    public static function sortGraphQLSchemaAlphabetically(): bool
     {
         // Define properties
-        $envVariable = Environment::SORT_SCHEMA_ALPHABETICALLY;
-        $selfProperty = &self::$sortSchemaAlphabetically;
+        $envVariable = Environment::SORT_GRAPHQL_SCHEMA_ALPHABETICALLY;
+        $selfProperty = &self::$sortGraphQLSchemaAlphabetically;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

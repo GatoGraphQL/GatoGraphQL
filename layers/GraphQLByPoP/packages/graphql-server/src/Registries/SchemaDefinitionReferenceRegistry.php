@@ -277,7 +277,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
 
         // Sort the elements in the schema alphabetically
-        if (ComponentConfiguration::sortSchemaAlphabetically()) {
+        if (ComponentConfiguration::sortGraphQLSchemaAlphabetically()) {
             // Sort types
             foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES]) as $typeKind) {
                 ksort($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeKind]);
