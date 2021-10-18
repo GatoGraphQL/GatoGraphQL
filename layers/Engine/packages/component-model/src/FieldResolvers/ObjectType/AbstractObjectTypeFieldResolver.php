@@ -716,12 +716,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         foreach ($consolidatedFieldArgNames as $fieldArgName) {
             $consolidatedFieldArgsTypeModifiers[$fieldArgName] = $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
         }
-        if ($this->skipExposingDangerouslyDynamicScalarTypeInSchema(
-            $this->getFieldTypeResolver($objectTypeResolver, $fieldName),
-            $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
-            $consolidatedFieldArgsTypeModifiers
-        )) {
-           return true;
+        if (
+            $this->skipExposingDangerouslyDynamicScalarTypeInSchema(
+                $this->getFieldTypeResolver($objectTypeResolver, $fieldName),
+                $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
+                $consolidatedFieldArgsTypeModifiers
+            )
+        ) {
+            return true;
         }
 
         return false;

@@ -466,12 +466,14 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         foreach ($consolidatedFieldArgNames as $fieldArgName) {
             $consolidatedFieldArgsTypeModifiers[$fieldArgName] = $this->getConsolidatedFieldArgTypeModifiers($fieldName, $fieldArgName);
         }
-        if ($this->skipExposingDangerouslyDynamicScalarTypeInSchema(
-            $this->getFieldTypeResolver($fieldName),
-            $this->getConsolidatedFieldArgNameTypeResolvers($fieldName),
-            $consolidatedFieldArgsTypeModifiers
-        )) {
-           return true;
+        if (
+            $this->skipExposingDangerouslyDynamicScalarTypeInSchema(
+                $this->getFieldTypeResolver($fieldName),
+                $this->getConsolidatedFieldArgNameTypeResolvers($fieldName),
+                $consolidatedFieldArgsTypeModifiers
+            )
+        ) {
+            return true;
         }
 
         return false;
