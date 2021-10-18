@@ -4,14 +4,26 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Resolvers;
 
+use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait FieldOrDirectiveSchemaDefinitionResolverTrait
 {
+    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
+
+    #[Required]
+    final public function autowireFieldOrDirectiveSchemaDefinitionResolverTrait(
+        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
+    ): void {
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+    }
+
     final public function getFieldOrDirectiveArgSchemaDefinition(
         string $argName,
         InputTypeResolverInterface $argInputTypeResolver,
@@ -113,5 +125,47 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
                 }
             }
         }
+    }
+
+    /**
+     * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+     * In particular, it does not need to validate if it is an array or not,
+     * as according to the applied WrappingType.
+     *
+     * If disabled, then do not expose the field if either:
+     *
+     * 1. its type is `DangerouslyDynamic`
+     * 2. it has any mandatory argument of type `DangerouslyDynamic`
+     *
+     * @param array<string, InputTypeResolverInterface> $consolidatedFieldArgNameTypeResolvers
+     * @param array<string, int> $consolidatedFieldArgsTypeModifiers
+     */
+    protected function skipExposingDangerouslyDynamicScalarTypeInSchema(
+        TypeResolverInterface $fieldTypeResolver,
+        array $consolidatedFieldArgNameTypeResolvers,
+        array $consolidatedFieldArgsTypeModifiers,
+    ): bool {
+        if (!ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+            return false;
+        }
+
+        // 1. its type is `DangerouslyDynamic`
+        if ($fieldTypeResolver === $this->dangerouslyDynamicScalarTypeResolver) {
+            return true;
+        }
+
+        // 2. it has any mandatory argument of type `DangerouslyDynamic`
+        $dangerouslyDynamicFieldArgNameTypeResolvers = array_filter(
+            $consolidatedFieldArgNameTypeResolvers,
+            fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
+        );
+        foreach (array_keys($dangerouslyDynamicFieldArgNameTypeResolvers) as $fieldArgName) {
+            $consolidatedFieldArgTypeModifiers = $consolidatedFieldArgsTypeModifiers[$fieldArgName];
+            if ($consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::MANDATORY) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

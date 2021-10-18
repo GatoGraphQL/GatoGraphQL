@@ -706,34 +706,24 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     public function skipExposingFieldInSchema(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
         /**
-         * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
-         * In particular, it does not need to validate if it is an array or not,
-         * as according to the applied WrappingType.
+         * If `DangerouslyDynamic` is disabled, do not expose the field if either:
          *
-         * If disabled, then do not expose the field if either:
-         *
-         * 1. its type is `DangerouslyDynamic`
-         * 2. it has any mandatory argument of type `DangerouslyDynamic`
+         *   1. its type is `DangerouslyDynamic`
+         *   2. it has any mandatory argument of type `DangerouslyDynamic`
          */
-        if (ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
-            // 1. its type is `DangerouslyDynamic`
-            $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
-            if ($fieldTypeResolver === $this->dangerouslyDynamicScalarTypeResolver) {
-                return true;
-            }
-
-            // 2. it has any mandatory argument of type `DangerouslyDynamic`
-            $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
-            $dangerouslyDynamicFieldArgNameTypeResolvers = array_filter(
-                $consolidatedFieldArgNameTypeResolvers,
-                fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
-            );
-            foreach (array_keys($dangerouslyDynamicFieldArgNameTypeResolvers) as $fieldArgName) {
-                $consolidatedFieldArgTypeModifiers = $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
-                if ($consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::MANDATORY) {
-                    return true;
-                }
-            }
+        $consolidatedFieldArgNames = array_keys($this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName));
+        $consolidatedFieldArgsTypeModifiers = [];
+        foreach ($consolidatedFieldArgNames as $fieldArgName) {
+            $consolidatedFieldArgsTypeModifiers[$fieldArgName] = $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
+        }
+        if (
+            $this->skipExposingDangerouslyDynamicScalarTypeInSchema(
+                $this->getFieldTypeResolver($objectTypeResolver, $fieldName),
+                $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
+                $consolidatedFieldArgsTypeModifiers
+            )
+        ) {
+            return true;
         }
 
         return false;

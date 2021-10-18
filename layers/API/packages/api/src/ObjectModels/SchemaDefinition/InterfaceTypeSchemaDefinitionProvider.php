@@ -54,6 +54,11 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinition
         $schemaDefinition[SchemaDefinition::FIELDS] = [];
         $schemaInterfaceTypeFieldResolvers = $this->interfaceTypeResolver->getExecutableInterfaceTypeFieldResolversByField();
         foreach ($schemaInterfaceTypeFieldResolvers as $fieldName => $interfaceTypeFieldResolver) {
+            // Fields may not be directly visible in the schema
+            if ($interfaceTypeFieldResolver->skipExposingFieldInSchema($fieldName)) {
+                continue;
+            }
+
             $fieldSchemaDefinition = $interfaceTypeFieldResolver->getFieldSchemaDefinition($fieldName);
 
             // Extract the typeResolvers

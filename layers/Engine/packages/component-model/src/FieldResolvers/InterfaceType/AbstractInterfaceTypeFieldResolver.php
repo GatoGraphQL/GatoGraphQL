@@ -449,6 +449,37 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
 
     /**
+     * Fields may not be directly visible in the schema,
+     * eg: because they are used only by the application, and must not
+     * be exposed to the user (eg: "accessControlLists")
+     */
+    public function skipExposingFieldInSchema(string $fieldName): bool
+    {
+        /**
+         * If `DangerouslyDynamic` is disabled, do not expose the field if either:
+         *
+         *   1. its type is `DangerouslyDynamic`
+         *   2. it has any mandatory argument of type `DangerouslyDynamic`
+         */
+        $consolidatedFieldArgNames = array_keys($this->getConsolidatedFieldArgNameTypeResolvers($fieldName));
+        $consolidatedFieldArgsTypeModifiers = [];
+        foreach ($consolidatedFieldArgNames as $fieldArgName) {
+            $consolidatedFieldArgsTypeModifiers[$fieldArgName] = $this->getConsolidatedFieldArgTypeModifiers($fieldName, $fieldArgName);
+        }
+        if (
+            $this->skipExposingDangerouslyDynamicScalarTypeInSchema(
+                $this->getFieldTypeResolver($fieldName),
+                $this->getConsolidatedFieldArgNameTypeResolvers($fieldName),
+                $consolidatedFieldArgsTypeModifiers
+            )
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Field args may not be directly visible in the schema
      */
     public function skipExposingFieldArgInSchema(string $fieldName, string $fieldArgName): bool
