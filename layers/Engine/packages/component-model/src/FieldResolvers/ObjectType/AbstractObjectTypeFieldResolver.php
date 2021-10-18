@@ -46,7 +46,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldSchemaDefinition as upstreamGetFieldSchemaDefinition;
         // Avoid trait collisions for PHP 7.1
         FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldOrDirectiveArgSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
-        FieldOrDirectiveSchemaDefinitionResolverTrait::getSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
+        FieldOrDirectiveSchemaDefinitionResolverTrait::getTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::processSchemaDefinitionModifiers insteadof FieldOrDirectiveResolverTrait;
     }
 

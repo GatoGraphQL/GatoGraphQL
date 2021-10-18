@@ -32,7 +32,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
         int $argTypeModifiers,
         ?string $argDeprecationMessage,
     ): array {
-        return $this->getSchemaDefinition(
+        return $this->getTypeSchemaDefinition(
             $argName,
             $argInputTypeResolver,
             $argDescription,
@@ -49,7 +49,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
         int $fieldTypeModifiers,
         ?string $fieldDeprecationMessage,
     ): array {
-        return $this->getSchemaDefinition(
+        return $this->getTypeSchemaDefinition(
             $fieldName,
             $fieldTypeResolver,
             $fieldDescription,
@@ -59,7 +59,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
         );
     }
 
-    final public function getSchemaDefinition(
+    final public function getTypeSchemaDefinition(
         string $name,
         TypeResolverInterface $typeResolver,
         ?string $description,
