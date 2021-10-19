@@ -465,23 +465,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             return [$maybeError];
         }
         
-        if ($directiveArgsSchemaDefinition = $this->getDirectiveArgsSchemaDefinition($relationalTypeResolver)) {
-            if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
-                /**
-                 * Validate enums
-                 */
-                if (
-                    $maybeErrors = $this->validateEnumFieldOrDirectiveArguments(
-                        $directiveArgsSchemaDefinition,
-                        $directiveName,
-                        $directiveArgs,
-                        ResolverTypes::DIRECTIVE
-                    )
-                ) {
-                    return $maybeErrors;
-                }
-            }
-        }
         if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
             /**
              * Validate all enum values provided via args are valid
