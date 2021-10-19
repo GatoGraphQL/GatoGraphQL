@@ -20,6 +20,11 @@ class IPScalarTypeResolver extends AbstractScalarTypeResolver
         return 'IP';
     }
 
+    public function getTypeDescription(): ?string
+    {
+        return $this->translationAPI->__('IP scalar, such as 192.168.0.1', 'component-model');
+    }
+
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
     {
         if ($error = $this->validateIsNotStdClass($inputValue)) {

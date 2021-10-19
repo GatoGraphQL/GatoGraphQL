@@ -41,4 +41,9 @@ class BooleanScalarTypeResolver extends AbstractScalarTypeResolver
         }
         return (bool) $castInputValue;
     }
+
+    public function getTypeDescription(): ?string
+    {
+        return $this->translationAPI->__('The Boolean scalar type represents `true` or `false`.', 'component-model');
+    }
 }

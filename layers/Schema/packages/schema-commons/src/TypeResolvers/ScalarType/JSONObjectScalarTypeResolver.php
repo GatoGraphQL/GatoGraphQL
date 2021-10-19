@@ -21,6 +21,11 @@ class JSONObjectScalarTypeResolver extends AbstractScalarTypeResolver
         return 'JSONObject';
     }
 
+    public function getTypeDescription(): ?string
+    {
+        return $this->translationAPI->__('Custom Scalar representing a JSON Object of unrestricted shape', 'component-model');
+    }
+
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
     {
         if (!($inputValue instanceof stdClass)) {

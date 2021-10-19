@@ -21,6 +21,11 @@ class IntScalarTypeResolver extends AbstractScalarTypeResolver
         return 'Int';
     }
 
+    public function getTypeDescription(): ?string
+    {
+        return $this->translationAPI->__('The Int scalar type represents non-fractional signed whole numeric values.', 'component-model');
+    }
+
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
     {
         if ($error = $this->validateIsNotStdClass($inputValue)) {
