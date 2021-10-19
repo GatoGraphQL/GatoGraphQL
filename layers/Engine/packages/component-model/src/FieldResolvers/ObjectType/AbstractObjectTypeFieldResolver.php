@@ -47,6 +47,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldOrDirectiveArgTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::getTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::processSchemaDefinitionTypeModifiers insteadof FieldOrDirectiveResolverTrait;
+        FieldOrDirectiveSchemaDefinitionResolverTrait::autowireFieldOrDirectiveSchemaDefinitionResolverTrait insteadof FieldOrDirectiveResolverTrait;
+        FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
+        FieldOrDirectiveSchemaDefinitionResolverTrait::isDangerouslyDynamicScalarFieldType insteadof FieldOrDirectiveResolverTrait;
+        FieldOrDirectiveSchemaDefinitionResolverTrait::hasMandatoryDangerouslyDynamicScalarInputType insteadof FieldOrDirectiveResolverTrait;
     }
 
     /**
