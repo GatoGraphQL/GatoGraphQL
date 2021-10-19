@@ -783,11 +783,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $extensionFieldNames = $this->getFieldNamesResolvedByObjectTypeFieldResolver($objectTypeFieldResolver);
                 if (in_array($fieldName, $extensionFieldNames)) {
                     // Check that the fieldResolver can handle the field based on other parameters (eg: "version" in the fieldArgs)
-                    if ($objectTypeFieldResolver->resolveCanProcess($this, $fieldName, $fieldArgs)) {
-                        $extensionPriority = $objectTypeFieldResolver->getPriorityToAttachToClasses();
-                        $classTypeResolverPriorities[] = $extensionPriority;
-                        $classObjectTypeFieldResolvers[] = $objectTypeFieldResolver;
+                    if (!$objectTypeFieldResolver->resolveCanProcess($this, $fieldName, $fieldArgs)) {
+                        continue;
                     }
+                    $extensionPriority = $objectTypeFieldResolver->getPriorityToAttachToClasses();
+                    $classTypeResolverPriorities[] = $extensionPriority;
+                    $classObjectTypeFieldResolvers[] = $objectTypeFieldResolver;
                 }
             }
             // Sort the found units by their priority, and then add to the stack of all units, for all classes
