@@ -27,9 +27,10 @@ class RegexScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
     {
-        if ($error = $this->validateIsNotStdClass($inputValue)) {
+        if ($error = $this->validateIsString($inputValue)) {
             return $error;
         }
+
         if ($error = $this->validateFilterVar($inputValue, \FILTER_VALIDATE_REGEXP)) {
             return $error;
         }

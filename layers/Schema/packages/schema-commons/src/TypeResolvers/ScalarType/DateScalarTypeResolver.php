@@ -33,17 +33,8 @@ class DateScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
     {
-        if ($error = $this->validateIsNotStdClass($inputValue)) {
+        if ($error = $this->validateIsString($inputValue)) {
             return $error;
-        }
-
-        if (!is_string($inputValue)) {
-            return $this->getError(
-                sprintf(
-                    $this->translationAPI->__('Type \'%s\' must be provided as a string', 'component-model'),
-                    $this->getMaybeNamespacedTypeName()
-                )
-            );
         }
 
         /**

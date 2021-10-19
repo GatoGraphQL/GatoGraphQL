@@ -89,4 +89,17 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         }
         return null;
     }
+
+    final protected function validateIsString(string|int|float|bool|stdClass $inputValue): ?Error
+    {
+        if (!is_string($inputValue)) {
+            return $this->getError(
+                sprintf(
+                    $this->translationAPI->__('Type \'%s\' must be provided as a string', 'component-model'),
+                    $this->getMaybeNamespacedTypeName()
+                )
+            );
+        }
+        return null;
+    }
 }
