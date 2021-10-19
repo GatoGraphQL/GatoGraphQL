@@ -84,25 +84,6 @@ trait FieldOrDirectiveResolverTrait
         return !FieldQueryUtils::isAnyFieldArgumentValueAFieldOrExpression($fieldOrDirectiveArgs);
     }
 
-    protected function validateEnumFieldOrDirectiveArguments(
-        array $fieldOrDirectiveArgsSchemaDefinition,
-        string $fieldOrDirectiveName,
-        array $fieldOrDirectiveArgs,
-        string $type
-    ): array {
-        // Iterate all the enum types and check that the provided values is one of them, or throw an error
-        if ($enumTypeFieldOrDirectiveArgsSchemaDefinition = SchemaHelpers::getEnumTypeFieldOrDirectiveArgsSchemaDefinition($fieldOrDirectiveArgsSchemaDefinition)) {
-            [$maybeErrors] = $this->doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
-                $enumTypeFieldOrDirectiveArgsSchemaDefinition,
-                $fieldOrDirectiveName,
-                $fieldOrDirectiveArgs,
-                $type
-            );
-            return $maybeErrors;
-        }
-        return [];
-    }
-
     /**
      * @param array $enumDirectiveArgNameTypeResolvers array<string, EnumTypeResolverInterface>
      * @param array $enumDirectiveArgNamesIsArrayOfArrays array<string, bool>
