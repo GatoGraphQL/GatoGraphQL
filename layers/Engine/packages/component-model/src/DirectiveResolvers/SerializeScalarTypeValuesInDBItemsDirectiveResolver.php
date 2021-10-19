@@ -113,6 +113,7 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
                     continue;
                 }
                 
+                /** @var int */
                 $fieldTypeModifiers = $targetObjectTypeResolver->getFieldTypeModifiers($field);
                 $fieldScalarTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
                 $fieldScalarTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
@@ -131,8 +132,6 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
      * The response for Custom Scalar Types must be serialized.
      * The response type is the same as in the ScalarType's
      * `serialize` method.
-     *
-     * @param array<string, mixed> $fieldScalarSchemaDefinition
      */
     private function serializeScalarTypeValue(
         ScalarTypeResolverInterface $fieldScalarTypeResolver,
