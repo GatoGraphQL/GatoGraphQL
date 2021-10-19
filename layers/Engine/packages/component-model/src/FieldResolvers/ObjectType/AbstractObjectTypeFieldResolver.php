@@ -558,23 +558,26 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
     {
-        $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs);
-        if ($fieldArgsSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName)) {
-            /**
-             * Validate mandatory values. If it produces errors, return immediately
-             */
-            if (
-                $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
-                    $fieldArgsSchemaDefinition,
-                    $fieldName,
-                    $fieldArgs,
-                    ResolverTypes::FIELD
-                )
-            ) {
-                return [$maybeError];
-            }
-        }
         $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+
+        /**
+         * Validate all mandatory args have been provided
+         */
+        $mandatoryConsolidatedFieldArgNames = array_keys(array_filter(
+            $consolidatedFieldArgNameTypeResolvers,
+            fn (string $fieldArgName) => $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName) & SchemaTypeModifiers::MANDATORY,
+            ARRAY_FILTER_USE_KEY
+        ));
+        if ($maybeError = $this->doValidateNotMissingFieldOrDirectiveArguments(
+            $mandatoryConsolidatedFieldArgNames,
+            $fieldName,
+            $fieldArgs,
+            ResolverTypes::FIELD
+        )) {
+            return [$maybeError];
+        }
+        
+        $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs);
         if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
             /**
              * Validate all enum values provided via args are valid

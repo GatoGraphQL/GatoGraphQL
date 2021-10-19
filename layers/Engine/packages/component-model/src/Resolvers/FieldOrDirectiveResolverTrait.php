@@ -31,27 +31,6 @@ trait FieldOrDirectiveResolverTrait
      */
     protected array $enumValueArgumentValidationCache = [];
 
-    protected function validateNotMissingFieldOrDirectiveArguments(
-        array $fieldOrDirectiveArgsSchemaDefinition,
-        string $fieldOrDirectiveName,
-        array $fieldOrDirectiveArgs,
-        string $type
-    ): ?string {
-        if ($mandatoryArgs = SchemaHelpers::getSchemaMandatoryFieldOrDirectiveArgs($fieldOrDirectiveArgsSchemaDefinition)) {
-            if (
-                $maybeError = $this->doValidateNotMissingFieldOrDirectiveArguments(
-                    array_keys($mandatoryArgs),
-                    $fieldOrDirectiveName,
-                    $fieldOrDirectiveArgs,
-                    $type
-                )
-            ) {
-                return $maybeError;
-            }
-        }
-        return null;
-    }
-
     private function doValidateNotMissingFieldOrDirectiveArguments(
         array $mandatoryFieldOrDirectiveArgNames,
         string $fieldOrDirectiveName,
