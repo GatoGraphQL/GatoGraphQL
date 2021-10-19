@@ -10,6 +10,7 @@ use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\DirectiveTypeEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
 use PoP\API\Schema\SchemaDefinition;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -113,20 +114,13 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
             case 'directives':
                 $directiveIDs = $schema->getDirectiveIDs();
                 if ($ofTypes = $fieldArgs['ofTypes'] ?? null) {
-                    // Convert the enum from uppercase (as exposed in the API) to lowercase (as is its real value)
-                    $ofTypes = array_map(
-                        fn (string $enumValue) => $this->directiveTypeEnumTypeResolver->getEnumValueFromInput($enumValue),
-                        $ofTypes
-                    );
                     $ofTypeDirectiveResolvers = array_filter(
                         $this->directiveRegistry->getDirectiveResolvers(),
-                        function ($directiveResolver) use ($ofTypes) {
-                            return in_array($directiveResolver->getDirectiveType(), $ofTypes);
-                        }
+                        fn (DirectiveResolverInterface $directiveResolver) => in_array($directiveResolver->getDirectiveType(), $ofTypes)
                     );
                     // Calculate the directive IDs
                     $ofTypeDirectiveIDs = array_map(
-                        function ($directiveResolver) {
+                        function (DirectiveResolverInterface $directiveResolver): string {
                             // To retrieve the ID, use the same method to calculate the ID
                             // used when creating a new Directive instance
                             // (which we can't do here, since it has side-effects)
