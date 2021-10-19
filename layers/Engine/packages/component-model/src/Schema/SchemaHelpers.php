@@ -25,16 +25,6 @@ class SchemaHelpers
         ));
     }
 
-    public static function getSchemaMandatoryFieldOrDirectiveArgs(array $fieldOrDirectiveArgsSchemaDefinition)
-    {
-        return array_filter(
-            $fieldOrDirectiveArgsSchemaDefinition,
-            function ($fieldOrDirectiveArgSchemaDefinition) {
-                return $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::MANDATORY] ?? false;
-            }
-        );
-    }
-
     public static function getEnumTypeFieldOrDirectiveArgsSchemaDefinition(array $fieldOrDirectiveArgsSchemaDefinition)
     {
         return array_filter(
