@@ -28,7 +28,7 @@ class DateScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Date scalar. It follows the ISO 8601 specification: "YYYY-MM-DD"', 'schema-commons');
+        return $this->translationAPI->__('Date scalar. It follows the ISO 8601 specification: "Y-m-d"', 'schema-commons');
     }
 
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
