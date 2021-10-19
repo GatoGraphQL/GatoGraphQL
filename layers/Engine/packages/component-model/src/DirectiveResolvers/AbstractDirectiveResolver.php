@@ -291,7 +291,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     public function validateDirectiveArgumentsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
     {
-        $deprecationMessages = $this->resolveDirectiveDeprecationMessages(
+        $deprecationMessages = $this->resolveDirectiveValidationDeprecationMessages(
             $relationalTypeResolver,
             $directiveName,
             $directiveArgs
@@ -825,7 +825,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * @return string[]
      */
-    public function resolveDirectiveDeprecationMessages(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): array
+    public function resolveDirectiveValidationDeprecationMessages(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): array
     {
         $directiveDeprecationMessages = [];
 
