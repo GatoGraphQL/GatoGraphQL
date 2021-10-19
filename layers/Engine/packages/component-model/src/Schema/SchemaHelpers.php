@@ -25,14 +25,6 @@ class SchemaHelpers
         ));
     }
 
-    public static function getEnumTypeFieldOrDirectiveArgsSchemaDefinition(array $fieldOrDirectiveArgsSchemaDefinition)
-    {
-        return array_filter(
-            $fieldOrDirectiveArgsSchemaDefinition,
-            fn ($fieldOrDirectiveArgSchemaDefinition) => $fieldOrDirectiveArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER] instanceof EnumTypeResolverInterface
-        );
-    }
-
     /**
      * @return array<string, EnumTypeResolverInterface>
      */
