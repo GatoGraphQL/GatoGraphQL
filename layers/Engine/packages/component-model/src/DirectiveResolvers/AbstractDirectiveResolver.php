@@ -453,15 +453,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             fn (string $directiveArgName) => ($this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName) & SchemaTypeModifiers::MANDATORY) === 1,
             ARRAY_FILTER_USE_KEY
         ));
-        if ($maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
-            $mandatoryConsolidatedDirectiveArgNames,
-            $directiveName,
-            $directiveArgs,
-            ResolverTypes::DIRECTIVE
-        )) {
+        if (
+            $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
+                $mandatoryConsolidatedDirectiveArgNames,
+                $directiveName,
+                $directiveArgs,
+                ResolverTypes::DIRECTIVE
+            )
+        ) {
             return [$maybeError];
         }
-        
+
         if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs)) {
             /**
              * Validate all enum values provided via args are valid
@@ -845,7 +847,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     public function resolveDirectiveDeprecationMessages(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): array
     {
         $directiveDeprecationMessages = [];
-        
+
         /**
          * Deprecations for the directive args of Enum Type
          */
