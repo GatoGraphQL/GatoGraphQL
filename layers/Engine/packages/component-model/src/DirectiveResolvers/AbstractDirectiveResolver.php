@@ -444,12 +444,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         string $directiveName,
         array $directiveArgs = []
     ): array {
-        $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs);
-        $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
-        
         /**
          * Validate all mandatory args have been provided
          */
+        $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
         $mandatoryConsolidatedDirectiveArgNames = array_keys(array_filter(
             $consolidatedDirectiveArgNameTypeResolvers,
             fn (string $directiveArgName) => $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName) & SchemaTypeModifiers::MANDATORY,
@@ -464,7 +462,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             return [$maybeError];
         }
         
-        if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
+        if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs)) {
             /**
              * Validate all enum values provided via args are valid
              */

@@ -526,11 +526,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
     {
-        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
-
         /**
          * Validate all mandatory args have been provided
          */
+        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         $mandatoryConsolidatedFieldArgNames = array_keys(array_filter(
             $consolidatedFieldArgNameTypeResolvers,
             fn (string $fieldArgName) => $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName) & SchemaTypeModifiers::MANDATORY,
@@ -545,8 +544,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return [$maybeError];
         }
         
-        $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs);
-        if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
+        if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs)) {
             /**
              * Validate all enum values provided via args are valid
              */
@@ -586,13 +584,13 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 return $maybeErrors;
             }
         }
-        // If a MutationResolver is declared, let it resolve the value
+
+        /**
+         * If a MutationResolver is declared, let it validate the schema
+         */
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
-        if ($mutationResolver !== null) {
-            // Validate on the schema?
-            if (!$this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
-                return $mutationResolver->validateErrors($fieldArgs);
-            }
+        if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
+            return $mutationResolver->validateErrors($fieldArgs);
         }
 
         // Custom validations
