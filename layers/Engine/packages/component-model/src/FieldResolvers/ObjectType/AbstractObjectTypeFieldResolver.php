@@ -532,7 +532,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         $mandatoryConsolidatedFieldArgNames = array_keys(array_filter(
             $consolidatedFieldArgNameTypeResolvers,
-            fn (string $fieldArgName) => ($this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName) & SchemaTypeModifiers::MANDATORY) === 1,
+            fn (string $fieldArgName) => ($this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName) & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY,
             ARRAY_FILTER_USE_KEY
         ));
         if (
@@ -558,8 +558,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $enumConsolidatedFieldArgNamesIsArrayOfArrays = $enumConsolidatedFieldArgNamesIsArray = [];
             foreach (array_keys($enumConsolidatedFieldArgNameTypeResolvers) as $fieldArgName) {
                 $consolidatedFieldArgTypeModifiers = $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
-                $enumConsolidatedFieldArgNamesIsArrayOfArrays[$fieldArgName] = ($consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === 1;
-                $enumConsolidatedFieldArgNamesIsArray[$fieldArgName] = ($consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === 1;
+                $enumConsolidatedFieldArgNamesIsArrayOfArrays[$fieldArgName] = ($consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+                $enumConsolidatedFieldArgNamesIsArray[$fieldArgName] = ($consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
             }
             [$maybeErrors] = $this->validateEnumFieldOrDirectiveArguments(
                 $enumConsolidatedFieldArgNameTypeResolvers,
