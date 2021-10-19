@@ -23,7 +23,12 @@ class JSONObjectScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Custom Scalar representing a JSON Object of unrestricted shape', 'component-model');
+        return $this->translationAPI->__('Custom scalar representing a JSON Object of unrestricted shape', 'component-model');
+    }
+
+    public function getSpecifiedByURL(): ?string
+    {
+        return 'https://datatracker.ietf.org/doc/html/rfc7159';
     }
 
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error

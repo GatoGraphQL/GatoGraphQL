@@ -25,6 +25,11 @@ class EmailScalarTypeResolver extends AbstractScalarTypeResolver
         return $this->translationAPI->__('Email scalar, such as leo@mysite.com', 'component-model');
     }
 
+    public function getSpecifiedByURL(): ?string
+    {
+        return 'https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1';
+    }
+
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
     {
         if ($error = $this->validateIsString($inputValue)) {
