@@ -7,12 +7,22 @@ namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 use PoP\PoP\Config\Rector\Configurators\AbstractContainerConfigurationService;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
+use Rector\Set\ValueObject\DowngradeLevelSetList;
 use Rector\Set\ValueObject\DowngradeSetList;
 
 abstract class AbstractDowngradeContainerConfigurationService extends AbstractContainerConfigurationService
 {
     public function configureContainer(): void
     {
+        /**
+         * This line produces a bug, executing `DowngradeParameterTypeWideningRector`
+         * when it should not.
+         * 
+         * @todo Check if it is fixed in Rector v0.11.60, then revert this code
+         * 
+         * @see https://github.com/leoloso/PoP/pull/1181
+         */
+        // $this->containerConfigurator->import(DowngradeLevelSetList::DOWN_TO_PHP_71);
         $this->containerConfigurator->import(DowngradeSetList::PHP_80);
         $this->containerConfigurator->import(DowngradeSetList::PHP_74);
         $this->containerConfigurator->import(DowngradeSetList::PHP_73);
