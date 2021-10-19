@@ -13,16 +13,21 @@ use stdClass;
  *
  * @see https://spec.graphql.org/draft/#sec-Scalars.Custom-Scalars
  */
-class IPScalarTypeResolver extends AbstractScalarTypeResolver
+class IPv4ScalarTypeResolver extends AbstractScalarTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'IP';
+        return 'IPv4';
+    }
+
+    public function getSpecifiedByURL(): ?string
+    {
+        return 'https://datatracker.ietf.org/doc/html/rfc4001#section-3';
     }
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('IP scalar, including both IPv4 (such as 192.168.0.1) and IPv6 (such as 2001:0db8:85a3:08d3:1319:8a2e:0370:7334)', 'component-model');
+        return $this->translationAPI->__('IPv4 scalar, such as 192.168.0.1', 'component-model');
     }
 
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
@@ -31,7 +36,7 @@ class IPScalarTypeResolver extends AbstractScalarTypeResolver
             return $error;
         }
 
-        if ($error = $this->validateFilterVar($inputValue, \FILTER_VALIDATE_IP)) {
+        if ($error = $this->validateFilterVar($inputValue, \FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
             return $error;
         }
         return $inputValue;
