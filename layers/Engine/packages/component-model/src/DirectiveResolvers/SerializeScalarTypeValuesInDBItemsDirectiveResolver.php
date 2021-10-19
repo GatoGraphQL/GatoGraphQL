@@ -112,7 +112,7 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
                 if ($value === null) {
                     continue;
                 }
-                
+
                 /** @var int */
                 $fieldTypeModifiers = $targetObjectTypeResolver->getFieldTypeModifiers($field);
                 $fieldScalarTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;

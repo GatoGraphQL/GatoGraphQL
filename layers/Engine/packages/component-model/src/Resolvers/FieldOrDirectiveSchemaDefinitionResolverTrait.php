@@ -150,10 +150,12 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
         }
 
         // 2. it has any mandatory argument of type `DangerouslyDynamic`
-        if ($this->hasMandatoryDangerouslyDynamicScalarInputType(
-            $consolidatedFieldArgNameTypeResolvers,
-            $consolidatedFieldArgsTypeModifiers,
-        )) {
+        if (
+            $this->hasMandatoryDangerouslyDynamicScalarInputType(
+                $consolidatedFieldArgNameTypeResolvers,
+                $consolidatedFieldArgsTypeModifiers,
+            )
+        ) {
             return true;
         }
 

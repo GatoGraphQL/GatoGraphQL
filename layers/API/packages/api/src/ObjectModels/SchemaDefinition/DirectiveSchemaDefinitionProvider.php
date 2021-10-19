@@ -33,7 +33,7 @@ class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider
 
         foreach (($schemaDefinition[SchemaDefinition::ARGS] ?? []) as $directiveArgName => &$directiveArgSchemaDefinition) {
             $directiveArgTypeResolver = $directiveArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
-            
+
             /**
              * If the directive arg must not be exposed, then remove it from the schema
              */
@@ -44,7 +44,7 @@ class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider
                 unset($schemaDefinition[SchemaDefinition::ARGS][$directiveArgName]);
                 continue;
             }
-            
+
             $this->accessedTypeAndDirectiveResolvers[$directiveArgTypeResolver::class] = $directiveArgTypeResolver;
             SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($schemaDefinition[SchemaDefinition::ARGS][$directiveArgName]);
         }
