@@ -90,7 +90,7 @@ trait FieldOrDirectiveResolverTrait
      * @param array $enumDirectiveArgNamesIsArray array<string, bool>
      * @return array[] 2 items: [0]: array of errors, [1]: array of deprecations
      */
-    private function doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
+    private function validateEnumFieldOrDirectiveArguments(
         array $enumDirectiveArgNameTypeResolvers,
         array $enumDirectiveArgNamesIsArrayOfArrays,
         array $enumDirectiveArgNamesIsArray,

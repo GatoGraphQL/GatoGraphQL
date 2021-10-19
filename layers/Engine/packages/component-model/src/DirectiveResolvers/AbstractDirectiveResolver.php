@@ -480,7 +480,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 $enumConsolidatedDirectiveArgNamesIsArrayOfArrays[$directiveArgName]  = $consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
                 $enumConsolidatedDirectiveArgNamesIsArray[$directiveArgName]  = $consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY;
             }
-            [$maybeErrors] = $this->doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
+            [$maybeErrors] = $this->validateEnumFieldOrDirectiveArguments(
                 $enumConsolidatedDirectiveArgNameTypeResolvers,
                 $enumConsolidatedDirectiveArgNamesIsArrayOfArrays,
                 $enumConsolidatedDirectiveArgNamesIsArray,
@@ -864,7 +864,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $enumConsolidatedDirectiveArgNamesIsArrayOfArrays[$directiveArgName]  = $consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
             $enumConsolidatedDirectiveArgNamesIsArray[$directiveArgName]  = $consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY;
         }
-        [$maybeErrors, $maybeDeprecations] = $this->doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
+        [$maybeErrors, $maybeDeprecations] = $this->validateEnumFieldOrDirectiveArguments(
             $enumConsolidatedDirectiveArgNameTypeResolvers,
             $enumConsolidatedDirectiveArgNamesIsArrayOfArrays,
             $enumConsolidatedDirectiveArgNamesIsArray,

@@ -561,7 +561,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $enumConsolidatedFieldArgNamesIsArrayOfArrays[$fieldArgName]  = $consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
                 $enumConsolidatedFieldArgNamesIsArray[$fieldArgName]  = $consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY;
             }
-            [$maybeErrors] = $this->doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
+            [$maybeErrors] = $this->validateEnumFieldOrDirectiveArguments(
                 $enumConsolidatedFieldArgNameTypeResolvers,
                 $enumConsolidatedFieldArgNamesIsArrayOfArrays,
                 $enumConsolidatedFieldArgNamesIsArray,
@@ -670,7 +670,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $enumConsolidatedFieldArgNamesIsArrayOfArrays[$fieldArgName]  = $consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
             $enumConsolidatedFieldArgNamesIsArray[$fieldArgName]  = $consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY;
         }
-        [$maybeErrors, $maybeDeprecations] = $this->doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
+        [$maybeErrors, $maybeDeprecations] = $this->validateEnumFieldOrDirectiveArguments(
             $enumConsolidatedFieldArgNameTypeResolvers,
             $enumConsolidatedFieldArgNamesIsArrayOfArrays,
             $enumConsolidatedFieldArgNamesIsArray,
