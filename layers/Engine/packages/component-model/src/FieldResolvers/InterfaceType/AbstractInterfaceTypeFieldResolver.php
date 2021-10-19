@@ -31,6 +31,10 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
 
     /** @var array<string, array> */
     protected array $schemaDefinitionForFieldCache = [];
+    /** @var array<string, string|null> */
+    protected array $consolidatedFieldDescriptionCache = [];
+    /** @var array<string, string|null> */
+    protected array $consolidatedFieldDeprecationMessageCache = [];
     /** @var array<string, array<string, InputTypeResolverInterface>> */
     protected array $consolidatedFieldArgNameTypeResolversCache = [];
     /** @var array<string, string|null> */
@@ -361,10 +365,12 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     {
         $schemaDefinition = $this->getFieldTypeSchemaDefinition(
             $fieldName,
+            // This method has no "Consolidated" because it makes no sense
             $this->getFieldTypeResolver($fieldName),
-            $this->getFieldDescription($fieldName),
+            $this->getConsolidatedFieldDescription($fieldName),
+            // This method has no "Consolidated" because it makes no sense
             $this->getFieldTypeModifiers($fieldName),
-            $this->getFieldDeprecationMessage($fieldName),
+            $this->getConsolidatedFieldDeprecationMessage($fieldName),
         );
 
         if ($args = $this->getFieldArgsSchemaDefinition($fieldName)) {
@@ -372,6 +378,46 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         }
 
         return $schemaDefinition;
+    }
+
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedFieldDescription(string $fieldName): ?string
+    {
+        // Cache the result
+        $cacheKey = $fieldName;
+        if (array_key_exists($cacheKey, $this->consolidatedFieldDescriptionCache)) {
+            return $this->consolidatedFieldDescriptionCache[$cacheKey];
+        }
+        $this->consolidatedFieldDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
+            HookNames::INTERFACE_TYPE_FIELD_DESCRIPTION,
+            $this->getFieldDescription($fieldName),
+            $this,
+            $fieldName,
+        );
+        return $this->consolidatedFieldDescriptionCache[$cacheKey];
+    }
+
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedFieldDeprecationMessage(string $fieldName): ?string
+    {
+        // Cache the result
+        $cacheKey = $fieldName;
+        if (array_key_exists($cacheKey, $this->consolidatedFieldDeprecationMessageCache)) {
+            return $this->consolidatedFieldDeprecationMessageCache[$cacheKey];
+        }
+        $this->consolidatedFieldDeprecationMessageCache[$cacheKey] = $this->hooksAPI->applyFilters(
+            HookNames::INTERFACE_TYPE_FIELD_DEPRECATION_MESSAGE,
+            $this->getFieldDeprecationMessage($fieldName),
+            $this,
+            $fieldName,
+        );
+        return $this->consolidatedFieldDeprecationMessageCache[$cacheKey];
     }
 
     /**
