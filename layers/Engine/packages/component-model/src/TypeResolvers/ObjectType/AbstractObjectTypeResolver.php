@@ -262,6 +262,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return null;
     }
 
+    final public function getFieldTypeModifiers(string $field): int
+    {
+        if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
+            list(
+                $validField,
+                $fieldName,
+            ) = $this->dissectFieldForSchema($field);
+            return $executableObjectTypeFieldResolver->getFieldTypeModifiers($this, $fieldName);
+        }
+
+        return null;
+    }
+
     final public function getFieldMutationResolver(string $field): ?MutationResolverInterface
     {
         if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
