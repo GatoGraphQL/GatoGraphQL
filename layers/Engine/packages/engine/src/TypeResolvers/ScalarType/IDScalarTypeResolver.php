@@ -20,6 +20,11 @@ class IDScalarTypeResolver extends AbstractScalarTypeResolver
         return 'ID';
     }
 
+    public function getTypeDescription(): ?string
+    {
+        return $this->translationAPI->__('The ID scalar type represents a unique identifier.', 'component-model');
+    }
+
     /**
      * From the GraphQL spec, for section "ID > Input Coercion":
      *

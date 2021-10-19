@@ -20,6 +20,11 @@ class ArrayKeyScalarTypeResolver extends AbstractScalarTypeResolver
         return 'ArrayKey';
     }
 
+    public function getTypeDescription(): ?string
+    {
+        return $this->translationAPI->__('Associative and non-associative array keys, which can be either a String or an Int.', 'component-model');
+    }
+
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
     {
         if ($error = $this->validateIsNotStdClass($inputValue)) {

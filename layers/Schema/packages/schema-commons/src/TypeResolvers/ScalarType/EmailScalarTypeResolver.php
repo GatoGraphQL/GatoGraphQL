@@ -20,6 +20,11 @@ class EmailScalarTypeResolver extends AbstractScalarTypeResolver
         return 'Email';
     }
 
+    public function getTypeDescription(): ?string
+    {
+        return $this->translationAPI->__('Email scalar, such as leo@mysite.com', 'component-model');
+    }
+
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
     {
         if ($error = $this->validateIsNotStdClass($inputValue)) {

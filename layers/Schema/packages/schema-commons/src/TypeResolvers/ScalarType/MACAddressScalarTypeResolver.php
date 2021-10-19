@@ -20,6 +20,11 @@ class MACAddressScalarTypeResolver extends AbstractScalarTypeResolver
         return 'MACAddress';
     }
 
+    public function getTypeDescription(): ?string
+    {
+        return $this->translationAPI->__('MAC address scalar, such as 00:1A:C2:7B:00:47', 'component-model');
+    }
+
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
     {
         if ($error = $this->validateIsNotStdClass($inputValue)) {

@@ -20,13 +20,18 @@ class TimeScalarTypeResolver extends AbstractScalarTypeResolver
         return 'Time';
     }
 
+    public function getTypeDescription(): ?string
+    {
+        return $this->translationAPI->__('Time scalar, such as /([a-zA-Z_][0-9a-zA-Z_]*)/', 'component-model');
+    }
+
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
     {
         if ($error = $this->validateIsNotStdClass($inputValue)) {
             return $error;
         }
 
-        $castInputValue = strtotime($inputValue);
+        $castInputValue = strtotime((string) $inputValue);
         if ($castInputValue === false) {
             return $this->getError($this->getDefaultErrorMessage($inputValue));
         }
