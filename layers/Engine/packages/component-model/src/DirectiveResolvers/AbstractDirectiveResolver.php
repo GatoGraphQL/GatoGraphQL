@@ -450,7 +450,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
         $mandatoryConsolidatedDirectiveArgNames = array_keys(array_filter(
             $consolidatedDirectiveArgNameTypeResolvers,
-            fn (string $directiveArgName) => $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName) & SchemaTypeModifiers::MANDATORY,
+            fn (string $directiveArgName) => $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName) & SchemaTypeModifiers::MANDATORY === 1,
             ARRAY_FILTER_USE_KEY
         ));
         if ($maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
@@ -474,8 +474,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $enumConsolidatedDirectiveArgNamesIsArrayOfArrays = $enumConsolidatedDirectiveArgNamesIsArray = [];
             foreach (array_keys($enumConsolidatedDirectiveArgNameTypeResolvers) as $directiveArgName) {
                 $consolidatedDirectiveArgTypeModifiers = $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
-                $enumConsolidatedDirectiveArgNamesIsArrayOfArrays[$directiveArgName]  = $consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-                $enumConsolidatedDirectiveArgNamesIsArray[$directiveArgName]  = $consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY;
+                $enumConsolidatedDirectiveArgNamesIsArrayOfArrays[$directiveArgName]  = $consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS === 1;
+                $enumConsolidatedDirectiveArgNamesIsArray[$directiveArgName]  = $consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY === 1;
             }
             [$maybeErrors] = $this->validateEnumFieldOrDirectiveArguments(
                 $enumConsolidatedDirectiveArgNameTypeResolvers,
