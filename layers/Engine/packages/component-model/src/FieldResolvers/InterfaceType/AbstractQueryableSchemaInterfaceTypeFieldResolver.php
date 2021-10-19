@@ -43,14 +43,6 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
         return parent::getFieldArgDescription($fieldName, $fieldArgName);
     }
 
-    public function getFieldArgDeprecationMessage(string $fieldName, string $fieldArgName): ?string
-    {
-        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($fieldName)) {
-            return $this->getFilterFieldArgDeprecationMessage($filterDataloadingModule, $fieldArgName);
-        }
-        return parent::getFieldArgDeprecationMessage($fieldName, $fieldArgName);
-    }
-
     public function getFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($fieldName)) {

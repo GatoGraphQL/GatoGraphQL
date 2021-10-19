@@ -28,10 +28,10 @@ use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -77,7 +77,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
     protected EngineInterface $engine;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
 
     #[Required]
     final public function autowireAbstractObjectTypeFieldResolver(
@@ -88,7 +87,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         EngineInterface $engine,
         StringScalarTypeResolver $stringScalarTypeResolver,
-        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
     ): void {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
         $this->nameResolver = $nameResolver;
@@ -97,7 +95,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $this->schemaDefinitionService = $schemaDefinitionService;
         $this->engine = $engine;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
     }
 
     final public function getClassesToAttachTo(): array
@@ -247,15 +244,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
-    public function getFieldArgDeprecationMessage(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
-    {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldArgDeprecationMessage($objectTypeResolver, $fieldName, $fieldArgName);
-        }
-        return null;
-    }
-
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
@@ -343,28 +331,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getConsolidatedFieldArgDeprecationMessage(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
-    {
-        // Cache the result
-        $cacheKey = $objectTypeResolver::class . '.' . $fieldName . '(' . $fieldArgName . ':)';
-        if (array_key_exists($cacheKey, $this->consolidatedFieldArgDeprecationMessageCache)) {
-            return $this->consolidatedFieldArgDeprecationMessageCache[$cacheKey];
-        }
-        $this->consolidatedFieldArgDeprecationMessageCache[$cacheKey] = $this->hooksAPI->applyFilters(
-            HookNames::OBJECT_TYPE_FIELD_ARG_DEPRECATION_MESSAGE,
-            $this->getFieldArgDeprecationMessage($objectTypeResolver, $fieldName, $fieldArgName),
-            $this,
-            $objectTypeResolver,
-            $fieldName,
-            $fieldArgName,
-        );
-        return $this->consolidatedFieldArgDeprecationMessageCache[$cacheKey];
-    }
-
-    /**
-     * Consolidation of the schema field arguments. Call this function to read the data
-     * instead of the individual functions, since it applies hooks to override/extend.
-     */
     final public function getConsolidatedFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         // Cache the result
@@ -417,30 +383,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $this->schemaFieldArgsCache[$cacheKey];
         }
         $schemaFieldArgs = [];
-        $skipExposingDangerouslyDynamicScalarTypeInSchema = ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema();
         $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         foreach ($consolidatedFieldArgNameTypeResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
-            /**
-             * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
-             * If disabled, then do not expose the directive args of this type
-             */
-            if (
-                $skipExposingDangerouslyDynamicScalarTypeInSchema
-                && $fieldArgInputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
-            ) {
-                continue;
-            }
-            if ($this->skipExposingFieldArgInSchema($objectTypeResolver, $fieldName, $fieldArgName)) {
-                continue;
-            }
-
             $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgTypeSchemaDefinition(
                 $fieldArgName,
                 $fieldArgInputTypeResolver,
                 $this->getConsolidatedFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
                 $this->getConsolidatedFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
                 $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
-                $this->getConsolidatedFieldArgDeprecationMessage($objectTypeResolver, $fieldName, $fieldArgName),
             );
         }
         $this->schemaFieldArgsCache[$cacheKey] = $schemaFieldArgs;
@@ -557,39 +507,53 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
     {
-        $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs);
-        if ($fieldArgsSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName)) {
+        /**
+         * Validate all mandatory args have been provided
+         */
+        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        $mandatoryConsolidatedFieldArgNames = array_keys(array_filter(
+            $consolidatedFieldArgNameTypeResolvers,
+            fn (string $fieldArgName) => ($this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName) & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY,
+            ARRAY_FILTER_USE_KEY
+        ));
+        if (
+            $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
+                $mandatoryConsolidatedFieldArgNames,
+                $fieldName,
+                $fieldArgs,
+                ResolverTypes::FIELD
+            )
+        ) {
+            return [$maybeError];
+        }
+
+        if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs)) {
             /**
-             * Validate mandatory values. If it produces errors, return immediately
+             * Validate all enum values provided via args are valid
              */
-            if (
-                $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
-                    $fieldArgsSchemaDefinition,
-                    $fieldName,
-                    $fieldArgs,
-                    ResolverTypes::FIELD
-                )
-            ) {
-                return [$maybeError];
+            /** @var array<string, EnumTypeResolverInterface> */
+            $enumConsolidatedFieldArgNameTypeResolvers = array_filter(
+                $consolidatedFieldArgNameTypeResolvers,
+                fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver instanceof EnumTypeResolverInterface
+            );
+            $enumConsolidatedFieldArgNamesIsArrayOfArrays = $enumConsolidatedFieldArgNamesIsArray = [];
+            foreach (array_keys($enumConsolidatedFieldArgNameTypeResolvers) as $fieldArgName) {
+                $consolidatedFieldArgTypeModifiers = $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
+                $enumConsolidatedFieldArgNamesIsArrayOfArrays[$fieldArgName] = ($consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+                $enumConsolidatedFieldArgNamesIsArray[$fieldArgName] = ($consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
+            }
+            [$maybeErrors] = $this->validateEnumFieldOrDirectiveArguments(
+                $enumConsolidatedFieldArgNameTypeResolvers,
+                $enumConsolidatedFieldArgNamesIsArrayOfArrays,
+                $enumConsolidatedFieldArgNamesIsArray,
+                $fieldName,
+                $fieldArgs,
+                ResolverTypes::FIELD
+            );
+            if ($maybeErrors) {
+                return $maybeErrors;
             }
 
-            if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
-                /**
-                 * Validate enums
-                 */
-                if (
-                    $maybeErrors = $this->validateEnumFieldOrDirectiveArguments(
-                        $fieldArgsSchemaDefinition,
-                        $fieldName,
-                        $fieldArgs,
-                        ResolverTypes::FIELD
-                    )
-                ) {
-                    return $maybeErrors;
-                }
-            }
-        }
-        if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
             /**
              * Validate field argument constraints
              */
@@ -603,13 +567,13 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 return $maybeErrors;
             }
         }
-        // If a MutationResolver is declared, let it resolve the value
+
+        /**
+         * If a MutationResolver is declared, let it validate the schema
+         */
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
-        if ($mutationResolver !== null) {
-            // Validate on the schema?
-            if (!$this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
-                return $mutationResolver->validateErrors($fieldArgs);
-            }
+        if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
+            return $mutationResolver->validateErrors($fieldArgs);
         }
 
         // Custom validations
@@ -671,28 +635,35 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $fieldDeprecationMessage
             );
         }
-        if ($fieldArgsSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName)) {
-            // Deprecations for the field args
-            $fieldDeprecationMessages = array_merge(
-                $fieldDeprecationMessages,
-                $this->maybeGetFieldOrDirectiveArgumentDeprecations(
-                    $fieldArgsSchemaDefinition,
-                    $fieldName,
-                    $fieldArgs,
-                    ResolverTypes::FIELD
-                )
-            );
-            // Deprecations for the field args of Enum Type
-            $fieldDeprecationMessages = array_merge(
-                $fieldDeprecationMessages,
-                $this->getEnumFieldOrDirectiveArgumentDeprecations(
-                    $fieldArgsSchemaDefinition,
-                    $fieldName,
-                    $fieldArgs,
-                    ResolverTypes::FIELD
-                )
-            );
+
+        /**
+         * Deprecations for the field args of Enum Type
+         */
+        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        /** @var array<string, EnumTypeResolverInterface> */
+        $enumConsolidatedFieldArgNameTypeResolvers = array_filter(
+            $consolidatedFieldArgNameTypeResolvers,
+            fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver instanceof EnumTypeResolverInterface
+        );
+        $enumConsolidatedFieldArgNamesIsArrayOfArrays = $enumConsolidatedFieldArgNamesIsArray = [];
+        foreach (array_keys($enumConsolidatedFieldArgNameTypeResolvers) as $fieldArgName) {
+            $consolidatedFieldArgTypeModifiers = $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
+            $enumConsolidatedFieldArgNamesIsArrayOfArrays[$fieldArgName]  = $consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+            $enumConsolidatedFieldArgNamesIsArray[$fieldArgName]  = $consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY;
         }
+        [$maybeErrors, $maybeDeprecations] = $this->validateEnumFieldOrDirectiveArguments(
+            $enumConsolidatedFieldArgNameTypeResolvers,
+            $enumConsolidatedFieldArgNamesIsArrayOfArrays,
+            $enumConsolidatedFieldArgNamesIsArray,
+            $fieldName,
+            $fieldArgs,
+            ResolverTypes::FIELD
+        );
+        $fieldDeprecationMessages = array_merge(
+            $fieldDeprecationMessages,
+            $maybeDeprecations
+        );
+
         return $fieldDeprecationMessages;
     }
 
@@ -703,25 +674,27 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     public function skipExposingFieldInSchema(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
-        /**
-         * If `DangerouslyDynamic` is disabled, do not expose the field if either:
-         *
-         *   1. its type is `DangerouslyDynamic`
-         *   2. it has any mandatory argument of type `DangerouslyDynamic`
-         */
-        $consolidatedFieldArgNames = array_keys($this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName));
-        $consolidatedFieldArgsTypeModifiers = [];
-        foreach ($consolidatedFieldArgNames as $fieldArgName) {
-            $consolidatedFieldArgsTypeModifiers[$fieldArgName] = $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
-        }
-        if (
-            $this->skipExposingDangerouslyDynamicScalarTypeInSchema(
-                $this->getFieldTypeResolver($objectTypeResolver, $fieldName),
-                $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
-                $consolidatedFieldArgsTypeModifiers
-            )
-        ) {
-            return true;
+        if (ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+            /**
+             * If `DangerouslyDynamic` is disabled, do not expose the field if either:
+             *
+             *   1. its type is `DangerouslyDynamic`
+             *   2. it has any mandatory argument of type `DangerouslyDynamic`
+             */
+            $consolidatedFieldArgNames = array_keys($this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName));
+            $consolidatedFieldArgsTypeModifiers = [];
+            foreach ($consolidatedFieldArgNames as $fieldArgName) {
+                $consolidatedFieldArgsTypeModifiers[$fieldArgName] = $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
+            }
+            if (
+                $this->isDangerouslyDynamicScalarFieldType(
+                    $this->getFieldTypeResolver($objectTypeResolver, $fieldName),
+                    $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
+                    $consolidatedFieldArgsTypeModifiers
+                )
+            ) {
+                return true;
+            }
         }
 
         return false;

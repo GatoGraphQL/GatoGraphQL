@@ -26,15 +26,6 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed;
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int;
     /**
-     * Watch out! The GraphQL spec does not include deprecations for arguments,
-     * only for fields and enum values, but here it is added nevertheless.
-     * This message is shown on runtime when executing a query with a deprecated field,
-     * but it's not shown when doing introspection.
-     *
-     * @see https://spec.graphql.org/draft/#sec-Schema-Introspection.Schema-Introspection-Schema
-     */
-    public function getFieldArgDeprecationMessage(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string;
-    /**
      * Invoke Schema Field Arguments
      *
      * @return array<string, InputTypeResolverInterface>
@@ -43,7 +34,6 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
     public function getConsolidatedFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string;
     public function getConsolidatedFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed;
     public function getConsolidatedFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int;
-    public function getConsolidatedFieldArgDeprecationMessage(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string;
     /**
      * Validate the constraints for a field argument
      *

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
-use GraphQLByPoP\GraphQLServer\Schema\SchemaHelpers;
+use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaHelpers;
 use PoP\API\Schema\SchemaDefinition;
 
 trait HasTypeSchemaDefinitionReferenceTrait
@@ -21,7 +21,7 @@ trait HasTypeSchemaDefinitionReferenceTrait
             $this->schemaDefinition[SchemaDefinition::TYPE_KIND],
             $this->schemaDefinition[SchemaDefinition::TYPE_NAME],
         ]);
-        return SchemaHelpers::getTypeNameForGraphQLSchema(
+        return GraphQLSchemaHelpers::getTypeNameForGraphQLSchema(
             $typeID,
             $this->schemaDefinition[SchemaDefinition::NON_NULLABLE] ?? null,
             $this->schemaDefinition[SchemaDefinition::IS_ARRAY] ?? false,

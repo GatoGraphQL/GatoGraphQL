@@ -51,14 +51,6 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         return parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName);
     }
 
-    public function getFieldArgDeprecationMessage(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
-    {
-        if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {
-            return $this->getFilterFieldArgDeprecationMessage($filterDataloadingModule, $fieldArgName);
-        }
-        return parent::getFieldArgDeprecationMessage($objectTypeResolver, $fieldName, $fieldArgName);
-    }
-
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {

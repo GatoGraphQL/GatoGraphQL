@@ -21,11 +21,11 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
@@ -64,7 +64,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected SemverHelperServiceInterface $semverHelperService;
     protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
 
     /**
      * @var array<string, mixed>
@@ -115,7 +114,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         FeedbackMessageStoreInterface $feedbackMessageStore,
         SemverHelperServiceInterface $semverHelperService,
         StringScalarTypeResolver $stringScalarTypeResolver,
-        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
     ): void {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
@@ -124,7 +122,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->semverHelperService = $semverHelperService;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
     }
 
     final public function getClassesToAttachTo(): array
@@ -443,39 +440,53 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         string $directiveName,
         array $directiveArgs = []
     ): array {
-        $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs);
-        if ($directiveArgsSchemaDefinition = $this->getDirectiveArgsSchemaDefinition($relationalTypeResolver)) {
+        /**
+         * Validate all mandatory args have been provided
+         */
+        $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
+        $mandatoryConsolidatedDirectiveArgNames = array_keys(array_filter(
+            $consolidatedDirectiveArgNameTypeResolvers,
+            fn (string $directiveArgName) => ($this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName) & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY,
+            ARRAY_FILTER_USE_KEY
+        ));
+        if (
+            $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
+                $mandatoryConsolidatedDirectiveArgNames,
+                $directiveName,
+                $directiveArgs,
+                ResolverTypes::DIRECTIVE
+            )
+        ) {
+            return [$maybeError];
+        }
+
+        if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs)) {
             /**
-             * Validate mandatory values. If it produces errors, return immediately
+             * Validate all enum values provided via args are valid
              */
-            if (
-                $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
-                    $directiveArgsSchemaDefinition,
-                    $directiveName,
-                    $directiveArgs,
-                    ResolverTypes::DIRECTIVE
-                )
-            ) {
-                return [$maybeError];
+            /** @var array<string, EnumTypeResolverInterface> */
+            $enumConsolidatedDirectiveArgNameTypeResolvers = array_filter(
+                $consolidatedDirectiveArgNameTypeResolvers,
+                fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver instanceof EnumTypeResolverInterface
+            );
+            $enumConsolidatedDirectiveArgNamesIsArrayOfArrays = $enumConsolidatedDirectiveArgNamesIsArray = [];
+            foreach (array_keys($enumConsolidatedDirectiveArgNameTypeResolvers) as $directiveArgName) {
+                $consolidatedDirectiveArgTypeModifiers = $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
+                $enumConsolidatedDirectiveArgNamesIsArrayOfArrays[$directiveArgName] = ($consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+                $enumConsolidatedDirectiveArgNamesIsArray[$directiveArgName] = ($consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
+            }
+            [$maybeErrors] = $this->validateEnumFieldOrDirectiveArguments(
+                $enumConsolidatedDirectiveArgNameTypeResolvers,
+                $enumConsolidatedDirectiveArgNamesIsArrayOfArrays,
+                $enumConsolidatedDirectiveArgNamesIsArray,
+                $directiveName,
+                $directiveArgs,
+                ResolverTypes::DIRECTIVE
+            );
+            if ($maybeErrors) {
+                return $maybeErrors;
             }
 
-            if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
-                /**
-                 * Validate enums
-                 */
-                if (
-                    $maybeErrors = $this->validateEnumFieldOrDirectiveArguments(
-                        $directiveArgsSchemaDefinition,
-                        $directiveName,
-                        $directiveArgs,
-                        ResolverTypes::DIRECTIVE
-                    )
-                ) {
-                    return $maybeErrors;
-                }
-            }
-        }
-        if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
             /**
              * Validate directive argument constraints
              */
@@ -489,6 +500,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 return $maybeErrors;
             }
         }
+
         // Custom validations
         return $this->doResolveSchemaValidationErrorDescriptions(
             $relationalTypeResolver,
@@ -746,27 +758,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * Consolidation of the schema directive arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getConsolidatedDirectiveArgDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
-    {
-        // Cache the result
-        $cacheKey = $relationalTypeResolver::class . '(' . $directiveArgName . ':)';
-        if (array_key_exists($cacheKey, $this->consolidatedDirectiveArgDeprecationMessageCache)) {
-            return $this->consolidatedDirectiveArgDeprecationMessageCache[$cacheKey];
-        }
-        $this->consolidatedDirectiveArgDeprecationMessageCache[$cacheKey] = $this->hooksAPI->applyFilters(
-            HookNames::DIRECTIVE_ARG_DEPRECATION_MESSAGE,
-            $this->getDirectiveArgDeprecationMessage($relationalTypeResolver, $directiveArgName),
-            $this,
-            $relationalTypeResolver,
-            $directiveArgName,
-        );
-        return $this->consolidatedDirectiveArgDeprecationMessageCache[$cacheKey];
-    }
-
-    /**
-     * Consolidation of the schema directive arguments. Call this function to read the data
-     * instead of the individual functions, since it applies hooks to override/extend.
-     */
     final public function getConsolidatedDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
     {
         // Cache the result
@@ -817,30 +808,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             return $this->schemaDirectiveArgsCache[$cacheKey];
         }
         $schemaDirectiveArgs = [];
-        $skipExposingDangerouslyDynamicScalarTypeInSchema = ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema();
         $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
         foreach ($consolidatedDirectiveArgNameTypeResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
-            /**
-             * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
-             * If disabled, then do not expose the directive args of this type
-             */
-            if (
-                $skipExposingDangerouslyDynamicScalarTypeInSchema
-                && $directiveArgInputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
-            ) {
-                continue;
-            }
-            if ($this->skipExposingDirectiveArgInSchema($relationalTypeResolver, $directiveArgName)) {
-                continue;
-            }
-
             $schemaDirectiveArgs[$directiveArgName] = $this->getFieldOrDirectiveArgTypeSchemaDefinition(
                 $directiveArgName,
                 $directiveArgInputTypeResolver,
                 $this->getConsolidatedDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
                 $this->getConsolidatedDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
                 $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
-                $this->getConsolidatedDirectiveArgDeprecationMessage($relationalTypeResolver, $directiveArgName),
             );
         }
         $this->schemaDirectiveArgsCache[$cacheKey] = $schemaDirectiveArgs;
@@ -853,28 +828,32 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     public function resolveDirectiveDeprecationMessages(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): array
     {
         $directiveDeprecationMessages = [];
-        if ($directiveArgsSchemaDefinition = $this->getDirectiveArgsSchemaDefinition($relationalTypeResolver)) {
-            // Deprecations for the field args
-            $directiveDeprecationMessages = array_merge(
-                $directiveDeprecationMessages,
-                $this->maybeGetFieldOrDirectiveArgumentDeprecations(
-                    $directiveArgsSchemaDefinition,
-                    $directiveName,
-                    $directiveArgs,
-                    ResolverTypes::DIRECTIVE
-                )
-            );
-            // Deprecations for the field args of Enum Type
-            $directiveDeprecationMessages = array_merge(
-                $directiveDeprecationMessages,
-                $this->getEnumFieldOrDirectiveArgumentDeprecations(
-                    $directiveArgsSchemaDefinition,
-                    $directiveName,
-                    $directiveArgs,
-                    ResolverTypes::DIRECTIVE
-                )
-            );
+
+        /**
+         * Deprecations for the directive args of Enum Type
+         */
+        $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
+        /** @var array<string, EnumTypeResolverInterface> */
+        $enumConsolidatedDirectiveArgNameTypeResolvers = array_filter(
+            $consolidatedDirectiveArgNameTypeResolvers,
+            fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver instanceof EnumTypeResolverInterface
+        );
+        $enumConsolidatedDirectiveArgNamesIsArrayOfArrays = $enumConsolidatedDirectiveArgNamesIsArray = [];
+        foreach (array_keys($enumConsolidatedDirectiveArgNameTypeResolvers) as $directiveArgName) {
+            $consolidatedDirectiveArgTypeModifiers = $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
+            $enumConsolidatedDirectiveArgNamesIsArrayOfArrays[$directiveArgName]  = $consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+            $enumConsolidatedDirectiveArgNamesIsArray[$directiveArgName]  = $consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY;
         }
+        [$maybeErrors, $maybeDeprecations] = $this->validateEnumFieldOrDirectiveArguments(
+            $enumConsolidatedDirectiveArgNameTypeResolvers,
+            $enumConsolidatedDirectiveArgNamesIsArrayOfArrays,
+            $enumConsolidatedDirectiveArgNamesIsArray,
+            $directiveName,
+            $directiveArgs,
+            ResolverTypes::DIRECTIVE
+        );
+        $directiveDeprecationMessages = $maybeDeprecations;
+
         return $directiveDeprecationMessages;
     }
 
@@ -1218,16 +1197,24 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * has any mandatory argument of type `DangerouslyDynamic`
          */
         if (ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+            /**
+             * If `DangerouslyDynamic` is disabled, do not expose the field if either:
+             *
+             *   1. its type is `DangerouslyDynamic`
+             *   2. it has any mandatory argument of type `DangerouslyDynamic`
+             */
             $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
-            $dangerouslyDynamicDirectiveArgNameTypeResolvers = array_filter(
-                $consolidatedDirectiveArgNameTypeResolvers,
-                fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
-            );
-            foreach (array_keys($dangerouslyDynamicDirectiveArgNameTypeResolvers) as $directiveArgName) {
-                $consolidatedDirectiveArgTypeModifiers = $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
-                if ($consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::MANDATORY) {
-                    return true;
-                }
+            $consolidatedDirectiveArgsTypeModifiers = [];
+            foreach (array_keys($consolidatedDirectiveArgNameTypeResolvers) as $directiveArgName) {
+                $consolidatedDirectiveArgsTypeModifiers[$directiveArgName] = $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
+            }
+            if (
+                $this->hasMandatoryDangerouslyDynamicScalarInputType(
+                    $consolidatedDirectiveArgNameTypeResolvers,
+                    $consolidatedDirectiveArgsTypeModifiers,
+                )
+            ) {
+                return true;
             }
         }
         return false;

@@ -18,6 +18,7 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface
     public function resolveFieldValidationWarningQualifiedEntries(string $field, array &$variables = null): array;
     public function resolveFieldDeprecationQualifiedEntries(string $field, array &$variables = null): array;
     public function getFieldTypeResolver(string $field): ?ConcreteTypeResolverInterface;
+    public function getFieldTypeModifiers(string $field): ?int;
     public function getFieldMutationResolver(string $field): ?MutationResolverInterface;
     public function isFieldAMutation(string $field): ?bool;
     public function getAllMandatoryDirectivesForFields(): array;

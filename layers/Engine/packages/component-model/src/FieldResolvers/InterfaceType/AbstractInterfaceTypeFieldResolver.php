@@ -216,15 +216,6 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return null;
     }
 
-    public function getFieldArgDeprecationMessage(string $fieldName, string $fieldArgName): ?string
-    {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldArgDeprecationMessage($fieldName, $fieldArgName);
-        }
-        return null;
-    }
-
     public function getFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
@@ -290,27 +281,6 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             $fieldArgName,
         );
         return $this->consolidatedFieldArgDescriptionCache[$cacheKey];
-    }
-
-    /**
-     * Consolidation of the schema field arguments. Call this function to read the data
-     * instead of the individual functions, since it applies hooks to override/extend.
-     */
-    final public function getConsolidatedFieldArgDeprecationMessage(string $fieldName, string $fieldArgName): ?string
-    {
-        // Cache the result
-        $cacheKey = $fieldName . '(' . $fieldArgName . ':)';
-        if (array_key_exists($cacheKey, $this->consolidatedFieldArgDeprecationMessageCache)) {
-            return $this->consolidatedFieldArgDeprecationMessageCache[$cacheKey];
-        }
-        $this->consolidatedFieldArgDeprecationMessageCache[$cacheKey] = $this->hooksAPI->applyFilters(
-            HookNames::INTERFACE_TYPE_FIELD_ARG_DEPRECATION_MESSAGE,
-            $this->getFieldArgDeprecationMessage($fieldName, $fieldArgName),
-            $this,
-            $fieldName,
-            $fieldArgName,
-        );
-        return $this->consolidatedFieldArgDeprecationMessageCache[$cacheKey];
     }
 
     /**
@@ -439,7 +409,6 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
                 $this->getConsolidatedFieldArgDescription($fieldName, $fieldArgName),
                 $this->getConsolidatedFieldArgDefaultValue($fieldName, $fieldArgName),
                 $this->getConsolidatedFieldArgTypeModifiers($fieldName, $fieldArgName),
-                $this->getConsolidatedFieldArgDeprecationMessage($fieldName, $fieldArgName),
             );
         }
         $this->schemaFieldArgsCache[$cacheKey] = $schemaFieldArgs;
@@ -453,25 +422,27 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      */
     public function skipExposingFieldInSchema(string $fieldName): bool
     {
-        /**
-         * If `DangerouslyDynamic` is disabled, do not expose the field if either:
-         *
-         *   1. its type is `DangerouslyDynamic`
-         *   2. it has any mandatory argument of type `DangerouslyDynamic`
-         */
-        $consolidatedFieldArgNames = array_keys($this->getConsolidatedFieldArgNameTypeResolvers($fieldName));
-        $consolidatedFieldArgsTypeModifiers = [];
-        foreach ($consolidatedFieldArgNames as $fieldArgName) {
-            $consolidatedFieldArgsTypeModifiers[$fieldArgName] = $this->getConsolidatedFieldArgTypeModifiers($fieldName, $fieldArgName);
-        }
-        if (
-            $this->skipExposingDangerouslyDynamicScalarTypeInSchema(
-                $this->getFieldTypeResolver($fieldName),
-                $this->getConsolidatedFieldArgNameTypeResolvers($fieldName),
-                $consolidatedFieldArgsTypeModifiers
-            )
-        ) {
-            return true;
+        if (ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+            /**
+             * If `DangerouslyDynamic` is disabled, do not expose the field if either:
+             *
+             *   1. its type is `DangerouslyDynamic`
+             *   2. it has any mandatory argument of type `DangerouslyDynamic`
+             */
+            $consolidatedFieldArgNames = array_keys($this->getConsolidatedFieldArgNameTypeResolvers($fieldName));
+            $consolidatedFieldArgsTypeModifiers = [];
+            foreach ($consolidatedFieldArgNames as $fieldArgName) {
+                $consolidatedFieldArgsTypeModifiers[$fieldArgName] = $this->getConsolidatedFieldArgTypeModifiers($fieldName, $fieldArgName);
+            }
+            if (
+                $this->isDangerouslyDynamicScalarFieldType(
+                    $this->getFieldTypeResolver($fieldName),
+                    $this->getConsolidatedFieldArgNameTypeResolvers($fieldName),
+                    $consolidatedFieldArgsTypeModifiers
+                )
+            ) {
+                return true;
+            }
         }
 
         return false;

@@ -10,5 +10,4 @@ class HookNames
     public const DIRECTIVE_ARG_DESCRIPTION = __CLASS__ . ':directive-arg-description';
     public const DIRECTIVE_ARG_DEFAULT_VALUE = __CLASS__ . ':directive-arg-default-value';
     public const DIRECTIVE_ARG_TYPE_MODIFIERS = __CLASS__ . ':directive-arg-type-modifiers';
-    public const DIRECTIVE_ARG_DEPRECATION_MESSAGE = __CLASS__ . ':directive-arg-deprecation-message';
 }

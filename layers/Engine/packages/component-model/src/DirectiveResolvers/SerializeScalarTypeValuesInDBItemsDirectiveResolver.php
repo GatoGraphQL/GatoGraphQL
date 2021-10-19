@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -97,8 +97,7 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
             }
             $dataFields = $idsDataFields[(string)$id]['direct'];
             foreach ($dataFields as $field) {
-                $fieldSchemaDefinition = $targetObjectTypeResolver->getFieldSchemaDefinition($field);
-                $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
+                $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($field);
                 if (!($fieldTypeResolver instanceof ScalarTypeResolverInterface)) {
                     continue;
                 }
@@ -113,10 +112,16 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
                 if ($value === null) {
                     continue;
                 }
+
+                /** @var int */
+                $fieldTypeModifiers = $targetObjectTypeResolver->getFieldTypeModifiers($field);
+                $fieldScalarTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+                $fieldScalarTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
                 // Serialize the scalar value stored in $dbItems
                 $dbItems[(string)$id][$fieldOutputKey] = $this->serializeScalarTypeValue(
                     $fieldScalarTypeResolver,
-                    $fieldSchemaDefinition,
+                    $fieldScalarTypeIsArrayOfArrays,
+                    $fieldScalarTypeIsArray,
                     $value
                 );
             }
@@ -127,15 +132,13 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
      * The response for Custom Scalar Types must be serialized.
      * The response type is the same as in the ScalarType's
      * `serialize` method.
-     *
-     * @param array<string, mixed> $fieldScalarSchemaDefinition
      */
     private function serializeScalarTypeValue(
         ScalarTypeResolverInterface $fieldScalarTypeResolver,
-        array $fieldScalarSchemaDefinition,
+        bool $fieldScalarTypeIsArrayOfArrays,
+        bool $fieldScalarTypeIsArray,
         mixed $value,
     ): string|int|float|bool|array {
-        $fieldScalarTypeResolver = $fieldScalarSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
         /**
          * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
          * In particular, it does not need to validate if it is an array or not,
@@ -153,7 +156,7 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
         }
 
         // If the value is an array of arrays, then serialize each subelement to the item type
-        if ($fieldScalarSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false) {
+        if ($fieldScalarTypeIsArrayOfArrays) {
             return $value === null ? null : array_map(
                 // If it contains a null value, return it as is
                 fn (?array $arrayValueElem) => $arrayValueElem === null ? null : array_map(
@@ -165,7 +168,7 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
         }
 
         // If the value is an array, then serialize each element to the item type
-        if ($fieldScalarSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false) {
+        if ($fieldScalarTypeIsArray) {
             return $value === null ? null : array_map(
                 fn (mixed $arrayValueElem) => $arrayValueElem === null ? null : $fieldScalarTypeResolver->serialize($arrayValueElem),
                 $value

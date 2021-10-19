@@ -7,8 +7,11 @@ namespace PoP\API\ObjectModels\SchemaDefinition;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\API\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\TypeKinds;
+use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 
 class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvider
 {
@@ -68,6 +71,13 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
 
     final protected function addFieldSchemaDefinitions(array &$schemaDefinition, bool $useGlobal): void
     {
+        $dangerouslyDynamicScalarTypeResolver = null;
+        if ($skipExposingDangerouslyDynamicScalarTypeInSchema = ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var DangerouslyDynamicScalarTypeResolver */
+            $dangerouslyDynamicScalarTypeResolver = $instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+        }
+
         // Add the fields (non-global)
         $schemaDefinition[SchemaDefinition::FIELDS] = [];
         $schemaObjectTypeFieldResolvers = $this->objectTypeResolver->getExecutableObjectTypeFieldResolversByField($useGlobal);
@@ -87,6 +97,18 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionPro
 
             foreach (($fieldSchemaDefinition[SchemaDefinition::ARGS] ?? []) as $fieldArgName => &$fieldArgSchemaDefinition) {
                 $fieldArgTypeResolver = $fieldArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
+
+                /**
+                 * If the field arg must not be exposed, then remove it from the schema
+                 */
+                $skipExposingDangerousDynamicType =
+                    $skipExposingDangerouslyDynamicScalarTypeInSchema
+                    && $fieldArgTypeResolver === $dangerouslyDynamicScalarTypeResolver;
+                if ($skipExposingDangerousDynamicType || $objectTypeFieldResolver->skipExposingFieldArgInSchema($this->objectTypeResolver, $fieldName, $fieldArgName)) {
+                    unset($fieldSchemaDefinition[SchemaDefinition::ARGS][$fieldArgName]);
+                    continue;
+                }
+
                 $this->accessedTypeAndDirectiveResolvers[$fieldArgTypeResolver::class] = $fieldArgTypeResolver;
                 SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($fieldSchemaDefinition[SchemaDefinition::ARGS][$fieldArgName]);
             }

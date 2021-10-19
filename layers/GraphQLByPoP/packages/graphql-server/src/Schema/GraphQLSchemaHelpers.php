@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
-class SchemaHelpers
+class GraphQLSchemaHelpers
 {
     /**
      * Convert the field type from its internal representation
