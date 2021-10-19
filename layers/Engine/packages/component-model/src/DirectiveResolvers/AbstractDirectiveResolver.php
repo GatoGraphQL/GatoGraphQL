@@ -812,23 +812,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             return $this->schemaDirectiveArgsCache[$cacheKey];
         }
         $schemaDirectiveArgs = [];
-        $skipExposingDangerouslyDynamicScalarTypeInSchema = ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema();
         $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
         foreach ($consolidatedDirectiveArgNameTypeResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
-            /**
-             * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
-             * If disabled, then do not expose the directive args of this type
-             */
-            if (
-                $skipExposingDangerouslyDynamicScalarTypeInSchema
-                && $directiveArgInputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
-            ) {
-                continue;
-            }
-            if ($this->skipExposingDirectiveArgInSchema($relationalTypeResolver, $directiveArgName)) {
-                continue;
-            }
-
             $schemaDirectiveArgs[$directiveArgName] = $this->getFieldOrDirectiveArgTypeSchemaDefinition(
                 $directiveArgName,
                 $directiveArgInputTypeResolver,
