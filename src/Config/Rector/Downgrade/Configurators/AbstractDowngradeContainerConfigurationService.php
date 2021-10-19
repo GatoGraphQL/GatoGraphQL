@@ -7,26 +7,13 @@ namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 use PoP\PoP\Config\Rector\Configurators\AbstractContainerConfigurationService;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
-use Rector\Set\ValueObject\DowngradeSetList;
+use Rector\Set\ValueObject\DowngradeLevelSetList;
 
 abstract class AbstractDowngradeContainerConfigurationService extends AbstractContainerConfigurationService
 {
     public function configureContainer(): void
     {
-        $this->containerConfigurator->import(DowngradeSetList::PHP_80);
-        $this->containerConfigurator->import(DowngradeSetList::PHP_74);
-        $this->containerConfigurator->import(DowngradeSetList::PHP_73);
-        /**
-         * Replace the current `DowngradeParameterTypeWideningRector` (because it takes too long)
-         * with a "legacy" version (from up to v0.10.9), which is fast
-         * but does not replace code within traits.
-         *
-         * To make up, the hack below manually fixes the code within traits.
-         *
-         * @see https://github.com/leoloso/PoP/issues/715
-         */
-        $this->containerConfigurator->import(DowngradeSetList::PHP_72);
-        // $this->containerConfigurator->import(CustomDowngradeSetList::PHP_72);
+        $this->containerConfigurator->import(DowngradeLevelSetList::DOWN_TO_PHP_71);
 
         /**
          * Hack to fix bug.
