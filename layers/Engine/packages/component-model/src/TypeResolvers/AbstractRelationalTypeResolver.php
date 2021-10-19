@@ -450,7 +450,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
 
                 // Validate against the directiveResolver
-                if ($maybeErrors = $directiveResolverInstance->resolveFieldValidationErrorDescriptions($this, $directiveName, $directiveArgs)) {
+                if ($maybeErrors = $directiveResolverInstance->resolveDirectiveValidationErrorDescriptions($this, $directiveName, $directiveArgs)) {
                     foreach ($maybeErrors as $error) {
                         $schemaErrors[] = [
                             Tokens::PATH => [$fieldDirective],

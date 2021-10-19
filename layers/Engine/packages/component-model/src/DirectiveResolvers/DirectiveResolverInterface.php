@@ -138,7 +138,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     /**
      * @return string[]
      */
-    public function resolveFieldValidationErrorDescriptions(
+    public function resolveDirectiveValidationErrorDescriptions(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs = []
