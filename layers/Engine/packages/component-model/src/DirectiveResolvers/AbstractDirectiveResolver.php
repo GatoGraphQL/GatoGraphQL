@@ -19,8 +19,10 @@ use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTr
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
@@ -444,21 +446,26 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array $directiveArgs = []
     ): array {
         $canValidateFieldOrDirectiveArgumentsWithValuesForSchema = $this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs);
+        $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
+        
+        /**
+         * Validate all mandatory args have been provided
+         */
+        $mandatoryConsolidatedDirectiveArgNames = array_keys(array_filter(
+            $consolidatedDirectiveArgNameTypeResolvers,
+            fn (string $directiveArgName) => $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName) & SchemaTypeModifiers::MANDATORY,
+            ARRAY_FILTER_USE_KEY
+        ));
+        if ($maybeError = $this->doValidateNotMissingFieldOrDirectiveArguments(
+            $mandatoryConsolidatedDirectiveArgNames,
+            $directiveName,
+            $directiveArgs,
+            ResolverTypes::DIRECTIVE
+        )) {
+            return [$maybeError];
+        }
+        
         if ($directiveArgsSchemaDefinition = $this->getDirectiveArgsSchemaDefinition($relationalTypeResolver)) {
-            /**
-             * Validate mandatory values. If it produces errors, return immediately
-             */
-            if (
-                $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
-                    $directiveArgsSchemaDefinition,
-                    $directiveName,
-                    $directiveArgs,
-                    ResolverTypes::DIRECTIVE
-                )
-            ) {
-                return [$maybeError];
-            }
-
             if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
                 /**
                  * Validate enums
@@ -477,6 +484,32 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         }
         if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
             /**
+             * Validate all enum values provided via args are valid
+             */
+            /** @var array<string, EnumTypeResolverInterface> */
+            $enumConsolidatedDirectiveArgNameTypeResolvers = array_filter(
+                $consolidatedDirectiveArgNameTypeResolvers,
+                fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver instanceof EnumTypeResolverInterface
+            );
+            $enumConsolidatedDirectiveArgNamesIsArrayOfArrays = $enumConsolidatedDirectiveArgNamesIsArray = [];
+            foreach (array_keys($enumConsolidatedDirectiveArgNameTypeResolvers) as $directiveArgName) {
+                $consolidatedDirectiveArgTypeModifiers = $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
+                $enumConsolidatedDirectiveArgNamesIsArrayOfArrays[$directiveArgName]  = $consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+                $enumConsolidatedDirectiveArgNamesIsArray[$directiveArgName]  = $consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY;
+            }
+            [$maybeErrors] = $this->doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
+                $enumConsolidatedDirectiveArgNameTypeResolvers,
+                $enumConsolidatedDirectiveArgNamesIsArrayOfArrays,
+                $enumConsolidatedDirectiveArgNamesIsArray,
+                $directiveName,
+                $directiveArgs,
+                ResolverTypes::DIRECTIVE
+            );
+            if ($maybeErrors) {
+                return $maybeErrors;
+            }
+
+            /**
              * Validate directive argument constraints
              */
             if (
@@ -489,6 +522,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 return $maybeErrors;
             }
         }
+
         // Custom validations
         return $this->doResolveSchemaValidationErrorDescriptions(
             $relationalTypeResolver,

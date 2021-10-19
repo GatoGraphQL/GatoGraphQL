@@ -181,52 +181,57 @@ trait FieldOrDirectiveResolverTrait
     }
 
     /**
+     * @param array $enumDirectiveArgNameTypeResolvers array<string, EnumTypeResolverInterface>
+     * @param array $enumDirectiveArgNamesIsArrayOfArrays array<string, bool>
+     * @param array $enumDirectiveArgNamesIsArray array<string, bool>
      * @return array[] 2 items: [0]: array of errors, [1]: array of deprecations
      */
     private function doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
-        array $enumTypeFieldOrDirectiveArgsSchemaDefinition,
+        array $enumDirectiveArgNameTypeResolvers,
+        array $enumDirectiveArgNamesIsArrayOfArrays,
+        array $enumDirectiveArgNamesIsArray,
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,
         string $type
     ): array {
-        // Remove the resolver before serialization, or it throws an error
-        $serializableEnumTypeFieldOrDirectiveArgsSchemaDefinition = array_map(
-            function (array $enumTypeFieldOrDirectiveArgSchemaDefinition): array {
-                unset($enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER]);
-                return $enumTypeFieldOrDirectiveArgSchemaDefinition;
-            },
-            $enumTypeFieldOrDirectiveArgsSchemaDefinition
-        );
-        $key = serialize($serializableEnumTypeFieldOrDirectiveArgsSchemaDefinition) . '|' . $fieldOrDirectiveName . serialize($fieldOrDirectiveArgs);
+        $enumFieldOrDirectiveArgs = array_intersect_key($fieldOrDirectiveArgs, $enumDirectiveArgNameTypeResolvers);
+        $key = $fieldOrDirectiveName . '|' . implode(',', $enumFieldOrDirectiveArgs);
         if (!isset($this->enumValueArgumentValidationCache[$key])) {
-            $this->enumValueArgumentValidationCache[$key] = $this->doValidateEnumFieldOrDirectiveArguments($enumTypeFieldOrDirectiveArgsSchemaDefinition, $fieldOrDirectiveName, $fieldOrDirectiveArgs, $type);
+            $this->enumValueArgumentValidationCache[$key] = $this->doValidateEnumFieldOrDirectiveArguments(
+                $enumDirectiveArgNameTypeResolvers,
+                $enumDirectiveArgNamesIsArrayOfArrays,
+                $enumDirectiveArgNamesIsArray,
+                $fieldOrDirectiveName,
+                $fieldOrDirectiveArgs,
+                $type,
+            );
         }
         return $this->enumValueArgumentValidationCache[$key];
     }
 
     /**
+     * @param array $enumDirectiveArgNameTypeResolvers array<string, EnumTypeResolverInterface>
+     * @param array $enumDirectiveArgNamesIsArrayOfArrays array<string, bool>
+     * @param array $enumDirectiveArgNamesIsArray array<string, bool>
      * @return array[] 2 items: [0]: array of errors, [1]: array of deprecations
      */
     private function doValidateEnumFieldOrDirectiveArguments(
-        array $enumTypeFieldOrDirectiveArgsSchemaDefinition,
+        array $enumDirectiveArgNameTypeResolvers,
+        array $enumDirectiveArgNamesIsArrayOfArrays,
+        array $enumDirectiveArgNamesIsArray,
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,
         string $type
     ): array {
         $errors = $deprecations = [];
-        $fieldOrDirectiveArgumentNames = array_keys($enumTypeFieldOrDirectiveArgsSchemaDefinition);
-        $schemaFieldArgumentEnumTypeResolvers = SchemaHelpers::getSchemaFieldArgEnumTypeResolvers($enumTypeFieldOrDirectiveArgsSchemaDefinition);
-        foreach ($fieldOrDirectiveArgumentNames as $fieldOrDirectiveArgumentName) {
+        foreach (array_keys($enumDirectiveArgNameTypeResolvers) as $fieldOrDirectiveArgumentName) {
             $fieldOrDirectiveArgumentValue = $fieldOrDirectiveArgs[$fieldOrDirectiveArgumentName] ?? null;
             if ($fieldOrDirectiveArgumentValue === null) {
                 continue;
             }
-            // Check if it's an array or not from the schema definition
-            $enumTypeFieldOrDirectiveArgSchemaDefinition = $enumTypeFieldOrDirectiveArgsSchemaDefinition[$fieldOrDirectiveArgumentName];
-            $enumTypeFieldOrDirectiveArgIsArrayOfArrays = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
-            $enumTypeFieldOrDirectiveArgIsArray = $enumTypeFieldOrDirectiveArgSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false;
-            /** @var EnumTypeResolverInterface */
-            $schemaFieldOrDirectiveArgumentEnumTypeResolver = $schemaFieldArgumentEnumTypeResolvers[$fieldOrDirectiveArgumentName];
+            $enumTypeFieldOrDirectiveArgIsArrayOfArrays = $enumDirectiveArgNamesIsArrayOfArrays[$fieldOrDirectiveArgumentName];
+            $enumTypeFieldOrDirectiveArgIsArray = $enumDirectiveArgNamesIsArray[$fieldOrDirectiveArgumentName];
+            $fieldOrDirectiveArgumentEnumTypeResolver = $enumDirectiveArgNameTypeResolvers[$fieldOrDirectiveArgumentName];
 
             /**
              * Pass all the enum values to be validated, as a list.
@@ -245,7 +250,7 @@ trait FieldOrDirectiveResolverTrait
             $this->doValidateEnumFieldOrDirectiveArgumentsItem(
                 $errors,
                 $deprecations,
-                $schemaFieldOrDirectiveArgumentEnumTypeResolver,
+                $fieldOrDirectiveArgumentEnumTypeResolver,
                 $fieldOrDirectiveArgumentValueEnums,
                 $fieldOrDirectiveArgumentName,
                 $fieldOrDirectiveName,
@@ -259,15 +264,15 @@ trait FieldOrDirectiveResolverTrait
     private function doValidateEnumFieldOrDirectiveArgumentsItem(
         array &$errors,
         array &$deprecations,
-        EnumTypeResolverInterface $schemaFieldOrDirectiveArgumentEnumTypeResolver,
+        EnumTypeResolverInterface $fieldOrDirectiveArgumentEnumTypeResolver,
         array $fieldOrDirectiveArgumentValueItems,
         string $fieldOrDirectiveArgumentName,
         string $fieldOrDirectiveName,
         string $type
     ): void {
         $errorItems = $deprecationItems = [];
-        $schemaFieldOrDirectiveArgumentEnumTypeValues = $schemaFieldOrDirectiveArgumentEnumTypeResolver->getEnumOutputValues();
-        $schemaFieldOrDirectiveArgumentEnumTypeDeprecationMessages = $schemaFieldOrDirectiveArgumentEnumTypeResolver->getEnumValueDeprecationMessages();
+        $schemaFieldOrDirectiveArgumentEnumTypeValues = $fieldOrDirectiveArgumentEnumTypeResolver->getEnumOutputValues();
+        $schemaFieldOrDirectiveArgumentEnumTypeDeprecationMessages = $fieldOrDirectiveArgumentEnumTypeResolver->getEnumValueDeprecationMessages();
         foreach ($fieldOrDirectiveArgumentValueItems as $fieldOrDirectiveArgumentValueItem) {
             if (!in_array($fieldOrDirectiveArgumentValueItem, $schemaFieldOrDirectiveArgumentEnumTypeValues)) {
                 // Remove deprecated ones and extract their names
