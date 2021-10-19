@@ -24,15 +24,4 @@ class SchemaHelpers
             }
         ));
     }
-
-    /**
-     * @return array<string, EnumTypeResolverInterface>
-     */
-    public static function getSchemaFieldArgEnumTypeResolvers(array $schemaFieldArgs): array
-    {
-        return array_map(
-            fn (array $schemaFieldArg): EnumTypeResolverInterface => $schemaFieldArg[SchemaDefinition::TYPE_RESOLVER],
-            $schemaFieldArgs
-        );
-    }
 }
