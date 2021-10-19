@@ -30,7 +30,6 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
         ?string $argDescription,
         mixed $argDefaultValue,
         int $argTypeModifiers,
-        ?string $argDeprecationMessage,
     ): array {
         return $this->getTypeSchemaDefinition(
             $argName,
@@ -38,7 +37,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
             $argDescription,
             $argDefaultValue,
             $argTypeModifiers,
-            $argDeprecationMessage,
+            null
         );
     }
 

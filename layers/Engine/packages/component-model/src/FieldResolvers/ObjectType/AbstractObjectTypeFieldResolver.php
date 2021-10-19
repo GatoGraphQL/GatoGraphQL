@@ -248,15 +248,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
-    public function getFieldArgDeprecationMessage(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
-    {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getFieldArgDeprecationMessage($objectTypeResolver, $fieldName, $fieldArgName);
-        }
-        return null;
-    }
-
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
@@ -344,28 +335,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getConsolidatedFieldArgDeprecationMessage(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
-    {
-        // Cache the result
-        $cacheKey = $objectTypeResolver::class . '.' . $fieldName . '(' . $fieldArgName . ':)';
-        if (array_key_exists($cacheKey, $this->consolidatedFieldArgDeprecationMessageCache)) {
-            return $this->consolidatedFieldArgDeprecationMessageCache[$cacheKey];
-        }
-        $this->consolidatedFieldArgDeprecationMessageCache[$cacheKey] = $this->hooksAPI->applyFilters(
-            HookNames::OBJECT_TYPE_FIELD_ARG_DEPRECATION_MESSAGE,
-            $this->getFieldArgDeprecationMessage($objectTypeResolver, $fieldName, $fieldArgName),
-            $this,
-            $objectTypeResolver,
-            $fieldName,
-            $fieldArgName,
-        );
-        return $this->consolidatedFieldArgDeprecationMessageCache[$cacheKey];
-    }
-
-    /**
-     * Consolidation of the schema field arguments. Call this function to read the data
-     * instead of the individual functions, since it applies hooks to override/extend.
-     */
     final public function getConsolidatedFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         // Cache the result
@@ -441,7 +410,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $this->getConsolidatedFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
                 $this->getConsolidatedFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
                 $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
-                $this->getConsolidatedFieldArgDeprecationMessage($objectTypeResolver, $fieldName, $fieldArgName),
             );
         }
         $this->schemaFieldArgsCache[$cacheKey] = $schemaFieldArgs;
@@ -684,18 +652,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $this->translationAPI->__('Field \'%s\' is deprecated: %s', 'component-model'),
                 $fieldName,
                 $fieldDeprecationMessage
-            );
-        }
-        if ($fieldArgsSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $fieldName)) {
-            // Deprecations for the field args
-            $fieldDeprecationMessages = array_merge(
-                $fieldDeprecationMessages,
-                $this->maybeGetFieldOrDirectiveArgumentDeprecations(
-                    $fieldArgsSchemaDefinition,
-                    $fieldName,
-                    $fieldArgs,
-                    ResolverTypes::FIELD
-                )
             );
         }
 

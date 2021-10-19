@@ -48,15 +48,6 @@ trait SchemaFilterInputModuleProcessorTrait
         return null;
     }
 
-    public function getFilterInputDeprecationMessage(array $module): ?string
-    {
-        $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
-        if ($filterSchemaDefinitionResolver !== $this) {
-            return $filterSchemaDefinitionResolver->getFilterInputDeprecationMessage($module);
-        }
-        return null;
-    }
-
     public function getFilterInputDefaultValue(array $module): mixed
     {
         $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($module);
