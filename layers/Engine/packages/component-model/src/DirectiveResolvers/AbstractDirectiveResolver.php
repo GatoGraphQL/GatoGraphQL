@@ -483,6 +483,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             }
         }
         if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
+        $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
             /**
              * Validate all enum values provided via args are valid
              */
@@ -897,18 +898,37 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $directiveArgs,
                     ResolverTypes::DIRECTIVE
                 )
-            );
-            // Deprecations for the field args of Enum Type
-            $directiveDeprecationMessages = array_merge(
-                $directiveDeprecationMessages,
-                $this->getEnumFieldOrDirectiveArgumentDeprecations(
-                    $directiveArgsSchemaDefinition,
-                    $directiveName,
-                    $directiveArgs,
-                    ResolverTypes::DIRECTIVE
-                )
-            );
+            );          
         }
+
+        /**
+         * Deprecations for the directive args of Enum Type
+         */
+        $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
+        /** @var array<string, EnumTypeResolverInterface> */
+        $enumConsolidatedDirectiveArgNameTypeResolvers = array_filter(
+            $consolidatedDirectiveArgNameTypeResolvers,
+            fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver instanceof EnumTypeResolverInterface
+        );
+        $enumConsolidatedDirectiveArgNamesIsArrayOfArrays = $enumConsolidatedDirectiveArgNamesIsArray = [];
+        foreach (array_keys($enumConsolidatedDirectiveArgNameTypeResolvers) as $directiveArgName) {
+            $consolidatedDirectiveArgTypeModifiers = $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
+            $enumConsolidatedDirectiveArgNamesIsArrayOfArrays[$directiveArgName]  = $consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+            $enumConsolidatedDirectiveArgNamesIsArray[$directiveArgName]  = $consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY;
+        }
+        [$maybeErrors, $maybeDeprecations] = $this->doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
+            $enumConsolidatedDirectiveArgNameTypeResolvers,
+            $enumConsolidatedDirectiveArgNamesIsArrayOfArrays,
+            $enumConsolidatedDirectiveArgNamesIsArray,
+            $directiveName,
+            $directiveArgs,
+            ResolverTypes::DIRECTIVE
+        );
+        $directiveDeprecationMessages = array_merge(
+            $directiveDeprecationMessages,
+            $maybeDeprecations
+        );
+
         return $directiveDeprecationMessages;
     }
 

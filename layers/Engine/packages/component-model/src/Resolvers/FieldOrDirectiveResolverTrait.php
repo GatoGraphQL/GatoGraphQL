@@ -161,25 +161,6 @@ trait FieldOrDirectiveResolverTrait
         return [];
     }
 
-    protected function getEnumFieldOrDirectiveArgumentDeprecations(
-        array $fieldOrDirectiveArgsSchemaDefinition,
-        string $fieldOrDirectiveName,
-        array $fieldOrDirectiveArgs,
-        string $type
-    ): array {
-        // Iterate all the enum types and check that the provided values is one of them, or throw an error
-        if ($enumTypeFieldOrDirectiveArgsSchemaDefinition = SchemaHelpers::getEnumTypeFieldOrDirectiveArgsSchemaDefinition($fieldOrDirectiveArgsSchemaDefinition)) {
-            [$maybeErrors, $maybeDeprecations] = $this->doValidateEnumFieldOrDirectiveArgumentsOrGetFromCache(
-                $enumTypeFieldOrDirectiveArgsSchemaDefinition,
-                $fieldOrDirectiveName,
-                $fieldOrDirectiveArgs,
-                $type
-            );
-            return $maybeDeprecations;
-        }
-        return [];
-    }
-
     /**
      * @param array $enumDirectiveArgNameTypeResolvers array<string, EnumTypeResolverInterface>
      * @param array $enumDirectiveArgNamesIsArrayOfArrays array<string, bool>
