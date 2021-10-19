@@ -115,16 +115,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
-     * By default, do nothing
-     *
-     * @param array<string, mixed> $fieldArgs
-     */
-    public function validateFieldArgumentsForSchema(string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
-    {
-        return $fieldArgs;
-    }
-
-    /**
      * @return array<string,mixed>|null `null` if there are no objectTypeFieldResolvers for the field
      */
     final public function getFieldSchemaDefinition(string $field): ?array

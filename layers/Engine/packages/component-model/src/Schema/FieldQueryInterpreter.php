@@ -642,10 +642,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         }
         $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        if ($fieldArgs = $this->castAndValidateFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $schemaErrors, $schemaWarnings)) {
-            // Enable the typeResolver to add its own code validations
-            $fieldArgs = $objectTypeResolver->validateFieldArgumentsForSchema($field, $fieldArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
-        }
+        $fieldArgs = $this->castAndValidateFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $schemaErrors, $schemaWarnings);
 
         // If there's an error, those args will be removed. Then, re-create the fieldDirective to pass it to the function below
         if ($schemaErrors) {
