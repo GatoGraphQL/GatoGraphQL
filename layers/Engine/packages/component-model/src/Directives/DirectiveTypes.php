@@ -6,9 +6,9 @@ namespace PoP\ComponentModel\Directives;
 
 class DirectiveTypes
 {
-    const SCHEMA = 'schema';
-    const QUERY = 'query';
-    const SYSTEM = 'system';
-    const SCRIPTING = 'scripting';
-    const INDEXING = 'indexing';
+    public const SCHEMA = 'SCHEMA';
+    public const QUERY = 'QUERY';
+    public const SYSTEM = 'SYSTEM';
+    public const SCRIPTING = 'SCRIPTING';
+    public const INDEXING = 'INDEXING';
 }

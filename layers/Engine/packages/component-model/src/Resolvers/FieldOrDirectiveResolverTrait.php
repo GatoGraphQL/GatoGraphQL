@@ -184,7 +184,7 @@ trait FieldOrDirectiveResolverTrait
         string $type
     ): void {
         $errorItems = $deprecationItems = [];
-        $schemaFieldOrDirectiveArgumentEnumTypeValues = $fieldOrDirectiveArgumentEnumTypeResolver->getEnumOutputValues();
+        $schemaFieldOrDirectiveArgumentEnumTypeValues = $fieldOrDirectiveArgumentEnumTypeResolver->getEnumValues();
         $schemaFieldOrDirectiveArgumentEnumTypeDeprecationMessages = $fieldOrDirectiveArgumentEnumTypeResolver->getEnumValueDeprecationMessages();
         foreach ($fieldOrDirectiveArgumentValueItems as $fieldOrDirectiveArgumentValueItem) {
             if (!in_array($fieldOrDirectiveArgumentValueItem, $schemaFieldOrDirectiveArgumentEnumTypeValues)) {
