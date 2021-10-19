@@ -456,7 +456,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             fn (string $directiveArgName) => $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName) & SchemaTypeModifiers::MANDATORY,
             ARRAY_FILTER_USE_KEY
         ));
-        if ($maybeError = $this->doValidateNotMissingFieldOrDirectiveArguments(
+        if ($maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
             $mandatoryConsolidatedDirectiveArgNames,
             $directiveName,
             $directiveArgs,

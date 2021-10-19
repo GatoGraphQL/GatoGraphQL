@@ -31,7 +31,7 @@ trait FieldOrDirectiveResolverTrait
      */
     protected array $enumValueArgumentValidationCache = [];
 
-    private function doValidateNotMissingFieldOrDirectiveArguments(
+    private function validateNotMissingFieldOrDirectiveArguments(
         array $mandatoryFieldOrDirectiveArgNames,
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,

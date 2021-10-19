@@ -568,7 +568,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             fn (string $fieldArgName) => $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName) & SchemaTypeModifiers::MANDATORY,
             ARRAY_FILTER_USE_KEY
         ));
-        if ($maybeError = $this->doValidateNotMissingFieldOrDirectiveArguments(
+        if ($maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
             $mandatoryConsolidatedFieldArgNames,
             $fieldName,
             $fieldArgs,
