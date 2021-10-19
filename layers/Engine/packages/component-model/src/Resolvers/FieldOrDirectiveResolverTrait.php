@@ -31,13 +31,24 @@ trait FieldOrDirectiveResolverTrait
      */
     protected array $enumValueArgumentValidationCache = [];
 
+    /**
+     * Validate that if the key is missing or is `null`,
+     * but not if the value is empty such as '""' or [],
+     * because empty values could be allowed.
+     *
+     * Eg: `setTagsOnPost(tags:[])` where `tags` is mandatory
+     */
     private function validateNotMissingFieldOrDirectiveArguments(
         array $mandatoryFieldOrDirectiveArgNames,
         string $fieldOrDirectiveName,
         array $fieldOrDirectiveArgs,
         string $type
     ): ?string {
-        if ($missing = SchemaHelpers::getMissingFieldArgs($mandatoryFieldOrDirectiveArgNames, $fieldOrDirectiveArgs)) {
+        $missing = array_values(array_filter(
+            $mandatoryFieldOrDirectiveArgNames,
+            fn (string $fieldArgName) => !isset($fieldOrDirectiveArgs[$fieldArgName])
+        ));
+        if ($missing !== []) {
             $treatUndefinedFieldOrDirectiveArgsAsErrors = ComponentConfiguration::treatUndefinedFieldOrDirectiveArgsAsErrors();
             $errorMessage = count($missing) == 1 ?
                 sprintf(
