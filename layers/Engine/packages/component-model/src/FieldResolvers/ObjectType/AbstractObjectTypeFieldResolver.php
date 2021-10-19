@@ -673,7 +673,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $fieldDeprecationMessages = [];
 
         // Deprecations for the field
-        $fieldDeprecationMessage = $this->getFieldDeprecationMessage($objectTypeResolver, $fieldName);
+        $fieldDeprecationMessage = $this->getConsolidatedFieldDeprecationMessage($objectTypeResolver, $fieldName);
         if ($fieldDeprecationMessage !== null) {
             $fieldDeprecationMessages[] = sprintf(
                 $this->translationAPI->__('Field \'%s\' is deprecated: %s', 'component-model'),
