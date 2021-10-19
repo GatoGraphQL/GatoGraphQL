@@ -483,7 +483,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             }
         }
         if ($canValidateFieldOrDirectiveArgumentsWithValuesForSchema) {
-        $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
             /**
              * Validate all enum values provided via args are valid
              */
