@@ -75,9 +75,9 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         return null;
     }
 
-    final protected function validateFilterVar(mixed $inputValue, int $filter): ?Error
+    final protected function validateFilterVar(mixed $inputValue, int $filter, array|int|null $options = null): ?Error
     {
-        $valid = filter_var($inputValue, $filter);
+        $valid = \filter_var($inputValue, $filter, $options);
         if ($valid === false) {
             return $this->getError(
                 sprintf(
