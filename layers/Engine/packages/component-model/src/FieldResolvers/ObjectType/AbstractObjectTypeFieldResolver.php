@@ -803,14 +803,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($extensions = $this->getFieldSchemaDefinitionExtensions($objectTypeResolver, $fieldName, $fieldArgs)) {
             $schemaDefinition[SchemaDefinition::EXTENSIONS] = $extensions;
         }
-
-        // Hook to override the values, eg: by the Field Deprecation List
-        return $this->triggerHookToOverrideSchemaDefinition(
-            $schemaDefinition,
-            $objectTypeResolver,
-            $fieldName,
-            $fieldArgs
-        );
+        
+        return $schemaDefinition;
     }
 
     public function getFieldSchemaDefinitionExtensions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
