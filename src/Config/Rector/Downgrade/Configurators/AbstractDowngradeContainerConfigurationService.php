@@ -17,9 +17,9 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
         /**
          * This line produces a bug, executing `DowngradeParameterTypeWideningRector`
          * when it should not.
-         * 
+         *
          * @todo Check if it is fixed in Rector v0.11.60, then revert this code
-         * 
+         *
          * @see https://github.com/leoloso/PoP/pull/1181
          */
         // $this->containerConfigurator->import(DowngradeLevelSetList::DOWN_TO_PHP_71);
@@ -27,7 +27,7 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
         $this->containerConfigurator->import(DowngradeSetList::PHP_74);
         $this->containerConfigurator->import(DowngradeSetList::PHP_73);
         $this->containerConfigurator->import(DowngradeSetList::PHP_72);
-        
+
         $parameters = $this->containerConfigurator->parameters();
 
         // is your PHP version different from the one your refactor to? [default: your PHP version]
