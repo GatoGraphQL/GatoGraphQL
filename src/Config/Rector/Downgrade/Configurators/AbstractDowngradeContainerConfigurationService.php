@@ -16,47 +16,8 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
         $this->containerConfigurator->import(DowngradeSetList::PHP_80);
         $this->containerConfigurator->import(DowngradeSetList::PHP_74);
         $this->containerConfigurator->import(DowngradeSetList::PHP_73);
-        /**
-         * Replace the current `DowngradeParameterTypeWideningRector` (because it takes too long)
-         * with a "legacy" version (from up to v0.10.9), which is fast
-         * but does not replace code within traits.
-         *
-         * To make up, the hack below manually fixes the code within traits.
-         *
-         * @see https://github.com/leoloso/PoP/issues/715
-         */
         $this->containerConfigurator->import(DowngradeSetList::PHP_72);
-        // $this->containerConfigurator->import(CustomDowngradeSetList::PHP_72);
-
-        /**
-         * Hack to fix bug.
-         *
-         * DowngradeParameterTypeWideningRector is modifying function `clear` from vendor/symfony/cache/Adapter/AdapterInterface.php:
-         *
-         * from:
-         *     public function clear(string $prefix = '');
-         * to:
-         *     public function clear($prefix = '');
-         *
-         * But the same modification is not being done in vendor/symfony/cache/Traits/AbstractAdapterTrait.php
-         * So apply this change (and several similar others) manually
-         *
-         * @see https://github.com/leoloso/PoP/issues/597#issue-855005786
-         */
-        // $services = $this->containerConfigurator->services();
-        // $services->set(AddParamTypeDeclarationInTraitRector::class)
-        //     ->call('configure', [[
-        //         AddParamTypeDeclarationInTraitRector::PARAMETER_TYPEHINTS => ValueObjectInliner::inline([
-        //             new AddParamTypeDeclaration(AbstractAdapterTrait::class, 'clear', 0, new NullType()),
-        //             new AddParamTypeDeclaration(ServiceLocatorTrait::class, 'has', 0, new NullType()),
-        //             new AddParamTypeDeclaration(ServiceLocatorTrait::class, 'get', 0, new NullType()),
-        //             // The type for this param is being removed, add it again
-        //             new AddParamTypeDeclaration(CacheTrait::class, 'get', 0, new StringType()),
-        //             new AddParamTypeDeclaration(CacheTrait::class, 'get', 2, new NullType()),
-        //             new AddParamTypeDeclaration(CacheTrait::class, 'get', 3, new NullType()),
-        //         ]),
-        //     ]]);
-
+        
         $parameters = $this->containerConfigurator->parameters();
 
         // is your PHP version different from the one your refactor to? [default: your PHP version]
