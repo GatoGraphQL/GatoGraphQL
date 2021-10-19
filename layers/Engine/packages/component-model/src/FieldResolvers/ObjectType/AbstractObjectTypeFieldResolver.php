@@ -803,7 +803,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($extensions = $this->getFieldSchemaDefinitionExtensions($objectTypeResolver, $fieldName, $fieldArgs)) {
             $schemaDefinition[SchemaDefinition::EXTENSIONS] = $extensions;
         }
-        
+
         return $schemaDefinition;
     }
 
