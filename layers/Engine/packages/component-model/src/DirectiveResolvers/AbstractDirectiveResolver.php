@@ -1208,10 +1208,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             foreach (array_keys($consolidatedDirectiveArgNameTypeResolvers) as $directiveArgName) {
                 $consolidatedDirectiveArgsTypeModifiers[$directiveArgName] = $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
             }
-            if ($this->hasMandatoryDangerouslyDynamicScalarInputType(
-                $consolidatedDirectiveArgNameTypeResolvers,
-                $consolidatedDirectiveArgsTypeModifiers,
-            )) {
+            if (
+                $this->hasMandatoryDangerouslyDynamicScalarInputType(
+                    $consolidatedDirectiveArgNameTypeResolvers,
+                    $consolidatedDirectiveArgsTypeModifiers,
+                )
+            ) {
                 return true;
             }
         }

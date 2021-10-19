@@ -139,15 +139,11 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
      * @param array<string, InputTypeResolverInterface> $consolidatedFieldArgNameTypeResolvers
      * @param array<string, int> $consolidatedFieldArgsTypeModifiers
      */
-    protected function skipExposingDangerouslyDynamicScalarTypeInSchema(
+    protected function isDangerouslyDynamicScalarFieldType(
         TypeResolverInterface $fieldTypeResolver,
         array $consolidatedFieldArgNameTypeResolvers,
         array $consolidatedFieldArgsTypeModifiers,
     ): bool {
-        if (!ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
-            return false;
-        }
-
         // 1. its type is `DangerouslyDynamic`
         if ($fieldTypeResolver === $this->dangerouslyDynamicScalarTypeResolver) {
             return true;

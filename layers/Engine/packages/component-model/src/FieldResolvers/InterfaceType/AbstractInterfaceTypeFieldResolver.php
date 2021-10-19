@@ -422,25 +422,27 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      */
     public function skipExposingFieldInSchema(string $fieldName): bool
     {
-        /**
-         * If `DangerouslyDynamic` is disabled, do not expose the field if either:
-         *
-         *   1. its type is `DangerouslyDynamic`
-         *   2. it has any mandatory argument of type `DangerouslyDynamic`
-         */
-        $consolidatedFieldArgNames = array_keys($this->getConsolidatedFieldArgNameTypeResolvers($fieldName));
-        $consolidatedFieldArgsTypeModifiers = [];
-        foreach ($consolidatedFieldArgNames as $fieldArgName) {
-            $consolidatedFieldArgsTypeModifiers[$fieldArgName] = $this->getConsolidatedFieldArgTypeModifiers($fieldName, $fieldArgName);
-        }
-        if (
-            $this->skipExposingDangerouslyDynamicScalarTypeInSchema(
-                $this->getFieldTypeResolver($fieldName),
-                $this->getConsolidatedFieldArgNameTypeResolvers($fieldName),
-                $consolidatedFieldArgsTypeModifiers
-            )
-        ) {
-            return true;
+        if (ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+            /**
+             * If `DangerouslyDynamic` is disabled, do not expose the field if either:
+             *
+             *   1. its type is `DangerouslyDynamic`
+             *   2. it has any mandatory argument of type `DangerouslyDynamic`
+             */
+            $consolidatedFieldArgNames = array_keys($this->getConsolidatedFieldArgNameTypeResolvers($fieldName));
+            $consolidatedFieldArgsTypeModifiers = [];
+            foreach ($consolidatedFieldArgNames as $fieldArgName) {
+                $consolidatedFieldArgsTypeModifiers[$fieldArgName] = $this->getConsolidatedFieldArgTypeModifiers($fieldName, $fieldArgName);
+            }
+            if (
+                $this->isDangerouslyDynamicScalarFieldType(
+                    $this->getFieldTypeResolver($fieldName),
+                    $this->getConsolidatedFieldArgNameTypeResolvers($fieldName),
+                    $consolidatedFieldArgsTypeModifiers
+                )
+            ) {
+                return true;
+            }
         }
 
         return false;
