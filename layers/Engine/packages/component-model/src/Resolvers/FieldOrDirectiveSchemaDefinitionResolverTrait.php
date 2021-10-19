@@ -154,13 +154,31 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
         }
 
         // 2. it has any mandatory argument of type `DangerouslyDynamic`
-        $dangerouslyDynamicFieldArgNameTypeResolvers = array_filter(
+        if ($this->hasMandatoryDangerouslyDynamicScalarInputType(
             $consolidatedFieldArgNameTypeResolvers,
+            $consolidatedFieldArgsTypeModifiers,
+        )) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param array<string, InputTypeResolverInterface> $consolidatedFieldOrDirectiveArgNameTypeResolvers
+     * @param array<string, int> $consolidatedFieldOrDirectiveArgsTypeModifiers
+     */
+    protected function hasMandatoryDangerouslyDynamicScalarInputType(
+        array $consolidatedFieldOrDirectiveArgNameTypeResolvers,
+        array $consolidatedFieldOrDirectiveArgsTypeModifiers,
+    ): bool {
+        $dangerouslyDynamicFieldOrDirectiveArgNameTypeResolvers = array_filter(
+            $consolidatedFieldOrDirectiveArgNameTypeResolvers,
             fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
         );
-        foreach (array_keys($dangerouslyDynamicFieldArgNameTypeResolvers) as $fieldArgName) {
-            $consolidatedFieldArgTypeModifiers = $consolidatedFieldArgsTypeModifiers[$fieldArgName];
-            if ($consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::MANDATORY) {
+        foreach (array_keys($dangerouslyDynamicFieldOrDirectiveArgNameTypeResolvers) as $fieldOrDirectiveArgName) {
+            $consolidatedFieldOrDirectiveArgTypeModifiers = $consolidatedFieldOrDirectiveArgsTypeModifiers[$fieldOrDirectiveArgName];
+            if ($consolidatedFieldOrDirectiveArgTypeModifiers & SchemaTypeModifiers::MANDATORY) {
                 return true;
             }
         }
