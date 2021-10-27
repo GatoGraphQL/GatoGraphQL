@@ -142,6 +142,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         if (!$enableNestedMutations) {
             $queryRootTypeResolver = $this->graphQLSchemaDefinitionService->getQueryRootObjectTypeResolver();
             $queryRootTypeName = $queryRootTypeResolver->getMaybeNamespacedTypeName();
+            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName]);
         } elseif (ComponentConfiguration::addConnectionFromRootToQueryRootAndMutationRoot()) {
             // Additionally append the QueryRoot and MutationRoot to the schema
             $queryRootTypeName = $this->queryRootObjectTypeResolver->getMaybeNamespacedTypeName();
