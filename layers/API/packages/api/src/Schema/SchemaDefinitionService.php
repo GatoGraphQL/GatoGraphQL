@@ -32,7 +32,6 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\Engine\Schema\SchemaDefinitionService as UpstreamSchemaDefinitionService;
-use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements SchemaDefinitionServiceInterface
@@ -59,17 +58,14 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
 
     protected PersistedFragmentManagerInterface $fragmentCatalogueManager;
     protected PersistedQueryManagerInterface $queryCatalogueManager;
-    protected RootObjectTypeResolver $rootObjectTypeResolver;
 
     #[Required]
     final public function autowireAPISchemaDefinitionService(
         PersistedFragmentManagerInterface $fragmentCatalogueManager,
         PersistedQueryManagerInterface $queryCatalogueManager,
-        RootObjectTypeResolver $rootObjectTypeResolver,
     ): void {
         $this->fragmentCatalogueManager = $fragmentCatalogueManager;
         $this->queryCatalogueManager = $queryCatalogueManager;
-        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
     }
 
     final public function getPersistentCache(): PersistentCacheInterface
@@ -95,9 +91,8 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             }
         }
         if ($schemaDefinition === null) {
-            $rootObjectTypeResolver = $this->getRootObjectTypeResolver();
             $schemaDefinition = [
-                SchemaDefinition::QUERY_TYPE => $rootObjectTypeResolver->getMaybeNamespacedTypeName(),
+                SchemaDefinition::QUERY_TYPE => $this->rootObjectTypeResolver->getMaybeNamespacedTypeName(),
                 SchemaDefinition::TYPES => [],
             ];
 

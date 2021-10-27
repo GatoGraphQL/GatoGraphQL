@@ -550,7 +550,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->executableObjectTypeFieldResolversByFieldCache[$cacheKey];
     }
 
-    final public function doGetExecutableObjectTypeFieldResolversByField(bool $global): array
+    private function doGetExecutableObjectTypeFieldResolversByField(bool $global): array
     {
         $objectTypeFieldResolvers = [];
         foreach ($this->getObjectTypeFieldResolversByField($global) as $fieldName => $fieldObjectTypeFieldResolvers) {
@@ -756,7 +756,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return !empty($this->getObjectTypeFieldResolversForField($field));
     }
 
-    private function calculateObjectTypeFieldResolversForField(string $field): array
+    protected function calculateObjectTypeFieldResolversForField(string $field): array
     {
         // Important: here we CAN'T use `dissectFieldForSchema` to get the fieldArgs, because it will attempt to validate them
         // To validate them, the fieldQueryInterpreter needs to know the schema, so it once again calls functions from this typeResolver
@@ -807,27 +807,5 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         // Return all the units that resolve the fieldName
         return array_values($objectTypeFieldResolvers);
-    }
-
-    private function calculateFieldNamesToResolve(): array
-    {
-        $fieldNames = [];
-
-        // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
-        $class = get_class($this->getTypeResolverToCalculateSchema());
-        do {
-            /** @var ObjectTypeFieldResolverInterface[] */
-            $attachedObjectTypeFieldResolvers = $this->attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);
-            foreach ($attachedObjectTypeFieldResolvers as $objectTypeFieldResolver) {
-                $extensionFieldNames = $this->getFieldNamesResolvedByObjectTypeFieldResolver($objectTypeFieldResolver);
-                $fieldNames = array_merge(
-                    $fieldNames,
-                    $extensionFieldNames
-                );
-            }
-            // Continue iterating for the class parents
-        } while ($class = get_parent_class($class));
-
-        return array_values(array_unique($fieldNames));
     }
 }

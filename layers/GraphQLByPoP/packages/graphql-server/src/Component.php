@@ -88,6 +88,7 @@ class Component extends AbstractComponent
             self::initServices(dirname(__DIR__));
             self::initServices(dirname(__DIR__), '/Overrides');
             self::initSchemaServices(dirname(__DIR__), $skipSchema);
+            self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Overrides');
 
             // Boot conditionals
             if (
@@ -110,7 +111,7 @@ class Component extends AbstractComponent
     protected static function initializeSystemContainerServices(): void
     {
         if (self::isEnabled()) {
-                self::initSystemServices(dirname(__DIR__));
+            self::initSystemServices(dirname(__DIR__));
         }
     }
 
