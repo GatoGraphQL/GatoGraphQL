@@ -550,7 +550,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->executableObjectTypeFieldResolversByFieldCache[$cacheKey];
     }
 
-    final public function doGetExecutableObjectTypeFieldResolversByField(bool $global): array
+    private function doGetExecutableObjectTypeFieldResolversByField(bool $global): array
     {
         $objectTypeFieldResolvers = [];
         foreach ($this->getObjectTypeFieldResolversByField($global) as $fieldName => $fieldObjectTypeFieldResolvers) {
