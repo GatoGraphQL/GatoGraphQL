@@ -756,7 +756,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return !empty($this->getObjectTypeFieldResolversForField($field));
     }
 
-    private function calculateObjectTypeFieldResolversForField(string $field): array
+    protected function calculateObjectTypeFieldResolversForField(string $field): array
     {
         // Important: here we CAN'T use `dissectFieldForSchema` to get the fieldArgs, because it will attempt to validate them
         // To validate them, the fieldQueryInterpreter needs to know the schema, so it once again calls functions from this typeResolver
