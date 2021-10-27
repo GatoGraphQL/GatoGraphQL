@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver:
+        class: \GraphQLByPoP\GraphQLServer\Overrides\TypeResolvers\ObjectType\RootObjectTypeResolver
+        
