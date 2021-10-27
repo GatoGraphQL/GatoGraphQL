@@ -24,7 +24,7 @@ class Schema
     protected array $directives;
 
     public function __construct(
-        array $fullSchemaDefinition,
+        array &$fullSchemaDefinition,
         protected string $id
     ) {
         // Enable or not to add the global fields to the schema, since they may pollute the documentation
