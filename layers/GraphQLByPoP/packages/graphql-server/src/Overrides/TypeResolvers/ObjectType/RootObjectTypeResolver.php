@@ -21,10 +21,12 @@ class RootObjectTypeResolver extends UpstreamRootObjectTypeResolver
          * Watch out: The field is not provided fieldArgs,
          * that's why there's no need to parse $field to get the fieldName!
          */
-        if (!$enableNestedMutations && !in_array($field, [
+        if (
+            !$enableNestedMutations && !in_array($field, [
             'queryRoot',
             'mutationRoot',
-        ])) {
+            ])
+        ) {
             return [];
         }
         return parent::calculateObjectTypeFieldResolversForField($field);
