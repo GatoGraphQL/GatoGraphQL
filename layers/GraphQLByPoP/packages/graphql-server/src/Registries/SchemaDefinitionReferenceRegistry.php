@@ -378,4 +378,13 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     ): ?SchemaDefinitionReferenceObjectInterface {
         return $this->fullSchemaDefinitionReferenceDictionary[$schemaDefinitionReferenceObjectID] ?? null;
     }
+    /**
+     * @param string[] $schemaDefinitionReferenceObjectIDs
+     * @return SchemaDefinitionReferenceObjectInterface[]
+     */
+    public function getSchemaDefinitionReferenceObjects(
+        array $schemaDefinitionReferenceObjectIDs
+    ): array {
+        return array_values(array_intersect_key($this->fullSchemaDefinitionReferenceDictionary, array_flip($schemaDefinitionReferenceObjectIDs)));
+    }
 }

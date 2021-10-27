@@ -18,4 +18,11 @@ interface SchemaDefinitionReferenceRegistryInterface
     public function getSchemaDefinitionReferenceObject(
         string $referenceObjectID
     ): ?SchemaDefinitionReferenceObjectInterface;
+    /**
+     * @param string[] $schemaDefinitionReferenceObjectIDs
+     * @return SchemaDefinitionReferenceObjectInterface[]
+     */
+    public function getSchemaDefinitionReferenceObjects(
+        array $schemaDefinitionReferenceObjectIDs
+    ): array;
 }
