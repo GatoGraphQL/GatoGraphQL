@@ -16,7 +16,7 @@ trait HasTypeSchemaDefinitionReferenceTrait
      * when initializing the Field/InputValue
      */
     protected ?TypeInterface $type = null;
-    
+
     public function getType(): TypeInterface
     {
         if ($this->type === null) {
@@ -51,30 +51,30 @@ trait HasTypeSchemaDefinitionReferenceTrait
         $isNonNullItemsInArray = $this->schemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
         $isNonNullableOrMandatory = ($this->schemaDefinition[SchemaDefinition::NON_NULLABLE] ?? false) || ($this->schemaDefinition[SchemaDefinition::MANDATORY] ?? false);
         if ($isArrayOfArrays) {
-			if ($isNonNullItemsInArrayOfArrays) {
+            if ($isNonNullItemsInArrayOfArrays) {
                 $typeID = GraphQLSchemaHelpers::getNonNullableOrMandatoryTypeName($typeID);
                 $maybeRegisteredType = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
                 $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new NonNullWrappingType($type);
-			}
+            }
             $typeID = GraphQLSchemaHelpers::getListTypeName($typeID);
             $maybeRegisteredType = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
             $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new ListWrappingType($type);
-		}
-		if ($isArray) {
-			if ($isNonNullItemsInArray) {
-				$typeID = GraphQLSchemaHelpers::getNonNullableOrMandatoryTypeName($typeID);
+        }
+        if ($isArray) {
+            if ($isNonNullItemsInArray) {
+                $typeID = GraphQLSchemaHelpers::getNonNullableOrMandatoryTypeName($typeID);
                 $maybeRegisteredType = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
                 $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new NonNullWrappingType($type);
-			}
-			$typeID = GraphQLSchemaHelpers::getListTypeName($typeID);
+            }
+            $typeID = GraphQLSchemaHelpers::getListTypeName($typeID);
             $maybeRegisteredType = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
             $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new ListWrappingType($type);
-		}
-		if ($isNonNullableOrMandatory) {
-			$typeID = GraphQLSchemaHelpers::getNonNullableOrMandatoryTypeName($typeID);
+        }
+        if ($isNonNullableOrMandatory) {
+            $typeID = GraphQLSchemaHelpers::getNonNullableOrMandatoryTypeName($typeID);
             $maybeRegisteredType = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
             $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new NonNullWrappingType($type);
-		}
+        }
         $this->type = $type;
     }
 }

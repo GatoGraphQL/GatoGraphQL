@@ -19,7 +19,7 @@ class FieldGraphQLSchemaDefinitionHelper implements FieldGraphQLSchemaDefinition
     ): void {
         $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
     }
-    
+
     /**
      * @return array<Field|WrappingTypeInterface>
      */
@@ -59,5 +59,5 @@ class FieldGraphQLSchemaDefinitionHelper implements FieldGraphQLSchemaDefinition
         }
         /** @var array<Field|WrappingTypeInterface> */
         return $this->schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObjects($schemaDefinitionReferenceObjectIDs);
-    }    
+    }
 }
