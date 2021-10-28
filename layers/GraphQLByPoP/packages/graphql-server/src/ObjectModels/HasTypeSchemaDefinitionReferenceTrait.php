@@ -25,14 +25,19 @@ trait HasTypeSchemaDefinitionReferenceTrait
         return $this->type;
     }
 
-    private function initType(): void
+    private function getInnermostTypeID(): string
     {
-        $typeID = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID([
+        return SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID([
             SchemaDefinition::TYPES,
             $this->schemaDefinition[SchemaDefinition::TYPE_KIND],
             $this->schemaDefinition[SchemaDefinition::TYPE_NAME],
         ]);
+    }
+
+    private function initType(): void
+    {
         $schemaDefinitionReferenceRegistry = SchemaDefinitionReferenceRegistryFacade::getInstance();
+        $typeID = $this->getInnermostTypeID();
         /** @var TypeInterface */
         $type = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
 
