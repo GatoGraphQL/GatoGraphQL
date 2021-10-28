@@ -128,7 +128,7 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'args':
                 return $field->getArgIDs();
             case 'type':
-                return $field->getTypeID();
+                return $field->getType()->getID();
             case 'isDeprecated':
                 return $field->isDeprecated();
             case 'deprecationReason':
