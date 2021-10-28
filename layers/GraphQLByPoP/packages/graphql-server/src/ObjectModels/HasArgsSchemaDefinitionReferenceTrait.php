@@ -48,11 +48,10 @@ trait HasArgsSchemaDefinitionReferenceTrait
      */
     public function getArgIDs(): array
     {
-        return array_map(
-            function (InputValue $inputValue) {
-                return $inputValue->getID();
-            },
-            $this->getArgs()
-        );
+        $ids = [];
+        foreach ($this->getArgs() as $inputValue) {
+            $ids[] = $inputValue->getID();
+        }
+        return $ids;
     }
 }
