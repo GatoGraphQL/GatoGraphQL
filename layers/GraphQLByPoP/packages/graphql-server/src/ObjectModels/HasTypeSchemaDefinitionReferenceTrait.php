@@ -11,6 +11,10 @@ use PoP\API\Schema\SchemaDefinition;
 
 trait HasTypeSchemaDefinitionReferenceTrait
 {
+    /**
+     * Lazy load the type, because it may not exist in the registry yet
+     * when initializing the Field/InputValue
+     */
     protected ?TypeInterface $type = null;
     
     public function getType(): TypeInterface
