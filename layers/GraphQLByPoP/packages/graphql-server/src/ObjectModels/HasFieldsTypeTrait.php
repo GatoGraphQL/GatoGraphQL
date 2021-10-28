@@ -10,9 +10,7 @@ use PoP\API\Schema\SchemaDefinition;
 
 trait HasFieldsTypeTrait
 {
-    /**
-     * @var Field[]
-     */
+    /** @var array<Field|WrappingTypeInterface> */
     protected array $fields;
 
     protected function initFields(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
