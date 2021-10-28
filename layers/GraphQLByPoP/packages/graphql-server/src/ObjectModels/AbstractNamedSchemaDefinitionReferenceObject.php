@@ -17,7 +17,7 @@ abstract class AbstractNamedSchemaDefinitionReferenceObject extends AbstractSche
      * Build a new Schema Definition Reference Object
      */
     public function __construct(/** @var array<string, mixed> */
-        protected array &$fullSchemaDefinition,
+        array &$fullSchemaDefinition,
         /** @var string[] */
         protected array $schemaDefinitionPath,
     ) {
