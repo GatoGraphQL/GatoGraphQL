@@ -376,6 +376,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     ): ?SchemaDefinitionReferenceObjectInterface {
         return $this->fullSchemaDefinitionReferenceDictionary[$id] ?? null;
     }
+    public function hasSchemaDefinitionReferenceObject(
+        string $id
+    ): bool {
+        return isset($this->fullSchemaDefinitionReferenceDictionary[$id]);
+    }
     /**
      * @param string[] $ids
      * @return SchemaDefinitionReferenceObjectInterface[]

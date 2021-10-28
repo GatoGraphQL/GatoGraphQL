@@ -18,6 +18,9 @@ interface SchemaDefinitionReferenceRegistryInterface
     public function getSchemaDefinitionReferenceObject(
         string $id
     ): ?SchemaDefinitionReferenceObjectInterface;
+    public function hasSchemaDefinitionReferenceObject(
+        string $id
+    ): bool;
     /**
      * @param string[] $ids
      * @return SchemaDefinitionReferenceObjectInterface[]
