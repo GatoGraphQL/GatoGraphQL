@@ -19,7 +19,7 @@ abstract class AbstractNamedSchemaDefinitionReferenceObject extends AbstractSche
     public function __construct(/** @var array<string, mixed> */
         array &$fullSchemaDefinition,
         /** @var string[] */
-        protected array $schemaDefinitionPath,
+        array $schemaDefinitionPath,
     ) {
         $this->id = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID($schemaDefinitionPath);
 
@@ -31,15 +31,5 @@ abstract class AbstractNamedSchemaDefinitionReferenceObject extends AbstractSche
         $this->schemaDefinition = &$schemaDefinitionPointer;
 
         parent::__construct();
-    }
-
-    public function getSchemaDefinition(): array
-    {
-        return $this->schemaDefinition;
-    }
-
-    public function getSchemaDefinitionPath(): array
-    {
-        return $this->schemaDefinitionPath;
     }
 }
