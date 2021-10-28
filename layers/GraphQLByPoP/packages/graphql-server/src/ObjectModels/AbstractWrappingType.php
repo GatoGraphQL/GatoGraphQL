@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-abstract class AbstractWrappingType implements WrappingTypeInterface
+abstract class AbstractWrappingType extends AbstractSchemaDefinitionReferenceObject implements WrappingTypeInterface
 {
     public function __construct(
         protected TypeInterface $wrappedType,
