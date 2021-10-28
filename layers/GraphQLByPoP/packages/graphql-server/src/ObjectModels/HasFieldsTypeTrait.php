@@ -17,10 +17,8 @@ trait HasFieldsTypeTrait
 
     protected function initFields(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
-        $this->fields = [];
-
         // Iterate to the definition of the fields in the schema, and create an object for each of them
-        $this->createFieldsFromPath(
+        $this->fields = SchemaDefinitionHelpers::createFieldsFromPath(
             $fullSchemaDefinition,
             array_merge(
                 $schemaDefinitionPath,
@@ -36,13 +34,6 @@ trait HasFieldsTypeTrait
                 return $a->getName() <=> $b->getName();
             });
         }
-    }
-    protected function createFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
-    {
-        $this->fields = array_merge(
-            $this->fields,
-            SchemaDefinitionHelpers::createFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
-        );
     }
 
     public function getFields(bool $includeDeprecated = false): array
