@@ -40,8 +40,13 @@ trait HasTypeSchemaDefinitionReferenceTrait
          * Either retrieve the object from the registry if it exists,
          * or create it.
          */
-        if ($this->schemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false) {
-			if ($this->schemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false) {
+        $isArrayOfArrays = $this->schemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
+        $isNonNullItemsInArrayOfArrays = $this->schemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
+        $isArray = $this->schemaDefinition[SchemaDefinition::IS_ARRAY] ?? false;
+        $isNonNullItemsInArray = $this->schemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
+        $isNonNullableOrMandatory = ($this->schemaDefinition[SchemaDefinition::NON_NULLABLE] ?? false) || ($this->schemaDefinition[SchemaDefinition::MANDATORY] ?? false);
+        if ($isArrayOfArrays) {
+			if ($isNonNullItemsInArrayOfArrays) {
                 $typeID = GraphQLSchemaHelpers::getNonNullableOrMandatoryTypeName($typeID);
                 $maybeRegisteredType = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
                 $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new NonNullType($type);
@@ -50,8 +55,8 @@ trait HasTypeSchemaDefinitionReferenceTrait
             $maybeRegisteredType = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
             $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new ListType($type);
 		}
-		if ($this->schemaDefinition[SchemaDefinition::IS_ARRAY] ?? false) {
-			if ($this->schemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false) {
+		if ($isArray) {
+			if ($isNonNullItemsInArray) {
 				$typeID = GraphQLSchemaHelpers::getNonNullableOrMandatoryTypeName($typeID);
                 $maybeRegisteredType = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
                 $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new NonNullType($type);
@@ -60,7 +65,7 @@ trait HasTypeSchemaDefinitionReferenceTrait
             $maybeRegisteredType = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
             $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new ListType($type);
 		}
-		if ($this->schemaDefinition[SchemaDefinition::NON_NULLABLE] ?? false) {
+		if ($isNonNullableOrMandatory) {
 			$typeID = GraphQLSchemaHelpers::getNonNullableOrMandatoryTypeName($typeID);
             $maybeRegisteredType = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
             $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new NonNullType($type);
