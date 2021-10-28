@@ -3,7 +3,7 @@
 Plugin Name: GraphQL API for WordPress
 Plugin URI: https://graphql-api.com
 Description: Transform your WordPress site into a GraphQL server.
-Version: 0.8.1
+Version: 0.9.0
 Requires at least: 5.4
 Requires PHP: 8.0
 Author: Leonardo Losoviz
@@ -31,7 +31,7 @@ add_action('init', function (): void {
     load_plugin_textdomain('graphql-api', false, plugin_basename(__FILE__) . '/languages');
 });
 
-$pluginVersion = '0.8.1';
+$pluginVersion = '0.9.0';
 $pluginName = __('GraphQL API for WordPress', 'graphql-api');
 
 /**
