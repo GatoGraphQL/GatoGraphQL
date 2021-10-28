@@ -10,6 +10,13 @@ class InputValue extends AbstractNamedSchemaDefinitionReferenceObject
 {
     use HasTypeSchemaDefinitionReferenceTrait;
 
+    public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
+    {
+        parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
+
+        $this->initType();
+    }
+
     public function getName(): string
     {
         return $this->schemaDefinition[SchemaDefinition::NAME];

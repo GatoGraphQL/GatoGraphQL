@@ -15,6 +15,7 @@ class Field extends AbstractNamedSchemaDefinitionReferenceObject
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
 
+        $this->initType();
         $this->initArgs($fullSchemaDefinition, $schemaDefinitionPath);
     }
     public function getName(): string
