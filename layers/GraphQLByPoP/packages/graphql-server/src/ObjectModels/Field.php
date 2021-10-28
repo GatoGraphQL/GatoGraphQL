@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use PoP\API\Schema\SchemaDefinition;
 
-class Field extends AbstractSchemaDefinitionReferenceObject
+class Field extends AbstractNamedSchemaDefinitionReferenceObject
 {
     use HasTypeSchemaDefinitionReferenceTrait;
     use HasArgsSchemaDefinitionReferenceTrait;

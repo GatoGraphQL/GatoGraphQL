@@ -361,9 +361,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
     public function registerSchemaDefinitionReferenceObject(
         SchemaDefinitionReferenceObjectInterface $schemaDefinitionReferenceObject,
-    ): string {
-        $schemaDefinitionPath = $schemaDefinitionReferenceObject->getSchemaDefinitionPath();
-        $schemaDefinitionReferenceObjectID = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID($schemaDefinitionPath);
+    ): void {
+        $schemaDefinitionReferenceObjectID = $schemaDefinitionReferenceObject->getID();
         if (isset($this->fullSchemaDefinitionReferenceDictionary[$schemaDefinitionReferenceObjectID])) {
             throw new Exception(sprintf(
                 $this->translationAPI->__('A Schema Definition Reference Object with id \'%s\s has already been registered', 'graphql-server'),
@@ -371,7 +370,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             ));
         }
         $this->fullSchemaDefinitionReferenceDictionary[$schemaDefinitionReferenceObjectID] = $schemaDefinitionReferenceObject;
-        return $schemaDefinitionReferenceObjectID;
     }
     public function getSchemaDefinitionReferenceObject(
         string $id

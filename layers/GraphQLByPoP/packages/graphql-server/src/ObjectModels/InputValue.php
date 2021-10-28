@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 
-class InputValue extends AbstractSchemaDefinitionReferenceObject
+class InputValue extends AbstractNamedSchemaDefinitionReferenceObject
 {
     use HasTypeSchemaDefinitionReferenceTrait;
 

@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 
-class EnumValue extends AbstractSchemaDefinitionReferenceObject
+class EnumValue extends AbstractNamedSchemaDefinitionReferenceObject
 {
     public function getName(): string
     {

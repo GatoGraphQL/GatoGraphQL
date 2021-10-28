@@ -6,7 +6,5 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 interface SchemaDefinitionReferenceObjectInterface
 {
-    public function getSchemaDefinitionPath(): array;
-
     public function getID(): string;
 }

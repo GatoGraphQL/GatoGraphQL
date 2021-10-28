@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-interface NamedTypeInterface extends TypeInterface, SchemaDefinitionReferenceObjectInterface
+interface NamedTypeInterface extends TypeInterface, NamedSchemaDefinitionReferenceObjectInterface
 {
     public function getNamespacedName(): string;
 

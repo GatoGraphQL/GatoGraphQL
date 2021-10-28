@@ -9,7 +9,7 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\State\ApplicationState;
 
-class Directive extends AbstractSchemaDefinitionReferenceObject
+class Directive extends AbstractNamedSchemaDefinitionReferenceObject
 {
     use HasArgsSchemaDefinitionReferenceTrait;
 

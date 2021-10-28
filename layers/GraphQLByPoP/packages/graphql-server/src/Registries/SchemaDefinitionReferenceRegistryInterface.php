@@ -14,7 +14,7 @@ interface SchemaDefinitionReferenceRegistryInterface
     public function &getFullSchemaDefinitionForGraphQL(): array;
     public function registerSchemaDefinitionReferenceObject(
         SchemaDefinitionReferenceObjectInterface $referenceObject
-    ): string;
+    ): void;
     public function getSchemaDefinitionReferenceObject(
         string $id
     ): ?SchemaDefinitionReferenceObjectInterface;
