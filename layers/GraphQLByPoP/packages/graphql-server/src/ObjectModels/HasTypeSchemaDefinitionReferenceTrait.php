@@ -11,14 +11,17 @@ use PoP\API\Schema\SchemaDefinition;
 
 trait HasTypeSchemaDefinitionReferenceTrait
 {
-    protected TypeInterface $type;
+    protected ?TypeInterface $type = null;
     
     public function getType(): TypeInterface
     {
+        if ($this->type === null) {
+            $this->initType();
+        }
         return $this->type;
     }
 
-    protected function initType(): void
+    private function initType(): void
     {
         $typeID = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID([
             SchemaDefinition::TYPES,
