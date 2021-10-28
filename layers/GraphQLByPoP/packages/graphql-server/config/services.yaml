@@ -13,9 +13,6 @@ services:
     GraphQLByPoP\GraphQLServer\Schema\FieldGraphQLSchemaDefinitionHelperInterface:
         class: \GraphQLByPoP\GraphQLServer\Schema\FieldGraphQLSchemaDefinitionHelper
 
-    GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxServiceInterface:
-        class: \GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxService
-
     GraphQLByPoP\GraphQLServer\Hooks\:
         resource: '../src/Hooks/*'
 
