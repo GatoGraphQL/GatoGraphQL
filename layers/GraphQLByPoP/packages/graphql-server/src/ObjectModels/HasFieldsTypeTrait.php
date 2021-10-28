@@ -53,18 +53,22 @@ trait HasFieldsTypeTrait
             $this->fields :
             array_filter(
                 $this->fields,
-                function (Field $field) {
+                function (Field | WrappingTypeInterface $fieldOrWrappingType) {
+                    while ($fieldOrWrappingType instanceof WrappingTypeInterface) {
+                        $fieldOrWrappingType = $fieldOrWrappingType->getWrappedType();
+                    }
+                    /** @var Field */
+                    $field = $fieldOrWrappingType;
                     return !$field->isDeprecated();
                 }
             );
     }
     public function getFieldIDs(bool $includeDeprecated = false): array
     {
-        return array_map(
-            function (Field $field) {
-                return $field->getID();
-            },
-            $this->getFields($includeDeprecated)
-        );
+        $ids = [];
+        foreach ($this->getFields($includeDeprecated) as $fieldOrWrappingType) {
+            $ids[] = $fieldOrWrappingType->getID();
+        }
+        return $ids;
     }
 }
