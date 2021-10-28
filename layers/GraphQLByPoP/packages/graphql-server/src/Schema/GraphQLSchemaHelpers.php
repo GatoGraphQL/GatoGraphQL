@@ -4,45 +4,18 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
+/**
+ * Convert the field type from its internal representation
+ * to the GraphQL standard representation (eg: "[Post]")
+ *
+ * If $isNonNullableOrMandatory is `true`, a "!" is added to the type name,
+ * to handle both field response and field arguments:
+ *
+ * - field response: isNonNullable
+ * - field argument: isMandatory (its provided value can still be null)
+ */
 class GraphQLSchemaHelpers
 {
-    /**
-     * Convert the field type from its internal representation
-     * to the GraphQL standard representation (eg: "[Post]")
-     *
-     * If $isNonNullableOrMandatory is `true`, a "!" is added to the type name,
-     * to handle both field response and field arguments:
-     *
-     * - field response: isNonNullable
-     * - field argument: isMandatory (its provided value can still be null)
-     */
-    public static function getTypeNameForGraphQLSchema(
-        string $typeName,
-        ?bool $isNonNullableOrMandatory = false,
-        ?bool $isArray = false,
-        ?bool $isNonNullItemsInArray = false,
-        ?bool $isArrayOfArrays = false,
-        ?bool $isNonNullItemsInArrayOfArrays = false,
-    ): string {
-        // Wrap the type with the array brackets
-        if ($isArrayOfArrays) {
-            if ($isNonNullItemsInArrayOfArrays) {
-                $typeName = self::getNonNullableOrMandatoryTypeName($typeName);
-            }
-            $typeName = self::getListTypeName($typeName);
-        }
-        if ($isArray) {
-            if ($isNonNullItemsInArray) {
-                $typeName = self::getNonNullableOrMandatoryTypeName($typeName);
-            }
-            $typeName = self::getListTypeName($typeName);
-        }
-        if ($isNonNullableOrMandatory) {
-            $typeName = self::getNonNullableOrMandatoryTypeName($typeName);
-        }
-        return $typeName;
-    }
-
     public static function getNonNullableOrMandatoryTypeName(string $typeName): string
     {
         return sprintf(
