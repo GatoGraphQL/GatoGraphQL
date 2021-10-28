@@ -28,7 +28,7 @@ abstract class AbstractNamedSchemaDefinitionReferenceObject extends AbstractSche
         foreach ($schemaDefinitionPath as $pathLevel) {
             $schemaDefinitionPointer = &$schemaDefinitionPointer[$pathLevel];
         }
-        $this->schemaDefinition = $schemaDefinitionPointer;
+        $this->schemaDefinition = &$schemaDefinitionPointer;
 
         parent::__construct();
     }
