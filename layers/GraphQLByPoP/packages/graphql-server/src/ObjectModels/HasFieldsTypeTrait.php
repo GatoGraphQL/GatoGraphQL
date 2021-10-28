@@ -44,13 +44,6 @@ trait HasFieldsTypeTrait
             SchemaDefinitionHelpers::createFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
         );
     }
-    protected function getFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
-    {
-        $this->fields = array_merge(
-            $this->fields,
-            SchemaDefinitionHelpers::getFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
-        );
-    }
 
     public function getFields(bool $includeDeprecated = false): array
     {
