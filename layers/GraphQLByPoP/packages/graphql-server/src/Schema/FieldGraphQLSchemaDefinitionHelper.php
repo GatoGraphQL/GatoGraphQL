@@ -24,7 +24,7 @@ class FieldGraphQLSchemaDefinitionHelper implements FieldGraphQLSchemaDefinition
      */
     public function createFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array
     {
-        $fieldSchemaDefinitionPointer = SchemaDefinitionHelpers::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
+        $fieldSchemaDefinitionPointer = &SchemaDefinitionHelpers::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
         $fields = [];
         foreach (array_keys($fieldSchemaDefinitionPointer) as $fieldName) {
             $fields[] = new Field(
@@ -45,7 +45,7 @@ class FieldGraphQLSchemaDefinitionHelper implements FieldGraphQLSchemaDefinition
      */
     public function getFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array
     {
-        $fieldSchemaDefinitionPointer = SchemaDefinitionHelpers::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
+        $fieldSchemaDefinitionPointer = &SchemaDefinitionHelpers::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
         $schemaDefinitionReferenceObjectIDs = [];
         foreach (array_keys($fieldSchemaDefinitionPointer) as $fieldName) {
             $schemaDefinitionReferenceObjectIDs[] = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID(array_merge(
