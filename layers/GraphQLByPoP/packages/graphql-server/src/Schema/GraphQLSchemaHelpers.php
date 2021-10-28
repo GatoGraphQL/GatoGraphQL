@@ -20,19 +20,19 @@ class GraphQLSchemaHelpers
         string $typeName,
         ?bool $isNonNullableOrMandatory = false,
         ?bool $isArray = false,
-        ?bool $isNonNullArrayItems = false,
+        ?bool $isNonNullItemsInArray = false,
         ?bool $isArrayOfArrays = false,
-        ?bool $isNonNullArrayOfArraysItems = false,
+        ?bool $isNonNullItemsInArrayOfArrays = false,
     ): string {
         // Wrap the type with the array brackets
         if ($isArrayOfArrays) {
-            if ($isNonNullArrayOfArraysItems) {
+            if ($isNonNullItemsInArrayOfArrays) {
                 $typeName = self::getNonNullableOrMandatoryTypeName($typeName);
             }
             $typeName = self::getListTypeName($typeName);
         }
         if ($isArray) {
-            if ($isNonNullArrayItems) {
+            if ($isNonNullItemsInArray) {
                 $typeName = self::getNonNullableOrMandatoryTypeName($typeName);
             }
             $typeName = self::getListTypeName($typeName);
