@@ -26,45 +26,4 @@ class SchemaDefinitionHelpers
         }
         return $schemaDefinitionPointer;
     }
-
-    /**
-     * @return Field[]
-     */
-    public static function createFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array
-    {
-        $fieldSchemaDefinitionPointer = self::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
-        $fields = [];
-        foreach (array_keys($fieldSchemaDefinitionPointer) as $fieldName) {
-            $fields[] = new Field(
-                $fullSchemaDefinition,
-                array_merge(
-                    $fieldSchemaDefinitionPath,
-                    [
-                        $fieldName
-                    ]
-                )
-            );
-        }
-        return $fields;
-    }
-
-    /**
-     * @return Field[]
-     */
-    public static function getFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array
-    {
-        $fieldSchemaDefinitionPointer = self::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
-        $schemaDefinitionReferenceRegistry = SchemaDefinitionReferenceRegistryFacade::getInstance();
-        $schemaDefinitionReferenceObjectIDs = [];
-        foreach (array_keys($fieldSchemaDefinitionPointer) as $fieldName) {
-            $schemaDefinitionReferenceObjectIDs[] = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID(array_merge(
-                $fieldSchemaDefinitionPath,
-                [
-                    $fieldName
-                ]
-            ));
-        }
-        /** @var Field[] */
-        return $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObjects($schemaDefinitionReferenceObjectIDs);
-    }
 }

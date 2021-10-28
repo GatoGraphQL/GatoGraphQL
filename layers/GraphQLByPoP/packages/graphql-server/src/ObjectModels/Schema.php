@@ -6,6 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use Exception;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\Facades\Schema\FieldGraphQLSchemaDefinitionHelperFacade;
 use GraphQLByPoP\GraphQLServer\Facades\Schema\GraphQLSchemaDefinitionServiceFacade;
 use GraphQLByPoP\GraphQLServer\ObjectModels\NamedTypeInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
@@ -29,8 +30,10 @@ class Schema
     ) {
         // Enable or not to add the global fields to the schema, since they may pollute the documentation
         if (ComponentConfiguration::exposeGlobalFieldsInGraphQLSchema()) {
+            $fieldGraphQLSchemaDefinitionHelper = FieldGraphQLSchemaDefinitionHelperFacade::getInstance();
+
             // Add the global fields in the registry
-            SchemaDefinitionHelpers::createFieldsFromPath(
+            $fieldGraphQLSchemaDefinitionHelper->createFieldsFromPath(
                 $fullSchemaDefinition,
                 [
                     SchemaDefinition::GLOBAL_FIELDS,

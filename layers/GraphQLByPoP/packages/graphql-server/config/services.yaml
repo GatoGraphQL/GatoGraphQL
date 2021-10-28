@@ -10,6 +10,9 @@ services:
     GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface:
         class: \GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionService
 
+    GraphQLByPoP\GraphQLServer\Schema\FieldGraphQLSchemaDefinitionHelperInterface:
+        class: \GraphQLByPoP\GraphQLServer\Schema\FieldGraphQLSchemaDefinitionHelper
+
     GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxServiceInterface:
         class: \GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxService
 

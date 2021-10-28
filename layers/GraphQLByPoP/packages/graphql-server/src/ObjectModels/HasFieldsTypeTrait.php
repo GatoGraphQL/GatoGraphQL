@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
-use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
+use GraphQLByPoP\GraphQLServer\Facades\Schema\FieldGraphQLSchemaDefinitionHelperFacade;
 use PoP\API\Schema\SchemaDefinition;
 
 trait HasFieldsTypeTrait
@@ -17,8 +17,9 @@ trait HasFieldsTypeTrait
 
     protected function initFields(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
+        $fieldGraphQLSchemaDefinitionHelper = FieldGraphQLSchemaDefinitionHelperFacade::getInstance();
         // Iterate to the definition of the fields in the schema, and create an object for each of them
-        $this->fields = SchemaDefinitionHelpers::createFieldsFromPath(
+        $this->fields = $fieldGraphQLSchemaDefinitionHelper->createFieldsFromPath(
             $fullSchemaDefinition,
             array_merge(
                 $schemaDefinitionPath,
@@ -31,7 +32,7 @@ trait HasFieldsTypeTrait
             // Global fields have already been initialized, simply get the reference to the existing objects from the registryMap
             $this->fields = array_merge(
                 $this->fields,
-                SchemaDefinitionHelpers::getFieldsFromPath(
+                $fieldGraphQLSchemaDefinitionHelper->getFieldsFromPath(
                     $fullSchemaDefinition,
                     [
                         SchemaDefinition::GLOBAL_FIELDS,
