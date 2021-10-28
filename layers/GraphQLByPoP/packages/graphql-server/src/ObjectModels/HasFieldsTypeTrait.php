@@ -29,15 +29,6 @@ trait HasFieldsTypeTrait
                 ]
             )
         );
-        if (ComponentConfiguration::exposeGlobalFieldsInGraphQLSchema()) {
-            // Global fields have already been initialized, simply get the reference to the existing objects from the registryMap
-            $this->getFieldsFromPath(
-                $fullSchemaDefinition,
-                [
-                    SchemaDefinition::GLOBAL_FIELDS,
-                ]
-            );
-        }
 
         // Maybe sort fields and connections all together
         if (ComponentConfiguration::sortGraphQLSchemaAlphabetically()) {
