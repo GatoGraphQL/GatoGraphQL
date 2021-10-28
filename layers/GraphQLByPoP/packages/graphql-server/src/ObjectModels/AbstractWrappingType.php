@@ -17,11 +17,6 @@ abstract class AbstractWrappingType extends AbstractSchemaDefinitionReferenceObj
         return $this->wrappedType;
     }
 
-    public function getWrappedTypeID(): string
-    {
-        return $this->wrappedType->getID();
-    }
-
     public function getDescription(): ?string
     {
         return null;
