@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaHelpers;
 
-class NonNullType extends AbstractWrappingType
+class NonNullWrappingType extends AbstractWrappingType
 {
     public function __construct(
         TypeInterface $wrappedType,

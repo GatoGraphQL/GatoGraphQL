@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaHelpers;
 
-class ListType extends AbstractWrappingType
+class ListWrappingType extends AbstractWrappingType
 {
     public function __construct(
         TypeInterface $wrappedType,

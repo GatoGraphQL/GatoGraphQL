@@ -54,26 +54,26 @@ trait HasTypeSchemaDefinitionReferenceTrait
 			if ($isNonNullItemsInArrayOfArrays) {
                 $typeID = GraphQLSchemaHelpers::getNonNullableOrMandatoryTypeName($typeID);
                 $maybeRegisteredType = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
-                $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new NonNullType($type);
+                $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new NonNullWrappingType($type);
 			}
             $typeID = GraphQLSchemaHelpers::getListTypeName($typeID);
             $maybeRegisteredType = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
-            $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new ListType($type);
+            $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new ListWrappingType($type);
 		}
 		if ($isArray) {
 			if ($isNonNullItemsInArray) {
 				$typeID = GraphQLSchemaHelpers::getNonNullableOrMandatoryTypeName($typeID);
                 $maybeRegisteredType = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
-                $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new NonNullType($type);
+                $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new NonNullWrappingType($type);
 			}
 			$typeID = GraphQLSchemaHelpers::getListTypeName($typeID);
             $maybeRegisteredType = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
-            $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new ListType($type);
+            $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new ListWrappingType($type);
 		}
 		if ($isNonNullableOrMandatory) {
 			$typeID = GraphQLSchemaHelpers::getNonNullableOrMandatoryTypeName($typeID);
             $maybeRegisteredType = $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
-            $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new NonNullType($type);
+            $type = $maybeRegisteredType !== null ? $maybeRegisteredType : new NonNullWrappingType($type);
 		}
         $this->type = $type;
     }
