@@ -374,17 +374,17 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         return $schemaDefinitionReferenceObjectID;
     }
     public function getSchemaDefinitionReferenceObject(
-        string $schemaDefinitionReferenceObjectID
+        string $id
     ): ?SchemaDefinitionReferenceObjectInterface {
-        return $this->fullSchemaDefinitionReferenceDictionary[$schemaDefinitionReferenceObjectID] ?? null;
+        return $this->fullSchemaDefinitionReferenceDictionary[$id] ?? null;
     }
     /**
-     * @param string[] $schemaDefinitionReferenceObjectIDs
+     * @param string[] $ids
      * @return SchemaDefinitionReferenceObjectInterface[]
      */
     public function getSchemaDefinitionReferenceObjects(
-        array $schemaDefinitionReferenceObjectIDs
+        array $ids
     ): array {
-        return array_values(array_intersect_key($this->fullSchemaDefinitionReferenceDictionary, array_flip($schemaDefinitionReferenceObjectIDs)));
+        return array_values(array_intersect_key($this->fullSchemaDefinitionReferenceDictionary, array_flip($ids)));
     }
 }

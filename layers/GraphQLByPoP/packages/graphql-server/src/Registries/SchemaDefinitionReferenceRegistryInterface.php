@@ -16,13 +16,13 @@ interface SchemaDefinitionReferenceRegistryInterface
         SchemaDefinitionReferenceObjectInterface $referenceObject
     ): string;
     public function getSchemaDefinitionReferenceObject(
-        string $referenceObjectID
+        string $id
     ): ?SchemaDefinitionReferenceObjectInterface;
     /**
-     * @param string[] $schemaDefinitionReferenceObjectIDs
+     * @param string[] $ids
      * @return SchemaDefinitionReferenceObjectInterface[]
      */
     public function getSchemaDefinitionReferenceObjects(
-        array $schemaDefinitionReferenceObjectIDs
+        array $ids
     ): array;
 }
