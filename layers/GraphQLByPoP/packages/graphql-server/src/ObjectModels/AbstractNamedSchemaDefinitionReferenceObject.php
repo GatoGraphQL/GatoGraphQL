@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 
 abstract class AbstractNamedSchemaDefinitionReferenceObject extends AbstractSchemaDefinitionReferenceObject implements NamedSchemaDefinitionReferenceObjectInterface
@@ -31,9 +30,7 @@ abstract class AbstractNamedSchemaDefinitionReferenceObject extends AbstractSche
         }
         $this->schemaDefinition = $schemaDefinitionPointer;
 
-        // Register the object
-        $schemaDefinitionReferenceRegistry = SchemaDefinitionReferenceRegistryFacade::getInstance();
-        $schemaDefinitionReferenceRegistry->registerSchemaDefinitionReferenceObject($this);
+        parent::__construct();
     }
 
     public function getSchemaDefinition(): array

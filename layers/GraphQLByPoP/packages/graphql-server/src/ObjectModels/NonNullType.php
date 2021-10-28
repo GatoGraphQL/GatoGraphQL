@@ -9,11 +9,11 @@ class NonNullType extends AbstractWrappingType
     public function __construct(
         TypeInterface $wrappedType,
     ) {
-        parent::__construct($wrappedType);
         $this->id = sprintf(
             '%s!',
-            $this->wrappedType->getID()
+            $wrappedType->getID()
         );
+        parent::__construct($wrappedType);
     }
 
     public function getName(): string

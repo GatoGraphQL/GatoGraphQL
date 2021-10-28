@@ -9,6 +9,7 @@ abstract class AbstractWrappingType extends AbstractSchemaDefinitionReferenceObj
     public function __construct(
         protected TypeInterface $wrappedType,
     ) {
+        parent::__construct();
     }
 
     public function getWrappedType(): TypeInterface
