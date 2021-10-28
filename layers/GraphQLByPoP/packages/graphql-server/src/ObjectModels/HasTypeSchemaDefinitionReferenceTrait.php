@@ -77,25 +77,4 @@ trait HasTypeSchemaDefinitionReferenceTrait
 		}
         $this->type = $type;
     }
-
-    // /**
-    //  * Append the GraphQL wrappers to the ID, to select any entity
-    //  * of type NamedType or WrappingType
-    //  */
-    // public function getTypeID(): string
-    // {
-    //     $typeID = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID([
-    //         SchemaDefinition::TYPES,
-    //         $this->schemaDefinition[SchemaDefinition::TYPE_KIND],
-    //         $this->schemaDefinition[SchemaDefinition::TYPE_NAME],
-    //     ]);
-    //     return GraphQLSchemaHelpers::getTypeNameForGraphQLSchema(
-    //         $typeID,
-    //         $this->schemaDefinition[SchemaDefinition::NON_NULLABLE] ?? null,
-    //         $this->schemaDefinition[SchemaDefinition::IS_ARRAY] ?? false,
-    //         $this->schemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false,
-    //         $this->schemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false,
-    //         $this->schemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false,
-    //     );
-    // }
 }
