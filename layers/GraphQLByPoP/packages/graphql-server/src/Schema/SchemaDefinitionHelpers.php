@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
+use GraphQLByPoP\GraphQLServer\Facades\Registries\SchemaDefinitionReferenceRegistryFacade;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Field;
 
 class SchemaDefinitionHelpers
@@ -45,5 +46,25 @@ class SchemaDefinitionHelpers
             );
         }
         return $fields;
+    }
+
+    /**
+     * @return Field[]
+     */
+    public static function getFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array
+    {
+        $fieldSchemaDefinitionPointer = self::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
+        $schemaDefinitionReferenceRegistry = SchemaDefinitionReferenceRegistryFacade::getInstance();
+        $schemaDefinitionReferenceObjectIDs = [];
+        foreach (array_keys($fieldSchemaDefinitionPointer) as $fieldName) {
+            $schemaDefinitionReferenceObjectIDs[] = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID(array_merge(
+                $fieldSchemaDefinitionPath,
+                [
+                    $fieldName
+                ]
+            ));
+        }
+        /** @var Field[] */
+        return $schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObjects($schemaDefinitionReferenceObjectIDs);
     }
 }

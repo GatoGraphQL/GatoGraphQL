@@ -17,8 +17,10 @@ trait HasFieldsTypeTrait
 
     protected function initFields(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
+        $this->fields = [];
+
         // Iterate to the definition of the fields in the schema, and create an object for each of them
-        $this->fields = SchemaDefinitionHelpers::createFieldsFromPath(
+        $this->createFieldsFromPath(
             $fullSchemaDefinition,
             array_merge(
                 $schemaDefinitionPath,
@@ -27,6 +29,15 @@ trait HasFieldsTypeTrait
                 ]
             )
         );
+        if (ComponentConfiguration::exposeGlobalFieldsInGraphQLSchema()) {
+            // Global fields have already been initialized, simply get the reference to the existing objects from the registryMap
+            $this->getFieldsFromPath(
+                $fullSchemaDefinition,
+                [
+                    SchemaDefinition::GLOBAL_FIELDS,
+                ]
+            );
+        }
 
         // Maybe sort fields and connections all together
         if (ComponentConfiguration::sortGraphQLSchemaAlphabetically()) {
@@ -34,6 +45,20 @@ trait HasFieldsTypeTrait
                 return $a->getName() <=> $b->getName();
             });
         }
+    }
+    protected function createFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
+    {
+        $this->fields = array_merge(
+            $this->fields,
+            SchemaDefinitionHelpers::createFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
+        );
+    }
+    protected function getFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
+    {
+        $this->fields = array_merge(
+            $this->fields,
+            SchemaDefinitionHelpers::getFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
+        );
     }
 
     public function getFields(bool $includeDeprecated = false): array
