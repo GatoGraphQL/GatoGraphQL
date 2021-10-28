@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\Field;
+use GraphQLByPoP\GraphQLServer\ObjectModels\WrappingTypeInterface;
 
 interface FieldGraphQLSchemaDefinitionHelperInterface
 {
     /**
-     * @return Field[]
+     * @return array<Field|WrappingTypeInterface>
      */
     public function createFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array;
     /**
-     * @return Field[]
+     * @return array<Field|WrappingTypeInterface>
      */
     public function getFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array;
 }

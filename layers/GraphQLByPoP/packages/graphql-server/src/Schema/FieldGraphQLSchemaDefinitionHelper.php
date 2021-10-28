@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\Field;
+use GraphQLByPoP\GraphQLServer\ObjectModels\WrappingTypeInterface;
 use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -20,14 +21,14 @@ class FieldGraphQLSchemaDefinitionHelper implements FieldGraphQLSchemaDefinition
     }
     
     /**
-     * @return Field[]
+     * @return array<Field|WrappingTypeInterface>
      */
     public function createFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array
     {
         $fieldSchemaDefinitionPointer = &SchemaDefinitionHelpers::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
         $fields = [];
-        foreach (array_keys($fieldSchemaDefinitionPointer) as $fieldName) {
-            $fields[] = new Field(
+        foreach ($fieldSchemaDefinitionPointer as $fieldName => $fieldSchemaDefinition) {
+            $fieldOrWrappingType = new Field(
                 $fullSchemaDefinition,
                 array_merge(
                     $fieldSchemaDefinitionPath,
@@ -36,12 +37,13 @@ class FieldGraphQLSchemaDefinitionHelper implements FieldGraphQLSchemaDefinition
                     ]
                 )
             );
+            $fields[] = $fieldOrWrappingType;
         }
         return $fields;
     }
 
     /**
-     * @return Field[]
+     * @return array<Field|WrappingTypeInterface>
      */
     public function getFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array
     {
@@ -55,7 +57,7 @@ class FieldGraphQLSchemaDefinitionHelper implements FieldGraphQLSchemaDefinition
                 ]
             ));
         }
-        /** @var Field[] */
+        /** @var array<Field|WrappingTypeInterface> */
         return $this->schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObjects($schemaDefinitionReferenceObjectIDs);
     }    
 }
