@@ -24,13 +24,6 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireUserStance_URE_Module_Processor_MultiSelectFilterInputs(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-
     public function getModulesToProcess(): array
     {
         return array(

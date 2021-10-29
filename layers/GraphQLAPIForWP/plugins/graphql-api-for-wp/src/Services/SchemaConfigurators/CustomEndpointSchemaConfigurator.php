@@ -22,13 +22,6 @@ class CustomEndpointSchemaConfigurator extends AbstractCustomPostEndpointSchemaC
         return $this->endpointSchemaConfigurationExecuterRegistry ??= $this->instanceManager->getInstance(EndpointSchemaConfigurationExecuterRegistryInterface::class);
     }
 
-    //#[Required]
-    final public function autowireCustomEndpointSchemaConfigurator(
-        EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry
-    ): void {
-        $this->endpointSchemaConfigurationExecuterRegistry = $endpointSchemaConfigurationExecuterRegistry;
-    }
-
     /**
      * Only enable the service, if the corresponding module is also enabled
      */

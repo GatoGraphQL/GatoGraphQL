@@ -30,13 +30,6 @@ abstract class AbstractEditorScript extends AbstractScript
         return $this->editorHelpers ??= $this->instanceManager->getInstance(EditorHelpers::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractEditorScript(
-        EditorHelpers $editorHelpers,
-    ): void {
-        $this->editorHelpers = $editorHelpers;
-    }
-
     /**
      * Pass localized data to the block
      *

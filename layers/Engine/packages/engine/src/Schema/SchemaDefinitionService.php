@@ -36,15 +36,6 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
         return $this->anyBuiltInScalarScalarTypeResolver ??= $this->instanceManager->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireSchemaDefinitionService(
-        RootObjectTypeResolver $rootObjectTypeResolver,
-        AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver,
-    ): void {
-        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
-        $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
-    }
-
     /**
      * The `AnyBuiltInScalar` type is a wildcard type,
      * representing any of GraphQL's built-in types

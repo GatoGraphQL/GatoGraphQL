@@ -59,19 +59,6 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
         return $this->persistedQueryEndpointOptionsBlock ??= $this->instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
     }
 
-    //#[Required]
-    final public function autowireGraphQLPersistedQueryEndpointCustomPostType(
-        PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry,
-        PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistry,
-        PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistry,
-        PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock,
-    ): void {
-        $this->persistedQueryEndpointBlockRegistry = $persistedQueryEndpointBlockRegistry;
-        $this->persistedQueryEndpointExecuterRegistry = $persistedQueryEndpointExecuterRegistry;
-        $this->persistedQueryEndpointAnnotatorRegistry = $persistedQueryEndpointAnnotatorRegistry;
-        $this->persistedQueryEndpointOptionsBlock = $persistedQueryEndpointOptionsBlock;
-    }
-
     /**
      * Custom Post Type name
      */

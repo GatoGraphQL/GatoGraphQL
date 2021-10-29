@@ -35,12 +35,6 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractTagTypeAPI(CMSHelperServiceInterface $cmsHelperService): void
-    {
-        $this->cmsHelperService = $cmsHelperService;
-    }
-
     abstract protected function getTagTaxonomyName(): string;
 
 

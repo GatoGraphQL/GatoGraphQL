@@ -21,13 +21,6 @@ trait UseObjectDictionaryTypeDataLoaderTrait
         return $this->objectDictionary ??= $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
     }
 
-    //#[Required]
-    public function autowireUseObjectDictionaryTypeDataLoaderTrait(
-        ObjectDictionaryInterface $objectDictionary,
-    ): void {
-        $this->objectDictionary = $objectDictionary;
-    }
-
     public function getObjects(array $ids): array
     {
         $objectTypeResolverClass = get_class($this->getObjectTypeResolver());

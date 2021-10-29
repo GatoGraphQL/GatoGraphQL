@@ -22,13 +22,6 @@ trait WithTypeFieldControlBlockTrait
         return $this->typeRegistry ??= $this->instanceManager->getInstance(TypeRegistryInterface::class);
     }
 
-    //#[Required]
-    public function autowireWithTypeFieldControlBlockTrait(
-        TypeRegistryInterface $typeRegistry,
-    ): void {
-        $this->typeRegistry = $typeRegistry;
-    }
-
     /**
      * Convert the typeFields from the format saved in the post: "typeNamespacedName.fieldName",
      * to the one suitable for printing on the page, to show the user: "typeName/fieldName"

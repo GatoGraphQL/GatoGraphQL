@@ -55,17 +55,6 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
         return $this->endpointBlockCategory ??= $this->instanceManager->getInstance(EndpointBlockCategory::class);
     }
 
-    //#[Required]
-    final public function autowireEndpointSchemaConfigurationBlock(
-        BlockRenderingHelpers $blockRenderingHelpers,
-        CPTUtils $cptUtils,
-        EndpointBlockCategory $endpointBlockCategory,
-    ): void {
-        $this->blockRenderingHelpers = $blockRenderingHelpers;
-        $this->cptUtils = $cptUtils;
-        $this->endpointBlockCategory = $endpointBlockCategory;
-    }
-
     protected function getBlockName(): string
     {
         return 'schema-configuration';

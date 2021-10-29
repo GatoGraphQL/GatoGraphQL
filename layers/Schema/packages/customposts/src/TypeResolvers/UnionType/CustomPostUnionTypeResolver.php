@@ -32,15 +32,6 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
         return $this->isCustomPostInterfaceTypeResolver ??= $this->instanceManager->getInstance(IsCustomPostInterfaceTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireCustomPostUnionTypeResolver(
-        IsCustomPostInterfaceTypeResolver $isCustomPostInterfaceTypeResolver,
-        CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader,
-    ): void {
-        $this->isCustomPostInterfaceTypeResolver = $isCustomPostInterfaceTypeResolver;
-        $this->customPostUnionTypeDataLoader = $customPostUnionTypeDataLoader;
-    }
-
     public function getTypeName(): string
     {
         return 'CustomPostUnion';

@@ -49,14 +49,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractTypeResolver(SchemaNamespacingServiceInterface $schemaNamespacingService, SchemaDefinitionServiceInterface $schemaDefinitionService, AttachableExtensionManagerInterface $attachableExtensionManager): void
-    {
-        $this->schemaNamespacingService = $schemaNamespacingService;
-        $this->schemaDefinitionService = $schemaDefinitionService;
-        $this->attachableExtensionManager = $attachableExtensionManager;
-    }
-
     public function getNamespace(): string
     {
         return $this->getSchemaNamespacingService()->getSchemaNamespace(get_called_class());

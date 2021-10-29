@@ -57,17 +57,6 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireFilterInputModuleProcessor(
-        CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver,
-        CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
-    ): void {
-        $this->commentTypeEnumTypeResolver = $commentTypeEnumTypeResolver;
-        $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
-
     public function getModulesToProcess(): array
     {
         return array(

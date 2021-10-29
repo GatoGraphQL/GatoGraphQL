@@ -37,15 +37,6 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
         return $this->updatePostMutationResolver ??= $this->instanceManager->getInstance(UpdatePostMutationResolver::class);
     }
 
-    //#[Required]
-    final public function autowirePostObjectTypeFieldResolver(
-        PostObjectTypeResolver $postObjectTypeResolver,
-        UpdatePostMutationResolver $updatePostMutationResolver,
-    ): void {
-        $this->postObjectTypeResolver = $postObjectTypeResolver;
-        $this->updatePostMutationResolver = $updatePostMutationResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

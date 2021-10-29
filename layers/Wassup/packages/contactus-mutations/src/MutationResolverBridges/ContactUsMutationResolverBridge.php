@@ -22,13 +22,6 @@ class ContactUsMutationResolverBridge extends AbstractFormComponentMutationResol
         return $this->contactUsMutationResolver ??= $this->instanceManager->getInstance(ContactUsMutationResolver::class);
     }
 
-    //#[Required]
-    final public function autowireContactUsMutationResolverBridge(
-        ContactUsMutationResolver $contactUsMutationResolver,
-    ): void {
-        $this->contactUsMutationResolver = $contactUsMutationResolver;
-    }
-
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->getContactUsMutationResolver();

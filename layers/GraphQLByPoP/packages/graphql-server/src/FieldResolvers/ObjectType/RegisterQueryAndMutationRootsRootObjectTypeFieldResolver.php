@@ -41,15 +41,6 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
         return $this->mutationRootObjectTypeResolver ??= $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireRegisterQueryAndMutationRootsRootObjectTypeFieldResolver(
-        QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
-        MutationRootObjectTypeResolver $mutationRootObjectTypeResolver,
-    ): void {
-        $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
-        $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

@@ -28,13 +28,6 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
         return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireEntryRouteModuleProcessor(
-        PostCategoryTypeAPIInterface $postCategoryTypeAPI,
-    ): void {
-        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
-    }
-
     /**
      * @return array<string, array<array>>
      */

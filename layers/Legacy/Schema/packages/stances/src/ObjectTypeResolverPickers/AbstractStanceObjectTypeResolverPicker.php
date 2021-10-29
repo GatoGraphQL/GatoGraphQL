@@ -22,12 +22,6 @@ abstract class AbstractStanceObjectTypeResolverPicker extends AbstractObjectType
     {
         return $this->stanceObjectTypeResolver ??= $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
     }
-
-    //#[Required]
-    final public function autowireAbstractStanceObjectTypeResolverPicker(StanceObjectTypeResolver $stanceObjectTypeResolver): void
-    {
-        $this->stanceObjectTypeResolver = $stanceObjectTypeResolver;
-    }
     
     public function getObjectTypeResolver(): ObjectTypeResolverInterface
     {

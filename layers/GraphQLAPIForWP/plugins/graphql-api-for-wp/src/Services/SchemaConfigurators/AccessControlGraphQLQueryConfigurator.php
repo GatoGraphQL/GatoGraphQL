@@ -54,19 +54,6 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
         return $this->accessControlManager ??= $this->instanceManager->getInstance(AccessControlManagerInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAccessControlGraphQLQueryConfigurator(
-        AccessControlBlock $accessControlBlock,
-        BlockHelpers $blockHelpers,
-        AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry,
-        AccessControlManagerInterface $accessControlManager,
-    ): void {
-        $this->accessControlBlock = $accessControlBlock;
-        $this->blockHelpers = $blockHelpers;
-        $this->accessControlRuleBlockRegistry = $accessControlRuleBlockRegistry;
-        $this->accessControlManager = $accessControlManager;
-    }
-
     /**
      * @var array<string, bool>|null
      */

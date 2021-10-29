@@ -53,17 +53,6 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractPostObjectTypeFieldResolver(
-        IntScalarTypeResolver $intScalarTypeResolver,
-        PostObjectTypeResolver $postObjectTypeResolver,
-        PostTypeAPIInterface $postTypeAPI,
-    ): void {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-        $this->postObjectTypeResolver = $postObjectTypeResolver;
-        $this->postTypeAPI = $postTypeAPI;
-    }
-
     public function getFieldNamesToResolve(): array
     {
         return [

@@ -224,35 +224,6 @@ class Engine implements EngineInterface
         return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
 
-    //#[Required]
-    final public function autowireEngine(
-        DataStructureManagerInterface $dataStructureManager,
-        ModelInstanceInterface $modelInstance,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        ModulePathHelpersInterface $modulePathHelpers,
-        ModulePathManagerInterface $modulePathManager,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ModuleFilterManagerInterface $moduleFilterManager,
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        CheckpointProcessorManagerInterface $checkpointProcessorManager,
-        DataloadHelperServiceInterface $dataloadHelperService,
-        EntryModuleManagerInterface $entryModuleManager,
-        RequestHelperServiceInterface $requestHelperService,
-    ): void {
-        $this->dataStructureManager = $dataStructureManager;
-        $this->modelInstance = $modelInstance;
-        $this->feedbackMessageStore = $feedbackMessageStore;
-        $this->modulePathHelpers = $modulePathHelpers;
-        $this->modulePathManager = $modulePathManager;
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-        $this->moduleFilterManager = $moduleFilterManager;
-        $this->moduleProcessorManager = $moduleProcessorManager;
-        $this->checkpointProcessorManager = $checkpointProcessorManager;
-        $this->dataloadHelperService = $dataloadHelperService;
-        $this->entryModuleManager = $entryModuleManager;
-        $this->requestHelperService = $requestHelperService;
-    }
-
     final public function getPersistentCache(): PersistentCacheInterface
     {
         $this->persistentCache ??= PersistentCacheFacade::getInstance();

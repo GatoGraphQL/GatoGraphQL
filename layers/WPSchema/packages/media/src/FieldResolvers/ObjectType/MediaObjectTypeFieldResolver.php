@@ -44,17 +44,6 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }
 
-    //#[Required]
-    final public function autowireMediaObjectTypeFieldResolver(
-        CMSHelperServiceInterface $cmsHelperService,
-        DateFormatterInterface $dateFormatter,
-        QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
-    ): void {
-        $this->cmsHelperService = $cmsHelperService;
-        $this->dateFormatter = $dateFormatter;
-        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

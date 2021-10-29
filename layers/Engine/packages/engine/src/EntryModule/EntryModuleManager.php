@@ -25,12 +25,6 @@ class EntryModuleManager implements EntryModuleManagerInterface
         return $this->routeModuleProcessorManager ??= $this->instanceManager->getInstance(RouteModuleProcessorManagerInterface::class);
     }
 
-    //#[Required]
-    final public function autowireEntryModuleManager(RouteModuleProcessorManagerInterface $routeModuleProcessorManager): void
-    {
-        $this->routeModuleProcessorManager = $routeModuleProcessorManager;
-    }
-
     public function getEntryModule(): ?array
     {
         return $this->getRouteModuleProcessorManager()->getRouteModuleByMostAllmatchingVarsProperties(ModuleRoutingGroups::ENTRYMODULE);

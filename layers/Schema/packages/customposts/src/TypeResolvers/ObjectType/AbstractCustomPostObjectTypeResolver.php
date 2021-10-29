@@ -21,13 +21,6 @@ abstract class AbstractCustomPostObjectTypeResolver extends AbstractObjectTypeRe
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractCustomPostObjectTypeResolver(
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-    ): void {
-        $this->customPostTypeAPI = $customPostTypeAPI;
-    }
-
     public function getTypeDescription(): ?string
     {
         return $this->translationAPI->__('Representation of a custom post', 'customposts');

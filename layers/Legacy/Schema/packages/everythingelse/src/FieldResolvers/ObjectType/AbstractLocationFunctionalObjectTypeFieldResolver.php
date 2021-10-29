@@ -25,13 +25,6 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
         return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractLocationFunctionalObjectTypeFieldResolver(
-        URLScalarTypeResolver $urlScalarTypeResolver,
-    ): void {
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-    }
-
     protected function getDbobjectIdField()
     {
         return null;

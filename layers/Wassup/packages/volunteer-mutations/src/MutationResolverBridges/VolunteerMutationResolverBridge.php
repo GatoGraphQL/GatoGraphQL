@@ -22,13 +22,6 @@ class VolunteerMutationResolverBridge extends AbstractFormComponentMutationResol
         return $this->volunteerMutationResolver ??= $this->instanceManager->getInstance(VolunteerMutationResolver::class);
     }
 
-    //#[Required]
-    final public function autowireVolunteerMutationResolverBridge(
-        VolunteerMutationResolver $volunteerMutationResolver,
-    ): void {
-        $this->volunteerMutationResolver = $volunteerMutationResolver;
-    }
-
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->getVolunteerMutationResolver();

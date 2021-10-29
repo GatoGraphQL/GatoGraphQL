@@ -33,15 +33,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->supportingFeaturedImageInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(SupportingFeaturedImageInterfaceTypeFieldResolver::class);
     }
 
-    //#[Required]
-    final public function autowireCustomPostObjectTypeFieldResolver(
-        CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI,
-        SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver,
-    ): void {
-        $this->customPostMediaTypeAPI = $customPostMediaTypeAPI;
-        $this->supportingFeaturedImageInterfaceTypeFieldResolver = $supportingFeaturedImageInterfaceTypeFieldResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

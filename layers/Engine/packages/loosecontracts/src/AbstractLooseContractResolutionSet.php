@@ -35,13 +35,6 @@ abstract class AbstractLooseContractResolutionSet extends AbstractAutomaticallyI
         return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractLooseContractResolutionSet(LooseContractManagerInterface $looseContractManager, NameResolverInterface $nameResolver): void
-    {
-        $this->looseContractManager = $looseContractManager;
-        $this->nameResolver = $nameResolver;
-    }
-
     final public function initialize(): void
     {
         $this->resolveContracts();

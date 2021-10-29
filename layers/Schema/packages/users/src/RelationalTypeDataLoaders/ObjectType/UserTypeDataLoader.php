@@ -23,13 +23,6 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireUserTypeDataLoader(
-        UserTypeAPIInterface $userTypeAPI,
-    ): void {
-        $this->userTypeAPI = $userTypeAPI;
-    }
-
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [

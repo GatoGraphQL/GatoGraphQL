@@ -55,17 +55,6 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
         return $this->graphQLEndpointHandler ??= $this->instanceManager->getInstance(GraphQLEndpointHandler::class);
     }
 
-    //#[Required]
-    final public function autowireSingleEndpointSchemaConfiguratorExecuter(
-        ModuleRegistryInterface $moduleRegistry,
-        SingleEndpointSchemaConfigurator $singleEndpointSchemaConfigurator,
-        GraphQLEndpointHandler $graphQLEndpointHandler,
-    ): void {
-        $this->moduleRegistry = $moduleRegistry;
-        $this->singleEndpointSchemaConfigurator = $singleEndpointSchemaConfigurator;
-        $this->graphQLEndpointHandler = $graphQLEndpointHandler;
-    }
-
     /**
      * This is the Schema Configuration ID
      */

@@ -22,13 +22,6 @@ class DirectiveObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
         return $this->schemaDefinitionReferenceTypeDataLoader ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceTypeDataLoader::class);
     }
 
-    //#[Required]
-    final public function autowireDirectiveObjectTypeResolver(
-        SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
-    ): void {
-        $this->schemaDefinitionReferenceTypeDataLoader = $schemaDefinitionReferenceTypeDataLoader;
-    }
-
     public function getTypeName(): string
     {
         return '__Directive';

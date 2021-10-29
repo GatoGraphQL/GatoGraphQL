@@ -45,17 +45,6 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireUserObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        UserRoleTypeAPIInterface $userRoleTypeAPI,
-    ): void {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        $this->userRoleTypeAPI = $userRoleTypeAPI;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

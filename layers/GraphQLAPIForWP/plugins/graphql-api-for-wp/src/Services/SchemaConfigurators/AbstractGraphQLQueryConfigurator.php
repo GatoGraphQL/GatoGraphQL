@@ -63,14 +63,6 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
         return $this->directiveRegistry ??= $this->instanceManager->getInstance(DirectiveRegistryInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractGraphQLQueryConfigurator(ModuleRegistryInterface $moduleRegistry, TypeRegistryInterface $typeRegistry, DirectiveRegistryInterface $directiveRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-        $this->typeRegistry = $typeRegistry;
-        $this->directiveRegistry = $directiveRegistry;
-    }
-
     /**
      * Lazy load and return the `$namespacedObjectTypeNameResolverClasses` array
      *

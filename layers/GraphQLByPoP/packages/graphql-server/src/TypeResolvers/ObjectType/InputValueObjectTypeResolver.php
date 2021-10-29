@@ -22,13 +22,6 @@ class InputValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolv
         return $this->schemaDefinitionReferenceTypeDataLoader ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceTypeDataLoader::class);
     }
 
-    //#[Required]
-    final public function autowireInputValueObjectTypeResolver(
-        SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
-    ): void {
-        $this->schemaDefinitionReferenceTypeDataLoader = $schemaDefinitionReferenceTypeDataLoader;
-    }
-
     public function getTypeName(): string
     {
         return '__InputValue';

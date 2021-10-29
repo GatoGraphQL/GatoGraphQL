@@ -47,17 +47,6 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->locationObjectTypeResolver ??= $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireEventObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
-        LocationObjectTypeResolver $locationObjectTypeResolver,
-    ): void {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
-        $this->locationObjectTypeResolver = $locationObjectTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

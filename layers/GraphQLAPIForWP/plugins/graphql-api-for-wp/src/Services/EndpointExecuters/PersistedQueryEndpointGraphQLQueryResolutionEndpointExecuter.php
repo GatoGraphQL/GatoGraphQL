@@ -44,17 +44,6 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
         return $this->graphQLRequestVarsHooks ??= $this->instanceManager->getInstance(GraphQLRequestVarsHooks::class);
     }
 
-    //#[Required]
-    final public function autowirePersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter(
-        GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
-        GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
-        GraphQLRequestVarsHooks $graphQLRequestVarsHooks,
-    ): void {
-        $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
-        $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
-        $this->graphQLRequestVarsHooks = $graphQLRequestVarsHooks;
-    }
-
     public function getEnablingModule(): ?string
     {
         return EndpointFunctionalityModuleResolver::PERSISTED_QUERIES;

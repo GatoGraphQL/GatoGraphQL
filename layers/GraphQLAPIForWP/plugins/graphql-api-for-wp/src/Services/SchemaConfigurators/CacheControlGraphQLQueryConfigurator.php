@@ -43,17 +43,6 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
         return $this->cacheControlManager ??= $this->instanceManager->getInstance(CacheControlManagerInterface::class);
     }
 
-    //#[Required]
-    final public function autowireCacheControlGraphQLQueryConfigurator(
-        CacheControlBlock $cacheControlBlock,
-        BlockHelpers $blockHelpers,
-        CacheControlManagerInterface $cacheControlManager,
-    ): void {
-        $this->cacheControlBlock = $cacheControlBlock;
-        $this->blockHelpers = $blockHelpers;
-        $this->cacheControlManager = $cacheControlManager;
-    }
-
     public function isServiceEnabled(): bool
     {
         // Only execute for GET operations

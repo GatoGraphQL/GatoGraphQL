@@ -32,15 +32,6 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->commentTypeDataLoader ??= $this->instanceManager->getInstance(CommentTypeDataLoader::class);
     }
 
-    //#[Required]
-    final public function autowireCommentObjectTypeResolver(
-        CommentTypeAPIInterface $commentTypeAPI,
-        CommentTypeDataLoader $commentTypeDataLoader,
-    ): void {
-        $this->commentTypeAPI = $commentTypeAPI;
-        $this->commentTypeDataLoader = $commentTypeDataLoader;
-    }
-
     public function getTypeName(): string
     {
         return 'Comment';

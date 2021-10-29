@@ -23,13 +23,6 @@ class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->menuItemTypeDataLoader ??= $this->instanceManager->getInstance(MenuItemTypeDataLoader::class);
     }
 
-    //#[Required]
-    final public function autowireMenuItemObjectTypeResolver(
-        MenuItemTypeDataLoader $menuItemTypeDataLoader,
-    ): void {
-        $this->menuItemTypeDataLoader = $menuItemTypeDataLoader;
-    }
-
     public function getTypeName(): string
     {
         return 'MenuItem';

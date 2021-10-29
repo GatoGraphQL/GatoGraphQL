@@ -37,15 +37,6 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireUserObjectTypeFieldResolver(
-        DateFormatterInterface $dateFormatter,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->dateFormatter = $dateFormatter;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

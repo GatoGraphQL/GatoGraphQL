@@ -21,13 +21,6 @@ class RootTypeDataLoader extends AbstractObjectTypeDataLoader
         return $this->root ??= $this->instanceManager->getInstance(Root::class);
     }
 
-    //#[Required]
-    final public function autowireRootTypeDataLoader(
-        Root $root,
-    ): void {
-        $this->root = $root;
-    }
-
     public function getObjects(array $ids): array
     {
         return [

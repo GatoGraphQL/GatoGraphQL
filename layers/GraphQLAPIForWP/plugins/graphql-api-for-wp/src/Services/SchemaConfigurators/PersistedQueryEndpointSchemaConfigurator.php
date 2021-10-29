@@ -22,13 +22,6 @@ class PersistedQueryEndpointSchemaConfigurator extends AbstractCustomPostEndpoin
         return $this->persistedQueryEndpointSchemaConfigurationExecuterRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface::class);
     }
 
-    //#[Required]
-    final public function autowirePersistedQueryEndpointSchemaConfigurator(
-        PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface $persistedQueryEndpointSchemaConfigurationExecuterRegistry
-    ): void {
-        $this->persistedQueryEndpointSchemaConfigurationExecuterRegistry = $persistedQueryEndpointSchemaConfigurationExecuterRegistry;
-    }
-
     /**
      * Only enable the service, if the corresponding module is also enabled
      */

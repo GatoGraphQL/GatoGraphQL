@@ -34,15 +34,6 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireQueryableInterfaceTypeFieldResolver(
-        URLScalarTypeResolver $urlScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [

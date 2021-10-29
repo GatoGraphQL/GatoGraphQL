@@ -30,12 +30,6 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         return $this->errorHelper ??= $this->instanceManager->getInstance(ErrorHelperInterface::class);
     }
 
-    //#[Required]
-    final public function autowireCustomPostTypeMutationAPI(ErrorHelperInterface $errorHelper): void
-    {
-        $this->errorHelper = $errorHelper;
-    }
-
     protected function convertQueryArgsFromPoPToCMSForInsertUpdatePost(array &$query): void
     {
         // Convert the parameters

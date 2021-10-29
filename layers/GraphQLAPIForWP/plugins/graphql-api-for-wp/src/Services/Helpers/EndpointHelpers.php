@@ -36,15 +36,6 @@ class EndpointHelpers
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
 
-    //#[Required]
-    final public function autowireEndpointHelpers(
-        PluginMenu $pluginMenu,
-        ModuleRegistryInterface $moduleRegistry,
-    ): void {
-        $this->pluginMenu = $pluginMenu;
-        $this->moduleRegistry = $moduleRegistry;
-    }
-
     /**
      * Indicate if we are requesting
      * /wp-admin/edit.php?page=graphql_api&action=execute_query

@@ -33,13 +33,6 @@ abstract class AbstractPageObjectTypeResolverPicker extends AbstractObjectTypeRe
         return $this->pageTypeAPI ??= $this->instanceManager->getInstance(PageTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractPageObjectTypeResolverPicker(PageObjectTypeResolver $pageObjectTypeResolver, PageTypeAPIInterface $pageTypeAPI): void
-    {
-        $this->pageObjectTypeResolver = $pageObjectTypeResolver;
-        $this->pageTypeAPI = $pageTypeAPI;
-    }
-
     public function getObjectTypeResolver(): ObjectTypeResolverInterface
     {
         return $this->getPageObjectTypeResolver();

@@ -134,19 +134,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractDirectiveResolver(
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        SemverHelperServiceInterface $semverHelperService,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-        $this->feedbackMessageStore = $feedbackMessageStore;
-        $this->semverHelperService = $semverHelperService;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-
     final public function getClassesToAttachTo(): array
     {
         return $this->getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo();

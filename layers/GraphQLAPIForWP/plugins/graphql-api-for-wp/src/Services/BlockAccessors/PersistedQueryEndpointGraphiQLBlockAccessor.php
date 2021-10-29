@@ -35,15 +35,6 @@ class PersistedQueryEndpointGraphiQLBlockAccessor
         return $this->persistedQueryEndpointGraphiQLBlock ??= $this->instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
     }
 
-    //#[Required]
-    final public function autowirePersistedQueryEndpointGraphiQLBlockAccessor(
-        BlockHelpers $blockHelpers,
-        PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock,
-    ): void {
-        $this->blockHelpers = $blockHelpers;
-        $this->persistedQueryEndpointGraphiQLBlock = $persistedQueryEndpointGraphiQLBlock;
-    }
-
     /**
      * Extract the Persisted Query Options block attributes from the post
      */

@@ -44,17 +44,6 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
         return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireSupportingFeaturedImageInterfaceTypeFieldResolver(
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
-        MediaObjectTypeResolver $mediaObjectTypeResolver,
-    ): void {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
-    }
-
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [

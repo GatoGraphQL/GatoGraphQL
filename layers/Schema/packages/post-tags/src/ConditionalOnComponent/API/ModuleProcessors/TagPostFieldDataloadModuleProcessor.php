@@ -40,15 +40,6 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
         return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
-    //#[Required]
-    final public function autowireTagPostFieldDataloadModuleProcessor(
-        PostObjectTypeResolver $postObjectTypeResolver,
-        ListQueryInputOutputHandler $listQueryInputOutputHandler,
-    ): void {
-        $this->postObjectTypeResolver = $postObjectTypeResolver;
-        $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
-    }
-
     public function getModulesToProcess(): array
     {
         return array(

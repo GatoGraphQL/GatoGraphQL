@@ -36,15 +36,6 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireOperatorGlobalObjectTypeFieldResolver(
-        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
-        URLScalarTypeResolver $urlScalarTypeResolver,
-    ): void {
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-    }
-
     public function getFieldNamesToResolve(): array
     {
         return [

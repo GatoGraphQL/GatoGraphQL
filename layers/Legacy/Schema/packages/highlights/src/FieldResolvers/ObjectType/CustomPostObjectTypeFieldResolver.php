@@ -50,17 +50,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->highlightObjectTypeResolver ??= $this->instanceManager->getInstance(HighlightObjectTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireCustomPostObjectTypeFieldResolver(
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        IntScalarTypeResolver $intScalarTypeResolver,
-        HighlightObjectTypeResolver $highlightObjectTypeResolver,
-    ): void {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-        $this->highlightObjectTypeResolver = $highlightObjectTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

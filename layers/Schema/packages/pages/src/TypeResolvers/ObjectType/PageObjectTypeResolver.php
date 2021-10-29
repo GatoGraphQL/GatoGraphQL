@@ -32,15 +32,6 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
         return $this->pageTypeAPI ??= $this->instanceManager->getInstance(PageTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowirePageObjectTypeResolver(
-        PageTypeDataLoader $pageTypeDataLoader,
-        PageTypeAPIInterface $pageTypeAPI,
-    ): void {
-        $this->pageTypeDataLoader = $pageTypeDataLoader;
-        $this->pageTypeAPI = $pageTypeAPI;
-    }
-
     public function getTypeName(): string
     {
         return 'Page';

@@ -81,13 +81,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return $this->queryParser ??= $this->instanceManager->getInstance(QueryParserInterface::class);
     }
 
-    //#[Required]
-    final public function autowireFieldQueryInterpreter(FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser): void
-    {
-        $this->feedbackMessageStore = $feedbackMessageStore;
-        $this->queryParser = $queryParser;
-    }
-
     public function getFieldName(string $field): string
     {
         if (!isset($this->fieldNamesCache[$field])) {

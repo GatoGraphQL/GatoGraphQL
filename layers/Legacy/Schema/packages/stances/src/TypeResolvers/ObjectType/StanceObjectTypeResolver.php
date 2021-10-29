@@ -22,13 +22,6 @@ class StanceObjectTypeResolver extends AbstractObjectTypeResolver
     {
         return $this->stanceTypeDataLoader ??= $this->instanceManager->getInstance(StanceTypeDataLoader::class);
     }
-
-    //#[Required]
-    final public function autowireStanceObjectTypeResolver(
-        StanceTypeDataLoader $stanceTypeDataLoader,
-    ): void {
-        $this->stanceTypeDataLoader = $stanceTypeDataLoader;
-    }
     
     public function getTypeName(): string
     {

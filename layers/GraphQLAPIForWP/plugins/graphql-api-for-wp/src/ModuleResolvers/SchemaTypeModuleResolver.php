@@ -64,6 +64,18 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public const HOOK_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':generic-custompost-types';
     public const HOOK_REJECTED_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':rejected-generic-custompost-types';
 
+    /**
+     * This comment used to be valid when using `autowire` functions
+     * to automatically inject all services. Since migrating to lazy getters,
+     * this same behavior is implicitly covered.
+     *
+     * Make all properties nullable, becase the ModuleRegistry is registered
+     * in the SystemContainer, where there are no typeResolvers so it will be null,
+     * and in the ApplicationContainer, from where the "Modules" page is resolved
+     * and which does have all the typeResolvers.
+     * Function `getDescription` will only be accessed from the Application Container,
+     * so the properties will not be null in that situation.
+     */
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
     private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
@@ -181,45 +193,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     protected function getCustomPostTypeRegistry(): CustomPostTypeRegistryInterface
     {
         return $this->customPostTypeRegistry ??= $this->instanceManager->getInstance(CustomPostTypeRegistryInterface::class);
-    }
-
-    /**
-     * Make all properties nullable, becase the ModuleRegistry is registered
-     * in the SystemContainer, where there are no typeResolvers so it will be null,
-     * and in the ApplicationContainer, from where the "Modules" page is resolved
-     * and which does have all the typeResolvers.
-     * Function `getDescription` will only be accessed from the Application Container,
-     * so the properties will not be null in that situation.
-     */
-    //#[Required]
-    final public function autowireSchemaTypeModuleResolver(
-        ?CommentObjectTypeResolver $commentObjectTypeResolver,
-        ?CustomPostUnionTypeResolver $customPostUnionTypeResolver,
-        ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver,
-        ?MediaObjectTypeResolver $mediaObjectTypeResolver,
-        ?PageObjectTypeResolver $pageObjectTypeResolver,
-        ?PostTagObjectTypeResolver $postTagObjectTypeResolver,
-        ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
-        ?MenuObjectTypeResolver $menuObjectTypeResolver,
-        ?PostObjectTypeResolver $postObjectTypeResolver,
-        ?UserRoleObjectTypeResolver $userRoleObjectTypeResolver,
-        ?UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver,
-        ?UserObjectTypeResolver $userObjectTypeResolver,
-        ?CustomPostTypeRegistryInterface $customPostTypeRegistry
-    ): void {
-        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
-        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
-        $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
-        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
-        $this->pageObjectTypeResolver = $pageObjectTypeResolver;
-        $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
-        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
-        $this->menuObjectTypeResolver = $menuObjectTypeResolver;
-        $this->postObjectTypeResolver = $postObjectTypeResolver;
-        $this->userRoleObjectTypeResolver = $userRoleObjectTypeResolver;
-        $this->userAvatarObjectTypeResolver = $userAvatarObjectTypeResolver;
-        $this->userObjectTypeResolver = $userObjectTypeResolver;
-        $this->customPostTypeRegistry = $customPostTypeRegistry;
     }
 
     /**

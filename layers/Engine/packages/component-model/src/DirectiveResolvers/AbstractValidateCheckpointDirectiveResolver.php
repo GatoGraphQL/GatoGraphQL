@@ -22,13 +22,6 @@ abstract class AbstractValidateCheckpointDirectiveResolver extends AbstractValid
         return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractValidateCheckpointDirectiveResolver(
-        EngineInterface $engine,
-    ): void {
-        $this->engine = $engine;
-    }
-
     /**
      * Validate checkpoints
      */

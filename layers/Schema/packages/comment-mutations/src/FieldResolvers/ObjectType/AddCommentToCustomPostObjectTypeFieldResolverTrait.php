@@ -53,19 +53,6 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
 
-    //#[Required]
-    public function autowireObjectTypeFieldResolverTrait(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
-        EmailScalarTypeResolver $emailScalarTypeResolver,
-        URLScalarTypeResolver $urlScalarTypeResolver,
-    ): void {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-    }
-
     private function getAddCommentToCustomPostSchemaFieldArgNameTypeResolvers(
         bool $addCustomPostID,
         bool $addParentCommentID,

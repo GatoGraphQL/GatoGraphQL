@@ -22,13 +22,6 @@ class SchemaConfigurationBlockCategory extends AbstractBlockCategory
         return $this->graphQLSchemaConfigurationCustomPostType ??= $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
     }
 
-    //#[Required]
-    final public function autowireSchemaConfigurationBlockCategory(
-        GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
-    ): void {
-        $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
-    }
-
     /**
      * Custom Post Type for which to enable the block category
      *

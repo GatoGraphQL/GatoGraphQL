@@ -32,12 +32,6 @@ class Cache implements PersistentCacheInterface, TransientCacheInterface
         return $this->modelInstance ??= $this->instanceManager->getInstance(ModelInstanceInterface::class);
     }
 
-    //#[Required]
-    final public function autowireCache(ModelInstanceInterface $modelInstance): void
-    {
-        $this->modelInstance = $modelInstance;
-    }
-
     protected function getKey(string $id, string $type)
     {
         return $type . '.' . $id;

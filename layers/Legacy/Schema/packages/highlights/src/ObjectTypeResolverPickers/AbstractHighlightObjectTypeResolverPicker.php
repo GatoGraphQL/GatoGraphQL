@@ -22,12 +22,6 @@ abstract class AbstractHighlightObjectTypeResolverPicker extends AbstractObjectT
     {
         return $this->highlightObjectTypeResolver ??= $this->instanceManager->getInstance(HighlightObjectTypeResolver::class);
     }
-
-    //#[Required]
-    final public function autowireAbstractHighlightObjectTypeResolverPicker(HighlightObjectTypeResolver $highlightObjectTypeResolver): void
-    {
-        $this->highlightObjectTypeResolver = $highlightObjectTypeResolver;
-    }
     
     public function getObjectTypeResolver(): ObjectTypeResolverInterface
     {

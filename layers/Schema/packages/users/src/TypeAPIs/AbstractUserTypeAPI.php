@@ -25,12 +25,6 @@ abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
         return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractUserTypeAPI(CMSHelperServiceInterface $cmsHelperService): void
-    {
-        $this->cmsHelperService = $cmsHelperService;
-    }
-
     public function getUserURLPath(string | int | object $userObjectOrID): ?string
     {
         $userURL = $this->getUserURL($userObjectOrID);

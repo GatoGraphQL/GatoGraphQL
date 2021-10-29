@@ -47,13 +47,6 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractCategoryTypeAPI(CMSHelperServiceInterface $cmsHelperService, CMSServiceInterface $cmsService): void
-    {
-        $this->cmsHelperService = $cmsHelperService;
-        $this->cmsService = $cmsService;
-    }
-
     /**
      * Indicates if the passed object is of type Category
      */

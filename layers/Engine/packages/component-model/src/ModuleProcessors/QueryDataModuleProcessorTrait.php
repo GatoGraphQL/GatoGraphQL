@@ -29,13 +29,6 @@ trait QueryDataModuleProcessorTrait
         return $this->actionExecutionQueryInputOutputHandler ??= $this->instanceManager->getInstance(ActionExecutionQueryInputOutputHandler::class);
     }
 
-    //#[Required]
-    public function autowireQueryDataModuleProcessorTrait(
-        ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler,
-    ): void {
-        $this->actionExecutionQueryInputOutputHandler = $actionExecutionQueryInputOutputHandler;
-    }
-
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
         return array();

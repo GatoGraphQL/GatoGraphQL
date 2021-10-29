@@ -29,13 +29,6 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractGraphQLEndpointCustomPostType(
-        BlockHelpers $blockHelpers,
-    ): void {
-        $this->blockHelpers = $blockHelpers;
-    }
-
     /**
      * Whenever this CPT is saved/updated, the timestamp must be regenerated,
      * because it contains the SchemaConfiguration block, which contains

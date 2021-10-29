@@ -49,7 +49,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldOrDirectiveArgTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::getTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::processSchemaDefinitionTypeModifiers insteadof FieldOrDirectiveResolverTrait;
-        FieldOrDirectiveSchemaDefinitionResolverTrait::autowireFieldOrDirectiveSchemaDefinitionResolverTrait insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::isDangerouslyDynamicScalarFieldType insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::hasMandatoryDangerouslyDynamicScalarInputType insteadof FieldOrDirectiveResolverTrait;
@@ -143,25 +142,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-    }
-
-    //#[Required]
-    final public function autowireAbstractObjectTypeFieldResolver(
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-        $this->nameResolver = $nameResolver;
-        $this->cmsService = $cmsService;
-        $this->semverHelperService = $semverHelperService;
-        $this->schemaDefinitionService = $schemaDefinitionService;
-        $this->engine = $engine;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
 
     final public function getClassesToAttachTo(): array

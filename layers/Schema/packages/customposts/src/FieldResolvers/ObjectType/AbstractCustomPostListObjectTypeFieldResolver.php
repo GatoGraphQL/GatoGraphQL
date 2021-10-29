@@ -44,15 +44,6 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractCustomPostListObjectTypeFieldResolver(
-        IntScalarTypeResolver $intScalarTypeResolver,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-    ): void {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-        $this->customPostTypeAPI = $customPostTypeAPI;
-    }
-
     public function getFieldNamesToResolve(): array
     {
         return [

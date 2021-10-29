@@ -22,12 +22,6 @@ abstract class AbstractNameResolver implements NameResolverInterface
         return $this->looseContractManager ??= $this->instanceManager->getInstance(LooseContractManagerInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractNameResolver(LooseContractManagerInterface $looseContractManager): void
-    {
-        $this->looseContractManager = $looseContractManager;
-    }
-
     public function implementName(string $abstractName, string $implementationName): void
     {
         $this->getLooseContractManager()->implementNames([$abstractName]);

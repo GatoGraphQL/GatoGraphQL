@@ -29,13 +29,6 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireEntryRouteModuleProcessor(
-        PostCategoryTypeAPIInterface $postCategoryTypeAPI,
-    ): void {
-        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
-    }
-
     protected function getInitialRESTFields(): string
     {
         return 'id|name|count|url';

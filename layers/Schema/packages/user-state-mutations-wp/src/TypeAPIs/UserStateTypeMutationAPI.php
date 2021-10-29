@@ -30,12 +30,6 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
         return $this->errorHelper ??= $this->instanceManager->getInstance(ErrorHelperInterface::class);
     }
 
-    //#[Required]
-    final public function autowireUserStateTypeMutationAPI(ErrorHelperInterface $errorHelper): void
-    {
-        $this->errorHelper = $errorHelper;
-    }
-
     /**
      * @return mixed Result or Error
      */

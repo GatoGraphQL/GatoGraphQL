@@ -66,21 +66,6 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireFieldObjectTypeFieldResolver(
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
-        InputValueObjectTypeResolver $inputValueObjectTypeResolver,
-        TypeObjectTypeResolver $typeObjectTypeResolver,
-    ): void {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
-        $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
-        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

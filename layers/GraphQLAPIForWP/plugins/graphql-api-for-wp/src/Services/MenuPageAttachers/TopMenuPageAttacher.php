@@ -60,21 +60,6 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
         return $this->graphQLVoyagerMenuPage ??= $this->instanceManager->getInstance(GraphQLVoyagerMenuPage::class);
     }
 
-    //#[Required]
-    final public function autowireTopMenuPageAttacher(
-        MenuPageHelper $menuPageHelper,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        GraphiQLMenuPage $graphiQLMenuPage,
-        GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage,
-    ): void {
-        $this->menuPageHelper = $menuPageHelper;
-        $this->moduleRegistry = $moduleRegistry;
-        $this->userAuthorization = $userAuthorization;
-        $this->graphiQLMenuPage = $graphiQLMenuPage;
-        $this->graphQLVoyagerMenuPage = $graphQLVoyagerMenuPage;
-    }
-
     /**
      * Before adding the menus for the CPTs
      */

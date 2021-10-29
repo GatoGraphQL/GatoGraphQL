@@ -25,13 +25,6 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
         return $this->createUpdateOrganizationProfileMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateOrganizationProfileMutationResolver::class);
     }
 
-    //#[Required]
-    final public function autowireCreateUpdateOrganizationProfileMutationResolverBridge(
-        CreateUpdateOrganizationProfileMutationResolver $createUpdateOrganizationProfileMutationResolver,
-    ): void {
-        $this->createUpdateOrganizationProfileMutationResolver = $createUpdateOrganizationProfileMutationResolver;
-    }
-
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->getCreateUpdateOrganizationProfileMutationResolver();

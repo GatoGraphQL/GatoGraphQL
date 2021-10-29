@@ -27,13 +27,6 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractQueryableObjectTypeFieldResolver(
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-    ): void {
-        $this->moduleProcessorManager = $moduleProcessorManager;
-    }
-
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         /** @var QueryableObjectTypeFieldSchemaDefinitionResolverInterface */

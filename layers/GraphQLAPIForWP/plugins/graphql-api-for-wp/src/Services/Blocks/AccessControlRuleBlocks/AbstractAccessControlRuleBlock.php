@@ -28,13 +28,6 @@ abstract class AbstractAccessControlRuleBlock extends AbstractBlock
         return $this->accessControlBlockCategory ??= $this->instanceManager->getInstance(AccessControlBlockCategory::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractAccessControlRuleBlock(
-        AccessControlBlockCategory $accessControlBlockCategory,
-    ): void {
-        $this->accessControlBlockCategory = $accessControlBlockCategory;
-    }
-
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
         return $this->getAccessControlBlockCategory();

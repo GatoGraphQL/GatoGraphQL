@@ -41,15 +41,6 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
         return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractFieldDataloadModuleProcessor(
-        PostTagObjectTypeResolver $postTagObjectTypeResolver,
-        ListQueryInputOutputHandler $listQueryInputOutputHandler,
-    ): void {
-        $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
-        $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
-    }
-
     public function getModulesToProcess(): array
     {
         return array(

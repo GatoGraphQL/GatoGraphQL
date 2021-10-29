@@ -22,13 +22,6 @@ class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationR
     {
         return $this->fileUploadPictureMutationResolver ??= $this->instanceManager->getInstance(FileUploadPictureMutationResolver::class);
     }
-
-    //#[Required]
-    final public function autowireFileUploadPictureMutationResolverBridge(
-        FileUploadPictureMutationResolver $fileUploadPictureMutationResolver,
-    ): void {
-        $this->fileUploadPictureMutationResolver = $fileUploadPictureMutationResolver;
-    }
     
     public function getMutationResolver(): MutationResolverInterface
     {

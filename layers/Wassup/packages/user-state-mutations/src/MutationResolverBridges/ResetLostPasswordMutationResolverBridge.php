@@ -23,13 +23,6 @@ class ResetLostPasswordMutationResolverBridge extends AbstractComponentMutationR
         return $this->resetLostPasswordMutationResolver ??= $this->instanceManager->getInstance(ResetLostPasswordMutationResolver::class);
     }
 
-    //#[Required]
-    final public function autowireResetLostPasswordMutationResolverBridge(
-        ResetLostPasswordMutationResolver $resetLostPasswordMutationResolver,
-    ): void {
-        $this->resetLostPasswordMutationResolver = $resetLostPasswordMutationResolver;
-    }
-
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->getResetLostPasswordMutationResolver();

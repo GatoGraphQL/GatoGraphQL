@@ -22,12 +22,6 @@ class ErrorHelper implements ErrorHelperInterface
         return $this->errorManager ??= $this->instanceManager->getInstance(ErrorManagerInterface::class);
     }
 
-    //#[Required]
-    final public function autowireErrorHelper(ErrorManagerInterface $errorManager): void
-    {
-        $this->errorManager = $errorManager;
-    }
-
     public function returnResultOrConvertError(mixed $result): mixed
     {
         if ($this->getErrorManager()->isCMSError($result)) {

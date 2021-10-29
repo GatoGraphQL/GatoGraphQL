@@ -24,13 +24,6 @@ class DateQueryInputObjectTypeResolver extends AbstractInputObjectTypeResolver
         return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireDateQueryInputObjectTypeResolver(
-        DateScalarTypeResolver $dateScalarTypeResolver,
-    ): void {
-        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
-    }
-
     public function getTypeName(): string
     {
         return 'DateQuery';

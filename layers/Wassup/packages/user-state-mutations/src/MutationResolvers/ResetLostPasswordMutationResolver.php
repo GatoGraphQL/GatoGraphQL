@@ -26,13 +26,6 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireResetLostPasswordMutationResolver(
-        UserTypeAPIInterface $userTypeAPI,
-    ): void {
-        $this->userTypeAPI = $userTypeAPI;
-    }
-
     public function getErrorType(): int
     {
         return ErrorTypes::CODES;

@@ -22,13 +22,6 @@ class SingleEndpointSchemaConfigurator extends AbstractSchemaConfigurationEndpoi
         return $this->endpointSchemaConfigurationExecuterRegistry ??= $this->instanceManager->getInstance(EndpointSchemaConfigurationExecuterRegistryInterface::class);
     }
 
-    //#[Required]
-    final public function autowireSingleEndpointSchemaConfigurator(
-        EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry
-    ): void {
-        $this->endpointSchemaConfigurationExecuterRegistry = $endpointSchemaConfigurationExecuterRegistry;
-    }
-
     /**
      * Only enable the service, if the corresponding module is also enabled
      */

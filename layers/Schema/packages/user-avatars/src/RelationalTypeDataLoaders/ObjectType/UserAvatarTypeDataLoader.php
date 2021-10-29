@@ -21,13 +21,6 @@ class UserAvatarTypeDataLoader extends AbstractObjectTypeDataLoader
         return $this->userAvatarRuntimeRegistry ??= $this->instanceManager->getInstance(UserAvatarRuntimeRegistryInterface::class);
     }
 
-    //#[Required]
-    final public function autowireUserAvatarTypeDataLoader(
-        UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
-    ): void {
-        $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;
-    }
-
     public function getObjects(array $ids): array
     {
         return array_map(

@@ -29,12 +29,6 @@ class AccessControlManager extends UpstreamAccessControlManager
         return $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator ??= $this->instanceManager->getInstance(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface::class);
     }
 
-    //#[Required]
-    final public function autowireGraphQLServerAccessControlManager(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator): void
-    {
-        $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator = $mandatoryDirectivesForFieldsRootTypeEntryDuplicator;
-    }
-
     public function addEntriesForFields(string $group, array $fieldEntries): void
     {
         parent::addEntriesForFields($group, $fieldEntries);

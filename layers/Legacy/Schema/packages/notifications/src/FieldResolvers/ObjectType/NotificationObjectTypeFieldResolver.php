@@ -100,27 +100,6 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireNotificationObjectTypeFieldResolver(
-        CommentTypeAPIInterface $commentTypeAPI,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        DateScalarTypeResolver $dateScalarTypeResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
-        IPScalarTypeResolver $ipScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        URLScalarTypeResolver $urlScalarTypeResolver,
-        UserObjectTypeResolver $userObjectTypeResolver,
-    ): void {
-        $this->commentTypeAPI = $commentTypeAPI;
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-        $this->ipScalarTypeResolver = $ipScalarTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-        $this->userObjectTypeResolver = $userObjectTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

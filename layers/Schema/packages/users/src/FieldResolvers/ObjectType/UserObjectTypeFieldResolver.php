@@ -65,21 +65,6 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }
 
-    //#[Required]
-    final public function autowireUserObjectTypeFieldResolver(
-        UserTypeAPIInterface $userTypeAPI,
-        EmailScalarTypeResolver $emailScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        URLScalarTypeResolver $urlScalarTypeResolver,
-        QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
-    ): void {
-        $this->userTypeAPI = $userTypeAPI;
-        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

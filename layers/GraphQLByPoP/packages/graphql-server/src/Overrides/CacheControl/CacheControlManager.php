@@ -26,12 +26,6 @@ class CacheControlManager extends UpstreamCacheControlManager
         return $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator ??= $this->instanceManager->getInstance(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface::class);
     }
 
-    //#[Required]
-    final public function autowireGraphQLServerCacheControlManager(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator): void
-    {
-        $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator = $mandatoryDirectivesForFieldsRootTypeEntryDuplicator;
-    }
-
     public function addEntriesForFields(array $fieldEntries): void
     {
         parent::addEntriesForFields($fieldEntries);

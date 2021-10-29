@@ -34,15 +34,6 @@ abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator
         return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractClientEndpointAnnotator(
-        BlockHelpers $blockHelpers,
-        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-    ): void {
-        $this->blockHelpers = $blockHelpers;
-        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
-    }
-
     protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface
     {
         return $this->getGraphQLCustomEndpointCustomPostType();

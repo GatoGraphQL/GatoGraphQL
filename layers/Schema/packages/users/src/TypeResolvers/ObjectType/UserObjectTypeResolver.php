@@ -32,15 +32,6 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->userTypeDataLoader ??= $this->instanceManager->getInstance(UserTypeDataLoader::class);
     }
 
-    //#[Required]
-    final public function autowireUserObjectTypeResolver(
-        UserTypeAPIInterface $userTypeAPI,
-        UserTypeDataLoader $userTypeDataLoader,
-    ): void {
-        $this->userTypeAPI = $userTypeAPI;
-        $this->userTypeDataLoader = $userTypeDataLoader;
-    }
-
     public function getTypeName(): string
     {
         return 'User';

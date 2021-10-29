@@ -25,13 +25,6 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
         return $this->aboutMenuPage ??= $this->instanceManager->getInstance(AboutMenuPage::class);
     }
 
-    //#[Required]
-    final public function autowireReleaseNotesAboutMenuPage(
-        AboutMenuPage $aboutMenuPage,
-    ): void {
-        $this->aboutMenuPage = $aboutMenuPage;
-    }
-
     public function getMenuPageSlug(): string
     {
         return $this->getAboutMenuPage()->getMenuPageSlug();

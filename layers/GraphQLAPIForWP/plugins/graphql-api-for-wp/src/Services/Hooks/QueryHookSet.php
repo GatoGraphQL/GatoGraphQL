@@ -28,13 +28,6 @@ class QueryHookSet extends AbstractHookSet
         return $this->customPostTypeRegistry ??= $this->instanceManager->getInstance(CustomPostTypeRegistryInterface::class);
     }
 
-    //#[Required]
-    final public function autowireQueryHookSet(
-        CustomPostTypeRegistryInterface $customPostTypeRegistry
-    ): void {
-        $this->customPostTypeRegistry = $customPostTypeRegistry;
-    }
-
     protected function init(): void
     {
         $this->hooksAPI->addFilter(

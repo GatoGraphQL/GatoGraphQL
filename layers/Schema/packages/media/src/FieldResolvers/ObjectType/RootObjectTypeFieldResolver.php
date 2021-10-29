@@ -56,17 +56,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireRootObjectTypeFieldResolver(
-        MediaTypeAPIInterface $mediaTypeAPI,
-        IntScalarTypeResolver $intScalarTypeResolver,
-        MediaObjectTypeResolver $mediaObjectTypeResolver,
-    ): void {
-        $this->mediaTypeAPI = $mediaTypeAPI;
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

@@ -23,13 +23,6 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelational
         return $this->validateIsUserLoggedInForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserLoggedInForDirectivesDirectiveResolver::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelationalTypeResolverDecorator(
-        ValidateIsUserLoggedInForDirectivesDirectiveResolver $validateIsUserLoggedInForDirectivesDirectiveResolver,
-    ): void {
-        $this->validateIsUserLoggedInForDirectivesDirectiveResolver = $validateIsUserLoggedInForDirectivesDirectiveResolver;
-    }
-
     /**
      * Verify that the user is logged in before checking the roles/capabilities
      */

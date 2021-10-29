@@ -21,13 +21,6 @@ class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
         return $this->cacheControlBlock ??= $this->instanceManager->getInstance(CacheControlBlock::class);
     }
 
-    //#[Required]
-    final public function autowireGraphQLCacheControlListCustomPostType(
-        CacheControlBlock $cacheControlBlock,
-    ): void {
-        $this->cacheControlBlock = $cacheControlBlock;
-    }
-
     /**
      * Custom Post Type name
      */

@@ -31,15 +31,6 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
         return $this->applicationInfo ??= $this->instanceManager->getInstance(ApplicationInfoInterface::class);
     }
 
-    //#[Required]
-    final public function autowireActivatePluginsMutationResolver(
-        CMSServiceInterface $cmsService,
-        ApplicationInfoInterface $applicationInfo,
-    ): void {
-        $this->cmsService = $cmsService;
-        $this->applicationInfo = $applicationInfo;
-    }
-
     // Taken from https://wordpress.stackexchange.com/questions/4041/how-to-activate-plugins-via-code
     private function runActivatePlugin($plugin)
     {

@@ -21,21 +21,6 @@ trait MarkdownContentRetrieverTrait
     }
 
     /**
-     * Make all properties nullable, becase the ModuleRegistry is registered
-     * in the SystemContainer, where there are no typeResolvers so it will be null,
-     * and in the ApplicationContainer, from where the "Modules" page is resolved
-     * and which does have all the typeResolvers.
-     * Function `getMarkdownContent` will only be accessed from the Application Container,
-     * so the properties will not be null in that situation.
-     */
-    //#[Required]
-    public function autowireMarkdownContentRetrieverTrait(
-        ?MarkdownContentParserInterface $markdownContentParser,
-    ): void {
-        $this->markdownContentParser = $markdownContentParser;
-    }
-
-    /**
      * @param array<string, mixed> $options
      */
     public function getMarkdownContent(

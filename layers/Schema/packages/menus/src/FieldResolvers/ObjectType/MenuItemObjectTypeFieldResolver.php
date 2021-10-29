@@ -75,23 +75,6 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->menuItemObjectTypeResolver ??= $this->instanceManager->getInstance(MenuItemObjectTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireMenuItemObjectTypeFieldResolver(
-        MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
-        CMSHelperServiceInterface $cmsHelperService,
-        URLScalarTypeResolver $urlScalarTypeResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        MenuItemObjectTypeResolver $menuItemObjectTypeResolver,
-    ): void {
-        $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
-        $this->cmsHelperService = $cmsHelperService;
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->menuItemObjectTypeResolver = $menuItemObjectTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

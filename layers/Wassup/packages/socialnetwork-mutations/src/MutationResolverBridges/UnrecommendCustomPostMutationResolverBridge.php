@@ -21,13 +21,6 @@ class UnrecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpda
         return $this->unrecommendCustomPostMutationResolver ??= $this->instanceManager->getInstance(UnrecommendCustomPostMutationResolver::class);
     }
 
-    //#[Required]
-    final public function autowireUnrecommendCustomPostMutationResolverBridge(
-        UnrecommendCustomPostMutationResolver $unrecommendCustomPostMutationResolver,
-    ): void {
-        $this->unrecommendCustomPostMutationResolver = $unrecommendCustomPostMutationResolver;
-    }
-
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->getUnrecommendCustomPostMutationResolver();

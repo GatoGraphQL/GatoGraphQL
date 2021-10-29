@@ -22,13 +22,6 @@ class MainContentModuleHookSet extends AbstractHookSet
         return $this->mainContentModule ??= $this->instanceManager->getInstance(MainContentModule::class);
     }
 
-    //#[Required]
-    final public function autowireMainContentModuleHookSet(
-        MainContentModule $mainContentModule
-    ): void {
-        $this->mainContentModule = $mainContentModule;
-    }
-
     protected function init(): void
     {
         $this->hooksAPI->addAction(

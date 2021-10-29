@@ -22,13 +22,6 @@ trait SchemaFilterInputModuleProcessorTrait
         return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
 
-    //#[Required]
-    public function autowireSchemaFilterInputModuleProcessorTrait(
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-    ): void {
-        $this->schemaDefinitionService = $schemaDefinitionService;
-    }
-
     protected function getFilterInputSchemaDefinitionResolver(array $module): DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
     {
         return $this;

@@ -35,15 +35,6 @@ class PersistedQueryEndpointAPIHierarchyBlockAccessor
         return $this->persistedQueryEndpointAPIHierarchyBlock ??= $this->instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
     }
 
-    //#[Required]
-    final public function autowirePersistedQueryEndpointAPIHierarchyBlockAccessor(
-        BlockHelpers $blockHelpers,
-        PersistedQueryEndpointAPIHierarchyBlock $persistedQueryEndpointAPIHierarchyBlock,
-    ): void {
-        $this->blockHelpers = $blockHelpers;
-        $this->persistedQueryEndpointAPIHierarchyBlock = $persistedQueryEndpointAPIHierarchyBlock;
-    }
-
     /**
      * Extract the Persisted Query Options block attributes from the post
      */

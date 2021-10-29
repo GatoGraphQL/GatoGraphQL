@@ -35,15 +35,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->site ??= $this->instanceManager->getInstance(Site::class);
     }
 
-    //#[Required]
-    final public function autowireRootObjectTypeFieldResolver(
-        SiteObjectTypeResolver $siteObjectTypeResolver,
-        Site $site,
-    ): void {
-        $this->siteObjectTypeResolver = $siteObjectTypeResolver;
-        $this->site = $site;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

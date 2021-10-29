@@ -21,13 +21,6 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractUserUpdateUserMetaValueMutationResolver(
-        UserTypeAPIInterface $userTypeAPI,
-    ): void {
-        $this->userTypeAPI = $userTypeAPI;
-    }
-
     public function validateErrors(array $form_data): array
     {
         $errors = parent::validateErrors($form_data);

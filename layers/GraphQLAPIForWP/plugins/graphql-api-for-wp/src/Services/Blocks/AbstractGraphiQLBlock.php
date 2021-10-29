@@ -39,15 +39,6 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
         return $this->persistedQueryEndpointBlockCategory ??= $this->instanceManager->getInstance(PersistedQueryEndpointBlockCategory::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractGraphiQLBlock(
-        EndpointHelpers $endpointHelpers,
-        PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
-    ): void {
-        $this->endpointHelpers = $endpointHelpers;
-        $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
-    }
-
     protected function getBlockName(): string
     {
         return 'graphiql';

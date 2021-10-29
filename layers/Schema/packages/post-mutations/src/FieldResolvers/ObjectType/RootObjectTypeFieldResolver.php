@@ -49,17 +49,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->updatePostMutationResolver ??= $this->instanceManager->getInstance(UpdatePostMutationResolver::class);
     }
 
-    //#[Required]
-    final public function autowireRootObjectTypeFieldResolver(
-        PostObjectTypeResolver $postObjectTypeResolver,
-        CreatePostMutationResolver $createPostMutationResolver,
-        UpdatePostMutationResolver $updatePostMutationResolver,
-    ): void {
-        $this->postObjectTypeResolver = $postObjectTypeResolver;
-        $this->createPostMutationResolver = $createPostMutationResolver;
-        $this->updatePostMutationResolver = $updatePostMutationResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

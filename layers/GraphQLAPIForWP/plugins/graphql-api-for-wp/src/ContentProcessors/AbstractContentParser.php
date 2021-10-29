@@ -55,15 +55,6 @@ abstract class AbstractContentParser implements ContentParserInterface
         return $this->localeHelper ??= $this->instanceManager->getInstance(LocaleHelper::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractContentParser(
-        RequestHelperServiceInterface $requestHelperService,
-        LocaleHelper $localeHelper,
-    ): void {
-        $this->requestHelperService = $requestHelperService;
-        $this->localeHelper = $localeHelper;
-    }
-
     /**
      * Inject the dir where to look for the documentation.
      * If null, it uses the default value from the main plugin.

@@ -22,13 +22,6 @@ trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDeco
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
 
-    //#[Required]
-    public function autowireUserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDecoratorTrait(
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-    ): void {
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-    }
-
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
         $validateUserStateDirectiveResolver = $this->getValidateUserStateDirectiveResolver();

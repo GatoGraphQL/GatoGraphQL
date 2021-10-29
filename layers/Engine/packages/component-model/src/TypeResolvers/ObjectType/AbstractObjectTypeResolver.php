@@ -74,13 +74,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractObjectTypeResolver(
-        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
-    ): void {
-        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
-    }
-
     /**
      * Watch out! This function will be overridden for the UnionTypeResolver
      *

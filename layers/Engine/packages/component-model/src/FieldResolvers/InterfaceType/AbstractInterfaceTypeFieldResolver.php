@@ -109,23 +109,6 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractInterfaceTypeFieldResolver(
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SchemaNamespacingServiceInterface $schemaNamespacingService,
-        TypeRegistryInterface $typeRegistry,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
-    ): void {
-        $this->nameResolver = $nameResolver;
-        $this->cmsService = $cmsService;
-        $this->schemaNamespacingService = $schemaNamespacingService;
-        $this->typeRegistry = $typeRegistry;
-        $this->schemaDefinitionService = $schemaDefinitionService;
-        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
-    }
-
     /**
      * The InterfaceTypes the InterfaceTypeFieldResolver adds fields to
      *

@@ -22,13 +22,6 @@ class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutatio
     {
         return $this->createUpdateProfileMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateProfileMutationResolver::class);
     }
-
-    //#[Required]
-    final public function autowireCreateUpdateProfileMutationResolverBridge(
-        CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver,
-    ): void {
-        $this->createUpdateProfileMutationResolver = $createUpdateProfileMutationResolver;
-    }
     
     public function getMutationResolver(): MutationResolverInterface
     {

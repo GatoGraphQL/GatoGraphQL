@@ -25,13 +25,6 @@ class ModulePathsHookSet extends AbstractHookSet
         return $this->modulePaths ??= $this->instanceManager->getInstance(ModulePaths::class);
     }
 
-    //#[Required]
-    final public function autowireModulePathsHookSet(
-        ModulePaths $modulePaths
-    ): void {
-        $this->modulePaths = $modulePaths;
-    }
-
     protected function init(): void
     {
         $this->hooksAPI->addFilter(

@@ -30,15 +30,6 @@ trait FilterDataModuleProcessorTrait
         return $this->filterInputProcessorManager ??= $this->instanceManager->getInstance(FilterInputProcessorManagerInterface::class);
     }
 
-    //#[Required]
-    public function autowireFilterDataModuleProcessorTrait(
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        FilterInputProcessorManagerInterface $filterInputProcessorManager,
-    ): void {
-        $this->moduleProcessorManager = $moduleProcessorManager;
-        $this->filterInputProcessorManager = $filterInputProcessorManager;
-    }
-
     /**
      * @var array<string, array<string[]>>
      */

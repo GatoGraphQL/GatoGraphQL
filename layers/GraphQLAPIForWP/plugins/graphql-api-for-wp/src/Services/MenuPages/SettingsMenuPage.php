@@ -43,13 +43,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
 
-    //#[Required]
-    final public function autowireSettingsMenuPage(
-        ModuleRegistryInterface $moduleRegistry,
-    ): void {
-        $this->moduleRegistry = $moduleRegistry;
-    }
-
     public function getMenuPageSlug(): string
     {
         return 'settings';

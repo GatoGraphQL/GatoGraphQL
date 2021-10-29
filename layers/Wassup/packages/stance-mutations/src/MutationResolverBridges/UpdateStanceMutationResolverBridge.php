@@ -21,13 +21,6 @@ class UpdateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutat
         return $this->updateStanceMutationResolver ??= $this->instanceManager->getInstance(UpdateStanceMutationResolver::class);
     }
 
-    //#[Required]
-    final public function autowireUpdateStanceMutationResolverBridge(
-        UpdateStanceMutationResolver $updateStanceMutationResolver,
-    ): void {
-        $this->updateStanceMutationResolver = $updateStanceMutationResolver;
-    }
-
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->getUpdateStanceMutationResolver();

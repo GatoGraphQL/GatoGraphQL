@@ -60,17 +60,6 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireRootGenericCustomPostObjectTypeFieldResolver(
-        IntScalarTypeResolver $intScalarTypeResolver,
-        GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-    ): void {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-        $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
-        $this->customPostTypeAPI = $customPostTypeAPI;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

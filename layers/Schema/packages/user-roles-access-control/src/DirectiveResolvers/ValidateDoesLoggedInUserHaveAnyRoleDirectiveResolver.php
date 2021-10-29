@@ -34,15 +34,6 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver(
-        UserRoleTypeAPIInterface $userRoleTypeAPI,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->userRoleTypeAPI = $userRoleTypeAPI;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-
     public function getDirectiveName(): string
     {
         return 'validateDoesLoggedInUserHaveAnyRole';

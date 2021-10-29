@@ -57,19 +57,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireRootObjectTypeFieldResolver(
-        SchemaObjectTypeResolver $schemaObjectTypeResolver,
-        TypeObjectTypeResolver $typeObjectTypeResolver,
-        SchemaTypeDataLoader $schemaTypeDataLoader,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
-        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
-        $this->schemaTypeDataLoader = $schemaTypeDataLoader;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

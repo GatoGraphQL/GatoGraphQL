@@ -37,15 +37,6 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireCustomPostsWPCustomPostUnionTypeDataLoader(
-        CustomPostTypeDataLoader $customPostTypeDataLoader,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-    ): void {
-        $this->customPostTypeDataLoader = $customPostTypeDataLoader;
-        $this->customPostTypeAPI = $customPostTypeAPI;
-    }
-
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         $query = $this->getCustomPostTypeDataLoader()->getQueryToRetrieveObjectsForIDs($ids);

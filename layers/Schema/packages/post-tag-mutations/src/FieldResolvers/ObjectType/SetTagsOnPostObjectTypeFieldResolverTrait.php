@@ -36,15 +36,6 @@ trait SetTagsOnPostObjectTypeFieldResolverTrait
         return $this->setTagsOnPostMutationResolver ??= $this->instanceManager->getInstance(SetTagsOnPostMutationResolver::class);
     }
 
-    //#[Required]
-    public function autowireSetTagsOnPostObjectTypeFieldResolverTrait(
-        PostObjectTypeResolver $postObjectTypeResolver,
-        SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver,
-    ): void {
-        $this->postObjectTypeResolver = $postObjectTypeResolver;
-        $this->setTagsOnPostMutationResolver = $setTagsOnPostMutationResolver;
-    }
-
     public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
     {
         return $this->getPostObjectTypeResolver();

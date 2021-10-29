@@ -22,13 +22,6 @@ class LoginMutationResolver extends UpstreamLoginMutationResolver
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireUserStateMutationsLoginMutationResolver(
-        UserTypeAPIInterface $userTypeAPI,
-    ): void {
-        $this->userTypeAPI = $userTypeAPI;
-    }
-
     protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): string
     {
         $cmsuseraccountapi = FunctionAPIFactory::getInstance();

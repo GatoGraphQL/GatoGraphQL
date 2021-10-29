@@ -24,13 +24,6 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
         return $this->schemaConfigBlockRegistry ??= $this->instanceManager->getInstance(SchemaConfigBlockRegistryInterface::class);
     }
 
-    //#[Required]
-    final public function autowireGraphQLSchemaConfigurationCustomPostType(
-        SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry
-    ): void {
-        $this->schemaConfigBlockRegistry = $schemaConfigBlockRegistry;
-    }
-
     /**
      * Custom Post Type name
      */

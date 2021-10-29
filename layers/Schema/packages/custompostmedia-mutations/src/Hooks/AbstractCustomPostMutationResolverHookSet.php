@@ -46,17 +46,6 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractCustomPostMutationResolverHookSet(
-        MediaObjectTypeResolver $mediaObjectTypeResolver,
-        CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
-        IDScalarTypeResolver $idScalarTypeResolver,
-    ): void {
-        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
-        $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
-
     protected function init(): void
     {
         $this->hooksAPI->addFilter(

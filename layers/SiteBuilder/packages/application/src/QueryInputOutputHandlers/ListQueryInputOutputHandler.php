@@ -27,12 +27,6 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
 
-    //#[Required]
-    final public function autowireApplicationListQueryInputOutputHandler(CMSServiceInterface $cmsService): void
-    {
-        $this->cmsService = $cmsService;
-    }
-
     protected function getLimit()
     {
         return $this->getCmsService()->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit'));

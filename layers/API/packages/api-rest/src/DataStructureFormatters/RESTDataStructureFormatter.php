@@ -21,13 +21,6 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
     }
 
-    //#[Required]
-    final public function autowireRESTDataStructureFormatter(
-        EngineInterface $engine,
-    ): void {
-        $this->engine = $engine;
-    }
-
     public function getName(): string
     {
         return 'rest';

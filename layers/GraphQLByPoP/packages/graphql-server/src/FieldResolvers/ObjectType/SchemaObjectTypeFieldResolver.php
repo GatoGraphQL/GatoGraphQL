@@ -46,17 +46,6 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireSchemaObjectTypeFieldResolver(
-        TypeObjectTypeResolver $typeObjectTypeResolver,
-        DirectiveObjectTypeResolver $directiveObjectTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
-        $this->directiveObjectTypeResolver = $directiveObjectTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

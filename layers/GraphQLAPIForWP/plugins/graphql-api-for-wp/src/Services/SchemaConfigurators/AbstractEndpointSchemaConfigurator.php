@@ -35,13 +35,6 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
         return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractEndpointSchemaConfigurator(ModuleRegistryInterface $moduleRegistry, BlockHelpers $blockHelpers): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-        $this->blockHelpers = $blockHelpers;
-    }
-
     /**
      * Only enable the service, if the corresponding module is also enabled
      */

@@ -22,13 +22,6 @@ class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoad
         return $this->schemaDefinitionReferenceRegistry ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
     }
 
-    //#[Required]
-    final public function autowireSchemaDefinitionReferenceTypeDataLoader(
-        SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
-    ): void {
-        $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
-    }
-
     public function getObjects(array $ids): array
     {
         return array_map(

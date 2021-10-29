@@ -41,17 +41,6 @@ trait PostMutationResolverHookSetTrait
         return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
 
-    //#[Required]
-    public function autowirePostMutationResolverHookSetTrait(
-        RootObjectTypeResolver $rootObjectTypeResolver,
-        MutationRootObjectTypeResolver $mutationRootObjectTypeResolver,
-        PostObjectTypeResolver $postObjectTypeResolver,
-    ): void {
-        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
-        $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
-        $this->postObjectTypeResolver = $postObjectTypeResolver;
-    }
-
     protected function mustAddFieldArgs(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,

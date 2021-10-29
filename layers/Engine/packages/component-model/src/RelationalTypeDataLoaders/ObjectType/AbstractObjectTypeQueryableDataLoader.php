@@ -23,13 +23,6 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
         return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractObjectTypeQueryableDataLoader(
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-    ): void {
-        $this->moduleProcessorManager = $moduleProcessorManager;
-    }
-
     /**
      * @return mixed[]
      */

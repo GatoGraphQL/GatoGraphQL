@@ -21,13 +21,6 @@ class InstallSystemMutationResolverBridge extends AbstractSystemComponentMutatio
         return $this->installSystemMutationResolver ??= $this->instanceManager->getInstance(InstallSystemMutationResolver::class);
     }
 
-    //#[Required]
-    final public function autowireInstallSystemMutationResolverBridge(
-        InstallSystemMutationResolver $installSystemMutationResolver,
-    ): void {
-        $this->installSystemMutationResolver = $installSystemMutationResolver;
-    }
-
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->getInstallSystemMutationResolver();

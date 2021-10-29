@@ -25,13 +25,6 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return $this->isCustomPostInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(IsCustomPostInterfaceTypeFieldResolver::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractCustomPostObjectTypeFieldResolver(
-        IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver,
-    ): void {
-        $this->isCustomPostInterfaceTypeFieldResolver = $isCustomPostInterfaceTypeFieldResolver;
-    }
-
     public function getFieldNamesToResolve(): array
     {
         return [];

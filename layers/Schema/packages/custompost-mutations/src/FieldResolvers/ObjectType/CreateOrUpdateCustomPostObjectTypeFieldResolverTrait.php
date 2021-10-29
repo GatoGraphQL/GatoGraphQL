@@ -48,17 +48,6 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    //#[Required]
-    public function autowireCreateOrUpdateCustomPostObjectTypeFieldResolverTrait(
-        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-
     private function getCreateOrUpdateCustomPostSchemaFieldArgNameTypeResolvers(
         bool $addCustomPostID,
     ): array {

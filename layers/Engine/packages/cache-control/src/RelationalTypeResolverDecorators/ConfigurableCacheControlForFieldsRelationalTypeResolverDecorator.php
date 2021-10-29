@@ -23,13 +23,6 @@ class ConfigurableCacheControlForFieldsRelationalTypeResolverDecorator extends A
         return $this->cacheControlManager ??= $this->instanceManager->getInstance(CacheControlManagerInterface::class);
     }
 
-    //#[Required]
-    final public function autowireConfigurableCacheControlForFieldsRelationalTypeResolverDecorator(
-        CacheControlManagerInterface $cacheControlManager,
-    ): void {
-        $this->cacheControlManager = $cacheControlManager;
-    }
-
     protected function getConfigurationEntries(): array
     {
         return $this->getCacheControlManager()->getEntriesForFields();

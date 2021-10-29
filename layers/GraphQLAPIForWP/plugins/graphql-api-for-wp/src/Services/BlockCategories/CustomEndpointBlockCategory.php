@@ -22,13 +22,6 @@ class CustomEndpointBlockCategory extends AbstractBlockCategory
         return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
     }
 
-    //#[Required]
-    final public function autowireCustomEndpointBlockCategory(
-        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-    ): void {
-        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
-    }
-
     /**
      * Custom Post Type for which to enable the block category
      *

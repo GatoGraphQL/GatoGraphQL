@@ -22,12 +22,6 @@ class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
         return $this->schemaTypeDataLoader ??= $this->instanceManager->getInstance(SchemaTypeDataLoader::class);
     }
 
-    //#[Required]
-    final public function autowireSchemaObjectTypeResolver(SchemaTypeDataLoader $schemaTypeDataLoader): void
-    {
-        $this->schemaTypeDataLoader = $schemaTypeDataLoader;
-    }
-
     public function getTypeName(): string
     {
         return '__Schema';

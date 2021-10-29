@@ -25,13 +25,6 @@ trait AttachableExtensionTrait
         return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
     }
 
-    //#[Required]
-    public function autowireAttachableExtensionTrait(
-        AttachableExtensionManagerInterface $attachableExtensionManager,
-    ): void {
-        $this->attachableExtensionManager = $attachableExtensionManager;
-    }
-
     /**
      * It is represented through a static class, because the extensions work at class level, not object level
      */

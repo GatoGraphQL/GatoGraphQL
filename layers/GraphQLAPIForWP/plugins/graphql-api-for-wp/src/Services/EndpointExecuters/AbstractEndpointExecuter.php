@@ -25,12 +25,6 @@ abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractEndpointExecuter(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-    }
-
     public function getEnablingModule(): ?string
     {
         return null;

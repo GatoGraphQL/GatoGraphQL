@@ -22,13 +22,6 @@ class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
         return $this->site ??= $this->instanceManager->getInstance(Site::class);
     }
 
-    //#[Required]
-    final public function autowireSiteTypeDataLoader(
-        Site $site,
-    ): void {
-        $this->site = $site;
-    }
-
     public function getObjects(array $ids): array
     {
         // Currently it deals only with the current site and nothing else

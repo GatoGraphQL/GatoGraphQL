@@ -33,15 +33,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->withAuthorInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(WithAuthorInterfaceTypeFieldResolver::class);
     }
 
-    //#[Required]
-    final public function autowireCustomPostObjectTypeFieldResolver(
-        CustomPostUserTypeAPIInterface $customPostUserTypeAPI,
-        WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver,
-    ): void {
-        $this->customPostUserTypeAPI = $customPostUserTypeAPI;
-        $this->withAuthorInterfaceTypeFieldResolver = $withAuthorInterfaceTypeFieldResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

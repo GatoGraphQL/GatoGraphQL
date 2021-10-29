@@ -32,15 +32,6 @@ trait PostCategoryAPISatisfiedContractTrait
         return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
     }
 
-    //#[Required]
-    public function autowirePostCategoryAPISatisfiedContractTrait(
-        PostCategoryTypeAPIInterface $postCategoryTypeAPI,
-        PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
-    ): void {
-        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
-        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
-    }
-
     public function getCategoryTypeAPI(): CategoryTypeAPIInterface
     {
         return $this->getPostCategoryTypeAPI();

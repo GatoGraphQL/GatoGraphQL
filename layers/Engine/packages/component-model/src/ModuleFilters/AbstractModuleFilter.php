@@ -23,12 +23,6 @@ abstract class AbstractModuleFilter implements ModuleFilterInterface
         return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractModuleFilter(ModuleProcessorManagerInterface $moduleProcessorManager): void
-    {
-        $this->moduleProcessorManager = $moduleProcessorManager;
-    }
-
     public function excludeModule(array $module, array &$props): bool
     {
         return false;

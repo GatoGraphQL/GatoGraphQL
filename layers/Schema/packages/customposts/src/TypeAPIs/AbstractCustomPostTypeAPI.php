@@ -25,12 +25,6 @@ abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
         return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractCustomPostTypeAPI(CMSHelperServiceInterface $cmsHelperService): void
-    {
-        $this->cmsHelperService = $cmsHelperService;
-    }
-
     public function getPermalinkPath(string | int | object $customPostObjectOrID): ?string
     {
         $permalink = $this->getPermalink($customPostObjectOrID);

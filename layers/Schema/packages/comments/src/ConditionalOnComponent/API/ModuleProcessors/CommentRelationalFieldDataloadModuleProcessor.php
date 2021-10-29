@@ -36,15 +36,6 @@ class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFi
         return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
-    //#[Required]
-    final public function autowireCommentRelationalFieldDataloadModuleProcessor(
-        CommentObjectTypeResolver $commentObjectTypeResolver,
-        ListQueryInputOutputHandler $listQueryInputOutputHandler,
-    ): void {
-        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
-        $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
-    }
-
     public function getModulesToProcess(): array
     {
         return array(

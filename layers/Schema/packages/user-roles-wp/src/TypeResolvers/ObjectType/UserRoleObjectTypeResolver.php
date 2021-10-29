@@ -22,13 +22,6 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->userRoleTypeDataLoader ??= $this->instanceManager->getInstance(UserRoleTypeDataLoader::class);
     }
 
-    //#[Required]
-    final public function autowireUserRoleObjectTypeResolver(
-        UserRoleTypeDataLoader $userRoleTypeDataLoader,
-    ): void {
-        $this->userRoleTypeDataLoader = $userRoleTypeDataLoader;
-    }
-
     public function getTypeName(): string
     {
         return 'UserRole';

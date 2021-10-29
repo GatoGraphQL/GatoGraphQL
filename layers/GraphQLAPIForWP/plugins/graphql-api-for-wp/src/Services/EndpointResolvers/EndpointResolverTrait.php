@@ -45,17 +45,6 @@ trait EndpointResolverTrait
         return $this->graphQLRequestVarsHookSet ??= $this->instanceManager->getInstance(GraphQLRequestVarsHookSet::class);
     }
 
-    //#[Required]
-    public function autowireEndpointResolverTrait(
-        GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
-        QueryRetrieverInterface $queryRetriever,
-        GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet,
-    ): void {
-        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
-        $this->queryRetriever = $queryRetriever;
-        $this->graphQLRequestVarsHookSet = $graphQLRequestVarsHookSet;
-    }
-
     /**
      * Execute the GraphQL query
      */

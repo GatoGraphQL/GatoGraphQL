@@ -56,19 +56,6 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireUserObjectTypeFieldResolver(
-        UserAvatarTypeAPIInterface $userAvatarTypeAPI,
-        UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
-        UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver,
-        IntScalarTypeResolver $intScalarTypeResolver,
-    ): void {
-        $this->userAvatarTypeAPI = $userAvatarTypeAPI;
-        $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;
-        $this->userAvatarObjectTypeResolver = $userAvatarObjectTypeResolver;
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

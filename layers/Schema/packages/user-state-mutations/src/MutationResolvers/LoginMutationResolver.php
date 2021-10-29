@@ -35,15 +35,6 @@ class LoginMutationResolver extends AbstractMutationResolver
         return $this->userStateTypeMutationAPI ??= $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireLoginMutationResolver(
-        UserTypeAPIInterface $userTypeAPI,
-        UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
-    ): void {
-        $this->userTypeAPI = $userTypeAPI;
-        $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;
-    }
-
     public function validateErrors(array $form_data): array
     {
         $errors = [];

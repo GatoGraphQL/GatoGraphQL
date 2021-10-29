@@ -76,23 +76,6 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireMediaObjectTypeFieldResolver(
-        MediaTypeAPIInterface $mediaTypeAPI,
-        DateFormatterInterface $dateFormatter,
-        URLScalarTypeResolver $urlScalarTypeResolver,
-        IntScalarTypeResolver $intScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        DateScalarTypeResolver $dateScalarTypeResolver,
-    ): void {
-        $this->mediaTypeAPI = $mediaTypeAPI;
-        $this->dateFormatter = $dateFormatter;
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

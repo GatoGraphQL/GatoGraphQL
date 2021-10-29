@@ -21,13 +21,6 @@ class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
         return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowirePostTypeDataLoader(
-        PostTypeAPIInterface $postTypeAPI,
-    ): void {
-        $this->postTypeAPI = $postTypeAPI;
-    }
-
     public function executeQuery($query, array $options = []): array
     {
         return $this->getPostTypeAPI()->getPosts($query, $options);

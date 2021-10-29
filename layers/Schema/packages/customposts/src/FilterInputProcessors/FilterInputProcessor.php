@@ -28,13 +28,6 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
         return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireFilterInputProcessor(
-        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver
-    ): void {
-        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
-    }
-
 
     public function getFilterInputsToProcess(): array
     {

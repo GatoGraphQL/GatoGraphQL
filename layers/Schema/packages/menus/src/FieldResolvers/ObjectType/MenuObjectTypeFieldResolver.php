@@ -66,21 +66,6 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireMenuObjectTypeFieldResolver(
-        MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
-        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
-        MenuItemObjectTypeResolver $menuItemObjectTypeResolver,
-        MenuTypeAPIInterface $menuTypeAPI,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-    ): void {
-        $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
-        $this->menuItemObjectTypeResolver = $menuItemObjectTypeResolver;
-        $this->menuTypeAPI = $menuTypeAPI;
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
