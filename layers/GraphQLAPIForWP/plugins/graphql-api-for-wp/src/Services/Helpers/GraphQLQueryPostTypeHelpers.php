@@ -6,11 +6,14 @@ namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
 use GraphQLAPI\GraphQLAPI\Services\BlockAccessors\PersistedQueryEndpointAPIHierarchyBlockAccessor;
 use GraphQLAPI\GraphQLAPI\Services\BlockAccessors\PersistedQueryEndpointGraphiQLBlockAccessor;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 
 class GraphQLQueryPostTypeHelpers
 {
+    use BasicServiceTrait;
+
     private ?PersistedQueryEndpointGraphiQLBlockAccessor $persistedQueryEndpointGraphiQLBlockAccessor = null;
     private ?PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor = null;
 
@@ -34,8 +37,8 @@ class GraphQLQueryPostTypeHelpers
     //#[Required]
     final public function autowireGraphQLQueryPostTypeHelpers(PersistedQueryEndpointGraphiQLBlockAccessor $persistedQueryEndpointGraphiQLBlockAccessor, PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor): void
     {
-        $this->getPersistedQueryEndpointGraphiQLBlockAccessor = $persistedQueryEndpointGraphiQLBlockAccessor;
-        $this->getPersistedQueryEndpointAPIHierarchyBlockAccessor = $persistedQueryEndpointAPIHierarchyBlockAccessor;
+        $this->persistedQueryEndpointGraphiQLBlockAccessor = $persistedQueryEndpointGraphiQLBlockAccessor;
+        $this->persistedQueryEndpointAPIHierarchyBlockAccessor = $persistedQueryEndpointAPIHierarchyBlockAccessor;
     }
 
     /**
@@ -71,12 +74,12 @@ class GraphQLQueryPostTypeHelpers
              */
             $inheritQuery = false;
             if ($inheritAttributes && $graphQLQueryPost->post_parent) {
-                $persistedQueryEndpointAPIHierarchyBlockAttributes = $this->getPersistedQueryEndpointAPIHierarchyBlockAccessor->getAttributes($graphQLQueryPost);
+                $persistedQueryEndpointAPIHierarchyBlockAttributes = $this->persistedQueryEndpointAPIHierarchyBlockAccessor->getAttributes($graphQLQueryPost);
                 if ($persistedQueryEndpointAPIHierarchyBlockAttributes !== null) {
                     $inheritQuery = $persistedQueryEndpointAPIHierarchyBlockAttributes->isInheritQuery();
                 }
             }
-            $graphiQLBlockAttributes = $this->getPersistedQueryEndpointGraphiQLBlockAccessor->getAttributes($graphQLQueryPost);
+            $graphiQLBlockAttributes = $this->persistedQueryEndpointGraphiQLBlockAccessor->getAttributes($graphQLQueryPost);
             // Set the query unless it must be inherited from the parent
             if (empty($graphQLQuery) && !$inheritQuery) {
                 $graphQLQuery = $graphiQLBlockAttributes->getQuery();
