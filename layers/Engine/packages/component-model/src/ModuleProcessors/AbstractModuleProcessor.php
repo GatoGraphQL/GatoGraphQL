@@ -34,7 +34,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 {
     use ModulePathProcessorTrait;
     use BasicServiceTrait;
-    use WithHooksAPIServiceTrait;
 
     public const HOOK_INIT_MODEL_PROPS = __CLASS__ . ':initModelProps';
     public const HOOK_INIT_REQUEST_PROPS = __CLASS__ . ':initRequestProps';

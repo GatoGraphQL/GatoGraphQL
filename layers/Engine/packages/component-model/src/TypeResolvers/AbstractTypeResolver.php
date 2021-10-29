@@ -18,7 +18,6 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractTypeResolver implements TypeResolverInterface
 {
     use BasicServiceTrait;
-    use WithHooksAPIServiceTrait;
     
     /**
      * @var array<string, array>

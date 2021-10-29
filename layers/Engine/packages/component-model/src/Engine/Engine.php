@@ -53,7 +53,6 @@ use Symfony\Contracts\Service\Attribute\Required;
 class Engine implements EngineInterface
 {
     use BasicServiceTrait;
-    use WithHooksAPIServiceTrait;
     
     public const CACHETYPE_IMMUTABLEDATASETSETTINGS = 'static-datasetsettings';
     public const CACHETYPE_STATICDATAPROPERTIES = 'static-data-properties';

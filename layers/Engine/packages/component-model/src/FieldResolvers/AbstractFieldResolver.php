@@ -14,7 +14,6 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractFieldResolver implements FieldResolverInterface
 {
     use BasicServiceTrait;
-    use WithHooksAPIServiceTrait;
     
     public function getAdminFieldNames(): array
     {

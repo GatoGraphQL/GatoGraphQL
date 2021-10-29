@@ -14,7 +14,6 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractHookSet extends AbstractAutomaticallyInstantiatedService
 {
     use BasicServiceTrait;
-    use WithHooksAPIServiceTrait;
     
     final public function initialize(): void
     {

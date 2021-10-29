@@ -43,7 +43,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     use FieldOrDirectiveResolverTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
     use BasicServiceTrait;
-    use WithHooksAPIServiceTrait;
 
     const MESSAGE_EXPRESSIONS = 'expressions';
 

@@ -20,7 +20,6 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
     use BasicServiceTrait;
-    use WithHooksAPIServiceTrait;
     
     private ?MutationResolutionManagerInterface $mutationResolutionManager = null;
 
