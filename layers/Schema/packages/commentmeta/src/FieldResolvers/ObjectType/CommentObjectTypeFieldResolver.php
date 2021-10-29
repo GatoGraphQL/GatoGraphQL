@@ -13,16 +13,16 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?CommentMetaTypeAPIInterface $commentMetaAPI = null;
+    private ?CommentMetaTypeAPIInterface $commentMetaTypeAPI = null;
     private ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
 
-    public function setCommentMetaTypeAPI(CommentMetaTypeAPIInterface $commentMetaAPI): void
+    public function setCommentMetaTypeAPI(CommentMetaTypeAPIInterface $commentMetaTypeAPI): void
     {
-        $this->commentMetaAPI = $commentMetaAPI;
+        $this->commentMetaTypeAPI = $commentMetaTypeAPI;
     }
     protected function getCommentMetaTypeAPI(): CommentMetaTypeAPIInterface
     {
-        return $this->commentMetaAPI ??= $this->instanceManager->getInstance(CommentMetaTypeAPIInterface::class);
+        return $this->commentMetaTypeAPI ??= $this->instanceManager->getInstance(CommentMetaTypeAPIInterface::class);
     }
     public function setWithMetaInterfaceTypeFieldResolver(WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver): void
     {
@@ -35,10 +35,10 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     //#[Required]
     final public function autowireCommentObjectTypeFieldResolver(
-        CommentMetaTypeAPIInterface $commentMetaAPI,
+        CommentMetaTypeAPIInterface $commentMetaTypeAPI,
         WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
     ): void {
-        $this->commentMetaAPI = $commentMetaAPI;
+        $this->commentMetaTypeAPI = $commentMetaTypeAPI;
         $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
     }
 
@@ -83,7 +83,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'metaValue':
             case 'metaValues':
-                return $this->getCommentMetaAPI()->getCommentMeta(
+                return $this->getCommentMetaTypeAPI()->getCommentMeta(
                     $objectTypeResolver->getID($comment),
                     $fieldArgs['key'],
                     $fieldName === 'metaValue'
