@@ -6,10 +6,13 @@ namespace GraphQLByPoP\GraphQLServer\Overrides\AccessControl;
 
 use GraphQLByPoP\GraphQLServer\IFTTT\MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface;
 use PoP\AccessControl\Services\AccessControlManager as UpstreamAccessControlManager;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class AccessControlManager extends UpstreamAccessControlManager
 {
+    use BasicServiceTrait;
+
     /**
      * @var array<string, array>
      */

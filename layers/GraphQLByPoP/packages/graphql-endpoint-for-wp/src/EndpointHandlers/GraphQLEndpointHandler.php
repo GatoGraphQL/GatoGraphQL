@@ -8,12 +8,15 @@ use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
 use PoP\ComponentModel\Constants\Params;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\GraphQLAPI\Component;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLEndpointHandler extends AbstractEndpointHandler
 {
+    use BasicServiceTrait;
+    
     private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
 
     public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void

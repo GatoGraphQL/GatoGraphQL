@@ -6,10 +6,13 @@ namespace GraphQLByPoP\GraphQLServer\Overrides\CacheControl;
 
 use GraphQLByPoP\GraphQLServer\IFTTT\MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface;
 use PoP\CacheControl\Managers\CacheControlManager as UpstreamCacheControlManager;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class CacheControlManager extends UpstreamCacheControlManager
 {
+    use BasicServiceTrait;
+
     protected ?array $overriddenFieldEntries = null;
 
     private ?MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator = null;

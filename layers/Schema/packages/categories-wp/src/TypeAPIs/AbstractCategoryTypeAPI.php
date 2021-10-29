@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\CategoriesWP\TypeAPIs;
 
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -22,7 +23,7 @@ use WP_Term;
  */
 abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements CategoryTypeAPIInterface
 {
-    use WithHooksAPIServiceTrait;
+    use BasicServiceTrait;
 
     public const HOOK_QUERY = __CLASS__ . ':query';
 
