@@ -25,7 +25,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     }
     protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
-        return $this->jsonObjectScalarTypeResolver ??= $this->getInstanceManager()->getInstance(JSONObjectScalarTypeResolver::class);
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
     public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
     {
@@ -33,7 +33,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     }
     protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
-        return $this->urlScalarTypeResolver ??= $this->getInstanceManager()->getInstance(URLScalarTypeResolver::class);
+        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
 
     public function getFieldNamesToResolve(): array

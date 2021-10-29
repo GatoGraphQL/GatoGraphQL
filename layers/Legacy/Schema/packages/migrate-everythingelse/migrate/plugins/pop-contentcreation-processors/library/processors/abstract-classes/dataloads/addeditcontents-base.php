@@ -42,15 +42,15 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
 
     public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        return $this->getInstanceManager()->getInstance(CustomPostObjectTypeResolver::class);
+        return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
     }
 
     public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
     {
         if ($this->isUpdate($module)) {
-            return $this->getInstanceManager()->getInstance(GD_DataLoad_QueryInputOutputHandler_EditPost::class);
+            return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_EditPost::class);
         } elseif ($this->isCreate($module)) {
-            return $this->getInstanceManager()->getInstance(GD_DataLoad_QueryInputOutputHandler_AddPost::class);
+            return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_AddPost::class);
         }
 
         return parent::getQueryInputOutputHandler($module);

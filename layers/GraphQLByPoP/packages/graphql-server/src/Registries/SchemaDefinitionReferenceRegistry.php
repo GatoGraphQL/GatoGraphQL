@@ -56,7 +56,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     }
     protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
-        return $this->schemaDefinitionService ??= $this->getInstanceManager()->getInstance(SchemaDefinitionServiceInterface::class);
+        return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
     public function setGraphQLSchemaDefinitionService(GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService): void
     {
@@ -64,7 +64,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     }
     protected function getGraphQLSchemaDefinitionService(): GraphQLSchemaDefinitionServiceInterface
     {
-        return $this->graphQLSchemaDefinitionService ??= $this->getInstanceManager()->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
+        return $this->graphQLSchemaDefinitionService ??= $this->instanceManager->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
     }
     public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -72,7 +72,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     }
     protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
 
     final public function getPersistentCache(): PersistentCacheInterface

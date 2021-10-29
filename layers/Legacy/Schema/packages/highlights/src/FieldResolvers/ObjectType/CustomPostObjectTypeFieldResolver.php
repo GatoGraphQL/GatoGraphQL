@@ -31,7 +31,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
     public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -39,7 +39,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
     public function setHighlightObjectTypeResolver(HighlightObjectTypeResolver $highlightObjectTypeResolver): void
     {
@@ -47,7 +47,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getHighlightObjectTypeResolver(): HighlightObjectTypeResolver
     {
-        return $this->highlightObjectTypeResolver ??= $this->getInstanceManager()->getInstance(HighlightObjectTypeResolver::class);
+        return $this->highlightObjectTypeResolver ??= $this->instanceManager->getInstance(HighlightObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

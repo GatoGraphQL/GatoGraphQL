@@ -10,15 +10,11 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait WithInstanceManagerServiceTrait
 {
-    private ?InstanceManagerInterface $instanceManager = null;
+    protected InstanceManagerInterface $instanceManager;
 
-    // #[Required]
+    #[Required]
     public function setInstanceManager(InstanceManagerInterface $instanceManager): void
     {
         $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= InstanceManagerFacade::getInstance();
     }
 }

@@ -19,7 +19,7 @@ class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
     }
     protected function getNotificationTypeDataLoader(): NotificationTypeDataLoader
     {
-        return $this->notificationTypeDataLoader ??= $this->getInstanceManager()->getInstance(NotificationTypeDataLoader::class);
+        return $this->notificationTypeDataLoader ??= $this->instanceManager->getInstance(NotificationTypeDataLoader::class);
     }
     
     public function getTypeName(): string

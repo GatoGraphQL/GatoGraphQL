@@ -19,7 +19,7 @@ class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModu
     }
     protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
-        return $this->postCategoryObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostCategoryObjectTypeResolver::class);
+        return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
     }
 
     public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface

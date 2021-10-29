@@ -25,7 +25,7 @@ abstract class AbstractAccessControlRuleBlock extends AbstractBlock
     }
     protected function getAccessControlBlockCategory(): AccessControlBlockCategory
     {
-        return $this->accessControlBlockCategory ??= $this->getInstanceManager()->getInstance(AccessControlBlockCategory::class);
+        return $this->accessControlBlockCategory ??= $this->instanceManager->getInstance(AccessControlBlockCategory::class);
     }
 
     protected function getBlockCategory(): ?BlockCategoryInterface

@@ -36,7 +36,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     }
     protected function getCMSHelperService(): CMSHelperServiceInterface
     {
-        return $this->cmsHelperService ??= $this->getInstanceManager()->getInstance(CMSHelperServiceInterface::class);
+        return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
     }
     public function setCMSService(CMSServiceInterface $cmsService): void
     {
@@ -44,7 +44,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     }
     protected function getCMSService(): CMSServiceInterface
     {
-        return $this->cmsService ??= $this->getInstanceManager()->getInstance(CMSServiceInterface::class);
+        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
 
     /**

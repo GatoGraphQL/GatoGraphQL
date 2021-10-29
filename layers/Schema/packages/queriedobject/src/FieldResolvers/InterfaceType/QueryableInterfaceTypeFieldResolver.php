@@ -23,7 +23,7 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     }
     protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
-        return $this->urlScalarTypeResolver ??= $this->getInstanceManager()->getInstance(URLScalarTypeResolver::class);
+        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -31,7 +31,7 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getInterfaceTypeResolverClassesToAttachTo(): array

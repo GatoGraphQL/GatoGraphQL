@@ -20,7 +20,7 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
     }
     protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
     {
-        return $this->moduleProcessorManager ??= $this->getInstanceManager()->getInstance(ModuleProcessorManagerInterface::class);
+        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     }
 
     /**

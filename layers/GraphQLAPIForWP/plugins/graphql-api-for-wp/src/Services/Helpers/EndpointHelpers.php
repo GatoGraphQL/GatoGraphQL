@@ -25,7 +25,7 @@ class EndpointHelpers
     }
     protected function getPluginMenu(): PluginMenu
     {
-        return $this->pluginMenu ??= $this->getInstanceManager()->getInstance(PluginMenu::class);
+        return $this->pluginMenu ??= $this->instanceManager->getInstance(PluginMenu::class);
     }
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -33,7 +33,7 @@ class EndpointHelpers
     }
     protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
 
     /**

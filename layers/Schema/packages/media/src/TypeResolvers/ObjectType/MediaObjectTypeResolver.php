@@ -21,7 +21,7 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
     }
     protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
-        return $this->mediaTypeAPI ??= $this->getInstanceManager()->getInstance(MediaTypeAPIInterface::class);
+        return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
     }
     public function setMediaTypeDataLoader(MediaTypeDataLoader $mediaTypeDataLoader): void
     {
@@ -29,7 +29,7 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
     }
     protected function getMediaTypeDataLoader(): MediaTypeDataLoader
     {
-        return $this->mediaTypeDataLoader ??= $this->getInstanceManager()->getInstance(MediaTypeDataLoader::class);
+        return $this->mediaTypeDataLoader ??= $this->instanceManager->getInstance(MediaTypeDataLoader::class);
     }
 
     public function getTypeName(): string

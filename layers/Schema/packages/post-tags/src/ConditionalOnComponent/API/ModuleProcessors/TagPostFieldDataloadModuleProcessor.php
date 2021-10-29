@@ -29,7 +29,7 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
     }
     protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
-        return $this->postObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostObjectTypeResolver::class);
+        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
     public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
     {
@@ -37,7 +37,7 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
     }
     protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
     {
-        return $this->listQueryInputOutputHandler ??= $this->getInstanceManager()->getInstance(ListQueryInputOutputHandler::class);
+        return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
     public function getModulesToProcess(): array

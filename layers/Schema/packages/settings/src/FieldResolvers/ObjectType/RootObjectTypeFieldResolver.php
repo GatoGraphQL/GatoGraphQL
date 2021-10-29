@@ -26,7 +26,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
     {
-        return $this->anyBuiltInScalarScalarTypeResolver ??= $this->getInstanceManager()->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
+        return $this->anyBuiltInScalarScalarTypeResolver ??= $this->instanceManager->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
     }
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -34,7 +34,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     public function setSettingsTypeAPI(SettingsTypeAPIInterface $settingsTypeAPI): void
     {
@@ -42,7 +42,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getSettingsTypeAPI(): SettingsTypeAPIInterface
     {
-        return $this->settingsTypeAPI ??= $this->getInstanceManager()->getInstance(SettingsTypeAPIInterface::class);
+        return $this->settingsTypeAPI ??= $this->instanceManager->getInstance(SettingsTypeAPIInterface::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

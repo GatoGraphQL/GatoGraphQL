@@ -22,7 +22,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getUserMetaTypeAPI(): UserMetaTypeAPIInterface
     {
-        return $this->userMetaTypeAPI ??= $this->getInstanceManager()->getInstance(UserMetaTypeAPIInterface::class);
+        return $this->userMetaTypeAPI ??= $this->instanceManager->getInstance(UserMetaTypeAPIInterface::class);
     }
     public function setWithMetaInterfaceTypeFieldResolver(WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver): void
     {
@@ -30,7 +30,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getWithMetaInterfaceTypeFieldResolver(): WithMetaInterfaceTypeFieldResolver
     {
-        return $this->withMetaInterfaceTypeFieldResolver ??= $this->getInstanceManager()->getInstance(WithMetaInterfaceTypeFieldResolver::class);
+        return $this->withMetaInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(WithMetaInterfaceTypeFieldResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

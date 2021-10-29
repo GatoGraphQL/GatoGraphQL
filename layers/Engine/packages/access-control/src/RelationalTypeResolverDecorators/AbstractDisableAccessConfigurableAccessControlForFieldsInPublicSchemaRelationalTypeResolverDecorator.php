@@ -17,7 +17,7 @@ abstract class AbstractDisableAccessConfigurableAccessControlForFieldsInPublicSc
     }
     protected function getDisableAccessDirectiveResolver(): DisableAccessDirectiveResolver
     {
-        return $this->disableAccessDirectiveResolver ??= $this->getInstanceManager()->getInstance(DisableAccessDirectiveResolver::class);
+        return $this->disableAccessDirectiveResolver ??= $this->instanceManager->getInstance(DisableAccessDirectiveResolver::class);
     }
 
     protected function getMandatoryDirectives(mixed $entryValue = null): array

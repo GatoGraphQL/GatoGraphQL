@@ -20,7 +20,7 @@ class CustomEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaC
     }
     protected function getCustomEndpointSchemaConfigurator(): CustomEndpointSchemaConfigurator
     {
-        return $this->customEndpointSchemaConfigurator ??= $this->getInstanceManager()->getInstance(CustomEndpointSchemaConfigurator::class);
+        return $this->customEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(CustomEndpointSchemaConfigurator::class);
     }
     public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
     {
@@ -28,7 +28,7 @@ class CustomEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaC
     }
     protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
     {
-        return $this->graphQLCustomEndpointCustomPostType ??= $this->getInstanceManager()->getInstance(GraphQLCustomEndpointCustomPostType::class);
+        return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
     }
 
     protected function getCustomPostType(): string

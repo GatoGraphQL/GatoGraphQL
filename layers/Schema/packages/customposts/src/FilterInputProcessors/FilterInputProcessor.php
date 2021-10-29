@@ -25,7 +25,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     }
     protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
     {
-        return $this->customPostStatusEnumTypeResolver ??= $this->getInstanceManager()->getInstance(CustomPostStatusEnumTypeResolver::class);
+        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
     }
 
 

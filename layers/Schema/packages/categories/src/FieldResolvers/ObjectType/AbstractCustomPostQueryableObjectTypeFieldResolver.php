@@ -33,7 +33,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -41,7 +41,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     }
     protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
 
     public function getFieldNamesToResolve(): array

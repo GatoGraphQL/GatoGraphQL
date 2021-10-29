@@ -23,7 +23,7 @@ class VarsHookSet extends AbstractHookSet
     }
     protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
     {
-        return $this->graphQLDataStructureFormatter ??= $this->getInstanceManager()->getInstance(GraphQLDataStructureFormatter::class);
+        return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
     }
 
     protected function init(): void

@@ -21,7 +21,7 @@ class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator imp
     }
     protected function getEndpointVoyagerBlock(): EndpointVoyagerBlock
     {
-        return $this->endpointVoyagerBlock ??= $this->getInstanceManager()->getInstance(EndpointVoyagerBlock::class);
+        return $this->endpointVoyagerBlock ??= $this->instanceManager->getInstance(EndpointVoyagerBlock::class);
     }
 
     public function getEnablingModule(): ?string

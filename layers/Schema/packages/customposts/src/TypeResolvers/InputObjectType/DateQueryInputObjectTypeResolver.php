@@ -21,7 +21,7 @@ class DateQueryInputObjectTypeResolver extends AbstractInputObjectTypeResolver
     }
     protected function getDateScalarTypeResolver(): DateScalarTypeResolver
     {
-        return $this->dateScalarTypeResolver ??= $this->getInstanceManager()->getInstance(DateScalarTypeResolver::class);
+        return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
     }
 
     public function getTypeName(): string

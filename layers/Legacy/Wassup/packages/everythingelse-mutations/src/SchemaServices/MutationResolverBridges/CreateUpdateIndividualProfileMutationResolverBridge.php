@@ -22,7 +22,7 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
     }
     protected function getCreateUpdateIndividualProfileMutationResolver(): CreateUpdateIndividualProfileMutationResolver
     {
-        return $this->createUpdateIndividualProfileMutationResolver ??= $this->getInstanceManager()->getInstance(CreateUpdateIndividualProfileMutationResolver::class);
+        return $this->createUpdateIndividualProfileMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateIndividualProfileMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface

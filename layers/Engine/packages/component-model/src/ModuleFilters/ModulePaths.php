@@ -36,7 +36,7 @@ class ModulePaths extends AbstractModuleFilter
     }
     protected function getModulePathManager(): ModulePathManagerInterface
     {
-        return $this->modulePathManager ??= $this->getInstanceManager()->getInstance(ModulePathManagerInterface::class);
+        return $this->modulePathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
     }
 
     protected function init(): void

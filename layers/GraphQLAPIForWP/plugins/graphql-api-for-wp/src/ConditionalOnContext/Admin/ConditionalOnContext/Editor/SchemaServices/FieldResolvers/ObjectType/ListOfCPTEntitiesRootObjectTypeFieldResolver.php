@@ -25,7 +25,7 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
     }
     protected function getGraphQLAccessControlListCustomPostType(): GraphQLAccessControlListCustomPostType
     {
-        return $this->graphQLAccessControlListCustomPostType ??= $this->getInstanceManager()->getInstance(GraphQLAccessControlListCustomPostType::class);
+        return $this->graphQLAccessControlListCustomPostType ??= $this->instanceManager->getInstance(GraphQLAccessControlListCustomPostType::class);
     }
     public function setGraphQLCacheControlListCustomPostType(GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType): void
     {
@@ -33,7 +33,7 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
     }
     protected function getGraphQLCacheControlListCustomPostType(): GraphQLCacheControlListCustomPostType
     {
-        return $this->graphQLCacheControlListCustomPostType ??= $this->getInstanceManager()->getInstance(GraphQLCacheControlListCustomPostType::class);
+        return $this->graphQLCacheControlListCustomPostType ??= $this->instanceManager->getInstance(GraphQLCacheControlListCustomPostType::class);
     }
     public function setGraphQLSchemaConfigurationCustomPostType(GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType): void
     {
@@ -41,7 +41,7 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
     }
     protected function getGraphQLSchemaConfigurationCustomPostType(): GraphQLSchemaConfigurationCustomPostType
     {
-        return $this->graphQLSchemaConfigurationCustomPostType ??= $this->getInstanceManager()->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
+        return $this->graphQLSchemaConfigurationCustomPostType ??= $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
     }
 
     /**

@@ -25,7 +25,7 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
     }
     protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
     {
-        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->getInstanceManager()->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
     }
 
     public function getDirectiveName(): string

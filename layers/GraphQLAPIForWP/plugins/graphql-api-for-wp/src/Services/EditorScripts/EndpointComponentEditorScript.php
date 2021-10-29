@@ -24,7 +24,7 @@ class EndpointComponentEditorScript extends AbstractEditorScript
     }
     protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
     {
-        return $this->graphQLCustomEndpointCustomPostType ??= $this->getInstanceManager()->getInstance(GraphQLCustomEndpointCustomPostType::class);
+        return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
     }
 
     /**

@@ -40,7 +40,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
             case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
-                return $this->getInstanceManager()->getInstance(PostObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
 
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCONTENTLIST:
@@ -48,13 +48,13 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
 
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST:
-                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
 
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
-                return $this->getInstanceManager()->getInstance(PostTagObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
 
             case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEAUTHORLIST:
-                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);
@@ -72,7 +72,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGCONTENTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEAUTHORLIST:
-                return $this->getInstanceManager()->getInstance(ListQueryInputOutputHandler::class);
+                return $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
         }
 
         return parent::getQueryInputOutputHandler($module);

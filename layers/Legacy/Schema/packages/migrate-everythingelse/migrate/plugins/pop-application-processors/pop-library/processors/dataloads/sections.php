@@ -124,7 +124,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
             case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_LIST:
-                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

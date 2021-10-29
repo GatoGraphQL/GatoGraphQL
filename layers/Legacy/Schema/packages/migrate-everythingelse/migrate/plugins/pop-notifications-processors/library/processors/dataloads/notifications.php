@@ -44,7 +44,7 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
-                return $this->getInstanceManager()->getInstance(NotificationObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(NotificationObjectTypeResolver::class);
         }
         
         return parent::getRelationalTypeResolver($module);
@@ -54,7 +54,7 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LATESTNOTIFICATIONS:
-                return $this->getInstanceManager()->getInstance(GD_DataLoad_QueryInputOutputHandler_LatestNotificationList::class);
+                return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_LatestNotificationList::class);
         }
         
         return parent::getQueryInputOutputHandler($module);

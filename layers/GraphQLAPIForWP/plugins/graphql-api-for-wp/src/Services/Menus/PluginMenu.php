@@ -20,7 +20,7 @@ class PluginMenu extends AbstractMenu
     }
     protected function getUserAuthorization(): UserAuthorizationInterface
     {
-        return $this->userAuthorization ??= $this->getInstanceManager()->getInstance(UserAuthorizationInterface::class);
+        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
 
     public function getName(): string

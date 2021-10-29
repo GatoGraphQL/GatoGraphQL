@@ -93,9 +93,9 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENT_CREATE:
-                return $this->getInstanceManager()->getInstance(CreateEventMutationResolverBridge::class);
+                return $this->instanceManager->getInstance(CreateEventMutationResolverBridge::class);
             case self::MODULE_DATALOAD_EVENT_UPDATE:
-                return $this->getInstanceManager()->getInstance(UpdateEventMutationResolverBridge::class);
+                return $this->instanceManager->getInstance(UpdateEventMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);
@@ -124,7 +124,7 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENT_UPDATE:
             case self::MODULE_DATALOAD_EVENT_CREATE:
-                return $this->getInstanceManager()->getInstance(EventObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(EventObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

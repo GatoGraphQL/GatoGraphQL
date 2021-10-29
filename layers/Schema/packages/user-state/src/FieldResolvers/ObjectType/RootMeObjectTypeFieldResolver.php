@@ -21,7 +21,7 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
     }
     protected function getUserObjectTypeResolver(): UserObjectTypeResolver
     {
-        return $this->userObjectTypeResolver ??= $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+        return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

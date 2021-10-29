@@ -6,6 +6,6 @@ abstract class PoP_Module_Processor_LocationTriggerLayoutFormComponentValuesBase
 {
     public function getTriggerRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
     {
-        return $this->getInstanceManager()->getInstance(LocationObjectTypeResolver::class);
+        return $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
     }
 }

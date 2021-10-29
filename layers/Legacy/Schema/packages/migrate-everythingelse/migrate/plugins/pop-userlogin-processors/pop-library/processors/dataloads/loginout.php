@@ -68,16 +68,16 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOGIN:
-                return $this->getInstanceManager()->getInstance(LoginMutationResolverBridge::class);
+                return $this->instanceManager->getInstance(LoginMutationResolverBridge::class);
 
             case self::MODULE_DATALOAD_LOSTPWD:
-                return $this->getInstanceManager()->getInstance(LostPasswordMutationResolverBridge::class);
+                return $this->instanceManager->getInstance(LostPasswordMutationResolverBridge::class);
 
             case self::MODULE_DATALOAD_LOSTPWDRESET:
-                return $this->getInstanceManager()->getInstance(ResetLostPasswordMutationResolverBridge::class);
+                return $this->instanceManager->getInstance(ResetLostPasswordMutationResolverBridge::class);
 
             case self::MODULE_DATALOAD_LOGOUT:
-                return $this->getInstanceManager()->getInstance(LogoutMutationResolverBridge::class);
+                return $this->instanceManager->getInstance(LogoutMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);

@@ -196,12 +196,12 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
             case self::MODULE_DATALOAD_PASTEVENTS_SCROLLMAP:
             case self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
             case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
-                return $this->getInstanceManager()->getInstance(EventObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(EventObjectTypeResolver::class);
 
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP:
             case self::MODULE_DATALOAD_USERS_SCROLLMAP:
             case self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP:
-                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

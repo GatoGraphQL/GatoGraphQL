@@ -30,7 +30,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     }
     protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
     {
-        return $this->emailScalarTypeResolver ??= $this->getInstanceManager()->getInstance(EmailScalarTypeResolver::class);
+        return $this->emailScalarTypeResolver ??= $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
     }
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -38,7 +38,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getModulesToProcess(): array

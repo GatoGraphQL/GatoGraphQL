@@ -21,7 +21,7 @@ abstract class AbstractCommentMetaTypeAPI implements CommentMetaTypeAPIInterface
     }
     protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
     {
-        return $this->allowOrDenySettingsService ??= $this->getInstanceManager()->getInstance(AllowOrDenySettingsServiceInterface::class);
+        return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
     }
 
     final public function getCommentMeta(string | int $commentID, string $key, bool $single = false): mixed

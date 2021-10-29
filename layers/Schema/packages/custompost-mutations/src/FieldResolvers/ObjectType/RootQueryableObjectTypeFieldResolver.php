@@ -37,7 +37,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     }
     protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
     public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -45,7 +45,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     }
     protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
-        return $this->customPostTypeAPI ??= $this->getInstanceManager()->getInstance(CustomPostTypeAPIInterface::class);
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

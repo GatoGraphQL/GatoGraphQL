@@ -30,7 +30,7 @@ class PoP_SystemWP_WP_Module_Processor_SystemActions extends AbstractDataloadMod
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS:
-                return $this->getInstanceManager()->getInstance(ActivatePluginsMutationResolverBridge::class);
+                return $this->instanceManager->getInstance(ActivatePluginsMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);

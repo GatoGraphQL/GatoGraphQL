@@ -20,6 +20,6 @@ abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoa
     }
     protected function getNameResolver(): NameResolverInterface
     {
-        return $this->nameResolver ??= $this->getInstanceManager()->getInstance(NameResolverInterface::class);
+        return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
     }
 }

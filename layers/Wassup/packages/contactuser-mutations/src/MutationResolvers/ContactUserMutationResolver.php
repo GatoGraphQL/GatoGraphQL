@@ -19,7 +19,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
     }
     protected function getUserTypeAPI(): UserTypeAPIInterface
     {
-        return $this->userTypeAPI ??= $this->getInstanceManager()->getInstance(UserTypeAPIInterface::class);
+        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
     public function validateErrors(array $form_data): array

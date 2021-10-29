@@ -120,7 +120,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW:
-                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

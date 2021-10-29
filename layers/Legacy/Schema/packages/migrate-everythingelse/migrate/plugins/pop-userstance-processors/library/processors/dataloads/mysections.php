@@ -67,7 +67,7 @@ class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processo
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYSTANCES_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW:
-                return $this->getInstanceManager()->getInstance(StanceObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

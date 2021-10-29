@@ -19,7 +19,7 @@ trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
     }
     protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
-        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
     public function setCacheControlDirectiveResolver(CacheControlDirectiveResolver $cacheControlDirectiveResolver): void
     {
@@ -27,7 +27,7 @@ trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
     }
     protected function getCacheControlDirectiveResolver(): CacheControlDirectiveResolver
     {
-        return $this->cacheControlDirectiveResolver ??= $this->getInstanceManager()->getInstance(CacheControlDirectiveResolver::class);
+        return $this->cacheControlDirectiveResolver ??= $this->instanceManager->getInstance(CacheControlDirectiveResolver::class);
     }
 
     /**

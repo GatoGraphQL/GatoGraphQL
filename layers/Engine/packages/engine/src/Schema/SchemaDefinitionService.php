@@ -25,7 +25,7 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
     }
     protected function getRootObjectTypeResolver(): RootObjectTypeResolver
     {
-        return $this->rootObjectTypeResolver ??= $this->getInstanceManager()->getInstance(RootObjectTypeResolver::class);
+        return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
     }
     public function setAnyBuiltInScalarScalarTypeResolver(AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver): void
     {
@@ -33,7 +33,7 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
     }
     protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
     {
-        return $this->anyBuiltInScalarScalarTypeResolver ??= $this->getInstanceManager()->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
+        return $this->anyBuiltInScalarScalarTypeResolver ??= $this->instanceManager->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
     }
 
     /**

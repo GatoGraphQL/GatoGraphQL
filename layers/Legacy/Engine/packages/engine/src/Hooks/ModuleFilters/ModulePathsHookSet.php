@@ -22,7 +22,7 @@ class ModulePathsHookSet extends AbstractHookSet
     }
     protected function getModulePaths(): ModulePaths
     {
-        return $this->modulePaths ??= $this->getInstanceManager()->getInstance(ModulePaths::class);
+        return $this->modulePaths ??= $this->instanceManager->getInstance(ModulePaths::class);
     }
 
     protected function init(): void

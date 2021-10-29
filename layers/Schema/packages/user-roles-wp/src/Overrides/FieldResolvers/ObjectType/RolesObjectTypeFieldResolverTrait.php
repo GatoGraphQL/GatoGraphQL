@@ -19,7 +19,7 @@ trait RolesObjectTypeFieldResolverTrait
     }
     protected function getUserRoleObjectTypeResolver(): UserRoleObjectTypeResolver
     {
-        return $this->userRoleObjectTypeResolver ??= $this->getInstanceManager()->getInstance(UserRoleObjectTypeResolver::class);
+        return $this->userRoleObjectTypeResolver ??= $this->instanceManager->getInstance(UserRoleObjectTypeResolver::class);
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

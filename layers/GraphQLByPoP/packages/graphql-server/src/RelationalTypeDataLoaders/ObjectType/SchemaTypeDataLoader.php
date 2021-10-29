@@ -25,7 +25,7 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
     }
     protected function getSchemaObjectTypeResolver(): SchemaObjectTypeResolver
     {
-        return $this->schemaObjectTypeResolver ??= $this->getInstanceManager()->getInstance(SchemaObjectTypeResolver::class);
+        return $this->schemaObjectTypeResolver ??= $this->instanceManager->getInstance(SchemaObjectTypeResolver::class);
     }
     public function setSchemaDefinitionReferenceRegistry(SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry): void
     {
@@ -33,7 +33,7 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
     }
     protected function getSchemaDefinitionReferenceRegistry(): SchemaDefinitionReferenceRegistryInterface
     {
-        return $this->schemaDefinitionReferenceRegistry ??= $this->getInstanceManager()->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
+        return $this->schemaDefinitionReferenceRegistry ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

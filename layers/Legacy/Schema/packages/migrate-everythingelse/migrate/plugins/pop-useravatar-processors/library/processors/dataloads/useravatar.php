@@ -40,7 +40,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
-                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);
@@ -117,10 +117,10 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
                 // 2. Update the avatar, on the POST operation
                 $moduleAtts = (count($module) >= 3) ? $module[2] : null;
                 if ($moduleAtts && $moduleAtts['executeupdate']) {
-                    return $this->getInstanceManager()->getInstance(UpdateUserAvatarMutationResolverBridge::class);
+                    return $this->instanceManager->getInstance(UpdateUserAvatarMutationResolverBridge::class);
                 }
 
-                return $this->getInstanceManager()->getInstance(FileUploadPictureMutationResolverBridge::class);
+                return $this->instanceManager->getInstance(FileUploadPictureMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);

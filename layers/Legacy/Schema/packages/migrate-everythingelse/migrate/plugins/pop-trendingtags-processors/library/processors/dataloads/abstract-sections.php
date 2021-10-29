@@ -16,12 +16,12 @@ abstract class Abstract_PoP_TrendingTags_Module_Processor_SectionDataloads exten
 
     public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
     {
-        return $this->getInstanceManager()->getInstance(\PoP\TrendingTags\QueryInputOutputHandler_TrendingTagList::class);
+        return $this->instanceManager->getInstance(\PoP\TrendingTags\QueryInputOutputHandler_TrendingTagList::class);
     }
 
     public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        return $this->getInstanceManager()->getInstance(PostTagObjectTypeResolver::class);
+        return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
     }
 }
 

@@ -37,7 +37,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Users extends AbstractOb
 
             case 'followers':
             case 'following':
-                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
         return match($fieldName) {
             'followersCount' => \PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver::class,

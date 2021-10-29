@@ -21,7 +21,7 @@ abstract class AbstractCustomPostMetaTypeAPI implements CustomPostMetaTypeAPIInt
     }
     protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
     {
-        return $this->allowOrDenySettingsService ??= $this->getInstanceManager()->getInstance(AllowOrDenySettingsServiceInterface::class);
+        return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
     }
 
     final public function getCustomPostMeta(string | int $customPostID, string $key, bool $single = false): mixed

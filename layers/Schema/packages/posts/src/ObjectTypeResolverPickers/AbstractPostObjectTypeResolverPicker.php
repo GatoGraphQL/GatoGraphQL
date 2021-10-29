@@ -21,7 +21,7 @@ abstract class AbstractPostObjectTypeResolverPicker extends AbstractObjectTypeRe
     }
     protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
-        return $this->postObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostObjectTypeResolver::class);
+        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
     public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
     {
@@ -29,7 +29,7 @@ abstract class AbstractPostObjectTypeResolverPicker extends AbstractObjectTypeRe
     }
     protected function getPostTypeAPI(): PostTypeAPIInterface
     {
-        return $this->postTypeAPI ??= $this->getInstanceManager()->getInstance(PostTypeAPIInterface::class);
+        return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

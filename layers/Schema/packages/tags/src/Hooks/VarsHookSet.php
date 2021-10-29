@@ -19,7 +19,7 @@ class VarsHookSet extends AbstractHookSet
     }
     protected function getTaxonomyTypeAPI(): TaxonomyTypeAPIInterface
     {
-        return $this->taxonomyTypeAPI ??= $this->getInstanceManager()->getInstance(TaxonomyTypeAPIInterface::class);
+        return $this->taxonomyTypeAPI ??= $this->instanceManager->getInstance(TaxonomyTypeAPIInterface::class);
     }
 
     protected function init(): void

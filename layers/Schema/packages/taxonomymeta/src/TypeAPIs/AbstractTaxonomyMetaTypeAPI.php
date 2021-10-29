@@ -21,7 +21,7 @@ abstract class AbstractTaxonomyMetaTypeAPI implements TaxonomyMetaTypeAPIInterfa
     }
     protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
     {
-        return $this->allowOrDenySettingsService ??= $this->getInstanceManager()->getInstance(AllowOrDenySettingsServiceInterface::class);
+        return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
     }
 
     final public function getTaxonomyTermMeta(string | int $termID, string $key, bool $single = false): mixed

@@ -18,7 +18,7 @@ class RootTypeDataLoader extends AbstractObjectTypeDataLoader
     }
     protected function getRoot(): Root
     {
-        return $this->root ??= $this->getInstanceManager()->getInstance(Root::class);
+        return $this->root ??= $this->instanceManager->getInstance(Root::class);
     }
 
     public function getObjects(array $ids): array

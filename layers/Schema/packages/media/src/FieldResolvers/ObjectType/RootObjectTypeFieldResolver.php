@@ -37,7 +37,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
-        return $this->mediaTypeAPI ??= $this->getInstanceManager()->getInstance(MediaTypeAPIInterface::class);
+        return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
     }
     public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -45,7 +45,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
     public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
     {
@@ -53,7 +53,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
-        return $this->mediaObjectTypeResolver ??= $this->getInstanceManager()->getInstance(MediaObjectTypeResolver::class);
+        return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

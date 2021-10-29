@@ -25,7 +25,7 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
     }
     protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
     {
-        return $this->graphQLDataStructureFormatter ??= $this->getInstanceManager()->getInstance(GraphQLDataStructureFormatter::class);
+        return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
     }
     /**
      * Initialize the endpoints

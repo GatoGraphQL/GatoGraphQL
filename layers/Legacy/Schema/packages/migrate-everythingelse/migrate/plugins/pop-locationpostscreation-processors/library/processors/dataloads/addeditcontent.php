@@ -91,9 +91,9 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONPOST_CREATE:
-                return $this->getInstanceManager()->getInstance(CreateLocationPostMutationResolverBridge::class);
+                return $this->instanceManager->getInstance(CreateLocationPostMutationResolverBridge::class);
             case self::MODULE_DATALOAD_LOCATIONPOST_UPDATE:
-                return $this->getInstanceManager()->getInstance(UpdateLocationPostMutationResolverBridge::class);
+                return $this->instanceManager->getInstance(UpdateLocationPostMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);

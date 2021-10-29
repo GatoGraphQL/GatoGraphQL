@@ -20,7 +20,7 @@ class LoginMutationResolverBridge extends AbstractComponentMutationResolverBridg
     }
     protected function getLoginMutationResolver(): LoginMutationResolver
     {
-        return $this->loginMutationResolver ??= $this->getInstanceManager()->getInstance(LoginMutationResolver::class);
+        return $this->loginMutationResolver ??= $this->instanceManager->getInstance(LoginMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface

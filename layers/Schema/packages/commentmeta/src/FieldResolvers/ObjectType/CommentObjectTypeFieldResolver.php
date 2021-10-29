@@ -22,7 +22,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getCommentMetaTypeAPI(): CommentMetaTypeAPIInterface
     {
-        return $this->commentMetaTypeAPI ??= $this->getInstanceManager()->getInstance(CommentMetaTypeAPIInterface::class);
+        return $this->commentMetaTypeAPI ??= $this->instanceManager->getInstance(CommentMetaTypeAPIInterface::class);
     }
     public function setWithMetaInterfaceTypeFieldResolver(WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver): void
     {
@@ -30,7 +30,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getWithMetaInterfaceTypeFieldResolver(): WithMetaInterfaceTypeFieldResolver
     {
-        return $this->withMetaInterfaceTypeFieldResolver ??= $this->getInstanceManager()->getInstance(WithMetaInterfaceTypeFieldResolver::class);
+        return $this->withMetaInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(WithMetaInterfaceTypeFieldResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

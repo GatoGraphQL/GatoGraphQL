@@ -32,7 +32,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     }
     protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
-        return $this->commentTypeAPI ??= $this->getInstanceManager()->getInstance(CommentTypeAPIInterface::class);
+        return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
     }
     public function setCommentTypeMutationAPI(CommentTypeMutationAPIInterface $commentTypeMutationAPI): void
     {
@@ -40,7 +40,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     }
     protected function getCommentTypeMutationAPI(): CommentTypeMutationAPIInterface
     {
-        return $this->commentTypeMutationAPI ??= $this->getInstanceManager()->getInstance(CommentTypeMutationAPIInterface::class);
+        return $this->commentTypeMutationAPI ??= $this->instanceManager->getInstance(CommentTypeMutationAPIInterface::class);
     }
     public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
     {
@@ -48,7 +48,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     }
     protected function getUserTypeAPI(): UserTypeAPIInterface
     {
-        return $this->userTypeAPI ??= $this->getInstanceManager()->getInstance(UserTypeAPIInterface::class);
+        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
     public function validateErrors(array $form_data): array

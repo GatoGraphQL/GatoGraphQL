@@ -21,7 +21,7 @@ trait PostCategoryAPISatisfiedContractTrait
     }
     protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
     {
-        return $this->postCategoryTypeAPI ??= $this->getInstanceManager()->getInstance(PostCategoryTypeAPIInterface::class);
+        return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
     }
     public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
     {
@@ -29,7 +29,7 @@ trait PostCategoryAPISatisfiedContractTrait
     }
     protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
-        return $this->postCategoryObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostCategoryObjectTypeResolver::class);
+        return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
     }
 
     public function getCategoryTypeAPI(): CategoryTypeAPIInterface

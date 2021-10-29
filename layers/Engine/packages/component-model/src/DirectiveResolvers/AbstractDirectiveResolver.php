@@ -107,7 +107,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
     protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
-        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
     public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
@@ -115,7 +115,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
     protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
     {
-        return $this->feedbackMessageStore ??= $this->getInstanceManager()->getInstance(FeedbackMessageStoreInterface::class);
+        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
     }
     public function setSemverHelperService(SemverHelperServiceInterface $semverHelperService): void
     {
@@ -123,7 +123,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
     protected function getSemverHelperService(): SemverHelperServiceInterface
     {
-        return $this->semverHelperService ??= $this->getInstanceManager()->getInstance(SemverHelperServiceInterface::class);
+        return $this->semverHelperService ??= $this->instanceManager->getInstance(SemverHelperServiceInterface::class);
     }
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -131,7 +131,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     final public function getClassesToAttachTo(): array

@@ -18,7 +18,7 @@ class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
     }
     protected function getQueryRoot(): QueryRoot
     {
-        return $this->queryRoot ??= $this->getInstanceManager()->getInstance(QueryRoot::class);
+        return $this->queryRoot ??= $this->instanceManager->getInstance(QueryRoot::class);
     }
 
     public function getObjects(array $ids): array

@@ -22,7 +22,7 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
     }
     protected function getPostTagTypeDataLoader(): PostTagTypeDataLoader
     {
-        return $this->postTagTypeDataLoader ??= $this->getInstanceManager()->getInstance(PostTagTypeDataLoader::class);
+        return $this->postTagTypeDataLoader ??= $this->instanceManager->getInstance(PostTagTypeDataLoader::class);
     }
 
     public function getTypeName(): string

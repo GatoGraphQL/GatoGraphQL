@@ -24,7 +24,7 @@ abstract class AbstractLooseContractResolutionSet extends AbstractAutomaticallyI
     }
     protected function getLooseContractManager(): LooseContractManagerInterface
     {
-        return $this->looseContractManager ??= $this->getInstanceManager()->getInstance(LooseContractManagerInterface::class);
+        return $this->looseContractManager ??= $this->instanceManager->getInstance(LooseContractManagerInterface::class);
     }
     public function setNameResolver(NameResolverInterface $nameResolver): void
     {
@@ -32,7 +32,7 @@ abstract class AbstractLooseContractResolutionSet extends AbstractAutomaticallyI
     }
     protected function getNameResolver(): NameResolverInterface
     {
-        return $this->nameResolver ??= $this->getInstanceManager()->getInstance(NameResolverInterface::class);
+        return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
     }
 
     final public function initialize(): void

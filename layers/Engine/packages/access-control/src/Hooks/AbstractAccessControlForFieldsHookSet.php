@@ -23,7 +23,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
     }
     protected function getAccessControlManager(): AccessControlManagerInterface
     {
-        return $this->accessControlManager ??= $this->getInstanceManager()->getInstance(AccessControlManagerInterface::class);
+        return $this->accessControlManager ??= $this->instanceManager->getInstance(AccessControlManagerInterface::class);
     }
 
     /**

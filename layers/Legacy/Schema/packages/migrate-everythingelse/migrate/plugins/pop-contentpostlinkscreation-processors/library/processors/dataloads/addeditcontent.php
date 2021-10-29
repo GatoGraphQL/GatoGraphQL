@@ -90,9 +90,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads ex
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_CONTENTPOSTLINK_CREATE:
-                return $this->getInstanceManager()->getInstance(CreatePostLinkMutationResolverBridge::class);
+                return $this->instanceManager->getInstance(CreatePostLinkMutationResolverBridge::class);
             case self::MODULE_DATALOAD_CONTENTPOSTLINK_UPDATE:
-                return $this->getInstanceManager()->getInstance(UpdatePostLinkMutationResolverBridge::class);
+                return $this->instanceManager->getInstance(UpdatePostLinkMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);

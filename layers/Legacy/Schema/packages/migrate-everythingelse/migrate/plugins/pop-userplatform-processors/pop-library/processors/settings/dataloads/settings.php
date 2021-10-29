@@ -36,7 +36,7 @@ class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SETTINGS:
-                return $this->getInstanceManager()->getInstance(SettingsMutationResolverBridge::class);
+                return $this->instanceManager->getInstance(SettingsMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);
@@ -46,7 +46,7 @@ class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SETTINGS:
-                return $this->getInstanceManager()->getInstance(RedirectQueryInputOutputHandler::class);
+                return $this->instanceManager->getInstance(RedirectQueryInputOutputHandler::class);
         }
 
         return parent::getQueryInputOutputHandler($module);

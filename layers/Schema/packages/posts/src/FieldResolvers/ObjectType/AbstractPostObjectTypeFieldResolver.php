@@ -34,7 +34,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     }
     protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
     public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {
@@ -42,7 +42,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     }
     protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
-        return $this->postObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostObjectTypeResolver::class);
+        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
     public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
     {
@@ -50,7 +50,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     }
     protected function getPostTypeAPI(): PostTypeAPIInterface
     {
-        return $this->postTypeAPI ??= $this->getInstanceManager()->getInstance(PostTypeAPIInterface::class);
+        return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
     }
 
     public function getFieldNamesToResolve(): array

@@ -64,7 +64,7 @@ class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_Da
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONSMAP:
-                return $this->getInstanceManager()->getInstance(LocationObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

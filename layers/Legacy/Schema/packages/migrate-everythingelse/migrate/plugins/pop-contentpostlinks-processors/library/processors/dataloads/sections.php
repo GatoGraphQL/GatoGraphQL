@@ -303,7 +303,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
             case self::MODULE_DATALOAD_TAGLINKS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGLINKS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGLINKS_SCROLL_LIST:
-                return $this->getInstanceManager()->getInstance(CustomPostObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

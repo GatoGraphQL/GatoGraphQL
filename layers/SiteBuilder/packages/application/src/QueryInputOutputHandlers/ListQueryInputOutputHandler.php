@@ -24,7 +24,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
     }
     protected function getCMSService(): CMSServiceInterface
     {
-        return $this->cmsService ??= $this->getInstanceManager()->getInstance(CMSServiceInterface::class);
+        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
 
     protected function getLimit()

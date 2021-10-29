@@ -49,13 +49,13 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_INVITENEWMEMBERS:
-                return $this->getInstanceManager()->getInstance(InviteMembersMutationResolverBridge::class);
+                return $this->instanceManager->getInstance(InviteMembersMutationResolverBridge::class);
 
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
-                return $this->getInstanceManager()->getInstance(EditMembershipMutationResolverBridge::class);
+                return $this->instanceManager->getInstance(EditMembershipMutationResolverBridge::class);
 
             case self::MODULE_DATALOAD_MYCOMMUNITIES_UPDATE:
-                return $this->getInstanceManager()->getInstance(UpdateMyCommunitiesMutationResolverBridge::class);
+                return $this->instanceManager->getInstance(UpdateMyCommunitiesMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);
@@ -166,7 +166,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYCOMMUNITIES_UPDATE:
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
-                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);
@@ -176,7 +176,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
-                return $this->getInstanceManager()->getInstance(GD_DataLoad_QueryInputOutputHandler_EditMembership::class);
+                return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_EditMembership::class);
         }
 
         return parent::getQueryInputOutputHandler($module);

@@ -20,7 +20,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     }
     protected function getCMSService(): CMSServiceInterface
     {
-        return $this->cmsService ??= $this->getInstanceManager()->getInstance(CMSServiceInterface::class);
+        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
     public function setApplicationInfo(ApplicationInfoInterface $applicationInfo): void
     {
@@ -28,7 +28,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     }
     protected function getApplicationInfo(): ApplicationInfoInterface
     {
-        return $this->applicationInfo ??= $this->getInstanceManager()->getInstance(ApplicationInfoInterface::class);
+        return $this->applicationInfo ??= $this->instanceManager->getInstance(ApplicationInfoInterface::class);
     }
 
     // Taken from https://wordpress.stackexchange.com/questions/4041/how-to-activate-plugins-via-code

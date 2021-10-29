@@ -25,7 +25,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
     }
     protected function getRootObjectTypeResolver(): RootObjectTypeResolver
     {
-        return $this->rootObjectTypeResolver ??= $this->getInstanceManager()->getInstance(RootObjectTypeResolver::class);
+        return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
     }
     public function setQueryRootTypeDataLoader(QueryRootTypeDataLoader $queryRootTypeDataLoader): void
     {
@@ -33,7 +33,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
     }
     protected function getQueryRootTypeDataLoader(): QueryRootTypeDataLoader
     {
-        return $this->queryRootTypeDataLoader ??= $this->getInstanceManager()->getInstance(QueryRootTypeDataLoader::class);
+        return $this->queryRootTypeDataLoader ??= $this->instanceManager->getInstance(QueryRootTypeDataLoader::class);
     }
 
     public function getTypeName(): string

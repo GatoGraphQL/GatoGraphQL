@@ -26,7 +26,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     }
     protected function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolver
     {
-        return $this->customPostObjectTypeResolver ??= $this->getInstanceManager()->getInstance(CustomPostObjectTypeResolver::class);
+        return $this->customPostObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
     }
     public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
     {
@@ -34,7 +34,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     }
     protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
     {
-        return $this->listQueryInputOutputHandler ??= $this->getInstanceManager()->getInstance(ListQueryInputOutputHandler::class);
+        return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
     public function getModulesToProcess(): array

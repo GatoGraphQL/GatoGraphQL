@@ -28,7 +28,7 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {
@@ -36,7 +36,7 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
-        return $this->jsonObjectScalarTypeResolver ??= $this->getInstanceManager()->getInstance(JSONObjectScalarTypeResolver::class);
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
     public function setLocationObjectTypeResolver(LocationObjectTypeResolver $locationObjectTypeResolver): void
     {
@@ -44,7 +44,7 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getLocationObjectTypeResolver(): LocationObjectTypeResolver
     {
-        return $this->locationObjectTypeResolver ??= $this->getInstanceManager()->getInstance(LocationObjectTypeResolver::class);
+        return $this->locationObjectTypeResolver ??= $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

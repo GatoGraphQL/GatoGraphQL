@@ -24,7 +24,7 @@ class PersistedQueryEndpointComponentEditorScript extends AbstractEditorScript
     }
     protected function getGraphQLPersistedQueryEndpointCustomPostType(): GraphQLPersistedQueryEndpointCustomPostType
     {
-        return $this->graphQLPersistedQueryEndpointCustomPostType ??= $this->getInstanceManager()->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
+        return $this->graphQLPersistedQueryEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
     }
 
     /**

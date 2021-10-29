@@ -17,7 +17,7 @@ trait MarkdownContentRetrieverTrait
     }
     protected function getMarkdownContentParser(): MarkdownContentParserInterface
     {
-        return $this->markdownContentParser ??= $this->getInstanceManager()->getInstance(MarkdownContentParserInterface::class);
+        return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
     }
 
     /**

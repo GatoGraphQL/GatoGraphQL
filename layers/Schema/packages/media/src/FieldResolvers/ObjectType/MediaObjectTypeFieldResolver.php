@@ -33,7 +33,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     }
     protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
-        return $this->mediaTypeAPI ??= $this->getInstanceManager()->getInstance(MediaTypeAPIInterface::class);
+        return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
     }
     public function setDateFormatter(DateFormatterInterface $dateFormatter): void
     {
@@ -41,7 +41,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     }
     protected function getDateFormatter(): DateFormatterInterface
     {
-        return $this->dateFormatter ??= $this->getInstanceManager()->getInstance(DateFormatterInterface::class);
+        return $this->dateFormatter ??= $this->instanceManager->getInstance(DateFormatterInterface::class);
     }
     public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
     {
@@ -49,7 +49,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     }
     protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
-        return $this->urlScalarTypeResolver ??= $this->getInstanceManager()->getInstance(URLScalarTypeResolver::class);
+        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
     public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -57,7 +57,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     }
     protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -65,7 +65,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
     {
@@ -73,7 +73,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     }
     protected function getDateScalarTypeResolver(): DateScalarTypeResolver
     {
-        return $this->dateScalarTypeResolver ??= $this->getInstanceManager()->getInstance(DateScalarTypeResolver::class);
+        return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

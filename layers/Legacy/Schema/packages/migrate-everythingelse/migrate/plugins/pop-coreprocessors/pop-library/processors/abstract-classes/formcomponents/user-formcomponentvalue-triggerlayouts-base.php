@@ -6,6 +6,6 @@ abstract class PoP_Module_Processor_UserTriggerLayoutFormComponentValuesBase ext
 {
     public function getTriggerRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
     {
-        return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+        return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
 }

@@ -103,7 +103,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_MySectionDataloads extends P
             case self::MODULE_DATALOAD_MYLINKS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYLINKS_SCROLL_FULLVIEWPREVIEW:
-                return $this->getInstanceManager()->getInstance(CustomPostObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

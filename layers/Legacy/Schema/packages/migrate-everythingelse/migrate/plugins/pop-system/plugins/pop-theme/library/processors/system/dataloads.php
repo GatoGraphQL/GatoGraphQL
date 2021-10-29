@@ -30,7 +30,7 @@ class PoP_System_Theme_Module_Processor_SystemActions extends AbstractDataloadMo
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_GENERATETHEME:
-                return $this->getInstanceManager()->getInstance(GenerateThemeMutationResolverBridge::class);
+                return $this->instanceManager->getInstance(GenerateThemeMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);

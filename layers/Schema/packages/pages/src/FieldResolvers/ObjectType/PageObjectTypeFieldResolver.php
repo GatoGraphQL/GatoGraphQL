@@ -34,7 +34,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
     public function setPageObjectTypeResolver(PageObjectTypeResolver $pageObjectTypeResolver): void
     {
@@ -42,7 +42,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     protected function getPageObjectTypeResolver(): PageObjectTypeResolver
     {
-        return $this->pageObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PageObjectTypeResolver::class);
+        return $this->pageObjectTypeResolver ??= $this->instanceManager->getInstance(PageObjectTypeResolver::class);
     }
     public function setPageTypeAPI(PageTypeAPIInterface $pageTypeAPI): void
     {
@@ -50,7 +50,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     protected function getPageTypeAPI(): PageTypeAPIInterface
     {
-        return $this->pageTypeAPI ??= $this->getInstanceManager()->getInstance(PageTypeAPIInterface::class);
+        return $this->pageTypeAPI ??= $this->instanceManager->getInstance(PageTypeAPIInterface::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

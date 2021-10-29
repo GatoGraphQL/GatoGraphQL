@@ -22,7 +22,7 @@ class Engine extends UpstreamEngine implements EngineInterface
     }
     protected function getLooseContractManager(): LooseContractManagerInterface
     {
-        return $this->looseContractManager ??= $this->getInstanceManager()->getInstance(LooseContractManagerInterface::class);
+        return $this->looseContractManager ??= $this->instanceManager->getInstance(LooseContractManagerInterface::class);
     }
     public function setCacheControlEngine(CacheControlEngineInterface $cacheControlEngine): void
     {
@@ -30,7 +30,7 @@ class Engine extends UpstreamEngine implements EngineInterface
     }
     protected function getCacheControlEngine(): CacheControlEngineInterface
     {
-        return $this->cacheControlEngine ??= $this->getInstanceManager()->getInstance(CacheControlEngineInterface::class);
+        return $this->cacheControlEngine ??= $this->instanceManager->getInstance(CacheControlEngineInterface::class);
     }
 
     public function generateData(): void

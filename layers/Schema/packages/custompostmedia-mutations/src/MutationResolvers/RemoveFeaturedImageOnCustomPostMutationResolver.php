@@ -21,7 +21,7 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
     }
     protected function getCustomPostMediaTypeMutationAPI(): CustomPostMediaTypeMutationAPIInterface
     {
-        return $this->customPostMediaTypeMutationAPI ??= $this->getInstanceManager()->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
+        return $this->customPostMediaTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
     }
 
     public function executeMutation(array $form_data): mixed

@@ -21,7 +21,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
     }
     protected function getDateScalarTypeResolver(): DateScalarTypeResolver
     {
-        return $this->dateScalarTypeResolver ??= $this->getInstanceManager()->getInstance(DateScalarTypeResolver::class);
+        return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
     }
 
     public function getModulesToProcess(): array

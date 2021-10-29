@@ -22,7 +22,7 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
     }
     protected function getAboutMenuPage(): AboutMenuPage
     {
-        return $this->aboutMenuPage ??= $this->getInstanceManager()->getInstance(AboutMenuPage::class);
+        return $this->aboutMenuPage ??= $this->instanceManager->getInstance(AboutMenuPage::class);
     }
 
     public function getMenuPageSlug(): string

@@ -27,7 +27,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     }
     protected function getMutationResolutionManager(): MutationResolutionManagerInterface
     {
-        return $this->mutationResolutionManager ??= $this->getInstanceManager()->getInstance(MutationResolutionManagerInterface::class);
+        return $this->mutationResolutionManager ??= $this->instanceManager->getInstance(MutationResolutionManagerInterface::class);
     }
     public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
     {
@@ -35,7 +35,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     }
     protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
     {
-        return $this->moduleProcessorManager ??= $this->getInstanceManager()->getInstance(ModuleProcessorManagerInterface::class);
+        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     }
 
     public function getSuccessString(string | int $result_id): ?string

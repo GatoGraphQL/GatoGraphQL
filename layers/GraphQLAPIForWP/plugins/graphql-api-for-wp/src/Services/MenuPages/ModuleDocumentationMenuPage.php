@@ -26,7 +26,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
     }
     protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
     public function setModulesMenuPage(ModulesMenuPage $modulesMenuPage): void
     {
@@ -34,7 +34,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
     }
     protected function getModulesMenuPage(): ModulesMenuPage
     {
-        return $this->modulesMenuPage ??= $this->getInstanceManager()->getInstance(ModulesMenuPage::class);
+        return $this->modulesMenuPage ??= $this->instanceManager->getInstance(ModulesMenuPage::class);
     }
 
     public function getMenuPageSlug(): string

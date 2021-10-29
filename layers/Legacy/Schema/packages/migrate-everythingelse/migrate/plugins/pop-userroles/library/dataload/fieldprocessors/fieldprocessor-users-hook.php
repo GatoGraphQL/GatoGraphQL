@@ -23,7 +23,7 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -31,7 +31,7 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
     }
     protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

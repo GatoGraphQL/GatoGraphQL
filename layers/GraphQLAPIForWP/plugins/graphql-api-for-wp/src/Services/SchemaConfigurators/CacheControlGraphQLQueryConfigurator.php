@@ -24,7 +24,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
     }
     protected function getCacheControlBlock(): CacheControlBlock
     {
-        return $this->cacheControlBlock ??= $this->getInstanceManager()->getInstance(CacheControlBlock::class);
+        return $this->cacheControlBlock ??= $this->instanceManager->getInstance(CacheControlBlock::class);
     }
     public function setBlockHelpers(BlockHelpers $blockHelpers): void
     {
@@ -32,7 +32,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
     }
     protected function getBlockHelpers(): BlockHelpers
     {
-        return $this->blockHelpers ??= $this->getInstanceManager()->getInstance(BlockHelpers::class);
+        return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
     public function setCacheControlManager(CacheControlManagerInterface $cacheControlManager): void
     {
@@ -40,7 +40,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
     }
     protected function getCacheControlManager(): CacheControlManagerInterface
     {
-        return $this->cacheControlManager ??= $this->getInstanceManager()->getInstance(CacheControlManagerInterface::class);
+        return $this->cacheControlManager ??= $this->instanceManager->getInstance(CacheControlManagerInterface::class);
     }
 
     public function isServiceEnabled(): bool

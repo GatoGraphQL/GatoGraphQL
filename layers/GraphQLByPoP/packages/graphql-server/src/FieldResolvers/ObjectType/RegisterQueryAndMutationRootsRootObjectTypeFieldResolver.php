@@ -30,7 +30,7 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
     }
     protected function getQueryRootObjectTypeResolver(): QueryRootObjectTypeResolver
     {
-        return $this->queryRootObjectTypeResolver ??= $this->getInstanceManager()->getInstance(QueryRootObjectTypeResolver::class);
+        return $this->queryRootObjectTypeResolver ??= $this->instanceManager->getInstance(QueryRootObjectTypeResolver::class);
     }
     public function setMutationRootObjectTypeResolver(MutationRootObjectTypeResolver $mutationRootObjectTypeResolver): void
     {
@@ -38,7 +38,7 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
     }
     protected function getMutationRootObjectTypeResolver(): MutationRootObjectTypeResolver
     {
-        return $this->mutationRootObjectTypeResolver ??= $this->getInstanceManager()->getInstance(MutationRootObjectTypeResolver::class);
+        return $this->mutationRootObjectTypeResolver ??= $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

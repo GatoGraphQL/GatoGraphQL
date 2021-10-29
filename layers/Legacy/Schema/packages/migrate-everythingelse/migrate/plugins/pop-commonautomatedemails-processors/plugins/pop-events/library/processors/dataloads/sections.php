@@ -119,7 +119,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads extends PoP_Common
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_LIST:
-                return $this->getInstanceManager()->getInstance(EventObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(EventObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

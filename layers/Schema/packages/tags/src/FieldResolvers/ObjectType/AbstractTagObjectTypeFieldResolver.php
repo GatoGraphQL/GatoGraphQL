@@ -26,7 +26,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     }
     protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -34,7 +34,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
     {
@@ -42,7 +42,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     }
     protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
     {
-        return $this->queryableInterfaceTypeFieldResolver ??= $this->getInstanceManager()->getInstance(QueryableInterfaceTypeFieldResolver::class);
+        return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }
 
     public function getImplementedInterfaceTypeFieldResolvers(): array

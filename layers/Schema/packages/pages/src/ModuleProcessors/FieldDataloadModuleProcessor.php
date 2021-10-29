@@ -24,7 +24,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     }
     protected function getPageObjectTypeResolver(): PageObjectTypeResolver
     {
-        return $this->pageObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PageObjectTypeResolver::class);
+        return $this->pageObjectTypeResolver ??= $this->instanceManager->getInstance(PageObjectTypeResolver::class);
     }
 
     public function getModulesToProcess(): array

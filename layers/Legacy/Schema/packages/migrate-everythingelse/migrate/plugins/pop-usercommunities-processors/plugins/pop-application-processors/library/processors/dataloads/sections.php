@@ -231,7 +231,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
             case self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
-                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

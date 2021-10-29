@@ -27,7 +27,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     }
     protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
-        return $this->mediaObjectTypeResolver ??= $this->getInstanceManager()->getInstance(MediaObjectTypeResolver::class);
+        return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
     }
     public function setCustomPostMediaTypeMutationAPI(CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI): void
     {
@@ -35,7 +35,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     }
     protected function getCustomPostMediaTypeMutationAPI(): CustomPostMediaTypeMutationAPIInterface
     {
-        return $this->customPostMediaTypeMutationAPI ??= $this->getInstanceManager()->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
+        return $this->customPostMediaTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
     }
     public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -43,7 +43,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     }
     protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        return $this->idScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IDScalarTypeResolver::class);
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
     protected function init(): void

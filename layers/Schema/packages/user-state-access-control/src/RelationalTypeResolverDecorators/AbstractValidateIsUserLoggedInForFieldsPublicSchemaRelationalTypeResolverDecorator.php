@@ -21,7 +21,7 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
     }
     protected function getValidateIsUserLoggedInDirectiveResolver(): ValidateIsUserLoggedInDirectiveResolver
     {
-        return $this->validateIsUserLoggedInDirectiveResolver ??= $this->getInstanceManager()->getInstance(ValidateIsUserLoggedInDirectiveResolver::class);
+        return $this->validateIsUserLoggedInDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserLoggedInDirectiveResolver::class);
     }
 
     /**

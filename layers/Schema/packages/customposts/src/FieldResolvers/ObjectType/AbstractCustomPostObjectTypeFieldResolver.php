@@ -26,7 +26,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     }
     protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
-        return $this->customPostTypeAPI ??= $this->getInstanceManager()->getInstance(CustomPostTypeAPIInterface::class);
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
     public function setDateFormatter(DateFormatterInterface $dateFormatter): void
     {
@@ -34,7 +34,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     }
     protected function getDateFormatter(): DateFormatterInterface
     {
-        return $this->dateFormatter ??= $this->getInstanceManager()->getInstance(DateFormatterInterface::class);
+        return $this->dateFormatter ??= $this->instanceManager->getInstance(DateFormatterInterface::class);
     }
     public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
     {
@@ -42,7 +42,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     }
     protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
     {
-        return $this->queryableInterfaceTypeFieldResolver ??= $this->getInstanceManager()->getInstance(QueryableInterfaceTypeFieldResolver::class);
+        return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }
     public function setIsCustomPostInterfaceTypeFieldResolver(IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver): void
     {
@@ -50,7 +50,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     }
     protected function getIsCustomPostInterfaceTypeFieldResolver(): IsCustomPostInterfaceTypeFieldResolver
     {
-        return $this->isCustomPostInterfaceTypeFieldResolver ??= $this->getInstanceManager()->getInstance(IsCustomPostInterfaceTypeFieldResolver::class);
+        return $this->isCustomPostInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(IsCustomPostInterfaceTypeFieldResolver::class);
     }
 
     public function getFieldNamesToResolve(): array

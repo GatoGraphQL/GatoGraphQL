@@ -26,7 +26,7 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaRelationalTypeR
     }
     protected function getAccessControlManager(): AccessControlManagerInterface
     {
-        return $this->accessControlManager ??= $this->getInstanceManager()->getInstance(AccessControlManagerInterface::class);
+        return $this->accessControlManager ??= $this->instanceManager->getInstance(AccessControlManagerInterface::class);
     }
     public function setValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver(ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver $validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver): void
     {
@@ -34,7 +34,7 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaRelationalTypeR
     }
     protected function getValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver(): ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver
     {
-        return $this->validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver ??= $this->getInstanceManager()->getInstance(ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver::class);
+        return $this->validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver ??= $this->instanceManager->getInstance(ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver::class);
     }
 
     protected function getConfigurationEntries(): array

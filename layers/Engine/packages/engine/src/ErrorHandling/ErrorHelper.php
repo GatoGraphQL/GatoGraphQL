@@ -19,7 +19,7 @@ class ErrorHelper implements ErrorHelperInterface
     }
     protected function getErrorManager(): ErrorManagerInterface
     {
-        return $this->errorManager ??= $this->getInstanceManager()->getInstance(ErrorManagerInterface::class);
+        return $this->errorManager ??= $this->instanceManager->getInstance(ErrorManagerInterface::class);
     }
 
     public function returnResultOrConvertError(mixed $result): mixed

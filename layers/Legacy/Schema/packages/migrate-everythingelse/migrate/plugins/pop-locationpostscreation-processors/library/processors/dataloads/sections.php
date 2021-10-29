@@ -78,7 +78,7 @@ class GD_Custom_EM_Module_Processor_MySectionDataloads extends PoP_Module_Proces
             case self::MODULE_DATALOAD_MYLOCATIONPOSTS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYLOCATIONPOSTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYLOCATIONPOSTS_SCROLL_FULLVIEWPREVIEW:
-                return $this->getInstanceManager()->getInstance(LocationPostObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(LocationPostObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

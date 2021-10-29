@@ -34,7 +34,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        return $this->idScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IDScalarTypeResolver::class);
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -42,7 +42,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -50,7 +50,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
     public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -58,7 +58,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

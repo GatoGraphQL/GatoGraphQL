@@ -31,7 +31,7 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
     }
     protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
     {
-        return $this->genericCustomPostObjectTypeResolver ??= $this->getInstanceManager()->getInstance(GenericCustomPostObjectTypeResolver::class);
+        return $this->genericCustomPostObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
     }
     public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
     {
@@ -39,7 +39,7 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
     }
     protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
     {
-        return $this->listQueryInputOutputHandler ??= $this->getInstanceManager()->getInstance(ListQueryInputOutputHandler::class);
+        return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
     public function getModulesToProcess(): array

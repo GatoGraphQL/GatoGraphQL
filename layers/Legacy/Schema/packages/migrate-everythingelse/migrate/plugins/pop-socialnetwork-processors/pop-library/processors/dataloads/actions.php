@@ -257,7 +257,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_FOLLOWUSER:
             case self::MODULE_DATALOADACTION_UNFOLLOWUSER:
-                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
 
             case self::MODULE_DATALOADACTION_RECOMMENDPOST:
             case self::MODULE_DATALOADACTION_UNRECOMMENDPOST:
@@ -269,7 +269,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
 
             case self::MODULE_DATALOADACTION_SUBSCRIBETOTAG:
             case self::MODULE_DATALOADACTION_UNSUBSCRIBEFROMTAG:
-                return $this->getInstanceManager()->getInstance(PostTagObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

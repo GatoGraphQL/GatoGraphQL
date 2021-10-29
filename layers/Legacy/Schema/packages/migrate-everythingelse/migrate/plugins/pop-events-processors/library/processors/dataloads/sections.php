@@ -563,7 +563,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_AUTHOREVENTSCALENDAR_CALENDARMAP:
             case self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDAR:
             case self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP:
-                return $this->getInstanceManager()->getInstance(GD_DataLoad_QueryInputOutputHandler_Calendar::class);
+                return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_Calendar::class);
         }
 
         return parent::getQueryInputOutputHandler($module);
@@ -649,7 +649,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_LIST:
-                return $this->getInstanceManager()->getInstance(EventObjectTypeResolver::class);
+                return $this->instanceManager->getInstance(EventObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

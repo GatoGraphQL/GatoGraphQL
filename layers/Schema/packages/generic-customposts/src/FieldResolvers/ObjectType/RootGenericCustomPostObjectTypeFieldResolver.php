@@ -41,7 +41,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     }
     protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
     public function setGenericCustomPostObjectTypeResolver(GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver): void
     {
@@ -49,7 +49,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     }
     protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
     {
-        return $this->genericCustomPostObjectTypeResolver ??= $this->getInstanceManager()->getInstance(GenericCustomPostObjectTypeResolver::class);
+        return $this->genericCustomPostObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
     }
     public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -57,7 +57,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     }
     protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
-        return $this->customPostTypeAPI ??= $this->getInstanceManager()->getInstance(CustomPostTypeAPIInterface::class);
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

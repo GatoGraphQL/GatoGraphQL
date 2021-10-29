@@ -33,7 +33,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     }
     protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
     {
-        return $this->customPostStatusEnumTypeResolver ??= $this->getInstanceManager()->getInstance(CustomPostStatusEnumTypeResolver::class);
+        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
     }
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -41,7 +41,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getModulesToProcess(): array

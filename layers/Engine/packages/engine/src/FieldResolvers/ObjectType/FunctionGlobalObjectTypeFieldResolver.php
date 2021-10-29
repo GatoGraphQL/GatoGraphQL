@@ -27,7 +27,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     }
     protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
     {
-        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->getInstanceManager()->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
     }
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -35,7 +35,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {
@@ -43,7 +43,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     }
     protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
-        return $this->jsonObjectScalarTypeResolver ??= $this->getInstanceManager()->getInstance(JSONObjectScalarTypeResolver::class);
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
 
     public function getFieldNamesToResolve(): array
