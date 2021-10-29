@@ -18,6 +18,7 @@ class AccessControlBlock extends AbstractControlBlock
     use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_SCHEMA_MODE = 'schemaMode';
+
     protected AccessControlBlockCategory $accessControlBlockCategory;
 
     #[Required]
