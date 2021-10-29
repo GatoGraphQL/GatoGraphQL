@@ -28,6 +28,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
+use PoP\Engine\Services\WithHooksAPIServiceTrait;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\Hooks\HooksAPIInterface;
@@ -42,6 +43,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     use FieldOrDirectiveResolverTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
     use BasicServiceTrait;
+    use WithHooksAPIServiceTrait;
 
     const MESSAGE_EXPRESSIONS = 'expressions';
 
@@ -59,7 +61,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /** @var array<string, array<string, mixed>> */
     protected array $schemaDirectiveArgsCache = [];
 
-    private ?HooksAPIInterface $hooksAPI = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?SemverHelperServiceInterface $semverHelperService = null;
@@ -105,14 +106,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $this->directive = $directive;
     }
 
-    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
     public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
@@ -148,13 +141,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     //#[Required]
     final public function autowireAbstractDirectiveResolver(
-        HooksAPIInterface $hooksAPI,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         SemverHelperServiceInterface $semverHelperService,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
-        $this->hooksAPI = $hooksAPI;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->semverHelperService = $semverHelperService;

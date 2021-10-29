@@ -9,28 +9,14 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\Definitions\Configuration\Request;
+use PoP\Engine\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class RequestHelperService implements RequestHelperServiceInterface
 {
-    private ?HooksAPIInterface $hooksAPI = null;
-
-    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
-
-    //#[Required]
-    final public function autowireRequestHelperService(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-
+    use WithHooksAPIServiceTrait;
+    
     public function getCurrentURL(): string
     {
         // Strip the Target and Output off it, users don't need to see those

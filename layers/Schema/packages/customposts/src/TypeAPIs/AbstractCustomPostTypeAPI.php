@@ -5,22 +5,16 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeAPIs;
 
 use PoP\Engine\CMS\CMSHelperServiceInterface;
+use PoP\Engine\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
 {
-    private ?HooksAPIInterface $hooksAPI = null;
+    use WithHooksAPIServiceTrait;
+
     private ?CMSHelperServiceInterface $cmsHelperService = null;
 
-    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
     public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
     {
         $this->cmsHelperService = $cmsHelperService;
@@ -31,9 +25,8 @@ abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
     }
 
     //#[Required]
-    final public function autowireAbstractCustomPostTypeAPI(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService): void
+    final public function autowireAbstractCustomPostTypeAPI(CMSHelperServiceInterface $cmsHelperService): void
     {
-        $this->hooksAPI = $hooksAPI;
         $this->cmsHelperService = $cmsHelperService;
     }
 

@@ -24,6 +24,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Definitions\Configuration\Request;
 use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Engine\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -33,6 +34,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 {
     use ModulePathProcessorTrait;
     use BasicServiceTrait;
+    use WithHooksAPIServiceTrait;
 
     public const HOOK_INIT_MODEL_PROPS = __CLASS__ . ':initModelProps';
     public const HOOK_INIT_REQUEST_PROPS = __CLASS__ . ':initRequestProps';
@@ -42,7 +44,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     protected const MODULECOMPONENT_CONDITIONALONDATAFIELDSUBMODULES = 'conditional-on-data-field-submodules';
     protected const MODULECOMPONENT_CONDITIONALONDATAFIELDDOMAINSWITCHINGSUBMODULES = 'conditional-on-data-field-domain-switching-submodules';
 
-    private ?HooksAPIInterface $hooksAPI = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ModulePathHelpersInterface $modulePathHelpers = null;
     private ?ModuleFilterManagerInterface $moduleFilterManager = null;
@@ -53,14 +54,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?ModulePaths $modulePaths = null;
 
-    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
     public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
@@ -135,9 +128,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     }
 
     //#[Required]
-    final public function autowireAbstractModuleProcessor(HooksAPIInterface $hooksAPI, FieldQueryInterpreterInterface $fieldQueryInterpreter, ModulePathHelpersInterface $modulePathHelpers, ModuleFilterManagerInterface $moduleFilterManager, ModuleProcessorManagerInterface $moduleProcessorManager, CMSServiceInterface $cmsService, NameResolverInterface $nameResolver, DataloadHelperServiceInterface $dataloadHelperService, RequestHelperServiceInterface $requestHelperService, ModulePaths $modulePaths): void
+    final public function autowireAbstractModuleProcessor(FieldQueryInterpreterInterface $fieldQueryInterpreter, ModulePathHelpersInterface $modulePathHelpers, ModuleFilterManagerInterface $moduleFilterManager, ModuleProcessorManagerInterface $moduleProcessorManager, CMSServiceInterface $cmsService, NameResolverInterface $nameResolver, DataloadHelperServiceInterface $dataloadHelperService, RequestHelperServiceInterface $requestHelperService, ModulePaths $modulePaths): void
     {
-        $this->hooksAPI = $hooksAPI;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
         $this->modulePathHelpers = $modulePathHelpers;
         $this->moduleFilterManager = $moduleFilterManager;

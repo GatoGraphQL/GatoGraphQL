@@ -9,24 +9,17 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderInterface;
+use PoP\Engine\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait QueryDataModuleProcessorTrait
 {
     use FilterDataModuleProcessorTrait;
+    use WithHooksAPIServiceTrait;
 
-    private ?HooksAPIInterface $hooksAPI = null;
     private ?ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler = null;
 
-    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
     public function setActionExecutionQueryInputOutputHandler(ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler): void
     {
         $this->actionExecutionQueryInputOutputHandler = $actionExecutionQueryInputOutputHandler;
@@ -38,10 +31,8 @@ trait QueryDataModuleProcessorTrait
 
     //#[Required]
     public function autowireQueryDataModuleProcessorTrait(
-        HooksAPIInterface $hooksAPI,
         ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler,
     ): void {
-        $this->hooksAPI = $hooksAPI;
         $this->actionExecutionQueryInputOutputHandler = $actionExecutionQueryInputOutputHandler;
     }
 

@@ -8,6 +8,7 @@ use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Definitions\DefinitionManagerInterface;
+use PoP\Engine\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -15,23 +16,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 class ModelInstance implements ModelInstanceInterface
 {
     use BasicServiceTrait;
+    use WithHooksAPIServiceTrait;
     
     public const HOOK_COMPONENTS_RESULT = __CLASS__ . ':components:result';
     public const HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE = __CLASS__ . ':componentsFromVars:postOrGetChange';
     public const HOOK_COMPONENTSFROMVARS_RESULT = __CLASS__ . ':componentsFromVars:result';
 
-    private ?HooksAPIInterface $hooksAPI = null;
     private ?ApplicationInfoInterface $applicationInfo = null;
     private ?DefinitionManagerInterface $definitionManager = null;
 
-    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
     public function setApplicationInfo(ApplicationInfoInterface $applicationInfo): void
     {
         $this->applicationInfo = $applicationInfo;
@@ -50,9 +43,8 @@ class ModelInstance implements ModelInstanceInterface
     }
 
     //#[Required]
-    final public function autowireModelInstance(HooksAPIInterface $hooksAPI, ApplicationInfoInterface $applicationInfo, DefinitionManagerInterface $definitionManager): void
+    final public function autowireModelInstance(ApplicationInfoInterface $applicationInfo, DefinitionManagerInterface $definitionManager): void
     {
-        $this->hooksAPI = $hooksAPI;
         $this->applicationInfo = $applicationInfo;
         $this->definitionManager = $definitionManager;
     }

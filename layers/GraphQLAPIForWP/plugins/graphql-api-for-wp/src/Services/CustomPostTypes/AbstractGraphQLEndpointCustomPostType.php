@@ -9,23 +9,17 @@ use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use PoP\Engine\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 
 abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostType implements GraphQLEndpointCustomPostTypeInterface
 {
-    private ?HooksAPIInterface $hooksAPI = null;
+    use WithHooksAPIServiceTrait;
+    
     private ?BlockHelpers $blockHelpers = null;
 
-    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
     public function setBlockHelpers(BlockHelpers $blockHelpers): void
     {
         $this->blockHelpers = $blockHelpers;
@@ -37,10 +31,8 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
 
     //#[Required]
     final public function autowireAbstractGraphQLEndpointCustomPostType(
-        HooksAPIInterface $hooksAPI,
         BlockHelpers $blockHelpers,
     ): void {
-        $this->hooksAPI = $hooksAPI;
         $this->blockHelpers = $blockHelpers;
     }
 

@@ -5,29 +5,18 @@ declare(strict_types=1);
 namespace PoP\Engine\Cache;
 
 use PoP\ComponentModel\Cache\Cache as UpstreamCache;
+use PoP\Engine\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use Psr\Cache\CacheItemInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class Cache extends UpstreamCache
 {
-    private ?HooksAPIInterface $hooksAPI = null;
-
-    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
+    use WithHooksAPIServiceTrait;
+    
+    #[Required]
+    final public function autowireEngineCache(): void
     {
-        $this->hooksAPI = $hooksAPI;
-    }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
-
-    //#[Required]
-    final public function autowireEngineCache(
-        HooksAPIInterface $hooksAPI,
-    ): void {
-        $this->hooksAPI = $hooksAPI;
-
         // When a plugin is activated/deactivated, ANY plugin, delete the corresponding cached files
         // This is particularly important for the MEMORY, since we can't set by constants to not use it
         $this->getHooksAPI()->addAction(

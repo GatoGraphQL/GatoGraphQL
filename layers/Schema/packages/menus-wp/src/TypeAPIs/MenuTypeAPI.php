@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\MenusWP\TypeAPIs;
 
+use PoP\Engine\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Menus\ObjectModels\MenuItem;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
@@ -15,24 +16,9 @@ use WP_Term;
 
 class MenuTypeAPI implements MenuTypeAPIInterface
 {
+    use WithHooksAPIServiceTrait;
+    
     public const HOOK_QUERY = __CLASS__ . ':query';
-
-    private ?HooksAPIInterface $hooksAPI = null;
-
-    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
-
-    //#[Required]
-    final public function autowireMenuTypeAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
 
     public function getMenu(string | int $menuID): ?object
     {

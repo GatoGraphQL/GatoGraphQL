@@ -10,6 +10,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\Engine\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -19,6 +20,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInterface
 {
     use BasicServiceTrait;
+    use WithHooksAPIServiceTrait;
     
     /**
      * Keep a map of all namespaced type names to their resolver classes
@@ -36,19 +38,10 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      */
     protected ?array $directiveNameClasses = null;
 
-    private ?HooksAPIInterface $hooksAPI = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?TypeRegistryInterface $typeRegistry = null;
     private ?DirectiveRegistryInterface $directiveRegistry = null;
 
-    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
         $this->moduleRegistry = $moduleRegistry;
@@ -75,9 +68,8 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     }
 
     //#[Required]
-    final public function autowireAbstractGraphQLQueryConfigurator(HooksAPIInterface $hooksAPI, ModuleRegistryInterface $moduleRegistry, TypeRegistryInterface $typeRegistry, DirectiveRegistryInterface $directiveRegistry): void
+    final public function autowireAbstractGraphQLQueryConfigurator(ModuleRegistryInterface $moduleRegistry, TypeRegistryInterface $typeRegistry, DirectiveRegistryInterface $directiveRegistry): void
     {
-        $this->hooksAPI = $hooksAPI;
         $this->moduleRegistry = $moduleRegistry;
         $this->typeRegistry = $typeRegistry;
         $this->directiveRegistry = $directiveRegistry;

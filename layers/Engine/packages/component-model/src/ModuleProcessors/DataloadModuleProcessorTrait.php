@@ -4,30 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\Engine\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait DataloadModuleProcessorTrait
 {
     use FormattableModuleTrait;
-
-    private ?HooksAPIInterface $hooksAPI = null;
-
-    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
-
-    //#[Required]
-    public function autowireDataloadModuleProcessorTrait(
-        HooksAPIInterface $hooksAPI,
-    ): void {
-        $this->hooksAPI = $hooksAPI;
-    }
+    use WithHooksAPIServiceTrait;
 
     public function getSubmodules(array $module): array
     {

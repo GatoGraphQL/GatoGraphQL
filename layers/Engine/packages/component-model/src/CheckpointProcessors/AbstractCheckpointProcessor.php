@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\CheckpointProcessors;
 
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\Engine\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -13,24 +14,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractCheckpointProcessor implements CheckpointProcessorInterface
 {
     use BasicServiceTrait;
+    use WithHooksAPIServiceTrait;
     
-    private ?HooksAPIInterface $hooksAPI = null;
-
-    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
-
-    //#[Required]
-    final public function autowireAbstractCheckpointProcessor(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-
     /**
      * By default there's no problem
      */

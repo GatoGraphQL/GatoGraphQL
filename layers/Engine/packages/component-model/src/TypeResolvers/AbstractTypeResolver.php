@@ -10,6 +10,7 @@ use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -17,25 +18,17 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractTypeResolver implements TypeResolverInterface
 {
     use BasicServiceTrait;
+    use WithHooksAPIServiceTrait;
     
     /**
      * @var array<string, array>
      */
     protected ?array $schemaDefinition = null;
 
-    private ?HooksAPIInterface $hooksAPI = null;
     private ?SchemaNamespacingServiceInterface $schemaNamespacingService = null;
     private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
-    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
     public function setSchemaNamespacingService(SchemaNamespacingServiceInterface $schemaNamespacingService): void
     {
         $this->schemaNamespacingService = $schemaNamespacingService;
@@ -62,9 +55,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     }
 
     //#[Required]
-    final public function autowireAbstractTypeResolver(HooksAPIInterface $hooksAPI, SchemaNamespacingServiceInterface $schemaNamespacingService, SchemaDefinitionServiceInterface $schemaDefinitionService, AttachableExtensionManagerInterface $attachableExtensionManager): void
+    final public function autowireAbstractTypeResolver(SchemaNamespacingServiceInterface $schemaNamespacingService, SchemaDefinitionServiceInterface $schemaDefinitionService, AttachableExtensionManagerInterface $attachableExtensionManager): void
     {
-        $this->hooksAPI = $hooksAPI;
         $this->schemaNamespacingService = $schemaNamespacingService;
         $this->schemaDefinitionService = $schemaDefinitionService;
         $this->attachableExtensionManager = $attachableExtensionManager;

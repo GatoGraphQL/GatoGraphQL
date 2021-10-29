@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\TagsWP\TypeAPIs;
 
 use PoP\Engine\CMS\CMSHelperServiceInterface;
+use PoP\Engine\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -18,19 +19,12 @@ use WP_Taxonomy;
  */
 abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPIInterface
 {
+    use WithHooksAPIServiceTrait;
+    
     public const HOOK_QUERY = __CLASS__ . ':query';
 
-    private ?HooksAPIInterface $hooksAPI = null;
     private ?CMSHelperServiceInterface $cmsHelperService = null;
 
-    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
     public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
     {
         $this->cmsHelperService = $cmsHelperService;
@@ -41,9 +35,8 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     }
 
     //#[Required]
-    final public function autowireAbstractTagTypeAPI(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService): void
+    final public function autowireAbstractTagTypeAPI(CMSHelperServiceInterface $cmsHelperService): void
     {
-        $this->hooksAPI = $hooksAPI;
         $this->cmsHelperService = $cmsHelperService;
     }
 

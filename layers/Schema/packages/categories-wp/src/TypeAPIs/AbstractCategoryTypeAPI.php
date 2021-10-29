@@ -6,6 +6,7 @@ namespace PoPSchema\CategoriesWP\TypeAPIs;
 
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Engine\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -21,20 +22,13 @@ use WP_Term;
  */
 abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements CategoryTypeAPIInterface
 {
+    use WithHooksAPIServiceTrait;
+
     public const HOOK_QUERY = __CLASS__ . ':query';
 
-    private ?HooksAPIInterface $hooksAPI = null;
     private ?CMSHelperServiceInterface $cmsHelperService = null;
     private ?CMSServiceInterface $cmsService = null;
 
-    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
     public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
     {
         $this->cmsHelperService = $cmsHelperService;
@@ -53,9 +47,8 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     }
 
     //#[Required]
-    final public function autowireAbstractCategoryTypeAPI(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService, CMSServiceInterface $cmsService): void
+    final public function autowireAbstractCategoryTypeAPI(CMSHelperServiceInterface $cmsHelperService, CMSServiceInterface $cmsService): void
     {
-        $this->hooksAPI = $hooksAPI;
         $this->cmsHelperService = $cmsHelperService;
         $this->cmsService = $cmsService;
     }

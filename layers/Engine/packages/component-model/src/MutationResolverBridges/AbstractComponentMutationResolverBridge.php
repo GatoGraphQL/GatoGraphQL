@@ -12,6 +12,7 @@ use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\Engine\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -19,18 +20,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
     use BasicServiceTrait;
+    use WithHooksAPIServiceTrait;
     
-    private ?HooksAPIInterface $hooksAPI = null;
     private ?MutationResolutionManagerInterface $mutationResolutionManager = null;
 
-    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
     public function setMutationResolutionManager(MutationResolutionManagerInterface $mutationResolutionManager): void
     {
         $this->mutationResolutionManager = $mutationResolutionManager;
@@ -41,9 +34,8 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     }
 
     //#[Required]
-    final public function autowireAbstractComponentMutationResolverBridge(HooksAPIInterface $hooksAPI, MutationResolutionManagerInterface $mutationResolutionManager): void
+    final public function autowireAbstractComponentMutationResolverBridge(MutationResolutionManagerInterface $mutationResolutionManager): void
     {
-        $this->hooksAPI = $hooksAPI;
         $this->mutationResolutionManager = $mutationResolutionManager;
     }
 

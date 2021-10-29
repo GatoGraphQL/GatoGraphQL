@@ -44,6 +44,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Configuration\Request;
+use PoP\Engine\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Root\Helpers\Methods;
 use PoP\Translation\TranslationAPIInterface;
@@ -52,6 +53,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class Engine implements EngineInterface
 {
     use BasicServiceTrait;
+    use WithHooksAPIServiceTrait;
     
     public const CACHETYPE_IMMUTABLEDATASETSETTINGS = 'static-datasetsettings';
     public const CACHETYPE_STATICDATAPROPERTIES = 'static-data-properties';
@@ -114,7 +116,6 @@ class Engine implements EngineInterface
      */
     private ?PersistentCacheInterface $persistentCache = null;
 
-    private ?HooksAPIInterface $hooksAPI = null;
     private ?DataStructureManagerInterface $dataStructureManager = null;
     private ?ModelInstanceInterface $modelInstance = null;
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
@@ -128,14 +129,6 @@ class Engine implements EngineInterface
     private ?EntryModuleManagerInterface $entryModuleManager = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
 
-    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
-    }
     public function setDataStructureManager(DataStructureManagerInterface $dataStructureManager): void
     {
         $this->dataStructureManager = $dataStructureManager;
@@ -235,7 +228,6 @@ class Engine implements EngineInterface
 
     //#[Required]
     final public function autowireEngine(
-        HooksAPIInterface $hooksAPI,
         DataStructureManagerInterface $dataStructureManager,
         ModelInstanceInterface $modelInstance,
         FeedbackMessageStoreInterface $feedbackMessageStore,
@@ -249,7 +241,6 @@ class Engine implements EngineInterface
         EntryModuleManagerInterface $entryModuleManager,
         RequestHelperServiceInterface $requestHelperService,
     ): void {
-        $this->hooksAPI = $hooksAPI;
         $this->dataStructureManager = $dataStructureManager;
         $this->modelInstance = $modelInstance;
         $this->feedbackMessageStore = $feedbackMessageStore;
