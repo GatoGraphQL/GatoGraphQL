@@ -27,7 +27,16 @@ class ModulePaths extends AbstractModuleFilter
 
     protected ?ModulePathManagerInterface $modulePathManager = null;
 
-    #[Required]
+    public function setModulePathManager(ModulePathManagerInterface $modulePathManager): void
+    {
+        $this->modulePathManager = $modulePathManager;
+    }
+    protected function getModulePathManager(): ModulePathManagerInterface
+    {
+        return $this->modulePathManager ??= $this->getInstanceManager()->getInstance(ModulePathManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireModulePaths(ModulePathManagerInterface $modulePathManager): void
     {
         $this->modulePathManager = $modulePathManager;

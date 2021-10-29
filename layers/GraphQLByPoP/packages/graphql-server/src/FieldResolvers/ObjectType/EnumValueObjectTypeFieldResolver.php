@@ -19,7 +19,24 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireEnumValueObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,

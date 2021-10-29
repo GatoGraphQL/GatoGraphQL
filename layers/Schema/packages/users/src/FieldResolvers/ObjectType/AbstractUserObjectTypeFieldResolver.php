@@ -28,7 +28,32 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
     protected ?UserObjectTypeResolver $userObjectTypeResolver = null;
 
-    #[Required]
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
+        $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->getInstanceManager()->getInstance(UserTypeAPIInterface::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
+    {
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userObjectTypeResolver ??= $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractUserObjectTypeFieldResolver(
         UserTypeAPIInterface $userTypeAPI,
         IntScalarTypeResolver $intScalarTypeResolver,

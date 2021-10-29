@@ -18,7 +18,24 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     protected ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
 
-    #[Required]
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
+    {
+        $this->userRoleTypeAPI = $userRoleTypeAPI;
+    }
+    protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
+    {
+        return $this->userRoleTypeAPI ??= $this->getInstanceManager()->getInstance(UserRoleTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireUserObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         UserRoleTypeAPIInterface $userRoleTypeAPI,

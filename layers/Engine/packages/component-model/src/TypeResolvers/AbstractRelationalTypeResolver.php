@@ -63,7 +63,48 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected ?DataloadingEngineInterface $dataloadingEngine = null;
     protected ?DirectivePipelineServiceInterface $directivePipelineService = null;
 
-    #[Required]
+    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+    }
+    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    {
+        return $this->feedbackMessageStore ??= $this->getInstanceManager()->getInstance(FeedbackMessageStoreInterface::class);
+    }
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
+    }
+    public function setErrorProvider(ErrorProviderInterface $errorProvider): void
+    {
+        $this->errorProvider = $errorProvider;
+    }
+    protected function getErrorProvider(): ErrorProviderInterface
+    {
+        return $this->errorProvider ??= $this->getInstanceManager()->getInstance(ErrorProviderInterface::class);
+    }
+    public function setDataloadingEngine(DataloadingEngineInterface $dataloadingEngine): void
+    {
+        $this->dataloadingEngine = $dataloadingEngine;
+    }
+    protected function getDataloadingEngine(): DataloadingEngineInterface
+    {
+        return $this->dataloadingEngine ??= $this->getInstanceManager()->getInstance(DataloadingEngineInterface::class);
+    }
+    public function setDirectivePipelineService(DirectivePipelineServiceInterface $directivePipelineService): void
+    {
+        $this->directivePipelineService = $directivePipelineService;
+    }
+    protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
+    {
+        return $this->directivePipelineService ??= $this->getInstanceManager()->getInstance(DirectivePipelineServiceInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractRelationalTypeResolver(
         FeedbackMessageStoreInterface $feedbackMessageStore,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,

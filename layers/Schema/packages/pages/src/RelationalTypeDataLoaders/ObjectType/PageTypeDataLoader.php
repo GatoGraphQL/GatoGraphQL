@@ -12,7 +12,16 @@ class PageTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
     protected ?PageTypeAPIInterface $pageTypeAPI = null;
 
-    #[Required]
+    public function setPageTypeAPI(PageTypeAPIInterface $pageTypeAPI): void
+    {
+        $this->pageTypeAPI = $pageTypeAPI;
+    }
+    protected function getPageTypeAPI(): PageTypeAPIInterface
+    {
+        return $this->pageTypeAPI ??= $this->getInstanceManager()->getInstance(PageTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowirePageTypeDataLoader(
         PageTypeAPIInterface $pageTypeAPI,
     ): void {

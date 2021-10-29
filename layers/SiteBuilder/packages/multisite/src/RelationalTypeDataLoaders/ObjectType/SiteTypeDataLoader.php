@@ -13,7 +13,16 @@ class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     protected ?Site $site = null;
 
-    #[Required]
+    public function setSite(Site $site): void
+    {
+        $this->site = $site;
+    }
+    protected function getSite(): Site
+    {
+        return $this->site ??= $this->getInstanceManager()->getInstance(Site::class);
+    }
+
+    //#[Required]
     final public function autowireSiteTypeDataLoader(
         Site $site,
     ): void {

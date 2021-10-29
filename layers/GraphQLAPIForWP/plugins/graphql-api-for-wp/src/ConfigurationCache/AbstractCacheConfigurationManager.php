@@ -21,7 +21,24 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
     protected ?UserSettingsManagerInterface $userSettingsManager = null;
     protected ?EndpointHelpers $endpointHelpers = null;
 
-    #[Required]
+    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
+    {
+        $this->userSettingsManager = $userSettingsManager;
+    }
+    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    {
+        return $this->userSettingsManager ??= $this->getInstanceManager()->getInstance(UserSettingsManagerInterface::class);
+    }
+    public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
+    {
+        $this->endpointHelpers = $endpointHelpers;
+    }
+    protected function getEndpointHelpers(): EndpointHelpers
+    {
+        return $this->endpointHelpers ??= $this->getInstanceManager()->getInstance(EndpointHelpers::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCacheConfigurationManager(
         EndpointHelpers $endpointHelpers,
     ): void {

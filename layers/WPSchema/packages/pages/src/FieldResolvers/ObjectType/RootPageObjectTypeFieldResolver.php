@@ -19,7 +19,24 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     protected ?PageObjectTypeResolver $pageObjectTypeResolver = null;
     protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setPageObjectTypeResolver(PageObjectTypeResolver $pageObjectTypeResolver): void
+    {
+        $this->pageObjectTypeResolver = $pageObjectTypeResolver;
+    }
+    protected function getPageObjectTypeResolver(): PageObjectTypeResolver
+    {
+        return $this->pageObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PageObjectTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireRootPageObjectTypeFieldResolver(
         PageObjectTypeResolver $pageObjectTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,

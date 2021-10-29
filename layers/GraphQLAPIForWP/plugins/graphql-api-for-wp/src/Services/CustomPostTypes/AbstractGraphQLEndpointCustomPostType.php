@@ -18,7 +18,24 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     protected ?HooksAPIInterface $hooksAPI = null;
     protected ?BlockHelpers $blockHelpers = null;
 
-    #[Required]
+    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
+    {
+        $this->hooksAPI = $hooksAPI;
+    }
+    protected function getHooksAPI(): HooksAPIInterface
+    {
+        return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
+    }
+    public function setBlockHelpers(BlockHelpers $blockHelpers): void
+    {
+        $this->blockHelpers = $blockHelpers;
+    }
+    protected function getBlockHelpers(): BlockHelpers
+    {
+        return $this->blockHelpers ??= $this->getInstanceManager()->getInstance(BlockHelpers::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractGraphQLEndpointCustomPostType(
         HooksAPIInterface $hooksAPI,
         BlockHelpers $blockHelpers,

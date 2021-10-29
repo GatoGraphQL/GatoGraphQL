@@ -18,7 +18,32 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
     protected ?BlockHelpers $blockHelpers = null;
     protected ?CacheControlManagerInterface $cacheControlManager = null;
 
-    #[Required]
+    public function setCacheControlBlock(CacheControlBlock $cacheControlBlock): void
+    {
+        $this->cacheControlBlock = $cacheControlBlock;
+    }
+    protected function getCacheControlBlock(): CacheControlBlock
+    {
+        return $this->cacheControlBlock ??= $this->getInstanceManager()->getInstance(CacheControlBlock::class);
+    }
+    public function setBlockHelpers(BlockHelpers $blockHelpers): void
+    {
+        $this->blockHelpers = $blockHelpers;
+    }
+    protected function getBlockHelpers(): BlockHelpers
+    {
+        return $this->blockHelpers ??= $this->getInstanceManager()->getInstance(BlockHelpers::class);
+    }
+    public function setCacheControlManager(CacheControlManagerInterface $cacheControlManager): void
+    {
+        $this->cacheControlManager = $cacheControlManager;
+    }
+    protected function getCacheControlManager(): CacheControlManagerInterface
+    {
+        return $this->cacheControlManager ??= $this->getInstanceManager()->getInstance(CacheControlManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireCacheControlGraphQLQueryConfigurator(
         CacheControlBlock $cacheControlBlock,
         BlockHelpers $blockHelpers,

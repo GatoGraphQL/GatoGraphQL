@@ -14,7 +14,16 @@ class UpdateMyPreferencesMutationResolverBridge extends AbstractComponentMutatio
 {
     protected ?UpdateMyPreferencesMutationResolver $updateMyPreferencesMutationResolver = null;
     
-    #[Required]
+    public function setUpdateMyPreferencesMutationResolver(UpdateMyPreferencesMutationResolver $updateMyPreferencesMutationResolver): void
+    {
+        $this->updateMyPreferencesMutationResolver = $updateMyPreferencesMutationResolver;
+    }
+    protected function getUpdateMyPreferencesMutationResolver(): UpdateMyPreferencesMutationResolver
+    {
+        return $this->updateMyPreferencesMutationResolver ??= $this->getInstanceManager()->getInstance(UpdateMyPreferencesMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireUpdateMyPreferencesMutationResolverBridge(
         UpdateMyPreferencesMutationResolver $updateMyPreferencesMutationResolver,
     ): void {

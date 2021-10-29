@@ -23,7 +23,40 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver = null;
     protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
-    #[Required]
+    public function setUserAvatarTypeAPI(UserAvatarTypeAPIInterface $userAvatarTypeAPI): void
+    {
+        $this->userAvatarTypeAPI = $userAvatarTypeAPI;
+    }
+    protected function getUserAvatarTypeAPI(): UserAvatarTypeAPIInterface
+    {
+        return $this->userAvatarTypeAPI ??= $this->getInstanceManager()->getInstance(UserAvatarTypeAPIInterface::class);
+    }
+    public function setUserAvatarRuntimeRegistry(UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry): void
+    {
+        $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;
+    }
+    protected function getUserAvatarRuntimeRegistry(): UserAvatarRuntimeRegistryInterface
+    {
+        return $this->userAvatarRuntimeRegistry ??= $this->getInstanceManager()->getInstance(UserAvatarRuntimeRegistryInterface::class);
+    }
+    public function setUserAvatarObjectTypeResolver(UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver): void
+    {
+        $this->userAvatarObjectTypeResolver = $userAvatarObjectTypeResolver;
+    }
+    protected function getUserAvatarObjectTypeResolver(): UserAvatarObjectTypeResolver
+    {
+        return $this->userAvatarObjectTypeResolver ??= $this->getInstanceManager()->getInstance(UserAvatarObjectTypeResolver::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireUserObjectTypeFieldResolver(
         UserAvatarTypeAPIInterface $userAvatarTypeAPI,
         UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,

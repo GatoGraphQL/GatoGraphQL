@@ -14,7 +14,24 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
     protected ?BlockRenderingHelpers $blockRenderingHelpers = null;
     protected ?CPTUtils $cptUtils = null;
 
-    #[Required]
+    public function setBlockRenderingHelpers(BlockRenderingHelpers $blockRenderingHelpers): void
+    {
+        $this->blockRenderingHelpers = $blockRenderingHelpers;
+    }
+    protected function getBlockRenderingHelpers(): BlockRenderingHelpers
+    {
+        return $this->blockRenderingHelpers ??= $this->getInstanceManager()->getInstance(BlockRenderingHelpers::class);
+    }
+    public function setCPTUtils(CPTUtils $cptUtils): void
+    {
+        $this->cptUtils = $cptUtils;
+    }
+    protected function getCPTUtils(): CPTUtils
+    {
+        return $this->cptUtils ??= $this->getInstanceManager()->getInstance(CPTUtils::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractSchemaConfigCustomPostListBlock(
         BlockRenderingHelpers $blockRenderingHelpers,
         CPTUtils $cptUtils,

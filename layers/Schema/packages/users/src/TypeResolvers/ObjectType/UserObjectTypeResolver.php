@@ -15,7 +15,24 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
     protected ?UserTypeAPIInterface $userTypeAPI = null;
     protected ?UserTypeDataLoader $userTypeDataLoader = null;
 
-    #[Required]
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
+        $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->getInstanceManager()->getInstance(UserTypeAPIInterface::class);
+    }
+    public function setUserTypeDataLoader(UserTypeDataLoader $userTypeDataLoader): void
+    {
+        $this->userTypeDataLoader = $userTypeDataLoader;
+    }
+    protected function getUserTypeDataLoader(): UserTypeDataLoader
+    {
+        return $this->userTypeDataLoader ??= $this->getInstanceManager()->getInstance(UserTypeDataLoader::class);
+    }
+
+    //#[Required]
     final public function autowireUserObjectTypeResolver(
         UserTypeAPIInterface $userTypeAPI,
         UserTypeDataLoader $userTypeDataLoader,

@@ -18,7 +18,16 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
 
     protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowirePoP_Module_Processor_TextFilterInputs(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {

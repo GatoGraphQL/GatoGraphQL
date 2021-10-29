@@ -15,7 +15,16 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
 
     protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
-    #[Required]
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowirePoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {

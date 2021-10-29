@@ -15,7 +15,24 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
     protected ?CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader = null;
     protected ?IsCustomPostInterfaceTypeResolver $isCustomPostInterfaceTypeResolver = null;
 
-    #[Required]
+    public function setCustomPostUnionTypeDataLoader(CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader): void
+    {
+        $this->customPostUnionTypeDataLoader = $customPostUnionTypeDataLoader;
+    }
+    protected function getCustomPostUnionTypeDataLoader(): CustomPostUnionTypeDataLoader
+    {
+        return $this->customPostUnionTypeDataLoader ??= $this->getInstanceManager()->getInstance(CustomPostUnionTypeDataLoader::class);
+    }
+    public function setIsCustomPostInterfaceTypeResolver(IsCustomPostInterfaceTypeResolver $isCustomPostInterfaceTypeResolver): void
+    {
+        $this->isCustomPostInterfaceTypeResolver = $isCustomPostInterfaceTypeResolver;
+    }
+    protected function getIsCustomPostInterfaceTypeResolver(): IsCustomPostInterfaceTypeResolver
+    {
+        return $this->isCustomPostInterfaceTypeResolver ??= $this->getInstanceManager()->getInstance(IsCustomPostInterfaceTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCustomPostUnionTypeResolver(
         IsCustomPostInterfaceTypeResolver $isCustomPostInterfaceTypeResolver,
         CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader,

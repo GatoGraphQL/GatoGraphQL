@@ -21,7 +21,32 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?DirectiveObjectTypeResolver $directiveObjectTypeResolver = null;
     protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
+    {
+        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
+    }
+    protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
+    {
+        return $this->typeObjectTypeResolver ??= $this->getInstanceManager()->getInstance(TypeObjectTypeResolver::class);
+    }
+    public function setDirectiveObjectTypeResolver(DirectiveObjectTypeResolver $directiveObjectTypeResolver): void
+    {
+        $this->directiveObjectTypeResolver = $directiveObjectTypeResolver;
+    }
+    protected function getDirectiveObjectTypeResolver(): DirectiveObjectTypeResolver
+    {
+        return $this->directiveObjectTypeResolver ??= $this->getInstanceManager()->getInstance(DirectiveObjectTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireSchemaObjectTypeFieldResolver(
         TypeObjectTypeResolver $typeObjectTypeResolver,
         DirectiveObjectTypeResolver $directiveObjectTypeResolver,

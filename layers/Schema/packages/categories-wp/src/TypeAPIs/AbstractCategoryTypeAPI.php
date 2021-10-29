@@ -27,7 +27,32 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     protected ?CMSHelperServiceInterface $cmsHelperService = null;
     protected ?CMSServiceInterface $cmsService = null;
 
-    #[Required]
+    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
+    {
+        $this->hooksAPI = $hooksAPI;
+    }
+    protected function getHooksAPI(): HooksAPIInterface
+    {
+        return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
+    }
+    public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
+    {
+        $this->cmsHelperService = $cmsHelperService;
+    }
+    protected function getCMSHelperService(): CMSHelperServiceInterface
+    {
+        return $this->cmsHelperService ??= $this->getInstanceManager()->getInstance(CMSHelperServiceInterface::class);
+    }
+    public function setCMSService(CMSServiceInterface $cmsService): void
+    {
+        $this->cmsService = $cmsService;
+    }
+    protected function getCMSService(): CMSServiceInterface
+    {
+        return $this->cmsService ??= $this->getInstanceManager()->getInstance(CMSServiceInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCategoryTypeAPI(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService, CMSServiceInterface $cmsService): void
     {
         $this->hooksAPI = $hooksAPI;

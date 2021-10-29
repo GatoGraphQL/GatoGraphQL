@@ -20,7 +20,24 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     protected ?PostObjectTypeResolver $postObjectTypeResolver = null;
     protected ?UpdatePostMutationResolver $updatePostMutationResolver = null;
 
-    #[Required]
+    public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
+    {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+    }
+    protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    {
+        return $this->postObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostObjectTypeResolver::class);
+    }
+    public function setUpdatePostMutationResolver(UpdatePostMutationResolver $updatePostMutationResolver): void
+    {
+        $this->updatePostMutationResolver = $updatePostMutationResolver;
+    }
+    protected function getUpdatePostMutationResolver(): UpdatePostMutationResolver
+    {
+        return $this->updatePostMutationResolver ??= $this->getInstanceManager()->getInstance(UpdatePostMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowirePostObjectTypeFieldResolver(
         PostObjectTypeResolver $postObjectTypeResolver,
         UpdatePostMutationResolver $updatePostMutationResolver,

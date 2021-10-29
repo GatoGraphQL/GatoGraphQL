@@ -13,7 +13,16 @@ class EntryModuleManager implements EntryModuleManagerInterface
 {
     protected ?RouteModuleProcessorManagerInterface $routeModuleProcessorManager = null;
 
-    #[Required]
+    public function setRouteModuleProcessorManager(RouteModuleProcessorManagerInterface $routeModuleProcessorManager): void
+    {
+        $this->routeModuleProcessorManager = $routeModuleProcessorManager;
+    }
+    protected function getRouteModuleProcessorManager(): RouteModuleProcessorManagerInterface
+    {
+        return $this->routeModuleProcessorManager ??= $this->getInstanceManager()->getInstance(RouteModuleProcessorManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireEntryModuleManager(RouteModuleProcessorManagerInterface $routeModuleProcessorManager): void
     {
         $this->routeModuleProcessorManager = $routeModuleProcessorManager;

@@ -25,7 +25,48 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?MenuTypeAPIInterface $menuTypeAPI = null;
     protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
-    #[Required]
+    public function setMenuItemRuntimeRegistry(MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry): void
+    {
+        $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
+    }
+    protected function getMenuItemRuntimeRegistry(): MenuItemRuntimeRegistryInterface
+    {
+        return $this->menuItemRuntimeRegistry ??= $this->getInstanceManager()->getInstance(MenuItemRuntimeRegistryInterface::class);
+    }
+    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        return $this->jsonObjectScalarTypeResolver ??= $this->getInstanceManager()->getInstance(JSONObjectScalarTypeResolver::class);
+    }
+    public function setMenuItemObjectTypeResolver(MenuItemObjectTypeResolver $menuItemObjectTypeResolver): void
+    {
+        $this->menuItemObjectTypeResolver = $menuItemObjectTypeResolver;
+    }
+    protected function getMenuItemObjectTypeResolver(): MenuItemObjectTypeResolver
+    {
+        return $this->menuItemObjectTypeResolver ??= $this->getInstanceManager()->getInstance(MenuItemObjectTypeResolver::class);
+    }
+    public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
+    {
+        $this->menuTypeAPI = $menuTypeAPI;
+    }
+    protected function getMenuTypeAPI(): MenuTypeAPIInterface
+    {
+        return $this->menuTypeAPI ??= $this->getInstanceManager()->getInstance(MenuTypeAPIInterface::class);
+    }
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireMenuObjectTypeFieldResolver(
         MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
         JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,

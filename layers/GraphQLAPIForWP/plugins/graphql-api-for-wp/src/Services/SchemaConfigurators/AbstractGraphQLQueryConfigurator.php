@@ -39,7 +39,48 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     protected ?TypeRegistryInterface $typeRegistry = null;
     protected ?DirectiveRegistryInterface $directiveRegistry = null;
 
-    #[Required]
+    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
+    {
+        $this->hooksAPI = $hooksAPI;
+    }
+    protected function getHooksAPI(): HooksAPIInterface
+    {
+        return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
+    }
+    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
+    {
+        $this->instanceManager = $instanceManager;
+    }
+    protected function getInstanceManager(): InstanceManagerInterface
+    {
+        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
+    }
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
+    {
+        $this->typeRegistry = $typeRegistry;
+    }
+    protected function getTypeRegistry(): TypeRegistryInterface
+    {
+        return $this->typeRegistry ??= $this->getInstanceManager()->getInstance(TypeRegistryInterface::class);
+    }
+    public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
+    {
+        $this->directiveRegistry = $directiveRegistry;
+    }
+    protected function getDirectiveRegistry(): DirectiveRegistryInterface
+    {
+        return $this->directiveRegistry ??= $this->getInstanceManager()->getInstance(DirectiveRegistryInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractGraphQLQueryConfigurator(HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, TypeRegistryInterface $typeRegistry, DirectiveRegistryInterface $directiveRegistry): void
     {
         $this->hooksAPI = $hooksAPI;

@@ -15,7 +15,16 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
 {
     protected ?UserObjectTypeResolver $userObjectTypeResolver = null;
 
-    #[Required]
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
+    {
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userObjectTypeResolver ??= $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireWithAuthorInterfaceTypeFieldResolver(
         UserObjectTypeResolver $userObjectTypeResolver,
     ): void {

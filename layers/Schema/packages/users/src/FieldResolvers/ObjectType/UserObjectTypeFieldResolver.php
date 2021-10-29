@@ -24,7 +24,48 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     protected ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
 
-    #[Required]
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
+        $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->getInstanceManager()->getInstance(UserTypeAPIInterface::class);
+    }
+    public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
+    {
+        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
+    }
+    protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
+    {
+        return $this->emailScalarTypeResolver ??= $this->getInstanceManager()->getInstance(EmailScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        return $this->urlScalarTypeResolver ??= $this->getInstanceManager()->getInstance(URLScalarTypeResolver::class);
+    }
+    public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
+    {
+        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
+    }
+    protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
+    {
+        return $this->queryableInterfaceTypeFieldResolver ??= $this->getInstanceManager()->getInstance(QueryableInterfaceTypeFieldResolver::class);
+    }
+
+    //#[Required]
     final public function autowireUserObjectTypeFieldResolver(
         UserTypeAPIInterface $userTypeAPI,
         EmailScalarTypeResolver $emailScalarTypeResolver,

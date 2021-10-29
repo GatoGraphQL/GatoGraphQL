@@ -17,7 +17,24 @@ class RoutingHookSet extends AbstractHookSet
     protected ?CMSServiceInterface $cmsService = null;
     protected ?RequestHelperServiceInterface $requestHelperService = null;
 
-    #[Required]
+    public function setCMSService(CMSServiceInterface $cmsService): void
+    {
+        $this->cmsService = $cmsService;
+    }
+    protected function getCMSService(): CMSServiceInterface
+    {
+        return $this->cmsService ??= $this->getInstanceManager()->getInstance(CMSServiceInterface::class);
+    }
+    public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
+    {
+        $this->requestHelperService = $requestHelperService;
+    }
+    protected function getRequestHelperService(): RequestHelperServiceInterface
+    {
+        return $this->requestHelperService ??= $this->getInstanceManager()->getInstance(RequestHelperServiceInterface::class);
+    }
+
+    //#[Required]
     final public function autowireRoutingHookSet(
         CMSServiceInterface $cmsService,
         RequestHelperServiceInterface $requestHelperService,

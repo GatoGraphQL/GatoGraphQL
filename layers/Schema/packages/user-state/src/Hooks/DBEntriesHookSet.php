@@ -12,7 +12,16 @@ class DBEntriesHookSet extends AbstractHookSet
 {
     protected ?GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver = null;
 
-    #[Required]
+    public function setGlobalObjectTypeFieldResolver(GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver): void
+    {
+        $this->globalObjectTypeFieldResolver = $globalObjectTypeFieldResolver;
+    }
+    protected function getGlobalObjectTypeFieldResolver(): GlobalObjectTypeFieldResolver
+    {
+        return $this->globalObjectTypeFieldResolver ??= $this->getInstanceManager()->getInstance(GlobalObjectTypeFieldResolver::class);
+    }
+
+    //#[Required]
     final public function autowireDBEntriesHookSet(
         GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver
     ): void {

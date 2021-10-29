@@ -45,7 +45,48 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
     protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     protected ?PersistedFragmentManagerInterface $persistedFragmentManager = null;
 
-    #[Required]
+    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
+    {
+        $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
+    }
+    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+    }
+    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    {
+        return $this->feedbackMessageStore ??= $this->getInstanceManager()->getInstance(FeedbackMessageStoreInterface::class);
+    }
+    public function setQueryParser(QueryParserInterface $queryParser): void
+    {
+        $this->queryParser = $queryParser;
+    }
+    protected function getQueryParser(): QueryParserInterface
+    {
+        return $this->queryParser ??= $this->getInstanceManager()->getInstance(QueryParserInterface::class);
+    }
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
+    }
+    public function setPersistedFragmentManager(PersistedFragmentManagerInterface $persistedFragmentManager): void
+    {
+        $this->persistedFragmentManager = $persistedFragmentManager;
+    }
+    protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
+    {
+        return $this->persistedFragmentManager ??= $this->getInstanceManager()->getInstance(PersistedFragmentManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireFieldQueryConvertor(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser, FieldQueryInterpreterInterface $fieldQueryInterpreter, PersistedFragmentManagerInterface $persistedFragmentManager): void
     {
         $this->translationAPI = $translationAPI;

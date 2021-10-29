@@ -13,7 +13,16 @@ class MainContentModuleHookSet extends AbstractHookSet
 {
     protected ?MainContentModule $mainContentModule = null;
     
-    #[Required]
+    public function setMainContentModule(MainContentModule $mainContentModule): void
+    {
+        $this->mainContentModule = $mainContentModule;
+    }
+    protected function getMainContentModule(): MainContentModule
+    {
+        return $this->mainContentModule ??= $this->getInstanceManager()->getInstance(MainContentModule::class);
+    }
+
+    //#[Required]
     final public function autowireMainContentModuleHookSet(
         MainContentModule $mainContentModule
     ): void {

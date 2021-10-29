@@ -22,7 +22,40 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     protected ?TranslationAPIInterface $translationAPI = null;
     protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
-    #[Required]
+    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+    }
+    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    {
+        return $this->feedbackMessageStore ??= $this->getInstanceManager()->getInstance(FeedbackMessageStoreInterface::class);
+    }
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
+    }
+    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
+    {
+        $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
+    }
+    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    {
+        $this->moduleProcessorManager = $moduleProcessorManager;
+    }
+    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    {
+        return $this->moduleProcessorManager ??= $this->getInstanceManager()->getInstance(ModuleProcessorManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireDataloadHelperService(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, TranslationAPIInterface $translationAPI, ModuleProcessorManagerInterface $moduleProcessorManager): void
     {
         $this->feedbackMessageStore = $feedbackMessageStore;

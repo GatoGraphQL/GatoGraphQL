@@ -16,7 +16,24 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?CustomPostMetaTypeAPIInterface $customPostMetaAPI = null;
     protected ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
 
-    #[Required]
+    public function setCustomPostMetaTypeAPI(CustomPostMetaTypeAPIInterface $customPostMetaAPI): void
+    {
+        $this->customPostMetaAPI = $customPostMetaAPI;
+    }
+    protected function getCustomPostMetaTypeAPI(): CustomPostMetaTypeAPIInterface
+    {
+        return $this->customPostMetaAPI ??= $this->getInstanceManager()->getInstance(CustomPostMetaTypeAPIInterface::class);
+    }
+    public function setWithMetaInterfaceTypeFieldResolver(WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver): void
+    {
+        $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
+    }
+    protected function getWithMetaInterfaceTypeFieldResolver(): WithMetaInterfaceTypeFieldResolver
+    {
+        return $this->withMetaInterfaceTypeFieldResolver ??= $this->getInstanceManager()->getInstance(WithMetaInterfaceTypeFieldResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCustomPostObjectTypeFieldResolver(
         CustomPostMetaTypeAPIInterface $customPostMetaAPI,
         WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,

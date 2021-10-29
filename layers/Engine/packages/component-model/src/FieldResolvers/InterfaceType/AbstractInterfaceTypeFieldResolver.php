@@ -60,7 +60,56 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     protected ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
     protected ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
 
-    #[Required]
+    public function setNameResolver(NameResolverInterface $nameResolver): void
+    {
+        $this->nameResolver = $nameResolver;
+    }
+    protected function getNameResolver(): NameResolverInterface
+    {
+        return $this->nameResolver ??= $this->getInstanceManager()->getInstance(NameResolverInterface::class);
+    }
+    public function setCMSService(CMSServiceInterface $cmsService): void
+    {
+        $this->cmsService = $cmsService;
+    }
+    protected function getCMSService(): CMSServiceInterface
+    {
+        return $this->cmsService ??= $this->getInstanceManager()->getInstance(CMSServiceInterface::class);
+    }
+    public function setSchemaNamespacingService(SchemaNamespacingServiceInterface $schemaNamespacingService): void
+    {
+        $this->schemaNamespacingService = $schemaNamespacingService;
+    }
+    protected function getSchemaNamespacingService(): SchemaNamespacingServiceInterface
+    {
+        return $this->schemaNamespacingService ??= $this->getInstanceManager()->getInstance(SchemaNamespacingServiceInterface::class);
+    }
+    public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
+    {
+        $this->typeRegistry = $typeRegistry;
+    }
+    protected function getTypeRegistry(): TypeRegistryInterface
+    {
+        return $this->typeRegistry ??= $this->getInstanceManager()->getInstance(TypeRegistryInterface::class);
+    }
+    public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
+    {
+        $this->schemaDefinitionService = $schemaDefinitionService;
+    }
+    protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
+    {
+        return $this->schemaDefinitionService ??= $this->getInstanceManager()->getInstance(SchemaDefinitionServiceInterface::class);
+    }
+    public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    {
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+    }
+    protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    {
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->getInstanceManager()->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractInterfaceTypeFieldResolver(
         NameResolverInterface $nameResolver,
         CMSServiceInterface $cmsService,

@@ -12,7 +12,16 @@ class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
 {
     protected ?CacheControlBlock $cacheControlBlock = null;
 
-    #[Required]
+    public function setCacheControlBlock(CacheControlBlock $cacheControlBlock): void
+    {
+        $this->cacheControlBlock = $cacheControlBlock;
+    }
+    protected function getCacheControlBlock(): CacheControlBlock
+    {
+        return $this->cacheControlBlock ??= $this->getInstanceManager()->getInstance(CacheControlBlock::class);
+    }
+
+    //#[Required]
     final public function autowireGraphQLCacheControlListCustomPostType(
         CacheControlBlock $cacheControlBlock,
     ): void {

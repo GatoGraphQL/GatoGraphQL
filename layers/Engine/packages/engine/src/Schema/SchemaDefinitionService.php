@@ -20,7 +20,40 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
     protected ?InstanceManagerInterface $instanceManager = null;
     protected ?TranslationAPIInterface $translationAPI = null;
 
-    #[Required]
+    public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
+    {
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+    }
+    protected function getRootObjectTypeResolver(): RootObjectTypeResolver
+    {
+        return $this->rootObjectTypeResolver ??= $this->getInstanceManager()->getInstance(RootObjectTypeResolver::class);
+    }
+    public function setAnyBuiltInScalarScalarTypeResolver(AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver): void
+    {
+        $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
+    }
+    protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
+    {
+        return $this->anyBuiltInScalarScalarTypeResolver ??= $this->getInstanceManager()->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
+    }
+    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
+    {
+        $this->instanceManager = $instanceManager;
+    }
+    protected function getInstanceManager(): InstanceManagerInterface
+    {
+        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
+    }
+    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
+    {
+        $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireSchemaDefinitionService(
         RootObjectTypeResolver $rootObjectTypeResolver,
         InstanceManagerInterface $instanceManager,

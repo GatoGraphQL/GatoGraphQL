@@ -12,7 +12,16 @@ trait UseObjectDictionaryTypeDataLoaderTrait
 {
     protected ?ObjectDictionaryInterface $objectDictionary = null;
 
-    #[Required]
+    public function setObjectDictionary(ObjectDictionaryInterface $objectDictionary): void
+    {
+        $this->objectDictionary = $objectDictionary;
+    }
+    protected function getObjectDictionary(): ObjectDictionaryInterface
+    {
+        return $this->objectDictionary ??= $this->getInstanceManager()->getInstance(ObjectDictionaryInterface::class);
+    }
+
+    //#[Required]
     public function autowireUseObjectDictionaryTypeDataLoaderTrait(
         ObjectDictionaryInterface $objectDictionary,
     ): void {

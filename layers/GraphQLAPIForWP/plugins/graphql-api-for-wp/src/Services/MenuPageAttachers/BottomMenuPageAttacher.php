@@ -28,7 +28,72 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     protected ?ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage = null;
     protected ?AboutMenuPage $aboutMenuPage = null;
 
-    #[Required]
+    public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
+    {
+        $this->menuPageHelper = $menuPageHelper;
+    }
+    protected function getMenuPageHelper(): MenuPageHelper
+    {
+        return $this->menuPageHelper ??= $this->getInstanceManager()->getInstance(MenuPageHelper::class);
+    }
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    {
+        $this->userAuthorization = $userAuthorization;
+    }
+    protected function getUserAuthorization(): UserAuthorizationInterface
+    {
+        return $this->userAuthorization ??= $this->getInstanceManager()->getInstance(UserAuthorizationInterface::class);
+    }
+    public function setSettingsMenuPage(SettingsMenuPage $settingsMenuPage): void
+    {
+        $this->settingsMenuPage = $settingsMenuPage;
+    }
+    protected function getSettingsMenuPage(): SettingsMenuPage
+    {
+        return $this->settingsMenuPage ??= $this->getInstanceManager()->getInstance(SettingsMenuPage::class);
+    }
+    public function setModuleDocumentationMenuPage(ModuleDocumentationMenuPage $moduleDocumentationMenuPage): void
+    {
+        $this->moduleDocumentationMenuPage = $moduleDocumentationMenuPage;
+    }
+    protected function getModuleDocumentationMenuPage(): ModuleDocumentationMenuPage
+    {
+        return $this->moduleDocumentationMenuPage ??= $this->getInstanceManager()->getInstance(ModuleDocumentationMenuPage::class);
+    }
+    public function setModulesMenuPage(ModulesMenuPage $modulesMenuPage): void
+    {
+        $this->modulesMenuPage = $modulesMenuPage;
+    }
+    protected function getModulesMenuPage(): ModulesMenuPage
+    {
+        return $this->modulesMenuPage ??= $this->getInstanceManager()->getInstance(ModulesMenuPage::class);
+    }
+    public function setReleaseNotesAboutMenuPage(ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage): void
+    {
+        $this->releaseNotesAboutMenuPage = $releaseNotesAboutMenuPage;
+    }
+    protected function getReleaseNotesAboutMenuPage(): ReleaseNotesAboutMenuPage
+    {
+        return $this->releaseNotesAboutMenuPage ??= $this->getInstanceManager()->getInstance(ReleaseNotesAboutMenuPage::class);
+    }
+    public function setAboutMenuPage(AboutMenuPage $aboutMenuPage): void
+    {
+        $this->aboutMenuPage = $aboutMenuPage;
+    }
+    protected function getAboutMenuPage(): AboutMenuPage
+    {
+        return $this->aboutMenuPage ??= $this->getInstanceManager()->getInstance(AboutMenuPage::class);
+    }
+
+    //#[Required]
     final public function autowireBottomMenuPageAttacher(
         MenuPageHelper $menuPageHelper,
         ModuleRegistryInterface $moduleRegistry,

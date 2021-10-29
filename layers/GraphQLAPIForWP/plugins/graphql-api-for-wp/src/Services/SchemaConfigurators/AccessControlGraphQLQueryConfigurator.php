@@ -21,7 +21,40 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     protected ?AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry = null;
     protected ?AccessControlManagerInterface $accessControlManager = null;
 
-    #[Required]
+    public function setAccessControlBlock(AccessControlBlock $accessControlBlock): void
+    {
+        $this->accessControlBlock = $accessControlBlock;
+    }
+    protected function getAccessControlBlock(): AccessControlBlock
+    {
+        return $this->accessControlBlock ??= $this->getInstanceManager()->getInstance(AccessControlBlock::class);
+    }
+    public function setBlockHelpers(BlockHelpers $blockHelpers): void
+    {
+        $this->blockHelpers = $blockHelpers;
+    }
+    protected function getBlockHelpers(): BlockHelpers
+    {
+        return $this->blockHelpers ??= $this->getInstanceManager()->getInstance(BlockHelpers::class);
+    }
+    public function setAccessControlRuleBlockRegistry(AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry): void
+    {
+        $this->accessControlRuleBlockRegistry = $accessControlRuleBlockRegistry;
+    }
+    protected function getAccessControlRuleBlockRegistry(): AccessControlRuleBlockRegistryInterface
+    {
+        return $this->accessControlRuleBlockRegistry ??= $this->getInstanceManager()->getInstance(AccessControlRuleBlockRegistryInterface::class);
+    }
+    public function setAccessControlManager(AccessControlManagerInterface $accessControlManager): void
+    {
+        $this->accessControlManager = $accessControlManager;
+    }
+    protected function getAccessControlManager(): AccessControlManagerInterface
+    {
+        return $this->accessControlManager ??= $this->getInstanceManager()->getInstance(AccessControlManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAccessControlGraphQLQueryConfigurator(
         AccessControlBlock $accessControlBlock,
         BlockHelpers $blockHelpers,

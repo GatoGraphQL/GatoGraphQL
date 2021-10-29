@@ -24,7 +24,40 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     protected ?LogoutMutationResolver $logoutMutationResolver = null;
     protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
+    {
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userObjectTypeResolver ??= $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+    }
+    public function setLoginMutationResolver(LoginMutationResolver $loginMutationResolver): void
+    {
+        $this->loginMutationResolver = $loginMutationResolver;
+    }
+    protected function getLoginMutationResolver(): LoginMutationResolver
+    {
+        return $this->loginMutationResolver ??= $this->getInstanceManager()->getInstance(LoginMutationResolver::class);
+    }
+    public function setLogoutMutationResolver(LogoutMutationResolver $logoutMutationResolver): void
+    {
+        $this->logoutMutationResolver = $logoutMutationResolver;
+    }
+    protected function getLogoutMutationResolver(): LogoutMutationResolver
+    {
+        return $this->logoutMutationResolver ??= $this->getInstanceManager()->getInstance(LogoutMutationResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireRootObjectTypeFieldResolver(
         UserObjectTypeResolver $userObjectTypeResolver,
         LoginMutationResolver $loginMutationResolver,

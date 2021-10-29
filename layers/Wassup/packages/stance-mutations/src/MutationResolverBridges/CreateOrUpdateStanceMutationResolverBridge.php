@@ -12,7 +12,16 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
 {
     protected ?CreateOrUpdateStanceMutationResolver $createOrUpdateStanceMutationResolver = null;
 
-    #[Required]
+    public function setCreateOrUpdateStanceMutationResolver(CreateOrUpdateStanceMutationResolver $createOrUpdateStanceMutationResolver): void
+    {
+        $this->createOrUpdateStanceMutationResolver = $createOrUpdateStanceMutationResolver;
+    }
+    protected function getCreateOrUpdateStanceMutationResolver(): CreateOrUpdateStanceMutationResolver
+    {
+        return $this->createOrUpdateStanceMutationResolver ??= $this->getInstanceManager()->getInstance(CreateOrUpdateStanceMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCreateOrUpdateStanceMutationResolverBridge(
         CreateOrUpdateStanceMutationResolver $createOrUpdateStanceMutationResolver,
     ): void {

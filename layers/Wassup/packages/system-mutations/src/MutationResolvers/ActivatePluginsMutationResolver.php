@@ -14,7 +14,24 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     protected ?CMSServiceInterface $cmsService = null;
     protected ?ApplicationInfoInterface $applicationInfo = null;
 
-    #[Required]
+    public function setCMSService(CMSServiceInterface $cmsService): void
+    {
+        $this->cmsService = $cmsService;
+    }
+    protected function getCMSService(): CMSServiceInterface
+    {
+        return $this->cmsService ??= $this->getInstanceManager()->getInstance(CMSServiceInterface::class);
+    }
+    public function setApplicationInfo(ApplicationInfoInterface $applicationInfo): void
+    {
+        $this->applicationInfo = $applicationInfo;
+    }
+    protected function getApplicationInfo(): ApplicationInfoInterface
+    {
+        return $this->applicationInfo ??= $this->getInstanceManager()->getInstance(ApplicationInfoInterface::class);
+    }
+
+    //#[Required]
     final public function autowireActivatePluginsMutationResolver(
         CMSServiceInterface $cmsService,
         ApplicationInfoInterface $applicationInfo,

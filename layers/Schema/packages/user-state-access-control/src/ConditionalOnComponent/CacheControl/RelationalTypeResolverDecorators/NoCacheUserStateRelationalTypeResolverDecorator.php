@@ -21,7 +21,40 @@ class NoCacheUserStateRelationalTypeResolverDecorator extends AbstractRelational
     protected ?ValidateIsUserNotLoggedInDirectiveResolver $validateIsUserNotLoggedInDirectiveResolver = null;
     protected ?ValidateIsUserNotLoggedInForDirectivesDirectiveResolver $validateIsUserNotLoggedInForDirectivesDirectiveResolver = null;
 
-    #[Required]
+    public function setValidateIsUserLoggedInDirectiveResolver(ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver): void
+    {
+        $this->validateIsUserLoggedInDirectiveResolver = $validateIsUserLoggedInDirectiveResolver;
+    }
+    protected function getValidateIsUserLoggedInDirectiveResolver(): ValidateIsUserLoggedInDirectiveResolver
+    {
+        return $this->validateIsUserLoggedInDirectiveResolver ??= $this->getInstanceManager()->getInstance(ValidateIsUserLoggedInDirectiveResolver::class);
+    }
+    public function setValidateIsUserLoggedInForDirectivesDirectiveResolver(ValidateIsUserLoggedInForDirectivesDirectiveResolver $validateIsUserLoggedInForDirectivesDirectiveResolver): void
+    {
+        $this->validateIsUserLoggedInForDirectivesDirectiveResolver = $validateIsUserLoggedInForDirectivesDirectiveResolver;
+    }
+    protected function getValidateIsUserLoggedInForDirectivesDirectiveResolver(): ValidateIsUserLoggedInForDirectivesDirectiveResolver
+    {
+        return $this->validateIsUserLoggedInForDirectivesDirectiveResolver ??= $this->getInstanceManager()->getInstance(ValidateIsUserLoggedInForDirectivesDirectiveResolver::class);
+    }
+    public function setValidateIsUserNotLoggedInDirectiveResolver(ValidateIsUserNotLoggedInDirectiveResolver $validateIsUserNotLoggedInDirectiveResolver): void
+    {
+        $this->validateIsUserNotLoggedInDirectiveResolver = $validateIsUserNotLoggedInDirectiveResolver;
+    }
+    protected function getValidateIsUserNotLoggedInDirectiveResolver(): ValidateIsUserNotLoggedInDirectiveResolver
+    {
+        return $this->validateIsUserNotLoggedInDirectiveResolver ??= $this->getInstanceManager()->getInstance(ValidateIsUserNotLoggedInDirectiveResolver::class);
+    }
+    public function setValidateIsUserNotLoggedInForDirectivesDirectiveResolver(ValidateIsUserNotLoggedInForDirectivesDirectiveResolver $validateIsUserNotLoggedInForDirectivesDirectiveResolver): void
+    {
+        $this->validateIsUserNotLoggedInForDirectivesDirectiveResolver = $validateIsUserNotLoggedInForDirectivesDirectiveResolver;
+    }
+    protected function getValidateIsUserNotLoggedInForDirectivesDirectiveResolver(): ValidateIsUserNotLoggedInForDirectivesDirectiveResolver
+    {
+        return $this->validateIsUserNotLoggedInForDirectivesDirectiveResolver ??= $this->getInstanceManager()->getInstance(ValidateIsUserNotLoggedInForDirectivesDirectiveResolver::class);
+    }
+
+    //#[Required]
     final public function autowireNoCacheUserStateRelationalTypeResolverDecorator(
         ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver,
         ValidateIsUserLoggedInForDirectivesDirectiveResolver $validateIsUserLoggedInForDirectivesDirectiveResolver,

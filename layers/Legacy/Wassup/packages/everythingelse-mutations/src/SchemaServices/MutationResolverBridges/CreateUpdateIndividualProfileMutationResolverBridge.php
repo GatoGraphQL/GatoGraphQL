@@ -16,7 +16,16 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
     
     protected ?CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver = null;
     
-    #[Required]
+    public function setCreateUpdateIndividualProfileMutationResolver(CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver): void
+    {
+        $this->createUpdateIndividualProfileMutationResolver = $createUpdateIndividualProfileMutationResolver;
+    }
+    protected function getCreateUpdateIndividualProfileMutationResolver(): CreateUpdateIndividualProfileMutationResolver
+    {
+        return $this->createUpdateIndividualProfileMutationResolver ??= $this->getInstanceManager()->getInstance(CreateUpdateIndividualProfileMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCreateUpdateIndividualProfileMutationResolverBridge(
         CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver,
     ): void {

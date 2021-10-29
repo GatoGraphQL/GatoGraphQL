@@ -12,7 +12,16 @@ trait ValidateUserLoggedInMutationResolverTrait
 {
     protected ?TranslationAPIInterface $translationAPI = null;
 
-    #[Required]
+    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
+    {
+        $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
+    }
+
+    //#[Required]
     public function autowireValidateUserLoggedInMutationResolverTrait(
         TranslationAPIInterface $translationAPI,
     ): void {

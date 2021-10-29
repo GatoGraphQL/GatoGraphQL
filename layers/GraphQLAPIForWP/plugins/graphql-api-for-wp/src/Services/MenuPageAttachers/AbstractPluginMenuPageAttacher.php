@@ -15,7 +15,16 @@ abstract class AbstractPluginMenuPageAttacher extends AbstractMenuPageAttacher
 {
     protected ?PluginMenu $pluginMenu = null;
 
-    #[Required]
+    public function setPluginMenu(PluginMenu $pluginMenu): void
+    {
+        $this->pluginMenu = $pluginMenu;
+    }
+    protected function getPluginMenu(): PluginMenu
+    {
+        return $this->pluginMenu ??= $this->getInstanceManager()->getInstance(PluginMenu::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractPluginMenuPageAttacher(
         PluginMenu $pluginMenu,
     ): void {

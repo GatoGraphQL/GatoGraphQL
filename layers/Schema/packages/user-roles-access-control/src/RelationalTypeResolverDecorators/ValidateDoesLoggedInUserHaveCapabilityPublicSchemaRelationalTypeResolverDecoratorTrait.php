@@ -12,7 +12,16 @@ trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDe
 {
     protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
 
-    #[Required]
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
+    }
+
+    //#[Required]
     public function autowireValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDecoratorTrait(
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
     ): void {

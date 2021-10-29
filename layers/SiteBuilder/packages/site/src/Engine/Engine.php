@@ -12,7 +12,16 @@ class Engine extends UpstreamEngine
 {
     protected ?ApplicationStateHelperServiceInterface $applicationStateHelperService = null;
 
-    #[Required]
+    public function setApplicationStateHelperService(ApplicationStateHelperServiceInterface $applicationStateHelperService): void
+    {
+        $this->applicationStateHelperService = $applicationStateHelperService;
+    }
+    protected function getApplicationStateHelperService(): ApplicationStateHelperServiceInterface
+    {
+        return $this->applicationStateHelperService ??= $this->getInstanceManager()->getInstance(ApplicationStateHelperServiceInterface::class);
+    }
+
+    //#[Required]
     final public function autowireSiteEngine(
         ApplicationStateHelperServiceInterface $applicationStateHelperService
     ): void {

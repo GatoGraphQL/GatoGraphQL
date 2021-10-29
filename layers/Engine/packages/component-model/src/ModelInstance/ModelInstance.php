@@ -22,7 +22,40 @@ class ModelInstance implements ModelInstanceInterface
     protected ?ApplicationInfoInterface $applicationInfo = null;
     protected ?DefinitionManagerInterface $definitionManager = null;
 
-    #[Required]
+    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
+    {
+        $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
+    }
+    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
+    {
+        $this->hooksAPI = $hooksAPI;
+    }
+    protected function getHooksAPI(): HooksAPIInterface
+    {
+        return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
+    }
+    public function setApplicationInfo(ApplicationInfoInterface $applicationInfo): void
+    {
+        $this->applicationInfo = $applicationInfo;
+    }
+    protected function getApplicationInfo(): ApplicationInfoInterface
+    {
+        return $this->applicationInfo ??= $this->getInstanceManager()->getInstance(ApplicationInfoInterface::class);
+    }
+    public function setDefinitionManager(DefinitionManagerInterface $definitionManager): void
+    {
+        $this->definitionManager = $definitionManager;
+    }
+    protected function getDefinitionManager(): DefinitionManagerInterface
+    {
+        return $this->definitionManager ??= $this->getInstanceManager()->getInstance(DefinitionManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireModelInstance(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, ApplicationInfoInterface $applicationInfo, DefinitionManagerInterface $definitionManager): void
     {
         $this->translationAPI = $translationAPI;

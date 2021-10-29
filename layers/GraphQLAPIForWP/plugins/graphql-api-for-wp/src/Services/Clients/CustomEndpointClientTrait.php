@@ -14,7 +14,24 @@ trait CustomEndpointClientTrait
     protected ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
     protected ?RequestHelperServiceInterface $requestHelperService = null;
 
-    #[Required]
+    public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
+    {
+        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
+    }
+    protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
+    {
+        return $this->graphQLCustomEndpointCustomPostType ??= $this->getInstanceManager()->getInstance(GraphQLCustomEndpointCustomPostType::class);
+    }
+    public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
+    {
+        $this->requestHelperService = $requestHelperService;
+    }
+    protected function getRequestHelperService(): RequestHelperServiceInterface
+    {
+        return $this->requestHelperService ??= $this->getInstanceManager()->getInstance(RequestHelperServiceInterface::class);
+    }
+
+    //#[Required]
     public function autowireCustomEndpointClientTrait(
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
         RequestHelperServiceInterface $requestHelperService,

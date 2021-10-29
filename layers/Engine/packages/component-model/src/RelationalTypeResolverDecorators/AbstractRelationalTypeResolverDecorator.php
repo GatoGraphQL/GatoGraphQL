@@ -18,7 +18,24 @@ abstract class AbstractRelationalTypeResolverDecorator implements RelationalType
     protected ?InstanceManagerInterface $instanceManager = null;
     protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
 
-    #[Required]
+    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
+    {
+        $this->instanceManager = $instanceManager;
+    }
+    protected function getInstanceManager(): InstanceManagerInterface
+    {
+        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
+    }
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractRelationalTypeResolverDecorator(InstanceManagerInterface $instanceManager, FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
         $this->instanceManager = $instanceManager;

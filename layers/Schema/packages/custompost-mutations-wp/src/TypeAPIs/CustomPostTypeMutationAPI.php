@@ -19,7 +19,24 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
     protected ?TranslationAPIInterface $translationAPI = null;
     protected ?ErrorHelperInterface $errorHelper = null;
 
-    #[Required]
+    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
+    {
+        $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
+    }
+    public function setErrorHelper(ErrorHelperInterface $errorHelper): void
+    {
+        $this->errorHelper = $errorHelper;
+    }
+    protected function getErrorHelper(): ErrorHelperInterface
+    {
+        return $this->errorHelper ??= $this->getInstanceManager()->getInstance(ErrorHelperInterface::class);
+    }
+
+    //#[Required]
     final public function autowireCustomPostTypeMutationAPI(TranslationAPIInterface $translationAPI, ErrorHelperInterface $errorHelper): void
     {
         $this->translationAPI = $translationAPI;

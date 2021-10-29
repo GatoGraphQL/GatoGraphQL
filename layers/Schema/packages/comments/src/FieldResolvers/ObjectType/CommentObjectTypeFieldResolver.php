@@ -47,7 +47,96 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     protected ?CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver = null;
     protected ?DateFormatterInterface $dateFormatter = null;
 
-    #[Required]
+    public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
+    {
+        $this->commentTypeAPI = $commentTypeAPI;
+    }
+    protected function getCommentTypeAPI(): CommentTypeAPIInterface
+    {
+        return $this->commentTypeAPI ??= $this->getInstanceManager()->getInstance(CommentTypeAPIInterface::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        return $this->urlScalarTypeResolver ??= $this->getInstanceManager()->getInstance(URLScalarTypeResolver::class);
+    }
+    public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
+    {
+        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
+    }
+    protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
+    {
+        return $this->emailScalarTypeResolver ??= $this->getInstanceManager()->getInstance(EmailScalarTypeResolver::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IDScalarTypeResolver::class);
+    }
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    {
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+    }
+    protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    {
+        return $this->dateScalarTypeResolver ??= $this->getInstanceManager()->getInstance(DateScalarTypeResolver::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
+    {
+        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+    }
+    protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
+    {
+        return $this->commentObjectTypeResolver ??= $this->getInstanceManager()->getInstance(CommentObjectTypeResolver::class);
+    }
+    public function setCommentStatusEnumTypeResolver(CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver): void
+    {
+        $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
+    }
+    protected function getCommentStatusEnumTypeResolver(): CommentStatusEnumTypeResolver
+    {
+        return $this->commentStatusEnumTypeResolver ??= $this->getInstanceManager()->getInstance(CommentStatusEnumTypeResolver::class);
+    }
+    public function setDateFormatter(DateFormatterInterface $dateFormatter): void
+    {
+        $this->dateFormatter = $dateFormatter;
+    }
+    protected function getDateFormatter(): DateFormatterInterface
+    {
+        return $this->dateFormatter ??= $this->getInstanceManager()->getInstance(DateFormatterInterface::class);
+    }
+
+    //#[Required]
     final public function autowireCommentObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         StringScalarTypeResolver $stringScalarTypeResolver,

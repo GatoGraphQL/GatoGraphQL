@@ -15,7 +15,24 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
     protected ?MenuTypeDataLoader $menuTypeDataLoader = null;
     protected ?MenuTypeAPIInterface $menuTypeAPI = null;
 
-    #[Required]
+    public function setMenuTypeDataLoader(MenuTypeDataLoader $menuTypeDataLoader): void
+    {
+        $this->menuTypeDataLoader = $menuTypeDataLoader;
+    }
+    protected function getMenuTypeDataLoader(): MenuTypeDataLoader
+    {
+        return $this->menuTypeDataLoader ??= $this->getInstanceManager()->getInstance(MenuTypeDataLoader::class);
+    }
+    public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
+    {
+        $this->menuTypeAPI = $menuTypeAPI;
+    }
+    protected function getMenuTypeAPI(): MenuTypeAPIInterface
+    {
+        return $this->menuTypeAPI ??= $this->getInstanceManager()->getInstance(MenuTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireMenuObjectTypeResolver(
         MenuTypeDataLoader $menuTypeDataLoader,
         MenuTypeAPIInterface $menuTypeAPI,

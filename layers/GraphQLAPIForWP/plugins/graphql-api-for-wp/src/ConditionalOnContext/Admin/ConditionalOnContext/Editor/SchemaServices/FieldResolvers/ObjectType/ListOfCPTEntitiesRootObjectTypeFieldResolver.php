@@ -19,7 +19,32 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
     protected ?GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType = null;
     protected ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
 
-    #[Required]
+    public function setGraphQLAccessControlListCustomPostType(GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType): void
+    {
+        $this->graphQLAccessControlListCustomPostType = $graphQLAccessControlListCustomPostType;
+    }
+    protected function getGraphQLAccessControlListCustomPostType(): GraphQLAccessControlListCustomPostType
+    {
+        return $this->graphQLAccessControlListCustomPostType ??= $this->getInstanceManager()->getInstance(GraphQLAccessControlListCustomPostType::class);
+    }
+    public function setGraphQLCacheControlListCustomPostType(GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType): void
+    {
+        $this->graphQLCacheControlListCustomPostType = $graphQLCacheControlListCustomPostType;
+    }
+    protected function getGraphQLCacheControlListCustomPostType(): GraphQLCacheControlListCustomPostType
+    {
+        return $this->graphQLCacheControlListCustomPostType ??= $this->getInstanceManager()->getInstance(GraphQLCacheControlListCustomPostType::class);
+    }
+    public function setGraphQLSchemaConfigurationCustomPostType(GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType): void
+    {
+        $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
+    }
+    protected function getGraphQLSchemaConfigurationCustomPostType(): GraphQLSchemaConfigurationCustomPostType
+    {
+        return $this->graphQLSchemaConfigurationCustomPostType ??= $this->getInstanceManager()->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
+    }
+
+    //#[Required]
     final public function autowireListOfCPTEntitiesRootObjectTypeFieldResolver(
         GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
         GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,

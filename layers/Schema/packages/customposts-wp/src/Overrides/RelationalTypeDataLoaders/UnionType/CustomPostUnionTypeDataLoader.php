@@ -20,7 +20,24 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
     protected ?CustomPostTypeDataLoader $customPostTypeDataLoader = null;
     protected ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    #[Required]
+    public function setCustomPostTypeDataLoader(CustomPostTypeDataLoader $customPostTypeDataLoader): void
+    {
+        $this->customPostTypeDataLoader = $customPostTypeDataLoader;
+    }
+    protected function getCustomPostTypeDataLoader(): CustomPostTypeDataLoader
+    {
+        return $this->customPostTypeDataLoader ??= $this->getInstanceManager()->getInstance(CustomPostTypeDataLoader::class);
+    }
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->getInstanceManager()->getInstance(CustomPostTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireCustomPostsWPCustomPostUnionTypeDataLoader(
         CustomPostTypeDataLoader $customPostTypeDataLoader,
         CustomPostTypeAPIInterface $customPostTypeAPI,

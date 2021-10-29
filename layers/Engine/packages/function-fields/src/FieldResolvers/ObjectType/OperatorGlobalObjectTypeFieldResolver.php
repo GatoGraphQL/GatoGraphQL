@@ -26,7 +26,56 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     protected ?ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver = null;
     protected ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
 
-    #[Required]
+    public function setFloatScalarTypeResolver(FloatScalarTypeResolver $floatScalarTypeResolver): void
+    {
+        $this->floatScalarTypeResolver = $floatScalarTypeResolver;
+    }
+    protected function getFloatScalarTypeResolver(): FloatScalarTypeResolver
+    {
+        return $this->floatScalarTypeResolver ??= $this->getInstanceManager()->getInstance(FloatScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setAnyBuiltInScalarScalarTypeResolver(AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver): void
+    {
+        $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
+    }
+    protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
+    {
+        return $this->anyBuiltInScalarScalarTypeResolver ??= $this->getInstanceManager()->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
+    }
+    public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    {
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+    }
+    protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    {
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->getInstanceManager()->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+    public function setArrayKeyScalarTypeResolver(ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver): void
+    {
+        $this->arrayKeyScalarTypeResolver = $arrayKeyScalarTypeResolver;
+    }
+    protected function getArrayKeyScalarTypeResolver(): ArrayKeyScalarTypeResolver
+    {
+        return $this->arrayKeyScalarTypeResolver ??= $this->getInstanceManager()->getInstance(ArrayKeyScalarTypeResolver::class);
+    }
+    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        return $this->jsonObjectScalarTypeResolver ??= $this->getInstanceManager()->getInstance(JSONObjectScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireOperatorGlobalObjectTypeFieldResolver(
         FloatScalarTypeResolver $floatScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,

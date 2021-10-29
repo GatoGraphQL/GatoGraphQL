@@ -25,7 +25,32 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
     protected ?HighlightObjectTypeResolver $highlightObjectTypeResolver = null;
     
-    #[Required]
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setHighlightObjectTypeResolver(HighlightObjectTypeResolver $highlightObjectTypeResolver): void
+    {
+        $this->highlightObjectTypeResolver = $highlightObjectTypeResolver;
+    }
+    protected function getHighlightObjectTypeResolver(): HighlightObjectTypeResolver
+    {
+        return $this->highlightObjectTypeResolver ??= $this->getInstanceManager()->getInstance(HighlightObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCustomPostObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,

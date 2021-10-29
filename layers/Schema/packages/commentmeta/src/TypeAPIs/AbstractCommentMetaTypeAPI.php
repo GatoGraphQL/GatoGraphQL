@@ -12,7 +12,16 @@ abstract class AbstractCommentMetaTypeAPI implements CommentMetaTypeAPIInterface
 {
     protected ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
 
-    #[Required]
+    public function setAllowOrDenySettingsService(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
+    {
+        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
+    }
+    protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
+    {
+        return $this->allowOrDenySettingsService ??= $this->getInstanceManager()->getInstance(AllowOrDenySettingsServiceInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCommentMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
     {
         $this->allowOrDenySettingsService = $allowOrDenySettingsService;

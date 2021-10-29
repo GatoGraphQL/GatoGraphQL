@@ -30,7 +30,24 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
     protected ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
     protected ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
 
-    #[Required]
+    public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
+    {
+        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
+    }
+    protected function getCustomPostUnionTypeResolver(): CustomPostUnionTypeResolver
+    {
+        return $this->customPostUnionTypeResolver ??= $this->getInstanceManager()->getInstance(CustomPostUnionTypeResolver::class);
+    }
+    public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
+    {
+        $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
+    }
+    protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
+    {
+        return $this->listQueryInputOutputHandler ??= $this->getInstanceManager()->getInstance(ListQueryInputOutputHandler::class);
+    }
+
+    //#[Required]
     final public function autowireCustomPostRelationalFieldDataloadModuleProcessor(
         CustomPostUnionTypeResolver $customPostUnionTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,

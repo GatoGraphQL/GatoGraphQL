@@ -19,7 +19,24 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     protected ?MenuObjectTypeResolver $menuObjectTypeResolver = null;
     protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setMenuObjectTypeResolver(MenuObjectTypeResolver $menuObjectTypeResolver): void
+    {
+        $this->menuObjectTypeResolver = $menuObjectTypeResolver;
+    }
+    protected function getMenuObjectTypeResolver(): MenuObjectTypeResolver
+    {
+        return $this->menuObjectTypeResolver ??= $this->getInstanceManager()->getInstance(MenuObjectTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireRootObjectTypeFieldResolver(
         MenuObjectTypeResolver $menuObjectTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,

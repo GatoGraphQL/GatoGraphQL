@@ -16,7 +16,24 @@ class Engine extends UpstreamEngine implements EngineInterface
     protected ?LooseContractManagerInterface $looseContractManager = null;
     protected ?CacheControlEngineInterface $cacheControlEngine = null;
 
-    #[Required]
+    public function setLooseContractManager(LooseContractManagerInterface $looseContractManager): void
+    {
+        $this->looseContractManager = $looseContractManager;
+    }
+    protected function getLooseContractManager(): LooseContractManagerInterface
+    {
+        return $this->looseContractManager ??= $this->getInstanceManager()->getInstance(LooseContractManagerInterface::class);
+    }
+    public function setCacheControlEngine(CacheControlEngineInterface $cacheControlEngine): void
+    {
+        $this->cacheControlEngine = $cacheControlEngine;
+    }
+    protected function getCacheControlEngine(): CacheControlEngineInterface
+    {
+        return $this->cacheControlEngine ??= $this->getInstanceManager()->getInstance(CacheControlEngineInterface::class);
+    }
+
+    //#[Required]
     final public function autowireEngineEngine(
         LooseContractManagerInterface $looseContractManager,
         CacheControlEngineInterface $cacheControlEngine

@@ -11,7 +11,16 @@ class CMSHelperService implements CMSHelperServiceInterface
 {
     protected ?CMSServiceInterface $cmsService = null;
 
-    #[Required]
+    public function setCMSService(CMSServiceInterface $cmsService): void
+    {
+        $this->cmsService = $cmsService;
+    }
+    protected function getCMSService(): CMSServiceInterface
+    {
+        return $this->cmsService ??= $this->getInstanceManager()->getInstance(CMSServiceInterface::class);
+    }
+
+    //#[Required]
     final public function autowireCMSHelperService(CMSServiceInterface $cmsService): void
     {
         $this->cmsService = $cmsService;

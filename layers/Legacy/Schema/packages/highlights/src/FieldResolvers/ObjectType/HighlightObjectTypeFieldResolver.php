@@ -22,7 +22,24 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     
-    #[Required]
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        return $this->urlScalarTypeResolver ??= $this->getInstanceManager()->getInstance(URLScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireHighlightObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         URLScalarTypeResolver $urlScalarTypeResolver,

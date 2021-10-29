@@ -13,7 +13,24 @@ trait FilterDataModuleProcessorTrait
     protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
     protected ?FilterInputProcessorManagerInterface $filterInputProcessorManager = null;
 
-    #[Required]
+    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    {
+        $this->moduleProcessorManager = $moduleProcessorManager;
+    }
+    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    {
+        return $this->moduleProcessorManager ??= $this->getInstanceManager()->getInstance(ModuleProcessorManagerInterface::class);
+    }
+    public function setFilterInputProcessorManager(FilterInputProcessorManagerInterface $filterInputProcessorManager): void
+    {
+        $this->filterInputProcessorManager = $filterInputProcessorManager;
+    }
+    protected function getFilterInputProcessorManager(): FilterInputProcessorManagerInterface
+    {
+        return $this->filterInputProcessorManager ??= $this->getInstanceManager()->getInstance(FilterInputProcessorManagerInterface::class);
+    }
+
+    //#[Required]
     public function autowireFilterDataModuleProcessorTrait(
         ModuleProcessorManagerInterface $moduleProcessorManager,
         FilterInputProcessorManagerInterface $filterInputProcessorManager,

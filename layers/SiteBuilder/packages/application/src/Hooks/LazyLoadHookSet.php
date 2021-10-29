@@ -21,7 +21,24 @@ class LazyLoadHookSet extends AbstractHookSet
     protected ?RequestHelperServiceInterface $requestHelperService = null;
     protected ?Lazy $lazy = null;
 
-    #[Required]
+    public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
+    {
+        $this->requestHelperService = $requestHelperService;
+    }
+    protected function getRequestHelperService(): RequestHelperServiceInterface
+    {
+        return $this->requestHelperService ??= $this->getInstanceManager()->getInstance(RequestHelperServiceInterface::class);
+    }
+    public function setLazy(Lazy $lazy): void
+    {
+        $this->lazy = $lazy;
+    }
+    protected function getLazy(): Lazy
+    {
+        return $this->lazy ??= $this->getInstanceManager()->getInstance(Lazy::class);
+    }
+
+    //#[Required]
     final public function autowireLazyLoadHookSet(
         RequestHelperServiceInterface $requestHelperService,
         Lazy $lazy,

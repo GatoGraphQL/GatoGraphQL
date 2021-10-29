@@ -35,7 +35,72 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     protected ?UserObjectTypeResolver $userObjectTypeResolver = null;
     
-    #[Required]
+    public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
+    {
+        $this->commentTypeAPI = $commentTypeAPI;
+    }
+    protected function getCommentTypeAPI(): CommentTypeAPIInterface
+    {
+        return $this->commentTypeAPI ??= $this->getInstanceManager()->getInstance(CommentTypeAPIInterface::class);
+    }
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    {
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+    }
+    protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    {
+        return $this->dateScalarTypeResolver ??= $this->getInstanceManager()->getInstance(DateScalarTypeResolver::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IDScalarTypeResolver::class);
+    }
+    public function setIPScalarTypeResolver(IPScalarTypeResolver $ipScalarTypeResolver): void
+    {
+        $this->ipScalarTypeResolver = $ipScalarTypeResolver;
+    }
+    protected function getIPScalarTypeResolver(): IPScalarTypeResolver
+    {
+        return $this->ipScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IPScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        return $this->urlScalarTypeResolver ??= $this->getInstanceManager()->getInstance(URLScalarTypeResolver::class);
+    }
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
+    {
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userObjectTypeResolver ??= $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireNotificationObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,

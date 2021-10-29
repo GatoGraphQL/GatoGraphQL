@@ -19,7 +19,48 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     protected ?GraphiQLMenuPage $graphiQLMenuPage = null;
     protected ?GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage = null;
 
-    #[Required]
+    public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
+    {
+        $this->menuPageHelper = $menuPageHelper;
+    }
+    protected function getMenuPageHelper(): MenuPageHelper
+    {
+        return $this->menuPageHelper ??= $this->getInstanceManager()->getInstance(MenuPageHelper::class);
+    }
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    {
+        $this->userAuthorization = $userAuthorization;
+    }
+    protected function getUserAuthorization(): UserAuthorizationInterface
+    {
+        return $this->userAuthorization ??= $this->getInstanceManager()->getInstance(UserAuthorizationInterface::class);
+    }
+    public function setGraphiQLMenuPage(GraphiQLMenuPage $graphiQLMenuPage): void
+    {
+        $this->graphiQLMenuPage = $graphiQLMenuPage;
+    }
+    protected function getGraphiQLMenuPage(): GraphiQLMenuPage
+    {
+        return $this->graphiQLMenuPage ??= $this->getInstanceManager()->getInstance(GraphiQLMenuPage::class);
+    }
+    public function setGraphQLVoyagerMenuPage(GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage): void
+    {
+        $this->graphQLVoyagerMenuPage = $graphQLVoyagerMenuPage;
+    }
+    protected function getGraphQLVoyagerMenuPage(): GraphQLVoyagerMenuPage
+    {
+        return $this->graphQLVoyagerMenuPage ??= $this->getInstanceManager()->getInstance(GraphQLVoyagerMenuPage::class);
+    }
+
+    //#[Required]
     final public function autowireTopMenuPageAttacher(
         MenuPageHelper $menuPageHelper,
         ModuleRegistryInterface $moduleRegistry,

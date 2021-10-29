@@ -11,7 +11,16 @@ abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPubl
 {
     protected ?DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver = null;
 
-    #[Required]
+    public function setDisableAccessForDirectivesDirectiveResolver(DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver): void
+    {
+        $this->disableAccessForDirectivesDirectiveResolver = $disableAccessForDirectivesDirectiveResolver;
+    }
+    protected function getDisableAccessForDirectivesDirectiveResolver(): DisableAccessForDirectivesDirectiveResolver
+    {
+        return $this->disableAccessForDirectivesDirectiveResolver ??= $this->getInstanceManager()->getInstance(DisableAccessForDirectivesDirectiveResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractDisableAccessConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator(
         DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver,
     ): void {

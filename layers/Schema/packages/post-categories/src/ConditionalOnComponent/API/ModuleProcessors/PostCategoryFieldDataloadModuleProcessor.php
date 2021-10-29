@@ -13,7 +13,16 @@ class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModu
 {
     protected ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
 
-    #[Required]
+    public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
+    {
+        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
+    }
+    protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
+    {
+        return $this->postCategoryObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostCategoryObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowirePostCategoryFieldDataloadModuleProcessor(
         PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
     ): void {

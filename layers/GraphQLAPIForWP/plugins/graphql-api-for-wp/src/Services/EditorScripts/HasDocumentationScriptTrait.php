@@ -20,7 +20,16 @@ trait HasDocumentationScriptTrait
 {
     protected ?LocaleHelper $localeHelper = null;
 
-    #[Required]
+    public function setLocaleHelper(LocaleHelper $localeHelper): void
+    {
+        $this->localeHelper = $localeHelper;
+    }
+    protected function getLocaleHelper(): LocaleHelper
+    {
+        return $this->localeHelper ??= $this->getInstanceManager()->getInstance(LocaleHelper::class);
+    }
+
+    //#[Required]
     public function autowireHasDocumentationScriptTrait(
         LocaleHelper $localeHelper,
     ): void {

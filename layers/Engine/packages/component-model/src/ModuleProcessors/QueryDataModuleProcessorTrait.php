@@ -19,7 +19,24 @@ trait QueryDataModuleProcessorTrait
     protected ?HooksAPIInterface $hooksAPI = null;
     protected ?ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler = null;
 
-    #[Required]
+    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
+    {
+        $this->hooksAPI = $hooksAPI;
+    }
+    protected function getHooksAPI(): HooksAPIInterface
+    {
+        return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
+    }
+    public function setActionExecutionQueryInputOutputHandler(ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler): void
+    {
+        $this->actionExecutionQueryInputOutputHandler = $actionExecutionQueryInputOutputHandler;
+    }
+    protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler
+    {
+        return $this->actionExecutionQueryInputOutputHandler ??= $this->getInstanceManager()->getInstance(ActionExecutionQueryInputOutputHandler::class);
+    }
+
+    //#[Required]
     public function autowireQueryDataModuleProcessorTrait(
         HooksAPIInterface $hooksAPI,
         ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler,

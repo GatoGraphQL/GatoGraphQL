@@ -10,7 +10,16 @@ class ErrorHelper implements ErrorHelperInterface
 {
     protected ?ErrorManagerInterface $errorManager = null;
 
-    #[Required]
+    public function setErrorManager(ErrorManagerInterface $errorManager): void
+    {
+        $this->errorManager = $errorManager;
+    }
+    protected function getErrorManager(): ErrorManagerInterface
+    {
+        return $this->errorManager ??= $this->getInstanceManager()->getInstance(ErrorManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireErrorHelper(ErrorManagerInterface $errorManager): void
     {
         $this->errorManager = $errorManager;

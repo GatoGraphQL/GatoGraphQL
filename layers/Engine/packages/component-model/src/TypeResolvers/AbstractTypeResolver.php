@@ -27,7 +27,56 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     protected ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
     protected ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
-    #[Required]
+    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
+    {
+        $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
+    }
+    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
+    {
+        $this->hooksAPI = $hooksAPI;
+    }
+    protected function getHooksAPI(): HooksAPIInterface
+    {
+        return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
+    }
+    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
+    {
+        $this->instanceManager = $instanceManager;
+    }
+    protected function getInstanceManager(): InstanceManagerInterface
+    {
+        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
+    }
+    public function setSchemaNamespacingService(SchemaNamespacingServiceInterface $schemaNamespacingService): void
+    {
+        $this->schemaNamespacingService = $schemaNamespacingService;
+    }
+    protected function getSchemaNamespacingService(): SchemaNamespacingServiceInterface
+    {
+        return $this->schemaNamespacingService ??= $this->getInstanceManager()->getInstance(SchemaNamespacingServiceInterface::class);
+    }
+    public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
+    {
+        $this->schemaDefinitionService = $schemaDefinitionService;
+    }
+    protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
+    {
+        return $this->schemaDefinitionService ??= $this->getInstanceManager()->getInstance(SchemaDefinitionServiceInterface::class);
+    }
+    public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
+    {
+        $this->attachableExtensionManager = $attachableExtensionManager;
+    }
+    protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
+    {
+        return $this->attachableExtensionManager ??= $this->getInstanceManager()->getInstance(AttachableExtensionManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractTypeResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, SchemaNamespacingServiceInterface $schemaNamespacingService, SchemaDefinitionServiceInterface $schemaDefinitionService, AttachableExtensionManagerInterface $attachableExtensionManager): void
     {
         $this->translationAPI = $translationAPI;

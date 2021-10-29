@@ -17,7 +17,24 @@ class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter impl
     protected ?CustomEndpointGraphiQLClient $customEndpointGraphiQLClient = null;
     protected ?GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator = null;
 
-    #[Required]
+    public function setCustomEndpointGraphiQLClient(CustomEndpointGraphiQLClient $customEndpointGraphiQLClient): void
+    {
+        $this->customEndpointGraphiQLClient = $customEndpointGraphiQLClient;
+    }
+    protected function getCustomEndpointGraphiQLClient(): CustomEndpointGraphiQLClient
+    {
+        return $this->customEndpointGraphiQLClient ??= $this->getInstanceManager()->getInstance(CustomEndpointGraphiQLClient::class);
+    }
+    public function setGraphiQLClientEndpointAnnotator(GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator): void
+    {
+        $this->graphiQLClientEndpointAnnotator = $graphiQLClientEndpointAnnotator;
+    }
+    protected function getGraphiQLClientEndpointAnnotator(): GraphiQLClientEndpointAnnotator
+    {
+        return $this->graphiQLClientEndpointAnnotator ??= $this->getInstanceManager()->getInstance(GraphiQLClientEndpointAnnotator::class);
+    }
+
+    //#[Required]
     final public function autowireGraphiQLClientEndpointExecuter(
         CustomEndpointGraphiQLClient $customEndpointGraphiQLClient,
         GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator,

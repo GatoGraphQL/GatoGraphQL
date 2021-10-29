@@ -35,7 +35,24 @@ abstract class AbstractContentParser implements ContentParserInterface
         $this->setBaseURL($baseURL);
     }
 
-    #[Required]
+    public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
+    {
+        $this->requestHelperService = $requestHelperService;
+    }
+    protected function getRequestHelperService(): RequestHelperServiceInterface
+    {
+        return $this->requestHelperService ??= $this->getInstanceManager()->getInstance(RequestHelperServiceInterface::class);
+    }
+    public function setLocaleHelper(LocaleHelper $localeHelper): void
+    {
+        $this->localeHelper = $localeHelper;
+    }
+    protected function getLocaleHelper(): LocaleHelper
+    {
+        return $this->localeHelper ??= $this->getInstanceManager()->getInstance(LocaleHelper::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractContentParser(
         RequestHelperServiceInterface $requestHelperService,
         LocaleHelper $localeHelper,

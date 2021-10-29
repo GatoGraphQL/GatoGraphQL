@@ -20,7 +20,24 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     protected ?UserTypeAPIInterface $userTypeAPI = null;
     protected ?GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver = null;
 
-    #[Required]
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
+        $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->getInstanceManager()->getInstance(UserTypeAPIInterface::class);
+    }
+    public function setGravityFormsAddEntryToFormMutationResolver(GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver): void
+    {
+        $this->gravityFormsAddEntryToFormMutationResolver = $gravityFormsAddEntryToFormMutationResolver;
+    }
+    protected function getGravityFormsAddEntryToFormMutationResolver(): GravityFormsAddEntryToFormMutationResolver
+    {
+        return $this->gravityFormsAddEntryToFormMutationResolver ??= $this->getInstanceManager()->getInstance(GravityFormsAddEntryToFormMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireGravityFormsAddEntryToFormMutationResolverBridge(
         UserTypeAPIInterface $userTypeAPI,
         GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver,
@@ -29,7 +46,24 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         $this->gravityFormsAddEntryToFormMutationResolver = $gravityFormsAddEntryToFormMutationResolver;
     }
 
-    #[Required]
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
+        $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->getInstanceManager()->getInstance(UserTypeAPIInterface::class);
+    }
+    public function setGravityFormsAddEntryToFormMutationResolver(GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver): void
+    {
+        $this->gravityFormsAddEntryToFormMutationResolver = $gravityFormsAddEntryToFormMutationResolver;
+    }
+    protected function getGravityFormsAddEntryToFormMutationResolver(): GravityFormsAddEntryToFormMutationResolver
+    {
+        return $this->gravityFormsAddEntryToFormMutationResolver ??= $this->getInstanceManager()->getInstance(GravityFormsAddEntryToFormMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireGravityFormsAddEntryToFormMutationResolverBridgeLogic()
     {
         // Execute before $hooksAPI->addAction('wp',  array('RGForms', 'maybe_process_form'), 9);

@@ -17,7 +17,32 @@ trait SetTagsOnPostObjectTypeFieldResolverTrait
     protected ?SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver = null;
     protected ?TranslationAPIInterface $translationAPI = null;
 
-    #[Required]
+    public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
+    {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+    }
+    protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    {
+        return $this->postObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostObjectTypeResolver::class);
+    }
+    public function setSetTagsOnPostMutationResolver(SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver): void
+    {
+        $this->setTagsOnPostMutationResolver = $setTagsOnPostMutationResolver;
+    }
+    protected function getSetTagsOnPostMutationResolver(): SetTagsOnPostMutationResolver
+    {
+        return $this->setTagsOnPostMutationResolver ??= $this->getInstanceManager()->getInstance(SetTagsOnPostMutationResolver::class);
+    }
+    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
+    {
+        $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
+    }
+
+    //#[Required]
     public function autowireSetTagsOnPostObjectTypeFieldResolverTrait(
         PostObjectTypeResolver $postObjectTypeResolver,
         SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver,

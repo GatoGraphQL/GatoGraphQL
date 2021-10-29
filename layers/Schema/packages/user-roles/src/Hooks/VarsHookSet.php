@@ -16,7 +16,16 @@ class VarsHookSet extends AbstractHookSet
 {
     protected ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
 
-    #[Required]
+    public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
+    {
+        $this->userRoleTypeAPI = $userRoleTypeAPI;
+    }
+    protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
+    {
+        return $this->userRoleTypeAPI ??= $this->getInstanceManager()->getInstance(UserRoleTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireVarsHookSet(
         UserRoleTypeAPIInterface $userRoleTypeAPI,
     ): void {

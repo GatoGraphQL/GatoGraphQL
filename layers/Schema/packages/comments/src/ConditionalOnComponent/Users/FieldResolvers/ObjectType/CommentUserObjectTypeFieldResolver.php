@@ -17,7 +17,24 @@ class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?CommentTypeAPIInterface $commentTypeAPI = null;
     protected ?UserObjectTypeResolver $userObjectTypeResolver = null;
 
-    #[Required]
+    public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
+    {
+        $this->commentTypeAPI = $commentTypeAPI;
+    }
+    protected function getCommentTypeAPI(): CommentTypeAPIInterface
+    {
+        return $this->commentTypeAPI ??= $this->getInstanceManager()->getInstance(CommentTypeAPIInterface::class);
+    }
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
+    {
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userObjectTypeResolver ??= $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCommentUserObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         UserObjectTypeResolver $userObjectTypeResolver,

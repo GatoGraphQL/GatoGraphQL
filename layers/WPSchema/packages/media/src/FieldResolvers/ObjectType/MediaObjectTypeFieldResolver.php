@@ -19,7 +19,32 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?DateFormatterInterface $dateFormatter = null;
     protected ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
 
-    #[Required]
+    public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
+    {
+        $this->cmsHelperService = $cmsHelperService;
+    }
+    protected function getCMSHelperService(): CMSHelperServiceInterface
+    {
+        return $this->cmsHelperService ??= $this->getInstanceManager()->getInstance(CMSHelperServiceInterface::class);
+    }
+    public function setDateFormatter(DateFormatterInterface $dateFormatter): void
+    {
+        $this->dateFormatter = $dateFormatter;
+    }
+    protected function getDateFormatter(): DateFormatterInterface
+    {
+        return $this->dateFormatter ??= $this->getInstanceManager()->getInstance(DateFormatterInterface::class);
+    }
+    public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
+    {
+        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
+    }
+    protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
+    {
+        return $this->queryableInterfaceTypeFieldResolver ??= $this->getInstanceManager()->getInstance(QueryableInterfaceTypeFieldResolver::class);
+    }
+
+    //#[Required]
     final public function autowireMediaObjectTypeFieldResolver(
         CMSHelperServiceInterface $cmsHelperService,
         DateFormatterInterface $dateFormatter,

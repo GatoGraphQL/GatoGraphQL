@@ -20,7 +20,40 @@ trait SetCategoriesOnPostObjectTypeFieldResolverTrait
     protected ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
     protected ?TranslationAPIInterface $translationAPI = null;
 
-    #[Required]
+    public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
+    {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+    }
+    protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    {
+        return $this->postObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostObjectTypeResolver::class);
+    }
+    public function setSetCategoriesOnPostMutationResolver(SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver): void
+    {
+        $this->setCategoriesOnPostMutationResolver = $setCategoriesOnPostMutationResolver;
+    }
+    protected function getSetCategoriesOnPostMutationResolver(): SetCategoriesOnPostMutationResolver
+    {
+        return $this->setCategoriesOnPostMutationResolver ??= $this->getInstanceManager()->getInstance(SetCategoriesOnPostMutationResolver::class);
+    }
+    public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
+    {
+        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
+    }
+    protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
+    {
+        return $this->postCategoryObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostCategoryObjectTypeResolver::class);
+    }
+    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
+    {
+        $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
+    }
+
+    //#[Required]
     public function autowireSetCategoriesOnPostObjectTypeFieldResolverTrait(
         PostObjectTypeResolver $postObjectTypeResolver,
         SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver,

@@ -17,7 +17,16 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 {
     protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
-    #[Required]
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowirePageObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
     ): void {

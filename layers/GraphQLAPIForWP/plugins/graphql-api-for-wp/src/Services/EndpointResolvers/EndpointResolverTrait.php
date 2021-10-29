@@ -20,7 +20,32 @@ trait EndpointResolverTrait
     protected ?QueryRetrieverInterface $queryRetriever = null;
     protected ?GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet = null;
 
-    #[Required]
+    public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
+    {
+        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
+    }
+    protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
+    {
+        return $this->graphQLDataStructureFormatter ??= $this->getInstanceManager()->getInstance(GraphQLDataStructureFormatter::class);
+    }
+    public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
+    {
+        $this->queryRetriever = $queryRetriever;
+    }
+    protected function getQueryRetriever(): QueryRetrieverInterface
+    {
+        return $this->queryRetriever ??= $this->getInstanceManager()->getInstance(QueryRetrieverInterface::class);
+    }
+    public function setGraphQLRequestVarsHookSet(GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet): void
+    {
+        $this->graphQLRequestVarsHookSet = $graphQLRequestVarsHookSet;
+    }
+    protected function getGraphQLRequestVarsHookSet(): GraphQLRequestVarsHookSet
+    {
+        return $this->graphQLRequestVarsHookSet ??= $this->getInstanceManager()->getInstance(GraphQLRequestVarsHookSet::class);
+    }
+
+    //#[Required]
     public function autowireEndpointResolverTrait(
         GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
         QueryRetrieverInterface $queryRetriever,

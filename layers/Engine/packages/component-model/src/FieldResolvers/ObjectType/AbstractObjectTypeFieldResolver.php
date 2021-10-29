@@ -86,7 +86,64 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected ?EngineInterface $engine = null;
     protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
+    }
+    public function setNameResolver(NameResolverInterface $nameResolver): void
+    {
+        $this->nameResolver = $nameResolver;
+    }
+    protected function getNameResolver(): NameResolverInterface
+    {
+        return $this->nameResolver ??= $this->getInstanceManager()->getInstance(NameResolverInterface::class);
+    }
+    public function setCMSService(CMSServiceInterface $cmsService): void
+    {
+        $this->cmsService = $cmsService;
+    }
+    protected function getCMSService(): CMSServiceInterface
+    {
+        return $this->cmsService ??= $this->getInstanceManager()->getInstance(CMSServiceInterface::class);
+    }
+    public function setSemverHelperService(SemverHelperServiceInterface $semverHelperService): void
+    {
+        $this->semverHelperService = $semverHelperService;
+    }
+    protected function getSemverHelperService(): SemverHelperServiceInterface
+    {
+        return $this->semverHelperService ??= $this->getInstanceManager()->getInstance(SemverHelperServiceInterface::class);
+    }
+    public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
+    {
+        $this->schemaDefinitionService = $schemaDefinitionService;
+    }
+    protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
+    {
+        return $this->schemaDefinitionService ??= $this->getInstanceManager()->getInstance(SchemaDefinitionServiceInterface::class);
+    }
+    public function setEngine(EngineInterface $engine): void
+    {
+        $this->engine = $engine;
+    }
+    protected function getEngine(): EngineInterface
+    {
+        return $this->engine ??= $this->getInstanceManager()->getInstance(EngineInterface::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractObjectTypeFieldResolver(
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         NameResolverInterface $nameResolver,

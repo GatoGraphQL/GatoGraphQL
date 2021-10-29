@@ -31,7 +31,32 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     protected ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
 
-    #[Required]
+    public function setRootObjectTypeResolver(RootObjectTypeResolver $rootTypeResolver): void
+    {
+        $this->rootTypeResolver = $rootTypeResolver;
+    }
+    protected function getRootObjectTypeResolver(): RootObjectTypeResolver
+    {
+        return $this->rootTypeResolver ??= $this->getInstanceManager()->getInstance(RootObjectTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    {
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+    }
+    protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    {
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->getInstanceManager()->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireApplyFunctionDirectiveResolver(
         RootObjectTypeResolver $rootTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,

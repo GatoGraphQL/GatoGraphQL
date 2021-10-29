@@ -14,7 +14,16 @@ class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMuta
 {
     protected ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
 
-    #[Required]
+    public function setAddCommentToCustomPostMutationResolver(AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver): void
+    {
+        $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
+    }
+    protected function getAddCommentToCustomPostMutationResolver(): AddCommentToCustomPostMutationResolver
+    {
+        return $this->addCommentToCustomPostMutationResolver ??= $this->getInstanceManager()->getInstance(AddCommentToCustomPostMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAddCommentToCustomPostMutationResolverBridge(
         AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
     ): void {

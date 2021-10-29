@@ -13,7 +13,16 @@ trait WithTypeFieldControlBlockTrait
 {
     protected ?TypeRegistryInterface $typeRegistry = null;
 
-    #[Required]
+    public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
+    {
+        $this->typeRegistry = $typeRegistry;
+    }
+    protected function getTypeRegistry(): TypeRegistryInterface
+    {
+        return $this->typeRegistry ??= $this->getInstanceManager()->getInstance(TypeRegistryInterface::class);
+    }
+
+    //#[Required]
     public function autowireWithTypeFieldControlBlockTrait(
         TypeRegistryInterface $typeRegistry,
     ): void {

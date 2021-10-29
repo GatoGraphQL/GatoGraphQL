@@ -24,7 +24,24 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     protected ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
     protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
+    {
+        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
+    }
+    protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
+    {
+        return $this->emailScalarTypeResolver ??= $this->getInstanceManager()->getInstance(EmailScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireFilterInputModuleProcessor(
         EmailScalarTypeResolver $emailScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,

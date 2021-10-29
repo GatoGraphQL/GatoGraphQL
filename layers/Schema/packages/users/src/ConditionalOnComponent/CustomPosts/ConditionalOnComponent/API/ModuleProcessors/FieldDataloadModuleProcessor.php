@@ -20,7 +20,24 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     protected ?CustomPostObjectTypeResolver $customPostObjectTypeResolver = null;
     protected ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
 
-    #[Required]
+    public function setCustomPostObjectTypeResolver(CustomPostObjectTypeResolver $customPostObjectTypeResolver): void
+    {
+        $this->customPostObjectTypeResolver = $customPostObjectTypeResolver;
+    }
+    protected function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolver
+    {
+        return $this->customPostObjectTypeResolver ??= $this->getInstanceManager()->getInstance(CustomPostObjectTypeResolver::class);
+    }
+    public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
+    {
+        $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
+    }
+    protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
+    {
+        return $this->listQueryInputOutputHandler ??= $this->getInstanceManager()->getInstance(ListQueryInputOutputHandler::class);
+    }
+
+    //#[Required]
     final public function autowireFieldDataloadModuleProcessor(
         CustomPostObjectTypeResolver $customPostObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,

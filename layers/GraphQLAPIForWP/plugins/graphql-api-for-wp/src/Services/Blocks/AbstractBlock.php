@@ -34,7 +34,48 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     protected ?GeneralUtils $generalUtils = null;
     protected ?EditorHelpers $editorHelpers = null;
 
-    #[Required]
+    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
+    {
+        $this->instanceManager = $instanceManager;
+    }
+    protected function getInstanceManager(): InstanceManagerInterface
+    {
+        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
+    }
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    {
+        $this->userAuthorization = $userAuthorization;
+    }
+    protected function getUserAuthorization(): UserAuthorizationInterface
+    {
+        return $this->userAuthorization ??= $this->getInstanceManager()->getInstance(UserAuthorizationInterface::class);
+    }
+    public function setGeneralUtils(GeneralUtils $generalUtils): void
+    {
+        $this->generalUtils = $generalUtils;
+    }
+    protected function getGeneralUtils(): GeneralUtils
+    {
+        return $this->generalUtils ??= $this->getInstanceManager()->getInstance(GeneralUtils::class);
+    }
+    public function setEditorHelpers(EditorHelpers $editorHelpers): void
+    {
+        $this->editorHelpers = $editorHelpers;
+    }
+    protected function getEditorHelpers(): EditorHelpers
+    {
+        return $this->editorHelpers ??= $this->getInstanceManager()->getInstance(EditorHelpers::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractBlock(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, UserAuthorizationInterface $userAuthorization, GeneralUtils $generalUtils, EditorHelpers $editorHelpers): void
     {
         $this->instanceManager = $instanceManager;

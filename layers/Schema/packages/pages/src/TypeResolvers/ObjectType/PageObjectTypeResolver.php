@@ -15,7 +15,24 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
     protected ?PageTypeDataLoader $pageTypeDataLoader = null;
     protected ?PageTypeAPIInterface $pageTypeAPI = null;
 
-    #[Required]
+    public function setPageTypeDataLoader(PageTypeDataLoader $pageTypeDataLoader): void
+    {
+        $this->pageTypeDataLoader = $pageTypeDataLoader;
+    }
+    protected function getPageTypeDataLoader(): PageTypeDataLoader
+    {
+        return $this->pageTypeDataLoader ??= $this->getInstanceManager()->getInstance(PageTypeDataLoader::class);
+    }
+    public function setPageTypeAPI(PageTypeAPIInterface $pageTypeAPI): void
+    {
+        $this->pageTypeAPI = $pageTypeAPI;
+    }
+    protected function getPageTypeAPI(): PageTypeAPIInterface
+    {
+        return $this->pageTypeAPI ??= $this->getInstanceManager()->getInstance(PageTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowirePageObjectTypeResolver(
         PageTypeDataLoader $pageTypeDataLoader,
         PageTypeAPIInterface $pageTypeAPI,

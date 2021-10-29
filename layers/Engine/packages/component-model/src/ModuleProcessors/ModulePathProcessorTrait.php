@@ -16,7 +16,24 @@ trait ModulePathProcessorTrait
     protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
     protected ?ModuleFilterManagerInterface $moduleFilterManager = null;
 
-    #[Required]
+    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    {
+        $this->moduleProcessorManager = $moduleProcessorManager;
+    }
+    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    {
+        return $this->moduleProcessorManager ??= $this->getInstanceManager()->getInstance(ModuleProcessorManagerInterface::class);
+    }
+    public function setModuleFilterManager(ModuleFilterManagerInterface $moduleFilterManager): void
+    {
+        $this->moduleFilterManager = $moduleFilterManager;
+    }
+    protected function getModuleFilterManager(): ModuleFilterManagerInterface
+    {
+        return $this->moduleFilterManager ??= $this->getInstanceManager()->getInstance(ModuleFilterManagerInterface::class);
+    }
+
+    //#[Required]
     public function autowireModulePathProcessorTrait(
         ModuleProcessorManagerInterface $moduleProcessorManager,
         ModuleFilterManagerInterface $moduleFilterManager,

@@ -12,7 +12,16 @@ abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
 {
     protected ?UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet = null;
 
-    #[Required]
+    public function setUserCustomPostFilterInputHookSet(UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet): void
+    {
+        $this->userCustomPostFilterInputHookSet = $userCustomPostFilterInputHookSet;
+    }
+    protected function getUserCustomPostFilterInputHookSet(): UserCustomPostFilterInputHookSet
+    {
+        return $this->userCustomPostFilterInputHookSet ??= $this->getInstanceManager()->getInstance(UserCustomPostFilterInputHookSet::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractRemoveAuthorFilterInputHookSet(
         UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet,
     ): void {

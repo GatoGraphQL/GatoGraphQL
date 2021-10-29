@@ -16,7 +16,32 @@ trait PostMutationResolverHookSetTrait
     protected ?MutationRootObjectTypeResolver $mutationRootObjectTypeResolver = null;
     protected ?PostObjectTypeResolver $postObjectTypeResolver = null;
 
-    #[Required]
+    public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
+    {
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+    }
+    protected function getRootObjectTypeResolver(): RootObjectTypeResolver
+    {
+        return $this->rootObjectTypeResolver ??= $this->getInstanceManager()->getInstance(RootObjectTypeResolver::class);
+    }
+    public function setMutationRootObjectTypeResolver(MutationRootObjectTypeResolver $mutationRootObjectTypeResolver): void
+    {
+        $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
+    }
+    protected function getMutationRootObjectTypeResolver(): MutationRootObjectTypeResolver
+    {
+        return $this->mutationRootObjectTypeResolver ??= $this->getInstanceManager()->getInstance(MutationRootObjectTypeResolver::class);
+    }
+    public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
+    {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+    }
+    protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    {
+        return $this->postObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostObjectTypeResolver::class);
+    }
+
+    //#[Required]
     public function autowirePostMutationResolverHookSetTrait(
         RootObjectTypeResolver $rootObjectTypeResolver,
         MutationRootObjectTypeResolver $mutationRootObjectTypeResolver,

@@ -19,7 +19,32 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
     protected ?GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers = null;
     protected ?GraphQLRequestVarsHooks $graphQLRequestVarsHooks = null;
 
-    #[Required]
+    public function setGraphQLPersistedQueryEndpointCustomPostType(GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType): void
+    {
+        $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
+    }
+    protected function getGraphQLPersistedQueryEndpointCustomPostType(): GraphQLPersistedQueryEndpointCustomPostType
+    {
+        return $this->graphQLPersistedQueryEndpointCustomPostType ??= $this->getInstanceManager()->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
+    }
+    public function setGraphQLQueryPostTypeHelpers(GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers): void
+    {
+        $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
+    }
+    protected function getGraphQLQueryPostTypeHelpers(): GraphQLQueryPostTypeHelpers
+    {
+        return $this->graphQLQueryPostTypeHelpers ??= $this->getInstanceManager()->getInstance(GraphQLQueryPostTypeHelpers::class);
+    }
+    public function setGraphQLRequestVarsHooks(GraphQLRequestVarsHooks $graphQLRequestVarsHooks): void
+    {
+        $this->graphQLRequestVarsHooks = $graphQLRequestVarsHooks;
+    }
+    protected function getGraphQLRequestVarsHooks(): GraphQLRequestVarsHooks
+    {
+        return $this->graphQLRequestVarsHooks ??= $this->getInstanceManager()->getInstance(GraphQLRequestVarsHooks::class);
+    }
+
+    //#[Required]
     final public function autowirePersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter(
         GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
         GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,

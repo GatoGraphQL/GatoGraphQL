@@ -16,7 +16,24 @@ class VarsHookSet extends AbstractHookSet
     protected ?ModuleRegistryInterface $moduleRegistry = null;
     protected ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
 
-    #[Required]
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
+    {
+        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
+    }
+    protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
+    {
+        return $this->graphQLDataStructureFormatter ??= $this->getInstanceManager()->getInstance(GraphQLDataStructureFormatter::class);
+    }
+
+    //#[Required]
     final public function autowireVarsHookSet(
         ModuleRegistryInterface $moduleRegistry,
         GraphQLDataStructureFormatter $graphQLDataStructureFormatter,

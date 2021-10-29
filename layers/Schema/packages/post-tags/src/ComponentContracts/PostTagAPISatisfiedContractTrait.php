@@ -15,7 +15,24 @@ trait PostTagAPISatisfiedContractTrait
     protected ?PostTagTypeAPIInterface $postTagTypeAPI = null;
     protected ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
 
-    #[Required]
+    public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
+    {
+        $this->postTagTypeAPI = $postTagTypeAPI;
+    }
+    protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
+    {
+        return $this->postTagTypeAPI ??= $this->getInstanceManager()->getInstance(PostTagTypeAPIInterface::class);
+    }
+    public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
+    {
+        $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
+    }
+    protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
+    {
+        return $this->postTagObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostTagObjectTypeResolver::class);
+    }
+
+    //#[Required]
     public function autowirePostTagAPISatisfiedContractTrait(
         PostTagTypeAPIInterface $postTagTypeAPI,
         PostTagObjectTypeResolver $postTagObjectTypeResolver,

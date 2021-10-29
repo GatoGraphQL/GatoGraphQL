@@ -30,7 +30,32 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
     protected ?CPTUtils $cptUtils = null;
     protected ?EndpointBlockCategory $endpointBlockCategory = null;
 
-    #[Required]
+    public function setBlockRenderingHelpers(BlockRenderingHelpers $blockRenderingHelpers): void
+    {
+        $this->blockRenderingHelpers = $blockRenderingHelpers;
+    }
+    protected function getBlockRenderingHelpers(): BlockRenderingHelpers
+    {
+        return $this->blockRenderingHelpers ??= $this->getInstanceManager()->getInstance(BlockRenderingHelpers::class);
+    }
+    public function setCPTUtils(CPTUtils $cptUtils): void
+    {
+        $this->cptUtils = $cptUtils;
+    }
+    protected function getCPTUtils(): CPTUtils
+    {
+        return $this->cptUtils ??= $this->getInstanceManager()->getInstance(CPTUtils::class);
+    }
+    public function setEndpointBlockCategory(EndpointBlockCategory $endpointBlockCategory): void
+    {
+        $this->endpointBlockCategory = $endpointBlockCategory;
+    }
+    protected function getEndpointBlockCategory(): EndpointBlockCategory
+    {
+        return $this->endpointBlockCategory ??= $this->getInstanceManager()->getInstance(EndpointBlockCategory::class);
+    }
+
+    //#[Required]
     final public function autowireEndpointSchemaConfigurationBlock(
         BlockRenderingHelpers $blockRenderingHelpers,
         CPTUtils $cptUtils,

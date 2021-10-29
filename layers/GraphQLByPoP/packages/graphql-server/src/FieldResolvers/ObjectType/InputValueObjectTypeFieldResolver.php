@@ -19,7 +19,24 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     protected ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
 
-    #[Required]
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
+    {
+        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
+    }
+    protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
+    {
+        return $this->typeObjectTypeResolver ??= $this->getInstanceManager()->getInstance(TypeObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireInputValueObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         TypeObjectTypeResolver $typeObjectTypeResolver,

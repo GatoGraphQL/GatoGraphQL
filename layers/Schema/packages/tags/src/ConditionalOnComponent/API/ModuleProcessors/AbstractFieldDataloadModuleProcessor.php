@@ -24,7 +24,24 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
     protected ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
     protected ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
 
-    #[Required]
+    public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
+    {
+        $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
+    }
+    protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
+    {
+        return $this->postTagObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostTagObjectTypeResolver::class);
+    }
+    public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
+    {
+        $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
+    }
+    protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
+    {
+        return $this->listQueryInputOutputHandler ??= $this->getInstanceManager()->getInstance(ListQueryInputOutputHandler::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractFieldDataloadModuleProcessor(
         PostTagObjectTypeResolver $postTagObjectTypeResolver,
         ListQueryInputOutputHandler $listQueryInputOutputHandler,

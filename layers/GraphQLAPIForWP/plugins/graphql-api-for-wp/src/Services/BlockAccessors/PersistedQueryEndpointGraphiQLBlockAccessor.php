@@ -15,7 +15,24 @@ class PersistedQueryEndpointGraphiQLBlockAccessor
     protected ?BlockHelpers $blockHelpers = null;
     protected ?PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock = null;
 
-    #[Required]
+    public function setBlockHelpers(BlockHelpers $blockHelpers): void
+    {
+        $this->blockHelpers = $blockHelpers;
+    }
+    protected function getBlockHelpers(): BlockHelpers
+    {
+        return $this->blockHelpers ??= $this->getInstanceManager()->getInstance(BlockHelpers::class);
+    }
+    public function setPersistedQueryEndpointGraphiQLBlock(PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock): void
+    {
+        $this->persistedQueryEndpointGraphiQLBlock = $persistedQueryEndpointGraphiQLBlock;
+    }
+    protected function getPersistedQueryEndpointGraphiQLBlock(): PersistedQueryEndpointGraphiQLBlock
+    {
+        return $this->persistedQueryEndpointGraphiQLBlock ??= $this->getInstanceManager()->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
+    }
+
+    //#[Required]
     final public function autowirePersistedQueryEndpointGraphiQLBlockAccessor(
         BlockHelpers $blockHelpers,
         PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock,

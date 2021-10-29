@@ -26,7 +26,24 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     protected ?UserSettingsManagerInterface $userSettingsManager = null;
     protected ?ModuleRegistryInterface $moduleRegistry = null;
 
-    #[Required]
+    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
+    {
+        $this->userSettingsManager = $userSettingsManager;
+    }
+    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    {
+        return $this->userSettingsManager ??= $this->getInstanceManager()->getInstance(UserSettingsManagerInterface::class);
+    }
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+    }
+
+    //#[Required]
     final public function autowireSettingsMenuPage(
         ModuleRegistryInterface $moduleRegistry,
     ): void {

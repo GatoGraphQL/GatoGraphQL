@@ -14,7 +14,16 @@ class PluginMenu extends AbstractMenu
 {
     protected ?UserAuthorizationInterface $userAuthorization = null;
 
-    #[Required]
+    public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    {
+        $this->userAuthorization = $userAuthorization;
+    }
+    protected function getUserAuthorization(): UserAuthorizationInterface
+    {
+        return $this->userAuthorization ??= $this->getInstanceManager()->getInstance(UserAuthorizationInterface::class);
+    }
+
+    //#[Required]
     final public function autowirePluginMenu(
         UserAuthorizationInterface $userAuthorization
     ): void {

@@ -59,7 +59,24 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     protected ?PersistedFragmentManagerInterface $fragmentCatalogueManager = null;
     protected ?PersistedQueryManagerInterface $queryCatalogueManager = null;
 
-    #[Required]
+    public function setPersistedFragmentManager(PersistedFragmentManagerInterface $fragmentCatalogueManager): void
+    {
+        $this->fragmentCatalogueManager = $fragmentCatalogueManager;
+    }
+    protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
+    {
+        return $this->fragmentCatalogueManager ??= $this->getInstanceManager()->getInstance(PersistedFragmentManagerInterface::class);
+    }
+    public function setPersistedQueryManager(PersistedQueryManagerInterface $queryCatalogueManager): void
+    {
+        $this->queryCatalogueManager = $queryCatalogueManager;
+    }
+    protected function getPersistedQueryManager(): PersistedQueryManagerInterface
+    {
+        return $this->queryCatalogueManager ??= $this->getInstanceManager()->getInstance(PersistedQueryManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAPISchemaDefinitionService(
         PersistedFragmentManagerInterface $fragmentCatalogueManager,
         PersistedQueryManagerInterface $queryCatalogueManager,

@@ -14,7 +14,16 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 {
     protected ?SiteTypeDataLoader $siteTypeDataLoader = null;
 
-    #[Required]
+    public function setSiteTypeDataLoader(SiteTypeDataLoader $siteTypeDataLoader): void
+    {
+        $this->siteTypeDataLoader = $siteTypeDataLoader;
+    }
+    protected function getSiteTypeDataLoader(): SiteTypeDataLoader
+    {
+        return $this->siteTypeDataLoader ??= $this->getInstanceManager()->getInstance(SiteTypeDataLoader::class);
+    }
+
+    //#[Required]
     final public function autowireSiteObjectTypeResolver(
         SiteTypeDataLoader $siteTypeDataLoader,
     ): void {

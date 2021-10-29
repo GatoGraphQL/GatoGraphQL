@@ -27,7 +27,32 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
     protected ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
 
-    #[Required]
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
+    {
+        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+    }
+    protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
+    {
+        return $this->commentObjectTypeResolver ??= $this->getInstanceManager()->getInstance(CommentObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCommentableInterfaceTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,

@@ -15,7 +15,16 @@ class SelfFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisable
 {
     protected ?SchemaConfigSelfFieldsBlock $schemaConfigSelfFieldsBlock = null;
 
-    #[Required]
+    public function setSchemaConfigSelfFieldsBlock(SchemaConfigSelfFieldsBlock $schemaConfigSelfFieldsBlock): void
+    {
+        $this->schemaConfigSelfFieldsBlock = $schemaConfigSelfFieldsBlock;
+    }
+    protected function getSchemaConfigSelfFieldsBlock(): SchemaConfigSelfFieldsBlock
+    {
+        return $this->schemaConfigSelfFieldsBlock ??= $this->getInstanceManager()->getInstance(SchemaConfigSelfFieldsBlock::class);
+    }
+
+    //#[Required]
     final public function autowireNamespacingSchemaConfigurationExecuter(
         SchemaConfigSelfFieldsBlock $schemaConfigSelfFieldsBlock,
     ): void {

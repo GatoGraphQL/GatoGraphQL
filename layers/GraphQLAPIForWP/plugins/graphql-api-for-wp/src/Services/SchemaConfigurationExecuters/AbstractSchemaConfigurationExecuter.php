@@ -16,7 +16,32 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
     protected ?ModuleRegistryInterface $moduleRegistry = null;
     protected ?BlockHelpers $blockHelpers = null;
 
-    #[Required]
+    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
+    {
+        $this->instanceManager = $instanceManager;
+    }
+    protected function getInstanceManager(): InstanceManagerInterface
+    {
+        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
+    }
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setBlockHelpers(BlockHelpers $blockHelpers): void
+    {
+        $this->blockHelpers = $blockHelpers;
+    }
+    protected function getBlockHelpers(): BlockHelpers
+    {
+        return $this->blockHelpers ??= $this->getInstanceManager()->getInstance(BlockHelpers::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractSchemaConfigurationExecuter(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, BlockHelpers $blockHelpers): void
     {
         $this->instanceManager = $instanceManager;

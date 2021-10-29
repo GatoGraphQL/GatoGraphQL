@@ -17,7 +17,24 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?UserMediaTypeAPIInterface $userMediaTypeAPI = null;
     protected ?UserObjectTypeResolver $userObjectTypeResolver = null;
 
-    #[Required]
+    public function setUserMediaTypeAPI(UserMediaTypeAPIInterface $userMediaTypeAPI): void
+    {
+        $this->userMediaTypeAPI = $userMediaTypeAPI;
+    }
+    protected function getUserMediaTypeAPI(): UserMediaTypeAPIInterface
+    {
+        return $this->userMediaTypeAPI ??= $this->getInstanceManager()->getInstance(UserMediaTypeAPIInterface::class);
+    }
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
+    {
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userObjectTypeResolver ??= $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireMediaUserObjectTypeFieldResolver(
         UserMediaTypeAPIInterface $userMediaTypeAPI,
         UserObjectTypeResolver $userObjectTypeResolver,

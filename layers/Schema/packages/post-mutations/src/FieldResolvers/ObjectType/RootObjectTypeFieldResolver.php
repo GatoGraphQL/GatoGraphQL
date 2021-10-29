@@ -24,7 +24,32 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?CreatePostMutationResolver $createPostMutationResolver = null;
     protected ?UpdatePostMutationResolver $updatePostMutationResolver = null;
 
-    #[Required]
+    public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
+    {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+    }
+    protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    {
+        return $this->postObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostObjectTypeResolver::class);
+    }
+    public function setCreatePostMutationResolver(CreatePostMutationResolver $createPostMutationResolver): void
+    {
+        $this->createPostMutationResolver = $createPostMutationResolver;
+    }
+    protected function getCreatePostMutationResolver(): CreatePostMutationResolver
+    {
+        return $this->createPostMutationResolver ??= $this->getInstanceManager()->getInstance(CreatePostMutationResolver::class);
+    }
+    public function setUpdatePostMutationResolver(UpdatePostMutationResolver $updatePostMutationResolver): void
+    {
+        $this->updatePostMutationResolver = $updatePostMutationResolver;
+    }
+    protected function getUpdatePostMutationResolver(): UpdatePostMutationResolver
+    {
+        return $this->updatePostMutationResolver ??= $this->getInstanceManager()->getInstance(UpdatePostMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireRootObjectTypeFieldResolver(
         PostObjectTypeResolver $postObjectTypeResolver,
         CreatePostMutationResolver $createPostMutationResolver,

@@ -20,7 +20,32 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     protected ?SettingsTypeAPIInterface $settingsTypeAPI = null;
 
-    #[Required]
+    public function setAnyBuiltInScalarScalarTypeResolver(AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver): void
+    {
+        $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
+    }
+    protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
+    {
+        return $this->anyBuiltInScalarScalarTypeResolver ??= $this->getInstanceManager()->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setSettingsTypeAPI(SettingsTypeAPIInterface $settingsTypeAPI): void
+    {
+        $this->settingsTypeAPI = $settingsTypeAPI;
+    }
+    protected function getSettingsTypeAPI(): SettingsTypeAPIInterface
+    {
+        return $this->settingsTypeAPI ??= $this->getInstanceManager()->getInstance(SettingsTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireRootObjectTypeFieldResolver(
         AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,

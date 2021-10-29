@@ -15,7 +15,24 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
     protected ?CommentTypeAPIInterface $commentTypeAPI = null;
     protected ?CommentTypeDataLoader $commentTypeDataLoader = null;
 
-    #[Required]
+    public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
+    {
+        $this->commentTypeAPI = $commentTypeAPI;
+    }
+    protected function getCommentTypeAPI(): CommentTypeAPIInterface
+    {
+        return $this->commentTypeAPI ??= $this->getInstanceManager()->getInstance(CommentTypeAPIInterface::class);
+    }
+    public function setCommentTypeDataLoader(CommentTypeDataLoader $commentTypeDataLoader): void
+    {
+        $this->commentTypeDataLoader = $commentTypeDataLoader;
+    }
+    protected function getCommentTypeDataLoader(): CommentTypeDataLoader
+    {
+        return $this->commentTypeDataLoader ??= $this->getInstanceManager()->getInstance(CommentTypeDataLoader::class);
+    }
+
+    //#[Required]
     final public function autowireCommentObjectTypeResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         CommentTypeDataLoader $commentTypeDataLoader,

@@ -33,7 +33,48 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     protected ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     protected ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
 
-    #[Required]
+    public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
+    {
+        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+    }
+    protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
+    {
+        return $this->customPostStatusEnumTypeResolver ??= $this->getInstanceManager()->getInstance(CustomPostStatusEnumTypeResolver::class);
+    }
+    public function setNameResolver(NameResolverInterface $nameResolver): void
+    {
+        $this->nameResolver = $nameResolver;
+    }
+    protected function getNameResolver(): NameResolverInterface
+    {
+        return $this->nameResolver ??= $this->getInstanceManager()->getInstance(NameResolverInterface::class);
+    }
+    public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
+    {
+        $this->userRoleTypeAPI = $userRoleTypeAPI;
+    }
+    protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
+    {
+        return $this->userRoleTypeAPI ??= $this->getInstanceManager()->getInstance(UserRoleTypeAPIInterface::class);
+    }
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->getInstanceManager()->getInstance(CustomPostTypeAPIInterface::class);
+    }
+    public function setCustomPostTypeMutationAPI(CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI): void
+    {
+        $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
+    }
+    protected function getCustomPostTypeMutationAPI(): CustomPostTypeMutationAPIInterface
+    {
+        return $this->customPostTypeMutationAPI ??= $this->getInstanceManager()->getInstance(CustomPostTypeMutationAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCreateUpdateCustomPostMutationResolver(
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
         NameResolverInterface $nameResolver,

@@ -13,7 +13,16 @@ trait ValidateUserLoggedInForFieldsRelationalTypeResolverDecoratorTrait
 {
     protected ?ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver = null;
 
-    #[Required]
+    public function setValidateIsUserLoggedInDirectiveResolver(ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver): void
+    {
+        $this->validateIsUserLoggedInDirectiveResolver = $validateIsUserLoggedInDirectiveResolver;
+    }
+    protected function getValidateIsUserLoggedInDirectiveResolver(): ValidateIsUserLoggedInDirectiveResolver
+    {
+        return $this->validateIsUserLoggedInDirectiveResolver ??= $this->getInstanceManager()->getInstance(ValidateIsUserLoggedInDirectiveResolver::class);
+    }
+
+    //#[Required]
     public function autowireValidateUserLoggedInForFieldsRelationalTypeResolverDecoratorTrait(
         ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver,
     ): void {

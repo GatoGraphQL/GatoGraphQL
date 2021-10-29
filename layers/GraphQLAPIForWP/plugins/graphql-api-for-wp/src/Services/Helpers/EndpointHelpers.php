@@ -16,7 +16,24 @@ class EndpointHelpers
     protected ?PluginMenu $pluginMenu = null;
     protected ?ModuleRegistryInterface $moduleRegistry = null;
 
-    #[Required]
+    public function setPluginMenu(PluginMenu $pluginMenu): void
+    {
+        $this->pluginMenu = $pluginMenu;
+    }
+    protected function getPluginMenu(): PluginMenu
+    {
+        return $this->pluginMenu ??= $this->getInstanceManager()->getInstance(PluginMenu::class);
+    }
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+    }
+
+    //#[Required]
     final public function autowireEndpointHelpers(
         PluginMenu $pluginMenu,
         ModuleRegistryInterface $moduleRegistry,

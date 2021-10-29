@@ -15,7 +15,16 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
 {
     protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireGlobalObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {

@@ -13,7 +13,16 @@ class DirectiveObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
 {
     protected ?SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader = null;
 
-    #[Required]
+    public function setSchemaDefinitionReferenceTypeDataLoader(SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader): void
+    {
+        $this->schemaDefinitionReferenceTypeDataLoader = $schemaDefinitionReferenceTypeDataLoader;
+    }
+    protected function getSchemaDefinitionReferenceTypeDataLoader(): SchemaDefinitionReferenceTypeDataLoader
+    {
+        return $this->schemaDefinitionReferenceTypeDataLoader ??= $this->getInstanceManager()->getInstance(SchemaDefinitionReferenceTypeDataLoader::class);
+    }
+
+    //#[Required]
     final public function autowireDirectiveObjectTypeResolver(
         SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
     ): void {

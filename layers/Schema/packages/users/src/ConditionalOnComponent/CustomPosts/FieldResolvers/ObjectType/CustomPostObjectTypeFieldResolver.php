@@ -16,7 +16,24 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?CustomPostUserTypeAPIInterface $customPostUserTypeAPI = null;
     protected ?WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver = null;
 
-    #[Required]
+    public function setCustomPostUserTypeAPI(CustomPostUserTypeAPIInterface $customPostUserTypeAPI): void
+    {
+        $this->customPostUserTypeAPI = $customPostUserTypeAPI;
+    }
+    protected function getCustomPostUserTypeAPI(): CustomPostUserTypeAPIInterface
+    {
+        return $this->customPostUserTypeAPI ??= $this->getInstanceManager()->getInstance(CustomPostUserTypeAPIInterface::class);
+    }
+    public function setWithAuthorInterfaceTypeFieldResolver(WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver): void
+    {
+        $this->withAuthorInterfaceTypeFieldResolver = $withAuthorInterfaceTypeFieldResolver;
+    }
+    protected function getWithAuthorInterfaceTypeFieldResolver(): WithAuthorInterfaceTypeFieldResolver
+    {
+        return $this->withAuthorInterfaceTypeFieldResolver ??= $this->getInstanceManager()->getInstance(WithAuthorInterfaceTypeFieldResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCustomPostObjectTypeFieldResolver(
         CustomPostUserTypeAPIInterface $customPostUserTypeAPI,
         WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver,

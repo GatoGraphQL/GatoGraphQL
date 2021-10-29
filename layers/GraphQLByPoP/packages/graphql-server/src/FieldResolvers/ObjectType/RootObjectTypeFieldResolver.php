@@ -24,7 +24,40 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?SchemaTypeDataLoader $schemaTypeDataLoader = null;
     protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setSchemaObjectTypeResolver(SchemaObjectTypeResolver $schemaObjectTypeResolver): void
+    {
+        $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
+    }
+    protected function getSchemaObjectTypeResolver(): SchemaObjectTypeResolver
+    {
+        return $this->schemaObjectTypeResolver ??= $this->getInstanceManager()->getInstance(SchemaObjectTypeResolver::class);
+    }
+    public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
+    {
+        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
+    }
+    protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
+    {
+        return $this->typeObjectTypeResolver ??= $this->getInstanceManager()->getInstance(TypeObjectTypeResolver::class);
+    }
+    public function setSchemaTypeDataLoader(SchemaTypeDataLoader $schemaTypeDataLoader): void
+    {
+        $this->schemaTypeDataLoader = $schemaTypeDataLoader;
+    }
+    protected function getSchemaTypeDataLoader(): SchemaTypeDataLoader
+    {
+        return $this->schemaTypeDataLoader ??= $this->getInstanceManager()->getInstance(SchemaTypeDataLoader::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireRootObjectTypeFieldResolver(
         SchemaObjectTypeResolver $schemaObjectTypeResolver,
         TypeObjectTypeResolver $typeObjectTypeResolver,

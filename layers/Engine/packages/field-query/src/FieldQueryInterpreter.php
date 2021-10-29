@@ -62,7 +62,32 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     protected ?QueryParserInterface $queryParser = null;
 
-    #[Required]
+    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
+    {
+        $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
+    }
+    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+    }
+    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    {
+        return $this->feedbackMessageStore ??= $this->getInstanceManager()->getInstance(FeedbackMessageStoreInterface::class);
+    }
+    public function setQueryParser(QueryParserInterface $queryParser): void
+    {
+        $this->queryParser = $queryParser;
+    }
+    protected function getQueryParser(): QueryParserInterface
+    {
+        return $this->queryParser ??= $this->getInstanceManager()->getInstance(QueryParserInterface::class);
+    }
+
+    //#[Required]
     final public function autowireFieldQueryInterpreter(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser): void
     {
         $this->translationAPI = $translationAPI;

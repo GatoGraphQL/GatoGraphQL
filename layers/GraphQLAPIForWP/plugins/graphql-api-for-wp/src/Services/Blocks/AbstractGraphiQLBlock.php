@@ -22,7 +22,24 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     protected ?EndpointHelpers $endpointHelpers = null;
     protected ?PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory = null;
 
-    #[Required]
+    public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
+    {
+        $this->endpointHelpers = $endpointHelpers;
+    }
+    protected function getEndpointHelpers(): EndpointHelpers
+    {
+        return $this->endpointHelpers ??= $this->getInstanceManager()->getInstance(EndpointHelpers::class);
+    }
+    public function setPersistedQueryEndpointBlockCategory(PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory): void
+    {
+        $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
+    }
+    protected function getPersistedQueryEndpointBlockCategory(): PersistedQueryEndpointBlockCategory
+    {
+        return $this->persistedQueryEndpointBlockCategory ??= $this->getInstanceManager()->getInstance(PersistedQueryEndpointBlockCategory::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractGraphiQLBlock(
         EndpointHelpers $endpointHelpers,
         PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,

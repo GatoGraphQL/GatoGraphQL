@@ -19,7 +19,24 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
     protected ?SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry = null;
     protected ?GraphQLSyntaxServiceInterface $graphQLSyntaxService = null;
 
-    #[Required]
+    public function setSchemaDefinitionReferenceRegistry(SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry): void
+    {
+        $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
+    }
+    protected function getSchemaDefinitionReferenceRegistry(): SchemaDefinitionReferenceRegistryInterface
+    {
+        return $this->schemaDefinitionReferenceRegistry ??= $this->getInstanceManager()->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
+    }
+    public function setGraphQLSyntaxService(GraphQLSyntaxServiceInterface $graphQLSyntaxService): void
+    {
+        $this->graphQLSyntaxService = $graphQLSyntaxService;
+    }
+    protected function getGraphQLSyntaxService(): GraphQLSyntaxServiceInterface
+    {
+        return $this->graphQLSyntaxService ??= $this->getInstanceManager()->getInstance(GraphQLSyntaxServiceInterface::class);
+    }
+
+    //#[Required]
     final public function autowireSchemaDefinitionReferenceTypeDataLoader(
         SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
         GraphQLSyntaxServiceInterface $graphQLSyntaxService,

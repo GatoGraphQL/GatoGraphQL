@@ -14,7 +14,24 @@ abstract class AbstractCheckpointProcessor implements CheckpointProcessorInterfa
     protected ?TranslationAPIInterface $translationAPI = null;
     protected ?HooksAPIInterface $hooksAPI = null;
 
-    #[Required]
+    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
+    {
+        $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
+    }
+    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
+    {
+        $this->hooksAPI = $hooksAPI;
+    }
+    protected function getHooksAPI(): HooksAPIInterface
+    {
+        return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCheckpointProcessor(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI): void
     {
         $this->translationAPI = $translationAPI;

@@ -20,7 +20,24 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaRelationalTypeR
     protected ?AccessControlManagerInterface $accessControlManager = null;
     protected ?ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver $validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver = null;
 
-    #[Required]
+    public function setAccessControlManager(AccessControlManagerInterface $accessControlManager): void
+    {
+        $this->accessControlManager = $accessControlManager;
+    }
+    protected function getAccessControlManager(): AccessControlManagerInterface
+    {
+        return $this->accessControlManager ??= $this->getInstanceManager()->getInstance(AccessControlManagerInterface::class);
+    }
+    public function setValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver(ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver $validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver): void
+    {
+        $this->validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver = $validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver;
+    }
+    protected function getValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver(): ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver
+    {
+        return $this->validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver ??= $this->getInstanceManager()->getInstance(ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver::class);
+    }
+
+    //#[Required]
     final public function autowireValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaRelationalTypeResolverDecorator(
         AccessControlManagerInterface $accessControlManager,
         ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver $validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver,

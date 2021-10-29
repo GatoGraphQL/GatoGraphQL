@@ -51,7 +51,48 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     protected ?GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService = null;
     protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
-    #[Required]
+    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
+    {
+        $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
+    }
+    public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
+    {
+        $this->schemaDefinitionService = $schemaDefinitionService;
+    }
+    protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
+    {
+        return $this->schemaDefinitionService ??= $this->getInstanceManager()->getInstance(SchemaDefinitionServiceInterface::class);
+    }
+    public function setQueryRootObjectTypeResolver(QueryRootObjectTypeResolver $queryRootObjectTypeResolver): void
+    {
+        $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
+    }
+    protected function getQueryRootObjectTypeResolver(): QueryRootObjectTypeResolver
+    {
+        return $this->queryRootObjectTypeResolver ??= $this->getInstanceManager()->getInstance(QueryRootObjectTypeResolver::class);
+    }
+    public function setGraphQLSchemaDefinitionService(GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService): void
+    {
+        $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
+    }
+    protected function getGraphQLSchemaDefinitionService(): GraphQLSchemaDefinitionServiceInterface
+    {
+        return $this->graphQLSchemaDefinitionService ??= $this->getInstanceManager()->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireSchemaDefinitionReferenceRegistry(
         TranslationAPIInterface $translationAPI,
         SchemaDefinitionServiceInterface $schemaDefinitionService,

@@ -19,7 +19,24 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
     protected ?UserCommentTypeAPIInterface $userCommentTypeAPI = null;
     protected ?UserTypeAPIInterface $userTypeAPI = null;
 
-    #[Required]
+    public function setUserCommentTypeAPI(UserCommentTypeAPIInterface $userCommentTypeAPI): void
+    {
+        $this->userCommentTypeAPI = $userCommentTypeAPI;
+    }
+    protected function getUserCommentTypeAPI(): UserCommentTypeAPIInterface
+    {
+        return $this->userCommentTypeAPI ??= $this->getInstanceManager()->getInstance(UserCommentTypeAPIInterface::class);
+    }
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
+        $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->getInstanceManager()->getInstance(UserTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireCommentMutationsCommentObjectTypeFieldResolver(
         UserCommentTypeAPIInterface $userCommentTypeAPI,
         UserTypeAPIInterface $userTypeAPI,

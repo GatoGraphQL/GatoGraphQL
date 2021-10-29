@@ -13,7 +13,16 @@ class GravityFormsNewsletterUnsubscriptionMutationResolverBridge extends Abstrac
 {
     protected ?GravityFormsNewsletterUnsubscriptionMutationResolver $gravityFormsNewsletterUnsubscriptionMutationResolver = null;
     
-    #[Required]
+    public function setGravityFormsNewsletterUnsubscriptionMutationResolver(GravityFormsNewsletterUnsubscriptionMutationResolver $gravityFormsNewsletterUnsubscriptionMutationResolver): void
+    {
+        $this->gravityFormsNewsletterUnsubscriptionMutationResolver = $gravityFormsNewsletterUnsubscriptionMutationResolver;
+    }
+    protected function getGravityFormsNewsletterUnsubscriptionMutationResolver(): GravityFormsNewsletterUnsubscriptionMutationResolver
+    {
+        return $this->gravityFormsNewsletterUnsubscriptionMutationResolver ??= $this->getInstanceManager()->getInstance(GravityFormsNewsletterUnsubscriptionMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireGravityFormsNewsletterUnsubscriptionMutationResolverBridge(
         GravityFormsNewsletterUnsubscriptionMutationResolver $gravityFormsNewsletterUnsubscriptionMutationResolver,
     ): void {

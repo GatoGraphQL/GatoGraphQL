@@ -15,7 +15,32 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     protected ?ModuleRegistryInterface $moduleRegistry = null;
     protected ?TranslationAPIInterface $translationAPI = null;
 
-    #[Required]
+    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
+    {
+        $this->instanceManager = $instanceManager;
+    }
+    protected function getInstanceManager(): InstanceManagerInterface
+    {
+        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
+    }
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
+    {
+        $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractModuleResolver(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, TranslationAPIInterface $translationAPI): void
     {
         $this->instanceManager = $instanceManager;

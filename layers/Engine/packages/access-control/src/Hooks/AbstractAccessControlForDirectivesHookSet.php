@@ -15,7 +15,16 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
 {
     protected ?AccessControlManagerInterface $accessControlManager = null;
 
-    #[Required]
+    public function setAccessControlManager(AccessControlManagerInterface $accessControlManager): void
+    {
+        $this->accessControlManager = $accessControlManager;
+    }
+    protected function getAccessControlManager(): AccessControlManagerInterface
+    {
+        return $this->accessControlManager ??= $this->getInstanceManager()->getInstance(AccessControlManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractAccessControlForDirectivesHookSet(
         AccessControlManagerInterface $accessControlManager
     ): void {

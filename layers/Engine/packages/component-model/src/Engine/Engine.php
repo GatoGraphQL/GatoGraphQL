@@ -127,7 +127,128 @@ class Engine implements EngineInterface
     protected ?EntryModuleManagerInterface $entryModuleManager = null;
     protected ?RequestHelperServiceInterface $requestHelperService = null;
 
-    #[Required]
+    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
+    {
+        $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
+    }
+    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
+    {
+        $this->hooksAPI = $hooksAPI;
+    }
+    protected function getHooksAPI(): HooksAPIInterface
+    {
+        return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
+    }
+    public function setDataStructureManager(DataStructureManagerInterface $dataStructureManager): void
+    {
+        $this->dataStructureManager = $dataStructureManager;
+    }
+    protected function getDataStructureManager(): DataStructureManagerInterface
+    {
+        return $this->dataStructureManager ??= $this->getInstanceManager()->getInstance(DataStructureManagerInterface::class);
+    }
+    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
+    {
+        $this->instanceManager = $instanceManager;
+    }
+    protected function getInstanceManager(): InstanceManagerInterface
+    {
+        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
+    }
+    public function setModelInstance(ModelInstanceInterface $modelInstance): void
+    {
+        $this->modelInstance = $modelInstance;
+    }
+    protected function getModelInstance(): ModelInstanceInterface
+    {
+        return $this->modelInstance ??= $this->getInstanceManager()->getInstance(ModelInstanceInterface::class);
+    }
+    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+    }
+    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    {
+        return $this->feedbackMessageStore ??= $this->getInstanceManager()->getInstance(FeedbackMessageStoreInterface::class);
+    }
+    public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
+    {
+        $this->modulePathHelpers = $modulePathHelpers;
+    }
+    protected function getModulePathHelpers(): ModulePathHelpersInterface
+    {
+        return $this->modulePathHelpers ??= $this->getInstanceManager()->getInstance(ModulePathHelpersInterface::class);
+    }
+    public function setModulePathManager(ModulePathManagerInterface $modulePathManager): void
+    {
+        $this->modulePathManager = $modulePathManager;
+    }
+    protected function getModulePathManager(): ModulePathManagerInterface
+    {
+        return $this->modulePathManager ??= $this->getInstanceManager()->getInstance(ModulePathManagerInterface::class);
+    }
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
+    }
+    public function setModuleFilterManager(ModuleFilterManagerInterface $moduleFilterManager): void
+    {
+        $this->moduleFilterManager = $moduleFilterManager;
+    }
+    protected function getModuleFilterManager(): ModuleFilterManagerInterface
+    {
+        return $this->moduleFilterManager ??= $this->getInstanceManager()->getInstance(ModuleFilterManagerInterface::class);
+    }
+    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    {
+        $this->moduleProcessorManager = $moduleProcessorManager;
+    }
+    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    {
+        return $this->moduleProcessorManager ??= $this->getInstanceManager()->getInstance(ModuleProcessorManagerInterface::class);
+    }
+    public function setCheckpointProcessorManager(CheckpointProcessorManagerInterface $checkpointProcessorManager): void
+    {
+        $this->checkpointProcessorManager = $checkpointProcessorManager;
+    }
+    protected function getCheckpointProcessorManager(): CheckpointProcessorManagerInterface
+    {
+        return $this->checkpointProcessorManager ??= $this->getInstanceManager()->getInstance(CheckpointProcessorManagerInterface::class);
+    }
+    public function setDataloadHelperService(DataloadHelperServiceInterface $dataloadHelperService): void
+    {
+        $this->dataloadHelperService = $dataloadHelperService;
+    }
+    protected function getDataloadHelperService(): DataloadHelperServiceInterface
+    {
+        return $this->dataloadHelperService ??= $this->getInstanceManager()->getInstance(DataloadHelperServiceInterface::class);
+    }
+    public function setEntryModuleManager(EntryModuleManagerInterface $entryModuleManager): void
+    {
+        $this->entryModuleManager = $entryModuleManager;
+    }
+    protected function getEntryModuleManager(): EntryModuleManagerInterface
+    {
+        return $this->entryModuleManager ??= $this->getInstanceManager()->getInstance(EntryModuleManagerInterface::class);
+    }
+    public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
+    {
+        $this->requestHelperService = $requestHelperService;
+    }
+    protected function getRequestHelperService(): RequestHelperServiceInterface
+    {
+        return $this->requestHelperService ??= $this->getInstanceManager()->getInstance(RequestHelperServiceInterface::class);
+    }
+
+    //#[Required]
     final public function autowireEngine(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,

@@ -29,7 +29,56 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     protected ?CPTUtils $cptUtils = null;
     protected ?PluginMenu $pluginMenu = null;
 
-    #[Required]
+    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
+    {
+        $this->userSettingsManager = $userSettingsManager;
+    }
+    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    {
+        return $this->userSettingsManager ??= $this->getInstanceManager()->getInstance(UserSettingsManagerInterface::class);
+    }
+    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
+    {
+        $this->instanceManager = $instanceManager;
+    }
+    protected function getInstanceManager(): InstanceManagerInterface
+    {
+        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
+    }
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    {
+        $this->userAuthorization = $userAuthorization;
+    }
+    protected function getUserAuthorization(): UserAuthorizationInterface
+    {
+        return $this->userAuthorization ??= $this->getInstanceManager()->getInstance(UserAuthorizationInterface::class);
+    }
+    public function setCPTUtils(CPTUtils $cptUtils): void
+    {
+        $this->cptUtils = $cptUtils;
+    }
+    protected function getCPTUtils(): CPTUtils
+    {
+        return $this->cptUtils ??= $this->getInstanceManager()->getInstance(CPTUtils::class);
+    }
+    public function setPluginMenu(PluginMenu $pluginMenu): void
+    {
+        $this->pluginMenu = $pluginMenu;
+    }
+    protected function getPluginMenu(): PluginMenu
+    {
+        return $this->pluginMenu ??= $this->getInstanceManager()->getInstance(PluginMenu::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCustomPostType(
         InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,

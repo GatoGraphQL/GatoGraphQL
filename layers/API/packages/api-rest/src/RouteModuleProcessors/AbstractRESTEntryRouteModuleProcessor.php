@@ -18,7 +18,24 @@ abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteM
     protected ?RESTDataStructureFormatter $restDataStructureFormatter = null;
     protected ?FieldQueryConvertorInterface $fieldQueryConvertor = null;
 
-    #[Required]
+    public function setRESTDataStructureFormatter(RESTDataStructureFormatter $restDataStructureFormatter): void
+    {
+        $this->restDataStructureFormatter = $restDataStructureFormatter;
+    }
+    protected function getRESTDataStructureFormatter(): RESTDataStructureFormatter
+    {
+        return $this->restDataStructureFormatter ??= $this->getInstanceManager()->getInstance(RESTDataStructureFormatter::class);
+    }
+    public function setFieldQueryConvertor(FieldQueryConvertorInterface $fieldQueryConvertor): void
+    {
+        $this->fieldQueryConvertor = $fieldQueryConvertor;
+    }
+    protected function getFieldQueryConvertor(): FieldQueryConvertorInterface
+    {
+        return $this->fieldQueryConvertor ??= $this->getInstanceManager()->getInstance(FieldQueryConvertorInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractRESTEntryRouteModuleProcessor(
         RESTDataStructureFormatter $restDataStructureFormatter,
         FieldQueryConvertorInterface $fieldQueryConvertor

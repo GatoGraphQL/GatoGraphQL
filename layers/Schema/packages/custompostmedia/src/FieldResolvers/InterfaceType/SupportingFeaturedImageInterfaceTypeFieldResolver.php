@@ -19,7 +19,32 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
     protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
     protected ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
 
-    #[Required]
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IDScalarTypeResolver::class);
+    }
+    public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
+    {
+        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
+    }
+    protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
+    {
+        return $this->mediaObjectTypeResolver ??= $this->getInstanceManager()->getInstance(MediaObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireSupportingFeaturedImageInterfaceTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,

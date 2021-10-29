@@ -20,7 +20,40 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     protected ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
     protected ?IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver = null;
 
-    #[Required]
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->getInstanceManager()->getInstance(CustomPostTypeAPIInterface::class);
+    }
+    public function setDateFormatter(DateFormatterInterface $dateFormatter): void
+    {
+        $this->dateFormatter = $dateFormatter;
+    }
+    protected function getDateFormatter(): DateFormatterInterface
+    {
+        return $this->dateFormatter ??= $this->getInstanceManager()->getInstance(DateFormatterInterface::class);
+    }
+    public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
+    {
+        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
+    }
+    protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
+    {
+        return $this->queryableInterfaceTypeFieldResolver ??= $this->getInstanceManager()->getInstance(QueryableInterfaceTypeFieldResolver::class);
+    }
+    public function setIsCustomPostInterfaceTypeFieldResolver(IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver): void
+    {
+        $this->isCustomPostInterfaceTypeFieldResolver = $isCustomPostInterfaceTypeFieldResolver;
+    }
+    protected function getIsCustomPostInterfaceTypeFieldResolver(): IsCustomPostInterfaceTypeFieldResolver
+    {
+        return $this->isCustomPostInterfaceTypeFieldResolver ??= $this->getInstanceManager()->getInstance(IsCustomPostInterfaceTypeFieldResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCustomPostObjectTypeFieldResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,
         DateFormatterInterface $dateFormatter,

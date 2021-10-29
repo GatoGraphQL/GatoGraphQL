@@ -22,7 +22,40 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     protected ?InstanceManagerInterface $instanceManager = null;
     protected ?MutationResolutionManagerInterface $mutationResolutionManager = null;
 
-    #[Required]
+    public function setHooksAPI(HooksAPIInterface $hooksAPI): void
+    {
+        $this->hooksAPI = $hooksAPI;
+    }
+    protected function getHooksAPI(): HooksAPIInterface
+    {
+        return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
+    }
+    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
+    {
+        $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
+    }
+    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
+    {
+        $this->instanceManager = $instanceManager;
+    }
+    protected function getInstanceManager(): InstanceManagerInterface
+    {
+        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
+    }
+    public function setMutationResolutionManager(MutationResolutionManagerInterface $mutationResolutionManager): void
+    {
+        $this->mutationResolutionManager = $mutationResolutionManager;
+    }
+    protected function getMutationResolutionManager(): MutationResolutionManagerInterface
+    {
+        return $this->mutationResolutionManager ??= $this->getInstanceManager()->getInstance(MutationResolutionManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractComponentMutationResolverBridge(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, InstanceManagerInterface $instanceManager, MutationResolutionManagerInterface $mutationResolutionManager): void
     {
         $this->hooksAPI = $hooksAPI;

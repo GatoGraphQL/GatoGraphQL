@@ -32,7 +32,40 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     protected ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
     protected ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
-    #[Required]
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
+    {
+        $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
+    }
+    protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
+    {
+        return $this->postTagObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostTagObjectTypeResolver::class);
+    }
+    public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
+    {
+        $this->postTagTypeAPI = $postTagTypeAPI;
+    }
+    protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
+    {
+        return $this->postTagTypeAPI ??= $this->getInstanceManager()->getInstance(PostTagTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireRootPostTagObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,

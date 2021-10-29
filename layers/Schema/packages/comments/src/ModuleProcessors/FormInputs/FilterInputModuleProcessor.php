@@ -32,7 +32,32 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     protected ?CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver = null;
     protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    #[Required]
+    public function setCommentTypeEnumTypeResolver(CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver): void
+    {
+        $this->commentTypeEnumTypeResolver = $commentTypeEnumTypeResolver;
+    }
+    protected function getCommentTypeEnumTypeResolver(): CommentTypeEnumTypeResolver
+    {
+        return $this->commentTypeEnumTypeResolver ??= $this->getInstanceManager()->getInstance(CommentTypeEnumTypeResolver::class);
+    }
+    public function setCommentStatusEnumTypeResolver(CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver): void
+    {
+        $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
+    }
+    protected function getCommentStatusEnumTypeResolver(): CommentStatusEnumTypeResolver
+    {
+        return $this->commentStatusEnumTypeResolver ??= $this->getInstanceManager()->getInstance(CommentStatusEnumTypeResolver::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IDScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireFilterInputModuleProcessor(
         CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver,
         CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,

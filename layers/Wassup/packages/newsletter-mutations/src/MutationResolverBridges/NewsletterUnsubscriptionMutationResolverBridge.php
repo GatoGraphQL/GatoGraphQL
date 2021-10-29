@@ -13,7 +13,16 @@ class NewsletterUnsubscriptionMutationResolverBridge extends AbstractFormCompone
 {
     protected ?NewsletterUnsubscriptionMutationResolver $newsletterUnsubscriptionMutationResolver = null;
 
-    #[Required]
+    public function setNewsletterUnsubscriptionMutationResolver(NewsletterUnsubscriptionMutationResolver $newsletterUnsubscriptionMutationResolver): void
+    {
+        $this->newsletterUnsubscriptionMutationResolver = $newsletterUnsubscriptionMutationResolver;
+    }
+    protected function getNewsletterUnsubscriptionMutationResolver(): NewsletterUnsubscriptionMutationResolver
+    {
+        return $this->newsletterUnsubscriptionMutationResolver ??= $this->getInstanceManager()->getInstance(NewsletterUnsubscriptionMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireNewsletterUnsubscriptionMutationResolverBridge(
         NewsletterUnsubscriptionMutationResolver $newsletterUnsubscriptionMutationResolver,
     ): void {

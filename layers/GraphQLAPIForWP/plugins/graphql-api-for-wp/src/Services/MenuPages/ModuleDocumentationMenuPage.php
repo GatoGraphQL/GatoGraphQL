@@ -20,7 +20,24 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
     protected ?ModuleRegistryInterface $moduleRegistry = null;
     protected ?ModulesMenuPage $modulesMenuPage = null;
 
-    #[Required]
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setModulesMenuPage(ModulesMenuPage $modulesMenuPage): void
+    {
+        $this->modulesMenuPage = $modulesMenuPage;
+    }
+    protected function getModulesMenuPage(): ModulesMenuPage
+    {
+        return $this->modulesMenuPage ??= $this->getInstanceManager()->getInstance(ModulesMenuPage::class);
+    }
+
+    //#[Required]
     final public function autowireModuleDocumentationMenuPage(
         ModuleRegistryInterface $moduleRegistry,
         ModulesMenuPage $modulesMenuPage,

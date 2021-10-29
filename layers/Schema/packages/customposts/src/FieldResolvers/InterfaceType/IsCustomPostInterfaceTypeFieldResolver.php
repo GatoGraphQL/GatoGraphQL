@@ -27,7 +27,56 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     protected ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
 
-    #[Required]
+    public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
+    {
+        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+    }
+    protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
+    {
+        return $this->customPostStatusEnumTypeResolver ??= $this->getInstanceManager()->getInstance(CustomPostStatusEnumTypeResolver::class);
+    }
+    public function setCustomPostContentFormatEnumTypeResolver(CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver): void
+    {
+        $this->customPostContentFormatEnumTypeResolver = $customPostContentFormatEnumTypeResolver;
+    }
+    protected function getCustomPostContentFormatEnumTypeResolver(): CustomPostContentFormatEnumTypeResolver
+    {
+        return $this->customPostContentFormatEnumTypeResolver ??= $this->getInstanceManager()->getInstance(CustomPostContentFormatEnumTypeResolver::class);
+    }
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    {
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+    }
+    protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    {
+        return $this->dateScalarTypeResolver ??= $this->getInstanceManager()->getInstance(DateScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
+    {
+        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
+    }
+    protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
+    {
+        return $this->queryableInterfaceTypeFieldResolver ??= $this->getInstanceManager()->getInstance(QueryableInterfaceTypeFieldResolver::class);
+    }
+
+    //#[Required]
     final public function autowireIsCustomPostInterfaceTypeFieldResolver(
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
         CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver,

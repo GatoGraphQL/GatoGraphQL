@@ -12,7 +12,16 @@ abstract class AbstractEndpointResolver extends AbstractAutomaticallyInstantiate
 {
     protected ?EndpointHelpers $endpointHelpers = null;
 
-    #[Required]
+    public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
+    {
+        $this->endpointHelpers = $endpointHelpers;
+    }
+    protected function getEndpointHelpers(): EndpointHelpers
+    {
+        return $this->endpointHelpers ??= $this->getInstanceManager()->getInstance(EndpointHelpers::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractEndpointResolver(EndpointHelpers $endpointHelpers): void
     {
         $this->endpointHelpers = $endpointHelpers;

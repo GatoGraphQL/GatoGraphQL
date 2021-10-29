@@ -26,7 +26,56 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     protected ?MenuItemObjectTypeResolver $menuItemObjectTypeResolver = null;
 
-    #[Required]
+    public function setMenuItemRuntimeRegistry(MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry): void
+    {
+        $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
+    }
+    protected function getMenuItemRuntimeRegistry(): MenuItemRuntimeRegistryInterface
+    {
+        return $this->menuItemRuntimeRegistry ??= $this->getInstanceManager()->getInstance(MenuItemRuntimeRegistryInterface::class);
+    }
+    public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
+    {
+        $this->cmsHelperService = $cmsHelperService;
+    }
+    protected function getCMSHelperService(): CMSHelperServiceInterface
+    {
+        return $this->cmsHelperService ??= $this->getInstanceManager()->getInstance(CMSHelperServiceInterface::class);
+    }
+    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        return $this->urlScalarTypeResolver ??= $this->getInstanceManager()->getInstance(URLScalarTypeResolver::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IDScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setMenuItemObjectTypeResolver(MenuItemObjectTypeResolver $menuItemObjectTypeResolver): void
+    {
+        $this->menuItemObjectTypeResolver = $menuItemObjectTypeResolver;
+    }
+    protected function getMenuItemObjectTypeResolver(): MenuItemObjectTypeResolver
+    {
+        return $this->menuItemObjectTypeResolver ??= $this->getInstanceManager()->getInstance(MenuItemObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireMenuItemObjectTypeFieldResolver(
         MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
         CMSHelperServiceInterface $cmsHelperService,

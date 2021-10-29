@@ -14,7 +14,16 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelational
 {
     protected ?ValidateIsUserLoggedInForDirectivesDirectiveResolver $validateIsUserLoggedInForDirectivesDirectiveResolver = null;
 
-    #[Required]
+    public function setValidateIsUserLoggedInForDirectivesDirectiveResolver(ValidateIsUserLoggedInForDirectivesDirectiveResolver $validateIsUserLoggedInForDirectivesDirectiveResolver): void
+    {
+        $this->validateIsUserLoggedInForDirectivesDirectiveResolver = $validateIsUserLoggedInForDirectivesDirectiveResolver;
+    }
+    protected function getValidateIsUserLoggedInForDirectivesDirectiveResolver(): ValidateIsUserLoggedInForDirectivesDirectiveResolver
+    {
+        return $this->validateIsUserLoggedInForDirectivesDirectiveResolver ??= $this->getInstanceManager()->getInstance(ValidateIsUserLoggedInForDirectivesDirectiveResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelationalTypeResolverDecorator(
         ValidateIsUserLoggedInForDirectivesDirectiveResolver $validateIsUserLoggedInForDirectivesDirectiveResolver,
     ): void {

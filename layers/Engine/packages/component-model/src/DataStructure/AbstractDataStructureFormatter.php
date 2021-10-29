@@ -13,7 +13,24 @@ abstract class AbstractDataStructureFormatter implements DataStructureFormatterI
     protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
 
-    #[Required]
+    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+    }
+    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    {
+        return $this->feedbackMessageStore ??= $this->getInstanceManager()->getInstance(FeedbackMessageStoreInterface::class);
+    }
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractDataStructureFormatter(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
         $this->feedbackMessageStore = $feedbackMessageStore;

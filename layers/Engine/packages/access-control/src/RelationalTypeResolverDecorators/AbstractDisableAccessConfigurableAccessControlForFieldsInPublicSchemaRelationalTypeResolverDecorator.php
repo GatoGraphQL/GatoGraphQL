@@ -11,7 +11,16 @@ abstract class AbstractDisableAccessConfigurableAccessControlForFieldsInPublicSc
 {
     protected ?DisableAccessDirectiveResolver $disableAccessDirectiveResolver = null;
 
-    #[Required]
+    public function setDisableAccessDirectiveResolver(DisableAccessDirectiveResolver $disableAccessDirectiveResolver): void
+    {
+        $this->disableAccessDirectiveResolver = $disableAccessDirectiveResolver;
+    }
+    protected function getDisableAccessDirectiveResolver(): DisableAccessDirectiveResolver
+    {
+        return $this->disableAccessDirectiveResolver ??= $this->getInstanceManager()->getInstance(DisableAccessDirectiveResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractDisableAccessConfigurableAccessControlForFieldsInPublicSchemaRelationalTypeResolverDecorator(
         DisableAccessDirectiveResolver $disableAccessDirectiveResolver,
     ): void {

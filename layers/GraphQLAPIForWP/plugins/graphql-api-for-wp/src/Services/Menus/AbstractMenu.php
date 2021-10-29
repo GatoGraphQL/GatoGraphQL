@@ -12,7 +12,16 @@ abstract class AbstractMenu extends AbstractAutomaticallyInstantiatedService imp
 {
     protected ?InstanceManagerInterface $instanceManager = null;
 
-    #[Required]
+    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
+    {
+        $this->instanceManager = $instanceManager;
+    }
+    protected function getInstanceManager(): InstanceManagerInterface
+    {
+        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractMenu(InstanceManagerInterface $instanceManager): void
     {
         $this->instanceManager = $instanceManager;

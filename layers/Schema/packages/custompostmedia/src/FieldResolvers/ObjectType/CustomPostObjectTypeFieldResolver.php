@@ -16,7 +16,24 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI = null;
     protected ?SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver = null;
 
-    #[Required]
+    public function setCustomPostMediaTypeAPI(CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI): void
+    {
+        $this->customPostMediaTypeAPI = $customPostMediaTypeAPI;
+    }
+    protected function getCustomPostMediaTypeAPI(): CustomPostMediaTypeAPIInterface
+    {
+        return $this->customPostMediaTypeAPI ??= $this->getInstanceManager()->getInstance(CustomPostMediaTypeAPIInterface::class);
+    }
+    public function setSupportingFeaturedImageInterfaceTypeFieldResolver(SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver): void
+    {
+        $this->supportingFeaturedImageInterfaceTypeFieldResolver = $supportingFeaturedImageInterfaceTypeFieldResolver;
+    }
+    protected function getSupportingFeaturedImageInterfaceTypeFieldResolver(): SupportingFeaturedImageInterfaceTypeFieldResolver
+    {
+        return $this->supportingFeaturedImageInterfaceTypeFieldResolver ??= $this->getInstanceManager()->getInstance(SupportingFeaturedImageInterfaceTypeFieldResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCustomPostObjectTypeFieldResolver(
         CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI,
         SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver,

@@ -13,7 +13,16 @@ abstract class AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelat
 
     protected ?AccessControlManagerInterface $accessControlManager = null;
 
-    #[Required]
+    public function setAccessControlManager(AccessControlManagerInterface $accessControlManager): void
+    {
+        $this->accessControlManager = $accessControlManager;
+    }
+    protected function getAccessControlManager(): AccessControlManagerInterface
+    {
+        return $this->accessControlManager ??= $this->getInstanceManager()->getInstance(AccessControlManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator(
         AccessControlManagerInterface $accessControlManager,
     ): void {

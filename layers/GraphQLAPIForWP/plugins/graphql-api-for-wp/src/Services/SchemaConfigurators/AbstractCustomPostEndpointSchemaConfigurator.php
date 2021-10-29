@@ -19,7 +19,24 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
     protected ?UserSettingsManagerInterface $userSettingsManager = null;
     protected ?EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock = null;
 
-    #[Required]
+    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
+    {
+        $this->userSettingsManager = $userSettingsManager;
+    }
+    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    {
+        return $this->userSettingsManager ??= $this->getInstanceManager()->getInstance(UserSettingsManagerInterface::class);
+    }
+    public function setEndpointSchemaConfigurationBlock(EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock): void
+    {
+        $this->endpointSchemaConfigurationBlock = $endpointSchemaConfigurationBlock;
+    }
+    protected function getEndpointSchemaConfigurationBlock(): EndpointSchemaConfigurationBlock
+    {
+        return $this->endpointSchemaConfigurationBlock ??= $this->getInstanceManager()->getInstance(EndpointSchemaConfigurationBlock::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCustomPostEndpointSchemaConfigurator(
         EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
     ): void {

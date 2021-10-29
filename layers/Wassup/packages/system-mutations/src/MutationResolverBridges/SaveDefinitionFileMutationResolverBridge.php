@@ -12,7 +12,16 @@ class SaveDefinitionFileMutationResolverBridge extends AbstractSystemComponentMu
 {
     protected ?SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver = null;
 
-    #[Required]
+    public function setSaveDefinitionFileMutationResolver(SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver): void
+    {
+        $this->saveDefinitionFileMutationResolver = $saveDefinitionFileMutationResolver;
+    }
+    protected function getSaveDefinitionFileMutationResolver(): SaveDefinitionFileMutationResolver
+    {
+        return $this->saveDefinitionFileMutationResolver ??= $this->getInstanceManager()->getInstance(SaveDefinitionFileMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireSaveDefinitionFileMutationResolverBridge(
         SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver,
     ): void {

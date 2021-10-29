@@ -17,7 +17,16 @@ abstract class AbstractUseRootAsSourceForSchemaObjectTypeResolver extends Abstra
 {
     protected ?RootObjectTypeResolver $rootObjectTypeResolver = null;
 
-    #[Required]
+    public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
+    {
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+    }
+    protected function getRootObjectTypeResolver(): RootObjectTypeResolver
+    {
+        return $this->rootObjectTypeResolver ??= $this->getInstanceManager()->getInstance(RootObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractUseRootAsSourceForSchemaObjectTypeResolver(
         RootObjectTypeResolver $rootObjectTypeResolver,
     ): void {

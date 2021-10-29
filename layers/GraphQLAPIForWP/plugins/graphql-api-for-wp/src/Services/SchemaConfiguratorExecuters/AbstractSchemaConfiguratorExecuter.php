@@ -14,7 +14,16 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
 {
     protected ?InstanceManagerInterface $instanceManager = null;
 
-    #[Required]
+    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
+    {
+        $this->instanceManager = $instanceManager;
+    }
+    protected function getInstanceManager(): InstanceManagerInterface
+    {
+        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractSchemaConfiguratorExecuter(InstanceManagerInterface $instanceManager): void
     {
         $this->instanceManager = $instanceManager;

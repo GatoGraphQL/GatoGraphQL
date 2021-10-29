@@ -32,7 +32,40 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?PersistedQueryManagerInterface $queryCatalogueManager = null;
     protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
-    #[Required]
+    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        return $this->jsonObjectScalarTypeResolver ??= $this->getInstanceManager()->getInstance(JSONObjectScalarTypeResolver::class);
+    }
+    public function setPersistedFragmentManager(PersistedFragmentManagerInterface $fragmentCatalogueManager): void
+    {
+        $this->fragmentCatalogueManager = $fragmentCatalogueManager;
+    }
+    protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
+    {
+        return $this->fragmentCatalogueManager ??= $this->getInstanceManager()->getInstance(PersistedFragmentManagerInterface::class);
+    }
+    public function setPersistedQueryManager(PersistedQueryManagerInterface $queryCatalogueManager): void
+    {
+        $this->queryCatalogueManager = $queryCatalogueManager;
+    }
+    protected function getPersistedQueryManager(): PersistedQueryManagerInterface
+    {
+        return $this->queryCatalogueManager ??= $this->getInstanceManager()->getInstance(PersistedQueryManagerInterface::class);
+    }
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireRootObjectTypeFieldResolver(
         JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
         PersistedFragmentManagerInterface $fragmentCatalogueManager,

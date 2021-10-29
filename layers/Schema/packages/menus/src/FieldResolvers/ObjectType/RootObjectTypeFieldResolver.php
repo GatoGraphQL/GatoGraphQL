@@ -25,7 +25,40 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     protected ?MenuObjectTypeResolver $menuObjectTypeResolver = null;
     protected ?MenuTypeAPIInterface $menuTypeAPI = null;
 
-    #[Required]
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IDScalarTypeResolver::class);
+    }
+    public function setMenuObjectTypeResolver(MenuObjectTypeResolver $menuObjectTypeResolver): void
+    {
+        $this->menuObjectTypeResolver = $menuObjectTypeResolver;
+    }
+    protected function getMenuObjectTypeResolver(): MenuObjectTypeResolver
+    {
+        return $this->menuObjectTypeResolver ??= $this->getInstanceManager()->getInstance(MenuObjectTypeResolver::class);
+    }
+    public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
+    {
+        $this->menuTypeAPI = $menuTypeAPI;
+    }
+    protected function getMenuTypeAPI(): MenuTypeAPIInterface
+    {
+        return $this->menuTypeAPI ??= $this->getInstanceManager()->getInstance(MenuTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireRootObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,

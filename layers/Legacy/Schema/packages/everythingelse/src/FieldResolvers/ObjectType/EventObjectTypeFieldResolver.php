@@ -22,7 +22,32 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
     protected ?LocationObjectTypeResolver $locationObjectTypeResolver = null;
     
-    #[Required]
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        return $this->jsonObjectScalarTypeResolver ??= $this->getInstanceManager()->getInstance(JSONObjectScalarTypeResolver::class);
+    }
+    public function setLocationObjectTypeResolver(LocationObjectTypeResolver $locationObjectTypeResolver): void
+    {
+        $this->locationObjectTypeResolver = $locationObjectTypeResolver;
+    }
+    protected function getLocationObjectTypeResolver(): LocationObjectTypeResolver
+    {
+        return $this->locationObjectTypeResolver ??= $this->getInstanceManager()->getInstance(LocationObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireEventObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,

@@ -16,7 +16,16 @@ class LogoutMutationResolver extends AbstractMutationResolver
 
     protected ?UserStateTypeMutationAPIInterface $userStateTypeMutationAPI = null;
 
-    #[Required]
+    public function setUserStateTypeMutationAPI(UserStateTypeMutationAPIInterface $userStateTypeMutationAPI): void
+    {
+        $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;
+    }
+    protected function getUserStateTypeMutationAPI(): UserStateTypeMutationAPIInterface
+    {
+        return $this->userStateTypeMutationAPI ??= $this->getInstanceManager()->getInstance(UserStateTypeMutationAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireLogoutMutationResolver(
         UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
     ): void {

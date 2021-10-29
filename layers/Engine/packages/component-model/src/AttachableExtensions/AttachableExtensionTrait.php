@@ -14,7 +14,16 @@ trait AttachableExtensionTrait
 
     protected ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
-    #[Required]
+    public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
+    {
+        $this->attachableExtensionManager = $attachableExtensionManager;
+    }
+    protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
+    {
+        return $this->attachableExtensionManager ??= $this->getInstanceManager()->getInstance(AttachableExtensionManagerInterface::class);
+    }
+
+    //#[Required]
     public function autowireAttachableExtensionTrait(
         AttachableExtensionManagerInterface $attachableExtensionManager,
     ): void {

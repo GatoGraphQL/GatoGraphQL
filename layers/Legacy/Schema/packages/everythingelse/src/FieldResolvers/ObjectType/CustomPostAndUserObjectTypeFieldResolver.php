@@ -20,7 +20,24 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
     protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     protected ?LocationObjectTypeResolver $locationObjectTypeResolver = null;
     
-    #[Required]
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setLocationObjectTypeResolver(LocationObjectTypeResolver $locationObjectTypeResolver): void
+    {
+        $this->locationObjectTypeResolver = $locationObjectTypeResolver;
+    }
+    protected function getLocationObjectTypeResolver(): LocationObjectTypeResolver
+    {
+        return $this->locationObjectTypeResolver ??= $this->getInstanceManager()->getInstance(LocationObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCustomPostAndUserObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         LocationObjectTypeResolver $locationObjectTypeResolver,

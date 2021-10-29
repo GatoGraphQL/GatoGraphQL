@@ -12,7 +12,16 @@ class AdminGraphiQLWithExplorerClient extends GraphiQLWithExplorerClient
 {
     protected ?EndpointHelpers $endpointHelpers = null;
 
-    #[Required]
+    public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
+    {
+        $this->endpointHelpers = $endpointHelpers;
+    }
+    protected function getEndpointHelpers(): EndpointHelpers
+    {
+        return $this->endpointHelpers ??= $this->getInstanceManager()->getInstance(EndpointHelpers::class);
+    }
+
+    //#[Required]
     final public function autowireAdminGraphiQLWithExplorerClient(EndpointHelpers $endpointHelpers): void
     {
         $this->endpointHelpers = $endpointHelpers;

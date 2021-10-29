@@ -12,7 +12,16 @@ trait QueryableFieldResolverTrait
 {
     protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
-    #[Required]
+    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    {
+        $this->moduleProcessorManager = $moduleProcessorManager;
+    }
+    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    {
+        return $this->moduleProcessorManager ??= $this->getInstanceManager()->getInstance(ModuleProcessorManagerInterface::class);
+    }
+
+    //#[Required]
     public function autowireQueryableFieldResolverTrait(
         ModuleProcessorManagerInterface $moduleProcessorManager,
     ): void {

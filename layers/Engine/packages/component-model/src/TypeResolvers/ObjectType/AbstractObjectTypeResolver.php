@@ -65,7 +65,16 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     protected ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
 
-    #[Required]
+    public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    {
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+    }
+    protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    {
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->getInstanceManager()->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractObjectTypeResolver(
         DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
     ): void {

@@ -15,7 +15,16 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
 
     protected ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
 
-    #[Required]
+    public function setCustomPostMediaTypeMutationAPI(CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI): void
+    {
+        $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
+    }
+    protected function getCustomPostMediaTypeMutationAPI(): CustomPostMediaTypeMutationAPIInterface
+    {
+        return $this->customPostMediaTypeMutationAPI ??= $this->getInstanceManager()->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireRemoveFeaturedImageOnCustomPostMutationResolver(
         CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
     ): void {

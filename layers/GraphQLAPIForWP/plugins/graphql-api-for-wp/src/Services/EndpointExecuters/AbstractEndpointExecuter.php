@@ -15,7 +15,24 @@ abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
     protected ?InstanceManagerInterface $instanceManager = null;
     protected ?ModuleRegistryInterface $moduleRegistry = null;
 
-    #[Required]
+    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
+    {
+        $this->instanceManager = $instanceManager;
+    }
+    protected function getInstanceManager(): InstanceManagerInterface
+    {
+        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
+    }
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractEndpointExecuter(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry): void
     {
         $this->instanceManager = $instanceManager;

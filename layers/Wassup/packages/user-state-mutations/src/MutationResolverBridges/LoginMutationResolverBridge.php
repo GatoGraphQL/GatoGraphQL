@@ -14,7 +14,16 @@ class LoginMutationResolverBridge extends AbstractComponentMutationResolverBridg
 {
     protected ?LoginMutationResolver $loginMutationResolver = null;
 
-    #[Required]
+    public function setLoginMutationResolver(LoginMutationResolver $loginMutationResolver): void
+    {
+        $this->loginMutationResolver = $loginMutationResolver;
+    }
+    protected function getLoginMutationResolver(): LoginMutationResolver
+    {
+        return $this->loginMutationResolver ??= $this->getInstanceManager()->getInstance(LoginMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireLoginMutationResolverBridge(
         LoginMutationResolver $loginMutationResolver,
     ): void {

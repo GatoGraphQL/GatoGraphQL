@@ -12,7 +12,16 @@ abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUp
 {
     protected ?PostTypeAPIInterface $postTypeAPI = null;
 
-    #[Required]
+    public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
+    {
+        $this->postTypeAPI = $postTypeAPI;
+    }
+    protected function getPostTypeAPI(): PostTypeAPIInterface
+    {
+        return $this->postTypeAPI ??= $this->getInstanceManager()->getInstance(PostTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCreateUpdatePostMutationResolver(
         PostTypeAPIInterface $postTypeAPI,
     ): void {

@@ -22,7 +22,40 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     protected ?SingleEndpointSchemaConfigurator $endpointSchemaConfigurator = null;
     protected ?GraphQLEndpointHandler $graphQLEndpointHandler = null;
 
-    #[Required]
+    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
+    {
+        $this->userSettingsManager = $userSettingsManager;
+    }
+    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    {
+        return $this->userSettingsManager ??= $this->getInstanceManager()->getInstance(UserSettingsManagerInterface::class);
+    }
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setSingleEndpointSchemaConfigurator(SingleEndpointSchemaConfigurator $endpointSchemaConfigurator): void
+    {
+        $this->endpointSchemaConfigurator = $endpointSchemaConfigurator;
+    }
+    protected function getSingleEndpointSchemaConfigurator(): SingleEndpointSchemaConfigurator
+    {
+        return $this->endpointSchemaConfigurator ??= $this->getInstanceManager()->getInstance(SingleEndpointSchemaConfigurator::class);
+    }
+    public function setGraphQLEndpointHandler(GraphQLEndpointHandler $graphQLEndpointHandler): void
+    {
+        $this->graphQLEndpointHandler = $graphQLEndpointHandler;
+    }
+    protected function getGraphQLEndpointHandler(): GraphQLEndpointHandler
+    {
+        return $this->graphQLEndpointHandler ??= $this->getInstanceManager()->getInstance(GraphQLEndpointHandler::class);
+    }
+
+    //#[Required]
     final public function autowireSingleEndpointSchemaConfiguratorExecuter(
         ModuleRegistryInterface $moduleRegistry,
         SingleEndpointSchemaConfigurator $endpointSchemaConfigurator,

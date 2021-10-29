@@ -14,7 +14,16 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
 
     protected ?DateScalarTypeResolver $dateScalarTypeResolver = null;
 
-    #[Required]
+    public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    {
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+    }
+    protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    {
+        return $this->dateScalarTypeResolver ??= $this->getInstanceManager()->getInstance(DateScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowirePoP_Events_Module_Processor_DateRangeComponentFilterInputs(
         DateScalarTypeResolver $dateScalarTypeResolver,
     ): void {

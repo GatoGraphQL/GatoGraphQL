@@ -12,7 +12,16 @@ class BuildSystemMutationResolverBridge extends AbstractSystemComponentMutationR
 {
     protected ?BuildSystemMutationResolver $buildSystemMutationResolver = null;
 
-    #[Required]
+    public function setBuildSystemMutationResolver(BuildSystemMutationResolver $buildSystemMutationResolver): void
+    {
+        $this->buildSystemMutationResolver = $buildSystemMutationResolver;
+    }
+    protected function getBuildSystemMutationResolver(): BuildSystemMutationResolver
+    {
+        return $this->buildSystemMutationResolver ??= $this->getInstanceManager()->getInstance(BuildSystemMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireBuildSystemMutationResolverBridge(
         BuildSystemMutationResolver $buildSystemMutationResolver,
     ): void {

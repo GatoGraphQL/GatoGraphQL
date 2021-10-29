@@ -16,7 +16,16 @@ trait ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecorato
 
     protected ?InstanceManagerInterface $instanceManager = null;
 
-    #[Required]
+    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
+    {
+        $this->instanceManager = $instanceManager;
+    }
+    protected function getInstanceManager(): InstanceManagerInterface
+    {
+        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
+    }
+
+    //#[Required]
     public function autowireConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait(
         InstanceManagerInterface $instanceManager,
     ): void {

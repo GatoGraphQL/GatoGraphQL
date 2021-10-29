@@ -19,7 +19,24 @@ class ModelInstanceHookSet extends AbstractHookSet
     protected ?PostTypeAPIInterface $postTypeAPI = null;
     protected ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
-    #[Required]
+    public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
+    {
+        $this->postTypeAPI = $postTypeAPI;
+    }
+    protected function getPostTypeAPI(): PostTypeAPIInterface
+    {
+        return $this->postTypeAPI ??= $this->getInstanceManager()->getInstance(PostTypeAPIInterface::class);
+    }
+    public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
+    {
+        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
+    }
+    protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
+    {
+        return $this->postCategoryTypeAPI ??= $this->getInstanceManager()->getInstance(PostCategoryTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireModelInstanceHookSet(
         PostTypeAPIInterface $postTypeAPI,
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,

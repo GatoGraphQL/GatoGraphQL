@@ -18,7 +18,16 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
 
     protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    #[Required]
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IDScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowirePoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs(
         IDScalarTypeResolver $idScalarTypeResolver,
     ): void {

@@ -13,7 +13,16 @@ trait RolesObjectTypeFieldResolverTrait
 {
     protected ?UserRoleObjectTypeResolver $userRoleObjectTypeResolver = null;
 
-    #[Required]
+    public function setUserRoleObjectTypeResolver(UserRoleObjectTypeResolver $userRoleObjectTypeResolver): void
+    {
+        $this->userRoleObjectTypeResolver = $userRoleObjectTypeResolver;
+    }
+    protected function getUserRoleObjectTypeResolver(): UserRoleObjectTypeResolver
+    {
+        return $this->userRoleObjectTypeResolver ??= $this->getInstanceManager()->getInstance(UserRoleObjectTypeResolver::class);
+    }
+
+    //#[Required]
     public function autowireUserRolesWPRolesObjectTypeFieldResolverTrait(
         UserRoleObjectTypeResolver $userRoleObjectTypeResolver,
     ): void {

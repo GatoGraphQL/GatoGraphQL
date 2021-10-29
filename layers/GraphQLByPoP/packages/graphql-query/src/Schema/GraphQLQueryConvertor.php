@@ -36,7 +36,40 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     protected ?IncludeDirectiveResolver $includeDirectiveResolver = null;
 
-    #[Required]
+    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
+    {
+        $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
+    }
+    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+    }
+    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    {
+        return $this->feedbackMessageStore ??= $this->getInstanceManager()->getInstance(FeedbackMessageStoreInterface::class);
+    }
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
+    }
+    public function setIncludeDirectiveResolver(IncludeDirectiveResolver $includeDirectiveResolver): void
+    {
+        $this->includeDirectiveResolver = $includeDirectiveResolver;
+    }
+    protected function getIncludeDirectiveResolver(): IncludeDirectiveResolver
+    {
+        return $this->includeDirectiveResolver ??= $this->getInstanceManager()->getInstance(IncludeDirectiveResolver::class);
+    }
+
+    //#[Required]
     final public function autowireGraphQLQueryConvertor(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, IncludeDirectiveResolver $includeDirectiveResolver): void
     {
         $this->translationAPI = $translationAPI;

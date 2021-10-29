@@ -25,7 +25,48 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected ?DirectiveLocationEnumTypeResolver $directiveLocationEnumTypeResolver = null;
     protected ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
 
-    #[Required]
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setInputValueObjectTypeResolver(InputValueObjectTypeResolver $inputValueObjectTypeResolver): void
+    {
+        $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
+    }
+    protected function getInputValueObjectTypeResolver(): InputValueObjectTypeResolver
+    {
+        return $this->inputValueObjectTypeResolver ??= $this->getInstanceManager()->getInstance(InputValueObjectTypeResolver::class);
+    }
+    public function setDirectiveLocationEnumTypeResolver(DirectiveLocationEnumTypeResolver $directiveLocationEnumTypeResolver): void
+    {
+        $this->directiveLocationEnumTypeResolver = $directiveLocationEnumTypeResolver;
+    }
+    protected function getDirectiveLocationEnumTypeResolver(): DirectiveLocationEnumTypeResolver
+    {
+        return $this->directiveLocationEnumTypeResolver ??= $this->getInstanceManager()->getInstance(DirectiveLocationEnumTypeResolver::class);
+    }
+    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        return $this->jsonObjectScalarTypeResolver ??= $this->getInstanceManager()->getInstance(JSONObjectScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireDirectiveObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
