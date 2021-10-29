@@ -29,7 +29,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     use WithLimitFieldArgResolverTrait;
 
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
-    private ?CustomPostTypeAPIInterface $postTypeAPI = null;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
     public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -39,22 +39,22 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
-    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $postTypeAPI): void
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
-        $this->postTypeAPI = $postTypeAPI;
+        $this->customPostTypeAPI = $customPostTypeAPI;
     }
     protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
-        return $this->postTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
     //#[Required]
     final public function autowireRootQueryableObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
-        CustomPostTypeAPIInterface $postTypeAPI,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
     ): void {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
-        $this->postTypeAPI = $postTypeAPI;
+        $this->customPostTypeAPI = $customPostTypeAPI;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -208,13 +208,13 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         );
         switch ($fieldName) {
             case 'myCustomPostCount':
-                return $this->getPostTypeAPI()->getCustomPostCount($query);
+                return $this->getCustomPostTypeAPI()->getCustomPostCount($query);
 
             case 'myCustomPosts':
-                return $this->getPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'myCustomPost':
-                if ($customPosts = $this->getPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($customPosts = $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $customPosts[0];
                 }
                 return null;
