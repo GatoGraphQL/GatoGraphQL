@@ -16,7 +16,6 @@ use WP_Post;
 
 class AdminEndpointResolver extends AbstractEndpointResolver
 {
-    use BasicServiceTrait;
     use EndpointResolverTrait {
         EndpointResolverTrait::executeGraphQLQuery as upstreamExecuteGraphQLQuery;
     }
