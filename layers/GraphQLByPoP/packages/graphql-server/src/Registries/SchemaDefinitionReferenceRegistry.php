@@ -159,16 +159,16 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $rootObjectTypeResolver = $this->getGraphQLSchemaDefinitionService()->getSchemaRootObjectTypeResolver();
         $rootTypeName = $rootObjectTypeResolver->getMaybeNamespacedTypeName();
         $queryRootTypeName = null;
-        if (!$enableNestedMutations) {
+        $addConnectionFromRootToQueryRootAndMutationRoot = ComponentConfiguration::addConnectionFromRootToQueryRootAndMutationRoot();
+        if (!$enableNestedMutations || $addConnectionFromRootToQueryRootAndMutationRoot) {
             $queryRootTypeResolver = $this->getGraphQLSchemaDefinitionService()->getSchemaQueryRootObjectTypeResolver();
             $queryRootTypeName = $queryRootTypeResolver->getMaybeNamespacedTypeName();
-        } elseif (ComponentConfiguration::addConnectionFromRootToQueryRootAndMutationRoot()) {
             // Additionally append the QueryRoot and MutationRoot to the schema
-            $queryRootTypeResolver = $this->getGraphQLSchemaDefinitionService()->getSchemaQueryRootObjectTypeResolver();
-            $queryRootTypeName = $queryRootTypeResolver->getMaybeNamespacedTypeName();
-            // Remove the fields connecting from Root to QueryRoot and MutationRoot
-            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::FIELDS]['queryRoot']);
-            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::FIELDS]['mutationRoot']);
+            if ($addConnectionFromRootToQueryRootAndMutationRoot) {
+                // Remove the fields connecting from Root to QueryRoot and MutationRoot
+                unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::FIELDS]['queryRoot']);
+                unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::FIELDS]['mutationRoot']);
+            }
         }
 
         if ($exposeGlobalFieldsInGraphQLSchema) {
