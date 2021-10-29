@@ -180,7 +180,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
             unset($query['limit']);
         }
 
-        return $this->getHooksAPI()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             self::HOOK_QUERY,
             $query,
             $options

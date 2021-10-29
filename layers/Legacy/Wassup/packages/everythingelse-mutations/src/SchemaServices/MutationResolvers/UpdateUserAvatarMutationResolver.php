@@ -26,6 +26,6 @@ class UpdateUserAvatarMutationResolver extends AbstractMutationResolver
 
     protected function additionals($user_id, $form_data): void
     {
-        $this->getHooksAPI()->doAction('gd_useravatar_update:additionals', $user_id, $form_data);
+        $this->hooksAPI->doAction('gd_useravatar_update:additionals', $user_id, $form_data);
     }
 }

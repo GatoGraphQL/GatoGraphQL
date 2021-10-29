@@ -306,7 +306,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         if (is_null($this->safeVars)) {
             $this->safeVars = ApplicationState::getVars();
-            $this->getHooksAPI()->doAction(
+            $this->hooksAPI->doAction(
                 self::HOOK_SAFEVARS,
                 array(&$this->safeVars)
             );

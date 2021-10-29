@@ -43,7 +43,7 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
     }
     protected function getCommonuserrolesFormInputs()
     {
-        $inputs = $this->getHooksAPI()->applyFilters(
+        $inputs = $this->hooksAPI->applyFilters(
             'GD_CreateUpdate_ProfileOrganization_Trait:form-inputs',
             array(
                 'organizationtypes' => null,

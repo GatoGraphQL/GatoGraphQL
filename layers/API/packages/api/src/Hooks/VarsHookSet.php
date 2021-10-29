@@ -23,20 +23,20 @@ class VarsHookSet extends AbstractHookSet
     protected function init(): void
     {
         // Execute early, since others (eg: SPA) will be based on these updated values
-        $this->getHooksAPI()->addAction(
+        $this->hooksAPI->addAction(
             'ApplicationState:addVars',
             array($this, 'addVars'),
             5,
             1
         );
         // Add functions as hooks, so we allow PoP_Application to set the 'routing-state' first
-        $this->getHooksAPI()->addAction(
+        $this->hooksAPI->addAction(
             'ApplicationState:addVars',
             array($this, 'addURLParamVars'),
             10,
             1
         );
-        $this->getHooksAPI()->addFilter(
+        $this->hooksAPI->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
             array($this, 'getModelInstanceComponentsFromVars')
         );

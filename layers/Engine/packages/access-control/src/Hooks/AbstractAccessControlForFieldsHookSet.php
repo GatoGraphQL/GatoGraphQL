@@ -49,7 +49,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
         // If no field defined => it applies to any field
         if ($fieldNames = $this->getFieldNames()) {
             foreach ($fieldNames as $fieldName) {
-                $this->getHooksAPI()->addFilter(
+                $this->hooksAPI->addFilter(
                     HookHelpers::getHookNameToFilterField($fieldName),
                     array($this, 'maybeFilterFieldName'),
                     10,
@@ -57,7 +57,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHook
                 );
             }
         } else {
-            $this->getHooksAPI()->addFilter(
+            $this->hooksAPI->addFilter(
                 HookHelpers::getHookNameToFilterField(),
                 array($this, 'maybeFilterFieldName'),
                 10,

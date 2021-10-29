@@ -12,7 +12,7 @@ class RoutingHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addAction(
+        $this->hooksAPI->addAction(
             RouteHookNames::ROUTES,
             [$this, 'registerRoutes']
         );

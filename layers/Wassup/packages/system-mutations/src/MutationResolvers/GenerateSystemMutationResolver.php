@@ -10,7 +10,7 @@ class GenerateSystemMutationResolver extends AbstractMutationResolver
 {
     public function executeMutation(array $form_data): mixed
     {
-        $this->getHooksAPI()->doAction('PoP:system-generate');
+        $this->hooksAPI->doAction('PoP:system-generate');
         return true;
     }
 }

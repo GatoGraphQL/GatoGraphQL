@@ -31,7 +31,7 @@ class TemplateHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        $this->hooksAPI->addFilter(
             'template_include',
             [$this, 'setTemplate'],
             // Execute last

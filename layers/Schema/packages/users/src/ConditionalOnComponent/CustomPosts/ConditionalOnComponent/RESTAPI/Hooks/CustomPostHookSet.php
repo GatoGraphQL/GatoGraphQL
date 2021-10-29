@@ -14,7 +14,7 @@ class CustomPostHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        $this->hooksAPI->addFilter(
             HookHelpers::getHookName(AbstractCustomPostRESTEntryRouteModuleProcessor::class),
             [$this, 'getRESTFields']
         );

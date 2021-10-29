@@ -86,7 +86,7 @@ class VarsHookSet extends AbstractHookSet
     protected function init(): void
     {
         // Priority 20: execute after the same code in API, as to remove $vars['query]
-        $this->getHooksAPI()->addAction(
+        $this->hooksAPI->addAction(
             'ApplicationState:addVars',
             array($this, 'addVars'),
             20,
@@ -94,7 +94,7 @@ class VarsHookSet extends AbstractHookSet
         );
 
         // Change the error message when mutations are not supported
-        $this->getHooksAPI()->addFilter(
+        $this->hooksAPI->addFilter(
             MutationCheckpointProcessor::HOOK_MUTATIONS_NOT_SUPPORTED_ERROR_MSG,
             array($this, 'getMutationsNotSupportedErrorMessage'),
             10,

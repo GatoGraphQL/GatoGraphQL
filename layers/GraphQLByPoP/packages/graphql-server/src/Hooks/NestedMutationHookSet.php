@@ -36,7 +36,7 @@ class NestedMutationHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        $this->hooksAPI->addFilter(
             HookHelpers::getHookNameToFilterField(),
             array($this, 'maybeFilterFieldName'),
             10,

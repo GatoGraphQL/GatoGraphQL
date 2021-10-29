@@ -12,7 +12,7 @@ class FilterInputHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        $this->hooksAPI->addFilter(
             AbstractPostFilterInputContainerModuleProcessor::HOOK_FILTER_INPUTS,
             [$this, 'getFilterInputModules']
         );

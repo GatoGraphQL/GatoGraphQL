@@ -54,7 +54,7 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
     protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
-        $this->getHooksAPI()->doAction('gd_upvotepost', $target_id, $form_data);
+        $this->hooksAPI->doAction('gd_upvotepost', $target_id, $form_data);
     }
 
     protected function update($form_data): string | int

@@ -57,7 +57,7 @@ abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteM
     public function getRESTFieldsQuery(): string
     {
         if (is_null($this->restFieldsQuery)) {
-            $this->restFieldsQuery = (string) $this->getHooksAPI()->applyFilters(
+            $this->restFieldsQuery = (string) $this->hooksAPI->applyFilters(
                 HookHelpers::getHookName(get_called_class()),
                 $this->getInitialRESTFields()
             );

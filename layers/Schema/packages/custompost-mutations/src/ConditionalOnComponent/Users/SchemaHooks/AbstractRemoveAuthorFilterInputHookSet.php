@@ -30,7 +30,7 @@ abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        $this->hooksAPI->addFilter(
             $this->getHookNameToRemoveFilterInput(),
             [$this, 'getFilterInputModules']
         );

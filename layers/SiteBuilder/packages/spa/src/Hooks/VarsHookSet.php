@@ -12,7 +12,7 @@ class VarsHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addAction(
+        $this->hooksAPI->addAction(
             'ApplicationState:addVars',
             array($this, 'addVars'),
             10,

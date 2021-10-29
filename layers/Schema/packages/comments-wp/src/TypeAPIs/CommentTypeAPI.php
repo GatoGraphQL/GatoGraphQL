@@ -173,7 +173,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             unset($query['date-to-inclusive']);
         }
 
-        $query = $this->getHooksAPI()->applyFilters(
+        $query = $this->hooksAPI->applyFilters(
             self::HOOK_QUERY,
             $query,
             $options
@@ -205,7 +205,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
 
     public function getCommentContent(object $comment): string
     {
-        return $this->getHooksAPI()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             'comment_text',
             $this->getCommentPlainContent($comment)
         );
