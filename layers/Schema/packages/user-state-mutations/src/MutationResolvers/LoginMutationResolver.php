@@ -98,7 +98,7 @@ class LoginMutationResolver extends AbstractMutationResolver
         ApplicationStateUtils::setUserStateVars(ApplicationState::$vars);
 
         $userID = $this->getUserTypeAPI()->getUserId($user);
-        $this->hooksAPI->doAction('gd:user:loggedin', $userID);
+        $this->getHooksAPI()->doAction('gd:user:loggedin', $userID);
         return $userID;
     }
 }

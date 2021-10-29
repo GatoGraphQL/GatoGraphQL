@@ -150,7 +150,7 @@ class Engine extends UpstreamEngine implements EngineInterface
                 $meta[Params::STRATUM] = $vars['stratum'];
             }
         }
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             '\PoPSiteBuilder\ComponentModel\Engine:site-meta',
             $meta
         );
@@ -172,7 +172,7 @@ class Engine extends UpstreamEngine implements EngineInterface
                 : $this->getTranslationAPI()->__('Oops, there was an error: ', 'pop-engine') . RequestUtils::$errors[0];
         }
 
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             '\PoPSiteBuilder\ComponentModel\Engine:request-meta',
             $meta
         );

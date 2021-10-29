@@ -874,7 +874,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 foreach ($directiveResolvers as $directiveResolver) {
                     // Execute 2 filters: a generic one, and a specific one
                     if (
-                        $this->hooksAPI->applyFilters(
+                        $this->getHooksAPI()->applyFilters(
                             HookHelpers::getHookNameToFilterDirective(),
                             true,
                             $this,
@@ -882,7 +882,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                             $directiveName
                         )
                     ) {
-                        return $this->hooksAPI->applyFilters(
+                        return $this->getHooksAPI()->applyFilters(
                             HookHelpers::getHookNameToFilterDirective($directiveName),
                             true,
                             $this,

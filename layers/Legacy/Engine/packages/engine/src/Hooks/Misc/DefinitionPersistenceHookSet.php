@@ -12,7 +12,7 @@ class DefinitionPersistenceHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'popcms:shutdown',
             array($this, 'maybePersist')
         );

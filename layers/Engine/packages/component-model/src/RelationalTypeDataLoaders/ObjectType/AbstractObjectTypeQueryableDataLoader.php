@@ -35,14 +35,14 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
 
     protected function getPagenumberParam($query_args)
     {
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             'GD_Dataloader_List:query:pagenumber',
             $query_args[Params::PAGE_NUMBER]
         );
     }
     protected function getLimitParam($query_args)
     {
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             'GD_Dataloader_List:query:limit',
             $query_args[Params::LIMIT]
         );
@@ -61,7 +61,7 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
         $query = $this->getQuery($query_args);
 
         // Allow URE to modify the role, limiting selected users and excluding others, like 'subscriber'
-        $query = $this->hooksAPI->applyFilters(self::class . ':gd_dataload_query', $query, $data_properties);
+        $query = $this->getHooksAPI()->applyFilters(self::class . ':gd_dataload_query', $query, $data_properties);
 
         // Apply filtering of the data
         if ($filtering_modules = $data_properties[DataloadingConstants::QUERYARGSFILTERINGMODULES] ?? null) {
@@ -128,7 +128,7 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
         }
 
         // Allow CoAuthors Plus to modify the query to add the coauthors
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             $this->getQueryHookName(),
             $query,
             $query_args

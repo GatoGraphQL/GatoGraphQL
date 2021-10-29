@@ -37,7 +37,7 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         }
 
         // Allow Organik Fundraising to override the content
-        $content = $this->hooksAPI->applyFilters(
+        $content = $this->getHooksAPI()->applyFilters(
             'GD_InviteUsers:emailcontent',
             $content,
             $sender_html,
@@ -91,7 +91,7 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         }
 
         // Allow Organik Fundraising to override the message
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             'GD_InviteUsers:emailsubject',
             $subject,
             $sender_name

@@ -203,7 +203,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             unset($query['date-to-inclusive']);
         }
 
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             self::HOOK_QUERY,
             $query,
             $options
@@ -302,7 +302,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             return null;
         }
         /** @var WP_Post $customPost */
-        return $this->hooksAPI->applyFilters('the_title', $customPost->post_title, $customPostID);
+        return $this->getHooksAPI()->applyFilters('the_title', $customPost->post_title, $customPostID);
     }
 
     public function getContent(string | int | object $customPostObjectOrID): ?string
@@ -311,7 +311,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         if ($customPost === null) {
             return null;
         }
-        return $this->hooksAPI->applyFilters('the_content', $customPost->post_content);
+        return $this->getHooksAPI()->applyFilters('the_content', $customPost->post_content);
     }
 
     public function getPlainTextContent(string | int | object $customPostObjectOrID): ?string
@@ -324,12 +324,12 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         // Basic content: remove embeds, shortcodes, and tags
         // Remove the embed functionality, and then add again
         $wp_embed = $GLOBALS['wp_embed'];
-        $this->hooksAPI->removeFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
+        $this->getHooksAPI()->removeFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
 
         // Do not allow HTML tags or shortcodes
         $ret = \strip_shortcodes($customPost->post_content);
-        $ret = $this->hooksAPI->applyFilters('the_content', $ret);
-        $this->hooksAPI->addFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
+        $ret = $this->getHooksAPI()->applyFilters('the_content', $ret);
+        $this->getHooksAPI()->addFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
 
         return strip_tags($ret);
     }

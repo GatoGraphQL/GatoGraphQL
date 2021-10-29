@@ -175,7 +175,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
 
         // Allow plugins to add validation for their fields
-        $this->hooksAPI->doAction(
+        $this->getHooksAPI()->doAction(
             self::HOOK_VALIDATE_CONTENT,
             array(&$errors),
             $form_data
@@ -332,8 +332,8 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         $this->updateAdditionals($customPostID, $form_data, $log);
 
         // Inject Share profiles here
-        $this->hooksAPI->doAction(self::HOOK_EXECUTE_CREATE_OR_UPDATE, $customPostID, $form_data);
-        $this->hooksAPI->doAction(self::HOOK_EXECUTE_UPDATE, $customPostID, $log, $form_data);
+        $this->getHooksAPI()->doAction(self::HOOK_EXECUTE_CREATE_OR_UPDATE, $customPostID, $form_data);
+        $this->getHooksAPI()->doAction(self::HOOK_EXECUTE_UPDATE, $customPostID, $log, $form_data);
         return $customPostID;
     }
 
@@ -370,8 +370,8 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         $this->createAdditionals($customPostID, $form_data);
 
         // Inject Share profiles here
-        $this->hooksAPI->doAction(self::HOOK_EXECUTE_CREATE_OR_UPDATE, $customPostID, $form_data);
-        $this->hooksAPI->doAction(self::HOOK_EXECUTE_CREATE, $customPostID, $form_data);
+        $this->getHooksAPI()->doAction(self::HOOK_EXECUTE_CREATE_OR_UPDATE, $customPostID, $form_data);
+        $this->getHooksAPI()->doAction(self::HOOK_EXECUTE_CREATE, $customPostID, $form_data);
 
         return $customPostID;
     }

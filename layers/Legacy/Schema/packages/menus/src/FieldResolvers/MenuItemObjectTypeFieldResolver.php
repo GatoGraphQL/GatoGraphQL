@@ -45,7 +45,7 @@ abstract class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
                 if ($objectID = $menuItemTypeAPI->getMenuItemObjectID($menuItem)) {
                     $classes[] = 'menu-item-object-id-' . $objectID;
                 }
-                return $this->hooksAPI->applyFilters('menuitem:classes', array_filter($classes), $menuItem, array());
+                return $this->getHooksAPI()->applyFilters('menuitem:classes', array_filter($classes), $menuItem, array());
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

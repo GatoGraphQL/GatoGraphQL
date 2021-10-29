@@ -67,7 +67,7 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
 
         $user_id = $user_data['ID'];
 
-        $this->hooksAPI->doAction('gd_changepassword_user', $user_id, $form_data);
+        $this->getHooksAPI()->doAction('gd_changepassword_user', $user_id, $form_data);
 
         return $user_id;
     }

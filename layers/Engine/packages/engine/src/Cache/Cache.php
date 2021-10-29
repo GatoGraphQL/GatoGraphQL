@@ -19,7 +19,7 @@ class Cache extends UpstreamCache
     {
         // When a plugin is activated/deactivated, ANY plugin, delete the corresponding cached files
         // This is particularly important for the MEMORY, since we can't set by constants to not use it
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'popcms:componentInstalledOrUninstalled',
             function (): void {
                 $this->cacheItemPool->clear();
@@ -27,7 +27,7 @@ class Cache extends UpstreamCache
         );
 
         // Save all deferred cacheItems
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'popcms:shutdown',
             function (): void {
                 $this->cacheItemPool->commit();

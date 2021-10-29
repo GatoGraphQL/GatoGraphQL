@@ -10,23 +10,23 @@ class CMSLooseContractImplementations extends AbstractLooseContractResolutionSet
 	protected function resolveContracts(): void
     {
 		// Filters.
-		$this->hooksAPI->addFilter('login_url', function($url, $redirect) {
-			return $this->hooksAPI->applyFilters('popcms:loginUrl', $url, $redirect);
+		$this->getHooksAPI()->addFilter('login_url', function($url, $redirect) {
+			return $this->getHooksAPI()->applyFilters('popcms:loginUrl', $url, $redirect);
 		}, 10, 2);
-		$this->hooksAPI->addFilter('lostpassword_url', function($url, $redirect) {
-			return $this->hooksAPI->applyFilters('popcms:lostPasswordUrl', $url, $redirect);
+		$this->getHooksAPI()->addFilter('lostpassword_url', function($url, $redirect) {
+			return $this->getHooksAPI()->applyFilters('popcms:lostPasswordUrl', $url, $redirect);
 		}, 10, 2);
-		$this->hooksAPI->addFilter('logout_url', function($url, $redirect) {
-			return $this->hooksAPI->applyFilters('popcms:logoutUrl', $url, $redirect);
+		$this->getHooksAPI()->addFilter('logout_url', function($url, $redirect) {
+			return $this->getHooksAPI()->applyFilters('popcms:logoutUrl', $url, $redirect);
 		}, 10, 2);
-		$this->hooksAPI->addFilter('auth_cookie_expiration', function($time_in_seconds, $user_id, $remember) {
-			return $this->hooksAPI->applyFilters('popcms:authCookieExpiration', $time_in_seconds, $user_id, $remember);
+		$this->getHooksAPI()->addFilter('auth_cookie_expiration', function($time_in_seconds, $user_id, $remember) {
+			return $this->getHooksAPI()->applyFilters('popcms:authCookieExpiration', $time_in_seconds, $user_id, $remember);
 		}, 10, 3);
-		$this->hooksAPI->addFilter('retrieve_password_title', function($title, $user_login, $user_data) {
-			return $this->hooksAPI->applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user_data);
+		$this->getHooksAPI()->addFilter('retrieve_password_title', function($title, $user_login, $user_data) {
+			return $this->getHooksAPI()->applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user_data);
 		}, 10, 3);
-		$this->hooksAPI->addFilter('retrieve_password_message', function($message, $key, $user_login, $user_data) {
-			return $this->hooksAPI->applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user_data);
+		$this->getHooksAPI()->addFilter('retrieve_password_message', function($message, $key, $user_login, $user_data) {
+			return $this->getHooksAPI()->applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user_data);
 		}, 10, 4);
 
 		$this->looseContractManager->implementHooks([

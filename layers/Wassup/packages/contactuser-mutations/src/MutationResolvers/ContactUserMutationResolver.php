@@ -55,7 +55,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data): void
     {
-        $this->hooksAPI->doAction('pop_contactuser', $form_data);
+        $this->getHooksAPI()->doAction('pop_contactuser', $form_data);
     }
 
     protected function doExecute($form_data)

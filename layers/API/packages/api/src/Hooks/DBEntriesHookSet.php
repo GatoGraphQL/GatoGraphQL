@@ -10,7 +10,7 @@ class DBEntriesHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',
             array($this, 'moveEntriesUnderDBName'),
             10,
@@ -21,14 +21,14 @@ class DBEntriesHookSet extends AbstractHookSet
     public function moveEntriesUnderDBName(array $dbname_datafields): array
     {
         // Enable to add all fields starting with "__" (such as "__schema") as meta
-        $dbname_datafields['meta'] = $this->hooksAPI->applyFilters(
+        $dbname_datafields['meta'] = $this->getHooksAPI()->applyFilters(
             'PoP\API\DataloaderHooks:metaFields',
             [
                 'fullSchema',
                 'typeName',
             ]
         );
-        $dbname_datafields['context'] = $this->hooksAPI->applyFilters(
+        $dbname_datafields['context'] = $this->getHooksAPI()->applyFilters(
             'PoP\API\DataloaderHooks:contextFields',
             [
                 'var',

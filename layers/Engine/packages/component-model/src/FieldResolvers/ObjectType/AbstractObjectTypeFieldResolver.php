@@ -277,7 +277,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldDescriptionCache)) {
             return $this->consolidatedFieldDescriptionCache[$cacheKey];
         }
-        $this->consolidatedFieldDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
+        $this->consolidatedFieldDescriptionCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
             HookNames::OBJECT_TYPE_FIELD_DESCRIPTION,
             $this->getFieldDescription($objectTypeResolver, $fieldName),
             $this,
@@ -298,7 +298,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldDeprecationMessageCache)) {
             return $this->consolidatedFieldDeprecationMessageCache[$cacheKey];
         }
-        $this->consolidatedFieldDeprecationMessageCache[$cacheKey] = $this->hooksAPI->applyFilters(
+        $this->consolidatedFieldDeprecationMessageCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
             HookNames::OBJECT_TYPE_FIELD_DEPRECATION_MESSAGE,
             $this->getFieldDeprecationMessage($objectTypeResolver, $fieldName),
             $this,
@@ -369,7 +369,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
          */
-        $consolidatedFieldArgNameTypeResolvers = $this->hooksAPI->applyFilters(
+        $consolidatedFieldArgNameTypeResolvers = $this->getHooksAPI()->applyFilters(
             HookNames::OBJECT_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
             $fieldArgNameTypeResolvers,
             $this,
@@ -405,7 +405,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldArgDescriptionCache)) {
             return $this->consolidatedFieldArgDescriptionCache[$cacheKey];
         }
-        $this->consolidatedFieldArgDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
+        $this->consolidatedFieldArgDescriptionCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
             HookNames::OBJECT_TYPE_FIELD_ARG_DESCRIPTION,
             $this->getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
             $this,
@@ -427,7 +427,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldArgDefaultValueCache)) {
             return $this->consolidatedFieldArgDefaultValueCache[$cacheKey];
         }
-        $this->consolidatedFieldArgDefaultValueCache[$cacheKey] = $this->hooksAPI->applyFilters(
+        $this->consolidatedFieldArgDefaultValueCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
             HookNames::OBJECT_TYPE_FIELD_ARG_DEFAULT_VALUE,
             $this->getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
             $this,
@@ -449,7 +449,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldArgTypeModifiersCache)) {
             return $this->consolidatedFieldArgTypeModifiersCache[$cacheKey];
         }
-        $this->consolidatedFieldArgTypeModifiersCache[$cacheKey] = $this->hooksAPI->applyFilters(
+        $this->consolidatedFieldArgTypeModifiersCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
             HookNames::OBJECT_TYPE_FIELD_ARG_TYPE_MODIFIERS,
             $this->getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
             $this,

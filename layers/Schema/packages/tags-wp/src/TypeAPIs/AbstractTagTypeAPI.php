@@ -173,9 +173,9 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
             // Same param name, so do nothing
         }
 
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             TaxonomyTypeAPI::HOOK_QUERY,
-            $this->hooksAPI->applyFilters(
+            $this->getHooksAPI()->applyFilters(
                 self::HOOK_QUERY,
                 $query,
                 $options

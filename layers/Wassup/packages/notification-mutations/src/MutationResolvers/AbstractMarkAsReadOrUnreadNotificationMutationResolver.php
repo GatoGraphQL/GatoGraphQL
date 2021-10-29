@@ -26,7 +26,7 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
 
     protected function additionals($histid, $form_data): void
     {
-        $this->hooksAPI->doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $form_data);
+        $this->getHooksAPI()->doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $form_data);
     }
 
     abstract protected function getStatus();

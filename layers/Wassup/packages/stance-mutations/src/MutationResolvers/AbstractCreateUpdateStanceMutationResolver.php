@@ -122,7 +122,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         }
 
         // Allow for URE to add the AuthorRole meta value
-        $this->hooksAPI->doAction('GD_CreateUpdate_Stance:createAdditionals', $post_id, $form_data);
+        $this->getHooksAPI()->doAction('GD_CreateUpdate_Stance:createAdditionals', $post_id, $form_data);
     }
 
     protected function updateAdditionals(string | int $post_id, array $form_data, array $log): void
@@ -130,6 +130,6 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         parent::updateAdditionals($post_id, $form_data, $log);
 
         // Allow for URE to add the AuthorRole meta value
-        $this->hooksAPI->doAction('GD_CreateUpdate_Stance:updateAdditionals', $post_id, $form_data, $log);
+        $this->getHooksAPI()->doAction('GD_CreateUpdate_Stance:updateAdditionals', $post_id, $form_data, $log);
     }
 }

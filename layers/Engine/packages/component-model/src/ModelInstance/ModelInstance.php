@@ -55,7 +55,7 @@ class ModelInstance implements ModelInstanceInterface
         $components = array();
 
         // Mix the information specific to the module, with that present in $vars
-        $components = (array)$this->hooksAPI->applyFilters(
+        $components = (array)$this->getHooksAPI()->applyFilters(
             self::HOOK_COMPONENTS_RESULT,
             array_merge(
                 $components,
@@ -116,7 +116,7 @@ class ModelInstance implements ModelInstanceInterface
 
         // Can the configuration change when doing a POST or GET?
         if (
-            $this->hooksAPI->applyFilters(
+            $this->getHooksAPI()->applyFilters(
                 self::HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE,
                 false
             )
@@ -142,7 +142,7 @@ class ModelInstance implements ModelInstanceInterface
         }
 
         // Allow for plug-ins to add their own vars. Eg: URE source parameter
-        return (array)$this->hooksAPI->applyFilters(
+        return (array)$this->getHooksAPI()->applyFilters(
             self::HOOK_COMPONENTSFROMVARS_RESULT,
             $components
         );

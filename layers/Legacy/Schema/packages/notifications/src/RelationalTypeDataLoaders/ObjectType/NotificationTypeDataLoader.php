@@ -39,7 +39,7 @@ class NotificationTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
             }
         }
 
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             $this->getQueryHookName(),
             $query,
             $query_args

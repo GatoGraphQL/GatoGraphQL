@@ -101,7 +101,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 } elseif ($format == CustomPostContentFormatEnum::PLAIN_TEXT) {
                     $value = $customPostTypeAPI->getPlainTextContent($customPost);
                 }
-                return $this->hooksAPI->applyFilters(
+                return $this->getHooksAPI()->applyFilters(
                     'pop_content',
                     $value,
                     $objectTypeResolver->getID($customPost)

@@ -8,7 +8,7 @@ class PoP_System_Engine_ModuleDefinitionHooks extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'PoP:system:save-definition-file',
             array($this, 'persistDefinitions')
         );
