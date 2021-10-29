@@ -71,7 +71,7 @@ class VarsHookSet extends AbstractHookSet
     protected function init(): void
     {
         // Priority 20: execute after the same code in API, as to remove $vars['query]
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'ApplicationState:addVars',
             array($this, 'addVars'),
             20,
@@ -79,7 +79,7 @@ class VarsHookSet extends AbstractHookSet
         );
 
         // Change the error message when mutations are not supported
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             MutationCheckpointProcessor::HOOK_MUTATIONS_NOT_SUPPORTED_ERROR_MSG,
             array($this, 'getMutationsNotSupportedErrorMessage'),
             10,
@@ -95,7 +95,7 @@ class VarsHookSet extends AbstractHookSet
         $vars = ApplicationState::getVars();
         if ($vars['standard-graphql']) {
             return sprintf(
-                $this->translationAPI->__('Use the operation type \'%s\' to execute mutations', 'graphql-request'),
+                $this->getTranslationAPI()->__('Use the operation type \'%s\' to execute mutations', 'graphql-request'),
                 OperationTypes::MUTATION
             );
         }
@@ -175,8 +175,8 @@ class VarsHookSet extends AbstractHookSet
                 // here for GraphQL and also for PoP.
                 // Show error only for the other cases
                 $errorMessage = $disablePoPQuery ?
-                    $this->translationAPI->__('No query was provided. (The body has no query, and the query provided as a URL param is ignored because of configuration)', 'graphql-request')
-                    : $this->translationAPI->__('The query in the body is empty', 'graphql-request');
+                    $this->getTranslationAPI()->__('No query was provided. (The body has no query, and the query provided as a URL param is ignored because of configuration)', 'graphql-request')
+                    : $this->getTranslationAPI()->__('The query in the body is empty', 'graphql-request');
                 $this->getFeedbackMessageStore()->addQueryError($errorMessage);
             }
         }

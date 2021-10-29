@@ -9,11 +9,17 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait WithTranslationAPIServiceTrait
 {
-    protected TranslationAPIInterface $translationAPI;
+    // use WithInstanceManagerServiceTrait;
 
-    #[Required]
+    private ?TranslationAPIInterface $translationAPI = null;
+
+    // #[Required]
     public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
     {
         $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= $this->instanceManager->getInstance(TranslationAPIInterface::class);
     }
 }

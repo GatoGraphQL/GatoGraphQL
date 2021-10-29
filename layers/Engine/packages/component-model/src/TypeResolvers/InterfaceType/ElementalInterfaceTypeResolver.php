@@ -13,6 +13,6 @@ class ElementalInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('The fundamental fields that must be implemented by all objects', 'component-model');
+        return $this->getTranslationAPI()->__('The fundamental fields that must be implemented by all objects', 'component-model');
     }
 }

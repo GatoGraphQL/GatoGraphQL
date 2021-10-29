@@ -33,7 +33,7 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_UPVOTESPOSTS);
             if (in_array($target_id, $value)) {
                 $errors[] = sprintf(
-                    $this->translationAPI->__('You have already up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+                    $this->getTranslationAPI()->__('You have already up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $this->getCustomPostTypeAPI()->getTitle($target_id)
                 );
             }
@@ -47,7 +47,7 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
     protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
-        $this->hooksAPI->doAction('gd_upvotepost', $target_id, $form_data);
+        $this->getHooksAPI()->doAction('gd_upvotepost', $target_id, $form_data);
     }
 
     protected function update($form_data): string | int

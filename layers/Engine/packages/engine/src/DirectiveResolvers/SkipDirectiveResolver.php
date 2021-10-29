@@ -67,7 +67,7 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->translationAPI->__('Include the field value in the output only if the argument \'if\' evals to `false`', 'engine');
+        return $this->getTranslationAPI()->__('Include the field value in the output only if the argument \'if\' evals to `false`', 'engine');
     }
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
@@ -79,7 +79,7 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'if' => $this->translationAPI->__('Argument that must evaluate to `false` to include the field value in the output', 'engine'),
+            'if' => $this->getTranslationAPI()->__('Argument that must evaluate to `false` to include the field value in the output', 'engine'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }

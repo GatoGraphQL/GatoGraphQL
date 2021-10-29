@@ -59,10 +59,10 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'user' => $this->translationAPI->__('User with a specific ID', 'pop-users'),
-            'userByUsername' => $this->translationAPI->__('User with a specific username', 'pop-users'),
-            'userByEmail' => $this->translationAPI->__('User with a specific email', 'pop-users'),
-            'users' => $this->translationAPI->__('Users in the current site', 'pop-users'),
+            'user' => $this->getTranslationAPI()->__('User with a specific ID', 'pop-users'),
+            'userByUsername' => $this->getTranslationAPI()->__('User with a specific username', 'pop-users'),
+            'userByEmail' => $this->getTranslationAPI()->__('User with a specific email', 'pop-users'),
+            'users' => $this->getTranslationAPI()->__('Users in the current site', 'pop-users'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -83,8 +83,8 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['userByUsername' => 'username'] => $this->translationAPI->__('The user\'s username', 'pop-users'),
-            ['userByEmail' => 'email'] => $this->translationAPI->__('The user\'s username', 'pop-users'),
+            ['userByUsername' => 'username'] => $this->getTranslationAPI()->__('The user\'s username', 'pop-users'),
+            ['userByEmail' => 'email'] => $this->getTranslationAPI()->__('The user\'s username', 'pop-users'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

@@ -77,9 +77,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'menu' => $this->translationAPI->__('Get a menu', 'menus'),
-            'menus' => $this->translationAPI->__('Get all menus', 'menus'),
-            'menuCount' => $this->translationAPI->__('Count the number of menus', 'menus'),
+            'menu' => $this->getTranslationAPI()->__('Get a menu', 'menus'),
+            'menus' => $this->getTranslationAPI()->__('Get all menus', 'menus'),
+            'menuCount' => $this->getTranslationAPI()->__('Count the number of menus', 'menus'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -116,7 +116,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['menu' => 'id'] => $this->translationAPI->__('The ID of the menu', 'menus'),
+            ['menu' => 'id'] => $this->getTranslationAPI()->__('The ID of the menu', 'menus'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

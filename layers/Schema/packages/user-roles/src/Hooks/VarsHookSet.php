@@ -27,7 +27,7 @@ class VarsHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
             array($this, 'getModelInstanceComponentsFromVars')
         );
@@ -40,7 +40,7 @@ class VarsHookSet extends AbstractHookSet
             case RouteNatures::USER:
                 $user_id = $vars['routing-state']['queried-object-id'];
                 // Author: it may depend on its role
-                $component_types = $this->hooksAPI->applyFilters(
+                $component_types = $this->getHooksAPI()->applyFilters(
                     '\PoP\ComponentModel\ModelInstanceProcessor_Utils:components_from_vars:type:userrole',
                     array(
                         ModelInstanceComponentTypes::USER_ROLE,
@@ -49,7 +49,7 @@ class VarsHookSet extends AbstractHookSet
                 if (in_array(ModelInstanceComponentTypes::USER_ROLE, $component_types)) {
                     /** @var string */
                     $userRole = $this->getUserRoleTypeAPI()->getTheUserRole($user_id);
-                    $components[] = $this->translationAPI->__('user role:', 'pop-engine') . $userRole;
+                    $components[] = $this->getTranslationAPI()->__('user role:', 'pop-engine') . $userRole;
                 }
                 break;
         }

@@ -23,20 +23,20 @@ class VarsHookSet extends AbstractHookSet
     protected function init(): void
     {
         // Execute early, since others (eg: SPA) will be based on these updated values
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'ApplicationState:addVars',
             array($this, 'addVars'),
             5,
             1
         );
         // Add functions as hooks, so we allow PoP_Application to set the 'routing-state' first
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'ApplicationState:addVars',
             array($this, 'addURLParamVars'),
             10,
             1
         );
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
             array($this, 'getModelInstanceComponentsFromVars')
         );
@@ -109,7 +109,7 @@ class VarsHookSet extends AbstractHookSet
         }
 
         // Namespaces change the configuration
-        $components[] = $this->translationAPI->__('namespaced:', 'pop-engine') . ($vars['namespace-types-and-interfaces'] ?? false);
+        $components[] = $this->getTranslationAPI()->__('namespaced:', 'pop-engine') . ($vars['namespace-types-and-interfaces'] ?? false);
 
         return $components;
     }
@@ -119,7 +119,7 @@ class VarsHookSet extends AbstractHookSet
         $vars = ApplicationState::getVars();
         if ($fields = $vars['query'] ?? null) {
             // Serialize instead of implode, because $fields can contain $key => $value
-            $components[] = $this->translationAPI->__('fields:', 'pop-engine') . serialize($fields);
+            $components[] = $this->getTranslationAPI()->__('fields:', 'pop-engine') . serialize($fields);
         }
     }
 }

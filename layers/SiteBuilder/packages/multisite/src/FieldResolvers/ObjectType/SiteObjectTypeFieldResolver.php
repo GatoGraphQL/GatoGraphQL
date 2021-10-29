@@ -64,8 +64,8 @@ class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'domain' => $this->translationAPI->__('The site\'s domain', ''),
-            'host' => $this->translationAPI->__('The site\'s host', ''),
+            'domain' => $this->getTranslationAPI()->__('The site\'s domain', ''),
+            'host' => $this->getTranslationAPI()->__('The site\'s host', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

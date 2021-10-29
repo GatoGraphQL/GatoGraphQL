@@ -40,16 +40,16 @@ class Engine extends UpstreamEngine implements EngineInterface
         if ($notImplementedHooks = $this->getLooseContractManager()->getNotImplementedRequiredHooks()) {
             throw new Exception(
                 sprintf(
-                    $this->translationAPI->__('The following hooks have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
-                    implode($this->translationAPI->__('", "'), $notImplementedHooks)
+                    $this->getTranslationAPI()->__('The following hooks have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
+                    implode($this->getTranslationAPI()->__('", "'), $notImplementedHooks)
                 )
             );
         }
         if ($notImplementedNames = $this->getLooseContractManager()->getNotImplementedRequiredNames()) {
             throw new Exception(
                 sprintf(
-                    $this->translationAPI->__('The following names have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
-                    implode($this->translationAPI->__('", "'), $notImplementedNames)
+                    $this->getTranslationAPI()->__('The following names have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
+                    implode($this->getTranslationAPI()->__('", "'), $notImplementedNames)
                 )
             );
         }

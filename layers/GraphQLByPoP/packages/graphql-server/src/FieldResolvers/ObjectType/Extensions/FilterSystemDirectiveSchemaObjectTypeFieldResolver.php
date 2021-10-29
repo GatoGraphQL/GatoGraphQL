@@ -70,7 +70,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     // public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     // {
     //     $descriptions = [
-    //         'directives' => $this->translationAPI->__('All directives registered in the data graph, allowing to remove the system directives', 'graphql-api'),
+    //         'directives' => $this->getTranslationAPI()->__('All directives registered in the data graph, allowing to remove the system directives', 'graphql-api'),
     //     ];
     //     return $descriptions[$fieldName] ?? parent::getFieldDescription($objectTypeResolver, $fieldName);
     // }
@@ -88,7 +88,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['directives' => 'ofTypes'] => $this->translationAPI->__('Include only directives of provided types', 'graphql-api'),
+            ['directives' => 'ofTypes'] => $this->getTranslationAPI()->__('Include only directives of provided types', 'graphql-api'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

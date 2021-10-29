@@ -14,6 +14,6 @@ trait SetTagsOnCustomPostObjectTypeFieldResolverTrait
 
     protected function getEntityName(): string
     {
-        return $this->translationAPI->__('custom post', 'custompost-tag-mutations');
+        return $this->getTranslationAPI()->__('custom post', 'custompost-tag-mutations');
     }
 }

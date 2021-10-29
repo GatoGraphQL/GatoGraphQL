@@ -34,7 +34,7 @@ class DownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateU
     public function getSuccessString(string | int $result_id): ?string
     {
         return sprintf(
-            $this->translationAPI->__('You have down-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->getTranslationAPI()->__('You have down-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
             $this->getCustomPostTypeAPI()->getTitle($result_id)
         );
     }

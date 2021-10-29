@@ -32,10 +32,10 @@ class CommentStatusEnumTypeResolver extends AbstractEnumTypeResolver
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            CommentStatus::APPROVE => $this->translationAPI->__('Approved comment', 'comments'),
-            CommentStatus::HOLD => $this->translationAPI->__('Onhold comment', 'comments'),
-            CommentStatus::SPAM => $this->translationAPI->__('Spam comment', 'comments'),
-            CommentStatus::TRASH => $this->translationAPI->__('Trashed comment', 'comments'),
+            CommentStatus::APPROVE => $this->getTranslationAPI()->__('Approved comment', 'comments'),
+            CommentStatus::HOLD => $this->getTranslationAPI()->__('Onhold comment', 'comments'),
+            CommentStatus::SPAM => $this->getTranslationAPI()->__('Spam comment', 'comments'),
+            CommentStatus::TRASH => $this->getTranslationAPI()->__('Trashed comment', 'comments'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }

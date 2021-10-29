@@ -90,10 +90,10 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'customPosts' => $this->translationAPI->__('Custom posts', 'pop-posts'),
-            'customPostCount' => $this->translationAPI->__('Number of custom posts', 'pop-posts'),
-            'customPostsForAdmin' => $this->translationAPI->__('[Unrestricted] Custom posts', 'pop-posts'),
-            'customPostCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of custom posts', 'pop-posts'),
+            'customPosts' => $this->getTranslationAPI()->__('Custom posts', 'pop-posts'),
+            'customPostCount' => $this->getTranslationAPI()->__('Number of custom posts', 'pop-posts'),
+            'customPostsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Custom posts', 'pop-posts'),
+            'customPostCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of custom posts', 'pop-posts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

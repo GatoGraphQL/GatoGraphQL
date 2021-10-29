@@ -51,7 +51,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'locations' => $this->translationAPI->__('Locations', 'pop-locations'),
+            'locations' => $this->getTranslationAPI()->__('Locations', 'pop-locations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

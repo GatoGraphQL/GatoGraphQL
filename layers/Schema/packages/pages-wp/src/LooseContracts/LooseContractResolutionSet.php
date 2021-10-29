@@ -11,10 +11,10 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
     protected function resolveContracts(): void
     {
         // Filters.
-        $this->hooksAPI->addFilter('the_title', function ($post_title, $post_id) {
+        $this->getHooksAPI()->addFilter('the_title', function ($post_title, $post_id) {
             $post_type = get_post_type($post_id);
             if ($post_type == 'page') {
-                return $this->hooksAPI->applyFilters('popcms:page:title', $post_title, $post_id);
+                return $this->getHooksAPI()->applyFilters('popcms:page:title', $post_title, $post_id);
             }
             return $post_title;
         }, 10, 2);

@@ -94,8 +94,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_NAME => $this->translationAPI->__('Search users whose name contains this string', 'pop-users'),
-            self::MODULE_FILTERINPUT_EMAILS => $this->translationAPI->__('Search users with any of the provided emails', 'pop-users'),
+            self::MODULE_FILTERINPUT_NAME => $this->getTranslationAPI()->__('Search users whose name contains this string', 'pop-users'),
+            self::MODULE_FILTERINPUT_EMAILS => $this->getTranslationAPI()->__('Search users with any of the provided emails', 'pop-users'),
             default => null,
         };
     }

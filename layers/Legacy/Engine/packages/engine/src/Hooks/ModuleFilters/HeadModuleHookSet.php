@@ -26,11 +26,11 @@ class HeadModuleHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             ModelInstance::HOOK_COMPONENTSFROMVARS_RESULT,
             [$this, 'maybeAddComponent']
         );
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'ApplicationState:addVars',
             [$this, 'addVars'],
             10,
@@ -54,7 +54,7 @@ class HeadModuleHookSet extends AbstractHookSet
         $vars = ApplicationState::getVars();
         if (isset($vars['modulefilter']) && $vars['modulefilter'] == $this->headModule->getName()) {
             if ($headmodule = $vars['headmodule']) {
-                $components[] = $this->translationAPI->__('head module:', 'engine') . ModuleUtils::getModuleFullName($headmodule);
+                $components[] = $this->getTranslationAPI()->__('head module:', 'engine') . ModuleUtils::getModuleFullName($headmodule);
             }
         }
 

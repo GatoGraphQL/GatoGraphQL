@@ -306,7 +306,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 if (!is_int($nestedUnder) || !($nestedUnder < 0)) {
                     $this->getFeedbackMessageStore()->addQueryError(
                         sprintf(
-                            $this->translationAPI->__('Param \'%s\' must be a negative integer, hence value \'%s\' in directive \'%s\' has been ignored', 'graphql-query'),
+                            $this->getTranslationAPI()->__('Param \'%s\' must be a negative integer, hence value \'%s\' in directive \'%s\' has been ignored', 'graphql-query'),
                             SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER,
                             $nestedUnder,
                             $directiveName
@@ -315,7 +315,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 } elseif ((-1 * $nestedUnder) > $counter) {
                     $this->getFeedbackMessageStore()->addQueryError(
                         sprintf(
-                            $this->translationAPI->__('There is no directive at position \'%s\' (set under param \'%s\') relative to directive \'%s\'', 'graphql-query'),
+                            $this->getTranslationAPI()->__('There is no directive at position \'%s\' (set under param \'%s\') relative to directive \'%s\'', 'graphql-query'),
                             $nestedUnder,
                             SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER,
                             $directiveName
@@ -509,7 +509,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         // In that case, execute mutations only, and display a warning on the query
         if ($queries && $mutations) {
             $this->getFeedbackMessageStore()->addQueryWarning(
-                $this->translationAPI->__('Cannot execute both queries AND mutations, hence the queries have been ignored, resolving mutations only', 'graphql-query')
+                $this->getTranslationAPI()->__('Cannot execute both queries AND mutations, hence the queries have been ignored, resolving mutations only', 'graphql-query')
             );
         }
         foreach ($queriesOrMutations as $query) {
@@ -541,7 +541,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     ): Request {
         if (empty($payload)) {
             throw new InvalidArgumentException(
-                $this->translationAPI->__('Must provide an operation.', 'graphql-query')
+                $this->getTranslationAPI()->__('Must provide an operation.', 'graphql-query')
             );
         }
 
@@ -569,7 +569,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 $operationCount = count($parsedData['queryOperations']) + count($parsedData['mutationOperations']);
                 if ($operationCount > 1) {
                     throw new InvalidArgumentException(sprintf(
-                        $this->translationAPI->__(
+                        $this->getTranslationAPI()->__(
                             'Feature \'Multiple Query Execution\' is not enabled, so can execute 1 operation only, but %s operations were submitted (\'%s\')',
                             'graphql-query'
                         ),
@@ -687,7 +687,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                  */
                 if (empty($parsedData['queries']) && empty($parsedData['mutations'])) {
                     throw new InvalidArgumentException(sprintf(
-                        $this->translationAPI->__('No operation with name \'%s\' was submitted.', 'graphql-query'),
+                        $this->getTranslationAPI()->__('No operation with name \'%s\' was submitted.', 'graphql-query'),
                         $operationName
                     ));
                 }

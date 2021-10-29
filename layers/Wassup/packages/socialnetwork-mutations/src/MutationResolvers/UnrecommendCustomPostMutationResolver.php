@@ -21,7 +21,7 @@ class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecomme
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_RECOMMENDSPOSTS);
             if (!in_array($target_id, $value)) {
                 $errors[] = sprintf(
-                    $this->translationAPI->__('You had not recommended <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+                    $this->getTranslationAPI()->__('You had not recommended <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $this->getCustomPostTypeAPI()->getTitle($target_id)
                 );
             }
@@ -35,7 +35,7 @@ class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecomme
     protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
-        $this->hooksAPI->doAction('gd_unrecommendpost', $target_id, $form_data);
+        $this->getHooksAPI()->doAction('gd_unrecommendpost', $target_id, $form_data);
     }
 
     // protected function updateValue($value, $form_data) {

@@ -35,9 +35,9 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             self::HOOK_DESCRIPTION,
-            $this->translationAPI->__('Root type, starting from which the query is executed', 'api')
+            $this->getTranslationAPI()->__('Root type, starting from which the query is executed', 'api')
         );
     }
 

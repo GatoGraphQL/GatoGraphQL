@@ -22,7 +22,7 @@ class URLScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('URL scalar, such as https://mysite.com/my-fabulous-page', 'component-model');
+        return $this->getTranslationAPI()->__('URL scalar, such as https://mysite.com/my-fabulous-page', 'component-model');
     }
 
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error

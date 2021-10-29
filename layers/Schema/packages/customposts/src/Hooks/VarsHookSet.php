@@ -27,11 +27,11 @@ class VarsHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
             array($this, 'getModelInstanceComponentsFromVars')
         );
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'augmentVarsProperties',
             [$this, 'augmentVarsProperties'],
             10,
@@ -51,7 +51,7 @@ class VarsHookSet extends AbstractHookSet
                 // Post and Event may be different
                 // Announcements and Articles (Posts), or Past Event and (Upcoming) Event may be different
                 // By default, we check for post type but not for categories
-                $component_types = (array) $this->hooksAPI->applyFilters(
+                $component_types = (array) $this->getHooksAPI()->applyFilters(
                     '\PoP\ComponentModel\ModelInstanceProcessor_Utils:components_from_vars:type:single',
                     array(
                         ModelInstanceComponentTypes::SINGLE_CUSTOMPOST,
@@ -59,7 +59,7 @@ class VarsHookSet extends AbstractHookSet
                 );
                 if (in_array(ModelInstanceComponentTypes::SINGLE_CUSTOMPOST, $component_types)) {
                     $customPostType = $vars['routing-state']['queried-object-post-type'];
-                    $components[] = $this->translationAPI->__('post type:', 'pop-engine') . $customPostType;
+                    $components[] = $this->getTranslationAPI()->__('post type:', 'pop-engine') . $customPostType;
                 }
                 break;
         }

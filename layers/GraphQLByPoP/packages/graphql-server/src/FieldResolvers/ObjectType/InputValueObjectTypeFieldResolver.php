@@ -78,10 +78,10 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->translationAPI->__('Input value\'s name as defined by the GraphQL spec', 'graphql-server'),
-            'description' => $this->translationAPI->__('Input value\'s description', 'graphql-server'),
-            'type' => $this->translationAPI->__('Type of the input value', 'graphql-server'),
-            'defaultValue' => $this->translationAPI->__('Default value of the input value', 'graphql-server'),
+            'name' => $this->getTranslationAPI()->__('Input value\'s name as defined by the GraphQL spec', 'graphql-server'),
+            'description' => $this->getTranslationAPI()->__('Input value\'s description', 'graphql-server'),
+            'type' => $this->getTranslationAPI()->__('Type of the input value', 'graphql-server'),
+            'defaultValue' => $this->getTranslationAPI()->__('Default value of the input value', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

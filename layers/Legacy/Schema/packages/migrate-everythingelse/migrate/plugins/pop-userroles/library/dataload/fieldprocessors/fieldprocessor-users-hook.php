@@ -69,8 +69,8 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'role' => $this->translationAPI->__('', ''),
-            'hasRole' => $this->translationAPI->__('', ''),
+            'role' => $this->getTranslationAPI()->__('', ''),
+            'hasRole' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -88,7 +88,7 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['hasRole' => 'role'] => $this->translationAPI->__('The role name to compare against', 'user-roles'),
+            ['hasRole' => 'role'] => $this->getTranslationAPI()->__('The role name to compare against', 'user-roles'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

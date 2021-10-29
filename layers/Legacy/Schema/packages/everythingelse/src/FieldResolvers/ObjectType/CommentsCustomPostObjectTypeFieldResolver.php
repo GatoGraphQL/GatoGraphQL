@@ -49,7 +49,7 @@ class CommentsCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'commentsURL' => $this->translationAPI->__('URL of the comments section in the post page', 'pop-comments'),
+            'commentsURL' => $this->getTranslationAPI()->__('URL of the comments section in the post page', 'pop-comments'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

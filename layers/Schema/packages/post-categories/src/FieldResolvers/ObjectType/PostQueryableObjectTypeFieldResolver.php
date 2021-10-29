@@ -24,9 +24,9 @@ class PostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableOb
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'categories' => $this->translationAPI->__('Categories added to this post', 'post-categories'),
-            'categoryCount' => $this->translationAPI->__('Number of categories added to this post', 'post-categories'),
-            'categoryNames' => $this->translationAPI->__('Names of the categories added to this post', 'post-categories'),
+            'categories' => $this->getTranslationAPI()->__('Categories added to this post', 'post-categories'),
+            'categoryCount' => $this->getTranslationAPI()->__('Number of categories added to this post', 'post-categories'),
+            'categoryNames' => $this->getTranslationAPI()->__('Names of the categories added to this post', 'post-categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

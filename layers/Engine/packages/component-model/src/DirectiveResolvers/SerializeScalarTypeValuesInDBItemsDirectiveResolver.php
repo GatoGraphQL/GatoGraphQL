@@ -183,6 +183,6 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->translationAPI->__('Serialize the results for fields of Scalar Type. This directive is already included by the engine, since its execution is mandatory', 'component-model');
+        return $this->getTranslationAPI()->__('Serialize the results for fields of Scalar Type. This directive is already included by the engine, since its execution is mandatory', 'component-model');
     }
 }

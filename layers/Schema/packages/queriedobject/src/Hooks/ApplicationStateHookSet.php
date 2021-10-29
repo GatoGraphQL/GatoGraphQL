@@ -24,13 +24,13 @@ class ApplicationStateHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'ApplicationState:addVars',
             [$this, 'setQueriedObject'],
             0,
             1
         );
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             OperatorGlobalObjectTypeFieldResolver::HOOK_SAFEVARS,
             [$this, 'setSafeVars'],
             10,
@@ -46,7 +46,7 @@ class ApplicationStateHookSet extends AbstractHookSet
         $vars = &$vars_in_array[0];
 
         // Allow to override the queried object, eg: by the AppShell
-        list($queried_object, $queried_object_id) = $this->hooksAPI->applyFilters(
+        list($queried_object, $queried_object_id) = $this->getHooksAPI()->applyFilters(
             'ApplicationState:queried-object',
             [
                 $this->getCmsRoutingStateService()->getQueriedObject(),

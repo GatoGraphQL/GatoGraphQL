@@ -67,7 +67,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         if ($postIDOrError === 0) {
             return new Error(
                 'add-custompost-error',
-                $this->translationAPI->__('Could not create the custom post', 'custompost-mutations-wp')
+                $this->getTranslationAPI()->__('Could not create the custom post', 'custompost-mutations-wp')
             );
         }
         return $this->getErrorHelper()->returnResultOrConvertError($postIDOrError);

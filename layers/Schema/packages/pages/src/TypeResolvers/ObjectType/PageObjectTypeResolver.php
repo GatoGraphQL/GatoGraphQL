@@ -39,7 +39,7 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Representation of a page', 'pages');
+        return $this->getTranslationAPI()->__('Representation of a page', 'pages');
     }
 
     public function getID(object $object): string | int | null

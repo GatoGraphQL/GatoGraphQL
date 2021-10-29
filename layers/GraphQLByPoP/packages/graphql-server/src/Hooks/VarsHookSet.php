@@ -28,19 +28,19 @@ class VarsHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'ApplicationState:addVars',
             array($this, 'addVars'),
             10,
             1
         );
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'augmentVarsProperties',
             [$this, 'augmentVarsProperties'],
             10,
             1
         );
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
             array($this, 'getModelInstanceComponentsFromVars')
         );
@@ -81,13 +81,13 @@ class VarsHookSet extends AbstractHookSet
     {
         $vars = ApplicationState::getVars();
         if (isset($vars['edit-schema'])) {
-            $components[] = $this->translationAPI->__('edit schema:', 'graphql-server') . $vars['edit-schema'];
+            $components[] = $this->getTranslationAPI()->__('edit schema:', 'graphql-server') . $vars['edit-schema'];
         }
         if ($graphQLOperationType = $vars['graphql-operation-type'] ?? null) {
-            $components[] = $this->translationAPI->__('GraphQL operation type:', 'graphql-server') . $graphQLOperationType;
+            $components[] = $this->getTranslationAPI()->__('GraphQL operation type:', 'graphql-server') . $graphQLOperationType;
         }
-        $components[] = $this->translationAPI->__('enable nested mutations:', 'graphql-server') . $vars['nested-mutations-enabled'];
-        $components[] = $this->translationAPI->__('enable GraphQL introspection:', 'graphql-server') . $vars['graphql-introspection-enabled'];
+        $components[] = $this->getTranslationAPI()->__('enable nested mutations:', 'graphql-server') . $vars['nested-mutations-enabled'];
+        $components[] = $this->getTranslationAPI()->__('enable GraphQL introspection:', 'graphql-server') . $vars['graphql-introspection-enabled'];
 
         return $components;
     }

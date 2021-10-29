@@ -36,7 +36,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
 
         if (!$form_data[MutationInputProperties::CUSTOMPOST_ID]) {
             $errors[] = sprintf(
-                $this->translationAPI->__('The %s ID is missing.', 'custompost-category-mutations'),
+                $this->getTranslationAPI()->__('The %s ID is missing.', 'custompost-category-mutations'),
                 $this->getEntityName()
             );
         }
@@ -45,6 +45,6 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
 
     protected function getEntityName(): string
     {
-        return $this->translationAPI->__('custom post', 'custompost-category-mutations');
+        return $this->getTranslationAPI()->__('custom post', 'custompost-category-mutations');
     }
 }

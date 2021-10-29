@@ -148,17 +148,17 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->translationAPI->__('Custom post URL', 'customposts'),
-            'urlPath' => $this->translationAPI->__('Custom post URL path', 'customposts'),
-            'slug' => $this->translationAPI->__('Custom post slug', 'customposts'),
-            'content' => $this->translationAPI->__('Custom post content', 'customposts'),
-            'status' => $this->translationAPI->__('Custom post status', 'customposts'),
-            'isStatus' => $this->translationAPI->__('Is the custom post in the given status?', 'customposts'),
-            'date' => $this->translationAPI->__('Custom post published date', 'customposts'),
-            'modified' => $this->translationAPI->__('Custom post modified date', 'customposts'),
-            'title' => $this->translationAPI->__('Custom post title', 'customposts'),
-            'excerpt' => $this->translationAPI->__('Custom post excerpt', 'customposts'),
-            'customPostType' => $this->translationAPI->__('Custom post type', 'customposts'),
+            'url' => $this->getTranslationAPI()->__('Custom post URL', 'customposts'),
+            'urlPath' => $this->getTranslationAPI()->__('Custom post URL path', 'customposts'),
+            'slug' => $this->getTranslationAPI()->__('Custom post slug', 'customposts'),
+            'content' => $this->getTranslationAPI()->__('Custom post content', 'customposts'),
+            'status' => $this->getTranslationAPI()->__('Custom post status', 'customposts'),
+            'isStatus' => $this->getTranslationAPI()->__('Is the custom post in the given status?', 'customposts'),
+            'date' => $this->getTranslationAPI()->__('Custom post published date', 'customposts'),
+            'modified' => $this->getTranslationAPI()->__('Custom post modified date', 'customposts'),
+            'title' => $this->getTranslationAPI()->__('Custom post title', 'customposts'),
+            'excerpt' => $this->getTranslationAPI()->__('Custom post excerpt', 'customposts'),
+            'customPostType' => $this->getTranslationAPI()->__('Custom post type', 'customposts'),
             default => parent::getFieldDescription($fieldName),
         };
     }
@@ -179,8 +179,8 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['isStatus' => 'status'] => $this->translationAPI->__('The status to check if the post has', 'customposts'),
-            ['content' => 'format'] => $this->translationAPI->__('The format of the content', 'customposts'),
+            ['isStatus' => 'status'] => $this->getTranslationAPI()->__('The status to check if the post has', 'customposts'),
+            ['content' => 'format'] => $this->getTranslationAPI()->__('The format of the content', 'customposts'),
             default => parent::getFieldArgDescription($fieldName, $fieldArgName),
         };
     }

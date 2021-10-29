@@ -64,31 +64,31 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         } elseif (ComponentConfiguration::requireCommenterNameAndEmail()) {
             // Validate if the commenter's name and email are mandatory
             if (!($form_data[MutationInputProperties::AUTHOR_NAME] ?? null)) {
-                $errors[] = $this->translationAPI->__('The comment author\'s name is missing', 'comment-mutations');
+                $errors[] = $this->getTranslationAPI()->__('The comment author\'s name is missing', 'comment-mutations');
             }
             if (!($form_data[MutationInputProperties::AUTHOR_EMAIL] ?? null)) {
-                $errors[] = $this->translationAPI->__('The comment author\'s email is missing', 'comment-mutations');
+                $errors[] = $this->getTranslationAPI()->__('The comment author\'s email is missing', 'comment-mutations');
             }
         }
 
         // Either provide the customPostID, or retrieve it from the parent comment
         if (!($form_data[MutationInputProperties::CUSTOMPOST_ID] ?? null) && !($form_data[MutationInputProperties::PARENT_COMMENT_ID] ?? null)) {
-            $errors[] = $this->translationAPI->__('The custom post ID is missing.', 'comment-mutations');
+            $errors[] = $this->getTranslationAPI()->__('The custom post ID is missing.', 'comment-mutations');
         }
         if (!($form_data[MutationInputProperties::COMMENT] ?? null)) {
-            $errors[] = $this->translationAPI->__('The comment is empty.', 'comment-mutations');
+            $errors[] = $this->getTranslationAPI()->__('The comment is empty.', 'comment-mutations');
         }
         return $errors;
     }
 
     protected function getUserNotLoggedInErrorMessage(): string
     {
-        return $this->translationAPI->__('You must be logged in to add comments', 'comment-mutations');
+        return $this->getTranslationAPI()->__('You must be logged in to add comments', 'comment-mutations');
     }
 
     protected function additionals(string | int $comment_id, array $form_data): void
     {
-        $this->hooksAPI->doAction('gd_addcomment', $comment_id, $form_data);
+        $this->getHooksAPI()->doAction('gd_addcomment', $comment_id, $form_data);
     }
 
     protected function getCommentData(array $form_data): array

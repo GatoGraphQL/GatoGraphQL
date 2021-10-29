@@ -20,16 +20,16 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         // Validate that the referenced post has been added (protection against hacking)
         // For highlights, we only add 1 reference, and not more.
         if (!$form_data['highlightedpost']) {
-            $errors[] = $this->translationAPI->__('No post has been highlighted', 'poptheme-wassup');
+            $errors[] = $this->getTranslationAPI()->__('No post has been highlighted', 'poptheme-wassup');
         } else {
             // Highlights have no title input by the user. Instead, produce the title from the referenced post
             $referenced = $this->getCustomPostTypeAPI()->getCustomPost($form_data['highlightedpost']);
             if (!$referenced) {
-                $errors[] = $this->translationAPI->__('The highlighted post does not exist', 'poptheme-wassup');
+                $errors[] = $this->getTranslationAPI()->__('The highlighted post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
                 if ($this->getCustomPostTypeAPI()->getStatus($referenced) != Status::PUBLISHED) {
-                    $errors[] = $this->translationAPI->__('The highlighted post is not published yet', 'poptheme-wassup');
+                    $errors[] = $this->getTranslationAPI()->__('The highlighted post is not published yet', 'poptheme-wassup');
                 }
             }
         }
@@ -47,7 +47,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, $form_data['highlightedpost'], true);
 
         // Allow to create a Notification
-        $this->hooksAPI->doAction('GD_CreateUpdate_Highlight:createAdditionals', $post_id, $form_data);
+        $this->getHooksAPI()->doAction('GD_CreateUpdate_Highlight:createAdditionals', $post_id, $form_data);
     }
 
     protected function updateAdditionals(string | int $post_id, array $form_data, array $log): void
@@ -55,6 +55,6 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         parent::updateAdditionals($post_id, $form_data, $log);
 
         // Allow to create a Notification
-        $this->hooksAPI->doAction('GD_CreateUpdate_Highlight:updateAdditionals', $post_id, $form_data, $log);
+        $this->getHooksAPI()->doAction('GD_CreateUpdate_Highlight:updateAdditionals', $post_id, $form_data, $log);
     }
 }

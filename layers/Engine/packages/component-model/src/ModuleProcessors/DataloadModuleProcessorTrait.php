@@ -46,7 +46,7 @@ trait DataloadModuleProcessorTrait
         /**
          * Allow to add more stuff
          */
-        $this->hooksAPI->doAction(
+        $this->getHooksAPI()->doAction(
             Constants::HOOK_DATALOAD_INIT_MODEL_PROPS,
             array(&$props),
             $module,

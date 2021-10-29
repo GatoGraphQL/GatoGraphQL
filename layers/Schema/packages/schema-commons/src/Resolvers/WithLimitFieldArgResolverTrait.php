@@ -57,7 +57,7 @@ trait WithLimitFieldArgResolverTrait
         $minLimit = $maxLimit === -1 ? -1 : 1;
         if ($fieldArgValue < $minLimit) {
             return sprintf(
-                $this->translationAPI->__('The value for argument \'%s\' in field \'%s\' cannot be below \'%s\'', 'schema-commons'),
+                $this->getTranslationAPI()->__('The value for argument \'%s\' in field \'%s\' cannot be below \'%s\'', 'schema-commons'),
                 $fieldArgName,
                 $fieldName,
                 $minLimit
@@ -67,7 +67,7 @@ trait WithLimitFieldArgResolverTrait
         // Check the value is not below the max limit
         if ($maxLimit !== -1 && $fieldArgValue > $maxLimit) {
             return sprintf(
-                $this->translationAPI->__('The value for argument \'%s\' in field \'%s\' cannot be above \'%s\'', 'posts'),
+                $this->getTranslationAPI()->__('The value for argument \'%s\' in field \'%s\' cannot be above \'%s\'', 'posts'),
                 $fieldArgName,
                 $fieldName,
                 $maxLimit

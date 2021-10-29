@@ -21,11 +21,11 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
             // Check that the referenced post exists
             $referenced = $this->getCustomPostTypeAPI()->getCustomPost($form_data['stancetarget']);
             if (!$referenced) {
-                $errors[] = $this->translationAPI->__('The referenced post does not exist', 'poptheme-wassup');
+                $errors[] = $this->getTranslationAPI()->__('The referenced post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
                 if ($this->getCustomPostTypeAPI()->getStatus($referenced) != Status::PUBLISHED) {
-                    $errors[] = $this->translationAPI->__('The referenced post is not published yet', 'poptheme-wassup');
+                    $errors[] = $this->getTranslationAPI()->__('The referenced post is not published yet', 'poptheme-wassup');
                 }
             }
         }
@@ -44,8 +44,8 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     protected function getCategoriesErrorMessages()
     {
         $category_error_msgs = parent::getCategoriesErrorMessages();
-        $category_error_msgs['empty-category'] = $this->translationAPI->__('The stance has not been set', 'pop-userstance');
-        $category_error_msgs['only-one'] = $this->translationAPI->__('Only one stance can be selected', 'pop-userstance');
+        $category_error_msgs['empty-category'] = $this->getTranslationAPI()->__('The stance has not been set', 'pop-userstance');
+        $category_error_msgs['only-one'] = $this->getTranslationAPI()->__('Only one stance can be selected', 'pop-userstance');
         return $category_error_msgs;
     }
 
@@ -79,19 +79,19 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         if ($stances = $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
             $stance_id = $stances[0];
             $error = sprintf(
-                $this->translationAPI->__('You have already added your %s', 'pop-userstance'),
+                $this->getTranslationAPI()->__('You have already added your %s', 'pop-userstance'),
                 \PoP_UserStance_PostNameUtils::getNameLc()
             );
             if ($referenced_id) {
                 $error = sprintf(
-                    $this->translationAPI->__('%s after reading “<a href="%s">%s</a>”', 'pop-userstance'),
+                    $this->getTranslationAPI()->__('%s after reading “<a href="%s">%s</a>”', 'pop-userstance'),
                     $error,
                     $this->getCustomPostTypeAPI()->getPermalink($referenced_id),
                     $this->getCustomPostTypeAPI()->getTitle($referenced_id)
                 );
             }
             $errors[] = sprintf(
-                $this->translationAPI->__('%s. <a href="%s" target="%s">Edit?</a>', 'pop-userstance'),
+                $this->getTranslationAPI()->__('%s. <a href="%s" target="%s">Edit?</a>', 'pop-userstance'),
                 $error,
                 urldecode($cmseditpostsapi->getEditPostLink($stance_id)),
                 POP_TARGET_ADDONS
@@ -122,7 +122,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         }
 
         // Allow for URE to add the AuthorRole meta value
-        $this->hooksAPI->doAction('GD_CreateUpdate_Stance:createAdditionals', $post_id, $form_data);
+        $this->getHooksAPI()->doAction('GD_CreateUpdate_Stance:createAdditionals', $post_id, $form_data);
     }
 
     protected function updateAdditionals(string | int $post_id, array $form_data, array $log): void
@@ -130,6 +130,6 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         parent::updateAdditionals($post_id, $form_data, $log);
 
         // Allow for URE to add the AuthorRole meta value
-        $this->hooksAPI->doAction('GD_CreateUpdate_Stance:updateAdditionals', $post_id, $form_data, $log);
+        $this->getHooksAPI()->doAction('GD_CreateUpdate_Stance:updateAdditionals', $post_id, $form_data, $log);
     }
 }

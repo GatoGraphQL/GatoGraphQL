@@ -24,7 +24,7 @@ class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscrib
                 $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
                 $tag = $this->getPostTagTypeAPI()->getTag($target_id);
                 $errors[] = sprintf(
-                    $this->translationAPI->__('You had not subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+                    $this->getTranslationAPI()->__('You had not subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $applicationtaxonomyapi->getTagSymbolName($tag)
                 );
             }
@@ -38,7 +38,7 @@ class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscrib
     protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
-        $this->hooksAPI->doAction('gd_unsubscribefromtag', $target_id, $form_data);
+        $this->getHooksAPI()->doAction('gd_unsubscribefromtag', $target_id, $form_data);
     }
 
     protected function update($form_data): string | int

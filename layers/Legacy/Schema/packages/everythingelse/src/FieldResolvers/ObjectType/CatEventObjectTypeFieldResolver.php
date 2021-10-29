@@ -63,8 +63,8 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'catSlugs' => $this->translationAPI->__('', ''),
-            'catName' => $this->translationAPI->__('', ''),
+            'catSlugs' => $this->getTranslationAPI()->__('', ''),
+            'catName' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

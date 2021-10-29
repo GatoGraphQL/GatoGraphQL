@@ -30,7 +30,7 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
             // Make sure the user exists
             $target = $this->getUserTypeAPI()->getUserById($target_id);
             if (!$target) {
-                $errors[] = $this->translationAPI->__('The requested user does not exist.', 'pop-coreprocessors');
+                $errors[] = $this->getTranslationAPI()->__('The requested user does not exist.', 'pop-coreprocessors');
             }
         }
         return $errors;
@@ -43,7 +43,7 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
 
     protected function additionals($target_id, $form_data): void
     {
-        $this->hooksAPI->doAction('gd_updateusermetavalue:user', $target_id, $form_data);
+        $this->getHooksAPI()->doAction('gd_updateusermetavalue:user', $target_id, $form_data);
         parent::additionals($target_id, $form_data);
     }
 }

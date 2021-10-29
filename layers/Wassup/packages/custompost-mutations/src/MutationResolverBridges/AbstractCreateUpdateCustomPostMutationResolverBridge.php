@@ -110,7 +110,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         }
 
         // Allow plugins to add their own fields
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             self::HOOK_FORM_DATA_CREATE_OR_UPDATE,
             $form_data
         );
@@ -147,7 +147,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
     protected function canInputMultipleCategories()
     {
         return false;
-        // return $this->hooksAPI->applyFilters(
+        // return $this->getHooksAPI()->applyFilters(
         //     'GD_CreateUpdate_Post:multiple-categories',
         //     true
         // );
@@ -171,17 +171,17 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         $status = $this->getCustomPostTypeAPI()->getStatus($result_id);
         if ($status == Status::PUBLISHED) {
             $success_string = sprintf(
-                $this->translationAPI->__('<a href="%s" %s>Click here to view it</a>.', 'pop-application'),
+                $this->getTranslationAPI()->__('<a href="%s" %s>Click here to view it</a>.', 'pop-application'),
                 $this->getCustomPostTypeAPI()->getPermalink($result_id),
                 getReloadurlLinkattrs()
             );
         } elseif ($status == Status::DRAFT) {
-            $success_string = $this->translationAPI->__('The status is still “Draft”, so it won\'t be online.', 'pop-application');
+            $success_string = $this->getTranslationAPI()->__('The status is still “Draft”, so it won\'t be online.', 'pop-application');
         } elseif ($status == Status::PENDING) {
-            $success_string = $this->translationAPI->__('Now waiting for approval from the admins.', 'pop-application');
+            $success_string = $this->getTranslationAPI()->__('Now waiting for approval from the admins.', 'pop-application');
         }
 
-        return $this->hooksAPI->applyFilters('gd-createupdate-post:execute:successstring', $success_string, $result_id, $status);
+        return $this->getHooksAPI()->applyFilters('gd-createupdate-post:execute:successstring', $success_string, $result_id, $status);
     }
 
     protected function getFeaturedimageModule()

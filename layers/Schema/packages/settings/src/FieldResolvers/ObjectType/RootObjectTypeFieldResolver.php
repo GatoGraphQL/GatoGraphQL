@@ -62,7 +62,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'option' => $this->translationAPI->__('Option saved in the DB', 'pop-settings'),
+            'option' => $this->getTranslationAPI()->__('Option saved in the DB', 'pop-settings'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -88,7 +88,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['option' => 'name'] => $this->translationAPI->__('The option name', 'pop-settings'),
+            ['option' => 'name'] => $this->getTranslationAPI()->__('The option name', 'pop-settings'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

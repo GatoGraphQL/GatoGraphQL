@@ -48,7 +48,7 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
 
   public function getTypeDescription(): ?string
   {
-    return $this->translationAPI->__('Representation of a user', 'users');
+    return $this->getTranslationAPI()->__('Representation of a user', 'users');
   }
 
   public function getID(object $user)
@@ -91,9 +91,9 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     string $fieldName
   ): ?string {
     $descriptions = [
-      'username' => $this->translationAPI->__("User's username handle", "users"),
-      'email' => $this->translationAPI->__("User's email", "users"),
-      'url' => $this->translationAPI->__("URL of the user's profile in the website", "users"),
+      'username' => $this->getTranslationAPI()->__("User's username handle", "users"),
+      'email' => $this->getTranslationAPI()->__("User's email", "users"),
+      'url' => $this->getTranslationAPI()->__("URL of the user's profile in the website", "users"),
     ];
     return $descriptions[$fieldName];
   }

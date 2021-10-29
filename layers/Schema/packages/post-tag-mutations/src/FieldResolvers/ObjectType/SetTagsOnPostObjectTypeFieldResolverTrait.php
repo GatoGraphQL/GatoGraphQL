@@ -48,6 +48,6 @@ trait SetTagsOnPostObjectTypeFieldResolverTrait
 
     protected function getEntityName(): string
     {
-        return $this->translationAPI->__('post', 'post-tag-mutations');
+        return $this->getTranslationAPI()->__('post', 'post-tag-mutations');
     }
 }

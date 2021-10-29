@@ -57,10 +57,10 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'symbol' => $this->translationAPI->__('Tag symbol', 'pop-everythingelse'),
-            'symbolnamedescription' => $this->translationAPI->__('Tag symbol and description', 'pop-everythingelse'),
-            'namedescription' => $this->translationAPI->__('Tag and description', 'pop-everythingelse'),
-            'symbolname' => $this->translationAPI->__('Symbol and tag', 'pop-everythingelse'),
+            'symbol' => $this->getTranslationAPI()->__('Tag symbol', 'pop-everythingelse'),
+            'symbolnamedescription' => $this->getTranslationAPI()->__('Tag symbol and description', 'pop-everythingelse'),
+            'namedescription' => $this->getTranslationAPI()->__('Tag and description', 'pop-everythingelse'),
+            'symbolname' => $this->getTranslationAPI()->__('Symbol and tag', 'pop-everythingelse'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

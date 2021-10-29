@@ -48,19 +48,19 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             HookNames::OBJECT_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
             array($this, 'maybeAddFieldArgNameTypeResolvers'),
             10,
             4
         );
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             HookNames::OBJECT_TYPE_FIELD_ARG_DESCRIPTION,
             array($this, 'maybeAddFieldArgDescription'),
             10,
             5
         );
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
             array($this, 'setOrRemoveFeaturedImage'),
             10,
@@ -94,7 +94,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
             return $fieldArgDescription;
         }
         return sprintf(
-            $this->translationAPI->__('The ID of the featured image (of type %s)', 'custompost-mutations'),
+            $this->getTranslationAPI()->__('The ID of the featured image (of type %s)', 'custompost-mutations'),
             $this->getMediaObjectTypeResolver()->getMaybeNamespacedTypeName()
         );
     }

@@ -29,7 +29,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
 
         $query = $this->convertPagesQuery($query, $options);
 
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             self::HOOK_QUERY,
             $query,
             $options

@@ -12,13 +12,13 @@ class VarsHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'ApplicationState:addVars',
             array($this, 'addVars'),
             10,
             1
         );
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             OperatorGlobalObjectTypeFieldResolver::HOOK_SAFEVARS,
             [$this, 'setSafeVars'],
             10,

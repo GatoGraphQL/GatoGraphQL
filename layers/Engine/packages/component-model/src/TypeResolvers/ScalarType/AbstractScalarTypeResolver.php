@@ -55,7 +55,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
     protected function getDefaultErrorMessage(mixed $inputValue): string
     {
         return sprintf(
-            $this->translationAPI->__('Cannot cast value \'%s\' for type \'%s\'', 'component-model'),
+            $this->getTranslationAPI()->__('Cannot cast value \'%s\' for type \'%s\'', 'component-model'),
             $inputValue,
             $this->getMaybeNamespacedTypeName(),
         );
@@ -67,7 +67,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         if ($inputValue instanceof stdClass) {
             return $this->getError(
                 sprintf(
-                    $this->translationAPI->__('An object cannot be casted to type \'%s\'', 'component-model'),
+                    $this->getTranslationAPI()->__('An object cannot be casted to type \'%s\'', 'component-model'),
                     $this->getMaybeNamespacedTypeName()
                 )
             );
@@ -81,7 +81,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         if ($valid === false) {
             return $this->getError(
                 sprintf(
-                    $this->translationAPI->__('The format for \'%s\' is not right for type \'%s\'', 'component-model'),
+                    $this->getTranslationAPI()->__('The format for \'%s\' is not right for type \'%s\'', 'component-model'),
                     $inputValue,
                     $this->getMaybeNamespacedTypeName()
                 )
@@ -95,7 +95,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         if (!is_string($inputValue)) {
             return $this->getError(
                 sprintf(
-                    $this->translationAPI->__('Type \'%s\' must be provided as a string', 'component-model'),
+                    $this->getTranslationAPI()->__('Type \'%s\' must be provided as a string', 'component-model'),
                     $this->getMaybeNamespacedTypeName()
                 )
             );

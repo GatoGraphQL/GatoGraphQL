@@ -35,7 +35,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
     protected function addParentCategories()
     {
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             'GD_CreateUpdate_Post:add-parent-categories',
             false,
             $this
@@ -62,12 +62,12 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
     protected function getCategoriesErrorMessages()
     {
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             'GD_CreateUpdate_Post:categories-validation:error',
             array(
-                'empty-categories' => $this->translationAPI->__('The categories have not been set', 'pop-application'),
-                'empty-category' => $this->translationAPI->__('The category has not been set', 'pop-application'),
-                'only-one' => $this->translationAPI->__('Only one category can be selected', 'pop-application'),
+                'empty-categories' => $this->getTranslationAPI()->__('The categories have not been set', 'pop-application'),
+                'empty-category' => $this->getTranslationAPI()->__('The category has not been set', 'pop-application'),
+                'only-one' => $this->getTranslationAPI()->__('Only one category can be selected', 'pop-application'),
             )
         );
     }
@@ -78,7 +78,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         parent::validateContent($errors, $form_data);
 
         if ($this->supportsTitle() && empty($form_data[MutationInputProperties::TITLE])) {
-            $errors[] = $this->translationAPI->__('The title cannot be empty', 'pop-application');
+            $errors[] = $this->getTranslationAPI()->__('The title cannot be empty', 'pop-application');
         }
 
         // Validate the following conditions only if status = pending/publish
@@ -87,11 +87,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         }
 
         if (empty($form_data[MutationInputProperties::CONTENT])) {
-            $errors[] = $this->translationAPI->__('The content cannot be empty', 'pop-application');
+            $errors[] = $this->getTranslationAPI()->__('The content cannot be empty', 'pop-application');
         }
 
         if ($this->isFeaturedImageMandatory() && empty($form_data[CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID])) {
-            $errors[] = $this->translationAPI->__('The featured image has not been set', 'pop-application');
+            $errors[] = $this->getTranslationAPI()->__('The featured image has not been set', 'pop-application');
         }
 
         if ($validateCategories = $this->validateCategories($form_data)) {
@@ -113,7 +113,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         parent::validateUpdateContent($errors, $form_data);
 
         if (isset($form_data[MutationInputProperties::REFERENCES]) && in_array($form_data[MutationInputProperties::ID], $form_data[MutationInputProperties::REFERENCES])) {
-            $errors[] = $this->translationAPI->__('The post cannot be a response to itself', 'pop-postscreation');
+            $errors[] = $this->getTranslationAPI()->__('The post cannot be a response to itself', 'pop-postscreation');
         }
     }
 
@@ -125,20 +125,20 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         $customPostID = $form_data[MutationInputProperties::ID];
 
         if (!in_array($this->getCustomPostTypeAPI()->getStatus($customPostID), array(Status::DRAFT, Status::PENDING, Status::PUBLISHED))) {
-            $errors[] = $this->translationAPI->__('Hmmmmm, this post seems to have been deleted...', 'pop-application');
+            $errors[] = $this->getTranslationAPI()->__('Hmmmmm, this post seems to have been deleted...', 'pop-application');
             return;
         }
 
         // Validation below not needed, since this is done in the Checkpoint already
         // // Validate user permission
         // if (!gdCurrentUserCanEdit($customPostID)) {
-        //     $errors[] = $this->translationAPI->__('Your user doesn\'t have permission for editing.', 'pop-application');
+        //     $errors[] = $this->getTranslationAPI()->__('Your user doesn\'t have permission for editing.', 'pop-application');
         // }
 
         // // The nonce comes directly as a parameter in the request, it's not a form field
         // $nonce = $_REQUEST[POP_INPUTNAME_NONCE];
         // if (!gdVerifyNonce($nonce, GD_NONCE_EDITURL, $customPostID)) {
-        //     $errors[] = $this->translationAPI->__('Incorrect URL', 'pop-application');
+        //     $errors[] = $this->getTranslationAPI()->__('Incorrect URL', 'pop-application');
         //     return;
         // }
     }

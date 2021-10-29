@@ -53,10 +53,10 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'customPost' => $this->translationAPI->__('Custom post with a specific ID', 'customposts'),
-            'customPostBySlug' => $this->translationAPI->__('Custom post with a specific slug', 'customposts'),
-            'customPostForAdmin' => $this->translationAPI->__('[Unrestricted] Custom post with a specific ID', 'customposts'),
-            'customPostBySlugForAdmin' => $this->translationAPI->__('[Unrestricted] Custom post with a specific slug', 'customposts'),
+            'customPost' => $this->getTranslationAPI()->__('Custom post with a specific ID', 'customposts'),
+            'customPostBySlug' => $this->getTranslationAPI()->__('Custom post with a specific slug', 'customposts'),
+            'customPostForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Custom post with a specific ID', 'customposts'),
+            'customPostBySlugForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Custom post with a specific slug', 'customposts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

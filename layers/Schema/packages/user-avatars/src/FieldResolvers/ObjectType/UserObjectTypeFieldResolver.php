@@ -73,7 +73,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'avatar' => $this->translationAPI->__('User avatar', 'user-avatars'),
+            'avatar' => $this->getTranslationAPI()->__('User avatar', 'user-avatars'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -91,7 +91,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['avatar' => 'size'] => $this->translationAPI->__('Avatar size', 'user-avatars'),
+            ['avatar' => 'size'] => $this->getTranslationAPI()->__('Avatar size', 'user-avatars'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

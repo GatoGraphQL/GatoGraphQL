@@ -27,7 +27,7 @@ class BuildSystemMutationResolverBridge extends AbstractSystemComponentMutationR
     }
     public function getSuccessString(string | int $result_id): ?string
     {
-        return $this->translationAPI->__('System action "build" executed successfully.', 'pop-system');
+        return $this->getTranslationAPI()->__('System action "build" executed successfully.', 'pop-system');
         ;
     }
 }

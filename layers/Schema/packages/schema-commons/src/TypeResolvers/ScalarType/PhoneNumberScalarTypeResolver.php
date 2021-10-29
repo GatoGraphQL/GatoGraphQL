@@ -22,7 +22,7 @@ class PhoneNumberScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Phone number scalar, such as +1-212-555-0149', 'component-model');
+        return $this->getTranslationAPI()->__('Phone number scalar, such as +1-212-555-0149', 'component-model');
     }
 
     public function getSpecifiedByURL(): ?string
@@ -39,7 +39,7 @@ class PhoneNumberScalarTypeResolver extends AbstractScalarTypeResolver
         if (\preg_match('/(\+{1}[0-9]{1,3}[0-9]{8,9})/', $inputValue) !== 1) {
             return $this->getError(
                 sprintf(
-                    $this->translationAPI->__('The format for type \'%s\' is not right: it must be satisfied via regex /(\+{1}[0-9]{1,3}[0-9]{8,9})/', 'component-model'),
+                    $this->getTranslationAPI()->__('The format for type \'%s\' is not right: it must be satisfied via regex /(\+{1}[0-9]{1,3}[0-9]{8,9})/', 'component-model'),
                     $this->getMaybeNamespacedTypeName()
                 )
             );

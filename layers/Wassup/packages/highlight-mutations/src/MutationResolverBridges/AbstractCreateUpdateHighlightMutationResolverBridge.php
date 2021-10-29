@@ -29,12 +29,12 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
     {
         if ($referenced) {
             return sprintf(
-                $this->translationAPI->__('Highlight from “%s”', 'poptheme-wassup'),
+                $this->getTranslationAPI()->__('Highlight from “%s”', 'poptheme-wassup'),
                 $this->getCustomPostTypeAPI()->getTitle($referenced)
             );
         }
 
-        return $this->translationAPI->__('Highlight', 'poptheme-wassup');
+        return $this->getTranslationAPI()->__('Highlight', 'poptheme-wassup');
     }
 
     public function getSuccessString(string | int $result_id): ?string
@@ -44,12 +44,12 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
             // Give a link to the referenced post to the stance, and force it to get it from the server again
             $highlighted = Utils::getCustomPostMeta($result_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
             $success_string = sprintf(
-                $this->translationAPI->__('<a href="%s" %s>Click here to view it</a>.', 'poptheme-wassup'),
+                $this->getTranslationAPI()->__('<a href="%s" %s>Click here to view it</a>.', 'poptheme-wassup'),
                 $this->getCustomPostTypeAPI()->getPermalink($highlighted),
                 getReloadurlLinkattrs()
             );
 
-            return $this->hooksAPI->applyFilters('gd-createupdate-uniquereference:execute:successstring', $success_string, $result_id, $status);
+            return $this->getHooksAPI()->applyFilters('gd-createupdate-uniquereference:execute:successstring', $success_string, $result_id, $status);
         }
 
         return parent::getSuccessString($result_id);

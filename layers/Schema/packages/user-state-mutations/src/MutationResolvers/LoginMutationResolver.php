@@ -42,10 +42,10 @@ class LoginMutationResolver extends AbstractMutationResolver
         $pwd = $form_data[MutationInputProperties::PASSWORD];
 
         if (!$username_or_email) {
-            $errors[] = $this->translationAPI->__('Please supply your username or email', 'user-state-mutations');
+            $errors[] = $this->getTranslationAPI()->__('Please supply your username or email', 'user-state-mutations');
         }
         if (!$pwd) {
-            $errors[] = $this->translationAPI->__('Please supply your password', 'user-state-mutations');
+            $errors[] = $this->getTranslationAPI()->__('Please supply your password', 'user-state-mutations');
         }
 
         $vars = ApplicationState::getVars();
@@ -57,7 +57,7 @@ class LoginMutationResolver extends AbstractMutationResolver
 
     protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): string
     {
-        return $this->translationAPI->__('You are already logged in', 'user-state-mutations');
+        return $this->getTranslationAPI()->__('You are already logged in', 'user-state-mutations');
     }
 
     public function executeMutation(array $form_data): mixed
@@ -73,7 +73,7 @@ class LoginMutationResolver extends AbstractMutationResolver
             if (!$user) {
                 return new Error(
                     'no-user',
-                    $this->translationAPI->__('There is no user registered with that email address.')
+                    $this->getTranslationAPI()->__('There is no user registered with that email address.')
                 );
             }
             $username = $this->getUserTypeAPI()->getUserLogin($user);
@@ -98,7 +98,7 @@ class LoginMutationResolver extends AbstractMutationResolver
         ApplicationStateUtils::setUserStateVars(ApplicationState::$vars);
 
         $userID = $this->getUserTypeAPI()->getUserId($user);
-        $this->hooksAPI->doAction('gd:user:loggedin', $userID);
+        $this->getHooksAPI()->doAction('gd:user:loggedin', $userID);
         return $userID;
     }
 }

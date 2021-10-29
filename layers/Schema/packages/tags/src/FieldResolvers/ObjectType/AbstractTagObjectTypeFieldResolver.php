@@ -88,12 +88,12 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->translationAPI->__('Tag URL', 'pop-tags'),
-            'urlPath' => $this->translationAPI->__('Tag URL path', 'pop-tags'),
-            'name' => $this->translationAPI->__('Tag', 'pop-tags'),
-            'slug' => $this->translationAPI->__('Tag slug', 'pop-tags'),
-            'description' => $this->translationAPI->__('Tag description', 'pop-tags'),
-            'count' => $this->translationAPI->__('Number of custom posts containing this tag', 'pop-tags'),
+            'url' => $this->getTranslationAPI()->__('Tag URL', 'pop-tags'),
+            'urlPath' => $this->getTranslationAPI()->__('Tag URL path', 'pop-tags'),
+            'name' => $this->getTranslationAPI()->__('Tag', 'pop-tags'),
+            'slug' => $this->getTranslationAPI()->__('Tag slug', 'pop-tags'),
+            'description' => $this->getTranslationAPI()->__('Tag description', 'pop-tags'),
+            'count' => $this->getTranslationAPI()->__('Number of custom posts containing this tag', 'pop-tags'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

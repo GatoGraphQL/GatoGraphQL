@@ -38,7 +38,7 @@ class ModelInstanceHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
             array($this, 'getModelInstanceComponentsFromVars')
         );
@@ -59,7 +59,7 @@ class ModelInstanceHookSet extends AbstractHookSet
             // Announcements and Articles (Posts), or Past Event and (Upcoming) Event may be different
             // By default, we check for post type but not for categories
             if (
-                $this->hooksAPI->applyFilters(
+                $this->getHooksAPI()->applyFilters(
                     self::HOOK_VARY_MODEL_INSTANCE_BY_CATEGORY,
                     false
                 )
@@ -69,7 +69,7 @@ class ModelInstanceHookSet extends AbstractHookSet
                 foreach ($this->getPostCategoryTypeAPI()->getCustomPostCategories($postID) as $cat) {
                     $categories[] = $this->getPostCategoryTypeAPI()->getCategorySlug($cat) . $this->getPostCategoryTypeAPI()->getCategoryID($cat);
                 }
-                $components[] = $this->translationAPI->__('categories:', 'post-categories') . implode('.', $categories);
+                $components[] = $this->getTranslationAPI()->__('categories:', 'post-categories') . implode('.', $categories);
             }
         }
         return $components;

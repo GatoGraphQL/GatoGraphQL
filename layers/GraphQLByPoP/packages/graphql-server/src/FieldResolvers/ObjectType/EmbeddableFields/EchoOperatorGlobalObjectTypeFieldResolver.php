@@ -87,7 +87,7 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['echoStr' => 'value'] => $this->translationAPI->__('The input string to be echoed back', 'graphql-api'),
+            ['echoStr' => 'value'] => $this->getTranslationAPI()->__('The input string to be echoed back', 'graphql-api'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -106,7 +106,7 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'echoStr' => $this->translationAPI->__('Repeat back the input string', 'graphql-api'),
+            'echoStr' => $this->getTranslationAPI()->__('Repeat back the input string', 'graphql-api'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

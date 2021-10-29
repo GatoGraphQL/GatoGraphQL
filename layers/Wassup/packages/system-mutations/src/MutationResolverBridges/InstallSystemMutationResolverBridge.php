@@ -27,6 +27,6 @@ class InstallSystemMutationResolverBridge extends AbstractSystemComponentMutatio
     }
     public function getSuccessString(string | int $result_id): ?string
     {
-        return $this->translationAPI->__('System action "install" executed successfully.', 'pop-system');
+        return $this->getTranslationAPI()->__('System action "install" executed successfully.', 'pop-system');
     }
 }

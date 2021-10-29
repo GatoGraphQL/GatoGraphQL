@@ -15,7 +15,7 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
      */
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             self::HOOK_QUERY,
             parent::convertCustomPostsQuery($query, $options),
             $options

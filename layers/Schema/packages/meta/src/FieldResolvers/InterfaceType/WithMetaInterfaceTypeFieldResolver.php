@@ -79,7 +79,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldArgName) {
-            'key' => $this->translationAPI->__('The meta key', 'meta'),
+            'key' => $this->getTranslationAPI()->__('The meta key', 'meta'),
             default => parent::getFieldArgDescription($fieldName, $fieldArgName),
         };
     }
@@ -95,8 +95,8 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'metaValue' => $this->translationAPI->__('Single meta value', 'custompostmeta'),
-            'metaValues' => $this->translationAPI->__('List of meta values', 'custompostmeta'),
+            'metaValue' => $this->getTranslationAPI()->__('Single meta value', 'custompostmeta'),
+            'metaValues' => $this->getTranslationAPI()->__('List of meta values', 'custompostmeta'),
             default => parent::getFieldDescription($fieldName),
         };
     }

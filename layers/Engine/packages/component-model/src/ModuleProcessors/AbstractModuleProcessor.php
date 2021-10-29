@@ -282,7 +282,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         /**
          * Allow to add more stuff
          */
-        $this->hooksAPI->doAction(
+        $this->getHooksAPI()->doAction(
             self::HOOK_INIT_MODEL_PROPS,
             array(&$props),
             $module,
@@ -310,7 +310,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         /**
          * Allow to add more stuff
          */
-        $this->hooksAPI->doAction(
+        $this->getHooksAPI()->doAction(
             self::HOOK_INIT_REQUEST_PROPS,
             array(&$props),
             $module,
@@ -872,7 +872,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         /**
          * Allow to add more stuff
          */
-        $this->hooksAPI->doAction(
+        $this->getHooksAPI()->doAction(
             self::HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES,
             array(&$ret),
             $module,

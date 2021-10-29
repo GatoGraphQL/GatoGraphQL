@@ -39,7 +39,7 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Comments added to custom posts', 'comments');
+        return $this->getTranslationAPI()->__('Comments added to custom posts', 'comments');
     }
 
     public function getID(object $object): string | int | null

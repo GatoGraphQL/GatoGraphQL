@@ -21,7 +21,7 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_FOLLOWSUSERS);
             if (!in_array($target_id, $value)) {
                 $errors[] = sprintf(
-                    $this->translationAPI->__('You were not following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+                    $this->getTranslationAPI()->__('You were not following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $this->getUserTypeAPI()->getUserDisplayName($target_id)
                 );
             }
@@ -35,7 +35,7 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
     protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
-        $this->hooksAPI->doAction('gd_unfollowuser', $target_id, $form_data);
+        $this->getHooksAPI()->doAction('gd_unfollowuser', $target_id, $form_data);
     }
 
     // protected function updateValue($value, $form_data) {

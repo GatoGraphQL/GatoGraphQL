@@ -11,7 +11,7 @@ class URLHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             'RequestUtils:current_url:remove_params',
             [$this, 'getParamsToRemoveFromURL']
         );
