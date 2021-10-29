@@ -156,7 +156,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         if ($addArguments) {
             $functionName = $this->getFieldQueryInterpreter()->getFieldName($function);
             $functionArgElems = array_merge(
-                $this->getFieldQueryInterpreter()->extractFieldArguments($this->getRootTypeResolver(), $function) ?? [],
+                $this->getFieldQueryInterpreter()->extractFieldArguments($this->getRootObjectTypeResolver(), $function) ?? [],
                 $addArguments
             );
             $function = $this->getFieldQueryInterpreter()->getField($functionName, $functionArgElems);
@@ -206,7 +206,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                     $schemaFieldArgs,
                     $schemaObjectErrors,
                     $schemaObjectWarnings
-                ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForSchema($this->getRootTypeResolver(), $function, $variables);
+                ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForSchema($this->getRootObjectTypeResolver(), $function, $variables);
 
                 // Place the errors not under schema but under DB, since they may change on a object by object basis
                 if ($schemaObjectWarnings) {
