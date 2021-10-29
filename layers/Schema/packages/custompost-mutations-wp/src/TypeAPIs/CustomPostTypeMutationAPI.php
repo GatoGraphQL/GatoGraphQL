@@ -16,8 +16,8 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 {
-    protected TranslationAPIInterface $translationAPI;
-    protected ErrorHelperInterface $errorHelper;
+    protected ?TranslationAPIInterface $translationAPI = null;
+    protected ?ErrorHelperInterface $errorHelper = null;
 
     #[Required]
     final public function autowireCustomPostTypeMutationAPI(TranslationAPIInterface $translationAPI, ErrorHelperInterface $errorHelper): void

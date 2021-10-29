@@ -11,9 +11,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractHookSet extends AbstractAutomaticallyInstantiatedService
 {
-    protected HooksAPIInterface $hooksAPI;
-    protected TranslationAPIInterface $translationAPI;
-    protected InstanceManagerInterface $instanceManager;
+    protected ?HooksAPIInterface $hooksAPI = null;
+    protected ?TranslationAPIInterface $translationAPI = null;
+    protected ?InstanceManagerInterface $instanceManager = null;
 
     #[Required]
     final public function autowireAbstractHookSet(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, InstanceManagerInterface $instanceManager): void

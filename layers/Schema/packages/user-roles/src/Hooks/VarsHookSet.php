@@ -14,7 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {
-    protected UserRoleTypeAPIInterface $userRoleTypeAPI;
+    protected ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
 
     #[Required]
     final public function autowireVarsHookSet(

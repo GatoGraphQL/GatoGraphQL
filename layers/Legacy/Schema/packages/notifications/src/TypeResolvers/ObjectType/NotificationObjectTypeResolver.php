@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected NotificationTypeDataLoader $notificationTypeDataLoader;
+    protected ?NotificationTypeDataLoader $notificationTypeDataLoader = null;
     
     #[Required]
     final public function autowireNotificationObjectTypeResolver(

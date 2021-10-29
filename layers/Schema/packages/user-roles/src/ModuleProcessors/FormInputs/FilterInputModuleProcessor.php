@@ -20,7 +20,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_USER_ROLES = 'filterinput-user-roles';
     public const MODULE_FILTERINPUT_EXCLUDE_USER_ROLES = 'filterinput-exclude-user-roles';
 
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     #[Required]
     final public function autowireFilterInputModuleProcessor(

@@ -15,7 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractAccessControlForFieldsHookSet extends AbstractCMSBootHookSet
 {
-    protected AccessControlManagerInterface $accessControlManager;
+    protected ?AccessControlManagerInterface $accessControlManager = null;
 
     #[Required]
     final public function autowireAbstractAccessControlForFieldsHookSet(

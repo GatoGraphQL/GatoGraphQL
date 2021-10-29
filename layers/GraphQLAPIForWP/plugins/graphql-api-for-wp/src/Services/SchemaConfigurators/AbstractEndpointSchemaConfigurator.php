@@ -13,9 +13,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorInterface
 {
-    protected InstanceManagerInterface $instanceManager;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected BlockHelpers $blockHelpers;
+    protected ?InstanceManagerInterface $instanceManager = null;
+    protected ?ModuleRegistryInterface $moduleRegistry = null;
+    protected ?BlockHelpers $blockHelpers = null;
 
     #[Required]
     final public function autowireAbstractEndpointSchemaConfigurator(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, BlockHelpers $blockHelpers): void

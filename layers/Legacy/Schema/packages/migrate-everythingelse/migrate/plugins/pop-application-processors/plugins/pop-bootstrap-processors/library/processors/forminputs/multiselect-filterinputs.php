@@ -17,8 +17,8 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
     public const MODULE_FILTERINPUT_CONTENTSECTIONS = 'filterinput-contentsections';
     public const MODULE_FILTERINPUT_POSTSECTIONS = 'filterinput-postsections';
 
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     #[Required]
     final public function autowirePoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs(

@@ -20,9 +20,9 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
 {
-    protected InstanceManagerInterface $instanceManager;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected GeneralUtils $generalUtils;
+    protected ?InstanceManagerInterface $instanceManager = null;
+    protected ?ModuleRegistryInterface $moduleRegistry = null;
+    protected ?GeneralUtils $generalUtils = null;
 
     #[Required]
     final public function autowireAbstractScript(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, GeneralUtils $generalUtils): void

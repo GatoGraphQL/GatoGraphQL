@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
-    protected UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver;
+    protected ?UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver = null;
 
     #[Required]
     final public function autowireUpvoteCustomPostMutationResolverBridge(

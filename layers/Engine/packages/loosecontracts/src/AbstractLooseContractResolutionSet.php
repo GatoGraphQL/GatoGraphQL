@@ -10,9 +10,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractLooseContractResolutionSet extends AbstractAutomaticallyInstantiatedService
 {
-    protected LooseContractManagerInterface $looseContractManager;
-    protected NameResolverInterface $nameResolver;
-    protected HooksAPIInterface $hooksAPI;
+    protected ?LooseContractManagerInterface $looseContractManager = null;
+    protected ?NameResolverInterface $nameResolver = null;
+    protected ?HooksAPIInterface $hooksAPI = null;
 
     #[Required]
     final public function autowireAbstractLooseContractResolutionSet(LooseContractManagerInterface $looseContractManager, NameResolverInterface $nameResolver, HooksAPIInterface $hooksAPI): void

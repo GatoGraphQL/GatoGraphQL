@@ -27,10 +27,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      */
     protected ?PersistentCacheInterface $persistentCache = null;
 
-    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
-    protected PersistedFragmentManagerInterface $fragmentCatalogueManager;
-    protected PersistedQueryManagerInterface $queryCatalogueManager;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    protected ?PersistedFragmentManagerInterface $fragmentCatalogueManager = null;
+    protected ?PersistedQueryManagerInterface $queryCatalogueManager = null;
+    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
     #[Required]
     final public function autowireRootObjectTypeFieldResolver(

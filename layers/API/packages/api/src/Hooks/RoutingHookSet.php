@@ -14,8 +14,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RoutingHookSet extends AbstractHookSet
 {
-    protected CMSServiceInterface $cmsService;
-    protected RequestHelperServiceInterface $requestHelperService;
+    protected ?CMSServiceInterface $cmsService = null;
+    protected ?RequestHelperServiceInterface $requestHelperService = null;
 
     #[Required]
     final public function autowireRoutingHookSet(

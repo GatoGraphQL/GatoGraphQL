@@ -14,7 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     
     #[Required]
     final public function autowireAbstractLocationFunctionalObjectTypeFieldResolver(

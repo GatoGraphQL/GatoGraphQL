@@ -16,8 +16,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
-    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    protected ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
 
     #[Required]
     final public function autowireOperatorGlobalObjectTypeFieldResolver(

@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected HighlightTypeDataLoader $highlightTypeDataLoader;
+    protected ?HighlightTypeDataLoader $highlightTypeDataLoader = null;
     
     #[Required]
     final public function autowireHighlightObjectTypeResolver(

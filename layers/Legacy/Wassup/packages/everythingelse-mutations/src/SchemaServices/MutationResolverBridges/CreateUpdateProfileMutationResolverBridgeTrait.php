@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait CreateUpdateProfileMutationResolverBridgeTrait
 {
-    protected ModuleProcessorManagerInterface $moduleProcessorManager;
+    protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
     #[Required]
     public function autowireCreateUpdateProfileMutationResolverBridgeTrait(

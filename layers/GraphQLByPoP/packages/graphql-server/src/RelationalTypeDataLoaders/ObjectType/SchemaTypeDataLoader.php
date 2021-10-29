@@ -16,8 +16,8 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     use UseObjectDictionaryTypeDataLoaderTrait;
 
-    protected SchemaObjectTypeResolver $schemaObjectTypeResolver;
-    protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
+    protected ?SchemaObjectTypeResolver $schemaObjectTypeResolver = null;
+    protected ?SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry = null;
 
     #[Required]
     final public function autowireSchemaTypeDataLoader(

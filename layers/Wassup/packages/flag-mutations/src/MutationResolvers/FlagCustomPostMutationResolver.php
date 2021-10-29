@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FlagCustomPostMutationResolver extends AbstractMutationResolver
 {
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    protected ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
     #[Required]
     final public function autowireFlagCustomPostMutationResolver(

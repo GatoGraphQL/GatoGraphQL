@@ -16,8 +16,8 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
 {
     use ReservedNameTypeResolverTrait;
 
-    protected TypeResolverHelperInterface $typeResolverHelper;
-    protected MutationRootTypeDataLoader $mutationRootTypeDataLoader;
+    protected ?TypeResolverHelperInterface $typeResolverHelper = null;
+    protected ?MutationRootTypeDataLoader $mutationRootTypeDataLoader = null;
 
     #[Required]
     final public function autowireMutationRootObjectTypeResolver(

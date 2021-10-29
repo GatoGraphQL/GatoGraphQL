@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ActivatePluginsMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
-    protected ActivatePluginsMutationResolver $activatePluginsMutationResolver;
+    protected ?ActivatePluginsMutationResolver $activatePluginsMutationResolver = null;
 
     #[Required]
     final public function autowireActivatePluginsMutationResolverBridge(

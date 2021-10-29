@@ -29,14 +29,14 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
-    protected FieldObjectTypeResolver $fieldObjectTypeResolver;
-    protected TypeObjectTypeResolver $typeObjectTypeResolver;
-    protected EnumValueObjectTypeResolver $enumValueObjectTypeResolver;
-    protected InputValueObjectTypeResolver $inputValueObjectTypeResolver;
-    protected TypeKindEnumTypeResolver $typeKindEnumTypeResolver;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    protected ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    protected ?FieldObjectTypeResolver $fieldObjectTypeResolver = null;
+    protected ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
+    protected ?EnumValueObjectTypeResolver $enumValueObjectTypeResolver = null;
+    protected ?InputValueObjectTypeResolver $inputValueObjectTypeResolver = null;
+    protected ?TypeKindEnumTypeResolver $typeKindEnumTypeResolver = null;
 
     #[Required]
     final public function autowireTypeObjectTypeFieldResolver(

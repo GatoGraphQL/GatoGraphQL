@@ -9,7 +9,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRouteModuleProcessor
 {
-    protected HooksAPIInterface $hooksAPI;
+    protected ?HooksAPIInterface $hooksAPI = null;
 
     #[Required]
     final public function autowireAbstractRouteModuleProcessor(

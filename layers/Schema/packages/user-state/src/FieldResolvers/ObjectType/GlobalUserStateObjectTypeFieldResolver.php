@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObjectTypeFieldResolver
 {
-    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
     #[Required]
     final public function autowireGlobalUserStateObjectTypeFieldResolver(

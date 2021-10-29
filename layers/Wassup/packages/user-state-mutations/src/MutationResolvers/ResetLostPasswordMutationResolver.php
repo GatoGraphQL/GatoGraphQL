@@ -15,7 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ResetLostPasswordMutationResolver extends AbstractMutationResolver
 {
-    protected UserTypeAPIInterface $userTypeAPI;
+    protected ?UserTypeAPIInterface $userTypeAPI = null;
 
     #[Required]
     final public function autowireResetLostPasswordMutationResolver(

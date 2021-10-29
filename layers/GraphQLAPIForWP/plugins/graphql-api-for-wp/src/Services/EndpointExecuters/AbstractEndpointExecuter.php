@@ -12,8 +12,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
 {
-    protected InstanceManagerInterface $instanceManager;
-    protected ModuleRegistryInterface $moduleRegistry;
+    protected ?InstanceManagerInterface $instanceManager = null;
+    protected ?ModuleRegistryInterface $moduleRegistry = null;
 
     #[Required]
     final public function autowireAbstractEndpointExecuter(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry): void

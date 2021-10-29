@@ -17,8 +17,8 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
 {
     use PluginMarkdownContentRetrieverTrait;
 
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected ModulesMenuPage $modulesMenuPage;
+    protected ?ModuleRegistryInterface $moduleRegistry = null;
+    protected ?ModulesMenuPage $modulesMenuPage = null;
 
     #[Required]
     final public function autowireModuleDocumentationMenuPage(

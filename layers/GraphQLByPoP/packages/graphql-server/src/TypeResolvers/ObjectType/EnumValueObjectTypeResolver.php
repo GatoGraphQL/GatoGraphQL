@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class EnumValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
-    protected SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader;
+    protected ?SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader = null;
 
     #[Required]
     final public function autowireEnumValueObjectTypeResolver(

@@ -14,9 +14,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigurator
 {
-    protected CacheControlBlock $cacheControlBlock;
-    protected BlockHelpers $blockHelpers;
-    protected CacheControlManagerInterface $cacheControlManager;
+    protected ?CacheControlBlock $cacheControlBlock = null;
+    protected ?BlockHelpers $blockHelpers = null;
+    protected ?CacheControlManagerInterface $cacheControlManager = null;
 
     #[Required]
     final public function autowireCacheControlGraphQLQueryConfigurator(

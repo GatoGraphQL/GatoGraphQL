@@ -11,8 +11,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait CustomEndpointClientTrait
 {
-    protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
-    protected RequestHelperServiceInterface $requestHelperService;
+    protected ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
+    protected ?RequestHelperServiceInterface $requestHelperService = null;
 
     #[Required]
     public function autowireCustomEndpointClientTrait(

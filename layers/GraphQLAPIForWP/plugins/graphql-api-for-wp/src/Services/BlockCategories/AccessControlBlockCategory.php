@@ -11,7 +11,7 @@ class AccessControlBlockCategory extends AbstractBlockCategory
 {
     public const ACCESS_CONTROL_BLOCK_CATEGORY = 'graphql-api-access-control';
 
-    protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType;
+    protected ?GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType = null;
 
     #[Required]
     final public function autowireAccessControlBlockCategory(

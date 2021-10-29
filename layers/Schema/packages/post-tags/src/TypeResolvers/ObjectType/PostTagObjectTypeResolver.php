@@ -14,7 +14,7 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
 {
     use PostTagAPISatisfiedContractTrait;
 
-    protected PostTagTypeDataLoader $postTagTypeDataLoader;
+    protected ?PostTagTypeDataLoader $postTagTypeDataLoader = null;
 
     #[Required]
     final public function autowirePostTagObjectTypeResolver(

@@ -12,8 +12,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SubscribeToTagMutationResolverBridge extends AbstractTagUpdateUserMetaValueMutationResolverBridge
 {
-    protected SubscribeToTagMutationResolver $subscribeToTagMutationResolver;
-    protected PostTagTypeAPIInterface $postTagTypeAPI;
+    protected ?SubscribeToTagMutationResolver $subscribeToTagMutationResolver = null;
+    protected ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
     #[Required]
     final public function autowireSubscribeToTagMutationResolverBridge(

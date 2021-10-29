@@ -14,7 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLEndpointHandler extends AbstractEndpointHandler
 {
-    protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
+    protected ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
 
     #[Required]
     final public function autowireGraphQLEndpointHandler(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void

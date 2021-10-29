@@ -10,8 +10,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractMutationResolver implements MutationResolverInterface
 {
-    protected TranslationAPIInterface $translationAPI;
-    protected HooksAPIInterface $hooksAPI;
+    protected ?TranslationAPIInterface $translationAPI = null;
+    protected ?HooksAPIInterface $hooksAPI = null;
 
     #[Required]
     final public function autowireAbstractMutationResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI): void

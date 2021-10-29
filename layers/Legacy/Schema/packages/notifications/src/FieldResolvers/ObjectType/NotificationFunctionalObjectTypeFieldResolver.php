@@ -14,7 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     
     #[Required]
     final public function autowireNotificationFunctionalObjectTypeFieldResolver(

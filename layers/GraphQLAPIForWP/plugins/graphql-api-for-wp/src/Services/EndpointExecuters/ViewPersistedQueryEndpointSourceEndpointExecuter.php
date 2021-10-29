@@ -16,11 +16,11 @@ use WP_Post;
 
 class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourceEndpointExecuter implements PersistedQueryEndpointExecuterServiceTagInterface
 {
-    protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType;
-    protected UserAuthorizationInterface $userAuthorization;
-    protected GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers;
-    protected PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor;
-    protected PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock;
+    protected ?GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType = null;
+    protected ?UserAuthorizationInterface $userAuthorization = null;
+    protected ?GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers = null;
+    protected ?PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor = null;
+    protected ?PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock = null;
 
     #[Required]
     final public function autowireViewPersistedQueryEndpointSourceEndpointExecuter(

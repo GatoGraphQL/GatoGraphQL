@@ -9,8 +9,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_FunctionalSocialMediaItems extends AbstractObjectTypeFieldResolver
 {
-    protected SocialMediaProviderEnumTypeResolver $socialMediaProviderEnumTypeResolver;
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    protected ?SocialMediaProviderEnumTypeResolver $socialMediaProviderEnumTypeResolver = null;
+    protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
 
     #[Required]
     final public function autowirePoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_FunctionalSocialMediaItems(

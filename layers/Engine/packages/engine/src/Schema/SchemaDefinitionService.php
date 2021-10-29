@@ -15,10 +15,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionService implements SchemaDefinitionServiceInterface
 {
-    protected RootObjectTypeResolver $rootObjectTypeResolver;
-    protected AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver;
-    protected InstanceManagerInterface $instanceManager;
-    protected TranslationAPIInterface $translationAPI;
+    protected ?RootObjectTypeResolver $rootObjectTypeResolver = null;
+    protected ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
+    protected ?InstanceManagerInterface $instanceManager = null;
+    protected ?TranslationAPIInterface $translationAPI = null;
 
     #[Required]
     final public function autowireSchemaDefinitionService(

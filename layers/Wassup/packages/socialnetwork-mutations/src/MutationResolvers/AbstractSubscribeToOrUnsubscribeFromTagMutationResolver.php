@@ -9,7 +9,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
-    protected PostTagTypeAPIInterface $postTagTypeAPI;
+    protected ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
     #[Required]
     final public function autowireAbstractSubscribeToOrUnsubscribeFromTagMutationResolver(

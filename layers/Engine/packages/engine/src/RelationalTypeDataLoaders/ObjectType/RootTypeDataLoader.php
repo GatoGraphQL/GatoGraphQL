@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    protected Root $root;
+    protected ?Root $root = null;
 
     #[Required]
     final public function autowireRootTypeDataLoader(

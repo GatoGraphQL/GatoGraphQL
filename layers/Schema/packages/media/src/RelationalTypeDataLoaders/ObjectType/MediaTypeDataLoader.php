@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
-    protected MediaTypeAPIInterface $mediaTypeAPI;
+    protected ?MediaTypeAPIInterface $mediaTypeAPI = null;
 
     #[Required]
     final public function autowireMediaTypeDataLoader(

@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SelfFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    protected SchemaConfigSelfFieldsBlock $schemaConfigSelfFieldsBlock;
+    protected ?SchemaConfigSelfFieldsBlock $schemaConfigSelfFieldsBlock = null;
 
     #[Required]
     final public function autowireNamespacingSchemaConfigurationExecuter(

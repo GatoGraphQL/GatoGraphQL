@@ -12,8 +12,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait PostTagAPISatisfiedContractTrait
 {
-    protected PostTagTypeAPIInterface $postTagTypeAPI;
-    protected PostTagObjectTypeResolver $postTagObjectTypeResolver;
+    protected ?PostTagTypeAPIInterface $postTagTypeAPI = null;
+    protected ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
 
     #[Required]
     public function autowirePostTagAPISatisfiedContractTrait(

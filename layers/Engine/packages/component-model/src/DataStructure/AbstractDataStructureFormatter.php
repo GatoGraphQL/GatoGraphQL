@@ -10,8 +10,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractDataStructureFormatter implements DataStructureFormatterInterface
 {
-    protected FeedbackMessageStoreInterface $feedbackMessageStore;
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
 
     #[Required]
     final public function autowireAbstractDataStructureFormatter(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter): void

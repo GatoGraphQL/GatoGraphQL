@@ -28,9 +28,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected CommentTypeAPIInterface $commentTypeAPI;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected CommentObjectTypeResolver $commentObjectTypeResolver;
+    protected ?CommentTypeAPIInterface $commentTypeAPI = null;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    protected ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
 
     #[Required]
     final public function autowireRootObjectTypeFieldResolver(

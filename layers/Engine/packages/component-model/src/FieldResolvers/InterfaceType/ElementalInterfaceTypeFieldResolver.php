@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
-    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
     #[Required]
     final public function autowireElementalInterfaceTypeFieldResolver(

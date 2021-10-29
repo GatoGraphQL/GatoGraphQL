@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeDataLoader implements ObjectTypeQueryableDataLoaderInterface
 {
-    protected ModuleProcessorManagerInterface $moduleProcessorManager;
+    protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
     #[Required]
     final public function autowireAbstractObjectTypeQueryableDataLoader(

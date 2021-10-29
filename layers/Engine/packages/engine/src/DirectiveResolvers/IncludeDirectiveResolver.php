@@ -15,7 +15,7 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
     use FilterIDsSatisfyingConditionDirectiveResolverTrait;
 
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
     #[Required]
     final public function autowireIncludeDirectiveResolver(

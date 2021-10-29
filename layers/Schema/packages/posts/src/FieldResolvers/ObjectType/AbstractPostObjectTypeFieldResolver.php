@@ -24,9 +24,9 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected PostObjectTypeResolver $postObjectTypeResolver;
-    protected PostTypeAPIInterface $postTypeAPI;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    protected ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    protected ?PostTypeAPIInterface $postTypeAPI = null;
 
     #[Required]
     final public function autowireAbstractPostObjectTypeFieldResolver(

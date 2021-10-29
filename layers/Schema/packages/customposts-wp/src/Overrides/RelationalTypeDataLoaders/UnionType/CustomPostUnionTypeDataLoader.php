@@ -17,8 +17,8 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoader
 {
-    protected CustomPostTypeDataLoader $customPostTypeDataLoader;
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    protected ?CustomPostTypeDataLoader $customPostTypeDataLoader = null;
+    protected ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
     #[Required]
     final public function autowireCustomPostsWPCustomPostUnionTypeDataLoader(

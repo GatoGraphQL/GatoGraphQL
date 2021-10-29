@@ -13,7 +13,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
 
     public const MODULE_FILTERINPUT_STANCE_MULTISELECT = 'filterinput-multiselect-stance';
 
-    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
     #[Required]
     final public function autowireUserStance_Module_Processor_MultiSelectFilterInputs(

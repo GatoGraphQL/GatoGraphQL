@@ -28,9 +28,9 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_COMMENT_TYPES = 'filterinput-comment-types';
     public const MODULE_FILTERINPUT_COMMENT_STATUS = 'filterinput-comment-status';
 
-    protected CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver;
-    protected CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected ?CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver = null;
+    protected ?CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver = null;
+    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
     #[Required]
     final public function autowireFilterInputModuleProcessor(

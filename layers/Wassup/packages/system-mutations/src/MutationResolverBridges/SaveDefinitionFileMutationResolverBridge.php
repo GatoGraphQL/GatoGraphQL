@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SaveDefinitionFileMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
-    protected SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver;
+    protected ?SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver = null;
 
     #[Required]
     final public function autowireSaveDefinitionFileMutationResolverBridge(

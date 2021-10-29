@@ -20,7 +20,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_CUSTOMPOST_AUTHOR_IDS = 'filterinput-custompost-author-ids';
     public const MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS = 'filterinput-exclude-custompost-author-ids';
 
-    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
     #[Required]
     final public function autowireFilterInputModuleProcessor(

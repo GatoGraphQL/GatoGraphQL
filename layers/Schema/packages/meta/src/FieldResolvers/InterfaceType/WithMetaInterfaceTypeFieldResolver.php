@@ -14,8 +14,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
-    protected AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     #[Required]
     final public function autowireWithMetaInterfaceTypeFieldResolver(

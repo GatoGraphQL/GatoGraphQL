@@ -8,7 +8,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ErrorHelper implements ErrorHelperInterface
 {
-    protected ErrorManagerInterface $errorManager;
+    protected ?ErrorManagerInterface $errorManager = null;
 
     #[Required]
     final public function autowireErrorHelper(ErrorManagerInterface $errorManager): void

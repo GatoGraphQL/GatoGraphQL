@@ -14,7 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     #[Required]
     final public function autowireSetPropertiesAsExpressionsDirectiveResolver(

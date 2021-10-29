@@ -17,10 +17,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class DataloadHelperService implements DataloadHelperServiceInterface
 {
-    protected FeedbackMessageStoreInterface $feedbackMessageStore;
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
-    protected TranslationAPIInterface $translationAPI;
-    protected ModuleProcessorManagerInterface $moduleProcessorManager;
+    protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    protected ?TranslationAPIInterface $translationAPI = null;
+    protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
     #[Required]
     final public function autowireDataloadHelperService(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, TranslationAPIInterface $translationAPI, ModuleProcessorManagerInterface $moduleProcessorManager): void

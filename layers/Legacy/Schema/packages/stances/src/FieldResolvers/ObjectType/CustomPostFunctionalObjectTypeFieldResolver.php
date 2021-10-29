@@ -26,11 +26,11 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     
     #[Required]
     final public function autowireCustomPostFunctionalObjectTypeFieldResolver(

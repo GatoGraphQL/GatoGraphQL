@@ -20,12 +20,12 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      */
     protected ?array $schemaDefinition = null;
 
-    protected TranslationAPIInterface $translationAPI;
-    protected HooksAPIInterface $hooksAPI;
-    protected InstanceManagerInterface $instanceManager;
-    protected SchemaNamespacingServiceInterface $schemaNamespacingService;
-    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
-    protected AttachableExtensionManagerInterface $attachableExtensionManager;
+    protected ?TranslationAPIInterface $translationAPI = null;
+    protected ?HooksAPIInterface $hooksAPI = null;
+    protected ?InstanceManagerInterface $instanceManager = null;
+    protected ?SchemaNamespacingServiceInterface $schemaNamespacingService = null;
+    protected ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
+    protected ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
     #[Required]
     final public function autowireAbstractTypeResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, SchemaNamespacingServiceInterface $schemaNamespacingService, SchemaDefinitionServiceInterface $schemaDefinitionService, AttachableExtensionManagerInterface $attachableExtensionManager): void

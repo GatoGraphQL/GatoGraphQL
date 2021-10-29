@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMutationResolverBridge
 {
-    protected FollowUserMutationResolver $followUserMutationResolver;
+    protected ?FollowUserMutationResolver $followUserMutationResolver = null;
 
     #[Required]
     final public function autowireFollowUserMutationResolverBridge(

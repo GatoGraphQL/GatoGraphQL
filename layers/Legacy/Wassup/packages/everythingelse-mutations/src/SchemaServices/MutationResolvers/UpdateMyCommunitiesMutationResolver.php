@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
 {
-    protected UserTypeAPIInterface $userTypeAPI;
+    protected ?UserTypeAPIInterface $userTypeAPI = null;
     
     #[Required]
     final public function autowireUpdateMyCommunitiesMutationResolver(

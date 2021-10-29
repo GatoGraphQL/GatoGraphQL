@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GravityFormsNewsletterUnsubscriptionMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
-    protected GravityFormsNewsletterUnsubscriptionMutationResolver $gravityFormsNewsletterUnsubscriptionMutationResolver;
+    protected ?GravityFormsNewsletterUnsubscriptionMutationResolver $gravityFormsNewsletterUnsubscriptionMutationResolver = null;
     
     #[Required]
     final public function autowireGravityFormsNewsletterUnsubscriptionMutationResolverBridge(

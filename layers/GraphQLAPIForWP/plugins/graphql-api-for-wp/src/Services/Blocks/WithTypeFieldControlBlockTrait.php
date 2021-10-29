@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait WithTypeFieldControlBlockTrait
 {
-    protected TypeRegistryInterface $typeRegistry;
+    protected ?TypeRegistryInterface $typeRegistry = null;
 
     #[Required]
     public function autowireWithTypeFieldControlBlockTrait(

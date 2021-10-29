@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait UserStateObjectTypeFieldResolverTrait
 {
-    protected TranslationAPIInterface $translationAPI;
+    protected ?TranslationAPIInterface $translationAPI = null;
 
     #[Required]
     public function autowireUserStateObjectTypeFieldResolverTrait(

@@ -22,8 +22,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_TAG_SLUGS = 'filterinput-tag-slugs';
     public const MODULE_FILTERINPUT_TAG_IDS = 'filterinput-tag-ids';
 
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     #[Required]
     final public function autowireFilterInputModuleProcessor(

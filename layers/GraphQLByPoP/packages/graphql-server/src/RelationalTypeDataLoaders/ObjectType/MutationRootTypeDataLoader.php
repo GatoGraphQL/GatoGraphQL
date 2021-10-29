@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MutationRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    protected MutationRoot $mutationRoot;
+    protected ?MutationRoot $mutationRoot = null;
 
     #[Required]
     final public function autowireMutationRootTypeDataLoader(

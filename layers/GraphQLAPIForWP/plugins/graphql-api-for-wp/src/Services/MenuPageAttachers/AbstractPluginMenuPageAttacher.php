@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 abstract class AbstractPluginMenuPageAttacher extends AbstractMenuPageAttacher
 {
-    protected PluginMenu $pluginMenu;
+    protected ?PluginMenu $pluginMenu = null;
 
     #[Required]
     final public function autowireAbstractPluginMenuPageAttacher(

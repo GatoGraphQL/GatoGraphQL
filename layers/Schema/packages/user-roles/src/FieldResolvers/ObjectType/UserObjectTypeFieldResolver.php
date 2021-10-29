@@ -16,9 +16,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected UserRoleTypeAPIInterface $userRoleTypeAPI;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    protected ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
 
     #[Required]
     final public function autowireUserObjectTypeFieldResolver(

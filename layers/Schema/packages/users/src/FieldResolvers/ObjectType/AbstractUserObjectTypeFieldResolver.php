@@ -24,9 +24,9 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected UserTypeAPIInterface $userTypeAPI;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected UserObjectTypeResolver $userObjectTypeResolver;
+    protected ?UserTypeAPIInterface $userTypeAPI = null;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    protected ?UserObjectTypeResolver $userObjectTypeResolver = null;
 
     #[Required]
     final public function autowireAbstractUserObjectTypeFieldResolver(

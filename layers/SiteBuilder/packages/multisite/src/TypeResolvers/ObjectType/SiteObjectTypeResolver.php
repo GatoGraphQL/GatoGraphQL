@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected SiteTypeDataLoader $siteTypeDataLoader;
+    protected ?SiteTypeDataLoader $siteTypeDataLoader = null;
 
     #[Required]
     final public function autowireSiteObjectTypeResolver(

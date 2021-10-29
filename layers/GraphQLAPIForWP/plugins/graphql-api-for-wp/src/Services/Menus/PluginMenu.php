@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class PluginMenu extends AbstractMenu
 {
-    protected UserAuthorizationInterface $userAuthorization;
+    protected ?UserAuthorizationInterface $userAuthorization = null;
 
     #[Required]
     final public function autowirePluginMenu(

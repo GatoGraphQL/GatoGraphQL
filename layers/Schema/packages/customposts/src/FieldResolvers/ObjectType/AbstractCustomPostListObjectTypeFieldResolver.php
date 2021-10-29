@@ -24,8 +24,8 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    protected ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
     #[Required]
     final public function autowireAbstractCustomPostListObjectTypeFieldResolver(

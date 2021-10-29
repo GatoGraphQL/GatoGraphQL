@@ -20,8 +20,8 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     public const MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTLIST = 'dataload-relationalfields-mypostlist';
     public const MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTCOUNT = 'dataload-relationalfields-mypostcount';
 
-    protected PostObjectTypeResolver $postObjectTypeResolver;
-    protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
+    protected ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    protected ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
 
     #[Required]
     final public function autowireFieldDataloadModuleProcessor(

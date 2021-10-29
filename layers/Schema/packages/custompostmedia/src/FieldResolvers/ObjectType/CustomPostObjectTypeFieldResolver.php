@@ -13,8 +13,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI;
-    protected SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver;
+    protected ?CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI = null;
+    protected ?SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver = null;
 
     #[Required]
     final public function autowireCustomPostObjectTypeFieldResolver(

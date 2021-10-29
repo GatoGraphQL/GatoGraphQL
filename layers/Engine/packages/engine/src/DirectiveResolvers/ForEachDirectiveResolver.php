@@ -16,7 +16,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
 {
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
     #[Required]
     final public function autowireForEachDirectiveResolver(

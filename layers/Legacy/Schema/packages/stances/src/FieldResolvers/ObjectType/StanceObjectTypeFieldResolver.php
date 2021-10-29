@@ -23,10 +23,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     
     #[Required]
     final public function autowireStanceObjectTypeFieldResolver(

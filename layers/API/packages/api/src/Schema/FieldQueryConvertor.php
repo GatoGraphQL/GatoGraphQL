@@ -39,11 +39,11 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
      * @var array<string, mixed>
      */
     private ?array $fragmentsFromRequestCache = null;
-    protected TranslationAPIInterface $translationAPI;
-    protected FeedbackMessageStoreInterface $feedbackMessageStore;
-    protected QueryParserInterface $queryParser;
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
-    protected PersistedFragmentManagerInterface $persistedFragmentManager;
+    protected ?TranslationAPIInterface $translationAPI = null;
+    protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    protected ?QueryParserInterface $queryParser = null;
+    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    protected ?PersistedFragmentManagerInterface $persistedFragmentManager = null;
 
     #[Required]
     final public function autowireFieldQueryConvertor(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser, FieldQueryInterpreterInterface $fieldQueryInterpreter, PersistedFragmentManagerInterface $persistedFragmentManager): void

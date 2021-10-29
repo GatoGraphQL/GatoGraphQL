@@ -18,8 +18,8 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
 {
     use SetCategoriesOnCustomPostObjectTypeFieldResolverTrait;
 
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
+    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
     #[Required]
     final public function autowireAbstractCustomPostObjectTypeFieldResolver(

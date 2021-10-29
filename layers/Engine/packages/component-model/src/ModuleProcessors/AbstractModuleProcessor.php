@@ -40,18 +40,18 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     protected const MODULECOMPONENT_CONDITIONALONDATAFIELDSUBMODULES = 'conditional-on-data-field-submodules';
     protected const MODULECOMPONENT_CONDITIONALONDATAFIELDDOMAINSWITCHINGSUBMODULES = 'conditional-on-data-field-domain-switching-submodules';
 
-    protected TranslationAPIInterface $translationAPI;
-    protected HooksAPIInterface $hooksAPI;
-    protected InstanceManagerInterface $instanceManager;
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
-    protected ModulePathHelpersInterface $modulePathHelpers;
-    protected ModuleFilterManagerInterface $moduleFilterManager;
-    protected ModuleProcessorManagerInterface $moduleProcessorManager;
-    protected CMSServiceInterface $cmsService;
-    protected NameResolverInterface $nameResolver;
-    protected DataloadHelperServiceInterface $dataloadHelperService;
-    protected RequestHelperServiceInterface $requestHelperService;
-    protected ModulePaths $modulePaths;
+    protected ?TranslationAPIInterface $translationAPI = null;
+    protected ?HooksAPIInterface $hooksAPI = null;
+    protected ?InstanceManagerInterface $instanceManager = null;
+    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    protected ?ModulePathHelpersInterface $modulePathHelpers = null;
+    protected ?ModuleFilterManagerInterface $moduleFilterManager = null;
+    protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    protected ?CMSServiceInterface $cmsService = null;
+    protected ?NameResolverInterface $nameResolver = null;
+    protected ?DataloadHelperServiceInterface $dataloadHelperService = null;
+    protected ?RequestHelperServiceInterface $requestHelperService = null;
+    protected ?ModulePaths $modulePaths = null;
 
     #[Required]
     final public function autowireAbstractModuleProcessor(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, FieldQueryInterpreterInterface $fieldQueryInterpreter, ModulePathHelpersInterface $modulePathHelpers, ModuleFilterManagerInterface $moduleFilterManager, ModuleProcessorManagerInterface $moduleProcessorManager, CMSServiceInterface $cmsService, NameResolverInterface $nameResolver, DataloadHelperServiceInterface $dataloadHelperService, RequestHelperServiceInterface $requestHelperService, ModulePaths $modulePaths): void

@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait ConfigurableMandatoryDirectivesForDirectivesTrait
 {
-    protected InstanceManagerInterface $instanceManager;
+    protected ?InstanceManagerInterface $instanceManager = null;
 
     #[Required]
     public function autowireConfigurableMandatoryDirectivesForDirectivesTrait(

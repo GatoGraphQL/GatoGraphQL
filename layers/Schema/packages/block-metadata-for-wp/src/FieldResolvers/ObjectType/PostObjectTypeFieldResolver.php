@@ -17,8 +17,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     #[Required]
     final public function autowirePostObjectTypeFieldResolver(

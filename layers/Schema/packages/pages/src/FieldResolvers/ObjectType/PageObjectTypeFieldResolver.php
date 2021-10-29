@@ -24,9 +24,9 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected PageObjectTypeResolver $pageObjectTypeResolver;
-    protected PageTypeAPIInterface $pageTypeAPI;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    protected ?PageObjectTypeResolver $pageObjectTypeResolver = null;
+    protected ?PageTypeAPIInterface $pageTypeAPI = null;
 
     #[Required]
     final public function autowirePageObjectTypeFieldResolver(

@@ -17,7 +17,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
-    protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
+    protected ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
     #[Required]
     final public function autowireEntryRouteModuleProcessor(

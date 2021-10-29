@@ -31,10 +31,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
-    protected TranslationAPIInterface $translationAPI;
-    protected FeedbackMessageStoreInterface $feedbackMessageStore;
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
-    protected IncludeDirectiveResolver $includeDirectiveResolver;
+    protected ?TranslationAPIInterface $translationAPI = null;
+    protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    protected ?IncludeDirectiveResolver $includeDirectiveResolver = null;
 
     #[Required]
     final public function autowireGraphQLQueryConvertor(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, IncludeDirectiveResolver $includeDirectiveResolver): void

@@ -18,8 +18,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 {
     use AddCommentToCustomPostObjectTypeFieldResolverTrait;
 
-    protected CommentObjectTypeResolver $commentObjectTypeResolver;
-    protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver;
+    protected ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
+    protected ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
 
     #[Required]
     final public function autowireRootObjectTypeFieldResolver(

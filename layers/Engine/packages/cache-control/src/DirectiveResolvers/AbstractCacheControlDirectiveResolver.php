@@ -13,8 +13,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirectiveResolver implements CacheControlDirectiveResolverInterface
 {
-    protected CacheControlEngineInterface $cacheControlEngine;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected ?CacheControlEngineInterface $cacheControlEngine = null;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
     #[Required]
     final public function autowireAbstractCacheControlDirectiveResolver(

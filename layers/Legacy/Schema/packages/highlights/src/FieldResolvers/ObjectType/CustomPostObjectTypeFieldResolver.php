@@ -21,9 +21,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected HighlightObjectTypeResolver $highlightObjectTypeResolver;
+    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    protected ?HighlightObjectTypeResolver $highlightObjectTypeResolver = null;
     
     #[Required]
     final public function autowireCustomPostObjectTypeFieldResolver(

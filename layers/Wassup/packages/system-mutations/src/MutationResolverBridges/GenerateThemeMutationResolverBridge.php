@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
-    protected GenerateThemeMutationResolver $generateThemeMutationResolver;
+    protected ?GenerateThemeMutationResolver $generateThemeMutationResolver = null;
 
     #[Required]
     final public function autowireGenerateThemeMutationResolverBridge(

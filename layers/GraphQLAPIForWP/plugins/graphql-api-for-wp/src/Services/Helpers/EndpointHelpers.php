@@ -13,8 +13,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class EndpointHelpers
 {
-    protected PluginMenu $pluginMenu;
-    protected ModuleRegistryInterface $moduleRegistry;
+    protected ?PluginMenu $pluginMenu = null;
+    protected ?ModuleRegistryInterface $moduleRegistry = null;
 
     #[Required]
     final public function autowireEndpointHelpers(

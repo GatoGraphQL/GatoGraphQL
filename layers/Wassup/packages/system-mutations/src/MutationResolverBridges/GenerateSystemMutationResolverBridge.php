@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GenerateSystemMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
-    protected GenerateSystemMutationResolver $generateSystemMutationResolver;
+    protected ?GenerateSystemMutationResolver $generateSystemMutationResolver = null;
 
     #[Required]
     final public function autowireGenerateSystemMutationResolverBridge(

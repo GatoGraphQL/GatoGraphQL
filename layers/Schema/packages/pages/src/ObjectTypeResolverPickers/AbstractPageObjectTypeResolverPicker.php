@@ -12,8 +12,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractPageObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
-    protected PageObjectTypeResolver $pageObjectTypeResolver;
-    protected PageTypeAPIInterface $pageTypeAPI;
+    protected ?PageObjectTypeResolver $pageObjectTypeResolver = null;
+    protected ?PageTypeAPIInterface $pageTypeAPI = null;
 
     #[Required]
     final public function autowireAbstractPageObjectTypeResolverPicker(PageObjectTypeResolver $pageObjectTypeResolver, PageTypeAPIInterface $pageTypeAPI): void

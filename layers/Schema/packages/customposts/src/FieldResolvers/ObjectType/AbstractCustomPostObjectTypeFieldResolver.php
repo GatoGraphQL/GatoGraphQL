@@ -15,10 +15,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    protected DateFormatterInterface $dateFormatter;
-    protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
-    protected IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver;
+    protected ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    protected ?DateFormatterInterface $dateFormatter = null;
+    protected ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
+    protected ?IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver = null;
 
     #[Required]
     final public function autowireAbstractCustomPostObjectTypeFieldResolver(

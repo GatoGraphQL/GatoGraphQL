@@ -14,8 +14,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     #[Required]
     final public function autowireQueryableInterfaceTypeFieldResolver(

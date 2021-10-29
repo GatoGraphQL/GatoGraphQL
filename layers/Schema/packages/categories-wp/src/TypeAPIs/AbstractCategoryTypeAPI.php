@@ -23,9 +23,9 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
-    protected HooksAPIInterface $hooksAPI;
-    protected CMSHelperServiceInterface $cmsHelperService;
-    protected CMSServiceInterface $cmsService;
+    protected ?HooksAPIInterface $hooksAPI = null;
+    protected ?CMSHelperServiceInterface $cmsHelperService = null;
+    protected ?CMSServiceInterface $cmsService = null;
 
     #[Required]
     final public function autowireAbstractCategoryTypeAPI(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService, CMSServiceInterface $cmsService): void

@@ -12,8 +12,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    protected AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator;
-    protected SchemaConfigAccessControlListBlock $schemaConfigAccessControlListBlock;
+    protected ?AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator = null;
+    protected ?SchemaConfigAccessControlListBlock $schemaConfigAccessControlListBlock = null;
 
     #[Required]
     final public function autowireAccessControlSchemaConfigurationExecuter(

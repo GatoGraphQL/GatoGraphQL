@@ -16,8 +16,8 @@ use WP_Term;
 
 class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
     #[Required]
     final public function autowireMenuObjectTypeFieldResolver(

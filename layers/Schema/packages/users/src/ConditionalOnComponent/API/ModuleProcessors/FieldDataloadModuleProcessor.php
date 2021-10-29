@@ -23,8 +23,8 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST = 'dataload-relationalfields-adminuserlist';
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERCOUNT = 'dataload-relationalfields-adminusercount';
 
-    protected UserObjectTypeResolver $userObjectTypeResolver;
-    protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
+    protected ?UserObjectTypeResolver $userObjectTypeResolver = null;
+    protected ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
 
     #[Required]
     final public function autowireFieldDataloadModuleProcessor(

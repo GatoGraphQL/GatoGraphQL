@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    protected Site $site;
+    protected ?Site $site = null;
 
     #[Required]
     final public function autowireSiteTypeDataLoader(

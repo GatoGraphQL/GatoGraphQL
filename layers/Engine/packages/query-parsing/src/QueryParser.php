@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class QueryParser implements QueryParserInterface
 {
-    protected TranslationAPIInterface $translationAPI;
+    protected ?TranslationAPIInterface $translationAPI = null;
 
     #[Required]
     final public function autowireQueryParser(TranslationAPIInterface $translationAPI): void

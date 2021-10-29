@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class PageTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
-    protected PageTypeAPIInterface $pageTypeAPI;
+    protected ?PageTypeAPIInterface $pageTypeAPI = null;
 
     #[Required]
     final public function autowirePageTypeDataLoader(

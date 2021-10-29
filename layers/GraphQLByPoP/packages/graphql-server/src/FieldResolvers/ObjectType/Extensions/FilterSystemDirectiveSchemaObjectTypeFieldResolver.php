@@ -18,8 +18,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTypeFieldResolver
 {
-    protected DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver;
-    protected DirectiveRegistryInterface $directiveRegistry;
+    protected ?DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver = null;
+    protected ?DirectiveRegistryInterface $directiveRegistry = null;
 
     #[Required]
     final public function autowireFilterSystemDirectiveSchemaObjectTypeFieldResolver(

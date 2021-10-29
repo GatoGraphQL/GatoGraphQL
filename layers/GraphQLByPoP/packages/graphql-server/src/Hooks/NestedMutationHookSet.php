@@ -16,7 +16,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class NestedMutationHookSet extends AbstractHookSet
 {
-    protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService;
+    protected ?GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService = null;
 
     #[Required]
     final public function autowireNestedMutationHookSet(

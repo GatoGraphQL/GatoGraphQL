@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ShareByEmailMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
-    protected ShareByEmailMutationResolver $shareByEmailMutationResolver;
+    protected ?ShareByEmailMutationResolver $shareByEmailMutationResolver = null;
 
     #[Required]
     final public function autowireShareByEmailMutationResolverBridge(

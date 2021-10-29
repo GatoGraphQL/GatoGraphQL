@@ -26,14 +26,14 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected CommentTypeAPIInterface $commentTypeAPI;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected DateScalarTypeResolver $dateScalarTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected IPScalarTypeResolver $ipScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
-    protected UserObjectTypeResolver $userObjectTypeResolver;
+    protected ?CommentTypeAPIInterface $commentTypeAPI = null;
+    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    protected ?DateScalarTypeResolver $dateScalarTypeResolver = null;
+    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    protected ?IPScalarTypeResolver $ipScalarTypeResolver = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
+    protected ?UserObjectTypeResolver $userObjectTypeResolver = null;
     
     #[Required]
     final public function autowireNotificationObjectTypeFieldResolver(

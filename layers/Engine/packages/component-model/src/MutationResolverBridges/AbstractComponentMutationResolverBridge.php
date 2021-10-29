@@ -17,10 +17,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
-    protected HooksAPIInterface $hooksAPI;
-    protected TranslationAPIInterface $translationAPI;
-    protected InstanceManagerInterface $instanceManager;
-    protected MutationResolutionManagerInterface $mutationResolutionManager;
+    protected ?HooksAPIInterface $hooksAPI = null;
+    protected ?TranslationAPIInterface $translationAPI = null;
+    protected ?InstanceManagerInterface $instanceManager = null;
+    protected ?MutationResolutionManagerInterface $mutationResolutionManager = null;
 
     #[Required]
     final public function autowireAbstractComponentMutationResolverBridge(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, InstanceManagerInterface $instanceManager, MutationResolutionManagerInterface $mutationResolutionManager): void

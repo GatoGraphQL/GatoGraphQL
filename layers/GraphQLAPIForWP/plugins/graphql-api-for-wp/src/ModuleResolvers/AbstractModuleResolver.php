@@ -11,9 +11,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractModuleResolver implements ModuleResolverInterface
 {
-    protected InstanceManagerInterface $instanceManager;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected TranslationAPIInterface $translationAPI;
+    protected ?InstanceManagerInterface $instanceManager = null;
+    protected ?ModuleRegistryInterface $moduleRegistry = null;
+    protected ?TranslationAPIInterface $translationAPI = null;
 
     #[Required]
     final public function autowireAbstractModuleResolver(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, TranslationAPIInterface $translationAPI): void

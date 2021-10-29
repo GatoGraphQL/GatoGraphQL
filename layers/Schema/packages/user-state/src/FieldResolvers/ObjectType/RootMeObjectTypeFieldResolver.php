@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldResolver
 {
-    protected UserObjectTypeResolver $userObjectTypeResolver;
+    protected ?UserObjectTypeResolver $userObjectTypeResolver = null;
 
     #[Required]
     final public function autowireRootMeObjectTypeFieldResolver(

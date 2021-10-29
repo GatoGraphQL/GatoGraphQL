@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class AdminFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    protected SchemaConfigAdminFieldsBlock $schemaConfigAdminFieldsBlock;
+    protected ?SchemaConfigAdminFieldsBlock $schemaConfigAdminFieldsBlock = null;
 
     #[Required]
     final public function autowireAdminFieldsSchemaConfigurationExecuter(

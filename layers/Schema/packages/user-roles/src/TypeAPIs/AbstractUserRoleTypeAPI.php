@@ -9,7 +9,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractUserRoleTypeAPI implements UserRoleTypeAPIInterface
 {
-    protected HooksAPIInterface $hooksAPI;
+    protected ?HooksAPIInterface $hooksAPI = null;
 
     #[Required]
     final public function autowireAbstractUserRoleTypeAPI(HooksAPIInterface $hooksAPI): void

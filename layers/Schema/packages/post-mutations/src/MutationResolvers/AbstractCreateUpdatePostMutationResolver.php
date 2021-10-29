@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {
-    protected PostTypeAPIInterface $postTypeAPI;
+    protected ?PostTypeAPIInterface $postTypeAPI = null;
 
     #[Required]
     final public function autowireAbstractCreateUpdatePostMutationResolver(

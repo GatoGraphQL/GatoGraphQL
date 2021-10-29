@@ -15,8 +15,8 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    protected CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator;
-    protected SchemaConfigCacheControlListBlock $schemaConfigCacheControlListBlock;
+    protected ?CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator = null;
+    protected ?SchemaConfigCacheControlListBlock $schemaConfigCacheControlListBlock = null;
 
     #[Required]
     final public function autowireCacheControlSchemaConfigurationExecuter(

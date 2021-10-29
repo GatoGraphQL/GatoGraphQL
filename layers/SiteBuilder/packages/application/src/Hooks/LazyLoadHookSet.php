@@ -18,8 +18,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class LazyLoadHookSet extends AbstractHookSet
 {
-    protected RequestHelperServiceInterface $requestHelperService;
-    protected Lazy $lazy;
+    protected ?RequestHelperServiceInterface $requestHelperService = null;
+    protected ?Lazy $lazy = null;
 
     #[Required]
     final public function autowireLazyLoadHookSet(

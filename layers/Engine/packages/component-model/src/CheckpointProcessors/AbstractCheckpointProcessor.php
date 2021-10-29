@@ -11,8 +11,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCheckpointProcessor implements CheckpointProcessorInterface
 {
-    protected TranslationAPIInterface $translationAPI;
-    protected HooksAPIInterface $hooksAPI;
+    protected ?TranslationAPIInterface $translationAPI = null;
+    protected ?HooksAPIInterface $hooksAPI = null;
 
     #[Required]
     final public function autowireAbstractCheckpointProcessor(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI): void

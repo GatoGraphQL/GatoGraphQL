@@ -15,8 +15,8 @@ abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteM
     protected ?string $restFieldsQuery = null;
     protected ?array $restFields = null;
 
-    protected RESTDataStructureFormatter $restDataStructureFormatter;
-    protected FieldQueryConvertorInterface $fieldQueryConvertor;
+    protected ?RESTDataStructureFormatter $restDataStructureFormatter = null;
+    protected ?FieldQueryConvertorInterface $fieldQueryConvertor = null;
 
     #[Required]
     final public function autowireAbstractRESTEntryRouteModuleProcessor(

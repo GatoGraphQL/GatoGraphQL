@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
 {
-    protected UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet;
+    protected ?UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet = null;
 
     #[Required]
     final public function autowireAbstractRemoveAuthorFilterInputHookSet(

@@ -17,8 +17,8 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
 {
     use PostMutationResolverHookSetTrait;
 
-    protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
-    protected PostTypeAPIInterface $postTypeAPI;
+    protected ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
+    protected ?PostTypeAPIInterface $postTypeAPI = null;
 
     #[Required]
     final public function autowirePostMutationResolverHookSet(

@@ -14,7 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
-    protected CommentTypeAPIInterface $commentTypeAPI;
+    protected ?CommentTypeAPIInterface $commentTypeAPI = null;
 
     #[Required]
     final public function autowireCommentTypeDataLoader(

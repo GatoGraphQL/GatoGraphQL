@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    protected ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
     #[Required]
     final public function autowireAbstractCustomPostUpdateUserMetaValueMutationResolver(

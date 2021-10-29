@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class EntryModuleManager implements EntryModuleManagerInterface
 {
-    protected RouteModuleProcessorManagerInterface $routeModuleProcessorManager;
+    protected ?RouteModuleProcessorManagerInterface $routeModuleProcessorManager = null;
 
     #[Required]
     final public function autowireEntryModuleManager(RouteModuleProcessorManagerInterface $routeModuleProcessorManager): void

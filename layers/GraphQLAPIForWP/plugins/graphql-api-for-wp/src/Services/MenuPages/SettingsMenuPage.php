@@ -23,8 +23,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     public const FORM_ORIGIN = 'form-origin';
     public const SETTINGS_FIELD = 'graphql-api-settings';
 
-    protected UserSettingsManagerInterface $userSettingsManager;
-    protected ModuleRegistryInterface $moduleRegistry;
+    protected ?UserSettingsManagerInterface $userSettingsManager = null;
+    protected ?ModuleRegistryInterface $moduleRegistry = null;
 
     #[Required]
     final public function autowireSettingsMenuPage(

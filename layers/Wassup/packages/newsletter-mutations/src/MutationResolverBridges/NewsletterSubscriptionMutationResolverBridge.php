@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class NewsletterSubscriptionMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
-    protected NewsletterSubscriptionMutationResolver $newsletterSubscriptionMutationResolver;
+    protected ?NewsletterSubscriptionMutationResolver $newsletterSubscriptionMutationResolver = null;
 
     #[Required]
     final public function autowireNewsletterSubscriptionMutationResolverBridge(

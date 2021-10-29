@@ -7,7 +7,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class PoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
 {
-    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
     #[Required]
     final public function autowirePoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users(

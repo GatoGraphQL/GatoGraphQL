@@ -18,7 +18,7 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
 {
     use EmbeddableFieldsObjectTypeFieldResolverTrait;
 
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     #[Required]
     final public function autowireEchoOperatorGlobalObjectTypeFieldResolver(

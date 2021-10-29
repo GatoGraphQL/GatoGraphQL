@@ -9,7 +9,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MarkdownContentParser extends AbstractContentParser implements MarkdownContentParserInterface
 {
-    protected MarkdownConvertorInterface $markdownConvertorInterface;
+    protected ?MarkdownConvertorInterface $markdownConvertorInterface = null;
 
     #[Required]
     final public function autowireMarkdownContentParser(

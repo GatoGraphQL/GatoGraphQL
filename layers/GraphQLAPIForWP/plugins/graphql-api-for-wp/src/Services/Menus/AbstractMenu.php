@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractMenu extends AbstractAutomaticallyInstantiatedService implements MenuInterface
 {
-    protected InstanceManagerInterface $instanceManager;
+    protected ?InstanceManagerInterface $instanceManager = null;
 
     #[Required]
     final public function autowireAbstractMenu(InstanceManagerInterface $instanceManager): void

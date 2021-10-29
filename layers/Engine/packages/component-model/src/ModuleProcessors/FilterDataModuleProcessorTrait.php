@@ -10,8 +10,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait FilterDataModuleProcessorTrait
 {
-    protected ModuleProcessorManagerInterface $moduleProcessorManager;
-    protected FilterInputProcessorManagerInterface $filterInputProcessorManager;
+    protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    protected ?FilterInputProcessorManagerInterface $filterInputProcessorManager = null;
 
     #[Required]
     public function autowireFilterDataModuleProcessorTrait(

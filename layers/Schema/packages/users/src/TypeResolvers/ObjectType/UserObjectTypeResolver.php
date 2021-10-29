@@ -12,8 +12,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected UserTypeAPIInterface $userTypeAPI;
-    protected UserTypeDataLoader $userTypeDataLoader;
+    protected ?UserTypeAPIInterface $userTypeAPI = null;
+    protected ?UserTypeDataLoader $userTypeDataLoader = null;
 
     #[Required]
     final public function autowireUserObjectTypeResolver(

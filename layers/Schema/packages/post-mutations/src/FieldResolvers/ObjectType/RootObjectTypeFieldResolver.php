@@ -20,9 +20,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use CreateOrUpdateCustomPostObjectTypeFieldResolverTrait;
 
-    protected PostObjectTypeResolver $postObjectTypeResolver;
-    protected CreatePostMutationResolver $createPostMutationResolver;
-    protected UpdatePostMutationResolver $updatePostMutationResolver;
+    protected ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    protected ?CreatePostMutationResolver $createPostMutationResolver = null;
+    protected ?UpdatePostMutationResolver $updatePostMutationResolver = null;
 
     #[Required]
     final public function autowireRootObjectTypeFieldResolver(

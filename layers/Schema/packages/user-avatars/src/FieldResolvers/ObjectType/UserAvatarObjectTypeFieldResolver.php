@@ -15,8 +15,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserAvatarObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
     #[Required]
     final public function autowireUserAvatarObjectTypeFieldResolver(

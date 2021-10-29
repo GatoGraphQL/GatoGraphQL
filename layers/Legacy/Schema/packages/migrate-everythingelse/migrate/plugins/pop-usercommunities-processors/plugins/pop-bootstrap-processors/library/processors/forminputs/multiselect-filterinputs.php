@@ -16,9 +16,9 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
     public const MODULE_URE_FILTERINPUT_MEMBERTAGS = 'filterinput-membertags';
     public const MODULE_URE_FILTERINPUT_MEMBERSTATUS = 'filterinput-memberstatus';
 
-    protected MemberPrivilegeEnumTypeResolver $memberPrivilegeEnumTypeResolver;
-    protected MemberTagEnumTypeResolver $memberTagEnumTypeResolver;
-    protected MemberStatusEnumTypeResolver $memberStatusEnumTypeResolver;
+    protected ?MemberPrivilegeEnumTypeResolver $memberPrivilegeEnumTypeResolver = null;
+    protected ?MemberTagEnumTypeResolver $memberTagEnumTypeResolver = null;
+    protected ?MemberStatusEnumTypeResolver $memberStatusEnumTypeResolver = null;
 
     #[Required]
     final public function autowireGD_URE_Module_Processor_ProfileMultiSelectFilterInputs(

@@ -27,11 +27,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     public const HOOK_EXECUTE_UPDATE = __CLASS__ . ':execute-update';
     public const HOOK_VALIDATE_CONTENT = __CLASS__ . ':validate-content';
 
-    protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
-    protected NameResolverInterface $nameResolver;
-    protected UserRoleTypeAPIInterface $userRoleTypeAPI;
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    protected CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI;
+    protected ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
+    protected ?NameResolverInterface $nameResolver = null;
+    protected ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
+    protected ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    protected ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
 
     #[Required]
     final public function autowireAbstractCreateUpdateCustomPostMutationResolver(

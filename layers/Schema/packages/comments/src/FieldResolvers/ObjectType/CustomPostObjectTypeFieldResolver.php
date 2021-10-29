@@ -15,8 +15,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected CommentTypeAPIInterface $commentTypeAPI;
-    protected CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver;
+    protected ?CommentTypeAPIInterface $commentTypeAPI = null;
+    protected ?CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver = null;
 
     #[Required]
     final public function autowireCustomPostObjectTypeFieldResolver(

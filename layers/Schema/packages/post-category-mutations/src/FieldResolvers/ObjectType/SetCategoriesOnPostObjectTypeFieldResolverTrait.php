@@ -15,10 +15,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait SetCategoriesOnPostObjectTypeFieldResolverTrait
 {
-    protected PostObjectTypeResolver $postObjectTypeResolver;
-    protected SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver;
-    protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
-    protected TranslationAPIInterface $translationAPI;
+    protected ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    protected ?SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver = null;
+    protected ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
+    protected ?TranslationAPIInterface $translationAPI = null;
 
     #[Required]
     public function autowireSetCategoriesOnPostObjectTypeFieldResolverTrait(

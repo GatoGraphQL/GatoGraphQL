@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractValidateCheckpointDirectiveResolver extends AbstractValidateConditionDirectiveResolver
 {
-    protected EngineInterface $engine;
+    protected ?EngineInterface $engine = null;
 
     #[Required]
     final public function autowireAbstractValidateCheckpointDirectiveResolver(

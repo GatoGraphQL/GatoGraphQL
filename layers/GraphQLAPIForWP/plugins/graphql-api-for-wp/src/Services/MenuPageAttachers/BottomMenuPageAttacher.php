@@ -19,14 +19,14 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
-    protected MenuPageHelper $menuPageHelper;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected UserAuthorizationInterface $userAuthorization;
-    protected SettingsMenuPage $settingsMenuPage;
-    protected ModuleDocumentationMenuPage $moduleDocumentationMenuPage;
-    protected ModulesMenuPage $modulesMenuPage;
-    protected ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage;
-    protected AboutMenuPage $aboutMenuPage;
+    protected ?MenuPageHelper $menuPageHelper = null;
+    protected ?ModuleRegistryInterface $moduleRegistry = null;
+    protected ?UserAuthorizationInterface $userAuthorization = null;
+    protected ?SettingsMenuPage $settingsMenuPage = null;
+    protected ?ModuleDocumentationMenuPage $moduleDocumentationMenuPage = null;
+    protected ?ModulesMenuPage $modulesMenuPage = null;
+    protected ?ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage = null;
+    protected ?AboutMenuPage $aboutMenuPage = null;
 
     #[Required]
     final public function autowireBottomMenuPageAttacher(

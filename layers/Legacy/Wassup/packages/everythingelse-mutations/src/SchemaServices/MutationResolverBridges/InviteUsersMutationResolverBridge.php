@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class InviteUsersMutationResolverBridge extends AbstractEmailInviteMutationResolverBridge
 {
-    protected InviteUsersMutationResolver $inviteUsersMutationResolver;
+    protected ?InviteUsersMutationResolver $inviteUsersMutationResolver = null;
     
     #[Required]
     final public function autowireInviteUsersMutationResolverBridge(

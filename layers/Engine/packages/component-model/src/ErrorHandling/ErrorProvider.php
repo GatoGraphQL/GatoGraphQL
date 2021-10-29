@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ErrorProvider implements ErrorProviderInterface
 {
-    protected TranslationAPIInterface $translationAPI;
+    protected ?TranslationAPIInterface $translationAPI = null;
 
     #[Required]
     final public function autowireErrorProvider(TranslationAPIInterface $translationAPI): void

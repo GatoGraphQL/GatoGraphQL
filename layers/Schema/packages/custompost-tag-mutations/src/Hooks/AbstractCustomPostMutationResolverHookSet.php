@@ -18,8 +18,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     #[Required]
     final public function autowireAbstractCustomPostMutationResolverHookSet(

@@ -13,8 +13,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait ModulePathProcessorTrait
 {
-    protected ModuleProcessorManagerInterface $moduleProcessorManager;
-    protected ModuleFilterManagerInterface $moduleFilterManager;
+    protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    protected ?ModuleFilterManagerInterface $moduleFilterManager = null;
 
     #[Required]
     public function autowireModulePathProcessorTrait(

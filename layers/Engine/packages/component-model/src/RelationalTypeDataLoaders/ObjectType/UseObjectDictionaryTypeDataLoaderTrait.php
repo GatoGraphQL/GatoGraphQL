@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait UseObjectDictionaryTypeDataLoaderTrait
 {
-    protected ObjectDictionaryInterface $objectDictionary;
+    protected ?ObjectDictionaryInterface $objectDictionary = null;
 
     #[Required]
     public function autowireUseObjectDictionaryTypeDataLoaderTrait(

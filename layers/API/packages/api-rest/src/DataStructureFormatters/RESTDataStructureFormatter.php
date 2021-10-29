@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
-    protected EngineInterface $engine;
+    protected ?EngineInterface $engine = null;
 
     #[Required]
     final public function autowireRESTDataStructureFormatter(

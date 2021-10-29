@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
-    protected PostTypeAPIInterface $postTypeAPI;
+    protected ?PostTypeAPIInterface $postTypeAPI = null;
 
     #[Required]
     final public function autowirePostTypeDataLoader(

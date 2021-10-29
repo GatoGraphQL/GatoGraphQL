@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomEndpointSchemaConfigurator extends AbstractCustomPostEndpointSchemaConfigurator
 {
-    protected EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry;
+    protected ?EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry = null;
 
     #[Required]
     final public function autowireCustomEndpointSchemaConfigurator(

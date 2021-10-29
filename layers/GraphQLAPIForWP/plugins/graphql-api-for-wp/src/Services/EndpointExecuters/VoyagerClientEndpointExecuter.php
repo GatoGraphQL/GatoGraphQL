@@ -14,8 +14,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
-    protected CustomEndpointVoyagerClient $customEndpointVoyagerClient;
-    protected VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter;
+    protected ?CustomEndpointVoyagerClient $customEndpointVoyagerClient = null;
+    protected ?VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter = null;
 
     #[Required]
     final public function autowireVoyagerClientEndpointExecuter(

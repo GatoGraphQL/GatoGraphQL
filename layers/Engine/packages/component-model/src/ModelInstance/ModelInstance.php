@@ -17,10 +17,10 @@ class ModelInstance implements ModelInstanceInterface
     public const HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE = __CLASS__ . ':componentsFromVars:postOrGetChange';
     public const HOOK_COMPONENTSFROMVARS_RESULT = __CLASS__ . ':componentsFromVars:result';
 
-    protected TranslationAPIInterface $translationAPI;
-    protected HooksAPIInterface $hooksAPI;
-    protected ApplicationInfoInterface $applicationInfo;
-    protected DefinitionManagerInterface $definitionManager;
+    protected ?TranslationAPIInterface $translationAPI = null;
+    protected ?HooksAPIInterface $hooksAPI = null;
+    protected ?ApplicationInfoInterface $applicationInfo = null;
+    protected ?DefinitionManagerInterface $definitionManager = null;
 
     #[Required]
     final public function autowireModelInstance(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, ApplicationInfoInterface $applicationInfo, DefinitionManagerInterface $definitionManager): void

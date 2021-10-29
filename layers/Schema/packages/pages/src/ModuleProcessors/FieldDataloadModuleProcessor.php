@@ -16,7 +16,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
 
     public const MODULE_DATALOAD_RELATIONALFIELDS_PAGE = 'dataload-relationalfields-page';
 
-    protected PageObjectTypeResolver $pageObjectTypeResolver;
+    protected ?PageObjectTypeResolver $pageObjectTypeResolver = null;
 
     #[Required]
     final public function autowireFieldDataloadModuleProcessor(

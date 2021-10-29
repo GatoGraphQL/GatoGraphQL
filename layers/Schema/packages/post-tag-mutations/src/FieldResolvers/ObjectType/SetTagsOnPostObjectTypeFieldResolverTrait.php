@@ -13,9 +13,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait SetTagsOnPostObjectTypeFieldResolverTrait
 {
-    protected PostObjectTypeResolver $postObjectTypeResolver;
-    protected SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver;
-    protected TranslationAPIInterface $translationAPI;
+    protected ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    protected ?SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver = null;
+    protected ?TranslationAPIInterface $translationAPI = null;
 
     #[Required]
     public function autowireSetTagsOnPostObjectTypeFieldResolverTrait(

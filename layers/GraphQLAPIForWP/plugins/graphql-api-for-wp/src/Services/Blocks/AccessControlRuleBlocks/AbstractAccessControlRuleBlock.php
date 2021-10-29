@@ -17,7 +17,7 @@ abstract class AbstractAccessControlRuleBlock extends AbstractBlock
     public const ATTRIBUTE_NAME_ACCESS_CONTROL_GROUP = 'accessControlGroup';
     public const ATTRIBUTE_NAME_VALUE = 'value';
 
-    protected AccessControlBlockCategory $accessControlBlockCategory;
+    protected ?AccessControlBlockCategory $accessControlBlockCategory = null;
 
     #[Required]
     final public function autowireAbstractAccessControlRuleBlock(

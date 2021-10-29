@@ -28,11 +28,11 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
 {
     use HasDocumentationScriptTrait;
 
-    protected InstanceManagerInterface $instanceManager;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected UserAuthorizationInterface $userAuthorization;
-    protected GeneralUtils $generalUtils;
-    protected EditorHelpers $editorHelpers;
+    protected ?InstanceManagerInterface $instanceManager = null;
+    protected ?ModuleRegistryInterface $moduleRegistry = null;
+    protected ?UserAuthorizationInterface $userAuthorization = null;
+    protected ?GeneralUtils $generalUtils = null;
+    protected ?EditorHelpers $editorHelpers = null;
 
     #[Required]
     final public function autowireAbstractBlock(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, UserAuthorizationInterface $userAuthorization, GeneralUtils $generalUtils, EditorHelpers $editorHelpers): void

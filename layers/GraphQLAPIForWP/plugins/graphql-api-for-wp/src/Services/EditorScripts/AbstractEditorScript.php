@@ -19,7 +19,7 @@ abstract class AbstractEditorScript extends AbstractScript
 {
     use HasDocumentationScriptTrait;
 
-    protected EditorHelpers $editorHelpers;
+    protected ?EditorHelpers $editorHelpers = null;
 
     #[Required]
     final public function autowireAbstractEditorScript(

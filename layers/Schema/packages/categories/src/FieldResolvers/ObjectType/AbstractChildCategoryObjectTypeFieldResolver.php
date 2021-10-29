@@ -24,8 +24,8 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
     #[Required]
     final public function autowireAbstractChildCategoryObjectTypeFieldResolver(

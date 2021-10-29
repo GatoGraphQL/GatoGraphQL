@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FlagCustomPostMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
-    protected FlagCustomPostMutationResolver $flagCustomPostMutationResolver;
+    protected ?FlagCustomPostMutationResolver $flagCustomPostMutationResolver = null;
 
     #[Required]
     final public function autowireFlagCustomPostMutationResolverBridge(

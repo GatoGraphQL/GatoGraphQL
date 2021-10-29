@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class DateQueryInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
-    protected DateScalarTypeResolver $dateScalarTypeResolver;
+    protected ?DateScalarTypeResolver $dateScalarTypeResolver = null;
 
     #[Required]
     final public function autowireDateQueryInputObjectTypeResolver(

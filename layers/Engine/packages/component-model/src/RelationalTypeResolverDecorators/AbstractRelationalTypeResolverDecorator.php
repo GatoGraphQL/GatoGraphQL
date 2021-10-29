@@ -15,8 +15,8 @@ abstract class AbstractRelationalTypeResolverDecorator implements RelationalType
 {
     use AttachableExtensionTrait;
 
-    protected InstanceManagerInterface $instanceManager;
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    protected ?InstanceManagerInterface $instanceManager = null;
+    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
 
     #[Required]
     final public function autowireAbstractRelationalTypeResolverDecorator(InstanceManagerInterface $instanceManager, FieldQueryInterpreterInterface $fieldQueryInterpreter): void

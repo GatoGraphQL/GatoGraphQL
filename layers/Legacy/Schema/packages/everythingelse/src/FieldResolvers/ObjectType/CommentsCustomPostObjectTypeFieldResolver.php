@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CommentsCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     
     #[Required]
     final public function autowireCommentsCustomPostObjectTypeFieldResolver(

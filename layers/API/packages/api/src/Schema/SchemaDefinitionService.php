@@ -56,8 +56,8 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
      */
     protected ?PersistentCacheInterface $persistentCache = null;
 
-    protected PersistedFragmentManagerInterface $fragmentCatalogueManager;
-    protected PersistedQueryManagerInterface $queryCatalogueManager;
+    protected ?PersistedFragmentManagerInterface $fragmentCatalogueManager = null;
+    protected ?PersistedQueryManagerInterface $queryCatalogueManager = null;
 
     #[Required]
     final public function autowireAPISchemaDefinitionService(

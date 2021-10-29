@@ -14,7 +14,7 @@ class LogoutMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    protected UserStateTypeMutationAPIInterface $userStateTypeMutationAPI;
+    protected ?UserStateTypeMutationAPIInterface $userStateTypeMutationAPI = null;
 
     #[Required]
     final public function autowireLogoutMutationResolver(

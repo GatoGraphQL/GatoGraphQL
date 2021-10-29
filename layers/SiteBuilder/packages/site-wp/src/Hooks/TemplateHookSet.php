@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class TemplateHookSet extends AbstractHookSet
 {
-    protected ApplicationStateHelperServiceInterface $applicationStateHelperService;
+    protected ?ApplicationStateHelperServiceInterface $applicationStateHelperService = null;
 
     #[Required]
     final public function autowireTemplateHookSet(

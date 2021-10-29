@@ -13,9 +13,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractFieldResolver implements FieldResolverInterface
 {
-    protected TranslationAPIInterface $translationAPI;
-    protected HooksAPIInterface $hooksAPI;
-    protected InstanceManagerInterface $instanceManager;
+    protected ?TranslationAPIInterface $translationAPI = null;
+    protected ?HooksAPIInterface $hooksAPI = null;
+    protected ?InstanceManagerInterface $instanceManager = null;
 
     #[Required]
     final public function autowireAbstractFieldResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager): void

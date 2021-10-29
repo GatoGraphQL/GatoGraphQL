@@ -15,7 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    protected SchemaConfigSchemaModeBlock $schemaConfigSchemaModeBlock;
+    protected ?SchemaConfigSchemaModeBlock $schemaConfigSchemaModeBlock = null;
 
     #[Required]
     final public function autowireDefaultSchemaModeSchemaConfigurationExecuter(

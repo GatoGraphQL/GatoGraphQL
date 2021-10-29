@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VolunteerMutationResolver extends AbstractMutationResolver
 {
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    protected ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
     #[Required]
     final public function autowireVolunteerMutationResolver(

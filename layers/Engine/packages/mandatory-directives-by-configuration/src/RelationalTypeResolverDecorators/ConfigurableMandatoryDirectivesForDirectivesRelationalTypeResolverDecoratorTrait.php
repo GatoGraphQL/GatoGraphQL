@@ -14,7 +14,7 @@ trait ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecorato
 {
     use ConfigurableMandatoryDirectivesForDirectivesTrait;
 
-    protected InstanceManagerInterface $instanceManager;
+    protected ?InstanceManagerInterface $instanceManager = null;
 
     #[Required]
     public function autowireConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait(

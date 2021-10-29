@@ -14,9 +14,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface
 {
-    protected InstanceManagerInterface $instanceManager;
-    protected RootObjectTypeResolver $rootObjectTypeResolver;
-    protected TypeResolverHelperInterface $typeResolverHelper;
+    protected ?InstanceManagerInterface $instanceManager = null;
+    protected ?RootObjectTypeResolver $rootObjectTypeResolver = null;
+    protected ?TypeResolverHelperInterface $typeResolverHelper = null;
 
     #[Required]
     final public function autowireMandatoryDirectivesForFieldsRootTypeEntryDuplicator(

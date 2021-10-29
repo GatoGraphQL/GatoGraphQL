@@ -9,7 +9,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractFilterInputProcessor implements FilterInputProcessorInterface
 {
-    protected InstanceManagerInterface $instanceManager;
+    protected ?InstanceManagerInterface $instanceManager = null;
 
     #[Required]
     final public function autowireAbstractFilterInputProcessor(InstanceManagerInterface $instanceManager): void

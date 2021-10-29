@@ -16,7 +16,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     
     #[Required]
     final public function autowireCustomPostFunctionalObjectTypeFieldResolver(

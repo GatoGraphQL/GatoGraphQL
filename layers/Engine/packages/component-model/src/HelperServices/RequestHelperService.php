@@ -14,7 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RequestHelperService implements RequestHelperServiceInterface
 {
-    protected HooksAPIInterface $hooksAPI;
+    protected ?HooksAPIInterface $hooksAPI = null;
 
     #[Required]
     final public function autowireRequestHelperService(HooksAPIInterface $hooksAPI): void

@@ -78,13 +78,13 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     protected array $interfaceTypeFieldSchemaDefinitionResolverCache = [];
 
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
-    protected NameResolverInterface $nameResolver;
-    protected CMSServiceInterface $cmsService;
-    protected SemverHelperServiceInterface $semverHelperService;
-    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
-    protected EngineInterface $engine;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    protected ?NameResolverInterface $nameResolver = null;
+    protected ?CMSServiceInterface $cmsService = null;
+    protected ?SemverHelperServiceInterface $semverHelperService = null;
+    protected ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
+    protected ?EngineInterface $engine = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     #[Required]
     final public function autowireAbstractObjectTypeFieldResolver(

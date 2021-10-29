@@ -12,7 +12,7 @@ use WP_Post;
 
 abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedService implements BlockCategoryInterface
 {
-    protected InstanceManagerInterface $instanceManager;
+    protected ?InstanceManagerInterface $instanceManager = null;
 
     #[Required]
     final public function autowireAbstractBlockCategory(InstanceManagerInterface $instanceManager): void

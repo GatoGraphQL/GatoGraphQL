@@ -111,21 +111,21 @@ class Engine implements EngineInterface
      */
     protected ?PersistentCacheInterface $persistentCache = null;
 
-    protected TranslationAPIInterface $translationAPI;
-    protected HooksAPIInterface $hooksAPI;
-    protected DataStructureManagerInterface $dataStructureManager;
-    protected InstanceManagerInterface $instanceManager;
-    protected ModelInstanceInterface $modelInstance;
-    protected FeedbackMessageStoreInterface $feedbackMessageStore;
-    protected ModulePathHelpersInterface $modulePathHelpers;
-    protected ModulePathManagerInterface $modulePathManager;
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
-    protected ModuleFilterManagerInterface $moduleFilterManager;
-    protected ModuleProcessorManagerInterface $moduleProcessorManager;
-    protected CheckpointProcessorManagerInterface $checkpointProcessorManager;
-    protected DataloadHelperServiceInterface $dataloadHelperService;
-    protected EntryModuleManagerInterface $entryModuleManager;
-    protected RequestHelperServiceInterface $requestHelperService;
+    protected ?TranslationAPIInterface $translationAPI = null;
+    protected ?HooksAPIInterface $hooksAPI = null;
+    protected ?DataStructureManagerInterface $dataStructureManager = null;
+    protected ?InstanceManagerInterface $instanceManager = null;
+    protected ?ModelInstanceInterface $modelInstance = null;
+    protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    protected ?ModulePathHelpersInterface $modulePathHelpers = null;
+    protected ?ModulePathManagerInterface $modulePathManager = null;
+    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    protected ?ModuleFilterManagerInterface $moduleFilterManager = null;
+    protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    protected ?CheckpointProcessorManagerInterface $checkpointProcessorManager = null;
+    protected ?DataloadHelperServiceInterface $dataloadHelperService = null;
+    protected ?EntryModuleManagerInterface $entryModuleManager = null;
+    protected ?RequestHelperServiceInterface $requestHelperService = null;
 
     #[Required]
     final public function autowireEngine(

@@ -17,9 +17,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected TypeObjectTypeResolver $typeObjectTypeResolver;
-    protected DirectiveObjectTypeResolver $directiveObjectTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
+    protected ?DirectiveObjectTypeResolver $directiveObjectTypeResolver = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     #[Required]
     final public function autowireSchemaObjectTypeFieldResolver(

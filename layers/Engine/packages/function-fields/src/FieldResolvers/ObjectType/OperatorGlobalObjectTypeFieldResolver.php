@@ -19,12 +19,12 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
-    protected FloatScalarTypeResolver $floatScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver;
-    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
-    protected ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver;
-    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
+    protected ?FloatScalarTypeResolver $floatScalarTypeResolver = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
+    protected ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    protected ?ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver = null;
+    protected ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
 
     #[Required]
     final public function autowireOperatorGlobalObjectTypeFieldResolver(

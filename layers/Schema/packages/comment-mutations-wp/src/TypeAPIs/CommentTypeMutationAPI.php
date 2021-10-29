@@ -15,7 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class CommentTypeMutationAPI implements CommentTypeMutationAPIInterface
 {
-    protected TranslationAPIInterface $translationAPI;
+    protected ?TranslationAPIInterface $translationAPI = null;
 
     #[Required]
     final public function autowireCommentTypeMutationAPI(TranslationAPIInterface $translationAPI): void

@@ -9,7 +9,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait SetTagsOnCustomPostObjectTypeFieldResolverTrait
 {
-    protected TranslationAPIInterface $translationAPI;
+    protected ?TranslationAPIInterface $translationAPI = null;
 
     #[Required]
     public function autowireSetTagsOnCustomPostObjectTypeFieldResolverTrait(

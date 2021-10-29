@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class AdminGraphiQLWithExplorerClient extends GraphiQLWithExplorerClient
 {
-    protected EndpointHelpers $endpointHelpers;
+    protected ?EndpointHelpers $endpointHelpers = null;
 
     #[Required]
     final public function autowireAdminGraphiQLWithExplorerClient(EndpointHelpers $endpointHelpers): void

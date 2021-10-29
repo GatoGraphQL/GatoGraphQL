@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver;
+    protected ?UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver = null;
     
     #[Required]
     final public function autowireUpdateMyCommunitiesMutationResolverBridge(

@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UpdatePostMutationResolverBridge extends AbstractCreateUpdatePostMutationResolverBridge
 {
-    protected UpdatePostMutationResolver $updatePostMutationResolver;
+    protected ?UpdatePostMutationResolver $updatePostMutationResolver = null;
 
     #[Required]
     final public function autowireUpdatePostMutationResolverBridge(

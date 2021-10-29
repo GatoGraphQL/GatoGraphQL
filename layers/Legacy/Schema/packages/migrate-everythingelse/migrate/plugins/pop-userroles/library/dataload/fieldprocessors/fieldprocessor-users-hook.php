@@ -14,8 +14,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     
     #[Required]
     final public function autowireObjectTypeFieldResolver_Users(

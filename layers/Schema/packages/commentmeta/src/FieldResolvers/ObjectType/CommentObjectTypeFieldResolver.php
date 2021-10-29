@@ -13,8 +13,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected CommentMetaTypeAPIInterface $commentMetaAPI;
-    protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver;
+    protected ?CommentMetaTypeAPIInterface $commentMetaAPI = null;
+    protected ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
 
     #[Required]
     final public function autowireCommentObjectTypeFieldResolver(

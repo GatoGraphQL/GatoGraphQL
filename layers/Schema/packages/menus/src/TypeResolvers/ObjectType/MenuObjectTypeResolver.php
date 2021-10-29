@@ -12,8 +12,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MenuObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected MenuTypeDataLoader $menuTypeDataLoader;
-    protected MenuTypeAPIInterface $menuTypeAPI;
+    protected ?MenuTypeDataLoader $menuTypeDataLoader = null;
+    protected ?MenuTypeAPIInterface $menuTypeAPI = null;
 
     #[Required]
     final public function autowireMenuObjectTypeResolver(

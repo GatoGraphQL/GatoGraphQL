@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractEndpointResolver extends AbstractAutomaticallyInstantiatedService
 {
-    protected EndpointHelpers $endpointHelpers;
+    protected ?EndpointHelpers $endpointHelpers = null;
 
     #[Required]
     final public function autowireAbstractEndpointResolver(EndpointHelpers $endpointHelpers): void

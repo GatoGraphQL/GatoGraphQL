@@ -13,7 +13,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
+    protected ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
 
     #[Required]
     final public function autowireSetFeaturedImageOnCustomPostMutationResolver(

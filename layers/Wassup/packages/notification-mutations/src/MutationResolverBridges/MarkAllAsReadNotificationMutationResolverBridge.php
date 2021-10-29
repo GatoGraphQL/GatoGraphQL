@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver;
+    protected ?MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver = null;
 
     #[Required]
     final public function autowireMarkAllAsReadNotificationMutationResolverBridge(

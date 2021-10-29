@@ -13,8 +13,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI;
-    protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver;
+    protected ?TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI = null;
+    protected ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
 
     #[Required]
     final public function autowireTaxonomyObjectTypeFieldResolver(

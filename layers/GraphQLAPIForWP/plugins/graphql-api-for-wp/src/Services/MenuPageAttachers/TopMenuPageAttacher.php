@@ -13,11 +13,11 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
-    protected MenuPageHelper $menuPageHelper;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected UserAuthorizationInterface $userAuthorization;
-    protected GraphiQLMenuPage $graphiQLMenuPage;
-    protected GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage;
+    protected ?MenuPageHelper $menuPageHelper = null;
+    protected ?ModuleRegistryInterface $moduleRegistry = null;
+    protected ?UserAuthorizationInterface $userAuthorization = null;
+    protected ?GraphiQLMenuPage $graphiQLMenuPage = null;
+    protected ?GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage = null;
 
     #[Required]
     final public function autowireTopMenuPageAttacher(

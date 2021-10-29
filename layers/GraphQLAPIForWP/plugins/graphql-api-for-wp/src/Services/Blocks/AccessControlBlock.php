@@ -19,7 +19,7 @@ class AccessControlBlock extends AbstractControlBlock
 
     public const ATTRIBUTE_NAME_SCHEMA_MODE = 'schemaMode';
 
-    protected AccessControlBlockCategory $accessControlBlockCategory;
+    protected ?AccessControlBlockCategory $accessControlBlockCategory = null;
 
     #[Required]
     final public function autowireAccessControlBlock(

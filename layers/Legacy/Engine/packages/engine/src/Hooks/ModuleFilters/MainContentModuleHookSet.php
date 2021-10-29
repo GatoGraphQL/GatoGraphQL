@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MainContentModuleHookSet extends AbstractHookSet
 {
-    protected MainContentModule $mainContentModule;
+    protected ?MainContentModule $mainContentModule = null;
     
     #[Required]
     final public function autowireMainContentModuleHookSet(

@@ -20,12 +20,12 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterfaceTypeFieldResolver
 {
-    protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
-    protected CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected DateScalarTypeResolver $dateScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
+    protected ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
+    protected ?CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver = null;
+    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    protected ?DateScalarTypeResolver $dateScalarTypeResolver = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
 
     #[Required]
     final public function autowireIsCustomPostInterfaceTypeFieldResolver(

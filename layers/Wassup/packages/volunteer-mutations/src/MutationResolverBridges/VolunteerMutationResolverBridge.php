@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VolunteerMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
-    protected VolunteerMutationResolver $volunteerMutationResolver;
+    protected ?VolunteerMutationResolver $volunteerMutationResolver = null;
 
     #[Required]
     final public function autowireVolunteerMutationResolverBridge(

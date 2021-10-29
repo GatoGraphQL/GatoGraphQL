@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait ValidateUserLoggedInMutationResolverTrait
 {
-    protected TranslationAPIInterface $translationAPI;
+    protected ?TranslationAPIInterface $translationAPI = null;
 
     #[Required]
     public function autowireValidateUserLoggedInMutationResolverTrait(

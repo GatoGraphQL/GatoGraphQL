@@ -18,7 +18,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
 {
     public const HOOK_FORM_DATA_CREATE_OR_UPDATE = __CLASS__ . ':form-data-create-or-update';
 
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    protected ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
     #[Required]
     final public function autowireAbstractCreateUpdateCustomPostMutationResolverBridge(

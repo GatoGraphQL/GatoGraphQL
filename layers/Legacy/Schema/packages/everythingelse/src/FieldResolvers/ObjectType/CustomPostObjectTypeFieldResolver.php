@@ -15,7 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected LocationObjectTypeResolver $locationObjectTypeResolver;
+    protected ?LocationObjectTypeResolver $locationObjectTypeResolver = null;
     
     #[Required]
     final public function autowireCustomPostObjectTypeFieldResolver(

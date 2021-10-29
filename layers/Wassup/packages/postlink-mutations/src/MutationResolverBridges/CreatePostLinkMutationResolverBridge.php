@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CreatePostLinkMutationResolverBridge extends AbstractCreateUpdatePostLinkMutationResolverBridge
 {
-    protected CreatePostLinkMutationResolver $createPostLinkMutationResolver;
+    protected ?CreatePostLinkMutationResolver $createPostLinkMutationResolver = null;
 
     #[Required]
     final public function autowireCreatePostLinkMutationResolverBridge(

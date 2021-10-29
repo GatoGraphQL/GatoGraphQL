@@ -16,9 +16,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected SettingsTypeAPIInterface $settingsTypeAPI;
+    protected ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?SettingsTypeAPIInterface $settingsTypeAPI = null;
 
     #[Required]
     final public function autowireRootObjectTypeFieldResolver(

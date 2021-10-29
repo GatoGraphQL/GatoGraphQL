@@ -18,9 +18,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
-    protected LocationObjectTypeResolver $locationObjectTypeResolver;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    protected ?LocationObjectTypeResolver $locationObjectTypeResolver = null;
     
     #[Required]
     final public function autowireEventObjectTypeFieldResolver(

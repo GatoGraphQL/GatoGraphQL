@@ -17,7 +17,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     
     #[Required]
     final public function autowireCatEventObjectTypeFieldResolver(

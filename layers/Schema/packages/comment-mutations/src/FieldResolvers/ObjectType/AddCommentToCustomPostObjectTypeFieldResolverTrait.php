@@ -15,10 +15,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait AddCommentToCustomPostObjectTypeFieldResolverTrait
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected EmailScalarTypeResolver $emailScalarTypeResolver;
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    protected ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
+    protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
 
     #[Required]
     public function autowireObjectTypeFieldResolverTrait(

@@ -18,7 +18,7 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 trait HasDocumentationScriptTrait
 {
-    protected LocaleHelper $localeHelper;
+    protected ?LocaleHelper $localeHelper = null;
 
     #[Required]
     public function autowireHasDocumentationScriptTrait(

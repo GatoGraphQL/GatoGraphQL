@@ -11,9 +11,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoaderInterface
 {
-    protected HooksAPIInterface $hooksAPI;
-    protected InstanceManagerInterface $instanceManager;
-    protected NameResolverInterface $nameResolver;
+    protected ?HooksAPIInterface $hooksAPI = null;
+    protected ?InstanceManagerInterface $instanceManager = null;
+    protected ?NameResolverInterface $nameResolver = null;
 
     #[Required]
     final public function autowireAbstractRelationalTypeDataLoader(HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, NameResolverInterface $nameResolver): void

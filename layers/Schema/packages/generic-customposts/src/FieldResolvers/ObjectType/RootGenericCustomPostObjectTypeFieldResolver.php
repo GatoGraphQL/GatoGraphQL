@@ -31,9 +31,9 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver;
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    protected ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
+    protected ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
     #[Required]
     final public function autowireRootGenericCustomPostObjectTypeFieldResolver(

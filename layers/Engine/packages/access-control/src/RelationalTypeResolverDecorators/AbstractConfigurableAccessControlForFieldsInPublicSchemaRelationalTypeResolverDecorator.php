@@ -11,7 +11,7 @@ abstract class AbstractConfigurableAccessControlForFieldsInPublicSchemaRelationa
 {
     use ConfigurableAccessControlForFieldsRelationalTypeResolverDecoratorTrait;
 
-    protected AccessControlManagerInterface $accessControlManager;
+    protected ?AccessControlManagerInterface $accessControlManager = null;
 
     #[Required]
     final public function autowireAbstractConfigurableAccessControlForFieldsInPublicSchemaRelationalTypeResolverDecorator(

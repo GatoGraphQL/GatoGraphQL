@@ -16,8 +16,8 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 {
-    protected TranslationAPIInterface $translationAPI;
-    protected ErrorHelperInterface $errorHelper;
+    protected ?TranslationAPIInterface $translationAPI = null;
+    protected ?ErrorHelperInterface $errorHelper = null;
 
     #[Required]
     final public function autowireUserStateTypeMutationAPI(TranslationAPIInterface $translationAPI, ErrorHelperInterface $errorHelper): void

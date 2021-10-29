@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ModuleRegistry implements ModuleRegistryInterface
 {
-    protected UserSettingsManagerInterface $userSettingsManager;
+    protected ?UserSettingsManagerInterface $userSettingsManager = null;
 
     #[Required]
     final public function autowireModuleRegistry(): void

@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class HeadModuleHookSet extends AbstractHookSet
 {
-    protected HeadModule $headModule;
+    protected ?HeadModule $headModule = null;
     
     #[Required]
     final public function autowireHeadModuleHookSet(

@@ -16,7 +16,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
     public const MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES = 'filterinput-organizationcategories';
     public const MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES = 'filterinput-organizationtypes';
 
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     #[Required]
     final public function autowireGD_URE_Module_Processor_MultiSelectFilterInputs(

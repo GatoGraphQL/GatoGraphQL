@@ -35,17 +35,17 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected CommentTypeAPIInterface $commentTypeAPI;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
-    protected EmailScalarTypeResolver $emailScalarTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected DateScalarTypeResolver $dateScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected CommentObjectTypeResolver $commentObjectTypeResolver;
-    protected CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver;
-    protected DateFormatterInterface $dateFormatter;
+    protected ?CommentTypeAPIInterface $commentTypeAPI = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
+    protected ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
+    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    protected ?DateScalarTypeResolver $dateScalarTypeResolver = null;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    protected ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
+    protected ?CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver = null;
+    protected ?DateFormatterInterface $dateFormatter = null;
 
     #[Required]
     final public function autowireCommentObjectTypeFieldResolver(

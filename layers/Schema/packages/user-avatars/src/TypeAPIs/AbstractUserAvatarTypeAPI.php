@@ -9,7 +9,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractUserAvatarTypeAPI implements UserAvatarTypeAPIInterface
 {
-    protected HooksAPIInterface $hooksAPI;
+    protected ?HooksAPIInterface $hooksAPI = null;
 
     #[Required]
     final public function autowireAbstractUserAvatarTypeAPI(HooksAPIInterface $hooksAPI): void

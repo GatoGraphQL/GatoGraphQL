@@ -27,10 +27,10 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected PostTagObjectTypeResolver $postTagObjectTypeResolver;
-    protected PostTagTypeAPIInterface $postTagTypeAPI;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
+    protected ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
     #[Required]
     final public function autowireRootPostTagObjectTypeFieldResolver(

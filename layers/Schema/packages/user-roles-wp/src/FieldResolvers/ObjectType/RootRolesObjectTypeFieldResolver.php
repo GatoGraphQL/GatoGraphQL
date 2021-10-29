@@ -18,8 +18,8 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use RolesObjectTypeFieldResolverTrait;
 
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected UserRoleTypeAPIInterface $userRoleTypeAPI;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
 
     #[Required]
     final public function autowireRootRolesObjectTypeFieldResolver(

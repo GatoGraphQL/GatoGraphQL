@@ -21,8 +21,8 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver;
-    protected MutationRootObjectTypeResolver $mutationRootObjectTypeResolver;
+    protected ?QueryRootObjectTypeResolver $queryRootObjectTypeResolver = null;
+    protected ?MutationRootObjectTypeResolver $mutationRootObjectTypeResolver = null;
 
     #[Required]
     final public function autowireRegisterQueryAndMutationRootsRootObjectTypeFieldResolver(

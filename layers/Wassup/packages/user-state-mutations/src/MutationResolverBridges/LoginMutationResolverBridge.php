@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class LoginMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected LoginMutationResolver $loginMutationResolver;
+    protected ?LoginMutationResolver $loginMutationResolver = null;
 
     #[Required]
     final public function autowireLoginMutationResolverBridge(

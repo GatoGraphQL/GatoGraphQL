@@ -15,7 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
 {
-    protected AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient;
+    protected ?AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient = null;
 
     #[Required]
     final public function autowireGraphQLAPIGraphiQLMenuPage(

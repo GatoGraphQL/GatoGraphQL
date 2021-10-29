@@ -13,8 +13,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class Engine extends UpstreamEngine implements EngineInterface
 {
-    protected LooseContractManagerInterface $looseContractManager;
-    protected CacheControlEngineInterface $cacheControlEngine;
+    protected ?LooseContractManagerInterface $looseContractManager = null;
+    protected ?CacheControlEngineInterface $cacheControlEngine = null;
 
     #[Required]
     final public function autowireEngineEngine(

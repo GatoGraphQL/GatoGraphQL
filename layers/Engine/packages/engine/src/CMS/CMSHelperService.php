@@ -9,7 +9,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CMSHelperService implements CMSHelperServiceInterface
 {
-    protected CMSServiceInterface $cmsService;
+    protected ?CMSServiceInterface $cmsService = null;
 
     #[Required]
     final public function autowireCMSHelperService(CMSServiceInterface $cmsService): void

@@ -14,7 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 abstract class AbstractMenuPageAttacher extends AbstractAutomaticallyInstantiatedService
 {
-    protected InstanceManagerInterface $instanceManager;
+    protected ?InstanceManagerInterface $instanceManager = null;
 
     #[Required]
     final public function autowireAbstractMenuPageAttacher(InstanceManagerInterface $instanceManager): void

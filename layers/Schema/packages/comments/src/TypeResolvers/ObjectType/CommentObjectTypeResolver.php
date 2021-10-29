@@ -12,8 +12,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CommentObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected CommentTypeAPIInterface $commentTypeAPI;
-    protected CommentTypeDataLoader $commentTypeDataLoader;
+    protected ?CommentTypeAPIInterface $commentTypeAPI = null;
+    protected ?CommentTypeDataLoader $commentTypeDataLoader = null;
 
     #[Required]
     final public function autowireCommentObjectTypeResolver(

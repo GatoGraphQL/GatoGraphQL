@@ -17,7 +17,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     public const FILTERINPUT_CUSTOMPOSTSTATUS = 'filterinput-custompoststatus';
     public const FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
 
-    protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
+    protected ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
 
     #[Required]
     final public function autowireFilterInputProcessor(

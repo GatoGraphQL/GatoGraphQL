@@ -15,7 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     
     #[Required]
     final public function autowireTagFunctionalObjectTypeFieldResolver(

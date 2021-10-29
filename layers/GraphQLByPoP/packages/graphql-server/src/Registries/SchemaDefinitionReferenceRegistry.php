@@ -45,11 +45,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      */
     protected ?PersistentCacheInterface $persistentCache = null;
 
-    protected TranslationAPIInterface $translationAPI;
-    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
-    protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver;
-    protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected ?TranslationAPIInterface $translationAPI = null;
+    protected ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
+    protected ?QueryRootObjectTypeResolver $queryRootObjectTypeResolver = null;
+    protected ?GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService = null;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
     #[Required]
     final public function autowireSchemaDefinitionReferenceRegistry(

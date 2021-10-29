@@ -18,10 +18,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected UserAvatarTypeAPIInterface $userAvatarTypeAPI;
-    protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry;
-    protected UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
+    protected ?UserAvatarTypeAPIInterface $userAvatarTypeAPI = null;
+    protected ?UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry = null;
+    protected ?UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver = null;
+    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
     #[Required]
     final public function autowireUserObjectTypeFieldResolver(

@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
 {
-    protected UserTypeAPIInterface $userTypeAPI;
+    protected ?UserTypeAPIInterface $userTypeAPI = null;
     
     #[Required]
     final public function autowireInviteMembersMutationResolver(

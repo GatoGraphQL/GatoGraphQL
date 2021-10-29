@@ -13,8 +13,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected CustomPostMetaTypeAPIInterface $customPostMetaAPI;
-    protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver;
+    protected ?CustomPostMetaTypeAPIInterface $customPostMetaAPI = null;
+    protected ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
 
     #[Required]
     final public function autowireCustomPostObjectTypeFieldResolver(

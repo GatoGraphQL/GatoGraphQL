@@ -16,7 +16,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
 {
     use QueryableFieldResolverTrait;
 
-    protected ModuleProcessorManagerInterface $moduleProcessorManager;
+    protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
     #[Required]
     final public function autowireAbstractQueryableObjectTypeFieldResolver(

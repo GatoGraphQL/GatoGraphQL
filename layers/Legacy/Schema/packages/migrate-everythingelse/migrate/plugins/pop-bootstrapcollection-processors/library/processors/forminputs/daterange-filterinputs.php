@@ -13,7 +13,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
 
     public const MODULE_FILTERINPUT_CUSTOMPOSTDATES = 'filterinput-custompostdates';
 
-    protected DateScalarTypeResolver $dateScalarTypeResolver;
+    protected ?DateScalarTypeResolver $dateScalarTypeResolver = null;
 
     #[Required]
     final public function autowirePoP_Module_Processor_DateRangeComponentFilterInputs(

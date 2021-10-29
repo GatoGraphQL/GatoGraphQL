@@ -13,8 +13,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
+    protected ?ModuleRegistryInterface $moduleRegistry = null;
+    protected ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
 
     #[Required]
     final public function autowireVarsHookSet(

@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver;
+    protected ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
 
     #[Required]
     final public function autowireAddCommentToCustomPostMutationResolverBridge(

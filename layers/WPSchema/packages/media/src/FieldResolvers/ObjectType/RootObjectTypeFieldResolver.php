@@ -19,9 +19,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected MediaTypeAPIInterface $mediaTypeAPI;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected MediaObjectTypeResolver $mediaObjectTypeResolver;
+    protected ?MediaTypeAPIInterface $mediaTypeAPI = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
 
     #[Required]
     final public function autowireRootObjectTypeFieldResolver(

@@ -12,8 +12,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MediaObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected MediaTypeAPIInterface $mediaTypeAPI;
-    protected MediaTypeDataLoader $mediaTypeDataLoader;
+    protected ?MediaTypeAPIInterface $mediaTypeAPI = null;
+    protected ?MediaTypeDataLoader $mediaTypeDataLoader = null;
 
     #[Required]
     final public function autowireMediaObjectTypeResolver(

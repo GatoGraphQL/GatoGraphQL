@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class Cache extends UpstreamCache
 {
-    protected HooksAPIInterface $hooksAPI;
+    protected ?HooksAPIInterface $hooksAPI = null;
 
     #[Required]
     final public function autowireEngineCache(

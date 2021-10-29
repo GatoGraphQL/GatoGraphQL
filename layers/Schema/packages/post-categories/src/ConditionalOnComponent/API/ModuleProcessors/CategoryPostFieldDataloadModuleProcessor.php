@@ -20,8 +20,8 @@ class CategoryPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDa
 
     public const MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST = 'dataload-relationalfields-categorypostlist';
 
-    protected PostObjectTypeResolver $postObjectTypeResolver;
-    protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
+    protected ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    protected ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
 
     #[Required]
     final public function autowireCategoryPostFieldDataloadModuleProcessor(

@@ -15,7 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {
-    protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
+    protected ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
 
     #[Required]
     final public function autowireVarsHookSet(

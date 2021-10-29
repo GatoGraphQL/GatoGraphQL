@@ -26,8 +26,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
      */
     public const PROPERTY_SEPARATOR = '.';
 
-    protected DirectivePipelineServiceInterface $directivePipelineService;
-    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
+    protected ?DirectivePipelineServiceInterface $directivePipelineService = null;
+    protected ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
 
     #[Required]
     final public function autowireAbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver(

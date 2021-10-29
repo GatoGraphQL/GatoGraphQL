@@ -17,7 +17,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    protected SchemaConfigMutationSchemeBlock $schemaConfigMutationSchemeBlock;
+    protected ?SchemaConfigMutationSchemeBlock $schemaConfigMutationSchemeBlock = null;
 
     #[Required]
     final public function autowireMutationSchemeSchemaConfigurationExecuter(

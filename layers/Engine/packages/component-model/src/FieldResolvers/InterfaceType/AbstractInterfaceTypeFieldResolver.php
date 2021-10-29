@@ -53,12 +53,12 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      */
     protected ?array $partiallyImplementedInterfaceTypeResolvers = null;
 
-    protected NameResolverInterface $nameResolver;
-    protected CMSServiceInterface $cmsService;
-    protected SchemaNamespacingServiceInterface $schemaNamespacingService;
-    protected TypeRegistryInterface $typeRegistry;
-    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
-    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
+    protected ?NameResolverInterface $nameResolver = null;
+    protected ?CMSServiceInterface $cmsService = null;
+    protected ?SchemaNamespacingServiceInterface $schemaNamespacingService = null;
+    protected ?TypeRegistryInterface $typeRegistry = null;
+    protected ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
+    protected ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
 
     #[Required]
     final public function autowireAbstractInterfaceTypeFieldResolver(

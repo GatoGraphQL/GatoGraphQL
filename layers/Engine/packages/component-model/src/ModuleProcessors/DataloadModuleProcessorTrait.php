@@ -11,7 +11,7 @@ trait DataloadModuleProcessorTrait
 {
     use FormattableModuleTrait;
 
-    protected HooksAPIInterface $hooksAPI;
+    protected ?HooksAPIInterface $hooksAPI = null;
 
     #[Required]
     public function autowireDataloadModuleProcessorTrait(

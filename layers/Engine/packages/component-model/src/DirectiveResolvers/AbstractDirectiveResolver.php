@@ -57,13 +57,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /** @var array<string, array<string, mixed>> */
     protected array $schemaDirectiveArgsCache = [];
 
-    protected TranslationAPIInterface $translationAPI;
-    protected HooksAPIInterface $hooksAPI;
-    protected InstanceManagerInterface $instanceManager;
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
-    protected FeedbackMessageStoreInterface $feedbackMessageStore;
-    protected SemverHelperServiceInterface $semverHelperService;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?TranslationAPIInterface $translationAPI = null;
+    protected ?HooksAPIInterface $hooksAPI = null;
+    protected ?InstanceManagerInterface $instanceManager = null;
+    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    protected ?SemverHelperServiceInterface $semverHelperService = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     /**
      * @var array<string, mixed>

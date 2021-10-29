@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UnrecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
-    protected UnrecommendCustomPostMutationResolver $unrecommendCustomPostMutationResolver;
+    protected ?UnrecommendCustomPostMutationResolver $unrecommendCustomPostMutationResolver = null;
 
     #[Required]
     final public function autowireUnrecommendCustomPostMutationResolverBridge(

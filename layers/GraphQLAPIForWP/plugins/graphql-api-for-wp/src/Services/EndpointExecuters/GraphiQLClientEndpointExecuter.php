@@ -14,8 +14,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
-    protected CustomEndpointGraphiQLClient $customEndpointGraphiQLClient;
-    protected GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator;
+    protected ?CustomEndpointGraphiQLClient $customEndpointGraphiQLClient = null;
+    protected ?GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator = null;
 
     #[Required]
     final public function autowireGraphiQLClientEndpointExecuter(

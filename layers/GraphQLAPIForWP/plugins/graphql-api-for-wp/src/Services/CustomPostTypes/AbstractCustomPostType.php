@@ -22,12 +22,12 @@ use WP_Post;
 
 abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedService implements CustomPostTypeInterface
 {
-    protected UserSettingsManagerInterface $userSettingsManager;
-    protected InstanceManagerInterface $instanceManager;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected UserAuthorizationInterface $userAuthorization;
-    protected CPTUtils $cptUtils;
-    protected PluginMenu $pluginMenu;
+    protected ?UserSettingsManagerInterface $userSettingsManager = null;
+    protected ?InstanceManagerInterface $instanceManager = null;
+    protected ?ModuleRegistryInterface $moduleRegistry = null;
+    protected ?UserAuthorizationInterface $userAuthorization = null;
+    protected ?CPTUtils $cptUtils = null;
+    protected ?PluginMenu $pluginMenu = null;
 
     #[Required]
     final public function autowireAbstractCustomPostType(

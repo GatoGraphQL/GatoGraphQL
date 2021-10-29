@@ -9,7 +9,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractLooseContractSet extends AbstractAutomaticallyInstantiatedService
 {
-    protected LooseContractManagerInterface $looseContractManager;
+    protected ?LooseContractManagerInterface $looseContractManager = null;
 
     #[Required]
     final public function autowireAbstractLooseContractSet(LooseContractManagerInterface $looseContractManager): void

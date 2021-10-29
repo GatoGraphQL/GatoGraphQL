@@ -19,10 +19,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected SchemaObjectTypeResolver $schemaObjectTypeResolver;
-    protected TypeObjectTypeResolver $typeObjectTypeResolver;
-    protected SchemaTypeDataLoader $schemaTypeDataLoader;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?SchemaObjectTypeResolver $schemaObjectTypeResolver = null;
+    protected ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
+    protected ?SchemaTypeDataLoader $schemaTypeDataLoader = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     #[Required]
     final public function autowireRootObjectTypeFieldResolver(

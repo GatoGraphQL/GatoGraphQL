@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
-    protected PostTypeDataLoader $postTypeDataLoader;
+    protected ?PostTypeDataLoader $postTypeDataLoader = null;
 
     #[Required]
     final public function autowirePostObjectTypeResolver(

@@ -21,10 +21,10 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
 {
     use WithBlockRegistryCustomPostTypeTrait;
 
-    protected EndpointBlockRegistryInterface $endpointBlockRegistry;
-    protected CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface;
-    protected CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface;
-    protected CustomEndpointOptionsBlock $customEndpointOptionsBlock;
+    protected ?EndpointBlockRegistryInterface $endpointBlockRegistry = null;
+    protected ?CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface = null;
+    protected ?CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface = null;
+    protected ?CustomEndpointOptionsBlock $customEndpointOptionsBlock = null;
 
     #[Required]
     final public function autowireGraphQLCustomEndpointCustomPostType(

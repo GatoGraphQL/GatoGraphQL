@@ -16,8 +16,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected MenuObjectTypeResolver $menuObjectTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?MenuObjectTypeResolver $menuObjectTypeResolver = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     #[Required]
     final public function autowireRootObjectTypeFieldResolver(

@@ -15,8 +15,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class LostPasswordMutationResolver extends AbstractMutationResolver
 {
-    protected UserTypeAPIInterface $userTypeAPI;
-    protected CMSServiceInterface $cmsService;
+    protected ?UserTypeAPIInterface $userTypeAPI = null;
+    protected ?CMSServiceInterface $cmsService = null;
 
     #[Required]
     final public function autowireLostPasswordMutationResolver(

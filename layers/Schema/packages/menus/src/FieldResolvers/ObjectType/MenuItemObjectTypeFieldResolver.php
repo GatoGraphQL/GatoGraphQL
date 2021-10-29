@@ -19,12 +19,12 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry;
-    protected CMSHelperServiceInterface $cmsHelperService;
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected MenuItemObjectTypeResolver $menuItemObjectTypeResolver;
+    protected ?MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry = null;
+    protected ?CMSHelperServiceInterface $cmsHelperService = null;
+    protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
+    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    protected ?MenuItemObjectTypeResolver $menuItemObjectTypeResolver = null;
 
     #[Required]
     final public function autowireMenuItemObjectTypeFieldResolver(

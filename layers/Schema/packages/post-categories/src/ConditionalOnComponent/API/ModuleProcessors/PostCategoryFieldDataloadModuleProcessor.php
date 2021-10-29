@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModuleProcessor
 {
-    protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
+    protected ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
 
     #[Required]
     final public function autowirePostCategoryFieldDataloadModuleProcessor(

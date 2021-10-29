@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class EditMembershipMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected EditMembershipMutationResolver $editMembershipMutationResolver;
+    protected ?EditMembershipMutationResolver $editMembershipMutationResolver = null;
     
     #[Required]
     final public function autowireEditMembershipMutationResolverBridge(

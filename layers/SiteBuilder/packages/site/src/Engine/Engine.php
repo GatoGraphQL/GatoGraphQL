@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class Engine extends UpstreamEngine
 {
-    protected ApplicationStateHelperServiceInterface $applicationStateHelperService;
+    protected ?ApplicationStateHelperServiceInterface $applicationStateHelperService = null;
 
     #[Required]
     final public function autowireSiteEngine(

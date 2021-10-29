@@ -12,8 +12,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractPostObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
-    protected PostObjectTypeResolver $postObjectTypeResolver;
-    protected PostTypeAPIInterface $postTypeAPI;
+    protected ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    protected ?PostTypeAPIInterface $postTypeAPI = null;
 
     #[Required]
     final public function autowireAbstractPostObjectTypeResolverPicker(PostObjectTypeResolver $postObjectTypeResolver, PostTypeAPIInterface $postTypeAPI): void

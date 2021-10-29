@@ -15,11 +15,11 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
 {
-    protected TranslationAPIInterface $translationAPI;
-    protected HooksAPIInterface $hooksAPI;
-    protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    protected ?TranslationAPIInterface $translationAPI = null;
+    protected ?HooksAPIInterface $hooksAPI = null;
+    protected ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
+    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     #[Required]
     public function autowireCreateOrUpdateCustomPostObjectTypeFieldResolverTrait(

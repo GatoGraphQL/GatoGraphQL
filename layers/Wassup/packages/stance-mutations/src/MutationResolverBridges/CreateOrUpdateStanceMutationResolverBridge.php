@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutationResolverBridge
 {
-    protected CreateOrUpdateStanceMutationResolver $createOrUpdateStanceMutationResolver;
+    protected ?CreateOrUpdateStanceMutationResolver $createOrUpdateStanceMutationResolver = null;
 
     #[Required]
     final public function autowireCreateOrUpdateStanceMutationResolverBridge(
