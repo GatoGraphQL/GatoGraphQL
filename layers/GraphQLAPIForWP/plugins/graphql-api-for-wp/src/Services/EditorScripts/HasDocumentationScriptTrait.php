@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
 use GraphQLAPI\GraphQLAPI\Constants\DocumentationConstants;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use Symfony\Contracts\Service\Attribute\Required;
 
 /**
