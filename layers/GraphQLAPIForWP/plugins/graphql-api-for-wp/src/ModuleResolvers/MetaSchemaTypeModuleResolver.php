@@ -29,11 +29,52 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     public const SCHEMA_COMMENT_META = Plugin::NAMESPACE . '\schema-comment-meta';
     public const SCHEMA_TAXONOMY_META = Plugin::NAMESPACE . '\schema-taxonomy-meta';
 
-    protected ?CommentObjectTypeResolver $commentTypeResolver;
-    protected ?PostTagObjectTypeResolver $postTagTypeResolver;
-    protected ?PostCategoryObjectTypeResolver $postCategoryTypeResolver;
-    protected ?PostObjectTypeResolver $postTypeResolver;
-    protected ?UserObjectTypeResolver $userTypeResolver;
+    private ?CommentObjectTypeResolver $commentTypeResolver = null;
+    private ?PostTagObjectTypeResolver $postTagTypeResolver = null;
+    private ?PostCategoryObjectTypeResolver $postCategoryTypeResolver = null;
+    private ?PostObjectTypeResolver $postTypeResolver = null;
+    private ?UserObjectTypeResolver $userTypeResolver = null;
+
+    public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentTypeResolver): void
+    {
+        $this->commentTypeResolver = $commentTypeResolver;
+    }
+    protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
+    {
+        return $this->commentTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+    }
+    public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagTypeResolver): void
+    {
+        $this->postTagTypeResolver = $postTagTypeResolver;
+    }
+    protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
+    {
+        return $this->postTagTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+    }
+    public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryTypeResolver): void
+    {
+        $this->postCategoryTypeResolver = $postCategoryTypeResolver;
+    }
+    protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
+    {
+        return $this->postCategoryTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+    }
+    public function setPostObjectTypeResolver(PostObjectTypeResolver $postTypeResolver): void
+    {
+        $this->postTypeResolver = $postTypeResolver;
+    }
+    protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    {
+        return $this->postTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+    }
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userTypeResolver): void
+    {
+        $this->userTypeResolver = $userTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+    }
 
     /**
      * Make all properties nullable, becase the ModuleRegistry is registered
@@ -43,7 +84,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
      * Function `getDescription` will only be accessed from the Application Container,
      * so the properties will not be null in that situation.
      */
-    #[Required]
+    // #[Required]
     final public function autowireMetaSchemaTypeModuleResolver(
         ?CommentObjectTypeResolver $commentTypeResolver,
         ?PostTagObjectTypeResolver $postTagTypeResolver,

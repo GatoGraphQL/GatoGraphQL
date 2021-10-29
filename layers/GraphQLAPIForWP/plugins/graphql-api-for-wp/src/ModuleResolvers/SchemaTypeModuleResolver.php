@@ -64,19 +64,124 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public const HOOK_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':generic-custompost-types';
     public const HOOK_REJECTED_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':rejected-generic-custompost-types';
 
-    protected ?CommentObjectTypeResolver $commentTypeResolver;
-    protected ?CustomPostUnionTypeResolver $customPostUnionTypeResolver;
-    protected ?GenericCustomPostObjectTypeResolver $genericCustomPostTypeResolver;
-    protected ?MediaObjectTypeResolver $mediaTypeResolver;
-    protected ?PageObjectTypeResolver $pageTypeResolver;
-    protected ?PostTagObjectTypeResolver $postTagTypeResolver;
-    protected ?PostCategoryObjectTypeResolver $postCategoryTypeResolver;
-    protected ?MenuObjectTypeResolver $menuTypeResolver;
-    protected ?PostObjectTypeResolver $postTypeResolver;
-    protected ?UserRoleObjectTypeResolver $userRoleTypeResolver;
-    protected ?UserAvatarObjectTypeResolver $userAvatarTypeResolver;
-    protected ?UserObjectTypeResolver $userTypeResolver;
-    protected ?CustomPostTypeRegistryInterface $customPostTypeRegistry;
+    private ?CommentObjectTypeResolver $commentTypeResolver = null;
+    private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
+    private ?GenericCustomPostObjectTypeResolver $genericCustomPostTypeResolver = null;
+    private ?MediaObjectTypeResolver $mediaTypeResolver = null;
+    private ?PageObjectTypeResolver $pageTypeResolver = null;
+    private ?PostTagObjectTypeResolver $postTagTypeResolver = null;
+    private ?PostCategoryObjectTypeResolver $postCategoryTypeResolver = null;
+    private ?MenuObjectTypeResolver $menuTypeResolver = null;
+    private ?PostObjectTypeResolver $postTypeResolver = null;
+    private ?UserRoleObjectTypeResolver $userRoleTypeResolver = null;
+    private ?UserAvatarObjectTypeResolver $userAvatarTypeResolver = null;
+    private ?UserObjectTypeResolver $userTypeResolver = null;
+    private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
+
+    public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentTypeResolver): void
+    {
+        $this->commentTypeResolver = $commentTypeResolver;
+    }
+    protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
+    {
+        return $this->commentTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+    }
+    public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
+    {
+        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
+    }
+    protected function getCustomPostUnionTypeResolver(): CustomPostUnionTypeResolver
+    {
+        return $this->customPostUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
+    }
+    public function setGenericCustomPostObjectTypeResolver(GenericCustomPostObjectTypeResolver $genericCustomPostTypeResolver): void
+    {
+        $this->genericCustomPostTypeResolver = $genericCustomPostTypeResolver;
+    }
+    protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
+    {
+        return $this->genericCustomPostTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
+    }
+    public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaTypeResolver): void
+    {
+        $this->mediaTypeResolver = $mediaTypeResolver;
+    }
+    protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
+    {
+        return $this->mediaTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
+    }
+    public function setPageObjectTypeResolver(PageObjectTypeResolver $pageTypeResolver): void
+    {
+        $this->pageTypeResolver = $pageTypeResolver;
+    }
+    protected function getPageObjectTypeResolver(): PageObjectTypeResolver
+    {
+        return $this->pageTypeResolver ??= $this->instanceManager->getInstance(PageObjectTypeResolver::class);
+    }
+    public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagTypeResolver): void
+    {
+        $this->postTagTypeResolver = $postTagTypeResolver;
+    }
+    protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
+    {
+        return $this->postTagTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+    }
+    public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryTypeResolver): void
+    {
+        $this->postCategoryTypeResolver = $postCategoryTypeResolver;
+    }
+    protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
+    {
+        return $this->postCategoryTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+    }
+    public function setMenuObjectTypeResolver(MenuObjectTypeResolver $menuTypeResolver): void
+    {
+        $this->menuTypeResolver = $menuTypeResolver;
+    }
+    protected function getMenuObjectTypeResolver(): MenuObjectTypeResolver
+    {
+        return $this->menuTypeResolver ??= $this->instanceManager->getInstance(MenuObjectTypeResolver::class);
+    }
+    public function setPostObjectTypeResolver(PostObjectTypeResolver $postTypeResolver): void
+    {
+        $this->postTypeResolver = $postTypeResolver;
+    }
+    protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    {
+        return $this->postTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+    }
+    public function setUserRoleObjectTypeResolver(UserRoleObjectTypeResolver $userRoleTypeResolver): void
+    {
+        $this->userRoleTypeResolver = $userRoleTypeResolver;
+    }
+    protected function getUserRoleObjectTypeResolver(): UserRoleObjectTypeResolver
+    {
+        return $this->userRoleTypeResolver ??= $this->instanceManager->getInstance(UserRoleObjectTypeResolver::class);
+    }
+    public function setUserAvatarObjectTypeResolver(UserAvatarObjectTypeResolver $userAvatarTypeResolver): void
+    {
+        $this->userAvatarTypeResolver = $userAvatarTypeResolver;
+    }
+    protected function getUserAvatarObjectTypeResolver(): UserAvatarObjectTypeResolver
+    {
+        return $this->userAvatarTypeResolver ??= $this->instanceManager->getInstance(UserAvatarObjectTypeResolver::class);
+    }
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userTypeResolver): void
+    {
+        $this->userTypeResolver = $userTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+    }
+    public function setCustomPostTypeRegistryInterface(CustomPostTypeRegistryInterface $customPostTypeRegistry): void
+    {
+        $this->customPostTypeRegistry = $customPostTypeRegistry;
+    }
+    protected function getCustomPostTypeRegistryInterface(): CustomPostTypeRegistryInterface
+    {
+        return $this->customPostTypeRegistry ??= $this->instanceManager->getInstance(CustomPostTypeRegistryInterface::class);
+    }
 
     /**
      * Make all properties nullable, becase the ModuleRegistry is registered
@@ -86,7 +191,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      * Function `getDescription` will only be accessed from the Application Container,
      * so the properties will not be null in that situation.
      */
-    #[Required]
+    // #[Required]
     final public function autowireSchemaTypeModuleResolver(
         ?CommentObjectTypeResolver $commentTypeResolver,
         ?CustomPostUnionTypeResolver $customPostUnionTypeResolver,

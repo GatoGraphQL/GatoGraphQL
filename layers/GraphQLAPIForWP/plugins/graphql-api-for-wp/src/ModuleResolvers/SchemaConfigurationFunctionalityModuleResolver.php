@@ -25,7 +25,16 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public const PUBLIC_PRIVATE_SCHEMA = Plugin::NAMESPACE . '\public-private-schema';
     public const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
 
-    protected ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType;
+    private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
+
+    public function setGraphQLSchemaConfigurationCustomPostType(GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType): void
+    {
+        $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
+    }
+    protected function getGraphQLSchemaConfigurationCustomPostType(): GraphQLSchemaConfigurationCustomPostType
+    {
+        return $this->graphQLSchemaConfigurationCustomPostType ??= $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
+    }
 
     /**
      * Make all properties nullable, becase the ModuleRegistry is registered
@@ -35,7 +44,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
      * Function `getDescription` will only be accessed from the Application Container,
      * so the properties will not be null in that situation.
      */
-    #[Required]
+    // #[Required]
     final public function autowireSchemaConfigurationFunctionalityModuleResolver(
         ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
     ): void {
