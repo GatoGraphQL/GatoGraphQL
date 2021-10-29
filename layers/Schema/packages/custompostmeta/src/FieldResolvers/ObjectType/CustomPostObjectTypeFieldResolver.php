@@ -13,16 +13,16 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?CustomPostMetaTypeAPIInterface $customPostMetaAPI = null;
+    private ?CustomPostMetaTypeAPIInterface $customPostMetaTypeAPI = null;
     private ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
 
-    public function setCustomPostMetaTypeAPI(CustomPostMetaTypeAPIInterface $customPostMetaAPI): void
+    public function setCustomPostMetaTypeAPI(CustomPostMetaTypeAPIInterface $customPostMetaTypeAPI): void
     {
-        $this->customPostMetaAPI = $customPostMetaAPI;
+        $this->customPostMetaTypeAPI = $customPostMetaTypeAPI;
     }
     protected function getCustomPostMetaTypeAPI(): CustomPostMetaTypeAPIInterface
     {
-        return $this->customPostMetaAPI ??= $this->instanceManager->getInstance(CustomPostMetaTypeAPIInterface::class);
+        return $this->customPostMetaTypeAPI ??= $this->instanceManager->getInstance(CustomPostMetaTypeAPIInterface::class);
     }
     public function setWithMetaInterfaceTypeFieldResolver(WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver): void
     {
@@ -35,10 +35,10 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     //#[Required]
     final public function autowireCustomPostObjectTypeFieldResolver(
-        CustomPostMetaTypeAPIInterface $customPostMetaAPI,
+        CustomPostMetaTypeAPIInterface $customPostMetaTypeAPI,
         WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
     ): void {
-        $this->customPostMetaAPI = $customPostMetaAPI;
+        $this->customPostMetaTypeAPI = $customPostMetaTypeAPI;
         $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
     }
 
@@ -83,7 +83,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'metaValue':
             case 'metaValues':
-                return $this->getCustomPostMetaAPI()->getCustomPostMeta(
+                return $this->getCustomPostMetaTypeAPI()->getCustomPostMeta(
                     $objectTypeResolver->getID($customPost),
                     $fieldArgs['key'],
                     $fieldName === 'metaValue'
