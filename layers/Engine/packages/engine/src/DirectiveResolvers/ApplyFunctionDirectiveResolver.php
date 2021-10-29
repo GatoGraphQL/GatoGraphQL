@@ -27,17 +27,17 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
      * since this could be a UnionTypeResolver,
      * but `extractFieldArguments` expects an ObjectTypeResolver
      */
-    private ?RootObjectTypeResolver $rootTypeResolver = null;
+    private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
 
-    public function setRootObjectTypeResolver(RootObjectTypeResolver $rootTypeResolver): void
+    public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
     {
-        $this->rootTypeResolver = $rootTypeResolver;
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
     }
     protected function getRootObjectTypeResolver(): RootObjectTypeResolver
     {
-        return $this->rootTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
+        return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
     }
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -58,11 +58,11 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
 
     //#[Required]
     final public function autowireApplyFunctionDirectiveResolver(
-        RootObjectTypeResolver $rootTypeResolver,
+        RootObjectTypeResolver $rootObjectTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
     ): void {
-        $this->rootTypeResolver = $rootTypeResolver;
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
     }
