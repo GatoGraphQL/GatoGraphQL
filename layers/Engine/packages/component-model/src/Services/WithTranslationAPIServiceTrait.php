@@ -16,8 +16,4 @@ trait WithTranslationAPIServiceTrait
     {
         $this->translationAPI = $translationAPI;
     }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI;
-    }
 }
