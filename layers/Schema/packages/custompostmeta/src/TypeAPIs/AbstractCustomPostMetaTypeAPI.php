@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMeta\TypeAPIs;
 
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoPSchema\CustomPostMeta\ComponentConfiguration;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostMetaTypeAPI implements CustomPostMetaTypeAPIInterface
 {
+    use BasicServiceTrait;
+    
     private ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
 
     public function setAllowOrDenySettingsService(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void

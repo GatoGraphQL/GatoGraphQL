@@ -13,8 +13,6 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
-    use BasicServiceTrait;
-
     protected ?string $restFieldsQuery = null;
     protected ?array $restFields = null;
 

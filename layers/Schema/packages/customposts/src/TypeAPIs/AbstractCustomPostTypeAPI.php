@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeAPIs;
 
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
-use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
 {
-    use WithHooksAPIServiceTrait;
+    use BasicServiceTrait;
 
     private ?CMSHelperServiceInterface $cmsHelperService = null;
 
