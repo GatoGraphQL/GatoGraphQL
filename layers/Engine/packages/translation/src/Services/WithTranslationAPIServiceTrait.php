@@ -4,16 +4,21 @@ declare(strict_types=1);
 
 namespace PoP\Translation\Services;
 
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait WithTranslationAPIServiceTrait
 {
-    protected TranslationAPIInterface $translationAPI;
+    private ?TranslationAPIInterface $translationAPI = null;
 
-    #[Required]
+    //#[Required]
     public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
     {
         $this->translationAPI = $translationAPI;
+    }
+    protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= TranslationAPIFacade::getInstance();
     }
 }
