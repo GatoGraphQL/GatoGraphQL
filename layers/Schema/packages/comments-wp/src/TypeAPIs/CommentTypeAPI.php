@@ -36,6 +36,10 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         HooksAPIInterface $hooksAPI,
     ): void {
         $this->hooksAPI = $hooksAPI;
+    }
+
+    public function __construct()
+    {
         $this->popToCMSCommentStatusConversion = array_flip($this->cmsToPoPCommentStatusConversion);
     }
 
