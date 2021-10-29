@@ -12,7 +12,6 @@ use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinitionReferenceObjectInterface;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\API\Schema\SchemaDefinitionHelpers as APISchemaDefinitionHelpers;
 use PoP\API\Schema\SchemaDefinitionServiceInterface;
@@ -25,7 +24,6 @@ use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegistryInterface
@@ -49,7 +47,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     private ?PersistentCacheInterface $persistentCache = null;
 
     private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
-    private ?QueryRootObjectTypeResolver $queryRootObjectTypeResolver = null;
     private ?GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
@@ -60,14 +57,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
         return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
-    }
-    public function setQueryRootObjectTypeResolver(QueryRootObjectTypeResolver $queryRootObjectTypeResolver): void
-    {
-        $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
-    }
-    protected function getQueryRootObjectTypeResolver(): QueryRootObjectTypeResolver
-    {
-        return $this->queryRootObjectTypeResolver ??= $this->instanceManager->getInstance(QueryRootObjectTypeResolver::class);
     }
     public function setGraphQLSchemaDefinitionService(GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService): void
     {
@@ -89,12 +78,10 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     //#[Required]
     final public function autowireSchemaDefinitionReferenceRegistry(
         SchemaDefinitionServiceInterface $schemaDefinitionService,
-        QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
         GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
         IntScalarTypeResolver $intScalarTypeResolver,
     ): void {
         $this->schemaDefinitionService = $schemaDefinitionService;
-        $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
         $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
         $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
@@ -173,11 +160,12 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $rootTypeName = $rootObjectTypeResolver->getMaybeNamespacedTypeName();
         $queryRootTypeName = null;
         if (!$enableNestedMutations) {
-            $queryRootTypeResolver = $this->getGraphQLSchemaDefinitionService()->getQueryRootObjectTypeResolver();
+            $queryRootTypeResolver = $this->getGraphQLSchemaDefinitionService()->getSchemaQueryRootObjectTypeResolver();
             $queryRootTypeName = $queryRootTypeResolver->getMaybeNamespacedTypeName();
         } elseif (ComponentConfiguration::addConnectionFromRootToQueryRootAndMutationRoot()) {
             // Additionally append the QueryRoot and MutationRoot to the schema
-            $queryRootTypeName = $this->getQueryRootObjectTypeResolver()->getMaybeNamespacedTypeName();
+            $queryRootTypeResolver = $this->getGraphQLSchemaDefinitionService()->getSchemaQueryRootObjectTypeResolver();
+            $queryRootTypeName = $queryRootTypeResolver->getMaybeNamespacedTypeName();
             // Remove the fields connecting from Root to QueryRoot and MutationRoot
             unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::FIELDS]['queryRoot']);
             unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::FIELDS]['mutationRoot']);
