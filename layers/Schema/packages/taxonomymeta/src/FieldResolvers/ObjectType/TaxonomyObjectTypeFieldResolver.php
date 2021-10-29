@@ -13,16 +13,16 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI = null;
+    private ?TaxonomyMetaTypeAPIInterface $taxonomyMetaTypeAPI = null;
     private ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
 
-    public function setTaxonomyMetaTypeAPI(TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI): void
+    public function setTaxonomyMetaTypeAPI(TaxonomyMetaTypeAPIInterface $taxonomyMetaTypeAPI): void
     {
-        $this->taxonomyMetaAPI = $taxonomyMetaAPI;
+        $this->taxonomyMetaTypeAPI = $taxonomyMetaTypeAPI;
     }
     protected function getTaxonomyMetaTypeAPI(): TaxonomyMetaTypeAPIInterface
     {
-        return $this->taxonomyMetaAPI ??= $this->instanceManager->getInstance(TaxonomyMetaTypeAPIInterface::class);
+        return $this->taxonomyMetaTypeAPI ??= $this->instanceManager->getInstance(TaxonomyMetaTypeAPIInterface::class);
     }
     public function setWithMetaInterfaceTypeFieldResolver(WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver): void
     {
@@ -35,10 +35,10 @@ class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     //#[Required]
     final public function autowireTaxonomyObjectTypeFieldResolver(
-        TaxonomyMetaTypeAPIInterface $taxonomyMetaAPI,
+        TaxonomyMetaTypeAPIInterface $taxonomyMetaTypeAPI,
         WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
     ): void {
-        $this->taxonomyMetaAPI = $taxonomyMetaAPI;
+        $this->taxonomyMetaTypeAPI = $taxonomyMetaTypeAPI;
         $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
     }
 
@@ -83,7 +83,7 @@ class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'metaValue':
             case 'metaValues':
-                return $this->getTaxonomyMetaAPI()->getTaxonomyTermMeta(
+                return $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta(
                     $objectTypeResolver->getID($taxonomy),
                     $fieldArgs['key'],
                     $fieldName === 'metaValue'
