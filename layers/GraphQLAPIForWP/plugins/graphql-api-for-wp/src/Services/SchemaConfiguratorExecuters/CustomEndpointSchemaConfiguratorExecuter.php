@@ -11,16 +11,16 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaConfiguratorExecuter
 {
-    private ?CustomEndpointSchemaConfigurator $endpointSchemaConfigurator = null;
+    private ?CustomEndpointSchemaConfigurator $customEndpointSchemaConfigurator = null;
     private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
 
-    public function setCustomEndpointSchemaConfigurator(CustomEndpointSchemaConfigurator $endpointSchemaConfigurator): void
+    public function setCustomEndpointSchemaConfigurator(CustomEndpointSchemaConfigurator $customEndpointSchemaConfigurator): void
     {
-        $this->endpointSchemaConfigurator = $endpointSchemaConfigurator;
+        $this->customEndpointSchemaConfigurator = $customEndpointSchemaConfigurator;
     }
     protected function getCustomEndpointSchemaConfigurator(): CustomEndpointSchemaConfigurator
     {
-        return $this->endpointSchemaConfigurator ??= $this->instanceManager->getInstance(CustomEndpointSchemaConfigurator::class);
+        return $this->customEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(CustomEndpointSchemaConfigurator::class);
     }
     public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
     {
@@ -33,10 +33,10 @@ class CustomEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaC
 
     //#[Required]
     final public function autowireCustomEndpointSchemaConfiguratorExecuter(
-        CustomEndpointSchemaConfigurator $endpointSchemaConfigurator,
+        CustomEndpointSchemaConfigurator $customEndpointSchemaConfigurator,
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ): void {
-        $this->endpointSchemaConfigurator = $endpointSchemaConfigurator;
+        $this->customEndpointSchemaConfigurator = $customEndpointSchemaConfigurator;
         $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
     }
 
@@ -47,6 +47,6 @@ class CustomEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaC
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
     {
-        return $this->getEndpointSchemaConfigurator();
+        return $this->getCustomEndpointSchemaConfigurator();
     }
 }
