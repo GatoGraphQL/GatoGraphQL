@@ -7,10 +7,13 @@ namespace PoP\ComponentModel\ModuleFiltering;
 use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class ModuleFilterManager implements ModuleFilterManagerInterface
 {
+    use BasicServiceTrait;
+    
     public const URLPARAM_MODULEFILTER = 'modulefilter';
 
     protected ?string $selected_filter_name = null;
@@ -20,8 +23,9 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
      */
     protected array $modulefilters = [];
     protected bool $initialized = false;
-
-    // From the moment in which a module is not excluded, every module from then on must also be included
+    /**
+     * From the moment in which a module is not excluded, every module from then on must also be included
+     */
     protected ?string $not_excluded_ancestor_module = null;
     /**
      * @var array<array>|null
@@ -31,9 +35,13 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
      * @var string[]|null
      */
     protected ?array $not_excluded_module_sets_as_string;
-
-    // When targeting modules in pop-engine.php (eg: when doing ->get_dbobjectids()) those modules are already and always included, so no need to check for their ancestors or anything
+    /**
+     * When targeting modules in pop-engine.php (eg: when doing ->get_dbobjectids())
+     * those modules are already and always included, so no need to check
+     * for their ancestors or anything
+     */
     protected bool $neverExclude = false;
+
     private ?ModulePathManagerInterface $modulePathManager = null;
     private ?ModulePathHelpersInterface $modulePathHelpers = null;
 

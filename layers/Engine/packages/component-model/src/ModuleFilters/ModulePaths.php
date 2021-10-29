@@ -6,10 +6,13 @@ namespace PoP\ComponentModel\ModuleFilters;
 
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
 use PoP\ComponentModel\ModulePath\ModulePathUtils;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class ModulePaths extends AbstractModuleFilter
 {
+    use BasicServiceTrait;
+    
     public const URLPARAM_MODULEPATHS = 'modulepaths';
 
     /**

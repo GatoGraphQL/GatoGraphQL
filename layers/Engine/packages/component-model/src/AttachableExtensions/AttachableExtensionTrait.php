@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\AttachableExtensions;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Services\ServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait AttachableExtensionTrait
 {
     use ServiceTrait;
+    use BasicServiceTrait;
 
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
