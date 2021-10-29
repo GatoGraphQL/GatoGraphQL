@@ -15,6 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
     public const MODULE_DATALOAD_RELATIONALFIELDS_COMMENTS = 'dataload-relationalfields-comments';
+
     protected CommentObjectTypeResolver $commentObjectTypeResolver;
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
