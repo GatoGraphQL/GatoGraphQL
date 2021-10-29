@@ -29,9 +29,9 @@ class PersistedQueryEndpointAPIHierarchyBlockAccessor
      */
     public function getAttributes(WP_Post $post): ?PersistedQueryEndpointAPIHierarchyBlockAttributes
     {
-        $apiHierarchyBlock = $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        $apiHierarchyBlock = $this->getBlockHelpers()->getSingleBlockOfTypeFromCustomPost(
             $post,
-            $this->persistedQueryEndpointAPIHierarchyBlock
+            $this->getPersistedQueryEndpointAPIHierarchyBlock()
         );
         // If there is either 0 or more than 1, return nothing
         if ($apiHierarchyBlock === null) {

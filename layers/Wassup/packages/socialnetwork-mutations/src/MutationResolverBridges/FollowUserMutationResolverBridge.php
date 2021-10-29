@@ -21,7 +21,7 @@ class FollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMu
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->followUserMutationResolver;
+        return $this->getFollowUserMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool
@@ -32,8 +32,8 @@ class FollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMu
     public function getSuccessString(string | int $result_id): ?string
     {
         return sprintf(
-            $this->translationAPI->__('You are now following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $this->userTypeAPI->getUserDisplayName($result_id)
+            $this->getTranslationAPI()->__('You are now following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->getUserTypeAPI()->getUserDisplayName($result_id)
         );
     }
 }

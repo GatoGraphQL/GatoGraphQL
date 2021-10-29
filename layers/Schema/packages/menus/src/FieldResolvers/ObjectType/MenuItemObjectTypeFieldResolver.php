@@ -72,17 +72,17 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'children' => $this->menuItemObjectTypeResolver,
-            'localURLPath' => $this->stringScalarTypeResolver,
-            'label' => $this->stringScalarTypeResolver,
-            'title' => $this->stringScalarTypeResolver,
-            'url' => $this->urlScalarTypeResolver,
-            'classes' => $this->stringScalarTypeResolver,
-            'target' => $this->stringScalarTypeResolver,
-            'description' => $this->stringScalarTypeResolver,
-            'objectID' => $this->idScalarTypeResolver,
-            'parentID' => $this->idScalarTypeResolver,
-            'linkRelationship' => $this->stringScalarTypeResolver,
+            'children' => $this->getMenuItemObjectTypeResolver(),
+            'localURLPath' => $this->getStringScalarTypeResolver(),
+            'label' => $this->getStringScalarTypeResolver(),
+            'title' => $this->getStringScalarTypeResolver(),
+            'url' => $this->getUrlScalarTypeResolver(),
+            'classes' => $this->getStringScalarTypeResolver(),
+            'target' => $this->getStringScalarTypeResolver(),
+            'description' => $this->getStringScalarTypeResolver(),
+            'objectID' => $this->getIdScalarTypeResolver(),
+            'parentID' => $this->getIdScalarTypeResolver(),
+            'linkRelationship' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -100,17 +100,17 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'children' => $this->translationAPI->__('Menu item children items', 'menus'),
-            'label' => $this->translationAPI->__('Menu item label', 'menus'),
-            'title' => $this->translationAPI->__('Menu item title', 'menus'),
-            'localURLPath' => $this->translationAPI->__('Path of a local URL, or null if external URL', 'menus'),
-            'url' => $this->translationAPI->__('Menu item URL', 'menus'),
-            'classes' => $this->translationAPI->__('Menu item classes', 'menus'),
-            'target' => $this->translationAPI->__('Menu item target', 'menus'),
-            'description' => $this->translationAPI->__('Menu item additional attributes', 'menus'),
-            'objectID' => $this->translationAPI->__('ID of the object linked to by the menu item ', 'menus'),
-            'parentID' => $this->translationAPI->__('Menu item\'s parent ID', 'menus'),
-            'linkRelationship' => $this->translationAPI->__('Link relationship (XFN)', 'menus'),
+            'children' => $this->getTranslationAPI()->__('Menu item children items', 'menus'),
+            'label' => $this->getTranslationAPI()->__('Menu item label', 'menus'),
+            'title' => $this->getTranslationAPI()->__('Menu item title', 'menus'),
+            'localURLPath' => $this->getTranslationAPI()->__('Path of a local URL, or null if external URL', 'menus'),
+            'url' => $this->getTranslationAPI()->__('Menu item URL', 'menus'),
+            'classes' => $this->getTranslationAPI()->__('Menu item classes', 'menus'),
+            'target' => $this->getTranslationAPI()->__('Menu item target', 'menus'),
+            'description' => $this->getTranslationAPI()->__('Menu item additional attributes', 'menus'),
+            'objectID' => $this->getTranslationAPI()->__('ID of the object linked to by the menu item ', 'menus'),
+            'parentID' => $this->getTranslationAPI()->__('Menu item\'s parent ID', 'menus'),
+            'linkRelationship' => $this->getTranslationAPI()->__('Link relationship (XFN)', 'menus'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -134,10 +134,10 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $menuItem = $object;
         switch ($fieldName) {
             case 'children':
-                return array_keys($this->menuItemRuntimeRegistry->getMenuItemChildren($objectTypeResolver->getID($menuItem)));
+                return array_keys($this->getMenuItemRuntimeRegistry()->getMenuItemChildren($objectTypeResolver->getID($menuItem)));
             case 'localURLPath':
                 $url = $menuItem->url;
-                $pathURL = $this->cmsHelperService->getLocalURLPath($url);
+                $pathURL = $this->getCmsHelperService()->getLocalURLPath($url);
                 if ($pathURL === false) {
                     return null;
                 }

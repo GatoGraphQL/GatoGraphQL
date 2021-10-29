@@ -75,6 +75,6 @@ class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurat
 
     protected function getBlock(): BlockInterface
     {
-        return $this->schemaConfigMutationSchemeBlock;
+        return $this->getSchemaConfigMutationSchemeBlock();
     }
 }

@@ -54,8 +54,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'sites' => $this->translationAPI->__('All websites', 'multisite'),
-            'site' => $this->translationAPI->__('This website', 'multisite'),
+            'sites' => $this->getTranslationAPI()->__('All websites', 'multisite'),
+            'site' => $this->getTranslationAPI()->__('This website', 'multisite'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -79,10 +79,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'sites':
                 return [
-                    $this->site->getID(),
+                    $this->getSite()->getID(),
                 ];
             case 'site':
-                return $this->site->getID();
+                return $this->getSite()->getID();
         }
 
             return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
@@ -93,7 +93,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'sites',
             'site' =>
-                $this->siteObjectTypeResolver,
+                $this->getSiteObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

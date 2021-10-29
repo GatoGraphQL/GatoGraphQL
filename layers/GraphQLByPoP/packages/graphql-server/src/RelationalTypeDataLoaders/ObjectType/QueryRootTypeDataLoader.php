@@ -22,7 +22,7 @@ class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
     public function getObjects(array $ids): array
     {
         return [
-            $this->queryRoot,
+            $this->getQueryRoot(),
         ];
     }
 }

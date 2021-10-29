@@ -56,11 +56,11 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'stances' => $this->stanceObjectTypeResolver,
-            'hasStances' => $this->booleanScalarTypeResolver,
-            'stanceProCount' => $this->intScalarTypeResolver,
-            'stanceNeutralCount' => $this->intScalarTypeResolver,
-            'stanceAgainstCount' => $this->intScalarTypeResolver,
+            'stances' => $this->getStanceObjectTypeResolver(),
+            'hasStances' => $this->getBooleanScalarTypeResolver(),
+            'stanceProCount' => $this->getIntScalarTypeResolver(),
+            'stanceNeutralCount' => $this->getIntScalarTypeResolver(),
+            'stanceAgainstCount' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -83,11 +83,11 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'stances' => $this->translationAPI->__('', ''),
-            'hasStances' => $this->translationAPI->__('', ''),
-            'stanceProCount' => $this->translationAPI->__('', ''),
-            'stanceNeutralCount' => $this->translationAPI->__('', ''),
-            'stanceAgainstCount' => $this->translationAPI->__('', ''),
+            'stances' => $this->getTranslationAPI()->__('', ''),
+            'hasStances' => $this->getTranslationAPI()->__('', ''),
+            'stanceProCount' => $this->getTranslationAPI()->__('', ''),
+            'stanceNeutralCount' => $this->getTranslationAPI()->__('', ''),
+            'stanceAgainstCount' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -113,7 +113,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'stances':
                 $query = array(
                     'limit' => ComponentConfiguration::getStanceListDefaultLimit(),
-                    'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:customposts:date'),
+                    'orderby' => $this->getNameResolver()->getName('popcms:dbcolumn:orderby:customposts:date'),
                     'order' => 'ASC',
                 );
                 \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $objectTypeResolver->getID($customPost));

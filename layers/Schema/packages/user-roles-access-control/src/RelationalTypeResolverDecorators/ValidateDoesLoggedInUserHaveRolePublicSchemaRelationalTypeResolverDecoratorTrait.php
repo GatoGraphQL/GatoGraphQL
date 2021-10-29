@@ -27,7 +27,7 @@ trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecorato
         $roles = $entryValue;
         $directiveResolver = $this->getValidateRoleDirectiveResolver();
         $directiveName = $directiveResolver->getDirectiveName();
-        $validateDoesLoggedInUserHaveAnyRoleDirective = $this->fieldQueryInterpreter->getDirective(
+        $validateDoesLoggedInUserHaveAnyRoleDirective = $this->getFieldQueryInterpreter()->getDirective(
             $directiveName,
             [
                 'roles' => $roles,

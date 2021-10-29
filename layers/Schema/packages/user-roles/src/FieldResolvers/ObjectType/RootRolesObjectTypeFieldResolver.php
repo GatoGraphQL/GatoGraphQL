@@ -61,9 +61,9 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         switch ($fieldName) {
             case 'roles':
-                return $this->userRoleTypeAPI->getRoleNames();
+                return $this->getUserRoleTypeAPI()->getRoleNames();
             case 'capabilities':
-                return $this->userRoleTypeAPI->getCapabilities();
+                return $this->getUserRoleTypeAPI()->getCapabilities();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

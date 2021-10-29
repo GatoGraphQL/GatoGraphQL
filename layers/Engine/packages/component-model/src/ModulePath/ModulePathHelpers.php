@@ -20,7 +20,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
 
     public function getStringifiedModulePropagationCurrentPath(array $module)
     {
-        $module_propagation_current_path = $this->modulePathManager->getPropagationCurrentPath();
+        $module_propagation_current_path = $this->getModulePathManager()->getPropagationCurrentPath();
         $module_propagation_current_path[] = $module;
         return $this->stringifyModulePath($module_propagation_current_path);
     }

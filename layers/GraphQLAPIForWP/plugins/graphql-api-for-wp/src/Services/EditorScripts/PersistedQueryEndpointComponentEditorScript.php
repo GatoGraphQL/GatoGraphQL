@@ -80,7 +80,7 @@ class PersistedQueryEndpointComponentEditorScript extends AbstractEditorScript
         return array_merge(
             parent::getAllowedPostTypes(),
             [
-                $this->graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
+                $this->getGraphQLPersistedQueryEndpointCustomPostType()->getCustomPostType(),
             ]
         );
     }

@@ -38,7 +38,7 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHookSet 
      */
     protected function getConfigurationEntries(): array
     {
-        return $this->accessControlManager->getEntriesForFields(AccessControlGroups::CAPABILITIES);
+        return $this->getAccessControlManager()->getEntriesForFields(AccessControlGroups::CAPABILITIES);
     }
 
     /**

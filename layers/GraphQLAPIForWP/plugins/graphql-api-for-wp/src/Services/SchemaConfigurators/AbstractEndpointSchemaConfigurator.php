@@ -30,7 +30,7 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
      */
     public function isServiceEnabled(): bool
     {
-        return $this->moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION);
+        return $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION);
     }
 
     /**

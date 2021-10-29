@@ -178,7 +178,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
      */
     protected function isAccessForbidden(): bool
     {
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             Hooks::FORBID_ACCESS,
             false
         );
@@ -217,7 +217,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
      */
     public function getOptionsBlockDataItem(WP_Post|int $postOrID): ?array
     {
-        return $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        return $this->getBlockHelpers()->getSingleBlockOfTypeFromCustomPost(
             $postOrID,
             $this->getEndpointOptionsBlock()
         );

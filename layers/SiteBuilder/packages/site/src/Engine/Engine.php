@@ -22,7 +22,7 @@ class Engine extends UpstreamEngine
     public function outputResponse(): void
     {
         // If doing JSON, the response from the parent is already adequate
-        if ($this->applicationStateHelperService->doingJSON()) {
+        if ($this->getApplicationStateHelperService()->doingJSON()) {
             parent::outputResponse();
             return;
         }

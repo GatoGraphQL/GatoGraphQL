@@ -21,6 +21,6 @@ class PageTypeDataLoader extends AbstractCustomPostTypeDataLoader
 
     public function executeQuery($query, array $options = []): array
     {
-        return $this->pageTypeAPI->getPages($query, $options);
+        return $this->getPageTypeAPI()->getPages($query, $options);
     }
 }

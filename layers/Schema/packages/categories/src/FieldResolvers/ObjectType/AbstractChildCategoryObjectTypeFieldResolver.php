@@ -49,8 +49,8 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     {
         return match ($fieldName) {
             'childCategory' => $this->getCategoryTypeResolver(),
-            'childCategoryCount' => $this->intScalarTypeResolver,
-            'childCategoryNames' => $this->stringScalarTypeResolver,
+            'childCategoryCount' => $this->getIntScalarTypeResolver(),
+            'childCategoryNames' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -71,9 +71,9 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'childCategories' => $this->translationAPI->__('Post categories', 'child-categories'),
-            'childCategoryCount' => $this->translationAPI->__('Number of post categories', 'child-categories'),
-            'childCategoryNames' => $this->translationAPI->__('Names of the post categories', 'child-categories'),
+            'childCategories' => $this->getTranslationAPI()->__('Post categories', 'child-categories'),
+            'childCategoryCount' => $this->getTranslationAPI()->__('Number of post categories', 'child-categories'),
+            'childCategoryNames' => $this->getTranslationAPI()->__('Names of the post categories', 'child-categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

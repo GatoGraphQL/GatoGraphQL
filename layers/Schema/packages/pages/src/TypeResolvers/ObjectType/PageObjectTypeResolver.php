@@ -31,17 +31,17 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Representation of a page', 'pages');
+        return $this->getTranslationAPI()->__('Representation of a page', 'pages');
     }
 
     public function getID(object $object): string | int | null
     {
         $page = $object;
-        return $this->pageTypeAPI->getPageId($page);
+        return $this->getPageTypeAPI()->getPageId($page);
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->pageTypeDataLoader;
+        return $this->getPageTypeDataLoader();
     }
 }

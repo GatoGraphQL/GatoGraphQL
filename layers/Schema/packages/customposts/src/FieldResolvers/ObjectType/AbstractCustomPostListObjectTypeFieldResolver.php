@@ -59,8 +59,8 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         return match ($fieldName) {
             'customPosts' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
             'customPostsForAdmin' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
-            'customPostCount' => $this->intScalarTypeResolver,
-            'customPostCountForAdmin' => $this->intScalarTypeResolver,
+            'customPostCount' => $this->getIntScalarTypeResolver(),
+            'customPostCountForAdmin' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -82,10 +82,10 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'customPosts' => $this->translationAPI->__('Custom posts', 'pop-posts'),
-            'customPostCount' => $this->translationAPI->__('Number of custom posts', 'pop-posts'),
-            'customPostsForAdmin' => $this->translationAPI->__('[Unrestricted] Custom posts', 'pop-posts'),
-            'customPostCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of custom posts', 'pop-posts'),
+            'customPosts' => $this->getTranslationAPI()->__('Custom posts', 'pop-posts'),
+            'customPostCount' => $this->getTranslationAPI()->__('Number of custom posts', 'pop-posts'),
+            'customPostsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Custom posts', 'pop-posts'),
+            'customPostCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of custom posts', 'pop-posts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -202,11 +202,11 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         switch ($fieldName) {
             case 'customPosts':
             case 'customPostsForAdmin':
-                return $this->customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'customPostCount':
             case 'customPostCountForAdmin':
-                return $this->customPostTypeAPI->getCustomPostCount($query);
+                return $this->getCustomPostTypeAPI()->getCustomPostCount($query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

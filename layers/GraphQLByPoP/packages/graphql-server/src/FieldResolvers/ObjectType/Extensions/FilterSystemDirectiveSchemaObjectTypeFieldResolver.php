@@ -62,7 +62,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     // public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     // {
     //     $descriptions = [
-    //         'directives' => $this->translationAPI->__('All directives registered in the data graph, allowing to remove the system directives', 'graphql-api'),
+    //         'directives' => $this->getTranslationAPI()->__('All directives registered in the data graph, allowing to remove the system directives', 'graphql-api'),
     //     ];
     //     return $descriptions[$fieldName] ?? parent::getFieldDescription($objectTypeResolver, $fieldName);
     // }
@@ -71,7 +71,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     {
         return match ($fieldName) {
             'directives' => [
-                'ofTypes' => $this->directiveTypeEnumTypeResolver,
+                'ofTypes' => $this->getDirectiveTypeEnumTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -80,7 +80,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['directives' => 'ofTypes'] => $this->translationAPI->__('Include only directives of provided types', 'graphql-api'),
+            ['directives' => 'ofTypes'] => $this->getTranslationAPI()->__('Include only directives of provided types', 'graphql-api'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -115,7 +115,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
                 $directiveIDs = $schema->getDirectiveIDs();
                 if ($ofTypes = $fieldArgs['ofTypes'] ?? null) {
                     $ofTypeDirectiveResolvers = array_filter(
-                        $this->directiveRegistry->getDirectiveResolvers(),
+                        $this->getDirectiveRegistry()->getDirectiveResolvers(),
                         fn (DirectiveResolverInterface $directiveResolver) => in_array($directiveResolver->getDirectiveType(), $ofTypes)
                     );
                     // Calculate the directive IDs

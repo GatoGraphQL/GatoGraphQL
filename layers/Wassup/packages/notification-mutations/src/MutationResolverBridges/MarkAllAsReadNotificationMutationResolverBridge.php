@@ -23,7 +23,7 @@ class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentM
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->markAllAsReadNotificationMutationResolver;
+        return $this->getMarkAllAsReadNotificationMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

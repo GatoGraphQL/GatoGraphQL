@@ -20,8 +20,8 @@ abstract class AbstractDisableAccessConfigurableAccessControlForFieldsInPublicSc
 
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
-        $disableAccessDirective = $this->fieldQueryInterpreter->getDirective(
-            $this->disableAccessDirectiveResolver->getDirectiveName()
+        $disableAccessDirective = $this->getFieldQueryInterpreter()->getDirective(
+            $this->getDisableAccessDirectiveResolver()->getDirectiveName()
         );
         return [
             $disableAccessDirective,

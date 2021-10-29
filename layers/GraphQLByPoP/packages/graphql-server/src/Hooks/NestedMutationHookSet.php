@@ -27,7 +27,7 @@ class NestedMutationHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             HookHelpers::getHookNameToFilterField(),
             array($this, 'maybeFilterFieldName'),
             10,
@@ -60,8 +60,8 @@ class NestedMutationHookSet extends AbstractHookSet
         if (
             $include
             && (
-                $objectTypeResolver !== $this->graphQLSchemaDefinitionService->getRootObjectTypeResolver()
-                && $objectTypeResolver !== $this->graphQLSchemaDefinitionService->getMutationRootObjectTypeResolver()
+                $objectTypeResolver !== $this->getGraphQLSchemaDefinitionService()->getRootObjectTypeResolver()
+                && $objectTypeResolver !== $this->getGraphQLSchemaDefinitionService()->getMutationRootObjectTypeResolver()
             )
             && $objectTypeFieldResolver->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null
         ) {

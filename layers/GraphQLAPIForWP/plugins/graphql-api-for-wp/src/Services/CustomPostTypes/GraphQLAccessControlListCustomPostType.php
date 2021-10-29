@@ -81,7 +81,7 @@ class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
     protected function getGutenbergTemplate(): array
     {
         return [
-            [$this->accessControlBlock->getBlockFullName()],
+            [$this->getAccessControlBlock()->getBlockFullName()],
         ];
     }
 
@@ -92,10 +92,10 @@ class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
      */
     protected function getGutenbergBlocksForCustomPostType(): array
     {
-        $aclNestedBlocks = $this->accessControlRuleBlockRegistry->getAccessControlRuleBlocks();
+        $aclNestedBlocks = $this->getAccessControlRuleBlockRegistry()->getAccessControlRuleBlocks();
         return array_merge(
             [
-                $this->accessControlBlock->getBlockFullName(),
+                $this->getAccessControlBlock()->getBlockFullName(),
             ],
             array_map(
                 fn ($aclNestedBlock) => $aclNestedBlock->getBlockFullName(),

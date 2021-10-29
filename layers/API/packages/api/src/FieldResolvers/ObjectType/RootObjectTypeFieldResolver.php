@@ -68,7 +68,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'fullSchema' => $this->jsonObjectScalarTypeResolver,
+            'fullSchema' => $this->getJsonObjectScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -84,7 +84,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'fullSchema' => $this->translationAPI->__('The whole API schema, exposing what fields can be queried', 'api'),
+            'fullSchema' => $this->getTranslationAPI()->__('The whole API schema, exposing what fields can be queried', 'api'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -108,7 +108,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'fullSchema':
                 // Convert from array to stdClass
                 /** @var SchemaDefinitionServiceInterface */
-                $schemaDefinitionService = $this->schemaDefinitionService;
+                $schemaDefinitionService = $this->getSchemaDefinitionService();
                 return (object) $schemaDefinitionService->getFullSchemaDefinition();
         }
 

@@ -66,14 +66,14 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'commentCount'
-                => $this->intScalarTypeResolver,
+                => $this->getIntScalarTypeResolver(),
             'commentCountForAdmin'
-                => $this->intScalarTypeResolver,
+                => $this->getIntScalarTypeResolver(),
             'comment',
             'comments',
             'commentForAdmin',
             'commentsForAdmin'
-                => $this->commentObjectTypeResolver,
+                => $this->getCommentObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -111,7 +111,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
                 ]);
                 if ($fieldArgName === $orderFilterInputName) {
-                    $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
+                    $orderBy = $this->getNameResolver()->getName('popcms:dbcolumn:orderby:comments:date');
                     $order = 'DESC';
                     return $orderBy . OrderFormInput::SEPARATOR . $order;
                 }
@@ -160,12 +160,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'comment' => $this->translationAPI->__('Comment with a specific ID', 'pop-comments'),
-            'commentCount' => $this->translationAPI->__('Number of comments on the site', 'pop-comments'),
-            'comments' => $this->translationAPI->__('Comments on the site', 'pop-comments'),
-            'commentForAdmin' => $this->translationAPI->__('[Unrestricted] Comment with a specific ID', 'pop-comments'),
-            'commentCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of comments on the site', 'pop-comments'),
-            'commentsForAdmin' => $this->translationAPI->__('[Unrestricted] Comments on the site', 'pop-comments'),
+            'comment' => $this->getTranslationAPI()->__('Comment with a specific ID', 'pop-comments'),
+            'commentCount' => $this->getTranslationAPI()->__('Number of comments on the site', 'pop-comments'),
+            'comments' => $this->getTranslationAPI()->__('Comments on the site', 'pop-comments'),
+            'commentForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Comment with a specific ID', 'pop-comments'),
+            'commentCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of comments on the site', 'pop-comments'),
+            'commentsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Comments on the site', 'pop-comments'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -202,11 +202,11 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         switch ($fieldName) {
             case 'commentCount':
             case 'commentCountForAdmin':
-                return $this->commentTypeAPI->getCommentCount($query);
+                return $this->getCommentTypeAPI()->getCommentCount($query);
 
             case 'comments':
             case 'commentsForAdmin':
-                return $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getCommentTypeAPI()->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'comment':
             case 'commentForAdmin':
@@ -224,7 +224,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                  *   ```
                  */
                 $query['custompost-types'] = CustomPostUnionTypeHelpers::getTargetObjectTypeResolverCustomPostTypes();
-                if ($comments = $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($comments = $this->getCommentTypeAPI()->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $comments[0];
                 }
                 return null;

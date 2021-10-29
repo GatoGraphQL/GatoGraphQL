@@ -21,7 +21,7 @@ class DownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateU
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->downvoteCustomPostMutationResolver;
+        return $this->getDownvoteCustomPostMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool
@@ -32,8 +32,8 @@ class DownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateU
     public function getSuccessString(string | int $result_id): ?string
     {
         return sprintf(
-            $this->translationAPI->__('You have down-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $this->customPostTypeAPI->getTitle($result_id)
+            $this->getTranslationAPI()->__('You have down-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->getCustomPostTypeAPI()->getTitle($result_id)
         );
     }
 }

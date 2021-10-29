@@ -21,10 +21,10 @@ class InstallSystemMutationResolverBridge extends AbstractSystemComponentMutatio
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->installSystemMutationResolver;
+        return $this->getInstallSystemMutationResolver();
     }
     public function getSuccessString(string | int $result_id): ?string
     {
-        return $this->translationAPI->__('System action "install" executed successfully.', 'pop-system');
+        return $this->getTranslationAPI()->__('System action "install" executed successfully.', 'pop-system');
     }
 }

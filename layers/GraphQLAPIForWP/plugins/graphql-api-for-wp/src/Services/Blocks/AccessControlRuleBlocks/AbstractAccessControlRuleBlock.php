@@ -28,6 +28,6 @@ abstract class AbstractAccessControlRuleBlock extends AbstractBlock
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->accessControlBlockCategory;
+        return $this->getAccessControlBlockCategory();
     }
 }

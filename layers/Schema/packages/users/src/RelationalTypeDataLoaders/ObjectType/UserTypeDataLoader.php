@@ -30,7 +30,7 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 
     protected function getOrderbyDefault()
     {
-        return $this->nameResolver->getName('popcms:dbcolumn:orderby:users:name');
+        return $this->getNameResolver()->getName('popcms:dbcolumn:orderby:users:name');
     }
 
     protected function getOrderDefault()
@@ -46,7 +46,7 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 
     public function executeQuery($query, array $options = []): array
     {
-        return $this->userTypeAPI->getUsers($query, $options);
+        return $this->getUserTypeAPI()->getUsers($query, $options);
     }
 
     public function executeQueryIDs($query): array

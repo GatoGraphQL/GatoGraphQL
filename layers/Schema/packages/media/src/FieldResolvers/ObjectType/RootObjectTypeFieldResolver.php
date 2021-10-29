@@ -61,9 +61,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'mediaItem' => $this->translationAPI->__('Get a media item', 'media'),
-            'mediaItems' => $this->translationAPI->__('Get the media items', 'media'),
-            'mediaItemCount' => $this->translationAPI->__('Number of media items', 'media'),
+            'mediaItem' => $this->getTranslationAPI()->__('Get a media item', 'media'),
+            'mediaItems' => $this->getTranslationAPI()->__('Get the media items', 'media'),
+            'mediaItemCount' => $this->getTranslationAPI()->__('Number of media items', 'media'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -73,9 +73,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return match ($fieldName) {
             'mediaItems',
             'mediaItem'
-                => $this->mediaObjectTypeResolver,
+                => $this->getMediaObjectTypeResolver(),
             'mediaItemCount'
-                => $this->intScalarTypeResolver,
+                => $this->getIntScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -183,11 +183,11 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'mediaItemCount':
-                return $this->mediaTypeAPI->getMediaItemCount($query);
+                return $this->getMediaTypeAPI()->getMediaItemCount($query);
             case 'mediaItems':
-                return $this->mediaTypeAPI->getMediaItems($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getMediaTypeAPI()->getMediaItems($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'mediaItem':
-                if ($mediaItems = $this->mediaTypeAPI->getMediaItems($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($mediaItems = $this->getMediaTypeAPI()->getMediaItems($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $mediaItems[0];
                 }
                 return null;

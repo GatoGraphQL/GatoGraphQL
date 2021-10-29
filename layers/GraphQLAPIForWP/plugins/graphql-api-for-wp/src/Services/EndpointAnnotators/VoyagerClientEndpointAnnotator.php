@@ -56,6 +56,6 @@ class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator imp
 
     protected function getBlock(): BlockInterface
     {
-        return $this->endpointVoyagerBlock;
+        return $this->getEndpointVoyagerBlock();
     }
 }

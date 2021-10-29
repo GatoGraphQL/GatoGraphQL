@@ -37,7 +37,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->translationAPI->__('Iterate all affected array items and execute the composed directives on them', 'component-model');
+        return $this->getTranslationAPI()->__('Iterate all affected array items and execute the composed directives on them', 'component-model');
     }
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
@@ -45,7 +45,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
         return array_merge(
             parent::getDirectiveArgNameTypeResolvers($relationalTypeResolver),
             [
-                'if' => $this->booleanScalarTypeResolver,
+                'if' => $this->getBooleanScalarTypeResolver(),
             ]
         );
     }
@@ -53,7 +53,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'if' => $this->translationAPI->__('If provided, iterate only those items that satisfy this condition `%s`', 'component-model'),
+            'if' => $this->getTranslationAPI()->__('If provided, iterate only those items that satisfy this condition `%s`', 'component-model'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }
@@ -61,8 +61,8 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
     public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            Expressions::NAME_KEY => $this->translationAPI->__('Key of the array element from the current iteration', 'component-model'),
-            Expressions::NAME_VALUE => $this->translationAPI->__('Value of the array element from the current iteration', 'component-model'),
+            Expressions::NAME_KEY => $this->getTranslationAPI()->__('Key of the array element from the current iteration', 'component-model'),
+            Expressions::NAME_VALUE => $this->getTranslationAPI()->__('Value of the array element from the current iteration', 'component-model'),
         ];
     }
 
@@ -75,7 +75,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
             // If it is a field, execute the function against all the values in the array
             // Those that satisfy the condition stay, the others are filtered out
             // We must add each item in the array as expression `%value%`, over which the if function can be evaluated
-            if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($if)) {
+            if ($this->getFieldQueryInterpreter()->isFieldArgumentValueAField($if)) {
                 $options = [
                     AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
                 ];
@@ -86,7 +86,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
                     $expressions = $this->getExpressionsForObject($id, $variables, $messages);
                     $resolvedValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $if, $variables, $expressions, $options);
                     // Merge the objectWarnings, if any
-                    if ($storedObjectWarnings = $this->feedbackMessageStore->retrieveAndClearObjectWarnings($id)) {
+                    if ($storedObjectWarnings = $this->getFeedbackMessageStore()->retrieveAndClearObjectWarnings($id)) {
                         $objectWarnings[$id] = array_merge(
                             $objectWarnings[$id] ?? [],
                             $storedObjectWarnings
@@ -99,7 +99,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
                         $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $this->translationAPI->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),
+                                $this->getTranslationAPI()->__('Executing field \'%s\' on object with ID \'%s\' produced error: %s. Setting expression \'%s\' was ignored', 'pop-component-model'),
                                 $field,
                                 $id,
                                 $error->getMessageOrCode(),

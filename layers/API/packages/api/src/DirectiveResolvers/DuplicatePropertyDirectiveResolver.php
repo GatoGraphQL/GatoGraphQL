@@ -46,20 +46,20 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->translationAPI->__('Duplicate a property in the current object', 'component-model');
+        return $this->getTranslationAPI()->__('Duplicate a property in the current object', 'component-model');
     }
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            'to' => $this->stringScalarTypeResolver,
+            'to' => $this->getStringScalarTypeResolver(),
         ];
     }
 
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'to' => $this->translationAPI->__('The new property name', 'component-model'),
+            'to' => $this->getTranslationAPI()->__('The new property name', 'component-model'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }
@@ -103,12 +103,12 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
                 /**
                  * The data is stored under the field's output key (not the unique one!)
                  */
-                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($field);
                 if (!array_key_exists($fieldOutputKey, $dbItems[(string)$id])) {
                     $objectWarnings[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
-                            $this->translationAPI->__('Property \'%s\' doesn\'t exist in object with ID \'%s\', so it can\'t be copied to \'%s\''),
+                            $this->getTranslationAPI()->__('Property \'%s\' doesn\'t exist in object with ID \'%s\', so it can\'t be copied to \'%s\''),
                             $fieldOutputKey,
                             $id,
                             $copyTo

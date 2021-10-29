@@ -31,7 +31,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
 
     public function getMenuPageSlug(): string
     {
-        return $this->modulesMenuPage->getMenuPageSlug();
+        return $this->getModulesMenuPage()->getMenuPageSlug();
     }
 
     /**
@@ -39,7 +39,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
      */
     protected function isCurrentScreen(): bool
     {
-        return $this->menuPageHelper->isDocumentationScreen() && parent::isCurrentScreen();
+        return $this->getMenuPageHelper()->isDocumentationScreen() && parent::isCurrentScreen();
     }
 
     protected function openInModalWindow(): bool
@@ -61,7 +61,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
         parse_str($_SERVER['REQUEST_URI'], $vars);
         $module = urldecode($vars[RequestParams::MODULE]);
         try {
-            $moduleResolver = $this->moduleRegistry->getModuleResolver($module);
+            $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
         } catch (InvalidArgumentException) {
             return sprintf(
                 '<p>%s</p>',

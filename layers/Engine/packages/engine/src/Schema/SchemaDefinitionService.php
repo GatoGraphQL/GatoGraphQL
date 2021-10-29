@@ -27,7 +27,7 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
         AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver,
         TranslationAPIInterface $translationAPI,
     ): void {
-        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+        $this->getRoot()ObjectTypeResolver = $rootObjectTypeResolver;
         $this->instanceManager = $instanceManager;
         $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
         $this->translationAPI = $translationAPI;
@@ -35,7 +35,7 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
 
     public function getRootObjectTypeResolver(): ObjectTypeResolverInterface
     {
-        return $this->rootObjectTypeResolver;
+        return $this->getRoot()ObjectTypeResolver;
     }
 
     /**
@@ -45,7 +45,7 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
      */
     public function getDefaultConcreteTypeResolver(): ConcreteTypeResolverInterface
     {
-        return $this->anyBuiltInScalarScalarTypeResolver;
+        return $this->getAnyBuiltInScalarScalarTypeResolver();
     }
     /**
      * The `AnyBuiltInScalar` type is a wildcard type,
@@ -54,6 +54,6 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
      */
     public function getDefaultInputTypeResolver(): InputTypeResolverInterface
     {
-        return $this->anyBuiltInScalarScalarTypeResolver;
+        return $this->getAnyBuiltInScalarScalarTypeResolver();
     }
 }

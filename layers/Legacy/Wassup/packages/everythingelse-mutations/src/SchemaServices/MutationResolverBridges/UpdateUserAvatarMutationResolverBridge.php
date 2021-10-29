@@ -23,7 +23,7 @@ class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationRe
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->updateUserAvatarMutationResolver;
+        return $this->getUpdateUserAvatarMutationResolver();
     }
 
     public function getFormData(): array

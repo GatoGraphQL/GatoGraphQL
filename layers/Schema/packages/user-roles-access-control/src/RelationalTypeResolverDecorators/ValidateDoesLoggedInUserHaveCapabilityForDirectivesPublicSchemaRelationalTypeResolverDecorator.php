@@ -25,11 +25,11 @@ class ValidateDoesLoggedInUserHaveCapabilityForDirectivesPublicSchemaRelationalT
 
     protected function getConfigurationEntries(): array
     {
-        return $this->accessControlManager->getEntriesForDirectives(AccessControlGroups::CAPABILITIES);
+        return $this->getAccessControlManager()->getEntriesForDirectives(AccessControlGroups::CAPABILITIES);
     }
 
     protected function getValidateCapabilityDirectiveResolver(): DirectiveResolverInterface
     {
-        return $this->validateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver;
+        return $this->getValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver();
     }
 }

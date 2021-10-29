@@ -26,7 +26,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
         EndpointHelpers $endpointHelpers,
     ): void {
         $this->endpointHelpers = $endpointHelpers;
-        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
+        $this->getUserSettingsManager() = UserSettingsManagerFacade::getInstance();
     }
 
     /**
@@ -47,7 +47,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
         $suffix = \is_admin() ?
             // The WordPress editor can access the full GraphQL schema,
             // including "admin" fields, so cache it individually
-            'a' . ($this->endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint() ? 'u' : 'c')
+            'a' . ($this->getEndpointHelpers()->isRequestingAdminFixedSchemaGraphQLEndpoint() ? 'u' : 'c')
             : 'c';
         $timestamp .= '_' . $suffix;
         return $timestamp;

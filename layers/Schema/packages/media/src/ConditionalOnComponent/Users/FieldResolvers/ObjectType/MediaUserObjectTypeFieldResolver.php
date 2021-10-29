@@ -43,7 +43,7 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'author' => $this->translationAPI->__('Media element\'s author', 'pop-media'),
+            'author' => $this->getTranslationAPI()->__('Media element\'s author', 'pop-media'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -65,7 +65,7 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         $media = $object;
         return match ($fieldName) {
-            'author' => $this->userMediaTypeAPI->getMediaAuthorId($media),
+            'author' => $this->getUserMediaTypeAPI()->getMediaAuthorId($media),
             default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options),
         };
     }
@@ -73,7 +73,7 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'author' => $this->userObjectTypeResolver,
+            'author' => $this->getUserObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

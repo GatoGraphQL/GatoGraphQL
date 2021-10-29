@@ -61,12 +61,12 @@ class DataloadHelperService implements DataloadHelperServiceInterface
             // 2. No FieldDefaultTypeDataLoader
             if ($objectTypeResolver->hasObjectTypeFieldResolversForField($subcomponent_data_field)) {
                 // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-                $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($subcomponent_data_field);
-                $this->feedbackMessageStore->addSchemaError(
+                $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($subcomponent_data_field);
+                $this->getFeedbackMessageStore()->addSchemaError(
                     $objectTypeResolver->getTypeOutputDBKey(),
                     $subcomponent_data_field_outputkey,
                     sprintf(
-                        $this->translationAPI->__('Field \'%s\' is not a connection', 'pop-component-model'),
+                        $this->getTranslationAPI()->__('Field \'%s\' is not a connection', 'pop-component-model'),
                         $subcomponent_data_field_outputkey
                     )
                 );
@@ -86,7 +86,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
             $module = $moduleValue['module'];
             $value = $moduleValue['value'];
             /** @var FormComponentModuleProcessorInterface */
-            $moduleprocessor = $this->moduleProcessorManager->getProcessor($module);
+            $moduleprocessor = $this->getModuleProcessorManager()->getProcessor($module);
             $args[$moduleprocessor->getName($module)] = $value;
         }
         return GeneralUtils::addQueryArgs($args, $url);

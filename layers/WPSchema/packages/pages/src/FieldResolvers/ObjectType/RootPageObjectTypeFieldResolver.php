@@ -53,8 +53,8 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'pageByPath' => $this->translationAPI->__('Page with a specific URL path', 'pages'),
-            'pageByPathForAdmin' => $this->translationAPI->__('[Unrestricted] Page with a specific URL path', 'pages'),
+            'pageByPath' => $this->getTranslationAPI()->__('Page with a specific URL path', 'pages'),
+            'pageByPathForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Page with a specific URL path', 'pages'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -64,7 +64,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
         return match ($fieldName) {
             'pageByPath',
             'pageByPathForAdmin' => [
-                'path' => $this->stringScalarTypeResolver,
+                'path' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -73,7 +73,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldArgName) {
-            'path' => $this->translationAPI->__('The page URL path', 'pages'),
+            'path' => $this->getTranslationAPI()->__('The page URL path', 'pages'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -126,7 +126,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
         return match ($fieldName) {
             'pageByPath',
             'pageByPathForAdmin'
-                => $this->pageObjectTypeResolver,
+                => $this->getPageObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

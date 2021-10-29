@@ -24,7 +24,7 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
         EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
     ): void {
         $this->endpointSchemaConfigurationBlock = $endpointSchemaConfigurationBlock;
-        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
+        $this->getUserSettingsManager() = UserSettingsManagerFacade::getInstance();
     }
 
     /**
@@ -32,9 +32,9 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
      */
     protected function getSchemaConfigurationID(int $customPostID): ?int
     {
-        $schemaConfigurationBlockDataItem = $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        $schemaConfigurationBlockDataItem = $this->getBlockHelpers()->getSingleBlockOfTypeFromCustomPost(
             $customPostID,
-            $this->endpointSchemaConfigurationBlock
+            $this->getEndpointSchemaConfigurationBlock()
         );
         // If there was no schema configuration, then the default one has been selected
         // It is not saved in the DB, because it has been set as the default value in
@@ -51,7 +51,7 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
             return $this->getUserSettingSchemaConfigurationID();
         } elseif ($schemaConfiguration == EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT) {
             // If disabled by module, then return nothing
-            if (!$this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY)) {
+            if (!$this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY)) {
                 return null;
             }
             // Return the schema configuration from the parent, or null if no parent exists
@@ -74,7 +74,7 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
      */
     protected function getUserSettingSchemaConfigurationID(): ?int
     {
-        $schemaConfigurationID = $this->userSettingsManager->getSetting(
+        $schemaConfigurationID = $this->getUserSettingsManager()->getSetting(
             SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
             ModuleSettingOptions::DEFAULT_VALUE
         );

@@ -28,14 +28,14 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
      */
     protected function getCustomPostID(): ?int
     {
-        if ($this->endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint()) {
-            return (int) $this->endpointHelpers->getAdminPersistedQueryCustomPostID();
+        if ($this->getEndpointHelpers()->isRequestingAdminPersistedQueryGraphQLEndpoint()) {
+            return (int) $this->getEndpointHelpers()->getAdminPersistedQueryCustomPostID();
         }
         return null;
     }
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
     {
-        return $this->persistedQueryEndpointSchemaConfigurator;
+        return $this->getPersistedQueryEndpointSchemaConfigurator();
     }
 }

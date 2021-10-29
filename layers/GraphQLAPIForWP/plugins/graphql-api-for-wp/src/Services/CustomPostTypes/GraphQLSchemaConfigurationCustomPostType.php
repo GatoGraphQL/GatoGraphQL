@@ -84,6 +84,6 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
 
     protected function getBlockRegistry(): BlockRegistryInterface
     {
-        return $this->schemaConfigBlockRegistry;
+        return $this->getSchemaConfigBlockRegistry();
     }
 }

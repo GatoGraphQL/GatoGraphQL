@@ -40,8 +40,8 @@ class GlobalValidateIsUserLoggedInForDirectivesPublicSchemaRelationalTypeResolve
     protected function getDirectiveResolvers(): array
     {
         return [
-            $this->validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver,
-            $this->validateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver,
+            $this->getValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver(),
+            $this->getValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver(),
         ];
     }
 }

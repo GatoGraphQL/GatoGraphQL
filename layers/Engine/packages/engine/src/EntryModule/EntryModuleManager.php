@@ -21,6 +21,6 @@ class EntryModuleManager implements EntryModuleManagerInterface
 
     public function getEntryModule(): ?array
     {
-        return $this->routeModuleProcessorManager->getRouteModuleByMostAllmatchingVarsProperties(ModuleRoutingGroups::ENTRYMODULE);
+        return $this->getRouteModuleProcessorManager()->getRouteModuleByMostAllmatchingVarsProperties(ModuleRoutingGroups::ENTRYMODULE);
     }
 }

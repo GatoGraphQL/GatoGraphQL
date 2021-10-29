@@ -61,7 +61,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         return match ($fieldName) {
             'myCustomPosts' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
             'myCustomPost' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
-            'myCustomPostCount' => $this->intScalarTypeResolver,
+            'myCustomPostCount' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -78,9 +78,9 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'myCustomPosts' => $this->translationAPI->__('Custom posts by the logged-in user', 'custompost-mutations'),
-            'myCustomPostCount' => $this->translationAPI->__('Number of custom posts by the logged-in user', 'custompost-mutations'),
-            'myCustomPost' => $this->translationAPI->__('Custom post with a specific ID', 'custompost-mutations'),
+            'myCustomPosts' => $this->getTranslationAPI()->__('Custom posts by the logged-in user', 'custompost-mutations'),
+            'myCustomPostCount' => $this->getTranslationAPI()->__('Number of custom posts by the logged-in user', 'custompost-mutations'),
+            'myCustomPost' => $this->getTranslationAPI()->__('Custom post with a specific ID', 'custompost-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -191,13 +191,13 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         );
         switch ($fieldName) {
             case 'myCustomPostCount':
-                return $this->postTypeAPI->getCustomPostCount($query);
+                return $this->getPostTypeAPI()->getCustomPostCount($query);
 
             case 'myCustomPosts':
-                return $this->postTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'myCustomPost':
-                if ($customPosts = $this->postTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($customPosts = $this->getPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $customPosts[0];
                 }
                 return null;

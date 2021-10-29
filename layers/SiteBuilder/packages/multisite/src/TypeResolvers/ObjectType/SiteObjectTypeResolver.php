@@ -18,7 +18,7 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
     final public function autowireSiteObjectTypeResolver(
         SiteTypeDataLoader $siteTypeDataLoader,
     ): void {
-        $this->siteTypeDataLoader = $siteTypeDataLoader;
+        $this->getSite()TypeDataLoader = $siteTypeDataLoader;
     }
 
     public function getTypeName(): string
@@ -28,7 +28,7 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Obtain properties belonging to the site (name, domain, configuration options, etc)', 'multisite');
+        return $this->getTranslationAPI()->__('Obtain properties belonging to the site (name, domain, configuration options, etc)', 'multisite');
     }
 
     public function getID(object $object): string | int | null
@@ -40,6 +40,6 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->siteTypeDataLoader;
+        return $this->getSite()TypeDataLoader;
     }
 }

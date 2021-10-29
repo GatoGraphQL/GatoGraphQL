@@ -28,6 +28,6 @@ abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
         }
 
         /** @var string */
-        return $this->cmsHelperService->getLocalURLPath($permalink);
+        return $this->getCmsHelperService()->getLocalURLPath($permalink);
     }
 }

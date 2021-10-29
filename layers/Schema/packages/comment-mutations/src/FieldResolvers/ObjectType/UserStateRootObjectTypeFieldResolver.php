@@ -64,10 +64,10 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     {
         return match ($fieldName) {
             'myCommentCount'
-                => $this->intScalarTypeResolver,
+                => $this->getIntScalarTypeResolver(),
             'myComments',
             'myComment'
-                => $this->commentObjectTypeResolver,
+                => $this->getCommentObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -102,7 +102,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
                 ]);
                 if ($fieldArgName === $orderFilterInputName) {
-                    $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
+                    $orderBy = $this->getNameResolver()->getName('popcms:dbcolumn:orderby:comments:date');
                     $order = 'DESC';
                     return $orderBy . OrderFormInput::SEPARATOR . $order;
                 }
@@ -150,9 +150,9 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'myComment' => $this->translationAPI->__('Comment by the logged-in user on the site with a specific ID', 'pop-comments'),
-            'myCommentCount' => $this->translationAPI->__('Number of comments by the logged-in user on the site', 'pop-comments'),
-            'myComments' => $this->translationAPI->__('Comments by the logged-in user on the site', 'pop-comments'),
+            'myComment' => $this->getTranslationAPI()->__('Comment by the logged-in user on the site with a specific ID', 'pop-comments'),
+            'myCommentCount' => $this->getTranslationAPI()->__('Number of comments by the logged-in user on the site', 'pop-comments'),
+            'myComments' => $this->getTranslationAPI()->__('Comments by the logged-in user on the site', 'pop-comments'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -191,11 +191,11 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         );
         switch ($fieldName) {
             case 'myCommentCount':
-                return $this->commentTypeAPI->getCommentCount($query);
+                return $this->getCommentTypeAPI()->getCommentCount($query);
             case 'myComments':
-                return $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getCommentTypeAPI()->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'myComment':
-                if ($comments = $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($comments = $this->getCommentTypeAPI()->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $comments[0];
                 }
                 return null;

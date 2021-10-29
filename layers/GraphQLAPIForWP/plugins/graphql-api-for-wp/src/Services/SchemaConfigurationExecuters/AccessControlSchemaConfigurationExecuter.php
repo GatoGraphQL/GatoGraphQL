@@ -35,7 +35,7 @@ class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurati
         if (!is_null($schemaConfigACLBlockDataItem)) {
             if ($accessControlLists = $schemaConfigACLBlockDataItem['attrs'][SchemaConfigAccessControlListBlock::ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS] ?? null) {
                 foreach ($accessControlLists as $accessControlListID) {
-                    $this->accessControlGraphQLQueryConfigurator->executeSchemaConfiguration($accessControlListID);
+                    $this->getAccessControlGraphQLQueryConfigurator()->executeSchemaConfiguration($accessControlListID);
                 }
             }
         }
@@ -43,6 +43,6 @@ class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurati
 
     protected function getBlock(): BlockInterface
     {
-        return $this->schemaConfigAccessControlListBlock;
+        return $this->getSchemaConfigAccessControlListBlock();
     }
 }

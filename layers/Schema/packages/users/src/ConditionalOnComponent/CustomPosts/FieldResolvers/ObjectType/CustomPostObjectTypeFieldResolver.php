@@ -35,7 +35,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->withAuthorInterfaceTypeFieldResolver,
+            $this->getWithAuthorInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -49,7 +49,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'author' => $this->translationAPI->__('The post\'s author', ''),
+            'author' => $this->getTranslationAPI()->__('The post\'s author', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -71,7 +71,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         switch ($fieldName) {
             case 'author':
-                return $this->customPostUserTypeAPI->getAuthorID($object);
+                return $this->getCustomPostUserTypeAPI()->getAuthorID($object);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

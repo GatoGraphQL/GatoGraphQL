@@ -108,28 +108,28 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'content',
             'authorName',
             'type'
-                => $this->stringScalarTypeResolver,
+                => $this->getStringScalarTypeResolver(),
             'authorURL'
-                => $this->urlScalarTypeResolver,
+                => $this->getUrlScalarTypeResolver(),
             'authorEmail'
-                => $this->emailScalarTypeResolver,
+                => $this->getEmailScalarTypeResolver(),
             'customPostID'
-                => $this->idScalarTypeResolver,
+                => $this->getIdScalarTypeResolver(),
             'approved'
-                => $this->booleanScalarTypeResolver,
+                => $this->getBooleanScalarTypeResolver(),
             'date'
-                => $this->dateScalarTypeResolver,
+                => $this->getDateScalarTypeResolver(),
             'responseCount',
             'responseCountForAdmin'
-                => $this->intScalarTypeResolver,
+                => $this->getIntScalarTypeResolver(),
             'customPost'
                 => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
             'parent',
             'responses',
             'responsesForAdmin'
-                => $this->commentObjectTypeResolver,
+                => $this->getCommentObjectTypeResolver(),
             'status'
-                => $this->commentStatusEnumTypeResolver,
+                => $this->getCommentStatusEnumTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -159,21 +159,21 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'content' => $this->translationAPI->__('Comment\'s content', 'pop-comments'),
-            'authorName' => $this->translationAPI->__('Comment author\'s name', 'pop-comments'),
-            'authorURL' => $this->translationAPI->__('Comment author\'s URL', 'pop-comments'),
-            'authorEmail' => $this->translationAPI->__('Comment author\'s email', 'pop-comments'),
-            'customPost' => $this->translationAPI->__('Custom post to which the comment was added', 'pop-comments'),
-            'customPostID' => $this->translationAPI->__('ID of the custom post to which the comment was added', 'pop-comments'),
-            'approved' => $this->translationAPI->__('Is the comment approved?', 'pop-comments'),
-            'type' => $this->translationAPI->__('Type of comment', 'pop-comments'),
-            'status' => $this->translationAPI->__('Status of the comment', 'pop-comments'),
-            'parent' => $this->translationAPI->__('Parent comment (if this comment is a response to another one)', 'pop-comments'),
-            'date' => $this->translationAPI->__('Date when the comment was added', 'pop-comments'),
-            'responses' => $this->translationAPI->__('Responses to the comment', 'pop-comments'),
-            'responseCount' => $this->translationAPI->__('Number of responses to the comment', 'pop-comments'),
-            'responsesForAdmin' => $this->translationAPI->__('[Unrestricted] Responses to the comment', 'pop-comments'),
-            'responseCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of responses to the comment', 'pop-comments'),
+            'content' => $this->getTranslationAPI()->__('Comment\'s content', 'pop-comments'),
+            'authorName' => $this->getTranslationAPI()->__('Comment author\'s name', 'pop-comments'),
+            'authorURL' => $this->getTranslationAPI()->__('Comment author\'s URL', 'pop-comments'),
+            'authorEmail' => $this->getTranslationAPI()->__('Comment author\'s email', 'pop-comments'),
+            'customPost' => $this->getTranslationAPI()->__('Custom post to which the comment was added', 'pop-comments'),
+            'customPostID' => $this->getTranslationAPI()->__('ID of the custom post to which the comment was added', 'pop-comments'),
+            'approved' => $this->getTranslationAPI()->__('Is the comment approved?', 'pop-comments'),
+            'type' => $this->getTranslationAPI()->__('Type of comment', 'pop-comments'),
+            'status' => $this->getTranslationAPI()->__('Status of the comment', 'pop-comments'),
+            'parent' => $this->getTranslationAPI()->__('Parent comment (if this comment is a response to another one)', 'pop-comments'),
+            'date' => $this->getTranslationAPI()->__('Date when the comment was added', 'pop-comments'),
+            'responses' => $this->getTranslationAPI()->__('Responses to the comment', 'pop-comments'),
+            'responseCount' => $this->getTranslationAPI()->__('Number of responses to the comment', 'pop-comments'),
+            'responsesForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Responses to the comment', 'pop-comments'),
+            'responseCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of responses to the comment', 'pop-comments'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -208,7 +208,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
                 ]);
                 if ($fieldArgName === $orderFilterInputName) {
-                    $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
+                    $orderBy = $this->getNameResolver()->getName('popcms:dbcolumn:orderby:comments:date');
                     $order = 'DESC';
                     return $orderBy . OrderFormInput::SEPARATOR . $order;
                 }
@@ -272,37 +272,37 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         $comment = $object;
         switch ($fieldName) {
             case 'content':
-                return $this->commentTypeAPI->getCommentContent($comment);
+                return $this->getCommentTypeAPI()->getCommentContent($comment);
 
             case 'authorName':
-                return $this->commentTypeAPI->getCommentAuthorName($comment);
+                return $this->getCommentTypeAPI()->getCommentAuthorName($comment);
 
             case 'authorURL':
-                return $this->commentTypeAPI->getCommentAuthorURL($comment);
+                return $this->getCommentTypeAPI()->getCommentAuthorURL($comment);
 
             case 'authorEmail':
-                return $this->commentTypeAPI->getCommentAuthorEmail($comment);
+                return $this->getCommentTypeAPI()->getCommentAuthorEmail($comment);
 
             case 'customPost':
             case 'customPostID':
-                return $this->commentTypeAPI->getCommentPostId($comment);
+                return $this->getCommentTypeAPI()->getCommentPostId($comment);
 
             case 'approved':
-                return $this->commentTypeAPI->isCommentApproved($comment);
+                return $this->getCommentTypeAPI()->isCommentApproved($comment);
 
             case 'type':
-                return $this->commentTypeAPI->getCommentType($comment);
+                return $this->getCommentTypeAPI()->getCommentType($comment);
 
             case 'status':
-                return $this->commentTypeAPI->getCommentStatus($comment);
+                return $this->getCommentTypeAPI()->getCommentStatus($comment);
 
             case 'parent':
-                return $this->commentTypeAPI->getCommentParent($comment);
+                return $this->getCommentTypeAPI()->getCommentParent($comment);
 
             case 'date':
-                return $this->dateFormatter->format(
+                return $this->getDateFormatter()->format(
                     $fieldArgs['format'],
-                    $this->commentTypeAPI->getCommentDate($comment, $fieldArgs['gmt'])
+                    $this->getCommentTypeAPI()->getCommentDate($comment, $fieldArgs['gmt'])
                 );
         }
 
@@ -315,11 +315,11 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         switch ($fieldName) {
             case 'responses':
             case 'responsesForAdmin':
-                return $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getCommentTypeAPI()->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'responseCount':
             case 'responseCountForAdmin':
-                return $this->commentTypeAPI->getCommentCount($query);
+                return $this->getCommentTypeAPI()->getCommentCount($query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

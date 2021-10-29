@@ -32,7 +32,7 @@ class UserAuthorization implements UserAuthorizationInterface
         if ($accessScheme = ComponentConfiguration::getEditingAccessScheme()) {
             // If the capability does not exist, catch the exception
             try {
-                $accessSchemeCapability = $this->userAuthorizationSchemeRegistry->getUserAuthorizationScheme($accessScheme)->getSchemaEditorAccessCapability();
+                $accessSchemeCapability = $this->getUserAuthorizationSchemeRegistry()->getUserAuthorizationScheme($accessScheme)->getSchemaEditorAccessCapability();
             } catch (InvalidArgumentException) {
             }
         }
@@ -40,7 +40,7 @@ class UserAuthorization implements UserAuthorizationInterface
         // Return the default access
         if ($accessSchemeCapability === null) {
             // This function also throws an exception. Let it bubble up - that's an application error
-            $defaultUserAuthorizationScheme = $this->userAuthorizationSchemeRegistry->getDefaultUserAuthorizationScheme();
+            $defaultUserAuthorizationScheme = $this->getUserAuthorizationSchemeRegistry()->getDefaultUserAuthorizationScheme();
             return $defaultUserAuthorizationScheme->getSchemaEditorAccessCapability();
         }
         return $accessSchemeCapability;

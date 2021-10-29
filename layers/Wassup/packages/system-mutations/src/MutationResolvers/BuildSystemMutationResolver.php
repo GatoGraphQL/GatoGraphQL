@@ -10,7 +10,7 @@ class BuildSystemMutationResolver extends AbstractMutationResolver
 {
     public function executeMutation(array $form_data): mixed
     {
-        $this->hooksAPI->doAction('PoP:system-build');
+        $this->getHooksAPI()->doAction('PoP:system-build');
         return true;
     }
 }

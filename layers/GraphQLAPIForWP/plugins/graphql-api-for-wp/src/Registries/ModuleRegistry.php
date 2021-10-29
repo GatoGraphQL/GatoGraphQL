@@ -17,7 +17,7 @@ class ModuleRegistry implements ModuleRegistryInterface
     #[Required]
     final public function autowireModuleRegistry(): void
     {
-        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
+        $this->getUserSettingsManager() = UserSettingsManagerFacade::getInstance();
     }
 
     /**
@@ -121,8 +121,8 @@ class ModuleRegistry implements ModuleRegistryInterface
         }
         $moduleID = $moduleResolver->getID($module);
         // Check if the value has been saved on the DB
-        if ($this->userSettingsManager->hasSetModuleEnabled($moduleID)) {
-            return $this->userSettingsManager->isModuleEnabled($moduleID);
+        if ($this->getUserSettingsManager()->hasSetModuleEnabled($moduleID)) {
+            return $this->getUserSettingsManager()->isModuleEnabled($moduleID);
         }
         // Get the default value from the resolver
         return $moduleResolver->isEnabledByDefault($module);

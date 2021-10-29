@@ -23,6 +23,6 @@ class ConfigurableCacheControlForDirectivesRelationalTypeResolverDecorator exten
 
     protected function getConfigurationEntries(): array
     {
-        return $this->cacheControlManager->getEntriesForDirectives();
+        return $this->getCacheControlManager()->getEntriesForDirectives();
     }
 }

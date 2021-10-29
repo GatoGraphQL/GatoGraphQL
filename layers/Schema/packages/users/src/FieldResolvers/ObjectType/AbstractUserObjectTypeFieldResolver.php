@@ -62,10 +62,10 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         return match ($fieldName) {
             'users',
             'usersForAdmin'
-                => $this->userObjectTypeResolver,
+                => $this->getUserObjectTypeResolver(),
             'userCount',
             'userCountForAdmin'
-                => $this->intScalarTypeResolver,
+                => $this->getIntScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -87,10 +87,10 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'users' => $this->translationAPI->__('Users', 'pop-users'),
-            'userCount' => $this->translationAPI->__('Number of users', 'pop-users'),
-            'usersForAdmin' => $this->translationAPI->__('[Unrestricted] Users', 'pop-users'),
-            'userCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of users', 'pop-users'),
+            'users' => $this->getTranslationAPI()->__('Users', 'pop-users'),
+            'userCount' => $this->getTranslationAPI()->__('Number of users', 'pop-users'),
+            'usersForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Users', 'pop-users'),
+            'userCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of users', 'pop-users'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -179,11 +179,11 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         switch ($fieldName) {
             case 'users':
             case 'usersForAdmin':
-                return $this->userTypeAPI->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getUserTypeAPI()->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'userCount':
             case 'userCountForAdmin':
-                return $this->userTypeAPI->getUserCount($query);
+                return $this->getUserTypeAPI()->getUserCount($query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

@@ -33,7 +33,7 @@ abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
     public function isServiceEnabled(): bool
     {
         $enablingModule = $this->getEnablingModule();
-        if ($enablingModule !== null && !$this->moduleRegistry->isModuleEnabled($enablingModule)) {
+        if ($enablingModule !== null && !$this->getModuleRegistry()->isModuleEnabled($enablingModule)) {
             return false;
         }
 

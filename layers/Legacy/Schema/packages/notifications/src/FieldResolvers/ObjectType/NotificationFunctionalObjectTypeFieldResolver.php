@@ -40,7 +40,7 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'multilayoutKeys' => $this->stringScalarTypeResolver,
+            'multilayoutKeys' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -56,7 +56,7 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'multilayoutKeys' => $this->translationAPI->__('', ''),
+            'multilayoutKeys' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

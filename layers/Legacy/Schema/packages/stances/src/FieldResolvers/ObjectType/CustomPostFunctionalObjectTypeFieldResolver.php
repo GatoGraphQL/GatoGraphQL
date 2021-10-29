@@ -74,17 +74,17 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'addStanceURL' => $this->urlScalarTypeResolver,
-            'loggedInUserStances' => $this->intScalarTypeResolver,
-            'hasLoggedInUserStances' => $this->booleanScalarTypeResolver,
-            'editStanceURL' => $this->urlScalarTypeResolver,
-            'postStancesProURL' => $this->urlScalarTypeResolver,
-            'postStancesNeutralURL' => $this->urlScalarTypeResolver,
-            'postStancesAgainstURL' => $this->urlScalarTypeResolver,
-            'createStanceButtonLazy' => $this->idScalarTypeResolver,
-            'stancesLazy' => $this->idScalarTypeResolver,
-            'stanceName' => $this->stringScalarTypeResolver,
-            'catName' => $this->stringScalarTypeResolver,
+            'addStanceURL' => $this->getUrlScalarTypeResolver(),
+            'loggedInUserStances' => $this->getIntScalarTypeResolver(),
+            'hasLoggedInUserStances' => $this->getBooleanScalarTypeResolver(),
+            'editStanceURL' => $this->getUrlScalarTypeResolver(),
+            'postStancesProURL' => $this->getUrlScalarTypeResolver(),
+            'postStancesNeutralURL' => $this->getUrlScalarTypeResolver(),
+            'postStancesAgainstURL' => $this->getUrlScalarTypeResolver(),
+            'createStanceButtonLazy' => $this->getIdScalarTypeResolver(),
+            'stancesLazy' => $this->getIdScalarTypeResolver(),
+            'stanceName' => $this->getStringScalarTypeResolver(),
+            'catName' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -104,17 +104,17 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'addStanceURL' => $this->translationAPI->__('', ''),
-            'loggedInUserStances' => $this->translationAPI->__('', ''),
-            'hasLoggedInUserStances' => $this->translationAPI->__('', ''),
-            'editStanceURL' => $this->translationAPI->__('', ''),
-            'postStancesProURL' => $this->translationAPI->__('', ''),
-            'postStancesNeutralURL' => $this->translationAPI->__('', ''),
-            'postStancesAgainstURL' => $this->translationAPI->__('', ''),
-            'createStanceButtonLazy' => $this->translationAPI->__('', ''),
-            'stancesLazy' => $this->translationAPI->__('', ''),
-            'stanceName' => $this->translationAPI->__('', ''),
-            'catName' => $this->translationAPI->__('', ''),
+            'addStanceURL' => $this->getTranslationAPI()->__('', ''),
+            'loggedInUserStances' => $this->getTranslationAPI()->__('', ''),
+            'hasLoggedInUserStances' => $this->getTranslationAPI()->__('', ''),
+            'editStanceURL' => $this->getTranslationAPI()->__('', ''),
+            'postStancesProURL' => $this->getTranslationAPI()->__('', ''),
+            'postStancesNeutralURL' => $this->getTranslationAPI()->__('', ''),
+            'postStancesAgainstURL' => $this->getTranslationAPI()->__('', ''),
+            'createStanceButtonLazy' => $this->getTranslationAPI()->__('', ''),
+            'stancesLazy' => $this->getTranslationAPI()->__('', ''),
+            'stanceName' => $this->getTranslationAPI()->__('', ''),
+            'catName' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

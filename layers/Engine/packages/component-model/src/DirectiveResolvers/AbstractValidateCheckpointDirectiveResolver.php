@@ -26,7 +26,7 @@ abstract class AbstractValidateCheckpointDirectiveResolver extends AbstractValid
     protected function validateCondition(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         $checkpointSet = $this->getValidationCheckpointSet($relationalTypeResolver);
-        $validation = $this->engine->validateCheckpoints($checkpointSet);
+        $validation = $this->getEngine()->validateCheckpoints($checkpointSet);
         return !GeneralUtils::isError($validation);
     }
 

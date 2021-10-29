@@ -29,7 +29,7 @@ class NamespacingSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
 
     protected function getBlock(): BlockInterface
     {
-        return $this->schemaConfigNamespacingBlock;
+        return $this->getSchemaConfigNamespacingBlock();
     }
 
     public function getHookComponentConfigurationClass(): string

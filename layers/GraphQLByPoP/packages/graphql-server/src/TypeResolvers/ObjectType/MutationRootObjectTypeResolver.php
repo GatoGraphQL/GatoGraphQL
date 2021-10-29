@@ -25,7 +25,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
         MutationRootTypeDataLoader $mutationRootTypeDataLoader,
     ): void {
         $this->typeResolverHelper = $typeResolverHelper;
-        $this->mutationRootTypeDataLoader = $mutationRootTypeDataLoader;
+        $this->getMutationRoot()TypeDataLoader = $mutationRootTypeDataLoader;
     }
 
     public function getTypeName(): string
@@ -35,7 +35,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Mutation type, starting from which mutations are executed', 'graphql-server');
+        return $this->getTranslationAPI()->__('Mutation type, starting from which mutations are executed', 'graphql-server');
     }
 
     public function getID(object $object): string | int | null
@@ -47,14 +47,14 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->mutationRootTypeDataLoader;
+        return $this->getMutationRoot()TypeDataLoader;
     }
 
     public function isFieldNameConditionSatisfiedForSchema(
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         string $fieldName
     ): bool {
-        $objectTypeResolverMandatoryFields = $this->typeResolverHelper->getObjectTypeResolverMandatoryFields();
+        $objectTypeResolverMandatoryFields = $this->getTypeResolverHelper()->getObjectTypeResolverMandatoryFields();
         return
             in_array($fieldName, $objectTypeResolverMandatoryFields)
             || $objectTypeFieldResolver->getFieldMutationResolver($this, $fieldName) !== null;

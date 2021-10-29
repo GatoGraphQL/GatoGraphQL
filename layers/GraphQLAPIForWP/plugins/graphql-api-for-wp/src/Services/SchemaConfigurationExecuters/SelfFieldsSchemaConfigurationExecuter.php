@@ -29,7 +29,7 @@ class SelfFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisable
 
     protected function getBlock(): BlockInterface
     {
-        return $this->schemaConfigSelfFieldsBlock;
+        return $this->getSchemaConfigSelfFieldsBlock();
     }
 
     public function getHookComponentConfigurationClass(): string

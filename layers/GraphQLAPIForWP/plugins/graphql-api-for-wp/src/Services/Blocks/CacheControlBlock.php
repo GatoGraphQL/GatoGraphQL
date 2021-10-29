@@ -33,7 +33,7 @@ class CacheControlBlock extends AbstractControlBlock
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->cacheControlBlockCategory;
+        return $this->getCacheControlBlockCategory();
     }
 
     protected function registerCommonStyleCSS(): bool

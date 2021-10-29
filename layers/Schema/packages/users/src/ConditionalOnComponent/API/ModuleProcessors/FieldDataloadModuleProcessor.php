@@ -62,7 +62,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
             case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEUSER:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST:
-                return $this->userObjectTypeResolver;
+                return $this->getUserObjectTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);
@@ -73,7 +73,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST:
-                return $this->listQueryInputOutputHandler;
+                return $this->getListQueryInputOutputHandler();
         }
 
         return parent::getQueryInputOutputHandler($module);

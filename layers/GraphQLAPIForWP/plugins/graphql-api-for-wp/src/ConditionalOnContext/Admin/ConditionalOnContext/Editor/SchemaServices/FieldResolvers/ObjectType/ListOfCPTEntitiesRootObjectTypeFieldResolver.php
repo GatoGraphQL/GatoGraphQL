@@ -45,9 +45,9 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'accessControlLists' => $this->translationAPI->__('Access Control Lists', 'graphql-api'),
-            'cacheControlLists' => $this->translationAPI->__('Cache Control Lists', 'graphql-api'),
-            'schemaConfigurations' => $this->translationAPI->__('Schema Configurations', 'graphql-api'),
+            'accessControlLists' => $this->getTranslationAPI()->__('Access Control Lists', 'graphql-api'),
+            'cacheControlLists' => $this->getTranslationAPI()->__('Cache Control Lists', 'graphql-api'),
+            'schemaConfigurations' => $this->getTranslationAPI()->__('Schema Configurations', 'graphql-api'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -55,9 +55,9 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
     protected function getFieldCustomPostType(string $fieldName): string
     {
         return match ($fieldName) {
-            'accessControlLists' => $this->graphQLAccessControlListCustomPostType->getCustomPostType(),
-            'cacheControlLists' => $this->graphQLCacheControlListCustomPostType->getCustomPostType(),
-            'schemaConfigurations' => $this->graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
+            'accessControlLists' => $this->getGraphQLAccessControlListCustomPostType()->getCustomPostType(),
+            'cacheControlLists' => $this->getGraphQLCacheControlListCustomPostType()->getCustomPostType(),
+            'schemaConfigurations' => $this->getGraphQLSchemaConfigurationCustomPostType()->getCustomPostType(),
             default => '', // It will never reach here
         };
     }

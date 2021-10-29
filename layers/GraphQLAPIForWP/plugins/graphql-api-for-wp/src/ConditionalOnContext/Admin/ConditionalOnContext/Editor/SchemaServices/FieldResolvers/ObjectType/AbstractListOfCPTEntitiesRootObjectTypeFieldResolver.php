@@ -80,7 +80,7 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
             // With this flag, the hook will not remove the private CPTs
             QueryOptions::ALLOW_QUERYING_PRIVATE_CPTS => true,
         ];
-        return $this->customPostTypeAPI->getCustomPosts($query, $options);
+        return $this->getCustomPostTypeAPI()->getCustomPosts($query, $options);
     }
 
     abstract protected function getFieldCustomPostType(string $fieldName): string;
@@ -89,6 +89,6 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ConcreteTypeResolverInterface {
-        return $this->customPostObjectTypeResolver;
+        return $this->getCustomPostObjectTypeResolver();
     }
 }

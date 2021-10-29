@@ -23,7 +23,7 @@ class JSONObjectScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Custom scalar representing a JSON Object of unrestricted shape', 'component-model');
+        return $this->getTranslationAPI()->__('Custom scalar representing a JSON Object of unrestricted shape', 'component-model');
     }
 
     public function getSpecifiedByURL(): ?string
@@ -36,7 +36,7 @@ class JSONObjectScalarTypeResolver extends AbstractScalarTypeResolver
         if (!($inputValue instanceof stdClass)) {
             return $this->getError(
                 sprintf(
-                    $this->translationAPI->__('Cannot cast value \'%s\' to type \'%s\'', 'component-model'),
+                    $this->getTranslationAPI()->__('Cannot cast value \'%s\' to type \'%s\'', 'component-model'),
                     $inputValue,
                     $this->getMaybeNamespacedTypeName()
                 )

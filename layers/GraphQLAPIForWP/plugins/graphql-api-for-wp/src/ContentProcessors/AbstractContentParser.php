@@ -113,7 +113,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     public function getLocalizedFileDir(): string
     {
-        return $this->getFileDir($this->localeHelper->getLocaleLanguage());
+        return $this->getFileDir($this->getLocaleHelper()->getLocaleLanguage());
     }
 
     /**
@@ -322,7 +322,7 @@ abstract class AbstractContentParser implements ContentParserInterface
                         RequestParams::DOC => $matches[1],
                         'TB_iframe' => 'true',
                     ],
-                    $this->requestHelperService->getRequestedFullURL()
+                    $this->getRequestHelperService()->getRequestedFullURL()
                 );
                 /** @var string */
                 $link = str_replace(

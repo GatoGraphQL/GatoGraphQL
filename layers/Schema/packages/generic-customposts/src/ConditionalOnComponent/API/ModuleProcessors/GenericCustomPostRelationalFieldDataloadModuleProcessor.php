@@ -49,7 +49,7 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
-                return $this->genericCustomPostObjectTypeResolver;
+                return $this->getGenericCustomPostObjectTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);
@@ -60,7 +60,7 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
-                return $this->listQueryInputOutputHandler;
+                return $this->getListQueryInputOutputHandler();
         }
 
         return parent::getQueryInputOutputHandler($module);

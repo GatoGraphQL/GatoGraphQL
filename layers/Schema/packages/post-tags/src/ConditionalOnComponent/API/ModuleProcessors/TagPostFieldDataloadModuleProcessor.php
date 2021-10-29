@@ -43,7 +43,7 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
-                return $this->postObjectTypeResolver;
+                return $this->getPostObjectTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);
@@ -53,7 +53,7 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
-                return $this->listQueryInputOutputHandler;
+                return $this->getListQueryInputOutputHandler();
         }
 
         return parent::getQueryInputOutputHandler($module);

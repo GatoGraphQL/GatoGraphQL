@@ -64,7 +64,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
             case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTCOUNT:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTCOUNT:
-                return $this->postObjectTypeResolver;
+                return $this->getPostObjectTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);
@@ -75,7 +75,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST:
-                return $this->listQueryInputOutputHandler;
+                return $this->getListQueryInputOutputHandler();
         }
 
         return parent::getQueryInputOutputHandler($module);

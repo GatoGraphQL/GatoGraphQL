@@ -13,12 +13,12 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
         $errors = [];
         $histid = $form_data['histid'];
         if (!$histid) {
-            $errors[] = $this->translationAPI->__('This URL is incorrect.', 'pop-notifications');
+            $errors[] = $this->getTranslationAPI()->__('This URL is incorrect.', 'pop-notifications');
         } else {
             // $notification = AAL_Main::instance()->api->getNotification($histid);
             $notification = \PoP_Notifications_API::getNotification($histid);
             if (!$notification) {
-                $errors[] = $this->translationAPI->__('This notification does not exist.', 'pop-notifications');
+                $errors[] = $this->getTranslationAPI()->__('This notification does not exist.', 'pop-notifications');
             }
         }
         return $errors;
@@ -26,7 +26,7 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
 
     protected function additionals($histid, $form_data): void
     {
-        $this->hooksAPI->doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $form_data);
+        $this->getHooksAPI()->doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $form_data);
     }
 
     abstract protected function getStatus();

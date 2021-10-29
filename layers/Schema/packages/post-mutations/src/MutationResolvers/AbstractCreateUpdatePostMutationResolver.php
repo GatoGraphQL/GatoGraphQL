@@ -21,6 +21,6 @@ abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUp
 
     public function getCustomPostType(): string
     {
-        return $this->postTypeAPI->getPostCustomPostType();
+        return $this->getPostTypeAPI()->getPostCustomPostType();
     }
 }

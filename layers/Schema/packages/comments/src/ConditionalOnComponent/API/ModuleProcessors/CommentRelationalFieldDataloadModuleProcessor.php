@@ -39,7 +39,7 @@ class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFi
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_COMMENTS:
-                return $this->commentObjectTypeResolver;
+                return $this->getCommentObjectTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);
@@ -49,7 +49,7 @@ class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFi
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_COMMENTS:
-                return $this->listQueryInputOutputHandler;
+                return $this->getListQueryInputOutputHandler();
         }
 
         return parent::getQueryInputOutputHandler($module);

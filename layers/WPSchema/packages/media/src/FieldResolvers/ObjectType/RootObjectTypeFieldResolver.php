@@ -52,8 +52,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'mediaItemBySlug' => $this->translationAPI->__('Get a media item by slug', 'media'),
-            'imageSizeNames' => $this->translationAPI->__('Gets the available intermediate image size names.', 'media'),
+            'mediaItemBySlug' => $this->getTranslationAPI()->__('Get a media item by slug', 'media'),
+            'imageSizeNames' => $this->getTranslationAPI()->__('Gets the available intermediate image size names.', 'media'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -61,8 +61,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'imageSizeNames' => $this->stringScalarTypeResolver,
-            'mediaItemBySlug' => $this->mediaObjectTypeResolver,
+            'imageSizeNames' => $this->getStringScalarTypeResolver(),
+            'mediaItemBySlug' => $this->getMediaObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -109,7 +109,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'mediaItemBySlug':
-                if ($mediaItems = $this->mediaTypeAPI->getMediaItems($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($mediaItems = $this->getMediaTypeAPI()->getMediaItems($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $mediaItems[0];
                 }
                 return null;

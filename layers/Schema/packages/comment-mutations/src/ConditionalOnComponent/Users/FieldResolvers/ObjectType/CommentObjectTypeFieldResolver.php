@@ -64,7 +64,7 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
         array $fieldArgs = []
     ): bool {
         $comment = $object;
-        $commentUserID = $this->userCommentTypeAPI->getCommentUserId($comment);
+        $commentUserID = $this->getUserCommentTypeAPI()->getCommentUserId($comment);
         return $commentUserID !== null;
     }
 
@@ -84,16 +84,16 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
         array $options = []
     ): mixed {
         $comment = $object;
-        $commentUserID = $this->userCommentTypeAPI->getCommentUserId($comment);
+        $commentUserID = $this->getUserCommentTypeAPI()->getCommentUserId($comment);
         switch ($fieldName) {
             case 'authorName':
-                return $this->userTypeAPI->getUserDisplayName($commentUserID);
+                return $this->getUserTypeAPI()->getUserDisplayName($commentUserID);
 
             case 'authorURL':
-                return $this->userTypeAPI->getUserWebsiteURL($commentUserID);
+                return $this->getUserTypeAPI()->getUserWebsiteURL($commentUserID);
 
             case 'authorEmail':
-                return $this->userTypeAPI->getUserEmail($commentUserID);
+                return $this->getUserTypeAPI()->getUserEmail($commentUserID);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

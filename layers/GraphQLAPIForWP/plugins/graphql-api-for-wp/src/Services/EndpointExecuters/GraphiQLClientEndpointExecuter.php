@@ -38,11 +38,11 @@ class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter impl
 
     protected function getClient(): AbstractClient
     {
-        return $this->customEndpointGraphiQLClient;
+        return $this->getCustomEndpointGraphiQLClient();
     }
 
     protected function getClientEndpointAnnotator(): ClientEndpointAnnotatorInterface
     {
-        return $this->graphiQLClientEndpointAnnotator;
+        return $this->getGraphiQLClientEndpointAnnotator();
     }
 }

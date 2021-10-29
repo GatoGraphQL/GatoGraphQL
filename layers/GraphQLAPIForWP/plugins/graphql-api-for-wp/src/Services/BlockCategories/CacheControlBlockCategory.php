@@ -28,7 +28,7 @@ class CacheControlBlockCategory extends AbstractBlockCategory
     public function getCustomPostTypes(): array
     {
         return [
-            $this->graphQLCacheControlListCustomPostType->getCustomPostType(),
+            $this->getGraphQLCacheControlListCustomPostType()->getCustomPostType(),
         ];
     }
 

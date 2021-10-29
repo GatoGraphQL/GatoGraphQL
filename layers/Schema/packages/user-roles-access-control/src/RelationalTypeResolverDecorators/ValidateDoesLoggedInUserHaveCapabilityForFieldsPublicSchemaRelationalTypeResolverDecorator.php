@@ -31,11 +31,11 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaRelationalTypeR
 
     protected function getConfigurationEntries(): array
     {
-        return $this->accessControlManager->getEntriesForFields(AccessControlGroups::CAPABILITIES);
+        return $this->getAccessControlManager()->getEntriesForFields(AccessControlGroups::CAPABILITIES);
     }
 
     protected function getValidateCapabilityDirectiveResolver(): DirectiveResolverInterface
     {
-        return $this->validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver;
+        return $this->getValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver();
     }
 }

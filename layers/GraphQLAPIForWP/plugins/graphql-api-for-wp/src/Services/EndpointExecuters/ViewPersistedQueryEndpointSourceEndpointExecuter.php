@@ -33,7 +33,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
         $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
         $this->userAuthorization = $userAuthorization;
         $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
-        $this->persistedQueryEndpointAPIHierarchyBlockAccessor = $persistedQueryEndpointAPIHierarchyBlockAccessor;
+        $this->getPersistedQueryEndpointAPIHierarchyBlock()Accessor = $persistedQueryEndpointAPIHierarchyBlockAccessor;
         $this->persistedQueryEndpointGraphiQLBlock = $persistedQueryEndpointGraphiQLBlock;
     }
 
@@ -44,7 +44,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
 
     protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface
     {
-        return $this->graphQLPersistedQueryEndpointCustomPostType;
+        return $this->getGraphQLPersistedQueryEndpointCustomPostType();
     }
 
     /**
@@ -64,11 +64,11 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
         if ($graphQLQueryPost->post_parent) {
             // Check if the user is authorized to see the content
             $ancestorContent = null;
-            if ($this->userAuthorization->canAccessSchemaEditor()) {
+            if ($this->getUserAuthorization()->canAccessSchemaEditor()) {
                 /**
                  * If the query has a parent, also render the inherited output
                  */
-                $persistedQueryEndpointAPIHierarchyBlockAttributes = $this->persistedQueryEndpointAPIHierarchyBlockAccessor->getAttributes($graphQLQueryPost);
+                $persistedQueryEndpointAPIHierarchyBlockAttributes = $this->getPersistedQueryEndpointAPIHierarchyBlock()Accessor->getAttributes($graphQLQueryPost);
                 if (
                     $persistedQueryEndpointAPIHierarchyBlockAttributes !== null
                     && $persistedQueryEndpointAPIHierarchyBlockAttributes->isInheritQuery()
@@ -77,7 +77,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
                     list(
                         $inheritedGraphQLQuery,
                         $inheritedGraphQLVariables
-                    ) = $this->graphQLQueryPostTypeHelpers->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
+                    ) = $this->getGraphQLQueryPostTypeHelpers()->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
                     // To render the variables in the block, they must be json_encoded
                     if ($inheritedGraphQLVariables) {
                         $inheritedGraphQLVariables = json_encode($inheritedGraphQLVariables);
@@ -88,10 +88,10 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
                         PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $inheritedGraphQLVariables,
                     ];
                     // Add the new rendering to the output, and a description for each
-                    $ancestorContent = $this->persistedQueryEndpointGraphiQLBlock->renderBlock($inheritedGraphQLBlockAttributes, '');
+                    $ancestorContent = $this->getPersistedQueryEndpointGraphiQLBlock()->renderBlock($inheritedGraphQLBlockAttributes, '');
                 }
             } else {
-                $ancestorContent = $this->persistedQueryEndpointGraphiQLBlock->renderUnauthorizedAccess();
+                $ancestorContent = $this->getPersistedQueryEndpointGraphiQLBlock()->renderUnauthorizedAccess();
             }
             if (!is_null($ancestorContent)) {
                 $content = sprintf(

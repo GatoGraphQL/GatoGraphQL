@@ -140,7 +140,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
 
     protected function getBlockRegistry(): BlockRegistryInterface
     {
-        return $this->endpointBlockRegistry;
+        return $this->getEndpointBlockRegistry();
     }
 
     /**
@@ -161,16 +161,16 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
 
     public function getEndpointOptionsBlock(): BlockInterface
     {
-        return $this->customEndpointOptionsBlock;
+        return $this->getCustomEndpointOptionsBlock();
     }
 
     protected function getEndpointExecuterRegistry(): EndpointExecuterRegistryInterface
     {
-        return $this->customEndpointExecuterRegistryInterface;
+        return $this->getCustomEndpointExecuterRegistryInterface();
     }
 
     protected function getEndpointAnnotatorRegistry(): EndpointAnnotatorRegistryInterface
     {
-        return $this->customEndpointAnnotatorRegistryInterface;
+        return $this->getCustomEndpointAnnotatorRegistryInterface();
     }
 }

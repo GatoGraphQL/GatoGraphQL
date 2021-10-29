@@ -25,7 +25,7 @@ class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModu
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
-                return $this->postCategoryObjectTypeResolver;
+                return $this->getPostCategoryObjectTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);

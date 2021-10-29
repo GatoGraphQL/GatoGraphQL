@@ -23,6 +23,6 @@ class ConfigurableCacheControlForFieldsRelationalTypeResolverDecorator extends A
 
     protected function getConfigurationEntries(): array
     {
-        return $this->cacheControlManager->getEntriesForFields();
+        return $this->getCacheControlManager()->getEntriesForFields();
     }
 }

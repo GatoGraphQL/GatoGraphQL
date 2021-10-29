@@ -28,7 +28,7 @@ class VarsHookSet extends AbstractHookSet
     protected function init(): void
     {
         // Implement immediately, before VarsHookSet in API adds output=json
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'ApplicationState:addVars',
             array($this, 'maybeRemoveVars'),
             0,
@@ -56,11 +56,11 @@ class VarsHookSet extends AbstractHookSet
             // being processed /?scheme=api <= native API
             // If ever need to support REST or another format, add a hook here
             $allowedDataStructures = [
-                $this->graphQLDataStructureFormatter->getName(),
+                $this->getGraphQLDataStructureFormatter()->getName(),
             ];
             if (
                 // If single endpoint not enabled
-                !$this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)
+                !$this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)
                 // If datastructure is not GraphQL (or another allowed one)
                 || !in_array($vars['datastructure'], $allowedDataStructures)
             ) {

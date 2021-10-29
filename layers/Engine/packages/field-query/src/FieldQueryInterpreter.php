@@ -97,8 +97,8 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         }
         // If the field name is missing, show an error
         if ($pos === 0) {
-            $this->feedbackMessageStore->addQueryError(sprintf(
-                $this->translationAPI->__('Name in \'%s\' is missing', 'field-query'),
+            $this->getFeedbackMessageStore()->addQueryError(sprintf(
+                $this->getTranslationAPI()->__('Name in \'%s\' is missing', 'field-query'),
                 $field
             ));
             return '';
@@ -170,8 +170,8 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 && $fieldArgsOpeningSymbolPos === false
             )
         ) {
-            $this->feedbackMessageStore->addQueryError(sprintf(
-                $this->translationAPI->__(
+            $this->getFeedbackMessageStore()->addQueryError(sprintf(
+                $this->getTranslationAPI()->__(
                     'Arguments \'%s\' must start with symbol \'%s\' and end with symbol \'%s\'',
                     'field-query'
                 ),
@@ -356,15 +356,15 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             $aliasSymbolPos = $fieldAliasPositionSpan[self::ALIAS_POSITION_KEY];
             if ($aliasSymbolPos === 0) {
                 // Only there is the alias, nothing to alias to
-                $this->feedbackMessageStore->addQueryError(sprintf(
-                    $this->translationAPI->__('The field to be aliased in \'%s\' is missing', 'field-query'),
+                $this->getFeedbackMessageStore()->addQueryError(sprintf(
+                    $this->getTranslationAPI()->__('The field to be aliased in \'%s\' is missing', 'field-query'),
                     $field
                 ));
                 return null;
             } elseif ($aliasSymbolPos === strlen($field) - 1) {
                 // Only the "@" was added, but the alias is missing
-                $this->feedbackMessageStore->addQueryError(sprintf(
-                    $this->translationAPI->__('Alias in \'%s\' is missing', 'field-query'),
+                $this->getFeedbackMessageStore()->addQueryError(sprintf(
+                    $this->getTranslationAPI()->__('Alias in \'%s\' is missing', 'field-query'),
                     $field
                 ));
                 return null;
@@ -471,8 +471,8 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 && $fieldDirectivesOpeningSymbolPos === false
             )
         ) {
-            $this->feedbackMessageStore->addQueryError(sprintf(
-                $this->translationAPI->__(
+            $this->getFeedbackMessageStore()->addQueryError(sprintf(
+                $this->getTranslationAPI()->__(
                     'Directive \'%s\' must start with symbol \'%s\' and end with symbol \'%s\'',
                     'field-query'
                 ),
@@ -535,7 +535,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         }
         return array_map(
             [$this, 'listFieldDirective'],
-            $this->queryParser->splitElements(
+            $this->getQueryParser()->splitElements(
                 $fieldDirectives,
                 QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
                 [

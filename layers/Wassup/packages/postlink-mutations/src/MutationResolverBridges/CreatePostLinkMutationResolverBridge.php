@@ -21,7 +21,7 @@ class CreatePostLinkMutationResolverBridge extends AbstractCreateUpdatePostLinkM
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->createPostLinkMutationResolver;
+        return $this->getCreatePostLinkMutationResolver();
     }
 
     protected function isUpdate(): bool

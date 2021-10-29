@@ -13,15 +13,15 @@ class ContactUsMutationResolver extends AbstractMutationResolver
     {
         $errors = [];
         if (empty($form_data['name'])) {
-            $errors[] = $this->translationAPI->__('Your name cannot be empty.', 'pop-genericforms');
+            $errors[] = $this->getTranslationAPI()->__('Your name cannot be empty.', 'pop-genericforms');
         }
         if (empty($form_data['email'])) {
-            $errors[] = $this->translationAPI->__('Email cannot be empty.', 'pop-genericforms');
+            $errors[] = $this->getTranslationAPI()->__('Email cannot be empty.', 'pop-genericforms');
         } elseif (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
-            $errors[] = $this->translationAPI->__('Email format is incorrect.', 'pop-genericforms');
+            $errors[] = $this->getTranslationAPI()->__('Email format is incorrect.', 'pop-genericforms');
         }
         if (empty($form_data['message'])) {
-            $errors[] = $this->translationAPI->__('Message cannot be empty.', 'pop-genericforms');
+            $errors[] = $this->getTranslationAPI()->__('Message cannot be empty.', 'pop-genericforms');
         }
         return $errors;
     }
@@ -31,7 +31,7 @@ class ContactUsMutationResolver extends AbstractMutationResolver
      */
     protected function additionals($form_data): void
     {
-        $this->hooksAPI->doAction('pop_contactus', $form_data);
+        $this->getHooksAPI()->doAction('pop_contactus', $form_data);
     }
 
     protected function doExecute($form_data)
@@ -39,32 +39,32 @@ class ContactUsMutationResolver extends AbstractMutationResolver
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $to = \PoP_EmailSender_Utils::getAdminNotificationsEmail();
         $subject = sprintf(
-            $this->translationAPI->__('[%s]: %s', 'pop-genericforms'),
+            $this->getTranslationAPI()->__('[%s]: %s', 'pop-genericforms'),
             $cmsapplicationapi->getSiteName(),
-            $this->translationAPI->__('Contact us', 'pop-genericforms')
+            $this->getTranslationAPI()->__('Contact us', 'pop-genericforms')
         );
         $placeholder = '<p><b>%s:</b> %s</p>';
         $msg = sprintf(
             '<p>%s</p>',
-            $this->translationAPI->__('New contact us submission', 'pop-genericforms')
+            $this->getTranslationAPI()->__('New contact us submission', 'pop-genericforms')
         ) . sprintf(
             $placeholder,
-            $this->translationAPI->__('Name', 'pop-genericforms'),
+            $this->getTranslationAPI()->__('Name', 'pop-genericforms'),
             $form_data['name']
         ) . sprintf(
             $placeholder,
-            $this->translationAPI->__('Email', 'pop-genericforms'),
+            $this->getTranslationAPI()->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
                 $form_data['email']
             )
         ) . sprintf(
             $placeholder,
-            $this->translationAPI->__('Subject', 'pop-genericforms'),
+            $this->getTranslationAPI()->__('Subject', 'pop-genericforms'),
             $form_data['subject']
         ) . sprintf(
             $placeholder,
-            $this->translationAPI->__('Message', 'pop-genericforms'),
+            $this->getTranslationAPI()->__('Message', 'pop-genericforms'),
             $form_data['message']
         );
 

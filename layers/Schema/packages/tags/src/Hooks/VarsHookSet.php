@@ -22,7 +22,7 @@ class VarsHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'augmentVarsProperties',
             [$this, 'augmentVarsProperties'],
             10,
@@ -40,7 +40,7 @@ class VarsHookSet extends AbstractHookSet
         // needed to match the RouteModuleProcessor vars conditions
         if ($nature == RouteNatures::TAG) {
             $termObjectID = $vars['routing-state']['queried-object-id'];
-            $vars['routing-state']['taxonomy-name'] = $this->taxonomyTypeAPI->getTermTaxonomyName($termObjectID);
+            $vars['routing-state']['taxonomy-name'] = $this->getTaxonomyTypeAPI()->getTermTaxonomyName($termObjectID);
         }
     }
 }

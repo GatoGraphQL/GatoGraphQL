@@ -64,7 +64,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     {
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null) {
-            return $this->moduleRegistry->isModuleEnabled($enablingModule);
+            return $this->getModuleRegistry()->isModuleEnabled($enablingModule);
         }
         return parent::isServiceEnabled();
     }
@@ -153,7 +153,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      */
     final protected function getBlockLocalizationName(): string
     {
-        return $this->generalUtils->dashesToCamelCase($this->getBlockRegistrationName());
+        return $this->getGeneralUtils()->dashesToCamelCase($this->getBlockRegistrationName());
     }
     /**
      * Block class name: wp-block-namespace-blockName
@@ -260,7 +260,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          */
         if (\is_admin()) {
             if ($postTypes = $this->getAllowedPostTypes()) {
-                if (!in_array($this->editorHelpers->getEditingPostType(), $postTypes)) {
+                if (!in_array($this->getEditorHelpers()->getEditingPostType(), $postTypes)) {
                     return;
                 }
             }
@@ -335,7 +335,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
             /**
              * Show only if the user has the right permission
              */
-            if ($this->userAuthorization->canAccessSchemaEditor()) {
+            if ($this->getUserAuthorization()->canAccessSchemaEditor()) {
                 $blockConfiguration['render_callback'] = [$this, 'renderBlock'];
             } else {
                 $blockConfiguration['render_callback'] = [$this, 'renderUnauthorizedAccess'];

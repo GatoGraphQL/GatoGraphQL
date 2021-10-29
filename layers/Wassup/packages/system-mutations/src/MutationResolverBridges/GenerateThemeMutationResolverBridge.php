@@ -21,10 +21,10 @@ class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutatio
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->generateThemeMutationResolver;
+        return $this->getGenerateThemeMutationResolver();
     }
     public function getSuccessString(string | int $result_id): ?string
     {
-        return $this->translationAPI->__('System action "generate theme" executed successfully.', 'pop-system');
+        return $this->getTranslationAPI()->__('System action "generate theme" executed successfully.', 'pop-system');
     }
 }

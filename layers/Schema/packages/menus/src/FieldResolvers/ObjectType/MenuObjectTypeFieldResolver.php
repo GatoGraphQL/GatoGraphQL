@@ -58,8 +58,8 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'items' => $this->menuItemObjectTypeResolver,
-            'itemDataEntries' => $this->jsonObjectScalarTypeResolver,
+            'items' => $this->getMenuItemObjectTypeResolver(),
+            'itemDataEntries' => $this->getJsonObjectScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -78,7 +78,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'itemDataEntries' => [
-                'flat' => $this->booleanScalarTypeResolver,
+                'flat' => $this->getBooleanScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -87,7 +87,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['itemDataEntries' => 'flat'] => $this->translationAPI->__('Flatten the items', 'menus'),
+            ['itemDataEntries' => 'flat'] => $this->getTranslationAPI()->__('Flatten the items', 'menus'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -95,8 +95,8 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'items' => $this->translationAPI->__('The menu items', 'menus'),
-            'itemDataEntries' => $this->translationAPI->__('The data for the menu items', 'menus'),
+            'items' => $this->getTranslationAPI()->__('The menu items', 'menus'),
+            'itemDataEntries' => $this->getTranslationAPI()->__('The data for the menu items', 'menus'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -120,7 +120,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'itemDataEntries':
                 $isFlat = $fieldArgs['flat'] ?? false;
-                $menuItems = $this->menuTypeAPI->getMenuItems($menu);
+                $menuItems = $this->getMenuTypeAPI()->getMenuItems($menu);
                 $entries = array();
                 if ($menuItems) {
                     foreach ($menuItems as $menuItem) {
@@ -161,11 +161,11 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 }
                 return $arrangedEntries;
             case 'items':
-                $menuItems = $this->menuTypeAPI->getMenuItems($menu);
+                $menuItems = $this->getMenuTypeAPI()->getMenuItems($menu);
 
                 // Save the MenuItems on the dynamic registry
                 foreach ($menuItems as $menuItem) {
-                    $this->menuItemRuntimeRegistry->storeMenuItem($menuItem);
+                    $this->getMenuItemRuntimeRegistry()->storeMenuItem($menuItem);
                 }
 
                 // Return the IDs for the top-level items (those with no parent)

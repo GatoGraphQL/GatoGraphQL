@@ -23,7 +23,7 @@ class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationR
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->fileUploadPictureMutationResolver;
+        return $this->getFileUploadPictureMutationResolver();
     }
     protected function onlyExecuteWhenDoingPost(): bool
     {

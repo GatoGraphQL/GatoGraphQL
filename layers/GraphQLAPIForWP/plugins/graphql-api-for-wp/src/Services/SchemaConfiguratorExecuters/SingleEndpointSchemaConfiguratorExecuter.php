@@ -31,7 +31,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
         $this->moduleRegistry = $moduleRegistry;
         $this->endpointSchemaConfigurator = $endpointSchemaConfigurator;
         $this->graphQLEndpointHandler = $graphQLEndpointHandler;
-        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
+        $this->getUserSettingsManager() = UserSettingsManagerFacade::getInstance();
     }
 
     /**
@@ -40,7 +40,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     protected function getCustomPostID(): ?int
     {
         // Only enable it when executing a query against the single endpoint
-        if (!$this->graphQLEndpointHandler->isEndpointRequested()) {
+        if (!$this->getGraphQLEndpointHandler()->isEndpointRequested()) {
             return null;
         }
         return $this->getUserSettingSchemaConfigurationID();
@@ -51,7 +51,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
      */
     protected function getUserSettingSchemaConfigurationID(): ?int
     {
-        $schemaConfigurationID = $this->userSettingsManager->getSetting(
+        $schemaConfigurationID = $this->getUserSettingsManager()->getSetting(
             SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
             ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT
         );
@@ -64,6 +64,6 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
     {
-        return $this->endpointSchemaConfigurator;
+        return $this->getEndpointSchemaConfigurator();
     }
 }

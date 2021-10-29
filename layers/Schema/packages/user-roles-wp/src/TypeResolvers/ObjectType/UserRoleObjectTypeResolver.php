@@ -27,7 +27,7 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('User roles', 'user-roles');
+        return $this->getTranslationAPI()->__('User roles', 'user-roles');
     }
 
     public function getID(object $object): string | int | null
@@ -38,6 +38,6 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->userRoleTypeDataLoader;
+        return $this->getUserRoleTypeDataLoader();
     }
 }

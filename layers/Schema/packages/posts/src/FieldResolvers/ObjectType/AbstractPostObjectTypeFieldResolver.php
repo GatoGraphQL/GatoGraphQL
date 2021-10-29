@@ -60,10 +60,10 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'posts' => $this->postObjectTypeResolver,
-            'postCount' => $this->intScalarTypeResolver,
-            'postsForAdmin' => $this->postObjectTypeResolver,
-            'postCountForAdmin' => $this->intScalarTypeResolver,
+            'posts' => $this->getPostObjectTypeResolver(),
+            'postCount' => $this->getIntScalarTypeResolver(),
+            'postsForAdmin' => $this->getPostObjectTypeResolver(),
+            'postCountForAdmin' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -85,10 +85,10 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'posts' => $this->translationAPI->__('Posts', 'pop-posts'),
-            'postCount' => $this->translationAPI->__('Number of posts', 'pop-posts'),
-            'postsForAdmin' => $this->translationAPI->__('[Unrestricted] Posts', 'pop-posts'),
-            'postCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of posts', 'pop-posts'),
+            'posts' => $this->getTranslationAPI()->__('Posts', 'pop-posts'),
+            'postCount' => $this->getTranslationAPI()->__('Number of posts', 'pop-posts'),
+            'postsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Posts', 'pop-posts'),
+            'postCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of posts', 'pop-posts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -193,11 +193,11 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         switch ($fieldName) {
             case 'posts':
             case 'postsForAdmin':
-                return $this->postTypeAPI->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getPostTypeAPI()->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'postCount':
             case 'postCountForAdmin':
-                return $this->postTypeAPI->getPostCount($query);
+                return $this->getPostTypeAPI()->getPostCount($query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

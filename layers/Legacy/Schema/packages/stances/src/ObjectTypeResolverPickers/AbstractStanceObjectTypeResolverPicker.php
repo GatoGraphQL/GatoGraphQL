@@ -22,7 +22,7 @@ abstract class AbstractStanceObjectTypeResolverPicker extends AbstractObjectType
     
     public function getObjectTypeResolver(): ObjectTypeResolverInterface
     {
-        return $this->stanceObjectTypeResolver;
+        return $this->getStanceObjectTypeResolver();
     }
 
     public function isInstanceOfType(object $object): bool

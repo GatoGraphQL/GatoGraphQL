@@ -31,17 +31,17 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Media elements (such as images, videos, etc), attached to a post or independent', 'media');
+        return $this->getTranslationAPI()->__('Media elements (such as images, videos, etc), attached to a post or independent', 'media');
     }
 
     public function getID(object $object): string | int | null
     {
         $media = $object;
-        return $this->mediaTypeAPI->getMediaItemID($media);
+        return $this->getMediaTypeAPI()->getMediaItemID($media);
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->mediaTypeDataLoader;
+        return $this->getMediaTypeDataLoader();
     }
 }

@@ -51,7 +51,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'roleNames' => $this->stringScalarTypeResolver,
+            'roleNames' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -71,7 +71,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'roleNames' => $this->translationAPI->__('User role names', 'user-roles'),
+            'roleNames' => $this->getTranslationAPI()->__('User role names', 'user-roles'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -94,7 +94,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $user = $object;
         switch ($fieldName) {
             case 'roleNames':
-                return $this->userRoleTypeAPI->getUserRoles($user);
+                return $this->getUserRoleTypeAPI()->getUserRoles($user);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

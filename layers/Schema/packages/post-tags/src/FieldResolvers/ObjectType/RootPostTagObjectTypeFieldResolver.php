@@ -69,11 +69,11 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
             'postTag',
             'postTagBySlug',
             'postTags'
-                => $this->postTagObjectTypeResolver,
+                => $this->getPostTagObjectTypeResolver(),
             'postTagCount'
-                => $this->intScalarTypeResolver,
+                => $this->getIntScalarTypeResolver(),
             'postTagNames'
-                => $this->stringScalarTypeResolver,
+                => $this->getStringScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -95,11 +95,11 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'postTag' => $this->translationAPI->__('Post tag with a specific ID', 'pop-post-tags'),
-            'postTagBySlug' => $this->translationAPI->__('Post tag with a specific slug', 'pop-post-tags'),
-            'postTags' => $this->translationAPI->__('Post tags', 'pop-post-tags'),
-            'postTagCount' => $this->translationAPI->__('Number of post tags', 'pop-post-tags'),
-            'postTagNames' => $this->translationAPI->__('Names of the post tags', 'pop-post-tags'),
+            'postTag' => $this->getTranslationAPI()->__('Post tag with a specific ID', 'pop-post-tags'),
+            'postTagBySlug' => $this->getTranslationAPI()->__('Post tag with a specific slug', 'pop-post-tags'),
+            'postTags' => $this->getTranslationAPI()->__('Post tags', 'pop-post-tags'),
+            'postTagCount' => $this->getTranslationAPI()->__('Number of post tags', 'pop-post-tags'),
+            'postTagNames' => $this->getTranslationAPI()->__('Names of the post tags', 'pop-post-tags'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -189,16 +189,16 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
         switch ($fieldName) {
             case 'postTag':
             case 'postTagBySlug':
-                if ($tags = $this->postTagTypeAPI->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($tags = $this->getPostTagTypeAPI()->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $tags[0];
                 }
                 return null;
             case 'postTags':
-                return $this->postTagTypeAPI->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getPostTagTypeAPI()->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'postTagNames':
-                return $this->postTagTypeAPI->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
+                return $this->getPostTagTypeAPI()->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
             case 'postTagCount':
-                return $this->postTagTypeAPI->getTagCount($query);
+                return $this->getPostTagTypeAPI()->getTagCount($query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

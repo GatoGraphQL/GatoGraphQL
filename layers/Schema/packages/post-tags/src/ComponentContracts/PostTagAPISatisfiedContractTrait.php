@@ -26,11 +26,11 @@ trait PostTagAPISatisfiedContractTrait
 
     public function getTagTypeAPI(): TagTypeAPIInterface
     {
-        return $this->postTagTypeAPI;
+        return $this->getPostTagTypeAPI();
     }
 
     public function getTagTypeResolver(): TagObjectTypeResolverInterface
     {
-        return $this->postTagObjectTypeResolver;
+        return $this->getPostTagObjectTypeResolver();
     }
 }

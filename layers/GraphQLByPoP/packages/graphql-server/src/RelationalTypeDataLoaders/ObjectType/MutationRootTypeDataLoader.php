@@ -22,7 +22,7 @@ class MutationRootTypeDataLoader extends AbstractObjectTypeDataLoader
     public function getObjects(array $ids): array
     {
         return [
-            $this->mutationRoot,
+            $this->getMutationRoot(),
         ];
     }
 }

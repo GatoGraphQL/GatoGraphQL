@@ -27,7 +27,7 @@ class InputValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolv
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Representation of an input object in GraphQL', 'graphql-server');
+        return $this->getTranslationAPI()->__('Representation of an input object in GraphQL', 'graphql-server');
     }
 
     public function getID(object $object): string | int | null
@@ -39,6 +39,6 @@ class InputValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolv
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->schemaDefinitionReferenceTypeDataLoader;
+        return $this->getSchemaDefinitionReferenceTypeDataLoader();
     }
 }

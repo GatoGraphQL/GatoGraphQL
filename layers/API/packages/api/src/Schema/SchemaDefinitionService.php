@@ -92,7 +92,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
         if ($schemaDefinition === null) {
             $schemaDefinition = [
-                SchemaDefinition::QUERY_TYPE => $this->rootObjectTypeResolver->getMaybeNamespacedTypeName(),
+                SchemaDefinition::QUERY_TYPE => $this->getRoot()ObjectTypeResolver->getMaybeNamespacedTypeName(),
                 SchemaDefinition::TYPES => [],
             ];
 
@@ -101,7 +101,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $this->accessedInterfaceTypeNameObjectTypeResolvers = [];
 
             $this->pendingTypeOrDirectiveResolvers = [
-                $this->rootObjectTypeResolver,
+                $this->getRoot()ObjectTypeResolver,
             ];
             while (!empty($this->pendingTypeOrDirectiveResolvers)) {
                 $typeOrDirectiveResolver = array_pop($this->pendingTypeOrDirectiveResolvers);
@@ -148,10 +148,10 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
 
 
             // Add the Fragment Catalogue
-            $schemaDefinition[SchemaDefinition::PERSISTED_FRAGMENTS] = $this->fragmentCatalogueManager->getPersistedFragmentsForSchema();
+            $schemaDefinition[SchemaDefinition::PERSISTED_FRAGMENTS] = $this->getFragmentCatalogueManager()->getPersistedFragmentsForSchema();
 
             // Add the Query Catalogue
-            $schemaDefinition[SchemaDefinition::PERSISTED_QUERIES] = $this->queryCatalogueManager->getPersistedQueriesForSchema();
+            $schemaDefinition[SchemaDefinition::PERSISTED_QUERIES] = $this->getQueryCatalogueManager()->getPersistedQueriesForSchema();
 
             // Sort the elements in the schema alphabetically
             if (ComponentConfiguration::sortFullSchemaAlphabetically()) {
@@ -232,7 +232,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
          * The RootObject has the special role of also calculating the
          * global fields, connections and directives
          */
-        if ($typeResolver === $this->rootObjectTypeResolver) {
+        if ($typeResolver === $this->getRoot()ObjectTypeResolver) {
             $this->maybeMoveGlobalTypeSchemaDefinition($schemaDefinition, $typeSchemaDefinition);
         }
         $schemaDefinition[SchemaDefinition::TYPES][$typeKind][$typeName] = $typeSchemaDefinition;
@@ -302,7 +302,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
              * The RootObject has the special role of also calculating the
              * global fields, connections and directives
              */
-            if ($typeResolver === $this->rootObjectTypeResolver) {
+            if ($typeResolver === $this->getRoot()ObjectTypeResolver) {
                 return new RootObjectTypeSchemaDefinitionProvider($typeResolver);
             }
             return new ObjectTypeSchemaDefinitionProvider($typeResolver);
@@ -323,7 +323,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             return new InputObjectTypeSchemaDefinitionProvider($typeResolver);
         }
         throw new Exception(sprintf(
-            $this->translationAPI->__('No type identified for TypeResolver with class \'%s\'', 'api'),
+            $this->getTranslationAPI()->__('No type identified for TypeResolver with class \'%s\'', 'api'),
             get_class($typeResolver)
         ));
     }

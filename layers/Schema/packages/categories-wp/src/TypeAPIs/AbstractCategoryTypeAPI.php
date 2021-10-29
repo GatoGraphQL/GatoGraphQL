@@ -173,9 +173,9 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
             unset($query['parent-id']);
         }
 
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             TaxonomyTypeAPI::HOOK_QUERY,
-            $this->hooksAPI->applyFilters(
+            $this->getHooksAPI()->applyFilters(
                 self::HOOK_QUERY,
                 $query,
                 $options
@@ -193,12 +193,12 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     public function getCategoryURLPath(string | int | object $catObjectOrID): string
     {
         /** @var string */
-        return $this->cmsHelperService->getLocalURLPath($this->getCategoryURL($catObjectOrID));
+        return $this->getCmsHelperService()->getLocalURLPath($this->getCategoryURL($catObjectOrID));
     }
 
     public function getCategoryBase()
     {
-        return $this->cmsService->getOption($this->getCategoryBaseOption());
+        return $this->getCmsService()->getOption($this->getCategoryBaseOption());
     }
 
     public function setPostCategories($post_id, array $categories, bool $append = false)

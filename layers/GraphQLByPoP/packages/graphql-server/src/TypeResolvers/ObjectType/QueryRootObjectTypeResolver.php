@@ -24,8 +24,8 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
         RootObjectTypeResolver $rootObjectTypeResolver,
         QueryRootTypeDataLoader $queryRootTypeDataLoader,
     ): void {
-        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
-        $this->queryRootTypeDataLoader = $queryRootTypeDataLoader;
+        $this->getRoot()ObjectTypeResolver = $rootObjectTypeResolver;
+        $this->getQueryRoot()TypeDataLoader = $queryRootTypeDataLoader;
     }
 
     public function getTypeName(): string
@@ -35,7 +35,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Query type, starting from which the query is executed', 'graphql-server');
+        return $this->getTranslationAPI()->__('Query type, starting from which the query is executed', 'graphql-server');
     }
 
     public function getID(object $object): string | int | null
@@ -47,7 +47,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->queryRootTypeDataLoader;
+        return $this->getQueryRoot()TypeDataLoader;
     }
 
     public function isFieldNameConditionSatisfiedForSchema(

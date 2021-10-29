@@ -38,18 +38,18 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         bool $addParentCommentID,
     ): array {
         $schemaFieldArgNameTypeResolvers = [
-            MutationInputProperties::COMMENT => $this->stringScalarTypeResolver,
+            MutationInputProperties::COMMENT => $this->getStringScalarTypeResolver(),
         ];
         if ($addParentCommentID) {
-            $schemaFieldArgNameTypeResolvers[MutationInputProperties::PARENT_COMMENT_ID] = $this->idScalarTypeResolver;
+            $schemaFieldArgNameTypeResolvers[MutationInputProperties::PARENT_COMMENT_ID] = $this->getIdScalarTypeResolver();
         }
         if ($addCustomPostID) {
-            $schemaFieldArgNameTypeResolvers[MutationInputProperties::CUSTOMPOST_ID] = $this->idScalarTypeResolver;
+            $schemaFieldArgNameTypeResolvers[MutationInputProperties::CUSTOMPOST_ID] = $this->getIdScalarTypeResolver();
         }
         if (!ComponentConfiguration::mustUserBeLoggedInToAddComment()) {
-            $schemaFieldArgNameTypeResolvers[MutationInputProperties::AUTHOR_NAME] = $this->stringScalarTypeResolver;
-            $schemaFieldArgNameTypeResolvers[MutationInputProperties::AUTHOR_EMAIL] = $this->emailScalarTypeResolver;
-            $schemaFieldArgNameTypeResolvers[MutationInputProperties::AUTHOR_URL] = $this->urlScalarTypeResolver;
+            $schemaFieldArgNameTypeResolvers[MutationInputProperties::AUTHOR_NAME] = $this->getStringScalarTypeResolver();
+            $schemaFieldArgNameTypeResolvers[MutationInputProperties::AUTHOR_EMAIL] = $this->getEmailScalarTypeResolver();
+            $schemaFieldArgNameTypeResolvers[MutationInputProperties::AUTHOR_URL] = $this->getUrlScalarTypeResolver();
         }
         return $schemaFieldArgNameTypeResolvers;
     }
@@ -58,12 +58,12 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         string $fieldArgName,
     ): ?string {
         return match ($fieldArgName) {
-            MutationInputProperties::COMMENT => $this->translationAPI->__('The comment to add', 'comment-mutations'),
-            MutationInputProperties::PARENT_COMMENT_ID => $this->translationAPI->__('The ID of the parent comment', 'comment-mutations'),
-            MutationInputProperties::CUSTOMPOST_ID => $this->translationAPI->__('The ID of the custom post to add a comment to', 'comment-mutations'),
-            MutationInputProperties::AUTHOR_NAME => $this->translationAPI->__('The comment author\'s name', 'comment-mutations'),
-            MutationInputProperties::AUTHOR_EMAIL => $this->translationAPI->__('The comment author\'s email', 'comment-mutations'),
-            MutationInputProperties::AUTHOR_URL => $this->translationAPI->__('The comment author\'s site URL', 'comment-mutations'),
+            MutationInputProperties::COMMENT => $this->getTranslationAPI()->__('The comment to add', 'comment-mutations'),
+            MutationInputProperties::PARENT_COMMENT_ID => $this->getTranslationAPI()->__('The ID of the parent comment', 'comment-mutations'),
+            MutationInputProperties::CUSTOMPOST_ID => $this->getTranslationAPI()->__('The ID of the custom post to add a comment to', 'comment-mutations'),
+            MutationInputProperties::AUTHOR_NAME => $this->getTranslationAPI()->__('The comment author\'s name', 'comment-mutations'),
+            MutationInputProperties::AUTHOR_EMAIL => $this->getTranslationAPI()->__('The comment author\'s email', 'comment-mutations'),
+            MutationInputProperties::AUTHOR_URL => $this->getTranslationAPI()->__('The comment author\'s site URL', 'comment-mutations'),
             default => null,
         };
     }

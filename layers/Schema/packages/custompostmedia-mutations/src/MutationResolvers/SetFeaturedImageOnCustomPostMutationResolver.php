@@ -26,7 +26,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
     {
         $customPostID = $form_data[MutationInputProperties::CUSTOMPOST_ID];
         $mediaItemID = $form_data[MutationInputProperties::MEDIA_ITEM_ID];
-        $this->customPostMediaTypeMutationAPI->setFeaturedImage($customPostID, $mediaItemID);
+        $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $mediaItemID);
         return $customPostID;
     }
 
@@ -41,10 +41,10 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
         }
 
         if (!$form_data[MutationInputProperties::CUSTOMPOST_ID]) {
-            $errors[] = $this->translationAPI->__('The custom post ID is missing.', 'custompostmedia-mutations');
+            $errors[] = $this->getTranslationAPI()->__('The custom post ID is missing.', 'custompostmedia-mutations');
         }
         if (!$form_data[MutationInputProperties::MEDIA_ITEM_ID]) {
-            $errors[] = $this->translationAPI->__('The media item ID is missing.', 'custompostmedia-mutations');
+            $errors[] = $this->getTranslationAPI()->__('The media item ID is missing.', 'custompostmedia-mutations');
         }
         return $errors;
     }

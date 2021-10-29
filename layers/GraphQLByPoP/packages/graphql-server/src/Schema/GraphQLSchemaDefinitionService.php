@@ -35,7 +35,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
             return $this->getRootObjectTypeResolver();
         }
 
-        return $this->queryRootObjectTypeResolver;
+        return $this->getQueryRootObjectTypeResolver();
     }
 
     /**
@@ -52,7 +52,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
             return $this->getRootObjectTypeResolver();
         }
 
-        return $this->mutationRootObjectTypeResolver;
+        return $this->getMutationRootObjectTypeResolver();
     }
 
     /**

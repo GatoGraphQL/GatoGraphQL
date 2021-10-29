@@ -32,19 +32,19 @@ class LazyLoadHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             '\PoP\ComponentModel\Engine:getModuleData:start',
             array($this, 'start'),
             10,
             4
         );
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             '\PoP\ComponentModel\Engine:getModuleData:dataloading-module',
             array($this, 'calculateDataloadingModuleData'),
             10,
             8
         );
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             '\PoP\ComponentModel\Engine:getModuleData:end',
             array($this, 'end'),
             10,
@@ -81,10 +81,10 @@ class LazyLoadHookSet extends AbstractHookSet
                         DataOutputItems::MODULE_DATA,
                         DataOutputItems::DATABASES,
                     ],
-                    ModuleFilterManager::URLPARAM_MODULEFILTER => $this->lazy->getName(),
+                    ModuleFilterManager::URLPARAM_MODULEFILTER => $this->getLazy()->getName(),
                     Params::ACTIONS . '[]' => Actions::LOADLAZY,
                 ],
-                $this->requestHelperService->getCurrentURL()
+                $this->getRequestHelperService()->getCurrentURL()
             );
             $engine->addBackgroundUrl($url, array(Targets::MAIN));
         }

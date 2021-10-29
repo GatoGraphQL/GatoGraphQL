@@ -35,21 +35,21 @@ trait SetCategoriesOnPostObjectTypeFieldResolverTrait
 
     public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
     {
-        return $this->postObjectTypeResolver;
+        return $this->getPostObjectTypeResolver();
     }
 
     public function getSetCategoriesMutationResolver(): MutationResolverInterface
     {
-        return $this->setCategoriesOnPostMutationResolver;
+        return $this->getSetCategoriesOnPostMutationResolver();
     }
 
     public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
     {
-        return $this->postCategoryObjectTypeResolver;
+        return $this->getPostCategoryObjectTypeResolver();
     }
 
     protected function getEntityName(): string
     {
-        return $this->translationAPI->__('post', 'post-category-mutations');
+        return $this->getTranslationAPI()->__('post', 'post-category-mutations');
     }
 }

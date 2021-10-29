@@ -13,14 +13,14 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
         $errors = [];
         $target_id = $form_data['target_id'];
         if (!$target_id) {
-            $errors[] = $this->translationAPI->__('This URL is incorrect.', 'pop-coreprocessors');
+            $errors[] = $this->getTranslationAPI()->__('This URL is incorrect.', 'pop-coreprocessors');
         }
         return $errors;
     }
 
     protected function additionals($target_id, $form_data): void
     {
-        $this->hooksAPI->doAction('gd_updateusermetavalue', $target_id, $form_data);
+        $this->getHooksAPI()->doAction('gd_updateusermetavalue', $target_id, $form_data);
     }
 
     protected function update($form_data): string | int

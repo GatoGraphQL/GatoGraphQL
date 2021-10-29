@@ -58,8 +58,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'createPost' => $this->translationAPI->__('Create a post', 'post-mutations'),
-            'updatePost' => $this->translationAPI->__('Update a post', 'post-mutations'),
+            'createPost' => $this->getTranslationAPI()->__('Create a post', 'post-mutations'),
+            'updatePost' => $this->getTranslationAPI()->__('Update a post', 'post-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -98,8 +98,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
         return match ($fieldName) {
-            'createPost' => $this->createPostMutationResolver,
-            'updatePost' => $this->updatePostMutationResolver,
+            'createPost' => $this->getCreatePostMutationResolver(),
+            'updatePost' => $this->getUpdatePostMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -109,7 +109,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'createPost',
             'updatePost'
-                => $this->postObjectTypeResolver,
+                => $this->getPostObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

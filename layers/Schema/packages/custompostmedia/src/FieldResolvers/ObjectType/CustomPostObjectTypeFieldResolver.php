@@ -35,7 +35,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->supportingFeaturedImageInterfaceTypeFieldResolver,
+            $this->getSupportingFeaturedImageInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -65,10 +65,10 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $post = $object;
         switch ($fieldName) {
             case 'hasFeaturedImage':
-                return $this->customPostMediaTypeAPI->hasCustomPostThumbnail($objectTypeResolver->getID($post));
+                return $this->getCustomPostMediaTypeAPI()->hasCustomPostThumbnail($objectTypeResolver->getID($post));
 
             case 'featuredImage':
-                return $this->customPostMediaTypeAPI->getCustomPostThumbnailID($objectTypeResolver->getID($post));
+                return $this->getCustomPostMediaTypeAPI()->getCustomPostThumbnailID($objectTypeResolver->getID($post));
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

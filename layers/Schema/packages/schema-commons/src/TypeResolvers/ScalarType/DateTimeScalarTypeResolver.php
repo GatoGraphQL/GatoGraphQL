@@ -31,7 +31,7 @@ class DateTimeScalarTypeResolver extends AbstractScalarTypeResolver
     {
         $format = DateTimeInterface::ATOM;
         return sprintf(
-            $this->translationAPI->__('DateTime scalar. It follows the ISO 8601 specification, with format "%s")', 'schema-commons'),
+            $this->getTranslationAPI()->__('DateTime scalar. It follows the ISO 8601 specification, with format "%s")', 'schema-commons'),
             $format
         );
     }
@@ -52,7 +52,7 @@ class DateTimeScalarTypeResolver extends AbstractScalarTypeResolver
         if ($dt === false || array_sum($dt::getLastErrors())) {
             return $this->getError(
                 sprintf(
-                    $this->translationAPI->__('Type \'%s\' must be provided with format \'%s\'', 'component-model'),
+                    $this->getTranslationAPI()->__('Type \'%s\' must be provided with format \'%s\'', 'component-model'),
                     $this->getMaybeNamespacedTypeName(),
                     $format
                 )

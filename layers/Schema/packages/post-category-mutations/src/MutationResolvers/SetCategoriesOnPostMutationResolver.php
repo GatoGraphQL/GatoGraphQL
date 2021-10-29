@@ -17,6 +17,6 @@ class SetCategoriesOnPostMutationResolver extends AbstractSetCategoriesOnCustomP
 
     protected function getEntityName(): string
     {
-        return $this->translationAPI->__('post', 'post-category-mutations');
+        return $this->getTranslationAPI()->__('post', 'post-category-mutations');
     }
 }

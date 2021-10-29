@@ -37,13 +37,13 @@ trait ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecorato
              * So check that the instance exists, and if it doesn't, then
              * skip processing the entry
              */
-            if (!$this->instanceManager->hasInstance($directiveResolverClass)) {
+            if (!$this->getInstanceManager()->hasInstance($directiveResolverClass)) {
                 continue;
             }
             /**
              * Just to be on the safe side, also validate the instance is a directive
              */
-            $directiveResolver = $this->instanceManager->getInstance($directiveResolverClass);
+            $directiveResolver = $this->getInstanceManager()->getInstance($directiveResolverClass);
             if (!($directiveResolver instanceof DirectiveResolverInterface)) {
                 continue;
             }

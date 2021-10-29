@@ -66,13 +66,13 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match($fieldName) {
             'stancetarget' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
-            'categories' => $this->idScalarTypeResolver,
-            'catSlugs' => $this->stringScalarTypeResolver,
-            'stance' => $this->intScalarTypeResolver,
-            'title' => $this->stringScalarTypeResolver,
-            'excerpt' => $this->stringScalarTypeResolver,
-            'content' => $this->stringScalarTypeResolver,
-            'hasStanceTarget' => $this->booleanScalarTypeResolver,
+            'categories' => $this->getIdScalarTypeResolver(),
+            'catSlugs' => $this->getStringScalarTypeResolver(),
+            'stance' => $this->getIntScalarTypeResolver(),
+            'title' => $this->getStringScalarTypeResolver(),
+            'excerpt' => $this->getStringScalarTypeResolver(),
+            'content' => $this->getStringScalarTypeResolver(),
+            'hasStanceTarget' => $this->getBooleanScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -94,14 +94,14 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'categories' => $this->translationAPI->__('', ''),
-            'catSlugs' => $this->translationAPI->__('', ''),
-            'stance' => $this->translationAPI->__('', ''),
-            'title' => $this->translationAPI->__('', ''),
-            'excerpt' => $this->translationAPI->__('', ''),
-            'content' => $this->translationAPI->__('', ''),
-            'stancetarget' => $this->translationAPI->__('', ''),
-            'hasStanceTarget' => $this->translationAPI->__('', ''),
+            'categories' => $this->getTranslationAPI()->__('', ''),
+            'catSlugs' => $this->getTranslationAPI()->__('', ''),
+            'stance' => $this->getTranslationAPI()->__('', ''),
+            'title' => $this->getTranslationAPI()->__('', ''),
+            'excerpt' => $this->getTranslationAPI()->__('', ''),
+            'content' => $this->getTranslationAPI()->__('', ''),
+            'stancetarget' => $this->getTranslationAPI()->__('', ''),
+            'hasStanceTarget' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

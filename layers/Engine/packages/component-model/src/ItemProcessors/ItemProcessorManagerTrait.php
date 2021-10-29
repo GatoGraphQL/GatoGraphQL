@@ -59,7 +59,7 @@ trait ItemProcessorManagerTrait
             }
 
             // Get the instance from the InstanceManager
-            $processorInstance = $this->instanceManager->getInstance($itemProcessorClass);
+            $processorInstance = $this->getInstanceManager()->getInstance($itemProcessorClass);
             $this->processors[$itemProcessorClass][$itemName] = $processorInstance;
         }
 

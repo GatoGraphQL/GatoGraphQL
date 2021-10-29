@@ -29,9 +29,9 @@ class PersistedQueryEndpointGraphiQLBlockAccessor
      */
     public function getAttributes(WP_Post $post): ?PersistedQueryEndpointGraphiQLBlockAttributes
     {
-        $graphiQLBlock = $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        $graphiQLBlock = $this->getBlockHelpers()->getSingleBlockOfTypeFromCustomPost(
             $post,
-            $this->persistedQueryEndpointGraphiQLBlock
+            $this->getPersistedQueryEndpointGraphiQLBlock()
         );
         // If there is either 0 or more than 1, return nothing
         if ($graphiQLBlock === null) {

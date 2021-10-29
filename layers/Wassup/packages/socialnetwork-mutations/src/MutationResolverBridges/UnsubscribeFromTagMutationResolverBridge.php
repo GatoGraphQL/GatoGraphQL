@@ -26,7 +26,7 @@ class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMeta
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->unsubscribeFromTagMutationResolver;
+        return $this->getUnsubscribeFromTagMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool
@@ -37,9 +37,9 @@ class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMeta
     public function getSuccessString(string | int $result_id): ?string
     {
         $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
-        $tag = $this->postTagTypeAPI->getTag($result_id);
+        $tag = $this->getPostTagTypeAPI()->getTag($result_id);
         return sprintf(
-            $this->translationAPI->__('You have unsubscribed from <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->getTranslationAPI()->__('You have unsubscribed from <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
             $applicationtaxonomyapi->getTagSymbolName($tag)
         );
     }

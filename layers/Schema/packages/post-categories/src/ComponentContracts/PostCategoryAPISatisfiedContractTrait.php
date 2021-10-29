@@ -26,11 +26,11 @@ trait PostCategoryAPISatisfiedContractTrait
 
     public function getCategoryTypeAPI(): CategoryTypeAPIInterface
     {
-        return $this->postCategoryTypeAPI;
+        return $this->getPostCategoryTypeAPI();
     }
 
     public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
     {
-        return $this->postCategoryObjectTypeResolver;
+        return $this->getPostCategoryObjectTypeResolver();
     }
 }

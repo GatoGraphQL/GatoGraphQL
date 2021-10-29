@@ -111,11 +111,11 @@ class Cache implements PersistentCacheInterface, TransientCacheInterface
 
     public function getCacheByModelInstance(string $type): mixed
     {
-        return $this->getComponentModelCache($this->modelInstance->getModelInstanceId(), $type);
+        return $this->getComponentModelCache($this->getModelInstance()->getModelInstanceId(), $type);
     }
 
     public function storeCacheByModelInstance(string $type, mixed $content): void
     {
-        $this->storeCache($this->modelInstance->getModelInstanceId(), $type, $content);
+        $this->storeCache($this->getModelInstance()->getModelInstanceId(), $type, $content);
     }
 }

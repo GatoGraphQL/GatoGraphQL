@@ -60,7 +60,7 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
         // Set the params on the request, to emulate that they were added by the user
         $_REQUEST[Params::SCHEME] = APISchemes::API;
         // Include qualified namespace here (instead of `use`) since we do didn't know if component is installed
-        $_REQUEST[Params::DATASTRUCTURE] = $this->graphQLDataStructureFormatter->getName();
+        $_REQUEST[Params::DATASTRUCTURE] = $this->getGraphQLDataStructureFormatter()->getName();
         // Enable hooks
         \do_action('EndpointHandler:setDoingGraphQL');
     }

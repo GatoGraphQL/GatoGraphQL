@@ -28,7 +28,7 @@ trait CustomEndpointClientTrait
      */
     protected function isClientDisabled(): bool
     {
-        if (!\is_singular($this->graphQLCustomEndpointCustomPostType->getCustomPostType())) {
+        if (!\is_singular($this->getGraphQLCustomEndpointCustomPostType()->getCustomPostType())) {
             return true;
         }
         return parent::isClientDisabled();
@@ -43,7 +43,7 @@ trait CustomEndpointClientTrait
          * If accessing from Nginx, the server_name might point to localhost
          * instead of the actual server domain. So use the user-requested host
          */
-        $fullURL = $this->requestHelperService->getRequestedFullURL(true);
+        $fullURL = $this->getRequestHelperService()->getRequestedFullURL(true);
         // Remove the ?view=...
         $endpointURL = \remove_query_arg(RequestParams::VIEW, $fullURL);
         // // Maybe add ?use_namespace=true

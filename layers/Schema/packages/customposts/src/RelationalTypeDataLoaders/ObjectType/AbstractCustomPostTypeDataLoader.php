@@ -32,12 +32,12 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
 
     public function executeQuery($query, array $options = []): array
     {
-        return $this->customPostTypeAPI->getCustomPosts($query, $options);
+        return $this->getCustomPostTypeAPI()->getCustomPosts($query, $options);
     }
 
     protected function getOrderbyDefault()
     {
-        return $this->nameResolver->getName('popcms:dbcolumn:orderby:customposts:date');
+        return $this->getNameResolver()->getName('popcms:dbcolumn:orderby:customposts:date');
     }
 
     protected function getOrderDefault()
@@ -55,7 +55,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
 
     protected function getLimitParam($query_args)
     {
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             'CustomPostTypeDataLoader:query:limit',
             parent::getLimitParam($query_args)
         );

@@ -22,9 +22,9 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
             if (in_array($target_id, $value)) {
                 $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
-                $tag = $this->postTagTypeAPI->getTag($target_id);
+                $tag = $this->getPostTagTypeAPI()->getTag($target_id);
                 $errors[] = sprintf(
-                    $this->translationAPI->__('You have already subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+                    $this->getTranslationAPI()->__('You have already subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $applicationtaxonomyapi->getTagSymbolName($tag)
                 );
             }
@@ -38,7 +38,7 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
     protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
-        $this->hooksAPI->doAction('gd_subscribetotag', $target_id, $form_data);
+        $this->getHooksAPI()->doAction('gd_subscribetotag', $target_id, $form_data);
     }
 
     protected function update($form_data): string | int

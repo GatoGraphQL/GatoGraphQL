@@ -30,7 +30,7 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
     protected function getSchemaConfigBlockDataItem(int $schemaConfigurationID): ?array
     {
         $block = $this->getBlock();
-        return $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        return $this->getBlockHelpers()->getSingleBlockOfTypeFromCustomPost(
             $schemaConfigurationID,
             $block
         );
@@ -50,7 +50,7 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
     {
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null) {
-            return $this->moduleRegistry->isModuleEnabled($enablingModule);
+            return $this->getModuleRegistry()->isModuleEnabled($enablingModule);
         }
         return true;
     }

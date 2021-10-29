@@ -53,7 +53,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->endpointBlockCategory;
+        return $this->getEndpointBlockCategory();
     }
 
     protected function isDynamicBlock(): bool
@@ -71,7 +71,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
         return array_merge(
             parent::getLocalizedData(),
             [
-                'isAPIHierarchyEnabled' => $this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY),
+                'isAPIHierarchyEnabled' => $this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY),
             ]
         );
     }
@@ -101,17 +101,17 @@ EOF;
         } elseif ($schemaConfigurationID > 0) {
             $schemaConfigurationObject = \get_post($schemaConfigurationID);
             if (!is_null($schemaConfigurationObject)) {
-                $schemaConfigurationDescription = $this->cptUtils->getCustomPostDescription($schemaConfigurationObject);
+                $schemaConfigurationDescription = $this->getCptUtils()->getCustomPostDescription($schemaConfigurationObject);
                 $permalink = \get_permalink($schemaConfigurationObject->ID);
                 $schemaConfigurationContent = ($permalink ?
                     \sprintf(
                         '<code><a href="%s">%s</a></code>',
                         $permalink,
-                        $this->blockRenderingHelpers->getCustomPostTitle($schemaConfigurationObject)
+                        $this->getBlockRenderingHelpers()->getCustomPostTitle($schemaConfigurationObject)
                     ) :
                     \sprintf(
                         '<code>%s</code>',
-                        $this->blockRenderingHelpers->getCustomPostTitle($schemaConfigurationObject)
+                        $this->getBlockRenderingHelpers()->getCustomPostTitle($schemaConfigurationObject)
                     )
                 ) . ($schemaConfigurationDescription ?
                     '<br/><small>' . $schemaConfigurationDescription . '</small>'

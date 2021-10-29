@@ -26,7 +26,7 @@ abstract class AbstractUserMetaTypeAPI implements UserMetaTypeAPIInterface
          */
         $entries = ComponentConfiguration::getUserMetaEntries();
         $behavior = ComponentConfiguration::getUserMetaBehavior();
-        if (!$this->allowOrDenySettingsService->isEntryAllowed($key, $entries, $behavior)) {
+        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($key, $entries, $behavior)) {
             return null;
         }
         return $this->doGetUserMeta($userID, $key, $single);

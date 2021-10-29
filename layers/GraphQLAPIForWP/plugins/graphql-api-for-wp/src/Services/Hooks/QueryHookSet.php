@@ -28,7 +28,7 @@ class QueryHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             CustomPostTypeAPI::HOOK_QUERY,
             [$this, 'convertCustomPostsQuery'],
             10,
@@ -57,7 +57,7 @@ class QueryHookSet extends AbstractHookSet
              * must not be queried from outside, since they are used for
              * configuration purposes only, which is private data.
              */
-            $customPostTypeServices = $this->customPostTypeRegistry->getCustomPostTypes();
+            $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
             $query['post_type'] = array_diff(
                 is_array($query['post_type']) ? $query['post_type'] : [$query['post_type']],
                 array_map(

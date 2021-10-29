@@ -44,7 +44,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
 
     public function addMenuPages(): void
     {
-        $schemaEditorAccessCapability = $this->userAuthorization->getSchemaEditorAccessCapability();
+        $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
 
         if (
             $hookName = \add_submenu_page(
@@ -53,10 +53,10 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
                 __('GraphiQL', 'graphql-api'),
                 $schemaEditorAccessCapability,
                 $this->getMenuName(),
-                [$this->graphiQLMenuPage, 'print']
+                [$this->getGraphiQLMenuPage(), 'print']
             )
         ) {
-            $this->graphiQLMenuPage->setHookName($hookName);
+            $this->getGraphiQLMenuPage()->setHookName($hookName);
         }
 
         if (
@@ -65,11 +65,11 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
                 __('Interactive Schema', 'graphql-api'),
                 __('Interactive Schema', 'graphql-api'),
                 $schemaEditorAccessCapability,
-                $this->graphQLVoyagerMenuPage->getScreenID(),
-                [$this->graphQLVoyagerMenuPage, 'print']
+                $this->getGraphQLVoyagerMenuPage()->getScreenID(),
+                [$this->getGraphQLVoyagerMenuPage(), 'print']
             )
         ) {
-            $this->graphQLVoyagerMenuPage->setHookName($hookName);
+            $this->getGraphQLVoyagerMenuPage()->setHookName($hookName);
         }
     }
 }

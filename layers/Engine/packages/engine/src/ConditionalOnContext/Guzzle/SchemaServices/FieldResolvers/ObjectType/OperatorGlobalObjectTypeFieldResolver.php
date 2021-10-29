@@ -39,8 +39,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'getJSON' => $this->jsonObjectScalarTypeResolver,
-            'getAsyncJSON' => $this->jsonObjectScalarTypeResolver,
+            'getJSON' => $this->getJsonObjectScalarTypeResolver(),
+            'getAsyncJSON' => $this->getJsonObjectScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -56,8 +56,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'getJSON' => $this->translationAPI->__('Retrieve data from URL and decode it as a JSON object', 'pop-component-model'),
-            'getAsyncJSON' => $this->translationAPI->__('Retrieve data from multiple URL asynchronously, and decode each of them as a JSON object', 'pop-component-model'),
+            'getJSON' => $this->getTranslationAPI()->__('Retrieve data from URL and decode it as a JSON object', 'pop-component-model'),
+            'getAsyncJSON' => $this->getTranslationAPI()->__('Retrieve data from multiple URL asynchronously, and decode each of them as a JSON object', 'pop-component-model'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -66,10 +66,10 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         return match ($fieldName) {
             'getJSON' => [
-                'url' => $this->urlScalarTypeResolver,
+                'url' => $this->getUrlScalarTypeResolver(),
             ],
             'getAsyncJSON' => [
-                'urls' => $this->urlScalarTypeResolver,
+                'urls' => $this->getUrlScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -78,8 +78,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['getJSON' => 'url'] => $this->translationAPI->__('The URL to request', 'pop-component-model'),
-            ['getAsyncJSON' => 'urls'] => $this->translationAPI->__('The URLs to request, with format `key:value`, where the value is the URL, and the key, if provided, is the name where to store the JSON data in the result (if not provided, it is accessed under the corresponding numeric index)', 'pop-component-model'),
+            ['getJSON' => 'url'] => $this->getTranslationAPI()->__('The URL to request', 'pop-component-model'),
+            ['getAsyncJSON' => 'urls'] => $this->getTranslationAPI()->__('The URLs to request, with format `key:value`, where the value is the URL, and the key, if provided, is the name where to store the JSON data in the result (if not provided, it is accessed under the corresponding numeric index)', 'pop-component-model'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

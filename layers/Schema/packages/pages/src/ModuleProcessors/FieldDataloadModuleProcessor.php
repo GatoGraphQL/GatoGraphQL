@@ -46,7 +46,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_PAGE:
-                return $this->pageObjectTypeResolver;
+                return $this->getPageObjectTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);

@@ -137,14 +137,14 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
         // Propagate
         $submodules = $this->getAllSubmodules($module);
-        $submodules = $this->moduleFilterManager->removeExcludedSubmodules($module, $submodules);
+        $submodules = $this->getModuleFilterManager()->removeExcludedSubmodules($module, $submodules);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
-        $this->moduleFilterManager->prepareForPropagation($module, $props);
+        $this->getModuleFilterManager()->prepareForPropagation($module, $props);
         if ($submodules) {
             $props[$moduleFullName][Props::SUBMODULES] = $props[$moduleFullName][Props::SUBMODULES] ?? array();
             foreach ($submodules as $submodule) {
-                $submodule_processor = $this->moduleProcessorManager->getProcessor($submodule);
+                $submodule_processor = $this->getModuleProcessorManager()->getProcessor($submodule);
                 $submodule_wildcard_props_to_propagate = $wildcard_props_to_propagate;
 
                 // If the submodule belongs to the same dataset, then set the shared attributies for the same-dataset modules
@@ -158,7 +158,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 $submodule_processor->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES], $submodule_wildcard_props_to_propagate, $targetted_props_to_propagate);
             }
         }
-        $this->moduleFilterManager->restoreFromPropagation($module, $props);
+        $this->getModuleFilterManager()->restoreFromPropagation($module, $props);
     }
 
     public function initModelPropsModuletree(array $module, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
@@ -205,7 +205,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 $this->setProp($submodule, $props, 'succeeding-typeResolver', $relationalTypeResolver);
             }
             foreach ($this->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
-                if ($subcomponent_typeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
+                if ($subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
                     foreach ($subcomponent_modules as $subcomponent_module) {
                         $this->setProp($subcomponent_module, $props, 'succeeding-typeResolver', $subcomponent_typeResolver);
                     }
@@ -218,7 +218,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             }
             foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionDataField => $dataFieldTypeResolverOptionsConditionalSubmodules) {
                 foreach ($dataFieldTypeResolverOptionsConditionalSubmodules as $conditionalDataField => $conditionalSubmodules) {
-                    if ($subcomponentTypeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $conditionalDataField)) {
+                    if ($subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $conditionalDataField)) {
                         foreach ($conditionalSubmodules as $conditionalSubmodule) {
                             $this->setProp($conditionalSubmodule, $props, 'succeeding-typeResolver', $subcomponentTypeResolver);
                         }
@@ -230,7 +230,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         /**
          * Allow to add more stuff
          */
-        $this->hooksAPI->doAction(
+        $this->getHooksAPI()->doAction(
             self::HOOK_INIT_MODEL_PROPS,
             array(&$props),
             $module,
@@ -258,7 +258,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         /**
          * Allow to add more stuff
          */
-        $this->hooksAPI->doAction(
+        $this->getHooksAPI()->doAction(
             self::HOOK_INIT_REQUEST_PROPS,
             array(&$props),
             $module,
@@ -514,23 +514,23 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         if ($relationalTypeResolver = $this->getProp($module, $props, 'succeeding-typeResolver')) {
             foreach (array_keys($this->getDomainSwitchingSubmodules($module)) as $subcomponent_data_field) {
                 // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_typeResolver_class will be empty
-                if ($subcomponent_typeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
+                if ($subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
                     // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                     // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                     // @see https://github.com/leoloso/PoP/issues/1050
-                    $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($subcomponent_data_field);
-                    $ret[$subcomponent_data_field_outputkey] = $this->fieldQueryInterpreter->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $subcomponent_data_field);
+                    $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($subcomponent_data_field);
+                    $ret[$subcomponent_data_field_outputkey] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $subcomponent_data_field);
                 }
             }
             foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionDataField => $dataFieldTypeResolverOptionsConditionalSubmodules) {
                 foreach (array_keys($dataFieldTypeResolverOptionsConditionalSubmodules) as $conditionalDataField) {
                     // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponentTypeResolverClass will be empty
-                    if ($subcomponent_typeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $conditionalDataField)) {
+                    if ($subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $conditionalDataField)) {
                         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                         // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                         // @see https://github.com/leoloso/PoP/issues/1050
-                        $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($conditionalDataField);
-                        $ret[$subcomponent_data_field_outputkey] = $this->fieldQueryInterpreter->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $conditionalDataField);
+                        $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($conditionalDataField);
+                        $ret[$subcomponent_data_field_outputkey] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $conditionalDataField);
                     }
                 }
             }
@@ -570,7 +570,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             foreach ($dbkeys as $field => $dbkey) {
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                 // @see https://github.com/leoloso/PoP/issues/1050
-                $field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+                $field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($field);
                 $ret[implode('.', array_merge($path, [$field_outputkey]))] = $dbkey;
             }
         }
@@ -579,42 +579,42 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $moduleFullName = ModuleUtils::getModuleFullName($module);
 
         if ($relationalTypeResolver = $this->getProp($module, $props, 'succeeding-typeResolver')) {
-            $this->moduleFilterManager->prepareForPropagation($module, $props);
+            $this->getModuleFilterManager()->prepareForPropagation($module, $props);
             foreach ($this->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                 // @see https://github.com/leoloso/PoP/issues/1050
-                $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($subcomponent_data_field);
+                $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($subcomponent_data_field);
                 // Only modules which do not load data
                 $subcomponent_modules = array_filter($subcomponent_modules, function ($submodule) {
-                    return !$this->moduleProcessorManager->getProcessor($submodule)->startDataloadingSection($submodule);
+                    return !$this->getModuleProcessorManager()->getProcessor($submodule)->startDataloadingSection($submodule);
                 });
                 foreach ($subcomponent_modules as $subcomponent_module) {
-                    $this->moduleProcessorManager->getProcessor($subcomponent_module)->addToDatasetDatabaseKeys($subcomponent_module, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
+                    $this->getModuleProcessorManager()->getProcessor($subcomponent_module)->addToDatasetDatabaseKeys($subcomponent_module, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
                 }
             }
             foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionDataField => $dataFieldTypeResolverOptionsConditionalSubmodules) {
                 foreach ($dataFieldTypeResolverOptionsConditionalSubmodules as $conditionalDataField => $subcomponent_modules) {
                     // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                     // @see https://github.com/leoloso/PoP/issues/1050
-                    $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($conditionalDataField);
+                    $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($conditionalDataField);
                     // Only modules which do not load data
                     $subcomponent_modules = array_filter($subcomponent_modules, function ($submodule) {
-                        return !$this->moduleProcessorManager->getProcessor($submodule)->startDataloadingSection($submodule);
+                        return !$this->getModuleProcessorManager()->getProcessor($submodule)->startDataloadingSection($submodule);
                     });
                     foreach ($subcomponent_modules as $subcomponent_module) {
-                        $this->moduleProcessorManager->getProcessor($subcomponent_module)->addToDatasetDatabaseKeys($subcomponent_module, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
+                        $this->getModuleProcessorManager()->getProcessor($subcomponent_module)->addToDatasetDatabaseKeys($subcomponent_module, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
                     }
                 }
             }
 
             // Only modules which do not load data
             $submodules = array_filter($this->getSubmodules($module), function ($submodule) {
-                return !$this->moduleProcessorManager->getProcessor($submodule)->startDataloadingSection($submodule);
+                return !$this->getModuleProcessorManager()->getProcessor($submodule)->startDataloadingSection($submodule);
             });
             foreach ($submodules as $submodule) {
-                $this->moduleProcessorManager->getProcessor($submodule)->addToDatasetDatabaseKeys($submodule, $props[$moduleFullName][Props::SUBMODULES], $path, $ret);
+                $this->getModuleProcessorManager()->getProcessor($submodule)->addToDatasetDatabaseKeys($submodule, $props[$moduleFullName][Props::SUBMODULES], $path, $ret);
             }
-            $this->moduleFilterManager->restoreFromPropagation($module, $props);
+            $this->getModuleFilterManager()->restoreFromPropagation($module, $props);
         }
     }
 
@@ -768,7 +768,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         // Exclude the subcomponent modules here
         if ($submodules = $this->getModulesToPropagateDataProperties($module)) {
             foreach ($submodules as $submodule) {
-                $submodule_processor = $this->moduleProcessorManager->getProcessor($submodule);
+                $submodule_processor = $this->getModuleProcessorManager()->getProcessor($submodule);
 
                 // Propagate only if the submodule doesn't load data. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
                 if (!$submodule_processor->startDataloadingSection($submodule)) {
@@ -783,7 +783,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     //     // Exclude the subcomponent modules here
     //     if ($submodules = $this->getModulesToPropagateDataProperties($module)) {
     //         foreach ($submodules as $submodule) {
-    //             $submodule_processor = $this->moduleProcessorManager->getProcessor($submodule);
+    //             $submodule_processor = $this->getModuleProcessorManager()->getProcessor($submodule);
 
     //             // Propagate only if the submodule doesn't have a typeResolver. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
     //             if (!$submodule_processor->startDataloadingSection($submodule)) {
@@ -820,7 +820,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         /**
          * Allow to add more stuff
          */
-        $this->hooksAPI->doAction(
+        $this->getHooksAPI()->doAction(
             self::HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES,
             array(&$ret),
             $module,
@@ -1001,20 +1001,20 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     {
         // By default, execute only if the module is targeted for execution and doing POST
         $vars = ApplicationState::getVars();
-        return 'POST' == $_SERVER['REQUEST_METHOD'] && $vars['actionpath'] == $this->modulePathHelpers->getStringifiedModulePropagationCurrentPath($module);
+        return 'POST' == $_SERVER['REQUEST_METHOD'] && $vars['actionpath'] == $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
     }
 
     public function getDataloadSource(array $module, array &$props): string
     {
         // Because a component can interact with itself by adding ?modulepaths=...,
         // then, by default, we simply set the dataload source to point to itself!
-        $stringified_module_propagation_current_path = $this->modulePathHelpers->getStringifiedModulePropagationCurrentPath($module);
+        $stringified_module_propagation_current_path = $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($module);
         $ret = GeneralUtils::addQueryArgs(
             [
-                ModuleFilterManager::URLPARAM_MODULEFILTER => $this->modulePaths->getName(),
+                ModuleFilterManager::URLPARAM_MODULEFILTER => $this->getModulePaths()->getName(),
                 ModulePaths::URLPARAM_MODULEPATHS . '[]' => $stringified_module_propagation_current_path,
             ],
-            $this->requestHelperService->getCurrentURL()
+            $this->getRequestHelperService()->getCurrentURL()
         );
 
         // If we are in the API currently, stay in the API
@@ -1029,7 +1029,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         if ($extra_module_paths = $this->getProp($module, $props, 'dataload-source-add-modulepaths')) {
             foreach ($extra_module_paths as $modulepath) {
                 $ret = GeneralUtils::addQueryArgs([
-                    ModulePaths::URLPARAM_MODULEPATHS . '[]' => $this->modulePathHelpers->stringifyModulePath($modulepath),
+                    ModulePaths::URLPARAM_MODULEPATHS . '[]' => $this->getModulePathHelpers()->stringifyModulePath($modulepath),
                 ], $ret);
             }
         }
@@ -1076,7 +1076,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $moduleFullName = ModuleUtils::getModuleFullName($module);
 
         // Exclude the subcomponent modules here
-        $this->moduleFilterManager->prepareForPropagation($module, $props);
+        $this->getModuleFilterManager()->prepareForPropagation($module, $props);
         if ($submodules = $this->getModulesToPropagateDataProperties($module)) {
             // Calculate in 2 steps:
             // First step: The conditional-on-data-field-submodules must have their data-fields added under entry "conditional-data-fields"
@@ -1093,7 +1093,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                         }
                     }
                     foreach ($conditionalSubmodules as $submodule) {
-                        $submodule_processor = $this->moduleProcessorManager->getProcessor($submodule);
+                        $submodule_processor = $this->getModuleProcessorManager()->getProcessor($submodule);
 
                         // Propagate only if the submodule doesn't load data. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
                         if (!$submodule_processor->startDataloadingSection($submodule)) {
@@ -1138,7 +1138,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
             // Second step: all the other submodules can be calculated directly
             foreach ($submodules as $submodule) {
-                $submodule_processor = $this->moduleProcessorManager->getProcessor($submodule);
+                $submodule_processor = $this->getModuleProcessorManager()->getProcessor($submodule);
 
                 // Propagate only if the submodule doesn't load data. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
                 if (!$submodule_processor->startDataloadingSection($submodule)) {
@@ -1157,7 +1157,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 $ret['data-fields'] = array_values(array_unique($ret['data-fields']));
             }
         }
-        $this->moduleFilterManager->restoreFromPropagation($module, $props);
+        $this->getModuleFilterManager()->restoreFromPropagation($module, $props);
     }
 
     protected function flattenRelationalDBObjectDataProperties($propagate_fn, &$ret, array $module, array &$props): void
@@ -1176,7 +1176,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         }
 
         // If it has subcomponent modules, integrate them under 'subcomponents'
-        $this->moduleFilterManager->prepareForPropagation($module, $props);
+        $this->getModuleFilterManager()->prepareForPropagation($module, $props);
         foreach ($domainSwitchingSubmodules as $subcomponent_data_field => $subcomponent_modules) {
             $subcomponent_modules_data_properties = array(
                 'data-fields' => array(),
@@ -1184,7 +1184,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 'subcomponents' => array()
             );
             foreach ($subcomponent_modules as $subcomponent_module) {
-                $subcomponent_processor = $this->moduleProcessorManager->getProcessor($subcomponent_module);
+                $subcomponent_processor = $this->getModuleProcessorManager()->getProcessor($subcomponent_module);
                 if ($subcomponent_module_data_properties = $subcomponent_processor->$propagate_fn($subcomponent_module, $props[$moduleFullName][Props::SUBMODULES])) {
                     $subcomponent_modules_data_properties = array_merge_recursive(
                         $subcomponent_modules_data_properties,
@@ -1219,7 +1219,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 );
             }
         }
-        $this->moduleFilterManager->restoreFromPropagation($module, $props);
+        $this->getModuleFilterManager()->restoreFromPropagation($module, $props);
     }
 
 

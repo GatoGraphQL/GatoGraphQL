@@ -57,7 +57,7 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_DATEFORMAT
                 ]);
                 if ($fieldArgName === $formatFilterInputName) {
-                    return $this->cmsService->getOption($this->nameResolver->getName('popcms:option:dateFormat'));
+                    return $this->getCmsService()->getOption($this->getNameResolver()->getName('popcms:option:dateFormat'));
                 }
                 break;
         }

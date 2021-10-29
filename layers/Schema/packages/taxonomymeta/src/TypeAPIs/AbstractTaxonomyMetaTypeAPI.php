@@ -26,7 +26,7 @@ abstract class AbstractTaxonomyMetaTypeAPI implements TaxonomyMetaTypeAPIInterfa
          */
         $entries = ComponentConfiguration::getTaxonomyMetaEntries();
         $behavior = ComponentConfiguration::getTaxonomyMetaBehavior();
-        if (!$this->allowOrDenySettingsService->isEntryAllowed($key, $entries, $behavior)) {
+        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($key, $entries, $behavior)) {
             return null;
         }
         return $this->doGetTaxonomyMeta($termID, $key, $single);

@@ -25,12 +25,12 @@ class SingleEndpointSchemaConfigurator extends AbstractSchemaConfigurationEndpoi
      */
     public function isServiceEnabled(): bool
     {
-        return $this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)
+        return $this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)
             && parent::isServiceEnabled();
     }
 
     protected function getSchemaConfigurationExecuterRegistry(): SchemaConfigurationExecuterRegistryInterface
     {
-        return $this->endpointSchemaConfigurationExecuterRegistry;
+        return $this->getEndpointSchemaConfigurationExecuterRegistry();
     }
 }

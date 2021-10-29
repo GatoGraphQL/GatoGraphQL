@@ -63,10 +63,10 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         if ($postIDOrError === 0) {
             return new Error(
                 'add-custompost-error',
-                $this->translationAPI->__('Could not create the custom post', 'custompost-mutations-wp')
+                $this->getTranslationAPI()->__('Could not create the custom post', 'custompost-mutations-wp')
             );
         }
-        return $this->errorHelper->returnResultOrConvertError($postIDOrError);
+        return $this->getErrorHelper()->returnResultOrConvertError($postIDOrError);
     }
     /**
      * @param array<string, mixed> $data
@@ -77,7 +77,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         // Convert the parameters
         $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
         $postIDOrError = \wp_update_post($data);
-        return $this->errorHelper->returnResultOrConvertError($postIDOrError);
+        return $this->getErrorHelper()->returnResultOrConvertError($postIDOrError);
     }
     public function canUserEditCustomPost(string | int $userID, string | int $customPostID): bool
     {

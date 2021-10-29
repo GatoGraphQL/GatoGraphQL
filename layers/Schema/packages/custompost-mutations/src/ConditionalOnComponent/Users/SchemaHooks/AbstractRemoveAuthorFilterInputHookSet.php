@@ -21,7 +21,7 @@ abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             $this->getHookNameToRemoveFilterInput(),
             [$this, 'getFilterInputModules']
         );
@@ -34,7 +34,7 @@ abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
      */
     public function getFilterInputModules(array $filterInputModules): array
     {
-        $modules = $this->userCustomPostFilterInputHookSet->getAuthorFilterInputModules();
+        $modules = $this->getUserCustomPostFilterInputHookSet()->getAuthorFilterInputModules();
         foreach ($modules as $module) {
             $pos = array_search($module, $filterInputModules);
             if ($pos !== false) {

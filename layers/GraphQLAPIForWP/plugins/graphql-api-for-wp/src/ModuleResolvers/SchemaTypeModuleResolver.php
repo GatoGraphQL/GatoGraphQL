@@ -224,7 +224,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         /** @var GenericCustomPostObjectTypeResolver */
         $genericCustomPostTypeResolver = $this->genericCustomPostTypeResolver;
         /** @var MediaObjectTypeResolver */
-        $mediaTypeResolver = $this->mediaTypeResolver;
+        $mediaTypeResolver = $this->getMediaTypeResolver();
         /** @var PageObjectTypeResolver */
         $pageTypeResolver = $this->pageTypeResolver;
         /** @var PostTagObjectTypeResolver */
@@ -482,7 +482,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
          * to avoid PHPStan errors
          */
         /** @var CustomPostUnionTypeResolver */
-        $customPostUnionTypeResolver = $this->customPostUnionTypeResolver;
+        $customPostUnionTypeResolver = $this->getCustomPostUnionTypeResolver();
         /** @var GenericCustomPostObjectTypeResolver */
         $genericCustomPostTypeResolver = $this->genericCustomPostTypeResolver;
         /** @var PageObjectTypeResolver */
@@ -490,7 +490,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         /** @var PostObjectTypeResolver */
         $postTypeResolver = $this->postTypeResolver;
         /** @var CustomPostTypeRegistryInterface */
-        $customPostTypeRegistry = $this->customPostTypeRegistry;
+        $customPostTypeRegistry = $this->getCustomPostTypeRegistry();
         /** @var UserObjectTypeResolver */
         $userTypeResolver = $this->userTypeResolver;
 

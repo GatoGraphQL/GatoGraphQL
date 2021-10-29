@@ -81,7 +81,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     protected function initNamespacedObjectTypeNameClasses(): void
     {
         // For each class, obtain its namespacedTypeName
-        $objectTypeResolvers = $this->typeRegistry->getObjectTypeResolvers();
+        $objectTypeResolvers = $this->getTypeRegistry()->getObjectTypeResolvers();
         $this->namespacedObjectTypeNameResolverClasses = [];
         foreach ($objectTypeResolvers as $objectTypeResolver) {
             $objectTypeResolverNamespacedName = $objectTypeResolver->getNamespacedTypeName();
@@ -95,7 +95,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     protected function initNamespacedInterfaceTypeNameClasses(): void
     {
         // For each interface, obtain its namespacedInterfaceName
-        $interfaceTypeResolvers = $this->typeRegistry->getInterfaceTypeResolvers();
+        $interfaceTypeResolvers = $this->getTypeRegistry()->getInterfaceTypeResolvers();
         $this->namespacedInterfaceTypeNameResolverClasses = [];
         foreach ($interfaceTypeResolvers as $interfaceTypeResolver) {
             $interfaceTypeResolverNamespacedName = $interfaceTypeResolver->getNamespacedTypeName();
@@ -120,7 +120,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      */
     protected function initDirectiveNameClasses(): void
     {
-        $directiveResolvers = $this->directiveRegistry->getDirectiveResolvers();
+        $directiveResolvers = $this->getDirectiveRegistry()->getDirectiveResolvers();
         // For each class, obtain its directive name. Notice that different directives
         // can have the same name (eg: @translate as implemented for Google and Azure),
         // then the mapping goes from name to list of resolvers
@@ -203,7 +203,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     {
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null) {
-            return $this->moduleRegistry->isModuleEnabled($enablingModule);
+            return $this->getModuleRegistry()->isModuleEnabled($enablingModule);
         }
         return true;
     }

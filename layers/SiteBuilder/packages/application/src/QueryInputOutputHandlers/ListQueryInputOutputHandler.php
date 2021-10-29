@@ -26,7 +26,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
 
     protected function getLimit()
     {
-        return $this->cmsService->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit'));
+        return $this->getCmsService()->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit'));
     }
 
     public function getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array

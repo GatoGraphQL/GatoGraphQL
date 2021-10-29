@@ -28,7 +28,7 @@ abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator
 
     protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface
     {
-        return $this->graphQLCustomEndpointCustomPostType;
+        return $this->getGraphQLCustomEndpointCustomPostType();
     }
 
     /**
@@ -43,7 +43,7 @@ abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator
 
         // If there was no options block, something went wrong in the post content
         $default = true;
-        $optionsBlockDataItem = $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        $optionsBlockDataItem = $this->getBlockHelpers()->getSingleBlockOfTypeFromCustomPost(
             $postOrID,
             $this->getBlock()
         );

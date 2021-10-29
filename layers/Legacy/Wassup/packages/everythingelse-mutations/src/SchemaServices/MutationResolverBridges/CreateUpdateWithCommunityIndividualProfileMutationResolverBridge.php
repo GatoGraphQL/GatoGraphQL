@@ -21,6 +21,6 @@ class CreateUpdateWithCommunityIndividualProfileMutationResolverBridge extends C
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->createUpdateWithCommunityIndividualProfileMutationResolver;
+        return $this->getCreateUpdateWithCommunityIndividualProfileMutationResolver();
     }
 }

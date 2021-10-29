@@ -22,7 +22,7 @@ class ArrayKeyScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Associative and non-associative array keys, which can be either a String or an Int.', 'component-model');
+        return $this->getTranslationAPI()->__('Associative and non-associative array keys, which can be either a String or an Int.', 'component-model');
     }
 
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
@@ -36,7 +36,7 @@ class ArrayKeyScalarTypeResolver extends AbstractScalarTypeResolver
         if (is_float($inputValue) || is_bool($inputValue)) {
             return $this->getError(
                 sprintf(
-                    $this->translationAPI->__('Only strings or integers are allowed for type \'%s\'', 'schema-commons'),
+                    $this->getTranslationAPI()->__('Only strings or integers are allowed for type \'%s\'', 'schema-commons'),
                     $this->getMaybeNamespacedTypeName()
                 )
             );

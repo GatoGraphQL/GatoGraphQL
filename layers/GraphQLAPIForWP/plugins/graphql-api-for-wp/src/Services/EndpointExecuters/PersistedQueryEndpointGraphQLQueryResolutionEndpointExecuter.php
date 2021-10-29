@@ -37,7 +37,7 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
 
     protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface
     {
-        return $this->graphQLPersistedQueryEndpointCustomPostType;
+        return $this->getGraphQLPersistedQueryEndpointCustomPostType();
     }
 
     /**
@@ -50,7 +50,7 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
         /**
          * Extract the query from the post (or from its parents), and set it in $vars
          */
-        return $this->graphQLQueryPostTypeHelpers->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
+        return $this->getGraphQLQueryPostTypeHelpers()->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
     }
 
     /**
@@ -63,14 +63,14 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
         [&$vars] = $vars_in_array;
 
         // The Persisted Query is also standard GraphQL
-        $this->graphQLRequestVarsHooks->setStandardGraphQLVars($vars);
+        $this->getGraphQLRequestVarsHooks()->setStandardGraphQLVars($vars);
 
         // Remove the VarsHookSet from the GraphQLRequest, so it doesn't process the GraphQL query
         // Otherwise it will add error "The query in the body is empty"
         /**
          * @var callable
          */
-        $action = [$this->graphQLRequestVarsHooks, 'addVars'];
+        $action = [$this->getGraphQLRequestVarsHooks(), 'addVars'];
         \remove_action(
             'ApplicationState:addVars',
             $action,

@@ -77,7 +77,7 @@ class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
     protected function getGutenbergTemplate(): array
     {
         return [
-            [$this->cacheControlBlock->getBlockFullName()],
+            [$this->getCacheControlBlock()->getBlockFullName()],
         ];
     }
 }

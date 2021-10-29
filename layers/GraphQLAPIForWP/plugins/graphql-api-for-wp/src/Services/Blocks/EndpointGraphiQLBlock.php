@@ -41,7 +41,7 @@ class EndpointGraphiQLBlock extends AbstractBlock implements EndpointEditorBlock
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->customEndpointBlockCategory;
+        return $this->getCustomEndpointBlockCategory();
     }
 
     protected function isDynamicBlock(): bool

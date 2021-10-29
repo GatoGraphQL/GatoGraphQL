@@ -32,11 +32,11 @@ trait FilterDataModuleProcessorTrait
         if ($activeDataloadQueryArgsFilteringModules = $this->getActiveDataloadQueryArgsFilteringModules($module, $source)) {
             foreach ($activeDataloadQueryArgsFilteringModules as $submodule) {
                 /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
-                $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($submodule);
+                $dataloadQueryArgsFilterInputModuleProcessor = $this->getModuleProcessorManager()->getProcessor($submodule);
                 $value = $dataloadQueryArgsFilterInputModuleProcessor->getValue($submodule, $source);
                 if ($filterInput = $dataloadQueryArgsFilterInputModuleProcessor->getFilterInput($submodule)) {
                     /** @var FilterInputProcessorInterface */
-                    $filterInputProcessor = $this->filterInputProcessorManager->getProcessor($filterInput);
+                    $filterInputProcessor = $this->getFilterInputProcessorManager()->getProcessor($filterInput);
                     $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $value);
                 }
             }
@@ -60,7 +60,7 @@ trait FilterDataModuleProcessorTrait
                 $dataloadQueryArgsFilteringModules,
                 function (array $module) use ($source) {
                     /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
-                    $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
+                    $dataloadQueryArgsFilterInputModuleProcessor = $this->getModuleProcessorManager()->getProcessor($module);
                     return $dataloadQueryArgsFilterInputModuleProcessor->isInputSetInSource($module, $source);
                 }
             );
@@ -75,7 +75,7 @@ trait FilterDataModuleProcessorTrait
         return array_values(array_filter(
             $this->getDatasetmoduletreeSectionFlattenedModules($module),
             function ($module) {
-                return $this->moduleProcessorManager->getProcessor($module) instanceof DataloadQueryArgsFilterInputModuleProcessorInterface;
+                return $this->getModuleProcessorManager()->getProcessor($module) instanceof DataloadQueryArgsFilterInputModuleProcessorInterface;
             }
         ));
     }

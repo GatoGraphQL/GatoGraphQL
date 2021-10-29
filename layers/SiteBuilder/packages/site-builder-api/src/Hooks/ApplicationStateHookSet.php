@@ -13,11 +13,11 @@ class ApplicationStateHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             ModelInstance::HOOK_COMPONENTSFROMVARS_RESULT,
             [$this, 'maybeAddComponent']
         );
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'ApplicationState:addVars',
             [$this, 'addVars'],
             10,
@@ -45,7 +45,7 @@ class ApplicationStateHookSet extends AbstractHookSet
     {
         $vars = ApplicationState::getVars();
         if ($stratum = $vars['stratum'] ?? null) {
-            $components[] = $this->translationAPI->__('stratum:', 'component-model') . $stratum;
+            $components[] = $this->getTranslationAPI()->__('stratum:', 'component-model') . $stratum;
         }
 
         return $components;

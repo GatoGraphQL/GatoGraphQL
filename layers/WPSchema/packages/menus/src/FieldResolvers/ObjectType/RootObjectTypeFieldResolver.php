@@ -46,8 +46,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'menuByLocation' => $this->translationAPI->__('Get a menu by its location', 'menus'),
-            'menuBySlug' => $this->translationAPI->__('Get a menu by its slug', 'menus'),
+            'menuByLocation' => $this->getTranslationAPI()->__('Get a menu by its location', 'menus'),
+            'menuBySlug' => $this->getTranslationAPI()->__('Get a menu by its slug', 'menus'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -56,10 +56,10 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'menuByLocation' => [
-                'location' => $this->stringScalarTypeResolver,
+                'location' => $this->getStringScalarTypeResolver(),
             ],
             'menuBySlug' => [
-                'slug' => $this->stringScalarTypeResolver,
+                'slug' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -68,8 +68,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['menuByLocation' => 'location'] => $this->translationAPI->__('The location of the menu', 'menus'),
-            ['menuBySlug' => 'slug'] => $this->translationAPI->__('The slug of the menu', 'menus'),
+            ['menuByLocation' => 'location'] => $this->getTranslationAPI()->__('The location of the menu', 'menus'),
+            ['menuBySlug' => 'slug'] => $this->getTranslationAPI()->__('The slug of the menu', 'menus'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -129,7 +129,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return match ($fieldName) {
             'menuByLocation',
             'menuBySlug'
-                => $this->menuObjectTypeResolver,
+                => $this->getMenuObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

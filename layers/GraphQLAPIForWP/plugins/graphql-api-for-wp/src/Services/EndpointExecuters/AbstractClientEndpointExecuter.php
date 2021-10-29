@@ -23,7 +23,7 @@ abstract class AbstractClientEndpointExecuter extends AbstractEndpointExecuter
 
     protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface
     {
-        return $this->graphQLCustomEndpointCustomPostType;
+        return $this->getGraphQLCustomEndpointCustomPostType();
     }
 
     public function executeEndpoint(): void

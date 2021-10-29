@@ -101,7 +101,7 @@ abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor i
     public function queriesExternalDomain(array $module, array &$props): bool
     {
         if ($sources = $this->getDataloadMultidomainSources($module, $props)) {
-            $domain = $this->cmsService->getSiteURL();
+            $domain = $this->getCmsService()->getSiteURL();
             foreach ($sources as $source) {
                 if (substr($source, 0, strlen($domain)) != $domain) {
                     return true;

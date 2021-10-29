@@ -25,11 +25,11 @@ class CustomEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaC
 
     protected function getCustomPostType(): string
     {
-        return $this->graphQLCustomEndpointCustomPostType->getCustomPostType();
+        return $this->getGraphQLCustomEndpointCustomPostType()->getCustomPostType();
     }
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
     {
-        return $this->endpointSchemaConfigurator;
+        return $this->getEndpointSchemaConfigurator();
     }
 }

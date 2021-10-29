@@ -69,11 +69,11 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
             'postCategory',
             'postCategoryBySlug',
             'postCategories'
-                => $this->postCategoryObjectTypeResolver,
+                => $this->getPostCategoryObjectTypeResolver(),
             'postCategoryCount'
-                => $this->intScalarTypeResolver,
+                => $this->getIntScalarTypeResolver(),
             'postCategoryNames'
-                => $this->stringScalarTypeResolver,
+                => $this->getStringScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -95,11 +95,11 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'postCategory' => $this->translationAPI->__('Post category with a specific ID', 'post-categories'),
-            'postCategoryBySlug' => $this->translationAPI->__('Post category with a specific slug', 'post-categories'),
-            'postCategories' => $this->translationAPI->__('Post categories', 'post-categories'),
-            'postCategoryCount' => $this->translationAPI->__('Number of post categories', 'post-categories'),
-            'postCategoryNames' => $this->translationAPI->__('Names of the post categories', 'post-categories'),
+            'postCategory' => $this->getTranslationAPI()->__('Post category with a specific ID', 'post-categories'),
+            'postCategoryBySlug' => $this->getTranslationAPI()->__('Post category with a specific slug', 'post-categories'),
+            'postCategories' => $this->getTranslationAPI()->__('Post categories', 'post-categories'),
+            'postCategoryCount' => $this->getTranslationAPI()->__('Number of post categories', 'post-categories'),
+            'postCategoryNames' => $this->getTranslationAPI()->__('Names of the post categories', 'post-categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -189,16 +189,16 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
         switch ($fieldName) {
             case 'postCategory':
             case 'postCategoryBySlug':
-                if ($categories = $this->postCategoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($categories = $this->getPostCategoryTypeAPI()->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $categories[0];
                 }
                 return null;
             case 'postCategories':
-                return $this->postCategoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getPostCategoryTypeAPI()->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'postCategoryNames':
-                return $this->postCategoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
+                return $this->getPostCategoryTypeAPI()->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
             case 'postCategoryCount':
-                return $this->postCategoryTypeAPI->getCategoryCount($query);
+                return $this->getPostCategoryTypeAPI()->getCategoryCount($query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

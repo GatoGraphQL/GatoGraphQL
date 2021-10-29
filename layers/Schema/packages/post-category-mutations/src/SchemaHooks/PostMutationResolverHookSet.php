@@ -31,12 +31,12 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
 
     protected function getCustomPostType(): string
     {
-        return $this->postTypeAPI->getPostCustomPostType();
+        return $this->getPostTypeAPI()->getPostCustomPostType();
     }
 
     protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
     {
-        return $this->postCategoryObjectTypeResolver;
+        return $this->getPostCategoryObjectTypeResolver();
     }
 
     protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface

@@ -32,7 +32,7 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
 
     protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface
     {
-        return $this->graphQLCustomEndpointCustomPostType;
+        return $this->getGraphQLCustomEndpointCustomPostType();
     }
 
     /**
@@ -45,6 +45,6 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
         /**
          * Extract the query from the BODY through standard GraphQL endpoint execution
          */
-        return $this->queryRetrieverInterface->extractRequestedGraphQLQueryPayload();
+        return $this->getQueryRetrieverInterface()->extractRequestedGraphQLQueryPayload();
     }
 }

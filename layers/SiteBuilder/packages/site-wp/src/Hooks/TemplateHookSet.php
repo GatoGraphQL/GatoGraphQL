@@ -22,7 +22,7 @@ class TemplateHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             'template_include',
             [$this, 'setTemplate'],
             // Execute last
@@ -33,7 +33,7 @@ class TemplateHookSet extends AbstractHookSet
     public function setTemplate(string $template): string
     {
         // If doing JSON, for sure return json.php which only prints the encoded JSON
-        if (!$this->applicationStateHelperService->doingJSON()) {
+        if (!$this->getApplicationStateHelperService()->doingJSON()) {
             return Component::getTemplatesDir() . '/Output.php';
         }
         return $template;

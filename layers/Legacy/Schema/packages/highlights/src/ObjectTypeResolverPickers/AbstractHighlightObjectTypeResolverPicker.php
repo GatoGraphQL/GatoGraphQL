@@ -22,7 +22,7 @@ abstract class AbstractHighlightObjectTypeResolverPicker extends AbstractObjectT
     
     public function getObjectTypeResolver(): ObjectTypeResolverInterface
     {
-        return $this->highlightObjectTypeResolver;
+        return $this->getHighlightObjectTypeResolver();
     }
 
     public function isInstanceOfType(object $object): bool

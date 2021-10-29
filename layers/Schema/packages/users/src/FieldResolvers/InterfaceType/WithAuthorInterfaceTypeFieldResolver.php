@@ -48,7 +48,7 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'author' => $this->translationAPI->__('The entity\'s author', 'queriedobject'),
+            'author' => $this->getTranslationAPI()->__('The entity\'s author', 'queriedobject'),
             default => parent::getFieldDescription($fieldName),
         };
     }
@@ -57,7 +57,7 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
     {
         switch ($fieldName) {
             case 'author':
-                return $this->userObjectTypeResolver;
+                return $this->getUserObjectTypeResolver();
         }
 
         return parent::getFieldTypeResolver($fieldName);

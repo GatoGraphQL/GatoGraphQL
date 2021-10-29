@@ -32,25 +32,25 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             HookNames::OBJECT_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
             array($this, 'maybeAddFieldArgNameTypeResolvers'),
             10,
             4
         );
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             HookNames::OBJECT_TYPE_FIELD_ARG_DESCRIPTION,
             array($this, 'maybeAddFieldArgDescription'),
             10,
             5
         );
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             HookNames::OBJECT_TYPE_FIELD_ARG_TYPE_MODIFIERS,
             array($this, 'maybeAddFieldArgTypeModifiers'),
             10,
             5
         );
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
             array($this, 'maybeSetTags'),
             10,
@@ -68,7 +68,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if (!$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
             return $fieldArgNameTypeResolvers;
         }
-        $fieldArgNameTypeResolvers[MutationInputProperties::TAGS] = $this->stringScalarTypeResolver;
+        $fieldArgNameTypeResolvers[MutationInputProperties::TAGS] = $this->getStringScalarTypeResolver();
         return $fieldArgNameTypeResolvers;
     }
 
@@ -83,7 +83,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if ($fieldArgName !== MutationInputProperties::TAGS || !$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
             return $fieldArgDescription;
         }
-        return $this->translationAPI->__('The tags to set', 'custompost-tag-mutations');
+        return $this->getTranslationAPI()->__('The tags to set', 'custompost-tag-mutations');
     }
 
     public function maybeAddFieldArgTypeModifiers(
@@ -108,7 +108,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     public function maybeSetTags(int | string $customPostID, array $form_data): void
     {
         // Only for that specific CPT
-        if ($this->customPostTypeAPI->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
+        if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
             return;
         }
         if (!isset($form_data[MutationInputProperties::TAGS])) {

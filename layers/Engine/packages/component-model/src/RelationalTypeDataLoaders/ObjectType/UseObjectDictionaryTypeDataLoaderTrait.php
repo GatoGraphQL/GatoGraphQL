@@ -24,10 +24,10 @@ trait UseObjectDictionaryTypeDataLoaderTrait
         $objectTypeResolverClass = get_class($this->getObjectTypeResolver());
         $ret = [];
         foreach ($ids as $id) {
-            if (!$this->objectDictionary->has($objectTypeResolverClass, $id)) {
-                $this->objectDictionary->set($objectTypeResolverClass, $id, $this->getObjectTypeNewInstance($id));
+            if (!$this->getObjectDictionary()->has($objectTypeResolverClass, $id)) {
+                $this->getObjectDictionary()->set($objectTypeResolverClass, $id, $this->getObjectTypeNewInstance($id));
             }
-            $ret[] = $this->objectDictionary->get($objectTypeResolverClass, $id);
+            $ret[] = $this->getObjectDictionary()->get($objectTypeResolverClass, $id);
         }
         return $ret;
     }

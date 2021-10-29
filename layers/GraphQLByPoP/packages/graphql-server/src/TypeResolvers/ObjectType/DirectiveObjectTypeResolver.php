@@ -27,7 +27,7 @@ class DirectiveObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('A GraphQL directive in the data graph', 'graphql-server');
+        return $this->getTranslationAPI()->__('A GraphQL directive in the data graph', 'graphql-server');
     }
 
     public function getID(object $object): string | int | null
@@ -39,6 +39,6 @@ class DirectiveObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->schemaDefinitionReferenceTypeDataLoader;
+        return $this->getSchemaDefinitionReferenceTypeDataLoader();
     }
 }

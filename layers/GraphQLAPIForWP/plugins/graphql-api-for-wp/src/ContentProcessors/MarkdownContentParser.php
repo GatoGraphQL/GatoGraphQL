@@ -31,6 +31,6 @@ class MarkdownContentParser extends AbstractContentParser implements MarkdownCon
      */
     public function convertMarkdownToHTML(string $markdownContent): string
     {
-        return $this->markdownConvertorInterface->convertMarkdownToHTML($markdownContent);
+        return $this->getMarkdownConvertorInterface()->convertMarkdownToHTML($markdownContent);
     }
 }

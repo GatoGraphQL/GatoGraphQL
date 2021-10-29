@@ -51,9 +51,9 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
             ],
             'conditions' => [
                 'scheme' => APISchemes::API,
-                'datastructure' => $this->restDataStructureFormatter->getName(),
+                'datastructure' => $this->getRestDataStructureFormatter()->getName(),
                 'routing-state' => [
-                    'taxonomy-name' => $this->postTagTypeAPI->getPostTagTaxonomyName(),
+                    'taxonomy-name' => $this->getPostTagTypeAPI()->getPostTagTaxonomyName(),
                 ],
             ],
         ];
@@ -84,7 +84,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,
-                    'datastructure' => $this->restDataStructureFormatter->getName(),
+                    'datastructure' => $this->getRestDataStructureFormatter()->getName(),
                 ],
             ];
         }
@@ -104,9 +104,9 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,
-                    'datastructure' => $this->restDataStructureFormatter->getName(),
+                    'datastructure' => $this->getRestDataStructureFormatter()->getName(),
                     'routing-state' => [
-                        'taxonomy-name' => $this->postTagTypeAPI->getPostTagTaxonomyName(),
+                        'taxonomy-name' => $this->getPostTagTypeAPI()->getPostTagTaxonomyName(),
                     ],
                 ],
             ];

@@ -52,7 +52,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
     {
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null) {
-            return $this->moduleRegistry->isModuleEnabled($enablingModule);
+            return $this->getModuleRegistry()->isModuleEnabled($enablingModule);
         }
         return parent::isServiceEnabled();
     }
@@ -85,7 +85,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
      */
     final protected function getScriptLocalizationName(): string
     {
-        return $this->generalUtils->dashesToCamelCase($this->getScriptName());
+        return $this->getGeneralUtils()->dashesToCamelCase($this->getScriptName());
     }
 
     /**

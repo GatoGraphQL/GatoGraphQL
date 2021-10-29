@@ -51,8 +51,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'addCommentToCustomPost' => $this->translationAPI->__('Add a comment to a custom post', 'comment-mutations'),
-            'replyComment' => $this->translationAPI->__('Reply a comment with another comment', 'comment-mutations'),
+            'addCommentToCustomPost' => $this->getTranslationAPI()->__('Add a comment to a custom post', 'comment-mutations'),
+            'replyComment' => $this->getTranslationAPI()->__('Reply a comment with another comment', 'comment-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -91,7 +91,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return match ($fieldName) {
             'addCommentToCustomPost',
             'replyComment'
-                => $this->addCommentToCustomPostMutationResolver,
+                => $this->getAddCommentToCustomPostMutationResolver(),
             default
                 => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
@@ -102,7 +102,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return match ($fieldName) {
             'addCommentToCustomPost',
             'replyComment'
-                => $this->commentObjectTypeResolver,
+                => $this->getCommentObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

@@ -32,7 +32,7 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->elementalInterfaceTypeFieldResolver,
+            $this->getElementalInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -55,7 +55,7 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'self' => $this->translationAPI->__('The same object', 'pop-component-model'),
+            'self' => $this->getTranslationAPI()->__('The same object', 'pop-component-model'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

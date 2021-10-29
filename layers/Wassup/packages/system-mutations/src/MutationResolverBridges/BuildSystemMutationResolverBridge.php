@@ -21,11 +21,11 @@ class BuildSystemMutationResolverBridge extends AbstractSystemComponentMutationR
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->buildSystemMutationResolver;
+        return $this->getBuildSystemMutationResolver();
     }
     public function getSuccessString(string | int $result_id): ?string
     {
-        return $this->translationAPI->__('System action "build" executed successfully.', 'pop-system');
+        return $this->getTranslationAPI()->__('System action "build" executed successfully.', 'pop-system');
         ;
     }
 }

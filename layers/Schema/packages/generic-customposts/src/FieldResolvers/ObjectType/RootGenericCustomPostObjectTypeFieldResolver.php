@@ -70,14 +70,14 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'genericCustomPost' => $this->translationAPI->__('Custom post with a specific ID', 'generic-customposts'),
-            'genericCustomPostBySlug' => $this->translationAPI->__('Custom post with a specific slug', 'generic-customposts'),
-            'genericCustomPosts' => $this->translationAPI->__('Custom posts', 'generic-customposts'),
-            'genericCustomPostCount' => $this->translationAPI->__('Number of custom posts', 'generic-customposts'),
-            'genericCustomPostForAdmin' => $this->translationAPI->__('[Unrestricted] Custom post with a specific ID', 'generic-customposts'),
-            'genericCustomPostBySlugForAdmin' => $this->translationAPI->__('[Unrestricted] Custom post with a specific slug', 'generic-customposts'),
-            'genericCustomPostsForAdmin' => $this->translationAPI->__('[Unrestricted] Custom posts', 'generic-customposts'),
-            'genericCustomPostCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of custom posts', 'generic-customposts'),
+            'genericCustomPost' => $this->getTranslationAPI()->__('Custom post with a specific ID', 'generic-customposts'),
+            'genericCustomPostBySlug' => $this->getTranslationAPI()->__('Custom post with a specific slug', 'generic-customposts'),
+            'genericCustomPosts' => $this->getTranslationAPI()->__('Custom posts', 'generic-customposts'),
+            'genericCustomPostCount' => $this->getTranslationAPI()->__('Number of custom posts', 'generic-customposts'),
+            'genericCustomPostForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Custom post with a specific ID', 'generic-customposts'),
+            'genericCustomPostBySlugForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Custom post with a specific slug', 'generic-customposts'),
+            'genericCustomPostsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Custom posts', 'generic-customposts'),
+            'genericCustomPostCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of custom posts', 'generic-customposts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -91,10 +91,10 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
             'genericCustomPostForAdmin',
             'genericCustomPostBySlugForAdmin',
             'genericCustomPostsForAdmin'
-                => $this->genericCustomPostObjectTypeResolver,
+                => $this->getGenericCustomPostObjectTypeResolver(),
             'genericCustomPostCount',
             'genericCustomPostCountForAdmin'
-                => $this->intScalarTypeResolver,
+                => $this->getIntScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -257,16 +257,16 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
             case 'genericCustomPostBySlug':
             case 'genericCustomPostForAdmin':
             case 'genericCustomPostBySlugForAdmin':
-                if ($customPosts = $this->customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($customPosts = $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $customPosts[0];
                 }
                 return null;
             case 'genericCustomPosts':
             case 'genericCustomPostsForAdmin':
-                return $this->customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'genericCustomPostCount':
             case 'genericCustomPostCountForAdmin':
-                return $this->customPostTypeAPI->getCustomPostCount($query);
+                return $this->getCustomPostTypeAPI()->getCustomPostCount($query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

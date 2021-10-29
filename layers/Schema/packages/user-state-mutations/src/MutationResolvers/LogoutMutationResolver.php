@@ -34,12 +34,12 @@ class LogoutMutationResolver extends AbstractMutationResolver
         $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
 
-        $this->userStateTypeMutationAPI->logout();
+        $this->getUserStateTypeMutationAPI()->logout();
 
         // Modify the routing-state with the newly logged in user info
         ApplicationStateUtils::setUserStateVars(ApplicationState::$vars);
 
-        $this->hooksAPI->doAction('gd:user:loggedout', $user_id);
+        $this->getHooksAPI()->doAction('gd:user:loggedout', $user_id);
         return $user_id;
     }
 }

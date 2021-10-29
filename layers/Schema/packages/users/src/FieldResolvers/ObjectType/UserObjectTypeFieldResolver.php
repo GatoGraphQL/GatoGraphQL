@@ -49,7 +49,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->queryableInterfaceTypeFieldResolver,
+            $this->getQueryableInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -73,14 +73,14 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'username' => $this->stringScalarTypeResolver,
-            'name' => $this->stringScalarTypeResolver,
-            'displayName' => $this->stringScalarTypeResolver,
-            'firstName' => $this->stringScalarTypeResolver,
-            'lastName' => $this->stringScalarTypeResolver,
-            'email' => $this->emailScalarTypeResolver,
-            'description' => $this->stringScalarTypeResolver,
-            'websiteURL' => $this->urlScalarTypeResolver,
+            'username' => $this->getStringScalarTypeResolver(),
+            'name' => $this->getStringScalarTypeResolver(),
+            'displayName' => $this->getStringScalarTypeResolver(),
+            'firstName' => $this->getStringScalarTypeResolver(),
+            'lastName' => $this->getStringScalarTypeResolver(),
+            'email' => $this->getEmailScalarTypeResolver(),
+            'description' => $this->getStringScalarTypeResolver(),
+            'websiteURL' => $this->getUrlScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -100,17 +100,17 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->translationAPI->__('URL of the user\'s profile in the website', 'pop-users'),
-            'urlPath' => $this->translationAPI->__('URL path of the user\'s profile in the website', 'pop-users'),
-            'slug' => $this->translationAPI->__('Slug of the URL of the user\'s profile in the website', 'pop-users'),
-            'username' => $this->translationAPI->__('User\'s username handle', 'pop-users'),
-            'name' => $this->translationAPI->__('Name of the user', 'pop-users'),
-            'displayName' => $this->translationAPI->__('Name of the user as displayed on the website', 'pop-users'),
-            'firstName' => $this->translationAPI->__('User\'s first name', 'pop-users'),
-            'lastName' => $this->translationAPI->__('User\'s last name', 'pop-users'),
-            'email' => $this->translationAPI->__('User\'s email', 'pop-users'),
-            'description' => $this->translationAPI->__('Description of the user', 'pop-users'),
-            'websiteURL' => $this->translationAPI->__('User\'s own website\'s URL', 'pop-users'),
+            'url' => $this->getTranslationAPI()->__('URL of the user\'s profile in the website', 'pop-users'),
+            'urlPath' => $this->getTranslationAPI()->__('URL path of the user\'s profile in the website', 'pop-users'),
+            'slug' => $this->getTranslationAPI()->__('Slug of the URL of the user\'s profile in the website', 'pop-users'),
+            'username' => $this->getTranslationAPI()->__('User\'s username handle', 'pop-users'),
+            'name' => $this->getTranslationAPI()->__('Name of the user', 'pop-users'),
+            'displayName' => $this->getTranslationAPI()->__('Name of the user as displayed on the website', 'pop-users'),
+            'firstName' => $this->getTranslationAPI()->__('User\'s first name', 'pop-users'),
+            'lastName' => $this->getTranslationAPI()->__('User\'s last name', 'pop-users'),
+            'email' => $this->getTranslationAPI()->__('User\'s email', 'pop-users'),
+            'description' => $this->getTranslationAPI()->__('Description of the user', 'pop-users'),
+            'websiteURL' => $this->getTranslationAPI()->__('User\'s own website\'s URL', 'pop-users'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -133,35 +133,35 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $user = $object;
         switch ($fieldName) {
             case 'username':
-                return $this->userTypeAPI->getUserLogin($user);
+                return $this->getUserTypeAPI()->getUserLogin($user);
 
             case 'name':
             case 'displayName':
-                return $this->userTypeAPI->getUserDisplayName($user);
+                return $this->getUserTypeAPI()->getUserDisplayName($user);
 
             case 'firstName':
-                return $this->userTypeAPI->getUserFirstname($user);
+                return $this->getUserTypeAPI()->getUserFirstname($user);
 
             case 'lastName':
-                return $this->userTypeAPI->getUserLastname($user);
+                return $this->getUserTypeAPI()->getUserLastname($user);
 
             case 'email':
-                return $this->userTypeAPI->getUserEmail($user);
+                return $this->getUserTypeAPI()->getUserEmail($user);
 
             case 'url':
-                return $this->userTypeAPI->getUserURL($objectTypeResolver->getID($user));
+                return $this->getUserTypeAPI()->getUserURL($objectTypeResolver->getID($user));
 
             case 'urlPath':
-                return $this->userTypeAPI->getUserURLPath($objectTypeResolver->getID($user));
+                return $this->getUserTypeAPI()->getUserURLPath($objectTypeResolver->getID($user));
 
             case 'slug':
-                return $this->userTypeAPI->getUserSlug($user);
+                return $this->getUserTypeAPI()->getUserSlug($user);
 
             case 'description':
-                return $this->userTypeAPI->getUserDescription($user);
+                return $this->getUserTypeAPI()->getUserDescription($user);
 
             case 'websiteURL':
-                return $this->userTypeAPI->getUserWebsiteUrl($user);
+                return $this->getUserTypeAPI()->getUserWebsiteUrl($user);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

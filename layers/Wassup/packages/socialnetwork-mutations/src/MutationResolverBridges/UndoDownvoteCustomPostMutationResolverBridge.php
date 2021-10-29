@@ -21,7 +21,7 @@ class UndoDownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpd
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->undoDownvoteCustomPostMutationResolver;
+        return $this->getUndoDownvoteCustomPostMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool
@@ -32,8 +32,8 @@ class UndoDownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpd
     public function getSuccessString(string | int $result_id): ?string
     {
         return sprintf(
-            $this->translationAPI->__('You have stopped down-voting <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $this->customPostTypeAPI->getTitle($result_id)
+            $this->getTranslationAPI()->__('You have stopped down-voting <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->getCustomPostTypeAPI()->getTitle($result_id)
         );
     }
 }

@@ -35,7 +35,7 @@ class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->withMetaInterfaceTypeFieldResolver,
+            $this->getWithMetaInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -66,7 +66,7 @@ class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'metaValue':
             case 'metaValues':
-                return $this->taxonomyMetaAPI->getTaxonomyTermMeta(
+                return $this->getTaxonomyMetaAPI()->getTaxonomyTermMeta(
                     $objectTypeResolver->getID($taxonomy),
                     $fieldArgs['key'],
                     $fieldName === 'metaValue'

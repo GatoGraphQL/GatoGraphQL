@@ -35,7 +35,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->withMetaInterfaceTypeFieldResolver,
+            $this->getWithMetaInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -66,7 +66,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'metaValue':
             case 'metaValues':
-                return $this->customPostMetaAPI->getCustomPostMeta(
+                return $this->getCustomPostMetaAPI()->getCustomPostMeta(
                     $objectTypeResolver->getID($customPost),
                     $fieldArgs['key'],
                     $fieldName === 'metaValue'

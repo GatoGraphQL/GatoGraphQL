@@ -25,11 +25,11 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaRelationalTypeRes
 
     protected function getConfigurationEntries(): array
     {
-        return $this->accessControlManager->getEntriesForDirectives(AccessControlGroups::ROLES);
+        return $this->getAccessControlManager()->getEntriesForDirectives(AccessControlGroups::ROLES);
     }
 
     protected function getValidateRoleDirectiveResolver(): DirectiveResolverInterface
     {
-        return $this->validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver;
+        return $this->getValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver();
     }
 }

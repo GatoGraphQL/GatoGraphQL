@@ -28,7 +28,7 @@ class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Items (links, pages, etc) added to a menu', 'menus');
+        return $this->getTranslationAPI()->__('Items (links, pages, etc) added to a menu', 'menus');
     }
 
     public function getID(object $object): string | int | null
@@ -40,6 +40,6 @@ class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->menuItemTypeDataLoader;
+        return $this->getMenuItemTypeDataLoader();
     }
 }

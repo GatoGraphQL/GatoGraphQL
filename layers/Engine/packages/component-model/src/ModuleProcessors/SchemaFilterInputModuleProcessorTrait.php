@@ -36,7 +36,7 @@ trait SchemaFilterInputModuleProcessorTrait
 
     protected function getDefaultSchemaFilterInputTypeResolver(): InputTypeResolverInterface
     {
-        return $this->schemaDefinitionService->getDefaultInputTypeResolver();
+        return $this->getSchemaDefinitionService()->getDefaultInputTypeResolver();
     }
 
     public function getFilterInputDescription(array $module): ?string

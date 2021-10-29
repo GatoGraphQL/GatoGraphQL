@@ -44,7 +44,7 @@ class CacheControlManager extends UpstreamCacheControlManager
             return $this->overriddenFieldEntries;
         }
 
-        $this->overriddenFieldEntries = $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator->maybeAppendAdditionalRootEntriesForFields(
+        $this->overriddenFieldEntries = $this->getMandatoryDirectivesForFieldsRootTypeEntryDuplicator()->maybeAppendAdditionalRootEntriesForFields(
             parent::getEntriesForFields()
         );
 

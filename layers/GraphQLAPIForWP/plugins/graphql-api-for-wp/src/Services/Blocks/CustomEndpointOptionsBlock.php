@@ -36,6 +36,6 @@ class CustomEndpointOptionsBlock extends AbstractEndpointOptionsBlock implements
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->customEndpointBlockCategory;
+        return $this->getCustomEndpointBlockCategory();
     }
 }

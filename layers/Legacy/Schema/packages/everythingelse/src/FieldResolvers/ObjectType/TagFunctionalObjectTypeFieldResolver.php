@@ -44,10 +44,10 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'symbol' => $this->stringScalarTypeResolver,
-            'symbolnamedescription' => $this->stringScalarTypeResolver,
-            'namedescription' => $this->stringScalarTypeResolver,
-            'symbolname' => $this->stringScalarTypeResolver,
+            'symbol' => $this->getStringScalarTypeResolver(),
+            'symbolnamedescription' => $this->getStringScalarTypeResolver(),
+            'namedescription' => $this->getStringScalarTypeResolver(),
+            'symbolname' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -55,10 +55,10 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'symbol' => $this->translationAPI->__('Tag symbol', 'pop-everythingelse'),
-            'symbolnamedescription' => $this->translationAPI->__('Tag symbol and description', 'pop-everythingelse'),
-            'namedescription' => $this->translationAPI->__('Tag and description', 'pop-everythingelse'),
-            'symbolname' => $this->translationAPI->__('Symbol and tag', 'pop-everythingelse'),
+            'symbol' => $this->getTranslationAPI()->__('Tag symbol', 'pop-everythingelse'),
+            'symbolnamedescription' => $this->getTranslationAPI()->__('Tag symbol and description', 'pop-everythingelse'),
+            'namedescription' => $this->getTranslationAPI()->__('Tag and description', 'pop-everythingelse'),
+            'symbolname' => $this->getTranslationAPI()->__('Symbol and tag', 'pop-everythingelse'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

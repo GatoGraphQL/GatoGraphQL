@@ -22,7 +22,7 @@ class RootTypeDataLoader extends AbstractObjectTypeDataLoader
     public function getObjects(array $ids): array
     {
         return [
-            $this->root,
+            $this->getRoot(),
         ];
     }
 }

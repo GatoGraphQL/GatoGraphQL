@@ -26,7 +26,7 @@ abstract class AbstractCommentMetaTypeAPI implements CommentMetaTypeAPIInterface
          */
         $entries = ComponentConfiguration::getCommentMetaEntries();
         $behavior = ComponentConfiguration::getCommentMetaBehavior();
-        if (!$this->allowOrDenySettingsService->isEntryAllowed($key, $entries, $behavior)) {
+        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($key, $entries, $behavior)) {
             return null;
         }
         return $this->doGetCommentMeta($commentID, $key, $single);

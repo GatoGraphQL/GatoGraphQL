@@ -112,7 +112,7 @@ trait EndpointResolverTrait
         // \GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet will process the GraphQL request
         [&$vars] = $vars_in_array;
         $vars['scheme'] = APISchemes::API;
-        $vars['datastructure'] = $this->graphQLDataStructureFormatter->getName();
+        $vars['datastructure'] = $this->getGraphQLDataStructureFormatter()->getName();
 
         /**
          * Enable the AdminEndpointResolver to not load the query,
@@ -156,8 +156,8 @@ trait EndpointResolverTrait
             $unneededGraphQLQuery,
             $unneededVariables,
             $operationName
-        ) = $this->queryRetriever->extractRequestedGraphQLQueryPayload();
+        ) = $this->getQueryRetriever()->extractRequestedGraphQLQueryPayload();
         // Add the query into $vars
-        $this->graphQLRequestVarsHookSet->addGraphQLQueryToVars($vars, $graphQLQuery, $operationName);
+        $this->getGraphQLRequestVarsHookSet()->addGraphQLQueryToVars($vars, $graphQLQuery, $operationName);
     }
 }

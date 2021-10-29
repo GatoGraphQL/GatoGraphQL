@@ -60,17 +60,17 @@ EOF;
             ]);
             foreach ($postObjects as $postObject) {
                 $foundPostListIDs[] = $postObject->ID;
-                $postDescription = $this->cptUtils->getCustomPostDescription($postObject);
+                $postDescription = $this->getCptUtils()->getCustomPostDescription($postObject);
                 $permalink = \get_permalink($postObject->ID);
                 $postContentElems[] = ($permalink ?
                     \sprintf(
                         '<code><a href="%s">%s</a></code>',
                         $permalink,
-                        $this->blockRenderingHelpers->getCustomPostTitle($postObject)
+                        $this->getBlockRenderingHelpers()->getCustomPostTitle($postObject)
                     ) :
                     \sprintf(
                         '<code>%s</code>',
-                        $this->blockRenderingHelpers->getCustomPostTitle($postObject)
+                        $this->getBlockRenderingHelpers()->getCustomPostTitle($postObject)
                     )
                 ) . ($postDescription ?
                     '<br/><small>' . $postDescription . '</small>'

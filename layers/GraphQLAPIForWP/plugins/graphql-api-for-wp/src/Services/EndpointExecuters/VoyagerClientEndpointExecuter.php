@@ -38,11 +38,11 @@ class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter imple
 
     protected function getClient(): AbstractClient
     {
-        return $this->customEndpointVoyagerClient;
+        return $this->getCustomEndpointVoyagerClient();
     }
 
     protected function getClientEndpointAnnotator(): ClientEndpointAnnotatorInterface
     {
-        return $this->voyagerClientEndpointExecuter;
+        return $this->getVoyagerClientEndpointExecuter();
     }
 }

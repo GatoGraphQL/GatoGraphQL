@@ -41,7 +41,7 @@ class PostMutationFilterInputContainerModuleProcessor extends AbstractPostFilter
             $filterInputModules = parent::getFilterInputModules($targetModule);
         } else {
             /** @var FilterInputContainerModuleProcessorInterface */
-            $targetModuleProcessor = $this->moduleProcessorManager->getProcessor($targetModule);
+            $targetModuleProcessor = $this->getModuleProcessorManager()->getProcessor($targetModule);
             $filterInputModules = $targetModuleProcessor->getFilterInputModules($targetModule);
         }
         $filterInputModules[] = [CustomPostFilterInputModuleProcessor::class, CustomPostFilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];

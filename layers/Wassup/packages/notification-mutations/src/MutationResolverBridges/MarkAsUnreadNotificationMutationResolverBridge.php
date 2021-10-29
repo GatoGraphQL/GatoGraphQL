@@ -21,7 +21,7 @@ class MarkAsUnreadNotificationMutationResolverBridge extends AbstractMarkAsReadO
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->markAsUnreadNotificationMutationResolver;
+        return $this->getMarkAsUnreadNotificationMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

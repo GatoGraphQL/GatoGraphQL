@@ -48,16 +48,16 @@ class NoCacheUserStateRelationalTypeResolverDecorator extends AbstractRelational
     {
         $noCacheControlDirective = CacheControlHelper::getNoCacheDirective();
         return [
-            $this->validateIsUserLoggedInDirectiveResolver->getDirectiveName() => [
+            $this->getValidateIsUserLoggedInDirectiveResolver()->getDirectiveName() => [
                 $noCacheControlDirective,
             ],
-            $this->validateIsUserLoggedInForDirectivesDirectiveResolver->getDirectiveName() => [
+            $this->getValidateIsUserLoggedInForDirectivesDirectiveResolver()->getDirectiveName() => [
                 $noCacheControlDirective,
             ],
-            $this->validateIsUserNotLoggedInDirectiveResolver->getDirectiveName() => [
+            $this->getValidateIsUserNotLoggedInDirectiveResolver()->getDirectiveName() => [
                 $noCacheControlDirective,
             ],
-            $this->validateIsUserNotLoggedInForDirectivesDirectiveResolver->getDirectiveName() => [
+            $this->getValidateIsUserNotLoggedInForDirectivesDirectiveResolver()->getDirectiveName() => [
                 $noCacheControlDirective,
             ],
         ];

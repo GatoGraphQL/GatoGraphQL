@@ -38,7 +38,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->persistedQueryEndpointBlockCategory;
+        return $this->getPersistedQueryEndpointBlockCategory();
     }
 
     protected function isDynamicBlock(): bool
@@ -48,7 +48,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
 
     protected function getAdminGraphQLEndpoint(): string
     {
-        return $this->endpointHelpers->getAdminConfigurableSchemaGraphQLEndpoint();
+        return $this->getEndpointHelpers()->getAdminConfigurableSchemaGraphQLEndpoint();
     }
 
     /**

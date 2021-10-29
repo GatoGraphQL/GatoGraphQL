@@ -55,9 +55,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'hasHighlights' => $this->booleanScalarTypeResolver,
-            'highlightsCount' => $this->intScalarTypeResolver,
-            'highlights' => $this->highlightObjectTypeResolver,
+            'hasHighlights' => $this->getBooleanScalarTypeResolver(),
+            'highlightsCount' => $this->getIntScalarTypeResolver(),
+            'highlights' => $this->getHighlightObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -78,9 +78,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'highlights' => $this->translationAPI->__('', ''),
-            'hasHighlights' => $this->translationAPI->__('', ''),
-            'highlightsCount' => $this->translationAPI->__('', ''),
+            'highlights' => $this->getTranslationAPI()->__('', ''),
+            'hasHighlights' => $this->getTranslationAPI()->__('', ''),
+            'highlightsCount' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -114,7 +114,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         ],
                     ],
                     'custompost-types' => [POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT],
-                    'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:customposts:date'),
+                    'orderby' => $this->getNameResolver()->getName('popcms:dbcolumn:orderby:customposts:date'),
                     'order' => 'ASC',
                 );
 

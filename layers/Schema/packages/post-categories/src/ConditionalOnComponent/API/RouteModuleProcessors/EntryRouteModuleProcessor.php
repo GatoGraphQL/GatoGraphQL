@@ -37,7 +37,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'routing-state' => [
-                    'taxonomy-name' => $this->postCategoryTypeAPI->getPostCategoryTaxonomyName(),
+                    'taxonomy-name' => $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName(),
                 ],
             ],
         ];
@@ -70,7 +70,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
                 'conditions' => [
                     'scheme' => APISchemes::API,
                     'routing-state' => [
-                        'taxonomy-name' => $this->postCategoryTypeAPI->getPostCategoryTaxonomyName(),
+                        'taxonomy-name' => $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName(),
                     ],
                 ],
             ];

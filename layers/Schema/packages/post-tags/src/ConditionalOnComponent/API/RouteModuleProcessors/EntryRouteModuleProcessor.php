@@ -37,7 +37,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'routing-state' => [
-                    'taxonomy-name' => $this->postTagTypeAPI->getPostTagTaxonomyName(),
+                    'taxonomy-name' => $this->getPostTagTypeAPI()->getPostTagTaxonomyName(),
                 ],
             ],
         ];
@@ -70,7 +70,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
                 'conditions' => [
                     'scheme' => APISchemes::API,
                     'routing-state' => [
-                        'taxonomy-name' => $this->postTagTypeAPI->getPostTagTaxonomyName(),
+                        'taxonomy-name' => $this->getPostTagTypeAPI()->getPostTagTaxonomyName(),
                     ],
                 ],
             ];

@@ -26,7 +26,7 @@ class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Schema type, to implement the introspection fields', 'graphql-server');
+        return $this->getTranslationAPI()->__('Schema type, to implement the introspection fields', 'graphql-server');
     }
 
     public function getID(object $object): string | int | null
@@ -38,6 +38,6 @@ class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->schemaTypeDataLoader;
+        return $this->getSchemaTypeDataLoader();
     }
 }

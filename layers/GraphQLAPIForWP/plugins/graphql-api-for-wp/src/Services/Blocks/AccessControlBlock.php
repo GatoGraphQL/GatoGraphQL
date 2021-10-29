@@ -35,7 +35,7 @@ class AccessControlBlock extends AbstractControlBlock
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->accessControlBlockCategory;
+        return $this->getAccessControlBlockCategory();
     }
 
     protected function registerEditorCSS(): bool

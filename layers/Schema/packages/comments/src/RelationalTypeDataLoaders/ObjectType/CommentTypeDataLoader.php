@@ -43,7 +43,7 @@ class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 
     public function executeQuery($query, array $options = []): array
     {
-        return $this->commentTypeAPI->getComments($query, $options);
+        return $this->getCommentTypeAPI()->getComments($query, $options);
     }
 
     public function executeQueryIDs($query): array

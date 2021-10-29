@@ -46,7 +46,7 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
         $result = \wp_signon($credentials);
 
         // If it is an error, convert from WP_Error to Error
-        $result = $this->errorHelper->returnResultOrConvertError($result);
+        $result = $this->getErrorHelper()->returnResultOrConvertError($result);
 
         // Set the current user already, so that it already says "user logged in" for the toplevel feedback
         if (GeneralUtils::isError($result)) {
@@ -69,7 +69,7 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
             return new Error(
                 'incorrect_password',
                 sprintf(
-                    $this->translationAPI->__('The password you entered for the username \'%s\' is incorrect.', 'user-state-mutations'),
+                    $this->getTranslationAPI()->__('The password you entered for the username \'%s\' is incorrect.', 'user-state-mutations'),
                     $credentials['user_login']
                 )
             );

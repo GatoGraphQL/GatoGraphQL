@@ -28,8 +28,8 @@ trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
         $maxAge = $entryValue;
-        $cacheControlDirective = $this->fieldQueryInterpreter->getDirective(
-            $this->cacheControlDirectiveResolver->getDirectiveName(),
+        $cacheControlDirective = $this->getFieldQueryInterpreter()->getDirective(
+            $this->getCacheControlDirectiveResolver()->getDirectiveName(),
             [
                 'maxAge' => $maxAge,
             ]

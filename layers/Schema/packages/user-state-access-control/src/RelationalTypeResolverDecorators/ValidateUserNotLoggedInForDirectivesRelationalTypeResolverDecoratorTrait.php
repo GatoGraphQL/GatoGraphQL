@@ -27,6 +27,6 @@ trait ValidateUserNotLoggedInForDirectivesRelationalTypeResolverDecoratorTrait
     }
     protected function getValidateUserStateDirectiveResolver(): DirectiveResolverInterface
     {
-        return $this->validateIsUserNotLoggedInForDirectivesDirectiveResolver;
+        return $this->getValidateIsUserNotLoggedInForDirectivesDirectiveResolver();
     }
 }

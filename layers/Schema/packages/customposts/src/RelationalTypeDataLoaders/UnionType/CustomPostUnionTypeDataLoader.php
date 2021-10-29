@@ -22,6 +22,6 @@ class CustomPostUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface
     {
-        return $this->customPostUnionTypeResolver;
+        return $this->getCustomPostUnionTypeResolver();
     }
 }

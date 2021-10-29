@@ -21,7 +21,7 @@ class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValue
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->unfollowUserMutationResolver;
+        return $this->getUnfollowUserMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool
@@ -32,8 +32,8 @@ class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValue
     public function getSuccessString(string | int $result_id): ?string
     {
         return sprintf(
-            $this->translationAPI->__('You have stopped following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $this->userTypeAPI->getUserDisplayName($result_id)
+            $this->getTranslationAPI()->__('You have stopped following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->getUserTypeAPI()->getUserDisplayName($result_id)
         );
     }
 }

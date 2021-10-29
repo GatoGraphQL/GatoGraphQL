@@ -42,7 +42,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ROOT:
-                return $this->schemaDefinitionService->getRootObjectTypeResolver();
+                return $this->getSchemaDefinitionService()->getRootObjectTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);

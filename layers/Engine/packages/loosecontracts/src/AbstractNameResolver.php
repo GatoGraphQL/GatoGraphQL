@@ -18,7 +18,7 @@ abstract class AbstractNameResolver implements NameResolverInterface
 
     public function implementName(string $abstractName, string $implementationName): void
     {
-        $this->looseContractManager->implementNames([$abstractName]);
+        $this->getLooseContractManager()->implementNames([$abstractName]);
     }
 
     /**
@@ -26,6 +26,6 @@ abstract class AbstractNameResolver implements NameResolverInterface
      */
     public function implementNames(array $names): void
     {
-        $this->looseContractManager->implementNames(array_keys($names));
+        $this->getLooseContractManager()->implementNames(array_keys($names));
     }
 }

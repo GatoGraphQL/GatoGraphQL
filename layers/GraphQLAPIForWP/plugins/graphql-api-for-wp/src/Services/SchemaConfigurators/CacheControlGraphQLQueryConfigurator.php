@@ -50,9 +50,9 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
      */
     protected function doExecuteSchemaConfiguration(int $cclPostID): void
     {
-        $cclBlockItems = $this->blockHelpers->getBlocksOfTypeFromCustomPost(
+        $cclBlockItems = $this->getBlockHelpers()->getBlocksOfTypeFromCustomPost(
             $cclPostID,
-            $this->cacheControlBlock
+            $this->getCacheControlBlock()
         );
         // The "Cache Control" type contains the fields/directives and the max-age
         foreach ($cclBlockItems as $cclBlockItem) {
@@ -68,7 +68,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
                             )
                         )
                     ) {
-                        $this->cacheControlManager->addEntriesForFields(
+                        $this->getCacheControlManager()->addEntriesForFields(
                             $entriesForFields
                         );
                     }
@@ -84,7 +84,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
                             )
                         ))
                     ) {
-                        $this->cacheControlManager->addEntriesForDirectives(
+                        $this->getCacheControlManager()->addEntriesForDirectives(
                             $entriesForDirectives
                         );
                     }

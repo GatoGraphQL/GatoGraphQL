@@ -83,14 +83,14 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
                 __('Settings', 'graphql-api'),
                 __('Settings', 'graphql-api'),
                 'manage_options',
-                $this->settingsMenuPage->getScreenID(),
-                [$this->settingsMenuPage, 'print']
+                $this->getSettingsMenuPage()->getScreenID(),
+                [$this->getSettingsMenuPage(), 'print']
             )
         ) {
-            $this->settingsMenuPage->setHookName($hookName);
+            $this->getSettingsMenuPage()->setHookName($hookName);
         }
 
-        if ($this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
+        if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
             global $submenu;
             $clientPath = GraphQLClientsForWPComponentConfiguration::getGraphiQLClientEndpoint();
             $submenu[$this->getMenuName()][] = [
@@ -100,7 +100,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             ];
         }
 
-        if ($this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT)) {
+        if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT)) {
             global $submenu;
             $clientPath = GraphQLClientsForWPComponentConfiguration::getVoyagerClientEndpoint();
             $submenu[$this->getMenuName()][] = [
@@ -139,9 +139,9 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     protected function getModuleMenuPage(): MenuPageInterface
     {
         return
-            $this->menuPageHelper->isDocumentationScreen() ?
-                $this->moduleDocumentationMenuPage
-                : $this->modulesMenuPage;
+            $this->getMenuPageHelper()->isDocumentationScreen() ?
+                $this->getModuleDocumentationMenuPage()
+                : $this->getModulesMenuPage();
     }
 
     /**
@@ -151,8 +151,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     protected function getAboutMenuPage(): MenuPageInterface
     {
         return
-            $this->menuPageHelper->isDocumentationScreen() ?
-                $this->releaseNotesAboutMenuPage
-                : $this->aboutMenuPage;
+            $this->getMenuPageHelper()->isDocumentationScreen() ?
+                $this->getReleaseNotesAboutMenuPage()
+                : $this->getAboutMenuPage();
     }
 }

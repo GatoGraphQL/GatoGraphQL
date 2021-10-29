@@ -56,6 +56,6 @@ class GraphiQLClientEndpointAnnotator extends AbstractClientEndpointAnnotator im
 
     protected function getBlock(): BlockInterface
     {
-        return $this->endpointGraphiQLBlock;
+        return $this->getEndpointGraphiQLBlock();
     }
 }

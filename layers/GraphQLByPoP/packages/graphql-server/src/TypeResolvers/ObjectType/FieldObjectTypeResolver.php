@@ -27,7 +27,7 @@ class FieldObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Representation of a GraphQL type\'s field', 'graphql-server');
+        return $this->getTranslationAPI()->__('Representation of a GraphQL type\'s field', 'graphql-server');
     }
 
     public function getID(object $object): string | int | null
@@ -39,6 +39,6 @@ class FieldObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->schemaDefinitionReferenceTypeDataLoader;
+        return $this->getSchemaDefinitionReferenceTypeDataLoader();
     }
 }

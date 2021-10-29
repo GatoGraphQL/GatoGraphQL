@@ -19,7 +19,7 @@ class CMSHelperService implements CMSHelperServiceInterface
 
     public function getLocalURLPath(string $url): string | false
     {
-        if (str_starts_with($url, $this->cmsService->getHomeURL())) {
+        if (str_starts_with($url, $this->getCmsService()->getHomeURL())) {
             return GeneralUtils::getPath($url);
         }
         return false;

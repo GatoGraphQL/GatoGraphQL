@@ -29,7 +29,7 @@ class AdminFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
 
     protected function getBlock(): BlockInterface
     {
-        return $this->schemaConfigAdminFieldsBlock;
+        return $this->getSchemaConfigAdminFieldsBlock();
     }
 
     public function getHookComponentConfigurationClass(): string

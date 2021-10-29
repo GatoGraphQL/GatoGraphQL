@@ -26,7 +26,7 @@ abstract class AbstractSchemaConfigBlock extends AbstractBlock implements Schema
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->schemaConfigurationBlockCategory;
+        return $this->getSchemaConfigurationBlockCategory();
     }
 
     public function getBlockPriority(): int

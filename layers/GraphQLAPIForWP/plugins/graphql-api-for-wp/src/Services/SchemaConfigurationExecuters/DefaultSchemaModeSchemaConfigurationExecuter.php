@@ -63,6 +63,6 @@ class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigu
 
     protected function getBlock(): BlockInterface
     {
-        return $this->schemaConfigSchemaModeBlock;
+        return $this->getSchemaConfigSchemaModeBlock();
     }
 }

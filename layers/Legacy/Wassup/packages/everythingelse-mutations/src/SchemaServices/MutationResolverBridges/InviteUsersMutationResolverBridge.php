@@ -21,6 +21,6 @@ class InviteUsersMutationResolverBridge extends AbstractEmailInviteMutationResol
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->inviteUsersMutationResolver;
+        return $this->getInviteUsersMutationResolver();
     }
 }

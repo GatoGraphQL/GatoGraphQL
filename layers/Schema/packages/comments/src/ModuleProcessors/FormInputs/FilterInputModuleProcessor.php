@@ -95,11 +95,11 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOST_IDS => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_CUSTOMPOST_ID => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_COMMENT_TYPES => $this->commentTypeEnumTypeResolver,
-            self::MODULE_FILTERINPUT_COMMENT_STATUS => $this->commentStatusEnumTypeResolver,
+            self::MODULE_FILTERINPUT_CUSTOMPOST_IDS => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_CUSTOMPOST_ID => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_COMMENT_TYPES => $this->getCommentTypeEnumTypeResolver(),
+            self::MODULE_FILTERINPUT_COMMENT_STATUS => $this->getCommentStatusEnumTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -133,11 +133,11 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOST_IDS => $this->translationAPI->__('Limit results to elements with the given custom post IDs', 'comments'),
-            self::MODULE_FILTERINPUT_CUSTOMPOST_ID => $this->translationAPI->__('Limit results to elements with the given custom post ID', 'comments'),
-            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->translationAPI->__('Exclude elements with the given custom post IDs', 'comments'),
-            self::MODULE_FILTERINPUT_COMMENT_TYPES => $this->translationAPI->__('Types of comment', 'comments'),
-            self::MODULE_FILTERINPUT_COMMENT_STATUS => $this->translationAPI->__('Status of the comment', 'comments'),
+            self::MODULE_FILTERINPUT_CUSTOMPOST_IDS => $this->getTranslationAPI()->__('Limit results to elements with the given custom post IDs', 'comments'),
+            self::MODULE_FILTERINPUT_CUSTOMPOST_ID => $this->getTranslationAPI()->__('Limit results to elements with the given custom post ID', 'comments'),
+            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->getTranslationAPI()->__('Exclude elements with the given custom post IDs', 'comments'),
+            self::MODULE_FILTERINPUT_COMMENT_TYPES => $this->getTranslationAPI()->__('Types of comment', 'comments'),
+            self::MODULE_FILTERINPUT_COMMENT_STATUS => $this->getTranslationAPI()->__('Status of the comment', 'comments'),
             default => null,
         };
     }

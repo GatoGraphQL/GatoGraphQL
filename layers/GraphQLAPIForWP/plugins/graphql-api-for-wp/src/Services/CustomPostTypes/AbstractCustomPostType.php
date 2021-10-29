@@ -42,7 +42,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         $this->userAuthorization = $userAuthorization;
         $this->cptUtils = $cptUtils;
         $this->pluginMenu = $pluginMenu;
-        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
+        $this->getUserSettingsManager() = UserSettingsManagerFacade::getInstance();
     }
     /**
      * Add the hook to initialize the different post types
@@ -143,7 +143,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                     if ($post->post_status == 'auto-draft') {
                         return;
                     }
-                    $this->userSettingsManager->storeOperationalTimestamp();
+                    $this->getUserSettingsManager()->storeOperationalTimestamp();
                 },
                 10,
                 2
@@ -163,7 +163,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     {
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null) {
-            return $this->moduleRegistry->isModuleEnabled($enablingModule);
+            return $this->getModuleRegistry()->isModuleEnabled($enablingModule);
         }
         return parent::isServiceEnabled();
     }
@@ -214,7 +214,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                  */
                 $post = \get_post($post_id);
                 if (!is_null($post)) {
-                    echo $this->cptUtils->getCustomPostDescription($post);
+                    echo $this->getCptUtils()->getCustomPostDescription($post);
                 }
                 break;
         }
@@ -276,7 +276,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          * Check if it is enabled and it is this CPT...
          */
         if (
-            $this->userAuthorization->canAccessSchemaEditor()
+            $this->getUserAuthorization()->canAccessSchemaEditor()
             && \is_singular($this->getCustomPostType())
         ) {
             /**
@@ -286,7 +286,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             $customPost = $vars['routing-state']['queried-object'];
             // Make sure there is a post (eg: it has not been deleted)
             if ($customPost !== null) {
-                if ($excerpt = $this->cptUtils->getCustomPostDescription($customPost)) {
+                if ($excerpt = $this->getCptUtils()->getCustomPostDescription($customPost)) {
                     $content = \sprintf(
                         \__('<p class="%s"><strong>Description: </strong>%s</p>'),
                         $this->getAlignClassName(),
@@ -342,7 +342,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     protected function isExcerptAsDescriptionEnabled(): bool
     {
-        return $this->moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::EXCERPT_AS_DESCRIPTION);
+        return $this->getModuleRegistry()->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::EXCERPT_AS_DESCRIPTION);
     }
 
     /**
@@ -350,7 +350,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     protected function isAPIHierarchyModuleEnabled(): bool
     {
-        return $this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY);
+        return $this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY);
     }
 
     /**
@@ -406,7 +406,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             'show_ui' => true,
             'publicly_queryable' => true,
         );
-        $canAccessSchemaEditor = $this->userAuthorization->canAccessSchemaEditor();
+        $canAccessSchemaEditor = $this->getUserAuthorization()->canAccessSchemaEditor();
         /** @var array<string,mixed> */
         $postTypeArgs = array_merge(
             $securityPostTypeArgs,
@@ -448,7 +448,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     public function getMenu(): MenuInterface
     {
-        return $this->pluginMenu;
+        return $this->getPluginMenu();
     }
 
     /**

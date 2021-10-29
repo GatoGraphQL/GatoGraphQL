@@ -125,7 +125,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             if (!is_null($location)) {
                 $extensions['location'] = $location;
             }
-            $this->feedbackMessageStore->addQueryError($errorMessage, $extensions);
+            $this->getFeedbackMessageStore()->addQueryError($errorMessage, $extensions);
             // Returning nothing will not process the query
             return [
                 null,
@@ -205,8 +205,8 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
      */
     protected function maybeWrapStringInQuotesToAvoidExecutingAsAField(string $value): string
     {
-        if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($value)) {
-            return $this->fieldQueryInterpreter->wrapStringInQuotes($value);
+        if ($this->getFieldQueryInterpreter()->isFieldArgumentValueAField($value)) {
+            return $this->getFieldQueryInterpreter()->wrapStringInQuotes($value);
         }
         return $value;
     }
@@ -271,14 +271,14 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                     $directiveComposableDirectives = QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING . implode(
                         QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
                         array_map(
-                            [$this->fieldQueryInterpreter, 'convertDirectiveToFieldDirective'],
+                            [$this->getFieldQueryInterpreter(), 'convertDirectiveToFieldDirective'],
                             $composableDirectivesByPosition[$counter]
                         )
                     ) . QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING;
                 }
             }
             $directiveName = $directive->getName();
-            $convertedDirective = $this->fieldQueryInterpreter->getDirective(
+            $convertedDirective = $this->getFieldQueryInterpreter()->getDirective(
                 $directiveName,
                 $directiveArgs,
                 $directiveComposableDirectives
@@ -286,18 +286,18 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             $rootAndComposableDirectives[$counter] = $convertedDirective;
             if ($enableComposableDirectives && $nestedUnder !== null) {
                 if (!is_int($nestedUnder) || !($nestedUnder < 0)) {
-                    $this->feedbackMessageStore->addQueryError(
+                    $this->getFeedbackMessageStore()->addQueryError(
                         sprintf(
-                            $this->translationAPI->__('Param \'%s\' must be a negative integer, hence value \'%s\' in directive \'%s\' has been ignored', 'graphql-query'),
+                            $this->getTranslationAPI()->__('Param \'%s\' must be a negative integer, hence value \'%s\' in directive \'%s\' has been ignored', 'graphql-query'),
                             SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER,
                             $nestedUnder,
                             $directiveName
                         )
                     );
                 } elseif ((-1 * $nestedUnder) > $counter) {
-                    $this->feedbackMessageStore->addQueryError(
+                    $this->getFeedbackMessageStore()->addQueryError(
                         sprintf(
-                            $this->translationAPI->__('There is no directive at position \'%s\' (set under param \'%s\') relative to directive \'%s\'', 'graphql-query'),
+                            $this->getTranslationAPI()->__('There is no directive at position \'%s\' (set under param \'%s\') relative to directive \'%s\'', 'graphql-query'),
                             $nestedUnder,
                             SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER,
                             $directiveName
@@ -324,7 +324,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             $rootDirective = $rootAndComposableDirectives[$pos];
             $directives[] = $rootDirective;
         }
-        return $this->fieldQueryInterpreter->getField(
+        return $this->getFieldQueryInterpreter()->getField(
             $field->getName(),
             $arguments,
             $field->getAlias(),
@@ -339,20 +339,20 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     protected function restrainFieldsByTypeOrInterface(array $fragmentFieldPaths, string $fragmentModel): array
     {
         // Create the <include> directive, if the fragment references the type or interface
-        $includeDirective = $this->fieldQueryInterpreter->composeFieldDirective(
-            $this->includeDirectiveResolver->getDirectiveName(),
-            $this->fieldQueryInterpreter->getFieldArgsAsString([
-                'if' => $this->fieldQueryInterpreter->getField(
+        $includeDirective = $this->getFieldQueryInterpreter()->composeFieldDirective(
+            $this->getIncludeDirectiveResolver()->getDirectiveName(),
+            $this->getFieldQueryInterpreter()->getFieldArgsAsString([
+                'if' => $this->getFieldQueryInterpreter()->getField(
                     'or',
                     [
                         'values' => [
-                            $this->fieldQueryInterpreter->getField(
+                            $this->getFieldQueryInterpreter()->getField(
                                 'isType',
                                 [
                                     'type' => $fragmentModel
                                 ]
                             ),
-                            $this->fieldQueryInterpreter->getField(
+                            $this->getFieldQueryInterpreter()->getField(
                                 'implements',
                                 [
                                     'interface' => $fragmentModel
@@ -370,7 +370,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 $fragmentRootField = $fragmentFieldPath[0];
 
                 // Add the directive to the current directives from the field
-                $rootFieldDirectives = $this->fieldQueryInterpreter->getFieldDirectives((string)$fragmentRootField);
+                $rootFieldDirectives = $this->getFieldQueryInterpreter()->getFieldDirectives((string)$fragmentRootField);
                 if ($rootFieldDirectives) {
                     // The include directive comes first,
                     // so if it evals to false the upcoming directives are not executed
@@ -490,8 +490,8 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         // BUT, when doing multiple-query execution, it could pass both a query AND a mutation!
         // In that case, execute mutations only, and display a warning on the query
         if ($queries && $mutations) {
-            $this->feedbackMessageStore->addQueryWarning(
-                $this->translationAPI->__('Cannot execute both queries AND mutations, hence the queries have been ignored, resolving mutations only', 'graphql-query')
+            $this->getFeedbackMessageStore()->addQueryWarning(
+                $this->getTranslationAPI()->__('Cannot execute both queries AND mutations, hence the queries have been ignored, resolving mutations only', 'graphql-query')
             );
         }
         foreach ($queriesOrMutations as $query) {
@@ -523,7 +523,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     ): Request {
         if (empty($payload)) {
             throw new InvalidArgumentException(
-                $this->translationAPI->__('Must provide an operation.', 'graphql-query')
+                $this->getTranslationAPI()->__('Must provide an operation.', 'graphql-query')
             );
         }
 
@@ -551,7 +551,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 $operationCount = count($parsedData['queryOperations']) + count($parsedData['mutationOperations']);
                 if ($operationCount > 1) {
                     throw new InvalidArgumentException(sprintf(
-                        $this->translationAPI->__(
+                        $this->getTranslationAPI()->__(
                             'Feature \'Multiple Query Execution\' is not enabled, so can execute 1 operation only, but %s operations were submitted (\'%s\')',
                             'graphql-query'
                         ),
@@ -669,7 +669,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                  */
                 if (empty($parsedData['queries']) && empty($parsedData['mutations'])) {
                     throw new InvalidArgumentException(sprintf(
-                        $this->translationAPI->__('No operation with name \'%s\' was submitted.', 'graphql-query'),
+                        $this->getTranslationAPI()->__('No operation with name \'%s\' was submitted.', 'graphql-query'),
                         $operationName
                     ));
                 }

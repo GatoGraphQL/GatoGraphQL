@@ -53,7 +53,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'avatar' => $this->translationAPI->__('User avatar', 'user-avatars'),
+            'avatar' => $this->getTranslationAPI()->__('User avatar', 'user-avatars'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -62,7 +62,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'avatar' => [
-                'size' => $this->intScalarTypeResolver,
+                'size' => $this->getIntScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -71,7 +71,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['avatar' => 'size'] => $this->translationAPI->__('Avatar size', 'user-avatars'),
+            ['avatar' => 'size'] => $this->getTranslationAPI()->__('Avatar size', 'user-avatars'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -104,7 +104,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'avatar':
                 // Create the avatar, and store it in the dynamic registry
                 $avatarSize = $fieldArgs['size'] ?? ComponentConfiguration::getUserAvatarDefaultSize();
-                $avatarSrc = $this->userAvatarTypeAPI->getUserAvatarSrc($user, $avatarSize);
+                $avatarSrc = $this->getUserAvatarTypeAPI()->getUserAvatarSrc($user, $avatarSize);
                 if ($avatarSrc === null) {
                     return null;
                 }
@@ -114,7 +114,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 ];
                 // Generate a hash to represent the ID of the avatar given its properties
                 $avatarID = hash('md5', json_encode($avatarIDComponents));
-                $this->userAvatarRuntimeRegistry->storeUserAvatar(new UserAvatar($avatarID, $avatarSrc, $avatarSize));
+                $this->getUserAvatarRuntimeRegistry()->storeUserAvatar(new UserAvatar($avatarID, $avatarSrc, $avatarSize));
                 return $avatarID;
         }
 
@@ -124,7 +124,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'avatar' => $this->userAvatarObjectTypeResolver,
+            'avatar' => $this->getUserAvatarObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

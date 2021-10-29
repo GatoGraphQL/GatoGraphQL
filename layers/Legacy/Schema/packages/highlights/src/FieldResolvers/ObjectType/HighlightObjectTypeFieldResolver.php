@@ -53,10 +53,10 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'title' => $this->stringScalarTypeResolver,
-            'excerpt' => $this->stringScalarTypeResolver,
-            'content' => $this->stringScalarTypeResolver,
-            'highlightedPostURL' => $this->urlScalarTypeResolver,
+            'title' => $this->getStringScalarTypeResolver(),
+            'excerpt' => $this->getStringScalarTypeResolver(),
+            'content' => $this->getStringScalarTypeResolver(),
+            'highlightedPostURL' => $this->getUrlScalarTypeResolver(),
             'highlightedpost' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -76,12 +76,12 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'title' => $this->translationAPI->__('', ''),
-            'excerpt' => $this->translationAPI->__('', ''),
-            'content' => $this->translationAPI->__('', ''),
-            'highlightedpost' => $this->translationAPI->__('', ''),
-            'highlightedPostURL' => $this->translationAPI->__('', ''),
-            'highlightedpost' => $this->translationAPI->__('', ''),
+            'title' => $this->getTranslationAPI()->__('', ''),
+            'excerpt' => $this->getTranslationAPI()->__('', ''),
+            'content' => $this->getTranslationAPI()->__('', ''),
+            'highlightedpost' => $this->getTranslationAPI()->__('', ''),
+            'highlightedPostURL' => $this->getTranslationAPI()->__('', ''),
+            'highlightedpost' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

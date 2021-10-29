@@ -13,6 +13,6 @@ abstract class AbstractUserStateConfigurableAccessControlForDirectivesInPublicSc
 
     protected function getConfigurationEntries(): array
     {
-        return $this->accessControlManager->getEntriesForDirectives(AccessControlGroups::STATE);
+        return $this->getAccessControlManager()->getEntriesForDirectives(AccessControlGroups::STATE);
     }
 }

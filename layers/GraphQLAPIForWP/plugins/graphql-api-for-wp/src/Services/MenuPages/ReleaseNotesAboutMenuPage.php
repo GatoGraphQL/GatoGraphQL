@@ -25,7 +25,7 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
 
     public function getMenuPageSlug(): string
     {
-        return $this->aboutMenuPage->getMenuPageSlug();
+        return $this->getAboutMenuPage()->getMenuPageSlug();
     }
 
     /**
@@ -33,7 +33,7 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
      */
     protected function isCurrentScreen(): bool
     {
-        return $this->menuPageHelper->isDocumentationScreen() && parent::isCurrentScreen();
+        return $this->getMenuPageHelper()->isDocumentationScreen() && parent::isCurrentScreen();
     }
 
     protected function getRelativePathDir(): string

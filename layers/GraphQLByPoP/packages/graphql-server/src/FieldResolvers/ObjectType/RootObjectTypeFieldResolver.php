@@ -72,8 +72,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            '__schema' => $this->translationAPI->__('The GraphQL schema, exposing what fields can be queried', 'graphql-server'),
-            '__type' => $this->translationAPI->__('Obtain a specific type from the schema', 'graphql-server'),
+            '__schema' => $this->getTranslationAPI()->__('The GraphQL schema, exposing what fields can be queried', 'graphql-server'),
+            '__type' => $this->getTranslationAPI()->__('Obtain a specific type from the schema', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -82,7 +82,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             '__type' => [
-                'name' => $this->stringScalarTypeResolver,
+                'name' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -91,7 +91,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['__type' => 'name'] => $this->translationAPI->__('The name of the type', 'graphql-server'),
+            ['__type' => 'name'] => $this->getTranslationAPI()->__('The name of the type', 'graphql-server'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -127,7 +127,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // Get an instance of the schema and then execute function `getType` there
                 $schemaID = $objectTypeResolver->resolveValue(
                     $object,
-                    $this->fieldQueryInterpreter->getField(
+                    $this->getFieldQueryInterpreter()->getField(
                         '__schema',
                         []
                     ),
@@ -139,7 +139,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     return $schemaID;
                 }
                 // Obtain the instance of the schema
-                $schemaInstances = $this->schemaTypeDataLoader->getObjects([$schemaID]);
+                $schemaInstances = $this->getSchemaTypeDataLoader()->getObjects([$schemaID]);
                 $schema = $schemaInstances[0];
                 return $schema->getTypeID($fieldArgs['name']);
         }
@@ -150,8 +150,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            '__schema' => $this->schemaObjectTypeResolver,
-            '__type' => $this->typeObjectTypeResolver,
+            '__schema' => $this->getSchemaObjectTypeResolver(),
+            '__type' => $this->getTypeObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

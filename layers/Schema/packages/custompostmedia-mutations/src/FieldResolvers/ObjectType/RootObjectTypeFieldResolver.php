@@ -63,8 +63,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'setFeaturedImageOnCustomPost' => $this->translationAPI->__('Set the featured image on a custom post', 'custompostmedia-mutations'),
-            'removeFeaturedImageFromCustomPost' => $this->translationAPI->__('Remove the featured image from a custom post', 'custompostmedia-mutations'),
+            'setFeaturedImageOnCustomPost' => $this->getTranslationAPI()->__('Set the featured image on a custom post', 'custompostmedia-mutations'),
+            'removeFeaturedImageFromCustomPost' => $this->getTranslationAPI()->__('Remove the featured image from a custom post', 'custompostmedia-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -73,11 +73,11 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'setFeaturedImageOnCustomPost' => [
-                MutationInputProperties::CUSTOMPOST_ID => $this->idScalarTypeResolver,
-                MutationInputProperties::MEDIA_ITEM_ID => $this->idScalarTypeResolver,
+                MutationInputProperties::CUSTOMPOST_ID => $this->getIdScalarTypeResolver(),
+                MutationInputProperties::MEDIA_ITEM_ID => $this->getIdScalarTypeResolver(),
             ],
             'removeFeaturedImageFromCustomPost' => [
-                MutationInputProperties::CUSTOMPOST_ID => $this->idScalarTypeResolver,
+                MutationInputProperties::CUSTOMPOST_ID => $this->getIdScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -88,11 +88,11 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return match ([$fieldName => $fieldArgName]) {
             ['setFeaturedImageOnCustomPost' => MutationInputProperties::CUSTOMPOST_ID],
             ['removeFeaturedImageFromCustomPost' => MutationInputProperties::CUSTOMPOST_ID]
-                => $this->translationAPI->__('The ID of the custom post', 'custompostmedia-mutations'),
+                => $this->getTranslationAPI()->__('The ID of the custom post', 'custompostmedia-mutations'),
             ['setFeaturedImageOnCustomPost' => MutationInputProperties::MEDIA_ITEM_ID]
                 => sprintf(
-                    $this->translationAPI->__('The ID of the featured image, of type \'%s\'', 'custompostmedia-mutations'),
-                    $this->mediaTypeResolver->getTypeName()
+                    $this->getTranslationAPI()->__('The ID of the featured image, of type \'%s\'', 'custompostmedia-mutations'),
+                    $this->getMediaTypeResolver()->getTypeName()
                 ),
             default
                 => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
@@ -113,8 +113,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
         return match ($fieldName) {
-            'setFeaturedImageOnCustomPost' => $this->setFeaturedImageOnCustomPostMutationResolver,
-            'removeFeaturedImageFromCustomPost' => $this->removeFeaturedImageOnCustomPostMutationResolver,
+            'setFeaturedImageOnCustomPost' => $this->getSetFeaturedImageOnCustomPostMutationResolver(),
+            'removeFeaturedImageFromCustomPost' => $this->getRemoveFeaturedImageOnCustomPostMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -124,7 +124,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return match ($fieldName) {
             'setFeaturedImageOnCustomPost',
             'removeFeaturedImageFromCustomPost'
-                => $this->customPostUnionTypeResolver,
+                => $this->getCustomPostUnionTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

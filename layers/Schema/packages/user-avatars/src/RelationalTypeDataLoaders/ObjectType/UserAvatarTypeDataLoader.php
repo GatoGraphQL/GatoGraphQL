@@ -22,7 +22,7 @@ class UserAvatarTypeDataLoader extends AbstractObjectTypeDataLoader
     public function getObjects(array $ids): array
     {
         return array_map(
-            fn (string | int $id) => $this->userAvatarRuntimeRegistry->getUserAvatar($id),
+            fn (string | int $id) => $this->getUserAvatarRuntimeRegistry()->getUserAvatar($id),
             $ids
         );
     }

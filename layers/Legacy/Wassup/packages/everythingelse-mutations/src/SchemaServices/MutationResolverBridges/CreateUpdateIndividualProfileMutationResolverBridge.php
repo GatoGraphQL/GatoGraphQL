@@ -25,12 +25,12 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->createUpdateIndividualProfileMutationResolver;
+        return $this->getCreateUpdateIndividualProfileMutationResolver();
     }
 
     private function getFormInputs()
     {
-        $inputs = $this->hooksAPI->applyFilters(
+        $inputs = $this->getHooksAPI()->applyFilters(
             'GD_CreateUpdate_ProfileIndividual_Trait:form-inputs',
             array(
                 'last_name' => null,
@@ -64,9 +64,9 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();
-        $individualinterests = $this->moduleProcessorManager->getProcessor($inputs['individualinterests'])->getValue($inputs['individualinterests']);
+        $individualinterests = $this->getModuleProcessorManager()->getProcessor($inputs['individualinterests'])->getValue($inputs['individualinterests']);
         return array(
-            'last_name' => trim($cmsapplicationhelpers->escapeAttributes($this->moduleProcessorManager->getProcessor($inputs['last_name'])->getValue($inputs['last_name']))),
+            'last_name' => trim($cmsapplicationhelpers->escapeAttributes($this->getModuleProcessorManager()->getProcessor($inputs['last_name'])->getValue($inputs['last_name']))),
             'individualinterests' => $individualinterests ?? array(),
         );
     }

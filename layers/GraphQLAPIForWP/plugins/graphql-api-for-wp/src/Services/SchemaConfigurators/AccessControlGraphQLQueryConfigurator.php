@@ -54,7 +54,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
         // Lazy load
         if (is_null($this->aclRuleBlockNameEnabled)) {
             // Obtain the block names from the block classes
-            $aclRuleBlocks = $this->accessControlRuleBlockRegistry->getAccessControlRuleBlocks();
+            $aclRuleBlocks = $this->getAccessControlRuleBlockRegistry()->getAccessControlRuleBlocks();
             $this->aclRuleBlockNameEnabled = [];
             foreach ($aclRuleBlocks as $block) {
                 $this->aclRuleBlockNameEnabled[$block->getBlockFullName()] = $block->isServiceEnabled();
@@ -83,9 +83,9 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
      */
     protected function doExecuteSchemaConfiguration(int $aclPostID): void
     {
-        $aclBlockItems = $this->blockHelpers->getBlocksOfTypeFromCustomPost(
+        $aclBlockItems = $this->getBlockHelpers()->getBlocksOfTypeFromCustomPost(
             $aclPostID,
-            $this->accessControlBlock
+            $this->getAccessControlBlock()
         );
         // The "Access Control" type contains the fields/directives
         foreach ($aclBlockItems as $aclBlockItem) {
@@ -129,7 +129,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
                                     )
                                 )
                             ) {
-                                $this->accessControlManager->addEntriesForFields(
+                                $this->getAccessControlManager()->addEntriesForFields(
                                     $accessControlGroup,
                                     $entriesForFields
                                 );
@@ -150,7 +150,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
                                     )
                                 ))
                             ) {
-                                $this->accessControlManager->addEntriesForDirectives(
+                                $this->getAccessControlManager()->addEntriesForDirectives(
                                     $accessControlGroup,
                                     $entriesForDirectives
                                 );

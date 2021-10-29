@@ -10,7 +10,7 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
 {
     protected function resolveContracts(): void
     {
-        $this->nameResolver->implementNames([
+        $this->getNameResolver()->implementNames([
             'popcms:option:limit' => 'posts_per_page',
         ]);
     }

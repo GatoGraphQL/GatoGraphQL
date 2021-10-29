@@ -22,7 +22,7 @@ trait PostMutationResolverHookSetTrait
         MutationRootObjectTypeResolver $mutationRootObjectTypeResolver,
         PostObjectTypeResolver $postObjectTypeResolver,
     ): void {
-        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+        $this->getRoot()ObjectTypeResolver = $rootObjectTypeResolver;
         $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
         $this->postObjectTypeResolver = $postObjectTypeResolver;
     }
@@ -32,11 +32,11 @@ trait PostMutationResolverHookSetTrait
         string $fieldName,
     ): bool {
         $isRootMutationType =
-            $objectTypeResolver === $this->rootObjectTypeResolver
-            || $objectTypeResolver === $this->mutationRootObjectTypeResolver;
+            $objectTypeResolver === $this->getRoot()ObjectTypeResolver
+            || $objectTypeResolver === $this->getMutationRootObjectTypeResolver();
         return
             ($isRootMutationType && $fieldName === 'createPost')
             || ($isRootMutationType && $fieldName === 'updatePost')
-            || ($objectTypeResolver === $this->postObjectTypeResolver && $fieldName === 'update');
+            || ($objectTypeResolver === $this->getPostObjectTypeResolver() && $fieldName === 'update');
     }
 }

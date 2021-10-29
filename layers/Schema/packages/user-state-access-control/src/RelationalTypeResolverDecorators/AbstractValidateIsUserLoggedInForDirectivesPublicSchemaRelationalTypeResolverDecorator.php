@@ -28,8 +28,8 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelational
     {
         $mandatoryDirectivesForDirectives = [];
         // This is the required "validateIsUserLoggedIn" directive
-        $validateIsUserLoggedInDirective = $this->fieldQueryInterpreter->getDirective(
-            $this->validateIsUserLoggedInForDirectivesDirectiveResolver->getDirectiveName()
+        $validateIsUserLoggedInDirective = $this->getFieldQueryInterpreter()->getDirective(
+            $this->getValidateIsUserLoggedInForDirectivesDirectiveResolver()->getDirectiveName()
         );
         // Add the mapping
         foreach ($this->getDirectiveResolvers() as $needValidateIsUserLoggedInDirectiveResolver) {

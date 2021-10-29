@@ -24,7 +24,7 @@ trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDeco
     {
         $validateUserStateDirectiveResolver = $this->getValidateUserStateDirectiveResolver();
         $validateUserStateDirectiveName = $validateUserStateDirectiveResolver->getDirectiveName();
-        $validateUserStateDirective = $this->fieldQueryInterpreter->getDirective(
+        $validateUserStateDirective = $this->getFieldQueryInterpreter()->getDirective(
             $validateUserStateDirectiveName
         );
         return [

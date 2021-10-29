@@ -12,7 +12,7 @@ class SchemaCacheHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             CacheUtils::HOOK_SCHEMA_CACHE_KEY_COMPONENTS,
             array($this, 'getSchemaCacheKeyComponents')
         );

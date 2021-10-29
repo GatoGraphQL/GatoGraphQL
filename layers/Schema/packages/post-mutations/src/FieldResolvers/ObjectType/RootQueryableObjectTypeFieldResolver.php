@@ -64,9 +64,9 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         return match ($fieldName) {
             'myPosts',
             'myPost'
-                => $this->postObjectTypeResolver,
+                => $this->getPostObjectTypeResolver(),
             'myPostCount'
-                => $this->intScalarTypeResolver,
+                => $this->getIntScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -84,9 +84,9 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'myPosts' => $this->translationAPI->__('Posts by the logged-in user', 'post-mutations'),
-            'myPostCount' => $this->translationAPI->__('Number of posts by the logged-in user', 'post-mutations'),
-            'myPost' => $this->translationAPI->__('Post with a specific ID', 'post-mutations'),
+            'myPosts' => $this->getTranslationAPI()->__('Posts by the logged-in user', 'post-mutations'),
+            'myPostCount' => $this->getTranslationAPI()->__('Number of posts by the logged-in user', 'post-mutations'),
+            'myPost' => $this->getTranslationAPI()->__('Post with a specific ID', 'post-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -197,13 +197,13 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         );
         switch ($fieldName) {
             case 'myPostCount':
-                return $this->postTypeAPI->getPostCount($query);
+                return $this->getPostTypeAPI()->getPostCount($query);
 
             case 'myPosts':
-                return $this->postTypeAPI->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getPostTypeAPI()->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'myPost':
-                if ($posts = $this->postTypeAPI->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($posts = $this->getPostTypeAPI()->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $posts[0];
                 }
                 return null;

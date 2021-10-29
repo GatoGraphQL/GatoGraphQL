@@ -144,7 +144,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
         array $consolidatedFieldArgsTypeModifiers,
     ): bool {
         // 1. its type is `DangerouslyDynamic`
-        if ($fieldTypeResolver === $this->dangerouslyDynamicScalarTypeResolver) {
+        if ($fieldTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
             return true;
         }
 
@@ -171,7 +171,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
     ): bool {
         $dangerouslyDynamicFieldOrDirectiveArgNameTypeResolvers = array_filter(
             $consolidatedFieldOrDirectiveArgNameTypeResolvers,
-            fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
+            fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()
         );
         foreach (array_keys($dangerouslyDynamicFieldOrDirectiveArgNameTypeResolvers) as $fieldOrDirectiveArgName) {
             $consolidatedFieldOrDirectiveArgTypeModifiers = $consolidatedFieldOrDirectiveArgsTypeModifiers[$fieldOrDirectiveArgName];

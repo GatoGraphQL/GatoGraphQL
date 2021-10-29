@@ -43,7 +43,7 @@ class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'author' => $this->translationAPI->__('Comment\'s author', 'comments'),
+            'author' => $this->getTranslationAPI()->__('Comment\'s author', 'comments'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -66,7 +66,7 @@ class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $comment = $object;
         switch ($fieldName) {
             case 'author':
-                return $this->commentTypeAPI->getCommentUserId($comment);
+                return $this->getCommentTypeAPI()->getCommentUserId($comment);
         }
 
             return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
@@ -75,7 +75,7 @@ class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'author' => $this->userObjectTypeResolver,
+            'author' => $this->getUserObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

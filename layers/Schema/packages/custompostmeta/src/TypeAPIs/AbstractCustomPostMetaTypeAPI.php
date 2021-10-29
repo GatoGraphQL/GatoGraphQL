@@ -26,7 +26,7 @@ abstract class AbstractCustomPostMetaTypeAPI implements CustomPostMetaTypeAPIInt
          */
         $entries = ComponentConfiguration::getCustomPostMetaEntries();
         $behavior = ComponentConfiguration::getCustomPostMetaBehavior();
-        if (!$this->allowOrDenySettingsService->isEntryAllowed($key, $entries, $behavior)) {
+        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($key, $entries, $behavior)) {
             return null;
         }
         return $this->doGetCustomPostMeta($customPostID, $key, $single);

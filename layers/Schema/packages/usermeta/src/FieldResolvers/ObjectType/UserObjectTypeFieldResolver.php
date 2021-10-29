@@ -35,7 +35,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->withMetaInterfaceTypeFieldResolver,
+            $this->getWithMetaInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -66,7 +66,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'metaValue':
             case 'metaValues':
-                return $this->userMetaAPI->getUserMeta(
+                return $this->getUserMetaAPI()->getUserMeta(
                     $objectTypeResolver->getID($user),
                     $fieldArgs['key'],
                     $fieldName === 'metaValue'

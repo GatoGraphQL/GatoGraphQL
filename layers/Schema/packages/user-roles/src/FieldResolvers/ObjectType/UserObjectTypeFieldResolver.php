@@ -65,12 +65,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'roles' => $this->stringScalarTypeResolver,
-            'capabilities' => $this->stringScalarTypeResolver,
-            'hasRole' => $this->booleanScalarTypeResolver,
-            'hasAnyRole' => $this->booleanScalarTypeResolver,
-            'hasCapability' => $this->booleanScalarTypeResolver,
-            'hasAnyCapability' => $this->booleanScalarTypeResolver,
+            'roles' => $this->getStringScalarTypeResolver(),
+            'capabilities' => $this->getStringScalarTypeResolver(),
+            'hasRole' => $this->getBooleanScalarTypeResolver(),
+            'hasAnyRole' => $this->getBooleanScalarTypeResolver(),
+            'hasCapability' => $this->getBooleanScalarTypeResolver(),
+            'hasAnyCapability' => $this->getBooleanScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -98,12 +98,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'roles' => $this->translationAPI->__('User roles', 'user-roles'),
-            'capabilities' => $this->translationAPI->__('User capabilities', 'user-roles'),
-            'hasRole' => $this->translationAPI->__('Does the user have a specific role?', 'user-roles'),
-            'hasAnyRole' => $this->translationAPI->__('Does the user have any role from a provided list?', 'user-roles'),
-            'hasCapability' => $this->translationAPI->__('Does the user have a specific capability?', 'user-roles'),
-            'hasAnyCapability' => $this->translationAPI->__('Does the user have any capability from a provided list?', 'user-roles'),
+            'roles' => $this->getTranslationAPI()->__('User roles', 'user-roles'),
+            'capabilities' => $this->getTranslationAPI()->__('User capabilities', 'user-roles'),
+            'hasRole' => $this->getTranslationAPI()->__('Does the user have a specific role?', 'user-roles'),
+            'hasAnyRole' => $this->getTranslationAPI()->__('Does the user have any role from a provided list?', 'user-roles'),
+            'hasCapability' => $this->getTranslationAPI()->__('Does the user have a specific capability?', 'user-roles'),
+            'hasAnyCapability' => $this->getTranslationAPI()->__('Does the user have any capability from a provided list?', 'user-roles'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -112,16 +112,16 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'hasRole' => [
-                'role' => $this->stringScalarTypeResolver,
+                'role' => $this->getStringScalarTypeResolver(),
             ],
             'hasAnyRole' => [
-                'roles' => $this->stringScalarTypeResolver,
+                'roles' => $this->getStringScalarTypeResolver(),
             ],
             'hasCapability' => [
-                'capability' => $this->stringScalarTypeResolver,
+                'capability' => $this->getStringScalarTypeResolver(),
             ],
             'hasAnyCapability' => [
-                'capabilities' => $this->stringScalarTypeResolver,
+                'capabilities' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -130,10 +130,10 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['hasRole' => 'role'] => $this->translationAPI->__('User role to check against', 'user-roles'),
-            ['hasAnyRole' => 'roles'] => $this->translationAPI->__('User roles to check against', 'user-roles'),
-            ['hasCapability' => 'capability'] => $this->translationAPI->__('User capability to check against', 'user-roles'),
-            ['hasAnyCapability' => 'capabilities'] => $this->translationAPI->__('User capabilities to check against', 'user-roles'),
+            ['hasRole' => 'role'] => $this->getTranslationAPI()->__('User role to check against', 'user-roles'),
+            ['hasAnyRole' => 'roles'] => $this->getTranslationAPI()->__('User roles to check against', 'user-roles'),
+            ['hasCapability' => 'capability'] => $this->getTranslationAPI()->__('User capability to check against', 'user-roles'),
+            ['hasAnyCapability' => 'capabilities'] => $this->getTranslationAPI()->__('User capabilities to check against', 'user-roles'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -170,20 +170,20 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $user = $object;
         switch ($fieldName) {
             case 'roles':
-                return $this->userRoleTypeAPI->getUserRoles($user);
+                return $this->getUserRoleTypeAPI()->getUserRoles($user);
             case 'capabilities':
-                return $this->userRoleTypeAPI->getUserCapabilities($user);
+                return $this->getUserRoleTypeAPI()->getUserCapabilities($user);
             case 'hasRole':
-                $userRoles = $this->userRoleTypeAPI->getUserRoles($user);
+                $userRoles = $this->getUserRoleTypeAPI()->getUserRoles($user);
                 return in_array($fieldArgs['role'], $userRoles);
             case 'hasAnyRole':
-                $userRoles = $this->userRoleTypeAPI->getUserRoles($user);
+                $userRoles = $this->getUserRoleTypeAPI()->getUserRoles($user);
                 return !empty(array_intersect($fieldArgs['roles'], $userRoles));
             case 'hasCapability':
-                $userCapabilities = $this->userRoleTypeAPI->getUserCapabilities($user);
+                $userCapabilities = $this->getUserRoleTypeAPI()->getUserCapabilities($user);
                 return in_array($fieldArgs['capability'], $userCapabilities);
             case 'hasAnyCapability':
-                $userCapabilities = $this->userRoleTypeAPI->getUserCapabilities($user);
+                $userCapabilities = $this->getUserRoleTypeAPI()->getUserCapabilities($user);
                 return !empty(array_intersect($fieldArgs['capabilities'], $userCapabilities));
         }
 

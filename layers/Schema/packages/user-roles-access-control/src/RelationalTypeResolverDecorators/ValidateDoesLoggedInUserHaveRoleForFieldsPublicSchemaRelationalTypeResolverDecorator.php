@@ -31,11 +31,11 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaRelationalTypeResolve
 
     protected function getConfigurationEntries(): array
     {
-        return $this->accessControlManager->getEntriesForFields(AccessControlGroups::ROLES);
+        return $this->getAccessControlManager()->getEntriesForFields(AccessControlGroups::ROLES);
     }
 
     protected function getValidateRoleDirectiveResolver(): DirectiveResolverInterface
     {
-        return $this->validateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
+        return $this->getValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver();
     }
 }

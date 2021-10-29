@@ -50,7 +50,7 @@ class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfiguratio
         if (!is_null($schemaConfigCCLBlockDataItem)) {
             if ($cacheControlLists = $schemaConfigCCLBlockDataItem['attrs'][SchemaConfigCacheControlListBlock::ATTRIBUTE_NAME_CACHE_CONTROL_LISTS] ?? null) {
                 foreach ($cacheControlLists as $cacheControlListID) {
-                    $this->cacheControlGraphQLQueryConfigurator->executeSchemaConfiguration($cacheControlListID);
+                    $this->getCacheControlGraphQLQueryConfigurator()->executeSchemaConfiguration($cacheControlListID);
                 }
             }
         }
@@ -58,6 +58,6 @@ class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfiguratio
 
     protected function getBlock(): BlockInterface
     {
-        return $this->schemaConfigCacheControlListBlock;
+        return $this->getSchemaConfigCacheControlListBlock();
     }
 }

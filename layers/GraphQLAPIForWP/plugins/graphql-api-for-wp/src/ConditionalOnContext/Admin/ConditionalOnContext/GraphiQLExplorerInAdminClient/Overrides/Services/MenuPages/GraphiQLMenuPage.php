@@ -26,7 +26,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
 
     protected function getGraphiQLWithExplorerClientHTML(): string
     {
-        return $this->adminGraphiQLWithExplorerClient->getClientHTML();
+        return $this->getAdminGraphiQLWithExplorerClient()->getClientHTML();
     }
 
     public function print(): void

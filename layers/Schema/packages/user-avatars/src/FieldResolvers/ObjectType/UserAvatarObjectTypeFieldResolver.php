@@ -45,8 +45,8 @@ class UserAvatarObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'src' => $this->stringScalarTypeResolver,
-            'size' => $this->intScalarTypeResolver,
+            'src' => $this->getStringScalarTypeResolver(),
+            'size' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -64,8 +64,8 @@ class UserAvatarObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'src' => $this->translationAPI->__('Avatar source URL', 'user-avatars'),
-            'size' => $this->translationAPI->__('Avatar size', 'user-avatars'),
+            'src' => $this->getTranslationAPI()->__('Avatar source URL', 'user-avatars'),
+            'size' => $this->getTranslationAPI()->__('Avatar size', 'user-avatars'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

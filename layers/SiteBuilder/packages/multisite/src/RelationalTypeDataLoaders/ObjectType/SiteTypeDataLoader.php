@@ -26,7 +26,7 @@ class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
         $ret = [];
         $cmsengineapi = FunctionAPIFactory::getInstance();
         if (in_array($cmsengineapi->getHost(), $ids)) {
-            $ret[] = $this->site;
+            $ret[] = $this->getSite();
         }
         return $ret;
     }

@@ -27,7 +27,7 @@ trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDe
         $capabilities = $entryValue;
         $directiveResolver = $this->getValidateCapabilityDirectiveResolver();
         $directiveName = $directiveResolver->getDirectiveName();
-        $validateDoesLoggedInUserHaveAnyCapabilityDirective = $this->fieldQueryInterpreter->getDirective(
+        $validateDoesLoggedInUserHaveAnyCapabilityDirective = $this->getFieldQueryInterpreter()->getDirective(
             $directiveName,
             [
                 'capabilities' => $capabilities,

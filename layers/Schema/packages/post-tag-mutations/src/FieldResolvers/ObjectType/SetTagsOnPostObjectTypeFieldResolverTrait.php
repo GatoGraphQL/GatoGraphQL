@@ -30,16 +30,16 @@ trait SetTagsOnPostObjectTypeFieldResolverTrait
 
     public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
     {
-        return $this->postObjectTypeResolver;
+        return $this->getPostObjectTypeResolver();
     }
 
     public function getSetTagsMutationResolver(): MutationResolverInterface
     {
-        return $this->setTagsOnPostMutationResolver;
+        return $this->getSetTagsOnPostMutationResolver();
     }
 
     protected function getEntityName(): string
     {
-        return $this->translationAPI->__('post', 'post-tag-mutations');
+        return $this->getTranslationAPI()->__('post', 'post-tag-mutations');
     }
 }

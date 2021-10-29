@@ -67,12 +67,12 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'queryType' => $this->translationAPI->__('The type, accessible from the root, that resolves queries', 'graphql-server'),
-            'mutationType' => $this->translationAPI->__('The type, accessible from the root, that resolves mutations', 'graphql-server'),
-            'subscriptionType' => $this->translationAPI->__('The type, accessible from the root, that resolves subscriptions', 'graphql-server'),
-            'types' => $this->translationAPI->__('All types registered in the data graph', 'graphql-server'),
-            'directives' => $this->translationAPI->__('All directives registered in the data graph', 'graphql-server'),
-            'type' => $this->translationAPI->__('Obtain a specific type from the schema', 'graphql-server'),
+            'queryType' => $this->getTranslationAPI()->__('The type, accessible from the root, that resolves queries', 'graphql-server'),
+            'mutationType' => $this->getTranslationAPI()->__('The type, accessible from the root, that resolves mutations', 'graphql-server'),
+            'subscriptionType' => $this->getTranslationAPI()->__('The type, accessible from the root, that resolves subscriptions', 'graphql-server'),
+            'types' => $this->getTranslationAPI()->__('All types registered in the data graph', 'graphql-server'),
+            'directives' => $this->getTranslationAPI()->__('All directives registered in the data graph', 'graphql-server'),
+            'type' => $this->getTranslationAPI()->__('Obtain a specific type from the schema', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -81,7 +81,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'type' => [
-                'name' => $this->stringScalarTypeResolver,
+                'name' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -90,7 +90,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['type' => 'name'] => $this->translationAPI->__('The name of the type', 'graphql-server'),
+            ['type' => 'name'] => $this->getTranslationAPI()->__('The name of the type', 'graphql-server'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -134,8 +134,8 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'queryType', 'mutationType', 'subscriptionType', 'types', 'type' => $this->typeObjectTypeResolver,
-            'directives' => $this->directiveObjectTypeResolver,
+            'queryType', 'mutationType', 'subscriptionType', 'types', 'type' => $this->getTypeObjectTypeResolver(),
+            'directives' => $this->getDirectiveObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

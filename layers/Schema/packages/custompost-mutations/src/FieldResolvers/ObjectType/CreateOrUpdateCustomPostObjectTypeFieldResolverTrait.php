@@ -41,12 +41,12 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
     ): array {
         return array_merge(
             $addCustomPostID ? [
-                MutationInputProperties::ID => $this->idScalarTypeResolver,
+                MutationInputProperties::ID => $this->getIdScalarTypeResolver(),
             ] : [],
             [
-                MutationInputProperties::TITLE => $this->stringScalarTypeResolver,
-                MutationInputProperties::CONTENT => $this->stringScalarTypeResolver,
-                MutationInputProperties::STATUS => $this->customPostStatusEnumTypeResolver,
+                MutationInputProperties::TITLE => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::CONTENT => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::STATUS => $this->getCustomPostStatusEnumTypeResolver(),
             ]
         );
     }
@@ -55,10 +55,10 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
         string $fieldArgName,
     ): ?string {
         return match ($fieldArgName) {
-            MutationInputProperties::ID => $this->translationAPI->__('The ID of the custom post to update', 'custompost-mutations'),
-            MutationInputProperties::TITLE => $this->translationAPI->__('The title of the custom post', 'custompost-mutations'),
-            MutationInputProperties::CONTENT => $this->translationAPI->__('The content of the custom post', 'custompost-mutations'),
-            MutationInputProperties::STATUS => $this->translationAPI->__('The status of the custom post', 'custompost-mutations'),
+            MutationInputProperties::ID => $this->getTranslationAPI()->__('The ID of the custom post to update', 'custompost-mutations'),
+            MutationInputProperties::TITLE => $this->getTranslationAPI()->__('The title of the custom post', 'custompost-mutations'),
+            MutationInputProperties::CONTENT => $this->getTranslationAPI()->__('The content of the custom post', 'custompost-mutations'),
+            MutationInputProperties::STATUS => $this->getTranslationAPI()->__('The status of the custom post', 'custompost-mutations'),
             default => null,
         };
     }

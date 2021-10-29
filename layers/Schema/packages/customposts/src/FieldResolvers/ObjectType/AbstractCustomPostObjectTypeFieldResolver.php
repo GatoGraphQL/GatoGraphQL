@@ -41,8 +41,8 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->queryableInterfaceTypeFieldResolver,
-            $this->isCustomPostInterfaceTypeFieldResolver,
+            $this->getQueryableInterfaceTypeFieldResolver(),
+            $this->getIsCustomPostInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -51,7 +51,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
      */
     protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
-        return $this->customPostTypeAPI;
+        return $this->getCustomPostTypeAPI();
     }
 
     /**
@@ -89,7 +89,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 } elseif ($format == CustomPostContentFormatEnum::PLAIN_TEXT) {
                     $value = $customPostTypeAPI->getPlainTextContent($customPost);
                 }
-                return $this->hooksAPI->applyFilters(
+                return $this->getHooksAPI()->applyFilters(
                     'pop_content',
                     $value,
                     $objectTypeResolver->getID($customPost)
@@ -102,13 +102,13 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 return $fieldArgs['status'] == $customPostTypeAPI->getStatus($customPost);
 
             case 'date':
-                return $this->dateFormatter->format(
+                return $this->getDateFormatter()->format(
                     $fieldArgs['format'],
                     $customPostTypeAPI->getPublishedDate($customPost, $fieldArgs['gmt'])
                 );
 
             case 'modified':
-                return $this->dateFormatter->format(
+                return $this->getDateFormatter()->format(
                     $fieldArgs['format'],
                     $customPostTypeAPI->getModifiedDate($customPost, $fieldArgs['gmt'])
                 );

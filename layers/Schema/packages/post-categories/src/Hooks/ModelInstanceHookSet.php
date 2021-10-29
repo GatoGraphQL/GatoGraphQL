@@ -30,7 +30,7 @@ class ModelInstanceHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
             array($this, 'getModelInstanceComponentsFromVars')
         );
@@ -44,24 +44,24 @@ class ModelInstanceHookSet extends AbstractHookSet
         // Properties specific to each nature
         if (
             $nature == RouteNatures::CUSTOMPOST
-            && $vars['routing-state']['queried-object-post-type'] == $this->postTypeAPI->getPostCustomPostType()
+            && $vars['routing-state']['queried-object-post-type'] == $this->getPostTypeAPI()->getPostCustomPostType()
         ) {
             // Single may depend on its post_type and category
             // Post and Event may be different
             // Announcements and Articles (Posts), or Past Event and (Upcoming) Event may be different
             // By default, we check for post type but not for categories
             if (
-                $this->hooksAPI->applyFilters(
+                $this->getHooksAPI()->applyFilters(
                     self::HOOK_VARY_MODEL_INSTANCE_BY_CATEGORY,
                     false
                 )
             ) {
                 $postID = $vars['routing-state']['queried-object-id'];
                 $categories = [];
-                foreach ($this->postCategoryTypeAPI->getCustomPostCategories($postID) as $cat) {
-                    $categories[] = $this->postCategoryTypeAPI->getCategorySlug($cat) . $this->postCategoryTypeAPI->getCategoryID($cat);
+                foreach ($this->getPostCategoryTypeAPI()->getCustomPostCategories($postID) as $cat) {
+                    $categories[] = $this->getPostCategoryTypeAPI()->getCategorySlug($cat) . $this->getPostCategoryTypeAPI()->getCategoryID($cat);
                 }
-                $components[] = $this->translationAPI->__('categories:', 'post-categories') . implode('.', $categories);
+                $components[] = $this->getTranslationAPI()->__('categories:', 'post-categories') . implode('.', $categories);
             }
         }
         return $components;

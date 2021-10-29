@@ -150,7 +150,7 @@ class ModulePaths extends AbstractModuleFilter
     }
     protected function getBacklogEntry(): string
     {
-        $entry = json_encode($this->modulePathManager->getPropagationCurrentPath());
+        $entry = json_encode($this->getModulePathManager()->getPropagationCurrentPath());
         if ($entry === false) {
             return '';
         }

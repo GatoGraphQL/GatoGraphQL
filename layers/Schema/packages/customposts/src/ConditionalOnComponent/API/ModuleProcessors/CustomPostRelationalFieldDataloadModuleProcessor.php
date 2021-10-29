@@ -72,7 +72,7 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST:
-                return $this->customPostUnionTypeResolver;
+                return $this->getCustomPostUnionTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);
@@ -85,7 +85,7 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST:
-                return $this->listQueryInputOutputHandler;
+                return $this->getListQueryInputOutputHandler();
         }
 
         return parent::getQueryInputOutputHandler($module);

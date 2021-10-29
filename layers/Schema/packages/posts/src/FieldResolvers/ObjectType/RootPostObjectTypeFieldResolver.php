@@ -48,10 +48,10 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'post' => $this->translationAPI->__('Post with a specific ID', 'posts'),
-            'postBySlug' => $this->translationAPI->__('Post with a specific slug', 'posts'),
-            'postForAdmin' => $this->translationAPI->__('[Unrestricted] Post with a specific ID', 'posts'),
-            'postBySlugForAdmin' => $this->translationAPI->__('[Unrestricted] Post with a specific slug', 'posts'),
+            'post' => $this->getTranslationAPI()->__('Post with a specific ID', 'posts'),
+            'postBySlug' => $this->getTranslationAPI()->__('Post with a specific slug', 'posts'),
+            'postForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Post with a specific ID', 'posts'),
+            'postBySlugForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Post with a specific slug', 'posts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -100,7 +100,7 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
             case 'postBySlug':
             case 'postForAdmin':
             case 'postBySlugForAdmin':
-                if ($posts = $this->postTypeAPI->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($posts = $this->getPostTypeAPI()->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $posts[0];
                 }
                 return null;
@@ -116,7 +116,7 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
             'postForAdmin',
             'postBySlug',
             'postBySlugForAdmin'
-                => $this->postObjectTypeResolver,
+                => $this->getPostObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

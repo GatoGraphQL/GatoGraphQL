@@ -25,7 +25,7 @@ class SetupCortexHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'cortex.routes',
             [$this, 'setupCortex'],
             1
@@ -37,7 +37,7 @@ class SetupCortexHookSet extends AbstractHookSet
      */
     public function setupCortex(RouteCollectionInterface $routes): void
     {
-        foreach ($this->routingManager->getRoutes() as $route) {
+        foreach ($this->getRoutingManager()->getRoutes() as $route) {
             $routes->addRoute(new QueryRoute(
                 $route,
                 function (array $matches) {

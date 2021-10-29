@@ -70,7 +70,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->getStringScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -94,7 +94,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->translationAPI->__('Return results from Custom Post Types', 'customposts'),
+            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->getTranslationAPI()->__('Return results from Custom Post Types', 'customposts'),
             default => null,
         };
     }

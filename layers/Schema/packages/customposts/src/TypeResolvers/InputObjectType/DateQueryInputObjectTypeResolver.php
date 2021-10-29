@@ -30,8 +30,8 @@ class DateQueryInputObjectTypeResolver extends AbstractInputObjectTypeResolver
     public function getInputObjectFieldNameTypeResolvers(): array
     {
         return [
-            'after' => $this->dateScalarTypeResolver,
-            'before' => $this->dateScalarTypeResolver,
+            'after' => $this->getDateScalarTypeResolver(),
+            'before' => $this->getDateScalarTypeResolver(),
         ];
     }
 }

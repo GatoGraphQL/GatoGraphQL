@@ -26,7 +26,7 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
          */
         $settingsEntries = ComponentConfiguration::getSettingsEntries();
         $settingsBehavior = ComponentConfiguration::getSettingsBehavior();
-        if (!$this->allowOrDenySettingsService->isEntryAllowed($name, $settingsEntries, $settingsBehavior)) {
+        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($name, $settingsEntries, $settingsBehavior)) {
             return null;
         }
         return $this->doGetOption($name);

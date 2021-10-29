@@ -74,8 +74,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_TAG_SLUGS => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_TAG_IDS => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_TAG_SLUGS => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_TAG_IDS => $this->getIdScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -94,8 +94,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_TAG_SLUGS => $this->translationAPI->__('Limit results to elements with the given tags', 'tags'),
-            self::MODULE_FILTERINPUT_TAG_IDS => $this->translationAPI->__('Limit results to elements with the given ids', 'tags'),
+            self::MODULE_FILTERINPUT_TAG_SLUGS => $this->getTranslationAPI()->__('Limit results to elements with the given tags', 'tags'),
+            self::MODULE_FILTERINPUT_TAG_IDS => $this->getTranslationAPI()->__('Limit results to elements with the given ids', 'tags'),
             default => null,
         };
     }

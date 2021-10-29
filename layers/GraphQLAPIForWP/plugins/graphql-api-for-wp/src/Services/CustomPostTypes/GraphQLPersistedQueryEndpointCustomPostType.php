@@ -57,12 +57,12 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
 
     protected function getEndpointExecuterRegistry(): EndpointExecuterRegistryInterface
     {
-        return $this->persistedQueryEndpointExecuterRegistryInterface;
+        return $this->getPersistedQueryEndpointExecuterRegistryInterface();
     }
 
     protected function getEndpointAnnotatorRegistry(): EndpointAnnotatorRegistryInterface
     {
-        return $this->persistedQueryEndpointAnnotatorRegistryInterface;
+        return $this->getPersistedQueryEndpointAnnotatorRegistryInterface();
     }
 
     /**
@@ -166,7 +166,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
 
     protected function getBlockRegistry(): BlockRegistryInterface
     {
-        return $this->persistedQueryEndpointBlockRegistry;
+        return $this->getPersistedQueryEndpointBlockRegistry();
     }
 
     /**
@@ -179,6 +179,6 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
 
     public function getEndpointOptionsBlock(): BlockInterface
     {
-        return $this->persistedQueryEndpointOptionsBlock;
+        return $this->getPersistedQueryEndpointOptionsBlock();
     }
 }

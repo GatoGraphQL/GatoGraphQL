@@ -31,8 +31,8 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_UPVOTESPOSTS);
             if (in_array($target_id, $value)) {
                 $errors[] = sprintf(
-                    $this->translationAPI->__('You have already up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-                    $this->customPostTypeAPI->getTitle($target_id)
+                    $this->getTranslationAPI()->__('You have already up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+                    $this->getCustomPostTypeAPI()->getTitle($target_id)
                 );
             }
         }
@@ -45,7 +45,7 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
     protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
-        $this->hooksAPI->doAction('gd_upvotepost', $target_id, $form_data);
+        $this->getHooksAPI()->doAction('gd_upvotepost', $target_id, $form_data);
     }
 
     protected function update($form_data): string | int
@@ -66,7 +66,7 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
         // Had the user already executed the opposite (Up-vote => Down-vote, etc), then undo it
         $opposite = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
         if (in_array($target_id, $opposite)) {
-            $this->downvoteCustomPostMutationResolver->executeMutation($form_data);
+            $this->getDownvoteCustomPostMutationResolver()->executeMutation($form_data);
         }
 
         return parent::update($form_data);

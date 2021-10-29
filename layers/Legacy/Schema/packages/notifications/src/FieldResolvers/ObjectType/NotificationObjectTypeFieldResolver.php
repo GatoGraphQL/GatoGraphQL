@@ -99,33 +99,33 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'user' => $this->userObjectTypeResolver,
-            'action' => $this->stringScalarTypeResolver,
-            'objectType' => $this->stringScalarTypeResolver,
-            'objectSubtype' => $this->stringScalarTypeResolver,
-            'objectName' => $this->stringScalarTypeResolver,
-            'objectID' => $this->idScalarTypeResolver,
-            'userID' => $this->idScalarTypeResolver,
-            'websiteURL' => $this->urlScalarTypeResolver,
-            'userCaps' => $this->stringScalarTypeResolver,
-            'histIp' => $this->ipScalarTypeResolver,
-            'histTime' => $this->dateScalarTypeResolver,
-            'histTimeNogmt' => $this->dateScalarTypeResolver,
-            'histTimeReadable' => $this->stringScalarTypeResolver,
-            'status' => $this->stringScalarTypeResolver,
-            'isStatusRead' => $this->booleanScalarTypeResolver,
-            'isStatusNotRead' => $this->booleanScalarTypeResolver,
-            'markAsReadURL' => $this->urlScalarTypeResolver,
-            'markAsUnreadURL' => $this->urlScalarTypeResolver,
-            'icon' => $this->stringScalarTypeResolver,
-            'url' => $this->urlScalarTypeResolver,
-            'target' => $this->stringScalarTypeResolver,
-            'message' => $this->stringScalarTypeResolver,
-            'isPostNotification' => $this->booleanScalarTypeResolver,
-            'isUserNotification' => $this->booleanScalarTypeResolver,
-            'isCommentNotification' => $this->booleanScalarTypeResolver,
-            'isTaxonomyNotification' => $this->booleanScalarTypeResolver,
-            'isAction' => $this->booleanScalarTypeResolver,
+            'user' => $this->getUserObjectTypeResolver(),
+            'action' => $this->getStringScalarTypeResolver(),
+            'objectType' => $this->getStringScalarTypeResolver(),
+            'objectSubtype' => $this->getStringScalarTypeResolver(),
+            'objectName' => $this->getStringScalarTypeResolver(),
+            'objectID' => $this->getIdScalarTypeResolver(),
+            'userID' => $this->getIdScalarTypeResolver(),
+            'websiteURL' => $this->getUrlScalarTypeResolver(),
+            'userCaps' => $this->getStringScalarTypeResolver(),
+            'histIp' => $this->getIpScalarTypeResolver(),
+            'histTime' => $this->getDateScalarTypeResolver(),
+            'histTimeNogmt' => $this->getDateScalarTypeResolver(),
+            'histTimeReadable' => $this->getStringScalarTypeResolver(),
+            'status' => $this->getStringScalarTypeResolver(),
+            'isStatusRead' => $this->getBooleanScalarTypeResolver(),
+            'isStatusNotRead' => $this->getBooleanScalarTypeResolver(),
+            'markAsReadURL' => $this->getUrlScalarTypeResolver(),
+            'markAsUnreadURL' => $this->getUrlScalarTypeResolver(),
+            'icon' => $this->getStringScalarTypeResolver(),
+            'url' => $this->getUrlScalarTypeResolver(),
+            'target' => $this->getStringScalarTypeResolver(),
+            'message' => $this->getStringScalarTypeResolver(),
+            'isPostNotification' => $this->getBooleanScalarTypeResolver(),
+            'isUserNotification' => $this->getBooleanScalarTypeResolver(),
+            'isCommentNotification' => $this->getBooleanScalarTypeResolver(),
+            'isTaxonomyNotification' => $this->getBooleanScalarTypeResolver(),
+            'isAction' => $this->getBooleanScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -160,33 +160,33 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'action' => $this->translationAPI->__('', ''),
-            'objectType' => $this->translationAPI->__('', ''),
-            'objectSubtype' => $this->translationAPI->__('', ''),
-            'objectName' => $this->translationAPI->__('', ''),
-            'objectID' => $this->translationAPI->__('', ''),
-            'user' => $this->translationAPI->__('', ''),
-            'userID' => $this->translationAPI->__('', ''),
-            'websiteURL' => $this->translationAPI->__('', ''),
-            'userCaps' => $this->translationAPI->__('', ''),
-            'histIp' => $this->translationAPI->__('', ''),
-            'histTime' => $this->translationAPI->__('', ''),
-            'histTimeNogmt' => $this->translationAPI->__('', ''),
-            'histTimeReadable' => $this->translationAPI->__('', ''),
-            'status' => $this->translationAPI->__('', ''),
-            'isStatusRead' => $this->translationAPI->__('', ''),
-            'isStatusNotRead' => $this->translationAPI->__('', ''),
-            'markAsReadURL' => $this->translationAPI->__('', ''),
-            'markAsUnreadURL' => $this->translationAPI->__('', ''),
-            'icon' => $this->translationAPI->__('', ''),
-            'url' => $this->translationAPI->__('', ''),
-            'target' => $this->translationAPI->__('', ''),
-            'message' => $this->translationAPI->__('', ''),
-            'isPostNotification' => $this->translationAPI->__('', ''),
-            'isUserNotification' => $this->translationAPI->__('', ''),
-            'isCommentNotification' => $this->translationAPI->__('', ''),
-            'isTaxonomyNotification' => $this->translationAPI->__('', ''),
-            'isAction' => $this->translationAPI->__('', ''),
+            'action' => $this->getTranslationAPI()->__('', ''),
+            'objectType' => $this->getTranslationAPI()->__('', ''),
+            'objectSubtype' => $this->getTranslationAPI()->__('', ''),
+            'objectName' => $this->getTranslationAPI()->__('', ''),
+            'objectID' => $this->getTranslationAPI()->__('', ''),
+            'user' => $this->getTranslationAPI()->__('', ''),
+            'userID' => $this->getTranslationAPI()->__('', ''),
+            'websiteURL' => $this->getTranslationAPI()->__('', ''),
+            'userCaps' => $this->getTranslationAPI()->__('', ''),
+            'histIp' => $this->getTranslationAPI()->__('', ''),
+            'histTime' => $this->getTranslationAPI()->__('', ''),
+            'histTimeNogmt' => $this->getTranslationAPI()->__('', ''),
+            'histTimeReadable' => $this->getTranslationAPI()->__('', ''),
+            'status' => $this->getTranslationAPI()->__('', ''),
+            'isStatusRead' => $this->getTranslationAPI()->__('', ''),
+            'isStatusNotRead' => $this->getTranslationAPI()->__('', ''),
+            'markAsReadURL' => $this->getTranslationAPI()->__('', ''),
+            'markAsUnreadURL' => $this->getTranslationAPI()->__('', ''),
+            'icon' => $this->getTranslationAPI()->__('', ''),
+            'url' => $this->getTranslationAPI()->__('', ''),
+            'target' => $this->getTranslationAPI()->__('', ''),
+            'message' => $this->getTranslationAPI()->__('', ''),
+            'isPostNotification' => $this->getTranslationAPI()->__('', ''),
+            'isUserNotification' => $this->getTranslationAPI()->__('', ''),
+            'isCommentNotification' => $this->getTranslationAPI()->__('', ''),
+            'isTaxonomyNotification' => $this->getTranslationAPI()->__('', ''),
+            'isAction' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -195,7 +195,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     {
         return match ($fieldName) {
             'isAction' => [
-                'action' => $this->stringScalarTypeResolver,
+                'action' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -204,7 +204,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['isAction' => 'action'] => $this->translationAPI->__('The action to check against the notification', 'pop-posts'),
+            ['isAction' => 'action'] => $this->getTranslationAPI()->__('The action to check against the notification', 'pop-posts'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -261,12 +261,12 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
             case 'histTimeNogmt':
                 // In the DB, the time is saved without GMT. However, in the front-end we need the GMT factored in,
                 // because moment.js will
-                return $notification->hist_time - ($this->cmsService->getOption($this->nameResolver->getName('popcms:option:gmtOffset')) * 3600);
+                return $notification->hist_time - ($this->getCmsService()->getOption($this->getNameResolver()->getName('popcms:option:gmtOffset')) * 3600);
             case 'histTimeReadable':
                 // Must convert date using GMT
                 return sprintf(
-                    $this->translationAPI->__('%s ago', 'pop-notifications'),
-                    \humanTiming($notification->hist_time - ($this->cmsService->getOption($this->nameResolver->getName('popcms:option:gmtOffset')) * 3600))
+                    $this->getTranslationAPI()->__('%s ago', 'pop-notifications'),
+                    \humanTiming($notification->hist_time - ($this->getCmsService()->getOption($this->getNameResolver()->getName('popcms:option:gmtOffset')) * 3600))
                 );
 
             case 'status':
@@ -316,8 +316,8 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                         return $taxonomyapi->getTermLink($notification->object_id);
 
                     case 'Comments':
-                        $comment = $this->commentTypeAPI->getComment($notification->object_id);
-                        return $customPostTypeAPI->getPermalink($this->commentTypeAPI->getCommentPostId($comment));
+                        $comment = $this->getCommentTypeAPI()->getComment($notification->object_id);
+                        return $customPostTypeAPI->getPermalink($this->getCommentTypeAPI()->getCommentPostId($comment));
                 }
                 return null;
 

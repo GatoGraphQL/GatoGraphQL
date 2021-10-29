@@ -31,7 +31,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         ModuleRegistryInterface $moduleRegistry,
     ): void {
         $this->moduleRegistry = $moduleRegistry;
-        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
+        $this->getUserSettingsManager() = UserSettingsManagerFacade::getInstance();
     }
 
     public function getMenuPageSlug(): string
@@ -73,7 +73,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 \flush_rewrite_rules();
 
                 // Update the timestamp
-                $this->userSettingsManager->storeContainerTimestamp();
+                $this->getUserSettingsManager()->storeContainerTimestamp();
             }
         );
 
@@ -157,7 +157,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $items = $this->getAllItems();
         foreach ($items as $item) {
             $module = $item['module'];
-            $moduleResolver = $this->moduleRegistry->getModuleResolver($module);
+            $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
             foreach ($item['settings'] as $itemSetting) {
                 $option = $itemSetting[Properties::INPUT] ?? null;
                 // No option => it is a label
@@ -221,9 +221,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     protected function getAllItems(): array
     {
         $items = [];
-        $modules = $this->moduleRegistry->getAllModules(true, true, false);
+        $modules = $this->getModuleRegistry()->getAllModules(true, true, false);
         foreach ($modules as $module) {
-            $moduleResolver = $this->moduleRegistry->getModuleResolver($module);
+            $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
             $items[] = [
                 'module' => $module,
                 'id' => $moduleResolver->getID($module),
@@ -246,7 +246,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function printWithTabs(): bool
     {
-        return $this->userSettingsManager->getSetting(
+        return $this->getUserSettingsManager()->getSetting(
             PluginManagementFunctionalityModuleResolver::GENERAL,
             PluginManagementFunctionalityModuleResolver::OPTION_PRINT_SETTINGS_WITH_TABS
         );
@@ -366,7 +366,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function getOptionValue(string $module, string $option): mixed
     {
-        return $this->userSettingsManager->getSetting($module, $option);
+        return $this->getUserSettingsManager()->getSetting($module, $option);
     }
 
     /**

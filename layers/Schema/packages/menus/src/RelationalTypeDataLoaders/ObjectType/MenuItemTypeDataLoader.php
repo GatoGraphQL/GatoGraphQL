@@ -23,7 +23,7 @@ class MenuItemTypeDataLoader extends AbstractObjectTypeDataLoader
     {
         // Retrieve each item from the dynamic registry
         return array_map(
-            fn (string | int $id) => $this->menuItemRuntimeRegistry->getMenuItem($id),
+            fn (string | int $id) => $this->getMenuItemRuntimeRegistry()->getMenuItem($id),
             $ids
         );
     }

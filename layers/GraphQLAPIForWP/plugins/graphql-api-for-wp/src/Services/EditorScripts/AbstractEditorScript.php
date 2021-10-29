@@ -92,7 +92,7 @@ abstract class AbstractEditorScript extends AbstractScript
          */
         if (\is_admin()) {
             if ($postTypes = $this->getAllowedPostTypes()) {
-                if (!in_array($this->editorHelpers->getEditingPostType(), $postTypes)) {
+                if (!in_array($this->getEditorHelpers()->getEditingPostType(), $postTypes)) {
                     return;
                 }
             }
