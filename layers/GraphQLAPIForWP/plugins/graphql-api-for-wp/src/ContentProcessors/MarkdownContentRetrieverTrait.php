@@ -28,7 +28,7 @@ trait MarkdownContentRetrieverTrait
      * Function `getMarkdownContent` will only be accessed from the Application Container,
      * so the properties will not be null in that situation.
      */
-    // #[Required]
+    //#[Required]
     public function autowireMarkdownContentRetrieverTrait(
         ?MarkdownContentParserInterface $markdownContentParser,
     ): void {

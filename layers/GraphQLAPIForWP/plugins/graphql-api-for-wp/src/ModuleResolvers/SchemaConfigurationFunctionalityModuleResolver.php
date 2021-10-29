@@ -44,7 +44,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
      * Function `getDescription` will only be accessed from the Application Container,
      * so the properties will not be null in that situation.
      */
-    // #[Required]
+    //#[Required]
     final public function autowireSchemaConfigurationFunctionalityModuleResolver(
         ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
     ): void {
