@@ -42,7 +42,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
         MutationRootTypeDataLoader $mutationRootTypeDataLoader,
     ): void {
         $this->typeResolverHelper = $typeResolverHelper;
-        $this->getMutationRoot()TypeDataLoader = $mutationRootTypeDataLoader;
+        $this->mutationRootTypeDataLoader = $mutationRootTypeDataLoader;
     }
 
     public function getTypeName(): string
@@ -64,7 +64,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getMutationRoot()TypeDataLoader;
+        return $this->getMutationRootTypeDataLoader();
     }
 
     public function isFieldNameConditionSatisfiedForSchema(

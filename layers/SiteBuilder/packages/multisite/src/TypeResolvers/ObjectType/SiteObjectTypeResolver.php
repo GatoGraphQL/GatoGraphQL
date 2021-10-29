@@ -27,7 +27,7 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
     final public function autowireSiteObjectTypeResolver(
         SiteTypeDataLoader $siteTypeDataLoader,
     ): void {
-        $this->getSite()TypeDataLoader = $siteTypeDataLoader;
+        $this->siteTypeDataLoader = $siteTypeDataLoader;
     }
 
     public function getTypeName(): string
@@ -49,6 +49,6 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getSite()TypeDataLoader;
+        return $this->getSiteTypeDataLoader();
     }
 }

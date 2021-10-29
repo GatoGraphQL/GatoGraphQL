@@ -32,7 +32,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
     final public function autowireRootObjectTypeResolver(
         RootTypeDataLoader $rootTypeDataLoader,
     ): void {
-        $this->getRoot()TypeDataLoader = $rootTypeDataLoader;
+        $this->rootTypeDataLoader = $rootTypeDataLoader;
     }
 
     public function getTypeName(): string
@@ -57,6 +57,6 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getRoot()TypeDataLoader;
+        return $this->getRootTypeDataLoader();
     }
 }

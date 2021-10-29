@@ -23,10 +23,10 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
             $this->defaultUserAuthorizationScheme = $userAuthorizationScheme;
             // Place the default one at the top
             // @see http://www.mendoweb.be/blog/php-array_unshift-key-array_unshift-associative-array/
-            $this->getUserAuthorization()Schemes = [$userAuthorizationScheme->getName() => $userAuthorizationScheme] + $this->getUserAuthorization()Schemes;
+            $this->userAuthorizationSchemes = [$userAuthorizationScheme->getName() => $userAuthorizationScheme] + $this->userAuthorizationSchemes;
         } else {
             // Place at the end
-            $this->getUserAuthorization()Schemes[$userAuthorizationScheme->getName()] = $userAuthorizationScheme;
+            $this->userAuthorizationSchemes[$userAuthorizationScheme->getName()] = $userAuthorizationScheme;
         }
     }
 
@@ -35,18 +35,18 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
      */
     public function getUserAuthorizationSchemes(): array
     {
-        return array_values($this->getUserAuthorization()Schemes);
+        return array_values($this->userAuthorizationSchemes);
     }
 
     public function getUserAuthorizationScheme(string $name): UserAuthorizationSchemeInterface
     {
-        if (!isset($this->getUserAuthorization()Schemes[$name])) {
+        if (!isset($this->userAuthorizationSchemes[$name])) {
             throw new InvalidArgumentException(sprintf(
                 \__('User authorization scheme with name \'%s\' does not exist', 'graphql-api'),
                 $name
             ));
         }
-        return $this->getUserAuthorization()Schemes[$name];
+        return $this->userAuthorizationSchemes[$name];
     }
 
     public function getDefaultUserAuthorizationScheme(): UserAuthorizationSchemeInterface

@@ -42,7 +42,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
         RootObjectTypeResolver $rootObjectTypeResolver,
         TypeResolverHelperInterface $typeResolverHelper
     ): void {
-        $this->getRootObjectTypeResolver() = $rootObjectTypeResolver;
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
         $this->typeResolverHelper = $typeResolverHelper;
     }
 

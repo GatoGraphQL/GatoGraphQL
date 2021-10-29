@@ -41,8 +41,8 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
         RootObjectTypeResolver $rootObjectTypeResolver,
         QueryRootTypeDataLoader $queryRootTypeDataLoader,
     ): void {
-        $this->getRootObjectTypeResolver() = $rootObjectTypeResolver;
-        $this->getQueryRoot()TypeDataLoader = $queryRootTypeDataLoader;
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+        $this->queryRootTypeDataLoader = $queryRootTypeDataLoader;
     }
 
     public function getTypeName(): string
@@ -64,7 +64,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getQueryRoot()TypeDataLoader;
+        return $this->getQueryRootTypeDataLoader();
     }
 
     public function isFieldNameConditionSatisfiedForSchema(

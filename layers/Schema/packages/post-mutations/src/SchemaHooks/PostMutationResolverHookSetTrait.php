@@ -47,7 +47,7 @@ trait PostMutationResolverHookSetTrait
         MutationRootObjectTypeResolver $mutationRootObjectTypeResolver,
         PostObjectTypeResolver $postObjectTypeResolver,
     ): void {
-        $this->getRootObjectTypeResolver() = $rootObjectTypeResolver;
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
         $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
         $this->postObjectTypeResolver = $postObjectTypeResolver;
     }

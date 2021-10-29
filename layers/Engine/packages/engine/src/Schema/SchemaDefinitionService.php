@@ -43,7 +43,7 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
         RootObjectTypeResolver $rootObjectTypeResolver,
         AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver,
     ): void {
-        $this->getRootObjectTypeResolver() = $rootObjectTypeResolver;
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
         $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
     }
 
