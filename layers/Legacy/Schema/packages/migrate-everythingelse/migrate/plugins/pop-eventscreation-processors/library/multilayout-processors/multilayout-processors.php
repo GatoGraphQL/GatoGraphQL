@@ -33,12 +33,12 @@ class PoP_EventsCreation_Multilayout_Processor extends PoP_Application_Multilayo
                     if ($layout = $defaults[$format] ?? null) {
                         $instanceManager = InstanceManagerFacade::getInstance();
                         /** @var RelationalTypeResolverInterface */
-                        $eventTypeResolver = $instanceManager->getInstance(EventObjectTypeResolver::class);
+                        $eventObjectTypeResolver = $instanceManager->getInstance(EventObjectTypeResolver::class);
                         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                         $field = $fieldQueryInterpreter->getField(
                             'isType',
                             [
-                                'type' => $eventTypeResolver->getTypeName(),
+                                'type' => $eventObjectTypeResolver->getTypeName(),
                             ]
                         );
                         $layouts[$field] = $layout;

@@ -27,12 +27,12 @@ class PoP_CommonAutomatedEmails_Events_Multilayout_Processor extends PoP_Applica
                     if ($layout = $event_layouts[$format] ?? null) {
                         $instanceManager = InstanceManagerFacade::getInstance();
                         /** @var RelationalTypeResolverInterface */
-                        $eventTypeResolver = $instanceManager->getInstance(EventObjectTypeResolver::class);
+                        $eventObjectTypeResolver = $instanceManager->getInstance(EventObjectTypeResolver::class);
                         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                         $field = $fieldQueryInterpreter->getField(
                             'isType',
                             [
-                                'type' => $eventTypeResolver->getTypeName(),
+                                'type' => $eventObjectTypeResolver->getTypeName(),
                             ]
                         );
                         $layouts[$field] = $layout;
