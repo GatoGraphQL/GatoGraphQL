@@ -13,8 +13,8 @@ class Utils
 
     public static function getUserMeta($user_id, $key, $single = false)
     {
-        $userMetaAPI = UserMetaTypeAPIFacade::getInstance();
-        return $userMetaAPI->getUserMeta($user_id, self::getMetaKey($key), $single);
+        $userMetaTypeAPI = UserMetaTypeAPIFacade::getInstance();
+        return $userMetaTypeAPI->getUserMeta($user_id, self::getMetaKey($key), $single);
     }
     public static function updateUserMeta($user_id, $key, $values, $single = false, $boolean = false)
     {
