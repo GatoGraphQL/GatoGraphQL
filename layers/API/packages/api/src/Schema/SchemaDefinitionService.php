@@ -56,33 +56,33 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
      */
     private ?PersistentCacheInterface $persistentCache = null;
 
-    private ?PersistedFragmentManagerInterface $fragmentCatalogueManager = null;
-    private ?PersistedQueryManagerInterface $queryCatalogueManager = null;
+    private ?PersistedFragmentManagerInterface $persistedFragmentManager = null;
+    private ?PersistedQueryManagerInterface $persistedQueryManager = null;
 
-    public function setPersistedFragmentManager(PersistedFragmentManagerInterface $fragmentCatalogueManager): void
+    public function setPersistedFragmentManager(PersistedFragmentManagerInterface $persistedFragmentManager): void
     {
-        $this->fragmentCatalogueManager = $fragmentCatalogueManager;
+        $this->persistedFragmentManager = $persistedFragmentManager;
     }
     protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
     {
-        return $this->fragmentCatalogueManager ??= $this->instanceManager->getInstance(PersistedFragmentManagerInterface::class);
+        return $this->persistedFragmentManager ??= $this->instanceManager->getInstance(PersistedFragmentManagerInterface::class);
     }
-    public function setPersistedQueryManager(PersistedQueryManagerInterface $queryCatalogueManager): void
+    public function setPersistedQueryManager(PersistedQueryManagerInterface $persistedQueryManager): void
     {
-        $this->queryCatalogueManager = $queryCatalogueManager;
+        $this->persistedQueryManager = $persistedQueryManager;
     }
     protected function getPersistedQueryManager(): PersistedQueryManagerInterface
     {
-        return $this->queryCatalogueManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
+        return $this->persistedQueryManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
     }
 
     //#[Required]
     final public function autowireAPISchemaDefinitionService(
-        PersistedFragmentManagerInterface $fragmentCatalogueManager,
-        PersistedQueryManagerInterface $queryCatalogueManager,
+        PersistedFragmentManagerInterface $persistedFragmentManager,
+        PersistedQueryManagerInterface $persistedQueryManager,
     ): void {
-        $this->fragmentCatalogueManager = $fragmentCatalogueManager;
-        $this->queryCatalogueManager = $queryCatalogueManager;
+        $this->persistedFragmentManager = $persistedFragmentManager;
+        $this->persistedQueryManager = $persistedQueryManager;
     }
 
     final public function getPersistentCache(): PersistentCacheInterface
@@ -165,10 +165,10 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
 
 
             // Add the Fragment Catalogue
-            $schemaDefinition[SchemaDefinition::PERSISTED_FRAGMENTS] = $this->getFragmentCatalogueManager()->getPersistedFragmentsForSchema();
+            $schemaDefinition[SchemaDefinition::PERSISTED_FRAGMENTS] = $this->getPersistedFragmentManager()->getPersistedFragmentsForSchema();
 
             // Add the Query Catalogue
-            $schemaDefinition[SchemaDefinition::PERSISTED_QUERIES] = $this->getQueryCatalogueManager()->getPersistedQueriesForSchema();
+            $schemaDefinition[SchemaDefinition::PERSISTED_QUERIES] = $this->getPersistedQueryManager()->getPersistedQueriesForSchema();
 
             // Sort the elements in the schema alphabetically
             if (ComponentConfiguration::sortFullSchemaAlphabetically()) {

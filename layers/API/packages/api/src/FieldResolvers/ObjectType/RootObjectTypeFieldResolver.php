@@ -28,8 +28,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?PersistentCacheInterface $persistentCache = null;
 
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
-    private ?PersistedFragmentManagerInterface $fragmentCatalogueManager = null;
-    private ?PersistedQueryManagerInterface $queryCatalogueManager = null;
+    private ?PersistedFragmentManagerInterface $persistedFragmentManager = null;
+    private ?PersistedQueryManagerInterface $persistedQueryManager = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
     public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
@@ -40,21 +40,21 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
-    public function setPersistedFragmentManager(PersistedFragmentManagerInterface $fragmentCatalogueManager): void
+    public function setPersistedFragmentManager(PersistedFragmentManagerInterface $persistedFragmentManager): void
     {
-        $this->fragmentCatalogueManager = $fragmentCatalogueManager;
+        $this->persistedFragmentManager = $persistedFragmentManager;
     }
     protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
     {
-        return $this->fragmentCatalogueManager ??= $this->instanceManager->getInstance(PersistedFragmentManagerInterface::class);
+        return $this->persistedFragmentManager ??= $this->instanceManager->getInstance(PersistedFragmentManagerInterface::class);
     }
-    public function setPersistedQueryManager(PersistedQueryManagerInterface $queryCatalogueManager): void
+    public function setPersistedQueryManager(PersistedQueryManagerInterface $persistedQueryManager): void
     {
-        $this->queryCatalogueManager = $queryCatalogueManager;
+        $this->persistedQueryManager = $persistedQueryManager;
     }
     protected function getPersistedQueryManager(): PersistedQueryManagerInterface
     {
-        return $this->queryCatalogueManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
+        return $this->persistedQueryManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
     }
     public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -68,13 +68,13 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     //#[Required]
     final public function autowireRootObjectTypeFieldResolver(
         JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
-        PersistedFragmentManagerInterface $fragmentCatalogueManager,
-        PersistedQueryManagerInterface $queryCatalogueManager,
+        PersistedFragmentManagerInterface $persistedFragmentManager,
+        PersistedQueryManagerInterface $persistedQueryManager,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {
         $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
-        $this->fragmentCatalogueManager = $fragmentCatalogueManager;
-        $this->queryCatalogueManager = $queryCatalogueManager;
+        $this->persistedFragmentManager = $persistedFragmentManager;
+        $this->persistedQueryManager = $persistedQueryManager;
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
 
