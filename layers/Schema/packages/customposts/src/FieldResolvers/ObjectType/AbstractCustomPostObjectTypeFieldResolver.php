@@ -80,14 +80,6 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     }
 
     /**
-     * Allow to override the implementation service
-     */
-    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
-    {
-        return $this->getCustomPostTypeAPI();
-    }
-
-    /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
