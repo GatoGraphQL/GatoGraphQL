@@ -19,7 +19,6 @@ trait ConfigurableAccessControlForDirectivesRelationalTypeResolverDecoratorTrait
         AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getRequiredEntryValue insteadof ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait;
         AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getDirectiveResolvers insteadof ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait;
         AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getDirectiveResolverClasses insteadof ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait;
-        AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::autowireConfigurableMandatoryDirectivesForDirectivesTrait insteadof ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait;
     }
 
     /**
