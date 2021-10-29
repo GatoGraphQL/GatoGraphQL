@@ -7,6 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Security;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface;
 use InvalidArgumentException;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 /**
@@ -14,6 +15,8 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class UserAuthorization implements UserAuthorizationInterface
 {
+    use BasicServiceTrait;
+    
     private ?UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry = null;
 
     public function setUserAuthorizationSchemeRegistry(UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry): void
