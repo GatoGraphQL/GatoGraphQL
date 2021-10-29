@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Services;
+namespace PoP\Translation\Services;
 
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
