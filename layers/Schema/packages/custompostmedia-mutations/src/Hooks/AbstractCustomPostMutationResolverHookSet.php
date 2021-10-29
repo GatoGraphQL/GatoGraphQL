@@ -17,17 +17,17 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
-    private ?MediaObjectTypeResolver $mediaTypeResolver = null;
+    private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
     private ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaTypeResolver): void
+    public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
     {
-        $this->mediaTypeResolver = $mediaTypeResolver;
+        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
     }
     protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
-        return $this->mediaTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
+        return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
     }
     public function setCustomPostMediaTypeMutationAPI(CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI): void
     {
@@ -48,11 +48,11 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 
     //#[Required]
     final public function autowireAbstractCustomPostMutationResolverHookSet(
-        MediaObjectTypeResolver $mediaTypeResolver,
+        MediaObjectTypeResolver $mediaObjectTypeResolver,
         CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
         IDScalarTypeResolver $idScalarTypeResolver,
     ): void {
-        $this->mediaTypeResolver = $mediaTypeResolver;
+        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
         $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
         $this->idScalarTypeResolver = $idScalarTypeResolver;
     }

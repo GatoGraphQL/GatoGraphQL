@@ -64,27 +64,27 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public const HOOK_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':generic-custompost-types';
     public const HOOK_REJECTED_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':rejected-generic-custompost-types';
 
-    private ?CommentObjectTypeResolver $commentTypeResolver = null;
+    private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
-    private ?GenericCustomPostObjectTypeResolver $genericCustomPostTypeResolver = null;
-    private ?MediaObjectTypeResolver $mediaTypeResolver = null;
-    private ?PageObjectTypeResolver $pageTypeResolver = null;
-    private ?PostTagObjectTypeResolver $postTagTypeResolver = null;
-    private ?PostCategoryObjectTypeResolver $postCategoryTypeResolver = null;
-    private ?MenuObjectTypeResolver $menuTypeResolver = null;
-    private ?PostObjectTypeResolver $postTypeResolver = null;
-    private ?UserRoleObjectTypeResolver $userRoleTypeResolver = null;
-    private ?UserAvatarObjectTypeResolver $userAvatarTypeResolver = null;
-    private ?UserObjectTypeResolver $userTypeResolver = null;
+    private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
+    private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
+    private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
+    private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
+    private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
+    private ?MenuObjectTypeResolver $menuObjectTypeResolver = null;
+    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?UserRoleObjectTypeResolver $userRoleObjectTypeResolver = null;
+    private ?UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver = null;
+    private ?UserObjectTypeResolver $userObjectTypeResolver = null;
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
 
-    public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentTypeResolver): void
+    public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
     {
-        $this->commentTypeResolver = $commentTypeResolver;
+        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
     }
     protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
-        return $this->commentTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+        return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
     }
     public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
     {
@@ -94,85 +94,85 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         return $this->customPostUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
     }
-    public function setGenericCustomPostObjectTypeResolver(GenericCustomPostObjectTypeResolver $genericCustomPostTypeResolver): void
+    public function setGenericCustomPostObjectTypeResolver(GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver): void
     {
-        $this->genericCustomPostTypeResolver = $genericCustomPostTypeResolver;
+        $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
     }
     protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
     {
-        return $this->genericCustomPostTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
+        return $this->genericCustomPostObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
     }
-    public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaTypeResolver): void
+    public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
     {
-        $this->mediaTypeResolver = $mediaTypeResolver;
+        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
     }
     protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
-        return $this->mediaTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
+        return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
     }
-    public function setPageObjectTypeResolver(PageObjectTypeResolver $pageTypeResolver): void
+    public function setPageObjectTypeResolver(PageObjectTypeResolver $pageObjectTypeResolver): void
     {
-        $this->pageTypeResolver = $pageTypeResolver;
+        $this->pageObjectTypeResolver = $pageObjectTypeResolver;
     }
     protected function getPageObjectTypeResolver(): PageObjectTypeResolver
     {
-        return $this->pageTypeResolver ??= $this->instanceManager->getInstance(PageObjectTypeResolver::class);
+        return $this->pageObjectTypeResolver ??= $this->instanceManager->getInstance(PageObjectTypeResolver::class);
     }
-    public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagTypeResolver): void
+    public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
     {
-        $this->postTagTypeResolver = $postTagTypeResolver;
+        $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
     }
     protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
     {
-        return $this->postTagTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+        return $this->postTagObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
     }
-    public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryTypeResolver): void
+    public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
     {
-        $this->postCategoryTypeResolver = $postCategoryTypeResolver;
+        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
     }
     protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
-        return $this->postCategoryTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+        return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
     }
-    public function setMenuObjectTypeResolver(MenuObjectTypeResolver $menuTypeResolver): void
+    public function setMenuObjectTypeResolver(MenuObjectTypeResolver $menuObjectTypeResolver): void
     {
-        $this->menuTypeResolver = $menuTypeResolver;
+        $this->menuObjectTypeResolver = $menuObjectTypeResolver;
     }
     protected function getMenuObjectTypeResolver(): MenuObjectTypeResolver
     {
-        return $this->menuTypeResolver ??= $this->instanceManager->getInstance(MenuObjectTypeResolver::class);
+        return $this->menuObjectTypeResolver ??= $this->instanceManager->getInstance(MenuObjectTypeResolver::class);
     }
-    public function setPostObjectTypeResolver(PostObjectTypeResolver $postTypeResolver): void
+    public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {
-        $this->postTypeResolver = $postTypeResolver;
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
     }
     protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
-        return $this->postTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
-    public function setUserRoleObjectTypeResolver(UserRoleObjectTypeResolver $userRoleTypeResolver): void
+    public function setUserRoleObjectTypeResolver(UserRoleObjectTypeResolver $userRoleObjectTypeResolver): void
     {
-        $this->userRoleTypeResolver = $userRoleTypeResolver;
+        $this->userRoleObjectTypeResolver = $userRoleObjectTypeResolver;
     }
     protected function getUserRoleObjectTypeResolver(): UserRoleObjectTypeResolver
     {
-        return $this->userRoleTypeResolver ??= $this->instanceManager->getInstance(UserRoleObjectTypeResolver::class);
+        return $this->userRoleObjectTypeResolver ??= $this->instanceManager->getInstance(UserRoleObjectTypeResolver::class);
     }
-    public function setUserAvatarObjectTypeResolver(UserAvatarObjectTypeResolver $userAvatarTypeResolver): void
+    public function setUserAvatarObjectTypeResolver(UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver): void
     {
-        $this->userAvatarTypeResolver = $userAvatarTypeResolver;
+        $this->userAvatarObjectTypeResolver = $userAvatarObjectTypeResolver;
     }
     protected function getUserAvatarObjectTypeResolver(): UserAvatarObjectTypeResolver
     {
-        return $this->userAvatarTypeResolver ??= $this->instanceManager->getInstance(UserAvatarObjectTypeResolver::class);
+        return $this->userAvatarObjectTypeResolver ??= $this->instanceManager->getInstance(UserAvatarObjectTypeResolver::class);
     }
-    public function setUserObjectTypeResolver(UserObjectTypeResolver $userTypeResolver): void
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
     {
-        $this->userTypeResolver = $userTypeResolver;
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
     }
     protected function getUserObjectTypeResolver(): UserObjectTypeResolver
     {
-        return $this->userTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+        return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
     public function setCustomPostTypeRegistryInterface(CustomPostTypeRegistryInterface $customPostTypeRegistry): void
     {
@@ -193,32 +193,32 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      */
     // #[Required]
     final public function autowireSchemaTypeModuleResolver(
-        ?CommentObjectTypeResolver $commentTypeResolver,
+        ?CommentObjectTypeResolver $commentObjectTypeResolver,
         ?CustomPostUnionTypeResolver $customPostUnionTypeResolver,
-        ?GenericCustomPostObjectTypeResolver $genericCustomPostTypeResolver,
-        ?MediaObjectTypeResolver $mediaTypeResolver,
-        ?PageObjectTypeResolver $pageTypeResolver,
-        ?PostTagObjectTypeResolver $postTagTypeResolver,
-        ?PostCategoryObjectTypeResolver $postCategoryTypeResolver,
-        ?MenuObjectTypeResolver $menuTypeResolver,
-        ?PostObjectTypeResolver $postTypeResolver,
-        ?UserRoleObjectTypeResolver $userRoleTypeResolver,
-        ?UserAvatarObjectTypeResolver $userAvatarTypeResolver,
-        ?UserObjectTypeResolver $userTypeResolver,
+        ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver,
+        ?MediaObjectTypeResolver $mediaObjectTypeResolver,
+        ?PageObjectTypeResolver $pageObjectTypeResolver,
+        ?PostTagObjectTypeResolver $postTagObjectTypeResolver,
+        ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
+        ?MenuObjectTypeResolver $menuObjectTypeResolver,
+        ?PostObjectTypeResolver $postObjectTypeResolver,
+        ?UserRoleObjectTypeResolver $userRoleObjectTypeResolver,
+        ?UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver,
+        ?UserObjectTypeResolver $userObjectTypeResolver,
         ?CustomPostTypeRegistryInterface $customPostTypeRegistry
     ): void {
-        $this->commentTypeResolver = $commentTypeResolver;
+        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
         $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
-        $this->genericCustomPostTypeResolver = $genericCustomPostTypeResolver;
-        $this->mediaTypeResolver = $mediaTypeResolver;
-        $this->pageTypeResolver = $pageTypeResolver;
-        $this->postTagTypeResolver = $postTagTypeResolver;
-        $this->postCategoryTypeResolver = $postCategoryTypeResolver;
-        $this->menuTypeResolver = $menuTypeResolver;
-        $this->postTypeResolver = $postTypeResolver;
-        $this->userRoleTypeResolver = $userRoleTypeResolver;
-        $this->userAvatarTypeResolver = $userAvatarTypeResolver;
-        $this->userTypeResolver = $userTypeResolver;
+        $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
+        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
+        $this->pageObjectTypeResolver = $pageObjectTypeResolver;
+        $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
+        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
+        $this->menuObjectTypeResolver = $menuObjectTypeResolver;
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+        $this->userRoleObjectTypeResolver = $userRoleObjectTypeResolver;
+        $this->userAvatarObjectTypeResolver = $userAvatarObjectTypeResolver;
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
         $this->customPostTypeRegistry = $customPostTypeRegistry;
     }
 
@@ -325,27 +325,27 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
          * to avoid PHPStan errors
          */
         /** @var CommentObjectTypeResolver */
-        $commentTypeResolver = $this->commentTypeResolver;
+        $commentObjectTypeResolver = $this->commentObjectTypeResolver;
         /** @var GenericCustomPostObjectTypeResolver */
-        $genericCustomPostTypeResolver = $this->genericCustomPostTypeResolver;
+        $genericCustomPostObjectTypeResolver = $this->genericCustomPostObjectTypeResolver;
         /** @var MediaObjectTypeResolver */
-        $mediaTypeResolver = $this->getMediaTypeResolver();
+        $mediaObjectTypeResolver = $this->getMediaTypeResolver();
         /** @var PageObjectTypeResolver */
-        $pageTypeResolver = $this->pageTypeResolver;
+        $pageObjectTypeResolver = $this->pageObjectTypeResolver;
         /** @var PostTagObjectTypeResolver */
-        $postTagTypeResolver = $this->postTagTypeResolver;
+        $postTagObjectTypeResolver = $this->postTagObjectTypeResolver;
         /** @var PostCategoryObjectTypeResolver */
-        $postCategoryTypeResolver = $this->postCategoryTypeResolver;
+        $postCategoryObjectTypeResolver = $this->postCategoryObjectTypeResolver;
         /** @var MenuObjectTypeResolver */
-        $menuTypeResolver = $this->menuTypeResolver;
+        $menuObjectTypeResolver = $this->menuObjectTypeResolver;
         /** @var PostObjectTypeResolver */
-        $postTypeResolver = $this->postTypeResolver;
+        $postObjectTypeResolver = $this->postObjectTypeResolver;
         /** @var UserRoleObjectTypeResolver */
-        $userRoleTypeResolver = $this->userRoleTypeResolver;
+        $userRoleObjectTypeResolver = $this->userRoleObjectTypeResolver;
         /** @var UserAvatarObjectTypeResolver */
-        $userAvatarTypeResolver = $this->userAvatarTypeResolver;
+        $userAvatarObjectTypeResolver = $this->userAvatarObjectTypeResolver;
         /** @var UserObjectTypeResolver */
-        $userTypeResolver = $this->userTypeResolver;
+        $userObjectTypeResolver = $this->userObjectTypeResolver;
         switch ($module) {
             case self::SCHEMA_ADMIN_FIELDS:
                 return \__('Add "admin" fields to the schema', 'graphql-api');
@@ -354,67 +354,67 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             case self::SCHEMA_GENERIC_CUSTOMPOSTS:
                 return sprintf(
                     \__('Query any custom post type (added to the schema or not), through a generic type <code>%1$s</code>', 'graphql-api'),
-                    $genericCustomPostTypeResolver->getTypeName()
+                    $genericCustomPostObjectTypeResolver->getTypeName()
                 );
             case self::SCHEMA_POSTS:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('posts', 'graphql-api'),
-                    $postTypeResolver->getTypeName()
+                    $postObjectTypeResolver->getTypeName()
                 );
             case self::SCHEMA_USERS:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('users', 'graphql-api'),
-                    $userTypeResolver->getTypeName()
+                    $userObjectTypeResolver->getTypeName()
                 );
             case self::SCHEMA_USER_ROLES:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('user roles', 'graphql-api'),
-                    $userRoleTypeResolver->getTypeName()
+                    $userRoleObjectTypeResolver->getTypeName()
                 );
             case self::SCHEMA_USER_AVATARS:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('user avatars', 'graphql-api'),
-                    $userAvatarTypeResolver->getTypeName()
+                    $userAvatarObjectTypeResolver->getTypeName()
                 );
             case self::SCHEMA_PAGES:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('pages', 'graphql-api'),
-                    $pageTypeResolver->getTypeName()
+                    $pageObjectTypeResolver->getTypeName()
                 );
             case self::SCHEMA_MEDIA:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('media elements', 'graphql-api'),
-                    $mediaTypeResolver->getTypeName()
+                    $mediaObjectTypeResolver->getTypeName()
                 );
             case self::SCHEMA_COMMENTS:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('comments', 'graphql-api'),
-                    $commentTypeResolver->getTypeName()
+                    $commentObjectTypeResolver->getTypeName()
                 );
             case self::SCHEMA_POST_TAGS:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('post tags', 'graphql-api'),
-                    $postTagTypeResolver->getTypeName()
+                    $postTagObjectTypeResolver->getTypeName()
                 );
             case self::SCHEMA_POST_CATEGORIES:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('post categories', 'graphql-api'),
-                    $postCategoryTypeResolver->getTypeName()
+                    $postCategoryObjectTypeResolver->getTypeName()
                 );
             case self::SCHEMA_MENUS:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
                     \__('menus', 'graphql-api'),
-                    $menuTypeResolver->getTypeName()
+                    $menuObjectTypeResolver->getTypeName()
                 );
             case self::SCHEMA_SETTINGS:
                 return \__('Fetch settings from the site', 'graphql-api');
@@ -589,15 +589,15 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         /** @var CustomPostUnionTypeResolver */
         $customPostUnionTypeResolver = $this->getCustomPostUnionTypeResolver();
         /** @var GenericCustomPostObjectTypeResolver */
-        $genericCustomPostTypeResolver = $this->genericCustomPostTypeResolver;
+        $genericCustomPostObjectTypeResolver = $this->genericCustomPostObjectTypeResolver;
         /** @var PageObjectTypeResolver */
-        $pageTypeResolver = $this->pageTypeResolver;
+        $pageObjectTypeResolver = $this->pageObjectTypeResolver;
         /** @var PostObjectTypeResolver */
-        $postTypeResolver = $this->postTypeResolver;
+        $postObjectTypeResolver = $this->postObjectTypeResolver;
         /** @var CustomPostTypeRegistryInterface */
         $customPostTypeRegistry = $this->getCustomPostTypeRegistry();
         /** @var UserObjectTypeResolver */
-        $userTypeResolver = $this->userTypeResolver;
+        $userObjectTypeResolver = $this->userObjectTypeResolver;
 
         $moduleSettings = parent::getSettings($module);
         // Common variables to set the limit on the schema types
@@ -772,7 +772,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     Properties::DESCRIPTION => sprintf(
                         \__('If type <code>%s</code> is composed of only one type (eg: <code>%s</code>), then return this single type directly in field <code>%s</code>?', 'graphql-api'),
                         $customPostUnionTypeResolver->getTypeName(),
-                        $postTypeResolver->getTypeName(),
+                        $postObjectTypeResolver->getTypeName(),
                         'customPosts'
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
@@ -791,11 +791,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 $moduleTitles = [
                     self::SCHEMA_POSTS => sprintf(
                         $titlePlaceholder,
-                        $postTypeResolver->getTypeName()
+                        $postObjectTypeResolver->getTypeName()
                     ),
                     self::SCHEMA_PAGES => sprintf(
                         $titlePlaceholder,
-                        $pageTypeResolver->getTypeName()
+                        $pageObjectTypeResolver->getTypeName()
                     ),
                 ];
                 $descriptionPlaceholder = sprintf(
@@ -807,11 +807,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 $moduleDescriptions = [
                     self::SCHEMA_POSTS => sprintf(
                         $descriptionPlaceholder,
-                        $postTypeResolver->getTypeName()
+                        $postObjectTypeResolver->getTypeName()
                     ),
                     self::SCHEMA_PAGES => sprintf(
                         $descriptionPlaceholder,
-                        $pageTypeResolver->getTypeName()
+                        $pageObjectTypeResolver->getTypeName()
                     ),
                 ];
                 $option = ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE;
@@ -941,7 +941,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::TITLE => \__('Included custom post types', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Results from these custom post types will be included when querying a field with type <code>%s</code> (such as <code>%s</code>)<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
-                    $genericCustomPostTypeResolver->getTypeName(),
+                    $genericCustomPostObjectTypeResolver->getTypeName(),
                     'genericCustomPosts'
                 ),
                 Properties::TYPE => Properties::TYPE_ARRAY,
@@ -1013,7 +1013,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::TITLE => \__('Default avatar size', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Size of the avatar (in pixels) when not providing argument <code>"size"</code> in field <code>%s.avatar</code>', 'graphql-api'),
-                    $userTypeResolver->getTypeName()
+                    $userObjectTypeResolver->getTypeName()
                 ),
                 Properties::TYPE => Properties::TYPE_INT,
                 Properties::MIN_NUMBER => 1,

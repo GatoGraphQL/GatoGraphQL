@@ -257,10 +257,10 @@ class PoP_Mentions
             // Allow for the popover by adding data-popover-id
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var RelationalTypeResolverInterface */
-            $userTypeResolver = $instanceManager->getInstance(UserObjectTypeResolver::class);
+            $userObjectTypeResolver = $instanceManager->getInstance(UserObjectTypeResolver::class);
             $content = sprintf(
                 '<a class="pop-mentions-user" data-popover-target="%s" href="%s">%s</a>',
-                '#popover-' . RequestUtils::getDomainId($cmsService->getSiteURL()) . '-' . $userTypeResolver->getTypeName() . '-' . $userTypeAPI->getUserId($user),
+                '#popover-' . RequestUtils::getDomainId($cmsService->getSiteURL()) . '-' . $userObjectTypeResolver->getTypeName() . '-' . $userTypeAPI->getUserId($user),
                 $userTypeAPI->getUserURL($userTypeAPI->getUserId($user)),
                 $userTypeAPI->getUserDisplayName($user)
             );

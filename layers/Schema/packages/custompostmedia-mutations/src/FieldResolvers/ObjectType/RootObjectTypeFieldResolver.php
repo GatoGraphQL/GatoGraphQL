@@ -21,19 +21,19 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    private ?MediaObjectTypeResolver $mediaTypeResolver = null;
+    private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
     private ?SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver = null;
     private ?RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaTypeResolver): void
+    public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
     {
-        $this->mediaTypeResolver = $mediaTypeResolver;
+        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
     }
     protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
-        return $this->mediaTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
+        return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
     }
     public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
     {
@@ -70,13 +70,13 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
     //#[Required]
     final public function autowireRootObjectTypeFieldResolver(
-        MediaObjectTypeResolver $mediaTypeResolver,
+        MediaObjectTypeResolver $mediaObjectTypeResolver,
         CustomPostUnionTypeResolver $customPostUnionTypeResolver,
         SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver,
         RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver,
         IDScalarTypeResolver $idScalarTypeResolver,
     ): void {
-        $this->mediaTypeResolver = $mediaTypeResolver;
+        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
         $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
         $this->setFeaturedImageOnCustomPostMutationResolver = $setFeaturedImageOnCustomPostMutationResolver;
         $this->removeFeaturedImageOnCustomPostMutationResolver = $removeFeaturedImageOnCustomPostMutationResolver;
