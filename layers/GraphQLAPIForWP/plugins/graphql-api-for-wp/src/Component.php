@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPluginComponent;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
+use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 
 /**
  * Initialize component

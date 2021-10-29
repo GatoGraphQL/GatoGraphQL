@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Engine\Facades\CMS\CMSServiceFacade;
 use PoP\SPA\ModuleFilters\Page;
 

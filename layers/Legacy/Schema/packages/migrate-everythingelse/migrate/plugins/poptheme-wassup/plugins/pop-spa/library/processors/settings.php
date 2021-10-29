@@ -3,7 +3,7 @@
  * @todo Define the overriding service in services.yaml, once component migrated to PSR-4
  * @see https://github.com/leoloso/PoP/issues/476
  */
-// use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+// use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 // // Override ModuleProcessorClass
 // $instanceManager = InstanceManagerFacade::getInstance();

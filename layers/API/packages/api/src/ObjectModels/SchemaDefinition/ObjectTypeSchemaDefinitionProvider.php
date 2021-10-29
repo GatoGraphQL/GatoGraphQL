@@ -8,7 +8,7 @@ use PoP\API\Schema\SchemaDefinition;
 use PoP\API\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;

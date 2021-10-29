@@ -11,8 +11,8 @@ use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleTypeRegistryFacade;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 
 /**
  * Module Table

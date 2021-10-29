@@ -14,8 +14,8 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 
 class Plugin extends AbstractMainPlugin
 {

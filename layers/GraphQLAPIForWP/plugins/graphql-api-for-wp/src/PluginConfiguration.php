@@ -32,7 +32,7 @@ use PoP\CacheControl\ComponentConfiguration as CacheControlComponentConfiguratio
 use PoP\CacheControl\Environment as CacheControlEnvironment;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
-use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
+use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\Environment as EngineEnvironment;
 use PoPSchema\Categories\ComponentConfiguration as CategoriesComponentConfiguration;

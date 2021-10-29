@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginConfigurationHelper;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationHelpers;
-use PoP\ComponentModel\Facades\Instances\SystemInstanceManagerFacade;
+use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
 /**
