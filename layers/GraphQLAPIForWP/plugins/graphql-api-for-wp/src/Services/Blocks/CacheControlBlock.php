@@ -16,6 +16,7 @@ class CacheControlBlock extends AbstractControlBlock
     use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_CACHE_CONTROL_MAX_AGE = 'cacheControlMaxAge';
+
     protected CacheControlBlockCategory $cacheControlBlockCategory;
 
     #[Required]
