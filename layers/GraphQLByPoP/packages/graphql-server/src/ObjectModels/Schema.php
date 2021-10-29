@@ -105,7 +105,7 @@ class Schema
     public function getMutationRootObjectTypeID(): ?string
     {
         $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
-        if ($mutationRootTypeResolver = $graphQLSchemaDefinitionService->getMutationRootObjectTypeResolver()) {
+        if ($mutationRootTypeResolver = $graphQLSchemaDefinitionService->getSchemaMutationRootObjectTypeResolver()) {
             return $this->getObjectTypeID($mutationRootTypeResolver);
         }
         return null;

@@ -10,6 +10,6 @@ use PoP\API\Schema\SchemaDefinitionServiceInterface;
 interface GraphQLSchemaDefinitionServiceInterface extends SchemaDefinitionServiceInterface
 {
     public function getSchemaQueryRootObjectTypeResolver(): ObjectTypeResolverInterface;
-    public function getMutationRootObjectTypeResolver(): ?ObjectTypeResolverInterface;
+    public function getSchemaMutationRootObjectTypeResolver(): ?ObjectTypeResolverInterface;
     public function getSubscriptionRootTypeResolver(): ?ObjectTypeResolverInterface;
 }
