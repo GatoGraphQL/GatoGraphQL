@@ -12,7 +12,7 @@ trait WithTranslationAPIServiceTrait
 {
     private ?TranslationAPIInterface $translationAPI = null;
 
-    //#[Required]
+    // #[Required]
     public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
     {
         $this->translationAPI = $translationAPI;

@@ -12,7 +12,7 @@ trait WithInstanceManagerServiceTrait
 {
     private ?InstanceManagerInterface $instanceManager = null;
 
-    //#[Required]
+    // #[Required]
     public function setInstanceManager(InstanceManagerInterface $instanceManager): void
     {
         $this->instanceManager = $instanceManager;
