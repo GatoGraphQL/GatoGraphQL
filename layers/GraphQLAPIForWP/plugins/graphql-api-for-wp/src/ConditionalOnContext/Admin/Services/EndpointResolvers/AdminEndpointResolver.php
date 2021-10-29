@@ -9,12 +9,14 @@ use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\AbstractEndpointResolver;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
 use GraphQLByPoP\GraphQLRequest\ComponentConfiguration as GraphQLRequestComponentConfiguration;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\EngineWP\Templates\TemplateHelpers;
 use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 
 class AdminEndpointResolver extends AbstractEndpointResolver
 {
+    use BasicServiceTrait;
     use EndpointResolverTrait {
         EndpointResolverTrait::executeGraphQLQuery as upstreamExecuteGraphQLQuery;
     }

@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\Routing;
 
-use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
+use PoP\Root\Services\WithInstanceManagerServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRoutingManager implements RoutingManagerInterface
 {
     use WithHooksAPIServiceTrait;
+    use WithInstanceManagerServiceTrait;
 
     /**
      * @return string[]

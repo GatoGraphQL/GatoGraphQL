@@ -9,6 +9,7 @@ use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 /**
@@ -18,6 +19,8 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 abstract class AbstractCacheConfigurationManager implements CacheConfigurationManagerInterface
 {
+    use BasicServiceTrait;
+    
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?EndpointHelpers $endpointHelpers = null;
 

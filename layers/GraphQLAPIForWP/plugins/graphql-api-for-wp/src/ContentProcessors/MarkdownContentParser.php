@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
 use GraphQLAPI\MarkdownConvertor\MarkdownConvertorInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class MarkdownContentParser extends AbstractContentParser implements MarkdownContentParserInterface
 {
+    use BasicServiceTrait;
+    
     private ?MarkdownConvertorInterface $markdownConvertor = null;
 
     public function setMarkdownConvertor(MarkdownConvertorInterface $markdownConvertor): void

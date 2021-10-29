@@ -10,11 +10,14 @@ use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use InvalidArgumentException;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Environment as RootEnvironment;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractContentParser implements ContentParserInterface
 {
+    use BasicServiceTrait;
+    
     public const PATH_URL_TO_DOCS = 'pathURLToDocs';
 
     protected string $baseDir = '';
