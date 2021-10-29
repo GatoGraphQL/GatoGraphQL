@@ -54,10 +54,10 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
      * on services.yaml produces an exception of PHP properties not initialized
      * in its depended services.
      */
-    protected ?PersistentCacheInterface $persistentCache = null;
+    private ?PersistentCacheInterface $persistentCache = null;
 
-    protected ?PersistedFragmentManagerInterface $fragmentCatalogueManager = null;
-    protected ?PersistedQueryManagerInterface $queryCatalogueManager = null;
+    private ?PersistedFragmentManagerInterface $fragmentCatalogueManager = null;
+    private ?PersistedQueryManagerInterface $queryCatalogueManager = null;
 
     public function setPersistedFragmentManager(PersistedFragmentManagerInterface $fragmentCatalogueManager): void
     {

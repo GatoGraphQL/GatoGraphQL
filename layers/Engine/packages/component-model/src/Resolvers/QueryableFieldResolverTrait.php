@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait QueryableFieldResolverTrait
 {
-    protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
     public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
     {

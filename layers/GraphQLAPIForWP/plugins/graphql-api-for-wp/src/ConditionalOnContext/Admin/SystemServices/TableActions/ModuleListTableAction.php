@@ -24,7 +24,7 @@ class ModuleListTableAction extends AbstractListTableAction
     private array $mutatedModuleIDs = [];
     private bool $mutatedEnabled = false;
 
-    protected ?UserSettingsManagerInterface $userSettingsManager = null;
+    private ?UserSettingsManagerInterface $userSettingsManager = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {

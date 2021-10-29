@@ -10,8 +10,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
 {
-    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    protected ?CacheControlDirectiveResolver $cacheControlDirectiveResolver = null;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?CacheControlDirectiveResolver $cacheControlDirectiveResolver = null;
 
     public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {

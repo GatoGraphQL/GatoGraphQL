@@ -26,14 +26,14 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected ?CommentTypeAPIInterface $commentTypeAPI = null;
-    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    protected ?DateScalarTypeResolver $dateScalarTypeResolver = null;
-    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    protected ?IPScalarTypeResolver $ipScalarTypeResolver = null;
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
-    protected ?UserObjectTypeResolver $userObjectTypeResolver = null;
+    private ?CommentTypeAPIInterface $commentTypeAPI = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?IPScalarTypeResolver $ipScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
+    private ?UserObjectTypeResolver $userObjectTypeResolver = null;
     
     public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
     {

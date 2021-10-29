@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
-    protected ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
     public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {

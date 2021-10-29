@@ -8,7 +8,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractNameResolver implements NameResolverInterface
 {
-    protected ?LooseContractManagerInterface $looseContractManager = null;
+    private ?LooseContractManagerInterface $looseContractManager = null;
 
     public function setLooseContractManager(LooseContractManagerInterface $looseContractManager): void
     {

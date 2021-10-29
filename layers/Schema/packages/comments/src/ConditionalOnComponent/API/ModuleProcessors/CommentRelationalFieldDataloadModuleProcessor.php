@@ -16,8 +16,8 @@ class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFi
 {
     public const MODULE_DATALOAD_RELATIONALFIELDS_COMMENTS = 'dataload-relationalfields-comments';
 
-    protected ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
-    protected ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
+    private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
+    private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
 
     public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
     {

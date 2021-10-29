@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class TemplateHookSet extends AbstractHookSet
 {
-    protected ?ApplicationStateHelperServiceInterface $applicationStateHelperService = null;
+    private ?ApplicationStateHelperServiceInterface $applicationStateHelperService = null;
 
     public function setApplicationStateHelperService(ApplicationStateHelperServiceInterface $applicationStateHelperService): void
     {

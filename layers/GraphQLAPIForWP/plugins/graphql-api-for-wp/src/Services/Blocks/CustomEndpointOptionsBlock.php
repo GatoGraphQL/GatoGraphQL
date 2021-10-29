@@ -15,7 +15,7 @@ class CustomEndpointOptionsBlock extends AbstractEndpointOptionsBlock implements
 {
     use MainPluginBlockTrait;
 
-    protected ?CustomEndpointBlockCategory $customEndpointBlockCategory = null;
+    private ?CustomEndpointBlockCategory $customEndpointBlockCategory = null;
 
     public function setCustomEndpointBlockCategory(CustomEndpointBlockCategory $customEndpointBlockCategory): void
     {

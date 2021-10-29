@@ -13,8 +13,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirectiveResolver implements CacheControlDirectiveResolverInterface
 {
-    protected ?CacheControlEngineInterface $cacheControlEngine = null;
-    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?CacheControlEngineInterface $cacheControlEngine = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
     public function setCacheControlEngine(CacheControlEngineInterface $cacheControlEngine): void
     {

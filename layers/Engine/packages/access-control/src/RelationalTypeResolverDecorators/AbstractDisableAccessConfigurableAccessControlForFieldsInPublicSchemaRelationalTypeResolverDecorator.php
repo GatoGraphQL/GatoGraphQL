@@ -9,7 +9,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractDisableAccessConfigurableAccessControlForFieldsInPublicSchemaRelationalTypeResolverDecorator extends AbstractConfigurableAccessControlForFieldsInPublicSchemaRelationalTypeResolverDecorator
 {
-    protected ?DisableAccessDirectiveResolver $disableAccessDirectiveResolver = null;
+    private ?DisableAccessDirectiveResolver $disableAccessDirectiveResolver = null;
 
     public function setDisableAccessDirectiveResolver(DisableAccessDirectiveResolver $disableAccessDirectiveResolver): void
     {

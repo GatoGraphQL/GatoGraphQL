@@ -19,10 +19,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected ?UserObjectTypeResolver $userObjectTypeResolver = null;
-    protected ?LoginMutationResolver $loginMutationResolver = null;
-    protected ?LogoutMutationResolver $logoutMutationResolver = null;
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?UserObjectTypeResolver $userObjectTypeResolver = null;
+    private ?LoginMutationResolver $loginMutationResolver = null;
+    private ?LogoutMutationResolver $logoutMutationResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
     {

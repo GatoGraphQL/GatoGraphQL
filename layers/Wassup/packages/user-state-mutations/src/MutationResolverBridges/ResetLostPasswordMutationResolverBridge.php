@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ResetLostPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected ?ResetLostPasswordMutationResolver $resetLostPasswordMutationResolver = null;
+    private ?ResetLostPasswordMutationResolver $resetLostPasswordMutationResolver = null;
 
     public function setResetLostPasswordMutationResolver(ResetLostPasswordMutationResolver $resetLostPasswordMutationResolver): void
     {

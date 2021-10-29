@@ -12,7 +12,7 @@ class ConfigurableCacheControlForDirectivesRelationalTypeResolverDecorator exten
 {
     use ConfigurableCacheControlRelationalTypeResolverDecoratorTrait;
 
-    protected ?CacheControlManagerInterface $cacheControlManager = null;
+    private ?CacheControlManagerInterface $cacheControlManager = null;
 
     public function setCacheControlManager(CacheControlManagerInterface $cacheControlManager): void
     {

@@ -9,7 +9,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractModuleFilter implements ModuleFilterInterface
 {
-    protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
     public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
     {

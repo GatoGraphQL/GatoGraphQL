@@ -15,8 +15,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends AbstractValidateConditionDirectiveResolver
 {
-    protected ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
     {

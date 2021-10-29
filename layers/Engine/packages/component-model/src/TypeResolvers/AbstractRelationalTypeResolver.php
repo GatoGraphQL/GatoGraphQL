@@ -57,11 +57,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     private array $directiveResolverInstanceCache = [];
 
-    protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
-    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    protected ?ErrorProviderInterface $errorProvider = null;
-    protected ?DataloadingEngineInterface $dataloadingEngine = null;
-    protected ?DirectivePipelineServiceInterface $directivePipelineService = null;
+    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?ErrorProviderInterface $errorProvider = null;
+    private ?DataloadingEngineInterface $dataloadingEngine = null;
+    private ?DirectivePipelineServiceInterface $directivePipelineService = null;
 
     public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {

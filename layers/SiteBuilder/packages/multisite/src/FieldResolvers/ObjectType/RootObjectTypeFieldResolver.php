@@ -15,8 +15,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected ?SiteObjectTypeResolver $siteObjectTypeResolver = null;
-    protected ?Site $site = null;
+    private ?SiteObjectTypeResolver $siteObjectTypeResolver = null;
+    private ?Site $site = null;
 
     public function setSiteObjectTypeResolver(SiteObjectTypeResolver $siteObjectTypeResolver): void
     {

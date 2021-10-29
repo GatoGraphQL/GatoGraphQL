@@ -16,7 +16,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
 {
-    protected ?CMSServiceInterface $cmsService = null;
+    private ?CMSServiceInterface $cmsService = null;
 
     public function setCMSService(CMSServiceInterface $cmsService): void
     {

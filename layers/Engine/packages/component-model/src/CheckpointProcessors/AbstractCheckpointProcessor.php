@@ -14,7 +14,7 @@ abstract class AbstractCheckpointProcessor implements CheckpointProcessorInterfa
 {
     use BasicServiceTrait;
     
-    protected ?HooksAPIInterface $hooksAPI = null;
+    private ?HooksAPIInterface $hooksAPI = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {

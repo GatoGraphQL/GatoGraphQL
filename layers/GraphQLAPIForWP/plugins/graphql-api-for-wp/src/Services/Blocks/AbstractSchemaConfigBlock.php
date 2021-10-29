@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractSchemaConfigBlock extends AbstractBlock implements SchemaConfigEditorBlockServiceTagInterface
 {
-    protected ?SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory = null;
+    private ?SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory = null;
 
     public function setSchemaConfigurationBlockCategory(SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory): void
     {

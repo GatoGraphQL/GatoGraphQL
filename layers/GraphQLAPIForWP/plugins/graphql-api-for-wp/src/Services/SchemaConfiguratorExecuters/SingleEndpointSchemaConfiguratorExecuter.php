@@ -17,10 +17,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
 {
-    protected ?UserSettingsManagerInterface $userSettingsManager = null;
-    protected ?ModuleRegistryInterface $moduleRegistry = null;
-    protected ?SingleEndpointSchemaConfigurator $endpointSchemaConfigurator = null;
-    protected ?GraphQLEndpointHandler $graphQLEndpointHandler = null;
+    private ?UserSettingsManagerInterface $userSettingsManager = null;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?SingleEndpointSchemaConfigurator $endpointSchemaConfigurator = null;
+    private ?GraphQLEndpointHandler $graphQLEndpointHandler = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {

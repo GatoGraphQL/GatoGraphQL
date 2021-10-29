@@ -15,9 +15,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
-    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    protected ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
 
     public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {

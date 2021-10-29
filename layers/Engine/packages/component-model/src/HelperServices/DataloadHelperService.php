@@ -20,9 +20,9 @@ class DataloadHelperService implements DataloadHelperServiceInterface
 {
     use BasicServiceTrait;
     
-    protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
-    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
     public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {

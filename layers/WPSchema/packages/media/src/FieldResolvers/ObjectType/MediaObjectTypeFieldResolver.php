@@ -15,9 +15,9 @@ use WP_Post;
 
 class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected ?CMSHelperServiceInterface $cmsHelperService = null;
-    protected ?DateFormatterInterface $dateFormatter = null;
-    protected ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
+    private ?CMSHelperServiceInterface $cmsHelperService = null;
+    private ?DateFormatterInterface $dateFormatter = null;
+    private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
 
     public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
     {

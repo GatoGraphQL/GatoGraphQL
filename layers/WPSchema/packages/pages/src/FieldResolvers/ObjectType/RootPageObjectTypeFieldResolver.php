@@ -16,8 +16,8 @@ use WP_Post;
 
 class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected ?PageObjectTypeResolver $pageObjectTypeResolver = null;
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     public function setPageObjectTypeResolver(PageObjectTypeResolver $pageObjectTypeResolver): void
     {

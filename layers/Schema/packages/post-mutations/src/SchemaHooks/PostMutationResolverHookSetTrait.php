@@ -12,9 +12,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait PostMutationResolverHookSetTrait
 {
-    protected ?RootObjectTypeResolver $rootObjectTypeResolver = null;
-    protected ?MutationRootObjectTypeResolver $mutationRootObjectTypeResolver = null;
-    protected ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
+    private ?MutationRootObjectTypeResolver $mutationRootObjectTypeResolver = null;
+    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
 
     public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
     {

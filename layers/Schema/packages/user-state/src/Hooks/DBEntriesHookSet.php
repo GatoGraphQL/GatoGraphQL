@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class DBEntriesHookSet extends AbstractHookSet
 {
-    protected ?GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver = null;
+    private ?GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver = null;
 
     public function setGlobalObjectTypeFieldResolver(GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver): void
     {

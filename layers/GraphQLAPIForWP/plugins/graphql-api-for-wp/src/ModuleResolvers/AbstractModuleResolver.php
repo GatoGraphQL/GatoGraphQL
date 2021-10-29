@@ -14,7 +14,7 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
 {
     use BasicServiceTrait;
     
-    protected ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
 
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {

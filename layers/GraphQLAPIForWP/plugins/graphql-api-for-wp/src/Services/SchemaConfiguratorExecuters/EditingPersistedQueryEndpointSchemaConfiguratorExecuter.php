@@ -11,8 +11,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
 {
-    protected ?EndpointHelpers $endpointHelpers = null;
-    protected ?PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator = null;
+    private ?EndpointHelpers $endpointHelpers = null;
+    private ?PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator = null;
 
     public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
     {

@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractTaxonomyMetaTypeAPI implements TaxonomyMetaTypeAPIInterface
 {
-    protected ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
+    private ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
 
     public function setAllowOrDenySettingsService(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
     {

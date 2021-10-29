@@ -19,8 +19,8 @@ class AdminEndpointResolver extends AbstractEndpointResolver
         EndpointResolverTrait::executeGraphQLQuery as upstreamExecuteGraphQLQuery;
     }
 
-    protected ?UserAuthorizationInterface $userAuthorization = null;
-    protected ?QueryRetrieverInterface $queryRetrieverInterface = null;
+    private ?UserAuthorizationInterface $userAuthorization = null;
+    private ?QueryRetrieverInterface $queryRetrieverInterface = null;
 
     public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {

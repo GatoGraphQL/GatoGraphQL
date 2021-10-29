@@ -18,8 +18,8 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
 {
     use BasicServiceTrait;
     
-    protected ?RootObjectTypeResolver $rootObjectTypeResolver = null;
-    protected ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
+    private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
+    private ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
     
     public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
     {

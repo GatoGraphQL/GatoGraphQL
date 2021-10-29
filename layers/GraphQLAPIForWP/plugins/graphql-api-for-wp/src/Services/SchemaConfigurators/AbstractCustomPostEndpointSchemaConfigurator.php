@@ -16,8 +16,8 @@ use WP_Post;
 
 abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndpointSchemaConfigurator
 {
-    protected ?UserSettingsManagerInterface $userSettingsManager = null;
-    protected ?EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock = null;
+    private ?UserSettingsManagerInterface $userSettingsManager = null;
+    private ?EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {

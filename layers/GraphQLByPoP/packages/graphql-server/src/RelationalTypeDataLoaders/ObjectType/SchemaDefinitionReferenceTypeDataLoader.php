@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    protected ?SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry = null;
+    private ?SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry = null;
 
     public function setSchemaDefinitionReferenceRegistry(SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry): void
     {

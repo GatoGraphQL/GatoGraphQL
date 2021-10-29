@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected ?ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver = null;
+    private ?ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver = null;
     
     public function setChangeUserPasswordMutationResolver(ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver): void
     {

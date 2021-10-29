@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class InstallSystemMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
-    protected ?InstallSystemMutationResolver $installSystemMutationResolver = null;
+    private ?InstallSystemMutationResolver $installSystemMutationResolver = null;
 
     public function setInstallSystemMutationResolver(InstallSystemMutationResolver $installSystemMutationResolver): void
     {

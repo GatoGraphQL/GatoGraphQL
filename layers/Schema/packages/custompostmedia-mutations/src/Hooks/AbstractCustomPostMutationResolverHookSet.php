@@ -17,9 +17,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
-    protected ?MediaObjectTypeResolver $mediaTypeResolver = null;
-    protected ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
-    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?MediaObjectTypeResolver $mediaTypeResolver = null;
+    private ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
     public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaTypeResolver): void
     {

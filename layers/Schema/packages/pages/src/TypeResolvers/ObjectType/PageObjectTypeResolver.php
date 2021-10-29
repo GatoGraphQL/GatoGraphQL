@@ -12,8 +12,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
-    protected ?PageTypeDataLoader $pageTypeDataLoader = null;
-    protected ?PageTypeAPIInterface $pageTypeAPI = null;
+    private ?PageTypeDataLoader $pageTypeDataLoader = null;
+    private ?PageTypeAPIInterface $pageTypeAPI = null;
 
     public function setPageTypeDataLoader(PageTypeDataLoader $pageTypeDataLoader): void
     {

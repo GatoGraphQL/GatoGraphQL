@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait ValidateUserNotLoggedInForFieldsRelationalTypeResolverDecoratorTrait
 {
-    protected ?ValidateIsUserNotLoggedInDirectiveResolver $validateIsUserNotLoggedInDirectiveResolver = null;
+    private ?ValidateIsUserNotLoggedInDirectiveResolver $validateIsUserNotLoggedInDirectiveResolver = null;
 
     public function setValidateIsUserNotLoggedInDirectiveResolver(ValidateIsUserNotLoggedInDirectiveResolver $validateIsUserNotLoggedInDirectiveResolver): void
     {

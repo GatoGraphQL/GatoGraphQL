@@ -22,8 +22,8 @@ class GenericCustomPostRelationalFieldDataloadModuleProcessor extends AbstractRe
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST = 'dataload-relationalfields-admingenericcustompostlist';
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTCOUNT = 'dataload-relationalfields-admingenericcustompostcount';
 
-    protected ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
-    protected ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
+    private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
+    private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
 
     public function setGenericCustomPostObjectTypeResolver(GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver): void
     {

@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected ?UserAvatarTypeDataLoader $userAvatarTypeDataLoader = null;
+    private ?UserAvatarTypeDataLoader $userAvatarTypeDataLoader = null;
 
     public function setUserAvatarTypeDataLoader(UserAvatarTypeDataLoader $userAvatarTypeDataLoader): void
     {

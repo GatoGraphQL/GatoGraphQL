@@ -13,8 +13,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class EndpointHelpers
 {
-    protected ?PluginMenu $pluginMenu = null;
-    protected ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?PluginMenu $pluginMenu = null;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
 
     public function setPluginMenu(PluginMenu $pluginMenu): void
     {

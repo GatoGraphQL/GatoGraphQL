@@ -11,8 +11,8 @@ use WP_Post;
 
 abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaConfigBlock
 {
-    protected ?BlockRenderingHelpers $blockRenderingHelpers = null;
-    protected ?CPTUtils $cptUtils = null;
+    private ?BlockRenderingHelpers $blockRenderingHelpers = null;
+    private ?CPTUtils $cptUtils = null;
 
     public function setBlockRenderingHelpers(BlockRenderingHelpers $blockRenderingHelpers): void
     {

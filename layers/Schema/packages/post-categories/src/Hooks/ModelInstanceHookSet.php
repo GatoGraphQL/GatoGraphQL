@@ -16,8 +16,8 @@ class ModelInstanceHookSet extends AbstractHookSet
 {
     public const HOOK_VARY_MODEL_INSTANCE_BY_CATEGORY = __CLASS__ . ':vary-model-instance-by-category';
 
-    protected ?PostTypeAPIInterface $postTypeAPI = null;
-    protected ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
+    private ?PostTypeAPIInterface $postTypeAPI = null;
+    private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
     public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
     {

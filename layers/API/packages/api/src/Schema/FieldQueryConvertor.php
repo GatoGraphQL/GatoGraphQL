@@ -42,10 +42,10 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
      * @var array<string, mixed>
      */
     private ?array $fragmentsFromRequestCache = null;
-    protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
-    protected ?QueryParserInterface $queryParser = null;
-    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    protected ?PersistedFragmentManagerInterface $persistedFragmentManager = null;
+    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    private ?QueryParserInterface $queryParser = null;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?PersistedFragmentManagerInterface $persistedFragmentManager = null;
 
     public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {

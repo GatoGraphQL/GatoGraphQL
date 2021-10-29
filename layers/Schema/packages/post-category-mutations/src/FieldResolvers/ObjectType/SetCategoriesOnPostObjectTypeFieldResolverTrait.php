@@ -18,9 +18,9 @@ trait SetCategoriesOnPostObjectTypeFieldResolverTrait
 {
     // use BasicServiceTrait;
 
-    protected ?PostObjectTypeResolver $postObjectTypeResolver = null;
-    protected ?SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver = null;
-    protected ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
+    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver = null;
+    private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
     
     public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {

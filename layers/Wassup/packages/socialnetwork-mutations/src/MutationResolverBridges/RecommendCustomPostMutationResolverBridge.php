@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
-    protected ?RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver = null;
+    private ?RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver = null;
 
     public function setRecommendCustomPostMutationResolver(RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver): void
     {

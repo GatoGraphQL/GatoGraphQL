@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class PluginMenu extends AbstractMenu
 {
-    protected ?UserAuthorizationInterface $userAuthorization = null;
+    private ?UserAuthorizationInterface $userAuthorization = null;
 
     public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {

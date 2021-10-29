@@ -12,8 +12,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait PostCategoryAPISatisfiedContractTrait
 {
-    protected ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
-    protected ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
+    private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
+    private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
 
     public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
     {

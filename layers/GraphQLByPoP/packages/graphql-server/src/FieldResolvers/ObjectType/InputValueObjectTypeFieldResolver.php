@@ -16,8 +16,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    protected ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
 
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {

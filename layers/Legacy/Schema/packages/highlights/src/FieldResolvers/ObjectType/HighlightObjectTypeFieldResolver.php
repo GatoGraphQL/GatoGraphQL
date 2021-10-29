@@ -19,8 +19,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {

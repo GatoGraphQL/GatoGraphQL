@@ -17,8 +17,8 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
 {
     use BasicServiceTrait;
     
-    protected ?RootObjectTypeResolver $rootObjectTypeResolver = null;
-    protected ?TypeResolverHelperInterface $typeResolverHelper = null;
+    private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
+    private ?TypeResolverHelperInterface $typeResolverHelper = null;
 
     public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
     {

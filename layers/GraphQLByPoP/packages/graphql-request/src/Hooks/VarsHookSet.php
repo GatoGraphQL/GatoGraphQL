@@ -21,11 +21,11 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {
-    protected ?QueryRetrieverInterface $queryRetrieverInterface = null;
-    protected ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
-    protected ?GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager = null;
-    protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
-    protected ?GraphQLQueryConvertorInterface $graphQLQueryConvertor = null;
+    private ?QueryRetrieverInterface $queryRetrieverInterface = null;
+    private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
+    private ?GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager = null;
+    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    private ?GraphQLQueryConvertorInterface $graphQLQueryConvertor = null;
 
     public function setQueryRetriever(QueryRetrieverInterface $queryRetrieverInterface): void
     {

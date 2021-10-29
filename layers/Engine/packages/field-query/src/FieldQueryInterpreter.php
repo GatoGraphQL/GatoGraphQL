@@ -61,8 +61,8 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     public const ALIAS_POSITION_KEY = 'pos';
     public const ALIAS_LENGTH_KEY = 'length';
 
-    protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
-    protected ?QueryParserInterface $queryParser = null;
+    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    private ?QueryParserInterface $queryParser = null;
 
     public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {

@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteCustomPostMutationResolver
 {
-    protected ?UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver = null;
+    private ?UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver = null;
 
     public function setUpvoteCustomPostMutationResolver(UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver): void
     {

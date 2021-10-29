@@ -14,7 +14,7 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
 {
     use PluginMarkdownContentRetrieverTrait;
 
-    protected ?AboutMenuPage $aboutMenuPage = null;
+    private ?AboutMenuPage $aboutMenuPage = null;
 
     public function setAboutMenuPage(AboutMenuPage $aboutMenuPage): void
     {

@@ -20,8 +20,8 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
 {
     use BasicServiceTrait;
     
-    protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?MutationResolutionManagerInterface $mutationResolutionManager = null;
+    private ?HooksAPIInterface $hooksAPI = null;
+    private ?MutationResolutionManagerInterface $mutationResolutionManager = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {

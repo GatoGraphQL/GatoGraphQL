@@ -14,7 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait FieldOrDirectiveSchemaDefinitionResolverTrait
 {
-    protected ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
 
     public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
     {

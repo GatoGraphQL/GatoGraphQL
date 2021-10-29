@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected ?MenuItemTypeDataLoader $menuItemTypeDataLoader = null;
+    private ?MenuItemTypeDataLoader $menuItemTypeDataLoader = null;
 
     public function setMenuItemTypeDataLoader(MenuItemTypeDataLoader $menuItemTypeDataLoader): void
     {

@@ -15,7 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
 {
-    protected ?AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient = null;
+    private ?AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient = null;
 
     public function setAdminGraphiQLWithExplorerClient(AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient): void
     {

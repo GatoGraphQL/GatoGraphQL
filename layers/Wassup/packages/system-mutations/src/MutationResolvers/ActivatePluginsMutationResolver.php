@@ -11,8 +11,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ActivatePluginsMutationResolver extends AbstractMutationResolver
 {
-    protected ?CMSServiceInterface $cmsService = null;
-    protected ?ApplicationInfoInterface $applicationInfo = null;
+    private ?CMSServiceInterface $cmsService = null;
+    private ?ApplicationInfoInterface $applicationInfo = null;
 
     public function setCMSService(CMSServiceInterface $cmsService): void
     {

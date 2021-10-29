@@ -78,13 +78,13 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     protected array $interfaceTypeFieldSchemaDefinitionResolverCache = [];
 
-    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    protected ?NameResolverInterface $nameResolver = null;
-    protected ?CMSServiceInterface $cmsService = null;
-    protected ?SemverHelperServiceInterface $semverHelperService = null;
-    protected ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
-    protected ?EngineInterface $engine = null;
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?NameResolverInterface $nameResolver = null;
+    private ?CMSServiceInterface $cmsService = null;
+    private ?SemverHelperServiceInterface $semverHelperService = null;
+    private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
+    private ?EngineInterface $engine = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {

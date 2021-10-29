@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected ?ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver = null;
+    private ?ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver = null;
 
     public function setElementalInterfaceTypeFieldResolver(ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver): void
     {

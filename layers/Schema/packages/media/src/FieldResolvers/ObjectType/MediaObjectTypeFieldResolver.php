@@ -20,12 +20,12 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected ?MediaTypeAPIInterface $mediaTypeAPI = null;
-    protected ?DateFormatterInterface $dateFormatter = null;
-    protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
-    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    protected ?DateScalarTypeResolver $dateScalarTypeResolver = null;
+    private ?MediaTypeAPIInterface $mediaTypeAPI = null;
+    private ?DateFormatterInterface $dateFormatter = null;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
 
     public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {

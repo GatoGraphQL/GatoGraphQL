@@ -14,8 +14,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements GraphQLSchemaDefinitionServiceInterface
 {
-    protected ?QueryRootObjectTypeResolver $queryRootObjectTypeResolver = null;
-    protected ?MutationRootObjectTypeResolver $mutationRootObjectTypeResolver = null;
+    private ?QueryRootObjectTypeResolver $queryRootObjectTypeResolver = null;
+    private ?MutationRootObjectTypeResolver $mutationRootObjectTypeResolver = null;
 
     public function setQueryRootObjectTypeResolver(QueryRootObjectTypeResolver $queryRootObjectTypeResolver): void
     {

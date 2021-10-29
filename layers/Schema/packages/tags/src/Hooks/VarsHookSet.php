@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {
-    protected ?TaxonomyTypeAPIInterface $taxonomyTypeAPI = null;
+    private ?TaxonomyTypeAPIInterface $taxonomyTypeAPI = null;
 
     public function setTaxonomyTypeAPI(TaxonomyTypeAPIInterface $taxonomyTypeAPI): void
     {

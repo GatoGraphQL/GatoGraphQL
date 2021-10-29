@@ -17,8 +17,8 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
     
     protected ?string $hookName = null;
 
-    protected ?MenuPageHelper $menuPageHelper = null;
-    protected ?EndpointHelpers $endpointHelpers = null;
+    private ?MenuPageHelper $menuPageHelper = null;
+    private ?EndpointHelpers $endpointHelpers = null;
 
     public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
     {

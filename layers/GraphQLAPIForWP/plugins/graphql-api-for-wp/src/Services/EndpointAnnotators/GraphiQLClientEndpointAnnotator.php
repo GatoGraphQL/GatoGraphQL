@@ -13,7 +13,7 @@ use WP_Post;
 
 class GraphiQLClientEndpointAnnotator extends AbstractClientEndpointAnnotator implements CustomEndpointAnnotatorServiceTagInterface
 {
-    protected ?EndpointGraphiQLBlock $endpointGraphiQLBlock = null;
+    private ?EndpointGraphiQLBlock $endpointGraphiQLBlock = null;
 
     public function setEndpointGraphiQLBlock(EndpointGraphiQLBlock $endpointGraphiQLBlock): void
     {

@@ -23,9 +23,9 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
-    protected ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
 
     public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {

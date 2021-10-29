@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractStanceObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
-    protected ?StanceObjectTypeResolver $stanceObjectTypeResolver = null;
+    private ?StanceObjectTypeResolver $stanceObjectTypeResolver = null;
     
     public function setStanceObjectTypeResolver(StanceObjectTypeResolver $stanceObjectTypeResolver): void
     {

@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    protected ?QueryRoot $queryRoot = null;
+    private ?QueryRoot $queryRoot = null;
 
     public function setQueryRoot(QueryRoot $queryRoot): void
     {

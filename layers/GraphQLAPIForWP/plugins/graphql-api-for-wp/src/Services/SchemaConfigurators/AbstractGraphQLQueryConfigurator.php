@@ -36,10 +36,10 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      */
     protected ?array $directiveNameClasses = null;
 
-    protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?ModuleRegistryInterface $moduleRegistry = null;
-    protected ?TypeRegistryInterface $typeRegistry = null;
-    protected ?DirectiveRegistryInterface $directiveRegistry = null;
+    private ?HooksAPIInterface $hooksAPI = null;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?TypeRegistryInterface $typeRegistry = null;
+    private ?DirectiveRegistryInterface $directiveRegistry = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {

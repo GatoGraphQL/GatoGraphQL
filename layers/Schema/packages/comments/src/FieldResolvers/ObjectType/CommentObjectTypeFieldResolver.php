@@ -35,17 +35,17 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected ?CommentTypeAPIInterface $commentTypeAPI = null;
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    protected ?URLScalarTypeResolver $urlScalarTypeResolver = null;
-    protected ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
-    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    protected ?DateScalarTypeResolver $dateScalarTypeResolver = null;
-    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
-    protected ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
-    protected ?CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver = null;
-    protected ?DateFormatterInterface $dateFormatter = null;
+    private ?CommentTypeAPIInterface $commentTypeAPI = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
+    private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
+    private ?CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver = null;
+    private ?DateFormatterInterface $dateFormatter = null;
 
     public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
     {

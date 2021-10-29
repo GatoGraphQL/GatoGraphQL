@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected ?CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver = null;
+    private ?CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver = null;
     
     public function setCreateUpdateProfileMutationResolver(CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver): void
     {

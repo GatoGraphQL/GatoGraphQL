@@ -13,7 +13,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
 {
     public const MODULE_DATALOAD_RELATIONALFIELDS_ROOT = 'dataload-relationalfields-root';
 
-    protected ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
+    private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
 
     public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
     {

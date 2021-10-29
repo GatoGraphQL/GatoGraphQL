@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected ?UserRoleTypeDataLoader $userRoleTypeDataLoader = null;
+    private ?UserRoleTypeDataLoader $userRoleTypeDataLoader = null;
 
     public function setUserRoleTypeDataLoader(UserRoleTypeDataLoader $userRoleTypeDataLoader): void
     {

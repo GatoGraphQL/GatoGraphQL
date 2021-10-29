@@ -25,11 +25,11 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 {
     use BasicServiceTrait;
     
-    protected ?UserSettingsManagerInterface $userSettingsManager = null;
-    protected ?ModuleRegistryInterface $moduleRegistry = null;
-    protected ?UserAuthorizationInterface $userAuthorization = null;
-    protected ?CPTUtils $cptUtils = null;
-    protected ?PluginMenu $pluginMenu = null;
+    private ?UserSettingsManagerInterface $userSettingsManager = null;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?UserAuthorizationInterface $userAuthorization = null;
+    private ?CPTUtils $cptUtils = null;
+    private ?PluginMenu $pluginMenu = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {

@@ -14,8 +14,8 @@ use WP_Post;
 
 abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator implements ClientEndpointAnnotatorInterface
 {
-    protected ?BlockHelpers $blockHelpers = null;
-    protected ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
+    private ?BlockHelpers $blockHelpers = null;
+    private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
 
     public function setBlockHelpers(BlockHelpers $blockHelpers): void
     {

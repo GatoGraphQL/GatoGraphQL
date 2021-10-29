@@ -17,8 +17,8 @@ use WP_User;
 
 class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected ?DateFormatterInterface $dateFormatter = null;
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?DateFormatterInterface $dateFormatter = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     public function setDateFormatter(DateFormatterInterface $dateFormatter): void
     {

@@ -14,8 +14,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RoutingHookSet extends AbstractHookSet
 {
-    protected ?CMSServiceInterface $cmsService = null;
-    protected ?RequestHelperServiceInterface $requestHelperService = null;
+    private ?CMSServiceInterface $cmsService = null;
+    private ?RequestHelperServiceInterface $requestHelperService = null;
 
     public function setCMSService(CMSServiceInterface $cmsService): void
     {

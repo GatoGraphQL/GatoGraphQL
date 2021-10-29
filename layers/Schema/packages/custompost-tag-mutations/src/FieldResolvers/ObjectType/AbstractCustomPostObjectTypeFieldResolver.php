@@ -18,8 +18,8 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
 {
     use SetTagsOnCustomPostObjectTypeFieldResolverTrait;
 
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {

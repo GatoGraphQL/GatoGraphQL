@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ApplicationStateHookSet extends AbstractHookSet
 {
-    protected ?CMSRoutingStateServiceInterface $cmsRoutingStateService = null;
+    private ?CMSRoutingStateServiceInterface $cmsRoutingStateService = null;
 
     public function setCMSRoutingStateService(CMSRoutingStateServiceInterface $cmsRoutingStateService): void
     {

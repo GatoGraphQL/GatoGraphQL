@@ -14,8 +14,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected ?UserMediaTypeAPIInterface $userMediaTypeAPI = null;
-    protected ?UserObjectTypeResolver $userObjectTypeResolver = null;
+    private ?UserMediaTypeAPIInterface $userMediaTypeAPI = null;
+    private ?UserObjectTypeResolver $userObjectTypeResolver = null;
 
     public function setUserMediaTypeAPI(UserMediaTypeAPIInterface $userMediaTypeAPI): void
     {

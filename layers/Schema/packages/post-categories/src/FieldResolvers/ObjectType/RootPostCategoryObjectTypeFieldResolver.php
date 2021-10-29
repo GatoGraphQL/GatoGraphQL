@@ -27,10 +27,10 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    protected ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
-    protected ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
+    private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
     public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {

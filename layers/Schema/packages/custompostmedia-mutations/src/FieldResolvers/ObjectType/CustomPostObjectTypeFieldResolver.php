@@ -20,11 +20,11 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected ?MediaObjectTypeResolver $mediaTypeResolver = null;
-    protected ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
-    protected ?SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver = null;
-    protected ?RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver = null;
-    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?MediaObjectTypeResolver $mediaTypeResolver = null;
+    private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
+    private ?SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver = null;
+    private ?RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
     public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaTypeResolver): void
     {

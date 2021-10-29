@@ -23,10 +23,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      */
     protected ?array $schemaDefinition = null;
 
-    protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?SchemaNamespacingServiceInterface $schemaNamespacingService = null;
-    protected ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
-    protected ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
+    private ?HooksAPIInterface $hooksAPI = null;
+    private ?SchemaNamespacingServiceInterface $schemaNamespacingService = null;
+    private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
+    private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {

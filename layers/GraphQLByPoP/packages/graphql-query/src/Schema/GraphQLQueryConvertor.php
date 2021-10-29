@@ -34,9 +34,9 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
     use BasicServiceTrait;
     
-    protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
-    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    protected ?IncludeDirectiveResolver $includeDirectiveResolver = null;
+    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?IncludeDirectiveResolver $includeDirectiveResolver = null;
 
     public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {

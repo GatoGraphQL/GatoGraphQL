@@ -14,7 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected ?CreateUpdateUserMutationResolver $createUpdateUserMutationResolver = null;
+    private ?CreateUpdateUserMutationResolver $createUpdateUserMutationResolver = null;
     
     public function setCreateUpdateUserMutationResolver(CreateUpdateUserMutationResolver $createUpdateUserMutationResolver): void
     {

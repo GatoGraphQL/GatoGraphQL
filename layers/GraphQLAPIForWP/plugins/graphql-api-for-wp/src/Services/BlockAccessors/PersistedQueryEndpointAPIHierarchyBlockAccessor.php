@@ -12,8 +12,8 @@ use WP_Post;
 
 class PersistedQueryEndpointAPIHierarchyBlockAccessor
 {
-    protected ?BlockHelpers $blockHelpers = null;
-    protected ?PersistedQueryEndpointAPIHierarchyBlock $persistedQueryEndpointAPIHierarchyBlock = null;
+    private ?BlockHelpers $blockHelpers = null;
+    private ?PersistedQueryEndpointAPIHierarchyBlock $persistedQueryEndpointAPIHierarchyBlock = null;
 
     public function setBlockHelpers(BlockHelpers $blockHelpers): void
     {

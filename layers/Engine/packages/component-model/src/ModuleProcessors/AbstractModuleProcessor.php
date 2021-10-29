@@ -42,16 +42,16 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     protected const MODULECOMPONENT_CONDITIONALONDATAFIELDSUBMODULES = 'conditional-on-data-field-submodules';
     protected const MODULECOMPONENT_CONDITIONALONDATAFIELDDOMAINSWITCHINGSUBMODULES = 'conditional-on-data-field-domain-switching-submodules';
 
-    protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    protected ?ModulePathHelpersInterface $modulePathHelpers = null;
-    protected ?ModuleFilterManagerInterface $moduleFilterManager = null;
-    protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
-    protected ?CMSServiceInterface $cmsService = null;
-    protected ?NameResolverInterface $nameResolver = null;
-    protected ?DataloadHelperServiceInterface $dataloadHelperService = null;
-    protected ?RequestHelperServiceInterface $requestHelperService = null;
-    protected ?ModulePaths $modulePaths = null;
+    private ?HooksAPIInterface $hooksAPI = null;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?ModulePathHelpersInterface $modulePathHelpers = null;
+    private ?ModuleFilterManagerInterface $moduleFilterManager = null;
+    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    private ?CMSServiceInterface $cmsService = null;
+    private ?NameResolverInterface $nameResolver = null;
+    private ?DataloadHelperServiceInterface $dataloadHelperService = null;
+    private ?RequestHelperServiceInterface $requestHelperService = null;
+    private ?ModulePaths $modulePaths = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {

@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
-    protected ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
+    private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
 
     public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
     {

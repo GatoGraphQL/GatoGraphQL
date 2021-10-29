@@ -13,8 +13,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class Engine extends UpstreamEngine implements EngineInterface
 {
-    protected ?LooseContractManagerInterface $looseContractManager = null;
-    protected ?CacheControlEngineInterface $cacheControlEngine = null;
+    private ?LooseContractManagerInterface $looseContractManager = null;
+    private ?CacheControlEngineInterface $cacheControlEngine = null;
 
     public function setLooseContractManager(LooseContractManagerInterface $looseContractManager): void
     {

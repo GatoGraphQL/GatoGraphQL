@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ModulePathHelpers implements ModulePathHelpersInterface
 {
-    protected ?ModulePathManagerInterface $modulePathManager = null;
+    private ?ModulePathManagerInterface $modulePathManager = null;
 
     public function setModulePathManager(ModulePathManagerInterface $modulePathManager): void
     {

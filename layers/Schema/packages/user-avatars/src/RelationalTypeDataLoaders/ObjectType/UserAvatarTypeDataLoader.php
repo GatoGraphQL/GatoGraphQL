@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserAvatarTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    protected ?UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry = null;
+    private ?UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry = null;
 
     public function setUserAvatarRuntimeRegistry(UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry): void
     {

@@ -13,8 +13,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected ?UserMetaTypeAPIInterface $userMetaAPI = null;
-    protected ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
+    private ?UserMetaTypeAPIInterface $userMetaAPI = null;
+    private ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
 
     public function setUserMetaTypeAPI(UserMetaTypeAPIInterface $userMetaAPI): void
     {

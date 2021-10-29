@@ -14,7 +14,7 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
 {
     use PostCategoryAPISatisfiedContractTrait;
 
-    protected ?PostCategoryTypeDataLoader $postCategoryTypeDataLoader = null;
+    private ?PostCategoryTypeDataLoader $postCategoryTypeDataLoader = null;
 
     public function setPostCategoryTypeDataLoader(PostCategoryTypeDataLoader $postCategoryTypeDataLoader): void
     {

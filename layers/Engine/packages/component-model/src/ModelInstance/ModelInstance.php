@@ -20,9 +20,9 @@ class ModelInstance implements ModelInstanceInterface
     public const HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE = __CLASS__ . ':componentsFromVars:postOrGetChange';
     public const HOOK_COMPONENTSFROMVARS_RESULT = __CLASS__ . ':componentsFromVars:result';
 
-    protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?ApplicationInfoInterface $applicationInfo = null;
-    protected ?DefinitionManagerInterface $definitionManager = null;
+    private ?HooksAPIInterface $hooksAPI = null;
+    private ?ApplicationInfoInterface $applicationInfo = null;
+    private ?DefinitionManagerInterface $definitionManager = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {

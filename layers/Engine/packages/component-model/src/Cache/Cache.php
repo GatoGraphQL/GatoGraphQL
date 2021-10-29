@@ -14,7 +14,7 @@ class Cache implements PersistentCacheInterface, TransientCacheInterface
 {
     use ReplaceCurrentExecutionDataWithPlaceholdersTrait;
 
-    protected ?ModelInstanceInterface $modelInstance = null;
+    private ?ModelInstanceInterface $modelInstance = null;
 
     public function __construct(
         protected CacheItemPoolInterface $cacheItemPool,

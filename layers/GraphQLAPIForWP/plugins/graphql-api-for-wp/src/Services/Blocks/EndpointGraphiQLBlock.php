@@ -15,7 +15,7 @@ class EndpointGraphiQLBlock extends AbstractBlock implements EndpointEditorBlock
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
 
-    protected ?CustomEndpointBlockCategory $customEndpointBlockCategory = null;
+    private ?CustomEndpointBlockCategory $customEndpointBlockCategory = null;
 
     public function setCustomEndpointBlockCategory(CustomEndpointBlockCategory $customEndpointBlockCategory): void
     {

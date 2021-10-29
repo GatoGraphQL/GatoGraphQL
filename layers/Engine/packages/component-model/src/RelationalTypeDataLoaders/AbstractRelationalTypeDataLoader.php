@@ -14,8 +14,8 @@ abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoa
 {
     use BasicServiceTrait;
     
-    protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?NameResolverInterface $nameResolver = null;
+    private ?HooksAPIInterface $hooksAPI = null;
+    private ?NameResolverInterface $nameResolver = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {

@@ -11,7 +11,7 @@ class CacheControlBlockCategory extends AbstractBlockCategory
 {
     public const CACHE_CONTROL_BLOCK_CATEGORY = 'graphql-api-cache-control';
 
-    protected ?GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType = null;
+    private ?GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType = null;
 
     public function setGraphQLCacheControlListCustomPostType(GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType): void
     {

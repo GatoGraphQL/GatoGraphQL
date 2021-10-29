@@ -15,7 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {
-    protected ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
+    private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
 
     public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
     {

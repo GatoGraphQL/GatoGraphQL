@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected ?SettingsMutationResolver $settingsMutationResolver = null;
+    private ?SettingsMutationResolver $settingsMutationResolver = null;
     
     public function setSettingsMutationResolver(SettingsMutationResolver $settingsMutationResolver): void
     {

@@ -46,12 +46,12 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * on services.yaml produces an exception of PHP properties not initialized
      * in its depended services.
      */
-    protected ?PersistentCacheInterface $persistentCache = null;
+    private ?PersistentCacheInterface $persistentCache = null;
 
-    protected ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
-    protected ?QueryRootObjectTypeResolver $queryRootObjectTypeResolver = null;
-    protected ?GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService = null;
-    protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
+    private ?QueryRootObjectTypeResolver $queryRootObjectTypeResolver = null;
+    private ?GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
     public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
     {

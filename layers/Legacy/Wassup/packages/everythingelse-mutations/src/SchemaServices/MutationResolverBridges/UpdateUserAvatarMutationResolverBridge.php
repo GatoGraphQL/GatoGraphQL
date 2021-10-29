@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected ?UpdateUserAvatarMutationResolver $updateUserAvatarMutationResolver = null;
+    private ?UpdateUserAvatarMutationResolver $updateUserAvatarMutationResolver = null;
     
     public function setUpdateUserAvatarMutationResolver(UpdateUserAvatarMutationResolver $updateUserAvatarMutationResolver): void
     {

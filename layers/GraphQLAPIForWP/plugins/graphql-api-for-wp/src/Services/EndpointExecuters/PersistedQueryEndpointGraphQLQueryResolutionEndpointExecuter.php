@@ -15,9 +15,9 @@ use WP_Post;
 
 class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraphQLQueryResolutionEndpointExecuter implements PersistedQueryEndpointExecuterServiceTagInterface
 {
-    protected ?GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType = null;
-    protected ?GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers = null;
-    protected ?GraphQLRequestVarsHooks $graphQLRequestVarsHooks = null;
+    private ?GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType = null;
+    private ?GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers = null;
+    private ?GraphQLRequestVarsHooks $graphQLRequestVarsHooks = null;
 
     public function setGraphQLPersistedQueryEndpointCustomPostType(GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType): void
     {

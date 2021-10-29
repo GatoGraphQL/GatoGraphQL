@@ -16,8 +16,8 @@ trait SetTagsOnPostObjectTypeFieldResolverTrait
 {
     // use BasicServiceTrait;
 
-    protected ?PostObjectTypeResolver $postObjectTypeResolver = null;
-    protected ?SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver = null;
+    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver = null;
     
     public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {

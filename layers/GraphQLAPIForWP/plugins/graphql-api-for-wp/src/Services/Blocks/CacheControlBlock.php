@@ -17,7 +17,7 @@ class CacheControlBlock extends AbstractControlBlock
 
     public const ATTRIBUTE_NAME_CACHE_CONTROL_MAX_AGE = 'cacheControlMaxAge';
 
-    protected ?CacheControlBlockCategory $cacheControlBlockCategory = null;
+    private ?CacheControlBlockCategory $cacheControlBlockCategory = null;
 
     public function setCacheControlBlockCategory(CacheControlBlockCategory $cacheControlBlockCategory): void
     {

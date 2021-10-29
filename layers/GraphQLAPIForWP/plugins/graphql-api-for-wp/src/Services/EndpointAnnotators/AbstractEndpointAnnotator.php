@@ -15,7 +15,7 @@ abstract class AbstractEndpointAnnotator implements EndpointAnnotatorInterface
 {
     use BasicServiceTrait;
     
-    protected ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
 
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {

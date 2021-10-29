@@ -17,8 +17,8 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
 {
     use UserStateObjectTypeFieldResolverTrait;
 
-    protected ?PostObjectTypeResolver $postObjectTypeResolver = null;
-    protected ?UpdatePostMutationResolver $updatePostMutationResolver = null;
+    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?UpdatePostMutationResolver $updatePostMutationResolver = null;
 
     public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {

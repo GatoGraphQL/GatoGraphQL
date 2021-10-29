@@ -14,7 +14,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface
 {
     use BasicServiceTrait;
     
-    protected ?HooksAPIInterface $hooksAPI = null;
+    private ?HooksAPIInterface $hooksAPI = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {

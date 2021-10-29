@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractUserUpdateUserMetaValueMutationResolverBridge extends AbstractUpdateUserMetaValueMutationResolverBridge
 {
-    protected ?UserTypeAPIInterface $userTypeAPI = null;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
 
     public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
     {

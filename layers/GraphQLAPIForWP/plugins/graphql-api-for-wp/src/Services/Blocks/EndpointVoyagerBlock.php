@@ -15,7 +15,7 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
 
-    protected ?CustomEndpointBlockCategory $customEndpointBlockCategory = null;
+    private ?CustomEndpointBlockCategory $customEndpointBlockCategory = null;
 
     public function setCustomEndpointBlockCategory(CustomEndpointBlockCategory $customEndpointBlockCategory): void
     {

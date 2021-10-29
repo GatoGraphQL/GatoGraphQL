@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UpdateHighlightMutationResolverBridge extends AbstractCreateUpdateHighlightMutationResolverBridge
 {
-    protected ?UpdateHighlightMutationResolver $updateHighlightMutationResolver = null;
+    private ?UpdateHighlightMutationResolver $updateHighlightMutationResolver = null;
 
     public function setUpdateHighlightMutationResolver(UpdateHighlightMutationResolver $updateHighlightMutationResolver): void
     {

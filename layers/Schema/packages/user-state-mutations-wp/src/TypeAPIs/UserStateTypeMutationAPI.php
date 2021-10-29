@@ -19,7 +19,7 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 {
     use BasicServiceTrait;
     
-    protected ?ErrorHelperInterface $errorHelper = null;
+    private ?ErrorHelperInterface $errorHelper = null;
 
     public function setErrorHelper(ErrorHelperInterface $errorHelper): void
     {

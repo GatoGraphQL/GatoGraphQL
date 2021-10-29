@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ContactUsMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
-    protected ?ContactUsMutationResolver $contactUsMutationResolver = null;
+    private ?ContactUsMutationResolver $contactUsMutationResolver = null;
 
     public function setContactUsMutationResolver(ContactUsMutationResolver $contactUsMutationResolver): void
     {

@@ -14,7 +14,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
      */
     private ?array $routes = null;
 
-    protected ?HooksAPIInterface $hooksAPI = null;
+    private ?HooksAPIInterface $hooksAPI = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {

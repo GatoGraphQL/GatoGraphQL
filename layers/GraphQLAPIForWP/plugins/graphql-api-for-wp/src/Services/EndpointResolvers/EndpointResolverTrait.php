@@ -16,9 +16,9 @@ use WP_Query;
 
 trait EndpointResolverTrait
 {
-    protected ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
-    protected ?QueryRetrieverInterface $queryRetriever = null;
-    protected ?GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet = null;
+    private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
+    private ?QueryRetrieverInterface $queryRetriever = null;
+    private ?GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet = null;
 
     public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
     {

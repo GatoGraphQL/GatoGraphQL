@@ -25,12 +25,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      * on services.yaml produces an exception of PHP properties not initialized
      * in its depended services.
      */
-    protected ?PersistentCacheInterface $persistentCache = null;
+    private ?PersistentCacheInterface $persistentCache = null;
 
-    protected ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
-    protected ?PersistedFragmentManagerInterface $fragmentCatalogueManager = null;
-    protected ?PersistedQueryManagerInterface $queryCatalogueManager = null;
-    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?PersistedFragmentManagerInterface $fragmentCatalogueManager = null;
+    private ?PersistedQueryManagerInterface $queryCatalogueManager = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
     public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {

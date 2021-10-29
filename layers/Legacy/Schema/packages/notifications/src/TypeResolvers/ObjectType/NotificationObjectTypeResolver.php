@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected ?NotificationTypeDataLoader $notificationTypeDataLoader = null;
+    private ?NotificationTypeDataLoader $notificationTypeDataLoader = null;
     
     public function setNotificationTypeDataLoader(NotificationTypeDataLoader $notificationTypeDataLoader): void
     {

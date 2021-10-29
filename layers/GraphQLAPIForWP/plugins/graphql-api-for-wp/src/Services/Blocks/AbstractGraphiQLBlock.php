@@ -19,8 +19,8 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     public const ATTRIBUTE_NAME_QUERY = 'query';
     public const ATTRIBUTE_NAME_VARIABLES = 'variables';
 
-    protected ?EndpointHelpers $endpointHelpers = null;
-    protected ?PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory = null;
+    private ?EndpointHelpers $endpointHelpers = null;
+    private ?PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory = null;
 
     public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
     {

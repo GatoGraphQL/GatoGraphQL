@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MarkAsUnreadNotificationMutationResolverBridge extends AbstractMarkAsReadOrUnreadNotificationMutationResolverBridge
 {
-    protected ?MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver = null;
+    private ?MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver = null;
 
     public function setMarkAsUnreadNotificationMutationResolver(MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver): void
     {

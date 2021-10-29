@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecoratorTrait
 {
-    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
 
     public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {

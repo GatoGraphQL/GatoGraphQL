@@ -14,7 +14,7 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
      * @var array<string,UserAuthorizationSchemeInterface>
      */
     protected array $userAuthorizationSchemes = [];
-    protected ?UserAuthorizationSchemeInterface $defaultUserAuthorizationScheme = null;
+    private ?UserAuthorizationSchemeInterface $defaultUserAuthorizationScheme = null;
 
     public function addUserAuthorizationScheme(
         UserAuthorizationSchemeInterface $userAuthorizationScheme

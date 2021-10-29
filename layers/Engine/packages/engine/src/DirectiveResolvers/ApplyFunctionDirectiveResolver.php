@@ -27,9 +27,9 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
      * since this could be a UnionTypeResolver,
      * but `extractFieldArguments` expects an ObjectTypeResolver
      */
-    protected ?RootObjectTypeResolver $rootTypeResolver = null;
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    protected ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?RootObjectTypeResolver $rootTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
 
     public function setRootObjectTypeResolver(RootObjectTypeResolver $rootTypeResolver): void
     {

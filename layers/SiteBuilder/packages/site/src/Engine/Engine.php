@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class Engine extends UpstreamEngine
 {
-    protected ?ApplicationStateHelperServiceInterface $applicationStateHelperService = null;
+    private ?ApplicationStateHelperServiceInterface $applicationStateHelperService = null;
 
     public function setApplicationStateHelperService(ApplicationStateHelperServiceInterface $applicationStateHelperService): void
     {

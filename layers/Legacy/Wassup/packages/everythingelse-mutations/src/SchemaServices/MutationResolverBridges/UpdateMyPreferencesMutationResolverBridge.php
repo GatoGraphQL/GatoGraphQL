@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UpdateMyPreferencesMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected ?UpdateMyPreferencesMutationResolver $updateMyPreferencesMutationResolver = null;
+    private ?UpdateMyPreferencesMutationResolver $updateMyPreferencesMutationResolver = null;
     
     public function setUpdateMyPreferencesMutationResolver(UpdateMyPreferencesMutationResolver $updateMyPreferencesMutationResolver): void
     {

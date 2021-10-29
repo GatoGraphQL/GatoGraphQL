@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait ValidateUserLoggedInForFieldsRelationalTypeResolverDecoratorTrait
 {
-    protected ?ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver = null;
+    private ?ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver = null;
 
     public function setValidateIsUserLoggedInDirectiveResolver(ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver): void
     {

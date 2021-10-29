@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 abstract class AbstractPluginMenuPageAttacher extends AbstractMenuPageAttacher
 {
-    protected ?PluginMenu $pluginMenu = null;
+    private ?PluginMenu $pluginMenu = null;
 
     public function setPluginMenu(PluginMenu $pluginMenu): void
     {

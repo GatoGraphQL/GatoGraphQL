@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SelfFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    protected ?SchemaConfigSelfFieldsBlock $schemaConfigSelfFieldsBlock = null;
+    private ?SchemaConfigSelfFieldsBlock $schemaConfigSelfFieldsBlock = null;
 
     public function setSchemaConfigSelfFieldsBlock(SchemaConfigSelfFieldsBlock $schemaConfigSelfFieldsBlock): void
     {

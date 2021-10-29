@@ -17,7 +17,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
-    protected ?PostTagTypeAPIInterface $postTagTypeAPI = null;
+    private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
     public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
     {

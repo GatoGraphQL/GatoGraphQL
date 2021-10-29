@@ -20,8 +20,8 @@ class CategoryPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDa
 
     public const MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST = 'dataload-relationalfields-categorypostlist';
 
-    protected ?PostObjectTypeResolver $postObjectTypeResolver = null;
-    protected ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
+    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
 
     public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {

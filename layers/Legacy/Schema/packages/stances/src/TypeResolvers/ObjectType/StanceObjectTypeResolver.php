@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class StanceObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected ?StanceTypeDataLoader $stanceTypeDataLoader = null;
+    private ?StanceTypeDataLoader $stanceTypeDataLoader = null;
     
     public function setStanceTypeDataLoader(StanceTypeDataLoader $stanceTypeDataLoader): void
     {

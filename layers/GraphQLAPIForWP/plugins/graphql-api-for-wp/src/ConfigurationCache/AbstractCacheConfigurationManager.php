@@ -18,8 +18,8 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 abstract class AbstractCacheConfigurationManager implements CacheConfigurationManagerInterface
 {
-    protected ?UserSettingsManagerInterface $userSettingsManager = null;
-    protected ?EndpointHelpers $endpointHelpers = null;
+    private ?UserSettingsManagerInterface $userSettingsManager = null;
+    private ?EndpointHelpers $endpointHelpers = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {

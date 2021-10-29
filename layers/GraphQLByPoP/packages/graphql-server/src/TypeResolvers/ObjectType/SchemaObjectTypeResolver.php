@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
-    protected ?SchemaTypeDataLoader $schemaTypeDataLoader = null;
+    private ?SchemaTypeDataLoader $schemaTypeDataLoader = null;
 
     public function setSchemaTypeDataLoader(SchemaTypeDataLoader $schemaTypeDataLoader): void
     {

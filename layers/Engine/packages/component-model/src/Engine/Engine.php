@@ -112,21 +112,21 @@ class Engine implements EngineInterface
      * on services.yaml produces an exception of PHP properties not initialized
      * in its depended services.
      */
-    protected ?PersistentCacheInterface $persistentCache = null;
+    private ?PersistentCacheInterface $persistentCache = null;
 
-    protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?DataStructureManagerInterface $dataStructureManager = null;
-    protected ?ModelInstanceInterface $modelInstance = null;
-    protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
-    protected ?ModulePathHelpersInterface $modulePathHelpers = null;
-    protected ?ModulePathManagerInterface $modulePathManager = null;
-    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    protected ?ModuleFilterManagerInterface $moduleFilterManager = null;
-    protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
-    protected ?CheckpointProcessorManagerInterface $checkpointProcessorManager = null;
-    protected ?DataloadHelperServiceInterface $dataloadHelperService = null;
-    protected ?EntryModuleManagerInterface $entryModuleManager = null;
-    protected ?RequestHelperServiceInterface $requestHelperService = null;
+    private ?HooksAPIInterface $hooksAPI = null;
+    private ?DataStructureManagerInterface $dataStructureManager = null;
+    private ?ModelInstanceInterface $modelInstance = null;
+    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    private ?ModulePathHelpersInterface $modulePathHelpers = null;
+    private ?ModulePathManagerInterface $modulePathManager = null;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?ModuleFilterManagerInterface $moduleFilterManager = null;
+    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    private ?CheckpointProcessorManagerInterface $checkpointProcessorManager = null;
+    private ?DataloadHelperServiceInterface $dataloadHelperService = null;
+    private ?EntryModuleManagerInterface $entryModuleManager = null;
+    private ?RequestHelperServiceInterface $requestHelperService = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {

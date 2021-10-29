@@ -10,8 +10,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
 {
-    protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?CMSHelperServiceInterface $cmsHelperService = null;
+    private ?HooksAPIInterface $hooksAPI = null;
+    private ?CMSHelperServiceInterface $cmsHelperService = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {

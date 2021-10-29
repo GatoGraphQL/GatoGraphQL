@@ -16,8 +16,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    protected ?SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry = null;
-    protected ?GraphQLSyntaxServiceInterface $graphQLSyntaxService = null;
+    private ?SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry = null;
+    private ?GraphQLSyntaxServiceInterface $graphQLSyntaxService = null;
 
     public function setSchemaDefinitionReferenceRegistry(SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry): void
     {

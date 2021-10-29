@@ -13,7 +13,7 @@ use WP_Post;
 
 class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator implements CustomEndpointAnnotatorServiceTagInterface
 {
-    protected ?EndpointVoyagerBlock $endpointVoyagerBlock = null;
+    private ?EndpointVoyagerBlock $endpointVoyagerBlock = null;
 
     public function setEndpointVoyagerBlock(EndpointVoyagerBlock $endpointVoyagerBlock): void
     {

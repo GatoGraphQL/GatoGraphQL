@@ -19,11 +19,11 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    protected ?InputValueObjectTypeResolver $inputValueObjectTypeResolver = null;
-    protected ?DirectiveLocationEnumTypeResolver $directiveLocationEnumTypeResolver = null;
-    protected ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?InputValueObjectTypeResolver $inputValueObjectTypeResolver = null;
+    private ?DirectiveLocationEnumTypeResolver $directiveLocationEnumTypeResolver = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
 
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {

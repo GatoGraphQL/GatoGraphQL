@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected ?LogoutMutationResolver $logoutMutationResolver = null;
+    private ?LogoutMutationResolver $logoutMutationResolver = null;
 
     public function setLogoutMutationResolver(LogoutMutationResolver $logoutMutationResolver): void
     {

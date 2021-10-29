@@ -21,10 +21,10 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
 {
     use WithBlockRegistryCustomPostTypeTrait;
 
-    protected ?PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry = null;
-    protected ?PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistryInterface = null;
-    protected ?PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface = null;
-    protected ?PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock = null;
+    private ?PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry = null;
+    private ?PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistryInterface = null;
+    private ?PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface = null;
+    private ?PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock = null;
 
     public function setPersistedQueryEndpointBlockRegistry(PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry): void
     {

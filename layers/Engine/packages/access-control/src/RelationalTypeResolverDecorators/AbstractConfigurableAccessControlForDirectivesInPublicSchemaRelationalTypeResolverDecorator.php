@@ -11,7 +11,7 @@ abstract class AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelat
 {
     use ConfigurableAccessControlForDirectivesRelationalTypeResolverDecoratorTrait;
 
-    protected ?AccessControlManagerInterface $accessControlManager = null;
+    private ?AccessControlManagerInterface $accessControlManager = null;
 
     public function setAccessControlManager(AccessControlManagerInterface $accessControlManager): void
     {

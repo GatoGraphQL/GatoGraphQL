@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDecoratorTrait
 {
-    protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
 
     public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {

@@ -12,8 +12,8 @@ use WP_Post;
 
 class PersistedQueryEndpointGraphiQLBlockAccessor
 {
-    protected ?BlockHelpers $blockHelpers = null;
-    protected ?PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock = null;
+    private ?BlockHelpers $blockHelpers = null;
+    private ?PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock = null;
 
     public function setBlockHelpers(BlockHelpers $blockHelpers): void
     {

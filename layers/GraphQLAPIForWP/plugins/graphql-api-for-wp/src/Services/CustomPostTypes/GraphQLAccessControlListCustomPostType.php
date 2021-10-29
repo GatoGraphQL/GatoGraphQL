@@ -11,8 +11,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
 {
-    protected ?AccessControlBlock $accessControlBlock = null;
-    protected ?AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry = null;
+    private ?AccessControlBlock $accessControlBlock = null;
+    private ?AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry = null;
 
     public function setAccessControlBlock(AccessControlBlock $accessControlBlock): void
     {

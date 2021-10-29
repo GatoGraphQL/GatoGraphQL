@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractHighlightObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
-    protected ?HighlightObjectTypeResolver $highlightObjectTypeResolver = null;
+    private ?HighlightObjectTypeResolver $highlightObjectTypeResolver = null;
     
     public function setHighlightObjectTypeResolver(HighlightObjectTypeResolver $highlightObjectTypeResolver): void
     {

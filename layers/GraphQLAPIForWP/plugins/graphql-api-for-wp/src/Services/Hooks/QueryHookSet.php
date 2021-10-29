@@ -17,7 +17,7 @@ class QueryHookSet extends AbstractHookSet
 {
     public const NON_EXISTING_ID = "non-existing";
 
-    protected ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
+    private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
 
     public function setCustomPostTypeRegistry(CustomPostTypeRegistryInterface $customPostTypeRegistry): void
     {

@@ -14,7 +14,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
     public const URLPARAM_MODULEFILTER = 'modulefilter';
 
     protected ?string $selected_filter_name = null;
-    protected ?ModuleFilterInterface $selected_filter = null;
+    private ?ModuleFilterInterface $selected_filter = null;
     /**
      * @var array<string, ModuleFilterInterface>
      */
@@ -34,8 +34,8 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
 
     // When targeting modules in pop-engine.php (eg: when doing ->get_dbobjectids()) those modules are already and always included, so no need to check for their ancestors or anything
     protected bool $neverExclude = false;
-    protected ?ModulePathManagerInterface $modulePathManager = null;
-    protected ?ModulePathHelpersInterface $modulePathHelpers = null;
+    private ?ModulePathManagerInterface $modulePathManager = null;
+    private ?ModulePathHelpersInterface $modulePathHelpers = null;
 
     public function setModulePathManager(ModulePathManagerInterface $modulePathManager): void
     {

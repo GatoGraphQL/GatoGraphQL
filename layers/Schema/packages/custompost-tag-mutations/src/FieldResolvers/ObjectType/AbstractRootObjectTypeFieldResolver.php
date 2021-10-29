@@ -21,9 +21,9 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
 {
     use SetTagsOnCustomPostObjectTypeFieldResolverTrait;
 
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {

@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MainContentModuleHookSet extends AbstractHookSet
 {
-    protected ?MainContentModule $mainContentModule = null;
+    private ?MainContentModule $mainContentModule = null;
     
     public function setMainContentModule(MainContentModule $mainContentModule): void
     {

@@ -15,8 +15,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class LoginMutationResolver extends AbstractMutationResolver
 {
-    protected ?UserTypeAPIInterface $userTypeAPI = null;
-    protected ?UserStateTypeMutationAPIInterface $userStateTypeMutationAPI = null;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
+    private ?UserStateTypeMutationAPIInterface $userStateTypeMutationAPI = null;
 
     public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
     {

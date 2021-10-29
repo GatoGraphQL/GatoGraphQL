@@ -14,7 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ModulePathsHookSet extends AbstractHookSet
 {
-    protected ?ModulePaths $modulePaths = null;
+    private ?ModulePaths $modulePaths = null;
     
     public function setModulePaths(ModulePaths $modulePaths): void
     {

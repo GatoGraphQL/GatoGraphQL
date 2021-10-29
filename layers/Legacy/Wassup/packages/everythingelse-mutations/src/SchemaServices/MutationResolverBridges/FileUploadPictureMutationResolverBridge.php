@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected ?FileUploadPictureMutationResolver $fileUploadPictureMutationResolver = null;
+    private ?FileUploadPictureMutationResolver $fileUploadPictureMutationResolver = null;
     
     public function setFileUploadPictureMutationResolver(FileUploadPictureMutationResolver $fileUploadPictureMutationResolver): void
     {

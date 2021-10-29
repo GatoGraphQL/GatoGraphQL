@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBootHookSet
 {
-    protected ?AccessControlManagerInterface $accessControlManager = null;
+    private ?AccessControlManagerInterface $accessControlManager = null;
 
     public function setAccessControlManager(AccessControlManagerInterface $accessControlManager): void
     {

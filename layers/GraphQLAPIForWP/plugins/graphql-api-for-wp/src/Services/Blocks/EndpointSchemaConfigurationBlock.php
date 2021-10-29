@@ -26,9 +26,9 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
     public const ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE = -1;
     public const ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT = -2;
 
-    protected ?BlockRenderingHelpers $blockRenderingHelpers = null;
-    protected ?CPTUtils $cptUtils = null;
-    protected ?EndpointBlockCategory $endpointBlockCategory = null;
+    private ?BlockRenderingHelpers $blockRenderingHelpers = null;
+    private ?CPTUtils $cptUtils = null;
+    private ?EndpointBlockCategory $endpointBlockCategory = null;
 
     public function setBlockRenderingHelpers(BlockRenderingHelpers $blockRenderingHelpers): void
     {

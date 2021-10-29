@@ -21,8 +21,8 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected ?CustomPostObjectTypeResolver $customPostObjectTypeResolver = null;
-    protected ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    private ?CustomPostObjectTypeResolver $customPostObjectTypeResolver = null;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
     public function setCustomPostObjectTypeResolver(CustomPostObjectTypeResolver $customPostObjectTypeResolver): void
     {

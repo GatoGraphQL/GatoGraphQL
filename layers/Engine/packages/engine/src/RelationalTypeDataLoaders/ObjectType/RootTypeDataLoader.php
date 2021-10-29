@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    protected ?Root $root = null;
+    private ?Root $root = null;
 
     public function setRoot(Root $root): void
     {

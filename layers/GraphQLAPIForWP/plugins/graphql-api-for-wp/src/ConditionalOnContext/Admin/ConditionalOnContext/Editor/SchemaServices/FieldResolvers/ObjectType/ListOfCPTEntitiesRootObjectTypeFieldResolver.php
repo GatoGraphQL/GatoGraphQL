@@ -15,9 +15,9 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEntitiesRootObjectTypeFieldResolver
 {
-    protected ?GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType = null;
-    protected ?GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType = null;
-    protected ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
+    private ?GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType = null;
+    private ?GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType = null;
+    private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
 
     public function setGraphQLAccessControlListCustomPostType(GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType): void
     {

@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MenuTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    protected ?MenuTypeAPIInterface $menuTypeAPI = null;
+    private ?MenuTypeAPIInterface $menuTypeAPI = null;
 
     public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
     {

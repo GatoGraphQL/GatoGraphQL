@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class NamespacingSchemaConfigurationExecuter extends AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    protected ?SchemaConfigNamespacingBlock $schemaConfigNamespacingBlock = null;
+    private ?SchemaConfigNamespacingBlock $schemaConfigNamespacingBlock = null;
 
     public function setSchemaConfigNamespacingBlock(SchemaConfigNamespacingBlock $schemaConfigNamespacingBlock): void
     {

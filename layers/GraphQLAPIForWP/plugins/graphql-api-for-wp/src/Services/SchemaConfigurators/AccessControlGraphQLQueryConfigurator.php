@@ -16,10 +16,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGraphQLQueryConfigurator
 {
-    protected ?AccessControlBlock $accessControlBlock = null;
-    protected ?BlockHelpers $blockHelpers = null;
-    protected ?AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry = null;
-    protected ?AccessControlManagerInterface $accessControlManager = null;
+    private ?AccessControlBlock $accessControlBlock = null;
+    private ?BlockHelpers $blockHelpers = null;
+    private ?AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry = null;
+    private ?AccessControlManagerInterface $accessControlManager = null;
 
     public function setAccessControlBlock(AccessControlBlock $accessControlBlock): void
     {

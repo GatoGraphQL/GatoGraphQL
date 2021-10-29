@@ -16,7 +16,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
     public const MODULE_FILTERINPUT_ORDERTAG = 'filterinput-order-tag';
     public const MODULE_FILTERINPUT_ORDERCOMMENT = 'filterinput-order-comment';
 
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {

@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FieldObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
-    protected ?SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader = null;
+    private ?SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader = null;
 
     public function setSchemaDefinitionReferenceTypeDataLoader(SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader): void
     {

@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
 {
-    protected ?CacheControlBlock $cacheControlBlock = null;
+    private ?CacheControlBlock $cacheControlBlock = null;
 
     public function setCacheControlBlock(CacheControlBlock $cacheControlBlock): void
     {

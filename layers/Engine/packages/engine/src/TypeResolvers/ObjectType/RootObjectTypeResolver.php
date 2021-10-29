@@ -17,7 +17,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
 
     public const HOOK_DESCRIPTION = __CLASS__ . ':description';
 
-    protected ?RootTypeDataLoader $rootTypeDataLoader = null;
+    private ?RootTypeDataLoader $rootTypeDataLoader = null;
 
     public function setRootTypeDataLoader(RootTypeDataLoader $rootTypeDataLoader): void
     {

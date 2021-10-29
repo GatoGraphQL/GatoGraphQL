@@ -29,14 +29,14 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    protected ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
-    protected ?FieldObjectTypeResolver $fieldObjectTypeResolver = null;
-    protected ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
-    protected ?EnumValueObjectTypeResolver $enumValueObjectTypeResolver = null;
-    protected ?InputValueObjectTypeResolver $inputValueObjectTypeResolver = null;
-    protected ?TypeKindEnumTypeResolver $typeKindEnumTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?FieldObjectTypeResolver $fieldObjectTypeResolver = null;
+    private ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
+    private ?EnumValueObjectTypeResolver $enumValueObjectTypeResolver = null;
+    private ?InputValueObjectTypeResolver $inputValueObjectTypeResolver = null;
+    private ?TypeKindEnumTypeResolver $typeKindEnumTypeResolver = null;
 
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {

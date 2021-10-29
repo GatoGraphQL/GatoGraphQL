@@ -16,7 +16,7 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
     public const MODULE_FILTERINPUT_HASHTAGS = 'filterinput-hashtags';
     public const MODULE_FILTERINPUT_NAME = 'filterinput-name';
 
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {

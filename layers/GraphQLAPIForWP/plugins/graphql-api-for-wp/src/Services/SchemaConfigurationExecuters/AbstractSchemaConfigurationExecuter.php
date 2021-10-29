@@ -15,8 +15,8 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
 {
     use BasicServiceTrait;
     
-    protected ?ModuleRegistryInterface $moduleRegistry = null;
-    protected ?BlockHelpers $blockHelpers = null;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?BlockHelpers $blockHelpers = null;
 
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {

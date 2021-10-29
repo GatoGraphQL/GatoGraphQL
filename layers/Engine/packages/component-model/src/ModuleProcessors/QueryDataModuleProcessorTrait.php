@@ -16,8 +16,8 @@ trait QueryDataModuleProcessorTrait
 {
     use FilterDataModuleProcessorTrait;
 
-    protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler = null;
+    private ?HooksAPIInterface $hooksAPI = null;
+    private ?ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {

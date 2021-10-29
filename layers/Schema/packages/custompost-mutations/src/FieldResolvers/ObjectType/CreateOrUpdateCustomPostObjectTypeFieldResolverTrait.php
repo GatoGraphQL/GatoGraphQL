@@ -18,10 +18,10 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
 {
     // use BasicServiceTrait;
     
-    protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
-    protected ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    protected ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?HooksAPIInterface $hooksAPI = null;
+    private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {

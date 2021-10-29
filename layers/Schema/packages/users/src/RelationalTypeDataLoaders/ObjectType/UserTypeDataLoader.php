@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
-    protected ?UserTypeAPIInterface $userTypeAPI = null;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
 
     public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
     {

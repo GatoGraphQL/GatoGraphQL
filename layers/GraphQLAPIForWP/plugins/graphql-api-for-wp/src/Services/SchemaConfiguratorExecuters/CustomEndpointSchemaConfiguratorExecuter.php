@@ -11,8 +11,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaConfiguratorExecuter
 {
-    protected ?CustomEndpointSchemaConfigurator $endpointSchemaConfigurator = null;
-    protected ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
+    private ?CustomEndpointSchemaConfigurator $endpointSchemaConfigurator = null;
+    private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
 
     public function setCustomEndpointSchemaConfigurator(CustomEndpointSchemaConfigurator $endpointSchemaConfigurator): void
     {

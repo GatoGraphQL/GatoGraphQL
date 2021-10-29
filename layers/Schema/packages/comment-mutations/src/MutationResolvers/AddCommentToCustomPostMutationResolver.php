@@ -22,9 +22,9 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    protected ?CommentTypeAPIInterface $commentTypeAPI = null;
-    protected ?CommentTypeMutationAPIInterface $commentTypeMutationAPI = null;
-    protected ?UserTypeAPIInterface $userTypeAPI = null;
+    private ?CommentTypeAPIInterface $commentTypeAPI = null;
+    private ?CommentTypeMutationAPIInterface $commentTypeMutationAPI = null;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
 
     public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
     {

@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UpdateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutationResolverBridge
 {
-    protected ?UpdateStanceMutationResolver $updateStanceMutationResolver = null;
+    private ?UpdateStanceMutationResolver $updateStanceMutationResolver = null;
 
     public function setUpdateStanceMutationResolver(UpdateStanceMutationResolver $updateStanceMutationResolver): void
     {

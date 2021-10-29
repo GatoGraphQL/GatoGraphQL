@@ -23,8 +23,8 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
 {
     use BasicServiceTrait;
     
-    protected ?ModuleRegistryInterface $moduleRegistry = null;
-    protected ?GeneralUtils $generalUtils = null;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?GeneralUtils $generalUtils = null;
 
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {

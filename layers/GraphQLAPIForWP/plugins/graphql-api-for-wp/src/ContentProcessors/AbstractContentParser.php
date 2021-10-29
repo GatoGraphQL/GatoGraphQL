@@ -20,8 +20,8 @@ abstract class AbstractContentParser implements ContentParserInterface
     protected string $baseDir = '';
     protected string $baseURL = '';
 
-    protected ?RequestHelperServiceInterface $requestHelperService = null;
-    protected ?LocaleHelper $localeHelper = null;
+    private ?RequestHelperServiceInterface $requestHelperService = null;
+    private ?LocaleHelper $localeHelper = null;
 
     /**
      * @param string|null $baseDir Where to look for the documentation

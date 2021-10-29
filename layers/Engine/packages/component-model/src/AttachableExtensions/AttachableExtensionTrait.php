@@ -12,7 +12,7 @@ trait AttachableExtensionTrait
 {
     use ServiceTrait;
 
-    protected ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
+    private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
     public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
     {

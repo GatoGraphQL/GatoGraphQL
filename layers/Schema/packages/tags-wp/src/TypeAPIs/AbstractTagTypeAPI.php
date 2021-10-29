@@ -20,8 +20,8 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
-    protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?CMSHelperServiceInterface $cmsHelperService = null;
+    private ?HooksAPIInterface $hooksAPI = null;
+    private ?CMSHelperServiceInterface $cmsHelperService = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {

@@ -14,7 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SetupCortexHookSet extends AbstractHookSet
 {
-    protected ?RoutingManagerInterface $routingManager = null;
+    private ?RoutingManagerInterface $routingManager = null;
 
     public function setRoutingManager(RoutingManagerInterface $routingManager): void
     {

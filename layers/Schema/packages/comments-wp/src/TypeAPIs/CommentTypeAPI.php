@@ -29,7 +29,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
 
     protected array $popToCMSCommentStatusConversion;
 
-    protected ?HooksAPIInterface $hooksAPI = null;
+    private ?HooksAPIInterface $hooksAPI = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {

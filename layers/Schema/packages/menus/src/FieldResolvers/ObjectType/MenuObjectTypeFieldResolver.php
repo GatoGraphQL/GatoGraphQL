@@ -19,11 +19,11 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected ?MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry = null;
-    protected ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
-    protected ?MenuItemObjectTypeResolver $menuItemObjectTypeResolver = null;
-    protected ?MenuTypeAPIInterface $menuTypeAPI = null;
-    protected ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?MenuItemObjectTypeResolver $menuItemObjectTypeResolver = null;
+    private ?MenuTypeAPIInterface $menuTypeAPI = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
     public function setMenuItemRuntimeRegistry(MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry): void
     {

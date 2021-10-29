@@ -30,10 +30,10 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     use HasDocumentationScriptTrait;
     use BasicServiceTrait;
 
-    protected ?ModuleRegistryInterface $moduleRegistry = null;
-    protected ?UserAuthorizationInterface $userAuthorization = null;
-    protected ?GeneralUtils $generalUtils = null;
-    protected ?EditorHelpers $editorHelpers = null;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?UserAuthorizationInterface $userAuthorization = null;
+    private ?GeneralUtils $generalUtils = null;
+    private ?EditorHelpers $editorHelpers = null;
 
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {

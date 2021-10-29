@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
 {
-    protected ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
+    private ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
 
     public function setAllowOrDenySettingsService(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
     {
