@@ -165,45 +165,31 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
 
     public function getDescription(string $module): string
     {
-        /**
-         * Inner properties will not be null. Assign them their type,
-         * to avoid PHPStan errors
-         */
-        /** @var CommentObjectTypeResolver */
-        $commentObjectTypeResolver = $this->commentObjectTypeResolver;
-        /** @var PostTagObjectTypeResolver */
-        $postTagObjectTypeResolver = $this->postTagObjectTypeResolver;
-        /** @var PostCategoryObjectTypeResolver */
-        $postCategoryObjectTypeResolver = $this->postCategoryObjectTypeResolver;
-        /** @var PostObjectTypeResolver */
-        $postObjectTypeResolver = $this->postObjectTypeResolver;
-        /** @var UserObjectTypeResolver */
-        $userObjectTypeResolver = $this->userObjectTypeResolver;
         switch ($module) {
             case self::SCHEMA_CUSTOMPOST_META:
                 return sprintf(
                     \__('Add the <code>%1$s</code> field to custom posts, such as type <code>%2$s</code>', 'graphql-api'),
                     'metaValue',
-                    $postObjectTypeResolver->getTypeName()
+                    $this->getPostObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_USER_META:
                 return sprintf(
                     \__('Add the <code>%1$s</code> field to type <code>%2$s</code>', 'graphql-api'),
                     'metaValue',
-                    $userObjectTypeResolver->getTypeName()
+                    $this->getUserObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_COMMENT_META:
                 return sprintf(
                     \__('Add the <code>%1$s</code> field to type <code>%2$s</code>', 'graphql-api'),
                     'metaValue',
-                    $commentObjectTypeResolver->getTypeName()
+                    $this->getCommentObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_TAXONOMY_META:
                 return sprintf(
                     \__('Add the <code>%1$s</code> field to taxonomies, such as types <code>%2$s</code> and <code>%3$s</code>', 'graphql-api'),
                     'metaValue',
-                    $postTagObjectTypeResolver->getTypeName(),
-                    $postCategoryObjectTypeResolver->getTypeName()
+                    $this->getPostTagObjectTypeResolver()->getTypeName(),
+                    $this->getPostCategoryObjectTypeResolver()->getTypeName()
                 );
         }
         return parent::getDescription($module);
