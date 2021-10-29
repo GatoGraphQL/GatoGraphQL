@@ -15,7 +15,7 @@ class Cache extends UpstreamCache
     use WithHooksAPIServiceTrait;
 
     #[Required]
-    final public function autowireEngineCache(): void
+    final public function autowireInitializeCache(): void
     {
         // When a plugin is activated/deactivated, ANY plugin, delete the corresponding cached files
         // This is particularly important for the MEMORY, since we can't set by constants to not use it
