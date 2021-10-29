@@ -19,7 +19,6 @@ trait WithInstanceManagerServiceTrait
     }
     protected function getInstanceManager(): InstanceManagerInterface
     {
-        // return $this->instanceManager ??= $this->instanceManager->getInstance(InstanceManagerInterface::class);
         return $this->instanceManager ??= InstanceManagerFacade::getInstance();
     }
 }
