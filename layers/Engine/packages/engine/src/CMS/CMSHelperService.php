@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace PoP\Engine\CMS;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class CMSHelperService implements CMSHelperServiceInterface
 {
+    use BasicServiceTrait;
+    
     private ?CMSServiceInterface $cmsService = null;
 
     public function setCMSService(CMSServiceInterface $cmsService): void

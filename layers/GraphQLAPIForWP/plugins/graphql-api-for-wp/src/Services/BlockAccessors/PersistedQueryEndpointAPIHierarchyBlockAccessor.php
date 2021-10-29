@@ -7,11 +7,14 @@ namespace GraphQLAPI\GraphQLAPI\Services\BlockAccessors;
 use GraphQLAPI\GraphQLAPI\GetterSetterObjects\BlockAttributes\PersistedQueryEndpointAPIHierarchyBlockAttributes;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointAPIHierarchyBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 
 class PersistedQueryEndpointAPIHierarchyBlockAccessor
 {
+    use BasicServiceTrait;
+
     private ?BlockHelpers $blockHelpers = null;
     private ?PersistedQueryEndpointAPIHierarchyBlock $persistedQueryEndpointAPIHierarchyBlock = null;
 
