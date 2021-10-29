@@ -14,11 +14,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface
 {
-    /** @var string[] */
-    protected array $objectTypeResolverMandatoryFields;
-    
     protected InstanceManagerInterface $instanceManager;
     protected RootObjectTypeResolver $rootObjectTypeResolver;
+    protected TypeResolverHelperInterface $typeResolverHelper;
 
     #[Required]
     final public function autowireMandatoryDirectivesForFieldsRootTypeEntryDuplicator(
@@ -28,8 +26,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
     ): void {
         $this->instanceManager = $instanceManager;
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
-        /** Fields "id", "self" and "__typename" belong to both QueryRoot and MutationRoot */
-        $this->objectTypeResolverMandatoryFields = $typeResolverHelper->getObjectTypeResolverMandatoryFields();
+        $this->typeResolverHelper = $typeResolverHelper;
     }
 
     /**
@@ -76,9 +73,12 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
 
         $additionalFieldEntries = [];
 
+        /** Fields "id", "self" and "__typename" belong to both QueryRoot and MutationRoot */
+        $objectTypeResolverMandatoryFields = $this->typeResolverHelper->getObjectTypeResolverMandatoryFields();
+
         foreach ($rootFieldEntries as $rootFieldEntry) {
             $fieldName = $rootFieldEntry[1];
-            if ($forceBothTypes || in_array($fieldName, $this->objectTypeResolverMandatoryFields)) {
+            if ($forceBothTypes || in_array($fieldName, $objectTypeResolverMandatoryFields)) {
                 $rootFieldEntry[0] = QueryRootObjectTypeResolver::class;
                 $additionalFieldEntries[] = $rootFieldEntry;
                 $rootFieldEntry[0] = MutationRootObjectTypeResolver::class;

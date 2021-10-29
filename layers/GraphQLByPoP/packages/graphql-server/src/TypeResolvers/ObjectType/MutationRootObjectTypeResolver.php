@@ -16,13 +16,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
 {
     use ReservedNameTypeResolverTrait;
 
-    /**
-     * List of fieldNames that are mandatory to all ObjectTypeResolvers
-     *
-     * @var string[]
-     */
-    protected array $objectTypeResolverMandatoryFields;
-    
+    protected TypeResolverHelperInterface $typeResolverHelper;
     protected MutationRootTypeDataLoader $mutationRootTypeDataLoader;
 
     #[Required]
@@ -30,8 +24,8 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
         TypeResolverHelperInterface $typeResolverHelper,
         MutationRootTypeDataLoader $mutationRootTypeDataLoader,
     ): void {
+        $this->typeResolverHelper = $typeResolverHelper;
         $this->mutationRootTypeDataLoader = $mutationRootTypeDataLoader;
-        $this->objectTypeResolverMandatoryFields = $typeResolverHelper->getObjectTypeResolverMandatoryFields();
     }
 
     public function getTypeName(): string
@@ -60,8 +54,9 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         string $fieldName
     ): bool {
+        $objectTypeResolverMandatoryFields = $this->typeResolverHelper->getObjectTypeResolverMandatoryFields();
         return
-            in_array($fieldName, $this->objectTypeResolverMandatoryFields)
+            in_array($fieldName, $objectTypeResolverMandatoryFields)
             || $objectTypeFieldResolver->getFieldMutationResolver($this, $fieldName) !== null;
     }
 }
