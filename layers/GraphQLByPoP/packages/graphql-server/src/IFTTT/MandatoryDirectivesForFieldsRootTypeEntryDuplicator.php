@@ -42,7 +42,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
         RootObjectTypeResolver $rootObjectTypeResolver,
         TypeResolverHelperInterface $typeResolverHelper
     ): void {
-        $this->getRoot()ObjectTypeResolver = $rootObjectTypeResolver;
+        $this->getRootObjectTypeResolver() = $rootObjectTypeResolver;
         $this->typeResolverHelper = $typeResolverHelper;
     }
 
@@ -103,7 +103,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
                 continue;
             }
             // If it has a MutationResolver for that field then add entry for MutationRoot
-            $isFieldAMutation = $this->getRoot()ObjectTypeResolver->isFieldAMutation($fieldName);
+            $isFieldAMutation = $this->getRootObjectTypeResolver()->isFieldAMutation($fieldName);
             // Make sure the field has a FieldResolver. If not, ignore
             if ($isFieldAMutation === null) {
                 continue;
