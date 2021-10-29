@@ -9,22 +9,22 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MarkdownContentParser extends AbstractContentParser implements MarkdownContentParserInterface
 {
-    private ?MarkdownConvertorInterface $markdownConvertorInterface = null;
+    private ?MarkdownConvertorInterface $markdownConvertor = null;
 
-    public function setMarkdownConvertor(MarkdownConvertorInterface $markdownConvertorInterface): void
+    public function setMarkdownConvertor(MarkdownConvertorInterface $markdownConvertor): void
     {
-        $this->markdownConvertorInterface = $markdownConvertorInterface;
+        $this->markdownConvertor = $markdownConvertor;
     }
     protected function getMarkdownConvertor(): MarkdownConvertorInterface
     {
-        return $this->markdownConvertorInterface ??= $this->instanceManager->getInstance(MarkdownConvertorInterface::class);
+        return $this->markdownConvertor ??= $this->instanceManager->getInstance(MarkdownConvertorInterface::class);
     }
 
     //#[Required]
     final public function autowireMarkdownContentParser(
-        MarkdownConvertorInterface $markdownConvertorInterface,
+        MarkdownConvertorInterface $markdownConvertor,
     ): void {
-        $this->markdownConvertorInterface = $markdownConvertorInterface;
+        $this->markdownConvertor = $markdownConvertor;
     }
 
     /**
@@ -40,6 +40,6 @@ class MarkdownContentParser extends AbstractContentParser implements MarkdownCon
      */
     public function convertMarkdownToHTML(string $markdownContent): string
     {
-        return $this->getMarkdownConvertorInterface()->convertMarkdownToHTML($markdownContent);
+        return $this->getMarkdownConvertor()->convertMarkdownToHTML($markdownContent);
     }
 }

@@ -21,19 +21,19 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {
-    private ?QueryRetrieverInterface $queryRetrieverInterface = null;
+    private ?QueryRetrieverInterface $queryRetriever = null;
     private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
     private ?GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager = null;
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?GraphQLQueryConvertorInterface $graphQLQueryConvertor = null;
 
-    public function setQueryRetriever(QueryRetrieverInterface $queryRetrieverInterface): void
+    public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
     {
-        $this->queryRetrieverInterface = $queryRetrieverInterface;
+        $this->queryRetriever = $queryRetriever;
     }
     protected function getQueryRetriever(): QueryRetrieverInterface
     {
-        return $this->queryRetrieverInterface ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
+        return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
     }
     public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
     {
@@ -70,13 +70,13 @@ class VarsHookSet extends AbstractHookSet
 
     //#[Required]
     final public function autowireVarsHookSet(
-        QueryRetrieverInterface $queryRetrieverInterface,
+        QueryRetrieverInterface $queryRetriever,
         GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
         GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         GraphQLQueryConvertorInterface $graphQLQueryConvertor,
     ): void {
-        $this->queryRetrieverInterface = $queryRetrieverInterface;
+        $this->queryRetriever = $queryRetriever;
         $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
         $this->graphQLPersistedQueryManager = $graphQLPersistedQueryManager;
         $this->feedbackMessageStore = $feedbackMessageStore;
@@ -175,7 +175,7 @@ class VarsHookSet extends AbstractHookSet
                     $graphQLQuery,
                     $variables,
                     $operationName
-                ) = $this->getQueryRetrieverInterface()->extractRequestedGraphQLQueryPayload();
+                ) = $this->getQueryRetriever()->extractRequestedGraphQLQueryPayload();
             }
             // Process the query, or show an error if empty
             if ($graphQLQuery) {

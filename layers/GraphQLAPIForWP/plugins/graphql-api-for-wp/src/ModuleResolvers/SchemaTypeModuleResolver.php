@@ -174,11 +174,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
-    public function setCustomPostTypeRegistryInterface(CustomPostTypeRegistryInterface $customPostTypeRegistry): void
+    public function setCustomPostTypeRegistry(CustomPostTypeRegistryInterface $customPostTypeRegistry): void
     {
         $this->customPostTypeRegistry = $customPostTypeRegistry;
     }
-    protected function getCustomPostTypeRegistryInterface(): CustomPostTypeRegistryInterface
+    protected function getCustomPostTypeRegistry(): CustomPostTypeRegistryInterface
     {
         return $this->customPostTypeRegistry ??= $this->instanceManager->getInstance(CustomPostTypeRegistryInterface::class);
     }

@@ -20,7 +20,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     }
 
     private ?UserAuthorizationInterface $userAuthorization = null;
-    private ?QueryRetrieverInterface $queryRetrieverInterface = null;
+    private ?QueryRetrieverInterface $queryRetriever = null;
 
     public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
@@ -30,22 +30,22 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     {
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
-    public function setQueryRetriever(QueryRetrieverInterface $queryRetrieverInterface): void
+    public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
     {
-        $this->queryRetrieverInterface = $queryRetrieverInterface;
+        $this->queryRetriever = $queryRetriever;
     }
     protected function getQueryRetriever(): QueryRetrieverInterface
     {
-        return $this->queryRetrieverInterface ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
+        return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
     }
 
     //#[Required]
     final public function autowireAdminEndpointResolver(
         UserAuthorizationInterface $userAuthorization,
-        QueryRetrieverInterface $queryRetrieverInterface,
+        QueryRetrieverInterface $queryRetriever,
     ): void {
         $this->userAuthorization = $userAuthorization;
-        $this->queryRetrieverInterface = $queryRetrieverInterface;
+        $this->queryRetriever = $queryRetriever;
     }
 
     /**
@@ -67,7 +67,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
         /**
          * Extract the query from the BODY through standard GraphQL endpoint execution
          */
-        return $this->getQueryRetrieverInterface()->extractRequestedGraphQLQueryPayload();
+        return $this->getQueryRetriever()->extractRequestedGraphQLQueryPayload();
     }
 
     /**
