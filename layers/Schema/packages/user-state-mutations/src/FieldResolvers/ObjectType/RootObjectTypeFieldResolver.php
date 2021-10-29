@@ -75,8 +75,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'loginUser' => $this->translationAPI->__('Log the user in', 'user-state-mutations'),
-            'logoutUser' => $this->translationAPI->__('Log the user out', 'user-state-mutations'),
+            'loginUser' => $this->getTranslationAPI()->__('Log the user in', 'user-state-mutations'),
+            'logoutUser' => $this->getTranslationAPI()->__('Log the user out', 'user-state-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -95,8 +95,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['loginUser' => MutationInputProperties::USERNAME_OR_EMAIL] => $this->translationAPI->__('The username or email', 'user-state-mutations'),
-            ['loginUser' => MutationInputProperties::PASSWORD] => $this->translationAPI->__('The password', 'user-state-mutations'),
+            ['loginUser' => MutationInputProperties::USERNAME_OR_EMAIL] => $this->getTranslationAPI()->__('The username or email', 'user-state-mutations'),
+            ['loginUser' => MutationInputProperties::PASSWORD] => $this->getTranslationAPI()->__('The password', 'user-state-mutations'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

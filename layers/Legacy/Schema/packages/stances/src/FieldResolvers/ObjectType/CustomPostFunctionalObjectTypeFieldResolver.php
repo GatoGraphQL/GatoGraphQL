@@ -130,17 +130,17 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'addStanceURL' => $this->translationAPI->__('', ''),
-            'loggedInUserStances' => $this->translationAPI->__('', ''),
-            'hasLoggedInUserStances' => $this->translationAPI->__('', ''),
-            'editStanceURL' => $this->translationAPI->__('', ''),
-            'postStancesProURL' => $this->translationAPI->__('', ''),
-            'postStancesNeutralURL' => $this->translationAPI->__('', ''),
-            'postStancesAgainstURL' => $this->translationAPI->__('', ''),
-            'createStanceButtonLazy' => $this->translationAPI->__('', ''),
-            'stancesLazy' => $this->translationAPI->__('', ''),
-            'stanceName' => $this->translationAPI->__('', ''),
-            'catName' => $this->translationAPI->__('', ''),
+            'addStanceURL' => $this->getTranslationAPI()->__('', ''),
+            'loggedInUserStances' => $this->getTranslationAPI()->__('', ''),
+            'hasLoggedInUserStances' => $this->getTranslationAPI()->__('', ''),
+            'editStanceURL' => $this->getTranslationAPI()->__('', ''),
+            'postStancesProURL' => $this->getTranslationAPI()->__('', ''),
+            'postStancesNeutralURL' => $this->getTranslationAPI()->__('', ''),
+            'postStancesAgainstURL' => $this->getTranslationAPI()->__('', ''),
+            'createStanceButtonLazy' => $this->getTranslationAPI()->__('', ''),
+            'stancesLazy' => $this->getTranslationAPI()->__('', ''),
+            'stanceName' => $this->getTranslationAPI()->__('', ''),
+            'catName' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

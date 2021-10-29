@@ -20,10 +20,10 @@ class CustomPostListUserObjectTypeFieldResolver extends AbstractCustomPostListOb
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'customPosts' => $this->translationAPI->__('Custom posts by the user', 'pop-users'),
-            'customPostCount' => $this->translationAPI->__('Number of custom posts by the user', 'pop-users'),
-            'customPostsForAdmin' => $this->translationAPI->__('[Unrestricted] Custom posts by the user', 'pop-users'),
-            'customPostCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of custom posts by the user', 'pop-users'),
+            'customPosts' => $this->getTranslationAPI()->__('Custom posts by the user', 'pop-users'),
+            'customPostCount' => $this->getTranslationAPI()->__('Number of custom posts by the user', 'pop-users'),
+            'customPostsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Custom posts by the user', 'pop-users'),
+            'customPostCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of custom posts by the user', 'pop-users'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -91,7 +91,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if ($fieldArgName !== MutationInputProperties::TAGS || !$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
             return $fieldArgDescription;
         }
-        return $this->translationAPI->__('The tags to set', 'custompost-tag-mutations');
+        return $this->getTranslationAPI()->__('The tags to set', 'custompost-tag-mutations');
     }
 
     public function maybeAddFieldArgTypeModifiers(

@@ -82,11 +82,11 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'parentPage' => $this->translationAPI->__('Parent page', 'pages'),
-            'childPages' => $this->translationAPI->__('Child pages', 'pages'),
-            'childPageCount' => $this->translationAPI->__('Number of child pages', 'pages'),
-            'childPagesForAdmin' => $this->translationAPI->__('[Unrestricted] Child pages', 'pages'),
-            'childPageCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of child pages', 'pages'),
+            'parentPage' => $this->getTranslationAPI()->__('Parent page', 'pages'),
+            'childPages' => $this->getTranslationAPI()->__('Child pages', 'pages'),
+            'childPageCount' => $this->getTranslationAPI()->__('Number of child pages', 'pages'),
+            'childPagesForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Child pages', 'pages'),
+            'childPageCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of child pages', 'pages'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

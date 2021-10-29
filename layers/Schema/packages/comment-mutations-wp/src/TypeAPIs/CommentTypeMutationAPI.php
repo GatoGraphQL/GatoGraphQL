@@ -63,7 +63,7 @@ class CommentTypeMutationAPI implements CommentTypeMutationAPIInterface
         if ($commentID === false) {
             return new Error(
                 'insert-comment-error',
-                $this->translationAPI->__('Could not create the comment', 'comment-mutations-wp')
+                $this->getTranslationAPI()->__('Could not create the comment', 'comment-mutations-wp')
             );
         }
         return $commentID;

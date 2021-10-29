@@ -54,7 +54,7 @@ class HeadModuleHookSet extends AbstractHookSet
         $vars = ApplicationState::getVars();
         if (isset($vars['modulefilter']) && $vars['modulefilter'] == $this->headModule->getName()) {
             if ($headmodule = $vars['headmodule']) {
-                $components[] = $this->translationAPI->__('head module:', 'engine') . ModuleUtils::getModuleFullName($headmodule);
+                $components[] = $this->getTranslationAPI()->__('head module:', 'engine') . ModuleUtils::getModuleFullName($headmodule);
             }
         }
 

@@ -58,7 +58,7 @@ class ModulePathsHookSet extends AbstractHookSet
                     fn ($modulepath) => $modulePathHelpers->stringifyModulePath($modulepath),
                     $modulepaths
                 );
-                $components[] = $this->translationAPI->__('module paths:', 'engine') . implode(',', $paths);
+                $components[] = $this->getTranslationAPI()->__('module paths:', 'engine') . implode(',', $paths);
             }
         }
 

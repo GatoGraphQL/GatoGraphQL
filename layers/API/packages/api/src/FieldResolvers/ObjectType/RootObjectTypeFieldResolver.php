@@ -104,7 +104,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'fullSchema' => $this->translationAPI->__('The whole API schema, exposing what fields can be queried', 'api'),
+            'fullSchema' => $this->getTranslationAPI()->__('The whole API schema, exposing what fields can be queried', 'api'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

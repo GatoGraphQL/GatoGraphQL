@@ -205,27 +205,27 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     public function getFilterInputDescription(array $module): ?string
     {
         return match ((string)$module[1]) {
-            self::MODULE_FILTERINPUT_ORDER => $this->translationAPI->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'schema-commons'),
-            self::MODULE_FILTERINPUT_LIMIT => $this->translationAPI->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
-            self::MODULE_FILTERINPUT_OFFSET => $this->translationAPI->__('Offset the results by how many places (required for pagination)', 'schema-commons'),
-            self::MODULE_FILTERINPUT_SEARCH => $this->translationAPI->__('Search for elements containing the given string', 'schema-commons'),
-            self::MODULE_FILTERINPUT_IDS => $this->translationAPI->__('Limit results to elements with the given IDs', 'schema-commons'),
-            self::MODULE_FILTERINPUT_ID => $this->translationAPI->__('Fetch the element with the given ID', 'schema-commons'),
+            self::MODULE_FILTERINPUT_ORDER => $this->getTranslationAPI()->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'schema-commons'),
+            self::MODULE_FILTERINPUT_LIMIT => $this->getTranslationAPI()->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
+            self::MODULE_FILTERINPUT_OFFSET => $this->getTranslationAPI()->__('Offset the results by how many places (required for pagination)', 'schema-commons'),
+            self::MODULE_FILTERINPUT_SEARCH => $this->getTranslationAPI()->__('Search for elements containing the given string', 'schema-commons'),
+            self::MODULE_FILTERINPUT_IDS => $this->getTranslationAPI()->__('Limit results to elements with the given IDs', 'schema-commons'),
+            self::MODULE_FILTERINPUT_ID => $this->getTranslationAPI()->__('Fetch the element with the given ID', 'schema-commons'),
             self::MODULE_FILTERINPUT_COMMASEPARATED_IDS => sprintf(
-                $this->translationAPI->__('Limit results to elements with the given ID, or IDs (separated by \'%s\')', 'schema-commons'),
+                $this->getTranslationAPI()->__('Limit results to elements with the given ID, or IDs (separated by \'%s\')', 'schema-commons'),
                 Param::VALUE_SEPARATOR
             ),
-            self::MODULE_FILTERINPUT_EXCLUDE_IDS => $this->translationAPI->__('Exclude elements with the given IDs', 'schema-commons'),
-            self::MODULE_FILTERINPUT_PARENT_IDS => $this->translationAPI->__('Limit results to elements with the given parent IDs', 'schema-commons'),
-            self::MODULE_FILTERINPUT_PARENT_ID => $this->translationAPI->__('Limit results to elements with the given parent ID', 'schema-commons'),
-            self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS => $this->translationAPI->__('Exclude elements with the given parent IDs', 'schema-commons'),
-            self::MODULE_FILTERINPUT_SLUGS => $this->translationAPI->__('Limit results to elements with the given slug', 'schema-commons'),
-            self::MODULE_FILTERINPUT_SLUGS => $this->translationAPI->__('Limit results to elements with the given slug', 'schema-commons'),
+            self::MODULE_FILTERINPUT_EXCLUDE_IDS => $this->getTranslationAPI()->__('Exclude elements with the given IDs', 'schema-commons'),
+            self::MODULE_FILTERINPUT_PARENT_IDS => $this->getTranslationAPI()->__('Limit results to elements with the given parent IDs', 'schema-commons'),
+            self::MODULE_FILTERINPUT_PARENT_ID => $this->getTranslationAPI()->__('Limit results to elements with the given parent ID', 'schema-commons'),
+            self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS => $this->getTranslationAPI()->__('Exclude elements with the given parent IDs', 'schema-commons'),
+            self::MODULE_FILTERINPUT_SLUGS => $this->getTranslationAPI()->__('Limit results to elements with the given slug', 'schema-commons'),
+            self::MODULE_FILTERINPUT_SLUGS => $this->getTranslationAPI()->__('Limit results to elements with the given slug', 'schema-commons'),
             self::MODULE_FILTERINPUT_DATEFORMAT => sprintf(
-                $this->translationAPI->__('Date format, as defined in %s', 'schema-commons'),
+                $this->getTranslationAPI()->__('Date format, as defined in %s', 'schema-commons'),
                 'https://www.php.net/manual/en/function.date.php'
             ),
-            self::MODULE_FILTERINPUT_GMT => $this->translationAPI->__('Whether to retrieve the date as UTC or GMT timezone', 'schema-commons'),
+            self::MODULE_FILTERINPUT_GMT => $this->getTranslationAPI()->__('Whether to retrieve the date as UTC or GMT timezone', 'schema-commons'),
             default => null,
         };
     }

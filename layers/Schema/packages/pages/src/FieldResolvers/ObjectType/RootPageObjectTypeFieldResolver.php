@@ -90,14 +90,14 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'page' => $this->translationAPI->__('Page with a specific ID', 'pages'),
-            'pageBySlug' => $this->translationAPI->__('Page with a specific slug', 'pages'),
-            'pages' => $this->translationAPI->__('Pages', 'pages'),
-            'pageCount' => $this->translationAPI->__('Number of pages', 'pages'),
-            'pageForAdmin' => $this->translationAPI->__('[Unrestricted] Page with a specific ID', 'pages'),
-            'pageBySlugForAdmin' => $this->translationAPI->__('[Unrestricted] Page with a specific slug', 'pages'),
-            'pagesForAdmin' => $this->translationAPI->__('[Unrestricted] Pages', 'pages'),
-            'pageCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of pages', 'pages'),
+            'page' => $this->getTranslationAPI()->__('Page with a specific ID', 'pages'),
+            'pageBySlug' => $this->getTranslationAPI()->__('Page with a specific slug', 'pages'),
+            'pages' => $this->getTranslationAPI()->__('Pages', 'pages'),
+            'pageCount' => $this->getTranslationAPI()->__('Number of pages', 'pages'),
+            'pageForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Page with a specific ID', 'pages'),
+            'pageBySlugForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Page with a specific slug', 'pages'),
+            'pagesForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Pages', 'pages'),
+            'pageCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of pages', 'pages'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

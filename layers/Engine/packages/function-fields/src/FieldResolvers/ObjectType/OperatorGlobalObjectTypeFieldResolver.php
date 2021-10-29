@@ -154,22 +154,22 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'concat' => $this->translationAPI->__('Concatenate two or more strings', 'function-fields'),
-            'divide' => $this->translationAPI->__('Divide a number by another number', 'function-fields'),
-            'arrayRandom' => $this->translationAPI->__('Randomly select one element from the provided ones', 'function-fields'),
-            'arrayJoin' => $this->translationAPI->__('Join all the strings in an array, using a provided separator', 'function-fields'),
-            'arrayItem' => $this->translationAPI->__('Access the element on the given position in the array', 'function-fields'),
-            'arraySearch' => $this->translationAPI->__('Search in what position is an element placed in the array. If found, it returns its position (integer), otherwise it returns `false` (boolean)', 'function-fields'),
-            'arrayFill' => $this->translationAPI->__('Fill a target array with elements from a source array, where a certain property is the same', 'function-fields'),
-            'arrayValues' => $this->translationAPI->__('Return the values from a two-dimensional array', 'function-fields'),
-            'arrayUnique' => $this->translationAPI->__('Filters out all duplicated elements in the array', 'function-fields'),
-            'arrayDiff' => $this->translationAPI->__('Return an array containing all the elements from the first array which are not present on any of the other arrays', 'function-fields'),
-            'arrayAddItem' => $this->translationAPI->__('Adds an element to the array', 'function-fields'),
-            'arrayAsQueryStr' => $this->translationAPI->__('Represent an array as a string', 'function-fields'),
-            'objectAsQueryStr' => $this->translationAPI->__('Represent an object as a string', 'function-fields'),
-            'upperCase' => $this->translationAPI->__('Transform a string to upper case', 'function-fields'),
-            'lowerCase' => $this->translationAPI->__('Transform a string to lower case', 'function-fields'),
-            'titleCase' => $this->translationAPI->__('Transform a string to title case', 'function-fields'),
+            'concat' => $this->getTranslationAPI()->__('Concatenate two or more strings', 'function-fields'),
+            'divide' => $this->getTranslationAPI()->__('Divide a number by another number', 'function-fields'),
+            'arrayRandom' => $this->getTranslationAPI()->__('Randomly select one element from the provided ones', 'function-fields'),
+            'arrayJoin' => $this->getTranslationAPI()->__('Join all the strings in an array, using a provided separator', 'function-fields'),
+            'arrayItem' => $this->getTranslationAPI()->__('Access the element on the given position in the array', 'function-fields'),
+            'arraySearch' => $this->getTranslationAPI()->__('Search in what position is an element placed in the array. If found, it returns its position (integer), otherwise it returns `false` (boolean)', 'function-fields'),
+            'arrayFill' => $this->getTranslationAPI()->__('Fill a target array with elements from a source array, where a certain property is the same', 'function-fields'),
+            'arrayValues' => $this->getTranslationAPI()->__('Return the values from a two-dimensional array', 'function-fields'),
+            'arrayUnique' => $this->getTranslationAPI()->__('Filters out all duplicated elements in the array', 'function-fields'),
+            'arrayDiff' => $this->getTranslationAPI()->__('Return an array containing all the elements from the first array which are not present on any of the other arrays', 'function-fields'),
+            'arrayAddItem' => $this->getTranslationAPI()->__('Adds an element to the array', 'function-fields'),
+            'arrayAsQueryStr' => $this->getTranslationAPI()->__('Represent an array as a string', 'function-fields'),
+            'objectAsQueryStr' => $this->getTranslationAPI()->__('Represent an object as a string', 'function-fields'),
+            'upperCase' => $this->getTranslationAPI()->__('Transform a string to upper case', 'function-fields'),
+            'lowerCase' => $this->getTranslationAPI()->__('Transform a string to lower case', 'function-fields'),
+            'titleCase' => $this->getTranslationAPI()->__('Transform a string to title case', 'function-fields'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -237,31 +237,31 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['concat' => 'values'] => $this->translationAPI->__('Strings to concatenate', 'function-fields'),
-            ['divide' => 'number'] => $this->translationAPI->__('Number to divide', 'function-fields'),
-            ['divide' => 'by'] => $this->translationAPI->__('The division operandum', 'function-fields'),
-            ['arrayRandom' => 'array'] => $this->translationAPI->__('Array of elements from which to randomly select one', 'function-fields'),
-            ['arrayJoin' => 'array'] => $this->translationAPI->__('Array of strings to be joined all together', 'function-fields'),
-            ['arrayJoin' => 'separator'] => $this->translationAPI->__('Separator with which to join all strings in the array', 'function-fields'),
-            ['arrayItem' => 'array'] => $this->translationAPI->__('Array containing the element to retrieve', 'function-fields'),
-            ['arrayItem' => 'position'] => $this->translationAPI->__('Position where the element is placed in the array, starting from 0', 'function-fields'),
-            ['arraySearch' => 'array'] => $this->translationAPI->__('Array containing the element to search', 'function-fields'),
-            ['arraySearch' => 'element'] => $this->translationAPI->__('Element to search in the array and retrieve its position', 'function-fields'),
-            ['arrayFill' => 'target'] => $this->translationAPI->__('Array to be added elements coming from the source array', 'function-fields'),
-            ['arrayFill' => 'source'] => $this->translationAPI->__('Array whose elements will be added to the target array', 'function-fields'),
-            ['arrayFill' => 'index'] => $this->translationAPI->__('Property whose value must be the same on both arrays', 'function-fields'),
-            ['arrayFill' => 'properties'] => $this->translationAPI->__('Properties to copy from the source to the target array. If empty, all properties in the source array will be copied', 'function-fields'),
-            ['arrayValues' => 'array'] => $this->translationAPI->__('The array from which to retrieve the values', 'function-fields'),
-            ['arrayUnique' => 'array'] => $this->translationAPI->__('The array to operate on', 'function-fields'),
-            ['arrayDiff' => 'arrays'] => $this->translationAPI->__('The array containing all the arrays. It must have at least 2 elements', 'function-fields'),
-            ['arrayAddItem' => 'array'] => $this->translationAPI->__('The array to add an item on', 'function-fields'),
-            ['arrayAddItem' => 'value'] => $this->translationAPI->__('The value to add to the array', 'function-fields'),
-            ['arrayAddItem' => 'key'] => $this->translationAPI->__('Key (string or integer) under which to add the value to the array. If not provided, the value is added without key', 'function-fields'),
-            ['arrayAsQueryStr' => 'array'] => $this->translationAPI->__('The array to be represented as a string', 'function-fields'),
-            ['objectAsQueryStr' => 'object'] => $this->translationAPI->__('The object to be represented as a string', 'function-fields'),
+            ['concat' => 'values'] => $this->getTranslationAPI()->__('Strings to concatenate', 'function-fields'),
+            ['divide' => 'number'] => $this->getTranslationAPI()->__('Number to divide', 'function-fields'),
+            ['divide' => 'by'] => $this->getTranslationAPI()->__('The division operandum', 'function-fields'),
+            ['arrayRandom' => 'array'] => $this->getTranslationAPI()->__('Array of elements from which to randomly select one', 'function-fields'),
+            ['arrayJoin' => 'array'] => $this->getTranslationAPI()->__('Array of strings to be joined all together', 'function-fields'),
+            ['arrayJoin' => 'separator'] => $this->getTranslationAPI()->__('Separator with which to join all strings in the array', 'function-fields'),
+            ['arrayItem' => 'array'] => $this->getTranslationAPI()->__('Array containing the element to retrieve', 'function-fields'),
+            ['arrayItem' => 'position'] => $this->getTranslationAPI()->__('Position where the element is placed in the array, starting from 0', 'function-fields'),
+            ['arraySearch' => 'array'] => $this->getTranslationAPI()->__('Array containing the element to search', 'function-fields'),
+            ['arraySearch' => 'element'] => $this->getTranslationAPI()->__('Element to search in the array and retrieve its position', 'function-fields'),
+            ['arrayFill' => 'target'] => $this->getTranslationAPI()->__('Array to be added elements coming from the source array', 'function-fields'),
+            ['arrayFill' => 'source'] => $this->getTranslationAPI()->__('Array whose elements will be added to the target array', 'function-fields'),
+            ['arrayFill' => 'index'] => $this->getTranslationAPI()->__('Property whose value must be the same on both arrays', 'function-fields'),
+            ['arrayFill' => 'properties'] => $this->getTranslationAPI()->__('Properties to copy from the source to the target array. If empty, all properties in the source array will be copied', 'function-fields'),
+            ['arrayValues' => 'array'] => $this->getTranslationAPI()->__('The array from which to retrieve the values', 'function-fields'),
+            ['arrayUnique' => 'array'] => $this->getTranslationAPI()->__('The array to operate on', 'function-fields'),
+            ['arrayDiff' => 'arrays'] => $this->getTranslationAPI()->__('The array containing all the arrays. It must have at least 2 elements', 'function-fields'),
+            ['arrayAddItem' => 'array'] => $this->getTranslationAPI()->__('The array to add an item on', 'function-fields'),
+            ['arrayAddItem' => 'value'] => $this->getTranslationAPI()->__('The value to add to the array', 'function-fields'),
+            ['arrayAddItem' => 'key'] => $this->getTranslationAPI()->__('Key (string or integer) under which to add the value to the array. If not provided, the value is added without key', 'function-fields'),
+            ['arrayAsQueryStr' => 'array'] => $this->getTranslationAPI()->__('The array to be represented as a string', 'function-fields'),
+            ['objectAsQueryStr' => 'object'] => $this->getTranslationAPI()->__('The object to be represented as a string', 'function-fields'),
             ['upperCase' => 'text'],
             ['lowerCase' => 'text'],
-            ['titleCase' => 'text'] => $this->translationAPI->__('The string to be transformed', 'function-fields'),
+            ['titleCase' => 'text'] => $this->getTranslationAPI()->__('The string to be transformed', 'function-fields'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -314,7 +314,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                     if (count($fieldArgs['array']) < $fieldArgs['position']) {
                         return [
                             sprintf(
-                                $this->translationAPI->__('The array contains no element at position \'%s\'', 'function-fields'),
+                                $this->getTranslationAPI()->__('The array contains no element at position \'%s\'', 'function-fields'),
                                 $fieldArgs['position']
                             ),
                         ];
@@ -324,7 +324,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                     if (count($fieldArgs['arrays']) < 2) {
                         return [
                             sprintf(
-                                $this->translationAPI->__('The array must contain at least 2 elements: \'%s\'', 'function-fields'),
+                                $this->getTranslationAPI()->__('The array must contain at least 2 elements: \'%s\'', 'function-fields'),
                                 json_encode($fieldArgs['arrays'])
                             ),
                         ];
@@ -333,7 +333,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 case 'divide':
                     if ($fieldArgs['by'] === (float)0) {
                         return [
-                            $this->translationAPI->__('Cannot divide by 0', 'function-fields'),
+                            $this->getTranslationAPI()->__('Cannot divide by 0', 'function-fields'),
                         ];
                     }
                     // Check that all items are arrays
@@ -343,7 +343,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                     // }, true);
                     // if (!$allArrays) {
                     //     return sprintf(
-                    //         $this->translationAPI->__('The array must contain only arrays as elements: \'%s\'', 'function-fields'),
+                    //         $this->getTranslationAPI()->__('The array must contain only arrays as elements: \'%s\'', 'function-fields'),
                     //         json_encode($fieldArgs['arrays'])
                     //     );
                     // }

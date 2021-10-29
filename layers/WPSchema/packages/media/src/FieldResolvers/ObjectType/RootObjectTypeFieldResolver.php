@@ -66,8 +66,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'mediaItemBySlug' => $this->translationAPI->__('Get a media item by slug', 'media'),
-            'imageSizeNames' => $this->translationAPI->__('Gets the available intermediate image size names.', 'media'),
+            'mediaItemBySlug' => $this->getTranslationAPI()->__('Get a media item by slug', 'media'),
+            'imageSizeNames' => $this->getTranslationAPI()->__('Gets the available intermediate image size names.', 'media'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

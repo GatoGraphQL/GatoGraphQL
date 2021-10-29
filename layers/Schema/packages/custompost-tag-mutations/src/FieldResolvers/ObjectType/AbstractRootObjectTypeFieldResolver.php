@@ -73,7 +73,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return match ($fieldName) {
             $this->getSetTagsFieldName() => sprintf(
-                $this->translationAPI->__('Set tags on a %s', 'custompost-tag-mutations'),
+                $this->getTranslationAPI()->__('Set tags on a %s', 'custompost-tag-mutations'),
                 $this->getEntityName()
             ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -97,11 +97,11 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         $setTagsFieldName = $this->getSetTagsFieldName();
         return match ([$fieldName => $fieldArgName]) {
             [$setTagsFieldName => MutationInputProperties::CUSTOMPOST_ID] => sprintf(
-                $this->translationAPI->__('The ID of the %s', 'custompost-tag-mutations'),
+                $this->getTranslationAPI()->__('The ID of the %s', 'custompost-tag-mutations'),
                 $this->getEntityName()
             ),
-            [$setTagsFieldName => MutationInputProperties::TAGS] => $this->translationAPI->__('The tags to set', 'custompost-tag-mutations'),
-            [$setTagsFieldName => MutationInputProperties::APPEND] => $this->translationAPI->__('Append the tags to the existing ones?', 'custompost-tag-mutations'),
+            [$setTagsFieldName => MutationInputProperties::TAGS] => $this->getTranslationAPI()->__('The tags to set', 'custompost-tag-mutations'),
+            [$setTagsFieldName => MutationInputProperties::APPEND] => $this->getTranslationAPI()->__('Append the tags to the existing ones?', 'custompost-tag-mutations'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

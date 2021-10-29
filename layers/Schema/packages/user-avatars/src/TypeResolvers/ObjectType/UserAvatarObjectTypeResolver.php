@@ -30,7 +30,7 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('User avatar', 'user-avatars');
+        return $this->getTranslationAPI()->__('User avatar', 'user-avatars');
     }
 
     public function getID(object $object): string | int | null

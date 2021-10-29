@@ -48,12 +48,12 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->translationAPI->__('Extract a property from the current object, and set it as a expression, so it can be accessed by fieldResolvers', 'component-model');
+        return $this->getTranslationAPI()->__('Extract a property from the current object, and set it as a expression, so it can be accessed by fieldResolvers', 'component-model');
     }
 
     public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->translationAPI->__('Use directive `getSelfProp` together with field `extract` instead', 'component-model');
+        return $this->getTranslationAPI()->__('Use directive `getSelfProp` together with field `extract` instead', 'component-model');
     }
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
@@ -67,8 +67,8 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'properties' => $this->translationAPI->__('The property in the current object from which to copy the data into the expressions', 'component-model'),
-            'expressions' => $this->translationAPI->__('Name of the expressions. Default value: Same name as the properties', 'component-model'),
+            'properties' => $this->getTranslationAPI()->__('The property in the current object from which to copy the data into the expressions', 'component-model'),
+            'expressions' => $this->getTranslationAPI()->__('Name of the expressions. Default value: Same name as the properties', 'component-model'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }
@@ -100,16 +100,16 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
                 $schemaWarnings[] = [
                     Tokens::PATH => [$this->directive],
                     Tokens::MESSAGE => sprintf(
-                        $this->translationAPI->__('Argument \'expressions\' has more elements than argument \'properties\', so the following expressions have been ignored: \'%s\'', 'component-model'),
-                        implode($this->translationAPI->__('\', \''), array_slice($expressionsName, $propertiesCount))
+                        $this->getTranslationAPI()->__('Argument \'expressions\' has more elements than argument \'properties\', so the following expressions have been ignored: \'%s\'', 'component-model'),
+                        implode($this->getTranslationAPI()->__('\', \''), array_slice($expressionsName, $propertiesCount))
                     ),
                 ];
             } elseif ($expressionsNameCount < $propertiesCount) {
                 $schemaWarnings[] = [
                     Tokens::PATH => [$this->directive],
                     Tokens::MESSAGE => sprintf(
-                        $this->translationAPI->__('Argument \'properties\' has more elements than argument \'expressions\', so the following properties will be assigned to the destination object under their same name: \'%s\'', 'component-model'),
-                        implode($this->translationAPI->__('\', \''), array_slice($properties, $expressionsNameCount))
+                        $this->getTranslationAPI()->__('Argument \'properties\' has more elements than argument \'expressions\', so the following properties will be assigned to the destination object under their same name: \'%s\'', 'component-model'),
+                        implode($this->getTranslationAPI()->__('\', \''), array_slice($properties, $expressionsNameCount))
                     ),
                 ];
             }
@@ -156,7 +156,7 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
                     $objectErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
-                            $this->translationAPI->__('Property \'%s\' hadn\'t been set for object with ID \'%s\', so no expression has been defined', 'component-model'),
+                            $this->getTranslationAPI()->__('Property \'%s\' hadn\'t been set for object with ID \'%s\', so no expression has been defined', 'component-model'),
                             $property,
                             $id
                         ),
@@ -170,7 +170,7 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
                     $objectWarnings[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
-                            $this->translationAPI->__('The existing value for expression \'%s\' for object with ID \'%s\' has been overriden: \'%s\'', 'component-model'),
+                            $this->getTranslationAPI()->__('The existing value for expression \'%s\' for object with ID \'%s\' has been overriden: \'%s\'', 'component-model'),
                             $expressionName,
                             $id
                         ),

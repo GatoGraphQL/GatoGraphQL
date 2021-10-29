@@ -56,7 +56,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ($fieldName) {
             'setTags' => sprintf(
-                $this->translationAPI->__('Set tags on the %s', 'custompost-tag-mutations'),
+                $this->getTranslationAPI()->__('Set tags on the %s', 'custompost-tag-mutations'),
                 $this->getEntityName()
             ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -85,8 +85,8 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['setTags' => MutationInputProperties::TAGS] => $this->translationAPI->__('The tags to set', 'custompost-tag-mutations'),
-            ['setTags' => MutationInputProperties::APPEND] => $this->translationAPI->__('Append the tags to the existing ones?', 'custompost-tag-mutations'),
+            ['setTags' => MutationInputProperties::TAGS] => $this->getTranslationAPI()->__('The tags to set', 'custompost-tag-mutations'),
+            ['setTags' => MutationInputProperties::APPEND] => $this->getTranslationAPI()->__('Append the tags to the existing ones?', 'custompost-tag-mutations'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

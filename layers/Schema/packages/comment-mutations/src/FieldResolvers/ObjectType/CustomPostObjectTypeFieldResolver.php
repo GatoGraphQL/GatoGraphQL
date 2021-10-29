@@ -55,7 +55,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'addComment' => $this->translationAPI->__('Add a comment to the custom post', 'comment-mutations'),
+            'addComment' => $this->getTranslationAPI()->__('Add a comment to the custom post', 'comment-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

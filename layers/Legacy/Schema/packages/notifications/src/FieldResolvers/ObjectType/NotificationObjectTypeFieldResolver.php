@@ -204,33 +204,33 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'action' => $this->translationAPI->__('', ''),
-            'objectType' => $this->translationAPI->__('', ''),
-            'objectSubtype' => $this->translationAPI->__('', ''),
-            'objectName' => $this->translationAPI->__('', ''),
-            'objectID' => $this->translationAPI->__('', ''),
-            'user' => $this->translationAPI->__('', ''),
-            'userID' => $this->translationAPI->__('', ''),
-            'websiteURL' => $this->translationAPI->__('', ''),
-            'userCaps' => $this->translationAPI->__('', ''),
-            'histIp' => $this->translationAPI->__('', ''),
-            'histTime' => $this->translationAPI->__('', ''),
-            'histTimeNogmt' => $this->translationAPI->__('', ''),
-            'histTimeReadable' => $this->translationAPI->__('', ''),
-            'status' => $this->translationAPI->__('', ''),
-            'isStatusRead' => $this->translationAPI->__('', ''),
-            'isStatusNotRead' => $this->translationAPI->__('', ''),
-            'markAsReadURL' => $this->translationAPI->__('', ''),
-            'markAsUnreadURL' => $this->translationAPI->__('', ''),
-            'icon' => $this->translationAPI->__('', ''),
-            'url' => $this->translationAPI->__('', ''),
-            'target' => $this->translationAPI->__('', ''),
-            'message' => $this->translationAPI->__('', ''),
-            'isPostNotification' => $this->translationAPI->__('', ''),
-            'isUserNotification' => $this->translationAPI->__('', ''),
-            'isCommentNotification' => $this->translationAPI->__('', ''),
-            'isTaxonomyNotification' => $this->translationAPI->__('', ''),
-            'isAction' => $this->translationAPI->__('', ''),
+            'action' => $this->getTranslationAPI()->__('', ''),
+            'objectType' => $this->getTranslationAPI()->__('', ''),
+            'objectSubtype' => $this->getTranslationAPI()->__('', ''),
+            'objectName' => $this->getTranslationAPI()->__('', ''),
+            'objectID' => $this->getTranslationAPI()->__('', ''),
+            'user' => $this->getTranslationAPI()->__('', ''),
+            'userID' => $this->getTranslationAPI()->__('', ''),
+            'websiteURL' => $this->getTranslationAPI()->__('', ''),
+            'userCaps' => $this->getTranslationAPI()->__('', ''),
+            'histIp' => $this->getTranslationAPI()->__('', ''),
+            'histTime' => $this->getTranslationAPI()->__('', ''),
+            'histTimeNogmt' => $this->getTranslationAPI()->__('', ''),
+            'histTimeReadable' => $this->getTranslationAPI()->__('', ''),
+            'status' => $this->getTranslationAPI()->__('', ''),
+            'isStatusRead' => $this->getTranslationAPI()->__('', ''),
+            'isStatusNotRead' => $this->getTranslationAPI()->__('', ''),
+            'markAsReadURL' => $this->getTranslationAPI()->__('', ''),
+            'markAsUnreadURL' => $this->getTranslationAPI()->__('', ''),
+            'icon' => $this->getTranslationAPI()->__('', ''),
+            'url' => $this->getTranslationAPI()->__('', ''),
+            'target' => $this->getTranslationAPI()->__('', ''),
+            'message' => $this->getTranslationAPI()->__('', ''),
+            'isPostNotification' => $this->getTranslationAPI()->__('', ''),
+            'isUserNotification' => $this->getTranslationAPI()->__('', ''),
+            'isCommentNotification' => $this->getTranslationAPI()->__('', ''),
+            'isTaxonomyNotification' => $this->getTranslationAPI()->__('', ''),
+            'isAction' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -248,7 +248,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['isAction' => 'action'] => $this->translationAPI->__('The action to check against the notification', 'pop-posts'),
+            ['isAction' => 'action'] => $this->getTranslationAPI()->__('The action to check against the notification', 'pop-posts'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -309,7 +309,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
             case 'histTimeReadable':
                 // Must convert date using GMT
                 return sprintf(
-                    $this->translationAPI->__('%s ago', 'pop-notifications'),
+                    $this->getTranslationAPI()->__('%s ago', 'pop-notifications'),
                     \humanTiming($notification->hist_time - ($this->getCmsService()->getOption($this->getNameResolver()->getName('popcms:option:gmtOffset')) * 3600))
                 );
 

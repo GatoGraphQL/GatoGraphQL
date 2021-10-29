@@ -83,7 +83,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
     public function getFieldDescription(string $fieldName): ?string
     {
         return match($fieldName) {
-            'datetime' => $this->translationAPI->__('Custom post published date and time', 'customposts'),
+            'datetime' => $this->getTranslationAPI()->__('Custom post published date and time', 'customposts'),
             default => parent::getFieldDescription($fieldName),
         };
     }
@@ -101,7 +101,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
     {
         return match ([$fieldName => $fieldArgName]) {
             ['datetime' => 'format'] => sprintf(
-                $this->translationAPI->__('Date and time format, as defined in %s. Default value: \'%s\' (for current year date) or \'%s\' (otherwise)', 'customposts'),
+                $this->getTranslationAPI()->__('Date and time format, as defined in %s. Default value: \'%s\' (for current year date) or \'%s\' (otherwise)', 'customposts'),
                 'https://www.php.net/manual/en/function.date.php',
                 'j M, H:i',
                 'j M Y, H:i'

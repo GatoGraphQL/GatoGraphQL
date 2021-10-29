@@ -85,19 +85,19 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
         $errors = [];
         $user_id = $form_data['user_id'];
         if (!$user_id) {
-            $errors[] = $this->translationAPI->__('The user is missing', 'ure-pop');
+            $errors[] = $this->getTranslationAPI()->__('The user is missing', 'ure-pop');
             return $errors;
         }
 
         // $nonce = $form_data['nonce'];
         // if (!gdVerifyNonce( $nonce, GD_NONCE_EDITMEMBERSHIPURL, $user_id)) {
-        //     $errors[] = $this->translationAPI->__('Incorrect URL', 'ure-pop');
+        //     $errors[] = $this->getTranslationAPI()->__('Incorrect URL', 'ure-pop');
         //     return;
         // }
 
         $status = $form_data['status'];
         if (!$status) {
-            $errors[] = $this->translationAPI->__('The status has not been set', 'ure-pop');
+            $errors[] = $this->getTranslationAPI()->__('The status has not been set', 'ure-pop');
         }
         return $errors;
     }

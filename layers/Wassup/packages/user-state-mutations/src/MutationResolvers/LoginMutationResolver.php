@@ -26,7 +26,7 @@ class LoginMutationResolver extends UpstreamLoginMutationResolver
     {
         $cmsuseraccountapi = FunctionAPIFactory::getInstance();
         return sprintf(
-            $this->translationAPI->__('You are already logged in as <a href="%s">%s</a>, <a href="%s">logout</a>?', 'user-state-mutations'),
+            $this->getTranslationAPI()->__('You are already logged in as <a href="%s">%s</a>, <a href="%s">logout</a>?', 'user-state-mutations'),
             $this->getUserTypeAPI()->getUserURL($user_id),
             $this->getUserTypeAPI()->getUserDisplayName($user_id),
             $cmsuseraccountapi->getLogoutURL()

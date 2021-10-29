@@ -14,7 +14,7 @@ abstract class AbstractEmailInviteMutationResolverBridge extends AbstractCompone
     {
         $emails = (array) $result_id;
         return sprintf(
-            $this->translationAPI->__('Invitation sent to the following emails: <strong>%s</strong>'),
+            $this->getTranslationAPI()->__('Invitation sent to the following emails: <strong>%s</strong>'),
             implode(', ', $emails)
         );
     }

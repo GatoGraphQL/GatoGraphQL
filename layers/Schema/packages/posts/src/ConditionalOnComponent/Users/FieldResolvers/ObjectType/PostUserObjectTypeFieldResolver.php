@@ -20,10 +20,10 @@ class PostUserObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'posts' => $this->translationAPI->__('Posts by the user', 'users'),
-            'postCount' => $this->translationAPI->__('Number of posts by the user', 'users'),
-            'postsForAdmin' => $this->translationAPI->__('[Unrestricted] Posts by the user', 'users'),
-            'postCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of posts by the user', 'users'),
+            'posts' => $this->getTranslationAPI()->__('Posts by the user', 'users'),
+            'postCount' => $this->getTranslationAPI()->__('Number of posts by the user', 'users'),
+            'postsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Posts by the user', 'users'),
+            'postCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of posts by the user', 'users'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

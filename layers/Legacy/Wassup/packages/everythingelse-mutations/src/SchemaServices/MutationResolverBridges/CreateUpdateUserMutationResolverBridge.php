@@ -39,7 +39,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         if ($vars['global-userstate']['is-user-logged-in']) {
             // Allow PoP Service Workers to add the attr to avoid the link being served from the browser cache
             return sprintf(
-                $this->translationAPI->__('View your <a href="%s" target="%s" %s>updated profile</a>.', 'pop-application'),
+                $this->getTranslationAPI()->__('View your <a href="%s" target="%s" %s>updated profile</a>.', 'pop-application'),
                 getAuthorProfileUrl($vars['global-userstate']['current-user-id']),
                 \PoP_Application_Utils::getPreviewTarget(),
                 $this->hooksAPI->applyFilters('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', '')

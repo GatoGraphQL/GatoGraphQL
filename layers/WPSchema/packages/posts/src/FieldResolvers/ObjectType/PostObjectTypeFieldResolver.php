@@ -43,7 +43,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'postFormat' => $this->translationAPI->__('Retrieve the format slug for a post', 'posts'),
+            'postFormat' => $this->getTranslationAPI()->__('Retrieve the format slug for a post', 'posts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

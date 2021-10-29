@@ -8,6 +8,6 @@ trait WithVersionConstraintFieldOrDirectiveResolverTrait
 {
     protected function getVersionConstraintFieldOrDirectiveArgDescription(): string
     {
-        return $this->translationAPI->__('The version to restrict to, using the semantic versioning constraint rules used by Composer (https://getcomposer.org/doc/articles/versions.md)', 'component-model');
+        return $this->getTranslationAPI()->__('The version to restrict to, using the semantic versioning constraint rules used by Composer (https://getcomposer.org/doc/articles/versions.md)', 'component-model');
     }
 }

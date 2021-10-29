@@ -79,9 +79,9 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'categories' => $this->translationAPI->__('Categories added to this custom post', 'pop-categories'),
-            'categoryCount' => $this->translationAPI->__('Number of categories added to this custom post', 'pop-categories'),
-            'categoryNames' => $this->translationAPI->__('Names of the categories added to this custom post', 'pop-categories'),
+            'categories' => $this->getTranslationAPI()->__('Categories added to this custom post', 'pop-categories'),
+            'categoryCount' => $this->getTranslationAPI()->__('Number of categories added to this custom post', 'pop-categories'),
+            'categoryNames' => $this->getTranslationAPI()->__('Names of the categories added to this custom post', 'pop-categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

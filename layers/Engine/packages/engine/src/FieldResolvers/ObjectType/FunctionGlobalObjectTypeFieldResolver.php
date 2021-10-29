@@ -65,7 +65,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         return match ($fieldName) {
             'getSelfProp' => sprintf(
-                $this->translationAPI->__('Get a property from the current object, as stored under expression `%s`', 'pop-component-model'),
+                $this->getTranslationAPI()->__('Get a property from the current object, as stored under expression `%s`', 'pop-component-model'),
                 QueryHelpers::getExpressionQuery(Expressions::NAME_SELF)
             ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -86,8 +86,8 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['getSelfProp' => 'self'] => $this->translationAPI->__('The `$self` object containing all data for the current object', 'component-model'),
-            ['getSelfProp' => 'property'] => $this->translationAPI->__('The property to access from the current object', 'component-model'),
+            ['getSelfProp' => 'self'] => $this->getTranslationAPI()->__('The `$self` object containing all data for the current object', 'component-model'),
+            ['getSelfProp' => 'property'] => $this->getTranslationAPI()->__('The property to access from the current object', 'component-model'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

@@ -118,13 +118,13 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->translationAPI->__('Field\'s name', 'graphql-server'),
-            'description' => $this->translationAPI->__('Field\'s description', 'graphql-server'),
-            'args' => $this->translationAPI->__('Field arguments', 'graphql-server'),
-            'type' => $this->translationAPI->__('Type to which the field belongs', 'graphql-server'),
-            'isDeprecated' => $this->translationAPI->__('Is the field deprecated?', 'graphql-server'),
-            'deprecationReason' => $this->translationAPI->__('Why was the field deprecated?', 'graphql-server'),
-            'extensions' => $this->translationAPI->__('Custom metadata added to the field (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
+            'name' => $this->getTranslationAPI()->__('Field\'s name', 'graphql-server'),
+            'description' => $this->getTranslationAPI()->__('Field\'s description', 'graphql-server'),
+            'args' => $this->getTranslationAPI()->__('Field arguments', 'graphql-server'),
+            'type' => $this->getTranslationAPI()->__('Type to which the field belongs', 'graphql-server'),
+            'isDeprecated' => $this->getTranslationAPI()->__('Is the field deprecated?', 'graphql-server'),
+            'deprecationReason' => $this->getTranslationAPI()->__('Why was the field deprecated?', 'graphql-server'),
+            'extensions' => $this->getTranslationAPI()->__('Custom metadata added to the field (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

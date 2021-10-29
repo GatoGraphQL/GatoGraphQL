@@ -103,12 +103,12 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'areCommentsOpen' => $this->translationAPI->__('Are comments open to be added to the custom post', 'pop-comments'),
-            'hasComments' => $this->translationAPI->__('Does the custom post have comments?', 'pop-comments'),
-            'commentCount' => $this->translationAPI->__('Number of comments added to the custom post', 'pop-comments'),
-            'comments' => $this->translationAPI->__('Comments added to the custom post', 'pop-comments'),
-            'commentCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of comments added to the custom post', 'pop-comments'),
-            'commentsForAdmin' => $this->translationAPI->__('[Unrestricted] Comments added to the custom post', 'pop-comments'),
+            'areCommentsOpen' => $this->getTranslationAPI()->__('Are comments open to be added to the custom post', 'pop-comments'),
+            'hasComments' => $this->getTranslationAPI()->__('Does the custom post have comments?', 'pop-comments'),
+            'commentCount' => $this->getTranslationAPI()->__('Number of comments added to the custom post', 'pop-comments'),
+            'comments' => $this->getTranslationAPI()->__('Comments added to the custom post', 'pop-comments'),
+            'commentCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of comments added to the custom post', 'pop-comments'),
+            'commentsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Comments added to the custom post', 'pop-comments'),
             default => parent::getFieldDescription($fieldName),
         };
     }

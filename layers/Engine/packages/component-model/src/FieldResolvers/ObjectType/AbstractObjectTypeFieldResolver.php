@@ -719,7 +719,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $fieldDeprecationMessage = $this->getConsolidatedFieldDeprecationMessage($objectTypeResolver, $fieldName);
         if ($fieldDeprecationMessage !== null) {
             $fieldDeprecationMessages[] = sprintf(
-                $this->translationAPI->__('Field \'%s\' is deprecated: %s', 'component-model'),
+                $this->getTranslationAPI()->__('Field \'%s\' is deprecated: %s', 'component-model'),
                 $fieldName,
                 $fieldDeprecationMessage
             );
@@ -896,7 +896,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                  */
                 if (!$this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver)) {
                     $warnings[] = sprintf(
-                        $this->translationAPI->__('The ObjectTypeFieldResolver used to process field with name \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
+                        $this->getTranslationAPI()->__('The ObjectTypeFieldResolver used to process field with name \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
                         $fieldName,
                         $this->getFieldVersion($objectTypeResolver, $fieldName) ?? '',
                         $versionConstraint

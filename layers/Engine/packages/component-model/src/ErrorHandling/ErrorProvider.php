@@ -47,7 +47,7 @@ class ErrorProvider implements ErrorProviderInterface
             $fieldName,
             ErrorCodes::NO_FIELD,
             sprintf(
-                $this->translationAPI->__('There is no field \'%s\' on type \'%s\' and ID \'%s\'', 'pop-component-model'),
+                $this->getTranslationAPI()->__('There is no field \'%s\' on type \'%s\' and ID \'%s\'', 'pop-component-model'),
                 $fieldName,
                 $typeName,
                 $objectID
@@ -64,7 +64,7 @@ class ErrorProvider implements ErrorProviderInterface
             $fieldName,
             ErrorCodes::NON_NULLABLE_FIELD,
             sprintf(
-                $this->translationAPI->__('Non-nullable field \'%s\' cannot return null', 'pop-component-model'),
+                $this->getTranslationAPI()->__('Non-nullable field \'%s\' cannot return null', 'pop-component-model'),
                 $fieldName
             )
         );
@@ -79,7 +79,7 @@ class ErrorProvider implements ErrorProviderInterface
             $fieldName,
             ErrorCodes::MUST_NOT_BE_ARRAY_FIELD,
             sprintf(
-                $this->translationAPI->__('Field \'%s\' must not return an array, but returned \'%s\'', 'pop-component-model'),
+                $this->getTranslationAPI()->__('Field \'%s\' must not return an array, but returned \'%s\'', 'pop-component-model'),
                 $fieldName,
                 json_encode($value)
             )
@@ -102,7 +102,7 @@ class ErrorProvider implements ErrorProviderInterface
             $fieldName,
             ErrorCodes::MUST_BE_ARRAY_FIELD,
             sprintf(
-                $this->translationAPI->__('Field \'%s\' must return an array, but returned \'%s\'', 'pop-component-model'),
+                $this->getTranslationAPI()->__('Field \'%s\' must return an array, but returned \'%s\'', 'pop-component-model'),
                 $fieldName,
                 $valueAsString
             )
@@ -118,7 +118,7 @@ class ErrorProvider implements ErrorProviderInterface
             $fieldName,
             ErrorCodes::ARRAY_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
             sprintf(
-                $this->translationAPI->__('Field \'%s\' must not return an array with null items', 'pop-component-model'),
+                $this->getTranslationAPI()->__('Field \'%s\' must not return an array with null items', 'pop-component-model'),
                 $fieldName
             )
         );
@@ -130,7 +130,7 @@ class ErrorProvider implements ErrorProviderInterface
             $fieldName,
             ErrorCodes::MUST_BE_ARRAY_OF_ARRAYS_FIELD,
             sprintf(
-                $this->translationAPI->__('Array value in field \'%s\' must not contain arrays, but returned \'%s\'', 'pop-component-model'),
+                $this->getTranslationAPI()->__('Array value in field \'%s\' must not contain arrays, but returned \'%s\'', 'pop-component-model'),
                 $fieldName,
                 json_encode($value)
             )
@@ -143,7 +143,7 @@ class ErrorProvider implements ErrorProviderInterface
             $fieldName,
             ErrorCodes::MUST_BE_ARRAY_OF_ARRAYS_FIELD,
             sprintf(
-                $this->translationAPI->__('Field \'%s\' must return an array of arrays, but returned \'%s\'', 'pop-component-model'),
+                $this->getTranslationAPI()->__('Field \'%s\' must return an array of arrays, but returned \'%s\'', 'pop-component-model'),
                 $fieldName,
                 json_encode($value)
             )
@@ -156,7 +156,7 @@ class ErrorProvider implements ErrorProviderInterface
             $fieldName,
             ErrorCodes::ARRAY_OF_ARRAYS_MUST_NOT_HAVE_EMPTY_ITEMS_FIELD,
             sprintf(
-                $this->translationAPI->__('Field \'%s\' must not return an array of arrays with null items', 'pop-component-model'),
+                $this->getTranslationAPI()->__('Field \'%s\' must not return an array of arrays with null items', 'pop-component-model'),
                 $fieldName
             )
         );
@@ -181,9 +181,9 @@ class ErrorProvider implements ErrorProviderInterface
             $fieldName,
             ErrorCodes::VALIDATION_FAILED,
             sprintf(
-                $this->translationAPI->__('Field \'%s\' could not be processed due to previous error(s): \'%s\'', 'pop-component-model'),
+                $this->getTranslationAPI()->__('Field \'%s\' could not be processed due to previous error(s): \'%s\'', 'pop-component-model'),
                 $fieldName,
-                implode($this->translationAPI->__('\', \'', 'pop-component-model'), $validationDescriptions)
+                implode($this->getTranslationAPI()->__('\', \'', 'pop-component-model'), $validationDescriptions)
             )
         );
     }
@@ -194,7 +194,7 @@ class ErrorProvider implements ErrorProviderInterface
             $fieldName,
             ErrorCodes::NO_FIELD_RESOLVER_UNIT_PROCESSES_FIELD,
             sprintf(
-                $this->translationAPI->__('No ObjectTypeFieldResolver processes field \'%s\' for object with ID \'%s\'', 'pop-component-model'),
+                $this->getTranslationAPI()->__('No ObjectTypeFieldResolver processes field \'%s\' for object with ID \'%s\'', 'pop-component-model'),
                 $fieldName,
                 (string) $objectID
             )
@@ -210,7 +210,7 @@ class ErrorProvider implements ErrorProviderInterface
             $fieldName,
             $errorCode,
             sprintf(
-                $this->translationAPI->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
+                $this->getTranslationAPI()->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
                 $fieldName
             ),
             [
@@ -246,7 +246,7 @@ class ErrorProvider implements ErrorProviderInterface
             $fieldName,
             ErrorCodes::NESTED_ERRORS,
             sprintf(
-                $this->translationAPI->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
+                $this->getTranslationAPI()->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'pop-component-model'),
                 $fieldName
             ),
             null,

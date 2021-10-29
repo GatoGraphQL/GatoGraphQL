@@ -20,10 +20,10 @@ class PostTagListObjectTypeFieldResolver extends AbstractPostObjectTypeFieldReso
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'posts' => $this->translationAPI->__('Posts which contain this tag', 'pop-taxonomies'),
-            'postCount' => $this->translationAPI->__('Number of posts which contain this tag', 'pop-taxonomies'),
-            'postsForAdmin' => $this->translationAPI->__('[Unrestricted] Posts which contain this tag', 'pop-taxonomies'),
-            'postCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of posts which contain this tag', 'pop-taxonomies'),
+            'posts' => $this->getTranslationAPI()->__('Posts which contain this tag', 'pop-taxonomies'),
+            'postCount' => $this->getTranslationAPI()->__('Number of posts which contain this tag', 'pop-taxonomies'),
+            'postsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Posts which contain this tag', 'pop-taxonomies'),
+            'postCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of posts which contain this tag', 'pop-taxonomies'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -83,7 +83,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CATEGORY_IDS => $this->translationAPI->__('Limit results to elements with the given ids', 'categories'),
+            self::MODULE_FILTERINPUT_CATEGORY_IDS => $this->getTranslationAPI()->__('Limit results to elements with the given ids', 'categories'),
             default => null,
         };
     }

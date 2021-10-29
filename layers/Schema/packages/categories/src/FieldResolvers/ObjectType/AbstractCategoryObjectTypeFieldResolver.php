@@ -90,13 +90,13 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->translationAPI->__('Category URL', 'pop-categories'),
-            'urlPath' => $this->translationAPI->__('Category URL path', 'pop-categories'),
-            'slug' => $this->translationAPI->__('Category slug', 'pop-categories'),
-            'name' => $this->translationAPI->__('Category', 'pop-categories'),
-            'description' => $this->translationAPI->__('Category description', 'pop-categories'),
-            'parentCategory' => $this->translationAPI->__('Parent category (if this category is a child of another one)', 'pop-categories'),
-            'count' => $this->translationAPI->__('Number of custom posts containing this category', 'pop-categories'),
+            'url' => $this->getTranslationAPI()->__('Category URL', 'pop-categories'),
+            'urlPath' => $this->getTranslationAPI()->__('Category URL path', 'pop-categories'),
+            'slug' => $this->getTranslationAPI()->__('Category slug', 'pop-categories'),
+            'name' => $this->getTranslationAPI()->__('Category', 'pop-categories'),
+            'description' => $this->getTranslationAPI()->__('Category description', 'pop-categories'),
+            'parentCategory' => $this->getTranslationAPI()->__('Parent category (if this category is a child of another one)', 'pop-categories'),
+            'count' => $this->getTranslationAPI()->__('Number of custom posts containing this category', 'pop-categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

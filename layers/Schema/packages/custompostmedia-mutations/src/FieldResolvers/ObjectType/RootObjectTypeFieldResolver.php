@@ -89,8 +89,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'setFeaturedImageOnCustomPost' => $this->translationAPI->__('Set the featured image on a custom post', 'custompostmedia-mutations'),
-            'removeFeaturedImageFromCustomPost' => $this->translationAPI->__('Remove the featured image from a custom post', 'custompostmedia-mutations'),
+            'setFeaturedImageOnCustomPost' => $this->getTranslationAPI()->__('Set the featured image on a custom post', 'custompostmedia-mutations'),
+            'removeFeaturedImageFromCustomPost' => $this->getTranslationAPI()->__('Remove the featured image from a custom post', 'custompostmedia-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -114,10 +114,10 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return match ([$fieldName => $fieldArgName]) {
             ['setFeaturedImageOnCustomPost' => MutationInputProperties::CUSTOMPOST_ID],
             ['removeFeaturedImageFromCustomPost' => MutationInputProperties::CUSTOMPOST_ID]
-                => $this->translationAPI->__('The ID of the custom post', 'custompostmedia-mutations'),
+                => $this->getTranslationAPI()->__('The ID of the custom post', 'custompostmedia-mutations'),
             ['setFeaturedImageOnCustomPost' => MutationInputProperties::MEDIA_ITEM_ID]
                 => sprintf(
-                    $this->translationAPI->__('The ID of the featured image, of type \'%s\'', 'custompostmedia-mutations'),
+                    $this->getTranslationAPI()->__('The ID of the featured image, of type \'%s\'', 'custompostmedia-mutations'),
                     $this->getMediaObjectTypeResolver()->getTypeName()
                 ),
             default

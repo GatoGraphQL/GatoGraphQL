@@ -62,9 +62,9 @@ class QueryParser implements QueryParserInterface
         ) {
             throw new Exception(
                 sprintf(
-                    $this->translationAPI->__('Only strings of length 1 are valid in function `splitElements`, for params `$skipFromChars` and `$skipUntilChars`. The following string(s) are not valid: \'%s\''),
+                    $this->getTranslationAPI()->__('Only strings of length 1 are valid in function `splitElements`, for params `$skipFromChars` and `$skipUntilChars`. The following string(s) are not valid: \'%s\''),
                     implode(
-                        $this->translationAPI->__('\', \''),
+                        $this->getTranslationAPI()->__('\', \''),
                         $longStrings
                     )
                 )

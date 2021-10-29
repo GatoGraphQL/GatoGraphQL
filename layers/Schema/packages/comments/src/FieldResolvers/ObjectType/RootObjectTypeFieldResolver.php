@@ -174,12 +174,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'comment' => $this->translationAPI->__('Comment with a specific ID', 'pop-comments'),
-            'commentCount' => $this->translationAPI->__('Number of comments on the site', 'pop-comments'),
-            'comments' => $this->translationAPI->__('Comments on the site', 'pop-comments'),
-            'commentForAdmin' => $this->translationAPI->__('[Unrestricted] Comment with a specific ID', 'pop-comments'),
-            'commentCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of comments on the site', 'pop-comments'),
-            'commentsForAdmin' => $this->translationAPI->__('[Unrestricted] Comments on the site', 'pop-comments'),
+            'comment' => $this->getTranslationAPI()->__('Comment with a specific ID', 'pop-comments'),
+            'commentCount' => $this->getTranslationAPI()->__('Number of comments on the site', 'pop-comments'),
+            'comments' => $this->getTranslationAPI()->__('Comments on the site', 'pop-comments'),
+            'commentForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Comment with a specific ID', 'pop-comments'),
+            'commentCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of comments on the site', 'pop-comments'),
+            'commentsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Comments on the site', 'pop-comments'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

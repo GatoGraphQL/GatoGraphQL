@@ -70,7 +70,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
 
         // Validate the Community doesn't belong to itself as a member
         if (in_array($user_id, $form_data['communities'])) {
-            $errors[] = $this->translationAPI->__('You are not allowed to be a member of yourself!', 'ure-pop');
+            $errors[] = $this->getTranslationAPI()->__('You are not allowed to be a member of yourself!', 'ure-pop');
         }
         return $errors;
     }
@@ -103,7 +103,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
                 );
             }
             $warnings[] = sprintf(
-                $this->translationAPI->__('The following Community(ies) will not be active, since they claim you are not their member: %s.', 'ure-pop'),
+                $this->getTranslationAPI()->__('The following Community(ies) will not be active, since they claim you are not their member: %s.', 'ure-pop'),
                 implode(', ', $banned_communities_html)
             );
         }

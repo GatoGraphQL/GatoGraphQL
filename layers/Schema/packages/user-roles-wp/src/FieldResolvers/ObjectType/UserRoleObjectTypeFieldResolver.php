@@ -68,8 +68,8 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->translationAPI->__('The role name', 'user-roles-wp'),
-            'capabilities' => $this->translationAPI->__('Capabilities granted by the role', 'user-roles-wp'),
+            'name' => $this->getTranslationAPI()->__('The role name', 'user-roles-wp'),
+            'capabilities' => $this->getTranslationAPI()->__('Capabilities granted by the role', 'user-roles-wp'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

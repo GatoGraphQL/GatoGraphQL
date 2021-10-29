@@ -27,6 +27,6 @@ class GenerateSystemMutationResolverBridge extends AbstractSystemComponentMutati
     }
     public function getSuccessString(string | int $result_id): ?string
     {
-        return $this->translationAPI->__('System action "generate" executed successfully.', 'pop-system');
+        return $this->getTranslationAPI()->__('System action "generate" executed successfully.', 'pop-system');
     }
 }

@@ -97,11 +97,11 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'stances' => $this->translationAPI->__('', ''),
-            'hasStances' => $this->translationAPI->__('', ''),
-            'stanceProCount' => $this->translationAPI->__('', ''),
-            'stanceNeutralCount' => $this->translationAPI->__('', ''),
-            'stanceAgainstCount' => $this->translationAPI->__('', ''),
+            'stances' => $this->getTranslationAPI()->__('', ''),
+            'hasStances' => $this->getTranslationAPI()->__('', ''),
+            'stanceProCount' => $this->getTranslationAPI()->__('', ''),
+            'stanceNeutralCount' => $this->getTranslationAPI()->__('', ''),
+            'stanceAgainstCount' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

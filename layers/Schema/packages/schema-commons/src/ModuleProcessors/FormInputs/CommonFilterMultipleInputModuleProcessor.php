@@ -96,7 +96,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
     //                 $schemaDefinition,
     //                 [
     //                     SchemaDefinition::DESCRIPTION => sprintf(
-    //                         $this->translationAPI->__('Search for elements starting from this date, in format \'%s\'', 'pop-engine'),
+    //                         $this->getTranslationAPI()->__('Search for elements starting from this date, in format \'%s\'', 'pop-engine'),
     //                         $dateFormat
     //                     ),
     //                 ]
@@ -108,7 +108,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
     //                 $schemaDefinition,
     //                 [
     //                     SchemaDefinition::DESCRIPTION => sprintf(
-    //                         $this->translationAPI->__('Search for elements starting until this date, in format \'%s\'', 'pop-engine'),
+    //                         $this->getTranslationAPI()->__('Search for elements starting until this date, in format \'%s\'', 'pop-engine'),
     //                         $dateFormat
     //                     ),
     //                 ]
@@ -132,7 +132,7 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
                 $name = $this->getName($module);
                 $subnames = $this->getInputOptions($module)['subnames'];
                 return sprintf(
-                    $this->translationAPI->__('Search for elements between the \'from\' and \'to\' dates. Provide dates through params \'%s\' and \'%s\', in format \'%s\'', 'pop-engine'),
+                    $this->getTranslationAPI()->__('Search for elements between the \'from\' and \'to\' dates. Provide dates through params \'%s\' and \'%s\', in format \'%s\'', 'pop-engine'),
                     $this->getFormInputHelperService()->getMultipleInputName($name, $subnames[0]),
                     $this->getFormInputHelperService()->getMultipleInputName($name, $subnames[1]),
                     $this->getCmsService()->getOption($this->getNameResolver()->getName('popcms:option:dateFormat'))

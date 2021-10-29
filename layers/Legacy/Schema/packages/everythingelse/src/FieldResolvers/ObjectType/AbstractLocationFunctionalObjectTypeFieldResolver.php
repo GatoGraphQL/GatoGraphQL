@@ -48,7 +48,7 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'locationsmapURL' => $this->translationAPI->__('Locations map URL', 'pop-locations'),
+            'locationsmapURL' => $this->getTranslationAPI()->__('Locations map URL', 'pop-locations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

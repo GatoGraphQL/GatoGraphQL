@@ -25,13 +25,13 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
                 $sender_html = $sender_name;
             }
             $content = sprintf(
-                $this->translationAPI->__('<p>%s is inviting you to join %s!</p>', 'pop-coreprocessors'),
+                $this->getTranslationAPI()->__('<p>%s is inviting you to join %s!</p>', 'pop-coreprocessors'),
                 $sender_html,
                 $website_html
             );
         } else {
             $content = sprintf(
-                $this->translationAPI->__('<p>You have been invited to join %s!</p>', 'pop-coreprocessors'),
+                $this->getTranslationAPI()->__('<p>You have been invited to join %s!</p>', 'pop-coreprocessors'),
                 $website_html
             );
         }
@@ -57,7 +57,7 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         $content .= sprintf(
             '<h3>%s</h3>',
             sprintf(
-                $this->translationAPI->__('What is %s?', 'pop-coreprocessors'),
+                $this->getTranslationAPI()->__('What is %s?', 'pop-coreprocessors'),
                 $cmsapplicationapi->getSiteName()
             )
         );
@@ -65,7 +65,7 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         $content .= '<br/><br/>';
 
         $cmsService = CMSServiceFacade::getInstance();
-        $btn_title = $this->translationAPI->__('Check it out here', 'pop-coreprocessors');
+        $btn_title = $this->getTranslationAPI()->__('Check it out here', 'pop-coreprocessors');
         $content .= \PoP_EmailTemplatesFactory::getInstance()->getButtonhtml($btn_title, $cmsService->getSiteURL());
 
         return $content;
@@ -79,13 +79,13 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         // Maybe the user is logged in, maybe not
         if ($sender_name = $form_data['sender-name']) {
             $subject = sprintf(
-                $this->translationAPI->__('%s is inviting you to join %s!', 'pop-coreprocessors'),
+                $this->getTranslationAPI()->__('%s is inviting you to join %s!', 'pop-coreprocessors'),
                 $sender_name,
                 $cmsapplicationapi->getSiteName()
             );
         } else {
             $subject = sprintf(
-                $this->translationAPI->__('You have been invited to join %s!', 'pop-coreprocessors'),
+                $this->getTranslationAPI()->__('You have been invited to join %s!', 'pop-coreprocessors'),
                 $cmsapplicationapi->getSiteName()
             );
         }

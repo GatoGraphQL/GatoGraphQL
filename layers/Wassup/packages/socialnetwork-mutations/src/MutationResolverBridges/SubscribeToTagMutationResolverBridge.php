@@ -47,7 +47,7 @@ class SubscribeToTagMutationResolverBridge extends AbstractTagUpdateUserMetaValu
         $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
         $tag = $this->getPostTagTypeAPI()->getTag($result_id);
         return sprintf(
-            $this->translationAPI->__('You have subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->getTranslationAPI()->__('You have subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
             $applicationtaxonomyapi->getTagSymbolName($tag)
         );
     }
