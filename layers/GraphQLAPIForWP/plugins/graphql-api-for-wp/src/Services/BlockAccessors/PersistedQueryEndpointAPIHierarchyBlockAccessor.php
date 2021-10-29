@@ -7,14 +7,21 @@ namespace GraphQLAPI\GraphQLAPI\Services\BlockAccessors;
 use GraphQLAPI\GraphQLAPI\GetterSetterObjects\BlockAttributes\PersistedQueryEndpointAPIHierarchyBlockAttributes;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointAPIHierarchyBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 
 class PersistedQueryEndpointAPIHierarchyBlockAccessor
 {
-    public function __construct(
-        protected BlockHelpers $blockHelpers,
-        protected PersistedQueryEndpointAPIHierarchyBlock $persistedQueryEndpointAPIHierarchyBlock,
-    ) {
+    protected BlockHelpers $blockHelpers;
+    protected PersistedQueryEndpointAPIHierarchyBlock $persistedQueryEndpointAPIHierarchyBlock;
+
+    #[Required]
+    final public function autowirePersistedQueryEndpointAPIHierarchyBlockAccessor(
+        BlockHelpers $blockHelpers,
+        PersistedQueryEndpointAPIHierarchyBlock $persistedQueryEndpointAPIHierarchyBlock,
+    ): void {
+        $this->blockHelpers = $blockHelpers;
+        $this->persistedQueryEndpointAPIHierarchyBlock = $persistedQueryEndpointAPIHierarchyBlock;
     }
 
     /**

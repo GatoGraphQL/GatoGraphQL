@@ -7,14 +7,21 @@ namespace GraphQLAPI\GraphQLAPI\Services\BlockAccessors;
 use GraphQLAPI\GraphQLAPI\GetterSetterObjects\BlockAttributes\PersistedQueryEndpointGraphiQLBlockAttributes;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 
 class PersistedQueryEndpointGraphiQLBlockAccessor
 {
-    public function __construct(
-        protected BlockHelpers $blockHelpers,
-        protected PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock,
-    ) {
+    protected BlockHelpers $blockHelpers;
+    protected PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock;
+
+    #[Required]
+    final public function autowirePersistedQueryEndpointGraphiQLBlockAccessor(
+        BlockHelpers $blockHelpers,
+        PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock,
+    ): void {
+        $this->blockHelpers = $blockHelpers;
+        $this->persistedQueryEndpointGraphiQLBlock = $persistedQueryEndpointGraphiQLBlock;
     }
 
     /**
