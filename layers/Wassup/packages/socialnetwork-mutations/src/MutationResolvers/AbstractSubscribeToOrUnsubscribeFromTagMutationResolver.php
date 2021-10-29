@@ -36,7 +36,7 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
             // Make sure the post exists
             $target = $this->getPostTagTypeAPI()->getTag($target_id);
             if (!$target) {
-                $errors[] = $this->getTranslationAPI()->__('The requested topic/tag does not exist.', 'pop-coreprocessors');
+                $errors[] = $this->translationAPI->__('The requested topic/tag does not exist.', 'pop-coreprocessors');
             }
         }
         return $errors;

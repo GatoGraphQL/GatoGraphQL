@@ -103,9 +103,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'highlights' => $this->getTranslationAPI()->__('', ''),
-            'hasHighlights' => $this->getTranslationAPI()->__('', ''),
-            'highlightsCount' => $this->getTranslationAPI()->__('', ''),
+            'highlights' => $this->translationAPI->__('', ''),
+            'hasHighlights' => $this->translationAPI->__('', ''),
+            'highlightsCount' => $this->translationAPI->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

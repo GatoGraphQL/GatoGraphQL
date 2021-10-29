@@ -37,7 +37,7 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('A highlighted piece of text, extracted from a post', 'highlights');
+        return $this->translationAPI->__('A highlighted piece of text, extracted from a post', 'highlights');
     }
 
     public function getID(object $object): string | int | null

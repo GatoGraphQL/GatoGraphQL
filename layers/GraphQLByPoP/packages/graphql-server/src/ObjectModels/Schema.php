@@ -74,7 +74,7 @@ class Schema
              * @see https://github.com/rectorphp/rector/issues/6750
              */
             default => throw new Exception(sprintf(
-                $this->getTranslationAPI()->__('Unknown type kind \'%s\'', 'graphql-server'),
+                $this->translationAPI->__('Unknown type kind \'%s\'', 'graphql-server'),
                 $typeKind
             )),
         };

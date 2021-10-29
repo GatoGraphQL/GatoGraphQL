@@ -43,7 +43,7 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
         $website_html = \PoP_EmailTemplatesFactory::getInstance()->getWebsitehtml();//PoP_EmailUtils::get_website_html();
 
         $content = sprintf(
-            $this->getTranslationAPI()->__('<p><a href="%s">%s</a> is inviting you to <a href="%s">become their member</a>:</p>', 'ure-pop'),
+            $this->translationAPI->__('<p><a href="%s">%s</a> is inviting you to <a href="%s">become their member</a>:</p>', 'ure-pop'),
             $author_url,
             $author_name,
             RequestUtils::addRoute($author_url, POP_USERCOMMUNITIES_ROUTE_MEMBERS)
@@ -60,13 +60,13 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
         $content .= sprintf(
             '<h3>%s</h3>',
             sprintf(
-                $this->getTranslationAPI()->__('How to become %s\'s member?', 'ure-pop'),
+                $this->translationAPI->__('How to become %s\'s member?', 'ure-pop'),
                 $author_name
             )
         );
         $content .= '<ul><li>';
         $content .= sprintf(
-            $this->getTranslationAPI()->__('If you have not registered in %s yet:<br/><a href="%s">Create your account</a>, and while doing so, select <strong>%s</strong> in section "%s".', 'ure-pop'),
+            $this->translationAPI->__('If you have not registered in %s yet:<br/><a href="%s">Create your account</a>, and while doing so, select <strong>%s</strong> in section "%s".', 'ure-pop'),
             $website_html,
             RouteUtils::getRouteURL(POP_USERPLATFORM_ROUTE_ADDPROFILE),
             $author_name,
@@ -74,7 +74,7 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
         );
         $content .= '</li><li>';
         $content .= sprintf(
-            $this->getTranslationAPI()->__('<p>If you have already have an account in %s:<br/>Go to <a href="%s">%s</a>, select <strong>%s</strong> and submit.</p>', 'ure-pop'),
+            $this->translationAPI->__('<p>If you have already have an account in %s:<br/>Go to <a href="%s">%s</a>, select <strong>%s</strong> and submit.</p>', 'ure-pop'),
             $website_html,
             RouteUtils::getRouteURL(POP_USERCOMMUNITIES_ROUTE_MYCOMMUNITIES),
             RouteUtils::getRouteTitle(POP_USERCOMMUNITIES_ROUTE_MYCOMMUNITIES),
@@ -90,7 +90,7 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
         // The user must be always logged in, so we will have the user_id
         $user_id = $form_data['user_id'];
         return sprintf(
-            $this->getTranslationAPI()->__('%s is inviting you to become their member!', 'ure-pop'),
+            $this->translationAPI->__('%s is inviting you to become their member!', 'ure-pop'),
             $this->getUserTypeAPI()->getUserDisplayName($user_id)
         );
     }

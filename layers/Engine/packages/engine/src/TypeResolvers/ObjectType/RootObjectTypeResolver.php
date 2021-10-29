@@ -44,7 +44,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
     {
         return $this->getHooksAPI()->applyFilters(
             self::HOOK_DESCRIPTION,
-            $this->getTranslationAPI()->__('Root type, starting from which the query is executed', 'api')
+            $this->translationAPI->__('Root type, starting from which the query is executed', 'api')
         );
     }
 

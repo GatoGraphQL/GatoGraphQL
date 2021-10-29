@@ -65,7 +65,7 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'multilayoutKeys' => $this->getTranslationAPI()->__('', ''),
+            'multilayoutKeys' => $this->translationAPI->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

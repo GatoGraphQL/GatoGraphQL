@@ -127,14 +127,14 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'categories' => $this->getTranslationAPI()->__('', ''),
-            'catSlugs' => $this->getTranslationAPI()->__('', ''),
-            'stance' => $this->getTranslationAPI()->__('', ''),
-            'title' => $this->getTranslationAPI()->__('', ''),
-            'excerpt' => $this->getTranslationAPI()->__('', ''),
-            'content' => $this->getTranslationAPI()->__('', ''),
-            'stancetarget' => $this->getTranslationAPI()->__('', ''),
-            'hasStanceTarget' => $this->getTranslationAPI()->__('', ''),
+            'categories' => $this->translationAPI->__('', ''),
+            'catSlugs' => $this->translationAPI->__('', ''),
+            'stance' => $this->translationAPI->__('', ''),
+            'title' => $this->translationAPI->__('', ''),
+            'excerpt' => $this->translationAPI->__('', ''),
+            'content' => $this->translationAPI->__('', ''),
+            'stancetarget' => $this->translationAPI->__('', ''),
+            'hasStanceTarget' => $this->translationAPI->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -13,7 +13,7 @@ class GravityFormsNewsletterUnsubscriptionMutationResolver extends NewsletterUns
         parent::validateData($errors, $newsletter_data);
 
         if (empty($newsletter_data['entry-id'])) {
-            $errors[] = $this->getTranslationAPI()->__('Your email is not subscribed to our newsletter.', 'gravityforms-pop-genericforms');
+            $errors[] = $this->translationAPI->__('Your email is not subscribed to our newsletter.', 'gravityforms-pop-genericforms');
         }
     }
 

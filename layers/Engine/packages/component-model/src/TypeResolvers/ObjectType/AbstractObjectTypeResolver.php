@@ -170,7 +170,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             && ($versionConstraint = $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null)
         ) {
             $errorMessage = sprintf(
-                $this->getTranslationAPI()->__(
+                $this->translationAPI->__(
                     'There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'',
                     'pop-component-model'
                 ),
@@ -180,7 +180,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             );
         } else {
             $errorMessage = sprintf(
-                $this->getTranslationAPI()->__(
+                $this->translationAPI->__(
                     'There is no field \'%s\' on type \'%s\'',
                     'pop-component-model'
                 ),
@@ -415,7 +415,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         return new Error(
                             'exception',
                             sprintf(
-                                $this->getTranslationAPI()->__('Resolving field \'%s\' produced an exception, with message: \'%s\'. Please contact the admin.', 'component-model'),
+                                $this->translationAPI->__('Resolving field \'%s\' produced an exception, with message: \'%s\'. Please contact the admin.', 'component-model'),
                                 $field,
                                 $e->getMessage()
                             )

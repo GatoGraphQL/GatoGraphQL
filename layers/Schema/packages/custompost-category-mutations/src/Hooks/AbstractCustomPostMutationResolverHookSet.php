@@ -102,7 +102,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
             return $fieldArgDescription;
         }
         return sprintf(
-            $this->getTranslationAPI()->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
+            $this->translationAPI->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
             $this->getCategoryTypeResolver()->getMaybeNamespacedTypeName()
         );
     }

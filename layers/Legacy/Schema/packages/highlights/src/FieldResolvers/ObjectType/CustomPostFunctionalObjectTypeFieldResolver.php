@@ -67,7 +67,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'addhighlightURL' => $this->getTranslationAPI()->__('', ''),
+            'addhighlightURL' => $this->translationAPI->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

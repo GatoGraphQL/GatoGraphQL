@@ -392,7 +392,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $schemaErrors[] = [
                     Tokens::PATH => [$fieldDirective],
                     Tokens::MESSAGE => sprintf(
-                        $this->getTranslationAPI()->__('There is no directive with name \'%s\'', 'pop-component-model'),
+                        $this->translationAPI->__('There is no directive with name \'%s\'', 'pop-component-model'),
                         $directiveName
                     ),
                 ];
@@ -404,11 +404,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $schemaErrors[] = [
                     Tokens::PATH => [$fieldDirective],
                     Tokens::MESSAGE => sprintf(
-                        $this->getTranslationAPI()->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'pop-component-model'),
+                        $this->translationAPI->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'pop-component-model'),
                         $directiveName,
                         json_encode($directiveArgs),
                         implode(
-                            $this->getTranslationAPI()->__('\', \'', 'pop-component-model'),
+                            $this->translationAPI->__('\', \'', 'pop-component-model'),
                             $fieldDirectiveFields[$fieldDirective]
                         )
                     ),
@@ -422,7 +422,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $schemaErrors[] = [
                         Tokens::PATH => [$fieldDirective],
                         Tokens::MESSAGE => sprintf(
-                            $this->getTranslationAPI()->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'pop-component-model'),
+                            $this->translationAPI->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'pop-component-model'),
                             $directiveName,
                             json_encode($directiveArgs),
                             $field
@@ -540,7 +540,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $schemaErrors[] = [
                         Tokens::PATH => [$fieldDirective],
                         Tokens::MESSAGE => sprintf(
-                            $this->getTranslationAPI()->__('Directive \'%s\' can be executed only once for field(s) \'%s\'', 'component-model'),
+                            $this->translationAPI->__('Directive \'%s\' can be executed only once for field(s) \'%s\'', 'component-model'),
                             $fieldDirective,
                             implode('\', \'', $alreadyProcessingFields)
                         ),
@@ -621,7 +621,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return new Error(
             'unresolved-resultitem-id',
             sprintf(
-                $this->getTranslationAPI()->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'pop-component-model'),
+                $this->translationAPI->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'pop-component-model'),
                 $this->getMaybeNamespacedTypeName(),
                 $objectID
             )
@@ -1182,7 +1182,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 foreach ($failingFieldSchemaErrors as $failingField => $failingSchemaErrors) {
                     $schemaErrors[] = [
                         Tokens::PATH => [$failingField],
-                        Tokens::MESSAGE => $this->getTranslationAPI()->__('This field can\'t be executed due to errors from its directives', 'component-model'),
+                        Tokens::MESSAGE => $this->translationAPI->__('This field can\'t be executed due to errors from its directives', 'component-model'),
                         Tokens::EXTENSIONS => [
                             Tokens::NESTED => $failingSchemaErrors,
                         ],
@@ -1211,7 +1211,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     foreach ($failingIDObjectErrors as $id => $failingObjectErrors) {
                         $objectErrors[$id][] = [
                             Tokens::PATH => [$failingField],
-                            Tokens::MESSAGE => $this->getTranslationAPI()->__('This field can\'t be executed due to errors from its directives', 'component-model'),
+                            Tokens::MESSAGE => $this->translationAPI->__('This field can\'t be executed due to errors from its directives', 'component-model'),
                             Tokens::EXTENSIONS => [
                                 Tokens::NESTED => $failingObjectErrors,
                             ],

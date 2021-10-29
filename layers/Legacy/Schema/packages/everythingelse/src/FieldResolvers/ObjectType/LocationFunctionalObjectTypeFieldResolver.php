@@ -67,7 +67,7 @@ class LocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'mapURL' => $this->getTranslationAPI()->__('Location map URL', 'pop-locations'),
+            'mapURL' => $this->translationAPI->__('Location map URL', 'pop-locations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

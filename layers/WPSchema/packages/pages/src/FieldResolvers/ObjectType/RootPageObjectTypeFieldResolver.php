@@ -70,8 +70,8 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'pageByPath' => $this->getTranslationAPI()->__('Page with a specific URL path', 'pages'),
-            'pageByPathForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Page with a specific URL path', 'pages'),
+            'pageByPath' => $this->translationAPI->__('Page with a specific URL path', 'pages'),
+            'pageByPathForAdmin' => $this->translationAPI->__('[Unrestricted] Page with a specific URL path', 'pages'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -90,7 +90,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldArgName) {
-            'path' => $this->getTranslationAPI()->__('The page URL path', 'pages'),
+            'path' => $this->translationAPI->__('The page URL path', 'pages'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

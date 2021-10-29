@@ -65,7 +65,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ($fieldName) {
             'setCategories' => sprintf(
-                $this->getTranslationAPI()->__('Set categories on the %s', 'custompost-category-mutations'),
+                $this->translationAPI->__('Set categories on the %s', 'custompost-category-mutations'),
                 $this->getEntityName()
             ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -95,10 +95,10 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ([$fieldName => $fieldArgName]) {
             ['setCategories' => MutationInputProperties::CATEGORY_IDS] => sprintf(
-                $this->getTranslationAPI()->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
+                $this->translationAPI->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
                 $this->getCategoryTypeResolver()->getMaybeNamespacedTypeName()
             ),
-            ['setCategories' => MutationInputProperties::APPEND] => $this->getTranslationAPI()->__('Append the categories to the existing ones?', 'custompost-category-mutations'),
+            ['setCategories' => MutationInputProperties::APPEND] => $this->translationAPI->__('Append the categories to the existing ones?', 'custompost-category-mutations'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

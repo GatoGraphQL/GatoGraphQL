@@ -112,13 +112,13 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'locations' => $this->getTranslationAPI()->__('Event\'s locations', 'events'),
-            'categories' => $this->getTranslationAPI()->__('Event\'s categories', 'events'),
-            'dates' => $this->getTranslationAPI()->__('Event\'s dates', 'events'),
-            'times' => $this->getTranslationAPI()->__('Event\'s times', 'events'),
-            'startDateReadable' => $this->getTranslationAPI()->__('Event\'s start date in human-readable format', 'events'),
-            'daterange' => $this->getTranslationAPI()->__('Event\'s date range', 'events'),
-            'daterangetime' => $this->getTranslationAPI()->__('Event\'s date range and time', 'events'),
+            'locations' => $this->translationAPI->__('Event\'s locations', 'events'),
+            'categories' => $this->translationAPI->__('Event\'s categories', 'events'),
+            'dates' => $this->translationAPI->__('Event\'s dates', 'events'),
+            'times' => $this->translationAPI->__('Event\'s times', 'events'),
+            'startDateReadable' => $this->translationAPI->__('Event\'s start date in human-readable format', 'events'),
+            'daterange' => $this->translationAPI->__('Event\'s date range', 'events'),
+            'daterangetime' => $this->translationAPI->__('Event\'s date range and time', 'events'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

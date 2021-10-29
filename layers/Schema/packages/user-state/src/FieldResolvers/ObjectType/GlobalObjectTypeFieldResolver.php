@@ -58,7 +58,7 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'isUserLoggedIn' => $this->getTranslationAPI()->__('Is the user logged-in?', 'user-state'),
+            'isUserLoggedIn' => $this->translationAPI->__('Is the user logged-in?', 'user-state'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -36,7 +36,7 @@ class EnumValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Representation of an Enum value in GraphQL', 'graphql-server');
+        return $this->translationAPI->__('Representation of an Enum value in GraphQL', 'graphql-server');
     }
 
     public function getID(object $object): string | int | null

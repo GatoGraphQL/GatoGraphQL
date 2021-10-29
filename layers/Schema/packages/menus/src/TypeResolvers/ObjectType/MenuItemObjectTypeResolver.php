@@ -37,7 +37,7 @@ class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Items (links, pages, etc) added to a menu', 'menus');
+        return $this->translationAPI->__('Items (links, pages, etc) added to a menu', 'menus');
     }
 
     public function getID(object $object): string | int | null

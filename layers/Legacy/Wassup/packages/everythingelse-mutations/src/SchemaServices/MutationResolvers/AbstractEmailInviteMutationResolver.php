@@ -53,7 +53,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
 
         $emails = $form_data['emails'];
         if (empty($emails)) {
-            $errors[] = $this->getTranslationAPI()->__('Email(s) cannot be empty.', 'pop-coreprocessors');
+            $errors[] = $this->translationAPI->__('Email(s) cannot be empty.', 'pop-coreprocessors');
         }
 
         return $errors;
@@ -76,7 +76,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         $emails = $form_data['emails'];
         if ($invalid_emails = $this->getInvalidEmails($emails)) {
             $warnings[] = sprintf(
-                $this->getTranslationAPI()->__('The following emails are invalid: <strong>%s</strong>', 'pop-coreprocessors'),
+                $this->translationAPI->__('The following emails are invalid: <strong>%s</strong>', 'pop-coreprocessors'),
                 implode(', ', $invalid_emails)
             );
         }

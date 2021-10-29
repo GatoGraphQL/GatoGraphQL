@@ -93,12 +93,12 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'title' => $this->getTranslationAPI()->__('', ''),
-            'excerpt' => $this->getTranslationAPI()->__('', ''),
-            'content' => $this->getTranslationAPI()->__('', ''),
-            'highlightedpost' => $this->getTranslationAPI()->__('', ''),
-            'highlightedPostURL' => $this->getTranslationAPI()->__('', ''),
-            'highlightedpost' => $this->getTranslationAPI()->__('', ''),
+            'title' => $this->translationAPI->__('', ''),
+            'excerpt' => $this->translationAPI->__('', ''),
+            'content' => $this->translationAPI->__('', ''),
+            'highlightedpost' => $this->translationAPI->__('', ''),
+            'highlightedPostURL' => $this->translationAPI->__('', ''),
+            'highlightedpost' => $this->translationAPI->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

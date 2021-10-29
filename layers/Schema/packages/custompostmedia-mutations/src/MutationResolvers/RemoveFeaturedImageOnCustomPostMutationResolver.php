@@ -49,7 +49,7 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
         }
 
         if (!$form_data[MutationInputProperties::CUSTOMPOST_ID]) {
-            $errors[] = $this->getTranslationAPI()->__('The custom post ID is missing.', 'custompostmedia-mutations');
+            $errors[] = $this->translationAPI->__('The custom post ID is missing.', 'custompostmedia-mutations');
         }
         return $errors;
     }

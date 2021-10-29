@@ -95,14 +95,14 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'genericCustomPost' => $this->getTranslationAPI()->__('Custom post with a specific ID', 'generic-customposts'),
-            'genericCustomPostBySlug' => $this->getTranslationAPI()->__('Custom post with a specific slug', 'generic-customposts'),
-            'genericCustomPosts' => $this->getTranslationAPI()->__('Custom posts', 'generic-customposts'),
-            'genericCustomPostCount' => $this->getTranslationAPI()->__('Number of custom posts', 'generic-customposts'),
-            'genericCustomPostForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Custom post with a specific ID', 'generic-customposts'),
-            'genericCustomPostBySlugForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Custom post with a specific slug', 'generic-customposts'),
-            'genericCustomPostsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Custom posts', 'generic-customposts'),
-            'genericCustomPostCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of custom posts', 'generic-customposts'),
+            'genericCustomPost' => $this->translationAPI->__('Custom post with a specific ID', 'generic-customposts'),
+            'genericCustomPostBySlug' => $this->translationAPI->__('Custom post with a specific slug', 'generic-customposts'),
+            'genericCustomPosts' => $this->translationAPI->__('Custom posts', 'generic-customposts'),
+            'genericCustomPostCount' => $this->translationAPI->__('Number of custom posts', 'generic-customposts'),
+            'genericCustomPostForAdmin' => $this->translationAPI->__('[Unrestricted] Custom post with a specific ID', 'generic-customposts'),
+            'genericCustomPostBySlugForAdmin' => $this->translationAPI->__('[Unrestricted] Custom post with a specific slug', 'generic-customposts'),
+            'genericCustomPostsForAdmin' => $this->translationAPI->__('[Unrestricted] Custom posts', 'generic-customposts'),
+            'genericCustomPostCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of custom posts', 'generic-customposts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

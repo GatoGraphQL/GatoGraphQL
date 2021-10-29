@@ -37,7 +37,7 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Obtain properties belonging to the site (name, domain, configuration options, etc)', 'multisite');
+        return $this->translationAPI->__('Obtain properties belonging to the site (name, domain, configuration options, etc)', 'multisite');
     }
 
     public function getID(object $object): string | int | null

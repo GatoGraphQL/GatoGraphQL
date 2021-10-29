@@ -35,6 +35,6 @@ class SaveDefinitionFileMutationResolverBridge extends AbstractSystemComponentMu
 
     public function getSuccessString(string | int $result_id): ?string
     {
-        return $this->getTranslationAPI()->__('System action "save definition file" executed successfully.', 'pop-system');
+        return $this->translationAPI->__('System action "save definition file" executed successfully.', 'pop-system');
     }
 }

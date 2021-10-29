@@ -72,8 +72,8 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'multilayoutKeys' => $this->getTranslationAPI()->__('', ''),
-            'latestcountsTriggerValues' => $this->getTranslationAPI()->__('', ''),
+            'multilayoutKeys' => $this->translationAPI->__('', ''),
+            'latestcountsTriggerValues' => $this->translationAPI->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

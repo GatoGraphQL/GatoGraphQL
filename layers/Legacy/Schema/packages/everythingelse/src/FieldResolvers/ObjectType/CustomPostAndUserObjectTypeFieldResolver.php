@@ -82,8 +82,8 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'hasLocation' => $this->getTranslationAPI()->__('Does the object have location?', 'pop-locations'),
-            'location' => $this->getTranslationAPI()->__('Object\'s location', 'pop-locations'),
+            'hasLocation' => $this->translationAPI->__('Does the object have location?', 'pop-locations'),
+            'location' => $this->translationAPI->__('Object\'s location', 'pop-locations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
