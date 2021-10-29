@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyInstantiatedService
 {
     use BasicServiceTrait;
-    
+
     public function getInstantiationEvent(): string
     {
         return ApplicationEvents::BOOT;

@@ -20,7 +20,7 @@ use WP_Comment;
 class CommentTypeAPI implements CommentTypeAPIInterface
 {
     use WithHooksAPIServiceTrait;
-    
+
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     protected array $cmsToPoPCommentStatusConversion = [

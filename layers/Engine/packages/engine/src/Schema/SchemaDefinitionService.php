@@ -15,10 +15,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 class SchemaDefinitionService implements SchemaDefinitionServiceInterface
 {
     use BasicServiceTrait;
-    
+
     private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
     private ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
-    
+
     public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
     {
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;

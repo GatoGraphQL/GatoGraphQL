@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
 {
     use BasicServiceTrait;
-    
+
     private ?ModuleRegistryInterface $moduleRegistry = null;
 
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void

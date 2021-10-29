@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class QueryParser implements QueryParserInterface
 {
     use BasicServiceTrait;
-    
+
     /**
      * Parse elements by a separator, not failing whenever the separator
      * is also inside the fieldArgs (i.e. inside the brackets "(" and ")")

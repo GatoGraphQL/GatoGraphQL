@@ -14,7 +14,7 @@ use WP_Error;
 class ErrorManager extends AbstractErrorManager
 {
     use BasicServiceTrait;
-    
+
     public function convertFromCMSToPoPError(object $cmsError): Error
     {
         /** @var WP_Error */

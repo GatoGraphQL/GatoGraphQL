@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractSchemaConfigurationExecuter implements SchemaConfigurationExecuterInterface
 {
     use BasicServiceTrait;
-    
+
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?BlockHelpers $blockHelpers = null;
 

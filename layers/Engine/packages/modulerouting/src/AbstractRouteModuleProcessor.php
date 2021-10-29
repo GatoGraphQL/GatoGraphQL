@@ -13,7 +13,7 @@ abstract class AbstractRouteModuleProcessor
 {
     use WithHooksAPIServiceTrait;
     use WithInstanceManagerServiceTrait;
-    
+
     /**
      * @return string[]
      */

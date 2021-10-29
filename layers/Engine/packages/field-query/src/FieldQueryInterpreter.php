@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 {
     use BasicServiceTrait;
-    
+
     // Cache the output from functions
     /**
      * @var array<string, string>

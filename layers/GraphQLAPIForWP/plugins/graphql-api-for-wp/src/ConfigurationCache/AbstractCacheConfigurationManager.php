@@ -20,7 +20,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractCacheConfigurationManager implements CacheConfigurationManagerInterface
 {
     use BasicServiceTrait;
-    
+
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?EndpointHelpers $endpointHelpers = null;
 

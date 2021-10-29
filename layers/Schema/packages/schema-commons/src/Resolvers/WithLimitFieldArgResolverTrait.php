@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 trait WithLimitFieldArgResolverTrait
 {
     // use BasicServiceTrait;
-    
+
     private ?string $limitFilterInputName = null;
 
     /**

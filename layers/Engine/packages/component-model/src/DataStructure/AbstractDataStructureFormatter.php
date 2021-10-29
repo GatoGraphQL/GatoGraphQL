@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractDataStructureFormatter implements DataStructureFormatterInterface
 {
     use BasicServiceTrait;
-    
+
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
 

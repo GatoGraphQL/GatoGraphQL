@@ -11,7 +11,8 @@ use PoPSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractPageObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
-{    
+{
+
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
     private ?PageTypeAPIInterface $pageTypeAPI = null;
 

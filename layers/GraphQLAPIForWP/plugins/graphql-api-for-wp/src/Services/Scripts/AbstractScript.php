@@ -21,7 +21,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
 {
     use BasicServiceTrait;
-    
+
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?GeneralUtils $generalUtils = null;
 

@@ -15,7 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractMenuPageAttacher extends AbstractAutomaticallyInstantiatedService
 {
     use BasicServiceTrait;
-    
+
     abstract public function getMenu(): MenuInterface;
 
     protected function getMenuName(): string

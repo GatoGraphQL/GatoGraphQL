@@ -19,7 +19,7 @@ trait MarkdownContentRetrieverTrait
     {
         return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
     }
-    
+
     /**
      * Make all properties nullable, becase the ModuleRegistry is registered
      * in the SystemContainer, where there are no typeResolvers so it will be null,

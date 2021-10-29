@@ -14,7 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractCheckpointProcessor implements CheckpointProcessorInterface
 {
     use BasicServiceTrait;
-    
+
     /**
      * By default there's no problem
      */

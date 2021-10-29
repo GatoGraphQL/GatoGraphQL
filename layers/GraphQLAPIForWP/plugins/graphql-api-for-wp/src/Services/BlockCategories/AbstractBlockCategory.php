@@ -13,7 +13,7 @@ use WP_Post;
 abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedService implements BlockCategoryInterface
 {
     use BasicServiceTrait;
-    
+
     final public function initialize(): void
     {
         /**

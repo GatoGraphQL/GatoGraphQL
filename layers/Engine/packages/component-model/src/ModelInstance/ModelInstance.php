@@ -16,7 +16,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class ModelInstance implements ModelInstanceInterface
 {
     use BasicServiceTrait;
-    
+
     public const HOOK_COMPONENTS_RESULT = __CLASS__ . ':components:result';
     public const HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE = __CLASS__ . ':componentsFromVars:postOrGetChange';
     public const HOOK_COMPONENTSFROMVARS_RESULT = __CLASS__ . ':componentsFromVars:result';

@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class ErrorHelper implements ErrorHelperInterface
 {
     use BasicServiceTrait;
-    
+
     private ?ErrorManagerInterface $errorManager = null;
 
     public function setErrorManager(ErrorManagerInterface $errorManager): void

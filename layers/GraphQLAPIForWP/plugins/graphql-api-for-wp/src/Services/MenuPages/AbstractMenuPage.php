@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService implements MenuPageInterface
 {
     use BasicServiceTrait;
-    
+
     protected ?string $hookName = null;
 
     private ?MenuPageHelper $menuPageHelper = null;

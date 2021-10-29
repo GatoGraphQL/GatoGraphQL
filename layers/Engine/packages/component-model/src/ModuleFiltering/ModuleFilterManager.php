@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class ModuleFilterManager implements ModuleFilterManagerInterface
 {
     use BasicServiceTrait;
-    
+
     public const URLPARAM_MODULEFILTER = 'modulefilter';
 
     protected ?string $selected_filter_name = null;

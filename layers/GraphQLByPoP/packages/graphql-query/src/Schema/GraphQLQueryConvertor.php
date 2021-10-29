@@ -33,7 +33,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
     use BasicServiceTrait;
-    
+
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?IncludeDirectiveResolver $includeDirectiveResolver = null;

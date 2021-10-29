@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class MarkdownContentParser extends AbstractContentParser implements MarkdownContentParserInterface
 {
     use BasicServiceTrait;
-    
+
     private ?MarkdownConvertorInterface $markdownConvertor = null;
 
     public function setMarkdownConvertor(MarkdownConvertorInterface $markdownConvertor): void

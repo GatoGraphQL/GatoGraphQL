@@ -16,7 +16,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
     use BasicServiceTrait;
-    
+
     private ?MutationResolutionManagerInterface $mutationResolutionManager = null;
 
     public function setMutationResolutionManager(MutationResolutionManagerInterface $mutationResolutionManager): void

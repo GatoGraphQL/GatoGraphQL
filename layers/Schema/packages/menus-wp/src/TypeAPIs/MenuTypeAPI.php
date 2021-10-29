@@ -17,7 +17,7 @@ use WP_Term;
 class MenuTypeAPI implements MenuTypeAPIInterface
 {
     use WithHooksAPIServiceTrait;
-    
+
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     public function getMenu(string | int $menuID): ?object

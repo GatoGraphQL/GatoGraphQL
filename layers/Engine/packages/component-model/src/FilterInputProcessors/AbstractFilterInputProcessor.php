@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractFilterInputProcessor implements FilterInputProcessorInterface
 {
     use BasicServiceTrait;
-    
+
     public function getFilterInputsToProcess(): array
     {
         return [];

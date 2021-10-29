@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 trait SetTagsOnCustomPostObjectTypeFieldResolverTrait
 {
     // use BasicServiceTrait;
-    
+
     protected function getEntityName(): string
     {
         return $this->translationAPI->__('custom post', 'custompost-tag-mutations');

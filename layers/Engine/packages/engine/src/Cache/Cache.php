@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class Cache extends UpstreamCache
 {
     use WithHooksAPIServiceTrait;
-    
+
     #[Required]
     final public function autowireEngineCache(): void
     {

@@ -19,7 +19,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class DataloadHelperService implements DataloadHelperServiceInterface
 {
     use BasicServiceTrait;
-    
+
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;

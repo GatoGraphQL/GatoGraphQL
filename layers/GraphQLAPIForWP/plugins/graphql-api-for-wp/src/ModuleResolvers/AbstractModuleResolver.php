@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractModuleResolver implements ModuleResolverInterface
 {
     use BasicServiceTrait;
-    
+
     private ?ModuleRegistryInterface $moduleRegistry = null;
 
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void

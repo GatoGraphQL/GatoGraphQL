@@ -18,7 +18,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 {
     use BasicServiceTrait;
-    
+
     private ?ErrorHelperInterface $errorHelper = null;
 
     public function setErrorHelper(ErrorHelperInterface $errorHelper): void

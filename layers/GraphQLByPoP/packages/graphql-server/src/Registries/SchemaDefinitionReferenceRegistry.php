@@ -29,7 +29,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegistryInterface
 {
     use BasicServiceTrait;
-    
+
     /**
      * @var array<string, mixed>
      */

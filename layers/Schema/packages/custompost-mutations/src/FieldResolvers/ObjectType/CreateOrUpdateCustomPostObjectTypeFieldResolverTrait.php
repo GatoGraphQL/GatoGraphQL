@@ -18,7 +18,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
 {
     // use BasicServiceTrait;
-    
+
     private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;

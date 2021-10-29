@@ -15,7 +15,7 @@ abstract class AbstractRelationalTypeResolverDecorator implements RelationalType
 {
     use AttachableExtensionTrait;
     use BasicServiceTrait;
-    
+
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
 
     public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void

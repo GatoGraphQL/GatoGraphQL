@@ -13,7 +13,7 @@ use WP_Post;
 abstract class AbstractEndpointAnnotator implements EndpointAnnotatorInterface
 {
     use BasicServiceTrait;
-    
+
     private ?ModuleRegistryInterface $moduleRegistry = null;
 
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void

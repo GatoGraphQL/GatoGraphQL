@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractCustomPostMetaTypeAPI implements CustomPostMetaTypeAPIInterface
 {
     use BasicServiceTrait;
-    
+
     private ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
 
     public function setAllowOrDenySettingsService(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void

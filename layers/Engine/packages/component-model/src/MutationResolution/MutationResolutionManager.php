@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class MutationResolutionManager implements MutationResolutionManagerInterface
 {
     use WithHooksAPIServiceTrait;
-    
+
     /**
      * @var array<string, mixed>
      */

@@ -16,7 +16,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class RequestHelperService implements RequestHelperServiceInterface
 {
     use WithHooksAPIServiceTrait;
-    
+
     public function getCurrentURL(): string
     {
         // Strip the Target and Output off it, users don't need to see those

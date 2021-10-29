@@ -17,7 +17,7 @@ use WP_Post;
 abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostType implements GraphQLEndpointCustomPostTypeInterface
 {
     use WithHooksAPIServiceTrait;
-    
+
     private ?BlockHelpers $blockHelpers = null;
 
     public function setBlockHelpers(BlockHelpers $blockHelpers): void

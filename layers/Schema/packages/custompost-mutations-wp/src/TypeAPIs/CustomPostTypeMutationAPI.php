@@ -18,7 +18,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 {
     use BasicServiceTrait;
-    
+
     private ?ErrorHelperInterface $errorHelper = null;
 
     public function setErrorHelper(ErrorHelperInterface $errorHelper): void

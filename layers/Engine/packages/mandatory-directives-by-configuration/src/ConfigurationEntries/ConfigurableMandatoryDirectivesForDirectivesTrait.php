@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 trait ConfigurableMandatoryDirectivesForDirectivesTrait
 {
     use BasicServiceTrait;
-    
+
     /**
      * Configuration entries
      */

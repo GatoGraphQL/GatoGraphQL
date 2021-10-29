@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractMenu extends AbstractAutomaticallyInstantiatedService implements MenuInterface
 {
     use BasicServiceTrait;
-    
+
     /**
      * Initialize the endpoints
      */

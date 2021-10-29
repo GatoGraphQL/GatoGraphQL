@@ -16,7 +16,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class GraphQLEndpointHandler extends AbstractEndpointHandler
 {
     use BasicServiceTrait;
-    
+
     private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
 
     public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void

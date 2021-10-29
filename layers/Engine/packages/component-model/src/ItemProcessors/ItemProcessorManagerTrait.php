@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 trait ItemProcessorManagerTrait
 {
     use BasicServiceTrait;
-    
+
     /**
      * @var array<string, array>
      */

@@ -16,7 +16,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class UserAuthorization implements UserAuthorizationInterface
 {
     use BasicServiceTrait;
-    
+
     private ?UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry = null;
 
     public function setUserAuthorizationSchemeRegistry(UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry): void

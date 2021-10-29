@@ -14,7 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorInterface
 {
     use BasicServiceTrait;
-    
+
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?BlockHelpers $blockHelpers = null;
 

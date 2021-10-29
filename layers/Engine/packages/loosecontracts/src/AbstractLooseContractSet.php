@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractLooseContractSet extends AbstractAutomaticallyInstantiatedService
 {
     use WithInstanceManagerServiceTrait;
-    
+
     private ?LooseContractManagerInterface $looseContractManager = null;
 
     public function setLooseContractManager(LooseContractManagerInterface $looseContractManager): void

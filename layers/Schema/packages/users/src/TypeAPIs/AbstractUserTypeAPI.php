@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
 {
     use BasicServiceTrait;
-    
+
     private ?CMSHelperServiceInterface $cmsHelperService = null;
 
     public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void

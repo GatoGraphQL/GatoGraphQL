@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class ErrorProvider implements ErrorProviderInterface
 {
     use BasicServiceTrait;
-    
+
     /**
      * @param array<string, mixed>|null $data
      * @param Error[]|null $nestedErrors

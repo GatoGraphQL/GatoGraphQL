@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractModuleFilter implements ModuleFilterInterface
 {
     use BasicServiceTrait;
-    
+
     private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
     public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void

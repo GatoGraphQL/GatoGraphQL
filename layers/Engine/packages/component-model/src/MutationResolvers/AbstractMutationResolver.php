@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractMutationResolver implements MutationResolverInterface
 {
     use BasicServiceTrait;
-    
+
     public function validateErrors(array $form_data): array
     {
         return [];

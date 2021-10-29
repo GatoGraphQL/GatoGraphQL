@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoaderInterface
 {
     use BasicServiceTrait;
-    
+
     private ?NameResolverInterface $nameResolver = null;
 
     public function setNameResolver(NameResolverInterface $nameResolver): void

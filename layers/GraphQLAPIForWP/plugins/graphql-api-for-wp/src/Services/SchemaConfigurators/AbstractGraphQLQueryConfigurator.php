@@ -17,7 +17,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInterface
 {
     use BasicServiceTrait;
-    
+
     /**
      * Keep a map of all namespaced type names to their resolver classes
      * @var array<string, array>|null

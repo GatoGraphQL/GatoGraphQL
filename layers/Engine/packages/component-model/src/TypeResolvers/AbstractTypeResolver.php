@@ -14,7 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractTypeResolver implements TypeResolverInterface
 {
     use BasicServiceTrait;
-    
+
     /**
      * @var array<string, array>
      */
