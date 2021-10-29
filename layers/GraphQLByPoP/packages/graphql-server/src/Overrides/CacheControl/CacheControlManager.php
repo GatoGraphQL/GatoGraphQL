@@ -11,6 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class CacheControlManager extends UpstreamCacheControlManager
 {
     protected ?array $overriddenFieldEntries = null;
+
     protected MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator;
 
     #[Required]
