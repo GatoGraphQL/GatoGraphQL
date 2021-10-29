@@ -37,7 +37,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
-        return $this->userSettingsManager ??= $this->instanceManager->getInstance(UserSettingsManagerInterface::class);
+        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -83,7 +83,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         $this->userAuthorization = $userAuthorization;
         $this->cptUtils = $cptUtils;
         $this->pluginMenu = $pluginMenu;
-        $this->getUserSettingsManager() = UserSettingsManagerFacade::getInstance();
     }
     /**
      * Add the hook to initialize the different post types

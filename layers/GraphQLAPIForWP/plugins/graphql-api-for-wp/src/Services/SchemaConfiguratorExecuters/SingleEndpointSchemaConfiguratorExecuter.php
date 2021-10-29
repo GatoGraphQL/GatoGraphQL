@@ -28,7 +28,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     }
     protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
-        return $this->userSettingsManager ??= $this->instanceManager->getInstance(UserSettingsManagerInterface::class);
+        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -64,7 +64,6 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
         $this->moduleRegistry = $moduleRegistry;
         $this->endpointSchemaConfigurator = $endpointSchemaConfigurator;
         $this->graphQLEndpointHandler = $graphQLEndpointHandler;
-        $this->getUserSettingsManager() = UserSettingsManagerFacade::getInstance();
     }
 
     /**

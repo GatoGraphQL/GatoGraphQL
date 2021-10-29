@@ -25,7 +25,7 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
     }
     protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
-        return $this->userSettingsManager ??= $this->instanceManager->getInstance(UserSettingsManagerInterface::class);
+        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }
     public function setEndpointSchemaConfigurationBlock(EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock): void
     {
@@ -41,7 +41,6 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
         EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
     ): void {
         $this->endpointSchemaConfigurationBlock = $endpointSchemaConfigurationBlock;
-        $this->getUserSettingsManager() = UserSettingsManagerFacade::getInstance();
     }
 
     /**

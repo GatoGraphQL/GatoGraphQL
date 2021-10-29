@@ -20,13 +20,7 @@ class ModuleRegistry implements ModuleRegistryInterface
     }
     protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
-        return $this->userSettingsManager ??= $this->instanceManager->getInstance(UserSettingsManagerInterface::class);
-    }
-
-    //#[Required]
-    final public function autowireModuleRegistry(): void
-    {
-        $this->getUserSettingsManager() = UserSettingsManagerFacade::getInstance();
+        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }
 
     /**

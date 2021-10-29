@@ -32,7 +32,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     }
     protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
-        return $this->userSettingsManager ??= $this->instanceManager->getInstance(UserSettingsManagerInterface::class);
+        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -48,7 +48,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         ModuleRegistryInterface $moduleRegistry,
     ): void {
         $this->moduleRegistry = $moduleRegistry;
-        $this->getUserSettingsManager() = UserSettingsManagerFacade::getInstance();
     }
 
     public function getMenuPageSlug(): string
