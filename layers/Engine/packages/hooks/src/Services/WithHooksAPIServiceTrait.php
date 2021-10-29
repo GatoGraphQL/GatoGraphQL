@@ -16,8 +16,4 @@ trait WithHooksAPIServiceTrait
     {
         $this->hooksAPI = $hooksAPI;
     }
-    protected function getHooksAPI(): HooksAPIInterface
-    {
-        return $this->hooksAPI;
-    }
 }
