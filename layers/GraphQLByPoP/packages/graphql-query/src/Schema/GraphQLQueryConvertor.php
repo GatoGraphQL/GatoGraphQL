@@ -23,7 +23,7 @@ use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
 use InvalidArgumentException;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
@@ -32,7 +32,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;

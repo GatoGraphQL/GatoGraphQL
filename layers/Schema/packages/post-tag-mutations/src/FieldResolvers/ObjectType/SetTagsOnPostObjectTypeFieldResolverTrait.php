@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PostTagMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
@@ -14,7 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait SetTagsOnPostObjectTypeFieldResolverTrait
 {
-    // use WithInstanceManagerServiceTrait;
+    // use BasicServiceTrait;
 
     protected ?PostObjectTypeResolver $postObjectTypeResolver = null;
     protected ?SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver = null;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
@@ -16,7 +16,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
 {
-    // use WithInstanceManagerServiceTrait;
+    // use BasicServiceTrait;
     
     protected ?HooksAPIInterface $hooksAPI = null;
     protected ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;

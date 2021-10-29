@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\FieldQuery;
 
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\QueryParsing\QueryParserInterface;
 use PoP\Translation\TranslationAPIInterface;
 use stdClass;
@@ -12,7 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     // Cache the output from functions
     /**

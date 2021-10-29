@@ -8,12 +8,12 @@ use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     protected ?ModuleRegistryInterface $moduleRegistry = null;
 

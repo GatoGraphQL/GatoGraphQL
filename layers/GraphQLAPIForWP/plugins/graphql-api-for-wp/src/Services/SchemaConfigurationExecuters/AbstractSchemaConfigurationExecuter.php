@@ -8,12 +8,12 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractSchemaConfigurationExecuter implements SchemaConfigurationExecuterInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     protected ?ModuleRegistryInterface $moduleRegistry = null;
     protected ?BlockHelpers $blockHelpers = null;

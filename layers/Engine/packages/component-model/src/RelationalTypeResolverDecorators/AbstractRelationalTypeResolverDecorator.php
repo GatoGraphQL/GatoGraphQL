@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\RelationalTypeResolverDecorators;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -15,7 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractRelationalTypeResolverDecorator implements RelationalTypeResolverDecoratorInterface
 {
     use AttachableExtensionTrait;
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
 

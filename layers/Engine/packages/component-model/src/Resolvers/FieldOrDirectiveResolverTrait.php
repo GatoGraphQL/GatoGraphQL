@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Resolvers;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -15,7 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 trait FieldOrDirectiveResolverTrait
 {
     use FieldOrDirectiveSchemaDefinitionResolverTrait;
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
 
     /**
      * @var array<array|null>

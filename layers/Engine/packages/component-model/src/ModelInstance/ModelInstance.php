@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModelInstance;
 
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Definitions\DefinitionManagerInterface;
 use PoP\Hooks\HooksAPIInterface;
@@ -14,7 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ModelInstance implements ModelInstanceInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     public const HOOK_COMPONENTS_RESULT = __CLASS__ . ':components:result';
     public const HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE = __CLASS__ . ':componentsFromVars:postOrGetChange';

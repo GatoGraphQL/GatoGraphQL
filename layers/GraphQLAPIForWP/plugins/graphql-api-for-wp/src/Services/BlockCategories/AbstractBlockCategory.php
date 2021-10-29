@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use Symfony\Contracts\Service\Attribute\Required;
 use WP_Block_Editor_Context;
@@ -13,7 +13,7 @@ use WP_Post;
 
 abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedService implements BlockCategoryInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     final public function initialize(): void
     {

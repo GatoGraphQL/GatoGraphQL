@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractMutationResolver implements MutationResolverInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     protected ?HooksAPIInterface $hooksAPI = null;
 

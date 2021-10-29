@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ErrorHandling;
 
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Translation\TranslationAPIInterface;
 use stdClass;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class ErrorProvider implements ErrorProviderInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     /**
      * @param array<string, mixed>|null $data

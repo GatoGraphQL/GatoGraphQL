@@ -19,7 +19,7 @@ use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Definitions\Configuration\Request;
@@ -32,7 +32,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 {
     use ModulePathProcessorTrait;
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
 
     public const HOOK_INIT_MODEL_PROPS = __CLASS__ . ':initModelProps';
     public const HOOK_INIT_REQUEST_PROPS = __CLASS__ . ':initRequestProps';

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -13,7 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait RolesObjectTypeFieldResolverTrait
 {
-    // use WithInstanceManagerServiceTrait;
+    // use BasicServiceTrait;
 
     public function getFieldNamesToResolve(): array
     {

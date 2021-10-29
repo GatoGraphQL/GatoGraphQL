@@ -11,14 +11,14 @@ use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     protected ?HooksAPIInterface $hooksAPI = null;
     protected ?MutationResolutionManagerInterface $mutationResolutionManager = null;

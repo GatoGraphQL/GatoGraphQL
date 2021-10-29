@@ -8,7 +8,7 @@ use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
-trait WithInstanceManagerServiceTrait
+trait BasicServiceTrait
 {
     protected InstanceManagerInterface $instanceManager;
     protected TranslationAPIInterface $translationAPI;

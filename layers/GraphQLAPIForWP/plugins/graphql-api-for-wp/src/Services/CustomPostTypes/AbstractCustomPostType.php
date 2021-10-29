@@ -14,7 +14,7 @@ use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -23,7 +23,7 @@ use WP_Post;
 
 abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedService implements CustomPostTypeInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     protected ?UserSettingsManagerInterface $userSettingsManager = null;
     protected ?ModuleRegistryInterface $moduleRegistry = null;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategoryMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
@@ -16,7 +16,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait SetCategoriesOnPostObjectTypeFieldResolverTrait
 {
-    // use WithInstanceManagerServiceTrait;
+    // use BasicServiceTrait;
 
     protected ?PostObjectTypeResolver $postObjectTypeResolver = null;
     protected ?SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver = null;

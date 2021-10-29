@@ -14,7 +14,7 @@ use PoP\API\Schema\QuerySyntax as APIQuerySyntax;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax as FieldQueryQuerySyntax;
 
@@ -25,7 +25,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FieldQueryConvertor implements FieldQueryConvertorInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     // Cache the output from functions
     /**

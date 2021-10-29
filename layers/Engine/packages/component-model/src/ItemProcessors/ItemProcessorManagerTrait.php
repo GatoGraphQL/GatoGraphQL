@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ItemProcessors;
 
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait ItemProcessorManagerTrait
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     /**
      * @var array<string, array>

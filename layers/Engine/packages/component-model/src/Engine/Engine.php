@@ -37,7 +37,7 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -51,7 +51,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class Engine implements EngineInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     public const CACHETYPE_IMMUTABLEDATASETSETTINGS = 'static-datasetsettings';
     public const CACHETYPE_STATICDATAPROPERTIES = 'static-data-properties';

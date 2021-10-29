@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\MutationResolvers;
 
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait ValidateUserLoggedInMutationResolverTrait
 {
-    // use WithInstanceManagerServiceTrait;
+    // use BasicServiceTrait;
 
     /**
      * Check that the user is logged-in

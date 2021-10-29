@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoP\QueryParsing;
 
 use Exception;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class QueryParser implements QueryParserInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     /**
      * Parse elements by a separator, not failing whenever the separator

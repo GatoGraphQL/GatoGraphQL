@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\Resolvers;
 
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait WithLimitFieldArgResolverTrait
 {
-    // use WithInstanceManagerServiceTrait;
+    // use BasicServiceTrait;
     
     private ?string $limitFilterInputName = null;
 

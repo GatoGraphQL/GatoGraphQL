@@ -21,7 +21,7 @@ use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
@@ -30,7 +30,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegistryInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     /**
      * @var array<string, mixed>

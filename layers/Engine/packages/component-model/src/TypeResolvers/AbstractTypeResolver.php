@@ -8,7 +8,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -16,7 +16,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractTypeResolver implements TypeResolverInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     /**
      * @var array<string, array>

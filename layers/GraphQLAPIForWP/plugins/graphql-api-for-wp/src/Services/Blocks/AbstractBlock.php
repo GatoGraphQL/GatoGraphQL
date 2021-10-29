@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\Services\EditorScripts\HasDocumentationScriptTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -28,7 +28,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService implements BlockInterface
 {
     use HasDocumentationScriptTrait;
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
 
     protected ?ModuleRegistryInterface $moduleRegistry = null;
     protected ?UserAuthorizationInterface $userAuthorization = null;

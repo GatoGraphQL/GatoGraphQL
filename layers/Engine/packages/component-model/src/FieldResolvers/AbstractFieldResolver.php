@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractFieldResolver implements FieldResolverInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     protected ?HooksAPIInterface $hooksAPI = null;
 

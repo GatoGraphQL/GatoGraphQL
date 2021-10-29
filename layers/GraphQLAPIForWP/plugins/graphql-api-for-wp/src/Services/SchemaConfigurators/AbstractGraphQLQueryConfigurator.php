@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -18,7 +18,7 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     /**
      * Keep a map of all namespaced type names to their resolver classes

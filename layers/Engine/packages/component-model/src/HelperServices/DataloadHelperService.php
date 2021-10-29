@@ -9,7 +9,7 @@ use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
@@ -18,7 +18,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class DataloadHelperService implements DataloadHelperServiceInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;

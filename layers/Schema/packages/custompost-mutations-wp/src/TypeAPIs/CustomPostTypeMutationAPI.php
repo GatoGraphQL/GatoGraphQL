@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\ErrorHandling\ErrorHelperInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
@@ -17,7 +17,7 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     protected ?ErrorHelperInterface $errorHelper = null;
 

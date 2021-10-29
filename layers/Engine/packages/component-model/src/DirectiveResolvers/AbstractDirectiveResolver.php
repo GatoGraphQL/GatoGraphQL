@@ -20,7 +20,7 @@ use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
@@ -41,7 +41,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     use RemoveIDsDataFieldsDirectiveResolverTrait;
     use FieldOrDirectiveResolverTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
 
     const MESSAGE_EXPRESSIONS = 'expressions';
 

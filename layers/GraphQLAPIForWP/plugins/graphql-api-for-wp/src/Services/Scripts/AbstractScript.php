@@ -8,7 +8,7 @@ use Error;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -21,7 +21,7 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     protected ?ModuleRegistryInterface $moduleRegistry = null;
     protected ?GeneralUtils $generalUtils = null;

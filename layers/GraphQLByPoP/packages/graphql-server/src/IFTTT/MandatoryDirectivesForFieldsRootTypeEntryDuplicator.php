@@ -8,14 +8,14 @@ use GraphQLByPoP\GraphQLServer\Helpers\TypeResolverHelperInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     protected ?RootObjectTypeResolver $rootObjectTypeResolver = null;
     protected ?TypeResolverHelperInterface $typeResolverHelper = null;

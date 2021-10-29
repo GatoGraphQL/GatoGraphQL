@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\EngineWP\ErrorHandling;
 
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\ErrorHandling\AbstractErrorManager;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -13,7 +13,7 @@ use WP_Error;
 
 class ErrorManager extends AbstractErrorManager
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     public function convertFromCMSToPoPError(object $cmsError): Error
     {

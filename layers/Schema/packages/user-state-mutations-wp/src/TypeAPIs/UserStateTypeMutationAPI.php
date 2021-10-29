@@ -6,7 +6,7 @@ namespace PoPSchema\UserStateMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\ErrorHandling\ErrorHelperInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
@@ -17,7 +17,7 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     protected ?ErrorHelperInterface $errorHelper = null;
 

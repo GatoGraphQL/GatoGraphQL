@@ -6,12 +6,12 @@ namespace PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait ConfigurableMandatoryDirectivesForDirectivesTrait
 {
-    use WithInstanceManagerServiceTrait;
+    use BasicServiceTrait;
     
     /**
      * Configuration entries
