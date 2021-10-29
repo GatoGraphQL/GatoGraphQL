@@ -113,7 +113,7 @@ class Schema
     public function getSubscriptionRootObjectTypeID(): ?string
     {
         $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
-        if ($subscriptionRootTypeResolver = $graphQLSchemaDefinitionService->getSubscriptionRootTypeResolver()) {
+        if ($subscriptionRootTypeResolver = $graphQLSchemaDefinitionService->getSchemaSubscriptionRootTypeResolver()) {
             return $this->getObjectTypeID($subscriptionRootTypeResolver);
         }
         return null;

@@ -11,5 +11,5 @@ interface GraphQLSchemaDefinitionServiceInterface extends SchemaDefinitionServic
 {
     public function getSchemaQueryRootObjectTypeResolver(): ObjectTypeResolverInterface;
     public function getSchemaMutationRootObjectTypeResolver(): ?ObjectTypeResolverInterface;
-    public function getSubscriptionRootTypeResolver(): ?ObjectTypeResolverInterface;
+    public function getSchemaSubscriptionRootTypeResolver(): ?ObjectTypeResolverInterface;
 }

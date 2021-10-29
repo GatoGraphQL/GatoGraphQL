@@ -75,7 +75,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     /**
      * @todo Implement
      */
-    public function getSubscriptionRootTypeResolver(): ?ObjectTypeResolverInterface
+    public function getSchemaSubscriptionRootTypeResolver(): ?ObjectTypeResolverInterface
     {
         return null;
     }
