@@ -329,7 +329,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         /** @var GenericCustomPostObjectTypeResolver */
         $genericCustomPostObjectTypeResolver = $this->genericCustomPostObjectTypeResolver;
         /** @var MediaObjectTypeResolver */
-        $mediaObjectTypeResolver = $this->getMediaTypeResolver();
+        $mediaObjectTypeResolver = $this->getMediaObjectTypeResolver();
         /** @var PageObjectTypeResolver */
         $pageObjectTypeResolver = $this->pageObjectTypeResolver;
         /** @var PostTagObjectTypeResolver */

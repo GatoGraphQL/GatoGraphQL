@@ -106,7 +106,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         }
         return sprintf(
             $this->translationAPI->__('The ID of the featured image (of type %s)', 'custompost-mutations'),
-            $this->getMediaTypeResolver()->getMaybeNamespacedTypeName()
+            $this->getMediaObjectTypeResolver()->getMaybeNamespacedTypeName()
         );
     }
 

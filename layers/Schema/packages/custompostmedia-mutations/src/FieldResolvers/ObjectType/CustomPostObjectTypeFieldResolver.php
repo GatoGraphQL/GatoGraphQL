@@ -132,7 +132,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ([$fieldName => $fieldArgName]) {
             ['setFeaturedImage' => MutationInputProperties::MEDIA_ITEM_ID] => sprintf(
                 $this->translationAPI->__('The ID of the featured image, of type \'%s\'', 'custompostmedia-mutations'),
-                $this->getMediaTypeResolver()->getTypeName()
+                $this->getMediaObjectTypeResolver()->getTypeName()
             ),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
