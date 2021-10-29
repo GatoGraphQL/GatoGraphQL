@@ -56,6 +56,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @var array<string, array<string, DirectiveResolverInterface>>
      */
     private array $directiveResolverInstanceCache = [];
+    
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
     protected ErrorProviderInterface $errorProvider;

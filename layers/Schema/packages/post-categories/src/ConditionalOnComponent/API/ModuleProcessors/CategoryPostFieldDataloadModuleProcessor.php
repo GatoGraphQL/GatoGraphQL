@@ -19,6 +19,7 @@ class CategoryPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDa
     use QueriedDBObjectModuleProcessorTrait;
 
     public const MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST = 'dataload-relationalfields-categorypostlist';
+    
     protected PostObjectTypeResolver $postObjectTypeResolver;
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 

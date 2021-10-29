@@ -26,6 +26,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     public const HOOK_EXECUTE_CREATE = __CLASS__ . ':execute-create';
     public const HOOK_EXECUTE_UPDATE = __CLASS__ . ':execute-update';
     public const HOOK_VALIDATE_CONTENT = __CLASS__ . ':validate-content';
+    
     protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
     protected NameResolverInterface $nameResolver;
     protected UserRoleTypeAPIInterface $userRoleTypeAPI;

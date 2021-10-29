@@ -13,6 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdateProfileMutationResolverBridge
 {
     use CreateUpdateProfileMutationResolverBridgeTrait;
+    
     protected CreateUpdateOrganizationProfileMutationResolver $createUpdateOrganizationProfileMutationResolver;
     
     #[Required]

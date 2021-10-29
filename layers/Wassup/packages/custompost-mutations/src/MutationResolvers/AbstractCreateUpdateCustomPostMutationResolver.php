@@ -15,6 +15,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 {
     public const VALIDATECATEGORIESTYPE_ATLEASTONE = 1;
     public const VALIDATECATEGORIESTYPE_EXACTLYONE = 2;
+
     protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
 
     #[Required]

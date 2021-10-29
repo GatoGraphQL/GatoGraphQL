@@ -22,6 +22,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
      * @var string[]
      */
     protected array $objectTypeResolverMandatoryFields;
+    
     protected MutationRootTypeDataLoader $mutationRootTypeDataLoader;
 
     #[Required]

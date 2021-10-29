@@ -19,6 +19,7 @@ abstract class AbstractContentParser implements ContentParserInterface
 
     protected string $baseDir = '';
     protected string $baseURL = '';
+    
     protected RequestHelperServiceInterface $requestHelperService;
     protected LocaleHelper $localeHelper;
 

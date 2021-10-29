@@ -15,6 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class ModelInstanceHookSet extends AbstractHookSet
 {
     public const HOOK_VARY_MODEL_INSTANCE_BY_CATEGORY = __CLASS__ . ':vary-model-instance-by-category';
+    
     protected PostTypeAPIInterface $postTypeAPI;
     protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
 

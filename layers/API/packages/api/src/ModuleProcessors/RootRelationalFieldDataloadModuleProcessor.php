@@ -12,6 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
     public const MODULE_DATALOAD_RELATIONALFIELDS_ROOT = 'dataload-relationalfields-root';
+    
     protected SchemaDefinitionServiceInterface $schemaDefinitionService;
 
     #[Required]
