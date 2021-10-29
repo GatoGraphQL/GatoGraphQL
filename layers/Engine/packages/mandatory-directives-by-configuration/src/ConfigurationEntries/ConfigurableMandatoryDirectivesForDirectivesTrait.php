@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 

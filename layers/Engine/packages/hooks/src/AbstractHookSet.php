@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Hooks;
 
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
-use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractHookSet extends AbstractAutomaticallyInstantiatedService

@@ -96,9 +96,6 @@ services:
     PoP\ComponentModel\ModulePath\ModulePathHelpersInterface:
         class: \PoP\ComponentModel\ModulePath\ModulePathHelpers
 
-    PoP\ComponentModel\Instances\InstanceManagerInterface:
-        class: \PoP\ComponentModel\Instances\InstanceManager
-
     PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface:
         class: \PoP\ComponentModel\ModuleProcessors\ModuleProcessorManager
 

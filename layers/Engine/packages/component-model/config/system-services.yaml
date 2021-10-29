@@ -6,6 +6,3 @@ services:
 
     PoP\ComponentModel\Container\CompilerPasses\:
         resource: '../src/Container/CompilerPasses/*'
-
-    PoP\ComponentModel\Instances\InstanceManagerInterface:
-        class: \PoP\ComponentModel\Instances\SystemInstanceManager

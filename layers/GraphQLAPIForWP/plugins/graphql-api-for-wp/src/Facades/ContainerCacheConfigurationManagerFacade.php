@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\ManageOptionsUserAut
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
-use PoP\ComponentModel\Instances\InstanceManager;
+use PoP\Root\Instances\InstanceManager;
 
 /**
  * Obtain an instance of the ContainerCacheConfigurationManager.

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Services;
+namespace PoP\Root\Services;
 
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\Root\Instances\InstanceManagerInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait WithInstanceManagerServiceTrait

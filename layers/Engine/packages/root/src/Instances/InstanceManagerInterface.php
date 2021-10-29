@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Instances;
+namespace PoP\Root\Instances;
 
 interface InstanceManagerInterface
 {
