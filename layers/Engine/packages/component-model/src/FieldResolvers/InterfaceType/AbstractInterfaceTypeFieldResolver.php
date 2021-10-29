@@ -52,6 +52,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      * @var InterfaceTypeResolverInterface[]|null
      */
     protected ?array $partiallyImplementedInterfaceTypeResolvers = null;
+
     protected NameResolverInterface $nameResolver;
     protected CMSServiceInterface $cmsService;
     protected SchemaNamespacingServiceInterface $schemaNamespacingService;
