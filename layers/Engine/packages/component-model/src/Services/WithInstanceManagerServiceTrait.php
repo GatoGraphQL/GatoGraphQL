@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Services;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
-trait WithInstanceManagerTrait
+trait WithInstanceManagerServiceTrait
 {
     protected InstanceManagerInterface $instanceManager;
 
