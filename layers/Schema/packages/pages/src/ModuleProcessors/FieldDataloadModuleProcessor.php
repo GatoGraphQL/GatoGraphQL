@@ -15,7 +15,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     use QueriedDBObjectModuleProcessorTrait;
 
     public const MODULE_DATALOAD_RELATIONALFIELDS_PAGE = 'dataload-relationalfields-page';
-    
+
     protected PageObjectTypeResolver $pageObjectTypeResolver;
 
     #[Required]

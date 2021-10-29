@@ -19,7 +19,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      * @var array<string, array>
      */
     protected ?array $schemaDefinition = null;
-    
+
     protected TranslationAPIInterface $translationAPI;
     protected HooksAPIInterface $hooksAPI;
     protected InstanceManagerInterface $instanceManager;

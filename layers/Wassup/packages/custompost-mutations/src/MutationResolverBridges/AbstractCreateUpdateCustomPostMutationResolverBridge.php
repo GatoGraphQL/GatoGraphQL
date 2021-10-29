@@ -17,7 +17,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends AbstractCRUDComponentMutationResolverBridge
 {
     public const HOOK_FORM_DATA_CREATE_OR_UPDATE = __CLASS__ . ':form-data-create-or-update';
-    
+
     protected CustomPostTypeAPIInterface $customPostTypeAPI;
 
     #[Required]

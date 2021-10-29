@@ -57,7 +57,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 
     public const ALIAS_POSITION_KEY = 'pos';
     public const ALIAS_LENGTH_KEY = 'length';
-    
+
     protected TranslationAPIInterface $translationAPI;
     protected FeedbackMessageStoreInterface $feedbackMessageStore;
     protected QueryParserInterface $queryParser;

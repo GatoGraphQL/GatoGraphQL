@@ -16,7 +16,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
     public const MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST = 'dataload-relationalfields-authorcustompostlist';
-    
+
     protected CustomPostObjectTypeResolver $customPostObjectTypeResolver;
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 

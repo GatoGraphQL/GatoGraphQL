@@ -19,7 +19,7 @@ use WP_Taxonomy;
 abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
-    
+
     protected HooksAPIInterface $hooksAPI;
     protected CMSHelperServiceInterface $cmsHelperService;
 

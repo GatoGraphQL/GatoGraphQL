@@ -16,7 +16,7 @@ use WP_Term;
 class MenuTypeAPI implements MenuTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
-    
+
     protected HooksAPIInterface $hooksAPI;
 
     #[Required]

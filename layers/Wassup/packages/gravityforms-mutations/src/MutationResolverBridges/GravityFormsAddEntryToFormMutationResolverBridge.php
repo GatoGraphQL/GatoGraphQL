@@ -16,7 +16,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
     public const HOOK_FORM_FIELDNAMES = __CLASS__ . ':form-fieldnames';
-    
+
     protected UserTypeAPIInterface $userTypeAPI;
     protected GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver;
 
@@ -28,7 +28,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         $this->userTypeAPI = $userTypeAPI;
         $this->gravityFormsAddEntryToFormMutationResolver = $gravityFormsAddEntryToFormMutationResolver;
     }
-    
+
     #[Required]
     final public function autowireGravityFormsAddEntryToFormMutationResolverBridgeLogic()
     {

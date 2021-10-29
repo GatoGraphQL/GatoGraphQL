@@ -26,7 +26,7 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
     public const MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTCOUNT = 'dataload-relationalfields-custompostcount';
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST = 'dataload-relationalfields-admincustompostlist';
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTCOUNT = 'dataload-relationalfields-admincustompostcount';
-    
+
     protected CustomPostUnionTypeResolver $customPostUnionTypeResolver;
     protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 

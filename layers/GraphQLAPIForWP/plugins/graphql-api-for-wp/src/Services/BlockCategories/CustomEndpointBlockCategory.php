@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class CustomEndpointBlockCategory extends AbstractBlockCategory
 {
     public const CUSTOM_ENDPOINT_BLOCK_CATEGORY = 'graphql-api-endpoint';
-    
+
     protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
 
     #[Required]

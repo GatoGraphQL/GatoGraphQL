@@ -30,7 +30,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
      * @var array<string, mixed>
      */
     protected ?array $safeVars = null;
-    
+
     protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
     protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
     protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;

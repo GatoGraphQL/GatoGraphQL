@@ -14,7 +14,7 @@ class AccessControlManager extends UpstreamAccessControlManager
      * @var array<string, array>
      */
     protected array $overriddenFieldEntries = [];
-    
+
     protected MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator;
 
     #[Required]
