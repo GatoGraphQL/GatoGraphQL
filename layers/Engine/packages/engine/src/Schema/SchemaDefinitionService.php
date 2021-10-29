@@ -23,7 +23,7 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
     {
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
     }
-    protected function getRootObjectTypeResolver(): RootObjectTypeResolver
+    public function getRootObjectTypeResolver(): RootObjectTypeResolver
     {
         return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
     }
