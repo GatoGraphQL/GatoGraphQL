@@ -15,7 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
     private ?CustomEndpointVoyagerClient $customEndpointVoyagerClient = null;
-    private ?VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter = null;
+    private ?VoyagerClientEndpointAnnotator $voyagerClientEndpointAnnotator = null;
 
     public function setCustomEndpointVoyagerClient(CustomEndpointVoyagerClient $customEndpointVoyagerClient): void
     {
@@ -25,22 +25,22 @@ class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter imple
     {
         return $this->customEndpointVoyagerClient ??= $this->instanceManager->getInstance(CustomEndpointVoyagerClient::class);
     }
-    public function setVoyagerClientEndpointAnnotator(VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter): void
+    public function setVoyagerClientEndpointAnnotator(VoyagerClientEndpointAnnotator $voyagerClientEndpointAnnotator): void
     {
-        $this->voyagerClientEndpointExecuter = $voyagerClientEndpointExecuter;
+        $this->voyagerClientEndpointAnnotator = $voyagerClientEndpointAnnotator;
     }
     protected function getVoyagerClientEndpointAnnotator(): VoyagerClientEndpointAnnotator
     {
-        return $this->voyagerClientEndpointExecuter ??= $this->instanceManager->getInstance(VoyagerClientEndpointAnnotator::class);
+        return $this->voyagerClientEndpointAnnotator ??= $this->instanceManager->getInstance(VoyagerClientEndpointAnnotator::class);
     }
 
     //#[Required]
     final public function autowireVoyagerClientEndpointExecuter(
         CustomEndpointVoyagerClient $customEndpointVoyagerClient,
-        VoyagerClientEndpointAnnotator $voyagerClientEndpointExecuter,
+        VoyagerClientEndpointAnnotator $voyagerClientEndpointAnnotator,
     ): void {
         $this->customEndpointVoyagerClient = $customEndpointVoyagerClient;
-        $this->voyagerClientEndpointExecuter = $voyagerClientEndpointExecuter;
+        $this->voyagerClientEndpointAnnotator = $voyagerClientEndpointAnnotator;
     }
 
     public function getEnablingModule(): ?string
@@ -60,6 +60,6 @@ class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter imple
 
     protected function getClientEndpointAnnotator(): ClientEndpointAnnotatorInterface
     {
-        return $this->getVoyagerClientEndpointExecuter();
+        return $this->getVoyagerClientEndpointAnnotator();
     }
 }
