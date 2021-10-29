@@ -51,17 +51,6 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAddCommentToCustomPostMutationResolver(
-        CommentTypeAPIInterface $commentTypeAPI,
-        CommentTypeMutationAPIInterface $commentTypeMutationAPI,
-        UserTypeAPIInterface $userTypeAPI,
-    ): void {
-        $this->commentTypeAPI = $commentTypeAPI;
-        $this->commentTypeMutationAPI = $commentTypeMutationAPI;
-        $this->userTypeAPI = $userTypeAPI;
-    }
-
     public function validateErrors(array $form_data): array
     {
         $errors = [];

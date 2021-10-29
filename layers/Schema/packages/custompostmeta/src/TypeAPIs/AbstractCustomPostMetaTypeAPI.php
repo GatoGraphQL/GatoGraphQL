@@ -24,12 +24,6 @@ abstract class AbstractCustomPostMetaTypeAPI implements CustomPostMetaTypeAPIInt
         return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractCustomPostMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
-    {
-        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
-    }
-
     final public function getCustomPostMeta(string | int $customPostID, string $key, bool $single = false): mixed
     {
         /**

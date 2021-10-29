@@ -33,15 +33,6 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
         return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
     }
 
-    //#[Required]
-    final public function autowireCustomEndpointGraphQLQueryResolutionEndpointExecuter(
-        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-        QueryRetrieverInterface $queryRetriever,
-    ): void {
-        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
-        $this->queryRetriever = $queryRetriever;
-    }
-
     public function getEnablingModule(): ?string
     {
         return EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS;

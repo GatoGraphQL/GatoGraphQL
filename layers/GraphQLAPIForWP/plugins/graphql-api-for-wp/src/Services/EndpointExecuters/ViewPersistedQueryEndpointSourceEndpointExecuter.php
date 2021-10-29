@@ -63,21 +63,6 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
         return $this->persistedQueryEndpointGraphiQLBlock ??= $this->instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
     }
 
-    //#[Required]
-    final public function autowireViewPersistedQueryEndpointSourceEndpointExecuter(
-        GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
-        UserAuthorizationInterface $userAuthorization,
-        GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers,
-        PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor,
-        PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock,
-    ): void {
-        $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
-        $this->userAuthorization = $userAuthorization;
-        $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
-        $this->persistedQueryEndpointAPIHierarchyBlockAccessor = $persistedQueryEndpointAPIHierarchyBlockAccessor;
-        $this->persistedQueryEndpointGraphiQLBlock = $persistedQueryEndpointGraphiQLBlock;
-    }
-
     public function getEnablingModule(): ?string
     {
         return EndpointFunctionalityModuleResolver::PERSISTED_QUERIES;

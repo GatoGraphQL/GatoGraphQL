@@ -20,13 +20,6 @@ class CreateUpdateWithCommunityIndividualProfileMutationResolverBridge extends C
     {
         return $this->createUpdateWithCommunityIndividualProfileMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateWithCommunityIndividualProfileMutationResolver::class);
     }
-
-    //#[Required]
-    final public function autowireCreateUpdateWithCommunityIndividualProfileMutationResolverBridge(
-        CreateUpdateWithCommunityIndividualProfileMutationResolver $createUpdateWithCommunityIndividualProfileMutationResolver,
-    ): void {
-        $this->createUpdateWithCommunityIndividualProfileMutationResolver = $createUpdateWithCommunityIndividualProfileMutationResolver;
-    }
     
     public function getMutationResolver(): MutationResolverInterface
     {

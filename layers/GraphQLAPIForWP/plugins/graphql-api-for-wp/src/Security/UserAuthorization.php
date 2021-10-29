@@ -27,12 +27,6 @@ class UserAuthorization implements UserAuthorizationInterface
     {
         return $this->userAuthorizationSchemeRegistry ??= $this->instanceManager->getInstance(UserAuthorizationSchemeRegistryInterface::class);
     }
-
-    //#[Required]
-    final public function autowireUserAuthorization(UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry): void
-    {
-        $this->userAuthorizationSchemeRegistry = $userAuthorizationSchemeRegistry;
-    }
     /**
      * The capability needed to access the schema editor (i.e. access clients GraphiQL/Voyager
      * against the admin endpoint /wp-admin/?page=graphql_api, and execute queries against it).

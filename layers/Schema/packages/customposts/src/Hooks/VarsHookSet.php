@@ -25,13 +25,6 @@ class VarsHookSet extends AbstractHookSet
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireVarsHookSet(
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-    ): void {
-        $this->customPostTypeAPI = $customPostTypeAPI;
-    }
-
     protected function init(): void
     {
         $this->hooksAPI->addFilter(

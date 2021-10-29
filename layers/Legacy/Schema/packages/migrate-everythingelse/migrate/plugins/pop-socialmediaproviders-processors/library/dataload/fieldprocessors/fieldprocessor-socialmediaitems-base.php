@@ -29,15 +29,6 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
         return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowirePoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_FunctionalSocialMediaItems(
-        SocialMediaProviderEnumTypeResolver $socialMediaProviderEnumTypeResolver,
-        URLScalarTypeResolver $urlScalarTypeResolver,
-    ): void {
-        $this->socialMediaProviderEnumTypeResolver = $socialMediaProviderEnumTypeResolver;
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-    }
-
     protected function getShareUrl($url, $title, $provider)
     {
         $settings = gdSocialmediaProviderSettings();

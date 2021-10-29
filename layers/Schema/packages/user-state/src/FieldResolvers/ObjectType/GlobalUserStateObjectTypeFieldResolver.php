@@ -23,13 +23,6 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireGlobalUserStateObjectTypeFieldResolver(
-        IDScalarTypeResolver $idScalarTypeResolver,
-    ): void {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
-
     public function getFieldNamesToResolve(): array
     {
         return [

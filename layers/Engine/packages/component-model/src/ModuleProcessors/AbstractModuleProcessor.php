@@ -122,20 +122,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         return $this->modulePaths ??= $this->instanceManager->getInstance(ModulePaths::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractModuleProcessor(FieldQueryInterpreterInterface $fieldQueryInterpreter, ModulePathHelpersInterface $modulePathHelpers, ModuleFilterManagerInterface $moduleFilterManager, ModuleProcessorManagerInterface $moduleProcessorManager, CMSServiceInterface $cmsService, NameResolverInterface $nameResolver, DataloadHelperServiceInterface $dataloadHelperService, RequestHelperServiceInterface $requestHelperService, ModulePaths $modulePaths): void
-    {
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-        $this->modulePathHelpers = $modulePathHelpers;
-        $this->moduleFilterManager = $moduleFilterManager;
-        $this->moduleProcessorManager = $moduleProcessorManager;
-        $this->cmsService = $cmsService;
-        $this->nameResolver = $nameResolver;
-        $this->dataloadHelperService = $dataloadHelperService;
-        $this->requestHelperService = $requestHelperService;
-        $this->modulePaths = $modulePaths;
-    }
-
     public function getSubmodules(array $module): array
     {
         return array();

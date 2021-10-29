@@ -31,15 +31,6 @@ class PersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractLoadingCP
         return $this->graphQLPersistedQueryEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
     }
 
-    //#[Required]
-    final public function autowirePersistedQueryEndpointSchemaConfiguratorExecuter(
-        PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator,
-        GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
-    ): void {
-        $this->persistedQueryEndpointSchemaConfigurator = $persistedQueryEndpointSchemaConfigurator;
-        $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
-    }
-
     protected function getCustomPostType(): string
     {
         return $this->getGraphQLPersistedQueryEndpointCustomPostType()->getCustomPostType();

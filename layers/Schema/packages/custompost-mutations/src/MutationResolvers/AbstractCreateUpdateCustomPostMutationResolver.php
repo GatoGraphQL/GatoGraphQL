@@ -74,21 +74,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         return $this->customPostTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostTypeMutationAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractCreateUpdateCustomPostMutationResolver(
-        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
-        NameResolverInterface $nameResolver,
-        UserRoleTypeAPIInterface $userRoleTypeAPI,
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-        CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI,
-    ): void {
-        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
-        $this->nameResolver = $nameResolver;
-        $this->userRoleTypeAPI = $userRoleTypeAPI;
-        $this->customPostTypeAPI = $customPostTypeAPI;
-        $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
-    }
-
     protected function validateCreateErrors(array $form_data): array
     {
         $errors = [];

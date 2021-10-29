@@ -45,17 +45,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->settingsTypeAPI ??= $this->instanceManager->getInstance(SettingsTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireRootObjectTypeFieldResolver(
-        AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        SettingsTypeAPIInterface $settingsTypeAPI,
-    ): void {
-        $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->settingsTypeAPI = $settingsTypeAPI;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

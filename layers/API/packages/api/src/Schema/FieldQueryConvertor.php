@@ -80,15 +80,6 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         return $this->persistedFragmentManager ??= $this->instanceManager->getInstance(PersistedFragmentManagerInterface::class);
     }
 
-    //#[Required]
-    final public function autowireFieldQueryConvertor(FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser, FieldQueryInterpreterInterface $fieldQueryInterpreter, PersistedFragmentManagerInterface $persistedFragmentManager): void
-    {
-        $this->feedbackMessageStore = $feedbackMessageStore;
-        $this->queryParser = $queryParser;
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-        $this->persistedFragmentManager = $persistedFragmentManager;
-    }
-
     public function convertAPIQuery(string $operationDotNotation, ?array $fragments = null): FieldQuerySet
     {
         $fragments ??= $this->getFragments();

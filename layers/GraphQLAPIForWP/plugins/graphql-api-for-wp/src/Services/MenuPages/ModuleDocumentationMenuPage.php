@@ -37,15 +37,6 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
         return $this->modulesMenuPage ??= $this->instanceManager->getInstance(ModulesMenuPage::class);
     }
 
-    //#[Required]
-    final public function autowireModuleDocumentationMenuPage(
-        ModuleRegistryInterface $moduleRegistry,
-        ModulesMenuPage $modulesMenuPage,
-    ): void {
-        $this->moduleRegistry = $moduleRegistry;
-        $this->modulesMenuPage = $modulesMenuPage;
-    }
-
     public function getMenuPageSlug(): string
     {
         return $this->getModulesMenuPage()->getMenuPageSlug();

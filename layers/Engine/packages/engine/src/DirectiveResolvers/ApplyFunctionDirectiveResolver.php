@@ -56,17 +56,6 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireApplyFunctionDirectiveResolver(
-        RootObjectTypeResolver $rootObjectTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
-    ): void {
-        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
-    }
-
     public function getDirectiveName(): string
     {
         return 'applyFunction';

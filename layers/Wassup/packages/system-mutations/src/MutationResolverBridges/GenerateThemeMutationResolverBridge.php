@@ -21,13 +21,6 @@ class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutatio
         return $this->generateThemeMutationResolver ??= $this->instanceManager->getInstance(GenerateThemeMutationResolver::class);
     }
 
-    //#[Required]
-    final public function autowireGenerateThemeMutationResolverBridge(
-        GenerateThemeMutationResolver $generateThemeMutationResolver,
-    ): void {
-        $this->generateThemeMutationResolver = $generateThemeMutationResolver;
-    }
-
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->getGenerateThemeMutationResolver();

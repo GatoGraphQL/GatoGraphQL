@@ -24,12 +24,6 @@ abstract class AbstractUserMetaTypeAPI implements UserMetaTypeAPIInterface
         return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractUserMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
-    {
-        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
-    }
-
     final public function getUserMeta(string | int $userID, string $key, bool $single = false): mixed
     {
         /**

@@ -25,13 +25,6 @@ class VarsHookSet extends AbstractHookSet
         return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireVarsHookSet(
-        UserRoleTypeAPIInterface $userRoleTypeAPI,
-    ): void {
-        $this->userRoleTypeAPI = $userRoleTypeAPI;
-    }
-
     protected function init(): void
     {
         $this->hooksAPI->addFilter(

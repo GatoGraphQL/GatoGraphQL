@@ -24,12 +24,6 @@ abstract class AbstractCommentMetaTypeAPI implements CommentMetaTypeAPIInterface
         return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractCommentMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
-    {
-        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
-    }
-
     final public function getCommentMeta(string | int $commentID, string $key, bool $single = false): mixed
     {
         /**

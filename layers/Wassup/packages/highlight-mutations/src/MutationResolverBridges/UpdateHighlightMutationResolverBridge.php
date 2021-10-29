@@ -21,13 +21,6 @@ class UpdateHighlightMutationResolverBridge extends AbstractCreateUpdateHighligh
         return $this->updateHighlightMutationResolver ??= $this->instanceManager->getInstance(UpdateHighlightMutationResolver::class);
     }
 
-    //#[Required]
-    final public function autowireUpdateHighlightMutationResolverBridge(
-        UpdateHighlightMutationResolver $updateHighlightMutationResolver,
-    ): void {
-        $this->updateHighlightMutationResolver = $updateHighlightMutationResolver;
-    }
-
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->getUpdateHighlightMutationResolver();

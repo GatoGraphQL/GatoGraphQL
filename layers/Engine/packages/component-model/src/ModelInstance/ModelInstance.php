@@ -41,13 +41,6 @@ class ModelInstance implements ModelInstanceInterface
         return $this->definitionManager ??= $this->instanceManager->getInstance(DefinitionManagerInterface::class);
     }
 
-    //#[Required]
-    final public function autowireModelInstance(ApplicationInfoInterface $applicationInfo, DefinitionManagerInterface $definitionManager): void
-    {
-        $this->applicationInfo = $applicationInfo;
-        $this->definitionManager = $definitionManager;
-    }
-
     public function getModelInstanceId(): string
     {
         // The string is too long. Use a hashing function to shorten it

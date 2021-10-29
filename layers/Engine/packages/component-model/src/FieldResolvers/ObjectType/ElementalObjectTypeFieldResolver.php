@@ -24,13 +24,6 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->elementalInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(ElementalInterfaceTypeFieldResolver::class);
     }
 
-    //#[Required]
-    final public function autowireElementalObjectTypeFieldResolver(
-        ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver,
-    ): void {
-        $this->elementalInterfaceTypeFieldResolver = $elementalInterfaceTypeFieldResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

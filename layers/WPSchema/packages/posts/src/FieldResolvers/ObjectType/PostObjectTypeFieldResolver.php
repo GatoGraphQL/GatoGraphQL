@@ -26,13 +26,6 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowirePostObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

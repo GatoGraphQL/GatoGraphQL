@@ -145,25 +145,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractObjectTypeFieldResolver(
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-        $this->nameResolver = $nameResolver;
-        $this->cmsService = $cmsService;
-        $this->semverHelperService = $semverHelperService;
-        $this->schemaDefinitionService = $schemaDefinitionService;
-        $this->engine = $engine;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-
     final public function getClassesToAttachTo(): array
     {
         return $this->getObjectTypeResolverClassesToAttachTo();

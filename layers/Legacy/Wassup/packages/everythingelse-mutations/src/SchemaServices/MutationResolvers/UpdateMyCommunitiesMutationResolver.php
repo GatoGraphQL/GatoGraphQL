@@ -21,13 +21,6 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
     {
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
-
-    //#[Required]
-    final public function autowireUpdateMyCommunitiesMutationResolver(
-        UserTypeAPIInterface $userTypeAPI,
-    ): void {
-        $this->userTypeAPI = $userTypeAPI;
-    }
     
     public function executeMutation(array $form_data): mixed
     {

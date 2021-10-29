@@ -36,13 +36,6 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
         return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractMenuPage(MenuPageHelper $menuPageHelper, EndpointHelpers $endpointHelpers): void
-    {
-        $this->menuPageHelper = $menuPageHelper;
-        $this->endpointHelpers = $endpointHelpers;
-    }
-
     public function setHookName(string $hookName): void
     {
         $this->hookName = $hookName;

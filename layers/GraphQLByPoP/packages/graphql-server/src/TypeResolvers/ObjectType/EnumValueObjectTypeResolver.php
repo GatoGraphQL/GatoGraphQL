@@ -22,13 +22,6 @@ class EnumValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
         return $this->schemaDefinitionReferenceTypeDataLoader ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceTypeDataLoader::class);
     }
 
-    //#[Required]
-    final public function autowireEnumValueObjectTypeResolver(
-        SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
-    ): void {
-        $this->schemaDefinitionReferenceTypeDataLoader = $schemaDefinitionReferenceTypeDataLoader;
-    }
-
     public function getTypeName(): string
     {
         return '__EnumValue';

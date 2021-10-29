@@ -136,33 +136,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         return $this->dateFormatter ??= $this->instanceManager->getInstance(DateFormatterInterface::class);
     }
 
-    //#[Required]
-    final public function autowireCommentObjectTypeFieldResolver(
-        CommentTypeAPIInterface $commentTypeAPI,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        URLScalarTypeResolver $urlScalarTypeResolver,
-        EmailScalarTypeResolver $emailScalarTypeResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        DateScalarTypeResolver $dateScalarTypeResolver,
-        IntScalarTypeResolver $intScalarTypeResolver,
-        CommentObjectTypeResolver $commentObjectTypeResolver,
-        CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver,
-        DateFormatterInterface $dateFormatter,
-    ): void {
-        $this->commentTypeAPI = $commentTypeAPI;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
-        $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
-        $this->dateFormatter = $dateFormatter;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

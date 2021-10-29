@@ -35,15 +35,6 @@ class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfiguratio
         return $this->schemaConfigCacheControlListBlock ??= $this->instanceManager->getInstance(SchemaConfigCacheControlListBlock::class);
     }
 
-    //#[Required]
-    final public function autowireCacheControlSchemaConfigurationExecuter(
-        CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator,
-        SchemaConfigCacheControlListBlock $schemaConfigCacheControlListBlock,
-    ): void {
-        $this->cacheControlGraphQLQueryConfigurator = $cacheControlGraphQLQueryConfigurator;
-        $this->schemaConfigCacheControlListBlock = $schemaConfigCacheControlListBlock;
-    }
-
     /**
      * Only enable the service, if the corresponding module is also enabled
      */

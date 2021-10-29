@@ -24,13 +24,6 @@ class HeadModuleHookSet extends AbstractHookSet
         return $this->headModule ??= $this->instanceManager->getInstance(HeadModule::class);
     }
 
-    //#[Required]
-    final public function autowireHeadModuleHookSet(
-        HeadModule $headModule
-    ): void {
-        $this->headModule = $headModule;
-    }
-
     protected function init(): void
     {
         $this->hooksAPI->addFilter(

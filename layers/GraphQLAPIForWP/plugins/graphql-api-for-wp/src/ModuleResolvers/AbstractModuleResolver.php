@@ -23,12 +23,6 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractModuleResolver(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-    }
-
     /**
      * The priority to display the modules from this resolver in the Modules page.
      * The higher the number, the earlier it shows

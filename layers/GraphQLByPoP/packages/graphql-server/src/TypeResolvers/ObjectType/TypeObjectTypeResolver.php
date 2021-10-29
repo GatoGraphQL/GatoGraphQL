@@ -22,13 +22,6 @@ class TypeObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
         return $this->wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader ??= $this->instanceManager->getInstance(WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader::class);
     }
 
-    //#[Required]
-    final public function autowireTypeObjectTypeResolver(
-        WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader $wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader,
-    ): void {
-        $this->wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader = $wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader;
-    }
-
     public function getTypeName(): string
     {
         return '__Type';

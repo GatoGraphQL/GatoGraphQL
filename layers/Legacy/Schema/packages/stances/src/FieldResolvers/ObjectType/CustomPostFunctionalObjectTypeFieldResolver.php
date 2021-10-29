@@ -73,21 +73,6 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
         return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireCustomPostFunctionalObjectTypeFieldResolver(
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
-        IntScalarTypeResolver $intScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        URLScalarTypeResolver $urlScalarTypeResolver,
-    ): void {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

@@ -68,21 +68,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireRootObjectTypeFieldResolver(
-        MediaObjectTypeResolver $mediaObjectTypeResolver,
-        CustomPostUnionTypeResolver $customPostUnionTypeResolver,
-        SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver,
-        RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
-    ): void {
-        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
-        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
-        $this->setFeaturedImageOnCustomPostMutationResolver = $setFeaturedImageOnCustomPostMutationResolver;
-        $this->removeFeaturedImageOnCustomPostMutationResolver = $removeFeaturedImageOnCustomPostMutationResolver;
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

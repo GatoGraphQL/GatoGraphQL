@@ -21,13 +21,6 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
         return $this->upvoteCustomPostMutationResolver ??= $this->instanceManager->getInstance(UpvoteCustomPostMutationResolver::class);
     }
 
-    //#[Required]
-    final public function autowireDownvoteCustomPostMutationResolver(
-        UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver,
-    ): void {
-        $this->upvoteCustomPostMutationResolver = $upvoteCustomPostMutationResolver;
-    }
-
     public function validateErrors(array $form_data): array
     {
         $errors = parent::validateErrors($form_data);

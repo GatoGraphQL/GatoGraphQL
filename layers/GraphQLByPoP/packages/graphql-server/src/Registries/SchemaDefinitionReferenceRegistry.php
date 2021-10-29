@@ -75,17 +75,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireSchemaDefinitionReferenceRegistry(
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
-        IntScalarTypeResolver $intScalarTypeResolver,
-    ): void {
-        $this->schemaDefinitionService = $schemaDefinitionService;
-        $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-    }
-
     final public function getPersistentCache(): PersistentCacheInterface
     {
         $this->persistentCache ??= PersistentCacheFacade::getInstance();

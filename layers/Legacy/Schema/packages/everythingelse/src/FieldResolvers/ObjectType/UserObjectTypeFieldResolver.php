@@ -26,13 +26,6 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->locationObjectTypeResolver ??= $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireUserObjectTypeFieldResolver(
-        LocationObjectTypeResolver $locationObjectTypeResolver,
-    ): void {
-        $this->locationObjectTypeResolver = $locationObjectTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

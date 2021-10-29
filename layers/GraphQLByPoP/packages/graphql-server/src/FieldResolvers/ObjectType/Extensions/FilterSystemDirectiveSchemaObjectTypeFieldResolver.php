@@ -38,15 +38,6 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
         return $this->directiveRegistry ??= $this->instanceManager->getInstance(DirectiveRegistryInterface::class);
     }
 
-    //#[Required]
-    final public function autowireFilterSystemDirectiveSchemaObjectTypeFieldResolver(
-        DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver,
-        DirectiveRegistryInterface $directiveRegistry,
-    ): void {
-        $this->directiveTypeEnumTypeResolver = $directiveTypeEnumTypeResolver;
-        $this->directiveRegistry = $directiveRegistry;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

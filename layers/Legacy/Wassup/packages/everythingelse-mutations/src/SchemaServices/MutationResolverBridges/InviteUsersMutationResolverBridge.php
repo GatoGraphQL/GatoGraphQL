@@ -20,13 +20,6 @@ class InviteUsersMutationResolverBridge extends AbstractEmailInviteMutationResol
     {
         return $this->inviteUsersMutationResolver ??= $this->instanceManager->getInstance(InviteUsersMutationResolver::class);
     }
-
-    //#[Required]
-    final public function autowireInviteUsersMutationResolverBridge(
-        InviteUsersMutationResolver $inviteUsersMutationResolver,
-    ): void {
-        $this->inviteUsersMutationResolver = $inviteUsersMutationResolver;
-    }
     
     public function getMutationResolver(): MutationResolverInterface
     {

@@ -25,13 +25,6 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireUserRoleObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

@@ -42,15 +42,6 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
         return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireCommonFilterMultipleInputModuleProcessor(
-        FormInputHelperServiceInterface $formInputHelperService,
-        DateScalarTypeResolver $dateScalarTypeResolver,
-    ): void {
-        $this->formInputHelperService = $formInputHelperService;
-        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
-    }
-
     public function getModulesToProcess(): array
     {
         return array(

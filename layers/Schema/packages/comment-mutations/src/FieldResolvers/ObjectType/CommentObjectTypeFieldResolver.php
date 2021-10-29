@@ -47,17 +47,6 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->addCommentToCustomPostMutationResolver ??= $this->instanceManager->getInstance(AddCommentToCustomPostMutationResolver::class);
     }
 
-    //#[Required]
-    final public function autowireCommentObjectTypeFieldResolver(
-        CommentTypeAPIInterface $commentTypeAPI,
-        CommentObjectTypeResolver $commentObjectTypeResolver,
-        AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
-    ): void {
-        $this->commentTypeAPI = $commentTypeAPI;
-        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
-        $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

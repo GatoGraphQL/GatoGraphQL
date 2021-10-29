@@ -22,13 +22,6 @@ class VolunteerMutationResolver extends AbstractMutationResolver
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireVolunteerMutationResolver(
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-    ): void {
-        $this->customPostTypeAPI = $customPostTypeAPI;
-    }
-
     public function validateErrors(array $form_data): array
     {
         $errors = [];

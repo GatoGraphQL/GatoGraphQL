@@ -21,13 +21,6 @@ class ActivatePluginsMutationResolverBridge extends AbstractSystemComponentMutat
         return $this->activatePluginsMutationResolver ??= $this->instanceManager->getInstance(ActivatePluginsMutationResolver::class);
     }
 
-    //#[Required]
-    final public function autowireActivatePluginsMutationResolverBridge(
-        ActivatePluginsMutationResolver $activatePluginsMutationResolver,
-    ): void {
-        $this->activatePluginsMutationResolver = $activatePluginsMutationResolver;
-    }
-
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->getActivatePluginsMutationResolver();

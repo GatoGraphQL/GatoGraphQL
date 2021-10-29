@@ -24,13 +24,6 @@ class NamespacingSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
         return $this->schemaConfigNamespacingBlock ??= $this->instanceManager->getInstance(SchemaConfigNamespacingBlock::class);
     }
 
-    //#[Required]
-    final public function autowireNamespacingSchemaConfigurationExecuter(
-        SchemaConfigNamespacingBlock $schemaConfigNamespacingBlock,
-    ): void {
-        $this->schemaConfigNamespacingBlock = $schemaConfigNamespacingBlock;
-    }
-
     public function getEnablingModule(): ?string
     {
         return SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING;

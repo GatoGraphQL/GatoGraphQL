@@ -29,13 +29,6 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireEchoOperatorGlobalObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-
     /**
      * By making it not global, it gets registered on each single type.
      * Otherwise, it is not exposed in the schema

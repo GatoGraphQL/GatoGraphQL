@@ -27,13 +27,6 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
         return $this->graphQLSchemaDefinitionService ??= $this->instanceManager->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
     }
 
-    //#[Required]
-    final public function autowireRootRelationalFieldDataloadModuleProcessor(
-        GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
-    ): void {
-        $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
-    }
-
     public function getModulesToProcess(): array
     {
         return array(

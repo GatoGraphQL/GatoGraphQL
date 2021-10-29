@@ -25,13 +25,6 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
         return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireQueryableObjectPostObjectTypeFieldResolver(
-        URLScalarTypeResolver $urlScalarTypeResolver,
-    ): void {
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

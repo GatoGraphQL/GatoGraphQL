@@ -53,19 +53,6 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return $this->isCustomPostInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(IsCustomPostInterfaceTypeFieldResolver::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractCustomPostObjectTypeFieldResolver(
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-        DateFormatterInterface $dateFormatter,
-        QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
-        IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver,
-    ): void {
-        $this->customPostTypeAPI = $customPostTypeAPI;
-        $this->dateFormatter = $dateFormatter;
-        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
-        $this->isCustomPostInterfaceTypeFieldResolver = $isCustomPostInterfaceTypeFieldResolver;
-    }
-
     public function getFieldNamesToResolve(): array
     {
         return [];

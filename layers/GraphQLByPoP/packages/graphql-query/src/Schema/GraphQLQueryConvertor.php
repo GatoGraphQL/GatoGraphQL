@@ -63,14 +63,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         return $this->includeDirectiveResolver ??= $this->instanceManager->getInstance(IncludeDirectiveResolver::class);
     }
 
-    //#[Required]
-    final public function autowireGraphQLQueryConvertor(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, IncludeDirectiveResolver $includeDirectiveResolver): void
-    {
-        $this->feedbackMessageStore = $feedbackMessageStore;
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-        $this->includeDirectiveResolver = $includeDirectiveResolver;
-    }
-
     /**
      * Convert the GraphQL Query to PoP query in its requested form
      * @return array 2 items: [operationType (string), fieldQuery (string)]

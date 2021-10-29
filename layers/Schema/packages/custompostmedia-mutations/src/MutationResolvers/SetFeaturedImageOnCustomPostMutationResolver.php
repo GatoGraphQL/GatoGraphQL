@@ -24,13 +24,6 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
         return $this->customPostMediaTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireSetFeaturedImageOnCustomPostMutationResolver(
-        CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
-    ): void {
-        $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
-    }
-
     public function executeMutation(array $form_data): mixed
     {
         $customPostID = $form_data[MutationInputProperties::CUSTOMPOST_ID];

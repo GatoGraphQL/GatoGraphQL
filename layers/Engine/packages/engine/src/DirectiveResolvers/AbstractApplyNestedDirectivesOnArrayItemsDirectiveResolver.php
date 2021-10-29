@@ -46,15 +46,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
         return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver(
-        DirectivePipelineServiceInterface $directivePipelineService,
-        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
-    ): void {
-        $this->directivePipelineService = $directivePipelineService;
-        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
-    }
-
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         if (!ComponentConfiguration::enablePassingExpressionsByArgInNestedDirectives()) {

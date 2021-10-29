@@ -29,13 +29,6 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireEntryRouteModuleProcessor(
-        PostTagTypeAPIInterface $postTagTypeAPI,
-    ): void {
-        $this->postTagTypeAPI = $postTagTypeAPI;
-    }
-
     protected function getInitialRESTFields(): string
     {
         return 'id|name|count|url';

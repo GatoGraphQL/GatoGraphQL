@@ -28,12 +28,6 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         return $this->mutationResolutionManager ??= $this->instanceManager->getInstance(MutationResolutionManagerInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractComponentMutationResolverBridge(MutationResolutionManagerInterface $mutationResolutionManager): void
-    {
-        $this->mutationResolutionManager = $mutationResolutionManager;
-    }
-
     public function getSuccessString(string | int $result_id): ?string
     {
         return null;

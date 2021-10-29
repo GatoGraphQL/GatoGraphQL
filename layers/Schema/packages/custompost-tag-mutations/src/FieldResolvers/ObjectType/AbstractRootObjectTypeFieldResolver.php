@@ -50,17 +50,6 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractRootObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
-    ): void {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

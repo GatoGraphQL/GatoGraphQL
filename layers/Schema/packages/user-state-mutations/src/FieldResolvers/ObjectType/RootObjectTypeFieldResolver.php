@@ -57,19 +57,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireRootObjectTypeFieldResolver(
-        UserObjectTypeResolver $userObjectTypeResolver,
-        LoginMutationResolver $loginMutationResolver,
-        LogoutMutationResolver $logoutMutationResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->userObjectTypeResolver = $userObjectTypeResolver;
-        $this->loginMutationResolver = $loginMutationResolver;
-        $this->logoutMutationResolver = $logoutMutationResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

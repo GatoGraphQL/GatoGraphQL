@@ -32,15 +32,6 @@ class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurati
         return $this->schemaConfigAccessControlListBlock ??= $this->instanceManager->getInstance(SchemaConfigAccessControlListBlock::class);
     }
 
-    //#[Required]
-    final public function autowireAccessControlSchemaConfigurationExecuter(
-        AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
-        SchemaConfigAccessControlListBlock $schemaConfigAccessControlListBlock,
-    ): void {
-        $this->accessControlGraphQLQueryConfigurator = $accessControlGraphQLQueryConfigurator;
-        $this->schemaConfigAccessControlListBlock = $schemaConfigAccessControlListBlock;
-    }
-
     public function getEnablingModule(): ?string
     {
         return AccessControlFunctionalityModuleResolver::ACCESS_CONTROL;

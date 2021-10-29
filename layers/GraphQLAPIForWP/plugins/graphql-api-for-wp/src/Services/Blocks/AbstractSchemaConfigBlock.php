@@ -21,13 +21,6 @@ abstract class AbstractSchemaConfigBlock extends AbstractBlock implements Schema
         return $this->schemaConfigurationBlockCategory ??= $this->instanceManager->getInstance(SchemaConfigurationBlockCategory::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractSchemaConfigBlock(
-        SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
-    ): void {
-        $this->schemaConfigurationBlockCategory = $schemaConfigurationBlockCategory;
-    }
-
     protected function isDynamicBlock(): bool
     {
         return true;

@@ -27,12 +27,6 @@ abstract class AbstractRelationalTypeResolverDecorator implements RelationalType
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractRelationalTypeResolverDecorator(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
-    {
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-    }
-
     final public function getClassesToAttachTo(): array
     {
         return $this->getRelationalTypeResolverClassesToAttachTo();

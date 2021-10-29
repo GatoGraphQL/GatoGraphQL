@@ -103,27 +103,6 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->typeKindEnumTypeResolver ??= $this->instanceManager->getInstance(TypeKindEnumTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireTypeObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
-        FieldObjectTypeResolver $fieldObjectTypeResolver,
-        TypeObjectTypeResolver $typeObjectTypeResolver,
-        EnumValueObjectTypeResolver $enumValueObjectTypeResolver,
-        InputValueObjectTypeResolver $inputValueObjectTypeResolver,
-        TypeKindEnumTypeResolver $typeKindEnumTypeResolver,
-    ): void {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
-        $this->fieldObjectTypeResolver = $fieldObjectTypeResolver;
-        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
-        $this->enumValueObjectTypeResolver = $enumValueObjectTypeResolver;
-        $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
-        $this->typeKindEnumTypeResolver = $typeKindEnumTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

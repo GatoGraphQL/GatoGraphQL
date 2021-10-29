@@ -70,19 +70,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     {
         return $this->pluginMenu ??= $this->instanceManager->getInstance(PluginMenu::class);
     }
-
-    //#[Required]
-    final public function autowireAbstractCustomPostType(
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        CPTUtils $cptUtils,
-        PluginMenu $pluginMenu,
-    ): void {
-        $this->moduleRegistry = $moduleRegistry;
-        $this->userAuthorization = $userAuthorization;
-        $this->cptUtils = $cptUtils;
-        $this->pluginMenu = $pluginMenu;
-    }
     /**
      * Add the hook to initialize the different post types
      */

@@ -76,23 +76,6 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }
 
-    //#[Required]
-    final public function autowireIsCustomPostInterfaceTypeFieldResolver(
-        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
-        CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        DateScalarTypeResolver $dateScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
-    ): void {
-        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
-        $this->customPostContentFormatEnumTypeResolver = $customPostContentFormatEnumTypeResolver;
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
-    }
-
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [

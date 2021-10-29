@@ -36,15 +36,6 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
         return $this->typeResolverHelper ??= $this->instanceManager->getInstance(TypeResolverHelperInterface::class);
     }
 
-    //#[Required]
-    final public function autowireMandatoryDirectivesForFieldsRootTypeEntryDuplicator(
-        RootObjectTypeResolver $rootObjectTypeResolver,
-        TypeResolverHelperInterface $typeResolverHelper
-    ): void {
-        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
-        $this->typeResolverHelper = $typeResolverHelper;
-    }
-
     /**
      * This function appends entries only when Nested Mutations is disabled,
      * so that we have a QueryRoot and MutationRoot types.

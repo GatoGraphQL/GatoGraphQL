@@ -41,13 +41,6 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
         return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractCacheConfigurationManager(
-        EndpointHelpers $endpointHelpers,
-    ): void {
-        $this->endpointHelpers = $endpointHelpers;
-    }
-
     /**
      * Save into the DB, and inject to the FilesystemAdapter:
      * A string used as the subdirectory of the root cache directory, where cache

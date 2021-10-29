@@ -31,15 +31,6 @@ class CustomEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaC
         return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
     }
 
-    //#[Required]
-    final public function autowireCustomEndpointSchemaConfiguratorExecuter(
-        CustomEndpointSchemaConfigurator $customEndpointSchemaConfigurator,
-        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-    ): void {
-        $this->customEndpointSchemaConfigurator = $customEndpointSchemaConfigurator;
-        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
-    }
-
     protected function getCustomPostType(): string
     {
         return $this->getGraphQLCustomEndpointCustomPostType()->getCustomPostType();

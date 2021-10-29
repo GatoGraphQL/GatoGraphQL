@@ -28,13 +28,6 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->rootTypeDataLoader ??= $this->instanceManager->getInstance(RootTypeDataLoader::class);
     }
 
-    //#[Required]
-    final public function autowireRootObjectTypeResolver(
-        RootTypeDataLoader $rootTypeDataLoader,
-    ): void {
-        $this->rootTypeDataLoader = $rootTypeDataLoader;
-    }
-
     public function getTypeName(): string
     {
         return 'Root';

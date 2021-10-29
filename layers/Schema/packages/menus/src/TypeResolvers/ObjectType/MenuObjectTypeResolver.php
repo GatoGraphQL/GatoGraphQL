@@ -32,15 +32,6 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireMenuObjectTypeResolver(
-        MenuTypeDataLoader $menuTypeDataLoader,
-        MenuTypeAPIInterface $menuTypeAPI,
-    ): void {
-        $this->menuTypeDataLoader = $menuTypeDataLoader;
-        $this->menuTypeAPI = $menuTypeAPI;
-    }
-
     public function getTypeName(): string
     {
         return 'Menu';

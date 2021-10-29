@@ -66,21 +66,6 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireDirectiveObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        InputValueObjectTypeResolver $inputValueObjectTypeResolver,
-        DirectiveLocationEnumTypeResolver $directiveLocationEnumTypeResolver,
-        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
-    ): void {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
-        $this->directiveLocationEnumTypeResolver = $directiveLocationEnumTypeResolver;
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

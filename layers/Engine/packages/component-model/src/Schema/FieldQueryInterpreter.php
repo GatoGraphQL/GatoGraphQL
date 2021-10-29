@@ -102,13 +102,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireComponentModelFieldQueryInterpreter(
-        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
-    ): void {
-        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
-    }
-
     /**
      * If two different fields for the same type have the same fieldOutputKey, then
      * add a counter to the second one, so each of them is unique.

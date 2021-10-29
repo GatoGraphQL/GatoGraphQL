@@ -42,17 +42,6 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
         return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }
 
-    //#[Required]
-    final public function autowireIsCustomPostInterfaceTypeFieldResolver(
-        DateScalarTypeResolver $dateScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
-    ): void {
-        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
-    }
-
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [

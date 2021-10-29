@@ -23,12 +23,6 @@ class CMSHelperService implements CMSHelperServiceInterface
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
 
-    //#[Required]
-    final public function autowireCMSHelperService(CMSServiceInterface $cmsService): void
-    {
-        $this->cmsService = $cmsService;
-    }
-
     public function getLocalURLPath(string $url): string | false
     {
         if (str_starts_with($url, $this->getCmsService()->getHomeURL())) {

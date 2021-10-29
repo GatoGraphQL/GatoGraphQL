@@ -28,13 +28,6 @@ class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurat
         return $this->schemaConfigMutationSchemeBlock ??= $this->instanceManager->getInstance(SchemaConfigMutationSchemeBlock::class);
     }
 
-    //#[Required]
-    final public function autowireMutationSchemeSchemaConfigurationExecuter(
-        SchemaConfigMutationSchemeBlock $schemaConfigMutationSchemeBlock,
-    ): void {
-        $this->schemaConfigMutationSchemeBlock = $schemaConfigMutationSchemeBlock;
-    }
-
     public function getEnablingModule(): ?string
     {
         return SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS;

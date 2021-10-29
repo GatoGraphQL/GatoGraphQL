@@ -21,13 +21,6 @@ class MenuTypeDataLoader extends AbstractObjectTypeDataLoader
         return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireMenuTypeDataLoader(
-        MenuTypeAPIInterface $menuTypeAPI,
-    ): void {
-        $this->menuTypeAPI = $menuTypeAPI;
-    }
-
     public function getObjects(array $ids): array
     {
         // If the menu doesn't exist, remove the `null` entry

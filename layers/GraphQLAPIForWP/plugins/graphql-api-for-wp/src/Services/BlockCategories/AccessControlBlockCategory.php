@@ -22,13 +22,6 @@ class AccessControlBlockCategory extends AbstractBlockCategory
         return $this->graphQLAccessControlListCustomPostType ??= $this->instanceManager->getInstance(GraphQLAccessControlListCustomPostType::class);
     }
 
-    //#[Required]
-    final public function autowireAccessControlBlockCategory(
-        GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
-    ): void {
-        $this->graphQLAccessControlListCustomPostType = $graphQLAccessControlListCustomPostType;
-    }
-
     /**
      * Custom Post Type for which to enable the block category
      *

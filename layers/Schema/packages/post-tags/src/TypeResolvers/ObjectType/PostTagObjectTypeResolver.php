@@ -25,13 +25,6 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
         return $this->postTagTypeDataLoader ??= $this->instanceManager->getInstance(PostTagTypeDataLoader::class);
     }
 
-    //#[Required]
-    final public function autowirePostTagObjectTypeResolver(
-        PostTagTypeDataLoader $postTagTypeDataLoader,
-    ): void {
-        $this->postTagTypeDataLoader = $postTagTypeDataLoader;
-    }
-
     public function getTypeName(): string
     {
         return 'PostTag';

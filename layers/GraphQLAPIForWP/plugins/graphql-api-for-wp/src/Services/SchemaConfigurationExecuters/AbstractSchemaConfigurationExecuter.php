@@ -34,13 +34,6 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
         return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractSchemaConfigurationExecuter(ModuleRegistryInterface $moduleRegistry, BlockHelpers $blockHelpers): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-        $this->blockHelpers = $blockHelpers;
-    }
-
     /**
      * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
      */

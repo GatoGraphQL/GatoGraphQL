@@ -31,15 +31,6 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
         return $this->persistedQueryEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(PersistedQueryEndpointSchemaConfigurator::class);
     }
 
-    //#[Required]
-    final public function autowireEditingPersistedQueryEndpointSchemaConfiguratorExecuter(
-        EndpointHelpers $endpointHelpers,
-        PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator
-    ): void {
-        $this->endpointHelpers = $endpointHelpers;
-        $this->persistedQueryEndpointSchemaConfigurator = $persistedQueryEndpointSchemaConfigurator;
-    }
-
     /**
      * Initialize the configuration if editing a persisted query
      */

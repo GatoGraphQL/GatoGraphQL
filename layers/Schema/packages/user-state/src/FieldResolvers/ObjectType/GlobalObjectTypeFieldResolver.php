@@ -25,13 +25,6 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireGlobalObjectTypeFieldResolver(
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-    ): void {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
-
     public function getFieldNamesToResolve(): array
     {
         return [

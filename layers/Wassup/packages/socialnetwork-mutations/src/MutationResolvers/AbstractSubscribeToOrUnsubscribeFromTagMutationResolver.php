@@ -20,13 +20,6 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
         return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractSubscribeToOrUnsubscribeFromTagMutationResolver(
-        PostTagTypeAPIInterface $postTagTypeAPI,
-    ): void {
-        $this->postTagTypeAPI = $postTagTypeAPI;
-    }
-
     public function validateErrors(array $form_data): array
     {
         $errors = parent::validateErrors($form_data);

@@ -58,19 +58,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireRootObjectTypeFieldResolver(
-        IntScalarTypeResolver $intScalarTypeResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
-        MenuObjectTypeResolver $menuObjectTypeResolver,
-        MenuTypeAPIInterface $menuTypeAPI,
-    ): void {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-        $this->menuObjectTypeResolver = $menuObjectTypeResolver;
-        $this->menuTypeAPI = $menuTypeAPI;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

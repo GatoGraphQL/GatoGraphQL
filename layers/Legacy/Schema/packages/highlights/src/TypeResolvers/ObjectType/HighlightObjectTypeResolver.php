@@ -22,13 +22,6 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
     {
         return $this->highlightTypeDataLoader ??= $this->instanceManager->getInstance(HighlightTypeDataLoader::class);
     }
-
-    //#[Required]
-    final public function autowireHighlightObjectTypeResolver(
-        HighlightTypeDataLoader $highlightTypeDataLoader,
-    ): void {
-        $this->highlightTypeDataLoader = $highlightTypeDataLoader;
-    }
     
     public function getTypeName(): string
     {

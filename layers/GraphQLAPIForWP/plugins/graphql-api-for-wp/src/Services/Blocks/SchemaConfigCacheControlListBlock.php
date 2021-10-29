@@ -28,13 +28,6 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigCustomPostLi
         return $this->graphQLCacheControlListCustomPostType ??= $this->instanceManager->getInstance(GraphQLCacheControlListCustomPostType::class);
     }
 
-    //#[Required]
-    final public function autowireSchemaConfigCacheControlListBlock(
-        GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
-    ): void {
-        $this->graphQLCacheControlListCustomPostType = $graphQLCacheControlListCustomPostType;
-    }
-
     protected function getBlockName(): string
     {
         return 'schema-config-cache-control-lists';

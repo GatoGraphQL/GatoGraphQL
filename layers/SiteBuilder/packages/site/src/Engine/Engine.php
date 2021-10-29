@@ -21,13 +21,6 @@ class Engine extends UpstreamEngine
         return $this->applicationStateHelperService ??= $this->instanceManager->getInstance(ApplicationStateHelperServiceInterface::class);
     }
 
-    //#[Required]
-    final public function autowireSiteEngine(
-        ApplicationStateHelperServiceInterface $applicationStateHelperService
-    ): void {
-        $this->applicationStateHelperService = $applicationStateHelperService;
-    }
-
     public function outputResponse(): void
     {
         // If doing JSON, the response from the parent is already adequate

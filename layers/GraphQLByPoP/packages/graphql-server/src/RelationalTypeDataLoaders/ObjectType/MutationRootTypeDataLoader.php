@@ -21,13 +21,6 @@ class MutationRootTypeDataLoader extends AbstractObjectTypeDataLoader
         return $this->mutationRoot ??= $this->instanceManager->getInstance(MutationRoot::class);
     }
 
-    //#[Required]
-    final public function autowireMutationRootTypeDataLoader(
-        MutationRoot $mutationRoot,
-    ): void {
-        $this->mutationRoot = $mutationRoot;
-    }
-
     public function getObjects(array $ids): array
     {
         return [

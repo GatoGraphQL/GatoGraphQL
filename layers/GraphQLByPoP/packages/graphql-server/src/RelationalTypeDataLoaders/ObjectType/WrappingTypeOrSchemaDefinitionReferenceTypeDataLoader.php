@@ -36,15 +36,6 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
         return $this->graphQLSyntaxService ??= $this->instanceManager->getInstance(GraphQLSyntaxServiceInterface::class);
     }
 
-    //#[Required]
-    final public function autowireSchemaDefinitionReferenceTypeDataLoader(
-        SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
-        GraphQLSyntaxServiceInterface $graphQLSyntaxService,
-    ): void {
-        $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
-        $this->graphQLSyntaxService = $graphQLSyntaxService;
-    }
-
     /**
      * The IDs can contain GraphQL's type wrappers, such as `[String]!`
      *

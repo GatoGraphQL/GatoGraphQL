@@ -33,13 +33,6 @@ abstract class AbstractDataStructureFormatter implements DataStructureFormatterI
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractDataStructureFormatter(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter): void
-    {
-        $this->feedbackMessageStore = $feedbackMessageStore;
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-    }
-
     public function getFormattedData($data)
     {
         return $data;

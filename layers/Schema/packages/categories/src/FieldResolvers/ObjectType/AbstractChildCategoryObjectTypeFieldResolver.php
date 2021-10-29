@@ -44,15 +44,6 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractChildCategoryObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        IntScalarTypeResolver $intScalarTypeResolver,
-    ): void {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-    }
-
     public function getFieldNamesToResolve(): array
     {
         return [

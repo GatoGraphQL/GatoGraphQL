@@ -35,15 +35,6 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver(
-        UserRoleTypeAPIInterface $userRoleTypeAPI,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->userRoleTypeAPI = $userRoleTypeAPI;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-
     public function getDirectiveName(): string
     {
         return 'validateDoesLoggedInUserHaveAnyCapability';

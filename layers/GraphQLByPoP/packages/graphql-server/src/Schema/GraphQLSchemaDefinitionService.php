@@ -34,13 +34,6 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
         return $this->mutationRootObjectTypeResolver ??= $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireGraphQLSchemaDefinitionService(QueryRootObjectTypeResolver $queryRootObjectTypeResolver, MutationRootObjectTypeResolver $mutationRootObjectTypeResolver): void
-    {
-        $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
-        $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
-    }
-
     /**
      * If nested mutations are enabled, use "Root".
      * Otherwise, use "Query"

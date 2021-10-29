@@ -46,17 +46,6 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
         return $this->postTagTypeMutationAPI ??= $this->instanceManager->getInstance(PostTagTypeMutationAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowirePostMutationResolverHookSet(
-        PostObjectTypeResolver $postObjectTypeResolver,
-        PostTypeAPIInterface $postTypeAPI,
-        PostTagTypeMutationAPIInterface $postTagTypeMutationAPI,
-    ): void {
-        $this->postObjectTypeResolver = $postObjectTypeResolver;
-        $this->postTypeAPI = $postTypeAPI;
-        $this->postTagTypeMutationAPI = $postTagTypeMutationAPI;
-    }
-
     protected function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
     {
         return $this->getPostObjectTypeResolver();

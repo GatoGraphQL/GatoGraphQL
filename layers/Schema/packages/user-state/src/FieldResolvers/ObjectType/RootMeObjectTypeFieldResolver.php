@@ -24,13 +24,6 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
         return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireRootMeObjectTypeFieldResolver(
-        UserObjectTypeResolver $userObjectTypeResolver,
-    ): void {
-        $this->userObjectTypeResolver = $userObjectTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

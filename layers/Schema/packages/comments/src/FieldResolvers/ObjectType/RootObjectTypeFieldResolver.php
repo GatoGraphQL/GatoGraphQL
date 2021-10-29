@@ -57,17 +57,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireRootObjectTypeFieldResolver(
-        CommentTypeAPIInterface $commentTypeAPI,
-        IntScalarTypeResolver $intScalarTypeResolver,
-        CommentObjectTypeResolver $commentObjectTypeResolver,
-    ): void {
-        $this->commentTypeAPI = $commentTypeAPI;
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

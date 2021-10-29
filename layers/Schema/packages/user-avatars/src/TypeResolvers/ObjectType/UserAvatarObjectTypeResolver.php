@@ -23,13 +23,6 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->userAvatarTypeDataLoader ??= $this->instanceManager->getInstance(UserAvatarTypeDataLoader::class);
     }
 
-    //#[Required]
-    final public function autowireUserAvatarObjectTypeResolver(
-        UserAvatarTypeDataLoader $userAvatarTypeDataLoader,
-    ): void {
-        $this->userAvatarTypeDataLoader = $userAvatarTypeDataLoader;
-    }
-
     public function getTypeName(): string
     {
         return 'UserAvatar';

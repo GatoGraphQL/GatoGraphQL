@@ -23,13 +23,6 @@ class PluginMenu extends AbstractMenu
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
 
-    //#[Required]
-    final public function autowirePluginMenu(
-        UserAuthorizationInterface $userAuthorization
-    ): void {
-        $this->userAuthorization = $userAuthorization;
-    }
-
     public function getName(): string
     {
         return 'graphql_api';

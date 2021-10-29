@@ -25,13 +25,6 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
         return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireFieldOrDirectiveSchemaDefinitionResolverTrait(
-        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
-    ): void {
-        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
-    }
-
     final public function getFieldOrDirectiveArgTypeSchemaDefinition(
         string $argName,
         InputTypeResolverInterface $argInputTypeResolver,

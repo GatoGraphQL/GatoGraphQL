@@ -68,21 +68,6 @@ class VarsHookSet extends AbstractHookSet
         return $this->graphQLQueryConvertor ??= $this->instanceManager->getInstance(GraphQLQueryConvertorInterface::class);
     }
 
-    //#[Required]
-    final public function autowireVarsHookSet(
-        QueryRetrieverInterface $queryRetriever,
-        GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
-        GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        GraphQLQueryConvertorInterface $graphQLQueryConvertor,
-    ): void {
-        $this->queryRetriever = $queryRetriever;
-        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
-        $this->graphQLPersistedQueryManager = $graphQLPersistedQueryManager;
-        $this->feedbackMessageStore = $feedbackMessageStore;
-        $this->graphQLQueryConvertor = $graphQLQueryConvertor;
-    }
-
     protected function init(): void
     {
         // Priority 20: execute after the same code in API, as to remove $vars['query]

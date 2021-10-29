@@ -65,19 +65,6 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
         return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireRootPostCategoryObjectTypeFieldResolver(
-        IntScalarTypeResolver $intScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
-        PostCategoryTypeAPIInterface $postCategoryTypeAPI,
-    ): void {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
-        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

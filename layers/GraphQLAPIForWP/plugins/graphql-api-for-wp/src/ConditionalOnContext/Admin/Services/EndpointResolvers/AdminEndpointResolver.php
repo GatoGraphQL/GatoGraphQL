@@ -40,15 +40,6 @@ class AdminEndpointResolver extends AbstractEndpointResolver
         return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAdminEndpointResolver(
-        UserAuthorizationInterface $userAuthorization,
-        QueryRetrieverInterface $queryRetriever,
-    ): void {
-        $this->userAuthorization = $userAuthorization;
-        $this->queryRetriever = $queryRetriever;
-    }
-
     /**
      * Do not load the query if already loaded
      * in `processURLParamVars` from `graphql-request/src/Hooks/VarsHookSet.php`

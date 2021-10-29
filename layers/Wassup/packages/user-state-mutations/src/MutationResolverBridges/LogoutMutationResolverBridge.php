@@ -22,13 +22,6 @@ class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBrid
         return $this->logoutMutationResolver ??= $this->instanceManager->getInstance(LogoutMutationResolver::class);
     }
 
-    //#[Required]
-    final public function autowireLogoutMutationResolverBridge(
-        LogoutMutationResolver $logoutMutationResolver,
-    ): void {
-        $this->logoutMutationResolver = $logoutMutationResolver;
-    }
-
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->getLogoutMutationResolver();

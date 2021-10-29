@@ -104,21 +104,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $this->directivePipelineService ??= $this->instanceManager->getInstance(DirectivePipelineServiceInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractRelationalTypeResolver(
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
-    ): void {
-        $this->feedbackMessageStore = $feedbackMessageStore;
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-        $this->errorProvider = $errorProvider;
-        $this->dataloadingEngine = $dataloadingEngine;
-        $this->directivePipelineService = $directivePipelineService;
-    }
-
     /**
      * @return array<string,DirectiveResolverInterface[]>
      */

@@ -34,15 +34,6 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireWithMetaInterfaceTypeFieldResolver(
-        AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [

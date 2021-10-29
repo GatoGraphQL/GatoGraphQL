@@ -26,13 +26,6 @@ class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigu
         return $this->schemaConfigSchemaModeBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaModeBlock::class);
     }
 
-    //#[Required]
-    final public function autowireDefaultSchemaModeSchemaConfigurationExecuter(
-        SchemaConfigSchemaModeBlock $schemaConfigSchemaModeBlock,
-    ): void {
-        $this->schemaConfigSchemaModeBlock = $schemaConfigSchemaModeBlock;
-    }
-
     public function getEnablingModule(): ?string
     {
         return SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA;

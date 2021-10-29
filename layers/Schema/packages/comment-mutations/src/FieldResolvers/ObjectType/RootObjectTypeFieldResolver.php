@@ -38,15 +38,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return $this->addCommentToCustomPostMutationResolver ??= $this->instanceManager->getInstance(AddCommentToCustomPostMutationResolver::class);
     }
 
-    //#[Required]
-    final public function autowireRootObjectTypeFieldResolver(
-        CommentObjectTypeResolver $commentObjectTypeResolver,
-        AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
-    ): void {
-        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
-        $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

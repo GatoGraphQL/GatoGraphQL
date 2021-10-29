@@ -59,19 +59,6 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         return $this->customEndpointOptionsBlock ??= $this->instanceManager->getInstance(CustomEndpointOptionsBlock::class);
     }
 
-    //#[Required]
-    final public function autowireGraphQLCustomEndpointCustomPostType(
-        EndpointBlockRegistryInterface $endpointBlockRegistry,
-        CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistry,
-        CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistry,
-        CustomEndpointOptionsBlock $customEndpointOptionsBlock,
-    ): void {
-        $this->endpointBlockRegistry = $endpointBlockRegistry;
-        $this->customEndpointExecuterRegistry = $customEndpointExecuterRegistry;
-        $this->customEndpointAnnotatorRegistry = $customEndpointAnnotatorRegistry;
-        $this->customEndpointOptionsBlock = $customEndpointOptionsBlock;
-    }
-
     /**
      * Custom Post Type name
      */

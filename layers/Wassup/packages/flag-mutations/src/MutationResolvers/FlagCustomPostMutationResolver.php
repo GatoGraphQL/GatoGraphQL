@@ -22,13 +22,6 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
-    //#[Required]
-    final public function autowireFlagCustomPostMutationResolver(
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-    ): void {
-        $this->customPostTypeAPI = $customPostTypeAPI;
-    }
-
     public function validateErrors(array $form_data): array
     {
         $errors = [];

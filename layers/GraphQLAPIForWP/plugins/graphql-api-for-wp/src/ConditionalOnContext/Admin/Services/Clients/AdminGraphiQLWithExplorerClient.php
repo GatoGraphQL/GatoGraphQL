@@ -24,12 +24,6 @@ class AdminGraphiQLWithExplorerClient extends GraphiQLWithExplorerClient
         return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
     }
 
-    //#[Required]
-    final public function autowireAdminGraphiQLWithExplorerClient(EndpointHelpers $endpointHelpers): void
-    {
-        $this->endpointHelpers = $endpointHelpers;
-    }
-
     /**
      * Endpoint URL
      */

@@ -22,13 +22,6 @@ class TemplateHookSet extends AbstractHookSet
         return $this->applicationStateHelperService ??= $this->instanceManager->getInstance(ApplicationStateHelperServiceInterface::class);
     }
 
-    //#[Required]
-    final public function autowireTemplateHookSet(
-        ApplicationStateHelperServiceInterface $applicationStateHelperService,
-    ): void {
-        $this->applicationStateHelperService = $applicationStateHelperService;
-    }
-
     protected function init(): void
     {
         $this->hooksAPI->addFilter(

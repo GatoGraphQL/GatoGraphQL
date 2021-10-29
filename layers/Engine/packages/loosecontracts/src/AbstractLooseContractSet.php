@@ -23,12 +23,6 @@ abstract class AbstractLooseContractSet extends AbstractAutomaticallyInstantiate
         return $this->looseContractManager ??= $this->instanceManager->getInstance(LooseContractManagerInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractLooseContractSet(LooseContractManagerInterface $looseContractManager): void
-    {
-        $this->looseContractManager = $looseContractManager;
-    }
-
     final public function initialize(): void
     {
         // Require the configured hooks and names

@@ -38,15 +38,6 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractCustomPostMutationResolverHookSet(
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->customPostTypeAPI = $customPostTypeAPI;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-
     protected function init(): void
     {
         $this->hooksAPI->addFilter(

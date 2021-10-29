@@ -93,27 +93,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         return $this->aboutMenuPage ??= $this->instanceManager->getInstance(AboutMenuPage::class);
     }
 
-    //#[Required]
-    final public function autowireBottomMenuPageAttacher(
-        MenuPageHelper $menuPageHelper,
-        ModuleRegistryInterface $moduleRegistry,
-        UserAuthorizationInterface $userAuthorization,
-        SettingsMenuPage $settingsMenuPage,
-        ModuleDocumentationMenuPage $moduleDocumentationMenuPage,
-        ModulesMenuPage $modulesMenuPage,
-        ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage,
-        AboutMenuPage $aboutMenuPage,
-    ): void {
-        $this->menuPageHelper = $menuPageHelper;
-        $this->moduleRegistry = $moduleRegistry;
-        $this->userAuthorization = $userAuthorization;
-        $this->settingsMenuPage = $settingsMenuPage;
-        $this->moduleDocumentationMenuPage = $moduleDocumentationMenuPage;
-        $this->modulesMenuPage = $modulesMenuPage;
-        $this->releaseNotesAboutMenuPage = $releaseNotesAboutMenuPage;
-        $this->aboutMenuPage = $aboutMenuPage;
-    }
-
     /**
      * After adding the menus for the CPTs
      */

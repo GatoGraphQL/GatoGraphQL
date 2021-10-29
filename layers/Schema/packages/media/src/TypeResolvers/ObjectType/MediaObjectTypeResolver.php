@@ -32,15 +32,6 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->mediaTypeDataLoader ??= $this->instanceManager->getInstance(MediaTypeDataLoader::class);
     }
 
-    //#[Required]
-    final public function autowireMediaObjectTypeResolver(
-        MediaTypeAPIInterface $mediaTypeAPI,
-        MediaTypeDataLoader $mediaTypeDataLoader,
-    ): void {
-        $this->mediaTypeAPI = $mediaTypeAPI;
-        $this->mediaTypeDataLoader = $mediaTypeDataLoader;
-    }
-
     public function getTypeName(): string
     {
         return 'Media';

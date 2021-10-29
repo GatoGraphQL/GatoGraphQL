@@ -21,13 +21,6 @@ class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
         return $this->queryRoot ??= $this->instanceManager->getInstance(QueryRoot::class);
     }
 
-    //#[Required]
-    final public function autowireQueryRootTypeDataLoader(
-        QueryRoot $queryRoot,
-    ): void {
-        $this->queryRoot = $queryRoot;
-    }
-
     public function getObjects(array $ids): array
     {
         return [

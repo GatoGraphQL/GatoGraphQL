@@ -49,14 +49,6 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     }
 
-    //#[Required]
-    final public function autowireDataloadHelperService(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, ModuleProcessorManagerInterface $moduleProcessorManager): void
-    {
-        $this->feedbackMessageStore = $feedbackMessageStore;
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-        $this->moduleProcessorManager = $moduleProcessorManager;
-    }
-
     /**
      * Accept RelationalTypeResolverInterface as param, instead of the more natural
      * ObjectTypeResolverInterface, to make it easy within the application to check

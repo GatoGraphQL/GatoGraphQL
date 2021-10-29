@@ -36,13 +36,6 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
         return $this->endpointSchemaConfigurationBlock ??= $this->instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractCustomPostEndpointSchemaConfigurator(
-        EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock,
-    ): void {
-        $this->endpointSchemaConfigurationBlock = $endpointSchemaConfigurationBlock;
-    }
-
     /**
      * Extract the Schema Configuration ID from the block stored in the post
      */

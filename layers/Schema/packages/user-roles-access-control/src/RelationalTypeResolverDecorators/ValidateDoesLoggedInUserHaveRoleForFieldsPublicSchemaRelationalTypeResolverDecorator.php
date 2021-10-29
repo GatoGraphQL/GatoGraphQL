@@ -37,15 +37,6 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaRelationalTypeResolve
         return $this->validateDoesLoggedInUserHaveAnyRoleDirectiveResolver ??= $this->instanceManager->getInstance(ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver::class);
     }
 
-    //#[Required]
-    final public function autowireValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaRelationalTypeResolverDecorator(
-        AccessControlManagerInterface $accessControlManager,
-        ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver,
-    ): void {
-        $this->accessControlManager = $accessControlManager;
-        $this->validateDoesLoggedInUserHaveAnyRoleDirectiveResolver = $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
-    }
-
     protected function getConfigurationEntries(): array
     {
         return $this->getAccessControlManager()->getEntriesForFields(AccessControlGroups::ROLES);

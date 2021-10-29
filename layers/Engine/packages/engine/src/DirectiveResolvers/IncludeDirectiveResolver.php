@@ -26,13 +26,6 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireIncludeDirectiveResolver(
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-    ): void {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
-
     public function getDirectiveName(): string
     {
         return 'include';

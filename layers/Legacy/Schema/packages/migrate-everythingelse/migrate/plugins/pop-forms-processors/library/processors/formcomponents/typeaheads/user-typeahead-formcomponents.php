@@ -25,13 +25,6 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowirePoP_Module_Processor_UserSelectableTypeaheadFilterInputs(
-        IDScalarTypeResolver $idScalarTypeResolver,
-    ): void {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
-
     public function getModulesToProcess(): array
     {
         return array(

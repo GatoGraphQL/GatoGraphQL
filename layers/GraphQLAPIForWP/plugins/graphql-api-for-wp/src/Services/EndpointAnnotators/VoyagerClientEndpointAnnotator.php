@@ -24,13 +24,6 @@ class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator imp
         return $this->endpointVoyagerBlock ??= $this->instanceManager->getInstance(EndpointVoyagerBlock::class);
     }
 
-    //#[Required]
-    final public function autowireVoyagerClientEndpointAnnotator(
-        EndpointVoyagerBlock $endpointVoyagerBlock,
-    ): void {
-        $this->endpointVoyagerBlock = $endpointVoyagerBlock;
-    }
-
     public function getEnablingModule(): ?string
     {
         return ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS;

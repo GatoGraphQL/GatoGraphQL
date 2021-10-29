@@ -22,13 +22,6 @@ class CustomPostUnionTypeDataLoader extends AbstractUnionTypeDataLoader
         return $this->customPostUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireCustomPostUnionTypeDataLoader(
-        CustomPostUnionTypeResolver $customPostUnionTypeResolver,
-    ): void {
-        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
-    }
-
     protected function getUnionTypeResolver(): UnionTypeResolverInterface
     {
         return $this->getCustomPostUnionTypeResolver();

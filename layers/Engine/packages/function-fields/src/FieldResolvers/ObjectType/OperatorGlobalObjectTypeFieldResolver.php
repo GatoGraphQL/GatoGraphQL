@@ -75,23 +75,6 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireOperatorGlobalObjectTypeFieldResolver(
-        FloatScalarTypeResolver $floatScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver,
-        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
-        ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver,
-        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
-    ): void {
-        $this->floatScalarTypeResolver = $floatScalarTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
-        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
-        $this->arrayKeyScalarTypeResolver = $arrayKeyScalarTypeResolver;
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
-    }
-
     public function getFieldNamesToResolve(): array
     {
         return [

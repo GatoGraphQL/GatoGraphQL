@@ -23,13 +23,6 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
         return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowirePoP_Events_Module_Processor_DateRangeComponentFilterInputs(
-        DateScalarTypeResolver $dateScalarTypeResolver,
-    ): void {
-        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
-    }
-
     public function getModulesToProcess(): array
     {
         return array(

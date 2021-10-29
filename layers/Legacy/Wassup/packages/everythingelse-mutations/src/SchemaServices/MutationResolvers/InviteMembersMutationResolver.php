@@ -22,13 +22,6 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
     {
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
-
-    //#[Required]
-    final public function autowireInviteMembersMutationResolver(
-        UserTypeAPIInterface $userTypeAPI,
-    ): void {
-        $this->userTypeAPI = $userTypeAPI;
-    }
     
     protected function getEmailContent($form_data)
     {

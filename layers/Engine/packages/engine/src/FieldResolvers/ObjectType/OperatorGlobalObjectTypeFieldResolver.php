@@ -87,23 +87,6 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         return $this->errorProvider ??= $this->instanceManager->getInstance(ErrorProviderInterface::class);
     }
 
-    //#[Required]
-    final public function autowireOperatorGlobalObjectTypeFieldResolver(
-        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
-        IntScalarTypeResolver $intScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        ErrorProviderInterface $errorProvider,
-    ): void {
-        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->errorProvider = $errorProvider;
-    }
-
     public function getFieldNamesToResolve(): array
     {
         return [

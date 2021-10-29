@@ -33,15 +33,6 @@ class Engine extends UpstreamEngine implements EngineInterface
         return $this->cacheControlEngine ??= $this->instanceManager->getInstance(CacheControlEngineInterface::class);
     }
 
-    //#[Required]
-    final public function autowireEngineEngine(
-        LooseContractManagerInterface $looseContractManager,
-        CacheControlEngineInterface $cacheControlEngine
-    ): void {
-        $this->looseContractManager = $looseContractManager;
-        $this->cacheControlEngine = $cacheControlEngine;
-    }
-
     public function generateData(): void
     {
         // Check if there are hooks that must be implemented by the CMS, that have not been done so.

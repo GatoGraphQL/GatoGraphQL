@@ -37,15 +37,6 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireCopyRelationalResultsDirectiveResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-    ): void {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
-
     public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         return true;

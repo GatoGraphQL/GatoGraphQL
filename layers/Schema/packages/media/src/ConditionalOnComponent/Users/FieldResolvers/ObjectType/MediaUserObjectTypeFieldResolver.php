@@ -34,15 +34,6 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireMediaUserObjectTypeFieldResolver(
-        UserMediaTypeAPIInterface $userMediaTypeAPI,
-        UserObjectTypeResolver $userObjectTypeResolver,
-    ): void {
-        $this->userMediaTypeAPI = $userMediaTypeAPI;
-        $this->userObjectTypeResolver = $userObjectTypeResolver;
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

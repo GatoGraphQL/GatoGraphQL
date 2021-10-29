@@ -21,13 +21,6 @@ class UpdatePostMutationResolverBridge extends AbstractCreateUpdatePostMutationR
         return $this->updatePostMutationResolver ??= $this->instanceManager->getInstance(UpdatePostMutationResolver::class);
     }
 
-    //#[Required]
-    final public function autowireUpdatePostMutationResolverBridge(
-        UpdatePostMutationResolver $updatePostMutationResolver,
-    ): void {
-        $this->updatePostMutationResolver = $updatePostMutationResolver;
-    }
-
     public function getMutationResolver(): MutationResolverInterface
     {
         return $this->getUpdatePostMutationResolver();

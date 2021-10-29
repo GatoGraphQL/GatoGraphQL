@@ -76,15 +76,6 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         return $this->persistedQueryManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAPISchemaDefinitionService(
-        PersistedFragmentManagerInterface $persistedFragmentManager,
-        PersistedQueryManagerInterface $persistedQueryManager,
-    ): void {
-        $this->persistedFragmentManager = $persistedFragmentManager;
-        $this->persistedQueryManager = $persistedQueryManager;
-    }
-
     final public function getPersistentCache(): PersistentCacheInterface
     {
         $this->persistentCache ??= PersistentCacheFacade::getInstance();

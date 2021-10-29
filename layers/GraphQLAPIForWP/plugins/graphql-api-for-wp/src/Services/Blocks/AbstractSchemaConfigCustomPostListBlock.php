@@ -31,15 +31,6 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
         return $this->cptUtils ??= $this->instanceManager->getInstance(CPTUtils::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractSchemaConfigCustomPostListBlock(
-        BlockRenderingHelpers $blockRenderingHelpers,
-        CPTUtils $cptUtils,
-    ): void {
-        $this->blockRenderingHelpers = $blockRenderingHelpers;
-        $this->cptUtils = $cptUtils;
-    }
-
     abstract protected function getAttributeName(): string;
 
     abstract protected function getCustomPostType(): string;

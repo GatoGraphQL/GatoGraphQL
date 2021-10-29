@@ -65,19 +65,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
-    //#[Required]
-    final public function autowireRootObjectTypeFieldResolver(
-        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
-        PersistedFragmentManagerInterface $persistedFragmentManager,
-        PersistedQueryManagerInterface $persistedQueryManager,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-    ): void {
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
-        $this->persistedFragmentManager = $persistedFragmentManager;
-        $this->persistedQueryManager = $persistedQueryManager;
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
-
     final public function getPersistentCache(): PersistentCacheInterface
     {
         $this->persistentCache ??= PersistentCacheFacade::getInstance();

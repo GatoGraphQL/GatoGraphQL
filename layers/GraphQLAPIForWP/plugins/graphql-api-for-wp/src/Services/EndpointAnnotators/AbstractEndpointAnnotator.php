@@ -25,12 +25,6 @@ abstract class AbstractEndpointAnnotator implements EndpointAnnotatorInterface
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
 
-    //#[Required]
-    final public function autowireAbstractEndpointAnnotator(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-    }
-
     /**
      * Add actions to the CPT list
      * @param array<string, string> $actions

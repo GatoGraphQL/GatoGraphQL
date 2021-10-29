@@ -27,12 +27,6 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
     {
         return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
     }
-
-    //#[Required]
-    final public function autowireGraphQLEndpointHandler(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
-    {
-        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
-    }
     /**
      * Initialize the endpoints
      */
