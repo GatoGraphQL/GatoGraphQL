@@ -13,16 +13,16 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?UserMetaTypeAPIInterface $userMetaAPI = null;
+    private ?UserMetaTypeAPIInterface $userMetaTypeAPI = null;
     private ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
 
-    public function setUserMetaTypeAPI(UserMetaTypeAPIInterface $userMetaAPI): void
+    public function setUserMetaTypeAPI(UserMetaTypeAPIInterface $userMetaTypeAPI): void
     {
-        $this->userMetaAPI = $userMetaAPI;
+        $this->userMetaTypeAPI = $userMetaTypeAPI;
     }
     protected function getUserMetaTypeAPI(): UserMetaTypeAPIInterface
     {
-        return $this->userMetaAPI ??= $this->instanceManager->getInstance(UserMetaTypeAPIInterface::class);
+        return $this->userMetaTypeAPI ??= $this->instanceManager->getInstance(UserMetaTypeAPIInterface::class);
     }
     public function setWithMetaInterfaceTypeFieldResolver(WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver): void
     {
@@ -35,10 +35,10 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     //#[Required]
     final public function autowireUserObjectTypeFieldResolver(
-        UserMetaTypeAPIInterface $userMetaAPI,
+        UserMetaTypeAPIInterface $userMetaTypeAPI,
         WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
     ): void {
-        $this->userMetaAPI = $userMetaAPI;
+        $this->userMetaTypeAPI = $userMetaTypeAPI;
         $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
     }
 
@@ -83,7 +83,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'metaValue':
             case 'metaValues':
-                return $this->getUserMetaAPI()->getUserMeta(
+                return $this->getUserMetaTypeAPI()->getUserMeta(
                     $objectTypeResolver->getID($user),
                     $fieldArgs['key'],
                     $fieldName === 'metaValue'
