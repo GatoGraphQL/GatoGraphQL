@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\Cache;
 
 use PoP\ComponentModel\Cache\Cache as UpstreamCache;
-use PoP\Engine\Services\WithHooksAPIServiceTrait;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use Psr\Cache\CacheItemInterface;
 use Symfony\Contracts\Service\Attribute\Required;

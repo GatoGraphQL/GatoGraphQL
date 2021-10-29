@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Users\TypeAPIs;
 
 use PoP\Engine\CMS\CMSHelperServiceInterface;
-use PoP\Engine\Services\WithHooksAPIServiceTrait;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
