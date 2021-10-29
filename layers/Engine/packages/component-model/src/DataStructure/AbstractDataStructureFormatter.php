@@ -22,7 +22,7 @@ abstract class AbstractDataStructureFormatter implements DataStructureFormatterI
     }
     protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
     {
-        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
+        return $this->feedbackMessageStore ??= $this->getInstanceManager()->getInstance(FeedbackMessageStoreInterface::class);
     }
     public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -30,7 +30,7 @@ abstract class AbstractDataStructureFormatter implements DataStructureFormatterI
     }
     protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
-        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
+        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
     }
 
     public function getFormattedData($data)

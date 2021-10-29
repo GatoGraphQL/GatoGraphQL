@@ -30,7 +30,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
-        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+        return $this->postObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostObjectTypeResolver::class);
     }
     public function setCreatePostMutationResolver(CreatePostMutationResolver $createPostMutationResolver): void
     {
@@ -38,7 +38,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getCreatePostMutationResolver(): CreatePostMutationResolver
     {
-        return $this->createPostMutationResolver ??= $this->instanceManager->getInstance(CreatePostMutationResolver::class);
+        return $this->createPostMutationResolver ??= $this->getInstanceManager()->getInstance(CreatePostMutationResolver::class);
     }
     public function setUpdatePostMutationResolver(UpdatePostMutationResolver $updatePostMutationResolver): void
     {
@@ -46,7 +46,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getUpdatePostMutationResolver(): UpdatePostMutationResolver
     {
-        return $this->updatePostMutationResolver ??= $this->instanceManager->getInstance(UpdatePostMutationResolver::class);
+        return $this->updatePostMutationResolver ??= $this->getInstanceManager()->getInstance(UpdatePostMutationResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

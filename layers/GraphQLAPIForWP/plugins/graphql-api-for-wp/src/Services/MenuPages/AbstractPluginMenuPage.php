@@ -21,7 +21,7 @@ abstract class AbstractPluginMenuPage extends AbstractMenuPage
     }
     protected function getPluginMenu(): PluginMenu
     {
-        return $this->pluginMenu ??= $this->instanceManager->getInstance(PluginMenu::class);
+        return $this->pluginMenu ??= $this->getInstanceManager()->getInstance(PluginMenu::class);
     }
 
     public function getMenu(): MenuInterface

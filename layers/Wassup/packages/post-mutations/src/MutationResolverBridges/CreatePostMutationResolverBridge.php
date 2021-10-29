@@ -18,7 +18,7 @@ class CreatePostMutationResolverBridge extends AbstractCreateUpdatePostMutationR
     }
     protected function getCreatePostMutationResolver(): CreatePostMutationResolver
     {
-        return $this->createPostMutationResolver ??= $this->instanceManager->getInstance(CreatePostMutationResolver::class);
+        return $this->createPostMutationResolver ??= $this->getInstanceManager()->getInstance(CreatePostMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface

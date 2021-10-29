@@ -27,7 +27,7 @@ abstract class AbstractEditorScript extends AbstractScript
     }
     protected function getEditorHelpers(): EditorHelpers
     {
-        return $this->editorHelpers ??= $this->instanceManager->getInstance(EditorHelpers::class);
+        return $this->editorHelpers ??= $this->getInstanceManager()->getInstance(EditorHelpers::class);
     }
 
     /**

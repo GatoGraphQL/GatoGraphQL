@@ -37,7 +37,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
     protected function getRootObjectTypeResolver(): RootObjectTypeResolver
     {
-        return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
+        return $this->rootObjectTypeResolver ??= $this->getInstanceManager()->getInstance(RootObjectTypeResolver::class);
     }
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -45,7 +45,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
     }
     public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
     {
@@ -53,7 +53,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
     protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
     {
-        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->getInstanceManager()->getInstance(DangerouslyDynamicScalarTypeResolver::class);
     }
 
     public function getDirectiveName(): string

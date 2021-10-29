@@ -31,7 +31,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
     }
     protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
     }
     public function setGeneralUtils(GeneralUtils $generalUtils): void
     {
@@ -39,7 +39,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
     }
     protected function getGeneralUtils(): GeneralUtils
     {
-        return $this->generalUtils ??= $this->instanceManager->getInstance(GeneralUtils::class);
+        return $this->generalUtils ??= $this->getInstanceManager()->getInstance(GeneralUtils::class);
     }
 
     /**

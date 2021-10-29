@@ -23,7 +23,7 @@ class GraphQLQueryPostTypeHelpers
     }
     protected function getPersistedQueryEndpointGraphiQLBlockAccessor(): PersistedQueryEndpointGraphiQLBlockAccessor
     {
-        return $this->persistedQueryEndpointGraphiQLBlockAccessor ??= $this->instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlockAccessor::class);
+        return $this->persistedQueryEndpointGraphiQLBlockAccessor ??= $this->getInstanceManager()->getInstance(PersistedQueryEndpointGraphiQLBlockAccessor::class);
     }
     public function setPersistedQueryEndpointAPIHierarchyBlockAccessor(PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor): void
     {
@@ -31,7 +31,7 @@ class GraphQLQueryPostTypeHelpers
     }
     protected function getPersistedQueryEndpointAPIHierarchyBlockAccessor(): PersistedQueryEndpointAPIHierarchyBlockAccessor
     {
-        return $this->persistedQueryEndpointAPIHierarchyBlockAccessor ??= $this->instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlockAccessor::class);
+        return $this->persistedQueryEndpointAPIHierarchyBlockAccessor ??= $this->getInstanceManager()->getInstance(PersistedQueryEndpointAPIHierarchyBlockAccessor::class);
     }
 
     /**

@@ -23,7 +23,7 @@ class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter imple
     }
     protected function getCustomEndpointVoyagerClient(): CustomEndpointVoyagerClient
     {
-        return $this->customEndpointVoyagerClient ??= $this->instanceManager->getInstance(CustomEndpointVoyagerClient::class);
+        return $this->customEndpointVoyagerClient ??= $this->getInstanceManager()->getInstance(CustomEndpointVoyagerClient::class);
     }
     public function setVoyagerClientEndpointAnnotator(VoyagerClientEndpointAnnotator $voyagerClientEndpointAnnotator): void
     {
@@ -31,7 +31,7 @@ class VoyagerClientEndpointExecuter extends AbstractClientEndpointExecuter imple
     }
     protected function getVoyagerClientEndpointAnnotator(): VoyagerClientEndpointAnnotator
     {
-        return $this->voyagerClientEndpointAnnotator ??= $this->instanceManager->getInstance(VoyagerClientEndpointAnnotator::class);
+        return $this->voyagerClientEndpointAnnotator ??= $this->getInstanceManager()->getInstance(VoyagerClientEndpointAnnotator::class);
     }
 
     public function getEnablingModule(): ?string

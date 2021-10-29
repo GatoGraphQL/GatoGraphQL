@@ -21,7 +21,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
     }
     protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
-        return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
+        return $this->schemaDefinitionService ??= $this->getInstanceManager()->getInstance(SchemaDefinitionServiceInterface::class);
     }
 
     public function getModulesToProcess(): array

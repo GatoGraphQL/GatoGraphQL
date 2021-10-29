@@ -29,7 +29,7 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
     }
     protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
     {
-        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+        return $this->customPostStatusEnumTypeResolver ??= $this->getInstanceManager()->getInstance(CustomPostStatusEnumTypeResolver::class);
     }
     public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -37,7 +37,7 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
     }
     protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        return $this->idScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IDScalarTypeResolver::class);
     }
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -45,7 +45,7 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
     }
 
     private function getCreateOrUpdateCustomPostSchemaFieldArgNameTypeResolvers(

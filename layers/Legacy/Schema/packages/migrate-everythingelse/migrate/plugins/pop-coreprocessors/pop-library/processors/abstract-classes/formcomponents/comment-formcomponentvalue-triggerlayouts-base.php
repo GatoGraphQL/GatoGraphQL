@@ -6,6 +6,6 @@ abstract class PoP_Module_Processor_CommentTriggerLayoutFormComponentValuesBase 
 {
     public function getTriggerRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
     {
-        return $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+        return $this->getInstanceManager()->getInstance(CommentObjectTypeResolver::class);
     }
 }

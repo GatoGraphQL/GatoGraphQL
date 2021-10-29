@@ -274,7 +274,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
             case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST:
-                return $this->instanceManager->getInstance(LocationPostObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(LocationPostObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

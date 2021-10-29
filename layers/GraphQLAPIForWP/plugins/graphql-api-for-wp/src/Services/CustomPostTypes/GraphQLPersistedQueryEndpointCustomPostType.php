@@ -32,7 +32,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
     }
     protected function getPersistedQueryEndpointBlockRegistry(): PersistedQueryEndpointBlockRegistryInterface
     {
-        return $this->persistedQueryEndpointBlockRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointBlockRegistryInterface::class);
+        return $this->persistedQueryEndpointBlockRegistry ??= $this->getInstanceManager()->getInstance(PersistedQueryEndpointBlockRegistryInterface::class);
     }
     public function setPersistedQueryEndpointExecuterRegistry(PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistry): void
     {
@@ -40,7 +40,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
     }
     protected function getPersistedQueryEndpointExecuterRegistry(): PersistedQueryEndpointExecuterRegistryInterface
     {
-        return $this->persistedQueryEndpointExecuterRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointExecuterRegistryInterface::class);
+        return $this->persistedQueryEndpointExecuterRegistry ??= $this->getInstanceManager()->getInstance(PersistedQueryEndpointExecuterRegistryInterface::class);
     }
     public function setPersistedQueryEndpointAnnotatorRegistry(PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistry): void
     {
@@ -48,7 +48,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
     }
     protected function getPersistedQueryEndpointAnnotatorRegistry(): PersistedQueryEndpointAnnotatorRegistryInterface
     {
-        return $this->persistedQueryEndpointAnnotatorRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointAnnotatorRegistryInterface::class);
+        return $this->persistedQueryEndpointAnnotatorRegistry ??= $this->getInstanceManager()->getInstance(PersistedQueryEndpointAnnotatorRegistryInterface::class);
     }
     public function setPersistedQueryEndpointOptionsBlock(PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock): void
     {
@@ -56,7 +56,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
     }
     protected function getPersistedQueryEndpointOptionsBlock(): PersistedQueryEndpointOptionsBlock
     {
-        return $this->persistedQueryEndpointOptionsBlock ??= $this->instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
+        return $this->persistedQueryEndpointOptionsBlock ??= $this->getInstanceManager()->getInstance(PersistedQueryEndpointOptionsBlock::class);
     }
 
     /**

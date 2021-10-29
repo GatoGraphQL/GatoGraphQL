@@ -27,7 +27,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
-        return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+        return $this->commentObjectTypeResolver ??= $this->getInstanceManager()->getInstance(CommentObjectTypeResolver::class);
     }
     public function setAddCommentToCustomPostMutationResolver(AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver): void
     {
@@ -35,7 +35,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     protected function getAddCommentToCustomPostMutationResolver(): AddCommentToCustomPostMutationResolver
     {
-        return $this->addCommentToCustomPostMutationResolver ??= $this->instanceManager->getInstance(AddCommentToCustomPostMutationResolver::class);
+        return $this->addCommentToCustomPostMutationResolver ??= $this->getInstanceManager()->getInstance(AddCommentToCustomPostMutationResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

@@ -41,7 +41,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     }
     protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
-        return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+        return $this->commentObjectTypeResolver ??= $this->getInstanceManager()->getInstance(CommentObjectTypeResolver::class);
     }
     public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
     {
@@ -49,7 +49,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     }
     protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
     {
-        return $this->postTagObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+        return $this->postTagObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostTagObjectTypeResolver::class);
     }
     public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
     {
@@ -57,7 +57,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     }
     protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
-        return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+        return $this->postCategoryObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostCategoryObjectTypeResolver::class);
     }
     public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {
@@ -65,7 +65,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     }
     protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
-        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+        return $this->postObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostObjectTypeResolver::class);
     }
     public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
     {
@@ -73,7 +73,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     }
     protected function getUserObjectTypeResolver(): UserObjectTypeResolver
     {
-        return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+        return $this->userObjectTypeResolver ??= $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
     }
 
     /**

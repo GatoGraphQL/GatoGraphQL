@@ -28,7 +28,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
-        return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+        return $this->commentTypeAPI ??= $this->getInstanceManager()->getInstance(CommentTypeAPIInterface::class);
     }
     public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
     {
@@ -36,7 +36,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
-        return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+        return $this->commentObjectTypeResolver ??= $this->getInstanceManager()->getInstance(CommentObjectTypeResolver::class);
     }
     public function setAddCommentToCustomPostMutationResolver(AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver): void
     {
@@ -44,7 +44,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getAddCommentToCustomPostMutationResolver(): AddCommentToCustomPostMutationResolver
     {
-        return $this->addCommentToCustomPostMutationResolver ??= $this->instanceManager->getInstance(AddCommentToCustomPostMutationResolver::class);
+        return $this->addCommentToCustomPostMutationResolver ??= $this->getInstanceManager()->getInstance(AddCommentToCustomPostMutationResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

@@ -19,7 +19,7 @@ trait ValidateUserNotLoggedInForFieldsRelationalTypeResolverDecoratorTrait
     }
     protected function getValidateIsUserNotLoggedInDirectiveResolver(): ValidateIsUserNotLoggedInDirectiveResolver
     {
-        return $this->validateIsUserNotLoggedInDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserNotLoggedInDirectiveResolver::class);
+        return $this->validateIsUserNotLoggedInDirectiveResolver ??= $this->getInstanceManager()->getInstance(ValidateIsUserNotLoggedInDirectiveResolver::class);
     }
 
     protected function removeFieldNameBasedOnMatchingEntryValue($entryValue = null): bool

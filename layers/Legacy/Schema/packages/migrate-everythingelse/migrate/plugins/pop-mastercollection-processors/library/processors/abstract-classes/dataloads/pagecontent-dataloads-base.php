@@ -5,7 +5,7 @@ abstract class PoP_Module_Processor_PageContentDataloadsBase extends PoP_Module_
 {
     public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        return $this->instanceManager->getInstance(PageObjectTypeResolver::class);
+        return $this->getInstanceManager()->getInstance(PageObjectTypeResolver::class);
     }
 
     public function getPage(array $module, array &$props)

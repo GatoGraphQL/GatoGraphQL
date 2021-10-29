@@ -21,7 +21,7 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
     }
     protected function getCustomPostUnionTypeDataLoader(): CustomPostUnionTypeDataLoader
     {
-        return $this->customPostUnionTypeDataLoader ??= $this->instanceManager->getInstance(CustomPostUnionTypeDataLoader::class);
+        return $this->customPostUnionTypeDataLoader ??= $this->getInstanceManager()->getInstance(CustomPostUnionTypeDataLoader::class);
     }
     public function setIsCustomPostInterfaceTypeResolver(IsCustomPostInterfaceTypeResolver $isCustomPostInterfaceTypeResolver): void
     {
@@ -29,7 +29,7 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
     }
     protected function getIsCustomPostInterfaceTypeResolver(): IsCustomPostInterfaceTypeResolver
     {
-        return $this->isCustomPostInterfaceTypeResolver ??= $this->instanceManager->getInstance(IsCustomPostInterfaceTypeResolver::class);
+        return $this->isCustomPostInterfaceTypeResolver ??= $this->getInstanceManager()->getInstance(IsCustomPostInterfaceTypeResolver::class);
     }
 
     public function getTypeName(): string

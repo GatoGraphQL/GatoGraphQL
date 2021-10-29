@@ -19,7 +19,7 @@ trait FilterDataModuleProcessorTrait
     }
     protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
     {
-        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
+        return $this->moduleProcessorManager ??= $this->getInstanceManager()->getInstance(ModuleProcessorManagerInterface::class);
     }
     public function setFilterInputProcessorManager(FilterInputProcessorManagerInterface $filterInputProcessorManager): void
     {
@@ -27,7 +27,7 @@ trait FilterDataModuleProcessorTrait
     }
     protected function getFilterInputProcessorManager(): FilterInputProcessorManagerInterface
     {
-        return $this->filterInputProcessorManager ??= $this->instanceManager->getInstance(FilterInputProcessorManagerInterface::class);
+        return $this->filterInputProcessorManager ??= $this->getInstanceManager()->getInstance(FilterInputProcessorManagerInterface::class);
     }
 
     /**

@@ -18,7 +18,7 @@ trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDe
     }
     protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
-        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
+        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
     }
 
     /**

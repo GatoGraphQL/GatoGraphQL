@@ -38,7 +38,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     }
     protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
     }
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -46,7 +46,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
     }
     public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
     {
@@ -54,7 +54,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     }
     protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
-        return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+        return $this->postCategoryObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostCategoryObjectTypeResolver::class);
     }
     public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
     {
@@ -62,7 +62,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     }
     protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
     {
-        return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
+        return $this->postCategoryTypeAPI ??= $this->getInstanceManager()->getInstance(PostCategoryTypeAPIInterface::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

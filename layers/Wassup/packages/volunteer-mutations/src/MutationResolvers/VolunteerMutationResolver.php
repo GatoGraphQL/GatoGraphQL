@@ -19,7 +19,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
     }
     protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
-        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+        return $this->customPostTypeAPI ??= $this->getInstanceManager()->getInstance(CustomPostTypeAPIInterface::class);
     }
 
     public function validateErrors(array $form_data): array

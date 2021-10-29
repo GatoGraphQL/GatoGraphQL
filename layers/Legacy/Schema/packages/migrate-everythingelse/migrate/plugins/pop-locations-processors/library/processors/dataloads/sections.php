@@ -64,7 +64,7 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONS_SCROLL:
             case self::MODULE_DATALOAD_LOCATIONS_TYPEAHEAD:
-                return $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(LocationObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

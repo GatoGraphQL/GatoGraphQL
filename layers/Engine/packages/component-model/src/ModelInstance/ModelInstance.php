@@ -30,7 +30,7 @@ class ModelInstance implements ModelInstanceInterface
     }
     protected function getApplicationInfo(): ApplicationInfoInterface
     {
-        return $this->applicationInfo ??= $this->instanceManager->getInstance(ApplicationInfoInterface::class);
+        return $this->applicationInfo ??= $this->getInstanceManager()->getInstance(ApplicationInfoInterface::class);
     }
     public function setDefinitionManager(DefinitionManagerInterface $definitionManager): void
     {
@@ -38,7 +38,7 @@ class ModelInstance implements ModelInstanceInterface
     }
     protected function getDefinitionManager(): DefinitionManagerInterface
     {
-        return $this->definitionManager ??= $this->instanceManager->getInstance(DefinitionManagerInterface::class);
+        return $this->definitionManager ??= $this->getInstanceManager()->getInstance(DefinitionManagerInterface::class);
     }
 
     public function getModelInstanceId(): string

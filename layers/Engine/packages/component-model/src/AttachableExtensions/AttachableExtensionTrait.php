@@ -22,7 +22,7 @@ trait AttachableExtensionTrait
     }
     protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
     {
-        return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
+        return $this->attachableExtensionManager ??= $this->getInstanceManager()->getInstance(AttachableExtensionManagerInterface::class);
     }
 
     /**

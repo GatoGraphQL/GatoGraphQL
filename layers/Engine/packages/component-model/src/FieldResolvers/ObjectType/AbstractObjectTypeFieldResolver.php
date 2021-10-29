@@ -93,7 +93,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
-        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
+        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
     }
     public function setNameResolver(NameResolverInterface $nameResolver): void
     {
@@ -101,7 +101,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     protected function getNameResolver(): NameResolverInterface
     {
-        return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
+        return $this->nameResolver ??= $this->getInstanceManager()->getInstance(NameResolverInterface::class);
     }
     public function setCMSService(CMSServiceInterface $cmsService): void
     {
@@ -109,7 +109,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     protected function getCMSService(): CMSServiceInterface
     {
-        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
+        return $this->cmsService ??= $this->getInstanceManager()->getInstance(CMSServiceInterface::class);
     }
     public function setSemverHelperService(SemverHelperServiceInterface $semverHelperService): void
     {
@@ -117,7 +117,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     protected function getSemverHelperService(): SemverHelperServiceInterface
     {
-        return $this->semverHelperService ??= $this->instanceManager->getInstance(SemverHelperServiceInterface::class);
+        return $this->semverHelperService ??= $this->getInstanceManager()->getInstance(SemverHelperServiceInterface::class);
     }
     public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
     {
@@ -125,7 +125,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
-        return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
+        return $this->schemaDefinitionService ??= $this->getInstanceManager()->getInstance(SchemaDefinitionServiceInterface::class);
     }
     public function setEngine(EngineInterface $engine): void
     {
@@ -133,7 +133,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     protected function getEngine(): EngineInterface
     {
-        return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
+        return $this->engine ??= $this->getInstanceManager()->getInstance(EngineInterface::class);
     }
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -141,7 +141,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
     }
 
     final public function getClassesToAttachTo(): array

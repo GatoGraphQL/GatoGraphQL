@@ -125,15 +125,15 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_FOLLOWSUSERS:
-                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
 
             case self::MODULE_DATALOAD_UPVOTESPOSTS:
             case self::MODULE_DATALOAD_RECOMMENDSPOSTS:
             case self::MODULE_DATALOAD_DOWNVOTESPOSTS:
-                return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(CustomPostObjectTypeResolver::class);
 
             case self::MODULE_DATALOAD_SUBSCRIBESTOTAGS:
-                return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(PostTagObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

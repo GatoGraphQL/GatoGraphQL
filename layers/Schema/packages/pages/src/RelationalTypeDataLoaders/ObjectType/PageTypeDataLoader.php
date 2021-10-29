@@ -18,7 +18,7 @@ class PageTypeDataLoader extends AbstractCustomPostTypeDataLoader
     }
     protected function getPageTypeAPI(): PageTypeAPIInterface
     {
-        return $this->pageTypeAPI ??= $this->instanceManager->getInstance(PageTypeAPIInterface::class);
+        return $this->pageTypeAPI ??= $this->getInstanceManager()->getInstance(PageTypeAPIInterface::class);
     }
 
     public function executeQuery($query, array $options = []): array

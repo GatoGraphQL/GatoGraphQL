@@ -21,7 +21,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
     }
     protected function getModulePathManager(): ModulePathManagerInterface
     {
-        return $this->modulePathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
+        return $this->modulePathManager ??= $this->getInstanceManager()->getInstance(ModulePathManagerInterface::class);
     }
 
     public function getStringifiedModulePropagationCurrentPath(array $module)

@@ -25,7 +25,7 @@ abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteM
     }
     protected function getRESTDataStructureFormatter(): RESTDataStructureFormatter
     {
-        return $this->restDataStructureFormatter ??= $this->instanceManager->getInstance(RESTDataStructureFormatter::class);
+        return $this->restDataStructureFormatter ??= $this->getInstanceManager()->getInstance(RESTDataStructureFormatter::class);
     }
     public function setFieldQueryConvertor(FieldQueryConvertorInterface $fieldQueryConvertor): void
     {
@@ -33,7 +33,7 @@ abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteM
     }
     protected function getFieldQueryConvertor(): FieldQueryConvertorInterface
     {
-        return $this->fieldQueryConvertor ??= $this->instanceManager->getInstance(FieldQueryConvertorInterface::class);
+        return $this->fieldQueryConvertor ??= $this->getInstanceManager()->getInstance(FieldQueryConvertorInterface::class);
     }
 
     public function getRESTFields(): array

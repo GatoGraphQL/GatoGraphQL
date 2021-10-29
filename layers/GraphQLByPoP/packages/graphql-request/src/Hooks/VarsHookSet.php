@@ -33,7 +33,7 @@ class VarsHookSet extends AbstractHookSet
     }
     protected function getQueryRetriever(): QueryRetrieverInterface
     {
-        return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
+        return $this->queryRetriever ??= $this->getInstanceManager()->getInstance(QueryRetrieverInterface::class);
     }
     public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
     {
@@ -41,7 +41,7 @@ class VarsHookSet extends AbstractHookSet
     }
     protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
     {
-        return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+        return $this->graphQLDataStructureFormatter ??= $this->getInstanceManager()->getInstance(GraphQLDataStructureFormatter::class);
     }
     public function setGraphQLPersistedQueryManager(GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager): void
     {
@@ -49,7 +49,7 @@ class VarsHookSet extends AbstractHookSet
     }
     protected function getGraphQLPersistedQueryManager(): GraphQLPersistedQueryManagerInterface
     {
-        return $this->graphQLPersistedQueryManager ??= $this->instanceManager->getInstance(GraphQLPersistedQueryManagerInterface::class);
+        return $this->graphQLPersistedQueryManager ??= $this->getInstanceManager()->getInstance(GraphQLPersistedQueryManagerInterface::class);
     }
     public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
@@ -57,7 +57,7 @@ class VarsHookSet extends AbstractHookSet
     }
     protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
     {
-        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
+        return $this->feedbackMessageStore ??= $this->getInstanceManager()->getInstance(FeedbackMessageStoreInterface::class);
     }
     public function setGraphQLQueryConvertor(GraphQLQueryConvertorInterface $graphQLQueryConvertor): void
     {
@@ -65,7 +65,7 @@ class VarsHookSet extends AbstractHookSet
     }
     protected function getGraphQLQueryConvertor(): GraphQLQueryConvertorInterface
     {
-        return $this->graphQLQueryConvertor ??= $this->instanceManager->getInstance(GraphQLQueryConvertorInterface::class);
+        return $this->graphQLQueryConvertor ??= $this->getInstanceManager()->getInstance(GraphQLQueryConvertorInterface::class);
     }
 
     protected function init(): void

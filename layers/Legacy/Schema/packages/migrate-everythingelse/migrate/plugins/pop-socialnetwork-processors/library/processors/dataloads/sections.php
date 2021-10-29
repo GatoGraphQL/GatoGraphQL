@@ -378,7 +378,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_LIST:
-                return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(PostTagObjectTypeResolver::class);
 
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_SIMPLEVIEW:
@@ -411,7 +411,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
             case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_LIST:
-                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

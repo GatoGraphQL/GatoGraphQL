@@ -22,7 +22,7 @@ class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
     }
     protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
-        return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+        return $this->commentTypeAPI ??= $this->getInstanceManager()->getInstance(CommentTypeAPIInterface::class);
     }
 
     public function getQueryToRetrieveObjectsForIDs(array $ids): array

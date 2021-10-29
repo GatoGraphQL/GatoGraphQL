@@ -722,13 +722,13 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             case self::MODULE_DATALOAD_TAGPOSTS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGPOSTS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGPOSTS_SCROLL_LIST:
-                return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(PostObjectTypeResolver::class);
 
             case self::MODULE_DATALOAD_TAGS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_TAGS_SCROLL_LIST:
             case self::MODULE_DATALOAD_TAGS_TYPEAHEAD:
             case self::MODULE_DATALOAD_TAGS_MENTIONS:
-                return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(PostTagObjectTypeResolver::class);
 
             case self::MODULE_DATALOAD_CONTENT_TYPEAHEAD:
             case self::MODULE_DATALOAD_CONTENT_SCROLL_NAVIGATOR:
@@ -777,7 +777,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLL_LIST:
             case self::MODULE_DATALOAD_USERS_SCROLL_LIST:
             case self::MODULE_DATALOAD_USERS_CAROUSEL:
-                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

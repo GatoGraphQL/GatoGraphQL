@@ -28,7 +28,7 @@ class ObjectTypeFieldResolver_CommunityUsers extends AbstractObjectTypeFieldReso
     {
         switch ($fieldName) {
             case 'members':
-                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
         }
         return match($fieldName) {
             'hasMembers' => \PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver::class,

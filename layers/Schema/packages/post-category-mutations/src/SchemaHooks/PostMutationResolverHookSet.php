@@ -26,7 +26,7 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
     }
     protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
-        return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+        return $this->postCategoryObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostCategoryObjectTypeResolver::class);
     }
     public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
     {
@@ -34,7 +34,7 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
     }
     protected function getPostTypeAPI(): PostTypeAPIInterface
     {
-        return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
+        return $this->postTypeAPI ??= $this->getInstanceManager()->getInstance(PostTypeAPIInterface::class);
     }
 
     protected function getCustomPostType(): string

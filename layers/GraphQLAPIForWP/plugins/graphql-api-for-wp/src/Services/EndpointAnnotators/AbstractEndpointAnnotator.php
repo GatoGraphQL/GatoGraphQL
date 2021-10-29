@@ -22,7 +22,7 @@ abstract class AbstractEndpointAnnotator implements EndpointAnnotatorInterface
     }
     protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
     }
 
     /**

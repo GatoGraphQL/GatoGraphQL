@@ -48,7 +48,7 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_LIST:
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_FULLVIEW:
-                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

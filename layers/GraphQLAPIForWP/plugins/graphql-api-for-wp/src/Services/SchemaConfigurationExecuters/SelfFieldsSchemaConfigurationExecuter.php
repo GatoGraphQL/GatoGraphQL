@@ -21,7 +21,7 @@ class SelfFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisable
     }
     protected function getSchemaConfigSelfFieldsBlock(): SchemaConfigSelfFieldsBlock
     {
-        return $this->schemaConfigSelfFieldsBlock ??= $this->instanceManager->getInstance(SchemaConfigSelfFieldsBlock::class);
+        return $this->schemaConfigSelfFieldsBlock ??= $this->getInstanceManager()->getInstance(SchemaConfigSelfFieldsBlock::class);
     }
 
     public function getEnablingModule(): ?string

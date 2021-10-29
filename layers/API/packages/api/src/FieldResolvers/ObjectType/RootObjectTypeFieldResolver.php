@@ -38,7 +38,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
-        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+        return $this->jsonObjectScalarTypeResolver ??= $this->getInstanceManager()->getInstance(JSONObjectScalarTypeResolver::class);
     }
     public function setPersistedFragmentManager(PersistedFragmentManagerInterface $persistedFragmentManager): void
     {
@@ -46,7 +46,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
     {
-        return $this->persistedFragmentManager ??= $this->instanceManager->getInstance(PersistedFragmentManagerInterface::class);
+        return $this->persistedFragmentManager ??= $this->getInstanceManager()->getInstance(PersistedFragmentManagerInterface::class);
     }
     public function setPersistedQueryManager(PersistedQueryManagerInterface $persistedQueryManager): void
     {
@@ -54,7 +54,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getPersistedQueryManager(): PersistedQueryManagerInterface
     {
-        return $this->persistedQueryManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
+        return $this->persistedQueryManager ??= $this->getInstanceManager()->getInstance(PersistedQueryManagerInterface::class);
     }
     public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -62,7 +62,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
     }
 
     final public function getPersistentCache(): PersistentCacheInterface

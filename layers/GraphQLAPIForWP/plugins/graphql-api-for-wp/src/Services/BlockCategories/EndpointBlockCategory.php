@@ -24,7 +24,7 @@ class EndpointBlockCategory extends AbstractBlockCategory
     }
     protected function getGraphQLPersistedQueryEndpointCustomPostType(): GraphQLPersistedQueryEndpointCustomPostType
     {
-        return $this->graphQLPersistedQueryEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
+        return $this->graphQLPersistedQueryEndpointCustomPostType ??= $this->getInstanceManager()->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
     }
     public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
     {
@@ -32,7 +32,7 @@ class EndpointBlockCategory extends AbstractBlockCategory
     }
     protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
     {
-        return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+        return $this->graphQLCustomEndpointCustomPostType ??= $this->getInstanceManager()->getInstance(GraphQLCustomEndpointCustomPostType::class);
     }
 
     /**

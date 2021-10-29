@@ -21,7 +21,7 @@ class EditMembershipMutationResolverBridge extends AbstractComponentMutationReso
     }
     protected function getEditMembershipMutationResolver(): EditMembershipMutationResolver
     {
-        return $this->editMembershipMutationResolver ??= $this->instanceManager->getInstance(EditMembershipMutationResolver::class);
+        return $this->editMembershipMutationResolver ??= $this->getInstanceManager()->getInstance(EditMembershipMutationResolver::class);
     }
     
     public function getMutationResolver(): MutationResolverInterface

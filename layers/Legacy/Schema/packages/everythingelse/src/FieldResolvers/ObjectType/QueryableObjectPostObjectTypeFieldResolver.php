@@ -22,7 +22,7 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
     }
     protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
-        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+        return $this->urlScalarTypeResolver ??= $this->getInstanceManager()->getInstance(URLScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

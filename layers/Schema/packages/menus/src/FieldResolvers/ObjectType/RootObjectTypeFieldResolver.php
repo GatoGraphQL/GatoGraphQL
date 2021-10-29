@@ -31,7 +31,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
     }
     public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -39,7 +39,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        return $this->idScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IDScalarTypeResolver::class);
     }
     public function setMenuObjectTypeResolver(MenuObjectTypeResolver $menuObjectTypeResolver): void
     {
@@ -47,7 +47,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     protected function getMenuObjectTypeResolver(): MenuObjectTypeResolver
     {
-        return $this->menuObjectTypeResolver ??= $this->instanceManager->getInstance(MenuObjectTypeResolver::class);
+        return $this->menuObjectTypeResolver ??= $this->getInstanceManager()->getInstance(MenuObjectTypeResolver::class);
     }
     public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
     {
@@ -55,7 +55,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     protected function getMenuTypeAPI(): MenuTypeAPIInterface
     {
-        return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
+        return $this->menuTypeAPI ??= $this->getInstanceManager()->getInstance(MenuTypeAPIInterface::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

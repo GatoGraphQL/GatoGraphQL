@@ -20,7 +20,7 @@ class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
     }
     protected function getMenuItemTypeDataLoader(): MenuItemTypeDataLoader
     {
-        return $this->menuItemTypeDataLoader ??= $this->instanceManager->getInstance(MenuItemTypeDataLoader::class);
+        return $this->menuItemTypeDataLoader ??= $this->getInstanceManager()->getInstance(MenuItemTypeDataLoader::class);
     }
 
     public function getTypeName(): string

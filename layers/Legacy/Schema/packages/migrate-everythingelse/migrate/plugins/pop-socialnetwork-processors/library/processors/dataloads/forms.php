@@ -114,7 +114,7 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_CONTACTUSER:
-                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

@@ -44,7 +44,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     }
     protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
     {
-        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
+        return $this->feedbackMessageStore ??= $this->getInstanceManager()->getInstance(FeedbackMessageStoreInterface::class);
     }
     public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -52,7 +52,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     }
     protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
-        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
+        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
     }
     public function setIncludeDirectiveResolver(IncludeDirectiveResolver $includeDirectiveResolver): void
     {
@@ -60,7 +60,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     }
     protected function getIncludeDirectiveResolver(): IncludeDirectiveResolver
     {
-        return $this->includeDirectiveResolver ??= $this->instanceManager->getInstance(IncludeDirectiveResolver::class);
+        return $this->includeDirectiveResolver ??= $this->getInstanceManager()->getInstance(IncludeDirectiveResolver::class);
     }
 
     /**

@@ -24,7 +24,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
     }
     protected function getUserTypeAPI(): UserTypeAPIInterface
     {
-        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+        return $this->userTypeAPI ??= $this->getInstanceManager()->getInstance(UserTypeAPIInterface::class);
     }
     public function setCMSService(CMSServiceInterface $cmsService): void
     {
@@ -32,7 +32,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
     }
     protected function getCMSService(): CMSServiceInterface
     {
-        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
+        return $this->cmsService ??= $this->getInstanceManager()->getInstance(CMSServiceInterface::class);
     }
 
     public function retrievePasswordMessage($key, $user_login, $user_id)

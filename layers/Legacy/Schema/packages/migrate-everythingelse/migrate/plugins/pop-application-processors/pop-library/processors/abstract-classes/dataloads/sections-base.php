@@ -69,7 +69,7 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
 
     public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
     {
-        return $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
+        return $this->getInstanceManager()->getInstance(ListQueryInputOutputHandler::class);
     }
 
     protected function getInnerSubmodules(array $module): array

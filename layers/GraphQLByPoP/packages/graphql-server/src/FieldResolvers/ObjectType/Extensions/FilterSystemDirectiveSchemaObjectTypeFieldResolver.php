@@ -27,7 +27,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     }
     protected function getDirectiveTypeEnumTypeResolver(): DirectiveTypeEnumTypeResolver
     {
-        return $this->directiveTypeEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveTypeEnumTypeResolver::class);
+        return $this->directiveTypeEnumTypeResolver ??= $this->getInstanceManager()->getInstance(DirectiveTypeEnumTypeResolver::class);
     }
     public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
     {
@@ -35,7 +35,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     }
     protected function getDirectiveRegistry(): DirectiveRegistryInterface
     {
-        return $this->directiveRegistry ??= $this->instanceManager->getInstance(DirectiveRegistryInterface::class);
+        return $this->directiveRegistry ??= $this->getInstanceManager()->getInstance(DirectiveRegistryInterface::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

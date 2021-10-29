@@ -22,7 +22,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
     }
     protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        return $this->idScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IDScalarTypeResolver::class);
     }
 
     public function getModulesToProcess(): array

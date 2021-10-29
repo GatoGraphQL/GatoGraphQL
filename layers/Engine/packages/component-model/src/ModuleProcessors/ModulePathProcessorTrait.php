@@ -22,7 +22,7 @@ trait ModulePathProcessorTrait
     }
     protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
     {
-        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
+        return $this->moduleProcessorManager ??= $this->getInstanceManager()->getInstance(ModuleProcessorManagerInterface::class);
     }
     public function setModuleFilterManager(ModuleFilterManagerInterface $moduleFilterManager): void
     {
@@ -30,7 +30,7 @@ trait ModulePathProcessorTrait
     }
     protected function getModuleFilterManager(): ModuleFilterManagerInterface
     {
-        return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ModuleFilterManagerInterface::class);
+        return $this->moduleFilterManager ??= $this->getInstanceManager()->getInstance(ModuleFilterManagerInterface::class);
     }
 
     protected function getModuleProcessor(array $module)

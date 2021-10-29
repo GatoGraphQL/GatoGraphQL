@@ -31,7 +31,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
     }
     public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -39,7 +39,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
     }
     public function setInputValueObjectTypeResolver(InputValueObjectTypeResolver $inputValueObjectTypeResolver): void
     {
@@ -47,7 +47,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getInputValueObjectTypeResolver(): InputValueObjectTypeResolver
     {
-        return $this->inputValueObjectTypeResolver ??= $this->instanceManager->getInstance(InputValueObjectTypeResolver::class);
+        return $this->inputValueObjectTypeResolver ??= $this->getInstanceManager()->getInstance(InputValueObjectTypeResolver::class);
     }
     public function setDirectiveLocationEnumTypeResolver(DirectiveLocationEnumTypeResolver $directiveLocationEnumTypeResolver): void
     {
@@ -55,7 +55,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getDirectiveLocationEnumTypeResolver(): DirectiveLocationEnumTypeResolver
     {
-        return $this->directiveLocationEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveLocationEnumTypeResolver::class);
+        return $this->directiveLocationEnumTypeResolver ??= $this->getInstanceManager()->getInstance(DirectiveLocationEnumTypeResolver::class);
     }
     public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {
@@ -63,7 +63,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
-        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+        return $this->jsonObjectScalarTypeResolver ??= $this->getInstanceManager()->getInstance(JSONObjectScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

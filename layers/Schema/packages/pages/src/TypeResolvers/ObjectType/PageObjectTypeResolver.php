@@ -21,7 +21,7 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
     }
     protected function getPageTypeDataLoader(): PageTypeDataLoader
     {
-        return $this->pageTypeDataLoader ??= $this->instanceManager->getInstance(PageTypeDataLoader::class);
+        return $this->pageTypeDataLoader ??= $this->getInstanceManager()->getInstance(PageTypeDataLoader::class);
     }
     public function setPageTypeAPI(PageTypeAPIInterface $pageTypeAPI): void
     {
@@ -29,7 +29,7 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
     }
     protected function getPageTypeAPI(): PageTypeAPIInterface
     {
-        return $this->pageTypeAPI ??= $this->instanceManager->getInstance(PageTypeAPIInterface::class);
+        return $this->pageTypeAPI ??= $this->getInstanceManager()->getInstance(PageTypeAPIInterface::class);
     }
 
     public function getTypeName(): string

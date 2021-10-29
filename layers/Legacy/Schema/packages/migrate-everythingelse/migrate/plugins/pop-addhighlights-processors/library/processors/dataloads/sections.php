@@ -195,7 +195,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
             case self::MODULE_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST:
-                return $this->instanceManager->getInstance(HighlightObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(HighlightObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

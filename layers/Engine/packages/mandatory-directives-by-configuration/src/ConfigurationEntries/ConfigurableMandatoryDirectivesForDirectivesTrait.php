@@ -46,7 +46,7 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
     final protected function getDirectiveResolvers(): array
     {
         return array_map(
-            fn (string $directiveResolverClass) => $this->instanceManager->getInstance($directiveResolverClass),
+            fn (string $directiveResolverClass) => $this->getInstanceManager()->getInstance($directiveResolverClass),
             $this->getDirectiveResolverClasses()
         );
     }

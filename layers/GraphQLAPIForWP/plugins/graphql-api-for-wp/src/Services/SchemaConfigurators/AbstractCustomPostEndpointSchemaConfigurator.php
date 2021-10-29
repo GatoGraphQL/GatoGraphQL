@@ -33,7 +33,7 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
     }
     protected function getEndpointSchemaConfigurationBlock(): EndpointSchemaConfigurationBlock
     {
-        return $this->endpointSchemaConfigurationBlock ??= $this->instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
+        return $this->endpointSchemaConfigurationBlock ??= $this->getInstanceManager()->getInstance(EndpointSchemaConfigurationBlock::class);
     }
 
     /**

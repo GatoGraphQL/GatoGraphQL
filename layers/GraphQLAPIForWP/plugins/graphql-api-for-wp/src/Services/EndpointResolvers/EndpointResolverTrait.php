@@ -26,7 +26,7 @@ trait EndpointResolverTrait
     }
     protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
     {
-        return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+        return $this->graphQLDataStructureFormatter ??= $this->getInstanceManager()->getInstance(GraphQLDataStructureFormatter::class);
     }
     public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
     {
@@ -34,7 +34,7 @@ trait EndpointResolverTrait
     }
     protected function getQueryRetriever(): QueryRetrieverInterface
     {
-        return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
+        return $this->queryRetriever ??= $this->getInstanceManager()->getInstance(QueryRetrieverInterface::class);
     }
     public function setGraphQLRequestVarsHookSet(GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet): void
     {
@@ -42,7 +42,7 @@ trait EndpointResolverTrait
     }
     protected function getGraphQLRequestVarsHookSet(): GraphQLRequestVarsHookSet
     {
-        return $this->graphQLRequestVarsHookSet ??= $this->instanceManager->getInstance(GraphQLRequestVarsHookSet::class);
+        return $this->graphQLRequestVarsHookSet ??= $this->getInstanceManager()->getInstance(GraphQLRequestVarsHookSet::class);
     }
 
     /**

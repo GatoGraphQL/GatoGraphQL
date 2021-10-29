@@ -70,7 +70,7 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
             case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
-                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

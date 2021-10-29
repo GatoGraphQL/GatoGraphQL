@@ -22,7 +22,7 @@ class EntryModuleManager implements EntryModuleManagerInterface
     }
     protected function getRouteModuleProcessorManager(): RouteModuleProcessorManagerInterface
     {
-        return $this->routeModuleProcessorManager ??= $this->instanceManager->getInstance(RouteModuleProcessorManagerInterface::class);
+        return $this->routeModuleProcessorManager ??= $this->getInstanceManager()->getInstance(RouteModuleProcessorManagerInterface::class);
     }
 
     public function getEntryModule(): ?array

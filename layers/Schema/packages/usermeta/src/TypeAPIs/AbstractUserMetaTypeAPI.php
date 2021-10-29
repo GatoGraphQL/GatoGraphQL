@@ -21,7 +21,7 @@ abstract class AbstractUserMetaTypeAPI implements UserMetaTypeAPIInterface
     }
     protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
     {
-        return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
+        return $this->allowOrDenySettingsService ??= $this->getInstanceManager()->getInstance(AllowOrDenySettingsServiceInterface::class);
     }
 
     final public function getUserMeta(string | int $userID, string $key, bool $single = false): mixed

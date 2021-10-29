@@ -69,12 +69,12 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCE_CREATE:
-                return $this->instanceManager->getInstance(CreateStanceMutationResolverBridge::class);
+                return $this->getInstanceManager()->getInstance(CreateStanceMutationResolverBridge::class);
             case self::MODULE_DATALOAD_STANCE_UPDATE:
-                return $this->instanceManager->getInstance(UpdateStanceMutationResolverBridge::class);
+                return $this->getInstanceManager()->getInstance(UpdateStanceMutationResolverBridge::class);
             case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
-                return $this->instanceManager->getInstance(CreateOrUpdateStanceMutationResolverBridge::class);
+                return $this->getInstanceManager()->getInstance(CreateOrUpdateStanceMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);
@@ -168,7 +168,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
             case self::MODULE_DATALOAD_STANCE_CREATE:
             case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
-                return $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(StanceObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);
@@ -179,7 +179,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
-                return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_AddPost::class);
+                return $this->getInstanceManager()->getInstance(GD_DataLoad_QueryInputOutputHandler_AddPost::class);
         }
 
         return parent::getQueryInputOutputHandler($module);

@@ -18,7 +18,7 @@ trait QueryableFieldResolverTrait
     }
     protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
     {
-        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
+        return $this->moduleProcessorManager ??= $this->getInstanceManager()->getInstance(ModuleProcessorManagerInterface::class);
     }
 
     protected function getFilterFieldArgNameTypeResolvers(array $filterDataloadingModule): array

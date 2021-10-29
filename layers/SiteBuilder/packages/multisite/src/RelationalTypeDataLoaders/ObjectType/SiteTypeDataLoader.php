@@ -19,7 +19,7 @@ class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
     }
     protected function getSite(): Site
     {
-        return $this->site ??= $this->instanceManager->getInstance(Site::class);
+        return $this->site ??= $this->getInstanceManager()->getInstance(Site::class);
     }
 
     public function getObjects(array $ids): array

@@ -120,7 +120,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         switch ($module[1]) {
             case self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_LIST:
-                return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_NotificationList::class);
+                return $this->getInstanceManager()->getInstance(GD_DataLoad_QueryInputOutputHandler_NotificationList::class);
         }
 
         return parent::getQueryInputOutputHandler($module);
@@ -131,7 +131,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         switch ($module[1]) {
             case self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_LIST:
-                return $this->instanceManager->getInstance(NotificationObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(NotificationObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

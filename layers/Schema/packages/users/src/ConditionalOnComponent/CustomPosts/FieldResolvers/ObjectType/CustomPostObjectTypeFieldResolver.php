@@ -22,7 +22,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getCustomPostUserTypeAPI(): CustomPostUserTypeAPIInterface
     {
-        return $this->customPostUserTypeAPI ??= $this->instanceManager->getInstance(CustomPostUserTypeAPIInterface::class);
+        return $this->customPostUserTypeAPI ??= $this->getInstanceManager()->getInstance(CustomPostUserTypeAPIInterface::class);
     }
     public function setWithAuthorInterfaceTypeFieldResolver(WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver): void
     {
@@ -30,7 +30,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getWithAuthorInterfaceTypeFieldResolver(): WithAuthorInterfaceTypeFieldResolver
     {
-        return $this->withAuthorInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(WithAuthorInterfaceTypeFieldResolver::class);
+        return $this->withAuthorInterfaceTypeFieldResolver ??= $this->getInstanceManager()->getInstance(WithAuthorInterfaceTypeFieldResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

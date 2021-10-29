@@ -135,7 +135,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
             case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP:
             case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
-                return $this->instanceManager->getInstance(LocationPostObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(LocationPostObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

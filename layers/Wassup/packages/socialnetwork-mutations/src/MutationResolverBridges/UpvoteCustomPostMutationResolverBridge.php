@@ -18,7 +18,7 @@ class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUse
     }
     protected function getUpvoteCustomPostMutationResolver(): UpvoteCustomPostMutationResolver
     {
-        return $this->upvoteCustomPostMutationResolver ??= $this->instanceManager->getInstance(UpvoteCustomPostMutationResolver::class);
+        return $this->upvoteCustomPostMutationResolver ??= $this->getInstanceManager()->getInstance(UpvoteCustomPostMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface

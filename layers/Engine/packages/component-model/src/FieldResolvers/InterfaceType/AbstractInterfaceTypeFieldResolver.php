@@ -66,7 +66,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
     protected function getNameResolver(): NameResolverInterface
     {
-        return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
+        return $this->nameResolver ??= $this->getInstanceManager()->getInstance(NameResolverInterface::class);
     }
     public function setCMSService(CMSServiceInterface $cmsService): void
     {
@@ -74,7 +74,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
     protected function getCMSService(): CMSServiceInterface
     {
-        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
+        return $this->cmsService ??= $this->getInstanceManager()->getInstance(CMSServiceInterface::class);
     }
     public function setSchemaNamespacingService(SchemaNamespacingServiceInterface $schemaNamespacingService): void
     {
@@ -82,7 +82,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
     protected function getSchemaNamespacingService(): SchemaNamespacingServiceInterface
     {
-        return $this->schemaNamespacingService ??= $this->instanceManager->getInstance(SchemaNamespacingServiceInterface::class);
+        return $this->schemaNamespacingService ??= $this->getInstanceManager()->getInstance(SchemaNamespacingServiceInterface::class);
     }
     public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
     {
@@ -90,7 +90,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
     protected function getTypeRegistry(): TypeRegistryInterface
     {
-        return $this->typeRegistry ??= $this->instanceManager->getInstance(TypeRegistryInterface::class);
+        return $this->typeRegistry ??= $this->getInstanceManager()->getInstance(TypeRegistryInterface::class);
     }
     public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
     {
@@ -98,7 +98,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
     protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
-        return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
+        return $this->schemaDefinitionService ??= $this->getInstanceManager()->getInstance(SchemaDefinitionServiceInterface::class);
     }
     public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
     {
@@ -106,7 +106,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
     protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
     {
-        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->getInstanceManager()->getInstance(DangerouslyDynamicScalarTypeResolver::class);
     }
 
     /**

@@ -22,7 +22,7 @@ class VarsHookSet extends AbstractHookSet
     }
     protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
     {
-        return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
+        return $this->userRoleTypeAPI ??= $this->getInstanceManager()->getInstance(UserRoleTypeAPIInterface::class);
     }
 
     protected function init(): void

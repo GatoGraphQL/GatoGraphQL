@@ -24,7 +24,7 @@ class LoginMutationResolver extends AbstractMutationResolver
     }
     protected function getUserTypeAPI(): UserTypeAPIInterface
     {
-        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+        return $this->userTypeAPI ??= $this->getInstanceManager()->getInstance(UserTypeAPIInterface::class);
     }
     public function setUserStateTypeMutationAPI(UserStateTypeMutationAPIInterface $userStateTypeMutationAPI): void
     {
@@ -32,7 +32,7 @@ class LoginMutationResolver extends AbstractMutationResolver
     }
     protected function getUserStateTypeMutationAPI(): UserStateTypeMutationAPIInterface
     {
-        return $this->userStateTypeMutationAPI ??= $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
+        return $this->userStateTypeMutationAPI ??= $this->getInstanceManager()->getInstance(UserStateTypeMutationAPIInterface::class);
     }
 
     public function validateErrors(array $form_data): array

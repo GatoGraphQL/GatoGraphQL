@@ -18,7 +18,7 @@ abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUp
     }
     protected function getPostTypeAPI(): PostTypeAPIInterface
     {
-        return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
+        return $this->postTypeAPI ??= $this->getInstanceManager()->getInstance(PostTypeAPIInterface::class);
     }
 
     public function getCustomPostType(): string

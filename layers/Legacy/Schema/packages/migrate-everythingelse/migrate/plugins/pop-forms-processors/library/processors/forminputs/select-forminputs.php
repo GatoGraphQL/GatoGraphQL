@@ -24,7 +24,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getModulesToProcess(): array

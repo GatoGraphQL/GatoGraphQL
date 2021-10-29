@@ -38,7 +38,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     }
     protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
     }
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -46,7 +46,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
     }
     public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
     {
@@ -54,7 +54,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     }
     protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
     {
-        return $this->postTagObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+        return $this->postTagObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostTagObjectTypeResolver::class);
     }
     public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
     {
@@ -62,7 +62,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     }
     protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
     {
-        return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
+        return $this->postTagTypeAPI ??= $this->getInstanceManager()->getInstance(PostTagTypeAPIInterface::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

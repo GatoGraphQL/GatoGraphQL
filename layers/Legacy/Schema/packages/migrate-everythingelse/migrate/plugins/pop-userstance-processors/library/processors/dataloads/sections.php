@@ -870,7 +870,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST:
             case self::MODULE_DATALOAD_AUTHORSTANCES_CAROUSEL:
             case self::MODULE_DATALOAD_TAGSTANCES_CAROUSEL:
-                return $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(StanceObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

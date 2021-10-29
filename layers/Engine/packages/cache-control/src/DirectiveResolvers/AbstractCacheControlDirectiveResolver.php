@@ -22,7 +22,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     }
     protected function getCacheControlEngine(): CacheControlEngineInterface
     {
-        return $this->cacheControlEngine ??= $this->instanceManager->getInstance(CacheControlEngineInterface::class);
+        return $this->cacheControlEngine ??= $this->getInstanceManager()->getInstance(CacheControlEngineInterface::class);
     }
     public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -30,7 +30,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     }
     protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
     }
 
     public function getDirectiveName(): string

@@ -17,7 +17,7 @@ abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPubl
     }
     protected function getDisableAccessForDirectivesDirectiveResolver(): DisableAccessForDirectivesDirectiveResolver
     {
-        return $this->disableAccessForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(DisableAccessForDirectivesDirectiveResolver::class);
+        return $this->disableAccessForDirectivesDirectiveResolver ??= $this->getInstanceManager()->getInstance(DisableAccessForDirectivesDirectiveResolver::class);
     }
 
     protected function getMandatoryDirectives(mixed $entryValue = null): array

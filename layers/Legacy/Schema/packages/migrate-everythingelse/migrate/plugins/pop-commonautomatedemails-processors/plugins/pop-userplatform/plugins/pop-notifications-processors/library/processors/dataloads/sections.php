@@ -107,7 +107,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_Commo
 
     public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
     {
-        return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_NotificationList::class);
+        return $this->getInstanceManager()->getInstance(GD_DataLoad_QueryInputOutputHandler_NotificationList::class);
     }
 
     public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
@@ -115,7 +115,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_Commo
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
-                return $this->instanceManager->getInstance(NotificationObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(NotificationObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

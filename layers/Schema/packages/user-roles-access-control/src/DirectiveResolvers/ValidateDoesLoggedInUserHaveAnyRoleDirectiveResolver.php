@@ -23,7 +23,7 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
     }
     protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
     {
-        return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
+        return $this->userRoleTypeAPI ??= $this->getInstanceManager()->getInstance(UserRoleTypeAPIInterface::class);
     }
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -31,7 +31,7 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getDirectiveName(): string

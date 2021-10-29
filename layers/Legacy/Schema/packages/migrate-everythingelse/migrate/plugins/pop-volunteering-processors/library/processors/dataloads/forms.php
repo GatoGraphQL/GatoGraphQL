@@ -114,7 +114,7 @@ class PoP_Volunteering_Module_Processor_Dataloads extends PoP_Module_Processor_F
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_VOLUNTEER:
-                return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(CustomPostObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

@@ -26,7 +26,7 @@ trait QueryDataModuleProcessorTrait
     }
     protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler
     {
-        return $this->actionExecutionQueryInputOutputHandler ??= $this->instanceManager->getInstance(ActionExecutionQueryInputOutputHandler::class);
+        return $this->actionExecutionQueryInputOutputHandler ??= $this->getInstanceManager()->getInstance(ActionExecutionQueryInputOutputHandler::class);
     }
 
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array

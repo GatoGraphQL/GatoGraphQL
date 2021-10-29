@@ -72,9 +72,9 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_M
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_HIGHLIGHT_CREATE:
-                return $this->instanceManager->getInstance(CreateHighlightMutationResolverBridge::class);
+                return $this->getInstanceManager()->getInstance(CreateHighlightMutationResolverBridge::class);
             case self::MODULE_DATALOAD_HIGHLIGHT_UPDATE:
-                return $this->instanceManager->getInstance(UpdateHighlightMutationResolverBridge::class);
+                return $this->getInstanceManager()->getInstance(UpdateHighlightMutationResolverBridge::class);
         }
 
         return parent::getComponentMutationResolverBridge($module);

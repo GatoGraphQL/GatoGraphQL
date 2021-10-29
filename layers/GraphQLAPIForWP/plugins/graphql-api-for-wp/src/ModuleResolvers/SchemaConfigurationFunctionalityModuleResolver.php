@@ -33,7 +33,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     }
     protected function getGraphQLSchemaConfigurationCustomPostType(): GraphQLSchemaConfigurationCustomPostType
     {
-        return $this->graphQLSchemaConfigurationCustomPostType ??= $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
+        return $this->graphQLSchemaConfigurationCustomPostType ??= $this->getInstanceManager()->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
     }
 
     /**

@@ -38,7 +38,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
     }
     protected function getEndpointHelpers(): EndpointHelpers
     {
-        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+        return $this->endpointHelpers ??= $this->getInstanceManager()->getInstance(EndpointHelpers::class);
     }
 
     /**

@@ -36,9 +36,9 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
     public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         /** @var DirectiveResolverInterface */
-        $forEachDirectiveResolver = $this->instanceManager->getInstance(ForEachDirectiveResolver::class);
+        $forEachDirectiveResolver = $this->getInstanceManager()->getInstance(ForEachDirectiveResolver::class);
         /** @var DirectiveResolverInterface */
-        $applyFunctionDirectiveResolver = $this->instanceManager->getInstance(ApplyFunctionDirectiveResolver::class);
+        $applyFunctionDirectiveResolver = $this->getInstanceManager()->getInstance(ApplyFunctionDirectiveResolver::class);
         return sprintf(
             $this->translationAPI->__('Use %s instead', 'component-model'),
             $this->getFieldQueryInterpreter()->getFieldDirectivesAsString([

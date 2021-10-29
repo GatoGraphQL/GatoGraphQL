@@ -19,7 +19,7 @@ class LoginMutationResolver extends UpstreamLoginMutationResolver
     }
     protected function getUserTypeAPI(): UserTypeAPIInterface
     {
-        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+        return $this->userTypeAPI ??= $this->getInstanceManager()->getInstance(UserTypeAPIInterface::class);
     }
 
     protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): string

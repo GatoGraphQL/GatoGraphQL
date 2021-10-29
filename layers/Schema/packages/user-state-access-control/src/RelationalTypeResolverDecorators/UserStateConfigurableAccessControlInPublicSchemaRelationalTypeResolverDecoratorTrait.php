@@ -19,7 +19,7 @@ trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDeco
     }
     protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
-        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
+        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
     }
 
     protected function getMandatoryDirectives(mixed $entryValue = null): array

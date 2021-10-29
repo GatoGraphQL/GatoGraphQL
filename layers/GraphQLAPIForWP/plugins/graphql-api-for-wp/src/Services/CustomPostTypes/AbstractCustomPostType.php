@@ -44,7 +44,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
     }
     public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
@@ -52,7 +52,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     protected function getUserAuthorization(): UserAuthorizationInterface
     {
-        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+        return $this->userAuthorization ??= $this->getInstanceManager()->getInstance(UserAuthorizationInterface::class);
     }
     public function setCPTUtils(CPTUtils $cptUtils): void
     {
@@ -60,7 +60,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     protected function getCPTUtils(): CPTUtils
     {
-        return $this->cptUtils ??= $this->instanceManager->getInstance(CPTUtils::class);
+        return $this->cptUtils ??= $this->getInstanceManager()->getInstance(CPTUtils::class);
     }
     public function setPluginMenu(PluginMenu $pluginMenu): void
     {
@@ -68,7 +68,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     protected function getPluginMenu(): PluginMenu
     {
-        return $this->pluginMenu ??= $this->instanceManager->getInstance(PluginMenu::class);
+        return $this->pluginMenu ??= $this->getInstanceManager()->getInstance(PluginMenu::class);
     }
     /**
      * Add the hook to initialize the different post types

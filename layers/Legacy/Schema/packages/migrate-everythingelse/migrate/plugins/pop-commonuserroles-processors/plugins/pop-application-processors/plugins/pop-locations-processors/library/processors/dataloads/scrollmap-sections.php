@@ -82,7 +82,7 @@ class GD_URE_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modu
         switch ($module[1]) {
             case self::MODULE_DATALOAD_ORGANIZATIONS_SCROLLMAP:
             case self::MODULE_DATALOAD_INDIVIDUALS_SCROLLMAP:
-                return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+                return $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
         }
 
         return parent::getRelationalTypeResolver($module);

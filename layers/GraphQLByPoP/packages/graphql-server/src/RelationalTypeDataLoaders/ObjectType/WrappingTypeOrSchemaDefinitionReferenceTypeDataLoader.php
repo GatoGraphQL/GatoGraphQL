@@ -25,7 +25,7 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
     }
     protected function getSchemaDefinitionReferenceRegistry(): SchemaDefinitionReferenceRegistryInterface
     {
-        return $this->schemaDefinitionReferenceRegistry ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
+        return $this->schemaDefinitionReferenceRegistry ??= $this->getInstanceManager()->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
     }
     public function setGraphQLSyntaxService(GraphQLSyntaxServiceInterface $graphQLSyntaxService): void
     {
@@ -33,7 +33,7 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
     }
     protected function getGraphQLSyntaxService(): GraphQLSyntaxServiceInterface
     {
-        return $this->graphQLSyntaxService ??= $this->instanceManager->getInstance(GraphQLSyntaxServiceInterface::class);
+        return $this->graphQLSyntaxService ??= $this->getInstanceManager()->getInstance(GraphQLSyntaxServiceInterface::class);
     }
 
     /**

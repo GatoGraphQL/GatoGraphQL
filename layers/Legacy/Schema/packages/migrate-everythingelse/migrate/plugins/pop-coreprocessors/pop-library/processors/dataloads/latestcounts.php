@@ -62,7 +62,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LATESTCOUNTS:
-                return $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
+                return $this->getInstanceManager()->getInstance(ListQueryInputOutputHandler::class);
         }
 
         return parent::getQueryInputOutputHandler($module);

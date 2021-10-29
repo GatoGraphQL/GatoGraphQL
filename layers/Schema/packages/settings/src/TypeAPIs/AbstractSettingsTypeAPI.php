@@ -21,7 +21,7 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
     }
     protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
     {
-        return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
+        return $this->allowOrDenySettingsService ??= $this->getInstanceManager()->getInstance(AllowOrDenySettingsServiceInterface::class);
     }
 
     final public function getOption(string $name): mixed

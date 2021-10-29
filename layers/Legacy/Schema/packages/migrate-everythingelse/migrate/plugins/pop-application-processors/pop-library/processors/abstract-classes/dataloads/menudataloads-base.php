@@ -40,6 +40,6 @@ abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Process
 
     public function getRelationalTypeResolver(array $module): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        return $this->instanceManager->getInstance(MenuObjectTypeResolver::class);
+        return $this->getInstanceManager()->getInstance(MenuObjectTypeResolver::class);
     }
 }

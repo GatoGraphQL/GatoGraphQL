@@ -21,7 +21,7 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
     }
     protected function getMenuTypeDataLoader(): MenuTypeDataLoader
     {
-        return $this->menuTypeDataLoader ??= $this->instanceManager->getInstance(MenuTypeDataLoader::class);
+        return $this->menuTypeDataLoader ??= $this->getInstanceManager()->getInstance(MenuTypeDataLoader::class);
     }
     public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
     {
@@ -29,7 +29,7 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
     }
     protected function getMenuTypeAPI(): MenuTypeAPIInterface
     {
-        return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
+        return $this->menuTypeAPI ??= $this->getInstanceManager()->getInstance(MenuTypeAPIInterface::class);
     }
 
     public function getTypeName(): string
