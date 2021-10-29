@@ -59,7 +59,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /** @var array<string, array<string, mixed>> */
     protected array $schemaDirectiveArgsCache = [];
 
-    protected ?TranslationAPIInterface $translationAPI = null;
     protected ?HooksAPIInterface $hooksAPI = null;
     protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
@@ -106,14 +105,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $this->directive = $directive;
     }
 
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {
         $this->hooksAPI = $hooksAPI;
@@ -157,14 +148,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     //#[Required]
     final public function autowireAbstractDirectiveResolver(
-        TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         SemverHelperServiceInterface $semverHelperService,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
-        $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
         $this->feedbackMessageStore = $feedbackMessageStore;

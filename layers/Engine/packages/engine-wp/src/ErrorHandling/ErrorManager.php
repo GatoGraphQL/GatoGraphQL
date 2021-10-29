@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\EngineWP\ErrorHandling;
 
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\Engine\ErrorHandling\AbstractErrorManager;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -12,23 +13,8 @@ use WP_Error;
 
 class ErrorManager extends AbstractErrorManager
 {
-    protected ?TranslationAPIInterface $translationAPI = null;
-
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
-
-    //#[Required]
-    final public function autowireErrorManager(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-
+    use WithInstanceManagerServiceTrait;
+    
     public function convertFromCMSToPoPError(object $cmsError): Error
     {
         /** @var WP_Error */

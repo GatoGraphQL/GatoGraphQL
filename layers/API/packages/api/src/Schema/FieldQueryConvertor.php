@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\API\Schema;
 
+use function count;
+use function strlen;
+use function substr;
 use PoP\API\ComponentConfiguration;
 use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoP\API\Schema\FieldQueryInterpreterInterface as APIFieldQueryInterpreterInterface;
@@ -11,19 +14,19 @@ use PoP\API\Schema\QuerySyntax as APIQuerySyntax;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax as FieldQueryQuerySyntax;
+
 use PoP\FieldQuery\QueryUtils;
 use PoP\QueryParsing\QueryParserInterface;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
-use function count;
-use function strlen;
-use function substr;
-
 class FieldQueryConvertor implements FieldQueryConvertorInterface
 {
+    use WithInstanceManagerServiceTrait;
+    
     // Cache the output from functions
     /**
      * @var array<string, string>
@@ -39,20 +42,11 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
      * @var array<string, mixed>
      */
     private ?array $fragmentsFromRequestCache = null;
-    protected ?TranslationAPIInterface $translationAPI = null;
     protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     protected ?QueryParserInterface $queryParser = null;
     protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     protected ?PersistedFragmentManagerInterface $persistedFragmentManager = null;
 
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
     public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
         $this->feedbackMessageStore = $feedbackMessageStore;
@@ -87,9 +81,8 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
     }
 
     //#[Required]
-    final public function autowireFieldQueryConvertor(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser, FieldQueryInterpreterInterface $fieldQueryInterpreter, PersistedFragmentManagerInterface $persistedFragmentManager): void
+    final public function autowireFieldQueryConvertor(FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser, FieldQueryInterpreterInterface $fieldQueryInterpreter, PersistedFragmentManagerInterface $persistedFragmentManager): void
     {
-        $this->translationAPI = $translationAPI;
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->queryParser = $queryParser;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;

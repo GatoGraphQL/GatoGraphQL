@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategoryMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
@@ -15,11 +16,12 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait SetCategoriesOnPostObjectTypeFieldResolverTrait
 {
+    // use WithInstanceManagerServiceTrait;
+
     protected ?PostObjectTypeResolver $postObjectTypeResolver = null;
     protected ?SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver = null;
     protected ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
-    protected ?TranslationAPIInterface $translationAPI = null;
-
+    
     public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {
         $this->postObjectTypeResolver = $postObjectTypeResolver;
@@ -44,26 +46,16 @@ trait SetCategoriesOnPostObjectTypeFieldResolverTrait
     {
         return $this->postCategoryObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostCategoryObjectTypeResolver::class);
     }
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
 
     //#[Required]
     public function autowireSetCategoriesOnPostObjectTypeFieldResolverTrait(
         PostObjectTypeResolver $postObjectTypeResolver,
         SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver,
         PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
-        TranslationAPIInterface $translationAPI,
     ): void {
         $this->postObjectTypeResolver = $postObjectTypeResolver;
         $this->setCategoriesOnPostMutationResolver = $setCategoriesOnPostMutationResolver;
         $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
-        $this->translationAPI = $translationAPI;
     }
 
     public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface

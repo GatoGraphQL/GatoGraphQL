@@ -114,7 +114,6 @@ class Engine implements EngineInterface
      */
     protected ?PersistentCacheInterface $persistentCache = null;
 
-    protected ?TranslationAPIInterface $translationAPI = null;
     protected ?HooksAPIInterface $hooksAPI = null;
     protected ?DataStructureManagerInterface $dataStructureManager = null;
     protected ?ModelInstanceInterface $modelInstance = null;
@@ -129,14 +128,6 @@ class Engine implements EngineInterface
     protected ?EntryModuleManagerInterface $entryModuleManager = null;
     protected ?RequestHelperServiceInterface $requestHelperService = null;
 
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {
         $this->hooksAPI = $hooksAPI;
@@ -244,7 +235,6 @@ class Engine implements EngineInterface
 
     //#[Required]
     final public function autowireEngine(
-        TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         DataStructureManagerInterface $dataStructureManager,
         ModelInstanceInterface $modelInstance,
@@ -259,7 +249,6 @@ class Engine implements EngineInterface
         EntryModuleManagerInterface $entryModuleManager,
         RequestHelperServiceInterface $requestHelperService,
     ): void {
-        $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
         $this->dataStructureManager = $dataStructureManager;
         $this->modelInstance = $modelInstance;

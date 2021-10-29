@@ -23,20 +23,11 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
      */
     protected ?array $schemaDefinition = null;
 
-    protected ?TranslationAPIInterface $translationAPI = null;
     protected ?HooksAPIInterface $hooksAPI = null;
     protected ?SchemaNamespacingServiceInterface $schemaNamespacingService = null;
     protected ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
     protected ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {
         $this->hooksAPI = $hooksAPI;
@@ -71,9 +62,8 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     }
 
     //#[Required]
-    final public function autowireAbstractTypeResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, SchemaNamespacingServiceInterface $schemaNamespacingService, SchemaDefinitionServiceInterface $schemaDefinitionService, AttachableExtensionManagerInterface $attachableExtensionManager): void
+    final public function autowireAbstractTypeResolver(HooksAPIInterface $hooksAPI, SchemaNamespacingServiceInterface $schemaNamespacingService, SchemaDefinitionServiceInterface $schemaDefinitionService, AttachableExtensionManagerInterface $attachableExtensionManager): void
     {
-        $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
         $this->schemaNamespacingService = $schemaNamespacingService;
         $this->schemaDefinitionService = $schemaDefinitionService;

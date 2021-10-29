@@ -4,29 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\MutationResolvers;
 
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait ValidateUserLoggedInMutationResolverTrait
 {
-    protected ?TranslationAPIInterface $translationAPI = null;
-
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
-
-    //#[Required]
-    public function autowireValidateUserLoggedInMutationResolverTrait(
-        TranslationAPIInterface $translationAPI,
-    ): void {
-        $this->translationAPI = $translationAPI;
-    }
+    // use WithInstanceManagerServiceTrait;
 
     /**
      * Check that the user is logged-in

@@ -20,8 +20,7 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
     
     protected ?RootObjectTypeResolver $rootObjectTypeResolver = null;
     protected ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
-    protected ?TranslationAPIInterface $translationAPI = null;
-
+    
     public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
     {
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
@@ -38,24 +37,14 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
     {
         return $this->anyBuiltInScalarScalarTypeResolver ??= $this->getInstanceManager()->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
     }
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
 
     //#[Required]
     final public function autowireSchemaDefinitionService(
         RootObjectTypeResolver $rootObjectTypeResolver,
         AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver,
-        TranslationAPIInterface $translationAPI,
     ): void {
         $this->getRoot()ObjectTypeResolver = $rootObjectTypeResolver;
         $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
-        $this->translationAPI = $translationAPI;
     }
 
     public function getRootObjectTypeResolver(): ObjectTypeResolverInterface

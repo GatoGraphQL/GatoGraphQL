@@ -42,7 +42,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     protected const MODULECOMPONENT_CONDITIONALONDATAFIELDSUBMODULES = 'conditional-on-data-field-submodules';
     protected const MODULECOMPONENT_CONDITIONALONDATAFIELDDOMAINSWITCHINGSUBMODULES = 'conditional-on-data-field-domain-switching-submodules';
 
-    protected ?TranslationAPIInterface $translationAPI = null;
     protected ?HooksAPIInterface $hooksAPI = null;
     protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     protected ?ModulePathHelpersInterface $modulePathHelpers = null;
@@ -54,14 +53,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     protected ?RequestHelperServiceInterface $requestHelperService = null;
     protected ?ModulePaths $modulePaths = null;
 
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {
         $this->hooksAPI = $hooksAPI;
@@ -144,9 +135,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     }
 
     //#[Required]
-    final public function autowireAbstractModuleProcessor(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, FieldQueryInterpreterInterface $fieldQueryInterpreter, ModulePathHelpersInterface $modulePathHelpers, ModuleFilterManagerInterface $moduleFilterManager, ModuleProcessorManagerInterface $moduleProcessorManager, CMSServiceInterface $cmsService, NameResolverInterface $nameResolver, DataloadHelperServiceInterface $dataloadHelperService, RequestHelperServiceInterface $requestHelperService, ModulePaths $modulePaths): void
+    final public function autowireAbstractModuleProcessor(HooksAPIInterface $hooksAPI, FieldQueryInterpreterInterface $fieldQueryInterpreter, ModulePathHelpersInterface $modulePathHelpers, ModuleFilterManagerInterface $moduleFilterManager, ModuleProcessorManagerInterface $moduleProcessorManager, CMSServiceInterface $cmsService, NameResolverInterface $nameResolver, DataloadHelperServiceInterface $dataloadHelperService, RequestHelperServiceInterface $requestHelperService, ModulePaths $modulePaths): void
     {
-        $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
         $this->modulePathHelpers = $modulePathHelpers;

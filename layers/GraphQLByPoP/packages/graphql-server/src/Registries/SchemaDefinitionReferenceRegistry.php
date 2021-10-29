@@ -21,6 +21,7 @@ use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
@@ -29,6 +30,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegistryInterface
 {
+    use WithInstanceManagerServiceTrait;
+    
     /**
      * @var array<string, mixed>
      */
@@ -45,20 +48,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      */
     protected ?PersistentCacheInterface $persistentCache = null;
 
-    protected ?TranslationAPIInterface $translationAPI = null;
     protected ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
     protected ?QueryRootObjectTypeResolver $queryRootObjectTypeResolver = null;
     protected ?GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService = null;
     protected ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
     public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
     {
         $this->schemaDefinitionService = $schemaDefinitionService;
@@ -94,13 +88,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
     //#[Required]
     final public function autowireSchemaDefinitionReferenceRegistry(
-        TranslationAPIInterface $translationAPI,
         SchemaDefinitionServiceInterface $schemaDefinitionService,
         QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
         GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
         IntScalarTypeResolver $intScalarTypeResolver,
     ): void {
-        $this->translationAPI = $translationAPI;
         $this->schemaDefinitionService = $schemaDefinitionService;
         $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
         $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;

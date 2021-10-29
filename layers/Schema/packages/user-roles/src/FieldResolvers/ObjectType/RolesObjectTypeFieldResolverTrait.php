@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -12,23 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait RolesObjectTypeFieldResolverTrait
 {
-    protected ?TranslationAPIInterface $translationAPI = null;
-
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
-
-    //#[Required]
-    public function autowireRolesObjectTypeFieldResolverTrait(
-        TranslationAPIInterface $translationAPI,
-    ): void {
-        $this->translationAPI = $translationAPI;
-    }
+    // use WithInstanceManagerServiceTrait;
 
     public function getFieldNamesToResolve(): array
     {

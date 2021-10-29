@@ -6,6 +6,7 @@ namespace PoPSchema\UserStateMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\Engine\ErrorHandling\ErrorHelperInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
@@ -16,17 +17,10 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 {
-    protected ?TranslationAPIInterface $translationAPI = null;
+    use WithInstanceManagerServiceTrait;
+    
     protected ?ErrorHelperInterface $errorHelper = null;
 
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
     public function setErrorHelper(ErrorHelperInterface $errorHelper): void
     {
         $this->errorHelper = $errorHelper;
@@ -37,9 +31,8 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
     }
 
     //#[Required]
-    final public function autowireUserStateTypeMutationAPI(TranslationAPIInterface $translationAPI, ErrorHelperInterface $errorHelper): void
+    final public function autowireUserStateTypeMutationAPI(ErrorHelperInterface $errorHelper): void
     {
-        $this->translationAPI = $translationAPI;
         $this->errorHelper = $errorHelper;
     }
 

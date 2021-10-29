@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\FieldQuery;
 
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\QueryParsing\QueryParserInterface;
 use PoP\Translation\TranslationAPIInterface;
 use stdClass;
@@ -11,6 +12,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 {
+    use WithInstanceManagerServiceTrait;
+    
     // Cache the output from functions
     /**
      * @var array<string, string>
@@ -58,18 +61,9 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     public const ALIAS_POSITION_KEY = 'pos';
     public const ALIAS_LENGTH_KEY = 'length';
 
-    protected ?TranslationAPIInterface $translationAPI = null;
     protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     protected ?QueryParserInterface $queryParser = null;
 
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
     public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
         $this->feedbackMessageStore = $feedbackMessageStore;
@@ -88,9 +82,8 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     }
 
     //#[Required]
-    final public function autowireFieldQueryInterpreter(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser): void
+    final public function autowireFieldQueryInterpreter(FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser): void
     {
-        $this->translationAPI = $translationAPI;
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->queryParser = $queryParser;
     }

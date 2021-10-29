@@ -9,6 +9,7 @@ use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
@@ -17,9 +18,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class DataloadHelperService implements DataloadHelperServiceInterface
 {
+    use WithInstanceManagerServiceTrait;
+    
     protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    protected ?TranslationAPIInterface $translationAPI = null;
     protected ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
     public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
@@ -38,14 +40,6 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     {
         return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
     }
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
     public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
     {
         $this->moduleProcessorManager = $moduleProcessorManager;
@@ -56,11 +50,10 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     }
 
     //#[Required]
-    final public function autowireDataloadHelperService(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, TranslationAPIInterface $translationAPI, ModuleProcessorManagerInterface $moduleProcessorManager): void
+    final public function autowireDataloadHelperService(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, ModuleProcessorManagerInterface $moduleProcessorManager): void
     {
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-        $this->translationAPI = $translationAPI;
         $this->moduleProcessorManager = $moduleProcessorManager;
     }
 

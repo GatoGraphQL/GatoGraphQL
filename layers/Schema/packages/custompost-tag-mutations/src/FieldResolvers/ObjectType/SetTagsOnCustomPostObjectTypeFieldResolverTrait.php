@@ -4,29 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostTagMutations\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait SetTagsOnCustomPostObjectTypeFieldResolverTrait
 {
-    protected ?TranslationAPIInterface $translationAPI = null;
-
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
-
-    //#[Required]
-    public function autowireSetTagsOnCustomPostObjectTypeFieldResolverTrait(
-        TranslationAPIInterface $translationAPI,
-    ): void {
-        $this->translationAPI = $translationAPI;
-    }
-
+    // use WithInstanceManagerServiceTrait;
+    
     protected function getEntityName(): string
     {
         return $this->getTranslationAPI()->__('custom post', 'custompost-tag-mutations');

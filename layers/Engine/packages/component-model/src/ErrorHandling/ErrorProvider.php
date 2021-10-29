@@ -4,29 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ErrorHandling;
 
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\Translation\TranslationAPIInterface;
 use stdClass;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class ErrorProvider implements ErrorProviderInterface
 {
-    protected ?TranslationAPIInterface $translationAPI = null;
-
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
-
-    //#[Required]
-    final public function autowireErrorProvider(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-
+    use WithInstanceManagerServiceTrait;
+    
     /**
      * @param array<string, mixed>|null $data
      * @param Error[]|null $nestedErrors

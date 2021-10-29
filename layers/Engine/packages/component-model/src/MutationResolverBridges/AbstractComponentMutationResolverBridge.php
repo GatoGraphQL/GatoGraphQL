@@ -21,7 +21,6 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     use WithInstanceManagerServiceTrait;
     
     protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?TranslationAPIInterface $translationAPI = null;
     protected ?MutationResolutionManagerInterface $mutationResolutionManager = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
@@ -31,14 +30,6 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     protected function getHooksAPI(): HooksAPIInterface
     {
         return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
-    }
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
     }
     public function setMutationResolutionManager(MutationResolutionManagerInterface $mutationResolutionManager): void
     {
@@ -50,10 +41,9 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     }
 
     //#[Required]
-    final public function autowireAbstractComponentMutationResolverBridge(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, MutationResolutionManagerInterface $mutationResolutionManager): void
+    final public function autowireAbstractComponentMutationResolverBridge(HooksAPIInterface $hooksAPI, MutationResolutionManagerInterface $mutationResolutionManager): void
     {
         $this->hooksAPI = $hooksAPI;
-        $this->translationAPI = $translationAPI;
         $this->mutationResolutionManager = $mutationResolutionManager;
     }
 

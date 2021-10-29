@@ -5,28 +5,14 @@ declare(strict_types=1);
 namespace PoP\QueryParsing;
 
 use Exception;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class QueryParser implements QueryParserInterface
 {
-    protected ?TranslationAPIInterface $translationAPI = null;
-
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
-
-    //#[Required]
-    final public function autowireQueryParser(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-
+    use WithInstanceManagerServiceTrait;
+    
     /**
      * Parse elements by a separator, not failing whenever the separator
      * is also inside the fieldArgs (i.e. inside the brackets "(" and ")")

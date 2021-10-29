@@ -5,23 +5,17 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\CheckpointProcessors;
 
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCheckpointProcessor implements CheckpointProcessorInterface
 {
-    protected ?TranslationAPIInterface $translationAPI = null;
+    use WithInstanceManagerServiceTrait;
+    
     protected ?HooksAPIInterface $hooksAPI = null;
 
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {
         $this->hooksAPI = $hooksAPI;
@@ -32,9 +26,8 @@ abstract class AbstractCheckpointProcessor implements CheckpointProcessorInterfa
     }
 
     //#[Required]
-    final public function autowireAbstractCheckpointProcessor(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI): void
+    final public function autowireAbstractCheckpointProcessor(HooksAPIInterface $hooksAPI): void
     {
-        $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
     }
 

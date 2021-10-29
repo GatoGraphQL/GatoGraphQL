@@ -14,17 +14,8 @@ abstract class AbstractFieldResolver implements FieldResolverInterface
 {
     use WithInstanceManagerServiceTrait;
     
-    protected ?TranslationAPIInterface $translationAPI = null;
     protected ?HooksAPIInterface $hooksAPI = null;
 
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {
         $this->hooksAPI = $hooksAPI;
@@ -36,10 +27,8 @@ abstract class AbstractFieldResolver implements FieldResolverInterface
 
     //#[Required]
     final public function autowireAbstractFieldResolver(
-        TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
     ): void {
-        $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
     }
 

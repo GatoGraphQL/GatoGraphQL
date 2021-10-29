@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModelInstance;
 
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Definitions\DefinitionManagerInterface;
 use PoP\Hooks\HooksAPIInterface;
@@ -13,23 +14,16 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ModelInstance implements ModelInstanceInterface
 {
+    use WithInstanceManagerServiceTrait;
+    
     public const HOOK_COMPONENTS_RESULT = __CLASS__ . ':components:result';
     public const HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE = __CLASS__ . ':componentsFromVars:postOrGetChange';
     public const HOOK_COMPONENTSFROMVARS_RESULT = __CLASS__ . ':componentsFromVars:result';
 
-    protected ?TranslationAPIInterface $translationAPI = null;
     protected ?HooksAPIInterface $hooksAPI = null;
     protected ?ApplicationInfoInterface $applicationInfo = null;
     protected ?DefinitionManagerInterface $definitionManager = null;
 
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {
         $this->hooksAPI = $hooksAPI;
@@ -56,9 +50,8 @@ class ModelInstance implements ModelInstanceInterface
     }
 
     //#[Required]
-    final public function autowireModelInstance(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, ApplicationInfoInterface $applicationInfo, DefinitionManagerInterface $definitionManager): void
+    final public function autowireModelInstance(HooksAPIInterface $hooksAPI, ApplicationInfoInterface $applicationInfo, DefinitionManagerInterface $definitionManager): void
     {
-        $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
         $this->applicationInfo = $applicationInfo;
         $this->definitionManager = $definitionManager;

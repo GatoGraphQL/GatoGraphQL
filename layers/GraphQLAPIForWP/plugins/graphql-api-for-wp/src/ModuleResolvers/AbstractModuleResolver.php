@@ -15,7 +15,6 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     use WithInstanceManagerServiceTrait;
     
     protected ?ModuleRegistryInterface $moduleRegistry = null;
-    protected ?TranslationAPIInterface $translationAPI = null;
 
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -25,20 +24,11 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     {
         return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
     }
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
 
     //#[Required]
-    final public function autowireAbstractModuleResolver(ModuleRegistryInterface $moduleRegistry, TranslationAPIInterface $translationAPI): void
+    final public function autowireAbstractModuleResolver(ModuleRegistryInterface $moduleRegistry): void
     {
         $this->moduleRegistry = $moduleRegistry;
-        $this->translationAPI = $translationAPI;
     }
 
     /**

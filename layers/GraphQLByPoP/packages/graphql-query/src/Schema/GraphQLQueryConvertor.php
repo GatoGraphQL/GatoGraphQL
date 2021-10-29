@@ -23,6 +23,7 @@ use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
 use InvalidArgumentException;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
@@ -31,19 +32,12 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
-    protected ?TranslationAPIInterface $translationAPI = null;
+    use WithInstanceManagerServiceTrait;
+    
     protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     protected ?IncludeDirectiveResolver $includeDirectiveResolver = null;
 
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
     public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
         $this->feedbackMessageStore = $feedbackMessageStore;
@@ -70,9 +64,8 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     }
 
     //#[Required]
-    final public function autowireGraphQLQueryConvertor(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, IncludeDirectiveResolver $includeDirectiveResolver): void
+    final public function autowireGraphQLQueryConvertor(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, IncludeDirectiveResolver $includeDirectiveResolver): void
     {
-        $this->translationAPI = $translationAPI;
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
         $this->includeDirectiveResolver = $includeDirectiveResolver;

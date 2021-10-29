@@ -10,17 +10,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractMutationResolver implements MutationResolverInterface
 {
-    protected ?TranslationAPIInterface $translationAPI = null;
+    use WithInstanceManagerServiceTrait;
+    
     protected ?HooksAPIInterface $hooksAPI = null;
 
-    public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
-    protected function getTranslationAPI(): TranslationAPIInterface
-    {
-        return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
-    }
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
     {
         $this->hooksAPI = $hooksAPI;
@@ -31,9 +24,8 @@ abstract class AbstractMutationResolver implements MutationResolverInterface
     }
 
     //#[Required]
-    final public function autowireAbstractMutationResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI): void
+    final public function autowireAbstractMutationResolver(HooksAPIInterface $hooksAPI): void
     {
-        $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
     }
 
