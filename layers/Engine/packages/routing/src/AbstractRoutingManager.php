@@ -15,6 +15,11 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
     use WithInstanceManagerServiceTrait;
 
     /**
+     * @var string[]|null
+     */
+    private ?array $routes = null;
+
+    /**
      * @return string[]
      */
     public function getRoutes(): array
