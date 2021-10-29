@@ -21,10 +21,27 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_NAME = 'filterinput-name';
     public const MODULE_FILTERINPUT_EMAILS = 'filterinput-emails';
 
-    protected EmailScalarTypeResolver $emailScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
+    {
+        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
+    }
+    protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
+    {
+        return $this->emailScalarTypeResolver ??= $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireFilterInputModuleProcessor(
         EmailScalarTypeResolver $emailScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
@@ -69,8 +86,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_NAME => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_EMAILS => $this->emailScalarTypeResolver,
+            self::MODULE_FILTERINPUT_NAME => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_EMAILS => $this->getEmailScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }

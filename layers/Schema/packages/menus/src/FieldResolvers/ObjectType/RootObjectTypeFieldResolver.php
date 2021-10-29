@@ -20,12 +20,45 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected MenuObjectTypeResolver $menuObjectTypeResolver;
-    protected MenuTypeAPIInterface $menuTypeAPI;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?MenuObjectTypeResolver $menuObjectTypeResolver = null;
+    private ?MenuTypeAPIInterface $menuTypeAPI = null;
 
-    #[Required]
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+    public function setMenuObjectTypeResolver(MenuObjectTypeResolver $menuObjectTypeResolver): void
+    {
+        $this->menuObjectTypeResolver = $menuObjectTypeResolver;
+    }
+    protected function getMenuObjectTypeResolver(): MenuObjectTypeResolver
+    {
+        return $this->menuObjectTypeResolver ??= $this->instanceManager->getInstance(MenuObjectTypeResolver::class);
+    }
+    public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
+    {
+        $this->menuTypeAPI = $menuTypeAPI;
+    }
+    protected function getMenuTypeAPI(): MenuTypeAPIInterface
+    {
+        return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireRootObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,
@@ -67,9 +100,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'menu' => $this->menuObjectTypeResolver,
-            'menus' => $this->menuObjectTypeResolver,
-            'menuCount' => $this->intScalarTypeResolver,
+            'menu' => $this->getMenuObjectTypeResolver(),
+            'menus' => $this->getMenuObjectTypeResolver(),
+            'menuCount' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -87,7 +120,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'menu' => [
-                'id' => $this->idScalarTypeResolver,
+                'id' => $this->getIdScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -137,7 +170,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             case 'menu':
                 // Validate the ID exists
                 $menuID = $fieldArgs['id'];
-                if ($this->menuTypeAPI->getMenu($menuID) !== null) {
+                if ($this->getMenuTypeAPI()->getMenu($menuID) !== null) {
                     return $menuID;
                 }
                 return null;
@@ -146,10 +179,10 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'menus':
-                return $this->menuTypeAPI->getMenus($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getMenuTypeAPI()->getMenus($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'menuCount':
-                return $this->menuTypeAPI->getMenuCount($query);
+                return $this->getMenuTypeAPI()->getMenuCount($query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

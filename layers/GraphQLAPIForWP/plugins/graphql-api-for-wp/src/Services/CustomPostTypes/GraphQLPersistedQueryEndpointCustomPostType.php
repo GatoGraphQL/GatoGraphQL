@@ -21,21 +21,54 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
 {
     use WithBlockRegistryCustomPostTypeTrait;
 
-    protected PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry;
-    protected PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistryInterface;
-    protected PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface;
-    protected PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock;
+    private ?PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry = null;
+    private ?PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistry = null;
+    private ?PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistry = null;
+    private ?PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock = null;
 
-    #[Required]
+    public function setPersistedQueryEndpointBlockRegistry(PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry): void
+    {
+        $this->persistedQueryEndpointBlockRegistry = $persistedQueryEndpointBlockRegistry;
+    }
+    protected function getPersistedQueryEndpointBlockRegistry(): PersistedQueryEndpointBlockRegistryInterface
+    {
+        return $this->persistedQueryEndpointBlockRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointBlockRegistryInterface::class);
+    }
+    public function setPersistedQueryEndpointExecuterRegistry(PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistry): void
+    {
+        $this->persistedQueryEndpointExecuterRegistry = $persistedQueryEndpointExecuterRegistry;
+    }
+    protected function getPersistedQueryEndpointExecuterRegistry(): PersistedQueryEndpointExecuterRegistryInterface
+    {
+        return $this->persistedQueryEndpointExecuterRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointExecuterRegistryInterface::class);
+    }
+    public function setPersistedQueryEndpointAnnotatorRegistry(PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistry): void
+    {
+        $this->persistedQueryEndpointAnnotatorRegistry = $persistedQueryEndpointAnnotatorRegistry;
+    }
+    protected function getPersistedQueryEndpointAnnotatorRegistry(): PersistedQueryEndpointAnnotatorRegistryInterface
+    {
+        return $this->persistedQueryEndpointAnnotatorRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointAnnotatorRegistryInterface::class);
+    }
+    public function setPersistedQueryEndpointOptionsBlock(PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock): void
+    {
+        $this->persistedQueryEndpointOptionsBlock = $persistedQueryEndpointOptionsBlock;
+    }
+    protected function getPersistedQueryEndpointOptionsBlock(): PersistedQueryEndpointOptionsBlock
+    {
+        return $this->persistedQueryEndpointOptionsBlock ??= $this->instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
+    }
+
+    //#[Required]
     final public function autowireGraphQLPersistedQueryEndpointCustomPostType(
         PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry,
-        PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistryInterface,
-        PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistryInterface,
+        PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistry,
+        PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistry,
         PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock,
     ): void {
         $this->persistedQueryEndpointBlockRegistry = $persistedQueryEndpointBlockRegistry;
-        $this->persistedQueryEndpointExecuterRegistryInterface = $persistedQueryEndpointExecuterRegistryInterface;
-        $this->persistedQueryEndpointAnnotatorRegistryInterface = $persistedQueryEndpointAnnotatorRegistryInterface;
+        $this->persistedQueryEndpointExecuterRegistry = $persistedQueryEndpointExecuterRegistry;
+        $this->persistedQueryEndpointAnnotatorRegistry = $persistedQueryEndpointAnnotatorRegistry;
         $this->persistedQueryEndpointOptionsBlock = $persistedQueryEndpointOptionsBlock;
     }
 
@@ -57,12 +90,12 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
 
     protected function getEndpointExecuterRegistry(): EndpointExecuterRegistryInterface
     {
-        return $this->persistedQueryEndpointExecuterRegistryInterface;
+        return $this->getPersistedQueryEndpointExecuterRegistry();
     }
 
     protected function getEndpointAnnotatorRegistry(): EndpointAnnotatorRegistryInterface
     {
-        return $this->persistedQueryEndpointAnnotatorRegistryInterface;
+        return $this->getPersistedQueryEndpointAnnotatorRegistry();
     }
 
     /**
@@ -166,7 +199,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
 
     protected function getBlockRegistry(): BlockRegistryInterface
     {
-        return $this->persistedQueryEndpointBlockRegistry;
+        return $this->getPersistedQueryEndpointBlockRegistry();
     }
 
     /**
@@ -179,6 +212,6 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
 
     public function getEndpointOptionsBlock(): BlockInterface
     {
-        return $this->persistedQueryEndpointOptionsBlock;
+        return $this->getPersistedQueryEndpointOptionsBlock();
     }
 }

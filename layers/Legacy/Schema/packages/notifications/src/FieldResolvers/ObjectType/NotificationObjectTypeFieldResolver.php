@@ -26,16 +26,81 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected CommentTypeAPIInterface $commentTypeAPI;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected DateScalarTypeResolver $dateScalarTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected IPScalarTypeResolver $ipScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
-    protected UserObjectTypeResolver $userObjectTypeResolver;
+    private ?CommentTypeAPIInterface $commentTypeAPI = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?IPScalarTypeResolver $ipScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
+    private ?UserObjectTypeResolver $userObjectTypeResolver = null;
     
-    #[Required]
+    public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
+    {
+        $this->commentTypeAPI = $commentTypeAPI;
+    }
+    protected function getCommentTypeAPI(): CommentTypeAPIInterface
+    {
+        return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+    }
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    {
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+    }
+    protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    {
+        return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+    public function setIPScalarTypeResolver(IPScalarTypeResolver $ipScalarTypeResolver): void
+    {
+        $this->ipScalarTypeResolver = $ipScalarTypeResolver;
+    }
+    protected function getIPScalarTypeResolver(): IPScalarTypeResolver
+    {
+        return $this->ipScalarTypeResolver ??= $this->instanceManager->getInstance(IPScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+    }
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
+    {
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireNotificationObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
@@ -99,33 +164,33 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'user' => $this->userObjectTypeResolver,
-            'action' => $this->stringScalarTypeResolver,
-            'objectType' => $this->stringScalarTypeResolver,
-            'objectSubtype' => $this->stringScalarTypeResolver,
-            'objectName' => $this->stringScalarTypeResolver,
-            'objectID' => $this->idScalarTypeResolver,
-            'userID' => $this->idScalarTypeResolver,
-            'websiteURL' => $this->urlScalarTypeResolver,
-            'userCaps' => $this->stringScalarTypeResolver,
-            'histIp' => $this->ipScalarTypeResolver,
-            'histTime' => $this->dateScalarTypeResolver,
-            'histTimeNogmt' => $this->dateScalarTypeResolver,
-            'histTimeReadable' => $this->stringScalarTypeResolver,
-            'status' => $this->stringScalarTypeResolver,
-            'isStatusRead' => $this->booleanScalarTypeResolver,
-            'isStatusNotRead' => $this->booleanScalarTypeResolver,
-            'markAsReadURL' => $this->urlScalarTypeResolver,
-            'markAsUnreadURL' => $this->urlScalarTypeResolver,
-            'icon' => $this->stringScalarTypeResolver,
-            'url' => $this->urlScalarTypeResolver,
-            'target' => $this->stringScalarTypeResolver,
-            'message' => $this->stringScalarTypeResolver,
-            'isPostNotification' => $this->booleanScalarTypeResolver,
-            'isUserNotification' => $this->booleanScalarTypeResolver,
-            'isCommentNotification' => $this->booleanScalarTypeResolver,
-            'isTaxonomyNotification' => $this->booleanScalarTypeResolver,
-            'isAction' => $this->booleanScalarTypeResolver,
+            'user' => $this->getUserObjectTypeResolver(),
+            'action' => $this->getStringScalarTypeResolver(),
+            'objectType' => $this->getStringScalarTypeResolver(),
+            'objectSubtype' => $this->getStringScalarTypeResolver(),
+            'objectName' => $this->getStringScalarTypeResolver(),
+            'objectID' => $this->getIdScalarTypeResolver(),
+            'userID' => $this->getIdScalarTypeResolver(),
+            'websiteURL' => $this->getUrlScalarTypeResolver(),
+            'userCaps' => $this->getStringScalarTypeResolver(),
+            'histIp' => $this->getIpScalarTypeResolver(),
+            'histTime' => $this->getDateScalarTypeResolver(),
+            'histTimeNogmt' => $this->getDateScalarTypeResolver(),
+            'histTimeReadable' => $this->getStringScalarTypeResolver(),
+            'status' => $this->getStringScalarTypeResolver(),
+            'isStatusRead' => $this->getBooleanScalarTypeResolver(),
+            'isStatusNotRead' => $this->getBooleanScalarTypeResolver(),
+            'markAsReadURL' => $this->getUrlScalarTypeResolver(),
+            'markAsUnreadURL' => $this->getUrlScalarTypeResolver(),
+            'icon' => $this->getStringScalarTypeResolver(),
+            'url' => $this->getUrlScalarTypeResolver(),
+            'target' => $this->getStringScalarTypeResolver(),
+            'message' => $this->getStringScalarTypeResolver(),
+            'isPostNotification' => $this->getBooleanScalarTypeResolver(),
+            'isUserNotification' => $this->getBooleanScalarTypeResolver(),
+            'isCommentNotification' => $this->getBooleanScalarTypeResolver(),
+            'isTaxonomyNotification' => $this->getBooleanScalarTypeResolver(),
+            'isAction' => $this->getBooleanScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -195,7 +260,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     {
         return match ($fieldName) {
             'isAction' => [
-                'action' => $this->stringScalarTypeResolver,
+                'action' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -261,12 +326,12 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
             case 'histTimeNogmt':
                 // In the DB, the time is saved without GMT. However, in the front-end we need the GMT factored in,
                 // because moment.js will
-                return $notification->hist_time - ($this->cmsService->getOption($this->nameResolver->getName('popcms:option:gmtOffset')) * 3600);
+                return $notification->hist_time - ($this->getCmsService()->getOption($this->getNameResolver()->getName('popcms:option:gmtOffset')) * 3600);
             case 'histTimeReadable':
                 // Must convert date using GMT
                 return sprintf(
                     $this->translationAPI->__('%s ago', 'pop-notifications'),
-                    \humanTiming($notification->hist_time - ($this->cmsService->getOption($this->nameResolver->getName('popcms:option:gmtOffset')) * 3600))
+                    \humanTiming($notification->hist_time - ($this->getCmsService()->getOption($this->getNameResolver()->getName('popcms:option:gmtOffset')) * 3600))
                 );
 
             case 'status':
@@ -316,8 +381,8 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                         return $taxonomyapi->getTermLink($notification->object_id);
 
                     case 'Comments':
-                        $comment = $this->commentTypeAPI->getComment($notification->object_id);
-                        return $customPostTypeAPI->getPermalink($this->commentTypeAPI->getCommentPostId($comment));
+                        $comment = $this->getCommentTypeAPI()->getComment($notification->object_id);
+                        return $customPostTypeAPI->getPermalink($this->getCommentTypeAPI()->getCommentPostId($comment));
                 }
                 return null;
 

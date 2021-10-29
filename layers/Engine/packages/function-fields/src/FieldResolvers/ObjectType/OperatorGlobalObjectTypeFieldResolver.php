@@ -19,14 +19,63 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
-    protected FloatScalarTypeResolver $floatScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver;
-    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
-    protected ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver;
-    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
+    private ?FloatScalarTypeResolver $floatScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
+    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
 
-    #[Required]
+    public function setFloatScalarTypeResolver(FloatScalarTypeResolver $floatScalarTypeResolver): void
+    {
+        $this->floatScalarTypeResolver = $floatScalarTypeResolver;
+    }
+    protected function getFloatScalarTypeResolver(): FloatScalarTypeResolver
+    {
+        return $this->floatScalarTypeResolver ??= $this->instanceManager->getInstance(FloatScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setAnyBuiltInScalarScalarTypeResolver(AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver): void
+    {
+        $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
+    }
+    protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
+    {
+        return $this->anyBuiltInScalarScalarTypeResolver ??= $this->instanceManager->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
+    }
+    public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    {
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+    }
+    protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    {
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+    public function setArrayKeyScalarTypeResolver(ArrayKeyScalarTypeResolver $arrayKeyScalarTypeResolver): void
+    {
+        $this->arrayKeyScalarTypeResolver = $arrayKeyScalarTypeResolver;
+    }
+    protected function getArrayKeyScalarTypeResolver(): ArrayKeyScalarTypeResolver
+    {
+        return $this->arrayKeyScalarTypeResolver ??= $this->instanceManager->getInstance(ArrayKeyScalarTypeResolver::class);
+    }
+    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireOperatorGlobalObjectTypeFieldResolver(
         FloatScalarTypeResolver $floatScalarTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
@@ -69,7 +118,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         return match ($fieldName) {
             'divide'
-                => $this->floatScalarTypeResolver,
+                => $this->getFloatScalarTypeResolver(),
             'concat',
             'arrayJoin',
             'arrayAsQueryStr',
@@ -77,9 +126,9 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'upperCase',
             'lowerCase',
             'titleCase'
-                => $this->stringScalarTypeResolver,
+                => $this->getStringScalarTypeResolver(),
             'arraySearch'
-                => $this->anyBuiltInScalarScalarTypeResolver,
+                => $this->getAnyBuiltInScalarScalarTypeResolver(),
             'arrayRandom',
             'arrayItem',
             'arrayFill',
@@ -87,7 +136,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'arrayUnique',
             'arrayDiff',
             'arrayAddItem'
-                => $this->dangerouslyDynamicScalarTypeResolver,
+                => $this->getDangerouslyDynamicScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -146,57 +195,57 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         return match ($fieldName) {
             'concat' => [
-                'values' => $this->stringScalarTypeResolver,
+                'values' => $this->getStringScalarTypeResolver(),
             ],
             'divide' => [
-                'number' => $this->floatScalarTypeResolver,
-                'by' => $this->floatScalarTypeResolver,
+                'number' => $this->getFloatScalarTypeResolver(),
+                'by' => $this->getFloatScalarTypeResolver(),
             ],
             'arrayRandom' => [
-                'array' => $this->dangerouslyDynamicScalarTypeResolver,
+                'array' => $this->getDangerouslyDynamicScalarTypeResolver(),
             ],
             'arrayJoin' => [
-                'array' => $this->stringScalarTypeResolver,
-                'separator' => $this->stringScalarTypeResolver,
+                'array' => $this->getStringScalarTypeResolver(),
+                'separator' => $this->getStringScalarTypeResolver(),
             ],
             'arrayItem' => [
-                'array' => $this->dangerouslyDynamicScalarTypeResolver,
-                'position' => $this->stringScalarTypeResolver,
+                'array' => $this->getDangerouslyDynamicScalarTypeResolver(),
+                'position' => $this->getStringScalarTypeResolver(),
             ],
             'arraySearch' => [
-                'array' => $this->dangerouslyDynamicScalarTypeResolver,
-                'element' => $this->stringScalarTypeResolver,
+                'array' => $this->getDangerouslyDynamicScalarTypeResolver(),
+                'element' => $this->getStringScalarTypeResolver(),
             ],
             'arrayFill' => [
-                'target' => $this->dangerouslyDynamicScalarTypeResolver,
-                'source' => $this->dangerouslyDynamicScalarTypeResolver,
-                'index' => $this->stringScalarTypeResolver,
-                'properties' => $this->stringScalarTypeResolver,
+                'target' => $this->getDangerouslyDynamicScalarTypeResolver(),
+                'source' => $this->getDangerouslyDynamicScalarTypeResolver(),
+                'index' => $this->getStringScalarTypeResolver(),
+                'properties' => $this->getStringScalarTypeResolver(),
             ],
             'arrayValues' => [
-                'array' => $this->dangerouslyDynamicScalarTypeResolver,
+                'array' => $this->getDangerouslyDynamicScalarTypeResolver(),
             ],
             'arrayUnique' => [
-                'array' => $this->dangerouslyDynamicScalarTypeResolver,
+                'array' => $this->getDangerouslyDynamicScalarTypeResolver(),
             ],
             'arrayDiff' => [
-                'arrays' => $this->dangerouslyDynamicScalarTypeResolver,
+                'arrays' => $this->getDangerouslyDynamicScalarTypeResolver(),
             ],
             'arrayAddItem' => [
-                'array' => $this->dangerouslyDynamicScalarTypeResolver,
-                'value' => $this->dangerouslyDynamicScalarTypeResolver,
-                'key' => $this->arrayKeyScalarTypeResolver,
+                'array' => $this->getDangerouslyDynamicScalarTypeResolver(),
+                'value' => $this->getDangerouslyDynamicScalarTypeResolver(),
+                'key' => $this->getArrayKeyScalarTypeResolver(),
             ],
             'arrayAsQueryStr' => [
-                'array' => $this->dangerouslyDynamicScalarTypeResolver,
+                'array' => $this->getDangerouslyDynamicScalarTypeResolver(),
             ],
             'objectAsQueryStr' => [
-                'object' => $this->dangerouslyDynamicScalarTypeResolver,
+                'object' => $this->getDangerouslyDynamicScalarTypeResolver(),
             ],
             'upperCase',
             'lowerCase',
             'titleCase' => [
-                'text' => $this->stringScalarTypeResolver,
+                'text' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -396,9 +445,9 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 }
                 return $array;
             case 'arrayAsQueryStr':
-                return $this->fieldQueryInterpreter->getArrayAsStringForQuery($fieldArgs['array']);
+                return $this->getFieldQueryInterpreter()->getArrayAsStringForQuery($fieldArgs['array']);
             case 'objectAsQueryStr':
-                return $this->fieldQueryInterpreter->getObjectAsStringForQuery($fieldArgs['object']);
+                return $this->getFieldQueryInterpreter()->getObjectAsStringForQuery($fieldArgs['object']);
             case 'upperCase':
                 return strtoupper($fieldArgs['text']);
             case 'lowerCase':

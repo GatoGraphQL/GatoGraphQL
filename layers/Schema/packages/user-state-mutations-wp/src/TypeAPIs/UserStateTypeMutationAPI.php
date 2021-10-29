@@ -6,6 +6,7 @@ namespace PoPSchema\UserStateMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\ErrorHandling\ErrorHelperInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
@@ -16,13 +17,22 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 {
-    protected TranslationAPIInterface $translationAPI;
-    protected ErrorHelperInterface $errorHelper;
+    use BasicServiceTrait;
 
-    #[Required]
-    final public function autowireUserStateTypeMutationAPI(TranslationAPIInterface $translationAPI, ErrorHelperInterface $errorHelper): void
+    private ?ErrorHelperInterface $errorHelper = null;
+
+    public function setErrorHelper(ErrorHelperInterface $errorHelper): void
     {
-        $this->translationAPI = $translationAPI;
+        $this->errorHelper = $errorHelper;
+    }
+    protected function getErrorHelper(): ErrorHelperInterface
+    {
+        return $this->errorHelper ??= $this->instanceManager->getInstance(ErrorHelperInterface::class);
+    }
+
+    //#[Required]
+    final public function autowireUserStateTypeMutationAPI(ErrorHelperInterface $errorHelper): void
+    {
         $this->errorHelper = $errorHelper;
     }
 
@@ -46,7 +56,7 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
         $result = \wp_signon($credentials);
 
         // If it is an error, convert from WP_Error to Error
-        $result = $this->errorHelper->returnResultOrConvertError($result);
+        $result = $this->getErrorHelper()->returnResultOrConvertError($result);
 
         // Set the current user already, so that it already says "user logged in" for the toplevel feedback
         if (GeneralUtils::isError($result)) {

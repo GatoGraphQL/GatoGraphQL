@@ -15,9 +15,18 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
     use FilterIDsSatisfyingConditionDirectiveResolverTrait;
 
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
-    #[Required]
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireSkipDirectiveResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {
@@ -70,7 +79,7 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            'if' => $this->booleanScalarTypeResolver,
+            'if' => $this->getBooleanScalarTypeResolver(),
         ];
     }
 

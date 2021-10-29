@@ -9,14 +9,34 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use GraphQLByPoP\GraphQLServer\Configuration\Request as GraphQLServerRequest;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class EndpointHelpers
 {
-    protected PluginMenu $pluginMenu;
-    protected ModuleRegistryInterface $moduleRegistry;
+    use BasicServiceTrait;
 
-    #[Required]
+    private ?PluginMenu $pluginMenu = null;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+
+    public function setPluginMenu(PluginMenu $pluginMenu): void
+    {
+        $this->pluginMenu = $pluginMenu;
+    }
+    protected function getPluginMenu(): PluginMenu
+    {
+        return $this->pluginMenu ??= $this->instanceManager->getInstance(PluginMenu::class);
+    }
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+    }
+
+    //#[Required]
     final public function autowireEndpointHelpers(
         PluginMenu $pluginMenu,
         ModuleRegistryInterface $moduleRegistry,
@@ -34,7 +54,7 @@ class EndpointHelpers
         return \is_admin()
             && 'POST' == $_SERVER['REQUEST_METHOD']
             && isset($_GET['page'])
-            && $_GET['page'] == $this->pluginMenu->getName()
+            && $_GET['page'] == $this->getPluginMenu()->getName()
             && isset($_GET[RequestParams::ACTION])
             && $_GET[RequestParams::ACTION] == RequestParams::ACTION_EXECUTE_QUERY;
     }
@@ -90,13 +110,13 @@ class EndpointHelpers
     {
         $endpoint = \admin_url(sprintf(
             'edit.php?page=%s&%s=%s',
-            $this->pluginMenu->getName(),
+            $this->getPluginMenu()->getName(),
             RequestParams::ACTION,
             RequestParams::ACTION_EXECUTE_QUERY
         ));
         if ($enableLowLevelQueryEditing) {
             // Add /?edit_schema=1 so the query-type directives are also visible
-            if ($this->moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING)) {
+            if ($this->getModuleRegistry()->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING)) {
                 $endpoint = \add_query_arg(GraphQLServerRequest::URLPARAM_EDIT_SCHEMA, true, $endpoint);
             }
         }

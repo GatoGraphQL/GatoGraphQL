@@ -13,7 +13,7 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -22,27 +22,66 @@ use WP_Post;
 
 abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedService implements CustomPostTypeInterface
 {
-    protected UserSettingsManagerInterface $userSettingsManager;
-    protected InstanceManagerInterface $instanceManager;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected UserAuthorizationInterface $userAuthorization;
-    protected CPTUtils $cptUtils;
-    protected PluginMenu $pluginMenu;
+    use BasicServiceTrait;
 
-    #[Required]
+    private ?UserSettingsManagerInterface $userSettingsManager = null;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?UserAuthorizationInterface $userAuthorization = null;
+    private ?CPTUtils $cptUtils = null;
+    private ?PluginMenu $pluginMenu = null;
+
+    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
+    {
+        $this->userSettingsManager = $userSettingsManager;
+    }
+    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    {
+        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
+    }
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    {
+        $this->userAuthorization = $userAuthorization;
+    }
+    protected function getUserAuthorization(): UserAuthorizationInterface
+    {
+        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+    }
+    public function setCPTUtils(CPTUtils $cptUtils): void
+    {
+        $this->cptUtils = $cptUtils;
+    }
+    protected function getCPTUtils(): CPTUtils
+    {
+        return $this->cptUtils ??= $this->instanceManager->getInstance(CPTUtils::class);
+    }
+    public function setPluginMenu(PluginMenu $pluginMenu): void
+    {
+        $this->pluginMenu = $pluginMenu;
+    }
+    protected function getPluginMenu(): PluginMenu
+    {
+        return $this->pluginMenu ??= $this->instanceManager->getInstance(PluginMenu::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCustomPostType(
-        InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         CPTUtils $cptUtils,
         PluginMenu $pluginMenu,
     ): void {
-        $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;
         $this->userAuthorization = $userAuthorization;
         $this->cptUtils = $cptUtils;
         $this->pluginMenu = $pluginMenu;
-        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
     /**
      * Add the hook to initialize the different post types
@@ -143,7 +182,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                     if ($post->post_status == 'auto-draft') {
                         return;
                     }
-                    $this->userSettingsManager->storeOperationalTimestamp();
+                    $this->getUserSettingsManager()->storeOperationalTimestamp();
                 },
                 10,
                 2
@@ -163,7 +202,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     {
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null) {
-            return $this->moduleRegistry->isModuleEnabled($enablingModule);
+            return $this->getModuleRegistry()->isModuleEnabled($enablingModule);
         }
         return parent::isServiceEnabled();
     }
@@ -214,7 +253,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                  */
                 $post = \get_post($post_id);
                 if (!is_null($post)) {
-                    echo $this->cptUtils->getCustomPostDescription($post);
+                    echo $this->getCptUtils()->getCustomPostDescription($post);
                 }
                 break;
         }
@@ -276,7 +315,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          * Check if it is enabled and it is this CPT...
          */
         if (
-            $this->userAuthorization->canAccessSchemaEditor()
+            $this->getUserAuthorization()->canAccessSchemaEditor()
             && \is_singular($this->getCustomPostType())
         ) {
             /**
@@ -286,7 +325,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             $customPost = $vars['routing-state']['queried-object'];
             // Make sure there is a post (eg: it has not been deleted)
             if ($customPost !== null) {
-                if ($excerpt = $this->cptUtils->getCustomPostDescription($customPost)) {
+                if ($excerpt = $this->getCptUtils()->getCustomPostDescription($customPost)) {
                     $content = \sprintf(
                         \__('<p class="%s"><strong>Description: </strong>%s</p>'),
                         $this->getAlignClassName(),
@@ -342,7 +381,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     protected function isExcerptAsDescriptionEnabled(): bool
     {
-        return $this->moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::EXCERPT_AS_DESCRIPTION);
+        return $this->getModuleRegistry()->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::EXCERPT_AS_DESCRIPTION);
     }
 
     /**
@@ -350,7 +389,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     protected function isAPIHierarchyModuleEnabled(): bool
     {
-        return $this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY);
+        return $this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY);
     }
 
     /**
@@ -406,7 +445,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             'show_ui' => true,
             'publicly_queryable' => true,
         );
-        $canAccessSchemaEditor = $this->userAuthorization->canAccessSchemaEditor();
+        $canAccessSchemaEditor = $this->getUserAuthorization()->canAccessSchemaEditor();
         /** @var array<string,mixed> */
         $postTypeArgs = array_merge(
             $securityPostTypeArgs,
@@ -448,7 +487,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     public function getMenu(): MenuInterface
     {
-        return $this->pluginMenu;
+        return $this->getPluginMenu();
     }
 
     /**

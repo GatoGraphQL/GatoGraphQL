@@ -23,11 +23,36 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected CommentObjectTypeResolver $commentObjectTypeResolver;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
 
-    #[Required]
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
+    {
+        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+    }
+    protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
+    {
+        return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCommentableInterfaceTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
@@ -60,12 +85,12 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'comments' => $this->commentObjectTypeResolver,
-            'commentsForAdmin' => $this->commentObjectTypeResolver,
-            'areCommentsOpen' => $this->booleanScalarTypeResolver,
-            'hasComments' => $this->booleanScalarTypeResolver,
-            'commentCount' => $this->intScalarTypeResolver,
-            'commentCountForAdmin' => $this->intScalarTypeResolver,
+            'comments' => $this->getCommentObjectTypeResolver(),
+            'commentsForAdmin' => $this->getCommentObjectTypeResolver(),
+            'areCommentsOpen' => $this->getBooleanScalarTypeResolver(),
+            'hasComments' => $this->getBooleanScalarTypeResolver(),
+            'commentCount' => $this->getIntScalarTypeResolver(),
+            'commentCountForAdmin' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($fieldName),
         };
     }
@@ -155,7 +180,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
                 ]);
                 if ($fieldArgName === $orderFilterInputName) {
                     // Order by descending date
-                    $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
+                    $orderBy = $this->getNameResolver()->getName('popcms:dbcolumn:orderby:comments:date');
                     $order = 'DESC';
                     return $orderBy . OrderFormInput::SEPARATOR . $order;
                 }

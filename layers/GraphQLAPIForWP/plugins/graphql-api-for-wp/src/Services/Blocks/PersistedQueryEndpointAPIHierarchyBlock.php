@@ -19,9 +19,18 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
 
     public const ATTRIBUTE_NAME_INHERIT_QUERY = 'inheritQuery';
 
-    protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
+    private ?PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory = null;
 
-    #[Required]
+    public function setPersistedQueryEndpointBlockCategory(PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory): void
+    {
+        $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
+    }
+    protected function getPersistedQueryEndpointBlockCategory(): PersistedQueryEndpointBlockCategory
+    {
+        return $this->persistedQueryEndpointBlockCategory ??= $this->instanceManager->getInstance(PersistedQueryEndpointBlockCategory::class);
+    }
+
+    //#[Required]
     final public function autowirePersistedQueryEndpointAPIHierarchyBlock(
         PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
     ): void {
@@ -67,7 +76,7 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->persistedQueryEndpointBlockCategory;
+        return $this->getPersistedQueryEndpointBlockCategory();
     }
 
     /**

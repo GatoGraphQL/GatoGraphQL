@@ -5,16 +5,27 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\AttachableExtensions;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Services\ServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait AttachableExtensionTrait
 {
     use ServiceTrait;
+    use BasicServiceTrait;
 
-    protected AttachableExtensionManagerInterface $attachableExtensionManager;
+    private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
-    #[Required]
+    public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
+    {
+        $this->attachableExtensionManager = $attachableExtensionManager;
+    }
+    protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
+    {
+        return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
+    }
+
+    //#[Required]
     public function autowireAttachableExtensionTrait(
         AttachableExtensionManagerInterface $attachableExtensionManager,
     ): void {
@@ -41,7 +52,7 @@ trait AttachableExtensionTrait
     public function attach(string $group): void
     {
         foreach ($this->getClassesToAttachTo() as $attachableClass) {
-            $this->attachableExtensionManager->attachExtensionToClass(
+            $this->getAttachableExtensionManager()->attachExtensionToClass(
                 $attachableClass,
                 $group,
                 $this

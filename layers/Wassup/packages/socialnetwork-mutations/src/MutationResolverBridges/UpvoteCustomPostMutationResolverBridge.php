@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
-    protected UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver;
+    private ?UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver = null;
 
-    #[Required]
+    public function setUpvoteCustomPostMutationResolver(UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver): void
+    {
+        $this->upvoteCustomPostMutationResolver = $upvoteCustomPostMutationResolver;
+    }
+    protected function getUpvoteCustomPostMutationResolver(): UpvoteCustomPostMutationResolver
+    {
+        return $this->upvoteCustomPostMutationResolver ??= $this->instanceManager->getInstance(UpvoteCustomPostMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireUpvoteCustomPostMutationResolverBridge(
         UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver,
     ): void {
@@ -21,7 +30,7 @@ class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUse
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->upvoteCustomPostMutationResolver;
+        return $this->getUpvoteCustomPostMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool
@@ -33,7 +42,7 @@ class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUse
     {
         return sprintf(
             $this->translationAPI->__('You have up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $this->customPostTypeAPI->getTitle($result_id)
+            $this->getCustomPostTypeAPI()->getTitle($result_id)
         );
     }
 }

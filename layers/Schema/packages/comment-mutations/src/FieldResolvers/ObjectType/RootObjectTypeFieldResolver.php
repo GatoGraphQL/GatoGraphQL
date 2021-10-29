@@ -18,10 +18,27 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 {
     use AddCommentToCustomPostObjectTypeFieldResolverTrait;
 
-    protected CommentObjectTypeResolver $commentObjectTypeResolver;
-    protected AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver;
+    private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
+    private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
 
-    #[Required]
+    public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
+    {
+        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+    }
+    protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
+    {
+        return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+    }
+    public function setAddCommentToCustomPostMutationResolver(AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver): void
+    {
+        $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
+    }
+    protected function getAddCommentToCustomPostMutationResolver(): AddCommentToCustomPostMutationResolver
+    {
+        return $this->addCommentToCustomPostMutationResolver ??= $this->instanceManager->getInstance(AddCommentToCustomPostMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireRootObjectTypeFieldResolver(
         CommentObjectTypeResolver $commentObjectTypeResolver,
         AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver,
@@ -91,7 +108,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return match ($fieldName) {
             'addCommentToCustomPost',
             'replyComment'
-                => $this->addCommentToCustomPostMutationResolver,
+                => $this->getAddCommentToCustomPostMutationResolver(),
             default
                 => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
@@ -102,7 +119,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return match ($fieldName) {
             'addCommentToCustomPost',
             'replyComment'
-                => $this->commentObjectTypeResolver,
+                => $this->getCommentObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

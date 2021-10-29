@@ -20,11 +20,36 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected StanceObjectTypeResolver $stanceObjectTypeResolver;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?StanceObjectTypeResolver $stanceObjectTypeResolver = null;
     
-    #[Required]
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setStanceObjectTypeResolver(StanceObjectTypeResolver $stanceObjectTypeResolver): void
+    {
+        $this->stanceObjectTypeResolver = $stanceObjectTypeResolver;
+    }
+    protected function getStanceObjectTypeResolver(): StanceObjectTypeResolver
+    {
+        return $this->stanceObjectTypeResolver ??= $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCustomPostObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IntScalarTypeResolver $intScalarTypeResolver,
@@ -56,11 +81,11 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'stances' => $this->stanceObjectTypeResolver,
-            'hasStances' => $this->booleanScalarTypeResolver,
-            'stanceProCount' => $this->intScalarTypeResolver,
-            'stanceNeutralCount' => $this->intScalarTypeResolver,
-            'stanceAgainstCount' => $this->intScalarTypeResolver,
+            'stances' => $this->getStanceObjectTypeResolver(),
+            'hasStances' => $this->getBooleanScalarTypeResolver(),
+            'stanceProCount' => $this->getIntScalarTypeResolver(),
+            'stanceNeutralCount' => $this->getIntScalarTypeResolver(),
+            'stanceAgainstCount' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -113,7 +138,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'stances':
                 $query = array(
                     'limit' => ComponentConfiguration::getStanceListDefaultLimit(),
-                    'orderby' => $this->nameResolver->getName('popcms:dbcolumn:orderby:customposts:date'),
+                    'orderby' => $this->getNameResolver()->getName('popcms:dbcolumn:orderby:customposts:date'),
                     'order' => 'ASC',
                 );
                 \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $objectTypeResolver->getID($customPost));

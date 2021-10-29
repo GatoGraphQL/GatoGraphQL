@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostObjectTypeResolver extends AbstractObjectTypeResolver implements CustomPostObjectTypeResolverInterface
 {
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    #[Required]
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCustomPostObjectTypeResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ): void {
@@ -26,6 +35,6 @@ abstract class AbstractCustomPostObjectTypeResolver extends AbstractObjectTypeRe
 
     public function getID(object $object): string | int | null
     {
-        return $this->customPostTypeAPI->getID($object);
+        return $this->getCustomPostTypeAPI()->getID($object);
     }
 }

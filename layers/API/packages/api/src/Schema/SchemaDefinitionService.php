@@ -54,18 +54,35 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
      * on services.yaml produces an exception of PHP properties not initialized
      * in its depended services.
      */
-    protected ?PersistentCacheInterface $persistentCache = null;
+    private ?PersistentCacheInterface $persistentCache = null;
 
-    protected PersistedFragmentManagerInterface $fragmentCatalogueManager;
-    protected PersistedQueryManagerInterface $queryCatalogueManager;
+    private ?PersistedFragmentManagerInterface $persistedFragmentManager = null;
+    private ?PersistedQueryManagerInterface $persistedQueryManager = null;
 
-    #[Required]
+    public function setPersistedFragmentManager(PersistedFragmentManagerInterface $persistedFragmentManager): void
+    {
+        $this->persistedFragmentManager = $persistedFragmentManager;
+    }
+    protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
+    {
+        return $this->persistedFragmentManager ??= $this->instanceManager->getInstance(PersistedFragmentManagerInterface::class);
+    }
+    public function setPersistedQueryManager(PersistedQueryManagerInterface $persistedQueryManager): void
+    {
+        $this->persistedQueryManager = $persistedQueryManager;
+    }
+    protected function getPersistedQueryManager(): PersistedQueryManagerInterface
+    {
+        return $this->persistedQueryManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAPISchemaDefinitionService(
-        PersistedFragmentManagerInterface $fragmentCatalogueManager,
-        PersistedQueryManagerInterface $queryCatalogueManager,
+        PersistedFragmentManagerInterface $persistedFragmentManager,
+        PersistedQueryManagerInterface $persistedQueryManager,
     ): void {
-        $this->fragmentCatalogueManager = $fragmentCatalogueManager;
-        $this->queryCatalogueManager = $queryCatalogueManager;
+        $this->persistedFragmentManager = $persistedFragmentManager;
+        $this->persistedQueryManager = $persistedQueryManager;
     }
 
     final public function getPersistentCache(): PersistentCacheInterface
@@ -92,7 +109,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
         if ($schemaDefinition === null) {
             $schemaDefinition = [
-                SchemaDefinition::QUERY_TYPE => $this->rootObjectTypeResolver->getMaybeNamespacedTypeName(),
+                SchemaDefinition::QUERY_TYPE => $this->getSchemaRootObjectTypeResolver()->getMaybeNamespacedTypeName(),
                 SchemaDefinition::TYPES => [],
             ];
 
@@ -101,7 +118,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $this->accessedInterfaceTypeNameObjectTypeResolvers = [];
 
             $this->pendingTypeOrDirectiveResolvers = [
-                $this->rootObjectTypeResolver,
+                $this->getSchemaRootObjectTypeResolver(),
             ];
             while (!empty($this->pendingTypeOrDirectiveResolvers)) {
                 $typeOrDirectiveResolver = array_pop($this->pendingTypeOrDirectiveResolvers);
@@ -148,10 +165,10 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
 
 
             // Add the Fragment Catalogue
-            $schemaDefinition[SchemaDefinition::PERSISTED_FRAGMENTS] = $this->fragmentCatalogueManager->getPersistedFragmentsForSchema();
+            $schemaDefinition[SchemaDefinition::PERSISTED_FRAGMENTS] = $this->getPersistedFragmentManager()->getPersistedFragmentsForSchema();
 
             // Add the Query Catalogue
-            $schemaDefinition[SchemaDefinition::PERSISTED_QUERIES] = $this->queryCatalogueManager->getPersistedQueriesForSchema();
+            $schemaDefinition[SchemaDefinition::PERSISTED_QUERIES] = $this->getPersistedQueryManager()->getPersistedQueriesForSchema();
 
             // Sort the elements in the schema alphabetically
             if (ComponentConfiguration::sortFullSchemaAlphabetically()) {
@@ -232,7 +249,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
          * The RootObject has the special role of also calculating the
          * global fields, connections and directives
          */
-        if ($typeResolver === $this->rootObjectTypeResolver) {
+        if ($typeResolver === $this->getSchemaRootObjectTypeResolver()) {
             $this->maybeMoveGlobalTypeSchemaDefinition($schemaDefinition, $typeSchemaDefinition);
         }
         $schemaDefinition[SchemaDefinition::TYPES][$typeKind][$typeName] = $typeSchemaDefinition;
@@ -302,7 +319,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
              * The RootObject has the special role of also calculating the
              * global fields, connections and directives
              */
-            if ($typeResolver === $this->rootObjectTypeResolver) {
+            if ($typeResolver === $this->getSchemaRootObjectTypeResolver()) {
                 return new RootObjectTypeSchemaDefinitionProvider($typeResolver);
             }
             return new ObjectTypeSchemaDefinitionProvider($typeResolver);

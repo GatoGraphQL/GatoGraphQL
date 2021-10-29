@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\ErrorHandling\ErrorHelperInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
@@ -16,13 +17,22 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 {
-    protected TranslationAPIInterface $translationAPI;
-    protected ErrorHelperInterface $errorHelper;
+    use BasicServiceTrait;
 
-    #[Required]
-    final public function autowireCustomPostTypeMutationAPI(TranslationAPIInterface $translationAPI, ErrorHelperInterface $errorHelper): void
+    private ?ErrorHelperInterface $errorHelper = null;
+
+    public function setErrorHelper(ErrorHelperInterface $errorHelper): void
     {
-        $this->translationAPI = $translationAPI;
+        $this->errorHelper = $errorHelper;
+    }
+    protected function getErrorHelper(): ErrorHelperInterface
+    {
+        return $this->errorHelper ??= $this->instanceManager->getInstance(ErrorHelperInterface::class);
+    }
+
+    //#[Required]
+    final public function autowireCustomPostTypeMutationAPI(ErrorHelperInterface $errorHelper): void
+    {
         $this->errorHelper = $errorHelper;
     }
 
@@ -66,7 +76,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
                 $this->translationAPI->__('Could not create the custom post', 'custompost-mutations-wp')
             );
         }
-        return $this->errorHelper->returnResultOrConvertError($postIDOrError);
+        return $this->getErrorHelper()->returnResultOrConvertError($postIDOrError);
     }
     /**
      * @param array<string, mixed> $data
@@ -77,7 +87,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         // Convert the parameters
         $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
         $postIDOrError = \wp_update_post($data);
-        return $this->errorHelper->returnResultOrConvertError($postIDOrError);
+        return $this->getErrorHelper()->returnResultOrConvertError($postIDOrError);
     }
     public function canUserEditCustomPost(string | int $userID, string | int $customPostID): bool
     {

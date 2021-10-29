@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\RelationalTypeResolverDecorators;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -14,14 +14,22 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractRelationalTypeResolverDecorator implements RelationalTypeResolverDecoratorInterface
 {
     use AttachableExtensionTrait;
+    use BasicServiceTrait;
 
-    protected InstanceManagerInterface $instanceManager;
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
 
-    #[Required]
-    final public function autowireAbstractRelationalTypeResolverDecorator(InstanceManagerInterface $instanceManager, FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
-        $this->instanceManager = $instanceManager;
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
+    }
+
+    //#[Required]
+    final public function autowireAbstractRelationalTypeResolverDecorator(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
     }
 

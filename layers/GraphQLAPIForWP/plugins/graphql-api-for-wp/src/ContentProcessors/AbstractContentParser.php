@@ -10,17 +10,21 @@ use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use InvalidArgumentException;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Environment as RootEnvironment;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractContentParser implements ContentParserInterface
 {
+    use BasicServiceTrait;
+
     public const PATH_URL_TO_DOCS = 'pathURLToDocs';
 
     protected string $baseDir = '';
     protected string $baseURL = '';
-    protected RequestHelperServiceInterface $requestHelperService;
-    protected LocaleHelper $localeHelper;
+
+    private ?RequestHelperServiceInterface $requestHelperService = null;
+    private ?LocaleHelper $localeHelper = null;
 
     /**
      * @param string|null $baseDir Where to look for the documentation
@@ -34,7 +38,24 @@ abstract class AbstractContentParser implements ContentParserInterface
         $this->setBaseURL($baseURL);
     }
 
-    #[Required]
+    public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
+    {
+        $this->requestHelperService = $requestHelperService;
+    }
+    protected function getRequestHelperService(): RequestHelperServiceInterface
+    {
+        return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
+    }
+    public function setLocaleHelper(LocaleHelper $localeHelper): void
+    {
+        $this->localeHelper = $localeHelper;
+    }
+    protected function getLocaleHelper(): LocaleHelper
+    {
+        return $this->localeHelper ??= $this->instanceManager->getInstance(LocaleHelper::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractContentParser(
         RequestHelperServiceInterface $requestHelperService,
         LocaleHelper $localeHelper,
@@ -112,7 +133,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     public function getLocalizedFileDir(): string
     {
-        return $this->getFileDir($this->localeHelper->getLocaleLanguage());
+        return $this->getFileDir($this->getLocaleHelper()->getLocaleLanguage());
     }
 
     /**
@@ -321,7 +342,7 @@ abstract class AbstractContentParser implements ContentParserInterface
                         RequestParams::DOC => $matches[1],
                         'TB_iframe' => 'true',
                     ],
-                    $this->requestHelperService->getRequestedFullURL()
+                    $this->getRequestHelperService()->getRequestedFullURL()
                 );
                 /** @var string */
                 $link = str_replace(

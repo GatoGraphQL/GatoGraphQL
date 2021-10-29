@@ -14,6 +14,6 @@ class PageCustomPostObjectTypeResolverPicker extends UpstreamPageCustomPostObjec
 
     public function getCustomPostType(): string
     {
-        return $this->pageTypeAPI->getPageCustomPostType();
+        return $this->getPageTypeAPI()->getPageCustomPostType();
     }
 }

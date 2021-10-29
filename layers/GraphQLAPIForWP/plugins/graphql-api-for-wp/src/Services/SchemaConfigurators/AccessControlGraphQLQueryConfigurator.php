@@ -16,12 +16,45 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGraphQLQueryConfigurator
 {
-    protected AccessControlBlock $accessControlBlock;
-    protected BlockHelpers $blockHelpers;
-    protected AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry;
-    protected AccessControlManagerInterface $accessControlManager;
+    private ?AccessControlBlock $accessControlBlock = null;
+    private ?BlockHelpers $blockHelpers = null;
+    private ?AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry = null;
+    private ?AccessControlManagerInterface $accessControlManager = null;
 
-    #[Required]
+    public function setAccessControlBlock(AccessControlBlock $accessControlBlock): void
+    {
+        $this->accessControlBlock = $accessControlBlock;
+    }
+    protected function getAccessControlBlock(): AccessControlBlock
+    {
+        return $this->accessControlBlock ??= $this->instanceManager->getInstance(AccessControlBlock::class);
+    }
+    public function setBlockHelpers(BlockHelpers $blockHelpers): void
+    {
+        $this->blockHelpers = $blockHelpers;
+    }
+    protected function getBlockHelpers(): BlockHelpers
+    {
+        return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
+    }
+    public function setAccessControlRuleBlockRegistry(AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry): void
+    {
+        $this->accessControlRuleBlockRegistry = $accessControlRuleBlockRegistry;
+    }
+    protected function getAccessControlRuleBlockRegistry(): AccessControlRuleBlockRegistryInterface
+    {
+        return $this->accessControlRuleBlockRegistry ??= $this->instanceManager->getInstance(AccessControlRuleBlockRegistryInterface::class);
+    }
+    public function setAccessControlManager(AccessControlManagerInterface $accessControlManager): void
+    {
+        $this->accessControlManager = $accessControlManager;
+    }
+    protected function getAccessControlManager(): AccessControlManagerInterface
+    {
+        return $this->accessControlManager ??= $this->instanceManager->getInstance(AccessControlManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAccessControlGraphQLQueryConfigurator(
         AccessControlBlock $accessControlBlock,
         BlockHelpers $blockHelpers,
@@ -54,7 +87,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
         // Lazy load
         if (is_null($this->aclRuleBlockNameEnabled)) {
             // Obtain the block names from the block classes
-            $aclRuleBlocks = $this->accessControlRuleBlockRegistry->getAccessControlRuleBlocks();
+            $aclRuleBlocks = $this->getAccessControlRuleBlockRegistry()->getAccessControlRuleBlocks();
             $this->aclRuleBlockNameEnabled = [];
             foreach ($aclRuleBlocks as $block) {
                 $this->aclRuleBlockNameEnabled[$block->getBlockFullName()] = $block->isServiceEnabled();
@@ -83,9 +116,9 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
      */
     protected function doExecuteSchemaConfiguration(int $aclPostID): void
     {
-        $aclBlockItems = $this->blockHelpers->getBlocksOfTypeFromCustomPost(
+        $aclBlockItems = $this->getBlockHelpers()->getBlocksOfTypeFromCustomPost(
             $aclPostID,
-            $this->accessControlBlock
+            $this->getAccessControlBlock()
         );
         // The "Access Control" type contains the fields/directives
         foreach ($aclBlockItems as $aclBlockItem) {
@@ -129,7 +162,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
                                     )
                                 )
                             ) {
-                                $this->accessControlManager->addEntriesForFields(
+                                $this->getAccessControlManager()->addEntriesForFields(
                                     $accessControlGroup,
                                     $entriesForFields
                                 );
@@ -150,7 +183,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
                                     )
                                 ))
                             ) {
-                                $this->accessControlManager->addEntriesForDirectives(
+                                $this->getAccessControlManager()->addEntriesForDirectives(
                                     $accessControlGroup,
                                     $entriesForDirectives
                                 );

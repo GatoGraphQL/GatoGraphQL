@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateUpdateWithCommunityIndividualProfileMutationResolverBridge extends CreateUpdateIndividualProfileMutationResolverBridge
 {
-    protected CreateUpdateWithCommunityIndividualProfileMutationResolver $createUpdateWithCommunityIndividualProfileMutationResolver;
+    private ?CreateUpdateWithCommunityIndividualProfileMutationResolver $createUpdateWithCommunityIndividualProfileMutationResolver = null;
     
-    #[Required]
+    public function setCreateUpdateWithCommunityIndividualProfileMutationResolver(CreateUpdateWithCommunityIndividualProfileMutationResolver $createUpdateWithCommunityIndividualProfileMutationResolver): void
+    {
+        $this->createUpdateWithCommunityIndividualProfileMutationResolver = $createUpdateWithCommunityIndividualProfileMutationResolver;
+    }
+    protected function getCreateUpdateWithCommunityIndividualProfileMutationResolver(): CreateUpdateWithCommunityIndividualProfileMutationResolver
+    {
+        return $this->createUpdateWithCommunityIndividualProfileMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateWithCommunityIndividualProfileMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCreateUpdateWithCommunityIndividualProfileMutationResolverBridge(
         CreateUpdateWithCommunityIndividualProfileMutationResolver $createUpdateWithCommunityIndividualProfileMutationResolver,
     ): void {
@@ -21,6 +30,6 @@ class CreateUpdateWithCommunityIndividualProfileMutationResolverBridge extends C
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->createUpdateWithCommunityIndividualProfileMutationResolver;
+        return $this->getCreateUpdateWithCommunityIndividualProfileMutationResolver();
     }
 }

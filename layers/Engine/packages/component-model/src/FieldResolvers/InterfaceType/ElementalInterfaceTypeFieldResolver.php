@@ -12,9 +12,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
-    protected IDScalarTypeResolver $idScalarTypeResolver;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    #[Required]
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireElementalInterfaceTypeFieldResolver(
         IDScalarTypeResolver $idScalarTypeResolver,
     ): void {
@@ -38,7 +47,7 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'id' => $this->idScalarTypeResolver,
+            'id' => $this->getIdScalarTypeResolver(),
             default => parent::getFieldTypeResolver($fieldName),
         };
     }

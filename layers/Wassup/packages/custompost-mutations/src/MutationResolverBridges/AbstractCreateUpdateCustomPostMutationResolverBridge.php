@@ -17,9 +17,19 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends AbstractCRUDComponentMutationResolverBridge
 {
     public const HOOK_FORM_DATA_CREATE_OR_UPDATE = __CLASS__ . ':form-data-create-or-update';
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
 
-    #[Required]
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCreateUpdateCustomPostMutationResolverBridge(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ): void {
@@ -55,13 +65,13 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         }
 
         if ($this->supportsTitle()) {
-            $form_data[MutationInputProperties::TITLE] = trim(strip_tags($this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, \PoP_Module_Processor_CreateUpdatePostTextFormInputs::MODULE_FORMINPUT_CUP_TITLE])->getValue([\PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, \PoP_Module_Processor_CreateUpdatePostTextFormInputs::MODULE_FORMINPUT_CUP_TITLE])));
+            $form_data[MutationInputProperties::TITLE] = trim(strip_tags($this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, \PoP_Module_Processor_CreateUpdatePostTextFormInputs::MODULE_FORMINPUT_CUP_TITLE])->getValue([\PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, \PoP_Module_Processor_CreateUpdatePostTextFormInputs::MODULE_FORMINPUT_CUP_TITLE])));
         }
 
         $editor = $this->getEditorInput();
         if ($editor !== null) {
             $cmseditpostshelpers = HelperAPIFactory::getInstance();
-            $form_data[MutationInputProperties::CONTENT] = trim($cmseditpostshelpers->kses(stripslashes($this->moduleProcessorManager->getProcessor($editor)->getValue($editor))));
+            $form_data[MutationInputProperties::CONTENT] = trim($cmseditpostshelpers->kses(stripslashes($this->getModuleProcessorManager()->getProcessor($editor)->getValue($editor))));
         }
 
         if ($this->showCategories()) {
@@ -72,23 +82,23 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         // - Moderate: then using the Draft/Pending/Publish Select, user cannot choose 'Publish' when creating a post
         // - No moderation: using the 'Keep as Draft' checkbox, completely omitting value 'Pending', post is either 'draft' or 'publish'
         if ($this->moderate()) {
-            $form_data[MutationInputProperties::STATUS] = $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostSelectFormInputs::MODULE_FORMINPUT_CUP_STATUS])->getValue([\PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostSelectFormInputs::MODULE_FORMINPUT_CUP_STATUS]);
+            $form_data[MutationInputProperties::STATUS] = $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostSelectFormInputs::MODULE_FORMINPUT_CUP_STATUS])->getValue([\PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostSelectFormInputs::MODULE_FORMINPUT_CUP_STATUS]);
         } else {
-            $keepasdraft = $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, \PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::MODULE_FORMINPUT_CUP_KEEPASDRAFT])->getValue([\PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, \PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::MODULE_FORMINPUT_CUP_KEEPASDRAFT]);
+            $keepasdraft = $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, \PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::MODULE_FORMINPUT_CUP_KEEPASDRAFT])->getValue([\PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, \PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::MODULE_FORMINPUT_CUP_KEEPASDRAFT]);
             $form_data[MutationInputProperties::STATUS] = $keepasdraft ? Status::DRAFT : Status::PUBLISHED;
         }
 
         if ($featuredimage = $this->getFeaturedimageModule()) {
-            $form_data[CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID] = $this->moduleProcessorManager->getProcessor($featuredimage)->getValue($featuredimage);
+            $form_data[CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID] = $this->getModuleProcessorManager()->getProcessor($featuredimage)->getValue($featuredimage);
         }
 
         if ($this->addReferences()) {
-            $references = $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_PostSelectableTypeaheadFormComponents::class, \PoP_Module_Processor_PostSelectableTypeaheadFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES])->getValue([\PoP_Module_Processor_PostSelectableTypeaheadFormComponents::class, \PoP_Module_Processor_PostSelectableTypeaheadFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES]);
+            $references = $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_PostSelectableTypeaheadFormComponents::class, \PoP_Module_Processor_PostSelectableTypeaheadFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES])->getValue([\PoP_Module_Processor_PostSelectableTypeaheadFormComponents::class, \PoP_Module_Processor_PostSelectableTypeaheadFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES]);
             $form_data[MutationInputProperties::REFERENCES] = $references ?? array();
         }
 
         if (\PoP_ApplicationProcessors_Utils::addCategories()) {
-            $topics = $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::MODULE_FORMINPUT_CATEGORIES])->getValue([\PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::MODULE_FORMINPUT_CATEGORIES]);
+            $topics = $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::MODULE_FORMINPUT_CATEGORIES])->getValue([\PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::MODULE_FORMINPUT_CATEGORIES]);
             $form_data[MutationInputProperties::TOPICS] = $topics ?? array();
         }
 
@@ -96,13 +106,13 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         if (defined('POP_VOLUNTEERING_INITIALIZED')) {
             if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
                 if ($this->volunteer()) {
-                    $form_data[MutationInputProperties::VOLUNTEERSNEEDED] = $this->moduleProcessorManager->getProcessor([\GD_Custom_Module_Processor_SelectFormInputs::class, \GD_Custom_Module_Processor_SelectFormInputs::MODULE_FORMINPUT_VOLUNTEERSNEEDED_SELECT])->getValue([\GD_Custom_Module_Processor_SelectFormInputs::class, \GD_Custom_Module_Processor_SelectFormInputs::MODULE_FORMINPUT_VOLUNTEERSNEEDED_SELECT]);
+                    $form_data[MutationInputProperties::VOLUNTEERSNEEDED] = $this->getModuleProcessorManager()->getProcessor([\GD_Custom_Module_Processor_SelectFormInputs::class, \GD_Custom_Module_Processor_SelectFormInputs::MODULE_FORMINPUT_VOLUNTEERSNEEDED_SELECT])->getValue([\GD_Custom_Module_Processor_SelectFormInputs::class, \GD_Custom_Module_Processor_SelectFormInputs::MODULE_FORMINPUT_VOLUNTEERSNEEDED_SELECT]);
                 }
             }
         }
 
         if (\PoP_ApplicationProcessors_Utils::addAppliesto()) {
-            $appliesto = $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::MODULE_FORMINPUT_APPLIESTO])->getValue([\PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::MODULE_FORMINPUT_APPLIESTO]);
+            $appliesto = $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::MODULE_FORMINPUT_APPLIESTO])->getValue([\PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::MODULE_FORMINPUT_APPLIESTO]);
             $form_data[MutationInputProperties::APPLIESTO] = $appliesto ?? array();
         }
 
@@ -124,7 +134,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
             if ($categories_module = $this->getCategoriesModule()) {
                 // We might decide to allow the user to input many sections, or only one section, so this value might be an array or just the value
                 // So treat it always as an array
-                $categories = $this->moduleProcessorManager->getProcessor($categories_module)->getValue($categories_module);
+                $categories = $this->getModuleProcessorManager()->getProcessor($categories_module)->getValue($categories_module);
                 if ($categories && !is_array($categories)) {
                     $categories = array($categories);
                 }
@@ -165,11 +175,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
 
     public function getSuccessString(string | int $result_id): ?string
     {
-        $status = $this->customPostTypeAPI->getStatus($result_id);
+        $status = $this->getCustomPostTypeAPI()->getStatus($result_id);
         if ($status == Status::PUBLISHED) {
             $success_string = sprintf(
                 $this->translationAPI->__('<a href="%s" %s>Click here to view it</a>.', 'pop-application'),
-                $this->customPostTypeAPI->getPermalink($result_id),
+                $this->getCustomPostTypeAPI()->getPermalink($result_id),
                 getReloadurlLinkattrs()
             );
         } elseif ($status == Status::DRAFT) {

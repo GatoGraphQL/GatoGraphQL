@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ActivatePluginsMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
-    protected ActivatePluginsMutationResolver $activatePluginsMutationResolver;
+    private ?ActivatePluginsMutationResolver $activatePluginsMutationResolver = null;
 
-    #[Required]
+    public function setActivatePluginsMutationResolver(ActivatePluginsMutationResolver $activatePluginsMutationResolver): void
+    {
+        $this->activatePluginsMutationResolver = $activatePluginsMutationResolver;
+    }
+    protected function getActivatePluginsMutationResolver(): ActivatePluginsMutationResolver
+    {
+        return $this->activatePluginsMutationResolver ??= $this->instanceManager->getInstance(ActivatePluginsMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireActivatePluginsMutationResolverBridge(
         ActivatePluginsMutationResolver $activatePluginsMutationResolver,
     ): void {
@@ -21,7 +30,7 @@ class ActivatePluginsMutationResolverBridge extends AbstractSystemComponentMutat
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->activatePluginsMutationResolver;
+        return $this->getActivatePluginsMutationResolver();
     }
 
     public function getSuccessString(string | int $result_ids): ?string

@@ -7,28 +7,42 @@ namespace GraphQLByPoP\GraphQLServer\IFTTT;
 use GraphQLByPoP\GraphQLServer\Helpers\TypeResolverHelperInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface
 {
-    /** @var string[] */
-    protected array $objectTypeResolverMandatoryFields;
-    protected InstanceManagerInterface $instanceManager;
-    protected RootObjectTypeResolver $rootObjectTypeResolver;
+    use BasicServiceTrait;
 
-    #[Required]
+    private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
+    private ?TypeResolverHelperInterface $typeResolverHelper = null;
+
+    public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
+    {
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+    }
+    protected function getRootObjectTypeResolver(): RootObjectTypeResolver
+    {
+        return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
+    }
+    public function setTypeResolverHelper(TypeResolverHelperInterface $typeResolverHelper): void
+    {
+        $this->typeResolverHelper = $typeResolverHelper;
+    }
+    protected function getTypeResolverHelper(): TypeResolverHelperInterface
+    {
+        return $this->typeResolverHelper ??= $this->instanceManager->getInstance(TypeResolverHelperInterface::class);
+    }
+
+    //#[Required]
     final public function autowireMandatoryDirectivesForFieldsRootTypeEntryDuplicator(
-        InstanceManagerInterface $instanceManager,
         RootObjectTypeResolver $rootObjectTypeResolver,
         TypeResolverHelperInterface $typeResolverHelper
     ): void {
-        $this->instanceManager = $instanceManager;
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
-        /** Fields "id", "self" and "__typename" belong to both QueryRoot and MutationRoot */
-        $this->objectTypeResolverMandatoryFields = $typeResolverHelper->getObjectTypeResolverMandatoryFields();
+        $this->typeResolverHelper = $typeResolverHelper;
     }
 
     /**
@@ -75,9 +89,12 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
 
         $additionalFieldEntries = [];
 
+        /** Fields "id", "self" and "__typename" belong to both QueryRoot and MutationRoot */
+        $objectTypeResolverMandatoryFields = $this->getTypeResolverHelper()->getObjectTypeResolverMandatoryFields();
+
         foreach ($rootFieldEntries as $rootFieldEntry) {
             $fieldName = $rootFieldEntry[1];
-            if ($forceBothTypes || in_array($fieldName, $this->objectTypeResolverMandatoryFields)) {
+            if ($forceBothTypes || in_array($fieldName, $objectTypeResolverMandatoryFields)) {
                 $rootFieldEntry[0] = QueryRootObjectTypeResolver::class;
                 $additionalFieldEntries[] = $rootFieldEntry;
                 $rootFieldEntry[0] = MutationRootObjectTypeResolver::class;
@@ -85,7 +102,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
                 continue;
             }
             // If it has a MutationResolver for that field then add entry for MutationRoot
-            $isFieldAMutation = $this->rootObjectTypeResolver->isFieldAMutation($fieldName);
+            $isFieldAMutation = $this->getRootObjectTypeResolver()->isFieldAMutation($fieldName);
             // Make sure the field has a FieldResolver. If not, ignore
             if ($isFieldAMutation === null) {
                 continue;

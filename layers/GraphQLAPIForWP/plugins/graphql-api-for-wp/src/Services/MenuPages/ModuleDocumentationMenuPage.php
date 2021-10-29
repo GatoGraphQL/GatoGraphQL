@@ -17,10 +17,27 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
 {
     use PluginMarkdownContentRetrieverTrait;
 
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected ModulesMenuPage $modulesMenuPage;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?ModulesMenuPage $modulesMenuPage = null;
 
-    #[Required]
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setModulesMenuPage(ModulesMenuPage $modulesMenuPage): void
+    {
+        $this->modulesMenuPage = $modulesMenuPage;
+    }
+    protected function getModulesMenuPage(): ModulesMenuPage
+    {
+        return $this->modulesMenuPage ??= $this->instanceManager->getInstance(ModulesMenuPage::class);
+    }
+
+    //#[Required]
     final public function autowireModuleDocumentationMenuPage(
         ModuleRegistryInterface $moduleRegistry,
         ModulesMenuPage $modulesMenuPage,
@@ -31,7 +48,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
 
     public function getMenuPageSlug(): string
     {
-        return $this->modulesMenuPage->getMenuPageSlug();
+        return $this->getModulesMenuPage()->getMenuPageSlug();
     }
 
     /**
@@ -39,7 +56,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
      */
     protected function isCurrentScreen(): bool
     {
-        return $this->menuPageHelper->isDocumentationScreen() && parent::isCurrentScreen();
+        return $this->getMenuPageHelper()->isDocumentationScreen() && parent::isCurrentScreen();
     }
 
     protected function openInModalWindow(): bool
@@ -61,7 +78,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
         parse_str($_SERVER['REQUEST_URI'], $vars);
         $module = urldecode($vars[RequestParams::MODULE]);
         try {
-            $moduleResolver = $this->moduleRegistry->getModuleResolver($module);
+            $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
         } catch (InvalidArgumentException) {
             return sprintf(
                 '<p>%s</p>',

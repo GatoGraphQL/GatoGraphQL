@@ -7,21 +7,25 @@ namespace PoP\ComponentModel\ModuleFiltering;
 use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class ModuleFilterManager implements ModuleFilterManagerInterface
 {
+    use BasicServiceTrait;
+
     public const URLPARAM_MODULEFILTER = 'modulefilter';
 
     protected ?string $selected_filter_name = null;
-    protected ?ModuleFilterInterface $selected_filter = null;
+    private ?ModuleFilterInterface $selected_filter = null;
     /**
      * @var array<string, ModuleFilterInterface>
      */
     protected array $modulefilters = [];
     protected bool $initialized = false;
-
-    // From the moment in which a module is not excluded, every module from then on must also be included
+    /**
+     * From the moment in which a module is not excluded, every module from then on must also be included
+     */
     protected ?string $not_excluded_ancestor_module = null;
     /**
      * @var array<array>|null
@@ -31,13 +35,34 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
      * @var string[]|null
      */
     protected ?array $not_excluded_module_sets_as_string;
-
-    // When targeting modules in pop-engine.php (eg: when doing ->get_dbobjectids()) those modules are already and always included, so no need to check for their ancestors or anything
+    /**
+     * When targeting modules in pop-engine.php (eg: when doing ->get_dbobjectids())
+     * those modules are already and always included, so no need to check
+     * for their ancestors or anything
+     */
     protected bool $neverExclude = false;
-    protected ModulePathManagerInterface $modulePathManager;
-    protected ModulePathHelpersInterface $modulePathHelpers;
 
-    #[Required]
+    private ?ModulePathManagerInterface $modulePathManager = null;
+    private ?ModulePathHelpersInterface $modulePathHelpers = null;
+
+    public function setModulePathManager(ModulePathManagerInterface $modulePathManager): void
+    {
+        $this->modulePathManager = $modulePathManager;
+    }
+    protected function getModulePathManager(): ModulePathManagerInterface
+    {
+        return $this->modulePathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
+    }
+    public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
+    {
+        $this->modulePathHelpers = $modulePathHelpers;
+    }
+    protected function getModulePathHelpers(): ModulePathHelpersInterface
+    {
+        return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
+    }
+
+    //#[Required]
     final public function autowireModuleFilterManager(ModulePathManagerInterface $modulePathManager, ModulePathHelpersInterface $modulePathHelpers): void
     {
         $this->modulePathManager = $modulePathManager;
@@ -141,10 +166,10 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
         if ($this->selected_filter_name) {
             if (!$this->neverExclude && is_null($this->not_excluded_ancestor_module) && $this->excludeModule($module, $props) === false) {
                 // Set the current module as the one which is not excluded.
-                $module_propagation_current_path = $this->modulePathManager->getPropagationCurrentPath();
+                $module_propagation_current_path = $this->getModulePathManager()->getPropagationCurrentPath();
                 $module_propagation_current_path[] = $module;
 
-                $this->not_excluded_ancestor_module = $this->modulePathHelpers->stringifyModulePath($module_propagation_current_path);
+                $this->not_excluded_ancestor_module = $this->getModulePathHelpers()->stringifyModulePath($module_propagation_current_path);
 
                 // Add it to the list of not-excluded modules
                 if (!in_array($this->not_excluded_ancestor_module, $this->not_excluded_module_sets_as_string)) {
@@ -157,7 +182,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
         }
 
         // Add the module to the path
-        $this->modulePathManager->prepareForPropagation($module, $props);
+        $this->getModulePathManager()->prepareForPropagation($module, $props);
     }
     public function restoreFromPropagation(array $module, array &$props): void
     {
@@ -166,15 +191,15 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
         }
 
         // Remove the module from the path
-        $this->modulePathManager->restoreFromPropagation($module, $props);
+        $this->getModulePathManager()->restoreFromPropagation($module, $props);
 
         if ($this->selected_filter_name) {
             if (!$this->neverExclude && !is_null($this->not_excluded_ancestor_module) && $this->excludeModule($module, $props) === false) {
-                $module_propagation_current_path = $this->modulePathManager->getPropagationCurrentPath();
+                $module_propagation_current_path = $this->getModulePathManager()->getPropagationCurrentPath();
                 $module_propagation_current_path[] = $module;
 
                 // If the current module was set as the one not excluded, then reset it
-                if ($this->not_excluded_ancestor_module == $this->modulePathHelpers->stringifyModulePath($module_propagation_current_path)) {
+                if ($this->not_excluded_ancestor_module == $this->getModulePathHelpers()->stringifyModulePath($module_propagation_current_path)) {
                     $this->not_excluded_ancestor_module = null;
                 }
             }

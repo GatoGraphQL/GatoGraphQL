@@ -17,21 +17,53 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
 {
-    protected UserSettingsManagerInterface $userSettingsManager;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected SingleEndpointSchemaConfigurator $endpointSchemaConfigurator;
-    protected GraphQLEndpointHandler $graphQLEndpointHandler;
+    private ?UserSettingsManagerInterface $userSettingsManager = null;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?SingleEndpointSchemaConfigurator $singleEndpointSchemaConfigurator = null;
+    private ?GraphQLEndpointHandler $graphQLEndpointHandler = null;
 
-    #[Required]
+    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
+    {
+        $this->userSettingsManager = $userSettingsManager;
+    }
+    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    {
+        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
+    }
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setSingleEndpointSchemaConfigurator(SingleEndpointSchemaConfigurator $singleEndpointSchemaConfigurator): void
+    {
+        $this->singleEndpointSchemaConfigurator = $singleEndpointSchemaConfigurator;
+    }
+    protected function getSingleEndpointSchemaConfigurator(): SingleEndpointSchemaConfigurator
+    {
+        return $this->singleEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(SingleEndpointSchemaConfigurator::class);
+    }
+    public function setGraphQLEndpointHandler(GraphQLEndpointHandler $graphQLEndpointHandler): void
+    {
+        $this->graphQLEndpointHandler = $graphQLEndpointHandler;
+    }
+    protected function getGraphQLEndpointHandler(): GraphQLEndpointHandler
+    {
+        return $this->graphQLEndpointHandler ??= $this->instanceManager->getInstance(GraphQLEndpointHandler::class);
+    }
+
+    //#[Required]
     final public function autowireSingleEndpointSchemaConfiguratorExecuter(
         ModuleRegistryInterface $moduleRegistry,
-        SingleEndpointSchemaConfigurator $endpointSchemaConfigurator,
+        SingleEndpointSchemaConfigurator $singleEndpointSchemaConfigurator,
         GraphQLEndpointHandler $graphQLEndpointHandler,
     ): void {
         $this->moduleRegistry = $moduleRegistry;
-        $this->endpointSchemaConfigurator = $endpointSchemaConfigurator;
+        $this->singleEndpointSchemaConfigurator = $singleEndpointSchemaConfigurator;
         $this->graphQLEndpointHandler = $graphQLEndpointHandler;
-        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
 
     /**
@@ -40,7 +72,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     protected function getCustomPostID(): ?int
     {
         // Only enable it when executing a query against the single endpoint
-        if (!$this->graphQLEndpointHandler->isEndpointRequested()) {
+        if (!$this->getGraphQLEndpointHandler()->isEndpointRequested()) {
             return null;
         }
         return $this->getUserSettingSchemaConfigurationID();
@@ -51,7 +83,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
      */
     protected function getUserSettingSchemaConfigurationID(): ?int
     {
-        $schemaConfigurationID = $this->userSettingsManager->getSetting(
+        $schemaConfigurationID = $this->getUserSettingsManager()->getSetting(
             SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
             ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT
         );
@@ -64,6 +96,6 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
     {
-        return $this->endpointSchemaConfigurator;
+        return $this->getSingleEndpointSchemaConfigurator();
     }
 }

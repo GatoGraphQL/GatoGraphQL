@@ -25,7 +25,16 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public const PUBLIC_PRIVATE_SCHEMA = Plugin::NAMESPACE . '\public-private-schema';
     public const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
 
-    protected ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType;
+    private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
+
+    public function setGraphQLSchemaConfigurationCustomPostType(GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType): void
+    {
+        $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
+    }
+    protected function getGraphQLSchemaConfigurationCustomPostType(): GraphQLSchemaConfigurationCustomPostType
+    {
+        return $this->graphQLSchemaConfigurationCustomPostType ??= $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
+    }
 
     /**
      * Make all properties nullable, becase the ModuleRegistry is registered
@@ -35,7 +44,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
      * Function `getDescription` will only be accessed from the Application Container,
      * so the properties will not be null in that situation.
      */
-    #[Required]
+    //#[Required]
     final public function autowireSchemaConfigurationFunctionalityModuleResolver(
         ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
     ): void {
@@ -158,8 +167,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
             ];
             foreach ($maybeWhereModules as $maybeWhereModule) {
-                if ($this->moduleRegistry->isModuleEnabled($maybeWhereModule)) {
-                    $whereModules[] = '▹ ' . $this->moduleRegistry->getModuleResolver($maybeWhereModule)->getName($maybeWhereModule);
+                if ($this->getModuleRegistry()->isModuleEnabled($maybeWhereModule)) {
+                    $whereModules[] = '▹ ' . $this->getModuleRegistry()->getModuleResolver($maybeWhereModule)->getName($maybeWhereModule);
                 }
             }
             // Build all the possible values by fetching all the Schema Configuration posts
@@ -167,7 +176,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ModuleSettingOptionValues::NO_VALUE_ID => \__('None', 'graphql-api'),
             ];
             /** @var GraphQLSchemaConfigurationCustomPostType */
-            $graphQLSchemaConfigurationCustomPostType = $this->graphQLSchemaConfigurationCustomPostType;
+            $graphQLSchemaConfigurationCustomPostType = $this->getGraphQLSchemaConfigurationCustomPostType();
             /**
              * @var WP_Post[]
              */
@@ -200,7 +209,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 // Fetch all Schema Configurations from the DB
                 Properties::POSSIBLE_VALUES => $possibleValues,
             ];
-            if ($this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)) {
+            if ($this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)) {
                 $option = ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
@@ -253,7 +262,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 AccessControlFunctionalityModuleResolver::ACCESS_CONTROL,
             ];
             $whereModuleNames = array_map(
-                fn ($whereModule) => '▹ ' . $this->moduleRegistry->getModuleResolver($whereModule)->getName($whereModule),
+                fn ($whereModule) => '▹ ' . $this->getModuleRegistry()->getModuleResolver($whereModule)->getName($whereModule),
                 $whereModules
             );
             $option = self::OPTION_MODE;

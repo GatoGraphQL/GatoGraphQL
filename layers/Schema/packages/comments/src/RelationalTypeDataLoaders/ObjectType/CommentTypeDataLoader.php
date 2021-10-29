@@ -14,9 +14,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
-    protected CommentTypeAPIInterface $commentTypeAPI;
+    private ?CommentTypeAPIInterface $commentTypeAPI = null;
 
-    #[Required]
+    public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
+    {
+        $this->commentTypeAPI = $commentTypeAPI;
+    }
+    protected function getCommentTypeAPI(): CommentTypeAPIInterface
+    {
+        return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireCommentTypeDataLoader(
         CommentTypeAPIInterface $commentTypeAPI,
     ): void {
@@ -43,7 +52,7 @@ class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 
     public function executeQuery($query, array $options = []): array
     {
-        return $this->commentTypeAPI->getComments($query, $options);
+        return $this->getCommentTypeAPI()->getComments($query, $options);
     }
 
     public function executeQueryIDs($query): array

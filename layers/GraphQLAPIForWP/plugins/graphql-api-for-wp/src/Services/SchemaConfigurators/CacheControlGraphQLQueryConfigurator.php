@@ -14,11 +14,36 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigurator
 {
-    protected CacheControlBlock $cacheControlBlock;
-    protected BlockHelpers $blockHelpers;
-    protected CacheControlManagerInterface $cacheControlManager;
+    private ?CacheControlBlock $cacheControlBlock = null;
+    private ?BlockHelpers $blockHelpers = null;
+    private ?CacheControlManagerInterface $cacheControlManager = null;
 
-    #[Required]
+    public function setCacheControlBlock(CacheControlBlock $cacheControlBlock): void
+    {
+        $this->cacheControlBlock = $cacheControlBlock;
+    }
+    protected function getCacheControlBlock(): CacheControlBlock
+    {
+        return $this->cacheControlBlock ??= $this->instanceManager->getInstance(CacheControlBlock::class);
+    }
+    public function setBlockHelpers(BlockHelpers $blockHelpers): void
+    {
+        $this->blockHelpers = $blockHelpers;
+    }
+    protected function getBlockHelpers(): BlockHelpers
+    {
+        return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
+    }
+    public function setCacheControlManager(CacheControlManagerInterface $cacheControlManager): void
+    {
+        $this->cacheControlManager = $cacheControlManager;
+    }
+    protected function getCacheControlManager(): CacheControlManagerInterface
+    {
+        return $this->cacheControlManager ??= $this->instanceManager->getInstance(CacheControlManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireCacheControlGraphQLQueryConfigurator(
         CacheControlBlock $cacheControlBlock,
         BlockHelpers $blockHelpers,
@@ -50,9 +75,9 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
      */
     protected function doExecuteSchemaConfiguration(int $cclPostID): void
     {
-        $cclBlockItems = $this->blockHelpers->getBlocksOfTypeFromCustomPost(
+        $cclBlockItems = $this->getBlockHelpers()->getBlocksOfTypeFromCustomPost(
             $cclPostID,
-            $this->cacheControlBlock
+            $this->getCacheControlBlock()
         );
         // The "Cache Control" type contains the fields/directives and the max-age
         foreach ($cclBlockItems as $cclBlockItem) {
@@ -68,7 +93,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
                             )
                         )
                     ) {
-                        $this->cacheControlManager->addEntriesForFields(
+                        $this->getCacheControlManager()->addEntriesForFields(
                             $entriesForFields
                         );
                     }
@@ -84,7 +109,7 @@ class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigura
                             )
                         ))
                     ) {
-                        $this->cacheControlManager->addEntriesForDirectives(
+                        $this->getCacheControlManager()->addEntriesForDirectives(
                             $entriesForDirectives
                         );
                     }

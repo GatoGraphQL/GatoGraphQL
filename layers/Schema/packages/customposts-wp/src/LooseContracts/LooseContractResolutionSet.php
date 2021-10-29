@@ -18,12 +18,12 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
             return $this->hooksAPI->applyFilters('popcms:excerptMore', $text);
         }, 10, 1);
 
-        $this->looseContractManager->implementHooks([
+        $this->getLooseContractManager()->implementHooks([
             'popcms:post:title',
             'popcms:excerptMore',
         ]);
 
-        $this->nameResolver->implementNames([
+        $this->getNameResolver()->implementNames([
             'popcms:dbcolumn:orderby:customposts:date' => 'date',
             'popcms:dbcolumn:orderby:customposts:modified' => 'modified',
             'popcms:dbcolumn:orderby:customposts:id' => 'ID',

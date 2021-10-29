@@ -12,10 +12,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait PostTagAPISatisfiedContractTrait
 {
-    protected PostTagTypeAPIInterface $postTagTypeAPI;
-    protected PostTagObjectTypeResolver $postTagObjectTypeResolver;
+    private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
+    private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
 
-    #[Required]
+    public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
+    {
+        $this->postTagTypeAPI = $postTagTypeAPI;
+    }
+    protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
+    {
+        return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
+    }
+    public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
+    {
+        $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
+    }
+    protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
+    {
+        return $this->postTagObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+    }
+
+    //#[Required]
     public function autowirePostTagAPISatisfiedContractTrait(
         PostTagTypeAPIInterface $postTagTypeAPI,
         PostTagObjectTypeResolver $postTagObjectTypeResolver,
@@ -26,11 +43,11 @@ trait PostTagAPISatisfiedContractTrait
 
     public function getTagTypeAPI(): TagTypeAPIInterface
     {
-        return $this->postTagTypeAPI;
+        return $this->getPostTagTypeAPI();
     }
 
     public function getTagTypeResolver(): TagObjectTypeResolverInterface
     {
-        return $this->postTagObjectTypeResolver;
+        return $this->getPostTagObjectTypeResolver();
     }
 }

@@ -40,7 +40,7 @@ class ModulesMenuPage extends AbstractTableMenuPage
      */
     protected function isCurrentScreen(): bool
     {
-        return !$this->menuPageHelper->isDocumentationScreen() && parent::isCurrentScreen();
+        return !$this->getMenuPageHelper()->isDocumentationScreen() && parent::isCurrentScreen();
     }
 
     protected function getScreenOptionName(): string

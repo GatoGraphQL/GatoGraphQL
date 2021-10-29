@@ -15,11 +15,36 @@ use WP_Post;
 
 class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected CMSHelperServiceInterface $cmsHelperService;
-    protected DateFormatterInterface $dateFormatter;
-    protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
+    private ?CMSHelperServiceInterface $cmsHelperService = null;
+    private ?DateFormatterInterface $dateFormatter = null;
+    private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
 
-    #[Required]
+    public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
+    {
+        $this->cmsHelperService = $cmsHelperService;
+    }
+    protected function getCMSHelperService(): CMSHelperServiceInterface
+    {
+        return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
+    }
+    public function setDateFormatter(DateFormatterInterface $dateFormatter): void
+    {
+        $this->dateFormatter = $dateFormatter;
+    }
+    protected function getDateFormatter(): DateFormatterInterface
+    {
+        return $this->dateFormatter ??= $this->instanceManager->getInstance(DateFormatterInterface::class);
+    }
+    public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
+    {
+        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
+    }
+    protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
+    {
+        return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
+    }
+
+    //#[Required]
     final public function autowireMediaObjectTypeFieldResolver(
         CMSHelperServiceInterface $cmsHelperService,
         DateFormatterInterface $dateFormatter,
@@ -40,7 +65,7 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->queryableInterfaceTypeFieldResolver,
+            $this->getQueryableInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -88,7 +113,7 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     return $url;
                 }
                 /** @var string */
-                return $this->cmsHelperService->getLocalURLPath($url);
+                return $this->getCmsHelperService()->getLocalURLPath($url);
             case 'slug':
                 return $mediaItem->post_name;
         }

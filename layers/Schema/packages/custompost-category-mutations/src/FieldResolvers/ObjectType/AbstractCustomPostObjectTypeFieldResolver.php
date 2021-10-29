@@ -18,10 +18,27 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
 {
     use SetCategoriesOnCustomPostObjectTypeFieldResolverTrait;
 
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    #[Required]
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCustomPostObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,
@@ -67,8 +84,8 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ($fieldName) {
             'setCategories' => [
-                MutationInputProperties::CATEGORY_IDS => $this->idScalarTypeResolver,
-                MutationInputProperties::APPEND => $this->booleanScalarTypeResolver,
+                MutationInputProperties::CATEGORY_IDS => $this->getIdScalarTypeResolver(),
+                MutationInputProperties::APPEND => $this->getBooleanScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };

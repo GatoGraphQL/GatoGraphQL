@@ -20,11 +20,36 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use CreateOrUpdateCustomPostObjectTypeFieldResolverTrait;
 
-    protected PostObjectTypeResolver $postObjectTypeResolver;
-    protected CreatePostMutationResolver $createPostMutationResolver;
-    protected UpdatePostMutationResolver $updatePostMutationResolver;
+    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?CreatePostMutationResolver $createPostMutationResolver = null;
+    private ?UpdatePostMutationResolver $updatePostMutationResolver = null;
 
-    #[Required]
+    public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
+    {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+    }
+    protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    {
+        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+    }
+    public function setCreatePostMutationResolver(CreatePostMutationResolver $createPostMutationResolver): void
+    {
+        $this->createPostMutationResolver = $createPostMutationResolver;
+    }
+    protected function getCreatePostMutationResolver(): CreatePostMutationResolver
+    {
+        return $this->createPostMutationResolver ??= $this->instanceManager->getInstance(CreatePostMutationResolver::class);
+    }
+    public function setUpdatePostMutationResolver(UpdatePostMutationResolver $updatePostMutationResolver): void
+    {
+        $this->updatePostMutationResolver = $updatePostMutationResolver;
+    }
+    protected function getUpdatePostMutationResolver(): UpdatePostMutationResolver
+    {
+        return $this->updatePostMutationResolver ??= $this->instanceManager->getInstance(UpdatePostMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireRootObjectTypeFieldResolver(
         PostObjectTypeResolver $postObjectTypeResolver,
         CreatePostMutationResolver $createPostMutationResolver,
@@ -98,8 +123,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
         return match ($fieldName) {
-            'createPost' => $this->createPostMutationResolver,
-            'updatePost' => $this->updatePostMutationResolver,
+            'createPost' => $this->getCreatePostMutationResolver(),
+            'updatePost' => $this->getUpdatePostMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -109,7 +134,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'createPost',
             'updatePost'
-                => $this->postObjectTypeResolver,
+                => $this->getPostObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

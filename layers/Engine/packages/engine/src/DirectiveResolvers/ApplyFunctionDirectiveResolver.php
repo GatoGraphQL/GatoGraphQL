@@ -27,17 +27,42 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
      * since this could be a UnionTypeResolver,
      * but `extractFieldArguments` expects an ObjectTypeResolver
      */
-    protected RootObjectTypeResolver $rootTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
+    private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
 
-    #[Required]
+    public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
+    {
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+    }
+    protected function getRootObjectTypeResolver(): RootObjectTypeResolver
+    {
+        return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    {
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+    }
+    protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    {
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireApplyFunctionDirectiveResolver(
-        RootObjectTypeResolver $rootTypeResolver,
+        RootObjectTypeResolver $rootObjectTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
         DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
     ): void {
-        $this->rootTypeResolver = $rootTypeResolver;
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
     }
@@ -58,9 +83,9 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            'function' => $this->stringScalarTypeResolver,
-            'addArguments' => $this->dangerouslyDynamicScalarTypeResolver,
-            'target' => $this->stringScalarTypeResolver,
+            'function' => $this->getStringScalarTypeResolver(),
+            'addArguments' => $this->getDangerouslyDynamicScalarTypeResolver(),
+            'target' => $this->getStringScalarTypeResolver(),
         ];
     }
 
@@ -129,12 +154,12 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
 
         // Maybe re-generate the function: Inject the provided `$addArguments` to the fieldArgs already declared in the query
         if ($addArguments) {
-            $functionName = $this->fieldQueryInterpreter->getFieldName($function);
+            $functionName = $this->getFieldQueryInterpreter()->getFieldName($function);
             $functionArgElems = array_merge(
-                $this->fieldQueryInterpreter->extractFieldArguments($this->rootTypeResolver, $function) ?? [],
+                $this->getFieldQueryInterpreter()->extractFieldArguments($this->getRootObjectTypeResolver(), $function) ?? [],
                 $addArguments
             );
-            $function = $this->fieldQueryInterpreter->getField($functionName, $functionArgElems);
+            $function = $this->getFieldQueryInterpreter()->getField($functionName, $functionArgElems);
         }
         $dbKey = $relationalTypeResolver->getTypeOutputDBKey();
 
@@ -142,7 +167,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         foreach ($idsDataFields as $id => $dataFields) {
             $object = $objectIDItems[$id];
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
+                $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
 
                 // Validate that the property exists
                 $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
@@ -181,7 +206,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                     $schemaFieldArgs,
                     $schemaObjectErrors,
                     $schemaObjectWarnings
-                ) = $this->fieldQueryInterpreter->extractFieldArgumentsForSchema($this->rootTypeResolver, $function, $variables);
+                ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForSchema($this->getRootObjectTypeResolver(), $function, $variables);
 
                 // Place the errors not under schema but under DB, since they may change on a object by object basis
                 if ($schemaObjectWarnings) {
@@ -236,7 +261,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 ];
                 $functionValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $validFunction, $variables, $expressions, $options);
                 // Merge the objectWarnings, if any
-                if ($storedObjectWarnings = $this->feedbackMessageStore->retrieveAndClearObjectWarnings($id)) {
+                if ($storedObjectWarnings = $this->getFeedbackMessageStore()->retrieveAndClearObjectWarnings($id)) {
                     $objectWarnings[$id] = array_merge(
                         $objectWarnings[$id] ?? [],
                         $storedObjectWarnings
@@ -291,7 +316,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaDeprecations
     ): void {
         $object = $objectIDItems[$id];
-        $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
+        $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
         $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
         $dbKey = $relationalTypeResolver->getTypeOutputDBKey();
         $value = $isValueInDBItems ?

@@ -12,9 +12,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected HighlightTypeDataLoader $highlightTypeDataLoader;
+    private ?HighlightTypeDataLoader $highlightTypeDataLoader = null;
     
-    #[Required]
+    public function setHighlightTypeDataLoader(HighlightTypeDataLoader $highlightTypeDataLoader): void
+    {
+        $this->highlightTypeDataLoader = $highlightTypeDataLoader;
+    }
+    protected function getHighlightTypeDataLoader(): HighlightTypeDataLoader
+    {
+        return $this->highlightTypeDataLoader ??= $this->instanceManager->getInstance(HighlightTypeDataLoader::class);
+    }
+
+    //#[Required]
     final public function autowireHighlightObjectTypeResolver(
         HighlightTypeDataLoader $highlightTypeDataLoader,
     ): void {
@@ -39,6 +48,6 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->highlightTypeDataLoader;
+        return $this->getHighlightTypeDataLoader();
     }
 }

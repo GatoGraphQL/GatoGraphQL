@@ -26,7 +26,6 @@ use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
@@ -37,12 +36,14 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Configuration\Request;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Root\Helpers\Methods;
 use PoP\Translation\TranslationAPIInterface;
@@ -50,6 +51,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class Engine implements EngineInterface
 {
+    use BasicServiceTrait;
+
     public const CACHETYPE_IMMUTABLEDATASETSETTINGS = 'static-datasetsettings';
     public const CACHETYPE_STATICDATAPROPERTIES = 'static-data-properties';
     public const CACHETYPE_STATEFULDATAPROPERTIES = 'stateful-data-properties';
@@ -109,30 +112,121 @@ class Engine implements EngineInterface
      * on services.yaml produces an exception of PHP properties not initialized
      * in its depended services.
      */
-    protected ?PersistentCacheInterface $persistentCache = null;
+    private ?PersistentCacheInterface $persistentCache = null;
 
-    protected TranslationAPIInterface $translationAPI;
-    protected HooksAPIInterface $hooksAPI;
-    protected DataStructureManagerInterface $dataStructureManager;
-    protected InstanceManagerInterface $instanceManager;
-    protected ModelInstanceInterface $modelInstance;
-    protected FeedbackMessageStoreInterface $feedbackMessageStore;
-    protected ModulePathHelpersInterface $modulePathHelpers;
-    protected ModulePathManagerInterface $modulePathManager;
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
-    protected ModuleFilterManagerInterface $moduleFilterManager;
-    protected ModuleProcessorManagerInterface $moduleProcessorManager;
-    protected CheckpointProcessorManagerInterface $checkpointProcessorManager;
-    protected DataloadHelperServiceInterface $dataloadHelperService;
-    protected EntryModuleManagerInterface $entryModuleManager;
-    protected RequestHelperServiceInterface $requestHelperService;
+    private ?DataStructureManagerInterface $dataStructureManager = null;
+    private ?ModelInstanceInterface $modelInstance = null;
+    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    private ?ModulePathHelpersInterface $modulePathHelpers = null;
+    private ?ModulePathManagerInterface $modulePathManager = null;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?ModuleFilterManagerInterface $moduleFilterManager = null;
+    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    private ?CheckpointProcessorManagerInterface $checkpointProcessorManager = null;
+    private ?DataloadHelperServiceInterface $dataloadHelperService = null;
+    private ?EntryModuleManagerInterface $entryModuleManager = null;
+    private ?RequestHelperServiceInterface $requestHelperService = null;
 
-    #[Required]
+    public function setDataStructureManager(DataStructureManagerInterface $dataStructureManager): void
+    {
+        $this->dataStructureManager = $dataStructureManager;
+    }
+    protected function getDataStructureManager(): DataStructureManagerInterface
+    {
+        return $this->dataStructureManager ??= $this->instanceManager->getInstance(DataStructureManagerInterface::class);
+    }
+    public function setModelInstance(ModelInstanceInterface $modelInstance): void
+    {
+        $this->modelInstance = $modelInstance;
+    }
+    protected function getModelInstance(): ModelInstanceInterface
+    {
+        return $this->modelInstance ??= $this->instanceManager->getInstance(ModelInstanceInterface::class);
+    }
+    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+    }
+    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    {
+        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
+    }
+    public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
+    {
+        $this->modulePathHelpers = $modulePathHelpers;
+    }
+    protected function getModulePathHelpers(): ModulePathHelpersInterface
+    {
+        return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
+    }
+    public function setModulePathManager(ModulePathManagerInterface $modulePathManager): void
+    {
+        $this->modulePathManager = $modulePathManager;
+    }
+    protected function getModulePathManager(): ModulePathManagerInterface
+    {
+        return $this->modulePathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
+    }
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
+    }
+    public function setModuleFilterManager(ModuleFilterManagerInterface $moduleFilterManager): void
+    {
+        $this->moduleFilterManager = $moduleFilterManager;
+    }
+    protected function getModuleFilterManager(): ModuleFilterManagerInterface
+    {
+        return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ModuleFilterManagerInterface::class);
+    }
+    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    {
+        $this->moduleProcessorManager = $moduleProcessorManager;
+    }
+    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    {
+        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
+    }
+    public function setCheckpointProcessorManager(CheckpointProcessorManagerInterface $checkpointProcessorManager): void
+    {
+        $this->checkpointProcessorManager = $checkpointProcessorManager;
+    }
+    protected function getCheckpointProcessorManager(): CheckpointProcessorManagerInterface
+    {
+        return $this->checkpointProcessorManager ??= $this->instanceManager->getInstance(CheckpointProcessorManagerInterface::class);
+    }
+    public function setDataloadHelperService(DataloadHelperServiceInterface $dataloadHelperService): void
+    {
+        $this->dataloadHelperService = $dataloadHelperService;
+    }
+    protected function getDataloadHelperService(): DataloadHelperServiceInterface
+    {
+        return $this->dataloadHelperService ??= $this->instanceManager->getInstance(DataloadHelperServiceInterface::class);
+    }
+    public function setEntryModuleManager(EntryModuleManagerInterface $entryModuleManager): void
+    {
+        $this->entryModuleManager = $entryModuleManager;
+    }
+    protected function getEntryModuleManager(): EntryModuleManagerInterface
+    {
+        return $this->entryModuleManager ??= $this->instanceManager->getInstance(EntryModuleManagerInterface::class);
+    }
+    public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
+    {
+        $this->requestHelperService = $requestHelperService;
+    }
+    protected function getRequestHelperService(): RequestHelperServiceInterface
+    {
+        return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
+    }
+
+    //#[Required]
     final public function autowireEngine(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
         DataStructureManagerInterface $dataStructureManager,
-        InstanceManagerInterface $instanceManager,
         ModelInstanceInterface $modelInstance,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         ModulePathHelpersInterface $modulePathHelpers,
@@ -145,10 +239,7 @@ class Engine implements EngineInterface
         EntryModuleManagerInterface $entryModuleManager,
         RequestHelperServiceInterface $requestHelperService,
     ): void {
-        $this->translationAPI = $translationAPI;
-        $this->hooksAPI = $hooksAPI;
         $this->dataStructureManager = $dataStructureManager;
-        $this->instanceManager = $instanceManager;
         $this->modelInstance = $modelInstance;
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->modulePathHelpers = $modulePathHelpers;
@@ -186,12 +277,12 @@ class Engine implements EngineInterface
         }
 
         // Obtain, validate and cache
-        $this->entryModule = $this->entryModuleManager->getEntryModule();
+        $this->entryModule = $this->getEntryModuleManager()->getEntryModule();
         if ($this->entryModule === null) {
             throw new Exception(
                 sprintf(
                     'No entry module for this request (%s)',
-                    $this->requestHelperService->getRequestedFullURL()
+                    $this->getRequestHelperService()->getRequestedFullURL()
                 )
             );
         }
@@ -259,9 +350,9 @@ class Engine implements EngineInterface
     {
         $model_instance_id = $current_uri = null;
         if ($has_extra_routes = !empty($this->getExtraRoutes())) {
-            $model_instance_id = $this->modelInstance->getModelInstanceId();
+            $model_instance_id = $this->getModelInstance()->getModelInstanceId();
             $current_uri = GeneralUtils::removeDomain(
-                $this->requestHelperService->getCurrentURL()
+                $this->getRequestHelperService()->getCurrentURL()
             );
         }
 
@@ -313,7 +404,7 @@ class Engine implements EngineInterface
 
     protected function formatData(): void
     {
-        $formatter = $this->dataStructureManager->getDataStructureFormatter();
+        $formatter = $this->getDataStructureManager()->getDataStructureFormatter();
         $this->data = $formatter->getFormattedData($this->data);
     }
 
@@ -335,7 +426,7 @@ class Engine implements EngineInterface
     public function getModelPropsModuletree(array $module): array
     {
         $useCache = ComponentConfiguration::useComponentModelCache();
-        $processor = $this->moduleProcessorManager->getProcessor($module);
+        $processor = $this->getModuleProcessorManager()->getProcessor($module);
 
         // Important: cannot use it if doing POST, because the request may have to be handled by a different block than the one whose data was cached
         // Eg: doing GET on /add-post/ will show the form BLOCK_ADDPOST_CREATE, but doing POST on /add-post/ will bring the action ACTION_ADDPOST_CREATE
@@ -361,7 +452,7 @@ class Engine implements EngineInterface
     // Notice that $props is passed by copy, this way the input $model_props and the returned $immutable_plus_request_props are different objects
     public function addRequestPropsModuletree(array $module, array $props): array
     {
-        $processor = $this->moduleProcessorManager->getProcessor($module);
+        $processor = $this->getModuleProcessorManager()->getProcessor($module);
 
         // The input $props is the model_props. We add, on object, the mutableonrequest props, resulting in a "static + mutableonrequest" props object
         $processor->initRequestPropsModuletree($module, $props, [], []);
@@ -509,7 +600,7 @@ class Engine implements EngineInterface
     {
         $ret = [];
         $useCache = ComponentConfiguration::useComponentModelCache();
-        $processor = $this->moduleProcessorManager->getProcessor($module);
+        $processor = $this->getModuleProcessorManager()->getProcessor($module);
 
         // From the state we know if to process static/staful content or both
         $vars = ApplicationState::getVars();
@@ -555,8 +646,8 @@ class Engine implements EngineInterface
         $meta = array(
             Response::ENTRY_MODULE => $this->getEntryModule()[1],
             Response::UNIQUE_ID => ComponentInfo::get('unique-id'),
-            Response::URL => $this->requestHelperService->getCurrentURL(),
-            'modelinstanceid' => $this->modelInstance->getModelInstanceId(),
+            Response::URL => $this->getRequestHelperService()->getCurrentURL(),
+            'modelinstanceid' => $this->getModelInstance()->getModelInstanceId(),
         );
 
         if ($this->backgroundload_urls) {
@@ -564,7 +655,7 @@ class Engine implements EngineInterface
         };
 
         // Starting from what modules must do the rendering. Allow for empty arrays (eg: modulepaths[]=somewhatevervalue)
-        $not_excluded_module_sets = $this->moduleFilterManager->getNotExcludedModuleSets();
+        $not_excluded_module_sets = $this->getModuleFilterManager()->getNotExcludedModuleSets();
         if (!is_null($not_excluded_module_sets)) {
             // Print the settings id of each module. Then, a module can feed data to another one by sharing the same settings id (eg: self::MODULE_BLOCK_USERAVATAR_EXECUTEUPDATE and PoP_UserAvatarProcessors_Module_Processor_UserBlocks::MODULE_BLOCK_USERAVATAR_UPDATE)
             $filteredsettings = [];
@@ -754,14 +845,14 @@ class Engine implements EngineInterface
         array $module,
         array &$props
     ): void {
-        $processor = $this->moduleProcessorManager->getProcessor($module);
+        $processor = $this->getModuleProcessorManager()->getProcessor($module);
         $moduleFullName = ModuleUtils::getModuleFullName($module);
 
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
-        if (!$this->moduleFilterManager->excludeModule($module, $props)) {
+        if (!$this->getModuleFilterManager()->excludeModule($module, $props)) {
             // If the current module loads data, then add its path to the list
             if ($interreferenced_modulepath = $processor->getDataFeedbackInterreferencedModulepath($module, $props)) {
-                $referenced_modulepath = $this->modulePathHelpers->stringifyModulePath($interreferenced_modulepath);
+                $referenced_modulepath = $this->getModulePathHelpers()->stringifyModulePath($interreferenced_modulepath);
                 $paths[$referenced_modulepath] = $paths[$referenced_modulepath] ?? [];
                 $paths[$referenced_modulepath][] = array_merge(
                     $module_path,
@@ -781,14 +872,14 @@ class Engine implements EngineInterface
 
         // Propagate to its inner modules
         $submodules = $processor->getAllSubmodules($module);
-        $submodules = $this->moduleFilterManager->removeExcludedSubmodules($module, $submodules);
+        $submodules = $this->getModuleFilterManager()->removeExcludedSubmodules($module, $submodules);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
-        $this->moduleFilterManager->prepareForPropagation($module, $props);
+        $this->getModuleFilterManager()->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
             $this->addInterreferencedModuleFullpaths($paths, $submodule_path, $submodule, $props[$moduleFullName][Props::SUBMODULES]);
         }
-        $this->moduleFilterManager->restoreFromPropagation($module, $props);
+        $this->getModuleFilterManager()->restoreFromPropagation($module, $props);
     }
 
     protected function getDataloadingModuleFullpaths(array $module, array &$props): array
@@ -804,11 +895,11 @@ class Engine implements EngineInterface
         array $module,
         array &$props
     ): void {
-        $processor = $this->moduleProcessorManager->getProcessor($module);
+        $processor = $this->getModuleProcessorManager()->getProcessor($module);
         $moduleFullName = ModuleUtils::getModuleFullName($module);
 
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
-        if (!$this->moduleFilterManager->excludeModule($module, $props)) {
+        if (!$this->getModuleFilterManager()->excludeModule($module, $props)) {
             // If the current module loads data, then add its path to the list
             if ($processor->moduleLoadsData($module)) {
                 $paths[] = array_merge(
@@ -829,14 +920,14 @@ class Engine implements EngineInterface
 
         // Propagate to its inner modules
         $submodules = $processor->getAllSubmodules($module);
-        $submodules = $this->moduleFilterManager->removeExcludedSubmodules($module, $submodules);
+        $submodules = $this->getModuleFilterManager()->removeExcludedSubmodules($module, $submodules);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
-        $this->moduleFilterManager->prepareForPropagation($module, $props);
+        $this->getModuleFilterManager()->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
             $this->addDataloadingModuleFullpaths($paths, $submodule_path, $submodule, $props[$moduleFullName][Props::SUBMODULES]);
         }
-        $this->moduleFilterManager->restoreFromPropagation($module, $props);
+        $this->getModuleFilterManager()->restoreFromPropagation($module, $props);
     }
 
     protected function assignValueForModule(
@@ -868,7 +959,7 @@ class Engine implements EngineInterface
     {
         // Iterate through the list of all checkpoints, process all of them, if any produces an error, already return it
         foreach ($checkpoints as $checkpoint) {
-            $maybeCheckpointError = $this->checkpointProcessorManager->getProcessor($checkpoint)->validateCheckpoint($checkpoint);
+            $maybeCheckpointError = $this->getCheckpointProcessorManager()->getProcessor($checkpoint)->validateCheckpoint($checkpoint);
             if (GeneralUtils::isError($maybeCheckpointError)) {
                 return $maybeCheckpointError;
             }
@@ -887,7 +978,7 @@ class Engine implements EngineInterface
     public function getModuleData(array $root_module, array $root_model_props, array $root_props): array
     {
         $useCache = ComponentConfiguration::useComponentModelCache();
-        $root_processor = $this->moduleProcessorManager->getProcessor($root_module);
+        $root_processor = $this->getModuleProcessorManager()->getProcessor($root_module);
 
         // From the state we know if to process static/staful content or both
         $vars = ApplicationState::getVars();
@@ -962,7 +1053,7 @@ class Engine implements EngineInterface
         $module_fullpaths = $this->getDataloadingModuleFullpaths($root_module, $root_props);
 
         // The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
-        $this->moduleFilterManager->neverExclude(true);
+        $this->getModuleFilterManager()->neverExclude(true);
         foreach ($module_fullpaths as $module_path) {
             // The module is the last element in the path.
             // Notice that the module is removed from the path, providing the path to all its properties
@@ -970,7 +1061,7 @@ class Engine implements EngineInterface
             $moduleFullName = ModuleUtils::getModuleFullName($module);
 
             // Artificially set the current path on the path manager. It will be needed in getDatasetmeta, which calls getDataloadSource, which needs the current path
-            $this->modulePathManager->setPropagationCurrentPath($module_path);
+            $this->getModulePathManager()->setPropagationCurrentPath($module_path);
 
             // Data Properties: assign by reference, so that changes to this variable are also performed in the original variable
             $data_properties = &$root_data_properties;
@@ -1024,7 +1115,7 @@ class Engine implements EngineInterface
                 $module_props = &$props;
             }
 
-            $processor = $this->moduleProcessorManager->getProcessor($module);
+            $processor = $this->getModuleProcessorManager()->getProcessor($module);
 
             // The module path key is used for storing temporary results for later retrieval
             $module_path_key = $this->getModulePathKey($module_path, $module);
@@ -1163,7 +1254,7 @@ class Engine implements EngineInterface
             $this->processAndAddModuleData($module_path, $module, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
 
             // Allow other modules to produce their own feedback using this module's data results
-            if ($referencer_modulefullpaths = $interreferenced_modulefullpaths[$this->modulePathHelpers->stringifyModulePath(array_merge($module_path, array($module)))] ?? null) {
+            if ($referencer_modulefullpaths = $interreferenced_modulefullpaths[$this->getModulePathHelpers()->stringifyModulePath(array_merge($module_path, array($module)))] ?? null) {
                 foreach ($referencer_modulefullpaths as $referencer_modulepath) {
                     $referencer_module = array_pop($referencer_modulepath);
 
@@ -1214,8 +1305,8 @@ class Engine implements EngineInterface
         }
 
         // Reset the filtermanager state and the pathmanager current path
-        $this->moduleFilterManager->neverExclude(false);
-        $this->modulePathManager->setPropagationCurrentPath();
+        $this->getModuleFilterManager()->neverExclude(false);
+        $this->getModulePathManager()->setPropagationCurrentPath();
 
         $ret = [];
 
@@ -1515,7 +1606,7 @@ class Engine implements EngineInterface
                 }
             }
 
-            $storeSchemaErrors = $this->feedbackMessageStore->retrieveAndClearSchemaErrors();
+            $storeSchemaErrors = $this->getFeedbackMessageStore()->retrieveAndClearSchemaErrors();
             if (!empty($iterationSchemaErrors) || !empty($storeSchemaErrors)) {
                 $dbNameSchemaErrorEntries = $this->moveEntriesUnderDBName($iterationSchemaErrors, false, $relationalTypeResolver);
                 foreach ($dbNameSchemaErrorEntries as $dbname => $entries) {
@@ -1530,7 +1621,7 @@ class Engine implements EngineInterface
                     $dbNameStoreSchemaErrors
                 );
             }
-            if ($storeSchemaWarnings = $this->feedbackMessageStore->retrieveAndClearSchemaWarnings()) {
+            if ($storeSchemaWarnings = $this->getFeedbackMessageStore()->retrieveAndClearSchemaWarnings()) {
                 $iterationSchemaWarnings = array_merge(
                     $iterationSchemaWarnings ?? [],
                     $storeSchemaWarnings
@@ -1661,10 +1752,10 @@ class Engine implements EngineInterface
         }
 
         // Add the feedback (errors, warnings, deprecations) into the output
-        if ($queryErrors = $this->feedbackMessageStore->getQueryErrors()) {
+        if ($queryErrors = $this->getFeedbackMessageStore()->getQueryErrors()) {
             $ret['queryErrors'] = $queryErrors;
         }
-        if ($queryWarnings = $this->feedbackMessageStore->getQueryWarnings()) {
+        if ($queryWarnings = $this->getFeedbackMessageStore()->getQueryWarnings()) {
             $ret['queryWarnings'] = $queryWarnings;
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'objectErrors', $objectErrors);
@@ -1693,7 +1784,7 @@ class Engine implements EngineInterface
         // Show logs only if both enabled, and passing the action in the URL
         if (Environment::enableShowLogs()) {
             if (in_array(Actions::SHOW_LOGS, $vars['actions'])) {
-                $ret['logEntries'] = $this->feedbackMessageStore->getLogEntries();
+                $ret['logEntries'] = $this->getFeedbackMessageStore()->getLogEntries();
             }
         }
         $this->maybeCombineAndAddDatabaseEntries($ret, 'dbData', $databases);
@@ -1721,9 +1812,9 @@ class Engine implements EngineInterface
             // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionDBKeyIDs"
             // However, for the targetObjectTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionDBKeyIDs".
             // The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
-            $subcomponentTypeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field);
+            $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field);
             if ($subcomponentTypeResolver === null && $relationalTypeResolver != $targetObjectTypeResolver) {
-                $subcomponentTypeResolver = $this->dataloadHelperService->getTypeResolverFromSubcomponentDataField($targetObjectTypeResolver, $subcomponent_data_field);
+                $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($targetObjectTypeResolver, $subcomponent_data_field);
             }
             if ($subcomponentTypeResolver !== null) {
                 $subcomponentTypeOutputDBKey = $subcomponentTypeResolver->getTypeOutputDBKey();
@@ -1740,7 +1831,7 @@ class Engine implements EngineInterface
                     $subcomponentIDs = [];
                     foreach ($typeResolver_ids as $id) {
                         $object = $objectIDItems[$id];
-                        $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $subcomponent_data_field, $object);
+                        $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $subcomponent_data_field, $object);
                         // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                         // Fetch the field_ids from all these DBs
                         foreach ($databases as $dbname => $database) {
@@ -1787,7 +1878,7 @@ class Engine implements EngineInterface
                                     $database_field_ids = $typed_database_field_ids;
                                 }
                                 $object = $objectIDItems[$id];
-                                $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $subcomponent_data_field, $object);
+                                $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $subcomponent_data_field, $object);
                                 // Set on the `unionDBKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
                                 $entryIsArray = $databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey]);
                                 $unionDBKeyIDs[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
@@ -1916,7 +2007,7 @@ class Engine implements EngineInterface
         $executed,
         $objectIDs
     ): void {
-        $processor = $this->moduleProcessorManager->getProcessor($module);
+        $processor = $this->getModuleProcessorManager()->getProcessor($module);
 
         // Integrate the feedback into $moduledata
         if (!is_null($this->moduledata)) {

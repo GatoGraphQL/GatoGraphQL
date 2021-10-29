@@ -15,7 +15,7 @@ abstract class AbstractMainPluginConfiguration extends AbstractPluginConfigurati
     /**
      * Cache the Container Cache Configuration
      */
-    protected ?ContainerCacheConfiguration $containerCacheConfigurationCache = null;
+    private ?ContainerCacheConfiguration $containerCacheConfigurationCache = null;
 
     /**
      * Provide the configuration to cache the container

@@ -5,29 +5,32 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\MutationResolverBridges;
 
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
-    protected HooksAPIInterface $hooksAPI;
-    protected TranslationAPIInterface $translationAPI;
-    protected InstanceManagerInterface $instanceManager;
-    protected MutationResolutionManagerInterface $mutationResolutionManager;
+    use BasicServiceTrait;
 
-    #[Required]
-    final public function autowireAbstractComponentMutationResolverBridge(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, InstanceManagerInterface $instanceManager, MutationResolutionManagerInterface $mutationResolutionManager): void
+    private ?MutationResolutionManagerInterface $mutationResolutionManager = null;
+
+    public function setMutationResolutionManager(MutationResolutionManagerInterface $mutationResolutionManager): void
     {
-        $this->hooksAPI = $hooksAPI;
-        $this->translationAPI = $translationAPI;
-        $this->instanceManager = $instanceManager;
+        $this->mutationResolutionManager = $mutationResolutionManager;
+    }
+    protected function getMutationResolutionManager(): MutationResolutionManagerInterface
+    {
+        return $this->mutationResolutionManager ??= $this->instanceManager->getInstance(MutationResolutionManagerInterface::class);
+    }
+
+    //#[Required]
+    final public function autowireAbstractComponentMutationResolverBridge(MutationResolutionManagerInterface $mutationResolutionManager): void
+    {
         $this->mutationResolutionManager = $mutationResolutionManager;
     }
 
@@ -109,7 +112,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         $this->modifyDataProperties($data_properties, $result_id);
 
         // Save the result for some module to incorporate it into the query args
-        $this->mutationResolutionManager->setResult($this, $result_id);
+        $this->getMutationResolutionManager()->setResult($this, $result_id);
 
         $return[ResponseConstants::SUCCESS] = true;
         if ($success_strings = $this->getSuccessStrings($result_id)) {

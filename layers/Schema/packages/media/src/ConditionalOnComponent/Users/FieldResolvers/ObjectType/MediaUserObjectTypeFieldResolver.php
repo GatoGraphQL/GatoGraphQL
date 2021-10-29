@@ -14,10 +14,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected UserMediaTypeAPIInterface $userMediaTypeAPI;
-    protected UserObjectTypeResolver $userObjectTypeResolver;
+    private ?UserMediaTypeAPIInterface $userMediaTypeAPI = null;
+    private ?UserObjectTypeResolver $userObjectTypeResolver = null;
 
-    #[Required]
+    public function setUserMediaTypeAPI(UserMediaTypeAPIInterface $userMediaTypeAPI): void
+    {
+        $this->userMediaTypeAPI = $userMediaTypeAPI;
+    }
+    protected function getUserMediaTypeAPI(): UserMediaTypeAPIInterface
+    {
+        return $this->userMediaTypeAPI ??= $this->instanceManager->getInstance(UserMediaTypeAPIInterface::class);
+    }
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
+    {
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireMediaUserObjectTypeFieldResolver(
         UserMediaTypeAPIInterface $userMediaTypeAPI,
         UserObjectTypeResolver $userObjectTypeResolver,
@@ -65,7 +82,7 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         $media = $object;
         return match ($fieldName) {
-            'author' => $this->userMediaTypeAPI->getMediaAuthorId($media),
+            'author' => $this->getUserMediaTypeAPI()->getMediaAuthorId($media),
             default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options),
         };
     }
@@ -73,7 +90,7 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'author' => $this->userObjectTypeResolver,
+            'author' => $this->getUserObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected NotificationTypeDataLoader $notificationTypeDataLoader;
+    private ?NotificationTypeDataLoader $notificationTypeDataLoader = null;
     
-    #[Required]
+    public function setNotificationTypeDataLoader(NotificationTypeDataLoader $notificationTypeDataLoader): void
+    {
+        $this->notificationTypeDataLoader = $notificationTypeDataLoader;
+    }
+    protected function getNotificationTypeDataLoader(): NotificationTypeDataLoader
+    {
+        return $this->notificationTypeDataLoader ??= $this->instanceManager->getInstance(NotificationTypeDataLoader::class);
+    }
+
+    //#[Required]
     final public function autowireNotificationObjectTypeResolver(
         NotificationTypeDataLoader $notificationTypeDataLoader,
     ): void {
@@ -38,6 +47,6 @@ class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->notificationTypeDataLoader;
+        return $this->getNotificationTypeDataLoader();
     }
 }

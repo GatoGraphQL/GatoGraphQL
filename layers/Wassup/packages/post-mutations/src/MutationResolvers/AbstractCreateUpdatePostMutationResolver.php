@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {
-    protected PostTypeAPIInterface $postTypeAPI;
+    private ?PostTypeAPIInterface $postTypeAPI = null;
 
-    #[Required]
+    public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
+    {
+        $this->postTypeAPI = $postTypeAPI;
+    }
+    protected function getPostTypeAPI(): PostTypeAPIInterface
+    {
+        return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCreateUpdatePostMutationResolver(
         PostTypeAPIInterface $postTypeAPI,
     ): void {
@@ -21,6 +30,6 @@ abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUp
 
     public function getCustomPostType(): string
     {
-        return $this->postTypeAPI->getPostCustomPostType();
+        return $this->getPostTypeAPI()->getPostCustomPostType();
     }
 }

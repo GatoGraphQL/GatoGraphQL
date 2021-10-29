@@ -15,10 +15,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected CommentTypeAPIInterface $commentTypeAPI;
-    protected CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver;
+    private ?CommentTypeAPIInterface $commentTypeAPI = null;
+    private ?CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver = null;
 
-    #[Required]
+    public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
+    {
+        $this->commentTypeAPI = $commentTypeAPI;
+    }
+    protected function getCommentTypeAPI(): CommentTypeAPIInterface
+    {
+        return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+    }
+    public function setCommentableInterfaceTypeFieldResolver(CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver): void
+    {
+        $this->commentableInterfaceTypeFieldResolver = $commentableInterfaceTypeFieldResolver;
+    }
+    protected function getCommentableInterfaceTypeFieldResolver(): CommentableInterfaceTypeFieldResolver
+    {
+        return $this->commentableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(CommentableInterfaceTypeFieldResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCustomPostObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver,
@@ -37,7 +54,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->commentableInterfaceTypeFieldResolver,
+            $this->getCommentableInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -71,7 +88,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $post = $object;
         switch ($fieldName) {
             case 'areCommentsOpen':
-                return $this->commentTypeAPI->areCommentsOpen($objectTypeResolver->getID($post));
+                return $this->getCommentTypeAPI()->areCommentsOpen($objectTypeResolver->getID($post));
 
             case 'hasComments':
                 return $objectTypeResolver->resolveValue($post, 'commentCount', $variables, $expressions, $options) > 0;
@@ -86,11 +103,11 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         switch ($fieldName) {
             case 'commentCount':
             case 'commentCountForAdmin':
-                return $this->commentTypeAPI->getCommentCount($query);
+                return $this->getCommentTypeAPI()->getCommentCount($query);
 
             case 'comments':
             case 'commentsForAdmin':
-                return $this->commentTypeAPI->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getCommentTypeAPI()->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

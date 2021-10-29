@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
-    protected GenerateThemeMutationResolver $generateThemeMutationResolver;
+    private ?GenerateThemeMutationResolver $generateThemeMutationResolver = null;
 
-    #[Required]
+    public function setGenerateThemeMutationResolver(GenerateThemeMutationResolver $generateThemeMutationResolver): void
+    {
+        $this->generateThemeMutationResolver = $generateThemeMutationResolver;
+    }
+    protected function getGenerateThemeMutationResolver(): GenerateThemeMutationResolver
+    {
+        return $this->generateThemeMutationResolver ??= $this->instanceManager->getInstance(GenerateThemeMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireGenerateThemeMutationResolverBridge(
         GenerateThemeMutationResolver $generateThemeMutationResolver,
     ): void {
@@ -21,7 +30,7 @@ class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutatio
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->generateThemeMutationResolver;
+        return $this->getGenerateThemeMutationResolver();
     }
     public function getSuccessString(string | int $result_id): ?string
     {

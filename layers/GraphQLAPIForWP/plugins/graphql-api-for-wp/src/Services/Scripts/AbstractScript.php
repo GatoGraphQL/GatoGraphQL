@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Scripts;
 use Error;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -20,14 +20,31 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
 {
-    protected InstanceManagerInterface $instanceManager;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected GeneralUtils $generalUtils;
+    use BasicServiceTrait;
 
-    #[Required]
-    final public function autowireAbstractScript(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, GeneralUtils $generalUtils): void
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?GeneralUtils $generalUtils = null;
+
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
-        $this->instanceManager = $instanceManager;
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setGeneralUtils(GeneralUtils $generalUtils): void
+    {
+        $this->generalUtils = $generalUtils;
+    }
+    protected function getGeneralUtils(): GeneralUtils
+    {
+        return $this->generalUtils ??= $this->instanceManager->getInstance(GeneralUtils::class);
+    }
+
+    //#[Required]
+    final public function autowireAbstractScript(ModuleRegistryInterface $moduleRegistry, GeneralUtils $generalUtils): void
+    {
         $this->moduleRegistry = $moduleRegistry;
         $this->generalUtils = $generalUtils;
     }
@@ -52,7 +69,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
     {
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null) {
-            return $this->moduleRegistry->isModuleEnabled($enablingModule);
+            return $this->getModuleRegistry()->isModuleEnabled($enablingModule);
         }
         return parent::isServiceEnabled();
     }
@@ -85,7 +102,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
      */
     final protected function getScriptLocalizationName(): string
     {
-        return $this->generalUtils->dashesToCamelCase($this->getScriptName());
+        return $this->getGeneralUtils()->dashesToCamelCase($this->getScriptName());
     }
 
     /**

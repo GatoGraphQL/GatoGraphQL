@@ -17,9 +17,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
-    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
+    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
 
-    #[Required]
+    public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    {
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+    }
+    protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    {
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireSerializeScalarTypeValuesInDBItemsDirectiveResolver(
         DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
     ): void {
@@ -104,7 +113,7 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
 
                 /** @var ScalarTypeResolverInterface */
                 $fieldScalarTypeResolver = $fieldTypeResolver;
-                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKeyByObjectTypeResolver(
+                $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByObjectTypeResolver(
                     $targetObjectTypeResolver,
                     $field,
                 );
@@ -144,7 +153,7 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
          * In particular, it does not need to validate if it is an array or not,
          * as according to the applied WrappingType.
          */
-        if ($fieldScalarTypeResolver === $this->dangerouslyDynamicScalarTypeResolver) {
+        if ($fieldScalarTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
             /**
              * Array is not supported by `serialize`, but can still be handled
              * by DangerouslyDynamic. So convert it into stdClass

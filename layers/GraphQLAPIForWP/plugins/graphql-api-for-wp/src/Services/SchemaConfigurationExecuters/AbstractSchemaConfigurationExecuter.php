@@ -7,19 +7,36 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractSchemaConfigurationExecuter implements SchemaConfigurationExecuterInterface
 {
-    protected InstanceManagerInterface $instanceManager;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected BlockHelpers $blockHelpers;
+    use BasicServiceTrait;
 
-    #[Required]
-    final public function autowireAbstractSchemaConfigurationExecuter(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, BlockHelpers $blockHelpers): void
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?BlockHelpers $blockHelpers = null;
+
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
-        $this->instanceManager = $instanceManager;
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setBlockHelpers(BlockHelpers $blockHelpers): void
+    {
+        $this->blockHelpers = $blockHelpers;
+    }
+    protected function getBlockHelpers(): BlockHelpers
+    {
+        return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
+    }
+
+    //#[Required]
+    final public function autowireAbstractSchemaConfigurationExecuter(ModuleRegistryInterface $moduleRegistry, BlockHelpers $blockHelpers): void
+    {
         $this->moduleRegistry = $moduleRegistry;
         $this->blockHelpers = $blockHelpers;
     }
@@ -30,7 +47,7 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
     protected function getSchemaConfigBlockDataItem(int $schemaConfigurationID): ?array
     {
         $block = $this->getBlock();
-        return $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        return $this->getBlockHelpers()->getSingleBlockOfTypeFromCustomPost(
             $schemaConfigurationID,
             $block
         );
@@ -50,7 +67,7 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
     {
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null) {
-            return $this->moduleRegistry->isModuleEnabled($enablingModule);
+            return $this->getModuleRegistry()->isModuleEnabled($enablingModule);
         }
         return true;
     }

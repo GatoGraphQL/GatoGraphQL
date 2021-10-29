@@ -15,10 +15,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected SiteObjectTypeResolver $siteObjectTypeResolver;
-    protected Site $site;
+    private ?SiteObjectTypeResolver $siteObjectTypeResolver = null;
+    private ?Site $site = null;
 
-    #[Required]
+    public function setSiteObjectTypeResolver(SiteObjectTypeResolver $siteObjectTypeResolver): void
+    {
+        $this->siteObjectTypeResolver = $siteObjectTypeResolver;
+    }
+    protected function getSiteObjectTypeResolver(): SiteObjectTypeResolver
+    {
+        return $this->siteObjectTypeResolver ??= $this->instanceManager->getInstance(SiteObjectTypeResolver::class);
+    }
+    public function setSite(Site $site): void
+    {
+        $this->site = $site;
+    }
+    protected function getSite(): Site
+    {
+        return $this->site ??= $this->instanceManager->getInstance(Site::class);
+    }
+
+    //#[Required]
     final public function autowireRootObjectTypeFieldResolver(
         SiteObjectTypeResolver $siteObjectTypeResolver,
         Site $site,
@@ -79,10 +96,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'sites':
                 return [
-                    $this->site->getID(),
+                    $this->getSite()->getID(),
                 ];
             case 'site':
-                return $this->site->getID();
+                return $this->getSite()->getID();
         }
 
             return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
@@ -93,7 +110,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'sites',
             'site' =>
-                $this->siteObjectTypeResolver,
+                $this->getSiteObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

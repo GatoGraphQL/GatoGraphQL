@@ -17,10 +17,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
-    #[Required]
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCopyRelationalResultsDirectiveResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
@@ -63,9 +80,9 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            'copyFromFields' => $this->stringScalarTypeResolver,
-            'copyToFields' => $this->stringScalarTypeResolver,
-            'keepRelationalIDs' => $this->booleanScalarTypeResolver,
+            'copyFromFields' => $this->getStringScalarTypeResolver(),
+            'copyToFields' => $this->getStringScalarTypeResolver(),
+            'keepRelationalIDs' => $this->getBooleanScalarTypeResolver(),
         ];
     }
 
@@ -199,7 +216,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                  * is "post" and for "post($postId)@post<copyRelationalResults([content,date],[postContent,postDate])>"
                  * it is "post-1".
                  */
-                $relationalFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($relationalField);
+                $relationalFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($relationalField);
 
                 // Make sure the field is relational, and not a scalar or enum
                 $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($relationalField);

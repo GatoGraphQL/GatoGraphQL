@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomPostMutationResolver
 {
-    protected DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver;
+    private ?DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver = null;
 
-    #[Required]
+    public function setDownvoteCustomPostMutationResolver(DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver): void
+    {
+        $this->downvoteCustomPostMutationResolver = $downvoteCustomPostMutationResolver;
+    }
+    protected function getDownvoteCustomPostMutationResolver(): DownvoteCustomPostMutationResolver
+    {
+        return $this->downvoteCustomPostMutationResolver ??= $this->instanceManager->getInstance(DownvoteCustomPostMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireUpvoteCustomPostMutationResolver(
         DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver,
     ): void {
@@ -32,7 +41,7 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
             if (in_array($target_id, $value)) {
                 $errors[] = sprintf(
                     $this->translationAPI->__('You have already up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-                    $this->customPostTypeAPI->getTitle($target_id)
+                    $this->getCustomPostTypeAPI()->getTitle($target_id)
                 );
             }
         }
@@ -66,7 +75,7 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
         // Had the user already executed the opposite (Up-vote => Down-vote, etc), then undo it
         $opposite = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
         if (in_array($target_id, $opposite)) {
-            $this->downvoteCustomPostMutationResolver->executeMutation($form_data);
+            $this->getDownvoteCustomPostMutationResolver()->executeMutation($form_data);
         }
 
         return parent::update($form_data);

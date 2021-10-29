@@ -14,10 +14,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
-    protected CustomEndpointGraphiQLClient $customEndpointGraphiQLClient;
-    protected GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator;
+    private ?CustomEndpointGraphiQLClient $customEndpointGraphiQLClient = null;
+    private ?GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator = null;
 
-    #[Required]
+    public function setCustomEndpointGraphiQLClient(CustomEndpointGraphiQLClient $customEndpointGraphiQLClient): void
+    {
+        $this->customEndpointGraphiQLClient = $customEndpointGraphiQLClient;
+    }
+    protected function getCustomEndpointGraphiQLClient(): CustomEndpointGraphiQLClient
+    {
+        return $this->customEndpointGraphiQLClient ??= $this->instanceManager->getInstance(CustomEndpointGraphiQLClient::class);
+    }
+    public function setGraphiQLClientEndpointAnnotator(GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator): void
+    {
+        $this->graphiQLClientEndpointAnnotator = $graphiQLClientEndpointAnnotator;
+    }
+    protected function getGraphiQLClientEndpointAnnotator(): GraphiQLClientEndpointAnnotator
+    {
+        return $this->graphiQLClientEndpointAnnotator ??= $this->instanceManager->getInstance(GraphiQLClientEndpointAnnotator::class);
+    }
+
+    //#[Required]
     final public function autowireGraphiQLClientEndpointExecuter(
         CustomEndpointGraphiQLClient $customEndpointGraphiQLClient,
         GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator,
@@ -38,11 +55,11 @@ class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter impl
 
     protected function getClient(): AbstractClient
     {
-        return $this->customEndpointGraphiQLClient;
+        return $this->getCustomEndpointGraphiQLClient();
     }
 
     protected function getClientEndpointAnnotator(): ClientEndpointAnnotatorInterface
     {
-        return $this->graphiQLClientEndpointAnnotator;
+        return $this->getGraphiQLClientEndpointAnnotator();
     }
 }

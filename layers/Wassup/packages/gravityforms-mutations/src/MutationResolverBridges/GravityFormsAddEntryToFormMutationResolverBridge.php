@@ -16,16 +16,39 @@ use Symfony\Contracts\Service\Attribute\Required;
 class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
     public const HOOK_FORM_FIELDNAMES = __CLASS__ . ':form-fieldnames';
-    protected UserTypeAPIInterface $userTypeAPI;
-    protected GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver;
 
-    #[Required]
+    private ?UserTypeAPIInterface $userTypeAPI = null;
+    private ?GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver = null;
+
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
+        $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+    }
+    public function setGravityFormsAddEntryToFormMutationResolver(GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver): void
+    {
+        $this->gravityFormsAddEntryToFormMutationResolver = $gravityFormsAddEntryToFormMutationResolver;
+    }
+    protected function getGravityFormsAddEntryToFormMutationResolver(): GravityFormsAddEntryToFormMutationResolver
+    {
+        return $this->gravityFormsAddEntryToFormMutationResolver ??= $this->instanceManager->getInstance(GravityFormsAddEntryToFormMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireGravityFormsAddEntryToFormMutationResolverBridge(
         UserTypeAPIInterface $userTypeAPI,
         GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver,
     ): void {
         $this->userTypeAPI = $userTypeAPI;
         $this->gravityFormsAddEntryToFormMutationResolver = $gravityFormsAddEntryToFormMutationResolver;
+    }
+
+    #[Required]
+    final public function autowireInitializeGravityFormsAddEntryToFormMutationResolverBridge()
+    {
         // Execute before $hooksAPI->addAction('wp',  array('RGForms', 'maybe_process_form'), 9);
         if (doingPost()) {
             $this->hooksAPI->addAction(
@@ -55,7 +78,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->gravityFormsAddEntryToFormMutationResolver;
+        return $this->getGravityFormsAddEntryToFormMutationResolver();
     }
 
     /**
@@ -66,7 +89,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     {
         $executed = parent::executeMutation($data_properties);
 
-        $execution_response = $this->mutationResolutionManager->getResult($this);
+        $execution_response = $this->getMutationResolutionManager()->getResult($this);
 
         // These are the Strings to use to return the errors: This is how they must be used to return errors / success
         // (Eg: in Gravity Forms confirmations)
@@ -111,7 +134,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
 
     public function getFormData(): array
     {
-        $formid_processor = $this->moduleProcessorManager->getProcessor([\GD_GF_Module_Processor_TextFormInputs::class, \GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID]);
+        $formid_processor = $this->getModuleProcessorManager()->getProcessor([\GD_GF_Module_Processor_TextFormInputs::class, \GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID]);
         $form_data = array(
             'form_id' => $formid_processor->getValue([\GD_GF_Module_Processor_TextFormInputs::class, \GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID]),
         );
@@ -153,15 +176,15 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
                     $user_id = $vars['global-userstate']['current-user-id'];
 
                     // Fill the user name
-                    $name = $this->moduleProcessorManager->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME])->getName([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME]);
+                    $name = $this->getModuleProcessorManager()->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME])->getName([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME]);
                     if (isset($fieldnames[$name])) {
-                        $_POST[$fieldnames[$name]] = $this->userTypeAPI->getUserDisplayName($user_id);
+                        $_POST[$fieldnames[$name]] = $this->getUserTypeAPI()->getUserDisplayName($user_id);
                     }
 
                     // Fill the user email
-                    $email = $this->moduleProcessorManager->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL])->getName([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL]);
+                    $email = $this->getModuleProcessorManager()->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL])->getName([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL]);
                     if (isset($fieldnames[$email])) {
-                        $_POST[$fieldnames[$email]] = $this->userTypeAPI->getUserEmail($user_id);
+                        $_POST[$fieldnames[$email]] = $this->getUserTypeAPI()->getUserEmail($user_id);
                     }
                 }
             }
@@ -192,7 +215,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
             if (!(\PoP_FormUtils::useLoggedinuserData() && $vars['global-userstate']['is-user-logged-in'])) {
                 if ($form_id = $_POST["gform_submit"] ?? null) {
                     // Check if there's a captcha sent along
-                    $captcha_name = $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA])->getName([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
+                    $captcha_name = $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA])->getName([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
                     if ($captcha = $_POST[$captcha_name] ?? null) {
                         // Validate the captcha. If it fails, remove the attr "gform_submit" from $_POST
                         $captcha_validation = \GD_Captcha::validate($captcha);

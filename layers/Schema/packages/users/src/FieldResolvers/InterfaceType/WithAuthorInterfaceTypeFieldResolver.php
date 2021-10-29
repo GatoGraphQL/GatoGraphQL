@@ -13,9 +13,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
-    protected UserObjectTypeResolver $userObjectTypeResolver;
+    private ?UserObjectTypeResolver $userObjectTypeResolver = null;
 
-    #[Required]
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
+    {
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireWithAuthorInterfaceTypeFieldResolver(
         UserObjectTypeResolver $userObjectTypeResolver,
     ): void {
@@ -57,7 +66,7 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
     {
         switch ($fieldName) {
             case 'author':
-                return $this->userObjectTypeResolver;
+                return $this->getUserObjectTypeResolver();
         }
 
         return parent::getFieldTypeResolver($fieldName);

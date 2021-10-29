@@ -13,9 +13,18 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
+    private ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
 
-    #[Required]
+    public function setCustomPostMediaTypeMutationAPI(CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI): void
+    {
+        $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
+    }
+    protected function getCustomPostMediaTypeMutationAPI(): CustomPostMediaTypeMutationAPIInterface
+    {
+        return $this->customPostMediaTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireRemoveFeaturedImageOnCustomPostMutationResolver(
         CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
     ): void {
@@ -25,7 +34,7 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
     public function executeMutation(array $form_data): mixed
     {
         $customPostID = $form_data[MutationInputProperties::CUSTOMPOST_ID];
-        $this->customPostMediaTypeMutationAPI->removeFeaturedImage($customPostID);
+        $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);
         return $customPostID;
     }
 

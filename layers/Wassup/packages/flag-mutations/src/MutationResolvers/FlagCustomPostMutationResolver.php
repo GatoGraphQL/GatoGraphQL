@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FlagCustomPostMutationResolver extends AbstractMutationResolver
 {
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    #[Required]
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireFlagCustomPostMutationResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ): void {
@@ -41,7 +50,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
             $errors[] = $this->translationAPI->__('The requested post cannot be empty.', 'pop-genericforms');
         } else {
             // Make sure the post exists
-            $target = $this->customPostTypeAPI->getCustomPost($form_data['target-id']);
+            $target = $this->getCustomPostTypeAPI()->getCustomPost($form_data['target-id']);
             if (!$target) {
                 $errors[] = $this->translationAPI->__('The requested post does not exist.', 'pop-genericforms');
             }
@@ -88,7 +97,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
         ) . sprintf(
             $placeholder,
             $this->translationAPI->__('Post title', 'pop-genericforms'),
-            $this->customPostTypeAPI->getTitle($form_data['target-id'])
+            $this->getCustomPostTypeAPI()->getTitle($form_data['target-id'])
         ) . sprintf(
             $placeholder,
             $this->translationAPI->__('Why flag', 'pop-genericforms'),

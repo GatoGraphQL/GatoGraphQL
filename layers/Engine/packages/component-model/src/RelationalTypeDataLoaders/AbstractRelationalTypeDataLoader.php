@@ -4,22 +4,28 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\RelationalTypeDataLoaders;
 
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\LooseContracts\NameResolverInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoaderInterface
 {
-    protected HooksAPIInterface $hooksAPI;
-    protected InstanceManagerInterface $instanceManager;
-    protected NameResolverInterface $nameResolver;
+    use BasicServiceTrait;
 
-    #[Required]
-    final public function autowireAbstractRelationalTypeDataLoader(HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, NameResolverInterface $nameResolver): void
+    private ?NameResolverInterface $nameResolver = null;
+
+    public function setNameResolver(NameResolverInterface $nameResolver): void
     {
-        $this->hooksAPI = $hooksAPI;
-        $this->instanceManager = $instanceManager;
+        $this->nameResolver = $nameResolver;
+    }
+    protected function getNameResolver(): NameResolverInterface
+    {
+        return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
+    }
+
+    //#[Required]
+    final public function autowireAbstractRelationalTypeDataLoader(NameResolverInterface $nameResolver): void
+    {
         $this->nameResolver = $nameResolver;
     }
 }

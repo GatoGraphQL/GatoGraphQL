@@ -16,9 +16,18 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
     public const MODULE_FILTERINPUT_ORDERTAG = 'filterinput-order-tag';
     public const MODULE_FILTERINPUT_ORDERCOMMENT = 'filterinput-order-comment';
 
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowirePoP_Module_Processor_SelectFilterInputs(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {

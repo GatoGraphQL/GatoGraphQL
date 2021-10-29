@@ -5,28 +5,45 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModelInstance;
 
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Definitions\DefinitionManagerInterface;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class ModelInstance implements ModelInstanceInterface
 {
+    use BasicServiceTrait;
+
     public const HOOK_COMPONENTS_RESULT = __CLASS__ . ':components:result';
     public const HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE = __CLASS__ . ':componentsFromVars:postOrGetChange';
     public const HOOK_COMPONENTSFROMVARS_RESULT = __CLASS__ . ':componentsFromVars:result';
 
-    protected TranslationAPIInterface $translationAPI;
-    protected HooksAPIInterface $hooksAPI;
-    protected ApplicationInfoInterface $applicationInfo;
-    protected DefinitionManagerInterface $definitionManager;
+    private ?ApplicationInfoInterface $applicationInfo = null;
+    private ?DefinitionManagerInterface $definitionManager = null;
 
-    #[Required]
-    final public function autowireModelInstance(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, ApplicationInfoInterface $applicationInfo, DefinitionManagerInterface $definitionManager): void
+    public function setApplicationInfo(ApplicationInfoInterface $applicationInfo): void
     {
-        $this->translationAPI = $translationAPI;
-        $this->hooksAPI = $hooksAPI;
+        $this->applicationInfo = $applicationInfo;
+    }
+    protected function getApplicationInfo(): ApplicationInfoInterface
+    {
+        return $this->applicationInfo ??= $this->instanceManager->getInstance(ApplicationInfoInterface::class);
+    }
+    public function setDefinitionManager(DefinitionManagerInterface $definitionManager): void
+    {
+        $this->definitionManager = $definitionManager;
+    }
+    protected function getDefinitionManager(): DefinitionManagerInterface
+    {
+        return $this->definitionManager ??= $this->instanceManager->getInstance(DefinitionManagerInterface::class);
+    }
+
+    //#[Required]
+    final public function autowireModelInstance(ApplicationInfoInterface $applicationInfo, DefinitionManagerInterface $definitionManager): void
+    {
         $this->applicationInfo = $applicationInfo;
         $this->definitionManager = $definitionManager;
     }
@@ -58,7 +75,7 @@ class ModelInstance implements ModelInstanceInterface
         // Comment Leo 05/04/2017: Also add the module-definition type, for 2 reasons:
         // 1. It allows to create the 2 versions (DEV/PROD) of the configuration files, to compare/debug them side by side
         // 2. It allows to switch from DEV/PROD without having to delete the pop-cache
-        if ($definitionResolvers = $this->definitionManager->getDefinitionResolvers()) {
+        if ($definitionResolvers = $this->getDefinitionManager()->getDefinitionResolvers()) {
             $resolvers = [];
             foreach ($definitionResolvers as $group => $resolverInstance) {
                 $resolvers[] = $group . '-' . get_class($resolverInstance);

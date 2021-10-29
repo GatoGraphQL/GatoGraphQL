@@ -30,7 +30,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
      */
     protected function isCurrentScreen(): bool
     {
-        return !$this->menuPageHelper->isDocumentationScreen() && parent::isCurrentScreen();
+        return !$this->getMenuPageHelper()->isDocumentationScreen() && parent::isCurrentScreen();
     }
 
     protected function getContentToPrint(): string

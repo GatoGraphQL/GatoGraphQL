@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MenuItemTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry;
+    private ?MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry = null;
 
-    #[Required]
+    public function setMenuItemRuntimeRegistry(MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry): void
+    {
+        $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
+    }
+    protected function getMenuItemRuntimeRegistry(): MenuItemRuntimeRegistryInterface
+    {
+        return $this->menuItemRuntimeRegistry ??= $this->instanceManager->getInstance(MenuItemRuntimeRegistryInterface::class);
+    }
+
+    //#[Required]
     final public function autowireMenuItemTypeDataLoader(
         MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
     ): void {
@@ -23,7 +32,7 @@ class MenuItemTypeDataLoader extends AbstractObjectTypeDataLoader
     {
         // Retrieve each item from the dynamic registry
         return array_map(
-            fn (string | int $id) => $this->menuItemRuntimeRegistry->getMenuItem($id),
+            fn (string | int $id) => $this->getMenuItemRuntimeRegistry()->getMenuItem($id),
             $ids
         );
     }

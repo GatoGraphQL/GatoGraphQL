@@ -11,9 +11,18 @@ class SchemaConfigurationBlockCategory extends AbstractBlockCategory
 {
     public const SCHEMA_CONFIGURATION_BLOCK_CATEGORY = 'graphql-api-schema-config';
 
-    protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType;
+    private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
 
-    #[Required]
+    public function setGraphQLSchemaConfigurationCustomPostType(GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType): void
+    {
+        $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
+    }
+    protected function getGraphQLSchemaConfigurationCustomPostType(): GraphQLSchemaConfigurationCustomPostType
+    {
+        return $this->graphQLSchemaConfigurationCustomPostType ??= $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
+    }
+
+    //#[Required]
     final public function autowireSchemaConfigurationBlockCategory(
         GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
     ): void {
@@ -28,7 +37,7 @@ class SchemaConfigurationBlockCategory extends AbstractBlockCategory
     public function getCustomPostTypes(): array
     {
         return [
-            $this->graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
+            $this->getGraphQLSchemaConfigurationCustomPostType()->getCustomPostType(),
         ];
     }
 

@@ -9,18 +9,13 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\Definitions\Configuration\Request;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class RequestHelperService implements RequestHelperServiceInterface
 {
-    protected HooksAPIInterface $hooksAPI;
-
-    #[Required]
-    final public function autowireRequestHelperService(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
+    use WithHooksAPIServiceTrait;
 
     public function getCurrentURL(): string
     {

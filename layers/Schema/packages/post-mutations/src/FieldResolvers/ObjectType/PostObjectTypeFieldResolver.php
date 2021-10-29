@@ -17,10 +17,27 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
 {
     use UserStateObjectTypeFieldResolverTrait;
 
-    protected PostObjectTypeResolver $postObjectTypeResolver;
-    protected UpdatePostMutationResolver $updatePostMutationResolver;
+    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?UpdatePostMutationResolver $updatePostMutationResolver = null;
 
-    #[Required]
+    public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
+    {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+    }
+    protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    {
+        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+    }
+    public function setUpdatePostMutationResolver(UpdatePostMutationResolver $updatePostMutationResolver): void
+    {
+        $this->updatePostMutationResolver = $updatePostMutationResolver;
+    }
+    protected function getUpdatePostMutationResolver(): UpdatePostMutationResolver
+    {
+        return $this->updatePostMutationResolver ??= $this->instanceManager->getInstance(UpdatePostMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowirePostObjectTypeFieldResolver(
         PostObjectTypeResolver $postObjectTypeResolver,
         UpdatePostMutationResolver $updatePostMutationResolver,
@@ -47,7 +64,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
         return match ($fieldName) {
-            'update' => $this->updatePostMutationResolver,
+            'update' => $this->getUpdatePostMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -55,7 +72,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'update' => $this->postObjectTypeResolver,
+            'update' => $this->getPostObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

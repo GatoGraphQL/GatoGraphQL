@@ -9,9 +9,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractDisableAccessConfigurableAccessControlForFieldsInPublicSchemaRelationalTypeResolverDecorator extends AbstractConfigurableAccessControlForFieldsInPublicSchemaRelationalTypeResolverDecorator
 {
-    protected DisableAccessDirectiveResolver $disableAccessDirectiveResolver;
+    private ?DisableAccessDirectiveResolver $disableAccessDirectiveResolver = null;
 
-    #[Required]
+    public function setDisableAccessDirectiveResolver(DisableAccessDirectiveResolver $disableAccessDirectiveResolver): void
+    {
+        $this->disableAccessDirectiveResolver = $disableAccessDirectiveResolver;
+    }
+    protected function getDisableAccessDirectiveResolver(): DisableAccessDirectiveResolver
+    {
+        return $this->disableAccessDirectiveResolver ??= $this->instanceManager->getInstance(DisableAccessDirectiveResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractDisableAccessConfigurableAccessControlForFieldsInPublicSchemaRelationalTypeResolverDecorator(
         DisableAccessDirectiveResolver $disableAccessDirectiveResolver,
     ): void {
@@ -20,8 +29,8 @@ abstract class AbstractDisableAccessConfigurableAccessControlForFieldsInPublicSc
 
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
-        $disableAccessDirective = $this->fieldQueryInterpreter->getDirective(
-            $this->disableAccessDirectiveResolver->getDirectiveName()
+        $disableAccessDirective = $this->getFieldQueryInterpreter()->getDirective(
+            $this->getDisableAccessDirectiveResolver()->getDirectiveName()
         );
         return [
             $disableAccessDirective,

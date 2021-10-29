@@ -6,13 +6,25 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\Clients;
 
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLByPoP\GraphQLClientsForWP\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Clients\GraphiQLWithExplorerClient;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class AdminGraphiQLWithExplorerClient extends GraphiQLWithExplorerClient
 {
-    protected EndpointHelpers $endpointHelpers;
+    use BasicServiceTrait;
 
-    #[Required]
+    private ?EndpointHelpers $endpointHelpers = null;
+
+    public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
+    {
+        $this->endpointHelpers = $endpointHelpers;
+    }
+    protected function getEndpointHelpers(): EndpointHelpers
+    {
+        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+    }
+
+    //#[Required]
     final public function autowireAdminGraphiQLWithExplorerClient(EndpointHelpers $endpointHelpers): void
     {
         $this->endpointHelpers = $endpointHelpers;
@@ -23,6 +35,6 @@ class AdminGraphiQLWithExplorerClient extends GraphiQLWithExplorerClient
      */
     protected function getEndpointURL(): string
     {
-        return $this->endpointHelpers->getAdminConfigurableSchemaGraphQLEndpoint();
+        return $this->getEndpointHelpers()->getAdminConfigurableSchemaGraphQLEndpoint();
     }
 }

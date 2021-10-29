@@ -12,9 +12,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
-    protected UserTypeAPIInterface $userTypeAPI;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
 
-    #[Required]
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
+        $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireUserTypeDataLoader(
         UserTypeAPIInterface $userTypeAPI,
     ): void {
@@ -30,7 +39,7 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 
     protected function getOrderbyDefault()
     {
-        return $this->nameResolver->getName('popcms:dbcolumn:orderby:users:name');
+        return $this->getNameResolver()->getName('popcms:dbcolumn:orderby:users:name');
     }
 
     protected function getOrderDefault()
@@ -46,7 +55,7 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 
     public function executeQuery($query, array $options = []): array
     {
-        return $this->userTypeAPI->getUsers($query, $options);
+        return $this->getUserTypeAPI()->getUsers($query, $options);
     }
 
     public function executeQueryIDs($query): array

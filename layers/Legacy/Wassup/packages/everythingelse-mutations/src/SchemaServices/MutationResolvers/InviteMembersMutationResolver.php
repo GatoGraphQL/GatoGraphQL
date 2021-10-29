@@ -12,9 +12,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
 {
-    protected UserTypeAPIInterface $userTypeAPI;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
     
-    #[Required]
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
+        $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireInviteMembersMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
     ): void {
@@ -27,8 +36,8 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
         // The user must be always logged in, so we will have the user_id
         $user_id = $form_data['user_id'];
 
-        $author_url = $this->userTypeAPI->getUserURL($user_id);
-        $author_name = $this->userTypeAPI->getUserDisplayName($user_id);
+        $author_url = $this->getUserTypeAPI()->getUserURL($user_id);
+        $author_name = $this->getUserTypeAPI()->getUserDisplayName($user_id);
 
         $user_html = \PoP_EmailTemplatesFactory::getInstance()->getUserhtml($user_id);//PoP_EmailUtils::get_user_html($user_id);
         $website_html = \PoP_EmailTemplatesFactory::getInstance()->getWebsitehtml();//PoP_EmailUtils::get_website_html();
@@ -82,7 +91,7 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
         $user_id = $form_data['user_id'];
         return sprintf(
             $this->translationAPI->__('%s is inviting you to become their member!', 'ure-pop'),
-            $this->userTypeAPI->getUserDisplayName($user_id)
+            $this->getUserTypeAPI()->getUserDisplayName($user_id)
         );
     }
 }

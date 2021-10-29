@@ -13,9 +13,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class NamespacingSchemaConfigurationExecuter extends AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    protected SchemaConfigNamespacingBlock $schemaConfigNamespacingBlock;
+    private ?SchemaConfigNamespacingBlock $schemaConfigNamespacingBlock = null;
 
-    #[Required]
+    public function setSchemaConfigNamespacingBlock(SchemaConfigNamespacingBlock $schemaConfigNamespacingBlock): void
+    {
+        $this->schemaConfigNamespacingBlock = $schemaConfigNamespacingBlock;
+    }
+    protected function getSchemaConfigNamespacingBlock(): SchemaConfigNamespacingBlock
+    {
+        return $this->schemaConfigNamespacingBlock ??= $this->instanceManager->getInstance(SchemaConfigNamespacingBlock::class);
+    }
+
+    //#[Required]
     final public function autowireNamespacingSchemaConfigurationExecuter(
         SchemaConfigNamespacingBlock $schemaConfigNamespacingBlock,
     ): void {
@@ -29,7 +38,7 @@ class NamespacingSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
 
     protected function getBlock(): BlockInterface
     {
-        return $this->schemaConfigNamespacingBlock;
+        return $this->getSchemaConfigNamespacingBlock();
     }
 
     public function getHookComponentConfigurationClass(): string

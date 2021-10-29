@@ -42,12 +42,45 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     public const MODULE_FILTERINPUT_DATEFORMAT = 'filterinput-date-format';
     public const MODULE_FILTERINPUT_GMT = 'filterinput-date-gmt';
 
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCommonFilterInputModuleProcessor(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,
@@ -149,21 +182,21 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ((string)$module[1]) {
-            self::MODULE_FILTERINPUT_ORDER => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_LIMIT => $this->intScalarTypeResolver,
-            self::MODULE_FILTERINPUT_OFFSET => $this->intScalarTypeResolver,
-            self::MODULE_FILTERINPUT_SEARCH => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_IDS => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_ID => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_COMMASEPARATED_IDS => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_EXCLUDE_IDS => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_PARENT_IDS => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_PARENT_ID => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_SLUGS => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_SLUG => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_DATEFORMAT => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_GMT => $this->booleanScalarTypeResolver,
+            self::MODULE_FILTERINPUT_ORDER => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_LIMIT => $this->getIntScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_OFFSET => $this->getIntScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_SEARCH => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_IDS => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_ID => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_COMMASEPARATED_IDS => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_EXCLUDE_IDS => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_PARENT_IDS => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_PARENT_ID => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_SLUGS => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_SLUG => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_DATEFORMAT => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_GMT => $this->getBooleanScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }

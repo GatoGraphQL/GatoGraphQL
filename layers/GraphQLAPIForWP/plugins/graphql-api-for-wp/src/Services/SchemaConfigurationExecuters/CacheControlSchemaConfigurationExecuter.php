@@ -15,10 +15,27 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    protected CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator;
-    protected SchemaConfigCacheControlListBlock $schemaConfigCacheControlListBlock;
+    private ?CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator = null;
+    private ?SchemaConfigCacheControlListBlock $schemaConfigCacheControlListBlock = null;
 
-    #[Required]
+    public function setCacheControlGraphQLQueryConfigurator(CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator): void
+    {
+        $this->cacheControlGraphQLQueryConfigurator = $cacheControlGraphQLQueryConfigurator;
+    }
+    protected function getCacheControlGraphQLQueryConfigurator(): CacheControlGraphQLQueryConfigurator
+    {
+        return $this->cacheControlGraphQLQueryConfigurator ??= $this->instanceManager->getInstance(CacheControlGraphQLQueryConfigurator::class);
+    }
+    public function setSchemaConfigCacheControlListBlock(SchemaConfigCacheControlListBlock $schemaConfigCacheControlListBlock): void
+    {
+        $this->schemaConfigCacheControlListBlock = $schemaConfigCacheControlListBlock;
+    }
+    protected function getSchemaConfigCacheControlListBlock(): SchemaConfigCacheControlListBlock
+    {
+        return $this->schemaConfigCacheControlListBlock ??= $this->instanceManager->getInstance(SchemaConfigCacheControlListBlock::class);
+    }
+
+    //#[Required]
     final public function autowireCacheControlSchemaConfigurationExecuter(
         CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator,
         SchemaConfigCacheControlListBlock $schemaConfigCacheControlListBlock,
@@ -50,7 +67,7 @@ class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfiguratio
         if (!is_null($schemaConfigCCLBlockDataItem)) {
             if ($cacheControlLists = $schemaConfigCCLBlockDataItem['attrs'][SchemaConfigCacheControlListBlock::ATTRIBUTE_NAME_CACHE_CONTROL_LISTS] ?? null) {
                 foreach ($cacheControlLists as $cacheControlListID) {
-                    $this->cacheControlGraphQLQueryConfigurator->executeSchemaConfiguration($cacheControlListID);
+                    $this->getCacheControlGraphQLQueryConfigurator()->executeSchemaConfiguration($cacheControlListID);
                 }
             }
         }
@@ -58,6 +75,6 @@ class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfiguratio
 
     protected function getBlock(): BlockInterface
     {
-        return $this->schemaConfigCacheControlListBlock;
+        return $this->getSchemaConfigCacheControlListBlock();
     }
 }

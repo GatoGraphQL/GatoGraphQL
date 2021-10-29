@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ApplicationStateHookSet extends AbstractHookSet
 {
-    protected CMSRoutingStateServiceInterface $cmsRoutingStateService;
+    private ?CMSRoutingStateServiceInterface $cmsRoutingStateService = null;
 
-    #[Required]
+    public function setCMSRoutingStateService(CMSRoutingStateServiceInterface $cmsRoutingStateService): void
+    {
+        $this->cmsRoutingStateService = $cmsRoutingStateService;
+    }
+    protected function getCMSRoutingStateService(): CMSRoutingStateServiceInterface
+    {
+        return $this->cmsRoutingStateService ??= $this->instanceManager->getInstance(CMSRoutingStateServiceInterface::class);
+    }
+
+    //#[Required]
     final public function autowireApplicationStateHookSet(
         CMSRoutingStateServiceInterface $cmsRoutingStateService,
     ): void {
@@ -47,8 +56,8 @@ class ApplicationStateHookSet extends AbstractHookSet
         list($queried_object, $queried_object_id) = $this->hooksAPI->applyFilters(
             'ApplicationState:queried-object',
             [
-                $this->cmsRoutingStateService->getQueriedObject(),
-                $this->cmsRoutingStateService->getQueriedObjectId()
+                $this->getCmsRoutingStateService()->getQueriedObject(),
+                $this->getCmsRoutingStateService()->getQueriedObjectId()
             ]
         );
 

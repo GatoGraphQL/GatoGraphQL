@@ -9,9 +9,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
-    protected PostTagTypeAPIInterface $postTagTypeAPI;
+    private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
-    #[Required]
+    public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
+    {
+        $this->postTagTypeAPI = $postTagTypeAPI;
+    }
+    protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
+    {
+        return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractSubscribeToOrUnsubscribeFromTagMutationResolver(
         PostTagTypeAPIInterface $postTagTypeAPI,
     ): void {
@@ -25,7 +34,7 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
             $target_id = $form_data['target_id'];
 
             // Make sure the post exists
-            $target = $this->postTagTypeAPI->getTag($target_id);
+            $target = $this->getPostTagTypeAPI()->getTag($target_id);
             if (!$target) {
                 $errors[] = $this->translationAPI->__('The requested topic/tag does not exist.', 'pop-coreprocessors');
             }

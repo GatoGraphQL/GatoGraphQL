@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
-    protected UserTypeAPIInterface $userTypeAPI;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
 
-    #[Required]
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
+        $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractUserUpdateUserMetaValueMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
     ): void {
@@ -26,7 +35,7 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
             $target_id = $form_data['target_id'];
 
             // Make sure the user exists
-            $target = $this->userTypeAPI->getUserById($target_id);
+            $target = $this->getUserTypeAPI()->getUserById($target_id);
             if (!$target) {
                 $errors[] = $this->translationAPI->__('The requested user does not exist.', 'pop-coreprocessors');
             }

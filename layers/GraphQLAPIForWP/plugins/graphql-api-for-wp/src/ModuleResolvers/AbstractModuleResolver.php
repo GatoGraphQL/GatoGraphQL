@@ -5,22 +5,28 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\Translation\TranslationAPIInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractModuleResolver implements ModuleResolverInterface
 {
-    protected InstanceManagerInterface $instanceManager;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected TranslationAPIInterface $translationAPI;
+    use BasicServiceTrait;
 
-    #[Required]
-    final public function autowireAbstractModuleResolver(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, TranslationAPIInterface $translationAPI): void
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
-        $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;
-        $this->translationAPI = $translationAPI;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+    }
+
+    //#[Required]
+    final public function autowireAbstractModuleResolver(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
     }
 
     /**

@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\CategoriesWP\TypeAPIs;
 
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -21,15 +23,33 @@ use WP_Term;
  */
 abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements CategoryTypeAPIInterface
 {
-    public const HOOK_QUERY = __CLASS__ . ':query';
-    protected HooksAPIInterface $hooksAPI;
-    protected CMSHelperServiceInterface $cmsHelperService;
-    protected CMSServiceInterface $cmsService;
+    use BasicServiceTrait;
 
-    #[Required]
-    final public function autowireAbstractCategoryTypeAPI(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService, CMSServiceInterface $cmsService): void
+    public const HOOK_QUERY = __CLASS__ . ':query';
+
+    private ?CMSHelperServiceInterface $cmsHelperService = null;
+    private ?CMSServiceInterface $cmsService = null;
+
+    public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
     {
-        $this->hooksAPI = $hooksAPI;
+        $this->cmsHelperService = $cmsHelperService;
+    }
+    protected function getCMSHelperService(): CMSHelperServiceInterface
+    {
+        return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
+    }
+    public function setCMSService(CMSServiceInterface $cmsService): void
+    {
+        $this->cmsService = $cmsService;
+    }
+    protected function getCMSService(): CMSServiceInterface
+    {
+        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
+    }
+
+    //#[Required]
+    final public function autowireAbstractCategoryTypeAPI(CMSHelperServiceInterface $cmsHelperService, CMSServiceInterface $cmsService): void
+    {
         $this->cmsHelperService = $cmsHelperService;
         $this->cmsService = $cmsService;
     }
@@ -192,12 +212,12 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     public function getCategoryURLPath(string | int | object $catObjectOrID): string
     {
         /** @var string */
-        return $this->cmsHelperService->getLocalURLPath($this->getCategoryURL($catObjectOrID));
+        return $this->getCmsHelperService()->getLocalURLPath($this->getCategoryURL($catObjectOrID));
     }
 
     public function getCategoryBase()
     {
-        return $this->cmsService->getOption($this->getCategoryBaseOption());
+        return $this->getCmsService()->getOption($this->getCategoryBaseOption());
     }
 
     public function setPostCategories($post_id, array $categories, bool $append = false)

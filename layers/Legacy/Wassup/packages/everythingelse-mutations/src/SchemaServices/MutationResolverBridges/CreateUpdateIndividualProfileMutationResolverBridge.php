@@ -13,9 +13,19 @@ use Symfony\Contracts\Service\Attribute\Required;
 class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdateProfileMutationResolverBridge
 {
     use CreateUpdateProfileMutationResolverBridgeTrait;
-    protected CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver;
     
-    #[Required]
+    private ?CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver = null;
+    
+    public function setCreateUpdateIndividualProfileMutationResolver(CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver): void
+    {
+        $this->createUpdateIndividualProfileMutationResolver = $createUpdateIndividualProfileMutationResolver;
+    }
+    protected function getCreateUpdateIndividualProfileMutationResolver(): CreateUpdateIndividualProfileMutationResolver
+    {
+        return $this->createUpdateIndividualProfileMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateIndividualProfileMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCreateUpdateIndividualProfileMutationResolverBridge(
         CreateUpdateIndividualProfileMutationResolver $createUpdateIndividualProfileMutationResolver,
     ): void {
@@ -24,7 +34,7 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->createUpdateIndividualProfileMutationResolver;
+        return $this->getCreateUpdateIndividualProfileMutationResolver();
     }
 
     private function getFormInputs()
@@ -63,9 +73,9 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();
-        $individualinterests = $this->moduleProcessorManager->getProcessor($inputs['individualinterests'])->getValue($inputs['individualinterests']);
+        $individualinterests = $this->getModuleProcessorManager()->getProcessor($inputs['individualinterests'])->getValue($inputs['individualinterests']);
         return array(
-            'last_name' => trim($cmsapplicationhelpers->escapeAttributes($this->moduleProcessorManager->getProcessor($inputs['last_name'])->getValue($inputs['last_name']))),
+            'last_name' => trim($cmsapplicationhelpers->escapeAttributes($this->getModuleProcessorManager()->getProcessor($inputs['last_name'])->getValue($inputs['last_name']))),
             'individualinterests' => $individualinterests ?? array(),
         );
     }

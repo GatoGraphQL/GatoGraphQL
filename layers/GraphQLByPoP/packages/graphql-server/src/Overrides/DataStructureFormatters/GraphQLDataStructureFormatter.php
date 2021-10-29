@@ -49,8 +49,8 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
             $maybeField = $fields[0];
             $maybeDirective = $fields[1];
             $maybeFieldDirectives = array_map(
-                [$this->fieldQueryInterpreter, 'convertDirectiveToFieldDirective'],
-                $this->fieldQueryInterpreter->getDirectives($maybeField)
+                [$this->getFieldQueryInterpreter(), 'convertDirectiveToFieldDirective'],
+                $this->getFieldQueryInterpreter()->getDirectives($maybeField)
             );
             // Find out if the directive is contained in the field
             if (in_array($maybeDirective, $maybeFieldDirectives)) {

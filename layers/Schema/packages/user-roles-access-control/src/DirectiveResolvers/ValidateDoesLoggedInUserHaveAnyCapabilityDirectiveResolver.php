@@ -15,10 +15,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends AbstractValidateConditionDirectiveResolver
 {
-    protected UserRoleTypeAPIInterface $userRoleTypeAPI;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
+    {
+        $this->userRoleTypeAPI = $userRoleTypeAPI;
+    }
+    protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
+    {
+        return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver(
         UserRoleTypeAPIInterface $userRoleTypeAPI,
         StringScalarTypeResolver $stringScalarTypeResolver,
@@ -42,7 +59,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
 
         $capabilities = $this->directiveArgsForSchema['capabilities'];
         $userID = $vars['global-userstate']['current-user-id'];
-        $userCapabilities = $this->userRoleTypeAPI->getUserCapabilities($userID);
+        $userCapabilities = $this->getUserRoleTypeAPI()->getUserCapabilities($userID);
         return !empty(array_intersect($capabilities, $userCapabilities));
     }
 
@@ -81,7 +98,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            'capabilities' => $this->stringScalarTypeResolver,
+            'capabilities' => $this->getStringScalarTypeResolver(),
         ];
     }
 

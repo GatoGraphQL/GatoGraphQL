@@ -13,9 +13,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    #[Required]
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCustomPostTypeDataLoader(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ): void {
@@ -32,12 +41,12 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
 
     public function executeQuery($query, array $options = []): array
     {
-        return $this->customPostTypeAPI->getCustomPosts($query, $options);
+        return $this->getCustomPostTypeAPI()->getCustomPosts($query, $options);
     }
 
     protected function getOrderbyDefault()
     {
-        return $this->nameResolver->getName('popcms:dbcolumn:orderby:customposts:date');
+        return $this->getNameResolver()->getName('popcms:dbcolumn:orderby:customposts:date');
     }
 
     protected function getOrderDefault()

@@ -16,10 +16,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
-    protected GraphQLSyntaxServiceInterface $graphQLSyntaxService;
+    private ?SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry = null;
+    private ?GraphQLSyntaxServiceInterface $graphQLSyntaxService = null;
 
-    #[Required]
+    public function setSchemaDefinitionReferenceRegistry(SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry): void
+    {
+        $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
+    }
+    protected function getSchemaDefinitionReferenceRegistry(): SchemaDefinitionReferenceRegistryInterface
+    {
+        return $this->schemaDefinitionReferenceRegistry ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
+    }
+    public function setGraphQLSyntaxService(GraphQLSyntaxServiceInterface $graphQLSyntaxService): void
+    {
+        $this->graphQLSyntaxService = $graphQLSyntaxService;
+    }
+    protected function getGraphQLSyntaxService(): GraphQLSyntaxServiceInterface
+    {
+        return $this->graphQLSyntaxService ??= $this->instanceManager->getInstance(GraphQLSyntaxServiceInterface::class);
+    }
+
+    //#[Required]
     final public function autowireSchemaDefinitionReferenceTypeDataLoader(
         SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
         GraphQLSyntaxServiceInterface $graphQLSyntaxService,
@@ -44,23 +61,23 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
     protected function getWrappingTypeOrSchemaDefinitionReferenceObject(string $typeID): WrappingTypeInterface | SchemaDefinitionReferenceObjectInterface
     {
         // Check if the type is non-null
-        if ($this->graphQLSyntaxService->isNonNullWrappingType($typeID)) {
+        if ($this->getGraphQLSyntaxService()->isNonNullWrappingType($typeID)) {
             /** @var TypeInterface */
             $wrappedType = $this->getWrappingTypeOrSchemaDefinitionReferenceObject(
-                $this->graphQLSyntaxService->extractWrappedTypeFromNonNullWrappingType($typeID)
+                $this->getGraphQLSyntaxService()->extractWrappedTypeFromNonNullWrappingType($typeID)
             );
             return new NonNullType($wrappedType);
         }
 
         // Check if it is an array
-        if ($this->graphQLSyntaxService->isListWrappingType($typeID)) {
+        if ($this->getGraphQLSyntaxService()->isListWrappingType($typeID)) {
             /** @var TypeInterface */
             $wrappedType = $this->getWrappingTypeOrSchemaDefinitionReferenceObject(
-                $this->graphQLSyntaxService->extractWrappedTypeFromListWrappingType($typeID)
+                $this->getGraphQLSyntaxService()->extractWrappedTypeFromListWrappingType($typeID)
             );
             return new ListType($wrappedType);
         }
 
-        return $this->schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID);
+        return $this->getSchemaDefinitionReferenceRegistry()->getSchemaDefinitionReferenceObject($typeID);
     }
 }

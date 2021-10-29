@@ -21,10 +21,27 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver;
-    protected MutationRootObjectTypeResolver $mutationRootObjectTypeResolver;
+    private ?QueryRootObjectTypeResolver $queryRootObjectTypeResolver = null;
+    private ?MutationRootObjectTypeResolver $mutationRootObjectTypeResolver = null;
 
-    #[Required]
+    public function setQueryRootObjectTypeResolver(QueryRootObjectTypeResolver $queryRootObjectTypeResolver): void
+    {
+        $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
+    }
+    protected function getQueryRootObjectTypeResolver(): QueryRootObjectTypeResolver
+    {
+        return $this->queryRootObjectTypeResolver ??= $this->instanceManager->getInstance(QueryRootObjectTypeResolver::class);
+    }
+    public function setMutationRootObjectTypeResolver(MutationRootObjectTypeResolver $mutationRootObjectTypeResolver): void
+    {
+        $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
+    }
+    protected function getMutationRootObjectTypeResolver(): MutationRootObjectTypeResolver
+    {
+        return $this->mutationRootObjectTypeResolver ??= $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireRegisterQueryAndMutationRootsRootObjectTypeFieldResolver(
         QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
         MutationRootObjectTypeResolver $mutationRootObjectTypeResolver,
@@ -74,8 +91,8 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'queryRoot' => $this->queryRootObjectTypeResolver,
-            'mutationRoot' => $this->mutationRootObjectTypeResolver,
+            'queryRoot' => $this->getQueryRootObjectTypeResolver(),
+            'mutationRoot' => $this->getMutationRootObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

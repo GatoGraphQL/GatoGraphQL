@@ -14,6 +14,6 @@ class PostCustomPostObjectTypeResolverPicker extends UpstreamPostCustomPostObjec
 
     public function getCustomPostType(): string
     {
-        return $this->postTypeAPI->getPostCustomPostType();
+        return $this->getPostTypeAPI()->getPostCustomPostType();
     }
 }

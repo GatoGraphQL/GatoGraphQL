@@ -30,14 +30,64 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
      * @var array<string, mixed>
      */
     protected ?array $safeVars = null;
-    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected ErrorProviderInterface $errorProvider;
 
-    #[Required]
+    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?ErrorProviderInterface $errorProvider = null;
+
+    public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    {
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+    }
+    protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    {
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setErrorProvider(ErrorProviderInterface $errorProvider): void
+    {
+        $this->errorProvider = $errorProvider;
+    }
+    protected function getErrorProvider(): ErrorProviderInterface
+    {
+        return $this->errorProvider ??= $this->instanceManager->getInstance(ErrorProviderInterface::class);
+    }
+
+    //#[Required]
     final public function autowireOperatorGlobalObjectTypeFieldResolver(
         DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
@@ -76,19 +126,19 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'if' => $this->dangerouslyDynamicScalarTypeResolver,
-            'not' => $this->booleanScalarTypeResolver,
-            'and' => $this->booleanScalarTypeResolver,
-            'or' => $this->booleanScalarTypeResolver,
-            'equals' => $this->booleanScalarTypeResolver,
-            'empty' => $this->booleanScalarTypeResolver,
-            'isNull' => $this->booleanScalarTypeResolver,
-            'var' => $this->dangerouslyDynamicScalarTypeResolver,
-            'context' => $this->jsonObjectScalarTypeResolver,
-            'extract' => $this->dangerouslyDynamicScalarTypeResolver,
-            'time' => $this->intScalarTypeResolver,
-            'echo' => $this->dangerouslyDynamicScalarTypeResolver,
-            'sprintf' => $this->stringScalarTypeResolver,
+            'if' => $this->getDangerouslyDynamicScalarTypeResolver(),
+            'not' => $this->getBooleanScalarTypeResolver(),
+            'and' => $this->getBooleanScalarTypeResolver(),
+            'or' => $this->getBooleanScalarTypeResolver(),
+            'equals' => $this->getBooleanScalarTypeResolver(),
+            'empty' => $this->getBooleanScalarTypeResolver(),
+            'isNull' => $this->getBooleanScalarTypeResolver(),
+            'var' => $this->getDangerouslyDynamicScalarTypeResolver(),
+            'context' => $this->getJsonObjectScalarTypeResolver(),
+            'extract' => $this->getDangerouslyDynamicScalarTypeResolver(),
+            'time' => $this->getIntScalarTypeResolver(),
+            'echo' => $this->getDangerouslyDynamicScalarTypeResolver(),
+            'sprintf' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -135,40 +185,40 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         return match ($fieldName) {
             'if' => [
-                'condition' => $this->booleanScalarTypeResolver,
-                'then' => $this->dangerouslyDynamicScalarTypeResolver,
-                'else' => $this->dangerouslyDynamicScalarTypeResolver,
+                'condition' => $this->getBooleanScalarTypeResolver(),
+                'then' => $this->getDangerouslyDynamicScalarTypeResolver(),
+                'else' => $this->getDangerouslyDynamicScalarTypeResolver(),
             ],
             'not' => [
-                'value' => $this->booleanScalarTypeResolver,
+                'value' => $this->getBooleanScalarTypeResolver(),
             ],
             'and',
             'or' => [
-                'values' => $this->booleanScalarTypeResolver,
+                'values' => $this->getBooleanScalarTypeResolver(),
             ],
             'equals' => [
-                'value1' => $this->dangerouslyDynamicScalarTypeResolver,
-                'value2' => $this->dangerouslyDynamicScalarTypeResolver,
+                'value1' => $this->getDangerouslyDynamicScalarTypeResolver(),
+                'value2' => $this->getDangerouslyDynamicScalarTypeResolver(),
             ],
             'empty' => [
-                'value' => $this->dangerouslyDynamicScalarTypeResolver,
+                'value' => $this->getDangerouslyDynamicScalarTypeResolver(),
             ],
             'isNull' => [
-                'value' => $this->dangerouslyDynamicScalarTypeResolver,
+                'value' => $this->getDangerouslyDynamicScalarTypeResolver(),
             ],
             'var' => [
-                'name' => $this->stringScalarTypeResolver,
+                'name' => $this->getStringScalarTypeResolver(),
             ],
             'extract' => [
-                'object' => $this->dangerouslyDynamicScalarTypeResolver,
-                'path' => $this->stringScalarTypeResolver,
+                'object' => $this->getDangerouslyDynamicScalarTypeResolver(),
+                'path' => $this->getStringScalarTypeResolver(),
             ],
             'echo' => [
-                'value' => $this->dangerouslyDynamicScalarTypeResolver,
+                'value' => $this->getDangerouslyDynamicScalarTypeResolver(),
             ],
             'sprintf' => [
-                'string' => $this->stringScalarTypeResolver,
-                'values' => $this->stringScalarTypeResolver,
+                'string' => $this->getStringScalarTypeResolver(),
+                'values' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -315,7 +365,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                     $array = (array) $fieldArgs['object'];
                     $pointerToArrayItemUnderPath = OperatorHelpers::getPointerToArrayItemUnderPath($array, $fieldArgs['path']);
                 } catch (Exception $e) {
-                    return $this->errorProvider->getError(
+                    return $this->getErrorProvider()->getError(
                         $fieldName,
                         'path-not-reachable',
                         $e->getMessage()

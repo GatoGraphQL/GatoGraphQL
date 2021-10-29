@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
 {
-    protected UserTypeAPIInterface $userTypeAPI;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
     
-    #[Required]
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
+        $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireUpdateMyCommunitiesMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
     ): void {
@@ -96,8 +105,8 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
             foreach ($banned_communities as $banned_community) {
                 $banned_communities_html[] = sprintf(
                     '<a href="%s">%s</a>',
-                    $this->userTypeAPI->getUserURL($banned_community),
-                    $this->userTypeAPI->getUserDisplayName($banned_community)
+                    $this->getUserTypeAPI()->getUserURL($banned_community),
+                    $this->getUserTypeAPI()->getUserDisplayName($banned_community)
                 );
             }
             $warnings[] = sprintf(

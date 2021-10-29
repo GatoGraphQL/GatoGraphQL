@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
+    private ?SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry = null;
 
-    #[Required]
+    public function setSchemaDefinitionReferenceRegistry(SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry): void
+    {
+        $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
+    }
+    protected function getSchemaDefinitionReferenceRegistry(): SchemaDefinitionReferenceRegistryInterface
+    {
+        return $this->schemaDefinitionReferenceRegistry ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
+    }
+
+    //#[Required]
     final public function autowireSchemaDefinitionReferenceTypeDataLoader(
         SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
     ): void {
@@ -23,7 +32,7 @@ class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoad
     public function getObjects(array $ids): array
     {
         return array_map(
-            fn (string $typeID) => $this->schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObject($typeID),
+            fn (string $typeID) => $this->getSchemaDefinitionReferenceRegistry()->getSchemaDefinitionReferenceObject($typeID),
             $ids
         );
     }

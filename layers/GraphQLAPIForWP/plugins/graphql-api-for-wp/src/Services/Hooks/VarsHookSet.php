@@ -13,10 +13,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
 
-    #[Required]
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
+    {
+        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
+    }
+    protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
+    {
+        return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+    }
+
+    //#[Required]
     final public function autowireVarsHookSet(
         ModuleRegistryInterface $moduleRegistry,
         GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
@@ -56,11 +73,11 @@ class VarsHookSet extends AbstractHookSet
             // being processed /?scheme=api <= native API
             // If ever need to support REST or another format, add a hook here
             $allowedDataStructures = [
-                $this->graphQLDataStructureFormatter->getName(),
+                $this->getGraphQLDataStructureFormatter()->getName(),
             ];
             if (
                 // If single endpoint not enabled
-                !$this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)
+                !$this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)
                 // If datastructure is not GraphQL (or another allowed one)
                 || !in_array($vars['datastructure'], $allowedDataStructures)
             ) {

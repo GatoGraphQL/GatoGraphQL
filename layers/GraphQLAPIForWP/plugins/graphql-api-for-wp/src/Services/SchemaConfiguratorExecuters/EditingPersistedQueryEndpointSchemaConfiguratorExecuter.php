@@ -11,10 +11,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
 {
-    protected EndpointHelpers $endpointHelpers;
-    protected PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator;
+    private ?EndpointHelpers $endpointHelpers = null;
+    private ?PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator = null;
 
-    #[Required]
+    public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
+    {
+        $this->endpointHelpers = $endpointHelpers;
+    }
+    protected function getEndpointHelpers(): EndpointHelpers
+    {
+        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+    }
+    public function setPersistedQueryEndpointSchemaConfigurator(PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator): void
+    {
+        $this->persistedQueryEndpointSchemaConfigurator = $persistedQueryEndpointSchemaConfigurator;
+    }
+    protected function getPersistedQueryEndpointSchemaConfigurator(): PersistedQueryEndpointSchemaConfigurator
+    {
+        return $this->persistedQueryEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(PersistedQueryEndpointSchemaConfigurator::class);
+    }
+
+    //#[Required]
     final public function autowireEditingPersistedQueryEndpointSchemaConfiguratorExecuter(
         EndpointHelpers $endpointHelpers,
         PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator
@@ -28,14 +45,14 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
      */
     protected function getCustomPostID(): ?int
     {
-        if ($this->endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint()) {
-            return (int) $this->endpointHelpers->getAdminPersistedQueryCustomPostID();
+        if ($this->getEndpointHelpers()->isRequestingAdminPersistedQueryGraphQLEndpoint()) {
+            return (int) $this->getEndpointHelpers()->getAdminPersistedQueryCustomPostID();
         }
         return null;
     }
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
     {
-        return $this->persistedQueryEndpointSchemaConfigurator;
+        return $this->getPersistedQueryEndpointSchemaConfigurator();
     }
 }

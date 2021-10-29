@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {
-    protected TaxonomyTypeAPIInterface $taxonomyTypeAPI;
+    private ?TaxonomyTypeAPIInterface $taxonomyTypeAPI = null;
 
-    #[Required]
+    public function setTaxonomyTypeAPI(TaxonomyTypeAPIInterface $taxonomyTypeAPI): void
+    {
+        $this->taxonomyTypeAPI = $taxonomyTypeAPI;
+    }
+    protected function getTaxonomyTypeAPI(): TaxonomyTypeAPIInterface
+    {
+        return $this->taxonomyTypeAPI ??= $this->instanceManager->getInstance(TaxonomyTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireVarsHookSet(
         TaxonomyTypeAPIInterface $taxonomyTypeAPI,
     ): void {
@@ -40,7 +49,7 @@ class VarsHookSet extends AbstractHookSet
         // needed to match the RouteModuleProcessor vars conditions
         if ($nature == RouteNatures::CATEGORY) {
             $termObjectID = $vars['routing-state']['queried-object-id'];
-            $vars['routing-state']['taxonomy-name'] = $this->taxonomyTypeAPI->getTermTaxonomyName($termObjectID);
+            $vars['routing-state']['taxonomy-name'] = $this->getTaxonomyTypeAPI()->getTermTaxonomyName($termObjectID);
         }
     }
 }

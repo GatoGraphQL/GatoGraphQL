@@ -15,10 +15,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class LostPasswordMutationResolver extends AbstractMutationResolver
 {
-    protected UserTypeAPIInterface $userTypeAPI;
-    protected CMSServiceInterface $cmsService;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
+    private ?CMSServiceInterface $cmsService = null;
 
-    #[Required]
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
+        $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+    }
+    public function setCMSService(CMSServiceInterface $cmsService): void
+    {
+        $this->cmsService = $cmsService;
+    }
+    protected function getCMSService(): CMSServiceInterface
+    {
+        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
+    }
+
+    //#[Required]
     final public function autowireLostPasswordMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
         CMSServiceInterface $cmsService,
@@ -43,7 +60,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
             '<p>%s</p><br/>',
             sprintf(
                 $this->translationAPI->__('Someone requested that the password be reset for your account on <a href="%s">%s</a>. If this was a mistake, or if it was not you who requested the password reset, just ignore this email and nothing will happen.', 'pop-application'),
-                GeneralUtils::maybeAddTrailingSlash($this->cmsService->getHomeURL()),
+                GeneralUtils::maybeAddTrailingSlash($this->getCmsService()->getHomeURL()),
                 $cmsapplicationapi->getSiteName()
             )
         );
@@ -81,13 +98,13 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         if (empty($user_login)) {
             $errors[] = $this->translationAPI->__('Enter a username or e-mail address.');
         } elseif (strpos($user_login, '@')) {
-            $user = $this->userTypeAPI->getUserByEmail(trim($user_login));
+            $user = $this->getUserTypeAPI()->getUserByEmail(trim($user_login));
             if (empty($user)) {
                 $errors[] = $this->translationAPI->__('There is no user registered with that email address.');
             }
         } else {
             $login = trim($user_login);
-            $user = $this->userTypeAPI->getUserByLogin($login);
+            $user = $this->getUserTypeAPI()->getUserByLogin($login);
         }
 
         if (!$user) {
@@ -103,10 +120,10 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         $user_login = $form_data[MutationInputProperties::USER_LOGIN];
 
         if (strpos($user_login, '@')) {
-            $user = $this->userTypeAPI->getUserByEmail(trim($user_login));
+            $user = $this->getUserTypeAPI()->getUserByEmail(trim($user_login));
         } else {
             $login = trim($user_login);
-            $user = $this->userTypeAPI->getUserByLogin($login);
+            $user = $this->getUserTypeAPI()->getUserByLogin($login);
         }
 
         // Generate something random for a password reset key.
@@ -122,14 +139,14 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         */
         // $site_name = wp_specialchars_decode($cmsapplicationapi->getSiteName(), ENT_QUOTES);
         // $title = sprintf($this->translationAPI->__('[%s] Password Reset'), $site_name);
-        $user_id = $this->userTypeAPI->getUserId($user);
+        $user_id = $this->getUserTypeAPI()->getUserId($user);
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $title = sprintf($this->translationAPI->__('[%s] Password Reset'), $cmsapplicationapi->getSiteName());
         $title = $this->hooksAPI->applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user);
         $message = $this->retrievePasswordMessage($key, $user_login, $user_id);
         $message = $this->hooksAPI->applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user);
 
-        $user_email = $this->userTypeAPI->getUserEmail($user);
+        $user_email = $this->getUserTypeAPI()->getUserEmail($user);
         return PoP_EmailSender_Utils::sendEmail($user_email, htmlspecialchars_decode($title)/*wp_specialchars_decode($title)*/, $message);
     }
 }

@@ -12,7 +12,6 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
@@ -20,6 +19,7 @@ use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
@@ -29,9 +29,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
-use PoP\Hooks\HooksAPIInterface;
 use PoP\Root\Environment as RootEnvironment;
-use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
@@ -40,6 +38,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     use RemoveIDsDataFieldsDirectiveResolverTrait;
     use FieldOrDirectiveResolverTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
+    use BasicServiceTrait;
 
     const MESSAGE_EXPRESSIONS = 'expressions';
 
@@ -57,13 +56,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /** @var array<string, array<string, mixed>> */
     protected array $schemaDirectiveArgsCache = [];
 
-    protected TranslationAPIInterface $translationAPI;
-    protected HooksAPIInterface $hooksAPI;
-    protected InstanceManagerInterface $instanceManager;
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
-    protected FeedbackMessageStoreInterface $feedbackMessageStore;
-    protected SemverHelperServiceInterface $semverHelperService;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    private ?SemverHelperServiceInterface $semverHelperService = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     /**
      * @var array<string, mixed>
@@ -105,19 +101,46 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $this->directive = $directive;
     }
 
-    #[Required]
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
+    }
+    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+    }
+    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    {
+        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
+    }
+    public function setSemverHelperService(SemverHelperServiceInterface $semverHelperService): void
+    {
+        $this->semverHelperService = $semverHelperService;
+    }
+    protected function getSemverHelperService(): SemverHelperServiceInterface
+    {
+        return $this->semverHelperService ??= $this->instanceManager->getInstance(SemverHelperServiceInterface::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractDirectiveResolver(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         SemverHelperServiceInterface $semverHelperService,
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
-        $this->translationAPI = $translationAPI;
-        $this->hooksAPI = $hooksAPI;
-        $this->instanceManager = $instanceManager;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->semverHelperService = $semverHelperService;
@@ -160,7 +183,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array &$schemaTraces
     ): array {
         // If it has nestedDirectives, extract them and validate them
-        $nestedFieldDirectives = $this->fieldQueryInterpreter->getFieldDirectives($this->directive, false);
+        $nestedFieldDirectives = $this->getFieldQueryInterpreter()->getFieldDirectives($this->directive, false);
         if ($nestedFieldDirectives) {
             $nestedDirectiveSchemaErrors = $nestedDirectiveSchemaWarnings = $nestedDirectiveSchemaDeprecations = $nestedDirectiveSchemaNotices = $nestedDirectiveSchemaTraces = [];
             $nestedFieldDirectives = QueryHelpers::splitFieldDirectives($nestedFieldDirectives);
@@ -241,7 +264,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $directiveSchemaErrors,
             $directiveSchemaWarnings,
             $directiveSchemaDeprecations
-        ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForSchema(
+        ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForSchema(
             $this,
             $relationalTypeResolver,
             $this->directive,
@@ -320,7 +343,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $directiveArgs,
             $nestedObjectErrors,
             $nestedObjectWarnings
-        ) = $this->fieldQueryInterpreter->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $this->directive, $variables, $expressions);
+        ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $this->directive, $variables, $expressions);
 
         // Store the args, they may be used in `resolveDirective`
         $objectID = $relationalTypeResolver->getID($object);
@@ -426,7 +449,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                  * If passing a wrong value to validate against (eg: "saraza" instead of "1.0.0"), it will throw an Exception
                  */
                 try {
-                    return $this->semverHelperService->satisfies($schemaDirectiveVersion, $versionConstraint);
+                    return $this->getSemverHelperService()->satisfies($schemaDirectiveVersion, $versionConstraint);
                 } catch (Exception) {
                     return false;
                 }
@@ -725,7 +748,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             if (Environment::enableSemanticVersionConstraints()) {
                 $hasVersion = !empty($this->getDirectiveVersion($relationalTypeResolver));
                 if ($hasVersion) {
-                    $consolidatedDirectiveArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->stringScalarTypeResolver;
+                    $consolidatedDirectiveArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getStringScalarTypeResolver();
                 }
             }
         }

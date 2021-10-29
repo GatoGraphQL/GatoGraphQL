@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class LoginMutationResolver extends UpstreamLoginMutationResolver
 {
-    protected UserTypeAPIInterface $userTypeAPI;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
 
-    #[Required]
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
+        $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireUserStateMutationsLoginMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
     ): void {
@@ -25,8 +34,8 @@ class LoginMutationResolver extends UpstreamLoginMutationResolver
         $cmsuseraccountapi = FunctionAPIFactory::getInstance();
         return sprintf(
             $this->translationAPI->__('You are already logged in as <a href="%s">%s</a>, <a href="%s">logout</a>?', 'user-state-mutations'),
-            $this->userTypeAPI->getUserURL($user_id),
-            $this->userTypeAPI->getUserDisplayName($user_id),
+            $this->getUserTypeAPI()->getUserURL($user_id),
+            $this->getUserTypeAPI()->getUserDisplayName($user_id),
             $cmsuseraccountapi->getLogoutURL()
         );
     }

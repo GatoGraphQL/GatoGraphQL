@@ -12,9 +12,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeDataLoader implements ObjectTypeQueryableDataLoaderInterface
 {
-    protected ModuleProcessorManagerInterface $moduleProcessorManager;
+    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
-    #[Required]
+    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    {
+        $this->moduleProcessorManager = $moduleProcessorManager;
+    }
+    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    {
+        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractObjectTypeQueryableDataLoader(
         ModuleProcessorManagerInterface $moduleProcessorManager,
     ): void {
@@ -65,7 +74,7 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
         if ($filtering_modules = $data_properties[DataloadingConstants::QUERYARGSFILTERINGMODULES] ?? null) {
             foreach ($filtering_modules as $module) {
                 /** @var FilterDataModuleProcessorInterface */
-                $filterDataModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
+                $filterDataModuleProcessor = $this->getModuleProcessorManager()->getProcessor($module);
                 $filterDataModuleProcessor->filterHeadmoduleDataloadQueryArgs($module, $query);
             }
         }

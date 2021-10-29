@@ -14,7 +14,7 @@ class PostTagFieldDataloadModuleProcessor extends AbstractFieldDataloadModulePro
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAG:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
-                return $this->postTagObjectTypeResolver;
+                return $this->getPostTagObjectTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);

@@ -8,7 +8,7 @@ abstract class AbstractUpvoteOrUndoUpvoteCustomPostMutationResolver extends Abst
 {
     protected function eligible($post)
     {
-        $eligible = in_array($this->customPostTypeAPI->getCustomPostType($post), \PoP_SocialNetwork_Utils::getUpdownvotePostTypes());
+        $eligible = in_array($this->getCustomPostTypeAPI()->getCustomPostType($post), \PoP_SocialNetwork_Utils::getUpdownvotePostTypes());
         return $this->hooksAPI->applyFilters('GD_UpdownvoteUndoUpdownvotePost:eligible', $eligible, $post);
     }
 

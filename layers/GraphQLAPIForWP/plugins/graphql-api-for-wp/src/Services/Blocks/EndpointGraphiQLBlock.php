@@ -15,9 +15,18 @@ class EndpointGraphiQLBlock extends AbstractBlock implements EndpointEditorBlock
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
 
-    protected CustomEndpointBlockCategory $customEndpointBlockCategory;
+    private ?CustomEndpointBlockCategory $customEndpointBlockCategory = null;
 
-    #[Required]
+    public function setCustomEndpointBlockCategory(CustomEndpointBlockCategory $customEndpointBlockCategory): void
+    {
+        $this->customEndpointBlockCategory = $customEndpointBlockCategory;
+    }
+    protected function getCustomEndpointBlockCategory(): CustomEndpointBlockCategory
+    {
+        return $this->customEndpointBlockCategory ??= $this->instanceManager->getInstance(CustomEndpointBlockCategory::class);
+    }
+
+    //#[Required]
     final public function autowireEndpointGraphiQLBlock(
         CustomEndpointBlockCategory $customEndpointBlockCategory,
     ): void {
@@ -41,7 +50,7 @@ class EndpointGraphiQLBlock extends AbstractBlock implements EndpointEditorBlock
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->customEndpointBlockCategory;
+        return $this->getCustomEndpointBlockCategory();
     }
 
     protected function isDynamicBlock(): bool

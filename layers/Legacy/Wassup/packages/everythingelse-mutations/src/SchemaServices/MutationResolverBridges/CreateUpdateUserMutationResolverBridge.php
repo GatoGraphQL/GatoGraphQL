@@ -14,9 +14,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected CreateUpdateUserMutationResolver $createUpdateUserMutationResolver;
+    private ?CreateUpdateUserMutationResolver $createUpdateUserMutationResolver = null;
     
-    #[Required]
+    public function setCreateUpdateUserMutationResolver(CreateUpdateUserMutationResolver $createUpdateUserMutationResolver): void
+    {
+        $this->createUpdateUserMutationResolver = $createUpdateUserMutationResolver;
+    }
+    protected function getCreateUpdateUserMutationResolver(): CreateUpdateUserMutationResolver
+    {
+        return $this->createUpdateUserMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateUserMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCreateUpdateUserMutationResolverBridge(
         CreateUpdateUserMutationResolver $createUpdateUserMutationResolver,
     ): void {
@@ -25,7 +34,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->createUpdateUserMutationResolver;
+        return $this->getCreateUpdateUserMutationResolver();
     }
 
     public function getSuccessString(string | int $result_id): ?string
@@ -54,17 +63,17 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         $inputs = $this->getFormInputs();
         $form_data = array(
             'user_id' => $user_id,
-            'username' => $cmseditusershelpers->sanitizeUsername($this->moduleProcessorManager->getProcessor($inputs['username'])->getValue($inputs['username'])),
-            'password' => $this->moduleProcessorManager->getProcessor($inputs['password'])->getValue($inputs['password']),
-            'repeat_password' => $this->moduleProcessorManager->getProcessor($inputs['repeat_password'])->getValue($inputs['repeat_password']),
-            'first_name' => trim($cmsapplicationhelpers->escapeAttributes($this->moduleProcessorManager->getProcessor($inputs['first_name'])->getValue($inputs['first_name']))),
-            'user_email' => trim($this->moduleProcessorManager->getProcessor($inputs['user_email'])->getValue($inputs['user_email'])),
-            'description' => trim($this->moduleProcessorManager->getProcessor($inputs['description'])->getValue($inputs['description'])),
-            'user_url' => trim($this->moduleProcessorManager->getProcessor($inputs['user_url'])->getValue($inputs['user_url'])),
+            'username' => $cmseditusershelpers->sanitizeUsername($this->getModuleProcessorManager()->getProcessor($inputs['username'])->getValue($inputs['username'])),
+            'password' => $this->getModuleProcessorManager()->getProcessor($inputs['password'])->getValue($inputs['password']),
+            'repeat_password' => $this->getModuleProcessorManager()->getProcessor($inputs['repeat_password'])->getValue($inputs['repeat_password']),
+            'first_name' => trim($cmsapplicationhelpers->escapeAttributes($this->getModuleProcessorManager()->getProcessor($inputs['first_name'])->getValue($inputs['first_name']))),
+            'user_email' => trim($this->getModuleProcessorManager()->getProcessor($inputs['user_email'])->getValue($inputs['user_email'])),
+            'description' => trim($this->getModuleProcessorManager()->getProcessor($inputs['description'])->getValue($inputs['description'])),
+            'user_url' => trim($this->getModuleProcessorManager()->getProcessor($inputs['user_url'])->getValue($inputs['user_url'])),
         );
 
         if (\PoP_Forms_ConfigurationUtils::captchaEnabled()) {
-            $form_data['captcha'] = $this->moduleProcessorManager->getProcessor($inputs['captcha'])->getValue($inputs['captcha']);
+            $form_data['captcha'] = $this->getModuleProcessorManager()->getProcessor($inputs['captcha'])->getValue($inputs['captcha']);
         }
 
         // Allow to add extra inputs

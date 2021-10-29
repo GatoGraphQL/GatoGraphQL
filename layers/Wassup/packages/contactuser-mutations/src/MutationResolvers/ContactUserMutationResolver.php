@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ContactUserMutationResolver extends AbstractMutationResolver
 {
-    protected UserTypeAPIInterface $userTypeAPI;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
 
-    #[Required]
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
+        $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireContactUserMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
     ): void {
@@ -40,7 +49,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
         if (empty($form_data['target-id'])) {
             $errors[] = $this->translationAPI->__('The requested user cannot be empty.', 'pop-genericforms');
         } else {
-            $target = $this->userTypeAPI->getUserById($form_data['target-id']);
+            $target = $this->getUserTypeAPI()->getUserById($form_data['target-id']);
             if (!$target) {
                 $errors[] = $this->translationAPI->__('The requested user does not exist.', 'pop-genericforms');
             }

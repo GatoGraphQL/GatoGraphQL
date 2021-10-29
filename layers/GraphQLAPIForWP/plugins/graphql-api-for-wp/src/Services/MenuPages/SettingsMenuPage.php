@@ -23,15 +23,31 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     public const FORM_ORIGIN = 'form-origin';
     public const SETTINGS_FIELD = 'graphql-api-settings';
 
-    protected UserSettingsManagerInterface $userSettingsManager;
-    protected ModuleRegistryInterface $moduleRegistry;
+    private ?UserSettingsManagerInterface $userSettingsManager = null;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
 
-    #[Required]
+    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
+    {
+        $this->userSettingsManager = $userSettingsManager;
+    }
+    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    {
+        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
+    }
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+    }
+
+    //#[Required]
     final public function autowireSettingsMenuPage(
         ModuleRegistryInterface $moduleRegistry,
     ): void {
         $this->moduleRegistry = $moduleRegistry;
-        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
 
     public function getMenuPageSlug(): string
@@ -73,7 +89,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 \flush_rewrite_rules();
 
                 // Update the timestamp
-                $this->userSettingsManager->storeContainerTimestamp();
+                $this->getUserSettingsManager()->storeContainerTimestamp();
             }
         );
 
@@ -157,7 +173,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $items = $this->getAllItems();
         foreach ($items as $item) {
             $module = $item['module'];
-            $moduleResolver = $this->moduleRegistry->getModuleResolver($module);
+            $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
             foreach ($item['settings'] as $itemSetting) {
                 $option = $itemSetting[Properties::INPUT] ?? null;
                 // No option => it is a label
@@ -221,9 +237,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     protected function getAllItems(): array
     {
         $items = [];
-        $modules = $this->moduleRegistry->getAllModules(true, true, false);
+        $modules = $this->getModuleRegistry()->getAllModules(true, true, false);
         foreach ($modules as $module) {
-            $moduleResolver = $this->moduleRegistry->getModuleResolver($module);
+            $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
             $items[] = [
                 'module' => $module,
                 'id' => $moduleResolver->getID($module),
@@ -246,7 +262,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function printWithTabs(): bool
     {
-        return $this->userSettingsManager->getSetting(
+        return $this->getUserSettingsManager()->getSetting(
             PluginManagementFunctionalityModuleResolver::GENERAL,
             PluginManagementFunctionalityModuleResolver::OPTION_PRINT_SETTINGS_WITH_TABS
         );
@@ -366,7 +382,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function getOptionValue(string $module, string $option): mixed
     {
-        return $this->userSettingsManager->getSetting($module, $option);
+        return $this->getUserSettingsManager()->getSetting($module, $option);
     }
 
     /**

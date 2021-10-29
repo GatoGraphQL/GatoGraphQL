@@ -9,6 +9,7 @@ use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 /**
@@ -18,15 +19,33 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 abstract class AbstractCacheConfigurationManager implements CacheConfigurationManagerInterface
 {
-    protected UserSettingsManagerInterface $userSettingsManager;
-    protected EndpointHelpers $endpointHelpers;
+    use BasicServiceTrait;
 
-    #[Required]
+    private ?UserSettingsManagerInterface $userSettingsManager = null;
+    private ?EndpointHelpers $endpointHelpers = null;
+
+    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
+    {
+        $this->userSettingsManager = $userSettingsManager;
+    }
+    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    {
+        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
+    }
+    public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
+    {
+        $this->endpointHelpers = $endpointHelpers;
+    }
+    protected function getEndpointHelpers(): EndpointHelpers
+    {
+        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCacheConfigurationManager(
         EndpointHelpers $endpointHelpers,
     ): void {
         $this->endpointHelpers = $endpointHelpers;
-        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
     }
 
     /**
@@ -47,7 +66,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
         $suffix = \is_admin() ?
             // The WordPress editor can access the full GraphQL schema,
             // including "admin" fields, so cache it individually
-            'a' . ($this->endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint() ? 'u' : 'c')
+            'a' . ($this->getEndpointHelpers()->isRequestingAdminFixedSchemaGraphQLEndpoint() ? 'u' : 'c')
             : 'c';
         $timestamp .= '_' . $suffix;
         return $timestamp;

@@ -19,12 +19,12 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     {
         if ($form_data['stancetarget'] ?? null) {
             // Check that the referenced post exists
-            $referenced = $this->customPostTypeAPI->getCustomPost($form_data['stancetarget']);
+            $referenced = $this->getCustomPostTypeAPI()->getCustomPost($form_data['stancetarget']);
             if (!$referenced) {
                 $errors[] = $this->translationAPI->__('The referenced post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
-                if ($this->customPostTypeAPI->getStatus($referenced) != Status::PUBLISHED) {
+                if ($this->getCustomPostTypeAPI()->getStatus($referenced) != Status::PUBLISHED) {
                     $errors[] = $this->translationAPI->__('The referenced post is not published yet', 'poptheme-wassup');
                 }
             }
@@ -76,7 +76,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
 
         // Stances are unique, just 1 per person/article.
         // Check if there is a Stance for the given post. If there is, it's an error, can't create a second Stance.
-        if ($stances = $this->customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+        if ($stances = $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
             $stance_id = $stances[0];
             $error = sprintf(
                 $this->translationAPI->__('You have already added your %s', 'pop-userstance'),
@@ -86,8 +86,8 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
                 $error = sprintf(
                     $this->translationAPI->__('%s after reading “<a href="%s">%s</a>”', 'pop-userstance'),
                     $error,
-                    $this->customPostTypeAPI->getPermalink($referenced_id),
-                    $this->customPostTypeAPI->getTitle($referenced_id)
+                    $this->getCustomPostTypeAPI()->getPermalink($referenced_id),
+                    $this->getCustomPostTypeAPI()->getTitle($referenced_id)
                 );
             }
             $errors[] = sprintf(

@@ -15,9 +15,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ResetLostPasswordMutationResolver extends AbstractMutationResolver
 {
-    protected UserTypeAPIInterface $userTypeAPI;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
 
-    #[Required]
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
+        $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireResetLostPasswordMutationResolver(
         UserTypeAPIInterface $userTypeAPI,
     ): void {
@@ -81,7 +90,7 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
         // Do the actual password reset
         $cmsuseraccountapi->resetPassword($user, $pwd);
 
-        $userID = $this->userTypeAPI->getUserId($user);
+        $userID = $this->getUserTypeAPI()->getUserId($user);
         $this->hooksAPI->doAction('gd_lostpasswordreset', $userID);
         return $userID;
     }

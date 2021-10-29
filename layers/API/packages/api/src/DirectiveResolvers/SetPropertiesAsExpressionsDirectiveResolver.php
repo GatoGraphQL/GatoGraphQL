@@ -14,9 +14,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireSetPropertiesAsExpressionsDirectiveResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
@@ -57,8 +66,8 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            'properties' => $this->stringScalarTypeResolver,
-            'expressions' => $this->stringScalarTypeResolver,
+            'properties' => $this->getStringScalarTypeResolver(),
+            'expressions' => $this->getStringScalarTypeResolver(),
         ];
     }
 

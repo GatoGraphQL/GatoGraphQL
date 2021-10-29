@@ -1,7 +1,7 @@
 <?php
 use PoP\Application\ModuleProcessors\AbstractQueryDataModuleProcessor;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Definitions\Facades\DefinitionManagerFacade;

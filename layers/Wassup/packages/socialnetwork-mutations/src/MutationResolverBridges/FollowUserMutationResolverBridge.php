@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMutationResolverBridge
 {
-    protected FollowUserMutationResolver $followUserMutationResolver;
+    private ?FollowUserMutationResolver $followUserMutationResolver = null;
 
-    #[Required]
+    public function setFollowUserMutationResolver(FollowUserMutationResolver $followUserMutationResolver): void
+    {
+        $this->followUserMutationResolver = $followUserMutationResolver;
+    }
+    protected function getFollowUserMutationResolver(): FollowUserMutationResolver
+    {
+        return $this->followUserMutationResolver ??= $this->instanceManager->getInstance(FollowUserMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireFollowUserMutationResolverBridge(
         FollowUserMutationResolver $followUserMutationResolver,
     ): void {
@@ -21,7 +30,7 @@ class FollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMu
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->followUserMutationResolver;
+        return $this->getFollowUserMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool
@@ -33,7 +42,7 @@ class FollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMu
     {
         return sprintf(
             $this->translationAPI->__('You are now following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $this->userTypeAPI->getUserDisplayName($result_id)
+            $this->getUserTypeAPI()->getUserDisplayName($result_id)
         );
     }
 }

@@ -14,9 +14,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    #[Required]
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireVarsHookSet(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ): void {
@@ -77,7 +86,7 @@ class VarsHookSet extends AbstractHookSet
         // Attributes needed to match the RouteModuleProcessor vars conditions
         if ($nature == RouteNatures::CUSTOMPOST) {
             $customPostID = $vars['routing-state']['queried-object-id'];
-            $vars['routing-state']['queried-object-post-type'] = $this->customPostTypeAPI->getCustomPostType($customPostID);
+            $vars['routing-state']['queried-object-post-type'] = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
         }
     }
 }

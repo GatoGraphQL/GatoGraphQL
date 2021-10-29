@@ -13,10 +13,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirectiveResolver implements CacheControlDirectiveResolverInterface
 {
-    protected CacheControlEngineInterface $cacheControlEngine;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
+    private ?CacheControlEngineInterface $cacheControlEngine = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
-    #[Required]
+    public function setCacheControlEngine(CacheControlEngineInterface $cacheControlEngine): void
+    {
+        $this->cacheControlEngine = $cacheControlEngine;
+    }
+    protected function getCacheControlEngine(): CacheControlEngineInterface
+    {
+        return $this->cacheControlEngine ??= $this->instanceManager->getInstance(CacheControlEngineInterface::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCacheControlDirectiveResolver(
         CacheControlEngineInterface $cacheControlEngine,
         IntScalarTypeResolver $intScalarTypeResolver,
@@ -69,7 +86,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            'maxAge' => $this->intScalarTypeResolver,
+            'maxAge' => $this->getIntScalarTypeResolver(),
         ];
     }
 
@@ -152,7 +169,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
         // If it was provided as a directiveArg, use that value. Otherwise, use the one from the class
         $maxAge = $this->directiveArgsForSchema['maxAge'] ?? $this->getMaxAge();
         if (!is_null($maxAge)) {
-            $this->cacheControlEngine->addMaxAge($maxAge);
+            $this->getCacheControlEngine()->addMaxAge($maxAge);
         }
     }
 

@@ -12,9 +12,18 @@ class ConfigurableCacheControlForDirectivesRelationalTypeResolverDecorator exten
 {
     use ConfigurableCacheControlRelationalTypeResolverDecoratorTrait;
 
-    protected CacheControlManagerInterface $cacheControlManager;
+    private ?CacheControlManagerInterface $cacheControlManager = null;
 
-    #[Required]
+    public function setCacheControlManager(CacheControlManagerInterface $cacheControlManager): void
+    {
+        $this->cacheControlManager = $cacheControlManager;
+    }
+    protected function getCacheControlManager(): CacheControlManagerInterface
+    {
+        return $this->cacheControlManager ??= $this->instanceManager->getInstance(CacheControlManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireConfigurableCacheControlForDirectivesRelationalTypeResolverDecorator(
         CacheControlManagerInterface $cacheControlManager,
     ): void {
@@ -23,6 +32,6 @@ class ConfigurableCacheControlForDirectivesRelationalTypeResolverDecorator exten
 
     protected function getConfigurationEntries(): array
     {
-        return $this->cacheControlManager->getEntriesForDirectives();
+        return $this->getCacheControlManager()->getEntriesForDirectives();
     }
 }

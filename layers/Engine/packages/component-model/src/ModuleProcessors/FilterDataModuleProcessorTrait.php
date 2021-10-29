@@ -10,10 +10,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait FilterDataModuleProcessorTrait
 {
-    protected ModuleProcessorManagerInterface $moduleProcessorManager;
-    protected FilterInputProcessorManagerInterface $filterInputProcessorManager;
+    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    private ?FilterInputProcessorManagerInterface $filterInputProcessorManager = null;
 
-    #[Required]
+    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    {
+        $this->moduleProcessorManager = $moduleProcessorManager;
+    }
+    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    {
+        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
+    }
+    public function setFilterInputProcessorManager(FilterInputProcessorManagerInterface $filterInputProcessorManager): void
+    {
+        $this->filterInputProcessorManager = $filterInputProcessorManager;
+    }
+    protected function getFilterInputProcessorManager(): FilterInputProcessorManagerInterface
+    {
+        return $this->filterInputProcessorManager ??= $this->instanceManager->getInstance(FilterInputProcessorManagerInterface::class);
+    }
+
+    //#[Required]
     public function autowireFilterDataModuleProcessorTrait(
         ModuleProcessorManagerInterface $moduleProcessorManager,
         FilterInputProcessorManagerInterface $filterInputProcessorManager,
@@ -32,11 +49,11 @@ trait FilterDataModuleProcessorTrait
         if ($activeDataloadQueryArgsFilteringModules = $this->getActiveDataloadQueryArgsFilteringModules($module, $source)) {
             foreach ($activeDataloadQueryArgsFilteringModules as $submodule) {
                 /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
-                $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($submodule);
+                $dataloadQueryArgsFilterInputModuleProcessor = $this->getModuleProcessorManager()->getProcessor($submodule);
                 $value = $dataloadQueryArgsFilterInputModuleProcessor->getValue($submodule, $source);
                 if ($filterInput = $dataloadQueryArgsFilterInputModuleProcessor->getFilterInput($submodule)) {
                     /** @var FilterInputProcessorInterface */
-                    $filterInputProcessor = $this->filterInputProcessorManager->getProcessor($filterInput);
+                    $filterInputProcessor = $this->getFilterInputProcessorManager()->getProcessor($filterInput);
                     $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $value);
                 }
             }
@@ -60,7 +77,7 @@ trait FilterDataModuleProcessorTrait
                 $dataloadQueryArgsFilteringModules,
                 function (array $module) use ($source) {
                     /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
-                    $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
+                    $dataloadQueryArgsFilterInputModuleProcessor = $this->getModuleProcessorManager()->getProcessor($module);
                     return $dataloadQueryArgsFilterInputModuleProcessor->isInputSetInSource($module, $source);
                 }
             );
@@ -75,7 +92,7 @@ trait FilterDataModuleProcessorTrait
         return array_values(array_filter(
             $this->getDatasetmoduletreeSectionFlattenedModules($module),
             function ($module) {
-                return $this->moduleProcessorManager->getProcessor($module) instanceof DataloadQueryArgsFilterInputModuleProcessorInterface;
+                return $this->getModuleProcessorManager()->getProcessor($module) instanceof DataloadQueryArgsFilterInputModuleProcessorInterface;
             }
         ));
     }

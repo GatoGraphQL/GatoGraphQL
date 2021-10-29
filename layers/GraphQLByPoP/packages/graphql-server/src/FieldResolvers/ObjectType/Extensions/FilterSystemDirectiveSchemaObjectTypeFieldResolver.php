@@ -18,10 +18,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTypeFieldResolver
 {
-    protected DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver;
-    protected DirectiveRegistryInterface $directiveRegistry;
+    private ?DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver = null;
+    private ?DirectiveRegistryInterface $directiveRegistry = null;
 
-    #[Required]
+    public function setDirectiveTypeEnumTypeResolver(DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver): void
+    {
+        $this->directiveTypeEnumTypeResolver = $directiveTypeEnumTypeResolver;
+    }
+    protected function getDirectiveTypeEnumTypeResolver(): DirectiveTypeEnumTypeResolver
+    {
+        return $this->directiveTypeEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveTypeEnumTypeResolver::class);
+    }
+    public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
+    {
+        $this->directiveRegistry = $directiveRegistry;
+    }
+    protected function getDirectiveRegistry(): DirectiveRegistryInterface
+    {
+        return $this->directiveRegistry ??= $this->instanceManager->getInstance(DirectiveRegistryInterface::class);
+    }
+
+    //#[Required]
     final public function autowireFilterSystemDirectiveSchemaObjectTypeFieldResolver(
         DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver,
         DirectiveRegistryInterface $directiveRegistry,
@@ -71,7 +88,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     {
         return match ($fieldName) {
             'directives' => [
-                'ofTypes' => $this->directiveTypeEnumTypeResolver,
+                'ofTypes' => $this->getDirectiveTypeEnumTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -115,7 +132,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
                 $directiveIDs = $schema->getDirectiveIDs();
                 if ($ofTypes = $fieldArgs['ofTypes'] ?? null) {
                     $ofTypeDirectiveResolvers = array_filter(
-                        $this->directiveRegistry->getDirectiveResolvers(),
+                        $this->getDirectiveRegistry()->getDirectiveResolvers(),
                         fn (DirectiveResolverInterface $directiveResolver) => in_array($directiveResolver->getDirectiveType(), $ofTypes)
                     );
                     // Calculate the directive IDs

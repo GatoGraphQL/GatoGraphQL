@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FlagCustomPostMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {
-    protected FlagCustomPostMutationResolver $flagCustomPostMutationResolver;
+    private ?FlagCustomPostMutationResolver $flagCustomPostMutationResolver = null;
 
-    #[Required]
+    public function setFlagCustomPostMutationResolver(FlagCustomPostMutationResolver $flagCustomPostMutationResolver): void
+    {
+        $this->flagCustomPostMutationResolver = $flagCustomPostMutationResolver;
+    }
+    protected function getFlagCustomPostMutationResolver(): FlagCustomPostMutationResolver
+    {
+        return $this->flagCustomPostMutationResolver ??= $this->instanceManager->getInstance(FlagCustomPostMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireFlagCustomPostMutationResolverBridge(
         FlagCustomPostMutationResolver $flagCustomPostMutationResolver,
     ): void {
@@ -22,16 +31,16 @@ class FlagCustomPostMutationResolverBridge extends AbstractFormComponentMutation
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->flagCustomPostMutationResolver;
+        return $this->getFlagCustomPostMutationResolver();
     }
 
     public function getFormData(): array
     {
         $form_data = array(
-            'name' => $this->moduleProcessorManager->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME])->getValue([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME]),
-            'email' => $this->moduleProcessorManager->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL])->getValue([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL]),
-            'whyflag' => $this->moduleProcessorManager->getProcessor([\PoP_ContentCreation_Module_Processor_TextareaFormInputs::class, \PoP_ContentCreation_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_WHYFLAG])->getValue([\PoP_ContentCreation_Module_Processor_TextareaFormInputs::class, \PoP_ContentCreation_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_WHYFLAG]),
-            'target-id' => $this->moduleProcessorManager->getProcessor([\PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, \PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST])->getValue([\PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, \PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST]),
+            'name' => $this->getModuleProcessorManager()->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME])->getValue([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME]),
+            'email' => $this->getModuleProcessorManager()->getProcessor([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL])->getValue([\PoP_Forms_Module_Processor_TextFormInputs::class, \PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL]),
+            'whyflag' => $this->getModuleProcessorManager()->getProcessor([\PoP_ContentCreation_Module_Processor_TextareaFormInputs::class, \PoP_ContentCreation_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_WHYFLAG])->getValue([\PoP_ContentCreation_Module_Processor_TextareaFormInputs::class, \PoP_ContentCreation_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_WHYFLAG]),
+            'target-id' => $this->getModuleProcessorManager()->getProcessor([\PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, \PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST])->getValue([\PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, \PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST]),
         );
 
         return $form_data;

@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class Engine extends UpstreamEngine
 {
-    protected ApplicationStateHelperServiceInterface $applicationStateHelperService;
+    private ?ApplicationStateHelperServiceInterface $applicationStateHelperService = null;
 
-    #[Required]
+    public function setApplicationStateHelperService(ApplicationStateHelperServiceInterface $applicationStateHelperService): void
+    {
+        $this->applicationStateHelperService = $applicationStateHelperService;
+    }
+    protected function getApplicationStateHelperService(): ApplicationStateHelperServiceInterface
+    {
+        return $this->applicationStateHelperService ??= $this->instanceManager->getInstance(ApplicationStateHelperServiceInterface::class);
+    }
+
+    //#[Required]
     final public function autowireSiteEngine(
         ApplicationStateHelperServiceInterface $applicationStateHelperService
     ): void {
@@ -22,7 +31,7 @@ class Engine extends UpstreamEngine
     public function outputResponse(): void
     {
         // If doing JSON, the response from the parent is already adequate
-        if ($this->applicationStateHelperService->doingJSON()) {
+        if ($this->getApplicationStateHelperService()->doingJSON()) {
             parent::outputResponse();
             return;
         }

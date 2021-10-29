@@ -80,7 +80,7 @@ class RenamePropertyDirectiveResolver extends DuplicatePropertyDirectiveResolver
                 /**
                  * The data is stored under the field's output key (not the unique one!)
                  */
-                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($field);
                 unset($dbItems[(string)$id][$fieldOutputKey]);
             }
         }

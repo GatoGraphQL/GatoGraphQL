@@ -26,13 +26,55 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     public const HOOK_EXECUTE_CREATE = __CLASS__ . ':execute-create';
     public const HOOK_EXECUTE_UPDATE = __CLASS__ . ':execute-update';
     public const HOOK_VALIDATE_CONTENT = __CLASS__ . ':validate-content';
-    protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
-    protected NameResolverInterface $nameResolver;
-    protected UserRoleTypeAPIInterface $userRoleTypeAPI;
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    protected CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI;
 
-    #[Required]
+    private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
+    private ?NameResolverInterface $nameResolver = null;
+    private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    private ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
+
+    public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
+    {
+        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+    }
+    protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
+    {
+        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+    }
+    public function setNameResolver(NameResolverInterface $nameResolver): void
+    {
+        $this->nameResolver = $nameResolver;
+    }
+    protected function getNameResolver(): NameResolverInterface
+    {
+        return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
+    }
+    public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
+    {
+        $this->userRoleTypeAPI = $userRoleTypeAPI;
+    }
+    protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
+    {
+        return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
+    }
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+    }
+    public function setCustomPostTypeMutationAPI(CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI): void
+    {
+        $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
+    }
+    protected function getCustomPostTypeMutationAPI(): CustomPostTypeMutationAPIInterface
+    {
+        return $this->customPostTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostTypeMutationAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCreateUpdateCustomPostMutationResolver(
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
         NameResolverInterface $nameResolver,
@@ -103,9 +145,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         // Validate user permission
         $vars = ApplicationState::getVars();
         $userID = $vars['global-userstate']['current-user-id'];
-        $editCustomPostsCapability = $this->nameResolver->getName(LooseContractSet::NAME_EDIT_CUSTOMPOSTS_CAPABILITY);
+        $editCustomPostsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_EDIT_CUSTOMPOSTS_CAPABILITY);
         if (
-            !$this->userRoleTypeAPI->userCan(
+            !$this->getUserRoleTypeAPI()->userCan(
                 $userID,
                 $editCustomPostsCapability
             )
@@ -116,9 +158,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
         // Check if the user can publish custom posts
         if (isset($form_data[MutationInputProperties::STATUS]) && $form_data[MutationInputProperties::STATUS] == Status::PUBLISHED) {
-            $publishCustomPostsCapability = $this->nameResolver->getName(LooseContractSet::NAME_PUBLISH_CUSTOMPOSTS_CAPABILITY);
+            $publishCustomPostsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_PUBLISH_CUSTOMPOSTS_CAPABILITY);
             if (
-                !$this->userRoleTypeAPI->userCan(
+                !$this->getUserRoleTypeAPI()->userCan(
                     $userID,
                     $publishCustomPostsCapability
                 )
@@ -139,7 +181,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         // Validate that the status is valid
         if (isset($form_data[MutationInputProperties::STATUS])) {
             $status = $form_data[MutationInputProperties::STATUS];
-            if (!in_array($status, $this->customPostStatusEnumTypeResolver->getEnumValues())) {
+            if (!in_array($status, $this->getCustomPostStatusEnumTypeResolver()->getEnumValues())) {
                 $errors[] = sprintf(
                     $this->translationAPI->__('Status \'%s\' is not supported', 'custompost-mutations'),
                     $status
@@ -182,7 +224,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
             return;
         }
 
-        $post = $this->customPostTypeAPI->getCustomPost($customPostID);
+        $post = $this->getCustomPostTypeAPI()->getCustomPost($customPostID);
         if (!$post) {
             $errors[] = sprintf(
                 $this->translationAPI->__('There is no entity with ID \'%s\'', 'custompost-mutations'),
@@ -194,7 +236,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         // Check that the user has access to the edited custom post
         $vars = ApplicationState::getVars();
         $userID = $vars['global-userstate']['current-user-id'];
-        if (!$this->customPostTypeMutationAPI->canUserEditCustomPost($userID, $customPostID)) {
+        if (!$this->getCustomPostTypeMutationAPI()->canUserEditCustomPost($userID, $customPostID)) {
             $errors[] = sprintf(
                 $this->translationAPI->__('You don\'t have permission to edit custom post with ID \'%s\'', 'custompost-mutations'),
                 $customPostID
@@ -258,7 +300,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      */
     protected function executeUpdateCustomPost(array $data): string | int | null | Error
     {
-        return $this->customPostTypeMutationAPI->updateCustomPost($data);
+        return $this->getCustomPostTypeMutationAPI()->updateCustomPost($data);
     }
 
     protected function createUpdateCustomPost(array $form_data, int | string $customPostID): void
@@ -268,7 +310,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     protected function getUpdateCustomPostDataLog(int | string $customPostID, array $form_data): array
     {
         $log = array(
-            'previous-status' => $this->customPostTypeAPI->getStatus($customPostID),
+            'previous-status' => $this->getCustomPostTypeAPI()->getStatus($customPostID),
         );
 
         return $log;
@@ -316,7 +358,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      */
     protected function executeCreateCustomPost(array $data): string | int | null | Error
     {
-        return $this->customPostTypeMutationAPI->createCustomPost($data);
+        return $this->getCustomPostTypeMutationAPI()->createCustomPost($data);
     }
 
     /**

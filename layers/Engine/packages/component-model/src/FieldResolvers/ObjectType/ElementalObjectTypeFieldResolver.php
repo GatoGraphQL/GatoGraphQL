@@ -13,9 +13,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver;
+    private ?ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver = null;
 
-    #[Required]
+    public function setElementalInterfaceTypeFieldResolver(ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver): void
+    {
+        $this->elementalInterfaceTypeFieldResolver = $elementalInterfaceTypeFieldResolver;
+    }
+    protected function getElementalInterfaceTypeFieldResolver(): ElementalInterfaceTypeFieldResolver
+    {
+        return $this->elementalInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(ElementalInterfaceTypeFieldResolver::class);
+    }
+
+    //#[Required]
     final public function autowireElementalObjectTypeFieldResolver(
         ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver,
     ): void {
@@ -32,7 +41,7 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->elementalInterfaceTypeFieldResolver,
+            $this->getElementalInterfaceTypeFieldResolver(),
         ];
     }
 

@@ -16,9 +16,18 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class CustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
-    protected CustomPostTypeDataLoader $customPostTypeDataLoader;
+    private ?CustomPostTypeDataLoader $customPostTypeDataLoader = null;
 
-    #[Required]
+    public function setCustomPostTypeDataLoader(CustomPostTypeDataLoader $customPostTypeDataLoader): void
+    {
+        $this->customPostTypeDataLoader = $customPostTypeDataLoader;
+    }
+    protected function getCustomPostTypeDataLoader(): CustomPostTypeDataLoader
+    {
+        return $this->customPostTypeDataLoader ??= $this->instanceManager->getInstance(CustomPostTypeDataLoader::class);
+    }
+
+    //#[Required]
     final public function autowireCustomPostObjectTypeResolver(
         CustomPostTypeDataLoader $customPostTypeDataLoader,
     ): void {
@@ -37,6 +46,6 @@ class CustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->customPostTypeDataLoader;
+        return $this->getCustomPostTypeDataLoader();
     }
 }

@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
 {
-    protected CacheControlBlock $cacheControlBlock;
+    private ?CacheControlBlock $cacheControlBlock = null;
 
-    #[Required]
+    public function setCacheControlBlock(CacheControlBlock $cacheControlBlock): void
+    {
+        $this->cacheControlBlock = $cacheControlBlock;
+    }
+    protected function getCacheControlBlock(): CacheControlBlock
+    {
+        return $this->cacheControlBlock ??= $this->instanceManager->getInstance(CacheControlBlock::class);
+    }
+
+    //#[Required]
     final public function autowireGraphQLCacheControlListCustomPostType(
         CacheControlBlock $cacheControlBlock,
     ): void {
@@ -77,7 +86,7 @@ class GraphQLCacheControlListCustomPostType extends AbstractCustomPostType
     protected function getGutenbergTemplate(): array
     {
         return [
-            [$this->cacheControlBlock->getBlockFullName()],
+            [$this->getCacheControlBlock()->getBlockFullName()],
         ];
     }
 }

@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\Resolvers;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -14,15 +15,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 trait FieldOrDirectiveResolverTrait
 {
     use FieldOrDirectiveSchemaDefinitionResolverTrait;
-
-    protected TranslationAPIInterface $translationAPI;
-
-    #[Required]
-    public function autowireFieldOrDirectiveResolverTrait(
-        TranslationAPIInterface $translationAPI,
-    ): void {
-        $this->translationAPI = $translationAPI;
-    }
+    use BasicServiceTrait;
 
     /**
      * @var array<array|null>

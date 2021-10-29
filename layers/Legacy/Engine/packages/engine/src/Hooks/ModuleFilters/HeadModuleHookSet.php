@@ -13,9 +13,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class HeadModuleHookSet extends AbstractHookSet
 {
-    protected HeadModule $headModule;
+    private ?HeadModule $headModule = null;
     
-    #[Required]
+    public function setHeadModule(HeadModule $headModule): void
+    {
+        $this->headModule = $headModule;
+    }
+    protected function getHeadModule(): HeadModule
+    {
+        return $this->headModule ??= $this->instanceManager->getInstance(HeadModule::class);
+    }
+
+    //#[Required]
     final public function autowireHeadModuleHookSet(
         HeadModule $headModule
     ): void {

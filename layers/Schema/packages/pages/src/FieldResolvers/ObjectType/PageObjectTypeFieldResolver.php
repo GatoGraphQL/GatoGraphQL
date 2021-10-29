@@ -24,11 +24,36 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected PageObjectTypeResolver $pageObjectTypeResolver;
-    protected PageTypeAPIInterface $pageTypeAPI;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
+    private ?PageTypeAPIInterface $pageTypeAPI = null;
 
-    #[Required]
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setPageObjectTypeResolver(PageObjectTypeResolver $pageObjectTypeResolver): void
+    {
+        $this->pageObjectTypeResolver = $pageObjectTypeResolver;
+    }
+    protected function getPageObjectTypeResolver(): PageObjectTypeResolver
+    {
+        return $this->pageObjectTypeResolver ??= $this->instanceManager->getInstance(PageObjectTypeResolver::class);
+    }
+    public function setPageTypeAPI(PageTypeAPIInterface $pageTypeAPI): void
+    {
+        $this->pageTypeAPI = $pageTypeAPI;
+    }
+    protected function getPageTypeAPI(): PageTypeAPIInterface
+    {
+        return $this->pageTypeAPI ??= $this->instanceManager->getInstance(PageTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowirePageObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         PageObjectTypeResolver $pageObjectTypeResolver,
@@ -83,10 +108,10 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'parentPage',
             'childPages',
             'childPagesForAdmin'
-                => $this->pageObjectTypeResolver,
+                => $this->getPageObjectTypeResolver(),
             'childPageCount',
             'childPageCountForAdmin'
-                => $this->intScalarTypeResolver,
+                => $this->getIntScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -201,7 +226,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         $page = $object;
         switch ($fieldName) {
             case 'parentPage':
-                return $this->pageTypeAPI->getParentPageID($page);
+                return $this->getPageTypeAPI()->getParentPageID($page);
         }
 
         $query = array_merge(
@@ -213,10 +238,10 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         switch ($fieldName) {
             case 'childPages':
             case 'childPagesForAdmin':
-                return $this->pageTypeAPI->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getPageTypeAPI()->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'childPageCount':
             case 'childPageCountForAdmin':
-                return $this->pageTypeAPI->getPageCount($query);
+                return $this->getPageTypeAPI()->getPageCount($query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

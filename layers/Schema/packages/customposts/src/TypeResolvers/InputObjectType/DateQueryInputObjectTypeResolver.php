@@ -13,9 +13,18 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class DateQueryInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
-    protected DateScalarTypeResolver $dateScalarTypeResolver;
+    private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
 
-    #[Required]
+    public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    {
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+    }
+    protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    {
+        return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireDateQueryInputObjectTypeResolver(
         DateScalarTypeResolver $dateScalarTypeResolver,
     ): void {
@@ -30,8 +39,8 @@ class DateQueryInputObjectTypeResolver extends AbstractInputObjectTypeResolver
     public function getInputObjectFieldNameTypeResolvers(): array
     {
         return [
-            'after' => $this->dateScalarTypeResolver,
-            'before' => $this->dateScalarTypeResolver,
+            'after' => $this->getDateScalarTypeResolver(),
+            'before' => $this->getDateScalarTypeResolver(),
         ];
     }
 }

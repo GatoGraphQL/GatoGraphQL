@@ -19,16 +19,81 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
-    protected MenuPageHelper $menuPageHelper;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected UserAuthorizationInterface $userAuthorization;
-    protected SettingsMenuPage $settingsMenuPage;
-    protected ModuleDocumentationMenuPage $moduleDocumentationMenuPage;
-    protected ModulesMenuPage $modulesMenuPage;
-    protected ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage;
-    protected AboutMenuPage $aboutMenuPage;
+    private ?MenuPageHelper $menuPageHelper = null;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?UserAuthorizationInterface $userAuthorization = null;
+    private ?SettingsMenuPage $settingsMenuPage = null;
+    private ?ModuleDocumentationMenuPage $moduleDocumentationMenuPage = null;
+    private ?ModulesMenuPage $modulesMenuPage = null;
+    private ?ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage = null;
+    private ?AboutMenuPage $aboutMenuPage = null;
 
-    #[Required]
+    public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
+    {
+        $this->menuPageHelper = $menuPageHelper;
+    }
+    protected function getMenuPageHelper(): MenuPageHelper
+    {
+        return $this->menuPageHelper ??= $this->instanceManager->getInstance(MenuPageHelper::class);
+    }
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    {
+        $this->userAuthorization = $userAuthorization;
+    }
+    protected function getUserAuthorization(): UserAuthorizationInterface
+    {
+        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+    }
+    public function setSettingsMenuPage(SettingsMenuPage $settingsMenuPage): void
+    {
+        $this->settingsMenuPage = $settingsMenuPage;
+    }
+    protected function getSettingsMenuPage(): SettingsMenuPage
+    {
+        return $this->settingsMenuPage ??= $this->instanceManager->getInstance(SettingsMenuPage::class);
+    }
+    public function setModuleDocumentationMenuPage(ModuleDocumentationMenuPage $moduleDocumentationMenuPage): void
+    {
+        $this->moduleDocumentationMenuPage = $moduleDocumentationMenuPage;
+    }
+    protected function getModuleDocumentationMenuPage(): ModuleDocumentationMenuPage
+    {
+        return $this->moduleDocumentationMenuPage ??= $this->instanceManager->getInstance(ModuleDocumentationMenuPage::class);
+    }
+    public function setModulesMenuPage(ModulesMenuPage $modulesMenuPage): void
+    {
+        $this->modulesMenuPage = $modulesMenuPage;
+    }
+    protected function getModulesMenuPage(): ModulesMenuPage
+    {
+        return $this->modulesMenuPage ??= $this->instanceManager->getInstance(ModulesMenuPage::class);
+    }
+    public function setReleaseNotesAboutMenuPage(ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage): void
+    {
+        $this->releaseNotesAboutMenuPage = $releaseNotesAboutMenuPage;
+    }
+    protected function getReleaseNotesAboutMenuPage(): ReleaseNotesAboutMenuPage
+    {
+        return $this->releaseNotesAboutMenuPage ??= $this->instanceManager->getInstance(ReleaseNotesAboutMenuPage::class);
+    }
+    public function setAboutMenuPage(AboutMenuPage $aboutMenuPage): void
+    {
+        $this->aboutMenuPage = $aboutMenuPage;
+    }
+    protected function getAboutMenuPage(): AboutMenuPage
+    {
+        return $this->aboutMenuPage ??= $this->instanceManager->getInstance(AboutMenuPage::class);
+    }
+
+    //#[Required]
     final public function autowireBottomMenuPageAttacher(
         MenuPageHelper $menuPageHelper,
         ModuleRegistryInterface $moduleRegistry,
@@ -83,14 +148,14 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
                 __('Settings', 'graphql-api'),
                 __('Settings', 'graphql-api'),
                 'manage_options',
-                $this->settingsMenuPage->getScreenID(),
-                [$this->settingsMenuPage, 'print']
+                $this->getSettingsMenuPage()->getScreenID(),
+                [$this->getSettingsMenuPage(), 'print']
             )
         ) {
-            $this->settingsMenuPage->setHookName($hookName);
+            $this->getSettingsMenuPage()->setHookName($hookName);
         }
 
-        if ($this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
+        if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
             global $submenu;
             $clientPath = GraphQLClientsForWPComponentConfiguration::getGraphiQLClientEndpoint();
             $submenu[$this->getMenuName()][] = [
@@ -100,7 +165,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             ];
         }
 
-        if ($this->moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT)) {
+        if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT)) {
             global $submenu;
             $clientPath = GraphQLClientsForWPComponentConfiguration::getVoyagerClientEndpoint();
             $submenu[$this->getMenuName()][] = [
@@ -115,7 +180,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
          * So it doesn't appear on the menu, but it's still available
          * to display the release notes on the modal window
          */
-        $aboutMenuPage = $this->getAboutMenuPage();
+        $aboutMenuPage = $this->getReleaseNoteOrAboutMenuPage();
         if (isset($_GET['page']) && $_GET['page'] == $aboutMenuPage->getScreenID()) {
             if (
                 $hookName = \add_submenu_page(
@@ -139,20 +204,20 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     protected function getModuleMenuPage(): MenuPageInterface
     {
         return
-            $this->menuPageHelper->isDocumentationScreen() ?
-                $this->moduleDocumentationMenuPage
-                : $this->modulesMenuPage;
+            $this->getMenuPageHelper()->isDocumentationScreen() ?
+                $this->getModuleDocumentationMenuPage()
+                : $this->getModulesMenuPage();
     }
 
     /**
      * Either the About menu page, or the Release Notes menu page,
      * based on parameter ?tab="docs" or not
      */
-    protected function getAboutMenuPage(): MenuPageInterface
+    protected function getReleaseNoteOrAboutMenuPage(): MenuPageInterface
     {
         return
-            $this->menuPageHelper->isDocumentationScreen() ?
-                $this->releaseNotesAboutMenuPage
-                : $this->aboutMenuPage;
+            $this->getMenuPageHelper()->isDocumentationScreen() ?
+                $this->getReleaseNotesAboutMenuPage()
+                : $this->getAboutMenuPage();
     }
 }

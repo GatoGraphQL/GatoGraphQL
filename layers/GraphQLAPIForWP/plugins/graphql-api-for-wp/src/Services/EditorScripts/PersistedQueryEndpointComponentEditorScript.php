@@ -16,9 +16,18 @@ class PersistedQueryEndpointComponentEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
 
-    protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType;
+    private ?GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType = null;
 
-    #[Required]
+    public function setGraphQLPersistedQueryEndpointCustomPostType(GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType): void
+    {
+        $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
+    }
+    protected function getGraphQLPersistedQueryEndpointCustomPostType(): GraphQLPersistedQueryEndpointCustomPostType
+    {
+        return $this->graphQLPersistedQueryEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
+    }
+
+    //#[Required]
     final public function autowirePersistedQueryEndpointComponentEditorScript(
         GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
     ): void {
@@ -80,7 +89,7 @@ class PersistedQueryEndpointComponentEditorScript extends AbstractEditorScript
         return array_merge(
             parent::getAllowedPostTypes(),
             [
-                $this->graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
+                $this->getGraphQLPersistedQueryEndpointCustomPostType()->getCustomPostType(),
             ]
         );
     }

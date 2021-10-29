@@ -17,9 +17,18 @@ class PersistedQueryEndpointOptionsBlock extends AbstractEndpointOptionsBlock im
 
     public const ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS = 'acceptVariablesAsURLParams';
 
-    protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
+    private ?PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory = null;
 
-    #[Required]
+    public function setPersistedQueryEndpointBlockCategory(PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory): void
+    {
+        $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
+    }
+    protected function getPersistedQueryEndpointBlockCategory(): PersistedQueryEndpointBlockCategory
+    {
+        return $this->persistedQueryEndpointBlockCategory ??= $this->instanceManager->getInstance(PersistedQueryEndpointBlockCategory::class);
+    }
+
+    //#[Required]
     final public function autowirePersistedQueryEndpointOptionsBlock(
         PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
     ): void {
@@ -55,7 +64,7 @@ class PersistedQueryEndpointOptionsBlock extends AbstractEndpointOptionsBlock im
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->persistedQueryEndpointBlockCategory;
+        return $this->getPersistedQueryEndpointBlockCategory();
     }
 
     /**

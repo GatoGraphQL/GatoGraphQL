@@ -4,19 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ErrorHandling;
 
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Translation\TranslationAPIInterface;
 use stdClass;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class ErrorProvider implements ErrorProviderInterface
 {
-    protected TranslationAPIInterface $translationAPI;
-
-    #[Required]
-    final public function autowireErrorProvider(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
+    use BasicServiceTrait;
 
     /**
      * @param array<string, mixed>|null $data

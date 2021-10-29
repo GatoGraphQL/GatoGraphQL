@@ -12,11 +12,36 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait PostMutationResolverHookSetTrait
 {
-    protected RootObjectTypeResolver $rootObjectTypeResolver;
-    protected MutationRootObjectTypeResolver $mutationRootObjectTypeResolver;
-    protected PostObjectTypeResolver $postObjectTypeResolver;
+    private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
+    private ?MutationRootObjectTypeResolver $mutationRootObjectTypeResolver = null;
+    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
 
-    #[Required]
+    public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
+    {
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+    }
+    protected function getRootObjectTypeResolver(): RootObjectTypeResolver
+    {
+        return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
+    }
+    public function setMutationRootObjectTypeResolver(MutationRootObjectTypeResolver $mutationRootObjectTypeResolver): void
+    {
+        $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
+    }
+    protected function getMutationRootObjectTypeResolver(): MutationRootObjectTypeResolver
+    {
+        return $this->mutationRootObjectTypeResolver ??= $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
+    }
+    public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
+    {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+    }
+    protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    {
+        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+    }
+
+    //#[Required]
     public function autowirePostMutationResolverHookSetTrait(
         RootObjectTypeResolver $rootObjectTypeResolver,
         MutationRootObjectTypeResolver $mutationRootObjectTypeResolver,
@@ -32,11 +57,11 @@ trait PostMutationResolverHookSetTrait
         string $fieldName,
     ): bool {
         $isRootMutationType =
-            $objectTypeResolver === $this->rootObjectTypeResolver
-            || $objectTypeResolver === $this->mutationRootObjectTypeResolver;
+            $objectTypeResolver === $this->getRootObjectTypeResolver()
+            || $objectTypeResolver === $this->getMutationRootObjectTypeResolver();
         return
             ($isRootMutationType && $fieldName === 'createPost')
             || ($isRootMutationType && $fieldName === 'updatePost')
-            || ($objectTypeResolver === $this->postObjectTypeResolver && $fieldName === 'update');
+            || ($objectTypeResolver === $this->getPostObjectTypeResolver() && $fieldName === 'update');
     }
 }

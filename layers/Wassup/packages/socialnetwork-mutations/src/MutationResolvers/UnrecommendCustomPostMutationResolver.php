@@ -22,7 +22,7 @@ class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecomme
             if (!in_array($target_id, $value)) {
                 $errors[] = sprintf(
                     $this->translationAPI->__('You had not recommended <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-                    $this->customPostTypeAPI->getTitle($target_id)
+                    $this->getCustomPostTypeAPI()->getTitle($target_id)
                 );
             }
         }

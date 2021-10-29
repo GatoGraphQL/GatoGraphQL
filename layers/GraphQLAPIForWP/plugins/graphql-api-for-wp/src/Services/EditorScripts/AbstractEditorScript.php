@@ -19,9 +19,18 @@ abstract class AbstractEditorScript extends AbstractScript
 {
     use HasDocumentationScriptTrait;
 
-    protected EditorHelpers $editorHelpers;
+    private ?EditorHelpers $editorHelpers = null;
 
-    #[Required]
+    public function setEditorHelpers(EditorHelpers $editorHelpers): void
+    {
+        $this->editorHelpers = $editorHelpers;
+    }
+    protected function getEditorHelpers(): EditorHelpers
+    {
+        return $this->editorHelpers ??= $this->instanceManager->getInstance(EditorHelpers::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractEditorScript(
         EditorHelpers $editorHelpers,
     ): void {
@@ -92,7 +101,7 @@ abstract class AbstractEditorScript extends AbstractScript
          */
         if (\is_admin()) {
             if ($postTypes = $this->getAllowedPostTypes()) {
-                if (!in_array($this->editorHelpers->getEditingPostType(), $postTypes)) {
+                if (!in_array($this->getEditorHelpers()->getEditingPostType(), $postTypes)) {
                     return;
                 }
             }

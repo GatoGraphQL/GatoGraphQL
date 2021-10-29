@@ -31,11 +31,36 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver;
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    #[Required]
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setGenericCustomPostObjectTypeResolver(GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver): void
+    {
+        $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
+    }
+    protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
+    {
+        return $this->genericCustomPostObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
+    }
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireRootGenericCustomPostObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
         GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver,
@@ -91,10 +116,10 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
             'genericCustomPostForAdmin',
             'genericCustomPostBySlugForAdmin',
             'genericCustomPostsForAdmin'
-                => $this->genericCustomPostObjectTypeResolver,
+                => $this->getGenericCustomPostObjectTypeResolver(),
             'genericCustomPostCount',
             'genericCustomPostCountForAdmin'
-                => $this->intScalarTypeResolver,
+                => $this->getIntScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -257,16 +282,16 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
             case 'genericCustomPostBySlug':
             case 'genericCustomPostForAdmin':
             case 'genericCustomPostBySlugForAdmin':
-                if ($customPosts = $this->customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($customPosts = $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $customPosts[0];
                 }
                 return null;
             case 'genericCustomPosts':
             case 'genericCustomPostsForAdmin':
-                return $this->customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'genericCustomPostCount':
             case 'genericCustomPostCountForAdmin':
-                return $this->customPostTypeAPI->getCustomPostCount($query);
+                return $this->getCustomPostTypeAPI()->getCustomPostCount($query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

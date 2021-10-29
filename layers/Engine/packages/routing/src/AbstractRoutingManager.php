@@ -5,21 +5,19 @@ declare(strict_types=1);
 namespace PoP\Routing;
 
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
+use PoP\Root\Services\WithInstanceManagerServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRoutingManager implements RoutingManagerInterface
 {
+    use WithHooksAPIServiceTrait;
+    use WithInstanceManagerServiceTrait;
+
     /**
      * @var string[]|null
      */
     private ?array $routes = null;
-    protected HooksAPIInterface $hooksAPI;
-
-    #[Required]
-    final public function autowireAbstractRoutingManager(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
 
     /**
      * @return string[]

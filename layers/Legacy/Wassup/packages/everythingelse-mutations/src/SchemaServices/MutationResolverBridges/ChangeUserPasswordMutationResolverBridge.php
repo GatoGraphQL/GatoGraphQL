@@ -12,9 +12,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver;
+    private ?ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver = null;
     
-    #[Required]
+    public function setChangeUserPasswordMutationResolver(ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver): void
+    {
+        $this->changeUserPasswordMutationResolver = $changeUserPasswordMutationResolver;
+    }
+    protected function getChangeUserPasswordMutationResolver(): ChangeUserPasswordMutationResolver
+    {
+        return $this->changeUserPasswordMutationResolver ??= $this->instanceManager->getInstance(ChangeUserPasswordMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireChangeUserPasswordMutationResolverBridge(
         ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver,
     ): void {
@@ -23,7 +32,7 @@ class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutation
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->changeUserPasswordMutationResolver;
+        return $this->getChangeUserPasswordMutationResolver();
     }
 
     public function getFormData(): array
@@ -32,9 +41,9 @@ class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutation
         $user_id = $vars['global-userstate']['current-user-id'];
         $form_data = array(
             'user_id' => $user_id,
-            'current_password' => $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, \PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_CURRENTPASSWORD])->getValue([\PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, \PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_CURRENTPASSWORD]),
-            'password' => $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, \PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_NEWPASSWORD])->getValue([\PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, \PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_NEWPASSWORD]),
-            'repeat_password' => $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, \PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_NEWPASSWORDREPEAT])->getValue([\PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, \PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_NEWPASSWORDREPEAT])
+            'current_password' => $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, \PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_CURRENTPASSWORD])->getValue([\PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, \PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_CURRENTPASSWORD]),
+            'password' => $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, \PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_NEWPASSWORD])->getValue([\PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, \PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_NEWPASSWORD]),
+            'repeat_password' => $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, \PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_NEWPASSWORDREPEAT])->getValue([\PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, \PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_NEWPASSWORDREPEAT])
         );
 
         return $form_data;

@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait CreateUpdateProfileMutationResolverBridgeTrait
 {
-    protected ModuleProcessorManagerInterface $moduleProcessorManager;
+    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
-    #[Required]
+    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    {
+        $this->moduleProcessorManager = $moduleProcessorManager;
+    }
+    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    {
+        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
+    }
+
+    //#[Required]
     public function autowireCreateUpdateProfileMutationResolverBridgeTrait(
         ModuleProcessorManagerInterface $moduleProcessorManager,
     ): void {
@@ -31,7 +40,7 @@ trait CreateUpdateProfileMutationResolverBridgeTrait
     {
         $inputs = MutationResolverUtils::getMyCommunityFormInputs();
         /** @var FormComponentModuleProcessorInterface */
-        $moduleProcessor = $this->moduleProcessorManager->getProcessor($inputs['communities']);
+        $moduleProcessor = $this->getModuleProcessorManager()->getProcessor($inputs['communities']);
         $communities = $moduleProcessor->getValue($inputs['communities']);
         return array(
             'communities' => $communities ?? array(),

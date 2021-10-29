@@ -6,14 +6,34 @@ namespace PoP\ComponentModel\DataStructure;
 
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractDataStructureFormatter implements DataStructureFormatterInterface
 {
-    protected FeedbackMessageStoreInterface $feedbackMessageStore;
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    use BasicServiceTrait;
 
-    #[Required]
+    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+
+    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+    }
+    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    {
+        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
+    }
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractDataStructureFormatter(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
         $this->feedbackMessageStore = $feedbackMessageStore;

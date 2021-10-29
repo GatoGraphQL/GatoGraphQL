@@ -17,9 +17,18 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigCustomPostLi
 
     public const ATTRIBUTE_NAME_CACHE_CONTROL_LISTS = 'cacheControlLists';
 
-    protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType;
+    private ?GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType = null;
 
-    #[Required]
+    public function setGraphQLCacheControlListCustomPostType(GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType): void
+    {
+        $this->graphQLCacheControlListCustomPostType = $graphQLCacheControlListCustomPostType;
+    }
+    protected function getGraphQLCacheControlListCustomPostType(): GraphQLCacheControlListCustomPostType
+    {
+        return $this->graphQLCacheControlListCustomPostType ??= $this->instanceManager->getInstance(GraphQLCacheControlListCustomPostType::class);
+    }
+
+    //#[Required]
     final public function autowireSchemaConfigCacheControlListBlock(
         GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
     ): void {
@@ -48,7 +57,7 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigCustomPostLi
 
     protected function getCustomPostType(): string
     {
-        return $this->graphQLCacheControlListCustomPostType->getCustomPostType();
+        return $this->getGraphQLCacheControlListCustomPostType()->getCustomPostType();
     }
 
     protected function getHeader(): string

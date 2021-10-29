@@ -24,11 +24,36 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected UserTypeAPIInterface $userTypeAPI;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected UserObjectTypeResolver $userObjectTypeResolver;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?UserObjectTypeResolver $userObjectTypeResolver = null;
 
-    #[Required]
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
+        $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
+    {
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractUserObjectTypeFieldResolver(
         UserTypeAPIInterface $userTypeAPI,
         IntScalarTypeResolver $intScalarTypeResolver,
@@ -62,10 +87,10 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         return match ($fieldName) {
             'users',
             'usersForAdmin'
-                => $this->userObjectTypeResolver,
+                => $this->getUserObjectTypeResolver(),
             'userCount',
             'userCountForAdmin'
-                => $this->intScalarTypeResolver,
+                => $this->getIntScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -179,11 +204,11 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         switch ($fieldName) {
             case 'users':
             case 'usersForAdmin':
-                return $this->userTypeAPI->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getUserTypeAPI()->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'userCount':
             case 'userCountForAdmin':
-                return $this->userTypeAPI->getUserCount($query);
+                return $this->getUserTypeAPI()->getUserCount($query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

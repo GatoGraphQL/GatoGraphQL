@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected LogoutMutationResolver $logoutMutationResolver;
+    private ?LogoutMutationResolver $logoutMutationResolver = null;
 
-    #[Required]
+    public function setLogoutMutationResolver(LogoutMutationResolver $logoutMutationResolver): void
+    {
+        $this->logoutMutationResolver = $logoutMutationResolver;
+    }
+    protected function getLogoutMutationResolver(): LogoutMutationResolver
+    {
+        return $this->logoutMutationResolver ??= $this->instanceManager->getInstance(LogoutMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireLogoutMutationResolverBridge(
         LogoutMutationResolver $logoutMutationResolver,
     ): void {
@@ -22,7 +31,7 @@ class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBrid
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->logoutMutationResolver;
+        return $this->getLogoutMutationResolver();
     }
 
     public function getFormData(): array

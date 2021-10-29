@@ -9,6 +9,7 @@ use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
@@ -17,17 +18,42 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class DataloadHelperService implements DataloadHelperServiceInterface
 {
-    protected FeedbackMessageStoreInterface $feedbackMessageStore;
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
-    protected TranslationAPIInterface $translationAPI;
-    protected ModuleProcessorManagerInterface $moduleProcessorManager;
+    use BasicServiceTrait;
 
-    #[Required]
-    final public function autowireDataloadHelperService(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, TranslationAPIInterface $translationAPI, ModuleProcessorManagerInterface $moduleProcessorManager): void
+    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+
+    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+    }
+    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    {
+        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
+    }
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
+        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
+    }
+    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    {
+        $this->moduleProcessorManager = $moduleProcessorManager;
+    }
+    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    {
+        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
+    }
+
+    //#[Required]
+    final public function autowireDataloadHelperService(FeedbackMessageStoreInterface $feedbackMessageStore, FieldQueryInterpreterInterface $fieldQueryInterpreter, ModuleProcessorManagerInterface $moduleProcessorManager): void
     {
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-        $this->translationAPI = $translationAPI;
         $this->moduleProcessorManager = $moduleProcessorManager;
     }
 
@@ -61,8 +87,8 @@ class DataloadHelperService implements DataloadHelperServiceInterface
             // 2. No FieldDefaultTypeDataLoader
             if ($objectTypeResolver->hasObjectTypeFieldResolversForField($subcomponent_data_field)) {
                 // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-                $subcomponent_data_field_outputkey = $this->fieldQueryInterpreter->getFieldOutputKey($subcomponent_data_field);
-                $this->feedbackMessageStore->addSchemaError(
+                $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($subcomponent_data_field);
+                $this->getFeedbackMessageStore()->addSchemaError(
                     $objectTypeResolver->getTypeOutputDBKey(),
                     $subcomponent_data_field_outputkey,
                     sprintf(
@@ -86,7 +112,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
             $module = $moduleValue['module'];
             $value = $moduleValue['value'];
             /** @var FormComponentModuleProcessorInterface */
-            $moduleprocessor = $this->moduleProcessorManager->getProcessor($module);
+            $moduleprocessor = $this->getModuleProcessorManager()->getProcessor($module);
             $args[$moduleprocessor->getName($module)] = $value;
         }
         return GeneralUtils::addQueryArgs($args, $url);

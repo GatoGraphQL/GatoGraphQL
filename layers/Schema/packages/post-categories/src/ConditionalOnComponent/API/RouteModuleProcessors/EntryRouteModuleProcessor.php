@@ -17,9 +17,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
-    protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
+    private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
-    #[Required]
+    public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
+    {
+        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
+    }
+    protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
+    {
+        return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireEntryRouteModuleProcessor(
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ): void {
@@ -37,7 +46,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'routing-state' => [
-                    'taxonomy-name' => $this->postCategoryTypeAPI->getPostCategoryTaxonomyName(),
+                    'taxonomy-name' => $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName(),
                 ],
             ],
         ];
@@ -70,7 +79,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
                 'conditions' => [
                     'scheme' => APISchemes::API,
                     'routing-state' => [
-                        'taxonomy-name' => $this->postCategoryTypeAPI->getPostCategoryTaxonomyName(),
+                        'taxonomy-name' => $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName(),
                     ],
                 ],
             ];

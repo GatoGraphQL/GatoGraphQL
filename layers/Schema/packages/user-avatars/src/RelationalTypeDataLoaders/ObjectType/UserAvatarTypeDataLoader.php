@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserAvatarTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    protected UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry;
+    private ?UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry = null;
 
-    #[Required]
+    public function setUserAvatarRuntimeRegistry(UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry): void
+    {
+        $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;
+    }
+    protected function getUserAvatarRuntimeRegistry(): UserAvatarRuntimeRegistryInterface
+    {
+        return $this->userAvatarRuntimeRegistry ??= $this->instanceManager->getInstance(UserAvatarRuntimeRegistryInterface::class);
+    }
+
+    //#[Required]
     final public function autowireUserAvatarTypeDataLoader(
         UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry,
     ): void {
@@ -22,7 +31,7 @@ class UserAvatarTypeDataLoader extends AbstractObjectTypeDataLoader
     public function getObjects(array $ids): array
     {
         return array_map(
-            fn (string | int $id) => $this->userAvatarRuntimeRegistry->getUserAvatar($id),
+            fn (string | int $id) => $this->getUserAvatarRuntimeRegistry()->getUserAvatar($id),
             $ids
         );
     }

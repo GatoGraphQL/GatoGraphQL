@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait ValidateUserLoggedInForDirectivesRelationalTypeResolverDecoratorTrait
 {
-    protected ValidateIsUserLoggedInForDirectivesDirectiveResolver $validateIsUserLoggedInForDirectivesDirectiveResolver;
+    private ?ValidateIsUserLoggedInForDirectivesDirectiveResolver $validateIsUserLoggedInForDirectivesDirectiveResolver = null;
 
-    #[Required]
+    public function setValidateIsUserLoggedInForDirectivesDirectiveResolver(ValidateIsUserLoggedInForDirectivesDirectiveResolver $validateIsUserLoggedInForDirectivesDirectiveResolver): void
+    {
+        $this->validateIsUserLoggedInForDirectivesDirectiveResolver = $validateIsUserLoggedInForDirectivesDirectiveResolver;
+    }
+    protected function getValidateIsUserLoggedInForDirectivesDirectiveResolver(): ValidateIsUserLoggedInForDirectivesDirectiveResolver
+    {
+        return $this->validateIsUserLoggedInForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserLoggedInForDirectivesDirectiveResolver::class);
+    }
+
+    //#[Required]
     public function autowireValidateUserLoggedInForDirectivesRelationalTypeResolverDecoratorTrait(
         ValidateIsUserLoggedInForDirectivesDirectiveResolver $validateIsUserLoggedInForDirectivesDirectiveResolver,
     ): void {
@@ -26,6 +35,6 @@ trait ValidateUserLoggedInForDirectivesRelationalTypeResolverDecoratorTrait
     }
     protected function getValidateUserStateDirectiveResolver(): DirectiveResolverInterface
     {
-        return $this->validateIsUserLoggedInForDirectivesDirectiveResolver;
+        return $this->getValidateIsUserLoggedInForDirectivesDirectiveResolver();
     }
 }

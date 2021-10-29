@@ -15,9 +15,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {
-    protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
+    private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
 
-    #[Required]
+    public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
+    {
+        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
+    }
+    protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
+    {
+        return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+    }
+
+    //#[Required]
     final public function autowireVarsHookSet(
         GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
     ): void {
@@ -70,7 +79,7 @@ class VarsHookSet extends AbstractHookSet
     public function addVars(array $vars_in_array): void
     {
         [&$vars] = $vars_in_array;
-        if ($vars['scheme'] == APISchemes::API && $vars['datastructure'] == $this->graphQLDataStructureFormatter->getName()) {
+        if ($vars['scheme'] == APISchemes::API && $vars['datastructure'] == $this->getGraphQLDataStructureFormatter()->getName()) {
             $vars['edit-schema'] = Request::editSchema();
         }
     }

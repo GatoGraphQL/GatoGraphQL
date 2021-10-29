@@ -28,16 +28,33 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     use UserStateObjectTypeFieldResolverTrait;
     use WithLimitFieldArgResolverTrait;
 
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected CustomPostTypeAPIInterface $postTypeAPI;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    #[Required]
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireRootQueryableObjectTypeFieldResolver(
         IntScalarTypeResolver $intScalarTypeResolver,
-        CustomPostTypeAPIInterface $postTypeAPI,
+        CustomPostTypeAPIInterface $customPostTypeAPI,
     ): void {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
-        $this->postTypeAPI = $postTypeAPI;
+        $this->customPostTypeAPI = $customPostTypeAPI;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -61,7 +78,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         return match ($fieldName) {
             'myCustomPosts' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
             'myCustomPost' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
-            'myCustomPostCount' => $this->intScalarTypeResolver,
+            'myCustomPostCount' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -191,13 +208,13 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         );
         switch ($fieldName) {
             case 'myCustomPostCount':
-                return $this->postTypeAPI->getCustomPostCount($query);
+                return $this->getCustomPostTypeAPI()->getCustomPostCount($query);
 
             case 'myCustomPosts':
-                return $this->postTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'myCustomPost':
-                if ($customPosts = $this->postTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($customPosts = $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $customPosts[0];
                 }
                 return null;

@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
-    protected SchemaTypeDataLoader $schemaTypeDataLoader;
+    private ?SchemaTypeDataLoader $schemaTypeDataLoader = null;
 
-    #[Required]
+    public function setSchemaTypeDataLoader(SchemaTypeDataLoader $schemaTypeDataLoader): void
+    {
+        $this->schemaTypeDataLoader = $schemaTypeDataLoader;
+    }
+    protected function getSchemaTypeDataLoader(): SchemaTypeDataLoader
+    {
+        return $this->schemaTypeDataLoader ??= $this->instanceManager->getInstance(SchemaTypeDataLoader::class);
+    }
+
+    //#[Required]
     final public function autowireSchemaObjectTypeResolver(SchemaTypeDataLoader $schemaTypeDataLoader): void
     {
         $this->schemaTypeDataLoader = $schemaTypeDataLoader;
@@ -38,6 +47,6 @@ class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->schemaTypeDataLoader;
+        return $this->getSchemaTypeDataLoader();
     }
 }

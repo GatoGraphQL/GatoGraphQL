@@ -15,9 +15,18 @@ class CustomEndpointOptionsBlock extends AbstractEndpointOptionsBlock implements
 {
     use MainPluginBlockTrait;
 
-    protected CustomEndpointBlockCategory $customEndpointBlockCategory;
+    private ?CustomEndpointBlockCategory $customEndpointBlockCategory = null;
 
-    #[Required]
+    public function setCustomEndpointBlockCategory(CustomEndpointBlockCategory $customEndpointBlockCategory): void
+    {
+        $this->customEndpointBlockCategory = $customEndpointBlockCategory;
+    }
+    protected function getCustomEndpointBlockCategory(): CustomEndpointBlockCategory
+    {
+        return $this->customEndpointBlockCategory ??= $this->instanceManager->getInstance(CustomEndpointBlockCategory::class);
+    }
+
+    //#[Required]
     final public function autowireCustomEndpointOptionsBlock(
         CustomEndpointBlockCategory $customEndpointBlockCategory,
     ): void {
@@ -36,6 +45,6 @@ class CustomEndpointOptionsBlock extends AbstractEndpointOptionsBlock implements
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->customEndpointBlockCategory;
+        return $this->getCustomEndpointBlockCategory();
     }
 }

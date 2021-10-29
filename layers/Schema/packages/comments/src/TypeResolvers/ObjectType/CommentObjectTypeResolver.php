@@ -12,10 +12,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CommentObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected CommentTypeAPIInterface $commentTypeAPI;
-    protected CommentTypeDataLoader $commentTypeDataLoader;
+    private ?CommentTypeAPIInterface $commentTypeAPI = null;
+    private ?CommentTypeDataLoader $commentTypeDataLoader = null;
 
-    #[Required]
+    public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
+    {
+        $this->commentTypeAPI = $commentTypeAPI;
+    }
+    protected function getCommentTypeAPI(): CommentTypeAPIInterface
+    {
+        return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+    }
+    public function setCommentTypeDataLoader(CommentTypeDataLoader $commentTypeDataLoader): void
+    {
+        $this->commentTypeDataLoader = $commentTypeDataLoader;
+    }
+    protected function getCommentTypeDataLoader(): CommentTypeDataLoader
+    {
+        return $this->commentTypeDataLoader ??= $this->instanceManager->getInstance(CommentTypeDataLoader::class);
+    }
+
+    //#[Required]
     final public function autowireCommentObjectTypeResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         CommentTypeDataLoader $commentTypeDataLoader,
@@ -37,11 +54,11 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
     public function getID(object $object): string | int | null
     {
         $comment = $object;
-        return $this->commentTypeAPI->getCommentId($comment);
+        return $this->getCommentTypeAPI()->getCommentId($comment);
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->commentTypeDataLoader;
+        return $this->getCommentTypeDataLoader();
     }
 }

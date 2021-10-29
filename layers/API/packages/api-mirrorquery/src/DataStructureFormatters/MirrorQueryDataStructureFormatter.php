@@ -151,8 +151,8 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         $dbObject = $databases[$dbKey][$objectID] ?? [];
         foreach ($propertyFields as $propertyField) {
             // Only if the property has been set (in case of dbError it is not set)
-            $propertyFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($propertyField);
-            $uniquePropertyFieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKeyByTypeOutputDBKey($dbKey, $propertyField);
+            $propertyFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($propertyField);
+            $uniquePropertyFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputDBKey($dbKey, $propertyField);
             if (array_key_exists($uniquePropertyFieldOutputKey, $dbObject)) {
                 $dbObjectRet[$propertyFieldOutputKey] = $dbObject[$uniquePropertyFieldOutputKey];
             }
@@ -160,8 +160,8 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
 
         // Add the nested levels
         foreach ($nestedFields as $nestedField => $nestedPropertyFields) {
-            $nestedFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($nestedField);
-            $uniqueNestedFieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKeyByTypeOutputDBKey($dbKey, $nestedField);
+            $nestedFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($nestedField);
+            $uniqueNestedFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputDBKey($dbKey, $nestedField);
             // If the key doesn't exist, then do nothing. This supports the "skip output if null" behaviour: if it is to be skipped, there will be no value (which is different than a null)
             if (array_key_exists($uniqueNestedFieldOutputKey, $dbObject)) {
                 // If it's null, directly assign the null to the result
@@ -171,7 +171,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                     // Watch out! If the property has already been loaded from a previous iteration, in some cases it can create trouble!
                     // But make sure that there truly are subproperties! It could also be a schemaError.
                     // Eg: ?query=posts.title.id, then no need to transform "title" from string to {"id" => ...}
-                    if ($this->feedbackMessageStore->getSchemaErrorsForField($dbKey, $nestedField)) {
+                    if ($this->getFeedbackMessageStore()->getSchemaErrorsForField($dbKey, $nestedField)) {
                         $dbObjectRet[$nestedFieldOutputKey] = $dbObject[$uniqueNestedFieldOutputKey];
                     } else {
                         // The first field, "id", needs not be concatenated. All the others do need

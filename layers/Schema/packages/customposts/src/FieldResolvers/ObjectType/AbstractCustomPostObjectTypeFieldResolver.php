@@ -15,12 +15,45 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    protected DateFormatterInterface $dateFormatter;
-    protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
-    protected IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    private ?DateFormatterInterface $dateFormatter = null;
+    private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
+    private ?IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver = null;
 
-    #[Required]
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+    }
+    public function setDateFormatter(DateFormatterInterface $dateFormatter): void
+    {
+        $this->dateFormatter = $dateFormatter;
+    }
+    protected function getDateFormatter(): DateFormatterInterface
+    {
+        return $this->dateFormatter ??= $this->instanceManager->getInstance(DateFormatterInterface::class);
+    }
+    public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
+    {
+        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
+    }
+    protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
+    {
+        return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
+    }
+    public function setIsCustomPostInterfaceTypeFieldResolver(IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver): void
+    {
+        $this->isCustomPostInterfaceTypeFieldResolver = $isCustomPostInterfaceTypeFieldResolver;
+    }
+    protected function getIsCustomPostInterfaceTypeFieldResolver(): IsCustomPostInterfaceTypeFieldResolver
+    {
+        return $this->isCustomPostInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(IsCustomPostInterfaceTypeFieldResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCustomPostObjectTypeFieldResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,
         DateFormatterInterface $dateFormatter,
@@ -41,17 +74,9 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->queryableInterfaceTypeFieldResolver,
-            $this->isCustomPostInterfaceTypeFieldResolver,
+            $this->getQueryableInterfaceTypeFieldResolver(),
+            $this->getIsCustomPostInterfaceTypeFieldResolver(),
         ];
-    }
-
-    /**
-     * Allow to override the implementation service
-     */
-    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
-    {
-        return $this->customPostTypeAPI;
     }
 
     /**
@@ -102,13 +127,13 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 return $fieldArgs['status'] == $customPostTypeAPI->getStatus($customPost);
 
             case 'date':
-                return $this->dateFormatter->format(
+                return $this->getDateFormatter()->format(
                     $fieldArgs['format'],
                     $customPostTypeAPI->getPublishedDate($customPost, $fieldArgs['gmt'])
                 );
 
             case 'modified':
-                return $this->dateFormatter->format(
+                return $this->getDateFormatter()->format(
                     $fieldArgs['format'],
                     $customPostTypeAPI->getModifiedDate($customPost, $fieldArgs['gmt'])
                 );

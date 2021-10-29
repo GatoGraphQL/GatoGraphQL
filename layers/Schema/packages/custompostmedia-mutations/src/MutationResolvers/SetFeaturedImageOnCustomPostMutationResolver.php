@@ -13,9 +13,18 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
+    private ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
 
-    #[Required]
+    public function setCustomPostMediaTypeMutationAPI(CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI): void
+    {
+        $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
+    }
+    protected function getCustomPostMediaTypeMutationAPI(): CustomPostMediaTypeMutationAPIInterface
+    {
+        return $this->customPostMediaTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireSetFeaturedImageOnCustomPostMutationResolver(
         CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
     ): void {
@@ -26,7 +35,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
     {
         $customPostID = $form_data[MutationInputProperties::CUSTOMPOST_ID];
         $mediaItemID = $form_data[MutationInputProperties::MEDIA_ITEM_ID];
-        $this->customPostMediaTypeMutationAPI->setFeaturedImage($customPostID, $mediaItemID);
+        $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $mediaItemID);
         return $customPostID;
     }
 

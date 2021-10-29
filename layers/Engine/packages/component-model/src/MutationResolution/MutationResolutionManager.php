@@ -6,18 +6,22 @@ namespace PoP\ComponentModel\MutationResolution;
 
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class MutationResolutionManager implements MutationResolutionManagerInterface
 {
+    use WithHooksAPIServiceTrait;
+
     /**
      * @var array<string, mixed>
      */
     private array $results = [];
 
-    public function __construct(
-        HooksAPIInterface $hooksAPI
-    ) {
-        $hooksAPI->addAction(
+    #[Required]
+    final public function autowireInitializeMutationResolutionManager(): void
+    {
+        $this->hooksAPI->addAction(
             'augmentVarsProperties',
             [$this, 'clearResults']
         );

@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class TemplateHookSet extends AbstractHookSet
 {
-    protected ApplicationStateHelperServiceInterface $applicationStateHelperService;
+    private ?ApplicationStateHelperServiceInterface $applicationStateHelperService = null;
 
-    #[Required]
+    public function setApplicationStateHelperService(ApplicationStateHelperServiceInterface $applicationStateHelperService): void
+    {
+        $this->applicationStateHelperService = $applicationStateHelperService;
+    }
+    protected function getApplicationStateHelperService(): ApplicationStateHelperServiceInterface
+    {
+        return $this->applicationStateHelperService ??= $this->instanceManager->getInstance(ApplicationStateHelperServiceInterface::class);
+    }
+
+    //#[Required]
     final public function autowireTemplateHookSet(
         ApplicationStateHelperServiceInterface $applicationStateHelperService,
     ): void {
@@ -32,7 +41,7 @@ class TemplateHookSet extends AbstractHookSet
     public function setTemplate(string $template): string
     {
         // If doing JSON, for sure return json.php which only prints the encoded JSON
-        if ($this->applicationStateHelperService->doingJSON()) {
+        if ($this->getApplicationStateHelperService()->doingJSON()) {
             return TemplateHelpers::getTemplateFile();
         }
         return $template;

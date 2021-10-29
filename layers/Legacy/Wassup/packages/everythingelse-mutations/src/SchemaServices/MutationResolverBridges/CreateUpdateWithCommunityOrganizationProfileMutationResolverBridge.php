@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends CreateUpdateOrganizationProfileMutationResolverBridge
 {
-    protected CreateUpdateWithCommunityOrganizationProfileMutationResolver $createUpdateWithCommunityOrganizationProfileMutationResolver;
+    private ?CreateUpdateWithCommunityOrganizationProfileMutationResolver $createUpdateWithCommunityOrganizationProfileMutationResolver = null;
     
-    #[Required]
+    public function setCreateUpdateWithCommunityOrganizationProfileMutationResolver(CreateUpdateWithCommunityOrganizationProfileMutationResolver $createUpdateWithCommunityOrganizationProfileMutationResolver): void
+    {
+        $this->createUpdateWithCommunityOrganizationProfileMutationResolver = $createUpdateWithCommunityOrganizationProfileMutationResolver;
+    }
+    protected function getCreateUpdateWithCommunityOrganizationProfileMutationResolver(): CreateUpdateWithCommunityOrganizationProfileMutationResolver
+    {
+        return $this->createUpdateWithCommunityOrganizationProfileMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateWithCommunityOrganizationProfileMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCreateUpdateWithCommunityOrganizationProfileMutationResolverBridge(
         CreateUpdateWithCommunityOrganizationProfileMutationResolver $createUpdateWithCommunityOrganizationProfileMutationResolver,
     ): void {
@@ -22,7 +31,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->createUpdateWithCommunityOrganizationProfileMutationResolver;
+        return $this->getCreateUpdateWithCommunityOrganizationProfileMutationResolver();
     }
 
     private function getFormInputs()
@@ -62,7 +71,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
             parent::getFormData(),
             $this->getCommonuserrolesFormData(),
             array(
-                'is_community' => (bool)$this->moduleProcessorManager->getProcessor($inputs['is_community'])->getValue($inputs['is_community']),
+                'is_community' => (bool)$this->getModuleProcessorManager()->getProcessor($inputs['is_community'])->getValue($inputs['is_community']),
             )
         );
     }

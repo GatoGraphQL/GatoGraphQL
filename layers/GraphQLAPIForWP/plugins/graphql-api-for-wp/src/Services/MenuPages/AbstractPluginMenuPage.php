@@ -13,9 +13,18 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 abstract class AbstractPluginMenuPage extends AbstractMenuPage
 {
-    protected PluginMenu $pluginMenu;
+    private ?PluginMenu $pluginMenu = null;
 
-    #[Required]
+    public function setPluginMenu(PluginMenu $pluginMenu): void
+    {
+        $this->pluginMenu = $pluginMenu;
+    }
+    protected function getPluginMenu(): PluginMenu
+    {
+        return $this->pluginMenu ??= $this->instanceManager->getInstance(PluginMenu::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractPluginMenuPageAttacher(
         PluginMenu $pluginMenu,
     ): void {
@@ -24,6 +33,6 @@ abstract class AbstractPluginMenuPage extends AbstractMenuPage
 
     public function getMenu(): MenuInterface
     {
-        return $this->pluginMenu;
+        return $this->getPluginMenu();
     }
 }

@@ -16,11 +16,36 @@ use WP_Query;
 
 trait EndpointResolverTrait
 {
-    protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
-    protected QueryRetrieverInterface $queryRetriever;
-    protected GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet;
+    private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
+    private ?QueryRetrieverInterface $queryRetriever = null;
+    private ?GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet = null;
 
-    #[Required]
+    public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
+    {
+        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
+    }
+    protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
+    {
+        return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+    }
+    public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
+    {
+        $this->queryRetriever = $queryRetriever;
+    }
+    protected function getQueryRetriever(): QueryRetrieverInterface
+    {
+        return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
+    }
+    public function setGraphQLRequestVarsHookSet(GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet): void
+    {
+        $this->graphQLRequestVarsHookSet = $graphQLRequestVarsHookSet;
+    }
+    protected function getGraphQLRequestVarsHookSet(): GraphQLRequestVarsHookSet
+    {
+        return $this->graphQLRequestVarsHookSet ??= $this->instanceManager->getInstance(GraphQLRequestVarsHookSet::class);
+    }
+
+    //#[Required]
     public function autowireEndpointResolverTrait(
         GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
         QueryRetrieverInterface $queryRetriever,
@@ -112,7 +137,7 @@ trait EndpointResolverTrait
         // \GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet will process the GraphQL request
         [&$vars] = $vars_in_array;
         $vars['scheme'] = APISchemes::API;
-        $vars['datastructure'] = $this->graphQLDataStructureFormatter->getName();
+        $vars['datastructure'] = $this->getGraphQLDataStructureFormatter()->getName();
 
         /**
          * Enable the AdminEndpointResolver to not load the query,
@@ -156,8 +181,8 @@ trait EndpointResolverTrait
             $unneededGraphQLQuery,
             $unneededVariables,
             $operationName
-        ) = $this->queryRetriever->extractRequestedGraphQLQueryPayload();
+        ) = $this->getQueryRetriever()->extractRequestedGraphQLQueryPayload();
         // Add the query into $vars
-        $this->graphQLRequestVarsHookSet->addGraphQLQueryToVars($vars, $graphQLQuery, $operationName);
+        $this->getGraphQLRequestVarsHookSet()->addGraphQLQueryToVars($vars, $graphQLQuery, $operationName);
     }
 }

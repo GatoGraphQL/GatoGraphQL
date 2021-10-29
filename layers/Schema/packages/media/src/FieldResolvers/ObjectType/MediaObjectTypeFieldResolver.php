@@ -20,14 +20,63 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected MediaTypeAPIInterface $mediaTypeAPI;
-    protected DateFormatterInterface $dateFormatter;
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected DateScalarTypeResolver $dateScalarTypeResolver;
+    private ?MediaTypeAPIInterface $mediaTypeAPI = null;
+    private ?DateFormatterInterface $dateFormatter = null;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
 
-    #[Required]
+    public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
+    {
+        $this->mediaTypeAPI = $mediaTypeAPI;
+    }
+    protected function getMediaTypeAPI(): MediaTypeAPIInterface
+    {
+        return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
+    }
+    public function setDateFormatter(DateFormatterInterface $dateFormatter): void
+    {
+        $this->dateFormatter = $dateFormatter;
+    }
+    protected function getDateFormatter(): DateFormatterInterface
+    {
+        return $this->dateFormatter ??= $this->instanceManager->getInstance(DateFormatterInterface::class);
+    }
+    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    {
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+    }
+    protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    {
+        return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireMediaObjectTypeFieldResolver(
         MediaTypeAPIInterface $mediaTypeAPI,
         DateFormatterInterface $dateFormatter,
@@ -72,18 +121,18 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'src' => $this->urlScalarTypeResolver,
-            'srcSet' => $this->stringScalarTypeResolver,
-            'width' => $this->intScalarTypeResolver,
-            'height' => $this->intScalarTypeResolver,
-            'sizes' => $this->stringScalarTypeResolver,
-            'title' => $this->stringScalarTypeResolver,
-            'caption' => $this->stringScalarTypeResolver,
-            'altText' => $this->stringScalarTypeResolver,
-            'description' => $this->stringScalarTypeResolver,
-            'date' => $this->dateScalarTypeResolver,
-            'modified' => $this->dateScalarTypeResolver,
-            'mimeType' => $this->stringScalarTypeResolver,
+            'src' => $this->getUrlScalarTypeResolver(),
+            'srcSet' => $this->getStringScalarTypeResolver(),
+            'width' => $this->getIntScalarTypeResolver(),
+            'height' => $this->getIntScalarTypeResolver(),
+            'sizes' => $this->getStringScalarTypeResolver(),
+            'title' => $this->getStringScalarTypeResolver(),
+            'caption' => $this->getStringScalarTypeResolver(),
+            'altText' => $this->getStringScalarTypeResolver(),
+            'description' => $this->getStringScalarTypeResolver(),
+            'date' => $this->getDateScalarTypeResolver(),
+            'modified' => $this->getDateScalarTypeResolver(),
+            'mimeType' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -128,7 +177,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             'height',
             'sizes'
                 => [
-                    'size' => $this->stringScalarTypeResolver,
+                    'size' => $this->getStringScalarTypeResolver(),
                 ],
             default
                 => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
@@ -173,39 +222,39 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             case 'src':
                 // The media item may be an image, or a video or audio.
                 // If image, $imgSrc will have a value. Otherwise, get the URL
-                $imgSrc = $this->mediaTypeAPI->getImageSrc($objectTypeResolver->getID($media), $size);
+                $imgSrc = $this->getMediaTypeAPI()->getImageSrc($objectTypeResolver->getID($media), $size);
                 if ($imgSrc !== null) {
                     return $imgSrc;
                 }
-                return $this->mediaTypeAPI->getMediaItemSrc($objectTypeResolver->getID($media));
+                return $this->getMediaTypeAPI()->getMediaItemSrc($objectTypeResolver->getID($media));
             case 'width':
             case 'height':
-                $properties = $this->mediaTypeAPI->getImageProperties($objectTypeResolver->getID($media), $size);
+                $properties = $this->getMediaTypeAPI()->getImageProperties($objectTypeResolver->getID($media), $size);
                 return $properties[$fieldName];
             case 'srcSet':
-                return $this->mediaTypeAPI->getImageSrcSet($objectTypeResolver->getID($media), $size);
+                return $this->getMediaTypeAPI()->getImageSrcSet($objectTypeResolver->getID($media), $size);
             case 'sizes':
-                return $this->mediaTypeAPI->getImageSizes($objectTypeResolver->getID($media), $size);
+                return $this->getMediaTypeAPI()->getImageSizes($objectTypeResolver->getID($media), $size);
             case 'title':
-                return $this->mediaTypeAPI->getTitle($media);
+                return $this->getMediaTypeAPI()->getTitle($media);
             case 'caption':
-                return $this->mediaTypeAPI->getCaption($media);
+                return $this->getMediaTypeAPI()->getCaption($media);
             case 'altText':
-                return $this->mediaTypeAPI->getAltText($media);
+                return $this->getMediaTypeAPI()->getAltText($media);
             case 'description':
-                return $this->mediaTypeAPI->getDescription($media);
+                return $this->getMediaTypeAPI()->getDescription($media);
             case 'date':
-                return $this->dateFormatter->format(
+                return $this->getDateFormatter()->format(
                     $fieldArgs['format'],
-                    $this->mediaTypeAPI->getDate($media, $fieldArgs['gmt'])
+                    $this->getMediaTypeAPI()->getDate($media, $fieldArgs['gmt'])
                 );
             case 'modified':
-                return $this->dateFormatter->format(
+                return $this->getDateFormatter()->format(
                     $fieldArgs['format'],
-                    $this->mediaTypeAPI->getModified($media, $fieldArgs['gmt'])
+                    $this->getMediaTypeAPI()->getModified($media, $fieldArgs['gmt'])
                 );
             case 'mimeType':
-                return $this->mediaTypeAPI->getMimeType($media);
+                return $this->getMediaTypeAPI()->getMimeType($media);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractSchemaConfigBlock extends AbstractBlock implements SchemaConfigEditorBlockServiceTagInterface
 {
-    protected SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory;
+    private ?SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory = null;
 
-    #[Required]
+    public function setSchemaConfigurationBlockCategory(SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory): void
+    {
+        $this->schemaConfigurationBlockCategory = $schemaConfigurationBlockCategory;
+    }
+    protected function getSchemaConfigurationBlockCategory(): SchemaConfigurationBlockCategory
+    {
+        return $this->schemaConfigurationBlockCategory ??= $this->instanceManager->getInstance(SchemaConfigurationBlockCategory::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractSchemaConfigBlock(
         SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory,
     ): void {
@@ -26,7 +35,7 @@ abstract class AbstractSchemaConfigBlock extends AbstractBlock implements Schema
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->schemaConfigurationBlockCategory;
+        return $this->getSchemaConfigurationBlockCategory();
     }
 
     public function getBlockPriority(): int

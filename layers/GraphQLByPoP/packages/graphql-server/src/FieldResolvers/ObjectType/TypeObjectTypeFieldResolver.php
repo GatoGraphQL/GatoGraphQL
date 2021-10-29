@@ -29,16 +29,81 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
-    protected FieldObjectTypeResolver $fieldObjectTypeResolver;
-    protected TypeObjectTypeResolver $typeObjectTypeResolver;
-    protected EnumValueObjectTypeResolver $enumValueObjectTypeResolver;
-    protected InputValueObjectTypeResolver $inputValueObjectTypeResolver;
-    protected TypeKindEnumTypeResolver $typeKindEnumTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?FieldObjectTypeResolver $fieldObjectTypeResolver = null;
+    private ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
+    private ?EnumValueObjectTypeResolver $enumValueObjectTypeResolver = null;
+    private ?InputValueObjectTypeResolver $inputValueObjectTypeResolver = null;
+    private ?TypeKindEnumTypeResolver $typeKindEnumTypeResolver = null;
 
-    #[Required]
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+    }
+    public function setFieldObjectTypeResolver(FieldObjectTypeResolver $fieldObjectTypeResolver): void
+    {
+        $this->fieldObjectTypeResolver = $fieldObjectTypeResolver;
+    }
+    protected function getFieldObjectTypeResolver(): FieldObjectTypeResolver
+    {
+        return $this->fieldObjectTypeResolver ??= $this->instanceManager->getInstance(FieldObjectTypeResolver::class);
+    }
+    public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
+    {
+        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
+    }
+    protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
+    {
+        return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
+    }
+    public function setEnumValueObjectTypeResolver(EnumValueObjectTypeResolver $enumValueObjectTypeResolver): void
+    {
+        $this->enumValueObjectTypeResolver = $enumValueObjectTypeResolver;
+    }
+    protected function getEnumValueObjectTypeResolver(): EnumValueObjectTypeResolver
+    {
+        return $this->enumValueObjectTypeResolver ??= $this->instanceManager->getInstance(EnumValueObjectTypeResolver::class);
+    }
+    public function setInputValueObjectTypeResolver(InputValueObjectTypeResolver $inputValueObjectTypeResolver): void
+    {
+        $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
+    }
+    protected function getInputValueObjectTypeResolver(): InputValueObjectTypeResolver
+    {
+        return $this->inputValueObjectTypeResolver ??= $this->instanceManager->getInstance(InputValueObjectTypeResolver::class);
+    }
+    public function setTypeKindEnumTypeResolver(TypeKindEnumTypeResolver $typeKindEnumTypeResolver): void
+    {
+        $this->typeKindEnumTypeResolver = $typeKindEnumTypeResolver;
+    }
+    protected function getTypeKindEnumTypeResolver(): TypeKindEnumTypeResolver
+    {
+        return $this->typeKindEnumTypeResolver ??= $this->instanceManager->getInstance(TypeKindEnumTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireTypeObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
@@ -89,21 +154,21 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'name',
             'description',
             'specifiedByURL'
-                => $this->stringScalarTypeResolver,
+                => $this->getStringScalarTypeResolver(),
             'extensions'
-                => $this->jsonObjectScalarTypeResolver,
+                => $this->getJsonObjectScalarTypeResolver(),
             'fields'
-                => $this->fieldObjectTypeResolver,
+                => $this->getFieldObjectTypeResolver(),
             'interfaces',
             'possibleTypes',
             'ofType'
-                => $this->typeObjectTypeResolver,
+                => $this->getTypeObjectTypeResolver(),
             'enumValues'
-                => $this->enumValueObjectTypeResolver,
+                => $this->getEnumValueObjectTypeResolver(),
             'inputFields'
-                => $this->inputValueObjectTypeResolver,
+                => $this->getInputValueObjectTypeResolver(),
             'kind'
-                => $this->typeKindEnumTypeResolver,
+                => $this->getTypeKindEnumTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -148,7 +213,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'fields',
             'enumValues' => [
-                'includeDeprecated' => $this->booleanScalarTypeResolver,
+                'includeDeprecated' => $this->getBooleanScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };

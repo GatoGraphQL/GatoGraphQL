@@ -4,15 +4,27 @@ declare(strict_types=1);
 
 namespace PoPSchema\Settings\TypeAPIs;
 
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPSchema\Settings\ComponentConfiguration;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
 {
-    protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
+    use BasicServiceTrait;
 
-    #[Required]
+    private ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
+
+    public function setAllowOrDenySettingsService(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
+    {
+        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
+    }
+    protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
+    {
+        return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractSettingsTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
     {
         $this->allowOrDenySettingsService = $allowOrDenySettingsService;
@@ -26,7 +38,7 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
          */
         $settingsEntries = ComponentConfiguration::getSettingsEntries();
         $settingsBehavior = ComponentConfiguration::getSettingsBehavior();
-        if (!$this->allowOrDenySettingsService->isEntryAllowed($name, $settingsEntries, $settingsBehavior)) {
+        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($name, $settingsEntries, $settingsBehavior)) {
             return null;
         }
         return $this->doGetOption($name);

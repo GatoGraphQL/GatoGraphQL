@@ -30,7 +30,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
         if ($referenced) {
             return sprintf(
                 $this->translationAPI->__('Highlight from “%s”', 'poptheme-wassup'),
-                $this->customPostTypeAPI->getTitle($referenced)
+                $this->getCustomPostTypeAPI()->getTitle($referenced)
             );
         }
 
@@ -39,13 +39,13 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
 
     public function getSuccessString(string | int $result_id): ?string
     {
-        $status = $this->customPostTypeAPI->getStatus($result_id);
+        $status = $this->getCustomPostTypeAPI()->getStatus($result_id);
         if ($status == Status::PUBLISHED) {
             // Give a link to the referenced post to the stance, and force it to get it from the server again
             $highlighted = Utils::getCustomPostMeta($result_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
             $success_string = sprintf(
                 $this->translationAPI->__('<a href="%s" %s>Click here to view it</a>.', 'poptheme-wassup'),
-                $this->customPostTypeAPI->getPermalink($highlighted),
+                $this->getCustomPostTypeAPI()->getPermalink($highlighted),
                 getReloadurlLinkattrs()
             );
 
@@ -64,11 +64,11 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
     {
         $form_data = parent::getFormData();
 
-        $form_data['highlightedpost'] = $this->moduleProcessorManager->getProcessor([\PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, \PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST])->getValue([\PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, \PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST]);
+        $form_data['highlightedpost'] = $this->getModuleProcessorManager()->getProcessor([\PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, \PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST])->getValue([\PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, \PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST]);
 
         // Highlights have no title input by the user. Instead, produce the title from the referenced post
-        $referenced = $this->customPostTypeAPI->getCustomPost($form_data['highlightedpost']);
-        $form_data['title'] = $this->customPostTypeAPI->getTitle($referenced);
+        $referenced = $this->getCustomPostTypeAPI()->getCustomPost($form_data['highlightedpost']);
+        $form_data['title'] = $this->getCustomPostTypeAPI()->getTitle($referenced);
 
         return $form_data;
     }

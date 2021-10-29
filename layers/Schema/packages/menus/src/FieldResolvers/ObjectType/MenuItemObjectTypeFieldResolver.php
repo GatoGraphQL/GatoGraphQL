@@ -19,14 +19,63 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry;
-    protected CMSHelperServiceInterface $cmsHelperService;
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected MenuItemObjectTypeResolver $menuItemObjectTypeResolver;
+    private ?MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry = null;
+    private ?CMSHelperServiceInterface $cmsHelperService = null;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?MenuItemObjectTypeResolver $menuItemObjectTypeResolver = null;
 
-    #[Required]
+    public function setMenuItemRuntimeRegistry(MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry): void
+    {
+        $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
+    }
+    protected function getMenuItemRuntimeRegistry(): MenuItemRuntimeRegistryInterface
+    {
+        return $this->menuItemRuntimeRegistry ??= $this->instanceManager->getInstance(MenuItemRuntimeRegistryInterface::class);
+    }
+    public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
+    {
+        $this->cmsHelperService = $cmsHelperService;
+    }
+    protected function getCMSHelperService(): CMSHelperServiceInterface
+    {
+        return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
+    }
+    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setMenuItemObjectTypeResolver(MenuItemObjectTypeResolver $menuItemObjectTypeResolver): void
+    {
+        $this->menuItemObjectTypeResolver = $menuItemObjectTypeResolver;
+    }
+    protected function getMenuItemObjectTypeResolver(): MenuItemObjectTypeResolver
+    {
+        return $this->menuItemObjectTypeResolver ??= $this->instanceManager->getInstance(MenuItemObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireMenuItemObjectTypeFieldResolver(
         MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry,
         CMSHelperServiceInterface $cmsHelperService,
@@ -72,17 +121,17 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'children' => $this->menuItemObjectTypeResolver,
-            'localURLPath' => $this->stringScalarTypeResolver,
-            'label' => $this->stringScalarTypeResolver,
-            'title' => $this->stringScalarTypeResolver,
-            'url' => $this->urlScalarTypeResolver,
-            'classes' => $this->stringScalarTypeResolver,
-            'target' => $this->stringScalarTypeResolver,
-            'description' => $this->stringScalarTypeResolver,
-            'objectID' => $this->idScalarTypeResolver,
-            'parentID' => $this->idScalarTypeResolver,
-            'linkRelationship' => $this->stringScalarTypeResolver,
+            'children' => $this->getMenuItemObjectTypeResolver(),
+            'localURLPath' => $this->getStringScalarTypeResolver(),
+            'label' => $this->getStringScalarTypeResolver(),
+            'title' => $this->getStringScalarTypeResolver(),
+            'url' => $this->getUrlScalarTypeResolver(),
+            'classes' => $this->getStringScalarTypeResolver(),
+            'target' => $this->getStringScalarTypeResolver(),
+            'description' => $this->getStringScalarTypeResolver(),
+            'objectID' => $this->getIdScalarTypeResolver(),
+            'parentID' => $this->getIdScalarTypeResolver(),
+            'linkRelationship' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -134,10 +183,10 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $menuItem = $object;
         switch ($fieldName) {
             case 'children':
-                return array_keys($this->menuItemRuntimeRegistry->getMenuItemChildren($objectTypeResolver->getID($menuItem)));
+                return array_keys($this->getMenuItemRuntimeRegistry()->getMenuItemChildren($objectTypeResolver->getID($menuItem)));
             case 'localURLPath':
                 $url = $menuItem->url;
-                $pathURL = $this->cmsHelperService->getLocalURLPath($url);
+                $pathURL = $this->getCmsHelperService()->getLocalURLPath($url);
                 if ($pathURL === false) {
                     return null;
                 }

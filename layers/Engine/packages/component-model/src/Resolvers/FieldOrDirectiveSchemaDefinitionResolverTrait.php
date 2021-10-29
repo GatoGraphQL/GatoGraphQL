@@ -14,9 +14,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait FieldOrDirectiveSchemaDefinitionResolverTrait
 {
-    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
+    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
 
-    #[Required]
+    public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    {
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+    }
+    protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    {
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireFieldOrDirectiveSchemaDefinitionResolverTrait(
         DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
     ): void {
@@ -144,7 +153,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
         array $consolidatedFieldArgsTypeModifiers,
     ): bool {
         // 1. its type is `DangerouslyDynamic`
-        if ($fieldTypeResolver === $this->dangerouslyDynamicScalarTypeResolver) {
+        if ($fieldTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
             return true;
         }
 
@@ -171,7 +180,7 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
     ): bool {
         $dangerouslyDynamicFieldOrDirectiveArgNameTypeResolvers = array_filter(
             $consolidatedFieldOrDirectiveArgNameTypeResolvers,
-            fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver === $this->dangerouslyDynamicScalarTypeResolver
+            fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()
         );
         foreach (array_keys($dangerouslyDynamicFieldOrDirectiveArgNameTypeResolvers) as $fieldOrDirectiveArgName) {
             $consolidatedFieldOrDirectiveArgTypeModifiers = $consolidatedFieldOrDirectiveArgsTypeModifiers[$fieldOrDirectiveArgName];

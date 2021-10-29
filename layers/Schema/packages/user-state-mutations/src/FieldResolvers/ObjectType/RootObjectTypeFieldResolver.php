@@ -19,12 +19,45 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected UserObjectTypeResolver $userObjectTypeResolver;
-    protected LoginMutationResolver $loginMutationResolver;
-    protected LogoutMutationResolver $logoutMutationResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?UserObjectTypeResolver $userObjectTypeResolver = null;
+    private ?LoginMutationResolver $loginMutationResolver = null;
+    private ?LogoutMutationResolver $logoutMutationResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
+    {
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+    }
+    public function setLoginMutationResolver(LoginMutationResolver $loginMutationResolver): void
+    {
+        $this->loginMutationResolver = $loginMutationResolver;
+    }
+    protected function getLoginMutationResolver(): LoginMutationResolver
+    {
+        return $this->loginMutationResolver ??= $this->instanceManager->getInstance(LoginMutationResolver::class);
+    }
+    public function setLogoutMutationResolver(LogoutMutationResolver $logoutMutationResolver): void
+    {
+        $this->logoutMutationResolver = $logoutMutationResolver;
+    }
+    protected function getLogoutMutationResolver(): LogoutMutationResolver
+    {
+        return $this->logoutMutationResolver ??= $this->instanceManager->getInstance(LogoutMutationResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireRootObjectTypeFieldResolver(
         UserObjectTypeResolver $userObjectTypeResolver,
         LoginMutationResolver $loginMutationResolver,
@@ -65,8 +98,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'loginUser' => [
-                MutationInputProperties::USERNAME_OR_EMAIL => $this->stringScalarTypeResolver,
-                MutationInputProperties::PASSWORD => $this->stringScalarTypeResolver,
+                MutationInputProperties::USERNAME_OR_EMAIL => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::PASSWORD => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -95,8 +128,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
         return match ($fieldName) {
-            'loginUser' => $this->loginMutationResolver,
-            'logoutUser' => $this->logoutMutationResolver,
+            'loginUser' => $this->getLoginMutationResolver(),
+            'logoutUser' => $this->getLogoutMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -106,7 +139,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return match ($fieldName) {
             'loginUser',
             'logoutUser'
-                => $this->userObjectTypeResolver,
+                => $this->getUserObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

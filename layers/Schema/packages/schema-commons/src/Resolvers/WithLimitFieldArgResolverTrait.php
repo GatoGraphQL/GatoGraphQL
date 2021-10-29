@@ -5,21 +5,16 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\Resolvers;
 
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait WithLimitFieldArgResolverTrait
 {
-    private ?string $limitFilterInputName = null;
-    protected TranslationAPIInterface $translationAPI;
+    // use BasicServiceTrait;
 
-    #[Required]
-    public function autowireWithLimitFieldArgResolverTrait(
-        TranslationAPIInterface $translationAPI,
-    ): void {
-        $this->translationAPI = $translationAPI;
-    }
+    private ?string $limitFilterInputName = null;
 
     /**
      * Check the limit is not above the max limit or below -1

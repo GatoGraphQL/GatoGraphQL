@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class DBEntriesHookSet extends AbstractHookSet
 {
-    protected GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver;
+    private ?GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver = null;
 
-    #[Required]
+    public function setGlobalObjectTypeFieldResolver(GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver): void
+    {
+        $this->globalObjectTypeFieldResolver = $globalObjectTypeFieldResolver;
+    }
+    protected function getGlobalObjectTypeFieldResolver(): GlobalObjectTypeFieldResolver
+    {
+        return $this->globalObjectTypeFieldResolver ??= $this->instanceManager->getInstance(GlobalObjectTypeFieldResolver::class);
+    }
+
+    //#[Required]
     final public function autowireDBEntriesHookSet(
         GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver
     ): void {
@@ -33,7 +42,7 @@ class DBEntriesHookSet extends AbstractHookSet
     {
         $dbname_datafields['userstate'] = $this->hooksAPI->applyFilters(
             'PoPSchema\UserState\DataloaderHooks:metaFields',
-            $this->globalObjectTypeFieldResolver->getFieldNamesToResolve()
+            $this->getGlobalObjectTypeFieldResolver()->getFieldNamesToResolve()
         );
         return $dbname_datafields;
     }

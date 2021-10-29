@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\ManageOptionsUserAut
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
-use PoP\ComponentModel\Instances\InstanceManager;
+use PoP\Root\Instances\InstanceManager;
 
 /**
  * Obtain an instance of the ContainerCacheConfigurationManager.
@@ -39,14 +39,15 @@ class ContainerCacheConfigurationManagerFacade
             $manageOptionsUserAuthorizationScheme = new ManageOptionsUserAuthorizationScheme();
             $userAuthorizationSchemeRegistry->addUserAuthorizationScheme($manageOptionsUserAuthorizationScheme);
             $userAuthorization = new UserAuthorization();
-            $userAuthorization->autowireUserAuthorization($userAuthorizationSchemeRegistry);
-            $menu = new PluginMenu();
-            $menu->autowireAbstractMenu($instanceManager);
-            $menu->autowirePluginMenu($userAuthorization);
+            $userAuthorization->setUserAuthorizationSchemeRegistry($userAuthorizationSchemeRegistry);
+            $pluginMenu = new PluginMenu();
+            $pluginMenu->setInstanceManager($instanceManager);
+            $pluginMenu->setUserAuthorization($userAuthorization);
             $endpointHelpers = new EndpointHelpers();
-            $endpointHelpers->autowireEndpointHelpers($menu, $moduleRegistry);
+            $endpointHelpers->setPluginMenu($pluginMenu);
+            $endpointHelpers->setModuleRegistry($moduleRegistry);
             $containerCacheConfigurationManager = new ContainerCacheConfigurationManager();
-            $containerCacheConfigurationManager->autowireAbstractCacheConfigurationManager($endpointHelpers);
+            $containerCacheConfigurationManager->setEndpointHelpers($endpointHelpers);
             self::$instance = $containerCacheConfigurationManager;
         }
         return self::$instance;

@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait UseObjectDictionaryTypeDataLoaderTrait
 {
-    protected ObjectDictionaryInterface $objectDictionary;
+    private ?ObjectDictionaryInterface $objectDictionary = null;
 
-    #[Required]
+    public function setObjectDictionary(ObjectDictionaryInterface $objectDictionary): void
+    {
+        $this->objectDictionary = $objectDictionary;
+    }
+    protected function getObjectDictionary(): ObjectDictionaryInterface
+    {
+        return $this->objectDictionary ??= $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
+    }
+
+    //#[Required]
     public function autowireUseObjectDictionaryTypeDataLoaderTrait(
         ObjectDictionaryInterface $objectDictionary,
     ): void {
@@ -24,10 +33,10 @@ trait UseObjectDictionaryTypeDataLoaderTrait
         $objectTypeResolverClass = get_class($this->getObjectTypeResolver());
         $ret = [];
         foreach ($ids as $id) {
-            if (!$this->objectDictionary->has($objectTypeResolverClass, $id)) {
-                $this->objectDictionary->set($objectTypeResolverClass, $id, $this->getObjectTypeNewInstance($id));
+            if (!$this->getObjectDictionary()->has($objectTypeResolverClass, $id)) {
+                $this->getObjectDictionary()->set($objectTypeResolverClass, $id, $this->getObjectTypeNewInstance($id));
             }
-            $ret[] = $this->objectDictionary->get($objectTypeResolverClass, $id);
+            $ret[] = $this->getObjectDictionary()->get($objectTypeResolverClass, $id);
         }
         return $ret;
     }

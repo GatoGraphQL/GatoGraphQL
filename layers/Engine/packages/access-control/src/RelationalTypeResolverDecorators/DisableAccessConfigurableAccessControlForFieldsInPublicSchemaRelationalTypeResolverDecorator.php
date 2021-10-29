@@ -10,6 +10,6 @@ class DisableAccessConfigurableAccessControlForFieldsInPublicSchemaRelationalTyp
 {
     protected function getConfigurationEntries(): array
     {
-        return $this->accessControlManager->getEntriesForFields(AccessControlGroups::DISABLED);
+        return $this->getAccessControlManager()->getEntriesForFields(AccessControlGroups::DISABLED);
     }
 }

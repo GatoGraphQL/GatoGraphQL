@@ -12,10 +12,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMetaValueMutationResolverBridge
 {
-    protected UnsubscribeFromTagMutationResolver $unsubscribeFromTagMutationResolver;
-    protected PostTagTypeAPIInterface $postTagTypeAPI;
+    private ?UnsubscribeFromTagMutationResolver $unsubscribeFromTagMutationResolver = null;
+    private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
-    #[Required]
+    public function setUnsubscribeFromTagMutationResolver(UnsubscribeFromTagMutationResolver $unsubscribeFromTagMutationResolver): void
+    {
+        $this->unsubscribeFromTagMutationResolver = $unsubscribeFromTagMutationResolver;
+    }
+    protected function getUnsubscribeFromTagMutationResolver(): UnsubscribeFromTagMutationResolver
+    {
+        return $this->unsubscribeFromTagMutationResolver ??= $this->instanceManager->getInstance(UnsubscribeFromTagMutationResolver::class);
+    }
+    public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
+    {
+        $this->postTagTypeAPI = $postTagTypeAPI;
+    }
+    protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
+    {
+        return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireUnsubscribeFromTagMutationResolverBridge(
         UnsubscribeFromTagMutationResolver $unsubscribeFromTagMutationResolver,
         PostTagTypeAPIInterface $postTagTypeAPI,
@@ -26,7 +43,7 @@ class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMeta
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->unsubscribeFromTagMutationResolver;
+        return $this->getUnsubscribeFromTagMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool
@@ -37,7 +54,7 @@ class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMeta
     public function getSuccessString(string | int $result_id): ?string
     {
         $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
-        $tag = $this->postTagTypeAPI->getTag($result_id);
+        $tag = $this->getPostTagTypeAPI()->getTag($result_id);
         return sprintf(
             $this->translationAPI->__('You have unsubscribed from <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
             $applicationtaxonomyapi->getTagSymbolName($tag)

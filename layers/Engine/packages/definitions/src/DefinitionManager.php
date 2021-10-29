@@ -24,7 +24,7 @@ class DefinitionManager implements DefinitionManagerInterface
      * @var array<string, DefinitionResolverInterface>
      */
     protected array $definition_resolvers = [];
-    protected ?DefinitionPersistenceInterface $definition_persistence = null;
+    private ?DefinitionPersistenceInterface $definition_persistence = null;
 
     public function isEnabled(): bool
     {

@@ -10,9 +10,19 @@ use Symfony\Contracts\Service\Attribute\Required;
 class CustomEndpointBlockCategory extends AbstractBlockCategory
 {
     public const CUSTOM_ENDPOINT_BLOCK_CATEGORY = 'graphql-api-endpoint';
-    protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
 
-    #[Required]
+    private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
+
+    public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
+    {
+        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
+    }
+    protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
+    {
+        return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+    }
+
+    //#[Required]
     final public function autowireCustomEndpointBlockCategory(
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ): void {
@@ -27,7 +37,7 @@ class CustomEndpointBlockCategory extends AbstractBlockCategory
     public function getCustomPostTypes(): array
     {
         return [
-            $this->graphQLCustomEndpointCustomPostType->getCustomPostType(),
+            $this->getGraphQLCustomEndpointCustomPostType()->getCustomPostType(),
         ];
     }
 

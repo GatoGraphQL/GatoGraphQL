@@ -9,22 +9,30 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderInterface;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait QueryDataModuleProcessorTrait
 {
     use FilterDataModuleProcessorTrait;
+    use WithHooksAPIServiceTrait;
 
-    protected HooksAPIInterface $hooksAPI;
-    protected ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler;
+    private ?ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler = null;
 
-    #[Required]
+    public function setActionExecutionQueryInputOutputHandler(ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler): void
+    {
+        $this->actionExecutionQueryInputOutputHandler = $actionExecutionQueryInputOutputHandler;
+    }
+    protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler
+    {
+        return $this->actionExecutionQueryInputOutputHandler ??= $this->instanceManager->getInstance(ActionExecutionQueryInputOutputHandler::class);
+    }
+
+    //#[Required]
     public function autowireQueryDataModuleProcessorTrait(
-        HooksAPIInterface $hooksAPI,
         ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler,
     ): void {
-        $this->hooksAPI = $hooksAPI;
         $this->actionExecutionQueryInputOutputHandler = $actionExecutionQueryInputOutputHandler;
     }
 
@@ -38,7 +46,7 @@ trait QueryDataModuleProcessorTrait
     }
     public function getQueryInputOutputHandler(array $module): ?QueryInputOutputHandlerInterface
     {
-        return $this->actionExecutionQueryInputOutputHandler;
+        return $this->getActionExecutionQueryInputOutputHandler();
     }
     // public function getFilter(array $module)
     // {

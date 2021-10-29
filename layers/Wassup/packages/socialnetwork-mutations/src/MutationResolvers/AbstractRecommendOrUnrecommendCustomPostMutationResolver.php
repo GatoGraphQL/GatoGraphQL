@@ -11,7 +11,7 @@ abstract class AbstractRecommendOrUnrecommendCustomPostMutationResolver extends 
     protected function eligible($post)
     {
         $cmsapplicationpostsapi = PostsFunctionAPIFactory::getInstance();
-        $eligible = in_array($this->customPostTypeAPI->getCustomPostType($post), $cmsapplicationpostsapi->getAllcontentPostTypes());
+        $eligible = in_array($this->getCustomPostTypeAPI()->getCustomPostType($post), $cmsapplicationpostsapi->getAllcontentPostTypes());
         return $this->hooksAPI->applyFilters('GD_RecommendUnrecommendPost:eligible', $eligible, $post);
     }
 

@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutationResolverBridge
 {
-    protected CreateStanceMutationResolver $createStanceMutationResolver;
+    private ?CreateStanceMutationResolver $createStanceMutationResolver = null;
 
-    #[Required]
+    public function setCreateStanceMutationResolver(CreateStanceMutationResolver $createStanceMutationResolver): void
+    {
+        $this->createStanceMutationResolver = $createStanceMutationResolver;
+    }
+    protected function getCreateStanceMutationResolver(): CreateStanceMutationResolver
+    {
+        return $this->createStanceMutationResolver ??= $this->instanceManager->getInstance(CreateStanceMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCreateStanceMutationResolverBridge(
         CreateStanceMutationResolver $createStanceMutationResolver,
     ): void {
@@ -21,7 +30,7 @@ class CreateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutat
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->createStanceMutationResolver;
+        return $this->getCreateStanceMutationResolver();
     }
 
     protected function isUpdate(): bool

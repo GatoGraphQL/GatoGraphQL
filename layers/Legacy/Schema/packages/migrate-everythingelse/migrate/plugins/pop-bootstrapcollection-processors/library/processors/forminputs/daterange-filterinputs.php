@@ -13,9 +13,18 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
 
     public const MODULE_FILTERINPUT_CUSTOMPOSTDATES = 'filterinput-custompostdates';
 
-    protected DateScalarTypeResolver $dateScalarTypeResolver;
+    private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
 
-    #[Required]
+    public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    {
+        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+    }
+    protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    {
+        return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowirePoP_Module_Processor_DateRangeComponentFilterInputs(
         DateScalarTypeResolver $dateScalarTypeResolver,
     ): void {

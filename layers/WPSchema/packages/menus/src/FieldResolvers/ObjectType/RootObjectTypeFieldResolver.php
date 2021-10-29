@@ -16,10 +16,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected MenuObjectTypeResolver $menuObjectTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?MenuObjectTypeResolver $menuObjectTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setMenuObjectTypeResolver(MenuObjectTypeResolver $menuObjectTypeResolver): void
+    {
+        $this->menuObjectTypeResolver = $menuObjectTypeResolver;
+    }
+    protected function getMenuObjectTypeResolver(): MenuObjectTypeResolver
+    {
+        return $this->menuObjectTypeResolver ??= $this->instanceManager->getInstance(MenuObjectTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireRootObjectTypeFieldResolver(
         MenuObjectTypeResolver $menuObjectTypeResolver,
         StringScalarTypeResolver $stringScalarTypeResolver,
@@ -56,10 +73,10 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'menuByLocation' => [
-                'location' => $this->stringScalarTypeResolver,
+                'location' => $this->getStringScalarTypeResolver(),
             ],
             'menuBySlug' => [
-                'slug' => $this->stringScalarTypeResolver,
+                'slug' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -129,7 +146,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return match ($fieldName) {
             'menuByLocation',
             'menuBySlug'
-                => $this->menuObjectTypeResolver,
+                => $this->getMenuObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

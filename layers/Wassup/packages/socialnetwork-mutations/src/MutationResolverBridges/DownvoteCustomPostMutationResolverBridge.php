@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class DownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
-    protected DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver;
+    private ?DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver = null;
 
-    #[Required]
+    public function setDownvoteCustomPostMutationResolver(DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver): void
+    {
+        $this->downvoteCustomPostMutationResolver = $downvoteCustomPostMutationResolver;
+    }
+    protected function getDownvoteCustomPostMutationResolver(): DownvoteCustomPostMutationResolver
+    {
+        return $this->downvoteCustomPostMutationResolver ??= $this->instanceManager->getInstance(DownvoteCustomPostMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireDownvoteCustomPostMutationResolverBridge(
         DownvoteCustomPostMutationResolver $downvoteCustomPostMutationResolver,
     ): void {
@@ -21,7 +30,7 @@ class DownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateU
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->downvoteCustomPostMutationResolver;
+        return $this->getDownvoteCustomPostMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool
@@ -33,7 +42,7 @@ class DownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateU
     {
         return sprintf(
             $this->translationAPI->__('You have down-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $this->customPostTypeAPI->getTitle($result_id)
+            $this->getCustomPostTypeAPI()->getTitle($result_id)
         );
     }
 }

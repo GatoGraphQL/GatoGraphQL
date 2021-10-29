@@ -29,11 +29,52 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     public const SCHEMA_COMMENT_META = Plugin::NAMESPACE . '\schema-comment-meta';
     public const SCHEMA_TAXONOMY_META = Plugin::NAMESPACE . '\schema-taxonomy-meta';
 
-    protected ?CommentObjectTypeResolver $commentTypeResolver;
-    protected ?PostTagObjectTypeResolver $postTagTypeResolver;
-    protected ?PostCategoryObjectTypeResolver $postCategoryTypeResolver;
-    protected ?PostObjectTypeResolver $postTypeResolver;
-    protected ?UserObjectTypeResolver $userTypeResolver;
+    private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
+    private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
+    private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
+    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?UserObjectTypeResolver $userObjectTypeResolver = null;
+
+    public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
+    {
+        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+    }
+    protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
+    {
+        return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+    }
+    public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
+    {
+        $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
+    }
+    protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
+    {
+        return $this->postTagObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+    }
+    public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
+    {
+        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
+    }
+    protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
+    {
+        return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+    }
+    public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
+    {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+    }
+    protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    {
+        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+    }
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
+    {
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+    }
 
     /**
      * Make all properties nullable, becase the ModuleRegistry is registered
@@ -43,19 +84,19 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
      * Function `getDescription` will only be accessed from the Application Container,
      * so the properties will not be null in that situation.
      */
-    #[Required]
+    //#[Required]
     final public function autowireMetaSchemaTypeModuleResolver(
-        ?CommentObjectTypeResolver $commentTypeResolver,
-        ?PostTagObjectTypeResolver $postTagTypeResolver,
-        ?PostCategoryObjectTypeResolver $postCategoryTypeResolver,
-        ?PostObjectTypeResolver $postTypeResolver,
-        ?UserObjectTypeResolver $userTypeResolver
+        ?CommentObjectTypeResolver $commentObjectTypeResolver,
+        ?PostTagObjectTypeResolver $postTagObjectTypeResolver,
+        ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
+        ?PostObjectTypeResolver $postObjectTypeResolver,
+        ?UserObjectTypeResolver $userObjectTypeResolver
     ): void {
-        $this->commentTypeResolver = $commentTypeResolver;
-        $this->postTagTypeResolver = $postTagTypeResolver;
-        $this->postCategoryTypeResolver = $postCategoryTypeResolver;
-        $this->postTypeResolver = $postTypeResolver;
-        $this->userTypeResolver = $userTypeResolver;
+        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+        $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
+        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
     }
 
     /**
@@ -124,45 +165,31 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
 
     public function getDescription(string $module): string
     {
-        /**
-         * Inner properties will not be null. Assign them their type,
-         * to avoid PHPStan errors
-         */
-        /** @var CommentObjectTypeResolver */
-        $commentTypeResolver = $this->commentTypeResolver;
-        /** @var PostTagObjectTypeResolver */
-        $postTagTypeResolver = $this->postTagTypeResolver;
-        /** @var PostCategoryObjectTypeResolver */
-        $postCategoryTypeResolver = $this->postCategoryTypeResolver;
-        /** @var PostObjectTypeResolver */
-        $postTypeResolver = $this->postTypeResolver;
-        /** @var UserObjectTypeResolver */
-        $userTypeResolver = $this->userTypeResolver;
         switch ($module) {
             case self::SCHEMA_CUSTOMPOST_META:
                 return sprintf(
                     \__('Add the <code>%1$s</code> field to custom posts, such as type <code>%2$s</code>', 'graphql-api'),
                     'metaValue',
-                    $postTypeResolver->getTypeName()
+                    $this->getPostObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_USER_META:
                 return sprintf(
                     \__('Add the <code>%1$s</code> field to type <code>%2$s</code>', 'graphql-api'),
                     'metaValue',
-                    $userTypeResolver->getTypeName()
+                    $this->getUserObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_COMMENT_META:
                 return sprintf(
                     \__('Add the <code>%1$s</code> field to type <code>%2$s</code>', 'graphql-api'),
                     'metaValue',
-                    $commentTypeResolver->getTypeName()
+                    $this->getCommentObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_TAXONOMY_META:
                 return sprintf(
                     \__('Add the <code>%1$s</code> field to taxonomies, such as types <code>%2$s</code> and <code>%3$s</code>', 'graphql-api'),
                     'metaValue',
-                    $postTagTypeResolver->getTypeName(),
-                    $postCategoryTypeResolver->getTypeName()
+                    $this->getPostTagObjectTypeResolver()->getTypeName(),
+                    $this->getPostCategoryObjectTypeResolver()->getTypeName()
                 );
         }
         return parent::getDescription($module);

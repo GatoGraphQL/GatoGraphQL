@@ -13,10 +13,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class Engine extends UpstreamEngine implements EngineInterface
 {
-    protected LooseContractManagerInterface $looseContractManager;
-    protected CacheControlEngineInterface $cacheControlEngine;
+    private ?LooseContractManagerInterface $looseContractManager = null;
+    private ?CacheControlEngineInterface $cacheControlEngine = null;
 
-    #[Required]
+    public function setLooseContractManager(LooseContractManagerInterface $looseContractManager): void
+    {
+        $this->looseContractManager = $looseContractManager;
+    }
+    protected function getLooseContractManager(): LooseContractManagerInterface
+    {
+        return $this->looseContractManager ??= $this->instanceManager->getInstance(LooseContractManagerInterface::class);
+    }
+    public function setCacheControlEngine(CacheControlEngineInterface $cacheControlEngine): void
+    {
+        $this->cacheControlEngine = $cacheControlEngine;
+    }
+    protected function getCacheControlEngine(): CacheControlEngineInterface
+    {
+        return $this->cacheControlEngine ??= $this->instanceManager->getInstance(CacheControlEngineInterface::class);
+    }
+
+    //#[Required]
     final public function autowireEngineEngine(
         LooseContractManagerInterface $looseContractManager,
         CacheControlEngineInterface $cacheControlEngine
@@ -29,7 +46,7 @@ class Engine extends UpstreamEngine implements EngineInterface
     {
         // Check if there are hooks that must be implemented by the CMS, that have not been done so.
         // Check here, since we can't rely on addAction('popcms:init') to check, since we don't know if it was implemented!
-        if ($notImplementedHooks = $this->looseContractManager->getNotImplementedRequiredHooks()) {
+        if ($notImplementedHooks = $this->getLooseContractManager()->getNotImplementedRequiredHooks()) {
             throw new Exception(
                 sprintf(
                     $this->translationAPI->__('The following hooks have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
@@ -37,7 +54,7 @@ class Engine extends UpstreamEngine implements EngineInterface
                 )
             );
         }
-        if ($notImplementedNames = $this->looseContractManager->getNotImplementedRequiredNames()) {
+        if ($notImplementedNames = $this->getLooseContractManager()->getNotImplementedRequiredNames()) {
             throw new Exception(
                 sprintf(
                     $this->translationAPI->__('The following names have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
@@ -55,12 +72,12 @@ class Engine extends UpstreamEngine implements EngineInterface
         $this->generateData();
 
         // 2. Get the data, and ask the formatter to output it
-        $formatter = $this->dataStructureManager->getDataStructureFormatter();
+        $formatter = $this->getDataStructureManager()->getDataStructureFormatter();
 
         // If CacheControl is enabled, add it to the headers
         $headers = [];
         if (CacheControlComponent::isEnabled()) {
-            if ($cacheControlHeader = $this->cacheControlEngine->getCacheControlHeader()) {
+            if ($cacheControlHeader = $this->getCacheControlEngine()->getCacheControlHeader()) {
                 $headers[] = $cacheControlHeader;
             }
         }

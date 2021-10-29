@@ -12,9 +12,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected MenuItemTypeDataLoader $menuItemTypeDataLoader;
+    private ?MenuItemTypeDataLoader $menuItemTypeDataLoader = null;
 
-    #[Required]
+    public function setMenuItemTypeDataLoader(MenuItemTypeDataLoader $menuItemTypeDataLoader): void
+    {
+        $this->menuItemTypeDataLoader = $menuItemTypeDataLoader;
+    }
+    protected function getMenuItemTypeDataLoader(): MenuItemTypeDataLoader
+    {
+        return $this->menuItemTypeDataLoader ??= $this->instanceManager->getInstance(MenuItemTypeDataLoader::class);
+    }
+
+    //#[Required]
     final public function autowireMenuItemObjectTypeResolver(
         MenuItemTypeDataLoader $menuItemTypeDataLoader,
     ): void {
@@ -40,6 +49,6 @@ class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->menuItemTypeDataLoader;
+        return $this->getMenuItemTypeDataLoader();
     }
 }

@@ -16,10 +16,27 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResolver
 {
-    protected UserCommentTypeAPIInterface $userCommentTypeAPI;
-    protected UserTypeAPIInterface $userTypeAPI;
+    private ?UserCommentTypeAPIInterface $userCommentTypeAPI = null;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
 
-    #[Required]
+    public function setUserCommentTypeAPI(UserCommentTypeAPIInterface $userCommentTypeAPI): void
+    {
+        $this->userCommentTypeAPI = $userCommentTypeAPI;
+    }
+    protected function getUserCommentTypeAPI(): UserCommentTypeAPIInterface
+    {
+        return $this->userCommentTypeAPI ??= $this->instanceManager->getInstance(UserCommentTypeAPIInterface::class);
+    }
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
+        $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireCommentMutationsCommentObjectTypeFieldResolver(
         UserCommentTypeAPIInterface $userCommentTypeAPI,
         UserTypeAPIInterface $userTypeAPI,
@@ -64,7 +81,7 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
         array $fieldArgs = []
     ): bool {
         $comment = $object;
-        $commentUserID = $this->userCommentTypeAPI->getCommentUserId($comment);
+        $commentUserID = $this->getUserCommentTypeAPI()->getCommentUserId($comment);
         return $commentUserID !== null;
     }
 
@@ -84,16 +101,16 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
         array $options = []
     ): mixed {
         $comment = $object;
-        $commentUserID = $this->userCommentTypeAPI->getCommentUserId($comment);
+        $commentUserID = $this->getUserCommentTypeAPI()->getCommentUserId($comment);
         switch ($fieldName) {
             case 'authorName':
-                return $this->userTypeAPI->getUserDisplayName($commentUserID);
+                return $this->getUserTypeAPI()->getUserDisplayName($commentUserID);
 
             case 'authorURL':
-                return $this->userTypeAPI->getUserWebsiteURL($commentUserID);
+                return $this->getUserTypeAPI()->getUserWebsiteURL($commentUserID);
 
             case 'authorEmail':
-                return $this->userTypeAPI->getUserEmail($commentUserID);
+                return $this->getUserTypeAPI()->getUserEmail($commentUserID);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

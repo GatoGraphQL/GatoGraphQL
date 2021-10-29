@@ -31,12 +31,12 @@ class PersistedQueryUtils
      */
     public static function maybeGetPersistedQuery(string $query): string
     {
-        $queryCatalogueManager = PersistedQueryManagerFacade::getInstance();
-        if ($queryCatalogueManager->isPersistedQuery($query)) {
+        $persistedQueryManager = PersistedQueryManagerFacade::getInstance();
+        if ($persistedQueryManager->isPersistedQuery($query)) {
             // Get the query name, and extract the query from the PersistedQueryManager
-            $queryName = $queryCatalogueManager->getPersistedQueryName($query);
-            if ($queryCatalogueManager->hasPersistedQuery($queryName)) {
-                return $queryCatalogueManager->getPersistedQuery($queryName);
+            $queryName = $persistedQueryManager->getPersistedQueryName($query);
+            if ($persistedQueryManager->hasPersistedQuery($queryName)) {
+                return $persistedQueryManager->getPersistedQuery($queryName);
             }
         }
         return $query;

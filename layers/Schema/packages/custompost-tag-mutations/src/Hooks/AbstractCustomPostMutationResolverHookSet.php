@@ -18,10 +18,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCustomPostMutationResolverHookSet(
         CustomPostTypeAPIInterface $customPostTypeAPI,
         StringScalarTypeResolver $stringScalarTypeResolver,
@@ -68,7 +85,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if (!$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
             return $fieldArgNameTypeResolvers;
         }
-        $fieldArgNameTypeResolvers[MutationInputProperties::TAGS] = $this->stringScalarTypeResolver;
+        $fieldArgNameTypeResolvers[MutationInputProperties::TAGS] = $this->getStringScalarTypeResolver();
         return $fieldArgNameTypeResolvers;
     }
 
@@ -108,7 +125,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     public function maybeSetTags(int | string $customPostID, array $form_data): void
     {
         // Only for that specific CPT
-        if ($this->customPostTypeAPI->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
+        if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
             return;
         }
         if (!isset($form_data[MutationInputProperties::TAGS])) {

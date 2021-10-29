@@ -15,9 +15,19 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
 {
     public const MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT = 'dataload-relationalfields-queryroot';
     public const MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT = 'dataload-relationalfields-mutationroot';
-    protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService;
 
-    #[Required]
+    private ?GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService = null;
+
+    public function setGraphQLSchemaDefinitionService(GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService): void
+    {
+        $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
+    }
+    protected function getGraphQLSchemaDefinitionService(): GraphQLSchemaDefinitionServiceInterface
+    {
+        return $this->graphQLSchemaDefinitionService ??= $this->instanceManager->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
+    }
+
+    //#[Required]
     final public function autowireRootRelationalFieldDataloadModuleProcessor(
         GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
     ): void {
@@ -47,9 +57,9 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT:
-                return $this->graphQLSchemaDefinitionService->getQueryRootObjectTypeResolver();
+                return $this->getGraphQLSchemaDefinitionService()->getSchemaQueryRootObjectTypeResolver();
             case self::MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT:
-                return $this->graphQLSchemaDefinitionService->getMutationRootObjectTypeResolver();
+                return $this->getGraphQLSchemaDefinitionService()->getSchemaMutationRootObjectTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);

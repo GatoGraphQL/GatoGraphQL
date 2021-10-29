@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\FieldQuery;
 
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\QueryParsing\QueryParserInterface;
 use PoP\Translation\TranslationAPIInterface;
 use stdClass;
@@ -11,6 +12,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 {
+    use BasicServiceTrait;
+
     // Cache the output from functions
     /**
      * @var array<string, string>
@@ -57,14 +60,30 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 
     public const ALIAS_POSITION_KEY = 'pos';
     public const ALIAS_LENGTH_KEY = 'length';
-    protected TranslationAPIInterface $translationAPI;
-    protected FeedbackMessageStoreInterface $feedbackMessageStore;
-    protected QueryParserInterface $queryParser;
 
-    #[Required]
-    final public function autowireFieldQueryInterpreter(TranslationAPIInterface $translationAPI, FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser): void
+    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    private ?QueryParserInterface $queryParser = null;
+
+    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
-        $this->translationAPI = $translationAPI;
+        $this->feedbackMessageStore = $feedbackMessageStore;
+    }
+    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    {
+        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
+    }
+    public function setQueryParser(QueryParserInterface $queryParser): void
+    {
+        $this->queryParser = $queryParser;
+    }
+    protected function getQueryParser(): QueryParserInterface
+    {
+        return $this->queryParser ??= $this->instanceManager->getInstance(QueryParserInterface::class);
+    }
+
+    //#[Required]
+    final public function autowireFieldQueryInterpreter(FeedbackMessageStoreInterface $feedbackMessageStore, QueryParserInterface $queryParser): void
+    {
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->queryParser = $queryParser;
     }
@@ -96,7 +115,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         }
         // If the field name is missing, show an error
         if ($pos === 0) {
-            $this->feedbackMessageStore->addQueryError(sprintf(
+            $this->getFeedbackMessageStore()->addQueryError(sprintf(
                 $this->translationAPI->__('Name in \'%s\' is missing', 'field-query'),
                 $field
             ));
@@ -169,7 +188,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 && $fieldArgsOpeningSymbolPos === false
             )
         ) {
-            $this->feedbackMessageStore->addQueryError(sprintf(
+            $this->getFeedbackMessageStore()->addQueryError(sprintf(
                 $this->translationAPI->__(
                     'Arguments \'%s\' must start with symbol \'%s\' and end with symbol \'%s\'',
                     'field-query'
@@ -355,14 +374,14 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             $aliasSymbolPos = $fieldAliasPositionSpan[self::ALIAS_POSITION_KEY];
             if ($aliasSymbolPos === 0) {
                 // Only there is the alias, nothing to alias to
-                $this->feedbackMessageStore->addQueryError(sprintf(
+                $this->getFeedbackMessageStore()->addQueryError(sprintf(
                     $this->translationAPI->__('The field to be aliased in \'%s\' is missing', 'field-query'),
                     $field
                 ));
                 return null;
             } elseif ($aliasSymbolPos === strlen($field) - 1) {
                 // Only the "@" was added, but the alias is missing
-                $this->feedbackMessageStore->addQueryError(sprintf(
+                $this->getFeedbackMessageStore()->addQueryError(sprintf(
                     $this->translationAPI->__('Alias in \'%s\' is missing', 'field-query'),
                     $field
                 ));
@@ -470,7 +489,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 && $fieldDirectivesOpeningSymbolPos === false
             )
         ) {
-            $this->feedbackMessageStore->addQueryError(sprintf(
+            $this->getFeedbackMessageStore()->addQueryError(sprintf(
                 $this->translationAPI->__(
                     'Directive \'%s\' must start with symbol \'%s\' and end with symbol \'%s\'',
                     'field-query'
@@ -534,7 +553,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         }
         return array_map(
             [$this, 'listFieldDirective'],
-            $this->queryParser->splitElements(
+            $this->getQueryParser()->splitElements(
                 $fieldDirectives,
                 QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
                 [

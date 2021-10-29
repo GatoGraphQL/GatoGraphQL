@@ -19,12 +19,12 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
             return $post_title;
         }, 10, 2);
 
-        $this->looseContractManager->implementHooks([
+        $this->getLooseContractManager()->implementHooks([
             'popcms:page:title',
             'popcms:page:content',
         ]);
 
-        $this->nameResolver->implementNames([
+        $this->getNameResolver()->implementNames([
             'popcms:dbcolumn:orderby:pages:date' => 'date',
         ]);
     }

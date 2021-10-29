@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    #[Required]
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCustomPostUpdateUserMetaValueMutationResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ): void {
@@ -31,7 +40,7 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
             $target_id = $form_data['target_id'];
 
             // Make sure the post exists
-            $target = $this->customPostTypeAPI->getCustomPost($target_id);
+            $target = $this->getCustomPostTypeAPI()->getCustomPost($target_id);
             if (!$target) {
                 $errors[] = $this->translationAPI->__('The requested post does not exist.', 'pop-coreprocessors');
             } else {

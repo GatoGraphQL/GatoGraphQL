@@ -16,9 +16,18 @@ class EndpointComponentEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
 
-    protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
+    private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
 
-    #[Required]
+    public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
+    {
+        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
+    }
+    protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
+    {
+        return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+    }
+
+    //#[Required]
     final public function autowireEndpointComponentEditorScript(
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
     ): void {
@@ -80,7 +89,7 @@ class EndpointComponentEditorScript extends AbstractEditorScript
         return array_merge(
             parent::getAllowedPostTypes(),
             [
-                $this->graphQLCustomEndpointCustomPostType->getCustomPostType(),
+                $this->getGraphQLCustomEndpointCustomPostType()->getCustomPostType(),
             ]
         );
     }

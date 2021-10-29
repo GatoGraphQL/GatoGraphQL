@@ -21,13 +21,13 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
             $this->hooksAPI->doAction('popcms:deleteComment', $comment_id, $comment);
         }, 10, 2);
 
-        $this->looseContractManager->implementHooks([
+        $this->getLooseContractManager()->implementHooks([
             'popcms:insertComment',
             'popcms:spamComment',
             'popcms:deleteComment',
         ]);
 
-        $this->nameResolver->implementNames([
+        $this->getNameResolver()->implementNames([
             'popcms:dbcolumn:orderby:comments:date' => 'comment_date_gmt',
             'popcms:dbcolumn:orderby:customposts:comment-count' => 'comment_count',
         ]);

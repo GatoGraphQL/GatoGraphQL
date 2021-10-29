@@ -26,11 +26,36 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
     public const ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE = -1;
     public const ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT = -2;
 
-    protected BlockRenderingHelpers $blockRenderingHelpers;
-    protected CPTUtils $cptUtils;
-    protected EndpointBlockCategory $endpointBlockCategory;
+    private ?BlockRenderingHelpers $blockRenderingHelpers = null;
+    private ?CPTUtils $cptUtils = null;
+    private ?EndpointBlockCategory $endpointBlockCategory = null;
 
-    #[Required]
+    public function setBlockRenderingHelpers(BlockRenderingHelpers $blockRenderingHelpers): void
+    {
+        $this->blockRenderingHelpers = $blockRenderingHelpers;
+    }
+    protected function getBlockRenderingHelpers(): BlockRenderingHelpers
+    {
+        return $this->blockRenderingHelpers ??= $this->instanceManager->getInstance(BlockRenderingHelpers::class);
+    }
+    public function setCPTUtils(CPTUtils $cptUtils): void
+    {
+        $this->cptUtils = $cptUtils;
+    }
+    protected function getCPTUtils(): CPTUtils
+    {
+        return $this->cptUtils ??= $this->instanceManager->getInstance(CPTUtils::class);
+    }
+    public function setEndpointBlockCategory(EndpointBlockCategory $endpointBlockCategory): void
+    {
+        $this->endpointBlockCategory = $endpointBlockCategory;
+    }
+    protected function getEndpointBlockCategory(): EndpointBlockCategory
+    {
+        return $this->endpointBlockCategory ??= $this->instanceManager->getInstance(EndpointBlockCategory::class);
+    }
+
+    //#[Required]
     final public function autowireEndpointSchemaConfigurationBlock(
         BlockRenderingHelpers $blockRenderingHelpers,
         CPTUtils $cptUtils,
@@ -53,7 +78,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->endpointBlockCategory;
+        return $this->getEndpointBlockCategory();
     }
 
     protected function isDynamicBlock(): bool
@@ -71,7 +96,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
         return array_merge(
             parent::getLocalizedData(),
             [
-                'isAPIHierarchyEnabled' => $this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY),
+                'isAPIHierarchyEnabled' => $this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY),
             ]
         );
     }
@@ -101,17 +126,17 @@ EOF;
         } elseif ($schemaConfigurationID > 0) {
             $schemaConfigurationObject = \get_post($schemaConfigurationID);
             if (!is_null($schemaConfigurationObject)) {
-                $schemaConfigurationDescription = $this->cptUtils->getCustomPostDescription($schemaConfigurationObject);
+                $schemaConfigurationDescription = $this->getCptUtils()->getCustomPostDescription($schemaConfigurationObject);
                 $permalink = \get_permalink($schemaConfigurationObject->ID);
                 $schemaConfigurationContent = ($permalink ?
                     \sprintf(
                         '<code><a href="%s">%s</a></code>',
                         $permalink,
-                        $this->blockRenderingHelpers->getCustomPostTitle($schemaConfigurationObject)
+                        $this->getBlockRenderingHelpers()->getCustomPostTitle($schemaConfigurationObject)
                     ) :
                     \sprintf(
                         '<code>%s</code>',
-                        $this->blockRenderingHelpers->getCustomPostTitle($schemaConfigurationObject)
+                        $this->getBlockRenderingHelpers()->getCustomPostTitle($schemaConfigurationObject)
                     )
                 ) . ($schemaConfigurationDescription ?
                     '<br/><small>' . $schemaConfigurationDescription . '</small>'

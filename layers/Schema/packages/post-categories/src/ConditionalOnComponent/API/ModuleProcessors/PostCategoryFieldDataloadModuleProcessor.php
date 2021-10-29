@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModuleProcessor
 {
-    protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
+    private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
 
-    #[Required]
+    public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
+    {
+        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
+    }
+    protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
+    {
+        return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowirePostCategoryFieldDataloadModuleProcessor(
         PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
     ): void {
@@ -25,7 +34,7 @@ class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModu
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
-                return $this->postCategoryObjectTypeResolver;
+                return $this->getPostCategoryObjectTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);

@@ -12,10 +12,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractPostObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
-    protected PostObjectTypeResolver $postObjectTypeResolver;
-    protected PostTypeAPIInterface $postTypeAPI;
+    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?PostTypeAPIInterface $postTypeAPI = null;
 
-    #[Required]
+    public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
+    {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+    }
+    protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    {
+        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+    }
+    public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
+    {
+        $this->postTypeAPI = $postTypeAPI;
+    }
+    protected function getPostTypeAPI(): PostTypeAPIInterface
+    {
+        return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractPostObjectTypeResolverPicker(PostObjectTypeResolver $postObjectTypeResolver, PostTypeAPIInterface $postTypeAPI): void
     {
         $this->postObjectTypeResolver = $postObjectTypeResolver;
@@ -24,16 +41,16 @@ abstract class AbstractPostObjectTypeResolverPicker extends AbstractObjectTypeRe
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface
     {
-        return $this->postObjectTypeResolver;
+        return $this->getPostObjectTypeResolver();
     }
 
     public function isInstanceOfType(object $object): bool
     {
-        return $this->postTypeAPI->isInstanceOfPostType($object);
+        return $this->getPostTypeAPI()->isInstanceOfPostType($object);
     }
 
     public function isIDOfType(string | int $objectID): bool
     {
-        return $this->postTypeAPI->postExists($objectID);
+        return $this->getPostTypeAPI()->postExists($objectID);
     }
 }

@@ -6,21 +6,39 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService implements MenuPageInterface
 {
-    protected ?string $hookName = null;
-    protected InstanceManagerInterface $instanceManager;
-    protected MenuPageHelper $menuPageHelper;
-    protected EndpointHelpers $endpointHelpers;
+    use BasicServiceTrait;
 
-    #[Required]
-    final public function autowireAbstractMenuPage(InstanceManagerInterface $instanceManager, MenuPageHelper $menuPageHelper, EndpointHelpers $endpointHelpers): void
+    protected ?string $hookName = null;
+
+    private ?MenuPageHelper $menuPageHelper = null;
+    private ?EndpointHelpers $endpointHelpers = null;
+
+    public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
     {
-        $this->instanceManager = $instanceManager;
+        $this->menuPageHelper = $menuPageHelper;
+    }
+    protected function getMenuPageHelper(): MenuPageHelper
+    {
+        return $this->menuPageHelper ??= $this->instanceManager->getInstance(MenuPageHelper::class);
+    }
+    public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
+    {
+        $this->endpointHelpers = $endpointHelpers;
+    }
+    protected function getEndpointHelpers(): EndpointHelpers
+    {
+        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+    }
+
+    //#[Required]
+    final public function autowireAbstractMenuPage(MenuPageHelper $menuPageHelper, EndpointHelpers $endpointHelpers): void
+    {
         $this->menuPageHelper = $menuPageHelper;
         $this->endpointHelpers = $endpointHelpers;
     }

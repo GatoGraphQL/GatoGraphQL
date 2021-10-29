@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected UserRoleTypeDataLoader $userRoleTypeDataLoader;
+    private ?UserRoleTypeDataLoader $userRoleTypeDataLoader = null;
 
-    #[Required]
+    public function setUserRoleTypeDataLoader(UserRoleTypeDataLoader $userRoleTypeDataLoader): void
+    {
+        $this->userRoleTypeDataLoader = $userRoleTypeDataLoader;
+    }
+    protected function getUserRoleTypeDataLoader(): UserRoleTypeDataLoader
+    {
+        return $this->userRoleTypeDataLoader ??= $this->instanceManager->getInstance(UserRoleTypeDataLoader::class);
+    }
+
+    //#[Required]
     final public function autowireUserRoleObjectTypeResolver(
         UserRoleTypeDataLoader $userRoleTypeDataLoader,
     ): void {
@@ -38,6 +47,6 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->userRoleTypeDataLoader;
+        return $this->getUserRoleTypeDataLoader();
     }
 }

@@ -96,7 +96,7 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
                     $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
                     $this->getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs)
                 );
-                if ($posts = $this->customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($posts = $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $posts[0];
                 }
                 return null;

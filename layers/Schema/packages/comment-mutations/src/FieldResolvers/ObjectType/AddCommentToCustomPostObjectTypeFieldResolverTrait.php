@@ -15,12 +15,45 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait AddCommentToCustomPostObjectTypeFieldResolverTrait
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected EmailScalarTypeResolver $emailScalarTypeResolver;
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
 
-    #[Required]
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+    public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
+    {
+        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
+    }
+    protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
+    {
+        return $this->emailScalarTypeResolver ??= $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
+    }
+    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+    }
+
+    //#[Required]
     public function autowireObjectTypeFieldResolverTrait(
         StringScalarTypeResolver $stringScalarTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,
@@ -38,18 +71,18 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         bool $addParentCommentID,
     ): array {
         $schemaFieldArgNameTypeResolvers = [
-            MutationInputProperties::COMMENT => $this->stringScalarTypeResolver,
+            MutationInputProperties::COMMENT => $this->getStringScalarTypeResolver(),
         ];
         if ($addParentCommentID) {
-            $schemaFieldArgNameTypeResolvers[MutationInputProperties::PARENT_COMMENT_ID] = $this->idScalarTypeResolver;
+            $schemaFieldArgNameTypeResolvers[MutationInputProperties::PARENT_COMMENT_ID] = $this->getIdScalarTypeResolver();
         }
         if ($addCustomPostID) {
-            $schemaFieldArgNameTypeResolvers[MutationInputProperties::CUSTOMPOST_ID] = $this->idScalarTypeResolver;
+            $schemaFieldArgNameTypeResolvers[MutationInputProperties::CUSTOMPOST_ID] = $this->getIdScalarTypeResolver();
         }
         if (!ComponentConfiguration::mustUserBeLoggedInToAddComment()) {
-            $schemaFieldArgNameTypeResolvers[MutationInputProperties::AUTHOR_NAME] = $this->stringScalarTypeResolver;
-            $schemaFieldArgNameTypeResolvers[MutationInputProperties::AUTHOR_EMAIL] = $this->emailScalarTypeResolver;
-            $schemaFieldArgNameTypeResolvers[MutationInputProperties::AUTHOR_URL] = $this->urlScalarTypeResolver;
+            $schemaFieldArgNameTypeResolvers[MutationInputProperties::AUTHOR_NAME] = $this->getStringScalarTypeResolver();
+            $schemaFieldArgNameTypeResolvers[MutationInputProperties::AUTHOR_EMAIL] = $this->getEmailScalarTypeResolver();
+            $schemaFieldArgNameTypeResolvers[MutationInputProperties::AUTHOR_URL] = $this->getUrlScalarTypeResolver();
         }
         return $schemaFieldArgNameTypeResolvers;
     }

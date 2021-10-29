@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
-    protected RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver;
+    private ?RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver = null;
 
-    #[Required]
+    public function setRecommendCustomPostMutationResolver(RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver): void
+    {
+        $this->recommendCustomPostMutationResolver = $recommendCustomPostMutationResolver;
+    }
+    protected function getRecommendCustomPostMutationResolver(): RecommendCustomPostMutationResolver
+    {
+        return $this->recommendCustomPostMutationResolver ??= $this->instanceManager->getInstance(RecommendCustomPostMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireRecommendCustomPostMutationResolverBridge(
         RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver,
     ): void {
@@ -21,7 +30,7 @@ class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdate
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->recommendCustomPostMutationResolver;
+        return $this->getRecommendCustomPostMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool
@@ -33,7 +42,7 @@ class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdate
     {
         return sprintf(
             $this->translationAPI->__('You have recommended <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $this->customPostTypeAPI->getTitle($result_id)
+            $this->getCustomPostTypeAPI()->getTitle($result_id)
         );
     }
 }

@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
 {
-    protected UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet;
+    private ?UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet = null;
 
-    #[Required]
+    public function setUserCustomPostFilterInputHookSet(UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet): void
+    {
+        $this->userCustomPostFilterInputHookSet = $userCustomPostFilterInputHookSet;
+    }
+    protected function getUserCustomPostFilterInputHookSet(): UserCustomPostFilterInputHookSet
+    {
+        return $this->userCustomPostFilterInputHookSet ??= $this->instanceManager->getInstance(UserCustomPostFilterInputHookSet::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractRemoveAuthorFilterInputHookSet(
         UserCustomPostFilterInputHookSet $userCustomPostFilterInputHookSet,
     ): void {
@@ -34,7 +43,7 @@ abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
      */
     public function getFilterInputModules(array $filterInputModules): array
     {
-        $modules = $this->userCustomPostFilterInputHookSet->getAuthorFilterInputModules();
+        $modules = $this->getUserCustomPostFilterInputHookSet()->getAuthorFilterInputModules();
         foreach ($modules as $module) {
             $pos = array_search($module, $filterInputModules);
             if ($pos !== false) {

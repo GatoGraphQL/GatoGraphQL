@@ -4,15 +4,27 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMeta\TypeAPIs;
 
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoPSchema\CommentMeta\ComponentConfiguration;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCommentMetaTypeAPI implements CommentMetaTypeAPIInterface
 {
-    protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
+    use BasicServiceTrait;
 
-    #[Required]
+    private ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
+
+    public function setAllowOrDenySettingsService(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
+    {
+        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
+    }
+    protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
+    {
+        return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCommentMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
     {
         $this->allowOrDenySettingsService = $allowOrDenySettingsService;
@@ -26,7 +38,7 @@ abstract class AbstractCommentMetaTypeAPI implements CommentMetaTypeAPIInterface
          */
         $entries = ComponentConfiguration::getCommentMetaEntries();
         $behavior = ComponentConfiguration::getCommentMetaBehavior();
-        if (!$this->allowOrDenySettingsService->isEntryAllowed($key, $entries, $behavior)) {
+        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($key, $entries, $behavior)) {
             return null;
         }
         return $this->doGetCommentMeta($commentID, $key, $single);

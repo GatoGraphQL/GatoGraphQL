@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    protected Site $site;
+    private ?Site $site = null;
 
-    #[Required]
+    public function setSite(Site $site): void
+    {
+        $this->site = $site;
+    }
+    protected function getSite(): Site
+    {
+        return $this->site ??= $this->instanceManager->getInstance(Site::class);
+    }
+
+    //#[Required]
     final public function autowireSiteTypeDataLoader(
         Site $site,
     ): void {
@@ -26,7 +35,7 @@ class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
         $ret = [];
         $cmsengineapi = FunctionAPIFactory::getInstance();
         if (in_array($cmsengineapi->getHost(), $ids)) {
-            $ret[] = $this->site;
+            $ret[] = $this->getSite();
         }
         return $ret;
     }

@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMutationResolverBridge
 {
-    protected UnfollowUserMutationResolver $unfollowUserMutationResolver;
+    private ?UnfollowUserMutationResolver $unfollowUserMutationResolver = null;
 
-    #[Required]
+    public function setUnfollowUserMutationResolver(UnfollowUserMutationResolver $unfollowUserMutationResolver): void
+    {
+        $this->unfollowUserMutationResolver = $unfollowUserMutationResolver;
+    }
+    protected function getUnfollowUserMutationResolver(): UnfollowUserMutationResolver
+    {
+        return $this->unfollowUserMutationResolver ??= $this->instanceManager->getInstance(UnfollowUserMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireUnfollowUserMutationResolverBridge(
         UnfollowUserMutationResolver $unfollowUserMutationResolver,
     ): void {
@@ -21,7 +30,7 @@ class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValue
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->unfollowUserMutationResolver;
+        return $this->getUnfollowUserMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool
@@ -33,7 +42,7 @@ class UnfollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValue
     {
         return sprintf(
             $this->translationAPI->__('You have stopped following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $this->userTypeAPI->getUserDisplayName($result_id)
+            $this->getUserTypeAPI()->getUserDisplayName($result_id)
         );
     }
 }

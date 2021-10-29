@@ -16,9 +16,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
 {
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
-    #[Required]
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireForEachDirectiveResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
     ): void {
@@ -45,7 +54,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
         return array_merge(
             parent::getDirectiveArgNameTypeResolvers($relationalTypeResolver),
             [
-                'if' => $this->booleanScalarTypeResolver,
+                'if' => $this->getBooleanScalarTypeResolver(),
             ]
         );
     }
@@ -75,7 +84,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
             // If it is a field, execute the function against all the values in the array
             // Those that satisfy the condition stay, the others are filtered out
             // We must add each item in the array as expression `%value%`, over which the if function can be evaluated
-            if ($this->fieldQueryInterpreter->isFieldArgumentValueAField($if)) {
+            if ($this->getFieldQueryInterpreter()->isFieldArgumentValueAField($if)) {
                 $options = [
                     AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
                 ];
@@ -86,7 +95,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
                     $expressions = $this->getExpressionsForObject($id, $variables, $messages);
                     $resolvedValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $if, $variables, $expressions, $options);
                     // Merge the objectWarnings, if any
-                    if ($storedObjectWarnings = $this->feedbackMessageStore->retrieveAndClearObjectWarnings($id)) {
+                    if ($storedObjectWarnings = $this->getFeedbackMessageStore()->retrieveAndClearObjectWarnings($id)) {
                         $objectWarnings[$id] = array_merge(
                             $objectWarnings[$id] ?? [],
                             $storedObjectWarnings

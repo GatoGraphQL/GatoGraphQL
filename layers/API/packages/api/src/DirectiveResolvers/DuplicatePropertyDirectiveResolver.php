@@ -14,9 +14,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireDuplicatePropertyDirectiveResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
     ): void {
@@ -52,7 +61,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            'to' => $this->stringScalarTypeResolver,
+            'to' => $this->getStringScalarTypeResolver(),
         ];
     }
 
@@ -103,7 +112,7 @@ class DuplicatePropertyDirectiveResolver extends AbstractGlobalDirectiveResolver
                 /**
                  * The data is stored under the field's output key (not the unique one!)
                  */
-                $fieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($field);
+                $fieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($field);
                 if (!array_key_exists($fieldOutputKey, $dbItems[(string)$id])) {
                     $objectWarnings[(string)$id][] = [
                         Tokens::PATH => [$this->directive],

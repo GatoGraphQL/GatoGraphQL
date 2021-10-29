@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
-    protected GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader;
+    private ?GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader = null;
 
-    #[Required]
+    public function setGenericCustomPostTypeDataLoader(GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader): void
+    {
+        $this->genericCustomPostTypeDataLoader = $genericCustomPostTypeDataLoader;
+    }
+    protected function getGenericCustomPostTypeDataLoader(): GenericCustomPostTypeDataLoader
+    {
+        return $this->genericCustomPostTypeDataLoader ??= $this->instanceManager->getInstance(GenericCustomPostTypeDataLoader::class);
+    }
+
+    //#[Required]
     final public function autowireGenericCustomPostObjectTypeResolver(
         GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader,
     ): void {
@@ -32,6 +41,6 @@ class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeRe
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->genericCustomPostTypeDataLoader;
+        return $this->getGenericCustomPostTypeDataLoader();
     }
 }

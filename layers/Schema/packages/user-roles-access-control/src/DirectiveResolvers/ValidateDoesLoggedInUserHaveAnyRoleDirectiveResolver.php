@@ -14,10 +14,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValidateConditionDirectiveResolver
 {
-    protected UserRoleTypeAPIInterface $userRoleTypeAPI;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
+    public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
+    {
+        $this->userRoleTypeAPI = $userRoleTypeAPI;
+    }
+    protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
+    {
+        return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver(
         UserRoleTypeAPIInterface $userRoleTypeAPI,
         StringScalarTypeResolver $stringScalarTypeResolver,
@@ -41,7 +58,7 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
 
         $roles = $this->directiveArgsForSchema['roles'];
         $userID = $vars['global-userstate']['current-user-id'];
-        $userRoles = $this->userRoleTypeAPI->getUserRoles($userID);
+        $userRoles = $this->getUserRoleTypeAPI()->getUserRoles($userID);
         return !empty(array_intersect($roles, $userRoles));
     }
 
@@ -80,7 +97,7 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            'roles' => $this->stringScalarTypeResolver,
+            'roles' => $this->getStringScalarTypeResolver(),
         ];
     }
 

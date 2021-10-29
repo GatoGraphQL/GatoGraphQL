@@ -16,9 +16,19 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     public const FILTERINPUT_CUSTOMPOSTTYPES = 'filterinput-customposttypes';
     public const FILTERINPUT_CUSTOMPOSTSTATUS = 'filterinput-custompoststatus';
     public const FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
-    protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
 
-    #[Required]
+    private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
+
+    public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
+    {
+        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+    }
+    protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
+    {
+        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireFilterInputProcessor(
         CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver
     ): void {
@@ -51,7 +61,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                 if ($value) {
                     $value = array_intersect(
                         $value,
-                        $this->customPostStatusEnumTypeResolver->getEnumValues()
+                        $this->getCustomPostStatusEnumTypeResolver()->getEnumValues()
                     );
                     // If no status is valid, do not set, as to not override the default value
                     if ($value) {

@@ -9,10 +9,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_FunctionalSocialMediaItems extends AbstractObjectTypeFieldResolver
 {
-    protected SocialMediaProviderEnumTypeResolver $socialMediaProviderEnumTypeResolver;
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    private ?SocialMediaProviderEnumTypeResolver $socialMediaProviderEnumTypeResolver = null;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
 
-    #[Required]
+    public function setSocialMediaProviderEnumTypeResolver(SocialMediaProviderEnumTypeResolver $socialMediaProviderEnumTypeResolver): void
+    {
+        $this->socialMediaProviderEnumTypeResolver = $socialMediaProviderEnumTypeResolver;
+    }
+    protected function getSocialMediaProviderEnumTypeResolver(): SocialMediaProviderEnumTypeResolver
+    {
+        return $this->socialMediaProviderEnumTypeResolver ??= $this->instanceManager->getInstance(SocialMediaProviderEnumTypeResolver::class);
+    }
+    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowirePoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_FunctionalSocialMediaItems(
         SocialMediaProviderEnumTypeResolver $socialMediaProviderEnumTypeResolver,
         URLScalarTypeResolver $urlScalarTypeResolver,

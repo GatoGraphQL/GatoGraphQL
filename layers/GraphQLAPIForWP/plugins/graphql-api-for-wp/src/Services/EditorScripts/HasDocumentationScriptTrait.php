@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
 use GraphQLAPI\GraphQLAPI\Constants\DocumentationConstants;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use Symfony\Contracts\Service\Attribute\Required;
 
 /**
@@ -18,9 +17,18 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 trait HasDocumentationScriptTrait
 {
-    protected LocaleHelper $localeHelper;
+    private ?LocaleHelper $localeHelper = null;
 
-    #[Required]
+    public function setLocaleHelper(LocaleHelper $localeHelper): void
+    {
+        $this->localeHelper = $localeHelper;
+    }
+    protected function getLocaleHelper(): LocaleHelper
+    {
+        return $this->localeHelper ??= $this->instanceManager->getInstance(LocaleHelper::class);
+    }
+
+    //#[Required]
     public function autowireHasDocumentationScriptTrait(
         LocaleHelper $localeHelper,
     ): void {
@@ -49,7 +57,7 @@ trait HasDocumentationScriptTrait
         $data = [];
         // Add the locale language?
         if ($this->addLocalLanguage()) {
-            $data[DocumentationConstants::LOCALE_LANG] = $this->localeHelper->getLocaleLanguage();
+            $data[DocumentationConstants::LOCALE_LANG] = $this->getLocaleHelper()->getLocaleLanguage();
         }
         // Add the default language?
         if ($defaultLang = $this->getDefaultLanguage()) {
@@ -110,7 +118,7 @@ trait HasDocumentationScriptTrait
             \wp_enqueue_script($scriptName . '-' . $defaultLang);
         }
         if ($this->addLocalLanguage()) {
-            $localeLang = $this->localeHelper->getLocaleLanguage();
+            $localeLang = $this->getLocaleHelper()->getLocaleLanguage();
             // Check the current locale has been translated, otherwise if will try to load an unexisting file
             // If the locale lang is the same as the default lang, the file has already been loaded
             if ($localeLang != $defaultLang && in_array($localeLang, $this->getDocLanguages())) {

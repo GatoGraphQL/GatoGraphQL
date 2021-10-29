@@ -22,7 +22,7 @@ class UndoDownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownv
             if (!in_array($target_id, $value)) {
                 $errors[] = sprintf(
                     $this->translationAPI->__('You had not down-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-                    $this->customPostTypeAPI->getTitle($target_id)
+                    $this->getCustomPostTypeAPI()->getTitle($target_id)
                 );
             }
         }

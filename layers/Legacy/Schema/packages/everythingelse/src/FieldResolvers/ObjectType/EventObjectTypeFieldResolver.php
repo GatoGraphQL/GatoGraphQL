@@ -18,11 +18,36 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
-    protected LocationObjectTypeResolver $locationObjectTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?LocationObjectTypeResolver $locationObjectTypeResolver = null;
     
-    #[Required]
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+    }
+    public function setLocationObjectTypeResolver(LocationObjectTypeResolver $locationObjectTypeResolver): void
+    {
+        $this->locationObjectTypeResolver = $locationObjectTypeResolver;
+    }
+    protected function getLocationObjectTypeResolver(): LocationObjectTypeResolver
+    {
+        return $this->locationObjectTypeResolver ??= $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireEventObjectTypeFieldResolver(
         StringScalarTypeResolver $stringScalarTypeResolver,
         JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
@@ -56,12 +81,12 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'dates' => $this->stringScalarTypeResolver,
-            'times' => $this->stringScalarTypeResolver,
-            'startDateReadable' => $this->stringScalarTypeResolver,
-            'daterange' => $this->jsonObjectScalarTypeResolver,
-            'daterangetime' => $this->jsonObjectScalarTypeResolver,
-            'locations' => $this->locationObjectTypeResolver,
+            'dates' => $this->getStringScalarTypeResolver(),
+            'times' => $this->getStringScalarTypeResolver(),
+            'startDateReadable' => $this->getStringScalarTypeResolver(),
+            'daterange' => $this->getJsonObjectScalarTypeResolver(),
+            'daterangetime' => $this->getJsonObjectScalarTypeResolver(),
+            'locations' => $this->getLocationObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

@@ -6,10 +6,9 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use GraphQLAPI\GraphQLAPI\Constants\BlockConstants;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
-use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 /**
@@ -17,6 +16,8 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInterface
 {
+    use BasicServiceTrait;
+
     /**
      * Keep a map of all namespaced type names to their resolver classes
      * @var array<string, array>|null
@@ -33,17 +34,38 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      */
     protected ?array $directiveNameClasses = null;
 
-    protected HooksAPIInterface $hooksAPI;
-    protected InstanceManagerInterface $instanceManager;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected TypeRegistryInterface $typeRegistry;
-    protected DirectiveRegistryInterface $directiveRegistry;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?TypeRegistryInterface $typeRegistry = null;
+    private ?DirectiveRegistryInterface $directiveRegistry = null;
 
-    #[Required]
-    final public function autowireAbstractGraphQLQueryConfigurator(HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, TypeRegistryInterface $typeRegistry, DirectiveRegistryInterface $directiveRegistry): void
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
-        $this->hooksAPI = $hooksAPI;
-        $this->instanceManager = $instanceManager;
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
+    {
+        $this->typeRegistry = $typeRegistry;
+    }
+    protected function getTypeRegistry(): TypeRegistryInterface
+    {
+        return $this->typeRegistry ??= $this->instanceManager->getInstance(TypeRegistryInterface::class);
+    }
+    public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
+    {
+        $this->directiveRegistry = $directiveRegistry;
+    }
+    protected function getDirectiveRegistry(): DirectiveRegistryInterface
+    {
+        return $this->directiveRegistry ??= $this->instanceManager->getInstance(DirectiveRegistryInterface::class);
+    }
+
+    //#[Required]
+    final public function autowireAbstractGraphQLQueryConfigurator(ModuleRegistryInterface $moduleRegistry, TypeRegistryInterface $typeRegistry, DirectiveRegistryInterface $directiveRegistry): void
+    {
         $this->moduleRegistry = $moduleRegistry;
         $this->typeRegistry = $typeRegistry;
         $this->directiveRegistry = $directiveRegistry;
@@ -81,7 +103,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     protected function initNamespacedObjectTypeNameClasses(): void
     {
         // For each class, obtain its namespacedTypeName
-        $objectTypeResolvers = $this->typeRegistry->getObjectTypeResolvers();
+        $objectTypeResolvers = $this->getTypeRegistry()->getObjectTypeResolvers();
         $this->namespacedObjectTypeNameResolverClasses = [];
         foreach ($objectTypeResolvers as $objectTypeResolver) {
             $objectTypeResolverNamespacedName = $objectTypeResolver->getNamespacedTypeName();
@@ -95,7 +117,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     protected function initNamespacedInterfaceTypeNameClasses(): void
     {
         // For each interface, obtain its namespacedInterfaceName
-        $interfaceTypeResolvers = $this->typeRegistry->getInterfaceTypeResolvers();
+        $interfaceTypeResolvers = $this->getTypeRegistry()->getInterfaceTypeResolvers();
         $this->namespacedInterfaceTypeNameResolverClasses = [];
         foreach ($interfaceTypeResolvers as $interfaceTypeResolver) {
             $interfaceTypeResolverNamespacedName = $interfaceTypeResolver->getNamespacedTypeName();
@@ -120,7 +142,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      */
     protected function initDirectiveNameClasses(): void
     {
-        $directiveResolvers = $this->directiveRegistry->getDirectiveResolvers();
+        $directiveResolvers = $this->getDirectiveRegistry()->getDirectiveResolvers();
         // For each class, obtain its directive name. Notice that different directives
         // can have the same name (eg: @translate as implemented for Google and Azure),
         // then the mapping goes from name to list of resolvers
@@ -203,7 +225,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     {
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null) {
-            return $this->moduleRegistry->isModuleEnabled($enablingModule);
+            return $this->getModuleRegistry()->isModuleEnabled($enablingModule);
         }
         return true;
     }

@@ -23,12 +23,12 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
             $errors[] = $this->translationAPI->__('No post has been highlighted', 'poptheme-wassup');
         } else {
             // Highlights have no title input by the user. Instead, produce the title from the referenced post
-            $referenced = $this->customPostTypeAPI->getCustomPost($form_data['highlightedpost']);
+            $referenced = $this->getCustomPostTypeAPI()->getCustomPost($form_data['highlightedpost']);
             if (!$referenced) {
                 $errors[] = $this->translationAPI->__('The highlighted post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
-                if ($this->customPostTypeAPI->getStatus($referenced) != Status::PUBLISHED) {
+                if ($this->getCustomPostTypeAPI()->getStatus($referenced) != Status::PUBLISHED) {
                     $errors[] = $this->translationAPI->__('The highlighted post is not published yet', 'poptheme-wassup');
                 }
             }

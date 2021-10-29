@@ -21,10 +21,27 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected CustomPostObjectTypeResolver $customPostObjectTypeResolver;
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    private ?CustomPostObjectTypeResolver $customPostObjectTypeResolver = null;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    #[Required]
+    public function setCustomPostObjectTypeResolver(CustomPostObjectTypeResolver $customPostObjectTypeResolver): void
+    {
+        $this->customPostObjectTypeResolver = $customPostObjectTypeResolver;
+    }
+    protected function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolver
+    {
+        return $this->customPostObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
+    }
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractListOfCPTEntitiesRootObjectTypeFieldResolver(
         CustomPostObjectTypeResolver $customPostObjectTypeResolver,
         CustomPostTypeAPIInterface $customPostTypeAPI,
@@ -80,7 +97,7 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
             // With this flag, the hook will not remove the private CPTs
             QueryOptions::ALLOW_QUERYING_PRIVATE_CPTS => true,
         ];
-        return $this->customPostTypeAPI->getCustomPosts($query, $options);
+        return $this->getCustomPostTypeAPI()->getCustomPosts($query, $options);
     }
 
     abstract protected function getFieldCustomPostType(string $fieldName): string;
@@ -89,6 +106,6 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ConcreteTypeResolverInterface {
-        return $this->customPostObjectTypeResolver;
+        return $this->getCustomPostObjectTypeResolver();
     }
 }

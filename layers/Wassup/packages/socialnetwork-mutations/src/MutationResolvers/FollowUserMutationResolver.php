@@ -25,7 +25,7 @@ class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationRes
                 if (in_array($target_id, $value)) {
                     $errors[] = sprintf(
                         $this->translationAPI->__('You are already following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-                        $this->userTypeAPI->getUserDisplayName($target_id)
+                        $this->getUserTypeAPI()->getUserDisplayName($target_id)
                     );
                 }
             }

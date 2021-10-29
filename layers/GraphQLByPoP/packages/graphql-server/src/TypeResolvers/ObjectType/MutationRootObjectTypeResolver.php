@@ -16,21 +16,33 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
 {
     use ReservedNameTypeResolverTrait;
 
-    /**
-     * List of fieldNames that are mandatory to all ObjectTypeResolvers
-     *
-     * @var string[]
-     */
-    protected array $objectTypeResolverMandatoryFields;
-    protected MutationRootTypeDataLoader $mutationRootTypeDataLoader;
+    private ?TypeResolverHelperInterface $typeResolverHelper = null;
+    private ?MutationRootTypeDataLoader $mutationRootTypeDataLoader = null;
 
-    #[Required]
+    public function setTypeResolverHelper(TypeResolverHelperInterface $typeResolverHelper): void
+    {
+        $this->typeResolverHelper = $typeResolverHelper;
+    }
+    protected function getTypeResolverHelper(): TypeResolverHelperInterface
+    {
+        return $this->typeResolverHelper ??= $this->instanceManager->getInstance(TypeResolverHelperInterface::class);
+    }
+    public function setMutationRootTypeDataLoader(MutationRootTypeDataLoader $mutationRootTypeDataLoader): void
+    {
+        $this->mutationRootTypeDataLoader = $mutationRootTypeDataLoader;
+    }
+    protected function getMutationRootTypeDataLoader(): MutationRootTypeDataLoader
+    {
+        return $this->mutationRootTypeDataLoader ??= $this->instanceManager->getInstance(MutationRootTypeDataLoader::class);
+    }
+
+    //#[Required]
     final public function autowireMutationRootObjectTypeResolver(
         TypeResolverHelperInterface $typeResolverHelper,
         MutationRootTypeDataLoader $mutationRootTypeDataLoader,
     ): void {
+        $this->typeResolverHelper = $typeResolverHelper;
         $this->mutationRootTypeDataLoader = $mutationRootTypeDataLoader;
-        $this->objectTypeResolverMandatoryFields = $typeResolverHelper->getObjectTypeResolverMandatoryFields();
     }
 
     public function getTypeName(): string
@@ -52,15 +64,16 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->mutationRootTypeDataLoader;
+        return $this->getMutationRootTypeDataLoader();
     }
 
     public function isFieldNameConditionSatisfiedForSchema(
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         string $fieldName
     ): bool {
+        $objectTypeResolverMandatoryFields = $this->getTypeResolverHelper()->getObjectTypeResolverMandatoryFields();
         return
-            in_array($fieldName, $this->objectTypeResolverMandatoryFields)
+            in_array($fieldName, $objectTypeResolverMandatoryFields)
             || $objectTypeFieldResolver->getFieldMutationResolver($this, $fieldName) !== null;
     }
 }

@@ -12,9 +12,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class StanceObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected StanceTypeDataLoader $stanceTypeDataLoader;
+    private ?StanceTypeDataLoader $stanceTypeDataLoader = null;
     
-    #[Required]
+    public function setStanceTypeDataLoader(StanceTypeDataLoader $stanceTypeDataLoader): void
+    {
+        $this->stanceTypeDataLoader = $stanceTypeDataLoader;
+    }
+    protected function getStanceTypeDataLoader(): StanceTypeDataLoader
+    {
+        return $this->stanceTypeDataLoader ??= $this->instanceManager->getInstance(StanceTypeDataLoader::class);
+    }
+
+    //#[Required]
     final public function autowireStanceObjectTypeResolver(
         StanceTypeDataLoader $stanceTypeDataLoader,
     ): void {
@@ -39,6 +48,6 @@ class StanceObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->stanceTypeDataLoader;
+        return $this->getStanceTypeDataLoader();
     }
 }

@@ -11,10 +11,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ActivatePluginsMutationResolver extends AbstractMutationResolver
 {
-    protected CMSServiceInterface $cmsService;
-    protected ApplicationInfoInterface $applicationInfo;
+    private ?CMSServiceInterface $cmsService = null;
+    private ?ApplicationInfoInterface $applicationInfo = null;
 
-    #[Required]
+    public function setCMSService(CMSServiceInterface $cmsService): void
+    {
+        $this->cmsService = $cmsService;
+    }
+    protected function getCMSService(): CMSServiceInterface
+    {
+        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
+    }
+    public function setApplicationInfo(ApplicationInfoInterface $applicationInfo): void
+    {
+        $this->applicationInfo = $applicationInfo;
+    }
+    protected function getApplicationInfo(): ApplicationInfoInterface
+    {
+        return $this->applicationInfo ??= $this->instanceManager->getInstance(ApplicationInfoInterface::class);
+    }
+
+    //#[Required]
     final public function autowireActivatePluginsMutationResolver(
         CMSServiceInterface $cmsService,
         ApplicationInfoInterface $applicationInfo,
@@ -26,7 +43,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     // Taken from https://wordpress.stackexchange.com/questions/4041/how-to-activate-plugins-via-code
     private function runActivatePlugin($plugin)
     {
-        $current = $this->cmsService->getOption('active_plugins');
+        $current = $this->getCmsService()->getOption('active_plugins');
         // @todo Rename package!
         // `plugin_basename` is a WordPress function,
         // so this package must be called "system-mutations-wp",
@@ -56,7 +73,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
         );
 
         // Iterate all plugins and check what version they require to be installed. If it matches the current version => activate
-        $version = $this->applicationInfo->getVersion();
+        $version = $this->getApplicationInfo()->getVersion();
         $activated = [];
         foreach ($plugin_version as $plugin => $activate_version) {
             if ($activate_version == $version) {

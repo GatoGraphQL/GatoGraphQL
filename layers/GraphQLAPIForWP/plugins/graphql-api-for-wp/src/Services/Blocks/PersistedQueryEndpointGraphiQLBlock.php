@@ -20,12 +20,12 @@ class PersistedQueryEndpointGraphiQLBlock extends AbstractGraphiQLBlock implemen
      */
     protected function getAdminGraphQLEndpoint(): string
     {
-        if ($persistedQueryEndpointCustomPostID = $this->editorHelpers->getEditingPostID()) {
-            return $this->endpointHelpers->getAdminPersistedQueryGraphQLEndpoint(
+        if ($persistedQueryEndpointCustomPostID = $this->getEditorHelpers()->getEditingPostID()) {
+            return $this->getEndpointHelpers()->getAdminPersistedQueryGraphQLEndpoint(
                 $persistedQueryEndpointCustomPostID,
                 true
             );
         }
-        return $this->endpointHelpers->getAdminConfigurableSchemaGraphQLEndpoint(true);
+        return $this->getEndpointHelpers()->getAdminConfigurableSchemaGraphQLEndpoint(true);
     }
 }

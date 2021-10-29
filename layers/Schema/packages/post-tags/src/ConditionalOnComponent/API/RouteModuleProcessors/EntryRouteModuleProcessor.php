@@ -17,9 +17,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
-    protected PostTagTypeAPIInterface $postTagTypeAPI;
+    private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
-    #[Required]
+    public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
+    {
+        $this->postTagTypeAPI = $postTagTypeAPI;
+    }
+    protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
+    {
+        return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireEntryRouteModuleProcessor(
         PostTagTypeAPIInterface $postTagTypeAPI,
     ): void {
@@ -37,7 +46,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'routing-state' => [
-                    'taxonomy-name' => $this->postTagTypeAPI->getPostTagTaxonomyName(),
+                    'taxonomy-name' => $this->getPostTagTypeAPI()->getPostTagTaxonomyName(),
                 ],
             ],
         ];
@@ -70,7 +79,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
                 'conditions' => [
                     'scheme' => APISchemes::API,
                     'routing-state' => [
-                        'taxonomy-name' => $this->postTagTypeAPI->getPostTagTaxonomyName(),
+                        'taxonomy-name' => $this->getPostTagTypeAPI()->getPostTagTaxonomyName(),
                     ],
                 ],
             ];

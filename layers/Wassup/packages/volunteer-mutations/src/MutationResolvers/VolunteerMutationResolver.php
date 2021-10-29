@@ -11,9 +11,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VolunteerMutationResolver extends AbstractMutationResolver
 {
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    #[Required]
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireVolunteerMutationResolver(
         CustomPostTypeAPIInterface $customPostTypeAPI,
     ): void {
@@ -37,7 +46,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             $errors[] = $this->translationAPI->__('The requested post cannot be empty.', 'pop-genericforms');
         } else {
             // Make sure the post exists
-            $target = $this->customPostTypeAPI->getCustomPost($form_data['target-id']);
+            $target = $this->getCustomPostTypeAPI()->getCustomPost($form_data['target-id']);
             if (!$target) {
                 $errors[] = $this->translationAPI->__('The requested post does not exist.', 'pop-genericforms');
             }
@@ -60,7 +69,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
     protected function doExecute($form_data)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
-        $post_title = $this->customPostTypeAPI->getTitle($form_data['target-id']);
+        $post_title = $this->getCustomPostTypeAPI()->getTitle($form_data['target-id']);
         $subject = sprintf(
             $this->translationAPI->__('[%s]: %s', 'pop-genericforms'),
             $cmsapplicationapi->getSiteName(),
@@ -79,7 +88,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             sprintf(
                 $this->translationAPI->__('%s applied to volunteer for: <a href="%s">%s</a>', 'pop-genericforms'),
                 $form_data['name'],
-                $this->customPostTypeAPI->getPermalink($form_data['target-id']),
+                $this->getCustomPostTypeAPI()->getPermalink($form_data['target-id']),
                 $post_title
             )
         ) . sprintf(

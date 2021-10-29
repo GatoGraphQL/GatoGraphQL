@@ -20,7 +20,7 @@ abstract class AbstractCategoryTypeDataLoader extends AbstractObjectTypeQueryabl
 
     protected function getOrderbyDefault()
     {
-        return $this->nameResolver->getName('popcms:dbcolumn:orderby:categories:count');
+        return $this->getNameResolver()->getName('popcms:dbcolumn:orderby:categories:count');
     }
 
     protected function getOrderDefault()

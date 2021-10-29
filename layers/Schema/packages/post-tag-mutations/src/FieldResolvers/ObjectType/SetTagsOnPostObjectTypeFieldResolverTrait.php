@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\PostTagMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
@@ -13,29 +14,45 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait SetTagsOnPostObjectTypeFieldResolverTrait
 {
-    protected PostObjectTypeResolver $postObjectTypeResolver;
-    protected SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver;
-    protected TranslationAPIInterface $translationAPI;
+    // use BasicServiceTrait;
 
-    #[Required]
+    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver = null;
+
+    public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
+    {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+    }
+    protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    {
+        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+    }
+    public function setSetTagsOnPostMutationResolver(SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver): void
+    {
+        $this->setTagsOnPostMutationResolver = $setTagsOnPostMutationResolver;
+    }
+    protected function getSetTagsOnPostMutationResolver(): SetTagsOnPostMutationResolver
+    {
+        return $this->setTagsOnPostMutationResolver ??= $this->instanceManager->getInstance(SetTagsOnPostMutationResolver::class);
+    }
+
+    //#[Required]
     public function autowireSetTagsOnPostObjectTypeFieldResolverTrait(
         PostObjectTypeResolver $postObjectTypeResolver,
         SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver,
-        TranslationAPIInterface $translationAPI,
     ): void {
         $this->postObjectTypeResolver = $postObjectTypeResolver;
         $this->setTagsOnPostMutationResolver = $setTagsOnPostMutationResolver;
-        $this->translationAPI = $translationAPI;
     }
 
     public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
     {
-        return $this->postObjectTypeResolver;
+        return $this->getPostObjectTypeResolver();
     }
 
     public function getSetTagsMutationResolver(): MutationResolverInterface
     {
-        return $this->setTagsOnPostMutationResolver;
+        return $this->getSetTagsOnPostMutationResolver();
     }
 
     protected function getEntityName(): string

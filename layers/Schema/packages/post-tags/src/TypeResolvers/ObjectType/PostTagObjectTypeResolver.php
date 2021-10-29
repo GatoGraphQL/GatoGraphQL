@@ -14,9 +14,18 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
 {
     use PostTagAPISatisfiedContractTrait;
 
-    protected PostTagTypeDataLoader $postTagTypeDataLoader;
+    private ?PostTagTypeDataLoader $postTagTypeDataLoader = null;
 
-    #[Required]
+    public function setPostTagTypeDataLoader(PostTagTypeDataLoader $postTagTypeDataLoader): void
+    {
+        $this->postTagTypeDataLoader = $postTagTypeDataLoader;
+    }
+    protected function getPostTagTypeDataLoader(): PostTagTypeDataLoader
+    {
+        return $this->postTagTypeDataLoader ??= $this->instanceManager->getInstance(PostTagTypeDataLoader::class);
+    }
+
+    //#[Required]
     final public function autowirePostTagObjectTypeResolver(
         PostTagTypeDataLoader $postTagTypeDataLoader,
     ): void {
@@ -35,6 +44,6 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->postTagTypeDataLoader;
+        return $this->getPostTagTypeDataLoader();
     }
 }

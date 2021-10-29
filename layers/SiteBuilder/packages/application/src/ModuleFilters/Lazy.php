@@ -18,7 +18,7 @@ class Lazy extends AbstractModuleFilter
     {
         // Exclude if it is not lazy
         /** @var ModuleProcessorInterface */
-        $processor = $this->moduleProcessorManager->getProcessor($module);
+        $processor = $this->getModuleProcessorManager()->getProcessor($module);
         return !$processor->isLazyload($module, $props);
     }
 }

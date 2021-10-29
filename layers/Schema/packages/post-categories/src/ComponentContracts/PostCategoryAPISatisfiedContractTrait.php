@@ -12,10 +12,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait PostCategoryAPISatisfiedContractTrait
 {
-    protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
-    protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
+    private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
+    private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
 
-    #[Required]
+    public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
+    {
+        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
+    }
+    protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
+    {
+        return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
+    }
+    public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
+    {
+        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
+    }
+    protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
+    {
+        return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+    }
+
+    //#[Required]
     public function autowirePostCategoryAPISatisfiedContractTrait(
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
         PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
@@ -26,11 +43,11 @@ trait PostCategoryAPISatisfiedContractTrait
 
     public function getCategoryTypeAPI(): CategoryTypeAPIInterface
     {
-        return $this->postCategoryTypeAPI;
+        return $this->getPostCategoryTypeAPI();
     }
 
     public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
     {
-        return $this->postCategoryObjectTypeResolver;
+        return $this->getPostCategoryObjectTypeResolver();
     }
 }

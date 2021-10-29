@@ -12,10 +12,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MenuObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected MenuTypeDataLoader $menuTypeDataLoader;
-    protected MenuTypeAPIInterface $menuTypeAPI;
+    private ?MenuTypeDataLoader $menuTypeDataLoader = null;
+    private ?MenuTypeAPIInterface $menuTypeAPI = null;
 
-    #[Required]
+    public function setMenuTypeDataLoader(MenuTypeDataLoader $menuTypeDataLoader): void
+    {
+        $this->menuTypeDataLoader = $menuTypeDataLoader;
+    }
+    protected function getMenuTypeDataLoader(): MenuTypeDataLoader
+    {
+        return $this->menuTypeDataLoader ??= $this->instanceManager->getInstance(MenuTypeDataLoader::class);
+    }
+    public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
+    {
+        $this->menuTypeAPI = $menuTypeAPI;
+    }
+    protected function getMenuTypeAPI(): MenuTypeAPIInterface
+    {
+        return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireMenuObjectTypeResolver(
         MenuTypeDataLoader $menuTypeDataLoader,
         MenuTypeAPIInterface $menuTypeAPI,
@@ -37,11 +54,11 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
     public function getID(object $object): string | int | null
     {
         $menu = $object;
-        return $this->menuTypeAPI->getMenuID($menu);
+        return $this->getMenuTypeAPI()->getMenuID($menu);
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->menuTypeDataLoader;
+        return $this->getMenuTypeDataLoader();
     }
 }

@@ -63,9 +63,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     protected ?array $implementedInterfaceTypeFieldResolversCache = null;
 
-    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
+    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
 
-    #[Required]
+    public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    {
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+    }
+    protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    {
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractObjectTypeResolver(
         DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
     ): void {
@@ -120,8 +129,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     final public function getFieldSchemaDefinition(string $field): ?array
     {
         if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
-            $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
-            $fieldArgs = $this->fieldQueryInterpreter->extractStaticFieldArguments($field);
+            $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field);
+            $fieldArgs = $this->getFieldQueryInterpreter()->extractStaticFieldArguments($field);
             return $executableObjectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
         }
 
@@ -302,7 +311,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     private function doDissectFieldForSchema(string $field): array
     {
-        return $this->fieldQueryInterpreter->extractFieldArgumentsForSchema($this, $field);
+        return $this->getFieldQueryInterpreter()->extractFieldArgumentsForSchema($this, $field);
     }
 
     /**
@@ -331,10 +340,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
             // Store the warnings to be read if needed
             if ($schemaWarnings) {
-                $this->feedbackMessageStore->addSchemaWarnings($schemaWarnings);
+                $this->getFeedbackMessageStore()->addSchemaWarnings($schemaWarnings);
             }
             if ($schemaErrors) {
-                return $this->errorProvider->getNestedSchemaErrorsFieldError($schemaErrors, $fieldName);
+                return $this->getErrorProvider()->getNestedSchemaErrorsFieldError($schemaErrors, $fieldName);
             }
 
             // Important: calculate 'isAnyFieldArgumentValueDynamic' before resolving the args for the object
@@ -351,7 +360,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 ($options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? null) ||
                 FieldQueryUtils::isAnyFieldArgumentValueDynamic(
                     array_values(
-                        $this->fieldQueryInterpreter->extractFieldArguments($this, $field) ?? []
+                        $this->getFieldQueryInterpreter()->extractFieldArguments($this, $field) ?? []
                     )
                 );
 
@@ -362,14 +371,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $fieldArgs,
                 $objectErrors,
                 $objectWarnings
-            ) = $this->fieldQueryInterpreter->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions);
+            ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions);
 
             // Store the warnings to be read if needed
             if ($objectWarnings) {
-                $this->feedbackMessageStore->addObjectWarnings($objectWarnings);
+                $this->getFeedbackMessageStore()->addObjectWarnings($objectWarnings);
             }
             if ($objectErrors) {
-                return $this->errorProvider->getNestedObjectErrorsFieldError($objectErrors, $fieldName);
+                return $this->getErrorProvider()->getNestedObjectErrorsFieldError($objectErrors, $fieldName);
             }
 
             foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
@@ -377,7 +386,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 if ($objectTypeFieldResolver->resolveCanProcessObject($this, $object, $fieldName, $fieldArgs)) {
                     if ($validateSchemaOnObject) {
                         if ($maybeErrors = $objectTypeFieldResolver->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
-                            return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $maybeErrors);
+                            return $this->getErrorProvider()->getValidationFailedError($fieldName, $fieldArgs, $maybeErrors);
                         }
                         if ($maybeDeprecations = $objectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
                             $id = $this->getID($object);
@@ -387,11 +396,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                     Tokens::MESSAGE => $deprecation,
                                 ];
                             }
-                            $this->feedbackMessageStore->addObjectDeprecations($objectDeprecations);
+                            $this->getFeedbackMessageStore()->addObjectDeprecations($objectDeprecations);
                         }
                     }
                     if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs)) {
-                        return $this->errorProvider->getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
+                        return $this->getErrorProvider()->getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
                     }
 
                     // Resolve the value. If the field resolver throws an Exception,
@@ -441,7 +450,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     if ($value === null) {
                         $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
                         if ($fieldSchemaDefinition[SchemaDefinition::NON_NULLABLE] ?? false) {
-                            return $this->errorProvider->getNonNullableFieldError($fieldName);
+                            return $this->getErrorProvider()->getNonNullableFieldError($fieldName);
                         }
                     } elseif (ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition()) {
                         $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
@@ -459,7 +468,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                          * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
                          * these values by types `String` and `[String]`.
                          */
-                        if ($fieldTypeResolver === $this->dangerouslyDynamicScalarTypeResolver) {
+                        if ($fieldTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
                             return $value;
                         }
 
@@ -471,13 +480,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             !$fieldIsArrayType
                             && is_array($value)
                         ) {
-                            return $this->errorProvider->getMustNotBeArrayFieldError($fieldName, $value);
+                            return $this->getErrorProvider()->getMustNotBeArrayFieldError($fieldName, $value);
                         }
                         if (
                             $fieldIsArrayType
                             && !is_array($value)
                         ) {
-                            return $this->errorProvider->getMustBeArrayFieldError($fieldName, $value);
+                            return $this->getErrorProvider()->getMustBeArrayFieldError($fieldName, $value);
                         }
                         $fieldIsNonNullArrayItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
                         if (
@@ -488,7 +497,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 fn (mixed $arrayItem) => $arrayItem === null
                             )
                         ) {
-                            return $this->errorProvider->getArrayMustNotHaveNullItemsFieldError($fieldName, $value);
+                            return $this->getErrorProvider()->getArrayMustNotHaveNullItemsFieldError($fieldName, $value);
                         }
                         $fieldIsArrayOfArraysType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
                         if (
@@ -499,7 +508,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 fn (mixed $arrayItem) => is_array($arrayItem)
                             )
                         ) {
-                            return $this->errorProvider->getMustNotBeArrayOfArraysFieldError($fieldName, $value);
+                            return $this->getErrorProvider()->getMustNotBeArrayOfArraysFieldError($fieldName, $value);
                         }
                         if (
                             $fieldIsArrayOfArraysType
@@ -510,7 +519,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 fn (mixed $arrayItem) => !is_array($arrayItem) && $arrayItem !== null
                             )
                         ) {
-                            return $this->errorProvider->getMustBeArrayOfArraysFieldError($fieldName, $value);
+                            return $this->getErrorProvider()->getMustBeArrayOfArraysFieldError($fieldName, $value);
                         }
                         $fieldIsNonNullArrayOfArraysItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
                         if (
@@ -524,7 +533,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 ) !== [],
                             )
                         ) {
-                            return $this->errorProvider->getArrayOfArraysMustNotHaveNullItemsFieldError($fieldName, $value);
+                            return $this->getErrorProvider()->getArrayOfArraysMustNotHaveNullItemsFieldError($fieldName, $value);
                         }
                     }
 
@@ -532,13 +541,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     return $value;
                 }
             }
-            return $this->errorProvider->getNoObjectTypeFieldResolverProcessesFieldError($this->getID($object), $fieldName, $fieldArgs);
+            return $this->getErrorProvider()->getNoObjectTypeFieldResolverProcessesFieldError($this->getID($object), $fieldName, $fieldArgs);
         }
 
         // Return an error to indicate that no fieldResolver processes this field, which is different than returning a null value.
         // Needed for compatibility with CustomPostUnionTypeResolver (so that data-fields aimed for another post_type are not retrieved)
-        $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
-        return $this->errorProvider->getNoFieldError($this->getID($object), $fieldName, $this->getMaybeNamespacedTypeName());
+        $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field);
+        return $this->getErrorProvider()->getNoFieldError($this->getID($object), $fieldName, $this->getMaybeNamespacedTypeName());
     }
 
     final public function getExecutableObjectTypeFieldResolversByField(bool $global): array
@@ -625,7 +634,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
         do {
             /** @var ObjectTypeFieldResolverInterface[] */
-            $attachedObjectTypeFieldResolvers = $this->attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);
+            $attachedObjectTypeFieldResolvers = $this->getAttachableExtensionManager()->getAttachedExtensions($class, AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS);
             foreach ($attachedObjectTypeFieldResolvers as $objectTypeFieldResolver) {
                 // Process the fields which have not been processed yet
                 $extensionFieldNames = $this->getFieldNamesResolvedByObjectTypeFieldResolver($objectTypeFieldResolver);
@@ -767,8 +776,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         //     $fieldName,
         //     $fieldArgs,
         // ) = $this->dissectFieldForSchema($field);
-        $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
-        $fieldArgs = $this->fieldQueryInterpreter->extractStaticFieldArguments($field);
+        $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field);
+        $fieldArgs = $this->getFieldQueryInterpreter()->extractStaticFieldArguments($field);
 
         $objectTypeFieldResolvers = [];
         // Get the ObjectTypeFieldResolvers attached to this ObjectTypeResolver
@@ -781,7 +790,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
             // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
             /** @var ObjectTypeFieldResolverInterface[] */
-            $attachedObjectTypeFieldResolvers = array_reverse($this->attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS));
+            $attachedObjectTypeFieldResolvers = array_reverse($this->getAttachableExtensionManager()->getAttachedExtensions($class, AttachableExtensionGroups::OBJECT_TYPE_FIELD_RESOLVERS));
             foreach ($attachedObjectTypeFieldResolvers as $objectTypeFieldResolver) {
                 $extensionFieldNames = $this->getFieldNamesResolvedByObjectTypeFieldResolver($objectTypeFieldResolver);
                 if (!in_array($fieldName, $extensionFieldNames)) {

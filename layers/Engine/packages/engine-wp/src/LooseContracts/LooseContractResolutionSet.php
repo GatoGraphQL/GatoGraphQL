@@ -35,7 +35,7 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
             $this->hooksAPI->doAction('popcms:componentInstalledOrUninstalled');
         });
 
-        $this->looseContractManager->implementHooks([
+        $this->getLooseContractManager()->implementHooks([
             'popcms:init',
             'popcms:boot',
             'popcms:shutdown',
@@ -44,7 +44,7 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
             'popcms:componentInstalledOrUninstalled',
         ]);
 
-        $this->nameResolver->implementNames([
+        $this->getNameResolver()->implementNames([
             'popcms:option:dateFormat' => 'date_format',
             'popcms:option:charset' => 'blog_charset',
             'popcms:option:gmtOffset' => 'gmt_offset',

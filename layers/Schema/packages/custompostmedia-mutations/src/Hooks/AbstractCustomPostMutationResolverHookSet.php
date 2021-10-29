@@ -17,17 +17,42 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
-    protected MediaObjectTypeResolver $mediaTypeResolver;
-    protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
+    private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
+    private ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    #[Required]
+    public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
+    {
+        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
+    }
+    protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
+    {
+        return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
+    }
+    public function setCustomPostMediaTypeMutationAPI(CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI): void
+    {
+        $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
+    }
+    protected function getCustomPostMediaTypeMutationAPI(): CustomPostMediaTypeMutationAPIInterface
+    {
+        return $this->customPostMediaTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractCustomPostMutationResolverHookSet(
-        MediaObjectTypeResolver $mediaTypeResolver,
+        MediaObjectTypeResolver $mediaObjectTypeResolver,
         CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
         IDScalarTypeResolver $idScalarTypeResolver,
     ): void {
-        $this->mediaTypeResolver = $mediaTypeResolver;
+        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
         $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
         $this->idScalarTypeResolver = $idScalarTypeResolver;
     }
@@ -64,7 +89,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if (!$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
             return $fieldArgNameTypeResolvers;
         }
-        $fieldArgNameTypeResolvers[MutationInputProperties::FEATUREDIMAGE_ID] = $this->idScalarTypeResolver;
+        $fieldArgNameTypeResolvers[MutationInputProperties::FEATUREDIMAGE_ID] = $this->getIdScalarTypeResolver();
         return $fieldArgNameTypeResolvers;
     }
 
@@ -81,7 +106,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         }
         return sprintf(
             $this->translationAPI->__('The ID of the featured image (of type %s)', 'custompost-mutations'),
-            $this->mediaTypeResolver->getMaybeNamespacedTypeName()
+            $this->getMediaObjectTypeResolver()->getMaybeNamespacedTypeName()
         );
     }
 
@@ -97,9 +122,9 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     {
         if (isset($form_data[MutationInputProperties::FEATUREDIMAGE_ID])) {
             if ($featuredImageID = $form_data[MutationInputProperties::FEATUREDIMAGE_ID]) {
-                $this->customPostMediaTypeMutationAPI->setFeaturedImage($customPostID, $featuredImageID);
+                $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $featuredImageID);
             } else {
-                $this->customPostMediaTypeMutationAPI->removeFeaturedImage($customPostID);
+                $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);
             }
         }
     }

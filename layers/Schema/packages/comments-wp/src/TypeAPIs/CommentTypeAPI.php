@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentsWP\TypeAPIs;
 
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\Constants\CommentTypes;
@@ -18,6 +19,8 @@ use WP_Comment;
  */
 class CommentTypeAPI implements CommentTypeAPIInterface
 {
+    use WithHooksAPIServiceTrait;
+
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     protected array $cmsToPoPCommentStatusConversion = [
@@ -28,13 +31,9 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     ];
 
     protected array $popToCMSCommentStatusConversion;
-    protected HooksAPIInterface $hooksAPI;
 
-    #[Required]
-    final public function autowireCommentTypeAPI(
-        HooksAPIInterface $hooksAPI,
-    ): void {
-        $this->hooksAPI = $hooksAPI;
+    public function __construct()
+    {
         $this->popToCMSCommentStatusConversion = array_flip($this->cmsToPoPCommentStatusConversion);
     }
 

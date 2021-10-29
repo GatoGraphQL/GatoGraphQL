@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MarkAsUnreadNotificationMutationResolverBridge extends AbstractMarkAsReadOrUnreadNotificationMutationResolverBridge
 {
-    protected MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver;
+    private ?MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver = null;
 
-    #[Required]
+    public function setMarkAsUnreadNotificationMutationResolver(MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver): void
+    {
+        $this->markAsUnreadNotificationMutationResolver = $markAsUnreadNotificationMutationResolver;
+    }
+    protected function getMarkAsUnreadNotificationMutationResolver(): MarkAsUnreadNotificationMutationResolver
+    {
+        return $this->markAsUnreadNotificationMutationResolver ??= $this->instanceManager->getInstance(MarkAsUnreadNotificationMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireMarkAsUnreadNotificationMutationResolverBridge(
         MarkAsUnreadNotificationMutationResolver $markAsUnreadNotificationMutationResolver,
     ): void {
@@ -21,7 +30,7 @@ class MarkAsUnreadNotificationMutationResolverBridge extends AbstractMarkAsReadO
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->markAsUnreadNotificationMutationResolver;
+        return $this->getMarkAsUnreadNotificationMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

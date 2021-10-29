@@ -26,13 +26,54 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     
-    #[Required]
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCustomPostFunctionalObjectTypeFieldResolver(
         BooleanScalarTypeResolver $booleanScalarTypeResolver,
         IDScalarTypeResolver $idScalarTypeResolver,
@@ -74,17 +115,17 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'addStanceURL' => $this->urlScalarTypeResolver,
-            'loggedInUserStances' => $this->intScalarTypeResolver,
-            'hasLoggedInUserStances' => $this->booleanScalarTypeResolver,
-            'editStanceURL' => $this->urlScalarTypeResolver,
-            'postStancesProURL' => $this->urlScalarTypeResolver,
-            'postStancesNeutralURL' => $this->urlScalarTypeResolver,
-            'postStancesAgainstURL' => $this->urlScalarTypeResolver,
-            'createStanceButtonLazy' => $this->idScalarTypeResolver,
-            'stancesLazy' => $this->idScalarTypeResolver,
-            'stanceName' => $this->stringScalarTypeResolver,
-            'catName' => $this->stringScalarTypeResolver,
+            'addStanceURL' => $this->getUrlScalarTypeResolver(),
+            'loggedInUserStances' => $this->getIntScalarTypeResolver(),
+            'hasLoggedInUserStances' => $this->getBooleanScalarTypeResolver(),
+            'editStanceURL' => $this->getUrlScalarTypeResolver(),
+            'postStancesProURL' => $this->getUrlScalarTypeResolver(),
+            'postStancesNeutralURL' => $this->getUrlScalarTypeResolver(),
+            'postStancesAgainstURL' => $this->getUrlScalarTypeResolver(),
+            'createStanceButtonLazy' => $this->getIdScalarTypeResolver(),
+            'stancesLazy' => $this->getIdScalarTypeResolver(),
+            'stanceName' => $this->getStringScalarTypeResolver(),
+            'catName' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

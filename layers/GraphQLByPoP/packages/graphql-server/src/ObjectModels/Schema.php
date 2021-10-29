@@ -100,12 +100,12 @@ class Schema
     public function getQueryRootObjectTypeID(): string
     {
         $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
-        return $this->getObjectTypeID($graphQLSchemaDefinitionService->getQueryRootObjectTypeResolver());
+        return $this->getObjectTypeID($graphQLSchemaDefinitionService->getSchemaQueryRootObjectTypeResolver());
     }
     public function getMutationRootObjectTypeID(): ?string
     {
         $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
-        if ($mutationRootTypeResolver = $graphQLSchemaDefinitionService->getMutationRootObjectTypeResolver()) {
+        if ($mutationRootTypeResolver = $graphQLSchemaDefinitionService->getSchemaMutationRootObjectTypeResolver()) {
             return $this->getObjectTypeID($mutationRootTypeResolver);
         }
         return null;
@@ -113,7 +113,7 @@ class Schema
     public function getSubscriptionRootObjectTypeID(): ?string
     {
         $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();
-        if ($subscriptionRootTypeResolver = $graphQLSchemaDefinitionService->getSubscriptionRootTypeResolver()) {
+        if ($subscriptionRootTypeResolver = $graphQLSchemaDefinitionService->getSchemaSubscriptionRootTypeResolver()) {
             return $this->getObjectTypeID($subscriptionRootTypeResolver);
         }
         return null;

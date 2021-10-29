@@ -13,13 +13,54 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
-    protected MenuPageHelper $menuPageHelper;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected UserAuthorizationInterface $userAuthorization;
-    protected GraphiQLMenuPage $graphiQLMenuPage;
-    protected GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage;
+    private ?MenuPageHelper $menuPageHelper = null;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?UserAuthorizationInterface $userAuthorization = null;
+    private ?GraphiQLMenuPage $graphiQLMenuPage = null;
+    private ?GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage = null;
 
-    #[Required]
+    public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
+    {
+        $this->menuPageHelper = $menuPageHelper;
+    }
+    protected function getMenuPageHelper(): MenuPageHelper
+    {
+        return $this->menuPageHelper ??= $this->instanceManager->getInstance(MenuPageHelper::class);
+    }
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    {
+        $this->userAuthorization = $userAuthorization;
+    }
+    protected function getUserAuthorization(): UserAuthorizationInterface
+    {
+        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+    }
+    public function setGraphiQLMenuPage(GraphiQLMenuPage $graphiQLMenuPage): void
+    {
+        $this->graphiQLMenuPage = $graphiQLMenuPage;
+    }
+    protected function getGraphiQLMenuPage(): GraphiQLMenuPage
+    {
+        return $this->graphiQLMenuPage ??= $this->instanceManager->getInstance(GraphiQLMenuPage::class);
+    }
+    public function setGraphQLVoyagerMenuPage(GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage): void
+    {
+        $this->graphQLVoyagerMenuPage = $graphQLVoyagerMenuPage;
+    }
+    protected function getGraphQLVoyagerMenuPage(): GraphQLVoyagerMenuPage
+    {
+        return $this->graphQLVoyagerMenuPage ??= $this->instanceManager->getInstance(GraphQLVoyagerMenuPage::class);
+    }
+
+    //#[Required]
     final public function autowireTopMenuPageAttacher(
         MenuPageHelper $menuPageHelper,
         ModuleRegistryInterface $moduleRegistry,
@@ -44,7 +85,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
 
     public function addMenuPages(): void
     {
-        $schemaEditorAccessCapability = $this->userAuthorization->getSchemaEditorAccessCapability();
+        $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
 
         if (
             $hookName = \add_submenu_page(
@@ -53,10 +94,10 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
                 __('GraphiQL', 'graphql-api'),
                 $schemaEditorAccessCapability,
                 $this->getMenuName(),
-                [$this->graphiQLMenuPage, 'print']
+                [$this->getGraphiQLMenuPage(), 'print']
             )
         ) {
-            $this->graphiQLMenuPage->setHookName($hookName);
+            $this->getGraphiQLMenuPage()->setHookName($hookName);
         }
 
         if (
@@ -65,11 +106,11 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
                 __('Interactive Schema', 'graphql-api'),
                 __('Interactive Schema', 'graphql-api'),
                 $schemaEditorAccessCapability,
-                $this->graphQLVoyagerMenuPage->getScreenID(),
-                [$this->graphQLVoyagerMenuPage, 'print']
+                $this->getGraphQLVoyagerMenuPage()->getScreenID(),
+                [$this->getGraphQLVoyagerMenuPage(), 'print']
             )
         ) {
-            $this->graphQLVoyagerMenuPage->setHookName($hookName);
+            $this->getGraphQLVoyagerMenuPage()->setHookName($hookName);
         }
     }
 }

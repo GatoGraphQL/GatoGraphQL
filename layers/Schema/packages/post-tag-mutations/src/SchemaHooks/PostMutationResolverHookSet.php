@@ -17,11 +17,36 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
 {
     use PostMutationResolverHookSetTrait;
 
-    protected PostObjectTypeResolver $postObjectTypeResolver;
-    protected PostTypeAPIInterface $postTypeAPI;
-    protected PostTagTypeMutationAPIInterface $postTagTypeMutationAPI;
+    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?PostTypeAPIInterface $postTypeAPI = null;
+    private ?PostTagTypeMutationAPIInterface $postTagTypeMutationAPI = null;
 
-    #[Required]
+    public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
+    {
+        $this->postObjectTypeResolver = $postObjectTypeResolver;
+    }
+    protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    {
+        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+    }
+    public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
+    {
+        $this->postTypeAPI = $postTypeAPI;
+    }
+    protected function getPostTypeAPI(): PostTypeAPIInterface
+    {
+        return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
+    }
+    public function setPostTagTypeMutationAPI(PostTagTypeMutationAPIInterface $postTagTypeMutationAPI): void
+    {
+        $this->postTagTypeMutationAPI = $postTagTypeMutationAPI;
+    }
+    protected function getPostTagTypeMutationAPI(): PostTagTypeMutationAPIInterface
+    {
+        return $this->postTagTypeMutationAPI ??= $this->instanceManager->getInstance(PostTagTypeMutationAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowirePostMutationResolverHookSet(
         PostObjectTypeResolver $postObjectTypeResolver,
         PostTypeAPIInterface $postTypeAPI,
@@ -34,16 +59,16 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
 
     protected function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
     {
-        return $this->postObjectTypeResolver;
+        return $this->getPostObjectTypeResolver();
     }
 
     protected function getCustomPostType(): string
     {
-        return $this->postTypeAPI->getPostCustomPostType();
+        return $this->getPostTypeAPI()->getPostCustomPostType();
     }
 
     protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface
     {
-        return $this->postTagTypeMutationAPI;
+        return $this->getPostTagTypeMutationAPI();
     }
 }

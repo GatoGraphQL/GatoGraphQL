@@ -15,9 +15,19 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 {
     public const VALIDATECATEGORIESTYPE_ATLEASTONE = 1;
     public const VALIDATECATEGORIESTYPE_EXACTLYONE = 2;
-    protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
 
-    #[Required]
+    private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
+
+    public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
+    {
+        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
+    }
+    protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
+    {
+        return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireCustomPostMutationsAbstractCreateUpdateCustomPostMutationResolver(
         PostCategoryTypeAPIInterface $postCategoryTypeAPI,
     ): void {
@@ -121,7 +131,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
         $customPostID = $form_data[MutationInputProperties::ID];
 
-        if (!in_array($this->customPostTypeAPI->getStatus($customPostID), array(Status::DRAFT, Status::PENDING, Status::PUBLISHED))) {
+        if (!in_array($this->getCustomPostTypeAPI()->getStatus($customPostID), array(Status::DRAFT, Status::PENDING, Status::PUBLISHED))) {
             $errors[] = $this->translationAPI->__('Hmmmmm, this post seems to have been deleted...', 'pop-application');
             return;
         }
@@ -177,7 +187,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
                 $catID = $categories[$i];
                 $i++;
 
-                if ($parentCatID = $this->postCategoryTypeAPI->getCategoryParentID($catID)) {
+                if ($parentCatID = $this->getPostCategoryTypeAPI()->getCategoryParentID($catID)) {
                     $categories[] = $parentCatID;
                 }
             }

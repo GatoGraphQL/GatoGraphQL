@@ -14,10 +14,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected CommentTypeAPIInterface $commentTypeAPI;
-    protected UserObjectTypeResolver $userObjectTypeResolver;
+    private ?CommentTypeAPIInterface $commentTypeAPI = null;
+    private ?UserObjectTypeResolver $userObjectTypeResolver = null;
 
-    #[Required]
+    public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
+    {
+        $this->commentTypeAPI = $commentTypeAPI;
+    }
+    protected function getCommentTypeAPI(): CommentTypeAPIInterface
+    {
+        return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+    }
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
+    {
+        $this->userObjectTypeResolver = $userObjectTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+    }
+
+    //#[Required]
     final public function autowireCommentUserObjectTypeFieldResolver(
         CommentTypeAPIInterface $commentTypeAPI,
         UserObjectTypeResolver $userObjectTypeResolver,
@@ -66,7 +83,7 @@ class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $comment = $object;
         switch ($fieldName) {
             case 'author':
-                return $this->commentTypeAPI->getCommentUserId($comment);
+                return $this->getCommentTypeAPI()->getCommentUserId($comment);
         }
 
             return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
@@ -75,7 +92,7 @@ class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'author' => $this->userObjectTypeResolver,
+            'author' => $this->getUserObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

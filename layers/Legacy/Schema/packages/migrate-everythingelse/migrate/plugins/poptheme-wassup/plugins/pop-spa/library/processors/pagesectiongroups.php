@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 use PoP\SPA\ModuleFilters\Page;

@@ -14,9 +14,18 @@ class LogoutMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    protected UserStateTypeMutationAPIInterface $userStateTypeMutationAPI;
+    private ?UserStateTypeMutationAPIInterface $userStateTypeMutationAPI = null;
 
-    #[Required]
+    public function setUserStateTypeMutationAPI(UserStateTypeMutationAPIInterface $userStateTypeMutationAPI): void
+    {
+        $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;
+    }
+    protected function getUserStateTypeMutationAPI(): UserStateTypeMutationAPIInterface
+    {
+        return $this->userStateTypeMutationAPI ??= $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
+    }
+
+    //#[Required]
     final public function autowireLogoutMutationResolver(
         UserStateTypeMutationAPIInterface $userStateTypeMutationAPI,
     ): void {
@@ -34,7 +43,7 @@ class LogoutMutationResolver extends AbstractMutationResolver
         $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
 
-        $this->userStateTypeMutationAPI->logout();
+        $this->getUserStateTypeMutationAPI()->logout();
 
         // Modify the routing-state with the newly logged in user info
         ApplicationStateUtils::setUserStateVars(ApplicationState::$vars);

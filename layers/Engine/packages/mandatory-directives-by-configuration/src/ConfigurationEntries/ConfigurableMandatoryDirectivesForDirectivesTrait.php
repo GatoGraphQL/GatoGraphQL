@@ -5,19 +5,12 @@ declare(strict_types=1);
 namespace PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait ConfigurableMandatoryDirectivesForDirectivesTrait
 {
-    protected InstanceManagerInterface $instanceManager;
-
-    #[Required]
-    public function autowireConfigurableMandatoryDirectivesForDirectivesTrait(
-        InstanceManagerInterface $instanceManager,
-    ): void {
-        $this->instanceManager = $instanceManager;
-    }
+    use BasicServiceTrait;
 
     /**
      * Configuration entries

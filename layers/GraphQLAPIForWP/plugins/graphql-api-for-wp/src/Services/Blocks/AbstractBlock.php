@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\EditorScripts\HasDocumentationScriptTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -27,17 +27,49 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService implements BlockInterface
 {
     use HasDocumentationScriptTrait;
+    use BasicServiceTrait;
 
-    protected InstanceManagerInterface $instanceManager;
-    protected ModuleRegistryInterface $moduleRegistry;
-    protected UserAuthorizationInterface $userAuthorization;
-    protected GeneralUtils $generalUtils;
-    protected EditorHelpers $editorHelpers;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?UserAuthorizationInterface $userAuthorization = null;
+    private ?GeneralUtils $generalUtils = null;
+    private ?EditorHelpers $editorHelpers = null;
 
-    #[Required]
-    final public function autowireAbstractBlock(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, UserAuthorizationInterface $userAuthorization, GeneralUtils $generalUtils, EditorHelpers $editorHelpers): void
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
-        $this->instanceManager = $instanceManager;
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+    }
+    public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    {
+        $this->userAuthorization = $userAuthorization;
+    }
+    protected function getUserAuthorization(): UserAuthorizationInterface
+    {
+        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+    }
+    public function setGeneralUtils(GeneralUtils $generalUtils): void
+    {
+        $this->generalUtils = $generalUtils;
+    }
+    protected function getGeneralUtils(): GeneralUtils
+    {
+        return $this->generalUtils ??= $this->instanceManager->getInstance(GeneralUtils::class);
+    }
+    public function setEditorHelpers(EditorHelpers $editorHelpers): void
+    {
+        $this->editorHelpers = $editorHelpers;
+    }
+    protected function getEditorHelpers(): EditorHelpers
+    {
+        return $this->editorHelpers ??= $this->instanceManager->getInstance(EditorHelpers::class);
+    }
+
+    //#[Required]
+    final public function autowireAbstractBlock(ModuleRegistryInterface $moduleRegistry, UserAuthorizationInterface $userAuthorization, GeneralUtils $generalUtils, EditorHelpers $editorHelpers): void
+    {
         $this->moduleRegistry = $moduleRegistry;
         $this->userAuthorization = $userAuthorization;
         $this->generalUtils = $generalUtils;
@@ -64,7 +96,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     {
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null) {
-            return $this->moduleRegistry->isModuleEnabled($enablingModule);
+            return $this->getModuleRegistry()->isModuleEnabled($enablingModule);
         }
         return parent::isServiceEnabled();
     }
@@ -153,7 +185,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      */
     final protected function getBlockLocalizationName(): string
     {
-        return $this->generalUtils->dashesToCamelCase($this->getBlockRegistrationName());
+        return $this->getGeneralUtils()->dashesToCamelCase($this->getBlockRegistrationName());
     }
     /**
      * Block class name: wp-block-namespace-blockName
@@ -260,7 +292,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          */
         if (\is_admin()) {
             if ($postTypes = $this->getAllowedPostTypes()) {
-                if (!in_array($this->editorHelpers->getEditingPostType(), $postTypes)) {
+                if (!in_array($this->getEditorHelpers()->getEditingPostType(), $postTypes)) {
                     return;
                 }
             }
@@ -335,7 +367,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
             /**
              * Show only if the user has the right permission
              */
-            if ($this->userAuthorization->canAccessSchemaEditor()) {
+            if ($this->getUserAuthorization()->canAccessSchemaEditor()) {
                 $blockConfiguration['render_callback'] = [$this, 'renderBlock'];
             } else {
                 $blockConfiguration['render_callback'] = [$this, 'renderUnauthorizedAccess'];

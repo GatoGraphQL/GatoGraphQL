@@ -5,13 +5,25 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModuleFilters;
 
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractModuleFilter implements ModuleFilterInterface
 {
-    protected ModuleProcessorManagerInterface $moduleProcessorManager;
+    use BasicServiceTrait;
 
-    #[Required]
+    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+
+    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    {
+        $this->moduleProcessorManager = $moduleProcessorManager;
+    }
+    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    {
+        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
+    }
+
+    //#[Required]
     final public function autowireAbstractModuleFilter(ModuleProcessorManagerInterface $moduleProcessorManager): void
     {
         $this->moduleProcessorManager = $moduleProcessorManager;

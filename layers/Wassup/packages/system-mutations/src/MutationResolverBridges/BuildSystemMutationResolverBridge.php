@@ -10,9 +10,18 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class BuildSystemMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
-    protected BuildSystemMutationResolver $buildSystemMutationResolver;
+    private ?BuildSystemMutationResolver $buildSystemMutationResolver = null;
 
-    #[Required]
+    public function setBuildSystemMutationResolver(BuildSystemMutationResolver $buildSystemMutationResolver): void
+    {
+        $this->buildSystemMutationResolver = $buildSystemMutationResolver;
+    }
+    protected function getBuildSystemMutationResolver(): BuildSystemMutationResolver
+    {
+        return $this->buildSystemMutationResolver ??= $this->instanceManager->getInstance(BuildSystemMutationResolver::class);
+    }
+
+    //#[Required]
     final public function autowireBuildSystemMutationResolverBridge(
         BuildSystemMutationResolver $buildSystemMutationResolver,
     ): void {
@@ -21,7 +30,7 @@ class BuildSystemMutationResolverBridge extends AbstractSystemComponentMutationR
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->buildSystemMutationResolver;
+        return $this->getBuildSystemMutationResolver();
     }
     public function getSuccessString(string | int $result_id): ?string
     {

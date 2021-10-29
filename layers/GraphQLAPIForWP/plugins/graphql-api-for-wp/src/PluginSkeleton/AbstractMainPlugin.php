@@ -21,7 +21,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin
      * If there is any error when initializing the plugin,
      * set this var to `true` to stop loading it and show an error message.
      */
-    protected ?Exception $inititalizationException = null;
+    private ?Exception $inititalizationException = null;
 
     public function __construct(
         string $pluginFile, /** The main plugin file */

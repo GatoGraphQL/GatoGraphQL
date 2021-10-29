@@ -17,9 +17,18 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
 
     public const ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS = 'accessControlLists';
 
-    protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType;
+    private ?GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType = null;
 
-    #[Required]
+    public function setGraphQLAccessControlListCustomPostType(GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType): void
+    {
+        $this->graphQLAccessControlListCustomPostType = $graphQLAccessControlListCustomPostType;
+    }
+    protected function getGraphQLAccessControlListCustomPostType(): GraphQLAccessControlListCustomPostType
+    {
+        return $this->graphQLAccessControlListCustomPostType ??= $this->instanceManager->getInstance(GraphQLAccessControlListCustomPostType::class);
+    }
+
+    //#[Required]
     final public function autowireSchemaConfigAccessControlListBlock(
         GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
     ): void {
@@ -48,7 +57,7 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigCustomPostL
 
     protected function getCustomPostType(): string
     {
-        return $this->graphQLAccessControlListCustomPostType->getCustomPostType();
+        return $this->getGraphQLAccessControlListCustomPostType()->getCustomPostType();
     }
 
     protected function getHeader(): string

@@ -12,9 +12,18 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class PluginMenu extends AbstractMenu
 {
-    protected UserAuthorizationInterface $userAuthorization;
+    private ?UserAuthorizationInterface $userAuthorization = null;
 
-    #[Required]
+    public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    {
+        $this->userAuthorization = $userAuthorization;
+    }
+    protected function getUserAuthorization(): UserAuthorizationInterface
+    {
+        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+    }
+
+    //#[Required]
     final public function autowirePluginMenu(
         UserAuthorizationInterface $userAuthorization
     ): void {
@@ -28,7 +37,7 @@ class PluginMenu extends AbstractMenu
 
     public function addMenuPage(): void
     {
-        $schemaEditorAccessCapability = $this->userAuthorization->getSchemaEditorAccessCapability();
+        $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
         \add_menu_page(
             __('GraphQL API', 'graphql-api'),
             __('GraphQL API', 'graphql-api'),

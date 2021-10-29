@@ -13,9 +13,18 @@ use WP_Post;
 
 class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator implements CustomEndpointAnnotatorServiceTagInterface
 {
-    protected EndpointVoyagerBlock $endpointVoyagerBlock;
+    private ?EndpointVoyagerBlock $endpointVoyagerBlock = null;
 
-    #[Required]
+    public function setEndpointVoyagerBlock(EndpointVoyagerBlock $endpointVoyagerBlock): void
+    {
+        $this->endpointVoyagerBlock = $endpointVoyagerBlock;
+    }
+    protected function getEndpointVoyagerBlock(): EndpointVoyagerBlock
+    {
+        return $this->endpointVoyagerBlock ??= $this->instanceManager->getInstance(EndpointVoyagerBlock::class);
+    }
+
+    //#[Required]
     final public function autowireVoyagerClientEndpointAnnotator(
         EndpointVoyagerBlock $endpointVoyagerBlock,
     ): void {
@@ -56,6 +65,6 @@ class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator imp
 
     protected function getBlock(): BlockInterface
     {
-        return $this->endpointVoyagerBlock;
+        return $this->getEndpointVoyagerBlock();
     }
 }

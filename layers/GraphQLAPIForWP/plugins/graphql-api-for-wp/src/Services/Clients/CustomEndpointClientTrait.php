@@ -11,10 +11,29 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait CustomEndpointClientTrait
 {
-    protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
-    protected RequestHelperServiceInterface $requestHelperService;
+    // use BasicServiceTrait;
 
-    #[Required]
+    private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
+    private ?RequestHelperServiceInterface $requestHelperService = null;
+
+    public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
+    {
+        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
+    }
+    protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
+    {
+        return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+    }
+    public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
+    {
+        $this->requestHelperService = $requestHelperService;
+    }
+    protected function getRequestHelperService(): RequestHelperServiceInterface
+    {
+        return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
+    }
+
+    //#[Required]
     public function autowireCustomEndpointClientTrait(
         GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
         RequestHelperServiceInterface $requestHelperService,
@@ -28,7 +47,7 @@ trait CustomEndpointClientTrait
      */
     protected function isClientDisabled(): bool
     {
-        if (!\is_singular($this->graphQLCustomEndpointCustomPostType->getCustomPostType())) {
+        if (!\is_singular($this->getGraphQLCustomEndpointCustomPostType()->getCustomPostType())) {
             return true;
         }
         return parent::isClientDisabled();
@@ -43,7 +62,7 @@ trait CustomEndpointClientTrait
          * If accessing from Nginx, the server_name might point to localhost
          * instead of the actual server domain. So use the user-requested host
          */
-        $fullURL = $this->requestHelperService->getRequestedFullURL(true);
+        $fullURL = $this->getRequestHelperService()->getRequestedFullURL(true);
         // Remove the ?view=...
         $endpointURL = \remove_query_arg(RequestParams::VIEW, $fullURL);
         // // Maybe add ?use_namespace=true

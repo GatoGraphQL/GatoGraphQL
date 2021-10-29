@@ -16,9 +16,19 @@ use Symfony\Contracts\Service\Attribute\Required;
 class QueryHookSet extends AbstractHookSet
 {
     public const NON_EXISTING_ID = "non-existing";
-    protected CustomPostTypeRegistryInterface $customPostTypeRegistry;
 
-    #[Required]
+    private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
+
+    public function setCustomPostTypeRegistry(CustomPostTypeRegistryInterface $customPostTypeRegistry): void
+    {
+        $this->customPostTypeRegistry = $customPostTypeRegistry;
+    }
+    protected function getCustomPostTypeRegistry(): CustomPostTypeRegistryInterface
+    {
+        return $this->customPostTypeRegistry ??= $this->instanceManager->getInstance(CustomPostTypeRegistryInterface::class);
+    }
+
+    //#[Required]
     final public function autowireQueryHookSet(
         CustomPostTypeRegistryInterface $customPostTypeRegistry
     ): void {
@@ -56,7 +66,7 @@ class QueryHookSet extends AbstractHookSet
              * must not be queried from outside, since they are used for
              * configuration purposes only, which is private data.
              */
-            $customPostTypeServices = $this->customPostTypeRegistry->getCustomPostTypes();
+            $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
             $query['post_type'] = array_diff(
                 is_array($query['post_type']) ? $query['post_type'] : [$query['post_type']],
                 array_map(

@@ -47,7 +47,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
         $schemaFieldArgNameTypeResolvers = [];
         foreach ($filterQueryArgsModules as $module) {
             /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
-            $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
+            $dataloadQueryArgsFilterInputModuleProcessor = $this->getModuleProcessorManager()->getProcessor($module);
             $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
             $schemaFieldArgNameTypeResolvers[$filterInputName] = $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputTypeResolver($module);
         }
@@ -59,7 +59,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
         foreach ($filterQueryArgsModules as $module) {
             /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
-            $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
+            $dataloadQueryArgsFilterInputModuleProcessor = $this->getModuleProcessorManager()->getProcessor($module);
             $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
             if ($filterInputName === $fieldArgName) {
                 return $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputDescription($module);
@@ -73,7 +73,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
         foreach ($filterQueryArgsModules as $module) {
             /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
-            $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
+            $dataloadQueryArgsFilterInputModuleProcessor = $this->getModuleProcessorManager()->getProcessor($module);
             $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
             if ($filterInputName === $fieldArgName) {
                 return $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputDefaultValue($module);
@@ -87,7 +87,7 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
         foreach ($filterQueryArgsModules as $module) {
             /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
-            $dataloadQueryArgsFilterInputModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
+            $dataloadQueryArgsFilterInputModuleProcessor = $this->getModuleProcessorManager()->getProcessor($module);
             $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
             if ($filterInputName === $fieldArgName) {
                 return $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputTypeModifiers($module);
