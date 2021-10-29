@@ -7,25 +7,19 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService implements MenuPageInterface
 {
+    use WithInstanceManagerServiceTrait;
+    
     protected ?string $hookName = null;
 
-    protected ?InstanceManagerInterface $instanceManager = null;
     protected ?MenuPageHelper $menuPageHelper = null;
     protected ?EndpointHelpers $endpointHelpers = null;
 
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
-    }
     public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
     {
         $this->menuPageHelper = $menuPageHelper;
@@ -44,9 +38,8 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
     }
 
     //#[Required]
-    final public function autowireAbstractMenuPage(InstanceManagerInterface $instanceManager, MenuPageHelper $menuPageHelper, EndpointHelpers $endpointHelpers): void
+    final public function autowireAbstractMenuPage(MenuPageHelper $menuPageHelper, EndpointHelpers $endpointHelpers): void
     {
-        $this->instanceManager = $instanceManager;
         $this->menuPageHelper = $menuPageHelper;
         $this->endpointHelpers = $endpointHelpers;
     }

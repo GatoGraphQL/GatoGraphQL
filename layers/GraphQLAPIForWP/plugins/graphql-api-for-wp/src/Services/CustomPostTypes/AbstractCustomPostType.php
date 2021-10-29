@@ -14,6 +14,7 @@ use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -22,8 +23,9 @@ use WP_Post;
 
 abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedService implements CustomPostTypeInterface
 {
+    use WithInstanceManagerServiceTrait;
+    
     protected ?UserSettingsManagerInterface $userSettingsManager = null;
-    protected ?InstanceManagerInterface $instanceManager = null;
     protected ?ModuleRegistryInterface $moduleRegistry = null;
     protected ?UserAuthorizationInterface $userAuthorization = null;
     protected ?CPTUtils $cptUtils = null;
@@ -36,14 +38,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
         return $this->userSettingsManager ??= $this->getInstanceManager()->getInstance(UserSettingsManagerInterface::class);
-    }
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
     }
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -80,13 +74,11 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     //#[Required]
     final public function autowireAbstractCustomPostType(
-        InstanceManagerInterface $instanceManager,
         ModuleRegistryInterface $moduleRegistry,
         UserAuthorizationInterface $userAuthorization,
         CPTUtils $cptUtils,
         PluginMenu $pluginMenu,
     ): void {
-        $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;
         $this->userAuthorization = $userAuthorization;
         $this->cptUtils = $cptUtils;

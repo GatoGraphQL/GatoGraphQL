@@ -5,28 +5,13 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ItemProcessors;
 
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait ItemProcessorManagerTrait
 {
-    protected ?InstanceManagerInterface $instanceManager = null;
-
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
-    }
-
-    //#[Required]
-    public function autowireItemProcessorManagerTrait(
-        InstanceManagerInterface $instanceManager,
-    ): void {
-        $this->instanceManager = $instanceManager;
-    }
-
+    use WithInstanceManagerServiceTrait;
+    
     /**
      * @var array<string, array>
      */

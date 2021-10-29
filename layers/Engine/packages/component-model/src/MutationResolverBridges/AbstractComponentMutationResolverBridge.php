@@ -11,15 +11,17 @@ use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
+    use WithInstanceManagerServiceTrait;
+    
     protected ?HooksAPIInterface $hooksAPI = null;
     protected ?TranslationAPIInterface $translationAPI = null;
-    protected ?InstanceManagerInterface $instanceManager = null;
     protected ?MutationResolutionManagerInterface $mutationResolutionManager = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
@@ -38,14 +40,6 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     {
         return $this->translationAPI ??= $this->getInstanceManager()->getInstance(TranslationAPIInterface::class);
     }
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
-    }
     public function setMutationResolutionManager(MutationResolutionManagerInterface $mutationResolutionManager): void
     {
         $this->mutationResolutionManager = $mutationResolutionManager;
@@ -56,11 +50,10 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     }
 
     //#[Required]
-    final public function autowireAbstractComponentMutationResolverBridge(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, InstanceManagerInterface $instanceManager, MutationResolutionManagerInterface $mutationResolutionManager): void
+    final public function autowireAbstractComponentMutationResolverBridge(HooksAPIInterface $hooksAPI, TranslationAPIInterface $translationAPI, MutationResolutionManagerInterface $mutationResolutionManager): void
     {
         $this->hooksAPI = $hooksAPI;
         $this->translationAPI = $translationAPI;
-        $this->instanceManager = $instanceManager;
         $this->mutationResolutionManager = $mutationResolutionManager;
     }
 

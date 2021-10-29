@@ -6,6 +6,7 @@ namespace PoP\MandatoryDirectivesByConfiguration\RelationalTypeResolverDecorator
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForDirectivesTrait;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -13,24 +14,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 trait ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait
 {
     use ConfigurableMandatoryDirectivesForDirectivesTrait;
-
-    protected ?InstanceManagerInterface $instanceManager = null;
-
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
-    }
-
-    //#[Required]
-    public function autowireConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait(
-        InstanceManagerInterface $instanceManager,
-    ): void {
-        $this->instanceManager = $instanceManager;
-    }
+    use WithInstanceManagerServiceTrait;
 
     abstract protected function getMandatoryDirectives(mixed $entryValue = null): array;
 

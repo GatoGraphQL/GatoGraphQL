@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\RelationalTypeResolverDecorators;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -14,18 +15,10 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractRelationalTypeResolverDecorator implements RelationalTypeResolverDecoratorInterface
 {
     use AttachableExtensionTrait;
-
-    protected ?InstanceManagerInterface $instanceManager = null;
+    use WithInstanceManagerServiceTrait;
+    
     protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
 
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
-    }
     public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
@@ -36,9 +29,8 @@ abstract class AbstractRelationalTypeResolverDecorator implements RelationalType
     }
 
     //#[Required]
-    final public function autowireAbstractRelationalTypeResolverDecorator(InstanceManagerInterface $instanceManager, FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    final public function autowireAbstractRelationalTypeResolverDecorator(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
-        $this->instanceManager = $instanceManager;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
     }
 

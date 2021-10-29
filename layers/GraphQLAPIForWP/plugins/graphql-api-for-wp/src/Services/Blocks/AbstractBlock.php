@@ -12,6 +12,7 @@ use GraphQLAPI\GraphQLAPI\Services\EditorScripts\HasDocumentationScriptTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -27,21 +28,13 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService implements BlockInterface
 {
     use HasDocumentationScriptTrait;
+    use WithInstanceManagerServiceTrait;
 
-    protected ?InstanceManagerInterface $instanceManager = null;
     protected ?ModuleRegistryInterface $moduleRegistry = null;
     protected ?UserAuthorizationInterface $userAuthorization = null;
     protected ?GeneralUtils $generalUtils = null;
     protected ?EditorHelpers $editorHelpers = null;
 
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
-    }
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
         $this->moduleRegistry = $moduleRegistry;
@@ -76,9 +69,8 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
 
     //#[Required]
-    final public function autowireAbstractBlock(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, UserAuthorizationInterface $userAuthorization, GeneralUtils $generalUtils, EditorHelpers $editorHelpers): void
+    final public function autowireAbstractBlock(ModuleRegistryInterface $moduleRegistry, UserAuthorizationInterface $userAuthorization, GeneralUtils $generalUtils, EditorHelpers $editorHelpers): void
     {
-        $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;
         $this->userAuthorization = $userAuthorization;
         $this->generalUtils = $generalUtils;

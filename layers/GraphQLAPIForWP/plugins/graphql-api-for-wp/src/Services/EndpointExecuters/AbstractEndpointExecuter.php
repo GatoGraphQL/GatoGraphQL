@@ -8,21 +8,15 @@ use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
 {
-    protected ?InstanceManagerInterface $instanceManager = null;
+    use WithInstanceManagerServiceTrait;
+    
     protected ?ModuleRegistryInterface $moduleRegistry = null;
 
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
-    }
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
         $this->moduleRegistry = $moduleRegistry;
@@ -33,9 +27,8 @@ abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
     }
 
     //#[Required]
-    final public function autowireAbstractEndpointExecuter(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry): void
+    final public function autowireAbstractEndpointExecuter(ModuleRegistryInterface $moduleRegistry): void
     {
-        $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;
     }
 

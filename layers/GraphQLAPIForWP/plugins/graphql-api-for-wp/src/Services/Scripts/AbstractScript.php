@@ -8,6 +8,7 @@ use Error;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -20,18 +21,11 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
 {
-    protected ?InstanceManagerInterface $instanceManager = null;
+    use WithInstanceManagerServiceTrait;
+    
     protected ?ModuleRegistryInterface $moduleRegistry = null;
     protected ?GeneralUtils $generalUtils = null;
 
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
-    }
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
         $this->moduleRegistry = $moduleRegistry;
@@ -50,9 +44,8 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
     }
 
     //#[Required]
-    final public function autowireAbstractScript(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, GeneralUtils $generalUtils): void
+    final public function autowireAbstractScript(ModuleRegistryInterface $moduleRegistry, GeneralUtils $generalUtils): void
     {
-        $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;
         $this->generalUtils = $generalUtils;
     }

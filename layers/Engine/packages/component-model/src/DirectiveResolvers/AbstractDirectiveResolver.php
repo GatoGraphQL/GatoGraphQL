@@ -20,6 +20,7 @@ use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
@@ -40,6 +41,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     use RemoveIDsDataFieldsDirectiveResolverTrait;
     use FieldOrDirectiveResolverTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
+    use WithInstanceManagerServiceTrait;
 
     const MESSAGE_EXPRESSIONS = 'expressions';
 
@@ -59,7 +61,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     protected ?TranslationAPIInterface $translationAPI = null;
     protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?InstanceManagerInterface $instanceManager = null;
     protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     protected ?SemverHelperServiceInterface $semverHelperService = null;
@@ -121,14 +122,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     {
         return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
     }
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
-    }
     public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
@@ -166,7 +159,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     final public function autowireAbstractDirectiveResolver(
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
-        InstanceManagerInterface $instanceManager,
         FieldQueryInterpreterInterface $fieldQueryInterpreter,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         SemverHelperServiceInterface $semverHelperService,
@@ -174,7 +166,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     ): void {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
-        $this->instanceManager = $instanceManager;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->semverHelperService = $semverHelperService;

@@ -8,24 +8,18 @@ use GraphQLByPoP\GraphQLServer\Helpers\TypeResolverHelperInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface
 {
-    protected ?InstanceManagerInterface $instanceManager = null;
+    use WithInstanceManagerServiceTrait;
+    
     protected ?RootObjectTypeResolver $rootObjectTypeResolver = null;
     protected ?TypeResolverHelperInterface $typeResolverHelper = null;
 
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
-    }
     public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
     {
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
@@ -45,11 +39,9 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
 
     //#[Required]
     final public function autowireMandatoryDirectivesForFieldsRootTypeEntryDuplicator(
-        InstanceManagerInterface $instanceManager,
         RootObjectTypeResolver $rootObjectTypeResolver,
         TypeResolverHelperInterface $typeResolverHelper
     ): void {
-        $this->instanceManager = $instanceManager;
         $this->getRoot()ObjectTypeResolver = $rootObjectTypeResolver;
         $this->typeResolverHelper = $typeResolverHelper;
     }

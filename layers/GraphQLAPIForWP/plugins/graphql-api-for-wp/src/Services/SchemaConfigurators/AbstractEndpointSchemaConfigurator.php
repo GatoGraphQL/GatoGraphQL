@@ -9,22 +9,16 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorInterface
 {
-    protected ?InstanceManagerInterface $instanceManager = null;
+    use WithInstanceManagerServiceTrait;
+    
     protected ?ModuleRegistryInterface $moduleRegistry = null;
     protected ?BlockHelpers $blockHelpers = null;
 
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
-    }
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
         $this->moduleRegistry = $moduleRegistry;
@@ -43,9 +37,8 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
     }
 
     //#[Required]
-    final public function autowireAbstractEndpointSchemaConfigurator(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, BlockHelpers $blockHelpers): void
+    final public function autowireAbstractEndpointSchemaConfigurator(ModuleRegistryInterface $moduleRegistry, BlockHelpers $blockHelpers): void
     {
-        $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;
         $this->blockHelpers = $blockHelpers;
     }

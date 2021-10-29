@@ -6,28 +6,13 @@ namespace PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait ConfigurableMandatoryDirectivesForDirectivesTrait
 {
-    protected ?InstanceManagerInterface $instanceManager = null;
-
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
-    }
-
-    //#[Required]
-    public function autowireConfigurableMandatoryDirectivesForDirectivesTrait(
-        InstanceManagerInterface $instanceManager,
-    ): void {
-        $this->instanceManager = $instanceManager;
-    }
-
+    use WithInstanceManagerServiceTrait;
+    
     /**
      * Configuration entries
      */

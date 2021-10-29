@@ -5,19 +5,21 @@ declare(strict_types=1);
 namespace PoP\Engine\Schema;
 
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionService implements SchemaDefinitionServiceInterface
 {
+    use WithInstanceManagerServiceTrait;
+    
     protected ?RootObjectTypeResolver $rootObjectTypeResolver = null;
     protected ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
-    protected ?InstanceManagerInterface $instanceManager = null;
     protected ?TranslationAPIInterface $translationAPI = null;
 
     public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
@@ -36,14 +38,6 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
     {
         return $this->anyBuiltInScalarScalarTypeResolver ??= $this->getInstanceManager()->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
     }
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
-    }
     public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
     {
         $this->translationAPI = $translationAPI;
@@ -56,12 +50,10 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
     //#[Required]
     final public function autowireSchemaDefinitionService(
         RootObjectTypeResolver $rootObjectTypeResolver,
-        InstanceManagerInterface $instanceManager,
         AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver,
         TranslationAPIInterface $translationAPI,
     ): void {
         $this->getRoot()ObjectTypeResolver = $rootObjectTypeResolver;
-        $this->instanceManager = $instanceManager;
         $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
         $this->translationAPI = $translationAPI;
     }

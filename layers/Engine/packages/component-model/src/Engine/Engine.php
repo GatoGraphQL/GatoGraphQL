@@ -37,6 +37,7 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -50,6 +51,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class Engine implements EngineInterface
 {
+    use WithInstanceManagerServiceTrait;
+    
     public const CACHETYPE_IMMUTABLEDATASETSETTINGS = 'static-datasetsettings';
     public const CACHETYPE_STATICDATAPROPERTIES = 'static-data-properties';
     public const CACHETYPE_STATEFULDATAPROPERTIES = 'stateful-data-properties';
@@ -114,7 +117,6 @@ class Engine implements EngineInterface
     protected ?TranslationAPIInterface $translationAPI = null;
     protected ?HooksAPIInterface $hooksAPI = null;
     protected ?DataStructureManagerInterface $dataStructureManager = null;
-    protected ?InstanceManagerInterface $instanceManager = null;
     protected ?ModelInstanceInterface $modelInstance = null;
     protected ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     protected ?ModulePathHelpersInterface $modulePathHelpers = null;
@@ -150,14 +152,6 @@ class Engine implements EngineInterface
     protected function getDataStructureManager(): DataStructureManagerInterface
     {
         return $this->dataStructureManager ??= $this->getInstanceManager()->getInstance(DataStructureManagerInterface::class);
-    }
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
     }
     public function setModelInstance(ModelInstanceInterface $modelInstance): void
     {
@@ -253,7 +247,6 @@ class Engine implements EngineInterface
         TranslationAPIInterface $translationAPI,
         HooksAPIInterface $hooksAPI,
         DataStructureManagerInterface $dataStructureManager,
-        InstanceManagerInterface $instanceManager,
         ModelInstanceInterface $modelInstance,
         FeedbackMessageStoreInterface $feedbackMessageStore,
         ModulePathHelpersInterface $modulePathHelpers,
@@ -269,7 +262,6 @@ class Engine implements EngineInterface
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
         $this->dataStructureManager = $dataStructureManager;
-        $this->instanceManager = $instanceManager;
         $this->modelInstance = $modelInstance;
         $this->feedbackMessageStore = $feedbackMessageStore;
         $this->modulePathHelpers = $modulePathHelpers;

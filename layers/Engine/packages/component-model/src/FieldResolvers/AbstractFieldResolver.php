@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers;
 
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
-use PoP\ComponentModel\TypeResolvers\HookHelpers;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractFieldResolver implements FieldResolverInterface
 {
+    use WithInstanceManagerServiceTrait;
+    
     protected ?TranslationAPIInterface $translationAPI = null;
     protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?InstanceManagerInterface $instanceManager = null;
 
     public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
     {
@@ -33,21 +33,14 @@ abstract class AbstractFieldResolver implements FieldResolverInterface
     {
         return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
     }
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
-    }
 
     //#[Required]
-    final public function autowireAbstractFieldResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager): void
-    {
+    final public function autowireAbstractFieldResolver(
+        TranslationAPIInterface $translationAPI,
+        HooksAPIInterface $hooksAPI,
+    ): void {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
-        $this->instanceManager = $instanceManager;
     }
 
     public function getAdminFieldNames(): array

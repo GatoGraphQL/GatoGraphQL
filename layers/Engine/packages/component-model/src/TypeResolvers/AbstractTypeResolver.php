@@ -8,6 +8,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -15,6 +16,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractTypeResolver implements TypeResolverInterface
 {
+    use WithInstanceManagerServiceTrait;
+    
     /**
      * @var array<string, array>
      */
@@ -22,7 +25,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     protected ?TranslationAPIInterface $translationAPI = null;
     protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?InstanceManagerInterface $instanceManager = null;
     protected ?SchemaNamespacingServiceInterface $schemaNamespacingService = null;
     protected ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
     protected ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
@@ -42,14 +44,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     protected function getHooksAPI(): HooksAPIInterface
     {
         return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
-    }
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
     }
     public function setSchemaNamespacingService(SchemaNamespacingServiceInterface $schemaNamespacingService): void
     {
@@ -77,11 +71,10 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     }
 
     //#[Required]
-    final public function autowireAbstractTypeResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, SchemaNamespacingServiceInterface $schemaNamespacingService, SchemaDefinitionServiceInterface $schemaDefinitionService, AttachableExtensionManagerInterface $attachableExtensionManager): void
+    final public function autowireAbstractTypeResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, SchemaNamespacingServiceInterface $schemaNamespacingService, SchemaDefinitionServiceInterface $schemaDefinitionService, AttachableExtensionManagerInterface $attachableExtensionManager): void
     {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
-        $this->instanceManager = $instanceManager;
         $this->schemaNamespacingService = $schemaNamespacingService;
         $this->schemaDefinitionService = $schemaDefinitionService;
         $this->attachableExtensionManager = $attachableExtensionManager;

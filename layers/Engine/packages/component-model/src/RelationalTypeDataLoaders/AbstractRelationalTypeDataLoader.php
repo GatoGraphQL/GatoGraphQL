@@ -5,14 +5,16 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\RelationalTypeDataLoaders;
 
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoaderInterface
 {
+    use WithInstanceManagerServiceTrait;
+    
     protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?InstanceManagerInterface $instanceManager = null;
     protected ?NameResolverInterface $nameResolver = null;
 
     public function setHooksAPI(HooksAPIInterface $hooksAPI): void
@@ -22,14 +24,6 @@ abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoa
     protected function getHooksAPI(): HooksAPIInterface
     {
         return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
-    }
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
     }
     public function setNameResolver(NameResolverInterface $nameResolver): void
     {
@@ -41,10 +35,9 @@ abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoa
     }
 
     //#[Required]
-    final public function autowireAbstractRelationalTypeDataLoader(HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, NameResolverInterface $nameResolver): void
+    final public function autowireAbstractRelationalTypeDataLoader(HooksAPIInterface $hooksAPI, NameResolverInterface $nameResolver): void
     {
         $this->hooksAPI = $hooksAPI;
-        $this->instanceManager = $instanceManager;
         $this->nameResolver = $nameResolver;
     }
 }

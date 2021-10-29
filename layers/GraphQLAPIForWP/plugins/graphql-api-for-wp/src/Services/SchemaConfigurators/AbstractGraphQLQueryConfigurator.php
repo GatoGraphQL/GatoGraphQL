@@ -9,6 +9,7 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -17,6 +18,8 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInterface
 {
+    use WithInstanceManagerServiceTrait;
+    
     /**
      * Keep a map of all namespaced type names to their resolver classes
      * @var array<string, array>|null
@@ -34,7 +37,6 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     protected ?array $directiveNameClasses = null;
 
     protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?InstanceManagerInterface $instanceManager = null;
     protected ?ModuleRegistryInterface $moduleRegistry = null;
     protected ?TypeRegistryInterface $typeRegistry = null;
     protected ?DirectiveRegistryInterface $directiveRegistry = null;
@@ -46,14 +48,6 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     protected function getHooksAPI(): HooksAPIInterface
     {
         return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
-    }
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
     }
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -81,10 +75,9 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     }
 
     //#[Required]
-    final public function autowireAbstractGraphQLQueryConfigurator(HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry, TypeRegistryInterface $typeRegistry, DirectiveRegistryInterface $directiveRegistry): void
+    final public function autowireAbstractGraphQLQueryConfigurator(HooksAPIInterface $hooksAPI, ModuleRegistryInterface $moduleRegistry, TypeRegistryInterface $typeRegistry, DirectiveRegistryInterface $directiveRegistry): void
     {
         $this->hooksAPI = $hooksAPI;
-        $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;
         $this->typeRegistry = $typeRegistry;
         $this->directiveRegistry = $directiveRegistry;

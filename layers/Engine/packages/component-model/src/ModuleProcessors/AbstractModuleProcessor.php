@@ -19,6 +19,7 @@ use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Services\WithInstanceManagerServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Definitions\Configuration\Request;
@@ -31,6 +32,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 {
     use ModulePathProcessorTrait;
+    use WithInstanceManagerServiceTrait;
 
     public const HOOK_INIT_MODEL_PROPS = __CLASS__ . ':initModelProps';
     public const HOOK_INIT_REQUEST_PROPS = __CLASS__ . ':initRequestProps';
@@ -42,7 +44,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     protected ?TranslationAPIInterface $translationAPI = null;
     protected ?HooksAPIInterface $hooksAPI = null;
-    protected ?InstanceManagerInterface $instanceManager = null;
     protected ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     protected ?ModulePathHelpersInterface $modulePathHelpers = null;
     protected ?ModuleFilterManagerInterface $moduleFilterManager = null;
@@ -68,14 +69,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     protected function getHooksAPI(): HooksAPIInterface
     {
         return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
-    }
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
-    protected function getInstanceManager(): InstanceManagerInterface
-    {
-        return $this->instanceManager ??= $this->getInstanceManager()->getInstance(InstanceManagerInterface::class);
     }
     public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -151,11 +144,10 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     }
 
     //#[Required]
-    final public function autowireAbstractModuleProcessor(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, FieldQueryInterpreterInterface $fieldQueryInterpreter, ModulePathHelpersInterface $modulePathHelpers, ModuleFilterManagerInterface $moduleFilterManager, ModuleProcessorManagerInterface $moduleProcessorManager, CMSServiceInterface $cmsService, NameResolverInterface $nameResolver, DataloadHelperServiceInterface $dataloadHelperService, RequestHelperServiceInterface $requestHelperService, ModulePaths $modulePaths): void
+    final public function autowireAbstractModuleProcessor(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, FieldQueryInterpreterInterface $fieldQueryInterpreter, ModulePathHelpersInterface $modulePathHelpers, ModuleFilterManagerInterface $moduleFilterManager, ModuleProcessorManagerInterface $moduleProcessorManager, CMSServiceInterface $cmsService, NameResolverInterface $nameResolver, DataloadHelperServiceInterface $dataloadHelperService, RequestHelperServiceInterface $requestHelperService, ModulePaths $modulePaths): void
     {
         $this->translationAPI = $translationAPI;
         $this->hooksAPI = $hooksAPI;
-        $this->instanceManager = $instanceManager;
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
         $this->modulePathHelpers = $modulePathHelpers;
         $this->moduleFilterManager = $moduleFilterManager;
