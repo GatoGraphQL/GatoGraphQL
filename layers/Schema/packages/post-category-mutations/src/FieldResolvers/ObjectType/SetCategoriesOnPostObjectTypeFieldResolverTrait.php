@@ -47,17 +47,6 @@ trait SetCategoriesOnPostObjectTypeFieldResolverTrait
         return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
     }
 
-    //#[Required]
-    public function autowireSetCategoriesOnPostObjectTypeFieldResolverTrait(
-        PostObjectTypeResolver $postObjectTypeResolver,
-        SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver,
-        PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
-    ): void {
-        $this->postObjectTypeResolver = $postObjectTypeResolver;
-        $this->setCategoriesOnPostMutationResolver = $setCategoriesOnPostMutationResolver;
-        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
-    }
-
     public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
     {
         return $this->getPostObjectTypeResolver();

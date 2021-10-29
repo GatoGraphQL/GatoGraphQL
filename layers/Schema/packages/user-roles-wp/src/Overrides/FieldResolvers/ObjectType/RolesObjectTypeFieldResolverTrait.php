@@ -22,13 +22,6 @@ trait RolesObjectTypeFieldResolverTrait
         return $this->userRoleObjectTypeResolver ??= $this->instanceManager->getInstance(UserRoleObjectTypeResolver::class);
     }
 
-    //#[Required]
-    public function autowireUserRolesWPRolesObjectTypeFieldResolverTrait(
-        UserRoleObjectTypeResolver $userRoleObjectTypeResolver,
-    ): void {
-        $this->userRoleObjectTypeResolver = $userRoleObjectTypeResolver;
-    }
-
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {

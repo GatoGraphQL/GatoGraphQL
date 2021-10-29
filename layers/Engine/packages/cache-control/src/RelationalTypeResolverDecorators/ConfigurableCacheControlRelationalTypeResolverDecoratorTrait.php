@@ -30,15 +30,6 @@ trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
         return $this->cacheControlDirectiveResolver ??= $this->instanceManager->getInstance(CacheControlDirectiveResolver::class);
     }
 
-    //#[Required]
-    public function autowireConfigurableCacheControlRelationalTypeResolverDecoratorTrait(
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        CacheControlDirectiveResolver $cacheControlDirectiveResolver,
-    ): void {
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-        $this->cacheControlDirectiveResolver = $cacheControlDirectiveResolver;
-    }
-
     /**
      * By default, only the admin can see the roles from the users
      */

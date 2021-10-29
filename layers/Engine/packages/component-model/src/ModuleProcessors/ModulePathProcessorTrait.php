@@ -33,15 +33,6 @@ trait ModulePathProcessorTrait
         return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ModuleFilterManagerInterface::class);
     }
 
-    //#[Required]
-    public function autowireModulePathProcessorTrait(
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-        ModuleFilterManagerInterface $moduleFilterManager,
-    ): void {
-        $this->moduleProcessorManager = $moduleProcessorManager;
-        $this->moduleFilterManager = $moduleFilterManager;
-    }
-
     protected function getModuleProcessor(array $module)
     {
         return $this->getModuleProcessorManager()->getProcessor($module);

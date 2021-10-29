@@ -32,15 +32,6 @@ trait PostTagAPISatisfiedContractTrait
         return $this->postTagObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
     }
 
-    //#[Required]
-    public function autowirePostTagAPISatisfiedContractTrait(
-        PostTagTypeAPIInterface $postTagTypeAPI,
-        PostTagObjectTypeResolver $postTagObjectTypeResolver,
-    ): void {
-        $this->postTagTypeAPI = $postTagTypeAPI;
-        $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
-    }
-
     public function getTagTypeAPI(): TagTypeAPIInterface
     {
         return $this->getPostTagTypeAPI();

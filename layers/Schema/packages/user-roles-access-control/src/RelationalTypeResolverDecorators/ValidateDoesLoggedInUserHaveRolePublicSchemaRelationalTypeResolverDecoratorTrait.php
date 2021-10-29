@@ -21,13 +21,6 @@ trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecorato
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
 
-    //#[Required]
-    public function autowireValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecoratorTrait(
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-    ): void {
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-    }
-
     /**
      * By default, only the admin can see the roles from the users
      */

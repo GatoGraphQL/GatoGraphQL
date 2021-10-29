@@ -22,13 +22,6 @@ trait CreateUpdateProfileMutationResolverBridgeTrait
         return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     }
 
-    //#[Required]
-    public function autowireCreateUpdateProfileMutationResolverBridgeTrait(
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-    ): void {
-        $this->moduleProcessorManager = $moduleProcessorManager;
-    }
-
     // public function getFormData(): array
     // {
     //     return array_merge(

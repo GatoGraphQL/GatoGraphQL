@@ -22,13 +22,6 @@ trait ValidateUserNotLoggedInForDirectivesRelationalTypeResolverDecoratorTrait
         return $this->validateIsUserNotLoggedInForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserNotLoggedInForDirectivesDirectiveResolver::class);
     }
 
-    //#[Required]
-    public function autowireValidateUserNotLoggedInForDirectivesRelationalTypeResolverDecoratorTrait(
-        ValidateIsUserNotLoggedInForDirectivesDirectiveResolver $validateIsUserNotLoggedInForDirectivesDirectiveResolver,
-    ): void {
-        $this->validateIsUserNotLoggedInForDirectivesDirectiveResolver = $validateIsUserNotLoggedInForDirectivesDirectiveResolver;
-    }
-
     protected function getRequiredEntryValue(): ?string
     {
         return UserStates::OUT;

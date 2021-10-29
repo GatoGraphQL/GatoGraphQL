@@ -33,15 +33,6 @@ trait CustomEndpointClientTrait
         return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
 
-    //#[Required]
-    public function autowireCustomEndpointClientTrait(
-        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-        RequestHelperServiceInterface $requestHelperService,
-    ): void {
-        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
-        $this->requestHelperService = $requestHelperService;
-    }
-
     /**
      * Enable only when executing a single CPT
      */

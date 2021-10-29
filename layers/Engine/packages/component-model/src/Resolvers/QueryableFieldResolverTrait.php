@@ -21,13 +21,6 @@ trait QueryableFieldResolverTrait
         return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     }
 
-    //#[Required]
-    public function autowireQueryableFieldResolverTrait(
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-    ): void {
-        $this->moduleProcessorManager = $moduleProcessorManager;
-    }
-
     protected function getFilterFieldArgNameTypeResolvers(array $filterDataloadingModule): array
     {
         /** @var FilterInputContainerModuleProcessorInterface */

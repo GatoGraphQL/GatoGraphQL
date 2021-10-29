@@ -28,13 +28,6 @@ trait HasDocumentationScriptTrait
         return $this->localeHelper ??= $this->instanceManager->getInstance(LocaleHelper::class);
     }
 
-    //#[Required]
-    public function autowireHasDocumentationScriptTrait(
-        LocaleHelper $localeHelper,
-    ): void {
-        $this->localeHelper = $localeHelper;
-    }
-
     /**
      * Docs are bundled as chunks by webpack, and loaded lazily
      * The `publicPath` property for `config.output` must be provided
