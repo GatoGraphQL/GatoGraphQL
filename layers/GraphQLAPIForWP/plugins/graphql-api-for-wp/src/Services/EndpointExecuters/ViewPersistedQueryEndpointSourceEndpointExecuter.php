@@ -74,7 +74,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
         $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
         $this->userAuthorization = $userAuthorization;
         $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
-        $this->getPersistedQueryEndpointAPIHierarchyBlock()Accessor = $persistedQueryEndpointAPIHierarchyBlockAccessor;
+        $this->getPersistedQueryEndpointAPIHierarchyBlockAccessor = $persistedQueryEndpointAPIHierarchyBlockAccessor;
         $this->persistedQueryEndpointGraphiQLBlock = $persistedQueryEndpointGraphiQLBlock;
     }
 
@@ -109,7 +109,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
                 /**
                  * If the query has a parent, also render the inherited output
                  */
-                $persistedQueryEndpointAPIHierarchyBlockAttributes = $this->getPersistedQueryEndpointAPIHierarchyBlock()Accessor->getAttributes($graphQLQueryPost);
+                $persistedQueryEndpointAPIHierarchyBlockAttributes = $this->getPersistedQueryEndpointAPIHierarchyBlockAccessor->getAttributes($graphQLQueryPost);
                 if (
                     $persistedQueryEndpointAPIHierarchyBlockAttributes !== null
                     && $persistedQueryEndpointAPIHierarchyBlockAttributes->isInheritQuery()

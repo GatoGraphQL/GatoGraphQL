@@ -34,8 +34,8 @@ class GraphQLQueryPostTypeHelpers
     //#[Required]
     final public function autowireGraphQLQueryPostTypeHelpers(PersistedQueryEndpointGraphiQLBlockAccessor $persistedQueryEndpointGraphiQLBlockAccessor, PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor): void
     {
-        $this->getPersistedQueryEndpointGraphiQLBlock()Accessor = $persistedQueryEndpointGraphiQLBlockAccessor;
-        $this->getPersistedQueryEndpointAPIHierarchyBlock()Accessor = $persistedQueryEndpointAPIHierarchyBlockAccessor;
+        $this->getPersistedQueryEndpointGraphiQLBlockAccessor = $persistedQueryEndpointGraphiQLBlockAccessor;
+        $this->getPersistedQueryEndpointAPIHierarchyBlockAccessor = $persistedQueryEndpointAPIHierarchyBlockAccessor;
     }
 
     /**
@@ -71,12 +71,12 @@ class GraphQLQueryPostTypeHelpers
              */
             $inheritQuery = false;
             if ($inheritAttributes && $graphQLQueryPost->post_parent) {
-                $persistedQueryEndpointAPIHierarchyBlockAttributes = $this->getPersistedQueryEndpointAPIHierarchyBlock()Accessor->getAttributes($graphQLQueryPost);
+                $persistedQueryEndpointAPIHierarchyBlockAttributes = $this->getPersistedQueryEndpointAPIHierarchyBlockAccessor->getAttributes($graphQLQueryPost);
                 if ($persistedQueryEndpointAPIHierarchyBlockAttributes !== null) {
                     $inheritQuery = $persistedQueryEndpointAPIHierarchyBlockAttributes->isInheritQuery();
                 }
             }
-            $graphiQLBlockAttributes = $this->getPersistedQueryEndpointGraphiQLBlock()Accessor->getAttributes($graphQLQueryPost);
+            $graphiQLBlockAttributes = $this->getPersistedQueryEndpointGraphiQLBlockAccessor->getAttributes($graphQLQueryPost);
             // Set the query unless it must be inherited from the parent
             if (empty($graphQLQuery) && !$inheritQuery) {
                 $graphQLQuery = $graphiQLBlockAttributes->getQuery();
