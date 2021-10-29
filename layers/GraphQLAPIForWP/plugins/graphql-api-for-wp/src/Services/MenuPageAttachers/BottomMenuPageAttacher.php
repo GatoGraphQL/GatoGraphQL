@@ -180,7 +180,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
          * So it doesn't appear on the menu, but it's still available
          * to display the release notes on the modal window
          */
-        $aboutMenuPage = $this->getAboutMenuPage();
+        $aboutMenuPage = $this->getReleaseNoteOrAboutMenuPage();
         if (isset($_GET['page']) && $_GET['page'] == $aboutMenuPage->getScreenID()) {
             if (
                 $hookName = \add_submenu_page(
@@ -213,7 +213,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
      * Either the About menu page, or the Release Notes menu page,
      * based on parameter ?tab="docs" or not
      */
-    protected function getAboutMenuPage(): MenuPageInterface
+    protected function getReleaseNoteOrAboutMenuPage(): MenuPageInterface
     {
         return
             $this->getMenuPageHelper()->isDocumentationScreen() ?
