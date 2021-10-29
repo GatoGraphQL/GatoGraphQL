@@ -169,7 +169,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $exposeSchemaIntrospectionFieldInSchema = ComponentConfiguration::exposeSchemaIntrospectionFieldInSchema();
         $exposeGlobalFieldsInGraphQLSchema = ComponentConfiguration::exposeGlobalFieldsInGraphQLSchema();
 
-        $rootObjectTypeResolver = $this->getGraphQLSchemaDefinitionService()->getRootObjectTypeResolver();
+        $rootObjectTypeResolver = $this->getGraphQLSchemaDefinitionService()->getSchemaRootObjectTypeResolver();
         $rootTypeName = $rootObjectTypeResolver->getMaybeNamespacedTypeName();
         $queryRootTypeName = null;
         if (!$enableNestedMutations) {

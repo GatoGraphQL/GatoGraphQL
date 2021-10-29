@@ -23,7 +23,7 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
     {
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
     }
-    public function getRootObjectTypeResolver(): RootObjectTypeResolver
+    protected function getRootObjectTypeResolver(): RootObjectTypeResolver
     {
         return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
     }
@@ -62,5 +62,10 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
     public function getDefaultInputTypeResolver(): InputTypeResolverInterface
     {
         return $this->getAnyBuiltInScalarScalarTypeResolver();
+    }
+
+    public function getSchemaRootObjectTypeResolver(): RootObjectTypeResolver
+    {
+        return $this->getRootObjectTypeResolver();
     }
 }

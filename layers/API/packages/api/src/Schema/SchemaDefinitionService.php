@@ -109,7 +109,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
         if ($schemaDefinition === null) {
             $schemaDefinition = [
-                SchemaDefinition::QUERY_TYPE => $this->getRootObjectTypeResolver()->getMaybeNamespacedTypeName(),
+                SchemaDefinition::QUERY_TYPE => $this->getSchemaRootObjectTypeResolver()->getMaybeNamespacedTypeName(),
                 SchemaDefinition::TYPES => [],
             ];
 
@@ -118,7 +118,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $this->accessedInterfaceTypeNameObjectTypeResolvers = [];
 
             $this->pendingTypeOrDirectiveResolvers = [
-                $this->getRootObjectTypeResolver(),
+                $this->getSchemaRootObjectTypeResolver(),
             ];
             while (!empty($this->pendingTypeOrDirectiveResolvers)) {
                 $typeOrDirectiveResolver = array_pop($this->pendingTypeOrDirectiveResolvers);
@@ -249,7 +249,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
          * The RootObject has the special role of also calculating the
          * global fields, connections and directives
          */
-        if ($typeResolver === $this->getRootObjectTypeResolver()) {
+        if ($typeResolver === $this->getSchemaRootObjectTypeResolver()) {
             $this->maybeMoveGlobalTypeSchemaDefinition($schemaDefinition, $typeSchemaDefinition);
         }
         $schemaDefinition[SchemaDefinition::TYPES][$typeKind][$typeName] = $typeSchemaDefinition;
@@ -319,7 +319,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
              * The RootObject has the special role of also calculating the
              * global fields, connections and directives
              */
-            if ($typeResolver === $this->getRootObjectTypeResolver()) {
+            if ($typeResolver === $this->getSchemaRootObjectTypeResolver()) {
                 return new RootObjectTypeSchemaDefinitionProvider($typeResolver);
             }
             return new ObjectTypeSchemaDefinitionProvider($typeResolver);
