@@ -20,7 +20,7 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
     }
     protected function getEndpointHelpers(): EndpointHelpers
     {
-        return $this->endpointHelpers ??= $this->getInstanceManager()->getInstance(EndpointHelpers::class);
+        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
     }
     public function setPersistedQueryEndpointSchemaConfigurator(PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator): void
     {
@@ -28,7 +28,7 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
     }
     protected function getPersistedQueryEndpointSchemaConfigurator(): PersistedQueryEndpointSchemaConfigurator
     {
-        return $this->persistedQueryEndpointSchemaConfigurator ??= $this->getInstanceManager()->getInstance(PersistedQueryEndpointSchemaConfigurator::class);
+        return $this->persistedQueryEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(PersistedQueryEndpointSchemaConfigurator::class);
     }
 
     //#[Required]

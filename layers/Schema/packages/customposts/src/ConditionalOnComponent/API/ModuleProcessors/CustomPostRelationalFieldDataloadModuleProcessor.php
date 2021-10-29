@@ -36,7 +36,7 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
     }
     protected function getCustomPostUnionTypeResolver(): CustomPostUnionTypeResolver
     {
-        return $this->customPostUnionTypeResolver ??= $this->getInstanceManager()->getInstance(CustomPostUnionTypeResolver::class);
+        return $this->customPostUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
     }
     public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
     {
@@ -44,7 +44,7 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
     }
     protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
     {
-        return $this->listQueryInputOutputHandler ??= $this->getInstanceManager()->getInstance(ListQueryInputOutputHandler::class);
+        return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
     //#[Required]

@@ -21,7 +21,7 @@ class HeadModuleHookSet extends AbstractHookSet
     }
     protected function getHeadModule(): HeadModule
     {
-        return $this->headModule ??= $this->getInstanceManager()->getInstance(HeadModule::class);
+        return $this->headModule ??= $this->instanceManager->getInstance(HeadModule::class);
     }
 
     //#[Required]

@@ -26,7 +26,7 @@ trait HasDocumentationScriptTrait
     }
     protected function getLocaleHelper(): LocaleHelper
     {
-        return $this->localeHelper ??= $this->getInstanceManager()->getInstance(LocaleHelper::class);
+        return $this->localeHelper ??= $this->instanceManager->getInstance(LocaleHelper::class);
     }
 
     //#[Required]

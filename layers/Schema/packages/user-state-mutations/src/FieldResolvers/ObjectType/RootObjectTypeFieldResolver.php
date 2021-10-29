@@ -30,7 +30,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     protected function getUserObjectTypeResolver(): UserObjectTypeResolver
     {
-        return $this->userObjectTypeResolver ??= $this->getInstanceManager()->getInstance(UserObjectTypeResolver::class);
+        return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
     public function setLoginMutationResolver(LoginMutationResolver $loginMutationResolver): void
     {
@@ -38,7 +38,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     protected function getLoginMutationResolver(): LoginMutationResolver
     {
-        return $this->loginMutationResolver ??= $this->getInstanceManager()->getInstance(LoginMutationResolver::class);
+        return $this->loginMutationResolver ??= $this->instanceManager->getInstance(LoginMutationResolver::class);
     }
     public function setLogoutMutationResolver(LogoutMutationResolver $logoutMutationResolver): void
     {
@@ -46,7 +46,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     protected function getLogoutMutationResolver(): LogoutMutationResolver
     {
-        return $this->logoutMutationResolver ??= $this->getInstanceManager()->getInstance(LogoutMutationResolver::class);
+        return $this->logoutMutationResolver ??= $this->instanceManager->getInstance(LogoutMutationResolver::class);
     }
     public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -54,7 +54,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->getInstanceManager()->getInstance(StringScalarTypeResolver::class);
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     //#[Required]

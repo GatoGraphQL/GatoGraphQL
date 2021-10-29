@@ -69,7 +69,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
     protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
     {
-        return $this->feedbackMessageStore ??= $this->getInstanceManager()->getInstance(FeedbackMessageStoreInterface::class);
+        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
     }
     public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -77,7 +77,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
     protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
-        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
     public function setErrorProvider(ErrorProviderInterface $errorProvider): void
     {
@@ -85,7 +85,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
     protected function getErrorProvider(): ErrorProviderInterface
     {
-        return $this->errorProvider ??= $this->getInstanceManager()->getInstance(ErrorProviderInterface::class);
+        return $this->errorProvider ??= $this->instanceManager->getInstance(ErrorProviderInterface::class);
     }
     public function setDataloadingEngine(DataloadingEngineInterface $dataloadingEngine): void
     {
@@ -93,7 +93,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
     protected function getDataloadingEngine(): DataloadingEngineInterface
     {
-        return $this->dataloadingEngine ??= $this->getInstanceManager()->getInstance(DataloadingEngineInterface::class);
+        return $this->dataloadingEngine ??= $this->instanceManager->getInstance(DataloadingEngineInterface::class);
     }
     public function setDirectivePipelineService(DirectivePipelineServiceInterface $directivePipelineService): void
     {
@@ -101,7 +101,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
     protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
     {
-        return $this->directivePipelineService ??= $this->getInstanceManager()->getInstance(DirectivePipelineServiceInterface::class);
+        return $this->directivePipelineService ??= $this->instanceManager->getInstance(DirectivePipelineServiceInterface::class);
     }
 
     //#[Required]

@@ -28,7 +28,7 @@ trait SetCategoriesOnPostObjectTypeFieldResolverTrait
     }
     protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
-        return $this->postObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostObjectTypeResolver::class);
+        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
     public function setSetCategoriesOnPostMutationResolver(SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver): void
     {
@@ -36,7 +36,7 @@ trait SetCategoriesOnPostObjectTypeFieldResolverTrait
     }
     protected function getSetCategoriesOnPostMutationResolver(): SetCategoriesOnPostMutationResolver
     {
-        return $this->setCategoriesOnPostMutationResolver ??= $this->getInstanceManager()->getInstance(SetCategoriesOnPostMutationResolver::class);
+        return $this->setCategoriesOnPostMutationResolver ??= $this->instanceManager->getInstance(SetCategoriesOnPostMutationResolver::class);
     }
     public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
     {
@@ -44,7 +44,7 @@ trait SetCategoriesOnPostObjectTypeFieldResolverTrait
     }
     protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
-        return $this->postCategoryObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostCategoryObjectTypeResolver::class);
+        return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
     }
 
     //#[Required]

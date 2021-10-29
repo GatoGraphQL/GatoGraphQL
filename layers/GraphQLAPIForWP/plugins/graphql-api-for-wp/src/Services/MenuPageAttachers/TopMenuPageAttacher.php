@@ -25,7 +25,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     protected function getMenuPageHelper(): MenuPageHelper
     {
-        return $this->menuPageHelper ??= $this->getInstanceManager()->getInstance(MenuPageHelper::class);
+        return $this->menuPageHelper ??= $this->instanceManager->getInstance(MenuPageHelper::class);
     }
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -33,7 +33,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
     public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
@@ -41,7 +41,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     protected function getUserAuthorization(): UserAuthorizationInterface
     {
-        return $this->userAuthorization ??= $this->getInstanceManager()->getInstance(UserAuthorizationInterface::class);
+        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
     public function setGraphiQLMenuPage(GraphiQLMenuPage $graphiQLMenuPage): void
     {
@@ -49,7 +49,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     protected function getGraphiQLMenuPage(): GraphiQLMenuPage
     {
-        return $this->graphiQLMenuPage ??= $this->getInstanceManager()->getInstance(GraphiQLMenuPage::class);
+        return $this->graphiQLMenuPage ??= $this->instanceManager->getInstance(GraphiQLMenuPage::class);
     }
     public function setGraphQLVoyagerMenuPage(GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage): void
     {
@@ -57,7 +57,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     protected function getGraphQLVoyagerMenuPage(): GraphQLVoyagerMenuPage
     {
-        return $this->graphQLVoyagerMenuPage ??= $this->getInstanceManager()->getInstance(GraphQLVoyagerMenuPage::class);
+        return $this->graphQLVoyagerMenuPage ??= $this->instanceManager->getInstance(GraphQLVoyagerMenuPage::class);
     }
 
     //#[Required]

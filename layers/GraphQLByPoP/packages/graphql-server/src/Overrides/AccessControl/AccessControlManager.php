@@ -23,7 +23,7 @@ class AccessControlManager extends UpstreamAccessControlManager
     }
     protected function getMandatoryDirectivesForFieldsRootTypeEntryDuplicator(): MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface
     {
-        return $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator ??= $this->getInstanceManager()->getInstance(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface::class);
+        return $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator ??= $this->instanceManager->getInstance(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface::class);
     }
 
     //#[Required]

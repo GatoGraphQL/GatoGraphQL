@@ -29,7 +29,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getUserAvatarTypeAPI(): UserAvatarTypeAPIInterface
     {
-        return $this->userAvatarTypeAPI ??= $this->getInstanceManager()->getInstance(UserAvatarTypeAPIInterface::class);
+        return $this->userAvatarTypeAPI ??= $this->instanceManager->getInstance(UserAvatarTypeAPIInterface::class);
     }
     public function setUserAvatarRuntimeRegistry(UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry): void
     {
@@ -37,7 +37,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getUserAvatarRuntimeRegistry(): UserAvatarRuntimeRegistryInterface
     {
-        return $this->userAvatarRuntimeRegistry ??= $this->getInstanceManager()->getInstance(UserAvatarRuntimeRegistryInterface::class);
+        return $this->userAvatarRuntimeRegistry ??= $this->instanceManager->getInstance(UserAvatarRuntimeRegistryInterface::class);
     }
     public function setUserAvatarObjectTypeResolver(UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver): void
     {
@@ -45,7 +45,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getUserAvatarObjectTypeResolver(): UserAvatarObjectTypeResolver
     {
-        return $this->userAvatarObjectTypeResolver ??= $this->getInstanceManager()->getInstance(UserAvatarObjectTypeResolver::class);
+        return $this->userAvatarObjectTypeResolver ??= $this->instanceManager->getInstance(UserAvatarObjectTypeResolver::class);
     }
     public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -53,7 +53,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        return $this->intScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IntScalarTypeResolver::class);
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
 
     //#[Required]

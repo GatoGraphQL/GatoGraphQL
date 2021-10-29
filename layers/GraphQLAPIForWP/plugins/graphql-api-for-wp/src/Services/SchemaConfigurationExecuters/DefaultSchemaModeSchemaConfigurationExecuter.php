@@ -23,7 +23,7 @@ class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigu
     }
     protected function getSchemaConfigSchemaModeBlock(): SchemaConfigSchemaModeBlock
     {
-        return $this->schemaConfigSchemaModeBlock ??= $this->getInstanceManager()->getInstance(SchemaConfigSchemaModeBlock::class);
+        return $this->schemaConfigSchemaModeBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaModeBlock::class);
     }
 
     //#[Required]

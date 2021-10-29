@@ -65,7 +65,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     }
     protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
     {
-        return $this->fragmentCatalogueManager ??= $this->getInstanceManager()->getInstance(PersistedFragmentManagerInterface::class);
+        return $this->fragmentCatalogueManager ??= $this->instanceManager->getInstance(PersistedFragmentManagerInterface::class);
     }
     public function setPersistedQueryManager(PersistedQueryManagerInterface $queryCatalogueManager): void
     {
@@ -73,7 +73,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     }
     protected function getPersistedQueryManager(): PersistedQueryManagerInterface
     {
-        return $this->queryCatalogueManager ??= $this->getInstanceManager()->getInstance(PersistedQueryManagerInterface::class);
+        return $this->queryCatalogueManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
     }
 
     //#[Required]

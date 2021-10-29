@@ -41,7 +41,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
     protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
     public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
@@ -49,7 +49,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
     protected function getUserAuthorization(): UserAuthorizationInterface
     {
-        return $this->userAuthorization ??= $this->getInstanceManager()->getInstance(UserAuthorizationInterface::class);
+        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
     public function setGeneralUtils(GeneralUtils $generalUtils): void
     {
@@ -57,7 +57,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
     protected function getGeneralUtils(): GeneralUtils
     {
-        return $this->generalUtils ??= $this->getInstanceManager()->getInstance(GeneralUtils::class);
+        return $this->generalUtils ??= $this->instanceManager->getInstance(GeneralUtils::class);
     }
     public function setEditorHelpers(EditorHelpers $editorHelpers): void
     {
@@ -65,7 +65,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
     protected function getEditorHelpers(): EditorHelpers
     {
-        return $this->editorHelpers ??= $this->getInstanceManager()->getInstance(EditorHelpers::class);
+        return $this->editorHelpers ??= $this->instanceManager->getInstance(EditorHelpers::class);
     }
 
     //#[Required]

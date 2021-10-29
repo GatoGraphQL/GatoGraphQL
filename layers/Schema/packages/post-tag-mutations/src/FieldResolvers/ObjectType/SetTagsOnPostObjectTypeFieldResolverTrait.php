@@ -25,7 +25,7 @@ trait SetTagsOnPostObjectTypeFieldResolverTrait
     }
     protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
-        return $this->postObjectTypeResolver ??= $this->getInstanceManager()->getInstance(PostObjectTypeResolver::class);
+        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
     public function setSetTagsOnPostMutationResolver(SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver): void
     {
@@ -33,7 +33,7 @@ trait SetTagsOnPostObjectTypeFieldResolverTrait
     }
     protected function getSetTagsOnPostMutationResolver(): SetTagsOnPostMutationResolver
     {
-        return $this->setTagsOnPostMutationResolver ??= $this->getInstanceManager()->getInstance(SetTagsOnPostMutationResolver::class);
+        return $this->setTagsOnPostMutationResolver ??= $this->instanceManager->getInstance(SetTagsOnPostMutationResolver::class);
     }
 
     //#[Required]

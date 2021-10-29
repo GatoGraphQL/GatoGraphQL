@@ -31,7 +31,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getMenuItemRuntimeRegistry(): MenuItemRuntimeRegistryInterface
     {
-        return $this->menuItemRuntimeRegistry ??= $this->getInstanceManager()->getInstance(MenuItemRuntimeRegistryInterface::class);
+        return $this->menuItemRuntimeRegistry ??= $this->instanceManager->getInstance(MenuItemRuntimeRegistryInterface::class);
     }
     public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {
@@ -39,7 +39,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
-        return $this->jsonObjectScalarTypeResolver ??= $this->getInstanceManager()->getInstance(JSONObjectScalarTypeResolver::class);
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
     public function setMenuItemObjectTypeResolver(MenuItemObjectTypeResolver $menuItemObjectTypeResolver): void
     {
@@ -47,7 +47,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getMenuItemObjectTypeResolver(): MenuItemObjectTypeResolver
     {
-        return $this->menuItemObjectTypeResolver ??= $this->getInstanceManager()->getInstance(MenuItemObjectTypeResolver::class);
+        return $this->menuItemObjectTypeResolver ??= $this->instanceManager->getInstance(MenuItemObjectTypeResolver::class);
     }
     public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
     {
@@ -55,7 +55,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getMenuTypeAPI(): MenuTypeAPIInterface
     {
-        return $this->menuTypeAPI ??= $this->getInstanceManager()->getInstance(MenuTypeAPIInterface::class);
+        return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
     }
     public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -63,7 +63,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
     //#[Required]

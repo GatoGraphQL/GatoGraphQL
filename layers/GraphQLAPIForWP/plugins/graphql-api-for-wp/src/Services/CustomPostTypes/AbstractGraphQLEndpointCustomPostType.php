@@ -24,7 +24,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     }
     protected function getHooksAPI(): HooksAPIInterface
     {
-        return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
+        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
     }
     public function setBlockHelpers(BlockHelpers $blockHelpers): void
     {
@@ -32,7 +32,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     }
     protected function getBlockHelpers(): BlockHelpers
     {
-        return $this->blockHelpers ??= $this->getInstanceManager()->getInstance(BlockHelpers::class);
+        return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
 
     //#[Required]

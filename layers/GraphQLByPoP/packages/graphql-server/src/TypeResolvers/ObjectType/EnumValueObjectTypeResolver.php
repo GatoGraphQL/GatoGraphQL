@@ -19,7 +19,7 @@ class EnumValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
     }
     protected function getSchemaDefinitionReferenceTypeDataLoader(): SchemaDefinitionReferenceTypeDataLoader
     {
-        return $this->schemaDefinitionReferenceTypeDataLoader ??= $this->getInstanceManager()->getInstance(SchemaDefinitionReferenceTypeDataLoader::class);
+        return $this->schemaDefinitionReferenceTypeDataLoader ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceTypeDataLoader::class);
     }
 
     //#[Required]

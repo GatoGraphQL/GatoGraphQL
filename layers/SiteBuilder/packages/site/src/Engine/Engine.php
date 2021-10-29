@@ -18,7 +18,7 @@ class Engine extends UpstreamEngine
     }
     protected function getApplicationStateHelperService(): ApplicationStateHelperServiceInterface
     {
-        return $this->applicationStateHelperService ??= $this->getInstanceManager()->getInstance(ApplicationStateHelperServiceInterface::class);
+        return $this->applicationStateHelperService ??= $this->instanceManager->getInstance(ApplicationStateHelperServiceInterface::class);
     }
 
     //#[Required]

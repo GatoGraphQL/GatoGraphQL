@@ -25,7 +25,7 @@ trait QueryDataModuleProcessorTrait
     }
     protected function getHooksAPI(): HooksAPIInterface
     {
-        return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
+        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
     }
     public function setActionExecutionQueryInputOutputHandler(ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler): void
     {
@@ -33,7 +33,7 @@ trait QueryDataModuleProcessorTrait
     }
     protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler
     {
-        return $this->actionExecutionQueryInputOutputHandler ??= $this->getInstanceManager()->getInstance(ActionExecutionQueryInputOutputHandler::class);
+        return $this->actionExecutionQueryInputOutputHandler ??= $this->instanceManager->getInstance(ActionExecutionQueryInputOutputHandler::class);
     }
 
     //#[Required]

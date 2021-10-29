@@ -27,7 +27,7 @@ class Cache implements PersistentCacheInterface, TransientCacheInterface
     }
     protected function getModelInstance(): ModelInstanceInterface
     {
-        return $this->modelInstance ??= $this->getInstanceManager()->getInstance(ModelInstanceInterface::class);
+        return $this->modelInstance ??= $this->instanceManager->getInstance(ModelInstanceInterface::class);
     }
 
     //#[Required]

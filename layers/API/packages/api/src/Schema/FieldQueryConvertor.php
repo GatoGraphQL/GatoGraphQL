@@ -53,7 +53,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
     }
     protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
     {
-        return $this->feedbackMessageStore ??= $this->getInstanceManager()->getInstance(FeedbackMessageStoreInterface::class);
+        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
     }
     public function setQueryParser(QueryParserInterface $queryParser): void
     {
@@ -61,7 +61,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
     }
     protected function getQueryParser(): QueryParserInterface
     {
-        return $this->queryParser ??= $this->getInstanceManager()->getInstance(QueryParserInterface::class);
+        return $this->queryParser ??= $this->instanceManager->getInstance(QueryParserInterface::class);
     }
     public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -69,7 +69,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
     }
     protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
-        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
     public function setPersistedFragmentManager(PersistedFragmentManagerInterface $persistedFragmentManager): void
     {
@@ -77,7 +77,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
     }
     protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
     {
-        return $this->persistedFragmentManager ??= $this->getInstanceManager()->getInstance(PersistedFragmentManagerInterface::class);
+        return $this->persistedFragmentManager ??= $this->instanceManager->getInstance(PersistedFragmentManagerInterface::class);
     }
 
     //#[Required]

@@ -29,7 +29,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     }
     protected function getHooksAPI(): HooksAPIInterface
     {
-        return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
+        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
     }
     public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
     {
@@ -37,7 +37,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     }
     protected function getCMSHelperService(): CMSHelperServiceInterface
     {
-        return $this->cmsHelperService ??= $this->getInstanceManager()->getInstance(CMSHelperServiceInterface::class);
+        return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
     }
 
     //#[Required]

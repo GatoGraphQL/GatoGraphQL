@@ -27,7 +27,7 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
     }
     protected function getErrorHelper(): ErrorHelperInterface
     {
-        return $this->errorHelper ??= $this->getInstanceManager()->getInstance(ErrorHelperInterface::class);
+        return $this->errorHelper ??= $this->instanceManager->getInstance(ErrorHelperInterface::class);
     }
 
     //#[Required]

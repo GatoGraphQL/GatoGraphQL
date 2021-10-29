@@ -22,7 +22,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getCustomPostMediaTypeAPI(): CustomPostMediaTypeAPIInterface
     {
-        return $this->customPostMediaTypeAPI ??= $this->getInstanceManager()->getInstance(CustomPostMediaTypeAPIInterface::class);
+        return $this->customPostMediaTypeAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeAPIInterface::class);
     }
     public function setSupportingFeaturedImageInterfaceTypeFieldResolver(SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver): void
     {
@@ -30,7 +30,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getSupportingFeaturedImageInterfaceTypeFieldResolver(): SupportingFeaturedImageInterfaceTypeFieldResolver
     {
-        return $this->supportingFeaturedImageInterfaceTypeFieldResolver ??= $this->getInstanceManager()->getInstance(SupportingFeaturedImageInterfaceTypeFieldResolver::class);
+        return $this->supportingFeaturedImageInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(SupportingFeaturedImageInterfaceTypeFieldResolver::class);
     }
 
     //#[Required]

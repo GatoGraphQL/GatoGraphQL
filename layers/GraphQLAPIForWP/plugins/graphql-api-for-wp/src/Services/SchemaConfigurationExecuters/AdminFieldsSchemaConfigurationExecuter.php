@@ -21,7 +21,7 @@ class AdminFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
     }
     protected function getSchemaConfigAdminFieldsBlock(): SchemaConfigAdminFieldsBlock
     {
-        return $this->schemaConfigAdminFieldsBlock ??= $this->getInstanceManager()->getInstance(SchemaConfigAdminFieldsBlock::class);
+        return $this->schemaConfigAdminFieldsBlock ??= $this->instanceManager->getInstance(SchemaConfigAdminFieldsBlock::class);
     }
 
     //#[Required]

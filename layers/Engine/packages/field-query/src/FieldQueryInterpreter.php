@@ -70,7 +70,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     }
     protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
     {
-        return $this->feedbackMessageStore ??= $this->getInstanceManager()->getInstance(FeedbackMessageStoreInterface::class);
+        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
     }
     public function setQueryParser(QueryParserInterface $queryParser): void
     {
@@ -78,7 +78,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     }
     protected function getQueryParser(): QueryParserInterface
     {
-        return $this->queryParser ??= $this->getInstanceManager()->getInstance(QueryParserInterface::class);
+        return $this->queryParser ??= $this->instanceManager->getInstance(QueryParserInterface::class);
     }
 
     //#[Required]

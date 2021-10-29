@@ -19,7 +19,7 @@ trait WithTypeFieldControlBlockTrait
     }
     protected function getTypeRegistry(): TypeRegistryInterface
     {
-        return $this->typeRegistry ??= $this->getInstanceManager()->getInstance(TypeRegistryInterface::class);
+        return $this->typeRegistry ??= $this->instanceManager->getInstance(TypeRegistryInterface::class);
     }
 
     //#[Required]

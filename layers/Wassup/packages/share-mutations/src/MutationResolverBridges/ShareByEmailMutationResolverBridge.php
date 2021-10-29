@@ -19,7 +19,7 @@ class ShareByEmailMutationResolverBridge extends AbstractFormComponentMutationRe
     }
     protected function getShareByEmailMutationResolver(): ShareByEmailMutationResolver
     {
-        return $this->shareByEmailMutationResolver ??= $this->getInstanceManager()->getInstance(ShareByEmailMutationResolver::class);
+        return $this->shareByEmailMutationResolver ??= $this->instanceManager->getInstance(ShareByEmailMutationResolver::class);
     }
 
     //#[Required]

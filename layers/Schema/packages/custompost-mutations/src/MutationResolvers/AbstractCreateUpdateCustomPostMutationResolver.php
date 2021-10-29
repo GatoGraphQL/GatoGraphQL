@@ -39,7 +39,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     }
     protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
     {
-        return $this->customPostStatusEnumTypeResolver ??= $this->getInstanceManager()->getInstance(CustomPostStatusEnumTypeResolver::class);
+        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
     }
     public function setNameResolver(NameResolverInterface $nameResolver): void
     {
@@ -47,7 +47,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     }
     protected function getNameResolver(): NameResolverInterface
     {
-        return $this->nameResolver ??= $this->getInstanceManager()->getInstance(NameResolverInterface::class);
+        return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
     }
     public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
     {
@@ -55,7 +55,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     }
     protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
     {
-        return $this->userRoleTypeAPI ??= $this->getInstanceManager()->getInstance(UserRoleTypeAPIInterface::class);
+        return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
     }
     public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -63,7 +63,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     }
     protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
-        return $this->customPostTypeAPI ??= $this->getInstanceManager()->getInstance(CustomPostTypeAPIInterface::class);
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
     public function setCustomPostTypeMutationAPI(CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI): void
     {
@@ -71,7 +71,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     }
     protected function getCustomPostTypeMutationAPI(): CustomPostTypeMutationAPIInterface
     {
-        return $this->customPostTypeMutationAPI ??= $this->getInstanceManager()->getInstance(CustomPostTypeMutationAPIInterface::class);
+        return $this->customPostTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostTypeMutationAPIInterface::class);
     }
 
     //#[Required]

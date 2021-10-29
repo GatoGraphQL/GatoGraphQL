@@ -25,7 +25,7 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
     }
     protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
     public function setBlockHelpers(BlockHelpers $blockHelpers): void
     {
@@ -33,7 +33,7 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
     }
     protected function getBlockHelpers(): BlockHelpers
     {
-        return $this->blockHelpers ??= $this->getInstanceManager()->getInstance(BlockHelpers::class);
+        return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
 
     //#[Required]

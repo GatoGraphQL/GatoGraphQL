@@ -38,7 +38,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     }
     protected function getCommentTypeEnumTypeResolver(): CommentTypeEnumTypeResolver
     {
-        return $this->commentTypeEnumTypeResolver ??= $this->getInstanceManager()->getInstance(CommentTypeEnumTypeResolver::class);
+        return $this->commentTypeEnumTypeResolver ??= $this->instanceManager->getInstance(CommentTypeEnumTypeResolver::class);
     }
     public function setCommentStatusEnumTypeResolver(CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver): void
     {
@@ -46,7 +46,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     }
     protected function getCommentStatusEnumTypeResolver(): CommentStatusEnumTypeResolver
     {
-        return $this->commentStatusEnumTypeResolver ??= $this->getInstanceManager()->getInstance(CommentStatusEnumTypeResolver::class);
+        return $this->commentStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CommentStatusEnumTypeResolver::class);
     }
     public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -54,7 +54,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     }
     protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        return $this->idScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IDScalarTypeResolver::class);
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
     //#[Required]

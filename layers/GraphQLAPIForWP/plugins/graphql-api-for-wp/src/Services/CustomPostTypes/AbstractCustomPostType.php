@@ -37,7 +37,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
-        return $this->userSettingsManager ??= $this->getInstanceManager()->getInstance(UserSettingsManagerInterface::class);
+        return $this->userSettingsManager ??= $this->instanceManager->getInstance(UserSettingsManagerInterface::class);
     }
     public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -45,7 +45,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        return $this->moduleRegistry ??= $this->getInstanceManager()->getInstance(ModuleRegistryInterface::class);
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
     public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
@@ -53,7 +53,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     protected function getUserAuthorization(): UserAuthorizationInterface
     {
-        return $this->userAuthorization ??= $this->getInstanceManager()->getInstance(UserAuthorizationInterface::class);
+        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
     public function setCPTUtils(CPTUtils $cptUtils): void
     {
@@ -61,7 +61,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     protected function getCPTUtils(): CPTUtils
     {
-        return $this->cptUtils ??= $this->getInstanceManager()->getInstance(CPTUtils::class);
+        return $this->cptUtils ??= $this->instanceManager->getInstance(CPTUtils::class);
     }
     public function setPluginMenu(PluginMenu $pluginMenu): void
     {
@@ -69,7 +69,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     protected function getPluginMenu(): PluginMenu
     {
-        return $this->pluginMenu ??= $this->getInstanceManager()->getInstance(PluginMenu::class);
+        return $this->pluginMenu ??= $this->instanceManager->getInstance(PluginMenu::class);
     }
 
     //#[Required]

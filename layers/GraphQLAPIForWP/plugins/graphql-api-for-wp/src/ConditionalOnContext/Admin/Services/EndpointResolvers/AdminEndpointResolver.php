@@ -28,7 +28,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     }
     protected function getUserAuthorization(): UserAuthorizationInterface
     {
-        return $this->userAuthorization ??= $this->getInstanceManager()->getInstance(UserAuthorizationInterface::class);
+        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
     public function setQueryRetriever(QueryRetrieverInterface $queryRetrieverInterface): void
     {
@@ -36,7 +36,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     }
     protected function getQueryRetriever(): QueryRetrieverInterface
     {
-        return $this->queryRetrieverInterface ??= $this->getInstanceManager()->getInstance(QueryRetrieverInterface::class);
+        return $this->queryRetrieverInterface ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
     }
 
     //#[Required]

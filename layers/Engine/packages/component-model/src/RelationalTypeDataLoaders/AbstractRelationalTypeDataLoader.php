@@ -23,7 +23,7 @@ abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoa
     }
     protected function getHooksAPI(): HooksAPIInterface
     {
-        return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
+        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
     }
     public function setNameResolver(NameResolverInterface $nameResolver): void
     {
@@ -31,7 +31,7 @@ abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoa
     }
     protected function getNameResolver(): NameResolverInterface
     {
-        return $this->nameResolver ??= $this->getInstanceManager()->getInstance(NameResolverInterface::class);
+        return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
     }
 
     //#[Required]

@@ -19,7 +19,7 @@ class MainContentModuleHookSet extends AbstractHookSet
     }
     protected function getMainContentModule(): MainContentModule
     {
-        return $this->mainContentModule ??= $this->getInstanceManager()->getInstance(MainContentModule::class);
+        return $this->mainContentModule ??= $this->instanceManager->getInstance(MainContentModule::class);
     }
 
     //#[Required]

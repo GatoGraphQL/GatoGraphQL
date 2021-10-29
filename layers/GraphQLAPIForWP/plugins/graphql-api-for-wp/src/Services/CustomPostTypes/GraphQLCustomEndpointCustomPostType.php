@@ -32,7 +32,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     }
     protected function getEndpointBlockRegistry(): EndpointBlockRegistryInterface
     {
-        return $this->endpointBlockRegistry ??= $this->getInstanceManager()->getInstance(EndpointBlockRegistryInterface::class);
+        return $this->endpointBlockRegistry ??= $this->instanceManager->getInstance(EndpointBlockRegistryInterface::class);
     }
     public function setCustomEndpointExecuterRegistry(CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistryInterface): void
     {
@@ -40,7 +40,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     }
     protected function getCustomEndpointExecuterRegistry(): CustomEndpointExecuterRegistryInterface
     {
-        return $this->customEndpointExecuterRegistryInterface ??= $this->getInstanceManager()->getInstance(CustomEndpointExecuterRegistryInterface::class);
+        return $this->customEndpointExecuterRegistryInterface ??= $this->instanceManager->getInstance(CustomEndpointExecuterRegistryInterface::class);
     }
     public function setCustomEndpointAnnotatorRegistry(CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistryInterface): void
     {
@@ -48,7 +48,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     }
     protected function getCustomEndpointAnnotatorRegistry(): CustomEndpointAnnotatorRegistryInterface
     {
-        return $this->customEndpointAnnotatorRegistryInterface ??= $this->getInstanceManager()->getInstance(CustomEndpointAnnotatorRegistryInterface::class);
+        return $this->customEndpointAnnotatorRegistryInterface ??= $this->instanceManager->getInstance(CustomEndpointAnnotatorRegistryInterface::class);
     }
     public function setCustomEndpointOptionsBlock(CustomEndpointOptionsBlock $customEndpointOptionsBlock): void
     {
@@ -56,7 +56,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     }
     protected function getCustomEndpointOptionsBlock(): CustomEndpointOptionsBlock
     {
-        return $this->customEndpointOptionsBlock ??= $this->getInstanceManager()->getInstance(CustomEndpointOptionsBlock::class);
+        return $this->customEndpointOptionsBlock ??= $this->instanceManager->getInstance(CustomEndpointOptionsBlock::class);
     }
 
     //#[Required]

@@ -27,7 +27,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     }
     protected function getAccessControlBlock(): AccessControlBlock
     {
-        return $this->accessControlBlock ??= $this->getInstanceManager()->getInstance(AccessControlBlock::class);
+        return $this->accessControlBlock ??= $this->instanceManager->getInstance(AccessControlBlock::class);
     }
     public function setBlockHelpers(BlockHelpers $blockHelpers): void
     {
@@ -35,7 +35,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     }
     protected function getBlockHelpers(): BlockHelpers
     {
-        return $this->blockHelpers ??= $this->getInstanceManager()->getInstance(BlockHelpers::class);
+        return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
     public function setAccessControlRuleBlockRegistry(AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry): void
     {
@@ -43,7 +43,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     }
     protected function getAccessControlRuleBlockRegistry(): AccessControlRuleBlockRegistryInterface
     {
-        return $this->accessControlRuleBlockRegistry ??= $this->getInstanceManager()->getInstance(AccessControlRuleBlockRegistryInterface::class);
+        return $this->accessControlRuleBlockRegistry ??= $this->instanceManager->getInstance(AccessControlRuleBlockRegistryInterface::class);
     }
     public function setAccessControlManager(AccessControlManagerInterface $accessControlManager): void
     {
@@ -51,7 +51,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     }
     protected function getAccessControlManager(): AccessControlManagerInterface
     {
-        return $this->accessControlManager ??= $this->getInstanceManager()->getInstance(AccessControlManagerInterface::class);
+        return $this->accessControlManager ??= $this->instanceManager->getInstance(AccessControlManagerInterface::class);
     }
 
     //#[Required]

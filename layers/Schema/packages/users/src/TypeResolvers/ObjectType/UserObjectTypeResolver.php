@@ -21,7 +21,7 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
     }
     protected function getUserTypeAPI(): UserTypeAPIInterface
     {
-        return $this->userTypeAPI ??= $this->getInstanceManager()->getInstance(UserTypeAPIInterface::class);
+        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
     public function setUserTypeDataLoader(UserTypeDataLoader $userTypeDataLoader): void
     {
@@ -29,7 +29,7 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
     }
     protected function getUserTypeDataLoader(): UserTypeDataLoader
     {
-        return $this->userTypeDataLoader ??= $this->getInstanceManager()->getInstance(UserTypeDataLoader::class);
+        return $this->userTypeDataLoader ??= $this->instanceManager->getInstance(UserTypeDataLoader::class);
     }
 
     //#[Required]

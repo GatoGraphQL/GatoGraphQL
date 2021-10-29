@@ -22,7 +22,7 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
     }
     protected function getPostCategoryTypeDataLoader(): PostCategoryTypeDataLoader
     {
-        return $this->postCategoryTypeDataLoader ??= $this->getInstanceManager()->getInstance(PostCategoryTypeDataLoader::class);
+        return $this->postCategoryTypeDataLoader ??= $this->instanceManager->getInstance(PostCategoryTypeDataLoader::class);
     }
 
     //#[Required]

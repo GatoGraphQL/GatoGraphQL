@@ -20,7 +20,7 @@ trait CustomEndpointClientTrait
     }
     protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
     {
-        return $this->graphQLCustomEndpointCustomPostType ??= $this->getInstanceManager()->getInstance(GraphQLCustomEndpointCustomPostType::class);
+        return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
     }
     public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
     {
@@ -28,7 +28,7 @@ trait CustomEndpointClientTrait
     }
     protected function getRequestHelperService(): RequestHelperServiceInterface
     {
-        return $this->requestHelperService ??= $this->getInstanceManager()->getInstance(RequestHelperServiceInterface::class);
+        return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
 
     //#[Required]

@@ -27,7 +27,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
     }
     protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
-        return $this->userSettingsManager ??= $this->getInstanceManager()->getInstance(UserSettingsManagerInterface::class);
+        return $this->userSettingsManager ??= $this->instanceManager->getInstance(UserSettingsManagerInterface::class);
     }
     public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
     {
@@ -35,7 +35,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
     }
     protected function getEndpointHelpers(): EndpointHelpers
     {
-        return $this->endpointHelpers ??= $this->getInstanceManager()->getInstance(EndpointHelpers::class);
+        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
     }
 
     //#[Required]

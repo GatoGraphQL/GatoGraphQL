@@ -18,7 +18,7 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
     }
     protected function getEngine(): EngineInterface
     {
-        return $this->engine ??= $this->getInstanceManager()->getInstance(EngineInterface::class);
+        return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
     }
 
     //#[Required]

@@ -21,7 +21,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
     }
     protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        return $this->idScalarTypeResolver ??= $this->getInstanceManager()->getInstance(IDScalarTypeResolver::class);
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
     //#[Required]

@@ -29,7 +29,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     }
     protected function getHooksAPI(): HooksAPIInterface
     {
-        return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
+        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
     }
     public function setMutationResolutionManager(MutationResolutionManagerInterface $mutationResolutionManager): void
     {
@@ -37,7 +37,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     }
     protected function getMutationResolutionManager(): MutationResolutionManagerInterface
     {
-        return $this->mutationResolutionManager ??= $this->getInstanceManager()->getInstance(MutationResolutionManagerInterface::class);
+        return $this->mutationResolutionManager ??= $this->instanceManager->getInstance(MutationResolutionManagerInterface::class);
     }
 
     //#[Required]

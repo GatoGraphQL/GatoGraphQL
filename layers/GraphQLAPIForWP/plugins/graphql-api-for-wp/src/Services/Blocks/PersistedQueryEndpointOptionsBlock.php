@@ -25,7 +25,7 @@ class PersistedQueryEndpointOptionsBlock extends AbstractEndpointOptionsBlock im
     }
     protected function getPersistedQueryEndpointBlockCategory(): PersistedQueryEndpointBlockCategory
     {
-        return $this->persistedQueryEndpointBlockCategory ??= $this->getInstanceManager()->getInstance(PersistedQueryEndpointBlockCategory::class);
+        return $this->persistedQueryEndpointBlockCategory ??= $this->instanceManager->getInstance(PersistedQueryEndpointBlockCategory::class);
     }
 
     //#[Required]

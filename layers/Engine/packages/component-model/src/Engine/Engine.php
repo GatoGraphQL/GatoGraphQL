@@ -134,7 +134,7 @@ class Engine implements EngineInterface
     }
     protected function getHooksAPI(): HooksAPIInterface
     {
-        return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
+        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
     }
     public function setDataStructureManager(DataStructureManagerInterface $dataStructureManager): void
     {
@@ -142,7 +142,7 @@ class Engine implements EngineInterface
     }
     protected function getDataStructureManager(): DataStructureManagerInterface
     {
-        return $this->dataStructureManager ??= $this->getInstanceManager()->getInstance(DataStructureManagerInterface::class);
+        return $this->dataStructureManager ??= $this->instanceManager->getInstance(DataStructureManagerInterface::class);
     }
     public function setModelInstance(ModelInstanceInterface $modelInstance): void
     {
@@ -150,7 +150,7 @@ class Engine implements EngineInterface
     }
     protected function getModelInstance(): ModelInstanceInterface
     {
-        return $this->modelInstance ??= $this->getInstanceManager()->getInstance(ModelInstanceInterface::class);
+        return $this->modelInstance ??= $this->instanceManager->getInstance(ModelInstanceInterface::class);
     }
     public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
@@ -158,7 +158,7 @@ class Engine implements EngineInterface
     }
     protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
     {
-        return $this->feedbackMessageStore ??= $this->getInstanceManager()->getInstance(FeedbackMessageStoreInterface::class);
+        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
     }
     public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
     {
@@ -166,7 +166,7 @@ class Engine implements EngineInterface
     }
     protected function getModulePathHelpers(): ModulePathHelpersInterface
     {
-        return $this->modulePathHelpers ??= $this->getInstanceManager()->getInstance(ModulePathHelpersInterface::class);
+        return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
     }
     public function setModulePathManager(ModulePathManagerInterface $modulePathManager): void
     {
@@ -174,7 +174,7 @@ class Engine implements EngineInterface
     }
     protected function getModulePathManager(): ModulePathManagerInterface
     {
-        return $this->modulePathManager ??= $this->getInstanceManager()->getInstance(ModulePathManagerInterface::class);
+        return $this->modulePathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
     }
     public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -182,7 +182,7 @@ class Engine implements EngineInterface
     }
     protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
-        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
     public function setModuleFilterManager(ModuleFilterManagerInterface $moduleFilterManager): void
     {
@@ -190,7 +190,7 @@ class Engine implements EngineInterface
     }
     protected function getModuleFilterManager(): ModuleFilterManagerInterface
     {
-        return $this->moduleFilterManager ??= $this->getInstanceManager()->getInstance(ModuleFilterManagerInterface::class);
+        return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ModuleFilterManagerInterface::class);
     }
     public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
     {
@@ -198,7 +198,7 @@ class Engine implements EngineInterface
     }
     protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
     {
-        return $this->moduleProcessorManager ??= $this->getInstanceManager()->getInstance(ModuleProcessorManagerInterface::class);
+        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     }
     public function setCheckpointProcessorManager(CheckpointProcessorManagerInterface $checkpointProcessorManager): void
     {
@@ -206,7 +206,7 @@ class Engine implements EngineInterface
     }
     protected function getCheckpointProcessorManager(): CheckpointProcessorManagerInterface
     {
-        return $this->checkpointProcessorManager ??= $this->getInstanceManager()->getInstance(CheckpointProcessorManagerInterface::class);
+        return $this->checkpointProcessorManager ??= $this->instanceManager->getInstance(CheckpointProcessorManagerInterface::class);
     }
     public function setDataloadHelperService(DataloadHelperServiceInterface $dataloadHelperService): void
     {
@@ -214,7 +214,7 @@ class Engine implements EngineInterface
     }
     protected function getDataloadHelperService(): DataloadHelperServiceInterface
     {
-        return $this->dataloadHelperService ??= $this->getInstanceManager()->getInstance(DataloadHelperServiceInterface::class);
+        return $this->dataloadHelperService ??= $this->instanceManager->getInstance(DataloadHelperServiceInterface::class);
     }
     public function setEntryModuleManager(EntryModuleManagerInterface $entryModuleManager): void
     {
@@ -222,7 +222,7 @@ class Engine implements EngineInterface
     }
     protected function getEntryModuleManager(): EntryModuleManagerInterface
     {
-        return $this->entryModuleManager ??= $this->getInstanceManager()->getInstance(EntryModuleManagerInterface::class);
+        return $this->entryModuleManager ??= $this->instanceManager->getInstance(EntryModuleManagerInterface::class);
     }
     public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
     {
@@ -230,7 +230,7 @@ class Engine implements EngineInterface
     }
     protected function getRequestHelperService(): RequestHelperServiceInterface
     {
-        return $this->requestHelperService ??= $this->getInstanceManager()->getInstance(RequestHelperServiceInterface::class);
+        return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
 
     //#[Required]

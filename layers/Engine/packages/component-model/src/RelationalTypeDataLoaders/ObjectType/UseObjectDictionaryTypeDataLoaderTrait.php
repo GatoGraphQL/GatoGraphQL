@@ -18,7 +18,7 @@ trait UseObjectDictionaryTypeDataLoaderTrait
     }
     protected function getObjectDictionary(): ObjectDictionaryInterface
     {
-        return $this->objectDictionary ??= $this->getInstanceManager()->getInstance(ObjectDictionaryInterface::class);
+        return $this->objectDictionary ??= $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
     }
 
     //#[Required]

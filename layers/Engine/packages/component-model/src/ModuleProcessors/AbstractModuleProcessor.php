@@ -59,7 +59,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     }
     protected function getHooksAPI(): HooksAPIInterface
     {
-        return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
+        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
     }
     public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -67,7 +67,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     }
     protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
-        return $this->fieldQueryInterpreter ??= $this->getInstanceManager()->getInstance(FieldQueryInterpreterInterface::class);
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
     public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
     {
@@ -75,7 +75,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     }
     protected function getModulePathHelpers(): ModulePathHelpersInterface
     {
-        return $this->modulePathHelpers ??= $this->getInstanceManager()->getInstance(ModulePathHelpersInterface::class);
+        return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
     }
     public function setModuleFilterManager(ModuleFilterManagerInterface $moduleFilterManager): void
     {
@@ -83,7 +83,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     }
     protected function getModuleFilterManager(): ModuleFilterManagerInterface
     {
-        return $this->moduleFilterManager ??= $this->getInstanceManager()->getInstance(ModuleFilterManagerInterface::class);
+        return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ModuleFilterManagerInterface::class);
     }
     public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
     {
@@ -91,7 +91,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     }
     protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
     {
-        return $this->moduleProcessorManager ??= $this->getInstanceManager()->getInstance(ModuleProcessorManagerInterface::class);
+        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     }
     public function setCMSService(CMSServiceInterface $cmsService): void
     {
@@ -99,7 +99,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     }
     protected function getCMSService(): CMSServiceInterface
     {
-        return $this->cmsService ??= $this->getInstanceManager()->getInstance(CMSServiceInterface::class);
+        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
     public function setNameResolver(NameResolverInterface $nameResolver): void
     {
@@ -107,7 +107,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     }
     protected function getNameResolver(): NameResolverInterface
     {
-        return $this->nameResolver ??= $this->getInstanceManager()->getInstance(NameResolverInterface::class);
+        return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
     }
     public function setDataloadHelperService(DataloadHelperServiceInterface $dataloadHelperService): void
     {
@@ -115,7 +115,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     }
     protected function getDataloadHelperService(): DataloadHelperServiceInterface
     {
-        return $this->dataloadHelperService ??= $this->getInstanceManager()->getInstance(DataloadHelperServiceInterface::class);
+        return $this->dataloadHelperService ??= $this->instanceManager->getInstance(DataloadHelperServiceInterface::class);
     }
     public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
     {
@@ -123,7 +123,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     }
     protected function getRequestHelperService(): RequestHelperServiceInterface
     {
-        return $this->requestHelperService ??= $this->getInstanceManager()->getInstance(RequestHelperServiceInterface::class);
+        return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
     public function setModulePaths(ModulePaths $modulePaths): void
     {
@@ -131,7 +131,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     }
     protected function getModulePaths(): ModulePaths
     {
-        return $this->modulePaths ??= $this->getInstanceManager()->getInstance(ModulePaths::class);
+        return $this->modulePaths ??= $this->instanceManager->getInstance(ModulePaths::class);
     }
 
     //#[Required]

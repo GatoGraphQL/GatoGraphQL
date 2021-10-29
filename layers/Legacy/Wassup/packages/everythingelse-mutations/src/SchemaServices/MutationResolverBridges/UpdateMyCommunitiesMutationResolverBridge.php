@@ -21,7 +21,7 @@ class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutatio
     }
     protected function getUpdateMyCommunitiesMutationResolver(): UpdateMyCommunitiesMutationResolver
     {
-        return $this->updateMyCommunitiesMutationResolver ??= $this->getInstanceManager()->getInstance(UpdateMyCommunitiesMutationResolver::class);
+        return $this->updateMyCommunitiesMutationResolver ??= $this->instanceManager->getInstance(UpdateMyCommunitiesMutationResolver::class);
     }
 
     //#[Required]

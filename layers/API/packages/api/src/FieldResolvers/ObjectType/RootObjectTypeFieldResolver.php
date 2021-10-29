@@ -38,7 +38,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
-        return $this->jsonObjectScalarTypeResolver ??= $this->getInstanceManager()->getInstance(JSONObjectScalarTypeResolver::class);
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
     public function setPersistedFragmentManager(PersistedFragmentManagerInterface $fragmentCatalogueManager): void
     {
@@ -46,7 +46,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
     {
-        return $this->fragmentCatalogueManager ??= $this->getInstanceManager()->getInstance(PersistedFragmentManagerInterface::class);
+        return $this->fragmentCatalogueManager ??= $this->instanceManager->getInstance(PersistedFragmentManagerInterface::class);
     }
     public function setPersistedQueryManager(PersistedQueryManagerInterface $queryCatalogueManager): void
     {
@@ -54,7 +54,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getPersistedQueryManager(): PersistedQueryManagerInterface
     {
-        return $this->queryCatalogueManager ??= $this->getInstanceManager()->getInstance(PersistedQueryManagerInterface::class);
+        return $this->queryCatalogueManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
     }
     public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -62,7 +62,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        return $this->booleanScalarTypeResolver ??= $this->getInstanceManager()->getInstance(BooleanScalarTypeResolver::class);
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
     //#[Required]

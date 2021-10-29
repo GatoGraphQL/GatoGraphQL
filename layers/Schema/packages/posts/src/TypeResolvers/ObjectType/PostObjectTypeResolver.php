@@ -19,7 +19,7 @@ class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
     }
     protected function getPostTypeDataLoader(): PostTypeDataLoader
     {
-        return $this->postTypeDataLoader ??= $this->getInstanceManager()->getInstance(PostTypeDataLoader::class);
+        return $this->postTypeDataLoader ??= $this->instanceManager->getInstance(PostTypeDataLoader::class);
     }
 
     //#[Required]

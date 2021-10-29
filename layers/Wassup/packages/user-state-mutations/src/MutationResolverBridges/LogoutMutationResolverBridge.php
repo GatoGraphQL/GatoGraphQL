@@ -19,7 +19,7 @@ class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBrid
     }
     protected function getLogoutMutationResolver(): LogoutMutationResolver
     {
-        return $this->logoutMutationResolver ??= $this->getInstanceManager()->getInstance(LogoutMutationResolver::class);
+        return $this->logoutMutationResolver ??= $this->instanceManager->getInstance(LogoutMutationResolver::class);
     }
 
     //#[Required]

@@ -43,7 +43,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
     }
     protected function getModulePathManager(): ModulePathManagerInterface
     {
-        return $this->modulePathManager ??= $this->getInstanceManager()->getInstance(ModulePathManagerInterface::class);
+        return $this->modulePathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
     }
     public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
     {
@@ -51,7 +51,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
     }
     protected function getModulePathHelpers(): ModulePathHelpersInterface
     {
-        return $this->modulePathHelpers ??= $this->getInstanceManager()->getInstance(ModulePathHelpersInterface::class);
+        return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
     }
 
     //#[Required]

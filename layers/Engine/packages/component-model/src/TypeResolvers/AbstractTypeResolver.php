@@ -34,7 +34,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     }
     protected function getHooksAPI(): HooksAPIInterface
     {
-        return $this->hooksAPI ??= $this->getInstanceManager()->getInstance(HooksAPIInterface::class);
+        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
     }
     public function setSchemaNamespacingService(SchemaNamespacingServiceInterface $schemaNamespacingService): void
     {
@@ -42,7 +42,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     }
     protected function getSchemaNamespacingService(): SchemaNamespacingServiceInterface
     {
-        return $this->schemaNamespacingService ??= $this->getInstanceManager()->getInstance(SchemaNamespacingServiceInterface::class);
+        return $this->schemaNamespacingService ??= $this->instanceManager->getInstance(SchemaNamespacingServiceInterface::class);
     }
     public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
     {
@@ -50,7 +50,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     }
     protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
-        return $this->schemaDefinitionService ??= $this->getInstanceManager()->getInstance(SchemaDefinitionServiceInterface::class);
+        return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
     public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
     {
@@ -58,7 +58,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     }
     protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
     {
-        return $this->attachableExtensionManager ??= $this->getInstanceManager()->getInstance(AttachableExtensionManagerInterface::class);
+        return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
     }
 
     //#[Required]
