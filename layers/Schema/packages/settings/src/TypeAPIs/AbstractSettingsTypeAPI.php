@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\Settings\TypeAPIs;
 
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPSchema\Settings\ComponentConfiguration;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
 {
+    use BasicServiceTrait;
+
     private ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
 
     public function setAllowOrDenySettingsService(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
