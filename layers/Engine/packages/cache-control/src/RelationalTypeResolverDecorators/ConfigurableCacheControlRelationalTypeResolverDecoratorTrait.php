@@ -10,18 +10,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
 {
-    private ?CacheControlDirectiveResolver $cacheControlDirectiveResolver = null;
-
     abstract protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface;
-    
-    public function setCacheControlDirectiveResolver(CacheControlDirectiveResolver $cacheControlDirectiveResolver): void
-    {
-        $this->cacheControlDirectiveResolver = $cacheControlDirectiveResolver;
-    }
-    protected function getCacheControlDirectiveResolver(): CacheControlDirectiveResolver
-    {
-        return $this->cacheControlDirectiveResolver ??= $this->instanceManager->getInstance(CacheControlDirectiveResolver::class);
-    }
+    abstract protected function getCacheControlDirectiveResolver(): CacheControlDirectiveResolver;
 
     /**
      * By default, only the admin can see the roles from the users

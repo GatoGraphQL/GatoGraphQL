@@ -6,11 +6,12 @@ namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Params;
+use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderInterface;
-use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait QueryDataModuleProcessorTrait
@@ -20,6 +21,8 @@ trait QueryDataModuleProcessorTrait
 
     private ?ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler = null;
 
+    private ?FilterInputProcessorManagerInterface $filterInputProcessorManager = null;
+
     public function setActionExecutionQueryInputOutputHandler(ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler): void
     {
         $this->actionExecutionQueryInputOutputHandler = $actionExecutionQueryInputOutputHandler;
@@ -27,6 +30,14 @@ trait QueryDataModuleProcessorTrait
     protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler
     {
         return $this->actionExecutionQueryInputOutputHandler ??= $this->instanceManager->getInstance(ActionExecutionQueryInputOutputHandler::class);
+    }
+    final public function setFilterInputProcessorManager(FilterInputProcessorManagerInterface $filterInputProcessorManager): void
+    {
+        $this->filterInputProcessorManager = $filterInputProcessorManager;
+    }
+    final protected function getFilterInputProcessorManager(): FilterInputProcessorManagerInterface
+    {
+        return $this->filterInputProcessorManager ??= $this->instanceManager->getInstance(FilterInputProcessorManagerInterface::class);
     }
 
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
