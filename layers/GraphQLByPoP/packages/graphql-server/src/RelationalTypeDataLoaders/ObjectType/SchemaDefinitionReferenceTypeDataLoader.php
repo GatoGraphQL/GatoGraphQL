@@ -23,6 +23,6 @@ class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoad
 
     public function getObjects(array $ids): array
     {
-        return $this->schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObjects($ids);
+        return $this->getSchemaDefinitionReferenceRegistry()->getSchemaDefinitionReferenceObjects($ids);
     }
 }

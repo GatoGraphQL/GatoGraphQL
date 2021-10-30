@@ -11,13 +11,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FieldGraphQLSchemaDefinitionHelper implements FieldGraphQLSchemaDefinitionHelperInterface
 {
-    protected SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry;
+    private ?SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry = null;
 
-    #[Required]
-    final public function autowireFieldGraphQLSchemaDefinitionHelper(
-        SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry,
-    ): void {
+    public function setSchemaDefinitionReferenceRegistry(SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry): void
+    {
         $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
+    }
+    protected function getSchemaDefinitionReferenceRegistry(): SchemaDefinitionReferenceRegistryInterface
+    {
+        return $this->schemaDefinitionReferenceRegistry ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceRegistry::class);
     }
 
     /**
@@ -58,6 +60,6 @@ class FieldGraphQLSchemaDefinitionHelper implements FieldGraphQLSchemaDefinition
             ));
         }
         /** @var array<Field|WrappingTypeInterface> */
-        return $this->schemaDefinitionReferenceRegistry->getSchemaDefinitionReferenceObjects($schemaDefinitionReferenceObjectIDs);
+        return $this->getSchemaDefinitionReferenceRegistry()->getSchemaDefinitionReferenceObjects($schemaDefinitionReferenceObjectIDs);
     }
 }
