@@ -722,12 +722,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
              * If it doesn't, then there will only be one version of it,
              * and it can be kept empty for simplicity
              */
-            if (Environment::enableSemanticVersionConstraints()) {
-                $directiveVersion = $this->getDirectiveVersion($relationalTypeResolver);
-                $hasVersion = !empty($directiveVersion);
-                if ($hasVersion) {
-                    $consolidatedDirectiveArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $directiveVersion;
-                }
+            if (Environment::enableSemanticVersionConstraints()
+                && $directiveVersion = $this->getDirectiveVersion($relationalTypeResolver)
+            ) {
+                $consolidatedDirectiveArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $directiveVersion;
             }
         }
         $this->consolidatedDirectiveArgNameTypeResolversCache[$cacheKey] = $consolidatedDirectiveArgNameTypeResolvers;

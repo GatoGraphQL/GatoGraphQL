@@ -371,11 +371,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * If it doesn't, then there will only be one version of it,
              * and it can be kept empty for simplicity
              */
-            if (Environment::enableSemanticVersionConstraints()) {
-                $hasVersion = $this->hasSchemaFieldVersion($objectTypeResolver, $fieldName);
-                if ($hasVersion) {
-                    $consolidatedFieldArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getFieldVersion($objectTypeResolver, $fieldName);
-                }
+            if (Environment::enableSemanticVersionConstraints()
+                && $fieldVersion = $this->getFieldVersion($objectTypeResolver, $fieldName)
+            ) {
+                $consolidatedFieldArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $fieldVersion;
             }
         }
         $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey] = $consolidatedFieldArgNameTypeResolvers;
@@ -864,11 +863,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     public function getFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return null;
-    }
-
-    protected function hasSchemaFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
-    {
-        return !empty($this->getFieldVersion($objectTypeResolver, $fieldName));
     }
 
     public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
