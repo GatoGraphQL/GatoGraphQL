@@ -17,6 +17,7 @@ trait FilterDataModuleProcessorTrait
      * Service to be provided by the class, not the trait,
      * to avoid overriding a final method
      */
+    abstract protected function getModuleProcessorManager(): ModuleProcessorManagerInterface;
     // public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
     // {
     //     $this->moduleProcessorManager = $moduleProcessorManager;
@@ -25,7 +26,6 @@ trait FilterDataModuleProcessorTrait
     // {
     //     return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     // }
-    abstract protected function getModuleProcessorManager(): ModuleProcessorManagerInterface;
     public function setFilterInputProcessorManager(FilterInputProcessorManagerInterface $filterInputProcessorManager): void
     {
         $this->filterInputProcessorManager = $filterInputProcessorManager;

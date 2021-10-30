@@ -17,6 +17,7 @@ trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
      * Service to be provided by the class, not the trait,
      * to avoid overriding a final method
      */
+    abstract protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface;
     // public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     // {
     //     $this->fieldQueryInterpreter = $fieldQueryInterpreter;
@@ -25,7 +26,6 @@ trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
     // {
     //     return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     // }
-    abstract protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface;
     public function setCacheControlDirectiveResolver(CacheControlDirectiveResolver $cacheControlDirectiveResolver): void
     {
         $this->cacheControlDirectiveResolver = $cacheControlDirectiveResolver;
