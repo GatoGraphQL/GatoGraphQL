@@ -10,22 +10,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDecoratorTrait
 {
-    // private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-
-    /**
-     * Service to be provided by the class, not the trait,
-     * to avoid overriding a final method
-     */
     abstract protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface;
-    // public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
-    // {
-    //     $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-    // }
-    // protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
-    // {
-    //     return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
-    // }
-
+    
     /**
      * By default, only the admin can see the roles from the users
      */
