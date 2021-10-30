@@ -20,27 +20,27 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
 
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
-    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
-    public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
+    final public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
     {
         $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
     }
-    protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
+    final protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
     {
         return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }

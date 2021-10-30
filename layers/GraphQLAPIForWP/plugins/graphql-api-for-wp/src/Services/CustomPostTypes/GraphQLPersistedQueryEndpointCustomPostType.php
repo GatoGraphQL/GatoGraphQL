@@ -26,35 +26,35 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
     private ?PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistry = null;
     private ?PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock = null;
 
-    public function setPersistedQueryEndpointBlockRegistry(PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry): void
+    final public function setPersistedQueryEndpointBlockRegistry(PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry): void
     {
         $this->persistedQueryEndpointBlockRegistry = $persistedQueryEndpointBlockRegistry;
     }
-    protected function getPersistedQueryEndpointBlockRegistry(): PersistedQueryEndpointBlockRegistryInterface
+    final protected function getPersistedQueryEndpointBlockRegistry(): PersistedQueryEndpointBlockRegistryInterface
     {
         return $this->persistedQueryEndpointBlockRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointBlockRegistryInterface::class);
     }
-    public function setPersistedQueryEndpointExecuterRegistry(PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistry): void
+    final public function setPersistedQueryEndpointExecuterRegistry(PersistedQueryEndpointExecuterRegistryInterface $persistedQueryEndpointExecuterRegistry): void
     {
         $this->persistedQueryEndpointExecuterRegistry = $persistedQueryEndpointExecuterRegistry;
     }
-    protected function getPersistedQueryEndpointExecuterRegistry(): PersistedQueryEndpointExecuterRegistryInterface
+    final protected function getPersistedQueryEndpointExecuterRegistry(): PersistedQueryEndpointExecuterRegistryInterface
     {
         return $this->persistedQueryEndpointExecuterRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointExecuterRegistryInterface::class);
     }
-    public function setPersistedQueryEndpointAnnotatorRegistry(PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistry): void
+    final public function setPersistedQueryEndpointAnnotatorRegistry(PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistry): void
     {
         $this->persistedQueryEndpointAnnotatorRegistry = $persistedQueryEndpointAnnotatorRegistry;
     }
-    protected function getPersistedQueryEndpointAnnotatorRegistry(): PersistedQueryEndpointAnnotatorRegistryInterface
+    final protected function getPersistedQueryEndpointAnnotatorRegistry(): PersistedQueryEndpointAnnotatorRegistryInterface
     {
         return $this->persistedQueryEndpointAnnotatorRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointAnnotatorRegistryInterface::class);
     }
-    public function setPersistedQueryEndpointOptionsBlock(PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock): void
+    final public function setPersistedQueryEndpointOptionsBlock(PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock): void
     {
         $this->persistedQueryEndpointOptionsBlock = $persistedQueryEndpointOptionsBlock;
     }
-    protected function getPersistedQueryEndpointOptionsBlock(): PersistedQueryEndpointOptionsBlock
+    final protected function getPersistedQueryEndpointOptionsBlock(): PersistedQueryEndpointOptionsBlock
     {
         return $this->persistedQueryEndpointOptionsBlock ??= $this->instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
     }

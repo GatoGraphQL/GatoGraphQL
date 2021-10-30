@@ -34,11 +34,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     {
         return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }
-    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
         $this->moduleRegistry = $moduleRegistry;
     }
-    protected function getModuleRegistry(): ModuleRegistryInterface
+    final protected function getModuleRegistry(): ModuleRegistryInterface
     {
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }

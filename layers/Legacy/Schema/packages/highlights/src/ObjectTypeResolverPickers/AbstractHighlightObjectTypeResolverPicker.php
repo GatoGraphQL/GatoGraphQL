@@ -14,11 +14,11 @@ abstract class AbstractHighlightObjectTypeResolverPicker extends AbstractObjectT
 {
     private ?HighlightObjectTypeResolver $highlightObjectTypeResolver = null;
     
-    public function setHighlightObjectTypeResolver(HighlightObjectTypeResolver $highlightObjectTypeResolver): void
+    final public function setHighlightObjectTypeResolver(HighlightObjectTypeResolver $highlightObjectTypeResolver): void
     {
         $this->highlightObjectTypeResolver = $highlightObjectTypeResolver;
     }
-    protected function getHighlightObjectTypeResolver(): HighlightObjectTypeResolver
+    final protected function getHighlightObjectTypeResolver(): HighlightObjectTypeResolver
     {
         return $this->highlightObjectTypeResolver ??= $this->instanceManager->getInstance(HighlightObjectTypeResolver::class);
     }

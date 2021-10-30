@@ -15,11 +15,11 @@ class NamespacingSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
 {
     private ?SchemaConfigNamespacingBlock $schemaConfigNamespacingBlock = null;
 
-    public function setSchemaConfigNamespacingBlock(SchemaConfigNamespacingBlock $schemaConfigNamespacingBlock): void
+    final public function setSchemaConfigNamespacingBlock(SchemaConfigNamespacingBlock $schemaConfigNamespacingBlock): void
     {
         $this->schemaConfigNamespacingBlock = $schemaConfigNamespacingBlock;
     }
-    protected function getSchemaConfigNamespacingBlock(): SchemaConfigNamespacingBlock
+    final protected function getSchemaConfigNamespacingBlock(): SchemaConfigNamespacingBlock
     {
         return $this->schemaConfigNamespacingBlock ??= $this->instanceManager->getInstance(SchemaConfigNamespacingBlock::class);
     }

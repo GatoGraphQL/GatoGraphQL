@@ -12,11 +12,11 @@ class MutationRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     private ?MutationRoot $mutationRoot = null;
 
-    public function setMutationRoot(MutationRoot $mutationRoot): void
+    final public function setMutationRoot(MutationRoot $mutationRoot): void
     {
         $this->mutationRoot = $mutationRoot;
     }
-    protected function getMutationRoot(): MutationRoot
+    final protected function getMutationRoot(): MutationRoot
     {
         return $this->mutationRoot ??= $this->instanceManager->getInstance(MutationRoot::class);
     }

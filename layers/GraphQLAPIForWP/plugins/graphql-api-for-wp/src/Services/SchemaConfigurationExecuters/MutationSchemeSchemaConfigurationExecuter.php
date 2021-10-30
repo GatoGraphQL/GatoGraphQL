@@ -19,11 +19,11 @@ class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurat
 {
     private ?SchemaConfigMutationSchemeBlock $schemaConfigMutationSchemeBlock = null;
 
-    public function setSchemaConfigMutationSchemeBlock(SchemaConfigMutationSchemeBlock $schemaConfigMutationSchemeBlock): void
+    final public function setSchemaConfigMutationSchemeBlock(SchemaConfigMutationSchemeBlock $schemaConfigMutationSchemeBlock): void
     {
         $this->schemaConfigMutationSchemeBlock = $schemaConfigMutationSchemeBlock;
     }
-    protected function getSchemaConfigMutationSchemeBlock(): SchemaConfigMutationSchemeBlock
+    final protected function getSchemaConfigMutationSchemeBlock(): SchemaConfigMutationSchemeBlock
     {
         return $this->schemaConfigMutationSchemeBlock ??= $this->instanceManager->getInstance(SchemaConfigMutationSchemeBlock::class);
     }

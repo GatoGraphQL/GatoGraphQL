@@ -21,19 +21,19 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
 
-    public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
+    final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
     {
         $this->commentObjectTypeResolver = $commentObjectTypeResolver;
     }
-    protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
+    final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
         return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
     }
-    public function setAddCommentToCustomPostMutationResolver(AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver): void
+    final public function setAddCommentToCustomPostMutationResolver(AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver): void
     {
         $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
     }
-    protected function getAddCommentToCustomPostMutationResolver(): AddCommentToCustomPostMutationResolver
+    final protected function getAddCommentToCustomPostMutationResolver(): AddCommentToCustomPostMutationResolver
     {
         return $this->addCommentToCustomPostMutationResolver ??= $this->instanceManager->getInstance(AddCommentToCustomPostMutationResolver::class);
     }

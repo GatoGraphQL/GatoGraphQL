@@ -18,11 +18,11 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
 {
     private ?CMSServiceInterface $cmsService = null;
 
-    public function setCMSService(CMSServiceInterface $cmsService): void
+    final public function setCMSService(CMSServiceInterface $cmsService): void
     {
         $this->cmsService = $cmsService;
     }
-    protected function getCMSService(): CMSServiceInterface
+    final protected function getCMSService(): CMSServiceInterface
     {
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }

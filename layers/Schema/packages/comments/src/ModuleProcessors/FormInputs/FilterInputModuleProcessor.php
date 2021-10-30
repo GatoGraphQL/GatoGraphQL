@@ -32,27 +32,27 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     private ?CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    public function setCommentTypeEnumTypeResolver(CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver): void
+    final public function setCommentTypeEnumTypeResolver(CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver): void
     {
         $this->commentTypeEnumTypeResolver = $commentTypeEnumTypeResolver;
     }
-    protected function getCommentTypeEnumTypeResolver(): CommentTypeEnumTypeResolver
+    final protected function getCommentTypeEnumTypeResolver(): CommentTypeEnumTypeResolver
     {
         return $this->commentTypeEnumTypeResolver ??= $this->instanceManager->getInstance(CommentTypeEnumTypeResolver::class);
     }
-    public function setCommentStatusEnumTypeResolver(CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver): void
+    final public function setCommentStatusEnumTypeResolver(CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver): void
     {
         $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
     }
-    protected function getCommentStatusEnumTypeResolver(): CommentStatusEnumTypeResolver
+    final protected function getCommentStatusEnumTypeResolver(): CommentStatusEnumTypeResolver
     {
         return $this->commentStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CommentStatusEnumTypeResolver::class);
     }
-    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
     }
-    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }

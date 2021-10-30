@@ -12,11 +12,11 @@ class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUse
 {
     private ?UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver = null;
 
-    public function setUpvoteCustomPostMutationResolver(UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver): void
+    final public function setUpvoteCustomPostMutationResolver(UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver): void
     {
         $this->upvoteCustomPostMutationResolver = $upvoteCustomPostMutationResolver;
     }
-    protected function getUpvoteCustomPostMutationResolver(): UpvoteCustomPostMutationResolver
+    final protected function getUpvoteCustomPostMutationResolver(): UpvoteCustomPostMutationResolver
     {
         return $this->upvoteCustomPostMutationResolver ??= $this->instanceManager->getInstance(UpvoteCustomPostMutationResolver::class);
     }

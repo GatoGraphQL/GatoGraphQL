@@ -16,11 +16,11 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
 
     private ?AboutMenuPage $aboutMenuPage = null;
 
-    public function setAboutMenuPage(AboutMenuPage $aboutMenuPage): void
+    final public function setAboutMenuPage(AboutMenuPage $aboutMenuPage): void
     {
         $this->aboutMenuPage = $aboutMenuPage;
     }
-    protected function getAboutMenuPage(): AboutMenuPage
+    final protected function getAboutMenuPage(): AboutMenuPage
     {
         return $this->aboutMenuPage ??= $this->instanceManager->getInstance(AboutMenuPage::class);
     }

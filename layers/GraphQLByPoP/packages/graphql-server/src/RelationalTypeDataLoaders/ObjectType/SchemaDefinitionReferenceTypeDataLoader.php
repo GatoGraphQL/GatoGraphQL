@@ -13,11 +13,11 @@ class SchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoad
 {
     private ?SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry = null;
 
-    public function setSchemaDefinitionReferenceRegistry(SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry): void
+    final public function setSchemaDefinitionReferenceRegistry(SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry): void
     {
         $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
     }
-    protected function getSchemaDefinitionReferenceRegistry(): SchemaDefinitionReferenceRegistryInterface
+    final protected function getSchemaDefinitionReferenceRegistry(): SchemaDefinitionReferenceRegistryInterface
     {
         return $this->schemaDefinitionReferenceRegistry ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
     }

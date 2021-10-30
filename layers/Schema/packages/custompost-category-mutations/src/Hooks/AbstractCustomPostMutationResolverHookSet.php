@@ -22,19 +22,19 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
         $this->customPostTypeAPI = $customPostTypeAPI;
     }
-    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
-    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
     }
-    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }

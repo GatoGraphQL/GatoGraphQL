@@ -13,11 +13,11 @@ class TypeObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
     private ?WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader $wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader = null;
 
-    public function setWrappingTypeOrSchemaDefinitionReferenceTypeDataLoader(WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader $wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader): void
+    final public function setWrappingTypeOrSchemaDefinitionReferenceTypeDataLoader(WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader $wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader): void
     {
         $this->wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader = $wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader;
     }
-    protected function getWrappingTypeOrSchemaDefinitionReferenceTypeDataLoader(): WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader
+    final protected function getWrappingTypeOrSchemaDefinitionReferenceTypeDataLoader(): WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader
     {
         return $this->wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader ??= $this->instanceManager->getInstance(WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader::class);
     }

@@ -17,11 +17,11 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
 {
     private ?AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient = null;
 
-    public function setAdminGraphiQLWithExplorerClient(AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient): void
+    final public function setAdminGraphiQLWithExplorerClient(AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient): void
     {
         $this->adminGraphiQLWithExplorerClient = $adminGraphiQLWithExplorerClient;
     }
-    protected function getAdminGraphiQLWithExplorerClient(): AdminGraphiQLWithExplorerClient
+    final protected function getAdminGraphiQLWithExplorerClient(): AdminGraphiQLWithExplorerClient
     {
         return $this->adminGraphiQLWithExplorerClient ??= $this->instanceManager->getInstance(AdminGraphiQLWithExplorerClient::class);
     }

@@ -8,7 +8,6 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalObjectTypeFieldResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 /**
@@ -17,17 +16,6 @@ use Symfony\Contracts\Service\Attribute\Required;
 class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectTypeFieldResolver
 {
     use EmbeddableFieldsObjectTypeFieldResolverTrait;
-
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
-    {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-    }
 
     /**
      * By making it not global, it gets registered on each single type.

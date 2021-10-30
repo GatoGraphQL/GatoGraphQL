@@ -16,19 +16,19 @@ class VarsHookSet extends AbstractHookSet
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
 
-    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
         $this->moduleRegistry = $moduleRegistry;
     }
-    protected function getModuleRegistry(): ModuleRegistryInterface
+    final protected function getModuleRegistry(): ModuleRegistryInterface
     {
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
-    public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
+    final public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
     {
         $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
     }
-    protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
+    final protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
     {
         return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
     }

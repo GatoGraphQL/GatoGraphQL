@@ -12,19 +12,19 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
     private ?SocialMediaProviderEnumTypeResolver $socialMediaProviderEnumTypeResolver = null;
     private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
 
-    public function setSocialMediaProviderEnumTypeResolver(SocialMediaProviderEnumTypeResolver $socialMediaProviderEnumTypeResolver): void
+    final public function setSocialMediaProviderEnumTypeResolver(SocialMediaProviderEnumTypeResolver $socialMediaProviderEnumTypeResolver): void
     {
         $this->socialMediaProviderEnumTypeResolver = $socialMediaProviderEnumTypeResolver;
     }
-    protected function getSocialMediaProviderEnumTypeResolver(): SocialMediaProviderEnumTypeResolver
+    final protected function getSocialMediaProviderEnumTypeResolver(): SocialMediaProviderEnumTypeResolver
     {
         return $this->socialMediaProviderEnumTypeResolver ??= $this->instanceManager->getInstance(SocialMediaProviderEnumTypeResolver::class);
     }
-    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
     {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
     }
-    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
         return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }

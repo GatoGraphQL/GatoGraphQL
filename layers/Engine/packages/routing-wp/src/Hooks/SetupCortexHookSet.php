@@ -16,11 +16,11 @@ class SetupCortexHookSet extends AbstractHookSet
 {
     private ?RoutingManagerInterface $routingManager = null;
 
-    public function setRoutingManager(RoutingManagerInterface $routingManager): void
+    final public function setRoutingManager(RoutingManagerInterface $routingManager): void
     {
         $this->routingManager = $routingManager;
     }
-    protected function getRoutingManager(): RoutingManagerInterface
+    final protected function getRoutingManager(): RoutingManagerInterface
     {
         return $this->routingManager ??= $this->instanceManager->getInstance(RoutingManagerInterface::class);
     }

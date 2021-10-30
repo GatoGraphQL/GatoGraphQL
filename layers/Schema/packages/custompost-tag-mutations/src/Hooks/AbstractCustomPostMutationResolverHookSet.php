@@ -21,19 +21,19 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
         $this->customPostTypeAPI = $customPostTypeAPI;
     }
-    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }

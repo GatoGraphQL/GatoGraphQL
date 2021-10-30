@@ -15,19 +15,19 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
     private ?MediaTypeDataLoader $mediaTypeDataLoader = null;
 
-    public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
+    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {
         $this->mediaTypeAPI = $mediaTypeAPI;
     }
-    protected function getMediaTypeAPI(): MediaTypeAPIInterface
+    final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
         return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
     }
-    public function setMediaTypeDataLoader(MediaTypeDataLoader $mediaTypeDataLoader): void
+    final public function setMediaTypeDataLoader(MediaTypeDataLoader $mediaTypeDataLoader): void
     {
         $this->mediaTypeDataLoader = $mediaTypeDataLoader;
     }
-    protected function getMediaTypeDataLoader(): MediaTypeDataLoader
+    final protected function getMediaTypeDataLoader(): MediaTypeDataLoader
     {
         return $this->mediaTypeDataLoader ??= $this->instanceManager->getInstance(MediaTypeDataLoader::class);
     }

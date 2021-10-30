@@ -16,11 +16,11 @@ class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
 
-    public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
+    final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
     {
         $this->commentTypeAPI = $commentTypeAPI;
     }
-    protected function getCommentTypeAPI(): CommentTypeAPIInterface
+    final protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
         return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
     }

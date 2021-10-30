@@ -14,19 +14,19 @@ class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
     private ?AccessControlBlock $accessControlBlock = null;
     private ?AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry = null;
 
-    public function setAccessControlBlock(AccessControlBlock $accessControlBlock): void
+    final public function setAccessControlBlock(AccessControlBlock $accessControlBlock): void
     {
         $this->accessControlBlock = $accessControlBlock;
     }
-    protected function getAccessControlBlock(): AccessControlBlock
+    final protected function getAccessControlBlock(): AccessControlBlock
     {
         return $this->accessControlBlock ??= $this->instanceManager->getInstance(AccessControlBlock::class);
     }
-    public function setAccessControlRuleBlockRegistry(AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry): void
+    final public function setAccessControlRuleBlockRegistry(AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry): void
     {
         $this->accessControlRuleBlockRegistry = $accessControlRuleBlockRegistry;
     }
-    protected function getAccessControlRuleBlockRegistry(): AccessControlRuleBlockRegistryInterface
+    final protected function getAccessControlRuleBlockRegistry(): AccessControlRuleBlockRegistryInterface
     {
         return $this->accessControlRuleBlockRegistry ??= $this->instanceManager->getInstance(AccessControlRuleBlockRegistryInterface::class);
     }

@@ -16,11 +16,11 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
 {
     private ?CreateUpdateUserMutationResolver $createUpdateUserMutationResolver = null;
     
-    public function setCreateUpdateUserMutationResolver(CreateUpdateUserMutationResolver $createUpdateUserMutationResolver): void
+    final public function setCreateUpdateUserMutationResolver(CreateUpdateUserMutationResolver $createUpdateUserMutationResolver): void
     {
         $this->createUpdateUserMutationResolver = $createUpdateUserMutationResolver;
     }
-    protected function getCreateUpdateUserMutationResolver(): CreateUpdateUserMutationResolver
+    final protected function getCreateUpdateUserMutationResolver(): CreateUpdateUserMutationResolver
     {
         return $this->createUpdateUserMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateUserMutationResolver::class);
     }

@@ -21,19 +21,19 @@ class LazyLoadHookSet extends AbstractHookSet
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?Lazy $lazy = null;
 
-    public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
+    final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
     {
         $this->requestHelperService = $requestHelperService;
     }
-    protected function getRequestHelperService(): RequestHelperServiceInterface
+    final protected function getRequestHelperService(): RequestHelperServiceInterface
     {
         return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
-    public function setLazy(Lazy $lazy): void
+    final public function setLazy(Lazy $lazy): void
     {
         $this->lazy = $lazy;
     }
-    protected function getLazy(): Lazy
+    final protected function getLazy(): Lazy
     {
         return $this->lazy ??= $this->instanceManager->getInstance(Lazy::class);
     }

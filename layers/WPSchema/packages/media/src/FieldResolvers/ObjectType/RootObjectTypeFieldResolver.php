@@ -23,27 +23,27 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
 
-    public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
+    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {
         $this->mediaTypeAPI = $mediaTypeAPI;
     }
-    protected function getMediaTypeAPI(): MediaTypeAPIInterface
+    final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
         return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
     }
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
+    final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
     {
         $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
     }
-    protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
+    final protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
         return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
     }

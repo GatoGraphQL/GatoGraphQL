@@ -23,35 +23,35 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
-    public function setUserAvatarTypeAPI(UserAvatarTypeAPIInterface $userAvatarTypeAPI): void
+    final public function setUserAvatarTypeAPI(UserAvatarTypeAPIInterface $userAvatarTypeAPI): void
     {
         $this->userAvatarTypeAPI = $userAvatarTypeAPI;
     }
-    protected function getUserAvatarTypeAPI(): UserAvatarTypeAPIInterface
+    final protected function getUserAvatarTypeAPI(): UserAvatarTypeAPIInterface
     {
         return $this->userAvatarTypeAPI ??= $this->instanceManager->getInstance(UserAvatarTypeAPIInterface::class);
     }
-    public function setUserAvatarRuntimeRegistry(UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry): void
+    final public function setUserAvatarRuntimeRegistry(UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry): void
     {
         $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;
     }
-    protected function getUserAvatarRuntimeRegistry(): UserAvatarRuntimeRegistryInterface
+    final protected function getUserAvatarRuntimeRegistry(): UserAvatarRuntimeRegistryInterface
     {
         return $this->userAvatarRuntimeRegistry ??= $this->instanceManager->getInstance(UserAvatarRuntimeRegistryInterface::class);
     }
-    public function setUserAvatarObjectTypeResolver(UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver): void
+    final public function setUserAvatarObjectTypeResolver(UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver): void
     {
         $this->userAvatarObjectTypeResolver = $userAvatarObjectTypeResolver;
     }
-    protected function getUserAvatarObjectTypeResolver(): UserAvatarObjectTypeResolver
+    final protected function getUserAvatarObjectTypeResolver(): UserAvatarObjectTypeResolver
     {
         return $this->userAvatarObjectTypeResolver ??= $this->instanceManager->getInstance(UserAvatarObjectTypeResolver::class);
     }
-    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
-    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }

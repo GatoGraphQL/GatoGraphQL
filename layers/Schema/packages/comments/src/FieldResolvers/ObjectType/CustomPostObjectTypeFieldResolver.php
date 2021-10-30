@@ -18,19 +18,19 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
     private ?CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver = null;
 
-    public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
+    final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
     {
         $this->commentTypeAPI = $commentTypeAPI;
     }
-    protected function getCommentTypeAPI(): CommentTypeAPIInterface
+    final protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
         return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
     }
-    public function setCommentableInterfaceTypeFieldResolver(CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver): void
+    final public function setCommentableInterfaceTypeFieldResolver(CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver): void
     {
         $this->commentableInterfaceTypeFieldResolver = $commentableInterfaceTypeFieldResolver;
     }
-    protected function getCommentableInterfaceTypeFieldResolver(): CommentableInterfaceTypeFieldResolver
+    final protected function getCommentableInterfaceTypeFieldResolver(): CommentableInterfaceTypeFieldResolver
     {
         return $this->commentableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(CommentableInterfaceTypeFieldResolver::class);
     }

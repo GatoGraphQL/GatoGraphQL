@@ -16,19 +16,19 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
     private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
     private ?QueryRetrieverInterface $queryRetriever = null;
 
-    public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
+    final public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
     {
         $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
     }
-    protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
+    final protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
     {
         return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
     }
-    public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
+    final public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
     {
         $this->queryRetriever = $queryRetriever;
     }
-    protected function getQueryRetriever(): QueryRetrieverInterface
+    final protected function getQueryRetriever(): QueryRetrieverInterface
     {
         return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
     }

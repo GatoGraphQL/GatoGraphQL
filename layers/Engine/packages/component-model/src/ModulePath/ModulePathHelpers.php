@@ -15,11 +15,11 @@ class ModulePathHelpers implements ModulePathHelpersInterface
 
     private ?ModulePathManagerInterface $modulePathManager = null;
 
-    public function setModulePathManager(ModulePathManagerInterface $modulePathManager): void
+    final public function setModulePathManager(ModulePathManagerInterface $modulePathManager): void
     {
         $this->modulePathManager = $modulePathManager;
     }
-    protected function getModulePathManager(): ModulePathManagerInterface
+    final protected function getModulePathManager(): ModulePathManagerInterface
     {
         return $this->modulePathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
     }

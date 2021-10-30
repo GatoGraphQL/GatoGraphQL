@@ -15,11 +15,11 @@ class GraphiQLClientEndpointAnnotator extends AbstractClientEndpointAnnotator im
 {
     private ?EndpointGraphiQLBlock $endpointGraphiQLBlock = null;
 
-    public function setEndpointGraphiQLBlock(EndpointGraphiQLBlock $endpointGraphiQLBlock): void
+    final public function setEndpointGraphiQLBlock(EndpointGraphiQLBlock $endpointGraphiQLBlock): void
     {
         $this->endpointGraphiQLBlock = $endpointGraphiQLBlock;
     }
-    protected function getEndpointGraphiQLBlock(): EndpointGraphiQLBlock
+    final protected function getEndpointGraphiQLBlock(): EndpointGraphiQLBlock
     {
         return $this->endpointGraphiQLBlock ??= $this->instanceManager->getInstance(EndpointGraphiQLBlock::class);
     }

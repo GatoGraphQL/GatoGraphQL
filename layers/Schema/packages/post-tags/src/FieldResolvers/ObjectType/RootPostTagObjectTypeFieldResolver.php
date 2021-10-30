@@ -32,35 +32,35 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
-    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
-    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
+    final public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
     {
         $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
     }
-    protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
+    final protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
     {
         return $this->postTagObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
     }
-    public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
+    final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
     {
         $this->postTagTypeAPI = $postTagTypeAPI;
     }
-    protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
+    final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
     {
         return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
     }

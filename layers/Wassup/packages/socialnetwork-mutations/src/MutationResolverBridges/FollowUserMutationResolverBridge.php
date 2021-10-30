@@ -12,11 +12,11 @@ class FollowUserMutationResolverBridge extends AbstractUserUpdateUserMetaValueMu
 {
     private ?FollowUserMutationResolver $followUserMutationResolver = null;
 
-    public function setFollowUserMutationResolver(FollowUserMutationResolver $followUserMutationResolver): void
+    final public function setFollowUserMutationResolver(FollowUserMutationResolver $followUserMutationResolver): void
     {
         $this->followUserMutationResolver = $followUserMutationResolver;
     }
-    protected function getFollowUserMutationResolver(): FollowUserMutationResolver
+    final protected function getFollowUserMutationResolver(): FollowUserMutationResolver
     {
         return $this->followUserMutationResolver ??= $this->instanceManager->getInstance(FollowUserMutationResolver::class);
     }

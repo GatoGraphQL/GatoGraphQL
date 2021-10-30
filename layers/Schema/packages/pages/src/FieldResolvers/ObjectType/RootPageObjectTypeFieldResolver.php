@@ -31,27 +31,27 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
     private ?PageTypeAPIInterface $pageTypeAPI = null;
 
-    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
-    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
-    public function setPageObjectTypeResolver(PageObjectTypeResolver $pageObjectTypeResolver): void
+    final public function setPageObjectTypeResolver(PageObjectTypeResolver $pageObjectTypeResolver): void
     {
         $this->pageObjectTypeResolver = $pageObjectTypeResolver;
     }
-    protected function getPageObjectTypeResolver(): PageObjectTypeResolver
+    final protected function getPageObjectTypeResolver(): PageObjectTypeResolver
     {
         return $this->pageObjectTypeResolver ??= $this->instanceManager->getInstance(PageObjectTypeResolver::class);
     }
-    public function setPageTypeAPI(PageTypeAPIInterface $pageTypeAPI): void
+    final public function setPageTypeAPI(PageTypeAPIInterface $pageTypeAPI): void
     {
         $this->pageTypeAPI = $pageTypeAPI;
     }
-    protected function getPageTypeAPI(): PageTypeAPIInterface
+    final protected function getPageTypeAPI(): PageTypeAPIInterface
     {
         return $this->pageTypeAPI ??= $this->instanceManager->getInstance(PageTypeAPIInterface::class);
     }

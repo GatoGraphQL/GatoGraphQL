@@ -16,11 +16,11 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
 {
     private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     
-    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
     {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
     }
-    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
         return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }

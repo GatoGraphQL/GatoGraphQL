@@ -20,27 +20,27 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
     private ?MemberTagEnumTypeResolver $memberTagEnumTypeResolver = null;
     private ?MemberStatusEnumTypeResolver $memberStatusEnumTypeResolver = null;
 
-    public function setMemberPrivilegeEnumTypeResolver(MemberPrivilegeEnumTypeResolver $memberPrivilegeEnumTypeResolver): void
+    final public function setMemberPrivilegeEnumTypeResolver(MemberPrivilegeEnumTypeResolver $memberPrivilegeEnumTypeResolver): void
     {
         $this->memberPrivilegeEnumTypeResolver = $memberPrivilegeEnumTypeResolver;
     }
-    protected function getMemberPrivilegeEnumTypeResolver(): MemberPrivilegeEnumTypeResolver
+    final protected function getMemberPrivilegeEnumTypeResolver(): MemberPrivilegeEnumTypeResolver
     {
         return $this->memberPrivilegeEnumTypeResolver ??= $this->instanceManager->getInstance(MemberPrivilegeEnumTypeResolver::class);
     }
-    public function setMemberTagEnumTypeResolver(MemberTagEnumTypeResolver $memberTagEnumTypeResolver): void
+    final public function setMemberTagEnumTypeResolver(MemberTagEnumTypeResolver $memberTagEnumTypeResolver): void
     {
         $this->memberTagEnumTypeResolver = $memberTagEnumTypeResolver;
     }
-    protected function getMemberTagEnumTypeResolver(): MemberTagEnumTypeResolver
+    final protected function getMemberTagEnumTypeResolver(): MemberTagEnumTypeResolver
     {
         return $this->memberTagEnumTypeResolver ??= $this->instanceManager->getInstance(MemberTagEnumTypeResolver::class);
     }
-    public function setMemberStatusEnumTypeResolver(MemberStatusEnumTypeResolver $memberStatusEnumTypeResolver): void
+    final public function setMemberStatusEnumTypeResolver(MemberStatusEnumTypeResolver $memberStatusEnumTypeResolver): void
     {
         $this->memberStatusEnumTypeResolver = $memberStatusEnumTypeResolver;
     }
-    protected function getMemberStatusEnumTypeResolver(): MemberStatusEnumTypeResolver
+    final protected function getMemberStatusEnumTypeResolver(): MemberStatusEnumTypeResolver
     {
         return $this->memberStatusEnumTypeResolver ??= $this->instanceManager->getInstance(MemberStatusEnumTypeResolver::class);
     }

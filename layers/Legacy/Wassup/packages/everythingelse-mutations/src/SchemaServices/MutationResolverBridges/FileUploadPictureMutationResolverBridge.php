@@ -14,11 +14,11 @@ class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationR
 {
     private ?FileUploadPictureMutationResolver $fileUploadPictureMutationResolver = null;
     
-    public function setFileUploadPictureMutationResolver(FileUploadPictureMutationResolver $fileUploadPictureMutationResolver): void
+    final public function setFileUploadPictureMutationResolver(FileUploadPictureMutationResolver $fileUploadPictureMutationResolver): void
     {
         $this->fileUploadPictureMutationResolver = $fileUploadPictureMutationResolver;
     }
-    protected function getFileUploadPictureMutationResolver(): FileUploadPictureMutationResolver
+    final protected function getFileUploadPictureMutationResolver(): FileUploadPictureMutationResolver
     {
         return $this->fileUploadPictureMutationResolver ??= $this->instanceManager->getInstance(FileUploadPictureMutationResolver::class);
     }

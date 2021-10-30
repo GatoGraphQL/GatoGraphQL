@@ -13,11 +13,11 @@ class ViewCustomEndpointSourceEndpointExecuter extends AbstractViewSourceEndpoin
 {
     private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
 
-    public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
+    final public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
     {
         $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
     }
-    protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
+    final protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
     {
         return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
     }

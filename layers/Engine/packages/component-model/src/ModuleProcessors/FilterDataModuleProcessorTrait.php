@@ -10,17 +10,22 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait FilterDataModuleProcessorTrait
 {
-    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    // private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
     private ?FilterInputProcessorManagerInterface $filterInputProcessorManager = null;
 
-    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
-    {
-        $this->moduleProcessorManager = $moduleProcessorManager;
-    }
-    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
-    {
-        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
-    }
+    /**
+     * Service to be provided by the class, not the trait,
+     * to avoid overriding a final method
+     */
+    abstract protected function getModuleProcessorManager(): ModuleProcessorManagerInterface;
+    // public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    // {
+    //     $this->moduleProcessorManager = $moduleProcessorManager;
+    // }
+    // protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    // {
+    //     return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
+    // }
     public function setFilterInputProcessorManager(FilterInputProcessorManagerInterface $filterInputProcessorManager): void
     {
         $this->filterInputProcessorManager = $filterInputProcessorManager;

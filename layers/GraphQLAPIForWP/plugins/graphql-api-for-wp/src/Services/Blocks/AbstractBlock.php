@@ -34,35 +34,35 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     private ?GeneralUtils $generalUtils = null;
     private ?EditorHelpers $editorHelpers = null;
 
-    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
         $this->moduleRegistry = $moduleRegistry;
     }
-    protected function getModuleRegistry(): ModuleRegistryInterface
+    final protected function getModuleRegistry(): ModuleRegistryInterface
     {
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
-    public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
         $this->userAuthorization = $userAuthorization;
     }
-    protected function getUserAuthorization(): UserAuthorizationInterface
+    final protected function getUserAuthorization(): UserAuthorizationInterface
     {
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
-    public function setGeneralUtils(GeneralUtils $generalUtils): void
+    final public function setGeneralUtils(GeneralUtils $generalUtils): void
     {
         $this->generalUtils = $generalUtils;
     }
-    protected function getGeneralUtils(): GeneralUtils
+    final protected function getGeneralUtils(): GeneralUtils
     {
         return $this->generalUtils ??= $this->instanceManager->getInstance(GeneralUtils::class);
     }
-    public function setEditorHelpers(EditorHelpers $editorHelpers): void
+    final public function setEditorHelpers(EditorHelpers $editorHelpers): void
     {
         $this->editorHelpers = $editorHelpers;
     }
-    protected function getEditorHelpers(): EditorHelpers
+    final protected function getEditorHelpers(): EditorHelpers
     {
         return $this->editorHelpers ??= $this->instanceManager->getInstance(EditorHelpers::class);
     }

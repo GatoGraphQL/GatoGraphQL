@@ -14,11 +14,11 @@ class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBr
 {
     private ?SettingsMutationResolver $settingsMutationResolver = null;
     
-    public function setSettingsMutationResolver(SettingsMutationResolver $settingsMutationResolver): void
+    final public function setSettingsMutationResolver(SettingsMutationResolver $settingsMutationResolver): void
     {
         $this->settingsMutationResolver = $settingsMutationResolver;
     }
-    protected function getSettingsMutationResolver(): SettingsMutationResolver
+    final protected function getSettingsMutationResolver(): SettingsMutationResolver
     {
         return $this->settingsMutationResolver ??= $this->instanceManager->getInstance(SettingsMutationResolver::class);
     }

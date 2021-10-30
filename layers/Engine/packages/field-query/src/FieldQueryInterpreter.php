@@ -64,19 +64,19 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?QueryParserInterface $queryParser = null;
 
-    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
         $this->feedbackMessageStore = $feedbackMessageStore;
     }
-    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
     {
         return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
     }
-    public function setQueryParser(QueryParserInterface $queryParser): void
+    final public function setQueryParser(QueryParserInterface $queryParser): void
     {
         $this->queryParser = $queryParser;
     }
-    protected function getQueryParser(): QueryParserInterface
+    final protected function getQueryParser(): QueryParserInterface
     {
         return $this->queryParser ??= $this->instanceManager->getInstance(QueryParserInterface::class);
     }

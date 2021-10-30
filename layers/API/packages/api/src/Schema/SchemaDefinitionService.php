@@ -59,19 +59,19 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     private ?PersistedFragmentManagerInterface $persistedFragmentManager = null;
     private ?PersistedQueryManagerInterface $persistedQueryManager = null;
 
-    public function setPersistedFragmentManager(PersistedFragmentManagerInterface $persistedFragmentManager): void
+    final public function setPersistedFragmentManager(PersistedFragmentManagerInterface $persistedFragmentManager): void
     {
         $this->persistedFragmentManager = $persistedFragmentManager;
     }
-    protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
+    final protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
     {
         return $this->persistedFragmentManager ??= $this->instanceManager->getInstance(PersistedFragmentManagerInterface::class);
     }
-    public function setPersistedQueryManager(PersistedQueryManagerInterface $persistedQueryManager): void
+    final public function setPersistedQueryManager(PersistedQueryManagerInterface $persistedQueryManager): void
     {
         $this->persistedQueryManager = $persistedQueryManager;
     }
-    protected function getPersistedQueryManager(): PersistedQueryManagerInterface
+    final protected function getPersistedQueryManager(): PersistedQueryManagerInterface
     {
         return $this->persistedQueryManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
     }

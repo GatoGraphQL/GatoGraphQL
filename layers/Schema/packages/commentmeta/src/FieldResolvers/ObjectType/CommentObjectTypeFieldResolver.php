@@ -16,19 +16,19 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?CommentMetaTypeAPIInterface $commentMetaTypeAPI = null;
     private ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
 
-    public function setCommentMetaTypeAPI(CommentMetaTypeAPIInterface $commentMetaTypeAPI): void
+    final public function setCommentMetaTypeAPI(CommentMetaTypeAPIInterface $commentMetaTypeAPI): void
     {
         $this->commentMetaTypeAPI = $commentMetaTypeAPI;
     }
-    protected function getCommentMetaTypeAPI(): CommentMetaTypeAPIInterface
+    final protected function getCommentMetaTypeAPI(): CommentMetaTypeAPIInterface
     {
         return $this->commentMetaTypeAPI ??= $this->instanceManager->getInstance(CommentMetaTypeAPIInterface::class);
     }
-    public function setWithMetaInterfaceTypeFieldResolver(WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver): void
+    final public function setWithMetaInterfaceTypeFieldResolver(WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver): void
     {
         $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
     }
-    protected function getWithMetaInterfaceTypeFieldResolver(): WithMetaInterfaceTypeFieldResolver
+    final protected function getWithMetaInterfaceTypeFieldResolver(): WithMetaInterfaceTypeFieldResolver
     {
         return $this->withMetaInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(WithMetaInterfaceTypeFieldResolver::class);
     }

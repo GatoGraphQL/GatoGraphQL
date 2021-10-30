@@ -27,19 +27,19 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
+    final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
     {
         $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
     }
-    protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
+    final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
     {
         return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
     }
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }

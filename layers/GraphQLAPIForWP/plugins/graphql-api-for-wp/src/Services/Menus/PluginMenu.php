@@ -14,11 +14,11 @@ class PluginMenu extends AbstractMenu
 {
     private ?UserAuthorizationInterface $userAuthorization = null;
 
-    public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
         $this->userAuthorization = $userAuthorization;
     }
-    protected function getUserAuthorization(): UserAuthorizationInterface
+    final protected function getUserAuthorization(): UserAuthorizationInterface
     {
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }

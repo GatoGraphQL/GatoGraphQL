@@ -20,11 +20,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
 
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
         $this->customPostTypeAPI = $customPostTypeAPI;
     }
-    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }

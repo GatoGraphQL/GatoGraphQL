@@ -21,11 +21,11 @@ abstract class AbstractEditorScript extends AbstractScript
 
     private ?EditorHelpers $editorHelpers = null;
 
-    public function setEditorHelpers(EditorHelpers $editorHelpers): void
+    final public function setEditorHelpers(EditorHelpers $editorHelpers): void
     {
         $this->editorHelpers = $editorHelpers;
     }
-    protected function getEditorHelpers(): EditorHelpers
+    final protected function getEditorHelpers(): EditorHelpers
     {
         return $this->editorHelpers ??= $this->instanceManager->getInstance(EditorHelpers::class);
     }

@@ -12,11 +12,11 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
     private ?EngineInterface $engine = null;
 
-    public function setEngine(EngineInterface $engine): void
+    final public function setEngine(EngineInterface $engine): void
     {
         $this->engine = $engine;
     }
-    protected function getEngine(): EngineInterface
+    final protected function getEngine(): EngineInterface
     {
         return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
     }

@@ -12,11 +12,11 @@ class Engine extends UpstreamEngine
 {
     private ?ApplicationStateHelperServiceInterface $applicationStateHelperService = null;
 
-    public function setApplicationStateHelperService(ApplicationStateHelperServiceInterface $applicationStateHelperService): void
+    final public function setApplicationStateHelperService(ApplicationStateHelperServiceInterface $applicationStateHelperService): void
     {
         $this->applicationStateHelperService = $applicationStateHelperService;
     }
-    protected function getApplicationStateHelperService(): ApplicationStateHelperServiceInterface
+    final protected function getApplicationStateHelperService(): ApplicationStateHelperServiceInterface
     {
         return $this->applicationStateHelperService ??= $this->instanceManager->getInstance(ApplicationStateHelperServiceInterface::class);
     }

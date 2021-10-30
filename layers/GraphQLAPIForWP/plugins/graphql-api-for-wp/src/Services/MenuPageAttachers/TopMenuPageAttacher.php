@@ -19,43 +19,43 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     private ?GraphiQLMenuPage $graphiQLMenuPage = null;
     private ?GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage = null;
 
-    public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
+    final public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
     {
         $this->menuPageHelper = $menuPageHelper;
     }
-    protected function getMenuPageHelper(): MenuPageHelper
+    final protected function getMenuPageHelper(): MenuPageHelper
     {
         return $this->menuPageHelper ??= $this->instanceManager->getInstance(MenuPageHelper::class);
     }
-    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
         $this->moduleRegistry = $moduleRegistry;
     }
-    protected function getModuleRegistry(): ModuleRegistryInterface
+    final protected function getModuleRegistry(): ModuleRegistryInterface
     {
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
-    public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
         $this->userAuthorization = $userAuthorization;
     }
-    protected function getUserAuthorization(): UserAuthorizationInterface
+    final protected function getUserAuthorization(): UserAuthorizationInterface
     {
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
-    public function setGraphiQLMenuPage(GraphiQLMenuPage $graphiQLMenuPage): void
+    final public function setGraphiQLMenuPage(GraphiQLMenuPage $graphiQLMenuPage): void
     {
         $this->graphiQLMenuPage = $graphiQLMenuPage;
     }
-    protected function getGraphiQLMenuPage(): GraphiQLMenuPage
+    final protected function getGraphiQLMenuPage(): GraphiQLMenuPage
     {
         return $this->graphiQLMenuPage ??= $this->instanceManager->getInstance(GraphiQLMenuPage::class);
     }
-    public function setGraphQLVoyagerMenuPage(GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage): void
+    final public function setGraphQLVoyagerMenuPage(GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage): void
     {
         $this->graphQLVoyagerMenuPage = $graphQLVoyagerMenuPage;
     }
-    protected function getGraphQLVoyagerMenuPage(): GraphQLVoyagerMenuPage
+    final protected function getGraphQLVoyagerMenuPage(): GraphQLVoyagerMenuPage
     {
         return $this->graphQLVoyagerMenuPage ??= $this->instanceManager->getInstance(GraphQLVoyagerMenuPage::class);
     }

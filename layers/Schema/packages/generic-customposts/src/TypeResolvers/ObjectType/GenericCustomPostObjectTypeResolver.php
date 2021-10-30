@@ -13,11 +13,11 @@ class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeRe
 {
     private ?GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader = null;
 
-    public function setGenericCustomPostTypeDataLoader(GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader): void
+    final public function setGenericCustomPostTypeDataLoader(GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader): void
     {
         $this->genericCustomPostTypeDataLoader = $genericCustomPostTypeDataLoader;
     }
-    protected function getGenericCustomPostTypeDataLoader(): GenericCustomPostTypeDataLoader
+    final protected function getGenericCustomPostTypeDataLoader(): GenericCustomPostTypeDataLoader
     {
         return $this->genericCustomPostTypeDataLoader ??= $this->instanceManager->getInstance(GenericCustomPostTypeDataLoader::class);
     }

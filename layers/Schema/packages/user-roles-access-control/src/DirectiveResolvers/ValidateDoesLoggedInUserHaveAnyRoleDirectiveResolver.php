@@ -17,19 +17,19 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
+    final public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
     {
         $this->userRoleTypeAPI = $userRoleTypeAPI;
     }
-    protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
+    final protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
     {
         return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
     }
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }

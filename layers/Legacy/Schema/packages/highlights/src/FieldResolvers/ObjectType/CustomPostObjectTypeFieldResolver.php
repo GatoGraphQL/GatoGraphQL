@@ -25,27 +25,27 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?HighlightObjectTypeResolver $highlightObjectTypeResolver = null;
     
-    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
-    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
-    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
-    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
-    public function setHighlightObjectTypeResolver(HighlightObjectTypeResolver $highlightObjectTypeResolver): void
+    final public function setHighlightObjectTypeResolver(HighlightObjectTypeResolver $highlightObjectTypeResolver): void
     {
         $this->highlightObjectTypeResolver = $highlightObjectTypeResolver;
     }
-    protected function getHighlightObjectTypeResolver(): HighlightObjectTypeResolver
+    final protected function getHighlightObjectTypeResolver(): HighlightObjectTypeResolver
     {
         return $this->highlightObjectTypeResolver ??= $this->instanceManager->getInstance(HighlightObjectTypeResolver::class);
     }

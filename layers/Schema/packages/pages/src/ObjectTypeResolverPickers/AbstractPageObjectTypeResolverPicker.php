@@ -16,19 +16,19 @@ abstract class AbstractPageObjectTypeResolverPicker extends AbstractObjectTypeRe
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
     private ?PageTypeAPIInterface $pageTypeAPI = null;
 
-    public function setPageObjectTypeResolver(PageObjectTypeResolver $pageObjectTypeResolver): void
+    final public function setPageObjectTypeResolver(PageObjectTypeResolver $pageObjectTypeResolver): void
     {
         $this->pageObjectTypeResolver = $pageObjectTypeResolver;
     }
-    protected function getPageObjectTypeResolver(): PageObjectTypeResolver
+    final protected function getPageObjectTypeResolver(): PageObjectTypeResolver
     {
         return $this->pageObjectTypeResolver ??= $this->instanceManager->getInstance(PageObjectTypeResolver::class);
     }
-    public function setPageTypeAPI(PageTypeAPIInterface $pageTypeAPI): void
+    final public function setPageTypeAPI(PageTypeAPIInterface $pageTypeAPI): void
     {
         $this->pageTypeAPI = $pageTypeAPI;
     }
-    protected function getPageTypeAPI(): PageTypeAPIInterface
+    final protected function getPageTypeAPI(): PageTypeAPIInterface
     {
         return $this->pageTypeAPI ??= $this->instanceManager->getInstance(PageTypeAPIInterface::class);
     }

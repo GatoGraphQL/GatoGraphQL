@@ -38,67 +38,67 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?InputValueObjectTypeResolver $inputValueObjectTypeResolver = null;
     private ?TypeKindEnumTypeResolver $typeKindEnumTypeResolver = null;
 
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
-    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
-    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {
         $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
     }
-    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
         return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
-    public function setFieldObjectTypeResolver(FieldObjectTypeResolver $fieldObjectTypeResolver): void
+    final public function setFieldObjectTypeResolver(FieldObjectTypeResolver $fieldObjectTypeResolver): void
     {
         $this->fieldObjectTypeResolver = $fieldObjectTypeResolver;
     }
-    protected function getFieldObjectTypeResolver(): FieldObjectTypeResolver
+    final protected function getFieldObjectTypeResolver(): FieldObjectTypeResolver
     {
         return $this->fieldObjectTypeResolver ??= $this->instanceManager->getInstance(FieldObjectTypeResolver::class);
     }
-    public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
+    final public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
     {
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
     }
-    protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
+    final protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
     {
         return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
     }
-    public function setEnumValueObjectTypeResolver(EnumValueObjectTypeResolver $enumValueObjectTypeResolver): void
+    final public function setEnumValueObjectTypeResolver(EnumValueObjectTypeResolver $enumValueObjectTypeResolver): void
     {
         $this->enumValueObjectTypeResolver = $enumValueObjectTypeResolver;
     }
-    protected function getEnumValueObjectTypeResolver(): EnumValueObjectTypeResolver
+    final protected function getEnumValueObjectTypeResolver(): EnumValueObjectTypeResolver
     {
         return $this->enumValueObjectTypeResolver ??= $this->instanceManager->getInstance(EnumValueObjectTypeResolver::class);
     }
-    public function setInputValueObjectTypeResolver(InputValueObjectTypeResolver $inputValueObjectTypeResolver): void
+    final public function setInputValueObjectTypeResolver(InputValueObjectTypeResolver $inputValueObjectTypeResolver): void
     {
         $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
     }
-    protected function getInputValueObjectTypeResolver(): InputValueObjectTypeResolver
+    final protected function getInputValueObjectTypeResolver(): InputValueObjectTypeResolver
     {
         return $this->inputValueObjectTypeResolver ??= $this->instanceManager->getInstance(InputValueObjectTypeResolver::class);
     }
-    public function setTypeKindEnumTypeResolver(TypeKindEnumTypeResolver $typeKindEnumTypeResolver): void
+    final public function setTypeKindEnumTypeResolver(TypeKindEnumTypeResolver $typeKindEnumTypeResolver): void
     {
         $this->typeKindEnumTypeResolver = $typeKindEnumTypeResolver;
     }
-    protected function getTypeKindEnumTypeResolver(): TypeKindEnumTypeResolver
+    final protected function getTypeKindEnumTypeResolver(): TypeKindEnumTypeResolver
     {
         return $this->typeKindEnumTypeResolver ??= $this->instanceManager->getInstance(TypeKindEnumTypeResolver::class);
     }

@@ -15,11 +15,11 @@ class HeadModuleHookSet extends AbstractHookSet
 {
     private ?HeadModule $headModule = null;
     
-    public function setHeadModule(HeadModule $headModule): void
+    final public function setHeadModule(HeadModule $headModule): void
     {
         $this->headModule = $headModule;
     }
-    protected function getHeadModule(): HeadModule
+    final protected function getHeadModule(): HeadModule
     {
         return $this->headModule ??= $this->instanceManager->getInstance(HeadModule::class);
     }

@@ -27,51 +27,51 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
 
-    public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
+    final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
     {
         $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
     }
-    protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
+    final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
     {
         return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
     }
-    public function setCustomPostContentFormatEnumTypeResolver(CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver): void
+    final public function setCustomPostContentFormatEnumTypeResolver(CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver): void
     {
         $this->customPostContentFormatEnumTypeResolver = $customPostContentFormatEnumTypeResolver;
     }
-    protected function getCustomPostContentFormatEnumTypeResolver(): CustomPostContentFormatEnumTypeResolver
+    final protected function getCustomPostContentFormatEnumTypeResolver(): CustomPostContentFormatEnumTypeResolver
     {
         return $this->customPostContentFormatEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostContentFormatEnumTypeResolver::class);
     }
-    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
-    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
-    public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    final public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
     {
         $this->dateScalarTypeResolver = $dateScalarTypeResolver;
     }
-    protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    final protected function getDateScalarTypeResolver(): DateScalarTypeResolver
     {
         return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
     }
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
+    final public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
     {
         $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
     }
-    protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
+    final protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
     {
         return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }

@@ -17,11 +17,11 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
 
-    public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
+    final public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
     {
         $this->userRoleTypeAPI = $userRoleTypeAPI;
     }
-    protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
+    final protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
     {
         return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
     }

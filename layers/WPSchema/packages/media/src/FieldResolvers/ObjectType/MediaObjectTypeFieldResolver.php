@@ -19,27 +19,27 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?DateFormatterInterface $dateFormatter = null;
     private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
 
-    public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
+    final public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
     {
         $this->cmsHelperService = $cmsHelperService;
     }
-    protected function getCMSHelperService(): CMSHelperServiceInterface
+    final protected function getCMSHelperService(): CMSHelperServiceInterface
     {
         return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
     }
-    public function setDateFormatter(DateFormatterInterface $dateFormatter): void
+    final public function setDateFormatter(DateFormatterInterface $dateFormatter): void
     {
         $this->dateFormatter = $dateFormatter;
     }
-    protected function getDateFormatter(): DateFormatterInterface
+    final protected function getDateFormatter(): DateFormatterInterface
     {
         return $this->dateFormatter ??= $this->instanceManager->getInstance(DateFormatterInterface::class);
     }
-    public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
+    final public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
     {
         $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
     }
-    protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
+    final protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
     {
         return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }

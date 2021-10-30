@@ -13,11 +13,11 @@ class ApplicationStateHookSet extends AbstractHookSet
 {
     private ?CMSRoutingStateServiceInterface $cmsRoutingStateService = null;
 
-    public function setCMSRoutingStateService(CMSRoutingStateServiceInterface $cmsRoutingStateService): void
+    final public function setCMSRoutingStateService(CMSRoutingStateServiceInterface $cmsRoutingStateService): void
     {
         $this->cmsRoutingStateService = $cmsRoutingStateService;
     }
-    protected function getCMSRoutingStateService(): CMSRoutingStateServiceInterface
+    final protected function getCMSRoutingStateService(): CMSRoutingStateServiceInterface
     {
         return $this->cmsRoutingStateService ??= $this->instanceManager->getInstance(CMSRoutingStateServiceInterface::class);
     }

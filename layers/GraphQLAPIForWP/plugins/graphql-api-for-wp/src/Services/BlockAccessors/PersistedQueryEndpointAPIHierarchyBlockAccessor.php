@@ -18,19 +18,19 @@ class PersistedQueryEndpointAPIHierarchyBlockAccessor
     private ?BlockHelpers $blockHelpers = null;
     private ?PersistedQueryEndpointAPIHierarchyBlock $persistedQueryEndpointAPIHierarchyBlock = null;
 
-    public function setBlockHelpers(BlockHelpers $blockHelpers): void
+    final public function setBlockHelpers(BlockHelpers $blockHelpers): void
     {
         $this->blockHelpers = $blockHelpers;
     }
-    protected function getBlockHelpers(): BlockHelpers
+    final protected function getBlockHelpers(): BlockHelpers
     {
         return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
-    public function setPersistedQueryEndpointAPIHierarchyBlock(PersistedQueryEndpointAPIHierarchyBlock $persistedQueryEndpointAPIHierarchyBlock): void
+    final public function setPersistedQueryEndpointAPIHierarchyBlock(PersistedQueryEndpointAPIHierarchyBlock $persistedQueryEndpointAPIHierarchyBlock): void
     {
         $this->persistedQueryEndpointAPIHierarchyBlock = $persistedQueryEndpointAPIHierarchyBlock;
     }
-    protected function getPersistedQueryEndpointAPIHierarchyBlock(): PersistedQueryEndpointAPIHierarchyBlock
+    final protected function getPersistedQueryEndpointAPIHierarchyBlock(): PersistedQueryEndpointAPIHierarchyBlock
     {
         return $this->persistedQueryEndpointAPIHierarchyBlock ??= $this->instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
     }

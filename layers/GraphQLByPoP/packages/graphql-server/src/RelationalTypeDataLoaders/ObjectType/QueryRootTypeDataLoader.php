@@ -12,11 +12,11 @@ class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     private ?QueryRoot $queryRoot = null;
 
-    public function setQueryRoot(QueryRoot $queryRoot): void
+    final public function setQueryRoot(QueryRoot $queryRoot): void
     {
         $this->queryRoot = $queryRoot;
     }
-    protected function getQueryRoot(): QueryRoot
+    final protected function getQueryRoot(): QueryRoot
     {
         return $this->queryRoot ??= $this->instanceManager->getInstance(QueryRoot::class);
     }

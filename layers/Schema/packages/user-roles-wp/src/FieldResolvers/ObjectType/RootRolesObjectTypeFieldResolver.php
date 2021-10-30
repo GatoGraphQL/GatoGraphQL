@@ -21,19 +21,19 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
 
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
+    final public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
     {
         $this->userRoleTypeAPI = $userRoleTypeAPI;
     }
-    protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
+    final protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
     {
         return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
     }

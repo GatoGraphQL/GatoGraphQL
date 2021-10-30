@@ -18,19 +18,19 @@ class CacheControlSchemaConfigurationExecuter extends AbstractSchemaConfiguratio
     private ?CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator = null;
     private ?SchemaConfigCacheControlListBlock $schemaConfigCacheControlListBlock = null;
 
-    public function setCacheControlGraphQLQueryConfigurator(CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator): void
+    final public function setCacheControlGraphQLQueryConfigurator(CacheControlGraphQLQueryConfigurator $cacheControlGraphQLQueryConfigurator): void
     {
         $this->cacheControlGraphQLQueryConfigurator = $cacheControlGraphQLQueryConfigurator;
     }
-    protected function getCacheControlGraphQLQueryConfigurator(): CacheControlGraphQLQueryConfigurator
+    final protected function getCacheControlGraphQLQueryConfigurator(): CacheControlGraphQLQueryConfigurator
     {
         return $this->cacheControlGraphQLQueryConfigurator ??= $this->instanceManager->getInstance(CacheControlGraphQLQueryConfigurator::class);
     }
-    public function setSchemaConfigCacheControlListBlock(SchemaConfigCacheControlListBlock $schemaConfigCacheControlListBlock): void
+    final public function setSchemaConfigCacheControlListBlock(SchemaConfigCacheControlListBlock $schemaConfigCacheControlListBlock): void
     {
         $this->schemaConfigCacheControlListBlock = $schemaConfigCacheControlListBlock;
     }
-    protected function getSchemaConfigCacheControlListBlock(): SchemaConfigCacheControlListBlock
+    final protected function getSchemaConfigCacheControlListBlock(): SchemaConfigCacheControlListBlock
     {
         return $this->schemaConfigCacheControlListBlock ??= $this->instanceManager->getInstance(SchemaConfigCacheControlListBlock::class);
     }

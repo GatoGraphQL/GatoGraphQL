@@ -13,11 +13,11 @@ class MainContentModuleHookSet extends AbstractHookSet
 {
     private ?MainContentModule $mainContentModule = null;
     
-    public function setMainContentModule(MainContentModule $mainContentModule): void
+    final public function setMainContentModule(MainContentModule $mainContentModule): void
     {
         $this->mainContentModule = $mainContentModule;
     }
-    protected function getMainContentModule(): MainContentModule
+    final protected function getMainContentModule(): MainContentModule
     {
         return $this->mainContentModule ??= $this->instanceManager->getInstance(MainContentModule::class);
     }

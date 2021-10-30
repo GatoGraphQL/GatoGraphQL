@@ -15,11 +15,11 @@ class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutatio
 {
     private ?UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver = null;
     
-    public function setUpdateMyCommunitiesMutationResolver(UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver): void
+    final public function setUpdateMyCommunitiesMutationResolver(UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver): void
     {
         $this->updateMyCommunitiesMutationResolver = $updateMyCommunitiesMutationResolver;
     }
-    protected function getUpdateMyCommunitiesMutationResolver(): UpdateMyCommunitiesMutationResolver
+    final protected function getUpdateMyCommunitiesMutationResolver(): UpdateMyCommunitiesMutationResolver
     {
         return $this->updateMyCommunitiesMutationResolver ??= $this->instanceManager->getInstance(UpdateMyCommunitiesMutationResolver::class);
     }

@@ -15,11 +15,11 @@ class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator imp
 {
     private ?EndpointVoyagerBlock $endpointVoyagerBlock = null;
 
-    public function setEndpointVoyagerBlock(EndpointVoyagerBlock $endpointVoyagerBlock): void
+    final public function setEndpointVoyagerBlock(EndpointVoyagerBlock $endpointVoyagerBlock): void
     {
         $this->endpointVoyagerBlock = $endpointVoyagerBlock;
     }
-    protected function getEndpointVoyagerBlock(): EndpointVoyagerBlock
+    final protected function getEndpointVoyagerBlock(): EndpointVoyagerBlock
     {
         return $this->endpointVoyagerBlock ??= $this->instanceManager->getInstance(EndpointVoyagerBlock::class);
     }

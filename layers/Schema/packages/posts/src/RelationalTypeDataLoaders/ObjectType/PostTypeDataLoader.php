@@ -12,11 +12,11 @@ class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
     private ?PostTypeAPIInterface $postTypeAPI = null;
 
-    public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
+    final public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
     {
         $this->postTypeAPI = $postTypeAPI;
     }
-    protected function getPostTypeAPI(): PostTypeAPIInterface
+    final protected function getPostTypeAPI(): PostTypeAPIInterface
     {
         return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
     }

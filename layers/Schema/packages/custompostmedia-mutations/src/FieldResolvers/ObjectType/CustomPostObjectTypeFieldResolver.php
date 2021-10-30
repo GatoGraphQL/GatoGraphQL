@@ -26,43 +26,43 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
+    final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
     {
         $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
     }
-    protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
+    final protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
         return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
     }
-    public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
+    final public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
     {
         $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
     }
-    protected function getCustomPostUnionTypeResolver(): CustomPostUnionTypeResolver
+    final protected function getCustomPostUnionTypeResolver(): CustomPostUnionTypeResolver
     {
         return $this->customPostUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
     }
-    public function setSetFeaturedImageOnCustomPostMutationResolver(SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver): void
+    final public function setSetFeaturedImageOnCustomPostMutationResolver(SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver): void
     {
         $this->setFeaturedImageOnCustomPostMutationResolver = $setFeaturedImageOnCustomPostMutationResolver;
     }
-    protected function getSetFeaturedImageOnCustomPostMutationResolver(): SetFeaturedImageOnCustomPostMutationResolver
+    final protected function getSetFeaturedImageOnCustomPostMutationResolver(): SetFeaturedImageOnCustomPostMutationResolver
     {
         return $this->setFeaturedImageOnCustomPostMutationResolver ??= $this->instanceManager->getInstance(SetFeaturedImageOnCustomPostMutationResolver::class);
     }
-    public function setRemoveFeaturedImageOnCustomPostMutationResolver(RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver): void
+    final public function setRemoveFeaturedImageOnCustomPostMutationResolver(RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver): void
     {
         $this->removeFeaturedImageOnCustomPostMutationResolver = $removeFeaturedImageOnCustomPostMutationResolver;
     }
-    protected function getRemoveFeaturedImageOnCustomPostMutationResolver(): RemoveFeaturedImageOnCustomPostMutationResolver
+    final protected function getRemoveFeaturedImageOnCustomPostMutationResolver(): RemoveFeaturedImageOnCustomPostMutationResolver
     {
         return $this->removeFeaturedImageOnCustomPostMutationResolver ??= $this->instanceManager->getInstance(RemoveFeaturedImageOnCustomPostMutationResolver::class);
     }
-    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
     }
-    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }

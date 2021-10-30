@@ -18,19 +18,19 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?SiteObjectTypeResolver $siteObjectTypeResolver = null;
     private ?Site $site = null;
 
-    public function setSiteObjectTypeResolver(SiteObjectTypeResolver $siteObjectTypeResolver): void
+    final public function setSiteObjectTypeResolver(SiteObjectTypeResolver $siteObjectTypeResolver): void
     {
         $this->siteObjectTypeResolver = $siteObjectTypeResolver;
     }
-    protected function getSiteObjectTypeResolver(): SiteObjectTypeResolver
+    final protected function getSiteObjectTypeResolver(): SiteObjectTypeResolver
     {
         return $this->siteObjectTypeResolver ??= $this->instanceManager->getInstance(SiteObjectTypeResolver::class);
     }
-    public function setSite(Site $site): void
+    final public function setSite(Site $site): void
     {
         $this->site = $site;
     }
-    protected function getSite(): Site
+    final protected function getSite(): Site
     {
         return $this->site ??= $this->instanceManager->getInstance(Site::class);
     }

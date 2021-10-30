@@ -38,51 +38,51 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?ErrorProviderInterface $errorProvider = null;
 
-    public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    final public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
     {
         $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
     }
-    protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    final protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
     {
         return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
     }
-    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
-    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
-    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {
         $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
     }
-    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
         return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
-    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
-    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    public function setErrorProvider(ErrorProviderInterface $errorProvider): void
+    final public function setErrorProvider(ErrorProviderInterface $errorProvider): void
     {
         $this->errorProvider = $errorProvider;
     }
-    protected function getErrorProvider(): ErrorProviderInterface
+    final protected function getErrorProvider(): ErrorProviderInterface
     {
         return $this->errorProvider ??= $this->instanceManager->getInstance(ErrorProviderInterface::class);
     }

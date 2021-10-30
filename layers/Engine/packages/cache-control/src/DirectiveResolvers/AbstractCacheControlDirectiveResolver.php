@@ -16,19 +16,19 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     private ?CacheControlEngineInterface $cacheControlEngine = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
-    public function setCacheControlEngine(CacheControlEngineInterface $cacheControlEngine): void
+    final public function setCacheControlEngine(CacheControlEngineInterface $cacheControlEngine): void
     {
         $this->cacheControlEngine = $cacheControlEngine;
     }
-    protected function getCacheControlEngine(): CacheControlEngineInterface
+    final protected function getCacheControlEngine(): CacheControlEngineInterface
     {
         return $this->cacheControlEngine ??= $this->instanceManager->getInstance(CacheControlEngineInterface::class);
     }
-    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
-    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }

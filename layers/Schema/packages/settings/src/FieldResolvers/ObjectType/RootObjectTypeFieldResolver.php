@@ -20,27 +20,27 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?SettingsTypeAPIInterface $settingsTypeAPI = null;
 
-    public function setAnyBuiltInScalarScalarTypeResolver(AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver): void
+    final public function setAnyBuiltInScalarScalarTypeResolver(AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver): void
     {
         $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
     }
-    protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
+    final protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
     {
         return $this->anyBuiltInScalarScalarTypeResolver ??= $this->instanceManager->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
     }
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    public function setSettingsTypeAPI(SettingsTypeAPIInterface $settingsTypeAPI): void
+    final public function setSettingsTypeAPI(SettingsTypeAPIInterface $settingsTypeAPI): void
     {
         $this->settingsTypeAPI = $settingsTypeAPI;
     }
-    protected function getSettingsTypeAPI(): SettingsTypeAPIInterface
+    final protected function getSettingsTypeAPI(): SettingsTypeAPIInterface
     {
         return $this->settingsTypeAPI ??= $this->instanceManager->getInstance(SettingsTypeAPIInterface::class);
     }

@@ -21,35 +21,35 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     private ?AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry = null;
     private ?AccessControlManagerInterface $accessControlManager = null;
 
-    public function setAccessControlBlock(AccessControlBlock $accessControlBlock): void
+    final public function setAccessControlBlock(AccessControlBlock $accessControlBlock): void
     {
         $this->accessControlBlock = $accessControlBlock;
     }
-    protected function getAccessControlBlock(): AccessControlBlock
+    final protected function getAccessControlBlock(): AccessControlBlock
     {
         return $this->accessControlBlock ??= $this->instanceManager->getInstance(AccessControlBlock::class);
     }
-    public function setBlockHelpers(BlockHelpers $blockHelpers): void
+    final public function setBlockHelpers(BlockHelpers $blockHelpers): void
     {
         $this->blockHelpers = $blockHelpers;
     }
-    protected function getBlockHelpers(): BlockHelpers
+    final protected function getBlockHelpers(): BlockHelpers
     {
         return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
-    public function setAccessControlRuleBlockRegistry(AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry): void
+    final public function setAccessControlRuleBlockRegistry(AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry): void
     {
         $this->accessControlRuleBlockRegistry = $accessControlRuleBlockRegistry;
     }
-    protected function getAccessControlRuleBlockRegistry(): AccessControlRuleBlockRegistryInterface
+    final protected function getAccessControlRuleBlockRegistry(): AccessControlRuleBlockRegistryInterface
     {
         return $this->accessControlRuleBlockRegistry ??= $this->instanceManager->getInstance(AccessControlRuleBlockRegistryInterface::class);
     }
-    public function setAccessControlManager(AccessControlManagerInterface $accessControlManager): void
+    final public function setAccessControlManager(AccessControlManagerInterface $accessControlManager): void
     {
         $this->accessControlManager = $accessControlManager;
     }
-    protected function getAccessControlManager(): AccessControlManagerInterface
+    final protected function getAccessControlManager(): AccessControlManagerInterface
     {
         return $this->accessControlManager ??= $this->instanceManager->getInstance(AccessControlManagerInterface::class);
     }

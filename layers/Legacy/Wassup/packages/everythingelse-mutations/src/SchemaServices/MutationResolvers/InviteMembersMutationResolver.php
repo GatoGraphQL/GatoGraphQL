@@ -14,11 +14,11 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
 {
     private ?UserTypeAPIInterface $userTypeAPI = null;
     
-    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
     {
         $this->userTypeAPI = $userTypeAPI;
     }
-    protected function getUserTypeAPI(): UserTypeAPIInterface
+    final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }

@@ -24,27 +24,27 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
-    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
         $this->feedbackMessageStore = $feedbackMessageStore;
     }
-    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
     {
         return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
     }
-    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
     }
-    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    final protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
-    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    final public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
     {
         $this->moduleProcessorManager = $moduleProcessorManager;
     }
-    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    final protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
     {
         return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     }

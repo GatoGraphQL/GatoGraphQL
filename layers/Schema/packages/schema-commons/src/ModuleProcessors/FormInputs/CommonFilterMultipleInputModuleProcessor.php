@@ -25,19 +25,19 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModulePr
     private ?FormInputHelperServiceInterface $formInputHelperService = null;
     private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
 
-    public function setFormInputHelperService(FormInputHelperServiceInterface $formInputHelperService): void
+    final public function setFormInputHelperService(FormInputHelperServiceInterface $formInputHelperService): void
     {
         $this->formInputHelperService = $formInputHelperService;
     }
-    protected function getFormInputHelperService(): FormInputHelperServiceInterface
+    final protected function getFormInputHelperService(): FormInputHelperServiceInterface
     {
         return $this->formInputHelperService ??= $this->instanceManager->getInstance(FormInputHelperServiceInterface::class);
     }
-    public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    final public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
     {
         $this->dateScalarTypeResolver = $dateScalarTypeResolver;
     }
-    protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    final protected function getDateScalarTypeResolver(): DateScalarTypeResolver
     {
         return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
     }

@@ -12,11 +12,11 @@ class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdate
 {
     private ?RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver = null;
 
-    public function setRecommendCustomPostMutationResolver(RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver): void
+    final public function setRecommendCustomPostMutationResolver(RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver): void
     {
         $this->recommendCustomPostMutationResolver = $recommendCustomPostMutationResolver;
     }
-    protected function getRecommendCustomPostMutationResolver(): RecommendCustomPostMutationResolver
+    final protected function getRecommendCustomPostMutationResolver(): RecommendCustomPostMutationResolver
     {
         return $this->recommendCustomPostMutationResolver ??= $this->instanceManager->getInstance(RecommendCustomPostMutationResolver::class);
     }

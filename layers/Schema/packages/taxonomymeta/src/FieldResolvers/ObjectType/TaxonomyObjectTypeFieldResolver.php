@@ -16,19 +16,19 @@ class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?TaxonomyMetaTypeAPIInterface $taxonomyMetaTypeAPI = null;
     private ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
 
-    public function setTaxonomyMetaTypeAPI(TaxonomyMetaTypeAPIInterface $taxonomyMetaTypeAPI): void
+    final public function setTaxonomyMetaTypeAPI(TaxonomyMetaTypeAPIInterface $taxonomyMetaTypeAPI): void
     {
         $this->taxonomyMetaTypeAPI = $taxonomyMetaTypeAPI;
     }
-    protected function getTaxonomyMetaTypeAPI(): TaxonomyMetaTypeAPIInterface
+    final protected function getTaxonomyMetaTypeAPI(): TaxonomyMetaTypeAPIInterface
     {
         return $this->taxonomyMetaTypeAPI ??= $this->instanceManager->getInstance(TaxonomyMetaTypeAPIInterface::class);
     }
-    public function setWithMetaInterfaceTypeFieldResolver(WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver): void
+    final public function setWithMetaInterfaceTypeFieldResolver(WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver): void
     {
         $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
     }
-    protected function getWithMetaInterfaceTypeFieldResolver(): WithMetaInterfaceTypeFieldResolver
+    final protected function getWithMetaInterfaceTypeFieldResolver(): WithMetaInterfaceTypeFieldResolver
     {
         return $this->withMetaInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(WithMetaInterfaceTypeFieldResolver::class);
     }

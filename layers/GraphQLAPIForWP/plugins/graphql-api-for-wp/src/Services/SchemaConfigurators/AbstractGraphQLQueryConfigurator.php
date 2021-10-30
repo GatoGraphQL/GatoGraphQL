@@ -38,27 +38,27 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     private ?TypeRegistryInterface $typeRegistry = null;
     private ?DirectiveRegistryInterface $directiveRegistry = null;
 
-    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
         $this->moduleRegistry = $moduleRegistry;
     }
-    protected function getModuleRegistry(): ModuleRegistryInterface
+    final protected function getModuleRegistry(): ModuleRegistryInterface
     {
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
-    public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
+    final public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
     {
         $this->typeRegistry = $typeRegistry;
     }
-    protected function getTypeRegistry(): TypeRegistryInterface
+    final protected function getTypeRegistry(): TypeRegistryInterface
     {
         return $this->typeRegistry ??= $this->instanceManager->getInstance(TypeRegistryInterface::class);
     }
-    public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
+    final public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
     {
         $this->directiveRegistry = $directiveRegistry;
     }
-    protected function getDirectiveRegistry(): DirectiveRegistryInterface
+    final protected function getDirectiveRegistry(): DirectiveRegistryInterface
     {
         return $this->directiveRegistry ??= $this->instanceManager->getInstance(DirectiveRegistryInterface::class);
     }

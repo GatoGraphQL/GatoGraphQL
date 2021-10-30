@@ -25,43 +25,43 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?InputValueObjectTypeResolver $inputValueObjectTypeResolver = null;
     private ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
 
-    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
-    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {
         $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
     }
-    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
         return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
-    public function setInputValueObjectTypeResolver(InputValueObjectTypeResolver $inputValueObjectTypeResolver): void
+    final public function setInputValueObjectTypeResolver(InputValueObjectTypeResolver $inputValueObjectTypeResolver): void
     {
         $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
     }
-    protected function getInputValueObjectTypeResolver(): InputValueObjectTypeResolver
+    final protected function getInputValueObjectTypeResolver(): InputValueObjectTypeResolver
     {
         return $this->inputValueObjectTypeResolver ??= $this->instanceManager->getInstance(InputValueObjectTypeResolver::class);
     }
-    public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
+    final public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
     {
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
     }
-    protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
+    final protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
     {
         return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
     }

@@ -27,51 +27,51 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
 
-    public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
+    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {
         $this->mediaTypeAPI = $mediaTypeAPI;
     }
-    protected function getMediaTypeAPI(): MediaTypeAPIInterface
+    final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
         return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
     }
-    public function setDateFormatter(DateFormatterInterface $dateFormatter): void
+    final public function setDateFormatter(DateFormatterInterface $dateFormatter): void
     {
         $this->dateFormatter = $dateFormatter;
     }
-    protected function getDateFormatter(): DateFormatterInterface
+    final protected function getDateFormatter(): DateFormatterInterface
     {
         return $this->dateFormatter ??= $this->instanceManager->getInstance(DateFormatterInterface::class);
     }
-    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
     {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
     }
-    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
         return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
-    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
-    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    final public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
     {
         $this->dateScalarTypeResolver = $dateScalarTypeResolver;
     }
-    protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    final protected function getDateScalarTypeResolver(): DateScalarTypeResolver
     {
         return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
     }

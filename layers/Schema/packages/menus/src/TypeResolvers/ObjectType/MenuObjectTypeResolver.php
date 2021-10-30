@@ -15,19 +15,19 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
     private ?MenuTypeDataLoader $menuTypeDataLoader = null;
     private ?MenuTypeAPIInterface $menuTypeAPI = null;
 
-    public function setMenuTypeDataLoader(MenuTypeDataLoader $menuTypeDataLoader): void
+    final public function setMenuTypeDataLoader(MenuTypeDataLoader $menuTypeDataLoader): void
     {
         $this->menuTypeDataLoader = $menuTypeDataLoader;
     }
-    protected function getMenuTypeDataLoader(): MenuTypeDataLoader
+    final protected function getMenuTypeDataLoader(): MenuTypeDataLoader
     {
         return $this->menuTypeDataLoader ??= $this->instanceManager->getInstance(MenuTypeDataLoader::class);
     }
-    public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
+    final public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
     {
         $this->menuTypeAPI = $menuTypeAPI;
     }
-    protected function getMenuTypeAPI(): MenuTypeAPIInterface
+    final protected function getMenuTypeAPI(): MenuTypeAPIInterface
     {
         return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
     }

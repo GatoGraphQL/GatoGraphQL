@@ -20,19 +20,19 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
     private ?PostTypeAPIInterface $postTypeAPI = null;
 
-    public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
+    final public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
     {
         $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
     }
-    protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
+    final protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
         return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
     }
-    public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
+    final public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
     {
         $this->postTypeAPI = $postTypeAPI;
     }
-    protected function getPostTypeAPI(): PostTypeAPIInterface
+    final protected function getPostTypeAPI(): PostTypeAPIInterface
     {
         return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
     }

@@ -12,11 +12,11 @@ class InviteMembersMutationResolverBridge extends AbstractEmailInviteMutationRes
 {
     private ?InviteMembersMutationResolver $inviteMembersMutationResolver = null;
     
-    public function setInviteMembersMutationResolver(InviteMembersMutationResolver $inviteMembersMutationResolver): void
+    final public function setInviteMembersMutationResolver(InviteMembersMutationResolver $inviteMembersMutationResolver): void
     {
         $this->inviteMembersMutationResolver = $inviteMembersMutationResolver;
     }
-    protected function getInviteMembersMutationResolver(): InviteMembersMutationResolver
+    final protected function getInviteMembersMutationResolver(): InviteMembersMutationResolver
     {
         return $this->inviteMembersMutationResolver ??= $this->instanceManager->getInstance(InviteMembersMutationResolver::class);
     }

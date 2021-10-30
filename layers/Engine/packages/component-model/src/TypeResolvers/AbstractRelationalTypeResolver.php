@@ -63,43 +63,43 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     private ?DataloadingEngineInterface $dataloadingEngine = null;
     private ?DirectivePipelineServiceInterface $directivePipelineService = null;
 
-    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
         $this->feedbackMessageStore = $feedbackMessageStore;
     }
-    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
     {
         return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
     }
-    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
     }
-    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    final protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
-    public function setErrorProvider(ErrorProviderInterface $errorProvider): void
+    final public function setErrorProvider(ErrorProviderInterface $errorProvider): void
     {
         $this->errorProvider = $errorProvider;
     }
-    protected function getErrorProvider(): ErrorProviderInterface
+    final protected function getErrorProvider(): ErrorProviderInterface
     {
         return $this->errorProvider ??= $this->instanceManager->getInstance(ErrorProviderInterface::class);
     }
-    public function setDataloadingEngine(DataloadingEngineInterface $dataloadingEngine): void
+    final public function setDataloadingEngine(DataloadingEngineInterface $dataloadingEngine): void
     {
         $this->dataloadingEngine = $dataloadingEngine;
     }
-    protected function getDataloadingEngine(): DataloadingEngineInterface
+    final protected function getDataloadingEngine(): DataloadingEngineInterface
     {
         return $this->dataloadingEngine ??= $this->instanceManager->getInstance(DataloadingEngineInterface::class);
     }
-    public function setDirectivePipelineService(DirectivePipelineServiceInterface $directivePipelineService): void
+    final public function setDirectivePipelineService(DirectivePipelineServiceInterface $directivePipelineService): void
     {
         $this->directivePipelineService = $directivePipelineService;
     }
-    protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
+    final protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
     {
         return $this->directivePipelineService ??= $this->instanceManager->getInstance(DirectivePipelineServiceInterface::class);
     }
