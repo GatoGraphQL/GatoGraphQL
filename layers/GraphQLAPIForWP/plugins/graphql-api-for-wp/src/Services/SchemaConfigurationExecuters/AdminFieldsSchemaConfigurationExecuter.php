@@ -13,13 +13,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class AdminFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    protected SchemaConfigAdminFieldsBlock $schemaConfigAdminFieldsBlock;
+    private ?SchemaConfigAdminFieldsBlock $schemaConfigAdminFieldsBlock = null;
 
-    #[Required]
-    final public function autowireAdminFieldsSchemaConfigurationExecuter(
-        SchemaConfigAdminFieldsBlock $schemaConfigAdminFieldsBlock,
-    ): void {
+    public function setSchemaConfigAdminFieldsBlock(SchemaConfigAdminFieldsBlock $schemaConfigAdminFieldsBlock): void
+    {
         $this->schemaConfigAdminFieldsBlock = $schemaConfigAdminFieldsBlock;
+    }
+    protected function getSchemaConfigAdminFieldsBlock(): SchemaConfigAdminFieldsBlock
+    {
+        return $this->schemaConfigAdminFieldsBlock ??= $this->instanceManager->getInstance(SchemaConfigAdminFieldsBlock::class);
     }
 
     public function getEnablingModule(): ?string
@@ -29,7 +31,7 @@ class AdminFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
 
     protected function getBlock(): BlockInterface
     {
-        return $this->schemaConfigAdminFieldsBlock;
+        return $this->getSchemaConfigAdminFieldsBlock();
     }
 
     public function getHookComponentConfigurationClass(): string

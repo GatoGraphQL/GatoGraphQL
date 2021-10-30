@@ -14,18 +14,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SetupCortexHookSet extends AbstractHookSet
 {
-    protected RoutingManagerInterface $routingManager;
+    private ?RoutingManagerInterface $routingManager = null;
 
-    #[Required]
-    final public function autowireSetupCortexHookSet(
-        RoutingManagerInterface $routingManager,
-    ): void {
+    public function setRoutingManager(RoutingManagerInterface $routingManager): void
+    {
         $this->routingManager = $routingManager;
+    }
+    protected function getRoutingManager(): RoutingManagerInterface
+    {
+        return $this->routingManager ??= $this->instanceManager->getInstance(RoutingManagerInterface::class);
     }
 
     protected function init(): void
     {
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'cortex.routes',
             [$this, 'setupCortex'],
             1
@@ -37,7 +39,7 @@ class SetupCortexHookSet extends AbstractHookSet
      */
     public function setupCortex(RouteCollectionInterface $routes): void
     {
-        foreach ($this->routingManager->getRoutes() as $route) {
+        foreach ($this->getRoutingManager()->getRoutes() as $route) {
             $routes->addRoute(new QueryRoute(
                 $route,
                 function (array $matches) {

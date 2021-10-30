@@ -18,16 +18,24 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
 {
     use SetCategoriesOnCustomPostObjectTypeFieldResolverTrait;
 
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireAbstractCustomPostObjectTypeFieldResolver(
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
-    ): void {
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -48,7 +56,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ($fieldName) {
             'setCategories' => sprintf(
-                $this->translationAPI->__('Set categories on the %s', 'custompost-category-mutations'),
+                $this->getTranslationAPI()->__('Set categories on the %s', 'custompost-category-mutations'),
                 $this->getEntityName()
             ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -67,8 +75,8 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ($fieldName) {
             'setCategories' => [
-                MutationInputProperties::CATEGORY_IDS => $this->idScalarTypeResolver,
-                MutationInputProperties::APPEND => $this->booleanScalarTypeResolver,
+                MutationInputProperties::CATEGORY_IDS => $this->getIdScalarTypeResolver(),
+                MutationInputProperties::APPEND => $this->getBooleanScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -78,10 +86,10 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ([$fieldName => $fieldArgName]) {
             ['setCategories' => MutationInputProperties::CATEGORY_IDS] => sprintf(
-                $this->translationAPI->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
+                $this->getTranslationAPI()->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
                 $this->getCategoryTypeResolver()->getMaybeNamespacedTypeName()
             ),
-            ['setCategories' => MutationInputProperties::APPEND] => $this->translationAPI->__('Append the categories to the existing ones?', 'custompost-category-mutations'),
+            ['setCategories' => MutationInputProperties::APPEND] => $this->getTranslationAPI()->__('Append the categories to the existing ones?', 'custompost-category-mutations'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

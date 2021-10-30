@@ -21,13 +21,15 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public const MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES = 'filterinput-genericcustomposttypes';
 
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireFilterInputModuleProcessor(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getModulesToProcess(): array
@@ -70,7 +72,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->getStringScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -94,7 +96,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->translationAPI->__('Return results from Custom Post Types', 'customposts'),
+            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->getTranslationAPI()->__('Return results from Custom Post Types', 'customposts'),
             default => null,
         };
     }

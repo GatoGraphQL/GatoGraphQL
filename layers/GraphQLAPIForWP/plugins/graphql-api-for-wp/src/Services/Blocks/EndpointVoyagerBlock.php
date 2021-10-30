@@ -15,13 +15,15 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
 
-    protected CustomEndpointBlockCategory $customEndpointBlockCategory;
+    private ?CustomEndpointBlockCategory $customEndpointBlockCategory = null;
 
-    #[Required]
-    final public function autowireEndpointVoyagerBlock(
-        CustomEndpointBlockCategory $customEndpointBlockCategory,
-    ): void {
+    public function setCustomEndpointBlockCategory(CustomEndpointBlockCategory $customEndpointBlockCategory): void
+    {
         $this->customEndpointBlockCategory = $customEndpointBlockCategory;
+    }
+    protected function getCustomEndpointBlockCategory(): CustomEndpointBlockCategory
+    {
+        return $this->customEndpointBlockCategory ??= $this->instanceManager->getInstance(CustomEndpointBlockCategory::class);
     }
 
     protected function getBlockName(): string
@@ -41,7 +43,7 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->customEndpointBlockCategory;
+        return $this->getCustomEndpointBlockCategory();
     }
 
     protected function isDynamicBlock(): bool

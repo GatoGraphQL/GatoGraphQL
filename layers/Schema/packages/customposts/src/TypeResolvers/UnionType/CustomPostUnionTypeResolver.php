@@ -12,16 +12,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
 {
-    protected CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader;
-    protected IsCustomPostInterfaceTypeResolver $isCustomPostInterfaceTypeResolver;
+    private ?CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader = null;
+    private ?IsCustomPostInterfaceTypeResolver $isCustomPostInterfaceTypeResolver = null;
 
-    #[Required]
-    final public function autowireCustomPostUnionTypeResolver(
-        IsCustomPostInterfaceTypeResolver $isCustomPostInterfaceTypeResolver,
-        CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader,
-    ): void {
-        $this->isCustomPostInterfaceTypeResolver = $isCustomPostInterfaceTypeResolver;
+    public function setCustomPostUnionTypeDataLoader(CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader): void
+    {
         $this->customPostUnionTypeDataLoader = $customPostUnionTypeDataLoader;
+    }
+    protected function getCustomPostUnionTypeDataLoader(): CustomPostUnionTypeDataLoader
+    {
+        return $this->customPostUnionTypeDataLoader ??= $this->instanceManager->getInstance(CustomPostUnionTypeDataLoader::class);
+    }
+    public function setIsCustomPostInterfaceTypeResolver(IsCustomPostInterfaceTypeResolver $isCustomPostInterfaceTypeResolver): void
+    {
+        $this->isCustomPostInterfaceTypeResolver = $isCustomPostInterfaceTypeResolver;
+    }
+    protected function getIsCustomPostInterfaceTypeResolver(): IsCustomPostInterfaceTypeResolver
+    {
+        return $this->isCustomPostInterfaceTypeResolver ??= $this->instanceManager->getInstance(IsCustomPostInterfaceTypeResolver::class);
     }
 
     public function getTypeName(): string
@@ -31,18 +39,18 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Union of \'custom post\' type resolvers', 'customposts');
+        return $this->getTranslationAPI()->__('Union of \'custom post\' type resolvers', 'customposts');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->customPostUnionTypeDataLoader;
+        return $this->getCustomPostUnionTypeDataLoader();
     }
 
     public function getUnionTypeInterfaceTypeResolvers(): array
     {
         return [
-            $this->isCustomPostInterfaceTypeResolver,
+            $this->getIsCustomPostInterfaceTypeResolver(),
         ];
     }
 }

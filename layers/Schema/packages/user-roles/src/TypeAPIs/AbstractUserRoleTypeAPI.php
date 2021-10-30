@@ -4,25 +4,20 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\TypeAPIs;
 
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractUserRoleTypeAPI implements UserRoleTypeAPIInterface
 {
-    protected HooksAPIInterface $hooksAPI;
-
-    #[Required]
-    final public function autowireAbstractUserRoleTypeAPI(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
+    use WithHooksAPIServiceTrait;
 
     public function getTheUserRole(string | int | object $userObjectOrID): ?string
     {
         $roles = $this->getUserRoles($userObjectOrID);
         $role = $roles[0] ?? null;
         // Allow URE to override this function
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             'getTheUserRole',
             $role,
             $userObjectOrID

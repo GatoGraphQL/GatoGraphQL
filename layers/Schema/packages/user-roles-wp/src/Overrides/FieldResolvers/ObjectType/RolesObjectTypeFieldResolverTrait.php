@@ -11,19 +11,21 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait RolesObjectTypeFieldResolverTrait
 {
-    protected UserRoleObjectTypeResolver $userRoleObjectTypeResolver;
+    private ?UserRoleObjectTypeResolver $userRoleObjectTypeResolver = null;
 
-    #[Required]
-    public function autowireUserRolesWPRolesObjectTypeFieldResolverTrait(
-        UserRoleObjectTypeResolver $userRoleObjectTypeResolver,
-    ): void {
+    public function setUserRoleObjectTypeResolver(UserRoleObjectTypeResolver $userRoleObjectTypeResolver): void
+    {
         $this->userRoleObjectTypeResolver = $userRoleObjectTypeResolver;
+    }
+    protected function getUserRoleObjectTypeResolver(): UserRoleObjectTypeResolver
+    {
+        return $this->userRoleObjectTypeResolver ??= $this->instanceManager->getInstance(UserRoleObjectTypeResolver::class);
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'roles' => $this->userRoleObjectTypeResolver,
+            'roles' => $this->getUserRoleObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

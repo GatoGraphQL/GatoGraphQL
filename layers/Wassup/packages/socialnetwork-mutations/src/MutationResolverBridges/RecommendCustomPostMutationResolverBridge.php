@@ -10,18 +10,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
-    protected RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver;
+    private ?RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver = null;
 
-    #[Required]
-    final public function autowireRecommendCustomPostMutationResolverBridge(
-        RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver,
-    ): void {
+    public function setRecommendCustomPostMutationResolver(RecommendCustomPostMutationResolver $recommendCustomPostMutationResolver): void
+    {
         $this->recommendCustomPostMutationResolver = $recommendCustomPostMutationResolver;
+    }
+    protected function getRecommendCustomPostMutationResolver(): RecommendCustomPostMutationResolver
+    {
+        return $this->recommendCustomPostMutationResolver ??= $this->instanceManager->getInstance(RecommendCustomPostMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->recommendCustomPostMutationResolver;
+        return $this->getRecommendCustomPostMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool
@@ -32,8 +34,8 @@ class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdate
     public function getSuccessString(string | int $result_id): ?string
     {
         return sprintf(
-            $this->translationAPI->__('You have recommended <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $this->customPostTypeAPI->getTitle($result_id)
+            $this->getTranslationAPI()->__('You have recommended <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->getCustomPostTypeAPI()->getTitle($result_id)
         );
     }
 }

@@ -10,17 +10,19 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
-    protected PostTypeAPIInterface $postTypeAPI;
+    private ?PostTypeAPIInterface $postTypeAPI = null;
 
-    #[Required]
-    final public function autowirePostTypeDataLoader(
-        PostTypeAPIInterface $postTypeAPI,
-    ): void {
+    public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
+    {
         $this->postTypeAPI = $postTypeAPI;
+    }
+    protected function getPostTypeAPI(): PostTypeAPIInterface
+    {
+        return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
     }
 
     public function executeQuery($query, array $options = []): array
     {
-        return $this->postTypeAPI->getPosts($query, $options);
+        return $this->getPostTypeAPI()->getPosts($query, $options);
     }
 }

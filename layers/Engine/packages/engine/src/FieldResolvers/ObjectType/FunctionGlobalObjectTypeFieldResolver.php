@@ -17,19 +17,33 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
-    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
+    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireFunctionGlobalObjectTypeFieldResolver(
-        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
-    ): void {
+    public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    {
         $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+    }
+    protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    {
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
         $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
 
     public function getFieldNamesToResolve(): array
@@ -42,7 +56,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'getSelfProp' => $this->dangerouslyDynamicScalarTypeResolver,
+            'getSelfProp' => $this->getDangerouslyDynamicScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -51,7 +65,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         return match ($fieldName) {
             'getSelfProp' => sprintf(
-                $this->translationAPI->__('Get a property from the current object, as stored under expression `%s`', 'pop-component-model'),
+                $this->getTranslationAPI()->__('Get a property from the current object, as stored under expression `%s`', 'pop-component-model'),
                 QueryHelpers::getExpressionQuery(Expressions::NAME_SELF)
             ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -62,8 +76,8 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         return match ($fieldName) {
             'getSelfProp' => [
-                'self' => $this->jsonObjectScalarTypeResolver,
-                'property' => $this->stringScalarTypeResolver,
+                'self' => $this->getJsonObjectScalarTypeResolver(),
+                'property' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -72,8 +86,8 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['getSelfProp' => 'self'] => $this->translationAPI->__('The `$self` object containing all data for the current object', 'component-model'),
-            ['getSelfProp' => 'property'] => $this->translationAPI->__('The property to access from the current object', 'component-model'),
+            ['getSelfProp' => 'self'] => $this->getTranslationAPI()->__('The `$self` object containing all data for the current object', 'component-model'),
+            ['getSelfProp' => 'property'] => $this->getTranslationAPI()->__('The property to access from the current object', 'component-model'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

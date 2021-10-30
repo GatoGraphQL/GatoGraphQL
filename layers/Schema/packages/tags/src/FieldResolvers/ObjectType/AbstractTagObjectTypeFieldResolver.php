@@ -16,25 +16,39 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements TagAPIRequestedContractInterface
 {
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
 
-    #[Required]
-    final public function autowireAbstractTagObjectTypeFieldResolver(
-        IntScalarTypeResolver $intScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
-    ): void {
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
+    {
         $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
+    }
+    protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
+    {
+        return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }
 
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->queryableInterfaceTypeFieldResolver,
+            $this->getQueryableInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -53,9 +67,9 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'name' => $this->stringScalarTypeResolver,
-            'description' => $this->stringScalarTypeResolver,
-            'count' => $this->intScalarTypeResolver,
+            'name' => $this->getStringScalarTypeResolver(),
+            'description' => $this->getStringScalarTypeResolver(),
+            'count' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -74,12 +88,12 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->translationAPI->__('Tag URL', 'pop-tags'),
-            'urlPath' => $this->translationAPI->__('Tag URL path', 'pop-tags'),
-            'name' => $this->translationAPI->__('Tag', 'pop-tags'),
-            'slug' => $this->translationAPI->__('Tag slug', 'pop-tags'),
-            'description' => $this->translationAPI->__('Tag description', 'pop-tags'),
-            'count' => $this->translationAPI->__('Number of custom posts containing this tag', 'pop-tags'),
+            'url' => $this->getTranslationAPI()->__('Tag URL', 'pop-tags'),
+            'urlPath' => $this->getTranslationAPI()->__('Tag URL path', 'pop-tags'),
+            'name' => $this->getTranslationAPI()->__('Tag', 'pop-tags'),
+            'slug' => $this->getTranslationAPI()->__('Tag slug', 'pop-tags'),
+            'description' => $this->getTranslationAPI()->__('Tag description', 'pop-tags'),
+            'count' => $this->getTranslationAPI()->__('Number of custom posts containing this tag', 'pop-tags'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

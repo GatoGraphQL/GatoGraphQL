@@ -14,21 +14,29 @@ use WP_Post;
 
 abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator implements ClientEndpointAnnotatorInterface
 {
-    protected BlockHelpers $blockHelpers;
-    protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
+    private ?BlockHelpers $blockHelpers = null;
+    private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
 
-    #[Required]
-    final public function autowireAbstractClientEndpointAnnotator(
-        BlockHelpers $blockHelpers,
-        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-    ): void {
+    public function setBlockHelpers(BlockHelpers $blockHelpers): void
+    {
         $this->blockHelpers = $blockHelpers;
+    }
+    protected function getBlockHelpers(): BlockHelpers
+    {
+        return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
+    }
+    public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
+    {
         $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
+    }
+    protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
+    {
+        return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
     }
 
     protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface
     {
-        return $this->graphQLCustomEndpointCustomPostType;
+        return $this->getGraphQLCustomEndpointCustomPostType();
     }
 
     /**
@@ -43,7 +51,7 @@ abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator
 
         // If there was no options block, something went wrong in the post content
         $default = true;
-        $optionsBlockDataItem = $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        $optionsBlockDataItem = $this->getBlockHelpers()->getSingleBlockOfTypeFromCustomPost(
             $postOrID,
             $this->getBlock()
         );

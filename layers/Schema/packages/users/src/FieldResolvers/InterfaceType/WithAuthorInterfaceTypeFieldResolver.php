@@ -13,13 +13,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
-    protected UserObjectTypeResolver $userObjectTypeResolver;
+    private ?UserObjectTypeResolver $userObjectTypeResolver = null;
 
-    #[Required]
-    final public function autowireWithAuthorInterfaceTypeFieldResolver(
-        UserObjectTypeResolver $userObjectTypeResolver,
-    ): void {
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
+    {
         $this->userObjectTypeResolver = $userObjectTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
 
     public function getInterfaceTypeResolverClassesToAttachTo(): array
@@ -48,7 +50,7 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'author' => $this->translationAPI->__('The entity\'s author', 'queriedobject'),
+            'author' => $this->getTranslationAPI()->__('The entity\'s author', 'queriedobject'),
             default => parent::getFieldDescription($fieldName),
         };
     }
@@ -57,7 +59,7 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
     {
         switch ($fieldName) {
             case 'author':
-                return $this->userObjectTypeResolver;
+                return $this->getUserObjectTypeResolver();
         }
 
         return parent::getFieldTypeResolver($fieldName);

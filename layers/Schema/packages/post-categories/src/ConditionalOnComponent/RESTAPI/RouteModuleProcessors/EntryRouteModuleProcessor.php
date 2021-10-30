@@ -18,13 +18,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
-    protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
+    private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
-    #[Required]
-    final public function autowireEntryRouteModuleProcessor(
-        PostCategoryTypeAPIInterface $postCategoryTypeAPI,
-    ): void {
+    public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
+    {
         $this->postCategoryTypeAPI = $postCategoryTypeAPI;
+    }
+    protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
+    {
+        return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
     }
 
     protected function getInitialRESTFields(): string
@@ -51,9 +53,9 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
             ],
             'conditions' => [
                 'scheme' => APISchemes::API,
-                'datastructure' => $this->restDataStructureFormatter->getName(),
+                'datastructure' => $this->getRestDataStructureFormatter()->getName(),
                 'routing-state' => [
-                    'taxonomy-name' => $this->postCategoryTypeAPI->getPostCategoryTaxonomyName(),
+                    'taxonomy-name' => $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName(),
                 ],
             ],
         ];
@@ -84,7 +86,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,
-                    'datastructure' => $this->restDataStructureFormatter->getName(),
+                    'datastructure' => $this->getRestDataStructureFormatter()->getName(),
                 ],
             ];
         }
@@ -104,9 +106,9 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,
-                    'datastructure' => $this->restDataStructureFormatter->getName(),
+                    'datastructure' => $this->getRestDataStructureFormatter()->getName(),
                     'routing-state' => [
-                        'taxonomy-name' => $this->postCategoryTypeAPI->getPostCategoryTaxonomyName(),
+                        'taxonomy-name' => $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName(),
                     ],
                 ],
             ];

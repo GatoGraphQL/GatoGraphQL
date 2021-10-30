@@ -21,16 +21,24 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected QueryRootObjectTypeResolver $queryRootObjectTypeResolver;
-    protected MutationRootObjectTypeResolver $mutationRootObjectTypeResolver;
+    private ?QueryRootObjectTypeResolver $queryRootObjectTypeResolver = null;
+    private ?MutationRootObjectTypeResolver $mutationRootObjectTypeResolver = null;
 
-    #[Required]
-    final public function autowireRegisterQueryAndMutationRootsRootObjectTypeFieldResolver(
-        QueryRootObjectTypeResolver $queryRootObjectTypeResolver,
-        MutationRootObjectTypeResolver $mutationRootObjectTypeResolver,
-    ): void {
+    public function setQueryRootObjectTypeResolver(QueryRootObjectTypeResolver $queryRootObjectTypeResolver): void
+    {
         $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
+    }
+    protected function getQueryRootObjectTypeResolver(): QueryRootObjectTypeResolver
+    {
+        return $this->queryRootObjectTypeResolver ??= $this->instanceManager->getInstance(QueryRootObjectTypeResolver::class);
+    }
+    public function setMutationRootObjectTypeResolver(MutationRootObjectTypeResolver $mutationRootObjectTypeResolver): void
+    {
         $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
+    }
+    protected function getMutationRootObjectTypeResolver(): MutationRootObjectTypeResolver
+    {
+        return $this->mutationRootObjectTypeResolver ??= $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -65,8 +73,8 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'queryRoot' => $this->translationAPI->__('Get the Query Root type', 'graphql-server'),
-            'mutationRoot' => $this->translationAPI->__('Get the Mutation Root type', 'graphql-server'),
+            'queryRoot' => $this->getTranslationAPI()->__('Get the Query Root type', 'graphql-server'),
+            'mutationRoot' => $this->getTranslationAPI()->__('Get the Mutation Root type', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -74,8 +82,8 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'queryRoot' => $this->queryRootObjectTypeResolver,
-            'mutationRoot' => $this->mutationRootObjectTypeResolver,
+            'queryRoot' => $this->getQueryRootObjectTypeResolver(),
+            'mutationRoot' => $this->getMutationRootObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

@@ -12,13 +12,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObjectTypeFieldResolver
 {
-    protected IDScalarTypeResolver $idScalarTypeResolver;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireGlobalUserStateObjectTypeFieldResolver(
-        IDScalarTypeResolver $idScalarTypeResolver,
-    ): void {
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
     public function getFieldNamesToResolve(): array
@@ -31,7 +33,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'loggedInUserID' => $this->idScalarTypeResolver,
+            'loggedInUserID' => $this->getIdScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -39,7 +41,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'loggedInUserID' => $this->translationAPI->__('The logged-in user\'s ID', 'user-state'),
+            'loggedInUserID' => $this->getTranslationAPI()->__('The logged-in user\'s ID', 'user-state'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

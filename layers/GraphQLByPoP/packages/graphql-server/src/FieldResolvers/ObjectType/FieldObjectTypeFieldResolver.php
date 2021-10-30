@@ -19,25 +19,51 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
-    protected InputValueObjectTypeResolver $inputValueObjectTypeResolver;
-    protected TypeObjectTypeResolver $typeObjectTypeResolver;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?InputValueObjectTypeResolver $inputValueObjectTypeResolver = null;
+    private ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
 
-    #[Required]
-    final public function autowireFieldObjectTypeFieldResolver(
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
-        InputValueObjectTypeResolver $inputValueObjectTypeResolver,
-        TypeObjectTypeResolver $typeObjectTypeResolver,
-    ): void {
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
         $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+    }
+    public function setInputValueObjectTypeResolver(InputValueObjectTypeResolver $inputValueObjectTypeResolver): void
+    {
         $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
+    }
+    protected function getInputValueObjectTypeResolver(): InputValueObjectTypeResolver
+    {
+        return $this->inputValueObjectTypeResolver ??= $this->instanceManager->getInstance(InputValueObjectTypeResolver::class);
+    }
+    public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
+    {
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
+    }
+    protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
+    {
+        return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -63,13 +89,13 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'name' => $this->stringScalarTypeResolver,
-            'description' => $this->stringScalarTypeResolver,
-            'isDeprecated' => $this->booleanScalarTypeResolver,
-            'deprecationReason' => $this->stringScalarTypeResolver,
-            'extensions' => $this->jsonObjectScalarTypeResolver,
-            'args' => $this->inputValueObjectTypeResolver,
-            'type' => $this->typeObjectTypeResolver,
+            'name' => $this->getStringScalarTypeResolver(),
+            'description' => $this->getStringScalarTypeResolver(),
+            'isDeprecated' => $this->getBooleanScalarTypeResolver(),
+            'deprecationReason' => $this->getStringScalarTypeResolver(),
+            'extensions' => $this->getJsonObjectScalarTypeResolver(),
+            'args' => $this->getInputValueObjectTypeResolver(),
+            'type' => $this->getTypeObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -92,13 +118,13 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->translationAPI->__('Field\'s name', 'graphql-server'),
-            'description' => $this->translationAPI->__('Field\'s description', 'graphql-server'),
-            'args' => $this->translationAPI->__('Field arguments', 'graphql-server'),
-            'type' => $this->translationAPI->__('Type to which the field belongs', 'graphql-server'),
-            'isDeprecated' => $this->translationAPI->__('Is the field deprecated?', 'graphql-server'),
-            'deprecationReason' => $this->translationAPI->__('Why was the field deprecated?', 'graphql-server'),
-            'extensions' => $this->translationAPI->__('Custom metadata added to the field (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
+            'name' => $this->getTranslationAPI()->__('Field\'s name', 'graphql-server'),
+            'description' => $this->getTranslationAPI()->__('Field\'s description', 'graphql-server'),
+            'args' => $this->getTranslationAPI()->__('Field arguments', 'graphql-server'),
+            'type' => $this->getTranslationAPI()->__('Type to which the field belongs', 'graphql-server'),
+            'isDeprecated' => $this->getTranslationAPI()->__('Is the field deprecated?', 'graphql-server'),
+            'deprecationReason' => $this->getTranslationAPI()->__('Why was the field deprecated?', 'graphql-server'),
+            'extensions' => $this->getTranslationAPI()->__('Custom metadata added to the field (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

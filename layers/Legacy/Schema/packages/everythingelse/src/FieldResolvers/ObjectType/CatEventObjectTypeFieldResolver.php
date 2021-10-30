@@ -17,13 +17,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     
-    #[Required]
-    final public function autowireCatEventObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -44,8 +46,8 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'catSlugs' => $this->stringScalarTypeResolver,
-            'catName' => $this->stringScalarTypeResolver,
+            'catSlugs' => $this->getStringScalarTypeResolver(),
+            'catName' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -61,8 +63,8 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'catSlugs' => $this->translationAPI->__('', ''),
-            'catName' => $this->translationAPI->__('', ''),
+            'catSlugs' => $this->getTranslationAPI()->__('', ''),
+            'catName' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

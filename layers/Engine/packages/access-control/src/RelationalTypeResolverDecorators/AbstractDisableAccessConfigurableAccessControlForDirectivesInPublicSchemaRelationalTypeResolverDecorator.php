@@ -9,19 +9,21 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator
 {
-    protected DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver;
+    private ?DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver = null;
 
-    #[Required]
-    final public function autowireAbstractDisableAccessConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator(
-        DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver,
-    ): void {
+    public function setDisableAccessForDirectivesDirectiveResolver(DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver): void
+    {
         $this->disableAccessForDirectivesDirectiveResolver = $disableAccessForDirectivesDirectiveResolver;
+    }
+    protected function getDisableAccessForDirectivesDirectiveResolver(): DisableAccessForDirectivesDirectiveResolver
+    {
+        return $this->disableAccessForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(DisableAccessForDirectivesDirectiveResolver::class);
     }
 
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
-        $disableAccessDirective = $this->fieldQueryInterpreter->getDirective(
-            $this->disableAccessForDirectivesDirectiveResolver->getDirectiveName()
+        $disableAccessDirective = $this->getFieldQueryInterpreter()->getDirective(
+            $this->getDisableAccessForDirectivesDirectiveResolver()->getDirectiveName()
         );
         return [
             $disableAccessDirective,

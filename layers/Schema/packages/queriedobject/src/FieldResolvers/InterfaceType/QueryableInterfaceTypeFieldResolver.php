@@ -14,16 +14,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireQueryableInterfaceTypeFieldResolver(
-        URLScalarTypeResolver $urlScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getInterfaceTypeResolverClassesToAttachTo(): array
@@ -45,9 +53,9 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'url' => $this->urlScalarTypeResolver,
-            'urlPath' => $this->stringScalarTypeResolver,
-            'slug' => $this->stringScalarTypeResolver,
+            'url' => $this->getUrlScalarTypeResolver(),
+            'urlPath' => $this->getStringScalarTypeResolver(),
+            'slug' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($fieldName),
         };
     }
@@ -67,9 +75,9 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->translationAPI->__('URL to query the object', 'queriedobject'),
-            'urlPath' => $this->translationAPI->__('URL path to query the object', 'queriedobject'),
-            'slug' => $this->translationAPI->__('URL\'s slug', 'queriedobject'),
+            'url' => $this->getTranslationAPI()->__('URL to query the object', 'queriedobject'),
+            'urlPath' => $this->getTranslationAPI()->__('URL path to query the object', 'queriedobject'),
+            'slug' => $this->getTranslationAPI()->__('URL\'s slug', 'queriedobject'),
             default => parent::getFieldDescription($fieldName),
         };
     }

@@ -5,7 +5,7 @@ use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;

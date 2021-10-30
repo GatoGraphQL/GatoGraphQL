@@ -14,18 +14,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {
-    protected UserRoleTypeAPIInterface $userRoleTypeAPI;
+    private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
 
-    #[Required]
-    final public function autowireVarsHookSet(
-        UserRoleTypeAPIInterface $userRoleTypeAPI,
-    ): void {
+    public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
+    {
         $this->userRoleTypeAPI = $userRoleTypeAPI;
+    }
+    protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
+    {
+        return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
     }
 
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
             array($this, 'getModelInstanceComponentsFromVars')
         );
@@ -38,7 +40,7 @@ class VarsHookSet extends AbstractHookSet
             case RouteNatures::USER:
                 $user_id = $vars['routing-state']['queried-object-id'];
                 // Author: it may depend on its role
-                $component_types = $this->hooksAPI->applyFilters(
+                $component_types = $this->getHooksAPI()->applyFilters(
                     '\PoP\ComponentModel\ModelInstanceProcessor_Utils:components_from_vars:type:userrole',
                     array(
                         ModelInstanceComponentTypes::USER_ROLE,
@@ -46,8 +48,8 @@ class VarsHookSet extends AbstractHookSet
                 );
                 if (in_array(ModelInstanceComponentTypes::USER_ROLE, $component_types)) {
                     /** @var string */
-                    $userRole = $this->userRoleTypeAPI->getTheUserRole($user_id);
-                    $components[] = $this->translationAPI->__('user role:', 'pop-engine') . $userRole;
+                    $userRole = $this->getUserRoleTypeAPI()->getTheUserRole($user_id);
+                    $components[] = $this->getTranslationAPI()->__('user role:', 'pop-engine') . $userRole;
                 }
                 break;
         }

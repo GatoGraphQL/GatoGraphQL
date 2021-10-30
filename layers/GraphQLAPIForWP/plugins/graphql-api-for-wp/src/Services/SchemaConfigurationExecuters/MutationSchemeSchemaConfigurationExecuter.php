@@ -17,13 +17,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    protected SchemaConfigMutationSchemeBlock $schemaConfigMutationSchemeBlock;
+    private ?SchemaConfigMutationSchemeBlock $schemaConfigMutationSchemeBlock = null;
 
-    #[Required]
-    final public function autowireMutationSchemeSchemaConfigurationExecuter(
-        SchemaConfigMutationSchemeBlock $schemaConfigMutationSchemeBlock,
-    ): void {
+    public function setSchemaConfigMutationSchemeBlock(SchemaConfigMutationSchemeBlock $schemaConfigMutationSchemeBlock): void
+    {
         $this->schemaConfigMutationSchemeBlock = $schemaConfigMutationSchemeBlock;
+    }
+    protected function getSchemaConfigMutationSchemeBlock(): SchemaConfigMutationSchemeBlock
+    {
+        return $this->schemaConfigMutationSchemeBlock ??= $this->instanceManager->getInstance(SchemaConfigMutationSchemeBlock::class);
     }
 
     public function getEnablingModule(): ?string
@@ -75,6 +77,6 @@ class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurat
 
     protected function getBlock(): BlockInterface
     {
-        return $this->schemaConfigMutationSchemeBlock;
+        return $this->getSchemaConfigMutationSchemeBlock();
     }
 }

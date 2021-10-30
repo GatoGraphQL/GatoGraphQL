@@ -10,18 +10,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CreatePostLinkMutationResolverBridge extends AbstractCreateUpdatePostLinkMutationResolverBridge
 {
-    protected CreatePostLinkMutationResolver $createPostLinkMutationResolver;
+    private ?CreatePostLinkMutationResolver $createPostLinkMutationResolver = null;
 
-    #[Required]
-    final public function autowireCreatePostLinkMutationResolverBridge(
-        CreatePostLinkMutationResolver $createPostLinkMutationResolver,
-    ): void {
+    public function setCreatePostLinkMutationResolver(CreatePostLinkMutationResolver $createPostLinkMutationResolver): void
+    {
         $this->createPostLinkMutationResolver = $createPostLinkMutationResolver;
+    }
+    protected function getCreatePostLinkMutationResolver(): CreatePostLinkMutationResolver
+    {
+        return $this->createPostLinkMutationResolver ??= $this->instanceManager->getInstance(CreatePostLinkMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->createPostLinkMutationResolver;
+        return $this->getCreatePostLinkMutationResolver();
     }
 
     protected function isUpdate(): bool

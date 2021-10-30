@@ -14,16 +14,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
-    protected AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireWithMetaInterfaceTypeFieldResolver(
-        AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setAnyBuiltInScalarScalarTypeResolver(AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver): void
+    {
         $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
+    }
+    protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
+    {
+        return $this->anyBuiltInScalarScalarTypeResolver ??= $this->instanceManager->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getInterfaceTypeResolverClassesToAttachTo(): array
@@ -43,8 +51,8 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'metaValue' => $this->anyBuiltInScalarScalarTypeResolver,
-            'metaValues' => $this->anyBuiltInScalarScalarTypeResolver,
+            'metaValue' => $this->getAnyBuiltInScalarScalarTypeResolver(),
+            'metaValues' => $this->getAnyBuiltInScalarScalarTypeResolver(),
             default => parent::getFieldTypeResolver($fieldName),
         };
     }
@@ -62,7 +70,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
         return match ($fieldName) {
             'metaValue',
             'metaValues' => [
-                'key' => $this->stringScalarTypeResolver,
+                'key' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($fieldName),
         };
@@ -71,7 +79,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldArgName) {
-            'key' => $this->translationAPI->__('The meta key', 'meta'),
+            'key' => $this->getTranslationAPI()->__('The meta key', 'meta'),
             default => parent::getFieldArgDescription($fieldName, $fieldArgName),
         };
     }
@@ -87,8 +95,8 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'metaValue' => $this->translationAPI->__('Single meta value', 'custompostmeta'),
-            'metaValues' => $this->translationAPI->__('List of meta values', 'custompostmeta'),
+            'metaValue' => $this->getTranslationAPI()->__('Single meta value', 'custompostmeta'),
+            'metaValues' => $this->getTranslationAPI()->__('List of meta values', 'custompostmeta'),
             default => parent::getFieldDescription($fieldName),
         };
     }

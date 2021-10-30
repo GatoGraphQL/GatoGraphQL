@@ -10,25 +10,27 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ActivatePluginsMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
-    protected ActivatePluginsMutationResolver $activatePluginsMutationResolver;
+    private ?ActivatePluginsMutationResolver $activatePluginsMutationResolver = null;
 
-    #[Required]
-    final public function autowireActivatePluginsMutationResolverBridge(
-        ActivatePluginsMutationResolver $activatePluginsMutationResolver,
-    ): void {
+    public function setActivatePluginsMutationResolver(ActivatePluginsMutationResolver $activatePluginsMutationResolver): void
+    {
         $this->activatePluginsMutationResolver = $activatePluginsMutationResolver;
+    }
+    protected function getActivatePluginsMutationResolver(): ActivatePluginsMutationResolver
+    {
+        return $this->activatePluginsMutationResolver ??= $this->instanceManager->getInstance(ActivatePluginsMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->activatePluginsMutationResolver;
+        return $this->getActivatePluginsMutationResolver();
     }
 
     public function getSuccessString(string | int $result_ids): ?string
     {
         return $result_ids ? sprintf(
-            $this->translationAPI->__('Successfully activated plugins: %s.', 'pop-system-wp'),
-            implode($this->translationAPI->__(', ', 'pop-system-wp'), (array) $result_ids)
-        ) : $this->translationAPI->__('There were no plugins to activate.', 'pop-system-wp');
+            $this->getTranslationAPI()->__('Successfully activated plugins: %s.', 'pop-system-wp'),
+            implode($this->getTranslationAPI()->__(', ', 'pop-system-wp'), (array) $result_ids)
+        ) : $this->getTranslationAPI()->__('There were no plugins to activate.', 'pop-system-wp');
     }
 }

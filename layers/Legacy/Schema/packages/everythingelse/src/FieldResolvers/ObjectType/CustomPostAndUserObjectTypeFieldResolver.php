@@ -17,16 +17,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected LocationObjectTypeResolver $locationObjectTypeResolver;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?LocationObjectTypeResolver $locationObjectTypeResolver = null;
     
-    #[Required]
-    final public function autowireCustomPostAndUserObjectTypeFieldResolver(
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        LocationObjectTypeResolver $locationObjectTypeResolver,
-    ): void {
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setLocationObjectTypeResolver(LocationObjectTypeResolver $locationObjectTypeResolver): void
+    {
         $this->locationObjectTypeResolver = $locationObjectTypeResolver;
+    }
+    protected function getLocationObjectTypeResolver(): LocationObjectTypeResolver
+    {
+        return $this->locationObjectTypeResolver ??= $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -48,8 +56,8 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'hasLocation' => $this->booleanScalarTypeResolver,
-            'location' => $this->locationObjectTypeResolver,
+            'hasLocation' => $this->getBooleanScalarTypeResolver(),
+            'location' => $this->getLocationObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -65,8 +73,8 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'hasLocation' => $this->translationAPI->__('Does the object have location?', 'pop-locations'),
-            'location' => $this->translationAPI->__('Object\'s location', 'pop-locations'),
+            'hasLocation' => $this->getTranslationAPI()->__('Does the object have location?', 'pop-locations'),
+            'location' => $this->getTranslationAPI()->__('Object\'s location', 'pop-locations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

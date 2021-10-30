@@ -16,13 +16,16 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
     use ReservedNameTypeResolverTrait;
 
     public const HOOK_DESCRIPTION = __CLASS__ . ':description';
-    protected RootTypeDataLoader $rootTypeDataLoader;
 
-    #[Required]
-    final public function autowireRootObjectTypeResolver(
-        RootTypeDataLoader $rootTypeDataLoader,
-    ): void {
+    private ?RootTypeDataLoader $rootTypeDataLoader = null;
+
+    public function setRootTypeDataLoader(RootTypeDataLoader $rootTypeDataLoader): void
+    {
         $this->rootTypeDataLoader = $rootTypeDataLoader;
+    }
+    protected function getRootTypeDataLoader(): RootTypeDataLoader
+    {
+        return $this->rootTypeDataLoader ??= $this->instanceManager->getInstance(RootTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -32,9 +35,9 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             self::HOOK_DESCRIPTION,
-            $this->translationAPI->__('Root type, starting from which the query is executed', 'api')
+            $this->getTranslationAPI()->__('Root type, starting from which the query is executed', 'api')
         );
     }
 
@@ -47,6 +50,6 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->rootTypeDataLoader;
+        return $this->getRootTypeDataLoader();
     }
 }

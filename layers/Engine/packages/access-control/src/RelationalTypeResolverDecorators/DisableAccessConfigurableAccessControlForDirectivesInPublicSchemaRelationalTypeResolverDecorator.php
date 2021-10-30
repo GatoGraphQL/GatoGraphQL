@@ -10,6 +10,6 @@ class DisableAccessConfigurableAccessControlForDirectivesInPublicSchemaRelationa
 {
     protected function getConfigurationEntries(): array
     {
-        return $this->accessControlManager->getEntriesForDirectives(AccessControlGroups::DISABLED);
+        return $this->getAccessControlManager()->getEntriesForDirectives(AccessControlGroups::DISABLED);
     }
 }

@@ -14,22 +14,24 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaRelationalTypeRes
 {
     use ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecoratorTrait;
 
-    protected ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver;
+    private ?ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver = null;
 
-    #[Required]
-    final public function autowireValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaRelationalTypeResolverDecorator(
-        ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver,
-    ): void {
+    public function setValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver(ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver): void
+    {
         $this->validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver = $validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver;
+    }
+    protected function getValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver(): ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver
+    {
+        return $this->validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver::class);
     }
 
     protected function getConfigurationEntries(): array
     {
-        return $this->accessControlManager->getEntriesForDirectives(AccessControlGroups::ROLES);
+        return $this->getAccessControlManager()->getEntriesForDirectives(AccessControlGroups::ROLES);
     }
 
     protected function getValidateRoleDirectiveResolver(): DirectiveResolverInterface
     {
-        return $this->validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver;
+        return $this->getValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver();
     }
 }

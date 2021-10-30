@@ -14,24 +14,26 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected LostPasswordMutationResolver $lostPasswordMutationResolver;
+    private ?LostPasswordMutationResolver $lostPasswordMutationResolver = null;
 
-    #[Required]
-    final public function autowireLostPasswordMutationResolverBridge(
-        LostPasswordMutationResolver $lostPasswordMutationResolver,
-    ): void {
+    public function setLostPasswordMutationResolver(LostPasswordMutationResolver $lostPasswordMutationResolver): void
+    {
         $this->lostPasswordMutationResolver = $lostPasswordMutationResolver;
+    }
+    protected function getLostPasswordMutationResolver(): LostPasswordMutationResolver
+    {
+        return $this->lostPasswordMutationResolver ??= $this->instanceManager->getInstance(LostPasswordMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->lostPasswordMutationResolver;
+        return $this->getLostPasswordMutationResolver();
     }
 
     public function getFormData(): array
     {
         return [
-            MutationInputProperties::USERNAME_OR_EMAIL => $this->moduleProcessorManager->getProcessor([\PoP_Module_Processor_LoginTextFormInputs::class, \PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWD_USERNAME])->getValue([\PoP_Module_Processor_LoginTextFormInputs::class, \PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWD_USERNAME]),
+            MutationInputProperties::USERNAME_OR_EMAIL => $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_LoginTextFormInputs::class, \PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWD_USERNAME])->getValue([\PoP_Module_Processor_LoginTextFormInputs::class, \PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWD_USERNAME]),
         ];
     }
 

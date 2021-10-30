@@ -11,13 +11,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait WithTypeFieldControlBlockTrait
 {
-    protected TypeRegistryInterface $typeRegistry;
+    private ?TypeRegistryInterface $typeRegistry = null;
 
-    #[Required]
-    public function autowireWithTypeFieldControlBlockTrait(
-        TypeRegistryInterface $typeRegistry,
-    ): void {
+    public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
+    {
         $this->typeRegistry = $typeRegistry;
+    }
+    protected function getTypeRegistry(): TypeRegistryInterface
+    {
+        return $this->typeRegistry ??= $this->instanceManager->getInstance(TypeRegistryInterface::class);
     }
 
     /**
@@ -31,14 +33,14 @@ trait WithTypeFieldControlBlockTrait
     {
         $groupFieldsUnderTypeForPrint = ComponentConfiguration::groupFieldsUnderTypeForPrint();
         // For each class, obtain its namespacedTypeName
-        $objectTypeResolvers = $this->typeRegistry->getObjectTypeResolvers();
+        $objectTypeResolvers = $this->getTypeRegistry()->getObjectTypeResolvers();
         $namespacedObjectTypeNameNames = [];
         foreach ($objectTypeResolvers as $objectTypeResolver) {
             $objectTypeResolverNamespacedName = $objectTypeResolver->getNamespacedTypeName();
             $namespacedObjectTypeNameNames[$objectTypeResolverNamespacedName] = $objectTypeResolver->getMaybeNamespacedTypeName();
         }
         // For each interface, obtain its namespacedInterfaceName
-        $interfaceTypeResolvers = $this->typeRegistry->getInterfaceTypeResolvers();
+        $interfaceTypeResolvers = $this->getTypeRegistry()->getInterfaceTypeResolvers();
         $namespacedInterfaceTypeNameNames = [];
         foreach ($interfaceTypeResolvers as $interfaceTypeResolver) {
             $interfaceTypeResolverNamespacedName = $interfaceTypeResolver->getNamespacedTypeName();

@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\Engine\ModuleFilters\MainContentModule;
 

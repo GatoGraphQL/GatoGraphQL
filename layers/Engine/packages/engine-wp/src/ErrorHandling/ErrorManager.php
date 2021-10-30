@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\EngineWP\ErrorHandling;
 
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\ErrorHandling\AbstractErrorManager;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -12,13 +13,7 @@ use WP_Error;
 
 class ErrorManager extends AbstractErrorManager
 {
-    protected TranslationAPIInterface $translationAPI;
-
-    #[Required]
-    final public function autowireErrorManager(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
+    use BasicServiceTrait;
 
     public function convertFromCMSToPoPError(object $cmsError): Error
     {
@@ -36,13 +31,13 @@ class ErrorManager extends AbstractErrorManager
         foreach ($cmsErrorCodes as $cmsErrorCode) {
             if ($errorMessage = $cmsError->get_error_message($cmsErrorCode)) {
                 $errorMessages[] = sprintf(
-                    $this->translationAPI->__('[%s] %s', 'engine-wp'),
+                    $this->getTranslationAPI()->__('[%s] %s', 'engine-wp'),
                     $cmsErrorCode,
                     $errorMessage
                 );
             } else {
                 $errorMessages[] = sprintf(
-                    $this->translationAPI->__('Error code: %s', 'engine-wp'),
+                    $this->getTranslationAPI()->__('Error code: %s', 'engine-wp'),
                     $cmsErrorCode
                 );
             }
@@ -50,8 +45,8 @@ class ErrorManager extends AbstractErrorManager
         return new Error(
             'cms-error',
             sprintf(
-                $this->translationAPI->__('CMS errors: \'%s\'', 'engine-wp'),
-                implode($this->translationAPI->__('\', \'', 'engine-wp'), $errorMessages)
+                $this->getTranslationAPI()->__('CMS errors: \'%s\'', 'engine-wp'),
+                implode($this->getTranslationAPI()->__('\', \'', 'engine-wp'), $errorMessages)
             )
         );
     }

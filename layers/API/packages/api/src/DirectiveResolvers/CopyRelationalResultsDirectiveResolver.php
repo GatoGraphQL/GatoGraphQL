@@ -17,16 +17,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireCopyRelationalResultsDirectiveResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
     public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool
@@ -57,24 +65,24 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->translationAPI->__('Copy the data from a relational object (which is one level below) to the current object', 'component-model');
+        return $this->getTranslationAPI()->__('Copy the data from a relational object (which is one level below) to the current object', 'component-model');
     }
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            'copyFromFields' => $this->stringScalarTypeResolver,
-            'copyToFields' => $this->stringScalarTypeResolver,
-            'keepRelationalIDs' => $this->booleanScalarTypeResolver,
+            'copyFromFields' => $this->getStringScalarTypeResolver(),
+            'copyToFields' => $this->getStringScalarTypeResolver(),
+            'keepRelationalIDs' => $this->getBooleanScalarTypeResolver(),
         ];
     }
 
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'copyFromFields' => $this->translationAPI->__('The fields in the relational object from which to copy the data', 'component-model'),
-            'copyToFields' => $this->translationAPI->__('The fields in the current object to which copy the data. Default value: Same fields provided through \'copyFromFields\' argument', 'component-model'),
-            'keepRelationalIDs' => $this->translationAPI->__('Indicate if the properties are placed under the relational ID as keys (`true`) or as a one-dimensional array (`false`)', 'component-model'),
+            'copyFromFields' => $this->getTranslationAPI()->__('The fields in the relational object from which to copy the data', 'component-model'),
+            'copyToFields' => $this->getTranslationAPI()->__('The fields in the current object to which copy the data. Default value: Same fields provided through \'copyFromFields\' argument', 'component-model'),
+            'keepRelationalIDs' => $this->getTranslationAPI()->__('Indicate if the properties are placed under the relational ID as keys (`true`) or as a one-dimensional array (`false`)', 'component-model'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }
@@ -114,16 +122,16 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                 $schemaWarnings[] = [
                     Tokens::PATH => [$this->directive],
                     Tokens::MESSAGE => sprintf(
-                        $this->translationAPI->__('Argument \'copyToFields\' has more elements than argument \'copyFromFields\', so the following fields have been ignored: \'%s\'', 'component-model'),
-                        implode($this->translationAPI->__('\', \''), array_slice($copyToFields, $copyFromFieldsCount))
+                        $this->getTranslationAPI()->__('Argument \'copyToFields\' has more elements than argument \'copyFromFields\', so the following fields have been ignored: \'%s\'', 'component-model'),
+                        implode($this->getTranslationAPI()->__('\', \''), array_slice($copyToFields, $copyFromFieldsCount))
                     ),
                 ];
             } elseif ($copyToFieldsCount < $copyFromFieldsCount) {
                 $schemaWarnings[] = [
                     Tokens::PATH => [$this->directive],
                     Tokens::MESSAGE => sprintf(
-                        $this->translationAPI->__('Argument \'copyFromFields\' has more elements than argument \'copyToFields\', so the following fields will be copied to the destination object under their same field name: \'%s\'', 'component-model'),
-                        implode($this->translationAPI->__('\', \''), array_slice($copyFromFields, $copyToFieldsCount))
+                        $this->getTranslationAPI()->__('Argument \'copyFromFields\' has more elements than argument \'copyToFields\', so the following fields will be copied to the destination object under their same field name: \'%s\'', 'component-model'),
+                        implode($this->getTranslationAPI()->__('\', \''), array_slice($copyFromFields, $copyToFieldsCount))
                     ),
                 ];
             }
@@ -199,7 +207,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                  * is "post" and for "post($postId)@post<copyRelationalResults([content,date],[postContent,postDate])>"
                  * it is "post-1".
                  */
-                $relationalFieldOutputKey = $this->fieldQueryInterpreter->getFieldOutputKey($relationalField);
+                $relationalFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($relationalField);
 
                 // Make sure the field is relational, and not a scalar or enum
                 $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($relationalField);
@@ -207,7 +215,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                     $objectErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
-                            $this->translationAPI->__('Field \'%s\' is not a connection, so it cannot have data properties', 'component-model'),
+                            $this->getTranslationAPI()->__('Field \'%s\' is not a connection, so it cannot have data properties', 'component-model'),
                             $relationalFieldOutputKey
                         ),
                     ];
@@ -223,7 +231,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                         $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $this->translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so no data can be copied', 'component-model'),
+                                $this->getTranslationAPI()->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so no data can be copied', 'component-model'),
                                 $relationalFieldOutputKey,
                                 $id
                             ),
@@ -232,7 +240,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                         $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $this->translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so no data can be copied', 'component-model'),
+                                $this->getTranslationAPI()->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so no data can be copied', 'component-model'),
                                 $relationalField,
                                 $id
                             ),
@@ -253,7 +261,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                         $objectWarnings[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $this->translationAPI->__('The existing value for field \'%s\' from object with ID \'%s\' has been overriden: \'%s\'', 'component-model'),
+                                $this->getTranslationAPI()->__('The existing value for field \'%s\' from object with ID \'%s\' has been overriden: \'%s\'', 'component-model'),
                                 $copyToField,
                                 $id,
                                 $isTargetValueInDBItems ?
@@ -288,7 +296,7 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
                             $objectErrors[(string)$id][] = [
                                 Tokens::PATH => [$this->directive],
                                 Tokens::MESSAGE => sprintf(
-                                    $this->translationAPI->__('Field \'%s\' hadn\'t been set for object of entity \'%s\' and ID \'%s\', so no data can be copied', 'component-model'),
+                                    $this->getTranslationAPI()->__('Field \'%s\' hadn\'t been set for object of entity \'%s\' and ID \'%s\', so no data can be copied', 'component-model'),
                                     $copyFromField,
                                     $relationalFieldTypeOutputDBKey,
                                     $relationalFieldID

@@ -13,13 +13,15 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
 {
     use WithBlockRegistryCustomPostTypeTrait;
 
-    protected SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry;
+    private ?SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry = null;
 
-    #[Required]
-    final public function autowireGraphQLSchemaConfigurationCustomPostType(
-        SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry
-    ): void {
+    public function setSchemaConfigBlockRegistry(SchemaConfigBlockRegistryInterface $schemaConfigBlockRegistry): void
+    {
         $this->schemaConfigBlockRegistry = $schemaConfigBlockRegistry;
+    }
+    protected function getSchemaConfigBlockRegistry(): SchemaConfigBlockRegistryInterface
+    {
+        return $this->schemaConfigBlockRegistry ??= $this->instanceManager->getInstance(SchemaConfigBlockRegistryInterface::class);
     }
 
     /**
@@ -84,6 +86,6 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
 
     protected function getBlockRegistry(): BlockRegistryInterface
     {
-        return $this->schemaConfigBlockRegistry;
+        return $this->getSchemaConfigBlockRegistry();
     }
 }

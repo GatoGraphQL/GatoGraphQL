@@ -20,13 +20,15 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_CUSTOMPOST_AUTHOR_IDS = 'filterinput-custompost-author-ids';
     public const MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS = 'filterinput-exclude-custompost-author-ids';
 
-    protected IDScalarTypeResolver $idScalarTypeResolver;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireFilterInputModuleProcessor(
-        IDScalarTypeResolver $idScalarTypeResolver,
-    ): void {
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
     public function getModulesToProcess(): array
@@ -58,8 +60,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOST_AUTHOR_IDS => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_CUSTOMPOST_AUTHOR_IDS => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS => $this->getIdScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -78,8 +80,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOST_AUTHOR_IDS => $this->translationAPI->__('Get results from the authors with given IDs', 'pop-users'),
-            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS => $this->translationAPI->__('Get results from the ones from authors with given IDs', 'pop-users'),
+            self::MODULE_FILTERINPUT_CUSTOMPOST_AUTHOR_IDS => $this->getTranslationAPI()->__('Get results from the authors with given IDs', 'pop-users'),
+            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS => $this->getTranslationAPI()->__('Get results from the ones from authors with given IDs', 'pop-users'),
             default => null,
         };
     }

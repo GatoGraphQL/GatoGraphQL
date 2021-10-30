@@ -16,17 +16,20 @@ abstract class AbstractAccessControlRuleBlock extends AbstractBlock
 {
     public const ATTRIBUTE_NAME_ACCESS_CONTROL_GROUP = 'accessControlGroup';
     public const ATTRIBUTE_NAME_VALUE = 'value';
-    protected AccessControlBlockCategory $accessControlBlockCategory;
 
-    #[Required]
-    final public function autowireAbstractAccessControlRuleBlock(
-        AccessControlBlockCategory $accessControlBlockCategory,
-    ): void {
+    private ?AccessControlBlockCategory $accessControlBlockCategory = null;
+
+    public function setAccessControlBlockCategory(AccessControlBlockCategory $accessControlBlockCategory): void
+    {
         $this->accessControlBlockCategory = $accessControlBlockCategory;
+    }
+    protected function getAccessControlBlockCategory(): AccessControlBlockCategory
+    {
+        return $this->accessControlBlockCategory ??= $this->instanceManager->getInstance(AccessControlBlockCategory::class);
     }
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->accessControlBlockCategory;
+        return $this->getAccessControlBlockCategory();
     }
 }

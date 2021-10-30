@@ -10,18 +10,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UndoDownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
-    protected UndoDownvoteCustomPostMutationResolver $undoDownvoteCustomPostMutationResolver;
+    private ?UndoDownvoteCustomPostMutationResolver $undoDownvoteCustomPostMutationResolver = null;
 
-    #[Required]
-    final public function autowireUndoDownvoteCustomPostMutationResolverBridge(
-        UndoDownvoteCustomPostMutationResolver $undoDownvoteCustomPostMutationResolver,
-    ): void {
+    public function setUndoDownvoteCustomPostMutationResolver(UndoDownvoteCustomPostMutationResolver $undoDownvoteCustomPostMutationResolver): void
+    {
         $this->undoDownvoteCustomPostMutationResolver = $undoDownvoteCustomPostMutationResolver;
+    }
+    protected function getUndoDownvoteCustomPostMutationResolver(): UndoDownvoteCustomPostMutationResolver
+    {
+        return $this->undoDownvoteCustomPostMutationResolver ??= $this->instanceManager->getInstance(UndoDownvoteCustomPostMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->undoDownvoteCustomPostMutationResolver;
+        return $this->getUndoDownvoteCustomPostMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool
@@ -32,8 +34,8 @@ class UndoDownvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpd
     public function getSuccessString(string | int $result_id): ?string
     {
         return sprintf(
-            $this->translationAPI->__('You have stopped down-voting <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $this->customPostTypeAPI->getTitle($result_id)
+            $this->getTranslationAPI()->__('You have stopped down-voting <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->getCustomPostTypeAPI()->getTitle($result_id)
         );
     }
 }

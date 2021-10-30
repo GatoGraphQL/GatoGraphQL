@@ -12,13 +12,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected UserAvatarTypeDataLoader $userAvatarTypeDataLoader;
+    private ?UserAvatarTypeDataLoader $userAvatarTypeDataLoader = null;
 
-    #[Required]
-    final public function autowireUserAvatarObjectTypeResolver(
-        UserAvatarTypeDataLoader $userAvatarTypeDataLoader,
-    ): void {
+    public function setUserAvatarTypeDataLoader(UserAvatarTypeDataLoader $userAvatarTypeDataLoader): void
+    {
         $this->userAvatarTypeDataLoader = $userAvatarTypeDataLoader;
+    }
+    protected function getUserAvatarTypeDataLoader(): UserAvatarTypeDataLoader
+    {
+        return $this->userAvatarTypeDataLoader ??= $this->instanceManager->getInstance(UserAvatarTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -28,7 +30,7 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('User avatar', 'user-avatars');
+        return $this->getTranslationAPI()->__('User avatar', 'user-avatars');
     }
 
     public function getID(object $object): string | int | null
@@ -40,6 +42,6 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->userAvatarTypeDataLoader;
+        return $this->getUserAvatarTypeDataLoader();
     }
 }

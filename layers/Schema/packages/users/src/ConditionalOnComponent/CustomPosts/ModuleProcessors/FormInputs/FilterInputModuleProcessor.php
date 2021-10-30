@@ -22,16 +22,24 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_AUTHOR_SLUG = 'filterinput-author-slug';
     public const MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS = 'filterinput-exclude-author-ids';
 
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireFilterInputModuleProcessor(
-        IDScalarTypeResolver $idScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getModulesToProcess(): array
@@ -66,9 +74,9 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_AUTHOR_IDS => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_AUTHOR_SLUG => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS => $this->idScalarTypeResolver,
+            self::MODULE_FILTERINPUT_AUTHOR_IDS => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_AUTHOR_SLUG => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS => $this->getIdScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -87,9 +95,9 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_AUTHOR_IDS => $this->translationAPI->__('Get results from the authors with given IDs', 'pop-users'),
-            self::MODULE_FILTERINPUT_AUTHOR_SLUG => $this->translationAPI->__('Get results from the authors with given slug', 'pop-users'),
-            self::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS => $this->translationAPI->__('Get results excluding the ones from authors with given IDs', 'pop-users'),
+            self::MODULE_FILTERINPUT_AUTHOR_IDS => $this->getTranslationAPI()->__('Get results from the authors with given IDs', 'pop-users'),
+            self::MODULE_FILTERINPUT_AUTHOR_SLUG => $this->getTranslationAPI()->__('Get results from the authors with given slug', 'pop-users'),
+            self::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS => $this->getTranslationAPI()->__('Get results excluding the ones from authors with given IDs', 'pop-users'),
             default => null,
         };
     }

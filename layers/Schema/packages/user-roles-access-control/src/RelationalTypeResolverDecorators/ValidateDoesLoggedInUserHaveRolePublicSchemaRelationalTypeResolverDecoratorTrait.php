@@ -10,13 +10,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecoratorTrait
 {
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
 
-    #[Required]
-    public function autowireValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecoratorTrait(
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-    ): void {
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
 
     /**
@@ -27,7 +29,7 @@ trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecorato
         $roles = $entryValue;
         $directiveResolver = $this->getValidateRoleDirectiveResolver();
         $directiveName = $directiveResolver->getDirectiveName();
-        $validateDoesLoggedInUserHaveAnyRoleDirective = $this->fieldQueryInterpreter->getDirective(
+        $validateDoesLoggedInUserHaveAnyRoleDirective = $this->getFieldQueryInterpreter()->getDirective(
             $directiveName,
             [
                 'roles' => $roles,

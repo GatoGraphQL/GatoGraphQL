@@ -9,13 +9,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
-    protected PostTagTypeAPIInterface $postTagTypeAPI;
+    private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
-    #[Required]
-    final public function autowireAbstractSubscribeToOrUnsubscribeFromTagMutationResolver(
-        PostTagTypeAPIInterface $postTagTypeAPI,
-    ): void {
+    public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
+    {
         $this->postTagTypeAPI = $postTagTypeAPI;
+    }
+    protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
+    {
+        return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
     }
 
     public function validateErrors(array $form_data): array
@@ -25,9 +27,9 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
             $target_id = $form_data['target_id'];
 
             // Make sure the post exists
-            $target = $this->postTagTypeAPI->getTag($target_id);
+            $target = $this->getPostTagTypeAPI()->getTag($target_id);
             if (!$target) {
-                $errors[] = $this->translationAPI->__('The requested topic/tag does not exist.', 'pop-coreprocessors');
+                $errors[] = $this->getTranslationAPI()->__('The requested topic/tag does not exist.', 'pop-coreprocessors');
             }
         }
         return $errors;
@@ -35,7 +37,7 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
 
     protected function additionals($target_id, $form_data): void
     {
-        $this->hooksAPI->doAction('gd_subscritetounsubscribefrom_tag', $target_id, $form_data);
+        $this->getHooksAPI()->doAction('gd_subscritetounsubscribefrom_tag', $target_id, $form_data);
         parent::additionals($target_id, $form_data);
     }
 }

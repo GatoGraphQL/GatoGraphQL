@@ -4,19 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ItemProcessors;
 
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait ItemProcessorManagerTrait
 {
-    protected InstanceManagerInterface $instanceManager;
-
-    #[Required]
-    public function autowireItemProcessorManagerTrait(
-        InstanceManagerInterface $instanceManager,
-    ): void {
-        $this->instanceManager = $instanceManager;
-    }
+    use BasicServiceTrait;
 
     /**
      * @var array<string, array>

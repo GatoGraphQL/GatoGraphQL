@@ -26,16 +26,25 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
     public const MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTCOUNT = 'dataload-relationalfields-custompostcount';
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST = 'dataload-relationalfields-admincustompostlist';
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTCOUNT = 'dataload-relationalfields-admincustompostcount';
-    protected CustomPostUnionTypeResolver $customPostUnionTypeResolver;
-    protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
-    #[Required]
-    final public function autowireCustomPostRelationalFieldDataloadModuleProcessor(
-        CustomPostUnionTypeResolver $customPostUnionTypeResolver,
-        ListQueryInputOutputHandler $listQueryInputOutputHandler,
-    ): void {
+    private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
+    private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
+
+    public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
+    {
         $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
+    }
+    protected function getCustomPostUnionTypeResolver(): CustomPostUnionTypeResolver
+    {
+        return $this->customPostUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
+    }
+    public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
+    {
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
+    }
+    protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
+    {
+        return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
     public function getModulesToProcess(): array
@@ -71,7 +80,7 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST:
-                return $this->customPostUnionTypeResolver;
+                return $this->getCustomPostUnionTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);
@@ -84,7 +93,7 @@ class CustomPostRelationalFieldDataloadModuleProcessor extends AbstractRelationa
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST:
-                return $this->listQueryInputOutputHandler;
+                return $this->getListQueryInputOutputHandler();
         }
 
         return parent::getQueryInputOutputHandler($module);

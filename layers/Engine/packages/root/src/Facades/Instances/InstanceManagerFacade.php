@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Facades\Instances;
+namespace PoP\Root\Facades\Instances;
 
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\Root\Instances\InstanceManagerInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
 class InstanceManagerFacade

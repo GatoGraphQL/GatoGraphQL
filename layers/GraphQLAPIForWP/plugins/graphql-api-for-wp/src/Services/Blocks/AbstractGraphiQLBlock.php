@@ -19,16 +19,24 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     public const ATTRIBUTE_NAME_QUERY = 'query';
     public const ATTRIBUTE_NAME_VARIABLES = 'variables';
 
-    protected EndpointHelpers $endpointHelpers;
-    protected PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory;
+    private ?EndpointHelpers $endpointHelpers = null;
+    private ?PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory = null;
 
-    #[Required]
-    final public function autowireAbstractGraphiQLBlock(
-        EndpointHelpers $endpointHelpers,
-        PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory,
-    ): void {
+    public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
+    {
         $this->endpointHelpers = $endpointHelpers;
+    }
+    protected function getEndpointHelpers(): EndpointHelpers
+    {
+        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+    }
+    public function setPersistedQueryEndpointBlockCategory(PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory): void
+    {
         $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
+    }
+    protected function getPersistedQueryEndpointBlockCategory(): PersistedQueryEndpointBlockCategory
+    {
+        return $this->persistedQueryEndpointBlockCategory ??= $this->instanceManager->getInstance(PersistedQueryEndpointBlockCategory::class);
     }
 
     protected function getBlockName(): string
@@ -38,7 +46,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->persistedQueryEndpointBlockCategory;
+        return $this->getPersistedQueryEndpointBlockCategory();
     }
 
     protected function isDynamicBlock(): bool
@@ -48,7 +56,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
 
     protected function getAdminGraphQLEndpoint(): string
     {
-        return $this->endpointHelpers->getAdminConfigurableSchemaGraphQLEndpoint();
+        return $this->getEndpointHelpers()->getAdminConfigurableSchemaGraphQLEndpoint();
     }
 
     /**

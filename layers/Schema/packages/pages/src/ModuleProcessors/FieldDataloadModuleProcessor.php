@@ -15,13 +15,16 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     use QueriedDBObjectModuleProcessorTrait;
 
     public const MODULE_DATALOAD_RELATIONALFIELDS_PAGE = 'dataload-relationalfields-page';
-    protected PageObjectTypeResolver $pageObjectTypeResolver;
 
-    #[Required]
-    final public function autowireFieldDataloadModuleProcessor(
-        PageObjectTypeResolver $pageObjectTypeResolver,
-    ): void {
+    private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
+
+    public function setPageObjectTypeResolver(PageObjectTypeResolver $pageObjectTypeResolver): void
+    {
         $this->pageObjectTypeResolver = $pageObjectTypeResolver;
+    }
+    protected function getPageObjectTypeResolver(): PageObjectTypeResolver
+    {
+        return $this->pageObjectTypeResolver ??= $this->instanceManager->getInstance(PageObjectTypeResolver::class);
     }
 
     public function getModulesToProcess(): array
@@ -45,7 +48,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_PAGE:
-                return $this->pageObjectTypeResolver;
+                return $this->getPageObjectTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);

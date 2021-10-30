@@ -10,22 +10,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class BuildSystemMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
-    protected BuildSystemMutationResolver $buildSystemMutationResolver;
+    private ?BuildSystemMutationResolver $buildSystemMutationResolver = null;
 
-    #[Required]
-    final public function autowireBuildSystemMutationResolverBridge(
-        BuildSystemMutationResolver $buildSystemMutationResolver,
-    ): void {
+    public function setBuildSystemMutationResolver(BuildSystemMutationResolver $buildSystemMutationResolver): void
+    {
         $this->buildSystemMutationResolver = $buildSystemMutationResolver;
+    }
+    protected function getBuildSystemMutationResolver(): BuildSystemMutationResolver
+    {
+        return $this->buildSystemMutationResolver ??= $this->instanceManager->getInstance(BuildSystemMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->buildSystemMutationResolver;
+        return $this->getBuildSystemMutationResolver();
     }
     public function getSuccessString(string | int $result_id): ?string
     {
-        return $this->translationAPI->__('System action "build" executed successfully.', 'pop-system');
+        return $this->getTranslationAPI()->__('System action "build" executed successfully.', 'pop-system');
         ;
     }
 }

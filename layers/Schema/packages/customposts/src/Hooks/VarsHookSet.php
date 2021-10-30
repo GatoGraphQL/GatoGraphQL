@@ -14,22 +14,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    #[Required]
-    final public function autowireVarsHookSet(
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-    ): void {
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
         $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
             array($this, 'getModelInstanceComponentsFromVars')
         );
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'augmentVarsProperties',
             [$this, 'augmentVarsProperties'],
             10,
@@ -49,7 +51,7 @@ class VarsHookSet extends AbstractHookSet
                 // Post and Event may be different
                 // Announcements and Articles (Posts), or Past Event and (Upcoming) Event may be different
                 // By default, we check for post type but not for categories
-                $component_types = (array) $this->hooksAPI->applyFilters(
+                $component_types = (array) $this->getHooksAPI()->applyFilters(
                     '\PoP\ComponentModel\ModelInstanceProcessor_Utils:components_from_vars:type:single',
                     array(
                         ModelInstanceComponentTypes::SINGLE_CUSTOMPOST,
@@ -57,7 +59,7 @@ class VarsHookSet extends AbstractHookSet
                 );
                 if (in_array(ModelInstanceComponentTypes::SINGLE_CUSTOMPOST, $component_types)) {
                     $customPostType = $vars['routing-state']['queried-object-post-type'];
-                    $components[] = $this->translationAPI->__('post type:', 'pop-engine') . $customPostType;
+                    $components[] = $this->getTranslationAPI()->__('post type:', 'pop-engine') . $customPostType;
                 }
                 break;
         }
@@ -77,7 +79,7 @@ class VarsHookSet extends AbstractHookSet
         // Attributes needed to match the RouteModuleProcessor vars conditions
         if ($nature == RouteNatures::CUSTOMPOST) {
             $customPostID = $vars['routing-state']['queried-object-id'];
-            $vars['routing-state']['queried-object-post-type'] = $this->customPostTypeAPI->getCustomPostType($customPostID);
+            $vars['routing-state']['queried-object-post-type'] = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
         }
     }
 }

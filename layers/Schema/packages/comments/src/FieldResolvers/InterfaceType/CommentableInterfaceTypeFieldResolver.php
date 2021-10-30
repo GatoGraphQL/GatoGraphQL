@@ -23,19 +23,33 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected CommentObjectTypeResolver $commentObjectTypeResolver;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
 
-    #[Required]
-    final public function autowireCommentableInterfaceTypeFieldResolver(
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        IntScalarTypeResolver $intScalarTypeResolver,
-        CommentObjectTypeResolver $commentObjectTypeResolver,
-    ): void {
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
+    {
         $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+    }
+    protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
+    {
+        return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
     }
 
     public function getInterfaceTypeResolverClassesToAttachTo(): array
@@ -60,12 +74,12 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'comments' => $this->commentObjectTypeResolver,
-            'commentsForAdmin' => $this->commentObjectTypeResolver,
-            'areCommentsOpen' => $this->booleanScalarTypeResolver,
-            'hasComments' => $this->booleanScalarTypeResolver,
-            'commentCount' => $this->intScalarTypeResolver,
-            'commentCountForAdmin' => $this->intScalarTypeResolver,
+            'comments' => $this->getCommentObjectTypeResolver(),
+            'commentsForAdmin' => $this->getCommentObjectTypeResolver(),
+            'areCommentsOpen' => $this->getBooleanScalarTypeResolver(),
+            'hasComments' => $this->getBooleanScalarTypeResolver(),
+            'commentCount' => $this->getIntScalarTypeResolver(),
+            'commentCountForAdmin' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($fieldName),
         };
     }
@@ -89,12 +103,12 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'areCommentsOpen' => $this->translationAPI->__('Are comments open to be added to the custom post', 'pop-comments'),
-            'hasComments' => $this->translationAPI->__('Does the custom post have comments?', 'pop-comments'),
-            'commentCount' => $this->translationAPI->__('Number of comments added to the custom post', 'pop-comments'),
-            'comments' => $this->translationAPI->__('Comments added to the custom post', 'pop-comments'),
-            'commentCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of comments added to the custom post', 'pop-comments'),
-            'commentsForAdmin' => $this->translationAPI->__('[Unrestricted] Comments added to the custom post', 'pop-comments'),
+            'areCommentsOpen' => $this->getTranslationAPI()->__('Are comments open to be added to the custom post', 'pop-comments'),
+            'hasComments' => $this->getTranslationAPI()->__('Does the custom post have comments?', 'pop-comments'),
+            'commentCount' => $this->getTranslationAPI()->__('Number of comments added to the custom post', 'pop-comments'),
+            'comments' => $this->getTranslationAPI()->__('Comments added to the custom post', 'pop-comments'),
+            'commentCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of comments added to the custom post', 'pop-comments'),
+            'commentsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Comments added to the custom post', 'pop-comments'),
             default => parent::getFieldDescription($fieldName),
         };
     }
@@ -155,7 +169,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
                 ]);
                 if ($fieldArgName === $orderFilterInputName) {
                     // Order by descending date
-                    $orderBy = $this->nameResolver->getName('popcms:dbcolumn:orderby:comments:date');
+                    $orderBy = $this->getNameResolver()->getName('popcms:dbcolumn:orderby:comments:date');
                     $order = 'DESC';
                     return $orderBy . OrderFormInput::SEPARATOR . $order;
                 }

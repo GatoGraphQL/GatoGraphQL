@@ -5,21 +5,19 @@ declare(strict_types=1);
 namespace PoP\Routing;
 
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
+use PoP\Root\Services\WithInstanceManagerServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRoutingManager implements RoutingManagerInterface
 {
+    use WithHooksAPIServiceTrait;
+    use WithInstanceManagerServiceTrait;
+
     /**
      * @var string[]|null
      */
     private ?array $routes = null;
-    protected HooksAPIInterface $hooksAPI;
-
-    #[Required]
-    final public function autowireAbstractRoutingManager(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
 
     /**
      * @return string[]
@@ -28,7 +26,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
     {
         if (is_null($this->routes)) {
             $this->routes = array_filter(
-                (array) $this->hooksAPI->applyFilters(
+                (array) $this->getHooksAPI()->applyFilters(
                     RouteHookNames::ROUTES,
                     []
                 )
@@ -37,7 +35,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
             // // If there are partial endpoints, generate all the combinations of route + partial endpoint
             // // For instance, route = "posts", endpoint = "/api/rest", combined route = "posts/api/rest"
             // if ($partialEndpoints = array_filter(
-            //     (array) $this->hooksAPI->applyFilters(
+            //     (array) $this->getHooksAPI()->applyFilters(
             //         'route-endpoints',
             //         []
             //     )
@@ -78,7 +76,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
         }
 
         // Allow to change it
-        return (string) $this->hooksAPI->applyFilters(
+        return (string) $this->getHooksAPI()->applyFilters(
             RouteHookNames::CURRENT_ROUTE,
             $route,
             $nature

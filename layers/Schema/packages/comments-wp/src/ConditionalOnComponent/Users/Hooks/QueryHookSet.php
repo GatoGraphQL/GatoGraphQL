@@ -11,7 +11,7 @@ class QueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             CommentTypeAPI::HOOK_QUERY,
             [$this, 'convertCommentQuery'],
             10,

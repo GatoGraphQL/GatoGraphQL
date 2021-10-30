@@ -11,13 +11,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait ValidateUserLoggedInForFieldsRelationalTypeResolverDecoratorTrait
 {
-    protected ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver;
+    private ?ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver = null;
 
-    #[Required]
-    public function autowireValidateUserLoggedInForFieldsRelationalTypeResolverDecoratorTrait(
-        ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver,
-    ): void {
+    public function setValidateIsUserLoggedInDirectiveResolver(ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver): void
+    {
         $this->validateIsUserLoggedInDirectiveResolver = $validateIsUserLoggedInDirectiveResolver;
+    }
+    protected function getValidateIsUserLoggedInDirectiveResolver(): ValidateIsUserLoggedInDirectiveResolver
+    {
+        return $this->validateIsUserLoggedInDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserLoggedInDirectiveResolver::class);
     }
 
     protected function removeFieldNameBasedOnMatchingEntryValue($entryValue = null): bool
@@ -26,6 +28,6 @@ trait ValidateUserLoggedInForFieldsRelationalTypeResolverDecoratorTrait
     }
     protected function getValidateUserStateDirectiveResolver(): DirectiveResolverInterface
     {
-        return $this->validateIsUserLoggedInDirectiveResolver;
+        return $this->getValidateIsUserLoggedInDirectiveResolver();
     }
 }

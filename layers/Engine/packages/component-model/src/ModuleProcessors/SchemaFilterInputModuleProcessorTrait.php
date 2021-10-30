@@ -11,13 +11,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait SchemaFilterInputModuleProcessorTrait
 {
-    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
+    private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
 
-    #[Required]
-    public function autowireSchemaFilterInputModuleProcessorTrait(
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-    ): void {
+    public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
+    {
         $this->schemaDefinitionService = $schemaDefinitionService;
+    }
+    protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
+    {
+        return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
 
     protected function getFilterInputSchemaDefinitionResolver(array $module): DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
@@ -36,7 +38,7 @@ trait SchemaFilterInputModuleProcessorTrait
 
     protected function getDefaultSchemaFilterInputTypeResolver(): InputTypeResolverInterface
     {
-        return $this->schemaDefinitionService->getDefaultInputTypeResolver();
+        return $this->getSchemaDefinitionService()->getDefaultInputTypeResolver();
     }
 
     public function getFilterInputDescription(array $module): ?string

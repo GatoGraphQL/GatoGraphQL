@@ -11,12 +11,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
-    protected SchemaTypeDataLoader $schemaTypeDataLoader;
+    private ?SchemaTypeDataLoader $schemaTypeDataLoader = null;
 
-    #[Required]
-    final public function autowireSchemaObjectTypeResolver(SchemaTypeDataLoader $schemaTypeDataLoader): void
+    public function setSchemaTypeDataLoader(SchemaTypeDataLoader $schemaTypeDataLoader): void
     {
         $this->schemaTypeDataLoader = $schemaTypeDataLoader;
+    }
+    protected function getSchemaTypeDataLoader(): SchemaTypeDataLoader
+    {
+        return $this->schemaTypeDataLoader ??= $this->instanceManager->getInstance(SchemaTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -26,7 +29,7 @@ class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Schema type, to implement the introspection fields', 'graphql-server');
+        return $this->getTranslationAPI()->__('Schema type, to implement the introspection fields', 'graphql-server');
     }
 
     public function getID(object $object): string | int | null
@@ -38,6 +41,6 @@ class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->schemaTypeDataLoader;
+        return $this->getSchemaTypeDataLoader();
     }
 }

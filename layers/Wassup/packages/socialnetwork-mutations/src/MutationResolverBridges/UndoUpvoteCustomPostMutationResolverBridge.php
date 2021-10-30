@@ -10,18 +10,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UndoUpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
-    protected UndoUpvoteCustomPostMutationResolver $undoUpvoteCustomPostMutationResolver;
+    private ?UndoUpvoteCustomPostMutationResolver $undoUpvoteCustomPostMutationResolver = null;
 
-    #[Required]
-    final public function autowireUndoUpvoteCustomPostMutationResolverBridge(
-        UndoUpvoteCustomPostMutationResolver $undoUpvoteCustomPostMutationResolver,
-    ): void {
+    public function setUndoUpvoteCustomPostMutationResolver(UndoUpvoteCustomPostMutationResolver $undoUpvoteCustomPostMutationResolver): void
+    {
         $this->undoUpvoteCustomPostMutationResolver = $undoUpvoteCustomPostMutationResolver;
+    }
+    protected function getUndoUpvoteCustomPostMutationResolver(): UndoUpvoteCustomPostMutationResolver
+    {
+        return $this->undoUpvoteCustomPostMutationResolver ??= $this->instanceManager->getInstance(UndoUpvoteCustomPostMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->undoUpvoteCustomPostMutationResolver;
+        return $this->getUndoUpvoteCustomPostMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool
@@ -32,8 +34,8 @@ class UndoUpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdat
     public function getSuccessString(string | int $result_id): ?string
     {
         return sprintf(
-            $this->translationAPI->__('You have stopped up-voting <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $this->customPostTypeAPI->getTitle($result_id)
+            $this->getTranslationAPI()->__('You have stopped up-voting <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->getCustomPostTypeAPI()->getTitle($result_id)
         );
     }
 }

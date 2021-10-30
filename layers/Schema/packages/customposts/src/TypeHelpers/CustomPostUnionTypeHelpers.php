@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeHelpers;
 
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoPSchema\CustomPosts\ComponentConfiguration;

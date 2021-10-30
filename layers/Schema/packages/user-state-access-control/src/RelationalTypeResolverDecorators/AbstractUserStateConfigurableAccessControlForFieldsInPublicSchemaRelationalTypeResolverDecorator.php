@@ -13,6 +13,6 @@ abstract class AbstractUserStateConfigurableAccessControlForFieldsInPublicSchema
 
     protected function getConfigurationEntries(): array
     {
-        return $this->accessControlManager->getEntriesForFields(AccessControlGroups::STATE);
+        return $this->getAccessControlManager()->getEntriesForFields(AccessControlGroups::STATE);
     }
 }

@@ -18,16 +18,24 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use RolesObjectTypeFieldResolverTrait;
 
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected UserRoleTypeAPIInterface $userRoleTypeAPI;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
 
-    #[Required]
-    final public function autowireRootRolesObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        UserRoleTypeAPIInterface $userRoleTypeAPI,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
+    {
         $this->userRoleTypeAPI = $userRoleTypeAPI;
+    }
+    protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
+    {
+        return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -54,7 +62,7 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'roleNames' => $this->stringScalarTypeResolver,
+            'roleNames' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -62,7 +70,7 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'roleNames' => $this->translationAPI->__('All user role names', 'user-roles'),
+            'roleNames' => $this->getTranslationAPI()->__('All user role names', 'user-roles'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -96,7 +104,7 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         switch ($fieldName) {
             case 'roleNames':
-                return $this->userRoleTypeAPI->getRoleNames();
+                return $this->getUserRoleTypeAPI()->getRoleNames();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

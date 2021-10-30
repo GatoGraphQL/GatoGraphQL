@@ -10,6 +10,6 @@ class ValidateDoesLoggedInUserHaveCapabilityForDirectivesPrivateSchemaRelational
 {
     protected function getConfigurationEntries(): array
     {
-        return $this->accessControlManager->getEntriesForDirectives(AccessControlGroups::CAPABILITIES);
+        return $this->getAccessControlManager()->getEntriesForDirectives(AccessControlGroups::CAPABILITIES);
     }
 }

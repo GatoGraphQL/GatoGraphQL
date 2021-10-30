@@ -13,19 +13,33 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeFieldResolver
 {
-    protected DateScalarTypeResolver $dateScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
+    private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
     
-    #[Required]
-    final public function autowireIsCustomPostInterfaceTypeFieldResolver(
-        DateScalarTypeResolver $dateScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
-    ): void {
+    public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    {
         $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+    }
+    protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    {
+        return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
+    {
         $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
+    }
+    protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
+    {
+        return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }
 
     public function getImplementedInterfaceTypeFieldResolvers(): array
@@ -69,7 +83,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
     public function getFieldDescription(string $fieldName): ?string
     {
         return match($fieldName) {
-            'datetime' => $this->translationAPI->__('Custom post published date and time', 'customposts'),
+            'datetime' => $this->getTranslationAPI()->__('Custom post published date and time', 'customposts'),
             default => parent::getFieldDescription($fieldName),
         };
     }
@@ -87,7 +101,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
     {
         return match ([$fieldName => $fieldArgName]) {
             ['datetime' => 'format'] => sprintf(
-                $this->translationAPI->__('Date and time format, as defined in %s. Default value: \'%s\' (for current year date) or \'%s\' (otherwise)', 'customposts'),
+                $this->getTranslationAPI()->__('Date and time format, as defined in %s. Default value: \'%s\' (for current year date) or \'%s\' (otherwise)', 'customposts'),
                 'https://www.php.net/manual/en/function.date.php',
                 'j M, H:i',
                 'j M Y, H:i'

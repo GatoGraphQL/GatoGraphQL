@@ -15,13 +15,15 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use RolesObjectTypeFieldResolverTrait;
 
-    protected UserRoleTypeAPIInterface $userRoleTypeAPI;
+    private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
 
-    #[Required]
-    final public function autowireRootRolesObjectTypeFieldResolver(
-        UserRoleTypeAPIInterface $userRoleTypeAPI,
-    ): void {
+    public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
+    {
         $this->userRoleTypeAPI = $userRoleTypeAPI;
+    }
+    protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
+    {
+        return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -61,9 +63,9 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         switch ($fieldName) {
             case 'roles':
-                return $this->userRoleTypeAPI->getRoleNames();
+                return $this->getUserRoleTypeAPI()->getRoleNames();
             case 'capabilities':
-                return $this->userRoleTypeAPI->getCapabilities();
+                return $this->getUserRoleTypeAPI()->getCapabilities();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

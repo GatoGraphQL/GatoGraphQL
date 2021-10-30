@@ -15,13 +15,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireSiteObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -42,8 +44,8 @@ class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'domain' => $this->stringScalarTypeResolver,
-            'host' => $this->stringScalarTypeResolver,
+            'domain' => $this->getStringScalarTypeResolver(),
+            'host' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -62,8 +64,8 @@ class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'domain' => $this->translationAPI->__('The site\'s domain', ''),
-            'host' => $this->translationAPI->__('The site\'s host', ''),
+            'domain' => $this->getTranslationAPI()->__('The site\'s domain', ''),
+            'host' => $this->getTranslationAPI()->__('The site\'s host', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -6,25 +6,30 @@ namespace PoP\ComponentModel\Cache;
 
 use DateInterval;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class Cache implements PersistentCacheInterface, TransientCacheInterface
 {
+    use BasicServiceTrait;
     use ReplaceCurrentExecutionDataWithPlaceholdersTrait;
 
-    protected ModelInstanceInterface $modelInstance;
+    private ?ModelInstanceInterface $modelInstance = null;
 
     public function __construct(
         protected CacheItemPoolInterface $cacheItemPool,
     ) {
     }
 
-    #[Required]
-    final public function autowireCache(ModelInstanceInterface $modelInstance): void
+    public function setModelInstance(ModelInstanceInterface $modelInstance): void
     {
         $this->modelInstance = $modelInstance;
+    }
+    protected function getModelInstance(): ModelInstanceInterface
+    {
+        return $this->modelInstance ??= $this->instanceManager->getInstance(ModelInstanceInterface::class);
     }
 
     protected function getKey(string $id, string $type)
@@ -111,11 +116,11 @@ class Cache implements PersistentCacheInterface, TransientCacheInterface
 
     public function getCacheByModelInstance(string $type): mixed
     {
-        return $this->getComponentModelCache($this->modelInstance->getModelInstanceId(), $type);
+        return $this->getComponentModelCache($this->getModelInstance()->getModelInstanceId(), $type);
     }
 
     public function storeCacheByModelInstance(string $type, mixed $content): void
     {
-        $this->storeCache($this->modelInstance->getModelInstanceId(), $type, $content);
+        $this->storeCache($this->getModelInstance()->getModelInstanceId(), $type, $content);
     }
 }

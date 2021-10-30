@@ -42,22 +42,42 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     public const MODULE_FILTERINPUT_DATEFORMAT = 'filterinput-date-format';
     public const MODULE_FILTERINPUT_GMT = 'filterinput-date-gmt';
 
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireCommonFilterInputModuleProcessor(
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
-        IntScalarTypeResolver $intScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getModulesToProcess(): array
@@ -149,21 +169,21 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ((string)$module[1]) {
-            self::MODULE_FILTERINPUT_ORDER => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_LIMIT => $this->intScalarTypeResolver,
-            self::MODULE_FILTERINPUT_OFFSET => $this->intScalarTypeResolver,
-            self::MODULE_FILTERINPUT_SEARCH => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_IDS => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_ID => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_COMMASEPARATED_IDS => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_EXCLUDE_IDS => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_PARENT_IDS => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_PARENT_ID => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS => $this->idScalarTypeResolver,
-            self::MODULE_FILTERINPUT_SLUGS => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_SLUG => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_DATEFORMAT => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_GMT => $this->booleanScalarTypeResolver,
+            self::MODULE_FILTERINPUT_ORDER => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_LIMIT => $this->getIntScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_OFFSET => $this->getIntScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_SEARCH => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_IDS => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_ID => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_COMMASEPARATED_IDS => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_EXCLUDE_IDS => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_PARENT_IDS => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_PARENT_ID => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_SLUGS => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_SLUG => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_DATEFORMAT => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_GMT => $this->getBooleanScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -185,27 +205,27 @@ class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor 
     public function getFilterInputDescription(array $module): ?string
     {
         return match ((string)$module[1]) {
-            self::MODULE_FILTERINPUT_ORDER => $this->translationAPI->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'schema-commons'),
-            self::MODULE_FILTERINPUT_LIMIT => $this->translationAPI->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
-            self::MODULE_FILTERINPUT_OFFSET => $this->translationAPI->__('Offset the results by how many places (required for pagination)', 'schema-commons'),
-            self::MODULE_FILTERINPUT_SEARCH => $this->translationAPI->__('Search for elements containing the given string', 'schema-commons'),
-            self::MODULE_FILTERINPUT_IDS => $this->translationAPI->__('Limit results to elements with the given IDs', 'schema-commons'),
-            self::MODULE_FILTERINPUT_ID => $this->translationAPI->__('Fetch the element with the given ID', 'schema-commons'),
+            self::MODULE_FILTERINPUT_ORDER => $this->getTranslationAPI()->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'schema-commons'),
+            self::MODULE_FILTERINPUT_LIMIT => $this->getTranslationAPI()->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
+            self::MODULE_FILTERINPUT_OFFSET => $this->getTranslationAPI()->__('Offset the results by how many places (required for pagination)', 'schema-commons'),
+            self::MODULE_FILTERINPUT_SEARCH => $this->getTranslationAPI()->__('Search for elements containing the given string', 'schema-commons'),
+            self::MODULE_FILTERINPUT_IDS => $this->getTranslationAPI()->__('Limit results to elements with the given IDs', 'schema-commons'),
+            self::MODULE_FILTERINPUT_ID => $this->getTranslationAPI()->__('Fetch the element with the given ID', 'schema-commons'),
             self::MODULE_FILTERINPUT_COMMASEPARATED_IDS => sprintf(
-                $this->translationAPI->__('Limit results to elements with the given ID, or IDs (separated by \'%s\')', 'schema-commons'),
+                $this->getTranslationAPI()->__('Limit results to elements with the given ID, or IDs (separated by \'%s\')', 'schema-commons'),
                 Param::VALUE_SEPARATOR
             ),
-            self::MODULE_FILTERINPUT_EXCLUDE_IDS => $this->translationAPI->__('Exclude elements with the given IDs', 'schema-commons'),
-            self::MODULE_FILTERINPUT_PARENT_IDS => $this->translationAPI->__('Limit results to elements with the given parent IDs', 'schema-commons'),
-            self::MODULE_FILTERINPUT_PARENT_ID => $this->translationAPI->__('Limit results to elements with the given parent ID', 'schema-commons'),
-            self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS => $this->translationAPI->__('Exclude elements with the given parent IDs', 'schema-commons'),
-            self::MODULE_FILTERINPUT_SLUGS => $this->translationAPI->__('Limit results to elements with the given slug', 'schema-commons'),
-            self::MODULE_FILTERINPUT_SLUGS => $this->translationAPI->__('Limit results to elements with the given slug', 'schema-commons'),
+            self::MODULE_FILTERINPUT_EXCLUDE_IDS => $this->getTranslationAPI()->__('Exclude elements with the given IDs', 'schema-commons'),
+            self::MODULE_FILTERINPUT_PARENT_IDS => $this->getTranslationAPI()->__('Limit results to elements with the given parent IDs', 'schema-commons'),
+            self::MODULE_FILTERINPUT_PARENT_ID => $this->getTranslationAPI()->__('Limit results to elements with the given parent ID', 'schema-commons'),
+            self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS => $this->getTranslationAPI()->__('Exclude elements with the given parent IDs', 'schema-commons'),
+            self::MODULE_FILTERINPUT_SLUGS => $this->getTranslationAPI()->__('Limit results to elements with the given slug', 'schema-commons'),
+            self::MODULE_FILTERINPUT_SLUGS => $this->getTranslationAPI()->__('Limit results to elements with the given slug', 'schema-commons'),
             self::MODULE_FILTERINPUT_DATEFORMAT => sprintf(
-                $this->translationAPI->__('Date format, as defined in %s', 'schema-commons'),
+                $this->getTranslationAPI()->__('Date format, as defined in %s', 'schema-commons'),
                 'https://www.php.net/manual/en/function.date.php'
             ),
-            self::MODULE_FILTERINPUT_GMT => $this->translationAPI->__('Whether to retrieve the date as UTC or GMT timezone', 'schema-commons'),
+            self::MODULE_FILTERINPUT_GMT => $this->getTranslationAPI()->__('Whether to retrieve the date as UTC or GMT timezone', 'schema-commons'),
             default => null,
         };
     }

@@ -13,16 +13,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected CustomPostUserTypeAPIInterface $customPostUserTypeAPI;
-    protected WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver;
+    private ?CustomPostUserTypeAPIInterface $customPostUserTypeAPI = null;
+    private ?WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver = null;
 
-    #[Required]
-    final public function autowireCustomPostObjectTypeFieldResolver(
-        CustomPostUserTypeAPIInterface $customPostUserTypeAPI,
-        WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver,
-    ): void {
+    public function setCustomPostUserTypeAPI(CustomPostUserTypeAPIInterface $customPostUserTypeAPI): void
+    {
         $this->customPostUserTypeAPI = $customPostUserTypeAPI;
+    }
+    protected function getCustomPostUserTypeAPI(): CustomPostUserTypeAPIInterface
+    {
+        return $this->customPostUserTypeAPI ??= $this->instanceManager->getInstance(CustomPostUserTypeAPIInterface::class);
+    }
+    public function setWithAuthorInterfaceTypeFieldResolver(WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver): void
+    {
         $this->withAuthorInterfaceTypeFieldResolver = $withAuthorInterfaceTypeFieldResolver;
+    }
+    protected function getWithAuthorInterfaceTypeFieldResolver(): WithAuthorInterfaceTypeFieldResolver
+    {
+        return $this->withAuthorInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(WithAuthorInterfaceTypeFieldResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -35,7 +43,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->withAuthorInterfaceTypeFieldResolver,
+            $this->getWithAuthorInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -49,7 +57,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'author' => $this->translationAPI->__('The post\'s author', ''),
+            'author' => $this->getTranslationAPI()->__('The post\'s author', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -71,7 +79,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         switch ($fieldName) {
             case 'author':
-                return $this->customPostUserTypeAPI->getAuthorID($object);
+                return $this->getCustomPostUserTypeAPI()->getAuthorID($object);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

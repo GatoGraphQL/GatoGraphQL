@@ -9,16 +9,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_FunctionalSocialMediaItems extends AbstractObjectTypeFieldResolver
 {
-    protected SocialMediaProviderEnumTypeResolver $socialMediaProviderEnumTypeResolver;
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    private ?SocialMediaProviderEnumTypeResolver $socialMediaProviderEnumTypeResolver = null;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowirePoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_FunctionalSocialMediaItems(
-        SocialMediaProviderEnumTypeResolver $socialMediaProviderEnumTypeResolver,
-        URLScalarTypeResolver $urlScalarTypeResolver,
-    ): void {
+    public function setSocialMediaProviderEnumTypeResolver(SocialMediaProviderEnumTypeResolver $socialMediaProviderEnumTypeResolver): void
+    {
         $this->socialMediaProviderEnumTypeResolver = $socialMediaProviderEnumTypeResolver;
+    }
+    protected function getSocialMediaProviderEnumTypeResolver(): SocialMediaProviderEnumTypeResolver
+    {
+        return $this->socialMediaProviderEnumTypeResolver ??= $this->instanceManager->getInstance(SocialMediaProviderEnumTypeResolver::class);
+    }
+    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
 
     protected function getShareUrl($url, $title, $provider)
@@ -51,7 +59,7 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-			'shareURL' => $this->translationAPI->__('', ''),
+			'shareURL' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -69,7 +77,7 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['shareURL' => 'provider'] => $this->translationAPI->__('What provider service to get the URL from', ''),
+            ['shareURL' => 'provider'] => $this->getTranslationAPI()->__('What provider service to get the URL from', ''),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

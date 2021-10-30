@@ -12,13 +12,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
-    protected IDScalarTypeResolver $idScalarTypeResolver;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireElementalInterfaceTypeFieldResolver(
-        IDScalarTypeResolver $idScalarTypeResolver,
-    ): void {
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
     public function getInterfaceTypeResolverClassesToAttachTo(): array
@@ -38,7 +40,7 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'id' => $this->idScalarTypeResolver,
+            'id' => $this->getIdScalarTypeResolver(),
             default => parent::getFieldTypeResolver($fieldName),
         };
     }
@@ -55,7 +57,7 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'id' => $this->translationAPI->__('The object\'s unique identifier for its type', 'component-model'),
+            'id' => $this->getTranslationAPI()->__('The object\'s unique identifier for its type', 'component-model'),
             default => parent::getFieldDescription($fieldName),
         };
     }

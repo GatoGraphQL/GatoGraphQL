@@ -14,7 +14,7 @@ class VarsHookSet extends AbstractHookSet
     protected function init(): void
     {
         // Execute early, since others (eg: SPA) will be based on these updated values
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'ApplicationState:addVars',
             array($this, 'addVars'),
             5,

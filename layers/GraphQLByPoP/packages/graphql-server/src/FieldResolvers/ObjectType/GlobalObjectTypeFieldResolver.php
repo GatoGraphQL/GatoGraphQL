@@ -13,13 +13,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireGlobalObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getFieldNamesToResolve(): array
@@ -32,7 +34,7 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            '__typename' => $this->stringScalarTypeResolver,
+            '__typename' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -48,7 +50,7 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            '__typename' => $this->translationAPI->__('The object\'s type', 'graphql-server'),
+            '__typename' => $this->getTranslationAPI()->__('The object\'s type', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

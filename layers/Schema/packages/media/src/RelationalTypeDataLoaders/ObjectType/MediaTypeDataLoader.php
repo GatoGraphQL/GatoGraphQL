@@ -12,13 +12,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
-    protected MediaTypeAPIInterface $mediaTypeAPI;
+    private ?MediaTypeAPIInterface $mediaTypeAPI = null;
 
-    #[Required]
-    final public function autowireMediaTypeDataLoader(
-        MediaTypeAPIInterface $mediaTypeAPI,
-    ): void {
+    public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
+    {
         $this->mediaTypeAPI = $mediaTypeAPI;
+    }
+    protected function getMediaTypeAPI(): MediaTypeAPIInterface
+    {
+        return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
     }
 
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
@@ -30,7 +32,7 @@ class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 
     public function executeQuery($query, array $options = []): array
     {
-        return $this->mediaTypeAPI->getMediaItems($query, $options);
+        return $this->getMediaTypeAPI()->getMediaItems($query, $options);
     }
 
     public function executeQueryIDs($query): array

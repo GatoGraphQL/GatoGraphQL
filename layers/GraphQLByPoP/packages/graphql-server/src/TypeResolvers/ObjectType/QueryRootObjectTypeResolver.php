@@ -16,16 +16,24 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
 {
     use ReservedNameTypeResolverTrait;
 
-    protected RootObjectTypeResolver $rootObjectTypeResolver;
-    protected QueryRootTypeDataLoader $queryRootTypeDataLoader;
+    private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
+    private ?QueryRootTypeDataLoader $queryRootTypeDataLoader = null;
 
-    #[Required]
-    final public function autowireQueryRootObjectTypeResolver(
-        RootObjectTypeResolver $rootObjectTypeResolver,
-        QueryRootTypeDataLoader $queryRootTypeDataLoader,
-    ): void {
+    public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
+    {
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+    }
+    protected function getRootObjectTypeResolver(): RootObjectTypeResolver
+    {
+        return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
+    }
+    public function setQueryRootTypeDataLoader(QueryRootTypeDataLoader $queryRootTypeDataLoader): void
+    {
         $this->queryRootTypeDataLoader = $queryRootTypeDataLoader;
+    }
+    protected function getQueryRootTypeDataLoader(): QueryRootTypeDataLoader
+    {
+        return $this->queryRootTypeDataLoader ??= $this->instanceManager->getInstance(QueryRootTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -35,7 +43,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Query type, starting from which the query is executed', 'graphql-server');
+        return $this->getTranslationAPI()->__('Query type, starting from which the query is executed', 'graphql-server');
     }
 
     public function getID(object $object): string | int | null
@@ -47,7 +55,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->queryRootTypeDataLoader;
+        return $this->getQueryRootTypeDataLoader();
     }
 
     public function isFieldNameConditionSatisfiedForSchema(

@@ -12,18 +12,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected FileUploadPictureMutationResolver $fileUploadPictureMutationResolver;
+    private ?FileUploadPictureMutationResolver $fileUploadPictureMutationResolver = null;
     
-    #[Required]
-    final public function autowireFileUploadPictureMutationResolverBridge(
-        FileUploadPictureMutationResolver $fileUploadPictureMutationResolver,
-    ): void {
+    public function setFileUploadPictureMutationResolver(FileUploadPictureMutationResolver $fileUploadPictureMutationResolver): void
+    {
         $this->fileUploadPictureMutationResolver = $fileUploadPictureMutationResolver;
+    }
+    protected function getFileUploadPictureMutationResolver(): FileUploadPictureMutationResolver
+    {
+        return $this->fileUploadPictureMutationResolver ??= $this->instanceManager->getInstance(FileUploadPictureMutationResolver::class);
     }
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->fileUploadPictureMutationResolver;
+        return $this->getFileUploadPictureMutationResolver();
     }
     protected function onlyExecuteWhenDoingPost(): bool
     {

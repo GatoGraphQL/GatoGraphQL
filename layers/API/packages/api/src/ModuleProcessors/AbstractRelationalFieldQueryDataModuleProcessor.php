@@ -62,25 +62,25 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     {
         $conditionFieldAlias = null;
         // Convert the field into its "not is null" version
-        if ($fieldAlias = $this->fieldQueryInterpreter->getFieldAlias($field)) {
+        if ($fieldAlias = $this->getFieldQueryInterpreter()->getFieldAlias($field)) {
             $conditionFieldAlias = 'not-isnull-' . $fieldAlias;
         }
-        return $this->fieldQueryInterpreter->getField(
+        return $this->getFieldQueryInterpreter()->getField(
             'not',
             [
-                'value' => $this->fieldQueryInterpreter->getField(
+                'value' => $this->getFieldQueryInterpreter()->getField(
                     'isNull',
                     [
-                        'value' => $this->fieldQueryInterpreter->composeField(
-                            $this->fieldQueryInterpreter->getFieldName($field),
-                            $this->fieldQueryInterpreter->getFieldArgs($field) ?? QueryHelpers::getEmptyFieldArgs()
+                        'value' => $this->getFieldQueryInterpreter()->composeField(
+                            $this->getFieldQueryInterpreter()->getFieldName($field),
+                            $this->getFieldQueryInterpreter()->getFieldArgs($field) ?? QueryHelpers::getEmptyFieldArgs()
                         ),
                     ]
                 ),
             ],
             $conditionFieldAlias,
             false,
-            $this->fieldQueryInterpreter->getDirectives($field)
+            $this->getFieldQueryInterpreter()->getDirectives($field)
         );
     }
 
@@ -91,7 +91,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         return array_filter(
             $this->getPropertyFields($module),
             function ($field) {
-                return !$this->fieldQueryInterpreter->isSkipOuputIfNullField($field);
+                return !$this->getFieldQueryInterpreter()->isSkipOuputIfNullField($field);
             }
         );
     }
@@ -107,7 +107,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         $fieldNestedFields = array_filter(
             $this->getFieldsWithNestedSubfields($module),
             function ($field) {
-                return !$this->fieldQueryInterpreter->isSkipOuputIfNullField($field);
+                return !$this->getFieldQueryInterpreter()->isSkipOuputIfNullField($field);
             },
             ARRAY_FILTER_USE_KEY
         );
@@ -133,13 +133,13 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         $propertyFields = array_filter(
             $this->getPropertyFields($module),
             function ($field) {
-                return $this->fieldQueryInterpreter->isSkipOuputIfNullField($field);
+                return $this->getFieldQueryInterpreter()->isSkipOuputIfNullField($field);
             }
         );
         $relationalFields = array_keys(array_filter(
             $this->getFieldsWithNestedSubfields($module),
             function ($field) {
-                return $this->fieldQueryInterpreter->isSkipOuputIfNullField($field);
+                return $this->getFieldQueryInterpreter()->isSkipOuputIfNullField($field);
             },
             ARRAY_FILTER_USE_KEY
         ));
@@ -151,7 +151,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         // Create a "virtual" module with the fields corresponding to the next level module
         foreach ($fields as $field) {
             $conditionField = $this->getNotIsEmptyConditionField($field);
-            $conditionalField = $this->fieldQueryInterpreter->removeSkipOuputIfNullFromField($field);
+            $conditionalField = $this->getFieldQueryInterpreter()->removeSkipOuputIfNullFromField($field);
             $ret[$conditionField][] = [
                 $module[0],
                 $module[1],
@@ -170,14 +170,14 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         $fieldNestedFields = array_filter(
             $this->getFieldsWithNestedSubfields($module),
             function ($field) {
-                return $this->fieldQueryInterpreter->isSkipOuputIfNullField($field);
+                return $this->getFieldQueryInterpreter()->isSkipOuputIfNullField($field);
             },
             ARRAY_FILTER_USE_KEY
         );
 
         foreach ($fieldNestedFields as $field => $nestedFields) {
             $conditionField = $this->getNotIsEmptyConditionField($field);
-            $conditionalField = $this->fieldQueryInterpreter->removeSkipOuputIfNullFromField($field);
+            $conditionalField = $this->getFieldQueryInterpreter()->removeSkipOuputIfNullFromField($field);
             $ret[$conditionField][$conditionalField] = array(
                 [
                     $module[0],

@@ -11,13 +11,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
-    protected GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader;
+    private ?GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader = null;
 
-    #[Required]
-    final public function autowireGenericCustomPostObjectTypeResolver(
-        GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader,
-    ): void {
+    public function setGenericCustomPostTypeDataLoader(GenericCustomPostTypeDataLoader $genericCustomPostTypeDataLoader): void
+    {
         $this->genericCustomPostTypeDataLoader = $genericCustomPostTypeDataLoader;
+    }
+    protected function getGenericCustomPostTypeDataLoader(): GenericCustomPostTypeDataLoader
+    {
+        return $this->genericCustomPostTypeDataLoader ??= $this->instanceManager->getInstance(GenericCustomPostTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -27,11 +29,11 @@ class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeRe
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Any custom post, with or without its own type for the schema', 'customposts');
+        return $this->getTranslationAPI()->__('Any custom post, with or without its own type for the schema', 'customposts');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->genericCustomPostTypeDataLoader;
+        return $this->getGenericCustomPostTypeDataLoader();
     }
 }

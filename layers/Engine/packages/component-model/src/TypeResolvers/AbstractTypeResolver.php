@@ -5,46 +5,58 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractTypeResolver implements TypeResolverInterface
 {
+    use BasicServiceTrait;
+
     /**
      * @var array<string, array>
      */
     protected ?array $schemaDefinition = null;
-    protected TranslationAPIInterface $translationAPI;
-    protected HooksAPIInterface $hooksAPI;
-    protected InstanceManagerInterface $instanceManager;
-    protected SchemaNamespacingServiceInterface $schemaNamespacingService;
-    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
-    protected AttachableExtensionManagerInterface $attachableExtensionManager;
 
-    #[Required]
-    final public function autowireAbstractTypeResolver(TranslationAPIInterface $translationAPI, HooksAPIInterface $hooksAPI, InstanceManagerInterface $instanceManager, SchemaNamespacingServiceInterface $schemaNamespacingService, SchemaDefinitionServiceInterface $schemaDefinitionService, AttachableExtensionManagerInterface $attachableExtensionManager): void
+    private ?SchemaNamespacingServiceInterface $schemaNamespacingService = null;
+    private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
+    private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
+
+    public function setSchemaNamespacingService(SchemaNamespacingServiceInterface $schemaNamespacingService): void
     {
-        $this->translationAPI = $translationAPI;
-        $this->hooksAPI = $hooksAPI;
-        $this->instanceManager = $instanceManager;
         $this->schemaNamespacingService = $schemaNamespacingService;
+    }
+    protected function getSchemaNamespacingService(): SchemaNamespacingServiceInterface
+    {
+        return $this->schemaNamespacingService ??= $this->instanceManager->getInstance(SchemaNamespacingServiceInterface::class);
+    }
+    public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
+    {
         $this->schemaDefinitionService = $schemaDefinitionService;
+    }
+    protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
+    {
+        return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
+    }
+    public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
+    {
         $this->attachableExtensionManager = $attachableExtensionManager;
+    }
+    protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
+    {
+        return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
     }
 
     public function getNamespace(): string
     {
-        return $this->schemaNamespacingService->getSchemaNamespace(get_called_class());
+        return $this->getSchemaNamespacingService()->getSchemaNamespace(get_called_class());
     }
 
     final public function getNamespacedTypeName(): string
     {
-        return $this->schemaNamespacingService->getSchemaNamespacedName(
+        return $this->getSchemaNamespacingService()->getSchemaNamespacedName(
             $this->getNamespace(),
             $this->getTypeName()
         );

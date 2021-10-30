@@ -4,20 +4,25 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\TypeAPIs;
 
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
 {
-    protected HooksAPIInterface $hooksAPI;
-    protected CMSHelperServiceInterface $cmsHelperService;
+    use BasicServiceTrait;
 
-    #[Required]
-    final public function autowireAbstractUserTypeAPI(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService): void
+    private ?CMSHelperServiceInterface $cmsHelperService = null;
+
+    public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
     {
-        $this->hooksAPI = $hooksAPI;
         $this->cmsHelperService = $cmsHelperService;
+    }
+    protected function getCMSHelperService(): CMSHelperServiceInterface
+    {
+        return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
     }
 
     public function getUserURLPath(string | int | object $userObjectOrID): ?string
@@ -28,6 +33,6 @@ abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
         }
 
         /** @var string */
-        return $this->cmsHelperService->getLocalURLPath($userURL);
+        return $this->getCmsHelperService()->getLocalURLPath($userURL);
     }
 }

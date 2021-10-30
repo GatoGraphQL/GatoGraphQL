@@ -10,20 +10,22 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MenuTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    protected MenuTypeAPIInterface $menuTypeAPI;
+    private ?MenuTypeAPIInterface $menuTypeAPI = null;
 
-    #[Required]
-    final public function autowireMenuTypeDataLoader(
-        MenuTypeAPIInterface $menuTypeAPI,
-    ): void {
+    public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
+    {
         $this->menuTypeAPI = $menuTypeAPI;
+    }
+    protected function getMenuTypeAPI(): MenuTypeAPIInterface
+    {
+        return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
     }
 
     public function getObjects(array $ids): array
     {
         // If the menu doesn't exist, remove the `null` entry
         return array_filter(array_map(
-            fn (string | int $id) => $this->menuTypeAPI->getMenu($id),
+            fn (string | int $id) => $this->getMenuTypeAPI()->getMenu($id),
             $ids
         ));
     }

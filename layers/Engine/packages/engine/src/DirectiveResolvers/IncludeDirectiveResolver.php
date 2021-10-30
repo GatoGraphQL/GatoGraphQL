@@ -15,13 +15,15 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
     use FilterIDsSatisfyingConditionDirectiveResolverTrait;
 
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireIncludeDirectiveResolver(
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-    ): void {
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
     public function getDirectiveName(): string
@@ -66,20 +68,20 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->translationAPI->__('Include the field value in the output only if the argument \'if\' evals to `true`', 'api');
+        return $this->getTranslationAPI()->__('Include the field value in the output only if the argument \'if\' evals to `true`', 'api');
     }
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            'if' => $this->booleanScalarTypeResolver,
+            'if' => $this->getBooleanScalarTypeResolver(),
         ];
     }
 
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'if' => $this->translationAPI->__('Argument that must evaluate to `true` to include the field value in the output', 'api'),
+            'if' => $this->getTranslationAPI()->__('Argument that must evaluate to `true` to include the field value in the output', 'api'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }

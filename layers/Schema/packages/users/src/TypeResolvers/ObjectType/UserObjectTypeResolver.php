@@ -12,16 +12,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected UserTypeAPIInterface $userTypeAPI;
-    protected UserTypeDataLoader $userTypeDataLoader;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
+    private ?UserTypeDataLoader $userTypeDataLoader = null;
 
-    #[Required]
-    final public function autowireUserObjectTypeResolver(
-        UserTypeAPIInterface $userTypeAPI,
-        UserTypeDataLoader $userTypeDataLoader,
-    ): void {
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
         $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+    }
+    public function setUserTypeDataLoader(UserTypeDataLoader $userTypeDataLoader): void
+    {
         $this->userTypeDataLoader = $userTypeDataLoader;
+    }
+    protected function getUserTypeDataLoader(): UserTypeDataLoader
+    {
+        return $this->userTypeDataLoader ??= $this->instanceManager->getInstance(UserTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -31,17 +39,17 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Representation of a user', 'users');
+        return $this->getTranslationAPI()->__('Representation of a user', 'users');
     }
 
     public function getID(object $object): string | int | null
     {
         $user = $object;
-        return $this->userTypeAPI->getUserId($user);
+        return $this->getUserTypeAPI()->getUserId($user);
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->userTypeDataLoader;
+        return $this->getUserTypeDataLoader();
     }
 }

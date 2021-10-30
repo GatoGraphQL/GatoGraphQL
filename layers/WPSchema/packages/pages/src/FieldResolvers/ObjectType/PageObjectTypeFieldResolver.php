@@ -15,13 +15,15 @@ use WP_Post;
 
 class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected IntScalarTypeResolver $intScalarTypeResolver;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowirePageObjectTypeFieldResolver(
-        IntScalarTypeResolver $intScalarTypeResolver,
-    ): void {
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -41,7 +43,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'menuOrder' => $this->translationAPI->__('Menu order', 'pages'),
+            'menuOrder' => $this->getTranslationAPI()->__('Menu order', 'pages'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -49,7 +51,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'menuOrder' => $this->intScalarTypeResolver,
+            'menuOrder' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

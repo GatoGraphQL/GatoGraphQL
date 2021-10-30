@@ -10,19 +10,21 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    protected Root $root;
+    private ?Root $root = null;
 
-    #[Required]
-    final public function autowireRootTypeDataLoader(
-        Root $root,
-    ): void {
+    public function setRoot(Root $root): void
+    {
         $this->root = $root;
+    }
+    protected function getRoot(): Root
+    {
+        return $this->root ??= $this->instanceManager->getInstance(Root::class);
     }
 
     public function getObjects(array $ids): array
     {
         return [
-            $this->root,
+            $this->getRoot(),
         ];
     }
 }

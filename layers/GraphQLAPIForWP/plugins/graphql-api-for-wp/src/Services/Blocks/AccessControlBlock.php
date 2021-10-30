@@ -18,13 +18,16 @@ class AccessControlBlock extends AbstractControlBlock
     use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_SCHEMA_MODE = 'schemaMode';
-    protected AccessControlBlockCategory $accessControlBlockCategory;
 
-    #[Required]
-    final public function autowireAccessControlBlock(
-        AccessControlBlockCategory $accessControlBlockCategory,
-    ): void {
+    private ?AccessControlBlockCategory $accessControlBlockCategory = null;
+
+    public function setAccessControlBlockCategory(AccessControlBlockCategory $accessControlBlockCategory): void
+    {
         $this->accessControlBlockCategory = $accessControlBlockCategory;
+    }
+    protected function getAccessControlBlockCategory(): AccessControlBlockCategory
+    {
+        return $this->accessControlBlockCategory ??= $this->instanceManager->getInstance(AccessControlBlockCategory::class);
     }
 
     protected function getBlockName(): string
@@ -34,7 +37,7 @@ class AccessControlBlock extends AbstractControlBlock
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->accessControlBlockCategory;
+        return $this->getAccessControlBlockCategory();
     }
 
     protected function registerEditorCSS(): bool

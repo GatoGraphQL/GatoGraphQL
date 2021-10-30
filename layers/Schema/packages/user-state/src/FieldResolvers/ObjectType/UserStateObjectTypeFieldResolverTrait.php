@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\UserState\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
@@ -12,14 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait UserStateObjectTypeFieldResolverTrait
 {
-    protected TranslationAPIInterface $translationAPI;
-
-    #[Required]
-    public function autowireUserStateObjectTypeFieldResolverTrait(
-        TranslationAPIInterface $translationAPI,
-    ): void {
-        $this->translationAPI = $translationAPI;
-    }
+    // use BasicServiceTrait;
 
     protected function getValidationCheckpointSets(
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -53,7 +47,7 @@ trait UserStateObjectTypeFieldResolverTrait
             return $errorMessage;
         }
         return sprintf(
-            $this->translationAPI->__('You must be logged in to access field \'%s\' for type \'%s\'', ''),
+            $this->getTranslationAPI()->__('You must be logged in to access field \'%s\' for type \'%s\'', ''),
             $fieldName,
             $objectTypeResolver->getMaybeNamespacedTypeName()
         );

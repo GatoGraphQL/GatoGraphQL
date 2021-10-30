@@ -9,3 +9,6 @@ services:
 
     PoP\Root\Container\HybridCompilerPasses\:
         resource: '../src/Container/HybridCompilerPasses/*'
+
+    PoP\Root\Instances\InstanceManagerInterface:
+        class: \PoP\Root\Instances\SystemInstanceManager

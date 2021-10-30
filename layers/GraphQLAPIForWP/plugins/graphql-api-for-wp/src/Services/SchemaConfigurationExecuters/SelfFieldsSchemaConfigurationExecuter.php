@@ -13,13 +13,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SelfFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    protected SchemaConfigSelfFieldsBlock $schemaConfigSelfFieldsBlock;
+    private ?SchemaConfigSelfFieldsBlock $schemaConfigSelfFieldsBlock = null;
 
-    #[Required]
-    final public function autowireNamespacingSchemaConfigurationExecuter(
-        SchemaConfigSelfFieldsBlock $schemaConfigSelfFieldsBlock,
-    ): void {
+    public function setSchemaConfigSelfFieldsBlock(SchemaConfigSelfFieldsBlock $schemaConfigSelfFieldsBlock): void
+    {
         $this->schemaConfigSelfFieldsBlock = $schemaConfigSelfFieldsBlock;
+    }
+    protected function getSchemaConfigSelfFieldsBlock(): SchemaConfigSelfFieldsBlock
+    {
+        return $this->schemaConfigSelfFieldsBlock ??= $this->instanceManager->getInstance(SchemaConfigSelfFieldsBlock::class);
     }
 
     public function getEnablingModule(): ?string
@@ -29,7 +31,7 @@ class SelfFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisable
 
     protected function getBlock(): BlockInterface
     {
-        return $this->schemaConfigSelfFieldsBlock;
+        return $this->getSchemaConfigSelfFieldsBlock();
     }
 
     public function getHookComponentConfigurationClass(): string

@@ -15,19 +15,33 @@ use WP_Post;
 
 class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected CMSHelperServiceInterface $cmsHelperService;
-    protected DateFormatterInterface $dateFormatter;
-    protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
+    private ?CMSHelperServiceInterface $cmsHelperService = null;
+    private ?DateFormatterInterface $dateFormatter = null;
+    private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
 
-    #[Required]
-    final public function autowireMediaObjectTypeFieldResolver(
-        CMSHelperServiceInterface $cmsHelperService,
-        DateFormatterInterface $dateFormatter,
-        QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
-    ): void {
+    public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
+    {
         $this->cmsHelperService = $cmsHelperService;
+    }
+    protected function getCMSHelperService(): CMSHelperServiceInterface
+    {
+        return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
+    }
+    public function setDateFormatter(DateFormatterInterface $dateFormatter): void
+    {
         $this->dateFormatter = $dateFormatter;
+    }
+    protected function getDateFormatter(): DateFormatterInterface
+    {
+        return $this->dateFormatter ??= $this->instanceManager->getInstance(DateFormatterInterface::class);
+    }
+    public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
+    {
         $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
+    }
+    protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
+    {
+        return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -40,7 +54,7 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->queryableInterfaceTypeFieldResolver,
+            $this->getQueryableInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -56,9 +70,9 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->translationAPI->__('Media element URL', 'pop-media'),
-            'urlPath' => $this->translationAPI->__('Media element URL path', 'pop-media'),
-            'slug' => $this->translationAPI->__('Media element slug', 'pop-media'),
+            'url' => $this->getTranslationAPI()->__('Media element URL', 'pop-media'),
+            'urlPath' => $this->getTranslationAPI()->__('Media element URL path', 'pop-media'),
+            'slug' => $this->getTranslationAPI()->__('Media element slug', 'pop-media'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -88,7 +102,7 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     return $url;
                 }
                 /** @var string */
-                return $this->cmsHelperService->getLocalURLPath($url);
+                return $this->getCmsHelperService()->getLocalURLPath($url);
             case 'slug':
                 return $mediaItem->post_name;
         }

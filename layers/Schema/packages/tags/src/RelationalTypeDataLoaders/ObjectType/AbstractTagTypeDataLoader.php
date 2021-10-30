@@ -20,7 +20,7 @@ abstract class AbstractTagTypeDataLoader extends AbstractObjectTypeQueryableData
 
     protected function getOrderbyDefault()
     {
-        return $this->nameResolver->getName('popcms:dbcolumn:orderby:tags:count');
+        return $this->getNameResolver()->getName('popcms:dbcolumn:orderby:tags:count');
     }
 
     protected function getOrderDefault()

@@ -10,18 +10,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateStanceMutationResolverBridge
 {
-    protected CreateOrUpdateStanceMutationResolver $createOrUpdateStanceMutationResolver;
+    private ?CreateOrUpdateStanceMutationResolver $createOrUpdateStanceMutationResolver = null;
 
-    #[Required]
-    final public function autowireCreateOrUpdateStanceMutationResolverBridge(
-        CreateOrUpdateStanceMutationResolver $createOrUpdateStanceMutationResolver,
-    ): void {
+    public function setCreateOrUpdateStanceMutationResolver(CreateOrUpdateStanceMutationResolver $createOrUpdateStanceMutationResolver): void
+    {
         $this->createOrUpdateStanceMutationResolver = $createOrUpdateStanceMutationResolver;
+    }
+    protected function getCreateOrUpdateStanceMutationResolver(): CreateOrUpdateStanceMutationResolver
+    {
+        return $this->createOrUpdateStanceMutationResolver ??= $this->instanceManager->getInstance(CreateOrUpdateStanceMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->createOrUpdateStanceMutationResolver;
+        return $this->getCreateOrUpdateStanceMutationResolver();
     }
 
     protected function supportsTitle()
@@ -33,7 +35,7 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
     {
         $form_data = parent::getFormData();
 
-        $target = $this->moduleProcessorManager->getProcessor([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, \PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_STANCETARGET])->getValue([\PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, \PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_STANCETARGET]);
+        $target = $this->getModuleProcessorManager()->getProcessor([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, \PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_STANCETARGET])->getValue([\PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, \PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_STANCETARGET]);
         $form_data['stancetarget'] = $target;
 
         return $form_data;
@@ -79,9 +81,9 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
         $feedback_title = \PoP_UserStance_PostNameUtils::getNameUc();
         if ($referenced) {
             return sprintf(
-                $this->translationAPI->__('%1$s after reading “%2$s”', 'pop-userstance'),
+                $this->getTranslationAPI()->__('%1$s after reading “%2$s”', 'pop-userstance'),
                 $feedback_title,
-                $this->customPostTypeAPI->getTitle($referenced)
+                $this->getCustomPostTypeAPI()->getTitle($referenced)
             );
         }
 

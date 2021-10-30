@@ -22,16 +22,25 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     public const MODULE_DATALOAD_RELATIONALFIELDS_USERCOUNT = 'dataload-relationalfields-usercount';
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST = 'dataload-relationalfields-adminuserlist';
     public const MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERCOUNT = 'dataload-relationalfields-adminusercount';
-    protected UserObjectTypeResolver $userObjectTypeResolver;
-    protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
-    #[Required]
-    final public function autowireFieldDataloadModuleProcessor(
-        UserObjectTypeResolver $userObjectTypeResolver,
-        ListQueryInputOutputHandler $listQueryInputOutputHandler,
-    ): void {
+    private ?UserObjectTypeResolver $userObjectTypeResolver = null;
+    private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
+
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
+    {
         $this->userObjectTypeResolver = $userObjectTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+    }
+    public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
+    {
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
+    }
+    protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
+    {
+        return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
     public function getModulesToProcess(): array
@@ -61,7 +70,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
             case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEUSER:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST:
-                return $this->userObjectTypeResolver;
+                return $this->getUserObjectTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);
@@ -72,7 +81,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST:
-                return $this->listQueryInputOutputHandler;
+                return $this->getListQueryInputOutputHandler();
         }
 
         return parent::getQueryInputOutputHandler($module);

@@ -15,7 +15,7 @@ class InstallSystemMutationResolver extends AbstractMutationResolver
         update_option('PoP:version', ApplicationInfoFacade::getInstance()->getVersion());
 
         // Execute install everywhere
-        $this->hooksAPI->doAction('PoP:system-install');
+        $this->getHooksAPI()->doAction('PoP:system-install');
         return true;
     }
 }

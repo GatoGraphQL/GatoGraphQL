@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\State\ApplicationState;

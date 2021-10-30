@@ -24,16 +24,24 @@ class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcesso
 
     public const MODULE_FILTERINPUT_CUSTOMPOSTDATES = 'filterinput-custompostdates';
 
-    protected FormInputHelperServiceInterface $formInputHelperService;
-    protected DateScalarTypeResolver $dateScalarTypeResolver;
+    private ?FormInputHelperServiceInterface $formInputHelperService = null;
+    private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireFilterMultipleInputModuleProcessor(
-        FormInputHelperServiceInterface $formInputHelperService,
-        DateScalarTypeResolver $dateScalarTypeResolver,
-    ): void {
+    public function setFormInputHelperService(FormInputHelperServiceInterface $formInputHelperService): void
+    {
         $this->formInputHelperService = $formInputHelperService;
+    }
+    protected function getFormInputHelperService(): FormInputHelperServiceInterface
+    {
+        return $this->formInputHelperService ??= $this->instanceManager->getInstance(FormInputHelperServiceInterface::class);
+    }
+    public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    {
         $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+    }
+    protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    {
+        return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
     }
 
     public function getModulesToProcess(): array
@@ -81,7 +89,7 @@ class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcesso
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => $this->dateScalarTypeResolver,
+            self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => $this->getDateScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -93,9 +101,9 @@ class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcesso
                 $name = $this->getName($module);
                 $subnames = $this->getInputOptions($module)['subnames'];
                 return sprintf(
-                    $this->translationAPI->__('Search for posts between the \'from\' and \'to\' dates. Provide dates through params \'%s\' and \'%s\'', 'pop-posts'),
-                    $this->formInputHelperService->getMultipleInputName($name, $subnames[0]),
-                    $this->formInputHelperService->getMultipleInputName($name, $subnames[1])
+                    $this->getTranslationAPI()->__('Search for posts between the \'from\' and \'to\' dates. Provide dates through params \'%s\' and \'%s\'', 'pop-posts'),
+                    $this->getFormInputHelperService()->getMultipleInputName($name, $subnames[0]),
+                    $this->getFormInputHelperService()->getMultipleInputName($name, $subnames[1])
                 );
         }
         return null;

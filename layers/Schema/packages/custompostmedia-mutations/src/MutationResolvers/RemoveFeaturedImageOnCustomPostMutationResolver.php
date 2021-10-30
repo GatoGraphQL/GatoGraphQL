@@ -13,19 +13,21 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    protected CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI;
+    private ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
 
-    #[Required]
-    final public function autowireRemoveFeaturedImageOnCustomPostMutationResolver(
-        CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI,
-    ): void {
+    public function setCustomPostMediaTypeMutationAPI(CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI): void
+    {
         $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
+    }
+    protected function getCustomPostMediaTypeMutationAPI(): CustomPostMediaTypeMutationAPIInterface
+    {
+        return $this->customPostMediaTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
     }
 
     public function executeMutation(array $form_data): mixed
     {
         $customPostID = $form_data[MutationInputProperties::CUSTOMPOST_ID];
-        $this->customPostMediaTypeMutationAPI->removeFeaturedImage($customPostID);
+        $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);
         return $customPostID;
     }
 
@@ -40,7 +42,7 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
         }
 
         if (!$form_data[MutationInputProperties::CUSTOMPOST_ID]) {
-            $errors[] = $this->translationAPI->__('The custom post ID is missing.', 'custompostmedia-mutations');
+            $errors[] = $this->getTranslationAPI()->__('The custom post ID is missing.', 'custompostmedia-mutations');
         }
         return $errors;
     }

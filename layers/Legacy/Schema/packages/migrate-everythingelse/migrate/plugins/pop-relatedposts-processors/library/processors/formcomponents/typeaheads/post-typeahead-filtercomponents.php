@@ -14,13 +14,15 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
 
     public const MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES = 'filtercomponent-selectabletypeahead-references';
 
-    protected IDScalarTypeResolver $idScalarTypeResolver;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowirePoP_Module_Processor_PostSelectableTypeaheadFilterComponents(
-        IDScalarTypeResolver $idScalarTypeResolver,
-    ): void {
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
     public function getModulesToProcess(): array

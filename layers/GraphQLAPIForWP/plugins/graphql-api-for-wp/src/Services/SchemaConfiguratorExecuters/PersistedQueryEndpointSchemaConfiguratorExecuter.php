@@ -11,25 +11,33 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class PersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaConfiguratorExecuter
 {
-    protected PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator;
-    protected GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType;
+    private ?PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator = null;
+    private ?GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType = null;
 
-    #[Required]
-    final public function autowirePersistedQueryEndpointSchemaConfiguratorExecuter(
-        PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator,
-        GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType,
-    ): void {
+    public function setPersistedQueryEndpointSchemaConfigurator(PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator): void
+    {
         $this->persistedQueryEndpointSchemaConfigurator = $persistedQueryEndpointSchemaConfigurator;
+    }
+    protected function getPersistedQueryEndpointSchemaConfigurator(): PersistedQueryEndpointSchemaConfigurator
+    {
+        return $this->persistedQueryEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(PersistedQueryEndpointSchemaConfigurator::class);
+    }
+    public function setGraphQLPersistedQueryEndpointCustomPostType(GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType): void
+    {
         $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
+    }
+    protected function getGraphQLPersistedQueryEndpointCustomPostType(): GraphQLPersistedQueryEndpointCustomPostType
+    {
+        return $this->graphQLPersistedQueryEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
     }
 
     protected function getCustomPostType(): string
     {
-        return $this->graphQLPersistedQueryEndpointCustomPostType->getCustomPostType();
+        return $this->getGraphQLPersistedQueryEndpointCustomPostType()->getCustomPostType();
     }
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
     {
-        return $this->persistedQueryEndpointSchemaConfigurator;
+        return $this->getPersistedQueryEndpointSchemaConfigurator();
     }
 }

@@ -15,13 +15,15 @@ use WP_Post;
 
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireCustomPostObjectTypeFieldResolver(
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-    ): void {
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -41,7 +43,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'isSticky' => $this->translationAPI->__('Determines whether a custom post is sticky', 'customposts'),
+            'isSticky' => $this->getTranslationAPI()->__('Determines whether a custom post is sticky', 'customposts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -49,7 +51,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'isSticky' => $this->booleanScalarTypeResolver,
+            'isSticky' => $this->getBooleanScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

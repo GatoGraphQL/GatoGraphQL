@@ -7,6 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Security;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface;
 use InvalidArgumentException;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 /**
@@ -14,12 +15,17 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class UserAuthorization implements UserAuthorizationInterface
 {
-    protected UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry;
+    use BasicServiceTrait;
 
-    #[Required]
-    final public function autowireUserAuthorization(UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry): void
+    private ?UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry = null;
+
+    public function setUserAuthorizationSchemeRegistry(UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry): void
     {
         $this->userAuthorizationSchemeRegistry = $userAuthorizationSchemeRegistry;
+    }
+    protected function getUserAuthorizationSchemeRegistry(): UserAuthorizationSchemeRegistryInterface
+    {
+        return $this->userAuthorizationSchemeRegistry ??= $this->instanceManager->getInstance(UserAuthorizationSchemeRegistryInterface::class);
     }
     /**
      * The capability needed to access the schema editor (i.e. access clients GraphiQL/Voyager
@@ -32,7 +38,7 @@ class UserAuthorization implements UserAuthorizationInterface
         if ($accessScheme = ComponentConfiguration::getEditingAccessScheme()) {
             // If the capability does not exist, catch the exception
             try {
-                $accessSchemeCapability = $this->userAuthorizationSchemeRegistry->getUserAuthorizationScheme($accessScheme)->getSchemaEditorAccessCapability();
+                $accessSchemeCapability = $this->getUserAuthorizationSchemeRegistry()->getUserAuthorizationScheme($accessScheme)->getSchemaEditorAccessCapability();
             } catch (InvalidArgumentException) {
             }
         }
@@ -40,7 +46,7 @@ class UserAuthorization implements UserAuthorizationInterface
         // Return the default access
         if ($accessSchemeCapability === null) {
             // This function also throws an exception. Let it bubble up - that's an application error
-            $defaultUserAuthorizationScheme = $this->userAuthorizationSchemeRegistry->getDefaultUserAuthorizationScheme();
+            $defaultUserAuthorizationScheme = $this->getUserAuthorizationSchemeRegistry()->getDefaultUserAuthorizationScheme();
             return $defaultUserAuthorizationScheme->getSchemaEditorAccessCapability();
         }
         return $accessSchemeCapability;

@@ -10,21 +10,23 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GenerateSystemMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
-    protected GenerateSystemMutationResolver $generateSystemMutationResolver;
+    private ?GenerateSystemMutationResolver $generateSystemMutationResolver = null;
 
-    #[Required]
-    final public function autowireGenerateSystemMutationResolverBridge(
-        GenerateSystemMutationResolver $generateSystemMutationResolver,
-    ): void {
+    public function setGenerateSystemMutationResolver(GenerateSystemMutationResolver $generateSystemMutationResolver): void
+    {
         $this->generateSystemMutationResolver = $generateSystemMutationResolver;
+    }
+    protected function getGenerateSystemMutationResolver(): GenerateSystemMutationResolver
+    {
+        return $this->generateSystemMutationResolver ??= $this->instanceManager->getInstance(GenerateSystemMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->generateSystemMutationResolver;
+        return $this->getGenerateSystemMutationResolver();
     }
     public function getSuccessString(string | int $result_id): ?string
     {
-        return $this->translationAPI->__('System action "generate" executed successfully.', 'pop-system');
+        return $this->getTranslationAPI()->__('System action "generate" executed successfully.', 'pop-system');
     }
 }

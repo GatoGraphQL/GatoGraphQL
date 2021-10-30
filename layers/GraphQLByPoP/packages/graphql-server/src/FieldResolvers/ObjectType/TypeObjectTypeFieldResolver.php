@@ -29,34 +29,78 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
-    protected FieldObjectTypeResolver $fieldObjectTypeResolver;
-    protected TypeObjectTypeResolver $typeObjectTypeResolver;
-    protected EnumValueObjectTypeResolver $enumValueObjectTypeResolver;
-    protected InputValueObjectTypeResolver $inputValueObjectTypeResolver;
-    protected TypeKindEnumTypeResolver $typeKindEnumTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?FieldObjectTypeResolver $fieldObjectTypeResolver = null;
+    private ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
+    private ?EnumValueObjectTypeResolver $enumValueObjectTypeResolver = null;
+    private ?InputValueObjectTypeResolver $inputValueObjectTypeResolver = null;
+    private ?TypeKindEnumTypeResolver $typeKindEnumTypeResolver = null;
 
-    #[Required]
-    final public function autowireTypeObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
-        FieldObjectTypeResolver $fieldObjectTypeResolver,
-        TypeObjectTypeResolver $typeObjectTypeResolver,
-        EnumValueObjectTypeResolver $enumValueObjectTypeResolver,
-        InputValueObjectTypeResolver $inputValueObjectTypeResolver,
-        TypeKindEnumTypeResolver $typeKindEnumTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
         $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+    }
+    public function setFieldObjectTypeResolver(FieldObjectTypeResolver $fieldObjectTypeResolver): void
+    {
         $this->fieldObjectTypeResolver = $fieldObjectTypeResolver;
+    }
+    protected function getFieldObjectTypeResolver(): FieldObjectTypeResolver
+    {
+        return $this->fieldObjectTypeResolver ??= $this->instanceManager->getInstance(FieldObjectTypeResolver::class);
+    }
+    public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
+    {
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
+    }
+    protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
+    {
+        return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
+    }
+    public function setEnumValueObjectTypeResolver(EnumValueObjectTypeResolver $enumValueObjectTypeResolver): void
+    {
         $this->enumValueObjectTypeResolver = $enumValueObjectTypeResolver;
+    }
+    protected function getEnumValueObjectTypeResolver(): EnumValueObjectTypeResolver
+    {
+        return $this->enumValueObjectTypeResolver ??= $this->instanceManager->getInstance(EnumValueObjectTypeResolver::class);
+    }
+    public function setInputValueObjectTypeResolver(InputValueObjectTypeResolver $inputValueObjectTypeResolver): void
+    {
         $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
+    }
+    protected function getInputValueObjectTypeResolver(): InputValueObjectTypeResolver
+    {
+        return $this->inputValueObjectTypeResolver ??= $this->instanceManager->getInstance(InputValueObjectTypeResolver::class);
+    }
+    public function setTypeKindEnumTypeResolver(TypeKindEnumTypeResolver $typeKindEnumTypeResolver): void
+    {
         $this->typeKindEnumTypeResolver = $typeKindEnumTypeResolver;
+    }
+    protected function getTypeKindEnumTypeResolver(): TypeKindEnumTypeResolver
+    {
+        return $this->typeKindEnumTypeResolver ??= $this->instanceManager->getInstance(TypeKindEnumTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -89,21 +133,21 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'name',
             'description',
             'specifiedByURL'
-                => $this->stringScalarTypeResolver,
+                => $this->getStringScalarTypeResolver(),
             'extensions'
-                => $this->jsonObjectScalarTypeResolver,
+                => $this->getJsonObjectScalarTypeResolver(),
             'fields'
-                => $this->fieldObjectTypeResolver,
+                => $this->getFieldObjectTypeResolver(),
             'interfaces',
             'possibleTypes',
             'ofType'
-                => $this->typeObjectTypeResolver,
+                => $this->getTypeObjectTypeResolver(),
             'enumValues'
-                => $this->enumValueObjectTypeResolver,
+                => $this->getEnumValueObjectTypeResolver(),
             'inputFields'
-                => $this->inputValueObjectTypeResolver,
+                => $this->getInputValueObjectTypeResolver(),
             'kind'
-                => $this->typeKindEnumTypeResolver,
+                => $this->getTypeKindEnumTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -128,17 +172,17 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'kind' => $this->translationAPI->__('Type\'s kind as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACqBBCvBAtrC)', 'graphql-server'),
-            'name' => $this->translationAPI->__('Type\'s name as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACvBBCyBH6rd)', 'graphql-server'),
-            'description' => $this->translationAPI->__('Type\'s description as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACyBIC1BHnjL)', 'graphql-server'),
-            'fields' => $this->translationAPI->__('Type\'s fields (available for Object and Interface types only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLAC3BBCnCA8pY)', 'graphql-server'),
-            'interfaces' => $this->translationAPI->__('Type\'s interfaces (available for Object type only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACpCBCxCA7tB)', 'graphql-server'),
-            'possibleTypes' => $this->translationAPI->__('Type\'s possible types (available for Interface and Union types only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACzCBC7CA0vN)', 'graphql-server'),
-            'enumValues' => $this->translationAPI->__('Type\'s enum values (available for Enum type only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLAC9CDD_CAA2lB)', 'graphql-server'),
-            'inputFields' => $this->translationAPI->__('Type\'s input Fields (available for InputObject type only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-HAJbLAuDABCBIu9N)', 'graphql-server'),
-            'ofType' => $this->translationAPI->__('The type of the nested type (available for NonNull and List types only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-HAJbLA4DABCBIu9N)', 'graphql-server'),
-            'specifiedByURL' => $this->translationAPI->__('A scalar specification URL (a String (in the form of a URL) for custom scalars, otherwise must be null) as defined by the GraphQL spec (https://spec.graphql.org/draft/#sel-IAJXNFA0EABABL9N)', 'graphql-server'),
-            'extensions' => $this->translationAPI->__('Custom metadata added to the field (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
+            'kind' => $this->getTranslationAPI()->__('Type\'s kind as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACqBBCvBAtrC)', 'graphql-server'),
+            'name' => $this->getTranslationAPI()->__('Type\'s name as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACvBBCyBH6rd)', 'graphql-server'),
+            'description' => $this->getTranslationAPI()->__('Type\'s description as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACyBIC1BHnjL)', 'graphql-server'),
+            'fields' => $this->getTranslationAPI()->__('Type\'s fields (available for Object and Interface types only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLAC3BBCnCA8pY)', 'graphql-server'),
+            'interfaces' => $this->getTranslationAPI()->__('Type\'s interfaces (available for Object type only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACpCBCxCA7tB)', 'graphql-server'),
+            'possibleTypes' => $this->getTranslationAPI()->__('Type\'s possible types (available for Interface and Union types only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACzCBC7CA0vN)', 'graphql-server'),
+            'enumValues' => $this->getTranslationAPI()->__('Type\'s enum values (available for Enum type only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLAC9CDD_CAA2lB)', 'graphql-server'),
+            'inputFields' => $this->getTranslationAPI()->__('Type\'s input Fields (available for InputObject type only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-HAJbLAuDABCBIu9N)', 'graphql-server'),
+            'ofType' => $this->getTranslationAPI()->__('The type of the nested type (available for NonNull and List types only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-HAJbLA4DABCBIu9N)', 'graphql-server'),
+            'specifiedByURL' => $this->getTranslationAPI()->__('A scalar specification URL (a String (in the form of a URL) for custom scalars, otherwise must be null) as defined by the GraphQL spec (https://spec.graphql.org/draft/#sel-IAJXNFA0EABABL9N)', 'graphql-server'),
+            'extensions' => $this->getTranslationAPI()->__('Custom metadata added to the field (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -148,7 +192,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'fields',
             'enumValues' => [
-                'includeDeprecated' => $this->booleanScalarTypeResolver,
+                'includeDeprecated' => $this->getBooleanScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -157,7 +201,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldArgName) {
-            'includeDeprecated' => $this->translationAPI->__('Include deprecated fields?', 'graphql-server'),
+            'includeDeprecated' => $this->getTranslationAPI()->__('Include deprecated fields?', 'graphql-server'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

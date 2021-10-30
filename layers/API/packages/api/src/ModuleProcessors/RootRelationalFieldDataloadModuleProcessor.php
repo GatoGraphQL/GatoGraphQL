@@ -12,13 +12,16 @@ use Symfony\Contracts\Service\Attribute\Required;
 class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
     public const MODULE_DATALOAD_RELATIONALFIELDS_ROOT = 'dataload-relationalfields-root';
-    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
 
-    #[Required]
-    final public function autowireRootRelationalFieldDataloadModuleProcessor(
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-    ): void {
+    private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
+
+    public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
+    {
         $this->schemaDefinitionService = $schemaDefinitionService;
+    }
+    protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
+    {
+        return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
 
     public function getModulesToProcess(): array
@@ -41,7 +44,7 @@ class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalField
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ROOT:
-                return $this->schemaDefinitionService->getRootObjectTypeResolver();
+                return $this->getSchemaDefinitionService()->getSchemaRootObjectTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);

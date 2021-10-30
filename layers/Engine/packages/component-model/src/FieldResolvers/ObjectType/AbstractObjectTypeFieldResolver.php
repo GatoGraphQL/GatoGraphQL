@@ -26,6 +26,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
@@ -40,6 +41,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver implements ObjectTypeFieldResolverInterface
 {
+    use BasicServiceTrait;
     use AttachableExtensionTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
     // Avoid trait collisions for PHP 7.1
@@ -47,7 +49,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldOrDirectiveArgTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::getTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::processSchemaDefinitionTypeModifiers insteadof FieldOrDirectiveResolverTrait;
-        FieldOrDirectiveSchemaDefinitionResolverTrait::autowireFieldOrDirectiveSchemaDefinitionResolverTrait insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::isDangerouslyDynamicScalarFieldType insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::hasMandatoryDangerouslyDynamicScalarInputType insteadof FieldOrDirectiveResolverTrait;
@@ -78,31 +79,69 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     protected array $interfaceTypeFieldSchemaDefinitionResolverCache = [];
 
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
-    protected NameResolverInterface $nameResolver;
-    protected CMSServiceInterface $cmsService;
-    protected SemverHelperServiceInterface $semverHelperService;
-    protected SchemaDefinitionServiceInterface $schemaDefinitionService;
-    protected EngineInterface $engine;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?NameResolverInterface $nameResolver = null;
+    private ?CMSServiceInterface $cmsService = null;
+    private ?SemverHelperServiceInterface $semverHelperService = null;
+    private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
+    private ?EngineInterface $engine = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireAbstractObjectTypeFieldResolver(
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        NameResolverInterface $nameResolver,
-        CMSServiceInterface $cmsService,
-        SemverHelperServiceInterface $semverHelperService,
-        SchemaDefinitionServiceInterface $schemaDefinitionService,
-        EngineInterface $engine,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
+    }
+    public function setNameResolver(NameResolverInterface $nameResolver): void
+    {
         $this->nameResolver = $nameResolver;
+    }
+    protected function getNameResolver(): NameResolverInterface
+    {
+        return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
+    }
+    public function setCMSService(CMSServiceInterface $cmsService): void
+    {
         $this->cmsService = $cmsService;
+    }
+    protected function getCMSService(): CMSServiceInterface
+    {
+        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
+    }
+    public function setSemverHelperService(SemverHelperServiceInterface $semverHelperService): void
+    {
         $this->semverHelperService = $semverHelperService;
+    }
+    protected function getSemverHelperService(): SemverHelperServiceInterface
+    {
+        return $this->semverHelperService ??= $this->instanceManager->getInstance(SemverHelperServiceInterface::class);
+    }
+    public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
+    {
         $this->schemaDefinitionService = $schemaDefinitionService;
+    }
+    protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
+    {
+        return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
+    }
+    public function setEngine(EngineInterface $engine): void
+    {
         $this->engine = $engine;
+    }
+    protected function getEngine(): EngineInterface
+    {
+        return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     final public function getClassesToAttachTo(): array
@@ -238,7 +277,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldDescriptionCache)) {
             return $this->consolidatedFieldDescriptionCache[$cacheKey];
         }
-        $this->consolidatedFieldDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
+        $this->consolidatedFieldDescriptionCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
             HookNames::OBJECT_TYPE_FIELD_DESCRIPTION,
             $this->getFieldDescription($objectTypeResolver, $fieldName),
             $this,
@@ -259,7 +298,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldDeprecationMessageCache)) {
             return $this->consolidatedFieldDeprecationMessageCache[$cacheKey];
         }
-        $this->consolidatedFieldDeprecationMessageCache[$cacheKey] = $this->hooksAPI->applyFilters(
+        $this->consolidatedFieldDeprecationMessageCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
             HookNames::OBJECT_TYPE_FIELD_DEPRECATION_MESSAGE,
             $this->getFieldDeprecationMessage($objectTypeResolver, $fieldName),
             $this,
@@ -330,7 +369,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
          */
-        $consolidatedFieldArgNameTypeResolvers = $this->hooksAPI->applyFilters(
+        $consolidatedFieldArgNameTypeResolvers = $this->getHooksAPI()->applyFilters(
             HookNames::OBJECT_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
             $fieldArgNameTypeResolvers,
             $this,
@@ -347,7 +386,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             if (Environment::enableSemanticVersionConstraints()) {
                 $hasVersion = $this->hasSchemaFieldVersion($objectTypeResolver, $fieldName);
                 if ($hasVersion) {
-                    $consolidatedFieldArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->stringScalarTypeResolver;
+                    $consolidatedFieldArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getStringScalarTypeResolver();
                 }
             }
         }
@@ -366,7 +405,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldArgDescriptionCache)) {
             return $this->consolidatedFieldArgDescriptionCache[$cacheKey];
         }
-        $this->consolidatedFieldArgDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
+        $this->consolidatedFieldArgDescriptionCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
             HookNames::OBJECT_TYPE_FIELD_ARG_DESCRIPTION,
             $this->getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
             $this,
@@ -388,7 +427,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldArgDefaultValueCache)) {
             return $this->consolidatedFieldArgDefaultValueCache[$cacheKey];
         }
-        $this->consolidatedFieldArgDefaultValueCache[$cacheKey] = $this->hooksAPI->applyFilters(
+        $this->consolidatedFieldArgDefaultValueCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
             HookNames::OBJECT_TYPE_FIELD_ARG_DEFAULT_VALUE,
             $this->getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
             $this,
@@ -410,7 +449,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (array_key_exists($cacheKey, $this->consolidatedFieldArgTypeModifiersCache)) {
             return $this->consolidatedFieldArgTypeModifiersCache[$cacheKey];
         }
-        $this->consolidatedFieldArgTypeModifiersCache[$cacheKey] = $this->hooksAPI->applyFilters(
+        $this->consolidatedFieldArgTypeModifiersCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
             HookNames::OBJECT_TYPE_FIELD_ARG_TYPE_MODIFIERS,
             $this->getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
             $this,
@@ -462,7 +501,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getFieldTypeResolver($objectTypeResolver, $fieldName);
         }
-        return $this->schemaDefinitionService->getDefaultConcreteTypeResolver();
+        return $this->getSchemaDefinitionService()->getDefaultConcreteTypeResolver();
     }
 
     /**
@@ -547,7 +586,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                  * If passing a wrong value to validate against (eg: "saraza" instead of "1.0.0"), it will throw an Exception
                  */
                 try {
-                    return $this->semverHelperService->satisfies($schemaFieldVersion, $versionConstraint);
+                    return $this->getSemverHelperService()->satisfies($schemaFieldVersion, $versionConstraint);
                 } catch (Exception) {
                     return false;
                 }
@@ -680,7 +719,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $fieldDeprecationMessage = $this->getConsolidatedFieldDeprecationMessage($objectTypeResolver, $fieldName);
         if ($fieldDeprecationMessage !== null) {
             $fieldDeprecationMessages[] = sprintf(
-                $this->translationAPI->__('Field \'%s\' is deprecated: %s', 'component-model'),
+                $this->getTranslationAPI()->__('Field \'%s\' is deprecated: %s', 'component-model'),
                 $fieldName,
                 $fieldDeprecationMessage
             );
@@ -857,7 +896,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                  */
                 if (!$this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver)) {
                     $warnings[] = sprintf(
-                        $this->translationAPI->__('The ObjectTypeFieldResolver used to process field with name \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
+                        $this->getTranslationAPI()->__('The ObjectTypeFieldResolver used to process field with name \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
                         $fieldName,
                         $this->getFieldVersion($objectTypeResolver, $fieldName) ?? '',
                         $versionConstraint
@@ -931,7 +970,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($checkpointSets = $this->getValidationCheckpointSets($objectTypeResolver, $object, $fieldName, $fieldArgs)) {
             $errorMessages = [];
             foreach ($checkpointSets as $checkpointSet) {
-                $validation = $this->engine->validateCheckpoints($checkpointSet);
+                $validation = $this->getEngine()->validateCheckpoints($checkpointSet);
                 if (GeneralUtils::isError($validation)) {
                     /** @var Error */
                     $error = $validation;

@@ -24,16 +24,24 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireAbstractChildCategoryObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        IntScalarTypeResolver $intScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
 
     public function getFieldNamesToResolve(): array
@@ -49,8 +57,8 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     {
         return match ($fieldName) {
             'childCategory' => $this->getCategoryTypeResolver(),
-            'childCategoryCount' => $this->intScalarTypeResolver,
-            'childCategoryNames' => $this->stringScalarTypeResolver,
+            'childCategoryCount' => $this->getIntScalarTypeResolver(),
+            'childCategoryNames' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -71,9 +79,9 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'childCategories' => $this->translationAPI->__('Post categories', 'child-categories'),
-            'childCategoryCount' => $this->translationAPI->__('Number of post categories', 'child-categories'),
-            'childCategoryNames' => $this->translationAPI->__('Names of the post categories', 'child-categories'),
+            'childCategories' => $this->getTranslationAPI()->__('Post categories', 'child-categories'),
+            'childCategoryCount' => $this->getTranslationAPI()->__('Number of post categories', 'child-categories'),
+            'childCategoryNames' => $this->getTranslationAPI()->__('Names of the post categories', 'child-categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

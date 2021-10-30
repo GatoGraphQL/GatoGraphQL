@@ -12,18 +12,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver;
+    private ?CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver = null;
     
-    #[Required]
-    final public function autowireCreateUpdateProfileMutationResolverBridge(
-        CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver,
-    ): void {
+    public function setCreateUpdateProfileMutationResolver(CreateUpdateProfileMutationResolver $createUpdateProfileMutationResolver): void
+    {
         $this->createUpdateProfileMutationResolver = $createUpdateProfileMutationResolver;
+    }
+    protected function getCreateUpdateProfileMutationResolver(): CreateUpdateProfileMutationResolver
+    {
+        return $this->createUpdateProfileMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateProfileMutationResolver::class);
     }
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->createUpdateProfileMutationResolver;
+        return $this->getCreateUpdateProfileMutationResolver();
     }
 
     public function getFormData(): array
@@ -34,26 +36,26 @@ class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutatio
         $form_data = array_merge(
             $form_data,
             array(
-                'short_description' => trim($this->moduleProcessorManager->getProcessor($inputs['short_description'])->getValue($inputs['short_description'])),
-                'display_email' => $this->moduleProcessorManager->getProcessor($inputs['display_email'])->getValue($inputs['display_email']),
-                'facebook' => trim($this->moduleProcessorManager->getProcessor($inputs['facebook'])->getValue($inputs['facebook'])),
-                'twitter' => trim($this->moduleProcessorManager->getProcessor($inputs['twitter'])->getValue($inputs['twitter'])),
-                'linkedin' => trim($this->moduleProcessorManager->getProcessor($inputs['linkedin'])->getValue($inputs['linkedin'])),
-                'youtube' => trim($this->moduleProcessorManager->getProcessor($inputs['youtube'])->getValue($inputs['youtube'])),
-                'instagram' => trim($this->moduleProcessorManager->getProcessor($inputs['instagram'])->getValue($inputs['instagram'])),
-                // 'blog' => trim($this->moduleProcessorManager->getProcessor($inputs['blog'])->getValue($inputs['blog'])),
+                'short_description' => trim($this->getModuleProcessorManager()->getProcessor($inputs['short_description'])->getValue($inputs['short_description'])),
+                'display_email' => $this->getModuleProcessorManager()->getProcessor($inputs['display_email'])->getValue($inputs['display_email']),
+                'facebook' => trim($this->getModuleProcessorManager()->getProcessor($inputs['facebook'])->getValue($inputs['facebook'])),
+                'twitter' => trim($this->getModuleProcessorManager()->getProcessor($inputs['twitter'])->getValue($inputs['twitter'])),
+                'linkedin' => trim($this->getModuleProcessorManager()->getProcessor($inputs['linkedin'])->getValue($inputs['linkedin'])),
+                'youtube' => trim($this->getModuleProcessorManager()->getProcessor($inputs['youtube'])->getValue($inputs['youtube'])),
+                'instagram' => trim($this->getModuleProcessorManager()->getProcessor($inputs['instagram'])->getValue($inputs['instagram'])),
+                // 'blog' => trim($this->getModuleProcessorManager()->getProcessor($inputs['blog'])->getValue($inputs['blog'])),
             )
         );
 
         // Allow to add extra inputs
-        $form_data = $this->hooksAPI->applyFilters('gd_createupdate_profile:form_data', $form_data);
+        $form_data = $this->getHooksAPI()->applyFilters('gd_createupdate_profile:form_data', $form_data);
 
         return $form_data;
     }
 
     private function getFormInputs()
     {
-        $inputs = $this->hooksAPI->applyFilters(
+        $inputs = $this->getHooksAPI()->applyFilters(
             'GD_CreateUpdate_Profile:form-inputs',
             array(
                 'short_description' => null,

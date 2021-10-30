@@ -24,16 +24,24 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireAbstractCustomPostQueryableObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        IntScalarTypeResolver $intScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
 
     public function getFieldNamesToResolve(): array
@@ -49,8 +57,8 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     {
         return match ($fieldName) {
             'categories' => $this->getCategoryTypeResolver(),
-            'categoryCount' => $this->intScalarTypeResolver,
-            'categoryNames' => $this->stringScalarTypeResolver,
+            'categoryCount' => $this->getIntScalarTypeResolver(),
+            'categoryNames' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -71,9 +79,9 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'categories' => $this->translationAPI->__('Categories added to this custom post', 'pop-categories'),
-            'categoryCount' => $this->translationAPI->__('Number of categories added to this custom post', 'pop-categories'),
-            'categoryNames' => $this->translationAPI->__('Names of the categories added to this custom post', 'pop-categories'),
+            'categories' => $this->getTranslationAPI()->__('Categories added to this custom post', 'pop-categories'),
+            'categoryCount' => $this->getTranslationAPI()->__('Number of categories added to this custom post', 'pop-categories'),
+            'categoryNames' => $this->getTranslationAPI()->__('Names of the categories added to this custom post', 'pop-categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

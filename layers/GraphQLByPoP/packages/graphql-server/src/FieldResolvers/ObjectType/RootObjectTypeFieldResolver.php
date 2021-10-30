@@ -19,22 +19,42 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected SchemaObjectTypeResolver $schemaObjectTypeResolver;
-    protected TypeObjectTypeResolver $typeObjectTypeResolver;
-    protected SchemaTypeDataLoader $schemaTypeDataLoader;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?SchemaObjectTypeResolver $schemaObjectTypeResolver = null;
+    private ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
+    private ?SchemaTypeDataLoader $schemaTypeDataLoader = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireRootObjectTypeFieldResolver(
-        SchemaObjectTypeResolver $schemaObjectTypeResolver,
-        TypeObjectTypeResolver $typeObjectTypeResolver,
-        SchemaTypeDataLoader $schemaTypeDataLoader,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setSchemaObjectTypeResolver(SchemaObjectTypeResolver $schemaObjectTypeResolver): void
+    {
         $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
+    }
+    protected function getSchemaObjectTypeResolver(): SchemaObjectTypeResolver
+    {
+        return $this->schemaObjectTypeResolver ??= $this->instanceManager->getInstance(SchemaObjectTypeResolver::class);
+    }
+    public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
+    {
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
+    }
+    protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
+    {
+        return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
+    }
+    public function setSchemaTypeDataLoader(SchemaTypeDataLoader $schemaTypeDataLoader): void
+    {
         $this->schemaTypeDataLoader = $schemaTypeDataLoader;
+    }
+    protected function getSchemaTypeDataLoader(): SchemaTypeDataLoader
+    {
+        return $this->schemaTypeDataLoader ??= $this->instanceManager->getInstance(SchemaTypeDataLoader::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -72,8 +92,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            '__schema' => $this->translationAPI->__('The GraphQL schema, exposing what fields can be queried', 'graphql-server'),
-            '__type' => $this->translationAPI->__('Obtain a specific type from the schema', 'graphql-server'),
+            '__schema' => $this->getTranslationAPI()->__('The GraphQL schema, exposing what fields can be queried', 'graphql-server'),
+            '__type' => $this->getTranslationAPI()->__('Obtain a specific type from the schema', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -82,7 +102,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             '__type' => [
-                'name' => $this->stringScalarTypeResolver,
+                'name' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -91,7 +111,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['__type' => 'name'] => $this->translationAPI->__('The name of the type', 'graphql-server'),
+            ['__type' => 'name'] => $this->getTranslationAPI()->__('The name of the type', 'graphql-server'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -127,7 +147,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // Get an instance of the schema and then execute function `getType` there
                 $schemaID = $objectTypeResolver->resolveValue(
                     $object,
-                    $this->fieldQueryInterpreter->getField(
+                    $this->getFieldQueryInterpreter()->getField(
                         '__schema',
                         []
                     ),
@@ -139,7 +159,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     return $schemaID;
                 }
                 // Obtain the instance of the schema
-                $schemaInstances = $this->schemaTypeDataLoader->getObjects([$schemaID]);
+                $schemaInstances = $this->getSchemaTypeDataLoader()->getObjects([$schemaID]);
                 $schema = $schemaInstances[0];
                 return $schema->getTypeID($fieldArgs['name']);
         }
@@ -150,8 +170,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            '__schema' => $this->schemaObjectTypeResolver,
-            '__type' => $this->typeObjectTypeResolver,
+            '__schema' => $this->getSchemaObjectTypeResolver(),
+            '__type' => $this->getTypeObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

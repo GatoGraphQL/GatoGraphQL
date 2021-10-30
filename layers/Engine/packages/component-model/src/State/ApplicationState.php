@@ -63,7 +63,8 @@ class ApplicationState
             ($_REQUEST[Params::VERSION] ?? $appVersion)
             : $appVersion;
 
-        $outputs = (array) HooksAPIFacade::getInstance()->applyFilters(
+        $hooksAPI = HooksAPIFacade::getInstance();
+        $outputs = (array) $hooksAPI->applyFilters(
             'ApplicationState:outputs',
             array(
                 Outputs::HTML,
@@ -106,7 +107,7 @@ class ApplicationState
                 $dataoutputitems = array_map('strtolower', $dataoutputitems);
             }
         }
-        $alldataoutputitems = (array) HooksAPIFacade::getInstance()->applyFilters(
+        $alldataoutputitems = (array) $hooksAPI->applyFilters(
             'ApplicationState:dataoutputitems',
             array(
                 DataOutputItems::META,
@@ -121,7 +122,7 @@ class ApplicationState
             $alldataoutputitems
         );
         if (!$dataoutputitems) {
-            $dataoutputitems = HooksAPIFacade::getInstance()->applyFilters(
+            $dataoutputitems = $hooksAPI->applyFilters(
                 'ApplicationState:default-dataoutputitems',
                 array(
                     DataOutputItems::META,
@@ -136,7 +137,7 @@ class ApplicationState
         // If not target, or invalid, reset it to "main"
         // We allow an empty target if none provided, so that we can generate the settings cache when no target is provided
         // (ie initial load) and when target is provided (ie loading pageSection)
-        $targets = (array) HooksAPIFacade::getInstance()->applyFilters(
+        $targets = (array) $hooksAPI->applyFilters(
             'ApplicationState:targets',
             array(
                 Targets::MAIN,
@@ -193,7 +194,7 @@ class ApplicationState
         self::$vars['routing-state'] = [];
 
         // Allow for plug-ins to add their own vars
-        HooksAPIFacade::getInstance()->doAction(
+        $hooksAPI->doAction(
             'ApplicationState:addVars',
             array(&self::$vars)
         );
@@ -210,7 +211,8 @@ class ApplicationState
         self::$vars['routing-state']['is-home'] = $nature == RouteNatures::HOME;
         self::$vars['routing-state']['is-404'] = $nature == RouteNatures::NOTFOUND;
 
-        HooksAPIFacade::getInstance()->doAction(
+        $hooksAPI = HooksAPIFacade::getInstance();
+        $hooksAPI->doAction(
             'augmentVarsProperties',
             array(&self::$vars)
         );

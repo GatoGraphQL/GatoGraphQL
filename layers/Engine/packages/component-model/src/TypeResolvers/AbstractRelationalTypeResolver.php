@@ -56,25 +56,52 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @var array<string, array<string, DirectiveResolverInterface>>
      */
     private array $directiveResolverInstanceCache = [];
-    protected FeedbackMessageStoreInterface $feedbackMessageStore;
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
-    protected ErrorProviderInterface $errorProvider;
-    protected DataloadingEngineInterface $dataloadingEngine;
-    protected DirectivePipelineServiceInterface $directivePipelineService;
 
-    #[Required]
-    final public function autowireAbstractRelationalTypeResolver(
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        ErrorProviderInterface $errorProvider,
-        DataloadingEngineInterface $dataloadingEngine,
-        DirectivePipelineServiceInterface $directivePipelineService,
-    ): void {
+    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?ErrorProviderInterface $errorProvider = null;
+    private ?DataloadingEngineInterface $dataloadingEngine = null;
+    private ?DirectivePipelineServiceInterface $directivePipelineService = null;
+
+    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    {
         $this->feedbackMessageStore = $feedbackMessageStore;
+    }
+    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    {
+        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
+    }
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
+    }
+    public function setErrorProvider(ErrorProviderInterface $errorProvider): void
+    {
         $this->errorProvider = $errorProvider;
+    }
+    protected function getErrorProvider(): ErrorProviderInterface
+    {
+        return $this->errorProvider ??= $this->instanceManager->getInstance(ErrorProviderInterface::class);
+    }
+    public function setDataloadingEngine(DataloadingEngineInterface $dataloadingEngine): void
+    {
         $this->dataloadingEngine = $dataloadingEngine;
+    }
+    protected function getDataloadingEngine(): DataloadingEngineInterface
+    {
+        return $this->dataloadingEngine ??= $this->instanceManager->getInstance(DataloadingEngineInterface::class);
+    }
+    public function setDirectivePipelineService(DirectivePipelineServiceInterface $directivePipelineService): void
+    {
         $this->directivePipelineService = $directivePipelineService;
+    }
+    protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
+    {
+        return $this->directivePipelineService ??= $this->instanceManager->getInstance(DirectivePipelineServiceInterface::class);
     }
 
     /**
@@ -128,9 +155,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     {
         return array_map(
             function ($directiveResolver) {
-                return $this->fieldQueryInterpreter->listFieldDirective($directiveResolver->getDirectiveName());
+                return $this->getFieldQueryInterpreter()->listFieldDirective($directiveResolver->getDirectiveName());
             },
-            $this->dataloadingEngine->getMandatoryDirectiveResolvers()
+            $this->getDataloadingEngine()->getMandatoryDirectiveResolvers()
         );
     }
 
@@ -344,29 +371,29 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
 
             $fieldDirectiveResolverInstances = $this->getDirectiveResolverInstancesForDirective($fieldDirective, $fieldDirectiveFields[$enqueuedFieldDirective], $variables);
-            $directiveName = $this->fieldQueryInterpreter->getFieldDirectiveName($fieldDirective);
+            $directiveName = $this->getFieldQueryInterpreter()->getFieldDirectiveName($fieldDirective);
             // If there is no directive with this name, show an error and skip it
             if (is_null($fieldDirectiveResolverInstances)) {
                 $schemaErrors[] = [
                     Tokens::PATH => [$fieldDirective],
                     Tokens::MESSAGE => sprintf(
-                        $this->translationAPI->__('There is no directive with name \'%s\'', 'pop-component-model'),
+                        $this->getTranslationAPI()->__('There is no directive with name \'%s\'', 'pop-component-model'),
                         $directiveName
                     ),
                 ];
                 continue;
             }
-            $directiveArgs = $this->fieldQueryInterpreter->extractStaticDirectiveArguments($fieldDirective);
+            $directiveArgs = $this->getFieldQueryInterpreter()->extractStaticDirectiveArguments($fieldDirective);
 
             if (empty($fieldDirectiveResolverInstances)) {
                 $schemaErrors[] = [
                     Tokens::PATH => [$fieldDirective],
                     Tokens::MESSAGE => sprintf(
-                        $this->translationAPI->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'pop-component-model'),
+                        $this->getTranslationAPI()->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'pop-component-model'),
                         $directiveName,
                         json_encode($directiveArgs),
                         implode(
-                            $this->translationAPI->__('\', \'', 'pop-component-model'),
+                            $this->getTranslationAPI()->__('\', \'', 'pop-component-model'),
                             $fieldDirectiveFields[$fieldDirective]
                         )
                     ),
@@ -380,7 +407,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $schemaErrors[] = [
                         Tokens::PATH => [$fieldDirective],
                         Tokens::MESSAGE => sprintf(
-                            $this->translationAPI->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'pop-component-model'),
+                            $this->getTranslationAPI()->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'pop-component-model'),
                             $directiveName,
                             json_encode($directiveArgs),
                             $field
@@ -480,7 +507,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // Validate if the directive can be executed multiple times on each field
             if (!$directiveResolverInstance->isRepeatable()) {
                 // Check if the directive is already processing any of the fields
-                $directiveName = $this->fieldQueryInterpreter->getFieldDirectiveName($fieldDirective);
+                $directiveName = $this->getFieldQueryInterpreter()->getFieldDirectiveName($fieldDirective);
                 $alreadyProcessingFields = array_intersect(
                     $directiveFieldTrack[$directiveName] ?? [],
                     $directiveResolverFields
@@ -498,7 +525,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $schemaErrors[] = [
                         Tokens::PATH => [$fieldDirective],
                         Tokens::MESSAGE => sprintf(
-                            $this->translationAPI->__('Directive \'%s\' can be executed only once for field(s) \'%s\'', 'component-model'),
+                            $this->getTranslationAPI()->__('Directive \'%s\' can be executed only once for field(s) \'%s\'', 'component-model'),
                             $fieldDirective,
                             implode('\', \'', $alreadyProcessingFields)
                         ),
@@ -524,8 +551,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     public function getDirectiveResolverInstancesForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?array
     {
-        $directiveName = $this->fieldQueryInterpreter->getFieldDirectiveName($fieldDirective);
-        $directiveArgs = $this->fieldQueryInterpreter->extractStaticDirectiveArguments($fieldDirective);
+        $directiveName = $this->getFieldQueryInterpreter()->getFieldDirectiveName($fieldDirective);
+        $directiveArgs = $this->getFieldQueryInterpreter()->extractStaticDirectiveArguments($fieldDirective);
 
         $directiveNameResolvers = $this->getDirectiveNameResolvers();
         $directiveResolvers = $directiveNameResolvers[$directiveName] ?? null;
@@ -537,7 +564,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $fieldDirectiveResolverInstances = [];
         foreach ($fieldDirectiveFields as $field) {
             // Check that at least one class which deals with this directiveName can satisfy the directive (for instance, validating that a required directiveArg is present)
-            $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
+            $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field);
             foreach ($directiveResolvers as $directiveResolver) {
                 $directiveSupportedFieldNames = $directiveResolver->getFieldNamesToApplyTo();
                 // If this field is not supported by the directive, skip
@@ -579,7 +606,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return new Error(
             'unresolved-resultitem-id',
             sprintf(
-                $this->translationAPI->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'pop-component-model'),
+                $this->getTranslationAPI()->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'pop-component-model'),
                 $this->getMaybeNamespacedTypeName(),
                 $objectID
             )
@@ -687,7 +714,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $succeedingMandatoryDirectivesForDirectives = $this->getAllSucceedingMandatoryDirectivesForDirectives();
         $allDirectives = [];
         foreach ($directives as $directive) {
-            $directiveName = $this->fieldQueryInterpreter->getDirectiveName($directive);
+            $directiveName = $this->getFieldQueryInterpreter()->getDirectiveName($directive);
             // Add preceding mandatory directives
             if (
                 $mandatoryDirectivesForDirective = array_merge(
@@ -813,7 +840,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         do {
             // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
             /** @var RelationalTypeResolverDecoratorInterface[] */
-            $attachedRelationalTypeResolverDecorators = array_reverse($this->attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::RELATIONAL_TYPE_RESOLVER_DECORATORS));
+            $attachedRelationalTypeResolverDecorators = array_reverse($this->getAttachableExtensionManager()->getAttachedExtensions($class, AttachableExtensionGroups::RELATIONAL_TYPE_RESOLVER_DECORATORS));
             // Order them by priority: higher priority are evaluated first
             $extensionPriorities = array_map(
                 fn (RelationalTypeResolverDecoratorInterface $typeResolverDecorator) => $typeResolverDecorator->getPriorityToAttachToClasses(),
@@ -847,7 +874,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 foreach ($directiveResolvers as $directiveResolver) {
                     // Execute 2 filters: a generic one, and a specific one
                     if (
-                        $this->hooksAPI->applyFilters(
+                        $this->getHooksAPI()->applyFilters(
                             HookHelpers::getHookNameToFilterDirective(),
                             true,
                             $this,
@@ -855,7 +882,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                             $directiveName
                         )
                     ) {
-                        return $this->hooksAPI->applyFilters(
+                        return $this->getHooksAPI()->applyFilters(
                             HookHelpers::getHookNameToFilterDirective($directiveName),
                             true,
                             $this,
@@ -895,10 +922,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         foreach ($fields as $field) {
             if (!isset($this->fieldDirectivesFromFieldCache[$field])) {
                 // Get the directives from the field
-                $directives = $this->fieldQueryInterpreter->getDirectives($field);
+                $directives = $this->getFieldQueryInterpreter()->getDirectives($field);
 
                 // Add the mandatory directives defined for this field or for any field in this typeResolver
-                $fieldName = $this->fieldQueryInterpreter->getFieldName($field);
+                $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field);
                 if (
                     $mandatoryDirectivesForField = array_merge(
                         $mandatoryDirectivesForFields[FieldSymbols::ANY_FIELD] ?? [],
@@ -924,7 +951,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $fieldDirectives = implode(
                     QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
                     array_map(
-                        [$this->fieldQueryInterpreter, 'convertDirectiveToFieldDirective'],
+                        [$this->getFieldQueryInterpreter(), 'convertDirectiveToFieldDirective'],
                         $directives
                     )
                 );
@@ -1053,7 +1080,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                             $schemaErrorFailingFields
                         );
                         foreach ($failingFields as $field) {
-                            $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($this, $field, $object);
+                            $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($this, $field, $object);
                             $dbItems[(string)$id][$fieldOutputKey] = null;
                         }
                     }
@@ -1097,7 +1124,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directivePipelineSchemaErrors = $directivePipelineIDObjectErrors = [];
 
             // We can finally resolve the pipeline, passing along an array with the ID and fields for each directive
-            $directivePipeline = $this->directivePipelineService->getDirectivePipeline($directiveResolverInstances);
+            $directivePipeline = $this->getDirectivePipelineService()->getDirectivePipeline($directiveResolverInstances);
             $directivePipeline->resolveDirectivePipeline(
                 $this,
                 $pipelineIDsDataFields,
@@ -1140,7 +1167,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 foreach ($failingFieldSchemaErrors as $failingField => $failingSchemaErrors) {
                     $schemaErrors[] = [
                         Tokens::PATH => [$failingField],
-                        Tokens::MESSAGE => $this->translationAPI->__('This field can\'t be executed due to errors from its directives', 'component-model'),
+                        Tokens::MESSAGE => $this->getTranslationAPI()->__('This field can\'t be executed due to errors from its directives', 'component-model'),
                         Tokens::EXTENSIONS => [
                             Tokens::NESTED => $failingSchemaErrors,
                         ],
@@ -1169,7 +1196,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     foreach ($failingIDObjectErrors as $id => $failingObjectErrors) {
                         $objectErrors[$id][] = [
                             Tokens::PATH => [$failingField],
-                            Tokens::MESSAGE => $this->translationAPI->__('This field can\'t be executed due to errors from its directives', 'component-model'),
+                            Tokens::MESSAGE => $this->getTranslationAPI()->__('This field can\'t be executed due to errors from its directives', 'component-model'),
                             Tokens::EXTENSIONS => [
                                 Tokens::NESTED => $failingObjectErrors,
                             ],
@@ -1223,7 +1250,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             do {
                 // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
                 /** @var DirectiveResolverInterface[] */
-                $attachedDirectiveResolvers = array_reverse($this->attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::DIRECTIVE_RESOLVERS));
+                $attachedDirectiveResolvers = array_reverse($this->getAttachableExtensionManager()->getAttachedExtensions($class, AttachableExtensionGroups::DIRECTIVE_RESOLVERS));
                 // Order them by priority: higher priority are evaluated first
                 $extensionPriorities = array_map(
                     fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->getPriorityToAttachToClasses(),

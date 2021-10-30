@@ -16,18 +16,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class NestedMutationHookSet extends AbstractHookSet
 {
-    protected GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService;
+    private ?GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService = null;
 
-    #[Required]
-    final public function autowireNestedMutationHookSet(
-        GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService,
-    ): void {
+    public function setGraphQLSchemaDefinitionService(GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService): void
+    {
         $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
+    }
+    protected function getGraphQLSchemaDefinitionService(): GraphQLSchemaDefinitionServiceInterface
+    {
+        return $this->graphQLSchemaDefinitionService ??= $this->instanceManager->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
     }
 
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             HookHelpers::getHookNameToFilterField(),
             array($this, 'maybeFilterFieldName'),
             10,
@@ -60,8 +62,8 @@ class NestedMutationHookSet extends AbstractHookSet
         if (
             $include
             && (
-                $objectTypeResolver !== $this->graphQLSchemaDefinitionService->getRootObjectTypeResolver()
-                && $objectTypeResolver !== $this->graphQLSchemaDefinitionService->getMutationRootObjectTypeResolver()
+                $objectTypeResolver !== $this->getGraphQLSchemaDefinitionService()->getSchemaRootObjectTypeResolver()
+                && $objectTypeResolver !== $this->getGraphQLSchemaDefinitionService()->getSchemaMutationRootObjectTypeResolver()
             )
             && $objectTypeFieldResolver->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null
         ) {

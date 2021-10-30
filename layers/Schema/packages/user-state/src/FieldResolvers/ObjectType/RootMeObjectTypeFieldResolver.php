@@ -13,13 +13,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldResolver
 {
-    protected UserObjectTypeResolver $userObjectTypeResolver;
+    private ?UserObjectTypeResolver $userObjectTypeResolver = null;
 
-    #[Required]
-    final public function autowireRootMeObjectTypeFieldResolver(
-        UserObjectTypeResolver $userObjectTypeResolver,
-    ): void {
+    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
+    {
         $this->userObjectTypeResolver = $userObjectTypeResolver;
+    }
+    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    {
+        return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -39,7 +41,7 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'me' => $this->translationAPI->__('The logged-in user', 'user-state'),
+            'me' => $this->getTranslationAPI()->__('The logged-in user', 'user-state'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -71,7 +73,7 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'me' => $this->userObjectTypeResolver,
+            'me' => $this->getUserObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

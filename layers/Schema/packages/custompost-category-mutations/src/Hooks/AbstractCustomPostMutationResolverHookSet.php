@@ -19,39 +19,47 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireAbstractCustomPostMutationResolverHookSet(
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-        IDScalarTypeResolver $idScalarTypeResolver,
-    ): void {
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
         $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             HookNames::OBJECT_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
             array($this, 'maybeAddFieldArgNameTypeResolvers'),
             10,
             4
         );
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             HookNames::OBJECT_TYPE_FIELD_ARG_DESCRIPTION,
             array($this, 'maybeAddFieldArgDescription'),
             10,
             5
         );
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             HookNames::OBJECT_TYPE_FIELD_ARG_TYPE_MODIFIERS,
             array($this, 'maybeAddFieldArgTypeModifiers'),
             10,
             5
         );
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
             array($this, 'maybeSetCategories'),
             10,
@@ -69,7 +77,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if (!$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
             return $fieldArgNameTypeResolvers;
         }
-        $fieldArgNameTypeResolvers[MutationInputProperties::CATEGORY_IDS] = $this->idScalarTypeResolver;
+        $fieldArgNameTypeResolvers[MutationInputProperties::CATEGORY_IDS] = $this->getIdScalarTypeResolver();
         return $fieldArgNameTypeResolvers;
     }
 
@@ -85,7 +93,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
             return $fieldArgDescription;
         }
         return sprintf(
-            $this->translationAPI->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
+            $this->getTranslationAPI()->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
             $this->getCategoryTypeResolver()->getMaybeNamespacedTypeName()
         );
     }
@@ -114,7 +122,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     public function maybeSetCategories(int | string $customPostID, array $form_data): void
     {
         // Only for that specific CPT
-        if ($this->customPostTypeAPI->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
+        if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
             return;
         }
         if (!isset($form_data[MutationInputProperties::CATEGORY_IDS])) {

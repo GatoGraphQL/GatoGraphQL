@@ -13,18 +13,21 @@ use Symfony\Contracts\Service\Attribute\Required;
 class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdateProfileMutationResolverBridge
 {
     use CreateUpdateProfileMutationResolverBridgeTrait;
-    protected CreateUpdateOrganizationProfileMutationResolver $createUpdateOrganizationProfileMutationResolver;
     
-    #[Required]
-    final public function autowireCreateUpdateOrganizationProfileMutationResolverBridge(
-        CreateUpdateOrganizationProfileMutationResolver $createUpdateOrganizationProfileMutationResolver,
-    ): void {
+    private ?CreateUpdateOrganizationProfileMutationResolver $createUpdateOrganizationProfileMutationResolver = null;
+    
+    public function setCreateUpdateOrganizationProfileMutationResolver(CreateUpdateOrganizationProfileMutationResolver $createUpdateOrganizationProfileMutationResolver): void
+    {
         $this->createUpdateOrganizationProfileMutationResolver = $createUpdateOrganizationProfileMutationResolver;
+    }
+    protected function getCreateUpdateOrganizationProfileMutationResolver(): CreateUpdateOrganizationProfileMutationResolver
+    {
+        return $this->createUpdateOrganizationProfileMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateOrganizationProfileMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->createUpdateOrganizationProfileMutationResolver;
+        return $this->getCreateUpdateOrganizationProfileMutationResolver();
     }
 
     private function getFormInputs()
@@ -33,7 +36,7 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
     }
     protected function getCommonuserrolesFormInputs()
     {
-        $inputs = $this->hooksAPI->applyFilters(
+        $inputs = $this->getHooksAPI()->applyFilters(
             'GD_CreateUpdate_ProfileOrganization_Trait:form-inputs',
             array(
                 'organizationtypes' => null,
@@ -69,13 +72,13 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();
-        $organizationtypes = $this->moduleProcessorManager->getProcessor($inputs['organizationtypes'])->getValue($inputs['organizationtypes']);
-        $organizationcategories = $this->moduleProcessorManager->getProcessor($inputs['organizationcategories'])->getValue($inputs['organizationcategories']);
+        $organizationtypes = $this->getModuleProcessorManager()->getProcessor($inputs['organizationtypes'])->getValue($inputs['organizationtypes']);
+        $organizationcategories = $this->getModuleProcessorManager()->getProcessor($inputs['organizationcategories'])->getValue($inputs['organizationcategories']);
         return array(
             'organizationtypes' => $organizationtypes ?? array(),
             'organizationcategories' => $organizationcategories ?? array(),
-            'contact_number' => trim($cmsapplicationhelpers->escapeAttributes($this->moduleProcessorManager->getProcessor($inputs['contact_number'])->getValue($inputs['contact_number']))),
-            'contact_person' => trim($cmsapplicationhelpers->escapeAttributes($this->moduleProcessorManager->getProcessor($inputs['contact_person'])->getValue($inputs['contact_person']))),
+            'contact_number' => trim($cmsapplicationhelpers->escapeAttributes($this->getModuleProcessorManager()->getProcessor($inputs['contact_number'])->getValue($inputs['contact_number']))),
+            'contact_person' => trim($cmsapplicationhelpers->escapeAttributes($this->getModuleProcessorManager()->getProcessor($inputs['contact_person'])->getValue($inputs['contact_person']))),
         );
     }
 }

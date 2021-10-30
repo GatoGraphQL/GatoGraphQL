@@ -13,13 +13,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver;
+    private ?ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver = null;
 
-    #[Required]
-    final public function autowireElementalObjectTypeFieldResolver(
-        ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver,
-    ): void {
+    public function setElementalInterfaceTypeFieldResolver(ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver): void
+    {
         $this->elementalInterfaceTypeFieldResolver = $elementalInterfaceTypeFieldResolver;
+    }
+    protected function getElementalInterfaceTypeFieldResolver(): ElementalInterfaceTypeFieldResolver
+    {
+        return $this->elementalInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(ElementalInterfaceTypeFieldResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -32,7 +34,7 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->elementalInterfaceTypeFieldResolver,
+            $this->getElementalInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -55,7 +57,7 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'self' => $this->translationAPI->__('The same object', 'pop-component-model'),
+            'self' => $this->getTranslationAPI()->__('The same object', 'pop-component-model'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

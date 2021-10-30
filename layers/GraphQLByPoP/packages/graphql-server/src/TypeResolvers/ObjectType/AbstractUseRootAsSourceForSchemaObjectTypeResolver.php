@@ -15,18 +15,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractUseRootAsSourceForSchemaObjectTypeResolver extends AbstractObjectTypeResolver implements UseRootAsSourceForSchemaObjectTypeResolverInterface
 {
-    protected RootObjectTypeResolver $rootObjectTypeResolver;
+    private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
 
-    #[Required]
-    final public function autowireAbstractUseRootAsSourceForSchemaObjectTypeResolver(
-        RootObjectTypeResolver $rootObjectTypeResolver,
-    ): void {
+    public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
+    {
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+    }
+    protected function getRootObjectTypeResolver(): RootObjectTypeResolver
+    {
+        return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
     }
 
     protected function getTypeResolverToCalculateSchema(): RelationalTypeResolverInterface
     {
-        return $this->rootObjectTypeResolver;
+        return $this->getRootObjectTypeResolver();
     }
 
     protected function isFieldNameResolvedByObjectTypeFieldResolver(

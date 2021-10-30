@@ -27,22 +27,42 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
-    protected PostCategoryTypeAPIInterface $postCategoryTypeAPI;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
+    private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
-    #[Required]
-    final public function autowireRootPostCategoryObjectTypeFieldResolver(
-        IntScalarTypeResolver $intScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
-        PostCategoryTypeAPIInterface $postCategoryTypeAPI,
-    ): void {
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
+    {
         $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
+    }
+    protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
+    {
+        return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+    }
+    public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
+    {
         $this->postCategoryTypeAPI = $postCategoryTypeAPI;
+    }
+    protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
+    {
+        return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -69,11 +89,11 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
             'postCategory',
             'postCategoryBySlug',
             'postCategories'
-                => $this->postCategoryObjectTypeResolver,
+                => $this->getPostCategoryObjectTypeResolver(),
             'postCategoryCount'
-                => $this->intScalarTypeResolver,
+                => $this->getIntScalarTypeResolver(),
             'postCategoryNames'
-                => $this->stringScalarTypeResolver,
+                => $this->getStringScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -95,11 +115,11 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'postCategory' => $this->translationAPI->__('Post category with a specific ID', 'post-categories'),
-            'postCategoryBySlug' => $this->translationAPI->__('Post category with a specific slug', 'post-categories'),
-            'postCategories' => $this->translationAPI->__('Post categories', 'post-categories'),
-            'postCategoryCount' => $this->translationAPI->__('Number of post categories', 'post-categories'),
-            'postCategoryNames' => $this->translationAPI->__('Names of the post categories', 'post-categories'),
+            'postCategory' => $this->getTranslationAPI()->__('Post category with a specific ID', 'post-categories'),
+            'postCategoryBySlug' => $this->getTranslationAPI()->__('Post category with a specific slug', 'post-categories'),
+            'postCategories' => $this->getTranslationAPI()->__('Post categories', 'post-categories'),
+            'postCategoryCount' => $this->getTranslationAPI()->__('Number of post categories', 'post-categories'),
+            'postCategoryNames' => $this->getTranslationAPI()->__('Names of the post categories', 'post-categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -189,16 +209,16 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
         switch ($fieldName) {
             case 'postCategory':
             case 'postCategoryBySlug':
-                if ($categories = $this->postCategoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($categories = $this->getPostCategoryTypeAPI()->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $categories[0];
                 }
                 return null;
             case 'postCategories':
-                return $this->postCategoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getPostCategoryTypeAPI()->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'postCategoryNames':
-                return $this->postCategoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
+                return $this->getPostCategoryTypeAPI()->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
             case 'postCategoryCount':
-                return $this->postCategoryTypeAPI->getCategoryCount($query);
+                return $this->getPostCategoryTypeAPI()->getCategoryCount($query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

@@ -10,16 +10,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
 {
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
-    protected CacheControlDirectiveResolver $cacheControlDirectiveResolver;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?CacheControlDirectiveResolver $cacheControlDirectiveResolver = null;
 
-    #[Required]
-    public function autowireConfigurableCacheControlRelationalTypeResolverDecoratorTrait(
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-        CacheControlDirectiveResolver $cacheControlDirectiveResolver,
-    ): void {
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
+    }
+    public function setCacheControlDirectiveResolver(CacheControlDirectiveResolver $cacheControlDirectiveResolver): void
+    {
         $this->cacheControlDirectiveResolver = $cacheControlDirectiveResolver;
+    }
+    protected function getCacheControlDirectiveResolver(): CacheControlDirectiveResolver
+    {
+        return $this->cacheControlDirectiveResolver ??= $this->instanceManager->getInstance(CacheControlDirectiveResolver::class);
     }
 
     /**
@@ -28,8 +36,8 @@ trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
         $maxAge = $entryValue;
-        $cacheControlDirective = $this->fieldQueryInterpreter->getDirective(
-            $this->cacheControlDirectiveResolver->getDirectiveName(),
+        $cacheControlDirective = $this->getFieldQueryInterpreter()->getDirective(
+            $this->getCacheControlDirectiveResolver()->getDirectiveName(),
             [
                 'maxAge' => $maxAge,
             ]

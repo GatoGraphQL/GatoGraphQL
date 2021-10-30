@@ -12,17 +12,19 @@ class ConfigurableCacheControlForFieldsRelationalTypeResolverDecorator extends A
 {
     use ConfigurableCacheControlRelationalTypeResolverDecoratorTrait;
 
-    protected CacheControlManagerInterface $cacheControlManager;
+    private ?CacheControlManagerInterface $cacheControlManager = null;
 
-    #[Required]
-    final public function autowireConfigurableCacheControlForFieldsRelationalTypeResolverDecorator(
-        CacheControlManagerInterface $cacheControlManager,
-    ): void {
+    public function setCacheControlManager(CacheControlManagerInterface $cacheControlManager): void
+    {
         $this->cacheControlManager = $cacheControlManager;
+    }
+    protected function getCacheControlManager(): CacheControlManagerInterface
+    {
+        return $this->cacheControlManager ??= $this->instanceManager->getInstance(CacheControlManagerInterface::class);
     }
 
     protected function getConfigurationEntries(): array
     {
-        return $this->cacheControlManager->getEntriesForFields();
+        return $this->getCacheControlManager()->getEntriesForFields();
     }
 }

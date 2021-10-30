@@ -16,16 +16,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireCoreGlobalObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
     public function getFieldNamesToResolve(): array
@@ -42,11 +50,11 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'typeName' => $this->stringScalarTypeResolver,
-            'namespace' => $this->stringScalarTypeResolver,
-            'qualifiedTypeName' => $this->stringScalarTypeResolver,
-            'isType' => $this->booleanScalarTypeResolver,
-            'implements' => $this->booleanScalarTypeResolver,
+            'typeName' => $this->getStringScalarTypeResolver(),
+            'namespace' => $this->getStringScalarTypeResolver(),
+            'qualifiedTypeName' => $this->getStringScalarTypeResolver(),
+            'isType' => $this->getBooleanScalarTypeResolver(),
+            'implements' => $this->getBooleanScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -68,11 +76,11 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'typeName' => $this->translationAPI->__('The object\'s type', 'pop-component-model'),
-            'namespace' => $this->translationAPI->__('The object\'s namespace', 'pop-component-model'),
-            'qualifiedTypeName' => $this->translationAPI->__('The object\'s namespace + type', 'pop-component-model'),
-            'isType' => $this->translationAPI->__('Indicate if the object is of a given type', 'pop-component-model'),
-            'implements' => $this->translationAPI->__('Indicate if the object implements a given interface', 'pop-component-model'),
+            'typeName' => $this->getTranslationAPI()->__('The object\'s type', 'pop-component-model'),
+            'namespace' => $this->getTranslationAPI()->__('The object\'s namespace', 'pop-component-model'),
+            'qualifiedTypeName' => $this->getTranslationAPI()->__('The object\'s namespace + type', 'pop-component-model'),
+            'isType' => $this->getTranslationAPI()->__('Indicate if the object is of a given type', 'pop-component-model'),
+            'implements' => $this->getTranslationAPI()->__('Indicate if the object implements a given interface', 'pop-component-model'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -81,10 +89,10 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     {
         return match ($fieldName) {
             'isType' => [
-                'type' => $this->stringScalarTypeResolver,
+                'type' => $this->getStringScalarTypeResolver(),
             ],
             'implements' => [
-                'interface' => $this->stringScalarTypeResolver,
+                'interface' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -93,8 +101,8 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['isType' => 'type'] => $this->translationAPI->__('The type name to compare against', 'component-model'),
-            ['implements' => 'interface'] => $this->translationAPI->__('The interface name to compare against', 'component-model'),
+            ['isType' => 'type'] => $this->getTranslationAPI()->__('The type name to compare against', 'component-model'),
+            ['implements' => 'interface'] => $this->getTranslationAPI()->__('The interface name to compare against', 'component-model'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

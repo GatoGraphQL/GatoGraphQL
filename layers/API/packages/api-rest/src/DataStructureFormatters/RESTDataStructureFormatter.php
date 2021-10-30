@@ -10,13 +10,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
-    protected EngineInterface $engine;
+    private ?EngineInterface $engine = null;
 
-    #[Required]
-    final public function autowireRESTDataStructureFormatter(
-        EngineInterface $engine,
-    ): void {
+    public function setEngine(EngineInterface $engine): void
+    {
         $this->engine = $engine;
+    }
+    protected function getEngine(): EngineInterface
+    {
+        return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
     }
 
     public function getName(): string
@@ -27,7 +29,7 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
     protected function getFields()
     {
         // Get the fields from the entry module's module atts
-        $entryModule = $this->engine->getEntryModule();
+        $entryModule = $this->getEngine()->getEntryModule();
         if ($moduleAtts = $entryModule[2] ?? null) {
             if ($fields = $moduleAtts['fields'] ?? null) {
                 return $fields;

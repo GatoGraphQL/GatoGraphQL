@@ -27,19 +27,33 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
      * since this could be a UnionTypeResolver,
      * but `extractFieldArguments` expects an ObjectTypeResolver
      */
-    protected RootObjectTypeResolver $rootTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver;
+    private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireApplyFunctionDirectiveResolver(
-        RootObjectTypeResolver $rootTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver,
-    ): void {
-        $this->rootTypeResolver = $rootTypeResolver;
+    public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
+    {
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+    }
+    protected function getRootObjectTypeResolver(): RootObjectTypeResolver
+    {
+        return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    {
         $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+    }
+    protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    {
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
     }
 
     public function getDirectiveName(): string
@@ -58,21 +72,21 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            'function' => $this->stringScalarTypeResolver,
-            'addArguments' => $this->dangerouslyDynamicScalarTypeResolver,
-            'target' => $this->stringScalarTypeResolver,
+            'function' => $this->getStringScalarTypeResolver(),
+            'addArguments' => $this->getDangerouslyDynamicScalarTypeResolver(),
+            'target' => $this->getStringScalarTypeResolver(),
         ];
     }
 
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'function' => $this->translationAPI->__('Function to execute on the affected fields', 'component-model'),
+            'function' => $this->getTranslationAPI()->__('Function to execute on the affected fields', 'component-model'),
             'addArguments' => sprintf(
-                $this->translationAPI->__('Arguments to inject to the function. The value of the affected field can be provided under special expression `%s`', 'component-model'),
+                $this->getTranslationAPI()->__('Arguments to inject to the function. The value of the affected field can be provided under special expression `%s`', 'component-model'),
                 QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)
             ),
-            'target' => $this->translationAPI->__('Property from the current object where to store the results of the function. If the result must not be stored, pass an empty value. Default value: Same property as the affected field', 'component-model'),
+            'target' => $this->getTranslationAPI()->__('Property from the current object where to store the results of the function. If the result must not be stored, pass an empty value. Default value: Same property as the affected field', 'component-model'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }
@@ -89,7 +103,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
     public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            Expressions::NAME_VALUE => $this->translationAPI->__('Element being transformed', 'component-model'),
+            Expressions::NAME_VALUE => $this->getTranslationAPI()->__('Element being transformed', 'component-model'),
         ];
     }
 
@@ -129,12 +143,12 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
 
         // Maybe re-generate the function: Inject the provided `$addArguments` to the fieldArgs already declared in the query
         if ($addArguments) {
-            $functionName = $this->fieldQueryInterpreter->getFieldName($function);
+            $functionName = $this->getFieldQueryInterpreter()->getFieldName($function);
             $functionArgElems = array_merge(
-                $this->fieldQueryInterpreter->extractFieldArguments($this->rootTypeResolver, $function) ?? [],
+                $this->getFieldQueryInterpreter()->extractFieldArguments($this->getRootObjectTypeResolver(), $function) ?? [],
                 $addArguments
             );
-            $function = $this->fieldQueryInterpreter->getField($functionName, $functionArgElems);
+            $function = $this->getFieldQueryInterpreter()->getField($functionName, $functionArgElems);
         }
         $dbKey = $relationalTypeResolver->getTypeOutputDBKey();
 
@@ -142,7 +156,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         foreach ($idsDataFields as $id => $dataFields) {
             $object = $objectIDItems[$id];
             foreach ($dataFields['direct'] as $field) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
+                $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
 
                 // Validate that the property exists
                 $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
@@ -151,7 +165,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                         $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $this->translationAPI->__('Field \'%s\' (under property \'%s\') hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
+                                $this->getTranslationAPI()->__('Field \'%s\' (under property \'%s\') hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
                                 $field,
                                 $fieldOutputKey,
                                 $id
@@ -161,7 +175,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                         $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
                             Tokens::MESSAGE => sprintf(
-                                $this->translationAPI->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
+                                $this->getTranslationAPI()->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'component-model'),
                                 $fieldOutputKey,
                                 $id
                             ),
@@ -181,14 +195,14 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                     $schemaFieldArgs,
                     $schemaObjectErrors,
                     $schemaObjectWarnings
-                ) = $this->fieldQueryInterpreter->extractFieldArgumentsForSchema($this->rootTypeResolver, $function, $variables);
+                ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForSchema($this->getRootObjectTypeResolver(), $function, $variables);
 
                 // Place the errors not under schema but under DB, since they may change on a object by object basis
                 if ($schemaObjectWarnings) {
                     $dbWarning = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
-                            $this->translationAPI->__('Nested warnings validating function \'%s\' on object with ID \'%s\' and field under property \'%s\')', 'component-model'),
+                            $this->getTranslationAPI()->__('Nested warnings validating function \'%s\' on object with ID \'%s\' and field under property \'%s\')', 'component-model'),
                             $function,
                             $id,
                             $fieldOutputKey
@@ -204,14 +218,14 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 if ($schemaObjectErrors) {
                     if ($fieldOutputKey != $field) {
                         $errorMessage = sprintf(
-                            $this->translationAPI->__('Applying function on field \'%s\' (under property \'%s\') on object with ID \'%s\' can\'t be executed due to nested errors', 'component-model'),
+                            $this->getTranslationAPI()->__('Applying function on field \'%s\' (under property \'%s\') on object with ID \'%s\' can\'t be executed due to nested errors', 'component-model'),
                             $field,
                             $fieldOutputKey,
                             $id
                         );
                     } else {
                         $errorMessage = sprintf(
-                            $this->translationAPI->__('Applying function on field \'%s\' on object with ID \'%s\' can\'t be executed due to nested errors', 'component-model'),
+                            $this->getTranslationAPI()->__('Applying function on field \'%s\' on object with ID \'%s\' can\'t be executed due to nested errors', 'component-model'),
                             $fieldOutputKey,
                             $id
                         );
@@ -236,7 +250,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                 ];
                 $functionValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $validFunction, $variables, $expressions, $options);
                 // Merge the objectWarnings, if any
-                if ($storedObjectWarnings = $this->feedbackMessageStore->retrieveAndClearObjectWarnings($id)) {
+                if ($storedObjectWarnings = $this->getFeedbackMessageStore()->retrieveAndClearObjectWarnings($id)) {
                     $objectWarnings[$id] = array_merge(
                         $objectWarnings[$id] ?? [],
                         $storedObjectWarnings
@@ -250,7 +264,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
                     $objectErrors[(string)$id][] = [
                         Tokens::PATH => [$this->directive],
                         Tokens::MESSAGE => sprintf(
-                            $this->translationAPI->__('Applying function on \'%s\' on object with ID \'%s\' failed due to error: %s', 'component-model'),
+                            $this->getTranslationAPI()->__('Applying function on \'%s\' on object with ID \'%s\' failed due to error: %s', 'component-model'),
                             $fieldOutputKey,
                             $id,
                             $error->getMessageOrCode()
@@ -291,7 +305,7 @@ class ApplyFunctionDirectiveResolver extends AbstractGlobalDirectiveResolver
         array &$schemaDeprecations
     ): void {
         $object = $objectIDItems[$id];
-        $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
+        $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
         $isValueInDBItems = array_key_exists($fieldOutputKey, $dbItems[(string)$id] ?? []);
         $dbKey = $relationalTypeResolver->getTypeOutputDBKey();
         $value = $isValueInDBItems ?

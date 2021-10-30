@@ -12,18 +12,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected UpdateUserAvatarMutationResolver $updateUserAvatarMutationResolver;
+    private ?UpdateUserAvatarMutationResolver $updateUserAvatarMutationResolver = null;
     
-    #[Required]
-    final public function autowireUpdateUserAvatarMutationResolverBridge(
-        UpdateUserAvatarMutationResolver $updateUserAvatarMutationResolver,
-    ): void {
+    public function setUpdateUserAvatarMutationResolver(UpdateUserAvatarMutationResolver $updateUserAvatarMutationResolver): void
+    {
         $this->updateUserAvatarMutationResolver = $updateUserAvatarMutationResolver;
+    }
+    protected function getUpdateUserAvatarMutationResolver(): UpdateUserAvatarMutationResolver
+    {
+        return $this->updateUserAvatarMutationResolver ??= $this->instanceManager->getInstance(UpdateUserAvatarMutationResolver::class);
     }
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->updateUserAvatarMutationResolver;
+        return $this->getUpdateUserAvatarMutationResolver();
     }
 
     public function getFormData(): array

@@ -12,12 +12,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ModuleRegistry implements ModuleRegistryInterface
 {
-    protected UserSettingsManagerInterface $userSettingsManager;
+    private ?UserSettingsManagerInterface $userSettingsManager = null;
 
-    #[Required]
-    final public function autowireModuleRegistry(): void
+    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
-        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
+        $this->userSettingsManager = $userSettingsManager;
+    }
+    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    {
+        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }
 
     /**
@@ -121,8 +124,8 @@ class ModuleRegistry implements ModuleRegistryInterface
         }
         $moduleID = $moduleResolver->getID($module);
         // Check if the value has been saved on the DB
-        if ($this->userSettingsManager->hasSetModuleEnabled($moduleID)) {
-            return $this->userSettingsManager->isModuleEnabled($moduleID);
+        if ($this->getUserSettingsManager()->hasSetModuleEnabled($moduleID)) {
+            return $this->getUserSettingsManager()->isModuleEnabled($moduleID);
         }
         // Get the default value from the resolver
         return $moduleResolver->isEnabledByDefault($module);

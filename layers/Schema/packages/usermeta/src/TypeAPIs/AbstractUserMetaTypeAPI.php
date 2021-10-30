@@ -4,18 +4,24 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserMeta\TypeAPIs;
 
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPSchema\UserMeta\ComponentConfiguration;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractUserMetaTypeAPI implements UserMetaTypeAPIInterface
 {
-    protected AllowOrDenySettingsServiceInterface $allowOrDenySettingsService;
+    use BasicServiceTrait;
 
-    #[Required]
-    final public function autowireAbstractUserMetaTypeAPI(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
+    private ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
+
+    public function setAllowOrDenySettingsService(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
     {
         $this->allowOrDenySettingsService = $allowOrDenySettingsService;
+    }
+    protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
+    {
+        return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
     }
 
     final public function getUserMeta(string | int $userID, string $key, bool $single = false): mixed
@@ -26,7 +32,7 @@ abstract class AbstractUserMetaTypeAPI implements UserMetaTypeAPIInterface
          */
         $entries = ComponentConfiguration::getUserMetaEntries();
         $behavior = ComponentConfiguration::getUserMetaBehavior();
-        if (!$this->allowOrDenySettingsService->isEntryAllowed($key, $entries, $behavior)) {
+        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($key, $entries, $behavior)) {
             return null;
         }
         return $this->doGetUserMeta($userID, $key, $single);

@@ -16,25 +16,39 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements CategoryAPIRequestedContractInterface
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
 
-    #[Required]
-    final public function autowireAbstractCategoryObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        IntScalarTypeResolver $intScalarTypeResolver,
-        QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
+    {
         $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
+    }
+    protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
+    {
+        return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }
 
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->queryableInterfaceTypeFieldResolver,
+            $this->getQueryableInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -55,9 +69,9 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     {
         return match ($fieldName) {
             'parentCategory' => $this->getCategoryTypeResolver(),
-            'name' => $this->stringScalarTypeResolver,
-            'description' => $this->stringScalarTypeResolver,
-            'count' => $this->intScalarTypeResolver,
+            'name' => $this->getStringScalarTypeResolver(),
+            'description' => $this->getStringScalarTypeResolver(),
+            'count' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -76,13 +90,13 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->translationAPI->__('Category URL', 'pop-categories'),
-            'urlPath' => $this->translationAPI->__('Category URL path', 'pop-categories'),
-            'slug' => $this->translationAPI->__('Category slug', 'pop-categories'),
-            'name' => $this->translationAPI->__('Category', 'pop-categories'),
-            'description' => $this->translationAPI->__('Category description', 'pop-categories'),
-            'parentCategory' => $this->translationAPI->__('Parent category (if this category is a child of another one)', 'pop-categories'),
-            'count' => $this->translationAPI->__('Number of custom posts containing this category', 'pop-categories'),
+            'url' => $this->getTranslationAPI()->__('Category URL', 'pop-categories'),
+            'urlPath' => $this->getTranslationAPI()->__('Category URL path', 'pop-categories'),
+            'slug' => $this->getTranslationAPI()->__('Category slug', 'pop-categories'),
+            'name' => $this->getTranslationAPI()->__('Category', 'pop-categories'),
+            'description' => $this->getTranslationAPI()->__('Category description', 'pop-categories'),
+            'parentCategory' => $this->getTranslationAPI()->__('Parent category (if this category is a child of another one)', 'pop-categories'),
+            'count' => $this->getTranslationAPI()->__('Number of custom posts containing this category', 'pop-categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

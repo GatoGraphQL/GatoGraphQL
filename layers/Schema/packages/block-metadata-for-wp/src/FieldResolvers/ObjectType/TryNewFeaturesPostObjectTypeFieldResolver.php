@@ -14,13 +14,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireTryNewFeaturesPostObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -45,7 +47,7 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'content' => $this->stringScalarTypeResolver,
+            'content' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -61,7 +63,7 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'content' => $this->translationAPI->__('Post\'s content, formatted with its block metadata', 'pop-block-metadata'),
+            'content' => $this->getTranslationAPI()->__('Post\'s content, formatted with its block metadata', 'pop-block-metadata'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -87,7 +89,7 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
                 unset($fieldArgs['project']);
                 return $objectTypeResolver->resolveValue(
                     $object,
-                    $this->fieldQueryInterpreter->getField('blockMetadata', $fieldArgs),
+                    $this->getFieldQueryInterpreter()->getField('blockMetadata', $fieldArgs),
                     $variables,
                     $expressions,
                     $options

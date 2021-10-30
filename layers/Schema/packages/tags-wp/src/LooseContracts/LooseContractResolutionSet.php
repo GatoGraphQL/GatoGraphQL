@@ -10,7 +10,7 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
 {
     protected function resolveContracts(): void
     {
-        $this->nameResolver->implementNames([
+        $this->getNameResolver()->implementNames([
             'popcms:dbcolumn:orderby:tags:count' => 'count',
             'popcms:dbcolumn:orderby:tags:id' => 'term_id',
         ]);

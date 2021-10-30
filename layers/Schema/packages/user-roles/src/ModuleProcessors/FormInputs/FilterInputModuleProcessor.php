@@ -20,13 +20,15 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_USER_ROLES = 'filterinput-user-roles';
     public const MODULE_FILTERINPUT_EXCLUDE_USER_ROLES = 'filterinput-exclude-user-roles';
 
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireFilterInputModuleProcessor(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getModulesToProcess(): array
@@ -58,8 +60,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_USER_ROLES => $this->stringScalarTypeResolver,
-            self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_USER_ROLES => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => $this->getStringScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -78,8 +80,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_USER_ROLES => $this->translationAPI->__('Get the users with given roles', 'user-roles'),
-            self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => $this->translationAPI->__('Get the users without the given roles', 'user-roles'),
+            self::MODULE_FILTERINPUT_USER_ROLES => $this->getTranslationAPI()->__('Get the users with given roles', 'user-roles'),
+            self::MODULE_FILTERINPUT_EXCLUDE_USER_ROLES => $this->getTranslationAPI()->__('Get the users without the given roles', 'user-roles'),
             default => null,
         };
     }

@@ -12,18 +12,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected SettingsMutationResolver $settingsMutationResolver;
+    private ?SettingsMutationResolver $settingsMutationResolver = null;
     
-    #[Required]
-    final public function autowireSettingsMutationResolverBridge(
-        SettingsMutationResolver $settingsMutationResolver,
-    ): void {
+    public function setSettingsMutationResolver(SettingsMutationResolver $settingsMutationResolver): void
+    {
         $this->settingsMutationResolver = $settingsMutationResolver;
+    }
+    protected function getSettingsMutationResolver(): SettingsMutationResolver
+    {
+        return $this->settingsMutationResolver ??= $this->instanceManager->getInstance(SettingsMutationResolver::class);
     }
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->settingsMutationResolver;
+        return $this->getSettingsMutationResolver();
     }
 
     public function getFormData(): array
@@ -39,7 +41,7 @@ class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBr
         $executed = parent::executeMutation($data_properties);
         if ($executed !== null && $executed[ResponseConstants::SUCCESS]) {
             // Add the result from the MutationResolver as hard redirect
-            $redirect_to = $this->mutationResolutionManager->getResult($this);
+            $redirect_to = $this->getMutationResolutionManager()->getResult($this);
             $executed[GD_DATALOAD_QUERYHANDLERRESPONSE_HARDREDIRECT] = $redirect_to;
         }
         return $executed;

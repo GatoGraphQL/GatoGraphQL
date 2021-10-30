@@ -14,13 +14,15 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
 {
     use PostCategoryAPISatisfiedContractTrait;
 
-    protected PostCategoryTypeDataLoader $postCategoryTypeDataLoader;
+    private ?PostCategoryTypeDataLoader $postCategoryTypeDataLoader = null;
 
-    #[Required]
-    final public function autowirePostCategoryObjectTypeResolver(
-        PostCategoryTypeDataLoader $postCategoryTypeDataLoader,
-    ): void {
+    public function setPostCategoryTypeDataLoader(PostCategoryTypeDataLoader $postCategoryTypeDataLoader): void
+    {
         $this->postCategoryTypeDataLoader = $postCategoryTypeDataLoader;
+    }
+    protected function getPostCategoryTypeDataLoader(): PostCategoryTypeDataLoader
+    {
+        return $this->postCategoryTypeDataLoader ??= $this->instanceManager->getInstance(PostCategoryTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -30,11 +32,11 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Representation of a category, added to a post', 'post-categories');
+        return $this->getTranslationAPI()->__('Representation of a category, added to a post', 'post-categories');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->postCategoryTypeDataLoader;
+        return $this->getPostCategoryTypeDataLoader();
     }
 }

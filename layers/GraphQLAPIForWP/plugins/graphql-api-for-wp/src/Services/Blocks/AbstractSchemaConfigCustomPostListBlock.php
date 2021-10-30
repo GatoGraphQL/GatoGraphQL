@@ -11,16 +11,24 @@ use WP_Post;
 
 abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaConfigBlock
 {
-    protected BlockRenderingHelpers $blockRenderingHelpers;
-    protected CPTUtils $cptUtils;
+    private ?BlockRenderingHelpers $blockRenderingHelpers = null;
+    private ?CPTUtils $cptUtils = null;
 
-    #[Required]
-    final public function autowireAbstractSchemaConfigCustomPostListBlock(
-        BlockRenderingHelpers $blockRenderingHelpers,
-        CPTUtils $cptUtils,
-    ): void {
+    public function setBlockRenderingHelpers(BlockRenderingHelpers $blockRenderingHelpers): void
+    {
         $this->blockRenderingHelpers = $blockRenderingHelpers;
+    }
+    protected function getBlockRenderingHelpers(): BlockRenderingHelpers
+    {
+        return $this->blockRenderingHelpers ??= $this->instanceManager->getInstance(BlockRenderingHelpers::class);
+    }
+    public function setCPTUtils(CPTUtils $cptUtils): void
+    {
         $this->cptUtils = $cptUtils;
+    }
+    protected function getCPTUtils(): CPTUtils
+    {
+        return $this->cptUtils ??= $this->instanceManager->getInstance(CPTUtils::class);
     }
 
     abstract protected function getAttributeName(): string;
@@ -60,17 +68,17 @@ EOF;
             ]);
             foreach ($postObjects as $postObject) {
                 $foundPostListIDs[] = $postObject->ID;
-                $postDescription = $this->cptUtils->getCustomPostDescription($postObject);
+                $postDescription = $this->getCptUtils()->getCustomPostDescription($postObject);
                 $permalink = \get_permalink($postObject->ID);
                 $postContentElems[] = ($permalink ?
                     \sprintf(
                         '<code><a href="%s">%s</a></code>',
                         $permalink,
-                        $this->blockRenderingHelpers->getCustomPostTitle($postObject)
+                        $this->getBlockRenderingHelpers()->getCustomPostTitle($postObject)
                     ) :
                     \sprintf(
                         '<code>%s</code>',
-                        $this->blockRenderingHelpers->getCustomPostTitle($postObject)
+                        $this->getBlockRenderingHelpers()->getCustomPostTitle($postObject)
                     )
                 ) . ($postDescription ?
                     '<br/><small>' . $postDescription . '</small>'

@@ -5,25 +5,31 @@ declare(strict_types=1);
 namespace PoP\LooseContracts;
 
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+use PoP\Root\Services\WithInstanceManagerServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractLooseContractSet extends AbstractAutomaticallyInstantiatedService
 {
-    protected LooseContractManagerInterface $looseContractManager;
+    use WithInstanceManagerServiceTrait;
 
-    #[Required]
-    final public function autowireAbstractLooseContractSet(LooseContractManagerInterface $looseContractManager): void
+    private ?LooseContractManagerInterface $looseContractManager = null;
+
+    public function setLooseContractManager(LooseContractManagerInterface $looseContractManager): void
     {
         $this->looseContractManager = $looseContractManager;
+    }
+    protected function getLooseContractManager(): LooseContractManagerInterface
+    {
+        return $this->looseContractManager ??= $this->instanceManager->getInstance(LooseContractManagerInterface::class);
     }
 
     final public function initialize(): void
     {
         // Require the configured hooks and names
-        $this->looseContractManager->requireHooks(
+        $this->getLooseContractManager()->requireHooks(
             $this->getRequiredHooks()
         );
-        $this->looseContractManager->requireNames(
+        $this->getLooseContractManager()->requireNames(
             $this->getRequiredNames()
         );
     }

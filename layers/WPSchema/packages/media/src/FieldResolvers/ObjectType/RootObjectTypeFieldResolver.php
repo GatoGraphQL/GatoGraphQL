@@ -19,19 +19,33 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected MediaTypeAPIInterface $mediaTypeAPI;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected MediaObjectTypeResolver $mediaObjectTypeResolver;
+    private ?MediaTypeAPIInterface $mediaTypeAPI = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
 
-    #[Required]
-    final public function autowireRootObjectTypeFieldResolver(
-        MediaTypeAPIInterface $mediaTypeAPI,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        MediaObjectTypeResolver $mediaObjectTypeResolver,
-    ): void {
+    public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
+    {
         $this->mediaTypeAPI = $mediaTypeAPI;
+    }
+    protected function getMediaTypeAPI(): MediaTypeAPIInterface
+    {
+        return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
+    {
         $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
+    }
+    protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
+    {
+        return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -52,8 +66,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'mediaItemBySlug' => $this->translationAPI->__('Get a media item by slug', 'media'),
-            'imageSizeNames' => $this->translationAPI->__('Gets the available intermediate image size names.', 'media'),
+            'mediaItemBySlug' => $this->getTranslationAPI()->__('Get a media item by slug', 'media'),
+            'imageSizeNames' => $this->getTranslationAPI()->__('Gets the available intermediate image size names.', 'media'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -61,8 +75,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'imageSizeNames' => $this->stringScalarTypeResolver,
-            'mediaItemBySlug' => $this->mediaObjectTypeResolver,
+            'imageSizeNames' => $this->getStringScalarTypeResolver(),
+            'mediaItemBySlug' => $this->getMediaObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -109,7 +123,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'mediaItemBySlug':
-                if ($mediaItems = $this->mediaTypeAPI->getMediaItems($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($mediaItems = $this->getMediaTypeAPI()->getMediaItems($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $mediaItems[0];
                 }
                 return null;

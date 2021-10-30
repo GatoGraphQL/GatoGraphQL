@@ -14,22 +14,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ModulePathsHookSet extends AbstractHookSet
 {
-    protected ModulePaths $modulePaths;
+    private ?ModulePaths $modulePaths = null;
     
-    #[Required]
-    final public function autowireModulePathsHookSet(
-        ModulePaths $modulePaths
-    ): void {
+    public function setModulePaths(ModulePaths $modulePaths): void
+    {
         $this->modulePaths = $modulePaths;
+    }
+    protected function getModulePaths(): ModulePaths
+    {
+        return $this->modulePaths ??= $this->instanceManager->getInstance(ModulePaths::class);
     }
 
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             ModelInstance::HOOK_COMPONENTSFROMVARS_RESULT,
             [$this, 'maybeAddComponent']
         );
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'ApplicationState:addVars',
             [$this, 'addVars'],
             10,
@@ -56,7 +58,7 @@ class ModulePathsHookSet extends AbstractHookSet
                     fn ($modulepath) => $modulePathHelpers->stringifyModulePath($modulepath),
                     $modulepaths
                 );
-                $components[] = $this->translationAPI->__('module paths:', 'engine') . implode(',', $paths);
+                $components[] = $this->getTranslationAPI()->__('module paths:', 'engine') . implode(',', $paths);
             }
         }
 

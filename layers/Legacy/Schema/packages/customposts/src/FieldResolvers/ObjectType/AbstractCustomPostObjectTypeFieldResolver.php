@@ -14,13 +14,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver;
+    private ?IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver = null;
     
-    #[Required]
-    final public function autowireAbstractCustomPostObjectTypeFieldResolver(
-        IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver,
-    ): void {
+    public function setIsCustomPostInterfaceTypeFieldResolver(IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver): void
+    {
         $this->isCustomPostInterfaceTypeFieldResolver = $isCustomPostInterfaceTypeFieldResolver;
+    }
+    protected function getIsCustomPostInterfaceTypeFieldResolver(): IsCustomPostInterfaceTypeFieldResolver
+    {
+        return $this->isCustomPostInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(IsCustomPostInterfaceTypeFieldResolver::class);
     }
 
     public function getFieldNamesToResolve(): array

@@ -11,13 +11,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractValidateCheckpointDirectiveResolver extends AbstractValidateConditionDirectiveResolver
 {
-    protected EngineInterface $engine;
+    private ?EngineInterface $engine = null;
 
-    #[Required]
-    final public function autowireAbstractValidateCheckpointDirectiveResolver(
-        EngineInterface $engine,
-    ): void {
+    public function setEngine(EngineInterface $engine): void
+    {
         $this->engine = $engine;
+    }
+    protected function getEngine(): EngineInterface
+    {
+        return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
     }
 
     /**
@@ -26,7 +28,7 @@ abstract class AbstractValidateCheckpointDirectiveResolver extends AbstractValid
     protected function validateCondition(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         $checkpointSet = $this->getValidationCheckpointSet($relationalTypeResolver);
-        $validation = $this->engine->validateCheckpoints($checkpointSet);
+        $validation = $this->getEngine()->validateCheckpoints($checkpointSet);
         return !GeneralUtils::isError($validation);
     }
 

@@ -10,22 +10,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SaveDefinitionFileMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {
-    protected SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver;
+    private ?SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver = null;
 
-    #[Required]
-    final public function autowireSaveDefinitionFileMutationResolverBridge(
-        SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver,
-    ): void {
+    public function setSaveDefinitionFileMutationResolver(SaveDefinitionFileMutationResolver $saveDefinitionFileMutationResolver): void
+    {
         $this->saveDefinitionFileMutationResolver = $saveDefinitionFileMutationResolver;
+    }
+    protected function getSaveDefinitionFileMutationResolver(): SaveDefinitionFileMutationResolver
+    {
+        return $this->saveDefinitionFileMutationResolver ??= $this->instanceManager->getInstance(SaveDefinitionFileMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->saveDefinitionFileMutationResolver;
+        return $this->getSaveDefinitionFileMutationResolver();
     }
 
     public function getSuccessString(string | int $result_id): ?string
     {
-        return $this->translationAPI->__('System action "save definition file" executed successfully.', 'pop-system');
+        return $this->getTranslationAPI()->__('System action "save definition file" executed successfully.', 'pop-system');
     }
 }

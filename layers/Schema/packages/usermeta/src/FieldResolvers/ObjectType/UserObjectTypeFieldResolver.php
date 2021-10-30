@@ -13,16 +13,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected UserMetaTypeAPIInterface $userMetaAPI;
-    protected WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver;
+    private ?UserMetaTypeAPIInterface $userMetaTypeAPI = null;
+    private ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
 
-    #[Required]
-    final public function autowireUserObjectTypeFieldResolver(
-        UserMetaTypeAPIInterface $userMetaAPI,
-        WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver,
-    ): void {
-        $this->userMetaAPI = $userMetaAPI;
+    public function setUserMetaTypeAPI(UserMetaTypeAPIInterface $userMetaTypeAPI): void
+    {
+        $this->userMetaTypeAPI = $userMetaTypeAPI;
+    }
+    protected function getUserMetaTypeAPI(): UserMetaTypeAPIInterface
+    {
+        return $this->userMetaTypeAPI ??= $this->instanceManager->getInstance(UserMetaTypeAPIInterface::class);
+    }
+    public function setWithMetaInterfaceTypeFieldResolver(WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver): void
+    {
         $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
+    }
+    protected function getWithMetaInterfaceTypeFieldResolver(): WithMetaInterfaceTypeFieldResolver
+    {
+        return $this->withMetaInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(WithMetaInterfaceTypeFieldResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -35,7 +43,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->withMetaInterfaceTypeFieldResolver,
+            $this->getWithMetaInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -66,7 +74,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'metaValue':
             case 'metaValues':
-                return $this->userMetaAPI->getUserMeta(
+                return $this->getUserMetaTypeAPI()->getUserMeta(
                     $objectTypeResolver->getID($user),
                     $fieldArgs['key'],
                     $fieldName === 'metaValue'

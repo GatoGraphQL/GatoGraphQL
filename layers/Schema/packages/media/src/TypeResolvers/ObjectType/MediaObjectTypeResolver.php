@@ -12,16 +12,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MediaObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected MediaTypeAPIInterface $mediaTypeAPI;
-    protected MediaTypeDataLoader $mediaTypeDataLoader;
+    private ?MediaTypeAPIInterface $mediaTypeAPI = null;
+    private ?MediaTypeDataLoader $mediaTypeDataLoader = null;
 
-    #[Required]
-    final public function autowireMediaObjectTypeResolver(
-        MediaTypeAPIInterface $mediaTypeAPI,
-        MediaTypeDataLoader $mediaTypeDataLoader,
-    ): void {
+    public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
+    {
         $this->mediaTypeAPI = $mediaTypeAPI;
+    }
+    protected function getMediaTypeAPI(): MediaTypeAPIInterface
+    {
+        return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
+    }
+    public function setMediaTypeDataLoader(MediaTypeDataLoader $mediaTypeDataLoader): void
+    {
         $this->mediaTypeDataLoader = $mediaTypeDataLoader;
+    }
+    protected function getMediaTypeDataLoader(): MediaTypeDataLoader
+    {
+        return $this->mediaTypeDataLoader ??= $this->instanceManager->getInstance(MediaTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -31,17 +39,17 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Media elements (such as images, videos, etc), attached to a post or independent', 'media');
+        return $this->getTranslationAPI()->__('Media elements (such as images, videos, etc), attached to a post or independent', 'media');
     }
 
     public function getID(object $object): string | int | null
     {
         $media = $object;
-        return $this->mediaTypeAPI->getMediaItemID($media);
+        return $this->getMediaTypeAPI()->getMediaItemID($media);
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->mediaTypeDataLoader;
+        return $this->getMediaTypeDataLoader();
     }
 }

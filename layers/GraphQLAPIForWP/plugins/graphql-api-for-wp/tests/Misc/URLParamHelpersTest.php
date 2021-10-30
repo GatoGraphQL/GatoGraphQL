@@ -4,7 +4,7 @@ namespace GraphQLAPI\GraphQLAPI\Misc;
 
 use GraphQLAPI\GraphQLAPI\Services\Helpers\URLParamHelpers;
 use PHPUnit\Framework\TestCase;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class URLParamHelpersTest extends TestCase
 {

@@ -13,16 +13,24 @@ use WP_Post;
 
 class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraphQLQueryResolutionEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
-    protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
-    protected QueryRetrieverInterface $queryRetrieverInterface;
+    private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
+    private ?QueryRetrieverInterface $queryRetriever = null;
 
-    #[Required]
-    final public function autowireCustomEndpointGraphQLQueryResolutionEndpointExecuter(
-        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-        QueryRetrieverInterface $queryRetrieverInterface,
-    ): void {
+    public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
+    {
         $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
-        $this->queryRetrieverInterface = $queryRetrieverInterface;
+    }
+    protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
+    {
+        return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+    }
+    public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
+    {
+        $this->queryRetriever = $queryRetriever;
+    }
+    protected function getQueryRetriever(): QueryRetrieverInterface
+    {
+        return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
     }
 
     public function getEnablingModule(): ?string
@@ -32,7 +40,7 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
 
     protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface
     {
-        return $this->graphQLCustomEndpointCustomPostType;
+        return $this->getGraphQLCustomEndpointCustomPostType();
     }
 
     /**
@@ -45,6 +53,6 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
         /**
          * Extract the query from the BODY through standard GraphQL endpoint execution
          */
-        return $this->queryRetrieverInterface->extractRequestedGraphQLQueryPayload();
+        return $this->getQueryRetriever()->extractRequestedGraphQLQueryPayload();
     }
 }

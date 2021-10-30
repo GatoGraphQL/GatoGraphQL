@@ -10,19 +10,21 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    protected QueryRoot $queryRoot;
+    private ?QueryRoot $queryRoot = null;
 
-    #[Required]
-    final public function autowireQueryRootTypeDataLoader(
-        QueryRoot $queryRoot,
-    ): void {
+    public function setQueryRoot(QueryRoot $queryRoot): void
+    {
         $this->queryRoot = $queryRoot;
+    }
+    protected function getQueryRoot(): QueryRoot
+    {
+        return $this->queryRoot ??= $this->instanceManager->getInstance(QueryRoot::class);
     }
 
     public function getObjects(array $ids): array
     {
         return [
-            $this->queryRoot,
+            $this->getQueryRoot(),
         ];
     }
 }

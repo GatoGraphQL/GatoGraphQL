@@ -23,22 +23,42 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     
-    #[Required]
-    final public function autowireStanceObjectTypeFieldResolver(
-        IDScalarTypeResolver $idScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        IntScalarTypeResolver $intScalarTypeResolver,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-    ): void {
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -66,13 +86,13 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match($fieldName) {
             'stancetarget' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
-            'categories' => $this->idScalarTypeResolver,
-            'catSlugs' => $this->stringScalarTypeResolver,
-            'stance' => $this->intScalarTypeResolver,
-            'title' => $this->stringScalarTypeResolver,
-            'excerpt' => $this->stringScalarTypeResolver,
-            'content' => $this->stringScalarTypeResolver,
-            'hasStanceTarget' => $this->booleanScalarTypeResolver,
+            'categories' => $this->getIdScalarTypeResolver(),
+            'catSlugs' => $this->getStringScalarTypeResolver(),
+            'stance' => $this->getIntScalarTypeResolver(),
+            'title' => $this->getStringScalarTypeResolver(),
+            'excerpt' => $this->getStringScalarTypeResolver(),
+            'content' => $this->getStringScalarTypeResolver(),
+            'hasStanceTarget' => $this->getBooleanScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -94,14 +114,14 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'categories' => $this->translationAPI->__('', ''),
-            'catSlugs' => $this->translationAPI->__('', ''),
-            'stance' => $this->translationAPI->__('', ''),
-            'title' => $this->translationAPI->__('', ''),
-            'excerpt' => $this->translationAPI->__('', ''),
-            'content' => $this->translationAPI->__('', ''),
-            'stancetarget' => $this->translationAPI->__('', ''),
-            'hasStanceTarget' => $this->translationAPI->__('', ''),
+            'categories' => $this->getTranslationAPI()->__('', ''),
+            'catSlugs' => $this->getTranslationAPI()->__('', ''),
+            'stance' => $this->getTranslationAPI()->__('', ''),
+            'title' => $this->getTranslationAPI()->__('', ''),
+            'excerpt' => $this->getTranslationAPI()->__('', ''),
+            'content' => $this->getTranslationAPI()->__('', ''),
+            'stancetarget' => $this->getTranslationAPI()->__('', ''),
+            'hasStanceTarget' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

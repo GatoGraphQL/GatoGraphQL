@@ -12,13 +12,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeDataLoader implements ObjectTypeQueryableDataLoaderInterface
 {
-    protected ModuleProcessorManagerInterface $moduleProcessorManager;
+    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
-    #[Required]
-    final public function autowireAbstractObjectTypeQueryableDataLoader(
-        ModuleProcessorManagerInterface $moduleProcessorManager,
-    ): void {
+    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    {
         $this->moduleProcessorManager = $moduleProcessorManager;
+    }
+    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    {
+        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     }
 
     /**
@@ -33,14 +35,14 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
 
     protected function getPagenumberParam($query_args)
     {
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             'GD_Dataloader_List:query:pagenumber',
             $query_args[Params::PAGE_NUMBER]
         );
     }
     protected function getLimitParam($query_args)
     {
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             'GD_Dataloader_List:query:limit',
             $query_args[Params::LIMIT]
         );
@@ -59,13 +61,13 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
         $query = $this->getQuery($query_args);
 
         // Allow URE to modify the role, limiting selected users and excluding others, like 'subscriber'
-        $query = $this->hooksAPI->applyFilters(self::class . ':gd_dataload_query', $query, $data_properties);
+        $query = $this->getHooksAPI()->applyFilters(self::class . ':gd_dataload_query', $query, $data_properties);
 
         // Apply filtering of the data
         if ($filtering_modules = $data_properties[DataloadingConstants::QUERYARGSFILTERINGMODULES] ?? null) {
             foreach ($filtering_modules as $module) {
                 /** @var FilterDataModuleProcessorInterface */
-                $filterDataModuleProcessor = $this->moduleProcessorManager->getProcessor($module);
+                $filterDataModuleProcessor = $this->getModuleProcessorManager()->getProcessor($module);
                 $filterDataModuleProcessor->filterHeadmoduleDataloadQueryArgs($module, $query);
             }
         }
@@ -126,7 +128,7 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
         }
 
         // Allow CoAuthors Plus to modify the query to add the coauthors
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             $this->getQueryHookName(),
             $query,
             $query_args

@@ -12,18 +12,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver;
+    private ?MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver = null;
 
-    #[Required]
-    final public function autowireMarkAllAsReadNotificationMutationResolverBridge(
-        MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver,
-    ): void {
+    public function setMarkAllAsReadNotificationMutationResolver(MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver): void
+    {
         $this->markAllAsReadNotificationMutationResolver = $markAllAsReadNotificationMutationResolver;
+    }
+    protected function getMarkAllAsReadNotificationMutationResolver(): MarkAllAsReadNotificationMutationResolver
+    {
+        return $this->markAllAsReadNotificationMutationResolver ??= $this->instanceManager->getInstance(MarkAllAsReadNotificationMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->markAllAsReadNotificationMutationResolver;
+        return $this->getMarkAllAsReadNotificationMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool

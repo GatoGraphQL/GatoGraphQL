@@ -12,28 +12,39 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractPageObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
-    protected PageObjectTypeResolver $pageObjectTypeResolver;
-    protected PageTypeAPIInterface $pageTypeAPI;
 
-    #[Required]
-    final public function autowireAbstractPageObjectTypeResolverPicker(PageObjectTypeResolver $pageObjectTypeResolver, PageTypeAPIInterface $pageTypeAPI): void
+    private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
+    private ?PageTypeAPIInterface $pageTypeAPI = null;
+
+    public function setPageObjectTypeResolver(PageObjectTypeResolver $pageObjectTypeResolver): void
     {
         $this->pageObjectTypeResolver = $pageObjectTypeResolver;
+    }
+    protected function getPageObjectTypeResolver(): PageObjectTypeResolver
+    {
+        return $this->pageObjectTypeResolver ??= $this->instanceManager->getInstance(PageObjectTypeResolver::class);
+    }
+    public function setPageTypeAPI(PageTypeAPIInterface $pageTypeAPI): void
+    {
         $this->pageTypeAPI = $pageTypeAPI;
+    }
+    protected function getPageTypeAPI(): PageTypeAPIInterface
+    {
+        return $this->pageTypeAPI ??= $this->instanceManager->getInstance(PageTypeAPIInterface::class);
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface
     {
-        return $this->pageObjectTypeResolver;
+        return $this->getPageObjectTypeResolver();
     }
 
     public function isInstanceOfType(object $object): bool
     {
-        return $this->pageTypeAPI->isInstanceOfPageType($object);
+        return $this->getPageTypeAPI()->isInstanceOfPageType($object);
     }
 
     public function isIDOfType(string | int $objectID): bool
     {
-        return $this->pageTypeAPI->pageExists($objectID);
+        return $this->getPageTypeAPI()->pageExists($objectID);
     }
 }

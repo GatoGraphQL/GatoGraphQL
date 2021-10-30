@@ -10,17 +10,19 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class PageTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
-    protected PageTypeAPIInterface $pageTypeAPI;
+    private ?PageTypeAPIInterface $pageTypeAPI = null;
 
-    #[Required]
-    final public function autowirePageTypeDataLoader(
-        PageTypeAPIInterface $pageTypeAPI,
-    ): void {
+    public function setPageTypeAPI(PageTypeAPIInterface $pageTypeAPI): void
+    {
         $this->pageTypeAPI = $pageTypeAPI;
+    }
+    protected function getPageTypeAPI(): PageTypeAPIInterface
+    {
+        return $this->pageTypeAPI ??= $this->instanceManager->getInstance(PageTypeAPIInterface::class);
     }
 
     public function executeQuery($query, array $options = []): array
     {
-        return $this->pageTypeAPI->getPages($query, $options);
+        return $this->getPageTypeAPI()->getPages($query, $options);
     }
 }

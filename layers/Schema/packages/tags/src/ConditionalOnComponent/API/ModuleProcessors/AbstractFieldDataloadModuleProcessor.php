@@ -20,16 +20,25 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
     public const MODULE_DATALOAD_RELATIONALFIELDS_TAG = 'dataload-relationalfields-tag';
     public const MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST = 'dataload-relationalfields-taglist';
     public const MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT = 'dataload-relationalfields-tagcount';
-    protected PostTagObjectTypeResolver $postTagObjectTypeResolver;
-    protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
-    #[Required]
-    final public function autowireAbstractFieldDataloadModuleProcessor(
-        PostTagObjectTypeResolver $postTagObjectTypeResolver,
-        ListQueryInputOutputHandler $listQueryInputOutputHandler,
-    ): void {
+    private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
+    private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
+
+    public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
+    {
         $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
+    }
+    protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
+    {
+        return $this->postTagObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+    }
+    public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
+    {
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
+    }
+    protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
+    {
+        return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
     public function getModulesToProcess(): array
@@ -56,7 +65,7 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAG:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
-                return $this->postTagObjectTypeResolver;
+                return $this->getPostTagObjectTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);
@@ -66,7 +75,7 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
-                return $this->listQueryInputOutputHandler;
+                return $this->getListQueryInputOutputHandler();
         }
 
         return parent::getQueryInputOutputHandler($module);

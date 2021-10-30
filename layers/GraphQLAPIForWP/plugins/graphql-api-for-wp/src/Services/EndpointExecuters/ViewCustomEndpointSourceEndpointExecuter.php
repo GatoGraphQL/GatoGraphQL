@@ -11,13 +11,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ViewCustomEndpointSourceEndpointExecuter extends AbstractViewSourceEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
-    protected GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType;
+    private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
 
-    #[Required]
-    final public function autowireViewCustomEndpointSourceEndpointExecuter(
-        GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType,
-    ): void {
+    public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
+    {
         $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
+    }
+    protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
+    {
+        return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
     }
 
     public function getEnablingModule(): ?string
@@ -27,6 +29,6 @@ class ViewCustomEndpointSourceEndpointExecuter extends AbstractViewSourceEndpoin
 
     protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface
     {
-        return $this->graphQLCustomEndpointCustomPostType;
+        return $this->getGraphQLCustomEndpointCustomPostType();
     }
 }

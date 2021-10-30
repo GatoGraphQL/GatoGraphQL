@@ -27,19 +27,33 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
 {
     use WithLimitFieldArgResolverTrait;
 
-    protected IntScalarTypeResolver $intScalarTypeResolver;
-    protected PageObjectTypeResolver $pageObjectTypeResolver;
-    protected PageTypeAPIInterface $pageTypeAPI;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
+    private ?PageTypeAPIInterface $pageTypeAPI = null;
 
-    #[Required]
-    final public function autowireRootPageObjectTypeFieldResolver(
-        IntScalarTypeResolver $intScalarTypeResolver,
-        PageObjectTypeResolver $pageObjectTypeResolver,
-        PageTypeAPIInterface $pageTypeAPI,
-    ): void {
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    public function setPageObjectTypeResolver(PageObjectTypeResolver $pageObjectTypeResolver): void
+    {
         $this->pageObjectTypeResolver = $pageObjectTypeResolver;
+    }
+    protected function getPageObjectTypeResolver(): PageObjectTypeResolver
+    {
+        return $this->pageObjectTypeResolver ??= $this->instanceManager->getInstance(PageObjectTypeResolver::class);
+    }
+    public function setPageTypeAPI(PageTypeAPIInterface $pageTypeAPI): void
+    {
         $this->pageTypeAPI = $pageTypeAPI;
+    }
+    protected function getPageTypeAPI(): PageTypeAPIInterface
+    {
+        return $this->pageTypeAPI ??= $this->instanceManager->getInstance(PageTypeAPIInterface::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -76,14 +90,14 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'page' => $this->translationAPI->__('Page with a specific ID', 'pages'),
-            'pageBySlug' => $this->translationAPI->__('Page with a specific slug', 'pages'),
-            'pages' => $this->translationAPI->__('Pages', 'pages'),
-            'pageCount' => $this->translationAPI->__('Number of pages', 'pages'),
-            'pageForAdmin' => $this->translationAPI->__('[Unrestricted] Page with a specific ID', 'pages'),
-            'pageBySlugForAdmin' => $this->translationAPI->__('[Unrestricted] Page with a specific slug', 'pages'),
-            'pagesForAdmin' => $this->translationAPI->__('[Unrestricted] Pages', 'pages'),
-            'pageCountForAdmin' => $this->translationAPI->__('[Unrestricted] Number of pages', 'pages'),
+            'page' => $this->getTranslationAPI()->__('Page with a specific ID', 'pages'),
+            'pageBySlug' => $this->getTranslationAPI()->__('Page with a specific slug', 'pages'),
+            'pages' => $this->getTranslationAPI()->__('Pages', 'pages'),
+            'pageCount' => $this->getTranslationAPI()->__('Number of pages', 'pages'),
+            'pageForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Page with a specific ID', 'pages'),
+            'pageBySlugForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Page with a specific slug', 'pages'),
+            'pagesForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Pages', 'pages'),
+            'pageCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of pages', 'pages'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -97,10 +111,10 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
             'pageForAdmin',
             'pageBySlugForAdmin',
             'pagesForAdmin'
-                => $this->pageObjectTypeResolver,
+                => $this->getPageObjectTypeResolver(),
             'pageCount',
             'pageCountForAdmin'
-                => $this->intScalarTypeResolver,
+                => $this->getIntScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -234,16 +248,16 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
             case 'pageBySlug':
             case 'pageForAdmin':
             case 'pageBySlugForAdmin':
-                if ($pages = $this->pageTypeAPI->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($pages = $this->getPageTypeAPI()->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $pages[0];
                 }
                 return null;
             case 'pages':
             case 'pagesForAdmin':
-                return $this->pageTypeAPI->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getPageTypeAPI()->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'pageCount':
             case 'pageCountForAdmin':
-                return $this->pageTypeAPI->getPageCount($query);
+                return $this->getPageTypeAPI()->getPageCount($query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

@@ -13,16 +13,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirectiveResolver implements CacheControlDirectiveResolverInterface
 {
-    protected CacheControlEngineInterface $cacheControlEngine;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
+    private ?CacheControlEngineInterface $cacheControlEngine = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireAbstractCacheControlDirectiveResolver(
-        CacheControlEngineInterface $cacheControlEngine,
-        IntScalarTypeResolver $intScalarTypeResolver,
-    ): void {
+    public function setCacheControlEngine(CacheControlEngineInterface $cacheControlEngine): void
+    {
         $this->cacheControlEngine = $cacheControlEngine;
+    }
+    protected function getCacheControlEngine(): CacheControlEngineInterface
+    {
+        return $this->cacheControlEngine ??= $this->instanceManager->getInstance(CacheControlEngineInterface::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
 
     public function getDirectiveName(): string
@@ -64,19 +72,19 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->translationAPI->__('HTTP caching (https://tools.ietf.org/html/rfc7234): Cache the response by setting a Cache-Control header with a max-age value; this value is calculated as the minimum max-age value among all requested fields. If any field has max-age: 0, a corresponding \'no-store\' value is sent, indicating to not cache the response', 'cache-control');
+        return $this->getTranslationAPI()->__('HTTP caching (https://tools.ietf.org/html/rfc7234): Cache the response by setting a Cache-Control header with a max-age value; this value is calculated as the minimum max-age value among all requested fields. If any field has max-age: 0, a corresponding \'no-store\' value is sent, indicating to not cache the response', 'cache-control');
     }
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            'maxAge' => $this->intScalarTypeResolver,
+            'maxAge' => $this->getIntScalarTypeResolver(),
         ];
     }
 
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'maxAge' => $this->translationAPI->__('Use a specific max-age value for the field, instead of the one configured in the directive', 'cache-control'),
+            'maxAge' => $this->getTranslationAPI()->__('Use a specific max-age value for the field, instead of the one configured in the directive', 'cache-control'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }
@@ -102,7 +110,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
         switch ($directiveArgName) {
             case 'maxAge':
                 if ($directiveArgValue < 0) {
-                    $errors[] = $this->translationAPI->__('The value for \'maxAge\' must either be a positive number, or \'0\' to avoid caching');
+                    $errors[] = $this->getTranslationAPI()->__('The value for \'maxAge\' must either be a positive number, or \'0\' to avoid caching');
                 }
                 break;
         }
@@ -152,7 +160,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
         // If it was provided as a directiveArg, use that value. Otherwise, use the one from the class
         $maxAge = $this->directiveArgsForSchema['maxAge'] ?? $this->getMaxAge();
         if (!is_null($maxAge)) {
-            $this->cacheControlEngine->addMaxAge($maxAge);
+            $this->getCacheControlEngine()->addMaxAge($maxAge);
         }
     }
 

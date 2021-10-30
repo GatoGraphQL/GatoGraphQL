@@ -15,13 +15,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireAdvancePointerInArrayDirectiveResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getDirectiveName(): string
@@ -44,7 +46,7 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->translationAPI->__('Apply all composed directives on the element found under the \'path\' parameter in the affected array object', 'component-model');
+        return $this->getTranslationAPI()->__('Apply all composed directives on the element found under the \'path\' parameter in the affected array object', 'component-model');
     }
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
@@ -52,7 +54,7 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
         return array_merge(
             parent::getDirectiveArgNameTypeResolvers($relationalTypeResolver),
             [
-                'path' => $this->stringScalarTypeResolver,
+                'path' => $this->getStringScalarTypeResolver(),
             ]
         );
     }
@@ -60,7 +62,7 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'path' => $this->translationAPI->__('Path to the element in the array', 'component-model'),
+            'path' => $this->getTranslationAPI()->__('Path to the element in the array', 'component-model'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }

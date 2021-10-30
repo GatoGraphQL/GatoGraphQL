@@ -14,18 +14,20 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
 {
     use PluginMarkdownContentRetrieverTrait;
 
-    protected AboutMenuPage $aboutMenuPage;
+    private ?AboutMenuPage $aboutMenuPage = null;
 
-    #[Required]
-    final public function autowireReleaseNotesAboutMenuPage(
-        AboutMenuPage $aboutMenuPage,
-    ): void {
+    public function setAboutMenuPage(AboutMenuPage $aboutMenuPage): void
+    {
         $this->aboutMenuPage = $aboutMenuPage;
+    }
+    protected function getAboutMenuPage(): AboutMenuPage
+    {
+        return $this->aboutMenuPage ??= $this->instanceManager->getInstance(AboutMenuPage::class);
     }
 
     public function getMenuPageSlug(): string
     {
-        return $this->aboutMenuPage->getMenuPageSlug();
+        return $this->getAboutMenuPage()->getMenuPageSlug();
     }
 
     /**
@@ -33,7 +35,7 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
      */
     protected function isCurrentScreen(): bool
     {
-        return $this->menuPageHelper->isDocumentationScreen() && parent::isCurrentScreen();
+        return $this->getMenuPageHelper()->isDocumentationScreen() && parent::isCurrentScreen();
     }
 
     protected function getRelativePathDir(): string

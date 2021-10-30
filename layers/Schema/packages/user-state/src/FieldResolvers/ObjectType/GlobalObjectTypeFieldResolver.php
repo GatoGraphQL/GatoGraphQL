@@ -14,13 +14,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireGlobalObjectTypeFieldResolver(
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-    ): void {
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
     public function getFieldNamesToResolve(): array
@@ -33,7 +35,7 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'isUserLoggedIn' => $this->booleanScalarTypeResolver,
+            'isUserLoggedIn' => $this->getBooleanScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -49,7 +51,7 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'isUserLoggedIn' => $this->translationAPI->__('Is the user logged-in?', 'user-state'),
+            'isUserLoggedIn' => $this->getTranslationAPI()->__('Is the user logged-in?', 'user-state'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

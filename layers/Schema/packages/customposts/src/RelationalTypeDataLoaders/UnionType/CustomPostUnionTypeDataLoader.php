@@ -11,17 +11,19 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
-    protected CustomPostUnionTypeResolver $customPostUnionTypeResolver;
+    private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
 
-    #[Required]
-    final public function autowireCustomPostUnionTypeDataLoader(
-        CustomPostUnionTypeResolver $customPostUnionTypeResolver,
-    ): void {
+    public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
+    {
         $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
+    }
+    protected function getCustomPostUnionTypeResolver(): CustomPostUnionTypeResolver
+    {
+        return $this->customPostUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface
     {
-        return $this->customPostUnionTypeResolver;
+        return $this->getCustomPostUnionTypeResolver();
     }
 }

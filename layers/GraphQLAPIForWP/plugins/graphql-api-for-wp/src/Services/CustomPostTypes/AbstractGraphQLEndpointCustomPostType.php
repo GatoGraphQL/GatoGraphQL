@@ -9,22 +9,24 @@ use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 
 abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostType implements GraphQLEndpointCustomPostTypeInterface
 {
-    protected HooksAPIInterface $hooksAPI;
-    protected BlockHelpers $blockHelpers;
+    use WithHooksAPIServiceTrait;
 
-    #[Required]
-    final public function autowireAbstractGraphQLEndpointCustomPostType(
-        HooksAPIInterface $hooksAPI,
-        BlockHelpers $blockHelpers,
-    ): void {
-        $this->hooksAPI = $hooksAPI;
+    private ?BlockHelpers $blockHelpers = null;
+
+    public function setBlockHelpers(BlockHelpers $blockHelpers): void
+    {
         $this->blockHelpers = $blockHelpers;
+    }
+    protected function getBlockHelpers(): BlockHelpers
+    {
+        return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
 
     /**
@@ -178,7 +180,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
      */
     protected function isAccessForbidden(): bool
     {
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             Hooks::FORBID_ACCESS,
             false
         );
@@ -217,7 +219,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
      */
     public function getOptionsBlockDataItem(WP_Post|int $postOrID): ?array
     {
-        return $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        return $this->getBlockHelpers()->getSingleBlockOfTypeFromCustomPost(
             $postOrID,
             $this->getEndpointOptionsBlock()
         );

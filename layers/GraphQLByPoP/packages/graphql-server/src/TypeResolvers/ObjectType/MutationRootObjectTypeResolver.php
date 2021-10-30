@@ -16,21 +16,24 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
 {
     use ReservedNameTypeResolverTrait;
 
-    /**
-     * List of fieldNames that are mandatory to all ObjectTypeResolvers
-     *
-     * @var string[]
-     */
-    protected array $objectTypeResolverMandatoryFields;
-    protected MutationRootTypeDataLoader $mutationRootTypeDataLoader;
+    private ?TypeResolverHelperInterface $typeResolverHelper = null;
+    private ?MutationRootTypeDataLoader $mutationRootTypeDataLoader = null;
 
-    #[Required]
-    final public function autowireMutationRootObjectTypeResolver(
-        TypeResolverHelperInterface $typeResolverHelper,
-        MutationRootTypeDataLoader $mutationRootTypeDataLoader,
-    ): void {
+    public function setTypeResolverHelper(TypeResolverHelperInterface $typeResolverHelper): void
+    {
+        $this->typeResolverHelper = $typeResolverHelper;
+    }
+    protected function getTypeResolverHelper(): TypeResolverHelperInterface
+    {
+        return $this->typeResolverHelper ??= $this->instanceManager->getInstance(TypeResolverHelperInterface::class);
+    }
+    public function setMutationRootTypeDataLoader(MutationRootTypeDataLoader $mutationRootTypeDataLoader): void
+    {
         $this->mutationRootTypeDataLoader = $mutationRootTypeDataLoader;
-        $this->objectTypeResolverMandatoryFields = $typeResolverHelper->getObjectTypeResolverMandatoryFields();
+    }
+    protected function getMutationRootTypeDataLoader(): MutationRootTypeDataLoader
+    {
+        return $this->mutationRootTypeDataLoader ??= $this->instanceManager->getInstance(MutationRootTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -40,7 +43,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Mutation type, starting from which mutations are executed', 'graphql-server');
+        return $this->getTranslationAPI()->__('Mutation type, starting from which mutations are executed', 'graphql-server');
     }
 
     public function getID(object $object): string | int | null
@@ -52,15 +55,16 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->mutationRootTypeDataLoader;
+        return $this->getMutationRootTypeDataLoader();
     }
 
     public function isFieldNameConditionSatisfiedForSchema(
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         string $fieldName
     ): bool {
+        $objectTypeResolverMandatoryFields = $this->getTypeResolverHelper()->getObjectTypeResolverMandatoryFields();
         return
-            in_array($fieldName, $this->objectTypeResolverMandatoryFields)
+            in_array($fieldName, $objectTypeResolverMandatoryFields)
             || $objectTypeFieldResolver->getFieldMutationResolver($this, $fieldName) !== null;
     }
 }

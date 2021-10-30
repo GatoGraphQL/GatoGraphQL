@@ -13,18 +13,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver;
+    private ?UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver = null;
     
-    #[Required]
-    final public function autowireUpdateMyCommunitiesMutationResolverBridge(
-        UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver,
-    ): void {
+    public function setUpdateMyCommunitiesMutationResolver(UpdateMyCommunitiesMutationResolver $updateMyCommunitiesMutationResolver): void
+    {
         $this->updateMyCommunitiesMutationResolver = $updateMyCommunitiesMutationResolver;
+    }
+    protected function getUpdateMyCommunitiesMutationResolver(): UpdateMyCommunitiesMutationResolver
+    {
+        return $this->updateMyCommunitiesMutationResolver ??= $this->instanceManager->getInstance(UpdateMyCommunitiesMutationResolver::class);
     }
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->updateMyCommunitiesMutationResolver;
+        return $this->getUpdateMyCommunitiesMutationResolver();
     }
 
     public function getFormData(): array
@@ -32,14 +34,14 @@ class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutatio
         $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['is-user-logged-in'] ? $vars['global-userstate']['current-user-id'] : '';
         $inputs = MutationResolverUtils::getMyCommunityFormInputs();
-        $communities = $this->moduleProcessorManager->getProcessor($inputs['communities'])->getValue($inputs['communities']);
+        $communities = $this->getModuleProcessorManager()->getProcessor($inputs['communities'])->getValue($inputs['communities']);
         $form_data = array(
             'user_id' => $user_id,
             'communities' => $communities ?? array(),
         );
 
         // Allow to add extra inputs
-        $form_data = $this->hooksAPI->applyFilters('gd_createupdate_mycommunities:form_data', $form_data);
+        $form_data = $this->getHooksAPI()->applyFilters('gd_createupdate_mycommunities:form_data', $form_data);
 
         return $form_data;
     }

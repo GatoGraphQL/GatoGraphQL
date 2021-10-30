@@ -15,13 +15,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected LocationObjectTypeResolver $locationObjectTypeResolver;
+    private ?LocationObjectTypeResolver $locationObjectTypeResolver = null;
     
-    #[Required]
-    final public function autowireUserObjectTypeFieldResolver(
-        LocationObjectTypeResolver $locationObjectTypeResolver,
-    ): void {
+    public function setLocationObjectTypeResolver(LocationObjectTypeResolver $locationObjectTypeResolver): void
+    {
         $this->locationObjectTypeResolver = $locationObjectTypeResolver;
+    }
+    protected function getLocationObjectTypeResolver(): LocationObjectTypeResolver
+    {
+        return $this->locationObjectTypeResolver ??= $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -49,7 +51,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'locations' => $this->translationAPI->__('Locations', 'pop-locations'),
+            'locations' => $this->getTranslationAPI()->__('Locations', 'pop-locations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -81,7 +83,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'locations' => $this->locationObjectTypeResolver,
+            'locations' => $this->getLocationObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

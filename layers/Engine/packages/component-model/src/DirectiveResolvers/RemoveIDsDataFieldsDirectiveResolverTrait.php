@@ -43,7 +43,7 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
             $object = $objectIDItems[$id];
             $fieldsToSetAsNullForID = $idsDataFieldsToSetAsNull[(string)$id]['direct'];
             foreach ($fieldsToSetAsNullForID as $field) {
-                $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
+                $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
                 $dbItems[(string)$id][$fieldOutputKey] = null;
             }
         }

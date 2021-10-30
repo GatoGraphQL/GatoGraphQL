@@ -5,22 +5,28 @@ declare(strict_types=1);
 namespace PoP\Engine\EntryModule;
 
 use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ModuleRouting\ModuleRoutingGroups;
 use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class EntryModuleManager implements EntryModuleManagerInterface
 {
-    protected RouteModuleProcessorManagerInterface $routeModuleProcessorManager;
+    use BasicServiceTrait;
 
-    #[Required]
-    final public function autowireEntryModuleManager(RouteModuleProcessorManagerInterface $routeModuleProcessorManager): void
+    private ?RouteModuleProcessorManagerInterface $routeModuleProcessorManager = null;
+
+    public function setRouteModuleProcessorManager(RouteModuleProcessorManagerInterface $routeModuleProcessorManager): void
     {
         $this->routeModuleProcessorManager = $routeModuleProcessorManager;
+    }
+    protected function getRouteModuleProcessorManager(): RouteModuleProcessorManagerInterface
+    {
+        return $this->routeModuleProcessorManager ??= $this->instanceManager->getInstance(RouteModuleProcessorManagerInterface::class);
     }
 
     public function getEntryModule(): ?array
     {
-        return $this->routeModuleProcessorManager->getRouteModuleByMostAllmatchingVarsProperties(ModuleRoutingGroups::ENTRYMODULE);
+        return $this->getRouteModuleProcessorManager()->getRouteModuleByMostAllmatchingVarsProperties(ModuleRoutingGroups::ENTRYMODULE);
     }
 }

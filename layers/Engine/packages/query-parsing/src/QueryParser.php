@@ -5,18 +5,13 @@ declare(strict_types=1);
 namespace PoP\QueryParsing;
 
 use Exception;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Translation\TranslationAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class QueryParser implements QueryParserInterface
 {
-    protected TranslationAPIInterface $translationAPI;
-
-    #[Required]
-    final public function autowireQueryParser(TranslationAPIInterface $translationAPI): void
-    {
-        $this->translationAPI = $translationAPI;
-    }
+    use BasicServiceTrait;
 
     /**
      * Parse elements by a separator, not failing whenever the separator
@@ -67,9 +62,9 @@ class QueryParser implements QueryParserInterface
         ) {
             throw new Exception(
                 sprintf(
-                    $this->translationAPI->__('Only strings of length 1 are valid in function `splitElements`, for params `$skipFromChars` and `$skipUntilChars`. The following string(s) are not valid: \'%s\''),
+                    $this->getTranslationAPI()->__('Only strings of length 1 are valid in function `splitElements`, for params `$skipFromChars` and `$skipUntilChars`. The following string(s) are not valid: \'%s\''),
                     implode(
-                        $this->translationAPI->__('\', \''),
+                        $this->getTranslationAPI()->__('\', \''),
                         $longStrings
                     )
                 )

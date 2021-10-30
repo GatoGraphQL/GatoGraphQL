@@ -22,7 +22,7 @@ class RegexScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Regex scalar, such as /([a-zA-Z_][0-9a-zA-Z_]*)/', 'component-model');
+        return $this->getTranslationAPI()->__('Regex scalar, such as /([a-zA-Z_][0-9a-zA-Z_]*)/', 'component-model');
     }
 
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error

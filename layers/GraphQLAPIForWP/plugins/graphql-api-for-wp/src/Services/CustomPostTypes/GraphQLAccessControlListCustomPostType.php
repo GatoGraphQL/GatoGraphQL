@@ -11,16 +11,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
 {
-    protected AccessControlBlock $accessControlBlock;
-    protected AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry;
+    private ?AccessControlBlock $accessControlBlock = null;
+    private ?AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry = null;
 
-    #[Required]
-    final public function autowireGraphQLAccessControlListCustomPostType(
-        AccessControlBlock $accessControlBlock,
-        AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry,
-    ): void {
+    public function setAccessControlBlock(AccessControlBlock $accessControlBlock): void
+    {
         $this->accessControlBlock = $accessControlBlock;
+    }
+    protected function getAccessControlBlock(): AccessControlBlock
+    {
+        return $this->accessControlBlock ??= $this->instanceManager->getInstance(AccessControlBlock::class);
+    }
+    public function setAccessControlRuleBlockRegistry(AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry): void
+    {
         $this->accessControlRuleBlockRegistry = $accessControlRuleBlockRegistry;
+    }
+    protected function getAccessControlRuleBlockRegistry(): AccessControlRuleBlockRegistryInterface
+    {
+        return $this->accessControlRuleBlockRegistry ??= $this->instanceManager->getInstance(AccessControlRuleBlockRegistryInterface::class);
     }
 
     /**
@@ -81,7 +89,7 @@ class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
     protected function getGutenbergTemplate(): array
     {
         return [
-            [$this->accessControlBlock->getBlockFullName()],
+            [$this->getAccessControlBlock()->getBlockFullName()],
         ];
     }
 
@@ -92,10 +100,10 @@ class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
      */
     protected function getGutenbergBlocksForCustomPostType(): array
     {
-        $aclNestedBlocks = $this->accessControlRuleBlockRegistry->getAccessControlRuleBlocks();
+        $aclNestedBlocks = $this->getAccessControlRuleBlockRegistry()->getAccessControlRuleBlocks();
         return array_merge(
             [
-                $this->accessControlBlock->getBlockFullName(),
+                $this->getAccessControlBlock()->getBlockFullName(),
             ],
             array_map(
                 fn ($aclNestedBlock) => $aclNestedBlock->getBlockFullName(),

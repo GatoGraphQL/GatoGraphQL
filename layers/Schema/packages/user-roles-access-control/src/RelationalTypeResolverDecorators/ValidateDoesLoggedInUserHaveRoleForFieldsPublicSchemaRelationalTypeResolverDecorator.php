@@ -17,25 +17,33 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaRelationalTypeResolve
     use ConfigurableAccessControlForFieldsRelationalTypeResolverDecoratorTrait;
     use ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecoratorTrait;
 
-    protected AccessControlManagerInterface $accessControlManager;
-    protected ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
+    private ?AccessControlManagerInterface $accessControlManager = null;
+    private ?ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver = null;
 
-    #[Required]
-    final public function autowireValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaRelationalTypeResolverDecorator(
-        AccessControlManagerInterface $accessControlManager,
-        ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver,
-    ): void {
+    public function setAccessControlManager(AccessControlManagerInterface $accessControlManager): void
+    {
         $this->accessControlManager = $accessControlManager;
+    }
+    protected function getAccessControlManager(): AccessControlManagerInterface
+    {
+        return $this->accessControlManager ??= $this->instanceManager->getInstance(AccessControlManagerInterface::class);
+    }
+    public function setValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver(ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver): void
+    {
         $this->validateDoesLoggedInUserHaveAnyRoleDirectiveResolver = $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
+    }
+    protected function getValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver(): ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver
+    {
+        return $this->validateDoesLoggedInUserHaveAnyRoleDirectiveResolver ??= $this->instanceManager->getInstance(ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver::class);
     }
 
     protected function getConfigurationEntries(): array
     {
-        return $this->accessControlManager->getEntriesForFields(AccessControlGroups::ROLES);
+        return $this->getAccessControlManager()->getEntriesForFields(AccessControlGroups::ROLES);
     }
 
     protected function getValidateRoleDirectiveResolver(): DirectiveResolverInterface
     {
-        return $this->validateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
+        return $this->getValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver();
     }
 }

@@ -14,26 +14,34 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RoutingHookSet extends AbstractHookSet
 {
-    protected CMSServiceInterface $cmsService;
-    protected RequestHelperServiceInterface $requestHelperService;
+    private ?CMSServiceInterface $cmsService = null;
+    private ?RequestHelperServiceInterface $requestHelperService = null;
 
-    #[Required]
-    final public function autowireRoutingHookSet(
-        CMSServiceInterface $cmsService,
-        RequestHelperServiceInterface $requestHelperService,
-    ): void {
+    public function setCMSService(CMSServiceInterface $cmsService): void
+    {
         $this->cmsService = $cmsService;
+    }
+    protected function getCMSService(): CMSServiceInterface
+    {
+        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
+    }
+    public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
+    {
         $this->requestHelperService = $requestHelperService;
+    }
+    protected function getRequestHelperService(): RequestHelperServiceInterface
+    {
+        return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
 
     protected function init(): void
     {
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             '\PoP\Routing:uri-route',
             array($this, 'getURIRoute')
         );
 
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             '\PoP\ComponentModel\Engine:getExtraRoutes',
             array($this, 'getExtraRoutes'),
             10,
@@ -64,8 +72,8 @@ class RoutingHookSet extends AbstractHookSet
         if (!ComponentConfiguration::overrideRequestURI()) {
             return $route;
         }
-        $homeURL = $this->cmsService->getHomeURL();
-        $currentURL = $this->requestHelperService->getCurrentURL();
+        $homeURL = $this->getCmsService()->getHomeURL();
+        $currentURL = $this->getRequestHelperService()->getCurrentURL();
         // Remove the protocol to avoid erroring on http/https
         $homeURL = preg_replace('#^https?://#', '', $homeURL);
         $currentURL = preg_replace('#^https?://#', '', $currentURL);

@@ -21,31 +21,57 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {
-    protected QueryRetrieverInterface $queryRetrieverInterface;
-    protected GraphQLDataStructureFormatter $graphQLDataStructureFormatter;
-    protected GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager;
-    protected FeedbackMessageStoreInterface $feedbackMessageStore;
-    protected GraphQLQueryConvertorInterface $graphQLQueryConvertor;
+    private ?QueryRetrieverInterface $queryRetriever = null;
+    private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
+    private ?GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager = null;
+    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    private ?GraphQLQueryConvertorInterface $graphQLQueryConvertor = null;
 
-    #[Required]
-    final public function autowireVarsHookSet(
-        QueryRetrieverInterface $queryRetrieverInterface,
-        GraphQLDataStructureFormatter $graphQLDataStructureFormatter,
-        GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager,
-        FeedbackMessageStoreInterface $feedbackMessageStore,
-        GraphQLQueryConvertorInterface $graphQLQueryConvertor,
-    ): void {
-        $this->queryRetrieverInterface = $queryRetrieverInterface;
+    public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
+    {
+        $this->queryRetriever = $queryRetriever;
+    }
+    protected function getQueryRetriever(): QueryRetrieverInterface
+    {
+        return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
+    }
+    public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
+    {
         $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
+    }
+    protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
+    {
+        return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+    }
+    public function setGraphQLPersistedQueryManager(GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager): void
+    {
         $this->graphQLPersistedQueryManager = $graphQLPersistedQueryManager;
+    }
+    protected function getGraphQLPersistedQueryManager(): GraphQLPersistedQueryManagerInterface
+    {
+        return $this->graphQLPersistedQueryManager ??= $this->instanceManager->getInstance(GraphQLPersistedQueryManagerInterface::class);
+    }
+    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    {
         $this->feedbackMessageStore = $feedbackMessageStore;
+    }
+    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    {
+        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
+    }
+    public function setGraphQLQueryConvertor(GraphQLQueryConvertorInterface $graphQLQueryConvertor): void
+    {
         $this->graphQLQueryConvertor = $graphQLQueryConvertor;
+    }
+    protected function getGraphQLQueryConvertor(): GraphQLQueryConvertorInterface
+    {
+        return $this->graphQLQueryConvertor ??= $this->instanceManager->getInstance(GraphQLQueryConvertorInterface::class);
     }
 
     protected function init(): void
     {
         // Priority 20: execute after the same code in API, as to remove $vars['query]
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'ApplicationState:addVars',
             array($this, 'addVars'),
             20,
@@ -53,7 +79,7 @@ class VarsHookSet extends AbstractHookSet
         );
 
         // Change the error message when mutations are not supported
-        $this->hooksAPI->addFilter(
+        $this->getHooksAPI()->addFilter(
             MutationCheckpointProcessor::HOOK_MUTATIONS_NOT_SUPPORTED_ERROR_MSG,
             array($this, 'getMutationsNotSupportedErrorMessage'),
             10,
@@ -69,7 +95,7 @@ class VarsHookSet extends AbstractHookSet
         $vars = ApplicationState::getVars();
         if ($vars['standard-graphql']) {
             return sprintf(
-                $this->translationAPI->__('Use the operation type \'%s\' to execute mutations', 'graphql-request'),
+                $this->getTranslationAPI()->__('Use the operation type \'%s\' to execute mutations', 'graphql-request'),
                 OperationTypes::MUTATION
             );
         }
@@ -86,7 +112,7 @@ class VarsHookSet extends AbstractHookSet
         // Set always. It will be overriden below
         $vars['standard-graphql'] = false;
 
-        if ($vars['scheme'] == APISchemes::API && $vars['datastructure'] == $this->graphQLDataStructureFormatter->getName()) {
+        if ($vars['scheme'] == APISchemes::API && $vars['datastructure'] == $this->getGraphQLDataStructureFormatter()->getName()) {
             $this->processURLParamVars($vars);
         }
     }
@@ -109,7 +135,7 @@ class VarsHookSet extends AbstractHookSet
         }
         // If the "query" param is set, this case is already handled in API package
         // Unless it is a persisted query for GraphQL, then deal with it here
-        $isGraphQLPersistedQuery = isset($_REQUEST[QueryInputs::QUERY]) && $this->graphQLPersistedQueryManager->isPersistedQuery($_REQUEST[QueryInputs::QUERY]);
+        $isGraphQLPersistedQuery = isset($_REQUEST[QueryInputs::QUERY]) && $this->getGraphQLPersistedQueryManager()->isPersistedQuery($_REQUEST[QueryInputs::QUERY]);
         if (
             !isset($_REQUEST[QueryInputs::QUERY])
             || ComponentConfiguration::disableGraphQLAPIForPoP()
@@ -125,16 +151,16 @@ class VarsHookSet extends AbstractHookSet
                 $graphQLQuery = $variables = $operationName = null;
                 // Get the query name, and extract the query from the PersistedQueryManager
                 $query = $_REQUEST[QueryInputs::QUERY] ?? '';
-                $queryName = $this->graphQLPersistedQueryManager->getPersistedQueryName($query);
-                if ($this->graphQLPersistedQueryManager->hasPersistedQuery($queryName)) {
-                    $graphQLQuery = $this->graphQLPersistedQueryManager->getPersistedQuery($queryName);
+                $queryName = $this->getGraphQLPersistedQueryManager()->getPersistedQueryName($query);
+                if ($this->getGraphQLPersistedQueryManager()->hasPersistedQuery($queryName)) {
+                    $graphQLQuery = $this->getGraphQLPersistedQueryManager()->getPersistedQuery($queryName);
                 }
             } else {
                 list(
                     $graphQLQuery,
                     $variables,
                     $operationName
-                ) = $this->queryRetrieverInterface->extractRequestedGraphQLQueryPayload();
+                ) = $this->getQueryRetriever()->extractRequestedGraphQLQueryPayload();
             }
             // Process the query, or show an error if empty
             if ($graphQLQuery) {
@@ -149,9 +175,9 @@ class VarsHookSet extends AbstractHookSet
                 // here for GraphQL and also for PoP.
                 // Show error only for the other cases
                 $errorMessage = $disablePoPQuery ?
-                    $this->translationAPI->__('No query was provided. (The body has no query, and the query provided as a URL param is ignored because of configuration)', 'graphql-request')
-                    : $this->translationAPI->__('The query in the body is empty', 'graphql-request');
-                $this->feedbackMessageStore->addQueryError($errorMessage);
+                    $this->getTranslationAPI()->__('No query was provided. (The body has no query, and the query provided as a URL param is ignored because of configuration)', 'graphql-request')
+                    : $this->getTranslationAPI()->__('The query in the body is empty', 'graphql-request');
+                $this->getFeedbackMessageStore()->addQueryError($errorMessage);
             }
         }
     }
@@ -167,7 +193,7 @@ class VarsHookSet extends AbstractHookSet
         list(
             $operationType,
             $fieldQuery
-        ) = $this->graphQLQueryConvertor->convertFromGraphQLToFieldQuery(
+        ) = $this->getGraphQLQueryConvertor()->convertFromGraphQLToFieldQuery(
             $graphQLQuery,
             $variables,
             ComponentConfiguration::enableMultipleQueryExecution(),

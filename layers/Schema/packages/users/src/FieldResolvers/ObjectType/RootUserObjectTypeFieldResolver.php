@@ -16,13 +16,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireRootUserObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -57,10 +59,10 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'user' => $this->translationAPI->__('User with a specific ID', 'pop-users'),
-            'userByUsername' => $this->translationAPI->__('User with a specific username', 'pop-users'),
-            'userByEmail' => $this->translationAPI->__('User with a specific email', 'pop-users'),
-            'users' => $this->translationAPI->__('Users in the current site', 'pop-users'),
+            'user' => $this->getTranslationAPI()->__('User with a specific ID', 'pop-users'),
+            'userByUsername' => $this->getTranslationAPI()->__('User with a specific username', 'pop-users'),
+            'userByEmail' => $this->getTranslationAPI()->__('User with a specific email', 'pop-users'),
+            'users' => $this->getTranslationAPI()->__('Users in the current site', 'pop-users'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -69,10 +71,10 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
     {
         return match ($fieldName) {
             'userByUsername' => [
-                'username' => $this->stringScalarTypeResolver,
+                'username' => $this->getStringScalarTypeResolver(),
             ],
             'userByEmail' => [
-                'email' => $this->stringScalarTypeResolver,
+                'email' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -81,8 +83,8 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['userByUsername' => 'username'] => $this->translationAPI->__('The user\'s username', 'pop-users'),
-            ['userByEmail' => 'email'] => $this->translationAPI->__('The user\'s username', 'pop-users'),
+            ['userByUsername' => 'username'] => $this->getTranslationAPI()->__('The user\'s username', 'pop-users'),
+            ['userByEmail' => 'email'] => $this->getTranslationAPI()->__('The user\'s username', 'pop-users'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -130,7 +132,7 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
                 } elseif ($fieldName === 'userByEmail') {
                     $query['emails'] = [$fieldArgs['email']];
                 }
-                if ($users = $this->userTypeAPI->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($users = $this->getUserTypeAPI()->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $users[0];
                 }
                 return null;
@@ -139,7 +141,7 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'user':
-                if ($users = $this->userTypeAPI->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($users = $this->getUserTypeAPI()->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $users[0];
                 }
                 return null;
@@ -154,7 +156,7 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
             'user',
             'userByUsername',
             'userByEmail'
-                => $this->userObjectTypeResolver,
+                => $this->getUserObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

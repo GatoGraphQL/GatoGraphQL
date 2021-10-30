@@ -11,20 +11,22 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDecoratorTrait
 {
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
 
-    #[Required]
-    public function autowireUserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDecoratorTrait(
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-    ): void {
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
 
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
         $validateUserStateDirectiveResolver = $this->getValidateUserStateDirectiveResolver();
         $validateUserStateDirectiveName = $validateUserStateDirectiveResolver->getDirectiveName();
-        $validateUserStateDirective = $this->fieldQueryInterpreter->getDirective(
+        $validateUserStateDirective = $this->getFieldQueryInterpreter()->getDirective(
             $validateUserStateDirectiveName
         );
         return [

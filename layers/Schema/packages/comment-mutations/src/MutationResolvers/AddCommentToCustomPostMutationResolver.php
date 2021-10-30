@@ -22,19 +22,33 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    protected CommentTypeAPIInterface $commentTypeAPI;
-    protected CommentTypeMutationAPIInterface $commentTypeMutationAPI;
-    protected UserTypeAPIInterface $userTypeAPI;
+    private ?CommentTypeAPIInterface $commentTypeAPI = null;
+    private ?CommentTypeMutationAPIInterface $commentTypeMutationAPI = null;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
 
-    #[Required]
-    final public function autowireAddCommentToCustomPostMutationResolver(
-        CommentTypeAPIInterface $commentTypeAPI,
-        CommentTypeMutationAPIInterface $commentTypeMutationAPI,
-        UserTypeAPIInterface $userTypeAPI,
-    ): void {
+    public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
+    {
         $this->commentTypeAPI = $commentTypeAPI;
+    }
+    protected function getCommentTypeAPI(): CommentTypeAPIInterface
+    {
+        return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+    }
+    public function setCommentTypeMutationAPI(CommentTypeMutationAPIInterface $commentTypeMutationAPI): void
+    {
         $this->commentTypeMutationAPI = $commentTypeMutationAPI;
+    }
+    protected function getCommentTypeMutationAPI(): CommentTypeMutationAPIInterface
+    {
+        return $this->commentTypeMutationAPI ??= $this->instanceManager->getInstance(CommentTypeMutationAPIInterface::class);
+    }
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
         $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
     public function validateErrors(array $form_data): array
@@ -50,31 +64,31 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         } elseif (ComponentConfiguration::requireCommenterNameAndEmail()) {
             // Validate if the commenter's name and email are mandatory
             if (!($form_data[MutationInputProperties::AUTHOR_NAME] ?? null)) {
-                $errors[] = $this->translationAPI->__('The comment author\'s name is missing', 'comment-mutations');
+                $errors[] = $this->getTranslationAPI()->__('The comment author\'s name is missing', 'comment-mutations');
             }
             if (!($form_data[MutationInputProperties::AUTHOR_EMAIL] ?? null)) {
-                $errors[] = $this->translationAPI->__('The comment author\'s email is missing', 'comment-mutations');
+                $errors[] = $this->getTranslationAPI()->__('The comment author\'s email is missing', 'comment-mutations');
             }
         }
 
         // Either provide the customPostID, or retrieve it from the parent comment
         if (!($form_data[MutationInputProperties::CUSTOMPOST_ID] ?? null) && !($form_data[MutationInputProperties::PARENT_COMMENT_ID] ?? null)) {
-            $errors[] = $this->translationAPI->__('The custom post ID is missing.', 'comment-mutations');
+            $errors[] = $this->getTranslationAPI()->__('The custom post ID is missing.', 'comment-mutations');
         }
         if (!($form_data[MutationInputProperties::COMMENT] ?? null)) {
-            $errors[] = $this->translationAPI->__('The comment is empty.', 'comment-mutations');
+            $errors[] = $this->getTranslationAPI()->__('The comment is empty.', 'comment-mutations');
         }
         return $errors;
     }
 
     protected function getUserNotLoggedInErrorMessage(): string
     {
-        return $this->translationAPI->__('You must be logged in to add comments', 'comment-mutations');
+        return $this->getTranslationAPI()->__('You must be logged in to add comments', 'comment-mutations');
     }
 
     protected function additionals(string | int $comment_id, array $form_data): void
     {
-        $this->hooksAPI->doAction('gd_addcomment', $comment_id, $form_data);
+        $this->getHooksAPI()->doAction('gd_addcomment', $comment_id, $form_data);
     }
 
     protected function getCommentData(array $form_data): array
@@ -93,9 +107,9 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             $vars = ApplicationState::getVars();
             $userID = $vars['global-userstate']['current-user-id'];
             $comment_data['userID'] = $userID;
-            $comment_data['author'] = $this->userTypeAPI->getUserDisplayName($userID);
-            $comment_data['authorEmail'] = $this->userTypeAPI->getUserEmail($userID);
-            $comment_data['authorURL'] = $this->userTypeAPI->getUserWebsiteUrl($userID);
+            $comment_data['author'] = $this->getUserTypeAPI()->getUserDisplayName($userID);
+            $comment_data['authorEmail'] = $this->getUserTypeAPI()->getUserEmail($userID);
+            $comment_data['authorURL'] = $this->getUserTypeAPI()->getUserWebsiteUrl($userID);
         } else {
             $comment_data['author'] = $form_data[MutationInputProperties::AUTHOR_NAME] ?? null;
             $comment_data['authorEmail'] = $form_data[MutationInputProperties::AUTHOR_EMAIL] ?? null;
@@ -105,8 +119,8 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         // If the parent comment is provided and the custom post is not,
         // then retrieve it from there
         if ($comment_data['parent'] && !$comment_data['customPostID']) {
-            $parentComment = $this->commentTypeAPI->getComment($comment_data['parent']);
-            $comment_data['customPostID'] = $this->commentTypeAPI->getCommentPostId($parentComment);
+            $parentComment = $this->getCommentTypeAPI()->getComment($comment_data['parent']);
+            $comment_data['customPostID'] = $this->getCommentTypeAPI()->getCommentPostId($parentComment);
         }
 
         return $comment_data;
@@ -114,7 +128,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 
     protected function insertComment(array $comment_data): string | int | Error
     {
-        return $this->commentTypeMutationAPI->insertComment($comment_data);
+        return $this->getCommentTypeMutationAPI()->insertComment($comment_data);
     }
 
     public function executeMutation(array $form_data): mixed

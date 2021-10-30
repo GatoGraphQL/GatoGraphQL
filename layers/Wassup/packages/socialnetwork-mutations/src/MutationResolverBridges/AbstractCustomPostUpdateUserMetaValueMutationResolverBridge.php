@@ -10,13 +10,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostUpdateUserMetaValueMutationResolverBridge extends AbstractUpdateUserMetaValueMutationResolverBridge
 {
-    protected CustomPostTypeAPIInterface $customPostTypeAPI;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    #[Required]
-    final public function autowireAbstractCustomPostUpdateUserMetaValueMutationResolverBridge(
-        CustomPostTypeAPIInterface $customPostTypeAPI,
-    ): void {
+    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
         $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
     protected function getRequestKey()

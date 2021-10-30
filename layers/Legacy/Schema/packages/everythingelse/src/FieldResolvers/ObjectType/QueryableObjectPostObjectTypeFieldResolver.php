@@ -14,13 +14,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     
-    #[Required]
-    final public function autowireQueryableObjectPostObjectTypeFieldResolver(
-        URLScalarTypeResolver $urlScalarTypeResolver,
-    ): void {
+    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -40,7 +42,7 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'endpoint' => $this->urlScalarTypeResolver,
+            'endpoint' => $this->getUrlScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -48,7 +50,7 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'endpoint' => $this->translationAPI->__('Endpoint to fetch the object\'s data', 'queriedobject'),
+            'endpoint' => $this->getTranslationAPI()->__('Endpoint to fetch the object\'s data', 'queriedobject'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -10,13 +10,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteCustomPostMutationResolver
 {
-    protected UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver;
+    private ?UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver = null;
 
-    #[Required]
-    final public function autowireDownvoteCustomPostMutationResolver(
-        UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver,
-    ): void {
+    public function setUpvoteCustomPostMutationResolver(UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver): void
+    {
         $this->upvoteCustomPostMutationResolver = $upvoteCustomPostMutationResolver;
+    }
+    protected function getUpvoteCustomPostMutationResolver(): UpvoteCustomPostMutationResolver
+    {
+        return $this->upvoteCustomPostMutationResolver ??= $this->instanceManager->getInstance(UpvoteCustomPostMutationResolver::class);
     }
 
     public function validateErrors(array $form_data): array
@@ -31,8 +33,8 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
             if (in_array($target_id, $value)) {
                 $errors[] = sprintf(
-                    $this->translationAPI->__('You have already down-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-                    $this->customPostTypeAPI->getTitle($target_id)
+                    $this->getTranslationAPI()->__('You have already down-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+                    $this->getCustomPostTypeAPI()->getTitle($target_id)
                 );
             }
         }
@@ -45,7 +47,7 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
     protected function additionals($target_id, $form_data): void
     {
         parent::additionals($target_id, $form_data);
-        $this->hooksAPI->doAction('gd_downvotepost', $target_id, $form_data);
+        $this->getHooksAPI()->doAction('gd_downvotepost', $target_id, $form_data);
     }
 
     protected function update($form_data): string | int
@@ -66,7 +68,7 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
         // Had the user already executed the opposite (Up-vote => Down-vote, etc), then undo it
         $opposite = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_UPVOTESPOSTS);
         if (in_array($target_id, $opposite)) {
-            $this->upvoteCustomPostMutationResolver->executeMutation($form_data);
+            $this->getUpvoteCustomPostMutationResolver()->executeMutation($form_data);
         }
 
         return parent::update($form_data);

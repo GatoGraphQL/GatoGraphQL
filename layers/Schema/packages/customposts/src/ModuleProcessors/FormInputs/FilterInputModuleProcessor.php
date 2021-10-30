@@ -24,16 +24,24 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public const MODULE_FILTERINPUT_CUSTOMPOSTSTATUS = 'filterinput-custompoststatus';
     public const MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
 
-    protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireFilterInputModuleProcessor(
-        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
+    {
         $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+    }
+    protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
+    {
+        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getModulesToProcess(): array
@@ -82,8 +90,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => $this->customPostStatusEnumTypeResolver,
-            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => $this->getCustomPostStatusEnumTypeResolver(),
+            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->getStringScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -113,8 +121,8 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => $this->translationAPI->__('Custom Post Status', 'customposts'),
-            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->translationAPI->__('Return results from Union of the Custom Post Types', 'customposts'),
+            self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => $this->getTranslationAPI()->__('Custom Post Status', 'customposts'),
+            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->getTranslationAPI()->__('Return results from Union of the Custom Post Types', 'customposts'),
             default => null,
         };
     }

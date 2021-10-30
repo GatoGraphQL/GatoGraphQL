@@ -6,20 +6,23 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
 
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 
 abstract class AbstractEndpointAnnotator implements EndpointAnnotatorInterface
 {
-    protected InstanceManagerInterface $instanceManager;
-    protected ModuleRegistryInterface $moduleRegistry;
+    use BasicServiceTrait;
 
-    #[Required]
-    final public function autowireAbstractEndpointAnnotator(InstanceManagerInterface $instanceManager, ModuleRegistryInterface $moduleRegistry): void
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+
+    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
-        $this->instanceManager = $instanceManager;
         $this->moduleRegistry = $moduleRegistry;
+    }
+    protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
 
     /**
@@ -42,7 +45,7 @@ abstract class AbstractEndpointAnnotator implements EndpointAnnotatorInterface
     public function isServiceEnabled(): bool
     {
         $enablingModule = $this->getEnablingModule();
-        if ($enablingModule !== null && !$this->moduleRegistry->isModuleEnabled($enablingModule)) {
+        if ($enablingModule !== null && !$this->getModuleRegistry()->isModuleEnabled($enablingModule)) {
             return false;
         }
 

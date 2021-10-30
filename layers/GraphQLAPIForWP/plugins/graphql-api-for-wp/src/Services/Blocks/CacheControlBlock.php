@@ -16,13 +16,16 @@ class CacheControlBlock extends AbstractControlBlock
     use MainPluginBlockTrait;
 
     public const ATTRIBUTE_NAME_CACHE_CONTROL_MAX_AGE = 'cacheControlMaxAge';
-    protected CacheControlBlockCategory $cacheControlBlockCategory;
 
-    #[Required]
-    final public function autowireCacheControlBlock(
-        CacheControlBlockCategory $cacheControlBlockCategory,
-    ): void {
+    private ?CacheControlBlockCategory $cacheControlBlockCategory = null;
+
+    public function setCacheControlBlockCategory(CacheControlBlockCategory $cacheControlBlockCategory): void
+    {
         $this->cacheControlBlockCategory = $cacheControlBlockCategory;
+    }
+    protected function getCacheControlBlockCategory(): CacheControlBlockCategory
+    {
+        return $this->cacheControlBlockCategory ??= $this->instanceManager->getInstance(CacheControlBlockCategory::class);
     }
 
     protected function getBlockName(): string
@@ -32,7 +35,7 @@ class CacheControlBlock extends AbstractControlBlock
 
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
-        return $this->cacheControlBlockCategory;
+        return $this->getCacheControlBlockCategory();
     }
 
     protected function registerCommonStyleCSS(): bool

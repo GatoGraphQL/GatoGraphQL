@@ -15,13 +15,15 @@ use WP_Post;
 
 class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowirePostObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -41,7 +43,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'postFormat' => $this->translationAPI->__('Retrieve the format slug for a post', 'posts'),
+            'postFormat' => $this->getTranslationAPI()->__('Retrieve the format slug for a post', 'posts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -49,7 +51,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'postFormat' => $this->stringScalarTypeResolver,
+            'postFormat' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

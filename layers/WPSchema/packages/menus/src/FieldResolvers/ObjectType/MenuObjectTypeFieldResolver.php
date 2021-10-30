@@ -16,16 +16,24 @@ use WP_Term;
 
 class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected IntScalarTypeResolver $intScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireMenuObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        IntScalarTypeResolver $intScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -51,9 +59,9 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'name',
             'slug',
             'locations'
-                => $this->stringScalarTypeResolver,
+                => $this->getStringScalarTypeResolver(),
             'count'
-                => $this->intScalarTypeResolver,
+                => $this->getIntScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -74,10 +82,10 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->translationAPI->__('Menu\'s name', 'pop-menus'),
-            'slug' => $this->translationAPI->__('Menu\'s slug', 'pop-menus'),
-            'count' => $this->translationAPI->__('Number of items contained in the menu', 'pop-menus'),
-            'locations' => $this->translationAPI->__('To which locations has the menu been assigned to', 'pop-menus'),
+            'name' => $this->getTranslationAPI()->__('Menu\'s name', 'pop-menus'),
+            'slug' => $this->getTranslationAPI()->__('Menu\'s slug', 'pop-menus'),
+            'count' => $this->getTranslationAPI()->__('Number of items contained in the menu', 'pop-menus'),
+            'locations' => $this->getTranslationAPI()->__('To which locations has the menu been assigned to', 'pop-menus'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -9,5 +9,5 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 interface SchemaDefinitionServiceInterface extends UpstreamSchemaDefinitionServiceInterface
 {
-    public function getRootObjectTypeResolver(): ObjectTypeResolverInterface;
+    public function getSchemaRootObjectTypeResolver(): ObjectTypeResolverInterface;
 }

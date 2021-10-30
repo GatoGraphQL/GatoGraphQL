@@ -13,13 +13,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CommentsCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     
-    #[Required]
-    final public function autowireCommentsCustomPostObjectTypeFieldResolver(
-        URLScalarTypeResolver $urlScalarTypeResolver,
-    ): void {
+    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -39,7 +41,7 @@ class CommentsCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'commentsURL' => $this->urlScalarTypeResolver,
+            'commentsURL' => $this->getUrlScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -47,7 +49,7 @@ class CommentsCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'commentsURL' => $this->translationAPI->__('URL of the comments section in the post page', 'pop-comments'),
+            'commentsURL' => $this->getTranslationAPI()->__('URL of the comments section in the post page', 'pop-comments'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

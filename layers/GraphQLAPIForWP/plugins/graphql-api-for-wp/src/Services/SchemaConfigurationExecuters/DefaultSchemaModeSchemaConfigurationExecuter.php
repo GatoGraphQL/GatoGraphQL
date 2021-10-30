@@ -15,13 +15,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    protected SchemaConfigSchemaModeBlock $schemaConfigSchemaModeBlock;
+    private ?SchemaConfigSchemaModeBlock $schemaConfigSchemaModeBlock = null;
 
-    #[Required]
-    final public function autowireDefaultSchemaModeSchemaConfigurationExecuter(
-        SchemaConfigSchemaModeBlock $schemaConfigSchemaModeBlock,
-    ): void {
+    public function setSchemaConfigSchemaModeBlock(SchemaConfigSchemaModeBlock $schemaConfigSchemaModeBlock): void
+    {
         $this->schemaConfigSchemaModeBlock = $schemaConfigSchemaModeBlock;
+    }
+    protected function getSchemaConfigSchemaModeBlock(): SchemaConfigSchemaModeBlock
+    {
+        return $this->schemaConfigSchemaModeBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaModeBlock::class);
     }
 
     public function getEnablingModule(): ?string
@@ -63,6 +65,6 @@ class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigu
 
     protected function getBlock(): BlockInterface
     {
-        return $this->schemaConfigSchemaModeBlock;
+        return $this->getSchemaConfigSchemaModeBlock();
     }
 }

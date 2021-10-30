@@ -38,7 +38,7 @@ class CustomPostMutationFilterInputContainerModuleProcessor extends CustomPostFi
             default => null,
         };
         /** @var FilterInputContainerModuleProcessorInterface */
-        $targetModuleProcessor = $this->moduleProcessorManager->getProcessor($targetModule);
+        $targetModuleProcessor = $this->getModuleProcessorManager()->getProcessor($targetModule);
         return array_merge(
             $targetModuleProcessor->getFilterInputModules($targetModule),
             [

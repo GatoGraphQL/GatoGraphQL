@@ -14,16 +14,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     
-    #[Required]
-    final public function autowirePoP_Application_DataLoad_ObjectTypeFieldResolver_Posts(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -98,16 +106,16 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-			'favicon' => $this->translationAPI->__('', ''),
-            'thumb' => $this->translationAPI->__('', ''),
-            'thumbFullSrc' => $this->translationAPI->__('', ''),
-            'authors' => $this->translationAPI->__('', ''),
-            'topics' => $this->translationAPI->__('', ''),
-            'hasTopics' => $this->translationAPI->__('', ''),
-            'appliesto' => $this->translationAPI->__('', ''),
-            'hasAppliesto' => $this->translationAPI->__('', ''),
-            'hasUserpostactivity' => $this->translationAPI->__('', ''),
-            'userPostActivityCount' => $this->translationAPI->__('', ''),
+			'favicon' => $this->getTranslationAPI()->__('', ''),
+            'thumb' => $this->getTranslationAPI()->__('', ''),
+            'thumbFullSrc' => $this->getTranslationAPI()->__('', ''),
+            'authors' => $this->getTranslationAPI()->__('', ''),
+            'topics' => $this->getTranslationAPI()->__('', ''),
+            'hasTopics' => $this->getTranslationAPI()->__('', ''),
+            'appliesto' => $this->getTranslationAPI()->__('', ''),
+            'hasAppliesto' => $this->getTranslationAPI()->__('', ''),
+            'hasUserpostactivity' => $this->getTranslationAPI()->__('', ''),
+            'userPostActivityCount' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -127,8 +135,8 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldArgName) {
-            'size' => $this->translationAPI->__('Thumbnail size', 'pop-posts'),
-            'addDescription' => $this->translationAPI->__('Add description on the thumb', 'pop-posts'),
+            'size' => $this->getTranslationAPI()->__('Thumbnail size', 'pop-posts'),
+            'addDescription' => $this->getTranslationAPI()->__('Add description on the thumb', 'pop-posts'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

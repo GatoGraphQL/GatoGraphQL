@@ -9,6 +9,7 @@ use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\AbstractEndpointResolver;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
 use GraphQLByPoP\GraphQLRequest\ComponentConfiguration as GraphQLRequestComponentConfiguration;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\EngineWP\Templates\TemplateHelpers;
 use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
@@ -19,16 +20,24 @@ class AdminEndpointResolver extends AbstractEndpointResolver
         EndpointResolverTrait::executeGraphQLQuery as upstreamExecuteGraphQLQuery;
     }
 
-    protected UserAuthorizationInterface $userAuthorization;
-    protected QueryRetrieverInterface $queryRetrieverInterface;
+    private ?UserAuthorizationInterface $userAuthorization = null;
+    private ?QueryRetrieverInterface $queryRetriever = null;
 
-    #[Required]
-    final public function autowireAdminEndpointResolver(
-        UserAuthorizationInterface $userAuthorization,
-        QueryRetrieverInterface $queryRetrieverInterface,
-    ): void {
+    public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    {
         $this->userAuthorization = $userAuthorization;
-        $this->queryRetrieverInterface = $queryRetrieverInterface;
+    }
+    protected function getUserAuthorization(): UserAuthorizationInterface
+    {
+        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+    }
+    public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
+    {
+        $this->queryRetriever = $queryRetriever;
+    }
+    protected function getQueryRetriever(): QueryRetrieverInterface
+    {
+        return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
     }
 
     /**
@@ -50,7 +59,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
         /**
          * Extract the query from the BODY through standard GraphQL endpoint execution
          */
-        return $this->queryRetrieverInterface->extractRequestedGraphQLQueryPayload();
+        return $this->getQueryRetriever()->extractRequestedGraphQLQueryPayload();
     }
 
     /**
@@ -59,7 +68,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
      */
     protected function isGraphQLQueryExecution(): bool
     {
-        return $this->endpointHelpers->isRequestingAdminConfigurableSchemaGraphQLEndpoint();
+        return $this->getEndpointHelpers()->isRequestingAdminConfigurableSchemaGraphQLEndpoint();
     }
 
     /**
@@ -92,7 +101,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     {
         \add_action('admin_print_scripts', function (): void {
             // Make sure the user has access to the editor
-            if ($this->userAuthorization->canAccessSchemaEditor()) {
+            if ($this->getUserAuthorization()->canAccessSchemaEditor()) {
                 $scriptTag = '<script type="text/javascript">var %s = "%s"</script>';
                 /**
                  * The endpoint against which to execute GraphQL queries on the admin.
@@ -105,7 +114,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
                 \printf(
                     $scriptTag,
                     'GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT',
-                    $this->endpointHelpers->getAdminConfigurableSchemaGraphQLEndpoint()
+                    $this->getEndpointHelpers()->getAdminConfigurableSchemaGraphQLEndpoint()
                 );
                 /**
                  * The endpoint against which to execute GraphQL queries on the WordPress editor,
@@ -119,7 +128,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
                 \printf(
                     $scriptTag,
                     'GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT',
-                    $this->endpointHelpers->getAdminFixedSchemaGraphQLEndpoint()
+                    $this->getEndpointHelpers()->getAdminFixedSchemaGraphQLEndpoint()
                 );
             }
         });
@@ -138,7 +147,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
             'init',
             function (): void {
                 // Make sure the user has access to the editor
-                if ($this->userAuthorization->canAccessSchemaEditor()) {
+                if ($this->getUserAuthorization()->canAccessSchemaEditor()) {
                     $this->upstreamExecuteGraphQLQuery();
                 }
             }
@@ -157,7 +166,7 @@ class AdminEndpointResolver extends AbstractEndpointResolver
             'admin_init',
             function (): void {
                 // Make sure the user has access to the editor
-                if ($this->userAuthorization->canAccessSchemaEditor()) {
+                if ($this->getUserAuthorization()->canAccessSchemaEditor()) {
                     include TemplateHelpers::getTemplateFile();
                     die;
                 }

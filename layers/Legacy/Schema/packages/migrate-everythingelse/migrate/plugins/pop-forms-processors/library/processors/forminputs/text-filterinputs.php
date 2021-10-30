@@ -16,13 +16,15 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
     public const MODULE_FILTERINPUT_HASHTAGS = 'filterinput-hashtags';
     public const MODULE_FILTERINPUT_NAME = 'filterinput-name';
 
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowirePoP_Module_Processor_TextFilterInputs(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getModulesToProcess(): array

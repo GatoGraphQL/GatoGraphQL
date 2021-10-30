@@ -10,18 +10,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUserMetaValueMutationResolverBridge
 {
-    protected UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver;
+    private ?UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver = null;
 
-    #[Required]
-    final public function autowireUpvoteCustomPostMutationResolverBridge(
-        UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver,
-    ): void {
+    public function setUpvoteCustomPostMutationResolver(UpvoteCustomPostMutationResolver $upvoteCustomPostMutationResolver): void
+    {
         $this->upvoteCustomPostMutationResolver = $upvoteCustomPostMutationResolver;
+    }
+    protected function getUpvoteCustomPostMutationResolver(): UpvoteCustomPostMutationResolver
+    {
+        return $this->upvoteCustomPostMutationResolver ??= $this->instanceManager->getInstance(UpvoteCustomPostMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->upvoteCustomPostMutationResolver;
+        return $this->getUpvoteCustomPostMutationResolver();
     }
 
     protected function onlyExecuteWhenDoingPost(): bool
@@ -32,8 +34,8 @@ class UpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdateUse
     public function getSuccessString(string | int $result_id): ?string
     {
         return sprintf(
-            $this->translationAPI->__('You have up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $this->customPostTypeAPI->getTitle($result_id)
+            $this->getTranslationAPI()->__('You have up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+            $this->getCustomPostTypeAPI()->getTitle($result_id)
         );
     }
 }

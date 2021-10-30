@@ -12,16 +12,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
-    protected PageTypeDataLoader $pageTypeDataLoader;
-    protected PageTypeAPIInterface $pageTypeAPI;
+    private ?PageTypeDataLoader $pageTypeDataLoader = null;
+    private ?PageTypeAPIInterface $pageTypeAPI = null;
 
-    #[Required]
-    final public function autowirePageObjectTypeResolver(
-        PageTypeDataLoader $pageTypeDataLoader,
-        PageTypeAPIInterface $pageTypeAPI,
-    ): void {
+    public function setPageTypeDataLoader(PageTypeDataLoader $pageTypeDataLoader): void
+    {
         $this->pageTypeDataLoader = $pageTypeDataLoader;
+    }
+    protected function getPageTypeDataLoader(): PageTypeDataLoader
+    {
+        return $this->pageTypeDataLoader ??= $this->instanceManager->getInstance(PageTypeDataLoader::class);
+    }
+    public function setPageTypeAPI(PageTypeAPIInterface $pageTypeAPI): void
+    {
         $this->pageTypeAPI = $pageTypeAPI;
+    }
+    protected function getPageTypeAPI(): PageTypeAPIInterface
+    {
+        return $this->pageTypeAPI ??= $this->instanceManager->getInstance(PageTypeAPIInterface::class);
     }
 
     public function getTypeName(): string
@@ -31,17 +39,17 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Representation of a page', 'pages');
+        return $this->getTranslationAPI()->__('Representation of a page', 'pages');
     }
 
     public function getID(object $object): string | int | null
     {
         $page = $object;
-        return $this->pageTypeAPI->getPageId($page);
+        return $this->getPageTypeAPI()->getPageId($page);
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->pageTypeDataLoader;
+        return $this->getPageTypeDataLoader();
     }
 }

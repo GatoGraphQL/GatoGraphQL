@@ -20,16 +20,24 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
 {
     use SetCategoriesOnCustomPostObjectTypeFieldResolverTrait;
 
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireAbstractRootObjectTypeFieldResolver(
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
-    ): void {
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -55,7 +63,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return match ($fieldName) {
             $this->getSetCategoriesFieldName() => sprintf(
-                $this->translationAPI->__('Set categories on a %s', 'custompost-category-mutations'),
+                $this->getTranslationAPI()->__('Set categories on a %s', 'custompost-category-mutations'),
                 $this->getEntityName()
             ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -66,9 +74,9 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return match ($fieldName) {
             $this->getSetCategoriesFieldName() => [
-                MutationInputProperties::CUSTOMPOST_ID => $this->idScalarTypeResolver,
-                MutationInputProperties::CATEGORY_IDS => $this->idScalarTypeResolver,
-                MutationInputProperties::APPEND => $this->booleanScalarTypeResolver,
+                MutationInputProperties::CUSTOMPOST_ID => $this->getIdScalarTypeResolver(),
+                MutationInputProperties::CATEGORY_IDS => $this->getIdScalarTypeResolver(),
+                MutationInputProperties::APPEND => $this->getBooleanScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -79,14 +87,14 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         $setCategoriesFieldName = $this->getSetCategoriesFieldName();
         return match ([$fieldName => $fieldArgName]) {
             [$setCategoriesFieldName => MutationInputProperties::CUSTOMPOST_ID] => sprintf(
-                $this->translationAPI->__('The ID of the %s', 'custompost-category-mutations'),
+                $this->getTranslationAPI()->__('The ID of the %s', 'custompost-category-mutations'),
                 $this->getEntityName()
             ),
             [$setCategoriesFieldName => MutationInputProperties::CATEGORY_IDS] => sprintf(
-                $this->translationAPI->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
+                $this->getTranslationAPI()->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
                 $this->getCategoryTypeResolver()->getMaybeNamespacedTypeName()
             ),
-            [$setCategoriesFieldName => MutationInputProperties::APPEND] => $this->translationAPI->__('Append the categories to the existing ones?', 'custompost-category-mutations'),
+            [$setCategoriesFieldName => MutationInputProperties::APPEND] => $this->getTranslationAPI()->__('Append the categories to the existing ones?', 'custompost-category-mutations'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

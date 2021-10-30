@@ -9,23 +9,18 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\Definitions\Configuration\Request;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class RequestHelperService implements RequestHelperServiceInterface
 {
-    protected HooksAPIInterface $hooksAPI;
-
-    #[Required]
-    final public function autowireRequestHelperService(HooksAPIInterface $hooksAPI): void
-    {
-        $this->hooksAPI = $hooksAPI;
-    }
+    use WithHooksAPIServiceTrait;
 
     public function getCurrentURL(): string
     {
         // Strip the Target and Output off it, users don't need to see those
-        $remove_params = (array) $this->hooksAPI->applyFilters(
+        $remove_params = (array) $this->getHooksAPI()->applyFilters(
             'RequestUtils:current_url:remove_params',
             [
                 Params::SETTINGSFORMAT,
@@ -51,7 +46,7 @@ class RequestHelperService implements RequestHelperServiceInterface
         );
 
         // Allow plug-ins to do their own logic to the URL
-        $url = $this->hooksAPI->applyFilters(
+        $url = $this->getHooksAPI()->applyFilters(
             'RequestUtils:getCurrentURL',
             $url
         );

@@ -11,13 +11,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FieldObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
-    protected SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader;
+    private ?SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader = null;
 
-    #[Required]
-    final public function autowireFieldObjectTypeResolver(
-        SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader,
-    ): void {
+    public function setSchemaDefinitionReferenceTypeDataLoader(SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader): void
+    {
         $this->schemaDefinitionReferenceTypeDataLoader = $schemaDefinitionReferenceTypeDataLoader;
+    }
+    protected function getSchemaDefinitionReferenceTypeDataLoader(): SchemaDefinitionReferenceTypeDataLoader
+    {
+        return $this->schemaDefinitionReferenceTypeDataLoader ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -27,7 +29,7 @@ class FieldObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Representation of a GraphQL type\'s field', 'graphql-server');
+        return $this->getTranslationAPI()->__('Representation of a GraphQL type\'s field', 'graphql-server');
     }
 
     public function getID(object $object): string | int | null
@@ -39,6 +41,6 @@ class FieldObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->schemaDefinitionReferenceTypeDataLoader;
+        return $this->getSchemaDefinitionReferenceTypeDataLoader();
     }
 }

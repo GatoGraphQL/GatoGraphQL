@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use PoP\APIEndpoints\EndpointUtils;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 /**
  * Helper class with functions to set the configuration in PoP components.

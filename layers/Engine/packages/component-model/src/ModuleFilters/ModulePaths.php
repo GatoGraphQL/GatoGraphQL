@@ -6,10 +6,13 @@ namespace PoP\ComponentModel\ModuleFilters;
 
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
 use PoP\ComponentModel\ModulePath\ModulePathUtils;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class ModulePaths extends AbstractModuleFilter
 {
+    use BasicServiceTrait;
+
     public const URLPARAM_MODULEPATHS = 'modulepaths';
 
     /**
@@ -24,12 +27,16 @@ class ModulePaths extends AbstractModuleFilter
      * @var array<string, array>
      */
     protected array $backlog_unsettled_paths = [];
-    protected ModulePathManagerInterface $modulePathManager;
 
-    #[Required]
-    final public function autowireModulePaths(ModulePathManagerInterface $modulePathManager): void
+    private ?ModulePathManagerInterface $modulePathManager = null;
+
+    public function setModulePathManager(ModulePathManagerInterface $modulePathManager): void
     {
         $this->modulePathManager = $modulePathManager;
+    }
+    protected function getModulePathManager(): ModulePathManagerInterface
+    {
+        return $this->modulePathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
     }
 
     protected function init(): void
@@ -149,7 +156,7 @@ class ModulePaths extends AbstractModuleFilter
     }
     protected function getBacklogEntry(): string
     {
-        $entry = json_encode($this->modulePathManager->getPropagationCurrentPath());
+        $entry = json_encode($this->getModulePathManager()->getPropagationCurrentPath());
         if ($entry === false) {
             return '';
         }

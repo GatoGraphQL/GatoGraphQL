@@ -14,18 +14,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    protected CreateUpdateUserMutationResolver $createUpdateUserMutationResolver;
+    private ?CreateUpdateUserMutationResolver $createUpdateUserMutationResolver = null;
     
-    #[Required]
-    final public function autowireCreateUpdateUserMutationResolverBridge(
-        CreateUpdateUserMutationResolver $createUpdateUserMutationResolver,
-    ): void {
+    public function setCreateUpdateUserMutationResolver(CreateUpdateUserMutationResolver $createUpdateUserMutationResolver): void
+    {
         $this->createUpdateUserMutationResolver = $createUpdateUserMutationResolver;
+    }
+    protected function getCreateUpdateUserMutationResolver(): CreateUpdateUserMutationResolver
+    {
+        return $this->createUpdateUserMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateUserMutationResolver::class);
     }
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->createUpdateUserMutationResolver;
+        return $this->getCreateUpdateUserMutationResolver();
     }
 
     public function getSuccessString(string | int $result_id): ?string
@@ -37,10 +39,10 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         if ($vars['global-userstate']['is-user-logged-in']) {
             // Allow PoP Service Workers to add the attr to avoid the link being served from the browser cache
             return sprintf(
-                $this->translationAPI->__('View your <a href="%s" target="%s" %s>updated profile</a>.', 'pop-application'),
+                $this->getTranslationAPI()->__('View your <a href="%s" target="%s" %s>updated profile</a>.', 'pop-application'),
                 getAuthorProfileUrl($vars['global-userstate']['current-user-id']),
                 \PoP_Application_Utils::getPreviewTarget(),
-                $this->hooksAPI->applyFilters('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', '')
+                $this->getHooksAPI()->applyFilters('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', '')
             );
         }
     }
@@ -54,21 +56,21 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         $inputs = $this->getFormInputs();
         $form_data = array(
             'user_id' => $user_id,
-            'username' => $cmseditusershelpers->sanitizeUsername($this->moduleProcessorManager->getProcessor($inputs['username'])->getValue($inputs['username'])),
-            'password' => $this->moduleProcessorManager->getProcessor($inputs['password'])->getValue($inputs['password']),
-            'repeat_password' => $this->moduleProcessorManager->getProcessor($inputs['repeat_password'])->getValue($inputs['repeat_password']),
-            'first_name' => trim($cmsapplicationhelpers->escapeAttributes($this->moduleProcessorManager->getProcessor($inputs['first_name'])->getValue($inputs['first_name']))),
-            'user_email' => trim($this->moduleProcessorManager->getProcessor($inputs['user_email'])->getValue($inputs['user_email'])),
-            'description' => trim($this->moduleProcessorManager->getProcessor($inputs['description'])->getValue($inputs['description'])),
-            'user_url' => trim($this->moduleProcessorManager->getProcessor($inputs['user_url'])->getValue($inputs['user_url'])),
+            'username' => $cmseditusershelpers->sanitizeUsername($this->getModuleProcessorManager()->getProcessor($inputs['username'])->getValue($inputs['username'])),
+            'password' => $this->getModuleProcessorManager()->getProcessor($inputs['password'])->getValue($inputs['password']),
+            'repeat_password' => $this->getModuleProcessorManager()->getProcessor($inputs['repeat_password'])->getValue($inputs['repeat_password']),
+            'first_name' => trim($cmsapplicationhelpers->escapeAttributes($this->getModuleProcessorManager()->getProcessor($inputs['first_name'])->getValue($inputs['first_name']))),
+            'user_email' => trim($this->getModuleProcessorManager()->getProcessor($inputs['user_email'])->getValue($inputs['user_email'])),
+            'description' => trim($this->getModuleProcessorManager()->getProcessor($inputs['description'])->getValue($inputs['description'])),
+            'user_url' => trim($this->getModuleProcessorManager()->getProcessor($inputs['user_url'])->getValue($inputs['user_url'])),
         );
 
         if (\PoP_Forms_ConfigurationUtils::captchaEnabled()) {
-            $form_data['captcha'] = $this->moduleProcessorManager->getProcessor($inputs['captcha'])->getValue($inputs['captcha']);
+            $form_data['captcha'] = $this->getModuleProcessorManager()->getProcessor($inputs['captcha'])->getValue($inputs['captcha']);
         }
 
         // Allow to add extra inputs
-        $form_data = $this->hooksAPI->applyFilters('gd_createupdate_user:form_data', $form_data);
+        $form_data = $this->getHooksAPI()->applyFilters('gd_createupdate_user:form_data', $form_data);
 
         if ($user_id) {
             $form_data = $this->getUpdateuserFormData($form_data);
@@ -82,7 +84,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
     protected function getCreateuserFormData(array $form_data)
     {
         // Allow to add extra inputs
-        $form_data = $this->hooksAPI->applyFilters('gd_createupdate_user:form_data:create', $form_data);
+        $form_data = $this->getHooksAPI()->applyFilters('gd_createupdate_user:form_data:create', $form_data);
 
         return $form_data;
     }
@@ -90,7 +92,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
     protected function getUpdateuserFormData(array $form_data)
     {
         // Allow to add extra inputs
-        $form_data = $this->hooksAPI->applyFilters('gd_createupdate_user:form_data:update', $form_data);
+        $form_data = $this->getHooksAPI()->applyFilters('gd_createupdate_user:form_data:update', $form_data);
 
         return $form_data;
     }
@@ -111,7 +113,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
             $form_inputs['captcha'] = null;
         }
 
-        $inputs = $this->hooksAPI->applyFilters(
+        $inputs = $this->getHooksAPI()->applyFilters(
             'GD_CreateUpdate_User:form-inputs',
             $form_inputs
         );

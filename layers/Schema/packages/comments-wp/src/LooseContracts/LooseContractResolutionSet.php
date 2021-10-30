@@ -11,23 +11,23 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
     protected function resolveContracts(): void
     {
         // Actions
-        $this->hooksAPI->addAction('wp_insert_comment', function ($comment_id, $comment): void {
-            $this->hooksAPI->doAction('popcms:insertComment', $comment_id, $comment);
+        $this->getHooksAPI()->addAction('wp_insert_comment', function ($comment_id, $comment): void {
+            $this->getHooksAPI()->doAction('popcms:insertComment', $comment_id, $comment);
         }, 10, 2);
-        $this->hooksAPI->addAction('spam_comment', function ($comment_id, $comment): void {
-            $this->hooksAPI->doAction('popcms:spamComment', $comment_id, $comment);
+        $this->getHooksAPI()->addAction('spam_comment', function ($comment_id, $comment): void {
+            $this->getHooksAPI()->doAction('popcms:spamComment', $comment_id, $comment);
         }, 10, 2);
-        $this->hooksAPI->addAction('delete_comment', function ($comment_id, $comment): void {
-            $this->hooksAPI->doAction('popcms:deleteComment', $comment_id, $comment);
+        $this->getHooksAPI()->addAction('delete_comment', function ($comment_id, $comment): void {
+            $this->getHooksAPI()->doAction('popcms:deleteComment', $comment_id, $comment);
         }, 10, 2);
 
-        $this->looseContractManager->implementHooks([
+        $this->getLooseContractManager()->implementHooks([
             'popcms:insertComment',
             'popcms:spamComment',
             'popcms:deleteComment',
         ]);
 
-        $this->nameResolver->implementNames([
+        $this->getNameResolver()->implementNames([
             'popcms:dbcolumn:orderby:comments:date' => 'comment_date_gmt',
             'popcms:dbcolumn:orderby:customposts:comment-count' => 'comment_count',
         ]);

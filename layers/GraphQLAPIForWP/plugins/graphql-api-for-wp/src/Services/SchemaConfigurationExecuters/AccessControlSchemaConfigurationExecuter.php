@@ -12,16 +12,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    protected AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator;
-    protected SchemaConfigAccessControlListBlock $schemaConfigAccessControlListBlock;
+    private ?AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator = null;
+    private ?SchemaConfigAccessControlListBlock $schemaConfigAccessControlListBlock = null;
 
-    #[Required]
-    final public function autowireAccessControlSchemaConfigurationExecuter(
-        AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator,
-        SchemaConfigAccessControlListBlock $schemaConfigAccessControlListBlock,
-    ): void {
+    public function setAccessControlGraphQLQueryConfigurator(AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator): void
+    {
         $this->accessControlGraphQLQueryConfigurator = $accessControlGraphQLQueryConfigurator;
+    }
+    protected function getAccessControlGraphQLQueryConfigurator(): AccessControlGraphQLQueryConfigurator
+    {
+        return $this->accessControlGraphQLQueryConfigurator ??= $this->instanceManager->getInstance(AccessControlGraphQLQueryConfigurator::class);
+    }
+    public function setSchemaConfigAccessControlListBlock(SchemaConfigAccessControlListBlock $schemaConfigAccessControlListBlock): void
+    {
         $this->schemaConfigAccessControlListBlock = $schemaConfigAccessControlListBlock;
+    }
+    protected function getSchemaConfigAccessControlListBlock(): SchemaConfigAccessControlListBlock
+    {
+        return $this->schemaConfigAccessControlListBlock ??= $this->instanceManager->getInstance(SchemaConfigAccessControlListBlock::class);
     }
 
     public function getEnablingModule(): ?string
@@ -35,7 +43,7 @@ class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurati
         if (!is_null($schemaConfigACLBlockDataItem)) {
             if ($accessControlLists = $schemaConfigACLBlockDataItem['attrs'][SchemaConfigAccessControlListBlock::ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS] ?? null) {
                 foreach ($accessControlLists as $accessControlListID) {
-                    $this->accessControlGraphQLQueryConfigurator->executeSchemaConfiguration($accessControlListID);
+                    $this->getAccessControlGraphQLQueryConfigurator()->executeSchemaConfiguration($accessControlListID);
                 }
             }
         }
@@ -43,6 +51,6 @@ class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurati
 
     protected function getBlock(): BlockInterface
     {
-        return $this->schemaConfigAccessControlListBlock;
+        return $this->getSchemaConfigAccessControlListBlock();
     }
 }

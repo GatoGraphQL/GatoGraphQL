@@ -12,13 +12,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected SiteTypeDataLoader $siteTypeDataLoader;
+    private ?SiteTypeDataLoader $siteTypeDataLoader = null;
 
-    #[Required]
-    final public function autowireSiteObjectTypeResolver(
-        SiteTypeDataLoader $siteTypeDataLoader,
-    ): void {
+    public function setSiteTypeDataLoader(SiteTypeDataLoader $siteTypeDataLoader): void
+    {
         $this->siteTypeDataLoader = $siteTypeDataLoader;
+    }
+    protected function getSiteTypeDataLoader(): SiteTypeDataLoader
+    {
+        return $this->siteTypeDataLoader ??= $this->instanceManager->getInstance(SiteTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -28,7 +30,7 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('Obtain properties belonging to the site (name, domain, configuration options, etc)', 'multisite');
+        return $this->getTranslationAPI()->__('Obtain properties belonging to the site (name, domain, configuration options, etc)', 'multisite');
     }
 
     public function getID(object $object): string | int | null
@@ -40,6 +42,6 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->siteTypeDataLoader;
+        return $this->getSiteTypeDataLoader();
     }
 }

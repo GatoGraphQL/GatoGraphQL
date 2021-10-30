@@ -19,16 +19,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     
-    #[Required]
-    final public function autowireHighlightObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        URLScalarTypeResolver $urlScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -53,10 +61,10 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'title' => $this->stringScalarTypeResolver,
-            'excerpt' => $this->stringScalarTypeResolver,
-            'content' => $this->stringScalarTypeResolver,
-            'highlightedPostURL' => $this->urlScalarTypeResolver,
+            'title' => $this->getStringScalarTypeResolver(),
+            'excerpt' => $this->getStringScalarTypeResolver(),
+            'content' => $this->getStringScalarTypeResolver(),
+            'highlightedPostURL' => $this->getUrlScalarTypeResolver(),
             'highlightedpost' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -76,12 +84,12 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'title' => $this->translationAPI->__('', ''),
-            'excerpt' => $this->translationAPI->__('', ''),
-            'content' => $this->translationAPI->__('', ''),
-            'highlightedpost' => $this->translationAPI->__('', ''),
-            'highlightedPostURL' => $this->translationAPI->__('', ''),
-            'highlightedpost' => $this->translationAPI->__('', ''),
+            'title' => $this->getTranslationAPI()->__('', ''),
+            'excerpt' => $this->getTranslationAPI()->__('', ''),
+            'content' => $this->getTranslationAPI()->__('', ''),
+            'highlightedpost' => $this->getTranslationAPI()->__('', ''),
+            'highlightedPostURL' => $this->getTranslationAPI()->__('', ''),
+            'highlightedpost' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

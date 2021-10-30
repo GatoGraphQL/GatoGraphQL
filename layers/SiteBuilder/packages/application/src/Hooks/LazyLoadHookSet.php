@@ -18,33 +18,41 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class LazyLoadHookSet extends AbstractHookSet
 {
-    protected RequestHelperServiceInterface $requestHelperService;
-    protected Lazy $lazy;
+    private ?RequestHelperServiceInterface $requestHelperService = null;
+    private ?Lazy $lazy = null;
 
-    #[Required]
-    final public function autowireLazyLoadHookSet(
-        RequestHelperServiceInterface $requestHelperService,
-        Lazy $lazy,
-    ): void {
+    public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
+    {
         $this->requestHelperService = $requestHelperService;
+    }
+    protected function getRequestHelperService(): RequestHelperServiceInterface
+    {
+        return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
+    }
+    public function setLazy(Lazy $lazy): void
+    {
         $this->lazy = $lazy;
+    }
+    protected function getLazy(): Lazy
+    {
+        return $this->lazy ??= $this->instanceManager->getInstance(Lazy::class);
     }
 
     protected function init(): void
     {
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             '\PoP\ComponentModel\Engine:getModuleData:start',
             array($this, 'start'),
             10,
             4
         );
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             '\PoP\ComponentModel\Engine:getModuleData:dataloading-module',
             array($this, 'calculateDataloadingModuleData'),
             10,
             8
         );
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             '\PoP\ComponentModel\Engine:getModuleData:end',
             array($this, 'end'),
             10,
@@ -81,10 +89,10 @@ class LazyLoadHookSet extends AbstractHookSet
                         DataOutputItems::MODULE_DATA,
                         DataOutputItems::DATABASES,
                     ],
-                    ModuleFilterManager::URLPARAM_MODULEFILTER => $this->lazy->getName(),
+                    ModuleFilterManager::URLPARAM_MODULEFILTER => $this->getLazy()->getName(),
                     Params::ACTIONS . '[]' => Actions::LOADLAZY,
                 ],
-                $this->requestHelperService->getCurrentURL()
+                $this->getRequestHelperService()->getCurrentURL()
             );
             $engine->addBackgroundUrl($url, array(Targets::MAIN));
         }

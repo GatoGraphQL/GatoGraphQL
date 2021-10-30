@@ -90,7 +90,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $objectErrors[(string)$id][] = [
                     Tokens::PATH => ['id'],
                     Tokens::MESSAGE => sprintf(
-                        $this->translationAPI->__('Corrupted data: Object with ID \'%s\' doesn\'t exist', 'component-model'),
+                        $this->getTranslationAPI()->__('Corrupted data: Object with ID \'%s\' doesn\'t exist', 'component-model'),
                         $id
                     ),
                 ];
@@ -108,7 +108,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             foreach (array_filter($idsDataFields[$id]['conditional']) as $conditionDataField => $conditionalDataFields) {
                 // Check if the condition field has value `true`
                 // All 'conditional' fields must have their own key as 'direct', then simply look for this element on $dbItems
-                $conditionFieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey($relationalTypeResolver, $conditionDataField, $object);
+                $conditionFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $conditionDataField, $object);
                 if (isset($dbItems[$id]) && array_key_exists($conditionFieldOutputKey, $dbItems[$id])) {
                     $conditionSatisfied = (bool)$dbItems[$id][$conditionFieldOutputKey];
                 } else {
@@ -183,13 +183,13 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     ) {
         $value = $relationalTypeResolver->resolveValue($object, $field, $variables, $expressions);
         // Merge the objectWarnings and objectDeprecations, if any
-        if ($storedObjectWarnings = $this->feedbackMessageStore->retrieveAndClearObjectWarnings($id)) {
+        if ($storedObjectWarnings = $this->getFeedbackMessageStore()->retrieveAndClearObjectWarnings($id)) {
             $objectWarnings[$id] = array_merge(
                 $objectWarnings[$id] ?? [],
                 $storedObjectWarnings
             );
         }
-        if ($storedObjectDeprecations = $this->feedbackMessageStore->retrieveAndClearObjectDeprecations($id)) {
+        if ($storedObjectDeprecations = $this->getFeedbackMessageStore()->retrieveAndClearObjectDeprecations($id)) {
             $objectDeprecations[$id] = array_merge(
                 $objectDeprecations[$id] ?? [],
                 $storedObjectDeprecations
@@ -223,7 +223,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$dbItems,
         array &$objectErrors,
     ): void {
-        $fieldOutputKey = $this->fieldQueryInterpreter->getUniqueFieldOutputKey(
+        $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey(
             $relationalTypeResolver,
             $field,
             $object,
@@ -253,6 +253,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->translationAPI->__('Resolve the value of the field and merge it into results. This directive is already included by the engine, since its execution is mandatory', 'component-model');
+        return $this->getTranslationAPI()->__('Resolve the value of the field and merge it into results. This directive is already included by the engine, since its execution is mandatory', 'component-model');
     }
 }

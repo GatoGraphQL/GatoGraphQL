@@ -15,19 +15,33 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEntitiesRootObjectTypeFieldResolver
 {
-    protected GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType;
-    protected GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType;
-    protected GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType;
+    private ?GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType = null;
+    private ?GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType = null;
+    private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
 
-    #[Required]
-    final public function autowireListOfCPTEntitiesRootObjectTypeFieldResolver(
-        GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType,
-        GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType,
-        GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType,
-    ): void {
+    public function setGraphQLAccessControlListCustomPostType(GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType): void
+    {
         $this->graphQLAccessControlListCustomPostType = $graphQLAccessControlListCustomPostType;
+    }
+    protected function getGraphQLAccessControlListCustomPostType(): GraphQLAccessControlListCustomPostType
+    {
+        return $this->graphQLAccessControlListCustomPostType ??= $this->instanceManager->getInstance(GraphQLAccessControlListCustomPostType::class);
+    }
+    public function setGraphQLCacheControlListCustomPostType(GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType): void
+    {
         $this->graphQLCacheControlListCustomPostType = $graphQLCacheControlListCustomPostType;
+    }
+    protected function getGraphQLCacheControlListCustomPostType(): GraphQLCacheControlListCustomPostType
+    {
+        return $this->graphQLCacheControlListCustomPostType ??= $this->instanceManager->getInstance(GraphQLCacheControlListCustomPostType::class);
+    }
+    public function setGraphQLSchemaConfigurationCustomPostType(GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType): void
+    {
         $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
+    }
+    protected function getGraphQLSchemaConfigurationCustomPostType(): GraphQLSchemaConfigurationCustomPostType
+    {
+        return $this->graphQLSchemaConfigurationCustomPostType ??= $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
     }
 
     /**
@@ -45,9 +59,9 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'accessControlLists' => $this->translationAPI->__('Access Control Lists', 'graphql-api'),
-            'cacheControlLists' => $this->translationAPI->__('Cache Control Lists', 'graphql-api'),
-            'schemaConfigurations' => $this->translationAPI->__('Schema Configurations', 'graphql-api'),
+            'accessControlLists' => $this->getTranslationAPI()->__('Access Control Lists', 'graphql-api'),
+            'cacheControlLists' => $this->getTranslationAPI()->__('Cache Control Lists', 'graphql-api'),
+            'schemaConfigurations' => $this->getTranslationAPI()->__('Schema Configurations', 'graphql-api'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -55,9 +69,9 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
     protected function getFieldCustomPostType(string $fieldName): string
     {
         return match ($fieldName) {
-            'accessControlLists' => $this->graphQLAccessControlListCustomPostType->getCustomPostType(),
-            'cacheControlLists' => $this->graphQLCacheControlListCustomPostType->getCustomPostType(),
-            'schemaConfigurations' => $this->graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
+            'accessControlLists' => $this->getGraphQLAccessControlListCustomPostType()->getCustomPostType(),
+            'cacheControlLists' => $this->getGraphQLCacheControlListCustomPostType()->getCustomPostType(),
+            'schemaConfigurations' => $this->getGraphQLSchemaConfigurationCustomPostType()->getCustomPostType(),
             default => '', // It will never reach here
         };
     }

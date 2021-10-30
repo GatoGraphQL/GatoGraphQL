@@ -7,13 +7,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class PoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
 {
-    protected IntScalarTypeResolver $intScalarTypeResolver;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowirePoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users(
-        IntScalarTypeResolver $intScalarTypeResolver,
-    ): void {
+    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -41,7 +43,7 @@ class PoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users extends 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-			'avatar' => $this->translationAPI->__('', ''),
+			'avatar' => $this->getTranslationAPI()->__('', ''),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -59,7 +61,7 @@ class PoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users extends 
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['avatar' => 'size'] => $this->translationAPI->__('Avatar size, in pixels', ''),
+            ['avatar' => 'size'] => $this->getTranslationAPI()->__('Avatar size, in pixels', ''),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

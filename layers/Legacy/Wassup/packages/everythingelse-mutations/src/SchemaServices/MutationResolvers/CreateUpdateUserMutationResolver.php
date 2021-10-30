@@ -20,22 +20,22 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     protected function validateContent(array &$errors, array $form_data): void
     {
         if (empty($form_data['first_name'])) {
-            $errors[] = $this->translationAPI->__('The name cannot be empty', 'pop-application');
+            $errors[] = $this->getTranslationAPI()->__('The name cannot be empty', 'pop-application');
         }
 
         // Validate email
         $user_email = $form_data['user_email'];
         if ($user_email == '') {
-            $errors[] = $this->translationAPI->__('The e-mail cannot be empty', 'pop-application');
+            $errors[] = $this->getTranslationAPI()->__('The e-mail cannot be empty', 'pop-application');
         } elseif (! is_email($user_email)) {
-            $errors[] = $this->translationAPI->__('The email address isn&#8217;t correct.', 'pop-application');
+            $errors[] = $this->getTranslationAPI()->__('The email address isn&#8217;t correct.', 'pop-application');
         }
 
         $limited_email_domains = get_site_option('limited_email_domains');
         if (is_array($limited_email_domains) && empty($limited_email_domains) == false) {
             $emaildomain = substr($user_email, 1 + strpos($user_email, '@'));
             if (in_array($emaildomain, $limited_email_domains) == false) {
-                $errors[] = $this->translationAPI->__('That email address is not allowed!', 'pop-application');
+                $errors[] = $this->getTranslationAPI()->__('That email address is not allowed!', 'pop-application');
             }
         }
     }
@@ -46,17 +46,17 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         // Check the username
         $user_login = $form_data['username'];
         if ($user_login == '') {
-            $errors[] = $this->translationAPI->__('The username cannot be empty.', 'pop-application');
+            $errors[] = $this->getTranslationAPI()->__('The username cannot be empty.', 'pop-application');
         } elseif (! validate_username($user_login)) {
-            $errors[] = $this->translationAPI->__('This username is invalid because it uses illegal characters. Please enter a valid username.', 'pop-application');
+            $errors[] = $this->getTranslationAPI()->__('This username is invalid because it uses illegal characters. Please enter a valid username.', 'pop-application');
         } elseif (username_exists($user_login)) {
-            $errors[] = $this->translationAPI->__('This username is already registered. Please choose another one.', 'pop-application');
+            $errors[] = $this->getTranslationAPI()->__('This username is already registered. Please choose another one.', 'pop-application');
         }
 
         // Check the e-mail address
         $user_email = $form_data['user_email'];
         if (email_exists($user_email)) {
-            $errors[] = $this->translationAPI->__('This email is already registered, please choose another one.', 'pop-application');
+            $errors[] = $this->getTranslationAPI()->__('This email is already registered, please choose another one.', 'pop-application');
         }
 
         // Validate Password
@@ -64,14 +64,14 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         $repeatpassword =  $form_data['repeat_password'];
 
         if (!$password) {
-            $errors[] = $this->translationAPI->__('The password cannot be emtpy.', 'pop-application');
+            $errors[] = $this->getTranslationAPI()->__('The password cannot be emtpy.', 'pop-application');
         } elseif (strlen($password) < 8) {
-            $errors[] = $this->translationAPI->__('The password must be at least 8 characters long.', 'pop-application');
+            $errors[] = $this->getTranslationAPI()->__('The password must be at least 8 characters long.', 'pop-application');
         } else {
             if (!$repeatpassword) {
-                $errors[] = $this->translationAPI->__('Please confirm the password.', 'pop-application');
+                $errors[] = $this->getTranslationAPI()->__('Please confirm the password.', 'pop-application');
             } elseif ($password !== $repeatpassword) {
-                $errors[] = $this->translationAPI->__('Passwords do not match.', 'pop-application');
+                $errors[] = $this->getTranslationAPI()->__('Passwords do not match.', 'pop-application');
             }
         }
 
@@ -95,7 +95,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
         $email_user_id = email_exists($user_email);
         if ($email_user_id && $email_user_id !== $user_id) {
-            $errors[] = $this->translationAPI->__('That email address already exists in our system!', 'pop-application');
+            $errors[] = $this->getTranslationAPI()->__('That email address already exists in our system!', 'pop-application');
         }
     }
 
@@ -193,15 +193,15 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
     protected function additionals($user_id, $form_data): void
     {
-        $this->hooksAPI->doAction('gd_createupdate_user:additionals', $user_id, $form_data);
+        $this->getHooksAPI()->doAction('gd_createupdate_user:additionals', $user_id, $form_data);
     }
     protected function additionalsUpdate($user_id, $form_data): void
     {
-        $this->hooksAPI->doAction('gd_createupdate_user:additionalsUpdate', $user_id, $form_data);
+        $this->getHooksAPI()->doAction('gd_createupdate_user:additionalsUpdate', $user_id, $form_data);
     }
     protected function additionalsCreate($user_id, $form_data): void
     {
-        $this->hooksAPI->doAction('gd_createupdate_user:additionalsCreate', $user_id, $form_data);
+        $this->getHooksAPI()->doAction('gd_createupdate_user:additionalsCreate', $user_id, $form_data);
     }
 
     public function validateErrors(array $form_data): array

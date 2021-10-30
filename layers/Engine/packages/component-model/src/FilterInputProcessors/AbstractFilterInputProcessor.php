@@ -4,18 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FilterInputProcessors;
 
-use PoP\ComponentModel\Instances\InstanceManagerInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractFilterInputProcessor implements FilterInputProcessorInterface
 {
-    protected InstanceManagerInterface $instanceManager;
-
-    #[Required]
-    final public function autowireAbstractFilterInputProcessor(InstanceManagerInterface $instanceManager): void
-    {
-        $this->instanceManager = $instanceManager;
-    }
+    use BasicServiceTrait;
 
     public function getFilterInputsToProcess(): array
     {

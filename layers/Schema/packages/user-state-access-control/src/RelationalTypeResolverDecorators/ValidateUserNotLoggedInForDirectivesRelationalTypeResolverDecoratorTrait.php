@@ -5,20 +5,21 @@ declare(strict_types=1);
 namespace PoPSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserNotLoggedInForDirectivesDirectiveResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait ValidateUserNotLoggedInForDirectivesRelationalTypeResolverDecoratorTrait
 {
-    protected ValidateIsUserNotLoggedInForDirectivesDirectiveResolver $validateIsUserNotLoggedInForDirectivesDirectiveResolver;
+    private ?ValidateIsUserNotLoggedInForDirectivesDirectiveResolver $validateIsUserNotLoggedInForDirectivesDirectiveResolver = null;
 
-    #[Required]
-    public function autowireValidateUserNotLoggedInForDirectivesRelationalTypeResolverDecoratorTrait(
-        ValidateIsUserNotLoggedInForDirectivesDirectiveResolver $validateIsUserNotLoggedInForDirectivesDirectiveResolver,
-    ): void {
+    public function setValidateIsUserNotLoggedInForDirectivesDirectiveResolver(ValidateIsUserNotLoggedInForDirectivesDirectiveResolver $validateIsUserNotLoggedInForDirectivesDirectiveResolver): void
+    {
         $this->validateIsUserNotLoggedInForDirectivesDirectiveResolver = $validateIsUserNotLoggedInForDirectivesDirectiveResolver;
+    }
+    protected function getValidateIsUserNotLoggedInForDirectivesDirectiveResolver(): ValidateIsUserNotLoggedInForDirectivesDirectiveResolver
+    {
+        return $this->validateIsUserNotLoggedInForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserNotLoggedInForDirectivesDirectiveResolver::class);
     }
 
     protected function getRequiredEntryValue(): ?string
@@ -27,6 +28,6 @@ trait ValidateUserNotLoggedInForDirectivesRelationalTypeResolverDecoratorTrait
     }
     protected function getValidateUserStateDirectiveResolver(): DirectiveResolverInterface
     {
-        return $this->validateIsUserNotLoggedInForDirectivesDirectiveResolver;
+        return $this->getValidateIsUserNotLoggedInForDirectivesDirectiveResolver();
     }
 }

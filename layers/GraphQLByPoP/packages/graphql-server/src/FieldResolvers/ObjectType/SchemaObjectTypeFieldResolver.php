@@ -17,19 +17,33 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected TypeObjectTypeResolver $typeObjectTypeResolver;
-    protected DirectiveObjectTypeResolver $directiveObjectTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
+    private ?DirectiveObjectTypeResolver $directiveObjectTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireSchemaObjectTypeFieldResolver(
-        TypeObjectTypeResolver $typeObjectTypeResolver,
-        DirectiveObjectTypeResolver $directiveObjectTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
+    {
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
+    }
+    protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
+    {
+        return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
+    }
+    public function setDirectiveObjectTypeResolver(DirectiveObjectTypeResolver $directiveObjectTypeResolver): void
+    {
         $this->directiveObjectTypeResolver = $directiveObjectTypeResolver;
+    }
+    protected function getDirectiveObjectTypeResolver(): DirectiveObjectTypeResolver
+    {
+        return $this->directiveObjectTypeResolver ??= $this->instanceManager->getInstance(DirectiveObjectTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -67,12 +81,12 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'queryType' => $this->translationAPI->__('The type, accessible from the root, that resolves queries', 'graphql-server'),
-            'mutationType' => $this->translationAPI->__('The type, accessible from the root, that resolves mutations', 'graphql-server'),
-            'subscriptionType' => $this->translationAPI->__('The type, accessible from the root, that resolves subscriptions', 'graphql-server'),
-            'types' => $this->translationAPI->__('All types registered in the data graph', 'graphql-server'),
-            'directives' => $this->translationAPI->__('All directives registered in the data graph', 'graphql-server'),
-            'type' => $this->translationAPI->__('Obtain a specific type from the schema', 'graphql-server'),
+            'queryType' => $this->getTranslationAPI()->__('The type, accessible from the root, that resolves queries', 'graphql-server'),
+            'mutationType' => $this->getTranslationAPI()->__('The type, accessible from the root, that resolves mutations', 'graphql-server'),
+            'subscriptionType' => $this->getTranslationAPI()->__('The type, accessible from the root, that resolves subscriptions', 'graphql-server'),
+            'types' => $this->getTranslationAPI()->__('All types registered in the data graph', 'graphql-server'),
+            'directives' => $this->getTranslationAPI()->__('All directives registered in the data graph', 'graphql-server'),
+            'type' => $this->getTranslationAPI()->__('Obtain a specific type from the schema', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -81,7 +95,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'type' => [
-                'name' => $this->stringScalarTypeResolver,
+                'name' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -90,7 +104,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['type' => 'name'] => $this->translationAPI->__('The name of the type', 'graphql-server'),
+            ['type' => 'name'] => $this->getTranslationAPI()->__('The name of the type', 'graphql-server'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -134,8 +148,8 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'queryType', 'mutationType', 'subscriptionType', 'types', 'type' => $this->typeObjectTypeResolver,
-            'directives' => $this->directiveObjectTypeResolver,
+            'queryType', 'mutationType', 'subscriptionType', 'types', 'type' => $this->getTypeObjectTypeResolver(),
+            'directives' => $this->getDirectiveObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

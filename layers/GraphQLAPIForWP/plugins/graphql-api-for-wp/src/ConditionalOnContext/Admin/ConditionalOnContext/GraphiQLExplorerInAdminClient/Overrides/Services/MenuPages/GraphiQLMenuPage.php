@@ -15,18 +15,20 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
 {
-    protected AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient;
+    private ?AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient = null;
 
-    #[Required]
-    final public function autowireGraphQLAPIGraphiQLMenuPage(
-        AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient,
-    ): void {
+    public function setAdminGraphiQLWithExplorerClient(AdminGraphiQLWithExplorerClient $adminGraphiQLWithExplorerClient): void
+    {
         $this->adminGraphiQLWithExplorerClient = $adminGraphiQLWithExplorerClient;
+    }
+    protected function getAdminGraphiQLWithExplorerClient(): AdminGraphiQLWithExplorerClient
+    {
+        return $this->adminGraphiQLWithExplorerClient ??= $this->instanceManager->getInstance(AdminGraphiQLWithExplorerClient::class);
     }
 
     protected function getGraphiQLWithExplorerClientHTML(): string
     {
-        return $this->adminGraphiQLWithExplorerClient->getClientHTML();
+        return $this->getAdminGraphiQLWithExplorerClient()->getClientHTML();
     }
 
     public function print(): void

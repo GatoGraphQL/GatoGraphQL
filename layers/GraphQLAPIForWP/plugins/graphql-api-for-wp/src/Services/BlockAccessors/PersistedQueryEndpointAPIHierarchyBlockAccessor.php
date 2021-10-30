@@ -7,14 +7,32 @@ namespace GraphQLAPI\GraphQLAPI\Services\BlockAccessors;
 use GraphQLAPI\GraphQLAPI\GetterSetterObjects\BlockAttributes\PersistedQueryEndpointAPIHierarchyBlockAttributes;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointAPIHierarchyBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use PoP\ComponentModel\Services\BasicServiceTrait;
+use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 
 class PersistedQueryEndpointAPIHierarchyBlockAccessor
 {
-    public function __construct(
-        protected BlockHelpers $blockHelpers,
-        protected PersistedQueryEndpointAPIHierarchyBlock $persistedQueryEndpointAPIHierarchyBlock,
-    ) {
+    use BasicServiceTrait;
+
+    private ?BlockHelpers $blockHelpers = null;
+    private ?PersistedQueryEndpointAPIHierarchyBlock $persistedQueryEndpointAPIHierarchyBlock = null;
+
+    public function setBlockHelpers(BlockHelpers $blockHelpers): void
+    {
+        $this->blockHelpers = $blockHelpers;
+    }
+    protected function getBlockHelpers(): BlockHelpers
+    {
+        return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
+    }
+    public function setPersistedQueryEndpointAPIHierarchyBlock(PersistedQueryEndpointAPIHierarchyBlock $persistedQueryEndpointAPIHierarchyBlock): void
+    {
+        $this->persistedQueryEndpointAPIHierarchyBlock = $persistedQueryEndpointAPIHierarchyBlock;
+    }
+    protected function getPersistedQueryEndpointAPIHierarchyBlock(): PersistedQueryEndpointAPIHierarchyBlock
+    {
+        return $this->persistedQueryEndpointAPIHierarchyBlock ??= $this->instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
     }
 
     /**
@@ -22,9 +40,9 @@ class PersistedQueryEndpointAPIHierarchyBlockAccessor
      */
     public function getAttributes(WP_Post $post): ?PersistedQueryEndpointAPIHierarchyBlockAttributes
     {
-        $apiHierarchyBlock = $this->blockHelpers->getSingleBlockOfTypeFromCustomPost(
+        $apiHierarchyBlock = $this->getBlockHelpers()->getSingleBlockOfTypeFromCustomPost(
             $post,
-            $this->persistedQueryEndpointAPIHierarchyBlock
+            $this->getPersistedQueryEndpointAPIHierarchyBlock()
         );
         // If there is either 0 or more than 1, return nothing
         if ($apiHierarchyBlock === null) {

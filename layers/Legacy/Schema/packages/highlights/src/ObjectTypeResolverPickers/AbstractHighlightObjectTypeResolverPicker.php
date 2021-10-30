@@ -12,17 +12,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractHighlightObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
-    protected HighlightObjectTypeResolver $highlightObjectTypeResolver;
+    private ?HighlightObjectTypeResolver $highlightObjectTypeResolver = null;
     
-    #[Required]
-    final public function autowireAbstractHighlightObjectTypeResolverPicker(HighlightObjectTypeResolver $highlightObjectTypeResolver): void
+    public function setHighlightObjectTypeResolver(HighlightObjectTypeResolver $highlightObjectTypeResolver): void
     {
         $this->highlightObjectTypeResolver = $highlightObjectTypeResolver;
+    }
+    protected function getHighlightObjectTypeResolver(): HighlightObjectTypeResolver
+    {
+        return $this->highlightObjectTypeResolver ??= $this->instanceManager->getInstance(HighlightObjectTypeResolver::class);
     }
     
     public function getObjectTypeResolver(): ObjectTypeResolverInterface
     {
-        return $this->highlightObjectTypeResolver;
+        return $this->getHighlightObjectTypeResolver();
     }
 
     public function isInstanceOfType(object $object): bool

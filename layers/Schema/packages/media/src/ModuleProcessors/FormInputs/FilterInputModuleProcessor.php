@@ -20,13 +20,15 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
 
     public const MODULE_FILTERINPUT_MIME_TYPES = 'filterinput-mime-types';
 
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireFilterInputModuleProcessor(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getModulesToProcess(): array
@@ -66,7 +68,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_MIME_TYPES => $this->stringScalarTypeResolver,
+            self::MODULE_FILTERINPUT_MIME_TYPES => $this->getStringScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -82,7 +84,7 @@ class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implem
     public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_MIME_TYPES => $this->translationAPI->__('Limit results to elements with the given mime types', 'media'),
+            self::MODULE_FILTERINPUT_MIME_TYPES => $this->getTranslationAPI()->__('Limit results to elements with the given mime types', 'media'),
             default => null,
         };
     }

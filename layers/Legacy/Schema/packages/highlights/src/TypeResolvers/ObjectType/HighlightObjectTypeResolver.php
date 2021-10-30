@@ -12,13 +12,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    protected HighlightTypeDataLoader $highlightTypeDataLoader;
+    private ?HighlightTypeDataLoader $highlightTypeDataLoader = null;
     
-    #[Required]
-    final public function autowireHighlightObjectTypeResolver(
-        HighlightTypeDataLoader $highlightTypeDataLoader,
-    ): void {
+    public function setHighlightTypeDataLoader(HighlightTypeDataLoader $highlightTypeDataLoader): void
+    {
         $this->highlightTypeDataLoader = $highlightTypeDataLoader;
+    }
+    protected function getHighlightTypeDataLoader(): HighlightTypeDataLoader
+    {
+        return $this->highlightTypeDataLoader ??= $this->instanceManager->getInstance(HighlightTypeDataLoader::class);
     }
     
     public function getTypeName(): string
@@ -28,7 +30,7 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->translationAPI->__('A highlighted piece of text, extracted from a post', 'highlights');
+        return $this->getTranslationAPI()->__('A highlighted piece of text, extracted from a post', 'highlights');
     }
 
     public function getID(object $object): string | int | null
@@ -39,6 +41,6 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->highlightTypeDataLoader;
+        return $this->getHighlightTypeDataLoader();
     }
 }

@@ -102,7 +102,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
             array_merge(
                 [
                     'defaultQuery' => $this->getDefaultQuery(),
-                    'endpoint' => $this->endpointHelpers->getAdminConfigurableSchemaGraphQLEndpoint(),
+                    'endpoint' => $this->getEndpointHelpers()->getAdminConfigurableSchemaGraphQLEndpoint(),
                 ],
                 $scriptSettings
             )

@@ -17,16 +17,24 @@ use WP_User;
 
 class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    protected DateFormatterInterface $dateFormatter;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?DateFormatterInterface $dateFormatter = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireUserObjectTypeFieldResolver(
-        DateFormatterInterface $dateFormatter,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setDateFormatter(DateFormatterInterface $dateFormatter): void
+    {
         $this->dateFormatter = $dateFormatter;
+    }
+    protected function getDateFormatter(): DateFormatterInterface
+    {
+        return $this->dateFormatter ??= $this->instanceManager->getInstance(DateFormatterInterface::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -49,10 +57,10 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'nicename' => $this->stringScalarTypeResolver,
-            'nickname' => $this->stringScalarTypeResolver,
-            'locale' => $this->stringScalarTypeResolver,
-            'registeredDate' => $this->stringScalarTypeResolver,
+            'nicename' => $this->getStringScalarTypeResolver(),
+            'nickname' => $this->getStringScalarTypeResolver(),
+            'locale' => $this->getStringScalarTypeResolver(),
+            'registeredDate' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -73,10 +81,10 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'nicename' => $this->translationAPI->__('User\'s nicename', 'pop-users'),
-            'nickname' => $this->translationAPI->__('User\'s nickname', 'pop-users'),
-            'locale' => $this->translationAPI->__('Retrieves the locale of a user', 'pop-users'),
-            'registeredDate' => $this->translationAPI->__('The date the user registerd on the site', 'pop-users'),
+            'nicename' => $this->getTranslationAPI()->__('User\'s nicename', 'pop-users'),
+            'nickname' => $this->getTranslationAPI()->__('User\'s nickname', 'pop-users'),
+            'locale' => $this->getTranslationAPI()->__('Retrieves the locale of a user', 'pop-users'),
+            'registeredDate' => $this->getTranslationAPI()->__('The date the user registerd on the site', 'pop-users'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -114,7 +122,7 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             case 'locale':
                 return \get_user_locale($user);
             case 'registeredDate':
-                return $this->dateFormatter->format(
+                return $this->getDateFormatter()->format(
                     $fieldArgs['format'],
                     $user->user_registered
                 );

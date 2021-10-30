@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\TagsWP\TypeAPIs;
 
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Hooks\HooksAPIInterface;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
@@ -18,15 +20,19 @@ use WP_Taxonomy;
  */
 abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPIInterface
 {
-    public const HOOK_QUERY = __CLASS__ . ':query';
-    protected HooksAPIInterface $hooksAPI;
-    protected CMSHelperServiceInterface $cmsHelperService;
+    use BasicServiceTrait;
 
-    #[Required]
-    final public function autowireAbstractTagTypeAPI(HooksAPIInterface $hooksAPI, CMSHelperServiceInterface $cmsHelperService): void
+    public const HOOK_QUERY = __CLASS__ . ':query';
+
+    private ?CMSHelperServiceInterface $cmsHelperService = null;
+
+    public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
     {
-        $this->hooksAPI = $hooksAPI;
         $this->cmsHelperService = $cmsHelperService;
+    }
+    protected function getCMSHelperService(): CMSHelperServiceInterface
+    {
+        return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
     }
 
     abstract protected function getTagTaxonomyName(): string;
@@ -167,9 +173,9 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
             // Same param name, so do nothing
         }
 
-        return $this->hooksAPI->applyFilters(
+        return $this->getHooksAPI()->applyFilters(
             TaxonomyTypeAPI::HOOK_QUERY,
-            $this->hooksAPI->applyFilters(
+            $this->getHooksAPI()->applyFilters(
                 self::HOOK_QUERY,
                 $query,
                 $options
@@ -186,7 +192,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     public function getTagURLPath(string | int | object $tagObjectOrID): string
     {
         /** @var string */
-        return $this->cmsHelperService->getLocalURLPath($this->getTagURL($tagObjectOrID));
+        return $this->getCmsHelperService()->getLocalURLPath($this->getTagURL($tagObjectOrID));
     }
 
     public function getTagSlug(string | int | object $tagObjectOrID): string

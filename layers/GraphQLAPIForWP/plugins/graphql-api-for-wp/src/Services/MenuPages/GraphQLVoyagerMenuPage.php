@@ -72,7 +72,7 @@ class GraphQLVoyagerMenuPage extends AbstractPluginMenuPage
             'graphQLByPoPGraphiQLSettings',
             array(
                 'nonce' => \wp_create_nonce('wp_rest'),
-                'endpoint' => $this->endpointHelpers->getAdminConfigurableSchemaGraphQLEndpoint(),
+                'endpoint' => $this->getEndpointHelpers()->getAdminConfigurableSchemaGraphQLEndpoint(),
             )
         );
     }

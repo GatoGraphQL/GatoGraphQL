@@ -11,13 +11,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomEndpointSchemaConfigurator extends AbstractCustomPostEndpointSchemaConfigurator
 {
-    protected EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry;
+    private ?EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry = null;
 
-    #[Required]
-    final public function autowireCustomEndpointSchemaConfigurator(
-        EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry
-    ): void {
+    public function setEndpointSchemaConfigurationExecuterRegistry(EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry): void
+    {
         $this->endpointSchemaConfigurationExecuterRegistry = $endpointSchemaConfigurationExecuterRegistry;
+    }
+    protected function getEndpointSchemaConfigurationExecuterRegistry(): EndpointSchemaConfigurationExecuterRegistryInterface
+    {
+        return $this->endpointSchemaConfigurationExecuterRegistry ??= $this->instanceManager->getInstance(EndpointSchemaConfigurationExecuterRegistryInterface::class);
     }
 
     /**
@@ -25,12 +27,12 @@ class CustomEndpointSchemaConfigurator extends AbstractCustomPostEndpointSchemaC
      */
     public function isServiceEnabled(): bool
     {
-        return $this->moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS)
+        return $this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS)
             && parent::isServiceEnabled();
     }
 
     protected function getSchemaConfigurationExecuterRegistry(): SchemaConfigurationExecuterRegistryInterface
     {
-        return $this->endpointSchemaConfigurationExecuterRegistry;
+        return $this->getEndpointSchemaConfigurationExecuterRegistry();
     }
 }

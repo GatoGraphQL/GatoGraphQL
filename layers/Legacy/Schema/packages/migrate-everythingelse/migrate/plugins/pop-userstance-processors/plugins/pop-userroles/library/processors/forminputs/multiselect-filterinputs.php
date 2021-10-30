@@ -13,13 +13,15 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
 
     public const MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT = 'filterinput-multiselect-authorrole';
 
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireUserStance_URE_Module_Processor_MultiSelectFilterInputs(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getModulesToProcess(): array

@@ -24,12 +24,15 @@ class ModuleListTableAction extends AbstractListTableAction
     private array $mutatedModuleIDs = [];
     private bool $mutatedEnabled = false;
 
-    protected UserSettingsManagerInterface $userSettingsManager;
+    private ?UserSettingsManagerInterface $userSettingsManager = null;
 
-    #[Required]
-    final public function autowireModuleListTableAction(): void
+    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
-        $this->userSettingsManager = UserSettingsManagerFacade::getInstance();
+        $this->userSettingsManager = $userSettingsManager;
+    }
+    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    {
+        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }
 
     /**
@@ -157,7 +160,7 @@ class ModuleListTableAction extends AbstractListTableAction
         foreach ($moduleIDs as $moduleID) {
             $moduleIDValues[$moduleID] = $isEnabled;
         }
-        $this->userSettingsManager->setModulesEnabled($moduleIDValues);
+        $this->getUserSettingsManager()->setModulesEnabled($moduleIDValues);
 
         // Flags to indicate that data was mutated, which and how
         $this->mutatedModuleIDs = $moduleIDs;
@@ -171,7 +174,7 @@ class ModuleListTableAction extends AbstractListTableAction
                 \flush_rewrite_rules();
 
                 // Update the timestamp
-                $this->userSettingsManager->storeContainerTimestamp();
+                $this->getUserSettingsManager()->storeContainerTimestamp();
             },
             PHP_INT_MAX
         );

@@ -53,7 +53,7 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
                 'module' => $module,
                 'conditions' => [
                     'scheme' => APISchemes::API,
-                    'datastructure' => $this->restDataStructureFormatter->getName(),
+                    'datastructure' => $this->getRestDataStructureFormatter()->getName(),
                 ],
             ];
         }

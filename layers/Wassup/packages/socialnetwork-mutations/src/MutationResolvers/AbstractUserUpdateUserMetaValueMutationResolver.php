@@ -10,13 +10,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {
-    protected UserTypeAPIInterface $userTypeAPI;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
 
-    #[Required]
-    final public function autowireAbstractUserUpdateUserMetaValueMutationResolver(
-        UserTypeAPIInterface $userTypeAPI,
-    ): void {
+    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    {
         $this->userTypeAPI = $userTypeAPI;
+    }
+    protected function getUserTypeAPI(): UserTypeAPIInterface
+    {
+        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
     public function validateErrors(array $form_data): array
@@ -26,9 +28,9 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
             $target_id = $form_data['target_id'];
 
             // Make sure the user exists
-            $target = $this->userTypeAPI->getUserById($target_id);
+            $target = $this->getUserTypeAPI()->getUserById($target_id);
             if (!$target) {
-                $errors[] = $this->translationAPI->__('The requested user does not exist.', 'pop-coreprocessors');
+                $errors[] = $this->getTranslationAPI()->__('The requested user does not exist.', 'pop-coreprocessors');
             }
         }
         return $errors;
@@ -41,7 +43,7 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
 
     protected function additionals($target_id, $form_data): void
     {
-        $this->hooksAPI->doAction('gd_updateusermetavalue:user', $target_id, $form_data);
+        $this->getHooksAPI()->doAction('gd_updateusermetavalue:user', $target_id, $form_data);
         parent::additionals($target_id, $form_data);
     }
 }

@@ -11,18 +11,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class MainContentModuleHookSet extends AbstractHookSet
 {
-    protected MainContentModule $mainContentModule;
+    private ?MainContentModule $mainContentModule = null;
     
-    #[Required]
-    final public function autowireMainContentModuleHookSet(
-        MainContentModule $mainContentModule
-    ): void {
+    public function setMainContentModule(MainContentModule $mainContentModule): void
+    {
         $this->mainContentModule = $mainContentModule;
+    }
+    protected function getMainContentModule(): MainContentModule
+    {
+        return $this->mainContentModule ??= $this->instanceManager->getInstance(MainContentModule::class);
     }
 
     protected function init(): void
     {
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'augmentVarsProperties',
             [$this, 'augmentVarsProperties'],
             PHP_INT_MAX,

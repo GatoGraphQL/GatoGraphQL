@@ -13,16 +13,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI;
-    protected SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver;
+    private ?CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI = null;
+    private ?SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver = null;
 
-    #[Required]
-    final public function autowireCustomPostObjectTypeFieldResolver(
-        CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI,
-        SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver,
-    ): void {
+    public function setCustomPostMediaTypeAPI(CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI): void
+    {
         $this->customPostMediaTypeAPI = $customPostMediaTypeAPI;
+    }
+    protected function getCustomPostMediaTypeAPI(): CustomPostMediaTypeAPIInterface
+    {
+        return $this->customPostMediaTypeAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeAPIInterface::class);
+    }
+    public function setSupportingFeaturedImageInterfaceTypeFieldResolver(SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver): void
+    {
         $this->supportingFeaturedImageInterfaceTypeFieldResolver = $supportingFeaturedImageInterfaceTypeFieldResolver;
+    }
+    protected function getSupportingFeaturedImageInterfaceTypeFieldResolver(): SupportingFeaturedImageInterfaceTypeFieldResolver
+    {
+        return $this->supportingFeaturedImageInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(SupportingFeaturedImageInterfaceTypeFieldResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -35,7 +43,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->supportingFeaturedImageInterfaceTypeFieldResolver,
+            $this->getSupportingFeaturedImageInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -65,10 +73,10 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $post = $object;
         switch ($fieldName) {
             case 'hasFeaturedImage':
-                return $this->customPostMediaTypeAPI->hasCustomPostThumbnail($objectTypeResolver->getID($post));
+                return $this->getCustomPostMediaTypeAPI()->hasCustomPostThumbnail($objectTypeResolver->getID($post));
 
             case 'featuredImage':
-                return $this->customPostMediaTypeAPI->getCustomPostThumbnailID($objectTypeResolver->getID($post));
+                return $this->getCustomPostMediaTypeAPI()->getCustomPostThumbnailID($objectTypeResolver->getID($post));
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

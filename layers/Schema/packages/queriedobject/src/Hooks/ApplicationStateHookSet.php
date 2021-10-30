@@ -11,24 +11,26 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ApplicationStateHookSet extends AbstractHookSet
 {
-    protected CMSRoutingStateServiceInterface $cmsRoutingStateService;
+    private ?CMSRoutingStateServiceInterface $cmsRoutingStateService = null;
 
-    #[Required]
-    final public function autowireApplicationStateHookSet(
-        CMSRoutingStateServiceInterface $cmsRoutingStateService,
-    ): void {
+    public function setCMSRoutingStateService(CMSRoutingStateServiceInterface $cmsRoutingStateService): void
+    {
         $this->cmsRoutingStateService = $cmsRoutingStateService;
+    }
+    protected function getCMSRoutingStateService(): CMSRoutingStateServiceInterface
+    {
+        return $this->cmsRoutingStateService ??= $this->instanceManager->getInstance(CMSRoutingStateServiceInterface::class);
     }
 
     protected function init(): void
     {
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             'ApplicationState:addVars',
             [$this, 'setQueriedObject'],
             0,
             1
         );
-        $this->hooksAPI->addAction(
+        $this->getHooksAPI()->addAction(
             OperatorGlobalObjectTypeFieldResolver::HOOK_SAFEVARS,
             [$this, 'setSafeVars'],
             10,
@@ -44,11 +46,11 @@ class ApplicationStateHookSet extends AbstractHookSet
         $vars = &$vars_in_array[0];
 
         // Allow to override the queried object, eg: by the AppShell
-        list($queried_object, $queried_object_id) = $this->hooksAPI->applyFilters(
+        list($queried_object, $queried_object_id) = $this->getHooksAPI()->applyFilters(
             'ApplicationState:queried-object',
             [
-                $this->cmsRoutingStateService->getQueriedObject(),
-                $this->cmsRoutingStateService->getQueriedObjectId()
+                $this->getCmsRoutingStateService()->getQueriedObject(),
+                $this->getCmsRoutingStateService()->getQueriedObjectId()
             ]
         );
 

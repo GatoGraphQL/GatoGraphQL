@@ -19,16 +19,25 @@ class CategoryPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDa
     use QueriedDBObjectModuleProcessorTrait;
 
     public const MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST = 'dataload-relationalfields-categorypostlist';
-    protected PostObjectTypeResolver $postObjectTypeResolver;
-    protected ListQueryInputOutputHandler $listQueryInputOutputHandler;
 
-    #[Required]
-    final public function autowireCategoryPostFieldDataloadModuleProcessor(
-        PostObjectTypeResolver $postObjectTypeResolver,
-        ListQueryInputOutputHandler $listQueryInputOutputHandler,
-    ): void {
+    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
+
+    public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
+    {
         $this->postObjectTypeResolver = $postObjectTypeResolver;
+    }
+    protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    {
+        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+    }
+    public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
+    {
         $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
+    }
+    protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
+    {
+        return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
     public function getModulesToProcess(): array
@@ -42,7 +51,7 @@ class CategoryPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDa
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST:
-                return $this->postObjectTypeResolver;
+                return $this->getPostObjectTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($module);
@@ -52,7 +61,7 @@ class CategoryPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDa
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST:
-                return $this->listQueryInputOutputHandler;
+                return $this->getListQueryInputOutputHandler();
         }
 
         return parent::getQueryInputOutputHandler($module);

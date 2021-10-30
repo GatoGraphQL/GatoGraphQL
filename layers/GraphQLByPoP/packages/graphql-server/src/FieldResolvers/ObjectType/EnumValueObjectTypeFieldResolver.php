@@ -16,16 +16,24 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireEnumValueObjectTypeFieldResolver(
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -48,10 +56,10 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'name' => $this->stringScalarTypeResolver,
-            'description' => $this->stringScalarTypeResolver,
-            'isDeprecated' => $this->booleanScalarTypeResolver,
-            'deprecationReason' => $this->stringScalarTypeResolver,
+            'name' => $this->getStringScalarTypeResolver(),
+            'description' => $this->getStringScalarTypeResolver(),
+            'isDeprecated' => $this->getBooleanScalarTypeResolver(),
+            'deprecationReason' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -70,10 +78,10 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->translationAPI->__('Enum value\'s name as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACvBBCyBH6rd)', 'graphql-server'),
-            'description' => $this->translationAPI->__('Enum value\'s description as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACyBIC1BHnjL)', 'graphql-server'),
-            'isDeprecated' => $this->translationAPI->__('Is the enum value deprecated?', 'graphql-server'),
-            'deprecationReason' => $this->translationAPI->__('Why was the enum value deprecated?', 'graphql-server'),
+            'name' => $this->getTranslationAPI()->__('Enum value\'s name as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACvBBCyBH6rd)', 'graphql-server'),
+            'description' => $this->getTranslationAPI()->__('Enum value\'s description as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACyBIC1BHnjL)', 'graphql-server'),
+            'isDeprecated' => $this->getTranslationAPI()->__('Is the enum value deprecated?', 'graphql-server'),
+            'deprecationReason' => $this->getTranslationAPI()->__('Why was the enum value deprecated?', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

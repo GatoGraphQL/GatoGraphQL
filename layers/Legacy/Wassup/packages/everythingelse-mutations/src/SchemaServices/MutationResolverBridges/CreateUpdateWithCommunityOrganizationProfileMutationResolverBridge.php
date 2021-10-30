@@ -11,18 +11,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends CreateUpdateOrganizationProfileMutationResolverBridge
 {
-    protected CreateUpdateWithCommunityOrganizationProfileMutationResolver $createUpdateWithCommunityOrganizationProfileMutationResolver;
+    private ?CreateUpdateWithCommunityOrganizationProfileMutationResolver $createUpdateWithCommunityOrganizationProfileMutationResolver = null;
     
-    #[Required]
-    final public function autowireCreateUpdateWithCommunityOrganizationProfileMutationResolverBridge(
-        CreateUpdateWithCommunityOrganizationProfileMutationResolver $createUpdateWithCommunityOrganizationProfileMutationResolver,
-    ): void {
+    public function setCreateUpdateWithCommunityOrganizationProfileMutationResolver(CreateUpdateWithCommunityOrganizationProfileMutationResolver $createUpdateWithCommunityOrganizationProfileMutationResolver): void
+    {
         $this->createUpdateWithCommunityOrganizationProfileMutationResolver = $createUpdateWithCommunityOrganizationProfileMutationResolver;
+    }
+    protected function getCreateUpdateWithCommunityOrganizationProfileMutationResolver(): CreateUpdateWithCommunityOrganizationProfileMutationResolver
+    {
+        return $this->createUpdateWithCommunityOrganizationProfileMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateWithCommunityOrganizationProfileMutationResolver::class);
     }
     
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->createUpdateWithCommunityOrganizationProfileMutationResolver;
+        return $this->getCreateUpdateWithCommunityOrganizationProfileMutationResolver();
     }
 
     private function getFormInputs()
@@ -34,7 +36,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
     }
     protected function getProfileorganizationFormInputs()
     {
-        $inputs = $this->hooksAPI->applyFilters(
+        $inputs = $this->getHooksAPI()->applyFilters(
             'GD_CommonUserRole_UserCommunities_CreateUpdate_ProfileOrganization:form-inputs',
             array(
                 'is_community' => null,
@@ -62,7 +64,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
             parent::getFormData(),
             $this->getCommonuserrolesFormData(),
             array(
-                'is_community' => (bool)$this->moduleProcessorManager->getProcessor($inputs['is_community'])->getValue($inputs['is_community']),
+                'is_community' => (bool)$this->getModuleProcessorManager()->getProcessor($inputs['is_community'])->getValue($inputs['is_community']),
             )
         );
     }

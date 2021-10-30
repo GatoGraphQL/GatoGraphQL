@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Hooks\HooksAPIInterface;
@@ -15,25 +17,35 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
 {
-    protected TranslationAPIInterface $translationAPI;
-    protected HooksAPIInterface $hooksAPI;
-    protected CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver;
-    protected IDScalarTypeResolver $idScalarTypeResolver;
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
+    // use BasicServiceTrait;
 
-    #[Required]
-    public function autowireCreateOrUpdateCustomPostObjectTypeFieldResolverTrait(
-        TranslationAPIInterface $translationAPI,
-        HooksAPIInterface $hooksAPI,
-        CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver,
-        IDScalarTypeResolver $idScalarTypeResolver,
-        StringScalarTypeResolver $stringScalarTypeResolver,
-    ): void {
-        $this->translationAPI = $translationAPI;
-        $this->hooksAPI = $hooksAPI;
+    private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+
+    public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
+    {
         $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+    }
+    protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
+    {
+        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+    }
+    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     private function getCreateOrUpdateCustomPostSchemaFieldArgNameTypeResolvers(
@@ -41,12 +53,12 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
     ): array {
         return array_merge(
             $addCustomPostID ? [
-                MutationInputProperties::ID => $this->idScalarTypeResolver,
+                MutationInputProperties::ID => $this->getIdScalarTypeResolver(),
             ] : [],
             [
-                MutationInputProperties::TITLE => $this->stringScalarTypeResolver,
-                MutationInputProperties::CONTENT => $this->stringScalarTypeResolver,
-                MutationInputProperties::STATUS => $this->customPostStatusEnumTypeResolver,
+                MutationInputProperties::TITLE => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::CONTENT => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::STATUS => $this->getCustomPostStatusEnumTypeResolver(),
             ]
         );
     }
@@ -55,10 +67,10 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
         string $fieldArgName,
     ): ?string {
         return match ($fieldArgName) {
-            MutationInputProperties::ID => $this->translationAPI->__('The ID of the custom post to update', 'custompost-mutations'),
-            MutationInputProperties::TITLE => $this->translationAPI->__('The title of the custom post', 'custompost-mutations'),
-            MutationInputProperties::CONTENT => $this->translationAPI->__('The content of the custom post', 'custompost-mutations'),
-            MutationInputProperties::STATUS => $this->translationAPI->__('The status of the custom post', 'custompost-mutations'),
+            MutationInputProperties::ID => $this->getTranslationAPI()->__('The ID of the custom post to update', 'custompost-mutations'),
+            MutationInputProperties::TITLE => $this->getTranslationAPI()->__('The title of the custom post', 'custompost-mutations'),
+            MutationInputProperties::CONTENT => $this->getTranslationAPI()->__('The content of the custom post', 'custompost-mutations'),
+            MutationInputProperties::STATUS => $this->getTranslationAPI()->__('The status of the custom post', 'custompost-mutations'),
             default => null,
         };
     }

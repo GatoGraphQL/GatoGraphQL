@@ -17,26 +17,34 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
 {
     use PostMutationResolverHookSetTrait;
 
-    protected PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver;
-    protected PostTypeAPIInterface $postTypeAPI;
+    private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
+    private ?PostTypeAPIInterface $postTypeAPI = null;
 
-    #[Required]
-    final public function autowirePostMutationResolverHookSet(
-        PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver,
-        PostTypeAPIInterface $postTypeAPI,
-    ): void {
+    public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
+    {
         $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
+    }
+    protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
+    {
+        return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+    }
+    public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
+    {
         $this->postTypeAPI = $postTypeAPI;
+    }
+    protected function getPostTypeAPI(): PostTypeAPIInterface
+    {
+        return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
     }
 
     protected function getCustomPostType(): string
     {
-        return $this->postTypeAPI->getPostCustomPostType();
+        return $this->getPostTypeAPI()->getPostCustomPostType();
     }
 
     protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
     {
-        return $this->postCategoryObjectTypeResolver;
+        return $this->getPostCategoryObjectTypeResolver();
     }
 
     protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface

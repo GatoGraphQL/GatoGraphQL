@@ -14,13 +14,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected URLScalarTypeResolver $urlScalarTypeResolver;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     
-    #[Required]
-    final public function autowireAbstractLocationFunctionalObjectTypeFieldResolver(
-        URLScalarTypeResolver $urlScalarTypeResolver,
-    ): void {
+    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
         $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
 
     protected function getDbobjectIdField()
@@ -38,7 +40,7 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'locationsmapURL' => $this->urlScalarTypeResolver,
+            'locationsmapURL' => $this->getUrlScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -46,7 +48,7 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'locationsmapURL' => $this->translationAPI->__('Locations map URL', 'pop-locations'),
+            'locationsmapURL' => $this->getTranslationAPI()->__('Locations map URL', 'pop-locations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

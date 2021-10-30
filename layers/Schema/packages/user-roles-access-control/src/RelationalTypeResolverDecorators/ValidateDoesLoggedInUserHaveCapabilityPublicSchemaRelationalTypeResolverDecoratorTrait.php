@@ -10,13 +10,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDecoratorTrait
 {
-    protected FieldQueryInterpreterInterface $fieldQueryInterpreter;
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
 
-    #[Required]
-    public function autowireValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDecoratorTrait(
-        FieldQueryInterpreterInterface $fieldQueryInterpreter,
-    ): void {
+    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+    }
+    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    {
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
 
     /**
@@ -27,7 +29,7 @@ trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDe
         $capabilities = $entryValue;
         $directiveResolver = $this->getValidateCapabilityDirectiveResolver();
         $directiveName = $directiveResolver->getDirectiveName();
-        $validateDoesLoggedInUserHaveAnyCapabilityDirective = $this->fieldQueryInterpreter->getDirective(
+        $validateDoesLoggedInUserHaveAnyCapabilityDirective = $this->getFieldQueryInterpreter()->getDirective(
             $directiveName,
             [
                 'capabilities' => $capabilities,

@@ -25,24 +25,44 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      * on services.yaml produces an exception of PHP properties not initialized
      * in its depended services.
      */
-    protected ?PersistentCacheInterface $persistentCache = null;
+    private ?PersistentCacheInterface $persistentCache = null;
 
-    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
-    protected PersistedFragmentManagerInterface $fragmentCatalogueManager;
-    protected PersistedQueryManagerInterface $queryCatalogueManager;
-    protected BooleanScalarTypeResolver $booleanScalarTypeResolver;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?PersistedFragmentManagerInterface $persistedFragmentManager = null;
+    private ?PersistedQueryManagerInterface $persistedQueryManager = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
-    #[Required]
-    final public function autowireRootObjectTypeFieldResolver(
-        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
-        PersistedFragmentManagerInterface $fragmentCatalogueManager,
-        PersistedQueryManagerInterface $queryCatalogueManager,
-        BooleanScalarTypeResolver $booleanScalarTypeResolver,
-    ): void {
+    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
         $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
-        $this->fragmentCatalogueManager = $fragmentCatalogueManager;
-        $this->queryCatalogueManager = $queryCatalogueManager;
+    }
+    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+    }
+    public function setPersistedFragmentManager(PersistedFragmentManagerInterface $persistedFragmentManager): void
+    {
+        $this->persistedFragmentManager = $persistedFragmentManager;
+    }
+    protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
+    {
+        return $this->persistedFragmentManager ??= $this->instanceManager->getInstance(PersistedFragmentManagerInterface::class);
+    }
+    public function setPersistedQueryManager(PersistedQueryManagerInterface $persistedQueryManager): void
+    {
+        $this->persistedQueryManager = $persistedQueryManager;
+    }
+    protected function getPersistedQueryManager(): PersistedQueryManagerInterface
+    {
+        return $this->persistedQueryManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
+    }
+    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
     final public function getPersistentCache(): PersistentCacheInterface
@@ -68,7 +88,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'fullSchema' => $this->jsonObjectScalarTypeResolver,
+            'fullSchema' => $this->getJsonObjectScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -84,7 +104,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'fullSchema' => $this->translationAPI->__('The whole API schema, exposing what fields can be queried', 'api'),
+            'fullSchema' => $this->getTranslationAPI()->__('The whole API schema, exposing what fields can be queried', 'api'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -108,7 +128,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'fullSchema':
                 // Convert from array to stdClass
                 /** @var SchemaDefinitionServiceInterface */
-                $schemaDefinitionService = $this->schemaDefinitionService;
+                $schemaDefinitionService = $this->getSchemaDefinitionService();
                 return (object) $schemaDefinitionService->getFullSchemaDefinition();
         }
 

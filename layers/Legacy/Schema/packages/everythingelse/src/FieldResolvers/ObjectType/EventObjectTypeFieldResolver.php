@@ -18,19 +18,33 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected StringScalarTypeResolver $stringScalarTypeResolver;
-    protected JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver;
-    protected LocationObjectTypeResolver $locationObjectTypeResolver;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?LocationObjectTypeResolver $locationObjectTypeResolver = null;
     
-    #[Required]
-    final public function autowireEventObjectTypeFieldResolver(
-        StringScalarTypeResolver $stringScalarTypeResolver,
-        JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver,
-        LocationObjectTypeResolver $locationObjectTypeResolver,
-    ): void {
+    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
         $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+    }
+    public function setLocationObjectTypeResolver(LocationObjectTypeResolver $locationObjectTypeResolver): void
+    {
         $this->locationObjectTypeResolver = $locationObjectTypeResolver;
+    }
+    protected function getLocationObjectTypeResolver(): LocationObjectTypeResolver
+    {
+        return $this->locationObjectTypeResolver ??= $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -56,12 +70,12 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match($fieldName) {
-            'dates' => $this->stringScalarTypeResolver,
-            'times' => $this->stringScalarTypeResolver,
-            'startDateReadable' => $this->stringScalarTypeResolver,
-            'daterange' => $this->jsonObjectScalarTypeResolver,
-            'daterangetime' => $this->jsonObjectScalarTypeResolver,
-            'locations' => $this->locationObjectTypeResolver,
+            'dates' => $this->getStringScalarTypeResolver(),
+            'times' => $this->getStringScalarTypeResolver(),
+            'startDateReadable' => $this->getStringScalarTypeResolver(),
+            'daterange' => $this->getJsonObjectScalarTypeResolver(),
+            'daterangetime' => $this->getJsonObjectScalarTypeResolver(),
+            'locations' => $this->getLocationObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -87,13 +101,13 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match($fieldName) {
-            'locations' => $this->translationAPI->__('Event\'s locations', 'events'),
-            'categories' => $this->translationAPI->__('Event\'s categories', 'events'),
-            'dates' => $this->translationAPI->__('Event\'s dates', 'events'),
-            'times' => $this->translationAPI->__('Event\'s times', 'events'),
-            'startDateReadable' => $this->translationAPI->__('Event\'s start date in human-readable format', 'events'),
-            'daterange' => $this->translationAPI->__('Event\'s date range', 'events'),
-            'daterangetime' => $this->translationAPI->__('Event\'s date range and time', 'events'),
+            'locations' => $this->getTranslationAPI()->__('Event\'s locations', 'events'),
+            'categories' => $this->getTranslationAPI()->__('Event\'s categories', 'events'),
+            'dates' => $this->getTranslationAPI()->__('Event\'s dates', 'events'),
+            'times' => $this->getTranslationAPI()->__('Event\'s times', 'events'),
+            'startDateReadable' => $this->getTranslationAPI()->__('Event\'s start date in human-readable format', 'events'),
+            'daterange' => $this->getTranslationAPI()->__('Event\'s date range', 'events'),
+            'daterangetime' => $this->getTranslationAPI()->__('Event\'s date range and time', 'events'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
