@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDecoratorTrait
 {
     abstract protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface;
- 
+
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
         $validateUserStateDirectiveResolver = $this->getValidateUserStateDirectiveResolver();

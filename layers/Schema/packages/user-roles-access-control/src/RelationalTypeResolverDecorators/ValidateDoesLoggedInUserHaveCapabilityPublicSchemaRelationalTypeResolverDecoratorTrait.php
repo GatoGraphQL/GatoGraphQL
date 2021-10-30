@@ -11,7 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDecoratorTrait
 {
     abstract protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface;
-    
+
     /**
      * By default, only the admin can see the roles from the users
      */
