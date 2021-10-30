@@ -371,7 +371,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * If it doesn't, then there will only be one version of it,
              * and it can be kept empty for simplicity
              */
-            if (Environment::enableSemanticVersionConstraints()
+            if (
+                Environment::enableSemanticVersionConstraints()
                 && $fieldVersion = $this->getFieldVersion($objectTypeResolver, $fieldName)
             ) {
                 $consolidatedFieldArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $fieldVersion;
