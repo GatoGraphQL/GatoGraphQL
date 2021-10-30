@@ -5,23 +5,11 @@ declare(strict_types=1);
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
 use PoP\UserAccount\FunctionAPIFactory;
-use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver as UpstreamLoginMutationResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class LoginMutationResolver extends UpstreamLoginMutationResolver
 {
-    private ?UserTypeAPIInterface $userTypeAPI = null;
-
-    final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
-    {
-        $this->userTypeAPI = $userTypeAPI;
-    }
-    final protected function getUserTypeAPI(): UserTypeAPIInterface
-    {
-        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
-    }
-
     protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): string
     {
         $cmsuseraccountapi = FunctionAPIFactory::getInstance();
