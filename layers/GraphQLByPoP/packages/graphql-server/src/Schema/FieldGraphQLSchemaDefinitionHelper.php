@@ -7,10 +7,13 @@ namespace GraphQLByPoP\GraphQLServer\Schema;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Field;
 use GraphQLByPoP\GraphQLServer\ObjectModels\WrappingTypeInterface;
 use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class FieldGraphQLSchemaDefinitionHelper implements FieldGraphQLSchemaDefinitionHelperInterface
 {
+    use BasicServiceTrait;
+    
     private ?SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry = null;
 
     public function setSchemaDefinitionReferenceRegistry(SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry): void
