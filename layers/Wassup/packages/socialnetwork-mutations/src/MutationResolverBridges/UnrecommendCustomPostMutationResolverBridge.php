@@ -12,11 +12,11 @@ class UnrecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpda
 {
     private ?UnrecommendCustomPostMutationResolver $unrecommendCustomPostMutationResolver = null;
 
-    public function setUnrecommendCustomPostMutationResolver(UnrecommendCustomPostMutationResolver $unrecommendCustomPostMutationResolver): void
+    final public function setUnrecommendCustomPostMutationResolver(UnrecommendCustomPostMutationResolver $unrecommendCustomPostMutationResolver): void
     {
         $this->unrecommendCustomPostMutationResolver = $unrecommendCustomPostMutationResolver;
     }
-    protected function getUnrecommendCustomPostMutationResolver(): UnrecommendCustomPostMutationResolver
+    final protected function getUnrecommendCustomPostMutationResolver(): UnrecommendCustomPostMutationResolver
     {
         return $this->unrecommendCustomPostMutationResolver ??= $this->instanceManager->getInstance(UnrecommendCustomPostMutationResolver::class);
     }

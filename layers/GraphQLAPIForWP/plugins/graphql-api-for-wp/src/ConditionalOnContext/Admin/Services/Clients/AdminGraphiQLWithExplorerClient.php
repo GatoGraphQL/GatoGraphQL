@@ -15,11 +15,11 @@ class AdminGraphiQLWithExplorerClient extends GraphiQLWithExplorerClient
 
     private ?EndpointHelpers $endpointHelpers = null;
 
-    public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
+    final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
     {
         $this->endpointHelpers = $endpointHelpers;
     }
-    protected function getEndpointHelpers(): EndpointHelpers
+    final protected function getEndpointHelpers(): EndpointHelpers
     {
         return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
     }

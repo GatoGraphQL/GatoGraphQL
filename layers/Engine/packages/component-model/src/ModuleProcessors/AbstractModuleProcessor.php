@@ -49,75 +49,75 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?ModulePaths $modulePaths = null;
 
-    public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
     }
-    protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    final protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
-    public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
+    final public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
     {
         $this->modulePathHelpers = $modulePathHelpers;
     }
-    protected function getModulePathHelpers(): ModulePathHelpersInterface
+    final protected function getModulePathHelpers(): ModulePathHelpersInterface
     {
         return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
     }
-    public function setModuleFilterManager(ModuleFilterManagerInterface $moduleFilterManager): void
+    final public function setModuleFilterManager(ModuleFilterManagerInterface $moduleFilterManager): void
     {
         $this->moduleFilterManager = $moduleFilterManager;
     }
-    protected function getModuleFilterManager(): ModuleFilterManagerInterface
+    final protected function getModuleFilterManager(): ModuleFilterManagerInterface
     {
         return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ModuleFilterManagerInterface::class);
     }
-    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    final public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
     {
         $this->moduleProcessorManager = $moduleProcessorManager;
     }
-    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    final protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
     {
         return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     }
-    public function setCMSService(CMSServiceInterface $cmsService): void
+    final public function setCMSService(CMSServiceInterface $cmsService): void
     {
         $this->cmsService = $cmsService;
     }
-    protected function getCMSService(): CMSServiceInterface
+    final protected function getCMSService(): CMSServiceInterface
     {
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
-    public function setNameResolver(NameResolverInterface $nameResolver): void
+    final public function setNameResolver(NameResolverInterface $nameResolver): void
     {
         $this->nameResolver = $nameResolver;
     }
-    protected function getNameResolver(): NameResolverInterface
+    final protected function getNameResolver(): NameResolverInterface
     {
         return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
     }
-    public function setDataloadHelperService(DataloadHelperServiceInterface $dataloadHelperService): void
+    final public function setDataloadHelperService(DataloadHelperServiceInterface $dataloadHelperService): void
     {
         $this->dataloadHelperService = $dataloadHelperService;
     }
-    protected function getDataloadHelperService(): DataloadHelperServiceInterface
+    final protected function getDataloadHelperService(): DataloadHelperServiceInterface
     {
         return $this->dataloadHelperService ??= $this->instanceManager->getInstance(DataloadHelperServiceInterface::class);
     }
-    public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
+    final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
     {
         $this->requestHelperService = $requestHelperService;
     }
-    protected function getRequestHelperService(): RequestHelperServiceInterface
+    final protected function getRequestHelperService(): RequestHelperServiceInterface
     {
         return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
-    public function setModulePaths(ModulePaths $modulePaths): void
+    final public function setModulePaths(ModulePaths $modulePaths): void
     {
         $this->modulePaths = $modulePaths;
     }
-    protected function getModulePaths(): ModulePaths
+    final protected function getModulePaths(): ModulePaths
     {
         return $this->modulePaths ??= $this->instanceManager->getInstance(ModulePaths::class);
     }

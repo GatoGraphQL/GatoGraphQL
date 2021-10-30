@@ -13,11 +13,11 @@ class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
     private ?SchemaTypeDataLoader $schemaTypeDataLoader = null;
 
-    public function setSchemaTypeDataLoader(SchemaTypeDataLoader $schemaTypeDataLoader): void
+    final public function setSchemaTypeDataLoader(SchemaTypeDataLoader $schemaTypeDataLoader): void
     {
         $this->schemaTypeDataLoader = $schemaTypeDataLoader;
     }
-    protected function getSchemaTypeDataLoader(): SchemaTypeDataLoader
+    final protected function getSchemaTypeDataLoader(): SchemaTypeDataLoader
     {
         return $this->schemaTypeDataLoader ??= $this->instanceManager->getInstance(SchemaTypeDataLoader::class);
     }

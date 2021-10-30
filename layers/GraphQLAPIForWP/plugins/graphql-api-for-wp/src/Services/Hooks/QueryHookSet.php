@@ -19,11 +19,11 @@ class QueryHookSet extends AbstractHookSet
 
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
 
-    public function setCustomPostTypeRegistry(CustomPostTypeRegistryInterface $customPostTypeRegistry): void
+    final public function setCustomPostTypeRegistry(CustomPostTypeRegistryInterface $customPostTypeRegistry): void
     {
         $this->customPostTypeRegistry = $customPostTypeRegistry;
     }
-    protected function getCustomPostTypeRegistry(): CustomPostTypeRegistryInterface
+    final protected function getCustomPostTypeRegistry(): CustomPostTypeRegistryInterface
     {
         return $this->customPostTypeRegistry ??= $this->instanceManager->getInstance(CustomPostTypeRegistryInterface::class);
     }

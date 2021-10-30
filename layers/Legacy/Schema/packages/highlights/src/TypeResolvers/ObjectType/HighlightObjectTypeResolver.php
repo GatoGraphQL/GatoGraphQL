@@ -14,11 +14,11 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
 {
     private ?HighlightTypeDataLoader $highlightTypeDataLoader = null;
     
-    public function setHighlightTypeDataLoader(HighlightTypeDataLoader $highlightTypeDataLoader): void
+    final public function setHighlightTypeDataLoader(HighlightTypeDataLoader $highlightTypeDataLoader): void
     {
         $this->highlightTypeDataLoader = $highlightTypeDataLoader;
     }
-    protected function getHighlightTypeDataLoader(): HighlightTypeDataLoader
+    final protected function getHighlightTypeDataLoader(): HighlightTypeDataLoader
     {
         return $this->highlightTypeDataLoader ??= $this->instanceManager->getInstance(HighlightTypeDataLoader::class);
     }

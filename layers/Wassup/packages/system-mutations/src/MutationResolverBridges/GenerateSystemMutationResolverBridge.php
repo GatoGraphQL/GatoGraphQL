@@ -12,11 +12,11 @@ class GenerateSystemMutationResolverBridge extends AbstractSystemComponentMutati
 {
     private ?GenerateSystemMutationResolver $generateSystemMutationResolver = null;
 
-    public function setGenerateSystemMutationResolver(GenerateSystemMutationResolver $generateSystemMutationResolver): void
+    final public function setGenerateSystemMutationResolver(GenerateSystemMutationResolver $generateSystemMutationResolver): void
     {
         $this->generateSystemMutationResolver = $generateSystemMutationResolver;
     }
-    protected function getGenerateSystemMutationResolver(): GenerateSystemMutationResolver
+    final protected function getGenerateSystemMutationResolver(): GenerateSystemMutationResolver
     {
         return $this->generateSystemMutationResolver ??= $this->instanceManager->getInstance(GenerateSystemMutationResolver::class);
     }

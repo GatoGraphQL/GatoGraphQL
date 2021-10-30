@@ -18,19 +18,19 @@ class LoginMutationResolver extends AbstractMutationResolver
     private ?UserTypeAPIInterface $userTypeAPI = null;
     private ?UserStateTypeMutationAPIInterface $userStateTypeMutationAPI = null;
 
-    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
     {
         $this->userTypeAPI = $userTypeAPI;
     }
-    protected function getUserTypeAPI(): UserTypeAPIInterface
+    final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
-    public function setUserStateTypeMutationAPI(UserStateTypeMutationAPIInterface $userStateTypeMutationAPI): void
+    final public function setUserStateTypeMutationAPI(UserStateTypeMutationAPIInterface $userStateTypeMutationAPI): void
     {
         $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;
     }
-    protected function getUserStateTypeMutationAPI(): UserStateTypeMutationAPIInterface
+    final protected function getUserStateTypeMutationAPI(): UserStateTypeMutationAPIInterface
     {
         return $this->userStateTypeMutationAPI ??= $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
     }

@@ -22,27 +22,27 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
     private ?LocationObjectTypeResolver $locationObjectTypeResolver = null;
     
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {
         $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
     }
-    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
         return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
-    public function setLocationObjectTypeResolver(LocationObjectTypeResolver $locationObjectTypeResolver): void
+    final public function setLocationObjectTypeResolver(LocationObjectTypeResolver $locationObjectTypeResolver): void
     {
         $this->locationObjectTypeResolver = $locationObjectTypeResolver;
     }
-    protected function getLocationObjectTypeResolver(): LocationObjectTypeResolver
+    final protected function getLocationObjectTypeResolver(): LocationObjectTypeResolver
     {
         return $this->locationObjectTypeResolver ??= $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
     }

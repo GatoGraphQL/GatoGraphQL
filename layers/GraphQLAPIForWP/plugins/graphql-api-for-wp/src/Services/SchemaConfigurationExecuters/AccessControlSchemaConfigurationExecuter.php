@@ -15,19 +15,19 @@ class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurati
     private ?AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator = null;
     private ?SchemaConfigAccessControlListBlock $schemaConfigAccessControlListBlock = null;
 
-    public function setAccessControlGraphQLQueryConfigurator(AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator): void
+    final public function setAccessControlGraphQLQueryConfigurator(AccessControlGraphQLQueryConfigurator $accessControlGraphQLQueryConfigurator): void
     {
         $this->accessControlGraphQLQueryConfigurator = $accessControlGraphQLQueryConfigurator;
     }
-    protected function getAccessControlGraphQLQueryConfigurator(): AccessControlGraphQLQueryConfigurator
+    final protected function getAccessControlGraphQLQueryConfigurator(): AccessControlGraphQLQueryConfigurator
     {
         return $this->accessControlGraphQLQueryConfigurator ??= $this->instanceManager->getInstance(AccessControlGraphQLQueryConfigurator::class);
     }
-    public function setSchemaConfigAccessControlListBlock(SchemaConfigAccessControlListBlock $schemaConfigAccessControlListBlock): void
+    final public function setSchemaConfigAccessControlListBlock(SchemaConfigAccessControlListBlock $schemaConfigAccessControlListBlock): void
     {
         $this->schemaConfigAccessControlListBlock = $schemaConfigAccessControlListBlock;
     }
-    protected function getSchemaConfigAccessControlListBlock(): SchemaConfigAccessControlListBlock
+    final protected function getSchemaConfigAccessControlListBlock(): SchemaConfigAccessControlListBlock
     {
         return $this->schemaConfigAccessControlListBlock ??= $this->instanceManager->getInstance(SchemaConfigAccessControlListBlock::class);
     }

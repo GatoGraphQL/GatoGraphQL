@@ -12,11 +12,11 @@ class RootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     private ?Root $root = null;
 
-    public function setRoot(Root $root): void
+    final public function setRoot(Root $root): void
     {
         $this->root = $root;
     }
-    protected function getRoot(): Root
+    final protected function getRoot(): Root
     {
         return $this->root ??= $this->instanceManager->getInstance(Root::class);
     }

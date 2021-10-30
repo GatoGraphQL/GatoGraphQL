@@ -17,11 +17,11 @@ class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigu
 {
     private ?SchemaConfigSchemaModeBlock $schemaConfigSchemaModeBlock = null;
 
-    public function setSchemaConfigSchemaModeBlock(SchemaConfigSchemaModeBlock $schemaConfigSchemaModeBlock): void
+    final public function setSchemaConfigSchemaModeBlock(SchemaConfigSchemaModeBlock $schemaConfigSchemaModeBlock): void
     {
         $this->schemaConfigSchemaModeBlock = $schemaConfigSchemaModeBlock;
     }
-    protected function getSchemaConfigSchemaModeBlock(): SchemaConfigSchemaModeBlock
+    final protected function getSchemaConfigSchemaModeBlock(): SchemaConfigSchemaModeBlock
     {
         return $this->schemaConfigSchemaModeBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaModeBlock::class);
     }

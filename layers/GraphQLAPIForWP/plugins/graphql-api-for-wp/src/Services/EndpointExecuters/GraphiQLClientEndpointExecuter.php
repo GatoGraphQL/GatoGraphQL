@@ -17,19 +17,19 @@ class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter impl
     private ?CustomEndpointGraphiQLClient $customEndpointGraphiQLClient = null;
     private ?GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator = null;
 
-    public function setCustomEndpointGraphiQLClient(CustomEndpointGraphiQLClient $customEndpointGraphiQLClient): void
+    final public function setCustomEndpointGraphiQLClient(CustomEndpointGraphiQLClient $customEndpointGraphiQLClient): void
     {
         $this->customEndpointGraphiQLClient = $customEndpointGraphiQLClient;
     }
-    protected function getCustomEndpointGraphiQLClient(): CustomEndpointGraphiQLClient
+    final protected function getCustomEndpointGraphiQLClient(): CustomEndpointGraphiQLClient
     {
         return $this->customEndpointGraphiQLClient ??= $this->instanceManager->getInstance(CustomEndpointGraphiQLClient::class);
     }
-    public function setGraphiQLClientEndpointAnnotator(GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator): void
+    final public function setGraphiQLClientEndpointAnnotator(GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator): void
     {
         $this->graphiQLClientEndpointAnnotator = $graphiQLClientEndpointAnnotator;
     }
-    protected function getGraphiQLClientEndpointAnnotator(): GraphiQLClientEndpointAnnotator
+    final protected function getGraphiQLClientEndpointAnnotator(): GraphiQLClientEndpointAnnotator
     {
         return $this->graphiQLClientEndpointAnnotator ??= $this->instanceManager->getInstance(GraphiQLClientEndpointAnnotator::class);
     }

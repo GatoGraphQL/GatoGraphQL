@@ -27,11 +27,11 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
     {
         return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }
-    public function setEndpointSchemaConfigurationBlock(EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock): void
+    final public function setEndpointSchemaConfigurationBlock(EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock): void
     {
         $this->endpointSchemaConfigurationBlock = $endpointSchemaConfigurationBlock;
     }
-    protected function getEndpointSchemaConfigurationBlock(): EndpointSchemaConfigurationBlock
+    final protected function getEndpointSchemaConfigurationBlock(): EndpointSchemaConfigurationBlock
     {
         return $this->endpointSchemaConfigurationBlock ??= $this->instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
     }

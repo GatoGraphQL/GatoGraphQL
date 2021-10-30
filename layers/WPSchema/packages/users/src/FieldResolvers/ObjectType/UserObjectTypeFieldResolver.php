@@ -20,19 +20,19 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?DateFormatterInterface $dateFormatter = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    public function setDateFormatter(DateFormatterInterface $dateFormatter): void
+    final public function setDateFormatter(DateFormatterInterface $dateFormatter): void
     {
         $this->dateFormatter = $dateFormatter;
     }
-    protected function getDateFormatter(): DateFormatterInterface
+    final protected function getDateFormatter(): DateFormatterInterface
     {
         return $this->dateFormatter ??= $this->instanceManager->getInstance(DateFormatterInterface::class);
     }
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }

@@ -21,19 +21,19 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     private ?DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver = null;
     private ?DirectiveRegistryInterface $directiveRegistry = null;
 
-    public function setDirectiveTypeEnumTypeResolver(DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver): void
+    final public function setDirectiveTypeEnumTypeResolver(DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver): void
     {
         $this->directiveTypeEnumTypeResolver = $directiveTypeEnumTypeResolver;
     }
-    protected function getDirectiveTypeEnumTypeResolver(): DirectiveTypeEnumTypeResolver
+    final protected function getDirectiveTypeEnumTypeResolver(): DirectiveTypeEnumTypeResolver
     {
         return $this->directiveTypeEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveTypeEnumTypeResolver::class);
     }
-    public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
+    final public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
     {
         $this->directiveRegistry = $directiveRegistry;
     }
-    protected function getDirectiveRegistry(): DirectiveRegistryInterface
+    final protected function getDirectiveRegistry(): DirectiveRegistryInterface
     {
         return $this->directiveRegistry ??= $this->instanceManager->getInstance(DirectiveRegistryInterface::class);
     }

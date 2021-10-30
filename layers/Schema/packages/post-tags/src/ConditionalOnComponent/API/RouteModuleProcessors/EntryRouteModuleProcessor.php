@@ -19,11 +19,11 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
-    public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
+    final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
     {
         $this->postTagTypeAPI = $postTagTypeAPI;
     }
-    protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
+    final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
     {
         return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
     }

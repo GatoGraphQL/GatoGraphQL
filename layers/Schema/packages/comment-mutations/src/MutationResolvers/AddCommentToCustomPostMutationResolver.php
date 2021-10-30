@@ -26,27 +26,27 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     private ?CommentTypeMutationAPIInterface $commentTypeMutationAPI = null;
     private ?UserTypeAPIInterface $userTypeAPI = null;
 
-    public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
+    final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
     {
         $this->commentTypeAPI = $commentTypeAPI;
     }
-    protected function getCommentTypeAPI(): CommentTypeAPIInterface
+    final protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
         return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
     }
-    public function setCommentTypeMutationAPI(CommentTypeMutationAPIInterface $commentTypeMutationAPI): void
+    final public function setCommentTypeMutationAPI(CommentTypeMutationAPIInterface $commentTypeMutationAPI): void
     {
         $this->commentTypeMutationAPI = $commentTypeMutationAPI;
     }
-    protected function getCommentTypeMutationAPI(): CommentTypeMutationAPIInterface
+    final protected function getCommentTypeMutationAPI(): CommentTypeMutationAPIInterface
     {
         return $this->commentTypeMutationAPI ??= $this->instanceManager->getInstance(CommentTypeMutationAPIInterface::class);
     }
-    public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
+    final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
     {
         $this->userTypeAPI = $userTypeAPI;
     }
-    protected function getUserTypeAPI(): UserTypeAPIInterface
+    final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }

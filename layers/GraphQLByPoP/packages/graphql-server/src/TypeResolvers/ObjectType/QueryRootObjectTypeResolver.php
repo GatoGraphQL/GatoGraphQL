@@ -19,19 +19,19 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
     private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
     private ?QueryRootTypeDataLoader $queryRootTypeDataLoader = null;
 
-    public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
+    final public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
     {
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
     }
-    protected function getRootObjectTypeResolver(): RootObjectTypeResolver
+    final protected function getRootObjectTypeResolver(): RootObjectTypeResolver
     {
         return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
     }
-    public function setQueryRootTypeDataLoader(QueryRootTypeDataLoader $queryRootTypeDataLoader): void
+    final public function setQueryRootTypeDataLoader(QueryRootTypeDataLoader $queryRootTypeDataLoader): void
     {
         $this->queryRootTypeDataLoader = $queryRootTypeDataLoader;
     }
-    protected function getQueryRootTypeDataLoader(): QueryRootTypeDataLoader
+    final protected function getQueryRootTypeDataLoader(): QueryRootTypeDataLoader
     {
         return $this->queryRootTypeDataLoader ??= $this->instanceManager->getInstance(QueryRootTypeDataLoader::class);
     }

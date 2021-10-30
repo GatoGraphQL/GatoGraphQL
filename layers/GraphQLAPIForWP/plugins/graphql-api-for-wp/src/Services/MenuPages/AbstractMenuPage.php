@@ -19,19 +19,19 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
     private ?MenuPageHelper $menuPageHelper = null;
     private ?EndpointHelpers $endpointHelpers = null;
 
-    public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
+    final public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
     {
         $this->menuPageHelper = $menuPageHelper;
     }
-    protected function getMenuPageHelper(): MenuPageHelper
+    final protected function getMenuPageHelper(): MenuPageHelper
     {
         return $this->menuPageHelper ??= $this->instanceManager->getInstance(MenuPageHelper::class);
     }
-    public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
+    final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
     {
         $this->endpointHelpers = $endpointHelpers;
     }
-    protected function getEndpointHelpers(): EndpointHelpers
+    final protected function getEndpointHelpers(): EndpointHelpers
     {
         return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
     }

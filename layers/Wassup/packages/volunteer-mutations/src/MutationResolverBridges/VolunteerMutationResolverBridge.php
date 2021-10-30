@@ -13,11 +13,11 @@ class VolunteerMutationResolverBridge extends AbstractFormComponentMutationResol
 {
     private ?VolunteerMutationResolver $volunteerMutationResolver = null;
 
-    public function setVolunteerMutationResolver(VolunteerMutationResolver $volunteerMutationResolver): void
+    final public function setVolunteerMutationResolver(VolunteerMutationResolver $volunteerMutationResolver): void
     {
         $this->volunteerMutationResolver = $volunteerMutationResolver;
     }
-    protected function getVolunteerMutationResolver(): VolunteerMutationResolver
+    final protected function getVolunteerMutationResolver(): VolunteerMutationResolver
     {
         return $this->volunteerMutationResolver ??= $this->instanceManager->getInstance(VolunteerMutationResolver::class);
     }

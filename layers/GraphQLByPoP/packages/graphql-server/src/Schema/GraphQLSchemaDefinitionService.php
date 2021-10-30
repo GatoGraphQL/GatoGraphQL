@@ -17,19 +17,19 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     private ?QueryRootObjectTypeResolver $queryRootObjectTypeResolver = null;
     private ?MutationRootObjectTypeResolver $mutationRootObjectTypeResolver = null;
 
-    public function setQueryRootObjectTypeResolver(QueryRootObjectTypeResolver $queryRootObjectTypeResolver): void
+    final public function setQueryRootObjectTypeResolver(QueryRootObjectTypeResolver $queryRootObjectTypeResolver): void
     {
         $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
     }
-    protected function getQueryRootObjectTypeResolver(): QueryRootObjectTypeResolver
+    final protected function getQueryRootObjectTypeResolver(): QueryRootObjectTypeResolver
     {
         return $this->queryRootObjectTypeResolver ??= $this->instanceManager->getInstance(QueryRootObjectTypeResolver::class);
     }
-    public function setMutationRootObjectTypeResolver(MutationRootObjectTypeResolver $mutationRootObjectTypeResolver): void
+    final public function setMutationRootObjectTypeResolver(MutationRootObjectTypeResolver $mutationRootObjectTypeResolver): void
     {
         $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
     }
-    protected function getMutationRootObjectTypeResolver(): MutationRootObjectTypeResolver
+    final protected function getMutationRootObjectTypeResolver(): MutationRootObjectTypeResolver
     {
         return $this->mutationRootObjectTypeResolver ??= $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
     }

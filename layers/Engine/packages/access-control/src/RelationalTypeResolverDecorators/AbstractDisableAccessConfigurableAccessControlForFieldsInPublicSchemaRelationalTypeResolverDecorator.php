@@ -11,11 +11,11 @@ abstract class AbstractDisableAccessConfigurableAccessControlForFieldsInPublicSc
 {
     private ?DisableAccessDirectiveResolver $disableAccessDirectiveResolver = null;
 
-    public function setDisableAccessDirectiveResolver(DisableAccessDirectiveResolver $disableAccessDirectiveResolver): void
+    final public function setDisableAccessDirectiveResolver(DisableAccessDirectiveResolver $disableAccessDirectiveResolver): void
     {
         $this->disableAccessDirectiveResolver = $disableAccessDirectiveResolver;
     }
-    protected function getDisableAccessDirectiveResolver(): DisableAccessDirectiveResolver
+    final protected function getDisableAccessDirectiveResolver(): DisableAccessDirectiveResolver
     {
         return $this->disableAccessDirectiveResolver ??= $this->instanceManager->getInstance(DisableAccessDirectiveResolver::class);
     }

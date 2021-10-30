@@ -19,11 +19,11 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
 
     private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
 
-    public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
+    final public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
     {
         $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
     }
-    protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
+    final protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
     {
         return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
     }

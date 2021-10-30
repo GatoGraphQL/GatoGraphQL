@@ -19,19 +19,19 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
     private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
     private ?TypeResolverHelperInterface $typeResolverHelper = null;
 
-    public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
+    final public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
     {
         $this->rootObjectTypeResolver = $rootObjectTypeResolver;
     }
-    protected function getRootObjectTypeResolver(): RootObjectTypeResolver
+    final protected function getRootObjectTypeResolver(): RootObjectTypeResolver
     {
         return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
     }
-    public function setTypeResolverHelper(TypeResolverHelperInterface $typeResolverHelper): void
+    final public function setTypeResolverHelper(TypeResolverHelperInterface $typeResolverHelper): void
     {
         $this->typeResolverHelper = $typeResolverHelper;
     }
-    protected function getTypeResolverHelper(): TypeResolverHelperInterface
+    final protected function getTypeResolverHelper(): TypeResolverHelperInterface
     {
         return $this->typeResolverHelper ??= $this->instanceManager->getInstance(TypeResolverHelperInterface::class);
     }

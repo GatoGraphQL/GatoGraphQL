@@ -13,11 +13,11 @@ class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBrid
 {
     private ?LogoutMutationResolver $logoutMutationResolver = null;
 
-    public function setLogoutMutationResolver(LogoutMutationResolver $logoutMutationResolver): void
+    final public function setLogoutMutationResolver(LogoutMutationResolver $logoutMutationResolver): void
     {
         $this->logoutMutationResolver = $logoutMutationResolver;
     }
-    protected function getLogoutMutationResolver(): LogoutMutationResolver
+    final protected function getLogoutMutationResolver(): LogoutMutationResolver
     {
         return $this->logoutMutationResolver ??= $this->instanceManager->getInstance(LogoutMutationResolver::class);
     }

@@ -17,11 +17,11 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?LocationObjectTypeResolver $locationObjectTypeResolver = null;
     
-    public function setLocationObjectTypeResolver(LocationObjectTypeResolver $locationObjectTypeResolver): void
+    final public function setLocationObjectTypeResolver(LocationObjectTypeResolver $locationObjectTypeResolver): void
     {
         $this->locationObjectTypeResolver = $locationObjectTypeResolver;
     }
-    protected function getLocationObjectTypeResolver(): LocationObjectTypeResolver
+    final protected function getLocationObjectTypeResolver(): LocationObjectTypeResolver
     {
         return $this->locationObjectTypeResolver ??= $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
     }

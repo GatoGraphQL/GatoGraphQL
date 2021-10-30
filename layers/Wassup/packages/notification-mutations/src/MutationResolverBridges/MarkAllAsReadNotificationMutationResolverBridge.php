@@ -14,11 +14,11 @@ class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentM
 {
     private ?MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver = null;
 
-    public function setMarkAllAsReadNotificationMutationResolver(MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver): void
+    final public function setMarkAllAsReadNotificationMutationResolver(MarkAllAsReadNotificationMutationResolver $markAllAsReadNotificationMutationResolver): void
     {
         $this->markAllAsReadNotificationMutationResolver = $markAllAsReadNotificationMutationResolver;
     }
-    protected function getMarkAllAsReadNotificationMutationResolver(): MarkAllAsReadNotificationMutationResolver
+    final protected function getMarkAllAsReadNotificationMutationResolver(): MarkAllAsReadNotificationMutationResolver
     {
         return $this->markAllAsReadNotificationMutationResolver ??= $this->instanceManager->getInstance(MarkAllAsReadNotificationMutationResolver::class);
     }

@@ -12,11 +12,11 @@ class MenuTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     private ?MenuTypeAPIInterface $menuTypeAPI = null;
 
-    public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
+    final public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
     {
         $this->menuTypeAPI = $menuTypeAPI;
     }
-    protected function getMenuTypeAPI(): MenuTypeAPIInterface
+    final protected function getMenuTypeAPI(): MenuTypeAPIInterface
     {
         return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
     }

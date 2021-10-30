@@ -24,27 +24,27 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?CreatePostMutationResolver $createPostMutationResolver = null;
     private ?UpdatePostMutationResolver $updatePostMutationResolver = null;
 
-    public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
+    final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {
         $this->postObjectTypeResolver = $postObjectTypeResolver;
     }
-    protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
         return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
-    public function setCreatePostMutationResolver(CreatePostMutationResolver $createPostMutationResolver): void
+    final public function setCreatePostMutationResolver(CreatePostMutationResolver $createPostMutationResolver): void
     {
         $this->createPostMutationResolver = $createPostMutationResolver;
     }
-    protected function getCreatePostMutationResolver(): CreatePostMutationResolver
+    final protected function getCreatePostMutationResolver(): CreatePostMutationResolver
     {
         return $this->createPostMutationResolver ??= $this->instanceManager->getInstance(CreatePostMutationResolver::class);
     }
-    public function setUpdatePostMutationResolver(UpdatePostMutationResolver $updatePostMutationResolver): void
+    final public function setUpdatePostMutationResolver(UpdatePostMutationResolver $updatePostMutationResolver): void
     {
         $this->updatePostMutationResolver = $updatePostMutationResolver;
     }
-    protected function getUpdatePostMutationResolver(): UpdatePostMutationResolver
+    final protected function getUpdatePostMutationResolver(): UpdatePostMutationResolver
     {
         return $this->updatePostMutationResolver ??= $this->instanceManager->getInstance(UpdatePostMutationResolver::class);
     }

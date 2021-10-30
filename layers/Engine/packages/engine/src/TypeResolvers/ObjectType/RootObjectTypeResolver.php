@@ -19,11 +19,11 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
 
     private ?RootTypeDataLoader $rootTypeDataLoader = null;
 
-    public function setRootTypeDataLoader(RootTypeDataLoader $rootTypeDataLoader): void
+    final public function setRootTypeDataLoader(RootTypeDataLoader $rootTypeDataLoader): void
     {
         $this->rootTypeDataLoader = $rootTypeDataLoader;
     }
-    protected function getRootTypeDataLoader(): RootTypeDataLoader
+    final protected function getRootTypeDataLoader(): RootTypeDataLoader
     {
         return $this->rootTypeDataLoader ??= $this->instanceManager->getInstance(RootTypeDataLoader::class);
     }

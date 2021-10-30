@@ -21,27 +21,27 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?DirectiveObjectTypeResolver $directiveObjectTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
+    final public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
     {
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
     }
-    protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
+    final protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
     {
         return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
     }
-    public function setDirectiveObjectTypeResolver(DirectiveObjectTypeResolver $directiveObjectTypeResolver): void
+    final public function setDirectiveObjectTypeResolver(DirectiveObjectTypeResolver $directiveObjectTypeResolver): void
     {
         $this->directiveObjectTypeResolver = $directiveObjectTypeResolver;
     }
-    protected function getDirectiveObjectTypeResolver(): DirectiveObjectTypeResolver
+    final protected function getDirectiveObjectTypeResolver(): DirectiveObjectTypeResolver
     {
         return $this->directiveObjectTypeResolver ??= $this->instanceManager->getInstance(DirectiveObjectTypeResolver::class);
     }
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }

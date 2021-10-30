@@ -28,67 +28,67 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     private ?ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage = null;
     private ?AboutMenuPage $aboutMenuPage = null;
 
-    public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
+    final public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
     {
         $this->menuPageHelper = $menuPageHelper;
     }
-    protected function getMenuPageHelper(): MenuPageHelper
+    final protected function getMenuPageHelper(): MenuPageHelper
     {
         return $this->menuPageHelper ??= $this->instanceManager->getInstance(MenuPageHelper::class);
     }
-    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
         $this->moduleRegistry = $moduleRegistry;
     }
-    protected function getModuleRegistry(): ModuleRegistryInterface
+    final protected function getModuleRegistry(): ModuleRegistryInterface
     {
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
-    public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
         $this->userAuthorization = $userAuthorization;
     }
-    protected function getUserAuthorization(): UserAuthorizationInterface
+    final protected function getUserAuthorization(): UserAuthorizationInterface
     {
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
-    public function setSettingsMenuPage(SettingsMenuPage $settingsMenuPage): void
+    final public function setSettingsMenuPage(SettingsMenuPage $settingsMenuPage): void
     {
         $this->settingsMenuPage = $settingsMenuPage;
     }
-    protected function getSettingsMenuPage(): SettingsMenuPage
+    final protected function getSettingsMenuPage(): SettingsMenuPage
     {
         return $this->settingsMenuPage ??= $this->instanceManager->getInstance(SettingsMenuPage::class);
     }
-    public function setModuleDocumentationMenuPage(ModuleDocumentationMenuPage $moduleDocumentationMenuPage): void
+    final public function setModuleDocumentationMenuPage(ModuleDocumentationMenuPage $moduleDocumentationMenuPage): void
     {
         $this->moduleDocumentationMenuPage = $moduleDocumentationMenuPage;
     }
-    protected function getModuleDocumentationMenuPage(): ModuleDocumentationMenuPage
+    final protected function getModuleDocumentationMenuPage(): ModuleDocumentationMenuPage
     {
         return $this->moduleDocumentationMenuPage ??= $this->instanceManager->getInstance(ModuleDocumentationMenuPage::class);
     }
-    public function setModulesMenuPage(ModulesMenuPage $modulesMenuPage): void
+    final public function setModulesMenuPage(ModulesMenuPage $modulesMenuPage): void
     {
         $this->modulesMenuPage = $modulesMenuPage;
     }
-    protected function getModulesMenuPage(): ModulesMenuPage
+    final protected function getModulesMenuPage(): ModulesMenuPage
     {
         return $this->modulesMenuPage ??= $this->instanceManager->getInstance(ModulesMenuPage::class);
     }
-    public function setReleaseNotesAboutMenuPage(ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage): void
+    final public function setReleaseNotesAboutMenuPage(ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage): void
     {
         $this->releaseNotesAboutMenuPage = $releaseNotesAboutMenuPage;
     }
-    protected function getReleaseNotesAboutMenuPage(): ReleaseNotesAboutMenuPage
+    final protected function getReleaseNotesAboutMenuPage(): ReleaseNotesAboutMenuPage
     {
         return $this->releaseNotesAboutMenuPage ??= $this->instanceManager->getInstance(ReleaseNotesAboutMenuPage::class);
     }
-    public function setAboutMenuPage(AboutMenuPage $aboutMenuPage): void
+    final public function setAboutMenuPage(AboutMenuPage $aboutMenuPage): void
     {
         $this->aboutMenuPage = $aboutMenuPage;
     }
-    protected function getAboutMenuPage(): AboutMenuPage
+    final protected function getAboutMenuPage(): AboutMenuPage
     {
         return $this->aboutMenuPage ??= $this->instanceManager->getInstance(AboutMenuPage::class);
     }

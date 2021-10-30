@@ -14,11 +14,11 @@ class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
 
-    public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
+    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {
         $this->mediaTypeAPI = $mediaTypeAPI;
     }
-    protected function getMediaTypeAPI(): MediaTypeAPIInterface
+    final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
         return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
     }

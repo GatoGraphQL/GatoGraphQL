@@ -24,35 +24,35 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?SchemaTypeDataLoader $schemaTypeDataLoader = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    public function setSchemaObjectTypeResolver(SchemaObjectTypeResolver $schemaObjectTypeResolver): void
+    final public function setSchemaObjectTypeResolver(SchemaObjectTypeResolver $schemaObjectTypeResolver): void
     {
         $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
     }
-    protected function getSchemaObjectTypeResolver(): SchemaObjectTypeResolver
+    final protected function getSchemaObjectTypeResolver(): SchemaObjectTypeResolver
     {
         return $this->schemaObjectTypeResolver ??= $this->instanceManager->getInstance(SchemaObjectTypeResolver::class);
     }
-    public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
+    final public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
     {
         $this->typeObjectTypeResolver = $typeObjectTypeResolver;
     }
-    protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
+    final protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
     {
         return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
     }
-    public function setSchemaTypeDataLoader(SchemaTypeDataLoader $schemaTypeDataLoader): void
+    final public function setSchemaTypeDataLoader(SchemaTypeDataLoader $schemaTypeDataLoader): void
     {
         $this->schemaTypeDataLoader = $schemaTypeDataLoader;
     }
-    protected function getSchemaTypeDataLoader(): SchemaTypeDataLoader
+    final protected function getSchemaTypeDataLoader(): SchemaTypeDataLoader
     {
         return $this->schemaTypeDataLoader ??= $this->instanceManager->getInstance(SchemaTypeDataLoader::class);
     }
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }

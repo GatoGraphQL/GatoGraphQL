@@ -16,11 +16,11 @@ class EntryModuleManager implements EntryModuleManagerInterface
 
     private ?RouteModuleProcessorManagerInterface $routeModuleProcessorManager = null;
 
-    public function setRouteModuleProcessorManager(RouteModuleProcessorManagerInterface $routeModuleProcessorManager): void
+    final public function setRouteModuleProcessorManager(RouteModuleProcessorManagerInterface $routeModuleProcessorManager): void
     {
         $this->routeModuleProcessorManager = $routeModuleProcessorManager;
     }
-    protected function getRouteModuleProcessorManager(): RouteModuleProcessorManagerInterface
+    final protected function getRouteModuleProcessorManager(): RouteModuleProcessorManagerInterface
     {
         return $this->routeModuleProcessorManager ??= $this->instanceManager->getInstance(RouteModuleProcessorManagerInterface::class);
     }

@@ -13,11 +13,11 @@ class CustomPostUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
 
-    public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
+    final public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
     {
         $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
     }
-    protected function getCustomPostUnionTypeResolver(): CustomPostUnionTypeResolver
+    final protected function getCustomPostUnionTypeResolver(): CustomPostUnionTypeResolver
     {
         return $this->customPostUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
     }

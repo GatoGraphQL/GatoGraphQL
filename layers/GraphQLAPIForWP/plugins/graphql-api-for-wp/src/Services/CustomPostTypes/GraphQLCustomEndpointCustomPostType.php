@@ -26,35 +26,35 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     private ?CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistry = null;
     private ?CustomEndpointOptionsBlock $customEndpointOptionsBlock = null;
 
-    public function setEndpointBlockRegistry(EndpointBlockRegistryInterface $endpointBlockRegistry): void
+    final public function setEndpointBlockRegistry(EndpointBlockRegistryInterface $endpointBlockRegistry): void
     {
         $this->endpointBlockRegistry = $endpointBlockRegistry;
     }
-    protected function getEndpointBlockRegistry(): EndpointBlockRegistryInterface
+    final protected function getEndpointBlockRegistry(): EndpointBlockRegistryInterface
     {
         return $this->endpointBlockRegistry ??= $this->instanceManager->getInstance(EndpointBlockRegistryInterface::class);
     }
-    public function setCustomEndpointExecuterRegistry(CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistry): void
+    final public function setCustomEndpointExecuterRegistry(CustomEndpointExecuterRegistryInterface $customEndpointExecuterRegistry): void
     {
         $this->customEndpointExecuterRegistry = $customEndpointExecuterRegistry;
     }
-    protected function getCustomEndpointExecuterRegistry(): CustomEndpointExecuterRegistryInterface
+    final protected function getCustomEndpointExecuterRegistry(): CustomEndpointExecuterRegistryInterface
     {
         return $this->customEndpointExecuterRegistry ??= $this->instanceManager->getInstance(CustomEndpointExecuterRegistryInterface::class);
     }
-    public function setCustomEndpointAnnotatorRegistry(CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistry): void
+    final public function setCustomEndpointAnnotatorRegistry(CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistry): void
     {
         $this->customEndpointAnnotatorRegistry = $customEndpointAnnotatorRegistry;
     }
-    protected function getCustomEndpointAnnotatorRegistry(): CustomEndpointAnnotatorRegistryInterface
+    final protected function getCustomEndpointAnnotatorRegistry(): CustomEndpointAnnotatorRegistryInterface
     {
         return $this->customEndpointAnnotatorRegistry ??= $this->instanceManager->getInstance(CustomEndpointAnnotatorRegistryInterface::class);
     }
-    public function setCustomEndpointOptionsBlock(CustomEndpointOptionsBlock $customEndpointOptionsBlock): void
+    final public function setCustomEndpointOptionsBlock(CustomEndpointOptionsBlock $customEndpointOptionsBlock): void
     {
         $this->customEndpointOptionsBlock = $customEndpointOptionsBlock;
     }
-    protected function getCustomEndpointOptionsBlock(): CustomEndpointOptionsBlock
+    final protected function getCustomEndpointOptionsBlock(): CustomEndpointOptionsBlock
     {
         return $this->customEndpointOptionsBlock ??= $this->instanceManager->getInstance(CustomEndpointOptionsBlock::class);
     }

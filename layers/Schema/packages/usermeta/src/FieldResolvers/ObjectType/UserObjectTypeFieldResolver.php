@@ -16,19 +16,19 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?UserMetaTypeAPIInterface $userMetaTypeAPI = null;
     private ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
 
-    public function setUserMetaTypeAPI(UserMetaTypeAPIInterface $userMetaTypeAPI): void
+    final public function setUserMetaTypeAPI(UserMetaTypeAPIInterface $userMetaTypeAPI): void
     {
         $this->userMetaTypeAPI = $userMetaTypeAPI;
     }
-    protected function getUserMetaTypeAPI(): UserMetaTypeAPIInterface
+    final protected function getUserMetaTypeAPI(): UserMetaTypeAPIInterface
     {
         return $this->userMetaTypeAPI ??= $this->instanceManager->getInstance(UserMetaTypeAPIInterface::class);
     }
-    public function setWithMetaInterfaceTypeFieldResolver(WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver): void
+    final public function setWithMetaInterfaceTypeFieldResolver(WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver): void
     {
         $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
     }
-    protected function getWithMetaInterfaceTypeFieldResolver(): WithMetaInterfaceTypeFieldResolver
+    final protected function getWithMetaInterfaceTypeFieldResolver(): WithMetaInterfaceTypeFieldResolver
     {
         return $this->withMetaInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(WithMetaInterfaceTypeFieldResolver::class);
     }

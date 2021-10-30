@@ -16,11 +16,11 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
 
     private ?PostTagTypeDataLoader $postTagTypeDataLoader = null;
 
-    public function setPostTagTypeDataLoader(PostTagTypeDataLoader $postTagTypeDataLoader): void
+    final public function setPostTagTypeDataLoader(PostTagTypeDataLoader $postTagTypeDataLoader): void
     {
         $this->postTagTypeDataLoader = $postTagTypeDataLoader;
     }
-    protected function getPostTagTypeDataLoader(): PostTagTypeDataLoader
+    final protected function getPostTagTypeDataLoader(): PostTagTypeDataLoader
     {
         return $this->postTagTypeDataLoader ??= $this->instanceManager->getInstance(PostTagTypeDataLoader::class);
     }

@@ -23,19 +23,19 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     private ?UserAuthorizationInterface $userAuthorization = null;
     private ?QueryRetrieverInterface $queryRetriever = null;
 
-    public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
         $this->userAuthorization = $userAuthorization;
     }
-    protected function getUserAuthorization(): UserAuthorizationInterface
+    final protected function getUserAuthorization(): UserAuthorizationInterface
     {
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
-    public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
+    final public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
     {
         $this->queryRetriever = $queryRetriever;
     }
-    protected function getQueryRetriever(): QueryRetrieverInterface
+    final protected function getQueryRetriever(): QueryRetrieverInterface
     {
         return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
     }

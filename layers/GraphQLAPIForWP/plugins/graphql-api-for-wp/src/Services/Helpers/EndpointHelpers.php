@@ -19,19 +19,19 @@ class EndpointHelpers
     private ?PluginMenu $pluginMenu = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
 
-    public function setPluginMenu(PluginMenu $pluginMenu): void
+    final public function setPluginMenu(PluginMenu $pluginMenu): void
     {
         $this->pluginMenu = $pluginMenu;
     }
-    protected function getPluginMenu(): PluginMenu
+    final protected function getPluginMenu(): PluginMenu
     {
         return $this->pluginMenu ??= $this->instanceManager->getInstance(PluginMenu::class);
     }
-    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
         $this->moduleRegistry = $moduleRegistry;
     }
-    protected function getModuleRegistry(): ModuleRegistryInterface
+    final protected function getModuleRegistry(): ModuleRegistryInterface
     {
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }

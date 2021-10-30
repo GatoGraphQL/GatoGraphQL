@@ -32,35 +32,35 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?PersistedQueryManagerInterface $persistedQueryManager = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
-    public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {
         $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
     }
-    protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
         return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
-    public function setPersistedFragmentManager(PersistedFragmentManagerInterface $persistedFragmentManager): void
+    final public function setPersistedFragmentManager(PersistedFragmentManagerInterface $persistedFragmentManager): void
     {
         $this->persistedFragmentManager = $persistedFragmentManager;
     }
-    protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
+    final protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
     {
         return $this->persistedFragmentManager ??= $this->instanceManager->getInstance(PersistedFragmentManagerInterface::class);
     }
-    public function setPersistedQueryManager(PersistedQueryManagerInterface $persistedQueryManager): void
+    final public function setPersistedQueryManager(PersistedQueryManagerInterface $persistedQueryManager): void
     {
         $this->persistedQueryManager = $persistedQueryManager;
     }
-    protected function getPersistedQueryManager(): PersistedQueryManagerInterface
+    final protected function getPersistedQueryManager(): PersistedQueryManagerInterface
     {
         return $this->persistedQueryManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
     }
-    public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
         $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
-    protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }

@@ -14,11 +14,11 @@ class LoginMutationResolverBridge extends AbstractComponentMutationResolverBridg
 {
     private ?LoginMutationResolver $loginMutationResolver = null;
 
-    public function setLoginMutationResolver(LoginMutationResolver $loginMutationResolver): void
+    final public function setLoginMutationResolver(LoginMutationResolver $loginMutationResolver): void
     {
         $this->loginMutationResolver = $loginMutationResolver;
     }
-    protected function getLoginMutationResolver(): LoginMutationResolver
+    final protected function getLoginMutationResolver(): LoginMutationResolver
     {
         return $this->loginMutationResolver ??= $this->instanceManager->getInstance(LoginMutationResolver::class);
     }

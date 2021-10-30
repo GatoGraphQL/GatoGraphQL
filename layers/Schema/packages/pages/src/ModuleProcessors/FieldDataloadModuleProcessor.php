@@ -18,11 +18,11 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
 
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
 
-    public function setPageObjectTypeResolver(PageObjectTypeResolver $pageObjectTypeResolver): void
+    final public function setPageObjectTypeResolver(PageObjectTypeResolver $pageObjectTypeResolver): void
     {
         $this->pageObjectTypeResolver = $pageObjectTypeResolver;
     }
-    protected function getPageObjectTypeResolver(): PageObjectTypeResolver
+    final protected function getPageObjectTypeResolver(): PageObjectTypeResolver
     {
         return $this->pageObjectTypeResolver ??= $this->instanceManager->getInstance(PageObjectTypeResolver::class);
     }

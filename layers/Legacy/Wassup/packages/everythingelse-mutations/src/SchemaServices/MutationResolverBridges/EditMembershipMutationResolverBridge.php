@@ -15,11 +15,11 @@ class EditMembershipMutationResolverBridge extends AbstractComponentMutationReso
 {
     private ?EditMembershipMutationResolver $editMembershipMutationResolver = null;
     
-    public function setEditMembershipMutationResolver(EditMembershipMutationResolver $editMembershipMutationResolver): void
+    final public function setEditMembershipMutationResolver(EditMembershipMutationResolver $editMembershipMutationResolver): void
     {
         $this->editMembershipMutationResolver = $editMembershipMutationResolver;
     }
-    protected function getEditMembershipMutationResolver(): EditMembershipMutationResolver
+    final protected function getEditMembershipMutationResolver(): EditMembershipMutationResolver
     {
         return $this->editMembershipMutationResolver ??= $this->instanceManager->getInstance(EditMembershipMutationResolver::class);
     }

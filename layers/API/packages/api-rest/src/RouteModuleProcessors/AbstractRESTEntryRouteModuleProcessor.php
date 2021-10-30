@@ -19,19 +19,19 @@ abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteM
     private ?RESTDataStructureFormatter $restDataStructureFormatter = null;
     private ?FieldQueryConvertorInterface $fieldQueryConvertor = null;
 
-    public function setRESTDataStructureFormatter(RESTDataStructureFormatter $restDataStructureFormatter): void
+    final public function setRESTDataStructureFormatter(RESTDataStructureFormatter $restDataStructureFormatter): void
     {
         $this->restDataStructureFormatter = $restDataStructureFormatter;
     }
-    protected function getRESTDataStructureFormatter(): RESTDataStructureFormatter
+    final protected function getRESTDataStructureFormatter(): RESTDataStructureFormatter
     {
         return $this->restDataStructureFormatter ??= $this->instanceManager->getInstance(RESTDataStructureFormatter::class);
     }
-    public function setFieldQueryConvertor(FieldQueryConvertorInterface $fieldQueryConvertor): void
+    final public function setFieldQueryConvertor(FieldQueryConvertorInterface $fieldQueryConvertor): void
     {
         $this->fieldQueryConvertor = $fieldQueryConvertor;
     }
-    protected function getFieldQueryConvertor(): FieldQueryConvertorInterface
+    final protected function getFieldQueryConvertor(): FieldQueryConvertorInterface
     {
         return $this->fieldQueryConvertor ??= $this->instanceManager->getInstance(FieldQueryConvertorInterface::class);
     }

@@ -38,35 +38,35 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     {
         return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }
-    public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
         $this->moduleRegistry = $moduleRegistry;
     }
-    protected function getModuleRegistry(): ModuleRegistryInterface
+    final protected function getModuleRegistry(): ModuleRegistryInterface
     {
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
-    public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
         $this->userAuthorization = $userAuthorization;
     }
-    protected function getUserAuthorization(): UserAuthorizationInterface
+    final protected function getUserAuthorization(): UserAuthorizationInterface
     {
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
-    public function setCPTUtils(CPTUtils $cptUtils): void
+    final public function setCPTUtils(CPTUtils $cptUtils): void
     {
         $this->cptUtils = $cptUtils;
     }
-    protected function getCPTUtils(): CPTUtils
+    final protected function getCPTUtils(): CPTUtils
     {
         return $this->cptUtils ??= $this->instanceManager->getInstance(CPTUtils::class);
     }
-    public function setPluginMenu(PluginMenu $pluginMenu): void
+    final public function setPluginMenu(PluginMenu $pluginMenu): void
     {
         $this->pluginMenu = $pluginMenu;
     }
-    protected function getPluginMenu(): PluginMenu
+    final protected function getPluginMenu(): PluginMenu
     {
         return $this->pluginMenu ??= $this->instanceManager->getInstance(PluginMenu::class);
     }

@@ -24,19 +24,19 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
     private ?CustomPostObjectTypeResolver $customPostObjectTypeResolver = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    public function setCustomPostObjectTypeResolver(CustomPostObjectTypeResolver $customPostObjectTypeResolver): void
+    final public function setCustomPostObjectTypeResolver(CustomPostObjectTypeResolver $customPostObjectTypeResolver): void
     {
         $this->customPostObjectTypeResolver = $customPostObjectTypeResolver;
     }
-    protected function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolver
+    final protected function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolver
     {
         return $this->customPostObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
     }
-    public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
         $this->customPostTypeAPI = $customPostTypeAPI;
     }
-    protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }

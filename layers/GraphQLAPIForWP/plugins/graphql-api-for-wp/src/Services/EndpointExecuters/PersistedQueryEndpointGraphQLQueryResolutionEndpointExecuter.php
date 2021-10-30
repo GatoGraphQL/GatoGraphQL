@@ -19,27 +19,27 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
     private ?GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers = null;
     private ?GraphQLRequestVarsHooks $graphQLRequestVarsHooks = null;
 
-    public function setGraphQLPersistedQueryEndpointCustomPostType(GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType): void
+    final public function setGraphQLPersistedQueryEndpointCustomPostType(GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType): void
     {
         $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
     }
-    protected function getGraphQLPersistedQueryEndpointCustomPostType(): GraphQLPersistedQueryEndpointCustomPostType
+    final protected function getGraphQLPersistedQueryEndpointCustomPostType(): GraphQLPersistedQueryEndpointCustomPostType
     {
         return $this->graphQLPersistedQueryEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
     }
-    public function setGraphQLQueryPostTypeHelpers(GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers): void
+    final public function setGraphQLQueryPostTypeHelpers(GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers): void
     {
         $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
     }
-    protected function getGraphQLQueryPostTypeHelpers(): GraphQLQueryPostTypeHelpers
+    final protected function getGraphQLQueryPostTypeHelpers(): GraphQLQueryPostTypeHelpers
     {
         return $this->graphQLQueryPostTypeHelpers ??= $this->instanceManager->getInstance(GraphQLQueryPostTypeHelpers::class);
     }
-    public function setGraphQLRequestVarsHooks(GraphQLRequestVarsHooks $graphQLRequestVarsHooks): void
+    final public function setGraphQLRequestVarsHooks(GraphQLRequestVarsHooks $graphQLRequestVarsHooks): void
     {
         $this->graphQLRequestVarsHooks = $graphQLRequestVarsHooks;
     }
-    protected function getGraphQLRequestVarsHooks(): GraphQLRequestVarsHooks
+    final protected function getGraphQLRequestVarsHooks(): GraphQLRequestVarsHooks
     {
         return $this->graphQLRequestVarsHooks ??= $this->instanceManager->getInstance(GraphQLRequestVarsHooks::class);
     }

@@ -14,11 +14,11 @@ abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoa
 
     private ?NameResolverInterface $nameResolver = null;
 
-    public function setNameResolver(NameResolverInterface $nameResolver): void
+    final public function setNameResolver(NameResolverInterface $nameResolver): void
     {
         $this->nameResolver = $nameResolver;
     }
-    protected function getNameResolver(): NameResolverInterface
+    final protected function getNameResolver(): NameResolverInterface
     {
         return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
     }

@@ -14,11 +14,11 @@ abstract class AbstractStanceObjectTypeResolverPicker extends AbstractObjectType
 {
     private ?StanceObjectTypeResolver $stanceObjectTypeResolver = null;
     
-    public function setStanceObjectTypeResolver(StanceObjectTypeResolver $stanceObjectTypeResolver): void
+    final public function setStanceObjectTypeResolver(StanceObjectTypeResolver $stanceObjectTypeResolver): void
     {
         $this->stanceObjectTypeResolver = $stanceObjectTypeResolver;
     }
-    protected function getStanceObjectTypeResolver(): StanceObjectTypeResolver
+    final protected function getStanceObjectTypeResolver(): StanceObjectTypeResolver
     {
         return $this->stanceObjectTypeResolver ??= $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
     }

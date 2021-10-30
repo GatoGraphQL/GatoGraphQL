@@ -20,11 +20,11 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
 
     private ?BlockHelpers $blockHelpers = null;
 
-    public function setBlockHelpers(BlockHelpers $blockHelpers): void
+    final public function setBlockHelpers(BlockHelpers $blockHelpers): void
     {
         $this->blockHelpers = $blockHelpers;
     }
-    protected function getBlockHelpers(): BlockHelpers
+    final protected function getBlockHelpers(): BlockHelpers
     {
         return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }

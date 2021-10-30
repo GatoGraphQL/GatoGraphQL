@@ -14,11 +14,11 @@ class ConfigurableCacheControlForFieldsRelationalTypeResolverDecorator extends A
 
     private ?CacheControlManagerInterface $cacheControlManager = null;
 
-    public function setCacheControlManager(CacheControlManagerInterface $cacheControlManager): void
+    final public function setCacheControlManager(CacheControlManagerInterface $cacheControlManager): void
     {
         $this->cacheControlManager = $cacheControlManager;
     }
-    protected function getCacheControlManager(): CacheControlManagerInterface
+    final protected function getCacheControlManager(): CacheControlManagerInterface
     {
         return $this->cacheControlManager ??= $this->instanceManager->getInstance(CacheControlManagerInterface::class);
     }

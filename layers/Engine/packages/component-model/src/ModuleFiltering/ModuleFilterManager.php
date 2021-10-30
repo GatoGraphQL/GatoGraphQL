@@ -45,19 +45,19 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
     private ?ModulePathManagerInterface $modulePathManager = null;
     private ?ModulePathHelpersInterface $modulePathHelpers = null;
 
-    public function setModulePathManager(ModulePathManagerInterface $modulePathManager): void
+    final public function setModulePathManager(ModulePathManagerInterface $modulePathManager): void
     {
         $this->modulePathManager = $modulePathManager;
     }
-    protected function getModulePathManager(): ModulePathManagerInterface
+    final protected function getModulePathManager(): ModulePathManagerInterface
     {
         return $this->modulePathManager ??= $this->instanceManager->getInstance(ModulePathManagerInterface::class);
     }
-    public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
+    final public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
     {
         $this->modulePathHelpers = $modulePathHelpers;
     }
-    protected function getModulePathHelpers(): ModulePathHelpersInterface
+    final protected function getModulePathHelpers(): ModulePathHelpersInterface
     {
         return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
     }

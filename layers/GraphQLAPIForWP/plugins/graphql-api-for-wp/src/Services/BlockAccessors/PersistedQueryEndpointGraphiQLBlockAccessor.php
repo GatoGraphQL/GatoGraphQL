@@ -18,19 +18,19 @@ class PersistedQueryEndpointGraphiQLBlockAccessor
     private ?BlockHelpers $blockHelpers = null;
     private ?PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock = null;
 
-    public function setBlockHelpers(BlockHelpers $blockHelpers): void
+    final public function setBlockHelpers(BlockHelpers $blockHelpers): void
     {
         $this->blockHelpers = $blockHelpers;
     }
-    protected function getBlockHelpers(): BlockHelpers
+    final protected function getBlockHelpers(): BlockHelpers
     {
         return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
-    public function setPersistedQueryEndpointGraphiQLBlock(PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock): void
+    final public function setPersistedQueryEndpointGraphiQLBlock(PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock): void
     {
         $this->persistedQueryEndpointGraphiQLBlock = $persistedQueryEndpointGraphiQLBlock;
     }
-    protected function getPersistedQueryEndpointGraphiQLBlock(): PersistedQueryEndpointGraphiQLBlock
+    final protected function getPersistedQueryEndpointGraphiQLBlock(): PersistedQueryEndpointGraphiQLBlock
     {
         return $this->persistedQueryEndpointGraphiQLBlock ??= $this->instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
     }

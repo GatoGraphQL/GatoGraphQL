@@ -14,11 +14,11 @@ class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutation
 {
     private ?ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver = null;
     
-    public function setChangeUserPasswordMutationResolver(ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver): void
+    final public function setChangeUserPasswordMutationResolver(ChangeUserPasswordMutationResolver $changeUserPasswordMutationResolver): void
     {
         $this->changeUserPasswordMutationResolver = $changeUserPasswordMutationResolver;
     }
-    protected function getChangeUserPasswordMutationResolver(): ChangeUserPasswordMutationResolver
+    final protected function getChangeUserPasswordMutationResolver(): ChangeUserPasswordMutationResolver
     {
         return $this->changeUserPasswordMutationResolver ??= $this->instanceManager->getInstance(ChangeUserPasswordMutationResolver::class);
     }

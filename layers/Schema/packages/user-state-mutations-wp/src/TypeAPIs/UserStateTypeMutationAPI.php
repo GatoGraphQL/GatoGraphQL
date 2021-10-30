@@ -21,11 +21,11 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 
     private ?ErrorHelperInterface $errorHelper = null;
 
-    public function setErrorHelper(ErrorHelperInterface $errorHelper): void
+    final public function setErrorHelper(ErrorHelperInterface $errorHelper): void
     {
         $this->errorHelper = $errorHelper;
     }
-    protected function getErrorHelper(): ErrorHelperInterface
+    final protected function getErrorHelper(): ErrorHelperInterface
     {
         return $this->errorHelper ??= $this->instanceManager->getInstance(ErrorHelperInterface::class);
     }

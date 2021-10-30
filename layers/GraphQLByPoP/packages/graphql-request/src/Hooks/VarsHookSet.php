@@ -27,43 +27,43 @@ class VarsHookSet extends AbstractHookSet
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?GraphQLQueryConvertorInterface $graphQLQueryConvertor = null;
 
-    public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
+    final public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
     {
         $this->queryRetriever = $queryRetriever;
     }
-    protected function getQueryRetriever(): QueryRetrieverInterface
+    final protected function getQueryRetriever(): QueryRetrieverInterface
     {
         return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
     }
-    public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
+    final public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
     {
         $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
     }
-    protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
+    final protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
     {
         return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
     }
-    public function setGraphQLPersistedQueryManager(GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager): void
+    final public function setGraphQLPersistedQueryManager(GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager): void
     {
         $this->graphQLPersistedQueryManager = $graphQLPersistedQueryManager;
     }
-    protected function getGraphQLPersistedQueryManager(): GraphQLPersistedQueryManagerInterface
+    final protected function getGraphQLPersistedQueryManager(): GraphQLPersistedQueryManagerInterface
     {
         return $this->graphQLPersistedQueryManager ??= $this->instanceManager->getInstance(GraphQLPersistedQueryManagerInterface::class);
     }
-    public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
         $this->feedbackMessageStore = $feedbackMessageStore;
     }
-    protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
     {
         return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
     }
-    public function setGraphQLQueryConvertor(GraphQLQueryConvertorInterface $graphQLQueryConvertor): void
+    final public function setGraphQLQueryConvertor(GraphQLQueryConvertorInterface $graphQLQueryConvertor): void
     {
         $this->graphQLQueryConvertor = $graphQLQueryConvertor;
     }
-    protected function getGraphQLQueryConvertor(): GraphQLQueryConvertorInterface
+    final protected function getGraphQLQueryConvertor(): GraphQLQueryConvertorInterface
     {
         return $this->graphQLQueryConvertor ??= $this->instanceManager->getInstance(GraphQLQueryConvertorInterface::class);
     }

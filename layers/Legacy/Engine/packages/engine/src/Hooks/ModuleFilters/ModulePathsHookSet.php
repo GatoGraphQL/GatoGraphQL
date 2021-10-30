@@ -16,11 +16,11 @@ class ModulePathsHookSet extends AbstractHookSet
 {
     private ?ModulePaths $modulePaths = null;
     
-    public function setModulePaths(ModulePaths $modulePaths): void
+    final public function setModulePaths(ModulePaths $modulePaths): void
     {
         $this->modulePaths = $modulePaths;
     }
-    protected function getModulePaths(): ModulePaths
+    final protected function getModulePaths(): ModulePaths
     {
         return $this->modulePaths ??= $this->instanceManager->getInstance(ModulePaths::class);
     }

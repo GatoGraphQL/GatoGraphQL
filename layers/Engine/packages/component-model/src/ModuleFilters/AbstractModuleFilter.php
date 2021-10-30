@@ -14,11 +14,11 @@ abstract class AbstractModuleFilter implements ModuleFilterInterface
 
     private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
 
-    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    final public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
     {
         $this->moduleProcessorManager = $moduleProcessorManager;
     }
-    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    final protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
     {
         return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     }

@@ -24,35 +24,35 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?LogoutMutationResolver $logoutMutationResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
+    final public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
     {
         $this->userObjectTypeResolver = $userObjectTypeResolver;
     }
-    protected function getUserObjectTypeResolver(): UserObjectTypeResolver
+    final protected function getUserObjectTypeResolver(): UserObjectTypeResolver
     {
         return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
-    public function setLoginMutationResolver(LoginMutationResolver $loginMutationResolver): void
+    final public function setLoginMutationResolver(LoginMutationResolver $loginMutationResolver): void
     {
         $this->loginMutationResolver = $loginMutationResolver;
     }
-    protected function getLoginMutationResolver(): LoginMutationResolver
+    final protected function getLoginMutationResolver(): LoginMutationResolver
     {
         return $this->loginMutationResolver ??= $this->instanceManager->getInstance(LoginMutationResolver::class);
     }
-    public function setLogoutMutationResolver(LogoutMutationResolver $logoutMutationResolver): void
+    final public function setLogoutMutationResolver(LogoutMutationResolver $logoutMutationResolver): void
     {
         $this->logoutMutationResolver = $logoutMutationResolver;
     }
-    protected function getLogoutMutationResolver(): LogoutMutationResolver
+    final protected function getLogoutMutationResolver(): LogoutMutationResolver
     {
         return $this->logoutMutationResolver ??= $this->instanceManager->getInstance(LogoutMutationResolver::class);
     }
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }

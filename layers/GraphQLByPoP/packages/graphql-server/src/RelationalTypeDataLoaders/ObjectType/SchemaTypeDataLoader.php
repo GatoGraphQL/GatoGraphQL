@@ -19,19 +19,19 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
     private ?SchemaObjectTypeResolver $schemaObjectTypeResolver = null;
     private ?SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry = null;
 
-    public function setSchemaObjectTypeResolver(SchemaObjectTypeResolver $schemaObjectTypeResolver): void
+    final public function setSchemaObjectTypeResolver(SchemaObjectTypeResolver $schemaObjectTypeResolver): void
     {
         $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
     }
-    protected function getSchemaObjectTypeResolver(): SchemaObjectTypeResolver
+    final protected function getSchemaObjectTypeResolver(): SchemaObjectTypeResolver
     {
         return $this->schemaObjectTypeResolver ??= $this->instanceManager->getInstance(SchemaObjectTypeResolver::class);
     }
-    public function setSchemaDefinitionReferenceRegistry(SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry): void
+    final public function setSchemaDefinitionReferenceRegistry(SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry): void
     {
         $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
     }
-    protected function getSchemaDefinitionReferenceRegistry(): SchemaDefinitionReferenceRegistryInterface
+    final protected function getSchemaDefinitionReferenceRegistry(): SchemaDefinitionReferenceRegistryInterface
     {
         return $this->schemaDefinitionReferenceRegistry ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
     }

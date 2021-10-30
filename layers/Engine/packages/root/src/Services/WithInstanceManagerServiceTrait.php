@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Root\Services;
 
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Instances\InstanceManagerInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 

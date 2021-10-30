@@ -24,19 +24,19 @@ class ModelInstance implements ModelInstanceInterface
     private ?ApplicationInfoInterface $applicationInfo = null;
     private ?DefinitionManagerInterface $definitionManager = null;
 
-    public function setApplicationInfo(ApplicationInfoInterface $applicationInfo): void
+    final public function setApplicationInfo(ApplicationInfoInterface $applicationInfo): void
     {
         $this->applicationInfo = $applicationInfo;
     }
-    protected function getApplicationInfo(): ApplicationInfoInterface
+    final protected function getApplicationInfo(): ApplicationInfoInterface
     {
         return $this->applicationInfo ??= $this->instanceManager->getInstance(ApplicationInfoInterface::class);
     }
-    public function setDefinitionManager(DefinitionManagerInterface $definitionManager): void
+    final public function setDefinitionManager(DefinitionManagerInterface $definitionManager): void
     {
         $this->definitionManager = $definitionManager;
     }
-    protected function getDefinitionManager(): DefinitionManagerInterface
+    final protected function getDefinitionManager(): DefinitionManagerInterface
     {
         return $this->definitionManager ??= $this->instanceManager->getInstance(DefinitionManagerInterface::class);
     }

@@ -15,11 +15,11 @@ class SelfFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisable
 {
     private ?SchemaConfigSelfFieldsBlock $schemaConfigSelfFieldsBlock = null;
 
-    public function setSchemaConfigSelfFieldsBlock(SchemaConfigSelfFieldsBlock $schemaConfigSelfFieldsBlock): void
+    final public function setSchemaConfigSelfFieldsBlock(SchemaConfigSelfFieldsBlock $schemaConfigSelfFieldsBlock): void
     {
         $this->schemaConfigSelfFieldsBlock = $schemaConfigSelfFieldsBlock;
     }
-    protected function getSchemaConfigSelfFieldsBlock(): SchemaConfigSelfFieldsBlock
+    final protected function getSchemaConfigSelfFieldsBlock(): SchemaConfigSelfFieldsBlock
     {
         return $this->schemaConfigSelfFieldsBlock ??= $this->instanceManager->getInstance(SchemaConfigSelfFieldsBlock::class);
     }

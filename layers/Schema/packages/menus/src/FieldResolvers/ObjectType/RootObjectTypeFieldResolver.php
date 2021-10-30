@@ -25,35 +25,35 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?MenuObjectTypeResolver $menuObjectTypeResolver = null;
     private ?MenuTypeAPIInterface $menuTypeAPI = null;
 
-    public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
-    protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
-    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
     }
-    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
-    public function setMenuObjectTypeResolver(MenuObjectTypeResolver $menuObjectTypeResolver): void
+    final public function setMenuObjectTypeResolver(MenuObjectTypeResolver $menuObjectTypeResolver): void
     {
         $this->menuObjectTypeResolver = $menuObjectTypeResolver;
     }
-    protected function getMenuObjectTypeResolver(): MenuObjectTypeResolver
+    final protected function getMenuObjectTypeResolver(): MenuObjectTypeResolver
     {
         return $this->menuObjectTypeResolver ??= $this->instanceManager->getInstance(MenuObjectTypeResolver::class);
     }
-    public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
+    final public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
     {
         $this->menuTypeAPI = $menuTypeAPI;
     }
-    protected function getMenuTypeAPI(): MenuTypeAPIInterface
+    final protected function getMenuTypeAPI(): MenuTypeAPIInterface
     {
         return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
     }
