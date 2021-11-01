@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use Exception;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
@@ -58,6 +59,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?SemverHelperServiceInterface $semverHelperService = null;
+    private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
     /**
      * @var array<string, mixed>
@@ -122,6 +124,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     final protected function getSemverHelperService(): SemverHelperServiceInterface
     {
         return $this->semverHelperService ??= $this->instanceManager->getInstance(SemverHelperServiceInterface::class);
+    }
+    final public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
+    {
+        $this->attachableExtensionManager = $attachableExtensionManager;
+    }
+    final protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
+    {
+        return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
     }
 
     final public function getClassesToAttachTo(): array
