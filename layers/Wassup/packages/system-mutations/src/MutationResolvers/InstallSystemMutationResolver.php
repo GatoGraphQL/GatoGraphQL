@@ -23,7 +23,7 @@ class InstallSystemMutationResolver extends AbstractMutationResolver
     public function executeMutation(array $form_data): mixed
     {
         // Save the new version on the DB
-        update_option('PoP:version', $this->applicationInfo->getVersion());
+        update_option('PoP:version', $this->getApplicationInfo()->getVersion());
 
         // Execute install everywhere
         $this->getHooksAPI()->doAction('PoP:system-install');
