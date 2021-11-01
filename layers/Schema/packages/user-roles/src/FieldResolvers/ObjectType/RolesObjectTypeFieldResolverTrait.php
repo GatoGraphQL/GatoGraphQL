@@ -12,6 +12,7 @@ use PoP\Translation\TranslationAPIInterface;
 trait RolesObjectTypeFieldResolverTrait
 {
     abstract protected function getTranslationAPI(): TranslationAPIInterface;
+    abstract protected function getStringScalarTypeResolver(): StringScalarTypeResolver;
 
     public function getFieldNamesToResolve(): array
     {
@@ -31,10 +32,9 @@ trait RolesObjectTypeFieldResolverTrait
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
         return match ($fieldName) {
-            'roles' => $stringScalarTypeResolver,
-            'capabilities' => $stringScalarTypeResolver,
+            'roles' => $this->getStringScalarTypeResolver(),
+            'capabilities' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
