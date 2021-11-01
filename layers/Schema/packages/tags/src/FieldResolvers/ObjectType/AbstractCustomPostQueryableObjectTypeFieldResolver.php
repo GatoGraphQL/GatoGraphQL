@@ -16,10 +16,10 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 use PoPSchema\Tags\ComponentConfiguration;
-use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractInterface;
+use PoPSchema\Tags\ComponentContracts\TagAPIObjectTypeFieldResolverRequestedContractInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
-abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements TagAPIRequestedContractInterface
+abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements TagAPIObjectTypeFieldResolverRequestedContractInterface
 {
     use WithLimitFieldArgResolverTrait;
 
