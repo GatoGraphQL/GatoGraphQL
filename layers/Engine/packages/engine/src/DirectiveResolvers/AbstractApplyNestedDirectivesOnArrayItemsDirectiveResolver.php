@@ -27,7 +27,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
     public const PROPERTY_SEPARATOR = '.';
 
     private ?DirectivePipelineServiceInterface $directivePipelineService = null;
-    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
 
     final public function setDirectivePipelineService(DirectivePipelineServiceInterface $directivePipelineService): void
     {
@@ -36,14 +35,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
     final protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
     {
         return $this->directivePipelineService ??= $this->instanceManager->getInstance(DirectivePipelineServiceInterface::class);
-    }
-    final public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
-    {
-        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
-    }
-    final protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
-    {
-        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
     }
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array

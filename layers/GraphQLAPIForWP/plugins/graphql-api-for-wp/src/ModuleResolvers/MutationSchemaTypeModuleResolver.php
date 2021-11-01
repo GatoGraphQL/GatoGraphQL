@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
+use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\Plugin;
 
 class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
@@ -24,6 +25,17 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     public const SCHEMA_POST_TAG_MUTATIONS = Plugin::NAMESPACE . '\schema-post-tag-mutations';
     public const SCHEMA_POST_CATEGORY_MUTATIONS = Plugin::NAMESPACE . '\schema-post-category-mutations';
     public const SCHEMA_COMMENT_MUTATIONS = Plugin::NAMESPACE . '\schema-comment-mutations';
+
+    private ?MarkdownContentParserInterface $markdownContentParser = null;
+
+    final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
+    {
+        $this->markdownContentParser = $markdownContentParser;
+    }
+    final protected function getMarkdownContentParser(): MarkdownContentParserInterface
+    {
+        return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+    }
 
     /**
      * @return string[]

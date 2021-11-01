@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 
 class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -18,6 +19,17 @@ class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModu
     public const ACCESS_CONTROL_RULE_USER_STATE = Plugin::NAMESPACE . '\access-control-rule-user-state';
     public const ACCESS_CONTROL_RULE_USER_ROLES = Plugin::NAMESPACE . '\access-control-rule-user-roles';
     public const ACCESS_CONTROL_RULE_USER_CAPABILITIES = Plugin::NAMESPACE . '\access-control-rule-user-capabilities';
+
+    private ?MarkdownContentParserInterface $markdownContentParser = null;
+
+    final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
+    {
+        $this->markdownContentParser = $markdownContentParser;
+    }
+    final protected function getMarkdownContentParser(): MarkdownContentParserInterface
+    {
+        return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+    }
 
     /**
      * @return string[]

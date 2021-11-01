@@ -9,16 +9,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait MarkdownContentRetrieverTrait
 {
-    private ?MarkdownContentParserInterface $markdownContentParser = null;
-
-    public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
-    {
-        $this->markdownContentParser = $markdownContentParser;
-    }
-    protected function getMarkdownContentParser(): MarkdownContentParserInterface
-    {
-        return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
-    }
+    abstract protected function getMarkdownContentParser(): MarkdownContentParserInterface;
 
     /**
      * @param array<string, mixed> $options
@@ -29,10 +20,10 @@ trait MarkdownContentRetrieverTrait
         array $options = []
     ): ?string {
         // Inject the place to look for the documentation
-        $this->markdownContentParser->setBaseDir($this->getBaseDir());
-        $this->markdownContentParser->setBaseURL($this->getBaseURL());
+        $this->getMarkdownContentParser()->setBaseDir($this->getBaseDir());
+        $this->getMarkdownContentParser()->setBaseURL($this->getBaseURL());
         try {
-            return $this->markdownContentParser->getContent(
+            return $this->getMarkdownContentParser()->getContent(
                 $markdownFilename,
                 $relativePathDir,
                 $options

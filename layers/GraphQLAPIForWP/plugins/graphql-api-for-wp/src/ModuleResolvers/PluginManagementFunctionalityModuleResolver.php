@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
+use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 
@@ -19,6 +20,17 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
      */
     public const OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE = 'add-release-notes-admin-notice';
     public const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
+
+    private ?MarkdownContentParserInterface $markdownContentParser = null;
+
+    final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
+    {
+        $this->markdownContentParser = $markdownContentParser;
+    }
+    final protected function getMarkdownContentParser(): MarkdownContentParserInterface
+    {
+        return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+    }
 
     /**
      * @return string[]

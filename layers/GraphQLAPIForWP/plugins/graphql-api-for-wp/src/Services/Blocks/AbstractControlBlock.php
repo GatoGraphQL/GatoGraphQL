@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use PoP\ComponentModel\Registries\TypeRegistryInterface;
 
 /**
  * Base Control block
@@ -15,6 +16,17 @@ abstract class AbstractControlBlock extends AbstractBlock
 
     public const ATTRIBUTE_NAME_TYPE_FIELDS = 'typeFields';
     public const ATTRIBUTE_NAME_DIRECTIVES = 'directives';
+
+    private ?TypeRegistryInterface $typeRegistry = null;
+
+    final public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
+    {
+        $this->typeRegistry = $typeRegistry;
+    }
+    final protected function getTypeRegistry(): TypeRegistryInterface
+    {
+        return $this->typeRegistry ??= $this->instanceManager->getInstance(TypeRegistryInterface::class);
+    }
 
     protected function isDynamicBlock(): bool
     {

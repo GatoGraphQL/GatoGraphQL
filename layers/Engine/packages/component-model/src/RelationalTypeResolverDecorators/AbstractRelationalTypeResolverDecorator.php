@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\RelationalTypeResolverDecorators;
 
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
@@ -17,6 +18,7 @@ abstract class AbstractRelationalTypeResolverDecorator implements RelationalType
     use BasicServiceTrait;
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -25,6 +27,14 @@ abstract class AbstractRelationalTypeResolverDecorator implements RelationalType
     final protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
     {
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
+    }
+    final public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
+    {
+        $this->attachableExtensionManager = $attachableExtensionManager;
+    }
+    final protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
+    {
+        return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
     }
 
     final public function getClassesToAttachTo(): array

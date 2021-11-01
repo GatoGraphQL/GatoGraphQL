@@ -5,19 +5,16 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\ModuleProcessors\FormInputs;
 
 use PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface;
-use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
+use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class CommonFilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
+class CommonFilterMultipleInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
-    use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
     use FormMultipleInputModuleProcessorTrait;
 
     public const MODULE_FILTERINPUT_DATES = 'filterinput-dates';

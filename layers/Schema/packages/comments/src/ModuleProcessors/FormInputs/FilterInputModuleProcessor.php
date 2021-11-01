@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\ModuleProcessors\FormInputs;
 
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
-use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
+use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
@@ -18,10 +17,8 @@ use PoPSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
 use PoPSchema\Comments\TypeResolvers\EnumType\CommentTypeEnumTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
+class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
-    use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-
     public const MODULE_FILTERINPUT_CUSTOMPOST_IDS = 'filterinput-custompost-ids';
     public const MODULE_FILTERINPUT_CUSTOMPOST_ID = 'filterinput-custompost-id';
     public const MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS = 'filterinput-exclude-custompost-ids';

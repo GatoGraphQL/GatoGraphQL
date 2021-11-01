@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
+use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
@@ -32,6 +33,17 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     public const OPTION_USE_IN_ADMIN_PERSISTED_QUERIES = 'use-in-admin-persisted-queries';
     public const OPTION_USE_IN_PUBLIC_CLIENT_FOR_SINGLE_ENDPOINT = 'use-in-public-client-for-single-endpoint';
     public const OPTION_USE_IN_PUBLIC_CLIENT_FOR_CUSTOM_ENDPOINTS = 'use-in-public-client-for-custom-endpoints';
+
+    private ?MarkdownContentParserInterface $markdownContentParser = null;
+
+    final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
+    {
+        $this->markdownContentParser = $markdownContentParser;
+    }
+    final protected function getMarkdownContentParser(): MarkdownContentParserInterface
+    {
+        return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+    }
 
     /**
      * @return string[]

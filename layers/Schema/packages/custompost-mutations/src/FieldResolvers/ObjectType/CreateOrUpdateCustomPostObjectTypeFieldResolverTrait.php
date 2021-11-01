@@ -5,48 +5,19 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\Services\BasicServiceTrait;
-use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\Hooks\HooksAPIInterface;
 use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
 {
-    // use BasicServiceTrait;
+    abstract protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver;
+    abstract protected function getIDScalarTypeResolver(): IDScalarTypeResolver;
+    abstract protected function getStringScalarTypeResolver(): StringScalarTypeResolver;
 
-    private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
-    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-
-    public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
-    {
-        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
-    }
-    protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
-    {
-        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
-    }
-    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
-    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
-    {
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
-    }
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
-    {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-    }
+    abstract protected function getTranslationAPI(): TranslationAPIInterface;
 
     private function getCreateOrUpdateCustomPostSchemaFieldArgNameTypeResolvers(
         bool $addCustomPostID,

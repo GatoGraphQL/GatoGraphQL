@@ -6,13 +6,44 @@ namespace PoPSchema\PostTags\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
-use PoPSchema\PostTags\ComponentContracts\PostTagAPISatisfiedContractTrait;
 use PoPSchema\PostTags\ModuleProcessors\PostTagFilterInputContainerModuleProcessor;
+use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
+use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPSchema\Tags\FieldResolvers\ObjectType\AbstractCustomPostQueryableObjectTypeFieldResolver;
+use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
+use PoPSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
 
 class PostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableObjectTypeFieldResolver
 {
-    use PostTagAPISatisfiedContractTrait;
+    private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
+    private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
+
+    final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
+    {
+        $this->postTagTypeAPI = $postTagTypeAPI;
+    }
+    final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
+    {
+        return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
+    }
+    final public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
+    {
+        $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
+    }
+    final protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
+    {
+        return $this->postTagObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+    }
+
+    public function getTagTypeAPI(): TagTypeAPIInterface
+    {
+        return $this->getPostTagTypeAPI();
+    }
+
+    public function getTagTypeResolver(): TagObjectTypeResolverInterface
+    {
+        return $this->getPostTagObjectTypeResolver();
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

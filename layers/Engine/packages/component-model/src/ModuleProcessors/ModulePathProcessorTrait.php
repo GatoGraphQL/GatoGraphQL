@@ -13,25 +13,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait ModulePathProcessorTrait
 {
-    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
-    private ?ModuleFilterManagerInterface $moduleFilterManager = null;
-
-    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
-    {
-        $this->moduleProcessorManager = $moduleProcessorManager;
-    }
-    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
-    {
-        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
-    }
-    public function setModuleFilterManager(ModuleFilterManagerInterface $moduleFilterManager): void
-    {
-        $this->moduleFilterManager = $moduleFilterManager;
-    }
-    protected function getModuleFilterManager(): ModuleFilterManagerInterface
-    {
-        return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ModuleFilterManagerInterface::class);
-    }
+    abstract protected function getModuleProcessorManager(): ModuleProcessorManagerInterface;
+    abstract protected function getModuleFilterManager(): ModuleFilterManagerInterface;
 
     protected function getModuleProcessor(array $module)
     {

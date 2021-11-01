@@ -7,6 +7,7 @@ namespace PoPSchema\CommentMutations\FieldResolvers\ObjectType;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CommentMutations\ComponentConfiguration;
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
@@ -15,43 +16,12 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait AddCommentToCustomPostObjectTypeFieldResolverTrait
 {
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
-    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
+    abstract protected function getStringScalarTypeResolver(): StringScalarTypeResolver;
+    abstract protected function getIDScalarTypeResolver(): IDScalarTypeResolver;
+    abstract protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver;
+    abstract protected function getURLScalarTypeResolver(): URLScalarTypeResolver;
 
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
-    {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-    }
-    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
-    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
-    {
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
-    }
-    public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
-    {
-        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
-    }
-    protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
-    {
-        return $this->emailScalarTypeResolver ??= $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
-    }
-    public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
-    {
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-    }
-    protected function getURLScalarTypeResolver(): URLScalarTypeResolver
-    {
-        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
-    }
+    abstract protected function getTranslationAPI(): TranslationAPIInterface;
 
     private function getAddCommentToCustomPostSchemaFieldArgNameTypeResolvers(
         bool $addCustomPostID,

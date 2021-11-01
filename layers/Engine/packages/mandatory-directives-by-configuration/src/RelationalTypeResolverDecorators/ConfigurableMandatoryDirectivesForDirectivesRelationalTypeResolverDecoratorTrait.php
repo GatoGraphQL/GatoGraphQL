@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace PoP\MandatoryDirectivesByConfiguration\RelationalTypeResolverDecorators;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForDirectivesTrait;
-use Symfony\Contracts\Service\Attribute\Required;
+use PoP\Root\Instances\InstanceManagerInterface;
 
 trait ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait
 {
     use ConfigurableMandatoryDirectivesForDirectivesTrait;
-    use BasicServiceTrait;
+
+    abstract protected function getInstanceManager(): InstanceManagerInterface;
 
     abstract protected function getMandatoryDirectives(mixed $entryValue = null): array;
 
@@ -29,13 +29,13 @@ trait ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecorato
              * So check that the instance exists, and if it doesn't, then
              * skip processing the entry
              */
-            if (!$this->instanceManager->hasInstance($directiveResolverClass)) {
+            if (!$this->getInstanceManager()->hasInstance($directiveResolverClass)) {
                 continue;
             }
             /**
              * Just to be on the safe side, also validate the instance is a directive
              */
-            $directiveResolver = $this->instanceManager->getInstance($directiveResolverClass);
+            $directiveResolver = $this->getInstanceManager()->getInstance($directiveResolverClass);
             if (!($directiveResolver instanceof DirectiveResolverInterface)) {
                 continue;
             }

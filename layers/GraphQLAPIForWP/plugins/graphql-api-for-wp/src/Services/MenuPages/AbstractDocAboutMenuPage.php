@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentRetrieverTrait;
 
 /**
  * Open documentation within the About page
  */
 abstract class AbstractDocAboutMenuPage extends AbstractDocsMenuPage
 {
-    use MarkdownContentRetrieverTrait;
-
     protected function openInModalWindow(): bool
     {
         return true;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
+use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\Plugin;
 
 class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
@@ -14,6 +15,17 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public const EXCERPT_AS_DESCRIPTION = Plugin::NAMESPACE . '\excerpt-as-description';
     public const LOW_LEVEL_PERSISTED_QUERY_EDITING = Plugin::NAMESPACE . '\low-level-persisted-query-editing';
     public const WELCOME_GUIDES = Plugin::NAMESPACE . '\welcome-guides';
+
+    private ?MarkdownContentParserInterface $markdownContentParser = null;
+
+    final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
+    {
+        $this->markdownContentParser = $markdownContentParser;
+    }
+    final protected function getMarkdownContentParser(): MarkdownContentParserInterface
+    {
+        return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+    }
 
     /**
      * @return string[]

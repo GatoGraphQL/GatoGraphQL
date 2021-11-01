@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace PoPSchema\Tags\ModuleProcessors\FormInputs;
 
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
-use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
+use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
@@ -15,10 +14,8 @@ use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Tags\FilterInputProcessors\FilterInputProcessor;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
+class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
-    use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-
     public const MODULE_FILTERINPUT_TAG_SLUGS = 'filterinput-tag-slugs';
     public const MODULE_FILTERINPUT_TAG_IDS = 'filterinput-tag-ids';
 

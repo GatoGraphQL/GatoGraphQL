@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentRetrieverTrait;
 
 /**
@@ -15,6 +16,17 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
     use UseTabpanelMenuPageTrait;
     use PrettyprintCodePageTrait;
     use MarkdownContentRetrieverTrait;
+
+    private ?MarkdownContentParserInterface $markdownContentParser = null;
+
+    final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
+    {
+        $this->markdownContentParser = $markdownContentParser;
+    }
+    final protected function getMarkdownContentParser(): MarkdownContentParserInterface
+    {
+        return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+    }
 
     public function print(): void
     {

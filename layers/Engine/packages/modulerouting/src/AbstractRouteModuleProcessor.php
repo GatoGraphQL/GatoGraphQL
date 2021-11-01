@@ -4,15 +4,23 @@ declare(strict_types=1);
 
 namespace PoP\ModuleRouting;
 
-use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Root\Services\WithInstanceManagerServiceTrait;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRouteModuleProcessor
 {
-    use WithHooksAPIServiceTrait;
     use WithInstanceManagerServiceTrait;
+
+    private ?HooksAPIInterface $hooksAPI = null;
+
+    final public function setHooksAPI(HooksAPIInterface $hooksAPI): void
+    {
+        $this->hooksAPI = $hooksAPI;
+    }
+    final protected function getHooksAPI(): HooksAPIInterface
+    {
+        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
+    }
 
     /**
      * @return string[]

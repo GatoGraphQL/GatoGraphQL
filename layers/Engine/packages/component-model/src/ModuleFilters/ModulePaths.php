@@ -11,8 +11,6 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ModulePaths extends AbstractModuleFilter
 {
-    use BasicServiceTrait;
-
     public const URLPARAM_MODULEPATHS = 'modulepaths';
 
     /**

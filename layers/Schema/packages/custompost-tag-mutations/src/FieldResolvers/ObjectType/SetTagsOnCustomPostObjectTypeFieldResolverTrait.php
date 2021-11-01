@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostTagMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Translation\TranslationAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait SetTagsOnCustomPostObjectTypeFieldResolverTrait
 {
-    // use BasicServiceTrait;
+    abstract protected function getTranslationAPI(): TranslationAPIInterface;
 
     protected function getEntityName(): string
     {

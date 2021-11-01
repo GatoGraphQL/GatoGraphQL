@@ -17,16 +17,7 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 trait HasDocumentationScriptTrait
 {
-    private ?LocaleHelper $localeHelper = null;
-
-    public function setLocaleHelper(LocaleHelper $localeHelper): void
-    {
-        $this->localeHelper = $localeHelper;
-    }
-    protected function getLocaleHelper(): LocaleHelper
-    {
-        return $this->localeHelper ??= $this->instanceManager->getInstance(LocaleHelper::class);
-    }
+    abstract protected function getLocaleHelper(): LocaleHelper;
 
     /**
      * Docs are bundled as chunks by webpack, and loaded lazily

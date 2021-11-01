@@ -5,21 +5,16 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\ModuleProcessors\FormInputs;
 
 use PoP\ComponentModel\HelperServices\FormInputHelperServiceInterface;
-use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
+use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class FilterMultipleInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
+class FilterMultipleInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
-    use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
     use FormMultipleInputModuleProcessorTrait;
 
     public const MODULE_FILTERINPUT_CUSTOMPOSTDATES = 'filterinput-custompostdates';

@@ -4,25 +4,27 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
-trait SchemaFilterInputModuleProcessorTrait
+abstract class AbstractFilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements FilterInputModuleProcessorInterface
 {
+    use FieldOrDirectiveSchemaDefinitionResolverTrait;
+
     private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
 
-    public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
+    final public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
     {
         $this->schemaDefinitionService = $schemaDefinitionService;
     }
-    protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
+    final protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
         return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
 
-    protected function getFilterInputSchemaDefinitionResolver(array $module): DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
+    protected function getFilterInputSchemaDefinitionResolver(array $module): FilterInputModuleProcessorInterface
     {
         return $this;
     }

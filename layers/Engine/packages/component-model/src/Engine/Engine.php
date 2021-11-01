@@ -43,11 +43,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Configuration\Request;
-use PoP\Hooks\Services\WithHooksAPIServiceTrait;
-use PoP\Hooks\HooksAPIInterface;
 use PoP\Root\Helpers\Methods;
-use PoP\Translation\TranslationAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class Engine implements EngineInterface
 {

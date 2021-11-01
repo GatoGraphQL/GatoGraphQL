@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\HookNames;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -28,6 +30,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     use AttachableExtensionTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
     use FieldOrDirectiveSchemaDefinitionResolverTrait;
+    use CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 
     /** @var array<string, array> */
     protected array $schemaDefinitionForFieldCache = [];
@@ -59,6 +62,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     private ?TypeRegistryInterface $typeRegistry = null;
     private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
     final public function setNameResolver(NameResolverInterface $nameResolver): void
     {
@@ -107,6 +111,14 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     final protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
     {
         return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+    final public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
+    {
+        $this->attachableExtensionManager = $attachableExtensionManager;
+    }
+    final protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
+    {
+        return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
     }
 
     /**

@@ -9,25 +9,14 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderInterface;
-use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait QueryDataModuleProcessorTrait
 {
     use FilterDataModuleProcessorTrait;
-    use WithHooksAPIServiceTrait;
 
-    private ?ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler = null;
-
-    public function setActionExecutionQueryInputOutputHandler(ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler): void
-    {
-        $this->actionExecutionQueryInputOutputHandler = $actionExecutionQueryInputOutputHandler;
-    }
-    protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler
-    {
-        return $this->actionExecutionQueryInputOutputHandler ??= $this->instanceManager->getInstance(ActionExecutionQueryInputOutputHandler::class);
-    }
+    abstract protected function getHooksAPI(): HooksAPIInterface;
+    abstract protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler;
 
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {

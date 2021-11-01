@@ -5,11 +5,43 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
+use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
+use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHookSet;
+use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use WP_Post;
 
 abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractEndpointExecuter
 {
     use EndpointResolverTrait;
+
+    private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
+    private ?QueryRetrieverInterface $queryRetriever = null;
+    private ?GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet = null;
+
+    final public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
+    {
+        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
+    }
+    final protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
+    {
+        return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+    }
+    final public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
+    {
+        $this->queryRetriever = $queryRetriever;
+    }
+    final protected function getQueryRetriever(): QueryRetrieverInterface
+    {
+        return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
+    }
+    final public function setGraphQLRequestVarsHookSet(GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet): void
+    {
+        $this->graphQLRequestVarsHookSet = $graphQLRequestVarsHookSet;
+    }
+    final protected function getGraphQLRequestVarsHookSet(): GraphQLRequestVarsHookSet
+    {
+        return $this->graphQLRequestVarsHookSet ??= $this->instanceManager->getInstance(GraphQLRequestVarsHookSet::class);
+    }
 
     protected function getView(): string
     {

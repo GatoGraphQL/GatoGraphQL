@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Translation\TranslationAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait RolesObjectTypeFieldResolverTrait
 {
-    // use BasicServiceTrait;
+    abstract protected function getTranslationAPI(): TranslationAPIInterface;
+    abstract protected function getStringScalarTypeResolver(): StringScalarTypeResolver;
 
     public function getFieldNamesToResolve(): array
     {
@@ -33,10 +32,9 @@ trait RolesObjectTypeFieldResolverTrait
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
         return match ($fieldName) {
-            'roles' => $stringScalarTypeResolver,
-            'capabilities' => $stringScalarTypeResolver,
+            'roles' => $this->getStringScalarTypeResolver(),
+            'capabilities' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

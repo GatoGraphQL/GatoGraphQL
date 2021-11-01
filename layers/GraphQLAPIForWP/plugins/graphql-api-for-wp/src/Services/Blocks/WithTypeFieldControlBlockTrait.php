@@ -11,16 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait WithTypeFieldControlBlockTrait
 {
-    private ?TypeRegistryInterface $typeRegistry = null;
-
-    public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
-    {
-        $this->typeRegistry = $typeRegistry;
-    }
-    protected function getTypeRegistry(): TypeRegistryInterface
-    {
-        return $this->typeRegistry ??= $this->instanceManager->getInstance(TypeRegistryInterface::class);
-    }
+    abstract protected function getTypeRegistry(): TypeRegistryInterface;
 
     /**
      * Convert the typeFields from the format saved in the post: "typeNamespacedName.fieldName",

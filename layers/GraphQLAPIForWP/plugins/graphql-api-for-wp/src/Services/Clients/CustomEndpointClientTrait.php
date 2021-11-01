@@ -11,27 +11,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait CustomEndpointClientTrait
 {
-    // use BasicServiceTrait;
-
-    private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
-    private ?RequestHelperServiceInterface $requestHelperService = null;
-
-    public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
-    {
-        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
-    }
-    protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
-    {
-        return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
-    }
-    public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
-    {
-        $this->requestHelperService = $requestHelperService;
-    }
-    protected function getRequestHelperService(): RequestHelperServiceInterface
-    {
-        return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
-    }
+    abstract protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType;
+    abstract protected function getRequestHelperService(): RequestHelperServiceInterface;
 
     /**
      * Enable only when executing a single CPT

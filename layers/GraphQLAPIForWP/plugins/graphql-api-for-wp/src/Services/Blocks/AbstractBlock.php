@@ -11,6 +11,7 @@ use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\EditorScripts\HasDocumentationScriptTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -33,6 +34,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     private ?UserAuthorizationInterface $userAuthorization = null;
     private ?GeneralUtils $generalUtils = null;
     private ?EditorHelpers $editorHelpers = null;
+    private ?LocaleHelper $localeHelper = null;
 
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -65,6 +67,14 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     final protected function getEditorHelpers(): EditorHelpers
     {
         return $this->editorHelpers ??= $this->instanceManager->getInstance(EditorHelpers::class);
+    }
+    final public function setLocaleHelper(LocaleHelper $localeHelper): void
+    {
+        $this->localeHelper = $localeHelper;
+    }
+    final protected function getLocaleHelper(): LocaleHelper
+    {
+        return $this->localeHelper ??= $this->instanceManager->getInstance(LocaleHelper::class);
     }
 
     /**

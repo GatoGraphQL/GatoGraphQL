@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use Exception;
+use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
@@ -12,6 +13,7 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
+use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
@@ -26,6 +28,7 @@ use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\Root\Environment as RootEnvironment;
@@ -38,6 +41,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     use FieldOrDirectiveResolverTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
     use BasicServiceTrait;
+    use CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 
     const MESSAGE_EXPRESSIONS = 'expressions';
 
@@ -58,6 +62,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?SemverHelperServiceInterface $semverHelperService = null;
+    private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
+    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
 
     /**
      * @var array<string, mixed>
@@ -122,6 +128,22 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     final protected function getSemverHelperService(): SemverHelperServiceInterface
     {
         return $this->semverHelperService ??= $this->instanceManager->getInstance(SemverHelperServiceInterface::class);
+    }
+    final public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
+    {
+        $this->attachableExtensionManager = $attachableExtensionManager;
+    }
+    final protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
+    {
+        return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
+    }
+    final public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    {
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+    }
+    final protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    {
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
     }
 
     final public function getClassesToAttachTo(): array

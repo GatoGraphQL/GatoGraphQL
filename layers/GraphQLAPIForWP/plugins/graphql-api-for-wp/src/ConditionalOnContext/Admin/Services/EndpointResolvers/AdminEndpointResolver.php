@@ -9,9 +9,9 @@ use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\AbstractEndpointResolver;
 use GraphQLAPI\GraphQLAPI\Services\EndpointResolvers\EndpointResolverTrait;
 use GraphQLByPoP\GraphQLRequest\ComponentConfiguration as GraphQLRequestComponentConfiguration;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use GraphQLByPoP\GraphQLRequest\Hooks\VarsHookSet as GraphQLRequestVarsHookSet;
 use PoP\EngineWP\Templates\TemplateHelpers;
-use Symfony\Contracts\Service\Attribute\Required;
+use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use WP_Post;
 
 class AdminEndpointResolver extends AbstractEndpointResolver
@@ -22,6 +22,8 @@ class AdminEndpointResolver extends AbstractEndpointResolver
 
     private ?UserAuthorizationInterface $userAuthorization = null;
     private ?QueryRetrieverInterface $queryRetriever = null;
+    private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
+    private ?GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet = null;
 
     final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
@@ -38,6 +40,22 @@ class AdminEndpointResolver extends AbstractEndpointResolver
     final protected function getQueryRetriever(): QueryRetrieverInterface
     {
         return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
+    }
+    final public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
+    {
+        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
+    }
+    final protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
+    {
+        return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+    }
+    final public function setGraphQLRequestVarsHookSet(GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet): void
+    {
+        $this->graphQLRequestVarsHookSet = $graphQLRequestVarsHookSet;
+    }
+    final protected function getGraphQLRequestVarsHookSet(): GraphQLRequestVarsHookSet
+    {
+        return $this->graphQLRequestVarsHookSet ??= $this->instanceManager->getInstance(GraphQLRequestVarsHookSet::class);
     }
 
     /**

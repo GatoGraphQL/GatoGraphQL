@@ -10,16 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait QueryableFieldResolverTrait
 {
-    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
-
-    public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
-    {
-        $this->moduleProcessorManager = $moduleProcessorManager;
-    }
-    protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
-    {
-        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
-    }
+    abstract protected function getModuleProcessorManager(): ModuleProcessorManagerInterface;
 
     protected function getFilterFieldArgNameTypeResolvers(array $filterDataloadingModule): array
     {

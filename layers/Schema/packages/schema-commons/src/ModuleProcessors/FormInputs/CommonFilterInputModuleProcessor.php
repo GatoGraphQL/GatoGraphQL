@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\ModuleProcessors\FormInputs;
 
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
-use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
+use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Tokens\Param;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -22,10 +20,8 @@ use PoPSchema\SchemaCommons\FormInputs\MultiValueFromStringFormInput;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class CommonFilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
+class CommonFilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
-    use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-
     public const MODULE_FILTERINPUT_ORDER = 'filterinput-order';
     public const MODULE_FILTERINPUT_LIMIT = 'filterinput-limit';
     public const MODULE_FILTERINPUT_OFFSET = 'filterinput-offset';

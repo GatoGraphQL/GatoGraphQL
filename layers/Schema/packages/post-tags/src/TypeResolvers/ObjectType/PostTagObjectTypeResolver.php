@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace PoPSchema\PostTags\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
-use PoPSchema\PostTags\ComponentContracts\PostTagAPISatisfiedContractTrait;
 use PoPSchema\PostTags\RelationalTypeDataLoaders\ObjectType\PostTagTypeDataLoader;
+use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
+use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagObjectTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
 {
-    use PostTagAPISatisfiedContractTrait;
-
     private ?PostTagTypeDataLoader $postTagTypeDataLoader = null;
+    private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
     final public function setPostTagTypeDataLoader(PostTagTypeDataLoader $postTagTypeDataLoader): void
     {
@@ -23,6 +23,19 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
     final protected function getPostTagTypeDataLoader(): PostTagTypeDataLoader
     {
         return $this->postTagTypeDataLoader ??= $this->instanceManager->getInstance(PostTagTypeDataLoader::class);
+    }
+    final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
+    {
+        $this->postTagTypeAPI = $postTagTypeAPI;
+    }
+    final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
+    {
+        return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
+    }
+
+    public function getTagTypeAPI(): TagTypeAPIInterface
+    {
+        return $this->getPostTagTypeAPI();
     }
 
     public function getTypeName(): string

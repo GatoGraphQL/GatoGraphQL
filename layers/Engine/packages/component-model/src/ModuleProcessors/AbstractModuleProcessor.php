@@ -34,6 +34,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public const HOOK_INIT_MODEL_PROPS = __CLASS__ . ':initModelProps';
     public const HOOK_INIT_REQUEST_PROPS = __CLASS__ . ':initRequestProps';
     public const HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES = __CLASS__ . ':addHeaddatasetmoduleDataProperties';
+
     protected const MODULECOMPONENT_SUBMODULES = 'submodules';
     protected const MODULECOMPONENT_DOMAINSWITCHINGSUBMODULES = 'domain-switching-submodules';
     protected const MODULECOMPONENT_CONDITIONALONDATAFIELDSUBMODULES = 'conditional-on-data-field-submodules';

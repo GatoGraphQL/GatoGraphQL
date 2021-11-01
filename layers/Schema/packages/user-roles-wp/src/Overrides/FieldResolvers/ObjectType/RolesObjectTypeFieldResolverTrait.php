@@ -11,16 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait RolesObjectTypeFieldResolverTrait
 {
-    private ?UserRoleObjectTypeResolver $userRoleObjectTypeResolver = null;
-
-    public function setUserRoleObjectTypeResolver(UserRoleObjectTypeResolver $userRoleObjectTypeResolver): void
-    {
-        $this->userRoleObjectTypeResolver = $userRoleObjectTypeResolver;
-    }
-    protected function getUserRoleObjectTypeResolver(): UserRoleObjectTypeResolver
-    {
-        return $this->userRoleObjectTypeResolver ??= $this->instanceManager->getInstance(UserRoleObjectTypeResolver::class);
-    }
+    abstract protected function getUserRoleObjectTypeResolver(): UserRoleObjectTypeResolver;
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {

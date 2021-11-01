@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserRoles\TypeAPIs;
 
-use PoP\Hooks\Services\WithHooksAPIServiceTrait;
-use PoP\Hooks\HooksAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 
 abstract class AbstractUserRoleTypeAPI implements UserRoleTypeAPIInterface
 {
-    use WithHooksAPIServiceTrait;
+    use BasicServiceTrait;
 
     public function getTheUserRole(string | int | object $userObjectOrID): ?string
     {
