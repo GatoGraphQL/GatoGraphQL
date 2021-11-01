@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostTagMutations\SchemaHooks;
 
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\CustomPostTagMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
 use PoPSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
@@ -20,6 +22,8 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?PostTypeAPIInterface $postTypeAPI = null;
     private ?PostTagTypeMutationAPIInterface $postTagTypeMutationAPI = null;
+    private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
+    private ?MutationRootObjectTypeResolver $mutationRootObjectTypeResolver = null;
 
     final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {
@@ -44,6 +48,22 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
     final protected function getPostTagTypeMutationAPI(): PostTagTypeMutationAPIInterface
     {
         return $this->postTagTypeMutationAPI ??= $this->instanceManager->getInstance(PostTagTypeMutationAPIInterface::class);
+    }
+    final public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
+    {
+        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+    }
+    final protected function getRootObjectTypeResolver(): RootObjectTypeResolver
+    {
+        return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
+    }
+    final public function setMutationRootObjectTypeResolver(MutationRootObjectTypeResolver $mutationRootObjectTypeResolver): void
+    {
+        $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
+    }
+    final protected function getMutationRootObjectTypeResolver(): MutationRootObjectTypeResolver
+    {
+        return $this->mutationRootObjectTypeResolver ??= $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
     }
 
     protected function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
