@@ -13,6 +13,7 @@ use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
+use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
@@ -39,6 +40,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     use FieldOrDirectiveResolverTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
     use BasicServiceTrait;
+    use CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 
     const MESSAGE_EXPRESSIONS = 'expressions';
 

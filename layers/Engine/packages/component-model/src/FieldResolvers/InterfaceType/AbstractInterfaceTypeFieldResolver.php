@@ -10,6 +10,7 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\HookNames;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -29,6 +30,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     use AttachableExtensionTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
     use FieldOrDirectiveSchemaDefinitionResolverTrait;
+    use CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 
     /** @var array<string, array> */
     protected array $schemaDefinitionForFieldCache = [];

@@ -18,6 +18,7 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefi
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
@@ -42,14 +43,13 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 {
     use AttachableExtensionTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
+    use CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
     // Avoid trait collisions for PHP 7.1
     use FieldOrDirectiveResolverTrait, FieldOrDirectiveSchemaDefinitionResolverTrait {
         FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldOrDirectiveArgTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::getTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::processSchemaDefinitionTypeModifiers insteadof FieldOrDirectiveResolverTrait;
         FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
-        FieldOrDirectiveSchemaDefinitionResolverTrait::isDangerouslyDynamicScalarFieldType insteadof FieldOrDirectiveResolverTrait;
-        FieldOrDirectiveSchemaDefinitionResolverTrait::hasMandatoryDangerouslyDynamicScalarInputType insteadof FieldOrDirectiveResolverTrait;
     }
 
     /**
