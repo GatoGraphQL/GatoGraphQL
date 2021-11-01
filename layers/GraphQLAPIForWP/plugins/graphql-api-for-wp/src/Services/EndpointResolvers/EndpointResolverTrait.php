@@ -16,34 +16,9 @@ use WP_Query;
 
 trait EndpointResolverTrait
 {
-    private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
-    private ?QueryRetrieverInterface $queryRetriever = null;
-    private ?GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet = null;
-
-    public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
-    {
-        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
-    }
-    protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
-    {
-        return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
-    }
-    public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
-    {
-        $this->queryRetriever = $queryRetriever;
-    }
-    protected function getQueryRetriever(): QueryRetrieverInterface
-    {
-        return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
-    }
-    public function setGraphQLRequestVarsHookSet(GraphQLRequestVarsHookSet $graphQLRequestVarsHookSet): void
-    {
-        $this->graphQLRequestVarsHookSet = $graphQLRequestVarsHookSet;
-    }
-    protected function getGraphQLRequestVarsHookSet(): GraphQLRequestVarsHookSet
-    {
-        return $this->graphQLRequestVarsHookSet ??= $this->instanceManager->getInstance(GraphQLRequestVarsHookSet::class);
-    }
+    abstract protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter;
+    abstract protected function getQueryRetriever(): QueryRetrieverInterface;
+    abstract protected function getGraphQLRequestVarsHookSet(): GraphQLRequestVarsHookSet;
 
     /**
      * Execute the GraphQL query
