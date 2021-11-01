@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategories\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
+use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPSchema\Categories\TypeResolvers\ObjectType\AbstractCategoryObjectTypeResolver;
-use PoPSchema\PostCategories\ComponentContracts\PostCategoryAPISatisfiedContractTrait;
+use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPSchema\PostCategories\RelationalTypeDataLoaders\ObjectType\PostCategoryTypeDataLoader;
+use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
 {
-    use PostCategoryAPISatisfiedContractTrait;
-
     private ?PostCategoryTypeDataLoader $postCategoryTypeDataLoader = null;
+    private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
     final public function setPostCategoryTypeDataLoader(PostCategoryTypeDataLoader $postCategoryTypeDataLoader): void
     {
@@ -23,6 +24,14 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
     final protected function getPostCategoryTypeDataLoader(): PostCategoryTypeDataLoader
     {
         return $this->postCategoryTypeDataLoader ??= $this->instanceManager->getInstance(PostCategoryTypeDataLoader::class);
+    }
+    final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
+    {
+        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
+    }
+    final protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
+    {
+        return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
     }
 
     public function getTypeName(): string
@@ -38,5 +47,10 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->getPostCategoryTypeDataLoader();
+    }
+
+    public function getCategoryTypeAPI(): CategoryTypeAPIInterface
+    {
+        return $this->getPostCategoryTypeAPI();
     }
 }
