@@ -13,18 +13,7 @@ trait FilterInputModuleProcessorTrait
 {
     use FieldOrDirectiveSchemaDefinitionResolverTrait;
 
-    private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
-
-    final public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
-    {
-        $this->schemaDefinitionService = $schemaDefinitionService;
-    }
-    final protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
-    {
-        return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
-    }
-
-    // abstract protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface;
+    abstract protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface;
 
     protected function getFilterInputSchemaDefinitionResolver(array $module): FilterInputModuleProcessorInterface
     {
