@@ -32,7 +32,7 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         ];
     }
 
-    public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): bool
+    public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool
     {
         return ($fieldArgs['branch'] ?? null) == 'try-new-features' && ($fieldArgs['project'] ?? null) == 'block-metadata';
     }
@@ -78,7 +78,7 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
+        array $fieldArgs,
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []

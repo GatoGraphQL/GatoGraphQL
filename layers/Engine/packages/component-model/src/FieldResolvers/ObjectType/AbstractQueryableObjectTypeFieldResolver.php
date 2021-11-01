@@ -104,7 +104,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
      * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
      */
-    protected function convertFieldArgsToFilteringQueryArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
+    protected function convertFieldArgsToFilteringQueryArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
     {
         $filteringQueryArgs = [];
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerModule($objectTypeResolver, $fieldName)) {

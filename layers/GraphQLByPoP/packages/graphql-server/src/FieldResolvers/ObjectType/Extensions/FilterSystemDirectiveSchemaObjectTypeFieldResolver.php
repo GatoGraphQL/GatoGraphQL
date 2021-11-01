@@ -62,7 +62,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     //  * Only use this fieldResolver when parameter `ofTypes` is provided.
     //  * Otherwise, use the default implementation
     //  */
-    // public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): bool
+    // public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool
     // {
     //     return $fieldName == 'directives' && isset($fieldArgs['ofTypes']);
     // }
@@ -111,7 +111,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
+        array $fieldArgs,
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []

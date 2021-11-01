@@ -151,7 +151,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
+        array $fieldArgs,
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []

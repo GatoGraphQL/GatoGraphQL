@@ -55,7 +55,7 @@ interface FieldQueryInterpreterInterface
     /**
      * @param array<string, mixed> $directiveArgs
      */
-    public function getFieldDirective(string $directiveName, array $directiveArgs = []): string;
+    public function getFieldDirective(string $directiveName, array $directiveArgs): string;
     /**
      * @param array<string|null> $directive
      */
@@ -80,7 +80,7 @@ interface FieldQueryInterpreterInterface
      */
     public function getField(
         string $fieldName,
-        array $fieldArgs = [],
+        array $fieldArgs,
         ?string $fieldAlias = null,
         bool $skipOutputIfNull = false,
         ?array $fieldDirectives = [],
@@ -107,7 +107,7 @@ interface FieldQueryInterpreterInterface
      */
     public function getDirective(
         string $directiveName,
-        array $directiveArgs = [],
+        array $directiveArgs,
         ?string $directiveNestedDirectives = ''
     ): array;
     public function composeFieldDirective(
@@ -132,12 +132,12 @@ interface FieldQueryInterpreterInterface
      * @param array<string, mixed> $fieldArgs
      */
     public function getFieldArgsAsString(
-        array $fieldArgs = [],
+        array $fieldArgs,
         bool $addFieldArgSymbolsIfEmpty = false
     ): string;
     /**
      * @param array<string, mixed> $directiveArgs
      */
-    public function getDirectiveArgsAsString(array $directiveArgs = []): string;
+    public function getDirectiveArgsAsString(array $directiveArgs): string;
     public function wrapStringInQuotes(string $value): string;
 }

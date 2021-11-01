@@ -68,7 +68,7 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
      */
-    public function resolveValue(ObjectTypeResolverInterface $objectTypeResolver, object $object, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = []): mixed
+    public function resolveValue(ObjectTypeResolverInterface $objectTypeResolver, object $object, string $fieldName, array $fieldArgs, ?array $variables = null, ?array $expressions = null, array $options = []): mixed
     {
         return match ($fieldName) {
             'id',

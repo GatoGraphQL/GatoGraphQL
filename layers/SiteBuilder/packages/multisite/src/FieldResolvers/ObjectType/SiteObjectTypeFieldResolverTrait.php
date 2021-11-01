@@ -17,7 +17,7 @@ trait SiteObjectTypeFieldResolverTrait
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): bool {
         $cmsengineapi = FunctionAPIFactory::getInstance();
         /** @var Site */

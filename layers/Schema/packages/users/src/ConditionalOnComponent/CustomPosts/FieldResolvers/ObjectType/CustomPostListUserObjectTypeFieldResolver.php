@@ -36,7 +36,7 @@ class CustomPostListUserObjectTypeFieldResolver extends AbstractCustomPostListOb
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): array {
         $query = parent::getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs);
 

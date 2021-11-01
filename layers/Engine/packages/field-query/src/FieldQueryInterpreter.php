@@ -233,7 +233,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
      *
      * @param array<string, mixed> $fieldArgs
      */
-    protected function replaceFieldArgs(string $field, array $fieldArgs = []): string
+    protected function replaceFieldArgs(string $field, array $fieldArgs): string
     {
         // Return a new field, replacing its fieldArgs (if any) with the provided ones
         // Used when validating a field and removing the fieldArgs that threw a warning
@@ -614,7 +614,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     /**
      * @param array<string, mixed> $directiveArgs
      */
-    public function getFieldDirective(string $directiveName, array $directiveArgs = []): string
+    public function getFieldDirective(string $directiveName, array $directiveArgs): string
     {
         return $this->getField($directiveName, $directiveArgs);
     }
@@ -694,7 +694,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
      */
     public function getField(
         string $fieldName,
-        array $fieldArgs = [],
+        array $fieldArgs,
         ?string $fieldAlias = null,
         bool $skipOutputIfNull = false,
         ?array $fieldDirectives = [],
@@ -739,7 +739,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
      */
     public function getDirective(
         string $directiveName,
-        array $directiveArgs = [],
+        array $directiveArgs,
         ?string $directiveNestedDirectives = ''
     ): array {
         return $this->composeDirective(
@@ -761,7 +761,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
      * @param array<string, mixed> $fieldArgs
      */
     public function getFieldArgsAsString(
-        array $fieldArgs = [],
+        array $fieldArgs,
         bool $addFieldArgSymbolsIfEmpty = false
     ): string {
         if (!$fieldArgs) {
@@ -800,7 +800,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     /**
      * @param array<string, mixed> $directiveArgs
      */
-    public function getDirectiveArgsAsString(array $directiveArgs = []): string
+    public function getDirectiveArgsAsString(array $directiveArgs): string
     {
         return $this->getFieldArgsAsString($directiveArgs);
     }

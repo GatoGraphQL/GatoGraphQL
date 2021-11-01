@@ -183,7 +183,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): array {
         return [];
     }
@@ -198,7 +198,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
+        array $fieldArgs,
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []

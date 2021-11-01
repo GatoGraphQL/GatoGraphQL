@@ -63,7 +63,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
-    public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): bool
+    public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool
     {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->resolveCanProcess(
@@ -77,7 +77,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
-    public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
+    public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
     {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->resolveFieldValidationErrorDescriptions(
@@ -91,7 +91,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
-    public function resolveFieldValidationDeprecationMessages(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
+    public function resolveFieldValidationDeprecationMessages(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
     {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->resolveFieldValidationDeprecationMessages(
@@ -105,7 +105,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
-    public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
+    public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
     {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->resolveFieldValidationWarningDescriptions(
@@ -126,7 +126,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): bool {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->resolveCanProcessObject(
@@ -147,7 +147,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): array {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->getValidationErrorDescriptions(
@@ -318,7 +318,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         ObjectTypeResolverInterface $objectTypeResolver,
         $object,
         string $fieldName,
-        array $fieldArgs = [],
+        array $fieldArgs,
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []

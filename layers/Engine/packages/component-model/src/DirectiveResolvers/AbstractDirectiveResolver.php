@@ -460,7 +460,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     public function resolveDirectiveValidationErrorDescriptions(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
-        array $directiveArgs = []
+        array $directiveArgs
     ): array {
         /**
          * Validate all mandatory args have been provided
@@ -537,7 +537,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     final protected function resolveDirectiveArgumentErrors(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
-        array $directiveArgs = []
+        array $directiveArgs
     ): array {
         $errors = [];
         foreach ($directiveArgs as $directiveArgName => $directiveArgValue) {
@@ -576,7 +576,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected function doResolveSchemaValidationErrorDescriptions(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
-        array $directiveArgs = []
+        array $directiveArgs
     ): array {
         return [];
     }
@@ -847,7 +847,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * @return string[]
      */
-    public function resolveDirectiveValidationDeprecationMessages(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs = []): array
+    public function resolveDirectiveValidationDeprecationMessages(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs): array
     {
         $directiveDeprecationMessages = [];
 

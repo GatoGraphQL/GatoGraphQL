@@ -251,7 +251,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     protected function doResolveSchemaValidationErrorDescriptions(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): array {
         // Important: The validations below can only be done if no fieldArg contains a field!
         // That is because this is a schema error, so we still don't have the $object against which to resolve the field
@@ -298,7 +298,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
+        array $fieldArgs,
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []

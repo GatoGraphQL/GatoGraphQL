@@ -31,7 +31,7 @@ abstract class AbstractCustomPostListTagObjectTypeFieldResolver extends Abstract
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): array {
         $query = parent::getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs);
 

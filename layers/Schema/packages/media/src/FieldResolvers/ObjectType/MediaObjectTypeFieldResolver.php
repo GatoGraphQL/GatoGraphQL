@@ -194,7 +194,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
+        array $fieldArgs,
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
@@ -248,7 +248,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
      *
      * @param array<string, mixed> $fieldArgs
      */
-    protected function obtainImageSizeFromParameters(array $fieldArgs = []): ?string
+    protected function obtainImageSizeFromParameters(array $fieldArgs): ?string
     {
         return $fieldArgs['size'] ?? null;
     }

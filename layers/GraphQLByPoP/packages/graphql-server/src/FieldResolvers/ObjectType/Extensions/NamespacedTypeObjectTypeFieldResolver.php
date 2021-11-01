@@ -61,7 +61,7 @@ class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
      *
      * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): bool
+    public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool
     {
         return $fieldName == 'name' && isset($fieldArgs['namespaced']);
     }
@@ -126,7 +126,7 @@ class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
+        array $fieldArgs,
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []

@@ -141,7 +141,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     public function resolveDirectiveValidationErrorDescriptions(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
-        array $directiveArgs = []
+        array $directiveArgs
     ): array;
     public function resolveDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
     public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
