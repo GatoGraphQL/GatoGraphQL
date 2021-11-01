@@ -614,7 +614,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     /**
      * @param array<string, mixed> $directiveArgs
      */
-    public function getFieldDirective(string $directiveName, array $directiveArgs = []): string
+    public function getFieldDirective(string $directiveName, array $directiveArgs): string
     {
         return $this->getField($directiveName, $directiveArgs);
     }
@@ -739,7 +739,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
      */
     public function getDirective(
         string $directiveName,
-        array $directiveArgs = [],
+        array $directiveArgs,
         ?string $directiveNestedDirectives = ''
     ): array {
         return $this->composeDirective(
@@ -800,7 +800,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     /**
      * @param array<string, mixed> $directiveArgs
      */
-    public function getDirectiveArgsAsString(array $directiveArgs = []): string
+    public function getDirectiveArgsAsString(array $directiveArgs): string
     {
         return $this->getFieldArgsAsString($directiveArgs);
     }
