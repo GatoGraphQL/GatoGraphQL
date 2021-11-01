@@ -11,16 +11,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait SchemaFilterInputModuleProcessorTrait
 {
-    private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
-
-    public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
-    {
-        $this->schemaDefinitionService = $schemaDefinitionService;
-    }
-    protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
-    {
-        return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
-    }
+    abstract protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface;
 
     protected function getFilterInputSchemaDefinitionResolver(array $module): DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
     {
