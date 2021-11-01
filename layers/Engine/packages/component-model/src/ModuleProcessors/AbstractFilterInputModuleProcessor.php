@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 abstract class AbstractFilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements FilterInputModuleProcessorInterface
 {
-    use FieldOrDirectiveSchemaDefinitionResolverTrait;
-
     private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
 
     final public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
