@@ -5,16 +5,11 @@ declare(strict_types=1);
 namespace PoPSchema\UserState\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait UserStateObjectTypeFieldResolverTrait
 {
-    // use BasicServiceTrait;
-
     protected function getValidationCheckpointSets(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,

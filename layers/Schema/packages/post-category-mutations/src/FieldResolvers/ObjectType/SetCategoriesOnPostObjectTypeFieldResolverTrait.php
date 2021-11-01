@@ -16,8 +16,6 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait SetCategoriesOnPostObjectTypeFieldResolverTrait
 {
-    // use BasicServiceTrait;
-
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver = null;
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;

@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ItemProcessors;
 
-use PoP\ComponentModel\Services\BasicServiceTrait;
-use Symfony\Contracts\Service\Attribute\Required;
+use PoP\Root\Instances\InstanceManagerInterface;
 
 trait ItemProcessorManagerTrait
 {
-    use BasicServiceTrait;
+    abstract protected function getInstanceManager(): InstanceManagerInterface;
 
     /**
      * @var array<string, array>
@@ -52,7 +51,7 @@ trait ItemProcessorManagerTrait
             }
 
             // Get the instance from the InstanceManager
-            $processorInstance = $this->instanceManager->getInstance($itemProcessorClass);
+            $processorInstance = $this->getInstanceManager()->getInstance($itemProcessorClass);
             $this->processors[$itemProcessorClass][$itemName] = $processorInstance;
         }
 

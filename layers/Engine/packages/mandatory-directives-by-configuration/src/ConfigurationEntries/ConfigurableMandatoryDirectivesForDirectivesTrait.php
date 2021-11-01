@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Services\BasicServiceTrait;
-use Symfony\Contracts\Service\Attribute\Required;
+use PoP\Root\Instances\InstanceManagerInterface;
 
 trait ConfigurableMandatoryDirectivesForDirectivesTrait
 {
-    use BasicServiceTrait;
+    abstract protected function getInstanceManager(): InstanceManagerInterface;
 
     /**
      * Configuration entries
@@ -46,7 +45,7 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
     final protected function getDirectiveResolvers(): array
     {
         return array_map(
-            fn (string $directiveResolverClass) => $this->instanceManager->getInstance($directiveResolverClass),
+            fn (string $directiveResolverClass) => $this->getInstanceManager()->getInstance($directiveResolverClass),
             $this->getDirectiveResolverClasses()
         );
     }

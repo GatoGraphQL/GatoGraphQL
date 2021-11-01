@@ -12,8 +12,6 @@ use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolve
 
 trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
 {
-    // use BasicServiceTrait;
-
     private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
