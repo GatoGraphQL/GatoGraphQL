@@ -23,6 +23,9 @@ trait WithBlockRegistryCustomPostTypeTrait
         // Order them by priority
         uasort(
             $blocks,
+            /**
+             * @return int<-1, 1>
+             */
             function (EditorBlockInterface $a, EditorBlockInterface $b): int {
                 return $b->getBlockPriority() <=> $a->getBlockPriority();
             }
