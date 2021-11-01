@@ -20,7 +20,7 @@ class SetCategoriesOnPostMutationResolver extends AbstractSetCategoriesOnCustomP
     {
         return $this->postCategoryTypeMutationAPI ??= $this->instanceManager->getInstance(PostCategoryTypeMutationAPIInterface::class);
     }
-    
+
     protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface
     {
         return $this->getPostCategoryTypeMutationAPI();
