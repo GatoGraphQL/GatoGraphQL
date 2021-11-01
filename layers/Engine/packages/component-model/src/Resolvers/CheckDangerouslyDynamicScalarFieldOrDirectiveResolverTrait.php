@@ -12,16 +12,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait
 {
-    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
-
-    public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
-    {
-        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
-    }
-    protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
-    {
-        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
-    }
+    abstract protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver;
 
     /**
      * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
