@@ -20,10 +20,10 @@ trait MarkdownContentRetrieverTrait
         array $options = []
     ): ?string {
         // Inject the place to look for the documentation
-        $this->markdownContentParser->setBaseDir($this->getBaseDir());
-        $this->markdownContentParser->setBaseURL($this->getBaseURL());
+        $this->getMarkdownContentParser()->setBaseDir($this->getBaseDir());
+        $this->getMarkdownContentParser()->setBaseURL($this->getBaseURL());
         try {
-            return $this->markdownContentParser->getContent(
+            return $this->getMarkdownContentParser()->getContent(
                 $markdownFilename,
                 $relativePathDir,
                 $options
