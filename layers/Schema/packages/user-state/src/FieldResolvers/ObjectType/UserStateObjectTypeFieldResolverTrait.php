@@ -17,7 +17,7 @@ trait UserStateObjectTypeFieldResolverTrait
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): array {
         $validationCheckpointSets = parent::getValidationCheckpointSets(
             $objectTypeResolver,
@@ -39,7 +39,7 @@ trait UserStateObjectTypeFieldResolverTrait
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): string {
         if ($checkpointSet !== UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER) {
             return $errorMessage;

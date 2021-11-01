@@ -71,7 +71,7 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
+        array $fieldArgs,
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []

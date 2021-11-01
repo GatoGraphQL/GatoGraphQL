@@ -233,7 +233,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
      *
      * @param array<string, mixed> $fieldArgs
      */
-    protected function replaceFieldArgs(string $field, array $fieldArgs = []): string
+    protected function replaceFieldArgs(string $field, array $fieldArgs): string
     {
         // Return a new field, replacing its fieldArgs (if any) with the provided ones
         // Used when validating a field and removing the fieldArgs that threw a warning
@@ -694,7 +694,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
      */
     public function getField(
         string $fieldName,
-        array $fieldArgs = [],
+        array $fieldArgs,
         ?string $fieldAlias = null,
         bool $skipOutputIfNull = false,
         ?array $fieldDirectives = [],
@@ -761,7 +761,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
      * @param array<string, mixed> $fieldArgs
      */
     public function getFieldArgsAsString(
-        array $fieldArgs = [],
+        array $fieldArgs,
         bool $addFieldArgSymbolsIfEmpty = false
     ): string {
         if (!$fieldArgs) {

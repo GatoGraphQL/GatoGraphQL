@@ -30,8 +30,8 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
      */
     public function skipExposingFieldInSchema(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
     public function skipExposingFieldArgInSchema(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): bool;
-    public function getFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array;
-    public function getFieldSchemaDefinitionExtensions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array;
+    public function getFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array;
+    public function getFieldSchemaDefinitionExtensions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array;
     public function getFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
     /**
      * Indicate if the fields are global (i.e. they apply to all typeResolvers)
@@ -44,15 +44,15 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
      *
      * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): bool;
+    public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool;
     /**
      * @return string[]
      */
-    public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array;
+    public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array;
     /**
      * @return string[]
      */
-    public function resolveFieldValidationDeprecationMessages(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array;
+    public function resolveFieldValidationDeprecationMessages(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array;
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
@@ -63,7 +63,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
+        array $fieldArgs,
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
@@ -84,7 +84,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     /**
      * @return string[]
      */
-    public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array;
+    public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array;
     /**
      * @param array<string, mixed> $fieldArgs
      */
@@ -92,7 +92,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): bool;
     public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
     /**
@@ -103,7 +103,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): array;
     /**
      * Define if to use the version to decide if to process the field or not

@@ -80,7 +80,7 @@ interface FieldQueryInterpreterInterface
      */
     public function getField(
         string $fieldName,
-        array $fieldArgs = [],
+        array $fieldArgs,
         ?string $fieldAlias = null,
         bool $skipOutputIfNull = false,
         ?array $fieldDirectives = [],
@@ -132,7 +132,7 @@ interface FieldQueryInterpreterInterface
      * @param array<string, mixed> $fieldArgs
      */
     public function getFieldArgsAsString(
-        array $fieldArgs = [],
+        array $fieldArgs,
         bool $addFieldArgSymbolsIfEmpty = false
     ): string;
     /**

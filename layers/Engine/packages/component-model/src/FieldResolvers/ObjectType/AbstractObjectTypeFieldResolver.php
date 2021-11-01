@@ -549,7 +549,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      *
      * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): bool
+    public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool
     {
         /** Check if to validate the version */
         if (
@@ -602,7 +602,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
         return true;
     }
-    public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
+    public function resolveFieldValidationErrorDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
     {
         /**
          * Validate all mandatory args have been provided
@@ -687,7 +687,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     final protected function resolveFieldArgumentErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): array {
         $errors = [];
         foreach ($fieldArgs as $fieldArgName => $fieldArgValue) {
@@ -714,12 +714,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected function doResolveSchemaValidationErrorDescriptions(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): array {
         return [];
     }
 
-    public function resolveFieldValidationDeprecationMessages(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
+    public function resolveFieldValidationDeprecationMessages(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
     {
         $fieldDeprecationMessages = [];
 
@@ -808,7 +808,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * Get the "schema" properties as for the fieldName
      */
-    final public function getFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
+    final public function getFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
     {
         // First check if the value was cached
         $key = $objectTypeResolver->getNamespacedTypeName() . '|' . $fieldName . '|' . json_encode($fieldArgs);
@@ -821,7 +821,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * Get the "schema" properties as for the fieldName
      */
-    final protected function doGetFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
+    final protected function doGetFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
     {
         $schemaDefinition = $this->getFieldTypeSchemaDefinition(
             $fieldName,
@@ -858,7 +858,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return $schemaDefinition;
     }
 
-    public function getFieldSchemaDefinitionExtensions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
+    public function getFieldSchemaDefinitionExtensions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
     {
         return [];
     }
@@ -886,7 +886,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
-    public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs = []): array
+    public function resolveFieldValidationWarningDescriptions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
     {
         $warnings = [];
         if (Environment::enableSemanticVersionConstraints()) {
@@ -922,7 +922,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): bool {
         return true;
     }
@@ -935,7 +935,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): array {
         $validationCheckpointSets = [];
         // Check that mutations can be executed
@@ -955,7 +955,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): string {
         return $errorMessage;
     }
@@ -967,7 +967,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): array {
         // Can perform validation through checkpoints
         if ($checkpointSets = $this->getValidationCheckpointSets($objectTypeResolver, $object, $fieldName, $fieldArgs)) {
@@ -1024,7 +1024,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
+        array $fieldArgs,
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []

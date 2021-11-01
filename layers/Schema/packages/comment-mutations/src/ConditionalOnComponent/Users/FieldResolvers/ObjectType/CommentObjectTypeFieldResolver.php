@@ -69,7 +69,7 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = []
+        array $fieldArgs
     ): bool {
         $comment = $object;
         $commentUserID = $this->getUserCommentTypeAPI()->getCommentUserId($comment);
@@ -86,7 +86,7 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
+        array $fieldArgs,
         ?array $variables = null,
         ?array $expressions = null,
         array $options = []
