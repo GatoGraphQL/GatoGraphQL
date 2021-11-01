@@ -10,7 +10,7 @@ use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInte
 use PoPSchema\CustomPostCategoryMutations\Hooks\AbstractCustomPostMutationResolverHookSet;
 use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
-use PoPSchema\PostCategoryMutations\Facades\PostCategoryTypeMutationAPIFacade;
+use PoPSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInterface;
 use PoPSchema\PostMutations\SchemaHooks\PostMutationResolverHookSetTrait;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
@@ -25,6 +25,7 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
     private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
     private ?MutationRootObjectTypeResolver $mutationRootObjectTypeResolver = null;
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?PostCategoryTypeMutationAPIInterface $postCategoryTypeMutationAPIInterface = null;
 
     final public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
     {
@@ -66,6 +67,14 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
     {
         return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
+    final public function setPostCategoryTypeMutationAPI(PostCategoryTypeMutationAPIInterface $postCategoryTypeMutationAPIInterface): void
+    {
+        $this->postCategoryTypeMutationAPIInterface = $postCategoryTypeMutationAPIInterface;
+    }
+    final protected function getPostCategoryTypeMutationAPI(): PostCategoryTypeMutationAPIInterface
+    {
+        return $this->postCategoryTypeMutationAPIInterface ??= $this->instanceManager->getInstance(PostCategoryTypeMutationAPIInterface::class);
+    }
 
     protected function getCustomPostType(): string
     {
@@ -79,6 +88,6 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
 
     protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface
     {
-        return PostCategoryTypeMutationAPIFacade::getInstance();
+        return $this->getPostCategoryTypeMutationAPI();
     }
 }
