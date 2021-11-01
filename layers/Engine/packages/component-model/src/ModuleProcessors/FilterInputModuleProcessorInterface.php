@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
-interface DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
+interface FilterInputModuleProcessorInterface
 {
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface;
     public function getFilterInputDescription(array $module): ?string;

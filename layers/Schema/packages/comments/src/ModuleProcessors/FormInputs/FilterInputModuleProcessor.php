@@ -7,7 +7,7 @@ namespace PoPSchema\Comments\ModuleProcessors\FormInputs;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+use PoP\ComponentModel\ModuleProcessors\FilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
@@ -20,7 +20,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
-    use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+    use FilterInputModuleProcessorTrait;
 
     public const MODULE_FILTERINPUT_CUSTOMPOST_IDS = 'filterinput-custompost-ids';
     public const MODULE_FILTERINPUT_CUSTOMPOST_ID = 'filterinput-custompost-id';

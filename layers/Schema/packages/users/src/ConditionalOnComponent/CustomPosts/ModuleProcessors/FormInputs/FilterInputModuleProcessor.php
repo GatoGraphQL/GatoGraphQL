@@ -6,7 +6,7 @@ namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\ModuleProcessors\Fo
 
 use PoP\ComponentModel\ModuleProcessors\AbstractFormInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+use PoP\ComponentModel\ModuleProcessors\FilterInputModuleProcessorTrait;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
@@ -16,7 +16,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class FilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
-    use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+    use FilterInputModuleProcessorTrait;
 
     public const MODULE_FILTERINPUT_AUTHOR_IDS = 'filterinput-author-ids';
     public const MODULE_FILTERINPUT_AUTHOR_SLUG = 'filterinput-author-slug';
