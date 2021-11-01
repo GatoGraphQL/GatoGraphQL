@@ -13,34 +13,9 @@ use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolve
 
 trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
 {
-    private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
-    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-
-    public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
-    {
-        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
-    }
-    protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
-    {
-        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
-    }
-    public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
-    protected function getIDScalarTypeResolver(): IDScalarTypeResolver
-    {
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
-    }
-    public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-    protected function getStringScalarTypeResolver(): StringScalarTypeResolver
-    {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-    }
+    abstract protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver;
+    abstract protected function getIDScalarTypeResolver(): IDScalarTypeResolver;
+    abstract protected function getStringScalarTypeResolver(): StringScalarTypeResolver;
 
     abstract protected function getTranslationAPI(): TranslationAPIInterface;
 
