@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 
-use GraphQLByPoP\GraphQLServer\ObjectModels\ListType;
-use GraphQLByPoP\GraphQLServer\ObjectModels\NonNullType;
+use GraphQLByPoP\GraphQLServer\ObjectModels\ListWrappingType;
+use GraphQLByPoP\GraphQLServer\ObjectModels\NonNullWrappingType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinitionReferenceObjectInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\TypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\WrappingTypeInterface;
@@ -57,7 +57,7 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
             $wrappedType = $this->getWrappingTypeOrSchemaDefinitionReferenceObject(
                 $this->getGraphQLSyntaxService()->extractWrappedTypeFromNonNullWrappingType($typeID)
             );
-            return new NonNullType($wrappedType);
+            return new NonNullWrappingType($wrappedType);
         }
 
         // Check if it is an array
@@ -66,7 +66,7 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
             $wrappedType = $this->getWrappingTypeOrSchemaDefinitionReferenceObject(
                 $this->getGraphQLSyntaxService()->extractWrappedTypeFromListWrappingType($typeID)
             );
-            return new ListType($wrappedType);
+            return new ListWrappingType($wrappedType);
         }
 
         return $this->getSchemaDefinitionReferenceRegistry()->getSchemaDefinitionReferenceObject($typeID);
