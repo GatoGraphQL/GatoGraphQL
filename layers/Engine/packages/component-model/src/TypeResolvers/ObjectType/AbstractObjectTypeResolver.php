@@ -376,158 +376,159 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
             foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
                 // Also send the typeResolver along, as to get the id of the $object being passed
-                if ($objectTypeFieldResolver->resolveCanProcessObject($this, $object, $fieldName, $fieldArgs)) {
-                    if ($validateSchemaOnObject) {
-                        if ($maybeErrors = $objectTypeFieldResolver->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
-                            return $this->getErrorProvider()->getValidationFailedError($fieldName, $fieldArgs, $maybeErrors);
-                        }
-                        if ($maybeDeprecations = $objectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
-                            $id = $this->getID($object);
-                            foreach ($maybeDeprecations as $deprecation) {
-                                $objectDeprecations[(string)$id][] = [
-                                    Tokens::PATH => [$field],
-                                    Tokens::MESSAGE => $deprecation,
-                                ];
-                            }
-                            $this->getFeedbackMessageStore()->addObjectDeprecations($objectDeprecations);
-                        }
+                if (!$objectTypeFieldResolver->resolveCanProcessObject($this, $object, $fieldName, $fieldArgs)) {
+                    continue;
+                }
+                if ($validateSchemaOnObject) {
+                    if ($maybeErrors = $objectTypeFieldResolver->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
+                        return $this->getErrorProvider()->getValidationFailedError($fieldName, $fieldArgs, $maybeErrors);
                     }
-                    if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs)) {
-                        return $this->getErrorProvider()->getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
+                    if ($maybeDeprecations = $objectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
+                        $id = $this->getID($object);
+                        foreach ($maybeDeprecations as $deprecation) {
+                            $objectDeprecations[(string)$id][] = [
+                                Tokens::PATH => [$field],
+                                Tokens::MESSAGE => $deprecation,
+                            ];
+                        }
+                        $this->getFeedbackMessageStore()->addObjectDeprecations($objectDeprecations);
                     }
+                }
+                if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs)) {
+                    return $this->getErrorProvider()->getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
+                }
 
-                    // Resolve the value. If the field resolver throws an Exception,
-                    // catch it and return the equivalent GraphQL error so that it
-                    // fails gracefully in production (but not on development!)
-                    try {
-                        $value = $objectTypeFieldResolver->resolveValue($this, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-                    } catch (Exception $e) {
-                        if (RootEnvironment::isApplicationEnvironmentDev()) {
-                            throw $e;
-                        }
-                        return new Error(
-                            'exception',
-                            sprintf(
-                                $this->getTranslationAPI()->__('Resolving field \'%s\' produced an exception, with message: \'%s\'. Please contact the admin.', 'component-model'),
-                                $field,
-                                $e->getMessage()
-                            )
-                        );
+                // Resolve the value. If the field resolver throws an Exception,
+                // catch it and return the equivalent GraphQL error so that it
+                // fails gracefully in production (but not on development!)
+                try {
+                    $value = $objectTypeFieldResolver->resolveValue($this, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+                } catch (Exception $e) {
+                    if (RootEnvironment::isApplicationEnvironmentDev()) {
+                        throw $e;
+                    }
+                    return new Error(
+                        'exception',
+                        sprintf(
+                            $this->getTranslationAPI()->__('Resolving field \'%s\' produced an exception, with message: \'%s\'. Please contact the admin.', 'component-model'),
+                            $field,
+                            $e->getMessage()
+                        )
+                    );
+                }
+
+                /**
+                 * Validate that the value is what was defined in the schema, or throw a corresponding error.
+                 *
+                 * Items being validated:
+                 *
+                 * - Is it null?
+                 * - Is it an array when it should be?
+                 * - Is it not an array when it should not be?
+                 *
+                 * Items NOT being validated:
+                 *
+                 * - Is the returned type (String, Int, some Object, etc) the expected one?
+                 *
+                 * According to the GraphQL speck, checking if a non-null field returns null
+                 * is handled always:
+                 *
+                 *   If the result of resolving a field is null (either because the function
+                 *   to resolve the field returned null or because a field error was raised),
+                 *   and that field is of a Non-Null type, then a field error is raised.
+                 *   The error must be added to the "errors" list in the response.
+                 *
+                 * @see https://spec.graphql.org/draft/#sec-Handling-Field-Errors
+                 *
+                 * All other conditions, check them when enabled by configuration.
+                 */
+                if ($value === null) {
+                    $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
+                    if ($fieldSchemaDefinition[SchemaDefinition::NON_NULLABLE] ?? false) {
+                        return $this->getErrorProvider()->getNonNullableFieldError($fieldName);
+                    }
+                } elseif (ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition()) {
+                    $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
+                    $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
+
+                    /**
+                     * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+                     * In particular, it does not need to validate if it is an array or not,
+                     * as according to the applied WrappingType.
+                     *
+                     * This is to enable it to have an array as value, which is not
+                     * allowed by GraphQL unless the array is explicitly defined.
+                     *
+                     * For instance, type `DangerouslyDynamic` could have values
+                     * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
+                     * these values by types `String` and `[String]`.
+                     */
+                    if ($fieldTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
+                        return $value;
                     }
 
                     /**
-                     * Validate that the value is what was defined in the schema, or throw a corresponding error.
-                     *
-                     * Items being validated:
-                     *
-                     * - Is it null?
-                     * - Is it an array when it should be?
-                     * - Is it not an array when it should not be?
-                     *
-                     * Items NOT being validated:
-                     *
-                     * - Is the returned type (String, Int, some Object, etc) the expected one?
-                     *
-                     * According to the GraphQL speck, checking if a non-null field returns null
-                     * is handled always:
-                     *
-                     *   If the result of resolving a field is null (either because the function
-                     *   to resolve the field returned null or because a field error was raised),
-                     *   and that field is of a Non-Null type, then a field error is raised.
-                     *   The error must be added to the "errors" list in the response.
-                     *
-                     * @see https://spec.graphql.org/draft/#sec-Handling-Field-Errors
-                     *
-                     * All other conditions, check them when enabled by configuration.
+                     * Execute the validation, return an error if it fails
                      */
-                    if ($value === null) {
-                        $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
-                        if ($fieldSchemaDefinition[SchemaDefinition::NON_NULLABLE] ?? false) {
-                            return $this->getErrorProvider()->getNonNullableFieldError($fieldName);
-                        }
-                    } elseif (ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition()) {
-                        $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
-                        $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
-
-                        /**
-                         * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
-                         * In particular, it does not need to validate if it is an array or not,
-                         * as according to the applied WrappingType.
-                         *
-                         * This is to enable it to have an array as value, which is not
-                         * allowed by GraphQL unless the array is explicitly defined.
-                         *
-                         * For instance, type `DangerouslyDynamic` could have values
-                         * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
-                         * these values by types `String` and `[String]`.
-                         */
-                        if ($fieldTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
-                            return $value;
-                        }
-
-                        /**
-                         * Execute the validation, return an error if it fails
-                         */
-                        $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false;
-                        if (
-                            !$fieldIsArrayType
-                            && is_array($value)
-                        ) {
-                            return $this->getErrorProvider()->getMustNotBeArrayFieldError($fieldName, $value);
-                        }
-                        if (
-                            $fieldIsArrayType
-                            && !is_array($value)
-                        ) {
-                            return $this->getErrorProvider()->getMustBeArrayFieldError($fieldName, $value);
-                        }
-                        $fieldIsNonNullArrayItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
-                        if (
-                            $fieldIsNonNullArrayItemsType
-                            && is_array($value)
-                            && array_filter(
-                                $value,
-                                fn (mixed $arrayItem) => $arrayItem === null
-                            )
-                        ) {
-                            return $this->getErrorProvider()->getArrayMustNotHaveNullItemsFieldError($fieldName, $value);
-                        }
-                        $fieldIsArrayOfArraysType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
-                        if (
-                            !$fieldIsArrayOfArraysType
-                            && is_array($value)
-                            && array_filter(
-                                $value,
-                                fn (mixed $arrayItem) => is_array($arrayItem)
-                            )
-                        ) {
-                            return $this->getErrorProvider()->getMustNotBeArrayOfArraysFieldError($fieldName, $value);
-                        }
-                        if (
-                            $fieldIsArrayOfArraysType
-                            && is_array($value)
-                            && array_filter(
-                                $value,
-                                // `null` could be accepted as an array! (Validation against null comes next)
-                                fn (mixed $arrayItem) => !is_array($arrayItem) && $arrayItem !== null
-                            )
-                        ) {
-                            return $this->getErrorProvider()->getMustBeArrayOfArraysFieldError($fieldName, $value);
-                        }
-                        $fieldIsNonNullArrayOfArraysItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
-                        if (
-                            $fieldIsNonNullArrayOfArraysItemsType
-                            && is_array($value)
-                            && array_filter(
-                                $value,
-                                fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
-                                    $arrayItem,
-                                    fn (mixed $arrayItemItem) => $arrayItemItem === null
-                                ) !== [],
-                            )
-                        ) {
-                            return $this->getErrorProvider()->getArrayOfArraysMustNotHaveNullItemsFieldError($fieldName, $value);
-                        }
+                    $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false;
+                    if (
+                        !$fieldIsArrayType
+                        && is_array($value)
+                    ) {
+                        return $this->getErrorProvider()->getMustNotBeArrayFieldError($fieldName, $value);
+                    }
+                    if (
+                        $fieldIsArrayType
+                        && !is_array($value)
+                    ) {
+                        return $this->getErrorProvider()->getMustBeArrayFieldError($fieldName, $value);
+                    }
+                    $fieldIsNonNullArrayItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
+                    if (
+                        $fieldIsNonNullArrayItemsType
+                        && is_array($value)
+                        && array_filter(
+                            $value,
+                            fn (mixed $arrayItem) => $arrayItem === null
+                        )
+                    ) {
+                        return $this->getErrorProvider()->getArrayMustNotHaveNullItemsFieldError($fieldName, $value);
+                    }
+                    $fieldIsArrayOfArraysType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
+                    if (
+                        !$fieldIsArrayOfArraysType
+                        && is_array($value)
+                        && array_filter(
+                            $value,
+                            fn (mixed $arrayItem) => is_array($arrayItem)
+                        )
+                    ) {
+                        return $this->getErrorProvider()->getMustNotBeArrayOfArraysFieldError($fieldName, $value);
+                    }
+                    if (
+                        $fieldIsArrayOfArraysType
+                        && is_array($value)
+                        && array_filter(
+                            $value,
+                            // `null` could be accepted as an array! (Validation against null comes next)
+                            fn (mixed $arrayItem) => !is_array($arrayItem) && $arrayItem !== null
+                        )
+                    ) {
+                        return $this->getErrorProvider()->getMustBeArrayOfArraysFieldError($fieldName, $value);
+                    }
+                    $fieldIsNonNullArrayOfArraysItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
+                    if (
+                        $fieldIsNonNullArrayOfArraysItemsType
+                        && is_array($value)
+                        && array_filter(
+                            $value,
+                            fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
+                                $arrayItem,
+                                fn (mixed $arrayItemItem) => $arrayItemItem === null
+                            ) !== [],
+                        )
+                    ) {
+                        return $this->getErrorProvider()->getArrayOfArraysMustNotHaveNullItemsFieldError($fieldName, $value);
                     }
 
                     // Everything is good, return the value (which could also be an Error!)
