@@ -21,7 +21,7 @@ trait HasTypeSchemaDefinitionReferenceTrait
             $this->schemaDefinition[SchemaDefinition::TYPE_KIND],
             $this->schemaDefinition[SchemaDefinition::TYPE_NAME],
         ]);
-        return GraphQLSchemaHelpers::getTypeNameForGraphQLSchema(
+        return GraphQLSchemaHelpers::getMaybeWrappedTypeName(
             $typeID,
             $this->schemaDefinition[SchemaDefinition::NON_NULLABLE] ?? null,
             $this->schemaDefinition[SchemaDefinition::IS_ARRAY] ?? false,

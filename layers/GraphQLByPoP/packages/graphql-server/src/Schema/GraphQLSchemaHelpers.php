@@ -16,7 +16,7 @@ class GraphQLSchemaHelpers
      * - field response: isNonNullable
      * - field argument: isMandatory (its provided value can still be null)
      */
-    public static function getTypeNameForGraphQLSchema(
+    public static function getMaybeWrappedTypeName(
         string $typeName,
         ?bool $isNonNullableOrMandatory = false,
         ?bool $isArray = false,
