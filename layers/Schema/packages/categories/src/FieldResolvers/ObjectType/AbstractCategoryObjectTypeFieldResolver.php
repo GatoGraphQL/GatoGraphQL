@@ -10,11 +10,11 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\Categories\ComponentContracts\CategoryAPIObjectTypeFieldResolverRequestedContractInterface;
+use PoPSchema\Categories\ComponentContracts\CategoryAPIRequestedContractObjectTypeFieldResolverInterface;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
-abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements CategoryAPIObjectTypeFieldResolverRequestedContractInterface
+abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements CategoryAPIRequestedContractObjectTypeFieldResolverInterface
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;

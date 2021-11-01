@@ -6,9 +6,9 @@ namespace PoPSchema\Tags\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPosts\FieldResolvers\ObjectType\AbstractCustomPostListObjectTypeFieldResolver;
-use PoPSchema\Tags\ComponentContracts\TagAPIObjectTypeFieldResolverRequestedContractInterface;
+use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractObjectTypeFieldResolverInterface;
 
-abstract class AbstractCustomPostListTagObjectTypeFieldResolver extends AbstractCustomPostListObjectTypeFieldResolver implements TagAPIObjectTypeFieldResolverRequestedContractInterface
+abstract class AbstractCustomPostListTagObjectTypeFieldResolver extends AbstractCustomPostListObjectTypeFieldResolver implements TagAPIRequestedContractObjectTypeFieldResolverInterface
 {
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
