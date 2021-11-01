@@ -64,7 +64,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     }
     final public function getPersistentCache(): PersistentCacheInterface
     {
-        return $this->persistentCache ??= PersistentCacheFacade::getInstance();
+        return $this->persistentCache ??= $this->instanceManager->getInstance(PersistentCacheInterface::class);
     }
     final public function setPersistedFragmentManager(PersistedFragmentManagerInterface $persistedFragmentManager): void
     {

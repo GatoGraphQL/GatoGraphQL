@@ -37,7 +37,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final public function getPersistentCache(): PersistentCacheInterface
     {
-        return $this->persistentCache ??= PersistentCacheFacade::getInstance();
+        return $this->persistentCache ??= $this->instanceManager->getInstance(PersistentCacheInterface::class);
     }
     final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {

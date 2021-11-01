@@ -128,7 +128,7 @@ class Engine implements EngineInterface
     }
     final public function getPersistentCache(): PersistentCacheInterface
     {
-        return $this->persistentCache ??= PersistentCacheFacade::getInstance();
+        return $this->persistentCache ??= $this->instanceManager->getInstance(PersistentCacheInterface::class);
     }
     final public function setDataStructureManager(DataStructureManagerInterface $dataStructureManager): void
     {
