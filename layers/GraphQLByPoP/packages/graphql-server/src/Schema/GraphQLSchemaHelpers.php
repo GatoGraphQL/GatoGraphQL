@@ -27,24 +27,37 @@ class GraphQLSchemaHelpers
         // Wrap the type with the array brackets
         if ($isArray) {
             if ($isArrayOfArrays) {
-                $typeName = sprintf(
-                    '[%s%s]',
-                    $typeName,
-                    $isNonNullArrayOfArraysItems ? '!' : ''
-                );
+                if ($isNonNullArrayOfArraysItems) {
+                    $typeName = self::getNonNullTypeName($typeName);
+                }
+                $typeName = self::getListTypeName($typeName);
             }
-            $typeName = sprintf(
-                '[%s%s]',
-                $typeName,
-                $isNonNullArrayItems ? '!' : ''
-            );
+            if ($isNonNullArrayItems) {
+                $typeName = self::getNonNullTypeName($typeName);
+            }
+            $typeName = self::getListTypeName($typeName);
         }
         if ($isNonNullableOrMandatory) {
-            $typeName = sprintf(
-                '%s!',
-                $typeName
-            );
+            $typeName = self::getNonNullTypeName($typeName);
         }
         return $typeName;
+    }
+    
+    public static function getNonNullTypeName(
+        string $typeName,
+    ): string {
+        return sprintf(
+            '%s!',
+            $typeName
+        );
+    }
+    
+    public static function getListTypeName(
+        string $typeName,
+    ): string {
+        return sprintf(
+            '[%s]',
+            $typeName
+        );
     }
 }
