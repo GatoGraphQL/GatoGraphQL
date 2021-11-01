@@ -49,16 +49,23 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     /** @var array<string, ObjectTypeResolverInterface[]> Key: InterfaceType name, Value: List of ObjectType resolvers implementing the interface */
     private array $accessedInterfaceTypeNameObjectTypeResolvers = [];
 
-    /**
-     * Cannot autowire because its calling `getNamespace`
-     * on services.yaml produces an exception of PHP properties not initialized
-     * in its depended services.
-     */
     private ?PersistentCacheInterface $persistentCache = null;
-
     private ?PersistedFragmentManagerInterface $persistedFragmentManager = null;
     private ?PersistedQueryManagerInterface $persistedQueryManager = null;
 
+    /**
+     * Cannot autowire with "#[Required]" because its calling `getNamespace`
+     * on services.yaml produces an exception of PHP properties not initialized
+     * in its depended services.
+     */
+    final public function setPersistentCache(PersistentCacheInterface $persistentCache): void
+    {
+        $this->persistentCache = $persistentCache;
+    }
+    final public function getPersistentCache(): PersistentCacheInterface
+    {
+        return $this->persistentCache ??= $this->instanceManager->getInstance(PersistentCacheInterface::class);
+    }
     final public function setPersistedFragmentManager(PersistedFragmentManagerInterface $persistedFragmentManager): void
     {
         $this->persistedFragmentManager = $persistedFragmentManager;
@@ -74,12 +81,6 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     final protected function getPersistedQueryManager(): PersistedQueryManagerInterface
     {
         return $this->persistedQueryManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
-    }
-
-    final public function getPersistentCache(): PersistentCacheInterface
-    {
-        $this->persistentCache ??= PersistentCacheFacade::getInstance();
-        return $this->persistentCache;
     }
 
     public function &getFullSchemaDefinition(): array

@@ -103,13 +103,7 @@ class Engine implements EngineInterface
      */
     protected array $relationalTypeOutputDBKeyIDsDataFields = [];
 
-    /**
-     * Cannot autowire because its calling `getNamespace`
-     * on services.yaml produces an exception of PHP properties not initialized
-     * in its depended services.
-     */
     private ?PersistentCacheInterface $persistentCache = null;
-
     private ?DataStructureManagerInterface $dataStructureManager = null;
     private ?ModelInstanceInterface $modelInstance = null;
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
@@ -123,6 +117,19 @@ class Engine implements EngineInterface
     private ?EntryModuleManagerInterface $entryModuleManager = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
 
+    /**
+     * Cannot autowire with "#[Required]" because its calling `getNamespace`
+     * on services.yaml produces an exception of PHP properties not initialized
+     * in its depended services.
+     */
+    final public function setPersistentCache(PersistentCacheInterface $persistentCache): void
+    {
+        $this->persistentCache = $persistentCache;
+    }
+    final public function getPersistentCache(): PersistentCacheInterface
+    {
+        return $this->persistentCache ??= $this->instanceManager->getInstance(PersistentCacheInterface::class);
+    }
     final public function setDataStructureManager(DataStructureManagerInterface $dataStructureManager): void
     {
         $this->dataStructureManager = $dataStructureManager;
@@ -218,12 +225,6 @@ class Engine implements EngineInterface
     final protected function getRequestHelperService(): RequestHelperServiceInterface
     {
         return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
-    }
-
-    final public function getPersistentCache(): PersistentCacheInterface
-    {
-        $this->persistentCache ??= PersistentCacheFacade::getInstance();
-        return $this->persistentCache;
     }
 
     public function getOutputData(): array

@@ -11,12 +11,13 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler as UpstreamListQueryInputOutputHandler;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\LooseContracts\NameResolverInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
 {
     private ?CMSServiceInterface $cmsService = null;
+    private ?NameResolverInterface $nameResolver = null;
 
     final public function setCMSService(CMSServiceInterface $cmsService): void
     {
@@ -26,10 +27,18 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
     {
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
+    final public function setNameResolver(NameResolverInterface $nameResolver): void
+    {
+        $this->nameResolver = $nameResolver;
+    }
+    final protected function getNameResolver(): NameResolverInterface
+    {
+        return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
+    }
 
     protected function getLimit()
     {
-        return $this->getCmsService()->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit'));
+        return $this->getCmsService()->getOption($this->getNameResolver()->getName('popcms:option:limit'));
     }
 
     public function getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array

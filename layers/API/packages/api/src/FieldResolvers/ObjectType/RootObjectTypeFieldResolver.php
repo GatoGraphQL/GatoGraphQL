@@ -20,18 +20,25 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    /**
-     * Cannot autowire because its calling `getNamespace`
-     * on services.yaml produces an exception of PHP properties not initialized
-     * in its depended services.
-     */
     private ?PersistentCacheInterface $persistentCache = null;
-
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
     private ?PersistedFragmentManagerInterface $persistedFragmentManager = null;
     private ?PersistedQueryManagerInterface $persistedQueryManager = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
+    /**
+     * Cannot autowire with "#[Required]" because its calling `getNamespace`
+     * on services.yaml produces an exception of PHP properties not initialized
+     * in its depended services.
+     */
+    final public function setPersistentCache(PersistentCacheInterface $persistentCache): void
+    {
+        $this->persistentCache = $persistentCache;
+    }
+    final public function getPersistentCache(): PersistentCacheInterface
+    {
+        return $this->persistentCache ??= $this->instanceManager->getInstance(PersistentCacheInterface::class);
+    }
     final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {
         $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
@@ -63,12 +70,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
-    }
-
-    final public function getPersistentCache(): PersistentCacheInterface
-    {
-        $this->persistentCache ??= PersistentCacheFacade::getInstance();
-        return $this->persistentCache;
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array

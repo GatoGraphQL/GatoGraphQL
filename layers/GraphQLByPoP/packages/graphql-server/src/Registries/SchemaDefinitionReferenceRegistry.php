@@ -39,17 +39,24 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      */
     protected array $fullSchemaDefinitionReferenceDictionary = [];
 
-    /**
-     * Cannot autowire because its calling `getNamespace`
-     * on services.yaml produces an exception of PHP properties not initialized
-     * in its depended services.
-     */
     private ?PersistentCacheInterface $persistentCache = null;
-
     private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
     private ?GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
+    /**
+     * Cannot autowire with "#[Required]" because its calling `getNamespace`
+     * on services.yaml produces an exception of PHP properties not initialized
+     * in its depended services.
+     */
+    final public function setPersistentCache(PersistentCacheInterface $persistentCache): void
+    {
+        $this->persistentCache = $persistentCache;
+    }
+    final public function getPersistentCache(): PersistentCacheInterface
+    {
+        return $this->persistentCache ??= $this->instanceManager->getInstance(PersistentCacheInterface::class);
+    }
     final public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
     {
         $this->schemaDefinitionService = $schemaDefinitionService;
@@ -73,12 +80,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
-    }
-
-    final public function getPersistentCache(): PersistentCacheInterface
-    {
-        $this->persistentCache ??= PersistentCacheFacade::getInstance();
-        return $this->persistentCache;
     }
 
     public function &getFullSchemaDefinitionForGraphQL(): array
