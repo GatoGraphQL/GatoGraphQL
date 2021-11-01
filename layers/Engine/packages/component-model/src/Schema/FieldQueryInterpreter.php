@@ -274,7 +274,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
     protected function doExtractStaticFieldArguments(string $field, ?array $variables): array
     {
-        $fieldArgs;
+        $fieldArgs = [];
         // Extract the args from the string into an array
         if ($fieldArgsStr = $this->getFieldArgs($field)) {
             // Remove the opening and closing brackets
