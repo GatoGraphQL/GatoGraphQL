@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Tags\TypeResolvers\ObjectType;
 
-use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractInterface;
+use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPSchema\Taxonomies\TypeResolvers\ObjectType\AbstractTaxonomyObjectTypeResolver;
 
-abstract class AbstractTagObjectTypeResolver extends AbstractTaxonomyObjectTypeResolver implements TagObjectTypeResolverInterface, TagAPIRequestedContractInterface
+abstract class AbstractTagObjectTypeResolver extends AbstractTaxonomyObjectTypeResolver implements TagObjectTypeResolverInterface
 {
+    abstract public function getTagTypeAPI(): TagTypeAPIInterface;
+
     public function getTypeDescription(): ?string
     {
         return $this->getTranslationAPI()->__('Representation of a tag, added to a custom post', 'tags');
