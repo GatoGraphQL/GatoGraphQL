@@ -12,9 +12,9 @@ abstract class AbstractObjectTypeResolverPicker implements ObjectTypeResolverPic
 {
     use AttachableExtensionTrait;
     use BasicServiceTrait;
-    
+
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
-    
+
     final public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
     {
         $this->attachableExtensionManager = $attachableExtensionManager;
