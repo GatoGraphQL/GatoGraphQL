@@ -8,14 +8,12 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Definitions\Configuration\Request;
-use PoP\Hooks\Services\WithHooksAPIServiceTrait;
-use PoP\Hooks\HooksAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class RequestHelperService implements RequestHelperServiceInterface
 {
-    use WithHooksAPIServiceTrait;
+    use BasicServiceTrait;
 
     public function getCurrentURL(): string
     {

@@ -6,9 +6,6 @@ namespace PoPSchema\CustomPosts\TypeAPIs;
 
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Hooks\Services\WithHooksAPIServiceTrait;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
 {

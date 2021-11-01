@@ -9,14 +9,13 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderInterface;
-use PoP\Hooks\Services\WithHooksAPIServiceTrait;
-use Symfony\Contracts\Service\Attribute\Required;
+use PoP\Hooks\HooksAPIInterface;
 
 trait QueryDataModuleProcessorTrait
 {
     use FilterDataModuleProcessorTrait;
-    use WithHooksAPIServiceTrait;
-
+    
+    abstract protected function getHooksAPI(): HooksAPIInterface;
     abstract protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler;
 
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array

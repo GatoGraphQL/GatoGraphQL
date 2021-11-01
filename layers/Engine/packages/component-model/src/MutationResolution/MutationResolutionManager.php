@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\MutationResolution;
 
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Hooks\Services\WithHooksAPIServiceTrait;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class MutationResolutionManager implements MutationResolutionManagerInterface
 {
-    use WithHooksAPIServiceTrait;
+    use BasicServiceTrait;
 
     /**
      * @var array<string, mixed>

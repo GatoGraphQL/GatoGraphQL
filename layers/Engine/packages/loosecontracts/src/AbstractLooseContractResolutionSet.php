@@ -4,20 +4,26 @@ declare(strict_types=1);
 
 namespace PoP\LooseContracts;
 
-use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\WithInstanceManagerServiceTrait;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractLooseContractResolutionSet extends AbstractAutomaticallyInstantiatedService
 {
-    use WithHooksAPIServiceTrait;
     use WithInstanceManagerServiceTrait;
 
+    private ?HooksAPIInterface $hooksAPI = null;
     private ?LooseContractManagerInterface $looseContractManager = null;
     private ?NameResolverInterface $nameResolver = null;
 
+    final public function setHooksAPI(HooksAPIInterface $hooksAPI): void
+    {
+        $this->hooksAPI = $hooksAPI;
+    }
+    final protected function getHooksAPI(): HooksAPIInterface
+    {
+        return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
+    }
     final public function setLooseContractManager(LooseContractManagerInterface $looseContractManager): void
     {
         $this->looseContractManager = $looseContractManager;

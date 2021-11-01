@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentsWP\TypeAPIs;
 
-use PoP\Hooks\Services\WithHooksAPIServiceTrait;
-use PoP\Hooks\HooksAPIInterface;
+use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\Constants\CommentTypes;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use Symfony\Contracts\Service\Attribute\Required;
 use WP_Comment;
 
 /**
@@ -19,7 +17,7 @@ use WP_Comment;
  */
 class CommentTypeAPI implements CommentTypeAPIInterface
 {
-    use WithHooksAPIServiceTrait;
+    use BasicServiceTrait;
 
     public const HOOK_QUERY = __CLASS__ . ':query';
 

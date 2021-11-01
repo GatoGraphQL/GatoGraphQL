@@ -12,8 +12,12 @@ trait WithInstanceManagerServiceTrait
     protected InstanceManagerInterface $instanceManager;
 
     #[Required]
-    public function setInstanceManager(InstanceManagerInterface $instanceManager): void
+    final public function setInstanceManager(InstanceManagerInterface $instanceManager): void
     {
         $this->instanceManager = $instanceManager;
+    }
+    final protected function getInstanceManager(): InstanceManagerInterface
+    {
+        return $this->instanceManager;
     }
 }

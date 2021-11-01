@@ -6,13 +6,10 @@ namespace PoPSchema\TagsWP\TypeAPIs;
 
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
-use PoP\Hooks\HooksAPIInterface;
-use PoP\Hooks\Services\WithHooksAPIServiceTrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
-use Symfony\Contracts\Service\Attribute\Required;
 use WP_Taxonomy;
 
 /**
