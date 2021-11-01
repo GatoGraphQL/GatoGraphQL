@@ -14,7 +14,6 @@ use WP_Post;
 class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraphQLQueryResolutionEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {
     private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
-    private ?QueryRetrieverInterface $queryRetriever = null;
 
     final public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
     {
@@ -23,14 +22,6 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
     final protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
     {
         return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
-    }
-    final public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
-    {
-        $this->queryRetriever = $queryRetriever;
-    }
-    final protected function getQueryRetriever(): QueryRetrieverInterface
-    {
-        return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
     }
 
     public function getEnablingModule(): ?string
