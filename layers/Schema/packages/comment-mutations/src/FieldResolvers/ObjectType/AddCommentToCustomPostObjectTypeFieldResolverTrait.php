@@ -7,6 +7,7 @@ namespace PoPSchema\CommentMutations\FieldResolvers\ObjectType;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CommentMutations\ComponentConfiguration;
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
@@ -52,6 +53,8 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
     {
         return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
+
+    abstract protected function getTranslationAPI(): TranslationAPIInterface;
 
     private function getAddCommentToCustomPostSchemaFieldArgNameTypeResolvers(
         bool $addCustomPostID,

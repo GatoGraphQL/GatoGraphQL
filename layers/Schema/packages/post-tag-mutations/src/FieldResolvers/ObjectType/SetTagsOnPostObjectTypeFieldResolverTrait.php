@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace PoPSchema\PostTagMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\PostTagMutations\MutationResolvers\SetTagsOnPostMutationResolver;
 
 trait SetTagsOnPostObjectTypeFieldResolverTrait
-{
+{    
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver = null;
 
@@ -30,6 +31,8 @@ trait SetTagsOnPostObjectTypeFieldResolverTrait
     {
         return $this->setTagsOnPostMutationResolver ??= $this->instanceManager->getInstance(SetTagsOnPostMutationResolver::class);
     }
+
+    abstract protected function getTranslationAPI(): TranslationAPIInterface;
 
     public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
     {

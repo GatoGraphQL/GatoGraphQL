@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\Resolvers;
 
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 
 trait WithLimitFieldArgResolverTrait
 {
     private ?string $limitFilterInputName = null;
+
+    abstract protected function getTranslationAPI(): TranslationAPIInterface;
 
     /**
      * Check the limit is not above the max limit or below -1

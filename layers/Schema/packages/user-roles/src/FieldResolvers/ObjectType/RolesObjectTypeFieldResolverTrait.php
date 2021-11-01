@@ -7,9 +7,12 @@ namespace PoPSchema\UserRoles\FieldResolvers\ObjectType;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Translation\TranslationAPIInterface;
 
 trait RolesObjectTypeFieldResolverTrait
 {
+    abstract protected function getTranslationAPI(): TranslationAPIInterface;
+
     public function getFieldNamesToResolve(): array
     {
         return [

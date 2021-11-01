@@ -6,10 +6,13 @@ namespace PoPSchema\UserState\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 
 trait UserStateObjectTypeFieldResolverTrait
 {
+    abstract protected function getTranslationAPI(): TranslationAPIInterface;
+
     protected function getValidationCheckpointSets(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,

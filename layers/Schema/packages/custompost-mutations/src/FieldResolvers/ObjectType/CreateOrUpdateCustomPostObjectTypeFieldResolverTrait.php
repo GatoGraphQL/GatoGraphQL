@@ -7,6 +7,7 @@ namespace PoPSchema\CustomPostMutations\FieldResolvers\ObjectType;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 
@@ -40,6 +41,8 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
+
+    abstract protected function getTranslationAPI(): TranslationAPIInterface;
 
     private function getCreateOrUpdateCustomPostSchemaFieldArgNameTypeResolvers(
         bool $addCustomPostID,
