@@ -41,7 +41,7 @@ class CustomPostListPostTagObjectTypeFieldResolver extends AbstractCustomPostLis
     {
         return $this->getPostTagObjectTypeResolver();
     }
-    
+
     public function isServiceEnabled(): bool
     {
         /**

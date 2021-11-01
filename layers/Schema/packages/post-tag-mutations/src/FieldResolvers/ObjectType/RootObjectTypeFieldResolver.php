@@ -46,7 +46,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     {
         return $this->getTranslationAPI()->__('post', 'post-tag-mutations');
     }
-    
+
     protected function getSetTagsFieldName(): string
     {
         return 'setTagsOnPost';

@@ -44,7 +44,7 @@ class PostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableOb
     {
         return $this->getPostTagObjectTypeResolver();
     }
-    
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

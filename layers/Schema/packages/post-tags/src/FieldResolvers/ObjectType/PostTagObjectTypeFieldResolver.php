@@ -41,7 +41,7 @@ class PostTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolver
     {
         return $this->getPostTagObjectTypeResolver();
     }
-    
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
