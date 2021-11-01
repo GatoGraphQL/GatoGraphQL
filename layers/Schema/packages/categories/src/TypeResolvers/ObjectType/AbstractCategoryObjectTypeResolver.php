@@ -10,7 +10,7 @@ use PoPSchema\Taxonomies\TypeResolvers\ObjectType\AbstractTaxonomyObjectTypeReso
 abstract class AbstractCategoryObjectTypeResolver extends AbstractTaxonomyObjectTypeResolver implements CategoryObjectTypeResolverInterface
 {
     abstract public function getCategoryTypeAPI(): CategoryTypeAPIInterface;
-    
+
     public function getTypeDescription(): ?string
     {
         return $this->getTranslationAPI()->__('Representation of a category, added to a custom post', 'categories');

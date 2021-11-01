@@ -30,7 +30,7 @@ class PostCategoryTypeDataLoader extends AbstractCategoryTypeDataLoader
     final protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
         return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
-    }   
+    }
 
     public function getCategoryTypeAPI(): CategoryTypeAPIInterface
     {
@@ -40,5 +40,5 @@ class PostCategoryTypeDataLoader extends AbstractCategoryTypeDataLoader
     public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
     {
         return $this->getPostCategoryObjectTypeResolver();
-    } 
+    }
 }

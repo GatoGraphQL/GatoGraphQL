@@ -31,7 +31,7 @@ class CustomPostListPostCategoryObjectTypeFieldResolver extends AbstractCustomPo
     {
         return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
     }
-    
+
     public function isServiceEnabled(): bool
     {
         /**

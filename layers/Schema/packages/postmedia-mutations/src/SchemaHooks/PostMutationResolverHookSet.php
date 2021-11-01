@@ -13,7 +13,7 @@ use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
     use PostMutationResolverHookSetTrait;
-    
+
     private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
     private ?MutationRootObjectTypeResolver $mutationRootObjectTypeResolver = null;
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
