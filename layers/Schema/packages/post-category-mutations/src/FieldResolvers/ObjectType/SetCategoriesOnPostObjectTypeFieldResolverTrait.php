@@ -15,7 +15,8 @@ use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
 trait SetCategoriesOnPostObjectTypeFieldResolverTrait
-{    
+{
+
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver = null;
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;

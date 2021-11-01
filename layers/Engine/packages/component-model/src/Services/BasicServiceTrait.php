@@ -11,7 +11,7 @@ use PoP\Translation\TranslationAPIInterface;
 trait BasicServiceTrait
 {
     use WithInstanceManagerServiceTrait;
-    
+
     private ?HooksAPIInterface $hooksAPI = null;
     private ?TranslationAPIInterface $translationAPI = null;
 

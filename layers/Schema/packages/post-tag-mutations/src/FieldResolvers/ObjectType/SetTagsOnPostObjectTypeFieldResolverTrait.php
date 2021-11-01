@@ -11,7 +11,8 @@ use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\PostTagMutations\MutationResolvers\SetTagsOnPostMutationResolver;
 
 trait SetTagsOnPostObjectTypeFieldResolverTrait
-{    
+{
+
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver = null;
 

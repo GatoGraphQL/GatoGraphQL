@@ -26,7 +26,7 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
     {
         return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
     }
-    
+
     /**
      * @return string[]
      */

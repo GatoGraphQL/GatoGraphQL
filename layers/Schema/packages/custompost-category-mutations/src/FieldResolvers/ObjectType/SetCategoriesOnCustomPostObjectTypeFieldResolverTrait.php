@@ -9,7 +9,7 @@ use PoP\Translation\TranslationAPIInterface;
 trait SetCategoriesOnCustomPostObjectTypeFieldResolverTrait
 {
     abstract protected function getTranslationAPI(): TranslationAPIInterface;
-    
+
     protected function getEntityName(): string
     {
         return $this->getTranslationAPI()->__('custom post', 'custompost-category-mutations');

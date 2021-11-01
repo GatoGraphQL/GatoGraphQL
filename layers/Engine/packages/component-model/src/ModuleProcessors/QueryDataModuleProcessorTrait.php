@@ -14,7 +14,7 @@ use PoP\Hooks\HooksAPIInterface;
 trait QueryDataModuleProcessorTrait
 {
     use FilterDataModuleProcessorTrait;
-    
+
     abstract protected function getHooksAPI(): HooksAPIInterface;
     abstract protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler;
 

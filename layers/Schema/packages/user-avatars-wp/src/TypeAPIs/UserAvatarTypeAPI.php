@@ -11,7 +11,7 @@ use WP_User;
 class UserAvatarTypeAPI implements UserAvatarTypeAPIInterface
 {
     use BasicServiceTrait;
-    
+
     protected function getUserID(string | int | object $userObjectOrID): string | int
     {
         if (is_object($userObjectOrID)) {

@@ -9,7 +9,7 @@ use PoP\Hooks\HooksAPIInterface;
 trait DataloadModuleProcessorTrait
 {
     use FormattableModuleTrait;
-    
+
     abstract protected function getHooksAPI(): HooksAPIInterface;
 
     public function getSubmodules(array $module): array

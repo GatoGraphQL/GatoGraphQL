@@ -21,7 +21,7 @@ abstract class AbstractRouteModuleProcessor
     {
         return $this->hooksAPI ??= $this->instanceManager->getInstance(HooksAPIInterface::class);
     }
-    
+
     /**
      * @return string[]
      */
