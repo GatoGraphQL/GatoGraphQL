@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\HelperServices;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
+use PoP\ComponentModel\ModuleProcessors\FilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -103,9 +103,9 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         foreach ($moduleValues as $moduleValue) {
             $module = $moduleValue['module'];
             $value = $moduleValue['value'];
-            /** @var FormComponentModuleProcessorInterface */
-            $moduleprocessor = $this->getModuleProcessorManager()->getProcessor($module);
-            $args[$moduleprocessor->getName($module)] = $value;
+            /** @var FilterInputModuleProcessorInterface */
+            $moduleProcessor = $this->getModuleProcessorManager()->getProcessor($module);
+            $args[$moduleProcessor->getName($module)] = $value;
         }
         return GeneralUtils::addQueryArgs($args, $url);
     }
