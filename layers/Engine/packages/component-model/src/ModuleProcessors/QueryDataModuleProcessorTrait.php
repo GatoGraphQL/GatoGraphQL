@@ -17,16 +17,7 @@ trait QueryDataModuleProcessorTrait
     use FilterDataModuleProcessorTrait;
     use WithHooksAPIServiceTrait;
 
-    private ?ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler = null;
-
-    public function setActionExecutionQueryInputOutputHandler(ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler): void
-    {
-        $this->actionExecutionQueryInputOutputHandler = $actionExecutionQueryInputOutputHandler;
-    }
-    protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler
-    {
-        return $this->actionExecutionQueryInputOutputHandler ??= $this->instanceManager->getInstance(ActionExecutionQueryInputOutputHandler::class);
-    }
+    abstract protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler;
 
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
