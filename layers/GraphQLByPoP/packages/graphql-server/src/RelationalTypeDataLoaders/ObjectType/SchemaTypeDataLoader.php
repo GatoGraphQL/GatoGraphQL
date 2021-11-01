@@ -7,6 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
 use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
+use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\UseObjectDictionaryTypeDataLoaderTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -18,6 +19,7 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
 
     private ?SchemaObjectTypeResolver $schemaObjectTypeResolver = null;
     private ?SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry = null;
+    private ?ObjectDictionaryInterface $objectDictionary = null;
 
     final public function setSchemaObjectTypeResolver(SchemaObjectTypeResolver $schemaObjectTypeResolver): void
     {
@@ -34,6 +36,14 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
     final protected function getSchemaDefinitionReferenceRegistry(): SchemaDefinitionReferenceRegistryInterface
     {
         return $this->schemaDefinitionReferenceRegistry ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
+    }
+    final public function setObjectDictionary(ObjectDictionaryInterface $objectDictionary): void
+    {
+        $this->objectDictionary = $objectDictionary;
+    }
+    final protected function getObjectDictionary(): ObjectDictionaryInterface
+    {
+        return $this->objectDictionary ??= $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface
