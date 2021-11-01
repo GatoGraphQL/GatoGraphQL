@@ -42,7 +42,7 @@ class GraphQLSchemaHelpers
         }
         return $typeName;
     }
-    
+
     public static function getNonNullTypeName(
         string $typeName,
     ): string {
@@ -51,7 +51,7 @@ class GraphQLSchemaHelpers
             $typeName
         );
     }
-    
+
     public static function getListTypeName(
         string $typeName,
     ): string {
