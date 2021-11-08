@@ -41,7 +41,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     final public function autowireInitializeGravityFormsAddEntryToFormMutationResolverBridge()
     {
         // Execute before $hooksAPI->addAction('wp',  array('RGForms', 'maybe_process_form'), 9);
-        if (doingPost()) {
+        if ('POST' === $_SERVER['REQUEST_METHOD']) {
             $this->getHooksAPI()->addAction(
                 'popcms:boot',
                 array($this, 'setup'),
