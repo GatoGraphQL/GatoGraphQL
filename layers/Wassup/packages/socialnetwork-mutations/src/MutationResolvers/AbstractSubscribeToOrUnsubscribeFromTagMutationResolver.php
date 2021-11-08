@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
 use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {

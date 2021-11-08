@@ -8,7 +8,6 @@ use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicke
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Stances\Facades\StanceTypeAPIFacade;
 use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractStanceObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {

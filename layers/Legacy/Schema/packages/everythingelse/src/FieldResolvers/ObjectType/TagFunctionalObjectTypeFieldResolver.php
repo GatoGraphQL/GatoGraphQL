@@ -11,7 +11,6 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\EverythingElse\Misc\TagHelpers;
 use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagObjectTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

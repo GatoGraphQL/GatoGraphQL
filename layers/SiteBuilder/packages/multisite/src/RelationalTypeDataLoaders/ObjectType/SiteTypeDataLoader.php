@@ -7,7 +7,6 @@ namespace PoP\Multisite\RelationalTypeDataLoaders\ObjectType;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoP\Engine\FunctionAPIFactory;
 use PoP\Multisite\ObjectModels\Site;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
 {

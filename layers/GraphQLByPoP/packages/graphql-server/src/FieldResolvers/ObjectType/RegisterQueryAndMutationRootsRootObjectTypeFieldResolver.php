@@ -13,7 +13,6 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Add connections to the QueryRoot and MutationRoot types,

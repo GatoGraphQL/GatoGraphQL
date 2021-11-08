@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\Menus;
 
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractMenu extends AbstractAutomaticallyInstantiatedService implements MenuInterface
 {

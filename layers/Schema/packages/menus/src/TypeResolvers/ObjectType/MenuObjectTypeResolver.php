@@ -8,7 +8,6 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\Menus\RelationalTypeDataLoaders\ObjectType\MenuTypeDataLoader;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class MenuObjectTypeResolver extends AbstractObjectTypeResolver
 {

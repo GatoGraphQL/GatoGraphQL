@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryEndpointBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * GraphiQL block

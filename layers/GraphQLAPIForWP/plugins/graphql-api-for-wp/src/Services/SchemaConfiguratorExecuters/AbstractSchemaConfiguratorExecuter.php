@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterfa
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Component\ApplicationEvents;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyInstantiatedService
 {

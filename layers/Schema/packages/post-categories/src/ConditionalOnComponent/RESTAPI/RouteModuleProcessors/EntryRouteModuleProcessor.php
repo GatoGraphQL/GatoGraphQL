@@ -14,7 +14,6 @@ use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\Categor
 use PoPSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
 use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {

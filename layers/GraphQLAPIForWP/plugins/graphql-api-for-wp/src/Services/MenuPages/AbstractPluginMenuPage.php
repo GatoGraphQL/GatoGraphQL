@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Main plugin menu page

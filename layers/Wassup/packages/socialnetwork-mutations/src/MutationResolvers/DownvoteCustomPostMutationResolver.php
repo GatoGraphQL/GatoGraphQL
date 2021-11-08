@@ -6,7 +6,6 @@ namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\UserMeta\Utils;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteCustomPostMutationResolver
 {

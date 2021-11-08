@@ -11,7 +11,6 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\UserState\State\ApplicationStateUtils;
 use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class LoginMutationResolver extends AbstractMutationResolver
 {

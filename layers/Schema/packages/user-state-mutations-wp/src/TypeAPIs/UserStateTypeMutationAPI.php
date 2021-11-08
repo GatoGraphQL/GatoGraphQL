@@ -8,9 +8,7 @@ use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\ErrorHandling\ErrorHelperInterface;
-use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

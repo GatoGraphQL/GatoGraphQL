@@ -12,7 +12,6 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {

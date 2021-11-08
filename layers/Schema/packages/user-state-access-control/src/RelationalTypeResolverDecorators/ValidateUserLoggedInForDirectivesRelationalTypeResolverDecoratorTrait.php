@@ -7,7 +7,6 @@ namespace PoPSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoPSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
 use PoPSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInForDirectivesDirectiveResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait ValidateUserLoggedInForDirectivesRelationalTypeResolverDecoratorTrait
 {

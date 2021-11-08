@@ -7,7 +7,6 @@ namespace PoPSchema\UserRolesWP\TypeResolvers\ObjectType;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\UserRolesWP\RelationalTypeDataLoaders\ObjectType\UserRoleTypeDataLoader;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
 {

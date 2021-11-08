@@ -9,7 +9,6 @@ use PoP\CacheControl\Component as CacheControlComponent;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\ComponentModel\Engine\Engine as UpstreamEngine;
 use PoP\LooseContracts\LooseContractManagerInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class Engine extends UpstreamEngine implements EngineInterface
 {

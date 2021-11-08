@@ -6,7 +6,6 @@ namespace PoPSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDecoratorTrait
 {

@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * It comprises the endpoint and the persisted query CPTs

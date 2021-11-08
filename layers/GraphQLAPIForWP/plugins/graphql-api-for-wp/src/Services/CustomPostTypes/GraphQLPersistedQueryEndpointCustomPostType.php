@@ -15,7 +15,6 @@ use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointExecuterRegistryInter
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpointCustomPostType
 {

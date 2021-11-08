@@ -6,7 +6,6 @@ namespace PoP\CacheControl\RelationalTypeResolverDecorators;
 
 use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
 {

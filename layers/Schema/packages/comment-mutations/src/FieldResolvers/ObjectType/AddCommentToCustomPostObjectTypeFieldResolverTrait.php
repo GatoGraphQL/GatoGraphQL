@@ -12,7 +12,6 @@ use PoPSchema\CommentMutations\ComponentConfiguration;
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait AddCommentToCustomPostObjectTypeFieldResolverTrait
 {

@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\AbstractScript;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Base class for a Gutenberg script.

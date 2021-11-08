@@ -7,10 +7,8 @@ namespace PoPSchema\PostCategories\TypeResolvers\ObjectType;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoPSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPSchema\Categories\TypeResolvers\ObjectType\AbstractCategoryObjectTypeResolver;
-use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPSchema\PostCategories\RelationalTypeDataLoaders\ObjectType\PostCategoryTypeDataLoader;
 use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
 {

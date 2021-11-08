@@ -6,7 +6,6 @@ namespace PoP\Site\Engine;
 
 use PoP\Application\Engine\Engine as UpstreamEngine;
 use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class Engine extends UpstreamEngine
 {

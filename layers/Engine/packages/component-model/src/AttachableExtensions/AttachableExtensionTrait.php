@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\AttachableExtensions;
 
-use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\Root\Services\ServiceTrait;
 
 trait AttachableExtensionTrait

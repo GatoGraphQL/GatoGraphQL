@@ -7,7 +7,6 @@ namespace PoP\Engine\Hooks\ModuleFilters;
 use PoP\Engine\ModuleFilters\MainContentModule;
 use PoP\Hooks\AbstractHookSet;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class MainContentModuleHookSet extends AbstractHookSet
 {

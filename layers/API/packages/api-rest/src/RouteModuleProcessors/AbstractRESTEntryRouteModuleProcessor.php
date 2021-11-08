@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace PoP\RESTAPI\RouteModuleProcessors;
 
 use PoP\API\Schema\FieldQueryConvertorInterface;
-use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
 use PoP\RESTAPI\Helpers\HookHelpers;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRESTEntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 {

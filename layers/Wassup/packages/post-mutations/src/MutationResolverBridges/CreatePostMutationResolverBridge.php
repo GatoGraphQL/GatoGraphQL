@@ -6,7 +6,6 @@ namespace PoPSitesWassup\PostMutations\MutationResolverBridges;
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\PostMutations\MutationResolvers\CreatePostMutationResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class CreatePostMutationResolverBridge extends AbstractCreateUpdatePostMutationResolverBridge
 {

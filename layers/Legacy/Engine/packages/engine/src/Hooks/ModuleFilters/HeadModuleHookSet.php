@@ -9,7 +9,6 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\ModuleFilters\HeadModule;
 use PoP\Hooks\AbstractHookSet;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class HeadModuleHookSet extends AbstractHookSet
 {

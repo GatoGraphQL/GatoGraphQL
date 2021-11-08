@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use Symfony\Contracts\Service\Attribute\Required;
 use WP_Block_Editor_Context;
 use WP_Post;
 

@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPageAttachers;
 use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Admin menu class

@@ -7,7 +7,6 @@ namespace PoPSchema\TaxonomyMeta\TypeAPIs;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPSchema\TaxonomyMeta\ComponentConfiguration;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractTaxonomyMetaTypeAPI implements TaxonomyMetaTypeAPIInterface
 {

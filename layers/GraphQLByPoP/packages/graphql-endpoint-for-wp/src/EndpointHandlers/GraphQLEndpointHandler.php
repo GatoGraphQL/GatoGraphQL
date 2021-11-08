@@ -11,7 +11,6 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\GraphQLAPI\Component;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLEndpointHandler extends AbstractEndpointHandler
 {

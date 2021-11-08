@@ -6,7 +6,6 @@ namespace PoP\LooseContracts;
 
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\WithInstanceManagerServiceTrait;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractLooseContractSet extends AbstractAutomaticallyInstantiatedService
 {

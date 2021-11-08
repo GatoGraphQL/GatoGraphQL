@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointResolvers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractEndpointResolver extends AbstractAutomaticallyInstantiatedService
 {

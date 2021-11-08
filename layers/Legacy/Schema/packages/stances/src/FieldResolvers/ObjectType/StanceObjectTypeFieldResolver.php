@@ -19,7 +19,6 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

@@ -8,7 +8,6 @@ use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ModuleRouting\ModuleRoutingGroups;
 use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class EntryModuleManager implements EntryModuleManagerInterface
 {

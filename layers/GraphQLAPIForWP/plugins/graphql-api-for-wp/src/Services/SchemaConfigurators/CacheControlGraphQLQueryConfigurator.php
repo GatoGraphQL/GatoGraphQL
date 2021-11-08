@@ -10,7 +10,6 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\CacheControlBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\CacheControl\Managers\CacheControlManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class CacheControlGraphQLQueryConfigurator extends AbstractGraphQLQueryConfigurator
 {

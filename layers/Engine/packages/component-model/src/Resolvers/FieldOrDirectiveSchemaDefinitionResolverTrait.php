@@ -9,7 +9,6 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait FieldOrDirectiveSchemaDefinitionResolverTrait
 {

@@ -13,7 +13,6 @@ use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Add a comment to a custom post. The user may be logged-in or not

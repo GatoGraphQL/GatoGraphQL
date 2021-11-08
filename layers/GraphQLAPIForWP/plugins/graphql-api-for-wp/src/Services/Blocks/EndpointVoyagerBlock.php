@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\CustomEndpointBlockCategory;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockServiceTagInterface
 {

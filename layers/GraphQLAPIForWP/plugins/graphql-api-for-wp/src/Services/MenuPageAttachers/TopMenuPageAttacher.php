@@ -9,7 +9,6 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphQLVoyagerMenuPage;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
