@@ -26,6 +26,7 @@
         "symfony/yaml": "^5.1"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.2",
         "johnpbloch/wordpress": ">=5.5",
         "phpstan/phpstan": "^0.12.76",
         "phpunit/phpunit": ">=9.3",
