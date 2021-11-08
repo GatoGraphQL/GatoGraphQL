@@ -301,7 +301,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
          */
-        $consolidatedFieldArgNameTypeResolvers = $this->getHooksAPI()->applyFilters(
+        $consolidatedFieldArgNameTypeResolvers = $this->hooksAPI->applyFilters(
             HookNames::INTERFACE_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
             $fieldArgNameTypeResolvers,
             $this,
@@ -322,7 +322,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         if (array_key_exists($cacheKey, $this->consolidatedFieldArgDescriptionCache)) {
             return $this->consolidatedFieldArgDescriptionCache[$cacheKey];
         }
-        $this->consolidatedFieldArgDescriptionCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedFieldArgDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
             HookNames::INTERFACE_TYPE_FIELD_ARG_DESCRIPTION,
             $this->getFieldArgDescription($fieldName, $fieldArgName),
             $this,
@@ -343,7 +343,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         if (array_key_exists($cacheKey, $this->consolidatedFieldArgDefaultValueCache)) {
             return $this->consolidatedFieldArgDefaultValueCache[$cacheKey];
         }
-        $this->consolidatedFieldArgDefaultValueCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedFieldArgDefaultValueCache[$cacheKey] = $this->hooksAPI->applyFilters(
             HookNames::INTERFACE_TYPE_FIELD_ARG_DEFAULT_VALUE,
             $this->getFieldArgDefaultValue($fieldName, $fieldArgName),
             $this,
@@ -364,7 +364,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         if (array_key_exists($cacheKey, $this->consolidatedFieldArgTypeModifiersCache)) {
             return $this->consolidatedFieldArgTypeModifiersCache[$cacheKey];
         }
-        $this->consolidatedFieldArgTypeModifiersCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedFieldArgTypeModifiersCache[$cacheKey] = $this->hooksAPI->applyFilters(
             HookNames::INTERFACE_TYPE_FIELD_ARG_TYPE_MODIFIERS,
             $this->getFieldArgTypeModifiers($fieldName, $fieldArgName),
             $this,
@@ -436,7 +436,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         if (array_key_exists($cacheKey, $this->consolidatedFieldDescriptionCache)) {
             return $this->consolidatedFieldDescriptionCache[$cacheKey];
         }
-        $this->consolidatedFieldDescriptionCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedFieldDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
             HookNames::INTERFACE_TYPE_FIELD_DESCRIPTION,
             $this->getFieldDescription($fieldName),
             $this,
@@ -456,7 +456,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         if (array_key_exists($cacheKey, $this->consolidatedFieldDeprecationMessageCache)) {
             return $this->consolidatedFieldDeprecationMessageCache[$cacheKey];
         }
-        $this->consolidatedFieldDeprecationMessageCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedFieldDeprecationMessageCache[$cacheKey] = $this->hooksAPI->applyFilters(
             HookNames::INTERFACE_TYPE_FIELD_DEPRECATION_MESSAGE,
             $this->getFieldDeprecationMessage($fieldName),
             $this,

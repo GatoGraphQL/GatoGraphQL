@@ -14,7 +14,7 @@ class PostHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        $this->hooksAPI->addFilter(
             HookHelpers::getHookName(EntryRouteModuleProcessor::class),
             [$this, 'getRESTFields']
         );

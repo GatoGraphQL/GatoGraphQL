@@ -731,7 +731,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
          */
-        $consolidatedDirectiveArgNameTypeResolvers = $this->getHooksAPI()->applyFilters(
+        $consolidatedDirectiveArgNameTypeResolvers = $this->hooksAPI->applyFilters(
             HookNames::DIRECTIVE_ARG_NAME_TYPE_RESOLVERS,
             $directiveArgNameTypeResolvers,
             $this,
@@ -766,7 +766,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if (array_key_exists($cacheKey, $this->consolidatedDirectiveArgDescriptionCache)) {
             return $this->consolidatedDirectiveArgDescriptionCache[$cacheKey];
         }
-        $this->consolidatedDirectiveArgDescriptionCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedDirectiveArgDescriptionCache[$cacheKey] = $this->hooksAPI->applyFilters(
             HookNames::DIRECTIVE_ARG_DESCRIPTION,
             $this->getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
             $this,
@@ -787,7 +787,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if (array_key_exists($cacheKey, $this->consolidatedDirectiveArgDefaultValueCache)) {
             return $this->consolidatedDirectiveArgDefaultValueCache[$cacheKey];
         }
-        $this->consolidatedDirectiveArgDefaultValueCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedDirectiveArgDefaultValueCache[$cacheKey] = $this->hooksAPI->applyFilters(
             HookNames::DIRECTIVE_ARG_DEFAULT_VALUE,
             $this->getDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
             $this,
@@ -808,7 +808,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if (array_key_exists($cacheKey, $this->consolidatedDirectiveArgTypeModifiersCache)) {
             return $this->consolidatedDirectiveArgTypeModifiersCache[$cacheKey];
         }
-        $this->consolidatedDirectiveArgTypeModifiersCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+        $this->consolidatedDirectiveArgTypeModifiersCache[$cacheKey] = $this->hooksAPI->applyFilters(
             HookNames::DIRECTIVE_ARG_TYPE_MODIFIERS,
             $this->getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
             $this,

@@ -12,7 +12,7 @@ class VarsHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        $this->hooksAPI->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
             array($this, 'getModelInstanceComponentsFromVars')
         );

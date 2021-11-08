@@ -38,7 +38,7 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
         ) {
             /** @var string[] $directiveNames */
             foreach ($directiveNames as $directiveName) {
-                $this->getHooksAPI()->addFilter(
+                $this->hooksAPI->addFilter(
                     HookHelpers::getHookNameToFilterDirective($directiveName),
                     array($this, 'maybeFilterDirectiveName'),
                     10,
@@ -46,7 +46,7 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractCMSBoot
                 );
             }
         } else {
-            $this->getHooksAPI()->addFilter(
+            $this->hooksAPI->addFilter(
                 HookHelpers::getHookNameToFilterDirective(),
                 array($this, 'maybeFilterDirectiveName'),
                 10,

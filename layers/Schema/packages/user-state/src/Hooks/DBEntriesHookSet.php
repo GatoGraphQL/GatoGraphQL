@@ -23,7 +23,7 @@ class DBEntriesHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        $this->hooksAPI->addFilter(
             'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',
             array($this, 'moveEntriesUnderDBName'),
             10,
@@ -33,7 +33,7 @@ class DBEntriesHookSet extends AbstractHookSet
 
     public function moveEntriesUnderDBName(array $dbname_datafields): array
     {
-        $dbname_datafields['userstate'] = $this->getHooksAPI()->applyFilters(
+        $dbname_datafields['userstate'] = $this->hooksAPI->applyFilters(
             'PoPSchema\UserState\DataloaderHooks:metaFields',
             $this->getGlobalObjectTypeFieldResolver()->getFieldNamesToResolve()
         );

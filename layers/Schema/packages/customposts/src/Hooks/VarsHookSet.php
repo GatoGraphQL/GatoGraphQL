@@ -27,11 +27,11 @@ class VarsHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        $this->hooksAPI->addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
             array($this, 'getModelInstanceComponentsFromVars')
         );
-        $this->getHooksAPI()->addAction(
+        $this->hooksAPI->addAction(
             'augmentVarsProperties',
             [$this, 'augmentVarsProperties'],
             10,
@@ -51,7 +51,7 @@ class VarsHookSet extends AbstractHookSet
                 // Post and Event may be different
                 // Announcements and Articles (Posts), or Past Event and (Upcoming) Event may be different
                 // By default, we check for post type but not for categories
-                $component_types = (array) $this->getHooksAPI()->applyFilters(
+                $component_types = (array) $this->hooksAPI->applyFilters(
                     '\PoP\ComponentModel\ModelInstanceProcessor_Utils:components_from_vars:type:single',
                     array(
                         ModelInstanceComponentTypes::SINGLE_CUSTOMPOST,

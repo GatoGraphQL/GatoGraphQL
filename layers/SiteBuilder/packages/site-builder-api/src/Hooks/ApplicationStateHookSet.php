@@ -13,11 +13,11 @@ class ApplicationStateHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        $this->hooksAPI->addFilter(
             ModelInstance::HOOK_COMPONENTSFROMVARS_RESULT,
             [$this, 'maybeAddComponent']
         );
-        $this->getHooksAPI()->addAction(
+        $this->hooksAPI->addAction(
             'ApplicationState:addVars',
             [$this, 'addVars'],
             10,

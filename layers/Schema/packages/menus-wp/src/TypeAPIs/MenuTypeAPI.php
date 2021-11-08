@@ -170,9 +170,9 @@ class MenuTypeAPI implements MenuTypeAPIInterface
             // Same param name, so do nothing
         }
 
-        return $this->getHooksAPI()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             TaxonomyTypeAPI::HOOK_QUERY,
-            $this->getHooksAPI()->applyFilters(
+            $this->hooksAPI->applyFilters(
                 self::HOOK_QUERY,
                 $query,
                 $options

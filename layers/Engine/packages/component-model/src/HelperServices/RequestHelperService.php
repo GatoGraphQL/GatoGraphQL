@@ -18,7 +18,7 @@ class RequestHelperService implements RequestHelperServiceInterface
     public function getCurrentURL(): string
     {
         // Strip the Target and Output off it, users don't need to see those
-        $remove_params = (array) $this->getHooksAPI()->applyFilters(
+        $remove_params = (array) $this->hooksAPI->applyFilters(
             'RequestUtils:current_url:remove_params',
             [
                 Params::SETTINGSFORMAT,
@@ -44,7 +44,7 @@ class RequestHelperService implements RequestHelperServiceInterface
         );
 
         // Allow plug-ins to do their own logic to the URL
-        $url = $this->getHooksAPI()->applyFilters(
+        $url = $this->hooksAPI->applyFilters(
             'RequestUtils:getCurrentURL',
             $url
         );

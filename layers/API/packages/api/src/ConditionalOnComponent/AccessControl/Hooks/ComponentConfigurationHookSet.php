@@ -22,7 +22,7 @@ class ComponentConfigurationHookSet extends AbstractHookSet
                 ComponentConfiguration::class,
                 Environment::USE_SCHEMA_DEFINITION_CACHE
             );
-            $this->getHooksAPI()->addFilter(
+            $this->hooksAPI->addFilter(
                 $hookName,
                 fn () => false
             );

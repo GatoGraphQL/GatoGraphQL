@@ -36,7 +36,7 @@ class VarsHookSet extends AbstractHookSet
     protected function init(): void
     {
         // Implement immediately, before VarsHookSet in API adds output=json
-        $this->getHooksAPI()->addAction(
+        $this->hooksAPI->addAction(
             'ApplicationState:addVars',
             array($this, 'maybeRemoveVars'),
             0,

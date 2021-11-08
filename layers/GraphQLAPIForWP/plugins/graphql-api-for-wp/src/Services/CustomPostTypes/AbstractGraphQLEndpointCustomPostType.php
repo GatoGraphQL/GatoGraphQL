@@ -175,7 +175,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
      */
     protected function isAccessForbidden(): bool
     {
-        return $this->getHooksAPI()->applyFilters(
+        return $this->hooksAPI->applyFilters(
             Hooks::FORBID_ACCESS,
             false
         );

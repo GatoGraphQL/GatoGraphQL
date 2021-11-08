@@ -20,7 +20,7 @@ class MutationResolutionManager implements MutationResolutionManagerInterface
     #[Required]
     final public function autowireInitializeMutationResolutionManager(): void
     {
-        $this->getHooksAPI()->addAction(
+        $this->hooksAPI->addAction(
             'augmentVarsProperties',
             [$this, 'clearResults']
         );

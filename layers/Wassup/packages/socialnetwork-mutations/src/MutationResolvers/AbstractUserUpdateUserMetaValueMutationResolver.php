@@ -43,7 +43,7 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
 
     protected function additionals($target_id, $form_data): void
     {
-        $this->getHooksAPI()->doAction('gd_updateusermetavalue:user', $target_id, $form_data);
+        $this->hooksAPI->doAction('gd_updateusermetavalue:user', $target_id, $form_data);
         parent::additionals($target_id, $form_data);
     }
 }

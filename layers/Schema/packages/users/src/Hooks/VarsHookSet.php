@@ -11,7 +11,7 @@ class VarsHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addAction(
+        $this->hooksAPI->addAction(
             'augmentVarsProperties',
             [$this, 'augmentVarsProperties'],
             10,

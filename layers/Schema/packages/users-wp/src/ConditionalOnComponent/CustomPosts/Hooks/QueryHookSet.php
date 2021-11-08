@@ -11,7 +11,7 @@ class QueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
-        $this->getHooksAPI()->addFilter(
+        $this->hooksAPI->addFilter(
             AbstractCustomPostTypeAPI::HOOK_QUERY,
             [$this, 'convertCustomPostsQuery'],
             10,

@@ -25,7 +25,7 @@ class MutationCheckpointProcessor extends AbstractCheckpointProcessor
             case self::ENABLED_MUTATIONS:
                 $vars = ApplicationState::getVars();
                 if (!$vars['are-mutations-enabled']) {
-                    $errorMessage = $this->getHooksAPI()->applyFilters(
+                    $errorMessage = $this->hooksAPI->applyFilters(
                         self::HOOK_MUTATIONS_NOT_SUPPORTED_ERROR_MSG,
                         $this->getTranslationAPI()->__('Mutations cannot be executed', 'component-model')
                     );
