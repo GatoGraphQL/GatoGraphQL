@@ -30,9 +30,6 @@ class MutationResolutionManagerHookSet extends AbstractHookSet
 
     public function clearResults(): void
     {
-        // Only if the service has been initialized
-        if ($this->mutationResolutionManager !== null) {
-            $this->getMutationResolutionManager()->clearResults();
-        }
+        $this->getMutationResolutionManager()->clearResults();
     }
 }

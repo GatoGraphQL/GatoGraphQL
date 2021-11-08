@@ -48,23 +48,13 @@ class CacheHookSet extends AbstractHookSet
 
     public function clear(): void
     {
-        // Only if the services have been initialized
-        if ($this->persistentCache !== null) {
-            $this->getPersistentCache()->clear();
-        }
-        if ($this->transientCache !== null) {
-            $this->getTransientCache()->clear();
-        }
+        $this->getPersistentCache()->clear();
+        $this->getTransientCache()->clear();
     }
 
     public function commit(): void
     {
-        // Only if the services have been initialized
-        if ($this->persistentCache !== null) {
-            $this->getPersistentCache()->commit();
-        }
-        if ($this->transientCache !== null) {
-            $this->getTransientCache()->commit();
-        }
+        $this->getPersistentCache()->commit();
+        $this->getTransientCache()->commit();
     }
 }
