@@ -13,8 +13,8 @@ trait BasicServiceTrait
 {
     use WithInstanceManagerServiceTrait;
 
-    private HooksAPIInterface $hooksAPI;
-    private TranslationAPIInterface $translationAPI;
+    protected HooksAPIInterface $hooksAPI;
+    protected TranslationAPIInterface $translationAPI;
 
     #[Required]
     final public function setHooksAPI(HooksAPIInterface $hooksAPI): void
