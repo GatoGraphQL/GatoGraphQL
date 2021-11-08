@@ -296,6 +296,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                         foreach ($justUpdatedExtensions as $extensionBaseName => $extensionInstance) {
                             $extensionInstance->pluginJustUpdated($storedPluginVersions[$extensionBaseName]);
                         }
+
+                        // If new CPTs have rewrite rules, these must be flushed
+                        \flush_rewrite_rules();
+
+                        // Regenerate the timestamp, to generate the service container
+                        $this->purgeContainer();
                     },
                     PluginLifecyclePriorities::AFTER_EVERYTHING
                 );
@@ -309,12 +315,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                     unset($storedPluginVersions[$extensionBaseName]);
                 }
                 \update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
-
-                // If new CPTs have rewrite rules, these must be flushed
-                \flush_rewrite_rules();
-
-                // Regenerate the timestamp, to generate the service container
-                $this->purgeContainer();
             },
             PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
         );
