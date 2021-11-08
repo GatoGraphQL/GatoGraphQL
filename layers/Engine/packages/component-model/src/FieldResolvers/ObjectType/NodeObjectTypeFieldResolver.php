@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?NodeInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver = null;
 
