@@ -8,13 +8,16 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Root\Services\AutomaticallyInstantiatedServiceInterface;
+use PoP\Root\Services\AutomaticallyInstantiatedServiceTrait;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMutationResolverBridge;
 use PoPSitesWassup\GravityFormsMutations\MutationResolvers\GravityFormsAddEntryToFormMutationResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
-class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
+class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormComponentMutationResolverBridge implements AutomaticallyInstantiatedServiceInterface
 {
+    use AutomaticallyInstantiatedServiceTrait;
+
     public const HOOK_FORM_FIELDNAMES = __CLASS__ . ':form-fieldnames';
 
     private ?UserTypeAPIInterface $userTypeAPI = null;
@@ -37,8 +40,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         return $this->gravityFormsAddEntryToFormMutationResolver ??= $this->instanceManager->getInstance(GravityFormsAddEntryToFormMutationResolver::class);
     }
 
-    #[Required]
-    final public function autowireInitializeGravityFormsAddEntryToFormMutationResolverBridge()
+    final public function initialize(): void
     {
         // Execute before $hooksAPI->addAction('wp',  array('RGForms', 'maybe_process_form'), 9);
         if ('POST' === $_SERVER['REQUEST_METHOD']) {

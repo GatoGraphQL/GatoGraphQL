@@ -61,6 +61,11 @@ class Cache implements PersistentCacheInterface, TransientCacheInterface
         $this->cacheItemPool->clear();
     }
 
+    public function commit(): void
+    {
+        $this->cacheItemPool->commit();
+    }
+
 
     /**
      * If the item is not cached, it will return `null`

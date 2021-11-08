@@ -17,6 +17,10 @@ interface CacheInterface
      * Remove all entries in the cache
      */
     public function clear(): void;
+    /**
+     * Commit entries in the pool
+     */
+    public function commit(): void;
     public function getCache(string $id, string $type): mixed;
     public function getComponentModelCache(string $id, string $type): mixed;
 
