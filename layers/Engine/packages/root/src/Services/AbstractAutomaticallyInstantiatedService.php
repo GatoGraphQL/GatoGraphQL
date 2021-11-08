@@ -11,6 +11,5 @@ namespace PoP\Root\Services;
  */
 abstract class AbstractAutomaticallyInstantiatedService implements AutomaticallyInstantiatedServiceInterface
 {
-    use ServiceTrait;
     use AutomaticallyInstantiatedServiceTrait;
 }

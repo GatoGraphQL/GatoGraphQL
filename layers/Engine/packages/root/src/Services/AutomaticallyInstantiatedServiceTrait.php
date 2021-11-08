@@ -13,6 +13,8 @@ use PoP\Root\Component\ApplicationEvents;
  */
 trait AutomaticallyInstantiatedServiceTrait
 {
+    use ServiceTrait;
+
     public function initialize(): void
     {
         // By default, do nothing
