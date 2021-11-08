@@ -13,8 +13,6 @@ use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
-use PoP\Translation\TranslationAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class DataloadHelperService implements DataloadHelperServiceInterface
 {

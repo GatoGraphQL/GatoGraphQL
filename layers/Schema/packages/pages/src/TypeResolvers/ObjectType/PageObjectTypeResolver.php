@@ -8,7 +8,6 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPSchema\Pages\RelationalTypeDataLoaders\ObjectType\PageTypeDataLoader;
 use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {

@@ -6,7 +6,6 @@ namespace PoPSchema\PostMutations\MutationResolvers;
 
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {

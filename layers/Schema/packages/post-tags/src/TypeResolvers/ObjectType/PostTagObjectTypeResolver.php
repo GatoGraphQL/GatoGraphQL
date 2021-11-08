@@ -9,7 +9,6 @@ use PoPSchema\PostTags\RelationalTypeDataLoaders\ObjectType\PostTagTypeDataLoade
 use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPSchema\Tags\TypeResolvers\ObjectType\AbstractTagObjectTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
 {

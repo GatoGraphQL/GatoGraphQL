@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {

@@ -9,7 +9,6 @@ use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractTypeResolver implements TypeResolverInterface
 {

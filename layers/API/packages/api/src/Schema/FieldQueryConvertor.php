@@ -16,8 +16,6 @@ use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax as FieldQueryQuerySyntax;
 use PoP\FieldQuery\QueryUtils;
 use PoP\QueryParsing\QueryParserInterface;
-use PoP\Translation\TranslationAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 use function count;
 use function strlen;

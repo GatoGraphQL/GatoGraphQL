@@ -12,7 +12,6 @@ use InvalidArgumentException;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Environment as RootEnvironment;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractContentParser implements ContentParserInterface
 {

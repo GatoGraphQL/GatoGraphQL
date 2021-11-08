@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\RelationalTypeDataLoaders;
 
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\LooseContracts\NameResolverInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoaderInterface
 {

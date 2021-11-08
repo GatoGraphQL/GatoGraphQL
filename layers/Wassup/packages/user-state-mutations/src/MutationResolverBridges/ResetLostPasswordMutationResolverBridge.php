@@ -8,7 +8,6 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolver
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\UserStateMutations\MutationResolvers\MutationInputProperties;
 use PoPSitesWassup\UserStateMutations\MutationResolvers\ResetLostPasswordMutationResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class ResetLostPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

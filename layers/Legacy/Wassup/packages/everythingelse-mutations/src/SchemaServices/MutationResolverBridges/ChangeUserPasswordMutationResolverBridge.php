@@ -8,7 +8,6 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolver
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\ChangeUserPasswordMutationResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

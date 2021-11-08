@@ -9,7 +9,6 @@ use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\EndpointBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * SchemaConfiguration block

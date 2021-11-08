@@ -7,7 +7,6 @@ namespace PoPSchema\Settings\TypeAPIs;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPSchema\Settings\ComponentConfiguration;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
 {

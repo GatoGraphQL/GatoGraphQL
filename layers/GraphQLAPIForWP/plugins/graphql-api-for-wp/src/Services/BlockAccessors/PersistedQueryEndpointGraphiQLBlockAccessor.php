@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\AppObjects\BlockAttributes\PersistedQueryEndpointGraph
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\ComponentModel\Services\BasicServiceTrait;
-use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 
 class PersistedQueryEndpointGraphiQLBlockAccessor

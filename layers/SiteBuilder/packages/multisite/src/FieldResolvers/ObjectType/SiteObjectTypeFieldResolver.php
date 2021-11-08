@@ -11,7 +11,6 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Multisite\ObjectModels\Site;
 use PoP\Multisite\TypeResolvers\ObjectType\SiteObjectTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

@@ -6,7 +6,6 @@ namespace PoPSitesWassup\SystemMutations\MutationResolverBridges;
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\SystemMutations\MutationResolvers\SaveDefinitionFileMutationResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class SaveDefinitionFileMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {

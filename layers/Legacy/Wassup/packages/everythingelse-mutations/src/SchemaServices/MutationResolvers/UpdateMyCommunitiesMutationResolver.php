@@ -7,7 +7,6 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPSchema\UserMeta\Utils;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
 {

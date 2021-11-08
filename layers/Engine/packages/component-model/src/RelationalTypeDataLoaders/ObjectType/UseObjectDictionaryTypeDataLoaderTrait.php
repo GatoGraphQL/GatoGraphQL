@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait UseObjectDictionaryTypeDataLoaderTrait
 {

@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Resolvers;
 
 use PoP\ComponentModel\ModuleProcessors\FilterInputContainerModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait QueryableFieldResolverTrait
 {

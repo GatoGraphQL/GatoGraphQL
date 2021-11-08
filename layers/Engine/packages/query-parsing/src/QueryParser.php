@@ -6,8 +6,6 @@ namespace PoP\QueryParsing;
 
 use Exception;
 use PoP\ComponentModel\Services\BasicServiceTrait;
-use PoP\Translation\TranslationAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class QueryParser implements QueryParserInterface
 {

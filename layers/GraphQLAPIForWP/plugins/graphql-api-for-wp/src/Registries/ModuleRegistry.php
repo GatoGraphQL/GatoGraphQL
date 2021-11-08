@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverInterface;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use InvalidArgumentException;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class ModuleRegistry implements ModuleRegistryInterface
 {

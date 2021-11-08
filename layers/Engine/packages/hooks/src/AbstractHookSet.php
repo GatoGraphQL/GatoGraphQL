@@ -6,7 +6,6 @@ namespace PoP\Hooks;
 
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractHookSet extends AbstractAutomaticallyInstantiatedService
 {

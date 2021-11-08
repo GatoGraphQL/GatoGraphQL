@@ -6,7 +6,6 @@ namespace PoPSchema\Posts\RelationalTypeDataLoaders\ObjectType;
 
 use PoPSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustomPostTypeDataLoader;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {

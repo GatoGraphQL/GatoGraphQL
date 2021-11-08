@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\LooseContracts;
 
 use PoP\Root\Services\WithInstanceManagerServiceTrait;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractNameResolver implements NameResolverInterface
 {

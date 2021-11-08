@@ -11,7 +11,6 @@ use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtils;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class LostPasswordMutationResolver extends AbstractMutationResolver
 {

@@ -9,7 +9,6 @@ use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\Users\Constants\InputNames;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\EditMembershipMutationResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class EditMembershipMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

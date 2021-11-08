@@ -6,7 +6,6 @@ namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
 use PoP\UserAccount\FunctionAPIFactory;
 use PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver as UpstreamLoginMutationResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class LoginMutationResolver extends UpstreamLoginMutationResolver
 {

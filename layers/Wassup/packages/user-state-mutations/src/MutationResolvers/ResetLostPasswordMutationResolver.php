@@ -11,7 +11,6 @@ use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\UserAccount\FunctionAPIFactory;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtils;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class ResetLostPasswordMutationResolver extends AbstractMutationResolver
 {

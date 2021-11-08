@@ -8,7 +8,6 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\Media\RelationalTypeDataLoaders\ObjectType\MediaTypeDataLoader;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class MediaObjectTypeResolver extends AbstractObjectTypeResolver
 {

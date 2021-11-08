@@ -8,7 +8,6 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\UserState\State\ApplicationStateUtils;
 use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class LogoutMutationResolver extends AbstractMutationResolver
 {

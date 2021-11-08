@@ -8,7 +8,6 @@ use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicke
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Highlights\Facades\HighlightTypeAPIFacade;
 use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightObjectTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractHighlightObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {

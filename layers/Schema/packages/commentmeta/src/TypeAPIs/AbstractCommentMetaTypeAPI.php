@@ -7,7 +7,6 @@ namespace PoPSchema\CommentMeta\TypeAPIs;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoPSchema\CommentMeta\ComponentConfiguration;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCommentMetaTypeAPI implements CommentMetaTypeAPIInterface
 {

@@ -10,7 +10,6 @@ use PoP\API\Response\Schemes as APISchemes;
 use PoP\API\Schema\QueryInputs;
 use PoP\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Routing\RouteNatures;
-use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 use WP_Query;
 

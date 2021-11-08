@@ -7,7 +7,6 @@ namespace PoPSitesWassup\FlagMutations\MutationResolverBridges;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\FlagMutations\MutationResolvers\FlagCustomPostMutationResolver;
 use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMutationResolverBridge;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class FlagCustomPostMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {

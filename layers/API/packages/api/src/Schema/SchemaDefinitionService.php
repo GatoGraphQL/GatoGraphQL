@@ -18,10 +18,8 @@ use PoP\API\ObjectModels\SchemaDefinition\TypeSchemaDefinitionProviderInterface;
 use PoP\API\ObjectModels\SchemaDefinition\UnionTypeSchemaDefinitionProvider;
 use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoP\API\PersistedQueries\PersistedQueryManagerInterface;
-use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -32,7 +30,6 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\Engine\Schema\SchemaDefinitionService as UpstreamSchemaDefinitionService;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements SchemaDefinitionServiceInterface
 {

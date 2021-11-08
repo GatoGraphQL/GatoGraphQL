@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 use GraphQLAPI\GraphQLAPI\Services\BlockAccessors\PersistedQueryEndpointAPIHierarchyBlockAccessor;
 use GraphQLAPI\GraphQLAPI\Services\BlockAccessors\PersistedQueryEndpointGraphiQLBlockAccessor;
 use PoP\ComponentModel\Services\BasicServiceTrait;
-use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 
 class GraphQLQueryPostTypeHelpers

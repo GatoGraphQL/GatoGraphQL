@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
 use InvalidArgumentException;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait MarkdownContentRetrieverTrait
 {

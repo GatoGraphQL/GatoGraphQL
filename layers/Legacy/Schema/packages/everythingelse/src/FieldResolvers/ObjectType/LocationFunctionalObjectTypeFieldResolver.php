@@ -12,7 +12,6 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoPSchema\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class LocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

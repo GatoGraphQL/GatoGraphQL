@@ -8,7 +8,6 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeRe
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait PostMutationResolverHookSetTrait
 {

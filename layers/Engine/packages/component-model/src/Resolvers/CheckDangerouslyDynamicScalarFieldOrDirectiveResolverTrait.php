@@ -8,7 +8,6 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait
 {

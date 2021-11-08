@@ -7,7 +7,6 @@ namespace PoPSitesWassup\UserStateMutations\MutationResolverBridges;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\LogoutMutationResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

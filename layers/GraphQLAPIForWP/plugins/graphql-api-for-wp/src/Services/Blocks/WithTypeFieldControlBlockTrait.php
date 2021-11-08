@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\BlockConstants;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait WithTypeFieldControlBlockTrait
 {

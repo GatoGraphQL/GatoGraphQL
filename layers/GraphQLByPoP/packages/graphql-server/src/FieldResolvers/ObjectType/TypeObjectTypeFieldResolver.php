@@ -25,7 +25,6 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

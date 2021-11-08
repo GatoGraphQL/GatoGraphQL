@@ -14,7 +14,6 @@ use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\Hooks\AbstractHookSet;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class LazyLoadHookSet extends AbstractHookSet
 {

@@ -8,7 +8,6 @@ use PoP\Application\HelperAPIFactory;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Engine\Route\RouteUtils;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
 {

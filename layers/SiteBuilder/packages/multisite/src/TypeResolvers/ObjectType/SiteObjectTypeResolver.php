@@ -8,7 +8,6 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\Multisite\ObjectModels\Site;
 use PoP\Multisite\RelationalTypeDataLoaders\ObjectType\SiteTypeDataLoader;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 {

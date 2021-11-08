@@ -24,7 +24,6 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Definitions\Configuration\Request;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\LooseContracts\NameResolverInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 {

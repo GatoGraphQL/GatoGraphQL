@@ -6,10 +6,8 @@ namespace PoPSchema\CommentMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Services\BasicServiceTrait;
-use PoP\Translation\TranslationAPIInterface;
 use PoPSchema\CommentMutations\ComponentConfiguration;
 use PoPSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

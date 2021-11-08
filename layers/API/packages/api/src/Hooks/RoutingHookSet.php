@@ -10,7 +10,6 @@ use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Hooks\AbstractHookSet;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class RoutingHookSet extends AbstractHookSet
 {

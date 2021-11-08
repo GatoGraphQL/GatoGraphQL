@@ -13,7 +13,6 @@ use PoPSchema\PostMutations\SchemaHooks\PostMutationResolverHookSetTrait;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {

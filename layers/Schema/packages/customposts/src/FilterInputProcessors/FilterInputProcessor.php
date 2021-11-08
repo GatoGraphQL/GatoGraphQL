@@ -8,7 +8,6 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 use PoPSchema\CustomPosts\FilterInput\FilterInputHelper;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {

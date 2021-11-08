@@ -7,7 +7,6 @@ namespace PoPSchema\Posts\TypeResolvers\ObjectType;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPSchema\Posts\RelationalTypeDataLoaders\ObjectType\PostTypeDataLoader;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {

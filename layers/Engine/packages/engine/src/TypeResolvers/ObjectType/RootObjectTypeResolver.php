@@ -9,7 +9,6 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\Engine\ObjectModels\Root;
 use PoP\Engine\RelationalTypeDataLoaders\ObjectType\RootTypeDataLoader;
 use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class RootObjectTypeResolver extends AbstractObjectTypeResolver
 {

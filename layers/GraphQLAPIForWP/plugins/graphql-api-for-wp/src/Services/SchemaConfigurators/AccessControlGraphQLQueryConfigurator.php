@@ -12,7 +12,6 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks\AbstractAccess
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGraphQLQueryConfigurator
 {
