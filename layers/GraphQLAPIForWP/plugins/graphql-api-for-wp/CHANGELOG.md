@@ -168,7 +168,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Breaking changes
 
 - Renamed module "Schema for the Admin" to "Schema Admin Fields"
-- Renamed `AnyScalar` to `AnyBuiltInScalar`
+- Renamed scalar type `AnyScalar` to `AnyBuiltInScalar`
+- Renamed interface type `Elemental` to `Node`
 - Renamed all the "admin" fields: instead of prepending them with "unrestricted", now they are appended "ForAdmin"
 - The Access Control and Cache Control configuration lists will be broken: all fields for all non-root types broken will appear under "(Undefined entries)". These lists must be recreated
 
