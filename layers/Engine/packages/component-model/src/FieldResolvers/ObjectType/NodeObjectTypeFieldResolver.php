@@ -13,15 +13,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?NodeInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver = null;
+    private ?NodeInterfaceTypeFieldResolver $nodeInterfaceTypeFieldResolver = null;
 
-    final public function setElementalInterfaceTypeFieldResolver(NodeInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver): void
+    final public function setNodeInterfaceTypeFieldResolver(NodeInterfaceTypeFieldResolver $nodeInterfaceTypeFieldResolver): void
     {
-        $this->elementalInterfaceTypeFieldResolver = $elementalInterfaceTypeFieldResolver;
+        $this->nodeInterfaceTypeFieldResolver = $nodeInterfaceTypeFieldResolver;
     }
-    final protected function getElementalInterfaceTypeFieldResolver(): NodeInterfaceTypeFieldResolver
+    final protected function getNodeInterfaceTypeFieldResolver(): NodeInterfaceTypeFieldResolver
     {
-        return $this->elementalInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(NodeInterfaceTypeFieldResolver::class);
+        return $this->nodeInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(NodeInterfaceTypeFieldResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -34,7 +34,7 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->getElementalInterfaceTypeFieldResolver(),
+            $this->getNodeInterfaceTypeFieldResolver(),
         ];
     }
 
