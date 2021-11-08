@@ -49,7 +49,7 @@ class VarsHookSet extends AbstractHookSet
                 if (in_array(ModelInstanceComponentTypes::USER_ROLE, $component_types)) {
                     /** @var string */
                     $userRole = $this->getUserRoleTypeAPI()->getTheUserRole($user_id);
-                    $components[] = $this->getTranslationAPI()->__('user role:', 'pop-engine') . $userRole;
+                    $components[] = $this->translationAPI->__('user role:', 'pop-engine') . $userRole;
                 }
                 break;
         }

@@ -84,7 +84,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
                     $objectTypeResolver->getTypeOutputDBKey(),
                     $subcomponent_data_field_outputkey,
                     sprintf(
-                        $this->getTranslationAPI()->__('Field \'%s\' is not a connection', 'pop-component-model'),
+                        $this->translationAPI->__('Field \'%s\' is not a connection', 'pop-component-model'),
                         $subcomponent_data_field_outputkey
                     )
                 );

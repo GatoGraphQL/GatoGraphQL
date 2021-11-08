@@ -96,7 +96,7 @@ class FilterMultipleInputModuleProcessor extends AbstractFilterInputModuleProces
                 $name = $this->getName($module);
                 $subnames = $this->getInputOptions($module)['subnames'];
                 return sprintf(
-                    $this->getTranslationAPI()->__('Search for posts between the \'from\' and \'to\' dates. Provide dates through params \'%s\' and \'%s\'', 'pop-posts'),
+                    $this->translationAPI->__('Search for posts between the \'from\' and \'to\' dates. Provide dates through params \'%s\' and \'%s\'', 'pop-posts'),
                     $this->getFormInputHelperService()->getMultipleInputName($name, $subnames[0]),
                     $this->getFormInputHelperService()->getMultipleInputName($name, $subnames[1])
                 );

@@ -81,7 +81,7 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
     public function getFilterInputDescription(array $module): ?string
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_MIME_TYPES => $this->getTranslationAPI()->__('Limit results to elements with the given mime types', 'media'),
+            self::MODULE_FILTERINPUT_MIME_TYPES => $this->translationAPI->__('Limit results to elements with the given mime types', 'media'),
             default => null,
         };
     }

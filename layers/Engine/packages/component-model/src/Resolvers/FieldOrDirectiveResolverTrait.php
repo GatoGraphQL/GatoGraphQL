@@ -42,27 +42,27 @@ trait FieldOrDirectiveResolverTrait
             $treatUndefinedFieldOrDirectiveArgsAsErrors = ComponentConfiguration::treatUndefinedFieldOrDirectiveArgsAsErrors();
             $errorMessage = count($missing) == 1 ?
                 sprintf(
-                    $this->getTranslationAPI()->__('Argument \'%1$s\' cannot be empty', 'component-model'),
+                    $this->translationAPI->__('Argument \'%1$s\' cannot be empty', 'component-model'),
                     $missing[0]
                 ) :
                 sprintf(
-                    $this->getTranslationAPI()->__('Arguments \'%1$s\' cannot be empty', 'component-model'),
-                    implode($this->getTranslationAPI()->__('\', \''), $missing)
+                    $this->translationAPI->__('Arguments \'%1$s\' cannot be empty', 'component-model'),
+                    implode($this->translationAPI->__('\', \''), $missing)
                 );
             if ($treatUndefinedFieldOrDirectiveArgsAsErrors) {
                 return $errorMessage;
             }
             return count($missing) == 1 ?
                 sprintf(
-                    $this->getTranslationAPI()->__('%s, so %2$s \'%3$s\' has been ignored', 'component-model'),
+                    $this->translationAPI->__('%s, so %2$s \'%3$s\' has been ignored', 'component-model'),
                     $errorMessage,
-                    $type == ResolverTypes::FIELD ? $this->getTranslationAPI()->__('field', 'component-model') : $this->getTranslationAPI()->__('directive', 'component-model'),
+                    $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                     $fieldOrDirectiveName
                 ) :
                 sprintf(
-                    $this->getTranslationAPI()->__('%s, so %2$s \'%3$s\' has been ignored', 'component-model'),
+                    $this->translationAPI->__('%s, so %2$s \'%3$s\' has been ignored', 'component-model'),
                     $errorMessage,
-                    $type == ResolverTypes::FIELD ? $this->getTranslationAPI()->__('field', 'component-model') : $this->getTranslationAPI()->__('directive', 'component-model'),
+                    $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                     $fieldOrDirectiveName
                 );
         }
@@ -195,30 +195,30 @@ trait FieldOrDirectiveResolverTrait
             ));
             if (count($errorItems) === 1) {
                 $errors[] = sprintf(
-                    $this->getTranslationAPI()->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is not allowed (the only allowed values are: \'%5$s\')', 'component-model'),
-                    implode($this->getTranslationAPI()->__('\', \''), $errorItems),
+                    $this->translationAPI->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is not allowed (the only allowed values are: \'%5$s\')', 'component-model'),
+                    implode($this->translationAPI->__('\', \''), $errorItems),
                     $fieldOrDirectiveArgumentName,
-                    $type == ResolverTypes::FIELD ? $this->getTranslationAPI()->__('field', 'component-model') : $this->getTranslationAPI()->__('directive', 'component-model'),
+                    $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                     $fieldOrDirectiveName,
-                    implode($this->getTranslationAPI()->__('\', \''), $fieldOrDirectiveArgumentEnumValues)
+                    implode($this->translationAPI->__('\', \''), $fieldOrDirectiveArgumentEnumValues)
                 );
             } else {
                 $errors[] = sprintf(
-                    $this->getTranslationAPI()->__('Values \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' are not allowed (the only allowed values are: \'%5$s\')', 'component-model'),
-                    implode($this->getTranslationAPI()->__('\', \''), $errorItems),
+                    $this->translationAPI->__('Values \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' are not allowed (the only allowed values are: \'%5$s\')', 'component-model'),
+                    implode($this->translationAPI->__('\', \''), $errorItems),
                     $fieldOrDirectiveArgumentName,
-                    $type == ResolverTypes::FIELD ? $this->getTranslationAPI()->__('field', 'component-model') : $this->getTranslationAPI()->__('directive', 'component-model'),
+                    $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                     $fieldOrDirectiveName,
-                    implode($this->getTranslationAPI()->__('\', \''), $fieldOrDirectiveArgumentEnumValues)
+                    implode($this->translationAPI->__('\', \''), $fieldOrDirectiveArgumentEnumValues)
                 );
             }
         }
         foreach ($deprecationItems as $fieldOrDirectiveArgumentValueItem => $deprecationItemDescription) {
             $deprecations[] = sprintf(
-                $this->getTranslationAPI()->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is deprecated: \'%5$s\'', 'component-model'),
+                $this->translationAPI->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is deprecated: \'%5$s\'', 'component-model'),
                 $fieldOrDirectiveArgumentValueItem,
                 $fieldOrDirectiveArgumentName,
-                $type == ResolverTypes::FIELD ? $this->getTranslationAPI()->__('field', 'component-model') : $this->getTranslationAPI()->__('directive', 'component-model'),
+                $type == ResolverTypes::FIELD ? $this->translationAPI->__('field', 'component-model') : $this->translationAPI->__('directive', 'component-model'),
                 $fieldOrDirectiveName,
                 $deprecationItemDescription
             );

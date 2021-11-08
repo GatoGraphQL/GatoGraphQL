@@ -60,7 +60,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
 
     protected function getEntityName(): string
     {
-        return $this->getTranslationAPI()->__('post', 'post-category-mutations');
+        return $this->translationAPI->__('post', 'post-category-mutations');
     }
 
     protected function getSetCategoriesFieldName(): string
