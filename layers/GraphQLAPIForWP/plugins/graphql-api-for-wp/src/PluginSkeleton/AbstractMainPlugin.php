@@ -273,6 +273,16 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                     return;
                 }
 
+                // Recalculate the updated entry and update on the DB
+                $storedPluginVersions[$this->pluginBaseName] = $this->pluginVersion;
+                foreach (array_merge($justActivatedExtensions, $justUpdatedExtensions) as $extensionBaseName => $extensionInstance) {
+                    $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersion();
+                }
+                foreach ($justDeactivatedExtensionBaseNames as $extensionBaseName) {
+                    unset($storedPluginVersions[$extensionBaseName]);
+                }
+                \update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
+
                 // Enable to implement custom additional functionality (eg: show admin notice with changelog)
                 // Watch out! Execute at the very end, just in case they need to access the service container,
                 // which is not initialized yet (eg: for calling `$userSettingsManager->getSetting`)
@@ -305,16 +315,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                     },
                     PluginLifecyclePriorities::AFTER_EVERYTHING
                 );
-
-                // Recalculate the updated entry and update on the DB
-                $storedPluginVersions[$this->pluginBaseName] = $this->pluginVersion;
-                foreach (array_merge($justActivatedExtensions, $justUpdatedExtensions) as $extensionBaseName => $extensionInstance) {
-                    $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersion();
-                }
-                foreach ($justDeactivatedExtensionBaseNames as $extensionBaseName) {
-                    unset($storedPluginVersions[$extensionBaseName]);
-                }
-                \update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
             },
             PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
         );
