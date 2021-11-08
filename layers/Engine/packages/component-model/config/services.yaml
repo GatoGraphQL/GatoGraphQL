@@ -72,6 +72,9 @@ services:
     PoP\ComponentModel\FormInputs\:
         resource: '../src/FormInputs/*'
 
+    PoP\ComponentModel\Hooks\:
+        resource: '../src/Hooks/*'
+
     PoP\ComponentModel\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
 
