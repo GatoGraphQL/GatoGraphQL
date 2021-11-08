@@ -18,7 +18,7 @@ class Cache extends UpstreamCache
         $this->getHooksAPI()->addAction(
             'popcms:componentInstalledOrUninstalled',
             function (): void {
-                $this->cacheItemPool->clear();
+                $this->clear();
             }
         );
 
@@ -26,7 +26,7 @@ class Cache extends UpstreamCache
         $this->getHooksAPI()->addAction(
             'popcms:shutdown',
             function (): void {
-                $this->cacheItemPool->commit();
+                $this->commit();
             }
         );
     }
