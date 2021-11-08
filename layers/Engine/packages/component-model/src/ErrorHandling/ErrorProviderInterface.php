@@ -47,7 +47,7 @@ interface ErrorProviderInterface
         string | int $objectID,
         string $fieldName,
         array $fieldArgs,
-    ): Error ;
+    ): Error;
     /**
      * @param string[] $schemaErrors
      */
