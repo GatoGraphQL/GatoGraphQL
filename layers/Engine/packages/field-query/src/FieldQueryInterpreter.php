@@ -853,7 +853,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             } elseif ($value instanceof stdClass) {
                 $elems[] =
                     $key .
-                    QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER .
+                    QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .
                     $this->getObjectAsStringForQuery($value);
             } else {
                 // If it is null, the unquoted `null` string will be represented as null
