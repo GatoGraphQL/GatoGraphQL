@@ -3,6 +3,7 @@
 phpcs.xml
 phpunit.xml
 .phpunit.result.cache
+.php-cs-fixer.cache
 composer.lock
 # The root composer.lock is commited to the repo,
 # to make sure the CI doesn't fail
