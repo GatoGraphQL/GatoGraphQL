@@ -530,10 +530,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     ) {
                         return $this->getErrorProvider()->getArrayOfArraysMustNotHaveNullItemsFieldError($fieldName, $value);
                     }
-
-                    // Everything is good, return the value (which could also be an Error!)
-                    return $value;
                 }
+
+                // Everything is good, return the value (which could also be an Error!)
+                return $value;
             }
             return $this->getErrorProvider()->getNoObjectTypeFieldResolverProcessesFieldError(
                 $this->getMaybeNamespacedTypeName(),
