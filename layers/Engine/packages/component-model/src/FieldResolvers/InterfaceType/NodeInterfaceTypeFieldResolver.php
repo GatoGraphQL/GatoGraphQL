@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\InterfaceType\ElementalInterfaceTypeResolve
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
+class NodeInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 

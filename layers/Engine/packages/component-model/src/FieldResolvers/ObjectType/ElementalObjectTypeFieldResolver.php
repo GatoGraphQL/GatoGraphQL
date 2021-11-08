@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\InterfaceType\ElementalInterfaceTypeFieldResolver;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\NodeInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
@@ -13,15 +13,15 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver = null;
+    private ?NodeInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver = null;
 
-    final public function setElementalInterfaceTypeFieldResolver(ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver): void
+    final public function setElementalInterfaceTypeFieldResolver(NodeInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver): void
     {
         $this->elementalInterfaceTypeFieldResolver = $elementalInterfaceTypeFieldResolver;
     }
-    final protected function getElementalInterfaceTypeFieldResolver(): ElementalInterfaceTypeFieldResolver
+    final protected function getElementalInterfaceTypeFieldResolver(): NodeInterfaceTypeFieldResolver
     {
-        return $this->elementalInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(ElementalInterfaceTypeFieldResolver::class);
+        return $this->elementalInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(NodeInterfaceTypeFieldResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
