@@ -535,7 +535,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     return $value;
                 }
             }
-            return $this->getErrorProvider()->getNoObjectTypeFieldResolverProcessesFieldError($this->getID($object), $fieldName, $fieldArgs);
+            return $this->getErrorProvider()->getNoObjectTypeFieldResolverProcessesFieldError(
+                $this->getMaybeNamespacedTypeName(),
+                $this->getID($object),
+                $fieldName,
+                $fieldArgs,
+            );
         }
 
         // Return an error to indicate that no fieldResolver processes this field, which is different than returning a null value.
