@@ -15,6 +15,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterfac
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -443,8 +444,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                  * All other conditions, check them when enabled by configuration.
                  */
                 if ($value === null) {
-                    $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
-                    if ($fieldSchemaDefinition[SchemaDefinition::NON_NULLABLE] ?? false) {
+                    $fieldTypeModifiers = $objectTypeFieldResolver->getFieldTypeModifiers($this, $field);
+                    $fieldTypeIsNonNullable = ($fieldTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) === SchemaTypeModifiers::NON_NULLABLE;
+                    if ($fieldTypeIsNonNullable) {
                         return $this->getErrorProvider()->getNonNullableFieldError($fieldName);
                     }
                 } elseif (ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition()) {
