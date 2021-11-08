@@ -6,11 +6,11 @@ namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\InterfaceType\ElementalInterfaceTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\NodeInterfaceTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
+class NodeInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
@@ -26,7 +26,7 @@ class ElementalInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
-            ElementalInterfaceTypeResolver::class,
+            NodeInterfaceTypeResolver::class,
         ];
     }
 

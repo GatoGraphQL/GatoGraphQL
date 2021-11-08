@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InterfaceType;
 
-class ElementalInterfaceTypeResolver extends AbstractInterfaceTypeResolver
+class NodeInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'Elemental';
+        return 'Node';
     }
 
     public function getTypeDescription(): ?string

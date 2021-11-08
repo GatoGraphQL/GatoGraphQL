@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\InterfaceType\ElementalInterfaceTypeFieldResolver;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\NodeInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver = null;
+    private ?NodeInterfaceTypeFieldResolver $nodeInterfaceTypeFieldResolver = null;
 
-    final public function setElementalInterfaceTypeFieldResolver(ElementalInterfaceTypeFieldResolver $elementalInterfaceTypeFieldResolver): void
+    final public function setNodeInterfaceTypeFieldResolver(NodeInterfaceTypeFieldResolver $nodeInterfaceTypeFieldResolver): void
     {
-        $this->elementalInterfaceTypeFieldResolver = $elementalInterfaceTypeFieldResolver;
+        $this->nodeInterfaceTypeFieldResolver = $nodeInterfaceTypeFieldResolver;
     }
-    final protected function getElementalInterfaceTypeFieldResolver(): ElementalInterfaceTypeFieldResolver
+    final protected function getNodeInterfaceTypeFieldResolver(): NodeInterfaceTypeFieldResolver
     {
-        return $this->elementalInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(ElementalInterfaceTypeFieldResolver::class);
+        return $this->nodeInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(NodeInterfaceTypeFieldResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -34,7 +34,7 @@ class ElementalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->getElementalInterfaceTypeFieldResolver(),
+            $this->getNodeInterfaceTypeFieldResolver(),
         ];
     }
 
