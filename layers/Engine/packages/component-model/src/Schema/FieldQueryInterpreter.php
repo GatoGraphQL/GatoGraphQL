@@ -1056,90 +1056,23 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
              */
             $argValue = $this->getInputCoercingService()->maybeCoerceInputFromSingleValueToList(
                 $argValue,
-                $fieldOrDirectiveArgIsArrayOfArraysType,
                 $fieldOrDirectiveArgIsArrayType,
+                $fieldOrDirectiveArgIsArrayOfArraysType,
             );
 
             // Validate that the expected array/non-array input is provided
-            $errorMessage = null;
-            if (
-                !$fieldOrDirectiveArgIsArrayType
-                && is_array($argValue)
-            ) {
-                $errorMessage = sprintf(
-                    $this->getTranslationAPI()->__('Argument \'%s\' does not expect an array, but array \'%s\' was provided', 'pop-component-model'),
-                    $argName,
-                    json_encode($argValue)
-                );
-            } elseif (
-                $fieldOrDirectiveArgIsArrayType
-                && !is_array($argValue)
-            ) {
-                $errorMessage = sprintf(
-                    $this->getTranslationAPI()->__('Argument \'%s\' expects an array, but value \'%s\' was provided', 'pop-component-model'),
-                    $argName,
-                    $argValue
-                );
-            } elseif (
-                $fieldOrDirectiveArgIsNonNullArrayItemsType
-                && is_array($argValue)
-                && array_filter(
-                    $argValue,
-                    fn ($arrayItem) => $arrayItem === null
-                )
-            ) {
-                $errorMessage = sprintf(
-                    $this->getTranslationAPI()->__('Argument \'%s\' cannot receive an array with `null` values', 'pop-component-model'),
-                    $argName
-                );
-            } elseif (
-                $fieldOrDirectiveArgIsArrayType
-                && !$fieldOrDirectiveArgIsArrayOfArraysType
-                && array_filter(
-                    $argValue,
-                    fn ($arrayItem) => is_array($arrayItem)
-                )
-            ) {
-                $errorMessage = sprintf(
-                    $this->getTranslationAPI()->__('Argument \'%s\' cannot receive an array containing arrays as elements', 'pop-component-model'),
-                    $argName,
-                    json_encode($argValue)
-                );
-            } elseif (
-                $fieldOrDirectiveArgIsArrayOfArraysType
-                && is_array($argValue)
-                && array_filter(
-                    $argValue,
-                    // `null` could be accepted as an array! (Validation against null comes next)
-                    fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null
-                )
-            ) {
-                $errorMessage = sprintf(
-                    $this->getTranslationAPI()->__('Argument \'%s\' expects an array of arrays, but value \'%s\' was provided', 'pop-component-model'),
-                    $argName,
-                    json_encode($argValue)
-                );
-            } elseif (
-                $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType
-                && is_array($argValue)
-                && array_filter(
-                    $argValue,
-                    fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
-                        $arrayItem,
-                        fn ($arrayItemItem) => $arrayItemItem === null
-                    ) !== [],
-                )
-            ) {
-                $errorMessage = sprintf(
-                    $this->getTranslationAPI()->__('Argument \'%s\' cannot receive an array of arrays with `null` values', 'pop-component-model'),
-                    $argName
-                );
-            }
-
-            if ($errorMessage !== null) {
+            $maybeErrorMessage = $this->getInputCoercingService()->validateInputArrayModifiers(
+                $argValue,
+                $argName,
+                $fieldOrDirectiveArgIsArrayType,
+                $fieldOrDirectiveArgIsNonNullArrayItemsType,
+                $fieldOrDirectiveArgIsArrayOfArraysType,
+                $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType,
+            );
+            if ($maybeErrorMessage !== null) {
                 $failedCastingFieldOrDirectiveArgErrors[$argName] = new Error(
                     sprintf('%s-cast', $argName),
-                    $errorMessage
+                    $maybeErrorMessage
                 );
                 unset($fieldOrDirectiveArgs[$argName]);
                 continue;

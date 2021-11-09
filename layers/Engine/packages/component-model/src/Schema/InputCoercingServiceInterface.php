@@ -18,7 +18,24 @@ interface InputCoercingServiceInterface
      */
     public function maybeCoerceInputFromSingleValueToList(
         mixed $inputValue,
-        bool $inputIsArrayOfArraysType,
         bool $inputIsArrayType,
+        bool $inputIsArrayOfArraysType,
     ): mixed;
+
+    /**
+     * Validate that the expected array/non-array input is provided,
+     * checking that the WrappingType is respected.
+     * 
+     * Eg: `["hello"]` must be `[String]`, can't be `[[String]]` or `String`.
+     * 
+     * @return string|null The error message if the validation fails, or null otherwise
+     */
+    public function validateInputArrayModifiers(
+        mixed $inputValue,
+        string $inputName,
+        bool $inputIsArrayType,
+        bool $inputIsNonNullArrayItemsType,
+        bool $inputIsArrayOfArraysType,
+        bool $inputIsNonNullArrayOfArraysItemsType,
+    ): ?string;
 }

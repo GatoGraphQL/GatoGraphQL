@@ -115,8 +115,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             }
 
             $inputObjectFieldTypeModifiers = $this->getInputObjectFieldTypeModifiers($fieldName);
-            $propertyIsArrayOfArraysType = ($inputObjectFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
             $propertyIsArrayType = ($inputObjectFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
+            $propertyIsArrayOfArraysType = ($inputObjectFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
 
             /**
              * Support passing a single value where a list is expected:
@@ -128,8 +128,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              */
             $propertyValue = $this->getInputCoercingService()->maybeCoerceInputFromSingleValueToList(
                 $propertyValue,
-                $propertyIsArrayOfArraysType,
                 $propertyIsArrayType,
+                $propertyIsArrayOfArraysType,
             );
 
             // Check that the cardinality of elements matches
