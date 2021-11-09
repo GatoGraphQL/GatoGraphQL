@@ -25,5 +25,4 @@ interface InputObjectTypeResolverInterface extends InputTypeResolverInterface
     public function getInputObjectFieldDeprecationMessage(string $inputObjectFieldName): ?string;
     public function getInputObjectFieldDefaultValue(string $inputObjectFieldName): mixed;
     public function getInputObjectFieldTypeModifiers(string $inputObjectFieldName): int;
-    public function coerceInputObjectValue(stdClass $inputValue): stdClass|Error;
 }
