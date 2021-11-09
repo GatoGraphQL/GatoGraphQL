@@ -17,7 +17,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
     private ?ErrorServiceInterface $errorService = null;
-    
+
     final public function setErrorService(ErrorServiceInterface $errorService): void
     {
         $this->errorService = $errorService;
@@ -26,7 +26,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     {
         return $this->errorService ??= $this->instanceManager->getInstance(ErrorServiceInterface::class);
     }
-    
+
     public function getDirectiveName(): string
     {
         return 'resolveValueAndMerge';

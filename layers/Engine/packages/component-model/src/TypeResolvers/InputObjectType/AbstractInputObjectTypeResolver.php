@@ -33,7 +33,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     {
         return $this->inputCoercingService ??= $this->instanceManager->getInstance(InputCoercingServiceInterface::class);
     }
-    
+
     public function getInputObjectFieldDescription(string $inputObjectFieldName): ?string
     {
         return null;
@@ -67,9 +67,9 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
     final protected function coerceInputObjectValue(stdClass $inputValue): stdClass|Error
     {
-        $coercedInputObjectValue = new stdClass;
+        $coercedInputObjectValue = new stdClass();
         $inputObjectFieldNameTypeResolvers = $this->getInputObjectFieldNameTypeResolvers();
-        
+
         /**
          * Inject all properties with default value
          */
@@ -164,7 +164,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $coercedInputPropertyValue,
                 $propertyIsArrayType,
                 $propertyIsArrayOfArraysType,
-            );  
+            );
             if ($maybeCoercedInputPropertyValueErrors !== []) {
                 $castingError = new Error(
                     $this->getErrorCode(),
@@ -179,7 +179,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $errors[] = $castingError;
                 continue;
             }
-            
+
             // The property is valid, add to the resulting InputObject
             $coercedInputObjectValue->$fieldName = $coercedInputPropertyValue;
         }

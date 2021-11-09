@@ -16,7 +16,7 @@ interface InputCoercingServiceInterface
      * Defined in the GraphQL spec.
      *
      * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
-     * 
+     *
      * @return mixed The provided value as is, converted to array, or converted to array of arrays
      */
     public function maybeConvertInputValueFromSingleToList(
@@ -28,9 +28,9 @@ interface InputCoercingServiceInterface
     /**
      * Validate that the expected array/non-array input is provided,
      * checking that the WrappingType is respected.
-     * 
+     *
      * Eg: `["hello"]` must be `[String]`, can't be `[[String]]` or `String`.
-     * 
+     *
      * @return string|null The error message if the validation fails, or null otherwise
      */
     public function validateInputArrayModifiers(
@@ -55,7 +55,7 @@ interface InputCoercingServiceInterface
 
     /**
      * Extract the Errors produced when coercing the input values
-     * 
+     *
      * @return Error[] Errors from coercing the input value
      */
     public function extractErrorsFromCoercedInputValue(

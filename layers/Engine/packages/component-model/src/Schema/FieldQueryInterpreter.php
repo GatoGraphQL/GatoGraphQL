@@ -1091,7 +1091,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $coercedArgValue,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
-            );            
+            );
             if ($maybeCoercedArgValueErrors !== []) {
                 $castingError = count($maybeCoercedArgValueErrors) === 1 ?
                     $maybeCoercedArgValueErrors[0]

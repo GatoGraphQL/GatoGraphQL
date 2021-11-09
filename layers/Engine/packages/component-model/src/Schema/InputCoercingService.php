@@ -45,9 +45,9 @@ class InputCoercingService implements InputCoercingServiceInterface
     /**
      * Validate that the expected array/non-array input is provided,
      * checking that the WrappingType is respected.
-     * 
+     *
      * Eg: `["hello"]` must be `[String]`, can't be `[[String]]` or `String`.
-     * 
+     *
      * @return string|null The error message if the validation fails, or null otherwise
      */
     public function validateInputArrayModifiers(
@@ -174,7 +174,7 @@ class InputCoercingService implements InputCoercingServiceInterface
 
     /**
      * Extract the Errors produced when coercing the input values
-     * 
+     *
      * @return Error[] Errors from coercing the input value
      */
     public function extractErrorsFromCoercedInputValue(
