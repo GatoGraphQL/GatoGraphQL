@@ -169,7 +169,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $castingError = new Error(
                     $this->getErrorCode(),
                     sprintf(
-                        $this->getTranslationAPI()->__('Casting the properties of property \'%s\' of type \'%s\' produced errors', 'component-model'),
+                        $this->getTranslationAPI()->__('Casting property \'%s\' of type \'%s\' produced errors', 'component-model'),
                         $fieldName,
                         $inputTypeResolver->getMaybeNamespacedTypeName()
                     ),
@@ -211,7 +211,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         if ($errors) {
             return $this->getError(
                 sprintf(
-                    $this->getTranslationAPI()->__('Casting the properties of input object of type \'%s\' produced errors', 'component-model'),
+                    $this->getTranslationAPI()->__('Casting input object of type \'%s\' produced errors', 'component-model'),
                     $this->getMaybeNamespacedTypeName()
                 ),
                 $errors
