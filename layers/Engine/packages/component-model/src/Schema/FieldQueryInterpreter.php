@@ -9,6 +9,7 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\ErrorHandling\ErrorDataTokens;
+use PoP\ComponentModel\ErrorHandling\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
@@ -91,6 +92,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     private array $fieldsByTypeAndFieldOutputKey = [];
 
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?ErrorServiceInterface $errorService = null;
 
     final public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
     {
@@ -99,6 +101,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     final protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
     {
         return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+    final public function setErrorService(ErrorServiceInterface $errorService): void
+    {
+        $this->errorService = $errorService;
+    }
+    final protected function getErrorService(): ErrorServiceInterface
+    {
+        return $this->errorService ??= $this->instanceManager->getInstance(ErrorServiceInterface::class);
     }
 
     /**
@@ -902,10 +912,12 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $errorFieldOrDirective = $errorData[ErrorDataTokens::FIELD_NAME] ?? null;
                     }
                     $errorFieldOrDirective = $errorFieldOrDirective ?? $fieldOrDirectiveOutputKey;
-                    $objectErrors[(string)$id][] = [
-                        Tokens::PATH => [$errorFieldOrDirective],
-                        Tokens::MESSAGE => $error->getMessageOrCode(),
-                    ];
+                    $objectErrors[(string)$id][] = array_merge(
+                        [
+                            Tokens::PATH => [$errorFieldOrDirective],
+                        ], 
+                        $this->getErrorService()->getErrorOutput($error)
+                    );
                     $fieldOrDirectiveArgs[$directiveArgName] = null;
                     continue;
                 }
@@ -933,11 +945,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         );
     }
 
+    /**
+     * @param array<string,Error> $failedCastingFieldArgErrors
+     */
     protected function castFieldArguments(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
         array $fieldArgs,
-        array &$failedCastingFieldArgErrorMessages,
+        array &$failedCastingFieldArgErrors,
         array &$schemaOrObjectErrors,
         bool $forSchema
     ): ?array {
@@ -952,15 +967,18 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $this->castFieldOrDirectiveArguments(
             $fieldArgs,
             $fieldArgSchemaDefinition,
-            $failedCastingFieldArgErrorMessages,
+            $failedCastingFieldArgErrors,
             $forSchema
         );
     }
 
+    /**
+     * @param array<string,Error> $failedCastingFieldOrDirectiveArgErrors
+     */
     protected function castFieldOrDirectiveArguments(
         array $fieldOrDirectiveArgs,
         array $fieldOrDirectiveArgSchemaDefinition,
-        array &$failedCastingFieldOrDirectiveArgErrorMessages,
+        array &$failedCastingFieldOrDirectiveArgErrors,
         bool $forSchema
     ): array {
         // Cast all argument values
@@ -1117,7 +1135,10 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             }
 
             if ($errorMessage !== null) {
-                $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $errorMessage;
+                $failedCastingFieldOrDirectiveArgErrors[$argName] = new Error(
+                    sprintf('%s-cast', $argName),
+                    $errorMessage
+                );
                 unset($fieldOrDirectiveArgs[$argName]);
                 continue;
             }
@@ -1163,16 +1184,15 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
             // If the response is an error, extract the error message and set value to null
             if ($errorArgValues) {
-                $castingErrorMessage = count($errorArgValues) === 1 ?
-                    $errorArgValues[0]->getMessageOrCode()
-                    : implode(
-                        $this->getTranslationAPI()->__('; ', 'pop-component-model'),
-                        array_map(
-                            fn (Error $errorArgValueElem) => $errorArgValueElem->getMessageOrCode(),
-                            $errorArgValues
-                        )
+                $castingError = count($errorArgValues) === 1 ?
+                    $errorArgValues[0]
+                    : new Error(
+                        'casting',
+                        $this->getTranslationAPI()->__('Casting cannot be done due to nested errors', 'component-model'),
+                        null,
+                        $errorArgValues
                     );
-                $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $castingErrorMessage;
+                $failedCastingFieldOrDirectiveArgErrors[$argName] = $castingError;
                 unset($fieldOrDirectiveArgs[$argName]);
                 continue;
             }
@@ -1190,9 +1210,12 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrorMessages, $forSchema);
     }
 
-    protected function castFieldArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrorMessages, array &$schemaErrors): ?array
+    /**
+     * @param array<string,Error> $failedCastingFieldArgErrors
+     */
+    protected function castFieldArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrors, array &$schemaErrors): ?array
     {
-        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $schemaErrors, true);
+        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $schemaErrors, true);
     }
 
     protected function castDirectiveArgumentsForObject(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $directive, array $directiveArgs, array &$failedCastingDirectiveArgErrorMessages): array
@@ -1200,9 +1223,12 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $directive, $directiveArgs, $failedCastingDirectiveArgErrorMessages, false);
     }
 
-    protected function castFieldArgumentsForObject(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrorMessages, array &$objectErrors): ?array
+    /**
+     * @param array<string,Error> $failedCastingFieldArgErrors
+     */
+    protected function castFieldArgumentsForObject(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrors, array &$objectErrors): ?array
     {
-        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $objectErrors, false);
+        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $objectErrors, false);
     }
 
     /**
@@ -1360,9 +1386,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function castAndValidateFieldArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings): ?array
     {
         if ($fieldArgs) {
-            $failedCastingFieldArgErrorMessages = [];
+            $failedCastingFieldArgErrors = [];
             $castingSchemaErrors = [];
-            $castedFieldArgs = $this->castFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $castingSchemaErrors);
+            $castedFieldArgs = $this->castFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $castingSchemaErrors);
             if ($castingSchemaErrors) {
                 $schemaErrors = array_merge(
                     $schemaErrors,
@@ -1370,7 +1396,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 );
                 return null;
             }
-            return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrorMessages, $field, $fieldArgs, $schemaErrors, $schemaWarnings);
+            return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrors, $field, $fieldArgs, $schemaErrors, $schemaWarnings);
         }
         return $fieldArgs;
     }
@@ -1384,9 +1410,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
     protected function castAndValidateFieldArgumentsForObject(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$objectErrors, array &$objectWarnings): ?array
     {
-        $failedCastingFieldArgErrorMessages = [];
+        $failedCastingFieldArgErrors = [];
         $castingObjectErrors = [];
-        $castedFieldArgs = $this->castFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $castingObjectErrors);
+        $castedFieldArgs = $this->castFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $castingObjectErrors);
         if ($castingObjectErrors) {
             $objectErrors = array_merge(
                 $objectErrors,
@@ -1394,7 +1420,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             );
             return null;
         }
-        return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrorMessages, $field, $fieldArgs, $objectErrors, $objectWarnings);
+        return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrors, $field, $fieldArgs, $objectErrors, $objectWarnings);
     }
 
     protected function validateAndFilterCastDirectiveArguments(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, array $castedDirectiveArgs, array &$failedCastingDirectiveArgErrorMessages, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings): array
@@ -1478,17 +1504,20 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         );
     }
 
+    /**
+     * @param array<string,Error> $failedCastingFieldArgErrors
+     */
     protected function validateAndFilterCastFieldArguments(
         ObjectTypeResolverInterface $objectTypeResolver,
         array $castedFieldArgs,
-        array &$failedCastingFieldArgErrorMessages,
+        array &$failedCastingFieldArgErrors,
         string $field,
         array $fieldArgs,
         array &$schemaErrors,
         array &$schemaWarnings
     ): array {
         // If any casting can't be done, show an error
-        if ($failedCastingFieldArgErrorMessages) {
+        if ($failedCastingFieldArgErrors) {
             $fieldName = $this->getFieldName($field);
             $fieldArgNameTypeResolvers = $this->getFieldArgumentNameTypeResolvers($objectTypeResolver, $field);
             if ($fieldArgNameTypeResolvers === null) {
@@ -1501,7 +1530,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             /** @var array */
             $fieldArgNameSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $field);
             $treatTypeCoercingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
-            foreach (array_keys($failedCastingFieldArgErrorMessages) as $failedCastingFieldArgName) {
+            foreach (array_keys($failedCastingFieldArgErrors) as $failedCastingFieldArgName) {
                 // If it is Error, also show the error message
                 $fieldArgIsArrayType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::IS_ARRAY] ?? false;
                 $fieldArgIsArrayOfArraysType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
@@ -1518,41 +1547,42 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $composedFieldArgTypeName
                     );
                 }
-                $encodedValue = $fieldArgs[$failedCastingFieldArgName] instanceof stdClass || is_array($fieldArgs[$failedCastingFieldArgName])
-                    ? json_encode($fieldArgs[$failedCastingFieldArgName])
-                    : $fieldArgs[$failedCastingFieldArgName];
-                if ($fieldArgErrorMessage = $failedCastingFieldArgErrorMessages[$failedCastingFieldArgName] ?? null) {
-                    $errorMessage = sprintf(
-                        $this->getTranslationAPI()->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed: %s', 'pop-component-model'),
-                        $fieldName,
-                        $encodedValue,
-                        $failedCastingFieldArgName,
-                        $composedFieldArgTypeName,
-                        $fieldArgErrorMessage
+                $fieldArgError = $failedCastingFieldArgErrors[$failedCastingFieldArgName] ?? null;
+                if ($fieldArgError === null) {
+                    $encodedValue = $fieldArgs[$failedCastingFieldArgName] instanceof stdClass || is_array($fieldArgs[$failedCastingFieldArgName])
+                        ? json_encode($fieldArgs[$failedCastingFieldArgName])
+                        : $fieldArgs[$failedCastingFieldArgName];
+                    $fieldArgError = new Error(
+                        sprintf('%s-error', $failedCastingFieldArgName),
+                        sprintf(
+                            $this->getTranslationAPI()->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
+                            $fieldName,
+                            $encodedValue,
+                            $failedCastingFieldArgName,
+                            $composedFieldArgTypeName
+                        )
                     );
-                } else {
-                    $errorMessage = sprintf(
-                        $this->getTranslationAPI()->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
-                        $fieldName,
-                        $encodedValue,
-                        $failedCastingFieldArgName,
-                        $composedFieldArgTypeName
+                } elseif (is_string($fieldArgError)) {
+                    $fieldArgError = new Error(
+                        sprintf('%s-error', $failedCastingFieldArgName),
+                        $fieldArgError
                     );
                 }
+                $schemaWarningOrError = array_merge(
+                    [
+                        Tokens::PATH => [$field],
+                    ],
+                    $this->getErrorService()->getErrorOutput($fieldArgError)
+                );
                 if ($treatTypeCoercingFailuresAsErrors) {
-                    $schemaErrors[] = [
-                        Tokens::PATH => [$field],
-                        Tokens::MESSAGE => $errorMessage,
-                    ];
+                    $schemaErrors[] = $schemaWarningOrError;
                 } else {
-                    $errorMessage = sprintf(
+                    // Override the message
+                    $schemaWarningOrError[Tokens::MESSAGE] = sprintf(
                         $this->getTranslationAPI()->__('%1$s. It has been ignored', 'pop-component-model'),
-                        $errorMessage
+                        $schemaWarningOrError[Tokens::MESSAGE]
                     );
-                    $schemaWarnings[] = [
-                        Tokens::PATH => [$field],
-                        Tokens::MESSAGE => $errorMessage,
-                    ];
+                    $schemaWarnings[] = $schemaWarningOrError;
                 }
             }
             return $this->filterFieldOrDirectiveArgs($castedFieldArgs);
