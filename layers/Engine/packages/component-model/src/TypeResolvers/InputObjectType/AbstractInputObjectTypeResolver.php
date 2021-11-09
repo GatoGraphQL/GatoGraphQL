@@ -28,10 +28,21 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return SchemaTypeModifiers::NONE;
     }
 
-    /**
-     * This function simply returns the same value always.
-     */
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
+    final public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
+    {
+        if (!($inputValue instanceof stdClass)) {
+            return $this->getError(
+                sprintf(
+                    $this->getTranslationAPI()->__('Input object of type \'%s\' cannot be casted from input value \'%s\'', 'component-model'),
+                    $this->getMaybeNamespacedTypeName(),
+                    $inputValue
+                )
+            );
+        }
+        return $this->coerceInputObjectValue($inputValue);
+    }
+
+    public function coerceInputObjectValue(stdClass $inputValue): stdClass|Error
     {
         return $inputValue;
     }

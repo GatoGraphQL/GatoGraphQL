@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use stdClass;
 
 /**
  * Based on GraphQL InputObject Type
@@ -23,4 +25,5 @@ interface InputObjectTypeResolverInterface extends InputTypeResolverInterface
     public function getInputObjectFieldDeprecationMessage(string $inputObjectFieldName): ?string;
     public function getInputObjectFieldDefaultValue(string $inputObjectFieldName): mixed;
     public function getInputObjectFieldTypeModifiers(string $inputObjectFieldName): int;
+    public function coerceInputObjectValue(stdClass $inputValue): stdClass|Error;
 }
