@@ -49,9 +49,20 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     final protected function coerceInputObjectValue(stdClass $inputValue): stdClass|Error
     {
         $coercedInputObjectValue = new stdClass;
+        $inputObjectFieldNameTypeResolvers = $this->getInputObjectFieldNameTypeResolvers();
+        
+        /**
+         * Inject all properties with default value
+         */
+        foreach ($inputObjectFieldNameTypeResolvers as $fieldName => $inputTypeResolver) {
+            if (isset($inputValue->$fieldName) || ($inputObjectFieldDefaultValue = $this->getInputObjectFieldDefaultValue($fieldName)) === null) {
+                continue;
+            }
+            $inputValue->$fieldName = $inputObjectFieldDefaultValue;
+        }
+
         /** @var Error[] */
         $errors = [];
-        $inputObjectFieldNameTypeResolvers = $this->getInputObjectFieldNameTypeResolvers();
         foreach ($inputValue as $fieldName => $propertyValue) {
             // Check that the property exists
             $inputTypeResolver = $inputObjectFieldNameTypeResolvers[$fieldName] ?? null;
@@ -66,9 +77,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 );
                 continue;
             }
-            // $inputObjectFieldTypeModifiers = $this->getInputObjectFieldTypeModifiers($fieldName);
             // Coerce the value using the property's typeResolver
-            $coercedInputPropertyValue = $inputTypeResolver->coerceValue($inputValue->$fieldName);
+            $coercedInputPropertyValue = $inputTypeResolver->coerceValue($propertyValue);
             if (GeneralUtils::isError($coercedInputPropertyValue)) {
                 $errors[] = $coercedInputPropertyValue;
                 continue;
@@ -76,7 +86,29 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             // The property is valid, add to the resulting InputObject
             $coercedInputObjectValue->$fieldName = $coercedInputPropertyValue;
         }
-        // Check that all mandatory properties have been provided
+
+        /**
+         * Check that all mandatory properties have been provided
+         */
+        foreach ($inputObjectFieldNameTypeResolvers as $fieldName => $inputTypeResolver) {
+            if (isset($inputValue->$fieldName)) {
+                continue;
+            }
+            $inputObjectFieldTypeModifiers = $this->getInputObjectFieldTypeModifiers($fieldName);
+            $inputObjectFieldTypeModifiersIsMandatory = ($inputObjectFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
+            if (!$inputObjectFieldTypeModifiersIsMandatory) {
+                continue;
+            }
+            $errors[] = new Error(
+                $this->getErrorCode(),
+                sprintf(
+                    $this->getTranslationAPI()->__('Mandatory property \'%s\' in input object \'%s\' has not been provided'),
+                    $fieldName,
+                    $this->getMaybeNamespacedTypeName()
+                )
+            );
+            continue;
+        }
 
         // If there was any error, return it
         if ($errors) {
