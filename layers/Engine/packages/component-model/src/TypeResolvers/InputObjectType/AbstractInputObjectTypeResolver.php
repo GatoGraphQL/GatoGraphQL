@@ -66,7 +66,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
     final protected function coerceInputObjectValue(stdClass $inputValue): stdClass|Error
     {
-        $coercedInputObjectValue = new stdClass();
+        $coercedInputValue = new stdClass();
         $inputFieldNameTypeResolvers = $this->getInputFieldNameTypeResolvers();
 
         /**
@@ -109,7 +109,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              * these values by types `String` and `[String]`.
              */
             if ($inputTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
-                $coercedInputObjectValue->$inputFieldName = $this->getDangerouslyDynamicScalarTypeResolver()->coerceValue($inputFieldValue);
+                $coercedInputValue->$inputFieldName = $this->getDangerouslyDynamicScalarTypeResolver()->coerceValue($inputFieldValue);
                 continue;
             }
 
@@ -180,7 +180,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             }
 
             // The input field is valid, add to the resulting InputObject
-            $coercedInputObjectValue->$inputFieldName = $coercedInputFieldValue;
+            $coercedInputValue->$inputFieldName = $coercedInputFieldValue;
         }
 
         /**
@@ -218,6 +218,6 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         }
 
         // Add all missing properties which have a default value
-        return $coercedInputObjectValue;
+        return $coercedInputValue;
     }
 }
