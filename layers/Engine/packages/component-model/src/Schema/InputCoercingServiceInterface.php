@@ -19,7 +19,7 @@ interface InputCoercingServiceInterface
      * 
      * @return mixed The provided value as is, converted to array, or converted to array of arrays
      */
-    public function maybeCoerceInputFromSingleValueToList(
+    public function maybeConvertInputValueFromSingleToList(
         mixed $inputValue,
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,

@@ -128,7 +128,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              *
              * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
              */
-            $propertyValue = $this->getInputCoercingService()->maybeCoerceInputFromSingleValueToList(
+            $propertyValue = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
                 $propertyValue,
                 $propertyIsArrayType,
                 $propertyIsArrayOfArraysType,

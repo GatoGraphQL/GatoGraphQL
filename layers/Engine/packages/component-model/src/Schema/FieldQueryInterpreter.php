@@ -1054,7 +1054,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
              *
              * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
              */
-            $argValue = $this->getInputCoercingService()->maybeCoerceInputFromSingleValueToList(
+            $argValue = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
                 $argValue,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,

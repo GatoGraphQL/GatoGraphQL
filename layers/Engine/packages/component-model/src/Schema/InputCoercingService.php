@@ -21,7 +21,7 @@ class InputCoercingService implements InputCoercingServiceInterface
      *
      * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
      */
-    public function maybeCoerceInputFromSingleValueToList(
+    public function maybeConvertInputValueFromSingleToList(
         mixed $inputValue,
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
