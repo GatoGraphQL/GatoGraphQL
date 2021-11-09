@@ -43,9 +43,6 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $this->coerceInputObjectValue($inputValue);
     }
 
-    /**
-     * Iterate all the properties of the inputValue, and coerce each
-     */
     final protected function coerceInputObjectValue(stdClass $inputValue): stdClass|Error
     {
         $coercedInputObjectValue = new stdClass;
