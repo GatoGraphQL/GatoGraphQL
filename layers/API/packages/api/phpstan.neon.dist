@@ -3,3 +3,9 @@ parameters:
 	paths:
 		- src
 		- tests
+	ignoreErrors:
+		# (.*) is for both `mixed` and `'self'`
+		- 
+			message: '#Offset (.*) on array\{\} on left side of \?\?= does not exist\.#'
+			path: src/Schema/FieldQueryConvertor.php
+			count: 3
