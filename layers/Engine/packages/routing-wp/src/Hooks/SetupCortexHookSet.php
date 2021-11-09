@@ -10,7 +10,6 @@ use Brain\Cortex\Route\RouteInterface;
 use PoP\Hooks\AbstractHookSet;
 use PoP\Routing\RoutingManagerInterface;
 use PoP\RoutingWP\WPQueries;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class SetupCortexHookSet extends AbstractHookSet
 {

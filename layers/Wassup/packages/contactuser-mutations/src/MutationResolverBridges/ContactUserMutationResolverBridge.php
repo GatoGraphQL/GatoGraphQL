@@ -7,7 +7,6 @@ namespace PoPSitesWassup\ContactUserMutations\MutationResolverBridges;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\ContactUserMutations\MutationResolvers\ContactUserMutationResolver;
 use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMutationResolverBridge;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class ContactUserMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {

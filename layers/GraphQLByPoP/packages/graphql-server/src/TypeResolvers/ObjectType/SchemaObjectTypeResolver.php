@@ -7,7 +7,6 @@ namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SchemaTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {

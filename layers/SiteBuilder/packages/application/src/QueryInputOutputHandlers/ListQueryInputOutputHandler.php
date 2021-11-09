@@ -12,7 +12,6 @@ use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler as U
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\LooseContracts\NameResolverInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
 {

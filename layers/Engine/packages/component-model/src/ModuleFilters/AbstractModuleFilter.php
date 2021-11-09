@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\ModuleFilters;
 
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractModuleFilter implements ModuleFilterInterface
 {

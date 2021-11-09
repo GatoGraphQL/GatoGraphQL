@@ -10,7 +10,6 @@ use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoP\Engine\Formatters\DateFormatterInterface;
 use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 use WP_Post;
 
 class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver

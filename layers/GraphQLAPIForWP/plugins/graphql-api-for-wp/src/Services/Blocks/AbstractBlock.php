@@ -14,7 +14,6 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Base class for a Gutenberg block, within a multi-block plugin.

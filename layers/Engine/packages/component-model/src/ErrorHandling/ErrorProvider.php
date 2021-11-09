@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ErrorHandling;
 
 use PoP\ComponentModel\Services\BasicServiceTrait;
-use PoP\Translation\TranslationAPIInterface;
 use stdClass;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class ErrorProvider implements ErrorProviderInterface
 {
@@ -188,13 +186,18 @@ class ErrorProvider implements ErrorProviderInterface
         );
     }
 
-    public function getNoObjectTypeFieldResolverProcessesFieldError(string | int $objectID, string $fieldName, array $fieldArgs): Error
-    {
+    public function getNoObjectTypeFieldResolverProcessesFieldError(
+        string $objectTypeName,
+        string | int $objectID,
+        string $fieldName,
+        array $fieldArgs,
+    ): Error {
         return $this->getError(
             $fieldName,
             ErrorCodes::NO_FIELD_RESOLVER_UNIT_PROCESSES_FIELD,
             sprintf(
-                $this->getTranslationAPI()->__('No ObjectTypeFieldResolver processes field \'%s\' for object with ID \'%s\'', 'pop-component-model'),
+                $this->getTranslationAPI()->__('No FieldResolver for object type \'%s\' processes field \'%s\' for object with ID \'%s\'', 'pop-component-model'),
+                $objectTypeName,
                 $fieldName,
                 (string) $objectID
             )

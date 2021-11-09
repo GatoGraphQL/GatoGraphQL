@@ -7,9 +7,7 @@ namespace PoP\ComponentModel\ModuleProcessors;
 use PoP\ComponentModel\ComponentInfo;
 use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
-use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait ModulePathProcessorTrait
 {

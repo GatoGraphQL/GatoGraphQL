@@ -7,7 +7,6 @@ namespace PoPSitesWassup\VolunteerMutations\MutationResolvers;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class VolunteerMutationResolver extends AbstractMutationResolver
 {

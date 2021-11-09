@@ -11,7 +11,6 @@ use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
 use PoPSchema\SchemaCommons\Constants\QueryOptions as SchemaCommonsQueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class QueryHookSet extends AbstractHookSet
 {

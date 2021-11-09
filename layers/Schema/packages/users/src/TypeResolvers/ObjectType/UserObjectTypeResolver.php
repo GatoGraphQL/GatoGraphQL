@@ -8,7 +8,6 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\Users\RelationalTypeDataLoaders\ObjectType\UserTypeDataLoader;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class UserObjectTypeResolver extends AbstractObjectTypeResolver
 {

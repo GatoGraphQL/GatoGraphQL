@@ -19,6 +19,9 @@ class Error
      */
     protected array $nestedErrors;
 
+    /**
+     * @param Error[]|null $nestedErrors
+     */
     public function __construct(
         string $code,
         ?string $message = null,

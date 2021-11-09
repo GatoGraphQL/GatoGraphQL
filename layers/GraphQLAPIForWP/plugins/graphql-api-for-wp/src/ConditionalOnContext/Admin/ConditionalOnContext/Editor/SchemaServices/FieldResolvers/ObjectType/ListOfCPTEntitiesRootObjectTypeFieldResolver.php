@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCusto
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * ObjectTypeFieldResolver for the Custom Post Types from this plugin

@@ -13,7 +13,6 @@ use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties
 use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {

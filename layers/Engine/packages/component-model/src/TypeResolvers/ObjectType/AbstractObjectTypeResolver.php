@@ -15,12 +15,12 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterfac
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\Root\Environment as RootEnvironment;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {
@@ -443,8 +443,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                  * All other conditions, check them when enabled by configuration.
                  */
                 if ($value === null) {
-                    $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
-                    if ($fieldSchemaDefinition[SchemaDefinition::NON_NULLABLE] ?? false) {
+                    $fieldTypeModifiers = $objectTypeFieldResolver->getFieldTypeModifiers($this, $field);
+                    $fieldTypeIsNonNullable = ($fieldTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) === SchemaTypeModifiers::NON_NULLABLE;
+                    if ($fieldTypeIsNonNullable) {
                         return $this->getErrorProvider()->getNonNullableFieldError($fieldName);
                     }
                 } elseif (ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition()) {
@@ -530,12 +531,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     ) {
                         return $this->getErrorProvider()->getArrayOfArraysMustNotHaveNullItemsFieldError($fieldName, $value);
                     }
-
-                    // Everything is good, return the value (which could also be an Error!)
-                    return $value;
                 }
+
+                // Everything is good, return the value (which could also be an Error!)
+                return $value;
             }
-            return $this->getErrorProvider()->getNoObjectTypeFieldResolverProcessesFieldError($this->getID($object), $fieldName, $fieldArgs);
+            return $this->getErrorProvider()->getNoObjectTypeFieldResolverProcessesFieldError(
+                $this->getMaybeNamespacedTypeName(),
+                $this->getID($object),
+                $fieldName,
+                $fieldArgs,
+            );
         }
 
         // Return an error to indicate that no fieldResolver processes this field, which is different than returning a null value.

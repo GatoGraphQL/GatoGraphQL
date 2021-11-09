@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace PoPSchema\UserRolesAccessControl\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
-use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends AbstractValidateConditionDirectiveResolver
 {

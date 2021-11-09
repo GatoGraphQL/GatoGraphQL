@@ -32,7 +32,6 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeReso
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\Root\Environment as RootEnvironment;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 {

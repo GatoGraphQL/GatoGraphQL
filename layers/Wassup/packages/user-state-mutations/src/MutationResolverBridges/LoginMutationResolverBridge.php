@@ -8,7 +8,6 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolver
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
 use PoPSitesWassup\UserStateMutations\MutationResolvers\LoginMutationResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class LoginMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

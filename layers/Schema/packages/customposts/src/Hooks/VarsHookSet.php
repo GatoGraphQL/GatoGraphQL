@@ -10,7 +10,6 @@ use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPosts\Constants\ModelInstanceComponentTypes;
 use PoPSchema\CustomPosts\Routing\RouteNatures;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {

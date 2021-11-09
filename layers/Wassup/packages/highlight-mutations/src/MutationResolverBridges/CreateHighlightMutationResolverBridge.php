@@ -6,7 +6,6 @@ namespace PoPSitesWassup\HighlightMutations\MutationResolverBridges;
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\HighlightMutations\MutationResolvers\CreateHighlightMutationResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateHighlightMutationResolverBridge extends AbstractCreateUpdateHighlightMutationResolverBridge
 {

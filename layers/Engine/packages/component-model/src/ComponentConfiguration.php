@@ -31,7 +31,7 @@ class ComponentConfiguration
     private static bool $treatUndefinedFieldOrDirectiveArgsAsErrors = false;
     private static bool $setFailingFieldResponseAsNull = false;
     private static bool $removeFieldIfDirectiveFailed = false;
-    private static bool $coerceInputFromSingleValueToList = false;
+    private static bool $convertInputValueFromSingleToList = false;
     private static bool $enableUnionTypeImplementingInterfaceType = false;
     private static bool $skipExposingDangerouslyDynamicScalarTypeInSchema = false;
 
@@ -303,11 +303,11 @@ class ComponentConfiguration
      *
      * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
      */
-    public static function coerceInputFromSingleValueToList(): bool
+    public static function convertInputValueFromSingleToList(): bool
     {
         // Define properties
-        $envVariable = Environment::COERCE_INPUT_FROM_SINGLE_VALUE_TO_LIST;
-        $selfProperty = &self::$coerceInputFromSingleValueToList;
+        $envVariable = Environment::CONVERT_INPUT_VALUE_FROM_SINGLE_TO_LIST;
+        $selfProperty = &self::$convertInputValueFromSingleToList;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

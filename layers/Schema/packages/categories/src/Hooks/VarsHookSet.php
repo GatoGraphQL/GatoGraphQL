@@ -7,7 +7,6 @@ namespace PoPSchema\Categories\Hooks;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\Categories\Routing\RouteNatures;
 use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {

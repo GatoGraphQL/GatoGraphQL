@@ -10,7 +10,6 @@ use PoP\Hooks\AbstractHookSet;
 use PoPSchema\UserRoles\Constants\ModelInstanceComponentTypes;
 use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPSchema\Users\Routing\RouteNatures;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class VarsHookSet extends AbstractHookSet
 {

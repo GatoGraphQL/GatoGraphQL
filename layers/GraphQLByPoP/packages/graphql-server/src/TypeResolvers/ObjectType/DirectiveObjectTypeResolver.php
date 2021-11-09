@@ -7,7 +7,6 @@ namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Directive;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SchemaDefinitionReferenceTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class DirectiveObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {

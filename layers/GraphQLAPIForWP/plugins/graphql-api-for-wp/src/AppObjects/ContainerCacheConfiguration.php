@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\GetterSetterObjects;
+namespace GraphQLAPI\GraphQLAPI\AppObjects;
 
 /**
  * Configuration to cache the container
@@ -12,8 +12,12 @@ class ContainerCacheConfiguration
     private bool $cacheContainerConfiguration;
     private ?string $containerConfigurationCacheNamespace;
     private ?string $containerConfigurationCacheDirectory;
-    public function __construct(bool $cacheContainerConfiguration, ?string $containerConfigurationCacheNamespace, ?string $containerConfigurationCacheDirectory)
-    {
+
+    public function __construct(
+        bool $cacheContainerConfiguration,
+        ?string $containerConfigurationCacheNamespace,
+        ?string $containerConfigurationCacheDirectory,
+    ) {
         $this->cacheContainerConfiguration = $cacheContainerConfiguration;
         $this->containerConfigurationCacheNamespace = $containerConfigurationCacheNamespace;
         $this->containerConfigurationCacheDirectory = $containerConfigurationCacheDirectory;

@@ -8,7 +8,6 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolver
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

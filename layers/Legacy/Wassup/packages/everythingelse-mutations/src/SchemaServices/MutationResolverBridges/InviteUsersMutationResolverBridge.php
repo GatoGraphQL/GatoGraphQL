@@ -6,7 +6,6 @@ namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolver
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\InviteUsersMutationResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class InviteUsersMutationResolverBridge extends AbstractEmailInviteMutationResolverBridge
 {

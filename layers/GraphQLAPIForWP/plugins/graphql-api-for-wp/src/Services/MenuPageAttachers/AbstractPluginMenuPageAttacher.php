@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPageAttachers;
 
 use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Admin menu class

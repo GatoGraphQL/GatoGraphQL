@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractModuleResolver implements ModuleResolverInterface
 {

@@ -11,7 +11,6 @@ use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\UseObjectDictionaryTypeDataLoaderTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
 {

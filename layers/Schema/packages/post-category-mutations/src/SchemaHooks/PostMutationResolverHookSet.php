@@ -14,7 +14,6 @@ use PoPSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInterfac
 use PoPSchema\PostMutations\SchemaHooks\PostMutationResolverHookSetTrait;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {

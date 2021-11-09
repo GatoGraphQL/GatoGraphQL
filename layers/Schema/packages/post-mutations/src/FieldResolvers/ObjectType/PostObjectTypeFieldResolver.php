@@ -11,7 +11,6 @@ use PoPSchema\CustomPostMutations\FieldResolvers\ObjectType\AbstractCustomPostOb
 use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\UserState\FieldResolvers\ObjectType\UserStateObjectTypeFieldResolverTrait;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResolver
 {

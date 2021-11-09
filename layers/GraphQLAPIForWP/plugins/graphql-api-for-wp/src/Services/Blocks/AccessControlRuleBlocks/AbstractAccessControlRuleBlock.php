@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks\AccessControlRuleBlocks;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AccessControlBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Access Control rule block

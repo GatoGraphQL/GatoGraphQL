@@ -6,7 +6,6 @@ namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
 use PoPSchema\Users\Constants\InputNames;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUserMetaValueMutationResolver
 {

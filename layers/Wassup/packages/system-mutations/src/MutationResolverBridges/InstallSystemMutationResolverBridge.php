@@ -6,7 +6,6 @@ namespace PoPSitesWassup\SystemMutations\MutationResolverBridges;
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\SystemMutations\MutationResolvers\InstallSystemMutationResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class InstallSystemMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {

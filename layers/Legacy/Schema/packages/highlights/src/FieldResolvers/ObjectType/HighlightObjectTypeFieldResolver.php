@@ -15,7 +15,6 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

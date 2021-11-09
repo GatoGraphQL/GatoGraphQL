@@ -6,7 +6,6 @@ namespace PoPSchema\Menus\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class MenuTypeDataLoader extends AbstractObjectTypeDataLoader
 {

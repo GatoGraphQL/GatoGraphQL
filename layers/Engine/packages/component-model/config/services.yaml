@@ -72,6 +72,9 @@ services:
     PoP\ComponentModel\FormInputs\:
         resource: '../src/FormInputs/*'
 
+    PoP\ComponentModel\Hooks\:
+        resource: '../src/Hooks/*'
+
     PoP\ComponentModel\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
 
@@ -80,6 +83,9 @@ services:
 
     PoP\ComponentModel\ErrorHandling\ErrorProviderInterface:
         class: \PoP\ComponentModel\ErrorHandling\ErrorProvider
+
+    PoP\ComponentModel\ErrorHandling\ErrorServiceInterface:
+        class: \PoP\ComponentModel\ErrorHandling\ErrorService
 
     PoP\ComponentModel\ModulePath\ModulePathManagerInterface:
         class: \PoP\ComponentModel\ModulePath\ModulePathManager
@@ -116,11 +122,11 @@ services:
     PoP\ComponentModel\Schema\FeedbackMessageStoreInterface:
         class: \PoP\ComponentModel\Schema\FeedbackMessageStore
 
-    # Override the service from FieldQuery
-    PoP\FieldQuery\FieldQueryInterpreterInterface:
-        class: \PoP\ComponentModel\Schema\FieldQueryInterpreter
     PoP\ComponentModel\Schema\FieldQueryInterpreterInterface:
         class: \PoP\ComponentModel\Schema\FieldQueryInterpreter
+
+    PoP\ComponentModel\Schema\InputCoercingServiceInterface:
+        class: \PoP\ComponentModel\Schema\InputCoercingService
 
     PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface:
         class: \PoP\ComponentModel\Schema\SchemaNamespacingService

@@ -7,7 +7,6 @@ namespace PoPSchema\CustomPostMediaMutations\MutationResolvers;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResolver
 {

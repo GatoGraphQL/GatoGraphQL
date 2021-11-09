@@ -9,7 +9,6 @@ use PoPSchema\CustomPostMeta\Utils;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver as UpstreamAbstractCreateUpdateCustomPostMutationResolver;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAbstractCreateUpdateCustomPostMutationResolver
 {

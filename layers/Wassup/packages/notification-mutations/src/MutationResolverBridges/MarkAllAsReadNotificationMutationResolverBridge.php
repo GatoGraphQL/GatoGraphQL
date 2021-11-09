@@ -8,7 +8,6 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolver
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSitesWassup\NotificationMutations\MutationResolvers\MarkAllAsReadNotificationMutationResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

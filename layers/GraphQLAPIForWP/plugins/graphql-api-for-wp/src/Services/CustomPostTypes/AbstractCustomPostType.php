@@ -16,7 +16,6 @@ use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use Symfony\Contracts\Service\Attribute\Required;
 use WP_Block_Editor_Context;
 use WP_Post;
 

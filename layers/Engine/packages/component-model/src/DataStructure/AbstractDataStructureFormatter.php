@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\DataStructure;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractDataStructureFormatter implements DataStructureFormatterInterface
 {

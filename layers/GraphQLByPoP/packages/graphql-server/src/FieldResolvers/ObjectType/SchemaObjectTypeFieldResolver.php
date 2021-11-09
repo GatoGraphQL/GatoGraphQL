@@ -13,7 +13,6 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -148,9 +147,16 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'queryType', 'mutationType', 'subscriptionType', 'types', 'type' => $this->getTypeObjectTypeResolver(),
-            'directives' => $this->getDirectiveObjectTypeResolver(),
-            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'queryType',
+            'mutationType',
+            'subscriptionType',
+            'types',
+            'type'
+                => $this->getTypeObjectTypeResolver(),
+            'directives'
+                => $this->getDirectiveObjectTypeResolver(),
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 }

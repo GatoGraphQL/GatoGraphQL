@@ -6,7 +6,6 @@ namespace PoP\Engine\CMS;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Services\BasicServiceTrait;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class CMSHelperService implements CMSHelperServiceInterface
 {

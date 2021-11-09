@@ -13,7 +13,6 @@ use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 use PoPSchema\EventTags\Facades\EventTagTypeAPIFacade;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

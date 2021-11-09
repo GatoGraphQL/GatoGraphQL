@@ -15,7 +15,6 @@ use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuItemObjectTypeResolver;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

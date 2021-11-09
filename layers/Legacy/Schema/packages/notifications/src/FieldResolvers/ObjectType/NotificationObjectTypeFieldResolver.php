@@ -22,7 +22,6 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoPSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 use PoPSchema\Users\Facades\UserTypeAPIFacade;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

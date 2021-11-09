@@ -6,7 +6,6 @@ namespace PoP\Engine\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoP\Engine\ObjectModels\Root;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class RootTypeDataLoader extends AbstractObjectTypeDataLoader
 {

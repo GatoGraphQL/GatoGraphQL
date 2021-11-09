@@ -6,9 +6,7 @@ namespace PoP\FieldQuery;
 
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\QueryParsing\QueryParserInterface;
-use PoP\Translation\TranslationAPIInterface;
 use stdClass;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 {
@@ -853,7 +851,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             } elseif ($value instanceof stdClass) {
                 $elems[] =
                     $key .
-                    QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER .
+                    QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .
                     $this->getObjectAsStringForQuery($value);
             } else {
                 // If it is null, the unquoted `null` string will be represented as null

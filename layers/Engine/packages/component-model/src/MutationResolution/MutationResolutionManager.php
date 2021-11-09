@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\MutationResolution;
 
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class MutationResolutionManager implements MutationResolutionManagerInterface
 {
@@ -16,15 +15,6 @@ class MutationResolutionManager implements MutationResolutionManagerInterface
      * @var array<string, mixed>
      */
     private array $results = [];
-
-    #[Required]
-    final public function autowireInitializeMutationResolutionManager(): void
-    {
-        $this->getHooksAPI()->addAction(
-            'augmentVarsProperties',
-            [$this, 'clearResults']
-        );
-    }
 
     public function clearResults(): void
     {

@@ -8,7 +8,6 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\Comments\RelationalTypeDataLoaders\ObjectType\CommentTypeDataLoader;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class CommentObjectTypeResolver extends AbstractObjectTypeResolver
 {

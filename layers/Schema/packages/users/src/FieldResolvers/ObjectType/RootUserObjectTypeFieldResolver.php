@@ -12,7 +12,6 @@ use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolver
 {

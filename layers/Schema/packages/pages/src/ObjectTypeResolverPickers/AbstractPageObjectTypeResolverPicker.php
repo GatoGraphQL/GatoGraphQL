@@ -8,7 +8,6 @@ use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicke
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 use PoPSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractPageObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {

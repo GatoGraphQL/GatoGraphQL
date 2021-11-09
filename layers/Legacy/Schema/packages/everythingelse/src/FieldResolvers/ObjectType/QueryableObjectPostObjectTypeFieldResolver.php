@@ -10,7 +10,6 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\SiteBuilderAPI\Helpers\APIUtils;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

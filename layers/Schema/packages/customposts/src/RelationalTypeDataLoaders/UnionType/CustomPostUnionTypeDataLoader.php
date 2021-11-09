@@ -7,7 +7,6 @@ namespace PoPSchema\CustomPosts\RelationalTypeDataLoaders\UnionType;
 use PoP\ComponentModel\RelationalTypeDataLoaders\UnionType\AbstractUnionTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomPostUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {

@@ -14,7 +14,6 @@ use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\PostTagFieldD
 use PoPSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
 use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {

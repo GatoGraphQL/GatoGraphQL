@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\AccessControl\RelationalTypeResolverDecorators;
 
 use PoP\AccessControl\DirectiveResolvers\DisableAccessDirectiveResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractDisableAccessConfigurableAccessControlForFieldsInPublicSchemaRelationalTypeResolverDecorator extends AbstractConfigurableAccessControlForFieldsInPublicSchemaRelationalTypeResolverDecorator
 {

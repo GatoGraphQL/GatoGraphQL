@@ -10,7 +10,6 @@ use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\Engine\Route\RouteUtils;
 use PoPSitesWassup\UserStateMutations\MutationResolvers\LostPasswordMutationResolver;
 use PoPSitesWassup\UserStateMutations\MutationResolvers\MutationInputProperties;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

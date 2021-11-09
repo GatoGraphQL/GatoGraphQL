@@ -6,7 +6,6 @@ namespace PoPSchema\UserState\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\UserState\FieldResolvers\ObjectType\GlobalObjectTypeFieldResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class DBEntriesHookSet extends AbstractHookSet
 {

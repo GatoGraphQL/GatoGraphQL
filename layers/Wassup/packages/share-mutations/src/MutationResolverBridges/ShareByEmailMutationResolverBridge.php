@@ -7,7 +7,6 @@ namespace PoPSitesWassup\ShareMutations\MutationResolverBridges;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMutationResolverBridge;
 use PoPSitesWassup\ShareMutations\MutationResolvers\ShareByEmailMutationResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class ShareByEmailMutationResolverBridge extends AbstractFormComponentMutationResolverBridge
 {

@@ -273,9 +273,24 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                     return;
                 }
 
-                // Enable to implement custom additional functionality (eg: show admin notice with changelog)
-                // Watch out! Execute at the very end, just in case they need to access the service container,
-                // which is not initialized yet (eg: for calling `$userSettingsManager->getSetting`)
+                // Recalculate the updated entry and update on the DB
+                $storedPluginVersions[$this->pluginBaseName] = $this->pluginVersion;
+                foreach (array_merge($justActivatedExtensions, $justUpdatedExtensions) as $extensionBaseName => $extensionInstance) {
+                    $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersion();
+                }
+                foreach ($justDeactivatedExtensionBaseNames as $extensionBaseName) {
+                    unset($storedPluginVersions[$extensionBaseName]);
+                }
+                \update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
+
+                // Regenerate the timestamp, to generate the service container
+                $this->purgeContainer();
+
+                /**
+                 * Enable to implement custom additional functionality (eg: show admin notice with changelog)
+                 * Watch out! Execute at the very end, just in case they need to access the service container,
+                 * which is not initialized yet (eg: for calling `$userSettingsManager->getSetting`)
+                 */
                 \add_action(
                     'plugins_loaded',
                     function () use (
@@ -300,21 +315,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin
                     PluginLifecyclePriorities::AFTER_EVERYTHING
                 );
 
-                // Recalculate the updated entry and update on the DB
-                $storedPluginVersions[$this->pluginBaseName] = $this->pluginVersion;
-                foreach (array_merge($justActivatedExtensions, $justUpdatedExtensions) as $extensionBaseName => $extensionInstance) {
-                    $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersion();
-                }
-                foreach ($justDeactivatedExtensionBaseNames as $extensionBaseName) {
-                    unset($storedPluginVersions[$extensionBaseName]);
-                }
-                \update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
-
-                // If new CPTs have rewrite rules, these must be flushed
-                \flush_rewrite_rules();
-
-                // Regenerate the timestamp, to generate the service container
-                $this->purgeContainer();
+                /**
+                 * Execute at the end of hook "init", because `AbstractCustomPostType` initializes
+                 * the custom post types on this hook, and the CPT also adds rewrites
+                 * that must be flushed
+                 */
+                \add_action('init', 'flush_rewrite_rules', PHP_INT_MAX);
             },
             PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
         );

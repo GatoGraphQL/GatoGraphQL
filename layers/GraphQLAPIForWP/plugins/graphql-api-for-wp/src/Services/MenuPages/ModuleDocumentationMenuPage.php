@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use InvalidArgumentException;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Module Documentation menu page

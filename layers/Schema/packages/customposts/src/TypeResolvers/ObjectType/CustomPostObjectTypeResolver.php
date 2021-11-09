@@ -6,7 +6,6 @@ namespace PoPSchema\CustomPosts\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoPSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\CustomPostTypeDataLoader;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Class to be used only when a generic CustomPost type is good enough.

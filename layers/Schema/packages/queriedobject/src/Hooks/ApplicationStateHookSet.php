@@ -7,7 +7,6 @@ namespace PoPSchema\QueriedObject\Hooks;
 use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalObjectTypeFieldResolver;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class ApplicationStateHookSet extends AbstractHookSet
 {

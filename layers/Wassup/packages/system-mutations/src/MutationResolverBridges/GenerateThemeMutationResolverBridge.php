@@ -6,7 +6,6 @@ namespace PoPSitesWassup\SystemMutations\MutationResolverBridges;
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\SystemMutations\MutationResolvers\GenerateThemeMutationResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutationResolverBridge
 {

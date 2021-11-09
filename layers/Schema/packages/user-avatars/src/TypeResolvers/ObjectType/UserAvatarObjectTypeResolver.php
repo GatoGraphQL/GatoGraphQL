@@ -8,7 +8,6 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\UserAvatars\ObjectModels\UserAvatar;
 use PoPSchema\UserAvatars\RelationalTypeDataLoaders\ObjectType\UserAvatarTypeDataLoader;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
 {

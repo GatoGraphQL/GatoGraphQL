@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait FilterDataModuleProcessorTrait
 {

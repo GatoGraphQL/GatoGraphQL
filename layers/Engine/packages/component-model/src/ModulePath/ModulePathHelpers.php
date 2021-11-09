@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\ModulePath;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\Tokens\ModulePath;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class ModulePathHelpers implements ModulePathHelpersInterface
 {

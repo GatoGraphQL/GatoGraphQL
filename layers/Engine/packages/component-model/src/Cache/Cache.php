@@ -9,7 +9,6 @@ use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class Cache implements PersistentCacheInterface, TransientCacheInterface
 {
@@ -59,6 +58,11 @@ class Cache implements PersistentCacheInterface, TransientCacheInterface
     public function clear(): void
     {
         $this->cacheItemPool->clear();
+    }
+
+    public function commit(): void
+    {
+        $this->cacheItemPool->commit();
     }
 
 

@@ -44,23 +44,6 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         return $scalarValue;
     }
 
-    final protected function getError(string $message): Error
-    {
-        return new Error(
-            sprintf('%s-cast', $this->getTypeName()),
-            $message
-        );
-    }
-
-    protected function getDefaultErrorMessage(mixed $inputValue): string
-    {
-        return sprintf(
-            $this->getTranslationAPI()->__('Cannot cast value \'%s\' for type \'%s\'', 'component-model'),
-            $inputValue,
-            $this->getMaybeNamespacedTypeName(),
-        );
-    }
-
     final protected function validateIsNotStdClass(string|int|float|bool|stdClass $inputValue): ?Error
     {
         // Fail if passing an array for unsupporting types

@@ -10,7 +10,6 @@ use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointGraphiQLClient;
 use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\ClientEndpointAnnotatorInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\GraphiQLClientEndpointAnnotator;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter implements CustomEndpointExecuterServiceTagInterface
 {

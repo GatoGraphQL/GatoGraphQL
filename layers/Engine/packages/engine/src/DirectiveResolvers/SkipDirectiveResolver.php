@@ -9,7 +9,6 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
