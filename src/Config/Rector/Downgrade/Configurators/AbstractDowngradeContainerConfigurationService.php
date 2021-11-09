@@ -41,7 +41,18 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
     protected function getBootstrapFiles(): array
     {
         return [
-            $this->rootDirectory . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
+            /**
+             * This file has been commented since it doesn't work with Rector v0.12,
+             * due to having this code:
+             * 
+             *   function readonly($readonly, $current = \true, $echo = \true)
+             *   {
+             *   }
+             * 
+             * Instead use temporary custom stubs file, which has the required stubs only
+             */
+            // $this->rootDirectory . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
+            $this->rootDirectory . '/stubs/php-stubs/wordpress-stubs/wordpress-stubs.php',
         ];
     }
 
