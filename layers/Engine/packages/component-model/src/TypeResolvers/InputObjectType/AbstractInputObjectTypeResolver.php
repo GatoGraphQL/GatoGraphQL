@@ -151,7 +151,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             }
 
             // Cast (or "coerce" in GraphQL terms) the value
-            $coercedInputPropertyValue = $this->getInputCoercingService()->coerceInputValue(
+            $coercedInputFieldValue = $this->getInputCoercingService()->coerceInputValue(
                 $inputTypeResolver,
                 $inputFieldValue,
                 $inputFieldIsArrayType,
@@ -159,12 +159,12 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             );
 
             // Check if the coercion produced errors
-            $maybeCoercedInputPropertyValueErrors = $this->getInputCoercingService()->extractErrorsFromCoercedInputValue(
-                $coercedInputPropertyValue,
+            $maybeCoercedInputFieldValueErrors = $this->getInputCoercingService()->extractErrorsFromCoercedInputValue(
+                $coercedInputFieldValue,
                 $inputFieldIsArrayType,
                 $inputFieldIsArrayOfArraysType,
             );
-            if ($maybeCoercedInputPropertyValueErrors !== []) {
+            if ($maybeCoercedInputFieldValueErrors !== []) {
                 $castingError = new Error(
                     $this->getErrorCode(),
                     sprintf(
@@ -173,14 +173,14 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                         $inputTypeResolver->getMaybeNamespacedTypeName()
                     ),
                     null,
-                    $maybeCoercedInputPropertyValueErrors
+                    $maybeCoercedInputFieldValueErrors
                 );
                 $errors[] = $castingError;
                 continue;
             }
 
             // The input field is valid, add to the resulting InputObject
-            $coercedInputObjectValue->$inputFieldName = $coercedInputPropertyValue;
+            $coercedInputObjectValue->$inputFieldName = $coercedInputFieldValue;
         }
 
         /**
