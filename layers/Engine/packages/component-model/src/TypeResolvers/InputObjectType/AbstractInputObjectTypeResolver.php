@@ -8,10 +8,22 @@ use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use stdClass;
 
 abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver implements InputObjectTypeResolverInterface
 {
+    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+
+    final public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    {
+        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+    }
+    final protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    {
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+    
     public function getInputObjectFieldDescription(string $inputObjectFieldName): ?string
     {
         return null;
@@ -74,6 +86,26 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 );
                 continue;
             }
+
+            /**
+             * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+             * In particular, it does not need to validate if it is an array or not,
+             * as according to the applied WrappingType.
+             *
+             * This is to enable it to have an array as value, which is not
+             * allowed by GraphQL unless the array is explicitly defined.
+             *
+             * For instance, type `DangerouslyDynamic` could have values
+             * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
+             * these values by types `String` and `[String]`.
+             */
+            if ($inputTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
+                $coercedInputObjectValue->$fieldName = $this->getDangerouslyDynamicScalarTypeResolver()->coerceValue($propertyValue);
+                continue;
+            }
+
+            // Check that the cardinality of elements matches
+
             // Coerce the value using the property's typeResolver
             $coercedInputPropertyValue = $inputTypeResolver->coerceValue($propertyValue);
             if (GeneralUtils::isError($coercedInputPropertyValue)) {
