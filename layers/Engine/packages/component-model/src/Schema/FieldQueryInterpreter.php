@@ -1081,41 +1081,13 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             /** @var Error[] */
             $errorArgValues = [];
             // Cast (or "coerce" in GraphQL terms) the value
-            if ($fieldOrDirectiveArgIsArrayOfArraysType) {
-                // If the value is an array of arrays, then cast each subelement to the item type
-                $argValue = $argValue === null ? null : array_map(
-                    // If it contains a null value, return it as is
-                    fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? null : array_map(
-                        fn (mixed $arrayOfArraysArgValueElem) => $arrayOfArraysArgValueElem === null ? null : $fieldOrDirectiveArgTypeResolver->coerceValue($arrayOfArraysArgValueElem),
-                        $arrayArgValueElem
-                    ),
-                    $argValue
-                );
-                $errorArgValues = GeneralUtils::arrayFlatten(array_filter(
-                    $argValue ?? [],
-                    fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? false : array_filter(
-                        $arrayArgValueElem,
-                        fn (mixed $arrayOfArraysArgValueElem) => GeneralUtils::isError($arrayOfArraysArgValueElem)
-                    )
-                ));
-            } elseif ($fieldOrDirectiveArgIsArrayType) {
-                // If the value is an array, then cast each element to the item type
-                $argValue = $argValue === null ? null : array_map(
-                    fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $fieldOrDirectiveArgTypeResolver->coerceValue($arrayArgValueElem),
-                    $argValue
-                );
-                $errorArgValues = array_filter(
-                    $argValue ?? [],
-                    fn (mixed $arrayArgValueElem) => GeneralUtils::isError($arrayArgValueElem)
-                );
-            } else {
-                // Otherwise, simply cast the given value directly
-                $argValue = $argValue === null ? null : $fieldOrDirectiveArgTypeResolver->coerceValue($argValue);
-                if (GeneralUtils::isError($argValue)) {
-                    /** @var Error $argValue */
-                    $errorArgValues[] = $argValue;
-                }
-            }
+            $argValue = $this->getInputCoercingService()->coerceInputValue(
+                $fieldOrDirectiveArgTypeResolver,
+                $argValue,
+                $fieldOrDirectiveArgIsArrayType,
+                $fieldOrDirectiveArgIsArrayOfArraysType,
+                $errorArgValues
+            );
 
             // If the response is an error, extract the error message and set value to null
             if ($errorArgValues) {

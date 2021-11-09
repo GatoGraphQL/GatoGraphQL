@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+
 interface InputCoercingServiceInterface
 {
     /**
@@ -38,4 +41,20 @@ interface InputCoercingServiceInterface
         bool $inputIsArrayOfArraysType,
         bool $inputIsNonNullArrayOfArraysItemsType,
     ): ?string;
+
+    /**
+     * Coerce the input value, corresponding to the array type
+     * defined by the modifiers.
+     * 
+     * In case of errors, these are added to entry $inputValueErrors
+     * 
+     * @param Error[] $inputValueErrors Errors from coercing the input value
+     */
+    public function coerceInputValue(
+        InputTypeResolverInterface $inputTypeResolver,
+        mixed $inputValue,
+        bool $inputIsArrayType,
+        bool $inputIsArrayOfArraysType,
+        array &$inputValueErrors
+    ): mixed;
 }
