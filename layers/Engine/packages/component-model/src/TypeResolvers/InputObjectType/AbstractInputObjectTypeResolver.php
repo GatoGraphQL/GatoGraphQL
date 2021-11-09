@@ -82,13 +82,13 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         /** @var Error[] */
         $errors = [];
         foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
-            // Check that the property exists
+            // Check that the input field exists
             $inputTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName] ?? null;
             if ($inputTypeResolver === null) {
                 $errors[] = new Error(
                     $this->getErrorCode(),
                     sprintf(
-                        $this->getTranslationAPI()->__('There is no property \'%s\' in input object \'%s\''),
+                        $this->getTranslationAPI()->__('There is no input field \'%s\' in input object \'%s\''),
                         $inputFieldName,
                         $this->getMaybeNamespacedTypeName()
                     )
@@ -114,10 +114,10 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             }
 
             $inputFieldTypeModifiers = $this->getInputObjectFieldTypeModifiers($inputFieldName);
-            $propertyIsArrayType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
-            $propertyIsNonNullArrayItemsType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY;
-            $propertyIsArrayOfArraysType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-            $propertyIsNonNullArrayOfArraysItemsType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS;
+            $inputFieldIsArrayType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
+            $inputFieldIsNonNullArrayItemsType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY;
+            $inputFieldIsArrayOfArraysType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+            $inputFieldIsNonNullArrayOfArraysItemsType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS;
 
             /**
              * Support passing a single value where a list is expected:
@@ -129,18 +129,18 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              */
             $inputFieldValue = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
                 $inputFieldValue,
-                $propertyIsArrayType,
-                $propertyIsArrayOfArraysType,
+                $inputFieldIsArrayType,
+                $inputFieldIsArrayOfArraysType,
             );
 
             // Validate that the expected array/non-array input is provided
             $maybeErrorMessage = $this->getInputCoercingService()->validateInputArrayModifiers(
                 $inputFieldValue,
                 $inputFieldName,
-                $propertyIsArrayType,
-                $propertyIsNonNullArrayItemsType,
-                $propertyIsArrayOfArraysType,
-                $propertyIsNonNullArrayOfArraysItemsType,
+                $inputFieldIsArrayType,
+                $inputFieldIsNonNullArrayItemsType,
+                $inputFieldIsArrayOfArraysType,
+                $inputFieldIsNonNullArrayOfArraysItemsType,
             );
             if ($maybeErrorMessage !== null) {
                 $errors[] = new Error(
@@ -154,21 +154,21 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             $coercedInputPropertyValue = $this->getInputCoercingService()->coerceInputValue(
                 $inputTypeResolver,
                 $inputFieldValue,
-                $propertyIsArrayType,
-                $propertyIsArrayOfArraysType,
+                $inputFieldIsArrayType,
+                $inputFieldIsArrayOfArraysType,
             );
 
             // Check if the coercion produced errors
             $maybeCoercedInputPropertyValueErrors = $this->getInputCoercingService()->extractErrorsFromCoercedInputValue(
                 $coercedInputPropertyValue,
-                $propertyIsArrayType,
-                $propertyIsArrayOfArraysType,
+                $inputFieldIsArrayType,
+                $inputFieldIsArrayOfArraysType,
             );
             if ($maybeCoercedInputPropertyValueErrors !== []) {
                 $castingError = new Error(
                     $this->getErrorCode(),
                     sprintf(
-                        $this->getTranslationAPI()->__('Casting property \'%s\' of type \'%s\' produced errors', 'component-model'),
+                        $this->getTranslationAPI()->__('Casting input field \'%s\' of type \'%s\' produced errors', 'component-model'),
                         $inputFieldName,
                         $inputTypeResolver->getMaybeNamespacedTypeName()
                     ),
@@ -179,7 +179,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 continue;
             }
 
-            // The property is valid, add to the resulting InputObject
+            // The input field is valid, add to the resulting InputObject
             $coercedInputObjectValue->$inputFieldName = $coercedInputPropertyValue;
         }
 
@@ -198,7 +198,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             $errors[] = new Error(
                 $this->getErrorCode(),
                 sprintf(
-                    $this->getTranslationAPI()->__('Mandatory property \'%s\' in input object \'%s\' has not been provided'),
+                    $this->getTranslationAPI()->__('Mandatory input field \'%s\' in input object \'%s\' has not been provided'),
                     $inputFieldName,
                     $this->getMaybeNamespacedTypeName()
                 )
