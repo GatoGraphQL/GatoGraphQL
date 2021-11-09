@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
+use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
@@ -78,5 +79,22 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     public function getTypeDescription(): ?string
     {
         return null;
+    }
+
+    final protected function getError(string $message): Error
+    {
+        return new Error(
+            sprintf('%s-cast', $this->getTypeName()),
+            $message
+        );
+    }
+
+    protected function getDefaultErrorMessage(mixed $inputValue): string
+    {
+        return sprintf(
+            $this->getTranslationAPI()->__('Cannot cast value \'%s\' for type \'%s\'', 'component-model'),
+            $inputValue,
+            $this->getMaybeNamespacedTypeName(),
+        );
     }
 }
