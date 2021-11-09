@@ -1079,7 +1079,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             }
 
             // Cast (or "coerce" in GraphQL terms) the value
-            $argValue = $this->getInputCoercingService()->coerceInputValue(
+            $coercedArgValue = $this->getInputCoercingService()->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
                 $fieldOrDirectiveArgIsArrayType,
@@ -1087,19 +1087,19 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             );
 
             // Check if the coercion produced errors
-            $maybeArgValueErrors = $this->getInputCoercingService()->extractErrorsFromCoercedInputValue(
-                $argValue,
+            $maybeCoercedArgValueErrors = $this->getInputCoercingService()->extractErrorsFromCoercedInputValue(
+                $coercedArgValue,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
             );            
-            if ($maybeArgValueErrors !== []) {
-                $castingError = count($maybeArgValueErrors) === 1 ?
-                    $maybeArgValueErrors[0]
+            if ($maybeCoercedArgValueErrors !== []) {
+                $castingError = count($maybeCoercedArgValueErrors) === 1 ?
+                    $maybeCoercedArgValueErrors[0]
                     : new Error(
                         'casting',
                         $this->getTranslationAPI()->__('Casting cannot be done due to nested errors', 'component-model'),
                         null,
-                        $maybeArgValueErrors
+                        $maybeCoercedArgValueErrors
                     );
                 $failedCastingFieldOrDirectiveArgErrors[$argName] = $castingError;
                 unset($fieldOrDirectiveArgs[$argName]);
@@ -1107,7 +1107,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             }
 
             // No errors, assign the value
-            $fieldOrDirectiveArgs[$argName] = $argValue;
+            $fieldOrDirectiveArgs[$argName] = $coercedArgValue;
         }
         return $fieldOrDirectiveArgs;
     }
