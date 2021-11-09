@@ -624,43 +624,18 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 self::SCHEMA_PAGES,
             ])
         ) {
-            $moduleEntries = [
-                self::SCHEMA_CUSTOMPOSTS => [
-                    'entities' => \__('custom posts', 'graphql-api'),
-                ],
-                // self::SCHEMA_GENERIC_CUSTOMPOSTS => [
-                //     'genericCustomPosts' => null,
-                // ],
-                self::SCHEMA_POSTS => [
-                    'entities' => \__('posts', 'graphql-api'),
-                ],
-                self::SCHEMA_USERS => [
-                    'entities' => \__('users', 'graphql-api'),
-                ],
-                self::SCHEMA_MEDIA => [
-                    'entities' => \__('media items', 'graphql-api'),
-                ],
-                self::SCHEMA_TAGS => [
-                    'entities' => \__('tags', 'graphql-api'),
-                ],
-                self::SCHEMA_CATEGORIES => [
-                    'entities' => \__('categories', 'graphql-api'),
-                ],
-                self::SCHEMA_PAGES => [
-                    'entities' => \__('pages', 'graphql-api'),
-                ],
+            $moduleEntities = [
+                self::SCHEMA_CUSTOMPOSTS => \__('custom posts', 'graphql-api'),
+                self::SCHEMA_POSTS => \__('posts', 'graphql-api'),
+                self::SCHEMA_USERS => \__('users', 'graphql-api'),
+                self::SCHEMA_MEDIA => \__('media items', 'graphql-api'),
+                self::SCHEMA_TAGS => \__('tags', 'graphql-api'),
+                self::SCHEMA_CATEGORIES => \__('categories', 'graphql-api'),
+                self::SCHEMA_PAGES => \__('pages', 'graphql-api'),
             ];
-            $moduleEntry = $moduleEntries[$module];
-            // If the options is not provided, use the default one
-            $entities = $moduleEntry['entities'];
-            $options = $moduleEntry['options'] ?? [
-                ModuleSettingOptions::LIST_DEFAULT_LIMIT,
-                ModuleSettingOptions::LIST_MAX_LIMIT,
-            ];
-            list(
-                $defaultLimitOption,
-                $maxLimitOption,
-            ) = $options;
+            $entities = $moduleEntities[$module];
+            $defaultLimitOption = ModuleSettingOptions::LIST_DEFAULT_LIMIT;
+            $maxLimitOption = ModuleSettingOptions::LIST_MAX_LIMIT;
             $moduleSettings[] = [
                 Properties::INPUT => $defaultLimitOption,
                 Properties::NAME => $this->getSettingOptionName(

@@ -1325,18 +1325,18 @@ class Engine implements EngineInterface
                 // If everything is combined, then it belongs under "mutableonrequest"
                 if (
                     $combined_moduledata = array_merge_recursive(
-                        $immutable_moduledata ?? [],
-                        $mutableonmodel_moduledata ?? [],
-                        $mutableonrequest_moduledata ?? []
+                        $immutable_moduledata,
+                        $mutableonmodel_moduledata,
+                        $mutableonrequest_moduledata
                     )
                 ) {
                     $ret['moduledata'] = $has_extra_routes ? array($current_uri => $combined_moduledata) : $combined_moduledata;
                 }
                 if (
                     $combined_datasetmoduledata = array_merge_recursive(
-                        $immutable_datasetmoduledata ?? [],
-                        $mutableonmodel_datasetmoduledata ?? [],
-                        $mutableonrequest_datasetmoduledata ?? []
+                        $immutable_datasetmoduledata,
+                        $mutableonmodel_datasetmoduledata,
+                        $mutableonrequest_datasetmoduledata
                     )
                 ) {
                     $ret['datasetmoduledata'] = $has_extra_routes ? array($current_uri => $combined_datasetmoduledata) : $combined_datasetmoduledata;
@@ -1574,7 +1574,7 @@ class Engine implements EngineInterface
             }
 
             $storeSchemaErrors = $this->getFeedbackMessageStore()->retrieveAndClearSchemaErrors();
-            if (!empty($iterationSchemaErrors) || !empty($storeSchemaErrors)) {
+            if ($iterationSchemaErrors !== [] || $storeSchemaErrors !== []) {
                 $dbNameSchemaErrorEntries = $this->moveEntriesUnderDBName($iterationSchemaErrors, false, $relationalTypeResolver);
                 foreach ($dbNameSchemaErrorEntries as $dbname => $entries) {
                     $schemaErrors[$dbname][$database_key] = array_merge(
@@ -1590,7 +1590,7 @@ class Engine implements EngineInterface
             }
             if ($storeSchemaWarnings = $this->getFeedbackMessageStore()->retrieveAndClearSchemaWarnings()) {
                 $iterationSchemaWarnings = array_merge(
-                    $iterationSchemaWarnings ?? [],
+                    $iterationSchemaWarnings,
                     $storeSchemaWarnings
                 );
             }

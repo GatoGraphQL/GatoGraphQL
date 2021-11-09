@@ -809,16 +809,10 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         if ($castingObjectErrors || $castingObjectWarnings) {
             $id = $objectTypeResolver->getID($object);
             if ($castingObjectErrors) {
-                $objectErrors[(string)$id] = array_merge(
-                    $objectErrors[(string)$id] ?? [],
-                    $castingObjectErrors
-                );
+                $objectErrors[(string)$id] = $castingObjectErrors;
             }
             if ($castingObjectWarnings) {
-                $objectWarnings[(string)$id] = array_merge(
-                    $objectWarnings[(string)$id] ?? [],
-                    $castingObjectWarnings
-                );
+                $objectWarnings[(string)$id] = $castingObjectWarnings;
             }
         }
         if ($objectErrors) {
@@ -864,16 +858,10 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         if ($castingObjectErrors || $castingObjectWarnings) {
             $id = $relationalTypeResolver->getID($object);
             if ($castingObjectErrors) {
-                $objectErrors[(string)$id] = array_merge(
-                    $objectErrors[(string)$id] ?? [],
-                    $castingObjectErrors
-                );
+                $objectErrors[(string)$id] = $castingObjectErrors;
             }
             if ($castingObjectWarnings) {
-                $objectWarnings[(string)$id] = array_merge(
-                    $objectWarnings[(string)$id] ?? [],
-                    $castingObjectWarnings
-                );
+                $objectWarnings[(string)$id] = $castingObjectWarnings;
             }
         }
         if ($objectErrors) {

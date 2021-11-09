@@ -146,6 +146,9 @@ class EndpointHelpers
 
     public function getAdminPersistedQueryCustomPostID(): ?int
     {
-        return (int) $_REQUEST[RequestParams::PERSISTED_QUERY_ID] ?? null;
+        if ($persistedQueryID = $_REQUEST[RequestParams::PERSISTED_QUERY_ID] ?? null) {
+            return (int) $persistedQueryID;
+        }
+        return null;
     }
 }

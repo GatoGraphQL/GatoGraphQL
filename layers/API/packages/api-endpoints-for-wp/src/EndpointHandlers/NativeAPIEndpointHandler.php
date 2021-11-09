@@ -23,8 +23,6 @@ class NativeAPIEndpointHandler extends AbstractEndpointHandler
 
     /**
      * Provide the endpoint
-     *
-     * @var string
      */
     protected function getEndpoint(): string
     {

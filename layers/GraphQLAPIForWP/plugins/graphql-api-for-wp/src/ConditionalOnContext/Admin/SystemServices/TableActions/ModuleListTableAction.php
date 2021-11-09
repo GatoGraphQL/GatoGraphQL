@@ -113,7 +113,7 @@ class ModuleListTableAction extends AbstractListTableAction
          */
         if ($isBulkAction) {
             $moduleIDs = (array) \esc_sql($_POST[self::INPUT_BULK_ACTION_IDS] ?? []);
-            if (!empty($moduleIDs)) {
+            if ($moduleIDs !== []) {
                 // Enable or disable
                 if (($_POST['action'] ?? null) == self::ACTION_ENABLE || ($_POST['action2'] ?? null) == self::ACTION_ENABLE) {
                     $this->setModulesEnabledValue($moduleIDs, true);

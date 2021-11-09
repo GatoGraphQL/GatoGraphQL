@@ -14,10 +14,10 @@ use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 
 trait ContainerBuilderFactoryTrait
 {
-    private static Container $instance;
-    private static bool $cacheContainerConfiguration;
-    private static bool $cached;
-    private static string $cacheFile;
+    protected static Container $instance;
+    protected static bool $cacheContainerConfiguration;
+    protected static bool $cached;
+    protected static string $cacheFile;
 
     /**
      * Initialize the Container Builder.
