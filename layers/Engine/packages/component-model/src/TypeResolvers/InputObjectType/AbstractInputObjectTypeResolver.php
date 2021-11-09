@@ -82,7 +82,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
         /** @var Error[] */
         $errors = [];
-        foreach ($inputValue as $fieldName => $propertyValue) {
+        foreach ((array)$inputValue as $fieldName => $propertyValue) {
             // Check that the property exists
             $inputTypeResolver = $inputObjectFieldNameTypeResolvers[$fieldName] ?? null;
             if ($inputTypeResolver === null) {
