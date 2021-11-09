@@ -7,7 +7,8 @@ namespace PoP\ComponentModel\ErrorHandling;
 interface ErrorServiceInterface
 {
     /**
+     * @param string[]|null $path
      * @return array<string, mixed>
      */
-    public function getErrorOutput(Error $error): array;
+    public function getErrorOutput(Error $error, ?array $path = null): array;
 }

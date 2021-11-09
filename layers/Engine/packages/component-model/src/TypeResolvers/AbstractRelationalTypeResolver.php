@@ -663,12 +663,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $failedFields = $ids_data_fields[$unresolvedObjectID]['direct'] ?? [];
             // Add in $schemaErrors instead of $objectErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
             foreach ($failedFields as $failedField) {
-                $schemaErrors[] = array_merge(
-                    [
-                        Tokens::PATH => [$failedField],
-                    ],
-                    $this->getErrorService()->getErrorOutput($error)
-                );
+                $schemaErrors[] = $this->getErrorService()->getErrorOutput($error, [$failedField]);
             }
 
             // Indicate that this ID must be removed from the results

@@ -912,12 +912,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $errorFieldOrDirective = $errorData[ErrorDataTokens::FIELD_NAME] ?? null;
                     }
                     $errorFieldOrDirective = $errorFieldOrDirective ?? $fieldOrDirectiveOutputKey;
-                    $objectErrors[(string)$id][] = array_merge(
-                        [
-                            Tokens::PATH => [$errorFieldOrDirective],
-                        ], 
-                        $this->getErrorService()->getErrorOutput($error)
-                    );
+                    $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$errorFieldOrDirective]);
                     $fieldOrDirectiveArgs[$directiveArgName] = null;
                     continue;
                 }
@@ -1568,12 +1563,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $fieldArgError
                     );
                 }
-                $schemaWarningOrError = array_merge(
-                    [
-                        Tokens::PATH => [$field],
-                    ],
-                    $this->getErrorService()->getErrorOutput($fieldArgError)
-                );
+                $schemaWarningOrError = $this->getErrorService()->getErrorOutput($fieldArgError, [$field]);
                 if ($treatTypeCoercingFailuresAsErrors) {
                     $schemaErrors[] = $schemaWarningOrError;
                 } else {

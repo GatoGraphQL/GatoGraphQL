@@ -231,12 +231,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             // Extract the error message
             /** @var Error */
             $error = $value;
-            $objectErrors[(string)$id][] = array_merge(
-                [
-                    Tokens::PATH => [$field],
-                ],
-                $this->getErrorService()->getErrorOutput($error)
-            );
+            $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$field]);
 
             // For GraphQL, set the response for the failing field as null
             if (ComponentConfiguration::setFailingFieldResponseAsNull()) {
