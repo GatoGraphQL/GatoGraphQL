@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Schema\InputCoercingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
@@ -14,6 +15,7 @@ use stdClass;
 abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver implements InputObjectTypeResolverInterface
 {
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?InputCoercingServiceInterface $inputCoercingService = null;
 
     final public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
     {
@@ -22,6 +24,14 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     final protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
     {
         return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+    final public function setInputCoercingService(InputCoercingServiceInterface $inputCoercingService): void
+    {
+        $this->inputCoercingService = $inputCoercingService;
+    }
+    final protected function getInputCoercingService(): InputCoercingServiceInterface
+    {
+        return $this->inputCoercingService ??= $this->instanceManager->getInstance(InputCoercingServiceInterface::class);
     }
     
     public function getInputObjectFieldDescription(string $inputObjectFieldName): ?string
@@ -103,6 +113,24 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $coercedInputObjectValue->$fieldName = $this->getDangerouslyDynamicScalarTypeResolver()->coerceValue($propertyValue);
                 continue;
             }
+
+            $inputObjectFieldTypeModifiers = $this->getInputObjectFieldTypeModifiers($fieldName);
+            $propertyIsArrayOfArraysType = ($inputObjectFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+            $propertyIsArrayType = ($inputObjectFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
+
+            /**
+             * Support passing a single value where a list is expected:
+             * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
+             *
+             * Defined in the GraphQL spec.
+             *
+             * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
+             */
+            $propertyValue = $this->getInputCoercingService()->maybeCoerceInputFromSingleValueToList(
+                $propertyValue,
+                $propertyIsArrayOfArraysType,
+                $propertyIsArrayType,
+            );
 
             // Check that the cardinality of elements matches
 
