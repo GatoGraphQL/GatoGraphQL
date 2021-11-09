@@ -141,22 +141,17 @@ class InputCoercingService implements InputCoercingServiceInterface
     /**
      * Coerce the input value, corresponding to the array type
      * defined by the modifiers.
-     * 
-     * In case of errors, these are added to entry $inputValueErrors
-     * 
-     * @param Error[] $inputValueErrors Errors from coercing the input value
      */
     public function coerceInputValue(
         InputTypeResolverInterface $inputTypeResolver,
         mixed $inputValue,
         bool $inputIsArrayType,
-        bool $inputIsArrayOfArraysType,
-        array &$inputValueErrors
+        bool $inputIsArrayOfArraysType
     ): mixed {
         // Cast (or "coerce" in GraphQL terms) the value
         if ($inputIsArrayOfArraysType) {
             // If the value is an array of arrays, then cast each subelement to the item type
-            $inputValue = $inputValue === null ? null : array_map(
+            return $inputValue === null ? null : array_map(
                 // If it contains a null value, return it as is
                 fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? null : array_map(
                     fn (mixed $arrayOfArraysArgValueElem) => $arrayOfArraysArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayOfArraysArgValueElem),
@@ -164,33 +159,49 @@ class InputCoercingService implements InputCoercingServiceInterface
                 ),
                 $inputValue
             );
-            $inputValueErrors = GeneralUtils::arrayFlatten(array_filter(
+        }
+        if ($inputIsArrayType) {
+            // If the value is an array, then cast each element to the item type
+            return $inputValue === null ? null : array_map(
+                fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayArgValueElem),
+                $inputValue
+            );
+        }
+        // Otherwise, simply cast the given value directly
+        return $inputValue === null ? null : $inputTypeResolver->coerceValue($inputValue);
+    }
+
+    /**
+     * Extract the Errors produced when coercing the input values
+     * 
+     * @return Error[] Errors from coercing the input value
+     */
+    public function extractErrorsFromCoercedInputValue(
+        mixed $inputValue,
+        bool $inputIsArrayType,
+        bool $inputIsArrayOfArraysType
+    ): array {
+        // Cast (or "coerce" in GraphQL terms) the value
+        if ($inputIsArrayOfArraysType) {
+            return GeneralUtils::arrayFlatten(array_filter(
                 $inputValue ?? [],
                 fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? false : array_filter(
                     $arrayArgValueElem,
                     fn (mixed $arrayOfArraysArgValueElem) => GeneralUtils::isError($arrayOfArraysArgValueElem)
                 )
             ));
-            return $inputValue;
         }
         if ($inputIsArrayType) {
-            // If the value is an array, then cast each element to the item type
-            $inputValue = $inputValue === null ? null : array_map(
-                fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayArgValueElem),
-                $inputValue
-            );
-            $inputValueErrors = array_filter(
+            return array_filter(
                 $inputValue ?? [],
                 fn (mixed $arrayArgValueElem) => GeneralUtils::isError($arrayArgValueElem)
             );
-            return $inputValue;
         }
-        // Otherwise, simply cast the given value directly
-        $inputValue = $inputValue === null ? null : $inputTypeResolver->coerceValue($inputValue);
         if (GeneralUtils::isError($inputValue)) {
-            /** @var Error $inputValue */
-            $inputValueErrors[] = $inputValue;
+            return [
+                $inputValue,
+            ];
         }
-        return $inputValue;
+        return [];
     }
 }

@@ -1078,26 +1078,28 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 continue;
             }
 
-            /** @var Error[] */
-            $errorArgValues = [];
             // Cast (or "coerce" in GraphQL terms) the value
             $argValue = $this->getInputCoercingService()->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
-                $errorArgValues
             );
 
-            // If the response is an error, extract the error message and set value to null
-            if ($errorArgValues) {
-                $castingError = count($errorArgValues) === 1 ?
-                    $errorArgValues[0]
+            // Check if the coercion produced errors
+            $maybeArgValueErrors = $this->getInputCoercingService()->extractErrorsFromCoercedInputValue(
+                $argValue,
+                $fieldOrDirectiveArgIsArrayType,
+                $fieldOrDirectiveArgIsArrayOfArraysType,
+            );            
+            if ($maybeArgValueErrors !== []) {
+                $castingError = count($maybeArgValueErrors) === 1 ?
+                    $maybeArgValueErrors[0]
                     : new Error(
                         'casting',
                         $this->getTranslationAPI()->__('Casting cannot be done due to nested errors', 'component-model'),
                         null,
-                        $errorArgValues
+                        $maybeArgValueErrors
                     );
                 $failedCastingFieldOrDirectiveArgErrors[$argName] = $castingError;
                 unset($fieldOrDirectiveArgs[$argName]);

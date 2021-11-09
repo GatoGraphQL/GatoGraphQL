@@ -45,16 +45,22 @@ interface InputCoercingServiceInterface
     /**
      * Coerce the input value, corresponding to the array type
      * defined by the modifiers.
-     * 
-     * In case of errors, these are added to entry $inputValueErrors
-     * 
-     * @param Error[] $inputValueErrors Errors from coercing the input value
      */
     public function coerceInputValue(
         InputTypeResolverInterface $inputTypeResolver,
         mixed $inputValue,
         bool $inputIsArrayType,
-        bool $inputIsArrayOfArraysType,
-        array &$inputValueErrors
+        bool $inputIsArrayOfArraysType
     ): mixed;
+
+    /**
+     * Extract the Errors produced when coercing the input values
+     * 
+     * @return Error[] Errors from coercing the input value
+     */
+    public function extractErrorsFromCoercedInputValue(
+        mixed $inputValue,
+        bool $inputIsArrayType,
+        bool $inputIsArrayOfArraysType
+    ): array;
 }
