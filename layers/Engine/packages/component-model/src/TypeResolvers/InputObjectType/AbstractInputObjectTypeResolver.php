@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\InputCoercingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
@@ -34,19 +33,19 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $this->inputCoercingService ??= $this->instanceManager->getInstance(InputCoercingServiceInterface::class);
     }
 
-    public function getInputObjectFieldDescription(string $inputObjectFieldName): ?string
+    public function getInputObjectFieldDescription(string $inputFieldName): ?string
     {
         return null;
     }
-    public function getInputObjectFieldDeprecationMessage(string $inputObjectFieldName): ?string
+    public function getInputObjectFieldDeprecationMessage(string $inputFieldName): ?string
     {
         return null;
     }
-    public function getInputObjectFieldDefaultValue(string $inputObjectFieldName): mixed
+    public function getInputObjectFieldDefaultValue(string $inputFieldName): mixed
     {
         return null;
     }
-    public function getInputObjectFieldTypeModifiers(string $inputObjectFieldName): int
+    public function getInputObjectFieldTypeModifiers(string $inputFieldName): int
     {
         return SchemaTypeModifiers::NONE;
     }
@@ -68,29 +67,29 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     final protected function coerceInputObjectValue(stdClass $inputValue): stdClass|Error
     {
         $coercedInputObjectValue = new stdClass();
-        $inputObjectFieldNameTypeResolvers = $this->getInputObjectFieldNameTypeResolvers();
+        $inputFieldNameTypeResolvers = $this->getInputObjectFieldNameTypeResolvers();
 
         /**
          * Inject all properties with default value
          */
-        foreach ($inputObjectFieldNameTypeResolvers as $fieldName => $inputTypeResolver) {
-            if (isset($inputValue->$fieldName) || ($inputObjectFieldDefaultValue = $this->getInputObjectFieldDefaultValue($fieldName)) === null) {
+        foreach ($inputFieldNameTypeResolvers as $inputFieldName => $inputTypeResolver) {
+            if (isset($inputValue->$inputFieldName) || ($inputFieldDefaultValue = $this->getInputObjectFieldDefaultValue($inputFieldName)) === null) {
                 continue;
             }
-            $inputValue->$fieldName = $inputObjectFieldDefaultValue;
+            $inputValue->$inputFieldName = $inputFieldDefaultValue;
         }
 
         /** @var Error[] */
         $errors = [];
-        foreach ((array)$inputValue as $fieldName => $propertyValue) {
+        foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
             // Check that the property exists
-            $inputTypeResolver = $inputObjectFieldNameTypeResolvers[$fieldName] ?? null;
+            $inputTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName] ?? null;
             if ($inputTypeResolver === null) {
                 $errors[] = new Error(
                     $this->getErrorCode(),
                     sprintf(
                         $this->getTranslationAPI()->__('There is no property \'%s\' in input object \'%s\''),
-                        $fieldName,
+                        $inputFieldName,
                         $this->getMaybeNamespacedTypeName()
                     )
                 );
@@ -110,15 +109,15 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              * these values by types `String` and `[String]`.
              */
             if ($inputTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
-                $coercedInputObjectValue->$fieldName = $this->getDangerouslyDynamicScalarTypeResolver()->coerceValue($propertyValue);
+                $coercedInputObjectValue->$inputFieldName = $this->getDangerouslyDynamicScalarTypeResolver()->coerceValue($inputFieldValue);
                 continue;
             }
 
-            $inputObjectFieldTypeModifiers = $this->getInputObjectFieldTypeModifiers($fieldName);
-            $propertyIsArrayType = ($inputObjectFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
-            $propertyIsNonNullArrayItemsType = ($inputObjectFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY;
-            $propertyIsArrayOfArraysType = ($inputObjectFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-            $propertyIsNonNullArrayOfArraysItemsType = ($inputObjectFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS;
+            $inputFieldTypeModifiers = $this->getInputObjectFieldTypeModifiers($inputFieldName);
+            $propertyIsArrayType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
+            $propertyIsNonNullArrayItemsType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY;
+            $propertyIsArrayOfArraysType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+            $propertyIsNonNullArrayOfArraysItemsType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS;
 
             /**
              * Support passing a single value where a list is expected:
@@ -128,16 +127,16 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              *
              * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
              */
-            $propertyValue = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
-                $propertyValue,
+            $inputFieldValue = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
+                $inputFieldValue,
                 $propertyIsArrayType,
                 $propertyIsArrayOfArraysType,
             );
 
             // Validate that the expected array/non-array input is provided
             $maybeErrorMessage = $this->getInputCoercingService()->validateInputArrayModifiers(
-                $propertyValue,
-                $fieldName,
+                $inputFieldValue,
+                $inputFieldName,
                 $propertyIsArrayType,
                 $propertyIsNonNullArrayItemsType,
                 $propertyIsArrayOfArraysType,
@@ -154,7 +153,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             // Cast (or "coerce" in GraphQL terms) the value
             $coercedInputPropertyValue = $this->getInputCoercingService()->coerceInputValue(
                 $inputTypeResolver,
-                $propertyValue,
+                $inputFieldValue,
                 $propertyIsArrayType,
                 $propertyIsArrayOfArraysType,
             );
@@ -170,7 +169,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                     $this->getErrorCode(),
                     sprintf(
                         $this->getTranslationAPI()->__('Casting property \'%s\' of type \'%s\' produced errors', 'component-model'),
-                        $fieldName,
+                        $inputFieldName,
                         $inputTypeResolver->getMaybeNamespacedTypeName()
                     ),
                     null,
@@ -181,26 +180,26 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             }
 
             // The property is valid, add to the resulting InputObject
-            $coercedInputObjectValue->$fieldName = $coercedInputPropertyValue;
+            $coercedInputObjectValue->$inputFieldName = $coercedInputPropertyValue;
         }
 
         /**
          * Check that all mandatory properties have been provided
          */
-        foreach ($inputObjectFieldNameTypeResolvers as $fieldName => $inputTypeResolver) {
-            if (isset($inputValue->$fieldName)) {
+        foreach ($inputFieldNameTypeResolvers as $inputFieldName => $inputTypeResolver) {
+            if (isset($inputValue->$inputFieldName)) {
                 continue;
             }
-            $inputObjectFieldTypeModifiers = $this->getInputObjectFieldTypeModifiers($fieldName);
-            $inputObjectFieldTypeModifiersIsMandatory = ($inputObjectFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
-            if (!$inputObjectFieldTypeModifiersIsMandatory) {
+            $inputFieldTypeModifiers = $this->getInputObjectFieldTypeModifiers($inputFieldName);
+            $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
+            if (!$inputFieldTypeModifiersIsMandatory) {
                 continue;
             }
             $errors[] = new Error(
                 $this->getErrorCode(),
                 sprintf(
                     $this->getTranslationAPI()->__('Mandatory property \'%s\' in input object \'%s\' has not been provided'),
-                    $fieldName,
+                    $inputFieldName,
                     $this->getMaybeNamespacedTypeName()
                 )
             );

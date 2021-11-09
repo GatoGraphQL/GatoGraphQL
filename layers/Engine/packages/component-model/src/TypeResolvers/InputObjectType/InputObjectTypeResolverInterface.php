@@ -21,8 +21,8 @@ interface InputObjectTypeResolverInterface extends InputTypeResolverInterface
      * @return array<string, InputTypeResolverInterface>
      */
     public function getInputObjectFieldNameTypeResolvers(): array;
-    public function getInputObjectFieldDescription(string $inputObjectFieldName): ?string;
-    public function getInputObjectFieldDeprecationMessage(string $inputObjectFieldName): ?string;
-    public function getInputObjectFieldDefaultValue(string $inputObjectFieldName): mixed;
-    public function getInputObjectFieldTypeModifiers(string $inputObjectFieldName): int;
+    public function getInputObjectFieldDescription(string $inputFieldName): ?string;
+    public function getInputObjectFieldDeprecationMessage(string $inputFieldName): ?string;
+    public function getInputObjectFieldDefaultValue(string $inputFieldName): mixed;
+    public function getInputObjectFieldTypeModifiers(string $inputFieldName): int;
 }
