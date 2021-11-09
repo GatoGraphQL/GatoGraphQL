@@ -56,11 +56,11 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             // Check that the property exists
             $inputTypeResolver = $inputObjectFieldNameTypeResolvers[$fieldName] ?? null;
             if ($inputTypeResolver === null) {
-                $errors[] = sprintf(
+                $errors[] = new Error(sprintf(
                     $this->getTranslationAPI()->__('There is no property \'%s\' in input object \'%s\''),
                     $fieldName,
                     $this->getMaybeNamespacedTypeName()
-                );
+                ));
                 continue;
             }
             // $inputObjectFieldTypeModifiers = $this->getInputObjectFieldTypeModifiers($fieldName);

@@ -81,6 +81,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return null;
     }
 
+    /**
+     * @param Error[]|null $nestedErrors
+     */
     final protected function getError(string $message, ?array $nestedErrors = null): Error
     {
         return new Error(
