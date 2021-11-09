@@ -93,6 +93,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
     private ?ErrorServiceInterface $errorService = null;
+    private ?InputCoercingServiceInterface $inputCoercingService = null;
 
     final public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
     {
@@ -109,6 +110,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     final protected function getErrorService(): ErrorServiceInterface
     {
         return $this->errorService ??= $this->instanceManager->getInstance(ErrorServiceInterface::class);
+    }
+    final public function setInputCoercingService(InputCoercingServiceInterface $inputCoercingService): void
+    {
+        $this->inputCoercingService = $inputCoercingService;
+    }
+    final protected function getInputCoercingService(): InputCoercingServiceInterface
+    {
+        return $this->inputCoercingService ??= $this->instanceManager->getInstance(InputCoercingServiceInterface::class);
     }
 
     /**
@@ -1045,16 +1054,11 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
              *
              * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
              */
-            if (
-                !is_array($argValue)
-                && ComponentConfiguration::coerceInputFromSingleValueToList()
-            ) {
-                if ($fieldOrDirectiveArgIsArrayOfArraysType) {
-                    $argValue = [[$argValue]];
-                } elseif ($fieldOrDirectiveArgIsArrayType) {
-                    $argValue = [$argValue];
-                }
-            }
+            $argValue = $this->getInputCoercingService()->maybeCoerceInputFromSingleValueToList(
+                $argValue,
+                $fieldOrDirectiveArgIsArrayOfArraysType,
+                $fieldOrDirectiveArgIsArrayType,
+            );
 
             // Validate that the expected array/non-array input is provided
             $errorMessage = null;
