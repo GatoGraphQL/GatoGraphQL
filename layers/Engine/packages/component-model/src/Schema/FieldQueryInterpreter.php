@@ -1557,11 +1557,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                             $composedFieldArgTypeName
                         )
                     );
-                } elseif (is_string($fieldArgError)) {
-                    $fieldArgError = new Error(
-                        sprintf('%s-error', $failedCastingFieldArgName),
-                        $fieldArgError
-                    );
                 }
                 $schemaWarningOrError = $this->getErrorService()->getErrorOutput($fieldArgError, [$field]);
                 if ($treatTypeCoercingFailuresAsErrors) {
