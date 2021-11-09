@@ -81,11 +81,21 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         return null;
     }
 
-    final protected function getError(string $message): Error
+    final protected function getError(string $message, ?array $nestedErrors = null): Error
     {
         return new Error(
-            sprintf('%s-cast', $this->getTypeName()),
-            $message
+            $this->getErrorCode(),
+            $message,
+            null,
+            $nestedErrors,
+        );
+    }
+
+    final protected function getErrorCode(): string
+    {
+        return sprintf(
+            '%s-cast',
+            $this->getTypeName()
         );
     }
 
