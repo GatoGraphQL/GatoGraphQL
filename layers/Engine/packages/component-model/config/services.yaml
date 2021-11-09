@@ -84,6 +84,9 @@ services:
     PoP\ComponentModel\ErrorHandling\ErrorProviderInterface:
         class: \PoP\ComponentModel\ErrorHandling\ErrorProvider
 
+    PoP\ComponentModel\ErrorHandling\ErrorServiceInterface:
+        class: \PoP\ComponentModel\ErrorHandling\ErrorService
+
     PoP\ComponentModel\ModulePath\ModulePathManagerInterface:
         class: \PoP\ComponentModel\ModulePath\ModulePathManager
 
