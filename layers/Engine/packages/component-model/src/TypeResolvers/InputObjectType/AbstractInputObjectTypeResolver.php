@@ -52,9 +52,10 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         /** @var Error[] */
         $errors = [];
         $inputObjectFieldNameTypeResolvers = $this->getInputObjectFieldNameTypeResolvers();
-        foreach ($inputValue as $fieldName => $inputTypeResolver) {
+        foreach ($inputValue as $fieldName => $propertyValue) {
             // Check that the property exists
-            if (!isset($inputObjectFieldNameTypeResolvers[$fieldName])) {
+            $inputTypeResolver = $inputObjectFieldNameTypeResolvers[$fieldName] ?? null;
+            if ($inputTypeResolver === null) {
                 $errors[] = sprintf(
                     $this->getTranslationAPI()->__('There is no property \'%s\' in input object \'%s\''),
                     $fieldName,
@@ -84,7 +85,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $errors
             );
         }
-        
+
         // Add all missing properties which have a default value
         return $coercedInputObjectValue;
     }
