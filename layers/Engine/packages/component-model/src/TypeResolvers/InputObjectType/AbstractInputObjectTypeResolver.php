@@ -116,7 +116,9 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
             $inputObjectFieldTypeModifiers = $this->getInputObjectFieldTypeModifiers($fieldName);
             $propertyIsArrayType = ($inputObjectFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
+            $propertyIsNonNullArrayItemsType = ($inputObjectFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY;
             $propertyIsArrayOfArraysType = ($inputObjectFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+            $propertyIsNonNullArrayOfArraysItemsType = ($inputObjectFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS;
 
             /**
              * Support passing a single value where a list is expected:
@@ -132,7 +134,22 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $propertyIsArrayOfArraysType,
             );
 
-            // Check that the cardinality of elements matches
+            // Validate that the expected array/non-array input is provided
+            $maybeErrorMessage = $this->getInputCoercingService()->validateInputArrayModifiers(
+                $propertyValue,
+                $fieldName,
+                $propertyIsArrayType,
+                $propertyIsNonNullArrayItemsType,
+                $propertyIsArrayOfArraysType,
+                $propertyIsNonNullArrayOfArraysItemsType,
+            );
+            if ($maybeErrorMessage !== null) {
+                $errors[] = new Error(
+                    $this->getErrorCode(),
+                    $maybeErrorMessage
+                );
+                continue;
+            }
 
             // Coerce the value using the property's typeResolver
             $coercedInputPropertyValue = $inputTypeResolver->coerceValue($propertyValue);
