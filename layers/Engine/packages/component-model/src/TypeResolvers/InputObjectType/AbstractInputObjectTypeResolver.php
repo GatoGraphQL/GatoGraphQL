@@ -151,12 +151,36 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 continue;
             }
 
-            // Coerce the value using the property's typeResolver
-            $coercedInputPropertyValue = $inputTypeResolver->coerceValue($propertyValue);
-            if (GeneralUtils::isError($coercedInputPropertyValue)) {
-                $errors[] = $coercedInputPropertyValue;
+            // Cast (or "coerce" in GraphQL terms) the value
+            $coercedInputPropertyValue = $this->getInputCoercingService()->coerceInputValue(
+                $inputTypeResolver,
+                $propertyValue,
+                $propertyIsArrayType,
+                $propertyIsArrayOfArraysType,
+            );
+
+            // Check if the coercion produced errors
+            $maybeCoercedInputPropertyValueErrors = $this->getInputCoercingService()->extractErrorsFromCoercedInputValue(
+                $coercedInputPropertyValue,
+                $propertyIsArrayType,
+                $propertyIsArrayOfArraysType,
+            );            
+            if ($maybeCoercedInputPropertyValueErrors !== []) {
+                $castingError = count($maybeCoercedInputPropertyValueErrors) === 1 ?
+                    $maybeCoercedInputPropertyValueErrors[0]
+                    : new Error(
+                        'casting',
+                        sprintf(
+                            $this->getTranslationAPI()->__('Casting in object type \'%s\' cannot be done due to nested errors', 'component-model'),
+                            $this->getMaybeNamespacedTypeName()
+                        ),
+                        null,
+                        $maybeCoercedInputPropertyValueErrors
+                    );
+                $errors[] = $castingError;
                 continue;
             }
+            
             // The property is valid, add to the resulting InputObject
             $coercedInputObjectValue->$fieldName = $coercedInputPropertyValue;
         }
