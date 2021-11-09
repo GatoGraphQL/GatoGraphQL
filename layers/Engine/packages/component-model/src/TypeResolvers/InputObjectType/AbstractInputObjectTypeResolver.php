@@ -164,19 +164,18 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $coercedInputPropertyValue,
                 $propertyIsArrayType,
                 $propertyIsArrayOfArraysType,
-            );            
+            );  
             if ($maybeCoercedInputPropertyValueErrors !== []) {
-                $castingError = count($maybeCoercedInputPropertyValueErrors) === 1 ?
-                    $maybeCoercedInputPropertyValueErrors[0]
-                    : new Error(
-                        'casting',
-                        sprintf(
-                            $this->getTranslationAPI()->__('Casting in object type \'%s\' cannot be done due to nested errors', 'component-model'),
-                            $this->getMaybeNamespacedTypeName()
-                        ),
-                        null,
-                        $maybeCoercedInputPropertyValueErrors
-                    );
+                $castingError = new Error(
+                    $this->getErrorCode(),
+                    sprintf(
+                        $this->getTranslationAPI()->__('Casting the properties of property \'%s\' of type \'%s\' produced errors', 'component-model'),
+                        $fieldName,
+                        $inputTypeResolver->getMaybeNamespacedTypeName()
+                    ),
+                    null,
+                    $maybeCoercedInputPropertyValueErrors
+                );
                 $errors[] = $castingError;
                 continue;
             }
@@ -212,7 +211,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         if ($errors) {
             return $this->getError(
                 sprintf(
-                    $this->getTranslationAPI()->__('Input object of type \'%s\' cannot be casted due to nested errors', 'component-model'),
+                    $this->getTranslationAPI()->__('Casting the properties of input object of type \'%s\' produced errors', 'component-model'),
                     $this->getMaybeNamespacedTypeName()
                 ),
                 $errors
