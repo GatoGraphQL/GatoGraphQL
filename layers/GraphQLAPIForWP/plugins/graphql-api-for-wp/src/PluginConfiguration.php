@@ -557,7 +557,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
              * Enable passing a single value where a list is expected:
              * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
              */
-            ComponentModelEnvironment::COERCE_INPUT_FROM_SINGLE_VALUE_TO_LIST => true,
+            ComponentModelEnvironment::CONVERT_INPUT_VALUE_FROM_SINGLE_TO_LIST => true,
             /**
              * Do not expose the `DangerouslyDynamic` scalar type
              */

@@ -28,7 +28,7 @@ class InputCoercingService implements InputCoercingServiceInterface
     ): mixed {
         if (
             is_array($inputValue)
-            || !ComponentConfiguration::coerceInputFromSingleValueToList()
+            || !ComponentConfiguration::convertInputValueFromSingleToList()
         ) {
             return $inputValue;
         }
