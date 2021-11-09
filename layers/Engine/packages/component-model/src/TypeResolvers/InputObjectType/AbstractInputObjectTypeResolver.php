@@ -33,19 +33,19 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $this->inputCoercingService ??= $this->instanceManager->getInstance(InputCoercingServiceInterface::class);
     }
 
-    public function getInputObjectFieldDescription(string $inputFieldName): ?string
+    public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return null;
     }
-    public function getInputObjectFieldDeprecationMessage(string $inputFieldName): ?string
+    public function getInputFieldDeprecationMessage(string $inputFieldName): ?string
     {
         return null;
     }
-    public function getInputObjectFieldDefaultValue(string $inputFieldName): mixed
+    public function getInputFieldDefaultValue(string $inputFieldName): mixed
     {
         return null;
     }
-    public function getInputObjectFieldTypeModifiers(string $inputFieldName): int
+    public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return SchemaTypeModifiers::NONE;
     }
@@ -67,13 +67,13 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     final protected function coerceInputObjectValue(stdClass $inputValue): stdClass|Error
     {
         $coercedInputObjectValue = new stdClass();
-        $inputFieldNameTypeResolvers = $this->getInputObjectFieldNameTypeResolvers();
+        $inputFieldNameTypeResolvers = $this->getInputFieldNameTypeResolvers();
 
         /**
          * Inject all properties with default value
          */
         foreach ($inputFieldNameTypeResolvers as $inputFieldName => $inputTypeResolver) {
-            if (isset($inputValue->$inputFieldName) || ($inputFieldDefaultValue = $this->getInputObjectFieldDefaultValue($inputFieldName)) === null) {
+            if (isset($inputValue->$inputFieldName) || ($inputFieldDefaultValue = $this->getInputFieldDefaultValue($inputFieldName)) === null) {
                 continue;
             }
             $inputValue->$inputFieldName = $inputFieldDefaultValue;
@@ -113,7 +113,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 continue;
             }
 
-            $inputFieldTypeModifiers = $this->getInputObjectFieldTypeModifiers($inputFieldName);
+            $inputFieldTypeModifiers = $this->getInputFieldTypeModifiers($inputFieldName);
             $inputFieldIsArrayType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
             $inputFieldIsNonNullArrayItemsType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY;
             $inputFieldIsArrayOfArraysType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
@@ -190,7 +190,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             if (isset($inputValue->$inputFieldName)) {
                 continue;
             }
-            $inputFieldTypeModifiers = $this->getInputObjectFieldTypeModifiers($inputFieldName);
+            $inputFieldTypeModifiers = $this->getInputFieldTypeModifiers($inputFieldName);
             $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
             if (!$inputFieldTypeModifiersIsMandatory) {
                 continue;
