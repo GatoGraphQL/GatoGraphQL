@@ -8,6 +8,7 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\ErrorHandling\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
@@ -15,6 +16,17 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
+    private ?ErrorServiceInterface $errorService = null;
+
+    final public function setErrorService(ErrorServiceInterface $errorService): void
+    {
+        $this->errorService = $errorService;
+    }
+    final protected function getErrorService(): ErrorServiceInterface
+    {
+        return $this->errorService ??= $this->instanceManager->getInstance(ErrorServiceInterface::class);
+    }
+
     public function getDirectiveName(): string
     {
         return 'resolveValueAndMerge';
@@ -199,21 +211,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         return $value;
     }
 
-    /**
-     * @return array<string, mixed>
-     */
-    protected function getErrorOutput(Error $error): array
-    {
-        $errorOutput = [
-            Tokens::MESSAGE => $error->getMessageOrCode(),
-            Tokens::EXTENSIONS => $error->getData(),
-        ];
-        foreach ($error->getNestedErrors() as $nestedError) {
-            $errorOutput[Tokens::EXTENSIONS][Tokens::NESTED][] = $this->getErrorOutput($nestedError);
-        }
-        return $errorOutput;
-    }
-
     protected function addValueForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string | int $id,
@@ -234,12 +231,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             // Extract the error message
             /** @var Error */
             $error = $value;
-            $objectErrors[(string)$id][] = array_merge(
-                [
-                    Tokens::PATH => [$field],
-                ],
-                $this->getErrorOutput($error)
-            );
+            $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$field]);
 
             // For GraphQL, set the response for the failing field as null
             if (ComponentConfiguration::setFailingFieldResponseAsNull()) {

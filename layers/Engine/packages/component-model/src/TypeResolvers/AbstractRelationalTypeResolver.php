@@ -11,6 +11,7 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
+use PoP\ComponentModel\ErrorHandling\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
@@ -19,7 +20,6 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryUtils;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver implements RelationalTypeResolverInterface
 {
@@ -62,6 +62,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     private ?ErrorProviderInterface $errorProvider = null;
     private ?DataloadingEngineInterface $dataloadingEngine = null;
     private ?DirectivePipelineServiceInterface $directivePipelineService = null;
+    private ?ErrorServiceInterface $errorService = null;
 
     final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
@@ -102,6 +103,14 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     final protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
     {
         return $this->directivePipelineService ??= $this->instanceManager->getInstance(DirectivePipelineServiceInterface::class);
+    }
+    final public function setErrorService(ErrorServiceInterface $errorService): void
+    {
+        $this->errorService = $errorService;
+    }
+    final protected function getErrorService(): ErrorServiceInterface
+    {
+        return $this->errorService ??= $this->instanceManager->getInstance(ErrorServiceInterface::class);
     }
 
     /**
@@ -654,10 +663,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $failedFields = $ids_data_fields[$unresolvedObjectID]['direct'] ?? [];
             // Add in $schemaErrors instead of $objectErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
             foreach ($failedFields as $failedField) {
-                $schemaErrors[] = [
-                    Tokens::PATH => [$failedField],
-                    Tokens::MESSAGE => $error->getMessageOrCode(),
-                ];
+                $schemaErrors[] = $this->getErrorService()->getErrorOutput($error, [$failedField]);
             }
 
             // Indicate that this ID must be removed from the results

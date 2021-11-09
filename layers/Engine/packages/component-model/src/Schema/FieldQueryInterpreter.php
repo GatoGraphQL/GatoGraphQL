@@ -9,6 +9,7 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\ErrorHandling\ErrorDataTokens;
+use PoP\ComponentModel\ErrorHandling\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
@@ -91,6 +92,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     private array $fieldsByTypeAndFieldOutputKey = [];
 
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?ErrorServiceInterface $errorService = null;
+    private ?InputCoercingServiceInterface $inputCoercingService = null;
 
     final public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
     {
@@ -99,6 +102,22 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     final protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
     {
         return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+    final public function setErrorService(ErrorServiceInterface $errorService): void
+    {
+        $this->errorService = $errorService;
+    }
+    final protected function getErrorService(): ErrorServiceInterface
+    {
+        return $this->errorService ??= $this->instanceManager->getInstance(ErrorServiceInterface::class);
+    }
+    final public function setInputCoercingService(InputCoercingServiceInterface $inputCoercingService): void
+    {
+        $this->inputCoercingService = $inputCoercingService;
+    }
+    final protected function getInputCoercingService(): InputCoercingServiceInterface
+    {
+        return $this->inputCoercingService ??= $this->instanceManager->getInstance(InputCoercingServiceInterface::class);
     }
 
     /**
@@ -902,10 +921,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $errorFieldOrDirective = $errorData[ErrorDataTokens::FIELD_NAME] ?? null;
                     }
                     $errorFieldOrDirective = $errorFieldOrDirective ?? $fieldOrDirectiveOutputKey;
-                    $objectErrors[(string)$id][] = [
-                        Tokens::PATH => [$errorFieldOrDirective],
-                        Tokens::MESSAGE => $error->getMessageOrCode(),
-                    ];
+                    $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$errorFieldOrDirective]);
                     $fieldOrDirectiveArgs[$directiveArgName] = null;
                     continue;
                 }
@@ -916,28 +932,34 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldOrDirectiveArgs;
     }
 
+    /**
+     * @param array<string,Error> $failedCastingDirectiveArgErrors
+     */
     protected function castDirectiveArguments(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directive,
         array $directiveArgs,
-        array &$failedCastingDirectiveArgErrorMessages,
+        array &$failedCastingDirectiveArgErrors,
         bool $forSchema
     ): array {
         $directiveArgSchemaDefinition = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $relationalTypeResolver);
         return $this->castFieldOrDirectiveArguments(
             $directiveArgs,
             $directiveArgSchemaDefinition,
-            $failedCastingDirectiveArgErrorMessages,
+            $failedCastingDirectiveArgErrors,
             $forSchema
         );
     }
 
+    /**
+     * @param array<string,Error> $failedCastingFieldArgErrors
+     */
     protected function castFieldArguments(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
         array $fieldArgs,
-        array &$failedCastingFieldArgErrorMessages,
+        array &$failedCastingFieldArgErrors,
         array &$schemaOrObjectErrors,
         bool $forSchema
     ): ?array {
@@ -952,15 +974,18 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $this->castFieldOrDirectiveArguments(
             $fieldArgs,
             $fieldArgSchemaDefinition,
-            $failedCastingFieldArgErrorMessages,
+            $failedCastingFieldArgErrors,
             $forSchema
         );
     }
 
+    /**
+     * @param array<string,Error> $failedCastingFieldOrDirectiveArgErrors
+     */
     protected function castFieldOrDirectiveArguments(
         array $fieldOrDirectiveArgs,
         array $fieldOrDirectiveArgSchemaDefinition,
-        array &$failedCastingFieldOrDirectiveArgErrorMessages,
+        array &$failedCastingFieldOrDirectiveArgErrors,
         bool $forSchema
     ): array {
         // Cast all argument values
@@ -1029,180 +1054,96 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
              *
              * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
              */
-            if (
-                !is_array($argValue)
-                && ComponentConfiguration::coerceInputFromSingleValueToList()
-            ) {
-                if ($fieldOrDirectiveArgIsArrayOfArraysType) {
-                    $argValue = [[$argValue]];
-                } elseif ($fieldOrDirectiveArgIsArrayType) {
-                    $argValue = [$argValue];
-                }
-            }
+            $argValue = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
+                $argValue,
+                $fieldOrDirectiveArgIsArrayType,
+                $fieldOrDirectiveArgIsArrayOfArraysType,
+            );
 
             // Validate that the expected array/non-array input is provided
-            $errorMessage = null;
-            if (
-                !$fieldOrDirectiveArgIsArrayType
-                && is_array($argValue)
-            ) {
-                $errorMessage = sprintf(
-                    $this->getTranslationAPI()->__('Argument \'%s\' does not expect an array, but array \'%s\' was provided', 'pop-component-model'),
-                    $argName,
-                    json_encode($argValue)
+            $maybeErrorMessage = $this->getInputCoercingService()->validateInputArrayModifiers(
+                $argValue,
+                $argName,
+                $fieldOrDirectiveArgIsArrayType,
+                $fieldOrDirectiveArgIsNonNullArrayItemsType,
+                $fieldOrDirectiveArgIsArrayOfArraysType,
+                $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType,
+            );
+            if ($maybeErrorMessage !== null) {
+                $failedCastingFieldOrDirectiveArgErrors[$argName] = new Error(
+                    sprintf('%s-cast', $argName),
+                    $maybeErrorMessage
                 );
-            } elseif (
-                $fieldOrDirectiveArgIsArrayType
-                && !is_array($argValue)
-            ) {
-                $errorMessage = sprintf(
-                    $this->getTranslationAPI()->__('Argument \'%s\' expects an array, but value \'%s\' was provided', 'pop-component-model'),
-                    $argName,
-                    $argValue
-                );
-            } elseif (
-                $fieldOrDirectiveArgIsNonNullArrayItemsType
-                && is_array($argValue)
-                && array_filter(
-                    $argValue,
-                    fn ($arrayItem) => $arrayItem === null
-                )
-            ) {
-                $errorMessage = sprintf(
-                    $this->getTranslationAPI()->__('Argument \'%s\' cannot receive an array with `null` values', 'pop-component-model'),
-                    $argName
-                );
-            } elseif (
-                $fieldOrDirectiveArgIsArrayType
-                && !$fieldOrDirectiveArgIsArrayOfArraysType
-                && array_filter(
-                    $argValue,
-                    fn ($arrayItem) => is_array($arrayItem)
-                )
-            ) {
-                $errorMessage = sprintf(
-                    $this->getTranslationAPI()->__('Argument \'%s\' cannot receive an array containing arrays as elements', 'pop-component-model'),
-                    $argName,
-                    json_encode($argValue)
-                );
-            } elseif (
-                $fieldOrDirectiveArgIsArrayOfArraysType
-                && is_array($argValue)
-                && array_filter(
-                    $argValue,
-                    // `null` could be accepted as an array! (Validation against null comes next)
-                    fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null
-                )
-            ) {
-                $errorMessage = sprintf(
-                    $this->getTranslationAPI()->__('Argument \'%s\' expects an array of arrays, but value \'%s\' was provided', 'pop-component-model'),
-                    $argName,
-                    json_encode($argValue)
-                );
-            } elseif (
-                $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType
-                && is_array($argValue)
-                && array_filter(
-                    $argValue,
-                    fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
-                        $arrayItem,
-                        fn ($arrayItemItem) => $arrayItemItem === null
-                    ) !== [],
-                )
-            ) {
-                $errorMessage = sprintf(
-                    $this->getTranslationAPI()->__('Argument \'%s\' cannot receive an array of arrays with `null` values', 'pop-component-model'),
-                    $argName
-                );
-            }
-
-            if ($errorMessage !== null) {
-                $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $errorMessage;
                 unset($fieldOrDirectiveArgs[$argName]);
                 continue;
             }
 
-            /** @var Error[] */
-            $errorArgValues = [];
             // Cast (or "coerce" in GraphQL terms) the value
-            if ($fieldOrDirectiveArgIsArrayOfArraysType) {
-                // If the value is an array of arrays, then cast each subelement to the item type
-                $argValue = $argValue === null ? null : array_map(
-                    // If it contains a null value, return it as is
-                    fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? null : array_map(
-                        fn (mixed $arrayOfArraysArgValueElem) => $arrayOfArraysArgValueElem === null ? null : $fieldOrDirectiveArgTypeResolver->coerceValue($arrayOfArraysArgValueElem),
-                        $arrayArgValueElem
-                    ),
-                    $argValue
-                );
-                $errorArgValues = GeneralUtils::arrayFlatten(array_filter(
-                    $argValue ?? [],
-                    fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? false : array_filter(
-                        $arrayArgValueElem,
-                        fn (mixed $arrayOfArraysArgValueElem) => GeneralUtils::isError($arrayOfArraysArgValueElem)
-                    )
-                ));
-            } elseif ($fieldOrDirectiveArgIsArrayType) {
-                // If the value is an array, then cast each element to the item type
-                $argValue = $argValue === null ? null : array_map(
-                    fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $fieldOrDirectiveArgTypeResolver->coerceValue($arrayArgValueElem),
-                    $argValue
-                );
-                $errorArgValues = array_filter(
-                    $argValue ?? [],
-                    fn (mixed $arrayArgValueElem) => GeneralUtils::isError($arrayArgValueElem)
-                );
-            } else {
-                // Otherwise, simply cast the given value directly
-                $argValue = $argValue === null ? null : $fieldOrDirectiveArgTypeResolver->coerceValue($argValue);
-                if (GeneralUtils::isError($argValue)) {
-                    /** @var Error $argValue */
-                    $errorArgValues[] = $argValue;
-                }
-            }
+            $coercedArgValue = $this->getInputCoercingService()->coerceInputValue(
+                $fieldOrDirectiveArgTypeResolver,
+                $argValue,
+                $fieldOrDirectiveArgIsArrayType,
+                $fieldOrDirectiveArgIsArrayOfArraysType,
+            );
 
-            // If the response is an error, extract the error message and set value to null
-            if ($errorArgValues) {
-                $castingErrorMessage = count($errorArgValues) === 1 ?
-                    $errorArgValues[0]->getMessageOrCode()
-                    : implode(
-                        $this->getTranslationAPI()->__('; ', 'pop-component-model'),
-                        array_map(
-                            fn (Error $errorArgValueElem) => $errorArgValueElem->getMessageOrCode(),
-                            $errorArgValues
-                        )
+            // Check if the coercion produced errors
+            $maybeCoercedArgValueErrors = $this->getInputCoercingService()->extractErrorsFromCoercedInputValue(
+                $coercedArgValue,
+                $fieldOrDirectiveArgIsArrayType,
+                $fieldOrDirectiveArgIsArrayOfArraysType,
+            );
+            if ($maybeCoercedArgValueErrors !== []) {
+                $castingError = count($maybeCoercedArgValueErrors) === 1 ?
+                    $maybeCoercedArgValueErrors[0]
+                    : new Error(
+                        'casting',
+                        $this->getTranslationAPI()->__('Casting cannot be done due to nested errors', 'component-model'),
+                        null,
+                        $maybeCoercedArgValueErrors
                     );
-                $failedCastingFieldOrDirectiveArgErrorMessages[$argName] = $castingErrorMessage;
+                $failedCastingFieldOrDirectiveArgErrors[$argName] = $castingError;
                 unset($fieldOrDirectiveArgs[$argName]);
                 continue;
             }
 
             // No errors, assign the value
-            $fieldOrDirectiveArgs[$argName] = $argValue;
+            $fieldOrDirectiveArgs[$argName] = $coercedArgValue;
         }
         return $fieldOrDirectiveArgs;
     }
 
-    protected function castDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldDirective, array $directiveArgs, array &$failedCastingDirectiveArgErrorMessages, bool $disableDynamicFields = false): array
+    /**
+     * @param array<string,Error> $failedCastingDirectiveArgErrors
+     */
+    protected function castDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldDirective, array $directiveArgs, array &$failedCastingDirectiveArgErrors, bool $disableDynamicFields = false): array
     {
         // If the directive doesn't allow dynamic fields (Eg: <cacheControl(maxAge:id())>), then treat it as not for schema
         $forSchema = !$disableDynamicFields;
-        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrorMessages, $forSchema);
+        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrors, $forSchema);
     }
 
-    protected function castFieldArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrorMessages, array &$schemaErrors): ?array
+    /**
+     * @param array<string,Error> $failedCastingFieldArgErrors
+     */
+    protected function castFieldArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrors, array &$schemaErrors): ?array
     {
-        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $schemaErrors, true);
+        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $schemaErrors, true);
     }
 
-    protected function castDirectiveArgumentsForObject(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $directive, array $directiveArgs, array &$failedCastingDirectiveArgErrorMessages): array
+    /**
+     * @param array<string,Error> $failedCastingDirectiveArgErrors
+     */
+    protected function castDirectiveArgumentsForObject(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $directive, array $directiveArgs, array &$failedCastingDirectiveArgErrors): array
     {
-        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $directive, $directiveArgs, $failedCastingDirectiveArgErrorMessages, false);
+        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $directive, $directiveArgs, $failedCastingDirectiveArgErrors, false);
     }
 
-    protected function castFieldArgumentsForObject(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrorMessages, array &$objectErrors): ?array
+    /**
+     * @param array<string,Error> $failedCastingFieldArgErrors
+     */
+    protected function castFieldArgumentsForObject(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrors, array &$objectErrors): ?array
     {
-        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $objectErrors, false);
+        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $objectErrors, false);
     }
 
     /**
@@ -1350,9 +1291,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function castAndValidateDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, bool $disableDynamicFields = false): array
     {
         if ($directiveArgs) {
-            $failedCastingDirectiveArgErrorMessages = [];
-            $castedDirectiveArgs = $this->castDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrorMessages, $disableDynamicFields);
-            return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrorMessages, $fieldDirective, $directiveArgs, $schemaErrors, $schemaWarnings);
+            $failedCastingDirectiveArgErrors = [];
+            $castedDirectiveArgs = $this->castDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrors, $disableDynamicFields);
+            return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrors, $fieldDirective, $directiveArgs, $schemaErrors, $schemaWarnings);
         }
         return $directiveArgs;
     }
@@ -1360,9 +1301,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function castAndValidateFieldArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings): ?array
     {
         if ($fieldArgs) {
-            $failedCastingFieldArgErrorMessages = [];
+            $failedCastingFieldArgErrors = [];
             $castingSchemaErrors = [];
-            $castedFieldArgs = $this->castFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $castingSchemaErrors);
+            $castedFieldArgs = $this->castFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $castingSchemaErrors);
             if ($castingSchemaErrors) {
                 $schemaErrors = array_merge(
                     $schemaErrors,
@@ -1370,23 +1311,23 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 );
                 return null;
             }
-            return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrorMessages, $field, $fieldArgs, $schemaErrors, $schemaWarnings);
+            return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrors, $field, $fieldArgs, $schemaErrors, $schemaWarnings);
         }
         return $fieldArgs;
     }
 
     protected function castAndValidateDirectiveArgumentsForObject(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldDirective, array $directiveArgs, array &$objectErrors, array &$objectWarnings): ?array
     {
-        $failedCastingDirectiveArgErrorMessages = [];
-        $castedDirectiveArgs = $this->castDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrorMessages);
-        return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrorMessages, $fieldDirective, $directiveArgs, $objectErrors, $objectWarnings);
+        $failedCastingDirectiveArgErrors = [];
+        $castedDirectiveArgs = $this->castDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrors);
+        return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrors, $fieldDirective, $directiveArgs, $objectErrors, $objectWarnings);
     }
 
     protected function castAndValidateFieldArgumentsForObject(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$objectErrors, array &$objectWarnings): ?array
     {
-        $failedCastingFieldArgErrorMessages = [];
+        $failedCastingFieldArgErrors = [];
         $castingObjectErrors = [];
-        $castedFieldArgs = $this->castFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrorMessages, $castingObjectErrors);
+        $castedFieldArgs = $this->castFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $castingObjectErrors);
         if ($castingObjectErrors) {
             $objectErrors = array_merge(
                 $objectErrors,
@@ -1394,18 +1335,21 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             );
             return null;
         }
-        return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrorMessages, $field, $fieldArgs, $objectErrors, $objectWarnings);
+        return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrors, $field, $fieldArgs, $objectErrors, $objectWarnings);
     }
 
-    protected function validateAndFilterCastDirectiveArguments(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, array $castedDirectiveArgs, array &$failedCastingDirectiveArgErrorMessages, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings): array
+    /**
+     * @param array<string,Error> $failedCastingDirectiveArgErrors
+     */
+    protected function validateAndFilterCastDirectiveArguments(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, array $castedDirectiveArgs, array &$failedCastingDirectiveArgErrors, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings): array
     {
         // If any casting can't be done, show an error
-        if ($failedCastingDirectiveArgErrorMessages) {
+        if ($failedCastingDirectiveArgErrors) {
             $directiveName = $this->getFieldDirectiveName($fieldDirective);
             $directiveArgNameTypeResolvers = $this->getDirectiveArgumentNameTypeResolvers($directiveResolver, $relationalTypeResolver);
             $directiveArgNameSchemaDefinition = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $relationalTypeResolver);
             $treatTypeCoercingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
-            foreach (array_keys($failedCastingDirectiveArgErrorMessages) as $failedCastingDirectiveArgName) {
+            foreach (array_keys($failedCastingDirectiveArgErrors) as $failedCastingDirectiveArgName) {
                 // If it is Error, also show the error message
                 $directiveArgIsArrayType = $directiveArgNameSchemaDefinition[$failedCastingDirectiveArgName][SchemaDefinition::IS_ARRAY] ?? false;
                 $directiveArgIsArrayOfArraysType = $directiveArgNameSchemaDefinition[$failedCastingDirectiveArgName][SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
@@ -1422,42 +1366,33 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $composedDirectiveArgTypeName
                     );
                 }
-                $encodedValue = $directiveArgs[$failedCastingDirectiveArgName] instanceof stdClass || is_array($directiveArgs[$failedCastingDirectiveArgName])
-                    ? json_encode($directiveArgs[$failedCastingDirectiveArgName])
-                    : $directiveArgs[$failedCastingDirectiveArgName];
-                if ($directiveArgErrorMessage = $failedCastingDirectiveArgErrorMessages[$failedCastingDirectiveArgName] ?? null) {
-                    $errorMessage = sprintf(
-                        $this->getTranslationAPI()->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed: %s', 'pop-component-model'),
-                        $directiveName,
-                        $encodedValue,
-                        $failedCastingDirectiveArgName,
-                        $composedDirectiveArgTypeName,
-                        $directiveArgErrorMessage
-                    );
-                } else {
-                    $errorMessage = sprintf(
-                        $this->getTranslationAPI()->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
-                        $directiveName,
-                        $encodedValue,
-                        $failedCastingDirectiveArgName,
-                        $composedDirectiveArgTypeName
+                $directiveArgError = $failedCastingDirectiveArgErrors[$failedCastingDirectiveArgName] ?? null;
+                if ($directiveArgError !== null) {
+                    $encodedValue = $directiveArgs[$failedCastingDirectiveArgName] instanceof stdClass || is_array($directiveArgs[$failedCastingDirectiveArgName])
+                        ? json_encode($directiveArgs[$failedCastingDirectiveArgName])
+                        : $directiveArgs[$failedCastingDirectiveArgName];
+                    $directiveArgError = new Error(
+                        sprintf('%s-error', $failedCastingDirectiveArgName),
+                        sprintf(
+                            $this->getTranslationAPI()->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
+                            $directiveName,
+                            $encodedValue,
+                            $failedCastingDirectiveArgName,
+                            $composedDirectiveArgTypeName
+                        )
                     );
                 }
                 // Either treat it as an error or a warning
+                $schemaWarningOrError = $this->getErrorService()->getErrorOutput($directiveArgError, [$fieldDirective]);
                 if ($treatTypeCoercingFailuresAsErrors) {
-                    $schemaErrors[] = [
-                        Tokens::PATH => [$fieldDirective],
-                        Tokens::MESSAGE => $errorMessage,
-                    ];
+                    $schemaErrors[] = $schemaWarningOrError;
                 } else {
-                    $errorMessage = sprintf(
+                    // Override the message
+                    $schemaWarningOrError[Tokens::MESSAGE] = sprintf(
                         $this->getTranslationAPI()->__('%1$s. It has been ignored', 'pop-component-model'),
-                        $errorMessage
+                        $schemaWarningOrError[Tokens::MESSAGE]
                     );
-                    $schemaWarnings[] = [
-                        Tokens::PATH => [$fieldDirective],
-                        Tokens::MESSAGE => $errorMessage,
-                    ];
+                    $schemaWarnings[] = $schemaWarningOrError;
                 }
             }
             return $this->filterFieldOrDirectiveArgs($castedDirectiveArgs);
@@ -1478,17 +1413,20 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         );
     }
 
+    /**
+     * @param array<string,Error> $failedCastingFieldArgErrors
+     */
     protected function validateAndFilterCastFieldArguments(
         ObjectTypeResolverInterface $objectTypeResolver,
         array $castedFieldArgs,
-        array &$failedCastingFieldArgErrorMessages,
+        array &$failedCastingFieldArgErrors,
         string $field,
         array $fieldArgs,
         array &$schemaErrors,
         array &$schemaWarnings
     ): array {
         // If any casting can't be done, show an error
-        if ($failedCastingFieldArgErrorMessages) {
+        if ($failedCastingFieldArgErrors) {
             $fieldName = $this->getFieldName($field);
             $fieldArgNameTypeResolvers = $this->getFieldArgumentNameTypeResolvers($objectTypeResolver, $field);
             if ($fieldArgNameTypeResolvers === null) {
@@ -1501,7 +1439,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             /** @var array */
             $fieldArgNameSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $field);
             $treatTypeCoercingFailuresAsErrors = ComponentConfiguration::treatTypeCoercingFailuresAsErrors();
-            foreach (array_keys($failedCastingFieldArgErrorMessages) as $failedCastingFieldArgName) {
+            foreach (array_keys($failedCastingFieldArgErrors) as $failedCastingFieldArgName) {
                 // If it is Error, also show the error message
                 $fieldArgIsArrayType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::IS_ARRAY] ?? false;
                 $fieldArgIsArrayOfArraysType = $fieldArgNameSchemaDefinition[$failedCastingFieldArgName][SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
@@ -1518,41 +1456,33 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $composedFieldArgTypeName
                     );
                 }
-                $encodedValue = $fieldArgs[$failedCastingFieldArgName] instanceof stdClass || is_array($fieldArgs[$failedCastingFieldArgName])
-                    ? json_encode($fieldArgs[$failedCastingFieldArgName])
-                    : $fieldArgs[$failedCastingFieldArgName];
-                if ($fieldArgErrorMessage = $failedCastingFieldArgErrorMessages[$failedCastingFieldArgName] ?? null) {
-                    $errorMessage = sprintf(
-                        $this->getTranslationAPI()->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed: %s', 'pop-component-model'),
-                        $fieldName,
-                        $encodedValue,
-                        $failedCastingFieldArgName,
-                        $composedFieldArgTypeName,
-                        $fieldArgErrorMessage
-                    );
-                } else {
-                    $errorMessage = sprintf(
-                        $this->getTranslationAPI()->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
-                        $fieldName,
-                        $encodedValue,
-                        $failedCastingFieldArgName,
-                        $composedFieldArgTypeName
+                $fieldArgError = $failedCastingFieldArgErrors[$failedCastingFieldArgName] ?? null;
+                if ($fieldArgError === null) {
+                    $encodedValue = $fieldArgs[$failedCastingFieldArgName] instanceof stdClass || is_array($fieldArgs[$failedCastingFieldArgName])
+                        ? json_encode($fieldArgs[$failedCastingFieldArgName])
+                        : $fieldArgs[$failedCastingFieldArgName];
+                    $fieldArgError = new Error(
+                        sprintf('%s-error', $failedCastingFieldArgName),
+                        sprintf(
+                            $this->getTranslationAPI()->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'pop-component-model'),
+                            $fieldName,
+                            $encodedValue,
+                            $failedCastingFieldArgName,
+                            $composedFieldArgTypeName
+                        )
                     );
                 }
+                // Either treat it as an error or a warning
+                $schemaWarningOrError = $this->getErrorService()->getErrorOutput($fieldArgError, [$field]);
                 if ($treatTypeCoercingFailuresAsErrors) {
-                    $schemaErrors[] = [
-                        Tokens::PATH => [$field],
-                        Tokens::MESSAGE => $errorMessage,
-                    ];
+                    $schemaErrors[] = $schemaWarningOrError;
                 } else {
-                    $errorMessage = sprintf(
+                    // Override the message
+                    $schemaWarningOrError[Tokens::MESSAGE] = sprintf(
                         $this->getTranslationAPI()->__('%1$s. It has been ignored', 'pop-component-model'),
-                        $errorMessage
+                        $schemaWarningOrError[Tokens::MESSAGE]
                     );
-                    $schemaWarnings[] = [
-                        Tokens::PATH => [$field],
-                        Tokens::MESSAGE => $errorMessage,
-                    ];
+                    $schemaWarnings[] = $schemaWarningOrError;
                 }
             }
             return $this->filterFieldOrDirectiveArgs($castedFieldArgs);
