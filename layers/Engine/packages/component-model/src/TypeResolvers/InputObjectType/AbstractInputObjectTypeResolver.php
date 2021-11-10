@@ -375,6 +375,22 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
      *
      * @return string[] Error messages
      */
+    public function validateInputValue(stdClass $inputValue): array
+    {
+        $errors = [];
+        foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
+            $errors = array_merge(
+                $errors,
+                $this->validateInputFieldValue($inputFieldName, $inputFieldValue)
+            );            
+        }
+        return $errors;
+    }
+    /**
+     * Validate constraints on the input field's value
+     *
+     * @return string[] Error messages
+     */
     public function validateInputFieldValue(string $inputFieldName, mixed $inputFieldValue): array
     {
         return [];
