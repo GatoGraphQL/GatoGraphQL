@@ -375,7 +375,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
      *
      * @return string[] Error messages
      */
-    public function validateInputValue(stdClass $inputValue): array
+    final public function validateInputValue(stdClass $inputValue): array
     {
         $errors = [];
         foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
@@ -391,7 +391,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
      *
      * @return string[] Error messages
      */
-    public function validateInputFieldValue(string $inputFieldName, mixed $inputFieldValue): array
+    protected function validateInputFieldValue(string $inputFieldName, mixed $inputFieldValue): array
     {
         return [];
     }
