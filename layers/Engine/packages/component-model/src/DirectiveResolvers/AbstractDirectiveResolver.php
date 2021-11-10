@@ -30,6 +30,7 @@ use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\Root\Environment as RootEnvironment;
 
@@ -414,8 +415,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     {
         /** Check if to validate the version */
         if (
-            Environment::enableSemanticVersionConstraints() &&
-            $this->decideCanProcessBasedOnVersionConstraint($relationalTypeResolver)
+            Environment::enableSemanticVersionConstraints()
+            && $this->decideCanProcessBasedOnVersionConstraint($relationalTypeResolver)
+            && $this->hasDirectiveVersion($relationalTypeResolver)
         ) {
             /**
              * Please notice: we can get the fieldVersion directly from this instance,
@@ -424,33 +426,32 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
              * inside the schemaDefinition object.
              * If this directive is tagged with a version...
              */
-            if ($schemaDirectiveVersion = $this->getDirectiveVersion($relationalTypeResolver)) {
-                $vars = ApplicationState::getVars();
-                /**
-                 * Get versionConstraint in this order:
-                 * 1. Passed as directive argument
-                 * 2. Through param `directiveVersionConstraints[$directiveName]`: specific to the directive
-                 * 3. Through param `versionConstraint`: applies to all fields and directives in the query
-                 */
-                $versionConstraint =
-                    $directiveArgs[SchemaDefinition::VERSION_CONSTRAINT]
-                    ?? VersioningHelpers::getVersionConstraintsForDirective($this->getDirectiveName())
-                    ?? $vars['version-constraint'];
-                /**
-                 * If the query doesn't restrict the version, then do not process
-                 */
-                if (!$versionConstraint) {
-                    return false;
-                }
-                /**
-                 * Compare using semantic versioning constraint rules, as used by Composer
-                 * If passing a wrong value to validate against (eg: "saraza" instead of "1.0.0"), it will throw an Exception
-                 */
-                try {
-                    return $this->getSemverHelperService()->satisfies($schemaDirectiveVersion, $versionConstraint);
-                } catch (Exception) {
-                    return false;
-                }
+            $schemaDirectiveVersion = $this->getDirectiveVersion($relationalTypeResolver);
+            $vars = ApplicationState::getVars();
+            /**
+             * Get versionConstraint in this order:
+             * 1. Passed as directive argument
+             * 2. Through param `directiveVersionConstraints[$directiveName]`: specific to the directive
+             * 3. Through param `versionConstraint`: applies to all fields and directives in the query
+             */
+            $versionConstraint =
+                $directiveArgs[SchemaDefinition::VERSION_CONSTRAINT]
+                ?? VersioningHelpers::getVersionConstraintsForDirective($this->getDirectiveName())
+                ?? $vars['version-constraint'];
+            /**
+             * If the query doesn't restrict the version, then do not process
+             */
+            if (!$versionConstraint) {
+                return false;
+            }
+            /**
+             * Compare using semantic versioning constraint rules, as used by Composer
+             * If passing a wrong value to validate against (eg: "saraza" instead of "1.0.0"), it will throw an Exception
+             */
+            try {
+                return $this->getSemverHelperService()->satisfies($schemaDirectiveVersion, $versionConstraint);
+            } catch (Exception) {
+                return false;
             }
         }
         return true;
@@ -651,6 +652,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return null;
     }
 
+    final public function hasDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): bool
+    {
+        return !empty($this->getDirectiveVersion($relationalTypeResolver))
+            && $this->getDirectiveVersionInputTypeResolver($relationalTypeResolver) !== null;
+    }
+
+    public function getDirectiveVersionInputTypeResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?InputTypeResolverInterface
+    {
+        return null;
+    }
+
     public function enableOrderedSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
@@ -745,9 +757,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
              */
             if (
                 Environment::enableSemanticVersionConstraints()
-                && $directiveVersion = $this->getDirectiveVersion($relationalTypeResolver)
+                && $this->hasDirectiveVersion($relationalTypeResolver)
             ) {
-                $consolidatedDirectiveArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $directiveVersion;
+                $consolidatedDirectiveArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getDirectiveVersionInputTypeResolver($relationalTypeResolver);
             }
         }
         $this->consolidatedDirectiveArgNameTypeResolversCache[$cacheKey] = $consolidatedDirectiveArgNameTypeResolvers;
@@ -1289,10 +1301,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
              * But it could also be that the contract doesn't change, but the implementation changes
              * it's really not their responsibility
              */
-            if (Environment::enableSemanticVersionConstraints()) {
-                if ($version = $this->getDirectiveVersion($relationalTypeResolver)) {
-                    $schemaDefinition[SchemaDefinition::VERSION] = $version;
-                }
+            if (Environment::enableSemanticVersionConstraints() && $this->hasDirectiveVersion($relationalTypeResolver)) {
+                $schemaDefinition[SchemaDefinition::VERSION] = $this->getDirectiveVersion($relationalTypeResolver);
             }
             $this->schemaDefinitionForDirectiveCache[$key] = $schemaDefinition;
         }

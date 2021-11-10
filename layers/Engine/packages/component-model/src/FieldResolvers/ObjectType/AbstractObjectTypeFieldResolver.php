@@ -37,8 +37,8 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Engine\CMS\CMSServiceInterface;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\LooseContracts\NameResolverInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver implements ObjectTypeFieldResolverInterface
 {
@@ -393,9 +393,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              */
             if (
                 Environment::enableSemanticVersionConstraints()
-                && $fieldVersion = $this->getFieldVersion($objectTypeResolver, $fieldName)
+                && $this->hasFieldVersion($objectTypeResolver, $fieldName)
             ) {
-                $consolidatedFieldArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $fieldVersion;
+                $consolidatedFieldArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getFieldVersionInputTypeResolver($objectTypeResolver, $fieldName);
             }
         }
         $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey] = $consolidatedFieldArgNameTypeResolvers;
@@ -553,8 +553,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     {
         /** Check if to validate the version */
         if (
-            Environment::enableSemanticVersionConstraints() &&
-            $this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver)
+            Environment::enableSemanticVersionConstraints()
+            && $this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver)
+            && $this->hasFieldVersion($objectTypeResolver, $fieldName)
         ) {
             /**
              * Please notice: we can get the fieldVersion directly from this instance,
@@ -563,41 +564,40 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * inside the schemaDefinition object.
              * If this field is tagged with a version...
              */
-            if ($schemaFieldVersion = $this->getFieldVersion($objectTypeResolver, $fieldName)) {
-                $vars = ApplicationState::getVars();
-                /**
-                 * Get versionConstraint in this order:
-                 * 1. Passed as field argument
-                 * 2. Through param `fieldVersionConstraints[$fieldName]`: specific to the namespaced type + field
-                 * 3. Through param `fieldVersionConstraints[$fieldName]`: specific to the type + field
-                 * 4. Through param `versionConstraint`: applies to all fields and directives in the query
-                 */
-                $versionConstraint =
-                    $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT]
-                    ?? VersioningHelpers::getVersionConstraintsForField(
-                        $objectTypeResolver->getNamespacedTypeName(),
-                        $fieldName
-                    )
-                    ?? VersioningHelpers::getVersionConstraintsForField(
-                        $objectTypeResolver->getTypeName(),
-                        $fieldName
-                    )
-                    ?? $vars['version-constraint'];
-                /**
-                 * If the query doesn't restrict the version, then do not process
-                 */
-                if (!$versionConstraint) {
-                    return false;
-                }
-                /**
-                 * Compare using semantic versioning constraint rules, as used by Composer
-                 * If passing a wrong value to validate against (eg: "saraza" instead of "1.0.0"), it will throw an Exception
-                 */
-                try {
-                    return $this->getSemverHelperService()->satisfies($schemaFieldVersion, $versionConstraint);
-                } catch (Exception) {
-                    return false;
-                }
+            $schemaFieldVersion = $this->getFieldVersion($objectTypeResolver, $fieldName);
+            $vars = ApplicationState::getVars();
+            /**
+             * Get versionConstraint in this order:
+             * 1. Passed as field argument
+             * 2. Through param `fieldVersionConstraints[$fieldName]`: specific to the namespaced type + field
+             * 3. Through param `fieldVersionConstraints[$fieldName]`: specific to the type + field
+             * 4. Through param `versionConstraint`: applies to all fields and directives in the query
+             */
+            $versionConstraint =
+                $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT]
+                ?? VersioningHelpers::getVersionConstraintsForField(
+                    $objectTypeResolver->getNamespacedTypeName(),
+                    $fieldName
+                )
+                ?? VersioningHelpers::getVersionConstraintsForField(
+                    $objectTypeResolver->getTypeName(),
+                    $fieldName
+                )
+                ?? $vars['version-constraint'];
+            /**
+             * If the query doesn't restrict the version, then do not process
+             */
+            if (!$versionConstraint) {
+                return false;
+            }
+            /**
+             * Compare using semantic versioning constraint rules, as used by Composer
+             * If passing a wrong value to validate against (eg: "saraza" instead of "1.0.0"), it will throw an Exception
+             */
+            try {
+                return $this->getSemverHelperService()->satisfies($schemaFieldVersion, $versionConstraint);
+            } catch (Exception) {
+                return false;
             }
         }
         return true;
@@ -842,10 +842,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             }
         }
 
-        if (Environment::enableSemanticVersionConstraints()) {
-            if ($version = $this->getFieldVersion($objectTypeResolver, $fieldName)) {
-                $schemaDefinition[SchemaDefinition::VERSION] = $version;
-            }
+        if (Environment::enableSemanticVersionConstraints() && $this->hasFieldVersion($objectTypeResolver, $fieldName)) {
+            $schemaDefinition[SchemaDefinition::VERSION] = $this->getFieldVersion($objectTypeResolver, $fieldName);
         }
         if ($this->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null) {
             $schemaDefinition[SchemaDefinition::FIELD_IS_MUTATION] = true;
@@ -882,6 +880,17 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * it's really not their responsibility
      */
     public function getFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    {
+        return null;
+    }
+
+    final public function hasFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
+    {
+        return !empty($this->getFieldVersion($objectTypeResolver, $fieldName))
+            && $this->getFieldVersionInputTypeResolver($objectTypeResolver, $fieldName) !== null;
+    }
+
+    public function getFieldVersionInputTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?InputTypeResolverInterface
     {
         return null;
     }

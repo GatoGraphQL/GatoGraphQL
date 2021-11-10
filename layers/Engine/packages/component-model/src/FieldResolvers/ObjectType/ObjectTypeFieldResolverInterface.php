@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, ObjectTypeFieldSchemaDefinitionResolverInterface
@@ -33,6 +34,8 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     public function getFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array;
     public function getFieldSchemaDefinitionExtensions(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array;
     public function getFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
+    public function hasFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
+    public function getFieldVersionInputTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?InputTypeResolverInterface;
     /**
      * Indicate if the fields are global (i.e. they apply to all typeResolvers)
      */
