@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 /**
@@ -305,6 +306,32 @@ trait AliasSchemaObjectTypeFieldResolverTrait
     {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->getFieldVersion(
+            $objectTypeResolver,
+            $this->getAliasedFieldName($fieldName)
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
+     * for the aliased $fieldName
+     */
+    public function hasFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
+    {
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
+        return $aliasedObjectTypeFieldResolver->hasFieldVersion(
+            $objectTypeResolver,
+            $this->getAliasedFieldName($fieldName)
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
+     * for the aliased $fieldName
+     */
+    public function getFieldVersionInputTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?InputTypeResolverInterface
+    {
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
+        return $aliasedObjectTypeFieldResolver->getFieldVersionInputTypeResolver(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );
