@@ -14,11 +14,11 @@ class PostPaginationInputObjectTypeResolver extends PaginationInputObjectTypeRes
         return 'PostPaginationInput';
     }
 
-    /**
-     * Validate constraints on the input field's value
-     *
-     * @return string[] Error messages
-     */
+    protected function getDefaultLimit(): ?int
+    {
+        return ComponentConfiguration::getPostListDefaultLimit();
+    }
+
     protected function getMaxLimit(): ?int
     {
         return ComponentConfiguration::getPostListMaxLimit();

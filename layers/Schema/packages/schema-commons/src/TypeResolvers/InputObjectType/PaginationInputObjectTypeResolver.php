@@ -51,6 +51,19 @@ class PaginationInputObjectTypeResolver extends AbstractInputObjectTypeResolver
         };
     }
 
+    public function getInputFieldDefaultValue(string $inputFieldName): mixed
+    {
+        return match ($inputFieldName) {
+            'limit' => $this->getDefaultLimit(),
+            default => parent::getInputFieldDefaultValue($inputFieldName),
+        };
+    }
+
+    protected function getDefaultLimit(): ?int
+    {
+        return null;
+    }
+
     /**
      * Validate constraints on the input field's value
      *
@@ -72,11 +85,6 @@ class PaginationInputObjectTypeResolver extends AbstractInputObjectTypeResolver
         return $errors;
     }
 
-    /**
-     * Validate constraints on the input field's value
-     *
-     * @return string[] Error messages
-     */
     protected function getMaxLimit(): ?int
     {
         return null;
