@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostDateQueryInputObjectTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 
-abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends AbstractInputObjectTypeResolver
+abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends AbstractObjectsFilterInputObjectTypeResolver
 {
     private ?CustomPostDateQueryInputObjectTypeResolver $customPostDateQueryInputObjectTypeResolver = null;
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     final public function setCustomPostDateQueryInputObjectTypeResolver(CustomPostDateQueryInputObjectTypeResolver $customPostDateQueryInputObjectTypeResolver): void
     {
@@ -21,20 +20,24 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     {
         return $this->customPostDateQueryInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostDateQueryInputObjectTypeResolver::class);
     }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
-    {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-    }
 
     public function getInputFieldNameTypeResolvers(): array
     {
-        return [
-            'search' => $this->getStringScalarTypeResolver(),
-            'dateQuery' => $this->getCustomPostDateQueryInputObjectTypeResolver(),
-        ];
+        return array_merge(
+            parent::getInputFieldNameTypeResolvers(),
+            [
+                'search' => $this->getStringScalarTypeResolver(),
+                'dateQuery' => $this->getCustomPostDateQueryInputObjectTypeResolver(),
+            ]
+        );
+    }
+
+    public function getInputFieldDescription(string $inputFieldName): ?string
+    {
+        return match ($inputFieldName) {
+            'search' => $this->getTranslationAPI()->__('Search for elements containing the given string', 'schema-commons'),
+            'dateQuery' => $this->getTranslationAPI()->__('Filter elements based on date', 'schema-commons'),
+            default => parent::getInputFieldDescription($inputFieldName),
+        };
     }
 }
