@@ -56,7 +56,7 @@ class SortInputObjectTypeResolver extends AbstractInputObjectTypeResolver
     public function getInputFieldDefaultValue(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'order' => Order::ASC,
+            'order' => Order::DESC,
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
     }
