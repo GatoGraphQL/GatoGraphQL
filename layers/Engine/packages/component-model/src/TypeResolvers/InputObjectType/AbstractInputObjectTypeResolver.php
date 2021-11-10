@@ -52,7 +52,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     }
 
     /**
-     * Consolidation of the schema field arguments. Call this function to read the data
+     * Consolidation of the schema inputs. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
     final public function getConsolidatedInputFieldNameTypeResolvers(): array
@@ -69,7 +69,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     }
 
     /**
-     * Consolidation of the schema field arguments. Call this function to read the data
+     * Consolidation of the schema inputs. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
     final public function getConsolidatedInputFieldDescription(string $inputFieldName): ?string
@@ -87,7 +87,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     }
 
     /**
-     * Consolidation of the schema field arguments. Call this function to read the data
+     * Consolidation of the schema inputs. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
     final public function getConsolidatedInputFieldDefaultValue(string $inputFieldName): mixed
@@ -105,7 +105,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     }
 
     /**
-     * Consolidation of the schema field arguments. Call this function to read the data
+     * Consolidation of the schema inputs. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
     final public function getConsolidatedInputFieldTypeModifiers(string $inputFieldName): int
