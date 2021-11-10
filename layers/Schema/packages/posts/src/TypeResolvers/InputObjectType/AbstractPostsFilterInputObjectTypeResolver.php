@@ -8,5 +8,5 @@ use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostsFilte
 
 abstract class AbstractPostsFilterInputObjectTypeResolver extends AbstractCustomPostsFilterInputObjectTypeResolver
 {
-    
+
 }

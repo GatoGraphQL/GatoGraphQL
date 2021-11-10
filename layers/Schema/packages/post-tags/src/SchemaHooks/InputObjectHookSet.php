@@ -84,7 +84,7 @@ class InputObjectHookSet extends AbstractHookSet
         if (!($inputObjectTypeResolver instanceof AbstractPostsFilterInputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
-        return match($inputFieldName) {
+        return match ($inputFieldName) {
             'tagIDs' => $this->getTranslationAPI()->__('Get results from the tags with given IDs', 'pop-users'),
             'tagSlugs' => $this->getTranslationAPI()->__('Get results from the tags with given slug', 'pop-users'),
             default => $inputFieldDescription,
@@ -99,7 +99,7 @@ class InputObjectHookSet extends AbstractHookSet
         if (!($inputObjectTypeResolver instanceof AbstractPostsFilterInputObjectTypeResolver)) {
             return $inputFieldTypeModifiers;
         }
-        return match($inputFieldName) {
+        return match ($inputFieldName) {
             'tagIDs',
             'tagSlugs'
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,

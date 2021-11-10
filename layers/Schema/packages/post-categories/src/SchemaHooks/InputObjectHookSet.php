@@ -73,7 +73,7 @@ class InputObjectHookSet extends AbstractHookSet
         if (!($inputObjectTypeResolver instanceof AbstractPostsFilterInputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
-        return match($inputFieldName) {
+        return match ($inputFieldName) {
             'categoryIDs' => $this->getTranslationAPI()->__('Get results from the categories with given IDs', 'pop-users'),
             default => $inputFieldDescription,
         };
@@ -87,7 +87,7 @@ class InputObjectHookSet extends AbstractHookSet
         if (!($inputObjectTypeResolver instanceof AbstractPostsFilterInputObjectTypeResolver)) {
             return $inputFieldTypeModifiers;
         }
-        return match($inputFieldName) {
+        return match ($inputFieldName) {
             'categoryIDs'
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default

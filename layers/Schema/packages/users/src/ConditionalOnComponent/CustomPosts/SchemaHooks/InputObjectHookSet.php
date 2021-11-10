@@ -90,7 +90,7 @@ class InputObjectHookSet extends AbstractHookSet
         if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
-        return match($inputFieldName) {
+        return match ($inputFieldName) {
             'authorIDs' => $this->getTranslationAPI()->__('Get results from the authors with given IDs', 'pop-users'),
             'authorSlug' => $this->getTranslationAPI()->__('Get results from the authors with given slug', 'pop-users'),
             'excludeAuthorIDs' => $this->getTranslationAPI()->__('Get results excluding the ones from authors with given IDs', 'pop-users'),
@@ -106,7 +106,7 @@ class InputObjectHookSet extends AbstractHookSet
         if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
             return $inputFieldTypeModifiers;
         }
-        return match($inputFieldName) {
+        return match ($inputFieldName) {
             'authorIDs',
             'excludeAuthorIDs'
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
