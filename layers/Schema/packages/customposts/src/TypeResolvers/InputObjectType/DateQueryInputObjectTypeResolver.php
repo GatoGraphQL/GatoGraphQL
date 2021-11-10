@@ -25,7 +25,7 @@ class DateQueryInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 
     public function getTypeName(): string
     {
-        return 'DateQuery';
+        return 'DateQueryInput';
     }
 
     public function getInputFieldNameTypeResolvers(): array
