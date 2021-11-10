@@ -5,30 +5,27 @@ declare(strict_types=1);
 namespace PoPSchema\Posts\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
-use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
-use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
+use PoPSchema\Posts\TypeResolvers\InputObjectType\PostPaginationInputObjectTypeResolver;
+use PoPSchema\Posts\TypeResolvers\InputObjectType\PostSortInputObjectTypeResolver;
 use PoPSchema\Posts\TypeResolvers\InputObjectType\RootPostsFilterInputObjectTypeResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
-use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
 
 abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
 
     private ?RootPostsFilterInputObjectTypeResolver $rootPostsFilterInputObjectTypeResolver = null;
-    private ?PaginationInputObjectTypeResolver $paginationInputObjectTypeResolver = null;
-    private ?SortInputObjectTypeResolver $sortInputObjectTypeResolver = null;
+    private ?PostPaginationInputObjectTypeResolver $postPaginationInputObjectTypeResolver = null;
+    private ?PostSortInputObjectTypeResolver $postSortInputObjectTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?PostTypeAPIInterface $postTypeAPI = null;
@@ -41,21 +38,21 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return $this->rootPostsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootPostsFilterInputObjectTypeResolver::class);
     }
-    final public function setPaginationInputObjectTypeResolver(PaginationInputObjectTypeResolver $paginationInputObjectTypeResolver): void
+    final public function setPaginationInputObjectTypeResolver(PostPaginationInputObjectTypeResolver $postPaginationInputObjectTypeResolver): void
     {
-        $this->paginationInputObjectTypeResolver = $paginationInputObjectTypeResolver;
+        $this->postPaginationInputObjectTypeResolver = $postPaginationInputObjectTypeResolver;
     }
-    final protected function getPaginationInputObjectTypeResolver(): PaginationInputObjectTypeResolver
+    final protected function getPaginationInputObjectTypeResolver(): PostPaginationInputObjectTypeResolver
     {
-        return $this->paginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(PaginationInputObjectTypeResolver::class);
+        return $this->postPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostPaginationInputObjectTypeResolver::class);
     }
-    final public function setSortInputObjectTypeResolver(SortInputObjectTypeResolver $sortInputObjectTypeResolver): void
+    final public function setPostSortInputObjectTypeResolver(PostSortInputObjectTypeResolver $postSortInputObjectTypeResolver): void
     {
-        $this->sortInputObjectTypeResolver = $sortInputObjectTypeResolver;
+        $this->postSortInputObjectTypeResolver = $postSortInputObjectTypeResolver;
     }
-    final protected function getSortInputObjectTypeResolver(): SortInputObjectTypeResolver
+    final protected function getPostSortInputObjectTypeResolver(): PostSortInputObjectTypeResolver
     {
-        return $this->sortInputObjectTypeResolver ??= $this->instanceManager->getInstance(SortInputObjectTypeResolver::class);
+        return $this->postSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostSortInputObjectTypeResolver::class);
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -158,7 +155,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
                     [
                         'filter' => $this->getRootPostsFilterInputObjectTypeResolver(),
                         'pagination' => $this->getPaginationInputObjectTypeResolver(),
-                        'sort' => $this->getSortInputObjectTypeResolver(),
+                        'sort' => $this->getPostSortInputObjectTypeResolver(),
                     ]
                 ),
             'postCount',
@@ -172,60 +169,6 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
             default
                 => $fieldArgNameTypeResolvers,
         };
-    }
-
-    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
-    {
-        switch ($fieldName) {
-            case 'posts':
-            case 'postsForAdmin':
-                $limitFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
-                ]);
-                if ($fieldArgName === $limitFilterInputName) {
-                    return ComponentConfiguration::getPostListDefaultLimit();
-                }
-                break;
-        }
-        return parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
-    }
-
-    /**
-     * Validate the constraints for a field argument
-     *
-     * @return string[] Error messages
-     */
-    public function validateFieldArgValue(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        string $fieldArgName,
-        mixed $fieldArgValue
-    ): array {
-        $errors = parent::validateFieldArgValue(
-            $objectTypeResolver,
-            $fieldName,
-            $fieldArgName,
-            $fieldArgValue,
-        );
-
-        // Check the "limit" fieldArg
-        switch ($fieldName) {
-            case 'posts':
-            case 'postsForAdmin':
-                if (
-                    $maybeError = $this->maybeValidateLimitFieldArgument(
-                        ComponentConfiguration::getPostListMaxLimit(),
-                        $fieldName,
-                        $fieldArgName,
-                        $fieldArgValue
-                    )
-                ) {
-                    $errors[] = $maybeError;
-                }
-                break;
-        }
-        return $errors;
     }
 
     /**
