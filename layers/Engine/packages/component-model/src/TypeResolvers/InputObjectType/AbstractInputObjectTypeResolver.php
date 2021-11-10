@@ -370,4 +370,29 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         $this->schemaDefinitionForInputFieldCache[$inputFieldName] = $inputFieldSchemaDefinition;
         return $this->schemaDefinitionForInputFieldCache[$inputFieldName];
     }
+    /**
+     * Validate constraints on the input field's value
+     *
+     * @return string[] Error messages
+     */
+    final public function validateInputValue(stdClass $inputValue): array
+    {
+        $errors = [];
+        foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
+            $errors = array_merge(
+                $errors,
+                $this->validateInputFieldValue($inputFieldName, $inputFieldValue)
+            );
+        }
+        return $errors;
+    }
+    /**
+     * Validate constraints on the input field's value
+     *
+     * @return string[] Error messages
+     */
+    protected function validateInputFieldValue(string $inputFieldName, mixed $inputFieldValue): array
+    {
+        return [];
+    }
 }

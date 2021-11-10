@@ -31,6 +31,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -39,6 +40,7 @@ use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\LooseContracts\NameResolverInterface;
+use stdClass;
 
 abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver implements ObjectTypeFieldResolverInterface
 {
@@ -690,20 +692,30 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         array $fieldArgs
     ): array {
         $errors = [];
+        $fieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         foreach ($fieldArgs as $fieldArgName => $fieldArgValue) {
+            /**
+             * If the field is an InputObject, let it perform validations on its input fields
+             */
+            $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$fieldArgName];
             if (
-                $maybeErrors = $this->validateFieldArgValue(
+                $fieldArgTypeResolver instanceof InputObjectTypeResolverInterface
+                && $fieldArgValue instanceof stdClass
+            ) {
+                $errors = array_merge(
+                    $errors,
+                    $fieldArgTypeResolver->validateInputValue($fieldArgValue)
+                );
+            }
+            $errors = array_merge(
+                $errors,
+                $this->validateFieldArgValue(
                     $objectTypeResolver,
                     $fieldName,
                     $fieldArgName,
                     $fieldArgValue
                 )
-            ) {
-                $errors = array_merge(
-                    $errors,
-                    $maybeErrors
-                );
-            }
+            );
         }
         return $errors;
     }

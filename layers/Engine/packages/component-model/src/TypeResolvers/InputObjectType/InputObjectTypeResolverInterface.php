@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use stdClass;
 
 /**
  * Based on GraphQL InputObject Type
@@ -40,4 +41,10 @@ interface InputObjectTypeResolverInterface extends InputTypeResolverInterface
      */
     public function skipExposingInputFieldInSchema(string $inputFieldName): bool;
     public function getInputFieldSchemaDefinition(string $inputFieldName): array;
+    /**
+     * Validate constraints on the input's value
+     *
+     * @return string[] Error messages
+     */
+    public function validateInputValue(stdClass $inputValue): array;
 }
