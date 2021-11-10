@@ -10,8 +10,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\Posts\ComponentConfiguration;
-use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPSchema\Posts\TypeResolvers\InputObjectType\RootPostsFilterInputObjectTypeResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
@@ -139,11 +139,11 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
-            'posts' => [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_POSTS],
-            'postCount' => [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_POSTCOUNT],
-            'postsForAdmin' => [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINPOSTS],
-            'postCountForAdmin' => [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINPOSTCOUNT],
-            default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
+            'postsForAdmin',
+            'postCountForAdmin'
+                => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTSTATUS],
+            default
+                => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
     }
 
@@ -152,15 +152,21 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         return match ($fieldName) {
             'posts',
-            'postCount',
-            'postsForAdmin',
-            'postCountForAdmin'
+            'postsForAdmin'
                 => array_merge(
                     $fieldArgNameTypeResolvers,
                     [
                         'filter' => $this->getRootPostsFilterInputObjectTypeResolver(),
                         'pagination' => $this->getPaginationInputObjectTypeResolver(),
                         'sort' => $this->getSortInputObjectTypeResolver(),
+                    ]
+                ),
+            'postCount',
+            'postCountForAdmin'
+                => array_merge(
+                    $fieldArgNameTypeResolvers,
+                    [
+                        'filter' => $this->getRootPostsFilterInputObjectTypeResolver(),
                     ]
                 ),
             default
