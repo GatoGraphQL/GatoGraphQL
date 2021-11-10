@@ -41,4 +41,67 @@ class PaginationInputObjectTypeResolver extends AbstractInputObjectTypeResolver
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
+
+    /**
+     * Validate constraints on the input field's value
+     *
+     * @return string[] Error messages
+     */
+    protected function validateInputFieldValue(string $inputFieldName, mixed $inputFieldValue): array
+    {
+        $errors = parent::validateInputFieldValue($inputFieldName, $inputFieldValue);
+
+        if ($inputFieldName === 'limit' && $this->getMaxLimit() !== null) {
+            if ($maybeError = $this->validateLimitInputField(
+                $this->getMaxLimit(),
+                $inputFieldName,
+                $inputFieldValue
+            )) {
+                $errors[] = $maybeError;
+            }
+        }
+        return $errors;
+    }
+
+    /**
+     * Validate constraints on the input field's value
+     *
+     * @return string[] Error messages
+     */
+    protected function getMaxLimit(): ?int
+    {
+        return null;
+    }
+
+    /**
+     * Check the limit is not above the max limit or below -1
+     */
+    protected function validateLimitInputField(
+        int $maxLimit,
+        string $inputFieldName,
+        mixed $inputFieldValue
+    ): ?string {
+        // Check the value is not below what is accepted
+        $minLimit = $maxLimit === -1 ? -1 : 1;
+        if ($inputFieldValue < $minLimit) {
+            return sprintf(
+                $this->getTranslationAPI()->__('The value for input field \'%s\' in input object \'%s\' cannot be below \'%s\'', 'schema-commons'),
+                $inputFieldName,
+                $this->getMaybeNamespacedTypeName(),
+                $minLimit
+            );
+        }
+
+        // Check the value is not below the max limit
+        if ($maxLimit !== -1 && $inputFieldValue > $maxLimit) {
+            return sprintf(
+                $this->getTranslationAPI()->__('The value for input field \'%s\' in input object \'%s\' cannot be above \'%s\'', 'posts'),
+                $inputFieldName,
+                $this->getMaybeNamespacedTypeName(),
+                $maxLimit
+            );
+        }
+
+        return null;
+    }
 }
