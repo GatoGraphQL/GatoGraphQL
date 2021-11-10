@@ -7,10 +7,7 @@ namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 
-/**
- * @todo Keep working on it
- */
-class DateQueryInputObjectTypeResolver extends AbstractInputObjectTypeResolver
+class CustomPostDateQueryInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
     private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
 
@@ -25,7 +22,7 @@ class DateQueryInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 
     public function getTypeName(): string
     {
-        return 'DateQueryInput';
+        return 'CustomPostDateQueryInput';
     }
 
     public function getInputFieldNameTypeResolvers(): array
