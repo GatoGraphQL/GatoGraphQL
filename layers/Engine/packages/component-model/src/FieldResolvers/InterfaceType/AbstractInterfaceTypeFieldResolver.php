@@ -378,14 +378,14 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      *
      * @return string[] Error messages
      */
-    public function validateFieldArgument(
+    public function validateFieldArgValue(
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
     ): array {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->validateFieldArgument($fieldName, $fieldArgName, $fieldArgValue);
+            return $schemaDefinitionResolver->validateFieldArgValue($fieldName, $fieldArgName, $fieldArgValue);
         }
         return [];
     }

@@ -39,7 +39,7 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
      *
      * @return string[] Error messages
      */
-    public function validateFieldArgument(
+    public function validateFieldArgValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         string $fieldArgName,

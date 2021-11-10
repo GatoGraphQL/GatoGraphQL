@@ -517,7 +517,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      *
      * @return string[] Error messages
      */
-    public function validateFieldArgument(
+    public function validateFieldArgValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         string $fieldArgName,
@@ -525,7 +525,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     ): array {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->validateFieldArgument($objectTypeResolver, $fieldName, $fieldArgName, $fieldArgValue);
+            return $schemaDefinitionResolver->validateFieldArgValue($objectTypeResolver, $fieldName, $fieldArgName, $fieldArgValue);
         }
         return [];
     }
@@ -692,7 +692,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $errors = [];
         foreach ($fieldArgs as $fieldArgName => $fieldArgValue) {
             if (
-                $maybeErrors = $this->validateFieldArgument(
+                $maybeErrors = $this->validateFieldArgValue(
                     $objectTypeResolver,
                     $fieldName,
                     $fieldArgName,

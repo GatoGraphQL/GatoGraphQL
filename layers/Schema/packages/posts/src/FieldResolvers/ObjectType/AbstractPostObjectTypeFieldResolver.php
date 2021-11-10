@@ -139,13 +139,13 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
      *
      * @return string[] Error messages
      */
-    public function validateFieldArgument(
+    public function validateFieldArgValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
     ): array {
-        $errors = parent::validateFieldArgument(
+        $errors = parent::validateFieldArgValue(
             $objectTypeResolver,
             $fieldName,
             $fieldArgName,
