@@ -851,10 +851,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             }
         }
 
-        if (Environment::enableSemanticVersionConstraints()) {
-            if ($version = $this->getFieldVersion($objectTypeResolver, $fieldName)) {
-                $schemaDefinition[SchemaDefinition::VERSION] = $version;
-            }
+        if (Environment::enableSemanticVersionConstraints() && $version = $this->getFieldVersion($objectTypeResolver, $fieldName)) {
+            $schemaDefinition[SchemaDefinition::VERSION] = $version;
         }
         if ($this->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null) {
             $schemaDefinition[SchemaDefinition::FIELD_IS_MUTATION] = true;

@@ -1299,10 +1299,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
              * But it could also be that the contract doesn't change, but the implementation changes
              * it's really not their responsibility
              */
-            if (Environment::enableSemanticVersionConstraints()) {
-                if ($version = $this->getDirectiveVersion($relationalTypeResolver)) {
-                    $schemaDefinition[SchemaDefinition::VERSION] = $version;
-                }
+            if (Environment::enableSemanticVersionConstraints() && $version = $this->getDirectiveVersion($relationalTypeResolver)) {
+                $schemaDefinition[SchemaDefinition::VERSION] = $version;
             }
             $this->schemaDefinitionForDirectiveCache[$key] = $schemaDefinition;
         }
