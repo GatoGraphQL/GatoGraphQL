@@ -93,13 +93,13 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
      *
      * @return string[] Error messages
      */
-    protected function validateDirectiveArgument(
+    protected function validateDirectiveArgValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         string $directiveArgName,
         mixed $directiveArgValue
     ): array {
-        $errors = parent::validateDirectiveArgument(
+        $errors = parent::validateDirectiveArgValue(
             $relationalTypeResolver,
             $directiveName,
             $directiveArgName,

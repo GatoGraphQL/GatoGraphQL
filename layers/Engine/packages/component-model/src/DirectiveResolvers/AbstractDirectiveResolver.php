@@ -542,7 +542,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $errors = [];
         foreach ($directiveArgs as $directiveArgName => $directiveArgValue) {
             if (
-                $maybeErrors = $this->validateDirectiveArgument(
+                $maybeErrors = $this->validateDirectiveArgValue(
                     $relationalTypeResolver,
                     $directiveName,
                     $directiveArgName,
@@ -561,7 +561,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * Validate the constraints for a directive argument
      */
-    protected function validateDirectiveArgument(
+    protected function validateDirectiveArgValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         string $directiveArgName,
