@@ -47,7 +47,7 @@ class SortInputObjectTypeResolver extends AbstractInputObjectTypeResolver
     {
         return match ($inputFieldName) {
             'order' => $this->getTranslationAPI()->__('Sorting direction', 'schema-commons'),
-            'by' => $this->getTranslationAPI()->__('Name of the property to order by', 'schema-commons'),
+            'by' => $this->getTranslationAPI()->__('Property to order by', 'schema-commons'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
