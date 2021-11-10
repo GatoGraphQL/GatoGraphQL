@@ -74,11 +74,13 @@ class PaginationInputObjectTypeResolver extends AbstractInputObjectTypeResolver
         $errors = parent::validateInputFieldValue($inputFieldName, $inputFieldValue);
 
         if ($inputFieldName === 'limit' && $this->getMaxLimit() !== null) {
-            if ($maybeError = $this->validateLimitInputField(
-                $this->getMaxLimit(),
-                $inputFieldName,
-                $inputFieldValue
-            )) {
+            if (
+                $maybeError = $this->validateLimitInputField(
+                    $this->getMaxLimit(),
+                    $inputFieldName,
+                    $inputFieldValue
+                )
+            ) {
                 $errors[] = $maybeError;
             }
         }
