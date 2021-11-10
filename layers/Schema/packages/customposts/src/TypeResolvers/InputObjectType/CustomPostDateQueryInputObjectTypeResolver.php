@@ -32,4 +32,13 @@ class CustomPostDateQueryInputObjectTypeResolver extends AbstractInputObjectType
             'before' => $this->getDateScalarTypeResolver(),
         ];
     }
+
+    public function getInputFieldDescription(string $inputFieldName): ?string
+    {
+        return match ($inputFieldName) {
+            'after' => $this->getTranslationAPI()->__('Retrieve custom posts from after this date', 'schema-commons'),
+            'before' => $this->getTranslationAPI()->__('Retrieve custom posts from before this date', 'schema-commons'),
+            default => parent::getInputFieldDescription($inputFieldName),
+        };
+    }
 }
