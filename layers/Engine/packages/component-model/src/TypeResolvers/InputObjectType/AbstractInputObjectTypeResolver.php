@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
+use Exception;
+use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Schema\InputCoercingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -144,7 +146,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         /**
          * Inject all properties with default value
          */
-        foreach ($inputFieldNameTypeResolvers as $inputFieldName => $inputTypeResolver) {
+        foreach (array_keys($inputFieldNameTypeResolvers) as $inputFieldName) {
             if (isset($inputValue->$inputFieldName) || ($inputFieldDefaultValue = $this->getConsolidatedInputFieldDefaultValue($inputFieldName)) === null) {
                 continue;
             }
@@ -155,8 +157,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         $errors = [];
         foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
             // Check that the input field exists
-            $inputTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName] ?? null;
-            if ($inputTypeResolver === null) {
+            $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName] ?? null;
+            if ($inputFieldTypeResolver === null) {
                 $errors[] = new Error(
                     $this->getErrorCode(),
                     sprintf(
@@ -180,7 +182,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
              * these values by types `String` and `[String]`.
              */
-            if ($inputTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
+            if ($inputFieldTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
                 $coercedInputValue->$inputFieldName = $this->getDangerouslyDynamicScalarTypeResolver()->coerceValue($inputFieldValue);
                 continue;
             }
@@ -224,7 +226,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
             // Cast (or "coerce" in GraphQL terms) the value
             $coercedInputFieldValue = $this->getInputCoercingService()->coerceInputValue(
-                $inputTypeResolver,
+                $inputFieldTypeResolver,
                 $inputFieldValue,
                 $inputFieldIsArrayType,
                 $inputFieldIsArrayOfArraysType,
@@ -242,7 +244,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                     sprintf(
                         $this->getTranslationAPI()->__('Casting input field \'%s\' of type \'%s\' produced errors', 'component-model'),
                         $inputFieldName,
-                        $inputTypeResolver->getMaybeNamespacedTypeName()
+                        $inputFieldTypeResolver->getMaybeNamespacedTypeName()
                     ),
                     null,
                     $maybeCoercedInputFieldValueErrors
@@ -258,7 +260,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         /**
          * Check that all mandatory properties have been provided
          */
-        foreach ($inputFieldNameTypeResolvers as $inputFieldName => $inputTypeResolver) {
+        foreach ($inputFieldNameTypeResolvers as $inputFieldName => $inputFieldTypeResolver) {
             if (isset($inputValue->$inputFieldName)) {
                 continue;
             }
@@ -291,5 +293,37 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
         // Add all missing properties which have a default value
         return $coercedInputValue;
+    }
+
+    /**
+     * Input fields may not be directly visible in the schema,
+     * eg: because they are used only by the application, and must not
+     * be exposed to the user
+     */
+    public function skipExposingInputFieldInSchema(string $inputFieldName): bool
+    {
+        if (ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+            /**
+             * If `DangerouslyDynamic` is disabled, do not expose the input field if:
+             *
+             *   - its type is `DangerouslyDynamic`
+             */
+            $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
+            $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName] ?? null;
+            if ($inputFieldTypeResolver === null) {
+                throw new Exception(
+                    sprintf(
+                        $this->getTranslationAPI()->__('There is no input field with name \'%s\' in input object \'%s\''),
+                        $inputFieldName,
+                        $this->getMaybeNamespacedTypeName()
+                    )
+                );
+            }
+            if ($inputFieldTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
