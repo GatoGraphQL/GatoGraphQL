@@ -139,13 +139,13 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     final protected function coerceInputObjectValue(stdClass $inputValue): stdClass|Error
     {
         $coercedInputValue = new stdClass();
-        $inputFieldNameTypeResolvers = $this->getInputFieldNameTypeResolvers();
+        $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
 
         /**
          * Inject all properties with default value
          */
         foreach ($inputFieldNameTypeResolvers as $inputFieldName => $inputTypeResolver) {
-            if (isset($inputValue->$inputFieldName) || ($inputFieldDefaultValue = $this->getInputFieldDefaultValue($inputFieldName)) === null) {
+            if (isset($inputValue->$inputFieldName) || ($inputFieldDefaultValue = $this->getConsolidatedInputFieldDefaultValue($inputFieldName)) === null) {
                 continue;
             }
             $inputValue->$inputFieldName = $inputFieldDefaultValue;
@@ -185,7 +185,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 continue;
             }
 
-            $inputFieldTypeModifiers = $this->getInputFieldTypeModifiers($inputFieldName);
+            $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
             $inputFieldIsArrayType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
             $inputFieldIsNonNullArrayItemsType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY;
             $inputFieldIsArrayOfArraysType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
@@ -262,7 +262,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             if (isset($inputValue->$inputFieldName)) {
                 continue;
             }
-            $inputFieldTypeModifiers = $this->getInputFieldTypeModifiers($inputFieldName);
+            $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
             $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
             if (!$inputFieldTypeModifiersIsMandatory) {
                 continue;
