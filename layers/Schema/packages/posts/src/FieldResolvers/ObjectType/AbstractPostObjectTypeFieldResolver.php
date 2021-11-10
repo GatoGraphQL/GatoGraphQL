@@ -13,13 +13,13 @@ use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
+use PoPSchema\Posts\TypeResolvers\InputObjectType\PostPaginationInputObjectTypeResolver;
 use PoPSchema\Posts\TypeResolvers\InputObjectType\RootPostsFilterInputObjectTypeResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
-use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
 
 abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
@@ -27,7 +27,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     use WithLimitFieldArgResolverTrait;
 
     private ?RootPostsFilterInputObjectTypeResolver $rootPostsFilterInputObjectTypeResolver = null;
-    private ?PaginationInputObjectTypeResolver $paginationInputObjectTypeResolver = null;
+    private ?PostPaginationInputObjectTypeResolver $postPaginationInputObjectTypeResolver = null;
     private ?SortInputObjectTypeResolver $sortInputObjectTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
@@ -41,13 +41,13 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return $this->rootPostsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootPostsFilterInputObjectTypeResolver::class);
     }
-    final public function setPaginationInputObjectTypeResolver(PaginationInputObjectTypeResolver $paginationInputObjectTypeResolver): void
+    final public function setPaginationInputObjectTypeResolver(PostPaginationInputObjectTypeResolver $postPaginationInputObjectTypeResolver): void
     {
-        $this->paginationInputObjectTypeResolver = $paginationInputObjectTypeResolver;
+        $this->postPaginationInputObjectTypeResolver = $postPaginationInputObjectTypeResolver;
     }
-    final protected function getPaginationInputObjectTypeResolver(): PaginationInputObjectTypeResolver
+    final protected function getPaginationInputObjectTypeResolver(): PostPaginationInputObjectTypeResolver
     {
-        return $this->paginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(PaginationInputObjectTypeResolver::class);
+        return $this->postPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostPaginationInputObjectTypeResolver::class);
     }
     final public function setSortInputObjectTypeResolver(SortInputObjectTypeResolver $sortInputObjectTypeResolver): void
     {
