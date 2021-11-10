@@ -22,12 +22,12 @@ class InputObjectType extends AbstractNamedType
     protected function initInputValues(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
         $this->inputValues = [];
-        if ($inputValues = $this->schemaDefinition[SchemaDefinition::ARGS] ?? null) {
+        if ($inputValues = $this->schemaDefinition[SchemaDefinition::INPUT_FIELDS] ?? null) {
             foreach (array_keys($inputValues) as $inputValueName) {
                 $inputValueSchemaDefinitionPath = array_merge(
                     $schemaDefinitionPath,
                     [
-                        SchemaDefinition::ARGS,
+                        SchemaDefinition::INPUT_FIELDS,
                         $inputValueName,
                     ]
                 );
