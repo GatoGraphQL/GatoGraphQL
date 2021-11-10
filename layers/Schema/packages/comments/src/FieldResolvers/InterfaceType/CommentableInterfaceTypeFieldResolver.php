@@ -182,12 +182,12 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
      *
      * @return string[] Error messages
      */
-    public function validateFieldArgument(
+    public function validateFieldArgValue(
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
     ): array {
-        $errors = parent::validateFieldArgument(
+        $errors = parent::validateFieldArgValue(
             $fieldName,
             $fieldArgName,
             $fieldArgValue,

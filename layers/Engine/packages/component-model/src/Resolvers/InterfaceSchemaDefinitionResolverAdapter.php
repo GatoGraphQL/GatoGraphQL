@@ -100,12 +100,12 @@ class InterfaceSchemaDefinitionResolverAdapter implements ObjectTypeFieldSchemaD
         return $this->interfaceTypeFieldSchemaDefinitionResolver->getFieldTypeResolver($fieldName);
     }
 
-    public function validateFieldArgument(
+    public function validateFieldArgValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
     ): array {
-        return $this->interfaceTypeFieldSchemaDefinitionResolver->validateFieldArgument($fieldName, $fieldArgName, $fieldArgValue);
+        return $this->interfaceTypeFieldSchemaDefinitionResolver->validateFieldArgValue($fieldName, $fieldArgName, $fieldArgValue);
     }
 }

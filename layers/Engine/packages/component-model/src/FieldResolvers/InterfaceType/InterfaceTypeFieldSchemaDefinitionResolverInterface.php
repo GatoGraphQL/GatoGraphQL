@@ -33,7 +33,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
      *
      * @return string[] Error messages
      */
-    public function validateFieldArgument(
+    public function validateFieldArgValue(
         string $fieldName,
         string $fieldArgName,
         mixed $fieldArgValue
