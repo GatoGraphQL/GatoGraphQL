@@ -524,6 +524,12 @@
         }
     ],
     "scripts": {
+        "all": [
+            "@validate-monorepo",
+            "@test",
+            "@analyse",
+            "@fix-style"
+        ],
         "test": "phpunit",
         "check-style": "phpcs -n src $(monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src --subfolder=tests)",
         "fix-style": "phpcbf -n src $(monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src --subfolder=tests)",
@@ -563,6 +569,7 @@
         "install-deps-build-js": "bash -x dev-helpers/scripts/build-js.sh layers/GraphQLAPIForWP/plugins/graphql-api-for-wp true"
     },
     "scripts-descriptions": {
+        "all": "Execute all required tests (except downgrade)",
         "test": "Execute PHPUnit tests",
         "check-style": "Validate PSR-12 coding standards (via phpcs)",
         "fix-style": "Fix PSR-12 coding standards (via phpcbf)",
