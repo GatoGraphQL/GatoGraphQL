@@ -18,7 +18,7 @@ use stdClass;
 abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver implements InputObjectTypeResolverInterface
 {
     use TypeSchemaDefinitionResolverTrait;
-    
+
     /** @var array<string, array> */
     protected array $schemaDefinitionForInputFieldCache = [];
     /** @var array<string, InputTypeResolverInterface>|null */
@@ -358,7 +358,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 )
             );
         }
-        
+
         $inputFieldSchemaDefinition = $this->getTypeSchemaDefinition(
             $inputFieldName,
             $inputFieldTypeResolver,
@@ -366,7 +366,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             $this->getConsolidatedInputFieldDefaultValue($inputFieldName),
             $this->getConsolidatedInputFieldTypeModifiers($inputFieldName),
         );
-        
+
         $this->schemaDefinitionForInputFieldCache[$inputFieldName] = $inputFieldSchemaDefinition;
         return $this->schemaDefinitionForInputFieldCache[$inputFieldName];
     }
