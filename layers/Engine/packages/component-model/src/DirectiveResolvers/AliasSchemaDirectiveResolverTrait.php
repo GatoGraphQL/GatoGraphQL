@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 /**
@@ -343,6 +344,28 @@ trait AliasSchemaDirectiveResolverTrait
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         return $aliasedDirectiveResolver->getDirectiveVersion(
+            $relationalTypeResolver
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased DirectiveResolver
+     */
+    public function hasDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): bool
+    {
+        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
+        return $aliasedDirectiveResolver->hasDirectiveVersion(
+            $relationalTypeResolver
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased DirectiveResolver
+     */
+    public function getDirectiveVersionInputTypeResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?InputTypeResolverInterface
+    {
+        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
+        return $aliasedDirectiveResolver->getDirectiveVersionInputTypeResolver(
             $relationalTypeResolver
         );
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 interface DirectiveResolverInterface extends AttachableExtensionInterface, SchemaDirectiveResolverInterface
@@ -134,6 +135,8 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * The version of the directive, using semantic versioning
      */
     public function getDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
+    public function hasDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): bool;
+    public function getDirectiveVersionInputTypeResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?InputTypeResolverInterface;
 
     /**
      * @return string[]
