@@ -202,7 +202,7 @@ class CommonFilterInputModuleProcessor extends AbstractFilterInputModuleProcesso
         return match ((string)$module[1]) {
             self::MODULE_FILTERINPUT_ORDER => $this->getTranslationAPI()->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'schema-commons'),
             self::MODULE_FILTERINPUT_LIMIT => $this->getTranslationAPI()->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
-            self::MODULE_FILTERINPUT_OFFSET => $this->getTranslationAPI()->__('Offset the results by how many places (required for pagination)', 'schema-commons'),
+            self::MODULE_FILTERINPUT_OFFSET => $this->getTranslationAPI()->__('Offset the results by how many positions', 'schema-commons'),
             self::MODULE_FILTERINPUT_SEARCH => $this->getTranslationAPI()->__('Search for elements containing the given string', 'schema-commons'),
             self::MODULE_FILTERINPUT_IDS => $this->getTranslationAPI()->__('Limit results to elements with the given IDs', 'schema-commons'),
             self::MODULE_FILTERINPUT_ID => $this->getTranslationAPI()->__('Fetch the element with the given ID', 'schema-commons'),

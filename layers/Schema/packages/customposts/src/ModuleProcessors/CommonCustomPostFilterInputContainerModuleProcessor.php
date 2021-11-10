@@ -14,6 +14,7 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
+    public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTSTATUS = 'filterinputcontainer-custompoststatus';
     public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS = 'filterinputcontainer-custompost-by-id-status';
     public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_UNIONTYPE = 'filterinputcontainer-custompost-by-id-uniontype';
     public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS_UNIONTYPE = 'filterinputcontainer-custompost-by-id-status-uniontype';
@@ -24,6 +25,7 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
     public function getModulesToProcess(): array
     {
         return array(
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTSTATUS],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_UNIONTYPE],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS_UNIONTYPE],
@@ -36,6 +38,9 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
     public function getFilterInputModules(array $module): array
     {
         return match ($module[1]) {
+            self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTSTATUS => [
+                [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
+            ],
             self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
                 [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],

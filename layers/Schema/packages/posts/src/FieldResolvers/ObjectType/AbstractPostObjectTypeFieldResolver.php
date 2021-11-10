@@ -10,23 +10,53 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\Posts\ComponentConfiguration;
-use PoPSchema\Posts\ModuleProcessors\PostFilterInputContainerModuleProcessor;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
+use PoPSchema\Posts\TypeResolvers\InputObjectType\RootPostsFilterInputObjectTypeResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
+use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
 
 abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use WithLimitFieldArgResolverTrait;
 
+    private ?RootPostsFilterInputObjectTypeResolver $rootPostsFilterInputObjectTypeResolver = null;
+    private ?PaginationInputObjectTypeResolver $paginationInputObjectTypeResolver = null;
+    private ?SortInputObjectTypeResolver $sortInputObjectTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?PostTypeAPIInterface $postTypeAPI = null;
 
+    final public function setRootPostsFilterInputObjectTypeResolver(RootPostsFilterInputObjectTypeResolver $rootPostsFilterInputObjectTypeResolver): void
+    {
+        $this->rootPostsFilterInputObjectTypeResolver = $rootPostsFilterInputObjectTypeResolver;
+    }
+    final protected function getRootPostsFilterInputObjectTypeResolver(): RootPostsFilterInputObjectTypeResolver
+    {
+        return $this->rootPostsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootPostsFilterInputObjectTypeResolver::class);
+    }
+    final public function setPaginationInputObjectTypeResolver(PaginationInputObjectTypeResolver $paginationInputObjectTypeResolver): void
+    {
+        $this->paginationInputObjectTypeResolver = $paginationInputObjectTypeResolver;
+    }
+    final protected function getPaginationInputObjectTypeResolver(): PaginationInputObjectTypeResolver
+    {
+        return $this->paginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(PaginationInputObjectTypeResolver::class);
+    }
+    final public function setSortInputObjectTypeResolver(SortInputObjectTypeResolver $sortInputObjectTypeResolver): void
+    {
+        $this->sortInputObjectTypeResolver = $sortInputObjectTypeResolver;
+    }
+    final protected function getSortInputObjectTypeResolver(): SortInputObjectTypeResolver
+    {
+        return $this->sortInputObjectTypeResolver ??= $this->instanceManager->getInstance(SortInputObjectTypeResolver::class);
+    }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
         $this->intScalarTypeResolver = $intScalarTypeResolver;
@@ -109,11 +139,38 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
-            'posts' => [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_POSTS],
-            'postCount' => [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_POSTCOUNT],
-            'postsForAdmin' => [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINPOSTS],
-            'postCountForAdmin' => [PostFilterInputContainerModuleProcessor::class, PostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINPOSTCOUNT],
-            default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
+            'postsForAdmin',
+            'postCountForAdmin'
+                => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTSTATUS],
+            default
+                => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'posts',
+            'postsForAdmin'
+                => array_merge(
+                    $fieldArgNameTypeResolvers,
+                    [
+                        'filter' => $this->getRootPostsFilterInputObjectTypeResolver(),
+                        'pagination' => $this->getPaginationInputObjectTypeResolver(),
+                        'sort' => $this->getSortInputObjectTypeResolver(),
+                    ]
+                ),
+            'postCount',
+            'postCountForAdmin'
+                => array_merge(
+                    $fieldArgNameTypeResolvers,
+                    [
+                        'filter' => $this->getRootPostsFilterInputObjectTypeResolver(),
+                    ]
+                ),
+            default
+                => $fieldArgNameTypeResolvers,
         };
     }
 
