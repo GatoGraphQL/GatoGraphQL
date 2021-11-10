@@ -59,15 +59,10 @@ class InputObjectHookSet extends AbstractHookSet
         }
         return array_merge(
             $inputFieldNameTypeResolvers,
-            $this->getPostCategoryInputFieldNameTypeResolvers(),
+            [
+                'categoryIDs' => $this->getIDScalarTypeResolver(),
+            ]
         );
-    }
-
-    public function getPostCategoryInputFieldNameTypeResolvers(): array
-    {
-        return [
-            'categoryIDs' => $this->getIDScalarTypeResolver(),
-        ];
     }
 
     public function getInputFieldDescription(

@@ -69,16 +69,11 @@ class InputObjectHookSet extends AbstractHookSet
         }
         return array_merge(
             $inputFieldNameTypeResolvers,
-            $this->getPostTagInputFieldNameTypeResolvers(),
+            [
+                'tagIDs' => $this->getIDScalarTypeResolver(),
+                'tagSlugs' => $this->getStringScalarTypeResolver(),
+            ]
         );
-    }
-
-    public function getPostTagInputFieldNameTypeResolvers(): array
-    {
-        return [
-            'tagIDs' => $this->getIDScalarTypeResolver(),
-            'tagSlugs' => $this->getStringScalarTypeResolver(),
-        ];
     }
 
     public function getInputFieldDescription(
