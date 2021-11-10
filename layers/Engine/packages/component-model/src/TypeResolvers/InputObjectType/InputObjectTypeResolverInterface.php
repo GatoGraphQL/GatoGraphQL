@@ -39,4 +39,5 @@ interface InputObjectTypeResolverInterface extends InputTypeResolverInterface
      * be exposed to the user
      */
     public function skipExposingInputFieldInSchema(string $inputFieldName): bool;
+    public function getInputFieldSchemaDefinition(string $inputFieldName): array;
 }

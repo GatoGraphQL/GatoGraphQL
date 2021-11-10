@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 use Exception;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Resolvers\TypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\InputCoercingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
@@ -15,9 +16,17 @@ use stdClass;
 
 abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver implements InputObjectTypeResolverInterface
 {
+    use TypeSchemaDefinitionResolverTrait;
+    
+    /** @var array<string, array> */
+    protected array $schemaDefinitionForInputFieldCache = [];
+    /** @var array<string, InputTypeResolverInterface>|null */
     private ?array $consolidatedInputFieldNameTypeResolversCache = null;
+    /** @var array<string, ?string> */
     private array $consolidatedInputFieldDescriptionCache = [];
+    /** @var array<string, mixed> */
     private array $consolidatedInputFieldDefaultValueCache = [];
+    /** @var array<string, int> */
     private array $consolidatedInputFieldTypeModifiersCache = [];
 
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
@@ -325,5 +334,39 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         }
 
         return false;
+    }
+
+    /**
+     * Get the "schema" properties as for the inputFieldName
+     */
+    final public function getInputFieldSchemaDefinition(string $inputFieldName): array
+    {
+        // Cache the result
+        if (isset($this->schemaDefinitionForInputFieldCache[$inputFieldName])) {
+            return $this->schemaDefinitionForInputFieldCache[$inputFieldName];
+        }
+
+        $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
+        $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName] ?? null;
+        if ($inputFieldTypeResolver === null) {
+            throw new Exception(
+                sprintf(
+                    $this->getTranslationAPI()->__('There is no input field with name \'%s\' in input object \'%s\''),
+                    $inputFieldName,
+                    $this->getMaybeNamespacedTypeName()
+                )
+            );
+        }
+        
+        $inputFieldSchemaDefinition = $this->getTypeSchemaDefinition(
+            $inputFieldName,
+            $inputFieldTypeResolver,
+            $this->getConsolidatedInputFieldDescription($inputFieldName),
+            $this->getConsolidatedInputFieldDefaultValue($inputFieldName),
+            $this->getConsolidatedInputFieldTypeModifiers($inputFieldName),
+        );
+        
+        $this->schemaDefinitionForInputFieldCache[$inputFieldName] = $inputFieldSchemaDefinition;
+        return $this->schemaDefinitionForInputFieldCache[$inputFieldName];
     }
 }
