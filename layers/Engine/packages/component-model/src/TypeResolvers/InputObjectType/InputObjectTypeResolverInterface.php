@@ -40,4 +40,10 @@ interface InputObjectTypeResolverInterface extends InputTypeResolverInterface
      */
     public function skipExposingInputFieldInSchema(string $inputFieldName): bool;
     public function getInputFieldSchemaDefinition(string $inputFieldName): array;
+    /**
+     * Validate constraints on the input field's value
+     *
+     * @return string[] Error messages
+     */
+    public function validateInputFieldValue(string $inputFieldName, mixed $inputFieldValue): array;
 }
