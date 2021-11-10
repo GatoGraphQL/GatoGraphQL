@@ -13,6 +13,11 @@ use stdClass;
 
 abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver implements InputObjectTypeResolverInterface
 {
+    private ?array $consolidatedInputFieldNameTypeResolversCache = null;
+    private array $consolidatedInputFieldDescriptionCache = [];
+    private array $consolidatedInputFieldDefaultValueCache = [];
+    private array $consolidatedInputFieldTypeModifiersCache = [];
+
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
     private ?InputCoercingServiceInterface $inputCoercingService = null;
 
@@ -37,10 +42,6 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     {
         return null;
     }
-    public function getInputFieldDeprecationMessage(string $inputFieldName): ?string
-    {
-        return null;
-    }
     public function getInputFieldDefaultValue(string $inputFieldName): mixed
     {
         return null;
@@ -48,6 +49,77 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return SchemaTypeModifiers::NONE;
+    }
+
+    /**
+     * Consolidation of the schema inputs. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedInputFieldNameTypeResolvers(): array
+    {
+        if ($this->consolidatedInputFieldNameTypeResolversCache !== null) {
+            return $this->consolidatedInputFieldNameTypeResolversCache;
+        }
+        $this->consolidatedInputFieldNameTypeResolversCache = $this->getHooksAPI()->applyFilters(
+            HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
+            $this->getInputFieldNameTypeResolvers(),
+            $this,
+        );
+        return $this->consolidatedInputFieldNameTypeResolversCache;
+    }
+
+    /**
+     * Consolidation of the schema inputs. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedInputFieldDescription(string $inputFieldName): ?string
+    {
+        if (array_key_exists($inputFieldName, $this->consolidatedInputFieldDescriptionCache)) {
+            return $this->consolidatedInputFieldDescriptionCache[$inputFieldName];
+        }
+        $this->consolidatedInputFieldDescriptionCache[$inputFieldName] = $this->getHooksAPI()->applyFilters(
+            HookNames::INPUT_FIELD_DESCRIPTION,
+            $this->getInputFieldDescription($inputFieldName),
+            $this,
+            $inputFieldName,
+        );
+        return $this->consolidatedInputFieldDescriptionCache[$inputFieldName];
+    }
+
+    /**
+     * Consolidation of the schema inputs. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedInputFieldDefaultValue(string $inputFieldName): mixed
+    {
+        if (array_key_exists($inputFieldName, $this->consolidatedInputFieldDefaultValueCache)) {
+            return $this->consolidatedInputFieldDefaultValueCache[$inputFieldName];
+        }
+        $this->consolidatedInputFieldDefaultValueCache[$inputFieldName] = $this->getHooksAPI()->applyFilters(
+            HookNames::INPUT_FIELD_DEFAULT_VALUE,
+            $this->getInputFieldDefaultValue($inputFieldName),
+            $this,
+            $inputFieldName,
+        );
+        return $this->consolidatedInputFieldDefaultValueCache[$inputFieldName];
+    }
+
+    /**
+     * Consolidation of the schema inputs. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedInputFieldTypeModifiers(string $inputFieldName): int
+    {
+        if (array_key_exists($inputFieldName, $this->consolidatedInputFieldTypeModifiersCache)) {
+            return $this->consolidatedInputFieldTypeModifiersCache[$inputFieldName];
+        }
+        $this->consolidatedInputFieldTypeModifiersCache[$inputFieldName] = $this->getHooksAPI()->applyFilters(
+            HookNames::INPUT_FIELD_TYPE_MODIFIERS,
+            $this->getInputFieldTypeModifiers($inputFieldName),
+            $this,
+            $inputFieldName,
+        );
+        return $this->consolidatedInputFieldTypeModifiersCache[$inputFieldName];
     }
 
     final public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
@@ -67,13 +139,13 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     final protected function coerceInputObjectValue(stdClass $inputValue): stdClass|Error
     {
         $coercedInputValue = new stdClass();
-        $inputFieldNameTypeResolvers = $this->getInputFieldNameTypeResolvers();
+        $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
 
         /**
          * Inject all properties with default value
          */
         foreach ($inputFieldNameTypeResolvers as $inputFieldName => $inputTypeResolver) {
-            if (isset($inputValue->$inputFieldName) || ($inputFieldDefaultValue = $this->getInputFieldDefaultValue($inputFieldName)) === null) {
+            if (isset($inputValue->$inputFieldName) || ($inputFieldDefaultValue = $this->getConsolidatedInputFieldDefaultValue($inputFieldName)) === null) {
                 continue;
             }
             $inputValue->$inputFieldName = $inputFieldDefaultValue;
@@ -113,7 +185,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 continue;
             }
 
-            $inputFieldTypeModifiers = $this->getInputFieldTypeModifiers($inputFieldName);
+            $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
             $inputFieldIsArrayType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
             $inputFieldIsNonNullArrayItemsType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY;
             $inputFieldIsArrayOfArraysType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
@@ -190,7 +262,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             if (isset($inputValue->$inputFieldName)) {
                 continue;
             }
-            $inputFieldTypeModifiers = $this->getInputFieldTypeModifiers($inputFieldName);
+            $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
             $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
             if (!$inputFieldTypeModifiersIsMandatory) {
                 continue;

@@ -20,7 +20,16 @@ interface InputObjectTypeResolverInterface extends InputTypeResolverInterface
      */
     public function getInputFieldNameTypeResolvers(): array;
     public function getInputFieldDescription(string $inputFieldName): ?string;
-    public function getInputFieldDeprecationMessage(string $inputFieldName): ?string;
     public function getInputFieldDefaultValue(string $inputFieldName): mixed;
     public function getInputFieldTypeModifiers(string $inputFieldName): int;
+    /**
+     * Consolidation of the schema inputs. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return array<string, InputTypeResolverInterface>
+     */
+    public function getConsolidatedInputFieldNameTypeResolvers(): array;
+    public function getConsolidatedInputFieldDescription(string $inputFieldName): ?string;
+    public function getConsolidatedInputFieldDefaultValue(string $inputFieldName): mixed;
+    public function getConsolidatedInputFieldTypeModifiers(string $inputFieldName): int;
 }
