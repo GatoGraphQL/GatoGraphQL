@@ -192,43 +192,6 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     }
 
     /**
-     * Validate the constraints for a field argument
-     *
-     * @return string[] Error messages
-     */
-    public function validateFieldArgValue(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        string $fieldArgName,
-        mixed $fieldArgValue
-    ): array {
-        $errors = parent::validateFieldArgValue(
-            $objectTypeResolver,
-            $fieldName,
-            $fieldArgName,
-            $fieldArgValue,
-        );
-
-        // Check the "limit" fieldArg
-        switch ($fieldName) {
-            case 'posts':
-            case 'postsForAdmin':
-                if (
-                    $maybeError = $this->maybeValidateLimitFieldArgument(
-                        ComponentConfiguration::getPostListMaxLimit(),
-                        $fieldName,
-                        $fieldArgName,
-                        $fieldArgValue
-                    )
-                ) {
-                    $errors[] = $maybeError;
-                }
-                break;
-        }
-        return $errors;
-    }
-
-    /**
      * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
      */
