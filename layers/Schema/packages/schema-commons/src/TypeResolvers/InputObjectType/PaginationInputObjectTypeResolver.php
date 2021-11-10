@@ -35,8 +35,17 @@ class PaginationInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
+        $maxLimit = $this->getMaxLimit();
+        $limitDesc = match ($maxLimit) {
+            null => $this->getTranslationAPI()->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
+            -1 => $this->getTranslationAPI()->__('Limit the results. \'-1\' brings all the results', 'schema-commons'),
+            default => sprintf(
+                $this->getTranslationAPI()->__('Limit the results. The maximum amount allowed is \'%s\'', 'schema-commons'),
+                $maxLimit
+            ),
+        };
         return match ($inputFieldName) {
-            'limit' => $this->getTranslationAPI()->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
+            'limit' => $limitDesc,
             'offset' => $this->getTranslationAPI()->__('Offset the results by how many positions', 'schema-commons'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
