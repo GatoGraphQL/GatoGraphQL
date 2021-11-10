@@ -382,7 +382,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             $errors = array_merge(
                 $errors,
                 $this->validateInputFieldValue($inputFieldName, $inputFieldValue)
-            );            
+            );
         }
         return $errors;
     }

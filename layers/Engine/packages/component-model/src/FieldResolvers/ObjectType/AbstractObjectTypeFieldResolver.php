@@ -698,13 +698,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * If the field is an InputObject, let it perform validations on its input fields
              */
             $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$fieldArgName];
-            if ($fieldArgTypeResolver instanceof InputObjectTypeResolverInterface
+            if (
+                $fieldArgTypeResolver instanceof InputObjectTypeResolverInterface
                 && $fieldArgValue instanceof stdClass
             ) {
                 $errors = array_merge(
                     $errors,
                     $fieldArgTypeResolver->validateInputValue($fieldArgValue)
-                );  
+                );
             }
             $errors = array_merge(
                 $errors,
