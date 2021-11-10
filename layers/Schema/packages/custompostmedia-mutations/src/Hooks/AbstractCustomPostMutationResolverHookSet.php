@@ -77,7 +77,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if (!$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
             return $fieldArgNameTypeResolvers;
         }
-        $fieldArgNameTypeResolvers[MutationInputProperties::FEATUREDIMAGE_ID] = $this->getIdScalarTypeResolver();
+        $fieldArgNameTypeResolvers[MutationInputProperties::FEATUREDIMAGE_ID] = $this->getIDScalarTypeResolver();
         return $fieldArgNameTypeResolvers;
     }
 

@@ -39,7 +39,7 @@ class NodeInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'id' => $this->getIdScalarTypeResolver(),
+            'id' => $this->getIDScalarTypeResolver(),
             default => parent::getFieldTypeResolver($fieldName),
         };
     }

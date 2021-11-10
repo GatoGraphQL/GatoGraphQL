@@ -106,7 +106,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'menu' => [
-                'id' => $this->getIdScalarTypeResolver(),
+                'id' => $this->getIDScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };

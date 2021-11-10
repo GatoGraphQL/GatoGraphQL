@@ -73,8 +73,8 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return match ($fieldName) {
             $this->getSetCategoriesFieldName() => [
-                MutationInputProperties::CUSTOMPOST_ID => $this->getIdScalarTypeResolver(),
-                MutationInputProperties::CATEGORY_IDS => $this->getIdScalarTypeResolver(),
+                MutationInputProperties::CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
+                MutationInputProperties::CATEGORY_IDS => $this->getIDScalarTypeResolver(),
                 MutationInputProperties::APPEND => $this->getBooleanScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),

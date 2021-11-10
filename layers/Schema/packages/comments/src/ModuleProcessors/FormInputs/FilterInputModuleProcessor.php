@@ -105,9 +105,9 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CUSTOMPOST_IDS => $this->getIdScalarTypeResolver(),
-            self::MODULE_FILTERINPUT_CUSTOMPOST_ID => $this->getIdScalarTypeResolver(),
-            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_CUSTOMPOST_IDS => $this->getIDScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->getIDScalarTypeResolver(),
             self::MODULE_FILTERINPUT_COMMENT_TYPES => $this->getCommentTypeEnumTypeResolver(),
             self::MODULE_FILTERINPUT_COMMENT_STATUS => $this->getCommentStatusEnumTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),

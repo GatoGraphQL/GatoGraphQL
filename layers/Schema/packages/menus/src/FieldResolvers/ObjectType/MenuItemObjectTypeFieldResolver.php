@@ -111,8 +111,8 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'classes' => $this->getStringScalarTypeResolver(),
             'target' => $this->getStringScalarTypeResolver(),
             'description' => $this->getStringScalarTypeResolver(),
-            'objectID' => $this->getIdScalarTypeResolver(),
-            'parentID' => $this->getIdScalarTypeResolver(),
+            'objectID' => $this->getIDScalarTypeResolver(),
+            'parentID' => $this->getIDScalarTypeResolver(),
             'linkRelationship' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

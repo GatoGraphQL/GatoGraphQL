@@ -24,7 +24,7 @@ trait CreateOrUpdateCustomPostObjectTypeFieldResolverTrait
     ): array {
         return array_merge(
             $addCustomPostID ? [
-                MutationInputProperties::ID => $this->getIdScalarTypeResolver(),
+                MutationInputProperties::ID => $this->getIDScalarTypeResolver(),
             ] : [],
             [
                 MutationInputProperties::TITLE => $this->getStringScalarTypeResolver(),

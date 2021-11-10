@@ -30,10 +30,10 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
             MutationInputProperties::COMMENT => $this->getStringScalarTypeResolver(),
         ];
         if ($addParentCommentID) {
-            $schemaFieldArgNameTypeResolvers[MutationInputProperties::PARENT_COMMENT_ID] = $this->getIdScalarTypeResolver();
+            $schemaFieldArgNameTypeResolvers[MutationInputProperties::PARENT_COMMENT_ID] = $this->getIDScalarTypeResolver();
         }
         if ($addCustomPostID) {
-            $schemaFieldArgNameTypeResolvers[MutationInputProperties::CUSTOMPOST_ID] = $this->getIdScalarTypeResolver();
+            $schemaFieldArgNameTypeResolvers[MutationInputProperties::CUSTOMPOST_ID] = $this->getIDScalarTypeResolver();
         }
         if (!ComponentConfiguration::mustUserBeLoggedInToAddComment()) {
             $schemaFieldArgNameTypeResolvers[MutationInputProperties::AUTHOR_NAME] = $this->getStringScalarTypeResolver();

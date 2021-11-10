@@ -98,11 +98,11 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'setFeaturedImageOnCustomPost' => [
-                MutationInputProperties::CUSTOMPOST_ID => $this->getIdScalarTypeResolver(),
-                MutationInputProperties::MEDIA_ITEM_ID => $this->getIdScalarTypeResolver(),
+                MutationInputProperties::CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
+                MutationInputProperties::MEDIA_ITEM_ID => $this->getIDScalarTypeResolver(),
             ],
             'removeFeaturedImageFromCustomPost' => [
-                MutationInputProperties::CUSTOMPOST_ID => $this->getIdScalarTypeResolver(),
+                MutationInputProperties::CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };

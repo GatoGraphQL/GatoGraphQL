@@ -63,7 +63,7 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_CATEGORY_IDS => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_CATEGORY_IDS => $this->getIDScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }

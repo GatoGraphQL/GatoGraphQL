@@ -79,7 +79,7 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_TAG_SLUGS => $this->getStringScalarTypeResolver(),
-            self::MODULE_FILTERINPUT_TAG_IDS => $this->getIdScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_TAG_IDS => $this->getIDScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }

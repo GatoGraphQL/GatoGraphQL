@@ -175,7 +175,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'authorEmail'
                 => $this->getEmailScalarTypeResolver(),
             'customPostID'
-                => $this->getIdScalarTypeResolver(),
+                => $this->getIDScalarTypeResolver(),
             'approved'
                 => $this->getBooleanScalarTypeResolver(),
             'date'

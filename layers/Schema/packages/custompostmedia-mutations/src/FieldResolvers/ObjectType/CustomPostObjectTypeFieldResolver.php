@@ -105,7 +105,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'setFeaturedImage' => [
-                MutationInputProperties::MEDIA_ITEM_ID => $this->getIdScalarTypeResolver(),
+                MutationInputProperties::MEDIA_ITEM_ID => $this->getIDScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };

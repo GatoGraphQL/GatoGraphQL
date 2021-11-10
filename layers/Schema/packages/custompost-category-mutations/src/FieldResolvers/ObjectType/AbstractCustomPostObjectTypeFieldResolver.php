@@ -74,7 +74,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ($fieldName) {
             'setCategories' => [
-                MutationInputProperties::CATEGORY_IDS => $this->getIdScalarTypeResolver(),
+                MutationInputProperties::CATEGORY_IDS => $this->getIDScalarTypeResolver(),
                 MutationInputProperties::APPEND => $this->getBooleanScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
