@@ -30,6 +30,7 @@ class SchemaDefinition
     public const ORDERED_ARGS_ENABLED = 'orderedArgsEnabled';
     public const INTERFACES = 'interfaces';
     public const FIELDS = 'fields';
+    public const INPUT_FIELDS = 'inputFields';
     public const GLOBAL_FIELDS = 'globalFields';
     public const QUERY_TYPE = 'queryType';
     public const TYPES = 'types';
