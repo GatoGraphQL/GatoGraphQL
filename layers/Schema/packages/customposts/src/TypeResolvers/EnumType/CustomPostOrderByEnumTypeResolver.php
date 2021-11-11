@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Posts\TypeResolvers\EnumType;
+namespace PoPSchema\CustomPosts\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 use PoPSchema\Posts\Constants\PostOrderBy;
 
-class PostOrderByEnumTypeResolver extends AbstractEnumTypeResolver
+class CustomPostOrderByEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'PostOrderBy';
+        return 'CustomPostOrderBy';
     }
 
     /**

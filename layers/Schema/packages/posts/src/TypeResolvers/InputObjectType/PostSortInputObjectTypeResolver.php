@@ -5,20 +5,20 @@ declare(strict_types=1);
 namespace PoPSchema\Posts\TypeResolvers\InputObjectType;
 
 use PoPSchema\Posts\Constants\PostOrderBy;
-use PoPSchema\Posts\TypeResolvers\EnumType\PostOrderByEnumTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
 
 class PostSortInputObjectTypeResolver extends SortInputObjectTypeResolver
 {
-    private ?PostOrderByEnumTypeResolver $postSortByEnumTypeResolver = null;
+    private ?CustomPostOrderByEnumTypeResolver $customPostSortByEnumTypeResolver = null;
 
-    final public function setPostOrderByEnumTypeResolver(PostOrderByEnumTypeResolver $postSortByEnumTypeResolver): void
+    final public function setCustomPostOrderByEnumTypeResolver(CustomPostOrderByEnumTypeResolver $customPostSortByEnumTypeResolver): void
     {
-        $this->postSortByEnumTypeResolver = $postSortByEnumTypeResolver;
+        $this->customPostSortByEnumTypeResolver = $customPostSortByEnumTypeResolver;
     }
-    final protected function getPostOrderByEnumTypeResolver(): PostOrderByEnumTypeResolver
+    final protected function getCustomPostOrderByEnumTypeResolver(): CustomPostOrderByEnumTypeResolver
     {
-        return $this->postSortByEnumTypeResolver ??= $this->instanceManager->getInstance(PostOrderByEnumTypeResolver::class);
+        return $this->customPostSortByEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostOrderByEnumTypeResolver::class);
     }
 
     public function getTypeName(): string
@@ -31,7 +31,7 @@ class PostSortInputObjectTypeResolver extends SortInputObjectTypeResolver
         return array_merge(
             parent::getInputFieldNameTypeResolvers(),
             [
-                'by' => $this->getPostOrderByEnumTypeResolver(),
+                'by' => $this->getCustomPostOrderByEnumTypeResolver(),
             ]
         );
     }

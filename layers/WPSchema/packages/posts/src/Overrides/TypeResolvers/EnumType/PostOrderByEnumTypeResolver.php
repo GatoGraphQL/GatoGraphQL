@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Posts\Overrides\TypeResolvers\EnumType;
 
-use PoPSchema\Posts\TypeResolvers\EnumType\PostOrderByEnumTypeResolver as UpstreamPostOrderByEnumTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver as UpstreamCustomPostOrderByEnumTypeResolver;
 use PoPWPSchema\Posts\Constants\PostOrderBy;
 
-class PostOrderByEnumTypeResolver extends UpstreamPostOrderByEnumTypeResolver
+class PostOrderByEnumTypeResolver extends UpstreamCustomPostOrderByEnumTypeResolver
 {
     /**
      * @return string[]
