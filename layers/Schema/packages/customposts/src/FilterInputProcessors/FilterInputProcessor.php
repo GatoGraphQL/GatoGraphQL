@@ -11,7 +11,6 @@ use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolve
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_CUSTOMPOSTDATES = 'filterinput-custompostdates';
     public const FILTERINPUT_CUSTOMPOSTTYPES = 'filterinput-customposttypes';
     public const FILTERINPUT_CUSTOMPOSTSTATUS = 'filterinput-custompoststatus';
     public const FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
@@ -31,7 +30,6 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     public function getFilterInputsToProcess(): array
     {
         return array(
-            [self::class, self::FILTERINPUT_CUSTOMPOSTDATES],
             [self::class, self::FILTERINPUT_CUSTOMPOSTTYPES],
             [self::class, self::FILTERINPUT_CUSTOMPOSTSTATUS],
             [self::class, self::FILTERINPUT_UNIONCUSTOMPOSTTYPES],
@@ -41,10 +39,6 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
     {
         switch ($filterInput[1]) {
-            case self::FILTERINPUT_CUSTOMPOSTDATES:
-                $query['date-from'] = $value['from'];
-                $query['date-to'] = $value['to'];
-                break;
             case self::FILTERINPUT_CUSTOMPOSTTYPES:
                 $query['custompost-types'] = $value;
                 break;
