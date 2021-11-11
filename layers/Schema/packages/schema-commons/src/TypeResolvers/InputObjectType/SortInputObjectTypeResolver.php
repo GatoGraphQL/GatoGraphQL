@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\Constants\Order;
+use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\EnumType\OrderEnumTypeResolver;
 
-class SortInputObjectTypeResolver extends AbstractInputObjectTypeResolver
+class SortInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?OrderEnumTypeResolver $orderEnumTypeResolver = null;
@@ -58,6 +59,15 @@ class SortInputObjectTypeResolver extends AbstractInputObjectTypeResolver
         return match ($inputFieldName) {
             'order' => Order::DESC,
             default => parent::getInputFieldDefaultValue($inputFieldName),
+        };
+    }
+
+    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    {
+        return match ($inputFieldName) {
+            'order' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_ORDER],
+            'by' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_ORDERBY],
+            default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }
 }

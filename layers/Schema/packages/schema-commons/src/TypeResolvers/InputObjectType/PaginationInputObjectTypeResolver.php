@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 
-class PaginationInputObjectTypeResolver extends AbstractInputObjectTypeResolver
+class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
 {
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
@@ -122,5 +123,14 @@ class PaginationInputObjectTypeResolver extends AbstractInputObjectTypeResolver
         }
 
         return null;
+    }
+
+    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    {
+        return match ($inputFieldName) {
+            'limit' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_LIMIT],
+            'offset' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_OFFSET],
+            default => parent::getInputFieldFilterInput($inputFieldName),
+        };
     }
 }

@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
+use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 
-class CustomPostDateQueryInputObjectTypeResolver extends AbstractInputObjectTypeResolver
+class CustomPostDateQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
 {
     private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
 
@@ -39,6 +40,15 @@ class CustomPostDateQueryInputObjectTypeResolver extends AbstractInputObjectType
             'after' => $this->getTranslationAPI()->__('Retrieve custom posts from after this date', 'schema-commons'),
             'before' => $this->getTranslationAPI()->__('Retrieve custom posts from before this date', 'schema-commons'),
             default => parent::getInputFieldDescription($inputFieldName),
+        };
+    }
+
+    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    {
+        return match ($inputFieldName) {
+            'after' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_DATE_FROM],
+            'before' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_DATE_TO],
+            default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }
 }

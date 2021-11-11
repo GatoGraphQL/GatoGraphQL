@@ -164,7 +164,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
                 }
                 $orderFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SORT
                 ]);
                 if ($fieldArgName === $orderFilterInputName) {
                     // Order by descending date

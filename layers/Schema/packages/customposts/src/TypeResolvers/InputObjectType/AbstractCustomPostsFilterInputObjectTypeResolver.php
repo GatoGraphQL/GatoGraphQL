@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostDateQueryInputObjectTypeResolver;
+use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 
 abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends AbstractObjectsFilterInputObjectTypeResolver
@@ -37,6 +38,14 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
             'search' => $this->getTranslationAPI()->__('Search for elements containing the given string', 'schema-commons'),
             'dateQuery' => $this->getTranslationAPI()->__('Filter elements based on date', 'schema-commons'),
             default => parent::getInputFieldDescription($inputFieldName),
+        };
+    }
+
+    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    {
+        return match ($inputFieldName) {
+            'search' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SEARCH],
+            default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }
 }

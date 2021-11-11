@@ -266,7 +266,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                 // Order by descending date
                 $orderFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ORDER
+                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SORT
                 ]);
                 if ($fieldArgName === $orderFilterInputName) {
                     $orderBy = $this->getNameResolver()->getName('popcms:dbcolumn:orderby:comments:date');

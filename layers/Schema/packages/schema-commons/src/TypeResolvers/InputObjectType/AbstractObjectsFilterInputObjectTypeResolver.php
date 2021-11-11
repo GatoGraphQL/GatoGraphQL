@@ -6,11 +6,12 @@ namespace PoPSchema\SchemaCommons\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Tokens\Param;
-use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 
-abstract class AbstractObjectsFilterInputObjectTypeResolver extends AbstractInputObjectTypeResolver
+abstract class AbstractObjectsFilterInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
@@ -62,6 +63,16 @@ abstract class AbstractObjectsFilterInputObjectTypeResolver extends AbstractInpu
             ),
             'excludeIDs' => $this->getTranslationAPI()->__('Exclude elements with the given IDs', 'schema-commons'),
             default => parent::getInputFieldDescription($inputFieldName),
+        };
+    }
+
+    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    {
+        return match ($inputFieldName) {
+            'ids' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
+            'id' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
+            'excludeIDs' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_IDS],
+            default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }
 }

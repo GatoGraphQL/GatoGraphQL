@@ -9,6 +9,7 @@ use PoP\ComponentModel\ModuleProcessors\FilterInputContainerModuleProcessorInter
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableInterfaceSchemaDefinitionResolverAdapter;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\QueryableInputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements QueryableObjectTypeFieldSchemaDefinitionResolverInterface
@@ -110,6 +111,15 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
             /** @var FilterDataModuleProcessorInterface */
             $filterDataModuleProcessor = $this->getModuleProcessorManager()->getProcessor($filterDataloadingModule);
             $filterDataModuleProcessor->filterHeadmoduleDataloadQueryArgs($filterDataloadingModule, $filteringQueryArgs, $fieldArgs);
+        }
+        // InputObjects can also provide filtering query values
+        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        foreach ($fieldArgs as $fieldArgName => $fieldArgValue) {
+            $fieldArgTypeResolver = $consolidatedFieldArgNameTypeResolvers[$fieldArgName];
+            if (!($fieldArgTypeResolver instanceof QueryableInputObjectTypeResolverInterface)) {
+                continue;
+            }
+            $fieldArgTypeResolver->integrateInputValueToFilteringQueryArgs($filteringQueryArgs, $fieldArgValue);
         }
         return $filteringQueryArgs;
     }
