@@ -7,6 +7,7 @@ namespace PoPSchema\CustomPostsWP\TypeAPIs;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI as UpstreamAbstractCustomPostTypeAPI;
 use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\Constants\CustomPostOrderBy;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Post;
@@ -19,6 +20,7 @@ use function get_post_status;
 abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeAPI
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
+    public const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
     /**
      * Return the post's ID
@@ -157,7 +159,8 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             // Same param name, so do nothing
         }
         if (isset($query['orderby'])) {
-            // Same param name, so do nothing
+            // Maybe replace the provided value
+            $query['orderby'] = $this->getOrderByQueryArgValue($query['orderby']);
         }
         // Post slug
         if (isset($query['slug'])) {
@@ -193,6 +196,19 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             self::HOOK_QUERY,
             $query,
             $options
+        );
+    }
+    protected function getOrderByQueryArgValue(string $orderBy): string
+    {
+        $orderBy = match ($orderBy) {
+            CustomPostOrderBy::ID => 'ID',
+            CustomPostOrderBy::TITLE => 'title',
+            CustomPostOrderBy::DATE => 'date',
+            default => $orderBy,
+        };
+        return $this->getHooksAPI()->applyFilters(
+            self::HOOK_ORDERBY_QUERY_ARG_VALUE,
+            $orderBy
         );
     }
     public function getCustomPostTypes(array $query = array()): array

@@ -10,9 +10,9 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
+use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostSortInputObjectTypeResolver;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPSchema\Posts\TypeResolvers\InputObjectType\PostPaginationInputObjectTypeResolver;
-use PoPSchema\Posts\TypeResolvers\InputObjectType\PostSortInputObjectTypeResolver;
 use PoPSchema\Posts\TypeResolvers\InputObjectType\RootPostsFilterInputObjectTypeResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -25,7 +25,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
 
     private ?RootPostsFilterInputObjectTypeResolver $rootPostsFilterInputObjectTypeResolver = null;
     private ?PostPaginationInputObjectTypeResolver $postPaginationInputObjectTypeResolver = null;
-    private ?PostSortInputObjectTypeResolver $postSortInputObjectTypeResolver = null;
+    private ?CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?PostTypeAPIInterface $postTypeAPI = null;
@@ -46,13 +46,13 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return $this->postPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostPaginationInputObjectTypeResolver::class);
     }
-    final public function setPostSortInputObjectTypeResolver(PostSortInputObjectTypeResolver $postSortInputObjectTypeResolver): void
+    final public function setCustomPostSortInputObjectTypeResolver(CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver): void
     {
-        $this->postSortInputObjectTypeResolver = $postSortInputObjectTypeResolver;
+        $this->customPostSortInputObjectTypeResolver = $customPostSortInputObjectTypeResolver;
     }
-    final protected function getPostSortInputObjectTypeResolver(): PostSortInputObjectTypeResolver
+    final protected function getCustomPostSortInputObjectTypeResolver(): CustomPostSortInputObjectTypeResolver
     {
-        return $this->postSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostSortInputObjectTypeResolver::class);
+        return $this->customPostSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostSortInputObjectTypeResolver::class);
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -155,7 +155,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
                     [
                         'filter' => $this->getRootPostsFilterInputObjectTypeResolver(),
                         'pagination' => $this->getPaginationInputObjectTypeResolver(),
-                        'sort' => $this->getPostSortInputObjectTypeResolver(),
+                        'sort' => $this->getCustomPostSortInputObjectTypeResolver(),
                     ]
                 ),
             'postCount',
