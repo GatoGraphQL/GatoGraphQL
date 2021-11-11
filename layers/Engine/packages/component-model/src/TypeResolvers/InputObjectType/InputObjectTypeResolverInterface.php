@@ -53,4 +53,10 @@ interface InputObjectTypeResolverInterface extends InputTypeResolverInterface
      * @return array|null A FilterInput module, or null
      */
     public function getInputFieldFilterInput(string $inputFieldName): ?array;
+    /**
+     * Apply the FilterInputs to produce the filtering query
+     *
+     * @param array<string, mixed> $query
+     */
+    public function maybeFilterDataloadQueryArgs(string $inputFieldName, array &$query, mixed $inputFieldValue): void;
 }

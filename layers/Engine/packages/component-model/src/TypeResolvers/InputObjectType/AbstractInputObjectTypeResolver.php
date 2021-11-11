@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 use Exception;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface;
 use PoP\ComponentModel\Resolvers\TypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\InputCoercingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -32,6 +33,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
     private ?InputCoercingServiceInterface $inputCoercingService = null;
+    private ?FilterInputProcessorManagerInterface $filterInputProcessorManager = null;
 
     final public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
     {
@@ -48,6 +50,14 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     final protected function getInputCoercingService(): InputCoercingServiceInterface
     {
         return $this->inputCoercingService ??= $this->instanceManager->getInstance(InputCoercingServiceInterface::class);
+    }
+    final public function setFilterInputProcessorManager(FilterInputProcessorManagerInterface $filterInputProcessorManager): void
+    {
+        $this->filterInputProcessorManager = $filterInputProcessorManager;
+    }
+    final protected function getFilterInputProcessorManager(): FilterInputProcessorManagerInterface
+    {
+        return $this->filterInputProcessorManager ??= $this->instanceManager->getInstance(FilterInputProcessorManagerInterface::class);
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
@@ -398,5 +408,50 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     public function getInputFieldFilterInput(string $inputFieldName): ?array
     {
         return null;
+    }
+    /**
+     * If the input field is an InputObject, then forward the logic.
+     * Otherwise, if the input field defines a FilterInput,
+     * apply it to obtain the filtering query
+     *
+     * @param array<string, mixed> $query
+     */
+    final public function maybeFilterDataloadQueryArgs(string $inputFieldName, array &$query, mixed $inputFieldValue): void
+    {
+        $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
+        $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName] ?? null;
+        if ($inputFieldTypeResolver === null) {
+            throw new Exception(
+                sprintf(
+                    $this->getTranslationAPI()->__('There is no input field with name \'%s\' in input object \'%s\''),
+                    $inputFieldName,
+                    $this->getMaybeNamespacedTypeName()
+                )
+            );
+        }
+
+        /**
+         * If the input field is an InputObject, then forward the logic
+         * to its contained input fields
+         */
+        if ($inputFieldTypeResolver instanceof InputObjectTypeResolverInterface) {
+            /** @var stdClass $inputFieldValue */
+            foreach ((array)$inputFieldValue as $inputFieldSubName => $inputFieldSubValue) {
+                $inputFieldTypeResolver->maybeFilterDataloadQueryArgs($inputFieldSubName, $query, $inputFieldSubValue);
+            }
+            return;
+        }
+
+        /**
+         * If the input field is defines a FilterInput,
+         * apply it to obtain the filtering query
+         */
+        $filterInput = $this->getInputFieldFilterInput($inputFieldName);
+        if ($filterInput === null) {
+            return;
+        }
+        /** @var FilterInputProcessorInterface */
+        $filterInputProcessor = $this->getFilterInputProcessorManager()->getProcessor($filterInput);
+        $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $inputFieldValue);
     }
 }
