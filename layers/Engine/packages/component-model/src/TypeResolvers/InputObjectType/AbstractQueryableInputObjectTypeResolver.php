@@ -71,13 +71,39 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
             return;
         }
 
+        $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
+        $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName];
+        $isQueryableInputObjectTypeResolver = $inputFieldTypeResolver instanceof QueryableInputObjectTypeResolverInterface;
+
+        /**
+         * Check if to copy the value directly to the filtering query args
+         */
+        $queryArgName = $this->getFilteringQueryArgNameToCopyInputFieldValue($inputFieldName);
+        /**
+         * If this input field is an InputObject, then copy as an array under the specified entry
+         */
+        if ($queryArgName !== null && $isQueryableInputObjectTypeResolver) {
+            $query[$queryArgName] = [];
+            $inputFieldTypeResolver->integrateInputValueToFilteringQueryArgs($query[$queryArgName], $inputFieldValue);
+            return;
+        }
+        /**
+         * Copy the value under the specified entry
+         */
+        if ($queryArgName !== null) {
+            $query[$queryArgName] = $inputFieldValue;
+            return;
+        }
+
         /**
          * If the input field is an InputObject, recursively apply this function
          */
-        $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
-        $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName];
-        if ($inputFieldTypeResolver instanceof QueryableInputObjectTypeResolverInterface) {
+        if ($isQueryableInputObjectTypeResolver) {
             $inputFieldTypeResolver->integrateInputValueToFilteringQueryArgs($query, $inputFieldValue);
         }
+    }
+    protected function getFilteringQueryArgNameToCopyInputFieldValue(string $inputFieldName): ?string
+    {
+        return null;
     }
 }
