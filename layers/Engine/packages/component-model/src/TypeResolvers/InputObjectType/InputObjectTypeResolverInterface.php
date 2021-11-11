@@ -47,4 +47,10 @@ interface InputObjectTypeResolverInterface extends InputTypeResolverInterface
      * @return string[] Error messages
      */
     public function validateInputValue(stdClass $inputValue): array;
+    /**
+     * Have the input field filter the query
+     *
+     * @return array|null A FilterInput module, or null
+     */
+    public function getInputFieldFilterInput(string $inputFieldName): ?array;
 }

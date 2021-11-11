@@ -395,4 +395,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     {
         return [];
     }
+    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    {
+        return null;
+    }
 }
