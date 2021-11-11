@@ -430,7 +430,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $inputFieldTypeResolver->maybeFilterDataloadQueryArgs($query, $inputFieldValue);
                 continue;
             }
-            $inputFieldTypeResolver->maybeFilterInputFieldDataloadQueryArgs($inputFieldName, $query, $inputFieldValue);
+            $this->maybeFilterInputFieldDataloadQueryArgs($inputFieldName, $query, $inputFieldValue);
         }
     }
     final protected function maybeFilterInputFieldDataloadQueryArgs(string $inputFieldName, array &$query, mixed $inputFieldValue): void
