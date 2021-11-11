@@ -20,7 +20,7 @@ class QueryHookSet extends AbstractHookSet
 
     public function getOrderByQueryArgValue(string $orderBy): string
     {
-        return match($orderBy) {
+        return match ($orderBy) {
             CustomPostOrderBy::NONE => 'none',
             CustomPostOrderBy::COMMENT_COUNT => 'comment_count',
             CustomPostOrderBy::RANDOM => 'rand',

@@ -200,7 +200,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     }
     protected function getOrderByQueryArgValue(string $orderBy): string
     {
-        $orderBy = match($orderBy) {
+        $orderBy = match ($orderBy) {
             CustomPostOrderBy::ID => 'ID',
             CustomPostOrderBy::TITLE => 'title',
             CustomPostOrderBy::DATE => 'date',
