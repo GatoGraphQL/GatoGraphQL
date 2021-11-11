@@ -11,7 +11,7 @@ use stdClass;
 abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements QueryableInputObjectTypeResolverInterface
 {
     /** @var array<string, ?array> */
-    private array $consolidatedInputFieldFilterInput = [];
+    private array $consolidatedInputFieldFilterInputCache = [];
     
     private ?FilterInputProcessorManagerInterface $filterInputProcessorManager = null;
 
