@@ -417,7 +417,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
      *
      * @param array<string, mixed> $query
      */
-    final public function maybeFilterDataloadQueryArgs(array &$query, stdClass $inputValue): void
+    final public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass $inputValue): void
     {
         $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
         foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
@@ -427,7 +427,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              * to its contained input fields
              */
             if ($inputFieldTypeResolver instanceof InputObjectTypeResolverInterface) {
-                $inputFieldTypeResolver->maybeFilterDataloadQueryArgs($query, $inputFieldValue);
+                $inputFieldTypeResolver->integrateInputValueToFilteringQueryArgs($query, $inputFieldValue);
                 continue;
             }
             $this->maybeFilterInputFieldDataloadQueryArgs($inputFieldName, $query, $inputFieldValue);

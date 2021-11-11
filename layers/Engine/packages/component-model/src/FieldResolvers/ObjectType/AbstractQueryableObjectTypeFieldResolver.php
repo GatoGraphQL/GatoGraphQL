@@ -119,7 +119,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
             if (!($fieldArgTypeResolver instanceof InputObjectTypeResolverInterface)) {
                 continue;
             }
-            $fieldArgTypeResolver->maybeFilterDataloadQueryArgs($filteringQueryArgs, $fieldArgValue);
+            $fieldArgTypeResolver->integrateInputValueToFilteringQueryArgs($filteringQueryArgs, $fieldArgValue);
         }
         return $filteringQueryArgs;
     }
