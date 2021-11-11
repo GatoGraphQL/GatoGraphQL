@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\Constants\Order;
 use PoPSchema\SchemaCommons\TypeResolvers\EnumType\OrderEnumTypeResolver;
 
-class SortInputObjectTypeResolver extends AbstractInputObjectTypeResolver
+class SortInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?OrderEnumTypeResolver $orderEnumTypeResolver = null;

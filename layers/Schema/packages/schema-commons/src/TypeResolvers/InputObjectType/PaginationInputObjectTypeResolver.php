@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 
-class PaginationInputObjectTypeResolver extends AbstractInputObjectTypeResolver
+class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
 {
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
