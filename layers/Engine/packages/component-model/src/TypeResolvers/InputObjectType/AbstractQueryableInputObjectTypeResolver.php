@@ -48,10 +48,6 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
     }
 
     /**
-     * If the input field is an InputObject, then forward the logic.
-     * Otherwise, if the input field defines a FilterInput,
-     * apply it to obtain the filtering query
-     *
      * @param array<string, mixed> $query
      */
     public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass $inputValue): void
@@ -61,12 +57,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
         }
     }
     /**
-     * Integrate an InputObject into the filtering args.
-     *
-     * By default, forward the logic to its contained input fields.
-     *
-     * It can be overriden to have the InputObject already
-     * perform the filtering logic.
+     * @param array<string, mixed> $query
      */
     protected function integrateInputFieldValueToFilteringQueryArgs(string $inputFieldName, array &$query, mixed $inputFieldValue): void
     {
