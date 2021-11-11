@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPSchema\Posts\TypeResolvers\EnumType\PostOrderByEnumTypeResolver:
-        class: PoPWPSchema\Posts\Overrides\TypeResolvers\EnumType\PostOrderByEnumTypeResolver
+    PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver:
+        class: PoPWPSchema\CustomPosts\Overrides\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver
