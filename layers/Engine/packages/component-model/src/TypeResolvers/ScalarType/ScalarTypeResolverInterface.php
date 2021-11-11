@@ -41,26 +41,4 @@ interface ScalarTypeResolverInterface extends ConcreteTypeResolverInterface, Inp
      * @return string|int|float|bool|array formatted representation of the custom scalar
      */
     public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array;
-
-    // /**
-    //  * Literal input coercion. Called by the (GraphQL) engine to convert an input
-    //  * (such as field argument `"Hallo!"` in `{ echo(msg: "Hallo!") }`)
-    //  * into the corresponding scalar entity (in this case, a String).
-    //  *
-    //  * @return mixed the (custom) scalar
-    //  * @see https://spec.graphql.org/draft/#sec-Input-Values
-    //  */
-    // public function parseLiteral(string|int|float|bool|array|null $inputValue): mixed;
-
-    // /**
-    //  * Value input coercion.
-    //  *
-    //  * Similar to `serialize` in that it can take any input: the (custom)
-    //  * scalar itself, or a representation of it (as string, int, etc).
-    //  *
-    //  * Similar to `parseLiteral` in that it must return the scalar entity
-    //  *
-    //  * @return mixed the (custom) scalar
-    //  */
-    // public function parseValue(mixed $scalarValue): mixed;
 }
