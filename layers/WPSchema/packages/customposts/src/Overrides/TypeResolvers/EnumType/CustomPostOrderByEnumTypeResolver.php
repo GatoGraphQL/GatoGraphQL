@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPWPSchema\CustomPosts\Overrides\TypeResolvers\EnumType;
 
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver as UpstreamCustomPostOrderByEnumTypeResolver;
-use PoPWPSchema\Posts\Constants\PostOrderBy;
+use PoPWPSchema\Posts\Constants\CustomPostOrderBy;
 
 class CustomPostOrderByEnumTypeResolver extends UpstreamCustomPostOrderByEnumTypeResolver
 {
@@ -17,10 +17,10 @@ class CustomPostOrderByEnumTypeResolver extends UpstreamCustomPostOrderByEnumTyp
         return array_merge(
             parent::getEnumValues(),
             [
-                PostOrderBy::COMMENT_COUNT,
-                PostOrderBy::RANDOM,
-                PostOrderBy::MODIFIED_DATE,
-                PostOrderBy::RELEVANCE,
+                CustomPostOrderBy::COMMENT_COUNT,
+                CustomPostOrderBy::RANDOM,
+                CustomPostOrderBy::MODIFIED_DATE,
+                CustomPostOrderBy::RELEVANCE,
             ]
         );
     }
@@ -28,10 +28,10 @@ class CustomPostOrderByEnumTypeResolver extends UpstreamCustomPostOrderByEnumTyp
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            PostOrderBy::COMMENT_COUNT => $this->getTranslationAPI()->__('Order by number of comments', 'schema-commons'),
-            PostOrderBy::RANDOM => $this->getTranslationAPI()->__('Order by a random number', 'schema-commons'),
-            PostOrderBy::MODIFIED_DATE => $this->getTranslationAPI()->__('Order by last modified date', 'schema-commons'),
-            PostOrderBy::RELEVANCE => $this->getTranslationAPI()->__('Order by relevance', 'schema-commons'),
+            CustomPostOrderBy::COMMENT_COUNT => $this->getTranslationAPI()->__('Order by number of comments', 'schema-commons'),
+            CustomPostOrderBy::RANDOM => $this->getTranslationAPI()->__('Order by a random number', 'schema-commons'),
+            CustomPostOrderBy::MODIFIED_DATE => $this->getTranslationAPI()->__('Order by last modified date', 'schema-commons'),
+            CustomPostOrderBy::RELEVANCE => $this->getTranslationAPI()->__('Order by relevance', 'schema-commons'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }

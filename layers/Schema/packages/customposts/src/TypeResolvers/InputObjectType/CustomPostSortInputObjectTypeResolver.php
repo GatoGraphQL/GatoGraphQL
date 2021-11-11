@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 
-use PoPSchema\Posts\Constants\PostOrderBy;
+use PoPSchema\CustomPosts\Constants\CustomPostOrderBy;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\SortInputObjectTypeResolver;
 
@@ -39,7 +39,7 @@ class CustomPostSortInputObjectTypeResolver extends SortInputObjectTypeResolver
     public function getInputFieldDefaultValue(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'by' => PostOrderBy::DATE,
+            'by' => CustomPostOrderBy::DATE,
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
     }

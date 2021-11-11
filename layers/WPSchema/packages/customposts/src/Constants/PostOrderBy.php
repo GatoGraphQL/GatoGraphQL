@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\Posts\Constants;
+namespace PoPWPSchema\CustomPosts\Constants;
 
-use PoPSchema\Posts\Constants\PostOrderBy as UpstreamPostOrderBy;
+use PoPSchema\CustomPosts\Constants\CustomPostOrderBy as UpstreamCustomPostOrderBy;
 
-class PostOrderBy extends UpstreamPostOrderBy
+class CustomPostOrderBy extends UpstreamCustomPostOrderBy
 {
     public const COMMENT_COUNT = 'COMMENT_COUNT';
     public const RANDOM = 'RANDOM';

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Posts\Constants;
+namespace PoPSchema\CustomPosts\Constants;
 
-class PostOrderBy
+class CustomPostOrderBy
 {
     public const ID = 'ID';
     public const TITLE = 'TITLE';

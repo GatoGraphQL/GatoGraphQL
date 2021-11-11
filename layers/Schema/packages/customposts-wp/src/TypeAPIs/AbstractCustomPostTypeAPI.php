@@ -7,7 +7,7 @@ namespace PoPSchema\CustomPostsWP\TypeAPIs;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI as UpstreamAbstractCustomPostTypeAPI;
 use PoPSchema\CustomPosts\Types\Status;
-use PoPSchema\Posts\Constants\PostOrderBy;
+use PoPSchema\CustomPosts\Constants\CustomPostOrderBy;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Post;
@@ -201,9 +201,9 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     protected function getOrderByQueryArgValue(string $orderBy): string
     {
         $orderBy = match($orderBy) {
-            PostOrderBy::ID => 'ID',
-            PostOrderBy::TITLE => 'title',
-            PostOrderBy::DATE => 'date',
+            CustomPostOrderBy::ID => 'ID',
+            CustomPostOrderBy::TITLE => 'title',
+            CustomPostOrderBy::DATE => 'date',
             default => $orderBy,
         };
         return $this->getHooksAPI()->applyFilters(
