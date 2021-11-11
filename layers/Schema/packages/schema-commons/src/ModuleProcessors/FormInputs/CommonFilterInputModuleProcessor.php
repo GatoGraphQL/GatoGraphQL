@@ -21,7 +21,7 @@ use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 
 class CommonFilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
-    public const MODULE_FILTERINPUT_ORDER = 'filterinput-order';
+    public const MODULE_FILTERINPUT_SORT = 'filterinput-sort';
     public const MODULE_FILTERINPUT_LIMIT = 'filterinput-limit';
     public const MODULE_FILTERINPUT_OFFSET = 'filterinput-offset';
     public const MODULE_FILTERINPUT_SEARCH = 'filterinput-search';
@@ -78,7 +78,7 @@ class CommonFilterInputModuleProcessor extends AbstractFilterInputModuleProcesso
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUT_ORDER],
+            [self::class, self::MODULE_FILTERINPUT_SORT],
             [self::class, self::MODULE_FILTERINPUT_LIMIT],
             [self::class, self::MODULE_FILTERINPUT_OFFSET],
             [self::class, self::MODULE_FILTERINPUT_SEARCH],
@@ -99,7 +99,7 @@ class CommonFilterInputModuleProcessor extends AbstractFilterInputModuleProcesso
     public function getFilterInput(array $module): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_ORDER => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_ORDER],
+            self::MODULE_FILTERINPUT_SORT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SORT],
             self::MODULE_FILTERINPUT_LIMIT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_LIMIT],
             self::MODULE_FILTERINPUT_OFFSET => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_OFFSET],
             self::MODULE_FILTERINPUT_SEARCH => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SEARCH],
@@ -121,7 +121,7 @@ class CommonFilterInputModuleProcessor extends AbstractFilterInputModuleProcesso
     public function getInputClass(array $module): string
     {
         switch ($module[1]) {
-            case self::MODULE_FILTERINPUT_ORDER:
+            case self::MODULE_FILTERINPUT_SORT:
                 return OrderFormInput::class;
             case self::MODULE_FILTERINPUT_IDS:
             case self::MODULE_FILTERINPUT_EXCLUDE_IDS:
@@ -142,7 +142,7 @@ class CommonFilterInputModuleProcessor extends AbstractFilterInputModuleProcesso
     {
         // Add a nice name, so that the URL params when filtering make sense
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_ORDER => 'order',
+            self::MODULE_FILTERINPUT_SORT => 'order',
             self::MODULE_FILTERINPUT_LIMIT => 'limit',
             self::MODULE_FILTERINPUT_OFFSET => 'offset',
             self::MODULE_FILTERINPUT_SEARCH => 'searchfor',
@@ -164,7 +164,7 @@ class CommonFilterInputModuleProcessor extends AbstractFilterInputModuleProcesso
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ((string)$module[1]) {
-            self::MODULE_FILTERINPUT_ORDER => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_SORT => $this->getStringScalarTypeResolver(),
             self::MODULE_FILTERINPUT_LIMIT => $this->getIntScalarTypeResolver(),
             self::MODULE_FILTERINPUT_OFFSET => $this->getIntScalarTypeResolver(),
             self::MODULE_FILTERINPUT_SEARCH => $this->getStringScalarTypeResolver(),
@@ -200,7 +200,7 @@ class CommonFilterInputModuleProcessor extends AbstractFilterInputModuleProcesso
     public function getFilterInputDescription(array $module): ?string
     {
         return match ((string)$module[1]) {
-            self::MODULE_FILTERINPUT_ORDER => $this->getTranslationAPI()->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'schema-commons'),
+            self::MODULE_FILTERINPUT_SORT => $this->getTranslationAPI()->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'schema-commons'),
             self::MODULE_FILTERINPUT_LIMIT => $this->getTranslationAPI()->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
             self::MODULE_FILTERINPUT_OFFSET => $this->getTranslationAPI()->__('Offset the results by how many positions', 'schema-commons'),
             self::MODULE_FILTERINPUT_SEARCH => $this->getTranslationAPI()->__('Search for elements containing the given string', 'schema-commons'),
