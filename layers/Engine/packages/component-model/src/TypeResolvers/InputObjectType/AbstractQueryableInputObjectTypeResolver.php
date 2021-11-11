@@ -78,19 +78,18 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
         /**
          * Check if to copy the value directly to the filtering query args
          */
-        $queryArgName = $this->getFilteringQueryArgNameToCopyInputFieldValue($inputFieldName);
-        /**
-         * If this input field is an InputObject, then copy as an array under the specified entry
-         */
-        if ($queryArgName !== null && $isQueryableInputObjectTypeResolver) {
-            $query[$queryArgName] = [];
-            $inputFieldTypeResolver->integrateInputValueToFilteringQueryArgs($query[$queryArgName], $inputFieldValue);
-            return;
-        }
-        /**
-         * Copy the value under the specified entry
-         */
-        if ($queryArgName !== null) {
+        if ($queryArgName = $this->getFilteringQueryArgNameToCopyInputFieldValue($inputFieldName)) {
+            /**
+             * If this input field is an InputObject, then copy as an array under the specified entry
+             */
+            if ($isQueryableInputObjectTypeResolver) {
+                $query[$queryArgName] = [];
+                $inputFieldTypeResolver->integrateInputValueToFilteringQueryArgs($query[$queryArgName], $inputFieldValue);
+                return;
+            }
+            /**
+             * Copy the value under the specified entry
+             */
             $query[$queryArgName] = $inputFieldValue;
             return;
         }
