@@ -451,6 +451,6 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         }
         /** @var FilterInputProcessorInterface */
         $filterInputProcessor = $this->getFilterInputProcessorManager()->getProcessor($filterInput);
-        $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $inputFieldValue);
+        $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $inputFieldValue->$inputFieldName);
     }
 }
