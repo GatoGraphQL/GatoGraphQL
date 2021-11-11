@@ -20,6 +20,7 @@ use function get_post_status;
 abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeAPI
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
+    public const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
     /**
      * Return the post's ID
@@ -199,12 +200,16 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     }
     protected function getOrderByQueryArgValue(string $orderBy): string
     {
-        return match($orderBy) {
+        $orderBy = match($orderBy) {
             PostOrderBy::ID => 'ID',
             PostOrderBy::TITLE => 'title',
             PostOrderBy::DATE => 'date',
             default => $orderBy,
         };
+        return $this->getHooksAPI()->applyFilters(
+            self::HOOK_ORDERBY_QUERY_ARG_VALUE,
+            $orderBy
+        );
     }
     public function getCustomPostTypes(array $query = array()): array
     {
