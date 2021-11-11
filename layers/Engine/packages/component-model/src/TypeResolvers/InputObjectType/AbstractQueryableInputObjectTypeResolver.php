@@ -12,7 +12,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
 {
     /** @var array<string, ?array> */
     private array $consolidatedInputFieldFilterInputCache = [];
-    
+
     private ?FilterInputProcessorManagerInterface $filterInputProcessorManager = null;
 
     final public function setFilterInputProcessorManager(FilterInputProcessorManagerInterface $filterInputProcessorManager): void
@@ -23,7 +23,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
     {
         return $this->filterInputProcessorManager ??= $this->instanceManager->getInstance(FilterInputProcessorManagerInterface::class);
     }
-    
+
     public function getInputFieldFilterInput(string $inputFieldName): ?array
     {
         return null;
@@ -62,9 +62,9 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
     }
     /**
      * Integrate an InputObject into the filtering args.
-     * 
+     *
      * By default, forward the logic to its contained input fields.
-     * 
+     *
      * It can be overriden to have the InputObject already
      * perform the filtering logic.
      */
@@ -79,7 +79,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
             $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $inputFieldValue);
             return;
         }
-        
+
         /**
          * If the input field is an InputObject, recursively apply this function
          */
