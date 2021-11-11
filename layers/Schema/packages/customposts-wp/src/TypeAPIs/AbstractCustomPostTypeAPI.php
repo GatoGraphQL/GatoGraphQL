@@ -181,26 +181,12 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             ];
             unset($query['date-from']);
         }
-        if (isset($query['date-from-inclusive'])) {
-            $query['date_query'][] = [
-                'after' => $query['date-from-inclusive'],
-                'inclusive' => true,
-            ];
-            unset($query['date-from-inclusive']);
-        }
         if (isset($query['date-to'])) {
             $query['date_query'][] = [
                 'before' => $query['date-to'],
                 'inclusive' => false,
             ];
             unset($query['date-to']);
-        }
-        if (isset($query['date-to-inclusive'])) {
-            $query['date_query'][] = [
-                'before' => $query['date-to-inclusive'],
-                'inclusive' => true,
-            ];
-            unset($query['date-to-inclusive']);
         }
 
         return $this->getHooksAPI()->applyFilters(
