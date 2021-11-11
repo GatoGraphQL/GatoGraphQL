@@ -419,32 +419,34 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
      */
     final public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass $inputValue): void
     {
-        $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
         foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
-            $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName];
-            /**
-             * If the input field is an InputObject, then forward the logic
-             * to its contained input fields
-             */
-            if ($inputFieldTypeResolver instanceof InputObjectTypeResolverInterface) {
-                $inputFieldTypeResolver->integrateInputValueToFilteringQueryArgs($query, $inputFieldValue);
-                continue;
-            }
-            $this->maybeFilterInputFieldDataloadQueryArgs($inputFieldName, $query, $inputFieldValue);
+            $this->integrateInputFieldValueToFilteringQueryArgs($inputFieldName, $query, $inputFieldValue);
         }
     }
-    final protected function maybeFilterInputFieldDataloadQueryArgs(string $inputFieldName, array &$query, mixed $inputFieldValue): void
+    /**
+     * Integrate an InputObject into the filtering args.
+     * 
+     * By default, forward the logic to its contained input fields
+     */
+    protected function integrateInputFieldValueToFilteringQueryArgs(string $inputFieldName, array &$query, mixed $inputFieldValue): void
     {
         /**
-         * If the input field is defines a FilterInput,
-         * apply it to obtain the filtering query
+         * If the input field defines a FilterInput, apply it to obtain the filtering query
          */
-        $filterInput = $this->getInputFieldFilterInput($inputFieldName);
-        if ($filterInput === null) {
+        if ($filterInput = $this->getInputFieldFilterInput($inputFieldName)) {
+            /** @var FilterInputProcessorInterface */
+            $filterInputProcessor = $this->getFilterInputProcessorManager()->getProcessor($filterInput);
+            $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $inputFieldValue);
             return;
         }
-        /** @var FilterInputProcessorInterface */
-        $filterInputProcessor = $this->getFilterInputProcessorManager()->getProcessor($filterInput);
-        $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $inputFieldValue);
+        
+        /**
+         * If the input field is an InputObject, recursively apply this function
+         */
+        $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
+        $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName];
+        if ($inputFieldTypeResolver instanceof InputObjectTypeResolverInterface) {
+            $inputFieldTypeResolver->integrateInputValueToFilteringQueryArgs($query, $inputFieldValue);
+        }
     }
 }
