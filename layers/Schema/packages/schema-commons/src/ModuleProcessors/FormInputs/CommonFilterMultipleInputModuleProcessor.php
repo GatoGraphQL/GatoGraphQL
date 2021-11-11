@@ -70,49 +70,6 @@ class CommonFilterMultipleInputModuleProcessor extends AbstractFilterInputModule
         };
     }
 
-    // @todo Fix this, migrate to InputObjectType!
-    // protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module): void
-    // {
-    //     // Replace the "date" item with "date-from" and "date-to"
-    //     switch ($module[1]) {
-    //         case self::MODULE_FILTERINPUT_DATES:
-    //             $name = $this->getName($module);
-    //             $subnames = $this->getInputSubnames($module);
-    //             $dateFormat = 'Y-m-d';
-    //             // Save documentation as template, and remove it
-    //             $schemaDefinition = $schemaDefinitionItems[0];
-    //             unset($schemaDefinition[SchemaDefinition::NAME]);
-    //             unset($schemaDefinition[SchemaDefinition::DESCRIPTION]);
-    //             array_shift($schemaDefinitionItems);
-    //             // Add the other elements, using the original documentation as placeholder
-    //             $schemaDefinitionItems[] = array_merge(
-    //                 [
-    //                     SchemaDefinition::NAME => $this->getFormInputHelperService()->getMultipleInputName($name, $subnames[0]),
-    //                 ],
-    //                 $schemaDefinition,
-    //                 [
-    //                     SchemaDefinition::DESCRIPTION => sprintf(
-    //                         $this->getTranslationAPI()->__('Search for elements starting from this date, in format \'%s\'', 'pop-engine'),
-    //                         $dateFormat
-    //                     ),
-    //                 ]
-    //             );
-    //             $schemaDefinitionItems[] = array_merge(
-    //                 [
-    //                     SchemaDefinition::NAME => $this->getFormInputHelperService()->getMultipleInputName($name, $subnames[1]),
-    //                 ],
-    //                 $schemaDefinition,
-    //                 [
-    //                     SchemaDefinition::DESCRIPTION => sprintf(
-    //                         $this->getTranslationAPI()->__('Search for elements starting until this date, in format \'%s\'', 'pop-engine'),
-    //                         $dateFormat
-    //                     ),
-    //                 ]
-    //             );
-    //             break;
-    //     }
-    // }
-
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
