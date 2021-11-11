@@ -417,31 +417,24 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
      *
      * @param array<string, mixed> $query
      */
-    final public function maybeFilterDataloadQueryArgs(string $inputFieldName, array &$query, stdClass $inputFieldValue): void
+    final public function maybeFilterDataloadQueryArgs(array &$query, stdClass $inputValue): void
     {
         $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
-        $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName] ?? null;
-        if ($inputFieldTypeResolver === null) {
-            throw new Exception(
-                sprintf(
-                    $this->getTranslationAPI()->__('There is no input field with name \'%s\' in input object \'%s\''),
-                    $inputFieldName,
-                    $this->getMaybeNamespacedTypeName()
-                )
-            );
-        }
-
-        /**
-         * If the input field is an InputObject, then forward the logic
-         * to its contained input fields
-         */
-        if ($inputFieldTypeResolver instanceof InputObjectTypeResolverInterface) {
-            foreach ((array)$inputFieldValue as $inputFieldSubName => $inputFieldSubValue) {
-                $inputFieldTypeResolver->maybeFilterDataloadQueryArgs($inputFieldSubName, $query, $inputFieldSubValue);
+        foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
+            $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName];
+            /**
+             * If the input field is an InputObject, then forward the logic
+             * to its contained input fields
+             */
+            if ($inputFieldTypeResolver instanceof InputObjectTypeResolverInterface) {
+                $inputFieldTypeResolver->maybeFilterDataloadQueryArgs($query, $inputFieldValue);
+                continue;
             }
-            return;
+            $inputFieldTypeResolver->maybeFilterInputFieldDataloadQueryArgs($inputFieldName, $query, $inputFieldValue);
         }
-
+    }
+    final protected function maybeFilterInputFieldDataloadQueryArgs(string $inputFieldName, array &$query, mixed $inputFieldValue): void
+    {
         /**
          * If the input field is defines a FilterInput,
          * apply it to obtain the filtering query
@@ -452,6 +445,6 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         }
         /** @var FilterInputProcessorInterface */
         $filterInputProcessor = $this->getFilterInputProcessorManager()->getProcessor($filterInput);
-        $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $inputFieldValue->$inputFieldName);
+        $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $inputFieldValue);
     }
 }
