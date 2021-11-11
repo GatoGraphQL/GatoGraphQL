@@ -7,6 +7,7 @@ namespace PoPSchema\CustomPostsWP\TypeAPIs;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI as UpstreamAbstractCustomPostTypeAPI;
 use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\Posts\Constants\PostOrderBy;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Post;
@@ -157,7 +158,8 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             // Same param name, so do nothing
         }
         if (isset($query['orderby'])) {
-            // Same param name, so do nothing
+            // Maybe replace the provided value
+            $query['orderby'] = $this->getOrderByQueryArgValue($query['orderby']);
         }
         // Post slug
         if (isset($query['slug'])) {
@@ -194,6 +196,15 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             $query,
             $options
         );
+    }
+    protected function getOrderByQueryArgValue(string $orderBy): string
+    {
+        return match($orderBy) {
+            PostOrderBy::ID => 'ID',
+            PostOrderBy::TITLE => 'title',
+            PostOrderBy::DATE => 'date',
+            default => $orderBy,
+        };
     }
     public function getCustomPostTypes(array $query = array()): array
     {
