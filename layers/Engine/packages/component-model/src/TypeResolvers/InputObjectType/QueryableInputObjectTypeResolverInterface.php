@@ -19,6 +19,7 @@ interface QueryableInputObjectTypeResolverInterface extends InputObjectTypeResol
      * @return array|null A FilterInput module, or null
      */
     public function getInputFieldFilterInput(string $inputFieldName): ?array;
+    public function getConsolidatedInputFieldFilterInput(string $inputFieldName): ?array;
     /**
      * Apply the FilterInputs to produce the filtering query
      *

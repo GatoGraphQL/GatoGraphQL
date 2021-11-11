@@ -10,6 +10,9 @@ use stdClass;
 
 abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements QueryableInputObjectTypeResolverInterface
 {
+    /** @var array<string, ?array> */
+    private array $consolidatedInputFieldFilterInput = [];
+    
     private ?FilterInputProcessorManagerInterface $filterInputProcessorManager = null;
 
     final public function setFilterInputProcessorManager(FilterInputProcessorManagerInterface $filterInputProcessorManager): void
@@ -25,6 +28,25 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
     {
         return null;
     }
+
+    /**
+     * Consolidation of the schema inputs. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedInputFieldFilterInput(string $inputFieldName): ?array
+    {
+        if (array_key_exists($inputFieldName, $this->consolidatedInputFieldFilterInputCache)) {
+            return $this->consolidatedInputFieldFilterInputCache[$inputFieldName];
+        }
+        $this->consolidatedInputFieldFilterInputCache[$inputFieldName] = $this->getHooksAPI()->applyFilters(
+            HookNames::INPUT_FIELD_DESCRIPTION,
+            $this->getInputFieldFilterInput($inputFieldName),
+            $this,
+            $inputFieldName,
+        );
+        return $this->consolidatedInputFieldFilterInputCache[$inputFieldName];
+    }
+
     /**
      * If the input field is an InputObject, then forward the logic.
      * Otherwise, if the input field defines a FilterInput,
@@ -48,7 +70,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
         /**
          * If the input field defines a FilterInput, apply it to obtain the filtering query
          */
-        if ($filterInput = $this->getInputFieldFilterInput($inputFieldName)) {
+        if ($filterInput = $this->getConsolidatedInputFieldFilterInput($inputFieldName)) {
             /** @var FilterInputProcessorInterface */
             $filterInputProcessor = $this->getFilterInputProcessorManager()->getProcessor($filterInput);
             $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $inputFieldValue);
