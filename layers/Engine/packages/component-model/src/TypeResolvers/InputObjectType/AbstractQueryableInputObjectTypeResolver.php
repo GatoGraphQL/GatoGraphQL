@@ -63,7 +63,10 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
     /**
      * Integrate an InputObject into the filtering args.
      * 
-     * By default, forward the logic to its contained input fields
+     * By default, forward the logic to its contained input fields.
+     * 
+     * It can be overriden to have the InputObject already
+     * perform the filtering logic.
      */
     protected function integrateInputFieldValueToFilteringQueryArgs(string $inputFieldName, array &$query, mixed $inputFieldValue): void
     {
