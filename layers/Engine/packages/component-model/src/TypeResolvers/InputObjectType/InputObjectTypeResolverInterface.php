@@ -58,5 +58,5 @@ interface InputObjectTypeResolverInterface extends InputTypeResolverInterface
      *
      * @param array<string, mixed> $query
      */
-    public function maybeFilterDataloadQueryArgs(string $inputFieldName, array &$query, mixed $inputFieldValue): void;
+    public function maybeFilterDataloadQueryArgs(string $inputFieldName, array &$query, stdClass $inputFieldValue): void;
 }
