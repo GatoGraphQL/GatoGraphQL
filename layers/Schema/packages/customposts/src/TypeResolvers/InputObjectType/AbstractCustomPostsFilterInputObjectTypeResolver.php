@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostDateQueryInputObjectTypeResolver;
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 
 abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends AbstractObjectsFilterInputObjectTypeResolver
@@ -44,7 +44,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     public function getInputFieldFilterInput(string $inputFieldName): ?array
     {
         return match ($inputFieldName) {
-            'search' => [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
+            'search' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SEARCH],
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

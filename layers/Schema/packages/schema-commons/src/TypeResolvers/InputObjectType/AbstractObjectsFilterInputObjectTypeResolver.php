@@ -9,7 +9,7 @@ use PoP\ComponentModel\Tokens\Param;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 
 abstract class AbstractObjectsFilterInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
@@ -69,9 +69,9 @@ abstract class AbstractObjectsFilterInputObjectTypeResolver extends AbstractInpu
     public function getInputFieldFilterInput(string $inputFieldName): ?array
     {
         return match ($inputFieldName) {
-            'ids' => [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
-            'id' => [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_COMMASEPARATED_IDS],
-            'excludeIDs' => [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
+            'ids' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
+            'id' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
+            'excludeIDs' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_IDS],
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }
