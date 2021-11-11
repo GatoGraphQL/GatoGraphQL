@@ -42,13 +42,4 @@ class CustomPostDateQueryInputObjectTypeResolver extends AbstractQueryableInputO
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
-
-    public function getInputFieldFilterInput(string $inputFieldName): ?array
-    {
-        return match ($inputFieldName) {
-            'after' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_DATE_FROM],
-            'before' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_DATE_TO],
-            default => parent::getInputFieldFilterInput($inputFieldName),
-        };
-    }
 }
