@@ -9,6 +9,8 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
     public const FILTERINPUT_SORT = 'filterinput-sort';
+    public const FILTERINPUT_ORDER = 'filterinput-order';
+    public const FILTERINPUT_ORDERBY = 'filterinput-orderby';
     public const FILTERINPUT_LIMIT = 'filterinput-limit';
     public const FILTERINPUT_OFFSET = 'filterinput-offset';
     public const FILTERINPUT_SEARCH = 'filterinput-search';
@@ -27,6 +29,8 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     {
         return array(
             [self::class, self::FILTERINPUT_SORT],
+            [self::class, self::FILTERINPUT_ORDER],
+            [self::class, self::FILTERINPUT_ORDERBY],
             [self::class, self::FILTERINPUT_LIMIT],
             [self::class, self::FILTERINPUT_OFFSET],
             [self::class, self::FILTERINPUT_SEARCH],
@@ -53,6 +57,12 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                 if (isset($value['order'])) {
                     $query['order'] = $value['order'];
                 }
+                break;
+            case self::FILTERINPUT_ORDER:
+                $query['order'] = $value;
+                break;
+            case self::FILTERINPUT_ORDERBY:
+                $query['orderby'] = $value;
                 break;
             case self::FILTERINPUT_LIMIT:
                 $query['limit'] = $value;

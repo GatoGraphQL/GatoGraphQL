@@ -6,6 +6,7 @@ namespace PoPSchema\SchemaCommons\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 
 class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
 {
@@ -122,5 +123,14 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
         }
 
         return null;
+    }
+
+    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    {
+        return match ($inputFieldName) {
+            'limit' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_LIMIT],
+            'offset' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_OFFSET],
+            default => parent::getInputFieldFilterInput($inputFieldName),
+        };
     }
 }
