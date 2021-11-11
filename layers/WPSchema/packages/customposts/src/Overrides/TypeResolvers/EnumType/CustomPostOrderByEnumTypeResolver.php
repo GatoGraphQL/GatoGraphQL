@@ -7,6 +7,11 @@ namespace PoPWPSchema\CustomPosts\Overrides\TypeResolvers\EnumType;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver as UpstreamCustomPostOrderByEnumTypeResolver;
 use PoPWPSchema\CustomPosts\Constants\CustomPostOrderBy;
 
+/**
+ * The "order by" parameters are defined here:
+ *
+ * @see https://developer.wordpress.org/reference/classes/wp_query/#order-orderby-parameters
+ */
 class CustomPostOrderByEnumTypeResolver extends UpstreamCustomPostOrderByEnumTypeResolver
 {
     /**
