@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\Posts\Overrides\TypeResolvers\EnumType;
+namespace PoPWPSchema\CustomPosts\Overrides\TypeResolvers\EnumType;
 
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver as UpstreamCustomPostOrderByEnumTypeResolver;
 use PoPWPSchema\Posts\Constants\PostOrderBy;
 
-class PostOrderByEnumTypeResolver extends UpstreamCustomPostOrderByEnumTypeResolver
+class CustomPostOrderByEnumTypeResolver extends UpstreamCustomPostOrderByEnumTypeResolver
 {
     /**
      * @return string[]
