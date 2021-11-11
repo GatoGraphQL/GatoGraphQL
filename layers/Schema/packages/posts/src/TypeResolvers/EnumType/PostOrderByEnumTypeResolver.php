@@ -23,23 +23,15 @@ class PostOrderByEnumTypeResolver extends AbstractEnumTypeResolver
             PostOrderBy::ID,
             PostOrderBy::TITLE,
             PostOrderBy::DATE,
-            PostOrderBy::COMMENT_COUNT,
-            PostOrderBy::RANDOM,
-            PostOrderBy::MODIFIED_DATE,
-            PostOrderBy::RELEVANCE,
         ];
     }
 
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            PostOrderBy::ID => $this->getTranslationAPI()->__('Order by id', 'schema-commons'),
+            PostOrderBy::ID => $this->getTranslationAPI()->__('Order by ID', 'schema-commons'),
             PostOrderBy::TITLE => $this->getTranslationAPI()->__('Order by title', 'schema-commons'),
             PostOrderBy::DATE => $this->getTranslationAPI()->__('Order by date', 'schema-commons'),
-            PostOrderBy::COMMENT_COUNT => $this->getTranslationAPI()->__('Order by number of comments', 'schema-commons'),
-            PostOrderBy::RANDOM => $this->getTranslationAPI()->__('Order by a random number', 'schema-commons'),
-            PostOrderBy::MODIFIED_DATE => $this->getTranslationAPI()->__('Order by last modified date', 'schema-commons'),
-            PostOrderBy::RELEVANCE => $this->getTranslationAPI()->__('Order by relevance', 'schema-commons'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }

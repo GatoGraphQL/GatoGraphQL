@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSchema\Posts\TypeResolvers\EnumType\PostOrderByEnumTypeResolver:
+        class: PoPWPSchema\Posts\Overrides\TypeResolvers\EnumType\PostOrderByEnumTypeResolver
