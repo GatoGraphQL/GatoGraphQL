@@ -54,7 +54,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
      *
      * @param array<string, mixed> $query
      */
-    final public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass $inputValue): void
+    public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass $inputValue): void
     {
         foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
             $this->integrateInputFieldValueToFilteringQueryArgs($inputFieldName, $query, $inputFieldValue);
