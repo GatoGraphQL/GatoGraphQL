@@ -35,7 +35,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.myCustomPosts: [CustomPostUnion]!`
   - `Root.myCustomPostCount: Int!`
 - Query properties for custom post fields:
-  - `modified: String`
+  - `modified: DateTime`
+  - `modifiedAsString: String`
   - `isSticky: Bool!`
 - Query properties for posts:
   - `Post.postFormat: String!`
@@ -135,7 +136,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Media.caption: String`
   - `Media.altText: String`
   - `Media.description: String`
-  - `Media.date: String`
+  - `Media.date: DateTime`
+  - `Media.dateAsString: String`
+  - `Media.modified: DateTime`
+  - `Media.modifiedAsString: String`
   - `Media.mimeType: String`
   - `Media.sizes: String`
 
@@ -167,6 +171,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Breaking changes
 
+- All `date` fields (such as `Post.date`, `Media.date` and `Comment.date`) and `modified` fields are now of type `DateTime` (before they had type `String`)
 - Renamed module "Schema for the Admin" to "Schema Admin Fields"
 - Renamed scalar type `AnyScalar` to `AnyBuiltInScalar`
 - Renamed interface type `Elemental` to `Node`
