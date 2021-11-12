@@ -74,7 +74,7 @@ class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQ
             'second' => $this->getTranslationAPI()->__('Second (0 to 59)', 'customposts'),
             'compare' => $this->getTranslationAPI()->__('Determines and validates what comparison operator to use', 'customposts'),
             'column' => $this->getTranslationAPI()->__('Posts column to query against. Default: ‘post_date’)', 'customposts'),
-            'relation' => $this->getTranslationAPI()->__('OR or AND, how the sub-arrays should be compared. Default: AND', 'customposts'),
+            'relation' => $this->getTranslationAPI()->__('OR or AND, how the sub-arrays should be compared. Default: AND. Only the value from the first sub-array will be used', 'customposts'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
