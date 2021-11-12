@@ -26,7 +26,7 @@ class FloatScalarTypeResolver extends AbstractScalarTypeResolver
         return $this->getTranslationAPI()->__('The Float scalar type represents float numbers.', 'component-model');
     }
 
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
     {
         if ($error = $this->validateIsNotStdClass($inputValue)) {
             return $error;
