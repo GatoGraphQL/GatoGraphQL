@@ -21,7 +21,7 @@ class BooleanScalarTypeResolver extends AbstractScalarTypeResolver
         return 'Boolean';
     }
 
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
     {
         if ($error = $this->validateIsNotStdClass($inputValue)) {
             return $error;

@@ -30,7 +30,7 @@ class IPv4ScalarTypeResolver extends AbstractScalarTypeResolver
         return $this->getTranslationAPI()->__('IPv4 scalar, such as 192.168.0.1', 'component-model');
     }
 
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
     {
         if ($error = $this->validateIsString($inputValue)) {
             return $error;
