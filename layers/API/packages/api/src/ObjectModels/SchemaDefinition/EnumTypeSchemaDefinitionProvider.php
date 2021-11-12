@@ -37,15 +37,15 @@ class EnumTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvi
     final protected function addEnumSchemaDefinition(array &$schemaDefinition): void
     {
         $enums = [];
-        $enumValues = $this->enumTypeResolver->getEnumValues();
+        $enumValues = $this->enumTypeResolver->getConsolidatedEnumValues();
         foreach ($enumValues as $enumValue) {
             $enum = [
                 SchemaDefinition::VALUE => $enumValue,
             ];
-            if ($description = $this->enumTypeResolver->getEnumValueDescription($enumValue)) {
+            if ($description = $this->enumTypeResolver->getConsolidatedEnumValueDescription($enumValue)) {
                 $enum[SchemaDefinition::DESCRIPTION] = $description;
             }
-            if ($deprecationMessage = $this->enumTypeResolver->getEnumValueDeprecationMessage($enumValue)) {
+            if ($deprecationMessage = $this->enumTypeResolver->getConsolidatedEnumValueDeprecationMessage($enumValue)) {
                 $enum[SchemaDefinition::DEPRECATED] = true;
                 $enum[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationMessage;
             }

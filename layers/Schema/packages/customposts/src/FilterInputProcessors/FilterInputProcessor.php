@@ -47,7 +47,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                 if ($value) {
                     $value = array_intersect(
                         $value,
-                        $this->getCustomPostStatusEnumTypeResolver()->getEnumValues()
+                        $this->getCustomPostStatusEnumTypeResolver()->getConsolidatedEnumValues()
                     );
                     // If no status is valid, do not set, as to not override the default value
                     if ($value) {
