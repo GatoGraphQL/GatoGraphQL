@@ -189,19 +189,6 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
-    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
-        return $aliasedObjectTypeFieldResolver->getFieldDescription(
-            $objectTypeResolver,
-            $this->getAliasedFieldName($fieldName)
-        );
-    }
-
-    /**
-     * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
-     * for the aliased $fieldName
-     */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
@@ -257,10 +244,104 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
+    public function getConsolidatedFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
+        return $aliasedObjectTypeFieldResolver->getConsolidatedFieldArgNameTypeResolvers(
+            $objectTypeResolver,
+            $this->getAliasedFieldName($fieldName)
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
+     * for the aliased $fieldName
+     */
+    public function getConsolidatedFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
+        return $aliasedObjectTypeFieldResolver->getConsolidatedFieldArgDescription(
+            $objectTypeResolver,
+            $this->getAliasedFieldName($fieldName),
+            $fieldArgName
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
+     * for the aliased $fieldName
+     */
+    public function getConsolidatedFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    {
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
+        return $aliasedObjectTypeFieldResolver->getConsolidatedFieldArgDefaultValue(
+            $objectTypeResolver,
+            $this->getAliasedFieldName($fieldName),
+            $fieldArgName
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
+     * for the aliased $fieldName
+     */
+    public function getConsolidatedFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
+        return $aliasedObjectTypeFieldResolver->getConsolidatedFieldArgTypeModifiers(
+            $objectTypeResolver,
+            $this->getAliasedFieldName($fieldName),
+            $fieldArgName
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
+     * for the aliased $fieldName
+     */
+    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    {
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
+        return $aliasedObjectTypeFieldResolver->getFieldDescription(
+            $objectTypeResolver,
+            $this->getAliasedFieldName($fieldName)
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
+     * for the aliased $fieldName
+     */
     public function getFieldDeprecationMessage(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->getFieldDeprecationMessage(
+            $objectTypeResolver,
+            $this->getAliasedFieldName($fieldName)
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
+     * for the aliased $fieldName
+     */
+    public function getConsolidatedFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    {
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
+        return $aliasedObjectTypeFieldResolver->getConsolidatedFieldDescription(
+            $objectTypeResolver,
+            $this->getAliasedFieldName($fieldName)
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
+     * for the aliased $fieldName
+     */
+    public function getConsolidatedFieldDeprecationMessage(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
+    {
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
+        return $aliasedObjectTypeFieldResolver->getConsolidatedFieldDeprecationMessage(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );
