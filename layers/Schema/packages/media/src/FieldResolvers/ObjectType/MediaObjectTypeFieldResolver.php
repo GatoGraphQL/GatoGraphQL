@@ -15,7 +15,7 @@ use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateTimeScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 
 class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
@@ -25,7 +25,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
+    private ?DateTimeScalarTypeResolver $dateTimeScalarTypeResolver = null;
 
     final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {
@@ -67,13 +67,13 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    final public function setDateTimeScalarTypeResolver(DateTimeScalarTypeResolver $dateTimeScalarTypeResolver): void
     {
-        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+        $this->dateTimeScalarTypeResolver = $dateTimeScalarTypeResolver;
     }
-    final protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    final protected function getDateTimeScalarTypeResolver(): DateTimeScalarTypeResolver
     {
-        return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
+        return $this->dateTimeScalarTypeResolver ??= $this->instanceManager->getInstance(DateTimeScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -113,8 +113,8 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             'caption' => $this->getStringScalarTypeResolver(),
             'altText' => $this->getStringScalarTypeResolver(),
             'description' => $this->getStringScalarTypeResolver(),
-            'date' => $this->getDateScalarTypeResolver(),
-            'modified' => $this->getDateScalarTypeResolver(),
+            'date' => $this->getDateTimeScalarTypeResolver(),
+            'modified' => $this->getDateTimeScalarTypeResolver(),
             'mimeType' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

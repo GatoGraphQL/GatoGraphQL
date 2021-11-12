@@ -27,7 +27,7 @@ use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateTimeScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 
@@ -41,7 +41,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
+    private ?DateTimeScalarTypeResolver $dateTimeScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver = null;
@@ -95,13 +95,13 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     {
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
-    final public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    final public function setDateTimeScalarTypeResolver(DateTimeScalarTypeResolver $dateTimeScalarTypeResolver): void
     {
-        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+        $this->dateTimeScalarTypeResolver = $dateTimeScalarTypeResolver;
     }
-    final protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    final protected function getDateTimeScalarTypeResolver(): DateTimeScalarTypeResolver
     {
-        return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
+        return $this->dateTimeScalarTypeResolver ??= $this->instanceManager->getInstance(DateTimeScalarTypeResolver::class);
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -180,7 +180,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'approved'
                 => $this->getBooleanScalarTypeResolver(),
             'date'
-                => $this->getDateScalarTypeResolver(),
+                => $this->getDateTimeScalarTypeResolver(),
             'responseCount',
             'responseCountForAdmin'
                 => $this->getIntScalarTypeResolver(),

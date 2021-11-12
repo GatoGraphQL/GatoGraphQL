@@ -15,14 +15,14 @@ use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolve
 use PoPSchema\CustomPosts\TypeResolvers\InterfaceType\IsCustomPostInterfaceTypeResolver;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateTimeScalarTypeResolver;
 
 class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterfaceTypeFieldResolver
 {
     private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
     private ?CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
+    private ?DateTimeScalarTypeResolver $dateTimeScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
 
@@ -50,13 +50,13 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     {
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
-    final public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    final public function setDateTimeScalarTypeResolver(DateTimeScalarTypeResolver $dateTimeScalarTypeResolver): void
     {
-        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+        $this->dateTimeScalarTypeResolver = $dateTimeScalarTypeResolver;
     }
-    final protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    final protected function getDateTimeScalarTypeResolver(): DateTimeScalarTypeResolver
     {
-        return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
+        return $this->dateTimeScalarTypeResolver ??= $this->instanceManager->getInstance(DateTimeScalarTypeResolver::class);
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -113,7 +113,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
                 => $this->getBooleanScalarTypeResolver(),
             'date',
             'modified'
-                => $this->getDateScalarTypeResolver(),
+                => $this->getDateTimeScalarTypeResolver(),
             'content',
             'title',
             'excerpt',
