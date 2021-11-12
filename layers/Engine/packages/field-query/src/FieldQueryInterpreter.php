@@ -767,6 +767,10 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             QuerySyntax::SYMBOL_FIELDARGS_CLOSING;
     }
 
+    /**
+     * This is the base implementation. Override function whenever
+     * the object does not contain `__serialize`
+     */
     protected function serializeObject(object $object): string
     {
         return $object->__serialize();
