@@ -362,16 +362,28 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $field,
                 $fieldName,
                 $fieldArgs,
-                $objectErrors,
-                $objectWarnings
+                $maybeObjectErrors,
+                $maybeObjectWarnings,
+                $maybeDeprecationMessages,
             ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions);
 
             // Store the warnings to be read if needed
-            if ($objectWarnings) {
-                $this->getFeedbackMessageStore()->addObjectWarnings($objectWarnings);
+            if ($maybeObjectWarnings) {
+                $this->getFeedbackMessageStore()->addObjectWarnings($maybeObjectWarnings);
             }
-            if ($objectErrors) {
-                return $this->getErrorProvider()->getNestedObjectErrorsFieldError($objectErrors, $fieldName);
+            if ($maybeObjectErrors) {
+                return $this->getErrorProvider()->getNestedObjectErrorsFieldError($maybeObjectErrors, $fieldName);
+            }
+            if ($maybeDeprecationMessages) {
+                $id = $this->getID($object);
+                $objectDeprecations = [];
+                foreach ($maybeDeprecationMessages as $deprecationMessage) {
+                    $objectDeprecations[(string)$id][] = [
+                        Tokens::PATH => [$field],
+                        Tokens::MESSAGE => $deprecationMessage,
+                    ];
+                }
+                $this->getFeedbackMessageStore()->addObjectDeprecations($objectDeprecations);
             }
 
             foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
@@ -385,6 +397,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     }
                     if ($maybeDeprecations = $objectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
                         $id = $this->getID($object);
+                        $objectDeprecations = [];
                         foreach ($maybeDeprecations as $deprecation) {
                             $objectDeprecations[(string)$id][] = [
                                 Tokens::PATH => [$field],

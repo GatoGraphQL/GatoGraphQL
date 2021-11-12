@@ -18,7 +18,7 @@ interface DeprecatableInputTypeResolverInterface extends InputTypeResolverInterf
      * obtain the deprecation messages for an input value.
      *
      * @param string|int|float|bool|stdClass $inputValue the (custom) scalar in any format: itself (eg: an object) or its representation (eg: as a string)
-     * @return string|null The deprecation message
+     * @return string[] The deprecation messages
      */
-    public function getInputValueDeprecationMessage(string|int|float|bool|stdClass $inputValue): ?string;
+    public function getInputValueDeprecationMessages(string|int|float|bool|stdClass $inputValue): array;
 }

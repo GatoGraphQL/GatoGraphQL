@@ -62,11 +62,14 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      * Obtain the deprecation messages for an input value.
      *
      * @param string|int|float|bool|stdClass $inputValue the (custom) scalar in any format: itself (eg: an object) or its representation (eg: as a string)
-     * @return string|null The deprecation message
+     * @return string[] The deprecation messages
      */
-    final public function getInputValueDeprecationMessage(string|int|float|bool|stdClass $inputValue): ?string
+    final public function getInputValueDeprecationMessages(string|int|float|bool|stdClass $inputValue): array
     {
-        return $this->getConsolidatedEnumValueDeprecationMessage($inputValue);
+        if ($deprecationMessage = $this->getConsolidatedEnumValueDeprecationMessage($inputValue)) {
+            return [$deprecationMessage];
+        }
+        return [];
     }
 
     /**

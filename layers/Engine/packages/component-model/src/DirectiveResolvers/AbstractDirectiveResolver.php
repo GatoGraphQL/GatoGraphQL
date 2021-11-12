@@ -338,7 +338,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $directiveName,
             $directiveArgs,
             $nestedObjectErrors,
-            $nestedObjectWarnings
+            $nestedObjectWarnings,
+            $nestedObjectDeprecationMessages,
         ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $this->directive, $variables, $expressions);
 
         // Store the args, they may be used in `resolveDirective`
@@ -356,6 +357,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $objectWarnings[$id] = array_merge(
                 $objectWarnings[$id] ?? [],
                 $fieldOutputKeyWarningMessages
+            );
+        }
+        foreach ($nestedObjectDeprecationMessages as $id => $fieldOutputKeyDeprecationMessages) {
+            $objectDeprecations[$id] = array_merge(
+                $objectDeprecations[$id] ?? [],
+                $fieldOutputKeyDeprecationMessages
             );
         }
 

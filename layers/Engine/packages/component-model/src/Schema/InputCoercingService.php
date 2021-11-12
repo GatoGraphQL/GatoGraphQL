@@ -233,11 +233,10 @@ class InputCoercingService implements InputCoercingServiceInterface
                     if ($arrayOfArraysArgValueElem === null) {
                         continue;
                     }
-                    $deprecationMessage = $deprecatableInputTypeResolver->getInputValueDeprecationMessage($arrayOfArraysArgValueElem);
-                    if (empty($deprecationMessage)) {
-                        continue;
-                    }
-                    $inputValueDeprecations[] = $deprecationMessage;
+                    $inputValueDeprecations = array_merge(
+                        $inputValueDeprecations,
+                        $deprecatableInputTypeResolver->getInputValueDeprecationMessages($arrayOfArraysArgValueElem)
+                    );
                 }
             }
         } elseif ($inputIsArrayType) {
@@ -246,17 +245,14 @@ class InputCoercingService implements InputCoercingServiceInterface
                 if ($arrayArgValueElem === null) {
                     continue;
                 }
-                $deprecationMessage = $deprecatableInputTypeResolver->getInputValueDeprecationMessage($arrayArgValueElem);
-                if (empty($deprecationMessage)) {
-                    continue;
-                }
-                $inputValueDeprecations[] = $deprecationMessage;
+                $inputValueDeprecations = array_merge(
+                    $inputValueDeprecations,
+                    $deprecatableInputTypeResolver->getInputValueDeprecationMessages($arrayArgValueElem)
+                );
             }
         } else {
             // Execute against the single value
-            if ($deprecationMessage = $deprecatableInputTypeResolver->getInputValueDeprecationMessage($inputValue)) {
-                $inputValueDeprecations[] = $deprecationMessage;
-            }
+            $inputValueDeprecations = $deprecatableInputTypeResolver->getInputValueDeprecationMessages($inputValue);
         }
         return array_unique($inputValueDeprecations);
     }
