@@ -67,7 +67,13 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     final public function getInputValueDeprecationMessages(string|int|float|bool|stdClass $inputValue): array
     {
         if ($deprecationMessage = $this->getConsolidatedEnumValueDeprecationMessage($inputValue)) {
-            return [$deprecationMessage];
+            return [
+                sprintf(
+                    $this->getTranslationAPI()->__('Enum value \'%s\' is deprecated: %s', 'component-model'),
+                    $inputValue,
+                    $deprecationMessage
+                ),
+            ];
         }
         return [];
     }
