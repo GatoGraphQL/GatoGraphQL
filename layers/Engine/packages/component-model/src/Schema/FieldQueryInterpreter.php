@@ -1424,7 +1424,10 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     ): array {
         // Add the deprecations
         foreach ($castingDirectiveArgDeprecationMessages as $castingDirectiveArgDeprecationMessage) {
-            $schemaDeprecations[] = $this->getErrorService()->getErrorOutput($castingDirectiveArgDeprecationMessage, [$fieldDirective]);
+            $schemaDeprecations[] = [
+                Tokens::PATH => [$fieldDirective],
+                Tokens::MESSAGE => $castingDirectiveArgDeprecationMessage,
+            ];
         }
 
         // If any casting can't be done, show an error
