@@ -149,7 +149,6 @@ class InputCoercingService implements InputCoercingServiceInterface
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType
     ): mixed {
-        // Cast (or "coerce" in GraphQL terms) the value
         if ($inputIsArrayOfArraysType) {
             // If the value is an array of arrays, then cast each subelement to the item type
             return $inputValue === null ? null : array_map(
