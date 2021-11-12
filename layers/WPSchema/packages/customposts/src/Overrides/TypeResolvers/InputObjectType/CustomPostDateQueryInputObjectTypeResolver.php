@@ -51,10 +51,10 @@ class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQ
         $dateQuery = [];
 
         if (isset($inputValue->before)) {
-            $dateQuery['before'] = $inputValue->before;
+            $dateQuery['before'] = $this->getDateScalarTypeResolver()->serialize($inputValue->before);
         }
         if (isset($inputValue->after)) {
-            $dateQuery['after'] = $inputValue->after;
+            $dateQuery['after'] = $this->getDateScalarTypeResolver()->serialize($inputValue->after);
         }
         if (isset($inputValue->inclusive)) {
             $dateQuery['inclusive'] = $inputValue->inclusive;
