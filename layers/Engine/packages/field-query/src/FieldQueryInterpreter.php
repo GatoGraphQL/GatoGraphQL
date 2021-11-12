@@ -781,6 +781,13 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             } elseif ($fieldArgValue instanceof stdClass) {
                 // Convert from array to its representation of object in a string
                 $fieldArgValue = $this->getObjectAsStringForQuery($fieldArgValue);
+            } elseif (is_object($fieldArgValue)) {
+                /**
+                 * This function accepts objects because it is called
+                 * after calling `coerceValue`, so a string like `2020-01-01`
+                 * will be transformed to a `Date` object
+                 */
+                $fieldArgValue = $this->wrapStringInQuotes($fieldArgValue->__serialize());
             } elseif (is_string($fieldArgValue)) {
                 // If it doesn't have them yet, wrap the string between quotes for if there's a special symbol
                 // inside of it (eg: it if has a ",", it will split the element there when decoding again
@@ -901,6 +908,13 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                     // inside of it (eg: it if has a ",", it will split the element there when decoding again
                     // from string to array in `getField`)
                     $value = $this->maybeWrapStringInQuotes($value);
+                } elseif (is_object($value)) {
+                    /**
+                     * This function accepts objects because it is called
+                     * after calling `coerceValue`, so a string like `2020-01-01`
+                     * will be transformed to a `Date` object
+                     */
+                    $value = $this->wrapStringInQuotes($value->__serialize());
                 }
                 $elems[] = $key . QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER . $value;
             }
