@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
-use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 
 class CustomPostDateQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
