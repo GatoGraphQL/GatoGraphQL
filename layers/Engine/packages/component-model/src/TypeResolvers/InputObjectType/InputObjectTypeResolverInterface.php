@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use stdClass;
 
@@ -12,7 +13,7 @@ use stdClass;
  *
  * @see https://spec.graphql.org/draft/#sec-Input-Objects
  */
-interface InputObjectTypeResolverInterface extends InputTypeResolverInterface
+interface InputObjectTypeResolverInterface extends DeprecatableInputTypeResolverInterface
 {
     /**
      * Define input fields

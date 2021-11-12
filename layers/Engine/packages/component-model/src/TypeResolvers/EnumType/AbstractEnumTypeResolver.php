@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\EnumType;
 
-use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use stdClass;
 
@@ -41,7 +40,42 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      */
     final public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
     {
+        $enumValues = $this->getConsolidatedEnumValues();
+        if (!in_array($inputValue, $enumValues)) {
+            $nonDeprecatedEnumValues = array_filter(
+                $enumValues,
+                fn (string $enumValue) => empty($this->getConsolidatedEnumValueDeprecationMessage($enumValue))
+            );
+            return $this->getError(
+                sprintf(
+                    $this->getTranslationAPI()->__('Value \'%1$s\' for enum type \'%2$s\' is not valid (the only valid values are: \'%3$s\')', 'component-model'),
+                    $inputValue,
+                    $this->getMaybeNamespacedTypeName(),
+                    implode($this->getTranslationAPI()->__('\', \''), $nonDeprecatedEnumValues)
+                )
+            );
+        }
         return $inputValue;
+    }
+
+    /**
+     * Obtain the deprecation messages for an input value.
+     *
+     * @param string|int|float|bool|stdClass $inputValue the (custom) scalar in any format: itself (eg: an object) or its representation (eg: as a string)
+     * @return string[] The deprecation messages
+     */
+    final public function getInputValueDeprecationMessages(string|int|float|bool|stdClass $inputValue): array
+    {
+        if ($deprecationMessage = $this->getConsolidatedEnumValueDeprecationMessage($inputValue)) {
+            return [
+                sprintf(
+                    $this->getTranslationAPI()->__('Enum value \'%s\' is deprecated: %s', 'component-model'),
+                    $inputValue,
+                    $deprecationMessage
+                ),
+            ];
+        }
+        return [];
     }
 
     /**

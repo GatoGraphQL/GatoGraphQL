@@ -8,6 +8,7 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 class InputCoercingService implements InputCoercingServiceInterface
@@ -149,10 +150,12 @@ class InputCoercingService implements InputCoercingServiceInterface
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType
     ): mixed {
-        // Cast (or "coerce" in GraphQL terms) the value
+        if ($inputValue === null) {
+            return null;
+        }
         if ($inputIsArrayOfArraysType) {
             // If the value is an array of arrays, then cast each subelement to the item type
-            return $inputValue === null ? null : array_map(
+            return array_map(
                 // If it contains a null value, return it as is
                 fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? null : array_map(
                     fn (mixed $arrayOfArraysArgValueElem) => $arrayOfArraysArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayOfArraysArgValueElem),
@@ -163,13 +166,13 @@ class InputCoercingService implements InputCoercingServiceInterface
         }
         if ($inputIsArrayType) {
             // If the value is an array, then cast each element to the item type
-            return $inputValue === null ? null : array_map(
+            return array_map(
                 fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayArgValueElem),
                 $inputValue
             );
         }
         // Otherwise, simply cast the given value directly
-        return $inputValue === null ? null : $inputTypeResolver->coerceValue($inputValue);
+        return $inputTypeResolver->coerceValue($inputValue);
     }
 
     /**
@@ -182,7 +185,6 @@ class InputCoercingService implements InputCoercingServiceInterface
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType
     ): array {
-        // Cast (or "coerce" in GraphQL terms) the value
         if ($inputIsArrayOfArraysType) {
             return GeneralUtils::arrayFlatten(array_filter(
                 $inputValue ?? [],
@@ -204,5 +206,54 @@ class InputCoercingService implements InputCoercingServiceInterface
             ];
         }
         return [];
+    }
+
+    /**
+     * If applicable, get the deprecation messages for the input value
+     *
+     * @return string[]
+     */
+    public function getInputValueDeprecationMessages(
+        DeprecatableInputTypeResolverInterface $deprecatableInputTypeResolver,
+        mixed $inputValue,
+        bool $inputIsArrayType,
+        bool $inputIsArrayOfArraysType
+    ): array {
+        if ($inputValue === null) {
+            return [];
+        }
+        $inputValueDeprecations = [];
+        if ($inputIsArrayOfArraysType) {
+            // Execute against an array of arrays of values
+            foreach ($inputValue as $arrayArgValueElem) {
+                if ($arrayArgValueElem === null) {
+                    continue;
+                }
+                foreach ($arrayArgValueElem as $arrayOfArraysArgValueElem) {
+                    if ($arrayOfArraysArgValueElem === null) {
+                        continue;
+                    }
+                    $inputValueDeprecations = array_merge(
+                        $inputValueDeprecations,
+                        $deprecatableInputTypeResolver->getInputValueDeprecationMessages($arrayOfArraysArgValueElem)
+                    );
+                }
+            }
+        } elseif ($inputIsArrayType) {
+            // Execute against an array of values
+            foreach ($inputValue as $arrayArgValueElem) {
+                if ($arrayArgValueElem === null) {
+                    continue;
+                }
+                $inputValueDeprecations = array_merge(
+                    $inputValueDeprecations,
+                    $deprecatableInputTypeResolver->getInputValueDeprecationMessages($arrayArgValueElem)
+                );
+            }
+        } else {
+            // Execute against the single value
+            $inputValueDeprecations = $deprecatableInputTypeResolver->getInputValueDeprecationMessages($inputValue);
+        }
+        return array_unique($inputValueDeprecations);
     }
 }

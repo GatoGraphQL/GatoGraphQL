@@ -30,7 +30,6 @@ use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -38,7 +37,6 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\LooseContracts\NameResolverInterface;
 use stdClass;
 
@@ -628,32 +626,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
         if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs)) {
             /**
-             * Validate all enum values provided via args are valid
-             */
-            /** @var array<string, EnumTypeResolverInterface> */
-            $enumConsolidatedFieldArgNameTypeResolvers = array_filter(
-                $consolidatedFieldArgNameTypeResolvers,
-                fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver instanceof EnumTypeResolverInterface
-            );
-            $enumConsolidatedFieldArgNamesIsArrayOfArrays = $enumConsolidatedFieldArgNamesIsArray = [];
-            foreach (array_keys($enumConsolidatedFieldArgNameTypeResolvers) as $fieldArgName) {
-                $consolidatedFieldArgTypeModifiers = $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
-                $enumConsolidatedFieldArgNamesIsArrayOfArrays[$fieldArgName] = ($consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-                $enumConsolidatedFieldArgNamesIsArray[$fieldArgName] = ($consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
-            }
-            [$maybeErrors] = $this->validateEnumFieldOrDirectiveArguments(
-                $enumConsolidatedFieldArgNameTypeResolvers,
-                $enumConsolidatedFieldArgNamesIsArrayOfArrays,
-                $enumConsolidatedFieldArgNamesIsArray,
-                $fieldName,
-                $fieldArgs,
-                ResolverTypes::FIELD
-            );
-            if ($maybeErrors) {
-                return $maybeErrors;
-            }
-
-            /**
              * Validate field argument constraints
              */
             if (
@@ -743,34 +715,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $fieldDeprecationMessage
             );
         }
-
-        /**
-         * Deprecations for the field args of Enum Type
-         */
-        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
-        /** @var array<string, EnumTypeResolverInterface> */
-        $enumConsolidatedFieldArgNameTypeResolvers = array_filter(
-            $consolidatedFieldArgNameTypeResolvers,
-            fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver instanceof EnumTypeResolverInterface
-        );
-        $enumConsolidatedFieldArgNamesIsArrayOfArrays = $enumConsolidatedFieldArgNamesIsArray = [];
-        foreach (array_keys($enumConsolidatedFieldArgNameTypeResolvers) as $fieldArgName) {
-            $consolidatedFieldArgTypeModifiers = $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
-            $enumConsolidatedFieldArgNamesIsArrayOfArrays[$fieldArgName]  = $consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-            $enumConsolidatedFieldArgNamesIsArray[$fieldArgName]  = $consolidatedFieldArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY;
-        }
-        [$maybeErrors, $maybeDeprecations] = $this->validateEnumFieldOrDirectiveArguments(
-            $enumConsolidatedFieldArgNameTypeResolvers,
-            $enumConsolidatedFieldArgNamesIsArrayOfArrays,
-            $enumConsolidatedFieldArgNamesIsArray,
-            $fieldName,
-            $fieldArgs,
-            ResolverTypes::FIELD
-        );
-        $fieldDeprecationMessages = array_merge(
-            $fieldDeprecationMessages,
-            $maybeDeprecations
-        );
 
         return $fieldDeprecationMessages;
     }

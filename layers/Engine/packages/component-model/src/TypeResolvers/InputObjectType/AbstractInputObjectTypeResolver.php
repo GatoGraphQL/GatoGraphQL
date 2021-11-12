@@ -11,6 +11,7 @@ use PoP\ComponentModel\Resolvers\TypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\InputCoercingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use stdClass;
@@ -303,6 +304,53 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
         // Add all missing properties which have a default value
         return $coercedInputValue;
+    }
+
+    /**
+     * Obtain the deprecation messages for an input value.
+     *
+     * @param string|int|float|bool|stdClass $inputValue the (custom) scalar in any format: itself (eg: an object) or its representation (eg: as a string)
+     * @return string[] The deprecation messages
+     */
+    final public function getInputValueDeprecationMessages(string|int|float|bool|stdClass $inputValue): array
+    {
+        $inputValueDeprecationMessages = [];
+        $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
+
+        foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
+            // Check that the input field exists
+            $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName] ?? null;
+            if ($inputFieldTypeResolver === null) {
+                $errors[] = new Error(
+                    $this->getErrorCode(),
+                    sprintf(
+                        $this->getTranslationAPI()->__('There is no input field \'%s\' in input object \'%s\''),
+                        $inputFieldName,
+                        $this->getMaybeNamespacedTypeName()
+                    )
+                );
+                continue;
+            }
+
+            // Obtain the deprecations
+            if ($inputFieldTypeResolver instanceof DeprecatableInputTypeResolverInterface) {
+                $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
+                $inputFieldIsArrayType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
+                $inputFieldIsArrayOfArraysType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+
+                $deprecationMessages = $this->getInputCoercingService()->getInputValueDeprecationMessages(
+                    $inputFieldTypeResolver,
+                    $inputFieldValue,
+                    $inputFieldIsArrayType,
+                    $inputFieldIsArrayOfArraysType,
+                );
+                $inputValueDeprecationMessages = array_merge(
+                    $inputValueDeprecationMessages,
+                    $deprecationMessages
+                );
+            }
+        }
+        return array_unique($inputValueDeprecationMessages);
     }
 
     /**

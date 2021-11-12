@@ -23,14 +23,12 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningHelpers;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\Root\Environment as RootEnvironment;
 
@@ -339,7 +337,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $directiveName,
             $directiveArgs,
             $nestedObjectErrors,
-            $nestedObjectWarnings
+            $nestedObjectWarnings,
+            $nestedObjectDeprecationMessages,
         ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $this->directive, $variables, $expressions);
 
         // Store the args, they may be used in `resolveDirective`
@@ -357,6 +356,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $objectWarnings[$id] = array_merge(
                 $objectWarnings[$id] ?? [],
                 $fieldOutputKeyWarningMessages
+            );
+        }
+        foreach ($nestedObjectDeprecationMessages as $id => $fieldOutputKeyDeprecationMessages) {
+            $objectDeprecations[$id] = array_merge(
+                $objectDeprecations[$id] ?? [],
+                $fieldOutputKeyDeprecationMessages
             );
         }
 
@@ -481,32 +486,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         }
 
         if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs)) {
-            /**
-             * Validate all enum values provided via args are valid
-             */
-            /** @var array<string, EnumTypeResolverInterface> */
-            $enumConsolidatedDirectiveArgNameTypeResolvers = array_filter(
-                $consolidatedDirectiveArgNameTypeResolvers,
-                fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver instanceof EnumTypeResolverInterface
-            );
-            $enumConsolidatedDirectiveArgNamesIsArrayOfArrays = $enumConsolidatedDirectiveArgNamesIsArray = [];
-            foreach (array_keys($enumConsolidatedDirectiveArgNameTypeResolvers) as $directiveArgName) {
-                $consolidatedDirectiveArgTypeModifiers = $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
-                $enumConsolidatedDirectiveArgNamesIsArrayOfArrays[$directiveArgName] = ($consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-                $enumConsolidatedDirectiveArgNamesIsArray[$directiveArgName] = ($consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
-            }
-            [$maybeErrors] = $this->validateEnumFieldOrDirectiveArguments(
-                $enumConsolidatedDirectiveArgNameTypeResolvers,
-                $enumConsolidatedDirectiveArgNamesIsArrayOfArrays,
-                $enumConsolidatedDirectiveArgNamesIsArray,
-                $directiveName,
-                $directiveArgs,
-                ResolverTypes::DIRECTIVE
-            );
-            if ($maybeErrors) {
-                return $maybeErrors;
-            }
-
             /**
              * Validate directive argument constraints
              */
@@ -849,34 +828,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     public function resolveDirectiveValidationDeprecationMessages(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs): array
     {
-        $directiveDeprecationMessages = [];
-
-        /**
-         * Deprecations for the directive args of Enum Type
-         */
-        $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
-        /** @var array<string, EnumTypeResolverInterface> */
-        $enumConsolidatedDirectiveArgNameTypeResolvers = array_filter(
-            $consolidatedDirectiveArgNameTypeResolvers,
-            fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver instanceof EnumTypeResolverInterface
-        );
-        $enumConsolidatedDirectiveArgNamesIsArrayOfArrays = $enumConsolidatedDirectiveArgNamesIsArray = [];
-        foreach (array_keys($enumConsolidatedDirectiveArgNameTypeResolvers) as $directiveArgName) {
-            $consolidatedDirectiveArgTypeModifiers = $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
-            $enumConsolidatedDirectiveArgNamesIsArrayOfArrays[$directiveArgName]  = $consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-            $enumConsolidatedDirectiveArgNamesIsArray[$directiveArgName]  = $consolidatedDirectiveArgTypeModifiers & SchemaTypeModifiers::IS_ARRAY;
-        }
-        [$maybeErrors, $maybeDeprecations] = $this->validateEnumFieldOrDirectiveArguments(
-            $enumConsolidatedDirectiveArgNameTypeResolvers,
-            $enumConsolidatedDirectiveArgNamesIsArrayOfArrays,
-            $enumConsolidatedDirectiveArgNamesIsArray,
-            $directiveName,
-            $directiveArgs,
-            ResolverTypes::DIRECTIVE
-        );
-        $directiveDeprecationMessages = $maybeDeprecations;
-
-        return $directiveDeprecationMessages;
+        return [];
     }
 
     public function getDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string

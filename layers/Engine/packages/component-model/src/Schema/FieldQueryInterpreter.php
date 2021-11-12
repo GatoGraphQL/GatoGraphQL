@@ -16,6 +16,7 @@ use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
+use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -672,7 +673,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         }
         $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $fieldArgs = $this->castAndValidateFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $schemaErrors, $schemaWarnings);
+        $fieldArgs = $this->castAndValidateFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
         // If there's an error, those args will be removed. Then, re-create the fieldDirective to pass it to the function below
         if ($schemaErrors) {
@@ -750,7 +751,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         );
         $directiveArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($relationalTypeResolver, $fieldDirective, $directiveArgs, $variables, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $directiveArgs = $this->castAndValidateDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $schemaErrors, $schemaWarnings, $disableDynamicFields);
+        $directiveArgs = $this->castAndValidateDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations, $disableDynamicFields);
         // Enable the directiveResolver to add its own code validations
         $directiveArgs = $directiveResolver->validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
 
@@ -837,7 +838,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         ?array $variables,
         ?array $expressions
     ): array {
-        $objectErrors = $objectWarnings = [];
+        $objectErrors = $objectWarnings = $objectDeprecations = [];
         $validAndResolvedField = $field;
         $fieldName = $this->getFieldName($field);
         $extractedFieldArgs = $fieldArgs = $this->extractFieldArguments(
@@ -850,7 +851,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $fieldArgs = $this->extractFieldOrDirectiveArgumentsForObject($objectTypeResolver, $object, $fieldArgs, $fieldOutputKey, $variables, $expressions, $objectErrors);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         $castingObjectErrors = $castingObjectWarnings = [];
-        $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $castingObjectErrors, $castingObjectWarnings);
+        $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $castingObjectErrors, $castingObjectWarnings, $objectDeprecations);
         if ($castingObjectErrors || $castingObjectWarnings) {
             $id = $objectTypeResolver->getID($object);
             if ($castingObjectErrors) {
@@ -885,7 +886,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         array $variables,
         array $expressions
     ): array {
-        $objectErrors = $objectWarnings = [];
+        $objectErrors = $objectWarnings = $objectDeprecations = [];
         $validAndResolvedDirective = $fieldDirective;
         $directiveName = $this->getFieldDirectiveName($fieldDirective);
         $extractedDirectiveArgs = $directiveArgs = $this->extractDirectiveArguments(
@@ -899,7 +900,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $directiveArgs = $this->extractFieldOrDirectiveArgumentsForObject($relationalTypeResolver, $object, $directiveArgs, $directiveOutputKey, $variables, $expressions, $objectErrors);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         $castingObjectErrors = $castingObjectWarnings = [];
-        $directiveArgs = $this->castAndValidateDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $castingObjectErrors, $castingObjectWarnings);
+        $directiveArgs = $this->castAndValidateDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $castingObjectErrors, $castingObjectWarnings, $objectDeprecations);
         if ($castingObjectErrors || $castingObjectWarnings) {
             $id = $relationalTypeResolver->getID($object);
             if ($castingObjectErrors) {
@@ -974,6 +975,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         string $directive,
         array $directiveArgs,
         array &$failedCastingDirectiveArgErrors,
+        array &$castingDirectiveArgDeprecationMessages,
         bool $forSchema
     ): array {
         $directiveArgSchemaDefinition = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $relationalTypeResolver);
@@ -981,6 +983,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $directiveArgs,
             $directiveArgSchemaDefinition,
             $failedCastingDirectiveArgErrors,
+            $castingDirectiveArgDeprecationMessages,
             $forSchema
         );
     }
@@ -994,6 +997,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         array $fieldArgs,
         array &$failedCastingFieldArgErrors,
         array &$schemaOrObjectErrors,
+        array &$castingFieldArgDeprecationMessages,
         bool $forSchema
     ): ?array {
         $fieldArgSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $field);
@@ -1008,6 +1012,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $fieldArgs,
             $fieldArgSchemaDefinition,
             $failedCastingFieldArgErrors,
+            $castingFieldArgDeprecationMessages,
             $forSchema
         );
     }
@@ -1019,6 +1024,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         array $fieldOrDirectiveArgs,
         array $fieldOrDirectiveArgSchemaDefinition,
         array &$failedCastingFieldOrDirectiveArgErrors,
+        array &$castingFieldOrDirectiveArgDeprecationMessages,
         bool $forSchema
     ): array {
         // Cast all argument values
@@ -1139,6 +1145,20 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 continue;
             }
 
+            // Obtain the deprecations
+            if ($fieldOrDirectiveArgTypeResolver instanceof DeprecatableInputTypeResolverInterface) {
+                $deprecationMessages = $this->getInputCoercingService()->getInputValueDeprecationMessages(
+                    $fieldOrDirectiveArgTypeResolver,
+                    $argValue,
+                    $fieldOrDirectiveArgIsArrayType,
+                    $fieldOrDirectiveArgIsArrayOfArraysType,
+                );
+                $castingFieldOrDirectiveArgDeprecationMessages = array_merge(
+                    $castingFieldOrDirectiveArgDeprecationMessages,
+                    $deprecationMessages
+                );
+            }
+
             // No errors, assign the value
             $fieldOrDirectiveArgs[$argName] = $coercedArgValue;
         }
@@ -1148,35 +1168,47 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     /**
      * @param array<string,Error> $failedCastingDirectiveArgErrors
      */
-    protected function castDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldDirective, array $directiveArgs, array &$failedCastingDirectiveArgErrors, bool $disableDynamicFields = false): array
+    protected function castDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldDirective, array $directiveArgs, array &$failedCastingDirectiveArgErrors, array &$castingDirectiveArgDeprecationMessages, bool $disableDynamicFields = false): array
     {
         // If the directive doesn't allow dynamic fields (Eg: <cacheControl(maxAge:id())>), then treat it as not for schema
         $forSchema = !$disableDynamicFields;
-        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrors, $forSchema);
+        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrors, $castingDirectiveArgDeprecationMessages, $forSchema);
     }
 
     /**
      * @param array<string,Error> $failedCastingFieldArgErrors
      */
-    protected function castFieldArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrors, array &$schemaErrors): ?array
-    {
-        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $schemaErrors, true);
+    protected function castFieldArgumentsForSchema(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $field,
+        array $fieldArgs,
+        array &$failedCastingFieldArgErrors,
+        array &$schemaErrors,
+        array &$castingFieldArgDeprecationMessages,
+    ): ?array {
+        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $schemaErrors, $castingFieldArgDeprecationMessages, true);
     }
 
     /**
      * @param array<string,Error> $failedCastingDirectiveArgErrors
      */
-    protected function castDirectiveArgumentsForObject(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $directive, array $directiveArgs, array &$failedCastingDirectiveArgErrors): array
+    protected function castDirectiveArgumentsForObject(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $directive, array $directiveArgs, array &$failedCastingDirectiveArgErrors, array &$castingDirectiveArgDeprecationMessages): array
     {
-        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $directive, $directiveArgs, $failedCastingDirectiveArgErrors, false);
+        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $directive, $directiveArgs, $failedCastingDirectiveArgErrors, $castingDirectiveArgDeprecationMessages, false);
     }
 
     /**
      * @param array<string,Error> $failedCastingFieldArgErrors
      */
-    protected function castFieldArgumentsForObject(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$failedCastingFieldArgErrors, array &$objectErrors): ?array
-    {
-        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $objectErrors, false);
+    protected function castFieldArgumentsForObject(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $field,
+        array $fieldArgs,
+        array &$failedCastingFieldArgErrors,
+        array &$objectErrors,
+        array &$castingFieldArgDeprecationMessages,
+    ): ?array {
+        return $this->castFieldArguments($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $objectErrors, $castingFieldArgDeprecationMessages, false);
     }
 
     /**
@@ -1321,22 +1353,24 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldArgNameDefaultValues;
     }
 
-    protected function castAndValidateDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, bool $disableDynamicFields = false): array
+    protected function castAndValidateDirectiveArgumentsForSchema(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations, bool $disableDynamicFields = false): array
     {
         if ($directiveArgs) {
             $failedCastingDirectiveArgErrors = [];
-            $castedDirectiveArgs = $this->castDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrors, $disableDynamicFields);
-            return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrors, $fieldDirective, $directiveArgs, $schemaErrors, $schemaWarnings);
+            $castingDirectiveArgDeprecationMessages = [];
+            $castedDirectiveArgs = $this->castDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrors, $castingDirectiveArgDeprecationMessages, $disableDynamicFields);
+            return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrors, $castingDirectiveArgDeprecationMessages, $fieldDirective, $directiveArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         }
         return $directiveArgs;
     }
 
-    protected function castAndValidateFieldArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings): ?array
+    protected function castAndValidateFieldArgumentsForSchema(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): ?array
     {
         if ($fieldArgs) {
             $failedCastingFieldArgErrors = [];
             $castingSchemaErrors = [];
-            $castedFieldArgs = $this->castFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $castingSchemaErrors);
+            $castingFieldArgDeprecationMessages = [];
+            $castedFieldArgs = $this->castFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $castingSchemaErrors, $castingFieldArgDeprecationMessages);
             if ($castingSchemaErrors) {
                 $schemaErrors = array_merge(
                     $schemaErrors,
@@ -1344,23 +1378,25 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 );
                 return null;
             }
-            return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrors, $field, $fieldArgs, $schemaErrors, $schemaWarnings);
+            return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrors, $castingFieldArgDeprecationMessages, $field, $fieldArgs, $schemaErrors, $schemaWarnings, $schemaDeprecations);
         }
         return $fieldArgs;
     }
 
-    protected function castAndValidateDirectiveArgumentsForObject(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldDirective, array $directiveArgs, array &$objectErrors, array &$objectWarnings): ?array
+    protected function castAndValidateDirectiveArgumentsForObject(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, string $fieldDirective, array $directiveArgs, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations): ?array
     {
         $failedCastingDirectiveArgErrors = [];
-        $castedDirectiveArgs = $this->castDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrors);
-        return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrors, $fieldDirective, $directiveArgs, $objectErrors, $objectWarnings);
+        $castingDirectiveArgDeprecationMessages = [];
+        $castedDirectiveArgs = $this->castDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $failedCastingDirectiveArgErrors, $castingDirectiveArgDeprecationMessages);
+        return $this->validateAndFilterCastDirectiveArguments($directiveResolver, $relationalTypeResolver, $castedDirectiveArgs, $failedCastingDirectiveArgErrors, $castingDirectiveArgDeprecationMessages, $fieldDirective, $directiveArgs, $objectErrors, $objectWarnings, $objectDeprecations);
     }
 
-    protected function castAndValidateFieldArgumentsForObject(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$objectErrors, array &$objectWarnings): ?array
+    protected function castAndValidateFieldArgumentsForObject(ObjectTypeResolverInterface $objectTypeResolver, string $field, array $fieldArgs, array &$objectErrors, array &$objectWarnings, array &$objectDeprecations): ?array
     {
         $failedCastingFieldArgErrors = [];
         $castingObjectErrors = [];
-        $castedFieldArgs = $this->castFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $castingObjectErrors);
+        $castingFieldArgDeprecationMessages = [];
+        $castedFieldArgs = $this->castFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $failedCastingFieldArgErrors, $castingObjectErrors, $castingFieldArgDeprecationMessages);
         if ($castingObjectErrors) {
             $objectErrors = array_merge(
                 $objectErrors,
@@ -1368,14 +1404,32 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             );
             return null;
         }
-        return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrors, $field, $fieldArgs, $objectErrors, $objectWarnings);
+        return $this->validateAndFilterCastFieldArguments($objectTypeResolver, $castedFieldArgs, $failedCastingFieldArgErrors, $castingFieldArgDeprecationMessages, $field, $fieldArgs, $objectErrors, $objectWarnings, $objectDeprecations);
     }
 
     /**
      * @param array<string,Error> $failedCastingDirectiveArgErrors
      */
-    protected function validateAndFilterCastDirectiveArguments(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver, array $castedDirectiveArgs, array &$failedCastingDirectiveArgErrors, string $fieldDirective, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings): array
-    {
+    protected function validateAndFilterCastDirectiveArguments(
+        DirectiveResolverInterface $directiveResolver,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $castedDirectiveArgs,
+        array &$failedCastingDirectiveArgErrors,
+        array &$castingDirectiveArgDeprecationMessages,
+        string $fieldDirective,
+        array $directiveArgs,
+        array &$schemaErrors,
+        array &$schemaWarnings,
+        array &$schemaDeprecations,
+    ): array {
+        // Add the deprecations
+        foreach ($castingDirectiveArgDeprecationMessages as $castingDirectiveArgDeprecationMessage) {
+            $schemaDeprecations[] = [
+                Tokens::PATH => [$fieldDirective],
+                Tokens::MESSAGE => $castingDirectiveArgDeprecationMessage,
+            ];
+        }
+
         // If any casting can't be done, show an error
         if ($failedCastingDirectiveArgErrors) {
             $directiveName = $this->getFieldDirectiveName($fieldDirective);
@@ -1453,11 +1507,21 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         ObjectTypeResolverInterface $objectTypeResolver,
         array $castedFieldArgs,
         array &$failedCastingFieldArgErrors,
+        array &$castingFieldArgDeprecationMessages,
         string $field,
         array $fieldArgs,
         array &$schemaErrors,
-        array &$schemaWarnings
+        array &$schemaWarnings,
+        array &$schemaDeprecations,
     ): array {
+        // Add the deprecations
+        foreach ($castingFieldArgDeprecationMessages as $castingFieldArgDeprecationMessage) {
+            $schemaDeprecations[] = [
+                Tokens::PATH => [$field],
+                Tokens::MESSAGE => $castingFieldArgDeprecationMessage,
+            ];
+        }
+
         // If any casting can't be done, show an error
         if ($failedCastingFieldArgErrors) {
             $fieldName = $this->getFieldName($field);
