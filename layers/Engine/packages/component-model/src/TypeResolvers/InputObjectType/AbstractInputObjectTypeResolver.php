@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
-use Exception;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Resolvers\TypeSchemaDefinitionResolverTrait;
@@ -319,20 +318,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
         foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
             // Check that the input field exists
-            $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName] ?? null;
-            if ($inputFieldTypeResolver === null) {
-                $errors[] = new Error(
-                    $this->getErrorCode(),
-                    sprintf(
-                        $this->getTranslationAPI()->__('There is no input field \'%s\' in input object \'%s\''),
-                        $inputFieldName,
-                        $this->getMaybeNamespacedTypeName()
-                    )
-                );
-                continue;
-            }
-
-            // Obtain the deprecations
+            $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName];
             if ($inputFieldTypeResolver instanceof DeprecatableInputTypeResolverInterface) {
                 $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
                 $inputFieldIsArrayType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
@@ -367,16 +353,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              *   - its type is `DangerouslyDynamic`
              */
             $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
-            $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName] ?? null;
-            if ($inputFieldTypeResolver === null) {
-                throw new Exception(
-                    sprintf(
-                        $this->getTranslationAPI()->__('There is no input field with name \'%s\' in input object \'%s\''),
-                        $inputFieldName,
-                        $this->getMaybeNamespacedTypeName()
-                    )
-                );
-            }
+            $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName];
             if ($inputFieldTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
                 return true;
             }
@@ -396,17 +373,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         }
 
         $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
-        $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName] ?? null;
-        if ($inputFieldTypeResolver === null) {
-            throw new Exception(
-                sprintf(
-                    $this->getTranslationAPI()->__('There is no input field with name \'%s\' in input object \'%s\''),
-                    $inputFieldName,
-                    $this->getMaybeNamespacedTypeName()
-                )
-            );
-        }
-
+        $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName];
         $inputFieldSchemaDefinition = $this->getTypeSchemaDefinition(
             $inputFieldName,
             $inputFieldTypeResolver,
