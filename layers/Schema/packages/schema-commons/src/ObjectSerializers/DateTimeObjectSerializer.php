@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ObjectSerialization;
+namespace PoPSchema\SchemaCommons\ObjectSerialization;
 
 use DateTime;
 use DateTimeInterface;
