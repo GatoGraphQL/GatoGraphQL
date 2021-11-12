@@ -149,9 +149,12 @@ class InputCoercingService implements InputCoercingServiceInterface
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType
     ): mixed {
+        if ($inputValue === null) {
+            return null;
+        }
         if ($inputIsArrayOfArraysType) {
             // If the value is an array of arrays, then cast each subelement to the item type
-            return $inputValue === null ? null : array_map(
+            return array_map(
                 // If it contains a null value, return it as is
                 fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? null : array_map(
                     fn (mixed $arrayOfArraysArgValueElem) => $arrayOfArraysArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayOfArraysArgValueElem),
@@ -162,13 +165,13 @@ class InputCoercingService implements InputCoercingServiceInterface
         }
         if ($inputIsArrayType) {
             // If the value is an array, then cast each element to the item type
-            return $inputValue === null ? null : array_map(
+            return array_map(
                 fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayArgValueElem),
                 $inputValue
             );
         }
         // Otherwise, simply cast the given value directly
-        return $inputValue === null ? null : $inputTypeResolver->coerceValue($inputValue);
+        return $inputTypeResolver->coerceValue($inputValue);
     }
 
     /**
