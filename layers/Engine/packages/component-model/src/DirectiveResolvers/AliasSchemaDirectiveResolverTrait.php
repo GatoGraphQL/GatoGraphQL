@@ -101,6 +101,53 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
+    public function getConsolidatedDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
+    {
+        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
+        return $aliasedDirectiveResolver->getConsolidatedDirectiveArgNameTypeResolvers(
+            $relationalTypeResolver
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased DirectiveResolver
+     */
+    public function getConsolidatedDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
+    {
+        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
+        return $aliasedDirectiveResolver->getConsolidatedDirectiveArgDescription(
+            $relationalTypeResolver,
+            $directiveArgName
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased DirectiveResolver
+     */
+    public function getConsolidatedDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
+    {
+        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
+        return $aliasedDirectiveResolver->getConsolidatedDirectiveArgDefaultValue(
+            $relationalTypeResolver,
+            $directiveArgName
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased DirectiveResolver
+     */
+    public function getConsolidatedDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
+    {
+        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
+        return $aliasedDirectiveResolver->getConsolidatedDirectiveArgTypeModifiers(
+            $relationalTypeResolver,
+            $directiveArgName
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased DirectiveResolver
+     */
     public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
