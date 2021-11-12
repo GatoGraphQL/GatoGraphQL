@@ -41,6 +41,21 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      */
     final public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
     {
+        $enumValues = $this->getConsolidatedEnumValues();
+        if (!in_array($inputValue, $enumValues)) {
+            $nonDeprecatedEnumValues = array_filter(
+                $enumValues,
+                fn (string $enumValue) => empty($this->getConsolidatedEnumValueDeprecationMessage($enumValue))
+            );
+            return $this->getError(
+                sprintf(
+                    $this->getTranslationAPI()->__('Value \'%1$s\' for enum type \'%2$s\' is not allowed (the only allowed values are: \'%3$s\')', 'component-model'),
+                    $inputValue,
+                    $this->getMaybeNamespacedTypeName(),
+                    implode($this->getTranslationAPI()->__('\', \''), $nonDeprecatedEnumValues)
+                )
+            );
+        }
         return $inputValue;
     }
 
