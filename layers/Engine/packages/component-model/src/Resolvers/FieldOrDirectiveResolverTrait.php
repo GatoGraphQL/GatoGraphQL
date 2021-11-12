@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Resolvers;
 
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\Translation\TranslationAPIInterface;
@@ -78,56 +77,6 @@ trait FieldOrDirectiveResolverTrait
     protected function canValidateFieldOrDirectiveArgumentsWithValuesForSchema(array $fieldOrDirectiveArgs): bool
     {
         return !FieldQueryUtils::isAnyFieldArgumentValueAFieldOrExpression($fieldOrDirectiveArgs);
-    }
-
-    /**
-     * @param array $enumDirectiveArgNameTypeResolvers array<string, EnumTypeResolverInterface>
-     * @param array $enumDirectiveArgNamesIsArrayOfArrays array<string, bool>
-     * @param array $enumDirectiveArgNamesIsArray array<string, bool>
-     * @return string[]
-     */
-    private function validateEnumFieldOrDirectiveArgumentDeprecations(
-        array $enumDirectiveArgNameTypeResolvers,
-        array $enumDirectiveArgNamesIsArrayOfArrays,
-        array $enumDirectiveArgNamesIsArray,
-        string $fieldOrDirectiveName,
-        array $fieldOrDirectiveArgs,
-        string $type
-    ): array {
-        $deprecations = [];
-        foreach (array_keys($enumDirectiveArgNameTypeResolvers) as $fieldOrDirectiveArgumentName) {
-            $fieldOrDirectiveArgumentValue = $fieldOrDirectiveArgs[$fieldOrDirectiveArgumentName] ?? null;
-            if ($fieldOrDirectiveArgumentValue === null) {
-                continue;
-            }
-            $enumTypeFieldOrDirectiveArgIsArrayOfArrays = $enumDirectiveArgNamesIsArrayOfArrays[$fieldOrDirectiveArgumentName];
-            $enumTypeFieldOrDirectiveArgIsArray = $enumDirectiveArgNamesIsArray[$fieldOrDirectiveArgumentName];
-            $fieldOrDirectiveArgumentEnumTypeResolver = $enumDirectiveArgNameTypeResolvers[$fieldOrDirectiveArgumentName];
-
-            /**
-             * Pass all the enum values to be validated, as a list.
-             * Possibilities:
-             *   1. Single item => [item]
-             *   2. Array => Array
-             *   3. Array of arrays => flatten into array
-             */
-            if ($enumTypeFieldOrDirectiveArgIsArrayOfArrays) {
-                $fieldOrDirectiveArgumentValueEnums = array_unique(GeneralUtils::arrayFlatten($fieldOrDirectiveArgumentValue));
-            } elseif ($enumTypeFieldOrDirectiveArgIsArray) {
-                $fieldOrDirectiveArgumentValueEnums = $fieldOrDirectiveArgumentValue;
-            } else {
-                $fieldOrDirectiveArgumentValueEnums = [$fieldOrDirectiveArgumentValue];
-            }
-            $this->doValidateEnumFieldOrDirectiveArgumentDeprecationsItem(
-                $deprecations,
-                $fieldOrDirectiveArgumentEnumTypeResolver,
-                $fieldOrDirectiveArgumentValueEnums,
-                $fieldOrDirectiveArgumentName,
-                $fieldOrDirectiveName,
-                $type,
-            );
-        }
-        return $deprecations;
     }
 
     /**

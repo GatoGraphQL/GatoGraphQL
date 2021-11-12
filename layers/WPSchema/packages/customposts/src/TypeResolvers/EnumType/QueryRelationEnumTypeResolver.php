@@ -43,4 +43,13 @@ class QueryRelationEnumTypeResolver extends AbstractEnumTypeResolver
             default => parent::getEnumValueDescription($enumValue),
         };
     }
+
+    public function getEnumValueDeprecationMessage(string $enumValue): ?string
+    {
+        return match ($enumValue) {
+            QueryRelations::AND => $this->getTranslationAPI()->__('`AND` relation', 'schema-commons'),
+            QueryRelations::OR => $this->getTranslationAPI()->__('`OR` relation', 'schema-commons'),
+            default => parent::getEnumValueDescription($enumValue),
+        };
+    }
 }
