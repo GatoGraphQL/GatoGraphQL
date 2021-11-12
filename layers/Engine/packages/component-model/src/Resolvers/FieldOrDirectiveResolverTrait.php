@@ -176,12 +176,12 @@ trait FieldOrDirectiveResolverTrait
         string $type
     ): void {
         $errorItems = $deprecationItems = [];
-        $schemaFieldOrDirectiveArgumentEnumTypeValues = $fieldOrDirectiveArgumentEnumTypeResolver->getEnumValues();
+        $schemaFieldOrDirectiveArgumentEnumTypeValues = $fieldOrDirectiveArgumentEnumTypeResolver->getConsolidatedEnumValues();
         foreach ($fieldOrDirectiveArgumentValueItems as $fieldOrDirectiveArgumentValueItem) {
             if (!in_array($fieldOrDirectiveArgumentValueItem, $schemaFieldOrDirectiveArgumentEnumTypeValues)) {
                 // Remove deprecated ones and extract their names
                 $errorItems[] = $fieldOrDirectiveArgumentValueItem;
-            } elseif ($schemaFieldOrDirectiveArgumentEnumTypeDeprecationMessage = $fieldOrDirectiveArgumentEnumTypeResolver->getEnumValueDeprecationMessage($fieldOrDirectiveArgumentValueItem)) {
+            } elseif ($schemaFieldOrDirectiveArgumentEnumTypeDeprecationMessage = $fieldOrDirectiveArgumentEnumTypeResolver->getConsolidatedEnumValueDeprecationMessage($fieldOrDirectiveArgumentValueItem)) {
                 // Check if this enumValue is deprecated
                 $deprecationItems[$fieldOrDirectiveArgumentValueItem] = $schemaFieldOrDirectiveArgumentEnumTypeDeprecationMessage;
             }
@@ -190,7 +190,7 @@ trait FieldOrDirectiveResolverTrait
             // Remove the deprecated enumValues from the schema definition
             $fieldOrDirectiveArgumentEnumValues = array_filter(
                 $schemaFieldOrDirectiveArgumentEnumTypeValues,
-                fn (string $enumValue) => empty($fieldOrDirectiveArgumentEnumTypeResolver->getEnumValueDeprecationMessage($enumValue))
+                fn (string $enumValue) => empty($fieldOrDirectiveArgumentEnumTypeResolver->getConsolidatedEnumValueDeprecationMessage($enumValue))
             );
             if (count($errorItems) === 1) {
                 $errors[] = sprintf(
