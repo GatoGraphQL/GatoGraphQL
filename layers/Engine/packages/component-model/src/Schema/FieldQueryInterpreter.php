@@ -12,6 +12,7 @@ use PoP\ComponentModel\ErrorHandling\ErrorDataTokens;
 use PoP\ComponentModel\ErrorHandling\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
@@ -94,6 +95,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
     private ?ErrorServiceInterface $errorService = null;
     private ?InputCoercingServiceInterface $inputCoercingService = null;
+    private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
 
     final public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
     {
@@ -118,6 +120,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     final protected function getInputCoercingService(): InputCoercingServiceInterface
     {
         return $this->inputCoercingService ??= $this->instanceManager->getInstance(InputCoercingServiceInterface::class);
+    }
+    final public function setObjectSerializationManager(ObjectSerializationManagerInterface $objectSerializationManager): void
+    {
+        $this->objectSerializationManager = $objectSerializationManager;
+    }
+    final protected function getObjectSerializationManager(): ObjectSerializationManagerInterface
+    {
+        return $this->objectSerializationManager ??= $this->instanceManager->getInstance(ObjectSerializationManagerInterface::class);
     }
 
     /**
@@ -681,6 +691,41 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $schemaWarnings,
             $schemaDeprecations,
         ];
+    }
+
+    /**
+     * Replace the fieldArgs in the field
+     *
+     * @param array<string, mixed> $fieldArgs
+     */
+    protected function replaceFieldArgs(string $field, array $fieldArgs): string
+    {
+        // Return a new field, replacing its fieldArgs (if any) with the provided ones
+        // Used when validating a field and removing the fieldArgs that threw a warning
+        list(
+            $fieldArgsOpeningSymbolPos,
+            $fieldArgsClosingSymbolPos
+        ) = QueryHelpers::listFieldArgsSymbolPositions($field);
+
+        // If it currently has fieldArgs, append the fieldArgs after the fieldName
+        if ($fieldArgsOpeningSymbolPos !== false && $fieldArgsClosingSymbolPos !== false) {
+            $fieldName = $this->getFieldName($field);
+            return substr(
+                $field,
+                0,
+                $fieldArgsOpeningSymbolPos
+            ) .
+            $this->getFieldArgsAsString($fieldArgs) .
+            substr(
+                $field,
+                $fieldArgsClosingSymbolPos + strlen(QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING)
+            );
+        }
+
+        // Otherwise there are none. Then add the fieldArgs between the fieldName and whatever may come after
+        // (alias, directives, or nothing)
+        $fieldName = $this->getFieldName($field);
+        return $fieldName . $this->getFieldArgsAsString($fieldArgs) . substr($field, strlen($fieldName));
     }
 
     public function extractDirectiveArgumentsForSchema(
@@ -1792,5 +1837,10 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             return $this->getFieldName($field);
         }
         return parent::getNoAliasFieldOutputKey($field);
+    }
+
+    protected function serializeObject(object $object): string
+    {
+        return $this->getObjectSerializationManager()->serialize($object);
     }
 }

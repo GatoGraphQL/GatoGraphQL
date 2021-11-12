@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FieldResolvers\ObjectType;
 
+use DateTime;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Formatters\DateFormatterInterface;
@@ -113,16 +114,16 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 return $fieldArgs['status'] == $customPostTypeAPI->getStatus($customPost);
 
             case 'date':
-                return $this->getDateFormatter()->format(
+                return new DateTime($this->getDateFormatter()->format(
                     $fieldArgs['format'],
                     $customPostTypeAPI->getPublishedDate($customPost, $fieldArgs['gmt'])
-                );
+                ));
 
             case 'modified':
-                return $this->getDateFormatter()->format(
+                return new DateTime($this->getDateFormatter()->format(
                     $fieldArgs['format'],
                     $customPostTypeAPI->getModifiedDate($customPost, $fieldArgs['gmt'])
-                );
+                ));
 
             case 'title':
                 return $customPostTypeAPI->getTitle($customPost);

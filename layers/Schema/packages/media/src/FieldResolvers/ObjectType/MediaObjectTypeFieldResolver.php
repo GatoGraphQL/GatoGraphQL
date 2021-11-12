@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\FieldResolvers\ObjectType;
 
+use DateTime;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -226,15 +227,15 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             case 'description':
                 return $this->getMediaTypeAPI()->getDescription($media);
             case 'date':
-                return $this->getDateFormatter()->format(
+                return new DateTime($this->getDateFormatter()->format(
                     $fieldArgs['format'],
                     $this->getMediaTypeAPI()->getDate($media, $fieldArgs['gmt'])
-                );
+                ));
             case 'modified':
-                return $this->getDateFormatter()->format(
+                return new DateTime($this->getDateFormatter()->format(
                     $fieldArgs['format'],
                     $this->getMediaTypeAPI()->getModified($media, $fieldArgs['gmt'])
-                );
+                ));
             case 'mimeType':
                 return $this->getMediaTypeAPI()->getMimeType($media);
         }

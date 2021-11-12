@@ -7,6 +7,7 @@ namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
+use stdClass;
 
 class CustomPostDateQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
 {
@@ -43,12 +44,20 @@ class CustomPostDateQueryInputObjectTypeResolver extends AbstractQueryableInputO
         };
     }
 
-    protected function getFilteringQueryArgNameToCopyInputFieldValue(string $inputFieldName): ?string
+    /**
+     * Integrate parameters into the "date_query" WP_Query arg
+     *
+     * @see https://developer.wordpress.org/reference/classes/wp_query/#date-parameters
+     *
+     * @param array<string, mixed> $query
+     */
+    public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass $inputValue): void
     {
-        return match ($inputFieldName) {
-            'after' => 'date-from',
-            'before' => 'date-to',
-            default => parent::getFilteringQueryArgNameToCopyInputFieldValue($inputFieldName),
-        };
+        if (isset($inputValue->before)) {
+            $query['date-to'] = $this->getDateScalarTypeResolver()->serialize($inputValue->before);
+        }
+        if (isset($inputValue->after)) {
+            $query['date-from'] = $this->getDateScalarTypeResolver()->serialize($inputValue->after);
+        }
     }
 }

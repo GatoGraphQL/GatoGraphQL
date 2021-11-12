@@ -15,3 +15,6 @@ services:
 
     PoPSchema\SchemaCommons\FormInputs\:
         resource: '../src/FormInputs/*'
+
+    PoPSchema\SchemaCommons\ObjectSerializers\:
+        resource: '../src/ObjectSerializers/*'

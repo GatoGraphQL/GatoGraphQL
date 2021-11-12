@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\FieldResolvers\ObjectType;
 
+use DateTime;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -361,10 +362,10 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                 return $this->getCommentTypeAPI()->getCommentParent($comment);
 
             case 'date':
-                return $this->getDateFormatter()->format(
+                return new DateTime($this->getDateFormatter()->format(
                     $fieldArgs['format'],
                     $this->getCommentTypeAPI()->getCommentDate($comment, $fieldArgs['gmt'])
-                );
+                ));
         }
 
         $query = array_merge(
