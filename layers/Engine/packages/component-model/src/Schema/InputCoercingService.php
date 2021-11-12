@@ -182,7 +182,6 @@ class InputCoercingService implements InputCoercingServiceInterface
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType
     ): array {
-        // Cast (or "coerce" in GraphQL terms) the value
         if ($inputIsArrayOfArraysType) {
             return GeneralUtils::arrayFlatten(array_filter(
                 $inputValue ?? [],
