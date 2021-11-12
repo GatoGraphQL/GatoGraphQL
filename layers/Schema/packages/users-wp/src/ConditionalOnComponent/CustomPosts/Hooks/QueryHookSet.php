@@ -6,6 +6,8 @@ namespace PoPSchema\UsersWP\ConditionalOnComponent\CustomPosts\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
+use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
+use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Constants\CustomPostOrderBy;
 
 class QueryHookSet extends AbstractHookSet
 {
@@ -16,6 +18,11 @@ class QueryHookSet extends AbstractHookSet
             [$this, 'convertCustomPostsQuery'],
             10,
             2
+        );
+
+        $this->getHooksAPI()->addFilter(
+            CustomPostTypeAPI::HOOK_ORDERBY_QUERY_ARG_VALUE,
+            [$this, 'getOrderByQueryArgValue']
         );
     }
 
@@ -34,5 +41,13 @@ class QueryHookSet extends AbstractHookSet
             unset($query['exclude-author-ids']);
         }
         return $query;
+    }
+
+    public function getOrderByQueryArgValue(string $orderBy): string
+    {
+        return match ($orderBy) {
+            CustomPostOrderBy::AUTHOR => 'author',
+            default => $orderBy,
+        };
     }
 }
