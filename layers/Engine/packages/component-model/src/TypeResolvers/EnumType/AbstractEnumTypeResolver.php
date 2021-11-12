@@ -49,7 +49,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
             );
             return $this->getError(
                 sprintf(
-                    $this->getTranslationAPI()->__('Value \'%1$s\' for enum type \'%2$s\' is not allowed (the only allowed values are: \'%3$s\')', 'component-model'),
+                    $this->getTranslationAPI()->__('Value \'%1$s\' for enum type \'%2$s\' is not valid (the only valid values are: \'%3$s\')', 'component-model'),
                     $inputValue,
                     $this->getMaybeNamespacedTypeName(),
                     implode($this->getTranslationAPI()->__('\', \''), $nonDeprecatedEnumValues)
