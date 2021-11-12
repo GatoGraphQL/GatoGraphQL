@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
-use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 use stdClass;
 
@@ -50,9 +49,15 @@ class CustomPostDateQueryInputObjectTypeResolver extends AbstractQueryableInputO
      * @see https://developer.wordpress.org/reference/classes/wp_query/#date-parameters
      *
      * @param array<string, mixed> $query
+     * @param stdClass|stdClass[]|array<stdClass[]> $inputValue
      */
-    public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass $inputValue): void
+    public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass|array $inputValue): void
     {
+        if (is_array($inputValue)) {
+            parent::integrateInputValueToFilteringQueryArgs($query, $inputValue);
+            return;
+        }
+
         if (isset($inputValue->before)) {
             $query['date-to'] = $this->getDateScalarTypeResolver()->serialize($inputValue->before);
         }

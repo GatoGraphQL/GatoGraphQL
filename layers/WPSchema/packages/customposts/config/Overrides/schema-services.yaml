@@ -5,3 +5,6 @@ services:
 
     PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver:
         class: PoPWPSchema\CustomPosts\Overrides\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver
+
+    PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostDateQueryInputObjectTypeResolver:
+        class: PoPWPSchema\CustomPosts\Overrides\TypeResolvers\InputObjectType\CustomPostDateQueryInputObjectTypeResolver

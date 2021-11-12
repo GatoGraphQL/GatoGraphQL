@@ -700,7 +700,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$fieldArgName];
             if (
                 $fieldArgTypeResolver instanceof InputObjectTypeResolverInterface
-                && $fieldArgValue instanceof stdClass
             ) {
                 $errors = array_merge(
                     $errors,

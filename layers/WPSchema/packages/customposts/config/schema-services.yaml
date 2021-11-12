@@ -5,3 +5,9 @@ services:
 
     PoPWPSchema\CustomPosts\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
+
+    PoPWPSchema\CustomPosts\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+
+    PoPWPSchema\CustomPosts\SchemaHooks\:
+        resource: '../src/SchemaHooks/*'
