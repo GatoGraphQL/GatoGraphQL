@@ -2,19 +2,21 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostCategories\SchemaHooks;
+namespace PoPSchema\PostTags\SchemaHooks;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\Posts\TypeResolvers\InputObjectType\AbstractPostsFilterInputObjectTypeResolver;
 
-class InputObjectHookSet extends AbstractHookSet
+class InputObjectTypeHookSet extends AbstractHookSet
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -23,6 +25,14 @@ class InputObjectHookSet extends AbstractHookSet
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     protected function init(): void
@@ -60,7 +70,8 @@ class InputObjectHookSet extends AbstractHookSet
         return array_merge(
             $inputFieldNameTypeResolvers,
             [
-                'categoryIDs' => $this->getIDScalarTypeResolver(),
+                'tagIDs' => $this->getIDScalarTypeResolver(),
+                'tagSlugs' => $this->getStringScalarTypeResolver(),
             ]
         );
     }
@@ -74,7 +85,8 @@ class InputObjectHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'categoryIDs' => $this->getTranslationAPI()->__('Get results from the categories with given IDs', 'pop-users'),
+            'tagIDs' => $this->getTranslationAPI()->__('Get results from the tags with given IDs', 'pop-users'),
+            'tagSlugs' => $this->getTranslationAPI()->__('Get results from the tags with given slug', 'pop-users'),
             default => $inputFieldDescription,
         };
     }
@@ -88,7 +100,8 @@ class InputObjectHookSet extends AbstractHookSet
             return $inputFieldTypeModifiers;
         }
         return match ($inputFieldName) {
-            'categoryIDs'
+            'tagIDs',
+            'tagSlugs'
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => $inputFieldTypeModifiers,
