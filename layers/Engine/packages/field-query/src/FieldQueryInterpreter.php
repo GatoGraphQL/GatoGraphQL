@@ -787,7 +787,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                  * after calling `coerceValue`, so a string like `2020-01-01`
                  * will be transformed to a `Date` object
                  */
-                $fieldArgValue = $this->wrapStringInQuotes($fieldArgValue->__serialize());
+                $fieldArgValue = $this->wrapStringInQuotes($this->serializeObject($fieldArgValue));
             } elseif (is_string($fieldArgValue)) {
                 // If it doesn't have them yet, wrap the string between quotes for if there's a special symbol
                 // inside of it (eg: it if has a ",", it will split the element there when decoding again
@@ -800,6 +800,11 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             QuerySyntax::SYMBOL_FIELDARGS_OPENING .
             implode(QuerySyntax::SYMBOL_FIELDARGS_ARGSEPARATOR, $elems) .
             QuerySyntax::SYMBOL_FIELDARGS_CLOSING;
+    }
+
+    protected function serializeObject(object $object): string
+    {
+        return $object->__serialize();
     }
 
     /**
@@ -914,7 +919,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                      * after calling `coerceValue`, so a string like `2020-01-01`
                      * will be transformed to a `Date` object
                      */
-                    $value = $this->wrapStringInQuotes($value->__serialize());
+                    $value = $this->wrapStringInQuotes($this->serializeObject($value));
                 }
                 $elems[] = $key . QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER . $value;
             }
