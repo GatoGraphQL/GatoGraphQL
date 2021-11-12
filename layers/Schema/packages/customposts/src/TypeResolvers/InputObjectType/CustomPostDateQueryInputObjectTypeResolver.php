@@ -57,7 +57,7 @@ class CustomPostDateQueryInputObjectTypeResolver extends AbstractQueryableInputO
             parent::integrateInputValueToFilteringQueryArgs($query, $inputValue);
             return;
         }
-        
+
         if (isset($inputValue->before)) {
             $query['date-to'] = $this->getDateScalarTypeResolver()->serialize($inputValue->before);
         }
