@@ -24,6 +24,7 @@ interface QueryableInputObjectTypeResolverInterface extends InputObjectTypeResol
      * Apply the FilterInputs to produce the filtering query
      *
      * @param array<string, mixed> $query
+     * @param stdClass|stdClass[]|array<stdClass[]> $inputValue
      */
-    public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass $inputValue): void;
+    public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass|array $inputValue): void;
 }

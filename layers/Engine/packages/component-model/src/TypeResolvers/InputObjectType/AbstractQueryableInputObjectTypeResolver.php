@@ -48,10 +48,24 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
     }
 
     /**
+     * The base behavior can only be applied when the value is an stdClass.
+     * If it is an array, or array of arrays, then apply this logic recursively.
+     *
      * @param array<string, mixed> $query
+     * @param stdClass|stdClass[]|array<stdClass[]> $inputValue
      */
-    public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass $inputValue): void
+    public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass|array $inputValue): void
     {
+        // Here $inputValue is an array, or array of arrays
+        if (is_array($inputValue)) {
+            foreach ($inputValue as $index => $inputValueElem) {
+                $queryElem = [];
+                $this->integrateInputValueToFilteringQueryArgs($queryElem, $inputValueElem);
+                $query[$index] = $queryElem;
+            }
+            return;
+        }
+        // Here $inputValue is an stdClass
         foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
             $this->integrateInputFieldValueToFilteringQueryArgs($inputFieldName, $query, $inputFieldValue);
         }
