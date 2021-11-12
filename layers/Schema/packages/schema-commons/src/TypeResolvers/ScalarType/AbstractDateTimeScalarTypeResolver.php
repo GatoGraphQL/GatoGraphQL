@@ -74,6 +74,10 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
         ];
     }
 
+    /**
+     * Because DateTimeObjectSerializer also uses the same format 'Y-m-d\TH:i:sP',
+     * override this function to provide the specific format for each case
+     */
     public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array
     {
         /** @var DateTimeInterface $scalarValue */
