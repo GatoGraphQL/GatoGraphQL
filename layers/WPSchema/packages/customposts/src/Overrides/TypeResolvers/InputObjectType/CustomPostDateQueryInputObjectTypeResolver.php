@@ -89,6 +89,10 @@ class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQ
      */
     public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass|array $inputValue): void
     {
+        /**
+         * Collect all the "date_query" results, and then arrange them properly
+         * as an array, with the "relation" as the first element (if defined)
+         */
         if (is_array($inputValue)) {
             $innerQueries = [];
             parent::integrateInputValueToFilteringQueryArgs($innerQueries, $inputValue);
@@ -97,21 +101,27 @@ class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQ
             if (isset($innerQueries[0]['date_query']['relation'])) {
                 $query['date_query']['relation'] = $innerQueries[0]['date_query']['relation'];
             }
+            // Re-create an array with all the subelements
             foreach ($innerQueries as $innerQuery) {
                 $query['date_query'][] = $innerQuery['date_query'];
             }
             return;
         }
 
+        /**
+         * Here it's a single stdClass. Create the config for a single "date_query"
+         */
         $dateQuery = [];
 
+        // These elements must be serialized, from Date to String
         if (isset($inputValue->before)) {
             $dateQuery['before'] = $this->getDateScalarTypeResolver()->serialize($inputValue->before);
         }
         if (isset($inputValue->after)) {
             $dateQuery['after'] = $this->getDateScalarTypeResolver()->serialize($inputValue->after);
         }
-        
+
+        // These elements can copy directly
         $properties = [
             'year',
             'month',
@@ -126,11 +136,13 @@ class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQ
             'relation',
         ];
         foreach ($properties as $property) {
-            if (isset($inputValue->$property)) {
-                $dateQuery[$property] = $inputValue->$property;
+            if (!isset($inputValue->$property)) {
+                continue;
             }
+            $dateQuery[$property] = $inputValue->$property;
         }
 
+        // Assign under "date_query"
         if ($dateQuery !== []) {
             $query['date_query'] = $dateQuery;
         }
