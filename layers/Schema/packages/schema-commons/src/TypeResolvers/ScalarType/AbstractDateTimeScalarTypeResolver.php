@@ -32,25 +32,47 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
         }
 
         /**
-         * Validate the format
+         * Validate the input has any of the supported formats
          *
          * @see https://stackoverflow.com/a/13194398
          */
-        $format = $this->getDateTimeFormat();
-        $dt = DateTime::createFromFormat($format, $inputValue);
-        if ($dt === false || array_sum($dt::getLastErrors())) {
-            return $this->getError(
-                sprintf(
-                    $this->getTranslationAPI()->__('Type \'%s\' must be provided with format \'%s\'', 'component-model'),
-                    $this->getMaybeNamespacedTypeName(),
-                    $format
-                )
-            );
+        foreach ($this->getDateTimeInputFormats() as $format) {
+            $dt = DateTime::createFromFormat($format, $inputValue);
+            if ($dt === false || array_sum($dt::getLastErrors())) {
+                continue;
+            }
+            return $dt;
         }
-        return $dt;
+        return $this->getError(
+            sprintf(
+                $this->getTranslationAPI()->__('Type \'%s\' must be provided with format \'%s\'', 'component-model'),
+                $this->getMaybeNamespacedTypeName(),
+                $this->getDateTimeFormat()
+            )
+        );
     }
 
     abstract protected function getDateTimeFormat(): string;
+    
+    /**
+     * Allow to define more than one input format, so that
+     * Date can be represented as either:
+     *
+     *   - 'Y-m-d'
+     *   - 'Y-m-d\TH:i:sP'
+     *
+     * This is needed for the DateTimeObjectSerializer,
+     * which is unable to tell if the input is Date or DateTime,
+     * so using the 'Y-m-d\TH:i:sP' format can support both cases.
+     *
+     * @return string[]
+     */
+    protected function getDateTimeInputFormats(): array
+    {
+        return [
+            $this->getDateTimeFormat(),
+        ];
+    }
 
     public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array
     {
