@@ -38,16 +38,14 @@ class EnumTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvi
     {
         $enums = [];
         $enumValues = $this->enumTypeResolver->getEnumValues();
-        $enumValueDeprecationMessages = $this->enumTypeResolver->getEnumValueDeprecationMessages();
-        $enumValueDescriptions = $this->enumTypeResolver->getEnumValueDescriptions();
         foreach ($enumValues as $enumValue) {
             $enum = [
                 SchemaDefinition::VALUE => $enumValue,
             ];
-            if ($description = $enumValueDescriptions[$enumValue] ?? null) {
+            if ($description = $this->enumTypeResolver->getEnumValueDescription($enumValue)) {
                 $enum[SchemaDefinition::DESCRIPTION] = $description;
             }
-            if ($deprecationMessage = $enumValueDeprecationMessages[$enumValue] ?? null) {
+            if ($deprecationMessage = $this->enumTypeResolver->getEnumValueDeprecationMessage($enumValue)) {
                 $enum[SchemaDefinition::DEPRECATED] = true;
                 $enum[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationMessage;
             }
