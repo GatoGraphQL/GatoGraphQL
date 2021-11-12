@@ -28,7 +28,7 @@ interface InputTypeResolverInterface extends TypeResolverInterface
      * with a descriptive error message.
      *
      * @param string|int|float|bool|stdClass $inputValue the (custom) scalar in any format: itself (eg: an object) or its representation (eg: as a string)
-     * @return string|int|float|bool|stdClass|Error the coerced (custom) scalar, or an instance of Error if it can't be done
+     * @return string|int|float|bool|object the coerced (custom) scalar, or an instance of Error if it can't be done
      *
      * @see https://spec.graphql.org/draft/#sec-Input-Values
      */
