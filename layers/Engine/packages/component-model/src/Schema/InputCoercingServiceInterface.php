@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 interface InputCoercingServiceInterface
@@ -59,6 +60,18 @@ interface InputCoercingServiceInterface
      * @return Error[] Errors from coercing the input value
      */
     public function extractErrorsFromCoercedInputValue(
+        mixed $inputValue,
+        bool $inputIsArrayType,
+        bool $inputIsArrayOfArraysType
+    ): array;
+
+    /**
+     * If applicable, get the deprecation messages for the input value
+     *
+     * @return string[]
+     */
+    public function getInputValueDeprecationMessages(
+        DeprecatableInputTypeResolverInterface $inputTypeResolver,
         mixed $inputValue,
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType

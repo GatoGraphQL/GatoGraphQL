@@ -16,6 +16,7 @@ use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
+use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -1137,6 +1138,16 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $failedCastingFieldOrDirectiveArgErrors[$argName] = $castingError;
                 unset($fieldOrDirectiveArgs[$argName]);
                 continue;
+            }
+
+            // Obtain the deprecations
+            if ($fieldOrDirectiveArgTypeResolver instanceof DeprecatableInputTypeResolverInterface) {
+                $deprecationMessages = $this->getInputCoercingService()->getInputValueDeprecationMessages(
+                    $fieldOrDirectiveArgTypeResolver,
+                    $argValue,
+                    $fieldOrDirectiveArgIsArrayType,
+                    $fieldOrDirectiveArgIsArrayOfArraysType,
+                );
             }
 
             // No errors, assign the value

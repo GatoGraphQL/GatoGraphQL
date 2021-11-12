@@ -8,6 +8,7 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 class InputCoercingService implements InputCoercingServiceInterface
@@ -205,5 +206,58 @@ class InputCoercingService implements InputCoercingServiceInterface
             ];
         }
         return [];
+    }
+
+    /**
+     * If applicable, get the deprecation messages for the input value
+     *
+     * @return string[]
+     */
+    public function getInputValueDeprecationMessages(
+        DeprecatableInputTypeResolverInterface $deprecatableInputTypeResolver,
+        mixed $inputValue,
+        bool $inputIsArrayType,
+        bool $inputIsArrayOfArraysType
+    ): array {
+        if ($inputValue === null) {
+            return [];
+        }
+        $inputValueDeprecations = [];
+        if ($inputIsArrayOfArraysType) {
+            // Execute against an array of arrays of values
+            foreach ($inputValue as $arrayArgValueElem) {
+                if ($arrayArgValueElem === null) {
+                    continue;
+                }
+                foreach ($arrayArgValueElem as $arrayOfArraysArgValueElem) {
+                    if ($arrayOfArraysArgValueElem === null) {
+                        continue;
+                    }
+                    $deprecationMessage = $deprecatableInputTypeResolver->getInputValueDeprecationMessage($arrayOfArraysArgValueElem);
+                    if (empty($deprecationMessage)) {
+                        continue;
+                    }
+                    $inputValueDeprecations[] = $deprecationMessage;
+                }
+            }
+        } elseif ($inputIsArrayType) {
+            // Execute against an array of values
+            foreach ($inputValue as $arrayArgValueElem) {
+                if ($arrayArgValueElem === null) {
+                    continue;
+                }
+                $deprecationMessage = $deprecatableInputTypeResolver->getInputValueDeprecationMessage($arrayArgValueElem);
+                if (empty($deprecationMessage)) {
+                    continue;
+                }
+                $inputValueDeprecations[] = $deprecationMessage;
+            }
+        } else {
+            // Execute against the single value
+            if ($deprecationMessage = $deprecatableInputTypeResolver->getInputValueDeprecationMessage($inputValue)) {
+                $inputValueDeprecations[] = $deprecationMessage;
+            }
+        }
+        return array_unique($inputValueDeprecations);
     }
 }

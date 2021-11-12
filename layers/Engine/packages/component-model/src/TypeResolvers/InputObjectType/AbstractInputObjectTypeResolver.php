@@ -11,6 +11,7 @@ use PoP\ComponentModel\Resolvers\TypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\InputCoercingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use stdClass;
@@ -261,6 +262,16 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 );
                 $errors[] = $castingError;
                 continue;
+            }
+
+            // Obtain the deprecations
+            if ($inputFieldTypeResolver instanceof DeprecatableInputTypeResolverInterface) {
+                $deprecationMessages = $this->getInputCoercingService()->getInputValueDeprecationMessages(
+                    $inputFieldTypeResolver,
+                    $inputFieldValue,
+                    $inputFieldIsArrayType,
+                    $inputFieldIsArrayOfArraysType,
+                );
             }
 
             // The input field is valid, add to the resulting InputObject

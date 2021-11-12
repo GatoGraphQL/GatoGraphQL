@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\EnumType;
 
-use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use stdClass;
 
@@ -57,6 +56,17 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
             );
         }
         return $inputValue;
+    }
+
+    /**
+     * Obtain the deprecation messages for an input value.
+     *
+     * @param string|int|float|bool|stdClass $inputValue the (custom) scalar in any format: itself (eg: an object) or its representation (eg: as a string)
+     * @return string|null The deprecation message
+     */
+    final public function getInputValueDeprecationMessage(string|int|float|bool|stdClass $inputValue): ?string
+    {
+        return $this->getConsolidatedEnumValueDeprecationMessage($inputValue);
     }
 
     /**
