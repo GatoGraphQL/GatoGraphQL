@@ -58,6 +58,6 @@ class DateTimeScalarTypeResolver extends AbstractScalarTypeResolver
                 )
             );
         }
-        return $inputValue;
+        return $dt;
     }
 }
