@@ -32,5 +32,5 @@ interface InputTypeResolverInterface extends TypeResolverInterface
      *
      * @see https://spec.graphql.org/draft/#sec-Input-Values
      */
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error;
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object;
 }

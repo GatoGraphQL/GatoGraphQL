@@ -36,7 +36,7 @@ class DateTimeScalarTypeResolver extends AbstractScalarTypeResolver
         );
     }
 
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
     {
         if ($error = $this->validateIsString($inputValue)) {
             return $error;

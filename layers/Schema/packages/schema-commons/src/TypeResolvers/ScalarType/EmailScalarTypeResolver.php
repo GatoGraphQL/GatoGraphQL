@@ -30,7 +30,7 @@ class EmailScalarTypeResolver extends AbstractScalarTypeResolver
         return 'https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1';
     }
 
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
     {
         if ($error = $this->validateIsString($inputValue)) {
             return $error;

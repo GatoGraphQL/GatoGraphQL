@@ -39,7 +39,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      *
      * This function simply returns the same value always.
      */
-    final public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|stdClass|Error
+    final public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
     {
         return $inputValue;
     }
