@@ -17,13 +17,14 @@ class EnumTypeHookSet extends AbstractHookSet
         $this->getHooksAPI()->addFilter(
             HookNames::ENUM_VALUES,
             [$this, 'getEnumValues'],
-            10
+            10,
+            2
         );
         $this->getHooksAPI()->addFilter(
             HookNames::ENUM_VALUE_DESCRIPTION,
             [$this, 'getEnumValueDescription'],
             10,
-            2
+            3
         );
     }
 
