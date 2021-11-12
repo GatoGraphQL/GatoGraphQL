@@ -189,8 +189,8 @@ trait FieldOrDirectiveResolverTrait
         if ($errorItems) {
             // Remove the deprecated enumValues from the schema definition
             $fieldOrDirectiveArgumentEnumValues = array_filter(
-                array_keys($schemaFieldOrDirectiveArgumentEnumTypeValues),
-                fn (string $enumValue) => !empty($fieldOrDirectiveArgumentEnumTypeResolver->getEnumValueDeprecationMessage($enumValue))
+                $schemaFieldOrDirectiveArgumentEnumTypeValues,
+                fn (string $enumValue) => empty($fieldOrDirectiveArgumentEnumTypeResolver->getEnumValueDeprecationMessage($enumValue))
             );
             if (count($errorItems) === 1) {
                 $errors[] = sprintf(
