@@ -15,14 +15,14 @@ use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolve
 use PoPSchema\CustomPosts\TypeResolvers\InterfaceType\IsCustomPostInterfaceTypeResolver;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateTimeScalarTypeResolver;
 
 class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterfaceTypeFieldResolver
 {
     private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
     private ?CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
+    private ?DateTimeScalarTypeResolver $dateTimeScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
 
@@ -50,13 +50,13 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     {
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
-    final public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    final public function setDateTimeScalarTypeResolver(DateTimeScalarTypeResolver $dateTimeScalarTypeResolver): void
     {
-        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+        $this->dateTimeScalarTypeResolver = $dateTimeScalarTypeResolver;
     }
-    final protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    final protected function getDateTimeScalarTypeResolver(): DateTimeScalarTypeResolver
     {
-        return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
+        return $this->dateTimeScalarTypeResolver ??= $this->instanceManager->getInstance(DateTimeScalarTypeResolver::class);
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -99,7 +99,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'status',
             'isStatus',
             'date',
+            'dateAsString',
             'modified',
+            'modifiedAsString',
             'title',
             'excerpt',
             'customPostType',
@@ -113,11 +115,13 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
                 => $this->getBooleanScalarTypeResolver(),
             'date',
             'modified'
-                => $this->getDateScalarTypeResolver(),
+                => $this->getDateTimeScalarTypeResolver(),
             'content',
             'title',
             'excerpt',
-            'customPostType'
+            'customPostType',
+            'dateAsString',
+            'modifiedAsString'
                 => $this->getStringScalarTypeResolver(),
             'status'
                 => $this->getCustomPostStatusEnumTypeResolver(),
@@ -137,7 +141,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             case 'status':
             case 'isStatus':
             case 'date':
+            case 'dateAsString':
             case 'modified':
+            case 'modifiedAsString':
             case 'customPostType':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }
@@ -154,7 +160,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'status' => $this->getTranslationAPI()->__('Custom post status', 'customposts'),
             'isStatus' => $this->getTranslationAPI()->__('Is the custom post in the given status?', 'customposts'),
             'date' => $this->getTranslationAPI()->__('Custom post published date', 'customposts'),
+            'dateAsString' => $this->getTranslationAPI()->__('Custom post published date, in String format', 'customposts'),
             'modified' => $this->getTranslationAPI()->__('Custom post modified date', 'customposts'),
+            'modifiedAsString' => $this->getTranslationAPI()->__('Custom post modified date, in String format', 'customposts'),
             'title' => $this->getTranslationAPI()->__('Custom post title', 'customposts'),
             'excerpt' => $this->getTranslationAPI()->__('Custom post excerpt', 'customposts'),
             'customPostType' => $this->getTranslationAPI()->__('Custom post type', 'customposts'),
@@ -203,8 +211,10 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     public function getFieldFilterInputContainerModule(string $fieldName): ?array
     {
         return match ($fieldName) {
-            'date' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
-            'modified' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
+            'date' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE],
+            'dateAsString' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
+            'modified' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE],
+            'modifiedAsString' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
             default => parent::getFieldFilterInputContainerModule($fieldName),
         };
     }

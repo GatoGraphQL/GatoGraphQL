@@ -27,7 +27,7 @@ use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateTimeScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 
@@ -41,7 +41,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
+    private ?DateTimeScalarTypeResolver $dateTimeScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver = null;
@@ -95,13 +95,13 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     {
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
-    final public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
+    final public function setDateTimeScalarTypeResolver(DateTimeScalarTypeResolver $dateTimeScalarTypeResolver): void
     {
-        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+        $this->dateTimeScalarTypeResolver = $dateTimeScalarTypeResolver;
     }
-    final protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    final protected function getDateTimeScalarTypeResolver(): DateTimeScalarTypeResolver
     {
-        return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
+        return $this->dateTimeScalarTypeResolver ??= $this->instanceManager->getInstance(DateTimeScalarTypeResolver::class);
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -157,6 +157,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'status',
             'parent',
             'date',
+            'dateAsString',
             'responses',
             'responseCount',
             'responsesForAdmin',
@@ -169,7 +170,8 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         return match ($fieldName) {
             'content',
             'authorName',
-            'type'
+            'type',
+            'dateAsString'
                 => $this->getStringScalarTypeResolver(),
             'authorURL'
                 => $this->getUrlScalarTypeResolver(),
@@ -180,7 +182,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'approved'
                 => $this->getBooleanScalarTypeResolver(),
             'date'
-                => $this->getDateScalarTypeResolver(),
+                => $this->getDateTimeScalarTypeResolver(),
             'responseCount',
             'responseCountForAdmin'
                 => $this->getIntScalarTypeResolver(),
@@ -207,6 +209,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'type',
             'status',
             'date',
+            'dateAsString',
             'responseCount',
             'responseCountForAdmin'
                 => SchemaTypeModifiers::NON_NULLABLE,
@@ -232,6 +235,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'status' => $this->getTranslationAPI()->__('Status of the comment', 'pop-comments'),
             'parent' => $this->getTranslationAPI()->__('Parent comment (if this comment is a response to another one)', 'pop-comments'),
             'date' => $this->getTranslationAPI()->__('Date when the comment was added', 'pop-comments'),
+            'dateAsString' => $this->getTranslationAPI()->__('Date when the comment was added, in String format', 'pop-comments'),
             'responses' => $this->getTranslationAPI()->__('Responses to the comment', 'pop-comments'),
             'responseCount' => $this->getTranslationAPI()->__('Number of responses to the comment', 'pop-comments'),
             'responsesForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Responses to the comment', 'pop-comments'),
@@ -247,7 +251,8 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'responseCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT],
             'responsesForAdmin' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINRESPONSES],
             'responseCountForAdmin' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINRESPONSECOUNT],
-            'date' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
+            'date' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE],
+            'dateAsString' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
     }
@@ -362,10 +367,13 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                 return $this->getCommentTypeAPI()->getCommentParent($comment);
 
             case 'date':
-                return new DateTime($this->getDateFormatter()->format(
+                return new DateTime($this->getCommentTypeAPI()->getCommentDate($comment, $fieldArgs['gmt']));
+
+            case 'dateAsString':
+                return $this->getDateFormatter()->format(
                     $fieldArgs['format'],
                     $this->getCommentTypeAPI()->getCommentDate($comment, $fieldArgs['gmt'])
-                ));
+                );
         }
 
         $query = array_merge(
