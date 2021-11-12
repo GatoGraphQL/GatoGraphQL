@@ -96,7 +96,9 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             'altText',
             'description',
             'date',
+            'dateAsString',
             'modified',
+            'modifiedAsString',
             'mimeType',
         ];
     }
@@ -114,7 +116,9 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             'altText' => $this->getStringScalarTypeResolver(),
             'description' => $this->getStringScalarTypeResolver(),
             'date' => $this->getDateTimeScalarTypeResolver(),
+            'dateAsString' => $this->getStringScalarTypeResolver(),
             'modified' => $this->getDateTimeScalarTypeResolver(),
+            'modifiedAsString' => $this->getStringScalarTypeResolver(),
             'mimeType' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -125,7 +129,9 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         return match ($fieldName) {
             'src',
             'date',
-            'modified'
+            'dateAsString',
+            'modified',
+            'modifiedAsString'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -145,7 +151,9 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             'altText' => $this->getTranslationAPI()->__('Media element alt text', 'pop-media'),
             'description' => $this->getTranslationAPI()->__('Media element description', 'pop-media'),
             'date' => $this->getTranslationAPI()->__('Media element\'s published date', 'pop-media'),
+            'dateAsString' => $this->getTranslationAPI()->__('Media element\'s published date, in String format', 'pop-media'),
             'modified' => $this->getTranslationAPI()->__('Media element\'s modified date', 'pop-media'),
+            'modifiedAsString' => $this->getTranslationAPI()->__('Media element\'s modified date, in String format', 'pop-media'),
             'mimeType' => $this->getTranslationAPI()->__('Media element\'s mime type', 'pop-media'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
@@ -178,8 +186,10 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
-            'date' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
-            'modified' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
+            'date' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE],
+            'dateAsString' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
+            'modified' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE],
+            'modifiedAsString' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
     }
@@ -227,15 +237,19 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             case 'description':
                 return $this->getMediaTypeAPI()->getDescription($media);
             case 'date':
-                return new DateTime($this->getDateFormatter()->format(
+                return new DateTime($this->getMediaTypeAPI()->getDate($media, $fieldArgs['gmt']));
+            case 'dateAsString':
+                return $this->getDateFormatter()->format(
                     $fieldArgs['format'],
                     $this->getMediaTypeAPI()->getDate($media, $fieldArgs['gmt'])
-                ));
+                );
             case 'modified':
-                return new DateTime($this->getDateFormatter()->format(
+                return new DateTime($this->getMediaTypeAPI()->getModified($media, $fieldArgs['gmt']));
+            case 'modifiedAsString':
+                return $this->getDateFormatter()->format(
                     $fieldArgs['format'],
                     $this->getMediaTypeAPI()->getModified($media, $fieldArgs['gmt'])
-                ));
+                );
             case 'mimeType':
                 return $this->getMediaTypeAPI()->getMimeType($media);
         }

@@ -15,6 +15,7 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
     public const MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID = 'filterinputcontainer-entity-by-id';
     public const MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG = 'filterinputcontainer-entity-by-slug';
     public const MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING = 'filterinputcontainer-date-as-string';
+    public const MODULE_FILTERINPUTCONTAINER_GMTDATE = 'filterinputcontainer-utcdate';
     public const MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING = 'filterinputcontainer-utcdate-as-string';
 
     public function getModulesToProcess(): array
@@ -23,6 +24,7 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
             [self::class, self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING],
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_GMTDATE],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
         );
     }
@@ -38,6 +40,9 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
             ],
             self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_DATEFORMAT],
+            ],
+            self::MODULE_FILTERINPUTCONTAINER_GMTDATE => [
+                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_GMT],
             ],
             self::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_DATEFORMAT],
@@ -62,6 +67,7 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
                 break;
         }
         switch ($module[1]) {
+            case self::MODULE_FILTERINPUTCONTAINER_GMTDATE:
             case self::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING:
                 $gmtFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
