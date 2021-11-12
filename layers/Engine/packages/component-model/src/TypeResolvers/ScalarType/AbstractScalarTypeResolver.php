@@ -12,7 +12,7 @@ use stdClass;
 abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implements ScalarTypeResolverInterface
 {
     private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
-    
+
     final public function setObjectSerializationManager(ObjectSerializationManagerInterface $objectSerializationManager): void
     {
         $this->objectSerializationManager = $objectSerializationManager;

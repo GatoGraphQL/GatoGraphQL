@@ -29,7 +29,7 @@ class ObjectSerializationManager implements ObjectSerializationManagerInterface
         if ($objectSerializer !== null) {
             return $objectSerializer->serialize($object);
         }
-        
+
         /**
          * No Serializer found. Then call the '__serialize' method of the object,
          * expecting it to implement it. If it doesn't, it will throw an exception,

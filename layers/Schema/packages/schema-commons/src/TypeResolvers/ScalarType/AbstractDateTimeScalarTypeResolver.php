@@ -53,7 +53,7 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
     }
 
     abstract protected function getDateTimeFormat(): string;
-    
+
     /**
      * Allow to define more than one input format, so that
      * Date can be represented as either:
