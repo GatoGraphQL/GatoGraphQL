@@ -16,21 +16,9 @@ interface EnumTypeResolverInterface extends ConcreteTypeResolverInterface, Input
      */
     public function getEnumValues(): array;
     /**
-     * Description for all enum values (which have a description)
-     *
-     * @return array<string,string> Key: enum value, Value: description
-     */
-    public function getEnumValueDescriptions(): array;
-    /**
      * Description for a specific enum value
      */
     public function getEnumValueDescription(string $enumValue): ?string;
-    /**
-     * Deprecation message for all enum values (which are deprecated)
-     *
-     * @return array<string,string> Key: enum value, Value: deprecation message
-     */
-    public function getEnumValueDeprecationMessages(): array;
     /**
      * Deprecation message for a specific enum value
      */

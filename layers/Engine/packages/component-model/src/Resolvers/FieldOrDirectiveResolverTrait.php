@@ -177,22 +177,21 @@ trait FieldOrDirectiveResolverTrait
     ): void {
         $errorItems = $deprecationItems = [];
         $schemaFieldOrDirectiveArgumentEnumTypeValues = $fieldOrDirectiveArgumentEnumTypeResolver->getEnumValues();
-        $schemaFieldOrDirectiveArgumentEnumTypeDeprecationMessages = $fieldOrDirectiveArgumentEnumTypeResolver->getEnumValueDeprecationMessages();
         foreach ($fieldOrDirectiveArgumentValueItems as $fieldOrDirectiveArgumentValueItem) {
             if (!in_array($fieldOrDirectiveArgumentValueItem, $schemaFieldOrDirectiveArgumentEnumTypeValues)) {
                 // Remove deprecated ones and extract their names
                 $errorItems[] = $fieldOrDirectiveArgumentValueItem;
-            } elseif ($schemaFieldOrDirectiveArgumentEnumTypeDeprecationMessage = $schemaFieldOrDirectiveArgumentEnumTypeDeprecationMessages[$fieldOrDirectiveArgumentValueItem] ?? null) {
+            } elseif ($schemaFieldOrDirectiveArgumentEnumTypeDeprecationMessage = $fieldOrDirectiveArgumentEnumTypeResolver->getEnumValueDeprecationMessage($fieldOrDirectiveArgumentValueItem)) {
                 // Check if this enumValue is deprecated
                 $deprecationItems[$fieldOrDirectiveArgumentValueItem] = $schemaFieldOrDirectiveArgumentEnumTypeDeprecationMessage;
             }
         }
         if ($errorItems) {
             // Remove the deprecated enumValues from the schema definition
-            $fieldOrDirectiveArgumentEnumValues = array_values(array_diff(
+            $fieldOrDirectiveArgumentEnumValues = array_filter(
                 $schemaFieldOrDirectiveArgumentEnumTypeValues,
-                array_keys($schemaFieldOrDirectiveArgumentEnumTypeDeprecationMessages)
-            ));
+                fn (string $enumValue) => empty($fieldOrDirectiveArgumentEnumTypeResolver->getEnumValueDeprecationMessage($enumValue))
+            );
             if (count($errorItems) === 1) {
                 $errors[] = sprintf(
                     $this->getTranslationAPI()->__('Value \'%1$s\' for argument \'%2$s\' in %3$s \'%4$s\' is not allowed (the only allowed values are: \'%5$s\')', 'component-model'),
