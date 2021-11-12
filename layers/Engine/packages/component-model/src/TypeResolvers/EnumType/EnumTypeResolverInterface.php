@@ -23,4 +23,13 @@ interface EnumTypeResolverInterface extends ConcreteTypeResolverInterface, Input
      * Deprecation message for a specific enum value
      */
     public function getEnumValueDeprecationMessage(string $enumValue): ?string;
+    /**
+     * Consolidation of the enum values. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return string[]
+     */
+    public function getConsolidatedEnumValues(): array;
+    public function getConsolidatedEnumValueDescription(string $enumValue): ?string;
+    public function getConsolidatedEnumValueDeprecationMessage(string $enumValue): ?string;
 }
