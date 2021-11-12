@@ -6,6 +6,7 @@ namespace PoPWPSchema\CustomPosts\Overrides\TypeResolvers\InputObjectType;
 
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostDateQueryInputObjectTypeResolver as UpstreamCustomPostDateQueryInputObjectTypeResolver;
 use stdClass;
 
@@ -13,6 +14,7 @@ class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQ
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -30,6 +32,14 @@ class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQ
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
 
     public function getInputFieldNameTypeResolvers(): array
     {
@@ -44,6 +54,9 @@ class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQ
                 'hour' => $this->getIntScalarTypeResolver(),
                 'minute' => $this->getIntScalarTypeResolver(),
                 'second' => $this->getIntScalarTypeResolver(),
+                'compare' => $this->getStringScalarTypeResolver(),
+                'column' => $this->getStringScalarTypeResolver(),
+                'relation' => $this->getStringScalarTypeResolver(),
             ]
         );
     }
@@ -59,6 +72,9 @@ class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQ
             'hour' => $this->getTranslationAPI()->__('Hour (from 0 to 23)', 'customposts'),
             'minute' => $this->getTranslationAPI()->__('Minute (from 0 to 59)', 'customposts'),
             'second' => $this->getTranslationAPI()->__('Second (0 to 59)', 'customposts'),
+            'compare' => $this->getTranslationAPI()->__('Determines and validates what comparison operator to use', 'customposts'),
+            'column' => $this->getTranslationAPI()->__('Posts column to query against. Default: ‘post_date’)', 'customposts'),
+            'relation' => $this->getTranslationAPI()->__('OR or AND, how the sub-arrays should be compared. Default: AND', 'customposts'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -69,9 +85,24 @@ class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQ
      * @see https://developer.wordpress.org/reference/classes/wp_query/#date-parameters
      *
      * @param array<string, mixed> $query
+     * @param stdClass|stdClass[]|array<stdClass[]> $inputValue
      */
-    public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass $inputValue): void
+    public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass|array $inputValue): void
     {
+        if (is_array($inputValue)) {
+            $innerQueries = [];
+            parent::integrateInputValueToFilteringQueryArgs($innerQueries, $inputValue);
+            $query['date_query'] = [];
+            // The "relation" is defined on the first element
+            if (isset($innerQueries[0]['date_query']['relation'])) {
+                $query['date_query']['relation'] = $innerQueries[0]['date_query']['relation'];
+            }
+            foreach ($innerQueries as $innerQuery) {
+                $query['date_query'][] = $innerQuery['date_query'];
+            }
+            return;
+        }
+
         $dateQuery = [];
 
         if (isset($inputValue->before)) {
@@ -80,6 +111,7 @@ class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQ
         if (isset($inputValue->after)) {
             $dateQuery['after'] = $this->getDateScalarTypeResolver()->serialize($inputValue->after);
         }
+        
         $properties = [
             'year',
             'month',
@@ -89,6 +121,9 @@ class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQ
             'minute',
             'second',
             'inclusive',
+            'compare',
+            'column',
+            'relation',
         ];
         foreach ($properties as $property) {
             if (isset($inputValue->$property)) {
