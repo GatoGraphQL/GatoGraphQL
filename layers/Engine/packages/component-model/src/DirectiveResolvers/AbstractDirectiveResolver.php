@@ -695,15 +695,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return null;
     }
 
-    public function getDirectiveArgDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
-    {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getDirectiveArgDeprecationMessage($relationalTypeResolver, $directiveArgName);
-        }
-        return null;
-    }
-
     public function getDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
