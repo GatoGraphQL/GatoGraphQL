@@ -16,7 +16,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     protected array $consolidatedEnumValueDescriptionCache = [];
     /** @var array<string, string|null> */
     protected array $consolidatedEnumValueDeprecationMessageCache = [];
-    
+
     /**
      * By default, no description
      */
