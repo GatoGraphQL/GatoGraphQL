@@ -23,6 +23,9 @@ services:
     PoP\ComponentModel\Engine\EngineInterface:
         class: \PoP\ComponentModel\Engine\Engine
 
+    PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface:
+        class: \PoP\ComponentModel\ObjectSerialization\ObjectSerializationManager
+
     PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface:
         class: \PoP\ComponentModel\DirectivePipeline\DirectivePipelineService
 

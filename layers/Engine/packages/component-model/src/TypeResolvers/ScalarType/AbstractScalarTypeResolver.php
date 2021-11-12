@@ -5,11 +5,23 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use stdClass;
 
 abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implements ScalarTypeResolverInterface
 {
+    private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
+
+    final public function setObjectSerializationManager(ObjectSerializationManagerInterface $objectSerializationManager): void
+    {
+        $this->objectSerializationManager = $objectSerializationManager;
+    }
+    final protected function getObjectSerializationManager(): ObjectSerializationManagerInterface
+    {
+        return $this->objectSerializationManager ??= $this->instanceManager->getInstance(ObjectSerializationManagerInterface::class);
+    }
+
     public function getSpecifiedByURL(): ?string
     {
         return null;
@@ -38,7 +50,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         }
         // Convert object to string
         if (is_object($scalarValue)) {
-            return $scalarValue->__serialize();
+            return $this->getObjectSerializationManager()->serialize($scalarValue);
         }
         // Return as is
         return $scalarValue;

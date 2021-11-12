@@ -4,12 +4,24 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ErrorHandling;
 
+use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use stdClass;
 
 class ErrorProvider implements ErrorProviderInterface
 {
     use BasicServiceTrait;
+
+    private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
+
+    final public function setObjectSerializationManager(ObjectSerializationManagerInterface $objectSerializationManager): void
+    {
+        $this->objectSerializationManager = $objectSerializationManager;
+    }
+    final protected function getObjectSerializationManager(): ObjectSerializationManagerInterface
+    {
+        return $this->objectSerializationManager ??= $this->instanceManager->getInstance(ObjectSerializationManagerInterface::class);
+    }
 
     /**
      * @param array<string, mixed>|null $data
@@ -92,7 +104,7 @@ class ErrorProvider implements ErrorProviderInterface
         if ($value instanceof stdClass) {
             $valueAsString = json_encode($value);
         } elseif (is_object($value)) {
-            $valueAsString = $value->__serialize();
+            $valueAsString = $this->getObjectSerializationManager()->serialize($value);
         } else {
             $valueAsString = (string) $value;
         }

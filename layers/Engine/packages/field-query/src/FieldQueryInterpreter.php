@@ -226,41 +226,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return $field;
     }
 
-    /**
-     * Replace the fieldArgs in the field
-     *
-     * @param array<string, mixed> $fieldArgs
-     */
-    protected function replaceFieldArgs(string $field, array $fieldArgs): string
-    {
-        // Return a new field, replacing its fieldArgs (if any) with the provided ones
-        // Used when validating a field and removing the fieldArgs that threw a warning
-        list(
-            $fieldArgsOpeningSymbolPos,
-            $fieldArgsClosingSymbolPos
-        ) = QueryHelpers::listFieldArgsSymbolPositions($field);
-
-        // If it currently has fieldArgs, append the fieldArgs after the fieldName
-        if ($fieldArgsOpeningSymbolPos !== false && $fieldArgsClosingSymbolPos !== false) {
-            $fieldName = $this->getFieldName($field);
-            return substr(
-                $field,
-                0,
-                $fieldArgsOpeningSymbolPos
-            ) .
-            $this->getFieldArgsAsString($fieldArgs) .
-            substr(
-                $field,
-                $fieldArgsClosingSymbolPos + strlen(QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING)
-            );
-        }
-
-        // Otherwise there are none. Then add the fieldArgs between the fieldName and whatever may come after
-        // (alias, directives, or nothing)
-        $fieldName = $this->getFieldName($field);
-        return $fieldName . $this->getFieldArgsAsString($fieldArgs) . substr($field, strlen($fieldName));
-    }
-
     public function isFieldArgumentValueAField(mixed $fieldArgValue): bool
     {
         // If the result fieldArgValue is a string (i.e. not numeric), and it has brackets (...),
@@ -781,6 +746,13 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             } elseif ($fieldArgValue instanceof stdClass) {
                 // Convert from array to its representation of object in a string
                 $fieldArgValue = $this->getObjectAsStringForQuery($fieldArgValue);
+            } elseif (is_object($fieldArgValue)) {
+                /**
+                 * This function accepts objects because it is called
+                 * after calling `coerceValue`, so a string like `2020-01-01`
+                 * will be transformed to a `Date` object
+                 */
+                $fieldArgValue = $this->wrapStringInQuotes($this->serializeObject($fieldArgValue));
             } elseif (is_string($fieldArgValue)) {
                 // If it doesn't have them yet, wrap the string between quotes for if there's a special symbol
                 // inside of it (eg: it if has a ",", it will split the element there when decoding again
@@ -793,6 +765,15 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             QuerySyntax::SYMBOL_FIELDARGS_OPENING .
             implode(QuerySyntax::SYMBOL_FIELDARGS_ARGSEPARATOR, $elems) .
             QuerySyntax::SYMBOL_FIELDARGS_CLOSING;
+    }
+
+    /**
+     * This is the base implementation. Override function whenever
+     * the object does not contain `__serialize`
+     */
+    protected function serializeObject(object $object): string
+    {
+        return $object->__serialize();
     }
 
     /**
@@ -901,6 +882,13 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                     // inside of it (eg: it if has a ",", it will split the element there when decoding again
                     // from string to array in `getField`)
                     $value = $this->maybeWrapStringInQuotes($value);
+                } elseif (is_object($value)) {
+                    /**
+                     * This function accepts objects because it is called
+                     * after calling `coerceValue`, so a string like `2020-01-01`
+                     * will be transformed to a `Date` object
+                     */
+                    $value = $this->wrapStringInQuotes($this->serializeObject($value));
                 }
                 $elems[] = $key . QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER . $value;
             }
