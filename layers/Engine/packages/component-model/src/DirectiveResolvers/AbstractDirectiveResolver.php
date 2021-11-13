@@ -1210,7 +1210,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $directiveName = $this->getDirectiveName();
             $schemaDefinition = [
                 SchemaDefinition::NAME => $directiveName,
-                SchemaDefinition::DIRECTIVE_TYPE => $this->getDirectiveKind(),
+                SchemaDefinition::DIRECTIVE_KIND => $this->getDirectiveKind(),
                 SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
                 SchemaDefinition::DIRECTIVE_IS_REPEATABLE => $this->isRepeatable(),
                 SchemaDefinition::DIRECTIVE_IS_GLOBAL => $this->isGlobal($relationalTypeResolver),

@@ -38,7 +38,7 @@ class SchemaDefinition
     public const DIRECTIVES = 'directives';
     public const GLOBAL_DIRECTIVES = 'globalDirectives';
     public const FIELD_IS_MUTATION = 'isMutation';
-    public const DIRECTIVE_TYPE = 'directiveType';
+    public const DIRECTIVE_KIND = 'directiveKind';
     public const DIRECTIVE_PIPELINE_POSITION = 'pipelinePosition';
     public const DIRECTIVE_IS_REPEATABLE = 'isRepeatable';
     public const DIRECTIVE_IS_GLOBAL = 'isGlobal';
