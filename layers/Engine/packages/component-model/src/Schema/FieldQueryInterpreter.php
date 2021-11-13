@@ -510,6 +510,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                                     $this->getTranslationAPI()->__('%s. The directive has been ignored', 'pop-component-model'),
                                     $errorMessage
                                 ),
+                                Tokens::EXTENSIONS => [
+                                    Tokens::ARGUMENT_PATH => [$fieldOrDirectiveArgName],
+                                ],
                         ];
                         continue;
                     } else {
@@ -519,6 +522,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                                 $this->getTranslationAPI()->__('%s, so it may have no effect (it has not been removed from the query, though)', 'pop-component-model'),
                                 $errorMessage
                             ),
+                            Tokens::EXTENSIONS => [
+                                Tokens::ARGUMENT_PATH => [$fieldOrDirectiveArgName],
+                            ],
                         ];
                     }
                 }
