@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\Extensions;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\Directive;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\DirectiveTypeEnumTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\DirectiveKindEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\DirectiveObjectTypeResolver;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -16,16 +16,16 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class DirectiveSchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver = null;
+    private ?DirectiveKindEnumTypeResolver $directiveTypeEnumTypeResolver = null;
     private ?DirectiveRegistryInterface $directiveRegistry = null;
 
-    final public function setDirectiveTypeEnumTypeResolver(DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver): void
+    final public function setDirectiveKindEnumTypeResolver(DirectiveKindEnumTypeResolver $directiveTypeEnumTypeResolver): void
     {
         $this->directiveTypeEnumTypeResolver = $directiveTypeEnumTypeResolver;
     }
-    final protected function getDirectiveKindEnumTypeResolver(): DirectiveTypeEnumTypeResolver
+    final protected function getDirectiveKindEnumTypeResolver(): DirectiveKindEnumTypeResolver
     {
-        return $this->directiveTypeEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveTypeEnumTypeResolver::class);
+        return $this->directiveTypeEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveKindEnumTypeResolver::class);
     }
     final public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
     {

@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\Extensions;
 use GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\SchemaObjectTypeFieldResolver;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\DirectiveTypeEnumTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\DirectiveKindEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
@@ -17,16 +17,16 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTypeFieldResolver
 {
-    private ?DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver = null;
+    private ?DirectiveKindEnumTypeResolver $directiveTypeEnumTypeResolver = null;
     private ?DirectiveRegistryInterface $directiveRegistry = null;
 
-    final public function setDirectiveTypeEnumTypeResolver(DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver): void
+    final public function setDirectiveKindEnumTypeResolver(DirectiveKindEnumTypeResolver $directiveTypeEnumTypeResolver): void
     {
         $this->directiveTypeEnumTypeResolver = $directiveTypeEnumTypeResolver;
     }
-    final protected function getDirectiveKindEnumTypeResolver(): DirectiveTypeEnumTypeResolver
+    final protected function getDirectiveKindEnumTypeResolver(): DirectiveKindEnumTypeResolver
     {
-        return $this->directiveTypeEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveTypeEnumTypeResolver::class);
+        return $this->directiveTypeEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveKindEnumTypeResolver::class);
     }
     final public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
     {

@@ -9,7 +9,7 @@ use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 use stdClass;
 
-class DirectiveTypeEnumTypeResolver extends AbstractEnumTypeResolver
+class DirectiveKindEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
