@@ -35,7 +35,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     /**
      * This is a system directive
      */
-    public function getDirectiveType(): string
+    public function getDirectiveKind(): string
     {
         return DirectiveKinds::SYSTEM;
     }

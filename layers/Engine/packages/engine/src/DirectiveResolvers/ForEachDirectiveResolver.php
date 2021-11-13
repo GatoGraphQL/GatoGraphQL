@@ -31,7 +31,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
         return 'forEach';
     }
 
-    public function getDirectiveType(): string
+    public function getDirectiveKind(): string
     {
         return DirectiveKinds::INDEXING;
     }

@@ -32,7 +32,7 @@ class SetPropertiesAsExpressionsDirectiveResolver extends AbstractGlobalDirectiv
     /**
      * This is a "Scripting" type directive
      */
-    public function getDirectiveType(): string
+    public function getDirectiveKind(): string
     {
         return DirectiveKinds::SCRIPTING;
     }

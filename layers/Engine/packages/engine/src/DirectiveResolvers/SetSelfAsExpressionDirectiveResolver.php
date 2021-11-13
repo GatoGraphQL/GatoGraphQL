@@ -22,7 +22,7 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
     /**
      * This is a "Scripting" type directive
      */
-    public function getDirectiveType(): string
+    public function getDirectiveKind(): string
     {
         return DirectiveKinds::SCRIPTING;
     }

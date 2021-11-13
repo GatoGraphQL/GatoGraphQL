@@ -15,7 +15,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
     /**
      * Validations are by default a "Schema" type directive
      */
-    public function getDirectiveType(): string
+    public function getDirectiveKind(): string
     {
         return DirectiveKinds::SCHEMA;
     }

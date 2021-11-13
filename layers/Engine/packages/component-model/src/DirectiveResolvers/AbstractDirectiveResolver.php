@@ -152,7 +152,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * depending on one case or the other, might be exposed to the user.
      * By default, use the Query type
      */
-    public function getDirectiveType(): string
+    public function getDirectiveKind(): string
     {
         return DirectiveKinds::QUERY;
     }
@@ -597,7 +597,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     public function isRepeatable(): bool
     {
-        return !($this->getDirectiveType() == DirectiveKinds::SYSTEM || $this->getDirectiveType() == DirectiveKinds::SCHEMA);
+        return !($this->getDirectiveKind() == DirectiveKinds::SYSTEM || $this->getDirectiveKind() == DirectiveKinds::SCHEMA);
     }
 
     /**
@@ -1210,7 +1210,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $directiveName = $this->getDirectiveName();
             $schemaDefinition = [
                 SchemaDefinition::NAME => $directiveName,
-                SchemaDefinition::DIRECTIVE_TYPE => $this->getDirectiveType(),
+                SchemaDefinition::DIRECTIVE_TYPE => $this->getDirectiveKind(),
                 SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
                 SchemaDefinition::DIRECTIVE_IS_REPEATABLE => $this->isRepeatable(),
                 SchemaDefinition::DIRECTIVE_IS_GLOBAL => $this->isGlobal($relationalTypeResolver),

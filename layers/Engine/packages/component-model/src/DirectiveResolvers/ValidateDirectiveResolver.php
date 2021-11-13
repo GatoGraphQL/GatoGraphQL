@@ -21,7 +21,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
     /**
      * This is a system directive
      */
-    public function getDirectiveType(): string
+    public function getDirectiveKind(): string
     {
         return DirectiveKinds::SYSTEM;
     }

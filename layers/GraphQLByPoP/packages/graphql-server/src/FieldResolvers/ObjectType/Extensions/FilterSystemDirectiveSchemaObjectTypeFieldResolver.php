@@ -24,7 +24,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     {
         $this->directiveTypeEnumTypeResolver = $directiveTypeEnumTypeResolver;
     }
-    final protected function getDirectiveTypeEnumTypeResolver(): DirectiveTypeEnumTypeResolver
+    final protected function getDirectiveKindEnumTypeResolver(): DirectiveTypeEnumTypeResolver
     {
         return $this->directiveTypeEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveTypeEnumTypeResolver::class);
     }
@@ -78,7 +78,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     {
         return match ($fieldName) {
             'directives' => [
-                'ofKinds' => $this->getDirectiveTypeEnumTypeResolver(),
+                'ofKinds' => $this->getDirectiveKindEnumTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -123,7 +123,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
                 if ($ofKinds = $fieldArgs['ofKinds'] ?? null) {
                     $ofTypeDirectiveResolvers = array_filter(
                         $this->getDirectiveRegistry()->getDirectiveResolvers(),
-                        fn (DirectiveResolverInterface $directiveResolver) => in_array($directiveResolver->getDirectiveType(), $ofKinds)
+                        fn (DirectiveResolverInterface $directiveResolver) => in_array($directiveResolver->getDirectiveKind(), $ofKinds)
                     );
                     // Calculate the directive IDs
                     $ofTypeDirectiveIDs = array_map(

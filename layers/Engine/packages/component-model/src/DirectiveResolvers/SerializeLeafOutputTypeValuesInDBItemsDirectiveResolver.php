@@ -23,7 +23,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
     /**
      * This is a system directive
      */
-    public function getDirectiveType(): string
+    public function getDirectiveKind(): string
     {
         return DirectiveKinds::SYSTEM;
     }

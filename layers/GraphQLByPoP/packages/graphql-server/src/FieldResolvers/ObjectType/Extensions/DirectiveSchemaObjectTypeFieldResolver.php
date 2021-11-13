@@ -23,7 +23,7 @@ class DirectiveSchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     {
         $this->directiveTypeEnumTypeResolver = $directiveTypeEnumTypeResolver;
     }
-    final protected function getDirectiveTypeEnumTypeResolver(): DirectiveTypeEnumTypeResolver
+    final protected function getDirectiveKindEnumTypeResolver(): DirectiveTypeEnumTypeResolver
     {
         return $this->directiveTypeEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveTypeEnumTypeResolver::class);
     }
@@ -100,7 +100,7 @@ class DirectiveSchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'kind' => $this->getDirectiveTypeEnumTypeResolver(),
+            'kind' => $this->getDirectiveKindEnumTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
