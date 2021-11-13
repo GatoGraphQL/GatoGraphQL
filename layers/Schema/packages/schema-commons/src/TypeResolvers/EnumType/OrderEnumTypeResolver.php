@@ -11,7 +11,7 @@ class OrderEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'Order';
+        return 'OrderEnum';
     }
 
     /**

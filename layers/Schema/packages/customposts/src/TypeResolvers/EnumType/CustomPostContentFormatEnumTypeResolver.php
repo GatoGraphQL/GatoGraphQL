@@ -11,7 +11,7 @@ class CustomPostContentFormatEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'CustomPostContentFormat';
+        return 'CustomPostContentFormatEnum';
     }
     /**
      * @return string[]

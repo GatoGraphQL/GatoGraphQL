@@ -16,7 +16,7 @@ class QueryRelationEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'QueryRelation';
+        return 'QueryRelationEnum';
     }
 
     public function getTypeDescription(): string

@@ -11,7 +11,7 @@ class CustomPostStatusEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'CustomPostStatus';
+        return 'CustomPostStatusEnum';
     }
 
     /**

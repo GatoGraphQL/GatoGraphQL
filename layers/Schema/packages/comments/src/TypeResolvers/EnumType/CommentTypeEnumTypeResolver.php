@@ -11,7 +11,7 @@ class CommentTypeEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'CommentType';
+        return 'CommentTypeEnum';
     }
 
     /**
