@@ -204,6 +204,13 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
      */
     protected function reformatExtensions(array $extensions): array
     {
+        // Recursive call for nested elements
+        foreach (($extensions[Tokens::NESTED] ?? []) as $index => $nested) {
+            if (!isset($nested[Tokens::EXTENSIONS])) {
+                continue;
+            }
+            $extensions[Tokens::NESTED][$index][Tokens::EXTENSIONS] = $this->reformatExtensions($nested[Tokens::EXTENSIONS]);
+        }
         return $extensions;
     }
 
