@@ -58,12 +58,12 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     }
 
     // /**
-    //  * Only use this fieldResolver when parameter `ofTypes` is provided.
+    //  * Only use this fieldResolver when parameter `ofKinds` is provided.
     //  * Otherwise, use the default implementation
     //  */
     // public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool
     // {
-    //     return $fieldName == 'directives' && isset($fieldArgs['ofTypes']);
+    //     return $fieldName == 'directives' && isset($fieldArgs['ofKinds']);
     // }
 
     // public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
@@ -78,7 +78,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     {
         return match ($fieldName) {
             'directives' => [
-                'ofTypes' => $this->getDirectiveTypeEnumTypeResolver(),
+                'ofKinds' => $this->getDirectiveTypeEnumTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -87,7 +87,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['directives' => 'ofTypes'] => $this->getTranslationAPI()->__('Include only directives of provided types', 'graphql-api'),
+            ['directives' => 'ofKinds'] => $this->getTranslationAPI()->__('Include only directives of provided types', 'graphql-api'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -95,7 +95,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['directives' => 'ofTypes'] => SchemaTypeModifiers::IS_ARRAY,
+            ['directives' => 'ofKinds'] => SchemaTypeModifiers::IS_ARRAY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -120,10 +120,10 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
         switch ($fieldName) {
             case 'directives':
                 $directiveIDs = $schema->getDirectiveIDs();
-                if ($ofTypes = $fieldArgs['ofTypes'] ?? null) {
+                if ($ofKinds = $fieldArgs['ofKinds'] ?? null) {
                     $ofTypeDirectiveResolvers = array_filter(
                         $this->getDirectiveRegistry()->getDirectiveResolvers(),
-                        fn (DirectiveResolverInterface $directiveResolver) => in_array($directiveResolver->getDirectiveType(), $ofTypes)
+                        fn (DirectiveResolverInterface $directiveResolver) => in_array($directiveResolver->getDirectiveType(), $ofKinds)
                     );
                     // Calculate the directive IDs
                     $ofTypeDirectiveIDs = array_map(
