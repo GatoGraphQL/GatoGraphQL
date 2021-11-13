@@ -46,14 +46,14 @@ class DirectiveSchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     public function getFieldNamesToResolve(): array
     {
         return [
-            'type',
+            'kind',
         ];
     }
 
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'type' => SchemaTypeModifiers::NON_NULLABLE,
+            'kind' => SchemaTypeModifiers::NON_NULLABLE,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -61,7 +61,7 @@ class DirectiveSchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'type' => $this->getTranslationAPI()->__('The directive type (custom property)', 'graphql-server'),
+            'kind' => $this->getTranslationAPI()->__('The directive type (custom property)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -84,7 +84,7 @@ class DirectiveSchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         /** @var Directive */
         $directive = $object;
         return match ($fieldName) {
-            'type' => ($directive->getExtensions())[SchemaDefinition::DIRECTIVE_TYPE],
+            'kind' => ($directive->getExtensions())[SchemaDefinition::DIRECTIVE_TYPE],
             default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options),
         };
     }
@@ -92,7 +92,7 @@ class DirectiveSchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'type' => $this->getDirectiveTypeEnumTypeResolver(),
+            'kind' => $this->getDirectiveTypeEnumTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
