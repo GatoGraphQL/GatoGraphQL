@@ -37,7 +37,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
      * Change properties for GraphQL.
      *
      * Rename the fields to the most appropriate name:
-     * 
+     *
      *   - field
      *   - directive
      *   - fields <= baseline
@@ -69,10 +69,10 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     }
     /**
      * Convert the argumentPath from array to string.
-     * 
+     *
      * The field or directive argument name is appended ":", and input fields
      * are separated with ".":
-     * 
+     *
      *   ['filter'] => 'filter:'
      *   ['filter', 'dateQuery'] => 'filter:dateQuery
      *   ['filter', 'dateQuery', 'relation'] => 'filter:dateQuery.relation
@@ -93,7 +93,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
                     $fieldOrDirectiveName,
                     implode('.', $extensions[Tokens::ARGUMENT_PATH])
                 );
-            }    
+            }
         }
         return $extensions;
     }

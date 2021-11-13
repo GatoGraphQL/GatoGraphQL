@@ -316,7 +316,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         // If there was any error, return it
         if ($errors) {
             return count($errors) === 1 ?
-                $errors[0]    
+                $errors[0]
                 : $this->getError(
                     sprintf(
                         $this->getTranslationAPI()->__('Casting input object of type \'%s\' produced errors', 'component-model'),
