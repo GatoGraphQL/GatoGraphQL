@@ -17,7 +17,7 @@ import {
 	setCacheControlLists,
 } from './action-creators';
 
-import { DIRECTIVE_TYPES } from '../constants/directive-types'
+import { DIRECTIVE_TYPES } from '../constants/directive-kinds'
 
 /**
  * GraphQL query to fetch the list of types and their fields from the GraphQL schema
