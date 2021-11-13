@@ -961,7 +961,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $errorFieldOrDirective = $errorData[ErrorDataTokens::FIELD_NAME] ?? null;
                     }
                     $errorFieldOrDirective = $errorFieldOrDirective ?? $fieldOrDirectiveOutputKey;
-                    $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$errorFieldOrDirective], [$directiveArgName]);
+                    $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$errorFieldOrDirective], $directiveArgName);
                     $fieldOrDirectiveArgs[$directiveArgName] = null;
                     continue;
                 }
@@ -1476,7 +1476,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     );
                 }
                 // Either treat it as an error or a warning
-                $schemaWarningOrError = $this->getErrorService()->getErrorOutput($directiveArgError, [$fieldDirective]);
+                $schemaWarningOrError = $this->getErrorService()->getErrorOutput($directiveArgError, [$fieldDirective], $failedCastingDirectiveArgName);
                 if ($treatTypeCoercingFailuresAsErrors) {
                     $schemaErrors[] = $schemaWarningOrError;
                 } else {
@@ -1576,7 +1576,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     );
                 }
                 // Either treat it as an error or a warning
-                $schemaWarningOrError = $this->getErrorService()->getErrorOutput($fieldArgError, [$field]);
+                $schemaWarningOrError = $this->getErrorService()->getErrorOutput($fieldArgError, [$field], $failedCastingFieldArgName);
                 if ($treatTypeCoercingFailuresAsErrors) {
                     $schemaErrors[] = $schemaWarningOrError;
                 } else {
