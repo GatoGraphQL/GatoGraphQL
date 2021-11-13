@@ -961,7 +961,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $errorFieldOrDirective = $errorData[ErrorDataTokens::FIELD_NAME] ?? null;
                     }
                     $errorFieldOrDirective = $errorFieldOrDirective ?? $fieldOrDirectiveOutputKey;
-                    $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$errorFieldOrDirective]);
+                    $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$errorFieldOrDirective], [$directiveArgName]);
                     $fieldOrDirectiveArgs[$directiveArgName] = null;
                     continue;
                 }
