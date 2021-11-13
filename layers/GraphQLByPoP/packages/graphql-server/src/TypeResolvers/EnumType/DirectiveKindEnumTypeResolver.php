@@ -33,7 +33,7 @@ class DirectiveKindEnumTypeResolver extends AbstractEnumTypeResolver
     }
 
     /**
-     * Convert the DirectiveType enum from UPPERCASE as input, to lowercase
+     * Convert the DirectiveKind enum from UPPERCASE as input, to lowercase
      * as defined in DirectiveKinds.php
      */
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object

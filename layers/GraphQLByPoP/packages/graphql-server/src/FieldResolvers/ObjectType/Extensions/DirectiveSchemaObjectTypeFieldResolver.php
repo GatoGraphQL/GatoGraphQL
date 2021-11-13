@@ -16,16 +16,16 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class DirectiveSchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?DirectiveKindEnumTypeResolver $directiveTypeEnumTypeResolver = null;
+    private ?DirectiveKindEnumTypeResolver $directiveKindEnumTypeResolver = null;
     private ?DirectiveRegistryInterface $directiveRegistry = null;
 
-    final public function setDirectiveKindEnumTypeResolver(DirectiveKindEnumTypeResolver $directiveTypeEnumTypeResolver): void
+    final public function setDirectiveKindEnumTypeResolver(DirectiveKindEnumTypeResolver $directiveKindEnumTypeResolver): void
     {
-        $this->directiveTypeEnumTypeResolver = $directiveTypeEnumTypeResolver;
+        $this->directiveKindEnumTypeResolver = $directiveKindEnumTypeResolver;
     }
     final protected function getDirectiveKindEnumTypeResolver(): DirectiveKindEnumTypeResolver
     {
-        return $this->directiveTypeEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveKindEnumTypeResolver::class);
+        return $this->directiveKindEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveKindEnumTypeResolver::class);
     }
     final public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
     {
