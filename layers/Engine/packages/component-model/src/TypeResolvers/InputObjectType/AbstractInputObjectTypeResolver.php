@@ -178,7 +178,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                         $this->getMaybeNamespacedTypeName()
                     ),
                     [
-                        Tokens::ARG_PATH => [$inputFieldName],
+                        Tokens::ARGUMENT_PATH => [$inputFieldName],
                     ]
                 );
                 continue;
@@ -235,7 +235,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                     $this->getErrorCode(),
                     $maybeErrorMessage,
                     [
-                        Tokens::ARG_PATH => [$inputFieldName],
+                        Tokens::ARGUMENT_PATH => [$inputFieldName],
                     ]
                 );
                 continue;
@@ -276,7 +276,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                         $inputFieldTypeResolver->getMaybeNamespacedTypeName()
                     ),
                     [
-                        Tokens::ARG_PATH => [$inputFieldName],
+                        Tokens::ARGUMENT_PATH => [$inputFieldName],
                     ],
                     $maybeCoercedInputFieldValueErrors
                 );
@@ -307,7 +307,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                     $this->getMaybeNamespacedTypeName()
                 ),
                 [
-                    Tokens::ARG_PATH => [$inputFieldName],
+                    Tokens::ARGUMENT_PATH => [$inputFieldName],
                 ]
             );
             continue;
@@ -346,9 +346,9 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     protected function prependArgPathToError(Error &$error, array $argPath): void
     {
         $errorData = $error->getData();
-        $error->addData(Tokens::ARG_PATH, array_merge(
+        $error->addData(Tokens::ARGUMENT_PATH, array_merge(
             $argPath,
-            $errorData[Tokens::ARG_PATH] ?? []
+            $errorData[Tokens::ARGUMENT_PATH] ?? []
         ));
     }
 
