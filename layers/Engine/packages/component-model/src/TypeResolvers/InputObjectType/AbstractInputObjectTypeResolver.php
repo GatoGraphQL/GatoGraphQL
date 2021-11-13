@@ -176,7 +176,10 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                         $this->getTranslationAPI()->__('There is no input field \'%s\' in input object \'%s\''),
                         $inputFieldName,
                         $this->getMaybeNamespacedTypeName()
-                    )
+                    ),
+                    [
+                        Tokens::ARG_PATH => [$inputFieldName],
+                    ]
                 );
                 continue;
             }
@@ -230,7 +233,10 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             if ($maybeErrorMessage !== null) {
                 $errors[] = new Error(
                     $this->getErrorCode(),
-                    $maybeErrorMessage
+                    $maybeErrorMessage,
+                    [
+                        Tokens::ARG_PATH => [$inputFieldName],
+                    ]
                 );
                 continue;
             }
@@ -299,7 +305,10 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                     $this->getTranslationAPI()->__('Mandatory input field \'%s\' in input object \'%s\' has not been provided'),
                     $inputFieldName,
                     $this->getMaybeNamespacedTypeName()
-                )
+                ),
+                [
+                    Tokens::ARG_PATH => [$inputFieldName],
+                ]
             );
             continue;
         }
