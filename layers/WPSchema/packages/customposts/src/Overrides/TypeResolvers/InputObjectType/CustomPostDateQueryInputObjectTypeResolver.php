@@ -8,7 +8,7 @@ use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostDateQueryInputObjectTypeResolver as UpstreamCustomPostDateQueryInputObjectTypeResolver;
-use PoPWPSchema\CustomPosts\TypeResolvers\EnumType\QueryRelationEnumTypeResolver;
+use PoPWPSchema\CustomPosts\TypeResolvers\EnumType\RelationEnumTypeResolver;
 use stdClass;
 
 class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQueryInputObjectTypeResolver
@@ -16,7 +16,7 @@ class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQ
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?QueryRelationEnumTypeResolver $queryRelationEnumTypeResolver = null;
+    private ?RelationEnumTypeResolver $queryRelationEnumTypeResolver = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -42,13 +42,13 @@ class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQ
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setQueryRelationEnumTypeResolver(QueryRelationEnumTypeResolver $queryRelationEnumTypeResolver): void
+    final public function setRelationEnumTypeResolver(RelationEnumTypeResolver $queryRelationEnumTypeResolver): void
     {
         $this->queryRelationEnumTypeResolver = $queryRelationEnumTypeResolver;
     }
-    final protected function getQueryRelationEnumTypeResolver(): QueryRelationEnumTypeResolver
+    final protected function getRelationEnumTypeResolver(): RelationEnumTypeResolver
     {
-        return $this->queryRelationEnumTypeResolver ??= $this->instanceManager->getInstance(QueryRelationEnumTypeResolver::class);
+        return $this->queryRelationEnumTypeResolver ??= $this->instanceManager->getInstance(RelationEnumTypeResolver::class);
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -66,7 +66,7 @@ class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQ
                 'second' => $this->getIntScalarTypeResolver(),
                 'compare' => $this->getStringScalarTypeResolver(),
                 'column' => $this->getStringScalarTypeResolver(),
-                'relation' => $this->getQueryRelationEnumTypeResolver(),
+                'relation' => $this->getRelationEnumTypeResolver(),
             ]
         );
     }

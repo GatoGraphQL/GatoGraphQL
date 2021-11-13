@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace PoPWPSchema\CustomPosts\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
-use PoPWPSchema\CustomPosts\Constants\QueryRelations;
+use PoPWPSchema\CustomPosts\Constants\Relation;
 
 /**
  * Query "relation" arg, as explained here:
  *
  * @see https://developer.wordpress.org/reference/classes/wp_query/#custom-field-post-meta-parameters
  */
-class QueryRelationEnumTypeResolver extends AbstractEnumTypeResolver
+class RelationEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'QueryRelationEnum';
+        return 'RelationEnum';
     }
 
     public function getTypeDescription(): string
@@ -30,16 +30,16 @@ class QueryRelationEnumTypeResolver extends AbstractEnumTypeResolver
     public function getEnumValues(): array
     {
         return [
-            QueryRelations::AND,
-            QueryRelations::OR,
+            Relation::AND,
+            Relation::OR,
         ];
     }
 
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            QueryRelations::AND => $this->getTranslationAPI()->__('`AND` relation', 'schema-commons'),
-            QueryRelations::OR => $this->getTranslationAPI()->__('`OR` relation', 'schema-commons'),
+            Relation::AND => $this->getTranslationAPI()->__('`AND` relation', 'schema-commons'),
+            Relation::OR => $this->getTranslationAPI()->__('`OR` relation', 'schema-commons'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }

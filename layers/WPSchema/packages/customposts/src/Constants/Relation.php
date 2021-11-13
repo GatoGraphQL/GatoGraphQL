@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CustomPosts\Constants;
 
-class QueryRelations
+class Relation
 {
     public const OR = 'OR';
     public const AND = 'AND';
