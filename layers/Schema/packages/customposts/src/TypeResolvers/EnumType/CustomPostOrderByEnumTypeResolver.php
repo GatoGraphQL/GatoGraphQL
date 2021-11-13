@@ -11,7 +11,7 @@ class CustomPostOrderByEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'CustomPostOrderBy';
+        return 'CustomPostOrderByEnum';
     }
 
     /**

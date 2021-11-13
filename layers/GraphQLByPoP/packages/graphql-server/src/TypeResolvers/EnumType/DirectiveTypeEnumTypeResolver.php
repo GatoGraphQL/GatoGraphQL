@@ -12,7 +12,7 @@ class DirectiveTypeEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'DirectiveType';
+        return 'DirectiveTypeEnum';
     }
     /**
      * @return string[]
