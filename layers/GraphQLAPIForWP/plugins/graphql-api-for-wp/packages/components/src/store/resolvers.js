@@ -17,7 +17,7 @@ import {
 	setCacheControlLists,
 } from './action-creators';
 
-import { DIRECTIVE_TYPE_QUERY } from '../constants/directive-types'
+import { DIRECTIVE_TYPES } from '../constants/directive-types'
 
 /**
  * GraphQL query to fetch the list of types and their fields from the GraphQL schema
@@ -45,7 +45,7 @@ export const FETCH_TYPE_FIELDS_GRAPHQL_QUERY = `
 export const FETCH_DIRECTIVES_GRAPHQL_QUERY = `
 	query GetDirectives {
 		__schema {
-			directives(ofTypes: [ "${ DIRECTIVE_TYPE_QUERY }" ]) {
+			directives(ofTypes: [ "${ DIRECTIVE_TYPES.QUERY }" ]) {
 				name
 			}
 		}

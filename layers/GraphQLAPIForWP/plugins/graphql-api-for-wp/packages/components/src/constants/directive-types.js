@@ -1,12 +1,9 @@
 /**
- * Same value as in PoP\ComponentModel\Directives\DirectiveTypes::SCHEMA,
+ * Same value as in PoP\ComponentModel\Directives\DirectiveTypes,
  * but converted to uppercase as done by PoP\ComponentModel\TypeResolvers\EnumType\DirectiveTypeEnum
  */
-const DIRECTIVE_TYPE_SCHEMA = 'SCHEMA';
-/**
- * Same value as in PoP\ComponentModel\Directives\DirectiveTypes::QUERY,
- * but converted to uppercase as done by PoP\ComponentModel\TypeResolvers\EnumType\DirectiveTypeEnum
- */
-const DIRECTIVE_TYPE_QUERY = 'QUERY';
+const DIRECTIVE_TYPES = {
+    QUERY: 'QUERY',
+}
 
-export { DIRECTIVE_TYPE_SCHEMA, DIRECTIVE_TYPE_QUERY };
+export { DIRECTIVE_TYPES };
