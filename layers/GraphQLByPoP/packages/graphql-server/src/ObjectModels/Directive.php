@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
-use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\State\ApplicationState;
 
@@ -33,7 +33,7 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
     public function getLocations(): array
     {
         $directives = [];
-        $directiveType = $this->schemaDefinition[SchemaDefinition::DIRECTIVE_TYPE];
+        $directiveKind = $this->schemaDefinition[SchemaDefinition::DIRECTIVE_KIND];
         $vars = ApplicationState::getVars();
         /**
          * There are 3 cases for adding the "Query" type locations:
@@ -42,9 +42,9 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
          * 3. When the type is "Indexing" and composable directives are enabled
          */
         if (
-            $directiveType === DirectiveTypes::QUERY
-            || ($directiveType === DirectiveTypes::SCHEMA && isset($vars['edit-schema']) && $vars['edit-schema'])
-            || ($directiveType === DirectiveTypes::INDEXING && ComponentConfiguration::enableComposableDirectives())
+            $directiveKind === DirectiveKinds::QUERY
+            || ($directiveKind === DirectiveKinds::SCHEMA && isset($vars['edit-schema']) && $vars['edit-schema'])
+            || ($directiveKind === DirectiveKinds::INDEXING && ComponentConfiguration::enableComposableDirectives())
         ) {
             // Same DirectiveLocations as used by "@skip": https://graphql.github.io/graphql-spec/draft/#sec--skip
             $directives = array_merge(
@@ -56,7 +56,7 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
                 ]
             );
         }
-        if ($directiveType === DirectiveTypes::SCHEMA) {
+        if ($directiveKind === DirectiveKinds::SCHEMA) {
             $directives = array_merge(
                 $directives,
                 [
@@ -78,7 +78,7 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
         if ($version = $this->schemaDefinition[SchemaDefinition::VERSION] ?? null) {
             $extensions[SchemaDefinition::VERSION] = $version;
         }
-        $extensions[SchemaDefinition::DIRECTIVE_TYPE] = $this->schemaDefinition[SchemaDefinition::DIRECTIVE_TYPE];
+        $extensions[SchemaDefinition::DIRECTIVE_KIND] = $this->schemaDefinition[SchemaDefinition::DIRECTIVE_KIND];
         return $extensions;
     }
 }

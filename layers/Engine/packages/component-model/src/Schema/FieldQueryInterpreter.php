@@ -880,7 +880,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $fieldName,
             $fieldArgs ?? [],
             $objectErrors,
-            $objectWarnings
+            $objectWarnings,
+            $objectDeprecations
         ];
     }
 
@@ -929,7 +930,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $directiveName,
             $directiveArgs,
             $objectErrors,
-            $objectWarnings
+            $objectWarnings,
+            $objectDeprecations,
+            $objectDeprecations
         ];
     }
 

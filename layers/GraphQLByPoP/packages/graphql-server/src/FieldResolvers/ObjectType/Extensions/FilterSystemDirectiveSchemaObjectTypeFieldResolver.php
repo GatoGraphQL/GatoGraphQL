@@ -7,26 +7,27 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\Extensions;
 use GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\SchemaObjectTypeFieldResolver;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\DirectiveTypeEnumTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\DirectiveKindEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
 use PoP\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTypeFieldResolver
 {
-    private ?DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver = null;
+    private ?DirectiveKindEnumTypeResolver $directiveKindEnumTypeResolver = null;
     private ?DirectiveRegistryInterface $directiveRegistry = null;
 
-    final public function setDirectiveTypeEnumTypeResolver(DirectiveTypeEnumTypeResolver $directiveTypeEnumTypeResolver): void
+    final public function setDirectiveKindEnumTypeResolver(DirectiveKindEnumTypeResolver $directiveKindEnumTypeResolver): void
     {
-        $this->directiveTypeEnumTypeResolver = $directiveTypeEnumTypeResolver;
+        $this->directiveKindEnumTypeResolver = $directiveKindEnumTypeResolver;
     }
-    final protected function getDirectiveTypeEnumTypeResolver(): DirectiveTypeEnumTypeResolver
+    final protected function getDirectiveKindEnumTypeResolver(): DirectiveKindEnumTypeResolver
     {
-        return $this->directiveTypeEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveTypeEnumTypeResolver::class);
+        return $this->directiveKindEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveKindEnumTypeResolver::class);
     }
     final public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
     {
@@ -58,12 +59,12 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     }
 
     // /**
-    //  * Only use this fieldResolver when parameter `ofTypes` is provided.
+    //  * Only use this fieldResolver when parameter `ofKinds` is provided.
     //  * Otherwise, use the default implementation
     //  */
     // public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool
     // {
-    //     return $fieldName == 'directives' && isset($fieldArgs['ofTypes']);
+    //     return $fieldName == 'directives' && isset($fieldArgs['ofKinds']);
     // }
 
     // public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
@@ -78,7 +79,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     {
         return match ($fieldName) {
             'directives' => [
-                'ofTypes' => $this->getDirectiveTypeEnumTypeResolver(),
+                'ofKinds' => $this->getDirectiveKindEnumTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -87,7 +88,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['directives' => 'ofTypes'] => $this->getTranslationAPI()->__('Include only directives of provided types', 'graphql-api'),
+            ['directives' => 'ofKinds'] => $this->getTranslationAPI()->__('Include only directives of provided types', 'graphql-api'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -95,8 +96,16 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['directives' => 'ofTypes'] => SchemaTypeModifiers::IS_ARRAY,
+            ['directives' => 'ofKinds'] => SchemaTypeModifiers::IS_ARRAY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['directives' => 'ofKinds'] => [DirectiveKinds::QUERY],
+            default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
@@ -120,10 +129,10 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
         switch ($fieldName) {
             case 'directives':
                 $directiveIDs = $schema->getDirectiveIDs();
-                if ($ofTypes = $fieldArgs['ofTypes'] ?? null) {
+                if ($ofKinds = $fieldArgs['ofKinds'] ?? null) {
                     $ofTypeDirectiveResolvers = array_filter(
                         $this->getDirectiveRegistry()->getDirectiveResolvers(),
-                        fn (DirectiveResolverInterface $directiveResolver) => in_array($directiveResolver->getDirectiveType(), $ofTypes)
+                        fn (DirectiveResolverInterface $directiveResolver) => in_array($directiveResolver->getDirectiveKind(), $ofKinds)
                     );
                     // Calculate the directive IDs
                     $ofTypeDirectiveIDs = array_map(

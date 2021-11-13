@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
-use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\ErrorHandling\ErrorServiceInterface;
 use PoP\ComponentModel\Feedback\Tokens;
@@ -35,9 +35,9 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     /**
      * This is a system directive
      */
-    public function getDirectiveType(): string
+    public function getDirectiveKind(): string
     {
-        return DirectiveTypes::SYSTEM;
+        return DirectiveKinds::SYSTEM;
     }
 
     /**

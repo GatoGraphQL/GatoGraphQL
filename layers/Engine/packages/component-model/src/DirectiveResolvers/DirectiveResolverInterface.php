@@ -35,7 +35,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * depending on one case or the other, might be exposed to the user.
      * By default, use the Query type
      */
-    public function getDirectiveType(): string;
+    public function getDirectiveKind(): string;
     /**
      * Extract and validate the directive arguments
      */

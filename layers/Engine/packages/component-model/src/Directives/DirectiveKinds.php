@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Directives;
 
-class DirectiveTypes
+class DirectiveKinds
 {
     public const SCHEMA = 'schema';
     public const QUERY = 'query';

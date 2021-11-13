@@ -201,10 +201,10 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function getDirectiveType(): string
+    public function getDirectiveKind(): string
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getDirectiveType();
+        return $aliasedDirectiveResolver->getDirectiveKind();
     }
 
     /**

@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType;
 
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
-use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 use stdClass;
 
-class DirectiveTypeEnumTypeResolver extends AbstractEnumTypeResolver
+class DirectiveKindEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'DirectiveTypeEnum';
+        return 'DirectiveKindEnum';
     }
 
     /**
@@ -23,18 +23,18 @@ class DirectiveTypeEnumTypeResolver extends AbstractEnumTypeResolver
     {
         return array_merge(
             [
-                DirectiveTypes::QUERY,
-                DirectiveTypes::SCHEMA,
+                DirectiveKinds::QUERY,
+                DirectiveKinds::SCHEMA,
             ],
             ComponentConfiguration::enableComposableDirectives() ? [
-                DirectiveTypes::INDEXING,
+                DirectiveKinds::INDEXING,
             ] : [],
         );
     }
 
     /**
-     * Convert the DirectiveType enum from UPPERCASE as input, to lowercase
-     * as defined in DirectiveTypes.php
+     * Convert the DirectiveKind enum from UPPERCASE as input, to lowercase
+     * as defined in DirectiveKinds.php
      */
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
     {

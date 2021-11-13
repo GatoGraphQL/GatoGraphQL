@@ -9,7 +9,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
-use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -152,9 +152,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * depending on one case or the other, might be exposed to the user.
      * By default, use the Query type
      */
-    public function getDirectiveType(): string
+    public function getDirectiveKind(): string
     {
-        return DirectiveTypes::QUERY;
+        return DirectiveKinds::QUERY;
     }
 
     /**
@@ -597,7 +597,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     public function isRepeatable(): bool
     {
-        return !($this->getDirectiveType() == DirectiveTypes::SYSTEM || $this->getDirectiveType() == DirectiveTypes::SCHEMA);
+        return !($this->getDirectiveKind() == DirectiveKinds::SYSTEM || $this->getDirectiveKind() == DirectiveKinds::SCHEMA);
     }
 
     /**
@@ -1210,7 +1210,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $directiveName = $this->getDirectiveName();
             $schemaDefinition = [
                 SchemaDefinition::NAME => $directiveName,
-                SchemaDefinition::DIRECTIVE_TYPE => $this->getDirectiveType(),
+                SchemaDefinition::DIRECTIVE_KIND => $this->getDirectiveKind(),
                 SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
                 SchemaDefinition::DIRECTIVE_IS_REPEATABLE => $this->isRepeatable(),
                 SchemaDefinition::DIRECTIVE_IS_GLOBAL => $this->isGlobal($relationalTypeResolver),

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\API\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
-use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -49,9 +49,9 @@ class CopyRelationalResultsDirectiveResolver extends AbstractGlobalDirectiveReso
     /**
      * This is a "Scripting" type directive
      */
-    public function getDirectiveType(): string
+    public function getDirectiveKind(): string
     {
-        return DirectiveTypes::SCRIPTING;
+        return DirectiveKinds::SCRIPTING;
     }
 
     /**

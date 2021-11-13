@@ -17,7 +17,7 @@ use PoP\API\Schema\SchemaDefinitionHelpers as APISchemaDefinitionHelpers;
 use PoP\API\Schema\SchemaDefinitionServiceInterface;
 use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
-use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
@@ -239,16 +239,16 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             }
         }
         // Remove all directives of types other than "Query", "Schema" and, maybe "Indexing"
-        $supportedDirectiveTypes = [
-            DirectiveTypes::SCHEMA,
-            DirectiveTypes::QUERY,
+        $supportedDirectiveKinds = [
+            DirectiveKinds::SCHEMA,
+            DirectiveKinds::QUERY,
         ];
         if ($enableComposableDirectives) {
-            $supportedDirectiveTypes [] = DirectiveTypes::INDEXING;
+            $supportedDirectiveKinds [] = DirectiveKinds::INDEXING;
         }
         $directivesNamesToRemove = [];
         foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_DIRECTIVES]) as $directiveName) {
-            if (!in_array($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_DIRECTIVES][$directiveName][SchemaDefinition::DIRECTIVE_TYPE], $supportedDirectiveTypes)) {
+            if (!in_array($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_DIRECTIVES][$directiveName][SchemaDefinition::DIRECTIVE_KIND], $supportedDirectiveKinds)) {
                 $directivesNamesToRemove[] = $directiveName;
             }
         }
@@ -309,7 +309,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $vars = ApplicationState::getVars();
         if (isset($vars['edit-schema']) && $vars['edit-schema']) {
             $directiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinitionForGraphQL, $directiveSchemaDefinitionPath);
-            if ($directiveSchemaDefinition[SchemaDefinition::DIRECTIVE_TYPE] == DirectiveTypes::SCHEMA) {
+            if ($directiveSchemaDefinition[SchemaDefinition::DIRECTIVE_KIND] === DirectiveKinds::SCHEMA) {
                 $directiveSchemaDefinition[SchemaDefinition::DESCRIPTION] = sprintf(
                     $this->getTranslationAPI()->__('%s %s', 'graphql-server'),
                     sprintf(

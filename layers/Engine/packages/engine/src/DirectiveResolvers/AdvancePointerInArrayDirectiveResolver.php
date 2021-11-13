@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\DirectiveResolvers;
 
 use Exception;
-use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -30,9 +30,9 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
         return 'advancePointerInArray';
     }
 
-    public function getDirectiveType(): string
+    public function getDirectiveKind(): string
     {
-        return DirectiveTypes::INDEXING;
+        return DirectiveKinds::INDEXING;
     }
 
     /**
