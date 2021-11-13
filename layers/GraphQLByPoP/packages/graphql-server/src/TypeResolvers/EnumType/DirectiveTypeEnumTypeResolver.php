@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType;
 
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
 use PoP\ComponentModel\Directives\DirectiveTypes;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 use stdClass;
 
@@ -16,7 +15,7 @@ class DirectiveTypeEnumTypeResolver extends AbstractEnumTypeResolver
     {
         return 'DirectiveTypeEnum';
     }
-    
+
     /**
      * @return string[]
      */
@@ -39,11 +38,7 @@ class DirectiveTypeEnumTypeResolver extends AbstractEnumTypeResolver
      */
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
     {
-        $coercedInputValue = parent::coerceValue($inputValue);
-        if (GeneralUtils::isError($coercedInputValue)) {
-            return $coercedInputValue;
-        }
-        return strtolower($inputValue);
+        return parent::coerceValue(strtolower($inputValue));
     }
 
     /**
