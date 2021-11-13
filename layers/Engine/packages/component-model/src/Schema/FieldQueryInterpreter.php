@@ -498,7 +498,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     $errorMessage = sprintf(
                         $this->getTranslationAPI()->__('On %1$s \'%2$s\', argument with name \'%3$s\' has not been documented in the schema', 'pop-component-model'),
                         $resolverType == ResolverTypes::FIELD ? $this->getTranslationAPI()->__('field', 'component-model') : $this->getTranslationAPI()->__('directive', 'component-model'),
-                        $fieldOrDirective,
+                        $this->getFieldName($fieldOrDirective),
                         $fieldOrDirectiveArgName
                     );
                     if ($treatUndefinedFieldOrDirectiveArgsAsErrors) {
