@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Resolvers\TypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\InputCoercingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -249,29 +250,30 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $inputFieldIsArrayOfArraysType,
             );
             if ($maybeCoercedInputFieldValueErrors !== []) {
-                $castingError = count($maybeCoercedInputFieldValueErrors) === 1 ?
-                    new Error(
-                        $maybeCoercedInputFieldValueErrors[0]->getCode(),
-                        sprintf(
-                            '%s: %s',
-                            // $this->getMaybeNamespacedTypeName(),
-                            $inputFieldName,
-                            $maybeCoercedInputFieldValueErrors[0]->getMessage()
-                        ),
-                        $maybeCoercedInputFieldValueErrors[0]->getData(),
-                        $maybeCoercedInputFieldValueErrors[0]->getNestedErrors()
-                    )
-                    : new Error(
-                        $this->getErrorCode(),
-                        sprintf(
-                            $this->getTranslationAPI()->__('Casting input field \'%s\' of type \'%s\' produced errors', 'component-model'),
-                            $inputFieldName,
-                            $inputFieldTypeResolver->getMaybeNamespacedTypeName()
-                        ),
-                        null,
-                        $maybeCoercedInputFieldValueErrors
-                    );
-                $errors[] = $castingError;
+                // Prepend the arg path to the error(s)
+                foreach ($maybeCoercedInputFieldValueErrors as $error) {
+                    $this->prependArgPathToError($error, [$inputFieldName]);
+                }
+
+                // Only 1 Error: bubble it up directly
+                if (count($maybeCoercedInputFieldValueErrors) === 1) {
+                    $errors[] = $maybeCoercedInputFieldValueErrors[0];
+                    continue;
+                }
+
+                // Many nested errors: Create a new Error with all of them
+                $errors[] = new Error(
+                    $this->getErrorCode(),
+                    sprintf(
+                        $this->getTranslationAPI()->__('Casting input field \'%s\' of type \'%s\' produced errors', 'component-model'),
+                        $inputFieldName,
+                        $inputFieldTypeResolver->getMaybeNamespacedTypeName()
+                    ),
+                    [
+                        Tokens::ARG_PATH => [$inputFieldName],
+                    ],
+                    $maybeCoercedInputFieldValueErrors
+                );
                 continue;
             }
 
@@ -327,6 +329,18 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
         // Add all missing properties which have a default value
         return $coercedInputValue;
+    }
+
+    /**
+     * @param string[] $argPath
+     */
+    protected function prependArgPathToError(Error &$error, array $argPath): void
+    {
+        $errorData = $error->getData();
+        $error->addData(Tokens::ARG_PATH, array_merge(
+            $argPath,
+            $errorData[Tokens::ARG_PATH] ?? []
+        ));
     }
 
     /**

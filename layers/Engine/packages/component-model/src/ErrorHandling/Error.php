@@ -62,6 +62,19 @@ class Error
     }
 
     /**
+     * @param array<string, mixed> $data
+     */
+    public function setData(array $data): void
+    {
+        $this->data = $data;
+    }
+
+    public function addData(string $key, mixed $value): void
+    {
+        $this->data[$key] = $value;
+    }
+
+    /**
      * @return Error[]
      */
     public function getNestedErrors(): array
