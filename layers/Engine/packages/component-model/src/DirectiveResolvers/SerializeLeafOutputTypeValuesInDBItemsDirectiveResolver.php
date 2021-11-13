@@ -107,11 +107,11 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
                 $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
                 $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
                 // Serialize the scalar/enum value stored in $dbItems
-                $dbItems[(string)$id][$fieldOutputKey] = $this->serializeLeafOutputTypeValue(
+                $dbItems[(string)$id][$fieldOutputKey] = $value === null ? $value : $this->serializeLeafOutputTypeValue(
+                    $value,
                     $fieldLeafOutputTypeResolver,
                     $fieldLeafOutputTypeIsArrayOfArrays,
                     $fieldLeafOutputTypeIsArray,
-                    $value
                 );
             }
         }
@@ -122,14 +122,11 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
      * The response type is the same as in the type's `serialize` method.
      */
     private function serializeLeafOutputTypeValue(
+        mixed $value,
         LeafOutputTypeResolverInterface $fieldLeafOutputTypeResolver,
         bool $fieldLeafOutputTypeIsArrayOfArrays,
         bool $fieldLeafOutputTypeIsArray,
-        mixed $value,
     ): string|int|float|bool|array {
-        if ($value === null) {
-            return null;
-        }
         /**
          * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
          * In particular, it does not need to validate if it is an array or not,
