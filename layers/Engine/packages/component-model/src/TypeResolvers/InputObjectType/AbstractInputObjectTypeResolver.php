@@ -249,16 +249,28 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $inputFieldIsArrayOfArraysType,
             );
             if ($maybeCoercedInputFieldValueErrors !== []) {
-                $castingError = new Error(
-                    $this->getErrorCode(),
-                    sprintf(
-                        $this->getTranslationAPI()->__('Casting input field \'%s\' of type \'%s\' produced errors', 'component-model'),
-                        $inputFieldName,
-                        $inputFieldTypeResolver->getMaybeNamespacedTypeName()
-                    ),
-                    null,
-                    $maybeCoercedInputFieldValueErrors
-                );
+                $castingError = count($maybeCoercedInputFieldValueErrors) === 1 ?
+                    new Error(
+                        $maybeCoercedInputFieldValueErrors[0]->getCode(),
+                        sprintf(
+                            '%s: %s',
+                            // $this->getMaybeNamespacedTypeName(),
+                            $inputFieldName,
+                            $maybeCoercedInputFieldValueErrors[0]->getMessage()
+                        ),
+                        $maybeCoercedInputFieldValueErrors[0]->getData(),
+                        $maybeCoercedInputFieldValueErrors[0]->getNestedErrors()
+                    )
+                    : new Error(
+                        $this->getErrorCode(),
+                        sprintf(
+                            $this->getTranslationAPI()->__('Casting input field \'%s\' of type \'%s\' produced errors', 'component-model'),
+                            $inputFieldName,
+                            $inputFieldTypeResolver->getMaybeNamespacedTypeName()
+                        ),
+                        null,
+                        $maybeCoercedInputFieldValueErrors
+                    );
                 $errors[] = $castingError;
                 continue;
             }
@@ -292,13 +304,25 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
         // If there was any error, return it
         if ($errors) {
-            return $this->getError(
-                sprintf(
-                    $this->getTranslationAPI()->__('Casting input object of type \'%s\' produced errors', 'component-model'),
-                    $this->getMaybeNamespacedTypeName()
-                ),
-                $errors
-            );
+            return count($errors) === 1 ?
+                $errors[0]    
+                // new Error(
+                //     $errors[0]->getCode(),
+                //     sprintf(
+                //         '(in \'%s\') %s',
+                //         $this->getMaybeNamespacedTypeName(),
+                //         $errors[0]->getMessage()
+                //     ),
+                //     $errors[0]->getData(),
+                //     $errors[0]->getNestedErrors()
+                // )
+                : $this->getError(
+                    sprintf(
+                        $this->getTranslationAPI()->__('Casting input object of type \'%s\' produced errors', 'component-model'),
+                        $this->getMaybeNamespacedTypeName()
+                    ),
+                    $errors
+                );
         }
 
         // Add all missing properties which have a default value
