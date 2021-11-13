@@ -38,7 +38,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      *
      * This function simply returns the same value always.
      */
-    final public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
     {
         $enumValues = $this->getConsolidatedEnumValues();
         if (!in_array($inputValue, $enumValues)) {
@@ -56,6 +56,14 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
             );
         }
         return $inputValue;
+    }
+
+    /**
+     * Return as is
+     */
+    public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array
+    {
+        return $scalarValue;
     }
 
     /**

@@ -6,8 +6,9 @@ namespace PoP\ComponentModel\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\LeafOutputTypeResolverInterface;
 
-interface EnumTypeResolverInterface extends ConcreteTypeResolverInterface, DeprecatableInputTypeResolverInterface
+interface EnumTypeResolverInterface extends ConcreteTypeResolverInterface, DeprecatableInputTypeResolverInterface, LeafOutputTypeResolverInterface
 {
     /**
      * The values in the enum
