@@ -2,8 +2,8 @@
  * Same value as in PoP\ComponentModel\Directives\DirectiveTypes,
  * but converted to uppercase as done by PoP\ComponentModel\TypeResolvers\EnumType\DirectiveTypeEnum
  */
-const DIRECTIVE_TYPES = {
+const DIRECTIVE_KINDS = {
     QUERY: 'QUERY',
 }
 
-export { DIRECTIVE_TYPES };
+export { DIRECTIVE_KINDS };
