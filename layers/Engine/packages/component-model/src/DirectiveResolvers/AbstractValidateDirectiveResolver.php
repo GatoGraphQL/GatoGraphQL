@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirectiveResolver
@@ -17,7 +17,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
      */
     public function getDirectiveType(): string
     {
-        return DirectiveTypes::SCHEMA;
+        return DirectiveKinds::SCHEMA;
     }
 
     /**

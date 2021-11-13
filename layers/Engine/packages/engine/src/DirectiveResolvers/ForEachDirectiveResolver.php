@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
-use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\ErrorHandling\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -33,7 +33,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItems
 
     public function getDirectiveType(): string
     {
-        return DirectiveTypes::INDEXING;
+        return DirectiveKinds::INDEXING;
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string

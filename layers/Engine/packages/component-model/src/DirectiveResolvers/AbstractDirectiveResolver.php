@@ -9,7 +9,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
-use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -154,7 +154,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     public function getDirectiveType(): string
     {
-        return DirectiveTypes::QUERY;
+        return DirectiveKinds::QUERY;
     }
 
     /**
@@ -597,7 +597,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     public function isRepeatable(): bool
     {
-        return !($this->getDirectiveType() == DirectiveTypes::SYSTEM || $this->getDirectiveType() == DirectiveTypes::SCHEMA);
+        return !($this->getDirectiveType() == DirectiveKinds::SYSTEM || $this->getDirectiveType() == DirectiveKinds::SCHEMA);
     }
 
     /**

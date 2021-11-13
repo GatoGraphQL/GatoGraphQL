@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
-use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -23,7 +23,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
      */
     public function getDirectiveType(): string
     {
-        return DirectiveTypes::SYSTEM;
+        return DirectiveKinds::SYSTEM;
     }
 
     /**

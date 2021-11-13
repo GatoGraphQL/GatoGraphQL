@@ -6,7 +6,7 @@ namespace PoP\Engine\DirectiveResolvers;
 
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
-use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
@@ -24,7 +24,7 @@ final class SetSelfAsExpressionDirectiveResolver extends AbstractGlobalDirective
      */
     public function getDirectiveType(): string
     {
-        return DirectiveTypes::SCRIPTING;
+        return DirectiveKinds::SCRIPTING;
     }
 
     /**

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
-use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\State\ApplicationState;
 
@@ -42,9 +42,9 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
          * 3. When the type is "Indexing" and composable directives are enabled
          */
         if (
-            $directiveType === DirectiveTypes::QUERY
-            || ($directiveType === DirectiveTypes::SCHEMA && isset($vars['edit-schema']) && $vars['edit-schema'])
-            || ($directiveType === DirectiveTypes::INDEXING && ComponentConfiguration::enableComposableDirectives())
+            $directiveType === DirectiveKinds::QUERY
+            || ($directiveType === DirectiveKinds::SCHEMA && isset($vars['edit-schema']) && $vars['edit-schema'])
+            || ($directiveType === DirectiveKinds::INDEXING && ComponentConfiguration::enableComposableDirectives())
         ) {
             // Same DirectiveLocations as used by "@skip": https://graphql.github.io/graphql-spec/draft/#sec--skip
             $directives = array_merge(
@@ -56,7 +56,7 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
                 ]
             );
         }
-        if ($directiveType === DirectiveTypes::SCHEMA) {
+        if ($directiveType === DirectiveKinds::SCHEMA) {
             $directives = array_merge(
                 $directives,
                 [

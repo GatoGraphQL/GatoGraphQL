@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\API\DirectiveResolvers;
 
-use PoP\ComponentModel\Directives\DirectiveTypes;
+use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class RenamePropertyDirectiveResolver extends DuplicatePropertyDirectiveResolver
@@ -19,7 +19,7 @@ class RenamePropertyDirectiveResolver extends DuplicatePropertyDirectiveResolver
      */
     public function getDirectiveType(): string
     {
-        return DirectiveTypes::SCRIPTING;
+        return DirectiveKinds::SCRIPTING;
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
