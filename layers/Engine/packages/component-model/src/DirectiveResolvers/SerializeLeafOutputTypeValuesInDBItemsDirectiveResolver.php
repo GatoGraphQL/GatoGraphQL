@@ -8,17 +8,16 @@ use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterfa
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\LeafOutputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
-final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
+final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
     public function getDirectiveName(): string
     {
-        return 'serializeScalarTypeValuesInDBItems';
+        return 'serializeLeafOutputTypeValuesInDBItems';
     }
 
     /**
@@ -88,12 +87,12 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
             $dataFields = $idsDataFields[(string)$id]['direct'];
             foreach ($dataFields as $field) {
                 $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($field);
-                if (!($fieldTypeResolver instanceof ScalarTypeResolverInterface)) {
+                if (!($fieldTypeResolver instanceof LeafOutputTypeResolverInterface)) {
                     continue;
                 }
 
-                /** @var ScalarTypeResolverInterface */
-                $fieldScalarTypeResolver = $fieldTypeResolver;
+                /** @var LeafOutputTypeResolverInterface */
+                $fieldLeafOutputTypeResolver = $fieldTypeResolver;
                 $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByObjectTypeResolver(
                     $targetObjectTypeResolver,
                     $field,
@@ -105,36 +104,35 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
 
                 /** @var int */
                 $fieldTypeModifiers = $targetObjectTypeResolver->getFieldTypeModifiers($field);
-                $fieldScalarTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-                $fieldScalarTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
-                // Serialize the scalar value stored in $dbItems
-                $dbItems[(string)$id][$fieldOutputKey] = $this->serializeScalarTypeValue(
-                    $fieldScalarTypeResolver,
-                    $fieldScalarTypeIsArrayOfArrays,
-                    $fieldScalarTypeIsArray,
-                    $value
+                $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+                $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
+                // Serialize the scalar/enum value stored in $dbItems
+                $dbItems[(string)$id][$fieldOutputKey] = $this->serializeLeafOutputTypeValue(
+                    $value,
+                    $fieldLeafOutputTypeResolver,
+                    $fieldLeafOutputTypeIsArrayOfArrays,
+                    $fieldLeafOutputTypeIsArray,
                 );
             }
         }
     }
 
     /**
-     * The response for Custom Scalar Types must be serialized.
-     * The response type is the same as in the ScalarType's
-     * `serialize` method.
+     * The response for Scalar Types and Enum types must be serialized.
+     * The response type is the same as in the type's `serialize` method.
      */
-    private function serializeScalarTypeValue(
-        ScalarTypeResolverInterface $fieldScalarTypeResolver,
-        bool $fieldScalarTypeIsArrayOfArrays,
-        bool $fieldScalarTypeIsArray,
+    private function serializeLeafOutputTypeValue(
         mixed $value,
+        LeafOutputTypeResolverInterface $fieldLeafOutputTypeResolver,
+        bool $fieldLeafOutputTypeIsArrayOfArrays,
+        bool $fieldLeafOutputTypeIsArray,
     ): string|int|float|bool|array {
         /**
          * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
          * In particular, it does not need to validate if it is an array or not,
          * as according to the applied WrappingType.
          */
-        if ($fieldScalarTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
+        if ($fieldLeafOutputTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
             /**
              * Array is not supported by `serialize`, but can still be handled
              * by DangerouslyDynamic. So convert it into stdClass
@@ -142,15 +140,15 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
             if (is_array($value)) {
                 $value = (object) $value;
             }
-            return $value === null ? null : $fieldScalarTypeResolver->serialize($value);
+            return $fieldLeafOutputTypeResolver->serialize($value);
         }
 
         // If the value is an array of arrays, then serialize each subelement to the item type
-        if ($fieldScalarTypeIsArrayOfArrays) {
-            return $value === null ? null : array_map(
+        if ($fieldLeafOutputTypeIsArrayOfArrays) {
+            return array_map(
                 // If it contains a null value, return it as is
                 fn (?array $arrayValueElem) => $arrayValueElem === null ? null : array_map(
-                    fn (mixed $arrayOfArraysValueElem) => $arrayOfArraysValueElem === null ? null : $fieldScalarTypeResolver->serialize($arrayOfArraysValueElem),
+                    fn (mixed $arrayOfArraysValueElem) => $arrayOfArraysValueElem === null ? null : $fieldLeafOutputTypeResolver->serialize($arrayOfArraysValueElem),
                     $arrayValueElem
                 ),
                 $value
@@ -158,19 +156,19 @@ final class SerializeScalarTypeValuesInDBItemsDirectiveResolver extends Abstract
         }
 
         // If the value is an array, then serialize each element to the item type
-        if ($fieldScalarTypeIsArray) {
-            return $value === null ? null : array_map(
-                fn (mixed $arrayValueElem) => $arrayValueElem === null ? null : $fieldScalarTypeResolver->serialize($arrayValueElem),
+        if ($fieldLeafOutputTypeIsArray) {
+            return array_map(
+                fn (mixed $arrayValueElem) => $arrayValueElem === null ? null : $fieldLeafOutputTypeResolver->serialize($arrayValueElem),
                 $value
             );
         }
 
         // Otherwise, simply serialize the given value directly
-        return $value === null ? null : $fieldScalarTypeResolver->serialize($value);
+        return $fieldLeafOutputTypeResolver->serialize($value);
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->getTranslationAPI()->__('Serialize the results for fields of Scalar Type. This directive is already included by the engine, since its execution is mandatory', 'component-model');
+        return $this->getTranslationAPI()->__('Serialize the results for fields of Scalar and Enum Types. This directive is already included by the engine, since its execution is mandatory', 'component-model');
     }
 }

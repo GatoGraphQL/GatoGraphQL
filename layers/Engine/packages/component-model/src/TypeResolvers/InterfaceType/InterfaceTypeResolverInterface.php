@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\InterfaceType;
 
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\OutputTypeResolverInterface;
 
-interface InterfaceTypeResolverInterface extends TypeResolverInterface
+interface InterfaceTypeResolverInterface extends OutputTypeResolverInterface
 {
     /**
      * The list of the fieldNames to implement in the Interface,

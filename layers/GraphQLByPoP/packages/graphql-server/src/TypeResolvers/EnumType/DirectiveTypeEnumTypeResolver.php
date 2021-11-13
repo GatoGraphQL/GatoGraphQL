@@ -7,6 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType;
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
 use PoP\ComponentModel\Directives\DirectiveTypes;
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
+use stdClass;
 
 class DirectiveTypeEnumTypeResolver extends AbstractEnumTypeResolver
 {
@@ -14,6 +15,7 @@ class DirectiveTypeEnumTypeResolver extends AbstractEnumTypeResolver
     {
         return 'DirectiveTypeEnum';
     }
+
     /**
      * @return string[]
      */
@@ -28,5 +30,22 @@ class DirectiveTypeEnumTypeResolver extends AbstractEnumTypeResolver
                 DirectiveTypes::INDEXING,
             ] : [],
         );
+    }
+
+    /**
+     * Convert the DirectiveType enum from UPPERCASE as input, to lowercase
+     * as defined in DirectiveTypes.php
+     */
+    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
+    {
+        return parent::coerceValue(strtolower($inputValue));
+    }
+
+    /**
+     * Convert back from lowercase to UPPERCASE
+     */
+    public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array
+    {
+        return strtoupper($scalarValue);
     }
 }

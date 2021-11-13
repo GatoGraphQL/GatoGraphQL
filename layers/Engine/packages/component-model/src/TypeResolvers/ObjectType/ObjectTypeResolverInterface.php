@@ -7,9 +7,10 @@ namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\OutputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
-interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface
+interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, OutputTypeResolverInterface
 {
     public function getFieldSchemaDefinition(string $field): ?array;
     public function hasObjectTypeFieldResolversForField(string $field): bool;

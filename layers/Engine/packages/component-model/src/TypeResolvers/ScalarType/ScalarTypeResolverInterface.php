@@ -6,13 +6,14 @@ namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\LeafOutputTypeResolverInterface;
 
 /**
  * Based on GraphQL custom scalars.
  *
  * @see https://www.graphql.de/blog/scalars-in-depth/
  */
-interface ScalarTypeResolverInterface extends ConcreteTypeResolverInterface, InputTypeResolverInterface
+interface ScalarTypeResolverInterface extends ConcreteTypeResolverInterface, InputTypeResolverInterface, LeafOutputTypeResolverInterface
 {
     /**
      * As specified by the GraphQL spec on directive @specifiedBy:
@@ -29,16 +30,4 @@ interface ScalarTypeResolverInterface extends ConcreteTypeResolverInterface, Inp
      * @see https://spec.graphql.org/draft/#sec--specifiedBy
      */
     public function getSpecifiedByURL(): ?string;
-
-    /**
-     * Result coercion. Called by the (GraphQL) engine when printing the response.
-     *
-     * It takes the scalar entity as an input and it is converted
-     * into a format that can be output on the response.
-     *
-     * `array` is supported as an output type, as to support `JSONObject`.
-     *
-     * @return string|int|float|bool|array formatted representation of the custom scalar
-     */
-    public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array;
 }
