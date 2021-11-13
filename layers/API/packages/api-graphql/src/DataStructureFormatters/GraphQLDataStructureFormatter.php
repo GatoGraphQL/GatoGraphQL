@@ -190,10 +190,28 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 $item[Tokens::EXTENSIONS] ?? []
             )
         ) {
-            $entry['extensions'] = $extensions;
+            $entry['extensions'] = $this->reformatExtensions($extensions);
         }
         // }
         return $entry;
+    }
+
+    /**
+     * Enable to modify the shape of the extensions.
+     *
+     * @param array<string,mixed> $extensions
+     * @return array<string,mixed>
+     */
+    protected function reformatExtensions(array $extensions): array
+    {
+        // Recursive call for nested elements
+        foreach (($extensions[Tokens::NESTED] ?? []) as $index => $nested) {
+            if (!isset($nested[Tokens::EXTENSIONS])) {
+                continue;
+            }
+            $extensions[Tokens::NESTED][$index][Tokens::EXTENSIONS] = $this->reformatExtensions($nested[Tokens::EXTENSIONS]);
+        }
+        return $extensions;
     }
 
     protected function getDBEntryExtensions(string $dbKey, int | string $id, array $item): array
@@ -233,7 +251,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 $item[Tokens::EXTENSIONS] ?? []
             )
         ) {
-            $entry['extensions'] = $extensions;
+            $entry['extensions'] = $this->reformatExtensions($extensions);
         }
         // }
         return $entry;
@@ -269,7 +287,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 $extensions
             )
         ) {
-            $entry['extensions'] = $extensions;
+            $entry['extensions'] = $this->reformatExtensions($extensions);
         };
         // }
         return $entry;

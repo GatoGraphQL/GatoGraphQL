@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Resolvers\TypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\InputCoercingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -175,7 +176,10 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                         $this->getTranslationAPI()->__('There is no input field \'%s\' in input object \'%s\''),
                         $inputFieldName,
                         $this->getMaybeNamespacedTypeName()
-                    )
+                    ),
+                    [
+                        Tokens::ARGUMENT_PATH => [$inputFieldName],
+                    ]
                 );
                 continue;
             }
@@ -229,7 +233,10 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             if ($maybeErrorMessage !== null) {
                 $errors[] = new Error(
                     $this->getErrorCode(),
-                    $maybeErrorMessage
+                    $maybeErrorMessage,
+                    [
+                        Tokens::ARGUMENT_PATH => [$inputFieldName],
+                    ]
                 );
                 continue;
             }
@@ -249,17 +256,30 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $inputFieldIsArrayOfArraysType,
             );
             if ($maybeCoercedInputFieldValueErrors !== []) {
-                $castingError = new Error(
+                // Prepend the arg path to the error(s)
+                foreach ($maybeCoercedInputFieldValueErrors as $error) {
+                    $this->prependArgPathToError($error, [$inputFieldName]);
+                }
+
+                // Only 1 Error: bubble it up directly
+                if (count($maybeCoercedInputFieldValueErrors) === 1) {
+                    $errors[] = $maybeCoercedInputFieldValueErrors[0];
+                    continue;
+                }
+
+                // Many nested errors: Create a new Error with all of them
+                $errors[] = new Error(
                     $this->getErrorCode(),
                     sprintf(
                         $this->getTranslationAPI()->__('Casting input field \'%s\' of type \'%s\' produced errors', 'component-model'),
                         $inputFieldName,
                         $inputFieldTypeResolver->getMaybeNamespacedTypeName()
                     ),
-                    null,
+                    [
+                        Tokens::ARGUMENT_PATH => [$inputFieldName],
+                    ],
                     $maybeCoercedInputFieldValueErrors
                 );
-                $errors[] = $castingError;
                 continue;
             }
 
@@ -285,24 +305,41 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                     $this->getTranslationAPI()->__('Mandatory input field \'%s\' in input object \'%s\' has not been provided'),
                     $inputFieldName,
                     $this->getMaybeNamespacedTypeName()
-                )
+                ),
+                [
+                    Tokens::ARGUMENT_PATH => [$inputFieldName],
+                ]
             );
             continue;
         }
 
         // If there was any error, return it
         if ($errors) {
-            return $this->getError(
-                sprintf(
-                    $this->getTranslationAPI()->__('Casting input object of type \'%s\' produced errors', 'component-model'),
-                    $this->getMaybeNamespacedTypeName()
-                ),
-                $errors
-            );
+            return count($errors) === 1 ?
+                $errors[0]
+                : $this->getError(
+                    sprintf(
+                        $this->getTranslationAPI()->__('Casting input object of type \'%s\' produced errors', 'component-model'),
+                        $this->getMaybeNamespacedTypeName()
+                    ),
+                    $errors
+                );
         }
 
         // Add all missing properties which have a default value
         return $coercedInputValue;
+    }
+
+    /**
+     * @param string[] $argPath
+     */
+    protected function prependArgPathToError(Error &$error, array $argPath): void
+    {
+        $errorData = $error->getData();
+        $error->addData(Tokens::ARGUMENT_PATH, array_merge(
+            $argPath,
+            $errorData[Tokens::ARGUMENT_PATH] ?? []
+        ));
     }
 
     /**

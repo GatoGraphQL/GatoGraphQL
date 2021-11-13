@@ -498,7 +498,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     $errorMessage = sprintf(
                         $this->getTranslationAPI()->__('On %1$s \'%2$s\', argument with name \'%3$s\' has not been documented in the schema', 'pop-component-model'),
                         $resolverType == ResolverTypes::FIELD ? $this->getTranslationAPI()->__('field', 'component-model') : $this->getTranslationAPI()->__('directive', 'component-model'),
-                        $fieldOrDirective,
+                        $this->getFieldName($fieldOrDirective),
                         $fieldOrDirectiveArgName
                     );
                     if ($treatUndefinedFieldOrDirectiveArgsAsErrors) {
@@ -510,6 +510,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                                     $this->getTranslationAPI()->__('%s. The directive has been ignored', 'pop-component-model'),
                                     $errorMessage
                                 ),
+                                Tokens::EXTENSIONS => [
+                                    Tokens::ARGUMENT_PATH => [$fieldOrDirectiveArgName],
+                                ],
                         ];
                         continue;
                     } else {
@@ -519,6 +522,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                                 $this->getTranslationAPI()->__('%s, so it may have no effect (it has not been removed from the query, though)', 'pop-component-model'),
                                 $errorMessage
                             ),
+                            Tokens::EXTENSIONS => [
+                                Tokens::ARGUMENT_PATH => [$fieldOrDirectiveArgName],
+                            ],
                         ];
                     }
                 }
@@ -955,7 +961,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $errorFieldOrDirective = $errorData[ErrorDataTokens::FIELD_NAME] ?? null;
                     }
                     $errorFieldOrDirective = $errorFieldOrDirective ?? $fieldOrDirectiveOutputKey;
-                    $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$errorFieldOrDirective]);
+                    $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$errorFieldOrDirective], $directiveArgName);
                     $fieldOrDirectiveArgs[$directiveArgName] = null;
                     continue;
                 }
@@ -1470,7 +1476,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     );
                 }
                 // Either treat it as an error or a warning
-                $schemaWarningOrError = $this->getErrorService()->getErrorOutput($directiveArgError, [$fieldDirective]);
+                $schemaWarningOrError = $this->getErrorService()->getErrorOutput($directiveArgError, [$fieldDirective], $failedCastingDirectiveArgName);
                 if ($treatTypeCoercingFailuresAsErrors) {
                     $schemaErrors[] = $schemaWarningOrError;
                 } else {
@@ -1570,7 +1576,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     );
                 }
                 // Either treat it as an error or a warning
-                $schemaWarningOrError = $this->getErrorService()->getErrorOutput($fieldArgError, [$field]);
+                $schemaWarningOrError = $this->getErrorService()->getErrorOutput($fieldArgError, [$field], $failedCastingFieldArgName);
                 if ($treatTypeCoercingFailuresAsErrors) {
                     $schemaErrors[] = $schemaWarningOrError;
                 } else {
