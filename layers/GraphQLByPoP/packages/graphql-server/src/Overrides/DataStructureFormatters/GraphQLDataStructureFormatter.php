@@ -68,7 +68,14 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
         $extensions['fields'] = $fields;
     }
     /**
-     * Enable to modify the shape of the extensions.
+     * Convert the argumentPath from array to string.
+     * 
+     * The field or directive argument name is appended ":", and input fields
+     * are separated with ".":
+     * 
+     *   ['filter'] => 'filter:'
+     *   ['filter', 'dateQuery'] => 'filter:dateQuery
+     *   ['filter', 'dateQuery', 'relation'] => 'filter:dateQuery.relation
      *
      * @param array<string,mixed> $extensions
      * @return array<string,mixed>
@@ -78,9 +85,14 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
         $extensions = parent::reformatExtensions($extensions);
         $vars = ApplicationState::getVars();
         if ($vars['standard-graphql']) {
-            // Convert the argumentPath from array to string
             if (!empty($extensions[Tokens::ARGUMENT_PATH])) {
-                $extensions[Tokens::ARGUMENT_PATH] = implode('.', $extensions[Tokens::ARGUMENT_PATH]);
+                // The first element is the field or directive argument name
+                $fieldOrDirectiveName = array_shift($extensions[Tokens::ARGUMENT_PATH]);
+                $extensions[Tokens::ARGUMENT_PATH] = sprintf(
+                    '%s:%s',
+                    $fieldOrDirectiveName,
+                    implode('.', $extensions[Tokens::ARGUMENT_PATH])
+                );
             }    
         }
         return $extensions;
