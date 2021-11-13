@@ -34,7 +34,13 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     }
 
     /**
-     * Change properties for GraphQL
+     * Change properties for GraphQL.
+     *
+     * Rename the fields to the most appropriate name:
+     * 
+     *   - field
+     *   - directive
+     *   - fields <= baseline
      */
     protected function addFieldOrDirectiveEntryToExtensions(array &$extensions, array $item): void
     {
@@ -61,6 +67,25 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
         // Many fields
         $extensions['fields'] = $fields;
     }
+    /**
+     * Enable to modify the shape of the extensions.
+     *
+     * @param array<string,mixed> $extensions
+     * @return array<string,mixed>
+     */
+    protected function reformatExtensions(array $extensions): array
+    {
+        $extensions = parent::reformatExtensions($extensions);
+        $vars = ApplicationState::getVars();
+        if ($vars['standard-graphql']) {
+            // Convert the argumentPath from array to string
+            if (!empty($extensions[Tokens::ARGUMENT_PATH])) {
+                $extensions[Tokens::ARGUMENT_PATH] = implode('.', $extensions[Tokens::ARGUMENT_PATH]);
+            }    
+        }
+        return $extensions;
+    }
+
     /**
      * Change properties for GraphQL
      */
