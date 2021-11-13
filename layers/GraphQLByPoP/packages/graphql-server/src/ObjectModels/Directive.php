@@ -78,6 +78,7 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
         if ($version = $this->schemaDefinition[SchemaDefinition::VERSION] ?? null) {
             $extensions[SchemaDefinition::VERSION] = $version;
         }
+        $extensions[SchemaDefinition::DIRECTIVE_TYPE] = $this->schemaDefinition[SchemaDefinition::DIRECTIVE_TYPE];
         return $extensions;
     }
 }
