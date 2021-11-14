@@ -22,7 +22,7 @@ class LoginCredentialsTaggedInputObjectTypeResolver extends AbstractTaggedInputO
 
     public function getTypeName(): string
     {
-        return 'LoginInput';
+        return 'LoginCredentialsInput';
     }
 
     public function getInputFieldNameTypeResolvers(): array
