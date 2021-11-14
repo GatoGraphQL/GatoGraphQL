@@ -96,6 +96,9 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
         return $inputFieldFormData;
     }
 
+    /**
+     * @return stdClass The current input field's form data
+     */
     abstract protected function getTaggedInputObjectFormData(array $formData): stdClass;
 
     final public function executeMutation(array $formData): mixed
