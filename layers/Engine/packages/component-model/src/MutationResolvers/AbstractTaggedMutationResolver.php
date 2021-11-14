@@ -9,6 +9,9 @@ use stdClass;
 
 abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
 {
+    /** @var array<string, MutationResolverInterface>|null */
+    private ?array $consolidatedInputFieldNameMutationResolversCache = null;
+    
     /**
      * The MutationResolvers contained in the TaggedMutationResolver,
      * organized by inputFieldName
@@ -16,6 +19,23 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
      * @return array<string, MutationResolverInterface> Array of inputFieldName => MutationResolver
      */
     protected abstract function getInputFieldNameMutationResolvers(): array;
+
+    /**
+     * Consolidation of the mutation resolver for each input field. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedInputFieldNameTypeResolvers(): array
+    {
+        if ($this->consolidatedInputFieldNameMutationResolversCache !== null) {
+            return $this->consolidatedInputFieldNameMutationResolversCache;
+        }
+        $this->consolidatedInputFieldNameMutationResolversCache = $this->getHooksAPI()->applyFilters(
+            HookNames::INPUT_FIELD_NAME_MUTATION_RESOLVERS,
+            $this->getInputFieldNameMutationResolvers(),
+            $this,
+        );
+        return $this->consolidatedInputFieldNameMutationResolversCache;
+    }
     
     /**
      * The tagged input object can receive only 1 input field at a time.
@@ -46,7 +66,7 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
      */
     protected function getInputFieldMutationResolver(string $inputFieldName): MutationResolverInterface
     {
-        $inputFieldMutationResolver = $this->getInputFieldNameMutationResolvers()[$inputFieldName] ?? null;
+        $inputFieldMutationResolver = $this->getConsolidatedInputFieldNameTypeResolvers()[$inputFieldName] ?? null;
         if ($inputFieldMutationResolver === null) {
             throw new Exception(
                 sprintf(
