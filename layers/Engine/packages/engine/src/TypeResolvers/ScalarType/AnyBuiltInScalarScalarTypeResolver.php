@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Engine\TypeResolvers\ScalarType;
 
-use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use stdClass;
 

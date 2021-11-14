@@ -38,7 +38,6 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeReso
 use PoP\ComponentModel\Versioning\VersioningHelpers;
 use PoP\Engine\CMS\CMSServiceInterface;
 use PoP\LooseContracts\NameResolverInterface;
-use stdClass;
 
 abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver implements ObjectTypeFieldResolverInterface
 {
