@@ -84,7 +84,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'loginUser' => [
-                'credentials' => $this->getLoginCredentialsTaggedInputObjectTypeResolver(),
+                MutationInputProperties::CREDENTIALS => $this->getLoginCredentialsTaggedInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -93,7 +93,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['loginUser' => 'credentials'] => $this->getTranslationAPI()->__('Choose which credentials to use, and provide them', 'user-state-mutations'),
+            ['loginUser' => MutationInputProperties::CREDENTIALS] => $this->getTranslationAPI()->__('Choose which credentials to use, and provide them', 'user-state-mutations'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -101,7 +101,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['loginUser' => 'credentials'] => SchemaTypeModifiers::MANDATORY,
+            ['loginUser' => MutationInputProperties::CREDENTIALS] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
