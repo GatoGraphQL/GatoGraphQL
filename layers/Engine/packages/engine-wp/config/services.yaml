@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\Engine\ErrorHandling\ErrorManagerInterface:
-        class: \PoP\EngineWP\ErrorHandling\ErrorManager
+    PoP\Engine\Error\ErrorManagerInterface:
+        class: \PoP\EngineWP\Error\ErrorManager
 
     PoP\Engine\Formatters\DateFormatterInterface:
         class: \PoP\EngineWP\Formatters\DateFormatter

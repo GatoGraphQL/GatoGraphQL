@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\EngineWP\ErrorHandling;
+namespace PoP\EngineWP\Error;
 
-use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Services\BasicServiceTrait;
-use PoP\Engine\ErrorHandling\AbstractErrorManager;
+use PoP\Engine\Error\AbstractErrorManager;
 use WP_Error;
 
 class ErrorManager extends AbstractErrorManager

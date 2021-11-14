@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\ErrorHandling;
+namespace PoP\Engine\Error;
 
 interface ErrorHelperInterface
 {

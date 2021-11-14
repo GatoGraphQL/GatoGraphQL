@@ -1930,13 +1930,13 @@ class CheckpointProcessor extends \PoP\Engine\AbstractCheckpointProcessor {
         $ip = get_client_ip();
         if (!$ip) {
           
-          return new \PoP\ComponentModel\ErrorHandling\Error('ipempty');
+          return new \PoP\ComponentModel\Error\Error('ipempty');
         }
 
         $whitelisted_ips = array(...);
         if (!in_array($ip, $whitelisted_ips)) {
           
-          return new \PoP\ComponentModel\ErrorHandling\Error('ipincorrect');
+          return new \PoP\ComponentModel\Error\Error('ipincorrect');
         }
         break;
     }

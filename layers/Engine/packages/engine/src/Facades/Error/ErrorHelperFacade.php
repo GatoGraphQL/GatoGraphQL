@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\Facades\ErrorHandling;
+namespace PoP\Engine\Facades\Error;
 
-use PoP\Engine\ErrorHandling\ErrorHelperInterface;
+use PoP\Engine\Error\ErrorHelperInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
 class ErrorHelperFacade
