@@ -12,7 +12,7 @@ use stdClass;
  *
  * @see https://github.com/graphql/graphql-spec/pull/733
  */
-abstract class AbstractTaggedInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements QueryableInputObjectTypeResolverInterface
+abstract class AbstractTaggedInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
     /**
      * Validate that there is exactly one input set
