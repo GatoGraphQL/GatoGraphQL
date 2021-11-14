@@ -149,7 +149,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $this->coerceInputObjectValue($inputValue);
     }
 
-    final protected function coerceInputObjectValue(stdClass $inputValue): stdClass|Error
+    protected function coerceInputObjectValue(stdClass $inputValue): stdClass|Error
     {
         $coercedInputValue = new stdClass();
         $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
