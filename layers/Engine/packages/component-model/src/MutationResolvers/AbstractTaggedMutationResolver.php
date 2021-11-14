@@ -100,26 +100,29 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
 
     final public function executeMutation(array $formData): mixed
     {
-        $taggedInputObjectFormData = $this->getTaggedInputObjectFormData($formData);
-        $inputFieldName = $this->getCurrentInputFieldName($taggedInputObjectFormData);
-        $inputFieldMutationResolver = $this->getInputFieldMutationResolver($inputFieldName);
-        $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $taggedInputObjectFormData);
+        [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($formData);
         return $inputFieldMutationResolver->executeMutation((array)$inputFieldFormData);
     }
     final public function validateErrors(array $formData): array
     {
-        $taggedInputObjectFormData = $this->getTaggedInputObjectFormData($formData);
-        $inputFieldName = $this->getCurrentInputFieldName($taggedInputObjectFormData);
-        $inputFieldMutationResolver = $this->getInputFieldMutationResolver($inputFieldName);
-        $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $taggedInputObjectFormData);
+        [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($formData);
         return $inputFieldMutationResolver->validateErrors((array)$inputFieldFormData);
     }
     final public function validateWarnings(array $formData): array
+    {
+        [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($formData);
+        return $inputFieldMutationResolver->validateWarnings((array)$inputFieldFormData);
+    }
+    /**
+     * @param array<string,mixed> $formData
+     * @return mixed[] An array of 2 items: the current input field's mutation resolver, and the current input field's form data
+     */
+    final protected function getInputFieldMutationResolverAndFormData(array $formData): array
     {
         $taggedInputObjectFormData = $this->getTaggedInputObjectFormData($formData);
         $inputFieldName = $this->getCurrentInputFieldName($taggedInputObjectFormData);
         $inputFieldMutationResolver = $this->getInputFieldMutationResolver($inputFieldName);
         $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $taggedInputObjectFormData);
-        return $inputFieldMutationResolver->validateWarnings((array)$inputFieldFormData);
+        return [$inputFieldMutationResolver, $inputFieldFormData];
     }
 }
