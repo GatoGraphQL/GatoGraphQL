@@ -11,14 +11,14 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
 {
     /** @var array<string, MutationResolverInterface>|null */
     private ?array $consolidatedInputFieldNameMutationResolversCache = null;
-    
+
     /**
      * The MutationResolvers contained in the TaggedMutationResolver,
      * organized by inputFieldName
      *
      * @return array<string, MutationResolverInterface> Array of inputFieldName => MutationResolver
      */
-    protected abstract function getInputFieldNameMutationResolvers(): array;
+    abstract protected function getInputFieldNameMutationResolvers(): array;
 
     /**
      * Consolidation of the mutation resolver for each input field. Call this function to read the data
@@ -36,7 +36,7 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
         );
         return $this->consolidatedInputFieldNameMutationResolversCache;
     }
-    
+
     /**
      * The tagged input object can receive only 1 input field at a time.
      * Retrieve it, or throw an Exception if this is not respected

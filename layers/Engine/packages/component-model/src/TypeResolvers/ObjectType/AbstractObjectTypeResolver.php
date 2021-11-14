@@ -237,7 +237,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
              */
             if ($validField === null) {
                 return $schemaDeprecations;
-            }            
+            }
             if ($maybeDeprecationMessages = $executableObjectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
                 foreach ($maybeDeprecationMessages as $deprecationMessage) {
                     $schemaDeprecations[] = [

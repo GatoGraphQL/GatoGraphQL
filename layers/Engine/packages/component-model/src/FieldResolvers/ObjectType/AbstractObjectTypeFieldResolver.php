@@ -648,7 +648,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * If it throws an Exception do nothing, since the error will
              * also be caught when validating the inputs
              */
-            try {          
+            try {
                 return $mutationResolver->validateErrors($fieldArgs);
             } catch (Exception) {
             }
@@ -885,7 +885,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * If it throws an Exception do nothing, since the error will
              * also be caught when validating the inputs
              */
-            try {          
+            try {
                 $warnings = array_merge(
                     $warnings,
                     $mutationResolver->validateWarnings($fieldArgs)
@@ -978,7 +978,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $object,
                 $fieldName
             );
-            try {          
+            try {
                 return $mutationResolver->validateErrors($mutationFieldArgs);
             } catch (Exception $e) {
                 return [$e->getMessage()];
@@ -1023,7 +1023,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $object,
                 $fieldName
             );
-            try {          
+            try {
                 return $mutationResolver->executeMutation($mutationFieldArgs);
             } catch (Exception $e) {
                 return new Error(
