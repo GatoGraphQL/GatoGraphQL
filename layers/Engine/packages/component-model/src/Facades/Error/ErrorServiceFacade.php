@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Facades\ErrorHandling;
+namespace PoP\ComponentModel\Facades\Error;
 
-use PoP\ComponentModel\ErrorHandling\ErrorServiceInterface;
+use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 
 class ErrorServiceFacade

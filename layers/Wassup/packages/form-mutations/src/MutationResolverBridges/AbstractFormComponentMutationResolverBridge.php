@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\FormMutations\MutationResolverBridges;
 
-use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;

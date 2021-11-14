@@ -6,8 +6,8 @@ namespace PoP\Engine\FieldResolvers\ObjectType;
 
 use ArgumentCountError;
 use Exception;
-use PoP\ComponentModel\ErrorHandling\Error;
-use PoP\ComponentModel\ErrorHandling\ErrorProviderInterface;
+use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Error\ErrorProviderInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMutations\TypeAPIs;
 
-use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Error\Error;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

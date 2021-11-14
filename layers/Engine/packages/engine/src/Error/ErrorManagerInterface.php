@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\ErrorHandling;
+namespace PoP\Engine\Error;
 
-use PoP\ComponentModel\ErrorHandling\Error;
+use PoP\ComponentModel\Error\Error;
 
 interface ErrorManagerInterface
 {
