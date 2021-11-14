@@ -55,8 +55,10 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
         $inputFieldMutationResolver = $this->getMutationResolvers()[$inputFieldName] ?? null;
         if ($inputFieldMutationResolver === null) {
             throw new Exception(
-                $this->getTranslationAPI()->__('There is not MutationResolver for input field with name \'%s\'', 'component-model'),
-                $inputFieldName
+                sprintf(
+                    $this->getTranslationAPI()->__('There is not MutationResolver for input field with name \'%s\'', 'component-model'),
+                    $inputFieldName
+                )
             );
         }
         return $inputFieldMutationResolver;
@@ -72,8 +74,10 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
         $inputFieldFormData = $formData[$inputFieldName] ?? null;
         if ($inputFieldFormData === null) {
             throw new Exception(
-                $this->getTranslationAPI()->__('There is not form data for input field with name \'%s\'', 'component-model'),
-                $inputFieldName
+                sprintf(
+                    $this->getTranslationAPI()->__('There is not form data for input field with name \'%s\'', 'component-model'),
+                    $inputFieldName
+                )
             );
         }
         return $inputFieldFormData;
