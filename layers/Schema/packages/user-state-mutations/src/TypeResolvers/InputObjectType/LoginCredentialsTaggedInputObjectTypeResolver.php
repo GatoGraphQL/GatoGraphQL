@@ -7,7 +7,7 @@ namespace PoPSchema\UserStateMutations\TypeResolvers\InputObjectType;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractTaggedInputObjectTypeResolver;
 use PoPSchema\UserStateMutations\TypeResolvers\InputObjectType\WebsiteCredentialsInputObjectTypeResolver;
 
-class LoginTaggedInputObjectTypeResolver extends AbstractTaggedInputObjectTypeResolver
+class LoginCredentialsTaggedInputObjectTypeResolver extends AbstractTaggedInputObjectTypeResolver
 {
     private ?WebsiteCredentialsInputObjectTypeResolver $websiteCredentialsInputObjectTypeResolver = null;
 

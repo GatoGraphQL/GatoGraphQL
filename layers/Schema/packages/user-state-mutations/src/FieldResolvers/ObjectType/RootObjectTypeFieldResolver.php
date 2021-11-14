@@ -14,14 +14,14 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\LogoutMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\UserStateMutations\TypeResolvers\InputObjectType\LoginTaggedInputObjectTypeResolver;
+use PoPSchema\UserStateMutations\TypeResolvers\InputObjectType\LoginCredentialsTaggedInputObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?UserObjectTypeResolver $userObjectTypeResolver = null;
     private ?LoginMutationResolver $loginMutationResolver = null;
     private ?LogoutMutationResolver $logoutMutationResolver = null;
-    private ?LoginTaggedInputObjectTypeResolver $loginTaggedInputObjectTypeResolver = null;
+    private ?LoginCredentialsTaggedInputObjectTypeResolver $loginCredentialsTaggedInputObjectTypeResolver = null;
 
     final public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
     {
@@ -47,13 +47,13 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return $this->logoutMutationResolver ??= $this->instanceManager->getInstance(LogoutMutationResolver::class);
     }
-    final public function setLoginTaggedInputObjectTypeResolver(LoginTaggedInputObjectTypeResolver $loginTaggedInputObjectTypeResolver): void
+    final public function setLoginCredentialsTaggedInputObjectTypeResolver(LoginCredentialsTaggedInputObjectTypeResolver $loginCredentialsTaggedInputObjectTypeResolver): void
     {
-        $this->loginTaggedInputObjectTypeResolver = $loginTaggedInputObjectTypeResolver;
+        $this->loginCredentialsTaggedInputObjectTypeResolver = $loginCredentialsTaggedInputObjectTypeResolver;
     }
-    final protected function getLoginTaggedInputObjectTypeResolver(): LoginTaggedInputObjectTypeResolver
+    final protected function getLoginCredentialsTaggedInputObjectTypeResolver(): LoginCredentialsTaggedInputObjectTypeResolver
     {
-        return $this->loginTaggedInputObjectTypeResolver ??= $this->instanceManager->getInstance(LoginTaggedInputObjectTypeResolver::class);
+        return $this->loginCredentialsTaggedInputObjectTypeResolver ??= $this->instanceManager->getInstance(LoginCredentialsTaggedInputObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -84,7 +84,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'loginUser' => [
-                'credentials' => $this->getLoginTaggedInputObjectTypeResolver(),
+                'credentials' => $this->getLoginCredentialsTaggedInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
