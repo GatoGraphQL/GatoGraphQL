@@ -101,14 +101,6 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
         };
     }
 
-    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            ['directives' => 'ofKinds'] => [DirectiveKinds::QUERY],
-            default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
-        };
-    }
-
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
