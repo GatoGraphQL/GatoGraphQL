@@ -10,18 +10,18 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\LoginMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\LogoutMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
+use PoPSchema\UserStateMutations\TypeResolvers\InputObjectType\LoginTaggedInputObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?UserObjectTypeResolver $userObjectTypeResolver = null;
     private ?LoginMutationResolver $loginMutationResolver = null;
     private ?LogoutMutationResolver $logoutMutationResolver = null;
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?LoginTaggedInputObjectTypeResolver $loginTaggedInputObjectTypeResolver = null;
 
     final public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
     {
@@ -47,13 +47,13 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return $this->logoutMutationResolver ??= $this->instanceManager->getInstance(LogoutMutationResolver::class);
     }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setLoginTaggedInputObjectTypeResolver(LoginTaggedInputObjectTypeResolver $loginTaggedInputObjectTypeResolver): void
     {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->loginTaggedInputObjectTypeResolver = $loginTaggedInputObjectTypeResolver;
     }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getLoginTaggedInputObjectTypeResolver(): LoginTaggedInputObjectTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        return $this->loginTaggedInputObjectTypeResolver ??= $this->instanceManager->getInstance(LoginTaggedInputObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -84,8 +84,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'loginUser' => [
-                MutationInputProperties::USERNAME_OR_EMAIL => $this->getStringScalarTypeResolver(),
-                MutationInputProperties::PASSWORD => $this->getStringScalarTypeResolver(),
+                'credentials' => $this->getLoginTaggedInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -94,8 +93,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['loginUser' => MutationInputProperties::USERNAME_OR_EMAIL] => $this->getTranslationAPI()->__('The username or email', 'user-state-mutations'),
-            ['loginUser' => MutationInputProperties::PASSWORD] => $this->getTranslationAPI()->__('The password', 'user-state-mutations'),
+            ['loginUser' => 'credentials'] => $this->getTranslationAPI()->__('Choose which credentials to use, and provide them', 'user-state-mutations'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -103,11 +101,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['loginUser' => MutationInputProperties::USERNAME_OR_EMAIL],
-            ['loginUser' => MutationInputProperties::PASSWORD]
-                => SchemaTypeModifiers::MANDATORY,
-            default
-                => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+            ['loginUser' => 'credentials'] => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
