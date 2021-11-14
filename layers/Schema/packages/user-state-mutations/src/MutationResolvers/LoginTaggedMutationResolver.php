@@ -7,7 +7,7 @@ namespace PoPSchema\UserStateMutations\MutationResolvers;
 use PoP\ComponentModel\MutationResolvers\AbstractTaggedMutationResolver;
 use stdClass;
 
-class LoginMutationResolver extends AbstractTaggedMutationResolver
+class LoginTaggedMutationResolver extends AbstractTaggedMutationResolver
 {
     private ?WebsiteLoginMutationResolver $websiteLoginMutationResolver = null;
 
