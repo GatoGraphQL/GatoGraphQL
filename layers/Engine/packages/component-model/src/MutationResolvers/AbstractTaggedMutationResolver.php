@@ -10,9 +10,12 @@ use stdClass;
 abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
 {
     /**
+     * The MutationResolvers contained in the TaggedMutationResolver,
+     * organized by inputFieldName
+     *
      * @return array<string, MutationResolverInterface> Array of inputFieldName => MutationResolver
      */
-    protected abstract function getMutationResolvers(): array;
+    protected abstract function getInputFieldNameMutationResolvers(): array;
     
     /**
      * The tagged input object can receive only 1 input field at a time.
@@ -43,7 +46,7 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
      */
     protected function getInputFieldMutationResolver(string $inputFieldName): MutationResolverInterface
     {
-        $inputFieldMutationResolver = $this->getMutationResolvers()[$inputFieldName] ?? null;
+        $inputFieldMutationResolver = $this->getInputFieldNameMutationResolvers()[$inputFieldName] ?? null;
         if ($inputFieldMutationResolver === null) {
             throw new Exception(
                 sprintf(

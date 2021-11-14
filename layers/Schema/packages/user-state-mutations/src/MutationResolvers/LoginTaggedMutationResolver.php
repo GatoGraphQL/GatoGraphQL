@@ -20,7 +20,7 @@ class LoginTaggedMutationResolver extends AbstractTaggedMutationResolver
         return $this->websiteLoginMutationResolver ??= $this->instanceManager->getInstance(WebsiteLoginMutationResolver::class);
     }
 
-    protected function getMutationResolvers(): array
+    protected function getInputFieldNameMutationResolvers(): array
     {
         return [
             'website' => $this->getWebsiteLoginMutationResolver(),
