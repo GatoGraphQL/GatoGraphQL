@@ -148,6 +148,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Support for custom scalar types
 - Implementation of standard custom scalar types
 - Support for custom enum types
+- Support for input objects
+- Support for tagged input objects
 - Allow to use unsafe default settings
 - Module "Schema Self Fields"
 - Schema Configuration for the Single Endpoint
@@ -175,6 +177,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Renamed scalar type `AnyScalar` to `AnyBuiltInScalar`
 - Renamed interface type `Elemental` to `Node`
 - All `date` fields (such as `Post.date`, `Media.date` and `Comment.date`) and `modified` fields are now of type `DateTime` (before they had type `String`)
+- Updated the arguments for mutation `loginUser`
 - Renamed all the "admin" fields: instead of prepending them with "unrestricted", now they are appended "ForAdmin"
 - The Access Control and Cache Control configuration lists will be broken: all fields for all non-root types broken will appear under "(Undefined entries)". These lists must be recreated
 

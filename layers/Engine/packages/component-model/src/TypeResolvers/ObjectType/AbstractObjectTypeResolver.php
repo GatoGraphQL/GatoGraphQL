@@ -199,6 +199,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $schemaErrors,
                 $schemaWarnings,
             ) = $this->dissectFieldForSchema($field);
+            /**
+             * If the field is not valid, the fieldArgs may be empty,
+             * and getting warnings on the field may not work correctly
+             */
+            if ($validField === null) {
+                return $schemaWarnings;
+            }
             if ($maybeWarnings = $executableObjectTypeFieldResolver->resolveFieldValidationWarningDescriptions($this, $fieldName, $fieldArgs)) {
                 foreach ($maybeWarnings as $warning) {
                     $schemaWarnings[] = [
@@ -224,8 +231,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $schemaWarnings,
                 $schemaDeprecations,
             ) = $this->dissectFieldForSchema($field);
-
-            // Check for deprecations in the enums
+            /**
+             * If the field is not valid, the fieldArgs may be empty,
+             * and getting deprecations on the field may not work correctly
+             */
+            if ($validField === null) {
+                return $schemaDeprecations;
+            }
             if ($maybeDeprecationMessages = $executableObjectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
                 foreach ($maybeDeprecationMessages as $deprecationMessage) {
                     $schemaDeprecations[] = [
@@ -234,7 +246,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     ];
                 }
             }
-
             return $schemaDeprecations;
         }
 

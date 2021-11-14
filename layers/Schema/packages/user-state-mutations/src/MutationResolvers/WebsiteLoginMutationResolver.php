@@ -12,7 +12,7 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\UserState\State\ApplicationStateUtils;
 use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
-class LoginMutationResolver extends AbstractMutationResolver
+class WebsiteLoginMutationResolver extends AbstractMutationResolver
 {
     private ?UserTypeAPIInterface $userTypeAPI = null;
     private ?UserStateTypeMutationAPIInterface $userStateTypeMutationAPI = null;
@@ -34,11 +34,11 @@ class LoginMutationResolver extends AbstractMutationResolver
         return $this->userStateTypeMutationAPI ??= $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
     }
 
-    public function validateErrors(array $form_data): array
+    public function validateErrors(array $formData): array
     {
         $errors = [];
-        $username_or_email = $form_data[MutationInputProperties::USERNAME_OR_EMAIL];
-        $pwd = $form_data[MutationInputProperties::PASSWORD];
+        $username_or_email = $formData[MutationInputProperties::USERNAME_OR_EMAIL];
+        $pwd = $formData[MutationInputProperties::PASSWORD];
 
         if (!$username_or_email) {
             $errors[] = $this->getTranslationAPI()->__('Please supply your username or email', 'user-state-mutations');
@@ -59,11 +59,11 @@ class LoginMutationResolver extends AbstractMutationResolver
         return $this->getTranslationAPI()->__('You are already logged in', 'user-state-mutations');
     }
 
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(array $formData): mixed
     {
         // If the user is already logged in, then return the error
-        $username_or_email = $form_data[MutationInputProperties::USERNAME_OR_EMAIL];
-        $pwd = $form_data[MutationInputProperties::PASSWORD];
+        $username_or_email = $formData[MutationInputProperties::USERNAME_OR_EMAIL];
+        $pwd = $formData[MutationInputProperties::PASSWORD];
 
         // Find out if it was a username or an email that was provided
         $is_email = strpos($username_or_email, '@');

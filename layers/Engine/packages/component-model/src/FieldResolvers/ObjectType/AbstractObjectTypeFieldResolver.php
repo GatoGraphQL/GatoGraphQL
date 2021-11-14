@@ -644,7 +644,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          */
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
         if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
-            return $mutationResolver->validateErrors($fieldArgs);
+            /**
+             * If it throws an Exception do nothing, since the error will
+             * also be caught when validating the inputs
+             */
+            try {
+                return $mutationResolver->validateErrors($fieldArgs);
+            } catch (Exception) {
+            }
         }
 
         // Custom validations
@@ -874,7 +881,17 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
         if ($mutationResolver !== null) {
-            return $mutationResolver->validateWarnings($fieldArgs);
+            /**
+             * If it throws an Exception do nothing, since the error will
+             * also be caught when validating the inputs
+             */
+            try {
+                $warnings = array_merge(
+                    $warnings,
+                    $mutationResolver->validateWarnings($fieldArgs)
+                );
+            } catch (Exception) {
+            }
         }
         return $warnings;
     }
@@ -961,7 +978,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $object,
                 $fieldName
             );
-            return $mutationResolver->validateErrors($mutationFieldArgs);
+            try {
+                return $mutationResolver->validateErrors($mutationFieldArgs);
+            } catch (Exception $e) {
+                return [$e->getMessage()];
+            }
         }
 
         return [];
@@ -1002,7 +1023,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $object,
                 $fieldName
             );
-            return $mutationResolver->executeMutation($mutationFieldArgs);
+            try {
+                return $mutationResolver->executeMutation($mutationFieldArgs);
+            } catch (Exception $e) {
+                return new Error(
+                    'mutation-error',
+                    $e->getMessage(),
+                );
+            }
         }
         // Base case: If the fieldName exists as property in the object, then retrieve it
         if (\property_exists($object, $fieldName)) {
