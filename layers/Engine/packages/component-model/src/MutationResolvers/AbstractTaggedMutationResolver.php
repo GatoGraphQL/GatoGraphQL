@@ -97,9 +97,29 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
     }
 
     /**
+     * Assume there's only one argument in the field,
+     * for this TaggedMutationResolver.
+     * If that's not the case, this function must be overriden,
+     * to avoid throwing an Exception
+     *
      * @return stdClass The current input field's form data
+     * @throws Exception If more than 1 argument is passed to the field executing the TaggedMutation
      */
-    abstract protected function getTaggedInputObjectFormData(array $formData): stdClass;
+    protected function getTaggedInputObjectFormData(array $formData): stdClass
+    {
+        $formDataSize = count($formData);
+        if ($formDataSize !== 1) {
+            throw new Exception(
+                sprintf(
+                    $this->getTranslationAPI()->__('The TaggedMutationResolver expects only 1 argument is passed to the field executing the mutation, but %s were provided: \'%s\'', 'component-model'),
+                    $formDataSize,
+                    implode('\'%s\'', array_keys($formData))
+                )
+            );
+        }
+        $fieldArgName = key($formData);
+        return $formData[$fieldArgName];
+    }
 
     final public function executeMutation(array $formData): mixed
     {

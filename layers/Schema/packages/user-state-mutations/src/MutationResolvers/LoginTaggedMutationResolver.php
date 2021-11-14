@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\UserStateMutations\MutationResolvers;
 
 use PoP\ComponentModel\MutationResolvers\AbstractTaggedMutationResolver;
-use stdClass;
 
 class LoginTaggedMutationResolver extends AbstractTaggedMutationResolver
 {
@@ -25,10 +24,5 @@ class LoginTaggedMutationResolver extends AbstractTaggedMutationResolver
         return [
             'website' => $this->getWebsiteLoginMutationResolver(),
         ];
-    }
-
-    protected function getTaggedInputObjectFormData(array $formData): stdClass
-    {
-        return $formData[MutationInputProperties::CREDENTIALS];
     }
 }
