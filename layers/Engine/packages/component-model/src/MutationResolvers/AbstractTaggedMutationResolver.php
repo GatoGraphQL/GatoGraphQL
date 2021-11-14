@@ -8,6 +8,7 @@ use Exception;
 
 abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
 {
+    private string $inputFieldName;
     private MutationResolverInterface $inputFieldMutationResolver;
 
     /**
@@ -15,8 +16,9 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
      */
     protected abstract function getMutationResolvers(): array;
     
-    final protected function defineInputFieldName(string $inputFieldName): void
+    final protected function setInputFieldName(string $inputFieldName): void
     {
+        $this->inputFieldName = $inputFieldName;
         $this->inputFieldMutationResolver = $this->getInputFieldMutationResolver($inputFieldName);
     }
     private function getInputFieldMutationResolver(string $inputFieldName): MutationResolverInterface
@@ -31,17 +33,17 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
         return $inputFieldMutationResolver;
     }
 
-    final public function executeMutation(array $form_data): mixed
+    final public function executeMutation(array $formData): mixed
     {
-        return $this->inputFieldMutationResolver->executeMutation($form_data);
+        return $this->inputFieldMutationResolver->executeMutation($formData[$this->inputFieldName]);
     }
-    final public function validateErrors(array $form_data): array
+    final public function validateErrors(array $formData): array
     {
-        return $this->inputFieldMutationResolver->validateErrors($form_data);
+        return $this->inputFieldMutationResolver->validateErrors($formData[$this->inputFieldName]);
     }
-    final public function validateWarnings(array $form_data): array
+    final public function validateWarnings(array $formData): array
     {
-        return $this->inputFieldMutationResolver->validateWarnings($form_data);
+        return $this->inputFieldMutationResolver->validateWarnings($formData[$this->inputFieldName]);
     }
     final public function getErrorType(): int
     {
