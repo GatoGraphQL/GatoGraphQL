@@ -24,7 +24,7 @@ class WebsiteLoginCredentialsInputObjectTypeResolver extends AbstractInputObject
 
     public function getTypeName(): string
     {
-        return 'WebsiteCredentials';
+        return 'WebsiteLoginCredentials';
     }
 
     public function getInputFieldNameTypeResolvers(): array
