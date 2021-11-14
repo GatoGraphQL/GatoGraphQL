@@ -8,3 +8,6 @@ services:
 
     PoPSchema\UserStateMutations\MutationResolvers\:
         resource: '../src/MutationResolvers/*'
+
+    PoPSchema\UserStateMutations\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
