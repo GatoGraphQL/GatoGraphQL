@@ -56,12 +56,10 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
             );
         }
         // Retrieve the first (and only) element key
-        return key($taggedInputObjectFormData);
+        return (string)key($taggedInputObjectFormData);
     }
 
     /**
-     * @param array<string,mixed> $formData
-     * @return array<string,mixed>
      * @throws Exception If there is not MutationResolver for the input field
      */
     protected function getInputFieldMutationResolver(string $inputFieldName): MutationResolverInterface

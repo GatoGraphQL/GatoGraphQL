@@ -20,7 +20,7 @@ abstract class AbstractTaggedInputObjectTypeResolver extends AbstractInputObject
     protected function coerceInputObjectValue(stdClass $inputValue): stdClass|Error
     {
         $inputValueSize = count((array)$inputValue);
-        if ($inputValueSize > 1) {
+        if ($inputValueSize !== 1) {
             return new Error(
                 $this->getErrorCode(),
                 sprintf(
