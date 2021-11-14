@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\MutationResolvers;
 
 use Exception;
+use stdClass;
 
 abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
 {
@@ -17,32 +18,22 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
      * The tagged input object can receive only 1 input field at a time.
      * Retrieve it, or throw an Exception if this is not respected
      *
-     * @param array<string,mixed> $formData
      * @return string
      * @throws Exception If either there is none or more than 1 inputFieldNames being used
      */
-    protected function getCurrentInputFieldName(array $formData): string
+    protected function getCurrentInputFieldName(stdClass $taggedInputObjectFormData): string
     {
-        $formDataSize = count($formData);
-        if ($formDataSize !== 1) {
+        $taggedInputObjectFormDataSize = count((array)$taggedInputObjectFormData);
+        if ($taggedInputObjectFormDataSize !== 1) {
             throw new Exception(
                 sprintf(
                     $this->getTranslationAPI()->__('Only and exactly 1 input field must be provided to the TaggedMutationResolver, but %s were provided', 'component-model'),
-                    $formDataSize
+                    $taggedInputObjectFormDataSize
                 )
             );
         }
-        reset($formData);
-        $inputFieldName = key($formData);
-        if (!is_string($inputFieldName)) {
-            throw new Exception(
-                sprintf(
-                    $this->getTranslationAPI()->__('The input field provided to the TaggedMutationResolver must be of type string, but \'%s\' was provided', 'component-model'),
-                    $inputFieldName
-                )
-            );
-        }
-        return $inputFieldName;
+        // Retrieve the first (and only) element key
+        return key($taggedInputObjectFormData);
     }
 
     /**
@@ -56,7 +47,7 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
         if ($inputFieldMutationResolver === null) {
             throw new Exception(
                 sprintf(
-                    $this->getTranslationAPI()->__('There is not MutationResolver for input field with name \'%s\'', 'component-model'),
+                    $this->getTranslationAPI()->__('There is no MutationResolver for input field with name \'%s\'', 'component-model'),
                     $inputFieldName
                 )
             );
@@ -65,13 +56,12 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * @param array<string,mixed> $formData
-     * @return array<string,mixed>
+     * @return array<string,mixed>|stdClass
      * @throws Exception If the form data for the input field is not present in the array
      */
-    protected function getInputFieldFormData(string $inputFieldName, array $formData): array
+    protected function getInputFieldFormData(string $inputFieldName, stdClass $taggedInputObjectFormData): array|stdClass
     {
-        $inputFieldFormData = $formData[$inputFieldName] ?? null;
+        $inputFieldFormData = $taggedInputObjectFormData->$inputFieldName ?? null;
         if ($inputFieldFormData === null) {
             throw new Exception(
                 sprintf(
@@ -83,25 +73,30 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
         return $inputFieldFormData;
     }
 
+    abstract protected function getTaggedInputObjectFormData(array $formData): stdClass;
+
     final public function executeMutation(array $formData): mixed
     {
-        $inputFieldName = $this->getCurrentInputFieldName($formData);
+        $taggedInputObjectFormData = $this->getTaggedInputObjectFormData($formData);
+        $inputFieldName = $this->getCurrentInputFieldName($taggedInputObjectFormData);
         $inputFieldMutationResolver = $this->getInputFieldMutationResolver($inputFieldName);
-        $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $formData);
-        return $inputFieldMutationResolver->executeMutation($inputFieldFormData);
+        $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $taggedInputObjectFormData);
+        return $inputFieldMutationResolver->executeMutation((array)$inputFieldFormData);
     }
     final public function validateErrors(array $formData): array
     {
-        $inputFieldName = $this->getCurrentInputFieldName($formData);
+        $taggedInputObjectFormData = $this->getTaggedInputObjectFormData($formData);
+        $inputFieldName = $this->getCurrentInputFieldName($taggedInputObjectFormData);
         $inputFieldMutationResolver = $this->getInputFieldMutationResolver($inputFieldName);
-        $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $formData);
-        return $inputFieldMutationResolver->validateErrors($inputFieldFormData);
+        $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $taggedInputObjectFormData);
+        return $inputFieldMutationResolver->validateErrors((array)$inputFieldFormData);
     }
     final public function validateWarnings(array $formData): array
     {
-        $inputFieldName = $this->getCurrentInputFieldName($formData);
+        $taggedInputObjectFormData = $this->getTaggedInputObjectFormData($formData);
+        $inputFieldName = $this->getCurrentInputFieldName($taggedInputObjectFormData);
         $inputFieldMutationResolver = $this->getInputFieldMutationResolver($inputFieldName);
-        $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $formData);
-        return $inputFieldMutationResolver->validateWarnings($inputFieldFormData);
+        $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $taggedInputObjectFormData);
+        return $inputFieldMutationResolver->validateWarnings((array)$inputFieldFormData);
     }
 }
