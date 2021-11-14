@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace PoPSchema\UserStateMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractTaggedInputObjectTypeResolver;
-use PoPSchema\UserStateMutations\TypeResolvers\InputObjectType\WebsiteCredentialsInputObjectTypeResolver;
+use PoPSchema\UserStateMutations\TypeResolvers\InputObjectType\WebsiteLoginCredentialsInputObjectTypeResolver;
 
 class LoginCredentialsTaggedInputObjectTypeResolver extends AbstractTaggedInputObjectTypeResolver
 {
-    private ?WebsiteCredentialsInputObjectTypeResolver $websiteCredentialsInputObjectTypeResolver = null;
+    private ?WebsiteLoginCredentialsInputObjectTypeResolver $websiteLoginCredentialsInputObjectTypeResolver = null;
 
-    final public function setWebsiteCredentialsInputObjectTypeResolver(WebsiteCredentialsInputObjectTypeResolver $websiteCredentialsInputObjectTypeResolver): void
+    final public function setWebsiteLoginCredentialsInputObjectTypeResolver(WebsiteLoginCredentialsInputObjectTypeResolver $websiteLoginCredentialsInputObjectTypeResolver): void
     {
-        $this->websiteCredentialsInputObjectTypeResolver = $websiteCredentialsInputObjectTypeResolver;
+        $this->websiteLoginCredentialsInputObjectTypeResolver = $websiteLoginCredentialsInputObjectTypeResolver;
     }
-    final protected function getWebsiteCredentialsInputObjectTypeResolver(): WebsiteCredentialsInputObjectTypeResolver
+    final protected function getWebsiteLoginCredentialsInputObjectTypeResolver(): WebsiteLoginCredentialsInputObjectTypeResolver
     {
-        return $this->websiteCredentialsInputObjectTypeResolver ??= $this->instanceManager->getInstance(WebsiteCredentialsInputObjectTypeResolver::class);
+        return $this->websiteLoginCredentialsInputObjectTypeResolver ??= $this->instanceManager->getInstance(WebsiteLoginCredentialsInputObjectTypeResolver::class);
     }
 
     public function getTypeName(): string
@@ -28,7 +28,7 @@ class LoginCredentialsTaggedInputObjectTypeResolver extends AbstractTaggedInputO
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            'website' => $this->getWebsiteCredentialsInputObjectTypeResolver(),
+            'website' => $this->getWebsiteLoginCredentialsInputObjectTypeResolver(),
         ];
     }
 

@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeReso
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
 
-class WebsiteCredentialsInputObjectTypeResolver extends AbstractInputObjectTypeResolver
+class WebsiteLoginCredentialsInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
