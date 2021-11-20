@@ -8,7 +8,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
-use PoP\ComponentModel\FieldResolvers\ObjectType\HookNames;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\HookNames;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
