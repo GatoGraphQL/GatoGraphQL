@@ -24,7 +24,7 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
      * Consolidation of the mutation resolver for each input field. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getConsolidatedInputFieldNameTypeResolvers(): array
+    final public function getConsolidatedInputFieldNameMutationResolvers(): array
     {
         if ($this->consolidatedInputFieldNameMutationResolversCache !== null) {
             return $this->consolidatedInputFieldNameMutationResolversCache;
@@ -64,7 +64,7 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
      */
     protected function getInputFieldMutationResolver(string $inputFieldName): MutationResolverInterface
     {
-        $inputFieldMutationResolver = $this->getConsolidatedInputFieldNameTypeResolvers()[$inputFieldName] ?? null;
+        $inputFieldMutationResolver = $this->getConsolidatedInputFieldNameMutationResolvers()[$inputFieldName] ?? null;
         if ($inputFieldMutationResolver === null) {
             throw new Exception(
                 sprintf(
