@@ -8,11 +8,11 @@ use PoP\ComponentModel\Error\Error;
 use stdClass;
 
 /**
- * Tagged InputObject Type, as proposed for the GraphQL spec:
+ * Oneof InputObject Type, as proposed for the GraphQL spec:
  *
  * @see https://github.com/graphql/graphql-spec/pull/733
  */
-abstract class AbstractTaggedInputObjectTypeResolver extends AbstractInputObjectTypeResolver
+abstract class AbstractOneofInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
     /**
      * Validate that there is exactly one input set

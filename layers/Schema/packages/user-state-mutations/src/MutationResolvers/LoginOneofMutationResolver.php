@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserStateMutations\MutationResolvers;
 
-use PoP\ComponentModel\MutationResolvers\AbstractTaggedMutationResolver;
+use PoP\ComponentModel\MutationResolvers\AbstractOneofMutationResolver;
 
-class LoginTaggedMutationResolver extends AbstractTaggedMutationResolver
+class LoginOneofMutationResolver extends AbstractOneofMutationResolver
 {
     private ?WebsiteLoginMutationResolver $websiteLoginMutationResolver = null;
 

@@ -11,17 +11,17 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
-use PoPSchema\UserStateMutations\MutationResolvers\LoginTaggedMutationResolver;
+use PoPSchema\UserStateMutations\MutationResolvers\LoginOneofMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\LogoutMutationResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\UserStateMutations\TypeResolvers\InputObjectType\LoginCredentialsTaggedInputObjectTypeResolver;
+use PoPSchema\UserStateMutations\TypeResolvers\InputObjectType\LoginCredentialsOneofInputObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?UserObjectTypeResolver $userObjectTypeResolver = null;
-    private ?LoginTaggedMutationResolver $loginTaggedMutationResolver = null;
+    private ?LoginOneofMutationResolver $loginOneofMutationResolver = null;
     private ?LogoutMutationResolver $logoutMutationResolver = null;
-    private ?LoginCredentialsTaggedInputObjectTypeResolver $loginCredentialsTaggedInputObjectTypeResolver = null;
+    private ?LoginCredentialsOneofInputObjectTypeResolver $loginCredentialsOneofInputObjectTypeResolver = null;
 
     final public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
     {
@@ -31,13 +31,13 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
-    final public function setLoginTaggedMutationResolver(LoginTaggedMutationResolver $loginTaggedMutationResolver): void
+    final public function setLoginOneofMutationResolver(LoginOneofMutationResolver $loginOneofMutationResolver): void
     {
-        $this->loginTaggedMutationResolver = $loginTaggedMutationResolver;
+        $this->loginOneofMutationResolver = $loginOneofMutationResolver;
     }
-    final protected function getLoginTaggedMutationResolver(): LoginTaggedMutationResolver
+    final protected function getLoginOneofMutationResolver(): LoginOneofMutationResolver
     {
-        return $this->loginTaggedMutationResolver ??= $this->instanceManager->getInstance(LoginTaggedMutationResolver::class);
+        return $this->loginOneofMutationResolver ??= $this->instanceManager->getInstance(LoginOneofMutationResolver::class);
     }
     final public function setLogoutMutationResolver(LogoutMutationResolver $logoutMutationResolver): void
     {
@@ -47,13 +47,13 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return $this->logoutMutationResolver ??= $this->instanceManager->getInstance(LogoutMutationResolver::class);
     }
-    final public function setLoginCredentialsTaggedInputObjectTypeResolver(LoginCredentialsTaggedInputObjectTypeResolver $loginCredentialsTaggedInputObjectTypeResolver): void
+    final public function setLoginCredentialsOneofInputObjectTypeResolver(LoginCredentialsOneofInputObjectTypeResolver $loginCredentialsOneofInputObjectTypeResolver): void
     {
-        $this->loginCredentialsTaggedInputObjectTypeResolver = $loginCredentialsTaggedInputObjectTypeResolver;
+        $this->loginCredentialsOneofInputObjectTypeResolver = $loginCredentialsOneofInputObjectTypeResolver;
     }
-    final protected function getLoginCredentialsTaggedInputObjectTypeResolver(): LoginCredentialsTaggedInputObjectTypeResolver
+    final protected function getLoginCredentialsOneofInputObjectTypeResolver(): LoginCredentialsOneofInputObjectTypeResolver
     {
-        return $this->loginCredentialsTaggedInputObjectTypeResolver ??= $this->instanceManager->getInstance(LoginCredentialsTaggedInputObjectTypeResolver::class);
+        return $this->loginCredentialsOneofInputObjectTypeResolver ??= $this->instanceManager->getInstance(LoginCredentialsOneofInputObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -84,7 +84,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'loginUser' => [
-                MutationInputProperties::CREDENTIALS => $this->getLoginCredentialsTaggedInputObjectTypeResolver(),
+                MutationInputProperties::CREDENTIALS => $this->getLoginCredentialsOneofInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -109,7 +109,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
         return match ($fieldName) {
-            'loginUser' => $this->getLoginTaggedMutationResolver(),
+            'loginUser' => $this->getLoginOneofMutationResolver(),
             'logoutUser' => $this->getLogoutMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
