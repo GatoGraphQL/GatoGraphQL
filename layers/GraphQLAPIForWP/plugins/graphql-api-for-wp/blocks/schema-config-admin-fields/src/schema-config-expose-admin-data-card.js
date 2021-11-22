@@ -16,7 +16,7 @@ import {
 	ATTRIBUTE_VALUE_DISABLED,
 } from '@graphqlapi/components';
 
-const SchemaConfigAdminFieldsCard = ( props ) => {
+const SchemaConfigExposeAdminDataCard = ( props ) => {
 	const {
 		isSelected,
 		className,
@@ -87,4 +87,4 @@ const SchemaConfigAdminFieldsCard = ( props ) => {
 	);
 }
 
-export default SchemaConfigAdminFieldsCard;
+export default SchemaConfigExposeAdminDataCard;
