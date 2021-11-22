@@ -10,4 +10,9 @@ class RootPostsFilterInputObjectTypeResolver extends AbstractPostsFilterInputObj
     {
         return 'RootPostsFilterInput';
     }
+
+    public function getTypeDescription(): ?string
+    {
+        return $this->getTranslationAPI()->__('Input to filter posts', 'posts');
+    }
 }

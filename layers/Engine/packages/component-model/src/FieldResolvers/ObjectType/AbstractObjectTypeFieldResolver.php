@@ -481,10 +481,13 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $schemaFieldArgs = [];
         $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         foreach ($consolidatedFieldArgNameTypeResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
+            $fieldArgDescription =
+                $this->getConsolidatedFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName)
+                ?? $fieldArgInputTypeResolver->getTypeDescription();
             $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgTypeSchemaDefinition(
                 $fieldArgName,
                 $fieldArgInputTypeResolver,
-                $this->getConsolidatedFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+                $fieldArgDescription,
                 $this->getConsolidatedFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
                 $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
             );
@@ -784,11 +787,15 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     final protected function doGetFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
     {
+        $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
+        $fieldDescription =
+            $this->getConsolidatedFieldDescription($objectTypeResolver, $fieldName)
+            ?? $fieldTypeResolver->getTypeDescription();
         $schemaDefinition = $this->getFieldTypeSchemaDefinition(
             $fieldName,
             // This method has no "Consolidated" because it makes no sense
-            $this->getFieldTypeResolver($objectTypeResolver, $fieldName),
-            $this->getConsolidatedFieldDescription($objectTypeResolver, $fieldName),
+            $fieldTypeResolver,
+            $fieldDescription,
             // This method has no "Consolidated" because it makes no sense
             $this->getFieldTypeModifiers($objectTypeResolver, $fieldName),
             $this->getConsolidatedFieldDeprecationMessage($objectTypeResolver, $fieldName),
