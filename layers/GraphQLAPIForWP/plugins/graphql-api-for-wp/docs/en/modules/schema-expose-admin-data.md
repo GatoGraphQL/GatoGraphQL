@@ -1,85 +1,34 @@
 # Schema Expose Admin Data
 
-Expose "admin" elements in the GraphQL schema, which may expose private data.
+Expose "admin" elements in the GraphQL schema, which provide access to private data.
 
-The GraphQL schema must strike a balance between public and private fields and input fields, as to avoid exposing private information in a public API.
+The GraphQL schema must strike a balance between public and private elements (including fields and input fields), as to avoid exposing private information in a public API.
 
-For instance, to access post data, we have field:
+For instance, to access post data, we have field `Root.posts`, which by default can only retrieve published posts.
 
-- `Root.posts`: exposes public data only, by fetching published posts.
+With this module, a new property `Schema Expose Admin Data` is added to the Schema Configuration. When enabled, argument `filter` in `Root.posts` exposes an additional input `status`, enabling to filter non-published posts (eg: posts with status `"draft"`), which is private data.
 
-With this module, we can also access post data via field:
+## List of admin elements
 
-- `Root.postsForAdmin`: exposes public and private data, by allowing us to fetch non-published posts via the field argument `status`.
-
-## List of admin fields
-
-The following fields will be added to the GraphQL schema:
-
-**Root:**
-
-- `postForAdmin`
-- `postBySlugForAdmin`
-- `postsForAdmin`
-- `postCountForAdmin`
-- `customPostForAdmin`
-- `customPostBySlugForAdmin`
-- `customPostsForAdmin`
-- `customPostCountForAdmin`
-- `genericCustomPostForAdmin`
-- `genericCustomPostBySlugForAdmin`
-- `pageForAdmin`
-- `pageBySlugForAdmin`
-- `pageByPathForAdmin`
-- `pagesForAdmin`
-- `pageCountForAdmin`
-- `commentForAdmin`
-- `commentsForAdmin`
-- `commentCountForAdmin`
-- `usersForAdmin`
-- `userCountForAdmin`
-- `roles`
-- `capabilities`
+The following elements will be added to the GraphQL schema:
 
 **User:**
 
-- `postsForAdmin`
-- `postCountForAdmin`
-- `customPostsForAdmin`
-- `customPostCountForAdmin`
+- `email`
 - `roles`
 - `capabilities`
 
-**PostCategory:**
-
-- `postsForAdmin`
-- `postCountForAdmin`
-
-**PostTag:**
-
-- `postsForAdmin`
-- `postCountForAdmin`
-
 **Custom Posts:**
 
-- `commentsForAdmin`
-- `commentCountForAdmin`
+- `status`
 
 **Comments:**
 
-- `responsesForAdmin`
-- `responseCountForAdmin`
-
----
-
-Please notice the naming convention:
-
-- If the field exposes public + private data, then the field name ends with `"ForAdmin"`, such as `Root.posts` and `Root.postsForAdmin`
-- If the field only exposes private data, then it doesn't need end with `"ForAdmin"`, such as `User.roles`
+- `status`
 
 ## How to use
 
-Adding admin fields to the schema can be configured as follows, in order of priority:
+Exposing admin elements in the schema can be configured as follows, in order of priority:
 
 ✅ Specific mode for the custom endpoint or persisted query, defined in the schema configuration
 
@@ -94,4 +43,3 @@ If the schema configuration has value `"Default"`, it will use the mode defined 
 ## When to use
 
 Use whenever exposing private information is allowed, such as when building a static website, fetching data from a local WordPress instance (i.e. not a public API).
-
