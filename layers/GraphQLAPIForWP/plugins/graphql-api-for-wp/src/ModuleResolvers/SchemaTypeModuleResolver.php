@@ -558,7 +558,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $defaultValueDesc = $this->getDefaultValueDescription();
         $adminClientsDesc = $this->getAdminClientDescription();
         $privateDataTitlePlaceholder = \__('Treat %s as private data', 'graphql-api');
-        $privateDataDescPlaceholder = \__('If <code>true</code>, the %s data is exposed in the schema (whether as a field to be queried, or as an input for filtering) only when property "Schema Admin Fields" is enabled in the Schema Configuration', 'graphql-api');
+        $privateDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema (whether as an object field for querying, or as an input field for filtering) only if the Schema Configuration has property <code>Schema Admin Fields</code> enabled (i.e. the data is for private use only); otherwise, the data is always exposed in the schema (i.e. it is public)', 'graphql-api');
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module == self::SCHEMA_ADMIN_FIELDS) {
             $option = ModuleSettingOptions::DEFAULT_VALUE;
