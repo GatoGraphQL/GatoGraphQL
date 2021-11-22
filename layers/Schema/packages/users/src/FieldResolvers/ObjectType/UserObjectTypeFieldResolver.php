@@ -98,7 +98,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getAdminFieldNames(): array
     {
-        $adminFieldNames = [];
+        $adminFieldNames = parent::getAdminFieldNames();
         if (ComponentConfiguration::treatUserEmailAsAdminData()) {
             $adminFieldNames[] = 'email';
         }
