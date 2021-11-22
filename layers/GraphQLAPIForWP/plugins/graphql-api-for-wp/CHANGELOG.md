@@ -88,7 +88,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `User.hasAnyRole: Bool!`
   - `User.hasCapability: Bool!`
   - `User.hasAnyCapability: Bool!`
-- Added arguments `roles` and `excludeRoles` to filter by user roles ("admin" fields)
+- Added arguments `roles` and `excludeRoles` to filter by user roles ("admin" input fields)
 - Fetch children from Categories:
   - `PostCategory.childCategories: [PostCategory]!`
   - `PostCategory.childCategoryNames: [String]!`
