@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\RootCustomPostByInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -19,6 +21,17 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
  */
 class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListObjectTypeFieldResolver
 {
+    private ?RootCustomPostByInputObjectTypeResolver $rootCustomPostByInputObjectTypeResolver = null;
+    
+    final public function setRootCustomPostByInputObjectTypeResolver(RootCustomPostByInputObjectTypeResolver $rootCustomPostByInputObjectTypeResolver): void
+    {
+        $this->rootCustomPostByInputObjectTypeResolver = $rootCustomPostByInputObjectTypeResolver;
+    }
+    final protected function getRootCustomPostByInputObjectTypeResolver(): RootCustomPostByInputObjectTypeResolver
+    {
+        return $this->rootCustomPostByInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootCustomPostByInputObjectTypeResolver::class);
+    }
+    
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -32,7 +45,6 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
             parent::getFieldNamesToResolve(),
             [
                 'customPost',
-                'customPostBySlug',
             ]
         );
     }
@@ -41,7 +53,6 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
     {
         return match ($fieldName) {
             'customPost' => $this->getTranslationAPI()->__('Custom post with a specific ID', 'customposts'),
-            'customPostBySlug' => $this->getTranslationAPI()->__('Custom post with a specific slug', 'customposts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -49,9 +60,30 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
-            'customPost' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_UNIONTYPE],
-            'customPostBySlug' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_UNIONTYPE],
+            'customPost' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_UNIONTYPE],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'customPost' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'by' => $this->getRootCustomPostByInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
+        };
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ($fieldName) {
+            'customPost' => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
@@ -72,7 +104,6 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
     ): mixed {
         switch ($fieldName) {
             case 'customPost':
-            case 'customPostBySlug':
                 $query = array_merge(
                     $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
                     $this->getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs)
@@ -89,11 +120,8 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'customPost',
-            'customPostBySlug',
-                => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
-            default
-                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'customPost' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 }
