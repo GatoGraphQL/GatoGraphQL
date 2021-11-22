@@ -58,6 +58,13 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return [];
     }
 
+    public function getAdminFieldNames(): array
+    {
+        return [
+            'status',
+        ];
+    }
+
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
