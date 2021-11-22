@@ -10,15 +10,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Fetch entities by slug and path:
   - `Root.postBySlug: Post`
-  - `Root.postBySlugForAdmin: Post` ("admin" field)
   - `Root.customPostBySlug: CustomPostUnion`
-  - `Root.customPostBySlugForAdmin: CustomPostUnion` ("admin" field)
   - `Root.genericCustomPostBySlug: GenericCustomPost`
-  - `Root.genericCustomPostBySlugForAdmin: GenericCustomPost` ("admin" field)
   - `Root.pageBySlug: Page`
-  - `Root.pageBySlugForAdmin: Page` ("admin" field)
   - `Root.pageByPath: Page`
-  - `Root.pageByPathForAdmin: Page` ("admin" field)
   - `Root.postCategoryBySlug: PostCategory`
   - `Root.postTagBySlug: PostTag`
   - `Root.mediaItemBySlug: MediaItem`
@@ -44,13 +39,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   `Page.parentPage: Page`
   `Page.childPages: [Page]!`
   `Page.childPageCount: Int!`
-  `Page.childPagesForAdmin: [Page]!`
-  `Page.childPageCountForAdmin: Int!`
   `Page.menuOrder: Int!`
 - Filter field `pages` via new arguments:
   - `parentIDs: [ID]`
   - `parentID: ID`
-- Added fields to retrieve comments and their number (and also their "admin" versions):
+- Added fields to retrieve comments and their number:
   - `Root.comment: Comment`
   - `Root.comments: [Comment]!`
   - `Root.commentCount: Int!`
@@ -83,9 +76,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Fetch a user by different means:
   - `Root.userByUsername: User`
   - `Root.userByEmail: User` ("admin" field)
-- Filter users by email:
-  - `Root.usersForAdmin: [User]!` ("admin" field)
-  - `Root.userCountForAdmin: Int!` ("admin" field)
+- Filter users by email ("admin" field)
 - Query properties for users:
   - `User.nicename: String!`
   - `User.nickname: String!`
@@ -97,7 +88,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `User.hasAnyRole: Bool!`
   - `User.hasCapability: Bool!`
   - `User.hasAnyCapability: Bool!`
-- Added arguments `roles` and `excludeRoles` in field `Root.usersForAdmin` to filter by user roles
+- Added arguments `roles` and `excludeRoles` to filter by user roles ("admin" fields)
 - Fetch children from Categories:
   - `PostCategory.childCategories: [PostCategory]!`
   - `PostCategory.childCategoryNames: [String]!`
@@ -178,7 +169,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Renamed interface type `Elemental` to `Node`
 - All `date` fields (such as `Post.date`, `Media.date` and `Comment.date`) and `modified` fields are now of type `DateTime` (before they had type `String`)
 - Updated the arguments for mutation `loginUser`
-- Renamed all the "admin" fields: instead of prepending them with "unrestricted", now they are appended "ForAdmin"
+- Converged all the "admin" fields with the non-admin versions: instead of having fields `posts` and `unrestrainedPosts`, now there is only field `posts`, and its `filter` argument can also receive input `status` when `Schema Expose Admin Data` is enabled
 - The Access Control and Cache Control configuration lists will be broken: all fields for all non-root types broken will appear under "(Undefined entries)". These lists must be recreated
 
 ## 0.8.1 - 21/07/2021
