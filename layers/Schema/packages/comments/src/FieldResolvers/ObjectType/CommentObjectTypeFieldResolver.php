@@ -163,6 +163,15 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         ];
     }
 
+    public function getAdminFieldNames(): array
+    {
+        $adminFieldNames = parent::getAdminFieldNames();
+        if (ComponentConfiguration::treatCommentStatusAsAdminData()) {
+            $adminFieldNames[] = 'status';
+        }
+        return $adminFieldNames;
+    }
+
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
