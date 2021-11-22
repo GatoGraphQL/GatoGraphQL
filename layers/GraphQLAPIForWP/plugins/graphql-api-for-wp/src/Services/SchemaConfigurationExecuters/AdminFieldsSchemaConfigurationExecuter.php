@@ -12,15 +12,15 @@ use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 
 class ExposeAdminDataSchemaConfigurationExecuter extends AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    private ?SchemaConfigExposeAdminDataBlock $schemaConfigAdminFieldsBlock = null;
+    private ?SchemaConfigExposeAdminDataBlock $schemaConfigExposeAdminDataBlock = null;
 
-    final public function setSchemaConfigExposeAdminDataBlock(SchemaConfigExposeAdminDataBlock $schemaConfigAdminFieldsBlock): void
+    final public function setSchemaConfigExposeAdminDataBlock(SchemaConfigExposeAdminDataBlock $schemaConfigExposeAdminDataBlock): void
     {
-        $this->schemaConfigAdminFieldsBlock = $schemaConfigAdminFieldsBlock;
+        $this->schemaConfigExposeAdminDataBlock = $schemaConfigExposeAdminDataBlock;
     }
     final protected function getSchemaConfigExposeAdminDataBlock(): SchemaConfigExposeAdminDataBlock
     {
-        return $this->schemaConfigAdminFieldsBlock ??= $this->instanceManager->getInstance(SchemaConfigExposeAdminDataBlock::class);
+        return $this->schemaConfigExposeAdminDataBlock ??= $this->instanceManager->getInstance(SchemaConfigExposeAdminDataBlock::class);
     }
 
     public function getEnablingModule(): ?string
