@@ -12,6 +12,7 @@ use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostsFilterInputObjectTypeResolver;
+use PoPSchema\Users\ConditionalOnComponent\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 
 class InputObjectTypeHookSet extends AbstractHookSet
 {
@@ -52,6 +53,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
         $this->getHooksAPI()->addFilter(
             HookNames::INPUT_FIELD_TYPE_MODIFIERS,
             [$this, 'getInputFieldTypeModifiers'],
+            10,
+            3
+        );
+        $this->getHooksAPI()->addFilter(
+            HookNames::INPUT_FIELD_FILTER_INPUT,
+            [$this, 'getInputFieldFilterInput'],
             10,
             3
         );
@@ -112,6 +119,22 @@ class InputObjectTypeHookSet extends AbstractHookSet
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => $inputFieldTypeModifiers,
+        };
+    }
+
+    public function getInputFieldFilterInput(
+        ?array $inputFieldFilterInput,
+        InputObjectTypeResolverInterface $inputObjectTypeResolver,
+        string $inputFieldName,
+    ): ?array {
+        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+            return $inputFieldFilterInput;
+        }
+        return match ($inputFieldName) {
+            'authorIDs' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_AUTHOR_IDS],
+            'authorSlug' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_AUTHOR_SLUG],
+            'excludeAuthorIDs' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_AUTHOR_IDS],
+            default => $inputFieldFilterInput,
         };
     }
 }
