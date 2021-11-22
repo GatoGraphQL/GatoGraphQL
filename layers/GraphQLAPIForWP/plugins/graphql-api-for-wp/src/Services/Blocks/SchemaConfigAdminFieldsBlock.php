@@ -12,7 +12,7 @@ class SchemaConfigAdminFieldsBlock extends AbstractDefaultEnableDisableFunctiona
 
     protected function getBlockName(): string
     {
-        return 'schema-config-admin-fields';
+        return 'schema-config-expose-admin-data';
     }
 
     public function getBlockPriority(): int

@@ -1,7 +1,7 @@
 /**
  * Application imports
  */
-import SchemaConfigAdminFieldsCard from './schema-config-admin-fields-card';
+import SchemaConfigAdminFieldsCard from './schema-config-expose-admin-data-card';
 
 const EditBlock = ( props ) => {
 	const { className } = props;
