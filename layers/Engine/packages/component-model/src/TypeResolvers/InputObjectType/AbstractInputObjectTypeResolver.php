@@ -53,6 +53,10 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $this->inputCoercingService ??= $this->instanceManager->getInstance(InputCoercingServiceInterface::class);
     }
 
+    public function getAdminInputFieldNames(): array
+    {
+        return [];
+    }
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return null;
@@ -64,10 +68,6 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return SchemaTypeModifiers::NONE;
-    }
-    public function getAdminInputFieldNames(): array
-    {
-        return [];
     }
 
     /**
@@ -97,6 +97,24 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             $this,
         );
         return $this->consolidatedInputFieldNameTypeResolversCache;
+    }
+
+    /**
+     * Consolidation of the schema inputs. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedAdminInputFieldNames(): array
+    {
+        if ($this->consolidatedAdminInputFieldNames !== null) {
+            return $this->consolidatedAdminInputFieldNames;
+        }
+
+        $this->consolidatedAdminInputFieldNames = $this->getHooksAPI()->applyFilters(
+            HookNames::ADMIN_INPUT_FIELD_NAMES,
+            $this->getAdminInputFieldNames(),
+            $this,
+        );
+        return $this->consolidatedAdminInputFieldNames;
     }
 
     /**
@@ -151,24 +169,6 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             $inputFieldName,
         );
         return $this->consolidatedInputFieldTypeModifiersCache[$inputFieldName];
-    }
-
-    /**
-     * Consolidation of the schema inputs. Call this function to read the data
-     * instead of the individual functions, since it applies hooks to override/extend.
-     */
-    final public function getConsolidatedAdminInputFieldNames(): array
-    {
-        if ($this->consolidatedAdminInputFieldNames !== null) {
-            return $this->consolidatedAdminInputFieldNames;
-        }
-
-        $this->consolidatedAdminInputFieldNames = $this->getHooksAPI()->applyFilters(
-            HookNames::ADMIN_INPUT_FIELD_NAMES,
-            $this->getAdminInputFieldNames(),
-            $this,
-        );
-        return $this->consolidatedAdminInputFieldNames;
     }
 
     final public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
