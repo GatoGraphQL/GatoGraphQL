@@ -97,9 +97,9 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
      * This function transforms between the 2 states:
      *
      * - For each FilterInput defined via `getFieldFilterInputContainerModule`:
-     * - Check if the entry with that name exists in fieldArgs, and if so:
-     * - Execute `filterDataloadQueryArgs` on the FilterInput to place the value
-     *   under the expected input name
+     *   - Check if the entry with that name exists in fieldArgs, and if so:
+     *     - Execute `filterDataloadQueryArgs` on the FilterInput to place the value
+     *       under the expected input name
      *
      * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
