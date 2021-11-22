@@ -16,7 +16,7 @@ import {
 	ATTRIBUTE_VALUE_DISABLED,
 } from '@graphqlapi/components';
 
-const SchemaConfigAdminFieldsCard = ( props ) => {
+const SchemaConfigExposeAdminDataCard = ( props ) => {
 	const {
 		isSelected,
 		className,
@@ -32,11 +32,11 @@ const SchemaConfigAdminFieldsCard = ( props ) => {
 			value: ATTRIBUTE_VALUE_DEFAULT,
 		},
 		{
-			label: __('Add "admin" fields to the schema', 'graphql-api'),
+			label: __('Expose "admin" elements in the schema', 'graphql-api'),
 			value: ATTRIBUTE_VALUE_ENABLED,
 		},
 		{
-			label: __('Do not add admin fields', 'graphql-api'),
+			label: __('Do not expose admin elements', 'graphql-api'),
 			value: ATTRIBUTE_VALUE_DISABLED,
 		},
 	];
@@ -45,14 +45,14 @@ const SchemaConfigAdminFieldsCard = ( props ) => {
 		<div className={ componentClassName }>
 			<Card { ...props }>
 				<CardHeader isShady>
-					{ __('Schema Admin Fields', 'graphql-api') }
+					{ __('Schema Expose Admin Data', 'graphql-api') }
 				</CardHeader>
 				<CardBody>
 					<div className={ `${ className }__admin_schema` }>
-						<em>{ __('Add admin fields to the schema?', 'graphql-api') }</em>
+						<em>{ __('Expose admin elements in the schema?', 'graphql-api') }</em>
 						<InfoTooltip
 							{ ...props }
-							text={ __('Add "admin" elements to the GraphQL schema (such as field "Root.roles", input field "Root.posts(status:)", and others), which expose private data', 'graphql-api') }
+							text={ __('Expose "admin" elements in the GraphQL schema (such as field "Root.roles", input field "Root.posts(status:)", and others), which provide access to private data', 'graphql-api') }
 						/>
 						{ !isSelected && (
 							<>
@@ -61,10 +61,10 @@ const SchemaConfigAdminFieldsCard = ( props ) => {
 									<span>🟡 { __('Default', 'graphql-api') }</span>
 								}
 								{ enabledConst == ATTRIBUTE_VALUE_ENABLED &&
-									<span>✅ { __('Add "admin" fields', 'graphql-api') }</span>
+									<span>✅ { __('Expose "admin" elements in the schema', 'graphql-api') }</span>
 								}
 								{ enabledConst == ATTRIBUTE_VALUE_DISABLED &&
-									<span>❌ { __('Do not add admin fields', 'graphql-api') }</span>
+									<span>❌ { __('Do not expose admin elements', 'graphql-api') }</span>
 								}
 							</>
 						) }
@@ -87,4 +87,4 @@ const SchemaConfigAdminFieldsCard = ( props ) => {
 	);
 }
 
-export default SchemaConfigAdminFieldsCard;
+export default SchemaConfigExposeAdminDataCard;

@@ -12,7 +12,7 @@ The schema can be configured with the following elements (more items can also pr
 Modules can define their own configuration to be applied in the schema through their own option blocks, including:
 
 - Setting the schema as public or private
-- Enabling "admin" fields exposing private data
+- Enabling "admin" elements exposing private data
 - Namespacing the schema
 - Using nested mutations
 
@@ -61,8 +61,8 @@ These inputs in the body of the editor are shipped with the plugin (more inputs 
     <td>(If module <code>Cache Control</code> is enabled) Manage the behavior of HTTP caching, by selecting the Cache Control Lists that must be applied to the custom endpoint or persisted query</td>
 </tr>
 <tr>
-    <td><strong>Schema Admin Fields</strong></td>
-    <td>Add "admin" elements to the GraphQL schema (such as field <code>Root.roles</code>, input field <code>Root.posts(status:)</code>, and others), which expose private data. If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
+    <td><strong>Schema Expose Admin Data</strong></td>
+    <td>Expose "admin" elements in the GraphQL schema (such as field <code>Root.roles</code>, input field <code>Root.posts(status:)</code>, and others), which provide access to private data. If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
 </tr>
 <tr>
     <td><strong>Public/Private Schema</strong></td>

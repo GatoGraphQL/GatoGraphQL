@@ -54,14 +54,14 @@ Code compiled for development, i.e. after running `npm start`, cannot be commite
 The GraphQL API for WordPress provides safe default settings, to make "live" sites secure:
 
 - The single endpoint is disabled
-- The "admin" fields (eg: to query posts with status "draft") are not added to the schema
+- The "admin" elements (eg: input field `status` to query posts with status `"draft"`) are not added to the schema
 - Only a few of settings options and meta keys (for posts, users, etc) can be queried
 - The number of entities (for posts, users, etc) that can be queried at once is limited
 
 These safe default settings are not needed when building "static" sites, where the WordPress site is not exposed to the Internet. These settings can be used instead:
 
 - The single endpoint is enabled
-- The "admin" fields are added to the schema
+- The "admin" elements are exposed in the schema
 - All settings options and meta keys can be queried
 - The number of entities that can be queried at once is unlimited
 
@@ -128,7 +128,7 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td><a href="docs/en/modules/interactive-schema-for-custom-endpoints.md">Interactive Schema for Custom Endpoints</a></td><td>Enable custom endpoints to be attached their own Interactive schema client, to visualize the custom schema subset</td></tr>
 <tr><td><a href="docs/en/modules/graphiql-explorer.md">GraphiQL Explorer</a></td><td>Add the Explorer widget to the GraphiQL client, to simplify coding the query (by point-and-clicking on the fields)</td></tr>
 <tr><th colspan="2"><br/>Schema Type</th></tr>
-<tr><td><a href="docs/en/modules/schema-admin-fields.md">Schema Admin Fields</a></td><td>Add "admin" elements to the GraphQL schema (such as field <code>Root.roles</code>, input field <code>Root.posts(status:)</code>, and others), which expose private data</td></tr>
+<tr><td><a href="docs/en/modules/schema-expose-admin-data.md">Schema Expose Admin Data</a></td><td>Expose "admin" elements in the GraphQL schema (such as field <code>Root.roles</code>, input field <code>Root.posts(status:)</code>, and others), which provide access to private data</td></tr>
 <tr><td><a href="docs/en/modules/schema-self-fields.md">Schema Self Fields</a></td><td>Add "self" fields to the GraphQL schema (such as <code>Post.self</code> and <code>User.self</code>), which can help give a particular shape to the GraphQL response</td></tr>
 <tr><td><a href="docs/en/modules/schema-customposts.md">Schema Custom Posts</a></td><td>Base functionality for all custom posts</td></tr>
 <tr><td><a href="docs/en/modules/schema-generic-customposts.md">Schema Generic Custom Posts</a></td><td>Query any custom post type (added to the schema or not), through a generic type <code>GenericCustomPost</code></td></tr>

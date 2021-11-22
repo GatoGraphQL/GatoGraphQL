@@ -25,19 +25,19 @@ import {
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'graphql-api/schema-config-admin-fields', {
+registerBlockType( 'graphql-api/schema-config-expose-admin-data', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( '"Schema Admin Fields" for the Schema Configuration', 'graphql-api' ),
+	title: __( '"Schema Expose Admin Data" for the Schema Configuration', 'graphql-api' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
 	 * It will be shown in the Block Tab in the Settings Sidebar.
 	 */
 	description: __(
-		'Enable "admin" fields in the Schema Configuration',
+		'Enable "admin" elements in the Schema Configuration',
 		'graphql-api'
 	),
 
