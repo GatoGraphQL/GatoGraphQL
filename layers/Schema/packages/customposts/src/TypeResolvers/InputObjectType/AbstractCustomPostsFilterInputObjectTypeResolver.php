@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
@@ -35,9 +36,11 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
 
     public function getAdminInputFieldNames(): array
     {
-        return [
-            'status',
-        ];
+        $adminInputFieldNames = parent::getAdminInputFieldNames();
+        if (ComponentConfiguration::treatCustomPostStatusAsAdminData()) {
+            $adminInputFieldNames[] = 'status';
+        }
+        return $adminInputFieldNames;
     }
 
     public function getInputFieldNameTypeResolvers(): array

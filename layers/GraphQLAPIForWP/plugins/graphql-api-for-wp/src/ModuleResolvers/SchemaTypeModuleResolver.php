@@ -58,6 +58,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public const OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT = 'root-comment-list-default-limit';
     public const OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT = 'custompost-comment-list-default-limit';
     public const OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA = 'treat-user-email-as-admin-data';
+    public const OPTION_TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA = 'treat-custompost-status-as-admin-data';
 
     /**
      * Hooks
@@ -473,6 +474,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
                 self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE => false,
+                self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA => true,
             ],
             self::SCHEMA_GENERIC_CUSTOMPOSTS => [
                 ModuleSettingOptions::CUSTOMPOST_TYPES => ['post'],
@@ -626,6 +628,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 self::SCHEMA_PAGES,
             ])
         ) {
+            $privateDataTitlePlaceholder = \__('Treat %s as private data', 'graphql-api');
+            $privateDataDescPlaceholder = \__('If <code>true</code>, the %s data is exposed in the schema (whether as a field to be queried, or as an input for filtering) only when property "Schema Admin Fields" is enabled in the Schema Configuration', 'graphql-api');
             $moduleEntities = [
                 self::SCHEMA_CUSTOMPOSTS => \__('custom posts', 'graphql-api'),
                 self::SCHEMA_POSTS => \__('posts', 'graphql-api'),
@@ -693,6 +697,24 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
+
+                $option = self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => sprintf(
+                        $privateDataTitlePlaceholder,
+                        \__('custom post\'s status', 'graphql-api'),
+                    ),
+                    Properties::DESCRIPTION => sprintf(
+                        $privateDataDescPlaceholder,
+                        \__('custom post\'s status', 'graphql-api'),
+                    ),
+                    Properties::TYPE => Properties::TYPE_BOOL,
+                ];
             } elseif (
                 in_array($module, [
                     self::SCHEMA_POSTS,
@@ -749,8 +771,14 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('Treat user email as private data', 'graphql-api'),
-                    Properties::DESCRIPTION => \__('If <code>true</code>, the user email data is exposed in the schema (as a field to be queried, and as input for filtering) only when property "Schema Admin Fields" is enabled in the Schema Configuration', 'graphql-api'),
+                    Properties::TITLE => sprintf(
+                        $privateDataTitlePlaceholder,
+                        \__('user\'s email', 'graphql-api'),
+                    ),
+                    Properties::DESCRIPTION => sprintf(
+                        $privateDataDescPlaceholder,
+                        \__('user\'s email', 'graphql-api'),
+                    ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             }
