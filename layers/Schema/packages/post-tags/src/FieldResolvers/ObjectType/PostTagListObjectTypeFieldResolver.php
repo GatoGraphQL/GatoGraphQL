@@ -22,8 +22,6 @@ class PostTagListObjectTypeFieldResolver extends AbstractPostObjectTypeFieldReso
         return match ($fieldName) {
             'posts' => $this->getTranslationAPI()->__('Posts which contain this tag', 'pop-taxonomies'),
             'postCount' => $this->getTranslationAPI()->__('Number of posts which contain this tag', 'pop-taxonomies'),
-            'postsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Posts which contain this tag', 'pop-taxonomies'),
-            'postCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of posts which contain this tag', 'pop-taxonomies'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -44,8 +42,6 @@ class PostTagListObjectTypeFieldResolver extends AbstractPostObjectTypeFieldReso
         switch ($fieldName) {
             case 'posts':
             case 'postCount':
-            case 'postsForAdmin':
-            case 'postCountForAdmin':
                 $query['tag-ids'] = [$objectTypeResolver->getID($tag)];
                 break;
         }

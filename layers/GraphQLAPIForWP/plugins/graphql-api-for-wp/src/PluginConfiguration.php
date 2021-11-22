@@ -60,9 +60,11 @@ use PoPSchema\Tags\ComponentConfiguration as TagsComponentConfiguration;
 use PoPSchema\Tags\Environment as TagsEnvironment;
 use PoPSchema\TaxonomyMeta\ComponentConfiguration as TaxonomyMetaComponentConfiguration;
 use PoPSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
+use PoPSchema\UserRoles\ComponentConfiguration as UserRolesComponentConfiguration;
+use PoPSchema\UserRoles\Environment as UserRolesEnvironment;
+use PoPSchema\UserMeta\ComponentConfiguration as UserMetaComponentConfiguration;
 use PoPSchema\UserAvatars\ComponentConfiguration as UserAvatarsComponentConfiguration;
 use PoPSchema\UserAvatars\Environment as UserAvatarsEnvironment;
-use PoPSchema\UserMeta\ComponentConfiguration as UserMetaComponentConfiguration;
 use PoPSchema\UserMeta\Environment as UserMetaEnvironment;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoPSchema\Users\Environment as UsersEnvironment;
@@ -263,6 +265,12 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
+            [
+                'class' => UsersComponentConfiguration::class,
+                'envVariable' => UsersEnvironment::TREAT_USER_EMAIL_AS_ADMIN_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA,
+            ],
             // Comment default/max limits
             [
                 'class' => CommentsComponentConfiguration::class,
@@ -354,6 +362,12 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => CustomPostsEnvironment::CUSTOMPOST_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
+            ],
+            [
+                'class' => CustomPostsComponentConfiguration::class,
+                'envVariable' => CustomPostsEnvironment::TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA,
             ],
             // Custom post, if there is only one custom type, use it instead of the Union
             [
@@ -457,6 +471,18 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => UserAvatarsEnvironment::USER_AVATAR_DEFAULT_SIZE,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USER_AVATARS,
                 'option' => SchemaTypeModuleResolver::OPTION_DEFAULT_AVATAR_SIZE,
+            ],
+            [
+                'class' => UserRolesComponentConfiguration::class,
+                'envVariable' => UserRolesEnvironment::TREAT_USER_ROLE_AS_ADMIN_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_USER_ROLES,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_ROLE_AS_ADMIN_DATA,
+            ],
+            [
+                'class' => UserRolesComponentConfiguration::class,
+                'envVariable' => UserRolesEnvironment::TREAT_USER_CAPABILITY_AS_ADMIN_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_USER_ROLES,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_CAPABILITY_AS_ADMIN_DATA,
             ],
         ];
     }

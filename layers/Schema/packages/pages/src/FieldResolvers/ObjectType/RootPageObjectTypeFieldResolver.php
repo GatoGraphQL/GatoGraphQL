@@ -69,20 +69,6 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
             'pageBySlug',
             'pages',
             'pageCount',
-            'pageForAdmin',
-            'pageBySlugForAdmin',
-            'pagesForAdmin',
-            'pageCountForAdmin',
-        ];
-    }
-
-    public function getAdminFieldNames(): array
-    {
-        return [
-            'pageForAdmin',
-            'pageBySlugForAdmin',
-            'pagesForAdmin',
-            'pageCountForAdmin',
         ];
     }
 
@@ -93,10 +79,6 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
             'pageBySlug' => $this->getTranslationAPI()->__('Page with a specific slug', 'pages'),
             'pages' => $this->getTranslationAPI()->__('Pages', 'pages'),
             'pageCount' => $this->getTranslationAPI()->__('Number of pages', 'pages'),
-            'pageForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Page with a specific ID', 'pages'),
-            'pageBySlugForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Page with a specific slug', 'pages'),
-            'pagesForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Pages', 'pages'),
-            'pageCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of pages', 'pages'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -106,13 +88,9 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
         return match ($fieldName) {
             'page',
             'pageBySlug',
-            'pages',
-            'pageForAdmin',
-            'pageBySlugForAdmin',
-            'pagesForAdmin'
+            'pages'
                 => $this->getPageObjectTypeResolver(),
-            'pageCount',
-            'pageCountForAdmin'
+            'pageCount'
                 => $this->getIntScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -122,14 +100,9 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'pageCount',
-            'pageCountForAdmin'
-                => SchemaTypeModifiers::NON_NULLABLE,
-            'pages',
-            'pagesForAdmin'
-                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
-            default
-                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            'pageCount' => SchemaTypeModifiers::NON_NULLABLE,
+            'pages' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
@@ -144,29 +117,13 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
                 PageFilterInputContainerModuleProcessor::class,
                 PageFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_PAGELISTCOUNT
             ],
-            'pagesForAdmin' => [
-                PageFilterInputContainerModuleProcessor::class,
-                PageFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTLIST
-            ],
-            'pageCountForAdmin' => [
-                PageFilterInputContainerModuleProcessor::class,
-                PageFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTCOUNT
-            ],
             'page' => [
                 CommonFilterInputContainerModuleProcessor::class,
                 CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID
             ],
-            'pageForAdmin' => [
-                CommonCustomPostFilterInputContainerModuleProcessor::class,
-                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS
-            ],
             'pageBySlug' => [
                 CommonFilterInputContainerModuleProcessor::class,
                 CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG
-            ],
-            'pageBySlugForAdmin' => [
-                CommonCustomPostFilterInputContainerModuleProcessor::class,
-                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS
             ],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
@@ -176,7 +133,6 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     {
         switch ($fieldName) {
             case 'pages':
-            case 'pagesForAdmin':
                 $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
@@ -210,7 +166,6 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
         // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'pages':
-            case 'pagesForAdmin':
                 if (
                     $maybeError = $this->maybeValidateLimitFieldArgument(
                         ComponentConfiguration::getPageListMaxLimit(),
@@ -245,17 +200,13 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
         switch ($fieldName) {
             case 'page':
             case 'pageBySlug':
-            case 'pageForAdmin':
-            case 'pageBySlugForAdmin':
                 if ($pages = $this->getPageTypeAPI()->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $pages[0];
                 }
                 return null;
             case 'pages':
-            case 'pagesForAdmin':
                 return $this->getPageTypeAPI()->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'pageCount':
-            case 'pageCountForAdmin':
                 return $this->getPageTypeAPI()->getPageCount($query);
         }
 

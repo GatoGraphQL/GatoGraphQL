@@ -57,42 +57,23 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         return [
             'users',
             'userCount',
-            'usersForAdmin',
-            'userCountForAdmin',
-        ];
-    }
-
-    public function getAdminFieldNames(): array
-    {
-        return [
-            'usersForAdmin',
-            'userCountForAdmin',
         ];
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'users',
-            'usersForAdmin'
-                => $this->getUserObjectTypeResolver(),
-            'userCount',
-            'userCountForAdmin'
-                => $this->getIntScalarTypeResolver(),
-            default
-                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'users' => $this->getUserObjectTypeResolver(),
+            'userCount' => $this->getIntScalarTypeResolver(),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'userCount',
-            'userCountForAdmin'
-                => SchemaTypeModifiers::NON_NULLABLE,
-            'users',
-            'usersForAdmin'
-                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            'userCount' => SchemaTypeModifiers::NON_NULLABLE,
+            'users' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -102,8 +83,6 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         return match ($fieldName) {
             'users' => $this->getTranslationAPI()->__('Users', 'pop-users'),
             'userCount' => $this->getTranslationAPI()->__('Number of users', 'pop-users'),
-            'usersForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Users', 'pop-users'),
-            'userCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of users', 'pop-users'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -113,8 +92,6 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         return match ($fieldName) {
             'users' => [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_USERS],
             'userCount' => [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_USERCOUNT],
-            'usersForAdmin' => [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUSERS],
-            'userCountForAdmin' => [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUSERCOUNT],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
     }
@@ -123,7 +100,6 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     {
         switch ($fieldName) {
             case 'users':
-            case 'usersForAdmin':
                 $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
@@ -157,7 +133,6 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'users':
-            case 'usersForAdmin':
                 if (
                     $maybeError = $this->maybeValidateLimitFieldArgument(
                         ComponentConfiguration::getUserListMaxLimit(),
@@ -191,11 +166,9 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'users':
-            case 'usersForAdmin':
                 return $this->getUserTypeAPI()->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'userCount':
-            case 'userCountForAdmin':
                 return $this->getUserTypeAPI()->getUserCount($query);
         }
 

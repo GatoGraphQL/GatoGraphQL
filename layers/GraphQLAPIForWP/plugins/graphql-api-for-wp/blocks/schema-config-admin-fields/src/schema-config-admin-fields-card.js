@@ -52,7 +52,7 @@ const SchemaConfigAdminFieldsCard = ( props ) => {
 						<em>{ __('Add admin fields to the schema?', 'graphql-api') }</em>
 						<InfoTooltip
 							{ ...props }
-							text={ __('Add "admin" fields to the GraphQL schema (such as "Root.postsForAdmin", "User.roles", and others), which expose private data', 'graphql-api') }
+							text={ __('Add "admin" elements to the GraphQL schema (such as field "Root.roles", input field "Root.posts(status:)", and others), which expose private data', 'graphql-api') }
 						/>
 						{ !isSelected && (
 							<>

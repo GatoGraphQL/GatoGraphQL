@@ -65,16 +65,6 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'parentPage',
             'childPages',
             'childPageCount',
-            'childPagesForAdmin',
-            'childPageCountForAdmin',
-        ];
-    }
-
-    public function getAdminFieldNames(): array
-    {
-        return [
-            'childPagesForAdmin',
-            'childPageCountForAdmin',
         ];
     }
 
@@ -84,8 +74,6 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'parentPage' => $this->getTranslationAPI()->__('Parent page', 'pages'),
             'childPages' => $this->getTranslationAPI()->__('Child pages', 'pages'),
             'childPageCount' => $this->getTranslationAPI()->__('Number of child pages', 'pages'),
-            'childPagesForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Child pages', 'pages'),
-            'childPageCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of child pages', 'pages'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -94,11 +82,9 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'parentPage',
-            'childPages',
-            'childPagesForAdmin'
+            'childPages'
                 => $this->getPageObjectTypeResolver(),
-            'childPageCount',
-            'childPageCountForAdmin'
+            'childPageCount'
                 => $this->getIntScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -108,14 +94,9 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'childPageCount',
-            'childPageCountForAdmin'
-                => SchemaTypeModifiers::NON_NULLABLE,
-            'childPages',
-            'childPagesForAdmin'
-                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
-            default
-                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            'childPageCount' => SchemaTypeModifiers::NON_NULLABLE,
+            'childPages' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
@@ -130,14 +111,6 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 CustomPostFilterInputContainerModuleProcessor::class,
                 CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT
             ],
-            'childPagesForAdmin' => [
-                CustomPostFilterInputContainerModuleProcessor::class,
-                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST
-            ],
-            'childPageCountForAdmin' => [
-                CustomPostFilterInputContainerModuleProcessor::class,
-                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT
-            ],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
     }
@@ -146,7 +119,6 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         switch ($fieldName) {
             case 'childPages':
-            case 'childPagesForAdmin':
                 $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
@@ -180,7 +152,6 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'childPages':
-            case 'childPagesForAdmin':
                 if (
                     $maybeError = $this->maybeValidateLimitFieldArgument(
                         ComponentConfiguration::getPageListMaxLimit(),
@@ -225,10 +196,8 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         );
         switch ($fieldName) {
             case 'childPages':
-            case 'childPagesForAdmin':
                 return $this->getPageTypeAPI()->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'childPageCount':
-            case 'childPageCountForAdmin':
                 return $this->getPageTypeAPI()->getPageCount($query);
         }
 

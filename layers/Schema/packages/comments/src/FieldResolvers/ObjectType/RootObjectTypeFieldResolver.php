@@ -69,9 +69,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'comment',
             'commentCount',
             'comments',
-            'commentForAdmin',
-            'commentCountForAdmin',
-            'commentsForAdmin',
         ];
     }
 
@@ -80,12 +77,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return match ($fieldName) {
             'commentCount'
                 => $this->getIntScalarTypeResolver(),
-            'commentCountForAdmin'
-                => $this->getIntScalarTypeResolver(),
             'comment',
-            'comments',
-            'commentForAdmin',
-            'commentsForAdmin'
+            'comments'
                 => $this->getCommentObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -95,14 +88,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'commentCount',
-            'commentCountForAdmin'
-                => SchemaTypeModifiers::NON_NULLABLE,
-            'comments',
-            'commentsForAdmin'
-                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
-            default
-                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            'commentCount' => SchemaTypeModifiers::NON_NULLABLE,
+            'comments' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
@@ -110,7 +98,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         switch ($fieldName) {
             case 'comments':
-            case 'commentsForAdmin':
                 $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
@@ -154,7 +141,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'comments':
-            case 'commentsForAdmin':
                 if (
                     $maybeError = $this->maybeValidateLimitFieldArgument(
                         ComponentConfiguration::getCommentListMaxLimit(),
@@ -176,9 +162,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'comment' => $this->getTranslationAPI()->__('Comment with a specific ID', 'pop-comments'),
             'commentCount' => $this->getTranslationAPI()->__('Number of comments on the site', 'pop-comments'),
             'comments' => $this->getTranslationAPI()->__('Comments on the site', 'pop-comments'),
-            'commentForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Comment with a specific ID', 'pop-comments'),
-            'commentCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of comments on the site', 'pop-comments'),
-            'commentsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Comments on the site', 'pop-comments'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -189,9 +172,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'comment' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
             'comments' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTS],
             'commentCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT],
-            'commentForAdmin' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS],
-            'commentsForAdmin' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTS],
-            'commentCountForAdmin' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTCOUNT],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
     }
@@ -214,15 +194,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'commentCount':
-            case 'commentCountForAdmin':
                 return $this->getCommentTypeAPI()->getCommentCount($query);
 
             case 'comments':
-            case 'commentsForAdmin':
                 return $this->getCommentTypeAPI()->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'comment':
-            case 'commentForAdmin':
                 /**
                  * Only from the mapped CPTs, otherwise we may get an error when
                  * the custom post to which the comment was added, is not accesible

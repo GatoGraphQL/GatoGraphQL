@@ -10,6 +10,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\UserRoles\ComponentConfiguration;
 use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
@@ -65,14 +66,18 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getAdminFieldNames(): array
     {
-        return [
-            'roles',
-            'capabilities',
-            'hasRole',
-            'hasAnyRole',
-            'hasCapability',
-            'hasAnyCapability',
-        ];
+        $adminFieldNames = parent::getAdminFieldNames();
+        if (ComponentConfiguration::treatUserRoleAsAdminData()) {
+            $adminFieldNames[] = 'roles';
+            $adminFieldNames[] = 'hasRole';
+            $adminFieldNames[] = 'hasAnyRole';
+        }
+        if (ComponentConfiguration::treatUserCapabilityAsAdminData()) {
+            $adminFieldNames[] = 'capabilities';
+            $adminFieldNames[] = 'hasCapability';
+            $adminFieldNames[] = 'hasAnyCapability';
+        }
+        return $adminFieldNames;
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

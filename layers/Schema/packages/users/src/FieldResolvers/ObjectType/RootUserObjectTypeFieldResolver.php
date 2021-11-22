@@ -12,6 +12,7 @@ use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
+use PoPSchema\Users\ComponentConfiguration;
 
 class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolver
 {
@@ -47,12 +48,11 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
 
     public function getAdminFieldNames(): array
     {
-        return array_merge(
-            parent::getAdminFieldNames(),
-            [
-                'userByEmail',
-            ]
-        );
+        $adminFieldNames = parent::getAdminFieldNames();
+        if (ComponentConfiguration::treatUserEmailAsAdminData()) {
+            $adminFieldNames[] = 'userByEmail';
+        }
+        return $adminFieldNames;
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

@@ -22,8 +22,6 @@ class PostUserObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
         return match ($fieldName) {
             'posts' => $this->getTranslationAPI()->__('Posts by the user', 'users'),
             'postCount' => $this->getTranslationAPI()->__('Number of posts by the user', 'users'),
-            'postsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Posts by the user', 'users'),
-            'postCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of posts by the user', 'users'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -44,8 +42,6 @@ class PostUserObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
         switch ($fieldName) {
             case 'posts':
             case 'postCount':
-            case 'postsForAdmin':
-            case 'postCountForAdmin':
                 $query['authors'] = [$objectTypeResolver->getID($user)];
                 break;
         }

@@ -15,8 +15,6 @@ abstract class AbstractCustomPostListCategoryObjectTypeFieldResolver extends Abs
         return match ($fieldName) {
             'customPosts' => $this->getTranslationAPI()->__('Custom posts which contain this category', 'pop-categories'),
             'customPostCount' => $this->getTranslationAPI()->__('Number of custom posts which contain this category', 'pop-categories'),
-            'customPostsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Custom posts which contain this category', 'pop-categories'),
-            'customPostCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of custom posts which contain this category', 'pop-categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -39,8 +37,6 @@ abstract class AbstractCustomPostListCategoryObjectTypeFieldResolver extends Abs
         switch ($fieldName) {
             case 'customPosts':
             case 'customPostCount':
-            case 'customPostsForAdmin':
-            case 'customPostCountForAdmin':
                 $query[$this->getQueryProperty()] = [$objectTypeResolver->getID($category)];
                 break;
         }

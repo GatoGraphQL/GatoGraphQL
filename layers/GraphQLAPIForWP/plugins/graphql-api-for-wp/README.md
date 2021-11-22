@@ -128,7 +128,7 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td><a href="docs/en/modules/interactive-schema-for-custom-endpoints.md">Interactive Schema for Custom Endpoints</a></td><td>Enable custom endpoints to be attached their own Interactive schema client, to visualize the custom schema subset</td></tr>
 <tr><td><a href="docs/en/modules/graphiql-explorer.md">GraphiQL Explorer</a></td><td>Add the Explorer widget to the GraphiQL client, to simplify coding the query (by point-and-clicking on the fields)</td></tr>
 <tr><th colspan="2"><br/>Schema Type</th></tr>
-<tr><td><a href="docs/en/modules/schema-admin-fields.md">Schema Admin Fields</a></td><td>Add "admin" fields to the GraphQL schema (such as <code>Root.postsForAdmin</code>, <code>Root.roles</code>, and others), which expose private data</td></tr>
+<tr><td><a href="docs/en/modules/schema-admin-fields.md">Schema Admin Fields</a></td><td>Add "admin" elements to the GraphQL schema (such as field <code>Root.roles</code>, input field <code>Root.posts(status:)</code>, and others), which expose private data</td></tr>
 <tr><td><a href="docs/en/modules/schema-self-fields.md">Schema Self Fields</a></td><td>Add "self" fields to the GraphQL schema (such as <code>Post.self</code> and <code>User.self</code>), which can help give a particular shape to the GraphQL response</td></tr>
 <tr><td><a href="docs/en/modules/schema-customposts.md">Schema Custom Posts</a></td><td>Base functionality for all custom posts</td></tr>
 <tr><td><a href="docs/en/modules/schema-generic-customposts.md">Schema Generic Custom Posts</a></td><td>Query any custom post type (added to the schema or not), through a generic type <code>GenericCustomPost</code></td></tr>

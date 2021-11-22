@@ -33,19 +33,6 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
             [
                 'customPost',
                 'customPostBySlug',
-                'customPostForAdmin',
-                'customPostBySlugForAdmin',
-            ]
-        );
-    }
-
-    public function getAdminFieldNames(): array
-    {
-        return array_merge(
-            parent::getAdminFieldNames(),
-            [
-                'customPostForAdmin',
-                'customPostBySlugForAdmin',
             ]
         );
     }
@@ -55,8 +42,6 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
         return match ($fieldName) {
             'customPost' => $this->getTranslationAPI()->__('Custom post with a specific ID', 'customposts'),
             'customPostBySlug' => $this->getTranslationAPI()->__('Custom post with a specific slug', 'customposts'),
-            'customPostForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Custom post with a specific ID', 'customposts'),
-            'customPostBySlugForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Custom post with a specific slug', 'customposts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -65,9 +50,7 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
     {
         return match ($fieldName) {
             'customPost' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_UNIONTYPE],
-            'customPostForAdmin' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS_UNIONTYPE],
             'customPostBySlug' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_UNIONTYPE],
-            'customPostBySlugForAdmin' => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS_UNIONTYPE],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
     }
@@ -90,8 +73,6 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
         switch ($fieldName) {
             case 'customPost':
             case 'customPostBySlug':
-            case 'customPostForAdmin':
-            case 'customPostBySlugForAdmin':
                 $query = array_merge(
                     $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
                     $this->getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs)
@@ -110,8 +91,6 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
         return match ($fieldName) {
             'customPost',
             'customPostBySlug',
-            'customPostForAdmin',
-            'customPostBySlugForAdmin'
                 => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),

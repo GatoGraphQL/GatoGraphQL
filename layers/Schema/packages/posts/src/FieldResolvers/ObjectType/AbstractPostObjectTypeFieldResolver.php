@@ -9,7 +9,6 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostSortInputObjectTypeResolver;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPSchema\Posts\TypeResolvers\InputObjectType\PostPaginationInputObjectTypeResolver;
@@ -84,16 +83,6 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         return [
             'posts',
             'postCount',
-            'postsForAdmin',
-            'postCountForAdmin',
-        ];
-    }
-
-    public function getAdminFieldNames(): array
-    {
-        return [
-            'postsForAdmin',
-            'postCountForAdmin',
         ];
     }
 
@@ -102,8 +91,6 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         return match ($fieldName) {
             'posts' => $this->getPostObjectTypeResolver(),
             'postCount' => $this->getIntScalarTypeResolver(),
-            'postsForAdmin' => $this->getPostObjectTypeResolver(),
-            'postCountForAdmin' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -111,14 +98,9 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'postCount',
-            'postCountForAdmin'
-                => SchemaTypeModifiers::NON_NULLABLE,
-            'posts',
-            'postsForAdmin'
-                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
-            default
-                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            'postCount' => SchemaTypeModifiers::NON_NULLABLE,
+            'posts' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
@@ -127,20 +109,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         return match ($fieldName) {
             'posts' => $this->getTranslationAPI()->__('Posts', 'pop-posts'),
             'postCount' => $this->getTranslationAPI()->__('Number of posts', 'pop-posts'),
-            'postsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Posts', 'pop-posts'),
-            'postCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of posts', 'pop-posts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
-    {
-        return match ($fieldName) {
-            'postsForAdmin',
-            'postCountForAdmin'
-                => [CommonCustomPostFilterInputContainerModuleProcessor::class, CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTSTATUS],
-            default
-                => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
     }
 
@@ -148,26 +117,21 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     {
         $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         return match ($fieldName) {
-            'posts',
-            'postsForAdmin'
-                => array_merge(
-                    $fieldArgNameTypeResolvers,
-                    [
-                        'filter' => $this->getRootPostsFilterInputObjectTypeResolver(),
-                        'pagination' => $this->getPaginationInputObjectTypeResolver(),
-                        'sort' => $this->getCustomPostSortInputObjectTypeResolver(),
-                    ]
-                ),
-            'postCount',
-            'postCountForAdmin'
-                => array_merge(
-                    $fieldArgNameTypeResolvers,
-                    [
-                        'filter' => $this->getRootPostsFilterInputObjectTypeResolver(),
-                    ]
-                ),
-            default
-                => $fieldArgNameTypeResolvers,
+            'posts' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'filter' => $this->getRootPostsFilterInputObjectTypeResolver(),
+                    'pagination' => $this->getPaginationInputObjectTypeResolver(),
+                    'sort' => $this->getCustomPostSortInputObjectTypeResolver(),
+                ]
+            ),
+            'postCount' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'filter' => $this->getRootPostsFilterInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
         };
     }
 
@@ -205,11 +169,9 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         );
         switch ($fieldName) {
             case 'posts':
-            case 'postsForAdmin':
                 return $this->getPostTypeAPI()->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'postCount':
-            case 'postCountForAdmin':
                 return $this->getPostTypeAPI()->getPostCount($query);
         }
 

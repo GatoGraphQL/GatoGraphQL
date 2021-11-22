@@ -48,16 +48,6 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         return [
             'customPosts',
             'customPostCount',
-            'customPostsForAdmin',
-            'customPostCountForAdmin',
-        ];
-    }
-
-    public function getAdminFieldNames(): array
-    {
-        return [
-            'customPostsForAdmin',
-            'customPostCountForAdmin',
         ];
     }
 
@@ -65,9 +55,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     {
         return match ($fieldName) {
             'customPosts' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
-            'customPostsForAdmin' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
             'customPostCount' => $this->getIntScalarTypeResolver(),
-            'customPostCountForAdmin' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -75,14 +63,9 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'customPostCount',
-            'customPostCountForAdmin'
-                => SchemaTypeModifiers::NON_NULLABLE,
-            'customPosts',
-            'customPostsForAdmin'
-                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
-            default
-                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            'customPostCount' => SchemaTypeModifiers::NON_NULLABLE,
+            'customPosts' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
@@ -91,8 +74,6 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         return match ($fieldName) {
             'customPosts' => $this->getTranslationAPI()->__('Custom posts', 'pop-posts'),
             'customPostCount' => $this->getTranslationAPI()->__('Number of custom posts', 'pop-posts'),
-            'customPostsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Custom posts', 'pop-posts'),
-            'customPostCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of custom posts', 'pop-posts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -104,17 +85,9 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
                 CustomPostFilterInputContainerModuleProcessor::class,
                 CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST
             ],
-            'customPostsForAdmin' => [
-                CustomPostFilterInputContainerModuleProcessor::class,
-                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTLIST
-            ],
             'customPostCount' => [
                 CustomPostFilterInputContainerModuleProcessor::class,
                 CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT
-            ],
-            'customPostCountForAdmin' => [
-                CustomPostFilterInputContainerModuleProcessor::class,
-                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTCOUNT
             ],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
@@ -124,7 +97,6 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     {
         switch ($fieldName) {
             case 'customPosts':
-            case 'customPostsForAdmin':
                 $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
@@ -158,7 +130,6 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'customPosts':
-            case 'customPostsForAdmin':
                 if (
                     $maybeError = $this->maybeValidateLimitFieldArgument(
                         ComponentConfiguration::getCustomPostListMaxLimit(),
@@ -208,11 +179,9 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         );
         switch ($fieldName) {
             case 'customPosts':
-            case 'customPostsForAdmin':
                 return $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'customPostCount':
-            case 'customPostCountForAdmin':
                 return $this->getCustomPostTypeAPI()->getCustomPostCount($query);
         }
 

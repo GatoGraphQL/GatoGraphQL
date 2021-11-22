@@ -21,6 +21,10 @@ interface InputObjectTypeResolverInterface extends DeprecatableInputTypeResolver
      * @return array<string, InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(): array;
+    /**
+     * @return string[]
+     */
+    public function getAdminInputFieldNames(): array;
     public function getInputFieldDescription(string $inputFieldName): ?string;
     public function getInputFieldDefaultValue(string $inputFieldName): mixed;
     public function getInputFieldTypeModifiers(string $inputFieldName): int;
@@ -31,6 +35,10 @@ interface InputObjectTypeResolverInterface extends DeprecatableInputTypeResolver
      * @return array<string, InputTypeResolverInterface>
      */
     public function getConsolidatedInputFieldNameTypeResolvers(): array;
+    /**
+     * @return string[]
+     */
+    public function getConsolidatedAdminInputFieldNames(): array;
     public function getConsolidatedInputFieldDescription(string $inputFieldName): ?string;
     public function getConsolidatedInputFieldDefaultValue(string $inputFieldName): mixed;
     public function getConsolidatedInputFieldTypeModifiers(string $inputFieldName): int;

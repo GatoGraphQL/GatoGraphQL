@@ -14,6 +14,7 @@ class ComponentConfiguration
     private static ?int $getUserListDefaultLimit = 10;
     private static ?int $getUserListMaxLimit = -1;
     private static string $getUsersRoute = '';
+    private static bool $treatUserEmailAsAdminData = true;
 
     public static function getUserListDefaultLimit(): ?int
     {
@@ -63,6 +64,24 @@ class ComponentConfiguration
             $envVariable,
             $selfProperty,
             $defaultValue
+        );
+        return $selfProperty;
+    }
+
+    public static function treatUserEmailAsAdminData(): bool
+    {
+        // Define properties
+        $envVariable = Environment::TREAT_USER_EMAIL_AS_ADMIN_DATA;
+        $selfProperty = &self::$treatUserEmailAsAdminData;
+        $defaultValue = true;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        // Initialize property from the environment/hook
+        self::maybeInitializeConfigurationValue(
+            $envVariable,
+            $selfProperty,
+            $defaultValue,
+            $callback
         );
         return $selfProperty;
     }

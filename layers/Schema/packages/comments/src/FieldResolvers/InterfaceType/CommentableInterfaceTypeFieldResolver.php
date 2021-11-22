@@ -65,8 +65,6 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
             'hasComments',
             'commentCount',
             'comments',
-            'commentCountForAdmin',
-            'commentsForAdmin',
         ];
     }
 
@@ -74,11 +72,9 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     {
         return match ($fieldName) {
             'comments' => $this->getCommentObjectTypeResolver(),
-            'commentsForAdmin' => $this->getCommentObjectTypeResolver(),
             'areCommentsOpen' => $this->getBooleanScalarTypeResolver(),
             'hasComments' => $this->getBooleanScalarTypeResolver(),
             'commentCount' => $this->getIntScalarTypeResolver(),
-            'commentCountForAdmin' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($fieldName),
         };
     }
@@ -88,11 +84,9 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         return match ($fieldName) {
             'areCommentsOpen',
             'hasComments',
-            'commentCount',
-            'commentCountForAdmin'
+            'commentCount'
                 => SchemaTypeModifiers::NON_NULLABLE,
-            'comments',
-            'commentsForAdmin'
+            'comments'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
                 => parent::getFieldTypeModifiers($fieldName),
@@ -106,8 +100,6 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
             'hasComments' => $this->getTranslationAPI()->__('Does the custom post have comments?', 'pop-comments'),
             'commentCount' => $this->getTranslationAPI()->__('Number of comments added to the custom post', 'pop-comments'),
             'comments' => $this->getTranslationAPI()->__('Comments added to the custom post', 'pop-comments'),
-            'commentCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of comments added to the custom post', 'pop-comments'),
-            'commentsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Comments added to the custom post', 'pop-comments'),
             default => parent::getFieldDescription($fieldName),
         };
     }
@@ -123,14 +115,6 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
                 CommentFilterInputContainerModuleProcessor::class,
                 CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTCOUNT
             ],
-            'commentsForAdmin' => [
-                CommentFilterInputContainerModuleProcessor::class,
-                CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTS
-            ],
-            'commentCountForAdmin' => [
-                CommentFilterInputContainerModuleProcessor::class,
-                CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTCOUNT
-            ],
             default => parent::getFieldFilterInputContainerModule($fieldName),
         };
     }
@@ -139,9 +123,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     {
         switch ($fieldName) {
             case 'comments':
-            case 'commentsForAdmin':
             case 'commentCount':
-            case 'commentCountForAdmin':
                 // By default retrieve the top level comments (with ID => 0)
                 $parentIDFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
@@ -154,7 +136,6 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         }
         switch ($fieldName) {
             case 'comments':
-            case 'commentsForAdmin':
                 $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
@@ -196,7 +177,6 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'comments':
-            case 'commentsForAdmin':
                 if (
                     $maybeError = $this->maybeValidateLimitFieldArgument(
                         ComponentConfiguration::getCommentListMaxLimit(),

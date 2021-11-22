@@ -8,6 +8,7 @@ use DateTime;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Formatters\DateFormatterInterface;
+use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
 use PoPSchema\CustomPosts\FieldResolvers\InterfaceType\IsCustomPostInterfaceTypeFieldResolver;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
@@ -56,6 +57,15 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getFieldNamesToResolve(): array
     {
         return [];
+    }
+
+    public function getAdminFieldNames(): array
+    {
+        $adminFieldNames = parent::getAdminFieldNames();
+        if (ComponentConfiguration::treatCustomPostStatusAsAdminData()) {
+            $adminFieldNames[] = 'status';
+        }
+        return $adminFieldNames;
     }
 
     public function getImplementedInterfaceTypeFieldResolvers(): array
