@@ -75,8 +75,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Comment mutations: support creating comments by non logged-in users
 - Fetch a user by different means:
   - `Root.userByUsername: User`
-  - `Root.userByEmail: User` ("admin" field)
-- Filter users by email ("admin" field)
+  - `Root.userByEmail: User`
+- Filter users by email
 - Query properties for users:
   - `User.nicename: String!`
   - `User.nickname: String!`
@@ -170,6 +170,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - All `date` fields (such as `Post.date`, `Media.date` and `Comment.date`) and `modified` fields are now of type `DateTime` (before they had type `String`)
 - Updated the arguments for mutation `loginUser`
 - Converged all the "admin" fields with the non-admin versions: instead of having fields `posts` and `unrestrainedPosts`, now there is only field `posts`, and its `filter` argument can also receive input `status` when `Schema Expose Admin Data` is enabled
+- `CustomPost.status` and `User.email` are treated as "admin" fields
 - The Access Control and Cache Control configuration lists will be broken: all fields for all non-root types broken will appear under "(Undefined entries)". These lists must be recreated
 
 ## 0.8.1 - 21/07/2021
