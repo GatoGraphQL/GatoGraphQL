@@ -12,6 +12,7 @@ use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\Posts\TypeResolvers\InputObjectType\AbstractPostsFilterInputObjectTypeResolver;
+use PoPSchema\Tags\FilterInputProcessors\FilterInputProcessor;
 
 class InputObjectTypeHookSet extends AbstractHookSet
 {
@@ -52,6 +53,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
         $this->getHooksAPI()->addFilter(
             HookNames::INPUT_FIELD_TYPE_MODIFIERS,
             [$this, 'getInputFieldTypeModifiers'],
+            10,
+            3
+        );
+        $this->getHooksAPI()->addFilter(
+            HookNames::INPUT_FIELD_FILTER_INPUT,
+            [$this, 'getInputFieldFilterInput'],
             10,
             3
         );
@@ -105,6 +112,21 @@ class InputObjectTypeHookSet extends AbstractHookSet
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => $inputFieldTypeModifiers,
+        };
+    }
+
+    public function getInputFieldFilterInput(
+        ?array $inputFieldFilterInput,
+        InputObjectTypeResolverInterface $inputObjectTypeResolver,
+        string $inputFieldName,
+    ): ?array {
+        if (!($inputObjectTypeResolver instanceof AbstractPostsFilterInputObjectTypeResolver)) {
+            return $inputFieldFilterInput;
+        }
+        return match ($inputFieldName) {
+            'tagIDs' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_TAG_IDS],
+            'tagSlugs' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_TAG_SLUGS],
+            default => $inputFieldFilterInput,
         };
     }
 }
