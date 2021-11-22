@@ -6,21 +6,21 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigAdminFieldsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigExposeAdminDataBlock;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 
 class AdminFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    private ?SchemaConfigAdminFieldsBlock $schemaConfigAdminFieldsBlock = null;
+    private ?SchemaConfigExposeAdminDataBlock $schemaConfigAdminFieldsBlock = null;
 
-    final public function setSchemaConfigAdminFieldsBlock(SchemaConfigAdminFieldsBlock $schemaConfigAdminFieldsBlock): void
+    final public function setSchemaConfigExposeAdminDataBlock(SchemaConfigExposeAdminDataBlock $schemaConfigAdminFieldsBlock): void
     {
         $this->schemaConfigAdminFieldsBlock = $schemaConfigAdminFieldsBlock;
     }
-    final protected function getSchemaConfigAdminFieldsBlock(): SchemaConfigAdminFieldsBlock
+    final protected function getSchemaConfigExposeAdminDataBlock(): SchemaConfigExposeAdminDataBlock
     {
-        return $this->schemaConfigAdminFieldsBlock ??= $this->instanceManager->getInstance(SchemaConfigAdminFieldsBlock::class);
+        return $this->schemaConfigAdminFieldsBlock ??= $this->instanceManager->getInstance(SchemaConfigExposeAdminDataBlock::class);
     }
 
     public function getEnablingModule(): ?string
@@ -30,7 +30,7 @@ class AdminFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
 
     protected function getBlock(): BlockInterface
     {
-        return $this->getSchemaConfigAdminFieldsBlock();
+        return $this->getSchemaConfigExposeAdminDataBlock();
     }
 
     public function getHookComponentConfigurationClass(): string
