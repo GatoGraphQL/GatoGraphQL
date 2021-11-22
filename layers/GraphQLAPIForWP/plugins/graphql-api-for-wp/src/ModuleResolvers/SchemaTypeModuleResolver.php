@@ -57,8 +57,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public const OPTION_DEFAULT_AVATAR_SIZE = 'default-avatar-size';
     public const OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT = 'root-comment-list-default-limit';
     public const OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT = 'custompost-comment-list-default-limit';
-    public const OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA = 'treat-user-email-as-admin-data';
     public const OPTION_TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA = 'treat-custompost-status-as-admin-data';
+    public const OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA = 'treat-user-email-as-admin-data';
+    public const OPTION_TREAT_USER_ROLE_AS_ADMIN_DATA = 'treat-user-role-as-admin-data';
+    public const OPTION_TREAT_USER_CAPABILITY_AS_ADMIN_DATA = 'treat-user-capability-as-admin-data';
 
     /**
      * Hooks
@@ -494,6 +496,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
                 self::OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA => true,
             ],
+            self::SCHEMA_USER_ROLES => [
+                self::OPTION_TREAT_USER_ROLE_AS_ADMIN_DATA => true,
+                self::OPTION_TREAT_USER_CAPABILITY_AS_ADMIN_DATA => true,
+            ],
             self::SCHEMA_MEDIA => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
@@ -551,6 +557,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $defaultValueLabel = $this->getDefaultValueLabel();
         $defaultValueDesc = $this->getDefaultValueDescription();
         $adminClientsDesc = $this->getAdminClientDescription();
+        $privateDataTitlePlaceholder = \__('Treat %s as private data', 'graphql-api');
+        $privateDataDescPlaceholder = \__('If <code>true</code>, the %s data is exposed in the schema (whether as a field to be queried, or as an input for filtering) only when property "Schema Admin Fields" is enabled in the Schema Configuration', 'graphql-api');
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module == self::SCHEMA_ADMIN_FIELDS) {
             $option = ModuleSettingOptions::DEFAULT_VALUE;
@@ -628,8 +636,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 self::SCHEMA_PAGES,
             ])
         ) {
-            $privateDataTitlePlaceholder = \__('Treat %s as private data', 'graphql-api');
-            $privateDataDescPlaceholder = \__('If <code>true</code>, the %s data is exposed in the schema (whether as a field to be queried, or as an input for filtering) only when property "Schema Admin Fields" is enabled in the Schema Configuration', 'graphql-api');
             $moduleEntities = [
                 self::SCHEMA_CUSTOMPOSTS => \__('custom posts', 'graphql-api'),
                 self::SCHEMA_POSTS => \__('posts', 'graphql-api'),
@@ -707,11 +713,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TITLE => sprintf(
                         $privateDataTitlePlaceholder,
-                        \__('custom post\'s status', 'graphql-api'),
+                        \__('custom post status', 'graphql-api'),
                     ),
                     Properties::DESCRIPTION => sprintf(
                         $privateDataDescPlaceholder,
-                        \__('custom post\'s status', 'graphql-api'),
+                        \__('custom post status', 'graphql-api'),
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
@@ -773,11 +779,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TITLE => sprintf(
                         $privateDataTitlePlaceholder,
-                        \__('user\'s email', 'graphql-api'),
+                        \__('user email', 'graphql-api'),
                     ),
                     Properties::DESCRIPTION => sprintf(
                         $privateDataDescPlaceholder,
-                        \__('user\'s email', 'graphql-api'),
+                        \__('user email', 'graphql-api'),
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
@@ -973,6 +979,42 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TYPE => Properties::TYPE_INT,
                 Properties::MIN_NUMBER => 1,
+            ];
+        } elseif ($module == self::SCHEMA_USER_ROLES) {
+            $option = self::OPTION_TREAT_USER_ROLE_AS_ADMIN_DATA;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => sprintf(
+                    $privateDataTitlePlaceholder,
+                    \__('user roles', 'graphql-api'),
+                ),
+                Properties::DESCRIPTION => sprintf(
+                    $privateDataDescPlaceholder,
+                    \__('user roles', 'graphql-api'),
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+
+            $option = self::OPTION_TREAT_USER_CAPABILITY_AS_ADMIN_DATA;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => sprintf(
+                    $privateDataTitlePlaceholder,
+                    \__('user capabilities', 'graphql-api'),
+                ),
+                Properties::DESCRIPTION => sprintf(
+                    $privateDataDescPlaceholder,
+                    \__('user capabilities', 'graphql-api'),
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
             ];
         }
 

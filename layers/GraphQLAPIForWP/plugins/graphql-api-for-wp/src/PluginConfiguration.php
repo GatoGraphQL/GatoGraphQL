@@ -60,9 +60,11 @@ use PoPSchema\Tags\ComponentConfiguration as TagsComponentConfiguration;
 use PoPSchema\Tags\Environment as TagsEnvironment;
 use PoPSchema\TaxonomyMeta\ComponentConfiguration as TaxonomyMetaComponentConfiguration;
 use PoPSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
+use PoPSchema\UserRoles\ComponentConfiguration as UserRolesComponentConfiguration;
+use PoPSchema\UserRoles\Environment as UserRolesEnvironment;
+use PoPSchema\UserMeta\ComponentConfiguration as UserMetaComponentConfiguration;
 use PoPSchema\UserAvatars\ComponentConfiguration as UserAvatarsComponentConfiguration;
 use PoPSchema\UserAvatars\Environment as UserAvatarsEnvironment;
-use PoPSchema\UserMeta\ComponentConfiguration as UserMetaComponentConfiguration;
 use PoPSchema\UserMeta\Environment as UserMetaEnvironment;
 use PoPSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 use PoPSchema\Users\Environment as UsersEnvironment;
@@ -469,6 +471,18 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'envVariable' => UserAvatarsEnvironment::USER_AVATAR_DEFAULT_SIZE,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USER_AVATARS,
                 'option' => SchemaTypeModuleResolver::OPTION_DEFAULT_AVATAR_SIZE,
+            ],
+            [
+                'class' => UserRolesComponentConfiguration::class,
+                'envVariable' => UserRolesEnvironment::TREAT_USER_ROLE_AS_ADMIN_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_USER_ROLES,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_ROLE_AS_ADMIN_DATA,
+            ],
+            [
+                'class' => UserRolesComponentConfiguration::class,
+                'envVariable' => UserRolesEnvironment::TREAT_USER_CAPABILITY_AS_ADMIN_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_USER_ROLES,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_CAPABILITY_AS_ADMIN_DATA,
             ],
         ];
     }
