@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\RootCustomPostByInputObjectTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostByInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -21,15 +21,15 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
  */
 class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListObjectTypeFieldResolver
 {
-    private ?RootCustomPostByInputObjectTypeResolver $rootCustomPostByInputObjectTypeResolver = null;
+    private ?CustomPostByInputObjectTypeResolver $customPostByInputObjectTypeResolver = null;
 
-    final public function setRootCustomPostByInputObjectTypeResolver(RootCustomPostByInputObjectTypeResolver $rootCustomPostByInputObjectTypeResolver): void
+    final public function setCustomPostByInputObjectTypeResolver(CustomPostByInputObjectTypeResolver $customPostByInputObjectTypeResolver): void
     {
-        $this->rootCustomPostByInputObjectTypeResolver = $rootCustomPostByInputObjectTypeResolver;
+        $this->customPostByInputObjectTypeResolver = $customPostByInputObjectTypeResolver;
     }
-    final protected function getRootCustomPostByInputObjectTypeResolver(): RootCustomPostByInputObjectTypeResolver
+    final protected function getCustomPostByInputObjectTypeResolver(): CustomPostByInputObjectTypeResolver
     {
-        return $this->rootCustomPostByInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootCustomPostByInputObjectTypeResolver::class);
+        return $this->customPostByInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostByInputObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -72,7 +72,7 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
             'customPost' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'by' => $this->getRootCustomPostByInputObjectTypeResolver(),
+                    'by' => $this->getCustomPostByInputObjectTypeResolver(),
                 ]
             ),
             default => $fieldArgNameTypeResolvers,
