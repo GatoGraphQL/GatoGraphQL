@@ -32,7 +32,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     use SchemaTypeModuleResolverTrait;
 
-    public const SCHEMA_ADMIN_FIELDS = Plugin::NAMESPACE . '\schema-admin-fields';
+    public const SCHEMA_ADMIN_FIELDS = Plugin::NAMESPACE . '\schema-expose-admin-data';
     public const SCHEMA_SELF_FIELDS = Plugin::NAMESPACE . '\schema-self-fields';
     public const SCHEMA_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-customposts';
     public const SCHEMA_GENERIC_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-generic-customposts';
