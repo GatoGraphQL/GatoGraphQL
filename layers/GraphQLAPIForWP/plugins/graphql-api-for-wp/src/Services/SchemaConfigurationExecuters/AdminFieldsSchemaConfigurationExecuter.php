@@ -25,7 +25,7 @@ class AdminFieldsSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
 
     public function getEnablingModule(): ?string
     {
-        return SchemaTypeModuleResolver::SCHEMA_ADMIN_FIELDS;
+        return SchemaTypeModuleResolver::SCHEMA_EXPOSE_ADMIN_DATA;
     }
 
     protected function getBlock(): BlockInterface

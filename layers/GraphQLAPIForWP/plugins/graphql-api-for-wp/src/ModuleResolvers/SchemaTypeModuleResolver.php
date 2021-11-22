@@ -32,7 +32,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     use SchemaTypeModuleResolverTrait;
 
-    public const SCHEMA_ADMIN_FIELDS = Plugin::NAMESPACE . '\schema-expose-admin-data';
+    public const SCHEMA_EXPOSE_ADMIN_DATA = Plugin::NAMESPACE . '\schema-expose-admin-data';
     public const SCHEMA_SELF_FIELDS = Plugin::NAMESPACE . '\schema-self-fields';
     public const SCHEMA_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-customposts';
     public const SCHEMA_GENERIC_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-generic-customposts';
@@ -214,7 +214,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public function getModulesToResolve(): array
     {
         return [
-            self::SCHEMA_ADMIN_FIELDS,
+            self::SCHEMA_EXPOSE_ADMIN_DATA,
             self::SCHEMA_SELF_FIELDS,
             self::SCHEMA_CUSTOMPOSTS,
             self::SCHEMA_GENERIC_CUSTOMPOSTS,
@@ -283,7 +283,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public function getName(string $module): string
     {
         return match ($module) {
-            self::SCHEMA_ADMIN_FIELDS => \__('Schema Expose Admin Data', 'graphql-api'),
+            self::SCHEMA_EXPOSE_ADMIN_DATA => \__('Schema Expose Admin Data', 'graphql-api'),
             self::SCHEMA_SELF_FIELDS => \__('Schema Self Fields', 'graphql-api'),
             self::SCHEMA_GENERIC_CUSTOMPOSTS => \__('Schema Generic Custom Posts', 'graphql-api'),
             self::SCHEMA_POSTS => \__('Schema Posts', 'graphql-api'),
@@ -307,7 +307,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public function getDescription(string $module): string
     {
         switch ($module) {
-            case self::SCHEMA_ADMIN_FIELDS:
+            case self::SCHEMA_EXPOSE_ADMIN_DATA:
                 return \__('Add "admin" fields to the schema', 'graphql-api');
             case self::SCHEMA_SELF_FIELDS:
                 return \__('Add "self" fields to the schema', 'graphql-api');
@@ -464,7 +464,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         // Lower the security constraints for the static app
         $useUnsafe = PluginEnvironment::areUnsafeDefaultsEnabled();
         $defaultValues = [
-            self::SCHEMA_ADMIN_FIELDS => [
+            self::SCHEMA_EXPOSE_ADMIN_DATA => [
                 ModuleSettingOptions::DEFAULT_VALUE => $useUnsafe,
                 ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => true,
             ],
@@ -560,7 +560,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $privateDataTitlePlaceholder = \__('Treat %s as private data', 'graphql-api');
         $privateDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema (whether as an object field for querying, or as an input field for filtering) only if the Schema Configuration has property <code>Schema Expose Admin Data</code> enabled (i.e. the data is for private use only); otherwise, the data is always exposed in the schema (i.e. it is public)', 'graphql-api');
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
-        if ($module == self::SCHEMA_ADMIN_FIELDS) {
+        if ($module == self::SCHEMA_EXPOSE_ADMIN_DATA) {
             $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,

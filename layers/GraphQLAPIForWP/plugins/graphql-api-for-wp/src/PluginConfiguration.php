@@ -396,7 +396,7 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             [
                 'class' => ComponentModelComponentConfiguration::class,
                 'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
-                'module' => SchemaTypeModuleResolver::SCHEMA_ADMIN_FIELDS,
+                'module' => SchemaTypeModuleResolver::SCHEMA_EXPOSE_ADMIN_DATA,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // Add "self" fields to the schema?
