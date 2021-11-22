@@ -37,6 +37,11 @@ class SortInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolv
         return 'SortInput';
     }
 
+    public function getTypeDescription(): ?string
+    {
+        return $this->getTranslationAPI()->__('Input to sort custom posts', 'customposts');
+    }
+
     public function getInputFieldNameTypeResolvers(): array
     {
         return [

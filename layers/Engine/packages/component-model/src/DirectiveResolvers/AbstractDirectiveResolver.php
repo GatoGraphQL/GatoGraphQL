@@ -811,10 +811,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $schemaDirectiveArgs = [];
         $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
         foreach ($consolidatedDirectiveArgNameTypeResolvers as $directiveArgName => $directiveArgInputTypeResolver) {
+            $directiveArgDescription =
+                $this->getConsolidatedDirectiveArgDescription($relationalTypeResolver, $directiveArgName)
+                ?? $directiveArgInputTypeResolver->getTypeDescription();
             $schemaDirectiveArgs[$directiveArgName] = $this->getFieldOrDirectiveArgTypeSchemaDefinition(
                 $directiveArgName,
                 $directiveArgInputTypeResolver,
-                $this->getConsolidatedDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
+                $directiveArgDescription,
                 $this->getConsolidatedDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
                 $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
             );

@@ -411,10 +411,13 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
         $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
         $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName];
+        $inputFieldDescription =
+            $this->getConsolidatedInputFieldDescription($inputFieldName)
+            ?? $inputFieldTypeResolver->getTypeDescription();
         $inputFieldSchemaDefinition = $this->getTypeSchemaDefinition(
             $inputFieldName,
             $inputFieldTypeResolver,
-            $this->getConsolidatedInputFieldDescription($inputFieldName),
+            $inputFieldDescription,
             $this->getConsolidatedInputFieldDefaultValue($inputFieldName),
             $this->getConsolidatedInputFieldTypeModifiers($inputFieldName),
         );

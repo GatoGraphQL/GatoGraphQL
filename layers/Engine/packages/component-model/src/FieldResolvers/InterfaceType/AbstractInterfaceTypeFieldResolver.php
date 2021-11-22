@@ -407,11 +407,15 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      */
     final protected function doGetFieldSchemaDefinition(string $fieldName): array
     {
+        $fieldTypeResolver = $this->getFieldTypeResolver($fieldName);
+        $fieldDescription =
+            $this->getConsolidatedFieldDescription($fieldName)
+            ?? $fieldTypeResolver->getTypeDescription();
         $schemaDefinition = $this->getFieldTypeSchemaDefinition(
             $fieldName,
             // This method has no "Consolidated" because it makes no sense
-            $this->getFieldTypeResolver($fieldName),
-            $this->getConsolidatedFieldDescription($fieldName),
+            $fieldTypeResolver,
+            $fieldDescription,
             // This method has no "Consolidated" because it makes no sense
             $this->getFieldTypeModifiers($fieldName),
             $this->getConsolidatedFieldDeprecationMessage($fieldName),
@@ -493,10 +497,13 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
                 continue;
             }
 
+            $fieldArgDescription =
+                $this->getConsolidatedFieldArgDescription($fieldName, $fieldArgName)
+                ?? $fieldArgInputTypeResolver->getTypeDescription();
             $schemaFieldArgs[$fieldArgName] = $this->getFieldOrDirectiveArgTypeSchemaDefinition(
                 $fieldArgName,
                 $fieldArgInputTypeResolver,
-                $this->getConsolidatedFieldArgDescription($fieldName, $fieldArgName),
+                $fieldArgDescription,
                 $this->getConsolidatedFieldArgDefaultValue($fieldName, $fieldArgName),
                 $this->getConsolidatedFieldArgTypeModifiers($fieldName, $fieldArgName),
             );

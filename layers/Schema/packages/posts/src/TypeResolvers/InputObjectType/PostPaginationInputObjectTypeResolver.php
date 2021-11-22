@@ -14,6 +14,11 @@ class PostPaginationInputObjectTypeResolver extends PaginationInputObjectTypeRes
         return 'PostPaginationInput';
     }
 
+    public function getTypeDescription(): ?string
+    {
+        return $this->getTranslationAPI()->__('Input to paginate posts', 'posts');
+    }
+
     protected function getDefaultLimit(): ?int
     {
         return ComponentConfiguration::getPostListDefaultLimit();
