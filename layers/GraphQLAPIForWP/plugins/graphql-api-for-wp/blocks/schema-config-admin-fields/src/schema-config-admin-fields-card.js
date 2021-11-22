@@ -45,7 +45,7 @@ const SchemaConfigAdminFieldsCard = ( props ) => {
 		<div className={ componentClassName }>
 			<Card { ...props }>
 				<CardHeader isShady>
-					{ __('Schema Admin Fields', 'graphql-api') }
+					{ __('Schema Expose Admin Data', 'graphql-api') }
 				</CardHeader>
 				<CardBody>
 					<div className={ `${ className }__admin_schema` }>
