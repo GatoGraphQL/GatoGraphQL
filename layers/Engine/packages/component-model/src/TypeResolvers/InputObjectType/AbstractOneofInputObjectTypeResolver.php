@@ -8,11 +8,11 @@ use PoP\ComponentModel\Error\Error;
 use stdClass;
 
 /**
- * Tagged InputObject Type, as proposed for the GraphQL spec:
+ * Oneof InputObject Type, as proposed for the GraphQL spec:
  *
  * @see https://github.com/graphql/graphql-spec/pull/733
  */
-abstract class AbstractTaggedInputObjectTypeResolver extends AbstractInputObjectTypeResolver
+abstract class AbstractOneofInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
     /**
      * Validate that there is exactly one input set
@@ -24,7 +24,7 @@ abstract class AbstractTaggedInputObjectTypeResolver extends AbstractInputObject
             return new Error(
                 $this->getErrorCode(),
                 sprintf(
-                    $this->getTranslationAPI()->__('The tagged input object \'%s\' must receive exactly 1 input, but %s', 'component-model'),
+                    $this->getTranslationAPI()->__('The oneof input object \'%s\' must receive exactly 1 input, but %s', 'component-model'),
                     $this->getMaybeNamespacedTypeName(),
                     $inputValueSize === 0 ?
                         $this->getTranslationAPI()->__('no input was provided', 'component-model')

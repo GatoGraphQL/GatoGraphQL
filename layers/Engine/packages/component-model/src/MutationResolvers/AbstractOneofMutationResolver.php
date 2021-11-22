@@ -7,13 +7,13 @@ namespace PoP\ComponentModel\MutationResolvers;
 use Exception;
 use stdClass;
 
-abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
+abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
 {
     /** @var array<string, MutationResolverInterface>|null */
     private ?array $consolidatedInputFieldNameMutationResolversCache = null;
 
     /**
-     * The MutationResolvers contained in the TaggedMutationResolver,
+     * The MutationResolvers contained in the OneofMutationResolver,
      * organized by inputFieldName
      *
      * @return array<string, MutationResolverInterface> Array of inputFieldName => MutationResolver
@@ -38,25 +38,25 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * The tagged input object can receive only 1 input field at a time.
+     * The oneof input object can receive only 1 input field at a time.
      * Retrieve it, or throw an Exception if this is not respected
      *
      * @return string
      * @throws Exception If either there is none or more than 1 inputFieldNames being used
      */
-    protected function getCurrentInputFieldName(stdClass $taggedInputObjectFormData): string
+    protected function getCurrentInputFieldName(stdClass $oneofInputObjectFormData): string
     {
-        $taggedInputObjectFormDataSize = count((array)$taggedInputObjectFormData);
-        if ($taggedInputObjectFormDataSize !== 1) {
+        $oneofInputObjectFormDataSize = count((array)$oneofInputObjectFormData);
+        if ($oneofInputObjectFormDataSize !== 1) {
             throw new Exception(
                 sprintf(
-                    $this->getTranslationAPI()->__('Only and exactly 1 input field must be provided to the TaggedMutationResolver, but %s were provided', 'component-model'),
-                    $taggedInputObjectFormDataSize
+                    $this->getTranslationAPI()->__('Only and exactly 1 input field must be provided to the OneofMutationResolver, but %s were provided', 'component-model'),
+                    $oneofInputObjectFormDataSize
                 )
             );
         }
         // Retrieve the first (and only) element key
-        return (string)key($taggedInputObjectFormData);
+        return (string)key($oneofInputObjectFormData);
     }
 
     /**
@@ -80,9 +80,9 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
      * @return array<string,mixed>|stdClass
      * @throws Exception If the form data for the input field is not present in the array
      */
-    protected function getInputFieldFormData(string $inputFieldName, stdClass $taggedInputObjectFormData): array|stdClass
+    protected function getInputFieldFormData(string $inputFieldName, stdClass $oneofInputObjectFormData): array|stdClass
     {
-        $inputFieldFormData = $taggedInputObjectFormData->$inputFieldName ?? null;
+        $inputFieldFormData = $oneofInputObjectFormData->$inputFieldName ?? null;
         if ($inputFieldFormData === null) {
             throw new Exception(
                 sprintf(
@@ -96,20 +96,20 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
 
     /**
      * Assume there's only one argument in the field,
-     * for this TaggedMutationResolver.
+     * for this OneofMutationResolver.
      * If that's not the case, this function must be overriden,
      * to avoid throwing an Exception
      *
      * @return stdClass The current input field's form data
-     * @throws Exception If more than 1 argument is passed to the field executing the TaggedMutation
+     * @throws Exception If more than 1 argument is passed to the field executing the OneofMutation
      */
-    protected function getTaggedInputObjectFormData(array $formData): stdClass
+    protected function getOneofInputObjectFormData(array $formData): stdClass
     {
         $formDataSize = count($formData);
         if ($formDataSize !== 1) {
             throw new Exception(
                 sprintf(
-                    $this->getTranslationAPI()->__('The TaggedMutationResolver expects only 1 argument is passed to the field executing the mutation, but %s were provided: \'%s\'', 'component-model'),
+                    $this->getTranslationAPI()->__('The OneofMutationResolver expects only 1 argument is passed to the field executing the mutation, but %s were provided: \'%s\'', 'component-model'),
                     $formDataSize,
                     implode('\'%s\'', array_keys($formData))
                 )
@@ -140,10 +140,10 @@ abstract class AbstractTaggedMutationResolver extends AbstractMutationResolver
      */
     final protected function getInputFieldMutationResolverAndFormData(array $formData): array
     {
-        $taggedInputObjectFormData = $this->getTaggedInputObjectFormData($formData);
-        $inputFieldName = $this->getCurrentInputFieldName($taggedInputObjectFormData);
+        $oneofInputObjectFormData = $this->getOneofInputObjectFormData($formData);
+        $inputFieldName = $this->getCurrentInputFieldName($oneofInputObjectFormData);
         $inputFieldMutationResolver = $this->getInputFieldMutationResolver($inputFieldName);
-        $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $taggedInputObjectFormData);
+        $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $oneofInputObjectFormData);
         return [$inputFieldMutationResolver, $inputFieldFormData];
     }
 }
