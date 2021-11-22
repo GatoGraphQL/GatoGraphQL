@@ -30,6 +30,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     private array $consolidatedInputFieldDefaultValueCache = [];
     /** @var array<string, int> */
     private array $consolidatedInputFieldTypeModifiersCache = [];
+    /** @var string[]|null */
+    private ?array $consolidatedAdminInputFieldNames = null;
 
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
     private ?InputCoercingServiceInterface $inputCoercingService = null;
@@ -63,6 +65,10 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     {
         return SchemaTypeModifiers::NONE;
     }
+    public function getAdminInputFieldNames(): array
+    {
+        return [];
+    }
 
     /**
      * Consolidation of the schema inputs. Call this function to read the data
@@ -73,9 +79,21 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         if ($this->consolidatedInputFieldNameTypeResolversCache !== null) {
             return $this->consolidatedInputFieldNameTypeResolversCache;
         }
+
+        // Exclude the admin input fields, if "Admin" Schema is not enabled
+        $inputFieldNameTypeResolvers = $this->getInputFieldNameTypeResolvers();
+        if (!ComponentConfiguration::enableAdminSchema()) {
+            $adminInputFieldNames = $this->getConsolidatedAdminInputFieldNames();
+            $inputFieldNameTypeResolvers = array_filter(
+                $inputFieldNameTypeResolvers,
+                fn (string $inputFieldName) => !in_array($inputFieldName, $adminInputFieldNames),
+                ARRAY_FILTER_USE_KEY
+            );
+        }
+        
         $this->consolidatedInputFieldNameTypeResolversCache = $this->getHooksAPI()->applyFilters(
             HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
-            $this->getInputFieldNameTypeResolvers(),
+            $inputFieldNameTypeResolvers,
             $this,
         );
         return $this->consolidatedInputFieldNameTypeResolversCache;
@@ -133,6 +151,24 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             $inputFieldName,
         );
         return $this->consolidatedInputFieldTypeModifiersCache[$inputFieldName];
+    }
+
+    /**
+     * Consolidation of the schema inputs. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedAdminInputFieldNames(): array
+    {
+        if ($this->consolidatedAdminInputFieldNames !== null) {
+            return $this->consolidatedAdminInputFieldNames;
+        }
+
+        $this->consolidatedAdminInputFieldNames = $this->getHooksAPI()->applyFilters(
+            HookNames::ADMIN_INPUT_FIELD_NAMES,
+            $this->getAdminInputFieldNames(),
+            $this,
+        );
+        return $this->consolidatedAdminInputFieldNames;
     }
 
     final public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object

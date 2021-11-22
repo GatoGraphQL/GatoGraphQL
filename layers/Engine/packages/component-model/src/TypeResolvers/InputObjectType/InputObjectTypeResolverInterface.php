@@ -25,6 +25,10 @@ interface InputObjectTypeResolverInterface extends DeprecatableInputTypeResolver
     public function getInputFieldDefaultValue(string $inputFieldName): mixed;
     public function getInputFieldTypeModifiers(string $inputFieldName): int;
     /**
+     * @return string[]
+     */
+    public function getAdminInputFieldNames(): array;
+    /**
      * Consolidation of the schema inputs. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      *
@@ -34,7 +38,11 @@ interface InputObjectTypeResolverInterface extends DeprecatableInputTypeResolver
     public function getConsolidatedInputFieldDescription(string $inputFieldName): ?string;
     public function getConsolidatedInputFieldDefaultValue(string $inputFieldName): mixed;
     public function getConsolidatedInputFieldTypeModifiers(string $inputFieldName): int;
-
+    /**
+     * @return string[]
+     */
+    public function getConsolidatedAdminInputFieldNames(): array;
+    
     /**
      * Input fields may not be directly visible in the schema,
      * eg: because they are used only by the application, and must not
