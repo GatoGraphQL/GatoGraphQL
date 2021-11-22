@@ -12,7 +12,7 @@ use stdClass;
  *
  * @see https://github.com/graphql/graphql-spec/pull/825
  */
-abstract class AbstractOneofInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements OneofInputObjectTypeResolverInterface
+abstract class AbstractOneofQueryableInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver implements OneofInputObjectTypeResolverInterface
 {
     use OneofInputObjectTypeResolverTrait;
 
