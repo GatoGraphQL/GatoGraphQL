@@ -58,6 +58,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public const OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT = 'root-comment-list-default-limit';
     public const OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT = 'custompost-comment-list-default-limit';
     public const OPTION_TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA = 'treat-custompost-status-as-admin-data';
+    public const OPTION_TREAT_COMMENT_STATUS_AS_ADMIN_DATA = 'treat-comment-status-as-admin-data';
     public const OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA = 'treat-user-email-as-admin-data';
     public const OPTION_TREAT_USER_ROLE_AS_ADMIN_DATA = 'treat-user-role-as-admin-data';
     public const OPTION_TREAT_USER_CAPABILITY_AS_ADMIN_DATA = 'treat-user-capability-as-admin-data';
@@ -536,6 +537,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 self::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT => 10,
                 self::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT => -1,
                 ModuleSettingOptions::LIST_MAX_LIMIT => -1,
+                self::OPTION_TREAT_COMMENT_STATUS_AS_ADMIN_DATA => true,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -844,6 +846,24 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TYPE => Properties::TYPE_INT,
                 Properties::MIN_NUMBER => -1,
+            ];
+
+            $option = self::OPTION_TREAT_COMMENT_STATUS_AS_ADMIN_DATA;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => sprintf(
+                    $privateDataTitlePlaceholder,
+                    \__('comment status', 'graphql-api'),
+                ),
+                Properties::DESCRIPTION => sprintf(
+                    $privateDataDescPlaceholder,
+                    \__('comment status', 'graphql-api'),
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module == self::SCHEMA_GENERIC_CUSTOMPOSTS) {
             // Get the list of custom post types from the system

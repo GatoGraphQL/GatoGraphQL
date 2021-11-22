@@ -290,6 +290,12 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
+            [
+                'class' => CommentsComponentConfiguration::class,
+                'envVariable' => CommentsEnvironment::TREAT_COMMENT_STATUS_AS_ADMIN_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_COMMENT_STATUS_AS_ADMIN_DATA,
+            ],
             // Media default/max limits
             [
                 'class' => MediaComponentConfiguration::class,
