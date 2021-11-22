@@ -15,8 +15,6 @@ abstract class AbstractCustomPostListTagObjectTypeFieldResolver extends Abstract
         return match ($fieldName) {
             'customPosts' => $this->getTranslationAPI()->__('Custom posts which contain this tag', 'pop-tags'),
             'customPostCount' => $this->getTranslationAPI()->__('Number of custom posts which contain this tag', 'pop-tags'),
-            'customPostsForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Custom posts which contain this tag', 'pop-tags'),
-            'customPostCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of custom posts which contain this tag', 'pop-tags'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -39,8 +37,6 @@ abstract class AbstractCustomPostListTagObjectTypeFieldResolver extends Abstract
         switch ($fieldName) {
             case 'customPosts':
             case 'customPostCount':
-            case 'customPostsForAdmin':
-            case 'customPostCountForAdmin':
                 $query[$this->getQueryProperty()] = [$objectTypeResolver->getID($tag)];
                 break;
         }

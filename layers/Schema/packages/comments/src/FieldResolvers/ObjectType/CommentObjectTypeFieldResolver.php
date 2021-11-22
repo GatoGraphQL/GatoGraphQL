@@ -160,8 +160,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'dateAsString',
             'responses',
             'responseCount',
-            'responsesForAdmin',
-            'responseCountForAdmin',
         ];
     }
 
@@ -183,14 +181,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                 => $this->getBooleanScalarTypeResolver(),
             'date'
                 => $this->getDateTimeScalarTypeResolver(),
-            'responseCount',
-            'responseCountForAdmin'
+            'responseCount'
                 => $this->getIntScalarTypeResolver(),
             'customPost'
                 => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
             'parent',
-            'responses',
-            'responsesForAdmin'
+            'responses'
                 => $this->getCommentObjectTypeResolver(),
             'status'
                 => $this->getCommentStatusEnumTypeResolver(),
@@ -210,11 +206,9 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'status',
             'date',
             'dateAsString',
-            'responseCount',
-            'responseCountForAdmin'
+            'responseCount'
                 => SchemaTypeModifiers::NON_NULLABLE,
-            'responses',
-            'responsesForAdmin'
+            'responses'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -238,8 +232,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'dateAsString' => $this->getTranslationAPI()->__('Date when the comment was added, in String format', 'pop-comments'),
             'responses' => $this->getTranslationAPI()->__('Responses to the comment', 'pop-comments'),
             'responseCount' => $this->getTranslationAPI()->__('Number of responses to the comment', 'pop-comments'),
-            'responsesForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Responses to the comment', 'pop-comments'),
-            'responseCountForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Number of responses to the comment', 'pop-comments'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -249,8 +241,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         return match ($fieldName) {
             'responses' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_RESPONSES],
             'responseCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT],
-            'responsesForAdmin' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINRESPONSES],
-            'responseCountForAdmin' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINRESPONSECOUNT],
             'date' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE],
             'dateAsString' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
@@ -261,7 +251,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     {
         switch ($fieldName) {
             case 'responses':
-            case 'responsesForAdmin':
                 $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
@@ -305,7 +294,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         // Check the "limit" fieldArg
         switch ($fieldName) {
             case 'responses':
-            case 'responsesForAdmin':
                 if (
                     $maybeError = $this->maybeValidateLimitFieldArgument(
                         ComponentConfiguration::getCommentListMaxLimit(),
@@ -384,11 +372,9 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         );
         switch ($fieldName) {
             case 'responses':
-            case 'responsesForAdmin':
                 return $this->getCommentTypeAPI()->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
             case 'responseCount':
-            case 'responseCountForAdmin':
                 return $this->getCommentTypeAPI()->getCommentCount($query);
         }
 

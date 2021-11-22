@@ -54,9 +54,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             'areCommentsOpen',
             'hasComments',
             'commentCount',
-            'commentCountForAdmin',
             'comments',
-            'commentsForAdmin',
         ];
     }
 
@@ -92,11 +90,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         );
         switch ($fieldName) {
             case 'commentCount':
-            case 'commentCountForAdmin':
                 return $this->getCommentTypeAPI()->getCommentCount($query);
 
             case 'comments':
-            case 'commentsForAdmin':
                 return $this->getCommentTypeAPI()->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
         }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Pages\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -46,14 +47,6 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     {
         return [
             'pageByPath',
-            'pageByPathForAdmin',
-        ];
-    }
-
-    public function getAdminFieldNames(): array
-    {
-        return [
-            'pageByPathForAdmin',
         ];
     }
 
@@ -61,7 +54,6 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     {
         return match ($fieldName) {
             'pageByPath' => $this->getTranslationAPI()->__('Page with a specific URL path', 'pages'),
-            'pageByPathForAdmin' => $this->getTranslationAPI()->__('[Unrestricted] Page with a specific URL path', 'pages'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -69,8 +61,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            'pageByPath',
-            'pageByPathForAdmin' => [
+            'pageByPath' => [
                 'path' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
@@ -110,16 +101,13 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     ): mixed {
         switch ($fieldName) {
             case 'pageByPath':
-            case 'pageByPathForAdmin':
                 /** @var WP_Post|null */
                 $page = \get_page_by_path($fieldArgs['path']);
                 if ($page === null) {
                     return null;
                 }
-                // Check the status is allowed
-                if ($fieldName === 'pageByPath' && $page->post_status !== "publish") {
-                    return null;
-                } elseif ($fieldName === 'pageByPathForAdmin') {
+                // If the "admin" schema is not enabled, Only expose posts with status "publish"
+                if (!ComponentConfiguration::enableAdminSchema() && $page->post_status !== "publish") {
                     return null;
                 }
                 return $page->ID;
@@ -131,11 +119,8 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'pageByPath',
-            'pageByPathForAdmin'
-                => $this->getPageObjectTypeResolver(),
-            default
-                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'pageByPath' => $this->getPageObjectTypeResolver(),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 }
