@@ -24,7 +24,7 @@ abstract class AbstractOneofInputObjectTypeResolver extends AbstractInputObjectT
             return new Error(
                 $this->getErrorCode(),
                 sprintf(
-                    $this->getTranslationAPI()->__('The tagged input object \'%s\' must receive exactly 1 input, but %s', 'component-model'),
+                    $this->getTranslationAPI()->__('The oneof input object \'%s\' must receive exactly 1 input, but %s', 'component-model'),
                     $this->getMaybeNamespacedTypeName(),
                     $inputValueSize === 0 ?
                         $this->getTranslationAPI()->__('no input was provided', 'component-model')

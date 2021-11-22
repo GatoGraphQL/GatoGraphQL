@@ -38,25 +38,25 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * The tagged input object can receive only 1 input field at a time.
+     * The oneof input object can receive only 1 input field at a time.
      * Retrieve it, or throw an Exception if this is not respected
      *
      * @return string
      * @throws Exception If either there is none or more than 1 inputFieldNames being used
      */
-    protected function getCurrentInputFieldName(stdClass $taggedInputObjectFormData): string
+    protected function getCurrentInputFieldName(stdClass $oneofInputObjectFormData): string
     {
-        $taggedInputObjectFormDataSize = count((array)$taggedInputObjectFormData);
-        if ($taggedInputObjectFormDataSize !== 1) {
+        $oneofInputObjectFormDataSize = count((array)$oneofInputObjectFormData);
+        if ($oneofInputObjectFormDataSize !== 1) {
             throw new Exception(
                 sprintf(
                     $this->getTranslationAPI()->__('Only and exactly 1 input field must be provided to the OneofMutationResolver, but %s were provided', 'component-model'),
-                    $taggedInputObjectFormDataSize
+                    $oneofInputObjectFormDataSize
                 )
             );
         }
         // Retrieve the first (and only) element key
-        return (string)key($taggedInputObjectFormData);
+        return (string)key($oneofInputObjectFormData);
     }
 
     /**
@@ -80,9 +80,9 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * @return array<string,mixed>|stdClass
      * @throws Exception If the form data for the input field is not present in the array
      */
-    protected function getInputFieldFormData(string $inputFieldName, stdClass $taggedInputObjectFormData): array|stdClass
+    protected function getInputFieldFormData(string $inputFieldName, stdClass $oneofInputObjectFormData): array|stdClass
     {
-        $inputFieldFormData = $taggedInputObjectFormData->$inputFieldName ?? null;
+        $inputFieldFormData = $oneofInputObjectFormData->$inputFieldName ?? null;
         if ($inputFieldFormData === null) {
             throw new Exception(
                 sprintf(
@@ -140,10 +140,10 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      */
     final protected function getInputFieldMutationResolverAndFormData(array $formData): array
     {
-        $taggedInputObjectFormData = $this->getOneofInputObjectFormData($formData);
-        $inputFieldName = $this->getCurrentInputFieldName($taggedInputObjectFormData);
+        $oneofInputObjectFormData = $this->getOneofInputObjectFormData($formData);
+        $inputFieldName = $this->getCurrentInputFieldName($oneofInputObjectFormData);
         $inputFieldMutationResolver = $this->getInputFieldMutationResolver($inputFieldName);
-        $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $taggedInputObjectFormData);
+        $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $oneofInputObjectFormData);
         return [$inputFieldMutationResolver, $inputFieldFormData];
     }
 }

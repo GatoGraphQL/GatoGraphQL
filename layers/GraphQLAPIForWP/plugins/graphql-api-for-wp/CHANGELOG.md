@@ -149,7 +149,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Implementation of standard custom scalar types
 - Support for custom enum types
 - Support for input objects
-- Support for tagged input objects
+- Support for oneof input objects
 - Allow to use unsafe default settings
 - Module "Schema Self Fields"
 - Schema Configuration for the Single Endpoint
