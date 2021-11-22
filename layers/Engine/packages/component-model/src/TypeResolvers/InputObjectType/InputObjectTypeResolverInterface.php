@@ -42,7 +42,7 @@ interface InputObjectTypeResolverInterface extends DeprecatableInputTypeResolver
     public function getConsolidatedInputFieldDescription(string $inputFieldName): ?string;
     public function getConsolidatedInputFieldDefaultValue(string $inputFieldName): mixed;
     public function getConsolidatedInputFieldTypeModifiers(string $inputFieldName): int;
-    
+
     /**
      * Input fields may not be directly visible in the schema,
      * eg: because they are used only by the application, and must not

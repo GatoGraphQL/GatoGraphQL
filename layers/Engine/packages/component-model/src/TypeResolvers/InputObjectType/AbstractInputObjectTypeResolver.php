@@ -90,7 +90,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 ARRAY_FILTER_USE_KEY
             );
         }
-        
+
         $this->consolidatedInputFieldNameTypeResolversCache = $this->getHooksAPI()->applyFilters(
             HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
             $inputFieldNameTypeResolvers,
