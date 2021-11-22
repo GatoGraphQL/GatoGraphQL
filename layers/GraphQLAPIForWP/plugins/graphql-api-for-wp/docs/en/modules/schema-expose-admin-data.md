@@ -1,8 +1,8 @@
 # Schema Expose Admin Data
 
-Add "admin" fields to the GraphQL schema, which may expose private data.
+Expose "admin" elements in the GraphQL schema, which may expose private data.
 
-The GraphQL schema must strike a balance between public and private fields, as to avoid exposing private information in a public API.
+The GraphQL schema must strike a balance between public and private fields and input fields, as to avoid exposing private information in a public API.
 
 For instance, to access post data, we have field:
 

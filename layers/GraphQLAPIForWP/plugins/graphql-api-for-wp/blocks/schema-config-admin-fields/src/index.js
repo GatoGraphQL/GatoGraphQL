@@ -37,7 +37,7 @@ registerBlockType( 'graphql-api/schema-config-expose-admin-data', {
 	 * It will be shown in the Block Tab in the Settings Sidebar.
 	 */
 	description: __(
-		'Enable "admin" fields in the Schema Configuration',
+		'Enable "admin" elements in the Schema Configuration',
 		'graphql-api'
 	),
 

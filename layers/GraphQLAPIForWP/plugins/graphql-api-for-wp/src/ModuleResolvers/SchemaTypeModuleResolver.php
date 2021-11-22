@@ -308,7 +308,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         switch ($module) {
             case self::SCHEMA_EXPOSE_ADMIN_DATA:
-                return \__('Add "admin" fields to the schema', 'graphql-api');
+                return \__('Expose "admin" elements in the schema', 'graphql-api');
             case self::SCHEMA_SELF_FIELDS:
                 return \__('Add "self" fields to the schema', 'graphql-api');
             case self::SCHEMA_GENERIC_CUSTOMPOSTS:
@@ -573,7 +573,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $defaultValueLabel
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Add "admin" elements to the GraphQL schema (such as field <code>Root.roles</code>, input field <code>Root.posts(status:)</code>, and others), which expose private data. %s', 'graphql-api'),
+                    \__('Expose "admin" elements in the GraphQL schema (such as field <code>Root.roles</code>, input field <code>Root.posts(status:)</code>, and others), which expose private data. %s', 'graphql-api'),
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
@@ -585,9 +585,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Add admin fields for the Admin?', 'graphql-api'),
+                Properties::TITLE => \__('Expose admin elements for the Admin?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Add "admin" fields in the wp-admin? %s', 'graphql-api'),
+                    \__('Expose "admin" elements in the wp-admin? %s', 'graphql-api'),
                     $adminClientsDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
