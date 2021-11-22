@@ -263,6 +263,12 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
+            [
+                'class' => UsersComponentConfiguration::class,
+                'envVariable' => UsersEnvironment::TREAT_USER_EMAIL_AS_ADMIN_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA,
+            ],
             // Comment default/max limits
             [
                 'class' => CommentsComponentConfiguration::class,

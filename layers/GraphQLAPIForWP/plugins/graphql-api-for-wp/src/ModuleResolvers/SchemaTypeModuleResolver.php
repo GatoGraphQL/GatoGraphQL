@@ -57,6 +57,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public const OPTION_DEFAULT_AVATAR_SIZE = 'default-avatar-size';
     public const OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT = 'root-comment-list-default-limit';
     public const OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT = 'custompost-comment-list-default-limit';
+    public const OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA = 'treat-user-email-as-admin-data';
 
     /**
      * Hooks
@@ -489,6 +490,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_USERS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
+                self::OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA => true,
             ],
             self::SCHEMA_MEDIA => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
@@ -737,6 +739,18 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TITLE => $moduleTitles[$module],
                     Properties::DESCRIPTION => $moduleDescriptions[$module],
+                    Properties::TYPE => Properties::TYPE_BOOL,
+                ];
+            } elseif ($module == self::SCHEMA_USERS) {
+                $option = self::OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('Treat user email as private data', 'graphql-api'),
+                    Properties::DESCRIPTION => \__('If <code>true</code>, the user email data is exposed in the schema (as a field to be queried, and as input for filtering) only when property "Schema Admin Fields" is enabled in the Schema Configuration', 'graphql-api'),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             }
