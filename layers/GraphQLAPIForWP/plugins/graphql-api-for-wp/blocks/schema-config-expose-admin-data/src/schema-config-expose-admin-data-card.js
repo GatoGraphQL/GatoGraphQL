@@ -52,7 +52,7 @@ const SchemaConfigExposeAdminDataCard = ( props ) => {
 						<em>{ __('Expose admin elements in the schema?', 'graphql-api') }</em>
 						<InfoTooltip
 							{ ...props }
-							text={ __('Expose "admin" elements in the GraphQL schema (such as field "Root.roles", input field "Root.posts(status:)", and others), which provide access to data', 'graphql-api') }
+							text={ __('Expose "admin" elements in the GraphQL schema (such as field "Root.roles", input field "Root.posts(status:)", and others), which provide access to private data', 'graphql-api') }
 						/>
 						{ !isSelected && (
 							<>
