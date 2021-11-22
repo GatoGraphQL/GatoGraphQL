@@ -13,7 +13,7 @@ trait OneofInputObjectTypeResolverTrait
     abstract protected function getErrorCode(): string;
     abstract protected function getTranslationAPI(): TranslationAPIInterface;
     abstract public function getMaybeNamespacedTypeName(): string;
-    
+
     /**
      * Validate that there is exactly one input set
      */

@@ -22,7 +22,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListObjectTypeFieldResolver
 {
     private ?RootCustomPostByInputObjectTypeResolver $rootCustomPostByInputObjectTypeResolver = null;
-    
+
     final public function setRootCustomPostByInputObjectTypeResolver(RootCustomPostByInputObjectTypeResolver $rootCustomPostByInputObjectTypeResolver): void
     {
         $this->rootCustomPostByInputObjectTypeResolver = $rootCustomPostByInputObjectTypeResolver;
@@ -31,7 +31,7 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
     {
         return $this->rootCustomPostByInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootCustomPostByInputObjectTypeResolver::class);
     }
-    
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

@@ -11,5 +11,5 @@ namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
  */
 interface OneofInputObjectTypeResolverInterface extends InputObjectTypeResolverInterface
 {
-    
+
 }
