@@ -41,7 +41,7 @@ abstract class AbstractTaxonomyByInputObjectTypeResolver extends AbstractOneofQu
 
     protected function getTypeDescriptionTaxonomyEntity(): string
     {
-        return $this->getTranslationAPI()->__('a custom post', 'customposts');
+        return $this->getTranslationAPI()->__('a taxonomy', 'customposts');
     }
 
     public function getInputFieldNameTypeResolvers(): array
