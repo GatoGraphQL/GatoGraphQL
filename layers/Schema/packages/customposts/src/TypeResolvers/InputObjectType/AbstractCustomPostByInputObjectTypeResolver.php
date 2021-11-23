@@ -9,7 +9,7 @@ use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 
-abstract class AbstractRootCustomPostByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
+abstract class AbstractCustomPostByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
@@ -33,7 +33,15 @@ abstract class AbstractRootCustomPostByInputObjectTypeResolver extends AbstractO
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Oneof input to specify the property and data to fetch a custom post', 'customposts');
+        return sprintf(
+            $this->getTranslationAPI()->__('Oneof input to specify the property and data to fetch %s', 'customposts'),
+            $this->getTypeDescriptionCustomPostEntity()
+        );
+    }
+
+    protected function getTypeDescriptionCustomPostEntity(): string
+    {
+        return $this->getTranslationAPI()->__('a custom post', 'customposts');
     }
 
     public function getInputFieldNameTypeResolvers(): array
