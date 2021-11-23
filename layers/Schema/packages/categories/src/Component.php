@@ -46,5 +46,6 @@ class Component extends AbstractComponent
     ): void {
         ComponentConfiguration::setConfiguration($configuration);
         self::initServices(dirname(__DIR__));
+        self::initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 }
