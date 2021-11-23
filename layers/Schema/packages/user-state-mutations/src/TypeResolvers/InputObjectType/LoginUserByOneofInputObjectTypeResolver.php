@@ -8,15 +8,15 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofInputObjectTyp
 
 class LoginUserByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
 {
-    private ?WebsiteLoginCredentialsInputObjectTypeResolver $websiteLoginCredentialsInputObjectTypeResolver = null;
+    private ?LoginCredentialsInputObjectTypeResolver $loginCredentialsInputObjectTypeResolver = null;
 
-    final public function setWebsiteLoginCredentialsInputObjectTypeResolver(WebsiteLoginCredentialsInputObjectTypeResolver $websiteLoginCredentialsInputObjectTypeResolver): void
+    final public function setLoginCredentialsInputObjectTypeResolver(LoginCredentialsInputObjectTypeResolver $loginCredentialsInputObjectTypeResolver): void
     {
-        $this->websiteLoginCredentialsInputObjectTypeResolver = $websiteLoginCredentialsInputObjectTypeResolver;
+        $this->loginCredentialsInputObjectTypeResolver = $loginCredentialsInputObjectTypeResolver;
     }
-    final protected function getWebsiteLoginCredentialsInputObjectTypeResolver(): WebsiteLoginCredentialsInputObjectTypeResolver
+    final protected function getLoginCredentialsInputObjectTypeResolver(): LoginCredentialsInputObjectTypeResolver
     {
-        return $this->websiteLoginCredentialsInputObjectTypeResolver ??= $this->instanceManager->getInstance(WebsiteLoginCredentialsInputObjectTypeResolver::class);
+        return $this->loginCredentialsInputObjectTypeResolver ??= $this->instanceManager->getInstance(LoginCredentialsInputObjectTypeResolver::class);
     }
 
     public function getTypeName(): string
@@ -27,7 +27,7 @@ class LoginUserByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTy
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            'credentials' => $this->getWebsiteLoginCredentialsInputObjectTypeResolver(),
+            'credentials' => $this->getLoginCredentialsInputObjectTypeResolver(),
         ];
     }
 

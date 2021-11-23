@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeReso
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
 
-class WebsiteLoginCredentialsInputObjectTypeResolver extends AbstractInputObjectTypeResolver
+class LoginCredentialsInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
@@ -24,7 +24,7 @@ class WebsiteLoginCredentialsInputObjectTypeResolver extends AbstractInputObject
 
     public function getTypeName(): string
     {
-        return 'WebsiteLoginCredentials';
+        return 'LoginCredentialsInput';
     }
 
     public function getInputFieldNameTypeResolvers(): array
