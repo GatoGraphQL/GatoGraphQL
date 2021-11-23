@@ -11,11 +11,16 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
+use PoPWPSchema\Menus\TypeResolvers\InputObjectType\MenuByInputObjectTypeResolver;
 
+/**
+ * Override implementation of field "menu" to provide a MenuByInput with several options
+ */
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?MenuObjectTypeResolver $menuObjectTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?MenuByInputObjectTypeResolver $menuByInputObjectTypeResolver = null;
 
     final public function setMenuObjectTypeResolver(MenuObjectTypeResolver $menuObjectTypeResolver): void
     {
@@ -33,6 +38,14 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
+    final public function setMenuByInputObjectTypeResolver(MenuByInputObjectTypeResolver $menuByInputObjectTypeResolver): void
+    {
+        $this->menuByInputObjectTypeResolver = $menuByInputObjectTypeResolver;
+    }
+    final protected function getMenuByInputObjectTypeResolver(): MenuByInputObjectTypeResolver
+    {
+        return $this->menuByInputObjectTypeResolver ??= $this->instanceManager->getInstance(MenuByInputObjectTypeResolver::class);
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -44,50 +57,45 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldNamesToResolve(): array
     {
         return [
-            'menuByLocation',
-            'menuBySlug',
+            'menu',
         ];
+    }
+
+    /**
+     * Execute before "menu" in Menus
+     */
+    public function getPriorityToAttachToClasses(): int
+    {
+        return 100;
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'menuByLocation' => $this->getTranslationAPI()->__('Get a menu by its location', 'menus'),
-            'menuBySlug' => $this->getTranslationAPI()->__('Get a menu by its slug', 'menus'),
+            'menu' => $this->getTranslationAPI()->__('Get a menu by some property', 'menus'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         return match ($fieldName) {
-            'menuByLocation' => [
-                'location' => $this->getStringScalarTypeResolver(),
-            ],
-            'menuBySlug' => [
-                'slug' => $this->getStringScalarTypeResolver(),
-            ],
-            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            ['menuByLocation' => 'location'] => $this->getTranslationAPI()->__('The location of the menu', 'menus'),
-            ['menuBySlug' => 'slug'] => $this->getTranslationAPI()->__('The slug of the menu', 'menus'),
-            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+            'menu' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'by' => $this->getMenuByInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
         };
     }
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['menuByLocation' => 'location'],
-            ['menuBySlug' => 'slug']
-                => SchemaTypeModifiers::MANDATORY,
-            default
-                => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+            ['menu' => 'by'] => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
@@ -106,16 +114,17 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $locations = \get_nav_menu_locations();
         switch ($fieldName) {
-            case 'menuByLocation':
-            case 'menuBySlug':
+            case 'menu':
                 $menuParam = null;
-                if ($fieldName === 'menuByLocation') {
-                    $location = $fieldArgs['location'];
-                    $menuParam = $locations[$location] ?? null;
-                } elseif ($fieldName === 'menuBySlug') {
-                    $menuParam = $fieldArgs['slug'];
+                $by = $fieldArgs['by'];
+                if (isset($by->id)) {
+                    $menuParam = $by->id;
+                } elseif (isset($by->slug)) {
+                    $menuParam = $by->slug;
+                } elseif (isset($by->location)) {
+                    $locations = \get_nav_menu_locations();
+                    $menuParam = $locations[$by->location] ?? null;
                 }
                 if ($menuParam === null) {
                     return null;
@@ -133,11 +142,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'menuByLocation',
-            'menuBySlug'
-                => $this->getMenuObjectTypeResolver(),
-            default
-                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'menu' => $this->getMenuObjectTypeResolver(),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 }

@@ -9,13 +9,15 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
     public const FILTERINPUT_NAME = 'filterinput-name';
-    public const FILTERINPUT_EMAILS = 'filterinput-emails';
+    public const FILTERINPUT_USERNAME_OR_USERNAMES = 'filterinput-username-or-usernames';
+    public const FILTERINPUT_EMAIL_OR_EMAILS = 'filterinput-email-or-emails';
 
     public function getFilterInputsToProcess(): array
     {
         return array(
             [self::class, self::FILTERINPUT_NAME],
-            [self::class, self::FILTERINPUT_EMAILS],
+            [self::class, self::FILTERINPUT_USERNAME_OR_USERNAMES],
+            [self::class, self::FILTERINPUT_EMAIL_OR_EMAILS],
         );
     }
 
@@ -25,8 +27,11 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
             case self::FILTERINPUT_NAME:
                 $query['name'] = $value;
                 break;
-            case self::FILTERINPUT_EMAILS:
-                $query['emails'] = $value;
+            case self::FILTERINPUT_USERNAME_OR_USERNAMES:
+                $query['username'] = is_array($value) ? $value : [$value];
+                break;
+            case self::FILTERINPUT_EMAIL_OR_EMAILS:
+                $query['emails'] = is_array($value) ? $value : [$value];
                 break;
         }
     }

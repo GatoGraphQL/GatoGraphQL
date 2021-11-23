@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\PagesWP\TypeAPIs;
 
+use function get_post;
+
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 use PoPSchema\Pages\ComponentConfiguration;
 use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Post;
-
-use function get_post;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -138,6 +141,27 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
 
     public function getPages(array $query, array $options = []): array
     {
+        /**
+         * "paths" is unique to pages
+         */
+        if ($paths = $query['paths'] ?? []) {
+            $returnIDs = ($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS;
+            $pageIDs = [];
+            $enableAdminSchema = ComponentModelComponentConfiguration::enableAdminSchema();
+            foreach ($paths as $path) {
+                /** @var WP_Post|null */
+                $page = \get_page_by_path($path);
+                if ($page === null) {
+                    continue;
+                }
+                // If the "admin" schema is not enabled, Only expose posts with status "publish"
+                if (!$enableAdminSchema && $page->post_status !== "publish") {
+                    continue;
+                }
+                $pageIDs[] = $returnIDs ? $page->ID : $page;
+            }
+            return $pageIDs;
+        }
         return $this->getCustomPosts($query, $options);
     }
     public function getPageCount(array $query = [], array $options = []): int

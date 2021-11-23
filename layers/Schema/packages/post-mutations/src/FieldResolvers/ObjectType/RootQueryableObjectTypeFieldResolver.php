@@ -15,6 +15,7 @@ use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\PostMutations\ModuleProcessors\PostMutationFilterInputContainerModuleProcessor;
 use PoPSchema\Posts\ComponentConfiguration;
 use PoPSchema\Posts\TypeAPIs\PostTypeAPIInterface;
+use PoPSchema\Posts\TypeResolvers\InputObjectType\PostByInputObjectTypeResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -30,6 +31,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?PostTypeAPIInterface $postTypeAPI = null;
+    private ?PostByInputObjectTypeResolver $postByInputObjectTypeResolver = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -54,6 +56,14 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     final protected function getPostTypeAPI(): PostTypeAPIInterface
     {
         return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
+    }
+    final public function setPostByInputObjectTypeResolver(PostByInputObjectTypeResolver $postByInputObjectTypeResolver): void
+    {
+        $this->postByInputObjectTypeResolver = $postByInputObjectTypeResolver;
+    }
+    final protected function getPostByInputObjectTypeResolver(): PostByInputObjectTypeResolver
+    {
+        return $this->postByInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostByInputObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -99,7 +109,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         return match ($fieldName) {
             'myPosts' => $this->getTranslationAPI()->__('Posts by the logged-in user', 'post-mutations'),
             'myPostCount' => $this->getTranslationAPI()->__('Number of posts by the logged-in user', 'post-mutations'),
-            'myPost' => $this->getTranslationAPI()->__('Post with a specific ID', 'post-mutations'),
+            'myPost' => $this->getTranslationAPI()->__('Post by some property', 'post-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -111,6 +121,28 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             'myPosts' => [PostMutationFilterInputContainerModuleProcessor::class, PostMutationFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYPOSTS],
             'myPostCount' => [PostMutationFilterInputContainerModuleProcessor::class, PostMutationFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYPOSTCOUNT],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'myPost' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'by' => $this->getPostByInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
+        };
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['myPost' => 'by'] => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 

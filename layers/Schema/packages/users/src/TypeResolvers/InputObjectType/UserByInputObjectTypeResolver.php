@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
+namespace PoPSchema\Users\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInputObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
+use PoPSchema\Users\ComponentConfiguration;
+use PoPSchema\Users\FilterInputProcessors\FilterInputProcessor;
 
-abstract class AbstractRootCustomPostByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
+class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
@@ -31,24 +33,40 @@ abstract class AbstractRootCustomPostByInputObjectTypeResolver extends AbstractO
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
+    public function getTypeName(): string
+    {
+        return 'UserByInput';
+    }
+
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Oneof input to fetch a custom post', 'customposts');
+        return $this->getTranslationAPI()->__('Oneof input to specify the property and data to fetch a user', 'users');
     }
 
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
             'id' => $this->getIDScalarTypeResolver(),
-            'slug' => $this->getStringScalarTypeResolver(),
+            'username' => $this->getStringScalarTypeResolver(),
+            'email' => $this->getStringScalarTypeResolver(),
         ];
+    }
+
+    public function getAdminInputFieldNames(): array
+    {
+        $adminInputFieldNames = parent::getAdminInputFieldNames();
+        if (ComponentConfiguration::treatUserEmailAsAdminData()) {
+            $adminInputFieldNames[] = 'email';
+        }
+        return $adminInputFieldNames;
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'id' => $this->getTranslationAPI()->__('Query by custom post ID', 'customposts'),
-            'slug' => $this->getTranslationAPI()->__('Query by custom post slug', 'customposts'),
+            'id' => $this->getTranslationAPI()->__('Query by user ID', 'users'),
+            'username' => $this->getTranslationAPI()->__('Query by username', 'users'),
+            'email' => $this->getTranslationAPI()->__('Query by email', 'users'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -56,8 +74,9 @@ abstract class AbstractRootCustomPostByInputObjectTypeResolver extends AbstractO
     public function getInputFieldFilterInput(string $inputFieldName): ?array
     {
         return match ($inputFieldName) {
-            'id' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
-            'slug' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SLUG],
+            'id' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_INCLUDE],
+            'username' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_USERNAME_OR_USERNAMES],
+            'email' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EMAIL_OR_EMAILS],
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

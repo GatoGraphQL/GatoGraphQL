@@ -12,6 +12,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostByInputObjectTypeResolver;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 use PoPSchema\GenericCustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostFilterInputContainerModuleProcessor;
@@ -33,6 +34,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    private ?CustomPostByInputObjectTypeResolver $customPostByInputObjectTypeResolver = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -58,6 +60,14 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
+    final public function setCustomPostByInputObjectTypeResolver(CustomPostByInputObjectTypeResolver $customPostByInputObjectTypeResolver): void
+    {
+        $this->customPostByInputObjectTypeResolver = $customPostByInputObjectTypeResolver;
+    }
+    final protected function getCustomPostByInputObjectTypeResolver(): CustomPostByInputObjectTypeResolver
+    {
+        return $this->customPostByInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostByInputObjectTypeResolver::class);
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -70,7 +80,6 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return [
             'genericCustomPost',
-            'genericCustomPostBySlug',
             'genericCustomPosts',
             'genericCustomPostCount',
         ];
@@ -79,8 +88,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'genericCustomPost' => $this->getTranslationAPI()->__('Custom post with a specific ID', 'generic-customposts'),
-            'genericCustomPostBySlug' => $this->getTranslationAPI()->__('Custom post with a specific slug', 'generic-customposts'),
+            'genericCustomPost' => $this->getTranslationAPI()->__('Custom post by some property', 'generic-customposts'),
             'genericCustomPosts' => $this->getTranslationAPI()->__('Custom posts', 'generic-customposts'),
             'genericCustomPostCount' => $this->getTranslationAPI()->__('Number of custom posts', 'generic-customposts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -91,7 +99,6 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return match ($fieldName) {
             'genericCustomPost',
-            'genericCustomPostBySlug',
             'genericCustomPosts',
                 => $this->getGenericCustomPostObjectTypeResolver(),
             'genericCustomPostCount',
@@ -123,13 +130,31 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
             ],
             'genericCustomPost' => [
                 CommonCustomPostFilterInputContainerModuleProcessor::class,
-                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_GENERICTYPE
-            ],
-            'genericCustomPostBySlug' => [
-                CommonCustomPostFilterInputContainerModuleProcessor::class,
-                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_GENERICTYPE
+                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_GENERICTYPE
             ],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'genericCustomPost' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'by' => $this->getCustomPostByInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
+        };
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['genericCustomPost' => 'by'] => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
@@ -197,7 +222,6 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     ): array {
         return match ($fieldName) {
             'genericCustomPost',
-            'genericCustomPostBySlug',
             'genericCustomPosts',
             'genericCustomPostCount'
                 => [
@@ -229,7 +253,6 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
         );
         switch ($fieldName) {
             case 'genericCustomPost':
-            case 'genericCustomPostBySlug':
                 if ($customPosts = $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $customPosts[0];
                 }

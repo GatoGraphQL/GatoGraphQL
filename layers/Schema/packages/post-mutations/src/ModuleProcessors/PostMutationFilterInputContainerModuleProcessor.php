@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostMutations\ModuleProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\FilterInputContainerModuleProcessorInterface;
 use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor as CustomPostFilterInputModuleProcessor;
 use PoPSchema\Posts\ModuleProcessors\AbstractPostFilterInputContainerModuleProcessor;
-use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 
 class PostMutationFilterInputContainerModuleProcessor extends AbstractPostFilterInputContainerModuleProcessor
 {
@@ -32,17 +30,15 @@ class PostMutationFilterInputContainerModuleProcessor extends AbstractPostFilter
     public function getFilterInputModules(array $module): array
     {
         $targetModule = match ($module[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_MYPOST => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
+            self::MODULE_FILTERINPUTCONTAINER_MYPOST => null,
             self::MODULE_FILTERINPUTCONTAINER_MYPOSTS => [self::class, self::MODULE_FILTERINPUTCONTAINER_POSTS],
             self::MODULE_FILTERINPUTCONTAINER_MYPOSTCOUNT => [self::class, self::MODULE_FILTERINPUTCONTAINER_POSTCOUNT],
             default => null,
         };
-        if ($targetModule[0] === self::class) {
+        if ($targetModule !== null && $targetModule[0] === self::class) {
             $filterInputModules = parent::getFilterInputModules($targetModule);
         } else {
-            /** @var FilterInputContainerModuleProcessorInterface */
-            $targetModuleProcessor = $this->getModuleProcessorManager()->getProcessor($targetModule);
-            $filterInputModules = $targetModuleProcessor->getFilterInputModules($targetModule);
+            $filterInputModules = [];
         }
         $filterInputModules[] = [CustomPostFilterInputModuleProcessor::class, CustomPostFilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
         return $filterInputModules;

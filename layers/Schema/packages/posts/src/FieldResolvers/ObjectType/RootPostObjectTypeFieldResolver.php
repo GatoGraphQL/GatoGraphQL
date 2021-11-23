@@ -4,16 +4,27 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
+use PoPSchema\Posts\TypeResolvers\InputObjectType\PostByInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 
 class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolver
 {
+    private ?PostByInputObjectTypeResolver $postByInputObjectTypeResolver = null;
+
+    final public function setPostByInputObjectTypeResolver(PostByInputObjectTypeResolver $postByInputObjectTypeResolver): void
+    {
+        $this->postByInputObjectTypeResolver = $postByInputObjectTypeResolver;
+    }
+    final protected function getPostByInputObjectTypeResolver(): PostByInputObjectTypeResolver
+    {
+        return $this->postByInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostByInputObjectTypeResolver::class);
+    }
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -27,7 +38,6 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
             parent::getFieldNamesToResolve(),
             [
                 'post',
-                'postBySlug',
             ]
         );
     }
@@ -35,24 +45,30 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'post' => $this->getTranslationAPI()->__('Post with a specific ID', 'posts'),
-            'postBySlug' => $this->getTranslationAPI()->__('Post with a specific slug', 'posts'),
+            'post' => $this->getTranslationAPI()->__('Post by some property', 'posts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
-    public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         return match ($fieldName) {
-            'post' => [
-                CommonFilterInputContainerModuleProcessor::class,
-                CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID
-            ],
-            'postBySlug' => [
-                CommonFilterInputContainerModuleProcessor::class,
-                CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG
-            ],
-            default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
+            'post' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'by' => $this->getPostByInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
+        };
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['post' => 'by'] => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
@@ -74,7 +90,6 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'post':
-            case 'postBySlug':
                 if ($posts = $this->getPostTypeAPI()->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $posts[0];
                 }
@@ -87,11 +102,8 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'post',
-            'postBySlug'
-                => $this->getPostObjectTypeResolver(),
-            default
-                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'post' => $this->getPostObjectTypeResolver(),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 }

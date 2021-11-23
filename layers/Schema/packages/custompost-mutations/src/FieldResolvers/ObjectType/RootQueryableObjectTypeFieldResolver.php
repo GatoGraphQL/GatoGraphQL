@@ -16,6 +16,7 @@ use PoPSchema\CustomPostMutations\ModuleProcessors\CustomPostMutationFilterInput
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostByInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
@@ -29,6 +30,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
 
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    private ?CustomPostByInputObjectTypeResolver $customPostByInputObjectTypeResolver = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -45,6 +47,14 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+    }
+    final public function setCustomPostByInputObjectTypeResolver(CustomPostByInputObjectTypeResolver $customPostByInputObjectTypeResolver): void
+    {
+        $this->customPostByInputObjectTypeResolver = $customPostByInputObjectTypeResolver;
+    }
+    final protected function getCustomPostByInputObjectTypeResolver(): CustomPostByInputObjectTypeResolver
+    {
+        return $this->customPostByInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostByInputObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -87,7 +97,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         return match ($fieldName) {
             'myCustomPosts' => $this->getTranslationAPI()->__('Custom posts by the logged-in user', 'custompost-mutations'),
             'myCustomPostCount' => $this->getTranslationAPI()->__('Number of custom posts by the logged-in user', 'custompost-mutations'),
-            'myCustomPost' => $this->getTranslationAPI()->__('Custom post with a specific ID', 'custompost-mutations'),
+            'myCustomPost' => $this->getTranslationAPI()->__('Custom post by some property', 'custompost-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -99,6 +109,28 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             'myCustomPosts' => [CustomPostMutationFilterInputContainerModuleProcessor::class, CustomPostMutationFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTS],
             'myCustomPostCount' => [CustomPostMutationFilterInputContainerModuleProcessor::class, CustomPostMutationFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'myCustomPost' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'by' => $this->getCustomPostByInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
+        };
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['myCustomPost' => 'by'] => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 

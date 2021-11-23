@@ -14,10 +14,10 @@ use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\PostTags\ModuleProcessors\PostTagFilterInputContainerModuleProcessor;
 use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
+use PoPSchema\PostTags\TypeResolvers\InputObjectType\PostTagByInputObjectTypeResolver;
 use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 use PoPSchema\Tags\ComponentConfiguration;
@@ -30,6 +30,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
+    private ?PostTagByInputObjectTypeResolver $postTagByInputObjectTypeResolver = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -63,6 +64,14 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     {
         return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
     }
+    final public function setPostTagByInputObjectTypeResolver(PostTagByInputObjectTypeResolver $postTagByInputObjectTypeResolver): void
+    {
+        $this->postTagByInputObjectTypeResolver = $postTagByInputObjectTypeResolver;
+    }
+    final protected function getPostTagByInputObjectTypeResolver(): PostTagByInputObjectTypeResolver
+    {
+        return $this->postTagByInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagByInputObjectTypeResolver::class);
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -75,7 +84,6 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     {
         return [
             'postTag',
-            'postTagBySlug',
             'postTags',
             'postTagCount',
             'postTagNames',
@@ -86,7 +94,6 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     {
         return match ($fieldName) {
             'postTag',
-            'postTagBySlug',
             'postTags'
                 => $this->getPostTagObjectTypeResolver(),
             'postTagCount'
@@ -114,8 +121,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'postTag' => $this->getTranslationAPI()->__('Post tag with a specific ID', 'pop-post-tags'),
-            'postTagBySlug' => $this->getTranslationAPI()->__('Post tag with a specific slug', 'pop-post-tags'),
+            'postTag' => $this->getTranslationAPI()->__('Post tag by some property', 'pop-post-tags'),
             'postTags' => $this->getTranslationAPI()->__('Post tags', 'pop-post-tags'),
             'postTagCount' => $this->getTranslationAPI()->__('Number of post tags', 'pop-post-tags'),
             'postTagNames' => $this->getTranslationAPI()->__('Names of the post tags', 'pop-post-tags'),
@@ -129,9 +135,29 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
             'postTags' => [PostTagFilterInputContainerModuleProcessor::class, PostTagFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_TAGS],
             'postTagCount' => [PostTagFilterInputContainerModuleProcessor::class, PostTagFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_TAGCOUNT],
             'postTagNames' => [PostTagFilterInputContainerModuleProcessor::class, PostTagFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_TAGS],
-            'postTag' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
-            'postTagBySlug' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'postTag' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'by' => $this->getPostTagByInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
+        };
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['postTag' => 'by'] => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
@@ -207,7 +233,6 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'postTag':
-            case 'postTagBySlug':
                 if ($tags = $this->getPostTagTypeAPI()->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $tags[0];
                 }

@@ -11,14 +11,13 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\Pages\ComponentConfiguration;
 use PoPSchema\Pages\ModuleProcessors\PageFilterInputContainerModuleProcessor;
 use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
+use PoPSchema\Pages\TypeResolvers\InputObjectType\PageByInputObjectTypeResolver;
 use PoPSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 
@@ -29,6 +28,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
     private ?PageTypeAPIInterface $pageTypeAPI = null;
+    private ?PageByInputObjectTypeResolver $pageByInputObjectTypeResolver = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -54,6 +54,14 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     {
         return $this->pageTypeAPI ??= $this->instanceManager->getInstance(PageTypeAPIInterface::class);
     }
+    final public function setPageByInputObjectTypeResolver(PageByInputObjectTypeResolver $pageByInputObjectTypeResolver): void
+    {
+        $this->pageByInputObjectTypeResolver = $pageByInputObjectTypeResolver;
+    }
+    final protected function getPageByInputObjectTypeResolver(): PageByInputObjectTypeResolver
+    {
+        return $this->pageByInputObjectTypeResolver ??= $this->instanceManager->getInstance(PageByInputObjectTypeResolver::class);
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -66,7 +74,6 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     {
         return [
             'page',
-            'pageBySlug',
             'pages',
             'pageCount',
         ];
@@ -75,8 +82,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'page' => $this->getTranslationAPI()->__('Page with a specific ID', 'pages'),
-            'pageBySlug' => $this->getTranslationAPI()->__('Page with a specific slug', 'pages'),
+            'page' => $this->getTranslationAPI()->__('Page by some property', 'pages'),
             'pages' => $this->getTranslationAPI()->__('Pages', 'pages'),
             'pageCount' => $this->getTranslationAPI()->__('Number of pages', 'pages'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -87,7 +93,6 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     {
         return match ($fieldName) {
             'page',
-            'pageBySlug',
             'pages'
                 => $this->getPageObjectTypeResolver(),
             'pageCount'
@@ -117,15 +122,29 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
                 PageFilterInputContainerModuleProcessor::class,
                 PageFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_PAGELISTCOUNT
             ],
-            'page' => [
-                CommonFilterInputContainerModuleProcessor::class,
-                CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID
-            ],
-            'pageBySlug' => [
-                CommonFilterInputContainerModuleProcessor::class,
-                CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG
-            ],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'page' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'by' => $this->getPageByInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
+        };
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['page' => 'by'] => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
@@ -199,7 +218,6 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'page':
-            case 'pageBySlug':
                 if ($pages = $this->getPageTypeAPI()->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $pages[0];
                 }

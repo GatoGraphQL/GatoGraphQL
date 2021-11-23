@@ -49,7 +49,7 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
     {
         $filterInputs = [
             self::MODULE_FILTERINPUT_NAME => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_NAME],
-            self::MODULE_FILTERINPUT_EMAILS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EMAILS],
+            self::MODULE_FILTERINPUT_EMAILS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EMAIL_OR_EMAILS],
         ];
         return $filterInputs[$module[1]] ?? null;
     }
