@@ -12,7 +12,7 @@ use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\UserState\State\ApplicationStateUtils;
 use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
-class WebsiteLoginMutationResolver extends AbstractMutationResolver
+class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
 {
     private ?UserTypeAPIInterface $userTypeAPI = null;
     private ?UserStateTypeMutationAPIInterface $userStateTypeMutationAPI = null;

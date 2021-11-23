@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
 use PoP\UserAccount\FunctionAPIFactory;
-use PoPSchema\UserStateMutations\MutationResolvers\WebsiteLoginMutationResolver as UpstreamWebsiteLoginMutationResolver;
+use PoPSchema\UserStateMutations\MutationResolvers\LoginUserByCredentialsMutationResolver as UpstreamLoginUserByCredentialsMutationResolver;
 
-class WebsiteLoginMutationResolver extends UpstreamWebsiteLoginMutationResolver
+class LoginUserByCredentialsMutationResolver extends UpstreamLoginUserByCredentialsMutationResolver
 {
     protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): string
     {
