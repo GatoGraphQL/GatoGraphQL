@@ -21,7 +21,7 @@ class LoginUserByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTy
 
     public function getTypeName(): string
     {
-        return 'LoginCredentialsInput';
+        return 'LoginUserByInput';
     }
 
     public function getInputFieldNameTypeResolvers(): array
