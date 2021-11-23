@@ -8,15 +8,16 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### GraphQL schema upgrade
 
-- Fetch entities by slug and path:
-  - `Root.postBySlug: Post`
-  - `Root.customPostBySlug: CustomPostUnion`
-  - `Root.genericCustomPostBySlug: GenericCustomPost`
-  - `Root.pageBySlug: Page`
-  - `Root.pageByPath: Page`
-  - `Root.postCategoryBySlug: PostCategory`
-  - `Root.postTagBySlug: PostTag`
-  - `Root.mediaItemBySlug: MediaItem`
+- In addition to `id`, fetch single entities by `slug`, `path` and other properties, on fields:
+  - `Root.customPost`
+  - `Root.genericCustomPost`
+  - `Root.mediaItem`
+  - `Root.menu`
+  - `Root.page`
+  - `Root.postCategory`
+  - `Root.postTag`
+  - `Root.post`
+  - `Root.user`
 - Filter custom post fields (`Root.posts`, `User.posts`, etc) via new arguments:
   - `tagIDs: [ID]`
   - `tagSlugs: [String]`
@@ -73,10 +74,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `searchfor: String`
   - `types: [String!]`
 - Comment mutations: support creating comments by non logged-in users
-- Fetch a user by different means:
-  - `Root.userByUsername: User`
-  - `Root.userByEmail: User`
-- Filter users by email
+- Filter users by email (considered as "admin" data)
 - Query properties for users:
   - `User.nicename: String!`
   - `User.nickname: String!`
@@ -96,8 +94,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added fields for Menus:
   - `Root.menus: [Menu]!`
   - `Root.menuCount: Int!`
-  - `Root.menuByLocation: Menu`
-  - `Root.menuBySlug: Menu`
   - `Menu.name: String`
   - `Menu.slug: String`
   - `Menu.count: Int`
@@ -164,6 +160,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Breaking changes
 
+- Replaced argument `id` with `by` in fields fetching a single entity
 - Renamed module "Schema for the Admin" to "Schema Expose Admin Data"
 - Renamed scalar type `AnyScalar` to `AnyBuiltInScalar`
 - Renamed interface type `Elemental` to `Node`
