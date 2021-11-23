@@ -55,7 +55,7 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'childCategory' => $this->getCategoryTypeResolver(),
+            'childCategories' => $this->getCategoryTypeResolver(),
             'childCategoryCount' => $this->getIntScalarTypeResolver(),
             'childCategoryNames' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
