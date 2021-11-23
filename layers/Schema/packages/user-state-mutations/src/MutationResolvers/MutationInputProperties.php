@@ -6,7 +6,7 @@ namespace PoPSchema\UserStateMutations\MutationResolvers;
 
 class MutationInputProperties
 {
-    public const CREDENTIALS = 'credentials';
+    public const BY = 'by';
     public const USERNAME_OR_EMAIL = 'usernameOrEmail';
     public const PASSWORD = 'password';
 }
