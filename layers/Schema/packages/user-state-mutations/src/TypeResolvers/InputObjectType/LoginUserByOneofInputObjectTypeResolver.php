@@ -6,7 +6,7 @@ namespace PoPSchema\UserStateMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofInputObjectTypeResolver;
 
-class LoginCredentialsOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
+class LoginUserByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
 {
     private ?WebsiteLoginCredentialsInputObjectTypeResolver $websiteLoginCredentialsInputObjectTypeResolver = null;
 
