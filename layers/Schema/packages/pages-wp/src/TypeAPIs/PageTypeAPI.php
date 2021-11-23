@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\PagesWP\TypeAPIs;
 
+use function get_post;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 use PoPSchema\Pages\ComponentConfiguration;
 use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
-use WP_Post;
 
-use function get_post;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use WP_Post;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -143,6 +145,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
          * "paths" is unique to pages
          */
         if ($paths = $query['paths'] ?? []) {
+            $returnIDs = ($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS;
             $pageIDs = [];
             $enableAdminSchema = ComponentModelComponentConfiguration::enableAdminSchema();
             foreach ($paths as $path) {
@@ -155,7 +158,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
                 if (!$enableAdminSchema && $page->post_status !== "publish") {
                     continue;
                 }
-                $pageIDs[] = $page->ID;
+                $pageIDs[] = $returnIDs ? $page->ID : $page;
             }
             return $pageIDs;
         }
