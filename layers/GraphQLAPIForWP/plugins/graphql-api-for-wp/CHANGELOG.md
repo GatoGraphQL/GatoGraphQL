@@ -37,7 +37,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Query properties for posts:
   - `Post.postFormat: String!`
 - Fetch a page's parent and children, and the menu order:
-  `Page.parentPage: Page`
+  `Page.parent: Page`
   `Page.childPages: [Page]!`
   `Page.childPageCount: Int!`
   `Page.menuOrder: Int!`

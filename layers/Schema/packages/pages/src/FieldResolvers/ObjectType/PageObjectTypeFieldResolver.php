@@ -62,7 +62,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldNamesToResolve(): array
     {
         return [
-            'parentPage',
+            'parent',
             'childPages',
             'childPageCount',
         ];
@@ -71,7 +71,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'parentPage' => $this->getTranslationAPI()->__('Parent page', 'pages'),
+            'parent' => $this->getTranslationAPI()->__('Parent page', 'pages'),
             'childPages' => $this->getTranslationAPI()->__('Child pages', 'pages'),
             'childPageCount' => $this->getTranslationAPI()->__('Number of child pages', 'pages'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -81,7 +81,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'parentPage',
+            'parent',
             'childPages'
                 => $this->getPageObjectTypeResolver(),
             'childPageCount'
@@ -184,7 +184,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     ): mixed {
         $page = $object;
         switch ($fieldName) {
-            case 'parentPage':
+            case 'parent':
                 return $this->getPageTypeAPI()->getParentPageID($page);
         }
 
