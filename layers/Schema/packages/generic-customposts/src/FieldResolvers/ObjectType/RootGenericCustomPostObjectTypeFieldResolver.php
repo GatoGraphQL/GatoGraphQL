@@ -120,6 +120,10 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
+            'genericCustomPost' => [
+                CommonCustomPostFilterInputContainerModuleProcessor::class,
+                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_STATUS_GENERICTYPE
+            ],
             'genericCustomPosts' => [
                 GenericCustomPostFilterInputContainerModuleProcessor::class,
                 GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST
@@ -127,10 +131,6 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
             'genericCustomPostCount' => [
                 GenericCustomPostFilterInputContainerModuleProcessor::class,
                 GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT
-            ],
-            'genericCustomPost' => [
-                CommonCustomPostFilterInputContainerModuleProcessor::class,
-                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_GENERICTYPE
             ],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
