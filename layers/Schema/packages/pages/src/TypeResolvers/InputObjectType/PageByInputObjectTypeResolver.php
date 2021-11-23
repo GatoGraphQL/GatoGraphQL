@@ -40,7 +40,7 @@ class PageByInputObjectTypeResolver extends AbstractCustomPostByInputObjectTypeR
     public function getInputFieldFilterInput(string $inputFieldName): ?array
     {
         return match ($inputFieldName) {
-            'path' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_PATH],
+            'path' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_PATH_OR_PATHS],
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

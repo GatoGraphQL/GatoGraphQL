@@ -142,10 +142,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
         /**
          * "paths" is unique to pages
          */
-        $paths = isset($query['path']) ?
-            [$query['path']]
-            : ($query['paths'] ?? []);
-        if ($paths !== []) {
+        if ($paths = $query['paths'] ?? []) {
             $pageIDs = [];
             $enableAdminSchema = ComponentModelComponentConfiguration::enableAdminSchema();
             foreach ($paths as $path) {
