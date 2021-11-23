@@ -9,6 +9,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostContentFormatEnumTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
@@ -106,6 +107,16 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'excerpt',
             'customPostType',
         ];
+    }
+
+    public function getAdminFieldNames(): array
+    {
+        $adminFieldNames = parent::getAdminFieldNames();
+        if (ComponentConfiguration::treatCustomPostStatusAsAdminData()) {
+            $adminFieldNames[] = 'status';
+            $adminFieldNames[] = 'isStatus';
+        }
+        return $adminFieldNames;
     }
 
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
