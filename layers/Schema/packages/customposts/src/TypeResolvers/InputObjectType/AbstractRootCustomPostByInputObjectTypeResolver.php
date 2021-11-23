@@ -33,7 +33,7 @@ abstract class AbstractRootCustomPostByInputObjectTypeResolver extends AbstractO
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Oneof input to fetch a custom post', 'customposts');
+        return $this->getTranslationAPI()->__('Oneof input to specify the property and data to fetch a custom post', 'customposts');
     }
 
     public function getInputFieldNameTypeResolvers(): array
