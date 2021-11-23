@@ -15,10 +15,10 @@ use PoPSchema\Media\ComponentConfiguration;
 use PoPSchema\Media\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPSchema\Media\ModuleProcessors\MediaFilterInputContainerModuleProcessor;
 use PoPSchema\Media\TypeAPIs\MediaTypeAPIInterface;
+use PoPSchema\Media\TypeResolvers\InputObjectType\MediaItemByInputObjectTypeResolver;
 use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 
@@ -29,6 +29,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
+    private ?MediaItemByInputObjectTypeResolver $mediaItemByInputObjectTypeResolver = null;
 
     final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {
@@ -53,6 +54,14 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     final protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
         return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
+    }
+    final public function setMediaItemByInputObjectTypeResolver(MediaItemByInputObjectTypeResolver $mediaItemByInputObjectTypeResolver): void
+    {
+        $this->mediaItemByInputObjectTypeResolver = $mediaItemByInputObjectTypeResolver;
+    }
+    final protected function getMediaItemByInputObjectTypeResolver(): MediaItemByInputObjectTypeResolver
+    {
+        return $this->mediaItemByInputObjectTypeResolver ??= $this->instanceManager->getInstance(MediaItemByInputObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -108,8 +117,29 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return match ($fieldName) {
             'mediaItems' => [MediaFilterInputContainerModuleProcessor::class, MediaFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MEDIAITEMS],
             'mediaItemCount' => [MediaFilterInputContainerModuleProcessor::class, MediaFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MEDIAITEMCOUNT],
-            'mediaItem' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'mediaItem' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'by' => $this->getMediaItemByInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
+        };
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['mediaItem' => 'by'] => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
