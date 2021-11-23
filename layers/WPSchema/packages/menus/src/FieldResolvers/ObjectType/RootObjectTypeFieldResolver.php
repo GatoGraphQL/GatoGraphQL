@@ -106,13 +106,13 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $locations = \get_nav_menu_locations();
         switch ($fieldName) {
             case 'menuByLocation':
             case 'menuBySlug':
                 $menuParam = null;
                 if ($fieldName === 'menuByLocation') {
                     $location = $fieldArgs['location'];
+                    $locations = \get_nav_menu_locations();
                     $menuParam = $locations[$location] ?? null;
                 } elseif ($fieldName === 'menuBySlug') {
                     $menuParam = $fieldArgs['slug'];
