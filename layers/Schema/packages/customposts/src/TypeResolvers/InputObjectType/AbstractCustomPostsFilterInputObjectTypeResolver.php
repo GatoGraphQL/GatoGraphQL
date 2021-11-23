@@ -58,9 +58,9 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'status' => $this->getTranslationAPI()->__('Custom Post Status', 'customposts'),
-            'search' => $this->getTranslationAPI()->__('Search for elements containing the given string', 'customposts'),
-            'dateQuery' => $this->getTranslationAPI()->__('Filter elements based on date', 'customposts'),
+            'status' => $this->getTranslationAPI()->__('Custom post status', 'customposts'),
+            'search' => $this->getTranslationAPI()->__('Search for custom posts containing the given string', 'customposts'),
+            'dateQuery' => $this->getTranslationAPI()->__('Filter custom posts based on date', 'customposts'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
