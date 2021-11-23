@@ -8,6 +8,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoPSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\Posts\TypeResolvers\InputObjectType\PostByInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -47,6 +48,17 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
         return match ($fieldName) {
             'post' => $this->getTranslationAPI()->__('Post by some property', 'posts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
+    {
+        return match ($fieldName) {
+            'post' => [
+                CommonCustomPostFilterInputContainerModuleProcessor::class,
+                CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTSTATUS
+            ],
+            default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
     }
 
