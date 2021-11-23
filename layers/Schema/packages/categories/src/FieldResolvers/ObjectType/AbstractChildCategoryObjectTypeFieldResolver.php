@@ -46,18 +46,18 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     public function getFieldNamesToResolve(): array
     {
         return [
-            'childCategories',
-            'childCategoryCount',
-            'childCategoryNames',
+            'children',
+            'childCount',
+            'childNames',
         ];
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'childCategories' => $this->getCategoryTypeResolver(),
-            'childCategoryCount' => $this->getIntScalarTypeResolver(),
-            'childCategoryNames' => $this->getStringScalarTypeResolver(),
+            'children' => $this->getCategoryTypeResolver(),
+            'childCount' => $this->getIntScalarTypeResolver(),
+            'childNames' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -65,10 +65,10 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'childCategoryCount'
+            'childCount'
                 => SchemaTypeModifiers::NON_NULLABLE,
-            'childCategories',
-            'childCategoryNames'
+            'children',
+            'childNames'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -78,9 +78,9 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'childCategories' => $this->getTranslationAPI()->__('Child categories', 'categories'),
-            'childCategoryCount' => $this->getTranslationAPI()->__('Number of child categories', 'categories'),
-            'childCategoryNames' => $this->getTranslationAPI()->__('Names of the child categories', 'categories'),
+            'children' => $this->getTranslationAPI()->__('Child categories', 'categories'),
+            'childCount' => $this->getTranslationAPI()->__('Number of child categories', 'categories'),
+            'childNames' => $this->getTranslationAPI()->__('Names of the child categories', 'categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -88,9 +88,9 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
-            'childCategories' => [CategoryFilterInputContainerModuleProcessor::class, CategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CHILDCATEGORIES],
-            'childCategoryCount' => [CategoryFilterInputContainerModuleProcessor::class, CategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT],
-            'childCategoryNames' => [CategoryFilterInputContainerModuleProcessor::class, CategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CHILDCATEGORIES],
+            'children' => [CategoryFilterInputContainerModuleProcessor::class, CategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CHILDCATEGORIES],
+            'childCount' => [CategoryFilterInputContainerModuleProcessor::class, CategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT],
+            'childNames' => [CategoryFilterInputContainerModuleProcessor::class, CategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CHILDCATEGORIES],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
     }
@@ -98,8 +98,8 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         switch ($fieldName) {
-            case 'childCategories':
-            case 'childCategoryNames':
+            case 'children':
+            case 'childNames':
                 $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
@@ -132,8 +132,8 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
 
         // Check the "limit" fieldArg
         switch ($fieldName) {
-            case 'childCategories':
-            case 'childCategoryNames':
+            case 'children':
+            case 'childNames':
                 if (
                     $maybeError = $this->maybeValidateLimitFieldArgument(
                         ComponentConfiguration::getCategoryListMaxLimit(),
@@ -173,11 +173,11 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
             ]
         );
         switch ($fieldName) {
-            case 'childCategories':
+            case 'children':
                 return $categoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
-            case 'childCategoryNames':
+            case 'childNames':
                 return $categoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
-            case 'childCategoryCount':
+            case 'childCount':
                 return $categoryTypeAPI->getCategoryCount($query);
         }
 
