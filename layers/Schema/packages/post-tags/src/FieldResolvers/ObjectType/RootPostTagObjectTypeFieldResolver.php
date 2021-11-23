@@ -114,7 +114,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'postTag' => $this->getTranslationAPI()->__('Post tag with a specific ID', 'pop-post-tags'),
+            'postTag' => $this->getTranslationAPI()->__('Post tag by some property', 'pop-post-tags'),
             'postTagBySlug' => $this->getTranslationAPI()->__('Post tag with a specific slug', 'pop-post-tags'),
             'postTags' => $this->getTranslationAPI()->__('Post tags', 'pop-post-tags'),
             'postTagCount' => $this->getTranslationAPI()->__('Number of post tags', 'pop-post-tags'),

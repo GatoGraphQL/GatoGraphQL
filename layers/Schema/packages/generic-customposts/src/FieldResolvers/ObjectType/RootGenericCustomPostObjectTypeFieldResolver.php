@@ -79,7 +79,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'genericCustomPost' => $this->getTranslationAPI()->__('Custom post with a specific ID', 'generic-customposts'),
+            'genericCustomPost' => $this->getTranslationAPI()->__('Custom post by some property', 'generic-customposts'),
             'genericCustomPostBySlug' => $this->getTranslationAPI()->__('Custom post with a specific slug', 'generic-customposts'),
             'genericCustomPosts' => $this->getTranslationAPI()->__('Custom posts', 'generic-customposts'),
             'genericCustomPostCount' => $this->getTranslationAPI()->__('Number of custom posts', 'generic-customposts'),
