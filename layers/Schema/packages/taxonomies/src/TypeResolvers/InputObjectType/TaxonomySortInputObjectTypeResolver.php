@@ -39,7 +39,7 @@ class TaxonomySortInputObjectTypeResolver extends SortInputObjectTypeResolver
     public function getInputFieldDefaultValue(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'by' => TaxonomyOrderBy::DATE,
+            'by' => TaxonomyOrderBy::NAME,
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
     }
