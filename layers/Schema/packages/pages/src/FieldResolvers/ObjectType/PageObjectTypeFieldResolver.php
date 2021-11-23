@@ -63,8 +63,8 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return [
             'parent',
-            'childPages',
-            'childPageCount',
+            'children',
+            'childCount',
         ];
     }
 
@@ -72,8 +72,8 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'parent' => $this->getTranslationAPI()->__('Parent page', 'pages'),
-            'childPages' => $this->getTranslationAPI()->__('Child pages', 'pages'),
-            'childPageCount' => $this->getTranslationAPI()->__('Number of child pages', 'pages'),
+            'children' => $this->getTranslationAPI()->__('Child pages', 'pages'),
+            'childCount' => $this->getTranslationAPI()->__('Number of child pages', 'pages'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -82,9 +82,9 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'parent',
-            'childPages'
+            'children'
                 => $this->getPageObjectTypeResolver(),
-            'childPageCount'
+            'childCount'
                 => $this->getIntScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -94,8 +94,8 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'childPageCount' => SchemaTypeModifiers::NON_NULLABLE,
-            'childPages' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            'childCount' => SchemaTypeModifiers::NON_NULLABLE,
+            'children' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -103,11 +103,11 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
-            'childPages' => [
+            'children' => [
                 CustomPostFilterInputContainerModuleProcessor::class,
                 CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST
             ],
-            'childPageCount' => [
+            'childCount' => [
                 CustomPostFilterInputContainerModuleProcessor::class,
                 CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT
             ],
@@ -118,7 +118,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         switch ($fieldName) {
-            case 'childPages':
+            case 'children':
                 $limitFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputModuleProcessor::class,
                     CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
@@ -151,7 +151,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
         // Check the "limit" fieldArg
         switch ($fieldName) {
-            case 'childPages':
+            case 'children':
                 if (
                     $maybeError = $this->maybeValidateLimitFieldArgument(
                         ComponentConfiguration::getPageListMaxLimit(),
@@ -195,9 +195,9 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             ]
         );
         switch ($fieldName) {
-            case 'childPages':
+            case 'children':
                 return $this->getPageTypeAPI()->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
-            case 'childPageCount':
+            case 'childCount':
                 return $this->getPageTypeAPI()->getPageCount($query);
         }
 

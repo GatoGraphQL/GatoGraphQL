@@ -38,8 +38,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Post.postFormat: String!`
 - Fetch a page's parent and children, and the menu order:
   `Page.parent: Page`
-  `Page.childPages: [Page]!`
-  `Page.childPageCount: Int!`
+  `Page.children: [Page]!`
+  `Page.childCount: Int!`
   `Page.menuOrder: Int!`
 - Filter field `pages` via new arguments:
   - `parentIDs: [ID]`
