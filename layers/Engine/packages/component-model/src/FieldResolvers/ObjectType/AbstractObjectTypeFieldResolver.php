@@ -62,6 +62,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected array $consolidatedFieldDeprecationMessageCache = [];
     /** @var array<string, array<string, InputTypeResolverInterface>> */
     protected array $consolidatedFieldArgNameTypeResolversCache = [];
+    /** @var array<string, string[]> */
+    protected array $consolidatedAdminFieldArgNamesCache = [];
     /** @var array<string, string|null> */
     protected array $consolidatedFieldArgDescriptionCache = [];
     /** @var array<string, string|null> */
@@ -327,6 +329,18 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return [];
     }
 
+    /**
+     * @return string[]
+     */
+    public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->getAdminFieldArgNames($objectTypeResolver, $fieldName);
+        }
+        return [];
+    }
+
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
@@ -372,6 +386,16 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
         $fieldArgNameTypeResolvers = $this->getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
 
+        // Exclude the admin field args, if "Admin" Schema is not enabled
+        if (!ComponentConfiguration::enableAdminSchema()) {
+            $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($objectTypeResolver, $fieldName);
+            $fieldArgNameTypeResolvers = array_filter(
+                $fieldArgNameTypeResolvers,
+                fn (string $fieldArgName) => !in_array($fieldArgName, $adminFieldArgNames),
+                ARRAY_FILTER_USE_KEY
+            );
+        }
+
         /**
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
@@ -399,6 +423,27 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
         $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey] = $consolidatedFieldArgNameTypeResolvers;
         return $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey];
+    }
+
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    public function getConsolidatedAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        // Cache the result
+        $cacheKey = $objectTypeResolver::class . '.' . $fieldName;
+        if (array_key_exists($cacheKey, $this->consolidatedAdminFieldArgNamesCache)) {
+            return $this->consolidatedAdminFieldArgNamesCache[$cacheKey];
+        }
+        $this->consolidatedAdminFieldArgNamesCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+            HookNames::OBJECT_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
+            $this->getAdminFieldArgNames($objectTypeResolver, $fieldName),
+            $this,
+            $objectTypeResolver,
+            $fieldName,
+        );
+        return $this->consolidatedAdminFieldArgNamesCache[$cacheKey];
     }
 
     /**
