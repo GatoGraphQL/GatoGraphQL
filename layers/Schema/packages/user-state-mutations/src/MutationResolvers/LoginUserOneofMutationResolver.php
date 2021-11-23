@@ -8,21 +8,21 @@ use PoP\ComponentModel\MutationResolvers\AbstractOneofMutationResolver;
 
 class LoginUserOneofMutationResolver extends AbstractOneofMutationResolver
 {
-    private ?WebsiteLoginMutationResolver $websiteLoginMutationResolver = null;
+    private ?LoginUserByCredentialsMutationResolver $loginUserByCredentialsMutationResolver = null;
 
-    final public function setWebsiteLoginMutationResolver(WebsiteLoginMutationResolver $websiteLoginMutationResolver): void
+    final public function setLoginUserByCredentialsMutationResolver(LoginUserByCredentialsMutationResolver $loginUserByCredentialsMutationResolver): void
     {
-        $this->websiteLoginMutationResolver = $websiteLoginMutationResolver;
+        $this->loginUserByCredentialsMutationResolver = $loginUserByCredentialsMutationResolver;
     }
-    final protected function getWebsiteLoginMutationResolver(): WebsiteLoginMutationResolver
+    final protected function getLoginUserByCredentialsMutationResolver(): LoginUserByCredentialsMutationResolver
     {
-        return $this->websiteLoginMutationResolver ??= $this->instanceManager->getInstance(WebsiteLoginMutationResolver::class);
+        return $this->loginUserByCredentialsMutationResolver ??= $this->instanceManager->getInstance(LoginUserByCredentialsMutationResolver::class);
     }
 
     protected function getInputFieldNameMutationResolvers(): array
     {
         return [
-            'credentials' => $this->getWebsiteLoginMutationResolver(),
+            'credentials' => $this->getLoginUserByCredentialsMutationResolver(),
         ];
     }
 }

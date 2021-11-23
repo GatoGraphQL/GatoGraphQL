@@ -7,24 +7,24 @@ namespace PoPSitesWassup\UserStateMutations\MutationResolverBridges;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
-use PoPSitesWassup\UserStateMutations\MutationResolvers\WebsiteLoginMutationResolver;
+use PoPSitesWassup\UserStateMutations\MutationResolvers\LoginUserByCredentialsMutationResolver;
 
-class WebsiteLoginMutationResolverBridge extends AbstractComponentMutationResolverBridge
+class LoginUserByCredentialsMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    private ?WebsiteLoginMutationResolver $websiteLoginMutationResolver = null;
+    private ?LoginUserByCredentialsMutationResolver $loginUserByCredentialsMutationResolver = null;
 
-    final public function setWebsiteLoginMutationResolver(WebsiteLoginMutationResolver $websiteLoginMutationResolver): void
+    final public function setLoginUserByCredentialsMutationResolver(LoginUserByCredentialsMutationResolver $loginUserByCredentialsMutationResolver): void
     {
-        $this->websiteLoginMutationResolver = $websiteLoginMutationResolver;
+        $this->loginUserByCredentialsMutationResolver = $loginUserByCredentialsMutationResolver;
     }
-    final protected function getWebsiteLoginMutationResolver(): WebsiteLoginMutationResolver
+    final protected function getLoginUserByCredentialsMutationResolver(): LoginUserByCredentialsMutationResolver
     {
-        return $this->websiteLoginMutationResolver ??= $this->instanceManager->getInstance(WebsiteLoginMutationResolver::class);
+        return $this->loginUserByCredentialsMutationResolver ??= $this->instanceManager->getInstance(LoginUserByCredentialsMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->getWebsiteLoginMutationResolver();
+        return $this->getLoginUserByCredentialsMutationResolver();
     }
 
     public function getFormData(): array
