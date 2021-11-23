@@ -202,6 +202,19 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
+    public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
+        return $aliasedObjectTypeFieldResolver->getAdminFieldArgNames(
+            $objectTypeResolver,
+            $this->getAliasedFieldName($fieldName)
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
+     * for the aliased $fieldName
+     */
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
@@ -248,6 +261,19 @@ trait AliasSchemaObjectTypeFieldResolverTrait
     {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->getConsolidatedFieldArgNameTypeResolvers(
+            $objectTypeResolver,
+            $this->getAliasedFieldName($fieldName)
+        );
+    }
+
+    /**
+     * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
+     * for the aliased $fieldName
+     */
+    public function getConsolidatedAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
+        return $aliasedObjectTypeFieldResolver->getConsolidatedAdminFieldArgNames(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );
