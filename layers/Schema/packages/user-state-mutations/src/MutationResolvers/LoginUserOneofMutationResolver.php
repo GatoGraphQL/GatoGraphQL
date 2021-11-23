@@ -6,7 +6,7 @@ namespace PoPSchema\UserStateMutations\MutationResolvers;
 
 use PoP\ComponentModel\MutationResolvers\AbstractOneofMutationResolver;
 
-class LoginOneofMutationResolver extends AbstractOneofMutationResolver
+class LoginUserOneofMutationResolver extends AbstractOneofMutationResolver
 {
     private ?WebsiteLoginMutationResolver $websiteLoginMutationResolver = null;
 
