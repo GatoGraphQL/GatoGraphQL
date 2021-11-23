@@ -9,7 +9,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\UserState\State\ApplicationStateUtils;
 use PoPSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
-class LogoutMutationResolver extends AbstractMutationResolver
+class LogoutUserMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
 

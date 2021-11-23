@@ -6,24 +6,24 @@ namespace PoPSitesWassup\UserStateMutations\MutationResolverBridges;
 
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoPSchema\UserStateMutations\MutationResolvers\LogoutMutationResolver;
+use PoPSchema\UserStateMutations\MutationResolvers\LogoutUserMutationResolver;
 
-class LogoutMutationResolverBridge extends AbstractComponentMutationResolverBridge
+class LogoutUserMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    private ?LogoutMutationResolver $logoutMutationResolver = null;
+    private ?LogoutUserMutationResolver $logoutUserMutationResolver = null;
 
-    final public function setLogoutMutationResolver(LogoutMutationResolver $logoutMutationResolver): void
+    final public function setLogoutUserMutationResolver(LogoutUserMutationResolver $logoutUserMutationResolver): void
     {
-        $this->logoutMutationResolver = $logoutMutationResolver;
+        $this->logoutUserMutationResolver = $logoutUserMutationResolver;
     }
-    final protected function getLogoutMutationResolver(): LogoutMutationResolver
+    final protected function getLogoutUserMutationResolver(): LogoutUserMutationResolver
     {
-        return $this->logoutMutationResolver ??= $this->instanceManager->getInstance(LogoutMutationResolver::class);
+        return $this->logoutUserMutationResolver ??= $this->instanceManager->getInstance(LogoutUserMutationResolver::class);
     }
 
     public function getMutationResolver(): MutationResolverInterface
     {
-        return $this->getLogoutMutationResolver();
+        return $this->getLogoutUserMutationResolver();
     }
 
     public function getFormData(): array
