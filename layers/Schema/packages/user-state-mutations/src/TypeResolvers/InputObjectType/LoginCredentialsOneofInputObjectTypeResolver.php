@@ -27,14 +27,14 @@ class LoginCredentialsOneofInputObjectTypeResolver extends AbstractOneofInputObj
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            'website' => $this->getWebsiteLoginCredentialsInputObjectTypeResolver(),
+            'credentials' => $this->getWebsiteLoginCredentialsInputObjectTypeResolver(),
         ];
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'website' => $this->getTranslationAPI()->__('Login using the website credentials', 'user-state-mutations'),
+            'credentials' => $this->getTranslationAPI()->__('Login using the website credentials', 'user-state-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

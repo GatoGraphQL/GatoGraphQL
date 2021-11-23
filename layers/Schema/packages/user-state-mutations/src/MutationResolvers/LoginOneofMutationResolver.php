@@ -22,7 +22,7 @@ class LoginOneofMutationResolver extends AbstractOneofMutationResolver
     protected function getInputFieldNameMutationResolvers(): array
     {
         return [
-            'website' => $this->getWebsiteLoginMutationResolver(),
+            'credentials' => $this->getWebsiteLoginMutationResolver(),
         ];
     }
 }
