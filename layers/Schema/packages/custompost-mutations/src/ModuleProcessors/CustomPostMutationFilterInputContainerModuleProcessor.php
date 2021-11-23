@@ -32,15 +32,20 @@ class CustomPostMutationFilterInputContainerModuleProcessor extends CustomPostFi
     public function getFilterInputModules(array $module): array
     {
         $targetModule = match ($module[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOST => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
+            self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOST => null,
             self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTS => [parent::class, parent::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST],
             self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT => [parent::class, parent::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT],
             default => null,
         };
-        /** @var FilterInputContainerModuleProcessorInterface */
-        $targetModuleProcessor = $this->getModuleProcessorManager()->getProcessor($targetModule);
+        if ($targetModule !== null) {
+            /** @var FilterInputContainerModuleProcessorInterface */
+            $targetModuleProcessor = $this->getModuleProcessorManager()->getProcessor($targetModule);
+            $targetFilterInputModules = $targetModuleProcessor->getFilterInputModules($targetModule);
+        } else {
+            $targetFilterInputModules = [];
+        }
         return array_merge(
-            $targetModuleProcessor->getFilterInputModules($targetModule),
+            $targetFilterInputModules,
             [
                 [CustomPostFilterInputModuleProcessor::class, CustomPostFilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
             ]
