@@ -17,6 +17,7 @@ use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -1261,16 +1262,21 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function doGetDirectiveArgumentNameDefaultValues(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         // Get the directive arguments which have a default value
+        // Set the missing InputObject as {} to give it a chance to set its default input field values
         $directiveArgNameDefaultValues = [];
         if ($directiveSchemaDefinitionArgs = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $relationalTypeResolver)) {
             $directiveSchemaDefinitionArgsWithDefaultValue = array_filter(
                 $directiveSchemaDefinitionArgs,
                 function (array $directiveSchemaDefinitionArg): bool {
-                    return \array_key_exists(SchemaDefinition::DEFAULT_VALUE, $directiveSchemaDefinitionArg);
+                    // Either has a default value, or is an InputObject
+                    return \array_key_exists(SchemaDefinition::DEFAULT_VALUE, $directiveSchemaDefinitionArg)
+                        || $directiveSchemaDefinitionArg[SchemaDefinition::TYPE_RESOLVER] instanceof InputObjectTypeResolverInterface;
                 }
             );
             foreach ($directiveSchemaDefinitionArgsWithDefaultValue as $directiveSchemaDefinitionArg) {
-                $directiveArgNameDefaultValues[$directiveSchemaDefinitionArg[SchemaDefinition::NAME]] = $directiveSchemaDefinitionArg[SchemaDefinition::DEFAULT_VALUE];
+                $isInputObjectTypeResolver = $directiveSchemaDefinitionArg[SchemaDefinition::TYPE_RESOLVER] instanceof InputObjectTypeResolverInterface;
+                $defaultValue = $isInputObjectTypeResolver ? new stdClass : $directiveSchemaDefinitionArg[SchemaDefinition::DEFAULT_VALUE];;
+                $directiveArgNameDefaultValues[$directiveSchemaDefinitionArg[SchemaDefinition::NAME]] = $defaultValue;
             }
         }
         return $directiveArgNameDefaultValues;
@@ -1345,6 +1351,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function doGetFieldArgumentNameDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
     {
         // Get the field arguments which have a default value
+        // Set the missing InputObject as {} to give it a chance to set its default input field values
         $fieldArgsSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $field);
         if ($fieldArgsSchemaDefinition === null) {
             return null;
@@ -1353,11 +1360,15 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $fieldSchemaDefinitionArgsWithDefaultValue = array_filter(
             $fieldArgsSchemaDefinition,
             function (array $fieldArgSchemaDefinition): bool {
-                return \array_key_exists(SchemaDefinition::DEFAULT_VALUE, $fieldArgSchemaDefinition);
+                // Either has a default value, or is an InputObject
+                return \array_key_exists(SchemaDefinition::DEFAULT_VALUE, $fieldArgSchemaDefinition)
+                    || $fieldArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER] instanceof InputObjectTypeResolverInterface;
             }
         );
         foreach ($fieldSchemaDefinitionArgsWithDefaultValue as $fieldArgSchemaDefinition) {
-            $fieldArgNameDefaultValues[$fieldArgSchemaDefinition[SchemaDefinition::NAME]] = $fieldArgSchemaDefinition[SchemaDefinition::DEFAULT_VALUE];
+            $isInputObjectTypeResolver = $fieldArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER] instanceof InputObjectTypeResolverInterface;
+            $defaultValue = $isInputObjectTypeResolver ? new stdClass : $fieldArgSchemaDefinition[SchemaDefinition::DEFAULT_VALUE];
+            $fieldArgNameDefaultValues[$fieldArgSchemaDefinition[SchemaDefinition::NAME]] = $defaultValue;
         }
         return $fieldArgNameDefaultValues;
     }
