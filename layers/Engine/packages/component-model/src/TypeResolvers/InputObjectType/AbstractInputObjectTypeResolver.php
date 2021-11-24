@@ -199,7 +199,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 continue;
             }
             // If it has default value, set it
-            if ($inputFieldDefaultValue = $this->getConsolidatedInputFieldDefaultValue($inputFieldName)) {
+            if (($inputFieldDefaultValue = $this->getConsolidatedInputFieldDefaultValue($inputFieldName)) !== null) {
                 $inputValue->$inputFieldName = $inputFieldDefaultValue;
                 continue;
             }
