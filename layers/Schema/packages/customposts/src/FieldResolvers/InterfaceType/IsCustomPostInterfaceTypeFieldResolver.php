@@ -109,16 +109,6 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         ];
     }
 
-    public function getAdminFieldNames(): array
-    {
-        $adminFieldNames = parent::getAdminFieldNames();
-        if (ComponentConfiguration::treatCustomPostStatusAsAdminData()) {
-            $adminFieldNames[] = 'status';
-            $adminFieldNames[] = 'isStatus';
-        }
-        return $adminFieldNames;
-    }
-
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {

@@ -59,16 +59,6 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return [];
     }
 
-    public function getAdminFieldNames(): array
-    {
-        $adminFieldNames = parent::getAdminFieldNames();
-        if (ComponentConfiguration::treatCustomPostStatusAsAdminData()) {
-            $adminFieldNames[] = 'status';
-            $adminFieldNames[] = 'isStatus';
-        }
-        return $adminFieldNames;
-    }
-
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
