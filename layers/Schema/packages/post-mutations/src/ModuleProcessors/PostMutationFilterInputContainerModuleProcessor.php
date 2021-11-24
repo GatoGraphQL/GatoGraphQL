@@ -11,14 +11,12 @@ class PostMutationFilterInputContainerModuleProcessor extends AbstractPostFilter
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINPUTCONTAINER_MYPOST = 'filterinputcontainer-mypost';
     public const MODULE_FILTERINPUTCONTAINER_MYPOSTS = 'filterinputcontainer-myposts';
     public const MODULE_FILTERINPUTCONTAINER_MYPOSTCOUNT = 'filterinputcontainer-mypostcount';
 
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_MYPOST],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_MYPOSTS],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_MYPOSTCOUNT],
         );
@@ -30,16 +28,11 @@ class PostMutationFilterInputContainerModuleProcessor extends AbstractPostFilter
     public function getFilterInputModules(array $module): array
     {
         $targetModule = match ($module[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_MYPOST => null,
             self::MODULE_FILTERINPUTCONTAINER_MYPOSTS => [self::class, self::MODULE_FILTERINPUTCONTAINER_POSTS],
             self::MODULE_FILTERINPUTCONTAINER_MYPOSTCOUNT => [self::class, self::MODULE_FILTERINPUTCONTAINER_POSTCOUNT],
             default => null,
         };
-        if ($targetModule !== null && $targetModule[0] === self::class) {
-            $filterInputModules = parent::getFilterInputModules($targetModule);
-        } else {
-            $filterInputModules = [];
-        }
+        $filterInputModules = parent::getFilterInputModules($targetModule);
         $filterInputModules[] = [CustomPostFilterInputModuleProcessor::class, CustomPostFilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
         return $filterInputModules;
     }
