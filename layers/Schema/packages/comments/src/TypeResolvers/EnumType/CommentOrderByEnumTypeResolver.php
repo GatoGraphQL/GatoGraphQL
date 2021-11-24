@@ -27,7 +27,6 @@ class CommentOrderByEnumTypeResolver extends AbstractEnumTypeResolver
             CommentOrderBy::CUSTOM_POST,
             CommentOrderBy::TYPE,
             CommentOrderBy::STATUS,
-            CommentOrderBy::NONE,
         ];
     }
 
@@ -41,7 +40,6 @@ class CommentOrderByEnumTypeResolver extends AbstractEnumTypeResolver
             CommentOrderBy::CUSTOM_POST => $this->getTranslationAPI()->__('Order by ID of the custom post', 'comments'),
             CommentOrderBy::TYPE => $this->getTranslationAPI()->__('Order by type', 'comments'),
             CommentOrderBy::STATUS => $this->getTranslationAPI()->__('Order by status (approved or not)', 'comments'),
-            CommentOrderBy::NONE => $this->getTranslationAPI()->__('Skip ordering', 'comments'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }

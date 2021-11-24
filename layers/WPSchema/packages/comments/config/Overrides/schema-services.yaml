@@ -2,3 +2,6 @@ services:
     _defaults:
         public: true
         autowire: true
+
+    PoPSchema\Comments\TypeResolvers\EnumType\CommentOrderByEnumTypeResolver:
+        class: PoPWPSchema\Comments\Overrides\TypeResolvers\EnumType\CommentOrderByEnumTypeResolver

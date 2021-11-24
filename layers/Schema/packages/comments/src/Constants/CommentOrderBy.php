@@ -13,5 +13,4 @@ class CommentOrderBy
     public const CUSTOM_POST = 'CUSTOM_POST';
     public const TYPE = 'TYPE';
     public const STATUS = 'STATUS';
-    public const NONE = 'NONE';
 }

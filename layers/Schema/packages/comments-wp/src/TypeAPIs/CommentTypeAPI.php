@@ -198,7 +198,6 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             CommentOrderBy::CUSTOM_POST => 'comment_post_ID',
             CommentOrderBy::TYPE => 'comment_type',
             CommentOrderBy::STATUS => 'comment_approved',
-            CommentOrderBy::NONE => 'none',
             default => $orderBy,
         };
         return $this->getHooksAPI()->applyFilters(
