@@ -29,7 +29,7 @@ class CommentFilterInputContainerModuleProcessor extends UpstreamCommentFilterIn
             self::MODULE_FILTERINPUTCONTAINER_MYCOMMENTCOUNT => [parent::class, parent::MODULE_FILTERINPUTCONTAINER_ADMINCOMMENTCOUNT],
             default => null,
         };
-        return parent::getFilterInputModules($targetModule);
+        return parent::getFilterInputModules($targetModule ?? $module);
     }
 
     /**

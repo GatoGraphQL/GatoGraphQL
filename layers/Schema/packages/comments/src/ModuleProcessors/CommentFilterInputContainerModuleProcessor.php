@@ -16,6 +16,7 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
+    public const MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS = 'filterinputcontainer-comment-status';
     public const MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS = 'filterinputcontainer-comment-by-id-status';
     public const MODULE_FILTERINPUTCONTAINER_COMMENTS = 'filterinputcontainer-comments';
     public const MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT = 'filterinputcontainer-commentcount';
@@ -33,6 +34,7 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
     public function getModulesToProcess(): array
     {
         return array(
+            [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENTS],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT],
@@ -75,6 +77,9 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
         ];
         $paginationFilterInputModules = $this->getPaginationFilterInputModules();
         return match ((string)$module[1]) {
+            self::MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS => [
+                [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
+            ],
             self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS => [
                 [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
                 [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
