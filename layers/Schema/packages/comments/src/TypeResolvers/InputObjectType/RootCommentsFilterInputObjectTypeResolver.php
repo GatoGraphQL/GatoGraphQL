@@ -25,13 +25,4 @@ class RootCommentsFilterInputObjectTypeResolver extends AbstractCommentsFilterIn
     {
         return true;
     }
-
-    // public function getInputFieldDefaultValue(string $inputFieldName): mixed
-    // {
-    //     return match ($inputFieldName) {
-    //         // By default fetch top-level comments
-    //         'parentID' => 0,
-    //         default => parent::getInputFieldDefaultValue($inputFieldName)
-    //     };
-    // }
 }
