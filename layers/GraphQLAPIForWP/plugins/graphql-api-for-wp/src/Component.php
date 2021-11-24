@@ -49,6 +49,7 @@ class Component extends AbstractPluginComponent
             \PoPSchema\CustomPostMetaWP\Component::class,
             \PoPSchema\TaxonomyMetaWP\Component::class,
             \PoPSchema\UserMetaWP\Component::class,
+            \PoPWPSchema\Comments\Component::class,
             \PoPWPSchema\Media\Component::class,
             \PoPWPSchema\Menus\Component::class,
             \PoPWPSchema\Pages\Component::class,
