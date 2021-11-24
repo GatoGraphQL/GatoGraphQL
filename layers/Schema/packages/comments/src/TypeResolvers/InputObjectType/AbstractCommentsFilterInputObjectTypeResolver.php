@@ -12,6 +12,7 @@ use PoPSchema\Comments\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
 use PoPSchema\Comments\TypeResolvers\EnumType\CommentTypeEnumTypeResolver;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor as CustomPostsFilterInputProcessor;
+use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostDateQueryInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
@@ -115,6 +116,7 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
             'types' => [
                 CommentTypes::COMMENT,
             ],
+            'customPostTypes' => CustomPostUnionTypeHelpers::getTargetObjectTypeResolverCustomPostTypes(),
             default => parent::getInputFieldDefaultValue($inputFieldName)
         };
     }
