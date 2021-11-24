@@ -19,6 +19,7 @@ includes:
     - layers/Schema/packages/commentmeta/phpstan.neon.dist
     - layers/Schema/packages/commentmeta-wp/phpstan.neon.dist
     - layers/Schema/packages/comments/phpstan.neon.dist
+    - layers/WPSchema/packages/comments/phpstan.neon.dist
     - layers/Schema/packages/comments-wp/phpstan.neon.dist
     - layers/Engine/packages/component-model/phpstan.neon.dist
     - layers/Schema/packages/custompost-categories-wp/phpstan.neon.dist

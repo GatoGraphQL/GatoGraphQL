@@ -58,6 +58,7 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
             \PoPSchema\Users\Component::class,
             \PoPSchema\UserState\Component::class,
             \PoPSchema\UserStateMutations\Component::class,
+            \PoPWPSchema\Comments\Component::class,
             \PoPWPSchema\CustomPosts\Component::class,
             \PoPWPSchema\Media\Component::class,
             \PoPWPSchema\Menus\Component::class,
