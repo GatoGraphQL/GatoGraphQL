@@ -205,6 +205,13 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             }
         }
 
+        // Sort input fields for each InutObject type
+        foreach (array_keys($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INPUT_OBJECT]) as $typeName) {
+            if (isset($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INPUT_OBJECT][$typeName][SchemaDefinition::INPUT_FIELDS])) {
+                ksort($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INPUT_OBJECT][$typeName][SchemaDefinition::INPUT_FIELDS]);
+            }
+        }
+
         // Sort directives
         if (isset($schemaDefinition[SchemaDefinition::DIRECTIVES])) {
             ksort($schemaDefinition[SchemaDefinition::DIRECTIVES]);
