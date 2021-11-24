@@ -15,7 +15,7 @@ use PoPSchema\Categories\TypeResolvers\InputObjectType\CategoryPaginationInputOb
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
-use PoPSchema\Taxonomies\TypeResolvers\InputObjectType\RootTaxonomiesFilterInputObjectTypeResolver;
+use PoPSchema\Taxonomies\TypeResolvers\InputObjectType\TaxonomyTaxonomiesFilterInputObjectTypeResolver;
 use PoPSchema\Taxonomies\TypeResolvers\InputObjectType\TaxonomySortInputObjectTypeResolver;
 
 abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements CategoryAPIRequestedContractObjectTypeFieldResolverInterface
@@ -24,7 +24,7 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
 
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
-    private ?RootTaxonomiesFilterInputObjectTypeResolver $rootTaxonomiesFilterInputObjectTypeResolver = null;
+    private ?TaxonomyTaxonomiesFilterInputObjectTypeResolver $taxonomyTaxonomiesFilterInputObjectTypeResolver = null;
     private ?CategoryPaginationInputObjectTypeResolver $categoryPaginationInputObjectTypeResolver = null;
     private ?TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver = null;
 
@@ -44,13 +44,13 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
-    final public function setRootTaxonomiesFilterInputObjectTypeResolver(RootTaxonomiesFilterInputObjectTypeResolver $rootTaxonomiesFilterInputObjectTypeResolver): void
+    final public function setTaxonomyTaxonomiesFilterInputObjectTypeResolver(TaxonomyTaxonomiesFilterInputObjectTypeResolver $taxonomyTaxonomiesFilterInputObjectTypeResolver): void
     {
-        $this->rootTaxonomiesFilterInputObjectTypeResolver = $rootTaxonomiesFilterInputObjectTypeResolver;
+        $this->taxonomyTaxonomiesFilterInputObjectTypeResolver = $taxonomyTaxonomiesFilterInputObjectTypeResolver;
     }
-    final protected function getRootTaxonomiesFilterInputObjectTypeResolver(): RootTaxonomiesFilterInputObjectTypeResolver
+    final protected function getTaxonomyTaxonomiesFilterInputObjectTypeResolver(): TaxonomyTaxonomiesFilterInputObjectTypeResolver
     {
-        return $this->rootTaxonomiesFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootTaxonomiesFilterInputObjectTypeResolver::class);
+        return $this->taxonomyTaxonomiesFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(TaxonomyTaxonomiesFilterInputObjectTypeResolver::class);
     }
     final public function setCategoryPaginationInputObjectTypeResolver(CategoryPaginationInputObjectTypeResolver $categoryPaginationInputObjectTypeResolver): void
     {
@@ -119,7 +119,7 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
             'childNames' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'filter' => $this->getRootTaxonomiesFilterInputObjectTypeResolver(),
+                    'filter' => $this->getTaxonomyTaxonomiesFilterInputObjectTypeResolver(),
                     'pagination' => $this->getCategoryPaginationInputObjectTypeResolver(),
                     'sort' => $this->getTaxonomySortInputObjectTypeResolver(),
                 ]
@@ -127,7 +127,7 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
             'childCount' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'filter' => $this->getRootTaxonomiesFilterInputObjectTypeResolver(),
+                    'filter' => $this->getTaxonomyTaxonomiesFilterInputObjectTypeResolver(),
                 ]
             ),
             default => $fieldArgNameTypeResolvers,

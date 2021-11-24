@@ -10,6 +10,8 @@ use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterI
 
 abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractObjectsFilterInputObjectTypeResolver
 {
+    abstract protected function addParentIDInputField(): bool;
+
     public function getInputFieldNameTypeResolvers(): array
     {
         return array_merge(
@@ -17,7 +19,10 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
             [
                 'search' => $this->getStringScalarTypeResolver(),
                 'slugs' => $this->getStringScalarTypeResolver(),
-            ]
+            ],
+            $this->addParentIDInputField() ? [
+                'parentID' => $this->getIDScalarTypeResolver(),
+            ] : []
         );
     }
 
@@ -26,6 +31,7 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
         return match ($inputFieldName) {
             'search' => $this->getTranslationAPI()->__('Search for taxonomies containing the given string', 'taxonomies'),
             'slugs' => $this->getTranslationAPI()->__('Search for taxonomies with the given slugs', 'taxonomies'),
+            'parentID' => $this->getTranslationAPI()->__('Limit results to taxonomies with the given parent ID. \'0\' means \'no parent\'', 'taxonomies'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -43,6 +49,7 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
         return match ($inputFieldName) {
             'search' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_SEARCH],
             'slugs' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_SLUGS],
+            'parentID' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_PARENT_ID],
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

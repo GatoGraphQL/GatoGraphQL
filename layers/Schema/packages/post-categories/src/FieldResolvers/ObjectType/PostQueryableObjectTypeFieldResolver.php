@@ -52,16 +52,6 @@ class PostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableOb
         };
     }
 
-    public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
-    {
-        return match ($fieldName) {
-            'categories' => [PostCategoryFilterInputContainerModuleProcessor::class, PostCategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORIES],
-            'categoryCount' => [PostCategoryFilterInputContainerModuleProcessor::class, PostCategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT],
-            'categoryNames' => [PostCategoryFilterInputContainerModuleProcessor::class, PostCategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORIES],
-            default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
-        };
-    }
-
     public function getCategoryTypeAPI(): CategoryTypeAPIInterface
     {
         return $this->getPostCategoryTypeAPI();
