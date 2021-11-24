@@ -21,6 +21,9 @@ class QueryHookSet extends AbstractHookSet
     public function getOrderByQueryArgValue(string $orderBy): string
     {
         return match ($orderBy) {
+            CommentOrderBy::AUTHOR_EMAIL => 'comment_author_email',
+            CommentOrderBy::AUTHOR_IP => 'comment_author_IP',
+            CommentOrderBy::AUTHOR_URL => 'comment_author_url',
             CommentOrderBy::KARMA => 'comment_karma',
             CommentOrderBy::NONE => 'none',
             default => $orderBy,
