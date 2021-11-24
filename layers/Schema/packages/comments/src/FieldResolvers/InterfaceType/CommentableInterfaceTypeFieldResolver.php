@@ -5,17 +5,15 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractQueryableSchemaInterfaceTypeFieldResolver;
-use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoPSchema\Comments\ComponentConfiguration;
-use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
+use PoPSchema\Comments\TypeResolvers\InputObjectType\CommentSortInputObjectTypeResolver;
+use PoPSchema\Comments\TypeResolvers\InputObjectType\CustomPostCommentPaginationInputObjectTypeResolver;
+use PoPSchema\Comments\TypeResolvers\InputObjectType\CustomPostCommentsFilterInputObjectTypeResolver;
 use PoPSchema\Comments\TypeResolvers\InterfaceType\CommentableInterfaceTypeResolver;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
-use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 
 class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterfaceTypeFieldResolver
@@ -25,6 +23,9 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
+    private ?CustomPostCommentsFilterInputObjectTypeResolver $customPostCommentsFilterInputObjectTypeResolver = null;
+    private ?CustomPostCommentPaginationInputObjectTypeResolver $customPostCommentPaginationInputObjectTypeResolver = null;
+    private ?CommentSortInputObjectTypeResolver $commentSortInputObjectTypeResolver = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -49,6 +50,30 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
         return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+    }
+    final public function setCustomPostCommentsFilterInputObjectTypeResolver(CustomPostCommentsFilterInputObjectTypeResolver $customPostCommentsFilterInputObjectTypeResolver): void
+    {
+        $this->customPostCommentsFilterInputObjectTypeResolver = $customPostCommentsFilterInputObjectTypeResolver;
+    }
+    final protected function getCustomPostCommentsFilterInputObjectTypeResolver(): CustomPostCommentsFilterInputObjectTypeResolver
+    {
+        return $this->customPostCommentsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostCommentsFilterInputObjectTypeResolver::class);
+    }
+    final public function setCustomPostCommentPaginationInputObjectTypeResolver(CustomPostCommentPaginationInputObjectTypeResolver $customPostCommentPaginationInputObjectTypeResolver): void
+    {
+        $this->customPostCommentPaginationInputObjectTypeResolver = $customPostCommentPaginationInputObjectTypeResolver;
+    }
+    final protected function getCustomPostCommentPaginationInputObjectTypeResolver(): CustomPostCommentPaginationInputObjectTypeResolver
+    {
+        return $this->customPostCommentPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostCommentPaginationInputObjectTypeResolver::class);
+    }
+    final public function setCommentSortInputObjectTypeResolver(CommentSortInputObjectTypeResolver $commentSortInputObjectTypeResolver): void
+    {
+        $this->commentSortInputObjectTypeResolver = $commentSortInputObjectTypeResolver;
+    }
+    final protected function getCommentSortInputObjectTypeResolver(): CommentSortInputObjectTypeResolver
+    {
+        return $this->commentSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(CommentSortInputObjectTypeResolver::class);
     }
 
     public function getInterfaceTypeResolverClassesToAttachTo(): array
@@ -104,91 +129,25 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         };
     }
 
-    public function getFieldFilterInputContainerModule(string $fieldName): ?array
+    public function getFieldArgNameTypeResolvers(string $fieldName): array
     {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($fieldName);
         return match ($fieldName) {
-            'comments' => [
-                CommentFilterInputContainerModuleProcessor::class,
-                CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTS
-            ],
-            'commentCount' => [
-                CommentFilterInputContainerModuleProcessor::class,
-                CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTCOUNT
-            ],
-            default => parent::getFieldFilterInputContainerModule($fieldName),
+            'comments' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'filter' => $this->getCustomPostCommentsFilterInputObjectTypeResolver(),
+                    'pagination' => $this->getCustomPostCommentPaginationInputObjectTypeResolver(),
+                    'sort' => $this->getCommentSortInputObjectTypeResolver(),
+                ]
+            ),
+            'commentCount' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'filter' => $this->getCustomPostCommentsFilterInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
         };
-    }
-
-    public function getFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
-    {
-        switch ($fieldName) {
-            case 'comments':
-            case 'commentCount':
-                // By default retrieve the top level comments (with ID => 0)
-                $parentIDFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID
-                ]);
-                if ($fieldArgName === $parentIDFilterInputName) {
-                    return 0;
-                }
-                break;
-        }
-        switch ($fieldName) {
-            case 'comments':
-                $limitFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
-                ]);
-                if ($fieldArgName === $limitFilterInputName) {
-                    return ComponentConfiguration::getCustomPostCommentOrCommentResponseListDefaultLimit();
-                }
-                $orderFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SORT
-                ]);
-                if ($fieldArgName === $orderFilterInputName) {
-                    // Order by descending date
-                    $orderBy = $this->getNameResolver()->getName('popcms:dbcolumn:orderby:comments:date');
-                    $order = 'DESC';
-                    return $orderBy . OrderFormInput::SEPARATOR . $order;
-                }
-                break;
-        }
-        return parent::getFieldArgDefaultValue($fieldName, $fieldArgName);
-    }
-
-    /**
-     * Validate the constraints for a field argument
-     *
-     * @return string[] Error messages
-     */
-    public function validateFieldArgValue(
-        string $fieldName,
-        string $fieldArgName,
-        mixed $fieldArgValue
-    ): array {
-        $errors = parent::validateFieldArgValue(
-            $fieldName,
-            $fieldArgName,
-            $fieldArgValue,
-        );
-
-        // Check the "limit" fieldArg
-        switch ($fieldName) {
-            case 'comments':
-                if (
-                    $maybeError = $this->maybeValidateLimitFieldArgument(
-                        ComponentConfiguration::getCommentListMaxLimit(),
-                        $fieldName,
-                        $fieldArgName,
-                        $fieldArgValue
-                    )
-                ) {
-                    $errors[] = $maybeError;
-                }
-                break;
-        }
-        return $errors;
     }
 }
