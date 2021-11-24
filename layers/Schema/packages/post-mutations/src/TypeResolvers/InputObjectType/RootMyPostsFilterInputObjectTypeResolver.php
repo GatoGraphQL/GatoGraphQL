@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostMutations\TypeResolvers\InputObjectType;
 
-class RootMyPostsFilterInputObjectTypeResolver extends AbstractMyPostsFilterInputObjectTypeResolver
+use PoPSchema\CustomPostMutations\TypeResolvers\InputObjectType\AbstractMyCustomPostsFilterInputObjectTypeResolver;
+use PoPSchema\Posts\TypeResolvers\InputObjectType\PostsFilterInputObjectTypeResolverInterface;
+
+class RootMyPostsFilterInputObjectTypeResolver extends AbstractMyCustomPostsFilterInputObjectTypeResolver implements PostsFilterInputObjectTypeResolverInterface
 {
     public function getTypeName(): string
     {
