@@ -5,3 +5,6 @@ services:
 
     PoPSchema\CustomPostMutations\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
+
+    PoPSchema\CustomPostMutations\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
