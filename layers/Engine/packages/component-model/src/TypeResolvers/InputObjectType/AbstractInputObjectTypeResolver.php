@@ -193,11 +193,20 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         /**
          * Inject all properties with default value
          */
-        foreach (array_keys($inputFieldNameTypeResolvers) as $inputFieldName) {
-            if (isset($inputValue->$inputFieldName) || ($inputFieldDefaultValue = $this->getConsolidatedInputFieldDefaultValue($inputFieldName)) === null) {
+        foreach ($inputFieldNameTypeResolvers as $inputFieldName => $inputFieldTypeResolver) {
+            // If it has value, skip it
+            if (isset($inputValue->$inputFieldName)) {
                 continue;
             }
-            $inputValue->$inputFieldName = $inputFieldDefaultValue;
+            // If it has default value, set it
+            if ($inputFieldDefaultValue = $this->getConsolidatedInputFieldDefaultValue($inputFieldName)) {
+                $inputValue->$inputFieldName = $inputFieldDefaultValue;
+                continue;
+            }
+            // If it is an InputObject, set it to {} so it has the chance to set its own default values
+            if ($inputFieldTypeResolver instanceof InputObjectTypeResolverInterface) {
+                $inputValue->$inputFieldName = new stdClass;
+            }
         }
 
         /** @var Error[] */
