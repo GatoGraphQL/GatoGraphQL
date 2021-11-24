@@ -180,7 +180,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             ksort($schemaDefinition[SchemaDefinition::TYPES][$typeKind]);
         }
 
-        // Sort fields and interfaces for each Object type
+        // Sort fields and interfaces for each ObjectType
         foreach (array_keys($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::OBJECT]) as $typeName) {
             if (isset($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::FIELDS])) {
                 ksort($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::FIELDS]);
@@ -195,7 +195,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             ksort($schemaDefinition[SchemaDefinition::GLOBAL_FIELDS]);
         }
 
-        // Sort fields for each Interface type
+        // Sort fields for each InterfaceType
         foreach (array_keys($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INTERFACE]) as $typeName) {
             if (isset($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::FIELDS])) {
                 ksort($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::FIELDS]);
@@ -205,10 +205,17 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             }
         }
 
-        // Sort input fields for each InutObject type
+        // Sort input fields for each InputObjectType
         foreach (array_keys($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INPUT_OBJECT]) as $typeName) {
             if (isset($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INPUT_OBJECT][$typeName][SchemaDefinition::INPUT_FIELDS])) {
                 ksort($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INPUT_OBJECT][$typeName][SchemaDefinition::INPUT_FIELDS]);
+            }
+        }
+
+        // Sort values for each EnumType
+        foreach (array_keys($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::ENUM]) as $typeName) {
+            if (isset($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::ENUM][$typeName][SchemaDefinition::ITEMS])) {
+                ksort($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::ENUM][$typeName][SchemaDefinition::ITEMS]);
             }
         }
 
