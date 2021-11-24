@@ -16,7 +16,7 @@ class SingleCommentFilterInputContainerModuleProcessor extends AbstractFilterInp
 
     public const MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS = 'filterinputcontainer-comment-status';
     public const MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS = 'filterinputcontainer-comment-by-id-status';
-    
+
     public function getModulesToProcess(): array
     {
         return array(
