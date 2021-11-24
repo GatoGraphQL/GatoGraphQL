@@ -211,8 +211,8 @@ class CommonFilterInputModuleProcessor extends AbstractFilterInputModuleProcesso
                 Param::VALUE_SEPARATOR
             ),
             self::MODULE_FILTERINPUT_EXCLUDE_IDS => $this->getTranslationAPI()->__('Exclude elements with the given IDs', 'schema-commons'),
-            self::MODULE_FILTERINPUT_PARENT_IDS => $this->getTranslationAPI()->__('Limit results to elements with the given parent IDs', 'schema-commons'),
-            self::MODULE_FILTERINPUT_PARENT_ID => $this->getTranslationAPI()->__('Limit results to elements with the given parent ID', 'schema-commons'),
+            self::MODULE_FILTERINPUT_PARENT_IDS => $this->getTranslationAPI()->__('Limit results to elements with the given parent IDs. \'0\' means \'no parent\'', 'schema-commons'),
+            self::MODULE_FILTERINPUT_PARENT_ID => $this->getTranslationAPI()->__('Limit results to elements with the given parent ID. \'0\' means \'no parent\'', 'schema-commons'),
             self::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS => $this->getTranslationAPI()->__('Exclude elements with the given parent IDs', 'schema-commons'),
             self::MODULE_FILTERINPUT_SLUGS => $this->getTranslationAPI()->__('Limit results to elements with the given slug', 'schema-commons'),
             self::MODULE_FILTERINPUT_SLUGS => $this->getTranslationAPI()->__('Limit results to elements with the given slug', 'schema-commons'),
