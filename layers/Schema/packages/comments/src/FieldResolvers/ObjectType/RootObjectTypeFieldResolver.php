@@ -12,6 +12,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\Comments\ComponentConfiguration;
+use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPSchema\Comments\ModuleProcessors\SingleCommentFilterInputContainerModuleProcessor;
@@ -242,6 +243,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         array $options = []
     ): mixed {
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
+        /**
+         * If "status" is admin and won't be shown, then default to "approve" only
+         */
+        if (!array_key_exists('status', $query)) {
+            $query['status'] = CommentStatus::APPROVE;
+        }
         switch ($fieldName) {
             case 'commentCount':
                 return $this->getCommentTypeAPI()->getCommentCount($query);
