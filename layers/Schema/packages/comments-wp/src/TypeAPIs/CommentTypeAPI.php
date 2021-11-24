@@ -192,7 +192,13 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     {
         $orderBy = match ($orderBy) {
             CommentOrderBy::ID => 'comment_ID',
-            CommentOrderBy::DATE => 'date',
+            CommentOrderBy::DATE => 'comment_date_gmt',
+            CommentOrderBy::CONTENT => 'comment_content',
+            CommentOrderBy::PARENT => 'comment_parent',
+            CommentOrderBy::CUSTOM_POST => 'comment_post_ID',
+            CommentOrderBy::TYPE => 'comment_type',
+            CommentOrderBy::STATUS => 'comment_approved',
+            CommentOrderBy::NONE => 'none',
             default => $orderBy,
         };
         return $this->getHooksAPI()->applyFilters(
