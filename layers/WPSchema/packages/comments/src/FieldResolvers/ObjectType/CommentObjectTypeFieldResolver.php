@@ -82,7 +82,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         $comment = $object;
         switch ($fieldName) {
             case 'karma':
-                return $comment->comment_karma;
+                return (int)$comment->comment_karma;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
