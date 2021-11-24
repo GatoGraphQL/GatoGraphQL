@@ -14,6 +14,7 @@ use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPSchema\Comments\ModuleProcessors\SingleCommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\InputObjectType\CommentByInputObjectTypeResolver;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
@@ -179,7 +180,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
-            'comment' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS],
+            'comment' => [SingleCommentFilterInputContainerModuleProcessor::class, SingleCommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS],
             'comments' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTS],
             'commentCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
