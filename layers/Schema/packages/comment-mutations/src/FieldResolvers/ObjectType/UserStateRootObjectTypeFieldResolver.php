@@ -14,7 +14,9 @@ use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\CommentMutations\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\ComponentConfiguration;
+use PoPSchema\Comments\ModuleProcessors\SingleCommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPSchema\Comments\TypeResolvers\InputObjectType\CommentByInputObjectTypeResolver;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -31,6 +33,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
+    private ?CommentByInputObjectTypeResolver $commentByInputObjectTypeResolver = null;
 
     final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
     {
@@ -55,6 +58,14 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
         return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+    }
+    final public function setCommentByInputObjectTypeResolver(CommentByInputObjectTypeResolver $commentByInputObjectTypeResolver): void
+    {
+        $this->commentByInputObjectTypeResolver = $commentByInputObjectTypeResolver;
+    }
+    final protected function getCommentByInputObjectTypeResolver(): CommentByInputObjectTypeResolver
+    {
+        return $this->commentByInputObjectTypeResolver ??= $this->instanceManager->getInstance(CommentByInputObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -173,10 +184,32 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
-            'myComment' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYCOMMENT],
+            'myComment' => [SingleCommentFilterInputContainerModuleProcessor::class, SingleCommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS],
             'myComments' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYCOMMENTS],
             'myCommentCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_MYCOMMENTCOUNT],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'myComment' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'by' => $this->getCommentByInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
+        };
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['myComment' => 'by'] => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 

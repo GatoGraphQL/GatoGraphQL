@@ -12,14 +12,17 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\Comments\ComponentConfiguration;
+use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
+use PoPSchema\Comments\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPSchema\Comments\ModuleProcessors\SingleCommentFilterInputContainerModuleProcessor;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPSchema\Comments\TypeResolvers\InputObjectType\CommentByInputObjectTypeResolver;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\FormInputs\OrderFormInput;
-use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 
@@ -30,6 +33,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
+    private ?CommentByInputObjectTypeResolver $commentByInputObjectTypeResolver = null;
 
     final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
     {
@@ -54,6 +58,14 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
         return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+    }
+    final public function setCommentByInputObjectTypeResolver(CommentByInputObjectTypeResolver $commentByInputObjectTypeResolver): void
+    {
+        $this->commentByInputObjectTypeResolver = $commentByInputObjectTypeResolver;
+    }
+    final protected function getCommentByInputObjectTypeResolver(): CommentByInputObjectTypeResolver
+    {
+        return $this->commentByInputObjectTypeResolver ??= $this->instanceManager->getInstance(CommentByInputObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -159,7 +171,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'comment' => $this->getTranslationAPI()->__('Comment with a specific ID', 'pop-comments'),
+            'comment' => $this->getTranslationAPI()->__('Comment by some property', 'pop-comments'),
             'commentCount' => $this->getTranslationAPI()->__('Number of comments on the site', 'pop-comments'),
             'comments' => $this->getTranslationAPI()->__('Comments on the site', 'pop-comments'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -169,11 +181,50 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
-            'comment' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
+            'comment' => [SingleCommentFilterInputContainerModuleProcessor::class, SingleCommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS],
             'comments' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTS],
             'commentCount' => [CommentFilterInputContainerModuleProcessor::class, CommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
+    }
+
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'comment' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'by' => $this->getCommentByInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
+        };
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['comment' => 'by'] => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $adminFieldArgNames = parent::getAdminFieldArgNames($objectTypeResolver, $fieldName);
+        switch ($fieldName) {
+            case 'comment':
+                if (ComponentConfiguration::treatCommentStatusAsAdminData()) {
+                    $commentStatusFilterInputName = FilterInputHelper::getFilterInputName([
+                        FilterInputModuleProcessor::class,
+                        FilterInputModuleProcessor::MODULE_FILTERINPUT_COMMENT_STATUS
+                    ]);
+                    $adminFieldArgNames[] = $commentStatusFilterInputName;
+                }
+                break;
+        }
+        return $adminFieldArgNames;
     }
 
     /**
@@ -192,6 +243,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         array $options = []
     ): mixed {
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
+        /**
+         * If "status" is admin and won't be shown, then default to "approve" only
+         */
+        if (!array_key_exists('status', $query)) {
+            $query['status'] = CommentStatus::APPROVE;
+        }
         switch ($fieldName) {
             case 'commentCount':
                 return $this->getCommentTypeAPI()->getCommentCount($query);

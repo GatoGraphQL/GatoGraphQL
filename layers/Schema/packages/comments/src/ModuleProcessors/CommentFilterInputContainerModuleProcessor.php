@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Comments\ModuleProcessors;
 
-use PoP\ComponentModel\FilterInput\FilterInputHelper;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\Comments\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor as CustomPostFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
@@ -16,7 +14,6 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS = 'filterinputcontainer-comment-by-id-status';
     public const MODULE_FILTERINPUTCONTAINER_COMMENTS = 'filterinputcontainer-comments';
     public const MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT = 'filterinputcontainer-commentcount';
     public const MODULE_FILTERINPUTCONTAINER_RESPONSES = 'filterinputcontainer-responses';
@@ -33,7 +30,6 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENTS],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENTCOUNT],
             [self::class, self::MODULE_FILTERINPUTCONTAINER_RESPONSES],
@@ -75,10 +71,6 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
         ];
         $paginationFilterInputModules = $this->getPaginationFilterInputModules();
         return match ((string)$module[1]) {
-            self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS => [
-                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-                [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
-            ],
             self::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT => $responseFilterInputModules,
             self::MODULE_FILTERINPUTCONTAINER_RESPONSES => [
                 ...$responseFilterInputModules,
@@ -123,23 +115,6 @@ class CommentFilterInputContainerModuleProcessor extends AbstractFilterInputCont
             ],
             default => [],
         };
-    }
-
-    public function getFieldFilterInputTypeModifiers(array $module, string $fieldArgName): int
-    {
-        $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($module, $fieldArgName);
-        switch ($module[1]) {
-            case self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS:
-                $idFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID
-                ]);
-                if ($fieldArgName === $idFilterInputName) {
-                    return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
-                }
-                break;
-        }
-        return $fieldFilterInputTypeModifiers;
     }
 
     /**
