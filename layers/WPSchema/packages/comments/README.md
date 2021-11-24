@@ -1,4 +1,4 @@
-# Custom Posts
+# Comments
 
 <!--
 [![Build Status][ico-travis]][link-travis]
@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-WordPress-specific Custom Post Data Model
+WordPress-specific Comment Data Model
 
 ## Install
 
