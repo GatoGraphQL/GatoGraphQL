@@ -12,4 +12,9 @@ abstract class AbstractMyCustomPostsFilterInputObjectTypeResolver extends Abstra
     {
         return false;
     }
+
+    protected function addCustomPostInputFields(): bool
+    {
+        return true;
+    }
 }

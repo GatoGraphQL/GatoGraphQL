@@ -13,6 +13,7 @@ use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostsFilterInputObjectTypeResolver;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\FilterInputProcessors\FilterInputProcessor;
+use PoPSchema\Users\ConditionalOnComponent\CustomPosts\TypeResolvers\InputObjectType\UserCustomPostsFilterInputObjectTypeResolver;
 
 class AddAuthorInputFieldsToCustomPostInputObjectTypeHookSet extends AbstractHookSet
 {
@@ -65,13 +66,23 @@ class AddAuthorInputFieldsToCustomPostInputObjectTypeHookSet extends AbstractHoo
     }
 
     /**
+     * Indicate if to add the fields added by the SchemaHookSet
+     */
+    protected function addAuthorInputFields(
+        InputObjectTypeResolverInterface $inputObjectTypeResolver,
+    ): bool {
+        return $inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver
+            && !($inputObjectTypeResolver instanceof UserCustomPostsFilterInputObjectTypeResolver);
+    }
+
+    /**
      * @param array<string, InputTypeResolverInterface> $inputFieldNameTypeResolvers
      */
     public function getInputFieldNameTypeResolvers(
         array $inputFieldNameTypeResolvers,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): array {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!$this->addAuthorInputFields($inputObjectTypeResolver)) {
             return $inputFieldNameTypeResolvers;
         }
         return array_merge(
@@ -94,7 +105,7 @@ class AddAuthorInputFieldsToCustomPostInputObjectTypeHookSet extends AbstractHoo
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName
     ): ?string {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!$this->addAuthorInputFields($inputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
@@ -110,7 +121,7 @@ class AddAuthorInputFieldsToCustomPostInputObjectTypeHookSet extends AbstractHoo
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName
     ): int {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!$this->addAuthorInputFields($inputObjectTypeResolver)) {
             return $inputFieldTypeModifiers;
         }
         return match ($inputFieldName) {
@@ -127,7 +138,7 @@ class AddAuthorInputFieldsToCustomPostInputObjectTypeHookSet extends AbstractHoo
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
     ): ?array {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!$this->addAuthorInputFields($inputObjectTypeResolver)) {
             return $inputFieldFilterInput;
         }
         return match ($inputFieldName) {
