@@ -80,22 +80,23 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             return $this->consolidatedInputFieldNameTypeResolversCache;
         }
 
+        $consolidatedInputFieldNameTypeResolvers = $this->getHooksAPI()->applyFilters(
+            HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
+            $this->getInputFieldNameTypeResolvers(),
+            $this,
+        );
+
         // Exclude the admin input fields, if "Admin" Schema is not enabled
-        $inputFieldNameTypeResolvers = $this->getInputFieldNameTypeResolvers();
         if (!ComponentConfiguration::enableAdminSchema()) {
             $adminInputFieldNames = $this->getConsolidatedAdminInputFieldNames();
-            $inputFieldNameTypeResolvers = array_filter(
-                $inputFieldNameTypeResolvers,
+            $consolidatedInputFieldNameTypeResolvers = array_filter(
+                $consolidatedInputFieldNameTypeResolvers,
                 fn (string $inputFieldName) => !in_array($inputFieldName, $adminInputFieldNames),
                 ARRAY_FILTER_USE_KEY
             );
         }
 
-        $this->consolidatedInputFieldNameTypeResolversCache = $this->getHooksAPI()->applyFilters(
-            HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
-            $inputFieldNameTypeResolvers,
-            $this,
-        );
+        $this->consolidatedInputFieldNameTypeResolversCache = $consolidatedInputFieldNameTypeResolvers;
         return $this->consolidatedInputFieldNameTypeResolversCache;
     }
 
