@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\Menus\TypeResolvers\InputObjectType;
+namespace PoPSchema\Menus\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofInputObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class MenuByInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -20,14 +18,6 @@ class MenuByInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
-    {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getTypeName(): string
@@ -44,8 +34,6 @@ class MenuByInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
     {
         return [
             'id' => $this->getIDScalarTypeResolver(),
-            'slug' => $this->getStringScalarTypeResolver(),
-            'location' => $this->getStringScalarTypeResolver(),
         ];
     }
 
@@ -53,8 +41,6 @@ class MenuByInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
     {
         return match ($inputFieldName) {
             'id' => $this->getTranslationAPI()->__('Query by menu ID', 'menus'),
-            'slug' => $this->getTranslationAPI()->__('Query by slug', 'menus'),
-            'location' => $this->getTranslationAPI()->__('Query by location', 'menus'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

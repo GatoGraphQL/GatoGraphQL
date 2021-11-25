@@ -9,10 +9,10 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\Menus\ModuleProcessors\MenuFilterInputContainerModuleProcessor;
 use PoPSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
+use PoPSchema\Menus\TypeResolvers\InputObjectType\MenuByInputObjectTypeResolver;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -20,9 +20,9 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
-    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?MenuObjectTypeResolver $menuObjectTypeResolver = null;
     private ?MenuTypeAPIInterface $menuTypeAPI = null;
+    private ?MenuByInputObjectTypeResolver $menuByInputObjectTypeResolver = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -31,14 +31,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
-    }
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
-    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
-    {
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
     final public function setMenuObjectTypeResolver(MenuObjectTypeResolver $menuObjectTypeResolver): void
     {
@@ -55,6 +47,14 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     final protected function getMenuTypeAPI(): MenuTypeAPIInterface
     {
         return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
+    }
+    final public function setMenuByInputObjectTypeResolver(MenuByInputObjectTypeResolver $menuByInputObjectTypeResolver): void
+    {
+        $this->menuByInputObjectTypeResolver = $menuByInputObjectTypeResolver;
+    }
+    final protected function getMenuByInputObjectTypeResolver(): MenuByInputObjectTypeResolver
+    {
+        return $this->menuByInputObjectTypeResolver ??= $this->instanceManager->getInstance(MenuByInputObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -104,26 +104,22 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         return match ($fieldName) {
-            'menu' => [
-                'id' => $this->getIDScalarTypeResolver(),
-            ],
-            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            ['menu' => 'id'] => $this->getTranslationAPI()->__('The ID of the menu', 'menus'),
-            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+            'menu' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'by' => $this->getMenuByInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
         };
     }
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['menu' => 'id'] => SchemaTypeModifiers::MANDATORY,
+            ['menu' => 'by'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -154,10 +150,13 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     ): mixed {
         switch ($fieldName) {
             case 'menu':
-                // Validate the ID exists
-                $menuID = $fieldArgs['id'];
-                if ($this->getMenuTypeAPI()->getMenu($menuID) !== null) {
-                    return $menuID;
+                $by = $fieldArgs['by'];
+                if (isset($by->id)) {
+                    // Validate the ID exists
+                    $menuID = $by->id;
+                    if ($this->getMenuTypeAPI()->getMenu($menuID) !== null) {
+                        return $menuID;
+                    }
                 }
                 return null;
         }
