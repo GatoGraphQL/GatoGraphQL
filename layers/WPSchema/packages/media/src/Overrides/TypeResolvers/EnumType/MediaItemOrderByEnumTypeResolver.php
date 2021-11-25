@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPWPSchema\Media\Overrides\TypeResolvers\EnumType;
 
 use PoPSchema\Media\TypeResolvers\EnumType\MediaItemOrderByEnumTypeResolver as UpstreamMediaItemOrderByEnumTypeResolver;
+use PoPWPSchema\CustomPosts\Constants\CustomPostOrderBy;
 use PoPWPSchema\CustomPosts\Overrides\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolverTrait;
 
 /**
@@ -16,13 +17,17 @@ class MediaItemOrderByEnumTypeResolver extends UpstreamMediaItemOrderByEnumTypeR
     use CustomPostOrderByEnumTypeResolverTrait;
 
     /**
+     * The "type" needs not be added, since it's always "attachment" for media items
+     *
      * @return string[]
      */
     public function getEnumValues(): array
     {
+        $additionalMediaItemEnumValues = $this->getAdditionalCustomPostEnumValues();
+        array_splice($additionalMediaItemEnumValues, array_search(CustomPostOrderBy::TYPE, $additionalMediaItemEnumValues), 1);
         return array_merge(
             parent::getEnumValues(),
-            $this->getAdditionalCustomPostEnumValues()
+            $additionalMediaItemEnumValues
         );
     }
 
