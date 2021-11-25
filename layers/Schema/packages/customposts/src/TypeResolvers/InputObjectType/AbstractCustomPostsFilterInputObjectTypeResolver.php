@@ -7,6 +7,7 @@ namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
+use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
@@ -37,10 +38,20 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     public function getAdminInputFieldNames(): array
     {
         $adminInputFieldNames = parent::getAdminInputFieldNames();
-        if (ComponentConfiguration::treatCustomPostStatusAsAdminData()) {
+        if ($this->treatCustomPostStatusAsAdminData()) {
             $adminInputFieldNames[] = 'status';
         }
         return $adminInputFieldNames;
+    }
+
+    protected function treatCustomPostStatusAsAdminData(): bool
+    {
+        return ComponentConfiguration::treatCustomPostStatusAsAdminData();
+    }
+
+    protected function addCustomPostInputFields(): bool
+    {
+        return false;
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -51,16 +62,20 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
                 'status' => $this->getCustomPostStatusEnumTypeResolver(),
                 'search' => $this->getStringScalarTypeResolver(),
                 'dateQuery' => $this->getCustomPostDateQueryInputObjectTypeResolver(),
-            ]
+            ],
+            $this->addCustomPostInputFields() ? [
+                'customPostTypes' => $this->getStringScalarTypeResolver(),
+            ] : []
         );
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'status' => $this->getTranslationAPI()->__('Custom Post Status', 'customposts'),
-            'search' => $this->getTranslationAPI()->__('Search for elements containing the given string', 'customposts'),
-            'dateQuery' => $this->getTranslationAPI()->__('Filter elements based on date', 'customposts'),
+            'status' => $this->getTranslationAPI()->__('Custom post status', 'customposts'),
+            'search' => $this->getTranslationAPI()->__('Search for custom posts containing the given string', 'customposts'),
+            'dateQuery' => $this->getTranslationAPI()->__('Filter custom posts based on date', 'customposts'),
+            'customPostTypes' => $this->getTranslationAPI()->__('Filter custom posts of given types', 'customposts'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -71,6 +86,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
             'status' => [
                 Status::PUBLISHED,
             ],
+            'customPostTypes' => CustomPostUnionTypeHelpers::getTargetObjectTypeResolverCustomPostTypes(),
             default => parent::getInputFieldDefaultValue($inputFieldName)
         };
     }
@@ -78,8 +94,11 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return match ($inputFieldName) {
-            'status' => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            default => parent::getInputFieldTypeModifiers($inputFieldName)
+            'status',
+            'customPostTypes'
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default
+                => parent::getInputFieldTypeModifiers($inputFieldName)
         };
     }
 
@@ -88,6 +107,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
         return match ($inputFieldName) {
             'status' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_CUSTOMPOSTSTATUS],
             'search' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_SEARCH],
+            'customPostTypes' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_UNIONCUSTOMPOSTTYPES],
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

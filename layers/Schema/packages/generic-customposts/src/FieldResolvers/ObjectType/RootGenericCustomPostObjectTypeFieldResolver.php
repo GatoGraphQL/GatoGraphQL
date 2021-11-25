@@ -15,13 +15,14 @@ use PoPSchema\CustomPosts\ComponentConfiguration as CustomPostsComponentConfigur
 use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostByInputObjectTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostSortInputObjectTypeResolver;
 use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 use PoPSchema\GenericCustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
-use PoPSchema\GenericCustomPosts\ModuleProcessors\GenericCustomPostFilterInputContainerModuleProcessor;
+use PoPSchema\GenericCustomPosts\TypeResolvers\InputObjectType\GenericCustomPostPaginationInputObjectTypeResolver;
+use PoPSchema\GenericCustomPosts\TypeResolvers\InputObjectType\RootGenericCustomPostsFilterInputObjectTypeResolver;
 use PoPSchema\GenericCustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 
 /**
@@ -37,6 +38,9 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?CustomPostByInputObjectTypeResolver $customPostByInputObjectTypeResolver = null;
+    private ?RootGenericCustomPostsFilterInputObjectTypeResolver $rootGenericCustomPostsFilterInputObjectTypeResolver = null;
+    private ?GenericCustomPostPaginationInputObjectTypeResolver $genericCustomPostPaginationInputObjectTypeResolver = null;
+    private ?CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -70,6 +74,31 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return $this->customPostByInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostByInputObjectTypeResolver::class);
     }
+    final public function setRootGenericCustomPostsFilterInputObjectTypeResolver(RootGenericCustomPostsFilterInputObjectTypeResolver $rootGenericCustomPostsFilterInputObjectTypeResolver): void
+    {
+        $this->rootGenericCustomPostsFilterInputObjectTypeResolver = $rootGenericCustomPostsFilterInputObjectTypeResolver;
+    }
+    final protected function getRootGenericCustomPostsFilterInputObjectTypeResolver(): RootGenericCustomPostsFilterInputObjectTypeResolver
+    {
+        return $this->rootGenericCustomPostsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootGenericCustomPostsFilterInputObjectTypeResolver::class);
+    }
+    final public function setGenericCustomPostPaginationInputObjectTypeResolver(GenericCustomPostPaginationInputObjectTypeResolver $genericCustomPostPaginationInputObjectTypeResolver): void
+    {
+        $this->genericCustomPostPaginationInputObjectTypeResolver = $genericCustomPostPaginationInputObjectTypeResolver;
+    }
+    final protected function getGenericCustomPostPaginationInputObjectTypeResolver(): GenericCustomPostPaginationInputObjectTypeResolver
+    {
+        return $this->genericCustomPostPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostPaginationInputObjectTypeResolver::class);
+    }
+    final public function setCustomPostSortInputObjectTypeResolver(CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver): void
+    {
+        $this->customPostSortInputObjectTypeResolver = $customPostSortInputObjectTypeResolver;
+    }
+    final protected function getCustomPostSortInputObjectTypeResolver(): CustomPostSortInputObjectTypeResolver
+    {
+        return $this->customPostSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostSortInputObjectTypeResolver::class);
+    }
+
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -90,7 +119,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'genericCustomPost' => $this->getTranslationAPI()->__('Custom post by some property', 'generic-customposts'),
+            'genericCustomPost' => $this->getTranslationAPI()->__('Retrieve a single custom post', 'generic-customposts'),
             'genericCustomPosts' => $this->getTranslationAPI()->__('Custom posts', 'generic-customposts'),
             'genericCustomPostCount' => $this->getTranslationAPI()->__('Number of custom posts', 'generic-customposts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -126,14 +155,6 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
                 CommonCustomPostFilterInputContainerModuleProcessor::class,
                 CommonCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_STATUS_GENERICTYPE
             ],
-            'genericCustomPosts' => [
-                GenericCustomPostFilterInputContainerModuleProcessor::class,
-                GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST
-            ],
-            'genericCustomPostCount' => [
-                GenericCustomPostFilterInputContainerModuleProcessor::class,
-                GenericCustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT
-            ],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
     }
@@ -146,6 +167,20 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
                 $fieldArgNameTypeResolvers,
                 [
                     'by' => $this->getCustomPostByInputObjectTypeResolver(),
+                ]
+            ),
+            'genericCustomPosts' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'filter' => $this->getRootGenericCustomPostsFilterInputObjectTypeResolver(),
+                    'pagination' => $this->getGenericCustomPostPaginationInputObjectTypeResolver(),
+                    'sort' => $this->getCustomPostSortInputObjectTypeResolver(),
+                ]
+            ),
+            'genericCustomPostCount' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'filter' => $this->getRootGenericCustomPostsFilterInputObjectTypeResolver(),
                 ]
             ),
             default => $fieldArgNameTypeResolvers,
@@ -175,58 +210,6 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
             ['genericCustomPost' => 'by'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
-    }
-
-    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
-    {
-        switch ($fieldName) {
-            case 'genericCustomPosts':
-                $limitFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
-                ]);
-                if ($fieldArgName === $limitFilterInputName) {
-                    return ComponentConfiguration::getGenericCustomPostListDefaultLimit();
-                }
-                break;
-        }
-        return parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
-    }
-
-    /**
-     * Validate the constraints for a field argument
-     *
-     * @return string[] Error messages
-     */
-    public function validateFieldArgValue(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        string $fieldArgName,
-        mixed $fieldArgValue
-    ): array {
-        $errors = parent::validateFieldArgValue(
-            $objectTypeResolver,
-            $fieldName,
-            $fieldArgName,
-            $fieldArgValue,
-        );
-
-        // Check the "limit" fieldArg
-        switch ($fieldName) {
-            case 'genericCustomPosts':
-                if (
-                    $maybeError = $this->maybeValidateLimitFieldArgument(
-                        ComponentConfiguration::getGenericCustomPostListMaxLimit(),
-                        $fieldName,
-                        $fieldArgName,
-                        $fieldArgValue
-                    )
-                ) {
-                    $errors[] = $maybeError;
-                }
-                break;
-        }
-        return $errors;
     }
 
     /**

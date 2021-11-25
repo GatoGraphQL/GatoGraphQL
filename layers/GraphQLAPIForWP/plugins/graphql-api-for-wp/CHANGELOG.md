@@ -37,9 +37,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Query properties for posts:
   - `Post.postFormat: String!`
 - Fetch a page's parent and children, and the menu order:
-  `Page.parentPage: Page`
-  `Page.childPages: [Page]!`
-  `Page.childPageCount: Int!`
+  `Page.parent: Page`
+  `Page.children: [Page]!`
+  `Page.childCount: Int!`
   `Page.menuOrder: Int!`
 - Filter field `pages` via new arguments:
   - `parentIDs: [ID]`
@@ -88,9 +88,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `User.hasAnyCapability: Bool!`
 - Added arguments `roles` and `excludeRoles` to filter by user roles ("admin" input fields)
 - Fetch children from Categories:
-  - `PostCategory.childCategories: [PostCategory]!`
-  - `PostCategory.childCategoryNames: [String]!`
-  - `PostCategory.childCategoryCount: Int`
+  - `PostCategory.children: [PostCategory]!`
+  - `PostCategory.childNames: [String]!`
+  - `PostCategory.childCount: Int`
 - Added fields for Menus:
   - `Root.menus: [Menu]!`
   - `Root.menuCount: Int!`

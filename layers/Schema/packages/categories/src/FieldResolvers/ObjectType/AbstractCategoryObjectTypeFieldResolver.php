@@ -60,14 +60,14 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             'name',
             'description',
             'count',
-            'parentCategory',
+            'parent',
         ];
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'parentCategory' => $this->getCategoryTypeResolver(),
+            'parent' => $this->getCategoryTypeResolver(),
             'name' => $this->getStringScalarTypeResolver(),
             'description' => $this->getStringScalarTypeResolver(),
             'count' => $this->getIntScalarTypeResolver(),
@@ -94,7 +94,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             'slug' => $this->getTranslationAPI()->__('Category slug', 'pop-categories'),
             'name' => $this->getTranslationAPI()->__('Category', 'pop-categories'),
             'description' => $this->getTranslationAPI()->__('Category description', 'pop-categories'),
-            'parentCategory' => $this->getTranslationAPI()->__('Parent category (if this category is a child of another one)', 'pop-categories'),
+            'parent' => $this->getTranslationAPI()->__('Parent category (if this category is a child of another one)', 'pop-categories'),
             'count' => $this->getTranslationAPI()->__('Number of custom posts containing this category', 'pop-categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
@@ -133,7 +133,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             case 'description':
                 return $categoryTypeAPI->getCategoryDescription($category);
 
-            case 'parentCategory':
+            case 'parent':
                 return $categoryTypeAPI->getCategoryParentID($objectTypeResolver->getID($category));
 
             case 'count':

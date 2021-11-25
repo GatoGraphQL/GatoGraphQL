@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Posts\TypeResolvers\InputObjectType;
 
+use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostPaginationInputObjectTypeResolver;
 use PoPSchema\Posts\ComponentConfiguration;
-use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
 
-class PostPaginationInputObjectTypeResolver extends PaginationInputObjectTypeResolver
+class PostPaginationInputObjectTypeResolver extends CustomPostPaginationInputObjectTypeResolver
 {
     public function getTypeName(): string
     {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CommentsWP\ConditionalOnComponent\Users\Hooks;
 
 use PoP\Hooks\AbstractHookSet;
+use PoPSchema\Comments\ConditionalOnComponent\Users\Constants\CommentOrderBy;
 use PoPSchema\CommentsWP\TypeAPIs\CommentTypeAPI;
 
 class QueryHookSet extends AbstractHookSet
@@ -16,6 +17,11 @@ class QueryHookSet extends AbstractHookSet
             [$this, 'convertCommentQuery'],
             10,
             2
+        );
+
+        $this->getHooksAPI()->addFilter(
+            CommentTypeAPI::HOOK_ORDERBY_QUERY_ARG_VALUE,
+            [$this, 'getOrderByQueryArgValue']
         );
     }
 
@@ -46,5 +52,13 @@ class QueryHookSet extends AbstractHookSet
             unset($query['exclude-custompost-author-ids']);
         }
         return $query;
+    }
+
+    public function getOrderByQueryArgValue(string $orderBy): string
+    {
+        return match ($orderBy) {
+            CommentOrderBy::AUTHOR => 'comment_author',
+            default => $orderBy,
+        };
     }
 }

@@ -2,31 +2,22 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\SchemaHooks;
+namespace PoPSchema\UserRoles\SchemaHooks;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
-use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostsFilterInputObjectTypeResolver;
-use PoPSchema\Users\ConditionalOnComponent\CustomPosts\FilterInputProcessors\FilterInputProcessor;
+use PoPSchema\UserRoles\ComponentConfiguration;
+use PoPSchema\UserRoles\FilterInputProcessors\FilterInputProcessor;
+use PoPSchema\Users\TypeResolvers\InputObjectType\AbstractUsersFilterInputObjectTypeResolver;
 
 class InputObjectTypeHookSet extends AbstractHookSet
 {
-    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
-    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
-    {
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
-    }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
@@ -51,6 +42,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
             3
         );
         $this->getHooksAPI()->addFilter(
+            HookNames::ADMIN_INPUT_FIELD_NAMES,
+            [$this, 'getAdminInputFieldNames'],
+            10,
+            2
+        );
+        $this->getHooksAPI()->addFilter(
             HookNames::INPUT_FIELD_TYPE_MODIFIERS,
             [$this, 'getInputFieldTypeModifiers'],
             10,
@@ -71,22 +68,34 @@ class InputObjectTypeHookSet extends AbstractHookSet
         array $inputFieldNameTypeResolvers,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): array {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!($inputObjectTypeResolver instanceof AbstractUsersFilterInputObjectTypeResolver)) {
             return $inputFieldNameTypeResolvers;
         }
         return array_merge(
             $inputFieldNameTypeResolvers,
-            $this->getAuthorInputFieldNameTypeResolvers(),
+            [
+                'roles' => $this->getStringScalarTypeResolver(),
+                'excludeRoles' => $this->getStringScalarTypeResolver(),
+            ]
         );
     }
 
-    public function getAuthorInputFieldNameTypeResolvers(): array
-    {
-        return [
-            'authorIDs' => $this->getIDScalarTypeResolver(),
-            'authorSlug' => $this->getStringScalarTypeResolver(),
-            'excludeAuthorIDs' => $this->getIDScalarTypeResolver(),
-        ];
+    /**
+     * @param string[] $adminInputFieldNames
+     * @return string[]
+     */
+    public function getAdminInputFieldNames(
+        array $adminInputFieldNames,
+        InputObjectTypeResolverInterface $inputObjectTypeResolver,
+    ): array {
+        if (!($inputObjectTypeResolver instanceof AbstractUsersFilterInputObjectTypeResolver)) {
+            return $adminInputFieldNames;
+        }
+        if (ComponentConfiguration::treatUserRoleAsAdminData()) {
+            $adminInputFieldNames[] = 'roles';
+            $adminInputFieldNames[] = 'excludeRoles';
+        }
+        return $adminInputFieldNames;
     }
 
     public function getInputFieldDescription(
@@ -94,13 +103,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName
     ): ?string {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!($inputObjectTypeResolver instanceof AbstractUsersFilterInputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'authorIDs' => $this->getTranslationAPI()->__('Get results from the authors with given IDs', 'pop-users'),
-            'authorSlug' => $this->getTranslationAPI()->__('Get results from the authors with given slug', 'pop-users'),
-            'excludeAuthorIDs' => $this->getTranslationAPI()->__('Get results excluding the ones from authors with given IDs', 'pop-users'),
+            'roles' => $this->getTranslationAPI()->__('Filter users by role(s)', 'user-roles'),
+            'excludeRoles' => $this->getTranslationAPI()->__('Filter users by excluding role(s)', 'user-roles'),
             default => $inputFieldDescription,
         };
     }
@@ -110,12 +118,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName
     ): int {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!($inputObjectTypeResolver instanceof AbstractUsersFilterInputObjectTypeResolver)) {
             return $inputFieldTypeModifiers;
         }
         return match ($inputFieldName) {
-            'authorIDs',
-            'excludeAuthorIDs'
+            'roles',
+            'excludeRoles'
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => $inputFieldTypeModifiers,
@@ -127,13 +135,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
     ): ?array {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!($inputObjectTypeResolver instanceof AbstractUsersFilterInputObjectTypeResolver)) {
             return $inputFieldFilterInput;
         }
         return match ($inputFieldName) {
-            'authorIDs' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_AUTHOR_IDS],
-            'authorSlug' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_AUTHOR_SLUG],
-            'excludeAuthorIDs' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_AUTHOR_IDS],
+            'roles' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_USER_ROLES],
+            'excludeRoles' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_USER_ROLES],
             default => $inputFieldFilterInput,
         };
     }

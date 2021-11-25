@@ -115,10 +115,11 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
         // Check the value is not below the max limit
         if ($maxLimit !== -1 && $inputFieldValue > $maxLimit) {
             return sprintf(
-                $this->getTranslationAPI()->__('The value for input field \'%s\' in input object \'%s\' cannot be above \'%s\'', 'posts'),
+                $this->getTranslationAPI()->__('The value for input field \'%s\' in input object \'%s\' cannot be above \'%s\', but \'%s\' was provided', 'posts'),
                 $inputFieldName,
                 $this->getMaybeNamespacedTypeName(),
-                $maxLimit
+                $maxLimit,
+                $inputFieldValue
             );
         }
 

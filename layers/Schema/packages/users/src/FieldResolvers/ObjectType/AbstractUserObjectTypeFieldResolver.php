@@ -5,18 +5,17 @@ declare(strict_types=1);
 namespace PoPSchema\Users\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
-use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
-use PoPSchema\Users\ComponentConfiguration;
-use PoPSchema\Users\ModuleProcessors\UserFilterInputContainerModuleProcessor;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPSchema\Users\TypeResolvers\InputObjectType\UserPaginationInputObjectTypeResolver;
+use PoPSchema\Users\TypeResolvers\InputObjectType\UsersFilterInputObjectTypeResolver;
+use PoPSchema\Users\TypeResolvers\InputObjectType\UserSortInputObjectTypeResolver;
 use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
@@ -26,6 +25,9 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     private ?UserTypeAPIInterface $userTypeAPI = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?UserObjectTypeResolver $userObjectTypeResolver = null;
+    private ?UsersFilterInputObjectTypeResolver $usersFilterInputObjectTypeResolver = null;
+    private ?UserPaginationInputObjectTypeResolver $userPaginationInputObjectTypeResolver = null;
+    private ?UserSortInputObjectTypeResolver $userSortInputObjectTypeResolver = null;
 
     final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
     {
@@ -50,6 +52,30 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     final protected function getUserObjectTypeResolver(): UserObjectTypeResolver
     {
         return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+    }
+    final public function setUsersFilterInputObjectTypeResolver(UsersFilterInputObjectTypeResolver $usersFilterInputObjectTypeResolver): void
+    {
+        $this->usersFilterInputObjectTypeResolver = $usersFilterInputObjectTypeResolver;
+    }
+    final protected function getUsersFilterInputObjectTypeResolver(): UsersFilterInputObjectTypeResolver
+    {
+        return $this->usersFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(UsersFilterInputObjectTypeResolver::class);
+    }
+    final public function setUserPaginationInputObjectTypeResolver(UserPaginationInputObjectTypeResolver $userPaginationInputObjectTypeResolver): void
+    {
+        $this->userPaginationInputObjectTypeResolver = $userPaginationInputObjectTypeResolver;
+    }
+    final protected function getUserPaginationInputObjectTypeResolver(): UserPaginationInputObjectTypeResolver
+    {
+        return $this->userPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(UserPaginationInputObjectTypeResolver::class);
+    }
+    final public function setUserSortInputObjectTypeResolver(UserSortInputObjectTypeResolver $userSortInputObjectTypeResolver): void
+    {
+        $this->userSortInputObjectTypeResolver = $userSortInputObjectTypeResolver;
+    }
+    final protected function getUserSortInputObjectTypeResolver(): UserSortInputObjectTypeResolver
+    {
+        return $this->userSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(UserSortInputObjectTypeResolver::class);
     }
 
     public function getFieldNamesToResolve(): array
@@ -87,65 +113,26 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         };
     }
 
-    public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         return match ($fieldName) {
-            'users' => [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_USERS],
-            'userCount' => [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_USERCOUNT],
-            default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
+            'users' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'filter' => $this->getUsersFilterInputObjectTypeResolver(),
+                    'pagination' => $this->getUserPaginationInputObjectTypeResolver(),
+                    'sort' => $this->getUserSortInputObjectTypeResolver(),
+                ]
+            ),
+            'userCount' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'filter' => $this->getUsersFilterInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
         };
-    }
-
-    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
-    {
-        switch ($fieldName) {
-            case 'users':
-                $limitFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
-                ]);
-                if ($fieldArgName === $limitFilterInputName) {
-                    return ComponentConfiguration::getUserListDefaultLimit();
-                }
-                break;
-        }
-        return parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
-    }
-
-    /**
-     * Validate the constraints for a field argument
-     *
-     * @return string[] Error messages
-     */
-    public function validateFieldArgValue(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        string $fieldArgName,
-        mixed $fieldArgValue
-    ): array {
-        $errors = parent::validateFieldArgValue(
-            $objectTypeResolver,
-            $fieldName,
-            $fieldArgName,
-            $fieldArgValue,
-        );
-
-        // Check the "limit" fieldArg
-        switch ($fieldName) {
-            case 'users':
-                if (
-                    $maybeError = $this->maybeValidateLimitFieldArgument(
-                        ComponentConfiguration::getUserListMaxLimit(),
-                        $fieldName,
-                        $fieldArgName,
-                        $fieldArgValue
-                    )
-                ) {
-                    $errors[] = $maybeError;
-                }
-                break;
-        }
-        return $errors;
     }
 
     /**

@@ -308,28 +308,27 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             return $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey];
         }
 
-        $fieldArgNameTypeResolvers = $this->getFieldArgNameTypeResolvers($fieldName);
-
-        // Exclude the admin field args, if "Admin" Schema is not enabled
-        if (!ComponentConfiguration::enableAdminSchema()) {
-            $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($fieldName);
-            $fieldArgNameTypeResolvers = array_filter(
-                $fieldArgNameTypeResolvers,
-                fn (string $fieldArgName) => !in_array($fieldArgName, $adminFieldArgNames),
-                ARRAY_FILTER_USE_KEY
-            );
-        }
-
         /**
          * Allow to override/extend the inputs (eg: module "Post Categories" can add
          * input "categories" to field "Root.createPost")
          */
         $consolidatedFieldArgNameTypeResolvers = $this->getHooksAPI()->applyFilters(
             HookNames::INTERFACE_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
-            $fieldArgNameTypeResolvers,
+            $this->getFieldArgNameTypeResolvers($fieldName),
             $this,
             $fieldName,
         );
+
+        // Exclude the admin field args, if "Admin" Schema is not enabled
+        if (!ComponentConfiguration::enableAdminSchema()) {
+            $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($fieldName);
+            $consolidatedFieldArgNameTypeResolvers = array_filter(
+                $consolidatedFieldArgNameTypeResolvers,
+                fn (string $fieldArgName) => !in_array($fieldArgName, $adminFieldArgNames),
+                ARRAY_FILTER_USE_KEY
+            );
+        }
+
         $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey] = $consolidatedFieldArgNameTypeResolvers;
         return $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey];
     }

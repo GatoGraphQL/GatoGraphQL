@@ -6,7 +6,7 @@ namespace PoPSchema\Posts\TypeResolvers\InputObjectType;
 
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostsFilterInputObjectTypeResolver;
 
-abstract class AbstractPostsFilterInputObjectTypeResolver extends AbstractCustomPostsFilterInputObjectTypeResolver
+abstract class AbstractPostsFilterInputObjectTypeResolver extends AbstractCustomPostsFilterInputObjectTypeResolver implements PostsFilterInputObjectTypeResolverInterface
 {
 
 }

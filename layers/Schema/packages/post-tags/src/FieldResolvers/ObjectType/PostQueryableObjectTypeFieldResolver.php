@@ -6,7 +6,6 @@ namespace PoPSchema\PostTags\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
-use PoPSchema\PostTags\ModuleProcessors\PostTagFilterInputContainerModuleProcessor;
 use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPSchema\Tags\FieldResolvers\ObjectType\AbstractCustomPostQueryableObjectTypeFieldResolver;
@@ -35,16 +34,6 @@ class PostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableOb
         return $this->postTagObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
     }
 
-    public function getTagTypeAPI(): TagTypeAPIInterface
-    {
-        return $this->getPostTagTypeAPI();
-    }
-
-    public function getTagTypeResolver(): TagObjectTypeResolverInterface
-    {
-        return $this->getPostTagObjectTypeResolver();
-    }
-
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -62,13 +51,13 @@ class PostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableOb
         };
     }
 
-    public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
+    public function getTagTypeAPI(): TagTypeAPIInterface
     {
-        return match ($fieldName) {
-            'tags' => [PostTagFilterInputContainerModuleProcessor::class, PostTagFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_TAGS],
-            'tagCount' => [PostTagFilterInputContainerModuleProcessor::class, PostTagFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_TAGCOUNT],
-            'tagNames' => [PostTagFilterInputContainerModuleProcessor::class, PostTagFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_TAGS],
-            default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
-        };
+        return $this->getPostTagTypeAPI();
+    }
+
+    public function getTagTypeResolver(): TagObjectTypeResolverInterface
+    {
+        return $this->getPostTagObjectTypeResolver();
     }
 }

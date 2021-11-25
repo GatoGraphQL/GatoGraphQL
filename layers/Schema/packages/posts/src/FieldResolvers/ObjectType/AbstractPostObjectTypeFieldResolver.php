@@ -37,11 +37,11 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return $this->rootPostsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootPostsFilterInputObjectTypeResolver::class);
     }
-    final public function setPaginationInputObjectTypeResolver(PostPaginationInputObjectTypeResolver $postPaginationInputObjectTypeResolver): void
+    final public function setPostPaginationInputObjectTypeResolver(PostPaginationInputObjectTypeResolver $postPaginationInputObjectTypeResolver): void
     {
         $this->postPaginationInputObjectTypeResolver = $postPaginationInputObjectTypeResolver;
     }
-    final protected function getPaginationInputObjectTypeResolver(): PostPaginationInputObjectTypeResolver
+    final protected function getPostPaginationInputObjectTypeResolver(): PostPaginationInputObjectTypeResolver
     {
         return $this->postPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostPaginationInputObjectTypeResolver::class);
     }
@@ -121,7 +121,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
                 $fieldArgNameTypeResolvers,
                 [
                     'filter' => $this->getRootPostsFilterInputObjectTypeResolver(),
-                    'pagination' => $this->getPaginationInputObjectTypeResolver(),
+                    'pagination' => $this->getPostPaginationInputObjectTypeResolver(),
                     'sort' => $this->getCustomPostSortInputObjectTypeResolver(),
                 ]
             ),

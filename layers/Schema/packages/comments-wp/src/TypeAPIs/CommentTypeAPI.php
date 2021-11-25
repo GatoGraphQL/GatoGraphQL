@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CommentsWP\TypeAPIs;
 
 use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoPSchema\Comments\Constants\CommentOrderBy;
 use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\Constants\CommentTypes;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
@@ -20,6 +21,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     use BasicServiceTrait;
 
     public const HOOK_QUERY = __CLASS__ . ':query';
+    public const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
     protected array $cmsToPoPCommentStatusConversion = [
         'approve' => CommentStatus::APPROVE,
@@ -127,9 +129,8 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             // Same param name, so do nothing
         }
         if (isset($query['orderby'])) {
-            // Same param name, so do nothing
-            // This param can either be a string or an array. Eg:
-            // $query['orderby'] => array('date' => 'DESC', 'title' => 'ASC');
+            // Maybe replace the provided value
+            $query['orderby'] = $this->getOrderByQueryArgValue($query['orderby']);
         }
         // For the comments, if there's no limit then it brings all results
         if (isset($query['limit'])) {
@@ -185,6 +186,24 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     public function areCommentsOpen(string | int $post_id): bool
     {
         return \comments_open($post_id);
+    }
+
+    protected function getOrderByQueryArgValue(string $orderBy): string
+    {
+        $orderBy = match ($orderBy) {
+            CommentOrderBy::ID => 'comment_ID',
+            CommentOrderBy::DATE => 'comment_date_gmt',
+            CommentOrderBy::CONTENT => 'comment_content',
+            CommentOrderBy::PARENT => 'comment_parent',
+            CommentOrderBy::CUSTOM_POST => 'comment_post_ID',
+            CommentOrderBy::TYPE => 'comment_type',
+            CommentOrderBy::STATUS => 'comment_approved',
+            default => $orderBy,
+        };
+        return $this->getHooksAPI()->applyFilters(
+            self::HOOK_ORDERBY_QUERY_ARG_VALUE,
+            $orderBy
+        );
     }
 
     public function getCommentContent(object $comment): string

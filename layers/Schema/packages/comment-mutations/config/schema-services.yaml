@@ -11,3 +11,6 @@ services:
 
     PoPSchema\CommentMutations\SchemaHooks\:
         resource: '../src/SchemaHooks/*'
+
+    PoPSchema\CommentMutations\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
