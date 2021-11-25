@@ -15,3 +15,6 @@ services:
 
     PoPSchema\Tags\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'
+
+    PoPSchema\Tags\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
