@@ -5,3 +5,6 @@ services:
 
     PoPWPSchema\Menus\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
+
+    PoPWPSchema\Menus\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'

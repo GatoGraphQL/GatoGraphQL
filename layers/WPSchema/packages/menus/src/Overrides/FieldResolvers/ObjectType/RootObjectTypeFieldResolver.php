@@ -34,15 +34,6 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
                 } elseif (isset($by->location)) {
                     $locations = \get_nav_menu_locations();
                     $menuParam = $locations[$by->location] ?? null;
-                    if ($menuParam === null) {
-                        return new Error(
-                            'no-location',
-                            sprintf(
-                                $this->getTranslationAPI()->__('There is no menu with location \'%s\'', 'menus'),
-                                $by->location
-                            )
-                        );
-                    }
                 }
                 if ($menuParam === null) {
                     return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
