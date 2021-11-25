@@ -10,8 +10,9 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInte
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
-use PoPSchema\Users\TypeResolvers\InputObjectType\AbstractUsersFilterInputObjectTypeResolver;
+use PoPSchema\UserRoles\ComponentConfiguration;
 use PoPSchema\UserRoles\FilterInputProcessors\FilterInputProcessor;
+use PoPSchema\Users\TypeResolvers\InputObjectType\AbstractUsersFilterInputObjectTypeResolver;
 
 class InputObjectTypeHookSet extends AbstractHookSet
 {
@@ -39,6 +40,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
             [$this, 'getInputFieldDescription'],
             10,
             3
+        );
+        $this->getHooksAPI()->addFilter(
+            HookNames::ADMIN_INPUT_FIELD_NAMES,
+            [$this, 'getAdminInputFieldNames'],
+            10,
+            2
         );
         $this->getHooksAPI()->addFilter(
             HookNames::INPUT_FIELD_TYPE_MODIFIERS,
@@ -71,6 +78,24 @@ class InputObjectTypeHookSet extends AbstractHookSet
                 'excludeRoles' => $this->getStringScalarTypeResolver(),
             ]
         );
+    }
+
+    /**
+     * @param string[] $adminInputFieldNames
+     * @return string[]
+     */
+    public function getAdminInputFieldNames(
+        array $adminInputFieldNames,
+        InputObjectTypeResolverInterface $inputObjectTypeResolver,
+    ): array {
+        if (!($inputObjectTypeResolver instanceof AbstractUsersFilterInputObjectTypeResolver)) {
+            return $adminInputFieldNames;
+        }
+        if (ComponentConfiguration::treatUserRoleAsAdminData()) {
+            $adminInputFieldNames[] = 'roles';
+            $adminInputFieldNames[] = 'excludeRoles';
+        }
+        return $adminInputFieldNames;
     }
 
     public function getInputFieldDescription(
