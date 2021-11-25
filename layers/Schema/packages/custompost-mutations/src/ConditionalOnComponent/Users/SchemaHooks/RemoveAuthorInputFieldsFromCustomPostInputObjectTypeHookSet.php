@@ -6,9 +6,9 @@ namespace PoPSchema\CustomPostMutations\ConditionalOnComponent\Users\SchemaHooks
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoPSchema\CustomPostMutations\TypeResolvers\InputObjectType\AbstractMyCustomPostsFilterInputObjectTypeResolver;
-use PoPSchema\Users\ConditionalOnComponent\CustomPosts\SchemaHooks\AbstractRemoveAuthorInputFieldsFromCustomPostInputObjectTypeHookSet;
+use PoPSchema\Users\SchemaHooks\AbstractRemoveAuthorInputFieldsInputObjectTypeHookSet;
 
-class RemoveAuthorInputFieldsFromCustomPostInputObjectTypeHookSet extends AbstractRemoveAuthorInputFieldsFromCustomPostInputObjectTypeHookSet
+class RemoveAuthorInputFieldsFromCustomPostInputObjectTypeHookSet extends AbstractRemoveAuthorInputFieldsInputObjectTypeHookSet
 {
     /**
      * Remove author inputs from field "myCustomPosts" and "myPosts"
