@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoPSchema\MediaWP\Component::class,
-            \PoPSchema\QueriedObjectWP\Component::class,
+            \PoPWPSchema\CustomPosts\Component::class,
         ];
     }
 
