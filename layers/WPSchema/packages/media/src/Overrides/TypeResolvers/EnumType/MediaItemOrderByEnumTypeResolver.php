@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\CustomPosts\Overrides\TypeResolvers\EnumType;
+namespace PoPWPSchema\Media\Overrides\TypeResolvers\EnumType;
 
-use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver as UpstreamCustomPostOrderByEnumTypeResolver;
+use PoPSchema\Media\TypeResolvers\EnumType\MediaItemOrderByEnumTypeResolver as UpstreamMediaItemOrderByEnumTypeResolver;
+use PoPWPSchema\CustomPosts\Overrides\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolverTrait;
 
 /**
- * The "order by" parameters are defined here:
- *
- * @see https://developer.wordpress.org/reference/classes/wp_query/#order-orderby-parameters
+ * Use the additional elements added to CustomPost to also add to the MediaItem,
+ * since, in WordPress, a media item is a custom post
  */
-class CustomPostOrderByEnumTypeResolver extends UpstreamCustomPostOrderByEnumTypeResolver
+class MediaItemOrderByEnumTypeResolver extends UpstreamMediaItemOrderByEnumTypeResolver
 {
     use CustomPostOrderByEnumTypeResolverTrait;
 
