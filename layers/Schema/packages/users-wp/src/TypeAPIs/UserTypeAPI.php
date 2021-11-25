@@ -6,6 +6,7 @@ namespace PoPSchema\UsersWP\TypeAPIs;
 
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\Users\Constants\UserOrderBy;
 use PoPSchema\Users\TypeAPIs\AbstractUserTypeAPI;
 use WP_User;
 use WP_User_Query;
@@ -16,6 +17,7 @@ use WP_User_Query;
 class UserTypeAPI extends AbstractUserTypeAPI
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
+    public const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
     /**
      * Indicates if the passed object is of type User
@@ -167,9 +169,8 @@ class UserTypeAPI extends AbstractUserTypeAPI
             // Same param name, so do nothing
         }
         if (isset($query['orderby'])) {
-            // Same param name, so do nothing
-            // This param can either be a string or an array. Eg:
-            // $query['orderby'] => array('date' => 'DESC', 'title' => 'ASC');
+            // Maybe replace the provided value
+            $query['orderby'] = $this->getOrderByQueryArgValue($query['orderby']);
         }
         if (isset($query['offset'])) {
             // Same param name, so do nothing
@@ -184,6 +185,21 @@ class UserTypeAPI extends AbstractUserTypeAPI
             self::HOOK_QUERY,
             $query,
             $options
+        );
+    }
+    protected function getOrderByQueryArgValue(string $orderBy): string
+    {
+        $orderBy = match ($orderBy) {
+            UserOrderBy::ID => 'ID',
+            UserOrderBy::NAME => 'name',
+            UserOrderBy::USERNAME => 'login',
+            UserOrderBy::DISPLAY_NAME => 'display_name',
+            UserOrderBy::REGISTRATION_DATE => 'registered',
+            default => $orderBy,
+        };
+        return $this->getHooksAPI()->applyFilters(
+            self::HOOK_ORDERBY_QUERY_ARG_VALUE,
+            $orderBy
         );
     }
     /**
