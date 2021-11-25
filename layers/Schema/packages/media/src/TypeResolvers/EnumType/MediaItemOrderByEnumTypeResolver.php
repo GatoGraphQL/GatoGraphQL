@@ -21,7 +21,7 @@ class MediaItemOrderByEnumTypeResolver extends AbstractEnumTypeResolver
     {
         return [
             MediaItemOrderBy::ID,
-            // MediaItemOrderBy::TITLE,
+            MediaItemOrderBy::TITLE,
             MediaItemOrderBy::DATE,
         ];
     }
@@ -30,7 +30,7 @@ class MediaItemOrderByEnumTypeResolver extends AbstractEnumTypeResolver
     {
         return match ($enumValue) {
             MediaItemOrderBy::ID => $this->getTranslationAPI()->__('Order by ID', 'media'),
-            // MediaItemOrderBy::TITLE => $this->getTranslationAPI()->__('Order by title', 'media'),
+            MediaItemOrderBy::TITLE => $this->getTranslationAPI()->__('Order by title', 'media'),
             MediaItemOrderBy::DATE => $this->getTranslationAPI()->__('Order by date', 'media'),
             default => parent::getEnumValueDescription($enumValue),
         };
