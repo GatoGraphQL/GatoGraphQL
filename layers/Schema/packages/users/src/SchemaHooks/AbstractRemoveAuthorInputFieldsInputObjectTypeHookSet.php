@@ -2,24 +2,38 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\SchemaHooks;
+namespace PoPSchema\Users\SchemaHooks;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 
-abstract class AbstractRemoveAuthorInputFieldsFromCustomPostInputObjectTypeHookSet extends AbstractHookSet
+abstract class AbstractRemoveAuthorInputFieldsInputObjectTypeHookSet extends AbstractHookSet
 {
-    private ?AddAuthorInputFieldsToCustomPostInputObjectTypeHookSet $addAuthorInputFieldsToCustomPostInputObjectTypeHookSet = null;
+    use AddOrRemoveAuthorInputFieldsInputObjectTypeHookSetTrait;
+    
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    final public function setAddAuthorInputFieldsToCustomPostInputObjectTypeHookSet(AddAuthorInputFieldsToCustomPostInputObjectTypeHookSet $addAuthorInputFieldsToCustomPostInputObjectTypeHookSet): void
+    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
-        $this->addAuthorInputFieldsToCustomPostInputObjectTypeHookSet = $addAuthorInputFieldsToCustomPostInputObjectTypeHookSet;
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
     }
-    final protected function getAddAuthorInputFieldsToCustomPostInputObjectTypeHookSet(): AddAuthorInputFieldsToCustomPostInputObjectTypeHookSet
+    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        return $this->addAuthorInputFieldsToCustomPostInputObjectTypeHookSet ??= $this->instanceManager->getInstance(AddAuthorInputFieldsToCustomPostInputObjectTypeHookSet::class);
+        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    
     protected function init(): void
     {
         $this->getHooksAPI()->addFilter(
@@ -49,7 +63,7 @@ abstract class AbstractRemoveAuthorInputFieldsFromCustomPostInputObjectTypeHookS
         if (!$this->removeAuthorInputFields($inputObjectTypeResolver)) {
             return $inputFieldNameTypeResolvers;
         }
-        $authorInputFieldNames = array_keys($this->getAddAuthorInputFieldsToCustomPostInputObjectTypeHookSet()->getAuthorInputFieldNameTypeResolvers());
+        $authorInputFieldNames = array_keys($this->getAuthorInputFieldNameTypeResolvers());
         foreach ($authorInputFieldNames as $authorInputFieldName) {
             unset($inputFieldNameTypeResolvers[$authorInputFieldName]);
         }
