@@ -26,7 +26,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?CustomPostPaginationInputObjectTypeResolver $customPostPaginationInputObjectTypeResolver = null;
     private ?CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver = null;
-    
+
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
         $this->intScalarTypeResolver = $intScalarTypeResolver;

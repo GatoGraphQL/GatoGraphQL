@@ -419,7 +419,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 ARRAY_FILTER_USE_KEY
             );
         }
-        
+
         $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey] = $consolidatedFieldArgNameTypeResolvers;
         return $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey];
     }

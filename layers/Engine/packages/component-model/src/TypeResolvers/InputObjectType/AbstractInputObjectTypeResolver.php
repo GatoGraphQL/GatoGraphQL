@@ -206,7 +206,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             }
             // If it is an InputObject, set it to {} so it has the chance to set its own default values
             if ($inputFieldTypeResolver instanceof InputObjectTypeResolverInterface) {
-                $inputValue->$inputFieldName = new stdClass;
+                $inputValue->$inputFieldName = new stdClass();
             }
         }
 

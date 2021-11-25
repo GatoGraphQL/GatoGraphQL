@@ -1275,7 +1275,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             );
             foreach ($directiveSchemaDefinitionArgsWithDefaultValue as $directiveSchemaDefinitionArg) {
                 $isInputObjectTypeResolver = $directiveSchemaDefinitionArg[SchemaDefinition::TYPE_RESOLVER] instanceof InputObjectTypeResolverInterface;
-                $defaultValue = $isInputObjectTypeResolver ? new stdClass : $directiveSchemaDefinitionArg[SchemaDefinition::DEFAULT_VALUE];;
+                $defaultValue = $isInputObjectTypeResolver ? new stdClass() : $directiveSchemaDefinitionArg[SchemaDefinition::DEFAULT_VALUE];
+                ;
                 $directiveArgNameDefaultValues[$directiveSchemaDefinitionArg[SchemaDefinition::NAME]] = $defaultValue;
             }
         }
@@ -1367,7 +1368,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         );
         foreach ($fieldSchemaDefinitionArgsWithDefaultValue as $fieldArgSchemaDefinition) {
             $isInputObjectTypeResolver = $fieldArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER] instanceof InputObjectTypeResolverInterface;
-            $defaultValue = $isInputObjectTypeResolver ? new stdClass : $fieldArgSchemaDefinition[SchemaDefinition::DEFAULT_VALUE];
+            $defaultValue = $isInputObjectTypeResolver ? new stdClass() : $fieldArgSchemaDefinition[SchemaDefinition::DEFAULT_VALUE];
             $fieldArgNameDefaultValues[$fieldArgSchemaDefinition[SchemaDefinition::NAME]] = $defaultValue;
         }
         return $fieldArgNameDefaultValues;

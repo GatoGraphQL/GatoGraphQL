@@ -14,7 +14,7 @@ use PoP\Hooks\AbstractHookSet;
 abstract class AbstractRemoveAuthorInputFieldsInputObjectTypeHookSet extends AbstractHookSet
 {
     use AddOrRemoveAuthorInputFieldsInputObjectTypeHookSetTrait;
-    
+
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
@@ -34,7 +34,7 @@ abstract class AbstractRemoveAuthorInputFieldsInputObjectTypeHookSet extends Abs
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    
+
     protected function init(): void
     {
         $this->getHooksAPI()->addFilter(

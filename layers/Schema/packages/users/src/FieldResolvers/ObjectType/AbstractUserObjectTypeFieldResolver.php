@@ -77,7 +77,7 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return $this->userSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(UserSortInputObjectTypeResolver::class);
     }
-    
+
     public function getFieldNamesToResolve(): array
     {
         return [

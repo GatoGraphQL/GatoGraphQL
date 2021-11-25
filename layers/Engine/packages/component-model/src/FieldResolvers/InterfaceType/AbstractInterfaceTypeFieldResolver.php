@@ -318,7 +318,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             $this,
             $fieldName,
         );
-        
+
         // Exclude the admin field args, if "Admin" Schema is not enabled
         if (!ComponentConfiguration::enableAdminSchema()) {
             $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($fieldName);
@@ -328,7 +328,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
                 ARRAY_FILTER_USE_KEY
             );
         }
-        
+
         $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey] = $consolidatedFieldArgNameTypeResolvers;
         return $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey];
     }

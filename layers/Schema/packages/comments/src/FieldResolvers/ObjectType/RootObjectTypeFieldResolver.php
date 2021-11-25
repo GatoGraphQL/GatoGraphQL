@@ -37,7 +37,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?RootCommentsFilterInputObjectTypeResolver $rootCommentsFilterInputObjectTypeResolver = null;
     private ?RootCommentPaginationInputObjectTypeResolver $rootCommentPaginationInputObjectTypeResolver = null;
     private ?CommentSortInputObjectTypeResolver $commentSortInputObjectTypeResolver = null;
-    
+
     final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
     {
         $this->commentTypeAPI = $commentTypeAPI;
@@ -94,7 +94,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return $this->commentSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(CommentSortInputObjectTypeResolver::class);
     }
-    
+
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

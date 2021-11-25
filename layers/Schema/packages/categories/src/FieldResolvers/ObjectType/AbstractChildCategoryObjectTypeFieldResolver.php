@@ -68,7 +68,7 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     {
         return $this->taxonomySortInputObjectTypeResolver ??= $this->instanceManager->getInstance(TaxonomySortInputObjectTypeResolver::class);
     }
-    
+
     public function getFieldNamesToResolve(): array
     {
         return [

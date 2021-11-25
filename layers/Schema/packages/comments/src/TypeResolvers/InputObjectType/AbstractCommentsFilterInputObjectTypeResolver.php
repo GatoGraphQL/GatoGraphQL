@@ -47,7 +47,7 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     {
         return $this->commentTypeEnumTypeResolver ??= $this->instanceManager->getInstance(CommentTypeEnumTypeResolver::class);
     }
-    
+
     public function getAdminInputFieldNames(): array
     {
         $adminInputFieldNames = parent::getAdminInputFieldNames();

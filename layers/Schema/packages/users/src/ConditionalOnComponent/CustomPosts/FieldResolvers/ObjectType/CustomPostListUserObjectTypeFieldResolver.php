@@ -13,7 +13,7 @@ use PoPSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 class CustomPostListUserObjectTypeFieldResolver extends AbstractCustomPostListObjectTypeFieldResolver
 {
     private ?UserCustomPostsFilterInputObjectTypeResolver $userCustomPostsFilterInputObjectTypeResolver = null;
-    
+
     final public function setUserCustomPostsFilterInputObjectTypeResolver(UserCustomPostsFilterInputObjectTypeResolver $userCustomPostsFilterInputObjectTypeResolver): void
     {
         $this->userCustomPostsFilterInputObjectTypeResolver = $userCustomPostsFilterInputObjectTypeResolver;
