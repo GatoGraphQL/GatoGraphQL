@@ -13,7 +13,6 @@ use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Categories\TypeResolvers\InputObjectType\CategoryPaginationInputObjectTypeResolver;
 use PoPSchema\Categories\TypeResolvers\InputObjectType\RootCategoriesFilterInputObjectTypeResolver;
-use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFilterInputContainerModuleProcessor;
 use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPSchema\PostCategories\TypeResolvers\InputObjectType\PostCategoryByInputObjectTypeResolver;
 use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
@@ -153,16 +152,6 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
             'postCategoryCount' => $this->getTranslationAPI()->__('Number of post categories', 'post-categories'),
             'postCategoryNames' => $this->getTranslationAPI()->__('Names of the post categories', 'post-categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
-    {
-        return match ($fieldName) {
-            'postCategories' => [PostCategoryFilterInputContainerModuleProcessor::class, PostCategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORIES],
-            'postCategoryCount' => [PostCategoryFilterInputContainerModuleProcessor::class, PostCategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT],
-            'postCategoryNames' => [PostCategoryFilterInputContainerModuleProcessor::class, PostCategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORIES],
-            default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
     }
 

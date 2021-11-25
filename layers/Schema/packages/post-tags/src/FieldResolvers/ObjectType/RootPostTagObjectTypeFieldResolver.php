@@ -11,7 +11,6 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\PostTags\ModuleProcessors\PostTagFilterInputContainerModuleProcessor;
 use PoPSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPSchema\PostTags\TypeResolvers\InputObjectType\PostTagByInputObjectTypeResolver;
 use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
@@ -153,16 +152,6 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
             'postTagCount' => $this->getTranslationAPI()->__('Number of post tags', 'pop-post-tags'),
             'postTagNames' => $this->getTranslationAPI()->__('Names of the post tags', 'pop-post-tags'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
-    {
-        return match ($fieldName) {
-            'postTags' => [PostTagFilterInputContainerModuleProcessor::class, PostTagFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_TAGS],
-            'postTagCount' => [PostTagFilterInputContainerModuleProcessor::class, PostTagFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_TAGCOUNT],
-            'postTagNames' => [PostTagFilterInputContainerModuleProcessor::class, PostTagFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_TAGS],
-            default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
     }
 
