@@ -49,6 +49,8 @@ use PoPSchema\GenericCustomPosts\ComponentConfiguration as GenericCustomPostsCom
 use PoPSchema\GenericCustomPosts\Environment as GenericCustomPostsEnvironment;
 use PoPSchema\Media\ComponentConfiguration as MediaComponentConfiguration;
 use PoPSchema\Media\Environment as MediaEnvironment;
+use PoPSchema\Menus\ComponentConfiguration as MenusComponentConfiguration;
+use PoPSchema\Menus\Environment as MenusEnvironment;
 use PoPSchema\Pages\ComponentConfiguration as PagesComponentConfiguration;
 use PoPSchema\Pages\Environment as PagesEnvironment;
 use PoPSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
@@ -307,6 +309,21 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
                 'class' => MediaComponentConfiguration::class,
                 'envVariable' => MediaEnvironment::MEDIA_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_MEDIA,
+                'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
+            ],
+            // Menu default/max limits
+            [
+                'class' => MenusComponentConfiguration::class,
+                'envVariable' => MenusEnvironment::MENU_LIST_DEFAULT_LIMIT,
+                'module' => SchemaTypeModuleResolver::SCHEMA_MENUS,
+                'optionModule' => SchemaTypeModuleResolver::SCHEMA_MENUS,
+                'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
+            ],
+            [
+                'class' => MenusComponentConfiguration::class,
+                'envVariable' => MenusEnvironment::MENU_LIST_MAX_LIMIT,
+                'module' => SchemaTypeModuleResolver::SCHEMA_MENUS,
+                'optionModule' => SchemaTypeModuleResolver::SCHEMA_MENUS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             // Tag default/max limits
