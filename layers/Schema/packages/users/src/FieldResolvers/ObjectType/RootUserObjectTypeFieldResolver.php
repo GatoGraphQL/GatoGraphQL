@@ -55,8 +55,8 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'user' => $this->getTranslationAPI()->__('User by some property', 'pop-users'),
-            'users' => $this->getTranslationAPI()->__('Users in the current site', 'pop-users'),
+            'user' => $this->getTranslationAPI()->__('Retrieve a single user', 'pop-users'),
+            'users' => $this->getTranslationAPI()->__('Retrieve a list of users', 'pop-users'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

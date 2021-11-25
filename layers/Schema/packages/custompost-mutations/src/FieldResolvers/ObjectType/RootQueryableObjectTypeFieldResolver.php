@@ -124,7 +124,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         return match ($fieldName) {
             'myCustomPosts' => $this->getTranslationAPI()->__('Custom posts by the logged-in user', 'custompost-mutations'),
             'myCustomPostCount' => $this->getTranslationAPI()->__('Number of custom posts by the logged-in user', 'custompost-mutations'),
-            'myCustomPost' => $this->getTranslationAPI()->__('Custom post by some property', 'custompost-mutations'),
+            'myCustomPost' => $this->getTranslationAPI()->__('Retrieve a single custom post', 'custompost-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
