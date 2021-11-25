@@ -15,7 +15,7 @@ use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 use PoPSchema\Tags\ComponentContracts\TagAPIRequestedContractObjectTypeFieldResolverInterface;
 use PoPSchema\Tags\TypeResolvers\InputObjectType\TagPaginationInputObjectTypeResolver;
-use PoPSchema\Tags\TypeResolvers\InputObjectType\RootTagsFilterInputObjectTypeResolver;
+use PoPSchema\Tags\TypeResolvers\InputObjectType\CustomPostTagsFilterInputObjectTypeResolver;
 use PoPSchema\Taxonomies\TypeResolvers\InputObjectType\TaxonomySortInputObjectTypeResolver;
 
 abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements TagAPIRequestedContractObjectTypeFieldResolverInterface
@@ -26,7 +26,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?TagPaginationInputObjectTypeResolver $tagPaginationInputObjectTypeResolver = null;
     private ?TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver = null;
-    private ?RootTagsFilterInputObjectTypeResolver $rootTagsFilterInputObjectTypeResolver = null;
+    private ?CustomPostTagsFilterInputObjectTypeResolver $customPostTagsFilterInputObjectTypeResolver = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -60,13 +60,13 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     {
         return $this->taxonomySortInputObjectTypeResolver ??= $this->instanceManager->getInstance(TaxonomySortInputObjectTypeResolver::class);
     }
-    final public function setRootTagsFilterInputObjectTypeResolver(RootTagsFilterInputObjectTypeResolver $rootTagsFilterInputObjectTypeResolver): void
+    final public function setCustomPostTagsFilterInputObjectTypeResolver(CustomPostTagsFilterInputObjectTypeResolver $customPostTagsFilterInputObjectTypeResolver): void
     {
-        $this->rootTagsFilterInputObjectTypeResolver = $rootTagsFilterInputObjectTypeResolver;
+        $this->customPostTagsFilterInputObjectTypeResolver = $customPostTagsFilterInputObjectTypeResolver;
     }
-    final protected function getRootTagsFilterInputObjectTypeResolver(): RootTagsFilterInputObjectTypeResolver
+    final protected function getCustomPostTagsFilterInputObjectTypeResolver(): CustomPostTagsFilterInputObjectTypeResolver
     {
-        return $this->rootTagsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootTagsFilterInputObjectTypeResolver::class);
+        return $this->customPostTagsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostTagsFilterInputObjectTypeResolver::class);
     }
 
     public function getFieldNamesToResolve(): array
@@ -119,7 +119,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
             'tagNames' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'filter' => $this->getRootTagsFilterInputObjectTypeResolver(),
+                    'filter' => $this->getCustomPostTagsFilterInputObjectTypeResolver(),
                     'pagination' => $this->getTagPaginationInputObjectTypeResolver(),
                     'sort' => $this->getTaxonomySortInputObjectTypeResolver(),
                 ]
@@ -127,7 +127,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
             'tagCount' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'filter' => $this->getRootTagsFilterInputObjectTypeResolver(),
+                    'filter' => $this->getCustomPostTagsFilterInputObjectTypeResolver(),
                 ]
             ),
             default => $fieldArgNameTypeResolvers,

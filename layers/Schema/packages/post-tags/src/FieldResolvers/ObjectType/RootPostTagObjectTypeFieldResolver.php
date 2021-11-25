@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\PostTags\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
-use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -18,9 +17,10 @@ use PoPSchema\PostTags\TypeResolvers\InputObjectType\PostTagByInputObjectTypeRes
 use PoPSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
-use PoPSchema\Tags\ComponentConfiguration;
+use PoPSchema\Tags\TypeResolvers\InputObjectType\RootTagsFilterInputObjectTypeResolver;
+use PoPSchema\Tags\TypeResolvers\InputObjectType\TagPaginationInputObjectTypeResolver;
+use PoPSchema\Taxonomies\TypeResolvers\InputObjectType\TaxonomySortInputObjectTypeResolver;
 
 class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
@@ -31,6 +31,9 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
     private ?PostTagByInputObjectTypeResolver $postTagByInputObjectTypeResolver = null;
+    private ?TagPaginationInputObjectTypeResolver $tagPaginationInputObjectTypeResolver = null;
+    private ?TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver = null;
+    private ?RootTagsFilterInputObjectTypeResolver $rootTagsFilterInputObjectTypeResolver = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -71,6 +74,30 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     final protected function getPostTagByInputObjectTypeResolver(): PostTagByInputObjectTypeResolver
     {
         return $this->postTagByInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagByInputObjectTypeResolver::class);
+    }
+    final public function setTagPaginationInputObjectTypeResolver(TagPaginationInputObjectTypeResolver $tagPaginationInputObjectTypeResolver): void
+    {
+        $this->tagPaginationInputObjectTypeResolver = $tagPaginationInputObjectTypeResolver;
+    }
+    final protected function getTagPaginationInputObjectTypeResolver(): TagPaginationInputObjectTypeResolver
+    {
+        return $this->tagPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(TagPaginationInputObjectTypeResolver::class);
+    }
+    final public function setTaxonomySortInputObjectTypeResolver(TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver): void
+    {
+        $this->taxonomySortInputObjectTypeResolver = $taxonomySortInputObjectTypeResolver;
+    }
+    final protected function getTaxonomySortInputObjectTypeResolver(): TaxonomySortInputObjectTypeResolver
+    {
+        return $this->taxonomySortInputObjectTypeResolver ??= $this->instanceManager->getInstance(TaxonomySortInputObjectTypeResolver::class);
+    }
+    final public function setRootTagsFilterInputObjectTypeResolver(RootTagsFilterInputObjectTypeResolver $rootTagsFilterInputObjectTypeResolver): void
+    {
+        $this->rootTagsFilterInputObjectTypeResolver = $rootTagsFilterInputObjectTypeResolver;
+    }
+    final protected function getRootTagsFilterInputObjectTypeResolver(): RootTagsFilterInputObjectTypeResolver
+    {
+        return $this->rootTagsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootTagsFilterInputObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -149,6 +176,21 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
                     'by' => $this->getPostTagByInputObjectTypeResolver(),
                 ]
             ),
+            'postTags',
+            'postTagNames' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'filter' => $this->getRootTagsFilterInputObjectTypeResolver(),
+                    'pagination' => $this->getTagPaginationInputObjectTypeResolver(),
+                    'sort' => $this->getTaxonomySortInputObjectTypeResolver(),
+                ]
+            ),
+            'postTagCount' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'filter' => $this->getRootTagsFilterInputObjectTypeResolver(),
+                ]
+            ),
             default => $fieldArgNameTypeResolvers,
         };
     }
@@ -159,60 +201,6 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
             ['postTag' => 'by'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
-    }
-
-    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
-    {
-        switch ($fieldName) {
-            case 'postTags':
-            case 'postTagNames':
-                $limitFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
-                ]);
-                if ($fieldArgName === $limitFilterInputName) {
-                    return ComponentConfiguration::getTagListDefaultLimit();
-                }
-                break;
-        }
-        return parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
-    }
-
-    /**
-     * Validate the constraints for a field argument
-     *
-     * @return string[] Error messages
-     */
-    public function validateFieldArgValue(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        string $fieldArgName,
-        mixed $fieldArgValue
-    ): array {
-        $errors = parent::validateFieldArgValue(
-            $objectTypeResolver,
-            $fieldName,
-            $fieldArgName,
-            $fieldArgValue,
-        );
-
-        // Check the "limit" fieldArg
-        switch ($fieldName) {
-            case 'postTags':
-            case 'postTagNames':
-                if (
-                    $maybeError = $this->maybeValidateLimitFieldArgument(
-                        ComponentConfiguration::getTagListMaxLimit(),
-                        $fieldName,
-                        $fieldArgName,
-                        $fieldArgValue
-                    )
-                ) {
-                    $errors[] = $maybeError;
-                }
-                break;
-        }
-        return $errors;
     }
 
     /**

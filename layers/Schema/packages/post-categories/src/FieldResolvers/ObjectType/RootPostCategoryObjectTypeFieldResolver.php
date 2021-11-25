@@ -5,22 +5,22 @@ declare(strict_types=1);
 namespace PoPSchema\PostCategories\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
-use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\Categories\ComponentConfiguration;
+use PoPSchema\Categories\TypeResolvers\InputObjectType\CategoryPaginationInputObjectTypeResolver;
+use PoPSchema\Categories\TypeResolvers\InputObjectType\RootCategoriesFilterInputObjectTypeResolver;
 use PoPSchema\PostCategories\ModuleProcessors\PostCategoryFilterInputContainerModuleProcessor;
 use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPSchema\PostCategories\TypeResolvers\InputObjectType\PostCategoryByInputObjectTypeResolver;
 use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
+use PoPSchema\Taxonomies\TypeResolvers\InputObjectType\TaxonomySortInputObjectTypeResolver;
 
 class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
@@ -31,6 +31,9 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
     private ?PostCategoryByInputObjectTypeResolver $postCategoryByInputObjectTypeResolver = null;
+    private ?RootCategoriesFilterInputObjectTypeResolver $rootCategoriesFilterInputObjectTypeResolver = null;
+    private ?CategoryPaginationInputObjectTypeResolver $categoryPaginationInputObjectTypeResolver = null;
+    private ?TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -71,6 +74,30 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     final protected function getPostCategoryByInputObjectTypeResolver(): PostCategoryByInputObjectTypeResolver
     {
         return $this->postCategoryByInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryByInputObjectTypeResolver::class);
+    }
+    final public function setRootCategoriesFilterInputObjectTypeResolver(RootCategoriesFilterInputObjectTypeResolver $rootCategoriesFilterInputObjectTypeResolver): void
+    {
+        $this->rootCategoriesFilterInputObjectTypeResolver = $rootCategoriesFilterInputObjectTypeResolver;
+    }
+    final protected function getRootCategoriesFilterInputObjectTypeResolver(): RootCategoriesFilterInputObjectTypeResolver
+    {
+        return $this->rootCategoriesFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootCategoriesFilterInputObjectTypeResolver::class);
+    }
+    final public function setCategoryPaginationInputObjectTypeResolver(CategoryPaginationInputObjectTypeResolver $categoryPaginationInputObjectTypeResolver): void
+    {
+        $this->categoryPaginationInputObjectTypeResolver = $categoryPaginationInputObjectTypeResolver;
+    }
+    final protected function getCategoryPaginationInputObjectTypeResolver(): CategoryPaginationInputObjectTypeResolver
+    {
+        return $this->categoryPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(CategoryPaginationInputObjectTypeResolver::class);
+    }
+    final public function setTaxonomySortInputObjectTypeResolver(TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver): void
+    {
+        $this->taxonomySortInputObjectTypeResolver = $taxonomySortInputObjectTypeResolver;
+    }
+    final protected function getTaxonomySortInputObjectTypeResolver(): TaxonomySortInputObjectTypeResolver
+    {
+        return $this->taxonomySortInputObjectTypeResolver ??= $this->instanceManager->getInstance(TaxonomySortInputObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -149,6 +176,21 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
                     'by' => $this->getPostCategoryByInputObjectTypeResolver(),
                 ]
             ),
+            'postCategories',
+            'postCategoryNames' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'filter' => $this->getRootCategoriesFilterInputObjectTypeResolver(),
+                    'pagination' => $this->getCategoryPaginationInputObjectTypeResolver(),
+                    'sort' => $this->getTaxonomySortInputObjectTypeResolver(),
+                ]
+            ),
+            'postCategoryCount' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'filter' => $this->getRootCategoriesFilterInputObjectTypeResolver(),
+                ]
+            ),
             default => $fieldArgNameTypeResolvers,
         };
     }
@@ -159,60 +201,6 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
             ['postCategory' => 'by'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
-    }
-
-    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
-    {
-        switch ($fieldName) {
-            case 'postCategories':
-            case 'postCategoryNames':
-                $limitFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
-                ]);
-                if ($fieldArgName === $limitFilterInputName) {
-                    return ComponentConfiguration::getCategoryListDefaultLimit();
-                }
-                break;
-        }
-        return parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
-    }
-
-    /**
-     * Validate the constraints for a field argument
-     *
-     * @return string[] Error messages
-     */
-    public function validateFieldArgValue(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        string $fieldArgName,
-        mixed $fieldArgValue
-    ): array {
-        $errors = parent::validateFieldArgValue(
-            $objectTypeResolver,
-            $fieldName,
-            $fieldArgName,
-            $fieldArgValue,
-        );
-
-        // Check the "limit" fieldArg
-        switch ($fieldName) {
-            case 'postCategories':
-            case 'postCategoryNames':
-                if (
-                    $maybeError = $this->maybeValidateLimitFieldArgument(
-                        ComponentConfiguration::getCategoryListMaxLimit(),
-                        $fieldName,
-                        $fieldArgName,
-                        $fieldArgValue
-                    )
-                ) {
-                    $errors[] = $maybeError;
-                }
-                break;
-        }
-        return $errors;
     }
 
     /**

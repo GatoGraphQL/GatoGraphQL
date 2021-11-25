@@ -15,7 +15,7 @@ use PoPSchema\Categories\TypeResolvers\InputObjectType\CategoryPaginationInputOb
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
-use PoPSchema\Categories\TypeResolvers\InputObjectType\RootCategoriesFilterInputObjectTypeResolver;
+use PoPSchema\Categories\TypeResolvers\InputObjectType\CustomPostCategoriesFilterInputObjectTypeResolver;
 use PoPSchema\Taxonomies\TypeResolvers\InputObjectType\TaxonomySortInputObjectTypeResolver;
 
 abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements CategoryAPIRequestedContractObjectTypeFieldResolverInterface
@@ -24,7 +24,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
 
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
-    private ?RootCategoriesFilterInputObjectTypeResolver $rootCategoriesFilterInputObjectTypeResolver = null;
+    private ?CustomPostCategoriesFilterInputObjectTypeResolver $customPostCategoriesFilterInputObjectTypeResolver = null;
     private ?CategoryPaginationInputObjectTypeResolver $categoryPaginationInputObjectTypeResolver = null;
     private ?TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver = null;
 
@@ -44,13 +44,13 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
-    final public function setRootCategoriesFilterInputObjectTypeResolver(RootCategoriesFilterInputObjectTypeResolver $rootCategoriesFilterInputObjectTypeResolver): void
+    final public function setCustomPostCategoriesFilterInputObjectTypeResolver(CustomPostCategoriesFilterInputObjectTypeResolver $customPostCategoriesFilterInputObjectTypeResolver): void
     {
-        $this->rootCategoriesFilterInputObjectTypeResolver = $rootCategoriesFilterInputObjectTypeResolver;
+        $this->customPostCategoriesFilterInputObjectTypeResolver = $customPostCategoriesFilterInputObjectTypeResolver;
     }
-    final protected function getRootCategoriesFilterInputObjectTypeResolver(): RootCategoriesFilterInputObjectTypeResolver
+    final protected function getCustomPostCategoriesFilterInputObjectTypeResolver(): CustomPostCategoriesFilterInputObjectTypeResolver
     {
-        return $this->rootCategoriesFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootCategoriesFilterInputObjectTypeResolver::class);
+        return $this->customPostCategoriesFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostCategoriesFilterInputObjectTypeResolver::class);
     }
     final public function setCategoryPaginationInputObjectTypeResolver(CategoryPaginationInputObjectTypeResolver $categoryPaginationInputObjectTypeResolver): void
     {
@@ -119,7 +119,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
             'categoryNames' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'filter' => $this->getRootCategoriesFilterInputObjectTypeResolver(),
+                    'filter' => $this->getCustomPostCategoriesFilterInputObjectTypeResolver(),
                     'pagination' => $this->getCategoryPaginationInputObjectTypeResolver(),
                     'sort' => $this->getTaxonomySortInputObjectTypeResolver(),
                 ]
@@ -127,7 +127,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
             'categoryCount' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'filter' => $this->getRootCategoriesFilterInputObjectTypeResolver(),
+                    'filter' => $this->getCustomPostCategoriesFilterInputObjectTypeResolver(),
                 ]
             ),
             default => $fieldArgNameTypeResolvers,
