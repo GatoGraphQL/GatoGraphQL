@@ -5,18 +5,17 @@ declare(strict_types=1);
 namespace PoPSchema\Pages\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
-use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoPSchema\CustomPosts\ModuleProcessors\CustomPostFilterInputContainerModuleProcessor;
-use PoPSchema\Pages\ComponentConfiguration;
+use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostSortInputObjectTypeResolver;
 use PoPSchema\Pages\TypeAPIs\PageTypeAPIInterface;
+use PoPSchema\Pages\TypeResolvers\InputObjectType\PageChildrenFilterInputObjectTypeResolver;
+use PoPSchema\Pages\TypeResolvers\InputObjectType\PagePaginationInputObjectTypeResolver;
 use PoPSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 
 class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
@@ -26,6 +25,9 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
     private ?PageTypeAPIInterface $pageTypeAPI = null;
+    private ?PageChildrenFilterInputObjectTypeResolver $pageChildrenFilterInputObjectTypeResolver = null;
+    private ?PagePaginationInputObjectTypeResolver $pagePaginationInputObjectTypeResolver = null;
+    private ?CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -50,6 +52,30 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     final protected function getPageTypeAPI(): PageTypeAPIInterface
     {
         return $this->pageTypeAPI ??= $this->instanceManager->getInstance(PageTypeAPIInterface::class);
+    }
+    final public function setPageChildrenFilterInputObjectTypeResolver(PageChildrenFilterInputObjectTypeResolver $pageChildrenFilterInputObjectTypeResolver): void
+    {
+        $this->pageChildrenFilterInputObjectTypeResolver = $pageChildrenFilterInputObjectTypeResolver;
+    }
+    final protected function getPageChildrenFilterInputObjectTypeResolver(): PageChildrenFilterInputObjectTypeResolver
+    {
+        return $this->pageChildrenFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(PageChildrenFilterInputObjectTypeResolver::class);
+    }
+    final public function setPagePaginationInputObjectTypeResolver(PagePaginationInputObjectTypeResolver $pagePaginationInputObjectTypeResolver): void
+    {
+        $this->pagePaginationInputObjectTypeResolver = $pagePaginationInputObjectTypeResolver;
+    }
+    final protected function getPagePaginationInputObjectTypeResolver(): PagePaginationInputObjectTypeResolver
+    {
+        return $this->pagePaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(PagePaginationInputObjectTypeResolver::class);
+    }
+    final public function setCustomPostSortInputObjectTypeResolver(CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver): void
+    {
+        $this->customPostSortInputObjectTypeResolver = $customPostSortInputObjectTypeResolver;
+    }
+    final protected function getCustomPostSortInputObjectTypeResolver(): CustomPostSortInputObjectTypeResolver
+    {
+        return $this->customPostSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostSortInputObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -100,71 +126,26 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         };
     }
 
-    public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         return match ($fieldName) {
-            'children' => [
-                CustomPostFilterInputContainerModuleProcessor::class,
-                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST
-            ],
-            'childCount' => [
-                CustomPostFilterInputContainerModuleProcessor::class,
-                CustomPostFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT
-            ],
-            default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
+            'children' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'filter' => $this->getPageChildrenFilterInputObjectTypeResolver(),
+                    'pagination' => $this->getPagePaginationInputObjectTypeResolver(),
+                    'sort' => $this->getCustomPostSortInputObjectTypeResolver(),
+                ]
+            ),
+            'childCount' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'filter' => $this->getPageChildrenFilterInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
         };
-    }
-
-    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
-    {
-        switch ($fieldName) {
-            case 'children':
-                $limitFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
-                ]);
-                if ($fieldArgName === $limitFilterInputName) {
-                    return ComponentConfiguration::getPageListDefaultLimit();
-                }
-                break;
-        }
-        return parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
-    }
-
-    /**
-     * Validate the constraints for a field argument
-     *
-     * @return string[] Error messages
-     */
-    public function validateFieldArgValue(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        string $fieldArgName,
-        mixed $fieldArgValue
-    ): array {
-        $errors = parent::validateFieldArgValue(
-            $objectTypeResolver,
-            $fieldName,
-            $fieldArgName,
-            $fieldArgValue,
-        );
-
-        // Check the "limit" fieldArg
-        switch ($fieldName) {
-            case 'children':
-                if (
-                    $maybeError = $this->maybeValidateLimitFieldArgument(
-                        ComponentConfiguration::getPageListMaxLimit(),
-                        $fieldName,
-                        $fieldArgName,
-                        $fieldArgValue
-                    )
-                ) {
-                    $errors[] = $maybeError;
-                }
-                break;
-        }
-        return $errors;
     }
 
     /**
