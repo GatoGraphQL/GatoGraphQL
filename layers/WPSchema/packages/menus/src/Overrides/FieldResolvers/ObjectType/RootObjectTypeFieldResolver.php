@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Menus\Overrides\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\Error\Error;
 use PoPSchema\Menus\FieldResolvers\ObjectType\RootObjectTypeFieldResolver as UpstreamRootObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
