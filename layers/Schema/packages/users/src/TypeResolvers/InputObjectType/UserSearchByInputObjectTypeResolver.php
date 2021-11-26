@@ -34,6 +34,11 @@ class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObj
         return $this->getTranslationAPI()->__('Oneof input to specify the property and data to search users', 'users');
     }
 
+    protected function isOneInputValueMandatory(): bool
+    {
+        return false;
+    }
+
     public function getInputFieldNameTypeResolvers(): array
     {
         return [

@@ -1265,19 +1265,18 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         // Set the missing InputObject as {} to give it a chance to set its default input field values
         $directiveArgNameDefaultValues = [];
         if ($directiveSchemaDefinitionArgs = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $relationalTypeResolver)) {
-            $directiveSchemaDefinitionArgsWithDefaultValue = array_filter(
-                $directiveSchemaDefinitionArgs,
-                function (array $directiveSchemaDefinitionArg): bool {
-                    // Either has a default value, or is an InputObject
-                    return \array_key_exists(SchemaDefinition::DEFAULT_VALUE, $directiveSchemaDefinitionArg)
-                        || $directiveSchemaDefinitionArg[SchemaDefinition::TYPE_RESOLVER] instanceof InputObjectTypeResolverInterface;
+            foreach ($directiveSchemaDefinitionArgs as $directiveSchemaDefinitionArg) {
+                if (\array_key_exists(SchemaDefinition::DEFAULT_VALUE, $directiveSchemaDefinitionArg)) {
+                    // If it has a default value, set it
+                    $directiveArgNameDefaultValues[$directiveSchemaDefinitionArg[SchemaDefinition::NAME]] = $directiveSchemaDefinitionArg[SchemaDefinition::DEFAULT_VALUE];
+                } elseif (
+                    // If it is a non-mandatory InputObject, set {}
+                    // (If it is mandatory, don't set a value as to let the validation fail)
+                    $directiveSchemaDefinitionArg[SchemaDefinition::TYPE_RESOLVER] instanceof InputObjectTypeResolverInterface
+                    && !($directiveSchemaDefinitionArg[SchemaDefinition::MANDATORY] ?? false)
+                ) {
+                    $directiveArgNameDefaultValues[$directiveSchemaDefinitionArg[SchemaDefinition::NAME]] = new stdClass();
                 }
-            );
-            foreach ($directiveSchemaDefinitionArgsWithDefaultValue as $directiveSchemaDefinitionArg) {
-                $isInputObjectTypeResolver = $directiveSchemaDefinitionArg[SchemaDefinition::TYPE_RESOLVER] instanceof InputObjectTypeResolverInterface;
-                $defaultValue = $isInputObjectTypeResolver ? new stdClass() : $directiveSchemaDefinitionArg[SchemaDefinition::DEFAULT_VALUE];
-                ;
-                $directiveArgNameDefaultValues[$directiveSchemaDefinitionArg[SchemaDefinition::NAME]] = $defaultValue;
             }
         }
         return $directiveArgNameDefaultValues;
@@ -1358,18 +1357,18 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             return null;
         }
         $fieldArgNameDefaultValues = [];
-        $fieldSchemaDefinitionArgsWithDefaultValue = array_filter(
-            $fieldArgsSchemaDefinition,
-            function (array $fieldArgSchemaDefinition): bool {
-                // Either has a default value, or is an InputObject
-                return \array_key_exists(SchemaDefinition::DEFAULT_VALUE, $fieldArgSchemaDefinition)
-                    || $fieldArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER] instanceof InputObjectTypeResolverInterface;
+        foreach ($fieldArgsSchemaDefinition as $fieldSchemaDefinitionArg) {
+            if (\array_key_exists(SchemaDefinition::DEFAULT_VALUE, $fieldSchemaDefinitionArg)) {
+                // If it has a default value, set it
+                $fieldArgNameDefaultValues[$fieldSchemaDefinitionArg[SchemaDefinition::NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::DEFAULT_VALUE];
+            } elseif (
+                // If it is a non-mandatory InputObject, set {}
+                // (If it is mandatory, don't set a value as to let the validation fail)
+                $fieldSchemaDefinitionArg[SchemaDefinition::TYPE_RESOLVER] instanceof InputObjectTypeResolverInterface
+                && !($fieldSchemaDefinitionArg[SchemaDefinition::MANDATORY] ?? false)
+            ) {
+                $fieldArgNameDefaultValues[$fieldSchemaDefinitionArg[SchemaDefinition::NAME]] = new stdClass();
             }
-        );
-        foreach ($fieldSchemaDefinitionArgsWithDefaultValue as $fieldArgSchemaDefinition) {
-            $isInputObjectTypeResolver = $fieldArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER] instanceof InputObjectTypeResolverInterface;
-            $defaultValue = $isInputObjectTypeResolver ? new stdClass() : $fieldArgSchemaDefinition[SchemaDefinition::DEFAULT_VALUE];
-            $fieldArgNameDefaultValues[$fieldArgSchemaDefinition[SchemaDefinition::NAME]] = $defaultValue;
         }
         return $fieldArgNameDefaultValues;
     }
