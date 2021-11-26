@@ -23,6 +23,7 @@ class QueryHookSet extends AbstractHookSet
         return match ($orderBy) {
             UserOrderBy::INCLUDE => 'include',
             UserOrderBy::WEBSITE_URL => 'user_url',
+            UserOrderBy::NICENAME => 'user_nicename',
             UserOrderBy::EMAIL => 'user_email',
             default => $orderBy,
         };

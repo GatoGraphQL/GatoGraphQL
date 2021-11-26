@@ -37,6 +37,7 @@ class UserOrderByEnumTypeResolver extends UpstreamUserOrderByEnumTypeResolver
             [
                 UserOrderBy::INCLUDE,
                 UserOrderBy::WEBSITE_URL,
+                UserOrderBy::NICENAME,
                 UserOrderBy::EMAIL,
             ]
         );
@@ -47,6 +48,7 @@ class UserOrderByEnumTypeResolver extends UpstreamUserOrderByEnumTypeResolver
         return match ($enumValue) {
             UserOrderBy::INCLUDE => $this->getTranslationAPI()->__('Order by the included list of user_ids (requires the include parameter)', 'users'),
             UserOrderBy::WEBSITE_URL => $this->getTranslationAPI()->__('Order by user\'s website URL', 'users'),
+            UserOrderBy::NICENAME => $this->getTranslationAPI()->__('Order by user nicename', 'users'),
             UserOrderBy::EMAIL => $this->getTranslationAPI()->__('Order by user email', 'users'),
             default => parent::getEnumValueDescription($enumValue),
         };

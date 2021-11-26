@@ -10,5 +10,6 @@ class UserOrderBy extends UpstreamUserOrderBy
 {
     public const INCLUDE = 'INCLUDE';
     public const WEBSITE_URL = 'WEBSITE_URL';
+    public const NICENAME = 'NICENAME';
     public const EMAIL = 'EMAIL';
 }
