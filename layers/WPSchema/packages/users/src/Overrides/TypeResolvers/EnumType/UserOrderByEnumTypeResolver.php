@@ -26,7 +26,7 @@ class UserOrderByEnumTypeResolver extends UpstreamUserOrderByEnumTypeResolver
         }
         return $adminEnumValues;
     }
-    
+
     /**
      * @return string[]
      */
