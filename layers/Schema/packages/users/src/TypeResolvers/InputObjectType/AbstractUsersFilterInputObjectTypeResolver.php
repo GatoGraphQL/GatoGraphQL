@@ -6,6 +6,7 @@ namespace PoPSchema\Users\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
+use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
 use PoPSchema\Users\ComponentConfiguration;
 use PoPSchema\Users\FilterInputProcessors\FilterInputProcessor;
 
@@ -35,7 +36,7 @@ abstract class AbstractUsersFilterInputObjectTypeResolver extends AbstractObject
         return array_merge(
             parent::getInputFieldNameTypeResolvers(),
             [
-                'name' => $this->getStringScalarTypeResolver(),
+                'search' => $this->getStringScalarTypeResolver(),
                 'emails' => $this->getStringScalarTypeResolver(),
             ]
         );
@@ -44,7 +45,7 @@ abstract class AbstractUsersFilterInputObjectTypeResolver extends AbstractObject
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'name' => $this->getTranslationAPI()->__('Search for custom posts containing the given string', 'customposts'),
+            'search' => $this->getTranslationAPI()->__('Search for custom posts containing the given string', 'customposts'),
             'emails' => $this->getTranslationAPI()->__('Custom post emails', 'customposts'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
@@ -61,7 +62,7 @@ abstract class AbstractUsersFilterInputObjectTypeResolver extends AbstractObject
     public function getInputFieldFilterInput(string $inputFieldName): ?array
     {
         return match ($inputFieldName) {
-            'name' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_NAME],
+            'search' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_SEARCH],
             'emails' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EMAIL_OR_EMAILS],
             default => parent::getInputFieldFilterInput($inputFieldName),
         };

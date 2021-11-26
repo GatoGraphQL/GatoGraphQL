@@ -157,6 +157,13 @@ class UserTypeAPI extends AbstractUserTypeAPI
             $query['login'] = $query['username'];
             unset($query['username']);
         }
+        // Attach "*" before/after the search term to support searching partial strings
+        if (isset($query['search'])) {
+            $query['search'] = sprintf(
+                '*%s*',
+                $query['search']
+            );
+        }
         if (isset($query['include']) && is_array($query['include'])) {
             // It can be an array or a string
             $query['include'] = implode(',', $query['include']);
