@@ -14,7 +14,16 @@ use PoPWPSchema\Users\Constants\UserOrderBy;
  * @see https://developer.wordpress.org/reference/classes/wp_user_query/#search-parameters
  */
 class UserOrderByEnumTypeResolver extends UpstreamUserOrderByEnumTypeResolver
-{    
+{
+    // public function getAdminEnumValues(): array
+    // {
+    //     $adminEnumValues = parent::getAdminEnumValues();
+    //     if (ComponentConfiguration::treatUserEmailAsAdminData()) {
+    //         $adminEnumValues[] = UserOrderBy::EMAIL;
+    //     }
+    //     return $adminEnumValues;
+    // }
+    
     /**
      * @return string[]
      */
