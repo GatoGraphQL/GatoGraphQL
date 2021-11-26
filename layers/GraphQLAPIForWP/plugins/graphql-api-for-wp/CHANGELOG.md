@@ -163,7 +163,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Breaking changes
 
 - Replaced argument `id` with `by` in fields fetching a single entity
-- Must use field arguments `filter`, `pagination` and `sort`
+- Must update GraphQL queries to use the new `filter`, `pagination` and `sort` field arguments
 - Renamed module "Schema for the Admin" to "Schema Expose Admin Data"
 - Renamed scalar type `AnyScalar` to `AnyBuiltInScalar`
 - Renamed interface type `Elemental` to `Node`
