@@ -123,6 +123,8 @@ class UserTypeAPI extends AbstractUserTypeAPI
      * 4. Remove hook
      *
      * @param mixed[] $query
+     *
+     * @see https://developer.wordpress.org/reference/classes/wp_user_query/#search-parameters
      */
     protected function filterByEmails(array &$query): bool
     {
@@ -130,6 +132,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
             $emails = $query['emails'];
             // This works for either 1 or many emails
             $query['search'] = implode(',', $emails);
+            $query['search_columns'] = ['user_email'];
             // But if there's more than 1 email, we must modify the SQL query with a hook
             if (count($emails) > 1) {
                 return true;
@@ -156,6 +159,17 @@ class UserTypeAPI extends AbstractUserTypeAPI
         if (isset($query['username'])) {
             $query['login'] = $query['username'];
             unset($query['username']);
+        }
+        /**
+         * Watch out: "search" and "emails" can't be set at the same time,
+         * because they both use the same "search" field in the query.
+         */
+        if (isset($query['search']) && !($query['emails'] ?? null)) {
+            // Search: Attach "*" before/after the term, to support searching partial strings
+            $query['search'] = sprintf(
+                '*%s*',
+                $query['search']
+            );
         }
         if (isset($query['include']) && is_array($query['include'])) {
             // It can be an array or a string

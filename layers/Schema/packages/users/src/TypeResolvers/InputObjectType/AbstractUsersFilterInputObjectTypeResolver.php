@@ -4,30 +4,24 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
-use PoPSchema\Users\ComponentConfiguration;
-use PoPSchema\Users\FilterInputProcessors\FilterInputProcessor;
 
 abstract class AbstractUsersFilterInputObjectTypeResolver extends AbstractObjectsFilterInputObjectTypeResolver
 {
+    private ?UserSearchByInputObjectTypeResolver $userSearchByInputObjectTypeResolver = null;
+
+    final public function setUserSearchByInputObjectTypeResolver(UserSearchByInputObjectTypeResolver $userSearchByInputObjectTypeResolver): void
+    {
+        $this->userSearchByInputObjectTypeResolver = $userSearchByInputObjectTypeResolver;
+    }
+    final protected function getUserSearchByInputObjectTypeResolver(): UserSearchByInputObjectTypeResolver
+    {
+        return $this->userSearchByInputObjectTypeResolver ??= $this->instanceManager->getInstance(UserSearchByInputObjectTypeResolver::class);
+    }
+
     public function getTypeDescription(): ?string
     {
         return $this->getTranslationAPI()->__('Input to filter users', 'users');
-    }
-
-    public function getAdminInputFieldNames(): array
-    {
-        $adminInputFieldNames = parent::getAdminInputFieldNames();
-        if ($this->treatUserEmailAsAdminData()) {
-            $adminInputFieldNames[] = 'emails';
-        }
-        return $adminInputFieldNames;
-    }
-
-    protected function treatUserEmailAsAdminData(): bool
-    {
-        return ComponentConfiguration::treatUserEmailAsAdminData();
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -35,8 +29,7 @@ abstract class AbstractUsersFilterInputObjectTypeResolver extends AbstractObject
         return array_merge(
             parent::getInputFieldNameTypeResolvers(),
             [
-                'name' => $this->getStringScalarTypeResolver(),
-                'emails' => $this->getStringScalarTypeResolver(),
+                'searchBy' => $this->getUserSearchByInputObjectTypeResolver(),
             ]
         );
     }
@@ -44,26 +37,8 @@ abstract class AbstractUsersFilterInputObjectTypeResolver extends AbstractObject
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'name' => $this->getTranslationAPI()->__('Search for custom posts containing the given string', 'customposts'),
-            'emails' => $this->getTranslationAPI()->__('Custom post emails', 'customposts'),
+            'searchBy' => $this->getTranslationAPI()->__('Search for users', 'users'),
             default => parent::getInputFieldDescription($inputFieldName),
-        };
-    }
-
-    public function getInputFieldTypeModifiers(string $inputFieldName): int
-    {
-        return match ($inputFieldName) {
-            'emails' => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            default => parent::getInputFieldTypeModifiers($inputFieldName)
-        };
-    }
-
-    public function getInputFieldFilterInput(string $inputFieldName): ?array
-    {
-        return match ($inputFieldName) {
-            'name' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_NAME],
-            'emails' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EMAIL_OR_EMAILS],
-            default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }
 }
