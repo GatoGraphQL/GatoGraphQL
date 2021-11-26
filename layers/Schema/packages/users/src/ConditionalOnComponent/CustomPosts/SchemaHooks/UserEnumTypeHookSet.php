@@ -7,10 +7,10 @@ namespace PoPSchema\Users\ConditionalOnComponent\CustomPosts\SchemaHooks;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\HookNames;
 use PoP\Hooks\AbstractHookSet;
-use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver;
-use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Constants\CustomPostOrderBy;
+use PoPSchema\Users\TypeResolvers\EnumType\UserOrderByEnumTypeResolver;
+use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Constants\UserOrderBy;
 
-class EnumTypeHookSet extends AbstractHookSet
+class UserEnumTypeHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
@@ -35,13 +35,13 @@ class EnumTypeHookSet extends AbstractHookSet
         array $enumValues,
         EnumTypeResolverInterface $enumTypeResolver,
     ): array {
-        if (!($enumTypeResolver instanceof CustomPostOrderByEnumTypeResolver)) {
+        if (!($enumTypeResolver instanceof UserOrderByEnumTypeResolver)) {
             return $enumValues;
         }
         return array_merge(
             $enumValues,
             [
-                CustomPostOrderBy::AUTHOR,
+                UserOrderBy::CUSTOMPOST_COUNT,
             ]
         );
     }
@@ -51,11 +51,11 @@ class EnumTypeHookSet extends AbstractHookSet
         EnumTypeResolverInterface $enumTypeResolver,
         string $enumValue
     ): ?string {
-        if (!($enumTypeResolver instanceof CustomPostOrderByEnumTypeResolver)) {
+        if (!($enumTypeResolver instanceof UserOrderByEnumTypeResolver)) {
             return $enumValueDescription;
         }
         return match ($enumValue) {
-            CustomPostOrderBy::AUTHOR => $this->getTranslationAPI()->__('Order by custom post author', 'pop-users'),
+            UserOrderBy::CUSTOMPOST_COUNT => $this->getTranslationAPI()->__('Order by custom post count', 'pop-users'),
             default => $enumValueDescription,
         };
     }

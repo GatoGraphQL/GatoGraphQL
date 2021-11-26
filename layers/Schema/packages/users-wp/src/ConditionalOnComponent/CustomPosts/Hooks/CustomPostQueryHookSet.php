@@ -9,7 +9,7 @@ use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\Constants\CustomPostOrderBy;
 
-class QueryHookSet extends AbstractHookSet
+class CustomPostQueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
