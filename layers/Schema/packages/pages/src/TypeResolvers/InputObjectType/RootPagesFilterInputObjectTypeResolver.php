@@ -15,4 +15,9 @@ class RootPagesFilterInputObjectTypeResolver extends AbstractPagesFilterInputObj
     {
         return $this->getTranslationAPI()->__('Input to filter pages', 'pages');
     }
+
+    protected function addParentInputFields(): bool
+    {
+        return true;
+    }
 }
