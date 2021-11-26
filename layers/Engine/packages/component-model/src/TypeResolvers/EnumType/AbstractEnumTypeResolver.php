@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\EnumType;
 
+use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use stdClass;
 
@@ -11,10 +12,22 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
 {
     /** @var string[]|null */
     protected ?array $consolidatedEnumValuesCache = null;
+    /** @var string[]|null */
+    protected ?array $consolidatedAdminEnumValuesCache = null;
     /** @var array<string, string|null> */
     protected array $consolidatedEnumValueDescriptionCache = [];
     /** @var array<string, string|null> */
     protected array $consolidatedEnumValueDeprecationMessageCache = [];
+
+    /**
+     * The "admin" values in the enum
+     *
+     * @return string[]
+     */
+    public function getAdminEnumValues(): array
+    {
+        return [];
+    }
 
     /**
      * By default, no description
@@ -101,12 +114,37 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         /**
          * Allow to override/extend the enum values
          */
-        $this->consolidatedEnumValuesCache = $this->getHooksAPI()->applyFilters(
+        $consolidatedEnumValues = $this->getHooksAPI()->applyFilters(
             HookNames::ENUM_VALUES,
             $this->getEnumValues(),
             $this,
         );
+
+        // Exclude the admin enum values, if "Admin" Schema is not enabled
+        if (!ComponentConfiguration::enableAdminSchema()) {
+            $adminEnumValues = $this->getConsolidatedAdminEnumValues();
+            $consolidatedEnumValues = array_filter(
+                $consolidatedEnumValues,
+                fn (string $enumValue) => !in_array($enumValue, $adminEnumValues),
+                ARRAY_FILTER_USE_KEY
+            );
+        }
+
+        $this->consolidatedEnumValuesCache = $consolidatedEnumValues;
         return $this->consolidatedEnumValuesCache;
+    }
+
+    final public function getConsolidatedAdminEnumValues(): array
+    {
+        // Cache the result
+        if ($this->consolidatedAdminEnumValuesCache !== null) {
+            return $this->consolidatedAdminEnumValuesCache;
+        }
+        return $this->consolidatedAdminEnumValuesCache = $this->getHooksAPI()->applyFilters(
+            HookNames::ADMIN_ENUM_VALUES,
+            $this->getAdminEnumValues(),
+            $this,
+        );
     }
 
     final public function getConsolidatedEnumValueDescription(string $enumValue): ?string

@@ -17,6 +17,12 @@ interface EnumTypeResolverInterface extends ConcreteTypeResolverInterface, Depre
      */
     public function getEnumValues(): array;
     /**
+     * The "admin" values in the enum
+     *
+     * @return string[]
+     */
+    public function getAdminEnumValues(): array;
+    /**
      * Description for a specific enum value
      */
     public function getEnumValueDescription(string $enumValue): ?string;
@@ -31,6 +37,10 @@ interface EnumTypeResolverInterface extends ConcreteTypeResolverInterface, Depre
      * @return string[]
      */
     public function getConsolidatedEnumValues(): array;
+    /**
+     * @return string[]
+     */
+    public function getConsolidatedAdminEnumValues(): array;
     public function getConsolidatedEnumValueDescription(string $enumValue): ?string;
     public function getConsolidatedEnumValueDeprecationMessage(string $enumValue): ?string;
 }
