@@ -204,9 +204,15 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $inputValue->$inputFieldName = $inputFieldDefaultValue;
                 continue;
             }
-            // If it is an InputObject, set it to {} so it has the chance to set its own default values
+            // If it is an InputObject, and it is non-mandatory, set it to {}
+            // so it has the chance to set its own default values
+            // (If it is mandatory, then rather let it fail)
             if ($inputFieldTypeResolver instanceof InputObjectTypeResolverInterface) {
-                $inputValue->$inputFieldName = new stdClass();
+                $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
+                $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
+                if (!$inputFieldTypeModifiersIsMandatory) {
+                    $inputValue->$inputFieldName = new stdClass();
+                }
             }
         }
 
