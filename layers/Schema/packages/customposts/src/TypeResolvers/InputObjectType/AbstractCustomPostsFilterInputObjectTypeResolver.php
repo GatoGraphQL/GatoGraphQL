@@ -12,7 +12,7 @@ use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolve
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
-use PoPWPSchema\SchemaCommons\Overrides\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver;
 
 abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends AbstractObjectsFilterInputObjectTypeResolver
 {
