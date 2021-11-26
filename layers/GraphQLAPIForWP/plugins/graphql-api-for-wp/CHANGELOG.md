@@ -18,6 +18,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.postTag`
   - `Root.post`
   - `Root.user`
+- Filter elements via the new `filter` field argument
+- Pagination and sorting fields are accessed via `pagination` and `sort` field args
 - Filter custom post fields (`Root.posts`, `User.posts`, etc) via new arguments:
   - `tagIDs: [ID]`
   - `tagSlugs: [String]`
@@ -161,14 +163,17 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Breaking changes
 
 - Replaced argument `id` with `by` in fields fetching a single entity
+- Must update GraphQL queries to use the new `filter`, `pagination` and `sort` field arguments
 - Renamed module "Schema for the Admin" to "Schema Expose Admin Data"
 - Renamed scalar type `AnyScalar` to `AnyBuiltInScalar`
 - Renamed interface type `Elemental` to `Node`
 - All `date` fields (such as `Post.date`, `Media.date` and `Comment.date`) and `modified` fields are now of type `DateTime` (before they had type `String`)
-- Updated the arguments for mutation `loginUser`
+- Must update the inputs for mutations
 - Converged all the "admin" fields with the non-admin versions: instead of having fields `posts` and `unrestrainedPosts`, now there is only field `posts`, and its `filter` argument can also receive input `status` when `Schema Expose Admin Data` is enabled
-- `CustomPost.status` and `User.email` are treated as "admin" fields
+- `User.email` is treated as "admin" field
 - The Access Control and Cache Control configuration lists will be broken: all fields for all non-root types broken will appear under "(Undefined entries)". These lists must be recreated
+- Settings for several modules must be set again
+- Must re-set options "default limit" and "max limit" for Posts and Pages
 
 ## 0.8.1 - 21/07/2021
 
