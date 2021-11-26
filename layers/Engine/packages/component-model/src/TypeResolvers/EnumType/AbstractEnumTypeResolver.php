@@ -28,7 +28,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     {
         return [];
     }
-    
+
     /**
      * By default, no description
      */
