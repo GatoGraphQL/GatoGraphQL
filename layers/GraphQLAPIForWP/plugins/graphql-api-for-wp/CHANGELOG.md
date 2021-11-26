@@ -168,7 +168,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Renamed scalar type `AnyScalar` to `AnyBuiltInScalar`
 - Renamed interface type `Elemental` to `Node`
 - All `date` fields (such as `Post.date`, `Media.date` and `Comment.date`) and `modified` fields are now of type `DateTime` (before they had type `String`)
-- Updated the arguments for mutation `loginUser`
+- Must update the inputs for mutations
 - Converged all the "admin" fields with the non-admin versions: instead of having fields `posts` and `unrestrainedPosts`, now there is only field `posts`, and its `filter` argument can also receive input `status` when `Schema Expose Admin Data` is enabled
 - `CustomPost.status` and `User.email` are treated as "admin" fields
 - The Access Control and Cache Control configuration lists will be broken: all fields for all non-root types broken will appear under "(Undefined entries)". These lists must be recreated
