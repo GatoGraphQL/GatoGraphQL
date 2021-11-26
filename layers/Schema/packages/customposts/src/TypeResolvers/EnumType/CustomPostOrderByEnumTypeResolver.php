@@ -29,9 +29,9 @@ class CustomPostOrderByEnumTypeResolver extends AbstractEnumTypeResolver
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            CustomPostOrderBy::ID => $this->getTranslationAPI()->__('Order by ID', 'schema-commons'),
-            CustomPostOrderBy::TITLE => $this->getTranslationAPI()->__('Order by title', 'schema-commons'),
-            CustomPostOrderBy::DATE => $this->getTranslationAPI()->__('Order by date', 'schema-commons'),
+            CustomPostOrderBy::ID => $this->getTranslationAPI()->__('Order by ID', 'users'),
+            CustomPostOrderBy::TITLE => $this->getTranslationAPI()->__('Order by title', 'users'),
+            CustomPostOrderBy::DATE => $this->getTranslationAPI()->__('Order by date', 'users'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }
