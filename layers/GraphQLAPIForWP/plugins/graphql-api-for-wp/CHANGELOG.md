@@ -18,6 +18,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.postTag`
   - `Root.post`
   - `Root.user`
+- Filter elements via the new `filter` field argument
+- Pagination and sorting fields are accessed via `pagination` and `sort` field args
 - Filter custom post fields (`Root.posts`, `User.posts`, etc) via new arguments:
   - `tagIDs: [ID]`
   - `tagSlugs: [String]`
@@ -161,6 +163,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Breaking changes
 
 - Replaced argument `id` with `by` in fields fetching a single entity
+- Must use field arguments `filter`, `pagination` and `sort`
 - Renamed module "Schema for the Admin" to "Schema Expose Admin Data"
 - Renamed scalar type `AnyScalar` to `AnyBuiltInScalar`
 - Renamed interface type `Elemental` to `Node`
