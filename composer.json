@@ -145,6 +145,7 @@
             "PoPWPSchema\\Menus\\": "layers/WPSchema/packages/menus/src",
             "PoPWPSchema\\Pages\\": "layers/WPSchema/packages/pages/src",
             "PoPWPSchema\\Posts\\": "layers/WPSchema/packages/posts/src",
+            "PoPWPSchema\\SchemaCommons\\": "layers/WPSchema/packages/schema-commons/src",
             "PoPWPSchema\\Users\\": "layers/WPSchema/packages/users/src",
             "PoP\\APIClients\\": "layers/API/packages/api-clients/src",
             "PoP\\APIEndpointsForWP\\": "layers/API/packages/api-endpoints-for-wp/src",
@@ -300,6 +301,7 @@
             "PoPWPSchema\\Menus\\": "layers/WPSchema/packages/menus/tests",
             "PoPWPSchema\\Pages\\": "layers/WPSchema/packages/pages/tests",
             "PoPWPSchema\\Posts\\": "layers/WPSchema/packages/posts/tests",
+            "PoPWPSchema\\SchemaCommons\\": "layers/WPSchema/packages/schema-commons/tests",
             "PoPWPSchema\\Users\\": "layers/WPSchema/packages/users/tests",
             "PoP\\APIClients\\": "layers/API/packages/api-clients/tests",
             "PoP\\APIEndpointsForWP\\": "layers/API/packages/api-endpoints-for-wp/tests",
@@ -501,6 +503,7 @@
         "pop-wp-schema/menus": "0.8.8",
         "pop-wp-schema/pages": "0.8.8",
         "pop-wp-schema/posts": "0.8.8",
+        "pop-wp-schema/schema-commons": "0.8.8",
         "pop-wp-schema/users": "0.8.8"
     },
     "authors": [
