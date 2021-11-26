@@ -15,14 +15,14 @@ use PoPWPSchema\Users\Constants\UserOrderBy;
  */
 class UserOrderByEnumTypeResolver extends UpstreamUserOrderByEnumTypeResolver
 {
-    // public function getAdminEnumValues(): array
-    // {
-    //     $adminEnumValues = parent::getAdminEnumValues();
-    //     if (ComponentConfiguration::treatUserEmailAsAdminData()) {
-    //         $adminEnumValues[] = UserOrderBy::EMAIL;
-    //     }
-    //     return $adminEnumValues;
-    // }
+    public function getAdminEnumValues(): array
+    {
+        $adminEnumValues = parent::getAdminEnumValues();
+        if (ComponentConfiguration::treatUserEmailAsAdminData()) {
+            $adminEnumValues[] = UserOrderBy::EMAIL;
+        }
+        return $adminEnumValues;
+    }
     
     /**
      * @return string[]
