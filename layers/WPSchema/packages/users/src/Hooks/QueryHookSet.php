@@ -21,7 +21,7 @@ class QueryHookSet extends AbstractHookSet
     public function getOrderByQueryArgValue(string $orderBy): string
     {
         return match ($orderBy) {
-            UserOrderBy::USER_URL => 'user_url',
+            UserOrderBy::WEBSITE_URL => 'user_url',
             default => $orderBy,
         };
     }

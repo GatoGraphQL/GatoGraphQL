@@ -22,7 +22,7 @@ class UserOrderByEnumTypeResolver extends UpstreamUserOrderByEnumTypeResolver
         return array_merge(
             parent::getEnumValues(),
             [
-                UserOrderBy::USER_URL,
+                UserOrderBy::WEBSITE_URL,
             ]
         );
     }
@@ -30,7 +30,7 @@ class UserOrderByEnumTypeResolver extends UpstreamUserOrderByEnumTypeResolver
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            UserOrderBy::USER_URL => $this->getTranslationAPI()->__('Order by user URL', 'users'),
+            UserOrderBy::WEBSITE_URL => $this->getTranslationAPI()->__('Order by user\'s website URL', 'users'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }
