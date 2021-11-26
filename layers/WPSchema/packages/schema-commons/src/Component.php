@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\CustomPosts;
+namespace PoPWPSchema\SchemaCommons;
 
 use PoP\Root\Component\AbstractComponent;
 
@@ -19,8 +19,7 @@ class Component extends AbstractComponent
     public static function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\CustomPostsWP\Component::class,
-            \PoPWPSchema\SchemaCommons\Component::class,
+            \PoPSchema\SchemaCommons\Component::class,
         ];
     }
 
@@ -35,7 +34,6 @@ class Component extends AbstractComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
-        self::initServices(dirname(__DIR__));
         self::initSchemaServices(dirname(__DIR__), $skipSchema);
         self::initSchemaServices(dirname(__DIR__), $skipSchema, '/Overrides');
     }

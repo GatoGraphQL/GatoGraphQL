@@ -1,9 +1,9 @@
 {
-    "name": "pop-wp-schema/menus",
+    "name": "pop-wp-schema/schema-commons",
     "type": "library",
-    "description": "WordPress-specific Menu data model",
-    "keywords": ["PoP", "WP", "menus"],
-    "homepage": "https://github.com/PoPWPSchema/menus",
+    "description": "WordPress-specific Schema Commons data model",
+    "keywords": ["PoP", "WP", "schema-commons"],
+    "homepage": "https://github.com/PoPWPSchema/schema-commons",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -14,8 +14,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "pop-schema/menus-wp": "^0.9",
-        "pop-wp-schema/schema-commons": "^0.9"
+        "pop-schema/schema-commons": "^0.9"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",
@@ -86,7 +85,7 @@
         "pop-schema/usermeta": "<0.8.8",
         "pop-schema/user-avatars-wp": "<0.8.8",
         "pop-schema/taxonomyquery-wp": "<0.8.8",
-        "pop-schema/customposts": "<0.8.8",
+        "pop-schema/schema-commons": "<0.8.8",
         "pop-schema/categories-wp": "<0.8.8",
         "pop-schema/meta": "<0.8.8",
         "pop-schema/comment-mutations": "<0.8.8",
@@ -98,22 +97,18 @@
         "pop-schema/custompost-categories-wp": "<0.8.8",
         "pop-schema/settings-wp": "<0.8.8",
         "pop-schema/queriedobject": "<0.8.8",
-        "pop-schema/customposts-wp": "<0.8.8",
+        "pop-schema/schema-commons-wp": "<0.8.2",
         "pop-schema/taxonomies-wp": "<0.8.8",
         "pop-schema/comment-mutations-wp": "<0.8.8",
         "pop-schema/custompostmedia-wp": "<0.8.8",
-        "pop-schema/menus": "<0.8.8",
         "pop-schema/block-metadata-for-wp": "<0.8.8",
         "pop-schema/post-categories": "<0.8.8",
-        "pop-schema/pages-wp": "<0.8.8",
         "pop-schema/custompostmedia-mutations-wp": "<0.8.8",
         "pop-schema/user-roles-acl": "<0.8.8",
         "pop-schema/user-avatars": "<0.8.8",
         "pop-schema/comments-wp": "<0.8.8",
-        "pop-schema/generic-customposts": "<0.8.8",
+        "pop-schema/generic-schema-commons": "<0.8.8",
         "pop-schema/metaquery-wp": "<0.8.8",
-        "pop-schema/pages": "<0.8.8",
-        "pop-schema/menus-wp": "<0.8.2",
         "pop-schema/custompostmeta": "<0.8.8",
         "pop-schema/categories": "<0.8.8",
         "pop-schema/taxonomies": "<0.8.8",
@@ -170,20 +165,24 @@
         "pop-schema/users-wp": "<0.8.8",
         "pop-schema/queriedobject-wp": "<0.8.8",
         "pop-schema/users": "<0.8.8",
+        "pop-schema/menus": "<0.8.8",
+        "pop-schema/pages-wp": "<0.8.8",
+        "pop-schema/pages": "<0.8.8",
+        "pop-schema/menus-wp": "<0.8.8",
         "pop-wp-schema/posts": "<0.8.8",
-        "pop-wp-schema/customposts": "<0.8.8",
         "pop-wp-schema/users": "<0.8.8",
+        "pop-wp-schema/menus": "<0.8.8",
         "pop-wp-schema/pages": "<0.8.8",
         "pop-wp-schema/media": "<0.8.8"
     },
     "autoload": {
         "psr-4": {
-            "PoPWPSchema\\Menus\\": "src"
+            "PoPWPSchema\\SchemaCommons\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPWPSchema\\Menus\\": "tests"
+            "PoPWPSchema\\SchemaCommons\\": "tests"
         }
     },
     "scripts": {

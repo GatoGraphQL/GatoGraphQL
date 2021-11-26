@@ -21,6 +21,7 @@ class Component extends AbstractComponent
         return [
             \PoPSchema\MediaWP\Component::class,
             \PoPWPSchema\CustomPosts\Component::class,
+            \PoPWPSchema\SchemaCommons\Component::class,
         ];
     }
 
