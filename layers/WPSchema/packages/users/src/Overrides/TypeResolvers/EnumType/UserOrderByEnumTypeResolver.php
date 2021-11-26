@@ -15,6 +15,9 @@ use PoPWPSchema\Users\Constants\UserOrderBy;
  */
 class UserOrderByEnumTypeResolver extends UpstreamUserOrderByEnumTypeResolver
 {
+    /**
+     * @return string[]
+     */
     public function getAdminEnumValues(): array
     {
         $adminEnumValues = parent::getAdminEnumValues();
