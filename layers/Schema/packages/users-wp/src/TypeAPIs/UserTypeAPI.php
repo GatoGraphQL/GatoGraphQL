@@ -160,9 +160,12 @@ class UserTypeAPI extends AbstractUserTypeAPI
             $query['login'] = $query['username'];
             unset($query['username']);
         }
-        // Attach "*" before/after the search term to support searching partial strings
-        // But not when searching emails!
+        /**
+         * Watch out: "search" and "emails" can't be set at the same time,
+         * because they both use the same "search" field in the query.
+         */
         if (isset($query['search']) && !($query['emails'] ?? null)) {
+            // Search: Attach "*" before/after the term, to support searching partial strings
             $query['search'] = sprintf(
                 '*%s*',
                 $query['search']
