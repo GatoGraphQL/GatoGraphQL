@@ -125,8 +125,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
             $adminEnumValues = $this->getConsolidatedAdminEnumValues();
             $consolidatedEnumValues = array_filter(
                 $consolidatedEnumValues,
-                fn (string $enumValue) => !in_array($enumValue, $adminEnumValues),
-                ARRAY_FILTER_USE_KEY
+                fn (string $enumValue) => !in_array($enumValue, $adminEnumValues)
             );
         }
 
