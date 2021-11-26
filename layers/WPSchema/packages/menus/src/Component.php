@@ -20,6 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoPSchema\MenusWP\Component::class,
+            \PoPWPSchema\SchemaCommons\Component::class,
         ];
     }
 

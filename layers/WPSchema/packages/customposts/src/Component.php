@@ -20,6 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoPSchema\CustomPostsWP\Component::class,
+            \PoPWPSchema\SchemaCommons\Component::class,
         ];
     }
 

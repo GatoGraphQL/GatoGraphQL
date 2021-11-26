@@ -20,6 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoPSchema\CommentsWP\Component::class,
+            \PoPWPSchema\SchemaCommons\Component::class,
         ];
     }
 
