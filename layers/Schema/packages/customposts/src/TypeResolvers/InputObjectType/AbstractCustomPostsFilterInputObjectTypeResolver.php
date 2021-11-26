@@ -12,19 +12,20 @@ use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolve
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver;
 
 abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends AbstractObjectsFilterInputObjectTypeResolver
 {
-    private ?CustomPostDateQueryInputObjectTypeResolver $customPostDateQueryInputObjectTypeResolver = null;
+    private ?DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver = null;
     private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
 
-    final public function setCustomPostDateQueryInputObjectTypeResolver(CustomPostDateQueryInputObjectTypeResolver $customPostDateQueryInputObjectTypeResolver): void
+    final public function setDateQueryInputObjectTypeResolver(DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver): void
     {
-        $this->customPostDateQueryInputObjectTypeResolver = $customPostDateQueryInputObjectTypeResolver;
+        $this->dateQueryInputObjectTypeResolver = $dateQueryInputObjectTypeResolver;
     }
-    final protected function getCustomPostDateQueryInputObjectTypeResolver(): CustomPostDateQueryInputObjectTypeResolver
+    final protected function getDateQueryInputObjectTypeResolver(): DateQueryInputObjectTypeResolver
     {
-        return $this->customPostDateQueryInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostDateQueryInputObjectTypeResolver::class);
+        return $this->dateQueryInputObjectTypeResolver ??= $this->instanceManager->getInstance(DateQueryInputObjectTypeResolver::class);
     }
     final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
     {
@@ -61,7 +62,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
             [
                 'status' => $this->getCustomPostStatusEnumTypeResolver(),
                 'search' => $this->getStringScalarTypeResolver(),
-                'dateQuery' => $this->getCustomPostDateQueryInputObjectTypeResolver(),
+                'dateQuery' => $this->getDateQueryInputObjectTypeResolver(),
             ],
             $this->addCustomPostInputFields() ? [
                 'customPostTypes' => $this->getStringScalarTypeResolver(),

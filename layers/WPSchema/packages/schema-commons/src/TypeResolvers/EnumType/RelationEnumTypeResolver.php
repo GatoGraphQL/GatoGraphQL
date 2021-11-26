@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\CustomPosts\TypeResolvers\EnumType;
+namespace PoPWPSchema\SchemaCommons\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
-use PoPWPSchema\CustomPosts\Constants\Relation;
+use PoPWPSchema\SchemaCommons\Constants\Relation;
 
 /**
  * Query "relation" arg, as explained here:
@@ -21,7 +21,7 @@ class RelationEnumTypeResolver extends AbstractEnumTypeResolver
 
     public function getTypeDescription(): string
     {
-        return $this->getTranslationAPI()->__('The logical relationship between array values in query args (for meta query, date parameters, and others) when there is more than one', 'customposts');
+        return $this->getTranslationAPI()->__('The logical relationship between array values in query args (for meta query, date parameters, and others) when there is more than one', 'schema-commons');
     }
 
     /**
