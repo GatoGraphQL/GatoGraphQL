@@ -6,21 +6,21 @@ namespace PoPSchema\Media\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\Media\FilterInputProcessors\FilterInputProcessor;
-use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostDateQueryInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver;
 
 abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractObjectsFilterInputObjectTypeResolver
 {
-    private ?CustomPostDateQueryInputObjectTypeResolver $customPostDateQueryInputObjectTypeResolver = null;
+    private ?DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver = null;
 
-    final public function setCustomPostDateQueryInputObjectTypeResolver(CustomPostDateQueryInputObjectTypeResolver $customPostDateQueryInputObjectTypeResolver): void
+    final public function setDateQueryInputObjectTypeResolver(DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver): void
     {
-        $this->customPostDateQueryInputObjectTypeResolver = $customPostDateQueryInputObjectTypeResolver;
+        $this->dateQueryInputObjectTypeResolver = $dateQueryInputObjectTypeResolver;
     }
-    final protected function getCustomPostDateQueryInputObjectTypeResolver(): CustomPostDateQueryInputObjectTypeResolver
+    final protected function getDateQueryInputObjectTypeResolver(): DateQueryInputObjectTypeResolver
     {
-        return $this->customPostDateQueryInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostDateQueryInputObjectTypeResolver::class);
+        return $this->dateQueryInputObjectTypeResolver ??= $this->instanceManager->getInstance(DateQueryInputObjectTypeResolver::class);
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -29,7 +29,7 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
             parent::getInputFieldNameTypeResolvers(),
             [
                 'search' => $this->getStringScalarTypeResolver(),
-                'dateQuery' => $this->getCustomPostDateQueryInputObjectTypeResolver(),
+                'dateQuery' => $this->getDateQueryInputObjectTypeResolver(),
                 'mimeTypes' => $this->getStringScalarTypeResolver(),
             ]
         );

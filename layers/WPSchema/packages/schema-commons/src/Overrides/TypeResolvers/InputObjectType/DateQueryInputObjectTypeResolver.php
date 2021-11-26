@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\CustomPosts\Overrides\TypeResolvers\InputObjectType;
+namespace PoPWPSchema\SchemaCommons\Overrides\TypeResolvers\InputObjectType;
 
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostDateQueryInputObjectTypeResolver as UpstreamCustomPostDateQueryInputObjectTypeResolver;
-use PoPWPSchema\CustomPosts\TypeResolvers\EnumType\RelationEnumTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver as UpstreamDateQueryInputObjectTypeResolver;
+use PoPWPSchema\SchemaCommons\TypeResolvers\EnumType\RelationEnumTypeResolver;
 use stdClass;
 
-class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQueryInputObjectTypeResolver
+class DateQueryInputObjectTypeResolver extends UpstreamDateQueryInputObjectTypeResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?RelationEnumTypeResolver $queryRelationEnumTypeResolver = null;
+    private ?RelationEnumTypeResolver $relationEnumTypeResolver = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -42,13 +42,13 @@ class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQ
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setRelationEnumTypeResolver(RelationEnumTypeResolver $queryRelationEnumTypeResolver): void
+    final public function setRelationEnumTypeResolver(RelationEnumTypeResolver $relationEnumTypeResolver): void
     {
-        $this->queryRelationEnumTypeResolver = $queryRelationEnumTypeResolver;
+        $this->relationEnumTypeResolver = $relationEnumTypeResolver;
     }
     final protected function getRelationEnumTypeResolver(): RelationEnumTypeResolver
     {
-        return $this->queryRelationEnumTypeResolver ??= $this->instanceManager->getInstance(RelationEnumTypeResolver::class);
+        return $this->relationEnumTypeResolver ??= $this->instanceManager->getInstance(RelationEnumTypeResolver::class);
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -74,17 +74,17 @@ class CustomPostDateQueryInputObjectTypeResolver extends UpstreamCustomPostDateQ
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'inclusive' => $this->getTranslationAPI()->__('For after/before, whether exact value should be matched or not', 'customposts'),
-            'year' => $this->getTranslationAPI()->__('4 digit year (e.g. 2011)', 'customposts'),
-            'month' => $this->getTranslationAPI()->__('Month number (from 1 to 12)', 'customposts'),
-            'week' => $this->getTranslationAPI()->__('Week of the year (from 0 to 53)', 'customposts'),
-            'day' => $this->getTranslationAPI()->__('Day of the month (from 1 to 31)', 'customposts'),
-            'hour' => $this->getTranslationAPI()->__('Hour (from 0 to 23)', 'customposts'),
-            'minute' => $this->getTranslationAPI()->__('Minute (from 0 to 59)', 'customposts'),
-            'second' => $this->getTranslationAPI()->__('Second (0 to 59)', 'customposts'),
-            'compare' => $this->getTranslationAPI()->__('Determines and validates what comparison operator to use', 'customposts'),
-            'column' => $this->getTranslationAPI()->__('Posts column to query against. Default: ‘post_date’)', 'customposts'),
-            'relation' => $this->getTranslationAPI()->__('OR or AND, how the sub-arrays should be compared. Default: AND. Only the value from the first sub-array will be used', 'customposts'),
+            'inclusive' => $this->getTranslationAPI()->__('For after/before, whether exact value should be matched or not', 'schema-commons'),
+            'year' => $this->getTranslationAPI()->__('4 digit year (e.g. 2011)', 'schema-commons'),
+            'month' => $this->getTranslationAPI()->__('Month number (from 1 to 12)', 'schema-commons'),
+            'week' => $this->getTranslationAPI()->__('Week of the year (from 0 to 53)', 'schema-commons'),
+            'day' => $this->getTranslationAPI()->__('Day of the month (from 1 to 31)', 'schema-commons'),
+            'hour' => $this->getTranslationAPI()->__('Hour (from 0 to 23)', 'schema-commons'),
+            'minute' => $this->getTranslationAPI()->__('Minute (from 0 to 59)', 'schema-commons'),
+            'second' => $this->getTranslationAPI()->__('Second (0 to 59)', 'schema-commons'),
+            'compare' => $this->getTranslationAPI()->__('Determines and validates what comparison operator to use', 'schema-commons'),
+            'column' => $this->getTranslationAPI()->__('Posts column to query against. Default: ‘post_date’)', 'schema-commons'),
+            'relation' => $this->getTranslationAPI()->__('OR or AND, how the sub-arrays should be compared. Default: AND. Only the value from the first sub-array will be used', 'schema-commons'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

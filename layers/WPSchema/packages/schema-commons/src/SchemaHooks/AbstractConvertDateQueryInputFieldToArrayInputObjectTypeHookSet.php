@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\CustomPosts\SchemaHooks;
+namespace PoPWPSchema\SchemaCommons\SchemaHooks;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\Hooks\AbstractHookSet;
-use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostsFilterInputObjectTypeResolver;
 
-class InputObjectTypeHookSet extends AbstractHookSet
+abstract class AbstractConvertDateQueryInputFieldToArrayInputObjectTypeHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
@@ -22,6 +21,8 @@ class InputObjectTypeHookSet extends AbstractHookSet
         );
     }
 
+    abstract protected function isInputObjectTypeResolver(InputObjectTypeResolverInterface $inputObjectTypeResolver): bool;
+
     /**
      * Transform "dateQuery" from a single value to an array of them
      */
@@ -30,7 +31,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName
     ): int {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldTypeModifiers;
         }
         return match ($inputFieldName) {
