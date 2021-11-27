@@ -87,8 +87,8 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'ignoreSticky' => $this->getTranslationAPI()->__('Ignore custom post stickiness. `false` (default): move sticky custom posts to the start of the set. `true`: do not move sticky custom posts to the start of the set. See: https://developer.wordpress.org/reference/classes/wp_query/#pagination-parameters', 'customposts'),
-            'excludeSticky' => $this->getTranslationAPI()->__('Exclude sticky custom posts', 'customposts'),
+            'ignoreSticky' => $this->getTranslationAPI()->__('Ignore post stickiness. `false` (default): move sticky posts to the start of the set. `true`: do not move sticky posts to the start of the set. See: https://developer.wordpress.org/reference/classes/wp_query/#pagination-parameters', 'posts'),
+            'excludeSticky' => $this->getTranslationAPI()->__('Exclude sticky posts', 'posts'),
             default => $inputFieldDescription,
         };
     }
