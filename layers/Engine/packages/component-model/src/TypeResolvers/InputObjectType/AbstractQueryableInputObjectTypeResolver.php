@@ -61,6 +61,10 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
             foreach ($inputValue as $index => $inputValueElem) {
                 $queryElem = [];
                 $this->integrateInputValueToFilteringQueryArgs($queryElem, $inputValueElem);
+                // If $inputValueElem is {}, then skip
+                if ($queryElem === []) {
+                    continue;
+                }
                 $query[$index] = $queryElem;
             }
             return;
