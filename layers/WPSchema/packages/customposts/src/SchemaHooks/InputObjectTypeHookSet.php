@@ -91,7 +91,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
         return array_merge(
             $inputFieldNames,
             [
-                'hasPassword' => $this->getBooleanScalarTypeResolver(),
+                'hasPassword',
             ]
         );
     }
