@@ -25,13 +25,21 @@ class QueryHookSet extends AbstractHookSet
             $query['ignore_sticky_posts'] = $query['ignore-sticky'];
             unset($query['ignore-sticky']);
         }
-        if (isset($query['exclude-sticky']) && $query['exclude-sticky']) {
-            // Add the sticky posts to whichever post was already set to be excluded
-            $query['post__not_in'] = array_merge(
-                $query['post__not_in'] ?? [],
-                \get_option('sticky_posts', [])
-            );
-            unset($query['exclude-sticky']);
+        if (isset($query['is-sticky'])) {
+            $stickyPosts = \get_option('sticky_posts', []);
+            // Add the sticky posts to whichever posts were already set
+            if ($query['is-sticky']) {
+                $query['post__in'] = array_merge(
+                    $query['post__in'] ?? [],
+                    $stickyPosts
+                );
+            } else {
+                $query['post__not_in'] = array_merge(
+                    $query['post__not_in'] ?? [],
+                    $stickyPosts
+                );
+            }
+            unset($query['is-sticky']);
         }
         return $query;
     }

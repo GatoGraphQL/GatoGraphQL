@@ -67,7 +67,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
             $inputFieldNameTypeResolvers,
             [
                 'ignoreSticky' => $this->getBooleanScalarTypeResolver(),
-                'excludeSticky' => $this->getBooleanScalarTypeResolver(),
+                'isSticky' => $this->getBooleanScalarTypeResolver(),
             ]
         );
     }
@@ -81,8 +81,8 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'ignoreSticky' => $this->getTranslationAPI()->__('Ignore post stickiness. `false` (default): move sticky posts to the start of the set. `true`: do not move sticky posts to the start of the set. See: https://developer.wordpress.org/reference/classes/wp_query/#pagination-parameters', 'posts'),
-            'excludeSticky' => $this->getTranslationAPI()->__('Exclude sticky posts', 'posts'),
+            'ignoreSticky' => $this->getTranslationAPI()->__('Ignore post stickiness. `false` (default): move sticky posts to the start of the set. `true`: do not move sticky posts to the start of the set', 'posts'),
+            'isSticky' => $this->getTranslationAPI()->__('Filter by sticky posts', 'posts'),
             default => $inputFieldDescription,
         };
     }
@@ -96,11 +96,8 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldDefaultValue;
         }
         return match ($inputFieldName) {
-            'ignoreSticky',
-            'excludeSticky'
-                => false,
-            default
-                => $inputFieldDefaultValue,
+            'ignoreSticky' => false,
+            default => $inputFieldDefaultValue,
         };
     }
 
@@ -114,7 +111,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
         }
         return match ($inputFieldName) {
             'ignoreSticky' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_IGNORE_STICKY],
-            'excludeSticky' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_STICKY],
+            'isSticky' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_IS_STICKY],
             default => $inputFieldFilterInput,
         };
     }
