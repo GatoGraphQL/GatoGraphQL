@@ -20,13 +20,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.user`
 - Filter elements via the new `filter` field argument
 - Pagination and sorting fields are accessed via `pagination` and `sort` field args
-- Filter custom post fields (`Root.posts`, `User.posts`, etc) via new arguments:
+- Filter custom post fields (`Root.posts`, `User.posts`, etc) via new inputs:
   - `tagIDs: [ID]`
   - `tagSlugs: [String]`
   - `categoryIDs: [ID]`
   - `authorIDs: [ID]`
   - `authorSlug: String`
   - `excludeAuthorIDs: [ID]`
+  - `hasPassword: Bool`
 - Exclude results via field arg `excludeIDs`
 - Added fields to retrieve the logged-in user's custom posts:
   - `Root.myCustomPost: CustomPostUnion`
@@ -35,9 +36,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Query properties for custom post fields:
   - `modified: DateTime`
   - `modifiedAsString: String`
-  - `isSticky: Bool!`
 - Query properties for posts:
   - `Post.postFormat: String!`
+  - `isSticky: Bool!`
 - Fetch a page's parent and children, and the menu order:
   `Page.parent: Page`
   `Page.children: [Page]!`

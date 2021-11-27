@@ -8,6 +8,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFiel
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use WP_Post;
@@ -15,6 +16,7 @@ use WP_Post;
 class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -23,6 +25,14 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -36,6 +46,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return [
             'postFormat',
+            'isSticky',
         ];
     }
 
@@ -43,6 +54,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'postFormat' => $this->getTranslationAPI()->__('Retrieve the format slug for a post', 'posts'),
+            'isSticky' => $this->getTranslationAPI()->__('Determines whether a custom post is sticky', 'customposts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -51,6 +63,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'postFormat' => $this->getStringScalarTypeResolver(),
+            'isSticky' => $this->getBooleanScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -58,8 +71,11 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'postFormat' => SchemaTypeModifiers::NON_NULLABLE,
-            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            'postFormat',
+            'isSticky'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            default
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
@@ -88,6 +104,8 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                     return 'standard';
                 }
                 return $postFormat;
+            case 'isSticky':
+                return \is_sticky($post->ID);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

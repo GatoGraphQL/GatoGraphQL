@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPWPSchema\CustomPosts\Hooks\:
+    PoPWPSchema\Posts\Hooks\:
         resource: '../src/Hooks/*'
 
-    PoPWPSchema\CustomPosts\FilterInputProcessors\:
+    PoPWPSchema\Posts\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'

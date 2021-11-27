@@ -106,14 +106,17 @@ class DateQueryInputObjectTypeResolver extends UpstreamDateQueryInputObjectTypeR
         if (is_array($inputValue)) {
             $innerQueries = [];
             parent::integrateInputValueToFilteringQueryArgs($innerQueries, $inputValue);
-            $query['date_query'] = [];
+            $dateQuery = [];
             // The "relation" is defined on the first element
             if (isset($innerQueries[0]['date_query']['relation'])) {
-                $query['date_query']['relation'] = $innerQueries[0]['date_query']['relation'];
+                $dateQuery['relation'] = $innerQueries[0]['date_query']['relation'];
             }
             // Re-create an array with all the subelements
             foreach ($innerQueries as $innerQuery) {
-                $query['date_query'][] = $innerQuery['date_query'];
+                $dateQuery[] = $innerQuery['date_query'];
+            }
+            if ($dateQuery !== []) {
+                $query['date_query'] = $dateQuery;
             }
             return;
         }
