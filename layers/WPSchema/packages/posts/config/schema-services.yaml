@@ -5,3 +5,6 @@ services:
 
     PoPWPSchema\Posts\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
+
+    PoPWPSchema\Posts\SchemaHooks\:
+        resource: '../src/SchemaHooks/*'

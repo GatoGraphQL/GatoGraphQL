@@ -34,12 +34,6 @@ class InputObjectTypeHookSet extends AbstractHookSet
             2
         );
         $this->getHooksAPI()->addFilter(
-            HookNames::ADMIN_INPUT_FIELD_NAMES,
-            [$this, 'getAdminInputFieldNames'],
-            10,
-            2
-        );
-        $this->getHooksAPI()->addFilter(
             HookNames::INPUT_FIELD_DESCRIPTION,
             [$this, 'getInputFieldDescription'],
             10,
