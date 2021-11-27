@@ -6,3 +6,6 @@ services:
 
     PoPWPSchema\CustomPosts\Hooks\:
         resource: '../src/Hooks/*'
+
+    PoPWPSchema\CustomPosts\FilterInputProcessors\:
+        resource: '../src/FilterInputProcessors/*'
