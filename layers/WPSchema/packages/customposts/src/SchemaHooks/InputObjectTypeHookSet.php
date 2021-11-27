@@ -46,7 +46,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
             3
         );
         $this->getHooksAPI()->addFilter(
-            HookNames::INPUT_FIELD_DESCRIPTION,
+            HookNames::INPUT_FIELD_DEFAULT_VALUE,
             [$this, 'getInputFieldDefaultValue'],
             10,
             3
@@ -111,7 +111,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
 
     public function getInputFieldDefaultValue(
-        ?string $inputFieldDefaultValue,
+        mixed $inputFieldDefaultValue,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName
     ): mixed {
