@@ -21,10 +21,6 @@ class QueryHookSet extends AbstractHookSet
 
     public function convertCustomPostsQuery($query, array $options): array
     {
-        if (isset($query['ignore-sticky'])) {
-            $query['ignore_sticky_posts'] = $query['ignore-sticky'];
-            unset($query['ignore-sticky']);
-        }
         if (isset($query['is-sticky'])) {
             $stickyPosts = \get_option('sticky_posts', []);
             // Add the sticky posts to whichever posts were already set
