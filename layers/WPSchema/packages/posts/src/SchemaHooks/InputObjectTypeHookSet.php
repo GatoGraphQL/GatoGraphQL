@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\CustomPosts\SchemaHooks;
+namespace PoPWPSchema\Posts\SchemaHooks;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
-use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostsFilterInputObjectTypeResolver;
-use PoPWPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
+use PoPSchema\Posts\TypeResolvers\InputObjectType\AbstractPostsFilterInputObjectTypeResolver;
+use PoPWPSchema\Posts\FilterInputProcessors\FilterInputProcessor;
 
 class InputObjectTypeHookSet extends AbstractHookSet
 {
@@ -66,32 +66,14 @@ class InputObjectTypeHookSet extends AbstractHookSet
         array $inputFieldNameTypeResolvers,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): array {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!($inputObjectTypeResolver instanceof AbstractPostsFilterInputObjectTypeResolver)) {
             return $inputFieldNameTypeResolvers;
         }
         return array_merge(
             $inputFieldNameTypeResolvers,
             [
-                'hasPassword' => $this->getBooleanScalarTypeResolver(),
-            ]
-        );
-    }
-
-    /**
-     * @param string[] $inputFieldNames
-     * @return string[]
-     */
-    public function getAdminInputFieldNames(
-        array $inputFieldNames,
-        InputObjectTypeResolverInterface $inputObjectTypeResolver,
-    ): array {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
-            return $inputFieldNames;
-        }
-        return array_merge(
-            $inputFieldNames,
-            [
-                'hasPassword' => $this->getBooleanScalarTypeResolver(),
+                'ignoreSticky' => $this->getBooleanScalarTypeResolver(),
+                'excludeSticky' => $this->getBooleanScalarTypeResolver(),
             ]
         );
     }
@@ -101,11 +83,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName
     ): ?string {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!($inputObjectTypeResolver instanceof AbstractPostsFilterInputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'hasPassword' => $this->getTranslationAPI()->__('Include elements which are password-protected. Pass `null` to fetch both with/out password', 'customposts'),
+            'ignoreSticky' => $this->getTranslationAPI()->__('Ignore custom post stickiness. `false` (default): move sticky custom posts to the start of the set. `true`: do not move sticky custom posts to the start of the set. See: https://developer.wordpress.org/reference/classes/wp_query/#pagination-parameters', 'customposts'),
+            'excludeSticky' => $this->getTranslationAPI()->__('Exclude sticky custom posts', 'customposts'),
             default => $inputFieldDescription,
         };
     }
@@ -115,12 +98,15 @@ class InputObjectTypeHookSet extends AbstractHookSet
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName
     ): mixed {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!($inputObjectTypeResolver instanceof AbstractPostsFilterInputObjectTypeResolver)) {
             return $inputFieldDefaultValue;
         }
         return match ($inputFieldName) {
-            'hasPassword' => false,
-            default => $inputFieldDefaultValue,
+            'ignoreSticky',
+            'excludeSticky'
+                => false,
+            default
+                => $inputFieldDefaultValue,
         };
     }
 
@@ -129,11 +115,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
     ): ?array {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!($inputObjectTypeResolver instanceof AbstractPostsFilterInputObjectTypeResolver)) {
             return $inputFieldFilterInput;
         }
         return match ($inputFieldName) {
-            'hasPassword' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_HAS_PASSWORD],
+            'ignoreSticky' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_IGNORE_STICKY],
+            'excludeSticky' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_STICKY],
             default => $inputFieldFilterInput,
         };
     }

@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPWPSchema\Posts\Hooks\:
+        resource: '../src/Hooks/*'
+
+    PoPWPSchema\Posts\FilterInputProcessors\:
+        resource: '../src/FilterInputProcessors/*'
