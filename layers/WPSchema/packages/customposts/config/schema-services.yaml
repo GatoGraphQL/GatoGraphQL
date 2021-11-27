@@ -3,8 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPWPSchema\CustomPosts\FieldResolvers\:
-        resource: '../src/FieldResolvers/*'
-
     PoPWPSchema\CustomPosts\SchemaHooks\:
         resource: '../src/SchemaHooks/*'
