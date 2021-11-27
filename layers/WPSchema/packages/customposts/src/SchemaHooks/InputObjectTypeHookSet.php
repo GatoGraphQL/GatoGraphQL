@@ -73,6 +73,8 @@ class InputObjectTypeHookSet extends AbstractHookSet
             $inputFieldNameTypeResolvers,
             [
                 'hasPassword' => $this->getBooleanScalarTypeResolver(),
+                'ignoreSticky' => $this->getBooleanScalarTypeResolver(),
+                'excludeSticky' => $this->getBooleanScalarTypeResolver(),
             ]
         );
     }
@@ -106,6 +108,8 @@ class InputObjectTypeHookSet extends AbstractHookSet
         }
         return match ($inputFieldName) {
             'hasPassword' => $this->getTranslationAPI()->__('Include elements which are password-protected. Pass `null` to fetch both with/out password', 'customposts'),
+            'ignoreSticky' => $this->getTranslationAPI()->__('Ignore custom post stickiness. `false` (default): move sticky custom posts to the start of the set. `true`: do not move sticky custom posts to the start of the set. See: https://developer.wordpress.org/reference/classes/wp_query/#pagination-parameters', 'customposts'),
+            'excludeSticky' => $this->getTranslationAPI()->__('Exclude sticky custom posts', 'customposts'),
             default => $inputFieldDescription,
         };
     }
@@ -119,8 +123,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldDefaultValue;
         }
         return match ($inputFieldName) {
-            'hasPassword' => false,
-            default => $inputFieldDefaultValue,
+            'hasPassword',
+            'ignoreSticky',
+            'excludeSticky'
+                => false,
+            default
+                => $inputFieldDefaultValue,
         };
     }
 
@@ -134,6 +142,8 @@ class InputObjectTypeHookSet extends AbstractHookSet
         }
         return match ($inputFieldName) {
             'hasPassword' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_HAS_PASSWORD],
+            'ignoreSticky' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_IGNORE_STICKY],
+            'excludeSticky' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_STICKY],
             default => $inputFieldFilterInput,
         };
     }

@@ -31,6 +31,18 @@ class QueryHookSet extends AbstractHookSet
             $query['has_password'] = $query['has-password'];
             unset($query['has-password']);
         }
+        if (isset($query['ignore-sticky'])) {
+            $query['ignore_sticky_posts'] = $query['ignore-sticky'];
+            unset($query['ignore-sticky']);
+        }
+        if (isset($query['exclude-sticky'])) {
+            // Add the sticky posts to whichever post was already set to be excluded
+            $query['post__not_in'] = array_merge(
+                $query['post__not_in'] ?? [],
+                \get_option('sticky_posts', [])
+            );
+            unset($query['exclude-sticky']);
+        }
         return $query;
     }
 
