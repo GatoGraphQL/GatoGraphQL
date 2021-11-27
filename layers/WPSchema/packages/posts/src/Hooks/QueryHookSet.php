@@ -25,7 +25,7 @@ class QueryHookSet extends AbstractHookSet
             $query['ignore_sticky_posts'] = $query['ignore-sticky'];
             unset($query['ignore-sticky']);
         }
-        if (isset($query['exclude-sticky'])) {
+        if (isset($query['exclude-sticky']) && $query['exclude-sticky']) {
             // Add the sticky posts to whichever post was already set to be excluded
             $query['post__not_in'] = array_merge(
                 $query['post__not_in'] ?? [],
