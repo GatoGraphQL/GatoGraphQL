@@ -342,7 +342,7 @@ _Filtering results **in GraphQL**:_
 
 ```graphql
 query {
-  posts(search: "something") {
+  posts(filter:{ search: "template" }) {
     id
     title
     date
@@ -350,11 +350,11 @@ query {
 }
 ```
 
-_Filtering results **in PoP** ([View query in browser](https://nextapi.getpop.org/api/graphql/?query=posts(searchfor:template).id|title|date)):_
+_Filtering results **in PoP** ([View query in browser](https://nextapi.getpop.org/api/graphql/?query=posts(filter:{search:template}).id|title|date)):_
 
 ```php
 /?query=
-  posts(search:something).
+  posts(filter: { search: template }).
     id|
     title|
     date
@@ -367,33 +367,33 @@ query {
   posts {
     id
     title
-    date(format: "d/m/Y")
+    dateAsString(format: "d/m/Y")
   }
 }
 ```
 
-_Formatting output **in PoP** ([View query in browser](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|date(format:d/m/Y))):_
+_Formatting output **in PoP** ([View query in browser](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|dateAsString(format:d/m/Y))):_
 
 ```php
 /?query=
   posts.
     id|
     title|
-    date(format:d/m/Y)
+    dateAsString(format:d/m/Y)
 ```
 
 ### Optional property name in field arguments
 
 Defining the argument name can be ignored if it can be deduced from the schema (for instance, the name can be deduced from the position of the property within the arguments in the schema definition).
 
-_**In PoP** ([View query in browser](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|date(d/m/Y))):_
+_**In PoP** ([View query in browser](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|dateAsString(d/m/Y))):_
 
 ```php
 /?query=
   posts.
     id|
     title|
-    date(d/m/Y)
+    dateAsString(d/m/Y)
 ```
 
 ### Aliases
@@ -412,14 +412,14 @@ query {
 }
 ```
 
-_**In PoP** ([View query in browser](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|date(d/m/Y)@formattedDate)):_
+_**In PoP** ([View query in browser](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|dateAsString(d/m/Y)@formattedDate)):_
 
 ```php
 /?query=
   posts.
     id|
     title|
-    date(d/m/Y)@formattedDate
+    dateAsString(d/m/Y)@formattedDate
 ```
 
 Please notice that aliases are optional, differently than in GraphQL. [In GraphQL](https://graphql.org/learn/queries/#aliases), because the field arguments are not part of the field in the response, when querying the same field with different arguments it is required to use an alias to differentiate them. In PoP, however, field arguments are part of the field in the response, which already differentiates the fields.
@@ -437,14 +437,14 @@ query {
 }
 ```
 
-_**In PoP** ([View query in browser](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|date|date(d/m/Y))):_
+_**In PoP** ([View query in browser](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|dateAsString|dateAsString(d/m/Y))):_
 
 ```php
 /?query=posts.
   id|
   title|
-  date|
-  date(d/m/Y)
+  dateAsString|
+  dateAsString(d/m/Y)
 ```
 
 ### Bookmarks
@@ -531,13 +531,13 @@ The variable name must be prepended with `$`, and its value in the request can b
 
 _API call **in GraphQL**:_
 
-```phphtml
+```json
 {
   "query":"query ($format: String) {
     posts {
       id
       title
-      date(format: $format)
+      dateAsString(format: $format)
     }
   }",
   "variables":"{
@@ -546,7 +546,7 @@ _API call **in GraphQL**:_
 }
 ```
 
-_**In PoP** (View in browser: [query 1](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|date($format)&format=d/m/Y), [query 2](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|date($format)&variables[format]=d/m/Y)):_
+_**In PoP** (View in browser: [query 1](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|dateAsString($format)&format=d/m/Y), [query 2](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|dateAsString($format)&variables[format]=d/m/Y)):_
 
 ```php
 1. /?
@@ -555,7 +555,7 @@ _**In PoP** (View in browser: [query 1](https://nextapi.getpop.org/api/graphql/?
     posts.
       id|
       title|
-      date($format)
+      dateAsString($format)
 
 2. /?
   variables[format]=d/m/Y&
@@ -563,7 +563,7 @@ _**In PoP** (View in browser: [query 1](https://nextapi.getpop.org/api/graphql/?
     posts.
       id|
       title|
-      date($format)
+      dateAsString($format)
 ```
 
 ### Fragments
@@ -755,7 +755,7 @@ The real benefit from having operators comes when they can receive the output fr
 
 In order to distinguish if the input to the field is a string or the name of a field, the field must have field arguments brackets `(...)` (if no arguments, then simply `()`). For instance, `"id"` means the string "id", and `"id()"` means to execute and pass the result from field "id".
 
-_**In PoP** (View in browser: <a href="https://nextapi.getpop.org/api/graphql/?query=posts.hasComments|not(hasComments())">query 1</a>, <a href="https://nextapi.getpop.org/api/graphql/?query=posts.hasComments|hasFeaturedImage|or([hasComments(),hasFeaturedImage()])">query 2</a>, <a href="https://nextapi.getpop.org/api/graphql/?query=var(fetching-site),posts.hasFeaturedImage|and([hasFeaturedImage(), var(fetching-site)])">query 3</a>, <a href="https://nextapi.getpop.org/api/graphql/?query=posts.if(hasComments(),sprintf(Post with title '%s' has %s comments,[title(), commentCount()]),sprintf(Post with ID %s was created on %s, [id(),date(d/m/Y)]))@postDesc">query 4</a>, <a href="https://nextapi.getpop.org/api/graphql/?query=users.name|equals(name(), leo)">query 5</a>, <a href="https://nextapi.getpop.org/api/graphql/?query=posts.featuredImage|isNull(featuredImage())">query 6</a>):_
+_**In PoP** (View in browser: <a href="https://nextapi.getpop.org/api/graphql/?query=posts.hasComments|not(hasComments())">query 1</a>, <a href="https://nextapi.getpop.org/api/graphql/?query=posts.hasComments|hasFeaturedImage|or([hasComments(),hasFeaturedImage()])">query 2</a>, <a href="https://nextapi.getpop.org/api/graphql/?query=var(fetching-site),posts.hasFeaturedImage|and([hasFeaturedImage(), var(fetching-site)])">query 3</a>, <a href="https://nextapi.getpop.org/api/graphql/?query=posts.if(hasComments(),sprintf(Post with title '%s' has %s comments,[title(), commentCount()]),sprintf(Post with ID %s was created on %s, [id(),dateAsString(d/m/Y)]))@postDesc">query 4</a>, <a href="https://nextapi.getpop.org/api/graphql/?query=users.name|equals(name(), leo)">query 5</a>, <a href="https://nextapi.getpop.org/api/graphql/?query=posts.featuredImage|isNull(featuredImage())">query 6</a>):_
 
 ```php
 1. /?query=
@@ -793,7 +793,7 @@ _**In PoP** (View in browser: <a href="https://nextapi.getpop.org/api/graphql/?q
     sprintf(
       Post with ID %s was created on %s, [
       id(),
-      date(d/m/Y)
+      dateAsString(d/m/Y)
     ])
   )@postDesc
 
@@ -951,7 +951,7 @@ Different elements can be combined, such as the following examples.
 
 A fragment can contain nested paths, variables, directives and other fragments:
 
-_**In PoP** ([View query in browser](https://nextapi.getpop.org/api/graphql/?query=posts(limit:$limit).--postData|author.posts(limit:$limit).--postData&postData=id|title|--nestedPostData|date(format:$format)&nestedPostData=comments<include(if:$include)>.id|content&format=d/m/Y&include=true&limit=3)):_
+_**In PoP** ([View query in browser](https://nextapi.getpop.org/api/graphql/?query=posts(pagination:{limit:$limit}).--postData|author.posts(pagination:{limit:$limit}).--postData&postData=id|title|--nestedPostData|dateAsString(format:$format)&nestedPostData=comments<include(if:$include)>.id|content&format=d/m/Y&include=true&limit=3)):_
 
 ```php
 /?
@@ -959,7 +959,7 @@ postData=
   id|
   title|
   --nestedPostData|
-  date(format:$format)&
+  dateAsString(format:$format)&
 nestedPostData=
   comments<
     include(if:$include)
@@ -972,13 +972,19 @@ limit=3&
 order=title&
 query=
   posts(
-    limit:$limit,
-    order:$order
+    pagination: {
+      limit:$limit
+    },
+    sort: {
+      order:$order
+    }
   ).
     --postData|
     author.
       posts(
-        limit:$limit
+        pagination: {
+          limit:$limit
+        }
       ).
         --postData
 ```

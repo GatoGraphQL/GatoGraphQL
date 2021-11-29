@@ -63,7 +63,7 @@ query=
     >
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?query=posts(limit:5)@posts.id%7Cdate(format:d/m/Y)%7Ctitle<skip(if:false)>">View query results</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5})@posts.id%7CdateAsString(format:d/m/Y)%7Ctitle<skip(if:false)>">View query results</a>
 
 The syntax has the following elements:
 
@@ -189,19 +189,22 @@ In the example below, field `post` is injected, in its field argument `id`, the 
 ```less
 /?query=
   post(
-    id: arrayItem(
-      posts(
-        limit: 1,
-        order: date|DESC
-      ), 
-    0)
+    by: {
+      id: arrayItem(
+        posts(
+          pagination: { limit: 1 },
+          sort: {by: DATE, order: DESC}
+        ),
+        0
+      )
+    }
   )@latestPost.
     id|
     title|
     date
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?query=post(id:arrayItem(posts(limit:1,order:date%7CDESC),0))@latestPost.id%7Ctitle%7Cdate">View query results</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=post(by:{id:arrayItem(posts(pagination:{limit:1},sort:{by:date,order:DESC}),0)})@latestPost.id%7Ctitle%7Cdate">View query results</a>
 
 To tell if a field argument must be considered a field or a string, if it contains `()` it is a field, otherwise it is a string (eg: `posts()` is a field, and `posts` is a string)
 
@@ -498,7 +501,7 @@ In the examples below, the Google Translate API is called the minimum possible a
 // containing 10 pieces of text to translate:
 // 2 fields (title and excerpt) for 5 posts
 /?query=
-  posts(limit:5).
+  posts(pagination:{ limit: 5 }).
     --props|
     --props@spanish<
       translate(en,es)
@@ -511,7 +514,7 @@ props=
 // every language (Spanish, French and German),
 // 10 strings each, all calls are concurrent
 /?query=
-  posts(limit:5).
+  posts(pagination: { limit: 5 }).
     --props|
     --props@spanish<
       translate(en,es)
@@ -527,9 +530,9 @@ props=
   excerpt
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?query=posts(limit:5).--props%7C--props@spanish<translate(en,es)>&amp;props=title%7Cexcerpt">View query results #1</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5}).--props%7C--props@spanish<translate(en,es)>&amp;props=title%7Cexcerpt">View query results #1</a>
 
-<a href="https://newapi.getpop.org/api/graphql/?query=posts(limit:5).--props%7C--props@spanish%3Ctranslate(en,es)%3E%7C--props@french%3Ctranslate(en,fr)%3E%7C--props@german%3Ctranslate(en,de)%3E&amp;props=title%7Cexcerpt">View query results #2</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5}).--props%7C--props@spanish%3Ctranslate(en,es)%3E%7C--props@french%3Ctranslate(en,fr)%3E%7C--props@german%3Ctranslate(en,de)%3E&amp;props=title%7Cexcerpt">View query results #2</a>
 
 ### Interact with APIs from the back-end
 
@@ -538,7 +541,7 @@ Example calling the Google Translate API from the back-end, as coded within dire
 ```less
 //1. <translate> calls the Google Translate API
 /?query=
-  posts(limit:5).
+  posts(pagination: { limit: 5 }).
     title|
     title@spanish<
       translate(en,es)
@@ -546,7 +549,7 @@ Example calling the Google Translate API from the back-end, as coded within dire
     
 //2. Translate to Spanish and back to English
 /?query=
-  posts(limit:5).
+  posts(pagination: { limit: 5 }).
     title|
     title@translateAndBack<
       translate(en,es),
@@ -556,18 +559,18 @@ Example calling the Google Translate API from the back-end, as coded within dire
 //3. Change the provider through arguments
 // (link gives error: Azure is not implemented)
 /?query=
-  posts(limit:5).
+  posts(pagination: { limit: 5 }).
     title|
     title@spanish<
       translate(en,es,provider:azure)
     >
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?query=posts(limit:5).title%7Ctitle@spanish%3Ctranslate(en,es)%3E">View query results #1</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5}).title%7Ctitle@spanish%3Ctranslate(en,es)%3E">View query results #1</a>
 
-<a href="https://newapi.getpop.org/api/graphql/?query=posts(limit:5).title%7Ctitle@translateAndBack%3Ctranslate(en,es),translate(es,en)%3E">View query results #2</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5}).title%7Ctitle@translateAndBack%3Ctranslate(en,es),translate(es,en)%3E">View query results #2</a>
 
-<a href="https://newapi.getpop.org/api/graphql/?query=posts(limit:5).title%7Ctitle@spanish%3Ctranslate(en,es,provider:azure)%3E">View query results #3</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5}).title%7Ctitle@spanish%3Ctranslate(en,es,provider:azure)%3E">View query results #3</a>
 
 ### Interact with APIs from the client-side
 
@@ -898,13 +901,13 @@ Issues are handled differently depending on their severity:
 
 //2. Schema warning
 /?query=
-  posts(limit:3.5).
+  posts(pagination: { limit:3.5 }).
     title
 
 //3. Database warning
 /?query=
   users.
-    posts(limit:name()).
+    posts(pagination: { limit:name() }).
       title
 
 //4. Query error
@@ -923,9 +926,9 @@ Issues are handled differently depending on their severity:
 
 <a href="https://newapi.getpop.org/api/graphql/?query=posts.title%7CisPublished">View query results #1</a>
 
-<a href="https://newapi.getpop.org/api/graphql/?query=posts(limit:3.5).title">View query results #2</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:3.5}).title">View query results #2</a>
 
-<a href="https://newapi.getpop.org/api/graphql/?query=users.posts(limit:name()).title">View query results #3</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=users.posts(pagination:{limit:name()}).title">View query results #3</a>
 
 <a href="https://newapi.getpop.org/api/graphql/?query=posts.id%5Bbook%5D(key:value)">View query results #4</a>
 
@@ -937,11 +940,11 @@ When an argument has its type declared in the schema, its inputs will be casted 
 
 ```less
 /?query=
-  posts(limit:3.5).
+  posts(pagination:{limit:3.5}).
     title
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?query=posts(limit:3.5).title">View query results</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:3.5}).title">View query results</a>
 
 ### Issues bubble upwards
 
@@ -949,11 +952,11 @@ If a field or directive fails and it is input to another field, this one may als
 
 ```less
 /?query=
-  post(divide(a,4)).
+  post(by: { id: divide(a,4) }).
     title
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?query=post(divide(a,4)).title">View query results</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=post(by:{id:divide(a,4)}).title">View query results</a>
 
 ### Path to the issue
 

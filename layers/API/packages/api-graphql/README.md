@@ -169,7 +169,7 @@ Let's use constraints with `^` and `>` to select the version. In [this query](ht
 
 ![Querying a field using version constraints](https://raw.githubusercontent.com/getpop/api-graphql/master/assets/images/versioning-field-directives-2.jpg)
 
-[This query](https://newapi.getpop.org/graphiql/?query=query%20%7B%0A%20%20post(id%3A1)%20%7B%0A%20%20%20%20titleCase%3Atitle%40makeTitle(versionConstraint%3A%22%5E0.1%22)%0A%20%20%20%20upperCase%3Atitle%40makeTitle(versionConstraint%3A%22%5E0.2%22)%0A%20%20%7D%0A%7D) demonstrates it for directives:
+[This query](https://newapi.getpop.org/graphiql/?query=query%20%7B%0A%20%20post(by%3A{id%3A1})%20%7B%0A%20%20%20%20titleCase%3Atitle%40makeTitle(versionConstraint%3A%22%5E0.1%22)%0A%20%20%20%20upperCase%3Atitle%40makeTitle(versionConstraint%3A%22%5E0.2%22)%0A%20%20%7D%0A%7D) demonstrates it for directives:
 
 ![Querying a directive using version constraints](https://raw.githubusercontent.com/getpop/api-graphql/master/assets/images/versioning-field-directives-3.jpg)
 
