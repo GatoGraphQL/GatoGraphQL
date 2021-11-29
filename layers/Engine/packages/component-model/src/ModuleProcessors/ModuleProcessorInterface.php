@@ -36,7 +36,7 @@ interface ModuleProcessorInterface
     public function getImmutableDatasetsettings(array $module, array &$props): array;
     public function getDatasetDatabaseKeys(array $module, array &$props): array;
     public function getDatasource(array $module, array &$props): string;
-    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array;
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array | null;
     public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface;
     public function getComponentMutationResolverBridge(array $module): ?ComponentMutationResolverBridgeInterface;
     public function prepareDataPropertiesAfterMutationExecution(array $module, array &$props, array &$data_properties): void;

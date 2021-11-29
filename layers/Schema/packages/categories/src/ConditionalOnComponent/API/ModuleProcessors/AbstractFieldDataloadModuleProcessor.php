@@ -38,7 +38,7 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
         );
     }
 
-    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array | null
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY:

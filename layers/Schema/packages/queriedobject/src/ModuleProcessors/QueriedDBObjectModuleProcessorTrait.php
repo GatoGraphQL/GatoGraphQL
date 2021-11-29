@@ -8,9 +8,9 @@ use PoP\ComponentModel\State\ApplicationState;
 
 trait QueriedDBObjectModuleProcessorTrait
 {
-    protected function getQueriedDBObjectID(array $module, array &$props, &$data_properties)
+    protected function getQueriedDBObjectID(array $module, array &$props, &$data_properties): string | int | array | null
     {
         $vars = ApplicationState::getVars();
-        return $vars['routing-state']['queried-object-id'];
+        return $vars['routing-state']['queried-object-id'] ?? null;
     }
 }
