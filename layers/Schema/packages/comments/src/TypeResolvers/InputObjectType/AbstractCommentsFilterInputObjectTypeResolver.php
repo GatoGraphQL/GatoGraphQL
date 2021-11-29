@@ -12,7 +12,7 @@ use PoPSchema\Comments\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
 use PoPSchema\Comments\TypeResolvers\EnumType\CommentTypeEnumTypeResolver;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor as CustomPostsFilterInputProcessor;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver;
@@ -22,6 +22,7 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     private ?DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver = null;
     private ?CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver = null;
     private ?CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver = null;
+    private ?CustomPostEnumTypeResolver $customPostEnumTypeResolver = null;
 
     final public function setDateQueryInputObjectTypeResolver(DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver): void
     {
@@ -46,6 +47,14 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     final protected function getCommentTypeEnumTypeResolver(): CommentTypeEnumTypeResolver
     {
         return $this->commentTypeEnumTypeResolver ??= $this->instanceManager->getInstance(CommentTypeEnumTypeResolver::class);
+    }
+    final public function setCustomPostEnumTypeResolver(CustomPostEnumTypeResolver $customPostEnumTypeResolver): void
+    {
+        $this->customPostEnumTypeResolver = $customPostEnumTypeResolver;
+    }
+    final protected function getCustomPostEnumTypeResolver(): CustomPostEnumTypeResolver
+    {
+        return $this->customPostEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostEnumTypeResolver::class);
     }
 
     public function getAdminInputFieldNames(): array
@@ -84,7 +93,7 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
                 'customPostID' => $this->getIDScalarTypeResolver(),
                 'customPostIDs' => $this->getIDScalarTypeResolver(),
                 'excludeCustomPostIDs' => $this->getIDScalarTypeResolver(),
-                'customPostTypes' => $this->getStringScalarTypeResolver(),
+                'customPostTypes' => $this->getCustomPostEnumTypeResolver(),
             ] : []
         );
     }
@@ -116,7 +125,7 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
             'types' => [
                 CommentTypes::COMMENT,
             ],
-            'customPostTypes' => CustomPostUnionTypeHelpers::getTargetObjectTypeResolverCustomPostTypes(),
+            'customPostTypes' => $this->getCustomPostEnumTypeResolver()->getConsolidatedEnumValues(),
             default => parent::getInputFieldDefaultValue($inputFieldName)
         };
     }
