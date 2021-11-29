@@ -132,6 +132,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Media.modifiedAsString: String`
   - `Media.mimeType: String`
   - `Media.sizes: String`
+- Converted from string to Enum type whenever possible
+  - Custom post type and status
+  - Comment type and status
+  - "Order by" property, for all entities
 
 ### Added
 
