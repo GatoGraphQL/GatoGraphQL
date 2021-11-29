@@ -10,7 +10,6 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProces
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;

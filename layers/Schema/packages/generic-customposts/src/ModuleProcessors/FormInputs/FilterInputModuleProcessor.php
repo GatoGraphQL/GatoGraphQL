@@ -9,23 +9,22 @@ use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 use PoPSchema\GenericCustomPosts\FilterInputProcessors\FilterInputProcessor;
+use PoPSchema\GenericCustomPosts\TypeResolvers\EnumType\GenericCustomPostEnumTypeResolver;
 
 class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
     public const MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES = 'filterinput-genericcustomposttypes';
 
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?GenericCustomPostEnumTypeResolver $genericCustomPostEnumTypeResolver = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setGenericCustomPostEnumTypeResolver(GenericCustomPostEnumTypeResolver $genericCustomPostEnumTypeResolver): void
     {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->genericCustomPostEnumTypeResolver = $genericCustomPostEnumTypeResolver;
     }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getGenericCustomPostEnumTypeResolver(): GenericCustomPostEnumTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        return $this->genericCustomPostEnumTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostEnumTypeResolver::class);
     }
 
     public function getModulesToProcess(): array
@@ -68,7 +67,7 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->getGenericCustomPostEnumTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -84,7 +83,7 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
     public function getFilterInputDefaultValue(array $module): mixed
     {
         return match ($module[1]) {
-            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => ComponentConfiguration::getGenericCustomPostTypes(),
+            self::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->getGenericCustomPostEnumTypeResolver()->getConsolidatedEnumValues(),
             default => null,
         };
     }
