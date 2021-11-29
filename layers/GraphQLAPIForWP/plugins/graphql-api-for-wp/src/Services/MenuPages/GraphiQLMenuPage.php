@@ -72,7 +72,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
 
         \wp_enqueue_style(
             'graphql-api-graphiql',
-            $mainPluginURL . 'assets/css/vendors/graphiql.min.css',
+            $mainPluginURL . 'assets/css/vendors/graphiql.1.5.7.min.css',
             array(),
             $mainPluginVersion
         );
@@ -82,7 +82,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
 
         \wp_enqueue_script(
             'graphql-api-graphiql',
-            $mainPluginURL . 'assets/js/vendors/graphiql.min.js',
+            $mainPluginURL . 'assets/js/vendors/graphiql.1.5.7.min.js',
             array('graphql-api-react-dom'),
             $mainPluginVersion,
             true
