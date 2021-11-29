@@ -1159,7 +1159,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             if ($fieldOrDirectiveArgTypeResolver instanceof DeprecatableInputTypeResolverInterface) {
                 $deprecationMessages = $this->getInputCoercingService()->getInputValueDeprecationMessages(
                     $fieldOrDirectiveArgTypeResolver,
-                    $argValue,
+                    $coercedArgValue,
                     $fieldOrDirectiveArgIsArrayType,
                     $fieldOrDirectiveArgIsArrayOfArraysType,
                 );
