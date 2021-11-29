@@ -64,6 +64,7 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
             \PoPWPSchema\Menus\Component::class,
             \PoPWPSchema\Pages\Component::class,
             \PoPWPSchema\Posts\Component::class,
+            \PoPWPSchema\SchemaCommons\Component::class,
             \PoPWPSchema\Users\Component::class,
         ];
     }
