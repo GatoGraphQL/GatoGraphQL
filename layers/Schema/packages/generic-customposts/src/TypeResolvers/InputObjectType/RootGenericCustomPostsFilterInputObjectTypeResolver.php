@@ -12,7 +12,7 @@ use PoPSchema\GenericCustomPosts\TypeResolvers\EnumType\GenericCustomPostEnumTyp
 class RootGenericCustomPostsFilterInputObjectTypeResolver extends AbstractCustomPostsFilterInputObjectTypeResolver
 {
     private ?GenericCustomPostEnumTypeResolver $customPostEnumTypeResolver = null;
-    
+
     final public function setGenericCustomPostEnumTypeResolver(GenericCustomPostEnumTypeResolver $customPostEnumTypeResolver): void
     {
         $this->customPostEnumTypeResolver = $customPostEnumTypeResolver;
