@@ -11,12 +11,14 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
+use PoPWPSchema\Menus\TypeResolvers\EnumType\MenuLocationEnumTypeResolver;
 use WP_Term;
 
 class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?MenuLocationEnumTypeResolver $menuLocationEnumTypeResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -33,6 +35,14 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    final public function setMenuLocationEnumTypeResolver(MenuLocationEnumTypeResolver $menuLocationEnumTypeResolver): void
+    {
+        $this->menuLocationEnumTypeResolver = $menuLocationEnumTypeResolver;
+    }
+    final protected function getMenuLocationEnumTypeResolver(): MenuLocationEnumTypeResolver
+    {
+        return $this->menuLocationEnumTypeResolver ??= $this->instanceManager->getInstance(MenuLocationEnumTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -56,9 +66,10 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'name',
-            'slug',
-            'locations'
+            'slug'
                 => $this->getStringScalarTypeResolver(),
+            'locations'
+                => $this->getMenuLocationEnumTypeResolver(),
             'count'
                 => $this->getIntScalarTypeResolver(),
             default
