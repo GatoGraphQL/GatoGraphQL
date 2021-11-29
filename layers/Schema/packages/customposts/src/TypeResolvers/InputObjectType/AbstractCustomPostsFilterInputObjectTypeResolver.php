@@ -7,7 +7,6 @@ namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
