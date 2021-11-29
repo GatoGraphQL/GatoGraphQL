@@ -6,7 +6,7 @@ import 'graphiql/graphiql.css';
  * Adding the GraphiQL client inside Gutenberg has styles
  * overriden. Undo the undesired changes
  */
-import './graphiql.scss';
+import './graphiql-restore.scss';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
