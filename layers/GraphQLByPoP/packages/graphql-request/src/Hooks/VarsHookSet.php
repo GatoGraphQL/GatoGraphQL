@@ -201,7 +201,7 @@ class VarsHookSet extends AbstractHookSet
         // Set the operation type and, based on it, if mutations are supported
         $vars['graphql-operation-type'] = $operationType;
         $vars['are-mutations-enabled'] = $operationType === OperationTypes::MUTATION;
-        
+
         // If there was an error when parsing the query, the operationType will be null,
         // then there's no need to execute the query
         if ($operationType === null) {
