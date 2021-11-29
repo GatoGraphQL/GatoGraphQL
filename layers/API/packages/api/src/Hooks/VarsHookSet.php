@@ -73,6 +73,9 @@ class VarsHookSet extends AbstractHookSet
 
             // Enable mutations?
             $vars['are-mutations-enabled'] = ComponentConfiguration::enableMutations();
+
+            // Entry to indicate if the query has errors (eg: some GraphQL variable not submitted)
+            $vars['does-api-query-have-errors'] = false;
         }
     }
 
