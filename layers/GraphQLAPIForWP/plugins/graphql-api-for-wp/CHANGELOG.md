@@ -160,6 +160,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Performance improvement: Avoid regenerating the container when the schema is modified
 - Clicking on "Save Changes" on the Settings page will always regenerate the schema
 - Prettyprint GraphQL queries in the module docs
+- Upgraded GraphiQL to the latest `v1.5.7`
 
 ### Fixed
 
