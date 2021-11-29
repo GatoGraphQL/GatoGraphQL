@@ -407,7 +407,7 @@ query {
   posts {
     id
     title
-    formattedDate: date(format: "d/m/Y")
+    formattedDate: dateAsString(format: "d/m/Y")
   }
 }
 ```
@@ -432,7 +432,7 @@ query {
     id
     title
     date: date
-    formattedDate: date(format: "d/m/Y")
+    formattedDate: dateAsString(format: "d/m/Y")
   }
 }
 ```
