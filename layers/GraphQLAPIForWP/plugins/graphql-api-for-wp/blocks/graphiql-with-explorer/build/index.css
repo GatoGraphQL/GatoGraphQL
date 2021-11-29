@@ -164,14 +164,14 @@
   position: relative;
 }
 
-.graphiql-container .variable-editor {
+.graphiql-container .secondary-editor {
   display: flex;
   flex-direction: column;
   height: 30px;
   position: relative;
 }
 
-.graphiql-container .variable-editor-title {
+.graphiql-container .secondary-editor-title {
   background: #eeeeee;
   border-bottom: 1px solid #d6d6d6;
   border-top: 1px solid #e0e0e0;
@@ -220,7 +220,7 @@
 
 /* No `.graphiql-container` here so themes can overwrite */
 
-.result-window .CodeMirror {
+.result-window .CodeMirror.cm-s-graphiql {
   background: #f6f7f8;
 }
 
@@ -547,7 +547,7 @@ div.CodeMirror-lint-tooltip > * + * {
 /* Comment */
 
 .cm-comment {
-  color: #999;
+  color: #666;
 }
 
 /* Punctuation */
@@ -662,7 +662,7 @@ div.CodeMirror-lint-tooltip > * + * {
 .CodeMirror-linenumbers {}
 
 .CodeMirror-linenumber {
-  color: #999;
+  color: #666;
   min-width: 20px;
   padding: 0 3px 0 5px;
   text-align: right;
@@ -671,7 +671,7 @@ div.CodeMirror-lint-tooltip > * + * {
 
 .CodeMirror-guttermarker { color: black; }
 
-.CodeMirror-guttermarker-subtle { color: #999; }
+.CodeMirror-guttermarker-subtle { color: #666; }
 
 /* CURSOR */
 
@@ -756,7 +756,7 @@ div.CodeMirror-overwrite div.CodeMirror-cursor {}
 
 .cm-s-default .cm-builtin {color: #30a;}
 
-.cm-s-default .cm-bracket {color: #997;}
+.cm-s-default .cm-bracket {color: #666;}
 
 .cm-s-default .cm-tag {color: #170;}
 
@@ -766,7 +766,7 @@ div.CodeMirror-overwrite div.CodeMirror-cursor {}
 
 .cm-s-default .cm-quote {color: #090;}
 
-.cm-s-default .cm-hr {color: #999;}
+.cm-s-default .cm-hr {color: #666;}
 
 .cm-s-default .cm-link {color: #00c;}
 
@@ -1555,7 +1555,7 @@ li.CodeMirror-hint-active {
 }
 
 .graphiql-container .field-short-description {
-  color: #999;
+  color: #666;
   margin-left: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1642,7 +1642,8 @@ li.CodeMirror-hint-active {
 
 .graphiql-container .search-box {
   border-bottom: 1px solid #d3d6db;
-  display: block;
+  display: flex;
+  align-items: center;
   font-size: 14px;
   margin: -15px -15px 12px 0;
   position: relative;
@@ -1652,8 +1653,6 @@ li.CodeMirror-hint-active {
   cursor: pointer;
   display: block;
   font-size: 24px;
-  position: absolute;
-  top: -2px;
   transform: rotate(-45deg);
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -1670,7 +1669,6 @@ li.CodeMirror-hint-active {
   padding: 1px 5px 2px;
   position: absolute;
   right: 3px;
-  top: 8px;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -1774,5 +1772,6 @@ li.CodeMirror-hint-active {
 }
 
 
+.graphiql-container .doc-explorer-contents a.field-name{color:#1f61a0}
 .wp-block-graphql-api-graphiql .graphiql-container .spinner{background:none;visibility:visible;float:none;opacity:initial;filter:initial;margin:initial}.wp-block-graphql-api-graphiql .graphiql-container{height:80vh;line-height:normal;box-sizing:initial}.wp-block-graphql-api-graphiql .graphiql-container,.wp-block-graphql-api-graphiql .graphiql-container p,.wp-block-graphql-api-graphiql .graphiql-container button,.wp-block-graphql-api-graphiql .graphiql-container input{color:#141823;font-family:system,-apple-system,"San Francisco",".SFNSDisplay-Regular","Segoe UI",Segoe,"Segoe WP","Helvetica Neue",helvetica,"Lucida Grande",arial,sans-serif;font-size:14px}.wp-block-graphql-api-graphiql .graphiql-container p{margin-bottom:10px;margin-top:10px}.wp-block-graphql-api-graphiql .graphiql-container .type-name{color:#ca9800}.wp-block-graphql-api-graphiql ul.CodeMirror-hints{font-family:"Consolas","Inconsolata","Droid Sans Mono","Monaco",monospace;list-style-type:none;padding:0;padding-left:0;margin-left:0;margin-bottom:0}
 .graphiql-explorer-root>div:last-child{display:none}.wp-block-graphql-api-graphiql .graphiql-container .spinner{background:none;visibility:visible;float:none;opacity:initial;filter:initial;margin:initial}
