@@ -17,8 +17,8 @@
 	"devDependencies": {
 		"@wordpress/scripts": "^12.1.0",
 		"flow-bin": "^0.91.0",
-		"graphiql": "^0.17.5",
-		"graphql": "^14.6.0",
+		"graphiql": "^1.5.7",
+		"graphql": "^16.0.0",
 		"isomorphic-fetch": "^2.2.1"
 	},
 	"dependencies": {
