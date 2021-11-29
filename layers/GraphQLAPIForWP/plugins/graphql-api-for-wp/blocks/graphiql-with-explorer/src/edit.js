@@ -4,6 +4,7 @@ import GraphiQLExplorer from "graphiql-explorer";
 import { buildClientSchema, getIntrospectionQuery, parse } from "graphql";
 
 import "graphiql/graphiql.css";
+import '../../graphiql/src/graphiql.scss';
 import '../../graphiql/src/editor.scss';
 
 /**
