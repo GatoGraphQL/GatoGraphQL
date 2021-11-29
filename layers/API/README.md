@@ -504,7 +504,7 @@ In the examples below, the Google Translate API is called the minimum possible a
   posts(pagination:{ limit: 5 }).
     --props|
     --props@spanish<
-      translate(en,es)
+      translate(from:en,to:es)
     >&
 props=
   title|
@@ -517,22 +517,22 @@ props=
   posts(pagination: { limit: 5 }).
     --props|
     --props@spanish<
-      translate(en,es)
+      translate(from:en,to:es)
     >|
     --props@french<
-      translate(en,fr)
+      translate(from:en,to:fr)
     >|
     --props@german<
-      translate(en,de)
+      translate(from:en,to:de)
     >&
 props=
   title|
   excerpt
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5}).--props%7C--props@spanish<translate(en,es)>&amp;props=title%7Cexcerpt">View query results #1</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5}).--props%7C--props@spanish<translate(from:en,to:es)>&amp;props=title%7Cexcerpt">View query results #1</a>
 
-<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5}).--props%7C--props@spanish%3Ctranslate(en,es)%3E%7C--props@french%3Ctranslate(en,fr)%3E%7C--props@german%3Ctranslate(en,de)%3E&amp;props=title%7Cexcerpt">View query results #2</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5}).--props%7C--props@spanish%3Ctranslate(from:en,to:es)%3E%7C--props@french%3Ctranslate(from:en,to:fr)%3E%7C--props@german%3Ctranslate(from:en,to:de)%3E&amp;props=title%7Cexcerpt">View query results #2</a>
 
 ### Interact with APIs from the back-end
 
@@ -544,7 +544,7 @@ Example calling the Google Translate API from the back-end, as coded within dire
   posts(pagination: { limit: 5 }).
     title|
     title@spanish<
-      translate(en,es)
+      translate(from:en,to:es)
     >
     
 //2. Translate to Spanish and back to English
@@ -552,7 +552,7 @@ Example calling the Google Translate API from the back-end, as coded within dire
   posts(pagination: { limit: 5 }).
     title|
     title@translateAndBack<
-      translate(en,es),
+      translate(from:en,to:es),
       translate(es,en)
     >
     
@@ -562,15 +562,15 @@ Example calling the Google Translate API from the back-end, as coded within dire
   posts(pagination: { limit: 5 }).
     title|
     title@spanish<
-      translate(en,es,provider:azure)
+      translate(from:en,to:es,provider:azure)
     >
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5}).title%7Ctitle@spanish%3Ctranslate(en,es)%3E">View query results #1</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5}).title%7Ctitle@spanish%3Ctranslate(from:en,to:es)%3E">View query results #1</a>
 
-<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5}).title%7Ctitle@translateAndBack%3Ctranslate(en,es),translate(es,en)%3E">View query results #2</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5}).title%7Ctitle@translateAndBack%3Ctranslate(from:en,to:es),translate(es,en)%3E">View query results #2</a>
 
-<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5}).title%7Ctitle@spanish%3Ctranslate(en,es,provider:azure)%3E">View query results #3</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5}).title%7Ctitle@spanish%3Ctranslate(from:en,to:es,provider:azure)%3E">View query results #3</a>
 
 ### Interact with APIs from the client-side
 
