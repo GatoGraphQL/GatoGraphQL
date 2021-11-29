@@ -7,7 +7,7 @@ namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
@@ -18,6 +18,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
 {
     private ?DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver = null;
     private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
+    private ?CustomPostEnumTypeResolver $customPostEnumTypeResolver = null;
 
     final public function setDateQueryInputObjectTypeResolver(DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver): void
     {
@@ -34,6 +35,14 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
     {
         return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+    }
+    final public function setCustomPostEnumTypeResolver(CustomPostEnumTypeResolver $customPostEnumTypeResolver): void
+    {
+        $this->customPostEnumTypeResolver = $customPostEnumTypeResolver;
+    }
+    final protected function getCustomPostEnumTypeResolver(): CustomPostEnumTypeResolver
+    {
+        return $this->customPostEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostEnumTypeResolver::class);
     }
 
     public function getAdminInputFieldNames(): array
@@ -65,7 +74,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
                 'dateQuery' => $this->getDateQueryInputObjectTypeResolver(),
             ],
             $this->addCustomPostInputFields() ? [
-                'customPostTypes' => $this->getStringScalarTypeResolver(),
+                'customPostTypes' => $this->getCustomPostEnumTypeResolver(),
             ] : []
         );
     }
@@ -87,7 +96,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
             'status' => [
                 Status::PUBLISHED,
             ],
-            'customPostTypes' => CustomPostUnionTypeHelpers::getTargetObjectTypeResolverCustomPostTypes(),
+            'customPostTypes' => $this->getCustomPostEnumTypeResolver()->getConsolidatedEnumValues(),
             default => parent::getInputFieldDefaultValue($inputFieldName)
         };
     }

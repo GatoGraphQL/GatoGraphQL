@@ -16,7 +16,6 @@ use PoPSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostByInputObjectTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostSortInputObjectTypeResolver;
-use PoPSchema\GenericCustomPosts\ComponentConfiguration;
 use PoPSchema\GenericCustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPSchema\GenericCustomPosts\TypeResolvers\InputObjectType\GenericCustomPostPaginationInputObjectTypeResolver;
 use PoPSchema\GenericCustomPosts\TypeResolvers\InputObjectType\RootGenericCustomPostsFilterInputObjectTypeResolver;
@@ -214,28 +213,6 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @return array<string, mixed>
-     */
-    protected function getQuery(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        object $object,
-        string $fieldName,
-        array $fieldArgs
-    ): array {
-        return match ($fieldName) {
-            'genericCustomPost',
-            'genericCustomPosts',
-            'genericCustomPostCount'
-                => [
-                    'custompost-types' => ComponentConfiguration::getGenericCustomPostTypes(),
-                ],
-            default
-                => [],
-        };
-    }
-
-    /**
-     * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
      * @param array<string, mixed>|null $expressions
      * @param array<string, mixed> $options
@@ -249,10 +226,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
         ?array $expressions = null,
         array $options = []
     ): mixed {
-        $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
-            $this->getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs)
-        );
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
         switch ($fieldName) {
             case 'genericCustomPost':
                 if ($customPosts = $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {

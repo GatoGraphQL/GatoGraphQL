@@ -9,9 +9,8 @@ use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
-use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPSchema\CustomPosts\Types\Status;
 
@@ -21,7 +20,7 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
     public const MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
 
     private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?CustomPostEnumTypeResolver $customPostEnumTypeResolver = null;
 
     final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
     {
@@ -31,13 +30,13 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
     {
         return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
     }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setCustomPostEnumTypeResolver(CustomPostEnumTypeResolver $customPostEnumTypeResolver): void
     {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->customPostEnumTypeResolver = $customPostEnumTypeResolver;
     }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getCustomPostEnumTypeResolver(): CustomPostEnumTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        return $this->customPostEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostEnumTypeResolver::class);
     }
 
     public function getModulesToProcess(): array
@@ -87,7 +86,7 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => $this->getCustomPostStatusEnumTypeResolver(),
-            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->getStringScalarTypeResolver(),
+            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->getCustomPostEnumTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
@@ -109,7 +108,7 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => [
                 Status::PUBLISHED,
             ],
-            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => CustomPostUnionTypeHelpers::getTargetObjectTypeResolverCustomPostTypes(),
+            self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->getCustomPostEnumTypeResolver()->getConsolidatedEnumValues(),
             default => null,
         };
     }

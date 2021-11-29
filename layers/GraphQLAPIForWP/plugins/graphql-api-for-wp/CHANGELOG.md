@@ -29,6 +29,16 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `excludeAuthorIDs: [ID]`
   - `hasPassword: Bool`
 - Exclude results via field arg `excludeIDs`
+- Added field `urlPath` on several types:
+  - `Post.urlPath: String!`
+  - `Page.urlPath: String!`
+  - `PostTag.urlPath: String!`
+  - `PostCategory.urlPath: String!`
+  - `User.urlPath: String!`
+- Converted from string to Enum type whenever possible
+  - Custom post type and status
+  - Comment type and status
+  - "Order by" property, for all entities
 - Added fields to retrieve the logged-in user's custom posts:
   - `Root.myCustomPost: CustomPostUnion`
   - `Root.myCustomPosts: [CustomPostUnion]!`
@@ -107,12 +117,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `User.avatar: [UserAvatar]`
   - `UserAvatar.src: String!`
   - `UserAvatar.size: Int!`
-- Added field `urlPath` on several types:
-  - `Post.urlPath: String!`
-  - `Page.urlPath: String!`
-  - `PostTag.urlPath: String!`
-  - `PostCategory.urlPath: String!`
-  - `User.urlPath: String!`
 - Added field arguments to `Root.mediaItems` for filtering results
 - Added media field:
   - `Root.imageSizeNames: [String]!` to retrieve the list of the available intermediate image size names
