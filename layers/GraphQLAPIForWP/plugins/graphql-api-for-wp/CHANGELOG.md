@@ -85,7 +85,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `parentIDs: [ID!]`
   - `excludeParentIDs: [ID]`
   - `excludeIDs: [ID!]`
-  - `searchfor: String`
+  - `search: String`
   - `types: [String!]`
 - Comment mutations: support creating comments by non logged-in users
 - Filter users by email (considered as "admin" data)
