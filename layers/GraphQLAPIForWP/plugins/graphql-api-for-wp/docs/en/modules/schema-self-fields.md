@@ -31,14 +31,14 @@ The `self` field allows to append extra levels to the query without leaving the 
     __typename
   }
   
-  post(id: 1) {
+  post(by: { id: 1 }) {
     self {
       id
       __typename
     }
   }
   
-  user(id: 1) {
+  user(by: { id: 1 }) {
     self {
       id
       __typename

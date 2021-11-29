@@ -115,7 +115,7 @@ To visualize it, in addition to the standard introspection field `__schema`, we 
 
 ### Skip argument names
 
-Field and directive argument names can be deduced from the schema. 
+Field and directive argument names can be deduced from the schema.
 
 This query...
 
@@ -124,7 +124,7 @@ This query...
 /?
 postId=1&
 query=
-  post($postId).
+  post({id:$postId}).
     dateAsString(d/m/Y)|
     title<
       skip(false)
@@ -138,16 +138,16 @@ query=
 /?
 postId=1&
 query=
-  post(id:$postId).
+  post(by:{id:$postId}).
     dateAsString(format:d/m/Y)|
     title<
       skip(if:false)
     >
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?postId=1&amp;query=post(%24postId).dateAsString(d/m/Y)%7Ctitle%3Cskip(false)%3E">View query results #1</a>
+<a href="https://newapi.getpop.org/api/graphql/?postId=1&amp;query=post({id:%24postId}).dateAsString(d/m/Y)%7Ctitle%3Cskip(false)%3E">View query results #1</a>
 
-<a href="https://newapi.getpop.org/api/graphql/?postId=1&amp;query=post(id:%24postId).dateAsString(format:d/m/Y)%7Ctitle<skip(if:false)>">View query results #2</a>
+<a href="https://newapi.getpop.org/api/graphql/?postId=1&amp;query=post(by:{id:%24postId}).dateAsString(format:d/m/Y)%7Ctitle<skip(if:false)>">View query results #2</a>
 
 ### Operators and Helpers
 
@@ -795,7 +795,7 @@ To select the version for the field/directive, we use the same [semver version c
 
 // Selecting version for directives
 /?query=
-  post($postId).
+  post({id:$postId}).
     title@titleCase<makeTitle(versionConstraint:^0.1)>|
     title@upperCase<makeTitle(versionConstraint:^0.2)>
 &postId=1
@@ -803,7 +803,7 @@ To select the version for the field/directive, we use the same [semver version c
 
 <a href="https://newapi.getpop.org/api/graphql/?query=userServiceURLs(versionConstraint:^0.1)|userServiceURLs(versionConstraint:%22%3E0.1%22)|userServiceURLs(versionConstraint:^0.2)">View query results #1</a>
 
-<a href="https://newapi.getpop.org/api/graphql/?query=post($postId).title@titleCase%3CmakeTitle(versionConstraint:^0.1)%3E|title@upperCase%3CmakeTitle(versionConstraint:^0.2)%3E&postId=1">View query results #2</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=post({id:$postId}).title@titleCase%3CmakeTitle(versionConstraint:^0.1)%3E|title@upperCase%3CmakeTitle(versionConstraint:^0.2)%3E&postId=1">View query results #2</a>
 
 ### Combine GraphQL with REST
 
@@ -982,12 +982,12 @@ Any informative piece of information can be logged (enabled/disabled through con
 actions[]=show-logs&
 postId=1&
 query=
-  post($postId).
+  post({id:$postId}).
     title|
     dateAsString(d/m/Y)
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?actions%5B%5D=show-logs&amp;postId=1&amp;query=post(%24postId).title%7CdateAsString(d/m/Y)">View query results</a>
+<a href="https://newapi.getpop.org/api/graphql/?actions%5B%5D=show-logs&amp;postId=1&amp;query=post({id:%24postId}).title%7CdateAsString(d/m/Y)">View query results</a>
 
 ### Embeddable fields
 
@@ -1037,7 +1037,7 @@ The email sent to the recipient must be customized:
 /?
 postId=1&
 query=
-  post($postId)@post.
+  post({id:$postId})@post.
     content|
     dateAsString(d/m/Y)@date,
   getJSON("https://newapi.getpop.org/wp-json/newsletter/v1/subscriptions")@userList|
@@ -1065,7 +1065,7 @@ query=
     email
   )@userData;
 
-  post($postId)@post<
+  post({id:$postId})@post<
     copyRelationalResults(
       [content, date],
       [postContent, postDate]
@@ -1189,7 +1189,7 @@ query=
   >
 ```
 
-<a href='https://newapi.getpop.org/api/graphql/?postId=1&query=post($postId)@post.content|dateAsString(d/m/Y)@date,getJSON("https://newapi.getpop.org/wp-json/newsletter/v1/subscriptions")@userList|arrayUnique(extract(getSelfProp(%self%,userList),lang))@userLangs|extract(getSelfProp(%self%,userList),email)@userEmails|arrayFill(getJSON(sprintf("https://newapi.getpop.org/users/api/rest/?query=name|email%26emails[]=%s",[arrayJoin(getSelfProp(%self%,userEmails),"%26emails[]=")])),getSelfProp(%self%,userList),email)@userData;post($postId)@post<copyRelationalResults([content,date],[postContent,postDate])>;getSelfProp(%self%,postContent)@postContent<translateMultiple(from:en,to:arrayDiff([getSelfProp(%self%,userLangs),[en]])),renameProperty(postContent-en)>|getSelfProp(%self%,userData)@userPostData<forEach<applyFunction(function:arrayAddItem(array:[],value:""),addArguments:[key:postContent,array:%value%,value:getSelfProp(%self%,sprintf(postContent-%s,[extract(%value%,lang)]))]),applyFunction(function:arrayAddItem(array:[],value:""),addArguments:[key:header,array:%value%,value:sprintf(string:"<p>Hi %s, we published this post on %s,enjoy!</p>",values:[extract(%value%,name),getSelfProp(%self%,postDate)])])>>;getSelfProp(%self%,userPostData)@translatedUserPostProps<forEach(if:not(equals(extract(%value%,lang),en)))<advancePointerInArray(path:header,appendExpressions:[toLang:extract(%value%,lang)])<translateMultiple(from:en,to:%toLang%,oneLanguagePerField:true,override:true)>>>;getSelfProp(%self%,translatedUserPostProps)@emails<forEach<applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:content,array:%value%,value:concat([extract(%value%,header),extract(%value%,postContent)])]),applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:to,array:%value%,value:extract(%value%,email)]),applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:subject,array:%value%,value:"PoP API example :)"]),sendByEmail>>'>View query results</a>
+<a href='https://newapi.getpop.org/api/graphql/?postId=1&query=post({id:$postId})@post.content|dateAsString(d/m/Y)@date,getJSON("https://newapi.getpop.org/wp-json/newsletter/v1/subscriptions")@userList|arrayUnique(extract(getSelfProp(%self%,userList),lang))@userLangs|extract(getSelfProp(%self%,userList),email)@userEmails|arrayFill(getJSON(sprintf("https://newapi.getpop.org/users/api/rest/?query=name|email%26emails[]=%s",[arrayJoin(getSelfProp(%self%,userEmails),"%26emails[]=")])),getSelfProp(%self%,userList),email)@userData;post({id:$postId})@post<copyRelationalResults([content,date],[postContent,postDate])>;getSelfProp(%self%,postContent)@postContent<translateMultiple(from:en,to:arrayDiff([getSelfProp(%self%,userLangs),[en]])),renameProperty(postContent-en)>|getSelfProp(%self%,userData)@userPostData<forEach<applyFunction(function:arrayAddItem(array:[],value:""),addArguments:[key:postContent,array:%value%,value:getSelfProp(%self%,sprintf(postContent-%s,[extract(%value%,lang)]))]),applyFunction(function:arrayAddItem(array:[],value:""),addArguments:[key:header,array:%value%,value:sprintf(string:"<p>Hi %s, we published this post on %s,enjoy!</p>",values:[extract(%value%,name),getSelfProp(%self%,postDate)])])>>;getSelfProp(%self%,userPostData)@translatedUserPostProps<forEach(if:not(equals(extract(%value%,lang),en)))<advancePointerInArray(path:header,appendExpressions:[toLang:extract(%value%,lang)])<translateMultiple(from:en,to:%toLang%,oneLanguagePerField:true,override:true)>>>;getSelfProp(%self%,translatedUserPostProps)@emails<forEach<applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:content,array:%value%,value:concat([extract(%value%,header),extract(%value%,postContent)])]),applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:to,array:%value%,value:extract(%value%,email)]),applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:subject,array:%value%,value:"PoP API example :)"]),sendByEmail>>'>View query results</a>
 
 **Step-by-step description of the solution:**
 

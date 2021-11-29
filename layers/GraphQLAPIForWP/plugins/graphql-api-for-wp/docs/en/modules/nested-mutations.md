@@ -18,7 +18,7 @@ The query from above can also be executed through a nested mutation, where the p
 
 ```graphql
 mutation {
-  post(id: 5) {
+  post(by:{ id: 5 }) {
     update(title: "New title") {
       title
     }
