@@ -693,6 +693,8 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             }
         }
 
+        // If some variable hasn't been submitted, it will throw an Exception
+        // Let it bubble up
         $request = new Request($parsedData, $variables);
 
         // If the validation fails, it will throw an exception
