@@ -226,10 +226,6 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
             'genericCustomPost',
             'genericCustomPosts',
             'genericCustomPostCount'
-                => [
-                    'custompost-types' => ComponentConfiguration::getGenericCustomPostTypes(),
-                ],
-            default
                 => [],
         };
     }
