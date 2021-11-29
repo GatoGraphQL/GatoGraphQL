@@ -198,10 +198,15 @@ class VarsHookSet extends AbstractHookSet
             ComponentConfiguration::enableMultipleQueryExecution(),
             $operationName
         );
-
         // Set the operation type and, based on it, if mutations are supported
         $vars['graphql-operation-type'] = $operationType;
-        $vars['are-mutations-enabled'] = $operationType == OperationTypes::MUTATION;
+        $vars['are-mutations-enabled'] = $operationType === OperationTypes::MUTATION;
+
+        // If there was an error when parsing the query, the operationType will be null,
+        // then there's no need to execute the query
+        if ($operationType === null) {
+            $vars['does-api-query-have-errors'] = true;
+        }
 
         // Set the query in $vars
         ApplicationStateUtils::maybeConvertQueryAndAddToVars($vars, $fieldQuery);
