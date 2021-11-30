@@ -168,7 +168,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "getpop/api": "^0.8.9"
+        "getpop/api": "^0.9"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.0",
