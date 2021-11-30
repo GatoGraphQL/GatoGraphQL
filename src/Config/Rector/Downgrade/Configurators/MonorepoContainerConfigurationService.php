@@ -29,6 +29,8 @@ class MonorepoContainerConfigurationService extends AbstractDowngradeContainerCo
                 // $this->rootDirectory . '/vendor/symfony/cache/Adapter/MemcachedAdapter.php',
                 $this->rootDirectory . '/vendor/symfony/cache/DoctrineProvider.php',
                 $this->rootDirectory . '/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
+                $this->rootDirectory . '/vendor/symfony/dotenv/Command/DebugCommand.php',
+                $this->rootDirectory . '/vendor/symfony/dotenv/Command/DotenvDumpCommand.php',
                 $this->rootDirectory . '/vendor/symfony/string/Slugger/AsciiSlugger.php',
             ]
         );

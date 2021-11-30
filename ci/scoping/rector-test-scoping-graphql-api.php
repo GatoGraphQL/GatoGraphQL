@@ -61,6 +61,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         $pluginDir . '/vendor/symfony/cache/DoctrineProvider.php',
         $pluginDir . '/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
         $pluginDir . '/vendor/symfony/cache/Psr16Cache.php',
+        $pluginDir . '/vendor/symfony/dotenv/Command/DebugCommand.php',
+        $pluginDir . '/vendor/symfony/dotenv/Command/DotenvDumpCommand.php',
         $pluginDir . '/vendor/symfony/string/Slugger/AsciiSlugger.php',
         $pluginDir . '/vendor/symfony/yaml/Command/LintCommand.php',
     ]);
