@@ -73,8 +73,11 @@ class MenuTypeAPI implements MenuTypeAPIInterface
 
     protected function getMenuObject(string $menuName): ?WP_Term
     {
-        $locations = get_nav_menu_locations();
-        $menuID = $locations[$menuName];
+        $locations = \get_nav_menu_locations();
+        $menuID = $locations[$menuName] ?? null;
+        if ($menuID === null) {
+            return null;
+        }
         return $this->getMenu($menuID);
     }
 
