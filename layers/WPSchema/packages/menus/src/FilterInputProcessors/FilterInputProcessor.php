@@ -28,9 +28,9 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                 $locations = \get_nav_menu_locations();
                 $menuIDs = [];
                 foreach ($value as $location) {
-                    $menuID = (int) $locations[$location] ?? null;
+                    $menuID = $locations[$location] ?? null;
                     // If the location doesn't have a menu assigned, it will be assigned "0"
-                    if ($menuID === null || $menuID === 0) {
+                    if ($menuID === null || (int) $menuID === 0) {
                         continue;
                     }
                     $menuIDs[] = $menuID;
