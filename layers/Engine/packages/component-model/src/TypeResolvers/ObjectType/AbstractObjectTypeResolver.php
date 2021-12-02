@@ -739,7 +739,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         // Make sure that this typeResolver implements all these InterfaceTypeFieldResolver
         // If not, the type does not fully satisfy the Interface
         $implementedInterfaceTypeFieldResolvers = $this->getAllImplementedInterfaceTypeFieldResolvers();
-        return array_filter(
+        return array_values(array_filter(
             $interfaceTypeResolvers,
             fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => array_udiff(
                 $interfaceTypeResolver->getInterfaceTypeFieldResolvers(),
@@ -756,7 +756,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                  */
                 fn (object $a, object $b) => get_class($a) <=> get_class($b),
             ) === [],
-        );
+        ));
     }
 
     /**

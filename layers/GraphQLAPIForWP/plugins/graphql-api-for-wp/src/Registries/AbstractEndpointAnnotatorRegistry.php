@@ -30,9 +30,9 @@ abstract class AbstractEndpointAnnotatorRegistry implements EndpointAnnotatorReg
      */
     public function getEnabledEndpointAnnotators(): array
     {
-        return array_filter(
+        return array_values(array_filter(
             $this->getEndpointAnnotators(),
             fn (ServiceInterface $service) => $service->isServiceEnabled()
-        );
+        ));
     }
 }

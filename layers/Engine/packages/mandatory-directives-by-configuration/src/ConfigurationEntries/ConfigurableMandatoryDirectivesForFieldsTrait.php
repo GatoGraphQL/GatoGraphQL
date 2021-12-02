@@ -87,12 +87,12 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
             'get_class',
             $interfaceTypeResolvers
         );
-        return array_filter(
+        return array_values(array_filter(
             $entryList,
             fn (array $entry) => (
                 $entry[0] === $objectTypeOrInterfaceTypeResolverClass
                 || in_array($entry[0], $interfaceTypeResolverClasses)
             ) && $entry[1] == $fieldName
-        );
+        ));
     }
 }
