@@ -18,7 +18,7 @@ use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 class CustomPostUnionTypeHelpers
 {
     /**
-     * Obtain the post types from all member typeResolvers
+     * Obtain the custom post types from all member typeResolvers
      */
     public static function getTargetObjectTypeResolverCustomPostTypes(?UnionTypeResolverInterface $unionTypeResolver = null): array
     {
