@@ -79,7 +79,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `dateTo: Date`
   - `excludeAuthorIDs: [ID]`
   - `excludeIDs: [ID!]`
-  - `id: ID`
   - `ids: [ID!]`
   - `parentID: ID!`
   - `parentIDs: [ID!]`
