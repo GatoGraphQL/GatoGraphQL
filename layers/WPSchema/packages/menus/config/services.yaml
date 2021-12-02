@@ -6,3 +6,6 @@ services:
 
     PoPWPSchema\Menus\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'
+
+    PoPWPSchema\Menus\Hooks\:
+        resource: '../src/Hooks/*'
