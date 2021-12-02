@@ -23,6 +23,6 @@ class MenuLocationEnumTypeResolver extends AbstractEnumTypeResolver
      */
     public function getEnumValues(): array
     {
-        return array_keys(\get_nav_menu_locations());
+        return array_keys(\get_registered_nav_menus());
     }
 }
