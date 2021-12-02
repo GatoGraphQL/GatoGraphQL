@@ -23,6 +23,11 @@ class MenuLocationEnumTypeResolver extends AbstractEnumTypeResolver
      */
     public function getEnumValues(): array
     {
-        return array_keys(\get_registered_nav_menus());
+        // Make sure there's at least 1 result, to avoid GraphQL throwing
+        // errors from an empty Enum
+        if ($enumValues = array_keys(\get_registered_nav_menus())) {
+            return $enumValues;
+        }
+        return ['empty'];
     }
 }
