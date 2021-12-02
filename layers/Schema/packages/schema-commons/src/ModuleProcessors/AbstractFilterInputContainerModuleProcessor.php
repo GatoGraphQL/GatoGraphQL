@@ -41,7 +41,6 @@ abstract class AbstractFilterInputContainerModuleProcessor extends UpstreamAbstr
     {
         return [
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_COMMASEPARATED_IDS],
             [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
         ];
     }

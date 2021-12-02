@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Media\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Media\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
@@ -13,6 +14,7 @@ use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\DateQueryInputObjectTy
 abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractObjectsFilterInputObjectTypeResolver
 {
     private ?DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     final public function setDateQueryInputObjectTypeResolver(DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver): void
     {
@@ -21,6 +23,14 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
     final protected function getDateQueryInputObjectTypeResolver(): DateQueryInputObjectTypeResolver
     {
         return $this->dateQueryInputObjectTypeResolver ??= $this->instanceManager->getInstance(DateQueryInputObjectTypeResolver::class);
+    }
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getInputFieldNameTypeResolvers(): array
