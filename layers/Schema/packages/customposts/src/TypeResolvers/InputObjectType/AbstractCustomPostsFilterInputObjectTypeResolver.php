@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPosts\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
@@ -19,6 +20,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     private ?DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver = null;
     private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
     private ?CustomPostEnumTypeResolver $customPostEnumTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     final public function setDateQueryInputObjectTypeResolver(DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver): void
     {
@@ -43,6 +45,14 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     final protected function getCustomPostEnumTypeResolver(): CustomPostEnumTypeResolver
     {
         return $this->customPostEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostEnumTypeResolver::class);
+    }
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getAdminInputFieldNames(): array

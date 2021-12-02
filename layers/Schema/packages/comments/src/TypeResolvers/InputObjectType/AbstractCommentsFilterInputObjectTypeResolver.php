@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Comments\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Comments\ComponentConfiguration;
 use PoPSchema\Comments\Constants\CommentStatus;
 use PoPSchema\Comments\Constants\CommentTypes;
@@ -23,6 +24,7 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     private ?CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver = null;
     private ?CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver = null;
     private ?CustomPostEnumTypeResolver $customPostEnumTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     final public function setDateQueryInputObjectTypeResolver(DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver): void
     {
@@ -55,6 +57,14 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     final protected function getCustomPostEnumTypeResolver(): CustomPostEnumTypeResolver
     {
         return $this->customPostEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostEnumTypeResolver::class);
+    }
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     public function getAdminInputFieldNames(): array
