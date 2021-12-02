@@ -30,9 +30,9 @@ abstract class AbstractBlockRegistry implements BlockRegistryInterface
      */
     public function getEnabledBlocks(): array
     {
-        return array_filter(
+        return array_values(array_filter(
             $this->getBlocks(),
             fn (ServiceInterface $service) => $service->isServiceEnabled()
-        );
+        ));
     }
 }

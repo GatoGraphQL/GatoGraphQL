@@ -115,9 +115,9 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
      */
     protected function filterRootEntriesForFields(array $fieldEntries): array
     {
-        return array_filter(
+        return array_values(array_filter(
             $fieldEntries,
             fn (array $fieldEntry) => $fieldEntry[0] === RootObjectTypeResolver::class
-        );
+        ));
     }
 }

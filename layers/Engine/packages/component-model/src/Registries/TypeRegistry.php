@@ -32,29 +32,29 @@ class TypeRegistry implements TypeRegistryInterface
      */
     public function getRelationalTypeResolvers(): array
     {
-        return array_filter(
+        return array_values(array_filter(
             $this->typeResolvers,
             fn ($typeResolver) => $typeResolver instanceof RelationalTypeResolverInterface
-        );
+        ));
     }
     /**
      * @return ObjectTypeResolverInterface[]
      */
     public function getObjectTypeResolvers(): array
     {
-        return array_filter(
+        return array_values(array_filter(
             $this->typeResolvers,
             fn ($typeResolver) => $typeResolver instanceof ObjectTypeResolverInterface
-        );
+        ));
     }
     /**
      * @return InterfaceTypeResolverInterface[]
      */
     public function getInterfaceTypeResolvers(): array
     {
-        return array_filter(
+        return array_values(array_filter(
             $this->typeResolvers,
             fn ($typeResolver) => $typeResolver instanceof InterfaceTypeResolverInterface
-        );
+        ));
     }
 }

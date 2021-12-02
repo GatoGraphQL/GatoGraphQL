@@ -195,10 +195,10 @@ class InputCoercingService implements InputCoercingServiceInterface
             ));
         }
         if ($inputIsArrayType) {
-            return array_filter(
+            return array_values(array_filter(
                 $inputValue ?? [],
                 fn (mixed $arrayArgValueElem) => GeneralUtils::isError($arrayArgValueElem)
-            );
+            ));
         }
         if (GeneralUtils::isError($inputValue)) {
             return [
