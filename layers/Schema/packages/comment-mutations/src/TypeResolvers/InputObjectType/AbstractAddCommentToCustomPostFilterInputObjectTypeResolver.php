@@ -99,9 +99,6 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
                 => ($this->isParentCommentMandatory() ? SchemaTypeModifiers::MANDATORY : SchemaTypeModifiers::NONE),
             MutationInputProperties::CUSTOMPOST_ID
                 => SchemaTypeModifiers::MANDATORY,
-            MutationInputProperties::AUTHOR_NAME,
-            MutationInputProperties::AUTHOR_EMAIL
-                => (ComponentConfiguration::requireCommenterNameAndEmail() ? SchemaTypeModifiers::MANDATORY : SchemaTypeModifiers::NONE),
             default
                 => SchemaTypeModifiers::NONE,
         };
