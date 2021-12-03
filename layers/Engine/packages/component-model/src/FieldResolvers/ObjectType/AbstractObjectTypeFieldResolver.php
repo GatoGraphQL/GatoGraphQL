@@ -1024,7 +1024,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
         if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
             // Validate on the object
-            $mutationFieldArgs = $this->getFieldArgsToExecuteMutation(
+            $mutationFieldArgs = $this->getMutationFieldArgsForObject(
                 $this->getMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs),
                 $objectTypeResolver,
                 $object,
@@ -1132,7 +1132,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
         if ($mutationResolver !== null) {
-            $mutationFieldArgs = $this->getFieldArgsToExecuteMutation(
+            $mutationFieldArgs = $this->getMutationFieldArgsForObject(
                 $this->getMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs),
                 $objectTypeResolver,
                 $object,
@@ -1154,7 +1154,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
-    protected function getFieldArgsToExecuteMutation(
+    protected function getMutationFieldArgsForObject(
         array $mutationFieldArgs,
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
