@@ -8,7 +8,7 @@ class RootReplyCommentFilterInputObjectTypeResolver extends AbstractAddCommentTo
 {
     public function getTypeName(): string
     {
-        return 'ReplyCommentFilterInput';
+        return 'RootReplyCommentFilterInput';
     }
 
     public function getTypeDescription(): ?string

@@ -8,7 +8,7 @@ class RootAddCommentToCustomPostFilterInputObjectTypeResolver extends AbstractAd
 {
     public function getTypeName(): string
     {
-        return 'AddCommentToCustomPostFilterInput';
+        return 'RootAddCommentToCustomPostFilterInput';
     }
 
     public function getTypeDescription(): ?string
