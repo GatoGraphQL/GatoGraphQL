@@ -9,7 +9,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterfac
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CommentMutations\ComponentConfiguration;
-use PoPSchema\CommentMutations\FieldResolvers\ObjectType\CommentObjectTypeFieldResolver;
+use PoPSchema\CommentMutations\FieldResolvers\ObjectType\AbstractAddCommentToCustomPostObjectTypeFieldResolver;
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
@@ -45,7 +45,7 @@ class ObjectTypeHookSet extends AbstractHookSet
         array $mutationFieldArgs,
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
     ): array {
-        if (!($objectTypeFieldResolver instanceof CommentObjectTypeFieldResolver)) {
+        if (!($objectTypeFieldResolver instanceof AbstractAddCommentToCustomPostObjectTypeFieldResolver)) {
             return $mutationFieldArgs;
         }
         

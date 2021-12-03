@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -15,7 +14,7 @@ use PoPSchema\CommentMutations\TypeResolvers\InputObjectType\CommentReplyFilterI
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 
-class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTypeFieldResolver
 {
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
