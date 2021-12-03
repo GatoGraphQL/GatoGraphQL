@@ -1,0 +1,34 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPSchema\CommentMutations\TypeResolvers\InputObjectType;
+
+class CommentReplyFilterInputObjectTypeResolver extends AbstractAddCommentToCustomPostFilterInputObjectTypeResolver
+{
+    public function getTypeName(): string
+    {
+        return 'ReplyCommentFilterInput';
+    }
+
+    public function getTypeDescription(): ?string
+    {
+        return $this->getTranslationAPI()->__('Input to reply to a comment', 'comment-mutations');
+    }
+
+    protected function addParentInputFields(): bool
+    {
+        return false;
+    }
+
+    protected function isParentCommentMandatory(): bool
+    {
+        return false;
+    }
+
+    protected function addCustomPostInputFields(): bool
+    {
+        return false;
+    }
+
+}
