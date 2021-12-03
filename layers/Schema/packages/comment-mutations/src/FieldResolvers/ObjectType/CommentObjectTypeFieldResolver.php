@@ -14,7 +14,6 @@ use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CommentMutations\TypeResolvers\InputObjectType\CommentReplyFilterInputObjectTypeResolver;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
-use stdClass;
 
 class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
