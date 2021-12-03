@@ -102,14 +102,17 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         /**
          * Override with the user's properties
          */
+        $vars = ApplicationState::getVars();
         if (ComponentConfiguration::mustUserBeLoggedInToAddComment()) {
-            $vars = ApplicationState::getVars();
             $userID = $vars['global-userstate']['current-user-id'];
             $comment_data['userID'] = $userID;
             $comment_data['author'] = $this->getUserTypeAPI()->getUserDisplayName($userID);
             $comment_data['authorEmail'] = $this->getUserTypeAPI()->getUserEmail($userID);
             $comment_data['authorURL'] = $this->getUserTypeAPI()->getUserWebsiteUrl($userID);
         } else {
+            if ($userID = $vars['global-userstate']['current-user-id'] ?? null) {
+                $comment_data['userID'] = $userID;
+            }
             $comment_data['author'] = $form_data[MutationInputProperties::AUTHOR_NAME] ?? null;
             $comment_data['authorEmail'] = $form_data[MutationInputProperties::AUTHOR_EMAIL] ?? null;
             $comment_data['authorURL'] = $form_data[MutationInputProperties::AUTHOR_URL] ?? null;
