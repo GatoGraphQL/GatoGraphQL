@@ -1024,7 +1024,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
         if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
             // Validate on the object
-            $mutationFieldArgs = $this->getMutationFieldArgsForObject(
+            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgsForObject(
                 $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs),
                 $objectTypeResolver,
                 $object,
@@ -1151,7 +1151,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
         if ($mutationResolver !== null) {
-            $mutationFieldArgs = $this->getMutationFieldArgsForObject(
+            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgsForObject(
                 $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs),
                 $objectTypeResolver,
                 $object,
@@ -1173,11 +1173,37 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    protected function getConsolidatedMutationFieldArgsForObject(
+        array $mutationFieldArgs,
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        string $fieldName,
+    ): array {
+        return $this->getHooksAPI()->applyFilters(
+            HookNames::OBJECT_TYPE_MUTATION_FIELD_ARGS_FOR_OBJECT,
+            $this->getMutationFieldArgsForObject(
+                $mutationFieldArgs,
+                $objectTypeResolver,
+                $object,
+                $fieldName,
+            ),
+            $this,
+            $mutationFieldArgs,
+            $objectTypeResolver,
+            $object,
+            $fieldName,
+        );
+    }
+
     protected function getMutationFieldArgsForObject(
         array $mutationFieldArgs,
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName
+        string $fieldName,
     ): array {
         return $mutationFieldArgs;
     }

@@ -16,4 +16,5 @@ class HookNames
     public const OBJECT_TYPE_FIELD_ARG_TYPE_MODIFIERS = __CLASS__ . ':object-type-field-arg-type-modifiers';
 
     public const OBJECT_TYPE_MUTATION_FIELD_ARGS = __CLASS__ . ':object-type-mutation-field-args';
+    public const OBJECT_TYPE_MUTATION_FIELD_ARGS_FOR_OBJECT = __CLASS__ . ':object-type-mutation-field-args-for-object';
 }
