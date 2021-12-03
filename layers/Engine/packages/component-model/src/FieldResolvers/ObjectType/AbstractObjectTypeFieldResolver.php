@@ -690,7 +690,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          */
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
         if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
-            $mutationFieldArgs = $this->getMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs);
+            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs);
             /**
              * If it throws an Exception do nothing, since the error will
              * also be caught when validating the inputs
@@ -932,7 +932,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
         if ($mutationResolver !== null) {
-            $mutationFieldArgs = $this->getMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs);
+            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs);
             /**
              * If it throws an Exception do nothing, since the error will
              * also be caught when validating the inputs
@@ -1025,7 +1025,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
             // Validate on the object
             $mutationFieldArgs = $this->getMutationFieldArgsForObject(
-                $this->getMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs),
+                $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs),
                 $objectTypeResolver,
                 $object,
                 $fieldName
@@ -1060,6 +1060,25 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             );
         }
         return $fieldArgs;
+    }
+
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    protected function getConsolidatedMutationFieldArgs(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        array $fieldArgs,
+    ): array {
+        return $this->getHooksAPI()->applyFilters(
+            HookNames::OBJECT_TYPE_MUTATION_FIELD_ARGS,
+            $this->getMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs),
+            $this,
+            $objectTypeResolver,
+            $fieldName,
+            $fieldArgs,
+        );
     }
 
     /**
@@ -1133,7 +1152,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
         if ($mutationResolver !== null) {
             $mutationFieldArgs = $this->getMutationFieldArgsForObject(
-                $this->getMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs),
+                $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs),
                 $objectTypeResolver,
                 $object,
                 $fieldName
