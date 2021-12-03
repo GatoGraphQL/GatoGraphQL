@@ -110,13 +110,13 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
 
     protected function getFieldArgsToExecuteMutation(
-        array $fieldArgs,
+        array $mutationFieldArgs,
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName
     ): array {
-        $fieldArgs = parent::getFieldArgsToExecuteMutation(
-            $fieldArgs,
+        $mutationFieldArgs = parent::getFieldArgsToExecuteMutation(
+            $mutationFieldArgs,
             $objectTypeResolver,
             $object,
             $fieldName
@@ -124,14 +124,12 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $comment = $object;
         switch ($fieldName) {
             case 'reply':
-                /** @var stdClass */
-                $input = $fieldArgs['input'];
-                $input->${MutationInputProperties::CUSTOMPOST_ID} = $this->getCommentTypeAPI()->getCommentPostId($comment);
-                $input->${MutationInputProperties::PARENT_COMMENT_ID} = $objectTypeResolver->getID($comment);
+                $mutationFieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $this->getCommentTypeAPI()->getCommentPostId($comment);
+                $mutationFieldArgs[MutationInputProperties::PARENT_COMMENT_ID] = $objectTypeResolver->getID($comment);
                 break;
         }
 
-        return $fieldArgs;
+        return $mutationFieldArgs;
     }
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface

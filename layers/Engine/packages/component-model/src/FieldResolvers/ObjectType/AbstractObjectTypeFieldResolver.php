@@ -1155,12 +1155,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
 
     protected function getFieldArgsToExecuteMutation(
-        array $fieldArgs,
+        array $mutationFieldArgs,
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName
     ): array {
-        return $fieldArgs;
+        return $mutationFieldArgs;
     }
 
     public function getFieldMutationResolver(
