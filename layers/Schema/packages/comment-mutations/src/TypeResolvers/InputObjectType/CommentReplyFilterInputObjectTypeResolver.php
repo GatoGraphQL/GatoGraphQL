@@ -16,17 +16,17 @@ class CommentReplyFilterInputObjectTypeResolver extends AbstractAddCommentToCust
         return $this->getTranslationAPI()->__('Input to reply to a comment', 'comment-mutations');
     }
 
-    protected function addCustomPostInputFields(): bool
+    protected function addCustomPostInputField(): bool
     {
         return false;
     }
 
-    protected function addParentInputFields(): bool
+    protected function addParentCommentInputField(): bool
     {
         return false;
     }
 
-    protected function isParentCommentMandatory(): bool
+    protected function isParentCommentInputFieldMandatory(): bool
     {
         return false;
     }

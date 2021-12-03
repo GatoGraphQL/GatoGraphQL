@@ -59,10 +59,10 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
             [
                 MutationInputProperties::COMMENT => $this->getStringScalarTypeResolver(),
             ],
-            $this->addCustomPostInputFields() ? [
+            $this->addCustomPostInputField() ? [
                 MutationInputProperties::CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
             ] : [],
-            $this->addParentInputFields() ? [
+            $this->addParentCommentInputField() ? [
                 MutationInputProperties::PARENT_COMMENT_ID => $this->getIDScalarTypeResolver(),
             ] : [],
             !ComponentConfiguration::mustUserBeLoggedInToAddComment() ? [
@@ -73,9 +73,9 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
         );
     }
 
-    abstract protected function addCustomPostInputFields(): bool;
-    abstract protected function addParentInputFields(): bool;
-    abstract protected function isParentCommentMandatory(): bool;
+    abstract protected function addCustomPostInputField(): bool;
+    abstract protected function addParentCommentInputField(): bool;
+    abstract protected function isParentCommentInputFieldMandatory(): bool;
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
@@ -94,7 +94,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
     {
         return match ($inputFieldName) {
             MutationInputProperties::COMMENT => SchemaTypeModifiers::MANDATORY,
-            MutationInputProperties::PARENT_COMMENT_ID => $this->isParentCommentMandatory() ? SchemaTypeModifiers::MANDATORY : SchemaTypeModifiers::NONE,
+            MutationInputProperties::PARENT_COMMENT_ID => $this->isParentCommentInputFieldMandatory() ? SchemaTypeModifiers::MANDATORY : SchemaTypeModifiers::NONE,
             MutationInputProperties::CUSTOMPOST_ID => SchemaTypeModifiers::MANDATORY,
             default => SchemaTypeModifiers::NONE,
         };

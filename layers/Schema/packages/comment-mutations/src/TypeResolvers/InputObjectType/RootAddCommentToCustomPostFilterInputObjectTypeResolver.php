@@ -16,17 +16,17 @@ class RootAddCommentToCustomPostFilterInputObjectTypeResolver extends AbstractAd
         return $this->getTranslationAPI()->__('Input to add a comment to a custom post', 'comment-mutations');
     }
 
-    protected function addCustomPostInputFields(): bool
+    protected function addCustomPostInputField(): bool
     {
         return true;
     }
 
-    protected function addParentInputFields(): bool
+    protected function addParentCommentInputField(): bool
     {
         return true;
     }
 
-    protected function isParentCommentMandatory(): bool
+    protected function isParentCommentInputFieldMandatory(): bool
     {
         return false;
     }
