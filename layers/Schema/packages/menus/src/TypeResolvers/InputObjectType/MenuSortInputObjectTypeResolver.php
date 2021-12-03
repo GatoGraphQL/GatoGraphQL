@@ -36,7 +36,7 @@ class MenuSortInputObjectTypeResolver extends SortInputObjectTypeResolver
         );
     }
 
-    public function getInputFieldDefaultValue(string $inputFieldName): ?string
+    public function getInputFieldDefaultValue(string $inputFieldName): mixed
     {
         return match ($inputFieldName) {
             'by' => MenuOrderBy::DATE,
