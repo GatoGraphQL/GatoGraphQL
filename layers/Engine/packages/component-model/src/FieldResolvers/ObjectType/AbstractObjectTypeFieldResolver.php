@@ -690,12 +690,13 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          */
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
         if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
+            $mutationFieldArgs = $this->getMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs);
             /**
              * If it throws an Exception do nothing, since the error will
              * also be caught when validating the inputs
              */
             try {
-                return $mutationResolver->validateErrors($fieldArgs);
+                return $mutationResolver->validateErrors($mutationFieldArgs);
             } catch (Exception) {
             }
         }
@@ -931,6 +932,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
         if ($mutationResolver !== null) {
+            $mutationFieldArgs = $this->getMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs);
             /**
              * If it throws an Exception do nothing, since the error will
              * also be caught when validating the inputs
@@ -938,7 +940,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             try {
                 $warnings = array_merge(
                     $warnings,
-                    $mutationResolver->validateWarnings($fieldArgs)
+                    $mutationResolver->validateWarnings($mutationFieldArgs)
                 );
             } catch (Exception) {
             }
@@ -1023,7 +1025,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
             // Validate on the object
             $mutationFieldArgs = $this->getFieldArgsToExecuteMutation(
-                $fieldArgs,
+                $this->getMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs),
                 $objectTypeResolver,
                 $object,
                 $fieldName
@@ -1036,6 +1038,69 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
 
         return [];
+    }
+
+    /**
+     * Retrieve the field arguments to pass to the MutationResolver,
+     * for instance from under an InputObject.
+     *
+     * @param array<string, mixed> $fieldArgs
+     * @return array<string, mixed>
+     */
+    protected function getMutationFieldArgs(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        array $fieldArgs,
+    ): array {
+        if ($this->extractInputObjectFieldArgsForMutation($objectTypeResolver, $fieldName)) {
+            $fieldArgs = $this->maybeGetInputObjectFieldArgs(
+                $objectTypeResolver,
+                $fieldName,
+                $fieldArgs,
+            );
+        }
+        return $fieldArgs;
+    }
+
+    /**
+     * Indicate: if the field has a single field argument, which is of type InputObject,
+     * then retrieve the value for its input fields?
+     */
+    protected function extractInputObjectFieldArgsForMutation(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+    ): bool {
+        return true;
+    }
+
+    /**
+     * If the field has a single argument, which is of type InputObject,
+     * then retrieve the value for its input fields.
+     *
+     * @param array<string, mixed> $fieldArgs
+     * @return array<string, mixed>
+     */
+    private function maybeGetInputObjectFieldArgs(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        array $fieldArgs,
+    ): array {
+        $fieldArgNameTypeResolvers = $this->getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        
+        // Check if there is only one fieldArg
+        if (count($fieldArgNameTypeResolvers) !== 1) {
+            return $fieldArgs;
+        }
+        
+        // Check if the fieldArg is an InputObject
+        $fieldArgName = key($fieldArgNameTypeResolvers);
+        $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$fieldArgName];
+        if (!($fieldArgTypeResolver instanceof InputObjectTypeResolverInterface)) {
+            return $fieldArgs;
+        }
+        
+        // Retrieve the elements under the InputObject, cast to array
+        return (array) $fieldArgs[$fieldArgName];
     }
 
     /**
@@ -1068,7 +1133,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
         if ($mutationResolver !== null) {
             $mutationFieldArgs = $this->getFieldArgsToExecuteMutation(
-                $fieldArgs,
+                $this->getMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs),
                 $objectTypeResolver,
                 $object,
                 $fieldName
