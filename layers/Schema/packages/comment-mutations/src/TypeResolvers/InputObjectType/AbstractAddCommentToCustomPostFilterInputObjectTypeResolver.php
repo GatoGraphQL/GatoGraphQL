@@ -86,7 +86,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
             MutationInputProperties::AUTHOR_NAME => $this->getTranslationAPI()->__('The comment author\'s name', 'comment-mutations'),
             MutationInputProperties::AUTHOR_EMAIL => $this->getTranslationAPI()->__('The comment author\'s email', 'comment-mutations'),
             MutationInputProperties::AUTHOR_URL => $this->getTranslationAPI()->__('The comment author\'s site URL', 'comment-mutations'),
-            default => null,
+            default => parent::getInputFieldDefaultValue($inputFieldName),
         };
     }
 
@@ -96,7 +96,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
             MutationInputProperties::COMMENT => SchemaTypeModifiers::MANDATORY,
             MutationInputProperties::PARENT_COMMENT_ID => $this->isParentCommentInputFieldMandatory() ? SchemaTypeModifiers::MANDATORY : SchemaTypeModifiers::NONE,
             MutationInputProperties::CUSTOMPOST_ID => SchemaTypeModifiers::MANDATORY,
-            default => SchemaTypeModifiers::NONE,
+            default => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }
 }
