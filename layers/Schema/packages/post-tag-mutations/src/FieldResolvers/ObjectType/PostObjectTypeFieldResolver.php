@@ -7,13 +7,16 @@ namespace PoPSchema\PostTagMutations\FieldResolvers\ObjectType;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\CustomPostTagMutations\FieldResolvers\ObjectType\AbstractCustomPostObjectTypeFieldResolver;
+use PoPSchema\CustomPostTagMutations\TypeResolvers\InputObjectType\AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\PostTagMutations\MutationResolvers\SetTagsOnPostMutationResolver;
+use PoPSchema\PostTagMutations\TypeResolvers\InputObjectType\PostSetTagsFilterInputObjectTypeResolver;
 
 class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResolver
 {
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver = null;
+    private ?PostSetTagsFilterInputObjectTypeResolver $postSetTagsFilterInputObjectTypeResolver = null;
 
     final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {
@@ -31,6 +34,14 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     {
         return $this->setTagsOnPostMutationResolver ??= $this->instanceManager->getInstance(SetTagsOnPostMutationResolver::class);
     }
+    final public function setPostSetTagsFilterInputObjectTypeResolver(PostSetTagsFilterInputObjectTypeResolver $postSetTagsFilterInputObjectTypeResolver): void
+    {
+        $this->postSetTagsFilterInputObjectTypeResolver = $postSetTagsFilterInputObjectTypeResolver;
+    }
+    final protected function getPostSetTagsFilterInputObjectTypeResolver(): AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver
+    {
+        return $this->postSetTagsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostSetTagsFilterInputObjectTypeResolver::class);
+    }
 
     public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
     {
@@ -40,6 +51,11 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     public function getSetTagsMutationResolver(): MutationResolverInterface
     {
         return $this->getSetTagsOnPostMutationResolver();
+    }
+
+    public function getCustomPostSetTagsFilterInputObjectTypeResolver(): AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver
+    {
+        return $this->getPostSetTagsFilterInputObjectTypeResolver();
     }
 
     protected function getEntityName(): string
