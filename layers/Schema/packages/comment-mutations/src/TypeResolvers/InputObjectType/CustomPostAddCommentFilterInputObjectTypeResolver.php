@@ -8,12 +8,12 @@ class CustomPostAddCommentFilterInputObjectTypeResolver extends AbstractAddComme
 {
     public function getTypeName(): string
     {
-        return 'AddCommentFilterInput';
+        return 'CustomPostAddCommentFilterInput';
     }
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Input to add a comment', 'comment-mutations');
+        return $this->getTranslationAPI()->__('Input to add a comment to a custom post', 'comment-mutations');
     }
 
     protected function addParentInputFields(): bool
