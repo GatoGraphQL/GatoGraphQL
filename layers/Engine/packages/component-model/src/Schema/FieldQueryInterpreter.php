@@ -497,7 +497,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 // But don't skip it! It may be that the engine accepts the property, it is just not documented!
                 if (!array_key_exists($fieldOrDirectiveArgName, $fieldOrDirectiveArgumentNameTypeResolvers)) {
                     $errorMessage = sprintf(
-                        $this->getTranslationAPI()->__('On %1$s \'%2$s\', argument with name \'%3$s\' has not been documented in the schema', 'pop-component-model'),
+                        $this->getTranslationAPI()->__('On %1$s \'%2$s\', there is no argument with name \'%3$s\'', 'pop-component-model'),
                         $resolverType == ResolverTypes::FIELD ? $this->getTranslationAPI()->__('field', 'component-model') : $this->getTranslationAPI()->__('directive', 'component-model'),
                         $this->getFieldName($fieldOrDirective),
                         $fieldOrDirectiveArgName
