@@ -11,7 +11,7 @@ class RootUpdateCustomPostFilterInputObjectTypeResolver extends AbstractCreateOr
         return 'RootUpdateCustomPostFilterInput';
     }
 
-    protected function addCustomPostIDInputField(): bool
+    protected function addCustomPostInputField(): bool
     {
         return true;
     }

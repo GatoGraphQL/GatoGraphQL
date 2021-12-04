@@ -11,7 +11,7 @@ class CustomPostUpdateFilterInputObjectTypeResolver extends AbstractCreateOrUpda
         return 'CustomPostUpdateFilterInput';
     }
 
-    protected function addCustomPostIDInputField(): bool
+    protected function addCustomPostInputField(): bool
     {
         return false;
     }

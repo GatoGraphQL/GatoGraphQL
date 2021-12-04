@@ -50,7 +50,7 @@ abstract class AbstractCreateOrUpdateCustomPostFilterInputObjectTypeResolver ext
     public function getInputFieldNameTypeResolvers(): array
     {
         return array_merge(
-            $this->addCustomPostIDInputField() ? [
+            $this->addCustomPostInputField() ? [
                 MutationInputProperties::ID => $this->getIDScalarTypeResolver(),
             ] : [],
             [
@@ -61,7 +61,7 @@ abstract class AbstractCreateOrUpdateCustomPostFilterInputObjectTypeResolver ext
         );
     }
 
-    abstract protected function addCustomPostIDInputField(): bool;
+    abstract protected function addCustomPostInputField(): bool;
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
