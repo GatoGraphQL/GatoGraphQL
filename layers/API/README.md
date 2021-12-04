@@ -57,13 +57,13 @@ query=
     limit: 5
   )@posts.
     id|
-    dateAsString(format: d/m/Y)|
+    dateStr(format: d/m/Y)|
     title<
       skip(if: false)
     >
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5})@posts.id%7CdateAsString(format:d/m/Y)%7Ctitle<skip(if:false)>">View query results</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=posts(pagination:{limit:5})@posts.id%7CdateStr(format:d/m/Y)%7Ctitle<skip(if:false)>">View query results</a>
 
 The syntax has the following elements:
 
@@ -86,7 +86,7 @@ query=
     sort: { by: $order }
   )@posts.
     id|
-    dateAsString(format: d/m/Y)|
+    dateStr(format: d/m/Y)|
     title<
       skip(if: false)
     >|
@@ -99,7 +99,7 @@ props=
     url
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?order=TITLE%7CASC&amp;props=url%7Cauthor.name%7Curl&amp;query=posts(filter:{ids:%5B1,1499,1178%5D},sort:{by:%24order})@posts.id%7CdateAsString(format:d/m/Y)%7Ctitle<skip(if:false)>%7C--props">View query results</a>
+<a href="https://newapi.getpop.org/api/graphql/?order=TITLE%7CASC&amp;props=url%7Cauthor.name%7Curl&amp;query=posts(filter:{ids:%5B1,1499,1178%5D},sort:{by:%24order})@posts.id%7CdateStr(format:d/m/Y)%7Ctitle<skip(if:false)>%7C--props">View query results</a>
 
 ### Dynamic schema
 
@@ -125,7 +125,7 @@ This query...
 postId=1&
 query=
   post({id:$postId}).
-    dateAsString(d/m/Y)|
+    dateStr(d/m/Y)|
     title<
       skip(false)
     >
@@ -139,15 +139,15 @@ query=
 postId=1&
 query=
   post(by:{id:$postId}).
-    dateAsString(format:d/m/Y)|
+    dateStr(format:d/m/Y)|
     title<
       skip(if:false)
     >
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?postId=1&amp;query=post({id:%24postId}).dateAsString(d/m/Y)%7Ctitle%3Cskip(false)%3E">View query results #1</a>
+<a href="https://newapi.getpop.org/api/graphql/?postId=1&amp;query=post({id:%24postId}).dateStr(d/m/Y)%7Ctitle%3Cskip(false)%3E">View query results #1</a>
 
-<a href="https://newapi.getpop.org/api/graphql/?postId=1&amp;query=post(by:{id:%24postId}).dateAsString(format:d/m/Y)%7Ctitle<skip(if:false)>">View query results #2</a>
+<a href="https://newapi.getpop.org/api/graphql/?postId=1&amp;query=post(by:{id:%24postId}).dateStr(format:d/m/Y)%7Ctitle<skip(if:false)>">View query results #2</a>
 
 ### Operators and Helpers
 
@@ -227,13 +227,13 @@ query=
       ), 
       sprintf(
         "This post was created on %s and has no comments", [
-          dateAsString(format: if(not(empty($format)), $format, d/m/Y))
+          dateStr(format: if(not(empty($format)), $format, d/m/Y))
         ]
       )
     )@postDesc
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?format=Y-m-d&amp;query=posts.if(hasComments(),sprintf(%22This%20post%20has%20%s%20comment(s)%20and%20title%20%27%s%27%22,%5BcommentCount(),title()%5D),sprintf(%22This%20post%20was%20created%20on%20%s%20and%20has%20no%20comments%22,%5BdateAsString(format:if(not(empty(%24format)),%24format,d/m/Y))%5D))@postDesc">View query results</a>
+<a href="https://newapi.getpop.org/api/graphql/?format=Y-m-d&amp;query=posts.if(hasComments(),sprintf(%22This%20post%20has%20%s%20comment(s)%20and%20title%20%27%s%27%22,%5BcommentCount(),title()%5D),sprintf(%22This%20post%20was%20created%20on%20%s%20and%20has%20no%20comments%22,%5BdateStr(format:if(not(empty(%24format)),%24format,d/m/Y))%5D))@postDesc">View query results</a>
 
 This solves an issue with GraphQL: That we may need to define a field argument with arbitrary values in order to provide variations of the field's response (which is akin to REST's way of creating multiple endpoints to satisfy different needs, such as `/posts-1st-format/` and `/posts-2nd-format/`).
 
@@ -270,12 +270,12 @@ query=
     )@postDesc<include(if:hasComments())>|
     sprintf(
       "This post was created on %s and has no comments", [
-        dateAsString(format: if(not(empty($format)), $format, d/m/Y))
+        dateStr(format: if(not(empty($format)), $format, d/m/Y))
       ]
     )@postDesc<include(if:not(hasComments()))>
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?format=Y-m-d&query=posts.sprintf(%22This%20post%20has%20%s%20comment(s)%20and%20title%20%27%s%27%22,%20[commentCount(),title()])@postDesc%3Cinclude(if:hasComments())%3E|sprintf(%22This%20post%20was%20created%20on%20%s%20and%20has%20no%20comments%22,%20[dateAsString(format:%20if(not(empty($format)),%20$format,%20d/m/Y))])@postDesc%3Cinclude(if:not(hasComments()))%3E">View query results</a>
+<a href="https://newapi.getpop.org/api/graphql/?format=Y-m-d&query=posts.sprintf(%22This%20post%20has%20%s%20comment(s)%20and%20title%20%27%s%27%22,%20[commentCount(),title()])@postDesc%3Cinclude(if:hasComments())%3E|sprintf(%22This%20post%20was%20created%20on%20%s%20and%20has%20no%20comments%22,%20[dateStr(format:%20if(not(empty($format)),%20$format,%20d/m/Y))])@postDesc%3Cinclude(if:not(hasComments()))%3E">View query results</a>
 
 ### Skip output if null
 
@@ -984,10 +984,10 @@ postId=1&
 query=
   post({id:$postId}).
     title|
-    dateAsString(d/m/Y)
+    dateStr(d/m/Y)
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?actions%5B%5D=show-logs&amp;postId=1&amp;query=post({id:%24postId}).title%7CdateAsString(d/m/Y)">View query results</a>
+<a href="https://newapi.getpop.org/api/graphql/?actions%5B%5D=show-logs&amp;postId=1&amp;query=post({id:%24postId}).title%7CdateStr(d/m/Y)">View query results</a>
 
 ### Embeddable fields
 
@@ -997,11 +997,11 @@ Syntactic sugar for composable fields: Resolve a field within an argument for an
 /?
 query=
   posts.
-    echo(({{ commentCount }}) {{ title }} - posted on {{ dateAsString(d/m/Y) }})@title<include({{ hasComments }})>|
+    echo(({{ commentCount }}) {{ title }} - posted on {{ dateStr(d/m/Y) }})@title<include({{ hasComments }})>|
     title<skip({{ hasComments }})>
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?query=posts.echo(({{%20commentCount%20}})%20{{%20title%20}}%20-%20posted%20on%20{{%20dateAsString(d/m/Y)%20}})@title%3Cinclude({{%20hasComments%20}})%3E|title%3Cskip({{%20hasComments%20}})%3E">View query results</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=posts.echo(({{%20commentCount%20}})%20{{%20title%20}}%20-%20posted%20on%20{{%20dateStr(d/m/Y)%20}})@title%3Cinclude({{%20hasComments%20}})%3E|title%3Cskip({{%20hasComments%20}})%3E">View query results</a>
 
 ### Mutations
 
@@ -1039,7 +1039,7 @@ postId=1&
 query=
   post({id:$postId})@post.
     content|
-    dateAsString(d/m/Y)@date,
+    dateStr(d/m/Y)@date,
   getJSON("https://newapi.getpop.org/wp-json/newsletter/v1/subscriptions")@userList|
   arrayUnique(
     extract(
@@ -1189,7 +1189,7 @@ query=
   >
 ```
 
-<a href='https://newapi.getpop.org/api/graphql/?postId=1&query=post({id:$postId})@post.content|dateAsString(d/m/Y)@date,getJSON("https://newapi.getpop.org/wp-json/newsletter/v1/subscriptions")@userList|arrayUnique(extract(getSelfProp(%self%,userList),lang))@userLangs|extract(getSelfProp(%self%,userList),email)@userEmails|arrayFill(getJSON(sprintf("https://newapi.getpop.org/users/api/rest/?query=name|email%26emails[]=%s",[arrayJoin(getSelfProp(%self%,userEmails),"%26emails[]=")])),getSelfProp(%self%,userList),email)@userData;post({id:$postId})@post<copyRelationalResults([content,date],[postContent,postDate])>;getSelfProp(%self%,postContent)@postContent<translateMultiple(from:en,to:arrayDiff([getSelfProp(%self%,userLangs),[en]])),renameProperty(postContent-en)>|getSelfProp(%self%,userData)@userPostData<forEach<applyFunction(function:arrayAddItem(array:[],value:""),addArguments:[key:postContent,array:%value%,value:getSelfProp(%self%,sprintf(postContent-%s,[extract(%value%,lang)]))]),applyFunction(function:arrayAddItem(array:[],value:""),addArguments:[key:header,array:%value%,value:sprintf(string:"<p>Hi %s, we published this post on %s,enjoy!</p>",values:[extract(%value%,name),getSelfProp(%self%,postDate)])])>>;getSelfProp(%self%,userPostData)@translatedUserPostProps<forEach(if:not(equals(extract(%value%,lang),en)))<advancePointerInArray(path:header,appendExpressions:[toLang:extract(%value%,lang)])<translateMultiple(from:en,to:%toLang%,oneLanguagePerField:true,override:true)>>>;getSelfProp(%self%,translatedUserPostProps)@emails<forEach<applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:content,array:%value%,value:concat([extract(%value%,header),extract(%value%,postContent)])]),applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:to,array:%value%,value:extract(%value%,email)]),applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:subject,array:%value%,value:"PoP API example :)"]),sendByEmail>>'>View query results</a>
+<a href='https://newapi.getpop.org/api/graphql/?postId=1&query=post({id:$postId})@post.content|dateStr(d/m/Y)@date,getJSON("https://newapi.getpop.org/wp-json/newsletter/v1/subscriptions")@userList|arrayUnique(extract(getSelfProp(%self%,userList),lang))@userLangs|extract(getSelfProp(%self%,userList),email)@userEmails|arrayFill(getJSON(sprintf("https://newapi.getpop.org/users/api/rest/?query=name|email%26emails[]=%s",[arrayJoin(getSelfProp(%self%,userEmails),"%26emails[]=")])),getSelfProp(%self%,userList),email)@userData;post({id:$postId})@post<copyRelationalResults([content,date],[postContent,postDate])>;getSelfProp(%self%,postContent)@postContent<translateMultiple(from:en,to:arrayDiff([getSelfProp(%self%,userLangs),[en]])),renameProperty(postContent-en)>|getSelfProp(%self%,userData)@userPostData<forEach<applyFunction(function:arrayAddItem(array:[],value:""),addArguments:[key:postContent,array:%value%,value:getSelfProp(%self%,sprintf(postContent-%s,[extract(%value%,lang)]))]),applyFunction(function:arrayAddItem(array:[],value:""),addArguments:[key:header,array:%value%,value:sprintf(string:"<p>Hi %s, we published this post on %s,enjoy!</p>",values:[extract(%value%,name),getSelfProp(%self%,postDate)])])>>;getSelfProp(%self%,userPostData)@translatedUserPostProps<forEach(if:not(equals(extract(%value%,lang),en)))<advancePointerInArray(path:header,appendExpressions:[toLang:extract(%value%,lang)])<translateMultiple(from:en,to:%toLang%,oneLanguagePerField:true,override:true)>>>;getSelfProp(%self%,translatedUserPostProps)@emails<forEach<applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:content,array:%value%,value:concat([extract(%value%,header),extract(%value%,postContent)])]),applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:to,array:%value%,value:extract(%value%,email)]),applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:subject,array:%value%,value:"PoP API example :)"]),sendByEmail>>'>View query results</a>
 
 **Step-by-step description of the solution:**
 

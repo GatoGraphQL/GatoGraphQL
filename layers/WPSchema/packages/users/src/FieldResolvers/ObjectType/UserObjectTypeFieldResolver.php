@@ -61,7 +61,7 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'nickname',
             'locale',
             'registeredDate',
-            'registeredDateAsString',
+            'registeredDateStr',
         ];
     }
 
@@ -72,7 +72,7 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'nickname' => $this->getStringScalarTypeResolver(),
             'locale' => $this->getStringScalarTypeResolver(),
             'registeredDate' => $this->getDateTimeScalarTypeResolver(),
-            'registeredDateAsString' => $this->getStringScalarTypeResolver(),
+            'registeredDateStr' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -84,7 +84,7 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'nickname',
             'locale',
             'registeredDate',
-            'registeredDateAsString'
+            'registeredDateStr'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -98,7 +98,7 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'nickname' => $this->getTranslationAPI()->__('User\'s nickname', 'pop-users'),
             'locale' => $this->getTranslationAPI()->__('Retrieves the locale of a user', 'pop-users'),
             'registeredDate' => $this->getTranslationAPI()->__('The date the user registerd on the site', 'pop-users'),
-            'registeredDateAsString' => $this->getTranslationAPI()->__('The date the user registerd on the site, in String format', 'pop-users'),
+            'registeredDateStr' => $this->getTranslationAPI()->__('The date the user registerd on the site, in String format', 'pop-users'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -106,7 +106,7 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
-            'registeredDateAsString' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING],
+            'registeredDateStr' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
     }
@@ -137,7 +137,7 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 return \get_user_locale($user);
             case 'registeredDate':
                 return new DateTime($user->user_registered);
-            case 'registeredDateAsString':
+            case 'registeredDateStr':
                 return $this->getDateFormatter()->format(
                     $fieldArgs['format'],
                     $user->user_registered

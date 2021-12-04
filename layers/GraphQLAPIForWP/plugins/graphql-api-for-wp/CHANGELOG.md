@@ -46,7 +46,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.myCustomPostCount: Int!`
 - Query properties for custom post fields:
   - `modified: DateTime`
-  - `modifiedAsString: String`
+  - `modifiedDateStr: String`
 - Query properties for posts:
   - `Post.postFormat: String!`
   - `isSticky: Bool!`
@@ -131,9 +131,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Media.altText: String`
   - `Media.description: String`
   - `Media.date: DateTime`
-  - `Media.dateAsString: String`
+  - `Media.dateStr: String`
   - `Media.modified: DateTime`
-  - `Media.modifiedAsString: String`
+  - `Media.modifiedDateStr: String`
   - `Media.mimeType: String`
   - `Media.sizes: String`
 

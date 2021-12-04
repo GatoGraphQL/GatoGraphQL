@@ -117,16 +117,16 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
             case 'date':
                 return new DateTime($customPostTypeAPI->getPublishedDate($customPost, $fieldArgs['gmt']));
 
-            case 'dateAsString':
+            case 'dateStr':
                 return $this->getDateFormatter()->format(
                     $fieldArgs['format'],
                     $customPostTypeAPI->getPublishedDate($customPost, $fieldArgs['gmt'])
                 );
 
-            case 'modified':
+            case 'modifiedDate':
                 return new DateTime($customPostTypeAPI->getModifiedDate($customPost, $fieldArgs['gmt']));
 
-            case 'modifiedAsString':
+            case 'modifiedDateStr':
                 return $this->getDateFormatter()->format(
                     $fieldArgs['format'],
                     $customPostTypeAPI->getModifiedDate($customPost, $fieldArgs['gmt'])

@@ -109,9 +109,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'status',
             'isStatus',
             'date',
-            'dateAsString',
-            'modified',
-            'modifiedAsString',
+            'dateStr',
+            'modifiedDate',
+            'modifiedDateStr',
             'title',
             'excerpt',
             'customPostType',
@@ -124,13 +124,13 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'isStatus'
                 => $this->getBooleanScalarTypeResolver(),
             'date',
-            'modified'
+            'modifiedDate'
                 => $this->getDateTimeScalarTypeResolver(),
             'content',
             'title',
             'excerpt',
-            'dateAsString',
-            'modifiedAsString'
+            'dateStr',
+            'modifiedDateStr'
                 => $this->getStringScalarTypeResolver(),
             'customPostType'
                 => $this->getCustomPostEnumTypeResolver(),
@@ -152,9 +152,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             case 'status':
             case 'isStatus':
             case 'date':
-            case 'dateAsString':
-            case 'modified':
-            case 'modifiedAsString':
+            case 'dateStr':
+            case 'modifiedDate':
+            case 'modifiedDateStr':
             case 'customPostType':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }
@@ -171,9 +171,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'status' => $this->getTranslationAPI()->__('Custom post status', 'customposts'),
             'isStatus' => $this->getTranslationAPI()->__('Is the custom post in the given status?', 'customposts'),
             'date' => $this->getTranslationAPI()->__('Custom post published date', 'customposts'),
-            'dateAsString' => $this->getTranslationAPI()->__('Custom post published date, in String format', 'customposts'),
-            'modified' => $this->getTranslationAPI()->__('Custom post modified date', 'customposts'),
-            'modifiedAsString' => $this->getTranslationAPI()->__('Custom post modified date, in String format', 'customposts'),
+            'dateStr' => $this->getTranslationAPI()->__('Custom post published date, in String format', 'customposts'),
+            'modifiedDate' => $this->getTranslationAPI()->__('Custom post modified date', 'customposts'),
+            'modifiedDateStr' => $this->getTranslationAPI()->__('Custom post modified date, in String format', 'customposts'),
             'title' => $this->getTranslationAPI()->__('Custom post title', 'customposts'),
             'excerpt' => $this->getTranslationAPI()->__('Custom post excerpt', 'customposts'),
             'customPostType' => $this->getTranslationAPI()->__('Custom post type', 'customposts'),
@@ -223,9 +223,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     {
         return match ($fieldName) {
             'date' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE],
-            'dateAsString' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
-            'modified' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE],
-            'modifiedAsString' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
+            'dateStr' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
+            'modifiedDate' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE],
+            'modifiedDateStr' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
             default => parent::getFieldFilterInputContainerModule($fieldName),
         };
     }
