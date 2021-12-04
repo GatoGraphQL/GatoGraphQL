@@ -59,7 +59,7 @@ class SortInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolv
         };
     }
 
-    public function getInputFieldDefaultValue(string $inputFieldName): ?string
+    public function getInputFieldDefaultValue(string $inputFieldName): mixed
     {
         return match ($inputFieldName) {
             'order' => Order::DESC,

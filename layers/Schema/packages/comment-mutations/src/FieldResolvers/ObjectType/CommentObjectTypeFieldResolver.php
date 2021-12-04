@@ -4,30 +4,22 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;
+use PoPSchema\CommentMutations\TypeResolvers\InputObjectType\CommentReplyFilterInputObjectTypeResolver;
 use PoPSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 
-class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTypeFieldResolver
 {
-    use AddCommentToCustomPostObjectTypeFieldResolverTrait;
-
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
-    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
+    private ?CommentReplyFilterInputObjectTypeResolver $commentReplyFilterInputObjectTypeResolver = null;
 
     final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
     {
@@ -53,37 +45,13 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return $this->addCommentToCustomPostMutationResolver ??= $this->instanceManager->getInstance(AddCommentToCustomPostMutationResolver::class);
     }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setCommentReplyFilterInputObjectTypeResolver(CommentReplyFilterInputObjectTypeResolver $commentReplyFilterInputObjectTypeResolver): void
     {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->commentReplyFilterInputObjectTypeResolver = $commentReplyFilterInputObjectTypeResolver;
     }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getCommentReplyFilterInputObjectTypeResolver(): CommentReplyFilterInputObjectTypeResolver
     {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-    }
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
-    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
-    {
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
-    }
-    final public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
-    {
-        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
-    }
-    final protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
-    {
-        return $this->emailScalarTypeResolver ??= $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
-    }
-    final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
-    {
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-    }
-    final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
-    {
-        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+        return $this->commentReplyFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(CommentReplyFilterInputObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -111,23 +79,17 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            'reply' => $this->getAddCommentToCustomPostSchemaFieldArgNameTypeResolvers(false, false),
+            'reply' => [
+                'input' => $this->getCommentReplyFilterInputObjectTypeResolver(),
+            ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
-    {
-        return match ($fieldName) {
-            'reply' => $this->getAddCommentToCustomPostSchemaFieldArgDescription($fieldArgName),
-            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
-        return match ($fieldName) {
-            'reply' => $this->getAddCommentToCustomPostSchemaFieldArgTypeModifiers($fieldArgName),
+        return match ([$fieldName => $fieldArgName]) {
+            ['reply' => 'input'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -145,14 +107,14 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    protected function getFieldArgsToExecuteMutation(
-        array $fieldArgs,
+    protected function getMutationFieldArgsForObject(
+        array $mutationFieldArgs,
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName
     ): array {
-        $fieldArgs = parent::getFieldArgsToExecuteMutation(
-            $fieldArgs,
+        $mutationFieldArgs = parent::getMutationFieldArgsForObject(
+            $mutationFieldArgs,
             $objectTypeResolver,
             $object,
             $fieldName
@@ -160,12 +122,12 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $comment = $object;
         switch ($fieldName) {
             case 'reply':
-                $fieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $this->getCommentTypeAPI()->getCommentPostId($comment);
-                $fieldArgs[MutationInputProperties::PARENT_COMMENT_ID] = $objectTypeResolver->getID($comment);
+                $mutationFieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $this->getCommentTypeAPI()->getCommentPostId($comment);
+                $mutationFieldArgs[MutationInputProperties::PARENT_COMMENT_ID] = $objectTypeResolver->getID($comment);
                 break;
         }
 
-        return $fieldArgs;
+        return $mutationFieldArgs;
     }
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface

@@ -19,11 +19,9 @@ class CommentTypeMutationAPI implements CommentTypeMutationAPIInterface
     public function insertComment(array $comment_data): string | int | Error
     {
         // Convert the parameters
-        if (ComponentConfiguration::mustUserBeLoggedInToAddComment()) {
-            if (isset($comment_data['userID'])) {
-                $comment_data['user_id'] = $comment_data['userID'];
-                unset($comment_data['userID']);
-            }
+        if (isset($comment_data['userID'])) {
+            $comment_data['user_id'] = $comment_data['userID'];
+            unset($comment_data['userID']);
         }
         if (isset($comment_data['author'])) {
             $comment_data['comment_author'] = $comment_data['author'];

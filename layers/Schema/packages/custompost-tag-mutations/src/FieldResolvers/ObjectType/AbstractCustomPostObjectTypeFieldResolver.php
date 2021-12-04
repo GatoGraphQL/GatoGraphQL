@@ -9,33 +9,11 @@ use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
 
 abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements SetTagsOnCustomPostObjectTypeFieldResolverInterface
 {
     use SetTagsOnCustomPostObjectTypeFieldResolverTrait;
-
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
-    {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-    }
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
-    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
-    {
-        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
-    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -74,34 +52,16 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ($fieldName) {
             'setTags' => [
-                MutationInputProperties::TAGS => $this->getStringScalarTypeResolver(),
-                MutationInputProperties::APPEND => $this->getBooleanScalarTypeResolver(),
+                'input' => $this->getCustomPostSetTagsFilterInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            ['setTags' => MutationInputProperties::TAGS] => $this->getTranslationAPI()->__('The tags to set', 'custompost-tag-mutations'),
-            ['setTags' => MutationInputProperties::APPEND] => $this->getTranslationAPI()->__('Append the tags to the existing ones?', 'custompost-tag-mutations'),
-            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
-        };
-    }
-
-    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            ['setTags' => MutationInputProperties::APPEND] => false,
-            default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['setTags' => MutationInputProperties::TAGS] => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::MANDATORY,
+            ['setTags' => 'input'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -119,14 +79,14 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         };
     }
 
-    protected function getFieldArgsToExecuteMutation(
-        array $fieldArgs,
+    protected function getMutationFieldArgsForObject(
+        array $mutationFieldArgs,
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName
     ): array {
-        $fieldArgs = parent::getFieldArgsToExecuteMutation(
-            $fieldArgs,
+        $mutationFieldArgs = parent::getMutationFieldArgsForObject(
+            $mutationFieldArgs,
             $objectTypeResolver,
             $object,
             $fieldName
@@ -134,11 +94,11 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         $customPost = $object;
         switch ($fieldName) {
             case 'setTags':
-                $fieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $objectTypeResolver->getID($customPost);
+                $mutationFieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $objectTypeResolver->getID($customPost);
                 break;
         }
 
-        return $fieldArgs;
+        return $mutationFieldArgs;
     }
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface

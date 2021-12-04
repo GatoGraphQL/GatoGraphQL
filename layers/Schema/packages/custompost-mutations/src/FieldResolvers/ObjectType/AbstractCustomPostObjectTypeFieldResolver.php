@@ -5,43 +5,22 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
+use PoPSchema\CustomPostMutations\TypeResolvers\InputObjectType\CustomPostUpdateFilterInputObjectTypeResolver;
 
 abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    use CreateOrUpdateCustomPostObjectTypeFieldResolverTrait;
+    private ?CustomPostUpdateFilterInputObjectTypeResolver $customPostUpdateFilterInputObjectTypeResolver = null;
 
-    private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
-    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-
-    final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
+    final public function setCustomPostUpdateFilterInputObjectTypeResolver(CustomPostUpdateFilterInputObjectTypeResolver $customPostUpdateFilterInputObjectTypeResolver): void
     {
-        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+        $this->customPostUpdateFilterInputObjectTypeResolver = $customPostUpdateFilterInputObjectTypeResolver;
     }
-    final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
+    final protected function getCustomPostUpdateFilterInputObjectTypeResolver(): CustomPostUpdateFilterInputObjectTypeResolver
     {
-        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
-    }
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
-    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
-    {
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
-    {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        return $this->customPostUpdateFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostUpdateFilterInputObjectTypeResolver::class);
     }
 
     public function getFieldNamesToResolve(): array
@@ -62,23 +41,17 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            'update' => $this->getCreateOrUpdateCustomPostSchemaFieldArgNameTypeResolvers(false),
+            'update' => [
+                'input' => $this->getCustomPostUpdateFilterInputObjectTypeResolver(),
+            ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
-    {
-        return match ($fieldName) {
-            'update' => $this->getCreateOrUpdateCustomPostSchemaFieldArgDescription($fieldArgName),
-            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
-        return match ($fieldName) {
-            'update' => $this->getCreateOrUpdateCustomPostSchemaFieldArgTypeModifiers($fieldArgName),
+        return match ([$fieldName => $fieldArgName]) {
+            ['update' => 'input'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -99,14 +72,14 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
     }
 
-    protected function getFieldArgsToExecuteMutation(
-        array $fieldArgs,
+    protected function getMutationFieldArgsForObject(
+        array $mutationFieldArgs,
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName
     ): array {
-        $fieldArgs = parent::getFieldArgsToExecuteMutation(
-            $fieldArgs,
+        $mutationFieldArgs = parent::getMutationFieldArgsForObject(
+            $mutationFieldArgs,
             $objectTypeResolver,
             $object,
             $fieldName
@@ -114,10 +87,10 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         $post = $object;
         switch ($fieldName) {
             case 'update':
-                $fieldArgs[MutationInputProperties::ID] = $objectTypeResolver->getID($post);
+                $mutationFieldArgs[MutationInputProperties::ID] = $objectTypeResolver->getID($post);
                 break;
         }
 
-        return $fieldArgs;
+        return $mutationFieldArgs;
     }
 }

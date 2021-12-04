@@ -9,6 +9,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPostMutations\FieldResolvers\ObjectType\AbstractCustomPostObjectTypeFieldResolver;
 use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
+use PoPSchema\PostMutations\TypeResolvers\InputObjectType\PostUpdateFilterInputObjectTypeResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPSchema\UserState\FieldResolvers\ObjectType\UserStateObjectTypeFieldResolverTrait;
 
@@ -18,6 +19,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
 
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?UpdatePostMutationResolver $updatePostMutationResolver = null;
+    private ?PostUpdateFilterInputObjectTypeResolver $postUpdateFilterInputObjectTypeResolver = null;
 
     final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {
@@ -35,6 +37,14 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     {
         return $this->updatePostMutationResolver ??= $this->instanceManager->getInstance(UpdatePostMutationResolver::class);
     }
+    final public function setPostUpdateFilterInputObjectTypeResolver(PostUpdateFilterInputObjectTypeResolver $postUpdateFilterInputObjectTypeResolver): void
+    {
+        $this->postUpdateFilterInputObjectTypeResolver = $postUpdateFilterInputObjectTypeResolver;
+    }
+    final protected function getPostUpdateFilterInputObjectTypeResolver(): PostUpdateFilterInputObjectTypeResolver
+    {
+        return $this->postUpdateFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostUpdateFilterInputObjectTypeResolver::class);
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -48,6 +58,16 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
         return match ($fieldName) {
             'update' => $this->getTranslationAPI()->__('Update the post', 'post-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        return match ($fieldName) {
+            'update' => [
+                'input' => $this->getPostUpdateFilterInputObjectTypeResolver(),
+            ],
+            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 

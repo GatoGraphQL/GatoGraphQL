@@ -9,10 +9,10 @@ use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\RemoveFeaturedImageOnCustomPostMutationResolver;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\SetFeaturedImageOnCustomPostMutationResolver;
+use PoPSchema\CustomPostMediaMutations\TypeResolvers\InputObjectType\CustomPostSetFeaturedImageFilterInputObjectTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
@@ -23,7 +23,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
     private ?SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver = null;
     private ?RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver = null;
-    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?CustomPostSetFeaturedImageFilterInputObjectTypeResolver $customPostSetFeaturedImageFilterInputObjectTypeResolver = null;
 
     final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
     {
@@ -57,13 +57,13 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return $this->removeFeaturedImageOnCustomPostMutationResolver ??= $this->instanceManager->getInstance(RemoveFeaturedImageOnCustomPostMutationResolver::class);
     }
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    final public function setCustomPostSetFeaturedImageFilterInputObjectTypeResolver(CustomPostSetFeaturedImageFilterInputObjectTypeResolver $customPostSetFeaturedImageFilterInputObjectTypeResolver): void
     {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->customPostSetFeaturedImageFilterInputObjectTypeResolver = $customPostSetFeaturedImageFilterInputObjectTypeResolver;
     }
-    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    final protected function getCustomPostSetFeaturedImageFilterInputObjectTypeResolver(): CustomPostSetFeaturedImageFilterInputObjectTypeResolver
     {
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        return $this->customPostSetFeaturedImageFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostSetFeaturedImageFilterInputObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -105,27 +105,16 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'setFeaturedImage' => [
-                MutationInputProperties::MEDIA_ITEM_ID => $this->getIDScalarTypeResolver(),
+                'input' => $this->getCustomPostSetFeaturedImageFilterInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            ['setFeaturedImage' => MutationInputProperties::MEDIA_ITEM_ID] => sprintf(
-                $this->getTranslationAPI()->__('The ID of the featured image, of type \'%s\'', 'custompostmedia-mutations'),
-                $this->getMediaObjectTypeResolver()->getTypeName()
-            ),
-            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['setFeaturedImage' => MutationInputProperties::MEDIA_ITEM_ID] => SchemaTypeModifiers::MANDATORY,
+            ['setFeaturedImage' => 'input'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -146,14 +135,14 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    protected function getFieldArgsToExecuteMutation(
-        array $fieldArgs,
+    protected function getMutationFieldArgsForObject(
+        array $mutationFieldArgs,
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName
     ): array {
-        $fieldArgs = parent::getFieldArgsToExecuteMutation(
-            $fieldArgs,
+        $mutationFieldArgs = parent::getMutationFieldArgsForObject(
+            $mutationFieldArgs,
             $objectTypeResolver,
             $object,
             $fieldName
@@ -162,11 +151,11 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'setFeaturedImage':
             case 'removeFeaturedImage':
-                $fieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $objectTypeResolver->getID($customPost);
+                $mutationFieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $objectTypeResolver->getID($customPost);
                 break;
         }
 
-        return $fieldArgs;
+        return $mutationFieldArgs;
     }
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface

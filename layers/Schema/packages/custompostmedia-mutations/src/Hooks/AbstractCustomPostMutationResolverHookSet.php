@@ -4,30 +4,21 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMediaMutations\Hooks;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\HookNames;
-use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
-use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
-use PoPSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
+use PoPSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostFilterInputObjectTypeResolverInterface;
+use PoPSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomPostFilterInputObjectTypeResolverInterface;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
-    private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
     private ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
-    {
-        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
-    }
-    final protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
-    {
-        return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
-    }
     final public function setCustomPostMediaTypeMutationAPI(CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI): void
     {
         $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
@@ -48,72 +39,51 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     protected function init(): void
     {
         $this->getHooksAPI()->addFilter(
-            HookNames::OBJECT_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
-            array($this, 'maybeAddFieldArgNameTypeResolvers'),
-            10,
-            4
-        );
-        $this->getHooksAPI()->addFilter(
-            HookNames::OBJECT_TYPE_FIELD_ARG_DESCRIPTION,
-            array($this, 'maybeAddFieldArgDescription'),
-            10,
-            5
-        );
-        $this->getHooksAPI()->addAction(
-            AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
-            array($this, 'setOrRemoveFeaturedImage'),
+            HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
+            array($this, 'maybeAddInputFieldNameTypeResolvers'),
             10,
             2
         );
-    }
-
-    public function maybeAddFieldArgNameTypeResolvers(
-        array $fieldArgNameTypeResolvers,
-        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-    ): array {
-        // Only for the specific combinations of Type and fieldName
-        if (!$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
-            return $fieldArgNameTypeResolvers;
-        }
-        $fieldArgNameTypeResolvers[MutationInputProperties::FEATUREDIMAGE_ID] = $this->getIDScalarTypeResolver();
-        return $fieldArgNameTypeResolvers;
-    }
-
-    public function maybeAddFieldArgDescription(
-        ?string $fieldArgDescription,
-        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        string $fieldArgName,
-    ): ?string {
-        // Only for the newly added fieldArgName
-        if ($fieldArgName !== MutationInputProperties::FEATUREDIMAGE_ID || !$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
-            return $fieldArgDescription;
-        }
-        return sprintf(
-            $this->getTranslationAPI()->__('The ID of the featured image (of type %s)', 'custompost-mutations'),
-            $this->getMediaObjectTypeResolver()->getMaybeNamespacedTypeName()
+        $this->getHooksAPI()->addFilter(
+            HookNames::INPUT_FIELD_DESCRIPTION,
+            array($this, 'maybeAddInputFieldDescription'),
+            10,
+            3
         );
     }
 
-    abstract protected function mustAddFieldArgs(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-    ): bool;
-
     /**
-     * If entry "featuredImageID" has an ID, set it. If it is null, remove it
+     * @param array<string, InputTypeResolverInterface> $inputFieldNameTypeResolvers
+     * @return array<string, InputTypeResolverInterface>
      */
-    public function setOrRemoveFeaturedImage(int | string $customPostID, array $form_data): void
-    {
-        if (isset($form_data[MutationInputProperties::FEATUREDIMAGE_ID])) {
-            if ($featuredImageID = $form_data[MutationInputProperties::FEATUREDIMAGE_ID]) {
-                $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $featuredImageID);
-            } else {
-                $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);
-            }
+    public function maybeAddInputFieldNameTypeResolvers(
+        array $inputFieldNameTypeResolvers,
+        InputObjectTypeResolverInterface $inputObjectTypeResolver,
+    ): array {
+        // Only for the specific combinations of Type and fieldName
+        if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
+            return $inputFieldNameTypeResolvers;
         }
+        $inputFieldNameTypeResolvers[MutationInputProperties::FEATUREDIMAGE_ID] = $this->getIDScalarTypeResolver();
+        return $inputFieldNameTypeResolvers;
+    }
+
+    protected function isInputObjectTypeResolver(
+        InputObjectTypeResolverInterface $inputObjectTypeResolver,
+    ): bool {
+        return $inputObjectTypeResolver instanceof CreateCustomPostFilterInputObjectTypeResolverInterface
+            || $inputObjectTypeResolver instanceof UpdateCustomPostFilterInputObjectTypeResolverInterface;
+    }
+
+    public function maybeAddInputFieldDescription(
+        ?string $inputFieldDescription,
+        InputObjectTypeResolverInterface $inputObjectTypeResolver,
+        string $inputFieldName,
+    ): ?string {
+        // Only for the newly added inputFieldName
+        if ($inputFieldName !== MutationInputProperties::FEATUREDIMAGE_ID || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
+            return $inputFieldDescription;
+        }
+        return $this->getTranslationAPI()->__('The ID of the image to set as featured', 'custompost-mutations');
     }
 }

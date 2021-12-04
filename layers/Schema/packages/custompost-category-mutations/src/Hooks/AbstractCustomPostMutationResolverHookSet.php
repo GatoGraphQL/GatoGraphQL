@@ -4,31 +4,21 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostCategoryMutations\Hooks;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\HookNames;
-use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
-use PoPSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
-use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
-use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostFilterInputObjectTypeResolverInterface;
+use PoPSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomPostFilterInputObjectTypeResolverInterface;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
-    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
-    {
-        $this->customPostTypeAPI = $customPostTypeAPI;
-    }
-    final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
-    {
-        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
-    }
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
@@ -41,55 +31,56 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     protected function init(): void
     {
         $this->getHooksAPI()->addFilter(
-            HookNames::OBJECT_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
-            array($this, 'maybeAddFieldArgNameTypeResolvers'),
-            10,
-            4
-        );
-        $this->getHooksAPI()->addFilter(
-            HookNames::OBJECT_TYPE_FIELD_ARG_DESCRIPTION,
-            array($this, 'maybeAddFieldArgDescription'),
-            10,
-            5
-        );
-        $this->getHooksAPI()->addFilter(
-            HookNames::OBJECT_TYPE_FIELD_ARG_TYPE_MODIFIERS,
-            array($this, 'maybeAddFieldArgTypeModifiers'),
-            10,
-            5
-        );
-        $this->getHooksAPI()->addAction(
-            AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
-            array($this, 'maybeSetCategories'),
+            HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
+            array($this, 'maybeAddInputFieldNameTypeResolvers'),
             10,
             2
         );
+        $this->getHooksAPI()->addFilter(
+            HookNames::INPUT_FIELD_DESCRIPTION,
+            array($this, 'maybeAddInputFieldDescription'),
+            10,
+            3
+        );
+        $this->getHooksAPI()->addFilter(
+            HookNames::INPUT_FIELD_TYPE_MODIFIERS,
+            array($this, 'maybeAddInputFieldTypeModifiers'),
+            10,
+            3
+        );
     }
 
-    public function maybeAddFieldArgNameTypeResolvers(
-        array $fieldArgNameTypeResolvers,
-        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
+    /**
+     * @param array<string, InputTypeResolverInterface> $inputFieldNameTypeResolvers
+     * @return array<string, InputTypeResolverInterface>
+     */
+    public function maybeAddInputFieldNameTypeResolvers(
+        array $inputFieldNameTypeResolvers,
+        InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): array {
         // Only for the specific combinations of Type and fieldName
-        if (!$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
-            return $fieldArgNameTypeResolvers;
+        if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
+            return $inputFieldNameTypeResolvers;
         }
-        $fieldArgNameTypeResolvers[MutationInputProperties::CATEGORY_IDS] = $this->getIDScalarTypeResolver();
-        return $fieldArgNameTypeResolvers;
+        $inputFieldNameTypeResolvers[MutationInputProperties::CATEGORY_IDS] = $this->getIDScalarTypeResolver();
+        return $inputFieldNameTypeResolvers;
     }
 
-    public function maybeAddFieldArgDescription(
-        ?string $fieldArgDescription,
-        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        string $fieldArgName,
+    protected function isInputObjectTypeResolver(
+        InputObjectTypeResolverInterface $inputObjectTypeResolver,
+    ): bool {
+        return $inputObjectTypeResolver instanceof CreateCustomPostFilterInputObjectTypeResolverInterface
+            || $inputObjectTypeResolver instanceof UpdateCustomPostFilterInputObjectTypeResolverInterface;
+    }
+
+    public function maybeAddInputFieldDescription(
+        ?string $inputFieldDescription,
+        InputObjectTypeResolverInterface $inputObjectTypeResolver,
+        string $inputFieldName,
     ): ?string {
-        // Only for the newly added fieldArgName
-        if ($fieldArgName !== MutationInputProperties::CATEGORY_IDS || !$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
-            return $fieldArgDescription;
+        // Only for the newly added inputFieldName
+        if ($inputFieldName !== MutationInputProperties::CATEGORY_IDS || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
+            return $inputFieldDescription;
         }
         return sprintf(
             $this->getTranslationAPI()->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
@@ -97,41 +88,17 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    public function maybeAddFieldArgTypeModifiers(
-        int $fieldArgTypeModifiers,
-        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        string $fieldArgName,
+    public function maybeAddInputFieldTypeModifiers(
+        int $inputFieldTypeModifiers,
+        InputObjectTypeResolverInterface $inputObjectTypeResolver,
+        string $inputFieldName,
     ): int {
-        // Only for the newly added fieldArgName
-        if ($fieldArgName !== MutationInputProperties::CATEGORY_IDS || !$this->mustAddFieldArgs($objectTypeResolver, $fieldName)) {
-            return $fieldArgTypeModifiers;
+        // Only for the newly added inputFieldName
+        if ($inputFieldName !== MutationInputProperties::CATEGORY_IDS || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
+            return $inputFieldTypeModifiers;
         }
-        return SchemaTypeModifiers::IS_ARRAY;
+        return SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY;
     }
-
-    abstract protected function mustAddFieldArgs(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-    ): bool;
 
     abstract protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface;
-
-    public function maybeSetCategories(int | string $customPostID, array $form_data): void
-    {
-        // Only for that specific CPT
-        if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
-            return;
-        }
-        if (!isset($form_data[MutationInputProperties::CATEGORY_IDS])) {
-            return;
-        }
-        $customPostCategoryIDs = $form_data[MutationInputProperties::CATEGORY_IDS];
-        $customPostCategoryTypeMutationAPI = $this->getCustomPostCategoryTypeMutationAPI();
-        $customPostCategoryTypeMutationAPI->setCategories($customPostID, $customPostCategoryIDs, false);
-    }
-
-    abstract protected function getCustomPostType(): string;
-    abstract protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface;
 }

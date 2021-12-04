@@ -7,9 +7,11 @@ namespace PoPSchema\PostCategoryMutations\FieldResolvers\ObjectType;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType\AbstractRootObjectTypeFieldResolver;
+use PoPSchema\CustomPostCategoryMutations\TypeResolvers\InputObjectType\AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPSchema\PostCategoryMutations\MutationResolvers\SetCategoriesOnPostMutationResolver;
+use PoPSchema\PostCategoryMutations\TypeResolvers\InputObjectType\RootSetCategoriesOnCustomPostFilterInputObjectTypeResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
@@ -17,6 +19,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver = null;
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
+    private ?RootSetCategoriesOnCustomPostFilterInputObjectTypeResolver $rootSetCategoriesOnCustomPostFilterInputObjectTypeResolver = null;
 
     final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {
@@ -42,6 +45,14 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     {
         return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
     }
+    final public function setRootSetCategoriesOnCustomPostFilterInputObjectTypeResolver(RootSetCategoriesOnCustomPostFilterInputObjectTypeResolver $rootSetCategoriesOnCustomPostFilterInputObjectTypeResolver): void
+    {
+        $this->rootSetCategoriesOnCustomPostFilterInputObjectTypeResolver = $rootSetCategoriesOnCustomPostFilterInputObjectTypeResolver;
+    }
+    final protected function getRootSetCategoriesOnCustomPostFilterInputObjectTypeResolver(): AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver
+    {
+        return $this->rootSetCategoriesOnCustomPostFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootSetCategoriesOnCustomPostFilterInputObjectTypeResolver::class);
+    }
 
     public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
     {
@@ -56,6 +67,11 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
     {
         return $this->getPostCategoryObjectTypeResolver();
+    }
+
+    public function getCustomPostSetCategoriesFilterInputObjectTypeResolver(): AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver
+    {
+        return $this->getRootSetCategoriesOnCustomPostFilterInputObjectTypeResolver();
     }
 
     protected function getEntityName(): string
