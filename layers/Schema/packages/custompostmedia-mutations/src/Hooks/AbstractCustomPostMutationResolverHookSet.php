@@ -6,6 +6,7 @@ namespace PoPSchema\CustomPostMediaMutations\Hooks;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
@@ -52,7 +53,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     }
 
     /**
-     * @param array<string, InputTypeResolverInterface>
+     * @param array<string, InputTypeResolverInterface> $inputFieldNameTypeResolvers
      * @return array<string, InputTypeResolverInterface>
      */
     public function maybeAddInputFieldNameTypeResolvers(
