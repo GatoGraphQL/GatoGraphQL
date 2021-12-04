@@ -30,5 +30,4 @@ class CustomPostAddCommentFilterInputObjectTypeResolver extends AbstractAddComme
     {
         return false;
     }
-
 }

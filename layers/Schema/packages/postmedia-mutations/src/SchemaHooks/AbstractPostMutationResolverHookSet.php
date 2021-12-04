@@ -11,5 +11,5 @@ use PoPSchema\CustomPostMediaMutations\Hooks\AbstractCustomPostMutationResolverH
  */
 abstract class AbstractPostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
-    
+
 }

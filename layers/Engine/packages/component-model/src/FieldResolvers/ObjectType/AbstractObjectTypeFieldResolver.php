@@ -1105,19 +1105,19 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         array $fieldArgs,
     ): array {
         $fieldArgNameTypeResolvers = $this->getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
-        
+
         // Check if there is only one fieldArg
         if (count($fieldArgNameTypeResolvers) !== 1) {
             return $fieldArgs;
         }
-        
+
         // Check if the fieldArg is an InputObject
         $fieldArgName = key($fieldArgNameTypeResolvers);
         $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$fieldArgName];
         if (!($fieldArgTypeResolver instanceof InputObjectTypeResolverInterface)) {
             return $fieldArgs;
         }
-        
+
         // Retrieve the elements under the InputObject, cast to array
         return (array) $fieldArgs[$fieldArgName];
     }

@@ -6,5 +6,5 @@ namespace PoPSchema\CustomPostMediaMutations\Hooks;
 
 class CustomPostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
-    
+
 }

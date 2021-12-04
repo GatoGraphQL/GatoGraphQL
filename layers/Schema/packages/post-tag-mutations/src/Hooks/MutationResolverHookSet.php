@@ -13,7 +13,7 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
 {
     private ?PostTypeAPIInterface $postTypeAPI = null;
     private ?PostTagTypeMutationAPIInterface $postTagTypeMutationAPI = null;
-    
+
     final public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
     {
         $this->postTypeAPI = $postTypeAPI;

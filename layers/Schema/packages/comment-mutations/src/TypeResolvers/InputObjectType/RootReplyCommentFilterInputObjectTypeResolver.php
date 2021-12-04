@@ -30,5 +30,4 @@ class RootReplyCommentFilterInputObjectTypeResolver extends AbstractAddCommentTo
     {
         return true;
     }
-
 }

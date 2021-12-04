@@ -48,9 +48,10 @@ class ObjectTypeHookSet extends AbstractHookSet
         if (!($objectTypeFieldResolver instanceof AbstractAddCommentToCustomPostObjectTypeFieldResolver)) {
             return $mutationFieldArgs;
         }
-        
+
         $vars = ApplicationState::getVars();
-        if (!ComponentConfiguration::mustUserBeLoggedInToAddComment()
+        if (
+            !ComponentConfiguration::mustUserBeLoggedInToAddComment()
             && $vars['global-userstate']['is-user-logged-in']
         ) {
             $userID = $vars['global-userstate']['current-user-id'];
