@@ -6,28 +6,24 @@ namespace PoPSchema\PostMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\CustomPostMutations\FieldResolvers\ObjectType\CreateOrUpdateCustomPostObjectTypeFieldResolverTrait;
-use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
+use PoPSchema\CustomPostMutations\TypeResolvers\InputObjectType\RootCreateCustomPostFilterInputObjectTypeResolver;
+use PoPSchema\CustomPostMutations\TypeResolvers\InputObjectType\RootUpdateCustomPostFilterInputObjectTypeResolver;
 use PoPSchema\PostMutations\MutationResolvers\CreatePostMutationResolver;
 use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    use CreateOrUpdateCustomPostObjectTypeFieldResolverTrait;
-
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?CreatePostMutationResolver $createPostMutationResolver = null;
     private ?UpdatePostMutationResolver $updatePostMutationResolver = null;
-    private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
-    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?RootUpdateCustomPostFilterInputObjectTypeResolver $rootUpdateCustomPostFilterInputObjectTypeResolver = null;
+    private ?RootCreateCustomPostFilterInputObjectTypeResolver $rootCreateCustomPostFilterInputObjectTypeResolver = null;
 
     final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {
@@ -53,29 +49,21 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return $this->updatePostMutationResolver ??= $this->instanceManager->getInstance(UpdatePostMutationResolver::class);
     }
-    final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
+    final public function setRootUpdateCustomPostFilterInputObjectTypeResolver(RootUpdateCustomPostFilterInputObjectTypeResolver $rootUpdateCustomPostFilterInputObjectTypeResolver): void
     {
-        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+        $this->rootUpdateCustomPostFilterInputObjectTypeResolver = $rootUpdateCustomPostFilterInputObjectTypeResolver;
     }
-    final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
+    final protected function getRootUpdateCustomPostFilterInputObjectTypeResolver(): RootUpdateCustomPostFilterInputObjectTypeResolver
     {
-        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+        return $this->rootUpdateCustomPostFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootUpdateCustomPostFilterInputObjectTypeResolver::class);
     }
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    final public function setRootCreateCustomPostFilterInputObjectTypeResolver(RootCreateCustomPostFilterInputObjectTypeResolver $rootCreateCustomPostFilterInputObjectTypeResolver): void
     {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->rootCreateCustomPostFilterInputObjectTypeResolver = $rootCreateCustomPostFilterInputObjectTypeResolver;
     }
-    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    final protected function getRootCreateCustomPostFilterInputObjectTypeResolver(): RootCreateCustomPostFilterInputObjectTypeResolver
     {
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
-    {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        return $this->rootCreateCustomPostFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootCreateCustomPostFilterInputObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -91,10 +79,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             [
                 'createPost',
             ],
-            !EngineComponentConfiguration::disableRedundantRootTypeMutationFields() ?
-                [
-                    'updatePost',
-                ] : []
+            !EngineComponentConfiguration::disableRedundantRootTypeMutationFields() ? [
+                'updatePost',
+            ] : []
         );
     }
 
@@ -110,31 +97,21 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            'createPost' => $this->getCreateOrUpdateCustomPostSchemaFieldArgNameTypeResolvers(false),
-            'updatePost' => $this->getCreateOrUpdateCustomPostSchemaFieldArgNameTypeResolvers(true),
+            'createPost' => [
+                'input' => $this->getRootCreateCustomPostFilterInputObjectTypeResolver(),
+            ],
+            'updatePost' => [
+                'input' => $this->getRootUpdateCustomPostFilterInputObjectTypeResolver(),
+            ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
-    {
-        return match ($fieldName) {
-            'createPost',
-            'updatePost'
-                => $this->getCreateOrUpdateCustomPostSchemaFieldArgDescription($fieldArgName),
-            default
-                => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
-        return match ($fieldName) {
-            'createPost',
-            'updatePost'
-                => $this->getCreateOrUpdateCustomPostSchemaFieldArgTypeModifiers($fieldArgName),
-            default
-                => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+        return match ($fieldArgName) {
+            'input' => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
