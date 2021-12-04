@@ -8,7 +8,10 @@ The query must use the operation type `mutation`:
 
 ```graphql
 mutation {
-  updatePost(id: 5, title: "New title") {
+  updatePost(input: {
+    id: 5,
+    title: "New title"
+  }) {
     title
   }
 }

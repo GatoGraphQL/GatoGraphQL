@@ -8,7 +8,10 @@ The query below executes a standard mutation, using the mutation field `updatePo
 
 ```graphql
 mutation {
-  updatePost(id: 5, title: "New title") {
+  updatePost(input: {
+    id: 5,
+    title: "New title"
+  }) {
     title
   }
 }
@@ -19,7 +22,9 @@ The query from above can also be executed through a nested mutation, where the p
 ```graphql
 mutation {
   post(by:{ id: 5 }) {
-    update(title: "New title") {
+    update(input: {
+      title: "New title"
+    }) {
       title
     }
   }
@@ -30,12 +35,19 @@ Mutations can also be nested, modifying data on the result from another mutation
 
 ```graphql
 mutation {
-  createPost(title: "First title") {
+  createPost(input: {
+    title: "First title"
+  }) {
     id
-    update(title: "Second title", content: "Some content") {
+    update(input: {
+      title: "Second title",
+      content: "Some content"
+    }) {
       title
       content
-      addComment(comment: "My first comment") {
+      addComment(input: {
+        comment: "My first comment"
+      }) {
         id
         content
         date
