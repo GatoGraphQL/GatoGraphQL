@@ -24,17 +24,18 @@ class Component extends AbstractComponent
         ];
     }
 
-    /**
-     * Initialize services
-     *
-     * @param array<string, mixed> $configuration
-     * @param string[] $skipSchemaComponentClasses
-     */
-    protected static function initializeContainerServices(
-        array $configuration = [],
-        bool $skipSchema = false,
-        array $skipSchemaComponentClasses = []
-    ): void {
-        self::initSchemaServices(dirname(__DIR__), $skipSchema);
-    }
+    // Currently there are no services, so disable
+    // /**
+    //  * Initialize services
+    //  *
+    //  * @param array<string, mixed> $configuration
+    //  * @param string[] $skipSchemaComponentClasses
+    //  */
+    // protected static function initializeContainerServices(
+    //     array $configuration = [],
+    //     bool $skipSchema = false,
+    //     array $skipSchemaComponentClasses = []
+    // ): void {
+    //     self::initSchemaServices(dirname(__DIR__), $skipSchema);
+    // }
 }

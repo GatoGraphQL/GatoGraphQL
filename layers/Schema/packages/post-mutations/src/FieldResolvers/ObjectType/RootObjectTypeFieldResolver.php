@@ -11,10 +11,10 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoPSchema\CustomPostMutations\TypeResolvers\InputObjectType\RootCreateCustomPostFilterInputObjectTypeResolver;
-use PoPSchema\CustomPostMutations\TypeResolvers\InputObjectType\RootUpdateCustomPostFilterInputObjectTypeResolver;
 use PoPSchema\PostMutations\MutationResolvers\CreatePostMutationResolver;
 use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
+use PoPSchema\PostMutations\TypeResolvers\InputObjectType\RootCreatePostFilterInputObjectTypeResolver;
+use PoPSchema\PostMutations\TypeResolvers\InputObjectType\RootUpdatePostFilterInputObjectTypeResolver;
 use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
@@ -22,8 +22,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?CreatePostMutationResolver $createPostMutationResolver = null;
     private ?UpdatePostMutationResolver $updatePostMutationResolver = null;
-    private ?RootUpdateCustomPostFilterInputObjectTypeResolver $rootUpdateCustomPostFilterInputObjectTypeResolver = null;
-    private ?RootCreateCustomPostFilterInputObjectTypeResolver $rootCreateCustomPostFilterInputObjectTypeResolver = null;
+    private ?RootUpdatePostFilterInputObjectTypeResolver $rootUpdatePostFilterInputObjectTypeResolver = null;
+    private ?RootCreatePostFilterInputObjectTypeResolver $rootCreatePostFilterInputObjectTypeResolver = null;
 
     final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {
@@ -49,21 +49,21 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return $this->updatePostMutationResolver ??= $this->instanceManager->getInstance(UpdatePostMutationResolver::class);
     }
-    final public function setRootUpdateCustomPostFilterInputObjectTypeResolver(RootUpdateCustomPostFilterInputObjectTypeResolver $rootUpdateCustomPostFilterInputObjectTypeResolver): void
+    final public function setRootUpdatePostFilterInputObjectTypeResolver(RootUpdatePostFilterInputObjectTypeResolver $rootUpdatePostFilterInputObjectTypeResolver): void
     {
-        $this->rootUpdateCustomPostFilterInputObjectTypeResolver = $rootUpdateCustomPostFilterInputObjectTypeResolver;
+        $this->rootUpdatePostFilterInputObjectTypeResolver = $rootUpdatePostFilterInputObjectTypeResolver;
     }
-    final protected function getRootUpdateCustomPostFilterInputObjectTypeResolver(): RootUpdateCustomPostFilterInputObjectTypeResolver
+    final protected function getRootUpdatePostFilterInputObjectTypeResolver(): RootUpdatePostFilterInputObjectTypeResolver
     {
-        return $this->rootUpdateCustomPostFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootUpdateCustomPostFilterInputObjectTypeResolver::class);
+        return $this->rootUpdatePostFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootUpdatePostFilterInputObjectTypeResolver::class);
     }
-    final public function setRootCreateCustomPostFilterInputObjectTypeResolver(RootCreateCustomPostFilterInputObjectTypeResolver $rootCreateCustomPostFilterInputObjectTypeResolver): void
+    final public function setRootCreatePostFilterInputObjectTypeResolver(RootCreatePostFilterInputObjectTypeResolver $rootCreatePostFilterInputObjectTypeResolver): void
     {
-        $this->rootCreateCustomPostFilterInputObjectTypeResolver = $rootCreateCustomPostFilterInputObjectTypeResolver;
+        $this->rootCreatePostFilterInputObjectTypeResolver = $rootCreatePostFilterInputObjectTypeResolver;
     }
-    final protected function getRootCreateCustomPostFilterInputObjectTypeResolver(): RootCreateCustomPostFilterInputObjectTypeResolver
+    final protected function getRootCreatePostFilterInputObjectTypeResolver(): RootCreatePostFilterInputObjectTypeResolver
     {
-        return $this->rootCreateCustomPostFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootCreateCustomPostFilterInputObjectTypeResolver::class);
+        return $this->rootCreatePostFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootCreatePostFilterInputObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -98,10 +98,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'createPost' => [
-                'input' => $this->getRootCreateCustomPostFilterInputObjectTypeResolver(),
+                'input' => $this->getRootCreatePostFilterInputObjectTypeResolver(),
             ],
             'updatePost' => [
-                'input' => $this->getRootUpdateCustomPostFilterInputObjectTypeResolver(),
+                'input' => $this->getRootUpdatePostFilterInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };

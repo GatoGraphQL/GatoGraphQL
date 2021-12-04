@@ -4,27 +4,16 @@ declare(strict_types=1);
 
 namespace PoPSchema\PostMutations\SchemaHooks;
 
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoPSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
+use PoPSchema\PostMutations\TypeResolvers\InputObjectType\CreatePostFilterInputObjectTypeResolverInterface;
+use PoPSchema\PostMutations\TypeResolvers\InputObjectType\UpdatePostFilterInputObjectTypeResolverInterface;
 
 trait PostMutationResolverHookSetTrait
 {
-    abstract protected function getRootObjectTypeResolver(): RootObjectTypeResolver;
-    abstract protected function getMutationRootObjectTypeResolver(): MutationRootObjectTypeResolver;
-    abstract protected function getPostObjectTypeResolver(): PostObjectTypeResolver;
-
-    protected function mustAddFieldArgs(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
+    protected function isInputObjectTypeResolver(
+        InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): bool {
-        $isRootMutationType =
-            $objectTypeResolver === $this->getRootObjectTypeResolver()
-            || $objectTypeResolver === $this->getMutationRootObjectTypeResolver();
-        return
-            ($isRootMutationType && $fieldName === 'createPost')
-            || ($isRootMutationType && $fieldName === 'updatePost')
-            || ($objectTypeResolver === $this->getPostObjectTypeResolver() && $fieldName === 'update');
+        return $inputObjectTypeResolver instanceof CreatePostFilterInputObjectTypeResolverInterface
+            || $inputObjectTypeResolver instanceof UpdatePostFilterInputObjectTypeResolverInterface;
     }
 }
