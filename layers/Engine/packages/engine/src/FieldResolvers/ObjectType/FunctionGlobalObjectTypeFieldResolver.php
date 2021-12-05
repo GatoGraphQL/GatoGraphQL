@@ -65,7 +65,7 @@ class FunctionGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         return match ($fieldName) {
             'getSelfProp' => [
-                'self' => $this->getJsonObjectScalarTypeResolver(),
+                'self' => $this->getJSONObjectScalarTypeResolver(),
                 'property' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),

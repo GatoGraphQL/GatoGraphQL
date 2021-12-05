@@ -134,7 +134,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'specifiedByURL'
                 => $this->getStringScalarTypeResolver(),
             'extensions'
-                => $this->getJsonObjectScalarTypeResolver(),
+                => $this->getJSONObjectScalarTypeResolver(),
             'fields'
                 => $this->getFieldObjectTypeResolver(),
             'interfaces',

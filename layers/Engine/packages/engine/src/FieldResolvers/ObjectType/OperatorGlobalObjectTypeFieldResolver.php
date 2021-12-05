@@ -106,7 +106,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             'empty' => $this->getBooleanScalarTypeResolver(),
             'isNull' => $this->getBooleanScalarTypeResolver(),
             'var' => $this->getDangerouslyDynamicScalarTypeResolver(),
-            'context' => $this->getJsonObjectScalarTypeResolver(),
+            'context' => $this->getJSONObjectScalarTypeResolver(),
             'extract' => $this->getDangerouslyDynamicScalarTypeResolver(),
             'time' => $this->getIntScalarTypeResolver(),
             'echo' => $this->getDangerouslyDynamicScalarTypeResolver(),

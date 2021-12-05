@@ -92,7 +92,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'isRepeatable' => $this->getBooleanScalarTypeResolver(),
             'args' => $this->getInputValueObjectTypeResolver(),
             'locations' => $this->getDirectiveLocationEnumTypeResolver(),
-            'extensions' => $this->getJsonObjectScalarTypeResolver(),
+            'extensions' => $this->getJSONObjectScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

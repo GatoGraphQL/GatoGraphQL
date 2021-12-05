@@ -84,7 +84,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'items' => $this->getMenuItemObjectTypeResolver(),
-            'itemDataEntries' => $this->getJsonObjectScalarTypeResolver(),
+            'itemDataEntries' => $this->getJSONObjectScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

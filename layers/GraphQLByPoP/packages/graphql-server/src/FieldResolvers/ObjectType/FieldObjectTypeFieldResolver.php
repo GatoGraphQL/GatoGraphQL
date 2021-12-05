@@ -92,7 +92,7 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'description' => $this->getStringScalarTypeResolver(),
             'isDeprecated' => $this->getBooleanScalarTypeResolver(),
             'deprecationReason' => $this->getStringScalarTypeResolver(),
-            'extensions' => $this->getJsonObjectScalarTypeResolver(),
+            'extensions' => $this->getJSONObjectScalarTypeResolver(),
             'args' => $this->getInputValueObjectTypeResolver(),
             'type' => $this->getTypeObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
