@@ -21,7 +21,7 @@ class URLAbsolutePathScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('URL Absolute Path scalar, such as "/my-fabulous-page" in URL "https://mysite.com/my-fabulous-page". The absolute path starts with "/", whereas the relative path does not', 'component-model');
+        return $this->getTranslationAPI()->__('URL Absolute Path scalar, such as "/my-fabulous-page" in URL "https://mysite.com/my-fabulous-page". The absolute path starts with "/", followed by the URL relative path', 'component-model');
     }
 
     public function getSpecifiedByURL(): ?string
