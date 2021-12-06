@@ -12,11 +12,13 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 
 class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -34,6 +36,14 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
     }
+    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -49,6 +59,7 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'description',
             'type',
             'defaultValue',
+            'extensions',
         ];
     }
 
@@ -59,6 +70,7 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'description' => $this->getStringScalarTypeResolver(),
             'defaultValue' => $this->getStringScalarTypeResolver(),
             'type' => $this->getTypeObjectTypeResolver(),
+            'extensions' => $this->getJSONObjectScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -67,7 +79,8 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'name',
-            'type'
+            'type',
+            'extensions'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -81,6 +94,7 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'description' => $this->getTranslationAPI()->__('Input value\'s description', 'graphql-server'),
             'type' => $this->getTranslationAPI()->__('Type of the input value', 'graphql-server'),
             'defaultValue' => $this->getTranslationAPI()->__('Default value of the input value', 'graphql-server'),
+            'extensions' => $this->getTranslationAPI()->__('Custom metadata added to the input (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -111,6 +125,8 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $inputValue->getTypeID();
             case 'defaultValue':
                 return $inputValue->getDefaultValue();
+            case 'extensions':
+                return (object) $inputValue->getExtensions();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
