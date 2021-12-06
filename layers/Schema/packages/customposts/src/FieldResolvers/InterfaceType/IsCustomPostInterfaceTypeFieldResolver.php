@@ -103,7 +103,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     {
         return [
             'url',
-            'urlPath',
+            'urlAbsolutePath',
             'slug',
             'content',
             'status',
@@ -165,7 +165,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     {
         return match ($fieldName) {
             'url' => $this->getTranslationAPI()->__('Custom post URL', 'customposts'),
-            'urlPath' => $this->getTranslationAPI()->__('Custom post URL path', 'customposts'),
+            'urlAbsolutePath' => $this->getTranslationAPI()->__('Custom post URL path', 'customposts'),
             'slug' => $this->getTranslationAPI()->__('Custom post slug', 'customposts'),
             'content' => $this->getTranslationAPI()->__('Custom post content', 'customposts'),
             'status' => $this->getTranslationAPI()->__('Custom post status', 'customposts'),

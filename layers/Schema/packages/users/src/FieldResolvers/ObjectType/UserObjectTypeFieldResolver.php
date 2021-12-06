@@ -83,7 +83,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return [
             'url',
-            'urlPath',
+            'urlAbsolutePath',
             'slug',
             'username',
             'name',
@@ -136,7 +136,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'url' => $this->getTranslationAPI()->__('URL of the user\'s profile in the website', 'pop-users'),
-            'urlPath' => $this->getTranslationAPI()->__('URL path of the user\'s profile in the website', 'pop-users'),
+            'urlAbsolutePath' => $this->getTranslationAPI()->__('URL path of the user\'s profile in the website', 'pop-users'),
             'slug' => $this->getTranslationAPI()->__('Slug of the URL of the user\'s profile in the website', 'pop-users'),
             'username' => $this->getTranslationAPI()->__('User\'s username handle', 'pop-users'),
             'name' => $this->getTranslationAPI()->__('Name of the user', 'pop-users'),
@@ -186,7 +186,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'url':
                 return $this->getUserTypeAPI()->getUserURL($objectTypeResolver->getID($user));
 
-            case 'urlPath':
+            case 'urlAbsolutePath':
                 return $this->getUserTypeAPI()->getUserURLPath($objectTypeResolver->getID($user));
 
             case 'slug':

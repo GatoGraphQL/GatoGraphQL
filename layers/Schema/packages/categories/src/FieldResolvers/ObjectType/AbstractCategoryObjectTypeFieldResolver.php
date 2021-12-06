@@ -55,7 +55,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     {
         return [
             'url',
-            'urlPath',
+            'urlAbsolutePath',
             'slug',
             'name',
             'description',
@@ -90,7 +90,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     {
         return match ($fieldName) {
             'url' => $this->getTranslationAPI()->__('Category URL', 'pop-categories'),
-            'urlPath' => $this->getTranslationAPI()->__('Category URL path', 'pop-categories'),
+            'urlAbsolutePath' => $this->getTranslationAPI()->__('Category URL path', 'pop-categories'),
             'slug' => $this->getTranslationAPI()->__('Category slug', 'pop-categories'),
             'name' => $this->getTranslationAPI()->__('Category', 'pop-categories'),
             'description' => $this->getTranslationAPI()->__('Category description', 'pop-categories'),
@@ -121,7 +121,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             case 'url':
                 return $categoryTypeAPI->getCategoryURL($objectTypeResolver->getID($category));
 
-            case 'urlPath':
+            case 'urlAbsolutePath':
                 return $categoryTypeAPI->getCategoryURLPath($objectTypeResolver->getID($category));
 
             case 'name':

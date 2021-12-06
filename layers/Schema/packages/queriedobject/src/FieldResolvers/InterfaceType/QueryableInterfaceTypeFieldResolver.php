@@ -54,7 +54,7 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     {
         return [
             'url',
-            'urlPath',
+            'urlAbsolutePath',
             'slug',
         ];
     }
@@ -63,7 +63,7 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     {
         return match ($fieldName) {
             'url' => $this->getUrlScalarTypeResolver(),
-            'urlPath' => $this->getURLAbsolutePathScalarTypeResolver(),
+            'urlAbsolutePath' => $this->getURLAbsolutePathScalarTypeResolver(),
             'slug' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($fieldName),
         };
@@ -73,7 +73,7 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     {
         return match ($fieldName) {
             'url',
-            'urlPath',
+            'urlAbsolutePath',
             'slug'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
@@ -85,7 +85,7 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     {
         return match ($fieldName) {
             'url' => $this->getTranslationAPI()->__('URL to query the object', 'queriedobject'),
-            'urlPath' => $this->getTranslationAPI()->__('URL path to query the object', 'queriedobject'),
+            'urlAbsolutePath' => $this->getTranslationAPI()->__('URL path to query the object', 'queriedobject'),
             'slug' => $this->getTranslationAPI()->__('URL\'s slug', 'queriedobject'),
             default => parent::getFieldDescription($fieldName),
         };
