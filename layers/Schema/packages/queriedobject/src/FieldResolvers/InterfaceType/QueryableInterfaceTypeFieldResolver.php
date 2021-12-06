@@ -9,11 +9,13 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\QueriedObject\TypeResolvers\InterfaceType\QueryableInterfaceTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLAbsolutePathScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 
 class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
+    private ?URLAbsolutePathScalarTypeResolver $urlAbsolutePathScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
@@ -23,6 +25,14 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
         return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+    }
+    final public function setURLAbsolutePathScalarTypeResolver(URLAbsolutePathScalarTypeResolver $urlAbsolutePathScalarTypeResolver): void
+    {
+        $this->urlAbsolutePathScalarTypeResolver = $urlAbsolutePathScalarTypeResolver;
+    }
+    final protected function getURLAbsolutePathScalarTypeResolver(): URLAbsolutePathScalarTypeResolver
+    {
+        return $this->urlAbsolutePathScalarTypeResolver ??= $this->instanceManager->getInstance(URLAbsolutePathScalarTypeResolver::class);
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -53,7 +63,7 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     {
         return match ($fieldName) {
             'url' => $this->getUrlScalarTypeResolver(),
-            'urlPath' => $this->getStringScalarTypeResolver(),
+            'urlPath' => $this->getURLAbsolutePathScalarTypeResolver(),
             'slug' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($fieldName),
         };
