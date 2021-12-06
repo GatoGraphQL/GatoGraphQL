@@ -14,6 +14,8 @@ class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
      */
     protected function doGetCustomPostMeta(string | int $customPostID, string $key, bool $single = false): mixed
     {
+        // This function does not differentiate between a stored empty value,
+        // and a non-existing key! So if empty, treat it as non-existant and return null
         $value = \get_post_meta($customPostID, $key, $single);
         if (($single && $value === '') || (!$single && $value === [])) {
             return null;
