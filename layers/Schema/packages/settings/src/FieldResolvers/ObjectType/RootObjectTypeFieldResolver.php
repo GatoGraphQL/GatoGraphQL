@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\Settings\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 
@@ -121,7 +122,13 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 if ($value = $this->getSettingsTypeAPI()->getOption($name)) {
                     return $value;
                 }
-                return null;
+                return new Error(
+                    'option-name-not-exists',
+                    sprintf(
+                        $this->getTranslationAPI()->__('There is no option with name \'%s\'', 'settings'),
+                        $name
+                    )
+                );
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
