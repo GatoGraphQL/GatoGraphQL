@@ -26,7 +26,7 @@ class URLScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getSpecifiedByURL(): ?string
     {
-        return 'https://datatracker.ietf.org/doc/rfc1738/';
+        return 'https://url.spec.whatwg.org/#url-representation';
     }
 
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
