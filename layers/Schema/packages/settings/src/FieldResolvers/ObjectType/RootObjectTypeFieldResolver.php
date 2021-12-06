@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Settings\FieldResolvers\ObjectType;
 
+use InvalidArgumentException;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -119,16 +120,16 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'option':
                 $name = $fieldArgs['name'];
-                if ($value = $this->getSettingsTypeAPI()->getOption($name)) {
-                    return $value;
+                try {
+                    $value = $this->getSettingsTypeAPI()->getOption($name);
+                } catch (InvalidArgumentException $e) {
+                    // If the option does not exist, it will throw an exception
+                    return new Error(
+                        'option-name-not-exists',
+                        $e->getMessage()
+                    );
                 }
-                return new Error(
-                    'option-name-not-exists',
-                    sprintf(
-                        $this->getTranslationAPI()->__('There is no option with name \'%s\'', 'settings'),
-                        $name
-                    )
-                );
+                return $value;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
