@@ -142,10 +142,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Support for custom scalar types
   - Implementation of standard custom scalar types
 - Support for custom enum types
-  - Implementation of input object types
+  - Implementation of several enum types
 - Support for input objects
-  - Implementation of input object types
+  - Implementation of several input object types
 - Support for oneof input objects
+  - Implementation of several oneof input objects
 - Namespacing is applied to new types
 - Allow to use unsafe default settings
 - Module "Schema Self Fields"
