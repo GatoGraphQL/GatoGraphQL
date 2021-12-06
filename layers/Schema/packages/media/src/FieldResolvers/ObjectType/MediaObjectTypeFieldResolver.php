@@ -106,7 +106,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'src' => $this->getUrlScalarTypeResolver(),
+            'src' => $this->getURLScalarTypeResolver(),
             'srcSet' => $this->getStringScalarTypeResolver(),
             'width' => $this->getIntScalarTypeResolver(),
             'height' => $this->getIntScalarTypeResolver(),

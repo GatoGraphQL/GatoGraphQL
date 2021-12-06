@@ -68,7 +68,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
             !ComponentConfiguration::mustUserBeLoggedInToAddComment() ? [
                 MutationInputProperties::AUTHOR_NAME => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::AUTHOR_EMAIL => $this->getEmailScalarTypeResolver(),
-                MutationInputProperties::AUTHOR_URL => $this->getUrlScalarTypeResolver(),
+                MutationInputProperties::AUTHOR_URL => $this->getURLScalarTypeResolver(),
             ] : [],
         );
     }

@@ -107,7 +107,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'localURLPath' => $this->getStringScalarTypeResolver(),
             'label' => $this->getStringScalarTypeResolver(),
             'title' => $this->getStringScalarTypeResolver(),
-            'url' => $this->getUrlScalarTypeResolver(),
+            'url' => $this->getURLScalarTypeResolver(),
             'classes' => $this->getStringScalarTypeResolver(),
             'target' => $this->getStringScalarTypeResolver(),
             'description' => $this->getStringScalarTypeResolver(),

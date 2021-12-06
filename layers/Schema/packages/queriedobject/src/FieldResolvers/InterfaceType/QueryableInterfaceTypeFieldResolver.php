@@ -62,7 +62,7 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'url' => $this->getUrlScalarTypeResolver(),
+            'url' => $this->getURLScalarTypeResolver(),
             'urlAbsolutePath' => $this->getURLAbsolutePathScalarTypeResolver(),
             'slug' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($fieldName),

@@ -73,10 +73,10 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         return match ($fieldName) {
             'getJSON' => [
-                'url' => $this->getUrlScalarTypeResolver(),
+                'url' => $this->getURLScalarTypeResolver(),
             ],
             'getAsyncJSON' => [
-                'urls' => $this->getUrlScalarTypeResolver(),
+                'urls' => $this->getURLScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };

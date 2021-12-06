@@ -115,7 +115,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'lastName' => $this->getStringScalarTypeResolver(),
             'email' => $this->getEmailScalarTypeResolver(),
             'description' => $this->getStringScalarTypeResolver(),
-            'websiteURL' => $this->getUrlScalarTypeResolver(),
+            'websiteURL' => $this->getURLScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
