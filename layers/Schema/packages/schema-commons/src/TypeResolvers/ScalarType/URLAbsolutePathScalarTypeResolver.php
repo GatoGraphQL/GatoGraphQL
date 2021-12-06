@@ -35,7 +35,7 @@ class URLAbsolutePathScalarTypeResolver extends AbstractScalarTypeResolver
             return $error;
         }
 
-        if ($error = $this->validateFilterVar($inputValue, \FILTER_VALIDATE_URL)) {
+        if ($error = $this->validateFilterVar('http://www.example.com' . $inputValue, \FILTER_VALIDATE_URL)) {
             return $error;
         }
         return $inputValue;
