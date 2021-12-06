@@ -8,6 +8,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInput
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\Users\ComponentConfiguration;
 use PoPSchema\Users\FilterInputProcessors\FilterInputProcessor;
 
@@ -15,6 +16,7 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -32,6 +34,14 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
+    final public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
+    {
+        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
+    }
+    final protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
+    {
+        return $this->emailScalarTypeResolver ??= $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
+    }
 
     public function getTypeName(): string
     {
@@ -48,7 +58,7 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
         return [
             'id' => $this->getIDScalarTypeResolver(),
             'username' => $this->getStringScalarTypeResolver(),
-            'email' => $this->getStringScalarTypeResolver(),
+            'email' => $this->getEmailScalarTypeResolver(),
         ];
     }
 
