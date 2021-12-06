@@ -38,7 +38,7 @@ class InputValue extends AbstractSchemaDefinitionReferenceObject
         }
         return null;
     }
-    
+
     public function getExtensions(): array
     {
         $extensions = $this->schemaDefinition[SchemaDefinition::EXTENSIONS] ?? [];
