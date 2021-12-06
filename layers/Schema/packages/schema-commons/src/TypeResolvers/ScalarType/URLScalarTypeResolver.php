@@ -24,6 +24,11 @@ class URLScalarTypeResolver extends AbstractScalarTypeResolver
         return $this->getTranslationAPI()->__('URL scalar, such as https://mysite.com/my-fabulous-page', 'component-model');
     }
 
+    public function getSpecifiedByURL(): ?string
+    {
+        return 'https://datatracker.ietf.org/doc/rfc1738/';
+    }
+
     public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
     {
         if ($error = $this->validateIsString($inputValue)) {
