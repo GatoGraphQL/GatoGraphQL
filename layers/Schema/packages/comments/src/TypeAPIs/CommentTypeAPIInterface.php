@@ -21,7 +21,7 @@ interface CommentTypeAPIInterface
     public function areCommentsOpen(string | int $post_id): bool;
 
     public function getCommentContent(object $comment): string;
-    public function getCommentPlainContent(object $comment): string;
+    public function getCommentRawContent(object $comment): string;
     public function getCommentPostId(object $comment): int | string;
     public function isCommentApproved(object $comment): bool;
     public function getCommentType(object $comment): string;

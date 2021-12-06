@@ -210,10 +210,10 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     {
         return $this->getHooksAPI()->applyFilters(
             'comment_text',
-            $this->getCommentPlainContent($comment)
+            $this->getCommentRawContent($comment)
         );
     }
-    public function getCommentPlainContent(object $comment): string
+    public function getCommentRawContent(object $comment): string
     {
         /** @var WP_Comment */
         $comment = $comment;

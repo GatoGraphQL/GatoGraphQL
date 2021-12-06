@@ -328,7 +328,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                 return $this->getCommentTypeAPI()->getCommentContent($comment);
 
             case 'rawContent':
-                return $this->getCommentTypeAPI()->getCommentPlainContent($comment);
+                return $this->getCommentTypeAPI()->getCommentRawContent($comment);
 
             case 'authorName':
                 return $this->getCommentTypeAPI()->getCommentAuthorName($comment);
