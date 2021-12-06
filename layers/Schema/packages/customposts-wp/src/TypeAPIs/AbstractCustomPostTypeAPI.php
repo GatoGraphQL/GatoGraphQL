@@ -316,7 +316,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return $this->getHooksAPI()->applyFilters('the_content', $customPost->post_content);
     }
 
-    public function getPlainTextContent(string | int | object $customPostObjectOrID): ?string
+    public function getRawContent(string | int | object $customPostObjectOrID): ?string
     {
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         if ($customPost === null) {

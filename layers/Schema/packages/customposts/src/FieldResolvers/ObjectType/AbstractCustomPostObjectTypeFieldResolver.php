@@ -96,7 +96,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 return $customPostTypeAPI->getContent($customPost);
 
             case 'rawContent':
-                return $customPostTypeAPI->getPlainTextContent($customPost);
+                return $customPostTypeAPI->getRawContent($customPost);
 
             case 'status':
                 return $customPostTypeAPI->getStatus($customPost);
