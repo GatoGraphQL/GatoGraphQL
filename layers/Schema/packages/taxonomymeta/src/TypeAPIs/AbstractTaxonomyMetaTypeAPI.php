@@ -11,7 +11,9 @@ use PoPSchema\TaxonomyMeta\ComponentConfiguration;
 abstract class AbstractTaxonomyMetaTypeAPI extends AbstractMetaTypeAPI implements TaxonomyMetaTypeAPIInterface
 {
     /**
-     * If the allow/denylist validation fails, throw an exception
+     * If the allow/denylist validation fails, throw an exception.
+     * If the key is allowed but non-existent, return `null`.
+     * Otherwise, return the value.
      *
      * @throws InvalidArgumentException
      */
@@ -23,5 +25,9 @@ abstract class AbstractTaxonomyMetaTypeAPI extends AbstractMetaTypeAPI implement
         return $this->doGetTaxonomyMeta($termID, $key, $single);
     }
 
+    /**
+     * If the key is non-existent, return `null`.
+     * Otherwise, return the value.
+     */
     abstract protected function doGetTaxonomyMeta(string | int $termID, string $key, bool $single = false): mixed;
 }

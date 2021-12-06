@@ -82,8 +82,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         $fieldName === 'metaValue'
                     );
                 } catch (InvalidArgumentException $e) {
-                    // If the meta key does not exist, or is not in the allowlist,
-                    // it will throw an exception
+                    // If the meta key is not in the allowlist, it will throw an exception
                     return new Error(
                         'meta-key-not-exists',
                         $e->getMessage()

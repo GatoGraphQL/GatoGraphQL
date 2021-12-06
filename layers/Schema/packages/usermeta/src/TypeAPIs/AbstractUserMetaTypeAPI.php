@@ -11,7 +11,9 @@ use PoPSchema\UserMeta\ComponentConfiguration;
 abstract class AbstractUserMetaTypeAPI extends AbstractMetaTypeAPI implements UserMetaTypeAPIInterface
 {
     /**
-     * If the allow/denylist validation fails, throw an exception
+     * If the allow/denylist validation fails, throw an exception.
+     * If the key is allowed but non-existent, return `null`.
+     * Otherwise, return the value.
      *
      * @throws InvalidArgumentException
      */
@@ -23,5 +25,9 @@ abstract class AbstractUserMetaTypeAPI extends AbstractMetaTypeAPI implements Us
         return $this->doGetUserMeta($userID, $key, $single);
     }
 
+    /**
+     * If the key is non-existent, return `null`.
+     * Otherwise, return the value.
+     */
     abstract protected function doGetUserMeta(string | int $userID, string $key, bool $single = false): mixed;
 }

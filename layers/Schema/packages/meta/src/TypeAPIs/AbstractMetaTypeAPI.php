@@ -24,7 +24,9 @@ abstract class AbstractMetaTypeAPI
     }
 
     /**
-     * If the allow/denylist validation fails, throw an exception
+     * If the allow/denylist validation fails, throw an exception.
+     * If the key is allowed but non-existent, return `null`.
+     * Otherwise, return the value.
      *
      * @throws InvalidArgumentException
      */

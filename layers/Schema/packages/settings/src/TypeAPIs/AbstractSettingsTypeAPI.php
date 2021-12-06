@@ -40,7 +40,9 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
     }
 
     /**
-     * If the allow/denylist validation fails, throw an exception
+     * If the allow/denylist validation fails, throw an exception.
+     * If the key is allowed but non-existent, return `null`.
+     * Otherwise, return the value.
      *
      * @throws InvalidArgumentException
      */
@@ -57,5 +59,9 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
         return true;
     }
 
+    /**
+     * If the name is non-existent, return `null`.
+     * Otherwise, return the value.
+     */
     abstract protected function doGetOption(string $name): mixed;
 }
