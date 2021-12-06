@@ -29,12 +29,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `excludeAuthorIDs: [ID]`
   - `hasPassword: Bool`
 - Exclude results via field arg `excludeIDs`
-- Added field `urlPath` on several types:
-  - `Post.urlPath: String!`
-  - `Page.urlPath: String!`
-  - `PostTag.urlPath: String!`
-  - `PostCategory.urlPath: String!`
-  - `User.urlPath: String!`
+- Added field `urlAbsolutePath` on several types:
+  - `Post.urlAbsolutePath: String!`
+  - `Page.urlAbsolutePath: String!`
+  - `PostTag.urlAbsolutePath: String!`
+  - `PostCategory.urlAbsolutePath: String!`
+  - `User.urlAbsolutePath: String!`
 - Converted from string to Enum type whenever possible
   - Custom post type and status
   - Comment type and status

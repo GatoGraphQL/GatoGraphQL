@@ -55,7 +55,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     {
         return [
             'url',
-            'urlPath',
+            'urlAbsolutePath',
             'slug',
             'name',
             'description',
@@ -88,7 +88,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     {
         return match ($fieldName) {
             'url' => $this->getTranslationAPI()->__('Tag URL', 'pop-tags'),
-            'urlPath' => $this->getTranslationAPI()->__('Tag URL path', 'pop-tags'),
+            'urlAbsolutePath' => $this->getTranslationAPI()->__('Tag URL path', 'pop-tags'),
             'name' => $this->getTranslationAPI()->__('Tag', 'pop-tags'),
             'slug' => $this->getTranslationAPI()->__('Tag slug', 'pop-tags'),
             'description' => $this->getTranslationAPI()->__('Tag description', 'pop-tags'),
@@ -118,7 +118,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
             case 'url':
                 return $tagTypeAPI->getTagURL($objectTypeResolver->getID($tag));
 
-            case 'urlPath':
+            case 'urlAbsolutePath':
                 return $tagTypeAPI->getTagURLPath($objectTypeResolver->getID($tag));
 
             case 'name':

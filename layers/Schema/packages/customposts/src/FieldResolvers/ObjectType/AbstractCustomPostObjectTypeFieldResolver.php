@@ -88,7 +88,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
             case 'url':
                 return $customPostTypeAPI->getPermalink($customPost);
 
-            case 'urlPath':
+            case 'urlAbsolutePath':
                 return $customPostTypeAPI->getPermalinkPath($customPost);
 
             case 'slug':
