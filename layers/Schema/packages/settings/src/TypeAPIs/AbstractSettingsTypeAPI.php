@@ -33,9 +33,20 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
          * Check if the allow/denylist validation fails
          * Compare for full match or regex
          */
-        $settingsEntries = ComponentConfiguration::getSettingsEntries();
-        $settingsBehavior = ComponentConfiguration::getSettingsBehavior();
-        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($name, $settingsEntries, $settingsBehavior)) {
+        $entries = ComponentConfiguration::getSettingsEntries();
+        $behavior = ComponentConfiguration::getSettingsBehavior();
+        $this->assertIsEntryAllowed($entries, $behavior, $name);
+        return $this->doGetOption($name);
+    }
+
+    /**
+     * If the allow/denylist validation fails, throw an exception
+     *
+     * @throws InvalidArgumentException
+     */
+    final protected function assertIsEntryAllowed(array $entries, string $behavior, string $name): bool|InvalidArgumentException
+    {
+        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($name, $entries, $behavior)) {
             return throw new InvalidArgumentException(
                 sprintf(
                     $this->getTranslationAPI()->__('There is no option with name \'%s\'', 'settings'),
@@ -43,7 +54,7 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
                 )
             );
         }
-        return $this->doGetOption($name);
+        return true;
     }
 
     abstract protected function doGetOption(string $name): mixed;

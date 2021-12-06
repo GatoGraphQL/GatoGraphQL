@@ -4,25 +4,17 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMeta\TypeAPIs;
 
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use InvalidArgumentException;
+use PoPSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
 use PoPSchema\CustomPostMeta\ComponentConfiguration;
-use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 
-abstract class AbstractCustomPostMetaTypeAPI implements CustomPostMetaTypeAPIInterface
+abstract class AbstractCustomPostMetaTypeAPI extends AbstractMetaTypeAPI implements CustomPostMetaTypeAPIInterface
 {
-    use BasicServiceTrait;
-
-    private ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
-
-    final public function setAllowOrDenySettingsService(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
-    {
-        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
-    }
-    final protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
-    {
-        return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
-    }
-
+    /**
+     * If the allow/denylist validation fails, throw an exception
+     *
+     * @throws InvalidArgumentException
+     */
     final public function getCustomPostMeta(string | int $customPostID, string $key, bool $single = false): mixed
     {
         /**
@@ -31,9 +23,7 @@ abstract class AbstractCustomPostMetaTypeAPI implements CustomPostMetaTypeAPIInt
          */
         $entries = ComponentConfiguration::getCustomPostMetaEntries();
         $behavior = ComponentConfiguration::getCustomPostMetaBehavior();
-        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($key, $entries, $behavior)) {
-            return null;
-        }
+        $this->assertIsEntryAllowed($entries, $behavior, $key);
         return $this->doGetCustomPostMeta($customPostID, $key, $single);
     }
 

@@ -119,11 +119,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         switch ($fieldName) {
             case 'option':
-                $name = $fieldArgs['name'];
                 try {
-                    $value = $this->getSettingsTypeAPI()->getOption($name);
+                    $value = $this->getSettingsTypeAPI()->getOption($fieldArgs['name']);
                 } catch (InvalidArgumentException $e) {
-                    // If the option does not exist, it will throw an exception
+                    // If the option does not exist, or is not in the allowlist,
+                    // it will throw an exception
                     return new Error(
                         'option-name-not-exists',
                         $e->getMessage()
