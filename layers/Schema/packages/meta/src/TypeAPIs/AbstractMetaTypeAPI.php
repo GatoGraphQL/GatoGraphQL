@@ -30,10 +30,10 @@ abstract class AbstractMetaTypeAPI
      *
      * @throws InvalidArgumentException
      */
-    final protected function assertIsEntryAllowed(array $entries, string $behavior, string $key): bool|InvalidArgumentException
+    final protected function assertIsEntryAllowed(array $entries, string $behavior, string $key): bool
     {
         if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($key, $entries, $behavior)) {
-            return throw new InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf(
                     $this->getTranslationAPI()->__('There is no meta with key \'%s\'', 'commentmeta'),
                     $key

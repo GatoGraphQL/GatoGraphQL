@@ -46,10 +46,10 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
      *
      * @throws InvalidArgumentException
      */
-    final protected function assertIsEntryAllowed(array $entries, string $behavior, string $name): bool|InvalidArgumentException
+    final protected function assertIsEntryAllowed(array $entries, string $behavior, string $name): bool
     {
         if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($name, $entries, $behavior)) {
-            return throw new InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf(
                     $this->getTranslationAPI()->__('There is no option with name \'%s\'', 'settings'),
                     $name
