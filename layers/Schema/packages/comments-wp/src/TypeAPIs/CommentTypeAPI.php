@@ -208,16 +208,18 @@ class CommentTypeAPI implements CommentTypeAPIInterface
 
     public function getCommentContent(object $comment): string
     {
+        /** @var WP_Comment $comment */
         return $this->getHooksAPI()->applyFilters(
             'comment_text',
-            $this->getCommentRawContent($comment)
+            $comment->comment_content
         );
     }
     public function getCommentRawContent(object $comment): string
     {
-        /** @var WP_Comment */
-        $comment = $comment;
-        return $comment->comment_content;
+        /** @var WP_Comment $comment */
+        // Do not allow HTML tags or shortcodes
+        $rawContent = \strip_shortcodes($comment->comment_content);
+        return strip_tags($rawContent);
     }
     public function getCommentPostId(object $comment): string | int
     {
