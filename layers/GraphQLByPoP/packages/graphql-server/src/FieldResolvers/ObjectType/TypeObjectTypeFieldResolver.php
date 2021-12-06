@@ -160,8 +160,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'interfaces',
             'possibleTypes',
             'enumValues',
-            'inputFields',
-            'extensions'
+            'inputFields'
                 => SchemaTypeModifiers::IS_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -289,7 +288,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'extensions':
                 // Custom development: this field is not in GraphQL spec yet!
                 if ($type instanceof NamedTypeInterface) {
-                    return $type->getExtensions();
+                    return (object) $type->getExtensions();
                 }
                 return null;
         }
