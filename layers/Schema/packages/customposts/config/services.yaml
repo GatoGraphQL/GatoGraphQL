@@ -15,6 +15,3 @@ services:
 
     PoPSchema\CustomPosts\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'
-
-    PoPSchema\CustomPosts\Enums\:
-        resource: '../src/Enums/*'
