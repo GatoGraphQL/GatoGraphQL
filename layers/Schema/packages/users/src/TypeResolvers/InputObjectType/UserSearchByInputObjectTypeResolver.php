@@ -8,12 +8,14 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInputObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\Users\ComponentConfiguration;
 use PoPSchema\Users\FilterInputProcessors\FilterInputProcessor;
 
 class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -22,6 +24,14 @@ class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObj
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
+    {
+        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
+    }
+    final protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
+    {
+        return $this->emailScalarTypeResolver ??= $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
     }
 
     public function getTypeName(): string
@@ -43,7 +53,7 @@ class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObj
     {
         return [
             'name' => $this->getStringScalarTypeResolver(),
-            'emails' => $this->getStringScalarTypeResolver(),
+            'emails' => $this->getEmailScalarTypeResolver(),
         ];
     }
 
