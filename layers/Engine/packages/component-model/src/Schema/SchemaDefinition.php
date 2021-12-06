@@ -37,6 +37,7 @@ class SchemaDefinition
     public const POSSIBLE_TYPES = 'possibleTypes';
     public const DIRECTIVES = 'directives';
     public const GLOBAL_DIRECTIVES = 'globalDirectives';
+    public const IS_ADMIN_ELEMENT = 'isAdminElement';
     public const FIELD_IS_MUTATION = 'isMutation';
     public const DIRECTIVE_KIND = 'directiveKind';
     public const DIRECTIVE_PIPELINE_POSITION = 'pipelinePosition';

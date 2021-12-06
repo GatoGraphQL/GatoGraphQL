@@ -463,6 +463,9 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             $this->getFieldTypeModifiers($fieldName),
             $this->getConsolidatedFieldDeprecationMessage($fieldName),
         );
+        if (in_array($fieldName, $this->getAdminFieldNames())) {
+            $schemaDefinition[SchemaDefinition::IS_ADMIN_ELEMENT] = true;
+        }
 
         if ($args = $this->getFieldArgsSchemaDefinition($fieldName)) {
             $schemaDefinition[SchemaDefinition::ARGS] = $args;
@@ -525,6 +528,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         $schemaFieldArgs = [];
         $skipExposingDangerouslyDynamicScalarTypeInSchema = ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema();
         $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($fieldName);
+        $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($fieldName);
         foreach ($consolidatedFieldArgNameTypeResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
             /**
              * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
@@ -550,6 +554,9 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
                 $this->getConsolidatedFieldArgDefaultValue($fieldName, $fieldArgName),
                 $this->getConsolidatedFieldArgTypeModifiers($fieldName, $fieldArgName),
             );
+            if (in_array($fieldArgName, $adminFieldArgNames)) {
+                $schemaFieldArgs[$fieldArgName][SchemaDefinition::IS_ADMIN_ELEMENT] = true;
+            }
         }
         $this->schemaFieldArgsCache[$cacheKey] = $schemaFieldArgs;
         return $this->schemaFieldArgsCache[$cacheKey];
