@@ -19,10 +19,44 @@ By default, the following elements are treated as private data:
 **Custom Posts:**
 
 - `status`
+- `hasPassword`
 
 **Comments:**
 
 - `status`
+
+## Inspecting the "admin" elements via schema introspection
+
+The `isAdminElement` property is added to field `extensions`, when doing schema introspection. To find out which are the "admin" elements from the schema, execute this query:
+
+```graphql
+query GetIntrospectionExtensions {
+  __schema {
+    types {
+      name
+      extensions
+      fields(includeDeprecated: true) {
+        name
+        extensions
+        args {
+          name
+          extensions
+        }
+      }
+      inputFields {
+        name
+        extensions
+      }
+      enumValues(includeDeprecated: true) {
+        name
+        extensions
+      }
+    }
+  }
+}
+```
+
+And then search for entries `isAdminElement: true` in the results.
 
 ## Overriding the default configuration
 
