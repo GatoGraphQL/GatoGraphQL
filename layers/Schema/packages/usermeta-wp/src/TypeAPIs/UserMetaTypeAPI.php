@@ -11,8 +11,18 @@ use PoPSchema\UserMeta\TypeAPIs\AbstractUserMetaTypeAPI;
  */
 class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
 {
-    public function doGetUserMeta(string | int $userID, string $key, bool $single = false): mixed
+    /**
+     * If the key is non-existent, return `null`.
+     * Otherwise, return the value.
+     */
+    protected function doGetUserMeta(string | int $userID, string $key, bool $single = false): mixed
     {
-        return \get_user_meta($userID, $key, $single);
+        // This function does not differentiate between a stored empty value,
+        // and a non-existing key! So if empty, treat it as non-existant and return null
+        $value = \get_user_meta($userID, $key, $single);
+        if (($single && $value === '') || (!$single && $value === [])) {
+            return null;
+        }
+        return $value;
     }
 }

@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\Settings\FieldResolvers\ObjectType;
 
+use InvalidArgumentException;
+use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 
@@ -117,11 +119,16 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         switch ($fieldName) {
             case 'option':
-                $name = $fieldArgs['name'];
-                if ($value = $this->getSettingsTypeAPI()->getOption($name)) {
-                    return $value;
+                try {
+                    $value = $this->getSettingsTypeAPI()->getOption($fieldArgs['name']);
+                } catch (InvalidArgumentException $e) {
+                    // If the option is not in the allowlist, it will throw an exception
+                    return new Error(
+                        'option-name-not-exists',
+                        $e->getMessage()
+                    );
                 }
-                return null;
+                return $value;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

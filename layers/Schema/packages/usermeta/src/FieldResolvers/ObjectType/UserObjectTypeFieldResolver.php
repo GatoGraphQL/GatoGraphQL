@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserMeta\FieldResolvers\ObjectType;
 
+use InvalidArgumentException;
+use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolver;
@@ -73,11 +75,20 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'metaValue':
             case 'metaValues':
-                return $this->getUserMetaTypeAPI()->getUserMeta(
-                    $objectTypeResolver->getID($user),
-                    $fieldArgs['key'],
-                    $fieldName === 'metaValue'
-                );
+                try {
+                    $value = $this->getUserMetaTypeAPI()->getUserMeta(
+                        $objectTypeResolver->getID($user),
+                        $fieldArgs['key'],
+                        $fieldName === 'metaValue'
+                    );
+                } catch (InvalidArgumentException $e) {
+                    // If the meta key is not in the allowlist, it will throw an exception
+                    return new Error(
+                        'meta-key-not-exists',
+                        $e->getMessage()
+                    );
+                }
+                return $value;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

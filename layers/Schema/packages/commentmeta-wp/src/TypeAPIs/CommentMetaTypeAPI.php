@@ -8,8 +8,18 @@ use PoPSchema\CommentMeta\TypeAPIs\AbstractCommentMetaTypeAPI;
 
 class CommentMetaTypeAPI extends AbstractCommentMetaTypeAPI
 {
-    public function doGetCommentMeta(string | int $commentID, string $key, bool $single = false): mixed
+    /**
+     * If the key is non-existent, return `null`.
+     * Otherwise, return the value.
+     */
+    protected function doGetCommentMeta(string | int $commentID, string $key, bool $single = false): mixed
     {
-        return \get_comment_meta($commentID, $key, $single);
+        // This function does not differentiate between a stored empty value,
+        // and a non-existing key! So if empty, treat it as non-existant and return null
+        $value = \get_comment_meta($commentID, $key, $single);
+        if (($single && $value === '') || (!$single && $value === [])) {
+            return null;
+        }
+        return $value;
     }
 }

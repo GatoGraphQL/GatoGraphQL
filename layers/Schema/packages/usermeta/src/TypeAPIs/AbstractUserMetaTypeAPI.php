@@ -4,38 +4,30 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserMeta\TypeAPIs;
 
-use PoP\ComponentModel\Services\BasicServiceTrait;
-use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
+use InvalidArgumentException;
+use PoPSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
 use PoPSchema\UserMeta\ComponentConfiguration;
 
-abstract class AbstractUserMetaTypeAPI implements UserMetaTypeAPIInterface
+abstract class AbstractUserMetaTypeAPI extends AbstractMetaTypeAPI implements UserMetaTypeAPIInterface
 {
-    use BasicServiceTrait;
-
-    private ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
-
-    final public function setAllowOrDenySettingsService(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
-    {
-        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
-    }
-    final protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
-    {
-        return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
-    }
-
+    /**
+     * If the allow/denylist validation fails, throw an exception.
+     * If the key is allowed but non-existent, return `null`.
+     * Otherwise, return the value.
+     *
+     * @throws InvalidArgumentException
+     */
     final public function getUserMeta(string | int $userID, string $key, bool $single = false): mixed
     {
-        /**
-         * Check if the allow/denylist validation fails
-         * Compare for full match or regex
-         */
         $entries = ComponentConfiguration::getUserMetaEntries();
         $behavior = ComponentConfiguration::getUserMetaBehavior();
-        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($key, $entries, $behavior)) {
-            return null;
-        }
+        $this->assertIsEntryAllowed($entries, $behavior, $key);
         return $this->doGetUserMeta($userID, $key, $single);
     }
 
+    /**
+     * If the key is non-existent, return `null`.
+     * Otherwise, return the value.
+     */
     abstract protected function doGetUserMeta(string | int $userID, string $key, bool $single = false): mixed;
 }

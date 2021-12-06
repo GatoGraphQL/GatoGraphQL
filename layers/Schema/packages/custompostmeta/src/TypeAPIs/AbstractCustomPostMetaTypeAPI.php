@@ -4,38 +4,30 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMeta\TypeAPIs;
 
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use InvalidArgumentException;
+use PoPSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
 use PoPSchema\CustomPostMeta\ComponentConfiguration;
-use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 
-abstract class AbstractCustomPostMetaTypeAPI implements CustomPostMetaTypeAPIInterface
+abstract class AbstractCustomPostMetaTypeAPI extends AbstractMetaTypeAPI implements CustomPostMetaTypeAPIInterface
 {
-    use BasicServiceTrait;
-
-    private ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
-
-    final public function setAllowOrDenySettingsService(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
-    {
-        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
-    }
-    final protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
-    {
-        return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
-    }
-
+    /**
+     * If the allow/denylist validation fails, throw an exception.
+     * If the key is allowed but non-existent, return `null`.
+     * Otherwise, return the value.
+     *
+     * @throws InvalidArgumentException
+     */
     final public function getCustomPostMeta(string | int $customPostID, string $key, bool $single = false): mixed
     {
-        /**
-         * Check if the allow/denylist validation fails
-         * Compare for full match or regex
-         */
         $entries = ComponentConfiguration::getCustomPostMetaEntries();
         $behavior = ComponentConfiguration::getCustomPostMetaBehavior();
-        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($key, $entries, $behavior)) {
-            return null;
-        }
+        $this->assertIsEntryAllowed($entries, $behavior, $key);
         return $this->doGetCustomPostMeta($customPostID, $key, $single);
     }
 
+    /**
+     * If the key is non-existent, return `null`.
+     * Otherwise, return the value.
+     */
     abstract protected function doGetCustomPostMeta(string | int $customPostID, string $key, bool $single = false): mixed;
 }

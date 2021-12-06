@@ -4,25 +4,19 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMeta\TypeAPIs;
 
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use InvalidArgumentException;
 use PoPSchema\CommentMeta\ComponentConfiguration;
-use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
+use PoPSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
 
-abstract class AbstractCommentMetaTypeAPI implements CommentMetaTypeAPIInterface
+abstract class AbstractCommentMetaTypeAPI extends AbstractMetaTypeAPI implements CommentMetaTypeAPIInterface
 {
-    use BasicServiceTrait;
-
-    private ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
-
-    final public function setAllowOrDenySettingsService(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
-    {
-        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
-    }
-    final protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
-    {
-        return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
-    }
-
+    /**
+     * If the allow/denylist validation fails, throw an exception.
+     * If the key is allowed but non-existent, return `null`.
+     * Otherwise, return the value.
+     *
+     * @throws InvalidArgumentException
+     */
     final public function getCommentMeta(string | int $commentID, string $key, bool $single = false): mixed
     {
         /**
@@ -31,11 +25,13 @@ abstract class AbstractCommentMetaTypeAPI implements CommentMetaTypeAPIInterface
          */
         $entries = ComponentConfiguration::getCommentMetaEntries();
         $behavior = ComponentConfiguration::getCommentMetaBehavior();
-        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($key, $entries, $behavior)) {
-            return null;
-        }
+        $this->assertIsEntryAllowed($entries, $behavior, $key);
         return $this->doGetCommentMeta($commentID, $key, $single);
     }
 
+    /**
+     * If the key is non-existent, return `null`.
+     * Otherwise, return the value.
+     */
     abstract protected function doGetCommentMeta(string | int $commentID, string $key, bool $single = false): mixed;
 }

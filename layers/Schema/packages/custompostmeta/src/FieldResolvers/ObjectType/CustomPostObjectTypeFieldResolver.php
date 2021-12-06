@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMeta\FieldResolvers\ObjectType;
 
+use InvalidArgumentException;
+use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface;
@@ -73,11 +75,20 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'metaValue':
             case 'metaValues':
-                return $this->getCustomPostMetaTypeAPI()->getCustomPostMeta(
-                    $objectTypeResolver->getID($customPost),
-                    $fieldArgs['key'],
-                    $fieldName === 'metaValue'
-                );
+                try {
+                    $value = $this->getCustomPostMetaTypeAPI()->getCustomPostMeta(
+                        $objectTypeResolver->getID($customPost),
+                        $fieldArgs['key'],
+                        $fieldName === 'metaValue'
+                    );
+                } catch (InvalidArgumentException $e) {
+                    // If the meta key is not in the allowlist, it will throw an exception
+                    return new Error(
+                        'meta-key-not-exists',
+                        $e->getMessage()
+                    );
+                }
+                return $value;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

@@ -94,8 +94,8 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'metaValue' => $this->getTranslationAPI()->__('Single meta value', 'custompostmeta'),
-            'metaValues' => $this->getTranslationAPI()->__('List of meta values', 'custompostmeta'),
+            'metaValue' => $this->getTranslationAPI()->__('Single meta value. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta value.', 'custompostmeta'),
+            'metaValues' => $this->getTranslationAPI()->__('List of meta values. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta value.', 'custompostmeta'),
             default => parent::getFieldDescription($fieldName),
         };
     }
