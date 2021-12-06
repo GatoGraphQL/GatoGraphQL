@@ -12,11 +12,13 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 
 class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -34,6 +36,14 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
+    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -49,6 +59,7 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'description',
             'isDeprecated',
             'deprecationReason',
+            'extensions',
         ];
     }
 
@@ -59,6 +70,7 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'description' => $this->getStringScalarTypeResolver(),
             'isDeprecated' => $this->getBooleanScalarTypeResolver(),
             'deprecationReason' => $this->getStringScalarTypeResolver(),
+            'extensions' => $this->getJSONObjectScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -67,7 +79,8 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'name',
-            'isDeprecated'
+            'isDeprecated',
+            'extensions'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -81,6 +94,7 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'description' => $this->getTranslationAPI()->__('Enum value\'s description as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACyBIC1BHnjL)', 'graphql-server'),
             'isDeprecated' => $this->getTranslationAPI()->__('Is the enum value deprecated?', 'graphql-server'),
             'deprecationReason' => $this->getTranslationAPI()->__('Why was the enum value deprecated?', 'graphql-server'),
+            'extensions' => $this->getTranslationAPI()->__('Custom metadata added to the enum value (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -111,6 +125,8 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $enumValue->isDeprecated();
             case 'deprecationReason':
                 return $enumValue->getDeprecatedReason();
+            case 'extensions':
+                return (object) $enumValue->getExtensions();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

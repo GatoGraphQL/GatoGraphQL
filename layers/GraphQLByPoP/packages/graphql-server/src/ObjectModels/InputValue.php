@@ -44,6 +44,7 @@ class InputValue extends AbstractSchemaDefinitionReferenceObject
         $extensions = $this->schemaDefinition[SchemaDefinition::EXTENSIONS] ?? [];
         if ($this->schemaDefinition[SchemaDefinition::IS_ADMIN_ELEMENT] ?? null) {
             $extensions[SchemaDefinition::IS_ADMIN_ELEMENT] = true;
-        }return $extensions;
+        }
+        return $extensions;
     }
 }
