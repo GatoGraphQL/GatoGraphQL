@@ -217,9 +217,8 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     public function getCommentRawContent(object $comment): string
     {
         /** @var WP_Comment $comment */
-        // Do not allow HTML tags or shortcodes
-        $rawContent = \strip_shortcodes($comment->comment_content);
-        return strip_tags($rawContent);
+        // Do not allow HTML tags
+        return strip_tags($comment->comment_content);
     }
     public function getCommentPostId(object $comment): string | int
     {
