@@ -15,7 +15,7 @@ class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
     protected function doGetCustomPostMeta(string | int $customPostID, string $key, bool $single = false): mixed
     {
         $value = \get_post_meta($customPostID, $key, $single);
-        if ($value === '') {
+        if (($single && $value === '') || (!$single && $value === [])) {
             return null;
         }
         return $value;

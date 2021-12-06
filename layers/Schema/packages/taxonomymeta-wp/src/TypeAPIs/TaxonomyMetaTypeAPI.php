@@ -15,7 +15,7 @@ class TaxonomyMetaTypeAPI extends AbstractTaxonomyMetaTypeAPI
     public function doGetTaxonomyMeta(string | int $termID, string $key, bool $single = false): mixed
     {
         $value = \get_term_meta($termID, $key, $single);
-        if ($value === '') {
+        if (($single && $value === '') || (!$single && $value === [])) {
             return null;
         }
         return $value;

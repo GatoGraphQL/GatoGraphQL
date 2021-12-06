@@ -15,7 +15,7 @@ class CommentMetaTypeAPI extends AbstractCommentMetaTypeAPI
     public function doGetCommentMeta(string | int $commentID, string $key, bool $single = false): mixed
     {
         $value = \get_comment_meta($commentID, $key, $single);
-        if ($value === '') {
+        if (($single && $value === '') || (!$single && $value === [])) {
             return null;
         }
         return $value;

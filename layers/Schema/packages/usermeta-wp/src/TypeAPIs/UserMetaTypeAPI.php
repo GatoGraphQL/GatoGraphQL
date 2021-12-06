@@ -18,7 +18,7 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
     public function doGetUserMeta(string | int $userID, string $key, bool $single = false): mixed
     {
         $value = \get_user_meta($userID, $key, $single);
-        if ($value === '') {
+        if (($single && $value === '') || (!$single && $value === [])) {
             return null;
         }
         return $value;
