@@ -9,22 +9,21 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
-use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostContentFormatEnumTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\InterfaceType\IsCustomPostInterfaceTypeResolver;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModuleProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateTimeScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\HTMLScalarTypeResolver;
 
 class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterfaceTypeFieldResolver
 {
     private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
-    private ?CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?DateTimeScalarTypeResolver $dateTimeScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?HTMLScalarTypeResolver $htmlScalarTypeResolver = null;
     private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
     private ?CustomPostEnumTypeResolver $customPostEnumTypeResolver = null;
 
@@ -35,14 +34,6 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
     {
         return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
-    }
-    final public function setCustomPostContentFormatEnumTypeResolver(CustomPostContentFormatEnumTypeResolver $customPostContentFormatEnumTypeResolver): void
-    {
-        $this->customPostContentFormatEnumTypeResolver = $customPostContentFormatEnumTypeResolver;
-    }
-    final protected function getCustomPostContentFormatEnumTypeResolver(): CustomPostContentFormatEnumTypeResolver
-    {
-        return $this->customPostContentFormatEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostContentFormatEnumTypeResolver::class);
     }
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -67,6 +58,14 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setHTMLScalarTypeResolver(HTMLScalarTypeResolver $htmlScalarTypeResolver): void
+    {
+        $this->htmlScalarTypeResolver = $htmlScalarTypeResolver;
+    }
+    final protected function getHTMLScalarTypeResolver(): HTMLScalarTypeResolver
+    {
+        return $this->htmlScalarTypeResolver ??= $this->instanceManager->getInstance(HTMLScalarTypeResolver::class);
     }
     final public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
     {
@@ -106,6 +105,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'urlAbsolutePath',
             'slug',
             'content',
+            'rawContent',
             'status',
             'isStatus',
             'date',
@@ -126,12 +126,14 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'date',
             'modifiedDate'
                 => $this->getDateTimeScalarTypeResolver(),
-            'content',
+            'rawContent',
             'title',
             'excerpt',
             'dateStr',
             'modifiedDateStr'
                 => $this->getStringScalarTypeResolver(),
+            'content'
+                => $this->getHTMLScalarTypeResolver(),
             'customPostType'
                 => $this->getCustomPostEnumTypeResolver(),
             'status'
@@ -149,6 +151,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
          */
         switch ($fieldName) {
             case 'content':
+            case 'rawContent':
             case 'status':
             case 'isStatus':
             case 'date':
@@ -167,7 +170,8 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'url' => $this->getTranslationAPI()->__('Custom post URL', 'customposts'),
             'urlAbsolutePath' => $this->getTranslationAPI()->__('Custom post URL path', 'customposts'),
             'slug' => $this->getTranslationAPI()->__('Custom post slug', 'customposts'),
-            'content' => $this->getTranslationAPI()->__('Custom post content', 'customposts'),
+            'content' => $this->getTranslationAPI()->__('Custom post content, in HTML format', 'customposts'),
+            'rawContent' => $this->getTranslationAPI()->__('Custom post content, in raw format', 'customposts'),
             'status' => $this->getTranslationAPI()->__('Custom post status', 'customposts'),
             'isStatus' => $this->getTranslationAPI()->__('Is the custom post in the given status?', 'customposts'),
             'date' => $this->getTranslationAPI()->__('Custom post published date', 'customposts'),
@@ -187,9 +191,6 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'isStatus' => [
                 'status' => $this->getCustomPostStatusEnumTypeResolver(),
             ],
-            'content' => [
-                'format' => $this->getCustomPostContentFormatEnumTypeResolver(),
-            ],
             default => parent::getFieldArgNameTypeResolvers($fieldName),
         };
     }
@@ -198,16 +199,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     {
         return match ([$fieldName => $fieldArgName]) {
             ['isStatus' => 'status'] => $this->getTranslationAPI()->__('The status to check if the post has', 'customposts'),
-            ['content' => 'format'] => $this->getTranslationAPI()->__('The format of the content', 'customposts'),
             default => parent::getFieldArgDescription($fieldName, $fieldArgName),
-        };
-    }
-
-    public function getFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
-    {
-        return match ([$fieldName => $fieldArgName]) {
-            ['content' => 'format'] => $this->getDefaultContentFormatValue(),
-            default => parent::getFieldArgDefaultValue($fieldName, $fieldArgName),
         };
     }
 
@@ -228,10 +220,5 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'modifiedDateStr' => [CommonFilterInputContainerModuleProcessor::class, CommonFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
             default => parent::getFieldFilterInputContainerModule($fieldName),
         };
-    }
-
-    public function getDefaultContentFormatValue(): string
-    {
-        return CustomPostContentFormatEnum::HTML;
     }
 }

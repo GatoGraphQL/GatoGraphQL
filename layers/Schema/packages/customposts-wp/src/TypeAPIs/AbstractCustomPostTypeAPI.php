@@ -316,7 +316,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return $this->getHooksAPI()->applyFilters('the_content', $customPost->post_content);
     }
 
-    public function getPlainTextContent(string | int | object $customPostObjectOrID): ?string
+    public function getRawContent(string | int | object $customPostObjectOrID): ?string
     {
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         if ($customPost === null) {
@@ -324,14 +324,17 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         }
 
         // Basic content: remove embeds, shortcodes, and tags
-        // Remove the embed functionality, and then add again
+        // Remove unneeded filters, then add them again
+        // @see wp-includes/default-filters.php
         $wp_embed = $GLOBALS['wp_embed'];
         $this->getHooksAPI()->removeFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
+        $this->getHooksAPI()->removeFilter('the_content', 'wpautop');
 
         // Do not allow HTML tags or shortcodes
         $ret = \strip_shortcodes($customPost->post_content);
         $ret = $this->getHooksAPI()->applyFilters('the_content', $ret);
         $this->getHooksAPI()->addFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
+        $this->getHooksAPI()->addFilter('the_content', 'wpautop');
 
         return strip_tags($ret);
     }

@@ -27,6 +27,7 @@ use PoPSchema\SchemaCommons\ModuleProcessors\CommonFilterInputContainerModulePro
 use PoPSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateTimeScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\HTMLScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 
 class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
@@ -35,6 +36,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
 
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?HTMLScalarTypeResolver $htmlScalarTypeResolver = null;
     private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
@@ -63,6 +65,14 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setHTMLScalarTypeResolver(HTMLScalarTypeResolver $htmlScalarTypeResolver): void
+    {
+        $this->htmlScalarTypeResolver = $htmlScalarTypeResolver;
+    }
+    final protected function getHTMLScalarTypeResolver(): HTMLScalarTypeResolver
+    {
+        return $this->htmlScalarTypeResolver ??= $this->instanceManager->getInstance(HTMLScalarTypeResolver::class);
     }
     final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
     {
@@ -172,6 +182,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     {
         return [
             'content',
+            'rawContent',
             'authorName',
             'authorURL',
             'authorEmail',
@@ -191,11 +202,13 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'content',
+            'rawContent',
             'authorName',
             'type',
             'dateStr'
                 => $this->getStringScalarTypeResolver(),
+            'content'
+                => $this->getHTMLScalarTypeResolver(),
             'authorURL'
                 => $this->getURLScalarTypeResolver(),
             'authorEmail'
@@ -224,6 +237,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     {
         return match ($fieldName) {
             'content',
+            'rawContent',
             'customPost',
             'customPostID',
             'approved',
@@ -243,7 +257,8 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'content' => $this->getTranslationAPI()->__('Comment\'s content', 'pop-comments'),
+            'content' => $this->getTranslationAPI()->__('Comment\'s content, in HTML format', 'pop-comments'),
+            'rawContent' => $this->getTranslationAPI()->__('Comment\'s content, in raw format', 'pop-comments'),
             'authorName' => $this->getTranslationAPI()->__('Comment author\'s name', 'pop-comments'),
             'authorURL' => $this->getTranslationAPI()->__('Comment author\'s URL', 'pop-comments'),
             'authorEmail' => $this->getTranslationAPI()->__('Comment author\'s email', 'pop-comments'),
@@ -311,6 +326,9 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         switch ($fieldName) {
             case 'content':
                 return $this->getCommentTypeAPI()->getCommentContent($comment);
+
+            case 'rawContent':
+                return $this->getCommentTypeAPI()->getCommentRawContent($comment);
 
             case 'authorName':
                 return $this->getCommentTypeAPI()->getCommentAuthorName($comment);

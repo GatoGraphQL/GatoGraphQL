@@ -35,6 +35,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `PostTag.urlAbsolutePath: String!`
   - `PostCategory.urlAbsolutePath: String!`
   - `User.urlAbsolutePath: String!`
+- `content` fields (for types `Post`, `Page` and `Comment`) are now of type `HTML`, and a new `rawContent` field of type `String` was added
 - Converted from string to Enum type whenever possible
   - Custom post type and status
   - Comment type and status
@@ -179,6 +180,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Renamed scalar type `AnyScalar` to `AnyBuiltInScalar`
 - Renamed interface type `Elemental` to `Node`
 - All `date` fields (such as `Post.date`, `Media.date` and `Comment.date`) and `modified` fields are now of type `DateTime` (before they had type `String`)
+- Must update `content(format:PLAIN_TEXT)` to `rawContent`
 - Must update the inputs for mutations
 - Merged the "admin" fields with the non-admin versions: instead of having fields `posts` and `unrestrainedPosts`, now there is only field `posts`, and its `filter` argument can also receive input `status` when `Schema Expose Admin Data` is enabled
 - `User.email` is treated as "admin" field

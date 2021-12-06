@@ -8,8 +8,6 @@ use DateTime;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Formatters\DateFormatterInterface;
-use PoPSchema\CustomPosts\ComponentConfiguration;
-use PoPSchema\CustomPosts\Enums\CustomPostContentFormatEnum;
 use PoPSchema\CustomPosts\FieldResolvers\InterfaceType\IsCustomPostInterfaceTypeFieldResolver;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
@@ -95,18 +93,10 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 return $customPostTypeAPI->getSlug($customPost);
 
             case 'content':
-                $format = $fieldArgs['format'];
-                $value = '';
-                if ($format == CustomPostContentFormatEnum::HTML) {
-                    $value = $customPostTypeAPI->getContent($customPost);
-                } elseif ($format == CustomPostContentFormatEnum::PLAIN_TEXT) {
-                    $value = $customPostTypeAPI->getPlainTextContent($customPost);
-                }
-                return $this->getHooksAPI()->applyFilters(
-                    'pop_content',
-                    $value,
-                    $objectTypeResolver->getID($customPost)
-                );
+                return $customPostTypeAPI->getContent($customPost);
+
+            case 'rawContent':
+                return $customPostTypeAPI->getRawContent($customPost);
 
             case 'status':
                 return $customPostTypeAPI->getStatus($customPost);
