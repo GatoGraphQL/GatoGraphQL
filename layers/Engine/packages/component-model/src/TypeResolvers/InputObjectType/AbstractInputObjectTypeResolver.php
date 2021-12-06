@@ -9,6 +9,7 @@ use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Resolvers\TypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\InputCoercingServiceInterface;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
@@ -473,6 +474,9 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             $this->getConsolidatedInputFieldDefaultValue($inputFieldName),
             $this->getConsolidatedInputFieldTypeModifiers($inputFieldName),
         );
+        if (in_array($inputFieldName, $this->getConsolidatedAdminInputFieldNames())) {
+            $inputFieldSchemaDefinition[SchemaDefinition::IS_ADMIN_ELEMENT] = true;
+        }
 
         $this->schemaDefinitionForInputFieldCache[$inputFieldName] = $inputFieldSchemaDefinition;
         return $this->schemaDefinitionForInputFieldCache[$inputFieldName];

@@ -42,6 +42,9 @@ class Field extends AbstractSchemaDefinitionReferenceObject
         if ($this->schemaDefinition[SchemaDefinition::FIELD_IS_MUTATION] ?? null) {
             $extensions[SchemaDefinition::FIELD_IS_MUTATION] = true;
         }
+        if ($this->schemaDefinition[SchemaDefinition::IS_ADMIN_ELEMENT] ?? null) {
+            $extensions[SchemaDefinition::IS_ADMIN_ELEMENT] = true;
+        }
         return $extensions;
     }
 }

@@ -38,18 +38,22 @@ class EnumTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvi
     {
         $enums = [];
         $enumValues = $this->enumTypeResolver->getConsolidatedEnumValues();
+        $adminEnumValues = $this->enumTypeResolver->getConsolidatedAdminEnumValues();
         foreach ($enumValues as $enumValue) {
-            $enum = [
+            $enumValueSchemaDefinition = [
                 SchemaDefinition::VALUE => $enumValue,
             ];
             if ($description = $this->enumTypeResolver->getConsolidatedEnumValueDescription($enumValue)) {
-                $enum[SchemaDefinition::DESCRIPTION] = $description;
+                $enumValueSchemaDefinition[SchemaDefinition::DESCRIPTION] = $description;
             }
             if ($deprecationMessage = $this->enumTypeResolver->getConsolidatedEnumValueDeprecationMessage($enumValue)) {
-                $enum[SchemaDefinition::DEPRECATED] = true;
-                $enum[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationMessage;
+                $enumValueSchemaDefinition[SchemaDefinition::DEPRECATED] = true;
+                $enumValueSchemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationMessage;
             }
-            $enums[$enumValue] = $enum;
+            if (in_array($enumValue, $adminEnumValues)) {
+                $enumValueSchemaDefinition[SchemaDefinition::IS_ADMIN_ELEMENT] = true;
+            }
+            $enums[$enumValue] = $enumValueSchemaDefinition;
         }
         $schemaDefinition[SchemaDefinition::ITEMS] = $enums;
     }

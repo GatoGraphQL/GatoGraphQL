@@ -38,10 +38,13 @@ class InputValue extends AbstractSchemaDefinitionReferenceObject
         }
         return null;
     }
-    
+
     public function getExtensions(): array
     {
         $extensions = $this->schemaDefinition[SchemaDefinition::EXTENSIONS] ?? [];
+        if ($this->schemaDefinition[SchemaDefinition::IS_ADMIN_ELEMENT] ?? null) {
+            $extensions[SchemaDefinition::IS_ADMIN_ELEMENT] = true;
+        }
         return $extensions;
     }
 }

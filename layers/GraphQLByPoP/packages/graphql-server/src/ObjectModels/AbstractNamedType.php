@@ -30,6 +30,7 @@ abstract class AbstractNamedType extends AbstractSchemaDefinitionReferenceObject
 
     public function getExtensions(): array
     {
-        return [];
+        $extensions = $this->schemaDefinition[SchemaDefinition::EXTENSIONS] ?? [];
+        return $extensions;
     }
 }

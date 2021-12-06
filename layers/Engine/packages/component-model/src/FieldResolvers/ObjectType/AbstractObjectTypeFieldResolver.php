@@ -523,6 +523,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $this->schemaFieldArgsCache[$cacheKey];
         }
         $schemaFieldArgs = [];
+        $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($objectTypeResolver, $fieldName);
         $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         foreach ($consolidatedFieldArgNameTypeResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
             $fieldArgDescription =
@@ -535,6 +536,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 $this->getConsolidatedFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
                 $this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
             );
+            if (in_array($fieldArgName, $adminFieldArgNames)) {
+                $schemaFieldArgs[$fieldArgName][SchemaDefinition::IS_ADMIN_ELEMENT] = true;
+            }
         }
         $this->schemaFieldArgsCache[$cacheKey] = $schemaFieldArgs;
         return $this->schemaFieldArgsCache[$cacheKey];
@@ -860,6 +864,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
         if ($this->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null) {
             $schemaDefinition[SchemaDefinition::FIELD_IS_MUTATION] = true;
+        }
+        if (in_array($fieldName, $this->getAdminFieldNames())) {
+            $schemaDefinition[SchemaDefinition::IS_ADMIN_ELEMENT] = true;
         }
 
         if ($extensions = $this->getFieldSchemaDefinitionExtensions($objectTypeResolver, $fieldName, $fieldArgs)) {
