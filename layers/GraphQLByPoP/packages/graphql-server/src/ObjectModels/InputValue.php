@@ -8,9 +8,9 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 
 class InputValue extends AbstractSchemaDefinitionReferenceObject
 {
-    protected InputValueExtensions $inputValueExtensions;
-
     use HasTypeSchemaDefinitionReferenceTrait;
+
+    protected InputValueExtensions $inputValueExtensions;
 
     public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {

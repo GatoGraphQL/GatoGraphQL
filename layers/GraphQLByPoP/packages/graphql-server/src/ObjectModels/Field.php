@@ -8,10 +8,10 @@ use PoP\API\Schema\SchemaDefinition;
 
 class Field extends AbstractSchemaDefinitionReferenceObject
 {
-    protected FieldExtensions $fieldExtensions;
-
     use HasTypeSchemaDefinitionReferenceTrait;
     use HasArgsSchemaDefinitionReferenceTrait;
+
+    protected FieldExtensions $fieldExtensions;
 
     public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
