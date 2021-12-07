@@ -180,11 +180,11 @@ class UserTypeAPI extends AbstractUserTypeAPI
             unset($query['exclude-ids']);
         }
         if (isset($query['order'])) {
-            // Same param name, so do nothing
+            $query['order'] = \esc_sql($query['order']);
         }
         if (isset($query['orderby'])) {
             // Maybe replace the provided value
-            $query['orderby'] = $this->getOrderByQueryArgValue($query['orderby']);
+            $query['orderby'] = \esc_sql($this->getOrderByQueryArgValue($query['orderby']));
         }
         if (isset($query['offset'])) {
             // Same param name, so do nothing

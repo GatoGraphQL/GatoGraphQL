@@ -143,12 +143,12 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
             unset($query['exclude-ids']);
         }
         if (isset($query['order'])) {
-            // Same param name, so do nothing
+            $query['order'] = \esc_sql($query['order']);
         }
         if (isset($query['orderby'])) {
-            // Same param name, so do nothing
             // This param can either be a string or an array. Eg:
             // $query['orderby'] => array('date' => 'DESC', 'title' => 'ASC');
+            $query['orderby'] = \esc_sql($query['orderby']);
         }
         if (isset($query['offset'])) {
             // Same param name, so do nothing

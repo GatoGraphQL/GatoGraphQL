@@ -156,11 +156,11 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             unset($query['limit']);
         }
         if (isset($query['order'])) {
-            // Same param name, so do nothing
+            $query['order'] = \esc_sql($query['order']);
         }
         if (isset($query['orderby'])) {
             // Maybe replace the provided value
-            $query['orderby'] = $this->getOrderByQueryArgValue($query['orderby']);
+            $query['orderby'] = \esc_sql($this->getOrderByQueryArgValue($query['orderby']));
         }
         // Post slug
         if (isset($query['slug'])) {
