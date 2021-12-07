@@ -10,4 +10,5 @@ class HookNames
     public const ADMIN_ENUM_VALUES = __CLASS__ . ':admin-enum-values';
     public const ENUM_VALUE_DESCRIPTION = __CLASS__ . ':enum-value-description';
     public const ENUM_VALUE_DEPRECATION_MESSAGE = __CLASS__ . ':enum-value-deprecation-message';
+    public const ENUM_VALUE_EXTENSIONS = __CLASS__ . ':enum-value-extensions';
 }

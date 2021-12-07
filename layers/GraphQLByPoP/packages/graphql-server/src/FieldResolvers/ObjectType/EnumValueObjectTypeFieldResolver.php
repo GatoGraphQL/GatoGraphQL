@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\EnumValue;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\EnumValueExtensionsObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\EnumValueObjectTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -12,13 +13,12 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 
 class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?EnumValueExtensionsObjectTypeResolver $enumValueExtensionsObjectTypeResolver = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -36,13 +36,13 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    final public function setEnumValueExtensionsObjectTypeResolver(EnumValueExtensionsObjectTypeResolver $enumValueExtensionsObjectTypeResolver): void
     {
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+        $this->enumValueExtensionsObjectTypeResolver = $enumValueExtensionsObjectTypeResolver;
     }
-    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    final protected function getEnumValueExtensionsObjectTypeResolver(): EnumValueExtensionsObjectTypeResolver
     {
-        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+        return $this->enumValueExtensionsObjectTypeResolver ??= $this->instanceManager->getInstance(EnumValueExtensionsObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -70,7 +70,7 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'description' => $this->getStringScalarTypeResolver(),
             'isDeprecated' => $this->getBooleanScalarTypeResolver(),
             'deprecationReason' => $this->getStringScalarTypeResolver(),
-            'extensions' => $this->getJSONObjectScalarTypeResolver(),
+            'extensions' => $this->getEnumValueExtensionsObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -94,7 +94,7 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'description' => $this->getTranslationAPI()->__('Enum value\'s description as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACyBIC1BHnjL)', 'graphql-server'),
             'isDeprecated' => $this->getTranslationAPI()->__('Is the enum value deprecated?', 'graphql-server'),
             'deprecationReason' => $this->getTranslationAPI()->__('Why was the enum value deprecated?', 'graphql-server'),
-            'extensions' => $this->getTranslationAPI()->__('Custom metadata added to the enum value (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
+            'extensions' => $this->getTranslationAPI()->__('Extensions (custom metadata) added to the enum value (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -126,7 +126,7 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'deprecationReason':
                 return $enumValue->getDeprecatedReason();
             case 'extensions':
-                return (object) $enumValue->getExtensions();
+                return $enumValue->getExtensions()->getID();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

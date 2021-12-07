@@ -489,7 +489,6 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         ];
     }
 
-
     /**
      * Consolidation of the schema inputs. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.

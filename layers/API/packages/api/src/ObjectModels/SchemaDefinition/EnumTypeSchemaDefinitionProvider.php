@@ -36,25 +36,6 @@ class EnumTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinition
      */
     final protected function addEnumSchemaDefinition(array &$schemaDefinition): void
     {
-        $enums = [];
-        $enumValues = $this->enumTypeResolver->getConsolidatedEnumValues();
-        $adminEnumValues = $this->enumTypeResolver->getConsolidatedAdminEnumValues();
-        foreach ($enumValues as $enumValue) {
-            $enumValueSchemaDefinition = [
-                SchemaDefinition::VALUE => $enumValue,
-            ];
-            if ($description = $this->enumTypeResolver->getConsolidatedEnumValueDescription($enumValue)) {
-                $enumValueSchemaDefinition[SchemaDefinition::DESCRIPTION] = $description;
-            }
-            if ($deprecationMessage = $this->enumTypeResolver->getConsolidatedEnumValueDeprecationMessage($enumValue)) {
-                $enumValueSchemaDefinition[SchemaDefinition::DEPRECATED] = true;
-                $enumValueSchemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationMessage;
-            }
-            if (in_array($enumValue, $adminEnumValues)) {
-                $enumValueSchemaDefinition[SchemaDefinition::IS_ADMIN_ELEMENT] = true;
-            }
-            $enums[$enumValue] = $enumValueSchemaDefinition;
-        }
-        $schemaDefinition[SchemaDefinition::ITEMS] = $enums;
+        $schemaDefinition[SchemaDefinition::ITEMS] = $this->enumTypeResolver->getEnumSchemaDefinition();
     }
 }

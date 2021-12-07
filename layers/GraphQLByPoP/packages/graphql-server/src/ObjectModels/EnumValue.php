@@ -8,6 +8,21 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 
 class EnumValue extends AbstractSchemaDefinitionReferenceObject
 {
+    protected EnumValueExtensions $enumValueExtensions;
+
+    public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
+    {
+        parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
+
+        $enumValueExtensionsSchemaDefinitionPath = array_merge(
+            $schemaDefinitionPath,
+            [
+                SchemaDefinition::EXTENSIONS,
+            ]
+        );
+        $this->enumValueExtensions = new EnumValueExtensions($fullSchemaDefinition, $enumValueExtensionsSchemaDefinitionPath);
+    }
+
     public function getName(): string
     {
         return $this->getValue();
@@ -28,12 +43,8 @@ class EnumValue extends AbstractSchemaDefinitionReferenceObject
     {
         return $this->schemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] ?? null;
     }
-    public function getExtensions(): array
+    public function getExtensions(): EnumValueExtensions
     {
-        $extensions = $this->schemaDefinition[SchemaDefinition::EXTENSIONS] ?? [];
-        if ($this->schemaDefinition[SchemaDefinition::IS_ADMIN_ELEMENT] ?? null) {
-            $extensions[SchemaDefinition::IS_ADMIN_ELEMENT] = true;
-        }
-        return $extensions;
+        return $this->enumValueExtensions;
     }
 }
