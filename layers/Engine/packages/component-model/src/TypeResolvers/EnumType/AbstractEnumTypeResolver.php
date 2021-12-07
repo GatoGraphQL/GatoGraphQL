@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use stdClass;
 
@@ -18,6 +19,12 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     protected array $consolidatedEnumValueDescriptionCache = [];
     /** @var array<string, string|null> */
     protected array $consolidatedEnumValueDeprecationMessageCache = [];
+    /** @var array<string, array<string,mixed>> */
+    protected array $consolidatedEnumValueExtensionsCache = [];
+    /** @var array<string,array<string,mixed>>|null */
+    protected ?array $schemaDefinitionForEnumCache = null;
+    /** @var array<string, array<string,mixed>> */
+    protected array $schemaDefinitionForEnumValueCache = [];
 
     /**
      * The "admin" values in the enum
@@ -172,5 +179,77 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
             $this,
             $enumValue,
         );
+    }
+
+
+    /**
+     * Get the "schema" properties as for the enum
+     */
+    final public function getEnumSchemaDefinition(): array
+    {
+        // Cache the result
+        if ($this->schemaDefinitionForEnumCache !== null) {
+            return $this->schemaDefinitionForEnumCache;
+        }
+
+        $enumSchemaDefinition = [];
+        $enumValues = $this->getConsolidatedEnumValues();
+        foreach ($enumValues as $enumValue) {
+            $enumSchemaDefinition[$enumValue] = $this->getEnumValueSchemaDefinition($enumValue);
+        }
+        $this->schemaDefinitionForEnumCache = $enumSchemaDefinition;
+        return $this->schemaDefinitionForEnumCache;
+    }
+
+    /**
+     * Get the "schema" properties as for the enumValue
+     */
+    final public function getEnumValueSchemaDefinition(string $enumValue): array
+    {
+        // Cache the result
+        if (isset($this->schemaDefinitionForEnumValueCache[$enumValue])) {
+            return $this->schemaDefinitionForEnumValueCache[$enumValue];
+        }
+
+        $enumValueSchemaDefinition = [
+            SchemaDefinition::VALUE => $enumValue,
+        ];
+        if ($description = $this->getConsolidatedEnumValueDescription($enumValue)) {
+            $enumValueSchemaDefinition[SchemaDefinition::DESCRIPTION] = $description;
+        }
+        if ($deprecationMessage = $this->getConsolidatedEnumValueDeprecationMessage($enumValue)) {
+            $enumValueSchemaDefinition[SchemaDefinition::DEPRECATED] = true;
+            $enumValueSchemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationMessage;
+        }
+        $enumValueSchemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getConsolidatedEnumValueExtensionsSchemaDefinition($enumValue);
+
+        $this->schemaDefinitionForEnumValueCache[$enumValue] = $enumValueSchemaDefinition;
+        ;
+        return $this->schemaDefinitionForEnumValueCache[$enumValue];
+    }
+
+    protected function getEnumValueExtensionsSchemaDefinition(string $enumValue): array
+    {
+        return [
+            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($enumValue, $this->getConsolidatedAdminEnumValues()),
+        ];
+    }
+
+    /**
+     * Consolidation of the schema inputs. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedEnumValueExtensionsSchemaDefinition(string $enumValue): array
+    {
+        if (array_key_exists($enumValue, $this->consolidatedEnumValueExtensionsCache)) {
+            return $this->consolidatedEnumValueExtensionsCache[$enumValue];
+        }
+        $this->consolidatedEnumValueExtensionsCache[$enumValue] = $this->getHooksAPI()->applyFilters(
+            HookNames::ENUM_VALUE_EXTENSIONS,
+            $this->getEnumValueExtensionsSchemaDefinition($enumValue),
+            $this,
+            $enumValue,
+        );
+        return $this->consolidatedEnumValueExtensionsCache[$enumValue];
     }
 }

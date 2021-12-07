@@ -8,7 +8,7 @@ For instance, to access post data, we have field `Root.posts`, which by default 
 
 ## List of admin elements
 
-By default, the following elements are treated as private data:
+The elements below (among others) are, by default, treated as private data:
 
 **User:**
 
@@ -27,36 +27,43 @@ By default, the following elements are treated as private data:
 
 ## Inspecting the "admin" elements via schema introspection
 
-The `isAdminElement` property is added to field `extensions`, when doing schema introspection. To find out which are the "admin" elements from the schema, execute this query:
+The `isAdminElement` property is added to field `extensions` when doing schema introspection. To find out which are the "admin" elements from the schema, execute this query:
 
 ```graphql
-query GetIntrospectionExtensions {
+query ViewAdminElements {
   __schema {
     types {
       name
-      extensions
-      fields(includeDeprecated: true) {
+      fields {
         name
-        extensions
+        extensions {
+          isAdminElement
+        }
         args {
           name
-          extensions
+          extensions {
+            isAdminElement
+          }
         }
       }
       inputFields {
         name
-        extensions
+        extensions {
+          isAdminElement
+        }
       }
-      enumValues(includeDeprecated: true) {
+      enumValues {
         name
-        extensions
+        extensions {
+          isAdminElement
+        }
       }
     }
   }
 }
 ```
 
-And then search for entries `isAdminElement: true` in the results.
+And then search for entries with `"isAdminElement": true` in the results.
 
 ## Overriding the default configuration
 

@@ -43,4 +43,12 @@ interface EnumTypeResolverInterface extends ConcreteTypeResolverInterface, Depre
     public function getConsolidatedAdminEnumValues(): array;
     public function getConsolidatedEnumValueDescription(string $enumValue): ?string;
     public function getConsolidatedEnumValueDeprecationMessage(string $enumValue): ?string;
+    /**
+     * @return array<string,mixed>
+     */
+    public function getEnumValueSchemaDefinition(string $enumValue): array;
+    /**
+     * @return array<string,array<string,mixed>>
+     */
+    public function getEnumSchemaDefinition(): array;
 }

@@ -10,13 +10,14 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\HasInterfacesTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasPossibleTypesTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\InputObjectType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\NamedTypeInterface;
-use GraphQLByPoP\GraphQLServer\ObjectModels\WrappingTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\ScalarType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\TypeInterface;
+use GraphQLByPoP\GraphQLServer\ObjectModels\WrappingTypeInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\TypeKindEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\EnumValueObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\FieldObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueObjectTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\NamedTypeExtensionsObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -24,13 +25,12 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 
 class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?NamedTypeExtensionsObjectTypeResolver $namedTypeExtensionsObjectTypeResolver = null;
     private ?FieldObjectTypeResolver $fieldObjectTypeResolver = null;
     private ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
     private ?EnumValueObjectTypeResolver $enumValueObjectTypeResolver = null;
@@ -53,13 +53,13 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
-    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    final public function setNamedTypeExtensionsObjectTypeResolver(NamedTypeExtensionsObjectTypeResolver $namedTypeExtensionsObjectTypeResolver): void
     {
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+        $this->namedTypeExtensionsObjectTypeResolver = $namedTypeExtensionsObjectTypeResolver;
     }
-    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    final protected function getNamedTypeExtensionsObjectTypeResolver(): NamedTypeExtensionsObjectTypeResolver
     {
-        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+        return $this->namedTypeExtensionsObjectTypeResolver ??= $this->instanceManager->getInstance(NamedTypeExtensionsObjectTypeResolver::class);
     }
     final public function setFieldObjectTypeResolver(FieldObjectTypeResolver $fieldObjectTypeResolver): void
     {
@@ -134,7 +134,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'specifiedByURL'
                 => $this->getStringScalarTypeResolver(),
             'extensions'
-                => $this->getJSONObjectScalarTypeResolver(),
+                => $this->getNamedTypeExtensionsObjectTypeResolver(),
             'fields'
                 => $this->getFieldObjectTypeResolver(),
             'interfaces',
@@ -180,7 +180,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'inputFields' => $this->getTranslationAPI()->__('Type\'s input Fields (available for InputObject type only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-HAJbLAuDABCBIu9N)', 'graphql-server'),
             'ofType' => $this->getTranslationAPI()->__('The type of the nested type (available for NonNull and List types only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-HAJbLA4DABCBIu9N)', 'graphql-server'),
             'specifiedByURL' => $this->getTranslationAPI()->__('A scalar specification URL (a String (in the form of a URL) for custom scalars, otherwise must be null) as defined by the GraphQL spec (https://spec.graphql.org/draft/#sel-IAJXNFA0EABABL9N)', 'graphql-server'),
-            'extensions' => $this->getTranslationAPI()->__('Custom metadata added to the field (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
+            'extensions' => $this->getTranslationAPI()->__('Extensions (custom metadata) added to the GraphQL type (for all \'named\' types: Object, Interface, Union, Scalar, Enum and InputObject) (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -287,8 +287,12 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return null;
             case 'extensions':
                 // Custom development: this field is not in GraphQL spec yet!
+                // @see https://github.com/graphql/graphql-spec/issues/300
+                // Implementation based on the one by GraphQL Java
+                // @see https://github.com/graphql-java/graphql-java/pull/2221
+                // Non-null for named types, null for wrapping types (Non-Null and List)
                 if ($type instanceof NamedTypeInterface) {
-                    return (object) $type->getExtensions();
+                    return $type->getExtensions()->getID();
                 }
                 return null;
         }

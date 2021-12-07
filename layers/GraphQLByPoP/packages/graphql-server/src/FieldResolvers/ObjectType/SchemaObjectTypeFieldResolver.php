@@ -6,6 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\DirectiveObjectTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaExtensionsObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -18,6 +19,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
     private ?DirectiveObjectTypeResolver $directiveObjectTypeResolver = null;
+    private ?SchemaExtensionsObjectTypeResolver $schemaExtensionsObjectTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     final public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
@@ -35,6 +37,14 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     final protected function getDirectiveObjectTypeResolver(): DirectiveObjectTypeResolver
     {
         return $this->directiveObjectTypeResolver ??= $this->instanceManager->getInstance(DirectiveObjectTypeResolver::class);
+    }
+    final public function setSchemaExtensionsObjectTypeResolver(SchemaExtensionsObjectTypeResolver $schemaExtensionsObjectTypeResolver): void
+    {
+        $this->schemaExtensionsObjectTypeResolver = $schemaExtensionsObjectTypeResolver;
+    }
+    final protected function getSchemaExtensionsObjectTypeResolver(): SchemaExtensionsObjectTypeResolver
+    {
+        return $this->schemaExtensionsObjectTypeResolver ??= $this->instanceManager->getInstance(SchemaExtensionsObjectTypeResolver::class);
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -61,13 +71,15 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'types',
             'directives',
             'type',
+            'extensions',
         ];
     }
 
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'queryType'
+            'queryType',
+            'extensions'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'types',
             'directives'
@@ -86,6 +98,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'types' => $this->getTranslationAPI()->__('All types registered in the data graph', 'graphql-server'),
             'directives' => $this->getTranslationAPI()->__('All directives registered in the data graph', 'graphql-server'),
             'type' => $this->getTranslationAPI()->__('Obtain a specific type from the schema', 'graphql-server'),
+            'extensions' => $this->getTranslationAPI()->__('Extensions (custom metadata) added to the GraphQL schema', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -140,6 +153,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'types' => $schema->getTypeIDs(),
             'directives' => $schema->getDirectiveIDs(),
             'type' => $schema->getTypeID($fieldArgs['name']),
+            'extensions' => $schema->getExtensions()->getID(),
             default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options),
         };
     }
@@ -155,6 +169,8 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 => $this->getTypeObjectTypeResolver(),
             'directives'
                 => $this->getDirectiveObjectTypeResolver(),
+            'extensions'
+                => $this->getSchemaExtensionsObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

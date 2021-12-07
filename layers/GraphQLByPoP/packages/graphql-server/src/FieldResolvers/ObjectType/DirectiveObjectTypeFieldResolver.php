@@ -6,6 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\Directive;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\DirectiveLocationEnumTypeResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\DirectiveExtensionsObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\DirectiveObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueObjectTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -14,7 +15,6 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 
 class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -22,7 +22,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?InputValueObjectTypeResolver $inputValueObjectTypeResolver = null;
     private ?DirectiveLocationEnumTypeResolver $directiveLocationEnumTypeResolver = null;
-    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?DirectiveExtensionsObjectTypeResolver $directiveExtensionsObjectTypeResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -56,13 +56,13 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return $this->directiveLocationEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveLocationEnumTypeResolver::class);
     }
-    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    final public function setDirectiveExtensionsObjectTypeResolver(DirectiveExtensionsObjectTypeResolver $directiveExtensionsObjectTypeResolver): void
     {
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+        $this->directiveExtensionsObjectTypeResolver = $directiveExtensionsObjectTypeResolver;
     }
-    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    final protected function getDirectiveExtensionsObjectTypeResolver(): DirectiveExtensionsObjectTypeResolver
     {
-        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+        return $this->directiveExtensionsObjectTypeResolver ??= $this->instanceManager->getInstance(DirectiveExtensionsObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -92,7 +92,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'isRepeatable' => $this->getBooleanScalarTypeResolver(),
             'args' => $this->getInputValueObjectTypeResolver(),
             'locations' => $this->getDirectiveLocationEnumTypeResolver(),
-            'extensions' => $this->getJSONObjectScalarTypeResolver(),
+            'extensions' => $this->getDirectiveExtensionsObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -120,7 +120,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'args' => $this->getTranslationAPI()->__('Directive\'s arguments', 'graphql-server'),
             'locations' => $this->getTranslationAPI()->__('The locations where the directive may be placed', 'graphql-server'),
             'isRepeatable' => $this->getTranslationAPI()->__('Can the directive be executed more than once in the same field?', 'graphql-server'),
-            'extensions' => $this->getTranslationAPI()->__('Custom metadata added to the directive (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
+            'extensions' => $this->getTranslationAPI()->__('Extensions (custom metadata) added to the directive (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -154,7 +154,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'isRepeatable':
                 return $directive->isRepeatable();
             case 'extensions':
-                return (object) $directive->getExtensions();
+                return $directive->getExtensions()->getID();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

@@ -13,9 +13,19 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
 {
     use HasArgsSchemaDefinitionReferenceTrait;
 
+    protected DirectiveExtensions $directiveExtensions;
+
     public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
+
+        $directiveExtensionsSchemaDefinitionPath = array_merge(
+            $schemaDefinitionPath,
+            [
+                SchemaDefinition::EXTENSIONS,
+            ]
+        );
+        $this->directiveExtensions = new DirectiveExtensions($fullSchemaDefinition, $directiveExtensionsSchemaDefinitionPath);
 
         $this->initArgs($fullSchemaDefinition, $schemaDefinitionPath);
     }
@@ -72,13 +82,13 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
         return $this->schemaDefinition[SchemaDefinition::DIRECTIVE_IS_REPEATABLE];
     }
 
-    public function getExtensions(): array
+    public function getKind(): string
     {
-        $extensions = $this->schemaDefinition[SchemaDefinition::EXTENSIONS] ?? [];
-        if ($version = $this->schemaDefinition[SchemaDefinition::VERSION] ?? null) {
-            $extensions[SchemaDefinition::VERSION] = $version;
-        }
-        $extensions[SchemaDefinition::DIRECTIVE_KIND] = $this->schemaDefinition[SchemaDefinition::DIRECTIVE_KIND];
-        return $extensions;
+        return $this->schemaDefinition[SchemaDefinition::DIRECTIVE_KIND];
+    }
+
+    public function getExtensions(): DirectiveExtensions
+    {
+        return $this->directiveExtensions;
     }
 }

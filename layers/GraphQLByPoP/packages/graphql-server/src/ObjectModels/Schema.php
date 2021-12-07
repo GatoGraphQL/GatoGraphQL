@@ -21,6 +21,7 @@ class Schema
     protected array $types;
     /** @var Directive[] */
     protected array $directives;
+    protected SchemaExtensions $schemaExtensions;
 
     public function __construct(
         array &$fullSchemaDefinition,
@@ -50,6 +51,11 @@ class Schema
                 $this->types[] = $this->getTypeInstance($fullSchemaDefinition, $typeKind, $typeName);
             }
         }
+
+        $schemaExtensionsSchemaDefinitionPath = [
+            SchemaDefinition::EXTENSIONS,
+        ];
+        $this->schemaExtensions = new SchemaExtensions($fullSchemaDefinition, $schemaExtensionsSchemaDefinitionPath);
     }
     protected function getTypeInstance(array &$fullSchemaDefinition, string $typeKind, string $typeName): NamedTypeInterface
     {
@@ -172,5 +178,10 @@ class Schema
             return $type->getID();
         }
         return null;
+    }
+
+    public function getExtensions(): SchemaExtensions
+    {
+        return $this->schemaExtensions;
     }
 }

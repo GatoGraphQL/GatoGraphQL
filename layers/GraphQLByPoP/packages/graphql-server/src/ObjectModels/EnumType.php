@@ -22,20 +22,19 @@ class EnumType extends AbstractNamedType
     protected function initEnumValues(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
         $this->enumValues = [];
-        if ($enumItems = $this->schemaDefinition[SchemaDefinition::ITEMS] ?? null) {
-            foreach (array_keys($enumItems) as $enumValue) {
-                $enumValueSchemaDefinitionPath = array_merge(
-                    $schemaDefinitionPath,
-                    [
-                        SchemaDefinition::ITEMS,
-                        $enumValue,
-                    ]
-                );
-                $this->enumValues[] = new EnumValue(
-                    $fullSchemaDefinition,
-                    $enumValueSchemaDefinitionPath
-                );
-            }
+        $enumItems = $this->schemaDefinition[SchemaDefinition::ITEMS];
+        foreach (array_keys($enumItems) as $enumValue) {
+            $enumValueSchemaDefinitionPath = array_merge(
+                $schemaDefinitionPath,
+                [
+                    SchemaDefinition::ITEMS,
+                    $enumValue,
+                ]
+            );
+            $this->enumValues[] = new EnumValue(
+                $fullSchemaDefinition,
+                $enumValueSchemaDefinitionPath
+            );
         }
     }
 

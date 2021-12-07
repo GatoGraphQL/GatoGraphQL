@@ -20,6 +20,7 @@ use PoP\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoP\API\PersistedQueries\PersistedQueryManagerInterface;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -152,12 +153,14 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
                 }
             }
 
-
             // Add the Fragment Catalogue
             $schemaDefinition[SchemaDefinition::PERSISTED_FRAGMENTS] = $this->getPersistedFragmentManager()->getPersistedFragmentsForSchema();
 
             // Add the Query Catalogue
             $schemaDefinition[SchemaDefinition::PERSISTED_QUERIES] = $this->getPersistedQueryManager()->getPersistedQueriesForSchema();
+
+            // Schema extensions
+            $schemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getSchemaExtensions();
 
             // Sort the elements in the schema alphabetically
             if (ComponentConfiguration::sortFullSchemaAlphabetically()) {
@@ -171,6 +174,17 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
 
         return $schemaDefinition;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    protected function getSchemaExtensions(): array
+    {
+        $vars = ApplicationState::getVars();
+        return [
+            SchemaDefinition::SCHEMA_IS_NAMESPACED => $vars['namespace-types-and-interfaces'],
+        ];
     }
 
     public function sortFullSchemaAlphabetically(array &$schemaDefinition): void

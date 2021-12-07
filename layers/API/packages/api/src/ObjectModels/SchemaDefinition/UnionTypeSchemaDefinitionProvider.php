@@ -10,7 +10,7 @@ use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class UnionTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvider
+class UnionTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitionProvider
 {
     public function __construct(
         protected UnionTypeResolverInterface $unionTypeResolver,

@@ -8,7 +8,22 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 
 class InputValue extends AbstractSchemaDefinitionReferenceObject
 {
+    protected InputValueExtensions $inputValueExtensions;
+
     use HasTypeSchemaDefinitionReferenceTrait;
+
+    public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
+    {
+        parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
+
+        $inputValueExtensionsSchemaDefinitionPath = array_merge(
+            $schemaDefinitionPath,
+            [
+                SchemaDefinition::EXTENSIONS,
+            ]
+        );
+        $this->inputValueExtensions = new InputValueExtensions($fullSchemaDefinition, $inputValueExtensionsSchemaDefinitionPath);
+    }
 
     public function getName(): string
     {
@@ -39,12 +54,8 @@ class InputValue extends AbstractSchemaDefinitionReferenceObject
         return null;
     }
 
-    public function getExtensions(): array
+    public function getExtensions(): InputValueExtensions
     {
-        $extensions = $this->schemaDefinition[SchemaDefinition::EXTENSIONS] ?? [];
-        if ($this->schemaDefinition[SchemaDefinition::IS_ADMIN_ELEMENT] ?? null) {
-            $extensions[SchemaDefinition::IS_ADMIN_ELEMENT] = true;
-        }
-        return $extensions;
+        return $this->inputValueExtensions;
     }
 }

@@ -8,7 +8,7 @@ use PoP\API\Schema\SchemaDefinition;
 use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
 
-class ScalarTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvider
+class ScalarTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitionProvider
 {
     public function __construct(
         protected ScalarTypeResolverInterface $scalarTypeResolver,

@@ -9,7 +9,7 @@ use PoP\API\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 
-class InterfaceTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvider
+class InterfaceTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitionProvider
 {
     public function __construct(
         protected InterfaceTypeResolverInterface $interfaceTypeResolver,

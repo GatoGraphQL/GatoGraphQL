@@ -31,6 +31,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     private array $consolidatedInputFieldDefaultValueCache = [];
     /** @var array<string, int> */
     private array $consolidatedInputFieldTypeModifiersCache = [];
+    /** @var array<string, array<string,mixed>> */
+    private array $consolidatedInputFieldExtensionsCache = [];
     /** @var string[]|null */
     private ?array $consolidatedAdminInputFieldNames = null;
 
@@ -474,12 +476,35 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             $this->getConsolidatedInputFieldDefaultValue($inputFieldName),
             $this->getConsolidatedInputFieldTypeModifiers($inputFieldName),
         );
-        if (in_array($inputFieldName, $this->getConsolidatedAdminInputFieldNames())) {
-            $inputFieldSchemaDefinition[SchemaDefinition::IS_ADMIN_ELEMENT] = true;
-        }
+        $inputFieldSchemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getConsolidatedInputFieldExtensionsSchemaDefinition($inputFieldName);
 
         $this->schemaDefinitionForInputFieldCache[$inputFieldName] = $inputFieldSchemaDefinition;
         return $this->schemaDefinitionForInputFieldCache[$inputFieldName];
+    }
+
+    protected function getInputFieldExtensionsSchemaDefinition(string $inputFieldName): array
+    {
+        return [
+            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($inputFieldName, $this->getConsolidatedAdminInputFieldNames()),
+        ];
+    }
+
+    /**
+     * Consolidation of the schema inputs. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final public function getConsolidatedInputFieldExtensionsSchemaDefinition(string $inputFieldName): array
+    {
+        if (array_key_exists($inputFieldName, $this->consolidatedInputFieldExtensionsCache)) {
+            return $this->consolidatedInputFieldExtensionsCache[$inputFieldName];
+        }
+        $this->consolidatedInputFieldExtensionsCache[$inputFieldName] = $this->getHooksAPI()->applyFilters(
+            HookNames::INPUT_FIELD_EXTENSIONS,
+            $this->getInputFieldExtensionsSchemaDefinition($inputFieldName),
+            $this,
+            $inputFieldName,
+        );
+        return $this->consolidatedInputFieldExtensionsCache[$inputFieldName];
     }
     /**
      * Validate constraints on the input field's value

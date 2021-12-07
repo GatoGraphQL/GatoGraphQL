@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
+use GraphQLByPoP\GraphQLServer\ObjectModels\NamedTypeExtensions;
+
 interface NamedTypeInterface extends TypeInterface, SchemaDefinitionReferenceObjectInterface
 {
     public function getNamespacedName(): string;
 
     public function getElementName(): string;
 
-    /**
-     * @return array<string, mixed>
-     */
-    public function getExtensions(): array;
+    public function getExtensions(): NamedTypeExtensions;
 }

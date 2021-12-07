@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\Field;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\FieldExtensionsObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\FieldObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
@@ -14,13 +15,12 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 
 class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?FieldExtensionsObjectTypeResolver $fieldExtensionsObjectTypeResolver = null;
     private ?InputValueObjectTypeResolver $inputValueObjectTypeResolver = null;
     private ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
 
@@ -40,13 +40,13 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    final public function setFieldExtensionsObjectTypeResolver(FieldExtensionsObjectTypeResolver $fieldExtensionsObjectTypeResolver): void
     {
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+        $this->fieldExtensionsObjectTypeResolver = $fieldExtensionsObjectTypeResolver;
     }
-    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    final protected function getFieldExtensionsObjectTypeResolver(): FieldExtensionsObjectTypeResolver
     {
-        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+        return $this->fieldExtensionsObjectTypeResolver ??= $this->instanceManager->getInstance(FieldExtensionsObjectTypeResolver::class);
     }
     final public function setInputValueObjectTypeResolver(InputValueObjectTypeResolver $inputValueObjectTypeResolver): void
     {
@@ -92,7 +92,7 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'description' => $this->getStringScalarTypeResolver(),
             'isDeprecated' => $this->getBooleanScalarTypeResolver(),
             'deprecationReason' => $this->getStringScalarTypeResolver(),
-            'extensions' => $this->getJSONObjectScalarTypeResolver(),
+            'extensions' => $this->getFieldExtensionsObjectTypeResolver(),
             'args' => $this->getInputValueObjectTypeResolver(),
             'type' => $this->getTypeObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -123,7 +123,7 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'type' => $this->getTranslationAPI()->__('Type to which the field belongs', 'graphql-server'),
             'isDeprecated' => $this->getTranslationAPI()->__('Is the field deprecated?', 'graphql-server'),
             'deprecationReason' => $this->getTranslationAPI()->__('Why was the field deprecated?', 'graphql-server'),
-            'extensions' => $this->getTranslationAPI()->__('Custom metadata added to the field (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
+            'extensions' => $this->getTranslationAPI()->__('Extensions (custom metadata) added to the field (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -159,7 +159,7 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'deprecationReason':
                 return $field->getDeprecationMessage();
             case 'extensions':
-                return (object) $field->getExtensions();
+                return $field->getExtensions()->getID();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

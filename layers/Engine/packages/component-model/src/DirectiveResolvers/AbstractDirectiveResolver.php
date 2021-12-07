@@ -52,6 +52,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected array $consolidatedDirectiveArgDefaultValueCache = [];
     /** @var array<string, int> */
     protected array $consolidatedDirectiveArgTypeModifiersCache = [];
+    /** @var array<string, array<string,mixed>> */
+    protected array $consolidatedDirectiveArgExtensionsCache = [];
     /** @var array<string, array<string, mixed>> */
     protected array $schemaDirectiveArgsCache = [];
 
@@ -821,9 +823,39 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 $this->getConsolidatedDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
                 $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
             );
+            $schemaDirectiveArgs[$directiveArgName][SchemaDefinition::EXTENSIONS] = $this->getConsolidatedDirectiveArgExtensionsSchemaDefinition($relationalTypeResolver, $directiveArgName);
         }
         $this->schemaDirectiveArgsCache[$cacheKey] = $schemaDirectiveArgs;
         return $this->schemaDirectiveArgsCache[$cacheKey];
+    }
+
+    protected function getDirectiveArgExtensionsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): array
+    {
+        // @todo Implement "admin" directive args, if needed
+        return [
+            SchemaDefinition::IS_ADMIN_ELEMENT => false,
+        ];
+    }
+
+    /**
+     * Consolidation of the schema directive arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final protected function getConsolidatedDirectiveArgExtensionsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): array
+    {
+        // Cache the result
+        $cacheKey = $relationalTypeResolver::class . '(' . $directiveArgName . ':)';
+        if (array_key_exists($cacheKey, $this->consolidatedDirectiveArgExtensionsCache)) {
+            return $this->consolidatedDirectiveArgExtensionsCache[$cacheKey];
+        }
+        $this->consolidatedDirectiveArgExtensionsCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+            HookNames::DIRECTIVE_ARG_EXTENSIONS,
+            $this->getDirectiveArgExtensionsSchemaDefinition($relationalTypeResolver, $directiveArgName),
+            $this,
+            $relationalTypeResolver,
+            $directiveArgName,
+        );
+        return $this->consolidatedDirectiveArgExtensionsCache[$cacheKey];
     }
 
     /**
@@ -1214,10 +1246,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $schemaDefinition = [
                 SchemaDefinition::NAME => $directiveName,
                 SchemaDefinition::DIRECTIVE_KIND => $this->getDirectiveKind(),
-                SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
                 SchemaDefinition::DIRECTIVE_IS_REPEATABLE => $this->isRepeatable(),
                 SchemaDefinition::DIRECTIVE_IS_GLOBAL => $this->isGlobal($relationalTypeResolver),
-                SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsIDsDataFieldsToExecute(),
             ];
             if ($limitedToFields = $this->getFieldNamesToApplyTo()) {
                 $schemaDefinition[SchemaDefinition::DIRECTIVE_LIMITED_TO_FIELDS] = $limitedToFields;
@@ -1235,9 +1265,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             if ($args = $this->getDirectiveArgsSchemaDefinition($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::ARGS] = $args;
             }
-            if ($extensions = $this->getDirectiveSchemaDefinitionExtensions($relationalTypeResolver)) {
-                $schemaDefinition[SchemaDefinition::EXTENSIONS] = $extensions;
-            }
             /**
              * Please notice: the version always comes from the directiveResolver, and not from the schemaDefinitionResolver
              * That is because it is the implementer the one who knows what version it is, and not the one defining the interface
@@ -1248,13 +1275,19 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             if (Environment::enableSemanticVersionConstraints() && $this->hasDirectiveVersion($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::VERSION] = $this->getDirectiveVersion($relationalTypeResolver);
             }
+            $schemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getDirectiveExtensionsSchemaDefinition($relationalTypeResolver);
             $this->schemaDefinitionForDirectiveCache[$key] = $schemaDefinition;
         }
         return $this->schemaDefinitionForDirectiveCache[$key];
     }
 
-    public function getDirectiveSchemaDefinitionExtensions(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveExtensionsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        return [];
+        return [
+            // @todo Implement "admin" directive, if needed
+            SchemaDefinition::IS_ADMIN_ELEMENT => false,
+            SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
+            SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsIDsDataFieldsToExecute(),
+        ];
     }
 }
