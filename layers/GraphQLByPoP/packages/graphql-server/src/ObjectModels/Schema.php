@@ -180,7 +180,7 @@ class Schema
         return null;
     }
 
-    public function getSchemaExtensions(): SchemaExtensions
+    public function getExtensions(): SchemaExtensions
     {
         return $this->schemaExtensions;
     }
