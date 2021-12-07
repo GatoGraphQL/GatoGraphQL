@@ -40,7 +40,7 @@ abstract class AbstractSchemaElementExtensionsObjectTypeResolver extends Abstrac
 
     public function getID(object $object): string | int | null
     {
-        /** @var SchemaDefinitionReferenceObjectInterface */
+        /** @var SchemaDefinitionReferenceObjectInterface $object */
         return $object->getID();
     }
 
