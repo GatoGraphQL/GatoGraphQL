@@ -290,6 +290,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // @see https://github.com/graphql/graphql-spec/issues/300
                 // Implementation based on the one by GraphQL Java
                 // @see https://github.com/graphql-java/graphql-java/pull/2221
+                // Non-null for named types, null for wrapping types (Non-Null and List)
                 if ($type instanceof NamedTypeInterface) {
                     return $type->getExtensions()->getID();
                 }
