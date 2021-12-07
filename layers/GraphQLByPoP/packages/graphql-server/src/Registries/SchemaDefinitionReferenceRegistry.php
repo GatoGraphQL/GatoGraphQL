@@ -328,7 +328,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     protected function addVersionToGraphQLSchemaFieldDescription(array $fieldOrDirectiveSchemaDefinitionPath): void
     {
         $fieldOrDirectiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinitionForGraphQL, $fieldOrDirectiveSchemaDefinitionPath);
-        if ($schemaFieldVersion = $fieldOrDirectiveSchemaDefinition[SchemaDefinition::EXTENSIONS][SchemaDefinition::VERSION] ?? null) {
+        if ($schemaFieldVersion = $fieldOrDirectiveSchemaDefinition[SchemaDefinition::VERSION] ?? null) {
             $fieldOrDirectiveSchemaDefinition[SchemaDefinition::DESCRIPTION] .= sprintf(
                 sprintf(
                     $this->getTranslationAPI()->__(' _%s_', 'graphql-server'), // Make it italic using markdown
