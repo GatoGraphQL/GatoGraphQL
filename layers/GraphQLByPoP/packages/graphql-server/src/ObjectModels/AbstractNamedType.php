@@ -8,6 +8,21 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 
 abstract class AbstractNamedType extends AbstractSchemaDefinitionReferenceObject implements NamedTypeInterface
 {
+    protected NamedTypeExtensions $namedTypeExtensions;
+
+    public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
+    {
+        parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
+
+        $namedTypeExtensionsSchemaDefinitionPath = array_merge(
+            $schemaDefinitionPath,
+            [
+                SchemaDefinition::EXTENSIONS,
+            ]
+        );
+        $this->namedTypeExtensions = new NamedTypeExtensions($fullSchemaDefinition, $namedTypeExtensionsSchemaDefinitionPath);
+    }
+
     public function getNamespacedName(): string
     {
         return $this->schemaDefinition[SchemaDefinition::NAMESPACED_NAME];
@@ -28,9 +43,8 @@ abstract class AbstractNamedType extends AbstractSchemaDefinitionReferenceObject
         return $this->schemaDefinition[SchemaDefinition::DESCRIPTION] ?? null;
     }
 
-    public function getExtensions(): array
+    public function getExtensions(): NamedTypeExtensions
     {
-        $extensions = $this->schemaDefinition[SchemaDefinition::EXTENSIONS] ?? [];
-        return $extensions;
+        return $this->namedTypeExtensions;
     }
 }

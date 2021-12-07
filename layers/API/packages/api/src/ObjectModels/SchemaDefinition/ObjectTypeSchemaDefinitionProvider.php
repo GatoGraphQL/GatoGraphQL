@@ -13,7 +13,7 @@ use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterfac
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 
-class ObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvider
+class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitionProvider
 {
     /**
      * @var InterfaceTypeResolverInterface[] List of the implemented interfaces, to add this Type to the InterfaceType's POSSIBLE_TYPES

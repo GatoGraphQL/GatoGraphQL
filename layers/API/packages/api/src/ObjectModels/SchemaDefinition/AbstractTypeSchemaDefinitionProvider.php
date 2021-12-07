@@ -33,12 +33,22 @@ abstract class AbstractTypeSchemaDefinitionProvider extends AbstractSchemaDefini
     {
         $schemaDefinition = [
             SchemaDefinition::NAME => $this->typeResolver->getMaybeNamespacedTypeName(),
-            SchemaDefinition::NAMESPACED_NAME => $this->typeResolver->getNamespacedTypeName(),
-            SchemaDefinition::ELEMENT_NAME => $this->typeResolver->getTypeName(),
         ];
         if ($description = $this->typeResolver->getTypeDescription()) {
             $schemaDefinition[SchemaDefinition::DESCRIPTION] = $description;
         }
+        $schemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getNamedTypeExtensions();
         return $schemaDefinition;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    protected function getNamedTypeExtensions(): array
+    {
+        return [
+            SchemaDefinition::NAMESPACED_NAME => $this->typeResolver->getNamespacedTypeName(),
+            SchemaDefinition::ELEMENT_NAME => $this->typeResolver->getTypeName(),
+        ];
     }
 }

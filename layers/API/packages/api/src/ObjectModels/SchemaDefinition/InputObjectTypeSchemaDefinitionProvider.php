@@ -9,7 +9,7 @@ use PoP\API\Schema\SchemaDefinitionHelpers;
 use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 
-class InputObjectTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvider
+class InputObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitionProvider
 {
     public function __construct(
         protected InputObjectTypeResolverInterface $inputObjectTypeResolver,

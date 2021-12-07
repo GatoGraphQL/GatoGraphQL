@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
-use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaExtensions;
+use GraphQLByPoP\GraphQLServer\ObjectModels\NamedTypeExtensions;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SchemaDefinitionReferenceTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
-class SchemaExtensionsObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
+class NamedTypeExtensionsObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
     private ?SchemaDefinitionReferenceTypeDataLoader $schemaDefinitionReferenceTypeDataLoader = null;
 
@@ -28,19 +28,19 @@ class SchemaExtensionsObjectTypeResolver extends AbstractIntrospectionObjectType
      */
     public function getTypeName(): string
     {
-        return '_SchemaExtensions';
+        return '_NamedTypeExtensions';
     }
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Extensions (custom metadata) added to the GraphQL schema', 'graphql-server');
+        return $this->getTranslationAPI()->__('Extensions (custom metadata) added to the GraphQL type (for all \'named\' types: Object, Interface, Union, Scalar, Enum and InputObject)', 'graphql-server');
     }
 
     public function getID(object $object): string | int | null
     {
-        /** @var SchemaExtensions */
-        $schemaExtensions = $object;
-        return $schemaExtensions->getID();
+        /** @var NamedTypeExtensions */
+        $namedTypeExtensions = $object;
+        return $namedTypeExtensions->getID();
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

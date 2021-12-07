@@ -8,7 +8,7 @@ use PoP\API\Schema\TypeKinds;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 
-class EnumTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvider
+class EnumTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitionProvider
 {
     public function __construct(
         protected EnumTypeResolverInterface $enumTypeResolver,

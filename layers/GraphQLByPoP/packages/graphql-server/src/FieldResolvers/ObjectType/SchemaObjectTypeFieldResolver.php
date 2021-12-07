@@ -98,7 +98,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'types' => $this->getTranslationAPI()->__('All types registered in the data graph', 'graphql-server'),
             'directives' => $this->getTranslationAPI()->__('All directives registered in the data graph', 'graphql-server'),
             'type' => $this->getTranslationAPI()->__('Obtain a specific type from the schema', 'graphql-server'),
-            'extensions' => $this->getTranslationAPI()->__('Extensions (custom metadata) for the Schema type', 'graphql-server'),
+            'extensions' => $this->getTranslationAPI()->__('Extensions (custom metadata) added to the GraphQL schema', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
