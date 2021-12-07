@@ -8,6 +8,7 @@ class HookNames
 {
     public const OBJECT_TYPE_FIELD_DESCRIPTION = __CLASS__ . ':object-type-field-description';
     public const OBJECT_TYPE_FIELD_DEPRECATION_MESSAGE = __CLASS__ . ':object-type-field-deprecation-message';
+    public const OBJECT_TYPE_FIELD_EXTENSIONS = __CLASS__ . ':object-type-field-extensions';
 
     public const OBJECT_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS = __CLASS__ . ':object-type-field-arg-name-type-resolvers';
     public const OBJECT_TYPE_ADMIN_FIELD_ARG_NAMES = __CLASS__ . ':object-type-admin-field-arg-names';

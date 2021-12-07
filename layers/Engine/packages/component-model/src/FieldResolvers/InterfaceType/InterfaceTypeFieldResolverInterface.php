@@ -35,8 +35,4 @@ interface InterfaceTypeFieldResolverInterface extends FieldResolverInterface, In
      * @return array<string, mixed>
      */
     public function getFieldSchemaDefinition(string $fieldName): array;
-    /**
-     * @return array<string, mixed>
-     */
-    public function getFieldExtensionsSchemaDefinition(string $fieldName): array;
 }

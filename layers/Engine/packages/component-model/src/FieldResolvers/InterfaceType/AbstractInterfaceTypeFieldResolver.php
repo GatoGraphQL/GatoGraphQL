@@ -35,6 +35,8 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     protected array $schemaDefinitionForFieldCache = [];
     /** @var array<string, string|null> */
     protected array $consolidatedFieldDescriptionCache = [];
+    /** @var array<string, array<string|mixed>> */
+    protected array $consolidatedFieldExtensionsCache = [];
     /** @var array<string, string|null> */
     protected array $consolidatedFieldDeprecationMessageCache = [];
     /** @var array<string, array<string, InputTypeResolverInterface>> */
@@ -472,7 +474,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             $this->getFieldTypeModifiers($fieldName),
             $this->getConsolidatedFieldDeprecationMessage($fieldName),
         );
-        $schemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getFieldExtensionsSchemaDefinition($fieldName);
+        $schemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getConsolidatedFieldExtensionsSchemaDefinition($fieldName);
 
         if ($args = $this->getFieldArgsSchemaDefinition($fieldName)) {
             $schemaDefinition[SchemaDefinition::ARGS] = $args;
@@ -487,12 +489,32 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      *
      * @return array<string, mixed>
      */
-    public function getFieldExtensionsSchemaDefinition(string $fieldName): array
+    protected function getFieldExtensionsSchemaDefinition(string $fieldName): array
     {
         return [
             SchemaDefinition::FIELD_IS_MUTATION => $this->isFieldAMutation($fieldName),
             SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldName, $this->getAdminFieldNames()),
         ];
+    }
+
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final protected function getConsolidatedFieldExtensionsSchemaDefinition(string $fieldName): array
+    {
+        // Cache the result
+        $cacheKey = $fieldName;
+        if (array_key_exists($cacheKey, $this->consolidatedFieldExtensionsCache)) {
+            return $this->consolidatedFieldExtensionsCache[$cacheKey];
+        }
+        $this->consolidatedFieldExtensionsCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+            HookNames::INTERFACE_TYPE_FIELD_EXTENSIONS,
+            $this->getFieldExtensionsSchemaDefinition($fieldName),
+            $this,
+            $fieldName,
+        );
+        return $this->consolidatedFieldExtensionsCache[$cacheKey];
     }
 
     /**

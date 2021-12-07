@@ -58,6 +58,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected array $schemaDefinitionForFieldCache = [];
     /** @var array<string, string|null> */
     protected array $consolidatedFieldDescriptionCache = [];
+    /** @var array<string, array<string, mixed>> */
+    protected array $consolidatedFieldExtensionsCache = [];
     /** @var array<string, string|null> */
     protected array $consolidatedFieldDeprecationMessageCache = [];
     /** @var array<string, array<string, InputTypeResolverInterface>> */
@@ -892,7 +894,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $schemaDefinition[SchemaDefinition::VERSION] = $this->getFieldVersion($objectTypeResolver, $fieldName);
         }
 
-        $schemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getFieldExtensionsSchemaDefinition($objectTypeResolver, $fieldName, $fieldArgs);
+        $schemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getConsolidatedFieldExtensionsSchemaDefinition($objectTypeResolver, $fieldName);
 
         return $schemaDefinition;
     }
@@ -903,12 +905,33 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      *
      * @return array<string, mixed>
      */
-    public function getFieldExtensionsSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
+    protected function getFieldExtensionsSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return [
             SchemaDefinition::FIELD_IS_MUTATION => $this->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null,
             SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldName, $this->getAdminFieldNames()),
         ];
+    }
+
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final protected function getConsolidatedFieldExtensionsSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        // Cache the result
+        $cacheKey = $objectTypeResolver::class . '.' . $fieldName;
+        if (array_key_exists($cacheKey, $this->consolidatedFieldExtensionsCache)) {
+            return $this->consolidatedFieldExtensionsCache[$cacheKey];
+        }
+        $this->consolidatedFieldExtensionsCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+            HookNames::OBJECT_TYPE_FIELD_EXTENSIONS,
+            $this->getFieldExtensionsSchemaDefinition($objectTypeResolver, $fieldName),
+            $this,
+            $objectTypeResolver,
+            $fieldName,
+        );
+        return $this->consolidatedFieldExtensionsCache[$cacheKey];
     }
 
     protected function getInterfaceSchemaDefinitionResolverAdapterClass(): string
