@@ -1235,26 +1235,25 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             if ($args = $this->getDirectiveArgsSchemaDefinition($relationalTypeResolver)) {
                 $schemaDefinition[SchemaDefinition::ARGS] = $args;
             }
-            if ($extensions = $this->getDirectiveSchemaDefinitionExtensions($relationalTypeResolver)) {
-                $schemaDefinition[SchemaDefinition::EXTENSIONS] = $extensions;
-            }
-            /**
-             * Please notice: the version always comes from the directiveResolver, and not from the schemaDefinitionResolver
-             * That is because it is the implementer the one who knows what version it is, and not the one defining the interface
-             * If the interface changes, the implementer will need to change, so the version will be upgraded
-             * But it could also be that the contract doesn't change, but the implementation changes
-             * it's really not their responsibility
-             */
-            if (Environment::enableSemanticVersionConstraints() && $this->hasDirectiveVersion($relationalTypeResolver)) {
-                $schemaDefinition[SchemaDefinition::VERSION] = $this->getDirectiveVersion($relationalTypeResolver);
-            }
+            $schemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getDirectiveExtensionsSchemaDefinition($relationalTypeResolver);
             $this->schemaDefinitionForDirectiveCache[$key] = $schemaDefinition;
         }
         return $this->schemaDefinitionForDirectiveCache[$key];
     }
 
-    public function getDirectiveSchemaDefinitionExtensions(RelationalTypeResolverInterface $relationalTypeResolver): array
+    public function getDirectiveExtensionsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        return [];
+        $extensionsSchemaDefinition = [];
+        /**
+         * Please notice: the version always comes from the directiveResolver, and not from the schemaDefinitionResolver
+         * That is because it is the implementer the one who knows what version it is, and not the one defining the interface
+         * If the interface changes, the implementer will need to change, so the version will be upgraded
+         * But it could also be that the contract doesn't change, but the implementation changes
+         * it's really not their responsibility
+         */
+        if (Environment::enableSemanticVersionConstraints() && $this->hasDirectiveVersion($relationalTypeResolver)) {
+            $extensionsSchemaDefinition[SchemaDefinition::VERSION] = $this->getDirectiveVersion($relationalTypeResolver);
+        }
+        return $extensionsSchemaDefinition;
     }
 }
