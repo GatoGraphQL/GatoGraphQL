@@ -296,6 +296,15 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return SchemaTypeModifiers::NONE;
     }
 
+    public function isFieldAMutation(string $fieldName): bool
+    {
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->isFieldAMutation($fieldName);
+        }
+        return false;
+    }
+
     /**
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
@@ -463,15 +472,27 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             $this->getFieldTypeModifiers($fieldName),
             $this->getConsolidatedFieldDeprecationMessage($fieldName),
         );
-        if (in_array($fieldName, $this->getAdminFieldNames())) {
-            $schemaDefinition[SchemaDefinition::IS_ADMIN_ELEMENT] = true;
-        }
+        $schemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getFieldExtensionsSchemaDefinition($fieldName);
 
         if ($args = $this->getFieldArgsSchemaDefinition($fieldName)) {
             $schemaDefinition[SchemaDefinition::ARGS] = $args;
         }
 
         return $schemaDefinition;
+    }
+
+    /**
+     * Watch out: The same extensions must be present for both
+     * the ObjectType and the InterfaceType!
+     *
+     * @return array<string, mixed>
+     */
+    public function getFieldExtensionsSchemaDefinition(string $fieldName): array
+    {
+        return [
+            SchemaDefinition::FIELD_IS_MUTATION => $this->isFieldAMutation($fieldName),
+            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldName, $this->getAdminFieldNames()),
+        ];
     }
 
     /**

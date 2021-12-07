@@ -361,7 +361,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     protected function addMutationLabelToSchemaFieldDescription(array $fieldSchemaDefinitionPath): void
     {
         $fieldSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($this->fullSchemaDefinitionForGraphQL, $fieldSchemaDefinitionPath);
-        if ($fieldSchemaDefinition[SchemaDefinition::FIELD_IS_MUTATION] ?? null) {
+        if ($fieldSchemaDefinition[SchemaDefinition::EXTENSIONS][SchemaDefinition::FIELD_IS_MUTATION]) {
             $fieldSchemaDefinition[SchemaDefinition::DESCRIPTION] = sprintf(
                 $this->getTranslationAPI()->__('[Mutation] %s', 'graphql-server'),
                 $fieldSchemaDefinition[SchemaDefinition::DESCRIPTION]

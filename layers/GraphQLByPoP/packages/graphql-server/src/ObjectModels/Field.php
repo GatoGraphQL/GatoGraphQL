@@ -8,12 +8,22 @@ use PoP\API\Schema\SchemaDefinition;
 
 class Field extends AbstractSchemaDefinitionReferenceObject
 {
+    protected FieldExtensions $fieldExtensions;
+
     use HasTypeSchemaDefinitionReferenceTrait;
     use HasArgsSchemaDefinitionReferenceTrait;
 
     public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
+
+        $fieldExtensionsSchemaDefinitionPath = array_merge(
+            $schemaDefinitionPath,
+            [
+                SchemaDefinition::EXTENSIONS,
+            ]
+        );
+        $this->fieldExtensions = new FieldExtensions($fullSchemaDefinition, $fieldExtensionsSchemaDefinitionPath);
 
         $this->initArgs($fullSchemaDefinition, $schemaDefinitionPath);
     }
@@ -33,18 +43,8 @@ class Field extends AbstractSchemaDefinitionReferenceObject
     {
         return $this->schemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] ?? null;
     }
-    public function getExtensions(): array
+    public function getExtensions(): FieldExtensions
     {
-        $extensions = $this->schemaDefinition[SchemaDefinition::EXTENSIONS] ?? [];
-        if ($version = $this->schemaDefinition[SchemaDefinition::VERSION] ?? null) {
-            $extensions[SchemaDefinition::VERSION] = $version;
-        }
-        if ($this->schemaDefinition[SchemaDefinition::FIELD_IS_MUTATION] ?? null) {
-            $extensions[SchemaDefinition::FIELD_IS_MUTATION] = true;
-        }
-        if ($this->schemaDefinition[SchemaDefinition::IS_ADMIN_ELEMENT] ?? null) {
-            $extensions[SchemaDefinition::IS_ADMIN_ELEMENT] = true;
-        }
-        return $extensions;
+        return $this->fieldExtensions;
     }
 }

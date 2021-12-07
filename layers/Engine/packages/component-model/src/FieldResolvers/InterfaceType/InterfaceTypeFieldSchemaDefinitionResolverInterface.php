@@ -36,6 +36,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
     public function getConsolidatedFieldArgDescription(string $fieldName, string $fieldArgName): ?string;
     public function getConsolidatedFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed;
     public function getConsolidatedFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int;
+    public function isFieldAMutation(string $fieldName): bool;
     /**
      * Validate the constraints for a field argument
      *
