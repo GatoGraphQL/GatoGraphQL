@@ -223,7 +223,8 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         }
         $enumValueSchemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getConsolidatedEnumValueExtensionsSchemaDefinition($enumValue);
 
-        $this->schemaDefinitionForEnumValueCache[$enumValue] = $enumValueSchemaDefinition;;
+        $this->schemaDefinitionForEnumValueCache[$enumValue] = $enumValueSchemaDefinition;
+        ;
         return $this->schemaDefinitionForEnumValueCache[$enumValue];
     }
 

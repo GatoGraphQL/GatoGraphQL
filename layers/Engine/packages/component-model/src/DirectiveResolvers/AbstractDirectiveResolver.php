@@ -1287,7 +1287,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             // @todo Implement "admin" directive, if needed
             SchemaDefinition::IS_ADMIN_ELEMENT => false,
             SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
-            SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsIDsDataFieldsToExecute(),            
+            SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsIDsDataFieldsToExecute(),
         ];
     }
 }
