@@ -8,8 +8,8 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 
 class DirectiveExtensions extends AbstractSchemaDefinitionReferenceObject
 {
-    public function getVersion(): ?string
+    public function needsDataToExecute(): bool
     {
-        return $this->schemaDefinition[SchemaDefinition::VERSION] ?? null;
+        return $this->schemaDefinition[SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE];
     }
 }
