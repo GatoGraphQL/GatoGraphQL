@@ -10,6 +10,7 @@ class HookNames
     public const INPUT_FIELD_DESCRIPTION = __CLASS__ . ':input-field-description';
     public const INPUT_FIELD_DEFAULT_VALUE = __CLASS__ . ':input-field-default-value';
     public const INPUT_FIELD_TYPE_MODIFIERS = __CLASS__ . ':input-field-type-modifiers';
+    public const INPUT_FIELD_EXTENSIONS = __CLASS__ . ':input-field-extensions';
     public const INPUT_FIELD_FILTER_INPUT = __CLASS__ . ':input-field-filter-input';
     public const ADMIN_INPUT_FIELD_NAMES = __CLASS__ . ':admin-input-field-names';
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\InputValue;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueExtensionsObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -12,13 +13,12 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 
 class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?TypeObjectTypeResolver $typeObjectTypeResolver = null;
-    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?InputValueExtensionsObjectTypeResolver $inputValueExtensionsObjectTypeResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -36,13 +36,13 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
     }
-    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    final public function setInputValueExtensionsObjectTypeResolver(InputValueExtensionsObjectTypeResolver $inputValueExtensionsObjectTypeResolver): void
     {
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+        $this->inputValueExtensionsObjectTypeResolver = $inputValueExtensionsObjectTypeResolver;
     }
-    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    final protected function getInputValueExtensionsObjectTypeResolver(): InputValueExtensionsObjectTypeResolver
     {
-        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+        return $this->inputValueExtensionsObjectTypeResolver ??= $this->instanceManager->getInstance(InputValueExtensionsObjectTypeResolver::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -70,7 +70,7 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'description' => $this->getStringScalarTypeResolver(),
             'defaultValue' => $this->getStringScalarTypeResolver(),
             'type' => $this->getTypeObjectTypeResolver(),
-            'extensions' => $this->getJSONObjectScalarTypeResolver(),
+            'extensions' => $this->getInputValueExtensionsObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -94,7 +94,7 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'description' => $this->getTranslationAPI()->__('Input value\'s description', 'graphql-server'),
             'type' => $this->getTranslationAPI()->__('Type of the input value', 'graphql-server'),
             'defaultValue' => $this->getTranslationAPI()->__('Default value of the input value', 'graphql-server'),
-            'extensions' => $this->getTranslationAPI()->__('Custom metadata added to the input (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
+            'extensions' => $this->getTranslationAPI()->__('Extensions (custom metadata) added to the input (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -126,7 +126,7 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'defaultValue':
                 return $inputValue->getDefaultValue();
             case 'extensions':
-                return (object) $inputValue->getExtensions();
+                return $inputValue->getExtensions()->getID();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

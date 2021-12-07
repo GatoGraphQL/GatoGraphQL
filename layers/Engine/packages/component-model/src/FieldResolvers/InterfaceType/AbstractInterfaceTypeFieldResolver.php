@@ -35,7 +35,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     protected array $schemaDefinitionForFieldCache = [];
     /** @var array<string, string|null> */
     protected array $consolidatedFieldDescriptionCache = [];
-    /** @var array<string, array<string|mixed>> */
+    /** @var array<string, array<string,mixed>> */
     protected array $consolidatedFieldExtensionsCache = [];
     /** @var array<string, string|null> */
     protected array $consolidatedFieldDeprecationMessageCache = [];
@@ -51,6 +51,8 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     protected array $consolidatedFieldArgDefaultValueCache = [];
     /** @var array<string, int> */
     protected array $consolidatedFieldArgTypeModifiersCache = [];
+    /** @var array<string, array<string,mixed>> */
+    protected array $consolidatedFieldArgExtensionsCache = [];
     /** @var array<string, array<string, mixed>> */
     protected array $schemaFieldArgsCache = [];
 
@@ -571,7 +573,6 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         $schemaFieldArgs = [];
         $skipExposingDangerouslyDynamicScalarTypeInSchema = ComponentConfiguration::skipExposingDangerouslyDynamicScalarTypeInSchema();
         $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($fieldName);
-        $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($fieldName);
         foreach ($consolidatedFieldArgNameTypeResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
             /**
              * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
@@ -597,12 +598,39 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
                 $this->getConsolidatedFieldArgDefaultValue($fieldName, $fieldArgName),
                 $this->getConsolidatedFieldArgTypeModifiers($fieldName, $fieldArgName),
             );
-            if (in_array($fieldArgName, $adminFieldArgNames)) {
-                $schemaFieldArgs[$fieldArgName][SchemaDefinition::IS_ADMIN_ELEMENT] = true;
-            }
+            $schemaFieldArgs[$fieldArgName][SchemaDefinition::EXTENSIONS] = $this->getConsolidatedFieldArgExtensionsSchemaDefinition($fieldName, $fieldArgName);
         }
         $this->schemaFieldArgsCache[$cacheKey] = $schemaFieldArgs;
         return $this->schemaFieldArgsCache[$cacheKey];
+    }
+
+    protected function getFieldArgExtensionsSchemaDefinition(string $fieldName, string $fieldArgName): array
+    {
+        $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($fieldName);
+        return [
+            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldArgName, $adminFieldArgNames),
+        ];
+    }
+
+    /**
+     * Consolidation of the schema field arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final protected function getConsolidatedFieldArgExtensionsSchemaDefinition(string $fieldName, string $fieldArgName): array
+    {
+        // Cache the result
+        $cacheKey = $fieldName . '(' . $fieldArgName . ':)';
+        if (array_key_exists($cacheKey, $this->consolidatedFieldArgExtensionsCache)) {
+            return $this->consolidatedFieldArgExtensionsCache[$cacheKey];
+        }
+        $this->consolidatedFieldArgExtensionsCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+            HookNames::INTERFACE_TYPE_FIELD_ARG_EXTENSIONS,
+            $this->getFieldArgExtensionsSchemaDefinition($fieldName, $fieldArgName),
+            $this,
+            $fieldName,
+            $fieldArgName,
+        );
+        return $this->consolidatedFieldArgExtensionsCache[$cacheKey];
     }
 
     /**

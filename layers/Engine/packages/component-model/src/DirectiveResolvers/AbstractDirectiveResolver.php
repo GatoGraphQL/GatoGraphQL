@@ -52,6 +52,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected array $consolidatedDirectiveArgDefaultValueCache = [];
     /** @var array<string, int> */
     protected array $consolidatedDirectiveArgTypeModifiersCache = [];
+    /** @var array<string, array<string,mixed>> */
+    protected array $consolidatedDirectiveArgExtensionsCache = [];
     /** @var array<string, array<string, mixed>> */
     protected array $schemaDirectiveArgsCache = [];
 
@@ -821,9 +823,39 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 $this->getConsolidatedDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
                 $this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
             );
+            $schemaDirectiveArgs[$directiveArgName][SchemaDefinition::EXTENSIONS] = $this->getConsolidatedDirectiveArgExtensionsSchemaDefinition($relationalTypeResolver, $directiveArgName);
         }
         $this->schemaDirectiveArgsCache[$cacheKey] = $schemaDirectiveArgs;
         return $this->schemaDirectiveArgsCache[$cacheKey];
+    }
+
+    protected function getDirectiveArgExtensionsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): array
+    {
+        // @todo Implement "admin" directive args, if needed
+        return [
+            SchemaDefinition::IS_ADMIN_ELEMENT => false,
+        ];
+    }
+
+    /**
+     * Consolidation of the schema directive arguments. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     */
+    final protected function getConsolidatedDirectiveArgExtensionsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): array
+    {
+        // Cache the result
+        $cacheKey = $relationalTypeResolver::class . '(' . $directiveArgName . ':)';
+        if (array_key_exists($cacheKey, $this->consolidatedDirectiveArgExtensionsCache)) {
+            return $this->consolidatedDirectiveArgExtensionsCache[$cacheKey];
+        }
+        $this->consolidatedDirectiveArgExtensionsCache[$cacheKey] = $this->getHooksAPI()->applyFilters(
+            HookNames::DIRECTIVE_ARG_EXTENSIONS,
+            $this->getDirectiveArgExtensionsSchemaDefinition($relationalTypeResolver, $directiveArgName),
+            $this,
+            $relationalTypeResolver,
+            $directiveArgName,
+        );
+        return $this->consolidatedDirectiveArgExtensionsCache[$cacheKey];
     }
 
     /**
