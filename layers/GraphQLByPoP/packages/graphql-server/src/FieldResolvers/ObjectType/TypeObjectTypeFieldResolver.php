@@ -287,6 +287,9 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return null;
             case 'extensions':
                 // Custom development: this field is not in GraphQL spec yet!
+                // @see https://github.com/graphql/graphql-spec/issues/300
+                // Implementation based on the one by GraphQL Java
+                // @see https://github.com/graphql-java/graphql-java/pull/2221
                 if ($type instanceof NamedTypeInterface) {
                     return $type->getExtensions()->getID();
                 }
