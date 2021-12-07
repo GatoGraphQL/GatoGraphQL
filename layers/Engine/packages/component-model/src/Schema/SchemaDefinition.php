@@ -46,4 +46,5 @@ class SchemaDefinition
     public const DIRECTIVE_NEEDS_DATA_TO_EXECUTE = 'needsDataToExecute';
     public const DIRECTIVE_LIMITED_TO_FIELDS = 'limitedToFields';
     public const DIRECTIVE_EXPRESSIONS = 'expressions';
+    public const SCHEMA_IS_NAMESPACED = 'isSchemaNamespaced';
 }
