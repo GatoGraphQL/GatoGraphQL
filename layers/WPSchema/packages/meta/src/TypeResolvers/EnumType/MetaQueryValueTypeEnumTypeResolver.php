@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPWPSchema\Meta\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
-use PoPWPSchema\SchemaCommons\Constants\MetaQueryValueTypes;
+use PoPWPSchema\Meta\Constants\MetaQueryValueTypes;
 
 /**
  * Meta query "type", as explained here:

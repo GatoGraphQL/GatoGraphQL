@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\SchemaCommons\Constants;
+namespace PoPWPSchema\Meta\Constants;
 
 /**
  * Meta query "type", as explained here:

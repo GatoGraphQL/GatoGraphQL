@@ -6,8 +6,8 @@ namespace PoPWPSchema\Meta\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPWPSchema\Meta\Constants\MetaQueryValueTypes;
 use PoPWPSchema\Meta\TypeResolvers\EnumType\MetaQueryValueTypeEnumTypeResolver;
-use PoPWPSchema\SchemaCommons\Constants\MetaQueryValueTypes;
 use PoPWPSchema\SchemaCommons\TypeResolvers\EnumType\RelationEnumTypeResolver;
 use stdClass;
 
