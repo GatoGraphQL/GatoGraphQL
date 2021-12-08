@@ -359,7 +359,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
          * Check that all mandatory properties have been provided
          */
         foreach ($inputFieldNameTypeResolvers as $inputFieldName => $inputFieldTypeResolver) {
-            if (isset($inputValue->$inputFieldName)) {
+            // Providing a `null` value to a mandatory input is still valid
+            if (property_exists($inputValue, $inputFieldName)) {
                 continue;
             }
             $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
