@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostsWP\TypeAPIs;
 
-use function get_post_status;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\Constants\CustomPostOrderBy;
 use PoPSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI as UpstreamAbstractCustomPostTypeAPI;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\CustomPostsWP\CMS\CMSDataConversionServiceInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
-
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Post;
+
+use function get_post_status;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -44,8 +44,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getStatus(string | int | object $customPostObjectOrID): ?string
     {
-        $status = get_post_status($customPostObjectOrID);
-        return CustomPostTypeAPIUtils::convertPostStatusFromCMSToPoP($status);
+        return get_post_status($customPostObjectOrID);
     }
 
     /**
