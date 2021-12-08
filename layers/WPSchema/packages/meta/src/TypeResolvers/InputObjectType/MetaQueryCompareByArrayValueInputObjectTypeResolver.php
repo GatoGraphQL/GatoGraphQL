@@ -65,8 +65,7 @@ class MetaQueryCompareByArrayValueInputObjectTypeResolver extends AbstractInputO
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return match ($inputFieldName) {
-            'value' => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            'operator' => SchemaTypeModifiers::MANDATORY,
+            'value' => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }

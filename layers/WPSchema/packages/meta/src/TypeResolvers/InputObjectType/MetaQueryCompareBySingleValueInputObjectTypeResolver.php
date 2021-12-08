@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Meta\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoPWPSchema\Meta\Constants\MetaQueryCompareByOperators;
@@ -57,20 +56,8 @@ class MetaQueryCompareBySingleValueInputObjectTypeResolver extends AbstractInput
     public function getInputFieldDefaultValue(string $inputFieldName): mixed
     {
         return match ($inputFieldName) {
-            // 'value' => 'a', // By passing a default value, "EXISTS" will work
             'operator' => MetaQueryCompareByOperators::EQ,
             default => parent::getInputFieldDefaultValue($inputFieldName),
-        };
-    }
-
-    public function getInputFieldTypeModifiers(string $inputFieldName): int
-    {
-        return match ($inputFieldName) {
-            // 'value',
-            'operator'
-                => SchemaTypeModifiers::MANDATORY,
-            default
-                => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }
 }
