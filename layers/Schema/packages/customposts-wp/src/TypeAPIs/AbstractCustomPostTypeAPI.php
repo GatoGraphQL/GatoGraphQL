@@ -7,8 +7,7 @@ namespace PoPSchema\CustomPostsWP\TypeAPIs;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\Constants\CustomPostOrderBy;
 use PoPSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI as UpstreamAbstractCustomPostTypeAPI;
-use PoPSchema\CustomPosts\Types\Status;
-use PoPSchema\CustomPostsWP\CMS\CMSDataConversionServiceInterface;
+use PoPSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Post;
@@ -20,17 +19,6 @@ use function get_post_status;
  */
 abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeAPI
 {
-    private ?CMSDataConversionServiceInterface $cmsDataConversionService = null;
-
-    final public function setCMSDataConversionService(CMSDataConversionServiceInterface $cmsDataConversionService): void
-    {
-        $this->cmsDataConversionService = $cmsDataConversionService;
-    }
-    final protected function getCMSDataConversionService(): CMSDataConversionServiceInterface
-    {
-        return $this->cmsDataConversionService ??= $this->instanceManager->getInstance(CMSDataConversionServiceInterface::class);
-    }
-
     public const HOOK_QUERY = __CLASS__ . ':query';
     public const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
@@ -56,7 +44,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     {
         return [
             'status' => [
-                Status::PUBLISHED,
+                CustomPostStatus::PUBLISH,
             ],
         ];
     }
@@ -123,12 +111,8 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
         // Convert the parameters
         if (isset($query['status'])) {
-            $query['post_status'] = is_array($query['status']) ?
-                array_map(
-                    [$this->getCMSDataConversionService(), 'convertCustomPostStatusFromPoPToCMS'],
-                    $query['status']
-                )
-                : $this->getCMSDataConversionService()->convertCustomPostStatusFromPoPToCMS($query['status']);
+            // This can be both an array and a single value
+            $query['post_status'] = $query['status'];
             unset($query['status']);
         }
         if (isset($query['include']) && is_array($query['include'])) {
@@ -238,7 +222,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         if ($customPostID === null) {
             return null;
         }
-        if ($this->getStatus($customPostObjectOrID) == Status::PUBLISHED) {
+        if ($this->getStatus($customPostObjectOrID) == CustomPostStatus::PUBLISH) {
             return \get_permalink($customPostID);
         }
 
@@ -260,7 +244,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             return null;
         }
         /** @var WP_Post $customPost */
-        if ($this->getStatus($customPostObjectOrID) === Status::PUBLISHED) {
+        if ($this->getStatus($customPostObjectOrID) === CustomPostStatus::PUBLISH) {
             return $customPost->post_name;
         }
 

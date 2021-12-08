@@ -7,7 +7,7 @@ namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
 use PoPSchema\CustomPostMeta\Utils;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver as UpstreamAbstractCreateUpdateCustomPostMutationResolver;
-use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 
 abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAbstractCreateUpdateCustomPostMutationResolver
@@ -81,7 +81,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         }
 
         // Validate the following conditions only if status = pending/publish
-        if ($form_data[MutationInputProperties::STATUS] == Status::DRAFT) {
+        if ($form_data[MutationInputProperties::STATUS] == CustomPostStatus::DRAFT) {
             return;
         }
 
@@ -123,7 +123,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
         $customPostID = $form_data[MutationInputProperties::ID];
 
-        if (!in_array($this->getCustomPostTypeAPI()->getStatus($customPostID), array(Status::DRAFT, Status::PENDING, Status::PUBLISHED))) {
+        if (!in_array($this->getCustomPostTypeAPI()->getStatus($customPostID), array(CustomPostStatus::DRAFT, CustomPostStatus::PENDING, CustomPostStatus::PUBLISH))) {
             $errors[] = $this->getTranslationAPI()->__('Hmmmmm, this post seems to have been deleted...', 'pop-application');
             return;
         }

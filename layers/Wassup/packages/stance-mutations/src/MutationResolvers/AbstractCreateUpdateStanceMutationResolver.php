@@ -7,7 +7,7 @@ namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\EditPosts\FunctionAPIFactory;
 use PoPSchema\CustomPostMeta\Utils;
-use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
@@ -24,7 +24,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
                 $errors[] = $this->getTranslationAPI()->__('The referenced post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
-                if ($this->getCustomPostTypeAPI()->getStatus($referenced) != Status::PUBLISHED) {
+                if ($this->getCustomPostTypeAPI()->getStatus($referenced) != CustomPostStatus::PUBLISH) {
                     $errors[] = $this->getTranslationAPI()->__('The referenced post is not published yet', 'poptheme-wassup');
                 }
             }
@@ -65,7 +65,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         // Check if there is already an existing stance
         $vars = ApplicationState::getVars();
         $query = array(
-            'status' => array(Status::PUBLISHED, Status::DRAFT),
+            'status' => array(CustomPostStatus::PUBLISH, CustomPostStatus::DRAFT),
             'authors' => [$vars['global-userstate']['current-user-id']],
         );
         if ($referenced_id) {

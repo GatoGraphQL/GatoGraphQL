@@ -7,7 +7,7 @@ namespace PoPSchema\CustomPosts\FilterInputProcessors;
 use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 use PoPSchema\CustomPosts\FilterInput\FilterInputHelper;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTypeResolver;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
@@ -15,15 +15,15 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     public const FILTERINPUT_CUSTOMPOSTSTATUS = 'filterinput-custompoststatus';
     public const FILTERINPUT_UNIONCUSTOMPOSTTYPES = 'filterinput-unioncustomposttypes';
 
-    private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
+    private ?FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver = null;
 
-    final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
+    final public function setFilterCustomPostStatusEnumTypeResolver(FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver): void
     {
-        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+        $this->filterCustomPostStatusEnumTypeResolver = $filterCustomPostStatusEnumTypeResolver;
     }
-    final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
+    final protected function getFilterCustomPostStatusEnumTypeResolver(): FilterCustomPostStatusEnumTypeResolver
     {
-        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+        return $this->filterCustomPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(FilterCustomPostStatusEnumTypeResolver::class);
     }
 
 
@@ -47,7 +47,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
                 if ($value) {
                     $value = array_intersect(
                         $value,
-                        $this->getCustomPostStatusEnumTypeResolver()->getConsolidatedEnumValues()
+                        $this->getFilterCustomPostStatusEnumTypeResolver()->getConsolidatedEnumValues()
                     );
                     // If no status is valid, do not set, as to not override the default value
                     if ($value) {

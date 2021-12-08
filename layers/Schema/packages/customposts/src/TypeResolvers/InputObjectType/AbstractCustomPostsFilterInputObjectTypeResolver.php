@@ -9,8 +9,8 @@ use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
-use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
-use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTypeResolver;
+use PoPSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver;
@@ -18,7 +18,7 @@ use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\DateQueryInputObjectTy
 abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends AbstractObjectsFilterInputObjectTypeResolver
 {
     private ?DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver = null;
-    private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
+    private ?FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver = null;
     private ?CustomPostEnumTypeResolver $customPostEnumTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
@@ -30,13 +30,13 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     {
         return $this->dateQueryInputObjectTypeResolver ??= $this->instanceManager->getInstance(DateQueryInputObjectTypeResolver::class);
     }
-    final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
+    final public function setFilterCustomPostStatusEnumTypeResolver(FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver): void
     {
-        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+        $this->filterCustomPostStatusEnumTypeResolver = $filterCustomPostStatusEnumTypeResolver;
     }
-    final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
+    final protected function getFilterCustomPostStatusEnumTypeResolver(): FilterCustomPostStatusEnumTypeResolver
     {
-        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+        return $this->filterCustomPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(FilterCustomPostStatusEnumTypeResolver::class);
     }
     final public function setCustomPostEnumTypeResolver(CustomPostEnumTypeResolver $customPostEnumTypeResolver): void
     {
@@ -79,7 +79,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
         return array_merge(
             parent::getInputFieldNameTypeResolvers(),
             [
-                'status' => $this->getCustomPostStatusEnumTypeResolver(),
+                'status' => $this->getFilterCustomPostStatusEnumTypeResolver(),
                 'search' => $this->getStringScalarTypeResolver(),
                 'dateQuery' => $this->getDateQueryInputObjectTypeResolver(),
             ],
@@ -104,7 +104,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     {
         return match ($inputFieldName) {
             'status' => [
-                Status::PUBLISHED,
+                CustomPostStatus::PUBLISH,
             ],
             'customPostTypes' => $this->getCustomPostEnumTypeResolver()->getConsolidatedEnumValues(),
             default => parent::getInputFieldDefaultValue($inputFieldName)

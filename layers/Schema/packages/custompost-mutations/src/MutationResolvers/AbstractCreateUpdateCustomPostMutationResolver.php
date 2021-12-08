@@ -13,7 +13,7 @@ use PoPSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
-use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
@@ -141,7 +141,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
 
         // Check if the user can publish custom posts
-        if (isset($form_data[MutationInputProperties::STATUS]) && $form_data[MutationInputProperties::STATUS] == Status::PUBLISHED) {
+        if (isset($form_data[MutationInputProperties::STATUS]) && $form_data[MutationInputProperties::STATUS] == CustomPostStatus::PUBLISH) {
             $publishCustomPostsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_PUBLISH_CUSTOMPOSTS_CAPABILITY);
             if (
                 !$this->getUserRoleTypeAPI()->userCan(

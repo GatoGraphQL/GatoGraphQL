@@ -9,7 +9,7 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractCRUDComponentMutationReso
 use PoP\EditPosts\HelperAPIFactory;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPSchema\Posts\Constants\InputNames;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\MutationInputProperties;
 
@@ -33,9 +33,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         parent::modifyDataProperties($data_properties, $result_id);
 
         $data_properties[DataloadingConstants::QUERYARGS]['status'] = [
-            Status::PUBLISHED,
-            Status::PENDING,
-            Status::DRAFT,
+            CustomPostStatus::PUBLISH,
+            CustomPostStatus::PENDING,
+            CustomPostStatus::DRAFT,
         ];
     }
 
@@ -77,7 +77,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
             $form_data[MutationInputProperties::STATUS] = $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostSelectFormInputs::MODULE_FORMINPUT_CUP_STATUS])->getValue([\PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostSelectFormInputs::MODULE_FORMINPUT_CUP_STATUS]);
         } else {
             $keepasdraft = $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, \PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::MODULE_FORMINPUT_CUP_KEEPASDRAFT])->getValue([\PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, \PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::MODULE_FORMINPUT_CUP_KEEPASDRAFT]);
-            $form_data[MutationInputProperties::STATUS] = $keepasdraft ? Status::DRAFT : Status::PUBLISHED;
+            $form_data[MutationInputProperties::STATUS] = $keepasdraft ? CustomPostStatus::DRAFT : CustomPostStatus::PUBLISH;
         }
 
         if ($featuredimage = $this->getFeaturedimageModule()) {
@@ -168,15 +168,15 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
     public function getSuccessString(string | int $result_id): ?string
     {
         $status = $this->getCustomPostTypeAPI()->getStatus($result_id);
-        if ($status == Status::PUBLISHED) {
+        if ($status == CustomPostStatus::PUBLISH) {
             $success_string = sprintf(
                 $this->getTranslationAPI()->__('<a href="%s" %s>Click here to view it</a>.', 'pop-application'),
                 $this->getCustomPostTypeAPI()->getPermalink($result_id),
                 getReloadurlLinkattrs()
             );
-        } elseif ($status == Status::DRAFT) {
+        } elseif ($status == CustomPostStatus::DRAFT) {
             $success_string = $this->getTranslationAPI()->__('The status is still “Draft”, so it won\'t be online.', 'pop-application');
-        } elseif ($status == Status::PENDING) {
+        } elseif ($status == CustomPostStatus::PENDING) {
             $success_string = $this->getTranslationAPI()->__('Now waiting for approval from the admins.', 'pop-application');
         }
 
