@@ -13,7 +13,7 @@ use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostsFilterInputObjectTypeResolver;
 use PoPWPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 
-class InputObjectTypeHookSet extends AbstractHookSet
+abstract class AbstractAddCustomPostPasswordInputFieldsInputObjectTypeHookSet extends AbstractHookSet
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
@@ -76,7 +76,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
         array $inputFieldNameTypeResolvers,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): array {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldNameTypeResolvers;
         }
         return array_merge(
@@ -88,6 +88,10 @@ class InputObjectTypeHookSet extends AbstractHookSet
         );
     }
 
+    abstract protected function isInputObjectTypeResolver(
+        InputObjectTypeResolverInterface $inputObjectTypeResolver,
+    ): bool;
+
     /**
      * @param string[] $inputFieldNames
      * @return string[]
@@ -96,7 +100,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
         array $inputFieldNames,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): array {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldNames;
         }
         return array_merge(
@@ -113,7 +117,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName
     ): ?string {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
@@ -128,7 +132,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName
     ): mixed {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldDefaultValue;
         }
         return match ($inputFieldName) {
@@ -142,7 +146,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
     ): ?array {
-        if (!($inputObjectTypeResolver instanceof AbstractCustomPostsFilterInputObjectTypeResolver)) {
+        if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldFilterInput;
         }
         return match ($inputFieldName) {
