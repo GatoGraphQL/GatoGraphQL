@@ -57,6 +57,7 @@ class MetaQueryCompareBySingleValueInputObjectTypeResolver extends AbstractInput
     public function getInputFieldDefaultValue(string $inputFieldName): mixed
     {
         return match ($inputFieldName) {
+            // 'value' => 'a', // By passing a default value, "EXISTS" will work
             'operator' => MetaQueryCompareByOperators::EQ,
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
@@ -65,7 +66,7 @@ class MetaQueryCompareBySingleValueInputObjectTypeResolver extends AbstractInput
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return match ($inputFieldName) {
-            'value',
+            // 'value',
             'operator'
                 => SchemaTypeModifiers::MANDATORY,
             default
