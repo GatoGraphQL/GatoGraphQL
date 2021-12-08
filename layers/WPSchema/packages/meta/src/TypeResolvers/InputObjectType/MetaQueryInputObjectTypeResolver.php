@@ -112,12 +112,14 @@ class MetaQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeR
             $metaQueryElem['key'] = $inputValueElem->key;
             $metaQueryElem['type'] = $inputValueElem->type;
             $value = $operator = null;
-            if (isset($inputValueElem->compareBy->single)) {
-                $value = $inputValueElem->compareBy->single->value ?? null;
-                $operator = $inputValueElem->compareBy->single->operator ?? null;
-            } elseif (isset($inputValueElem->compareBy->array)) {
-                $value = $inputValueElem->compareBy->array->value ?? null;
-                $operator = $inputValueElem->compareBy->array->operator ?? null;
+            if (isset($inputValueElem->compareBy->key)) {
+                $operator = $inputValueElem->compareBy->key->operator;
+            } elseif (isset($inputValueElem->compareBy->singleValue)) {
+                $value = $inputValueElem->compareBy->singleValue->value;
+                $operator = $inputValueElem->compareBy->singleValue->operator;
+            } elseif (isset($inputValueElem->compareBy->arrayValue)) {
+                $value = $inputValueElem->compareBy->arrayValue->value;
+                $operator = $inputValueElem->compareBy->arrayValue->operator;
             } else {
                 // It will never reach here
                 continue;

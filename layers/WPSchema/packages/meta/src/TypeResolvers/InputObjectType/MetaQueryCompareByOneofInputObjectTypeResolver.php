@@ -8,9 +8,18 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofInputObjectTyp
 
 class MetaQueryCompareByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
 {
+    private ?MetaQueryCompareByKeyInputObjectTypeResolver $metaQueryCompareByKeyInputObjectTypeResolver = null;
     private ?MetaQueryCompareBySingleValueInputObjectTypeResolver $metaQueryCompareBySingleValueInputObjectTypeResolver = null;
     private ?MetaQueryCompareByArrayValueInputObjectTypeResolver $metaQueryCompareByArrayValueInputObjectTypeResolver = null;
 
+    final public function setMetaQueryCompareByKeyInputObjectTypeResolver(MetaQueryCompareByKeyInputObjectTypeResolver $metaQueryCompareByKeyInputObjectTypeResolver): void
+    {
+        $this->metaQueryCompareByKeyInputObjectTypeResolver = $metaQueryCompareByKeyInputObjectTypeResolver;
+    }
+    final protected function getMetaQueryCompareByKeyInputObjectTypeResolver(): MetaQueryCompareByKeyInputObjectTypeResolver
+    {
+        return $this->metaQueryCompareByKeyInputObjectTypeResolver ??= $this->instanceManager->getInstance(MetaQueryCompareByKeyInputObjectTypeResolver::class);
+    }
     final public function setMetaQueryCompareBySingleValueInputObjectTypeResolver(MetaQueryCompareBySingleValueInputObjectTypeResolver $metaQueryCompareBySingleValueInputObjectTypeResolver): void
     {
         $this->metaQueryCompareBySingleValueInputObjectTypeResolver = $metaQueryCompareBySingleValueInputObjectTypeResolver;
@@ -36,16 +45,18 @@ class MetaQueryCompareByOneofInputObjectTypeResolver extends AbstractOneofInputO
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            'single' => $this->getMetaQueryCompareBySingleValueInputObjectTypeResolver(),
-            'array' => $this->getMetaQueryCompareByArrayValueInputObjectTypeResolver(),
+            'key' => $this->getMetaQueryCompareByKeyInputObjectTypeResolver(),
+            'singleValue' => $this->getMetaQueryCompareBySingleValueInputObjectTypeResolver(),
+            'arrayValue' => $this->getMetaQueryCompareByArrayValueInputObjectTypeResolver(),
         ];
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'single' => $this->getTranslationAPI()->__('Compare against a single value', 'meta'),
-            'array' => $this->getTranslationAPI()->__('Compare against an array value', 'meta'),
+            'key' => $this->getTranslationAPI()->__('Compare against the meta key', 'meta'),
+            'singleValue' => $this->getTranslationAPI()->__('Compare against a single meta value', 'meta'),
+            'arrayValue' => $this->getTranslationAPI()->__('Compare against an array meta value', 'meta'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
