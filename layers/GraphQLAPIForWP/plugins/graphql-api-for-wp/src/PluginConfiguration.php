@@ -794,15 +794,19 @@ class PluginConfiguration extends AbstractMainPluginConfiguration
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META => [
                 \PoPSchema\CustomPostMeta\Component::class,
+                \PoPWPSchema\CustomPostMeta\Component::class,
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_USER_META => [
                 \PoPSchema\UserMeta\Component::class,
+                \PoPWPSchema\UserMeta\Component::class,
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_COMMENT_META => [
                 \PoPSchema\CommentMeta\Component::class,
+                \PoPWPSchema\CommentMeta\Component::class,
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_TAXONOMY_META => [
                 \PoPSchema\TaxonomyMeta\Component::class,
+                \PoPWPSchema\TaxonomyMeta\Component::class,
             ],
         ];
     }
