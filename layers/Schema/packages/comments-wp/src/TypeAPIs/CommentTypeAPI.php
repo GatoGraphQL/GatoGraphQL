@@ -23,20 +23,6 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     public const HOOK_QUERY = __CLASS__ . ':query';
     public const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
-    protected array $cmsToPoPCommentStatusConversion = [
-        'approve' => CommentStatus::APPROVE,
-        'hold' => CommentStatus::HOLD,
-        'spam' => CommentStatus::SPAM,
-        'trash' => CommentStatus::TRASH,
-    ];
-
-    protected array $popToCMSCommentStatusConversion;
-
-    public function __construct()
-    {
-        $this->popToCMSCommentStatusConversion = array_flip($this->cmsToPoPCommentStatusConversion);
-    }
-
     /**
      * Indicates if the passed object is of type Comment
      */
@@ -45,16 +31,6 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         return $object instanceof WP_Comment;
     }
 
-    protected function convertCommentStatusFromCMSToPoP($status)
-    {
-        // Convert from the CMS status to PoP's one
-        return $this->cmsToPoPCommentStatusConversion[$status];
-    }
-    protected function convertCommentStatusFromPoPToCMS($status)
-    {
-        // Convert from the CMS status to PoP's one
-        return $this->popToCMSCommentStatusConversion[$status];
-    }
     public function getComments(array $query, array $options = []): array
     {
         $query = $this->convertCommentsQuery($query, $options);
@@ -68,14 +44,8 @@ class CommentTypeAPI implements CommentTypeAPIInterface
 
         // Convert the parameters
         if (isset($query['status'])) {
-            if (is_array($query['status'])) {
-                $query['status'] = array_map(
-                    [$this, 'convertCommentStatusFromPoPToCMS'],
-                    $query['status']
-                );
-            } else {
-                $query['status'] = $this->convertCommentStatusFromPoPToCMS($query['status']);
-            }
+            // This can be both an array and a single value
+            // Same name => do nothing
         }
         if (isset($query['types'])) {
             $query['type__in'] = $query['types'];
