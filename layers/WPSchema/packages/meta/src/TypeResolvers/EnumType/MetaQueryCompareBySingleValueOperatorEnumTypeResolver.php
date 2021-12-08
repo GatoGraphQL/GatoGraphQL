@@ -45,4 +45,27 @@ class MetaQueryCompareBySingleValueOperatorEnumTypeResolver extends AbstractEnum
             MetaQueryCompareByOperators::RLIKE,
         ];
     }
+
+    /**
+     * @return string[]
+     */
+    public function getEnumValueDescription(string $enumValue): ?string
+    {
+        return match ($enumValue) {
+            MetaQueryCompareByOperators::EQ => '\'=\'',
+            MetaQueryCompareByOperators::NOT_EQ => '\'!=\'',
+            MetaQueryCompareByOperators::GT => '\'>\'',
+            MetaQueryCompareByOperators::GET => '\'>=\'',
+            MetaQueryCompareByOperators::LT => '\'<\'',
+            MetaQueryCompareByOperators::LET => '\'<=\'',
+            MetaQueryCompareByOperators::LIKE => '\'LIKE\'',
+            MetaQueryCompareByOperators::NOT_LIKE => '\'NOT LIKE\'',
+            MetaQueryCompareByOperators::EXISTS => '\'EXISTS\'',
+            MetaQueryCompareByOperators::NOT_EXISTS => '\'NOT EXISTS\'',
+            MetaQueryCompareByOperators::REGEXP => '\'REGEXP\'',
+            MetaQueryCompareByOperators::NOT_REGEXP => '\'NOT REGEXP\'',
+            MetaQueryCompareByOperators::RLIKE => '\'RLIKE\'',
+            default => parent::getEnumValueDescription($enumValue),
+        };
+    }
 }

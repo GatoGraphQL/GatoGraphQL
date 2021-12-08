@@ -60,7 +60,7 @@ class MetaQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeR
 
     public function getTypeDescription(): ?string
     {
-        return $this->getTranslationAPI()->__('Filter by meta key and value. See: https://developer.wordpress.org/reference/classes/wp_meta_query/', 'meta');
+        return $this->getTranslationAPI()->__('Filter by meta key and value. The key must be allowed access in the Settings. See: https://developer.wordpress.org/reference/classes/wp_meta_query/', 'meta');
     }
 
     public function getInputFieldNameTypeResolvers(): array
