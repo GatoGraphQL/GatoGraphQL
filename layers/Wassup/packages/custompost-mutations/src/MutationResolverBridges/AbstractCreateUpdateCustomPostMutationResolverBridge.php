@@ -9,7 +9,7 @@ use PoP\ComponentModel\MutationResolverBridges\AbstractCRUDComponentMutationReso
 use PoP\EditPosts\HelperAPIFactory;
 use PoPSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\Enums\Status;
 use PoPSchema\Posts\Constants\InputNames;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\MutationInputProperties;
 

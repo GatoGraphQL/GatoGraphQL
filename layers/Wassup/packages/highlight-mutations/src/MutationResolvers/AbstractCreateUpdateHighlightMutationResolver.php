@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSitesWassup\HighlightMutations\MutationResolvers;
 
 use PoPSchema\CustomPostMeta\Utils;
-use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\Enums\Status;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
