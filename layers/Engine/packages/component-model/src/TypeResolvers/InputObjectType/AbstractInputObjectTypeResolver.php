@@ -212,7 +212,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
          */
         foreach ($inputFieldNameTypeResolvers as $inputFieldName => $inputFieldTypeResolver) {
             // If it has set a value, skip it
-            if (array_key_exists($inputFieldName, (array)$inputValue)) {
+            // Providing a `null` value is allowed
+            if (property_exists($inputValue, $inputFieldName)) {
                 continue;
             }
             // If it has default value, set it
