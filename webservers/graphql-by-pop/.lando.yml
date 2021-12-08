@@ -194,13 +194,18 @@ services:
           ../../layers/Schema/packages/usermeta:/app/vendor/pop-schema/usermeta
         - '../../layers/Schema/packages/users-wp:/app/vendor/pop-schema/users-wp'
         - '../../layers/Schema/packages/users:/app/vendor/pop-schema/users'
+        - '../../layers/WPSchema/packages/commentmeta:/app/vendor/pop-wp-schema/commentmeta'
         - '../../layers/WPSchema/packages/comments:/app/vendor/pop-wp-schema/comments'
+        - '../../layers/WPSchema/packages/custompostmeta:/app/vendor/pop-wp-schema/custompostmeta'
         - '../../layers/WPSchema/packages/customposts:/app/vendor/pop-wp-schema/customposts'
         - '../../layers/WPSchema/packages/media:/app/vendor/pop-wp-schema/media'
         - '../../layers/WPSchema/packages/menus:/app/vendor/pop-wp-schema/menus'
+        - '../../layers/WPSchema/packages/meta:/app/vendor/pop-wp-schema/meta'
         - '../../layers/WPSchema/packages/pages:/app/vendor/pop-wp-schema/pages'
         - '../../layers/WPSchema/packages/posts:/app/vendor/pop-wp-schema/posts'
         - '../../layers/WPSchema/packages/schema-commons:/app/vendor/pop-wp-schema/schema-commons'
+        - '../../layers/WPSchema/packages/taxonomymeta:/app/vendor/pop-wp-schema/taxonomymeta'
+        - '../../layers/WPSchema/packages/usermeta:/app/vendor/pop-wp-schema/usermeta'
         - '../../layers/WPSchema/packages/users:/app/vendor/pop-wp-schema/users'
     build_as_root:
       - a2enmod proxy proxy_http
