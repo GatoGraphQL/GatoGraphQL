@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Meta\TypeResolvers\InputObjectType;
 
+use Exception;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPWPSchema\Meta\Constants\MetaQueryCompareByOperators;
 use PoPWPSchema\Meta\Constants\MetaQueryValueTypes;
 use PoPWPSchema\Meta\TypeResolvers\EnumType\MetaQueryValueTypeEnumTypeResolver;
 use PoPWPSchema\SchemaCommons\TypeResolvers\EnumType\RelationEnumTypeResolver;
@@ -168,5 +170,29 @@ class MetaQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeR
         // if ($dateQuery !== []) {
         //     $query['date_query'] = $dateQuery;
         // }
+    }
+
+    protected function getOperatorFromInputValue(string $operator): string
+    {
+        return match ($operator) {
+            MetaQueryCompareByOperators::EQ => '=',
+            MetaQueryCompareByOperators::NOT_EQ => '!=',
+            MetaQueryCompareByOperators::GT => '>',
+            MetaQueryCompareByOperators::GET => '>=',
+            MetaQueryCompareByOperators::LT => '<',
+            MetaQueryCompareByOperators::LET => '<=',
+            MetaQueryCompareByOperators::LIKE => 'LIKE',
+            MetaQueryCompareByOperators::NOT_LIKE => 'NOT LIKE',
+            MetaQueryCompareByOperators::IN => 'IN',
+            MetaQueryCompareByOperators::NOT_IN => 'NOT IN',
+            MetaQueryCompareByOperators::BETWEEN => 'BETWEEN',
+            MetaQueryCompareByOperators::NOT_BETWEEN => 'NOT BETWEEN',
+            MetaQueryCompareByOperators::EXISTS => 'EXISTS',
+            MetaQueryCompareByOperators::NOT_EXISTS => 'NOT EXISTS',
+            MetaQueryCompareByOperators::REGEXP => 'REGEXP',
+            MetaQueryCompareByOperators::NOT_REGEXP => 'NOT REGEXP',
+            MetaQueryCompareByOperators::RLIKE => 'RLIKE',
+            default => new Exception(sprintf('Unknown operator \'%s\'', $operator)),
+        };
     }
 }

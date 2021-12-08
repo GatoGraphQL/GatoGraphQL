@@ -11,21 +11,21 @@ namespace PoPWPSchema\Meta\Constants;
  */
 class MetaQueryCompareByOperators
 {
-    public const EQ = '=';
-    public const NOT_EQ = '!=';
-    public const GT = '>';
-    public const GET = '>=';
-    public const LT = '<';
-    public const LET = '<=';
-    public const LIKE = 'LIKE';
-    public const NOT_LIKE = 'NOT LIKE';
-    public const IN = 'IN';
-    public const NOT_IN = 'NOT IN';
-    public const BETWEEN = 'BETWEEN';
-    public const NOT_BETWEEN = 'NOT BETWEEN';
-    public const EXISTS = 'EXISTS';
-    public const NOT_EXISTS = 'NOT EXISTS';
-    public const REGEXP = 'REGEXP';
-    public const NOT_REGEXP = 'NOT REGEXP';
-    public const RLIKE = 'RLIKE';
+    public const EQ = 'EQ'; // '='
+    public const NOT_EQ = 'NOT_EQ'; // '!='
+    public const GT = 'GT'; // '>'
+    public const GET = 'GET'; // '>='
+    public const LT = 'LT'; // '<'
+    public const LET = 'LET'; // '<='
+    public const LIKE = 'LIKE'; // 'LIKE'
+    public const NOT_LIKE = 'NOT_LIKE'; // 'NOT LIKE'
+    public const IN = 'IN'; // 'IN'
+    public const NOT_IN = 'NOT_IN'; // 'NOT IN'
+    public const BETWEEN = 'BETWEEN'; // 'BETWEEN'
+    public const NOT_BETWEEN = 'NOT_BETWEEN'; // 'NOT BETWEEN'
+    public const EXISTS = 'EXISTS'; // 'EXISTS'
+    public const NOT_EXISTS = 'NOT_EXISTS'; // 'NOT EXISTS'
+    public const REGEXP = 'REGEXP'; // 'REGEXP'
+    public const NOT_REGEXP = 'NOT_REGEXP'; // 'NOT REGEXP'
+    public const RLIKE = 'RLIKE'; // 'RLIKE'
 }
