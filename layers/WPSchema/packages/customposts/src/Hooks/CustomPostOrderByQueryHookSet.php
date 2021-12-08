@@ -8,7 +8,7 @@ use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 use PoPWPSchema\CustomPosts\Constants\CustomPostOrderBy;
 
-class QueryHookSet extends AbstractHookSet
+class CustomPostOrderByQueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
@@ -16,29 +16,6 @@ class QueryHookSet extends AbstractHookSet
             AbstractCustomPostTypeAPI::HOOK_ORDERBY_QUERY_ARG_VALUE,
             [$this, 'getOrderByQueryArgValue']
         );
-        $this->getHooksAPI()->addFilter(
-            AbstractCustomPostTypeAPI::HOOK_QUERY,
-            [$this, 'convertCustomPostsQuery'],
-            10,
-            2
-        );
-    }
-
-    /**
-     * @see https://developer.wordpress.org/reference/classes/wp_query/#password-parameters
-     */
-    public function convertCustomPostsQuery($query, array $options): array
-    {
-        // `null` is an accepted value
-        if (array_key_exists('has-password', $query)) {
-            $query['has_password'] = $query['has-password'];
-            unset($query['has-password']);
-        }
-        if (isset($query['password'])) {
-            $query['post_password'] = $query['password'];
-            unset($query['password']);
-        }
-        return $query;
     }
 
     public function getOrderByQueryArgValue(string $orderBy): string
