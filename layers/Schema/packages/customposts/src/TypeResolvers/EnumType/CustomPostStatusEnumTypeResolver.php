@@ -20,7 +20,7 @@ class CustomPostStatusEnumTypeResolver extends AbstractEnumTypeResolver
     public function getEnumValues(): array
     {
         return [
-            Status::PUBLISHED,
+            Status::PUBLISH,
             Status::PENDING,
             Status::DRAFT,
             Status::TRASH,
@@ -30,7 +30,7 @@ class CustomPostStatusEnumTypeResolver extends AbstractEnumTypeResolver
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            Status::PUBLISHED => $this->getTranslationAPI()->__('Published content', 'customposts'),
+            Status::PUBLISH => $this->getTranslationAPI()->__('Published content', 'customposts'),
             Status::PENDING => $this->getTranslationAPI()->__('Pending content', 'customposts'),
             Status::DRAFT => $this->getTranslationAPI()->__('Draft content', 'customposts'),
             Status::TRASH => $this->getTranslationAPI()->__('Trashed content', 'customposts'),

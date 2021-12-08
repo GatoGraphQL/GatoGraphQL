@@ -33,7 +33,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         parent::modifyDataProperties($data_properties, $result_id);
 
         $data_properties[DataloadingConstants::QUERYARGS]['status'] = [
-            Status::PUBLISHED,
+            Status::PUBLISH,
             Status::PENDING,
             Status::DRAFT,
         ];
@@ -77,7 +77,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
             $form_data[MutationInputProperties::STATUS] = $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostSelectFormInputs::MODULE_FORMINPUT_CUP_STATUS])->getValue([\PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, \PoP_Module_Processor_CreateUpdatePostSelectFormInputs::MODULE_FORMINPUT_CUP_STATUS]);
         } else {
             $keepasdraft = $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, \PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::MODULE_FORMINPUT_CUP_KEEPASDRAFT])->getValue([\PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, \PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::MODULE_FORMINPUT_CUP_KEEPASDRAFT]);
-            $form_data[MutationInputProperties::STATUS] = $keepasdraft ? Status::DRAFT : Status::PUBLISHED;
+            $form_data[MutationInputProperties::STATUS] = $keepasdraft ? Status::DRAFT : Status::PUBLISH;
         }
 
         if ($featuredimage = $this->getFeaturedimageModule()) {
@@ -168,7 +168,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
     public function getSuccessString(string | int $result_id): ?string
     {
         $status = $this->getCustomPostTypeAPI()->getStatus($result_id);
-        if ($status == Status::PUBLISHED) {
+        if ($status == Status::PUBLISH) {
             $success_string = sprintf(
                 $this->getTranslationAPI()->__('<a href="%s" %s>Click here to view it</a>.', 'pop-application'),
                 $this->getCustomPostTypeAPI()->getPermalink($result_id),

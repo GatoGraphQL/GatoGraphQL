@@ -40,7 +40,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
     public function getSuccessString(string | int $result_id): ?string
     {
         $status = $this->getCustomPostTypeAPI()->getStatus($result_id);
-        if ($status == Status::PUBLISHED) {
+        if ($status == Status::PUBLISH) {
             // Give a link to the referenced post to the stance, and force it to get it from the server again
             $highlighted = Utils::getCustomPostMeta($result_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
             $success_string = sprintf(

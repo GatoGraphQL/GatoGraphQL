@@ -123,7 +123,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
         $customPostID = $form_data[MutationInputProperties::ID];
 
-        if (!in_array($this->getCustomPostTypeAPI()->getStatus($customPostID), array(Status::DRAFT, Status::PENDING, Status::PUBLISHED))) {
+        if (!in_array($this->getCustomPostTypeAPI()->getStatus($customPostID), array(Status::DRAFT, Status::PENDING, Status::PUBLISH))) {
             $errors[] = $this->getTranslationAPI()->__('Hmmmmm, this post seems to have been deleted...', 'pop-application');
             return;
         }

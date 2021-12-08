@@ -24,7 +24,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
                 $errors[] = $this->getTranslationAPI()->__('The referenced post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
-                if ($this->getCustomPostTypeAPI()->getStatus($referenced) != Status::PUBLISHED) {
+                if ($this->getCustomPostTypeAPI()->getStatus($referenced) != Status::PUBLISH) {
                     $errors[] = $this->getTranslationAPI()->__('The referenced post is not published yet', 'poptheme-wassup');
                 }
             }
@@ -65,7 +65,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         // Check if there is already an existing stance
         $vars = ApplicationState::getVars();
         $query = array(
-            'status' => array(Status::PUBLISHED, Status::DRAFT),
+            'status' => array(Status::PUBLISH, Status::DRAFT),
             'authors' => [$vars['global-userstate']['current-user-id']],
         );
         if ($referenced_id) {

@@ -44,7 +44,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     {
         return [
             'status' => [
-                Status::PUBLISHED,
+                Status::PUBLISH,
             ],
         ];
     }
@@ -222,7 +222,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         if ($customPostID === null) {
             return null;
         }
-        if ($this->getStatus($customPostObjectOrID) == Status::PUBLISHED) {
+        if ($this->getStatus($customPostObjectOrID) == Status::PUBLISH) {
             return \get_permalink($customPostID);
         }
 
@@ -244,7 +244,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             return null;
         }
         /** @var WP_Post $customPost */
-        if ($this->getStatus($customPostObjectOrID) === Status::PUBLISHED) {
+        if ($this->getStatus($customPostObjectOrID) === Status::PUBLISH) {
             return $customPost->post_name;
         }
 

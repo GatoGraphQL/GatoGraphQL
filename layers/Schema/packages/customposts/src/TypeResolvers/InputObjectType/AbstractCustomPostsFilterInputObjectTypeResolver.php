@@ -104,7 +104,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     {
         return match ($inputFieldName) {
             'status' => [
-                Status::PUBLISHED,
+                Status::PUBLISH,
             ],
             'customPostTypes' => $this->getCustomPostEnumTypeResolver()->getConsolidatedEnumValues(),
             default => parent::getInputFieldDefaultValue($inputFieldName)

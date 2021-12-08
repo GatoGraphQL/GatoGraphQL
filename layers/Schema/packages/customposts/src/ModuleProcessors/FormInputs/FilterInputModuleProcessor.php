@@ -106,7 +106,7 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => [
-                Status::PUBLISHED,
+                Status::PUBLISH,
             ],
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->getCustomPostEnumTypeResolver()->getConsolidatedEnumValues(),
             default => null,
