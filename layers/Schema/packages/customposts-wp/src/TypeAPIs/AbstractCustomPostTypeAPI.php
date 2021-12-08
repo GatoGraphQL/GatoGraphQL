@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostsWP\TypeAPIs;
 
 use PoPSchema\CustomPosts\ComponentConfiguration;
+use PoPSchema\CustomPosts\Constants\CustomPostOrderBy;
 use PoPSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI as UpstreamAbstractCustomPostTypeAPI;
 use PoPSchema\CustomPosts\Types\Status;
-use PoPSchema\CustomPosts\Constants\CustomPostOrderBy;
+use PoPSchema\CustomPostsWP\CMS\CMSDataConversionServiceInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Post;
@@ -19,6 +20,17 @@ use function get_post_status;
  */
 abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeAPI
 {
+    private ?CMSDataConversionServiceInterface $cmsDataConversionService = null;
+
+    final public function setCMSDataConversionService(CMSDataConversionServiceInterface $cmsDataConversionService): void
+    {
+        $this->cmsDataConversionService = $cmsDataConversionService;
+    }
+    final protected function getCMSDataConversionService(): CMSDataConversionServiceInterface
+    {
+        return $this->cmsDataConversionService ??= $this->instanceManager->getInstance(CMSDataConversionServiceInterface::class);
+    }
+
     public const HOOK_QUERY = __CLASS__ . ':query';
     public const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
@@ -32,8 +44,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getStatus(string | int | object $customPostObjectOrID): ?string
     {
-        $status = get_post_status($customPostObjectOrID);
-        return CustomPostTypeAPIUtils::convertPostStatusFromCMSToPoP($status);
+        return get_post_status($customPostObjectOrID);
     }
 
     /**
@@ -112,16 +123,12 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
         // Convert the parameters
         if (isset($query['status'])) {
-            if (is_array($query['status'])) {
-                // doing get_posts can accept an array of values
-                $query['post_status'] = array_map(
-                    [CustomPostTypeAPIUtils::class, 'convertPostStatusFromPoPToCMS'],
+            $query['post_status'] = is_array($query['status']) ?
+                array_map(
+                    [$this->getCMSDataConversionService(), 'convertCustomPostStatusFromPoPToCMS'],
                     $query['status']
-                );
-            } else {
-                // doing wp_insert/update_post accepts a single value
-                $query['post_status'] = CustomPostTypeAPIUtils::convertPostStatusFromPoPToCMS($query['status']);
-            }
+                )
+                : $this->getCMSDataConversionService()->convertCustomPostStatusFromPoPToCMS($query['status']);
             unset($query['status']);
         }
         if (isset($query['include']) && is_array($query['include'])) {

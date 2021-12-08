@@ -8,7 +8,7 @@ use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\Error\ErrorHelperInterface;
 use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
-use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
+use PoPSchema\CustomPostsWP\CMS\CMSDataConversionServiceInterface;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -18,6 +18,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
     use BasicServiceTrait;
 
     private ?ErrorHelperInterface $errorHelper = null;
+    private ?CMSDataConversionServiceInterface $cmsDataConversionService = null;
 
     final public function setErrorHelper(ErrorHelperInterface $errorHelper): void
     {
@@ -27,12 +28,20 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
     {
         return $this->errorHelper ??= $this->instanceManager->getInstance(ErrorHelperInterface::class);
     }
+    final public function setCMSDataConversionService(CMSDataConversionServiceInterface $cmsDataConversionService): void
+    {
+        $this->cmsDataConversionService = $cmsDataConversionService;
+    }
+    final protected function getCMSDataConversionService(): CMSDataConversionServiceInterface
+    {
+        return $this->cmsDataConversionService ??= $this->instanceManager->getInstance(CMSDataConversionServiceInterface::class);
+    }
 
     protected function convertQueryArgsFromPoPToCMSForInsertUpdatePost(array &$query): void
     {
         // Convert the parameters
         if (isset($query['status'])) {
-            $query['post_status'] = CustomPostTypeAPIUtils::convertPostStatusFromPoPToCMS($query['status']);
+            $query['post_status'] = $this->getCMSDataConversionService()->convertCustomPostStatusFromPoPToCMS($query['status']);
             unset($query['status']);
         }
         if (isset($query['id'])) {

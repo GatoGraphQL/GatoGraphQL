@@ -6,13 +6,14 @@ namespace PoPSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
+use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
 
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -22,12 +23,20 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
     {
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
+    final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
+    {
+        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+    }
+    final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
+    {
+        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+    }
 
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [
             'include' => $ids,
-            'status' => CustomPostTypeAPIUtils::getPostStatuses(),
+            'status' => $this->getCustomPostStatusEnumTypeResolver()->getConsolidatedEnumValues(),
         ];
     }
 
