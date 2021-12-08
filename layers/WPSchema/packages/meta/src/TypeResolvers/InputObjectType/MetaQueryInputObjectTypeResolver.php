@@ -91,15 +91,82 @@ class MetaQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeR
     }
 
     /**
-     * Integrate parameters into the "date_query" WP_Query arg
+     * Integrate parameters into the "meta_query" WP_Query arg
      *
-     * @see https://developer.wordpress.org/reference/classes/wp_query/#date-parameters
+     * @see https://developer.wordpress.org/reference/classes/wp_meta_query/
      *
      * @param array<string, mixed> $query
      * @param stdClass|stdClass[]|array<stdClass[]> $inputValue
      */
     public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass|array $inputValue): void
     {
-        // @todo
+        // /**
+        //  * Collect all the "date_query" results, and then arrange them properly
+        //  * as an array, with the "relation" as the first element (if defined)
+        //  */
+        // if (is_array($inputValue)) {
+        //     $innerQueries = [];
+        //     foreach ($inputValue as $index => $inputValueElem) {
+        //         $queryElem = [];
+        //         $this->integrateInputValueToFilteringQueryArgs($queryElem, $inputValueElem);
+        //         // If $inputValueElem is {}, then skip
+        //         if ($queryElem === []) {
+        //             continue;
+        //         }
+        //         $query[$index] = $queryElem;
+        //     }
+        //     $dateQuery = [];
+        //     // The "relation" is defined on the first element
+        //     if (isset($innerQueries[0]['date_query']['relation'])) {
+        //         $dateQuery['relation'] = $innerQueries[0]['date_query']['relation'];
+        //     }
+        //     // Re-create an array with all the subelements
+        //     foreach ($innerQueries as $innerQuery) {
+        //         $dateQuery[] = $innerQuery['date_query'];
+        //     }
+        //     if ($dateQuery !== []) {
+        //         $query['date_query'] = $dateQuery;
+        //     }
+        //     return;
+        // }
+
+        // /**
+        //  * Here it's a single stdClass. Create the config for a single "date_query"
+        //  */
+        // $dateQuery = [];
+
+        // // These elements must be serialized, from Date to String
+        // if (isset($inputValue->before)) {
+        //     $dateQuery['before'] = $this->getDateScalarTypeResolver()->serialize($inputValue->before);
+        // }
+        // if (isset($inputValue->after)) {
+        //     $dateQuery['after'] = $this->getDateScalarTypeResolver()->serialize($inputValue->after);
+        // }
+
+        // // These elements can copy directly
+        // $properties = [
+        //     'year',
+        //     'month',
+        //     'week',
+        //     'day',
+        //     'hour',
+        //     'minute',
+        //     'second',
+        //     'inclusive',
+        //     'compare',
+        //     'column',
+        //     'relation',
+        // ];
+        // foreach ($properties as $property) {
+        //     if (!isset($inputValue->$property)) {
+        //         continue;
+        //     }
+        //     $dateQuery[$property] = $inputValue->$property;
+        // }
+
+        // // Assign under "date_query"
+        // if ($dateQuery !== []) {
+        //     $query['date_query'] = $dateQuery;
+        // }
     }
 }
