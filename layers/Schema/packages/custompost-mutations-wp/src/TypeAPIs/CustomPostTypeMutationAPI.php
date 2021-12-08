@@ -9,7 +9,6 @@ use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\Error\ErrorHelperInterface;
 use PoPSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPSchema\CustomPostsWP\CMS\CMSDataConversionServiceInterface;
-use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
