@@ -20,6 +20,7 @@ The elements below (among others) are, by default, treated as private data:
 
 - `status`
 - `hasPassword`
+- `password`
 
 **Comments:**
 

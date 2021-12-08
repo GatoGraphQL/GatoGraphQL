@@ -8,6 +8,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Hooks\AbstractHookSet;
 use PoPSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostsFilterInputObjectTypeResolver;
 use PoPWPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
@@ -15,6 +16,7 @@ use PoPWPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 class InputObjectTypeHookSet extends AbstractHookSet
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -23,6 +25,14 @@ class InputObjectTypeHookSet extends AbstractHookSet
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     protected function init(): void
@@ -73,6 +83,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
             $inputFieldNameTypeResolvers,
             [
                 'hasPassword' => $this->getBooleanScalarTypeResolver(),
+                'password' => $this->getStringScalarTypeResolver(),
             ]
         );
     }
@@ -92,6 +103,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
             $inputFieldNames,
             [
                 'hasPassword',
+                'password',
             ]
         );
     }
@@ -105,7 +117,8 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'hasPassword' => $this->getTranslationAPI()->__('Include elements which are password-protected. Pass `null` to fetch both with/out password', 'customposts'),
+            'hasPassword' => $this->getTranslationAPI()->__('Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with/out password', 'customposts'),
+            'password' => $this->getTranslationAPI()->__('Include custom posts protected by a specific password', 'customposts'),
             default => $inputFieldDescription,
         };
     }
@@ -134,6 +147,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
         }
         return match ($inputFieldName) {
             'hasPassword' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_HAS_PASSWORD],
+            'password' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_PASSWORD],
             default => $inputFieldFilterInput,
         };
     }
