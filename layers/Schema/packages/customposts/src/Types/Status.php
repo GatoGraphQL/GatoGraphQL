@@ -7,7 +7,7 @@ namespace PoPSchema\CustomPosts\Types;
 class Status
 {
     /**
-     * UsING 'publish' instead of 'published' to make it work directly with WordPress,
+     * Using 'publish' instead of 'published' to make it work directly with WordPress,
      * used by the GraphQL API for WordPress.
      *
      * Otherwise, this plugin should override fields 'status' and 'isStatus',
