@@ -30,12 +30,12 @@ class MetaQueryCompareBySingleValueOperatorEnumTypeResolver extends AbstractEnum
     public function getEnumValues(): array
     {
         return [
-            MetaQueryCompareByOperators::EQ,
-            MetaQueryCompareByOperators::NOT_EQ,
-            MetaQueryCompareByOperators::GT,
-            MetaQueryCompareByOperators::GET,
-            MetaQueryCompareByOperators::LT,
-            MetaQueryCompareByOperators::LET,
+            MetaQueryCompareByOperators::EQUALS,
+            MetaQueryCompareByOperators::NOT_EQUALS,
+            MetaQueryCompareByOperators::GREATER_THAN,
+            MetaQueryCompareByOperators::GREATER_THAN_OR_EQUAL,
+            MetaQueryCompareByOperators::LESS_THAN,
+            MetaQueryCompareByOperators::LESS_THAN_OR_EQUAL,
             MetaQueryCompareByOperators::LIKE,
             MetaQueryCompareByOperators::NOT_LIKE,
             MetaQueryCompareByOperators::EXISTS,
@@ -49,12 +49,12 @@ class MetaQueryCompareBySingleValueOperatorEnumTypeResolver extends AbstractEnum
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            MetaQueryCompareByOperators::EQ => '\'=\'',
-            MetaQueryCompareByOperators::NOT_EQ => '\'!=\'',
-            MetaQueryCompareByOperators::GT => '\'>\'',
-            MetaQueryCompareByOperators::GET => '\'>=\'',
-            MetaQueryCompareByOperators::LT => '\'<\'',
-            MetaQueryCompareByOperators::LET => '\'<=\'',
+            MetaQueryCompareByOperators::EQUALS => '\'=\'',
+            MetaQueryCompareByOperators::NOT_EQUALS => '\'!=\'',
+            MetaQueryCompareByOperators::GREATER_THAN => '\'>\'',
+            MetaQueryCompareByOperators::GREATER_THAN_OR_EQUAL => '\'>=\'',
+            MetaQueryCompareByOperators::LESS_THAN => '\'<\'',
+            MetaQueryCompareByOperators::LESS_THAN_OR_EQUAL => '\'<=\'',
             MetaQueryCompareByOperators::LIKE => '\'LIKE\'',
             MetaQueryCompareByOperators::NOT_LIKE => '\'NOT LIKE\'',
             MetaQueryCompareByOperators::EXISTS => '\'EXISTS\'',

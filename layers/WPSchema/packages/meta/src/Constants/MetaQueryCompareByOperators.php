@@ -11,12 +11,12 @@ namespace PoPWPSchema\Meta\Constants;
  */
 class MetaQueryCompareByOperators
 {
-    public const EQ = 'EQ'; // '='
-    public const NOT_EQ = 'NOT_EQ'; // '!='
-    public const GT = 'GT'; // '>'
-    public const GET = 'GET'; // '>='
-    public const LT = 'LT'; // '<'
-    public const LET = 'LET'; // '<='
+    public const EQUALS = 'EQUALS'; // '='
+    public const NOT_EQUALS = 'NOT_EQUALS'; // '!='
+    public const GREATER_THAN = 'GREATER_THAN'; // '>'
+    public const GREATER_THAN_OR_EQUAL = 'GREATER_THAN_OR_EQUAL'; // '>='
+    public const LESS_THAN = 'LESS_THAN'; // '<'
+    public const LESS_THAN_OR_EQUAL = 'LESS_THAN_OR_EQUAL'; // '<='
     public const LIKE = 'LIKE'; // 'LIKE'
     public const NOT_LIKE = 'NOT_LIKE'; // 'NOT LIKE'
     public const IN = 'IN'; // 'IN'

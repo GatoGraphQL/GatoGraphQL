@@ -138,12 +138,12 @@ class MetaQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeR
     protected function getOperatorFromInputValue(string $operator): string
     {
         return match ($operator) {
-            MetaQueryCompareByOperators::EQ => '=',
-            MetaQueryCompareByOperators::NOT_EQ => '!=',
-            MetaQueryCompareByOperators::GT => '>',
-            MetaQueryCompareByOperators::GET => '>=',
-            MetaQueryCompareByOperators::LT => '<',
-            MetaQueryCompareByOperators::LET => '<=',
+            MetaQueryCompareByOperators::EQUALS => '=',
+            MetaQueryCompareByOperators::NOT_EQUALS => '!=',
+            MetaQueryCompareByOperators::GREATER_THAN => '>',
+            MetaQueryCompareByOperators::GREATER_THAN_OR_EQUAL => '>=',
+            MetaQueryCompareByOperators::LESS_THAN => '<',
+            MetaQueryCompareByOperators::LESS_THAN_OR_EQUAL => '<=',
             MetaQueryCompareByOperators::LIKE => 'LIKE',
             MetaQueryCompareByOperators::NOT_LIKE => 'NOT LIKE',
             MetaQueryCompareByOperators::IN => 'IN',
