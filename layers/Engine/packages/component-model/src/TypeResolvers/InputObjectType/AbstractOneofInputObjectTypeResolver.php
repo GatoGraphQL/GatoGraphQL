@@ -27,7 +27,7 @@ abstract class AbstractOneofInputObjectTypeResolver extends AbstractInputObjectT
         }
         return parent::coerceInputObjectValue($inputValue);
     }
-    
+
     /**
      * Only validate the single provided entry, ignoring potential
      * errors from the unprovided entries.
