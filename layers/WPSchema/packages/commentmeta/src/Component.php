@@ -20,7 +20,8 @@ class Component extends AbstractComponent
     {
         return [
             \PoPSchema\CommentMetaWP\Component::class,
-            \PoPSchema\Meta\Component::class,
+            \PoPWPSchema\Comments\Component::class,
+            \PoPWPSchema\Meta\Component::class,
         ];
     }
 

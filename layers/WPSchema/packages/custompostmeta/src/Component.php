@@ -20,7 +20,8 @@ class Component extends AbstractComponent
     {
         return [
             \PoPSchema\CustomPostMetaWP\Component::class,
-            \PoPSchema\Meta\Component::class,
+            \PoPWPSchema\CustomPosts\Component::class,
+            \PoPWPSchema\Meta\Component::class,
         ];
     }
 
