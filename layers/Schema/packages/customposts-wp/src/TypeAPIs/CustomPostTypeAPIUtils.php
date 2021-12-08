@@ -34,8 +34,4 @@ class CustomPostTypeAPIUtils
         self::init();
         return self::$popToCMSPostStatusConversion[$status];
     }
-    public static function getPostStatuses()
-    {
-        return array_values(self::$cmsToPoPPostStatusConversion);
-    }
 }
