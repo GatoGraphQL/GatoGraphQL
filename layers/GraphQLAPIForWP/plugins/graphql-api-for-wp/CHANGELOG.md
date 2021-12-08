@@ -28,6 +28,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `authorSlug: String`
   - `excludeAuthorIDs: [ID]`
   - `hasPassword: Bool`
+  - `password: String`
 - Exclude results via field arg `excludeIDs`
 - Added field `urlAbsolutePath` on several types:
   - `Post.urlAbsolutePath: String!`
