@@ -57,7 +57,7 @@ class MetaQueryCompareByArrayValueInputObjectTypeResolver extends AbstractInputO
     public function getInputFieldDefaultValue(string $inputFieldName): mixed
     {
         return match ($inputFieldName) {
-            'operator' => MetaQueryCompareByOperators::EQ,
+            'operator' => MetaQueryCompareByOperators::IN,
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
     }
