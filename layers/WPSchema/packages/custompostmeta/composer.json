@@ -15,8 +15,8 @@
     "require": {
         "php": "^8.0",
         "pop-schema/custompostmeta-wp": "^0.9",
-        "pop-schema-wp/customposts": "^0.9",
-        "pop-schema-wp/meta": "^0.9"
+        "pop-wp-schema/customposts": "^0.9",
+        "pop-wp-schema/meta": "^0.9"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",
