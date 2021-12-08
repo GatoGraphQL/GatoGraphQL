@@ -7,9 +7,6 @@ services:
     PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface:
         class: \PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI
 
-    PoPSchema\CustomPostsWP\CMS\CMSDataConversionServiceInterface:
-        class: \PoPSchema\CustomPostsWP\CMS\CMSDataConversionService
-
     PoPSchema\CustomPostsWP\LooseContracts\:
         resource: '../src/LooseContracts/*'
 
