@@ -58,13 +58,18 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
             \PoPSchema\Users\Component::class,
             \PoPSchema\UserState\Component::class,
             \PoPSchema\UserStateMutations\Component::class,
+            \PoPWPSchema\CommentMeta\Component::class,
             \PoPWPSchema\Comments\Component::class,
+            \PoPWPSchema\CustomPostMeta\Component::class,
             \PoPWPSchema\CustomPosts\Component::class,
             \PoPWPSchema\Media\Component::class,
             \PoPWPSchema\Menus\Component::class,
+            \PoPWPSchema\Meta\Component::class,
             \PoPWPSchema\Pages\Component::class,
             \PoPWPSchema\Posts\Component::class,
             \PoPWPSchema\SchemaCommons\Component::class,
+            \PoPWPSchema\TaxonomyMeta\Component::class,
+            \PoPWPSchema\UserMeta\Component::class,
             \PoPWPSchema\Users\Component::class,
         ];
     }

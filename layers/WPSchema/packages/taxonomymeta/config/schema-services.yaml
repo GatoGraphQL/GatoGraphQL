@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPWPSchema\TaxonomyMeta\SchemaHooks\:
+        resource: '../src/SchemaHooks/*'

@@ -17,6 +17,7 @@ includes:
     - layers/Schema/packages/comment-mutations/phpstan.neon.dist
     - layers/Schema/packages/comment-mutations-wp/phpstan.neon.dist
     - layers/Schema/packages/commentmeta/phpstan.neon.dist
+    - layers/WPSchema/packages/commentmeta/phpstan.neon.dist
     - layers/Schema/packages/commentmeta-wp/phpstan.neon.dist
     - layers/Schema/packages/comments/phpstan.neon.dist
     - layers/WPSchema/packages/comments/phpstan.neon.dist
@@ -33,6 +34,7 @@ includes:
     - layers/Schema/packages/custompostmedia-mutations-wp/phpstan.neon.dist
     - layers/Schema/packages/custompostmedia-wp/phpstan.neon.dist
     - layers/Schema/packages/custompostmeta/phpstan.neon.dist
+    - layers/WPSchema/packages/custompostmeta/phpstan.neon.dist
     - layers/Schema/packages/custompostmeta-wp/phpstan.neon.dist
     - layers/Schema/packages/customposts/phpstan.neon.dist
     - layers/WPSchema/packages/customposts/phpstan.neon.dist
@@ -65,6 +67,7 @@ includes:
     - layers/WPSchema/packages/menus/phpstan.neon.dist
     - layers/Schema/packages/menus-wp/phpstan.neon.dist
     - layers/Schema/packages/meta/phpstan.neon.dist
+    - layers/WPSchema/packages/meta/phpstan.neon.dist
     - layers/Schema/packages/metaquery-wp/phpstan.neon.dist
     - layers/Engine/packages/modulerouting/phpstan.neon.dist
     - layers/Schema/packages/pages/phpstan.neon.dist
@@ -98,6 +101,7 @@ includes:
     - layers/Schema/packages/taxonomies/phpstan.neon.dist
     - layers/Schema/packages/taxonomies-wp/phpstan.neon.dist
     - layers/Schema/packages/taxonomymeta/phpstan.neon.dist
+    - layers/WPSchema/packages/taxonomymeta/phpstan.neon.dist
     - layers/Schema/packages/taxonomymeta-wp/phpstan.neon.dist
     - layers/Schema/packages/taxonomyquery/phpstan.neon.dist
     - layers/Schema/packages/taxonomyquery-wp/phpstan.neon.dist
@@ -115,6 +119,7 @@ includes:
     - layers/Schema/packages/user-state-mutations-wp/phpstan.neon.dist
     - layers/Schema/packages/user-state-wp/phpstan.neon.dist
     - layers/Schema/packages/usermeta/phpstan.neon.dist
+    - layers/WPSchema/packages/usermeta/phpstan.neon.dist
     - layers/Schema/packages/usermeta-wp/phpstan.neon.dist
     - layers/Schema/packages/users/phpstan.neon.dist
     - layers/WPSchema/packages/users/phpstan.neon.dist

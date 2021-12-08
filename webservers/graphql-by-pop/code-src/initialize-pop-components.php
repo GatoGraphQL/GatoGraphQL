@@ -6,14 +6,10 @@ use PoP\Engine\AppLoader;
 
 // Set the Component configuration
 AppLoader::addComponentClassesToInitialize([
-    \PoPSchema\CommentMetaWP\Component::class,
     \PoPSchema\PostsWP\Component::class,
     \PoPSchema\PagesWP\Component::class,
-    \PoPSchema\CustomPostMetaWP\Component::class,
     \PoPSchema\CustomPostMediaWP\Component::class,
     \PoPSchema\TaxonomyQueryWP\Component::class,
-    \PoPSchema\TaxonomyMetaWP\Component::class,
-    \PoPSchema\UserMetaWP\Component::class,
     \PoPSchema\UserStateWP\Component::class,
     \PoPSchema\UserRolesWP\Component::class,
     \PoPSchema\UserRolesACL\Component::class,
@@ -35,6 +31,10 @@ AppLoader::addComponentClassesToInitialize([
     \PoPWPSchema\Pages\Component::class,
     \PoPWPSchema\Posts\Component::class,
     \PoPWPSchema\Users\Component::class,
+    \PoPWPSchema\CommentMeta\Component::class,
+    \PoPWPSchema\CustomPostMeta\Component::class,
+    \PoPWPSchema\TaxonomyMeta\Component::class,
+    \PoPWPSchema\UserMeta\Component::class,
     \GraphQLByPoP\GraphQLServer\Component::class,
     \PoP\FunctionFields\Component::class,
     \PoP\RESTAPI\Component::class,
