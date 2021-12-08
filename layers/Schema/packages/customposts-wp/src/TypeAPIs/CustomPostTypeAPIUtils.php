@@ -28,10 +28,4 @@ class CustomPostTypeAPIUtils
         // Convert from the CMS status to PoP's one
         return self::$cmsToPoPPostStatusConversion[$status];
     }
-    public static function convertPostStatusFromPoPToCMS($status)
-    {
-        // Convert from the CMS status to PoP's one
-        self::init();
-        return self::$popToCMSPostStatusConversion[$status];
-    }
 }
