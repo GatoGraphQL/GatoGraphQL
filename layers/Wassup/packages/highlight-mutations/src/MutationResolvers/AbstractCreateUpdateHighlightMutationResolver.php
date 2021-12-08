@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSitesWassup\HighlightMutations\MutationResolvers;
 
 use PoPSchema\CustomPostMeta\Utils;
-use PoPSchema\CustomPosts\Enums\Status;
+use PoPSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
@@ -28,7 +28,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
                 $errors[] = $this->getTranslationAPI()->__('The highlighted post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
-                if ($this->getCustomPostTypeAPI()->getStatus($referenced) != Status::PUBLISH) {
+                if ($this->getCustomPostTypeAPI()->getStatus($referenced) != CustomPostStatus::PUBLISH) {
                     $errors[] = $this->getTranslationAPI()->__('The highlighted post is not published yet', 'poptheme-wassup');
                 }
             }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPosts\Enums;
 
-class Status
+class CustomPostStatus
 {
     /**
      * Using 'publish' instead of 'published' to make it work directly with WordPress,

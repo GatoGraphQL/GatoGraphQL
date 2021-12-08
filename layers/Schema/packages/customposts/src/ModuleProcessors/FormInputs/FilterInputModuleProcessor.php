@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
-use PoPSchema\CustomPosts\Enums\Status;
+use PoPSchema\CustomPosts\Enums\CustomPostStatus;
 
 class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
@@ -106,7 +106,7 @@ class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor impl
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS => [
-                Status::PUBLISH,
+                CustomPostStatus::PUBLISH,
             ],
             self::MODULE_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->getCustomPostEnumTypeResolver()->getConsolidatedEnumValues(),
             default => null,

@@ -7,7 +7,7 @@ namespace PoPSchema\CustomPostsWP\TypeAPIs;
 use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\Constants\CustomPostOrderBy;
 use PoPSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI as UpstreamAbstractCustomPostTypeAPI;
-use PoPSchema\CustomPosts\Enums\Status;
+use PoPSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use WP_Post;
@@ -44,7 +44,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     {
         return [
             'status' => [
-                Status::PUBLISH,
+                CustomPostStatus::PUBLISH,
             ],
         ];
     }
@@ -222,7 +222,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         if ($customPostID === null) {
             return null;
         }
-        if ($this->getStatus($customPostObjectOrID) == Status::PUBLISH) {
+        if ($this->getStatus($customPostObjectOrID) == CustomPostStatus::PUBLISH) {
             return \get_permalink($customPostID);
         }
 
@@ -244,7 +244,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             return null;
         }
         /** @var WP_Post $customPost */
-        if ($this->getStatus($customPostObjectOrID) === Status::PUBLISH) {
+        if ($this->getStatus($customPostObjectOrID) === CustomPostStatus::PUBLISH) {
             return $customPost->post_name;
         }
 

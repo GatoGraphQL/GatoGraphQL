@@ -10,7 +10,7 @@ use PoPSchema\CustomPosts\ComponentConfiguration;
 use PoPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
-use PoPSchema\CustomPosts\Enums\Status;
+use PoPSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver;
@@ -104,7 +104,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     {
         return match ($inputFieldName) {
             'status' => [
-                Status::PUBLISH,
+                CustomPostStatus::PUBLISH,
             ],
             'customPostTypes' => $this->getCustomPostEnumTypeResolver()->getConsolidatedEnumValues(),
             default => parent::getInputFieldDefaultValue($inputFieldName)
