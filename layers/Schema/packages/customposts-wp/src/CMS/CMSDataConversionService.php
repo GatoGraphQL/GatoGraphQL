@@ -10,7 +10,7 @@ use PoPSchema\CustomPosts\Types\Status;
 class CMSDataConversionService implements CMSDataConversionServiceInterface
 {
     use BasicServiceTrait;
-    
+
     public const HOOK_STATUS_QUERY_ARG_VALUE = __CLASS__ . ':status-query-arg-value';
 
     public function convertCustomPostStatusFromPoPToCMS(string $status): string
