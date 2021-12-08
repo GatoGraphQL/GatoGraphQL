@@ -7,10 +7,10 @@ namespace PoPWPSchema\CustomPosts\SchemaHooks;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\HookNames;
 use PoP\Hooks\AbstractHookSet;
-use PoPSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTypeResolver;
 use PoPWPSchema\CustomPosts\Enums\CustomPostStatus;
 
-class CustomPostStatusEnumTypeHookSet extends AbstractHookSet
+class FilterCustomPostStatusEnumTypeHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
@@ -41,7 +41,7 @@ class CustomPostStatusEnumTypeHookSet extends AbstractHookSet
         array $enumValues,
         EnumTypeResolverInterface $enumTypeResolver,
     ): array {
-        if (!($enumTypeResolver instanceof CustomPostStatusEnumTypeResolver)) {
+        if (!($enumTypeResolver instanceof FilterCustomPostStatusEnumTypeResolver)) {
             return $enumValues;
         }
         return array_merge(
@@ -61,7 +61,7 @@ class CustomPostStatusEnumTypeHookSet extends AbstractHookSet
         array $adminEnumValues,
         EnumTypeResolverInterface $enumTypeResolver,
     ): array {
-        if (!($enumTypeResolver instanceof CustomPostStatusEnumTypeResolver)) {
+        if (!($enumTypeResolver instanceof FilterCustomPostStatusEnumTypeResolver)) {
             return $adminEnumValues;
         }
         return array_merge(
@@ -79,7 +79,7 @@ class CustomPostStatusEnumTypeHookSet extends AbstractHookSet
         EnumTypeResolverInterface $enumTypeResolver,
         string $enumValue
     ): ?string {
-        if (!($enumTypeResolver instanceof CustomPostStatusEnumTypeResolver)) {
+        if (!($enumTypeResolver instanceof FilterCustomPostStatusEnumTypeResolver)) {
             return $enumValueDescription;
         }
         return match ($enumValue) {
