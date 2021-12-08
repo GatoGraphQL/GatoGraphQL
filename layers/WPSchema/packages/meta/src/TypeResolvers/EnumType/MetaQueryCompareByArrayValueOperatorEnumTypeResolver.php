@@ -37,9 +37,6 @@ class MetaQueryCompareByArrayValueOperatorEnumTypeResolver extends AbstractEnumT
         ];
     }
 
-    /**
-     * @return string[]
-     */
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {

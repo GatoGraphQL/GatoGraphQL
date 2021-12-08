@@ -102,7 +102,7 @@ class MetaQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeR
      */
     public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass|array $inputValue): void
     {
-        /** @var $inputValue array */
+        /** @var array $inputValue */
         $metaQuery = [];
         foreach ($inputValue as $inputValueElem) {
             $metaQueryElem = [];
