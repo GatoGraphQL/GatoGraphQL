@@ -20,6 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoPSchema\Meta\Component::class,
+            \PoPWPSchema\SchemaCommons\Component::class,
         ];
     }
 }
