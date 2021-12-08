@@ -6,22 +6,22 @@ namespace PoPWPSchema\Meta\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\NumericScalarTypeResolver;
 use PoPWPSchema\Meta\Constants\MetaQueryCompareByOperators;
 use PoPWPSchema\Meta\TypeResolvers\EnumType\MetaQueryCompareByNumericValueOperatorEnumTypeResolver;
 
 class MetaQueryCompareByNumericValueInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
-    private ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
+    private ?NumericScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
     private ?MetaQueryCompareByNumericValueOperatorEnumTypeResolver $metaQueryCompareByNumericValueOperatorEnumTypeResolver = null;
 
-    final public function setAnyBuiltInScalarScalarTypeResolver(AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver): void
+    final public function setNumericScalarTypeResolver(NumericScalarTypeResolver $anyBuiltInScalarScalarTypeResolver): void
     {
         $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
     }
-    final protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
+    final protected function getNumericScalarTypeResolver(): NumericScalarTypeResolver
     {
-        return $this->anyBuiltInScalarScalarTypeResolver ??= $this->instanceManager->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
+        return $this->anyBuiltInScalarScalarTypeResolver ??= $this->instanceManager->getInstance(NumericScalarTypeResolver::class);
     }
     final public function setMetaQueryCompareByNumericValueOperatorEnumTypeResolver(MetaQueryCompareByNumericValueOperatorEnumTypeResolver $metaQueryCompareByNumericValueOperatorEnumTypeResolver): void
     {
@@ -40,7 +40,7 @@ class MetaQueryCompareByNumericValueInputObjectTypeResolver extends AbstractInpu
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            'value' => $this->getAnyBuiltInScalarScalarTypeResolver(),
+            'value' => $this->getNumericScalarTypeResolver(),
             'operator' => $this->getMetaQueryCompareByNumericValueOperatorEnumTypeResolver(),
         ];
     }
