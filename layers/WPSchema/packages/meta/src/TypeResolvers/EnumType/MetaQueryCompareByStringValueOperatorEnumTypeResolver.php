@@ -12,16 +12,16 @@ use PoPWPSchema\Meta\Constants\MetaQueryCompareByOperators;
  *
  * @see https://developer.wordpress.org/reference/classes/wp_meta_query/
  */
-class MetaQueryCompareBySingleValueOperatorEnumTypeResolver extends AbstractEnumTypeResolver
+class MetaQueryCompareByStringValueOperatorEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'MetaQueryCompareBySingleValueOperator';
+        return 'MetaQueryCompareByStringValueOperator';
     }
 
     public function getTypeDescription(): string
     {
-        return $this->getTranslationAPI()->__('Operators to compare against a single value', 'meta');
+        return $this->getTranslationAPI()->__('Operators to compare against a string value', 'meta');
     }
 
     /**
@@ -32,10 +32,6 @@ class MetaQueryCompareBySingleValueOperatorEnumTypeResolver extends AbstractEnum
         return [
             MetaQueryCompareByOperators::EQUALS,
             MetaQueryCompareByOperators::NOT_EQUALS,
-            MetaQueryCompareByOperators::GREATER_THAN,
-            MetaQueryCompareByOperators::GREATER_THAN_OR_EQUAL,
-            MetaQueryCompareByOperators::LESS_THAN,
-            MetaQueryCompareByOperators::LESS_THAN_OR_EQUAL,
             MetaQueryCompareByOperators::LIKE,
             MetaQueryCompareByOperators::NOT_LIKE,
             MetaQueryCompareByOperators::REGEXP,
@@ -49,10 +45,6 @@ class MetaQueryCompareBySingleValueOperatorEnumTypeResolver extends AbstractEnum
         return match ($enumValue) {
             MetaQueryCompareByOperators::EQUALS => '\'=\'',
             MetaQueryCompareByOperators::NOT_EQUALS => '\'!=\'',
-            MetaQueryCompareByOperators::GREATER_THAN => '\'>\'',
-            MetaQueryCompareByOperators::GREATER_THAN_OR_EQUAL => '\'>=\'',
-            MetaQueryCompareByOperators::LESS_THAN => '\'<\'',
-            MetaQueryCompareByOperators::LESS_THAN_OR_EQUAL => '\'<=\'',
             MetaQueryCompareByOperators::LIKE => '\'LIKE\'',
             MetaQueryCompareByOperators::NOT_LIKE => '\'NOT LIKE\'',
             MetaQueryCompareByOperators::REGEXP => '\'REGEXP\'',

@@ -8,12 +8,12 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoPWPSchema\Meta\Constants\MetaQueryCompareByOperators;
-use PoPWPSchema\Meta\TypeResolvers\EnumType\MetaQueryCompareBySingleValueOperatorEnumTypeResolver;
+use PoPWPSchema\Meta\TypeResolvers\EnumType\MetaQueryCompareByNumericValueOperatorEnumTypeResolver;
 
-class MetaQueryCompareBySingleValueInputObjectTypeResolver extends AbstractInputObjectTypeResolver
+class MetaQueryCompareByNumericValueInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
     private ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
-    private ?MetaQueryCompareBySingleValueOperatorEnumTypeResolver $metaQueryCompareBySingleValueOperatorEnumTypeResolver = null;
+    private ?MetaQueryCompareByNumericValueOperatorEnumTypeResolver $metaQueryCompareByNumericValueOperatorEnumTypeResolver = null;
 
     final public function setAnyBuiltInScalarScalarTypeResolver(AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver): void
     {
@@ -23,25 +23,25 @@ class MetaQueryCompareBySingleValueInputObjectTypeResolver extends AbstractInput
     {
         return $this->anyBuiltInScalarScalarTypeResolver ??= $this->instanceManager->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
     }
-    final public function setMetaQueryCompareBySingleValueOperatorEnumTypeResolver(MetaQueryCompareBySingleValueOperatorEnumTypeResolver $metaQueryCompareBySingleValueOperatorEnumTypeResolver): void
+    final public function setMetaQueryCompareByNumericValueOperatorEnumTypeResolver(MetaQueryCompareByNumericValueOperatorEnumTypeResolver $metaQueryCompareByNumericValueOperatorEnumTypeResolver): void
     {
-        $this->metaQueryCompareBySingleValueOperatorEnumTypeResolver = $metaQueryCompareBySingleValueOperatorEnumTypeResolver;
+        $this->metaQueryCompareByNumericValueOperatorEnumTypeResolver = $metaQueryCompareByNumericValueOperatorEnumTypeResolver;
     }
-    final protected function getMetaQueryCompareBySingleValueOperatorEnumTypeResolver(): MetaQueryCompareBySingleValueOperatorEnumTypeResolver
+    final protected function getMetaQueryCompareByNumericValueOperatorEnumTypeResolver(): MetaQueryCompareByNumericValueOperatorEnumTypeResolver
     {
-        return $this->metaQueryCompareBySingleValueOperatorEnumTypeResolver ??= $this->instanceManager->getInstance(MetaQueryCompareBySingleValueOperatorEnumTypeResolver::class);
+        return $this->metaQueryCompareByNumericValueOperatorEnumTypeResolver ??= $this->instanceManager->getInstance(MetaQueryCompareByNumericValueOperatorEnumTypeResolver::class);
     }
 
     public function getTypeName(): string
     {
-        return 'MetaQueryCompareBySingleValueInput';
+        return 'MetaQueryCompareByNumericValueInput';
     }
 
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
             'value' => $this->getAnyBuiltInScalarScalarTypeResolver(),
-            'operator' => $this->getMetaQueryCompareBySingleValueOperatorEnumTypeResolver(),
+            'operator' => $this->getMetaQueryCompareByNumericValueOperatorEnumTypeResolver(),
         ];
     }
 
