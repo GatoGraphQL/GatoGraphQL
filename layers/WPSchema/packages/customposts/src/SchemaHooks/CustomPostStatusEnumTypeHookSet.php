@@ -49,6 +49,7 @@ class CustomPostStatusEnumTypeHookSet extends AbstractHookSet
             [
                 CustomPostStatus::FUTURE,
                 CustomPostStatus::PRIVATE,
+                CustomPostStatus::ANY,
             ]
         );
     }
@@ -68,6 +69,7 @@ class CustomPostStatusEnumTypeHookSet extends AbstractHookSet
             [
                 CustomPostStatus::FUTURE,
                 CustomPostStatus::PRIVATE,
+                CustomPostStatus::ANY,
             ]
         );
     }
@@ -83,6 +85,7 @@ class CustomPostStatusEnumTypeHookSet extends AbstractHookSet
         return match ($enumValue) {
             CustomPostStatus::FUTURE => $this->getTranslationAPI()->__('Future content - custom posts to publish in the future', 'customposts'),
             CustomPostStatus::PRIVATE => $this->getTranslationAPI()->__('Private content - not visible to users who are not logged in', 'customposts'),
+            CustomPostStatus::ANY => $this->getTranslationAPI()->__('Custom posts with any status', 'customposts'),
             default => $enumValueDescription,
         };
     }

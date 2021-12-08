@@ -8,4 +8,5 @@ class CustomPostStatus
 {
     public const FUTURE = 'future';
     public const PRIVATE = 'private';
+    public const ANY = 'any';
 }
