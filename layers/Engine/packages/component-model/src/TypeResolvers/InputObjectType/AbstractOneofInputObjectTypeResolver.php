@@ -26,4 +26,19 @@ abstract class AbstractOneofInputObjectTypeResolver extends AbstractInputObjectT
         }
         return parent::coerceInputObjectValue($inputValue);
     }
+    
+    /**
+     * Only validate the single provided entry, ignoring potential
+     * errors from the unprovided entries.
+     *
+     * @return array<string, InputTypeResolverInterface>
+     */
+    protected function getInputFieldNameTypeResolversToCoerce(stdClass $inputValue): array
+    {
+        $inputFieldNameTypeResolvers = parent::getInputFieldNameTypeResolversToCoerce($inputValue);
+        $inputField = key((array)$inputValue);
+        return [
+            $inputField => $inputFieldNameTypeResolvers[$inputField],
+        ];
+    }
 }

@@ -189,10 +189,23 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $this->coerceInputObjectValue($inputValue);
     }
 
+    /**
+     * Indicate which entries must be coerced/validated.
+     * By default, it's all of them, but allow the OneofInputObjectTypeResolver
+     * to only validate the single provided entry, ignoring potential
+     * errors from the unprovided entries.
+     *
+     * @return array<string, InputTypeResolverInterface>
+     */
+    protected function getInputFieldNameTypeResolversToCoerce(stdClass $inputValue): array
+    {
+        return $this->getConsolidatedInputFieldNameTypeResolvers();
+    }
+
     protected function coerceInputObjectValue(stdClass $inputValue): stdClass|Error
     {
         $coercedInputValue = new stdClass();
-        $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
+        $inputFieldNameTypeResolvers = $this->getInputFieldNameTypeResolversToCoerce($inputValue);
 
         /**
          * Inject all properties with default value
