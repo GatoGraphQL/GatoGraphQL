@@ -25,11 +25,14 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
     }
 
     /**
+     * @param array<string,mixed> $options
      * @throws InvalidArgumentException When the option does not exist, or is not in the allowlist
      */
-    final public function getOption(string $name): mixed
+    final public function getOption(string $name, array $options = []): mixed
     {
-        $this->assertIsEntryAllowed($name);
+        if ($options['assert-is-entry-allowed'] ?? null) {
+            $this->assertIsOptionAllowed($name);
+        }
         return $this->doGetOption($name);
     }
 
@@ -45,10 +48,10 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
         return ComponentConfiguration::getSettingsBehavior();
     }
 
-    final public function validateIsEntryAllowed(string $key): bool
+    final public function validateIsOptionAllowed(string $name): bool
     {
         return $this->getAllowOrDenySettingsService()->isEntryAllowed(
-            $key,
+            $name,
             $this->getAllowOrDenyOptionEntries(),
             $this->getAllowOrDenyOptionBehavior()
         );
@@ -59,9 +62,9 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
      *
      * @throws InvalidArgumentException
      */
-    final protected function assertIsEntryAllowed(string $name): void
+    final protected function assertIsOptionAllowed(string $name): void
     {
-        if (!$this->validateIsEntryAllowed($name)) {
+        if (!$this->validateIsOptionAllowed($name)) {
             throw new InvalidArgumentException(
                 sprintf(
                     $this->getTranslationAPI()->__('There is no option with name \'%s\'', 'settings'),

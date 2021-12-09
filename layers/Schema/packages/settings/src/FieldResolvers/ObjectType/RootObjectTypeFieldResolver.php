@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Settings\FieldResolvers\ObjectType;
 
-use InvalidArgumentException;
-use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -102,6 +100,29 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
+    protected function doResolveSchemaValidationErrorDescriptions(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        array $fieldArgs
+    ): array {
+        // if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
+        switch ($fieldName) {
+            case 'option':
+                if (!$this->getSettingsTypeAPI()->validateIsOptionAllowed($fieldArgs['name'])) {
+                    return [
+                        sprintf(
+                            $this->getTranslationAPI()->__('There is no option with name \'%s\'', 'settings'),
+                            $fieldArgs['name']
+                        ),
+                    ];
+                }
+                break;
+        }
+        // }
+
+        return parent::doResolveSchemaValidationErrorDescriptions($objectTypeResolver, $fieldName, $fieldArgs);
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
@@ -119,16 +140,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         switch ($fieldName) {
             case 'option':
-                try {
-                    $value = $this->getSettingsTypeAPI()->getOption($fieldArgs['name']);
-                } catch (InvalidArgumentException $e) {
-                    // If the option is not in the allowlist, it will throw an exception
-                    return new Error(
-                        'option-name-not-exists',
-                        $e->getMessage()
-                    );
-                }
-                return $value;
+                return $this->getSettingsTypeAPI()->getOption($fieldArgs['name']);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
