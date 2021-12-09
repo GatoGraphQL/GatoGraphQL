@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\TagsWP\TypeAPIs;
 
-use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\CMS\CMSHelperServiceInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -17,8 +16,6 @@ use WP_Taxonomy;
  */
 abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPIInterface
 {
-    use BasicServiceTrait;
-
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     private ?CMSHelperServiceInterface $cmsHelperService = null;
@@ -115,68 +112,13 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
 
     public function convertTagsQuery(array $query, array $options = []): array
     {
-        $query['taxonomy'] = $this->getTagTaxonomyName();
-
-        if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
-            if ($return_type === ReturnTypes::IDS) {
-                $query['fields'] = 'ids';
-            } elseif ($return_type === ReturnTypes::NAMES) {
-                $query['fields'] = 'names';
-            }
-        }
-
-        if (isset($query['hide-empty'])) {
-            $query['hide_empty'] = $query['hide-empty'];
-            unset($query['hide-empty']);
-        } else {
-            // By default: do not hide empty tags
-            $query['hide_empty'] = false;
-        }
+        $query = $this->convertTaxonomiesQuery($query, $options);
 
         // Convert the parameters
-        if (isset($query['include']) && is_array($query['include'])) {
-            // It can be an array or a string
-            $query['include'] = implode(',', $query['include']);
-        }
-        if (isset($query['exclude-ids'])) {
-            $query['exclude'] = $query['exclude-ids'];
-            unset($query['exclude-ids']);
-        }
-        if (isset($query['order'])) {
-            $query['order'] = \esc_sql($query['order']);
-        }
-        if (isset($query['orderby'])) {
-            // This param can either be a string or an array. Eg:
-            // $query['orderby'] => array('date' => 'DESC', 'title' => 'ASC');
-            $query['orderby'] = \esc_sql($query['orderby']);
-        }
-        if (isset($query['offset'])) {
-            // Same param name, so do nothing
-        }
-        if (isset($query['limit'])) {
-            $limit = (int) $query['limit'];
-            // To bring all results, get_tags needs "number => 0" instead of -1
-            $query['number'] = ($limit == -1) ? 0 : $limit;
-            unset($query['limit']);
-        }
-        if (isset($query['search'])) {
-            // Same param name, so do nothing
-        }
-        if (isset($query['slugs'])) {
-            $query['slug'] = $query['slugs'];
-            unset($query['slugs']);
-        }
-        if (isset($query['slug'])) {
-            // Same param name, so do nothing
-        }
+        $query['taxonomy'] = $this->getTagTaxonomyName();
 
         return $this->getHooksAPI()->applyFilters(
-            TaxonomyTypeAPI::HOOK_QUERY,
-            $this->getHooksAPI()->applyFilters(
-                self::HOOK_QUERY,
-                $query,
-                $options
-            ),
+            self::HOOK_QUERY,
             $query,
             $options
         );
