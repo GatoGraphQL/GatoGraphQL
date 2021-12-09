@@ -28,7 +28,7 @@ class TaxonomyOrderByEnumTypeResolver extends AbstractEnumTypeResolver
             TaxonomyOrderBy::COUNT,
             TaxonomyOrderBy::NONE,
             TaxonomyOrderBy::INCLUDE,
-            TaxonomyOrderBy::SLUG__IN,
+            TaxonomyOrderBy::SLUG_IN,
         ];
     }
 
@@ -43,7 +43,7 @@ class TaxonomyOrderByEnumTypeResolver extends AbstractEnumTypeResolver
             TaxonomyOrderBy::COUNT => $this->getTranslationAPI()->__('Order by number of objects associated with the term', 'taxonomies'),
             TaxonomyOrderBy::NONE => $this->getTranslationAPI()->__('Order by none, i.e. omit the ordering', 'taxonomies'),
             TaxonomyOrderBy::INCLUDE => $this->getTranslationAPI()->__('Match the \'order\' of the $include param', 'taxonomies'),
-            TaxonomyOrderBy::SLUG__IN => $this->getTranslationAPI()->__('Match the \'order\' of the $slug param', 'taxonomies'),
+            TaxonomyOrderBy::SLUG_IN => $this->getTranslationAPI()->__('Match the \'order\' of the $slug param', 'taxonomies'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }
