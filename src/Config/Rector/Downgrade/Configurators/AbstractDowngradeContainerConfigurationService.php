@@ -19,10 +19,16 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
     {
         $this->containerConfigurator->import(DowngradeLevelSetList::DOWN_TO_PHP_71);
 
-        // Must also replace DateTimeInterface::ATOM for PHP 7.1
-        $services = $this->containerConfigurator->services();
-        $services->set(RenameClassConstFetchRector::class)
-            ->configure([new RenameClassAndConstFetch(DateTimeInterface::class, 'ATOM', PolyfillDateTimeInterface::class, 'ATOM')]);
+        /**
+         * @todo Uncomment this code
+         * Currently it doesn't work, maybe because `RenameClassConstFetchRector`
+         * doesn't handle interfaces, so it doesn't replace `DateTimeInterface`
+         * Solution: Create a similar rule
+         */
+        // // Must also replace DateTimeInterface::ATOM for PHP 7.1
+        // $services = $this->containerConfigurator->services();
+        // $services->set(RenameClassConstFetchRector::class)
+        //     ->configure([new RenameClassAndConstFetch(DateTimeInterface::class, 'ATOM', PolyfillDateTimeInterface::class, 'ATOM')]);
 
         $parameters = $this->containerConfigurator->parameters();
 
