@@ -12,4 +12,9 @@ interface SettingsTypeAPIInterface
      * @throws InvalidArgumentException When the option does not exist, or is not in the allowlist
      */
     public function getOption(string $name): mixed;
+    /**
+     * @return string[]
+     */
+    public function getAllowOrDenyOptionEntries(): array;
+    public function getAllowOrDenyOptionBehavior(): string;
 }

@@ -29,26 +29,39 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
      */
     final public function getOption(string $name): mixed
     {
-        /**
-         * Check if the allow/denylist validation fails
-         * Compare for full match or regex
-         */
-        $entries = ComponentConfiguration::getSettingsEntries();
-        $behavior = ComponentConfiguration::getSettingsBehavior();
-        $this->assertIsEntryAllowed($entries, $behavior, $name);
+        $this->assertIsEntryAllowed($name);
         return $this->doGetOption($name);
     }
 
     /**
+     * @return string[]
+     */
+    public function getAllowOrDenyOptionEntries(): array
+    {
+        return ComponentConfiguration::getSettingsEntries();
+    }
+    public function getAllowOrDenyOptionBehavior(): string
+    {
+        return ComponentConfiguration::getSettingsBehavior();
+    }
+
+    final public function validateIsEntryAllowed(string $key): bool
+    {
+        return $this->getAllowOrDenySettingsService()->isEntryAllowed(
+            $key,
+            $this->getAllowOrDenyOptionEntries(),
+            $this->getAllowOrDenyOptionBehavior()
+        );
+    }
+
+    /**
      * If the allow/denylist validation fails, throw an exception.
-     * If the key is allowed but non-existent, return `null`.
-     * Otherwise, return the value.
      *
      * @throws InvalidArgumentException
      */
-    final protected function assertIsEntryAllowed(array $entries, string $behavior, string $name): void
+    final protected function assertIsEntryAllowed(string $name): void
     {
-        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($name, $entries, $behavior)) {
+        if (!$this->validateIsEntryAllowed($name)) {
             throw new InvalidArgumentException(
                 sprintf(
                     $this->getTranslationAPI()->__('There is no option with name \'%s\'', 'settings'),
