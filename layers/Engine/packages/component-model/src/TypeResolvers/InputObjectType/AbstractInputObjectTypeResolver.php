@@ -325,29 +325,10 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $inputFieldIsArrayOfArraysType,
             );
             if ($maybeCoercedInputFieldValueErrors !== []) {
-                // Prepend the arg path to the error(s)
-                foreach ($maybeCoercedInputFieldValueErrors as $error) {
-                    $this->prependArgPathToError($error, [$inputFieldName]);
-                }
-
-                // Only 1 Error: bubble it up directly
-                if (count($maybeCoercedInputFieldValueErrors) === 1) {
-                    $errors[] = $maybeCoercedInputFieldValueErrors[0];
-                    continue;
-                }
-
-                // Many nested errors: Create a new Error with all of them
-                $errors[] = new Error(
-                    $this->getErrorCode(),
-                    sprintf(
-                        $this->getTranslationAPI()->__('Casting input field \'%s\' of type \'%s\' produced errors', 'component-model'),
-                        $inputFieldName,
-                        $inputFieldTypeResolver->getMaybeNamespacedTypeName()
-                    ),
-                    [
-                        Tokens::ARGUMENT_PATH => [$inputFieldName],
-                    ],
-                    $maybeCoercedInputFieldValueErrors
+                $errors[] = $this->convergeCoercedInputFieldValueError(
+                    $inputFieldTypeResolver,
+                    $inputFieldName,
+                    $maybeCoercedInputFieldValueErrors,
                 );
                 continue;
             }
@@ -398,6 +379,41 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
         // Add all missing properties which have a default value
         return $coercedInputValue;
+    }
+
+    /**
+     * Converge multiple Errors as nested under a single Error
+     *
+     * @param Error[] $coercedInputFieldValueErrors
+     */
+    protected function convergeCoercedInputFieldValueError(
+        InputTypeResolverInterface $inputFieldTypeResolver,
+        string $inputFieldName,
+        array $coercedInputFieldValueErrors,
+    ): Error {
+        // Prepend the arg path to the error(s)
+        foreach ($coercedInputFieldValueErrors as $error) {
+            $this->prependArgPathToError($error, [$inputFieldName]);
+        }
+
+        // Only 1 Error: bubble it up directly
+        if (count($coercedInputFieldValueErrors) === 1) {
+            return $coercedInputFieldValueErrors[0];
+        }
+
+        // Many nested errors: Create a new Error with all of them
+        return new Error(
+            $this->getErrorCode(),
+            sprintf(
+                $this->getTranslationAPI()->__('Casting input field \'%s\' of type \'%s\' produced errors', 'component-model'),
+                $inputFieldName,
+                $inputFieldTypeResolver->getMaybeNamespacedTypeName()
+            ),
+            [
+                Tokens::ARGUMENT_PATH => [$inputFieldName],
+            ],
+            $coercedInputFieldValueErrors
+        );
     }
 
     /**
