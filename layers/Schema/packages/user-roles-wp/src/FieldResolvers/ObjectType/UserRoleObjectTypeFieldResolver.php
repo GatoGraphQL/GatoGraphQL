@@ -64,7 +64,7 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
     {
         return match ($fieldName) {
             'name' => SchemaTypeModifiers::NON_NULLABLE,
-            'capabilities' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            'capabilities' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }

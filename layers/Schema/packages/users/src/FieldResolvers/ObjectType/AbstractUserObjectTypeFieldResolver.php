@@ -99,7 +99,7 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return match ($fieldName) {
             'userCount' => SchemaTypeModifiers::NON_NULLABLE,
-            'users' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            'users' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }

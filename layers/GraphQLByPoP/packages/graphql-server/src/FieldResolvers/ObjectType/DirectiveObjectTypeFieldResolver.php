@@ -106,7 +106,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 => SchemaTypeModifiers::NON_NULLABLE,
             'locations',
             'args'
-                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };

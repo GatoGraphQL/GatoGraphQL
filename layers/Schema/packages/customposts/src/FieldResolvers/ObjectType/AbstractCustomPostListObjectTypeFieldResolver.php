@@ -81,7 +81,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     {
         return match ($fieldName) {
             'customPostCount' => SchemaTypeModifiers::NON_NULLABLE,
-            'customPosts' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            'customPosts' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }

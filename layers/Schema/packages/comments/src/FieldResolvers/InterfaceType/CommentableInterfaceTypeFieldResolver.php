@@ -112,7 +112,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
             'commentCount'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'comments'
-                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($fieldName),
         };

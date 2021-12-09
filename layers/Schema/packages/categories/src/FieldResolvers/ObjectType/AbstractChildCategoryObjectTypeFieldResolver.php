@@ -95,7 +95,7 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
                 => SchemaTypeModifiers::NON_NULLABLE,
             'children',
             'childNames'
-                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
