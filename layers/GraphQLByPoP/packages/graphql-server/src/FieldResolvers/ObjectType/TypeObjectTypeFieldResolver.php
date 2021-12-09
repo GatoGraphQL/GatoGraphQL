@@ -161,7 +161,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'possibleTypes',
             'enumValues',
             'inputFields'
-                => SchemaTypeModifiers::IS_ARRAY,
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
