@@ -62,4 +62,21 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
 
         return parent::doResolveSchemaValidationErrorDescriptions($objectTypeResolver, $fieldName, $fieldArgs);
     }
+
+    public function validateResolvedFieldType(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        array $fieldArgs,
+    ): bool {
+        switch ($fieldName) {
+            case 'metaValue':
+            case 'metaValues':
+                return true;
+        }
+        return parent::validateResolvedFieldType(
+            $objectTypeResolver,
+            $fieldName,
+            $fieldArgs,
+        );
+    }
 }
