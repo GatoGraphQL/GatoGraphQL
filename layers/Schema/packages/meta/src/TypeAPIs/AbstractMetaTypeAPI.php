@@ -23,13 +23,6 @@ abstract class AbstractMetaTypeAPI implements MetaTypeAPIInterface
         return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
     }
 
-    /**
-     * If the allow/denylist validation fails, throw an exception.
-     * If the key is allowed but non-existent, return `null`.
-     * Otherwise, return the value.
-     *
-     * @param string[] $entries
-     */
     final public function validateIsEntryAllowed(string $key): bool
     {
         return $this->getAllowOrDenySettingsService()->isEntryAllowed(
@@ -41,10 +34,6 @@ abstract class AbstractMetaTypeAPI implements MetaTypeAPIInterface
 
     /**
      * If the allow/denylist validation fails, throw an exception.
-     * If the key is allowed but non-existent, return `null`.
-     * Otherwise, return the value.
-     *
-     * @param string[] $entries
      *
      * @throws InvalidArgumentException
      */
