@@ -13,15 +13,15 @@ use PoPWPSchema\Meta\TypeResolvers\InputObjectType\MetaQueryInputObjectTypeResol
 
 abstract class AbstractAddMetaQueryInputFieldsInputObjectTypeHookSet extends AbstractHookSet
 {
-    private ?MetaQueryInputObjectTypeResolver $MetaQueryInputObjectTypeResolver = null;
+    private ?MetaQueryInputObjectTypeResolver $metaQueryInputObjectTypeResolver = null;
 
-    final public function setMetaQueryInputObjectTypeResolver(MetaQueryInputObjectTypeResolver $MetaQueryInputObjectTypeResolver): void
+    final public function setMetaQueryInputObjectTypeResolver(MetaQueryInputObjectTypeResolver $metaQueryInputObjectTypeResolver): void
     {
-        $this->MetaQueryInputObjectTypeResolver = $MetaQueryInputObjectTypeResolver;
+        $this->metaQueryInputObjectTypeResolver = $metaQueryInputObjectTypeResolver;
     }
     final protected function getMetaQueryInputObjectTypeResolver(): MetaQueryInputObjectTypeResolver
     {
-        return $this->MetaQueryInputObjectTypeResolver ??= $this->instanceManager->getInstance(MetaQueryInputObjectTypeResolver::class);
+        return $this->metaQueryInputObjectTypeResolver ??= $this->instanceManager->getInstance(MetaQueryInputObjectTypeResolver::class);
     }
 
     protected function init(): void
