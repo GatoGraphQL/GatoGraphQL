@@ -19,13 +19,7 @@ abstract class AbstractCommentMetaTypeAPI extends AbstractMetaTypeAPI implements
      */
     final public function getCommentMeta(string | int $commentID, string $key, bool $single = false): mixed
     {
-        /**
-         * Check if the allow/denylist validation fails
-         * Compare for full match or regex
-         */
-        $entries = ComponentConfiguration::getCommentMetaEntries();
-        $behavior = ComponentConfiguration::getCommentMetaBehavior();
-        $this->assertIsEntryAllowed($entries, $behavior, $key);
+        $this->assertIsEntryAllowed($key);
         return $this->doGetCommentMeta($commentID, $key, $single);
     }
 

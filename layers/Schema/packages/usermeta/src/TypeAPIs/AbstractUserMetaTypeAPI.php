@@ -19,9 +19,7 @@ abstract class AbstractUserMetaTypeAPI extends AbstractMetaTypeAPI implements Us
      */
     final public function getUserMeta(string | int $userID, string $key, bool $single = false): mixed
     {
-        $entries = ComponentConfiguration::getUserMetaEntries();
-        $behavior = ComponentConfiguration::getUserMetaBehavior();
-        $this->assertIsEntryAllowed($entries, $behavior, $key);
+        $this->assertIsEntryAllowed($key);
         return $this->doGetUserMeta($userID, $key, $single);
     }
 

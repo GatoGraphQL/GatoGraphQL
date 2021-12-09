@@ -19,9 +19,7 @@ abstract class AbstractCustomPostMetaTypeAPI extends AbstractMetaTypeAPI impleme
      */
     final public function getCustomPostMeta(string | int $customPostID, string $key, bool $single = false): mixed
     {
-        $entries = ComponentConfiguration::getCustomPostMetaEntries();
-        $behavior = ComponentConfiguration::getCustomPostMetaBehavior();
-        $this->assertIsEntryAllowed($entries, $behavior, $key);
+        $this->assertIsEntryAllowed($key);
         return $this->doGetCustomPostMeta($customPostID, $key, $single);
     }
 

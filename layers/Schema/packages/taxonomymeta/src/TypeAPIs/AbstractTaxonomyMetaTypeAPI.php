@@ -19,9 +19,7 @@ abstract class AbstractTaxonomyMetaTypeAPI extends AbstractMetaTypeAPI implement
      */
     final public function getTaxonomyTermMeta(string | int $termID, string $key, bool $single = false): mixed
     {
-        $entries = ComponentConfiguration::getTaxonomyMetaEntries();
-        $behavior = ComponentConfiguration::getTaxonomyMetaBehavior();
-        $this->assertIsEntryAllowed($entries, $behavior, $key);
+        $this->assertIsEntryAllowed($key);
         return $this->doGetTaxonomyMeta($termID, $key, $single);
     }
 

@@ -48,9 +48,9 @@ abstract class AbstractMetaTypeAPI implements MetaTypeAPIInterface
      *
      * @throws InvalidArgumentException
      */
-    final protected function assertIsEntryAllowed(array $entries, string $behavior, string $key): bool
+    final protected function assertIsEntryAllowed(string $key): bool
     {
-        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($key, $entries, $behavior)) {
+        if (!$this->validateIsEntryAllowed($key)) {
             throw new InvalidArgumentException(
                 sprintf(
                     $this->getTranslationAPI()->__('There is no meta with key \'%s\'', 'commentmeta'),
