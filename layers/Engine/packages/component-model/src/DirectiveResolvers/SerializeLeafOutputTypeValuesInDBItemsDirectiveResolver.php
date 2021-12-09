@@ -144,23 +144,25 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
         }
 
         // If the value is an array of arrays, then serialize each subelement to the item type
+        // To make sure the array is not associative (on which case it should be treated
+        // as a JSONObject instead of an array), also apply `array_values`
         if ($fieldLeafOutputTypeIsArrayOfArrays) {
-            return array_map(
+            return array_values(array_map(
                 // If it contains a null value, return it as is
-                fn (?array $arrayValueElem) => $arrayValueElem === null ? null : array_map(
+                fn (?array $arrayValueElem) => $arrayValueElem === null ? null : array_values(array_map(
                     fn (mixed $arrayOfArraysValueElem) => $arrayOfArraysValueElem === null ? null : $fieldLeafOutputTypeResolver->serialize($arrayOfArraysValueElem),
                     $arrayValueElem
-                ),
+                )),
                 $value
-            );
+            ));
         }
 
         // If the value is an array, then serialize each element to the item type
         if ($fieldLeafOutputTypeIsArray) {
-            return array_map(
+            return array_values(array_map(
                 fn (mixed $arrayValueElem) => $arrayValueElem === null ? null : $fieldLeafOutputTypeResolver->serialize($arrayValueElem),
                 $value
-            );
+            ));
         }
 
         // Otherwise, simply serialize the given value directly
