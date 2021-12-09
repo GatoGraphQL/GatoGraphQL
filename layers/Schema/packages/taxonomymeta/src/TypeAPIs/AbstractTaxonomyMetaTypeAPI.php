@@ -11,18 +11,32 @@ use PoPSchema\TaxonomyMeta\ComponentConfiguration;
 abstract class AbstractTaxonomyMetaTypeAPI extends AbstractMetaTypeAPI implements TaxonomyMetaTypeAPIInterface
 {
     /**
-     * If the allow/denylist validation fails, throw an exception.
+     * If the allow/denylist validation fails, and passing option "assert-is-meta-key-allowed",
+     * then throw an exception.
      * If the key is allowed but non-existent, return `null`.
      * Otherwise, return the value.
      *
+     * @param array<string,mixed> $options
      * @throws InvalidArgumentException
      */
-    final public function getTaxonomyTermMeta(string | int $termID, string $key, bool $single = false): mixed
+    final public function getTaxonomyTermMeta(string | int $termID, string $key, bool $single = false, array $options = []): mixed
     {
-        $entries = ComponentConfiguration::getTaxonomyMetaEntries();
-        $behavior = ComponentConfiguration::getTaxonomyMetaBehavior();
-        $this->assertIsEntryAllowed($entries, $behavior, $key);
+        if ($options['assert-is-meta-key-allowed'] ?? null) {
+            $this->assertIsMetaKeyAllowed($key);
+        }
         return $this->doGetTaxonomyMeta($termID, $key, $single);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getAllowOrDenyMetaEntries(): array
+    {
+        return ComponentConfiguration::getTaxonomyMetaEntries();
+    }
+    public function getAllowOrDenyMetaBehavior(): string
+    {
+        return ComponentConfiguration::getTaxonomyMetaBehavior();
     }
 
     /**

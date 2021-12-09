@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserMeta\FieldResolvers\ObjectType;
 
-use InvalidArgumentException;
-use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolver;
@@ -56,6 +54,30 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
+    protected function doResolveSchemaValidationErrorDescriptions(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        array $fieldArgs
+    ): array {
+        // if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
+        switch ($fieldName) {
+            case 'metaValue':
+            case 'metaValues':
+                if (!$this->getUserMetaTypeAPI()->validateIsMetaKeyAllowed($fieldArgs['key'])) {
+                    return [
+                        sprintf(
+                            $this->getTranslationAPI()->__('There is no key with name \'%s\'', 'usermeta'),
+                            $fieldArgs['key']
+                        ),
+                    ];
+                }
+                break;
+        }
+        // }
+
+        return parent::doResolveSchemaValidationErrorDescriptions($objectTypeResolver, $fieldName, $fieldArgs);
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
@@ -75,20 +97,11 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'metaValue':
             case 'metaValues':
-                try {
-                    $value = $this->getUserMetaTypeAPI()->getUserMeta(
-                        $objectTypeResolver->getID($user),
-                        $fieldArgs['key'],
-                        $fieldName === 'metaValue'
-                    );
-                } catch (InvalidArgumentException $e) {
-                    // If the meta key is not in the allowlist, it will throw an exception
-                    return new Error(
-                        'meta-key-not-exists',
-                        $e->getMessage()
-                    );
-                }
-                return $value;
+                return $this->getUserMetaTypeAPI()->getUserMeta(
+                    $objectTypeResolver->getID($user),
+                    $fieldArgs['key'],
+                    $fieldName === 'metaValue'
+                );
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

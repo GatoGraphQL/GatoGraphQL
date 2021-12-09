@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 
-abstract class AbstractMetaTypeAPI
+abstract class AbstractMetaTypeAPI implements MetaTypeAPIInterface
 {
     use BasicServiceTrait;
 
@@ -23,18 +23,23 @@ abstract class AbstractMetaTypeAPI
         return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
     }
 
+    final public function validateIsMetaKeyAllowed(string $key): bool
+    {
+        return $this->getAllowOrDenySettingsService()->isEntryAllowed(
+            $key,
+            $this->getAllowOrDenyMetaEntries(),
+            $this->getAllowOrDenyMetaBehavior()
+        );
+    }
+
     /**
      * If the allow/denylist validation fails, throw an exception.
-     * If the key is allowed but non-existent, return `null`.
-     * Otherwise, return the value.
-     *
-     * @param string[] $entries
      *
      * @throws InvalidArgumentException
      */
-    final protected function assertIsEntryAllowed(array $entries, string $behavior, string $key): bool
+    final protected function assertIsMetaKeyAllowed(string $key): void
     {
-        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($key, $entries, $behavior)) {
+        if (!$this->validateIsMetaKeyAllowed($key)) {
             throw new InvalidArgumentException(
                 sprintf(
                     $this->getTranslationAPI()->__('There is no meta with key \'%s\'', 'commentmeta'),
@@ -42,6 +47,5 @@ abstract class AbstractMetaTypeAPI
                 )
             );
         }
-        return true;
     }
 }

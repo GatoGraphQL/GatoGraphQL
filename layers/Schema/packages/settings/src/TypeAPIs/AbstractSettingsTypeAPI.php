@@ -25,30 +25,49 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
     }
 
     /**
-     * @throws InvalidArgumentException When the option does not exist, or is not in the allowlist
+     * If the allow/denylist validation fails, and passing option "assert-is-option-allowed",
+     * then throw an exception.
+     *
+     * @param array<string,mixed> $options
+     * @throws InvalidArgumentException When the option name is not in the allowlist. Enabled by passing option "assert-is-option-allowed"
      */
-    final public function getOption(string $name): mixed
+    final public function getOption(string $name, array $options = []): mixed
     {
-        /**
-         * Check if the allow/denylist validation fails
-         * Compare for full match or regex
-         */
-        $entries = ComponentConfiguration::getSettingsEntries();
-        $behavior = ComponentConfiguration::getSettingsBehavior();
-        $this->assertIsEntryAllowed($entries, $behavior, $name);
+        if ($options['assert-is-option-allowed'] ?? null) {
+            $this->assertIsOptionAllowed($name);
+        }
         return $this->doGetOption($name);
     }
 
     /**
+     * @return string[]
+     */
+    public function getAllowOrDenyOptionEntries(): array
+    {
+        return ComponentConfiguration::getSettingsEntries();
+    }
+    public function getAllowOrDenyOptionBehavior(): string
+    {
+        return ComponentConfiguration::getSettingsBehavior();
+    }
+
+    final public function validateIsOptionAllowed(string $name): bool
+    {
+        return $this->getAllowOrDenySettingsService()->isEntryAllowed(
+            $name,
+            $this->getAllowOrDenyOptionEntries(),
+            $this->getAllowOrDenyOptionBehavior()
+        );
+    }
+
+    /**
      * If the allow/denylist validation fails, throw an exception.
-     * If the key is allowed but non-existent, return `null`.
-     * Otherwise, return the value.
      *
      * @throws InvalidArgumentException
      */
-    final protected function assertIsEntryAllowed(array $entries, string $behavior, string $name): bool
+    final protected function assertIsOptionAllowed(string $name): void
     {
-        if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($name, $entries, $behavior)) {
+        if (!$this->validateIsOptionAllowed($name)) {
             throw new InvalidArgumentException(
                 sprintf(
                     $this->getTranslationAPI()->__('There is no option with name \'%s\'', 'settings'),
@@ -56,7 +75,6 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
                 )
             );
         }
-        return true;
     }
 
     /**

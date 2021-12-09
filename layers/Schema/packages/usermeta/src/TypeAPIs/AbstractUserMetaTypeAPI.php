@@ -11,18 +11,32 @@ use PoPSchema\UserMeta\ComponentConfiguration;
 abstract class AbstractUserMetaTypeAPI extends AbstractMetaTypeAPI implements UserMetaTypeAPIInterface
 {
     /**
-     * If the allow/denylist validation fails, throw an exception.
+     * If the allow/denylist validation fails, and passing option "assert-is-meta-key-allowed",
+     * then throw an exception.
      * If the key is allowed but non-existent, return `null`.
      * Otherwise, return the value.
      *
+     * @param array<string,mixed> $options
      * @throws InvalidArgumentException
      */
-    final public function getUserMeta(string | int $userID, string $key, bool $single = false): mixed
+    final public function getUserMeta(string | int $userID, string $key, bool $single = false, array $options = []): mixed
     {
-        $entries = ComponentConfiguration::getUserMetaEntries();
-        $behavior = ComponentConfiguration::getUserMetaBehavior();
-        $this->assertIsEntryAllowed($entries, $behavior, $key);
+        if ($options['assert-is-meta-key-allowed'] ?? null) {
+            $this->assertIsMetaKeyAllowed($key);
+        }
         return $this->doGetUserMeta($userID, $key, $single);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getAllowOrDenyMetaEntries(): array
+    {
+        return ComponentConfiguration::getUserMetaEntries();
+    }
+    public function getAllowOrDenyMetaBehavior(): string
+    {
+        return ComponentConfiguration::getUserMetaBehavior();
     }
 
     /**
