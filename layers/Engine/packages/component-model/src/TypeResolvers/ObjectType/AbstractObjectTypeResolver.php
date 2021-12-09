@@ -472,11 +472,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     if ($fieldTypeIsNonNullable) {
                         return $this->getErrorProvider()->getNonNullableFieldError($fieldName);
                     }
-                } elseif ($objectTypeFieldResolver->validateResolvedFieldType(
-                    $this,
-                    $fieldName,
-                    $fieldArgs,
-                )) {
+                } elseif (
+                    $objectTypeFieldResolver->validateResolvedFieldType(
+                        $this,
+                        $fieldName,
+                        $fieldArgs,
+                    )
+                ) {
                     $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
                     $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
 
