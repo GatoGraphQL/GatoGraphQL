@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 
+use DateTimeInterface;
+use GraphQLAPI\GraphQLAPI\Polyfill\PHP72\DateTimeInterface as PolyfillDateTimeInterface;
 use PoP\PoP\Config\Rector\Configurators\AbstractContainerConfigurationService;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
+use Rector\Renaming\Rector\ClassConstFetch\RenameClassConstFetchRector;
+use Rector\Renaming\ValueObject\RenameClassAndConstFetch;
 use Rector\Set\ValueObject\DowngradeLevelSetList;
 
 abstract class AbstractDowngradeContainerConfigurationService extends AbstractContainerConfigurationService
@@ -14,6 +18,11 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
     public function configureContainer(): void
     {
         $this->containerConfigurator->import(DowngradeLevelSetList::DOWN_TO_PHP_71);
+
+        // Must also replace DateTimeInterface::ATOM for PHP 7.1
+        $services = $this->containerConfigurator->services();
+        $services->set(RenameClassConstFetchRector::class)
+            ->configure([new RenameClassAndConstFetch(DateTimeInterface::class, 'ATOM', PolyfillDateTimeInterface::class, 'ATOM')]);
 
         $parameters = $this->containerConfigurator->parameters();
 
