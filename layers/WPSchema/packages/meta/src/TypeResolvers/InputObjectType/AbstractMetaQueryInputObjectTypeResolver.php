@@ -110,11 +110,13 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
     ): array {
         switch ($inputFieldName) {
             case 'key':
-                if (!$this->getAllowOrDenySettingsService()->isEntryAllowed(
-                    $coercedInputFieldValue,
-                    $this->getAllowOrDenyEntries(),
-                    $this->getAllowOrDenyBehavior(),
-                )) {
+                if (
+                    !$this->getAllowOrDenySettingsService()->isEntryAllowed(
+                        $coercedInputFieldValue,
+                        $this->getAllowOrDenyEntries(),
+                        $this->getAllowOrDenyBehavior(),
+                    )
+                ) {
                     return [
                         sprintf(
                             $this->getTranslationAPI()->__('There is no meta with key \'%s\'', 'meta'),
