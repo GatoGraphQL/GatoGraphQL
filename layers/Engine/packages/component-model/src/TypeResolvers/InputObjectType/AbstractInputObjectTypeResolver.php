@@ -333,6 +333,21 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 continue;
             }
 
+            // Custom validations for the field
+            $maybeCoercedInputFieldValueErrors = $this->validateCoercedInputFieldValue(
+                $inputFieldTypeResolver,
+                $inputFieldName,
+                $coercedInputFieldValue,
+            );
+            if ($maybeCoercedInputFieldValueErrors !== []) {
+                $errors[] = $this->convergeCoercedInputFieldValueError(
+                    $inputFieldTypeResolver,
+                    $inputFieldName,
+                    $maybeCoercedInputFieldValueErrors,
+                );
+                continue;
+            }
+
             // The input field is valid, add to the resulting InputObject
             $coercedInputValue->$inputFieldName = $coercedInputFieldValue;
         }
@@ -414,6 +429,19 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             ],
             $coercedInputFieldValueErrors
         );
+    }
+
+    /**
+     * Custom validations to execute on the input field.
+     *
+     * @return string[] The error messages, if any
+     */
+    protected function validateCoercedInputFieldValue(
+        InputTypeResolverInterface $inputFieldTypeResolver,
+        string $inputFieldName,
+        mixed $coercedInputFieldValue,
+    ): array {
+        return [];
     }
 
     /**
