@@ -6,7 +6,6 @@ namespace PoPSchema\Meta\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolver;
 use PoPSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 
@@ -21,13 +20,6 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
     final protected function getWithMetaInterfaceTypeFieldResolver(): WithMetaInterfaceTypeFieldResolver
     {
         return $this->withMetaInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(WithMetaInterfaceTypeFieldResolver::class);
-    }
-
-    public function getObjectTypeResolverClassesToAttachTo(): array
-    {
-        return [
-            CommentObjectTypeResolver::class,
-        ];
     }
 
     public function getImplementedInterfaceTypeFieldResolvers(): array
