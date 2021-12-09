@@ -5,3 +5,6 @@ services:
 
     PoPWPSchema\TaxonomyMeta\SchemaHooks\:
         resource: '../src/SchemaHooks/*'
+
+    PoPWPSchema\TaxonomyMeta\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'

@@ -5,3 +5,6 @@ services:
 
     PoPWPSchema\CommentMeta\SchemaHooks\:
         resource: '../src/SchemaHooks/*'
+
+    PoPWPSchema\CommentMeta\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'

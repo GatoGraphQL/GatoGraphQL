@@ -6,19 +6,22 @@ namespace PoPWPSchema\Meta\TypeResolvers\InputObjectType;
 
 use Exception;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPWPSchema\Meta\Constants\MetaQueryCompareByOperators;
 use PoPWPSchema\Meta\Constants\MetaQueryValueTypes;
 use PoPWPSchema\Meta\TypeResolvers\EnumType\MetaQueryValueTypeEnumTypeResolver;
 use PoPWPSchema\SchemaCommons\TypeResolvers\EnumType\RelationEnumTypeResolver;
 use stdClass;
 
-class MetaQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
+abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
 {
     private ?MetaQueryValueTypeEnumTypeResolver $metaQueryValueTypesEnumTypeResolver = null;
     private ?MetaQueryCompareByOneofInputObjectTypeResolver $metaQueryCompareByOneofInputObjectTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?RelationEnumTypeResolver $relationEnumTypeResolver = null;
+    private ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
 
     final public function setMetaQueryValueTypesEnumTypeResolver(MetaQueryValueTypeEnumTypeResolver $metaQueryValueTypesEnumTypeResolver): void
     {
@@ -52,10 +55,13 @@ class MetaQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeR
     {
         return $this->relationEnumTypeResolver ??= $this->instanceManager->getInstance(RelationEnumTypeResolver::class);
     }
-
-    public function getTypeName(): string
+    final public function setAllowOrDenySettingsService(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
     {
-        return 'MetaQueryInput';
+        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
+    }
+    final protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
+    {
+        return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
     }
 
     public function getTypeDescription(): ?string
@@ -91,6 +97,45 @@ class MetaQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeR
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
+
+    /**
+     * Custom validations to execute on the input field.
+     *
+     * @return string[] The produced error messages, if any
+     */
+    protected function resolveCoercedInputFieldValueErrorMessages(
+        InputTypeResolverInterface $inputFieldTypeResolver,
+        string $inputFieldName,
+        mixed $coercedInputFieldValue,
+    ): array {
+        switch ($inputFieldName) {
+            case 'key':
+                if (!$this->getAllowOrDenySettingsService()->isEntryAllowed(
+                    $coercedInputFieldValue,
+                    $this->getAllowOrDenyEntries(),
+                    $this->getAllowOrDenyBehavior(),
+                )) {
+                    return [
+                        sprintf(
+                            $this->getTranslationAPI()->__('There is no meta with key \'%s\'', 'meta'),
+                            $coercedInputFieldValue
+                        )
+                    ];
+                }
+                break;
+        }
+        return parent::resolveCoercedInputFieldValueErrorMessages(
+            $inputFieldTypeResolver,
+            $inputFieldName,
+            $coercedInputFieldValue,
+        );
+    }
+
+    /**
+     * @return string[]
+     */
+    abstract protected function getAllowOrDenyEntries(): array;
+    abstract protected function getAllowOrDenyBehavior(): string;
 
     /**
      * Integrate parameters into the "meta_query" WP_Query arg

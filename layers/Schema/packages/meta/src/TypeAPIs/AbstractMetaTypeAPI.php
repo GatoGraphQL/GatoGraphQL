@@ -28,6 +28,8 @@ abstract class AbstractMetaTypeAPI
      * If the key is allowed but non-existent, return `null`.
      * Otherwise, return the value.
      *
+     * @param string[] $entries
+     *
      * @throws InvalidArgumentException
      */
     final protected function assertIsEntryAllowed(array $entries, string $behavior, string $key): bool

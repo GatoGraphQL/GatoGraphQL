@@ -9,21 +9,10 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Hooks\AbstractHookSet;
-use PoPWPSchema\Meta\TypeResolvers\InputObjectType\MetaQueryInputObjectTypeResolver;
+use PoPWPSchema\Meta\TypeResolvers\InputObjectType\AbstractMetaQueryInputObjectTypeResolver;
 
 abstract class AbstractAddMetaQueryInputFieldsInputObjectTypeHookSet extends AbstractHookSet
 {
-    private ?MetaQueryInputObjectTypeResolver $metaQueryInputObjectTypeResolver = null;
-
-    final public function setMetaQueryInputObjectTypeResolver(MetaQueryInputObjectTypeResolver $metaQueryInputObjectTypeResolver): void
-    {
-        $this->metaQueryInputObjectTypeResolver = $metaQueryInputObjectTypeResolver;
-    }
-    final protected function getMetaQueryInputObjectTypeResolver(): MetaQueryInputObjectTypeResolver
-    {
-        return $this->metaQueryInputObjectTypeResolver ??= $this->instanceManager->getInstance(MetaQueryInputObjectTypeResolver::class);
-    }
-
     protected function init(): void
     {
         $this->getHooksAPI()->addFilter(
@@ -67,6 +56,8 @@ abstract class AbstractAddMetaQueryInputFieldsInputObjectTypeHookSet extends Abs
     abstract protected function isInputObjectTypeResolver(
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): bool;
+
+    abstract protected function getMetaQueryInputObjectTypeResolver(): AbstractMetaQueryInputObjectTypeResolver;
 
     public function getInputFieldDescription(
         ?string $inputFieldDescription,

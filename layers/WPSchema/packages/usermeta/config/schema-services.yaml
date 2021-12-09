@@ -5,3 +5,6 @@ services:
 
     PoPWPSchema\UserMeta\SchemaHooks\:
         resource: '../src/SchemaHooks/*'
+
+    PoPWPSchema\UserMeta\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
