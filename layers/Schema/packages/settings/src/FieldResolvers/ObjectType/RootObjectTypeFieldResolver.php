@@ -123,6 +123,22 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return parent::doResolveSchemaValidationErrorDescriptions($objectTypeResolver, $fieldName, $fieldArgs);
     }
 
+    public function validateResolvedFieldType(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        array $fieldArgs,
+    ): bool {
+        switch ($fieldName) {
+            case 'option':
+                return true;
+        }
+        return parent::validateResolvedFieldType(
+            $objectTypeResolver,
+            $fieldName,
+            $fieldArgs,
+        );
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
