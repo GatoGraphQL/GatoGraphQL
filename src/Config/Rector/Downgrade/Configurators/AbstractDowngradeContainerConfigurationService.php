@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 
 use DateTimeInterface;
-use GraphQLAPI\GraphQLAPI\Polyfill\PHP72\DateTimeInterface as PolyfillDateTimeInterface;
+use PoPSchema\SchemaCommons\Polyfill\PHP72\DateTimeInterface as PolyfillDateTimeInterface;
 use PoP\PoP\Config\Rector\Configurators\AbstractContainerConfigurationService;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;

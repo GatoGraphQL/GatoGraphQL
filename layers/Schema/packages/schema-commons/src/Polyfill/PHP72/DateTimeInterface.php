@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Polyfill\PHP72;
+namespace PoPSchema\SchemaCommons\Polyfill\PHP72;
 
 interface DateTimeInterface
 {
