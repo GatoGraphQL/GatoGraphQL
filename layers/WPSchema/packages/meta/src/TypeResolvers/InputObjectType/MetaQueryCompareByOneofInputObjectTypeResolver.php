@@ -51,6 +51,11 @@ class MetaQueryCompareByOneofInputObjectTypeResolver extends AbstractOneofInputO
         return 'MetaQueryCompareByInput';
     }
 
+    protected function isOneInputValueMandatory(): bool
+    {
+        return false;
+    }
+
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
