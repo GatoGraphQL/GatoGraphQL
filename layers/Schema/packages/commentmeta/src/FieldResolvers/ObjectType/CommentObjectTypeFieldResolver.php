@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentMeta\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CommentMeta\TypeAPIs\CommentMetaTypeAPIInterface;
 use PoPSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
-use PoPSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolver;
+use PoPSchema\Meta\FieldResolvers\ObjectType\AbstractWithMetaObjectTypeFieldResolver;
+use PoPSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 
-class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolver
 {
     private ?CommentMetaTypeAPIInterface $commentMetaTypeAPI = null;
-    private ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
 
     final public function setCommentMetaTypeAPI(CommentMetaTypeAPIInterface $commentMetaTypeAPI): void
     {
@@ -23,14 +22,6 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return $this->commentMetaTypeAPI ??= $this->instanceManager->getInstance(CommentMetaTypeAPIInterface::class);
     }
-    final public function setWithMetaInterfaceTypeFieldResolver(WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver): void
-    {
-        $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
-    }
-    final protected function getWithMetaInterfaceTypeFieldResolver(): WithMetaInterfaceTypeFieldResolver
-    {
-        return $this->withMetaInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(WithMetaInterfaceTypeFieldResolver::class);
-    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -39,43 +30,9 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getImplementedInterfaceTypeFieldResolvers(): array
+    protected function getMetaTypeAPI(): MetaTypeAPIInterface
     {
-        return [
-            $this->getWithMetaInterfaceTypeFieldResolver(),
-        ];
-    }
-
-    public function getFieldNamesToResolve(): array
-    {
-        return [
-            'metaValue',
-            'metaValues',
-        ];
-    }
-
-    protected function doResolveSchemaValidationErrorDescriptions(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs
-    ): array {
-        // if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
-        switch ($fieldName) {
-            case 'metaValue':
-            case 'metaValues':
-                if (!$this->getCommentMetaTypeAPI()->validateIsMetaKeyAllowed($fieldArgs['key'])) {
-                    return [
-                        sprintf(
-                            $this->getTranslationAPI()->__('There is no key with name \'%s\'', 'commentmeta'),
-                            $fieldArgs['key']
-                        ),
-                    ];
-                }
-                break;
-        }
-        // }
-
-        return parent::doResolveSchemaValidationErrorDescriptions($objectTypeResolver, $fieldName, $fieldArgs);
+        return $this->getCommentMetaTypeAPI();
     }
 
     /**
