@@ -334,17 +334,21 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             }
 
             // Custom validations for the field
-            $maybeCoercedInputFieldValueErrors = $this->validateCoercedInputFieldValue(
+            $maybeCoercedInputFieldValueErrorMessages = $this->resolveCoercedInputFieldValueErrorMessages(
                 $inputFieldTypeResolver,
                 $inputFieldName,
                 $coercedInputFieldValue,
             );
-            if ($maybeCoercedInputFieldValueErrors !== []) {
-                $errors[] = $this->convergeCoercedInputFieldValueError(
-                    $inputFieldTypeResolver,
-                    $inputFieldName,
-                    $maybeCoercedInputFieldValueErrors,
-                );
+            if ($maybeCoercedInputFieldValueErrorMessages !== []) {
+                foreach ($maybeCoercedInputFieldValueErrorMessages as $coercedInputFieldValueErrorMessage) {
+                    $errors[] = new Error(
+                        $this->getErrorCode(),
+                        $coercedInputFieldValueErrorMessage,
+                        [
+                            Tokens::ARGUMENT_PATH => [$inputFieldName],
+                        ]
+                    );
+                }
                 continue;
             }
 
@@ -434,9 +438,9 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     /**
      * Custom validations to execute on the input field.
      *
-     * @return string[] The error messages, if any
+     * @return string[] The produced error messages, if any
      */
-    protected function validateCoercedInputFieldValue(
+    protected function resolveCoercedInputFieldValueErrorMessages(
         InputTypeResolverInterface $inputFieldTypeResolver,
         string $inputFieldName,
         mixed $coercedInputFieldValue,
