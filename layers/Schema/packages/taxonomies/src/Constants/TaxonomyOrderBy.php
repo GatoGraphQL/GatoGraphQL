@@ -18,7 +18,7 @@ class TaxonomyOrderBy
     public const COUNT = 'COUNT';
     public const NONE = 'NONE';
     public const INCLUDE = 'INCLUDE';
-    public const SLUG_IN = 'SLUG_IN';
+    public const SLUG__IN = 'SLUG__IN';
     public const DESCRIPTION = 'DESCRIPTION';
 
     // public const TERM_GROUP = 'TERM_GROUP';

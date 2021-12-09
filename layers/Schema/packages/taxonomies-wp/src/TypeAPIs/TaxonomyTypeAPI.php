@@ -124,7 +124,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
             TaxonomyOrderBy::COUNT => 'count',
             TaxonomyOrderBy::NONE => 'none',
             TaxonomyOrderBy::INCLUDE => 'include',
-            TaxonomyOrderBy::SLUG_IN => 'slug__in',
+            TaxonomyOrderBy::SLUG__IN => 'slug__in',
             TaxonomyOrderBy::DESCRIPTION => 'description',
             default => $orderBy,
         };
