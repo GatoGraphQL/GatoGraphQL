@@ -56,6 +56,30 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
+    protected function doResolveSchemaValidationErrorDescriptions(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        array $fieldArgs
+    ): array {
+        // if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
+        switch ($fieldName) {
+            case 'metaValue':
+            case 'metaValues':
+                if (!$this->getCustomPostMetaTypeAPI()->validateIsMetaKeyAllowed($fieldArgs['key'])) {
+                    return [
+                        sprintf(
+                            $this->getTranslationAPI()->__('There is no key with name \'%s\'', 'custompostmeta'),
+                            $fieldArgs['key']
+                        ),
+                    ];
+                }
+                break;
+        }
+        // }
+
+        return parent::doResolveSchemaValidationErrorDescriptions($objectTypeResolver, $fieldName, $fieldArgs);
+    }
+
     /**
      * @param array<string, mixed> $fieldArgs
      * @param array<string, mixed>|null $variables
@@ -75,20 +99,11 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'metaValue':
             case 'metaValues':
-                try {
-                    $value = $this->getCustomPostMetaTypeAPI()->getCustomPostMeta(
-                        $objectTypeResolver->getID($customPost),
-                        $fieldArgs['key'],
-                        $fieldName === 'metaValue'
-                    );
-                } catch (InvalidArgumentException $e) {
-                    // If the meta key is not in the allowlist, it will throw an exception
-                    return new Error(
-                        'meta-key-not-exists',
-                        $e->getMessage()
-                    );
-                }
-                return $value;
+                return $this->getCustomPostMetaTypeAPI()->getCustomPostMeta(
+                    $objectTypeResolver->getID($customPost),
+                    $fieldArgs['key'],
+                    $fieldName === 'metaValue'
+                );
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);

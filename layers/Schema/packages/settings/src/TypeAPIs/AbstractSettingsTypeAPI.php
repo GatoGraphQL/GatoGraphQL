@@ -25,12 +25,15 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
     }
 
     /**
+     * If the allow/denylist validation fails, and passing option "assert-is-option-allowed",
+     * then throw an exception.
+     *
      * @param array<string,mixed> $options
-     * @throws InvalidArgumentException When the option does not exist, or is not in the allowlist
+     * @throws InvalidArgumentException When the option name is not in the allowlist. Enabled by passing option "assert-is-option-allowed"
      */
     final public function getOption(string $name, array $options = []): mixed
     {
-        if ($options['assert-is-entry-allowed'] ?? null) {
+        if ($options['assert-is-option-allowed'] ?? null) {
             $this->assertIsOptionAllowed($name);
         }
         return $this->doGetOption($name);

@@ -6,6 +6,7 @@ namespace PoPSchema\Meta\TypeAPIs;
 
 interface MetaTypeAPIInterface
 {
+    public function validateIsMetaKeyAllowed(string $key): bool;
     /**
      * @return string[]
      */
