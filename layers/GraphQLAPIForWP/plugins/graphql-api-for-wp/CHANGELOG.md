@@ -139,6 +139,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Media.modifiedDateStr: String`
   - `Media.mimeType: String`
   - `Media.sizes: String`
+- Added fields to query options:
+  - `Root.optionValues: [AnyBuiltInScalar]`
+  - `Root.optionObjectValue: JSONObject`
+  - `Root.optionValue: AnyBuiltInScalar` (renamed from `Root.option`)
 
 ### Added
 
@@ -185,6 +189,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Renamed module "Schema for the Admin" to "Schema Expose Admin Data"
 - Renamed scalar type `AnyScalar` to `AnyBuiltInScalar`
 - Renamed interface type `Elemental` to `Node`
+- Renamed field `Root.option` to `Root.optionValue`
 - All `date` fields (such as `Post.date`, `Media.date` and `Comment.date`) and `modified` fields are now of type `DateTime` (before they had type `String`)
 - Must update `content(format:PLAIN_TEXT)` to `rawContent`
 - Must update the inputs for mutations
