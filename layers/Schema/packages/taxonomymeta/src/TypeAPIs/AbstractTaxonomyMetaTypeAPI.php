@@ -26,6 +26,18 @@ abstract class AbstractTaxonomyMetaTypeAPI extends AbstractMetaTypeAPI implement
     }
 
     /**
+     * @return string[]
+     */
+    public function getAllowOrDenyMetaEntries(): array
+    {
+        return ComponentConfiguration::getTaxonomyMetaEntries();
+    }
+    public function getAllowOrDenyMetaBehavior(): string
+    {
+        return ComponentConfiguration::getTaxonomyMetaBehavior();
+    }
+
+    /**
      * If the key is non-existent, return `null`.
      * Otherwise, return the value.
      */

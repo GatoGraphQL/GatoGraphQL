@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\TaxonomyMeta\TypeAPIs;
 
 use InvalidArgumentException;
+use PoPSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 
-interface TaxonomyMetaTypeAPIInterface
+interface TaxonomyMetaTypeAPIInterface extends MetaTypeAPIInterface
 {
     /**
      * If the allow/denylist validation fails, throw an exception.

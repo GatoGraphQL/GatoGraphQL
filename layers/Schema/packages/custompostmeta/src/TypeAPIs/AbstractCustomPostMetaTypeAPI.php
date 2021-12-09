@@ -26,6 +26,18 @@ abstract class AbstractCustomPostMetaTypeAPI extends AbstractMetaTypeAPI impleme
     }
 
     /**
+     * @return string[]
+     */
+    public function getAllowOrDenyMetaEntries(): array
+    {
+        return ComponentConfiguration::getCustomPostMetaEntries();
+    }
+    public function getAllowOrDenyMetaBehavior(): string
+    {
+        return ComponentConfiguration::getCustomPostMetaBehavior();
+    }
+
+    /**
      * If the key is non-existent, return `null`.
      * Otherwise, return the value.
      */

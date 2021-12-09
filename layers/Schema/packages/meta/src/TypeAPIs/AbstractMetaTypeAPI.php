@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 
-abstract class AbstractMetaTypeAPI
+abstract class AbstractMetaTypeAPI implements MetaTypeAPIInterface
 {
     use BasicServiceTrait;
 
@@ -21,6 +21,22 @@ abstract class AbstractMetaTypeAPI
     final protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
     {
         return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
+    }
+
+    /**
+     * If the allow/denylist validation fails, throw an exception.
+     * If the key is allowed but non-existent, return `null`.
+     * Otherwise, return the value.
+     *
+     * @param string[] $entries
+     */
+    final public function validateIsEntryAllowed(string $key): bool
+    {
+        return $this->getAllowOrDenySettingsService()->isEntryAllowed(
+            $key,
+            $this->getAllowOrDenyMetaEntries(),
+            $this->getAllowOrDenyMetaBehavior()
+        );
     }
 
     /**

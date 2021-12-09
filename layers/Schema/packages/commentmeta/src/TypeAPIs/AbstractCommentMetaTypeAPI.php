@@ -30,6 +30,18 @@ abstract class AbstractCommentMetaTypeAPI extends AbstractMetaTypeAPI implements
     }
 
     /**
+     * @return string[]
+     */
+    public function getAllowOrDenyMetaEntries(): array
+    {
+        return ComponentConfiguration::getCommentMetaEntries();
+    }
+    public function getAllowOrDenyMetaBehavior(): string
+    {
+        return ComponentConfiguration::getCommentMetaBehavior();
+    }
+
+    /**
      * If the key is non-existent, return `null`.
      * Otherwise, return the value.
      */

@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\CustomPostMeta\TypeAPIs;
 
 use InvalidArgumentException;
+use PoPSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 
-interface CustomPostMetaTypeAPIInterface
+interface CustomPostMetaTypeAPIInterface extends MetaTypeAPIInterface
 {
     /**
      * If the allow/denylist validation fails, throw an exception.

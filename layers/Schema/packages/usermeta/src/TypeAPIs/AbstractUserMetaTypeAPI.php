@@ -26,6 +26,18 @@ abstract class AbstractUserMetaTypeAPI extends AbstractMetaTypeAPI implements Us
     }
 
     /**
+     * @return string[]
+     */
+    public function getAllowOrDenyMetaEntries(): array
+    {
+        return ComponentConfiguration::getUserMetaEntries();
+    }
+    public function getAllowOrDenyMetaBehavior(): string
+    {
+        return ComponentConfiguration::getUserMetaBehavior();
+    }
+
+    /**
      * If the key is non-existent, return `null`.
      * Otherwise, return the value.
      */

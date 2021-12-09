@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\CommentMeta\TypeAPIs;
 
 use InvalidArgumentException;
+use PoPSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 
-interface CommentMetaTypeAPIInterface
+interface CommentMetaTypeAPIInterface extends MetaTypeAPIInterface
 {
     /**
      * If the allow/denylist validation fails, throw an exception.
