@@ -46,7 +46,7 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
      *
      * @throws InvalidArgumentException
      */
-    final protected function assertIsEntryAllowed(array $entries, string $behavior, string $name): bool
+    final protected function assertIsEntryAllowed(array $entries, string $behavior, string $name): void
     {
         if (!$this->getAllowOrDenySettingsService()->isEntryAllowed($name, $entries, $behavior)) {
             throw new InvalidArgumentException(
@@ -56,7 +56,6 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
                 )
             );
         }
-        return true;
     }
 
     /**

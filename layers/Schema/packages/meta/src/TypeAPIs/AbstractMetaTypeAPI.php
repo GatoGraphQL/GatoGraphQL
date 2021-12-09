@@ -48,7 +48,7 @@ abstract class AbstractMetaTypeAPI implements MetaTypeAPIInterface
      *
      * @throws InvalidArgumentException
      */
-    final protected function assertIsEntryAllowed(string $key): bool
+    final protected function assertIsEntryAllowed(string $key): void
     {
         if (!$this->validateIsEntryAllowed($key)) {
             throw new InvalidArgumentException(
@@ -58,6 +58,5 @@ abstract class AbstractMetaTypeAPI implements MetaTypeAPIInterface
                 )
             );
         }
-        return true;
     }
 }
