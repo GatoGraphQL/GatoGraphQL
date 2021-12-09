@@ -99,7 +99,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return match ($fieldName) {
             'postCount' => SchemaTypeModifiers::NON_NULLABLE,
-            'posts' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+            'posts' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }

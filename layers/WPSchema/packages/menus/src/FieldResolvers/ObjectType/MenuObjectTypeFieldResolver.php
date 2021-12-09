@@ -83,7 +83,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'count'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'locations'
-                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };

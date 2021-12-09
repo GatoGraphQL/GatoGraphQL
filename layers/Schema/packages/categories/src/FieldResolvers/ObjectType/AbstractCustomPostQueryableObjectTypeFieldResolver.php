@@ -95,7 +95,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
                 => SchemaTypeModifiers::NON_NULLABLE,
             'categories',
             'categoryNames'
-                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
