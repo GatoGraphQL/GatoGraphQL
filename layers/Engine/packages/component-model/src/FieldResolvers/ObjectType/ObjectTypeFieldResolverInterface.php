@@ -74,6 +74,14 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         array $options = []
     ): mixed;
     /**
+     * Indicate if to validate the type of the response
+     */
+    public function validateResolvedFieldType(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        array $fieldArgs,
+    ): bool;
+    /**
      * The mutation can be validated either on the schema (`false`)
      * on on the object (`true`)
      */

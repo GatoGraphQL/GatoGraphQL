@@ -744,6 +744,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         );
     }
 
+    public function validateResolvedFieldType(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+        array $fieldArgs,
+    ): bool {
+        return ComponentConfiguration::validateFieldTypeResponseWithSchemaDefinition();
+    }
+
     /**
      * Validate the constraints for the field arguments
      */

@@ -81,6 +81,21 @@ class ErrorProvider implements ErrorProviderInterface
     }
 
     /**
+     * Encode the array, and trim to 500 chars max
+     *
+     * @param mixed[] $value
+     */
+    protected function jsonEncodeArrayOrStdClassValue(array|stdClass $value): string
+    {
+        return mb_strimwidth(
+            json_encode($value),
+            0,
+            500,
+            $this->getTranslationAPI()->__('...', 'component-model')
+        );
+    }
+
+    /**
      * Return an error to indicate that a non-array field is returning an array value
      */
     public function getMustNotBeArrayFieldError(string $fieldName, array $value): Error
@@ -91,7 +106,7 @@ class ErrorProvider implements ErrorProviderInterface
             sprintf(
                 $this->getTranslationAPI()->__('Field \'%s\' must not return an array, but returned \'%s\'', 'pop-component-model'),
                 $fieldName,
-                json_encode($value)
+                $this->jsonEncodeArrayOrStdClassValue($value)
             )
         );
     }
@@ -102,7 +117,7 @@ class ErrorProvider implements ErrorProviderInterface
     public function getMustBeArrayFieldError(string $fieldName, mixed $value): Error
     {
         if ($value instanceof stdClass) {
-            $valueAsString = json_encode($value);
+            $valueAsString = $this->jsonEncodeArrayOrStdClassValue($value);
         } elseif (is_object($value)) {
             $valueAsString = $this->getObjectSerializationManager()->serialize($value);
         } else {
@@ -142,7 +157,7 @@ class ErrorProvider implements ErrorProviderInterface
             sprintf(
                 $this->getTranslationAPI()->__('Array value in field \'%s\' must not contain arrays, but returned \'%s\'', 'pop-component-model'),
                 $fieldName,
-                json_encode($value)
+                $this->jsonEncodeArrayOrStdClassValue($value)
             )
         );
     }
@@ -155,7 +170,7 @@ class ErrorProvider implements ErrorProviderInterface
             sprintf(
                 $this->getTranslationAPI()->__('Field \'%s\' must return an array of arrays, but returned \'%s\'', 'pop-component-model'),
                 $fieldName,
-                json_encode($value)
+                $this->jsonEncodeArrayOrStdClassValue($value)
             )
         );
     }

@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\CustomPostMeta\FieldResolvers\ObjectType;
 
-use InvalidArgumentException;
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
-use PoPSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolver;
+use PoPSchema\Meta\FieldResolvers\ObjectType\AbstractWithMetaObjectTypeFieldResolver;
+use PoPSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 
-class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolver
 {
     private ?CustomPostMetaTypeAPIInterface $customPostMetaTypeAPI = null;
-    private ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
 
     final public function setCustomPostMetaTypeAPI(CustomPostMetaTypeAPIInterface $customPostMetaTypeAPI): void
     {
@@ -25,14 +22,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return $this->customPostMetaTypeAPI ??= $this->instanceManager->getInstance(CustomPostMetaTypeAPIInterface::class);
     }
-    final public function setWithMetaInterfaceTypeFieldResolver(WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver): void
-    {
-        $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
-    }
-    final protected function getWithMetaInterfaceTypeFieldResolver(): WithMetaInterfaceTypeFieldResolver
-    {
-        return $this->withMetaInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(WithMetaInterfaceTypeFieldResolver::class);
-    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -41,43 +30,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getImplementedInterfaceTypeFieldResolvers(): array
+    protected function getMetaTypeAPI(): MetaTypeAPIInterface
     {
-        return [
-            $this->getWithMetaInterfaceTypeFieldResolver(),
-        ];
-    }
-
-    public function getFieldNamesToResolve(): array
-    {
-        return [
-            'metaValue',
-            'metaValues',
-        ];
-    }
-
-    protected function doResolveSchemaValidationErrorDescriptions(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs
-    ): array {
-        // if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
-        switch ($fieldName) {
-            case 'metaValue':
-            case 'metaValues':
-                if (!$this->getCustomPostMetaTypeAPI()->validateIsMetaKeyAllowed($fieldArgs['key'])) {
-                    return [
-                        sprintf(
-                            $this->getTranslationAPI()->__('There is no key with name \'%s\'', 'custompostmeta'),
-                            $fieldArgs['key']
-                        ),
-                    ];
-                }
-                break;
-        }
-        // }
-
-        return parent::doResolveSchemaValidationErrorDescriptions($objectTypeResolver, $fieldName, $fieldArgs);
+        return $this->getCustomPostMetaTypeAPI();
     }
 
     /**

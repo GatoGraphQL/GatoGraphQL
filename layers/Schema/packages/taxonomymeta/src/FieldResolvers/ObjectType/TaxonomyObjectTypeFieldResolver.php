@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\TaxonomyMeta\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolver;
+use PoPSchema\Meta\FieldResolvers\ObjectType\AbstractWithMetaObjectTypeFieldResolver;
+use PoPSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 use PoPSchema\Taxonomies\TypeResolvers\ObjectType\AbstractTaxonomyObjectTypeResolver;
 use PoPSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
 
-class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolver
 {
     private ?TaxonomyMetaTypeAPIInterface $taxonomyMetaTypeAPI = null;
-    private ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
 
     final public function setTaxonomyMetaTypeAPI(TaxonomyMetaTypeAPIInterface $taxonomyMetaTypeAPI): void
     {
@@ -23,14 +22,6 @@ class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return $this->taxonomyMetaTypeAPI ??= $this->instanceManager->getInstance(TaxonomyMetaTypeAPIInterface::class);
     }
-    final public function setWithMetaInterfaceTypeFieldResolver(WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver): void
-    {
-        $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
-    }
-    final protected function getWithMetaInterfaceTypeFieldResolver(): WithMetaInterfaceTypeFieldResolver
-    {
-        return $this->withMetaInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(WithMetaInterfaceTypeFieldResolver::class);
-    }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -39,43 +30,9 @@ class TaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
-    public function getImplementedInterfaceTypeFieldResolvers(): array
+    protected function getMetaTypeAPI(): MetaTypeAPIInterface
     {
-        return [
-            $this->getWithMetaInterfaceTypeFieldResolver(),
-        ];
-    }
-
-    public function getFieldNamesToResolve(): array
-    {
-        return [
-            'metaValue',
-            'metaValues',
-        ];
-    }
-
-    protected function doResolveSchemaValidationErrorDescriptions(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs
-    ): array {
-        // if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
-        switch ($fieldName) {
-            case 'metaValue':
-            case 'metaValues':
-                if (!$this->getTaxonomyMetaTypeAPI()->validateIsMetaKeyAllowed($fieldArgs['key'])) {
-                    return [
-                        sprintf(
-                            $this->getTranslationAPI()->__('There is no key with name \'%s\'', 'taxonomymeta'),
-                            $fieldArgs['key']
-                        ),
-                    ];
-                }
-                break;
-        }
-        // }
-
-        return parent::doResolveSchemaValidationErrorDescriptions($objectTypeResolver, $fieldName, $fieldArgs);
+        return $this->getTaxonomyMetaTypeAPI();
     }
 
     /**
