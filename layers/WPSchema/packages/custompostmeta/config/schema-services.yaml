@@ -5,3 +5,6 @@ services:
 
     PoPWPSchema\CustomPostMeta\SchemaHooks\:
         resource: '../src/SchemaHooks/*'
+
+    PoPWPSchema\CustomPostMeta\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'

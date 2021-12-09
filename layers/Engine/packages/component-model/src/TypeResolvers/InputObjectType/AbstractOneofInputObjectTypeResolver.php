@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use stdClass;
 
 /**
@@ -26,7 +27,7 @@ abstract class AbstractOneofInputObjectTypeResolver extends AbstractInputObjectT
         }
         return parent::coerceInputObjectValue($inputValue);
     }
-    
+
     /**
      * Only validate the single provided entry, ignoring potential
      * errors from the unprovided entries.

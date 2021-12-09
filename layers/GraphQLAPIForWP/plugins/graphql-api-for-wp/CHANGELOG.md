@@ -29,6 +29,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `excludeAuthorIDs: [ID]`
   - `hasPassword: Bool`
   - `password: String`
+- Filter by `metaQuery`
 - Exclude results via field arg `excludeIDs`
 - Added field `urlAbsolutePath` on several types:
   - `Post.urlAbsolutePath: String!`
@@ -143,6 +144,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Support for custom scalar types
   - Implementation of standard custom scalar types
+  - Implementation of `Numeric` scalar
+  - Support for the new "Specified By URL" meta property
 - Support for custom enum types
   - Implementation of several enum types
 - Support for input objects
