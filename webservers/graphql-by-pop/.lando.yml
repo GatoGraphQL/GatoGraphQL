@@ -5,7 +5,7 @@ config:
   php: '8.0'
   ssl: true
   database: mariadb
-  xdebug: false
+  xdebug: true
   config:
     php: ../shared/config/php.ini
 services:

@@ -9,6 +9,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use GraphQLByPoP\GraphQLServer\Configuration\Request as GraphQLServerRequest;
+use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 
 class EndpointHelpers
@@ -110,6 +111,10 @@ class EndpointHelpers
                 $endpoint = \add_query_arg(GraphQLServerRequest::URLPARAM_EDIT_SCHEMA, true, $endpoint);
             }
         }
+
+        // Maybe enable XDebug
+        $endpoint = RequestHelpers::maybeAddParamToDebugRequest($endpoint);
+
         // If namespaced, add /?use_namespace=1 to the endpoint
         // if (ComponentModelComponentConfiguration::mustNamespaceTypes()) {
         //     $endpoint = \add_query_arg(APIRequest::URLPARAM_USE_NAMESPACE, true, $endpoint);

@@ -25,9 +25,9 @@ trait WPClientTrait
     }
 
     /**
-     * Endpoint URL
+     * Endpoint URL or URL Path
      */
-    protected function getEndpointURL(): string
+    protected function getEndpointURLOrURLPath(): string
     {
         return GraphQLEndpointForWPComponentConfiguration::getGraphQLAPIEndpoint();
     }

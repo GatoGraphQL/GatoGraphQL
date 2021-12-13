@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\APIClients;
 
+use PoP\ComponentModel\Configuration\RequestHelpers;
+
 trait ClientTrait
 {
     private ?string $clientHTMLCache = null;
@@ -44,7 +46,7 @@ trait ClientTrait
     /**
      * Endpoint URL
      */
-    abstract protected function getEndpointURL(): string;
+    abstract protected function getEndpointURLOrURLPath(): string;
 
     /**
      * HTML to print the client
@@ -77,19 +79,23 @@ trait ClientTrait
         }
 
         // Can pass either URL or path under current domain
-        $endpointURL = $this->getEndpointURL();
+        $endpoint = $this->getEndpointURLOrURLPath();
+
+        // Maybe enable XDebug
+        $endpoint = RequestHelpers::maybeAddParamToDebugRequest($endpoint);
+
         /**
          * Must remove the protocol, or we might get an error with status 406
          * @see https://github.com/leoloso/PoP/issues/436
          */
-        $endpointURL = preg_replace('#^https?:#', '', $endpointURL);
+        $endpoint = preg_replace('#^https?:#', '', $endpoint);
         // // If namespaced, add /?use_namespace=1 to the endpoint
         // if (ComponentModelComponentConfiguration::mustNamespaceTypes()) {
-        //     $endpointURL = GeneralUtils::addQueryArgs(
+        //     $endpoint = GeneralUtils::addQueryArgs(
         //         [
         //             Request::URLPARAM_USE_NAMESPACE => true,
         //         ],
-        //         $endpointURL
+        //         $endpoint
         //     );
         // }
         // Modify the endpoint, as a param to the script.
@@ -97,7 +103,7 @@ trait ClientTrait
         $jsFileHasParams = \str_contains($fileContents, '/' . $jsFileName . '?');
         $fileContents = \str_replace(
             '/' . $jsFileName . ($jsFileHasParams ? '?' : ''),
-            '/' . $jsFileName . '?endpoint=' . urlencode($endpointURL) . ($jsFileHasParams ? '&' : ''),
+            '/' . $jsFileName . '?endpoint=' . urlencode($endpoint) . ($jsFileHasParams ? '&' : ''),
             $fileContents
         );
 
