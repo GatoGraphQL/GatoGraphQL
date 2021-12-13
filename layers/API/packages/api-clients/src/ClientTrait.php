@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\APIClients;
 
+use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
+
 trait ClientTrait
 {
     private ?string $clientHTMLCache = null;
 
+    abstract protected function getRequestHelperService(): RequestHelperServiceInterface;
+    
     /**
      * Relative Path
      */
@@ -78,6 +82,10 @@ trait ClientTrait
 
         // Can pass either URL or path under current domain
         $endpointURL = $this->getEndpointURL();
+
+        // Maybe enable XDebug
+        $endpointURL = $this->getRequestHelperService()->maybeAddParamToDebugRequest($endpointURL);
+
         /**
          * Must remove the protocol, or we might get an error with status 406
          * @see https://github.com/leoloso/PoP/issues/436
