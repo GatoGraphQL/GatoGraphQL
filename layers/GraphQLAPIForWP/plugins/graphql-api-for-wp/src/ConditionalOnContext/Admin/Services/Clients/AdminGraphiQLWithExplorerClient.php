@@ -24,9 +24,9 @@ class AdminGraphiQLWithExplorerClient extends GraphiQLWithExplorerClient
     }
 
     /**
-     * Endpoint URL
+     * Endpoint URL or URL Path
      */
-    protected function getEndpointURL(): string
+    protected function getEndpoint(): string
     {
         return $this->getEndpointHelpers()->getAdminConfigurableSchemaGraphQLEndpoint();
     }
