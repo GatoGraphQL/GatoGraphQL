@@ -25,12 +25,12 @@ abstract class AbstractNamedType extends AbstractSchemaDefinitionReferenceObject
 
     public function getNamespacedName(): string
     {
-        return $this->schemaDefinition[SchemaDefinition::NAMESPACED_NAME];
+        return $this->schemaDefinition[SchemaDefinition::EXTENSIONS][SchemaDefinition::NAMESPACED_NAME];
     }
 
     public function getElementName(): string
     {
-        return $this->schemaDefinition[SchemaDefinition::ELEMENT_NAME];
+        return $this->schemaDefinition[SchemaDefinition::EXTENSIONS][SchemaDefinition::ELEMENT_NAME];
     }
 
     public function getName(): string
