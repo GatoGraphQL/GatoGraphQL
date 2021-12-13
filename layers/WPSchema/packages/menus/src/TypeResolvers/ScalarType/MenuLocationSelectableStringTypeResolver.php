@@ -16,8 +16,8 @@ class MenuLocationSelectableStringTypeResolver extends AbstractSelectableStringS
     public function getTypeDescription(): string
     {
         return sprintf(
-            $this->getTranslationAPI()->__('Menu Locations: \'%s\'.', 'menus'),
-            implode('\', \'', $this->getConsolidatedPossibleValues())
+            $this->getTranslationAPI()->__('Menu Locations, with possible values: `"%s"`.', 'menus'),
+            implode('"`, `"', $this->getConsolidatedPossibleValues())
         );
     }
 
