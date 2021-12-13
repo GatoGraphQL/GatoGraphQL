@@ -46,13 +46,13 @@ class GeneralUtils
      * Add paramters "key" => "value" to the URL
      * Implementation based on that from https://stackoverflow.com/a/5809881
      */
-    public static function addQueryArgs(array $keyValues, string $url): string
+    public static function addQueryArgs(array $keyValues, string $urlOrURLPath): string
     {
         if (!$keyValues) {
-            return $url;
+            return $urlOrURLPath;
         }
 
-        $url_parts = parse_url($url);
+        $url_parts = parse_url($urlOrURLPath);
         if (isset($url_parts['query'])) {
             parse_str($url_parts['query'], $params);
         } else {
@@ -68,8 +68,8 @@ class GeneralUtils
         $url_parts['query'] = http_build_query($params);
         // Check if schema/host are present, becase the URL can also be a relative path: /some-path/
         $port = isset($url_parts['port']) && $url_parts['port'] ? (($url_parts['port'] == "80") ? "" : (":" . $url_parts['port'])) : '';
-        $scheme = $url_parts['scheme'] ? $url_parts['scheme'] . '://' : '';
-        return $scheme . $url_parts['host'] . $port . $url_parts['path'] . '?' . $url_parts['query'];
+        $scheme = isset($url_parts['scheme']) ? $url_parts['scheme'] . '://' : '';
+        return $scheme . ($url_parts['host'] ?? '') . $port . $url_parts['path'] . '?' . $url_parts['query'];
     }
 
     /**
