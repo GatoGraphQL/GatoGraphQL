@@ -13,6 +13,8 @@ services:
     portforward: true
   appserver:
     overrides:
+      environment:
+        XDEBUG_MODE:
       volumes:
         - >-
           ../../layers/GraphQLAPIForWP/plugins/extension-demo:/app/wordpress/wp-content/plugins/graphql-api-extension-demo

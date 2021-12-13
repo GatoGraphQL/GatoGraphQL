@@ -13,6 +13,8 @@ services:
     portforward: true
   appserver:
     overrides:
+      environment:
+        XDEBUG_MODE:
       volumes:
         - >-
           ../../layers/Engine/packages/engine-wp-bootloader:/app/wordpress/wp-content/plugins/engine-wp-bootloader

@@ -13,6 +13,8 @@ services:
     portforward: true
   appserver:
     overrides:
+      environment:
+        XDEBUG_MODE:
       volumes:
         - '../../layers/API/packages/api-graphql:/app/vendor/getpop/api-graphql'
         - >-
