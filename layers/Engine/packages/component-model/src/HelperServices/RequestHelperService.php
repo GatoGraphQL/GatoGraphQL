@@ -10,6 +10,7 @@ use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\ModuleFilters\ModulePaths;
 use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Definitions\Configuration\Request;
+use PoP\Root\Environment as RootEnvironment;
 
 class RequestHelperService implements RequestHelperServiceInterface
 {
@@ -76,5 +77,16 @@ class RequestHelperService implements RequestHelperServiceInterface
          */
         $host = $useHostRequestedByClient ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
         return $protocol . "://" . $host . $port . $_SERVER['REQUEST_URI'];
+    }
+
+    /**
+     * If XDebug enabled, append param "XDEBUG_TRIGGER" to debug the request
+     */
+    public function maybeAddParamToDebugRequest(string $url): string
+    {
+        if (RootEnvironment::isApplicationEnvironmentDev() && isset($_REQUEST['XDEBUG_TRIGGER'])) {
+            $url = \add_query_arg('XDEBUG_TRIGGER', '', $url);
+        }
+        return $url;
     }
 }

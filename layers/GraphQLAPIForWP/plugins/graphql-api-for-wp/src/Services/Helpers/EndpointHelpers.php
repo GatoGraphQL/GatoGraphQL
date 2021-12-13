@@ -9,8 +9,8 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use GraphQLByPoP\GraphQLServer\Configuration\Request as GraphQLServerRequest;
+use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Services\BasicServiceTrait;
-use PoP\Root\Environment as RootEnvironment;
 
 class EndpointHelpers
 {
@@ -18,6 +18,7 @@ class EndpointHelpers
 
     private ?PluginMenu $pluginMenu = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?RequestHelperServiceInterface $requestHelperService = null;
 
     final public function setPluginMenu(PluginMenu $pluginMenu): void
     {
@@ -34,6 +35,14 @@ class EndpointHelpers
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+    }
+    final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
+    {
+        $this->requestHelperService = $requestHelperService;
+    }
+    final protected function getRequestHelperService(): RequestHelperServiceInterface
+    {
+        return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
 
     /**
@@ -113,24 +122,13 @@ class EndpointHelpers
         }
 
         // Maybe enable XDebug
-        $endpoint = $this->maybeAddParamToDebugRequest($endpoint);
+        $endpoint = $this->getRequestHelperService()->maybeAddParamToDebugRequest($endpoint);
 
         // If namespaced, add /?use_namespace=1 to the endpoint
         // if (ComponentModelComponentConfiguration::mustNamespaceTypes()) {
         //     $endpoint = \add_query_arg(APIRequest::URLPARAM_USE_NAMESPACE, true, $endpoint);
         // }
         return $endpoint;
-    }
-
-    /**
-     * If XDebug enabled, append param "XDEBUG_TRIGGER" to debug the request
-     */
-    public function maybeAddParamToDebugRequest(string $url): string
-    {
-        if (RootEnvironment::isApplicationEnvironmentDev() && isset($_REQUEST['XDEBUG_TRIGGER'])) {
-            $url = \add_query_arg('XDEBUG_TRIGGER', '', $url);
-        }
-        return $url;
     }
 
     /**

@@ -13,4 +13,8 @@ interface RequestHelperServiceInterface
      * @param boolean $useHostRequestedByClient If true, get the host from user-provided HTTP_HOST, otherwise from the server-defined SERVER_NAME
      */
     public function getRequestedFullURL(bool $useHostRequestedByClient = false): string;
+    /**
+     * If XDebug enabled, append param "XDEBUG_TRIGGER" to debug the request
+     */
+    public function maybeAddParamToDebugRequest(string $url): string;
 }
