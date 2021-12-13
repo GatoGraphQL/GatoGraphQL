@@ -6,12 +6,10 @@ namespace GraphQLAPI\GraphQLAPI\Services\Clients;
 
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\VoyagerClient;
-use PoP\ComponentModel\Services\BasicServiceTrait;
 
 class CustomEndpointVoyagerClient extends VoyagerClient
 {
     use CustomEndpointClientTrait;
-    use BasicServiceTrait;
 
     private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
 
