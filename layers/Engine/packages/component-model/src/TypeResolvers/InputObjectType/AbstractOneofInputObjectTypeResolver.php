@@ -37,6 +37,9 @@ abstract class AbstractOneofInputObjectTypeResolver extends AbstractInputObjectT
     protected function getInputFieldNameTypeResolversToCoerce(stdClass $inputValue): array
     {
         $inputFieldNameTypeResolvers = parent::getInputFieldNameTypeResolversToCoerce($inputValue);
+        if (count((array)$inputValue) !== 1) {
+            return $inputFieldNameTypeResolvers;
+        }
         $inputField = key((array)$inputValue);
         return [
             $inputField => $inputFieldNameTypeResolvers[$inputField],
