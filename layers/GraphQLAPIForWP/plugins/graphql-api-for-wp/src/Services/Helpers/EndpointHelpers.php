@@ -111,15 +111,26 @@ class EndpointHelpers
                 $endpoint = \add_query_arg(GraphQLServerRequest::URLPARAM_EDIT_SCHEMA, true, $endpoint);
             }
         }
-        // Enable debugging
-        if (RootEnvironment::isApplicationEnvironmentDev()) {
-            $endpoint = \add_query_arg('XDEBUG_TRIGGER', '', $endpoint);
-        }
+
+        // Maybe enable XDebug
+        $endpoint = $this->maybeAddParamToDebugRequest($endpoint);
+
         // If namespaced, add /?use_namespace=1 to the endpoint
         // if (ComponentModelComponentConfiguration::mustNamespaceTypes()) {
         //     $endpoint = \add_query_arg(APIRequest::URLPARAM_USE_NAMESPACE, true, $endpoint);
         // }
         return $endpoint;
+    }
+
+    /**
+     * If XDebug enabled, append param "XDEBUG_TRIGGER" to debug the request
+     */
+    public function maybeAddParamToDebugRequest(string $url): string
+    {
+        if (RootEnvironment::isApplicationEnvironmentDev() && isset($_REQUEST['XDEBUG_TRIGGER'])) {
+            $url = \add_query_arg('XDEBUG_TRIGGER', '', $url);
+        }
+        return $url;
     }
 
     /**
