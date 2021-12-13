@@ -6,12 +6,12 @@ namespace PoPWPSchema\Menus\Overrides\TypeResolvers\InputObjectType;
 
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\Menus\TypeResolvers\InputObjectType\MenuByInputObjectTypeResolver as UpstreamMenuByInputObjectTypeResolver;
-use PoPWPSchema\Menus\TypeResolvers\EnumType\MenuLocationEnumTypeResolver;
+use PoPWPSchema\Menus\TypeResolvers\ScalarType\MenuLocationSelectableStringTypeResolver;
 
 class MenuByInputObjectTypeResolver extends UpstreamMenuByInputObjectTypeResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?MenuLocationEnumTypeResolver $menuLocationEnumTypeResolver = null;
+    private ?MenuLocationSelectableStringTypeResolver $menuLocationEnumTypeResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -21,13 +21,13 @@ class MenuByInputObjectTypeResolver extends UpstreamMenuByInputObjectTypeResolve
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setMenuLocationEnumTypeResolver(MenuLocationEnumTypeResolver $menuLocationEnumTypeResolver): void
+    final public function setMenuLocationSelectableStringTypeResolver(MenuLocationSelectableStringTypeResolver $menuLocationEnumTypeResolver): void
     {
         $this->menuLocationEnumTypeResolver = $menuLocationEnumTypeResolver;
     }
-    final protected function getMenuLocationEnumTypeResolver(): MenuLocationEnumTypeResolver
+    final protected function getMenuLocationSelectableStringTypeResolver(): MenuLocationSelectableStringTypeResolver
     {
-        return $this->menuLocationEnumTypeResolver ??= $this->instanceManager->getInstance(MenuLocationEnumTypeResolver::class);
+        return $this->menuLocationEnumTypeResolver ??= $this->instanceManager->getInstance(MenuLocationSelectableStringTypeResolver::class);
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -36,7 +36,7 @@ class MenuByInputObjectTypeResolver extends UpstreamMenuByInputObjectTypeResolve
             parent::getInputFieldNameTypeResolvers(),
             [
                 'slug' => $this->getStringScalarTypeResolver(),
-                'location' => $this->getMenuLocationEnumTypeResolver(),
+                'location' => $this->getMenuLocationSelectableStringTypeResolver(),
             ]
         );
     }

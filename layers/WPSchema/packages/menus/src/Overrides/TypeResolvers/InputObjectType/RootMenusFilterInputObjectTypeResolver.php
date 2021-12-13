@@ -7,19 +7,19 @@ namespace PoPWPSchema\Menus\Overrides\TypeResolvers\InputObjectType;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPSchema\Menus\TypeResolvers\InputObjectType\RootMenusFilterInputObjectTypeResolver as UpstreamRootMenusFilterInputObjectTypeResolver;
 use PoPWPSchema\Menus\FilterInputProcessors\FilterInputProcessor;
-use PoPWPSchema\Menus\TypeResolvers\EnumType\MenuLocationEnumTypeResolver;
+use PoPWPSchema\Menus\TypeResolvers\ScalarType\MenuLocationSelectableStringTypeResolver;
 
 class RootMenusFilterInputObjectTypeResolver extends UpstreamRootMenusFilterInputObjectTypeResolver
 {
-    private ?MenuLocationEnumTypeResolver $menuLocationEnumTypeResolver = null;
+    private ?MenuLocationSelectableStringTypeResolver $menuLocationEnumTypeResolver = null;
 
-    final public function setMenuLocationEnumTypeResolver(MenuLocationEnumTypeResolver $menuLocationEnumTypeResolver): void
+    final public function setMenuLocationSelectableStringTypeResolver(MenuLocationSelectableStringTypeResolver $menuLocationEnumTypeResolver): void
     {
         $this->menuLocationEnumTypeResolver = $menuLocationEnumTypeResolver;
     }
-    final protected function getMenuLocationEnumTypeResolver(): MenuLocationEnumTypeResolver
+    final protected function getMenuLocationSelectableStringTypeResolver(): MenuLocationSelectableStringTypeResolver
     {
-        return $this->menuLocationEnumTypeResolver ??= $this->instanceManager->getInstance(MenuLocationEnumTypeResolver::class);
+        return $this->menuLocationEnumTypeResolver ??= $this->instanceManager->getInstance(MenuLocationSelectableStringTypeResolver::class);
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -27,7 +27,7 @@ class RootMenusFilterInputObjectTypeResolver extends UpstreamRootMenusFilterInpu
         return array_merge(
             parent::getInputFieldNameTypeResolvers(),
             [
-                'locations' => $this->getMenuLocationEnumTypeResolver(),
+                'locations' => $this->getMenuLocationSelectableStringTypeResolver(),
             ],
         );
     }
