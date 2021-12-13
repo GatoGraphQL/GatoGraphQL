@@ -6,25 +6,11 @@ namespace GraphQLByPoP\GraphQLClientsForWP\Clients;
 
 use PoP\APIClients\ClientTrait;
 use PoP\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
-use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
-use PoP\ComponentModel\Services\BasicServiceTrait;
 
 abstract class AbstractClient extends AbstractEndpointHandler
 {
-    use BasicServiceTrait;
     use ClientTrait, WPClientTrait {
         WPClientTrait::getComponentBaseURL insteadof ClientTrait;
-    }
-    
-    private ?RequestHelperServiceInterface $requestHelperService = null;
-    
-    final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
-    {
-        $this->requestHelperService = $requestHelperService;
-    }
-    final protected function getRequestHelperService(): RequestHelperServiceInterface
-    {
-        return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
 
     /**
