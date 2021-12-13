@@ -84,18 +84,11 @@ $ composer enable-caching
 
 ## Debugging
 
-XDebug is disabled by default. To enable it, create Lando config file `.lando.local.yml` with this content:
+XDebug is enabled by default, but must be triggered for the specific request. To do so, append param `XDEBUG_TRIGGER` to the URL:
 
-```yaml
-config:
-  xdebug: true
-```
-
-And then rebuild the server:
-
-```bash
-composer rebuild-server
-```
+- In the `wp-admin`, in the GraphiQL or Interactive schema client URLs
+- To any custom endpoint
+- To any persisted query
 
 ## Additional resources
 
