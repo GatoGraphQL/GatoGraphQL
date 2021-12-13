@@ -10,6 +10,7 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use GraphQLByPoP\GraphQLServer\Configuration\Request as GraphQLServerRequest;
 use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\Root\Environment as RootEnvironment;
 
 class EndpointHelpers
 {
@@ -109,6 +110,10 @@ class EndpointHelpers
             if ($this->getModuleRegistry()->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING)) {
                 $endpoint = \add_query_arg(GraphQLServerRequest::URLPARAM_EDIT_SCHEMA, true, $endpoint);
             }
+        }
+        // Enable debugging
+        if (RootEnvironment::isApplicationEnvironmentDev()) {
+            $endpoint = \add_query_arg('XDEBUG_TRIGGER', '', $endpoint);
         }
         // If namespaced, add /?use_namespace=1 to the endpoint
         // if (ComponentModelComponentConfiguration::mustNamespaceTypes()) {
