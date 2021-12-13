@@ -27,7 +27,7 @@ trait CustomEndpointClientTrait
     /**
      * Endpoint URL or URL Path
      */
-    protected function getEndpoint(): string
+    protected function getEndpointURLOrURLPath(): string
     {
         /**
          * If accessing from Nginx, the server_name might point to localhost

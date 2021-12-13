@@ -46,7 +46,7 @@ trait ClientTrait
     /**
      * Endpoint URL
      */
-    abstract protected function getEndpoint(): string;
+    abstract protected function getEndpointURLOrURLPath(): string;
 
     /**
      * HTML to print the client
@@ -79,7 +79,7 @@ trait ClientTrait
         }
 
         // Can pass either URL or path under current domain
-        $endpoint = $this->getEndpoint();
+        $endpoint = $this->getEndpointURLOrURLPath();
 
         // Maybe enable XDebug
         $endpoint = RequestHelpers::maybeAddParamToDebugRequest($endpoint);
