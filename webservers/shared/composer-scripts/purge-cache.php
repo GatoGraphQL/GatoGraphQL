@@ -12,6 +12,9 @@ class ComposerScripts
         string $dirPath,
         bool $removeDir = true
     ): void {
+        if (!file_exists($dirPath)) {
+            return;
+        }
         if (!is_dir($dirPath)) {
             throw new InvalidArgumentException("$dirPath must be a directory");
         }
