@@ -65,6 +65,9 @@ abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedSe
      */
     public function getBlockCategoriesViaBlockEditorContext(array $categories, WP_Block_Editor_Context $blockEditorContext): array
     {
+        if ($blockEditorContext->post === null) {
+            return $categories;
+        }
         return $this->getBlockCategories(
             $categories,
             $blockEditorContext->post

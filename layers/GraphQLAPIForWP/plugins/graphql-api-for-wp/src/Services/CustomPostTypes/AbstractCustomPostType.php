@@ -559,6 +559,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     public function allowGutenbergBlocksForCustomPostTypeViaBlockEditorContext(array|bool $allowedBlocks, WP_Block_Editor_Context $blockEditorContext): array|bool
     {
+        if ($blockEditorContext->post === null) {
+            return $allowedBlocks;
+        }
         return $this->allowGutenbergBlocksForCustomPostType(
             $allowedBlocks,
             $blockEditorContext->post
