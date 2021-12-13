@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\APIClients;
 
 use PoP\ComponentModel\Configuration\RequestHelpers;
-use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 
 trait ClientTrait
 {
