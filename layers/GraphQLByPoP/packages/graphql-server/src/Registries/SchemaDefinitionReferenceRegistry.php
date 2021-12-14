@@ -349,9 +349,12 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             SchemaDefinition::NAME => SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER,
             SchemaDefinition::TYPE_RESOLVER => $this->getIntScalarTypeResolver(),
             SchemaDefinition::DESCRIPTION => $this->getTranslationAPI()->__('Nest the directive under another one, indicated as a relative position from this one (a negative int)', 'graphql-server'),
+            SchemaDefinition::EXTENSIONS => [
+                SchemaDefinition::IS_ADMIN_ELEMENT => false,
+            ],
         ];
         APISchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($directiveArgSchemaDefinition);
-        $directiveSchemaDefinition[SchemaDefinition::ARGS][] = $directiveArgSchemaDefinition;
+        $directiveSchemaDefinition[SchemaDefinition::ARGS][SchemaElements::DIRECTIVE_PARAM_NESTED_UNDER] = $directiveArgSchemaDefinition;
     }
 
     /**
