@@ -913,7 +913,7 @@ _**In PoP** ([View query in browser](https://nextapi.getpop.org/api/graphql/?que
 
 In the example below, directive `<advancePointerInArrayOrObject>` communicates to directive `<translate>` the language to translate to through expression `%translateTo%`, which is defined on-the-fly.
 
-_**In PoP** (<a href="https://nextapi.getpop.org/api/graphql/?query=echo([{text:Hello my friends,translateTo:fr},{text:How do you like this software so far?,translateTo:es}])@translated<forEach<advancePointerInArrayOrObject(path:text,appendExpressions:[toLang:extract(%value%,translateTo)])<translateMultiple(from:en,to:%toLang%,oneLanguagePerField:true,override:true)>>>">View query in browser</a>):_
+_**In PoP** (<a href="https://nextapi.getpop.org/api/graphql/?query=echo([{text:Hello my friends,translateTo:fr},{text:How do you like this software so far?,translateTo:es}])@translated<forEach<advancePointerInArrayOrObject(path:text,appendExpressions:{toLang:extract(%value%,translateTo)})<translateMultiple(from:en,to:%toLang%,oneLanguagePerField:true,override:true)>>>">View query in browser</a>):_
 
 ```php
 /?query=
@@ -930,9 +930,9 @@ _**In PoP** (<a href="https://nextapi.getpop.org/api/graphql/?query=echo([{text:
     forEach<
       advancePointerInArrayOrObject(
         path: text,
-        appendExpressions: [
+        appendExpressions: {
           toLang:extract(%value%,translateTo)
-        ]
+        }
       )<
         translateMultiple(
           from: en,
