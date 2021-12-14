@@ -219,7 +219,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                 // The value is an array or stdClass. Unpack all the elements into their own property
                 $arrayValue = [];
                 $array = (array) $value;
-                foreach ($array as $key => $value) {
+                foreach (array_keys($array) as $key) {
                     $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, (string) $key);
                     $arrayItemProperty = $this->getFieldQueryInterpreter()->composeField(
                         $fieldName,

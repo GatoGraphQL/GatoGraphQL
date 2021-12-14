@@ -336,7 +336,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     $array = (array) $value;
                     $arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $objectIDItems, $dbItems, $previousDBItems, $variables, $messages, $arrayItemObjectErrors, $arrayItemObjectWarnings, $arrayItemObjectDeprecations);
                     // The value is an array. Unpack all the elements into their own property
-                    foreach ($arrayItems as $key => &$value) {
+                    foreach (array_keys($arrayItems) as $key) {
                         $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, (string) $key);
                         $arrayItemProperty = $this->getFieldQueryInterpreter()->composeField(
                             $fieldName,
