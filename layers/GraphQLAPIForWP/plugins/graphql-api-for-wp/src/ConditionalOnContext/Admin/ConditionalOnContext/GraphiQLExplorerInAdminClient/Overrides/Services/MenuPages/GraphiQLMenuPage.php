@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\Clients\AdminGraph
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage as UpstreamGraphiQLMenuPage;
 use PoP\API\Schema\QueryInputs;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * GraphiQL with Explorer page

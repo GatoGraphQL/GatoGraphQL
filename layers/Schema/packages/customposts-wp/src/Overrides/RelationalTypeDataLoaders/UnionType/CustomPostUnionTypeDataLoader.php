@@ -9,7 +9,6 @@ use PoPSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTyp
 use PoPSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPostsWP\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * In the context of WordPress, "Custom Posts" are all posts (eg: posts, pages, attachments, events, etc)

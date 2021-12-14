@@ -11,7 +11,6 @@ use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Settings menu page

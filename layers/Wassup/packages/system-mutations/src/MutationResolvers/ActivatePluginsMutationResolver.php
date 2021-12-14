@@ -7,7 +7,6 @@ namespace PoPSitesWassup\SystemMutations\MutationResolvers;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Engine\CMS\CMSServiceInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class ActivatePluginsMutationResolver extends AbstractMutationResolver
 {

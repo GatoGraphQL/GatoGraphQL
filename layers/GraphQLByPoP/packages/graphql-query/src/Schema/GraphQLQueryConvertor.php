@@ -27,7 +27,6 @@ use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
