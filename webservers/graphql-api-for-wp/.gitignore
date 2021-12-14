@@ -1,5 +1,6 @@
 /vendor/
 /wordpress/
+# For XDebug profiling
 /tmp/
 /defaults.local.env
 /wp-config.php.tmp
