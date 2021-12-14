@@ -127,11 +127,11 @@ class AdvancePointerInArrayOrObjectDirectiveResolver extends AbstractApplyNested
             parent::addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $objectErrors, $objectWarnings, $objectDeprecations, $objectNotices, $objectTraces, $id, $fieldOutputKey, $arrayItemKey, $arrayItemValue);
             return;
         }
+        // If stdClass: cast to array, and then back to object
+        if ($isStdClass = $dbItems[(string)$id][$fieldOutputKey] instanceof stdClass) {
+            $dbItems[(string)$id][$fieldOutputKey] = (array) $dbItems[(string)$id][$fieldOutputKey];
+        }
         foreach ((array)$arrayItemValue as $itemKey => $itemValue) {
-            // If stdClass: cast to array, and then back to object
-            if ($isStdClass = $dbItems[(string)$id][$fieldOutputKey][$itemKey] instanceof stdClass) {
-                $dbItems[(string)$id][$fieldOutputKey][$itemKey] = (array) $dbItems[(string)$id][$fieldOutputKey][$itemKey];
-            }
             try {
                 // Use function below since we may need to iterate a path
                 // Eg: $arrayItemKey => "meta.content"
@@ -146,9 +146,9 @@ class AdvancePointerInArrayOrObjectDirectiveResolver extends AbstractApplyNested
                     Tokens::MESSAGE => $e->getMessage(),
                 ];
             }
-            if ($isStdClass) {
-                $dbItems[(string)$id][$fieldOutputKey][$itemKey] = (object) $dbItems[(string)$id][$fieldOutputKey][$itemKey];
-            }
+        }
+        if ($isStdClass) {
+            $dbItems[(string)$id][$fieldOutputKey] = (object) $dbItems[(string)$id][$fieldOutputKey];
         }
     }
 }
