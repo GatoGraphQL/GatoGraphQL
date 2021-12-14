@@ -9,13 +9,13 @@ use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\ComponentConfiguration;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use stdClass;
 
 abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolver extends AbstractGlobalDirectiveResolver
@@ -26,6 +26,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
     public const PROPERTY_SEPARATOR = '.';
 
     private ?DirectivePipelineServiceInterface $directivePipelineService = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
 
     final public function setDirectivePipelineService(DirectivePipelineServiceInterface $directivePipelineService): void
     {
@@ -35,6 +36,14 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
     {
         return $this->directivePipelineService ??= $this->instanceManager->getInstance(DirectivePipelineServiceInterface::class);
     }
+    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+    }
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
@@ -42,8 +51,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
             return [];
         }
         return [
-            'addExpressions' => $this->getDangerouslyDynamicScalarTypeResolver(),
-            'appendExpressions' => $this->getDangerouslyDynamicScalarTypeResolver(),
+            'addExpressions' => $this->getJSONObjectScalarTypeResolver(),
+            'appendExpressions' => $this->getJSONObjectScalarTypeResolver(),
         ];
     }
 
@@ -66,17 +75,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
     {
         return match ($directiveArgName) {
             default => parent::getDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName),
-        };
-    }
-
-    public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
-    {
-        return match ($directiveArgName) {
-            'addExpressions',
-            'appendExpressions'
-                => SchemaTypeModifiers::IS_ARRAY,
-            default
-                => parent::getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName),
         };
     }
 
@@ -452,7 +450,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
             $options = [
                 AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
             ];
-            foreach ($addExpressions as $key => $value) {
+            foreach ((array) $addExpressions as $key => $value) {
                 // Evaluate the $value, since it may be a function
                 if ($this->getFieldQueryInterpreter()->isFieldArgumentValueAField($value)) {
                     $resolvedValue = $relationalTypeResolver->resolveValue($objectIDItems[(string)$id], $value, $variables, $expressions, $options);
@@ -483,7 +481,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 }
                 $this->addExpressionForObject($id, (string) $key, $value, $messages);
             }
-            foreach ($appendExpressions as $key => $value) {
+            foreach ((array)$appendExpressions as $key => $value) {
                 $existingValue = $this->getExpressionForObject($id, (string) $key, $messages) ?? [];
                 // Evaluate the $value, since it may be a function
                 if ($this->getFieldQueryInterpreter()->isFieldArgumentValueAField($value)) {
