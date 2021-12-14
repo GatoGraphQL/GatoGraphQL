@@ -189,23 +189,10 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $this->coerceInputObjectValue($inputValue);
     }
 
-    /**
-     * Indicate which entries must be coerced/validated.
-     * By default, it's all of them, but allow the OneofInputObjectTypeResolver
-     * to only validate the single provided entry, ignoring potential
-     * errors from the unprovided entries.
-     *
-     * @return array<string, InputTypeResolverInterface>
-     */
-    protected function getInputFieldNameTypeResolversToCoerce(stdClass $inputValue): array
-    {
-        return $this->getConsolidatedInputFieldNameTypeResolvers();
-    }
-
     protected function coerceInputObjectValue(stdClass $inputValue): stdClass|Error
     {
         $coercedInputValue = new stdClass();
-        $inputFieldNameTypeResolvers = $this->getInputFieldNameTypeResolversToCoerce($inputValue);
+        $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
 
         /**
          * Inject all properties with default value
@@ -227,7 +214,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             if ($inputFieldTypeResolver instanceof InputObjectTypeResolverInterface) {
                 $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
                 $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
-                if (!$inputFieldTypeModifiersIsMandatory) {
+                if (!$inputFieldTypeModifiersIsMandatory && $this->initializeInputFieldInputObjectValue()) {
                     $inputValue->$inputFieldName = new stdClass();
                 }
             }
@@ -398,6 +385,15 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
         // Add all missing properties which have a default value
         return $coercedInputValue;
+    }
+
+    /**
+     * Indicate if the InputObject must be initialized to {}.
+     * By default true, but will be false for OneofInputObject
+     */
+    protected function initializeInputFieldInputObjectValue(): bool
+    {
+        return true;
     }
 
     /**

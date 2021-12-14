@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use stdClass;
 
 /**
@@ -29,20 +28,11 @@ abstract class AbstractOneofInputObjectTypeResolver extends AbstractInputObjectT
     }
 
     /**
-     * Only validate the single provided entry, ignoring potential
-     * errors from the unprovided entries.
-     *
-     * @return array<string, InputTypeResolverInterface>
+     * Do not initialize the OneofInputObject for the unprovided values,
+     * otherwise its validation may show up in the errors
      */
-    protected function getInputFieldNameTypeResolversToCoerce(stdClass $inputValue): array
+    protected function initializeInputFieldInputObjectValue(): bool
     {
-        $inputFieldNameTypeResolvers = parent::getInputFieldNameTypeResolversToCoerce($inputValue);
-        if (count((array)$inputValue) !== 1) {
-            return $inputFieldNameTypeResolvers;
-        }
-        $inputField = key((array)$inputValue);
-        return [
-            $inputField => $inputFieldNameTypeResolvers[$inputField],
-        ];
+        return false;
     }
 }
