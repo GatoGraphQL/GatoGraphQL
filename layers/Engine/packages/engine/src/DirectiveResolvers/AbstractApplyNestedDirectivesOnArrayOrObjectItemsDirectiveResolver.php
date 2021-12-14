@@ -16,8 +16,9 @@ use PoP\Engine\ComponentConfiguration;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
+use stdClass;
 
-abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extends AbstractGlobalDirectiveResolver
+abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
     /**
      * Use a value that can't be part of a fieldName, that's legible, and that conveys the meaning of sublevel. The value "." is adequate
@@ -181,8 +182,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     continue;
                 }
 
-                // Validate that the value is an array
-                if (!is_array($value)) {
+                // Validate that the value is an array or stdClass
+                if (!(is_array($value) || ($value instanceof stdClass))) {
                     if ($fieldOutputKey != $field) {
                         $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
@@ -214,8 +215,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                 $fieldSkipOutputIfNull = $fieldParts[3];
                 $fieldDirectives = $fieldParts[4];
 
-                // The value is an array. Unpack all the elements into their own property
-                $array = $value;
+                // The value is an array or an stdClass. Unpack all the elements into their own property
+                $array = (array) $value;
                 if ($arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $objectIDItems, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations)) {
                     $execute = true;
                     foreach ($arrayItems as $key => &$value) {
@@ -318,7 +319,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
                     if (!$value) {
                         continue;
                     }
-                    if (!is_array($value)) {
+                    if (!(is_array($value) || ($value instanceof stdClass))) {
                         continue;
                     }
 
@@ -332,10 +333,10 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
 
                     // If there are errors, it will return null. Don't add the errors again
                     $arrayItemObjectErrors = $arrayItemObjectWarnings = $arrayItemObjectDeprecations = [];
-                    $array = $value;
+                    $array = (array) $value;
                     $arrayItems = $this->getArrayItems($array, $id, $field, $relationalTypeResolver, $objectIDItems, $dbItems, $previousDBItems, $variables, $messages, $arrayItemObjectErrors, $arrayItemObjectWarnings, $arrayItemObjectDeprecations);
                     // The value is an array. Unpack all the elements into their own property
-                    foreach ($arrayItems as $key => &$value) {
+                    foreach (array_keys($arrayItems) as $key) {
                         $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, (string) $key);
                         $arrayItemProperty = $this->getFieldQueryInterpreter()->composeField(
                             $fieldName,
@@ -388,7 +389,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extend
         int|string $arrayItemKey,
         $arrayItemValue
     ): void {
-        $dbItems[(string)$id][$fieldOutputKey][$arrayItemKey] = $arrayItemValue;
+        if (is_array($dbItems[(string)$id][$fieldOutputKey])) {
+            $dbItems[(string)$id][$fieldOutputKey][$arrayItemKey] = $arrayItemValue;
+        } else {
+            // stdClass
+            $dbItems[(string)$id][$fieldOutputKey]->$arrayItemKey = $arrayItemValue;
+        }
     }
 
     /**
