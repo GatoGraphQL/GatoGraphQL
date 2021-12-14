@@ -25,6 +25,7 @@ class RootObjectTypeResolver extends UpstreamRootObjectTypeResolver
             !$enableNestedMutations && !in_array($field, [
             'queryRoot',
             'mutationRoot',
+            'id',
             ])
         ) {
             return [];
