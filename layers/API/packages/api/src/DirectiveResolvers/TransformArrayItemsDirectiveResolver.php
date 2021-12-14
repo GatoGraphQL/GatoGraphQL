@@ -13,6 +13,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\DirectiveResolvers\ApplyFunctionDirectiveResolver;
 use PoP\Engine\DirectiveResolvers\ForEachDirectiveResolver;
 use PoP\FieldQuery\QuerySyntax;
+use stdClass;
 
 class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolver
 {
@@ -132,8 +133,8 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                     continue;
                 }
 
-                // Validate that the value is an array
-                if (!is_array($value)) {
+                // Validate that the value is an array or stdClass
+                if (!(is_array($value) || ($value instanceof stdClass))) {
                     if ($fieldOutputKey != $field) {
                         $objectErrors[(string)$id][] = [
                             Tokens::PATH => [$this->directive],
@@ -165,8 +166,8 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                 $fieldSkipOutputIfNull = $fieldParts[3];
                 $fieldDirectives = $fieldParts[4];
 
-                // The value is an array. Unpack all the elements into their own property
-                $array = $value;
+                // The value is an array or an stdClass. Unpack all the elements into their own property
+                $array = (array) $value;
                 foreach ($array as $key => $value) {
                     // Add into the $idsDataFields object for the array items
                     // Watch out: function `regenerateAndExecuteFunction` receives `$idsDataFields` and not `$idsDataFieldOutputKeys`, so then re-create the "field" assigning a new alias
@@ -203,7 +204,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                 if (!$value) {
                     continue;
                 }
-                if (!is_array($value)) {
+                if (!(is_array($value) || ($value instanceof stdClass))) {
                     continue;
                 }
 
@@ -215,9 +216,9 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                 $fieldSkipOutputIfNull = $fieldParts[3];
                 $fieldDirectives = $fieldParts[4];
 
-                // The value is an array. Unpack all the elements into their own property
+                // The value is an array or stdClass. Unpack all the elements into their own property
                 $arrayValue = [];
-                $array = $value;
+                $array = (array) $value;
                 foreach ($array as $key => $value) {
                     $arrayItemAlias = $this->createPropertyForArrayItem($fieldAlias ? $fieldAlias : QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldName, (string) $key);
                     $arrayItemProperty = $this->getFieldQueryInterpreter()->composeField(
@@ -255,7 +256,7 @@ class TransformArrayItemsDirectiveResolver extends ApplyFunctionDirectiveResolve
                 }
 
                 // Finally, place the results for all items in the array in the original property
-                $dbItems[(string)$id][$fieldOutputKey] = $arrayValue;
+                $dbItems[(string)$id][$fieldOutputKey] = is_array($value) ? $arrayValue : (object) $arrayValue;
             }
         }
     }
