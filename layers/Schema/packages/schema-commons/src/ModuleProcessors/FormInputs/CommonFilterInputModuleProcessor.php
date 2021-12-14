@@ -141,7 +141,7 @@ class CommonFilterInputModuleProcessor extends AbstractFilterInputModuleProcesso
     public function getName(array $module): string
     {
         // Add a nice name, so that the URL params when filtering make sense
-        return match ($module[1]) {
+        return match ((string) $module[1]) {
             self::MODULE_FILTERINPUT_SORT => 'order',
             self::MODULE_FILTERINPUT_LIMIT => 'limit',
             self::MODULE_FILTERINPUT_OFFSET => 'offset',

@@ -56,7 +56,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
             );
         }
         // Retrieve the first (and only) element key
-        return (string)key($oneofInputObjectFormData);
+        return (string)key((array)$oneofInputObjectFormData);
     }
 
     /**
