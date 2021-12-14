@@ -11,6 +11,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Misc\OperatorHelpers;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use stdClass;
 
 class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
 {
@@ -122,14 +123,18 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
         int|string $arrayItemKey,
         $arrayItemValue
     ): void {
-        if (!is_array($arrayItemValue)) {
+        if (!(is_array($arrayItemValue) || ($arrayItemValue instanceof stdClass))) {
             parent::addProcessedItemBackToDBItems($relationalTypeResolver, $dbItems, $objectErrors, $objectWarnings, $objectDeprecations, $objectNotices, $objectTraces, $id, $fieldOutputKey, $arrayItemKey, $arrayItemValue);
             return;
         }
-        foreach ($arrayItemValue as $itemKey => $itemValue) {
-            // Use function below since we may need to iterate a path
-            // Eg: $arrayItemKey => "meta.content"
+        foreach ((array)$arrayItemValue as $itemKey => $itemValue) {
+            // If stdClass: cast to array, and then back to object
+            if ($isStdClass = $dbItems[(string)$id][$fieldOutputKey][$itemKey] instanceof stdClass) {
+                $dbItems[(string)$id][$fieldOutputKey][$itemKey] = (array) $dbItems[(string)$id][$fieldOutputKey][$itemKey];
+            }
             try {
+                // Use function below since we may need to iterate a path
+                // Eg: $arrayItemKey => "meta.content"
                 OperatorHelpers::setValueToArrayItemUnderPath(
                     $dbItems[(string)$id][$fieldOutputKey][$itemKey],
                     $arrayItemKey,
@@ -140,6 +145,9 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
                     Tokens::PATH => [$this->directive],
                     Tokens::MESSAGE => $e->getMessage(),
                 ];
+            }
+            if ($isStdClass) {
+                $dbItems[(string)$id][$fieldOutputKey][$itemKey] = (object) $dbItems[(string)$id][$fieldOutputKey][$itemKey];
             }
         }
     }
