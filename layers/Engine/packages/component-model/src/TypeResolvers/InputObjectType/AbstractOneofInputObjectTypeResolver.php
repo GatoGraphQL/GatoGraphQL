@@ -26,13 +26,4 @@ abstract class AbstractOneofInputObjectTypeResolver extends AbstractInputObjectT
         }
         return parent::coerceInputObjectValue($inputValue);
     }
-
-    /**
-     * Do not initialize the OneofInputObject for the unprovided values,
-     * otherwise its validation may show up in the errors
-     */
-    protected function initializeInputFieldInputObjectValue(): bool
-    {
-        return false;
-    }
 }
