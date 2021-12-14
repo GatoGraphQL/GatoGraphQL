@@ -105,7 +105,7 @@ class AdvancePointerInArrayOrObjectDirectiveResolver extends AbstractApplyNested
      * Enables to support this query, having the translation
      * replace the original string, under the original entry in the array:
      *
-     * ?query=posts.title|blockMetadata(blockName:core/paragraph)@translated<advancePointerInArray(path:meta.content)<forEach<translate(from:en,to:fr)>>>
+     * ?query=posts.title|blockMetadata(blockName:core/paragraph)@translated<advancePointerInArrayOrObject(path:meta.content)<forEach<translate(from:en,to:fr)>>>
      *
      * Otherwise it adds the results under a parallel entry, not overriding
      * the original ones.
