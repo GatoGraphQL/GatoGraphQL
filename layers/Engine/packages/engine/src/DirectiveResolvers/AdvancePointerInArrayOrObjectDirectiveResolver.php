@@ -13,7 +13,7 @@ use PoP\Engine\Misc\OperatorHelpers;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use stdClass;
 
-class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
+class AdvancePointerInArrayOrObjectDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
@@ -28,7 +28,7 @@ class AdvancePointerInArrayDirectiveResolver extends AbstractApplyNestedDirectiv
 
     public function getDirectiveName(): string
     {
-        return 'advancePointerInArray';
+        return 'advancePointerInArrayOrObject';
     }
 
     public function getDirectiveKind(): string

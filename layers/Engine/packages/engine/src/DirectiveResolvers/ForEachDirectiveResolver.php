@@ -13,7 +13,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\Dataloading\Expressions;
 use PoP\Engine\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 
-class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver
+class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 

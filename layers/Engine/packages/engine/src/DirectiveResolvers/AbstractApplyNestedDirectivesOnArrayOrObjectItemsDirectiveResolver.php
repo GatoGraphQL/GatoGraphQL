@@ -18,7 +18,7 @@ use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use stdClass;
 
-abstract class AbstractApplyNestedDirectivesOnArrayItemsDirectiveResolver extends AbstractGlobalDirectiveResolver
+abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
     /**
      * Use a value that can't be part of a fieldName, that's legible, and that conveys the meaning of sublevel. The value "." is adequate
