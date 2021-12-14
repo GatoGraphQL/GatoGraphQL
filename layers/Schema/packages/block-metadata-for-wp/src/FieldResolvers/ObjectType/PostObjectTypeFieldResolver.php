@@ -179,7 +179,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         );
                     }
                 }
-                return $block_metadata;
+                return (object) $block_metadata;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
