@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Date: 16.11.16
- *
- * @author Portey Vasil <portey@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast\Interfaces;
 

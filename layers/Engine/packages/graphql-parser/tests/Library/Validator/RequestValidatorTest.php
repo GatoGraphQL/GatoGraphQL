@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Date: 27.10.16
- *
- * @author Portey Vasil <portey@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Library\Validator;
 

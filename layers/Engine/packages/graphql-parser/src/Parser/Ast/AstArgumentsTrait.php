@@ -1,11 +1,6 @@
 <?php
 
-/*
-* This file is a part of GraphQL project.
-*
-* @author Alexandr Viniychuk <a@viniychuk.com>
-* created: 2/5/17 11:31 AM
-*/
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast;
 

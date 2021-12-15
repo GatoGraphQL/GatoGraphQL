@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Date: 3/17/17
- *
- * @author Volodymyr Rashchepkin <rashepkin@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast;
 

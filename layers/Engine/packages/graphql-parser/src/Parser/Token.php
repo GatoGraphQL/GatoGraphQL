@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Date: 23.11.15
- *
- * @author Portey Vasil <portey@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser;
 
@@ -43,7 +39,7 @@ class Token
     public function __construct(private string $type, private int $line, private int $column, private string|int|float|bool|null $data = null)
     {
         if ($data) {
-            $tokenLength = mb_strlen($data);
+            $tokenLength = mb_strlen((string)$data);
             $tokenLength = $tokenLength > 1 ? $tokenLength - 1 : 0;
 
             $this->column = $column - $tokenLength;
