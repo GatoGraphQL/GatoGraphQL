@@ -35,7 +35,7 @@ class ParserTest extends TestCase
             'fragmentReferences' => [],
             'variables'          => [],
             'variableReferences' => [],
-        ], $parser->parse());
+        ], $parser->parse(''));
     }
 
     public function testInvalidSelection()
