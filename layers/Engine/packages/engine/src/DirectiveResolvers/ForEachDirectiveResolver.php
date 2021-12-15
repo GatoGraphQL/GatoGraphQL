@@ -75,7 +75,7 @@ class ForEachDirectiveResolver extends AbstractApplyNestedDirectivesOnArrayOrObj
         if ($if = $this->directiveArgsForSchema['if'] ?? null) {
             // If it is a field, execute the function against all the values in the array
             // Those that satisfy the condition stay, the others are filtered out
-            // We must add each item in the array as expression `%value%`, over which the if function can be evaluated
+            // We must add each item in the array as expression `%{value}%`, over which the if function can be evaluated
             if ($this->getFieldQueryInterpreter()->isFieldArgumentValueAField($if)) {
                 $options = [
                     AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,

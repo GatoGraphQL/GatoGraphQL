@@ -307,7 +307,7 @@ In the example below, directive `<forEach>` iterates all the elements from an ar
       applyFunction(
         function: arrayJoin,
         addArguments: [
-          array: %value%,
+          array: %{value}%,
           separator: "---"
         ]
       )
@@ -315,13 +315,13 @@ In the example below, directive `<forEach>` iterates all the elements from an ar
   >
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?query=echo(%5B%5Bbanana,apple%5D,%5Bstrawberry,grape,melon%5D%5D)@fruitJoin%3CforEach%3CapplyFunction(function:arrayJoin,addArguments:%5Barray:%value%,separator:%22---%22%5D)%3E%3E">View query results</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=echo(%5B%5Bbanana,apple%5D,%5Bstrawberry,grape,melon%5D%5D)@fruitJoin%3CforEach%3CapplyFunction(function:arrayJoin,addArguments:%5Barray:%{value}%,separator:%22---%22%5D)%3E%3E">View query results</a>
 
 ### Directive expressions
 
 An expression, defined through symbols `%...%`, is a variable used by directives to pass values to each other. An expression can be pre-defined by the directive or created on-the-fly in the query itself.
 
-In the example below, an array contains strings to translate and the language to translate the string to. The array element is passed from directive `<forEach>` to directive `<advancePointerInArrayOrObject>` through pre-defined expression `%value%`, and the language code is passed from directive `<advancePointerInArrayOrObject>` to directive `<translate>` through variable `%toLang%`, which is defined only in the query:
+In the example below, an array contains strings to translate and the language to translate the string to. The array element is passed from directive `<forEach>` to directive `<advancePointerInArrayOrObject>` through pre-defined expression `%{value}%`, and the language code is passed from directive `<advancePointerInArrayOrObject>` to directive `<translate>` through variable `%{toLang}%`, which is defined only in the query:
 
 ```less
 /?query=
@@ -339,21 +339,20 @@ In the example below, an array contains strings to translate and the language to
       advancePointerInArrayOrObject(
         path: text,
         appendExpressions: {
-          toLang:extract(%value%,translateTo)
+          toLang:extract(%{value}%,translateTo)
         }
       )<
         translateMultiple(
           from: en,
-          to: %toLang%,
-          oneLanguagePerField: true,
-          override: true
+          to: %{toLang}%,
+          oneLanguagePerField: true
         )
       >
     >
   >
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?query=echo(%5B{text:%20Hello%20my%20friends,translateTo:%20fr},{text:%20How%20do%20you%20like%20this%20software%20so%20far?,translateTo:%20es}%5D)@translated%3CforEach%3CadvancePointerInArrayOrObject(path:%20text,appendExpressions:%20{toLang:extract(%value%,translateTo)})%3CtranslateMultiple(from:%20en,to:%20%toLang%,oneLanguagePerField:%20true,override:%20true)%3E%3E%3E">View query results</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=echo(%5B{text:%20Hello%20my%20friends,translateTo:%20fr},{text:%20How%20do%20you%20like%20this%20software%20so%20far?,translateTo:%20es}%5D)@translated%3CforEach%3CadvancePointerInArrayOrObject(path:%20text,appendExpressions:%20{toLang:extract(%{value}%,translateTo)})%3CtranslateMultiple(from:%20en,to:%20%{toLang}%,oneLanguagePerField:%20true)%3E%3E%3E">View query results</a>
 
 ### HTTP Caching
 
@@ -653,30 +652,30 @@ The example below defines and accesses a list of all services required by the ap
     weather: "https://api.weather.gov/zones/forecast/MOZ028/forecast",
     photos: "https://picsum.photos/v2/list"
   ])@meshServices|
-  getAsyncJSON(getSelfProp(%self%, meshServices))@meshServiceData|
+  getAsyncJSON(getSelfProp(%{self}%, meshServices))@meshServiceData|
   echo([
     weatherForecast: extract(
-      getSelfProp(%self%, meshServiceData),
+      getSelfProp(%{self}%, meshServiceData),
       weather.properties.periods
     ),
     photoGalleryURLs: extract(
-      getSelfProp(%self%, meshServiceData),
+      getSelfProp(%{self}%, meshServiceData),
       photos.url
     ),
     githubMeta: echo([
       description: extract(
-        getSelfProp(%self%, meshServiceData),
+        getSelfProp(%{self}%, meshServiceData),
         github.description
       ),
       starCount: extract(
-        getSelfProp(%self%, meshServiceData),
+        getSelfProp(%{self}%, meshServiceData),
         github.stargazers_count
       )
     ])
   ])@contentMesh
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?query=echo(%5Bgithub:%22https://api.github.com/repos/leoloso/PoP%22,weather:%22https://api.weather.gov/zones/forecast/MOZ028/forecast%22,photos:%22https://picsum.photos/v2/list%22%5D)@meshServices%7CgetAsyncJSON(getSelfProp(%self%,meshServices))@meshServiceData%7Cecho(%5BweatherForecast:extract(getSelfProp(%self%,meshServiceData),weather.properties.periods),photoGalleryURLs:extract(getSelfProp(%self%,meshServiceData),photos.url),githubMeta:echo(%5Bdescription:extract(getSelfProp(%self%,meshServiceData),github.description),starCount:extract(getSelfProp(%self%,meshServiceData),github.stargazers_count)%5D)%5D)@contentMesh">View query results</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=echo(%5Bgithub:%22https://api.github.com/repos/leoloso/PoP%22,weather:%22https://api.weather.gov/zones/forecast/MOZ028/forecast%22,photos:%22https://picsum.photos/v2/list%22%5D)@meshServices%7CgetAsyncJSON(getSelfProp(%{self}%,meshServices))@meshServiceData%7Cecho(%5BweatherForecast:extract(getSelfProp(%{self}%,meshServiceData),weather.properties.periods),photoGalleryURLs:extract(getSelfProp(%{self}%,meshServiceData),photos.url),githubMeta:echo(%5Bdescription:extract(getSelfProp(%{self}%,meshServiceData),github.description),starCount:extract(getSelfProp(%{self}%,meshServiceData),github.stargazers_count)%5D)%5D)@contentMesh">View query results</a>
 
 ### One-graph ready
 
@@ -1043,12 +1042,12 @@ query=
   getJSON("https://newapi.getpop.org/wp-json/newsletter/v1/subscriptions")@userList|
   arrayUnique(
     extract(
-      getSelfProp(%self%, userList),
+      getSelfProp(%{self}%, userList),
       lang
     )
   )@userLangs|
   extract(
-    getSelfProp(%self%, userList),
+    getSelfProp(%{self}%, userList),
     email
   )@userEmails|
   arrayFill(
@@ -1056,12 +1055,12 @@ query=
       sprintf(
         "https://newapi.getpop.org/users/api/rest/?query=name|email%26emails[]=%s",
         [arrayJoin(
-          getSelfProp(%self%, userEmails),
+          getSelfProp(%{self}%, userEmails),
           "%26emails[]="
         )]
       )
     ),
-    getSelfProp(%self%, userList),
+    getSelfProp(%{self}%, userList),
     email
   )@userData;
 
@@ -1072,17 +1071,17 @@ query=
     )
   >;
 
-  getSelfProp(%self%, postContent)@postContent<
+  getSelfProp(%{self}%, postContent)@postContent<
     translateMultiple(
       from: en,
       to: arrayDiff([
-        getSelfProp(%self%, userLangs),
+        getSelfProp(%{self}%, userLangs),
         [en]
       ])
     ),
     renameProperty(postContent-en)
   >|
-  getSelfProp(%self%, userData)@userPostData<
+  getSelfProp(%{self}%, userData)@userPostData<
     forEach<
       applyFunction(
         function: arrayAddItem(
@@ -1091,12 +1090,12 @@ query=
         ),
         addArguments: [
           key: postContent,
-          array: %value%,
+          array: %{value}%,
           value: getSelfProp(
-            %self%,
+            %{self}%,
             sprintf(
               postContent-%s,
-              [extract(%value%, lang)]
+              [extract(%{value}%, lang)]
             )
           )
         ]
@@ -1108,12 +1107,12 @@ query=
         ),
         addArguments: [
           key: header,
-          array: %value%,
+          array: %{value}%,
           value: sprintf(
             string: "<p>Hi %s, we published this post on %s, enjoy!</p>",
             values: [
-              extract(%value%, name),
-              getSelfProp(%self%, postDate)
+              extract(%{value}%, name),
+              getSelfProp(%{self}%, postDate)
             ]
           )
         ]
@@ -1121,11 +1120,11 @@ query=
     >
   >;
 
-  getSelfProp(%self%, userPostData)@translatedUserPostProps<
+  getSelfProp(%{self}%, userPostData)@translatedUserPostProps<
     forEach(
       if: not(
         equals(
-          extract(%value%, lang),
+          extract(%{value}%, lang),
           en
         )
       )
@@ -1133,12 +1132,12 @@ query=
       advancePointerInArrayOrObject(
         path: header,
         appendExpressions: {
-          toLang: extract(%value%, lang)
+          toLang: extract(%{value}%, lang)
         }
       )<
         translateMultiple(
           from: en,
-          to: %toLang%,
+          to: %{toLang}%,
           oneLanguagePerField: true,
           override: true
         )
@@ -1146,7 +1145,7 @@ query=
     >
   >;
 
-  getSelfProp(%self%,translatedUserPostProps)@emails<
+  getSelfProp(%{self}%,translatedUserPostProps)@emails<
     forEach<
       applyFunction(
         function: arrayAddItem(
@@ -1155,10 +1154,10 @@ query=
         ),
         addArguments: [
           key: content,
-          array: %value%,
+          array: %{value}%,
           value: concat([
-            extract(%value%, header),
-            extract(%value%, postContent)
+            extract(%{value}%, header),
+            extract(%{value}%, postContent)
           ])
         ]
       ),
@@ -1169,8 +1168,8 @@ query=
         ),
         addArguments: [
           key: to,
-          array: %value%,
-          value: extract(%value%, email)
+          array: %{value}%,
+          value: extract(%{value}%, email)
         ]
       ),
       applyFunction(
@@ -1180,7 +1179,7 @@ query=
         ),
         addArguments: [
           key: subject,
-          array: %value%,
+          array: %{value}%,
           value: "PoP API example :)"
         ]
       ),
@@ -1189,7 +1188,7 @@ query=
   >
 ```
 
-<a href='https://newapi.getpop.org/api/graphql/?postId=1&query=post({id:$postId})@post.content|dateStr(d/m/Y)@date,getJSON("https://newapi.getpop.org/wp-json/newsletter/v1/subscriptions")@userList|arrayUnique(extract(getSelfProp(%self%,userList),lang))@userLangs|extract(getSelfProp(%self%,userList),email)@userEmails|arrayFill(getJSON(sprintf("https://newapi.getpop.org/users/api/rest/?query=name|email%26emails[]=%s",[arrayJoin(getSelfProp(%self%,userEmails),"%26emails[]=")])),getSelfProp(%self%,userList),email)@userData;post({id:$postId})@post<copyRelationalResults([content,date],[postContent,postDate])>;getSelfProp(%self%,postContent)@postContent<translateMultiple(from:en,to:arrayDiff([getSelfProp(%self%,userLangs),[en]])),renameProperty(postContent-en)>|getSelfProp(%self%,userData)@userPostData<forEach<applyFunction(function:arrayAddItem(array:[],value:""),addArguments:[key:postContent,array:%value%,value:getSelfProp(%self%,sprintf(postContent-%s,[extract(%value%,lang)]))]),applyFunction(function:arrayAddItem(array:[],value:""),addArguments:[key:header,array:%value%,value:sprintf(string:"<p>Hi %s, we published this post on %s,enjoy!</p>",values:[extract(%value%,name),getSelfProp(%self%,postDate)])])>>;getSelfProp(%self%,userPostData)@translatedUserPostProps<forEach(if:not(equals(extract(%value%,lang),en)))<advancePointerInArrayOrObject(path:header,appendExpressions:{toLang:extract(%value%,lang)})<translateMultiple(from:en,to:%toLang%,oneLanguagePerField:true,override:true)>>>;getSelfProp(%self%,translatedUserPostProps)@emails<forEach<applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:content,array:%value%,value:concat([extract(%value%,header),extract(%value%,postContent)])]),applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:to,array:%value%,value:extract(%value%,email)]),applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:subject,array:%value%,value:"PoP API example :)"]),sendByEmail>>'>View query results</a>
+<a href='https://newapi.getpop.org/api/graphql/?postId=1&query=post({id:$postId})@post.content|dateStr(d/m/Y)@date,getJSON("https://newapi.getpop.org/wp-json/newsletter/v1/subscriptions")@userList|arrayUnique(extract(getSelfProp(%{self}%,userList),lang))@userLangs|extract(getSelfProp(%{self}%,userList),email)@userEmails|arrayFill(getJSON(sprintf("https://newapi.getpop.org/users/api/rest/?query=name|email%26emails[]=%s",[arrayJoin(getSelfProp(%{self}%,userEmails),"%26emails[]=")])),getSelfProp(%{self}%,userList),email)@userData;post({id:$postId})@post<copyRelationalResults([content,date],[postContent,postDate])>;getSelfProp(%{self}%,postContent)@postContent<translateMultiple(from:en,to:arrayDiff([getSelfProp(%{self}%,userLangs),[en]])),renameProperty(postContent-en)>|getSelfProp(%{self}%,userData)@userPostData<forEach<applyFunction(function:arrayAddItem(array:[],value:""),addArguments:[key:postContent,array:%{value}%,value:getSelfProp(%{self}%,sprintf(postContent-%s,[extract(%{value}%,lang)]))]),applyFunction(function:arrayAddItem(array:[],value:""),addArguments:[key:header,array:%{value}%,value:sprintf(string:"<p>Hi %s, we published this post on %s,enjoy!</p>",values:[extract(%{value}%,name),getSelfProp(%{self}%,postDate)])])>>;getSelfProp(%{self}%,userPostData)@translatedUserPostProps<forEach(if:not(equals(extract(%{value}%,lang),en)))<advancePointerInArrayOrObject(path:header,appendExpressions:{toLang:extract(%{value}%,lang)})<translateMultiple(from:en,to:%{toLang}%,oneLanguagePerField:true,override:true)>>>;getSelfProp(%{self}%,translatedUserPostProps)@emails<forEach<applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:content,array:%{value}%,value:concat([extract(%{value}%,header),extract(%{value}%,postContent)])]),applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:to,array:%{value}%,value:extract(%{value}%,email)]),applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:subject,array:%{value}%,value:"PoP API example :)"]),sendByEmail>>'>View query results</a>
 
 **Step-by-step description of the solution:**
 
