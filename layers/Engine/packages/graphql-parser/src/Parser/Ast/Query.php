@@ -13,12 +13,12 @@ class Query extends AbstractAst implements FieldInterface
     use AstArgumentsTrait;
     use AstDirectivesTrait;
 
-    /** @var Field[]|Query[] */
+    /** @var Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] */
     protected array $fields = [];
 
     /**
      * @param Argument[] $arguments
-     * @param Field[]|Query[]|FragmentReference[] $fields
+     * @param Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] $fields
      * @param Directive[] $directives
      */
     public function __construct(protected string $name, protected ?string $alias, array $arguments, array $fields, array $directives, Location $location)
@@ -35,11 +35,11 @@ class Query extends AbstractAst implements FieldInterface
     }
 
     /**
-     * @return Field[]|Query[]|FragmentInterface[]
+     * @return Field[]|Query[]|FragmentInterface[]|TypedFragmentReference[]
      */
     public function getFields(): array
     {
-        return array_values($this->fields);
+        return $this->fields;
     }
 
     public function hasFields(): bool
@@ -48,7 +48,7 @@ class Query extends AbstractAst implements FieldInterface
     }
 
     /**
-     * @param Field[]|Query[] $fields
+     * @param Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] $fields
      */
     public function setFields(array $fields): void
     {
