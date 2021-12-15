@@ -1,56 +1,9 @@
 {
     "name": "getpop/graphql-parser",
-    "type": "library",
-    "description": "GraphQL syntax parser",
-    "homepage": "https://github.com/getpop/graphql-parser",
-    "license": "GPL-2.0-or-later",
-    "authors": [
-        {
-            "name": "Leonardo Losoviz",
-            "email": "leo@getpop.org",
-            "homepage": "https://getpop.org"
-        }
-    ],
-    "require": {
-        "php": "^8.0",
-        "getpop/translation": "^0.9",
-        "pop-backbone/graphql-parser": "^0.9"
-    },
-    "require-dev": {
-        "phpstan/phpstan": "^1.0",
-        "phpunit/phpunit": ">=9.3",
-        "rector/rector": "^0.12",
-        "squizlabs/php_codesniffer": "^3.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "PoP\\GraphQLParser\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "PoP\\GraphQLParser\\": "tests"
-        }
-    },
-    "scripts": {
-        "test": "phpunit",
-        "check-style": "phpcs src tests",
-        "fix-style": "phpcbf src tests",
-        "analyse": "phpstan analyse"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.9-dev"
-        }
-    },
-    "config": {
-        "sort-packages": true
-    },
     "conflict": {
         "getpop/modulerouting": "<0.8.9",
         "getpop/hooks-wp": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
-        "getpop/translation": "<0.8.9",
         "getpop/mandatory-directives-by-configuration": "<0.8.9",
         "getpop/component-model": "<0.8.9",
         "getpop/filestore": "<0.8.9",
@@ -66,8 +19,6 @@
         "getpop/definitions": "<0.8.9",
         "getpop/engine": "<0.8.9",
         "getpop/engine-wp-bootloader": "<0.8.9",
-        "getpop/query-parsing": "<0.8.9",
-        "getpop/field-query": "<0.8.9",
         "getpop/cache-control": "<0.8.9",
         "getpop/api-rest": "<0.8.9",
         "getpop/api-graphql": "<0.8.9",
@@ -200,5 +151,54 @@
         "pop-schema/postmedia-mutations": "<0.8.9",
         "pop-wp-schema/comments": "<0.8.9",
         "pop-wp-schema/schema-commons": "<0.8.9"
-    }
+    },
+    "type": "library",
+    "description": "GraphQL syntax parser",
+    "keywords": ["PoP", "GraphQL", "graphql-parser"],
+    "homepage": "https://github.com/getpop/graphql-parser",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "getpop/translation": "^0.9",
+        "pop-backbone/graphql-parser": "^0.9"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.0",
+        "phpunit/phpunit": ">=9.3",
+        "rector/rector": "^0.12",
+        "squizlabs/php_codesniffer": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PoP\\GraphQLParser\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PoP\\GraphQLParser\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src tests",
+        "fix-style": "phpcbf src tests",
+        "analyse": "phpstan analyse"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.9-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
