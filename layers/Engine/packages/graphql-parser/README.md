@@ -18,7 +18,7 @@ This component is a fork of [Youshido GraphQL](https://github.com/youshido-php/G
 Via Composer
 
 ``` bash
-composer require graphql-by-pop/graphql-parser
+composer require getpop/graphql-parser
 ```
 
 ## Development
@@ -113,17 +113,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/graphql-by-pop/graphql-parser.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/getpop/graphql-parser.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/graphql-by-pop/graphql-parser/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/graphql-by-pop/graphql-parser.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/graphql-by-pop/graphql-parser.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/graphql-by-pop/graphql-parser.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/getpop/graphql-parser/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/getpop/graphql-parser.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/getpop/graphql-parser.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/getpop/graphql-parser.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/graphql-by-pop/graphql-parser
-[link-travis]: https://travis-ci.org/graphql-by-pop/graphql-parser
-[link-scrutinizer]: https://scrutinizer-ci.com/g/graphql-by-pop/graphql-parser/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/graphql-by-pop/graphql-parser
-[link-downloads]: https://packagist.org/packages/graphql-by-pop/graphql-parser
+[link-packagist]: https://packagist.org/packages/getpop/graphql-parser
+[link-travis]: https://travis-ci.org/getpop/graphql-parser
+[link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/graphql-parser/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/getpop/graphql-parser
+[link-downloads]: https://packagist.org/packages/getpop/graphql-parser
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors
