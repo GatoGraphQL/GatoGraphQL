@@ -33,7 +33,7 @@ class Variable extends AbstractAst implements ValueInterface
             if ($this->hasDefaultValue()) {
                 return $this->defaultValue;
             }
-            throw new LogicException(sprintf('Value is not set for variable "%s"', $this->name));
+            throw new LogicException(sprintf('Value is not set for variable \'%s\'', $this->name));
         }
 
         return $this->value;
