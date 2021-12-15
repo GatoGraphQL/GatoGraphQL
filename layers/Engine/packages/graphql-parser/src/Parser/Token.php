@@ -86,7 +86,7 @@ class Token
             self::TYPE_FALSE              => 'FALSE',
             self::TYPE_REQUIRED           => 'REQUIRED',
             self::TYPE_AT                 => 'AT',
-        ][$tokenType];
+        ][$tokenType] ?? $tokenType;
     }
 
     public function getData(): mixed
