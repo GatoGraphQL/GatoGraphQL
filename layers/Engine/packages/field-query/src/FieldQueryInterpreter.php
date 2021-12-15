@@ -4,15 +4,24 @@ declare(strict_types=1);
 
 namespace PoP\FieldQuery;
 
-use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\QueryParsing\QueryParserInterface;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Translation\TranslationAPIInterface;
 use stdClass;
 
 class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 {
-    // @todo Remove this trait: ComponentModel is not a dependency!!!
-    use BasicServiceTrait;
+    private ?TranslationAPIInterface $translationAPI = null;
 
+    final public function setTranslationAPI(TranslationAPIInterface $translationAPI): void
+    {
+        $this->translationAPI = $translationAPI;
+    }
+    final protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return $this->translationAPI ??= TranslationAPIFacade::getInstance();
+    }
+    
     // Cache the output from functions
     /**
      * @var array<string, string>
