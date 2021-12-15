@@ -26,12 +26,12 @@ class VariableReference extends AbstractAst implements ValueInterface
         return $this->variable;
     }
 
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }
 
-    public function setValue($value): void
+    public function setValue(mixed $value): void
     {
         $this->value = $value;
     }

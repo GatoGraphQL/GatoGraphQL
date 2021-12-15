@@ -22,7 +22,7 @@ class InputList extends AbstractAst implements ValueInterface
     /**
      * @return array
      */
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->list;
     }
@@ -30,7 +30,7 @@ class InputList extends AbstractAst implements ValueInterface
     /**
      * @param array $value
      */
-    public function setValue($value): void
+    public function setValue(mixed $value): void
     {
         $this->list = $value;
     }

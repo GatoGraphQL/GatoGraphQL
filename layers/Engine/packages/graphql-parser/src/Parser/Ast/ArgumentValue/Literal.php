@@ -22,7 +22,7 @@ class Literal extends AbstractAst implements ValueInterface
         parent::__construct($location);
     }
 
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }
@@ -30,7 +30,7 @@ class Literal extends AbstractAst implements ValueInterface
     /**
      * @param string $value
      */
-    public function setValue($value): void
+    public function setValue(mixed $value): void
     {
         $this->value = $value;
     }

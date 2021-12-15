@@ -37,7 +37,7 @@ class Argument extends AbstractAst
     /**
      * @return ValueInterface
      */
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }
@@ -45,7 +45,7 @@ class Argument extends AbstractAst
     /**
      * @param mixed $value
      */
-    public function setValue($value): void
+    public function setValue(mixed $value): void
     {
         $this->value = $value;
     }

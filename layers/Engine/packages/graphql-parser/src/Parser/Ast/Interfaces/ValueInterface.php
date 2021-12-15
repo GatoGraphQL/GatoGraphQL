@@ -10,7 +10,7 @@ namespace PoP\GraphQLParser\Parser\Ast\Interfaces;
 
 interface ValueInterface
 {
-    public function getValue();
+    public function getValue(): mixed;
 
-    public function setValue($value): void;
+    public function setValue(mixed $value): void;
 }

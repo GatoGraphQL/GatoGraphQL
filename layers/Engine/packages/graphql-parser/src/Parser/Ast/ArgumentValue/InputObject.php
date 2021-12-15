@@ -22,7 +22,7 @@ class InputObject extends AbstractAst implements ValueInterface
     /**
      * @return object
      */
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->object;
     }
@@ -30,7 +30,7 @@ class InputObject extends AbstractAst implements ValueInterface
     /**
      * @param object $value
      */
-    public function setValue($value): void
+    public function setValue(mixed $value): void
     {
         $this->object = $value;
     }

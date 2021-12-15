@@ -32,7 +32,7 @@ class Variable extends AbstractAst implements ValueInterface
      *
      * @throws \LogicException
      */
-    public function getValue()
+    public function getValue(): mixed
     {
         if (null === $this->value) {
             if ($this->hasDefaultValue()) {
@@ -47,7 +47,7 @@ class Variable extends AbstractAst implements ValueInterface
     /**
      * @param mixed $value
      */
-    public function setValue($value): void
+    public function setValue(mixed $value): void
     {
         $this->value = $value;
     }
