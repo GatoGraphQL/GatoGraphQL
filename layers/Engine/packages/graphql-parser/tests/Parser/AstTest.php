@@ -26,7 +26,7 @@ class AstTest extends TestCase
         $this->assertNotNull($argument->getValue());
         $this->assertEquals($argument->getName(), 'test');
 
-        $test2Value = new Literal('test2', new Location(1, 1));
+        $test2Value = new Literal('some value', new Location(1, 1));
         $argument->setName('test2');
         $argument->setValue($test2Value);
 
