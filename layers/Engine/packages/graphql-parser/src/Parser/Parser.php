@@ -347,18 +347,18 @@ class Parser extends Tokenizer
             if ($type === Token::TYPE_TYPED_FRAGMENT) {
                 return new TypedFragmentReference($nameToken->getData(), $fields, $directives, $bodyLocation);
             }
-            
+
             return new Mutation($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
         }
 
         if ($highLevel && $type === Token::TYPE_MUTATION) {
             return new Mutation($nameToken->getData(), $alias, $arguments, [], $directives, $bodyLocation);
         }
-        
+
         if ($highLevel && $type === Token::TYPE_QUERY) {
             return new Query($nameToken->getData(), $alias, $arguments, [], $directives, $bodyLocation);
         }
-        
+
         return new Field($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
     }
 
@@ -444,7 +444,7 @@ class Parser extends Tokenizer
         throw $this->createUnexpectedException($this->lookAhead);
     }
 
-    protected function parseList(bool $createType) : InputList|array
+    protected function parseList(bool $createType): InputList|array
     {
         $startToken = $this->eat(Token::TYPE_LSQUARE_BRACE);
 

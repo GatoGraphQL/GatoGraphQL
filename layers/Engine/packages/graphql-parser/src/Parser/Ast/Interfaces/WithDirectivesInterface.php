@@ -12,7 +12,7 @@ interface WithDirectivesInterface
      * @param Directive[] $directives
      */
     public function setDirectives(array $directives): void;
-    
+
     /**
      * @return Directive[]
      */
