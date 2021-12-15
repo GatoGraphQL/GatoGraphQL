@@ -10,7 +10,6 @@ namespace PoP\GraphQLParser\Parser\Ast;
 
 trait AstDirectivesTrait
 {
-
     /** @var Directive[] */
     protected $directives;
 

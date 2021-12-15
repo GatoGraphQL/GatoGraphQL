@@ -14,7 +14,6 @@ use PoP\GraphQLParser\Parser\Location;
 
 class Variable extends AbstractAst implements ValueInterface
 {
-
     /** @var  string */
     private $name;
 

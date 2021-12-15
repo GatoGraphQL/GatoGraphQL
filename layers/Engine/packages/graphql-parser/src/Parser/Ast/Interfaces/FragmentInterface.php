@@ -11,5 +11,4 @@ namespace PoP\GraphQLParser\Parser\Ast\Interfaces;
 
 interface FragmentInterface
 {
-
 }

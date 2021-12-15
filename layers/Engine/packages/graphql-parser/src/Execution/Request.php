@@ -18,7 +18,6 @@ use PoP\GraphQLParser\Parser\Ast\Query;
 
 class Request
 {
-
     /** @var  Query[] */
     private $queries = [];
 

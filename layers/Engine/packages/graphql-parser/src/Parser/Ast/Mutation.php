@@ -10,5 +10,4 @@ namespace PoP\GraphQLParser\Parser\Ast;
 
 class Mutation extends Query
 {
-
 }

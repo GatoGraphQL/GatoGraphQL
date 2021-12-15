@@ -11,7 +11,6 @@ namespace PoP\GraphQLParser\Parser\Ast;
 
 trait AstArgumentsTrait
 {
-
     /** @var Argument[] */
     protected $arguments;
 

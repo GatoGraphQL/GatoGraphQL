@@ -27,7 +27,6 @@ use stdClass;
 
 class Parser extends Tokenizer
 {
-
     /** @var array */
     private $data = [];
 

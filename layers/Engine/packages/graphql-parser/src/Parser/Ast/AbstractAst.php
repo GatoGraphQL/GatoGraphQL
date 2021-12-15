@@ -13,7 +13,6 @@ use PoP\GraphQLParser\Parser\Location;
 
 abstract class AbstractAst implements LocatableInterface
 {
-
     /** @var  Location */
     private $location;
 

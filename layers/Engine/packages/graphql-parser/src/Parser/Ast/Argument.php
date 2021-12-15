@@ -13,7 +13,6 @@ use PoP\GraphQLParser\Parser\Location;
 
 class Argument extends AbstractAst
 {
-
     /** @var string */
     private $name;
 

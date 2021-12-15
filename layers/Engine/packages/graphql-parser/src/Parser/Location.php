@@ -10,7 +10,6 @@ namespace PoP\GraphQLParser\Parser;
 
 class Location
 {
-
     /** @var  integer */
     private $line;
 

@@ -12,6 +12,5 @@ use PoP\GraphQLParser\Execution\Request;
 
 interface RequestValidatorInterface
 {
-
     public function validate(Request $request);
 }

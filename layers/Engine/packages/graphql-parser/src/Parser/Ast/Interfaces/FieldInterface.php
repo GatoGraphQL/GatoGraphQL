@@ -13,7 +13,6 @@ use PoP\GraphQLParser\Parser\Ast\Directive;
 
 interface FieldInterface extends LocatableInterface
 {
-
     /**
      * @return string
      */

@@ -10,5 +10,4 @@ namespace PoP\GraphQLParser\Exception\Parser;
 
 class SyntaxErrorException extends AbstractParserError
 {
-
 }

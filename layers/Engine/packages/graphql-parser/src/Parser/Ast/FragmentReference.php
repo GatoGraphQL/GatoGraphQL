@@ -13,7 +13,6 @@ use PoP\GraphQLParser\Parser\Location;
 
 class FragmentReference extends AbstractAst implements FragmentInterface
 {
-
     /** @var  string */
     protected $name;
 

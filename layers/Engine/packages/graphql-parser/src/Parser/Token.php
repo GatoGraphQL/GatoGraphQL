@@ -10,7 +10,6 @@ namespace PoP\GraphQLParser\Parser;
 
 class Token
 {
-
     const TYPE_END        = 'end';
     const TYPE_IDENTIFIER = 'identifier';
     const TYPE_NUMBER     = 'number';

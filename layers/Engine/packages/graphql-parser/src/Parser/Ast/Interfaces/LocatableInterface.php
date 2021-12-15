@@ -12,7 +12,6 @@ use PoP\GraphQLParser\Parser\Location;
 
 interface LocatableInterface
 {
-
     /**
      * @return Location
      */

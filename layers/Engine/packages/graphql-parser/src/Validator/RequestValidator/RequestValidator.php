@@ -13,7 +13,6 @@ use PoP\GraphQLParser\Execution\Request;
 
 class RequestValidator implements RequestValidatorInterface
 {
-
     public function validate(Request $request): void
     {
         $this->assertFragmentReferencesValid($request);

@@ -14,7 +14,6 @@ use PoP\GraphQLParser\Parser\Location;
 
 class InputList extends AbstractAst implements ValueInterface
 {
-
     protected $list = [];
 
     public function __construct(array $list, Location $location)
