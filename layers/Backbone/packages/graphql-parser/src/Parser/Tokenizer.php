@@ -255,7 +255,7 @@ class Tokenizer
 
     protected function createException(string $message): SyntaxErrorException
     {
-        return new SyntaxErrorException(sprintf('%s', $message), $this->getLocation());
+        return new SyntaxErrorException($message, $this->getLocation());
     }
 
     protected function getLocation(): Location
