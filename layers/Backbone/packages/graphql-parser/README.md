@@ -25,16 +25,6 @@ composer require pop-backbone/graphql-parser
 
 The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Backbone/packages/graphql-parser`](https://github.com/leoloso/PoP/tree/master/layers/Backbone/packages/graphql-parser).
 
-## Usage
-
-Initialize the component:
-
-``` php
-\PoP\Root\AppLoader::addComponentClassesToInitialize([
-    \PoP\GraphQLParser\Component::class,
-]);
-```
-
 ## PHP versions
 
 Requirements:
