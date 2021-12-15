@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast\ArgumentValue;
 
+use LogicException;
 use PoP\GraphQLParser\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Parser\Ast\Interfaces\ValueInterface;
 use PoP\GraphQLParser\Parser\Location;
 
 class Variable extends AbstractAst implements ValueInterface
 {
-    private mixed $value;
+    private mixed $value = null;
 
     private bool $used = false;
 
@@ -24,7 +25,7 @@ class Variable extends AbstractAst implements ValueInterface
     }
 
     /**
-     * @throws \LogicException
+     * @throws LogicException
      */
     public function getValue(): mixed
     {
@@ -32,7 +33,7 @@ class Variable extends AbstractAst implements ValueInterface
             if ($this->hasDefaultValue()) {
                 return $this->defaultValue;
             }
-            throw new \LogicException('Value is not set for variable "' . $this->name . '"');
+            throw new LogicException('Value is not set for variable "' . $this->name . '"');
         }
 
         return $this->value;
