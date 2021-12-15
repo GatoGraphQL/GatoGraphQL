@@ -9,9 +9,10 @@
 namespace PoP\GraphQLParser\Parser\Ast;
 
 use PoP\GraphQLParser\Parser\Ast\Interfaces\FragmentInterface;
+use PoP\GraphQLParser\Parser\Ast\Interfaces\WithDirectivesInterface;
 use PoP\GraphQLParser\Parser\Location;
 
-class TypedFragmentReference extends AbstractAst implements FragmentInterface
+class TypedFragmentReference extends AbstractAst implements FragmentInterface, WithDirectivesInterface
 {
     use AstDirectivesTrait;
 

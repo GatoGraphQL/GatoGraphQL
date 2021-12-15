@@ -10,9 +10,10 @@ namespace PoP\GraphQLParser\Parser\Ast;
 
 use PoP\GraphQLParser\Parser\Ast\Interfaces\FieldInterface;
 use PoP\GraphQLParser\Parser\Ast\Interfaces\FragmentInterface;
+use PoP\GraphQLParser\Parser\Ast\Interfaces\WithDirectivesInterface;
 use PoP\GraphQLParser\Parser\Location;
 
-class Query extends AbstractAst implements FieldInterface
+class Query extends AbstractAst implements FieldInterface, WithDirectivesInterface
 {
     use AstArgumentsTrait;
     use AstDirectivesTrait;

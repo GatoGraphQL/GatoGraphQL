@@ -8,9 +8,10 @@
 
 namespace PoP\GraphQLParser\Parser\Ast;
 
+use PoP\GraphQLParser\Parser\Ast\Interfaces\WithDirectivesInterface;
 use PoP\GraphQLParser\Parser\Location;
 
-class Fragment extends AbstractAst
+class Fragment extends AbstractAst implements WithDirectivesInterface
 {
     use AstDirectivesTrait;
 

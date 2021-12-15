@@ -21,6 +21,7 @@ use PoP\GraphQLParser\Parser\Ast\Directive;
 use PoP\GraphQLParser\Parser\Ast\Field;
 use PoP\GraphQLParser\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Parser\Ast\FragmentReference;
+use PoP\GraphQLParser\Parser\Ast\Interfaces\WithDirectivesInterface;
 use PoP\GraphQLParser\Parser\Ast\Mutation;
 use PoP\GraphQLParser\Parser\Ast\Query;
 use PoP\GraphQLParser\Parser\Ast\TypedFragmentReference;
@@ -105,7 +106,7 @@ class Parser extends Tokenizer
     }
 
     /**
-     * @return mixed
+     * @return mixed[]
      */
     protected function parseOperation(string $type = Token::TYPE_QUERY): array
     {
@@ -137,6 +138,7 @@ class Parser extends Tokenizer
         while (!$this->match(Token::TYPE_RBRACE) && !$this->end()) {
             $this->eatMulti([Token::TYPE_COMMA]);
 
+            /** @var WithDirectivesInterface */
             $operation = $this->parseBodyItem($type, true);
             $operation->setDirectives(
                 array_merge(
@@ -243,7 +245,7 @@ class Parser extends Tokenizer
     }
 
     /**
-     * @param string $types
+     * @param string[] $types
      * @throws SyntaxErrorException
      */
     protected function expectMulti(array $types): Token

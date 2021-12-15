@@ -9,7 +9,6 @@
 namespace PoP\GraphQLParser\Parser\Ast\Interfaces;
 
 use PoP\GraphQLParser\Parser\Ast\Argument;
-use PoP\GraphQLParser\Parser\Ast\Directive;
 
 interface FieldInterface extends LocatableInterface
 {
@@ -27,11 +26,4 @@ interface FieldInterface extends LocatableInterface
     public function hasFields(): bool;
 
     public function getFields(): array;
-
-    public function hasDirectives(): bool;
-
-    /**
-     * @return Directive[]
-     */
-    public function getDirectives(): array;
 }
