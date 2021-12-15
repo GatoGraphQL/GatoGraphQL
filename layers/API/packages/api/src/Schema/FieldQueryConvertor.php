@@ -439,7 +439,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                             'values' => $fields
                         ]
                     );
-                    $field = str_replace($fieldOrDirectiveArgValue, $replacedFieldArgValue, $field);
+                $field = str_replace($fieldOrDirectiveArgValue, $replacedFieldArgValue, $field);
             }
         }
 
