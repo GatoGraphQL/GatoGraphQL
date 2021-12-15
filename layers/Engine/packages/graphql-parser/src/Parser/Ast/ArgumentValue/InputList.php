@@ -14,13 +14,16 @@ use PoP\GraphQLParser\Parser\Location;
 
 class InputList extends AbstractAst implements ValueInterface
 {
+    /**
+     * @param mixed[] $list
+     */
     public function __construct(protected array $list, Location $location)
     {
         parent::__construct($location);
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function getValue(): mixed
     {
@@ -28,7 +31,7 @@ class InputList extends AbstractAst implements ValueInterface
     }
 
     /**
-     * @param array $value
+     * @param mixed[] $value
      */
     public function setValue(mixed $value): void
     {

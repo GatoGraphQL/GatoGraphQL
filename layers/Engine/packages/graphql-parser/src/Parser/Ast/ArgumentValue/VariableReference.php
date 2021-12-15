@@ -21,7 +21,7 @@ class VariableReference extends AbstractAst implements ValueInterface
         parent::__construct($location);
     }
 
-    public function getVariable()
+    public function getVariable(): ?Variable
     {
         return $this->variable;
     }
@@ -36,10 +36,7 @@ class VariableReference extends AbstractAst implements ValueInterface
         $this->value = $value;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

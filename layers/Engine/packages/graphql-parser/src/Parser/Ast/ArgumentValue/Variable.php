@@ -28,8 +28,6 @@ class Variable extends AbstractAst implements ValueInterface
     }
 
     /**
-     * @return mixed
-     *
      * @throws \LogicException
      */
     public function getValue(): mixed
@@ -44,136 +42,83 @@ class Variable extends AbstractAst implements ValueInterface
         return $this->value;
     }
 
-    /**
-     * @param mixed $value
-     */
     public function setValue(mixed $value): void
     {
         $this->value = $value;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
-    public function getTypeName()
+    public function getTypeName(): string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     */
-    public function setTypeName($type): void
+    public function setTypeName(string $type): void
     {
         $this->type = $type;
     }
 
-    /**
-     * @return boolean
-     */
-    public function isArray()
+    public function isArray(): bool
     {
         return $this->isArray;
     }
 
-    /**
-     * @param boolean $isArray
-     */
-    public function setIsArray($isArray): void
+    public function setIsArray(bool $isArray): void
     {
         $this->isArray = $isArray;
     }
 
-    /**
-     * @return boolean
-     */
-    public function isNullable()
+    public function isNullable(): bool
     {
         return $this->nullable;
     }
 
-    /**
-     * @param boolean $nullable
-     */
-    public function setNullable($nullable): void
+    public function setNullable(bool $nullable): void
     {
         $this->nullable = $nullable;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasDefaultValue()
+    public function hasDefaultValue(): bool
     {
         return $this->hasDefaultValue;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDefaultValue()
+    public function getDefaultValue(): mixed
     {
         return $this->defaultValue;
     }
 
-    /**
-     * @param mixed $defaultValue
-     */
-    public function setDefaultValue($defaultValue): void
+    public function setDefaultValue(mixed $defaultValue): void
     {
         $this->hasDefaultValue = true;
-
         $this->defaultValue = $defaultValue;
     }
 
-    /**
-     * @return boolean
-     */
-    public function isUsed()
+    public function isUsed(): bool
     {
         return $this->used;
     }
 
-    /**
-     * @param boolean $used
-     *
-     * @return $this
-     */
-    public function setUsed($used)
+    public function setUsed(bool $used): void
     {
         $this->used = $used;
-
-        return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isArrayElementNullable()
+    public function isArrayElementNullable(): bool
     {
         return $this->arrayElementNullable;
     }
 
-    /**
-     * @param bool $arrayElementNullable
-     */
-    public function setArrayElementNullable($arrayElementNullable): void
+    public function setArrayElementNullable(bool $arrayElementNullable): void
     {
         $this->arrayElementNullable = $arrayElementNullable;
     }
