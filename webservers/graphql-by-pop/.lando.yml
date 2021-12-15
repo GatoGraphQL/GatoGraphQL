@@ -61,7 +61,7 @@ services:
         - >-
           ../../layers/GraphQLByPoP/clients/graphql-voyager:/app/wordpress/graphql-interactive
         - >-
-          ../../layers/GraphQLByPoP/packages/graphql-parser:/app/vendor/getpop/graphql-parser
+          ../../layers/Engine/packages/graphql-parser:/app/vendor/getpop/graphql-parser
         - >-
           ../../layers/GraphQLByPoP/packages/graphql-query:/app/vendor/graphql-by-pop/graphql-query
         - >-

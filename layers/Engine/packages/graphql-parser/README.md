@@ -23,7 +23,7 @@ composer require getpop/graphql-parser
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLByPoP/packages/graphql-parser`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLByPoP/packages/graphql-parser).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLByPoP/packages/graphql-parser`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/graphql-parser).
 
 ## Usage
 
