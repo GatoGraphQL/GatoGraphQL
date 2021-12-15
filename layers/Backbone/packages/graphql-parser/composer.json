@@ -1,6 +1,7 @@
 {
     "name": "pop-backbone/graphql-parser",
     "type": "library",
+    "keywords": ["PoP", "GraphQL", "graphql-parser"],
     "description": "GraphQL syntax parser",
     "homepage": "https://github.com/PoPBackbone/graphql-parser",
     "license": "GPL-2.0-or-later",
