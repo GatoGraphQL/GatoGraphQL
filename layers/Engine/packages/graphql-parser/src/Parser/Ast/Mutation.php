@@ -1,14 +1,9 @@
 <?php
 
-/**
- * Date: 20.11.15
- *
- * @author Portey Vasil <portey@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast;
 
 class Mutation extends Query
 {
-
 }

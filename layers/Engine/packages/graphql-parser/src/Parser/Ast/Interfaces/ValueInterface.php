@@ -1,17 +1,12 @@
 <?php
 
-/**
- * Date: 01.12.15
- *
- * @author Portey Vasil <portey@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast\Interfaces;
 
 interface ValueInterface
 {
+    public function getValue(): mixed;
 
-    public function getValue();
-
-    public function setValue($value);
+    public function setValue(mixed $value): void;
 }

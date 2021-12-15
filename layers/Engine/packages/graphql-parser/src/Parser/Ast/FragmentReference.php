@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Date: 23.11.15
- *
- * @author Portey Vasil <portey@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast;
 
@@ -13,32 +9,17 @@ use PoP\GraphQLParser\Parser\Location;
 
 class FragmentReference extends AbstractAst implements FragmentInterface
 {
-
-    /** @var  string */
-    protected $name;
-
-    /**
-     * @param string   $name
-     */
-    public function __construct($name, Location $location)
+    public function __construct(protected string $name, Location $location)
     {
         parent::__construct($location);
-
-        $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }

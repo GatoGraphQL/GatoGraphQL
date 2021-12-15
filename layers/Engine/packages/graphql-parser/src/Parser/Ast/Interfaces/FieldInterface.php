@@ -1,58 +1,21 @@
 <?php
 
-/**
- * Date: 03.11.16
- *
- * @author Portey Vasil <portey@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast\Interfaces;
 
 use PoP\GraphQLParser\Parser\Ast\Argument;
-use PoP\GraphQLParser\Parser\Ast\Directive;
 
-interface FieldInterface extends LocatableInterface
+interface FieldInterface extends LocatableInterface, WithDirectivesInterface
 {
+    public function getName(): string;
 
-    /**
-     * @return string
-     */
-    public function getName();
-
-    /**
-     * @return string
-     */
-    public function getAlias();
+    public function getAlias(): ?string;
 
     /**
      * @return Argument[]
      */
-    public function getArguments();
+    public function getArguments(): array;
 
-    /**
-     * @param string $name
-     *
-     * @return Argument
-     */
-    public function getArgument($name);
-
-    /**
-     * @return bool
-     */
-    public function hasFields();
-
-    /**
-     * @return array
-     */
-    public function getFields();
-
-    /**
-     * @return bool
-     */
-    public function hasDirectives();
-
-    /**
-     * @return Directive[]
-     */
-    public function getDirectives();
+    public function getArgument(string $name): ?Argument;
 }

@@ -1,67 +1,54 @@
 <?php
 
-/*
-* This file is a part of GraphQL project.
-*
-* @author Alexandr Viniychuk <a@viniychuk.com>
-* created: 2/5/17 11:31 AM
-*/
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast;
 
 trait AstArgumentsTrait
 {
+    /** @var array<string,Argument> */
+    protected array $arguments;
 
-    /** @var Argument[] */
-    protected $arguments;
-
-    private $argumentsCache = null;
+    /** @var array<string,mixed>|null */
+    private ?array $argumentsCache = null;
 
 
-    public function hasArguments()
+    public function hasArguments(): bool
     {
-        return (bool)count($this->arguments);
+        return count($this->arguments) > 0;
     }
 
-    public function hasArgument($name)
+    public function hasArgument(string $name): bool
     {
         return array_key_exists($name, $this->arguments);
     }
 
     /**
-     * @return Argument[]
+     * @return array<string,Argument>
      */
-    public function getArguments()
+    public function getArguments(): array
     {
         return $this->arguments;
     }
 
-    /**
-     * @param $name
-     *
-     * @return null|Argument
-     */
-    public function getArgument($name)
+    public function getArgument(string $name): ?Argument
     {
-        $argument = null;
-        if (isset($this->arguments[$name])) {
-            $argument = $this->arguments[$name];
+        return $this->arguments[$name] ?? null;
+    }
+
+    public function getArgumentValue(string $name): mixed
+    {
+        if ($argument = $this->getArgument($name)) {
+            return $argument->getValue()->getValue();
         }
 
-        return $argument;
-    }
-
-    public function getArgumentValue($name)
-    {
-        $argument = $this->getArgument($name);
-
-        return $argument ? $argument->getValue()->getValue() : null;
+        return null;
     }
 
     /**
-     * @param $arguments Argument[]
+     * @param Argument[] $arguments
      */
-    public function setArguments(array $arguments)
+    public function setArguments(array $arguments): void
     {
         $this->arguments = [];
         $this->argumentsCache = null;
@@ -71,12 +58,15 @@ trait AstArgumentsTrait
         }
     }
 
-    public function addArgument(Argument $argument)
+    public function addArgument(Argument $argument): void
     {
         $this->arguments[$argument->getName()] = $argument;
     }
 
-    public function getKeyValueArguments()
+    /**
+     * @return array<string,mixed>
+     */
+    public function getKeyValueArguments(): array
     {
         if ($this->argumentsCache !== null) {
             return $this->argumentsCache;

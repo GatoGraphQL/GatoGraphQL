@@ -1,88 +1,54 @@
 <?php
 
-/**
- * Date: 23.11.15
- *
- * @author Portey Vasil <portey@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast;
 
+use PoP\GraphQLParser\Parser\Ast\Interfaces\WithDirectivesInterface;
 use PoP\GraphQLParser\Parser\Location;
 
-class Fragment extends AbstractAst
+class Fragment extends AbstractAst implements WithDirectivesInterface
 {
     use AstDirectivesTrait;
 
-    protected $name;
-
-    protected $model;
-
-    /** @var Field[]|Query[] */
-    protected $fields;
-
-    /** @var bool */
-    private $used = false;
+    private bool $used = false;
 
     /**
-     * @param string          $name
-     * @param string          $model
+     * @param Directive[] $directives
      * @param Field[]|Query[] $fields
      */
-    public function __construct($name, $model, array $directives, array $fields, Location $location)
+    public function __construct(protected string $name, protected string $model, array $directives, protected array $fields, Location $location)
     {
         parent::__construct($location);
-
-        $this->name   = $name;
-        $this->model  = $model;
-        $this->fields = $fields;
         $this->setDirectives($directives);
     }
 
-    /**
-     * @return boolean
-     */
-    public function isUsed()
+    public function isUsed(): bool
     {
         return $this->used;
     }
 
-    /**
-     * @param boolean $used
-     */
-    public function setUsed($used): void
+    public function setUsed(bool $used): void
     {
         $this->used = $used;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param mixed $name
-     */
-    public function setName($name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getModel()
+    public function getModel(): string
     {
         return $this->model;
     }
 
-    /**
-     * @param mixed $model
-     */
-    public function setModel($model): void
+    public function setModel(string $model): void
     {
         $this->model = $model;
     }
@@ -90,7 +56,7 @@ class Fragment extends AbstractAst
     /**
      * @return Field[]|Query[]
      */
-    public function getFields()
+    public function getFields(): array
     {
         return $this->fields;
     }
@@ -98,7 +64,7 @@ class Fragment extends AbstractAst
     /**
      * @param Field[]|Query[] $fields
      */
-    public function setFields($fields): void
+    public function setFields(array $fields): void
     {
         $this->fields = $fields;
     }

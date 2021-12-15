@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Date: 23.11.15
- *
- * @author Portey Vasil <portey@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast\ArgumentValue;
 
@@ -14,28 +10,26 @@ use PoP\GraphQLParser\Parser\Location;
 
 class Literal extends AbstractAst implements ValueInterface
 {
-
-    private $value;
-
     /**
-     * @param mixed $value
+     * @param string|int|float|bool|null $value
      */
-    public function __construct($value, Location $location)
+    public function __construct(private string|int|float|bool|null $value, Location $location)
     {
         parent::__construct($location);
-
-        $this->value = $value;
     }
 
-    public function getValue()
+    /**
+     * @return string|int|float|bool|null
+     */
+    public function getValue(): mixed
     {
         return $this->value;
     }
 
     /**
-     * @param string $value
+     * @param string|int|float|bool|null $value
      */
-    public function setValue($value): void
+    public function setValue(mixed $value): void
     {
         $this->value = $value;
     }

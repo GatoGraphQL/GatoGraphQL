@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Date: 3/17/17
- *
- * @author Volodymyr Rashchepkin <rashepkin@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast;
 
@@ -14,33 +10,21 @@ class Directive extends AbstractAst
 {
     use AstArgumentsTrait;
 
-    /** @var string */
-    private $name;
-
-
     /**
-     * @param string   $name
+     * @param Argument[] $arguments
      */
-    public function __construct($name, array $arguments, Location $location)
+    public function __construct(private $name, array $arguments, Location $location)
     {
         parent::__construct($location);
-
-        $this->name = $name;
         $this->setArguments($arguments);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param mixed $name
-     */
-    public function setName($name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }

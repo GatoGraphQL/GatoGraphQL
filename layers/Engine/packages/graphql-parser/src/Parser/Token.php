@@ -1,88 +1,64 @@
 <?php
 
-/**
- * Date: 23.11.15
- *
- * @author Portey Vasil <portey@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser;
 
 class Token
 {
+    public const TYPE_END        = 'end';
+    public const TYPE_IDENTIFIER = 'identifier';
+    public const TYPE_NUMBER     = 'number';
+    public const TYPE_STRING     = 'string';
+    public const TYPE_ON         = 'on';
 
-    const TYPE_END        = 'end';
-    const TYPE_IDENTIFIER = 'identifier';
-    const TYPE_NUMBER     = 'number';
-    const TYPE_STRING     = 'string';
-    const TYPE_ON         = 'on';
+    public const TYPE_QUERY              = 'query';
+    public const TYPE_MUTATION           = 'mutation';
+    public const TYPE_FRAGMENT           = 'fragment';
+    public const TYPE_FRAGMENT_REFERENCE = '...';
+    public const TYPE_TYPED_FRAGMENT     = 'typed fragment';
 
-    const TYPE_QUERY              = 'query';
-    const TYPE_MUTATION           = 'mutation';
-    const TYPE_FRAGMENT           = 'fragment';
-    const TYPE_FRAGMENT_REFERENCE = '...';
-    const TYPE_TYPED_FRAGMENT     = 'typed fragment';
+    public const TYPE_LBRACE        = '{';
+    public const TYPE_RBRACE        = '}';
+    public const TYPE_LPAREN        = '(';
+    public const TYPE_RPAREN        = ')';
+    public const TYPE_LSQUARE_BRACE = '[';
+    public const TYPE_RSQUARE_BRACE = ']';
+    public const TYPE_COLON         = ':';
+    public const TYPE_COMMA         = ',';
+    public const TYPE_VARIABLE      = '$';
+    public const TYPE_POINT         = '.';
+    public const TYPE_REQUIRED      = '!';
+    public const TYPE_EQUAL         = '=';
+    public const TYPE_AT            = '@';
 
-    const TYPE_LBRACE        = '{';
-    const TYPE_RBRACE        = '}';
-    const TYPE_LPAREN        = '(';
-    const TYPE_RPAREN        = ')';
-    const TYPE_LSQUARE_BRACE = '[';
-    const TYPE_RSQUARE_BRACE = ']';
-    const TYPE_COLON         = ':';
-    const TYPE_COMMA         = ',';
-    const TYPE_VARIABLE      = '$';
-    const TYPE_POINT         = '.';
-    const TYPE_REQUIRED      = '!';
-    const TYPE_EQUAL         = '=';
-    const TYPE_AT            = '@';
+    public const TYPE_NULL  = 'null';
+    public const TYPE_TRUE  = 'true';
+    public const TYPE_FALSE = 'false';
 
-    const TYPE_NULL  = 'null';
-    const TYPE_TRUE  = 'true';
-    const TYPE_FALSE = 'false';
-
-
-    /** @var mixed */
-    private $data;
-
-    /** @var  string */
-    private $type;
-
-    /** @var integer */
-    private $line;
-
-    /** @var integer */
-    private $column;
-
-    public function __construct($type, $line, $column, $data = null)
+    public function __construct(private string $type, private int $line, private int $column, private string|int|float|bool|null $data = null)
     {
-        $this->type = $type;
-        $this->data = $data;
-
-        $this->line   = $line;
-        $this->column = $column;
-
         if ($data) {
-            $tokenLength = mb_strlen($data);
+            $tokenLength = mb_strlen((string)$data);
             $tokenLength = $tokenLength > 1 ? $tokenLength - 1 : 0;
 
             $this->column = $column - $tokenLength;
         }
 
-        if ($this->getType() == self::TYPE_TRUE) {
+        if ($this->getType() === self::TYPE_TRUE) {
             $this->data = true;
         }
 
-        if ($this->getType() == self::TYPE_FALSE) {
+        if ($this->getType() === self::TYPE_FALSE) {
             $this->data = false;
         }
 
-        if ($this->getType() == self::TYPE_NULL) {
+        if ($this->getType() === self::TYPE_NULL) {
             $this->data = null;
         }
     }
 
-    public static function tokenName($tokenType)
+    public static function tokenName(string $tokenType): string
     {
         return [
             self::TYPE_END                => 'END',
@@ -110,37 +86,25 @@ class Token
             self::TYPE_FALSE              => 'FALSE',
             self::TYPE_REQUIRED           => 'REQUIRED',
             self::TYPE_AT                 => 'AT',
-        ][$tokenType];
+        ][$tokenType] ?? $tokenType;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getData()
+    public function getData(): mixed
     {
         return $this->data;
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @return int
-     */
-    public function getLine()
+    public function getLine(): int
     {
         return $this->line;
     }
 
-    /**
-     * @return int
-     */
-    public function getColumn()
+    public function getColumn(): int
     {
         return $this->column;
     }

@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Date: 23.11.15
- *
- * @author Portey Vasil <portey@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast;
 
@@ -16,65 +12,34 @@ class Field extends AbstractAst implements FieldInterface
     use AstArgumentsTrait;
     use AstDirectivesTrait;
 
-    /** @var string */
-    private $name;
-
-    /** @var null|string */
-    private $alias = null;
-
     /**
-     * @param string   $name
-     * @param string   $alias
+     * @param Argument[] $arguments
+     * @param Directive[] $directives
      */
-    public function __construct($name, $alias, array $arguments, array $directives, Location $location)
+    public function __construct(private string $name, private ?string $alias, array $arguments, array $directives, Location $location)
     {
         parent::__construct($location);
-
-        $this->name      = $name;
-        $this->alias     = $alias;
         $this->setArguments($arguments);
         $this->setDirectives($directives);
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return null|string
-     */
-    public function getAlias()
+    public function getAlias(): ?string
     {
         return $this->alias;
     }
 
-    /**
-     * @param null|string $alias
-     */
-    public function setAlias($alias): void
+    public function setAlias(?string $alias): void
     {
         $this->alias = $alias;
-    }
-
-    public function hasFields()
-    {
-        return false;
-    }
-
-    public function getFields()
-    {
-        return [];
     }
 }

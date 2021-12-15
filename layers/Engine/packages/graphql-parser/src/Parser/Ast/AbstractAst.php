@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Date: 16.11.16
- *
- * @author Portey Vasil <portey@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast;
 
@@ -13,16 +9,11 @@ use PoP\GraphQLParser\Parser\Location;
 
 abstract class AbstractAst implements LocatableInterface
 {
-
-    /** @var  Location */
-    private $location;
-
-    public function __construct(Location $location)
+    public function __construct(private Location $location)
     {
-        $this->location = $location;
     }
 
-    public function getLocation()
+    public function getLocation(): Location
     {
         return $this->location;
     }

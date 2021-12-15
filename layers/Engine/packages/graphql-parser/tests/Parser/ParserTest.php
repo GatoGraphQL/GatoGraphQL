@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Date: 01.12.15
- *
- * @author Portey Vasil <portey@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser;
 
@@ -39,7 +35,7 @@ class ParserTest extends TestCase
             'fragmentReferences' => [],
             'variables'          => [],
             'variableReferences' => [],
-        ], $parser->parse());
+        ], $parser->parse(''));
     }
 
     public function testInvalidSelection()
@@ -143,11 +139,9 @@ GRAPHQL;
     }
 
     /**
-     * @param $query string
-     *
      * @dataProvider wrongQueriesProvider
      */
-    public function testWrongQueries($query)
+    public function testWrongQueries(string $query)
     {
         $this->expectException(SyntaxErrorException::class);
         $parser = new Parser();
@@ -490,6 +484,8 @@ GRAPHQL;
 
     public function mutationProvider()
     {
+        $variable = new Variable('variable', 'Int', false, false, true, new Location(1, 8));
+        $variable->setUsed(true);
         return [
             [
                 'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
@@ -507,7 +503,7 @@ GRAPHQL;
                             'query',
                             null,
                             [
-                                new Argument('teas', new VariableReference('variable', (new Variable('variable', 'Int', false, false, true, new Location(1, 8)))->setUsed(true), new Location(1, 39)), new Location(1, 33)),
+                                new Argument('teas', new VariableReference('variable', $variable, new Location(1, 39)), new Location(1, 33)),
                             ],
                             [
                                 new Field('name', 'alias', [], [], new Location(1, 60)),
@@ -520,10 +516,10 @@ GRAPHQL;
                     'fragments'          => [],
                     'fragmentReferences' => [],
                     'variables'          => [
-                        (new Variable('variable', 'Int', false, false, true, new Location(1, 8)))->setUsed(true),
+                        $variable,
                     ],
                     'variableReferences' => [
-                        new VariableReference('variable', (new Variable('variable', 'Int', false, false, true, new Location(1, 8)))->setUsed(true), new Location(1, 39)),
+                        new VariableReference('variable', $variable, new Location(1, 39)),
                     ],
                 ],
             ],

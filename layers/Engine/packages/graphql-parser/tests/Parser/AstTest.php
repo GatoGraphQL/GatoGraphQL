@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Date: 13.05.16
- *
- * @author Portey Vasil <portey@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser;
 
@@ -30,11 +26,12 @@ class AstTest extends TestCase
         $this->assertNotNull($argument->getValue());
         $this->assertEquals($argument->getName(), 'test');
 
+        $test2Value = new Literal('some value', new Location(1, 1));
         $argument->setName('test2');
-        $argument->setValue('some value');
+        $argument->setValue($test2Value);
 
         $this->assertEquals($argument->getName(), 'test2');
-        $this->assertEquals($argument->getValue(), 'some value');
+        $this->assertEquals($argument->getValue()->getValue(), 'some value');
     }
 
     public function testField()

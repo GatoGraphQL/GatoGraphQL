@@ -1,59 +1,44 @@
 <?php
 
-/**
- * Date: 3/17/17
- *
- * @author Volodymyr Rashchepkin <rashepkin@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast;
 
 trait AstDirectivesTrait
 {
+    /** @var array<string,Directive> */
+    protected array $directives;
 
-    /** @var Directive[] */
-    protected $directives;
+    /** @var array<string,Directive>|null */
+    private ?array $directivesCache = null;
 
-    private $directivesCache = null;
-
-
-    public function hasDirectives()
+    public function hasDirectives(): bool
     {
-        return (bool)count($this->directives);
+        return count($this->directives) > 0;
     }
 
-    public function hasDirective($name)
+    public function hasDirective(string $name): bool
     {
         return array_key_exists($name, $this->directives);
     }
 
-    /**
-     * @param $name
-     *
-     * @return null|Directive
-     */
-    public function getDirective($name)
+    public function getDirective(string $name): ?Directive
     {
-        $directive = null;
-        if (isset($this->directives[$name])) {
-            $directive = $this->directives[$name];
-        }
-
-        return $directive;
+        return $this->directives[$name] ?? null;
     }
 
     /**
      * @return Directive[]
      */
-    public function getDirectives()
+    public function getDirectives(): array
     {
-        return $this->directives;
+        return array_values($this->directives);
     }
 
     /**
-     * @param $directives Directive[]
+     * @param Directive[] $directives
      */
-    public function setDirectives(array $directives)
+    public function setDirectives(array $directives): void
     {
         $this->directives      = [];
         $this->directivesCache = null;
@@ -63,7 +48,7 @@ trait AstDirectivesTrait
         }
     }
 
-    public function addDirective(Directive $directive)
+    public function addDirective(Directive $directive): void
     {
         /**
          * Watch out! In this query, a field contains the same directive twice:

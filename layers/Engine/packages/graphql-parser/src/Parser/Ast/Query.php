@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Date: 23.11.15
- *
- * @author Portey Vasil <portey@gmail.com>
- */
+declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast;
 
@@ -17,57 +13,44 @@ class Query extends AbstractAst implements FieldInterface
     use AstArgumentsTrait;
     use AstDirectivesTrait;
 
-    /** @var string */
-    protected $name;
-
-    /** @var string */
-    protected $alias;
-
-    /** @var Field[]|Query[] */
-    protected $fields = [];
+    /** @var Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] */
+    protected array $fields = [];
 
     /**
-     * Query constructor.
-     *
-     * @param string   $name
-     * @param string   $alias
+     * @param Argument[] $arguments
+     * @param Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] $fields
+     * @param Directive[] $directives
      */
-    public function __construct($name, $alias, array $arguments, array $fields, array $directives, Location $location)
+    public function __construct(protected string $name, protected ?string $alias, array $arguments, array $fields, array $directives, Location $location)
     {
         parent::__construct($location);
-
-        $this->name      = $name;
-        $this->alias     = $alias;
         $this->setFields($fields);
         $this->setArguments($arguments);
         $this->setDirectives($directives);
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @return Field[]|Query[]|FragmentInterface[]
+     * @return Field[]|Query[]|FragmentInterface[]|TypedFragmentReference[]
      */
-    public function getFields()
+    public function getFields(): array
     {
-        return array_values($this->fields);
+        return $this->fields;
+    }
+
+    public function hasFields(): bool
+    {
+        return count($this->fields) > 0;
     }
 
     /**
-     * @return bool
+     * @param Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] $fields
      */
-    public function hasFields()
-    {
-        return (bool)count($this->fields);
-    }
-
-    /**
-     * @param Field[]|Query[] $fields
-     */
-    public function setFields($fields): void
+    public function setFields(array $fields): void
     {
         /**
          * we cannot store fields by name because of TypedFragments
@@ -75,15 +58,15 @@ class Query extends AbstractAst implements FieldInterface
         $this->fields = $fields;
     }
 
-    public function getAlias()
+    public function getAlias(): ?string
     {
         return $this->alias;
     }
 
-    public function hasField($name, $deep = false)
+    public function hasField(string $name, bool $deep = false): bool
     {
         foreach ($this->getFields() as $field) {
-            if ($field->getName() == $name) {
+            if ($field->getName() === $name) {
                 return true;
             }
 
