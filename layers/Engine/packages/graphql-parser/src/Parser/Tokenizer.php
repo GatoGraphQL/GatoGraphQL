@@ -12,14 +12,14 @@ use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 
 class Tokenizer
 {
-    protected $source;
+    protected string $source;
     protected int $pos = 0;
     protected int $line = 1;
     protected int $lineStart = 0;
 
     protected Token $lookAhead;
 
-    protected function initTokenizer($source): void
+    protected function initTokenizer(string $source): void
     {
         $this->source    = $source;
         $this->lookAhead = $this->next();
