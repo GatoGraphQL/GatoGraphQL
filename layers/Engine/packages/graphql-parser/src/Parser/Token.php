@@ -40,7 +40,7 @@ class Token
     public const TYPE_TRUE  = 'true';
     public const TYPE_FALSE = 'false';
 
-    public function __construct(private string $type, private int $line, private int $column, private string $data = null)
+    public function __construct(private string $type, private int $line, private int $column, private ?string $data = null)
     {
         if ($data) {
             $tokenLength = mb_strlen($data);
@@ -62,7 +62,7 @@ class Token
         }
     }
 
-    public static function tokenName($tokenType)
+    public static function tokenName(string $tokenType): string
     {
         return [
             self::TYPE_END                => 'END',
@@ -93,34 +93,22 @@ class Token
         ][$tokenType];
     }
 
-    /**
-     * @return mixed
-     */
-    public function getData()
+    public function getData(): mixed
     {
         return $this->data;
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @return int
-     */
-    public function getLine()
+    public function getLine(): int
     {
         return $this->line;
     }
 
-    /**
-     * @return int
-     */
-    public function getColumn()
+    public function getColumn(): int
     {
         return $this->column;
     }
