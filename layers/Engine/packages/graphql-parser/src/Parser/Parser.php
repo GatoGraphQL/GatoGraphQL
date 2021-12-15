@@ -46,7 +46,7 @@ class Parser extends Tokenizer
 
             switch ($tokenType) {
                 case Token::TYPE_LBRACE:
-                    foreach ($this->parseBody() as $query) {
+                    foreach ($this->parseBody(Token::TYPE_QUERY, true) as $query) {
                         $this->data['queries'][] = $query;
                     }
                     break;
@@ -108,7 +108,7 @@ class Parser extends Tokenizer
     /**
      * @return mixed[]
      */
-    protected function parseOperation(string $type = Token::TYPE_QUERY): array
+    protected function parseOperation(string $type): array
     {
         $operation  = null;
         $directives = [];
@@ -161,7 +161,7 @@ class Parser extends Tokenizer
     /**
      * @return AbstractAst[]
      */
-    protected function parseBody(string $token = Token::TYPE_QUERY, bool $highLevel = true): array
+    protected function parseBody(string $token, bool $highLevel): array
     {
         $fields = [];
 
@@ -324,7 +324,7 @@ class Parser extends Tokenizer
     /**
      * @throws SyntaxErrorException
      */
-    protected function parseBodyItem(string $type = Token::TYPE_QUERY, bool $highLevel = true): AbstractAst
+    protected function parseBodyItem(string $type, bool $highLevel): AbstractAst
     {
         $nameToken = $this->eatIdentifierToken();
         $alias     = null;
@@ -427,10 +427,10 @@ class Parser extends Tokenizer
     {
         switch ($this->lookAhead->getType()) {
             case Token::TYPE_LSQUARE_BRACE:
-                return $this->parseList();
+                return $this->parseList(true);
 
             case Token::TYPE_LBRACE:
-                return $this->parseObject();
+                return $this->parseObject(true);
 
             case Token::TYPE_VARIABLE:
                 return $this->parseVariableReference();
@@ -449,7 +449,7 @@ class Parser extends Tokenizer
         throw $this->createUnexpectedException($this->lookAhead);
     }
 
-    protected function parseList(bool $createType = true) : InputList|array
+    protected function parseList(bool $createType) : InputList|array
     {
         $startToken = $this->eat(Token::TYPE_LSQUARE_BRACE);
 
@@ -492,7 +492,7 @@ class Parser extends Tokenizer
     /**
      * @throws SyntaxErrorException
      */
-    protected function parseObject(bool $createType = true): InputObject|stdClass
+    protected function parseObject(bool $createType): InputObject|stdClass
     {
         $startToken = $this->eat(Token::TYPE_LBRACE);
 
