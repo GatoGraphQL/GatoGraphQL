@@ -16,6 +16,10 @@ class Field extends AbstractAst implements FieldInterface
     use AstArgumentsTrait;
     use AstDirectivesTrait;
 
+    /**
+     * @param Argument[] $arguments
+     * @param Directive[] $directives
+     */
     public function __construct(private string $name, private ?string $alias, array $arguments, array $directives, Location $location)
     {
         parent::__construct($location);
@@ -23,44 +27,32 @@ class Field extends AbstractAst implements FieldInterface
         $this->setDirectives($directives);
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return null|string
-     */
-    public function getAlias()
+    public function getAlias(): ?string
     {
         return $this->alias;
     }
 
-    /**
-     * @param null|string $alias
-     */
-    public function setAlias($alias): void
+    public function setAlias(?string $alias): void
     {
         $this->alias = $alias;
     }
 
-    public function hasFields()
+    public function hasFields(): bool
     {
         return false;
     }
 
-    public function getFields()
+    public function getFields(): array
     {
         return [];
     }

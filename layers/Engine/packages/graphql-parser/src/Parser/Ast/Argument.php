@@ -18,34 +18,22 @@ class Argument extends AbstractAst
         parent::__construct($location);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param mixed $name
-     */
-    public function setName($name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return ValueInterface
-     */
-    public function getValue(): mixed
+    public function getValue(): ValueInterface
     {
         return $this->value;
     }
 
-    /**
-     * @param mixed $value
-     */
-    public function setValue(mixed $value): void
+    public function setValue(ValueInterface $value): void
     {
         $this->value = $value;
     }

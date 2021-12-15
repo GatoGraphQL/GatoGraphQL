@@ -20,6 +20,11 @@ class Query extends AbstractAst implements FieldInterface
     /** @var Field[]|Query[] */
     protected array $fields = [];
 
+    /**
+     * @param Argument[] $arguments
+     * @param Field[]|Query[] $fields
+     * @param Directive[] $directives
+     */
     public function __construct(protected string $name, protected ?string $alias, array $arguments, array $fields, array $directives, Location $location)
     {
         parent::__construct($location);
@@ -62,7 +67,7 @@ class Query extends AbstractAst implements FieldInterface
         return $this->alias;
     }
 
-    public function hasField(string $name, bool $deep = false)
+    public function hasField(string $name, bool $deep = false): bool
     {
         foreach ($this->getFields() as $field) {
             if ($field->getName() == $name) {

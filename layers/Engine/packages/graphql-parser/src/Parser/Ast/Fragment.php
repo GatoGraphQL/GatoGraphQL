@@ -17,6 +17,7 @@ class Fragment extends AbstractAst
     private bool $used = false;
 
     /**
+     * @param Directive[] $directives
      * @param Field[]|Query[] $fields
      */
     public function __construct(protected string $name, protected string $model, array $directives, protected array $fields, Location $location)

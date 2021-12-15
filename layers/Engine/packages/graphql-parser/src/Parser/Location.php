@@ -32,7 +32,7 @@ class Location
     {
         return [
             'line'   => $this->getLine(),
-            'column' => $this->getColumn()
+            'column' => $this->getColumn(),
         ];
     }
 }
