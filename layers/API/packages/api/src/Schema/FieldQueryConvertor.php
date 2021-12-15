@@ -384,13 +384,13 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                 /**
                  * Most likely, the argValue is the embedded field.
                  * But the embed might also be inside an InputObject, as when doing:
-                 * 
+                 *
                  * ```
                  * appendExpressions: {
                  *   toLang: "{{extract(__value__,translateTo)}}"
                  * }
                  * ```
-                 * 
+                 *
                  * In that case, the embedded field will be a substring within the argValue.
                  */
                 $embeddedField = $fieldOrDirectiveArgValue;
