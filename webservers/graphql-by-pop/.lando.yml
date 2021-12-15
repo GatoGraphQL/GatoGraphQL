@@ -38,6 +38,8 @@ services:
         - >-
           ../../layers/Engine/packages/function-fields:/app/vendor/getpop/function-fields
         - >-
+          ../../layers/Engine/packages/graphql-parser:/app/vendor/getpop/graphql-parser
+        - >-
           ../../layers/Engine/packages/guzzle-helpers:/app/vendor/getpop/guzzle-helpers
         - '../../layers/Engine/packages/hooks-wp:/app/vendor/getpop/hooks-wp'
         - '../../layers/Engine/packages/hooks:/app/vendor/getpop/hooks'
@@ -60,8 +62,6 @@ services:
           ../../layers/GraphQLByPoP/clients/graphiql:/app/wordpress/graphiql
         - >-
           ../../layers/GraphQLByPoP/clients/graphql-voyager:/app/wordpress/graphql-interactive
-        - >-
-          ../../layers/Engine/packages/graphql-parser:/app/vendor/getpop/graphql-parser
         - >-
           ../../layers/GraphQLByPoP/packages/graphql-query:/app/vendor/graphql-by-pop/graphql-query
         - >-
