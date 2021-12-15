@@ -334,6 +334,7 @@ class Parser extends Tokenizer
         $directives   = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
 
         if ($this->match(Token::TYPE_LBRACE)) {
+            /** @var Query[] */
             $fields = $this->parseBody($type === Token::TYPE_TYPED_FRAGMENT ? Token::TYPE_QUERY : $type, false);
 
             if (!$fields) {
@@ -522,6 +523,7 @@ class Parser extends Tokenizer
 
         $directives = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
 
+        /** @var Query[] */
         $fields = $this->parseBody(Token::TYPE_QUERY, false);
 
         return new Fragment($nameToken->getData(), $model->getData(), $directives, $fields, new Location($nameToken->getLine(), $nameToken->getColumn()));

@@ -322,7 +322,6 @@ class Tokenizer
                         break;
                     default:
                         throw $this->createException(sprintf('Unexpected string escaped character "%s"', $ch));
-                        break;
                 }
             }
 
