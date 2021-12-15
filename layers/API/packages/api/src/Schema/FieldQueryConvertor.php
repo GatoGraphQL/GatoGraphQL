@@ -313,8 +313,34 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
             if ($fieldArgValues = $fieldQueryInterpreter->extractFieldArgumentValues($field)) {
                 $field = $this->maybeReplaceEmbeddableFieldOrDirectiveArguments($field, $fieldArgValues);
             }
-            if ($directiveArgValues = $fieldQueryInterpreter->extractDirectiveArgumentValues($field)) {
-                $field = $this->maybeReplaceEmbeddableFieldOrDirectiveArguments($field, $directiveArgValues);
+            $directives = $fieldQueryInterpreter->getDirectives($field);
+            foreach ($directives as $directive) {
+                $field = $this->replaceEmbeddableFieldsInDirectiveArgs($field, $directive);
+            }
+        }
+
+        return $field;
+    }
+
+    protected function replaceEmbeddableFieldsInDirectiveArgs(string $field, array $directive): string
+    {
+        /** @var APIFieldQueryInterpreterInterface */
+        $fieldQueryInterpreter = $this->getFieldQueryInterpreter();
+        list(
+            $directiveName,
+            $directiveArgsAsStr,
+            $nestedDirectives
+        ) = $directive;
+        if ($directiveArgsAsStr !== null) {
+            $directiveArgValues = $fieldQueryInterpreter->extractFieldOrDirectiveArgumentValues($directiveArgsAsStr);
+            $field = $this->maybeReplaceEmbeddableFieldOrDirectiveArguments($field, $directiveArgValues);
+        }
+        // Also apply to the args in the nested directives
+        if ($nestedDirectives !== null) {
+            $directiveDirective = $fieldQueryInterpreter->convertDirectiveToFieldDirective($directive);
+            $directiveDirectives = $fieldQueryInterpreter->getDirectives($directiveDirective);
+            foreach ($directiveDirectives as $directive) {
+                $field = $this->replaceEmbeddableFieldsInDirectiveArgs($field, $directive);
             }
         }
 

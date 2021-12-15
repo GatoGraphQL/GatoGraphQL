@@ -15,10 +15,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      * @var array<string, array >
      */
     private array $extractedFieldArgumentValuesCache = [];
-    /**
-     * @var array<string, array >
-     */
-    private array $extractedDirectiveArgumentValuesCache = [];
 
     public function extractFieldArgumentValues(string $field): array
     {
@@ -32,34 +28,13 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     {
         // Extract the args from the string into an array
         if ($fieldArgsStr = $this->getFieldDirectiveArgs($field)) {
-            return $this->doExtractFieldOrDirectiveArgumentValues($fieldArgsStr);
+            return $this->extractFieldOrDirectiveArgumentValues($fieldArgsStr);
         }
 
         return [];
     }
 
-    public function extractDirectiveArgumentValues(string $field): array
-    {
-        if (!isset($this->extractedDirectiveArgumentValuesCache[$field])) {
-            $this->extractedDirectiveArgumentValuesCache[$field] = $this->doExtractDirectiveArgumentValues($field);
-        }
-        return $this->extractedDirectiveArgumentValuesCache[$field];
-    }
-
-    protected function doExtractDirectiveArgumentValues(string $field): array
-    {
-        // Extract the directives from the field
-        if ($fieldDirectives = $this->getFieldDirectives($field)) {
-            // Extract the args from the string into an array
-            if ($directiveArgsStr = $this->getFieldDirectiveArgs($fieldDirectives)) {
-                return $this->doExtractFieldOrDirectiveArgumentValues($directiveArgsStr);
-            }
-        }
-
-        return [];
-    }
-
-    protected function doExtractFieldOrDirectiveArgumentValues(string $fieldOrDirectiveArgsStr): array
+    public function extractFieldOrDirectiveArgumentValues(string $fieldOrDirectiveArgsStr): array
     {
         $fieldOrDirectiveArgValues = [];
         // Remove the opening and closing brackets

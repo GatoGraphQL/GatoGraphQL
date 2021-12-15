@@ -9,5 +9,5 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface as UpstreamFieldQue
 interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterInterface
 {
     public function extractFieldArgumentValues(string $field): array;
-    public function extractDirectiveArgumentValues(string $field): array;
+    public function extractFieldOrDirectiveArgumentValues(string $fieldOrDirectiveArgsStr): array;
 }
