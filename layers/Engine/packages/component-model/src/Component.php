@@ -24,6 +24,7 @@ class Component extends AbstractComponent
         return [
             \PoP\Definitions\Component::class,
             \PoP\FieldQuery\Component::class,
+            \PoP\GraphQLParser\Component::class,
             \PoP\Hooks\Component::class,
         ];
     }

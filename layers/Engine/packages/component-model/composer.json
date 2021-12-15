@@ -170,6 +170,7 @@
         "composer/semver": "^3.2",
         "getpop/definitions": "^0.9",
         "getpop/field-query": "^0.9",
+        "getpop/graphql-parser": "^0.9",
         "getpop/hooks": "^0.9",
         "jrfnl/php-cast-to-type": "^2.0",
         "league/pipeline": "^1.0",
