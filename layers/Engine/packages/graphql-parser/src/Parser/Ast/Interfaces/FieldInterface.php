@@ -22,8 +22,4 @@ interface FieldInterface extends LocatableInterface
     public function getArguments(): array;
 
     public function getArgument(string $name): ?Argument;
-
-    public function hasFields(): bool;
-
-    public function getFields(): array;
 }

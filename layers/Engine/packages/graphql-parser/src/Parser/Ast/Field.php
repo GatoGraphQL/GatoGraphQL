@@ -47,14 +47,4 @@ class Field extends AbstractAst implements FieldInterface, WithDirectivesInterfa
     {
         $this->alias = $alias;
     }
-
-    public function hasFields(): bool
-    {
-        return false;
-    }
-
-    public function getFields(): array
-    {
-        return [];
-    }
 }
