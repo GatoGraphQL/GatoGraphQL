@@ -6,19 +6,19 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace GraphQLByPoP\GraphQLParser\Library\Validator;
+namespace PoP\GraphQLParser\Library\Validator;
 
-use GraphQLByPoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use GraphQLByPoP\GraphQLParser\Execution\Request;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Argument;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Field;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Fragment;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\FragmentReference;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Query;
-use GraphQLByPoP\GraphQLParser\Parser\Location;
-use GraphQLByPoP\GraphQLParser\Validator\RequestValidator\RequestValidator;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Execution\Request;
+use PoP\GraphQLParser\Parser\Ast\Argument;
+use PoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
+use PoP\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
+use PoP\GraphQLParser\Parser\Ast\Field;
+use PoP\GraphQLParser\Parser\Ast\Fragment;
+use PoP\GraphQLParser\Parser\Ast\FragmentReference;
+use PoP\GraphQLParser\Parser\Ast\Query;
+use PoP\GraphQLParser\Parser\Location;
+use PoP\GraphQLParser\Validator\RequestValidator\RequestValidator;
 use PHPUnit\Framework\TestCase;
 
 class RequestValidatorTest extends TestCase

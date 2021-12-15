@@ -6,9 +6,9 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace GraphQLByPoP\GraphQLParser\Validator\RequestValidator;
+namespace PoP\GraphQLParser\Validator\RequestValidator;
 
-use GraphQLByPoP\GraphQLParser\Execution\Request;
+use PoP\GraphQLParser\Execution\Request;
 
 interface RequestValidatorInterface
 {

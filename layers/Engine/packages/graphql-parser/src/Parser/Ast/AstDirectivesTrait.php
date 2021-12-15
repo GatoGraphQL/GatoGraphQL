@@ -6,7 +6,7 @@
  * @author Volodymyr Rashchepkin <rashepkin@gmail.com>
  */
 
-namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
+namespace PoP\GraphQLParser\Parser\Ast;
 
 trait AstDirectivesTrait
 {

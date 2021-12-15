@@ -6,10 +6,10 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces;
+namespace PoP\GraphQLParser\Parser\Ast\Interfaces;
 
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Argument;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Directive;
+use PoP\GraphQLParser\Parser\Ast\Argument;
+use PoP\GraphQLParser\Parser\Ast\Directive;
 
 interface FieldInterface extends LocatableInterface
 {

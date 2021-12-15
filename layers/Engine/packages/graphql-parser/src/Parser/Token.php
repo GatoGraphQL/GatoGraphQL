@@ -6,7 +6,7 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace GraphQLByPoP\GraphQLParser\Parser;
+namespace PoP\GraphQLParser\Parser;
 
 class Token
 {

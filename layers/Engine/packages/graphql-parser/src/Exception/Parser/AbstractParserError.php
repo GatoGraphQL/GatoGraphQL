@@ -6,11 +6,11 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace GraphQLByPoP\GraphQLParser\Exception\Parser;
+namespace PoP\GraphQLParser\Exception\Parser;
 
 use Exception;
-use GraphQLByPoP\GraphQLParser\Exception\Interfaces\LocationableExceptionInterface;
-use GraphQLByPoP\GraphQLParser\Parser\Location;
+use PoP\GraphQLParser\Exception\Interfaces\LocationableExceptionInterface;
+use PoP\GraphQLParser\Parser\Location;
 
 abstract class AbstractParserError extends Exception implements LocationableExceptionInterface
 {

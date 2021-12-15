@@ -6,11 +6,11 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue;
+namespace PoP\GraphQLParser\Parser\Ast\ArgumentValue;
 
-use GraphQLByPoP\GraphQLParser\Parser\Ast\AbstractAst;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\ValueInterface;
-use GraphQLByPoP\GraphQLParser\Parser\Location;
+use PoP\GraphQLParser\Parser\Ast\AbstractAst;
+use PoP\GraphQLParser\Parser\Ast\Interfaces\ValueInterface;
+use PoP\GraphQLParser\Parser\Location;
 
 class Literal extends AbstractAst implements ValueInterface
 {

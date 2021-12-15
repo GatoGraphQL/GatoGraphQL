@@ -6,10 +6,10 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
+namespace PoP\GraphQLParser\Parser\Ast;
 
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces\FieldInterface;
-use GraphQLByPoP\GraphQLParser\Parser\Location;
+use PoP\GraphQLParser\Parser\Ast\Interfaces\FieldInterface;
+use PoP\GraphQLParser\Parser\Location;
 
 class Field extends AbstractAst implements FieldInterface
 {

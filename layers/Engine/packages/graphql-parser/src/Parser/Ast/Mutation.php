@@ -6,7 +6,7 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
+namespace PoP\GraphQLParser\Parser\Ast;
 
 class Mutation extends Query
 {

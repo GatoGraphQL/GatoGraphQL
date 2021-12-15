@@ -6,15 +6,15 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace GraphQLByPoP\GraphQLParser\Execution;
+namespace PoP\GraphQLParser\Execution;
 
-use GraphQLByPoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Fragment;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\FragmentReference;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Mutation;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Query;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
+use PoP\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
+use PoP\GraphQLParser\Parser\Ast\Fragment;
+use PoP\GraphQLParser\Parser\Ast\FragmentReference;
+use PoP\GraphQLParser\Parser\Ast\Mutation;
+use PoP\GraphQLParser\Parser\Ast\Query;
 
 class Request
 {

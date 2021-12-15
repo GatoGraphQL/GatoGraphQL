@@ -6,7 +6,7 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace GraphQLByPoP\GraphQLParser\Exception\Parser;
+namespace PoP\GraphQLParser\Exception\Parser;
 
 class SyntaxErrorException extends AbstractParserError
 {

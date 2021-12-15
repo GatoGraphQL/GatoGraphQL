@@ -31,7 +31,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\AppLoader::addComponentClassesToInitialize([
-    \GraphQLByPoP\GraphQLParser\Component::class,
+    \PoP\GraphQLParser\Component::class,
 ]);
 ```
 

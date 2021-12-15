@@ -6,18 +6,18 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace GraphQLByPoP\GraphQLParser\Parser;
+namespace PoP\GraphQLParser\Parser;
 
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Argument;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Field;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Fragment;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\FragmentReference;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Query;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\TypedFragmentReference;
+use PoP\GraphQLParser\Parser\Ast\Argument;
+use PoP\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
+use PoP\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
+use PoP\GraphQLParser\Parser\Ast\Field;
+use PoP\GraphQLParser\Parser\Ast\Fragment;
+use PoP\GraphQLParser\Parser\Ast\FragmentReference;
+use PoP\GraphQLParser\Parser\Ast\Query;
+use PoP\GraphQLParser\Parser\Ast\TypedFragmentReference;
 use PHPUnit\Framework\TestCase;
 
 class AstTest extends TestCase

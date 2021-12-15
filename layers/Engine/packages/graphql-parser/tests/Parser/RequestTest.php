@@ -7,10 +7,10 @@
 * created: 5/15/16 3:51 PM
 */
 
-namespace GraphQLByPoP\GraphQLParser\Parser;
+namespace PoP\GraphQLParser\Parser;
 
-use GraphQLByPoP\GraphQLParser\Execution\Request;
-use GraphQLByPoP\GraphQLParser\Parser\Ast\Fragment;
+use PoP\GraphQLParser\Execution\Request;
+use PoP\GraphQLParser\Parser\Ast\Fragment;
 use PHPUnit\Framework\TestCase;
 
 class RequestTest extends TestCase

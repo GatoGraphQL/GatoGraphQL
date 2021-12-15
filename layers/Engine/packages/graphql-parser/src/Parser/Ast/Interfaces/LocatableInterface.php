@@ -6,9 +6,9 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace GraphQLByPoP\GraphQLParser\Parser\Ast\Interfaces;
+namespace PoP\GraphQLParser\Parser\Ast\Interfaces;
 
-use GraphQLByPoP\GraphQLParser\Parser\Location;
+use PoP\GraphQLParser\Parser\Location;
 
 interface LocatableInterface
 {

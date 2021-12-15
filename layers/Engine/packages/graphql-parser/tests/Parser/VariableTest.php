@@ -1,8 +1,8 @@
 <?php
 
-namespace GraphQLByPoP\GraphQLParser\Parser;
+namespace PoP\GraphQLParser\Parser;
 
-use GraphQLByPoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
+use PoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PHPUnit\Framework\TestCase;
 
 class VariableTest extends TestCase

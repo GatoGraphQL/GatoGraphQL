@@ -6,10 +6,10 @@
  * @author Portey Vasil <portey@gmail.com>
  */
 
-namespace GraphQLByPoP\GraphQLParser\Validator\RequestValidator;
+namespace PoP\GraphQLParser\Validator\RequestValidator;
 
-use GraphQLByPoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use GraphQLByPoP\GraphQLParser\Execution\Request;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Execution\Request;
 
 class RequestValidator implements RequestValidatorInterface
 {

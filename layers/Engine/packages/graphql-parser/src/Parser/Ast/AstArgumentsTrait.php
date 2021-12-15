@@ -7,7 +7,7 @@
 * created: 2/5/17 11:31 AM
 */
 
-namespace GraphQLByPoP\GraphQLParser\Parser\Ast;
+namespace PoP\GraphQLParser\Parser\Ast;
 
 trait AstArgumentsTrait
 {
