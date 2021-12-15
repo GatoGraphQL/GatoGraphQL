@@ -20,12 +20,12 @@
     },
     "autoload": {
         "psr-4": {
-            "GraphQLByPoP\\GraphQLParser\\": "src"
+            "PoP\\GraphQLParser\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "GraphQLByPoP\\GraphQLParser\\": "tests"
+            "PoP\\GraphQLParser\\": "tests"
         }
     },
     "scripts": {
