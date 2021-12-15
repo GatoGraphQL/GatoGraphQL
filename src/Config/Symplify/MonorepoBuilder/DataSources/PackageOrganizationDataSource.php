@@ -16,16 +16,17 @@ class PackageOrganizationDataSource
     public function getPackagePathOrganizations(): array
     {
         return [
-            'layers/Engine/packages' => 'getpop',
             'layers/API/packages' => 'getpop',
-            'layers/Schema/packages' => 'PoPSchema',
-            'layers/WPSchema/packages' => 'PoPWPSchema',
-            'layers/GraphQLByPoP/clients' => 'GraphQLByPoP',
-            'layers/GraphQLByPoP/packages' => 'GraphQLByPoP',
+            'layers/Backbone/packages' => 'getpop',
+            'layers/Engine/packages' => 'getpop',
             'layers/GraphQLAPIForWP/packages' => 'GraphQLAPI',
             'layers/GraphQLAPIForWP/plugins' => 'GraphQLAPI',
+            'layers/GraphQLByPoP/clients' => 'GraphQLByPoP',
+            'layers/GraphQLByPoP/packages' => 'GraphQLByPoP',
+            'layers/Schema/packages' => 'PoPSchema',
             'layers/SiteBuilder/packages' => 'getpop',
             'layers/Wassup/packages' => 'PoPSites-Wassup',
+            'layers/WPSchema/packages' => 'PoPWPSchema',
         ];
     }
 
