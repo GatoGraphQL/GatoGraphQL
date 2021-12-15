@@ -403,10 +403,8 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                     // Check if the embedded field is exactly the requested field
                     // Notice that it has '"' at the beginning and end
                     $embeddedField = $matches[0][0];
-                    if (
-                        $embeddedField == $fieldOrDirectiveArgValue
-                        || $this->getFieldQueryInterpreter()->wrapStringInQuotes($embeddedField) == $fieldOrDirectiveArgValue
-                    ) {
+                    $embeddedField = $this->getFieldQueryInterpreter()->wrapStringInQuotes($embeddedField);
+                    if ($embeddedField == $fieldOrDirectiveArgValue) {
                         $isSingleWholeEmbed = true;
                     }
                 }
