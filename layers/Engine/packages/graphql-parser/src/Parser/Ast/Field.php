@@ -16,22 +16,9 @@ class Field extends AbstractAst implements FieldInterface
     use AstArgumentsTrait;
     use AstDirectivesTrait;
 
-    /** @var string */
-    private $name;
-
-    /** @var null|string */
-    private $alias = null;
-
-    /**
-     * @param string   $name
-     * @param string   $alias
-     */
-    public function __construct($name, $alias, array $arguments, array $directives, Location $location)
+    public function __construct(private string $name, private ?string $alias, array $arguments, array $directives, Location $location)
     {
         parent::__construct($location);
-
-        $this->name      = $name;
-        $this->alias     = $alias;
         $this->setArguments($arguments);
         $this->setDirectives($directives);
     }

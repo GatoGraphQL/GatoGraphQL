@@ -14,16 +14,12 @@ use PoP\GraphQLParser\Parser\Location;
 
 class Literal extends AbstractAst implements ValueInterface
 {
-    private $value;
-
     /**
      * @param mixed $value
      */
-    public function __construct($value, Location $location)
+    public function __construct(private string|int|float|bool $value, Location $location)
     {
         parent::__construct($location);
-
-        $this->value = $value;
     }
 
     public function getValue()

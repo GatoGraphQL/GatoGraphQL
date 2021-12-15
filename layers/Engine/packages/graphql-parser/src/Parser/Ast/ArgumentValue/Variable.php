@@ -14,49 +14,17 @@ use PoP\GraphQLParser\Parser\Location;
 
 class Variable extends AbstractAst implements ValueInterface
 {
-    /** @var  string */
-    private $name;
+    private mixed $value;
 
-    /** @var  mixed */
-    private $value;
+    private bool $used = false;
 
-    /** @var string */
-    private $type;
+    private bool $hasDefaultValue = false;
 
-    /** @var bool */
-    private $nullable = false;
+    private mixed $defaultValue = null;
 
-    /** @var bool */
-    private $isArray = false;
-
-    /** @var bool */
-    private $used = false;
-
-    /** @var bool */
-    private $arrayElementNullable = true;
-
-    /** @var bool */
-    private $hasDefaultValue = false;
-
-    /** @var mixed */
-    private $defaultValue = null;
-
-    /**
-     * @param string   $name
-     * @param string   $type
-     * @param bool     $nullable
-     * @param bool     $isArray
-     * @param bool     $arrayElementNullable
-     */
-    public function __construct($name, $type, $nullable, $isArray, $arrayElementNullable, Location $location)
+    public function __construct(private string $name, private string $type, private bool $nullable, private bool $isArray, private bool $arrayElementNullable, Location $location)
     {
         parent::__construct($location);
-
-        $this->name                 = $name;
-        $this->type                 = $type;
-        $this->isArray              = $isArray;
-        $this->nullable             = $nullable;
-        $this->arrayElementNullable = $arrayElementNullable;
     }
 
     /**

@@ -18,28 +18,30 @@ use PoP\GraphQLParser\Parser\Ast\Query;
 
 class Request
 {
-    /** @var  Query[] */
-    private $queries = [];
+    /** @var Query[] */
+    private array $queries = [];
 
     /** @var Fragment[] */
-    private $fragments = [];
+    private array $fragments = [];
 
     /** @var Mutation[] */
-    private $mutations = [];
+    private array $mutations = [];
 
     /** @var array */
     private $variables = [];
 
     /** @var VariableReference[] */
-    private $variableReferences = [];
+    private array $variableReferences = [];
 
-    /** @var  array */
-    private $queryVariables = [];
+    private array $queryVariables = [];
 
-    /** @var array */
-    private $fragmentReferences = [];
+    private array $fragmentReferences = [];
 
-    public function __construct($data = [], $variables = [])
+    /**
+     * @param array<string, mixed> $data
+     * @param array<string, mixed> $variables
+     */
+    public function __construct(array $data = [], array $variables = [])
     {
         if (array_key_exists('queries', $data)) {
             $this->addQueries($data['queries']);

@@ -13,21 +13,9 @@ use PoP\GraphQLParser\Parser\Location;
 
 class Argument extends AbstractAst
 {
-    /** @var string */
-    private $name;
-
-    /** @var ValueInterface */
-    private $value;
-
-    /**
-     * @param string         $name
-     */
-    public function __construct($name, ValueInterface $value, Location $location)
+    public function __construct(private string $name, private ValueInterface $value, Location $location)
     {
         parent::__construct($location);
-
-        $this->name  = $name;
-        $this->value = $value;
     }
 
     /**

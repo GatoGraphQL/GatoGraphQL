@@ -17,33 +17,18 @@ class Query extends AbstractAst implements FieldInterface
     use AstArgumentsTrait;
     use AstDirectivesTrait;
 
-    /** @var string */
-    protected $name;
-
-    /** @var string */
-    protected $alias;
-
     /** @var Field[]|Query[] */
-    protected $fields = [];
+    protected array $fields = [];
 
-    /**
-     * Query constructor.
-     *
-     * @param string   $name
-     * @param string   $alias
-     */
-    public function __construct($name, $alias, array $arguments, array $fields, array $directives, Location $location)
+    public function __construct(protected string $name, protected ?string $alias, array $arguments, array $fields, array $directives, Location $location)
     {
         parent::__construct($location);
-
-        $this->name      = $name;
-        $this->alias     = $alias;
         $this->setFields($fields);
         $this->setArguments($arguments);
         $this->setDirectives($directives);
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -51,23 +36,20 @@ class Query extends AbstractAst implements FieldInterface
     /**
      * @return Field[]|Query[]|FragmentInterface[]
      */
-    public function getFields()
+    public function getFields(): array
     {
         return array_values($this->fields);
     }
 
-    /**
-     * @return bool
-     */
-    public function hasFields()
+    public function hasFields(): bool
     {
-        return (bool)count($this->fields);
+        return count($this->fields) > 0;
     }
 
     /**
      * @param Field[]|Query[] $fields
      */
-    public function setFields($fields): void
+    public function setFields(array $fields): void
     {
         /**
          * we cannot store fields by name because of TypedFragments
@@ -75,12 +57,12 @@ class Query extends AbstractAst implements FieldInterface
         $this->fields = $fields;
     }
 
-    public function getAlias()
+    public function getAlias(): ?string
     {
         return $this->alias;
     }
 
-    public function hasField($name, $deep = false)
+    public function hasField(string $name, bool $deep = false)
     {
         foreach ($this->getFields() as $field) {
             if ($field->getName() == $name) {

@@ -12,5 +12,5 @@ interface ValueInterface
 {
     public function getValue();
 
-    public function setValue($value);
+    public function setValue($value): void;
 }

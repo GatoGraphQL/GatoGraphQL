@@ -14,25 +14,11 @@ use PoP\GraphQLParser\Parser\Location;
 
 class VariableReference extends AbstractAst implements ValueInterface
 {
-    /** @var  string */
-    private $name;
+    private mixed $value;
 
-    /** @var  Variable */
-    private $variable;
-
-    /** @var  mixed */
-    private $value;
-
-    /**
-     * @param string        $name
-     * @param Variable|null $variable
-     */
-    public function __construct($name, Variable $variable = null, Location $location)
+    public function __construct(private string $name, private Variable $variable, Location $location)
     {
         parent::__construct($location);
-
-        $this->name     = $name;
-        $this->variable = $variable;
     }
 
     public function getVariable()

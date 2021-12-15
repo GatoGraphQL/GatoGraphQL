@@ -13,12 +13,11 @@ use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 class Tokenizer
 {
     protected $source;
-    protected $pos = 0;
-    protected $line = 1;
-    protected $lineStart = 0;
+    protected int $pos = 0;
+    protected int $line = 1;
+    protected int $lineStart = 0;
 
-    /** @var  Token */
-    protected $lookAhead;
+    protected Token $lookAhead;
 
     protected function initTokenizer($source): void
     {
@@ -197,30 +196,16 @@ class Tokenizer
 
     protected function getKeyword($name)
     {
-        switch ($name) {
-            case 'null':
-                return Token::TYPE_NULL;
-
-            case 'true':
-                return Token::TYPE_TRUE;
-
-            case 'false':
-                return Token::TYPE_FALSE;
-
-            case 'query':
-                return Token::TYPE_QUERY;
-
-            case 'fragment':
-                return Token::TYPE_FRAGMENT;
-
-            case 'mutation':
-                return Token::TYPE_MUTATION;
-
-            case 'on':
-                return Token::TYPE_ON;
-        }
-
-        return Token::TYPE_IDENTIFIER;
+        return match ($name) {
+            'null' => Token::TYPE_NULL,
+            'true' => Token::TYPE_TRUE,
+            'false' => Token::TYPE_FALSE,
+            'query' => Token::TYPE_QUERY,
+            'fragment' => Token::TYPE_FRAGMENT,
+            'mutation' => Token::TYPE_MUTATION,
+            'on' => Token::TYPE_ON,
+            default => Token::TYPE_IDENTIFIER,
+        };
     }
 
     protected function expect($type)
@@ -253,7 +238,7 @@ class Tokenizer
 
         $value = substr($this->source, $start, $this->pos - $start);
 
-        if (strpos($value, '.') === false) {
+        if (!str_contains($value, '.')) {
             $value = (int) $value;
         } else {
             $value = (float) $value;
@@ -279,7 +264,7 @@ class Tokenizer
         return new SyntaxErrorException(sprintf('%s', $message), $this->getLocation());
     }
 
-    protected function getLocation()
+    protected function getLocation(): Location
     {
         return new Location($this->getLine(), $this->getColumn());
     }

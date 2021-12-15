@@ -12,9 +12,9 @@ namespace PoP\GraphQLParser\Parser\Ast;
 trait AstArgumentsTrait
 {
     /** @var Argument[] */
-    protected $arguments;
+    protected array $arguments;
 
-    private $argumentsCache = null;
+    private ?array $argumentsCache = null;
 
 
     public function hasArguments()
