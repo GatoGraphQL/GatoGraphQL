@@ -1,7 +1,8 @@
 {
-    "name": "getpop/graphql-parser",
+    "name": "pop-basics/graphql-parser",
+    "type": "library",
     "description": "GraphQL syntax parser",
-    "homepage": "https://github.com/getpop/graphql-parser",
+    "homepage": "https://github.com/PoPBasics/graphql-parser",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -20,12 +21,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoP\\GraphQLParser\\": "src"
+            "PoPBasics\\GraphQLParser\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\GraphQLParser\\": "tests"
+            "PoPBasics\\GraphQLParser\\": "tests"
         }
     },
     "scripts": {
