@@ -56,7 +56,7 @@ return [
                 // Exclude libraries from WPSchema
                 '#pop-wp-schema/#',
                 // Exclude all composer.json from own libraries (they get broken!)
-                '#[getpop|pop\-schema|pop\-wp\-schema|graphql\-by\-pop|graphql\-api]/*/composer.json#',
+                '#[getpop|pop\-backbone|pop\-schema|pop\-wp\-schema|graphql\-by\-pop|graphql\-api]/*/composer.json#',
                 // Exclude libraries
                 '#symfony/deprecation-contracts/#',
                 '#ralouphie/getallheaders/#',
@@ -76,6 +76,7 @@ return [
         // Own namespaces
         // Watch out! Do NOT alter the order of PoPSchema, PoPWPSchema and PoP!
         // If PoP comes first, then PoPSchema is still scoped!
+        'PoPBackbone\*',
         'PoPSchema\*',
         'PoPWPSchema\*',
         'PoP\*',
