@@ -9,7 +9,7 @@ trait AstArgumentsTrait
     /** @var array<string,Argument> */
     protected array $arguments;
 
-    /** @var array<string,Argument>|null */
+    /** @var array<string,mixed>|null */
     private ?array $argumentsCache = null;
 
 
@@ -24,11 +24,11 @@ trait AstArgumentsTrait
     }
 
     /**
-     * @return Argument[]
+     * @return array<string,Argument>
      */
     public function getArguments(): array
     {
-        return array_values($this->arguments);
+        return $this->arguments;
     }
 
     public function getArgument(string $name): ?Argument
@@ -64,7 +64,7 @@ trait AstArgumentsTrait
     }
 
     /**
-     * @return array<string,Argument>
+     * @return array<string,mixed>
      */
     public function getKeyValueArguments(): array
     {
