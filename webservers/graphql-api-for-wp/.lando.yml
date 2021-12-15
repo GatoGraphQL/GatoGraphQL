@@ -33,6 +33,8 @@ services:
         - >-
           ../../layers/API/packages/api:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/api
         - >-
+          ../../layers/Backbone/packages/graphql-parser:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-backbone/graphql-parser
+        - >-
           ../../layers/Engine/packages/access-control:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/access-control
         - >-
           ../../layers/Engine/packages/cache-control:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/cache-control
