@@ -139,11 +139,9 @@ GRAPHQL;
     }
 
     /**
-     * @param $query string
-     *
      * @dataProvider wrongQueriesProvider
      */
-    public function testWrongQueries($query)
+    public function testWrongQueries(string $query)
     {
         $this->expectException(SyntaxErrorException::class);
         $parser = new Parser();

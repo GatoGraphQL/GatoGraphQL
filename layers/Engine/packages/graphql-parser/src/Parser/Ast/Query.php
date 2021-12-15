@@ -18,7 +18,7 @@ class Query extends AbstractAst implements FieldInterface
 
     /**
      * @param Argument[] $arguments
-     * @param Field[]|Query[] $fields
+     * @param Field[]|Query[]|FragmentReference[] $fields
      * @param Directive[] $directives
      */
     public function __construct(protected string $name, protected ?string $alias, array $arguments, array $fields, array $directives, Location $location)
