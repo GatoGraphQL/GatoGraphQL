@@ -11,15 +11,15 @@ use PoP\GraphQLParser\Parser\Location;
 class Literal extends AbstractAst implements ValueInterface
 {
     /**
-     * @param string|int|float|bool $value
+     * @param string|int|float|bool|null $value
      */
-    public function __construct(private string|int|float|bool $value, Location $location)
+    public function __construct(private string|int|float|bool|null $value, Location $location)
     {
         parent::__construct($location);
     }
 
     /**
-     * @return string|int|float|bool
+     * @return string|int|float|bool|null
      */
     public function getValue(): mixed
     {
@@ -27,7 +27,7 @@ class Literal extends AbstractAst implements ValueInterface
     }
 
     /**
-     * @param string|int|float|bool $value
+     * @param string|int|float|bool|null $value
      */
     public function setValue(mixed $value): void
     {
