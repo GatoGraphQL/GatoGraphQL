@@ -3,6 +3,7 @@
 $finder = PhpCsFixer\Finder::create()
     ->in([
         __DIR__ . '/layers/API/packages/*/src',
+        __DIR__ . '/layers/Backbone/packages/*/src',
         __DIR__ . '/layers/Engine/packages/*/src',
         __DIR__ . '/layers/GraphQLAPIForWP/packages/*/src',
         __DIR__ . '/layers/GraphQLAPIForWP/plugins/*/src',
