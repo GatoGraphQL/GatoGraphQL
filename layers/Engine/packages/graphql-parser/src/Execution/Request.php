@@ -24,7 +24,7 @@ class Request
     private array $mutations = [];
 
     /** @var array<string, mixed> */
-    private $variables = [];
+    private $variableValues = [];
 
     /** @var VariableReference[] */
     private array $variableReferences = [];
@@ -37,9 +37,9 @@ class Request
 
     /**
      * @param array<string, mixed> $data
-     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $variableValues
      */
-    public function __construct(array $data = [], array $variables = [])
+    public function __construct(array $data = [], array $variableValues = [])
     {
         if (array_key_exists('queries', $data)) {
             $this->addQueries($data['queries']);
@@ -65,7 +65,7 @@ class Request
             /** @var VariableReference[] */
             $variableReferences = $data['variableReferences'];
             foreach ($variableReferences as $ref) {
-                if (!array_key_exists($ref->getName(), $variables)) {
+                if (!array_key_exists($ref->getName(), $variableValues)) {
                     $variable = $ref->getVariable();
                     /**
                      * If $variable is null, then it was not declared in the operation arguments
@@ -75,7 +75,7 @@ class Request
                         throw new InvalidRequestException(sprintf("Variable %s hasn't been declared", $ref->getName()), $ref->getLocation());
                     }
                     if ($variable->hasDefaultValue()) {
-                        $variables[$variable->getName()] = $variable->getDefaultValue()->getValue();
+                        $variableValues[$variable->getName()] = $variable->getDefaultValue()->getValue();
                         continue;
                     }
                     throw new InvalidRequestException(sprintf("Variable %s hasn't been submitted", $ref->getName()), $ref->getLocation());
@@ -85,7 +85,7 @@ class Request
             $this->addVariableReferences($variableReferences);
         }
 
-        $this->setVariables($variables);
+        $this->setVariableValues($variableValues);
     }
 
     /**
@@ -212,16 +212,16 @@ class Request
     }
 
     /**
-     * @return Variable[]
+     * @return array<string,mixed>
      */
-    public function getVariables(): array
+    public function getVariableValues(): array
     {
-        return $this->variables;
+        return $this->variableValues;
     }
 
-    public function setVariables(array $variables): void
+    public function setVariableValues(array $variableValues): void
     {
-        $this->variables = $variables;
+        $this->variableValues = $variableValues;
         foreach ($this->variableReferences as $reference) {
             /** invalid request with no variable */
             if (!$reference->getVariable()) {
@@ -230,23 +230,23 @@ class Request
             $variableName = $reference->getVariable()->getName();
 
             /** no variable was set at the time */
-            if (!array_key_exists($variableName, $variables)) {
+            if (!array_key_exists($variableName, $variableValues)) {
                 continue;
             }
 
-            $reference->getVariable()->setValue($variables[$variableName]);
-            $reference->setValue($variables[$variableName]);
+            $reference->getVariable()->setValue($variableValues[$variableName]);
+            $reference->setValue($variableValues[$variableName]);
         }
     }
 
-    public function getVariable(string $name): ?Variable
+    public function getVariableValue(string $name): mixed
     {
-        return $this->hasVariable($name) ? $this->variables[$name] : null;
+        return $this->variableValues[$name] ?? null;
     }
 
     public function hasVariable(string $name): bool
     {
-        return array_key_exists($name, $this->variables);
+        return array_key_exists($name, $this->variableValues);
     }
 
     /**
