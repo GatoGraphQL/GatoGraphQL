@@ -24,7 +24,7 @@ services:
           ../../layers/API/packages/api-mirrorquery:/app/vendor/getpop/api-mirrorquery
         - '../../layers/API/packages/api-rest:/app/vendor/getpop/api-rest'
         - >-
-          ../../layers/GraphQLByPoP/packages/graphql-parser:/app/vendor/graphql-by-pop/graphql-parser
+          ../../layers/Engine/packages/graphql-parser:/app/vendor/getpop/graphql-parser
         - >-
           ../../layers/GraphQLByPoP/packages/graphql-query:/app/vendor/graphql-by-pop/graphql-query
         - >-

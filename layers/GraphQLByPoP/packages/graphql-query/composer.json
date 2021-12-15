@@ -168,7 +168,7 @@
         "getpop/api-graphql": "^0.9",
         "getpop/engine": "^0.9",
         "getpop/field-query": "^0.9",
-        "graphql-by-pop/graphql-parser": "^0.9"
+        "getpop/graphql-parser": "^0.9"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.0",

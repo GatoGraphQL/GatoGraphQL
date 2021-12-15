@@ -142,7 +142,7 @@
         "graphql-by-pop/graphql-voyager": "<0.8.9",
         "graphql-by-pop/graphql-request": "<0.8.9",
         "graphql-by-pop/graphql-query": "<0.8.9",
-        "graphql-by-pop/graphql-parser": "<0.8.9",
+        "getpop/graphql-parser": "<0.8.9",
         "graphql-api/extension-demo": "<0.8.9",
         "getpop/definitions-emoji": "<0.8.9",
         "getpop/static-site-generator": "<0.8.9",

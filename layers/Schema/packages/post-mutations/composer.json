@@ -104,7 +104,7 @@
         "graphql-by-pop/graphql-request": "<0.8.9",
         "graphql-by-pop/graphql-endpoint-for-wp": "<0.8.9",
         "graphql-by-pop/graphql-query": "<0.8.9",
-        "graphql-by-pop/graphql-parser": "<0.8.9",
+        "getpop/graphql-parser": "<0.8.9",
         "graphql-by-pop/graphql-server": "<0.8.9",
         "graphql-api/external-dependency-wrappers": "<0.8.9",
         "graphql-api/markdown-convertor": "<0.8.9",

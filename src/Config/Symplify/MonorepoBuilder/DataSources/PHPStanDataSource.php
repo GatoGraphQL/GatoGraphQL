@@ -17,7 +17,7 @@ class PHPStanDataSource
     public function getUnmigratedFailingPackages(): array
     {
         return [
-            'layers/GraphQLByPoP/packages/graphql-parser',
+            'layers/Engine/packages/graphql-parser',
             'layers/Schema/packages/block-metadata-for-wp',
             'layers/SiteBuilder/packages/application-wp',
             'layers/SiteBuilder/packages/application',
