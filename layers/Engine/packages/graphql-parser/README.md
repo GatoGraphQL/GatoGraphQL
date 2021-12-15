@@ -9,15 +9,13 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Parser for the GraphQL syntax
-
-This component is a fork of [Youshido GraphQL](https://github.com/youshido-php/GraphQL), extracting the parser functionality from within.
+Syntax to query GraphQL through URL params, which grants a GraphQL API the capability to be cached on the server.
 
 ## Install
 
 Via Composer
 
-``` bash
+```php bash
 composer require getpop/graphql-parser
 ```
 
@@ -76,18 +74,8 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Testing
 
-To execute [PHPUnit](https://phpunit.de/), run:
-
-``` bash
-composer test
-```
-
-## Static Analysis
-
-To execute [PHPStan](https://github.com/phpstan/phpstan), run:
-
-``` bash
-composer analyse
+```php bash
+$ composer test
 ```
 
 ## Report issues

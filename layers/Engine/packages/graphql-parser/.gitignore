@@ -1,8 +1,6 @@
-composer.phar
+/build/
+composer.lock
+/vendor/
+phpcs.xml
 phpunit.xml
 .phpunit.result.cache
-/build/
-/vendor/
-data/schema.graphql
-composer.lock
-.idea

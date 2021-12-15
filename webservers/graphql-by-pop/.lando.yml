@@ -22,6 +22,8 @@ services:
         - '../../layers/API/packages/api-rest:/app/vendor/getpop/api-rest'
         - '../../layers/API/packages/api:/app/vendor/getpop/api'
         - >-
+          ../../layers/Backbone/packages/graphql-parser:/app/vendor/pop-backbone/graphql-parser
+        - >-
           ../../layers/Engine/packages/access-control:/app/vendor/getpop/access-control
         - >-
           ../../layers/Engine/packages/cache-control:/app/vendor/getpop/cache-control
