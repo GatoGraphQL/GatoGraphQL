@@ -32,11 +32,11 @@ trait AstDirectivesTrait
     }
 
     /**
-     * @return array<string,Directive>
+     * @return Directive[]
      */
     public function getDirectives(): array
     {
-        return $this->directives;
+        return array_values($this->directives);
     }
 
     /**

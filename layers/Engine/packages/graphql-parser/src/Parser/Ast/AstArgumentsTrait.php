@@ -29,11 +29,11 @@ trait AstArgumentsTrait
     }
 
     /**
-     * @return array<string,Argument>
+     * @return Argument[]
      */
     public function getArguments(): array
     {
-        return $this->arguments;
+        return array_values($this->arguments);
     }
 
     public function getArgument(string $name): ?Argument
