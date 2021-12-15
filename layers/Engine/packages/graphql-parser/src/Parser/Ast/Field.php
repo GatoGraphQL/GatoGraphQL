@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Parser\Ast;
 
 use PoP\GraphQLParser\Parser\Ast\Interfaces\FieldInterface;
-use PoP\GraphQLParser\Parser\Ast\Interfaces\WithDirectivesInterface;
 use PoP\GraphQLParser\Parser\Location;
 
-class Field extends AbstractAst implements FieldInterface, WithDirectivesInterface
+class Field extends AbstractAst implements FieldInterface
 {
     use AstArgumentsTrait;
     use AstDirectivesTrait;

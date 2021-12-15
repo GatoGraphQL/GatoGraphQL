@@ -6,7 +6,7 @@ namespace PoP\GraphQLParser\Parser\Ast\Interfaces;
 
 use PoP\GraphQLParser\Parser\Ast\Argument;
 
-interface FieldInterface extends LocatableInterface
+interface FieldInterface extends LocatableInterface, WithDirectivesInterface
 {
     public function getName(): string;
 
