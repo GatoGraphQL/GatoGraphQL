@@ -5,20 +5,6 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLQuery\Schema;
 
 use Exception;
-use PoP\GraphQLParser\Exception\Interfaces\LocationableExceptionInterface;
-use PoP\GraphQLParser\Execution\Request;
-use PoP\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
-use PoP\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
-use PoP\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
-use PoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
-use PoP\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
-use PoP\GraphQLParser\Parser\Ast\Field;
-use PoP\GraphQLParser\Parser\Ast\FragmentReference;
-use PoP\GraphQLParser\Parser\Ast\Interfaces\FieldInterface;
-use PoP\GraphQLParser\Parser\Ast\Query;
-use PoP\GraphQLParser\Parser\Ast\TypedFragmentReference;
-use PoP\GraphQLParser\Parser\Parser;
-use PoP\GraphQLParser\Validator\RequestValidator\RequestValidator;
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
 use InvalidArgumentException;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
@@ -27,6 +13,20 @@ use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
+use PoP\GraphQLParser\Execution\Request;
+use PoP\GraphQLParser\Parser\Parser;
+use PoPBackbone\GraphQLParser\Exception\Interfaces\LocationableExceptionInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
+use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
+use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
+use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
+use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
+use PoPBackbone\GraphQLParser\Parser\Ast\Field;
+use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
+use PoPBackbone\GraphQLParser\Parser\Ast\Interfaces\FieldInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\Query;
+use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
+use PoPBackbone\GraphQLParser\Validator\RequestValidator\RequestValidator;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
