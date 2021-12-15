@@ -11,16 +11,17 @@ namespace PoP\GraphQLParser\Parser\Ast\ArgumentValue;
 use PoP\GraphQLParser\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Parser\Ast\Interfaces\ValueInterface;
 use PoP\GraphQLParser\Parser\Location;
+use stdClass;
 
 class InputObject extends AbstractAst implements ValueInterface
 {
-    public function __construct(protected object $object, Location $location)
+    public function __construct(protected stdClass $object, Location $location)
     {
         parent::__construct($location);
     }
 
     /**
-     * @return object
+     * @return stdClass
      */
     public function getValue(): mixed
     {
@@ -28,7 +29,7 @@ class InputObject extends AbstractAst implements ValueInterface
     }
 
     /**
-     * @param object $value
+     * @param stdClass $value
      */
     public function setValue(mixed $value): void
     {
