@@ -50,17 +50,4 @@ class RequestTest extends TestCase
         $this->assertEquals($fragment2, $request->getFragment('fragmentName2'));
         $this->assertNull($request->getFragment('unknown fragment'));
     }
-
-    public function testSetVariableParseJson()
-    {
-        $variables = '{"foo": "bar"}';
-        $expectedVariableArray = [ 'foo' => 'bar' ];
-
-        $request = new Request([], $variables);
-        $this->assertEquals($expectedVariableArray, $request->getVariables());
-
-        $request = new Request();
-        $request->setVariables($variables);
-        $this->assertEquals($expectedVariableArray, $request->getVariables());
-    }
 }
