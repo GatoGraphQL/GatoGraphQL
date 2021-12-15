@@ -40,7 +40,7 @@ class Token
     public const TYPE_TRUE  = 'true';
     public const TYPE_FALSE = 'false';
 
-    public function __construct(private string $type, private int $line, private int $column, private ?string $data = null)
+    public function __construct(private string $type, private int $line, private int $column, private mixed $data = null)
     {
         if ($data) {
             $tokenLength = mb_strlen($data);
