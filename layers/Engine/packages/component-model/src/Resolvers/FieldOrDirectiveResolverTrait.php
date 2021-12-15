@@ -70,7 +70,7 @@ trait FieldOrDirectiveResolverTrait
      * In that case, the validation will be done inside ->resolveValue(),
      * and will be treated as a $dbError, not a $schemaError.
      *
-     * Same with expressions, as when calling `getSelfProp(%self%, "posts")`.
+     * Same with expressions, as when calling `getSelfProp(%{self}%, "posts")`.
      *
      * But no need with variables, because by now they will have been replaced with the actual value.
      */
