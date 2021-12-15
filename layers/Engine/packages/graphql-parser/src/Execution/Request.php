@@ -8,5 +8,5 @@ use PoPBackbone\GraphQLParser\Execution\Request as UpstreamRequest;
 
 class Request extends UpstreamRequest
 {
-    
+
 }
