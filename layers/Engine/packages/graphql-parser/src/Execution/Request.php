@@ -184,7 +184,7 @@ class Request
     public function getFragment(string $name): ?Fragment
     {
         foreach ($this->fragments as $fragment) {
-            if ($fragment->getName() == $name) {
+            if ($fragment->getName() === $name) {
                 return $fragment;
             }
         }

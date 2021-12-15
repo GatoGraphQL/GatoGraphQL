@@ -71,7 +71,7 @@ class Query extends AbstractAst implements FieldInterface, WithDirectivesInterfa
     public function hasField(string $name, bool $deep = false): bool
     {
         foreach ($this->getFields() as $field) {
-            if ($field->getName() == $name) {
+            if ($field->getName() === $name) {
                 return true;
             }
 

@@ -49,15 +49,15 @@ class Token
             $this->column = $column - $tokenLength;
         }
 
-        if ($this->getType() == self::TYPE_TRUE) {
+        if ($this->getType() === self::TYPE_TRUE) {
             $this->data = true;
         }
 
-        if ($this->getType() == self::TYPE_FALSE) {
+        if ($this->getType() === self::TYPE_FALSE) {
             $this->data = false;
         }
 
-        if ($this->getType() == self::TYPE_NULL) {
+        if ($this->getType() === self::TYPE_NULL) {
             $this->data = null;
         }
     }
