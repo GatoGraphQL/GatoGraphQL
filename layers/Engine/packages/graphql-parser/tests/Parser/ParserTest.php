@@ -486,6 +486,8 @@ GRAPHQL;
 
     public function mutationProvider()
     {
+        $variable = new Variable('variable', 'Int', false, false, true, new Location(1, 8));
+        $variable->setUsed(true);
         return [
             [
                 'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
@@ -503,7 +505,7 @@ GRAPHQL;
                             'query',
                             null,
                             [
-                                new Argument('teas', new VariableReference('variable', (new Variable('variable', 'Int', false, false, true, new Location(1, 8)))->setUsed(true), new Location(1, 39)), new Location(1, 33)),
+                                new Argument('teas', new VariableReference('variable', $variable, new Location(1, 39)), new Location(1, 33)),
                             ],
                             [
                                 new Field('name', 'alias', [], [], new Location(1, 60)),
@@ -516,10 +518,10 @@ GRAPHQL;
                     'fragments'          => [],
                     'fragmentReferences' => [],
                     'variables'          => [
-                        (new Variable('variable', 'Int', false, false, true, new Location(1, 8)))->setUsed(true),
+                        $variable,
                     ],
                     'variableReferences' => [
-                        new VariableReference('variable', (new Variable('variable', 'Int', false, false, true, new Location(1, 8)))->setUsed(true), new Location(1, 39)),
+                        new VariableReference('variable', $variable, new Location(1, 39)),
                     ],
                 ],
             ],
