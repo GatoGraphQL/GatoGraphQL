@@ -365,7 +365,10 @@ class Parser extends Tokenizer
         return new Field($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
     }
 
-    protected function parseArgumentList()
+    /**
+     * @return Argument[]
+     */
+    protected function parseArgumentList(): array
     {
         $args = [];
 
@@ -381,7 +384,7 @@ class Parser extends Tokenizer
         return $args;
     }
 
-    protected function parseArgument()
+    protected function parseArgument(): Argument
     {
         $nameToken = $this->eatIdentifierToken();
         $this->expect(Token::TYPE_COLON);
@@ -390,7 +393,10 @@ class Parser extends Tokenizer
         return new Argument($nameToken->getData(), $value, new Location($nameToken->getLine(), $nameToken->getColumn()));
     }
 
-    protected function parseDirectiveList()
+    /**
+     * @return Directive[]
+     */
+    protected function parseDirectiveList(): array
     {
         $directives = [];
 
@@ -402,7 +408,7 @@ class Parser extends Tokenizer
         return $directives;
     }
 
-    protected function parseDirective()
+    protected function parseDirective(): Directive
     {
         $this->expect(Token::TYPE_AT);
 
@@ -441,7 +447,7 @@ class Parser extends Tokenizer
         throw $this->createUnexpectedException($this->lookAhead);
     }
 
-    protected function parseList($createType = true)
+    protected function parseList(bool $createType = true) : InputList|array
     {
         $startToken = $this->eat(Token::TYPE_LSQUARE_BRACE);
 
@@ -457,7 +463,10 @@ class Parser extends Tokenizer
         return $createType ? new InputList($list, new Location($startToken->getLine(), $startToken->getColumn())) : $list;
     }
 
-    protected function parseListValue()
+    /**
+     * @throws SyntaxErrorException
+     */
+    protected function parseListValue(): mixed
     {
         return match ($this->lookAhead->getType()) {
             Token::TYPE_NUMBER,
@@ -478,7 +487,10 @@ class Parser extends Tokenizer
         };
     }
 
-    protected function parseObject($createType = true)
+    /**
+     * @throws SyntaxErrorException
+     */
+    protected function parseObject(bool $createType = true): InputObject|stdClass
     {
         $startToken = $this->eat(Token::TYPE_LBRACE);
 
@@ -499,7 +511,10 @@ class Parser extends Tokenizer
         return $createType ? new InputObject($object, new Location($startToken->getLine(), $startToken->getColumn())) : $object;
     }
 
-    protected function parseFragment()
+    /**
+     * @throws SyntaxErrorException
+     */
+    protected function parseFragment(): Fragment
     {
         $this->lex();
         $nameToken = $this->eatIdentifierToken();
@@ -515,7 +530,7 @@ class Parser extends Tokenizer
         return new Fragment($nameToken->getData(), $model->getData(), $directives, $fields, new Location($nameToken->getLine(), $nameToken->getColumn()));
     }
 
-    protected function eat($type)
+    protected function eat(string $type): ?Token
     {
         if ($this->match($type)) {
             return $this->lex();
@@ -524,7 +539,10 @@ class Parser extends Tokenizer
         return null;
     }
 
-    protected function eatMulti($types)
+    /**
+     * @param string[] $types
+     */
+    protected function eatMulti(array $types): ?Token
     {
         if ($this->matchMulti($types)) {
             return $this->lex();
@@ -533,9 +551,12 @@ class Parser extends Tokenizer
         return null;
     }
 
-    protected function matchMulti($types)
+    /**
+     * @param string[] $types
+     */
+    protected function matchMulti(array $types): bool
     {
-        foreach ((array) $types as $type) {
+        foreach ($types as $type) {
             if ($this->peek()->getType() === $type) {
                 return true;
             }
