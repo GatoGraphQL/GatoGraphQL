@@ -8,6 +8,7 @@ use PoP\BasicService\BasicServiceTrait;
 use PoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable as ExtendedVariable;
 use PoP\GraphQLParser\Parser\Ast\Directive as ExtendedDirective;
 use PoP\GraphQLParser\Parser\Ast\Field as ExtendedField;
+use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Ast\Field;
