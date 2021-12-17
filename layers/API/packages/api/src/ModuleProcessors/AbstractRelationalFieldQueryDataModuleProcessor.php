@@ -16,8 +16,12 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     public function getDataFields(array $module, array &$props): array
     {
-        // The fields which have a numeric key only are the data-fields for the current module level
-        // Process only the fields without "skip output if null". Those will be processed on function `getConditionalOnDataFieldSubmodules`
+        /**
+         * The fields which have a numeric key only are the data-fields
+         * for the current module level.
+         * Process only the fields without "skip output if null".
+         * Those will be processed on function `getConditionalOnDataFieldSubmodules`
+         */
         return array_filter(
             $this->getPropertyFields($module),
             fn (Field $field) => !$field->skipOutputIfNull(),
