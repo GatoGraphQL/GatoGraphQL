@@ -39,8 +39,10 @@ class Request
      * @param array<string, mixed> $data
      * @param array<string, mixed> $variableValues
      */
-    public function __construct(array $data = [], array $variableValues = [])
-    {
+    public function __construct(
+        array $data = [],
+        array $variableValues = [],
+    ) {
         if (array_key_exists('queries', $data)) {
             $this->addQueries($data['queries']);
         }

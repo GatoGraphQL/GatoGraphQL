@@ -9,8 +9,10 @@ use PoPBackbone\GraphQLParser\Parser\Location;
 
 class FragmentReference extends AbstractAst implements FragmentInterface
 {
-    public function __construct(protected string $name, Location $location)
-    {
+    public function __construct(
+        protected string $name,
+        Location $location,
+    ) {
         parent::__construct($location);
     }
 

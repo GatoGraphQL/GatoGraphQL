@@ -11,8 +11,10 @@ use stdClass;
 
 class InputObject extends AbstractAst implements ValueInterface
 {
-    public function __construct(protected stdClass $object, Location $location)
-    {
+    public function __construct(
+        protected stdClass $object,
+        Location $location,
+    ) {
         parent::__construct($location);
     }
 

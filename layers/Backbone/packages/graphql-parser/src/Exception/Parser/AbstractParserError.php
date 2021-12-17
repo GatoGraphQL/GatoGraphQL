@@ -10,8 +10,10 @@ use PoPBackbone\GraphQLParser\Parser\Location;
 
 abstract class AbstractParserError extends Exception implements LocationableExceptionInterface
 {
-    public function __construct(string $message, private Location $location)
-    {
+    public function __construct(
+        string $message,
+        private Location $location,
+    ) {
         parent::__construct($message);
     }
 

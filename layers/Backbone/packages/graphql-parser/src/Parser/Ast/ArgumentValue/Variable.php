@@ -19,8 +19,14 @@ class Variable extends AbstractAst implements ValueInterface
 
     private mixed $defaultValue = null;
 
-    public function __construct(private string $name, private string $type, private bool $nullable, private bool $isArray, private bool $arrayElementNullable, Location $location)
-    {
+    public function __construct(
+        private string $name,
+        private string $type,
+        private bool $nullable,
+        private bool $isArray,
+        private bool $arrayElementNullable,
+        Location $location,
+    ) {
         parent::__construct($location);
     }
 
