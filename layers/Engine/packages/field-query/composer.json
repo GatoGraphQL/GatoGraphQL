@@ -167,8 +167,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "getpop/query-parsing": "^0.9",
-        "getpop/basic-service": "^0.9"
+        "getpop/query-parsing": "^0.9"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.0",
