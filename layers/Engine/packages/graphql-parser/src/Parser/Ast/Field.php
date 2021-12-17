@@ -11,9 +11,9 @@ use PoPBackbone\GraphQLParser\Parser\Location;
 
 class Field extends UpstreamField
 {
+    use MaybeNonLocatableAstTrait;
+
     /**
-     * For the SiteBuilder, the generated GraphQL query will have no Location
-     *
      * @param Argument[] $arguments
      * @param Directive[] $directives
      */
@@ -24,7 +24,12 @@ class Field extends UpstreamField
         array $directives,
         ?Location $location = null,
     ) {
-        $location ??= new Location(0, 0);
-        parent::__construct($name, $alias, $arguments, $directives, $location);
+        parent::__construct(
+            $name,
+            $alias,
+            $arguments,
+            $directives,
+            $this->getLocation($location),
+        );
     }
 }

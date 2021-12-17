@@ -9,9 +9,9 @@ use PoPBackbone\GraphQLParser\Parser\Location;
 
 class Directive extends UpstreamDirective
 {
+    use MaybeNonLocatableAstTrait;
+
     /**
-     * For the SiteBuilder, the generated GraphQL query will have no Location
-     *
      * @param Argument[] $arguments
      */
     public function __construct(
@@ -19,7 +19,10 @@ class Directive extends UpstreamDirective
         array $arguments,
         ?Location $location = null,
     ) {
-        $location ??= new Location(0, 0);
-        parent::__construct($name, $arguments, $location);
+        parent::__construct(
+            $name,
+            $arguments,
+            $this->getLocation($location),
+        );
     }
 }
