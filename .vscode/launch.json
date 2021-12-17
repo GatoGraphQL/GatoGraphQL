@@ -129,6 +129,7 @@
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-wp-schema/users": "${workspaceFolder}/layers/WPSchema/packages/users",
               "/app/wordpress/wp-content/plugins/graphql-api": "${workspaceFolder}/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp",
               "/app/wordpress/API/": "${workspaceFolder}/layers/API/",
+              "/app/wordpress/Backbone/": "${workspaceFolder}/layers/Backbone/",
               "/app/wordpress/Engine/": "${workspaceFolder}/layers/Engine/",
               "/app/wordpress/GraphQLByPoP/": "${workspaceFolder}/layers/GraphQLByPoP/",
               "/app/wordpress/Schema/": "${workspaceFolder}/layers/Schema/",
