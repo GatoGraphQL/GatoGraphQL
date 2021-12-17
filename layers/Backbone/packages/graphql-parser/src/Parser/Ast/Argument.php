@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
-use PoPBackbone\GraphQLParser\Parser\Ast\Interfaces\ValueInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\ValueInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
 class Argument extends AbstractAst

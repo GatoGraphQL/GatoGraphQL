@@ -16,7 +16,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\Interfaces\WithDirectivesInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\WithDirectivesInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\Mutation;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
 use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
-use PoPBackbone\GraphQLParser\Parser\Ast\Interfaces\FragmentInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\FragmentInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
 class FragmentReference extends AbstractAst implements FragmentInterface

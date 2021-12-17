@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue;
 
 use PoPBackbone\GraphQLParser\Parser\Ast\AbstractAst;
-use PoPBackbone\GraphQLParser\Parser\Ast\Interfaces\ValueInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\ValueInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 use stdClass;
 
