@@ -227,13 +227,13 @@ class Parser extends Tokenizer
                 $this->eat(Token::TYPE_REQUIRED);
             }
 
-            $variable = new Variable(
-                $nameToken->getData(),
-                $type,
+            $variable = $this->createVariable(
+                $nameToken,
+                (string)$type,
                 $required,
                 $isArray,
                 $arrayElementNullable,
-                new Location($variableToken->getLine(), $variableToken->getColumn())
+                $variableToken,
             );
 
             if ($this->match(Token::TYPE_EQUAL)) {
@@ -245,6 +245,24 @@ class Parser extends Tokenizer
         }
 
         $this->expect(Token::TYPE_RPAREN);
+    }
+
+    protected function createVariable(
+        Token $nameToken,
+        string $type,
+        bool $required,
+        bool $isArray,
+        bool $arrayElementNullable,
+        ?Token $variableToken
+    ): Variable {
+        return new Variable(
+            $nameToken->getData(),
+            $type,
+            $required,
+            $isArray,
+            $arrayElementNullable,
+            new Location($variableToken->getLine(), $variableToken->getColumn())
+        );
     }
 
     /**
@@ -314,7 +332,7 @@ class Parser extends Tokenizer
     /**
      * @throws SyntaxErrorException
      */
-    protected function eatIdentifierToken()
+    protected function eatIdentifierToken(): Token
     {
         return $this->expectMulti([
             Token::TYPE_IDENTIFIER,
