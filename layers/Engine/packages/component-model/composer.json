@@ -1,6 +1,7 @@
 {
     "name": "getpop/component-model",
     "conflict": {
+        "getpop/basic-service": "<0.8.9",
         "getpop/modulerouting": "<0.8.9",
         "getpop/hooks-wp": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
