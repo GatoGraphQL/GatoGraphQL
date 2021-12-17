@@ -33,7 +33,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     protected function getPropertyFields(array $module): array
     {
-        $moduleAtts = count($module) >= 3 ? $module[2] : null;
+        $moduleAtts = $module[2] ?? null;
         $fields = $this->getFields($module, $moduleAtts);
 
         return array_values(array_filter(
@@ -45,10 +45,13 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         ));
     }
 
+    /**
+     * @return Field[]
+     */
     protected function getFields(array $module, $moduleAtts): array
     {
         // If it is a virtual module, the fields are coded inside the virtual module atts
-        if (!is_null($moduleAtts)) {
+        if ($moduleAtts !== null) {
             return $moduleAtts['fields'];
         }
         // If it is a normal module, it is the first added, then simply get the fields from $vars
@@ -88,7 +91,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     protected function getFieldsWithNestedSubfields(array $module): array
     {
-        $moduleAtts = count($module) >= 3 ? $module[2] : null;
+        $moduleAtts = $module[2] ?? null;
         $fields = $this->getFields($module, $moduleAtts);
 
         return array_filter(
