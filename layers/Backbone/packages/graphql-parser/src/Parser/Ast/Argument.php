@@ -9,8 +9,11 @@ use PoPBackbone\GraphQLParser\Parser\Location;
 
 class Argument extends AbstractAst
 {
-    public function __construct(private string $name, private ValueInterface $value, Location $location)
-    {
+    public function __construct(
+        private string $name,
+        private ValueInterface $value,
+        Location $location,
+    ) {
         parent::__construct($location);
     }
 

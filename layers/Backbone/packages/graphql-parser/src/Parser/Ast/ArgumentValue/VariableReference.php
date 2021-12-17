@@ -12,8 +12,11 @@ class VariableReference extends AbstractAst implements ValueInterface
 {
     private mixed $value;
 
-    public function __construct(private string $name, private ?Variable $variable, Location $location)
-    {
+    public function __construct(
+        private string $name,
+        private ?Variable $variable,
+        Location $location,
+    ) {
         parent::__construct($location);
     }
 

@@ -13,8 +13,11 @@ class Directive extends AbstractAst
     /**
      * @param Argument[] $arguments
      */
-    public function __construct(private $name, array $arguments, Location $location)
-    {
+    public function __construct(
+        private $name,
+        array $arguments,
+        Location $location,
+    ) {
         parent::__construct($location);
         $this->setArguments($arguments);
     }
