@@ -293,7 +293,11 @@ class Parser extends Tokenizer
                 $variable->setUsed(true);
             }
 
-            $variableReference = $this->createVariableReference($name, $variable, new Location($startToken->getLine(), $startToken->getColumn()));
+            $variableReference = $this->createVariableReference(
+                $name,
+                $variable,
+                new Location($startToken->getLine(), $startToken->getColumn())
+            );
 
             $this->data['variableReferences'][] = $variableReference;
 
@@ -330,11 +334,21 @@ class Parser extends Tokenizer
     protected function parseFragmentReference(): FragmentReference
     {
         $nameToken         = $this->eatIdentifierToken();
-        $fragmentReference = new FragmentReference($nameToken->getData(), new Location($nameToken->getLine(), $nameToken->getColumn()));
+        $fragmentReference = $this->createFragmentReference(
+            $nameToken->getData(),
+            new Location($nameToken->getLine(), $nameToken->getColumn())
+        );
 
         $this->data['fragmentReferences'][] = $fragmentReference;
 
         return $fragmentReference;
+    }
+
+    protected function createFragmentReference(
+        string $name,
+        Location $location,
+    ): FragmentReference {
+        return new FragmentReference($name, $location);
     }
 
     /**
