@@ -42,11 +42,14 @@
         "pop-schema/user-state-mutations-wp": "dev-master",
         "pop-schema/user-state-wp": "dev-master",
         "pop-schema/usermeta-wp": "dev-master",
+        "pop-wp-schema/commentmeta": "dev-master",
+        "pop-wp-schema/custompostmeta": "dev-master",
         "pop-wp-schema/media": "dev-master",
         "pop-wp-schema/menus": "dev-master",
         "pop-wp-schema/pages": "dev-master",
         "pop-wp-schema/posts": "dev-master",
-        "pop-wp-schema/users": "dev-master"
+        "pop-wp-schema/taxonomymeta": "dev-master",
+        "pop-wp-schema/usermeta": "dev-master"
     },
     "extra": {
         "branch-alias": {
