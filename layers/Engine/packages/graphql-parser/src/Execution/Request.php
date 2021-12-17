@@ -16,4 +16,9 @@ class Request extends UpstreamRequest implements RequestInterface
     {
         return $this->getTranslationAPI()->__(\sprintf('Variable \'%s\' hasn\'t been declared', $variableName), 'graphql-parser');
     }
+
+    protected function getVariableHasntBeenSubmittedErrorMessage(string $variableName): string
+    {
+        return $this->getTranslationAPI()->__(\sprintf('Variable \'%s\' hasn\'t been submitted', $variableName), 'graphql-parser');
+    }
 }

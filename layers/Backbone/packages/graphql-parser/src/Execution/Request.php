@@ -81,7 +81,7 @@ class Request implements RequestInterface
                         continue;
                     }
                     throw new InvalidRequestException(
-                        sprintf('Variable \'%s\' hasn\'t been submitted', $ref->getName()),
+                        $this->getVariableHasntBeenSubmittedErrorMessage($ref->getName()),
                         $ref->getLocation()
                     );
                 }
@@ -96,6 +96,11 @@ class Request implements RequestInterface
     protected function getVariableHasntBeenDeclaredErrorMessage(string $variableName): string
     {
         return \sprintf('Variable \'%s\' hasn\'t been declared', $variableName);
+    }
+
+    protected function getVariableHasntBeenSubmittedErrorMessage(string $variableName): string
+    {
+        return \sprintf('Variable \'%s\' hasn\'t been submitted', $variableName);
     }
 
     /**
