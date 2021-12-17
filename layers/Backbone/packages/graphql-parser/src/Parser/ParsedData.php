@@ -88,4 +88,21 @@ class ParsedData
     {
         return $this->variableReferences;
     }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function toArray(): array
+    {
+        return [
+            'queryOperations'    => $this->getQueryOperations(),
+            'mutationOperations' => $this->getMutationOperations(),
+            'queries'            => $this->getQueries(),
+            'mutations'          => $this->getMutations(),
+            'fragments'          => $this->getFragments(),
+            'fragmentReferences' => $this->getFragmentReferences(),
+            'variables'          => $this->getVariables(),
+            'variableReferences' => $this->getVariableReferences(),
+        ];
+    }
 }
