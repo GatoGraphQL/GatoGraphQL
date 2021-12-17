@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPBackbone\GraphQLParser\Exception\Interfaces;
+namespace PoPBackbone\GraphQLParser\Exception;
 
 use PoPBackbone\GraphQLParser\Parser\Location;
 

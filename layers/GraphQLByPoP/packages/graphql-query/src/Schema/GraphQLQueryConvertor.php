@@ -16,7 +16,7 @@ use PoP\FieldQuery\QuerySyntax;
 use PoP\GraphQLParser\Execution\RequestInterface;
 use PoP\GraphQLParser\Parser\Parser;
 use PoP\GraphQLParser\Validator\RequestValidator\RequestValidatorInterface;
-use PoPBackbone\GraphQLParser\Exception\Interfaces\LocationableExceptionInterface;
+use PoPBackbone\GraphQLParser\Exception\LocationableExceptionInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
