@@ -536,7 +536,18 @@ class Parser extends Tokenizer
         $nameToken = $this->eatIdentifierToken();
         $args      = $this->match(Token::TYPE_LPAREN) ? $this->parseArgumentList() : [];
 
-        return new Directive($nameToken->getData(), $args, new Location($nameToken->getLine(), $nameToken->getColumn()));
+        return $this->createDirective($nameToken->getData(), $args, new Location($nameToken->getLine(), $nameToken->getColumn()));
+    }
+
+    /**
+     * @param Argument[] $arguments
+     */
+    public function createDirective(
+        $name,
+        array $arguments,
+        Location $location,
+    ): Directive {
+        return new Directive($name, $arguments, $location);
     }
 
     /**
