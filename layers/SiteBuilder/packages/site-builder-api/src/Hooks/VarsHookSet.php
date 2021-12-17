@@ -7,7 +7,7 @@ namespace PoP\SiteBuilderAPI\Hooks;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\StratumManagerFactory;
 use PoP\ConfigurationComponentModel\Constants\Stratum;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 
 class VarsHookSet extends AbstractHookSet
 {

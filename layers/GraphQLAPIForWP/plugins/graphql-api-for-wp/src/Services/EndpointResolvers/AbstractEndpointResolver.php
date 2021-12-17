@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointResolvers;
 
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractEndpointResolver extends AbstractAutomaticallyInstantiatedService

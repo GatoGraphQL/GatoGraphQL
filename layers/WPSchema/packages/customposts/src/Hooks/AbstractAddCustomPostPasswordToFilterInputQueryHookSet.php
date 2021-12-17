@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CustomPosts\Hooks;
 
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 
 abstract class AbstractAddCustomPostPasswordToFilterInputQueryHookSet extends AbstractHookSet
 {

@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInte
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 use PoPSchema\Posts\TypeResolvers\InputObjectType\PostsFilterInputObjectTypeResolverInterface;
 use PoPSchema\Tags\FilterInputProcessors\FilterInputProcessor;
 

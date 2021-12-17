@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 
 abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorInterface
 {

@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 
 abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
 {

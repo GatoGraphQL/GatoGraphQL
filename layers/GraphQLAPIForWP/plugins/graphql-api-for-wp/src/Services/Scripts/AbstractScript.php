@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Scripts;
 use Error;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GeneralUtils;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 /**

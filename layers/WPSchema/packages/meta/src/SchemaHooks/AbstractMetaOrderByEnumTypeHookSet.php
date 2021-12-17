@@ -6,7 +6,7 @@ namespace PoPWPSchema\Meta\SchemaHooks;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\HookNames;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 use PoPWPSchema\Meta\Constants\MetaOrderBy;
 
 abstract class AbstractMetaOrderByEnumTypeHookSet extends AbstractHookSet

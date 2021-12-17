@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\FieldQuery;
 
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\QueryParsing\QueryParserInterface;
 use stdClass;
 
 class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 {
-    // @todo Remove this trait: ComponentModel is not a dependency!!!
     use BasicServiceTrait;
 
     // Cache the output from functions

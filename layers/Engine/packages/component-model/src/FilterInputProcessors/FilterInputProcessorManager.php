@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FilterInputProcessors;
 
 use PoP\ComponentModel\ItemProcessors\ItemProcessorManagerTrait;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 
 class FilterInputProcessorManager implements FilterInputProcessorManagerInterface
 {

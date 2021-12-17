@@ -35,7 +35,7 @@ use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;

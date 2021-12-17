@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\TaxonomiesWP\TypeAPIs;
 
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Taxonomies\Constants\TaxonomyOrderBy;

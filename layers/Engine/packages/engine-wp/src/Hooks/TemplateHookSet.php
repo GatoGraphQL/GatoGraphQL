@@ -6,7 +6,7 @@ namespace PoP\EngineWP\Hooks;
 
 use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
 use PoP\EngineWP\Templates\TemplateHelpers;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 
 class TemplateHookSet extends AbstractHookSet
 {

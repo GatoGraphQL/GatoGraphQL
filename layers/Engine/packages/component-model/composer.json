@@ -1,6 +1,7 @@
 {
     "name": "getpop/component-model",
     "conflict": {
+        "getpop/basic-service": "<0.8.9",
         "getpop/modulerouting": "<0.8.9",
         "getpop/hooks-wp": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
@@ -168,10 +169,10 @@
     "require": {
         "php": "^8.0",
         "composer/semver": "^3.2",
+        "getpop/basic-service": "^0.9",
         "getpop/definitions": "^0.9",
         "getpop/field-query": "^0.9",
         "getpop/graphql-parser": "^0.9",
-        "getpop/hooks": "^0.9",
         "jrfnl/php-cast-to-type": "^2.0",
         "league/pipeline": "^1.0",
         "psr/simple-cache": "^1.0",

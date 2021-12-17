@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Users\Hooks;
 
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 use PoPSchema\Users\Routing\RouteNatures;
 
 class VarsHookSet extends AbstractHookSet

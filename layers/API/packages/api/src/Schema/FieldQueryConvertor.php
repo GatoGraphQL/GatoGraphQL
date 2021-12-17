@@ -11,7 +11,7 @@ use PoP\API\Schema\QuerySyntax as APIQuerySyntax;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax as FieldQueryQuerySyntax;
 use PoP\FieldQuery\QueryUtils;

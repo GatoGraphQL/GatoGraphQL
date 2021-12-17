@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Users\Hooks;
 
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 use PoPSchema\UsersWP\TypeAPIs\UserTypeAPI;
 use PoPWPSchema\Users\Constants\UserOrderBy;
 

@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Hooks;
 use GraphQLAPI\GraphQLAPI\Constants\QueryOptions;
 use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
 use PoPSchema\SchemaCommons\Constants\QueryOptions as SchemaCommonsQueryOptions;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;

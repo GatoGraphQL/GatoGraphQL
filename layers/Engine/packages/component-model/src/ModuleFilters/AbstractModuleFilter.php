@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModuleFilters;
 
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 
 abstract class AbstractModuleFilter implements ModuleFilterInterface
 {

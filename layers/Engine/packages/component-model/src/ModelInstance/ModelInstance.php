@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModelInstance;
 
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Definitions\DefinitionManagerInterface;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserAvatarsWP\TypeAPIs;
 
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 use PoPSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
 use WP_User;
 
