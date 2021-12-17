@@ -233,7 +233,7 @@ class Parser extends Tokenizer
                 $required,
                 $isArray,
                 $arrayElementNullable,
-                $variableToken,
+                new Location($variableToken->getLine(), $variableToken->getColumn()),
             );
 
             if ($this->match(Token::TYPE_EQUAL)) {
@@ -253,7 +253,7 @@ class Parser extends Tokenizer
         bool $required,
         bool $isArray,
         bool $arrayElementNullable,
-        ?Token $variableToken
+        Location $location,
     ): Variable {
         return new Variable(
             $nameToken->getData(),
@@ -261,7 +261,7 @@ class Parser extends Tokenizer
             $required,
             $isArray,
             $arrayElementNullable,
-            new Location($variableToken->getLine(), $variableToken->getColumn())
+            $location
         );
     }
 

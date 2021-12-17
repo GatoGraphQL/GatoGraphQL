@@ -30,7 +30,7 @@ class Parser extends UpstreamParser
         bool $required,
         bool $isArray,
         bool $arrayElementNullable,
-        ?Token $variableToken
+        Location $location,
     ): Variable {
         return new Variable(
             $nameToken->getData(),
@@ -38,7 +38,7 @@ class Parser extends UpstreamParser
             $required,
             $isArray,
             $arrayElementNullable,
-            new Location($variableToken->getLine(), $variableToken->getColumn())
+            $location,
         );
     }
 }
