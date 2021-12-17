@@ -7,7 +7,7 @@ namespace PoPWPSchema\Meta\SchemaHooks;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 
 abstract class AbstractRemoveMetaQueryInputFieldsInputObjectTypeHookSet extends AbstractHookSet
 {

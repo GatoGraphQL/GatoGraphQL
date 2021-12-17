@@ -6,7 +6,7 @@ namespace PoP\Engine\Hooks;
 
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\Engine\ComponentConfiguration;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 
 class VarsHookSet extends AbstractHookSet
 {

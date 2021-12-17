@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\PagesWP\Hooks;
 
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 use PoPSchema\Pages\Routing\RouteNatures;
 use WP_Query;
 

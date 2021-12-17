@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\UserMetaWP\Hooks;
 
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 use PoPSchema\MetaQueryWP\Helpers\MetaQueryHelpers;
 use PoPSchema\UsersWP\TypeAPIs\UserTypeAPI;
 

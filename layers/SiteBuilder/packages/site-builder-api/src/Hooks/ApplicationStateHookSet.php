@@ -7,7 +7,7 @@ namespace PoP\SiteBuilderAPI\Hooks;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\StratumManagerFactory;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 
 class ApplicationStateHookSet extends AbstractHookSet
 {
