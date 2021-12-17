@@ -11,6 +11,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Mutation;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
+use PoPBackbone\GraphQLParser\Parser\ParsedData;
 
 interface RequestInterface
 {
@@ -20,7 +21,7 @@ interface RequestInterface
      * @throws InvalidRequestException
      */
     public function process(
-        array $data,
+        ParsedData|array $data,
         array $variableValues = [],
     ): self;
 

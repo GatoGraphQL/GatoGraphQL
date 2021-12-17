@@ -30,10 +30,7 @@ class Parser extends Tokenizer implements ParserInterface
      */
     private array $data = [];
 
-    /**
-     * @return array<string,mixed>
-     */
-    public function parse(string $source): array
+    public function parse(string $source): ParsedData
     {
         $this->init($source);
 
@@ -85,7 +82,16 @@ class Parser extends Tokenizer implements ParserInterface
             }
         }
 
-        return $this->data;
+        return new ParsedData(
+            $this->data['queryOperations'],
+            $this->data['mutationOperations'],
+            $this->data['queries'],
+            $this->data['mutations'],
+            $this->data['fragments'],
+            $this->data['fragmentReferences'],
+            $this->data['variables'],
+            $this->data['variableReferences'],
+        );
     }
 
     protected function getIncorrectRequestSyntaxErrorMessage(): string

@@ -571,7 +571,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             );
         }
 
-        $parsedData = $this->getParser()->parse($payload);
+        $parsedData = $this->getParser()->parse($payload)->toArray();
 
         // GraphiQL sends the operationName to execute in the payload, under "operationName"
         // This is required when the payload contains multiple queries
