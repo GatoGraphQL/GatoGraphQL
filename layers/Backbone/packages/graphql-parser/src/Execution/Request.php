@@ -43,7 +43,7 @@ class Request implements RequestInterface
         if ($data instanceof ParsedData) {
             $data = $data->toArray();
         }
-        
+
         if (array_key_exists('queries', $data)) {
             $this->addQueries($data['queries']);
         }
