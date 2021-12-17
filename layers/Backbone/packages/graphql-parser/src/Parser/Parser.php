@@ -16,10 +16,11 @@ use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\WithDirectivesInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\Mutation;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
 use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
+use PoPBackbone\GraphQLParser\Parser\Ast\WithDirectivesInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
 use stdClass;
 
 class Parser extends Tokenizer
@@ -502,7 +503,15 @@ class Parser extends Tokenizer
         $this->expect(Token::TYPE_COLON);
         $value = $this->parseValue();
 
-        return new Argument($nameToken->getData(), $value, new Location($nameToken->getLine(), $nameToken->getColumn()));
+        return $this->createArgument($nameToken->getData(), $value, new Location($nameToken->getLine(), $nameToken->getColumn()));
+    }
+
+    public function createArgument(
+        string $name,
+        WithValueInterface $value,
+        Location $location,
+    ): Argument {
+        return new Argument($name, $value, $location);
     }
 
     /**
