@@ -15,4 +15,9 @@ class Parser extends UpstreamParser
     {
         return $this->getTranslationAPI()->__('Incorrect request syntax', 'graphql-parser');
     }
+
+    protected function getCantParseArgumentErrorMessage(): string
+    {
+        return $this->getTranslationAPI()->__('Can\'t parse argument', 'graphql-parser');
+    }
 }

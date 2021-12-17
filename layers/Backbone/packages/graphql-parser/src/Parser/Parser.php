@@ -489,8 +489,16 @@ class Parser extends Tokenizer
             Token::TYPE_LSQUARE_BRACE
                 => $this->parseList(false),
             default
-                => throw new SyntaxErrorException('Can\'t parse argument', $this->getLocation()),
+                => throw new SyntaxErrorException(
+                    $this->getCantParseArgumentErrorMessage(),
+                    $this->getLocation()
+                ),
         };
+    }
+
+    protected function getCantParseArgumentErrorMessage(): string
+    {
+        return 'Can\'t parse argument';
     }
 
     /**
