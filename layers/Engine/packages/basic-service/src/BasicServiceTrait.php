@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Services;
+namespace PoP\BasicService;
 
 use PoP\Hooks\HooksAPIInterface;
 use PoP\Root\Services\WithInstanceManagerServiceTrait;

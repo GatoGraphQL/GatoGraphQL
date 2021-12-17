@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\EntryModule;
 
 use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\ModuleRouting\ModuleRoutingGroups;
 use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
 

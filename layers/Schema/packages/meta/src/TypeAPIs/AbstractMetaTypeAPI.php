@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\Meta\TypeAPIs;
 
 use InvalidArgumentException;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 
 abstract class AbstractMetaTypeAPI implements MetaTypeAPIInterface

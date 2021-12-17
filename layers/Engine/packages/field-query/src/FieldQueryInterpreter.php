@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\FieldQuery;
 
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\QueryParsing\QueryParserInterface;
 use stdClass;
 

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Error;
 
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 use stdClass;
 
 class ErrorProvider implements ErrorProviderInterface

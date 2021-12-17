@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\BlockAccessors;
 use GraphQLAPI\GraphQLAPI\AppObjects\BlockAttributes\PersistedQueryEndpointGraphiQLBlockAttributes;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 use WP_Post;
 
 class PersistedQueryEndpointGraphiQLBlockAccessor
