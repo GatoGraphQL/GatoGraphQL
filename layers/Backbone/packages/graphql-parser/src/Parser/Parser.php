@@ -293,7 +293,7 @@ class Parser extends Tokenizer
                 $variable->setUsed(true);
             }
 
-            $variableReference = new VariableReference($name, $variable, new Location($startToken->getLine(), $startToken->getColumn()));
+            $variableReference = $this->createVariableReference($name, $variable, new Location($startToken->getLine(), $startToken->getColumn()));
 
             $this->data['variableReferences'][] = $variableReference;
 
@@ -301,6 +301,14 @@ class Parser extends Tokenizer
         }
 
         throw $this->createUnexpectedException($this->peek());
+    }
+
+    protected function createVariableReference(
+        string $name,
+        ?Variable $variable,
+        Location $location,
+    ): VariableReference {
+        return new VariableReference($name, $variable, $location);
     }
 
     protected function findVariable(string $name): ?Variable
