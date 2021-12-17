@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\CommentsWP\ConditionalOnComponent\Users\Hooks;
 
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 use PoPSchema\Comments\ConditionalOnComponent\Users\Constants\CommentOrderBy;
 use PoPSchema\CommentsWP\TypeAPIs\CommentTypeAPI;
 

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Hooks;
 
 use PoP\ComponentModel\MutationResolution\MutationResolutionManagerInterface;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 
 class MutationResolutionManagerHookSet extends AbstractHookSet
 {

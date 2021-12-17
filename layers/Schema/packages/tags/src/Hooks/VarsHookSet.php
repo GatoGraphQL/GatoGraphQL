@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Tags\Hooks;
 
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 use PoPSchema\Tags\Routing\RouteNatures;
 use PoPSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 

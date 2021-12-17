@@ -7,7 +7,7 @@ namespace PoPSchema\CommentMutations\ConditionalOnComponent\Users\SchemaHooks;
 use PoP\ComponentModel\FieldResolvers\ObjectType\HookNames;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 use PoPSchema\CommentMutations\ComponentConfiguration;
 use PoPSchema\CommentMutations\FieldResolvers\ObjectType\AbstractAddCommentToCustomPostObjectTypeFieldResolver;
 use PoPSchema\CommentMutations\MutationResolvers\MutationInputProperties;

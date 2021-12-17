@@ -6,7 +6,7 @@ namespace PoPSchema\Comments\ConditionalOnComponent\Users\SchemaHooks;
 
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\HookNames;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 use PoPSchema\Comments\ConditionalOnComponent\Users\Constants\CommentOrderBy;
 use PoPSchema\Comments\TypeResolvers\EnumType\CommentOrderByEnumTypeResolver;
 
