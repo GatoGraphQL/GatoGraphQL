@@ -390,25 +390,91 @@ class Parser extends Tokenizer
             }
 
             if ($type === Token::TYPE_QUERY) {
-                return new Query($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
+                return $this->createQuery($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
             }
 
             if ($type === Token::TYPE_TYPED_FRAGMENT) {
-                return new TypedFragmentReference($nameToken->getData(), $fields, $directives, $bodyLocation);
+                return $this->createTypedFragmentReference($nameToken->getData(), $fields, $directives, $bodyLocation);
             }
 
-            return new Mutation($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
+            return $this->createMutation($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
         }
 
         if ($highLevel && $type === Token::TYPE_MUTATION) {
-            return new Mutation($nameToken->getData(), $alias, $arguments, [], $directives, $bodyLocation);
+            return $this->createMutation($nameToken->getData(), $alias, $arguments, [], $directives, $bodyLocation);
         }
 
         if ($highLevel && $type === Token::TYPE_QUERY) {
-            return new Query($nameToken->getData(), $alias, $arguments, [], $directives, $bodyLocation);
+            return $this->createQuery($nameToken->getData(), $alias, $arguments, [], $directives, $bodyLocation);
         }
 
-        return new Field($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
+        return $this->createField($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
+    }
+
+    /**
+     * @param Argument[] $arguments
+     * @param Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] $fields
+     * @param Directive[] $directives
+     */
+    protected function createQuery(
+        string $name,
+        ?string $alias,
+        array $arguments,
+        array $fields,
+        array $directives,
+        Location $location
+    ): Query {
+        return new Query(
+            $name,
+            $alias,
+            $arguments,
+            $fields,
+            $directives,
+            $location
+        );
+    }
+
+    /**
+     * @param Field[]|Query[] $fields
+     * @param Directive[] $directives
+     */
+    protected function createTypedFragmentReference(
+        string $typeName,
+        array $fields,
+        array $directives,
+        Location $location,
+    ): TypedFragmentReference {
+        return new TypedFragmentReference($typeName, $fields, $directives, $location);
+    }
+
+    /**
+     * @param Argument[] $arguments
+     * @param Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] $fields
+     * @param Directive[] $directives
+     */
+    protected function createMutation(
+        string $name,
+        ?string $alias,
+        array $arguments,
+        array $fields,
+        array $directives,
+        Location $location,
+    ): Mutation {
+        return new Mutation($name, $alias, $arguments, $fields, $directives, $location);
+    }
+
+    /**
+     * @param Argument[] $arguments
+     * @param Directive[] $directives
+     */
+    protected function createField(
+        string $name,
+        ?string $alias,
+        array $arguments,
+        array $directives,
+        Location $location,
+    ): Field {
+        return new Field($name, $alias, $arguments, $directives, $location);
     }
 
     /**

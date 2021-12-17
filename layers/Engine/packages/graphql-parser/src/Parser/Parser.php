@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Parser;
 
 use PoP\BasicService\BasicServiceTrait;
-use PoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
+use PoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable as ExtendedVariable;
+use PoP\GraphQLParser\Parser\Ast\Field as ExtendedField;
+use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
+use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Location;
 use PoPBackbone\GraphQLParser\Parser\Parser as UpstreamParser;
-use PoPBackbone\GraphQLParser\Parser\Token;
 
 class Parser extends UpstreamParser
 {
@@ -32,7 +34,7 @@ class Parser extends UpstreamParser
         bool $arrayElementNullable,
         Location $location,
     ): Variable {
-        return new Variable(
+        return new ExtendedVariable(
             $name,
             $type,
             $required,
@@ -40,5 +42,19 @@ class Parser extends UpstreamParser
             $arrayElementNullable,
             $location,
         );
+    }
+
+    /**
+     * @param Argument[] $arguments
+     * @param Directive[] $directives
+     */
+    protected function createField(
+        string $name,
+        ?string $alias,
+        array $arguments,
+        array $directives,
+        Location $location,
+    ): Field {
+        return new ExtendedField($name, $alias, $arguments, $directives, $location);
     }
 }
