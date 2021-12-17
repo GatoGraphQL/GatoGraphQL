@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Validator\RequestValidator;
 
 use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoPBackbone\GraphQLParser\Execution\Request;
+use PoPBackbone\GraphQLParser\Execution\Interfaces\RequestInterface;
 
 class RequestValidator implements RequestValidatorInterface
 {
-    public function validate(Request $request): void
+    public function validate(RequestInterface $request): void
     {
         $this->assertFragmentReferencesValid($request);
         $this->assetFragmentsUsed($request);
@@ -17,7 +17,7 @@ class RequestValidator implements RequestValidatorInterface
         $this->assertAllVariablesUsed($request);
     }
 
-    private function assetFragmentsUsed(Request $request)
+    private function assetFragmentsUsed(RequestInterface $request)
     {
         foreach ($request->getFragmentReferences() as $fragmentReference) {
             $request->getFragment($fragmentReference->getName())->setUsed(true);
@@ -30,7 +30,7 @@ class RequestValidator implements RequestValidatorInterface
         }
     }
 
-    private function assertFragmentReferencesValid(Request $request)
+    private function assertFragmentReferencesValid(RequestInterface $request)
     {
         foreach ($request->getFragmentReferences() as $fragmentReference) {
             if (!$request->getFragment($fragmentReference->getName())) {
@@ -39,7 +39,7 @@ class RequestValidator implements RequestValidatorInterface
         }
     }
 
-    private function assertAllVariablesExists(Request $request)
+    private function assertAllVariablesExists(RequestInterface $request)
     {
         foreach ($request->getVariableReferences() as $variableReference) {
             if (!$variableReference->getVariable()) {
@@ -48,7 +48,7 @@ class RequestValidator implements RequestValidatorInterface
         }
     }
 
-    private function assertAllVariablesUsed(Request $request)
+    private function assertAllVariablesUsed(RequestInterface $request)
     {
         foreach ($request->getQueryVariables() as $queryVariable) {
             if (!$queryVariable->isUsed()) {

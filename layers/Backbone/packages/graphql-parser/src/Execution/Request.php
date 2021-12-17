@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Execution;
 
 use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoPBackbone\GraphQLParser\Execution\Interfaces\RequestInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
@@ -12,7 +13,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Mutation;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
 
-class Request
+class Request implements RequestInterface
 {
     /** @var Query[] */
     private array $queries = [];
@@ -35,14 +36,10 @@ class Request
     /** @var FragmentReference[] */
     private array $fragmentReferences = [];
 
-    /**
-     * @param array<string, mixed> $data
-     * @param array<string, mixed> $variableValues
-     */
-    public function __construct(
-        array $data = [],
+    public function process(
+        array $data,
         array $variableValues = [],
-    ) {
+    ): void {
         if (array_key_exists('queries', $data)) {
             $this->addQueries($data['queries']);
         }
