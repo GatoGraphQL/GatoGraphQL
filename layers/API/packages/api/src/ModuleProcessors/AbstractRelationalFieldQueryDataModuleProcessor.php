@@ -11,15 +11,19 @@ use PoP\GraphQLParser\Parser\Ast\Field;
 
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
 {
-    protected function getFields(array $module, $moduleAtts): array
+    /**
+     * @return Field[]
+     */
+    public function getDataFields(array $module, array &$props): array
     {
-        // If it is a virtual module, the fields are coded inside the virtual module atts
-        if (!is_null($moduleAtts)) {
-            return $moduleAtts['fields'];
-        }
-        // If it is a normal module, it is the first added, then simply get the fields from $vars
-        $vars = ApplicationState::getVars();
-        return $vars['query'] ?? [];
+        // The fields which have a numeric key only are the data-fields for the current module level
+        // Process only the fields without "skip output if null". Those will be processed on function `getConditionalOnDataFieldSubmodules`
+        return array_filter(
+            $this->getPropertyFields($module),
+            function ($field) {
+                return !$this->getFieldQueryInterpreter()->isSkipOuputIfNullField($field);
+            }
+        );
     }
 
     /**
@@ -39,65 +43,15 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         ));
     }
 
-    /**
-     * Nested fields: Those fields which have a field as key and an array of submodules as value
-     */
-    protected function getFieldsWithNestedSubfields(array $module): array
+    protected function getFields(array $module, $moduleAtts): array
     {
-        $moduleAtts = count($module) >= 3 ? $module[2] : null;
-        $fields = $this->getFields($module, $moduleAtts);
-
-        return array_filter(
-            $fields,
-            function ($key) {
-                return !is_numeric($key);
-            },
-            ARRAY_FILTER_USE_KEY
-        );
-    }
-
-    /**
-     * Given a field, return its corresponding "not(isEmpty($field))
-     */
-    protected function getNotIsEmptyConditionField(string $field): string
-    {
-        $conditionFieldAlias = null;
-        // Convert the field into its "not is null" version
-        if ($fieldAlias = $this->getFieldQueryInterpreter()->getFieldAlias($field)) {
-            $conditionFieldAlias = 'not-isnull-' . $fieldAlias;
+        // If it is a virtual module, the fields are coded inside the virtual module atts
+        if (!is_null($moduleAtts)) {
+            return $moduleAtts['fields'];
         }
-        return $this->getFieldQueryInterpreter()->getField(
-            'not',
-            [
-                'value' => $this->getFieldQueryInterpreter()->getField(
-                    'isNull',
-                    [
-                        'value' => $this->getFieldQueryInterpreter()->composeField(
-                            $this->getFieldQueryInterpreter()->getFieldName($field),
-                            $this->getFieldQueryInterpreter()->getFieldArgs($field) ?? QueryHelpers::getEmptyFieldArgs()
-                        ),
-                    ]
-                ),
-            ],
-            $conditionFieldAlias,
-            false,
-            $this->getFieldQueryInterpreter()->getDirectives($field)
-        );
-    }
-
-    /**
-     * @return Field[]
-     */
-    public function getDataFields(array $module, array &$props): array
-    {
-        // The fields which have a numeric key only are the data-fields for the current module level
-        // Process only the fields without "skip output if null". Those will be processed on function `getConditionalOnDataFieldSubmodules`
-        return array_filter(
-            $this->getPropertyFields($module),
-            function ($field) {
-                return !$this->getFieldQueryInterpreter()->isSkipOuputIfNullField($field);
-            }
-        );
+        // If it is a normal module, it is the first added, then simply get the fields from $vars
+        $vars = ApplicationState::getVars();
+        return $vars['query'] ?? [];
     }
 
     public function getDomainSwitchingSubmodules(array $module): array
@@ -127,6 +81,23 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
             );
         }
         return $ret;
+    }
+
+    /**
+     * Nested fields: Those fields which have a field as key and an array of submodules as value
+     */
+    protected function getFieldsWithNestedSubfields(array $module): array
+    {
+        $moduleAtts = count($module) >= 3 ? $module[2] : null;
+        $fields = $this->getFields($module, $moduleAtts);
+
+        return array_filter(
+            $fields,
+            function ($key) {
+                return !is_numeric($key);
+            },
+            ARRAY_FILTER_USE_KEY
+        );
     }
 
     public function getConditionalOnDataFieldSubmodules(array $module): array
@@ -164,6 +135,35 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         }
 
         return $ret;
+    }
+
+    /**
+     * Given a field, return its corresponding "not(isEmpty($field))
+     */
+    protected function getNotIsEmptyConditionField(string $field): string
+    {
+        $conditionFieldAlias = null;
+        // Convert the field into its "not is null" version
+        if ($fieldAlias = $this->getFieldQueryInterpreter()->getFieldAlias($field)) {
+            $conditionFieldAlias = 'not-isnull-' . $fieldAlias;
+        }
+        return $this->getFieldQueryInterpreter()->getField(
+            'not',
+            [
+                'value' => $this->getFieldQueryInterpreter()->getField(
+                    'isNull',
+                    [
+                        'value' => $this->getFieldQueryInterpreter()->composeField(
+                            $this->getFieldQueryInterpreter()->getFieldName($field),
+                            $this->getFieldQueryInterpreter()->getFieldArgs($field) ?? QueryHelpers::getEmptyFieldArgs()
+                        ),
+                    ]
+                ),
+            ],
+            $conditionFieldAlias,
+            false,
+            $this->getFieldQueryInterpreter()->getDirectives($field)
+        );
     }
 
     public function getConditionalOnDataFieldDomainSwitchingSubmodules(array $module): array
