@@ -7,6 +7,7 @@ namespace PoP\API\ModuleProcessors;
 use PoP\ComponentModel\ModuleProcessors\AbstractQueryDataModuleProcessor;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\FieldQuery\QueryHelpers;
+use PoP\GraphQLParser\Parser\Ast\Field;
 
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
 {
@@ -84,6 +85,9 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         );
     }
 
+    /**
+     * @return Field[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         // The fields which have a numeric key only are the data-fields for the current module level

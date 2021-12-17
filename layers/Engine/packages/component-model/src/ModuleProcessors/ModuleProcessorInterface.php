@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Parser\Ast\Field;
 
 interface ModuleProcessorInterface
 {
@@ -40,6 +41,9 @@ interface ModuleProcessorInterface
     public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface;
     public function getComponentMutationResolverBridge(array $module): ?ComponentMutationResolverBridgeInterface;
     public function prepareDataPropertiesAfterMutationExecution(array $module, array &$props, array &$data_properties): void;
+    /**
+     * @return Field[]
+     */
     public function getDataFields(array $module, array &$props): array;
     public function getDomainSwitchingSubmodules(array $module): array;
     public function getConditionalOnDataFieldSubmodules(array $module): array;
