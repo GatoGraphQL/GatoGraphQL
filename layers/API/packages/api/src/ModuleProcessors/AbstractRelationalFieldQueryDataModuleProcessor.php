@@ -35,7 +35,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     {
         $moduleAtts = $module[2] ?? null;
         $fields = $this->getFields($module, $moduleAtts);
-
         return array_values(array_filter(
             $fields,
             function ($key) {
@@ -54,7 +53,8 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         if ($moduleAtts !== null) {
             return $moduleAtts['fields'];
         }
-        // If it is a normal module, it is the first added, then simply get the fields from $vars
+        // If it is a normal module, it is the first one added,
+        // then simply get the fields from $vars
         $vars = ApplicationState::getVars();
         return $vars['query'] ?? [];
     }
