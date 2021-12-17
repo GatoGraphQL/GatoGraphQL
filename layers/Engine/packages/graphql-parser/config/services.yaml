@@ -4,3 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
+    PoP\GraphQLParser\Execution\Interfaces\RequestInterface:
+        class: \PoP\GraphQLParser\Execution\Request

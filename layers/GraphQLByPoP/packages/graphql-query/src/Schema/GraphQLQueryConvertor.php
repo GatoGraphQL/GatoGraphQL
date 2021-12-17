@@ -7,13 +7,13 @@ namespace GraphQLByPoP\GraphQLQuery\Schema;
 use Exception;
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
 use InvalidArgumentException;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\BasicService\BasicServiceTrait;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
-use PoP\GraphQLParser\Execution\Request;
+use PoP\GraphQLParser\Execution\Interfaces\RequestInterface;
 use PoP\GraphQLParser\Parser\Parser;
 use PoPBackbone\GraphQLParser\Exception\Interfaces\LocationableExceptionInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
@@ -35,6 +35,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?IncludeDirectiveResolver $includeDirectiveResolver = null;
+    private ?RequestInterface $request = null;
 
     final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
@@ -59,6 +60,14 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     final protected function getIncludeDirectiveResolver(): IncludeDirectiveResolver
     {
         return $this->includeDirectiveResolver ??= $this->instanceManager->getInstance(IncludeDirectiveResolver::class);
+    }
+    final public function setRequest(RequestInterface $request): void
+    {
+        $this->request = $request;
+    }
+    final protected function getRequest(): RequestInterface
+    {
+        return $this->request ??= $this->instanceManager->getInstance(RequestInterface::class);
     }
 
     /**
@@ -416,7 +425,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         return $fragmentFieldPaths;
     }
 
-    protected function processAndAddFieldPaths(Request $request, array &$queryFieldPaths, array $fields, array $queryField = []): void
+    protected function processAndAddFieldPaths(RequestInterface $request, array &$queryFieldPaths, array $fields, array $queryField = []): void
     {
         // Iterate through the query's fields: properties, connections, fragments
         $queryFieldPath = $queryField;
@@ -467,7 +476,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         }
     }
 
-    protected function getFieldPathsFromQuery(Request $request, Query $query): array
+    protected function getFieldPathsFromQuery(RequestInterface $request, Query $query): array
     {
         $queryFieldPaths = [];
         $queryFieldPath = [$this->convertField($query)];
@@ -490,7 +499,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
      *
      * @see https://graphql.org/learn/queries/
      */
-    protected function convertRequestToFieldQueryPaths(Request $request): array
+    protected function convertRequestToFieldQueryPaths(RequestInterface $request): array
     {
         $fieldQueryPaths = [];
         // It is either is a query or a mutation
@@ -536,7 +545,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         array $variables,
         bool $enableMultipleQueryExecution,
         ?string $operationName = null
-    ): Request {
+    ): RequestInterface {
         if (empty($payload)) {
             throw new InvalidArgumentException(
                 $this->getTranslationAPI()->__('Must provide an operation.', 'graphql-query')
@@ -694,7 +703,8 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
         // If some variable hasn't been submitted, it will throw an Exception
         // Let it bubble up
-        $request = new Request($parsedData, $variables);
+        $request = $this->getRequest();
+        $request->process($parsedData, $variables);
 
         // If the validation fails, it will throw an exception
         (new RequestValidator())->validate($request);
