@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Parser\Ast;
 
+use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive as UpstreamDirective;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
@@ -15,7 +16,7 @@ class Directive extends UpstreamDirective
      * @param Argument[] $arguments
      */
     public function __construct(
-        private string $name,
+        string $name,
         array $arguments,
         ?Location $location = null,
     ) {

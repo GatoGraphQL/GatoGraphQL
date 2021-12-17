@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
-use PoPBackbone\GraphQLParser\Parser\Ast\Interfaces\ValueInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
 class Argument extends AbstractAst
 {
     public function __construct(
         private string $name,
-        private ValueInterface $value,
+        private WithValueInterface $value,
         Location $location,
     ) {
         parent::__construct($location);
@@ -27,12 +27,12 @@ class Argument extends AbstractAst
         $this->name = $name;
     }
 
-    public function getValue(): ValueInterface
+    public function getValue(): WithValueInterface
     {
         return $this->value;
     }
 
-    public function setValue(ValueInterface $value): void
+    public function setValue(WithValueInterface $value): void
     {
         $this->value = $value;
     }

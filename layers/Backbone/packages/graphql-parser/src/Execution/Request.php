@@ -12,7 +12,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Mutation;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
 
-class Request
+class Request implements RequestInterface
 {
     /** @var Query[] */
     private array $queries = [];
@@ -35,14 +35,10 @@ class Request
     /** @var FragmentReference[] */
     private array $fragmentReferences = [];
 
-    /**
-     * @param array<string, mixed> $data
-     * @param array<string, mixed> $variableValues
-     */
-    public function __construct(
-        array $data = [],
+    public function process(
+        array $data,
         array $variableValues = [],
-    ) {
+    ): self {
         if (array_key_exists('queries', $data)) {
             $this->addQueries($data['queries']);
         }
@@ -74,13 +70,19 @@ class Request
                      * @see https://graphql.org/learn/queries/#variables
                      */
                     if ($variable === null) {
-                        throw new InvalidRequestException(sprintf('Variable \'%s\' hasn\'t been declared', $ref->getName()), $ref->getLocation());
+                        throw new InvalidRequestException(
+                            $this->getVariableHasntBeenDeclaredErrorMessage($ref->getName()),
+                            $ref->getLocation()
+                        );
                     }
                     if ($variable->hasDefaultValue()) {
                         $variableValues[$variable->getName()] = $variable->getDefaultValue()->getValue();
                         continue;
                     }
-                    throw new InvalidRequestException(sprintf('Variable \'%s\' hasn\'t been submitted', $ref->getName()), $ref->getLocation());
+                    throw new InvalidRequestException(
+                        $this->getVariableHasntBeenSubmittedErrorMessage($ref->getName()),
+                        $ref->getLocation()
+                    );
                 }
             }
 
@@ -88,6 +90,18 @@ class Request
         }
 
         $this->setVariableValues($variableValues);
+
+        return $this;
+    }
+
+    protected function getVariableHasntBeenDeclaredErrorMessage(string $variableName): string
+    {
+        return \sprintf('Variable \'%s\' hasn\'t been declared', $variableName);
+    }
+
+    protected function getVariableHasntBeenSubmittedErrorMessage(string $variableName): string
+    {
+        return \sprintf('Variable \'%s\' hasn\'t been submitted', $variableName);
     }
 
     /**

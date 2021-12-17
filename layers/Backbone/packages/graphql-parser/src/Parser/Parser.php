@@ -16,13 +16,14 @@ use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\Interfaces\WithDirectivesInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\Mutation;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
 use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
+use PoPBackbone\GraphQLParser\Parser\Ast\WithDirectivesInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
 use stdClass;
 
-class Parser extends Tokenizer
+class Parser extends Tokenizer implements ParserInterface
 {
     /**
      * @var array<string,mixed>
@@ -77,11 +78,19 @@ class Parser extends Tokenizer
                     break;
 
                 default:
-                    throw new SyntaxErrorException('Incorrect request syntax', $this->getLocation());
+                    throw new SyntaxErrorException(
+                        $this->getIncorrectRequestSyntaxErrorMessage(),
+                        $this->getLocation()
+                    );
             }
         }
 
         return $this->data;
+    }
+
+    protected function getIncorrectRequestSyntaxErrorMessage(): string
+    {
+        return 'Incorrect request syntax';
     }
 
     private function init(string $source): void
@@ -219,13 +228,13 @@ class Parser extends Tokenizer
                 $this->eat(Token::TYPE_REQUIRED);
             }
 
-            $variable = new Variable(
-                $nameToken->getData(),
-                $type,
+            $variable = $this->createVariable(
+                (string)$nameToken->getData(),
+                (string)$type,
                 $required,
                 $isArray,
                 $arrayElementNullable,
-                new Location($variableToken->getLine(), $variableToken->getColumn())
+                $this->getTokenLocation($variableToken),
             );
 
             if ($this->match(Token::TYPE_EQUAL)) {
@@ -237,6 +246,29 @@ class Parser extends Tokenizer
         }
 
         $this->expect(Token::TYPE_RPAREN);
+    }
+
+    protected function getTokenLocation(Token $token): Location
+    {
+        return new Location($token->getLine(), $token->getColumn());
+    }
+
+    protected function createVariable(
+        string $name,
+        string $type,
+        bool $required,
+        bool $isArray,
+        bool $arrayElementNullable,
+        Location $location,
+    ): Variable {
+        return new Variable(
+            $name,
+            $type,
+            $required,
+            $isArray,
+            $arrayElementNullable,
+            $location
+        );
     }
 
     /**
@@ -267,7 +299,11 @@ class Parser extends Tokenizer
                 $variable->setUsed(true);
             }
 
-            $variableReference = new VariableReference($name, $variable, new Location($startToken->getLine(), $startToken->getColumn()));
+            $variableReference = $this->createVariableReference(
+                $name,
+                $variable,
+                $this->getTokenLocation($startToken)
+            );
 
             $this->data['variableReferences'][] = $variableReference;
 
@@ -275,6 +311,14 @@ class Parser extends Tokenizer
         }
 
         throw $this->createUnexpectedException($this->peek());
+    }
+
+    protected function createVariableReference(
+        string $name,
+        ?Variable $variable,
+        Location $location,
+    ): VariableReference {
+        return new VariableReference($name, $variable, $location);
     }
 
     protected function findVariable(string $name): ?Variable
@@ -296,17 +340,27 @@ class Parser extends Tokenizer
     protected function parseFragmentReference(): FragmentReference
     {
         $nameToken         = $this->eatIdentifierToken();
-        $fragmentReference = new FragmentReference($nameToken->getData(), new Location($nameToken->getLine(), $nameToken->getColumn()));
+        $fragmentReference = $this->createFragmentReference(
+            $nameToken->getData(),
+            $this->getTokenLocation($nameToken)
+        );
 
         $this->data['fragmentReferences'][] = $fragmentReference;
 
         return $fragmentReference;
     }
 
+    protected function createFragmentReference(
+        string $name,
+        Location $location,
+    ): FragmentReference {
+        return new FragmentReference($name, $location);
+    }
+
     /**
      * @throws SyntaxErrorException
      */
-    protected function eatIdentifierToken()
+    protected function eatIdentifierToken(): Token
     {
         return $this->expectMulti([
             Token::TYPE_IDENTIFIER,
@@ -329,7 +383,7 @@ class Parser extends Tokenizer
             $nameToken = $this->eatIdentifierToken();
         }
 
-        $bodyLocation = new Location($nameToken->getLine(), $nameToken->getColumn());
+        $bodyLocation = $this->getTokenLocation($nameToken);
         $arguments    = $this->match(Token::TYPE_LPAREN) ? $this->parseArgumentList() : [];
         $directives   = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
 
@@ -342,25 +396,91 @@ class Parser extends Tokenizer
             }
 
             if ($type === Token::TYPE_QUERY) {
-                return new Query($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
+                return $this->createQuery($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
             }
 
             if ($type === Token::TYPE_TYPED_FRAGMENT) {
-                return new TypedFragmentReference($nameToken->getData(), $fields, $directives, $bodyLocation);
+                return $this->createTypedFragmentReference($nameToken->getData(), $fields, $directives, $bodyLocation);
             }
 
-            return new Mutation($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
+            return $this->createMutation($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
         }
 
         if ($highLevel && $type === Token::TYPE_MUTATION) {
-            return new Mutation($nameToken->getData(), $alias, $arguments, [], $directives, $bodyLocation);
+            return $this->createMutation($nameToken->getData(), $alias, $arguments, [], $directives, $bodyLocation);
         }
 
         if ($highLevel && $type === Token::TYPE_QUERY) {
-            return new Query($nameToken->getData(), $alias, $arguments, [], $directives, $bodyLocation);
+            return $this->createQuery($nameToken->getData(), $alias, $arguments, [], $directives, $bodyLocation);
         }
 
-        return new Field($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
+        return $this->createField($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
+    }
+
+    /**
+     * @param Argument[] $arguments
+     * @param Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] $fields
+     * @param Directive[] $directives
+     */
+    protected function createQuery(
+        string $name,
+        ?string $alias,
+        array $arguments,
+        array $fields,
+        array $directives,
+        Location $location
+    ): Query {
+        return new Query(
+            $name,
+            $alias,
+            $arguments,
+            $fields,
+            $directives,
+            $location
+        );
+    }
+
+    /**
+     * @param Field[]|Query[] $fields
+     * @param Directive[] $directives
+     */
+    protected function createTypedFragmentReference(
+        string $typeName,
+        array $fields,
+        array $directives,
+        Location $location,
+    ): TypedFragmentReference {
+        return new TypedFragmentReference($typeName, $fields, $directives, $location);
+    }
+
+    /**
+     * @param Argument[] $arguments
+     * @param Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] $fields
+     * @param Directive[] $directives
+     */
+    protected function createMutation(
+        string $name,
+        ?string $alias,
+        array $arguments,
+        array $fields,
+        array $directives,
+        Location $location,
+    ): Mutation {
+        return new Mutation($name, $alias, $arguments, $fields, $directives, $location);
+    }
+
+    /**
+     * @param Argument[] $arguments
+     * @param Directive[] $directives
+     */
+    protected function createField(
+        string $name,
+        ?string $alias,
+        array $arguments,
+        array $directives,
+        Location $location,
+    ): Field {
+        return new Field($name, $alias, $arguments, $directives, $location);
     }
 
     /**
@@ -388,7 +508,15 @@ class Parser extends Tokenizer
         $this->expect(Token::TYPE_COLON);
         $value = $this->parseValue();
 
-        return new Argument($nameToken->getData(), $value, new Location($nameToken->getLine(), $nameToken->getColumn()));
+        return $this->createArgument($nameToken->getData(), $value, $this->getTokenLocation($nameToken));
+    }
+
+    protected function createArgument(
+        string $name,
+        WithValueInterface $value,
+        Location $location,
+    ): Argument {
+        return new Argument($name, $value, $location);
     }
 
     /**
@@ -413,7 +541,18 @@ class Parser extends Tokenizer
         $nameToken = $this->eatIdentifierToken();
         $args      = $this->match(Token::TYPE_LPAREN) ? $this->parseArgumentList() : [];
 
-        return new Directive($nameToken->getData(), $args, new Location($nameToken->getLine(), $nameToken->getColumn()));
+        return $this->createDirective($nameToken->getData(), $args, $this->getTokenLocation($nameToken));
+    }
+
+    /**
+     * @param Argument[] $arguments
+     */
+    protected function createDirective(
+        $name,
+        array $arguments,
+        Location $location,
+    ): Directive {
+        return new Directive($name, $arguments, $location);
     }
 
     /**
@@ -439,10 +578,20 @@ class Parser extends Tokenizer
             case Token::TYPE_FALSE:
                 $token = $this->lex();
 
-                return new Literal($token->getData(), new Location($token->getLine(), $token->getColumn()));
+                return $this->createLiteral($token->getData(), $this->getTokenLocation($token));
         }
 
         throw $this->createUnexpectedException($this->lookAhead);
+    }
+
+    /**
+     * @param string|int|float|bool|null $value
+     */
+    public function createLiteral(
+        string|int|float|bool|null $value,
+        Location $location
+    ): Literal {
+        return new Literal($value, $location);
     }
 
     protected function parseList(bool $createType): InputList|array
@@ -458,7 +607,17 @@ class Parser extends Tokenizer
 
         $this->expect(Token::TYPE_RSQUARE_BRACE);
 
-        return $createType ? new InputList($list, new Location($startToken->getLine(), $startToken->getColumn())) : $list;
+        return $createType ? $this->createInputList($list, $this->getTokenLocation($startToken)) : $list;
+    }
+
+    /**
+     * @param mixed[] $list
+     */
+    protected function createInputList(
+        array $list,
+        Location $location,
+    ): InputList {
+        return new InputList($list, $location);
     }
 
     /**
@@ -481,8 +640,16 @@ class Parser extends Tokenizer
             Token::TYPE_LSQUARE_BRACE
                 => $this->parseList(false),
             default
-                => throw new SyntaxErrorException('Can\'t parse argument', $this->getLocation()),
+                => throw new SyntaxErrorException(
+                    $this->getCantParseArgumentErrorMessage(),
+                    $this->getLocation()
+                ),
         };
+    }
+
+    protected function getCantParseArgumentErrorMessage(): string
+    {
+        return 'Can\'t parse argument';
     }
 
     /**
@@ -506,7 +673,14 @@ class Parser extends Tokenizer
 
         $this->eat(Token::TYPE_RBRACE);
 
-        return $createType ? new InputObject($object, new Location($startToken->getLine(), $startToken->getColumn())) : $object;
+        return $createType ? $this->createInputObject($object, $this->getTokenLocation($startToken)) : $object;
+    }
+
+    protected function createInputObject(
+        stdClass $object,
+        Location $location,
+    ): InputObject {
+        return new InputObject($object, $location);
     }
 
     /**
@@ -526,7 +700,21 @@ class Parser extends Tokenizer
         /** @var Query[] */
         $fields = $this->parseBody(Token::TYPE_QUERY, false);
 
-        return new Fragment($nameToken->getData(), $model->getData(), $directives, $fields, new Location($nameToken->getLine(), $nameToken->getColumn()));
+        return $this->createFragment($nameToken->getData(), $model->getData(), $directives, $fields, $this->getTokenLocation($nameToken));
+    }
+
+    /**
+     * @param Directive[] $directives
+     * @param Field[]|Query[] $fields
+     */
+    protected function createFragment(
+        string $name,
+        string $model,
+        array $directives,
+        array $fields,
+        Location $location,
+    ): Fragment {
+        return new Fragment($name, $model, $directives, $fields, $location);
     }
 
     protected function eat(string $type): ?Token

@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoP\GraphQLParser\Execution;
+
+use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoPBackbone\GraphQLParser\Execution\RequestInterface as UpstreamRequestInterface;
+
+interface RequestInterface extends UpstreamRequestInterface
+{
+}

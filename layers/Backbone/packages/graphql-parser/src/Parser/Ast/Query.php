@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
-use PoPBackbone\GraphQLParser\Parser\Ast\Interfaces\FieldInterface;
-use PoPBackbone\GraphQLParser\Parser\Ast\Interfaces\FragmentInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\FragmentInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
 class Query extends AbstractAst implements FieldInterface

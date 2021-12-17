@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Library\Validator;
 
+use PHPUnit\Framework\TestCase;
 use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoPBackbone\GraphQLParser\Execution\RequestInterface;
 use PoPBackbone\GraphQLParser\Execution\Request;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
@@ -15,7 +17,6 @@ use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
 use PoPBackbone\GraphQLParser\Parser\Location;
 use PoPBackbone\GraphQLParser\Validator\RequestValidator\RequestValidator;
-use PHPUnit\Framework\TestCase;
 
 class RequestValidatorTest extends TestCase
 {
@@ -23,7 +24,7 @@ class RequestValidatorTest extends TestCase
     /**
      * @dataProvider invalidRequestProvider
      */
-    public function testInvalidRequests(Request $request)
+    public function testInvalidRequests(RequestInterface $request)
     {
         $this->expectException(InvalidRequestException::class);
         (new RequestValidator())->validate($request);
@@ -40,7 +41,7 @@ class RequestValidatorTest extends TestCase
 
         return [
             [
-                new Request([
+                (new Request())->process([
                     'queries'            => [
                         new Query('test', null, [], [
                             new FragmentReference('reference', new Location(1, 1))
@@ -52,7 +53,7 @@ class RequestValidatorTest extends TestCase
                 ])
             ],
             [
-                new Request([
+                (new Request())->process([
                     'queries'            => [
                         new Query('test', null, [], [
                             new FragmentReference('reference', new Location(1, 1)),
@@ -69,7 +70,7 @@ class RequestValidatorTest extends TestCase
                 ])
             ],
             [
-                new Request([
+                (new Request())->process([
                     'queries'            => [
                         new Query('test', null, [], [
                             new FragmentReference('reference', new Location(1, 1)),
@@ -85,7 +86,7 @@ class RequestValidatorTest extends TestCase
                 ])
             ],
             [
-                new Request([
+                (new Request())->process([
                     'queries'            => [
                         new Query(
                             'test',
@@ -106,7 +107,7 @@ class RequestValidatorTest extends TestCase
                 ], ['test' => 1])
             ],
             [
-                new Request([
+                (new Request())->process([
                     'queries'            => [
                         new Query('test', null, [
                             new Argument('test', new VariableReference('test', $variable1, new Location(1, 1)), new Location(1, 1)),

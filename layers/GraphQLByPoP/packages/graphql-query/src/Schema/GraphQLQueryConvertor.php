@@ -7,26 +7,27 @@ namespace GraphQLByPoP\GraphQLQuery\Schema;
 use Exception;
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration;
 use InvalidArgumentException;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
-use PoP\BasicService\BasicServiceTrait;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
-use PoP\GraphQLParser\Execution\Request;
+use PoP\GraphQLParser\Execution\RequestInterface;
 use PoP\GraphQLParser\Parser\Parser;
-use PoPBackbone\GraphQLParser\Exception\Interfaces\LocationableExceptionInterface;
+use PoP\GraphQLParser\Parser\ParserInterface;
+use PoP\GraphQLParser\Validator\RequestValidator\RequestValidatorInterface;
+use PoPBackbone\GraphQLParser\Exception\LocationableExceptionInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Field;
+use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\Interfaces\FieldInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
 use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
-use PoPBackbone\GraphQLParser\Validator\RequestValidator\RequestValidator;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
@@ -35,6 +36,9 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?IncludeDirectiveResolver $includeDirectiveResolver = null;
+    private ?ParserInterface $parser = null;
+    private ?RequestInterface $request = null;
+    private ?RequestValidatorInterface $requestValidator = null;
 
     final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
@@ -59,6 +63,30 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     final protected function getIncludeDirectiveResolver(): IncludeDirectiveResolver
     {
         return $this->includeDirectiveResolver ??= $this->instanceManager->getInstance(IncludeDirectiveResolver::class);
+    }
+    final public function setParser(ParserInterface $parser): void
+    {
+        $this->parser = $parser;
+    }
+    final protected function getParser(): ParserInterface
+    {
+        return $this->parser ??= $this->instanceManager->getInstance(ParserInterface::class);
+    }
+    final public function setRequest(RequestInterface $request): void
+    {
+        $this->request = $request;
+    }
+    final protected function getRequest(): RequestInterface
+    {
+        return $this->request ??= $this->instanceManager->getInstance(RequestInterface::class);
+    }
+    final public function setRequestValidator(RequestValidatorInterface $requestValidator): void
+    {
+        $this->requestValidator = $requestValidator;
+    }
+    final protected function getRequestValidator(): RequestValidatorInterface
+    {
+        return $this->requestValidator ??= $this->instanceManager->getInstance(RequestValidatorInterface::class);
     }
 
     /**
@@ -416,7 +444,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         return $fragmentFieldPaths;
     }
 
-    protected function processAndAddFieldPaths(Request $request, array &$queryFieldPaths, array $fields, array $queryField = []): void
+    protected function processAndAddFieldPaths(RequestInterface $request, array &$queryFieldPaths, array $fields, array $queryField = []): void
     {
         // Iterate through the query's fields: properties, connections, fragments
         $queryFieldPath = $queryField;
@@ -467,7 +495,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         }
     }
 
-    protected function getFieldPathsFromQuery(Request $request, Query $query): array
+    protected function getFieldPathsFromQuery(RequestInterface $request, Query $query): array
     {
         $queryFieldPaths = [];
         $queryFieldPath = [$this->convertField($query)];
@@ -490,7 +518,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
      *
      * @see https://graphql.org/learn/queries/
      */
-    protected function convertRequestToFieldQueryPaths(Request $request): array
+    protected function convertRequestToFieldQueryPaths(RequestInterface $request): array
     {
         $fieldQueryPaths = [];
         // It is either is a query or a mutation
@@ -536,15 +564,14 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         array $variables,
         bool $enableMultipleQueryExecution,
         ?string $operationName = null
-    ): Request {
+    ): RequestInterface {
         if (empty($payload)) {
             throw new InvalidArgumentException(
                 $this->getTranslationAPI()->__('Must provide an operation.', 'graphql-query')
             );
         }
 
-        $parser  = new Parser();
-        $parsedData = $parser->parse($payload);
+        $parsedData = $this->getParser()->parse($payload);
 
         // GraphiQL sends the operationName to execute in the payload, under "operationName"
         // This is required when the payload contains multiple queries
@@ -694,10 +721,11 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
         // If some variable hasn't been submitted, it will throw an Exception
         // Let it bubble up
-        $request = new Request($parsedData, $variables);
+        /** @var RequestInterface */
+        $request = $this->getRequest()->process($parsedData, $variables);
 
         // If the validation fails, it will throw an exception
-        (new RequestValidator())->validate($request);
+        $this->getRequestValidator()->validate($request);
 
         // Return the request
         return $request;
