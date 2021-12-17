@@ -33,7 +33,7 @@ class Field extends UpstreamField
         );
     }
 
-    public function skipOutputIfNull(): bool
+    public function isSkipOutputIfNull(): bool
     {
         return false;
     }
