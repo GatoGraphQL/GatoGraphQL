@@ -63,7 +63,7 @@ class Parser extends UpstreamParser
     /**
      * @param Argument[] $arguments
      */
-    public function createDirective(
+    protected function createDirective(
         $name,
         array $arguments,
         Location $location,

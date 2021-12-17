@@ -602,7 +602,17 @@ class Parser extends Tokenizer
 
         $this->expect(Token::TYPE_RSQUARE_BRACE);
 
-        return $createType ? new InputList($list, new Location($startToken->getLine(), $startToken->getColumn())) : $list;
+        return $createType ? $this->createInputList($list, new Location($startToken->getLine(), $startToken->getColumn())) : $list;
+    }
+
+    /**
+     * @param mixed[] $list
+     */
+    protected function createInputList(
+        array $list,
+        Location $location,
+    ) {
+        return new InputList($list, $location);
     }
 
     /**
