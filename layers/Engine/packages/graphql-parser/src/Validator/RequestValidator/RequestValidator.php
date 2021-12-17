@@ -10,7 +10,7 @@ use PoPBackbone\GraphQLParser\Validator\RequestValidator\RequestValidator as Ups
 class RequestValidator extends UpstreamRequestValidator implements RequestValidatorInterface
 {
     use BasicServiceTrait;
-    
+
     protected function getFragmentNotUsedErrorMessage(string $fragmentName): string
     {
         return \sprintf(

@@ -18,7 +18,7 @@ use PoPBackbone\GraphQLParser\Parser\Parser as UpstreamParser;
 class Parser extends UpstreamParser
 {
     use BasicServiceTrait;
-    
+
     protected function getIncorrectRequestSyntaxErrorMessage(): string
     {
         return $this->getTranslationAPI()->__('Incorrect request syntax', 'graphql-parser');
