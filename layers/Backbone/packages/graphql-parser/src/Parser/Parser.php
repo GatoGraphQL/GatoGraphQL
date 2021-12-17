@@ -506,7 +506,7 @@ class Parser extends Tokenizer
         return $this->createArgument($nameToken->getData(), $value, new Location($nameToken->getLine(), $nameToken->getColumn()));
     }
 
-    public function createArgument(
+    protected function createArgument(
         string $name,
         WithValueInterface $value,
         Location $location,
@@ -542,7 +542,7 @@ class Parser extends Tokenizer
     /**
      * @param Argument[] $arguments
      */
-    public function createDirective(
+    protected function createDirective(
         $name,
         array $arguments,
         Location $location,
@@ -573,10 +573,20 @@ class Parser extends Tokenizer
             case Token::TYPE_FALSE:
                 $token = $this->lex();
 
-                return new Literal($token->getData(), new Location($token->getLine(), $token->getColumn()));
+                return $this->createLiteral($token->getData(), new Location($token->getLine(), $token->getColumn()));
         }
 
         throw $this->createUnexpectedException($this->lookAhead);
+    }
+
+    /**
+     * @param string|int|float|bool|null $value
+     */
+    public function createLiteral(
+        string|int|float|bool|null $value,
+        Location $location
+    ): Literal {
+        return new Literal($value, $location);
     }
 
     protected function parseList(bool $createType): InputList|array
