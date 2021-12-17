@@ -6,7 +6,7 @@ namespace PoPBackbone\GraphQLParser\Library\Validator;
 
 use PHPUnit\Framework\TestCase;
 use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoPBackbone\GraphQLParser\Execution\Interfaces\RequestInterface;
+use PoPBackbone\GraphQLParser\Execution\RequestInterface;
 use PoPBackbone\GraphQLParser\Execution\Request;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;

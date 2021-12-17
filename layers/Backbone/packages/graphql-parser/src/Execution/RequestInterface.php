@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPBackbone\GraphQLParser\Execution\Interfaces;
+namespace PoPBackbone\GraphQLParser\Execution;
 
 use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;

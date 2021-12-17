@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Validator\RequestValidator;
 
 use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoPBackbone\GraphQLParser\Execution\Interfaces\RequestInterface;
+use PoPBackbone\GraphQLParser\Execution\RequestInterface;
 
 class RequestValidator implements RequestValidatorInterface
 {

@@ -4,7 +4,7 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\GraphQLParser\Execution\Interfaces\RequestInterface:
+    PoP\GraphQLParser\Execution\RequestInterface:
         class: \PoP\GraphQLParser\Execution\Request
 
     PoP\GraphQLParser\Validator\RequestValidator\RequestValidatorInterface:

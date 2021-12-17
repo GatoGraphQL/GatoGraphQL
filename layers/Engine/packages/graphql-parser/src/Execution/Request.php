@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Execution;
 
 use PoP\BasicService\BasicServiceTrait;
-use PoP\GraphQLParser\Execution\Interfaces\RequestInterface;
 use PoPBackbone\GraphQLParser\Execution\Request as UpstreamRequest;
 
 class Request extends UpstreamRequest implements RequestInterface
