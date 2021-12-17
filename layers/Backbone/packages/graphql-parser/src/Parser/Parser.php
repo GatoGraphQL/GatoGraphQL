@@ -234,7 +234,7 @@ class Parser extends Tokenizer
                 $required,
                 $isArray,
                 $arrayElementNullable,
-                new Location($variableToken->getLine(), $variableToken->getColumn()),
+                $this->getTokenLocation($variableToken),
             );
 
             if ($this->match(Token::TYPE_EQUAL)) {
@@ -246,6 +246,11 @@ class Parser extends Tokenizer
         }
 
         $this->expect(Token::TYPE_RPAREN);
+    }
+
+    protected function getTokenLocation(Token $token): Location
+    {
+        return new Location($token->getLine(), $token->getColumn());
     }
 
     protected function createVariable(
@@ -297,7 +302,7 @@ class Parser extends Tokenizer
             $variableReference = $this->createVariableReference(
                 $name,
                 $variable,
-                new Location($startToken->getLine(), $startToken->getColumn())
+                $this->getTokenLocation($startToken)
             );
 
             $this->data['variableReferences'][] = $variableReference;
@@ -337,7 +342,7 @@ class Parser extends Tokenizer
         $nameToken         = $this->eatIdentifierToken();
         $fragmentReference = $this->createFragmentReference(
             $nameToken->getData(),
-            new Location($nameToken->getLine(), $nameToken->getColumn())
+            $this->getTokenLocation($nameToken)
         );
 
         $this->data['fragmentReferences'][] = $fragmentReference;
@@ -378,7 +383,7 @@ class Parser extends Tokenizer
             $nameToken = $this->eatIdentifierToken();
         }
 
-        $bodyLocation = new Location($nameToken->getLine(), $nameToken->getColumn());
+        $bodyLocation = $this->getTokenLocation($nameToken);
         $arguments    = $this->match(Token::TYPE_LPAREN) ? $this->parseArgumentList() : [];
         $directives   = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
 
@@ -503,7 +508,7 @@ class Parser extends Tokenizer
         $this->expect(Token::TYPE_COLON);
         $value = $this->parseValue();
 
-        return $this->createArgument($nameToken->getData(), $value, new Location($nameToken->getLine(), $nameToken->getColumn()));
+        return $this->createArgument($nameToken->getData(), $value, $this->getTokenLocation($nameToken));
     }
 
     protected function createArgument(
@@ -536,7 +541,7 @@ class Parser extends Tokenizer
         $nameToken = $this->eatIdentifierToken();
         $args      = $this->match(Token::TYPE_LPAREN) ? $this->parseArgumentList() : [];
 
-        return $this->createDirective($nameToken->getData(), $args, new Location($nameToken->getLine(), $nameToken->getColumn()));
+        return $this->createDirective($nameToken->getData(), $args, $this->getTokenLocation($nameToken));
     }
 
     /**
@@ -573,7 +578,7 @@ class Parser extends Tokenizer
             case Token::TYPE_FALSE:
                 $token = $this->lex();
 
-                return $this->createLiteral($token->getData(), new Location($token->getLine(), $token->getColumn()));
+                return $this->createLiteral($token->getData(), $this->getTokenLocation($token));
         }
 
         throw $this->createUnexpectedException($this->lookAhead);
@@ -602,7 +607,7 @@ class Parser extends Tokenizer
 
         $this->expect(Token::TYPE_RSQUARE_BRACE);
 
-        return $createType ? $this->createInputList($list, new Location($startToken->getLine(), $startToken->getColumn())) : $list;
+        return $createType ? $this->createInputList($list, $this->getTokenLocation($startToken)) : $list;
     }
 
     /**
@@ -668,7 +673,7 @@ class Parser extends Tokenizer
 
         $this->eat(Token::TYPE_RBRACE);
 
-        return $createType ? $this->createInputObject($object, new Location($startToken->getLine(), $startToken->getColumn())) : $object;
+        return $createType ? $this->createInputObject($object, $this->getTokenLocation($startToken)) : $object;
     }
 
     protected function createInputObject(
@@ -695,7 +700,7 @@ class Parser extends Tokenizer
         /** @var Query[] */
         $fields = $this->parseBody(Token::TYPE_QUERY, false);
 
-        return $this->createFragment($nameToken->getData(), $model->getData(), $directives, $fields, new Location($nameToken->getLine(), $nameToken->getColumn()));
+        return $this->createFragment($nameToken->getData(), $model->getData(), $directives, $fields, $this->getTokenLocation($nameToken));
     }
 
     /**
