@@ -6,10 +6,10 @@ namespace PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue;
 
 use LogicException;
 use PoPBackbone\GraphQLParser\Parser\Ast\AbstractAst;
-use PoPBackbone\GraphQLParser\Parser\Ast\ValueInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class Variable extends AbstractAst implements ValueInterface
+class Variable extends AbstractAst implements WithValueInterface
 {
     private mixed $value = null;
 

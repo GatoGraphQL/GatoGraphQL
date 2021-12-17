@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue;
 
 use PoPBackbone\GraphQLParser\Parser\Ast\AbstractAst;
-use PoPBackbone\GraphQLParser\Parser\Ast\ValueInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class Literal extends AbstractAst implements ValueInterface
+class Literal extends AbstractAst implements WithValueInterface
 {
     /**
      * @param string|int|float|bool|null $value
