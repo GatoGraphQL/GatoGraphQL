@@ -10,7 +10,6 @@ use stdClass;
 
 class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 {
-    // @todo Remove this trait: ComponentModel is not a dependency!!!
     use BasicServiceTrait;
 
     // Cache the output from functions
