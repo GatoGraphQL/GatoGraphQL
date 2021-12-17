@@ -611,7 +611,7 @@ class Parser extends Tokenizer
     protected function createInputList(
         array $list,
         Location $location,
-    ) {
+    ): InputList {
         return new InputList($list, $location);
     }
 
@@ -668,7 +668,14 @@ class Parser extends Tokenizer
 
         $this->eat(Token::TYPE_RBRACE);
 
-        return $createType ? new InputObject($object, new Location($startToken->getLine(), $startToken->getColumn())) : $object;
+        return $createType ? $this->createInputObject($object, new Location($startToken->getLine(), $startToken->getColumn())) : $object;
+    }
+
+    protected function createInputObject(
+        stdClass $object,
+        Location $location,
+    ): InputObject {
+        return new InputObject($object, $location);
     }
 
     /**
