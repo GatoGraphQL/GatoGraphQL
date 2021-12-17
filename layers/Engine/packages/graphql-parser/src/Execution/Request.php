@@ -13,6 +13,6 @@ class Request extends UpstreamRequest
 
     protected function getVariableHasntBeenDeclaredErrorMessage(string $variableName): string
     {
-        return $this->translationAPI->__(\sprintf('Variable \'%s\' hasn\'t been declared', $variableName), 'graphql-parser');
+        return $this->getTranslationAPI()->__(\sprintf('Variable \'%s\' hasn\'t been declared', $variableName), 'graphql-parser');
     }
 }
