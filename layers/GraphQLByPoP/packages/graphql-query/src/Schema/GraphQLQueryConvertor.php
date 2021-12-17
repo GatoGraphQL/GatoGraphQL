@@ -15,6 +15,7 @@ use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\GraphQLParser\Execution\Interfaces\RequestInterface;
 use PoP\GraphQLParser\Parser\Parser;
+use PoP\GraphQLParser\Validator\RequestValidator\RequestValidatorInterface;
 use PoPBackbone\GraphQLParser\Exception\Interfaces\LocationableExceptionInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
@@ -36,6 +37,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?IncludeDirectiveResolver $includeDirectiveResolver = null;
     private ?RequestInterface $request = null;
+    private ?RequestValidatorInterface $requestValidator = null;
 
     final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
@@ -68,6 +70,14 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     final protected function getRequest(): RequestInterface
     {
         return $this->request ??= $this->instanceManager->getInstance(RequestInterface::class);
+    }
+    final public function setRequestValidator(RequestValidatorInterface $requestValidator): void
+    {
+        $this->requestValidator = $requestValidator;
+    }
+    final protected function getRequestValidator(): RequestValidatorInterface
+    {
+        return $this->requestValidator ??= $this->instanceManager->getInstance(RequestValidatorInterface::class);
     }
 
     /**
@@ -707,7 +717,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         $request->process($parsedData, $variables);
 
         // If the validation fails, it will throw an exception
-        (new RequestValidator())->validate($request);
+        $this->getRequestValidator()->validate($request);
 
         // Return the request
         return $request;
