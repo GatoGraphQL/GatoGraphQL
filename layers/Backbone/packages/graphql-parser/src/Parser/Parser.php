@@ -695,7 +695,21 @@ class Parser extends Tokenizer
         /** @var Query[] */
         $fields = $this->parseBody(Token::TYPE_QUERY, false);
 
-        return new Fragment($nameToken->getData(), $model->getData(), $directives, $fields, new Location($nameToken->getLine(), $nameToken->getColumn()));
+        return $this->createFragment($nameToken->getData(), $model->getData(), $directives, $fields, new Location($nameToken->getLine(), $nameToken->getColumn()));
+    }
+
+    /**
+     * @param Directive[] $directives
+     * @param Field[]|Query[] $fields
+     */
+    protected function createFragment(
+        string $name,
+        string $model,
+        array $directives,
+        array $fields,
+        Location $location,
+    ): Fragment {
+        return new Fragment($name, $model, $directives, $fields, $location);
     }
 
     protected function eat(string $type): ?Token
