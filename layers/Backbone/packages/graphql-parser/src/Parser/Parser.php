@@ -77,11 +77,19 @@ class Parser extends Tokenizer
                     break;
 
                 default:
-                    throw new SyntaxErrorException('Incorrect request syntax', $this->getLocation());
+                    throw new SyntaxErrorException(
+                        $this->getIncorrectRequestSyntaxErrorMessage(),
+                        $this->getLocation()
+                    );
             }
         }
 
         return $this->data;
+    }
+
+    protected function getIncorrectRequestSyntaxErrorMessage(): string
+    {
+        return 'Incorrect request syntax';
     }
 
     private function init(string $source): void
