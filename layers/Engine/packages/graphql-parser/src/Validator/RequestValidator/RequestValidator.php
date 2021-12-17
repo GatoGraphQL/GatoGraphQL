@@ -7,7 +7,7 @@ namespace PoP\GraphQLParser\Validator\RequestValidator;
 use PoP\BasicService\BasicServiceTrait;
 use PoPBackbone\GraphQLParser\Validator\RequestValidator\RequestValidator as UpstreamRequestValidator;
 
-class RequestValidator extends UpstreamRequestValidator
+class RequestValidator extends UpstreamRequestValidator implements RequestValidatorInterface
 {
     use BasicServiceTrait;
     

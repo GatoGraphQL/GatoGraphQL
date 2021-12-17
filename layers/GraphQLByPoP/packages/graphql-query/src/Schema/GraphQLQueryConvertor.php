@@ -27,7 +27,6 @@ use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Interfaces\FieldInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
 use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
-use PoPBackbone\GraphQLParser\Validator\RequestValidator\RequestValidator;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 {
@@ -713,8 +712,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
         // If some variable hasn't been submitted, it will throw an Exception
         // Let it bubble up
-        $request = $this->getRequest();
-        $request->process($parsedData, $variables);
+        $request = $this->getRequest()->process($parsedData, $variables);
 
         // If the validation fails, it will throw an exception
         $this->getRequestValidator()->validate($request);

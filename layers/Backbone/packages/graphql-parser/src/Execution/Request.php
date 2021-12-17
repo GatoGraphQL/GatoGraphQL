@@ -39,7 +39,7 @@ class Request implements RequestInterface
     public function process(
         array $data,
         array $variableValues = [],
-    ): void {
+    ): self {
         if (array_key_exists('queries', $data)) {
             $this->addQueries($data['queries']);
         }
@@ -91,6 +91,8 @@ class Request implements RequestInterface
         }
 
         $this->setVariableValues($variableValues);
+
+        return $this;
     }
 
     protected function getVariableHasntBeenDeclaredErrorMessage(string $variableName): string

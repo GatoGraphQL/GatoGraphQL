@@ -22,7 +22,7 @@ interface RequestInterface
     public function process(
         array $data,
         array $variableValues = [],
-    ): void;
+    ): self;
 
     /**
      * @param Query[] $queries

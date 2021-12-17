@@ -7,5 +7,5 @@ services:
     PoP\GraphQLParser\Execution\Interfaces\RequestInterface:
         class: \PoP\GraphQLParser\Execution\Request
 
-    PoP\GraphQLParser\Validator\RequestValidatorInterface:
-        class: \PoP\GraphQLParser\Validator\RequestValidator
+    PoP\GraphQLParser\Validator\RequestValidator\RequestValidatorInterface:
+        class: \PoP\GraphQLParser\Validator\RequestValidator\RequestValidator
