@@ -15,7 +15,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Location;
 use PoPBackbone\GraphQLParser\Parser\Parser as UpstreamParser;
 
-class Parser extends UpstreamParser
+class Parser extends UpstreamParser implements ParserInterface
 {
     use BasicServiceTrait;
 

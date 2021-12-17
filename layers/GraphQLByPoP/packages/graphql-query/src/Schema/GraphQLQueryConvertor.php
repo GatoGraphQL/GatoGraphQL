@@ -15,6 +15,7 @@ use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\GraphQLParser\Execution\RequestInterface;
 use PoP\GraphQLParser\Parser\Parser;
+use PoP\GraphQLParser\Parser\ParserInterface;
 use PoP\GraphQLParser\Validator\RequestValidator\RequestValidatorInterface;
 use PoPBackbone\GraphQLParser\Exception\LocationableExceptionInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
@@ -23,8 +24,8 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Field;
-use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
 use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
 
@@ -35,6 +36,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?IncludeDirectiveResolver $includeDirectiveResolver = null;
+    private ?ParserInterface $parser = null;
     private ?RequestInterface $request = null;
     private ?RequestValidatorInterface $requestValidator = null;
 
@@ -61,6 +63,14 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     final protected function getIncludeDirectiveResolver(): IncludeDirectiveResolver
     {
         return $this->includeDirectiveResolver ??= $this->instanceManager->getInstance(IncludeDirectiveResolver::class);
+    }
+    final public function setParser(ParserInterface $parser): void
+    {
+        $this->parser = $parser;
+    }
+    final protected function getParser(): ParserInterface
+    {
+        return $this->parser ??= $this->instanceManager->getInstance(ParserInterface::class);
     }
     final public function setRequest(RequestInterface $request): void
     {
@@ -561,8 +571,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             );
         }
 
-        $parser  = new Parser();
-        $parsedData = $parser->parse($payload);
+        $parsedData = $this->getParser()->parse($payload);
 
         // GraphiQL sends the operationName to execute in the payload, under "operationName"
         // This is required when the payload contains multiple queries

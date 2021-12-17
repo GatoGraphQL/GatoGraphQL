@@ -23,7 +23,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\WithDirectivesInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
 use stdClass;
 
-class Parser extends Tokenizer
+class Parser extends Tokenizer implements ParserInterface
 {
     /**
      * @var array<string,mixed>
