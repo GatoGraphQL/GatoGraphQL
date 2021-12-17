@@ -13,8 +13,10 @@ class InputList extends AbstractAst implements ValueInterface
     /**
      * @param mixed[] $list
      */
-    public function __construct(protected array $list, Location $location)
-    {
+    public function __construct(
+        protected array $list,
+        Location $location,
+    ) {
         parent::__construct($location);
     }
 

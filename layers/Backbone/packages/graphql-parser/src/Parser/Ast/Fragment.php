@@ -17,8 +17,13 @@ class Fragment extends AbstractAst implements WithDirectivesInterface
      * @param Directive[] $directives
      * @param Field[]|Query[] $fields
      */
-    public function __construct(protected string $name, protected string $model, array $directives, protected array $fields, Location $location)
-    {
+    public function __construct(
+        protected string $name,
+        protected string $model,
+        array $directives,
+        protected array $fields,
+        Location $location,
+    ) {
         parent::__construct($location);
         $this->setDirectives($directives);
     }
