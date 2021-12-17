@@ -8,10 +8,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
 
 interface ParserInterface
 {
-    /**
-     * @return array<string,mixed>
-     */
-    public function parse(string $source): array;
+    public function parse(string $source): ParsedData;
 
     /**
      * @param string|int|float|bool|null $value
