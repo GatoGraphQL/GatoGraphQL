@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\EngineWP\Error;
 
 use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\Engine\Error\AbstractErrorManager;
 use WP_Error;
 

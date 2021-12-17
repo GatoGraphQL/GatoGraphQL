@@ -11,6 +11,7 @@ includes:
     - layers/API/packages/api-graphql/phpstan.neon.dist
     - layers/API/packages/api-mirrorquery/phpstan.neon.dist
     - layers/API/packages/api-rest/phpstan.neon.dist
+    - layers/Engine/packages/basic-service/phpstan.neon.dist
     - layers/Engine/packages/cache-control/phpstan.neon.dist
     - layers/Schema/packages/categories/phpstan.neon.dist
     - layers/Schema/packages/categories-wp/phpstan.neon.dist

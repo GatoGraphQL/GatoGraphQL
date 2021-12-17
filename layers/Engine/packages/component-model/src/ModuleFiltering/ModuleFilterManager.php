@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\ModuleFiltering;
 use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 
 class ModuleFilterManager implements ModuleFilterManagerInterface
 {

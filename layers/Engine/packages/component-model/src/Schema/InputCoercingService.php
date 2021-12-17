@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Schema;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 

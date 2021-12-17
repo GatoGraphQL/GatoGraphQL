@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Hooks;
 
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractHookSet extends AbstractAutomaticallyInstantiatedService

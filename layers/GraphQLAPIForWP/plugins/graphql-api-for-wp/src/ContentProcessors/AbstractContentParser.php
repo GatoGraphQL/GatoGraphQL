@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use InvalidArgumentException;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 use PoP\Root\Environment as RootEnvironment;
 
 abstract class AbstractContentParser implements ContentParserInterface
