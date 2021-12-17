@@ -74,13 +74,19 @@ class Request
                      * @see https://graphql.org/learn/queries/#variables
                      */
                     if ($variable === null) {
-                        throw new InvalidRequestException(sprintf('Variable \'%s\' hasn\'t been declared', $ref->getName()), $ref->getLocation());
+                        throw new InvalidRequestException(
+                            $this->getVariableHasntBeenDeclaredErrorMessage($ref->getName()),
+                            $ref->getLocation()
+                        );
                     }
                     if ($variable->hasDefaultValue()) {
                         $variableValues[$variable->getName()] = $variable->getDefaultValue()->getValue();
                         continue;
                     }
-                    throw new InvalidRequestException(sprintf('Variable \'%s\' hasn\'t been submitted', $ref->getName()), $ref->getLocation());
+                    throw new InvalidRequestException(
+                        sprintf('Variable \'%s\' hasn\'t been submitted', $ref->getName()),
+                        $ref->getLocation()
+                    );
                 }
             }
 
@@ -88,6 +94,11 @@ class Request
         }
 
         $this->setVariableValues($variableValues);
+    }
+
+    protected function getVariableHasntBeenDeclaredErrorMessage(string $variableName): string
+    {
+        return \sprintf('Variable \'%s\' hasn\'t been declared', $variableName);
     }
 
     /**
