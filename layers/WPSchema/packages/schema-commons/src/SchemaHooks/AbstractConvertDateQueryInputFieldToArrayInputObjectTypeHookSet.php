@@ -7,7 +7,7 @@ namespace PoPWPSchema\SchemaCommons\SchemaHooks;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 
 abstract class AbstractConvertDateQueryInputFieldToArrayInputObjectTypeHookSet extends AbstractHookSet
 {

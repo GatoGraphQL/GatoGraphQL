@@ -6,7 +6,7 @@ namespace PoPSchema\Pages\Hooks;
 
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 use PoPSchema\Pages\Constants\ModelInstanceComponentTypes;
 use PoPSchema\Pages\Routing\RouteNatures;
 

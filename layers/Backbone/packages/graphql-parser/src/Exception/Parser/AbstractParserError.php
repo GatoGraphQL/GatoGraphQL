@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Exception\Parser;
 
 use Exception;
-use PoPBackbone\GraphQLParser\Exception\Interfaces\LocationableExceptionInterface;
+use PoPBackbone\GraphQLParser\Exception\LocationableExceptionInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
 abstract class AbstractParserError extends Exception implements LocationableExceptionInterface

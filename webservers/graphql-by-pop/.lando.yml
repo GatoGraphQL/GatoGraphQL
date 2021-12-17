@@ -26,6 +26,8 @@ services:
         - >-
           ../../layers/Engine/packages/access-control:/app/vendor/getpop/access-control
         - >-
+          ../../layers/Engine/packages/basic-service:/app/vendor/getpop/basic-service
+        - >-
           ../../layers/Engine/packages/cache-control:/app/vendor/getpop/cache-control
         - >-
           ../../layers/Engine/packages/component-model:/app/vendor/getpop/component-model

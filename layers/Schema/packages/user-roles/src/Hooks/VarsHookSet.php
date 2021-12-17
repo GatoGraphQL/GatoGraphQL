@@ -6,7 +6,7 @@ namespace PoPSchema\UserRoles\Hooks;
 
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 use PoPSchema\UserRoles\Constants\ModelInstanceComponentTypes;
 use PoPSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPSchema\Users\Routing\RouteNatures;

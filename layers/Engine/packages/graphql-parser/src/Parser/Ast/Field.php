@@ -18,8 +18,8 @@ class Field extends UpstreamField
      * @param Directive[] $directives
      */
     public function __construct(
-        private string $name,
-        private ?string $alias,
+        string $name,
+        ?string $alias,
         array $arguments,
         array $directives,
         ?Location $location = null,

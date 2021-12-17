@@ -4,3 +4,11 @@ services:
         autowire: true
         autoconfigure: true
 
+    PoP\GraphQLParser\Execution\RequestInterface:
+        class: \PoP\GraphQLParser\Execution\Request
+
+    PoP\GraphQLParser\Parser\ParserInterface:
+        class: \PoP\GraphQLParser\Parser\Parser
+
+    PoP\GraphQLParser\Validator\RequestValidator\RequestValidatorInterface:
+        class: \PoP\GraphQLParser\Validator\RequestValidator\RequestValidator

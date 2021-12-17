@@ -25,6 +25,7 @@ class ParserTest extends TestCase
     public function testEmptyParser()
     {
         $parser = new Parser();
+        $parsedData = $parser->parse('');
 
         $this->assertEquals([
             'queryOperations'    => [],
@@ -35,7 +36,7 @@ class ParserTest extends TestCase
             'fragmentReferences' => [],
             'variables'          => [],
             'variableReferences' => [],
-        ], $parser->parse(''));
+        ], $parsedData->toArray());
     }
 
     public function testInvalidSelection()
@@ -70,7 +71,7 @@ GRAPHQL;
         $parser     = new Parser();
         $parsedData = $parser->parse($query);
 
-        $this->assertEquals($parsedData, [
+        $this->assertEquals($parsedData->toArray(), [
             'queryOperations'    => [
                 [
                     'name' => null,
@@ -152,17 +153,17 @@ GRAPHQL;
     public function testCommas()
     {
         $parser = new Parser();
-        $data   = $parser->parse('{ foo,       ,,  , bar  }');
+        $parsedData   = $parser->parse('{ foo,       ,,  , bar  }');
         $this->assertEquals([
             new Query('foo', '', [], [], [], new Location(1, 3)),
             new Query('bar', '', [], [], [], new Location(1, 20)),
-        ], $data['queries']);
+        ], $parsedData->toArray()['queries']);
     }
 
     public function testQueryWithNoFields()
     {
         $parser = new Parser();
-        $data   = $parser->parse('{ name }');
+        $parsedData   = $parser->parse('{ name }');
         $this->assertEquals([
             'queryOperations'    => [],
                     'mutationOperations' => [],
@@ -174,13 +175,13 @@ GRAPHQL;
             'fragmentReferences' => [],
             'variables'          => [],
             'variableReferences' => [],
-        ], $data);
+        ], $parsedData->toArray());
     }
 
     public function testQueryWithFields()
     {
         $parser = new Parser();
-        $data   = $parser->parse('{ post, user { name } }');
+        $parsedData   = $parser->parse('{ post, user { name } }');
         $this->assertEquals([
             'queryOperations'    => [],
                     'mutationOperations' => [],
@@ -195,13 +196,13 @@ GRAPHQL;
             'fragmentReferences' => [],
             'variables'          => [],
             'variableReferences' => [],
-        ], $data);
+        ], $parsedData->toArray());
     }
 
     public function testFragmentWithFields()
     {
         $parser = new Parser();
-        $data   = $parser->parse('
+        $parsedData   = $parser->parse('
             fragment FullType on __Type {
                 kind
                 fields {
@@ -224,14 +225,14 @@ GRAPHQL;
             'variableReferences' => [],
             'queryOperations'    => [],
             'mutationOperations' => [],
-        ], $data);
+        ], $parsedData->toArray());
     }
 
     public function testInspectionQuery()
     {
         $parser = new Parser();
 
-        $data = $parser->parse('
+        $parsedData = $parser->parse('
             query IntrospectionQuery {
                 __schema {
                     queryType { name }
@@ -414,7 +415,7 @@ GRAPHQL;
             ],
             'variables'          => [],
             'variableReferences' => [],
-        ], $data);
+        ], $parsedData->toArray());
     }
 
     public function wrongQueriesProvider()
@@ -441,7 +442,7 @@ GRAPHQL;
 
         $parsedStructure = $parser->parse($query);
 
-        $this->assertEquals($parsedStructure, $structure);
+        $this->assertEquals($parsedStructure->toArray(), $structure);
     }
 
     public function testTypedFragment()
@@ -458,7 +459,7 @@ GRAPHQL;
             }
         ');
 
-        $this->assertEquals($parsedStructure, [
+        $this->assertEquals($parsedStructure->toArray(), [
             'queryOperations'    => [],
                     'mutationOperations' => [],
                     'queries'            => [
@@ -600,7 +601,7 @@ GRAPHQL;
         $parser          = new Parser();
         $parsedStructure = $parser->parse($query);
 
-        $this->assertEquals($structure, $parsedStructure);
+        $this->assertEquals($structure, $parsedStructure->toArray());
     }
 
 
@@ -929,7 +930,7 @@ GRAPHQL;
     {
         $parser = new Parser();
 
-        $data = $parser->parse('
+        $parsedData = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
               factions(names:$names_0, test: $query) {
                 id,
@@ -965,7 +966,7 @@ GRAPHQL;
             }
         ');
 
-        $this->assertArrayNotHasKey('errors', $data);
+        $this->assertArrayNotHasKey('errors', $parsedData->toArray());
     }
 
     public function testVariableDefaultValue()
@@ -980,7 +981,7 @@ GRAPHQL;
             }
         ');
         /** @var Variable $var */
-        $var = $parsedStructure['variables'][0];
+        $var = $parsedStructure->getVariables()[0];
         $this->assertTrue($var->hasDefaultValue());
         $this->assertEquals('small', $var->getDefaultValue()->getValue());
         $this->assertEquals('small', $var->getValue()->getValue());
@@ -995,7 +996,7 @@ GRAPHQL;
             }
         ');
         /** @var Variable $var */
-        $var = $parsedStructure['variables'][0];
+        $var = $parsedStructure->getVariables()[0];
         $this->assertTrue($var->hasDefaultValue());
         $this->assertNull($var->getDefaultValue()->getValue());
         $this->assertNull($var->getValue()->getValue());

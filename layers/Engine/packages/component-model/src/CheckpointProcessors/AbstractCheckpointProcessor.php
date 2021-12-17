@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\CheckpointProcessors;
 
 use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Services\BasicServiceTrait;
+use PoP\BasicService\BasicServiceTrait;
 
 abstract class AbstractCheckpointProcessor implements CheckpointProcessorInterface
 {

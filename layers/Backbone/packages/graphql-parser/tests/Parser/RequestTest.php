@@ -22,7 +22,8 @@ class RequestTest extends TestCase
             'page' => 2
         ];
 
-        $request = new Request([
+        $request = new Request();
+        $request->process([
             'queries'   => $queriesData,
             'mutations' => $mutationsData,
             'fragments' => $fragmentsData,

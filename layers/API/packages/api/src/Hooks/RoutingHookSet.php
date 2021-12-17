@@ -9,7 +9,7 @@ use PoP\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\CMS\CMSServiceInterface;
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 
 class RoutingHookSet extends AbstractHookSet
 {

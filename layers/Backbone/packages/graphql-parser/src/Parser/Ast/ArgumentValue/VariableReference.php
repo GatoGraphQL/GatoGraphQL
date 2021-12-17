@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue;
 
 use PoPBackbone\GraphQLParser\Parser\Ast\AbstractAst;
-use PoPBackbone\GraphQLParser\Parser\Ast\Interfaces\ValueInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class VariableReference extends AbstractAst implements ValueInterface
+class VariableReference extends AbstractAst implements WithValueInterface
 {
     private mixed $value;
 

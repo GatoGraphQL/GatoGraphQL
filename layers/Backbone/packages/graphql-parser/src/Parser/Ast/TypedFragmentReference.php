@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
-use PoPBackbone\GraphQLParser\Parser\Ast\Interfaces\FragmentInterface;
-use PoPBackbone\GraphQLParser\Parser\Ast\Interfaces\WithDirectivesInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\FragmentInterface;
+use PoPBackbone\GraphQLParser\Parser\Ast\WithDirectivesInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
 class TypedFragmentReference extends AbstractAst implements FragmentInterface, WithDirectivesInterface

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Media\ConditionalOnComponent\Users\SchemaHooks;
 
-use PoP\Hooks\AbstractHookSet;
+use PoP\BasicService\AbstractHookSet;
 use PoPSchema\Media\ModuleProcessors\MediaFilterInputContainerModuleProcessor;
 use PoPSchema\Users\ConditionalOnComponent\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
