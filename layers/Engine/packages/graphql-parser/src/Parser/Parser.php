@@ -25,7 +25,7 @@ class Parser extends UpstreamParser
     }
 
     protected function createVariable(
-        Token $nameToken,
+        string $name,
         string $type,
         bool $required,
         bool $isArray,
@@ -33,7 +33,7 @@ class Parser extends UpstreamParser
         Location $location,
     ): Variable {
         return new Variable(
-            $nameToken->getData(),
+            $name,
             $type,
             $required,
             $isArray,

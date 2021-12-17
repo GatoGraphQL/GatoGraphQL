@@ -228,7 +228,7 @@ class Parser extends Tokenizer
             }
 
             $variable = $this->createVariable(
-                $nameToken,
+                (string)$nameToken->getData(),
                 (string)$type,
                 $required,
                 $isArray,
@@ -248,7 +248,7 @@ class Parser extends Tokenizer
     }
 
     protected function createVariable(
-        Token $nameToken,
+        string $name,
         string $type,
         bool $required,
         bool $isArray,
@@ -256,7 +256,7 @@ class Parser extends Tokenizer
         Location $location,
     ): Variable {
         return new Variable(
-            $nameToken->getData(),
+            $name,
             $type,
             $required,
             $isArray,
