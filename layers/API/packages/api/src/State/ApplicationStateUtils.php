@@ -16,7 +16,7 @@ class ApplicationStateUtils
      * 2. The executable query, created by doing transformations on the requested query
      *
      * For instance, when doing query batching, fields in the executable query
-     * will be prepended with "self" to have the operations be executed in stric order.
+     * will be prepended with "self" to have the operations be executed in strict order.
      *
      * The executable query is the one needed to load data, so it's saved under "query".
      * The requested query is used to display the data, for instance for GraphQL.
