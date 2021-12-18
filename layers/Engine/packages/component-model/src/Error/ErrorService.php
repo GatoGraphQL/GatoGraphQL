@@ -4,10 +4,29 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Error;
 
+use PoP\BasicService\BasicServiceTrait;
 use PoP\ComponentModel\Feedback\Tokens;
+use stdClass;
 
 class ErrorService implements ErrorServiceInterface
 {
+    use BasicServiceTrait;
+    
+    /**
+     * Encode the array, and trim to 500 chars max
+     *
+     * @param mixed[] $value
+     */
+    public function jsonEncodeArrayOrStdClassValue(array|stdClass $value): string
+    {
+        return mb_strimwidth(
+            json_encode($value),
+            0,
+            500,
+            $this->getTranslationAPI()->__('...', 'component-model')
+        );
+    }
+    
     /**
      * @param string[]|null $path
      * @return array<string, mixed>
