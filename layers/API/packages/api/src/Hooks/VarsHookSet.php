@@ -19,11 +19,17 @@ use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\GraphQLParser\Execution\RequestInterface;
+use PoP\GraphQLParser\Parser\ParserInterface;
+use PoP\GraphQLParser\Validator\RequestValidator\RequestValidatorInterface;
 
 class VarsHookSet extends AbstractHookSet
 {
     private ?ErrorServiceInterface $errorService = null;
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+    private ?ParserInterface $parser = null;
+    private ?RequestInterface $request = null;
+    private ?RequestValidatorInterface $requestValidator = null;
 
     final public function setErrorService(ErrorServiceInterface $errorService): void
     {
@@ -40,6 +46,30 @@ class VarsHookSet extends AbstractHookSet
     final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
     {
         return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
+    }
+    final public function setParser(ParserInterface $parser): void
+    {
+        $this->parser = $parser;
+    }
+    final protected function getParser(): ParserInterface
+    {
+        return $this->parser ??= $this->instanceManager->getInstance(ParserInterface::class);
+    }
+    final public function setRequest(RequestInterface $request): void
+    {
+        $this->request = $request;
+    }
+    final protected function getRequest(): RequestInterface
+    {
+        return $this->request ??= $this->instanceManager->getInstance(RequestInterface::class);
+    }
+    final public function setRequestValidator(RequestValidatorInterface $requestValidator): void
+    {
+        $this->requestValidator = $requestValidator;
+    }
+    final protected function getRequestValidator(): RequestValidatorInterface
+    {
+        return $this->requestValidator ??= $this->instanceManager->getInstance(RequestValidatorInterface::class);
     }
 
     protected function init(): void
@@ -157,14 +187,31 @@ class VarsHookSet extends AbstractHookSet
      * It's saved under "requested-query" in $vars, and it's optional: if empty,
      * requested = executable => the executable query from $vars['query'] can be used
      */
-    public static function parseGraphQLQueryAndAddToVars(array &$vars, string $query): void
+    public function parseGraphQLQueryAndAddToVars(array &$vars, string $query): void
     {
-        $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
-        $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($query);
-        $vars['query'] = $fieldQuerySet->getExecutableFieldQuery();
-        if ($fieldQuerySet->areRequestedAndExecutableFieldQueriesDifferent()) {
-            $vars['requested-query'] = $fieldQuerySet->getRequestedFieldQuery();
+        $parsedData = $this->getParser()->parse($query);
+
+        // Take the existing variables from $vars, so they must be set in advance
+        $variables = $vars['variables'] ?? [];
+        
+        // If some variable hasn't been submitted, it will throw an Exception
+        // Let it bubble up
+        /** @var RequestInterface */
+        $request = $this->getRequest()->process($parsedData, $variables);
+
+        // If the validation fails, it will throw an exception
+        $this->getRequestValidator()->validate($request);
+
+        $vars['query'] = $request;
+        if (false) {
+            $vars['requested-query'] = $request;
         }
+        // $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
+        // $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($query);
+        // if ($fieldQuerySet->areRequestedAndExecutableFieldQueriesDifferent()) {
+        // if ($fieldQuerySet->areRequestedAndExecutableFieldQueriesDifferent()) {
+        //     $vars['requested-query'] = $fieldQuerySet->getRequestedFieldQuery();
+        // }
     }
 
     public function getModelInstanceComponentsFromVars($components)
