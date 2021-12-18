@@ -10,16 +10,38 @@ use PoP\API\PersistedQueries\PersistedQueryUtils;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\API\Schema\QueryInputs;
 use PoP\API\State\ApplicationStateUtils;
+use PoP\BasicService\AbstractHookSet;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
+use PoP\ComponentModel\Error\ErrorServiceInterface;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
+use PoP\ComponentModel\Schema\FeedbackMessageStoreInterface;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\BasicService\AbstractHookSet;
 
 class VarsHookSet extends AbstractHookSet
 {
+    private ?ErrorServiceInterface $errorService = null;
+    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
+
+    final public function setErrorService(ErrorServiceInterface $errorService): void
+    {
+        $this->errorService = $errorService;
+    }
+    final protected function getErrorService(): ErrorServiceInterface
+    {
+        return $this->errorService ??= $this->instanceManager->getInstance(ErrorServiceInterface::class);
+    }
+    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
+    {
+        $this->feedbackMessageStore = $feedbackMessageStore;
+    }
+    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
+    {
+        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
+    }
+
     protected function init(): void
     {
         // Execute early, since others (eg: SPA) will be based on these updated values
@@ -99,6 +121,16 @@ class VarsHookSet extends AbstractHookSet
              * @see https://github.com/graphql/graphql-over-http
              */
             $query = $_REQUEST[QueryInputs::QUERY];
+
+            // Validate the URL param is not passed as an array
+            if (is_array($query)) {
+                $errorMessage = sprintf(
+                    $this->getTranslationAPI()->__('The GraphQL query must be a string, but received \'%s\'', 'api'),
+                    $this->getErrorService()->jsonEncodeArrayOrStdClassValue($query)
+                );
+                $this->getFeedbackMessageStore()->addQueryError($errorMessage);
+                return;
+            }
 
             // If the query starts with "!", then it is the query name to a persisted query
             $query = PersistedQueryUtils::maybeGetPersistedQuery($query);
