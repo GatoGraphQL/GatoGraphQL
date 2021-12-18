@@ -104,7 +104,7 @@ class VarsHookSet extends AbstractHookSet
             $query = PersistedQueryUtils::maybeGetPersistedQuery($query);
 
             // Set the query in $vars
-            ApplicationStateUtils::maybeConvertQueryAndAddToVars($vars, $query);
+            ApplicationStateUtils::parseGraphQLQueryAndAddToVars($vars, $query);
         }
     }
 

@@ -9,9 +9,8 @@ use PoP\API\Facades\FieldQueryConvertorFacade;
 class ApplicationStateUtils
 {
     /**
-     * The query as an array goes straight into $vars['query'].
+     * The GraphQL query must be parsed into the AST, which has 2 outputs:
      *
-     * The query as string must be converted to array, which has 2 outputs:
      * 1. The actual requested query
      * 2. The executable query, created by doing transformations on the requested query
      *
@@ -23,18 +22,13 @@ class ApplicationStateUtils
      * It's saved under "requested-query" in $vars, and it's optional: if empty,
      * requested = executable => the executable query from $vars['query'] can be used
      */
-    public static function maybeConvertQueryAndAddToVars(array &$vars, array|string $query): void
+    public static function parseGraphQLQueryAndAddToVars(array &$vars, string $query): void
     {
-        // The fields param can either be an array or a string. Convert them to array
-        if (is_array($query)) {
-            $vars['query'] = $query;
-        } elseif (is_string($query)) {
-            $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
-            $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($query);
-            $vars['query'] = $fieldQuerySet->getExecutableFieldQuery();
-            if ($fieldQuerySet->areRequestedAndExecutableFieldQueriesDifferent()) {
-                $vars['requested-query'] = $fieldQuerySet->getRequestedFieldQuery();
-            }
+        $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
+        $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($query);
+        $vars['query'] = $fieldQuerySet->getExecutableFieldQuery();
+        if ($fieldQuerySet->areRequestedAndExecutableFieldQueriesDifferent()) {
+            $vars['requested-query'] = $fieldQuerySet->getRequestedFieldQuery();
         }
     }
 }
