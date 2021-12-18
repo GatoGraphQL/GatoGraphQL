@@ -9,6 +9,7 @@ use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use GraphQLByPoP\GraphQLRequest\ComponentConfiguration;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
 use GraphQLByPoP\GraphQLRequest\PersistedQueries\GraphQLPersistedQueryManagerInterface;
+use PoP\API\Hooks\VarsHookSet as APIVarsHookSet;
 use PoP\API\Response\Schemes as APISchemes;
 use PoP\API\Schema\QueryInputs;
 use PoP\API\State\ApplicationStateUtils;
@@ -25,6 +26,7 @@ class VarsHookSet extends AbstractHookSet
     private ?GraphQLPersistedQueryManagerInterface $graphQLPersistedQueryManager = null;
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?GraphQLQueryConvertorInterface $graphQLQueryConvertor = null;
+    private ?APIVarsHookSet $apiVarsHookSet = null;
 
     final public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
     {
@@ -65,6 +67,14 @@ class VarsHookSet extends AbstractHookSet
     final protected function getGraphQLQueryConvertor(): GraphQLQueryConvertorInterface
     {
         return $this->graphQLQueryConvertor ??= $this->instanceManager->getInstance(GraphQLQueryConvertorInterface::class);
+    }
+    final public function setAPIVarsHookSet(APIVarsHookSet $apiVarsHookSet): void
+    {
+        $this->apiVarsHookSet = $apiVarsHookSet;
+    }
+    final protected function getAPIVarsHookSet(): APIVarsHookSet
+    {
+        return $this->apiVarsHookSet ??= $this->instanceManager->getInstance(APIVarsHookSet::class);
     }
 
     protected function init(): void
@@ -209,7 +219,7 @@ class VarsHookSet extends AbstractHookSet
         }
 
         // Set the query in $vars
-        ApplicationStateUtils::parseGraphQLQueryAndAddToVars($vars, $graphQLQuery);
+        $this->getAPIVarsHookSet()->parseGraphQLQueryAndAddToVars($vars, $graphQLQuery);
 
         // Do not include the fieldArgs and directives when outputting the field
         $vars['only-fieldname-as-outputkey'] = true;

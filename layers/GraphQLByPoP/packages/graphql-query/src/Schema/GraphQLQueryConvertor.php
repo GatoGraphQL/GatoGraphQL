@@ -14,7 +14,6 @@ use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\GraphQLParser\Execution\RequestInterface;
-use PoP\GraphQLParser\Parser\Parser;
 use PoP\GraphQLParser\Parser\ParserInterface;
 use PoP\GraphQLParser\Validator\RequestValidator\RequestValidatorInterface;
 use PoPBackbone\GraphQLParser\Exception\LocationableExceptionInterface;
