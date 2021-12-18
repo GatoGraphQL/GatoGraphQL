@@ -92,6 +92,12 @@ class VarsHookSet extends AbstractHookSet
     private function addFieldsToVars(array &$vars): void
     {
         if (isset($_REQUEST[QueryInputs::QUERY])) {
+            /**
+             * Until GraphQL over HTTP is ready,
+             * this is a standard GraphQL query.
+             *
+             * @see https://github.com/graphql/graphql-over-http
+             */
             $query = $_REQUEST[QueryInputs::QUERY];
 
             // If the query starts with "!", then it is the query name to a persisted query
