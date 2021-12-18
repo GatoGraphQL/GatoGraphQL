@@ -209,7 +209,7 @@ class VarsHookSet extends AbstractHookSet
         }
 
         // Set the query in $vars
-        ApplicationStateUtils::parseGraphQLQueryAndAddToVars($vars, $fieldQuery);
+        ApplicationStateUtils::parseGraphQLQueryAndAddToVars($vars, $graphQLQuery);
 
         // Do not include the fieldArgs and directives when outputting the field
         $vars['only-fieldname-as-outputkey'] = true;
