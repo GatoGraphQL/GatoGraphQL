@@ -42,17 +42,12 @@ class Parser extends Tokenizer implements ParserInterface
 
             switch ($tokenType) {
                 case Token::TYPE_LBRACE:
-                    foreach ($this->parseBody(Token::TYPE_QUERY, true) as $query) {
-                        $this->data['queries'][] = $query;
-                    }
-                    break;
-
                 case Token::TYPE_QUERY:
-                    $this->data['queryOperations'][] = $this->parseOperation(Token::TYPE_QUERY);
+                    $this->data['queryOperations'][] = $this->parseOperation($tokenType);
                     break;
 
                 case Token::TYPE_MUTATION:
-                    $this->data['mutationOperations'][] = $this->parseOperation(Token::TYPE_MUTATION);
+                    $this->data['mutationOperations'][] = $this->parseOperation($tokenType);
                     break;
 
                 case Token::TYPE_FRAGMENT:
@@ -96,20 +91,18 @@ class Parser extends Tokenizer implements ParserInterface
         ];
     }
 
-    /**
-     * @return OperationInterface[]
-     */
-    protected function parseOperation(string $type): array
+    protected function parseOperation(string $type): OperationInterface
     {
         $operation  = null;
         $directives = [];
         $operationName = null;
         $this->data['variables'] = [];
 
-        if ($this->matchMulti([Token::TYPE_QUERY, Token::TYPE_MUTATION])) {
+        $isShorthandQuery = $this->match(Token::TYPE_LBRACE);
+
+        if (!$isShorthandQuery && $this->matchMulti([Token::TYPE_QUERY, Token::TYPE_MUTATION])) {
             $this->lex();
 
-            // If there's no operation name, the name is the empty string
             $operationToken = $this->eat(Token::TYPE_IDENTIFIER);
             $operationName = (string)$operationToken?->getData() ?? '';
             $operationLocation = $this->getTokenLocation($operationToken);
@@ -121,12 +114,18 @@ class Parser extends Tokenizer implements ParserInterface
             if ($this->match(Token::TYPE_AT)) {
                 $directives = $this->parseDirectiveList();
             }
-        } else {
-            // @todo
-            $operationLocation = null;
         }
 
-        $this->lex();
+        $lbraceToken = $this->lex();
+
+        /**
+         * Query shorthand: it has no name, variables or directives
+         * @see https://spec.graphql.org/draft/#sec-Language.Operations.Query-shorthand
+         */
+        if ($isShorthandQuery) {
+            $operationName = '';
+            $operationLocation = $this->getTokenLocation($lbraceToken);
+        }
 
         $fields = [];
 
