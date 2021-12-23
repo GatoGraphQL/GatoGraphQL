@@ -15,8 +15,7 @@ class RequestTest extends TestCase
     {
         $fragment1     = new Fragment('fragmentName1', 'test', [], [], new Location(1, 1));
         $fragment2     = new Fragment('fragmentName2', 'test', [], [], new Location(1, 1));
-        $queriesData   = ['query1', 'query2'];
-        $mutationsData = ['mutation1', 'mutation2'];
+        $operationsData   = ['query1', 'query2', 'mutation1', 'mutation2'];
         $fragmentsData = [$fragment1];
         $variableValues     = [
             'page' => 2
@@ -24,20 +23,17 @@ class RequestTest extends TestCase
 
         $request = new Request();
         $request->process([
-            'queries'   => $queriesData,
-            'mutations' => $mutationsData,
+            'operations' => $operationsData,
             'fragments' => $fragmentsData,
         ]);
         $request->setVariableValues($variableValues);
 
-        $this->assertEquals($queriesData, $request->getQueryOperations());
-        $this->assertEquals($mutationsData, $request->getMutationOperations());
+        $this->assertEquals($operationsData, $request->getOperations());
         $this->assertEquals($fragmentsData, $request->getFragments());
         $this->assertEquals($variableValues, $request->getVariableValues());
 
         $this->assertTrue($request->hasFragments());
-        $this->assertTrue($request->hasMutationOperations());
-        $this->assertTrue($request->hasQueryOperations());
+        $this->assertTrue($request->hasOperations());
 
         $this->assertTrue($request->hasVariable('page'));
         $this->assertEquals(2, $request->getVariableValue('page'));
