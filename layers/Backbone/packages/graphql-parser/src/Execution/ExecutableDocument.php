@@ -16,10 +16,19 @@ class ExecutableDocument implements ExecutableDocumentInterface
 
     public function __construct(
         private Document $document,
+        /** @var array<string, mixed> */
         private array $variableValues = [],
         ?string $operationName = null,
     ) {
         $this->operationName = $operationName ?? '';
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getVariableValues(): array
+    {
+        return $this->variableValues;
     }
 
     /**
