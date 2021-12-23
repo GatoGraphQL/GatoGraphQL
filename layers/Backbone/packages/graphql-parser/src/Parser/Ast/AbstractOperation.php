@@ -12,16 +12,16 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
 
     public function __construct(
         protected string $name,
-        /** @var FragmentReference[] */
-        protected array $fragmentReferences,
         /** @var Variable[] */
         protected array $variables,
-        /** @var VariableReference[] */
-        protected array $variableReferences,
         /** @var Directive[] $directives */
         array $directives,
         /** @var FieldInterface[]|FragmentInterface[] */
         protected array $fields,
+        /** @var FragmentReference[] */
+        protected array $fragmentReferences,
+        /** @var VariableReference[] */
+        protected array $variableReferences,
         Location $location,
     ) {
         parent::__construct($location);

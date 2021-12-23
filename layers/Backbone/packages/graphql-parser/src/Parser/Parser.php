@@ -140,44 +140,44 @@ class Parser extends Tokenizer implements ParserInterface
         $this->expect(Token::TYPE_RBRACE);
 
         if ($type === Token::TYPE_MUTATION) {
-            return $this->createMutationOperation($operationName, $this->data['fragmentReferences'], $variables, $this->data['variableReferences'], $directives, $fields, $operationLocation);
+            return $this->createMutationOperation($operationName, $variables, $directives, $fields, $this->data['fragmentReferences'], $this->data['variableReferences'], $operationLocation);
         }
 
-        return $this->createQueryOperation($operationName, $this->data['fragmentReferences'], $variables, $this->data['variableReferences'], $directives, $fields, $operationLocation);
+        return $this->createQueryOperation($operationName, $variables, $directives, $fields, $this->data['fragmentReferences'], $this->data['variableReferences'], $operationLocation);
     }
 
     public function createQueryOperation(
         string $name,
-        /** @var FragmentReference[] */
-        array $fragmentReferences,
         /** @var Variable[] */
         array $variables,
-        /** @var VariableReference[] */
-        array $variableReferences,
         /** @var Directive[] $directives */
         array $directives,
         /** @var FieldInterface[]|FragmentInterface[] */
         array $fields,
+        /** @var FragmentReference[] */
+        array $fragmentReferences,
+        /** @var VariableReference[] */
+        array $variableReferences,
         Location $location,
     ) {
-        return new QueryOperation($name, $fragmentReferences, $variables, $variableReferences, $directives, $fields, $location);
+        return new QueryOperation($name, $variables, $directives, $fields, $fragmentReferences, $variableReferences, $location);
     }
 
     public function createMutationOperation(
         string $name,
-        /** @var FragmentReference[] */
-        array $fragmentReferences,
         /** @var Variable[] */
         array $variables,
-        /** @var VariableReference[] */
-        array $variableReferences,
         /** @var Directive[] $directives */
         array $directives,
         /** @var FieldInterface[]|FragmentInterface[] */
         array $fields,
+        /** @var FragmentReference[] */
+        array $fragmentReferences,
+        /** @var VariableReference[] */
+        array $variableReferences,
         Location $location,
     ) {
-        return new MutationOperation($name, $fragmentReferences, $variables, $variableReferences, $directives, $fields, $location);
+        return new MutationOperation($name, $variables, $directives, $fields, $fragmentReferences, $variableReferences, $location);
     }
 
     /**
