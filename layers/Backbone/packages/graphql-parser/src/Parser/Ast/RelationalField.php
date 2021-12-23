@@ -12,23 +12,23 @@ class RelationalField extends AbstractAst implements FieldInterface
     use AstDirectivesTrait;
 
     /** @var FieldInterface[]|FragmentInterface[] */
-    protected array $fields = [];
+    protected array $fieldOrFragmentReferences = [];
 
     /**
      * @param Argument[] $arguments
-     * @param FieldInterface[]|FragmentInterface[] $fields
+     * @param FieldInterface[]|FragmentInterface[] $fieldOrFragmentReferences
      * @param Directive[] $directives
      */
     public function __construct(
         protected string $name,
         protected ?string $alias,
         array $arguments,
-        array $fields,
+        array $fieldOrFragmentReferences,
         array $directives,
         Location $location,
     ) {
         parent::__construct($location);
-        $this->setFields($fields);
+        $this->setFieldOrFragmentReferences($fieldOrFragmentReferences);
         $this->setArguments($arguments);
         $this->setDirectives($directives);
     }
@@ -41,25 +41,25 @@ class RelationalField extends AbstractAst implements FieldInterface
     /**
      * @return FieldInterface[]|FragmentInterface[]
      */
-    public function getFields(): array
+    public function getFieldOrFragmentReferences(): array
     {
-        return $this->fields;
+        return $this->fieldOrFragmentReferences;
     }
 
-    public function hasFields(): bool
+    public function hasFieldOrFragmentReferences(): bool
     {
-        return count($this->fields) > 0;
+        return count($this->fieldOrFragmentReferences) > 0;
     }
 
     /**
-     * @param FieldInterface[]|FragmentInterface[] $fields
+     * @param FieldInterface[]|FragmentInterface[] $fieldOrFragmentReferences
      */
-    public function setFields(array $fields): void
+    public function setFieldOrFragmentReferences(array $fieldOrFragmentReferences): void
     {
         /**
          * we cannot store fields by name because of TypedFragments
          */
-        $this->fields = $fields;
+        $this->fieldOrFragmentReferences = $fieldOrFragmentReferences;
     }
 
     public function getAlias(): ?string
@@ -69,9 +69,14 @@ class RelationalField extends AbstractAst implements FieldInterface
 
     public function hasField(string $name, bool $deep = false): bool
     {
-        foreach ($this->getFields() as $field) {
+        foreach ($this->getFieldOrFragmentReferences() as $fieldOrFragmentReference) {
+            if ($fieldOrFragmentReference instanceof FragmentInterface) {
+                continue;
+            }
+            /** @var FieldInterface */
+            $field = $fieldOrFragmentReference;
             if ($field->getName() === $name
-                || ($deep && $field instanceof RelationalField) && $field->hasField($name)
+                || ($deep && $field instanceof RelationalField && $field->hasField($name))
             ) {
                 return true;
             }

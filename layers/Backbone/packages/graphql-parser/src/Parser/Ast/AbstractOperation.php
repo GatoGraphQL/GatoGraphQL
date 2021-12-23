@@ -17,7 +17,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         /** @var Directive[] $directives */
         array $directives,
         /** @var FieldInterface[]|FragmentInterface[] */
-        protected array $fields,
+        protected array $fieldOrFragmentReferences,
         /** @var FragmentReference[] */
         protected array $fragmentReferences,
         /** @var VariableReference[] */
@@ -60,19 +60,24 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     /**
      * @return FieldInterface[]|FragmentInterface[]
      */
-    public function getFields(): array
+    public function getFieldOrFragmentReferences(): array
     {
-        return $this->fields;
+        return $this->fieldOrFragmentReferences;
     }
 
-    public function hasFields(): bool
+    public function hasFieldOrFragmentReferences(): bool
     {
-        return count($this->fields) > 0;
+        return count($this->fieldOrFragmentReferences) > 0;
     }
 
     public function hasField(string $name, bool $deep = false): bool
     {
-        foreach ($this->getFields() as $field) {
+        foreach ($this->getFieldOrFragmentReferences() as $fieldOrFragmentReference) {
+            if ($fieldOrFragmentReference instanceof FragmentInterface) {
+                continue;
+            }
+            /** @var FieldInterface */
+            $field = $fieldOrFragmentReference;
             if ($field->getName() === $name
                 || ($deep && $field instanceof RelationalField && $field->hasField($name))
             ) {
