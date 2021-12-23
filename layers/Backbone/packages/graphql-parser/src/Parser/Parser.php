@@ -432,14 +432,6 @@ class Parser extends Tokenizer implements ParserInterface
             return $this->createMutation($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
         }
 
-        if ($highLevel && $type === Token::TYPE_MUTATION) {
-            return $this->createMutation($nameToken->getData(), $alias, $arguments, [], $directives, $bodyLocation);
-        }
-
-        if ($highLevel && $type === Token::TYPE_QUERY) {
-            return $this->createQuery($nameToken->getData(), $alias, $arguments, [], $directives, $bodyLocation);
-        }
-
         return $this->createField($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
     }
 
