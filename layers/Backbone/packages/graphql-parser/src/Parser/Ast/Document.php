@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPBackbone\GraphQLParser\Parser;
+namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
