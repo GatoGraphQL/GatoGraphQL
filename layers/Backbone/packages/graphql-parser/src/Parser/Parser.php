@@ -17,7 +17,10 @@ use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Mutation;
+use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
+use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
+use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\WithDirectivesInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
@@ -45,29 +48,11 @@ class Parser extends Tokenizer implements ParserInterface
                     break;
 
                 case Token::TYPE_QUERY:
-                    [$operationName, $queries] = $this->parseOperation(Token::TYPE_QUERY);
-                    $this->data['queryOperations'][] = [
-                        'name' => $operationName,
-                        'position' => count($this->data['queries']),
-                        'numberItems' => count($queries),
-                    ];
-                    foreach ($queries as $query) {
-                        $this->data['queries'][] = $query;
-                    }
+                    $this->data['queryOperations'][] = $this->parseOperation(Token::TYPE_QUERY);
                     break;
 
                 case Token::TYPE_MUTATION:
-                    [$operationName, $mutations] = $this->parseOperation(Token::TYPE_MUTATION);
-                    if ($operationName) {
-                        $this->data['mutationOperations'][] = [
-                            'name' => $operationName,
-                            'position' => count($this->data['mutations']),
-                            'numberItems' => count($mutations),
-                        ];
-                    }
-                    foreach ($mutations as $query) {
-                        $this->data['mutations'][] = $query;
-                    }
+                    $this->data['mutationOperations'][] = $this->parseOperation(Token::TYPE_MUTATION);
                     break;
 
                 case Token::TYPE_FRAGMENT:
@@ -85,8 +70,6 @@ class Parser extends Tokenizer implements ParserInterface
         return new ParsedData(
             $this->data['queryOperations'],
             $this->data['mutationOperations'],
-            $this->data['queries'],
-            $this->data['mutations'],
             $this->data['fragments'],
             $this->data['fragmentReferences'],
             $this->data['variables'],
@@ -106,8 +89,6 @@ class Parser extends Tokenizer implements ParserInterface
         $this->data = [
             'queryOperations'    => [],
             'mutationOperations' => [],
-            'queries'            => [],
-            'mutations'          => [],
             'fragments'          => [],
             'fragmentReferences' => [],
             'variables'          => [],
@@ -116,21 +97,22 @@ class Parser extends Tokenizer implements ParserInterface
     }
 
     /**
-     * @return mixed[]
+     * @return OperationInterface[]
      */
     protected function parseOperation(string $type): array
     {
         $operation  = null;
         $directives = [];
         $operationName = null;
+        $this->data['variables'] = [];
 
         if ($this->matchMulti([Token::TYPE_QUERY, Token::TYPE_MUTATION])) {
             $this->lex();
 
-            $operationInfo = $this->eat(Token::TYPE_IDENTIFIER);
-            if (!is_null($operationInfo)) {
-                $operationName = $operationInfo->getData();
-            }
+            // If there's no operation name, the name is the empty string
+            $operationToken = $this->eat(Token::TYPE_IDENTIFIER);
+            $operationName = (string)$operationToken?->getData() ?? '';
+            $operationLocation = $this->getTokenLocation($operationToken);
 
             if ($this->match(Token::TYPE_LPAREN)) {
                 $this->parseVariables();
@@ -139,6 +121,9 @@ class Parser extends Tokenizer implements ParserInterface
             if ($this->match(Token::TYPE_AT)) {
                 $directives = $this->parseDirectiveList();
             }
+        } else {
+            // @todo
+            $operationLocation = null;
         }
 
         $this->lex();
@@ -162,10 +147,37 @@ class Parser extends Tokenizer implements ParserInterface
 
         $this->expect(Token::TYPE_RBRACE);
 
-        return [
-            $operationName,
-            $fields,
-        ];
+        if ($type === Token::TYPE_MUTATION) {
+            return $this->createMutationOperation($operationName, $this->data['variables'], $directives, $fields, $operationLocation);
+        }
+
+        return $this->createQueryOperation($operationName, $this->data['variables'], $directives, $fields, $operationLocation);
+    }
+
+    public function createQueryOperation(
+        string $name,
+        /** @var Variable[] */
+        array $variables,
+        /** @var Directive[] $directives */
+        array $directives,
+        /** @var Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] */
+        array $fields,
+        Location $location,
+    ) {
+        return new QueryOperation($name, $variables, $directives, $fields, $location);
+    }
+
+    public function createMutationOperation(
+        string $name,
+        /** @var Variable[] */
+        array $variables,
+        /** @var Directive[] $directives */
+        array $directives,
+        /** @var Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] */
+        array $fields,
+        Location $location,
+    ) {
+        return new MutationOperation($name, $variables, $directives, $fields, $location);
     }
 
     /**

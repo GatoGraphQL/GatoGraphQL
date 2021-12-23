@@ -10,14 +10,14 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
 {
     use AstDirectivesTrait;
 
-    /**
-     * @param Variable[] $variables
-     * @param Directive[] $directives
-     */
     public function __construct(
         protected string $name,
+        /** @var Variable[] */
         protected array $variables,
+        /** @var Directive[] $directives */
         array $directives,
+        /** @var Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] */
+        protected array $fields,
         Location $location,
     ) {
         parent::__construct($location);
@@ -35,5 +35,35 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     public function getVariables(): array
     {
         return $this->variables;
+    }
+
+    /**
+     * @return Field[]|Query[]|FragmentInterface[]|TypedFragmentReference[]
+     */
+    public function getFields(): array
+    {
+        return $this->fields;
+    }
+
+    public function hasFields(): bool
+    {
+        return count($this->fields) > 0;
+    }
+
+    public function hasField(string $name, bool $deep = false): bool
+    {
+        foreach ($this->getFields() as $field) {
+            if ($field->getName() === $name) {
+                return true;
+            }
+
+            if ($deep && $field instanceof Query) {
+                if ($field->hasField($name)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

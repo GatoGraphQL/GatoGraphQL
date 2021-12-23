@@ -8,18 +8,16 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\Mutation;
-use PoPBackbone\GraphQLParser\Parser\Ast\Query;
+use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
+use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 
 class ParsedData
 {
     public function __construct(
+        /** @var QueryOperation[] */
         private array $queryOperations,
+        /** @var MutationOperation[] */
         private array $mutationOperations,
-        /** @var Query[] */
-        private array $queries,
-        /** @var Mutation[] */
-        private array $mutations,
         /** @var Fragment[] */
         private array $fragments,
         /** @var FragmentReference[] */
@@ -31,30 +29,20 @@ class ParsedData
     ) {
     }
 
+    /**
+     * @return QueryOperation[]
+     */
     public function getQueryOperations(): array
     {
         return $this->queryOperations;
     }
 
+    /**
+     * @return MutationOperation[]
+     */
     public function getMutationOperations(): array
     {
         return $this->mutationOperations;
-    }
-
-    /**
-     * @return Query[]
-     */
-    public function getQueries(): array
-    {
-        return $this->queries;
-    }
-
-    /**
-     * @return Mutation[]
-     */
-    public function getMutations(): array
-    {
-        return $this->mutations;
     }
 
     /**
@@ -97,8 +85,6 @@ class ParsedData
         return [
             'queryOperations'    => $this->getQueryOperations(),
             'mutationOperations' => $this->getMutationOperations(),
-            'queries'            => $this->getQueries(),
-            'mutations'          => $this->getMutations(),
             'fragments'          => $this->getFragments(),
             'fragmentReferences' => $this->getFragmentReferences(),
             'variables'          => $this->getVariables(),
