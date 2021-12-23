@@ -16,8 +16,10 @@ use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
+use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 use PoPBackbone\GraphQLParser\Parser\Ast\ShorthandMutationOperation;
+use PoPBackbone\GraphQLParser\Parser\Ast\ShorthandQueryOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
 
 class ParserTest extends TestCase
@@ -69,18 +71,23 @@ GRAPHQL;
 
         $this->assertEquals($document->toArray(), [
             'operations'            => [
-                new RelationalField(
-                    'authors',
-                    null,
+                new ShorthandQueryOperation(
                     [
-                        new Argument('category', new Literal('#2', new Location(5, 25)), new Location(5, 14)),
+                        new RelationalField(
+                            'authors',
+                            null,
+                            [
+                                new Argument('category', new Literal('#2', new Location(5, 25)), new Location(5, 14)),
+                            ],
+                            [
+                                new Field('_id', null, [], [], new Location(6, 9)),
+                            ],
+                            [],
+                            new Location(5, 5)
+                        ),
                     ],
-                    [
-                        new Field('_id', null, [], [], new Location(6, 9)),
-                    ],
-                    [],
-                    new Location(5, 5)
-                ),
+                    new Location(1, 0)
+                )
             ],
             'fragments'          => [],
             'variables'          => [],
@@ -140,8 +147,13 @@ GRAPHQL;
         $parser = new Parser();
         $document   = $parser->parse('{ foo,       ,,  , bar  }');
         $this->assertEquals([
-            new Field('foo', '', [], [], new Location(1, 3)),
-            new Field('bar', '', [], [], new Location(1, 20)),
+            new ShorthandQueryOperation(
+                [
+                    new Field('foo', '', [], [], new Location(1, 3)),
+                    new Field('bar', '', [], [], new Location(1, 20)),
+                ],
+                new Location(1, 0)
+            )
         ], $document->toArray()['operations']);
     }
 
@@ -151,7 +163,12 @@ GRAPHQL;
         $document   = $parser->parse('{ name }');
         $this->assertEquals([
             'operations'            => [
-                new Field('name', '', [], [], new Location(1, 3)),
+                new ShorthandQueryOperation(
+                    [
+                        new Field('name', '', [], [], new Location(1, 3)),
+                    ],
+                    new Location(1, 0)
+                )
             ],
             'fragments'          => [],
             'variables'          => [],
@@ -164,10 +181,15 @@ GRAPHQL;
         $document   = $parser->parse('{ post, user { name } }');
         $this->assertEquals([
             'operations'            => [
-                new Field('post', null, [], [], new Location(1, 3)),
-                new RelationalField('user', null, [], [
-                    new Field('name', null, [], [], new Location(1, 16)),
-                ], [], new Location(1, 9)),
+                new ShorthandQueryOperation(
+                    [
+                        new Field('post', null, [], [], new Location(1, 3)),
+                        new RelationalField('user', null, [], [
+                            new Field('name', null, [], [], new Location(1, 16)),
+                        ], [], new Location(1, 9)),
+                    ],
+                    new Location(1, 0)
+                )
             ],
             'fragments'          => [],
             'variables'          => [],
@@ -283,27 +305,35 @@ GRAPHQL;
 
         $this->assertEquals([
             'operations'            => [
-                new RelationalField('__schema', null, [], [
-                    new RelationalField('queryType', null, [], [
-                        new Field('name', null, [], [], new Location(4, 33)),
-                    ], [], new Location(4, 21)),
-                    new RelationalField('mutationType', null, [], [
-                        new Field('name', null, [], [], new Location(5, 36)),
-                    ], [], new Location(5, 21)),
-                    new RelationalField('types', null, [], [
-                        new FragmentReference('FullType', new Location(7, 28)),
-                    ], [], new Location(6, 21)),
-                    new RelationalField('directives', null, [], [
-                        new Field('name', null, [], [], new Location(10, 25)),
-                        new Field('description', null, [], [], new Location(11, 25)),
-                        new RelationalField('args', null, [], [
-                            new FragmentReference('InputValue', new Location(13, 32)),
-                        ], [], new Location(12, 25)),
-                        new Field('onOperation', null, [], [], new Location(15, 25)),
-                        new Field('onFragment', null, [], [], new Location(16, 25)),
-                        new Field('onField', null, [], [], new Location(17, 25)),
-                    ], [], new Location(9, 21)),
-                ], [], new Location(3, 17)),
+                new QueryOperation(
+                    'IntrospectionQuery',
+                    [],
+                    [],
+                    [
+                        new RelationalField('__schema', null, [], [
+                            new RelationalField('queryType', null, [], [
+                                new Field('name', null, [], [], new Location(4, 33)),
+                            ], [], new Location(4, 21)),
+                            new RelationalField('mutationType', null, [], [
+                                new Field('name', null, [], [], new Location(5, 36)),
+                            ], [], new Location(5, 21)),
+                            new RelationalField('types', null, [], [
+                                new FragmentReference('FullType', new Location(7, 28)),
+                            ], [], new Location(6, 21)),
+                            new RelationalField('directives', null, [], [
+                                new Field('name', null, [], [], new Location(10, 25)),
+                                new Field('description', null, [], [], new Location(11, 25)),
+                                new RelationalField('args', null, [], [
+                                    new FragmentReference('InputValue', new Location(13, 32)),
+                                ], [], new Location(12, 25)),
+                                new Field('onOperation', null, [], [], new Location(15, 25)),
+                                new Field('onFragment', null, [], [], new Location(16, 25)),
+                                new Field('onField', null, [], [], new Location(17, 25)),
+                            ], [], new Location(9, 21)),
+                        ], [], new Location(3, 17)),
+                    ],
+                    new Location(1, 0)
+                )
             ],
             'fragments'          => [
                 new Fragment('FullType', '__Type', [], [
@@ -411,17 +441,22 @@ GRAPHQL;
 
         $this->assertEquals($document->toArray(), [
             'operations'            => [
-                new RelationalField(
-                    'test',
-                    'test',
-                    [],
+                new ShorthandQueryOperation(
                     [
-                        new Field('name', null, [], [], new Location(4, 21)),
-                        new TypedFragmentReference('UnionType', [new Field('unionName', null, [], [], new Location(6, 25))], [], new Location(5, 28)),
+                        new RelationalField(
+                            'test',
+                            'test',
+                            [],
+                            [
+                                new Field('name', null, [], [], new Location(4, 21)),
+                                new TypedFragmentReference('UnionType', [new Field('unionName', null, [], [], new Location(6, 25))], [], new Location(5, 28)),
+                            ],
+                            [],
+                            new Location(3, 23)
+                        ),
                     ],
-                    [],
-                    new Location(3, 23)
-                ),
+                    new Location(1, 0)
+                )
             ],
             'fragments'          => [],
             'variables'          => [],
