@@ -18,6 +18,8 @@ use PoP\GraphQLParser\Parser\Parser;
 use PoP\GraphQLParser\Parser\ParserInterface;
 use PoP\GraphQLParser\Validator\RequestValidator\RequestValidatorInterface;
 use PoPBackbone\GraphQLParser\Exception\LocationableExceptionInterface;
+use PoPBackbone\GraphQLParser\Execution\ExecutableDocument;
+use PoPBackbone\GraphQLParser\Execution\ExecutableDocumentInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
@@ -37,8 +39,8 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?IncludeDirectiveResolver $includeDirectiveResolver = null;
     private ?ParserInterface $parser = null;
-    private ?RequestInterface $request = null;
-    private ?RequestValidatorInterface $requestValidator = null;
+    // private ?RequestInterface $request = null;
+    // private ?RequestValidatorInterface $requestValidator = null;
 
     final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
@@ -72,22 +74,22 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     {
         return $this->parser ??= $this->instanceManager->getInstance(ParserInterface::class);
     }
-    final public function setRequest(RequestInterface $request): void
-    {
-        $this->request = $request;
-    }
-    final protected function getRequest(): RequestInterface
-    {
-        return $this->request ??= $this->instanceManager->getInstance(RequestInterface::class);
-    }
-    final public function setRequestValidator(RequestValidatorInterface $requestValidator): void
-    {
-        $this->requestValidator = $requestValidator;
-    }
-    final protected function getRequestValidator(): RequestValidatorInterface
-    {
-        return $this->requestValidator ??= $this->instanceManager->getInstance(RequestValidatorInterface::class);
-    }
+    // final public function setRequest(RequestInterface $request): void
+    // {
+    //     $this->request = $request;
+    // }
+    // final protected function getRequest(): RequestInterface
+    // {
+    //     return $this->request ??= $this->instanceManager->getInstance(RequestInterface::class);
+    // }
+    // final public function setRequestValidator(RequestValidatorInterface $requestValidator): void
+    // {
+    //     $this->requestValidator = $requestValidator;
+    // }
+    // final protected function getRequestValidator(): RequestValidatorInterface
+    // {
+    //     return $this->requestValidator ??= $this->instanceManager->getInstance(RequestValidatorInterface::class);
+    // }
 
     /**
      * Convert the GraphQL Query to PoP query in its requested form
@@ -95,7 +97,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
      */
     public function convertFromGraphQLToFieldQuery(
         string $graphQLQuery,
-        ?array $variables = [],
+        ?array $variableValues = [],
         bool $enableMultipleQueryExecution = false,
         ?string $operationName = null
     ): array {
@@ -104,7 +106,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             $operationFieldQueryPaths
         ) = $this->convertFromGraphQLToFieldQueryPaths(
             $graphQLQuery,
-            $variables ?? [],
+            $variableValues ?? [],
             $enableMultipleQueryExecution,
             $operationName
         );
@@ -141,7 +143,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
      */
     protected function convertFromGraphQLToFieldQueryPaths(
         string $graphQLQuery,
-        array $variables,
+        array $variableValues,
         bool $enableMultipleQueryExecution,
         ?string $operationName = null
     ): array {
@@ -149,7 +151,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             // If the validation throws an error, stop parsing the script
             $request = $this->parseAndCreateRequest(
                 $graphQLQuery,
-                $variables,
+                $variableValues,
                 $enableMultipleQueryExecution,
                 $operationName
             );
@@ -444,7 +446,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         return $fragmentFieldPaths;
     }
 
-    protected function processAndAddFieldPaths(RequestInterface $request, array &$queryFieldPaths, array $fields, array $queryField = []): void
+    protected function processAndAddFieldPaths(ExecutableDocumentInterface $executableDocument, array &$queryFieldPaths, array $fields, array $queryField = []): void
     {
         // Iterate through the query's fields: properties, connections, fragments
         $queryFieldPath = $queryField;
@@ -457,7 +459,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 );
             } elseif ($field instanceof Query) {
                 // Queries are connections
-                $nestedFieldPaths = $this->getFieldPathsFromQuery($request, $field);
+                $nestedFieldPaths = $this->getFieldPathsFromQuery($executableDocument, $field);
                 foreach ($nestedFieldPaths as $nestedFieldPath) {
                     $queryFieldPaths[] = array_merge(
                         $queryFieldPath,
@@ -469,7 +471,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 $fragmentReference = $field;
                 if ($fragmentReference instanceof FragmentReference) {
                     $fragmentName = $fragmentReference->getName();
-                    $fragment = $request->getFragment($fragmentName);
+                    $fragment = $executableDocument->getFragment($fragmentName);
                     $fragmentFields = $fragment->getFields();
                     $fragmentType = $fragment->getModel();
                 } else {
@@ -479,7 +481,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
                 // Get the fields defined in the fragment
                 $fragmentConvertedFieldPaths = [];
-                $this->processAndAddFieldPaths($request, $fragmentConvertedFieldPaths, $fragmentFields);
+                $this->processAndAddFieldPaths($executableDocument, $fragmentConvertedFieldPaths, $fragmentFields);
 
                 // Restrain those fields to the indicated type
                 $fragmentConvertedFieldPaths = $this->restrainFieldsByTypeOrInterface($fragmentConvertedFieldPaths, $fragmentType);
@@ -495,14 +497,14 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         }
     }
 
-    protected function getFieldPathsFromQuery(RequestInterface $request, Query $query): array
+    protected function getFieldPathsFromQuery(ExecutableDocumentInterface $executableDocument, Query $query): array
     {
         $queryFieldPaths = [];
         $queryFieldPath = [$this->convertField($query)];
 
         // Iterate through the query's fields: properties and connections
         if ($fields = $query->getFields()) {
-            $this->processAndAddFieldPaths($request, $queryFieldPaths, $fields, $queryFieldPath);
+            $this->processAndAddFieldPaths($executableDocument, $queryFieldPaths, $fields, $queryFieldPath);
         } else {
             // Otherwise, just add the query field, which doesn't have subfields
             $queryFieldPaths[] = $queryFieldPath;
@@ -518,12 +520,12 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
      *
      * @see https://graphql.org/learn/queries/
      */
-    protected function convertRequestToFieldQueryPaths(RequestInterface $request): array
+    protected function convertRequestToFieldQueryPaths(ExecutableDocumentInterface $executableDocument): array
     {
         $fieldQueryPaths = [];
         // It is either is a query or a mutation
-        $mutations = $request->getMutations();
-        $queries = $request->getQueries();
+        $mutations = $executableDocument->getMutations();
+        $queries = $executableDocument->getQueries();
         if ($mutations) {
             $queriesOrMutations = $mutations;
             $operationType = OperationTypes::MUTATION;
@@ -547,7 +549,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             );
             $fieldQueryPaths[$operationID] = array_merge(
                 $fieldQueryPaths[$operationID] ?? [],
-                $this->getFieldPathsFromQuery($request, $query)
+                $this->getFieldPathsFromQuery($executableDocument, $query)
             );
         }
         return [
@@ -561,21 +563,22 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
      */
     protected function parseAndCreateRequest(
         string $payload,
-        array $variables,
+        array $variableValues,
         bool $enableMultipleQueryExecution,
         ?string $operationName = null
-    ): RequestInterface {
+    ): ExecutableDocumentInterface {
         if (empty($payload)) {
             throw new InvalidArgumentException(
                 $this->getTranslationAPI()->__('Must provide an operation.', 'graphql-query')
             );
         }
 
-        $documentData = $this->getParser()->parse($payload)->toArray();
+        $document = $this->getParser()->parse($payload);
+        $documentData = $document->toArray();
 
         // GraphiQL sends the operationName to execute in the payload, under "operationName"
         // This is required when the payload contains multiple queries
-        if (is_null($operationName)) {
+        if ($operationName === null) {
             /**
              * If not enabling multiple query execution, validate that
              * only one operation was submitted.
@@ -721,13 +724,16 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
         // If some variable hasn't been submitted, it will throw an Exception
         // Let it bubble up
-        /** @var RequestInterface */
-        $request = $this->getRequest()->process($documentData, $variables);
+        $executableDocument = new ExecutableDocument($document, $variableValues, $operationName);
+        $executableDocument->validate();
+        return $executableDocument;
+        // // /** @var RequestInterface */
+        // // $request = $this->getRequest()->process($documentData, $variableValues);
 
-        // If the validation fails, it will throw an exception
-        $this->getRequestValidator()->validate($request);
+        // // If the validation fails, it will throw an exception
+        // $this->getRequestValidator()->validate($request);
 
-        // Return the request
-        return $request;
+        // // Return the request
+        // return $request;
     }
 }

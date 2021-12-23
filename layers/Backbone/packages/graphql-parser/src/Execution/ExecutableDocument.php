@@ -12,6 +12,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
     public function __construct(
         private Document $document,
         private array $variableValues = [],
+        private ?string $operationName = null,
     ) {
     }
 
