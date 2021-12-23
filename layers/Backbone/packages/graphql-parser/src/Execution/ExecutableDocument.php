@@ -44,7 +44,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
         // Validate all variables are satisfied
         $this->validateOperationVariables($operationsToExecute);
         $this->assertFragmentReferencesValid($operationsToExecute);
-        $this->assetFragmentsUsed($operationsToExecute);
+        $this->assertFragmentsUsed($operationsToExecute);
         $this->assertAllVariablesExists($operationsToExecute);
         $this->assertAllVariablesUsed($operationsToExecute);
 
@@ -117,7 +117,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
      * @param OperationInterface[] $operations
      * @throws InvalidRequestException
      */
-    protected function assetFragmentsUsed(array $operations): void
+    protected function assertFragmentsUsed(array $operations): void
     {
         foreach ($operations as $operation) {
             foreach ($operation->getFragmentReferences() as $fragmentReference) {
@@ -173,7 +173,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
     {
         foreach ($operations as $operation) {
             foreach ($operation->getVariableReferences() as $variableReference) {
-                if ($variableReference->getVariable()) {
+                if ($variableReference->getVariable() !== null) {
                     continue;
                 }
                 throw new InvalidRequestException(
