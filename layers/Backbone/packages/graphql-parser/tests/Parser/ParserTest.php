@@ -31,7 +31,6 @@ class ParserTest extends TestCase
         $this->assertEquals([
             'operations'    => [],
             'fragments'          => [],
-            'variables'          => [],
         ], $document->toArray());
     }
 
@@ -88,7 +87,6 @@ GRAPHQL;
                 )
             ],
             'fragments'          => [],
-            'variables'          => [],
         ]);
     }
 
@@ -169,7 +167,6 @@ GRAPHQL;
                 )
             ],
             'fragments'          => [],
-            'variables'          => [],
         ], $document->toArray());
     }
 
@@ -190,7 +187,6 @@ GRAPHQL;
                 )
             ],
             'fragments'          => [],
-            'variables'          => [],
         ], $document->toArray());
     }
 
@@ -214,7 +210,6 @@ GRAPHQL;
                     ], [], new Location(4, 17)),
                 ], new Location(2, 22)),
             ],
-            'variables'          => [],
         ], $document->toArray());
     }
 
@@ -392,7 +387,6 @@ GRAPHQL;
                     ], [], new Location(65, 17)),
                 ], new Location(62, 22)),
             ],
-            'variables'          => [],
         ], $document->toArray());
     }
 
@@ -457,7 +451,6 @@ GRAPHQL;
                 )
             ],
             'fragments'          => [],
-            'variables'          => [],
         ]);
     }
 
@@ -494,9 +487,6 @@ GRAPHQL;
                         )
                     ],
                     'fragments'          => [],
-                    'variables'          => [
-                        $variable,
-                    ],
                 ],
             ],
             [
@@ -508,7 +498,6 @@ GRAPHQL;
                         ], new Location(1, 1)),
                     ],
                     'fragments'          => [],
-                    'variables'          => [],
                 ],
             ],
             [
@@ -535,7 +524,6 @@ GRAPHQL;
                         )
                     ],
                     'fragments'          => [],
-                    'variables'          => [],
                 ],
             ],
             [
@@ -559,7 +547,6 @@ GRAPHQL;
                         )
                     ],
                     'fragments'          => [],
-                    'variables'          => [],
                 ],
             ],
         ];
@@ -594,7 +581,6 @@ GRAPHQL;
                         ], new Location(1, 1)),
                     ],
                     'fragments'          => [],
-                    'variables'          => [],
                 ],
             ],
             [
@@ -610,7 +596,6 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ],
                     'fragments'          => [],
-                    'variables'          => [],
                 ],
             ],
             [
@@ -626,7 +611,6 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ],
                     'fragments'          => [],
-                    'variables'          => [],
                 ],
             ],
             [
@@ -648,7 +632,6 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ],
                     'fragments'          => [],
-                    'variables'          => [],
                 ],
             ],
             [
@@ -663,7 +646,6 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ],
                     'fragments'          => [],
-                    'variables'          => [],
                 ],
             ],
             [
@@ -671,7 +653,6 @@ GRAPHQL;
                 [
                     'operations'    => [],
                     'fragments'          => [],
-                    'variables'          => [],
                 ],
             ],
             [
@@ -679,7 +660,6 @@ GRAPHQL;
                 [
                     'operations'    => [],
                     'fragments'          => [],
-                    'variables'          => [],
                 ],
             ],
             [
@@ -687,7 +667,6 @@ GRAPHQL;
                 [
                     'operations'    => [],
                     'fragments'          => [],
-                    'variables'          => [],
                 ],
             ],
             [
@@ -699,7 +678,6 @@ GRAPHQL;
                         ], new Location(1, 10))
                     ],
                     'fragments'          => [],
-                    'variables'          => [],
                 ],
             ],
             [
@@ -717,7 +695,6 @@ GRAPHQL;
                             new Field('email', null, [], [], new Location(1, 80)),
                         ], new Location(1, 43)),
                     ],
-                    'variables'          => [],
                 ],
             ],
             [
@@ -743,7 +720,6 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ],
                     'fragments'          => [],
-                    'variables'          => [],
                 ],
             ],
             [
@@ -766,7 +742,6 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ],
                     'fragments'          => [],
-                    'variables'          => [],
                 ],
             ],
             [
@@ -789,7 +764,6 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ],
                     'fragments'          => [],
-                    'variables'          => [],
                 ],
             ],
             [
@@ -820,7 +794,6 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ],
                     'fragments'          => [],
-                    'variables'          => [],
                 ],
             ],
         ];
