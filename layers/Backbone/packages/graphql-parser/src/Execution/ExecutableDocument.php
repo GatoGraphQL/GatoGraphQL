@@ -19,7 +19,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
     /**
      * @throws InvalidRequestException
      */
-    public function validate(): void
+    public function validateAndMerge(): void
     {
 
     }
