@@ -629,7 +629,7 @@ GRAPHQL;
                                 new Field('__typename', null, [], [], new Location(3, 21)),
                                 new Field('name', null, [], [], new Location(4, 21)),
                             ], [], new Location(2, 19)),
-                        ], new Location(1, 1))
+                        ], new Location(1, 7))
                     ],
                     'fragments'          => [],
                 ],
@@ -651,14 +651,18 @@ GRAPHQL;
             [
                 '{}',
                 [
-                    'operations'    => [],
+                    'operations'    => [
+                        new QueryOperation('', [], [], [], new Location(1, 1))
+                    ],
                     'fragments'          => [],
                 ],
             ],
             [
                 'query test {}',
                 [
-                    'operations'    => [],
+                    'operations'    => [
+                        new QueryOperation('test', [], [], [], new Location(1, 7))
+                    ],
                     'fragments'          => [],
                 ],
             ],
