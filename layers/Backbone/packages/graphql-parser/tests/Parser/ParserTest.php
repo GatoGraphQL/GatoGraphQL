@@ -29,9 +29,7 @@ class ParserTest extends TestCase
         $this->assertEquals([
             'operations'    => [],
             'fragments'          => [],
-            'fragmentReferences' => [],
             'variables'          => [],
-            'variableReferences' => [],
         ], $document->toArray());
     }
 
@@ -39,7 +37,7 @@ class ParserTest extends TestCase
     {
         $this->expectException(SyntaxErrorException::class);
         $parser = new Parser();
-        $document   = $parser->parse('
+        $parser->parse('
         {
             test {
                 id
@@ -83,9 +81,7 @@ GRAPHQL;
                 ),
             ],
             'fragments'          => [],
-            'fragmentReferences' => [],
             'variables'          => [],
-            'variableReferences' => [],
         ]);
     }
 
@@ -156,9 +152,7 @@ GRAPHQL;
                 new Field('name', '', [], [], new Location(1, 3)),
             ],
             'fragments'          => [],
-            'fragmentReferences' => [],
             'variables'          => [],
-            'variableReferences' => [],
         ], $document->toArray());
     }
 
@@ -174,9 +168,7 @@ GRAPHQL;
                 ], [], new Location(1, 9)),
             ],
             'fragments'          => [],
-            'fragmentReferences' => [],
             'variables'          => [],
-            'variableReferences' => [],
         ], $document->toArray());
     }
 
@@ -200,9 +192,7 @@ GRAPHQL;
                     ], [], new Location(4, 17)),
                 ], new Location(2, 22)),
             ],
-            'fragmentReferences' => [],
             'variables'          => [],
-            'variableReferences' => [],
         ], $document->toArray());
     }
 
@@ -372,18 +362,7 @@ GRAPHQL;
                     ], [], new Location(65, 17)),
                 ], new Location(62, 22)),
             ],
-            'fragmentReferences' => [
-                new FragmentReference('FullType', new Location(7, 28)),
-                new FragmentReference('InputValue', new Location(13, 32)),
-                new FragmentReference('InputValue', new Location(30, 28)),
-                new FragmentReference('TypeRef', new Location(33, 28)),
-                new FragmentReference('InputValue', new Location(39, 24)),
-                new FragmentReference('TypeRef', new Location(42, 24)),
-                new FragmentReference('TypeRef', new Location(51, 24)),
-                new FragmentReference('TypeRef', new Location(58, 27)),
-            ],
             'variables'          => [],
-            'variableReferences' => [],
         ], $document->toArray());
     }
 
@@ -443,9 +422,7 @@ GRAPHQL;
                 ),
             ],
             'fragments'          => [],
-            'fragmentReferences' => [],
             'variables'          => [],
-            'variableReferences' => [],
         ]);
     }
 
@@ -472,12 +449,8 @@ GRAPHQL;
                         ),
                     ],
                     'fragments'          => [],
-                    'fragmentReferences' => [],
                     'variables'          => [
                         $variable,
-                    ],
-                    'variableReferences' => [
-                        new VariableReference('variable', $variable, new Location(1, 39)),
                     ],
                 ],
             ],
@@ -488,9 +461,7 @@ GRAPHQL;
                         new RelationalField('query', null, [], [new Field('name', 'alias', [], [], new Location(1, 18))], [], new Location(1, 3)),
                     ],
                     'fragments'          => [],
-                    'fragmentReferences' => [],
                     'variables'          => [],
-                    'variableReferences' => [],
                 ],
             ],
             [
@@ -512,9 +483,7 @@ GRAPHQL;
                         ),
                     ],
                     'fragments'          => [],
-                    'fragmentReferences' => [],
                     'variables'          => [],
-                    'variableReferences' => [],
                 ],
             ],
             [
@@ -533,9 +502,7 @@ GRAPHQL;
                         ),
                     ],
                     'fragments'          => [],
-                    'fragmentReferences' => [],
                     'variables'          => [],
-                    'variableReferences' => [],
                 ],
             ],
         ];
@@ -568,9 +535,7 @@ GRAPHQL;
                         ], [], new Location(1, 3)),
                     ],
                     'fragments'          => [],
-                    'fragmentReferences' => [],
                     'variables'          => [],
-                    'variableReferences' => [],
                 ],
             ],
             [
@@ -584,9 +549,7 @@ GRAPHQL;
                         ], [], new Location(1, 3)),
                     ],
                     'fragments'          => [],
-                    'fragmentReferences' => [],
                     'variables'          => [],
-                    'variableReferences' => [],
                 ],
             ],
             [
@@ -600,9 +563,7 @@ GRAPHQL;
                         ], [], new Location(1, 3)),
                     ],
                     'fragments'          => [],
-                    'fragmentReferences' => [],
                     'variables'          => [],
-                    'variableReferences' => [],
                 ],
             ],
             [
@@ -622,9 +583,7 @@ GRAPHQL;
                         ], [], new Location(2, 19)),
                     ],
                     'fragments'          => [],
-                    'fragmentReferences' => [],
                     'variables'          => [],
-                    'variableReferences' => [],
                 ],
             ],
             [
@@ -637,9 +596,7 @@ GRAPHQL;
                         ], [], new Location(1, 3)),
                     ],
                     'fragments'          => [],
-                    'fragmentReferences' => [],
                     'variables'          => [],
-                    'variableReferences' => [],
                 ],
             ],
             [
@@ -647,9 +604,7 @@ GRAPHQL;
                 [
                     'operations'    => [],
                     'fragments'          => [],
-                    'fragmentReferences' => [],
                     'variables'          => [],
-                    'variableReferences' => [],
                 ],
             ],
             [
@@ -657,9 +612,7 @@ GRAPHQL;
                 [
                     'operations'    => [],
                     'fragments'          => [],
-                    'fragmentReferences' => [],
                     'variables'          => [],
-                    'variableReferences' => [],
                 ],
             ],
             [
@@ -667,9 +620,7 @@ GRAPHQL;
                 [
                     'operations'    => [],
                     'fragments'          => [],
-                    'fragmentReferences' => [],
                     'variables'          => [],
-                    'variableReferences' => [],
                 ],
             ],
             [
@@ -679,9 +630,7 @@ GRAPHQL;
                         new Mutation('setUserName', null, [], [], [], new Location(1, 20))
                     ],
                     'fragments'          => [],
-                    'fragmentReferences' => [],
                     'variables'          => [],
-                    'variableReferences' => [],
                 ],
             ],
             [
@@ -697,11 +646,7 @@ GRAPHQL;
                             new Field('email', null, [], [], new Location(1, 80)),
                         ], new Location(1, 43)),
                     ],
-                    'fragmentReferences' => [
-                        new FragmentReference('userDataFragment', new Location(1, 13)),
-                    ],
                     'variables'          => [],
-                    'variableReferences' => [],
                 ],
             ],
             [
@@ -725,9 +670,7 @@ GRAPHQL;
                         ),
                     ],
                     'fragments'          => [],
-                    'fragmentReferences' => [],
                     'variables'          => [],
-                    'variableReferences' => [],
                 ],
             ],
             [
@@ -748,9 +691,7 @@ GRAPHQL;
                         ),
                     ],
                     'fragments'          => [],
-                    'fragmentReferences' => [],
                     'variables'          => [],
-                    'variableReferences' => [],
                 ],
             ],
             [
@@ -771,9 +712,7 @@ GRAPHQL;
                         ),
                     ],
                     'fragments'          => [],
-                    'fragmentReferences' => [],
                     'variables'          => [],
-                    'variableReferences' => [],
                 ],
             ],
             [
@@ -802,9 +741,7 @@ GRAPHQL;
                         ),
                     ],
                     'fragments'          => [],
-                    'fragmentReferences' => [],
                     'variables'          => [],
-                    'variableReferences' => [],
                 ],
             ],
         ];
