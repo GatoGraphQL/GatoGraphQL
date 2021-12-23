@@ -9,6 +9,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 interface OperationInterface extends LocatableInterface, WithDirectivesInterface
 {
     public function getName(): string;
+    public function getOperationType(): string;
 
     /**
      * @return Variable[]
