@@ -21,6 +21,7 @@ interface OperationInterface extends LocatableInterface, WithDirectivesInterface
      * @return Variable[]
      */
     public function getVariables(): array;
+    
     /**
      * @return VariableReference[]
      */
