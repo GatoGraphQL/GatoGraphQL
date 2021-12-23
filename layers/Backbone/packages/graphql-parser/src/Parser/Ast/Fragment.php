@@ -15,7 +15,7 @@ class Fragment extends AbstractAst implements WithDirectivesInterface
 
     /**
      * @param Directive[] $directives
-     * @param Field[]|Query[] $fields
+     * @param FieldInterface[] $fields
      */
     public function __construct(
         protected string $name,
@@ -59,7 +59,7 @@ class Fragment extends AbstractAst implements WithDirectivesInterface
     }
 
     /**
-     * @return Field[]|Query[]
+     * @return FieldInterface[]
      */
     public function getFields(): array
     {
@@ -67,7 +67,7 @@ class Fragment extends AbstractAst implements WithDirectivesInterface
     }
 
     /**
-     * @param Field[]|Query[] $fields
+     * @param FieldInterface[] $fields
      */
     public function setFields(array $fields): void
     {

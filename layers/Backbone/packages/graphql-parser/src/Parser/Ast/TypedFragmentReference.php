@@ -13,7 +13,7 @@ class TypedFragmentReference extends AbstractAst implements FragmentInterface, W
     use AstDirectivesTrait;
 
     /**
-     * @param Field[]|Query[] $fields
+     * @param FieldInterface[] $fields
      * @param Directive[] $directives
      */
     public function __construct(
@@ -27,7 +27,7 @@ class TypedFragmentReference extends AbstractAst implements FragmentInterface, W
     }
 
     /**
-     * @return Field[]|Query[]
+     * @return FieldInterface[]
      */
     public function getFields(): array
     {
@@ -35,7 +35,7 @@ class TypedFragmentReference extends AbstractAst implements FragmentInterface, W
     }
 
     /**
-     * @param Field[]|Query[] $fields
+     * @param FieldInterface[] $fields
      */
     public function setFields(array $fields): void
     {

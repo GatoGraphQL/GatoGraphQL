@@ -20,7 +20,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         protected array $variableReferences,
         /** @var Directive[] $directives */
         array $directives,
-        /** @var Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] */
+        /** @var FieldInterface[]|FragmentReference[]|TypedFragmentReference[] */
         protected array $fields,
         Location $location,
     ) {
@@ -58,7 +58,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     }
 
     /**
-     * @return Field[]|Query[]|FragmentInterface[]|TypedFragmentReference[]
+     * @return FieldInterface[]|FragmentInterface[]|TypedFragmentReference[]
      */
     public function getFields(): array
     {
@@ -73,14 +73,10 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     public function hasField(string $name, bool $deep = false): bool
     {
         foreach ($this->getFields() as $field) {
-            if ($field->getName() === $name) {
+            if (($field->getName() === $name)
+                || ($deep && $field instanceof RelationalField && $field->hasField($name))
+            ) {
                 return true;
-            }
-
-            if ($deep && $field instanceof Query) {
-                if ($field->hasField($name)) {
-                    return true;
-                }
             }
         }
 

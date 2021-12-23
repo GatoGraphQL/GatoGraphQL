@@ -8,17 +8,17 @@ use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class Query extends AbstractAst implements FieldInterface
+class RelationalField extends AbstractAst implements FieldInterface
 {
     use AstArgumentsTrait;
     use AstDirectivesTrait;
 
-    /** @var Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] */
+    /** @var FieldInterface[]|FragmentReference[]|TypedFragmentReference[] */
     protected array $fields = [];
 
     /**
      * @param Argument[] $arguments
-     * @param Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] $fields
+     * @param FieldInterface[]|FragmentReference[]|TypedFragmentReference[] $fields
      * @param Directive[] $directives
      */
     public function __construct(
@@ -41,7 +41,7 @@ class Query extends AbstractAst implements FieldInterface
     }
 
     /**
-     * @return Field[]|Query[]|FragmentInterface[]|TypedFragmentReference[]
+     * @return FieldInterface[]|FragmentInterface[]|TypedFragmentReference[]
      */
     public function getFields(): array
     {
@@ -54,7 +54,7 @@ class Query extends AbstractAst implements FieldInterface
     }
 
     /**
-     * @param Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] $fields
+     * @param FieldInterface[]|FragmentReference[]|TypedFragmentReference[] $fields
      */
     public function setFields(array $fields): void
     {
@@ -72,14 +72,10 @@ class Query extends AbstractAst implements FieldInterface
     public function hasField(string $name, bool $deep = false): bool
     {
         foreach ($this->getFields() as $field) {
-            if ($field->getName() === $name) {
+            if (($field->getName() === $name)
+                || ($deep && $field instanceof RelationalField) && $field->hasField($name)
+            ) {
                 return true;
-            }
-
-            if ($deep && $field instanceof Query) {
-                if ($field->hasField($name)) {
-                    return true;
-                }
             }
         }
 

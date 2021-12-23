@@ -15,6 +15,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Ast\Document;
 use PoPBackbone\GraphQLParser\Parser\Ast\Field;
+use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
@@ -155,7 +156,7 @@ class Parser extends Tokenizer implements ParserInterface
         array $variableReferences,
         /** @var Directive[] $directives */
         array $directives,
-        /** @var Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] */
+        /** @var FieldInterface[]|FragmentReference[]|TypedFragmentReference[] */
         array $fields,
         Location $location,
     ) {
@@ -172,7 +173,7 @@ class Parser extends Tokenizer implements ParserInterface
         array $variableReferences,
         /** @var Directive[] $directives */
         array $directives,
-        /** @var Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] */
+        /** @var FieldInterface[]|FragmentReference[]|TypedFragmentReference[] */
         array $fields,
         Location $location,
     ) {
@@ -413,7 +414,7 @@ class Parser extends Tokenizer implements ParserInterface
         $directives   = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
 
         if ($this->match(Token::TYPE_LBRACE)) {
-            /** @var Query[] */
+            /** @var FieldInterface[] */
             $fields = $this->parseBody($type === Token::TYPE_TYPED_FRAGMENT ? Token::TYPE_QUERY : $type, false);
 
             if (!$fields) {
@@ -424,7 +425,7 @@ class Parser extends Tokenizer implements ParserInterface
                 return $this->createTypedFragmentReference($nameToken->getData(), $fields, $directives, $bodyLocation);
             }
 
-            return $this->createQuery($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
+            return $this->createRelationalField($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
         }
 
         return $this->createField($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
@@ -432,18 +433,18 @@ class Parser extends Tokenizer implements ParserInterface
 
     /**
      * @param Argument[] $arguments
-     * @param Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] $fields
+     * @param FieldInterface[]|FragmentReference[]|TypedFragmentReference[] $fields
      * @param Directive[] $directives
      */
-    protected function createQuery(
+    protected function createRelationalField(
         string $name,
         ?string $alias,
         array $arguments,
         array $fields,
         array $directives,
         Location $location
-    ): Query {
-        return new Query(
+    ): RelationalField {
+        return new RelationalField(
             $name,
             $alias,
             $arguments,
@@ -454,7 +455,7 @@ class Parser extends Tokenizer implements ParserInterface
     }
 
     /**
-     * @param Field[]|Query[] $fields
+     * @param FieldInterface[] $fields
      * @param Directive[] $directives
      */
     protected function createTypedFragmentReference(
@@ -694,7 +695,7 @@ class Parser extends Tokenizer implements ParserInterface
 
         $directives = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
 
-        /** @var Query[] */
+        /** @var FieldInterface[] */
         $fields = $this->parseBody(Token::TYPE_QUERY, false);
 
         return $this->createFragment($nameToken->getData(), $model->getData(), $directives, $fields, $this->getTokenLocation($nameToken));
@@ -702,7 +703,7 @@ class Parser extends Tokenizer implements ParserInterface
 
     /**
      * @param Directive[] $directives
-     * @param Field[]|Query[] $fields
+     * @param FieldInterface[] $fields
      */
     protected function createFragment(
         string $name,
