@@ -421,12 +421,12 @@ class Parser extends Tokenizer implements ParserInterface
                 throw $this->createUnexpectedTokenTypeException($this->lookAhead->getType());
             }
 
-            if ($type === Token::TYPE_QUERY) {
-                return $this->createQuery($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
-            }
-
             if ($type === Token::TYPE_TYPED_FRAGMENT) {
                 return $this->createTypedFragmentReference($nameToken->getData(), $fields, $directives, $bodyLocation);
+            }
+
+            if ($type === Token::TYPE_QUERY) {
+                return $this->createQuery($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
             }
 
             return $this->createMutation($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
