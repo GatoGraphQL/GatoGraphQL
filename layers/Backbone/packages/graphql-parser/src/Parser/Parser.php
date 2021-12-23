@@ -120,7 +120,7 @@ class Parser extends Tokenizer implements ParserInterface
             $operationLocation = $this->getTokenLocation($lbraceToken);
         }
 
-        $fields = [];
+        $fieldOrFragmentReferences = [];
 
         while (!$this->match(Token::TYPE_RBRACE) && !$this->end()) {
             $this->eatMulti([Token::TYPE_COMMA]);
@@ -134,16 +134,16 @@ class Parser extends Tokenizer implements ParserInterface
                 )
             );
 
-            $fields[] = $operation;
+            $fieldOrFragmentReferences[] = $operation;
         }
 
         $this->expect(Token::TYPE_RBRACE);
 
         if ($type === Token::TYPE_MUTATION) {
-            return $this->createMutationOperation($operationName, $variables, $directives, $fields, $this->data['fragmentReferences'], $this->data['variableReferences'], $operationLocation);
+            return $this->createMutationOperation($operationName, $variables, $directives, $fieldOrFragmentReferences, $this->data['fragmentReferences'], $this->data['variableReferences'], $operationLocation);
         }
 
-        return $this->createQueryOperation($operationName, $variables, $directives, $fields, $this->data['fragmentReferences'], $this->data['variableReferences'], $operationLocation);
+        return $this->createQueryOperation($operationName, $variables, $directives, $fieldOrFragmentReferences, $this->data['fragmentReferences'], $this->data['variableReferences'], $operationLocation);
     }
 
     public function createQueryOperation(
@@ -153,14 +153,14 @@ class Parser extends Tokenizer implements ParserInterface
         /** @var Directive[] $directives */
         array $directives,
         /** @var FieldInterface[]|FragmentInterface[] */
-        array $fields,
+        array $fieldOrFragmentReferences,
         /** @var FragmentReference[] */
         array $fragmentReferences,
         /** @var VariableReference[] */
         array $variableReferences,
         Location $location,
     ) {
-        return new QueryOperation($name, $variables, $directives, $fields, $fragmentReferences, $variableReferences, $location);
+        return new QueryOperation($name, $variables, $directives, $fieldOrFragmentReferences, $fragmentReferences, $variableReferences, $location);
     }
 
     public function createMutationOperation(
@@ -170,22 +170,22 @@ class Parser extends Tokenizer implements ParserInterface
         /** @var Directive[] $directives */
         array $directives,
         /** @var FieldInterface[]|FragmentInterface[] */
-        array $fields,
+        array $fieldOrFragmentReferences,
         /** @var FragmentReference[] */
         array $fragmentReferences,
         /** @var VariableReference[] */
         array $variableReferences,
         Location $location,
     ) {
-        return new MutationOperation($name, $variables, $directives, $fields, $fragmentReferences, $variableReferences, $location);
+        return new MutationOperation($name, $variables, $directives, $fieldOrFragmentReferences, $fragmentReferences, $variableReferences, $location);
     }
 
     /**
-     * @return AbstractAst[]
+     * @return FieldInterface[]|FragmentInterface[]
      */
     protected function parseBody(string $token, bool $highLevel): array
     {
-        $fields = [];
+        $fieldOrFragmentReferences = [];
 
         $this->lex();
 
@@ -196,18 +196,18 @@ class Parser extends Tokenizer implements ParserInterface
                 $this->lex();
 
                 if ($this->eat(Token::TYPE_ON)) {
-                    $fields[] = $this->parseBodyItem(Token::TYPE_TYPED_FRAGMENT, $highLevel);
+                    $fieldOrFragmentReferences[] = $this->parseBodyItem(Token::TYPE_TYPED_FRAGMENT, $highLevel);
                 } else {
-                    $fields[] = $this->parseFragmentReference();
+                    $fieldOrFragmentReferences[] = $this->parseFragmentReference();
                 }
             } else {
-                $fields[] = $this->parseBodyItem($token, $highLevel);
+                $fieldOrFragmentReferences[] = $this->parseBodyItem($token, $highLevel);
             }
         }
 
         $this->expect(Token::TYPE_RBRACE);
 
-        return $fields;
+        return $fieldOrFragmentReferences;
     }
 
     /**
@@ -414,18 +414,18 @@ class Parser extends Tokenizer implements ParserInterface
         $directives   = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
 
         if ($this->match(Token::TYPE_LBRACE)) {
-            /** @var FieldInterface[] */
-            $fields = $this->parseBody($type === Token::TYPE_TYPED_FRAGMENT ? Token::TYPE_QUERY : $type, false);
+            /** @var FieldInterface[]|FragmentInterface[] */
+            $fieldOrFragmentReferences = $this->parseBody($type === Token::TYPE_TYPED_FRAGMENT ? Token::TYPE_QUERY : $type, false);
 
-            if (!$fields) {
+            if (!$fieldOrFragmentReferences) {
                 throw $this->createUnexpectedTokenTypeException($this->lookAhead->getType());
             }
 
             if ($type === Token::TYPE_TYPED_FRAGMENT) {
-                return $this->createTypedFragmentReference($nameToken->getData(), $fields, $directives, $bodyLocation);
+                return $this->createTypedFragmentReference($nameToken->getData(), $fieldOrFragmentReferences, $directives, $bodyLocation);
             }
 
-            return $this->createRelationalField($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
+            return $this->createRelationalField($nameToken->getData(), $alias, $arguments, $fieldOrFragmentReferences, $directives, $bodyLocation);
         }
 
         return $this->createField($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
@@ -433,14 +433,14 @@ class Parser extends Tokenizer implements ParserInterface
 
     /**
      * @param Argument[] $arguments
-     * @param FieldInterface[]|FragmentInterface[] $fields
+     * @param FieldInterface[]|FragmentInterface[] $fieldOrFragmentReferences
      * @param Directive[] $directives
      */
     protected function createRelationalField(
         string $name,
         ?string $alias,
         array $arguments,
-        array $fields,
+        array $fieldOrFragmentReferences,
         array $directives,
         Location $location
     ): RelationalField {
@@ -448,23 +448,23 @@ class Parser extends Tokenizer implements ParserInterface
             $name,
             $alias,
             $arguments,
-            $fields,
+            $fieldOrFragmentReferences,
             $directives,
             $location
         );
     }
 
     /**
-     * @param FieldInterface[] $fields
+     * @param FieldInterface[] $fieldOrFragmentReferences
      * @param Directive[] $directives
      */
     protected function createTypedFragmentReference(
         string $typeName,
-        array $fields,
+        array $fieldOrFragmentReferences,
         array $directives,
         Location $location,
     ): TypedFragmentReference {
-        return new TypedFragmentReference($typeName, $fields, $directives, $location);
+        return new TypedFragmentReference($typeName, $fieldOrFragmentReferences, $directives, $location);
     }
 
     /**
@@ -696,23 +696,23 @@ class Parser extends Tokenizer implements ParserInterface
         $directives = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
 
         /** @var FieldInterface[] */
-        $fields = $this->parseBody(Token::TYPE_QUERY, false);
+        $fieldOrFragmentReferences = $this->parseBody(Token::TYPE_QUERY, false);
 
-        return $this->createFragment($nameToken->getData(), $model->getData(), $directives, $fields, $this->getTokenLocation($nameToken));
+        return $this->createFragment($nameToken->getData(), $model->getData(), $directives, $fieldOrFragmentReferences, $this->getTokenLocation($nameToken));
     }
 
     /**
      * @param Directive[] $directives
-     * @param FieldInterface[] $fields
+     * @param FieldInterface[] $fieldOrFragmentReferences
      */
     protected function createFragment(
         string $name,
         string $model,
         array $directives,
-        array $fields,
+        array $fieldOrFragmentReferences,
         Location $location,
     ): Fragment {
-        return new Fragment($name, $model, $directives, $fields, $location);
+        return new Fragment($name, $model, $directives, $fieldOrFragmentReferences, $location);
     }
 
     protected function eat(string $type): ?Token
