@@ -87,7 +87,6 @@ class Parser extends Tokenizer implements ParserInterface
         $directives = [];
         $operationName = null;
         $variables = [];
-        $this->data['fragmentReferences'] = [];
         $this->data['variables'] = [];
         $this->data['variableReferences'] = [];
 
@@ -140,10 +139,10 @@ class Parser extends Tokenizer implements ParserInterface
         $this->expect(Token::TYPE_RBRACE);
 
         if ($type === Token::TYPE_MUTATION) {
-            return $this->createMutationOperation($operationName, $variables, $directives, $fieldOrFragmentReferences, $this->data['fragmentReferences'], $this->data['variableReferences'], $operationLocation);
+            return $this->createMutationOperation($operationName, $variables, $directives, $fieldOrFragmentReferences, $this->data['variableReferences'], $operationLocation);
         }
 
-        return $this->createQueryOperation($operationName, $variables, $directives, $fieldOrFragmentReferences, $this->data['fragmentReferences'], $this->data['variableReferences'], $operationLocation);
+        return $this->createQueryOperation($operationName, $variables, $directives, $fieldOrFragmentReferences, $this->data['variableReferences'], $operationLocation);
     }
 
     public function createQueryOperation(
@@ -154,13 +153,11 @@ class Parser extends Tokenizer implements ParserInterface
         array $directives,
         /** @var FieldInterface[]|FragmentInterface[] */
         array $fieldOrFragmentReferences,
-        /** @var FragmentReference[] */
-        array $fragmentReferences,
         /** @var VariableReference[] */
         array $variableReferences,
         Location $location,
     ) {
-        return new QueryOperation($name, $variables, $directives, $fieldOrFragmentReferences, $fragmentReferences, $variableReferences, $location);
+        return new QueryOperation($name, $variables, $directives, $fieldOrFragmentReferences, $variableReferences, $location);
     }
 
     public function createMutationOperation(
@@ -171,13 +168,11 @@ class Parser extends Tokenizer implements ParserInterface
         array $directives,
         /** @var FieldInterface[]|FragmentInterface[] */
         array $fieldOrFragmentReferences,
-        /** @var FragmentReference[] */
-        array $fragmentReferences,
         /** @var VariableReference[] */
         array $variableReferences,
         Location $location,
     ) {
-        return new MutationOperation($name, $variables, $directives, $fieldOrFragmentReferences, $fragmentReferences, $variableReferences, $location);
+        return new MutationOperation($name, $variables, $directives, $fieldOrFragmentReferences, $variableReferences, $location);
     }
 
     /**
@@ -365,15 +360,11 @@ class Parser extends Tokenizer implements ParserInterface
      */
     protected function parseFragmentReference(): FragmentReference
     {
-        $nameToken         = $this->eatIdentifierToken();
-        $fragmentReference = $this->createFragmentReference(
+        $nameToken = $this->eatIdentifierToken();
+        return $this->createFragmentReference(
             $nameToken->getData(),
             $this->getTokenLocation($nameToken)
         );
-
-        $this->data['fragmentReferences'][] = $fragmentReference;
-
-        return $fragmentReference;
     }
 
     protected function createFragmentReference(

@@ -18,8 +18,6 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         array $directives,
         /** @var FieldInterface[]|FragmentInterface[] */
         protected array $fieldOrFragmentReferences,
-        /** @var FragmentReference[] */
-        protected array $fragmentReferences,
         /** @var VariableReference[] */
         protected array $variableReferences,
         Location $location,
@@ -31,14 +29,6 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     public function getName(): string
     {
         return $this->name;
-    }
-
-    /**
-     * @return FragmentReference[]
-     */
-    public function getFragmentReferences(): array
-    {
-        return $this->fragmentReferences;
     }
 
     /**
