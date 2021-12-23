@@ -70,7 +70,7 @@ class RelationalField extends AbstractAst implements FieldInterface
     public function hasField(string $name, bool $deep = false): bool
     {
         foreach ($this->getFields() as $field) {
-            if (($field->getName() === $name)
+            if ($field->getName() === $name
                 || ($deep && $field instanceof RelationalField) && $field->hasField($name)
             ) {
                 return true;
