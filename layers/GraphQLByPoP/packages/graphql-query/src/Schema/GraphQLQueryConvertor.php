@@ -724,7 +724,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
         // If some variable hasn't been submitted, it will throw an Exception
         // Let it bubble up
-        $executableDocument = new ExecutableDocument($document, $variableValues, $operationName);
+        $executableDocument = new ExecutableDocument($document, $variableValues, $operationName ?? '');
         $executableDocument->validateAndMerge();
         return $executableDocument;
         // // /** @var RequestInterface */
