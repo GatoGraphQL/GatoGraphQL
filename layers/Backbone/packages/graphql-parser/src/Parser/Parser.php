@@ -17,7 +17,6 @@ use PoPBackbone\GraphQLParser\Parser\Ast\Document;
 use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\Mutation;
 use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
@@ -425,11 +424,7 @@ class Parser extends Tokenizer implements ParserInterface
                 return $this->createTypedFragmentReference($nameToken->getData(), $fields, $directives, $bodyLocation);
             }
 
-            if ($type === Token::TYPE_QUERY) {
-                return $this->createQuery($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
-            }
-
-            return $this->createMutation($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
+            return $this->createQuery($nameToken->getData(), $alias, $arguments, $fields, $directives, $bodyLocation);
         }
 
         return $this->createField($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
@@ -469,22 +464,6 @@ class Parser extends Tokenizer implements ParserInterface
         Location $location,
     ): TypedFragmentReference {
         return new TypedFragmentReference($typeName, $fields, $directives, $location);
-    }
-
-    /**
-     * @param Argument[] $arguments
-     * @param Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] $fields
-     * @param Directive[] $directives
-     */
-    protected function createMutation(
-        string $name,
-        ?string $alias,
-        array $arguments,
-        array $fields,
-        array $directives,
-        Location $location,
-    ): Mutation {
-        return new Mutation($name, $alias, $arguments, $fields, $directives, $location);
     }
 
     /**
