@@ -20,8 +20,8 @@ use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
-use PoPBackbone\GraphQLParser\Parser\Ast\Query;
 use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
+use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\WithDirectivesInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
@@ -156,7 +156,7 @@ class Parser extends Tokenizer implements ParserInterface
         array $variableReferences,
         /** @var Directive[] $directives */
         array $directives,
-        /** @var FieldInterface[]|FragmentReference[]|TypedFragmentReference[] */
+        /** @var FieldInterface[]|FragmentInterface[] */
         array $fields,
         Location $location,
     ) {
@@ -173,7 +173,7 @@ class Parser extends Tokenizer implements ParserInterface
         array $variableReferences,
         /** @var Directive[] $directives */
         array $directives,
-        /** @var FieldInterface[]|FragmentReference[]|TypedFragmentReference[] */
+        /** @var FieldInterface[]|FragmentInterface[] */
         array $fields,
         Location $location,
     ) {
@@ -433,7 +433,7 @@ class Parser extends Tokenizer implements ParserInterface
 
     /**
      * @param Argument[] $arguments
-     * @param FieldInterface[]|FragmentReference[]|TypedFragmentReference[] $fields
+     * @param FieldInterface[]|FragmentInterface[] $fields
      * @param Directive[] $directives
      */
     protected function createRelationalField(

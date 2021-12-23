@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
-use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
-use PoPBackbone\GraphQLParser\Parser\Ast\FragmentInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
 class RelationalField extends AbstractAst implements FieldInterface
@@ -13,12 +11,12 @@ class RelationalField extends AbstractAst implements FieldInterface
     use AstArgumentsTrait;
     use AstDirectivesTrait;
 
-    /** @var FieldInterface[]|FragmentReference[]|TypedFragmentReference[] */
+    /** @var FieldInterface[]|FragmentInterface[] */
     protected array $fields = [];
 
     /**
      * @param Argument[] $arguments
-     * @param FieldInterface[]|FragmentReference[]|TypedFragmentReference[] $fields
+     * @param FieldInterface[]|FragmentInterface[] $fields
      * @param Directive[] $directives
      */
     public function __construct(
@@ -41,7 +39,7 @@ class RelationalField extends AbstractAst implements FieldInterface
     }
 
     /**
-     * @return FieldInterface[]|FragmentInterface[]|TypedFragmentReference[]
+     * @return FieldInterface[]|FragmentInterface[]
      */
     public function getFields(): array
     {
@@ -54,7 +52,7 @@ class RelationalField extends AbstractAst implements FieldInterface
     }
 
     /**
-     * @param FieldInterface[]|FragmentReference[]|TypedFragmentReference[] $fields
+     * @param FieldInterface[]|FragmentInterface[] $fields
      */
     public function setFields(array $fields): void
     {
