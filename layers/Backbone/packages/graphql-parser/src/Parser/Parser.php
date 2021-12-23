@@ -33,7 +33,7 @@ class Parser extends Tokenizer implements ParserInterface
      */
     private array $data = [];
 
-    public function parse(string $source): ParsedData
+    public function parse(string $source): Document
     {
         $this->init($source);
 
@@ -59,7 +59,7 @@ class Parser extends Tokenizer implements ParserInterface
             }
         }
 
-        return new ParsedData(
+        return new Document(
             $this->data['operations'],
             $this->data['fragments'],
         );

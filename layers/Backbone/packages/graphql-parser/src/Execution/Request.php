@@ -12,7 +12,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Mutation;
 use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
-use PoPBackbone\GraphQLParser\Parser\ParsedData;
+use PoPBackbone\GraphQLParser\Parser\Document;
 
 class Request implements RequestInterface
 {
@@ -35,10 +35,10 @@ class Request implements RequestInterface
     private array $fragmentReferences = [];
 
     public function process(
-        ParsedData|array $data,
+        Document|array $data,
         array $variableValues = [],
     ): self {
-        if ($data instanceof ParsedData) {
+        if ($data instanceof Document) {
             $data = $data->toArray();
         }
 

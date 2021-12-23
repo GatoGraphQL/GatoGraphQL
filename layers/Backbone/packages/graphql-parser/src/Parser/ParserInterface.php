@@ -8,7 +8,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
 
 interface ParserInterface
 {
-    public function parse(string $source): ParsedData;
+    public function parse(string $source): Document;
 
     /**
      * @param string|int|float|bool|null $value

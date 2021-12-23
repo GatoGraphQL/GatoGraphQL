@@ -7,7 +7,7 @@ namespace PoPBackbone\GraphQLParser\Parser;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 
-class ParsedData
+class Document
 {
     public function __construct(
         /** @var OperationInterface[] */

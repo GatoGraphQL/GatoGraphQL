@@ -12,7 +12,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Mutation;
 use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
-use PoPBackbone\GraphQLParser\Parser\ParsedData;
+use PoPBackbone\GraphQLParser\Parser\Document;
 
 interface RequestInterface
 {
@@ -22,7 +22,7 @@ interface RequestInterface
      * @throws InvalidRequestException
      */
     public function process(
-        ParsedData|array $data,
+        Document|array $data,
         array $variableValues = [],
     ): self;
 
