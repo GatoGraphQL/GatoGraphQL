@@ -11,12 +11,12 @@ class TypedFragmentReference extends AbstractAst implements FragmentInterface, W
     use AstDirectivesTrait;
 
     /**
-     * @param FieldInterface[] $fields
+     * @param FieldInterface[]|FragmentInterface[] $fieldOrFragmentReferences
      * @param Directive[] $directives
      */
     public function __construct(
         protected string $typeName,
-        protected array $fields,
+        protected array $fieldOrFragmentReferences,
         array $directives,
         Location $location,
     ) {
@@ -25,19 +25,19 @@ class TypedFragmentReference extends AbstractAst implements FragmentInterface, W
     }
 
     /**
-     * @return FieldInterface[]
+     * @return FieldInterface[]|FragmentInterface[]
      */
-    public function getFields(): array
+    public function getFieldOrFragmentReferences(): array
     {
-        return $this->fields;
+        return $this->fieldOrFragmentReferences;
     }
 
     /**
-     * @param FieldInterface[] $fields
+     * @param FieldInterface[]|FragmentInterface[] $fieldOrFragmentReferences
      */
-    public function setFields(array $fields): void
+    public function setFieldOrFragmentReferences(array $fieldOrFragmentReferences): void
     {
-        $this->fields = $fields;
+        $this->fieldOrFragmentReferences = $fieldOrFragmentReferences;
     }
 
     public function getTypeName(): string
