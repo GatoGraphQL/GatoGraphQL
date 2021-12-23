@@ -88,7 +88,6 @@ class Parser extends Tokenizer implements ParserInterface
         $operationName = null;
         $variables = [];
         $this->data['variables'] = [];
-        $this->data['variableReferences'] = [];
 
         $isShorthandQuery = $this->match(Token::TYPE_LBRACE);
 
@@ -139,10 +138,10 @@ class Parser extends Tokenizer implements ParserInterface
         $this->expect(Token::TYPE_RBRACE);
 
         if ($type === Token::TYPE_MUTATION) {
-            return $this->createMutationOperation($operationName, $variables, $directives, $fieldOrFragmentReferences, $this->data['variableReferences'], $operationLocation);
+            return $this->createMutationOperation($operationName, $variables, $directives, $fieldOrFragmentReferences, $operationLocation);
         }
 
-        return $this->createQueryOperation($operationName, $variables, $directives, $fieldOrFragmentReferences, $this->data['variableReferences'], $operationLocation);
+        return $this->createQueryOperation($operationName, $variables, $directives, $fieldOrFragmentReferences, $operationLocation);
     }
 
     public function createQueryOperation(
@@ -153,11 +152,9 @@ class Parser extends Tokenizer implements ParserInterface
         array $directives,
         /** @var FieldInterface[]|FragmentInterface[] */
         array $fieldOrFragmentReferences,
-        /** @var VariableReference[] */
-        array $variableReferences,
         Location $location,
     ) {
-        return new QueryOperation($name, $variables, $directives, $fieldOrFragmentReferences, $variableReferences, $location);
+        return new QueryOperation($name, $variables, $directives, $fieldOrFragmentReferences, $location);
     }
 
     public function createMutationOperation(
@@ -168,11 +165,9 @@ class Parser extends Tokenizer implements ParserInterface
         array $directives,
         /** @var FieldInterface[]|FragmentInterface[] */
         array $fieldOrFragmentReferences,
-        /** @var VariableReference[] */
-        array $variableReferences,
         Location $location,
     ) {
-        return new MutationOperation($name, $variables, $directives, $fieldOrFragmentReferences, $variableReferences, $location);
+        return new MutationOperation($name, $variables, $directives, $fieldOrFragmentReferences, $location);
     }
 
     /**
@@ -320,15 +315,11 @@ class Parser extends Tokenizer implements ParserInterface
                 $variable->setUsed(true);
             }
 
-            $variableReference = $this->createVariableReference(
+            return $this->createVariableReference(
                 $name,
                 $variable,
                 $this->getTokenLocation($startToken)
             );
-
-            $this->data['variableReferences'][] = $variableReference;
-
-            return $variableReference;
         }
 
         throw $this->createUnexpectedException($this->peek());

@@ -18,8 +18,6 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         array $directives,
         /** @var FieldInterface[]|FragmentInterface[] */
         protected array $fieldOrFragmentReferences,
-        /** @var VariableReference[] */
-        protected array $variableReferences,
         Location $location,
     ) {
         parent::__construct($location);
@@ -37,14 +35,6 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     public function getVariables(): array
     {
         return $this->variables;
-    }
-
-    /**
-     * @return VariableReference[]
-     */
-    public function getVariableReferences(): array
-    {
-        return $this->variableReferences;
     }
 
     /**
