@@ -881,7 +881,7 @@ GRAPHQL;
             }
         ');
         /** @var Variable $var */
-        $var = $document->getVariables()[0];
+        $var = $document->getOperations()[0]->getVariables()[0];
         $this->assertTrue($var->hasDefaultValue());
         $this->assertEquals('small', $var->getDefaultValue()->getValue());
         $this->assertEquals('small', $var->getValue()->getValue());
@@ -896,7 +896,7 @@ GRAPHQL;
             }
         ');
         /** @var Variable $var */
-        $var = $document->getVariables()[0];
+        $var = $document->getOperations()[0]->getVariables()[0];
         $this->assertTrue($var->hasDefaultValue());
         $this->assertNull($var->getDefaultValue()->getValue());
         $this->assertNull($var->getValue()->getValue());
