@@ -91,6 +91,7 @@ class Parser extends Tokenizer implements ParserInterface
         $operation  = null;
         $directives = [];
         $operationName = null;
+        $variables = [];
         $this->data['variables'] = [];
 
         $isShorthandQuery = $this->match(Token::TYPE_LBRACE);
@@ -103,7 +104,7 @@ class Parser extends Tokenizer implements ParserInterface
             $operationLocation = $this->getTokenLocation($operationToken);
 
             if ($this->match(Token::TYPE_LPAREN)) {
-                $this->parseVariables();
+                $variables = $this->parseVariables();
             }
 
             if ($this->match(Token::TYPE_AT)) {
@@ -142,10 +143,10 @@ class Parser extends Tokenizer implements ParserInterface
         $this->expect(Token::TYPE_RBRACE);
 
         if ($type === Token::TYPE_MUTATION) {
-            return $this->createMutationOperation($operationName, $this->data['variables'], $directives, $fields, $operationLocation);
+            return $this->createMutationOperation($operationName, $variables, $directives, $fields, $operationLocation);
         }
 
-        return $this->createQueryOperation($operationName, $this->data['variables'], $directives, $fields, $operationLocation);
+        return $this->createQueryOperation($operationName, $variables, $directives, $fields, $operationLocation);
     }
 
     public function createQueryOperation(
@@ -204,8 +205,13 @@ class Parser extends Tokenizer implements ParserInterface
         return $fields;
     }
 
-    protected function parseVariables(): void
+    /**
+     * @return Variable[]
+     */
+    protected function parseVariables(): array
     {
+        $variables = [];
+
         $this->eat(Token::TYPE_LPAREN);
 
         while (!$this->match(Token::TYPE_RPAREN) && !$this->end()) {
@@ -255,9 +261,12 @@ class Parser extends Tokenizer implements ParserInterface
             }
 
             $this->data['variables'][] = $variable;
+            $variables[] = $variable;
         }
 
         $this->expect(Token::TYPE_RPAREN);
+
+        return $variables;
     }
 
     protected function getTokenLocation(Token $token): Location
