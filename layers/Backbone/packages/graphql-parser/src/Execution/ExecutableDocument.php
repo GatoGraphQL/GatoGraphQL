@@ -42,9 +42,11 @@ class ExecutableDocument implements ExecutableDocumentInterface
         }
 
         // Validate all variables are satisfied
-        foreach ($operationsToExecute as $operation) {
-            $this->validateOperationVariables($operation);
-        }
+        $this->validateOperationVariables($operationsToExecute);
+        $this->assertFragmentReferencesValid($operationsToExecute);
+        $this->assetFragmentsUsed($operationsToExecute);
+        $this->assertAllVariablesExists($operationsToExecute);
+        $this->assertAllVariablesUsed($operationsToExecute);
 
         // Inject the variable values into the objects
         foreach ($operationsToExecute as $operation) {
@@ -56,30 +58,33 @@ class ExecutableDocument implements ExecutableDocumentInterface
      * Validate that all referenced variable are provided a value,
      * or they have a default value. Otherwise, throw an exception.
      *
+     * @param OperationInterface[] $operations
      * @throws InvalidRequestException
      */
-    protected function validateOperationVariables(OperationInterface $operation): void
+    protected function validateOperationVariables(array $operations): void
     {
-        foreach ($operation->getVariableReferences() as $variableReference) {
-            $variable = $variableReference->getVariable();
-            /**
-             * If $variable is null, then it was not declared in the operation arguments
-             * @see https://graphql.org/learn/queries/#variables
-             */
-            if ($variable === null) {
-                throw new InvalidRequestException(
-                    $this->getVariableHasntBeenDeclaredErrorMessage($variableReference->getName()),
-                    $variableReference->getLocation()
-                );
-            }
-            if (array_key_exists($variableReference->getName(), $this->variableValues)) {
-                continue;
-            }
-            if (!$variable->hasDefaultValue()) {
-                throw new InvalidRequestException(
-                    $this->getVariableHasntBeenSubmittedErrorMessage($variableReference->getName()),
-                    $variableReference->getLocation()
-                );
+        foreach ($operations as $operation) {
+            foreach ($operation->getVariableReferences() as $variableReference) {
+                $variable = $variableReference->getVariable();
+                /**
+                 * If $variable is null, then it was not declared in the operation arguments
+                 * @see https://graphql.org/learn/queries/#variables
+                 */
+                if ($variable === null) {
+                    throw new InvalidRequestException(
+                        $this->getVariableHasntBeenDeclaredErrorMessage($variableReference->getName()),
+                        $variableReference->getLocation()
+                    );
+                }
+                if (array_key_exists($variableReference->getName(), $this->variableValues)) {
+                    continue;
+                }
+                if (!$variable->hasDefaultValue()) {
+                    throw new InvalidRequestException(
+                        $this->getVariableHasntBeenSubmittedErrorMessage($variableReference->getName()),
+                        $variableReference->getLocation()
+                    );
+                }
             }
         }
     }
@@ -106,5 +111,105 @@ class ExecutableDocument implements ExecutableDocumentInterface
             $variableReference->getVariable()->setValue($variableValue);
             $variableReference->setValue($variableValue);
         }
+    }
+
+    /**
+     * @param OperationInterface[] $operations
+     * @throws InvalidRequestException
+     */
+    protected function assetFragmentsUsed(array $operations): void
+    {
+        foreach ($operations as $operation) {
+            foreach ($operation->getFragmentReferences() as $fragmentReference) {
+                $this->document->getFragment($fragmentReference->getName())?->setUsed(true);
+            }
+        }
+
+        foreach ($this->document->getFragments() as $fragment) {
+            if ($fragment->isUsed()) {
+                continue;
+            }
+            throw new InvalidRequestException(
+                $this->getFragmentNotUsedErrorMessage($fragment->getName()),
+                $fragment->getLocation()
+            );
+        }
+    }
+
+    protected function getFragmentNotUsedErrorMessage(string $fragmentName): string
+    {
+        return sprintf('Fragment \'%s\' not used', $fragmentName);
+    }
+
+    /**
+     * @param OperationInterface[] $operations
+     * @throws InvalidRequestException
+     */
+    protected function assertFragmentReferencesValid(array $operations): void
+    {
+        foreach ($operations as $operation) {
+            foreach ($operation->getFragmentReferences() as $fragmentReference) {
+                if ($this->document->getFragment($fragmentReference->getName()) !== null) {
+                    continue;
+                }
+                throw new InvalidRequestException(
+                    $this->getFragmentNotDefinedInQueryErrorMessage($fragmentReference->getName()),
+                    $fragmentReference->getLocation()
+                );
+            }
+        }
+    }
+
+    protected function getFragmentNotDefinedInQueryErrorMessage(string $fragmentName): string
+    {
+        return sprintf('Fragment \'%s\' not defined in query', $fragmentName);
+    }
+
+    /**
+     * @param OperationInterface[] $operations
+     * @throws InvalidRequestException
+     */
+    protected function assertAllVariablesExists(array $operations): void
+    {
+        foreach ($operations as $operation) {
+            foreach ($operation->getVariableReferences() as $variableReference) {
+                if ($variableReference->getVariable()) {
+                    continue;
+                }
+                throw new InvalidRequestException(
+                    $this->getVariableDoesNotExistErrorMessage($variableReference->getName()),
+                    $variableReference->getLocation()
+                );
+            }
+        }
+    }
+
+    protected function getVariableDoesNotExistErrorMessage(string $variableName): string
+    {
+        return sprintf('Variable \'%s\' does not exist', $variableName);
+    }
+
+    /**
+     * @param OperationInterface[] $operations
+     * @throws InvalidRequestException
+     */
+    protected function assertAllVariablesUsed(array $operations): void
+    {
+        foreach ($operations as $operation) {
+            foreach ($operation->getVariables() as $variable) {
+                if ($variable->isUsed()) {
+                    continue;
+                }
+                throw new InvalidRequestException(
+                    $this->getVariableNotUsedErrorMessage($variable->getName()),
+                    $variable->getLocation()
+                );
+            }
+        }
+    }
+
+    protected function getVariableNotUsedErrorMessage(string $variableName): string
+    {
+        return sprintf('Variable \'%s\' not used', $variableName);
     }
 }

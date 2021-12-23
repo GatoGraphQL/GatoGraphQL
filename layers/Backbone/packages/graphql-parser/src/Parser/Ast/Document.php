@@ -43,4 +43,15 @@ class Document
             'fragments'          => $this->getFragments(),
         ];
     }
+
+    public function getFragment(string $name): ?Fragment
+    {
+        foreach ($this->fragments as $fragment) {
+            if ($fragment->getName() === $name) {
+                return $fragment;
+            }
+        }
+
+        return null;
+    }
 }
