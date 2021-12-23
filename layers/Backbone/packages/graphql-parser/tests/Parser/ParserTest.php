@@ -470,18 +470,28 @@ GRAPHQL;
                 'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
                 [
                     'operations'            => [
-                        new RelationalField(
-                            'query',
-                            null,
+                        new QueryOperation(
+                            '', 
                             [
-                                new Argument('teas', new VariableReference('variable', $variable, new Location(1, 39)), new Location(1, 33)),
-                            ],
-                            [
-                                new Field('name', 'alias', [], [], new Location(1, 60)),
+                                new Variable('variable', 'Int', false, false, false, new Location(1, 7)),
                             ],
                             [],
-                            new Location(1, 25)
-                        ),
+                            [
+                                new RelationalField(
+                                    'query',
+                                    null,
+                                    [
+                                        new Argument('teas', new VariableReference('variable', $variable, new Location(1, 39)), new Location(1, 33)),
+                                    ],
+                                    [
+                                        new Field('name', 'alias', [], [], new Location(1, 60)),
+                                    ],
+                                    [],
+                                    new Location(1, 25)
+                                ),
+                            ],
+                            new Location(1, 0)
+                        )
                     ],
                     'fragments'          => [],
                     'variables'          => [
@@ -493,7 +503,9 @@ GRAPHQL;
                 '{ query { alias: name } }',
                 [
                     'operations'            => [
-                        new RelationalField('query', null, [], [new Field('name', 'alias', [], [], new Location(1, 18))], [], new Location(1, 3)),
+                        new QueryOperation('', [], [], [
+                            new RelationalField('query', null, [], [new Field('name', 'alias', [], [], new Location(1, 18))], [], new Location(1, 3)),
+                        ], new Location(1, 0)),
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -572,12 +584,14 @@ GRAPHQL;
                 '{ film(id: 1 filmID: 2) { title } }',
                 [
                     'operations'            => [
-                        new RelationalField('film', null, [
-                            new Argument('id', new Literal(1, new Location(1, 12)), new Location(1, 8)),
-                            new Argument('filmID', new Literal(2, new Location(1, 22)), new Location(1, 14)),
-                        ], [
-                            new Field('title', null, [], [], new Location(1, 27)),
-                        ], [], new Location(1, 3)),
+                        new QueryOperation('', [], [], [
+                            new RelationalField('film', null, [
+                                new Argument('id', new Literal(1, new Location(1, 12)), new Location(1, 8)),
+                                new Argument('filmID', new Literal(2, new Location(1, 22)), new Location(1, 14)),
+                            ], [
+                                new Field('title', null, [], [], new Location(1, 27)),
+                            ], [], new Location(1, 3))
+                        ], new Location(1, 0)),
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -587,11 +601,13 @@ GRAPHQL;
                 '{ test (id: -5) { id } } ',
                 [
                     'operations'            => [
-                        new RelationalField('test', null, [
-                            new Argument('id', new Literal(-5, new Location(1, 13)), new Location(1, 9)),
-                        ], [
-                            new Field('id', null, [], [], new Location(1, 19)),
-                        ], [], new Location(1, 3)),
+                        new QueryOperation('', [], [], [
+                            new RelationalField('test', null, [
+                                new Argument('id', new Literal(-5, new Location(1, 13)), new Location(1, 9)),
+                            ], [
+                                new Field('id', null, [], [], new Location(1, 19)),
+                            ], [], new Location(1, 3)),
+                        ], new Location(1, 0))
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -601,11 +617,13 @@ GRAPHQL;
                 "{ test (id: -5) \r\n { id } } ",
                 [
                     'operations'            => [
-                        new RelationalField('test', null, [
-                            new Argument('id', new Literal(-5, new Location(1, 13)), new Location(1, 9)),
-                        ], [
-                            new Field('id', null, [], [], new Location(2, 4)),
-                        ], [], new Location(1, 3)),
+                        new QueryOperation('', [], [], [
+                            new RelationalField('test', null, [
+                                new Argument('id', new Literal(-5, new Location(1, 13)), new Location(1, 9)),
+                            ], [
+                                new Field('id', null, [], [], new Location(2, 4)),
+                            ], [], new Location(1, 3)),
+                        ], new Location(1, 0))
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -620,12 +638,14 @@ GRAPHQL;
                 }',
                 [
                     'operations'            => [
-                        new RelationalField('hero', null, [
-                            new Argument('episode', new Literal('EMPIRE', new Location(2, 33)), new Location(2, 24)),
-                        ], [
-                            new Field('__typename', null, [], [], new Location(3, 21)),
-                            new Field('name', null, [], [], new Location(4, 21)),
-                        ], [], new Location(2, 19)),
+                        new QueryOperation('CheckTypeOfLuke', [], [], [
+                            new RelationalField('hero', null, [
+                                new Argument('episode', new Literal('EMPIRE', new Location(2, 33)), new Location(2, 24)),
+                            ], [
+                                new Field('__typename', null, [], [], new Location(3, 21)),
+                                new Field('name', null, [], [], new Location(4, 21)),
+                            ], [], new Location(2, 19)),
+                        ], new Location(1, 0))
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -635,10 +655,12 @@ GRAPHQL;
                 '{ test { __typename, id } }',
                 [
                     'operations'            => [
-                        new RelationalField('test', null, [], [
-                            new Field('__typename', null, [], [], new Location(1, 10)),
-                            new Field('id', null, [], [], new Location(1, 22)),
-                        ], [], new Location(1, 3)),
+                        new QueryOperation('', [], [], [
+                            new RelationalField('test', null, [], [
+                                new Field('__typename', null, [], [], new Location(1, 10)),
+                                new Field('id', null, [], [], new Location(1, 22)),
+                            ], [], new Location(1, 3)),
+                        ], new Location(1, 0))
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -684,7 +706,9 @@ GRAPHQL;
                 '{ test { ...userDataFragment } } fragment userDataFragment on User { id, name, email }',
                 [
                     'operations'            => [
-                        new RelationalField('test', null, [], [new FragmentReference('userDataFragment', new Location(1, 13))], [], new Location(1, 3)),
+                        new QueryOperation('', [], [], [
+                            new RelationalField('test', null, [], [new FragmentReference('userDataFragment', new Location(1, 13))], [], new Location(1, 3)),
+                        ], new Location(1, 0))
                     ],
                     'fragments'          => [
                         new Fragment('userDataFragment', 'User', [], [
@@ -700,21 +724,23 @@ GRAPHQL;
                 '{ user (id: 10, name: "max", float: 123.123 ) { id, name } }',
                 [
                     'operations'            => [
-                        new RelationalField(
-                            'user',
-                            null,
-                            [
-                                new Argument('id', new Literal('10', new Location(1, 13)), new Location(1, 9)),
-                                new Argument('name', new Literal('max', new Location(1, 24)), new Location(1, 17)),
-                                new Argument('float', new Literal('123.123', new Location(1, 37)), new Location(1, 30)),
-                            ],
-                            [
-                                new Field('id', null, [], [], new Location(1, 49)),
-                                new Field('name', null, [], [], new Location(1, 53)),
-                            ],
-                            [],
-                            new Location(1, 3)
-                        ),
+                        new QueryOperation('', [], [], [
+                            new RelationalField(
+                                'user',
+                                null,
+                                [
+                                    new Argument('id', new Literal('10', new Location(1, 13)), new Location(1, 9)),
+                                    new Argument('name', new Literal('max', new Location(1, 24)), new Location(1, 17)),
+                                    new Argument('float', new Literal('123.123', new Location(1, 37)), new Location(1, 30)),
+                                ],
+                                [
+                                    new Field('id', null, [], [], new Location(1, 49)),
+                                    new Field('name', null, [], [], new Location(1, 53)),
+                                ],
+                                [],
+                                new Location(1, 3)
+                            ),
+                        ], new Location(1, 0))
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -724,18 +750,20 @@ GRAPHQL;
                 '{ allUsers : users ( id: [ 1, 2, 3] ) { id } }',
                 [
                     'operations'            => [
-                        new RelationalField(
-                            'users',
-                            'allUsers',
-                            [
-                                new Argument('id', new InputList([1, 2, 3], new Location(1, 26)), new Location(1, 22)),
-                            ],
-                            [
-                                new Field('id', null, [], [], new Location(1, 41)),
-                            ],
-                            [],
-                            new Location(1, 14)
-                        ),
+                        new QueryOperation('', [], [], [
+                            new RelationalField(
+                                'users',
+                                'allUsers',
+                                [
+                                    new Argument('id', new InputList([1, 2, 3], new Location(1, 26)), new Location(1, 22)),
+                                ],
+                                [
+                                    new Field('id', null, [], [], new Location(1, 41)),
+                                ],
+                                [],
+                                new Location(1, 14)
+                            ),
+                        ], new Location(1, 0))
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -745,18 +773,20 @@ GRAPHQL;
                 '{ allUsers : users ( id: [ 1, "2", true, null] ) { id } }',
                 [
                     'operations'            => [
-                        new RelationalField(
-                            'users',
-                            'allUsers',
-                            [
-                                new Argument('id', new InputList([1, "2", true, null], new Location(1, 26)), new Location(1, 22)),
-                            ],
-                            [
-                                new Field('id', null, [], [], new Location(1, 52)),
-                            ],
-                            [],
-                            new Location(1, 14)
-                        ),
+                        new QueryOperation('', [], [], [
+                            new RelationalField(
+                                'users',
+                                'allUsers',
+                                [
+                                    new Argument('id', new InputList([1, "2", true, null], new Location(1, 26)), new Location(1, 22)),
+                                ],
+                                [
+                                    new Field('id', null, [], [], new Location(1, 52)),
+                                ],
+                                [],
+                                new Location(1, 14)
+                            )
+                        ], new Location(1, 0))
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -766,26 +796,28 @@ GRAPHQL;
                 '{ allUsers : users ( object: { "a": 123, "d": "asd",  "b" : [ 1, 2, 4 ], "c": { "a" : 123, "b":  "asd" } } ) { id } }',
                 [
                     'operations'            => [
-                        new RelationalField(
-                            'users',
-                            'allUsers',
-                            [
-                                new Argument('object', new InputObject((object) [
-                                    'a' => 123,
-                                    'd' => 'asd',
-                                    'b' => [1, 2, 4],
-                                    'c' => new InputObject((object) [
+                        new QueryOperation('', [], [], [
+                            new RelationalField(
+                                'users',
+                                'allUsers',
+                                [
+                                    new Argument('object', new InputObject((object) [
                                         'a' => 123,
-                                        'b' => 'asd',
-                                    ], new Location(1, 79)),
-                                ], new Location(1, 30)), new Location(1, 22)),
-                            ],
-                            [
-                                new Field('id', null, [], [], new Location(1, 112)),
-                            ],
-                            [],
-                            new Location(1, 14)
-                        ),
+                                        'd' => 'asd',
+                                        'b' => [1, 2, 4],
+                                        'c' => new InputObject((object) [
+                                            'a' => 123,
+                                            'b' => 'asd',
+                                        ], new Location(1, 79)),
+                                    ], new Location(1, 30)), new Location(1, 22)),
+                                ],
+                                [
+                                    new Field('id', null, [], [], new Location(1, 112)),
+                                ],
+                                [],
+                                new Location(1, 14)
+                            ),
+                        ], new Location(1, 0))
                     ],
                     'fragments'          => [],
                     'variables'          => [],
