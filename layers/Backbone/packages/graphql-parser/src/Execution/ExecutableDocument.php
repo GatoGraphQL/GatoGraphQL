@@ -12,11 +12,14 @@ use PoPBackbone\GraphQLParser\Parser\Location;
 
 class ExecutableDocument implements ExecutableDocumentInterface
 {
+    private string $operationName = null;
+
     public function __construct(
         private Document $document,
         private array $variableValues = [],
-        private string $operationName = '',
+        ?string $operationName = null,
     ) {
+        $this->operationName = $operationName ?? '';
     }
 
     /**
