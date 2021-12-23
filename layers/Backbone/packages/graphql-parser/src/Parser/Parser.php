@@ -62,9 +62,6 @@ class Parser extends Tokenizer implements ParserInterface
         return new ParsedData(
             $this->data['operations'],
             $this->data['fragments'],
-            $this->data['fragmentReferences'],
-            $this->data['variables'],
-            $this->data['variableReferences'],
         );
     }
 
@@ -78,11 +75,8 @@ class Parser extends Tokenizer implements ParserInterface
         $this->initTokenizer($source);
 
         $this->data = [
-            'operations'    => [],
+            'operations'         => [],
             'fragments'          => [],
-            'fragmentReferences' => [],
-            'variables'          => [],
-            'variableReferences' => [],
         ];
     }
 
@@ -92,7 +86,9 @@ class Parser extends Tokenizer implements ParserInterface
         $directives = [];
         $operationName = null;
         $variables = [];
+        $this->data['fragmentReferences'] = [];
         $this->data['variables'] = [];
+        $this->data['variableReferences'] = [];
 
         $isShorthandQuery = $this->match(Token::TYPE_LBRACE);
 
@@ -143,36 +139,44 @@ class Parser extends Tokenizer implements ParserInterface
         $this->expect(Token::TYPE_RBRACE);
 
         if ($type === Token::TYPE_MUTATION) {
-            return $this->createMutationOperation($operationName, $variables, $directives, $fields, $operationLocation);
+            return $this->createMutationOperation($operationName, $this->data['fragmentReferences'], $variables, $this->data['variableReferences'], $directives, $fields, $operationLocation);
         }
 
-        return $this->createQueryOperation($operationName, $variables, $directives, $fields, $operationLocation);
+        return $this->createQueryOperation($operationName, $this->data['fragmentReferences'], $variables, $this->data['variableReferences'], $directives, $fields, $operationLocation);
     }
 
     public function createQueryOperation(
         string $name,
+        /** @var FragmentReference[] */
+        array $fragmentReferences,
         /** @var Variable[] */
         array $variables,
+        /** @var VariableReference[] */
+        array $variableReferences,
         /** @var Directive[] $directives */
         array $directives,
         /** @var Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] */
         array $fields,
         Location $location,
     ) {
-        return new QueryOperation($name, $variables, $directives, $fields, $location);
+        return new QueryOperation($name, $fragmentReferences, $variables, $variableReferences, $directives, $fields, $location);
     }
 
     public function createMutationOperation(
         string $name,
+        /** @var FragmentReference[] */
+        array $fragmentReferences,
         /** @var Variable[] */
         array $variables,
+        /** @var VariableReference[] */
+        array $variableReferences,
         /** @var Directive[] $directives */
         array $directives,
         /** @var Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] */
         array $fields,
         Location $location,
     ) {
-        return new MutationOperation($name, $variables, $directives, $fields, $location);
+        return new MutationOperation($name, $fragmentReferences, $variables, $variableReferences, $directives, $fields, $location);
     }
 
     /**

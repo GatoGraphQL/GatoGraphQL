@@ -28,8 +28,8 @@ class Request implements RequestInterface
     /** @var VariableReference[] */
     private array $variableReferences = [];
 
-    // /** @var Variable[] */
-    // private array $queryVariables = [];
+    /** @var Variable[] */
+    private array $queryVariables = [];
 
     /** @var FragmentReference[] */
     private array $fragmentReferences = [];
@@ -54,41 +54,41 @@ class Request implements RequestInterface
             $this->addFragmentReferences($data['fragmentReferences']);
         }
 
-        // if (array_key_exists('variables', $data)) {
-        //     $this->addQueryVariables($data['variables']);
-        // }
+        if (array_key_exists('variables', $data)) {
+            $this->addQueryVariables($data['variables']);
+        }
 
-        // if (array_key_exists('variableReferences', $data)) {
-        //     /** @var VariableReference[] */
-        //     $variableReferences = $data['variableReferences'];
-        //     foreach ($variableReferences as $ref) {
-        //         if (!array_key_exists($ref->getName(), $variableValues)) {
-        //             $variable = $ref->getVariable();
-        //             /**
-        //              * If $variable is null, then it was not declared in the operation arguments
-        //              * @see https://graphql.org/learn/queries/#variables
-        //              */
-        //             if ($variable === null) {
-        //                 throw new InvalidRequestException(
-        //                     $this->getVariableHasntBeenDeclaredErrorMessage($ref->getName()),
-        //                     $ref->getLocation()
-        //                 );
-        //             }
-        //             if ($variable->hasDefaultValue()) {
-        //                 $variableValues[$variable->getName()] = $variable->getDefaultValue()->getValue();
-        //                 continue;
-        //             }
-        //             throw new InvalidRequestException(
-        //                 $this->getVariableHasntBeenSubmittedErrorMessage($ref->getName()),
-        //                 $ref->getLocation()
-        //             );
-        //         }
-        //     }
+        if (array_key_exists('variableReferences', $data)) {
+            /** @var VariableReference[] */
+            $variableReferences = $data['variableReferences'];
+            foreach ($variableReferences as $ref) {
+                if (!array_key_exists($ref->getName(), $variableValues)) {
+                    $variable = $ref->getVariable();
+                    /**
+                     * If $variable is null, then it was not declared in the operation arguments
+                     * @see https://graphql.org/learn/queries/#variables
+                     */
+                    if ($variable === null) {
+                        throw new InvalidRequestException(
+                            $this->getVariableHasntBeenDeclaredErrorMessage($ref->getName()),
+                            $ref->getLocation()
+                        );
+                    }
+                    if ($variable->hasDefaultValue()) {
+                        $variableValues[$variable->getName()] = $variable->getDefaultValue()->getValue();
+                        continue;
+                    }
+                    throw new InvalidRequestException(
+                        $this->getVariableHasntBeenSubmittedErrorMessage($ref->getName()),
+                        $ref->getLocation()
+                    );
+                }
+            }
 
-        //     $this->addVariableReferences($variableReferences);
-        // }
+            $this->addVariableReferences($variableReferences);
+        }
 
-        // $this->setVariableValues($variableValues);
+        $this->setVariableValues($variableValues);
 
         return $this;
     }

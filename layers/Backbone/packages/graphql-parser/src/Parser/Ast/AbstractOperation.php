@@ -12,8 +12,12 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
 
     public function __construct(
         protected string $name,
+        /** @var FragmentReference[] */
+        protected array $fragmentReferences,
         /** @var Variable[] */
         protected array $variables,
+        /** @var VariableReference[] */
+        protected array $variableReferences,
         /** @var Directive[] $directives */
         array $directives,
         /** @var Field[]|Query[]|FragmentReference[]|TypedFragmentReference[] */
@@ -30,11 +34,27 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     }
 
     /**
+     * @return FragmentReference[]
+     */
+    public function getFragmentReferences(): array
+    {
+        return $this->fragmentReferences;
+    }
+
+    /**
      * @return Variable[]
      */
     public function getVariables(): array
     {
         return $this->variables;
+    }
+
+    /**
+     * @return VariableReference[]
+     */
+    public function getVariableReferences(): array
+    {
+        return $this->variableReferences;
     }
 
     /**
