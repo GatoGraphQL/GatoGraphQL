@@ -37,6 +37,23 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         return $this->variables;
     }
 
+    // @todo Calculate deep
+    // /**
+    //  * @return FragmentReference[]
+    //  */
+    // public function getFragmentReferences(): array
+    // {
+    //     return $this->fragmentReferences;
+    // }
+
+    // /**
+    //  * @return VariableReference[]
+    //  */
+    // public function getVariableReferences(): array
+    // {
+    //     return $this->variableReferences;
+    // }
+
     /**
      * @return FieldInterface[]|FragmentInterface[]
      */
