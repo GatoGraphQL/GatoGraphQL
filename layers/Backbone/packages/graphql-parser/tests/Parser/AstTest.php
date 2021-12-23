@@ -18,7 +18,6 @@ use PHPUnit\Framework\TestCase;
 
 class AstTest extends TestCase
 {
-
     public function testArgument()
     {
         $argument = new Argument('test', new Literal('test', new Location(1, 1)), new Location(1, 1));

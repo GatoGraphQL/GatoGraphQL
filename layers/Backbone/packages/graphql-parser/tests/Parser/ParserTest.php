@@ -30,8 +30,6 @@ class ParserTest extends TestCase
         $this->assertEquals([
             'queryOperations'    => [],
             'mutationOperations' => [],
-            'queries'            => [],
-            'mutations'          => [],
             'fragments'          => [],
             'fragmentReferences' => [],
             'variables'          => [],
@@ -72,15 +70,7 @@ GRAPHQL;
         $parsedData = $parser->parse($query);
 
         $this->assertEquals($parsedData->toArray(), [
-            'queryOperations'    => [
-                [
-                    'name' => null,
-                    'position' => 0,
-                    'numberItems' => 1
-                ]
-            ],
-            'mutationOperations' => [],
-            'queries'            => [
+            'queryOperations'            => [
                 new Query(
                     'authors',
                     null,
@@ -94,7 +84,7 @@ GRAPHQL;
                     new Location(5, 5)
                 ),
             ],
-            'mutations'          => [],
+            'mutationOperations'          => [],
             'fragments'          => [],
             'fragmentReferences' => [],
             'variables'          => [],
@@ -157,7 +147,7 @@ GRAPHQL;
         $this->assertEquals([
             new Query('foo', '', [], [], [], new Location(1, 3)),
             new Query('bar', '', [], [], [], new Location(1, 20)),
-        ], $parsedData->toArray()['queries']);
+        ], $parsedData->toArray()['queryOperations']);
     }
 
     public function testQueryWithNoFields()
@@ -165,12 +155,10 @@ GRAPHQL;
         $parser = new Parser();
         $parsedData   = $parser->parse('{ name }');
         $this->assertEquals([
-            'queryOperations'    => [],
-                    'mutationOperations' => [],
-                    'queries'            => [
+            'queryOperations'            => [
                 new Query('name', '', [], [], [], new Location(1, 3)),
             ],
-            'mutations'          => [],
+            'mutationOperations'          => [],
             'fragments'          => [],
             'fragmentReferences' => [],
             'variables'          => [],
@@ -183,15 +171,13 @@ GRAPHQL;
         $parser = new Parser();
         $parsedData   = $parser->parse('{ post, user { name } }');
         $this->assertEquals([
-            'queryOperations'    => [],
-                    'mutationOperations' => [],
-                    'queries'            => [
+            'queryOperations'            => [
                 new Query('post', null, [], [], [], new Location(1, 3)),
                 new Query('user', null, [], [
                     new Field('name', null, [], [], new Location(1, 16)),
                 ], [], new Location(1, 9)),
             ],
-            'mutations'          => [],
+            'mutationOperations'          => [],
             'fragments'          => [],
             'fragmentReferences' => [],
             'variables'          => [],
@@ -210,8 +196,8 @@ GRAPHQL;
                 }
             }');
         $this->assertEquals([
-            'queries'            => [],
-            'mutations'          => [],
+            'queryOperations'    => [],
+            'mutationOperations' => [],
             'fragments'          => [
                 new Fragment('FullType', '__Type', [], [
                     new Field('kind', null, [], [], new Location(3, 17)),
@@ -223,8 +209,6 @@ GRAPHQL;
             'fragmentReferences' => [],
             'variables'          => [],
             'variableReferences' => [],
-            'queryOperations'    => [],
-            'mutationOperations' => [],
         ], $parsedData->toArray());
     }
 
@@ -312,15 +296,7 @@ GRAPHQL;
         ');
 
         $this->assertEquals([
-            'queryOperations'    => [
-                [
-                    'name' => 'IntrospectionQuery',
-                    'position' => 0,
-                    'numberItems' => 1
-                ]
-            ],
-            'mutationOperations' => [],
-            'queries'            => [
+            'queryOperations'            => [
                 new Query('__schema', null, [], [
                     new Query('queryType', null, [], [
                         new Field('name', null, [], [], new Location(4, 33)),
@@ -343,7 +319,7 @@ GRAPHQL;
                     ], [], new Location(9, 21)),
                 ], [], new Location(3, 17)),
             ],
-            'mutations'          => [],
+            'mutationOperations'          => [],
             'fragments'          => [
                 new Fragment('FullType', '__Type', [], [
                     new Field('kind', null, [], [], new Location(23, 17)),
@@ -460,9 +436,7 @@ GRAPHQL;
         ');
 
         $this->assertEquals($parsedStructure->toArray(), [
-            'queryOperations'    => [],
-                    'mutationOperations' => [],
-                    'queries'            => [
+            'queryOperations'            => [
                 new Query(
                     'test',
                     'test',
@@ -475,7 +449,7 @@ GRAPHQL;
                     new Location(3, 23)
                 ),
             ],
-            'mutations'          => [],
+            'mutationOperations'          => [],
             'fragments'          => [],
             'fragmentReferences' => [],
             'variables'          => [],
@@ -491,15 +465,7 @@ GRAPHQL;
             [
                 'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
                 [
-                    'queryOperations'    => [
-                        [
-                            'name' => null,
-                            'position' => 0,
-                            'numberItems' => 1
-                        ]
-                    ],
-                    'mutationOperations' => [],
-                    'queries'            => [
+                    'queryOperations'            => [
                         new Query(
                             'query',
                             null,
@@ -513,7 +479,7 @@ GRAPHQL;
                             new Location(1, 25)
                         ),
                     ],
-                    'mutations'          => [],
+                    'mutationOperations'          => [],
                     'fragments'          => [],
                     'fragmentReferences' => [],
                     'variables'          => [
@@ -527,12 +493,10 @@ GRAPHQL;
             [
                 '{ query { alias: name } }',
                 [
-                    'queryOperations'    => [],
-                    'mutationOperations' => [],
-                    'queries'            => [
+                    'queryOperations'            => [
                         new Query('query', null, [], [new Field('name', 'alias', [], [], new Location(1, 18))], [], new Location(1, 3)),
                     ],
-                    'mutations'          => [],
+                    'mutationOperations'          => [],
                     'fragments'          => [],
                     'fragmentReferences' => [],
                     'variables'          => [],
@@ -542,10 +506,8 @@ GRAPHQL;
             [
                 'mutation { createUser ( email: "test@test.com", active: true ) { id } }',
                 [
-                    'queryOperations'    => [],
-                    'mutationOperations' => [],
-                    'queries'            => [],
-                    'mutations'          => [
+                    'queryOperations'            => [],
+                    'mutationOperations'          => [
                         new Mutation(
                             'createUser',
                             null,
@@ -569,10 +531,8 @@ GRAPHQL;
             [
                 'mutation { test : createUser (id: 4) }',
                 [
-                    'queryOperations'    => [],
-                    'mutationOperations' => [],
-                    'queries'            => [],
-                    'mutations'          => [
+                    'queryOperations'            => [],
+                    'mutationOperations'          => [
                         new Mutation(
                             'createUser',
                             'test',
@@ -611,9 +571,7 @@ GRAPHQL;
             [
                 '{ film(id: 1 filmID: 2) { title } }',
                 [
-                    'queryOperations'    => [],
-                    'mutationOperations' => [],
-                    'queries'            => [
+                    'queryOperations'            => [
                         new Query('film', null, [
                             new Argument('id', new Literal(1, new Location(1, 12)), new Location(1, 8)),
                             new Argument('filmID', new Literal(2, new Location(1, 22)), new Location(1, 14)),
@@ -621,7 +579,7 @@ GRAPHQL;
                             new Field('title', null, [], [], new Location(1, 27)),
                         ], [], new Location(1, 3)),
                     ],
-                    'mutations'          => [],
+                    'mutationOperations'          => [],
                     'fragments'          => [],
                     'fragmentReferences' => [],
                     'variables'          => [],
@@ -631,16 +589,14 @@ GRAPHQL;
             [
                 '{ test (id: -5) { id } } ',
                 [
-                    'queryOperations'    => [],
-                    'mutationOperations' => [],
-                    'queries'            => [
+                    'queryOperations'            => [
                         new Query('test', null, [
                             new Argument('id', new Literal(-5, new Location(1, 13)), new Location(1, 9)),
                         ], [
                             new Field('id', null, [], [], new Location(1, 19)),
                         ], [], new Location(1, 3)),
                     ],
-                    'mutations'          => [],
+                    'mutationOperations'          => [],
                     'fragments'          => [],
                     'fragmentReferences' => [],
                     'variables'          => [],
@@ -650,16 +606,14 @@ GRAPHQL;
             [
                 "{ test (id: -5) \r\n { id } } ",
                 [
-                    'queryOperations'    => [],
-                    'mutationOperations' => [],
-                    'queries'            => [
+                    'queryOperations'            => [
                         new Query('test', null, [
                             new Argument('id', new Literal(-5, new Location(1, 13)), new Location(1, 9)),
                         ], [
                             new Field('id', null, [], [], new Location(2, 4)),
                         ], [], new Location(1, 3)),
                     ],
-                    'mutations'          => [],
+                    'mutationOperations'          => [],
                     'fragments'          => [],
                     'fragmentReferences' => [],
                     'variables'          => [],
@@ -674,15 +628,7 @@ GRAPHQL;
                   }
                 }',
                 [
-                    'queryOperations'    => [
-                        [
-                            'name' => 'CheckTypeOfLuke',
-                            'position' => 0,
-                            'numberItems' => 1
-                        ]
-                    ],
-                    'mutationOperations' => [],
-                    'queries'            => [
+                    'queryOperations'            => [
                         new Query('hero', null, [
                             new Argument('episode', new Literal('EMPIRE', new Location(2, 33)), new Location(2, 24)),
                         ], [
@@ -690,7 +636,7 @@ GRAPHQL;
                             new Field('name', null, [], [], new Location(4, 21)),
                         ], [], new Location(2, 19)),
                     ],
-                    'mutations'          => [],
+                    'mutationOperations'          => [],
                     'fragments'          => [],
                     'fragmentReferences' => [],
                     'variables'          => [],
@@ -700,15 +646,13 @@ GRAPHQL;
             [
                 '{ test { __typename, id } }',
                 [
-                    'queryOperations'    => [],
-                    'mutationOperations' => [],
-                    'queries'            => [
+                    'queryOperations'            => [
                         new Query('test', null, [], [
                             new Field('__typename', null, [], [], new Location(1, 10)),
                             new Field('id', null, [], [], new Location(1, 22)),
                         ], [], new Location(1, 3)),
                     ],
-                    'mutations'          => [],
+                    'mutationOperations'          => [],
                     'fragments'          => [],
                     'fragmentReferences' => [],
                     'variables'          => [],
@@ -720,8 +664,6 @@ GRAPHQL;
                 [
                     'queryOperations'    => [],
                     'mutationOperations' => [],
-                    'queries'            => [],
-                    'mutations'          => [],
                     'fragments'          => [],
                     'fragmentReferences' => [],
                     'variables'          => [],
@@ -731,16 +673,8 @@ GRAPHQL;
             [
                 'query test {}',
                 [
-                    'queryOperations'    => [
-                        [
-                            'name' => 'test',
-                            'position' => 0,
-                            'numberItems' => 0
-                        ]
-                    ],
+                    'queryOperations'    => [],
                     'mutationOperations' => [],
-                    'queries'            => [],
-                    'mutations'          => [],
                     'fragments'          => [],
                     'fragmentReferences' => [],
                     'variables'          => [],
@@ -750,16 +684,8 @@ GRAPHQL;
             [
                 'query {}',
                 [
-                    'queryOperations'    => [
-                        [
-                            'name' => null,
-                            'position' => 0,
-                            'numberItems' => 0
-                        ]
-                    ],
+                    'queryOperations'    => [],
                     'mutationOperations' => [],
-                    'queries'            => [],
-                    'mutations'          => [],
                     'fragments'          => [],
                     'fragmentReferences' => [],
                     'variables'          => [],
@@ -769,16 +695,8 @@ GRAPHQL;
             [
                 'mutation setName { setUserName }',
                 [
-                    'queryOperations'    => [],
-                    'mutationOperations' => [
-                        [
-                            'name' => 'setName',
-                            'position' => 0,
-                            'numberItems' => 1
-                        ]
-                    ],
-                    'queries'            => [],
-                    'mutations'          => [new Mutation('setUserName', null, [], [], [], new Location(1, 20))],
+                    'queryOperations'            => [],
+                    'mutationOperations'          => [new Mutation('setUserName', null, [], [], [], new Location(1, 20))],
                     'fragments'          => [],
                     'fragmentReferences' => [],
                     'variables'          => [],
@@ -788,12 +706,10 @@ GRAPHQL;
             [
                 '{ test { ...userDataFragment } } fragment userDataFragment on User { id, name, email }',
                 [
-                    'queryOperations'    => [],
-                    'mutationOperations' => [],
-                    'queries'            => [
+                    'queryOperations'            => [
                         new Query('test', null, [], [new FragmentReference('userDataFragment', new Location(1, 13))], [], new Location(1, 3)),
                     ],
-                    'mutations'          => [],
+                    'mutationOperations'          => [],
                     'fragments'          => [
                         new Fragment('userDataFragment', 'User', [], [
                             new Field('id', null, [], [], new Location(1, 70)),
@@ -811,9 +727,7 @@ GRAPHQL;
             [
                 '{ user (id: 10, name: "max", float: 123.123 ) { id, name } }',
                 [
-                    'queryOperations'    => [],
-                    'mutationOperations' => [],
-                    'queries'            => [
+                    'queryOperations'            => [
                         new Query(
                             'user',
                             null,
@@ -830,7 +744,7 @@ GRAPHQL;
                             new Location(1, 3)
                         ),
                     ],
-                    'mutations'          => [],
+                    'mutationOperations'          => [],
                     'fragments'          => [],
                     'fragmentReferences' => [],
                     'variables'          => [],
@@ -840,9 +754,7 @@ GRAPHQL;
             [
                 '{ allUsers : users ( id: [ 1, 2, 3] ) { id } }',
                 [
-                    'queryOperations'    => [],
-                    'mutationOperations' => [],
-                    'queries'            => [
+                    'queryOperations'            => [
                         new Query(
                             'users',
                             'allUsers',
@@ -856,7 +768,7 @@ GRAPHQL;
                             new Location(1, 14)
                         ),
                     ],
-                    'mutations'          => [],
+                    'mutationOperations'          => [],
                     'fragments'          => [],
                     'fragmentReferences' => [],
                     'variables'          => [],
@@ -866,9 +778,7 @@ GRAPHQL;
             [
                 '{ allUsers : users ( id: [ 1, "2", true, null] ) { id } }',
                 [
-                    'queryOperations'    => [],
-                    'mutationOperations' => [],
-                    'queries'            => [
+                    'queryOperations'            => [
                         new Query(
                             'users',
                             'allUsers',
@@ -882,7 +792,7 @@ GRAPHQL;
                             new Location(1, 14)
                         ),
                     ],
-                    'mutations'          => [],
+                    'mutationOperations'          => [],
                     'fragments'          => [],
                     'fragmentReferences' => [],
                     'variables'          => [],
@@ -892,9 +802,7 @@ GRAPHQL;
             [
                 '{ allUsers : users ( object: { "a": 123, "d": "asd",  "b" : [ 1, 2, 4 ], "c": { "a" : 123, "b":  "asd" } } ) { id } }',
                 [
-                    'queryOperations'    => [],
-                    'mutationOperations' => [],
-                    'queries'            => [
+                    'queryOperations'            => [
                         new Query(
                             'users',
                             'allUsers',
@@ -916,7 +824,7 @@ GRAPHQL;
                             new Location(1, 14)
                         ),
                     ],
-                    'mutations'          => [],
+                    'mutationOperations'          => [],
                     'fragments'          => [],
                     'fragmentReferences' => [],
                     'variables'          => [],

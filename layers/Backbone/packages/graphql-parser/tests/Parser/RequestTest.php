@@ -30,14 +30,14 @@ class RequestTest extends TestCase
         ]);
         $request->setVariableValues($variableValues);
 
-        $this->assertEquals($queriesData, $request->getQueries());
-        $this->assertEquals($mutationsData, $request->getMutations());
+        $this->assertEquals($queriesData, $request->getQueryOperations());
+        $this->assertEquals($mutationsData, $request->getMutationOperations());
         $this->assertEquals($fragmentsData, $request->getFragments());
         $this->assertEquals($variableValues, $request->getVariableValues());
 
         $this->assertTrue($request->hasFragments());
-        $this->assertTrue($request->hasMutations());
-        $this->assertTrue($request->hasQueries());
+        $this->assertTrue($request->hasMutationOperations());
+        $this->assertTrue($request->hasQueryOperations());
 
         $this->assertTrue($request->hasVariable('page'));
         $this->assertEquals(2, $request->getVariableValue('page'));

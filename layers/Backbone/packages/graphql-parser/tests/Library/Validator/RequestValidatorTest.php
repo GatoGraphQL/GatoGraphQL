@@ -20,7 +20,6 @@ use PoPBackbone\GraphQLParser\Validator\RequestValidator\RequestValidator;
 
 class RequestValidatorTest extends TestCase
 {
-
     /**
      * @dataProvider invalidRequestProvider
      */
