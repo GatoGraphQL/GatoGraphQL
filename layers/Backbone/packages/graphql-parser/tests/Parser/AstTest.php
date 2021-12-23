@@ -12,7 +12,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\Query;
+use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
 use PHPUnit\Framework\TestCase;
 
@@ -123,7 +123,7 @@ class AstTest extends TestCase
             new Field('id', null, [], [], new Location(1, 1))
         ];
 
-        $query = new Query('ships', 'lastShips', $arguments, $fields, [], new Location(1, 1));
+        $query = new RelationalField('ships', 'lastShips', $arguments, $fields, [], new Location(1, 1));
 
         $this->assertEquals('ships', $query->getName());
         $this->assertEquals('lastShips', $query->getAlias());

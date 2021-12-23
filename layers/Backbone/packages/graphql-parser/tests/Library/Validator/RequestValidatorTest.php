@@ -14,7 +14,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\Query;
+use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 use PoPBackbone\GraphQLParser\Parser\Location;
 use PoPBackbone\GraphQLParser\Validator\RequestValidator\RequestValidator;
 
@@ -42,9 +42,9 @@ class RequestValidatorTest extends TestCase
             [
                 (new Request())->process([
                     'queries'            => [
-                        new Query('test', null, [], [
+                        new Field('test', null, [], [
                             new FragmentReference('reference', new Location(1, 1))
-                        ], [], new Location(1, 1))
+                        ], new Location(1, 1))
                     ],
                     'fragmentReferences' => [
                         new FragmentReference('reference', new Location(1, 1))
@@ -54,10 +54,10 @@ class RequestValidatorTest extends TestCase
             [
                 (new Request())->process([
                     'queries'            => [
-                        new Query('test', null, [], [
+                        new Field('test', null, [], [
                             new FragmentReference('reference', new Location(1, 1)),
                             new FragmentReference('reference2', new Location(1, 1)),
-                        ], [], new Location(1, 1))
+                        ], new Location(1, 1))
                     ],
                     'fragments'          => [
                         new Fragment('reference', 'TestType', [], [], new Location(1, 1))
@@ -71,9 +71,9 @@ class RequestValidatorTest extends TestCase
             [
                 (new Request())->process([
                     'queries'            => [
-                        new Query('test', null, [], [
+                        new Field('test', null, [], [
                             new FragmentReference('reference', new Location(1, 1)),
-                        ], [], new Location(1, 1))
+                        ], new Location(1, 1))
                     ],
                     'fragments'          => [
                         new Fragment('reference', 'TestType', [], [], new Location(1, 1)),
@@ -87,7 +87,7 @@ class RequestValidatorTest extends TestCase
             [
                 (new Request())->process([
                     'queries'            => [
-                        new Query(
+                        new RelationalField(
                             'test',
                             null,
                             [
@@ -108,7 +108,7 @@ class RequestValidatorTest extends TestCase
             [
                 (new Request())->process([
                     'queries'            => [
-                        new Query('test', null, [
+                        new RelationalField('test', null, [
                             new Argument('test', new VariableReference('test', $variable1, new Location(1, 1)), new Location(1, 1)),
                             new Argument('test2', new VariableReference('test2', $variable2, new Location(1, 1)), new Location(1, 1)),
                         ], [
