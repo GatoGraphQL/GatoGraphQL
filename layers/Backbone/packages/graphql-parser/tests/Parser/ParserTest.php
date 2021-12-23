@@ -325,7 +325,7 @@ GRAPHQL;
                             ], [], new Location(9, 21)),
                         ], [], new Location(3, 17)),
                     ],
-                    new Location(1, 1)
+                    new Location(2, 19)
                 )
             ],
             'fragments'          => [
@@ -447,7 +447,7 @@ GRAPHQL;
                             new Location(3, 23)
                         ),
                     ],
-                    new Location(1, 1)
+                    new Location(2, 13)
                 )
             ],
             'fragments'          => [],
