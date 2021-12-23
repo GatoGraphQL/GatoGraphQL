@@ -18,8 +18,6 @@ use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
-use PoPBackbone\GraphQLParser\Parser\Ast\ShorthandMutationOperation;
-use PoPBackbone\GraphQLParser\Parser\Ast\ShorthandQueryOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
 
 class ParserTest extends TestCase
@@ -71,7 +69,7 @@ GRAPHQL;
 
         $this->assertEquals($document->toArray(), [
             'operations'            => [
-                new ShorthandQueryOperation(
+                new QueryOperation('', [], [],
                     [
                         new RelationalField(
                             'authors',
@@ -147,7 +145,7 @@ GRAPHQL;
         $parser = new Parser();
         $document   = $parser->parse('{ foo,       ,,  , bar  }');
         $this->assertEquals([
-            new ShorthandQueryOperation(
+            new QueryOperation('', [], [],
                 [
                     new Field('foo', '', [], [], new Location(1, 3)),
                     new Field('bar', '', [], [], new Location(1, 20)),
@@ -163,7 +161,7 @@ GRAPHQL;
         $document   = $parser->parse('{ name }');
         $this->assertEquals([
             'operations'            => [
-                new ShorthandQueryOperation(
+                new QueryOperation('', [], [],
                     [
                         new Field('name', '', [], [], new Location(1, 3)),
                     ],
@@ -181,7 +179,7 @@ GRAPHQL;
         $document   = $parser->parse('{ post, user { name } }');
         $this->assertEquals([
             'operations'            => [
-                new ShorthandQueryOperation(
+                new QueryOperation('', [], [],
                     [
                         new Field('post', null, [], [], new Location(1, 3)),
                         new RelationalField('user', null, [], [
@@ -441,7 +439,7 @@ GRAPHQL;
 
         $this->assertEquals($document->toArray(), [
             'operations'            => [
-                new ShorthandQueryOperation(
+                new QueryOperation('', [], [],
                     [
                         new RelationalField(
                             'test',
@@ -505,7 +503,7 @@ GRAPHQL;
                 'mutation { createUser ( email: "test@test.com", active: true ) { id } }',
                 [
                     'operations'          => [
-                        new ShorthandMutationOperation(
+                        new MutationOperation('', [], [],
                             [
                                 new RelationalField(
                                     'createUser',
@@ -532,7 +530,7 @@ GRAPHQL;
                 'mutation { test : createUser (id: 4) }',
                 [
                     'operations'            => [
-                        new ShorthandMutationOperation(
+                        new MutationOperation('', [], [],
                             [
                                 new RelationalField(
                                     'createUser',
