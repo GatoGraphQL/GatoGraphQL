@@ -25,7 +25,7 @@ class ParserTest extends TestCase
     public function testEmptyParser()
     {
         $parser = new Parser();
-        $parsedData = $parser->parse('');
+        $document = $parser->parse('');
 
         $this->assertEquals([
             'operations'    => [],
@@ -33,14 +33,14 @@ class ParserTest extends TestCase
             'fragmentReferences' => [],
             'variables'          => [],
             'variableReferences' => [],
-        ], $parsedData->toArray());
+        ], $document->toArray());
     }
 
     public function testInvalidSelection()
     {
         $this->expectException(SyntaxErrorException::class);
         $parser = new Parser();
-        $data   = $parser->parse('
+        $document   = $parser->parse('
         {
             test {
                 id
@@ -66,9 +66,9 @@ query {
 GRAPHQL;
 
         $parser     = new Parser();
-        $parsedData = $parser->parse($query);
+        $document = $parser->parse($query);
 
-        $this->assertEquals($parsedData->toArray(), [
+        $this->assertEquals($document->toArray(), [
             'operations'            => [
                 new Query(
                     'authors',
@@ -141,17 +141,17 @@ GRAPHQL;
     public function testCommas()
     {
         $parser = new Parser();
-        $parsedData   = $parser->parse('{ foo,       ,,  , bar  }');
+        $document   = $parser->parse('{ foo,       ,,  , bar  }');
         $this->assertEquals([
             new Query('foo', '', [], [], [], new Location(1, 3)),
             new Query('bar', '', [], [], [], new Location(1, 20)),
-        ], $parsedData->toArray()['operations']);
+        ], $document->toArray()['operations']);
     }
 
     public function testQueryWithNoFields()
     {
         $parser = new Parser();
-        $parsedData   = $parser->parse('{ name }');
+        $document   = $parser->parse('{ name }');
         $this->assertEquals([
             'operations'            => [
                 new Query('name', '', [], [], [], new Location(1, 3)),
@@ -160,13 +160,13 @@ GRAPHQL;
             'fragmentReferences' => [],
             'variables'          => [],
             'variableReferences' => [],
-        ], $parsedData->toArray());
+        ], $document->toArray());
     }
 
     public function testQueryWithFields()
     {
         $parser = new Parser();
-        $parsedData   = $parser->parse('{ post, user { name } }');
+        $document   = $parser->parse('{ post, user { name } }');
         $this->assertEquals([
             'operations'            => [
                 new Query('post', null, [], [], [], new Location(1, 3)),
@@ -178,13 +178,13 @@ GRAPHQL;
             'fragmentReferences' => [],
             'variables'          => [],
             'variableReferences' => [],
-        ], $parsedData->toArray());
+        ], $document->toArray());
     }
 
     public function testFragmentWithFields()
     {
         $parser = new Parser();
-        $parsedData   = $parser->parse('
+        $document   = $parser->parse('
             fragment FullType on __Type {
                 kind
                 fields {
@@ -204,14 +204,14 @@ GRAPHQL;
             'fragmentReferences' => [],
             'variables'          => [],
             'variableReferences' => [],
-        ], $parsedData->toArray());
+        ], $document->toArray());
     }
 
     public function testInspectionQuery()
     {
         $parser = new Parser();
 
-        $parsedData = $parser->parse('
+        $document = $parser->parse('
             query IntrospectionQuery {
                 __schema {
                     queryType { name }
@@ -385,7 +385,7 @@ GRAPHQL;
             ],
             'variables'          => [],
             'variableReferences' => [],
-        ], $parsedData->toArray());
+        ], $document->toArray());
     }
 
     public function wrongQueriesProvider()
@@ -410,15 +410,15 @@ GRAPHQL;
     {
         $parser = new Parser();
 
-        $parsedStructure = $parser->parse($query);
+        $document = $parser->parse($query);
 
-        $this->assertEquals($parsedStructure->toArray(), $structure);
+        $this->assertEquals($document->toArray(), $structure);
     }
 
     public function testTypedFragment()
     {
         $parser          = new Parser();
-        $parsedStructure = $parser->parse('
+        $document = $parser->parse('
             {
                 test: test {
                     name,
@@ -429,7 +429,7 @@ GRAPHQL;
             }
         ');
 
-        $this->assertEquals($parsedStructure->toArray(), [
+        $this->assertEquals($document->toArray(), [
             'operations'            => [
                 new Query(
                     'test',
@@ -548,9 +548,9 @@ GRAPHQL;
     public function testParser($query, $structure)
     {
         $parser          = new Parser();
-        $parsedStructure = $parser->parse($query);
+        $document = $parser->parse($query);
 
-        $this->assertEquals($structure, $parsedStructure->toArray());
+        $this->assertEquals($structure, $document->toArray());
     }
 
 
@@ -815,7 +815,7 @@ GRAPHQL;
     {
         $parser = new Parser();
 
-        $parsedData = $parser->parse('
+        $document = $parser->parse('
             query StarWarsAppHomeRoute($names_0:[String!]!, $query: String) {
               factions(names:$names_0, test: $query) {
                 id,
@@ -851,14 +851,14 @@ GRAPHQL;
             }
         ');
 
-        $this->assertArrayNotHasKey('errors', $parsedData->toArray());
+        $this->assertArrayNotHasKey('errors', $document->toArray());
     }
 
     public function testVariableDefaultValue()
     {
         // Test with non-null default value
         $parser          = new Parser();
-        $parsedStructure = $parser->parse('
+        $document = $parser->parse('
             query ($format: String = "small"){
               user {
                 avatar(format: $format)
@@ -866,14 +866,14 @@ GRAPHQL;
             }
         ');
         /** @var Variable $var */
-        $var = $parsedStructure->getVariables()[0];
+        $var = $document->getVariables()[0];
         $this->assertTrue($var->hasDefaultValue());
         $this->assertEquals('small', $var->getDefaultValue()->getValue());
         $this->assertEquals('small', $var->getValue()->getValue());
 
         // Test with null default value
         $parser          = new Parser();
-        $parsedStructure = $parser->parse('
+        $document = $parser->parse('
             query ($format: String = null){
               user {
                 avatar(format: $format)
@@ -881,7 +881,7 @@ GRAPHQL;
             }
         ');
         /** @var Variable $var */
-        $var = $parsedStructure->getVariables()[0];
+        $var = $document->getVariables()[0];
         $this->assertTrue($var->hasDefaultValue());
         $this->assertNull($var->getDefaultValue()->getValue());
         $this->assertNull($var->getValue()->getValue());

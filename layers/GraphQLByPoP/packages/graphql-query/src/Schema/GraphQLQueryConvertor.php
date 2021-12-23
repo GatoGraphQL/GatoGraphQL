@@ -571,7 +571,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             );
         }
 
-        $parsedData = $this->getParser()->parse($payload)->toArray();
+        $documentData = $this->getParser()->parse($payload)->toArray();
 
         // GraphiQL sends the operationName to execute in the payload, under "operationName"
         // This is required when the payload contains multiple queries
@@ -591,7 +591,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
              * @see https://spec.graphql.org/draft/#sel-EANLHDBFBGCBFDCBnmD
              */
             if (!$enableMultipleQueryExecution) {
-                $operationCount = count($parsedData['queryOperations']) + count($parsedData['mutationOperations']);
+                $operationCount = count($documentData['queryOperations']) + count($documentData['mutationOperations']);
                 if ($operationCount > 1) {
                     throw new InvalidArgumentException(sprintf(
                         $this->getTranslationAPI()->__(
@@ -606,13 +606,13 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                                     function (array $operation): string {
                                         return $operation['name'];
                                     },
-                                    $parsedData['queryOperations']
+                                    $documentData['queryOperations']
                                 ),
                                 array_map(
                                     function (array $operation): string {
                                         return $operation['name'];
                                     },
-                                    $parsedData['mutationOperations']
+                                    $documentData['mutationOperations']
                                 )
                             )
                         )
@@ -630,20 +630,20 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
              */
             if ($enableMultipleQueryExecution && strtoupper($operationName) == ClientSymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME) {
                 // Find the position and number of queries processed by this operation
-                foreach ($parsedData['queryOperations'] as $queryOperation) {
+                foreach ($documentData['queryOperations'] as $queryOperation) {
                     if ($queryOperation['name'] == $operationName) {
                         array_splice(
-                            $parsedData['queries'],
+                            $documentData['queries'],
                             $queryOperation['position'],
                             $queryOperation['numberItems']
                         );
                         break;
                     }
                 }
-                foreach ($parsedData['mutationOperations'] as $mutationOperation) {
+                foreach ($documentData['mutationOperations'] as $mutationOperation) {
                     if ($mutationOperation['name'] == $operationName) {
                         array_splice(
-                            $parsedData['mutations'],
+                            $documentData['mutations'],
                             $mutationOperation['position'],
                             $mutationOperation['numberItems']
                         );
@@ -658,19 +658,19 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                  * Otherwise, remove it from the entry, so that if sending an operationName,
                  * that does not exist, the set to execute is an empty array
                  */
-                if ($parsedData['queryOperations']) {
-                    for ($i = count($parsedData['queryOperations']) - 1; $i >= 0; $i--) {
-                        $queryOperation = $parsedData['queryOperations'][$i];
+                if ($documentData['queryOperations']) {
+                    for ($i = count($documentData['queryOperations']) - 1; $i >= 0; $i--) {
+                        $queryOperation = $documentData['queryOperations'][$i];
                         if ($queryOperation['name'] == $operationName) {
-                            $parsedData['queries'] = array_slice(
-                                $parsedData['queries'],
+                            $documentData['queries'] = array_slice(
+                                $documentData['queries'],
                                 $queryOperation['position'],
                                 $queryOperation['numberItems']
                             );
                             break;
                         } else {
                             array_splice(
-                                $parsedData['queries'],
+                                $documentData['queries'],
                                 $queryOperation['position'],
                                 $queryOperation['numberItems']
                             );
@@ -678,21 +678,21 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                     }
                 } else {
                     // Make sure no queries are executed
-                    unset($parsedData['queries']);
+                    unset($documentData['queries']);
                 }
-                if ($parsedData['mutationOperations']) {
-                    for ($i = count($parsedData['mutationOperations']) - 1; $i >= 0; $i--) {
-                        $mutationOperation = $parsedData['mutationOperations'][$i];
+                if ($documentData['mutationOperations']) {
+                    for ($i = count($documentData['mutationOperations']) - 1; $i >= 0; $i--) {
+                        $mutationOperation = $documentData['mutationOperations'][$i];
                         if ($mutationOperation['name'] == $operationName) {
-                            $parsedData['mutations'] = array_slice(
-                                $parsedData['mutations'],
+                            $documentData['mutations'] = array_slice(
+                                $documentData['mutations'],
                                 $mutationOperation['position'],
                                 $mutationOperation['numberItems']
                             );
                             break;
                         } else {
                             array_splice(
-                                $parsedData['mutations'],
+                                $documentData['mutations'],
                                 $mutationOperation['position'],
                                 $mutationOperation['numberItems']
                             );
@@ -700,7 +700,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                     }
                 } else {
                     // Make sure no mutations are executed
-                    unset($parsedData['mutations']);
+                    unset($documentData['mutations']);
                 }
                 /**
                  * From the GraphQL spec:
@@ -710,7 +710,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                  * @see https://spec.graphql.org/draft/#GetOperation()
                  * @see https://spec.graphql.org/draft/#sel-IANLHCDBDCAACCmB3L
                  */
-                if (empty($parsedData['queries']) && empty($parsedData['mutations'])) {
+                if (empty($documentData['queries']) && empty($documentData['mutations'])) {
                     throw new InvalidArgumentException(sprintf(
                         $this->getTranslationAPI()->__('No operation with name \'%s\' was submitted.', 'graphql-query'),
                         $operationName
@@ -722,7 +722,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         // If some variable hasn't been submitted, it will throw an Exception
         // Let it bubble up
         /** @var RequestInterface */
-        $request = $this->getRequest()->process($parsedData, $variables);
+        $request = $this->getRequest()->process($documentData, $variables);
 
         // If the validation fails, it will throw an exception
         $this->getRequestValidator()->validate($request);
