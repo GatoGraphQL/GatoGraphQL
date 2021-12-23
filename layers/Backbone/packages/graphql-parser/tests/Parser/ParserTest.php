@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser;
 
+use PHPUnit\Framework\TestCase;
 use PoPBackbone\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
@@ -14,10 +15,8 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\Mutation;
-use PoPBackbone\GraphQLParser\Parser\Ast\Query;
+use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
-use PHPUnit\Framework\TestCase;
 
 class ParserTest extends TestCase
 {
@@ -70,7 +69,7 @@ GRAPHQL;
 
         $this->assertEquals($document->toArray(), [
             'operations'            => [
-                new Query(
+                new RelationalField(
                     'authors',
                     null,
                     [
@@ -143,8 +142,8 @@ GRAPHQL;
         $parser = new Parser();
         $document   = $parser->parse('{ foo,       ,,  , bar  }');
         $this->assertEquals([
-            new Query('foo', '', [], [], [], new Location(1, 3)),
-            new Query('bar', '', [], [], [], new Location(1, 20)),
+            new Field('foo', '', [], [], new Location(1, 3)),
+            new Field('bar', '', [], [], new Location(1, 20)),
         ], $document->toArray()['operations']);
     }
 
@@ -154,7 +153,7 @@ GRAPHQL;
         $document   = $parser->parse('{ name }');
         $this->assertEquals([
             'operations'            => [
-                new Query('name', '', [], [], [], new Location(1, 3)),
+                new Field('name', '', [], [], new Location(1, 3)),
             ],
             'fragments'          => [],
             'fragmentReferences' => [],
@@ -169,8 +168,8 @@ GRAPHQL;
         $document   = $parser->parse('{ post, user { name } }');
         $this->assertEquals([
             'operations'            => [
-                new Query('post', null, [], [], [], new Location(1, 3)),
-                new Query('user', null, [], [
+                new Field('post', null, [], [], new Location(1, 3)),
+                new RelationalField('user', null, [], [
                     new Field('name', null, [], [], new Location(1, 16)),
                 ], [], new Location(1, 9)),
             ],
@@ -196,7 +195,7 @@ GRAPHQL;
             'fragments'          => [
                 new Fragment('FullType', '__Type', [], [
                     new Field('kind', null, [], [], new Location(3, 17)),
-                    new Query('fields', null, [], [
+                    new RelationalField('fields', null, [], [
                         new Field('name', null, [], [], new Location(5, 21)),
                     ], [], new Location(4, 17)),
                 ], new Location(2, 22)),
@@ -292,20 +291,20 @@ GRAPHQL;
 
         $this->assertEquals([
             'operations'            => [
-                new Query('__schema', null, [], [
-                    new Query('queryType', null, [], [
+                new RelationalField('__schema', null, [], [
+                    new RelationalField('queryType', null, [], [
                         new Field('name', null, [], [], new Location(4, 33)),
                     ], [], new Location(4, 21)),
-                    new Query('mutationType', null, [], [
+                    new RelationalField('mutationType', null, [], [
                         new Field('name', null, [], [], new Location(5, 36)),
                     ], [], new Location(5, 21)),
-                    new Query('types', null, [], [
+                    new RelationalField('types', null, [], [
                         new FragmentReference('FullType', new Location(7, 28)),
                     ], [], new Location(6, 21)),
-                    new Query('directives', null, [], [
+                    new RelationalField('directives', null, [], [
                         new Field('name', null, [], [], new Location(10, 25)),
                         new Field('description', null, [], [], new Location(11, 25)),
-                        new Query('args', null, [], [
+                        new RelationalField('args', null, [], [
                             new FragmentReference('InputValue', new Location(13, 32)),
                         ], [], new Location(12, 25)),
                         new Field('onOperation', null, [], [], new Location(15, 25)),
@@ -319,39 +318,39 @@ GRAPHQL;
                     new Field('kind', null, [], [], new Location(23, 17)),
                     new Field('name', null, [], [], new Location(24, 17)),
                     new Field('description', null, [], [], new Location(25, 17)),
-                    new Query('fields', null, [], [
+                    new RelationalField('fields', null, [], [
                         new Field('name', null, [], [], new Location(27, 21)),
                         new Field('description', null, [], [], new Location(28, 21)),
-                        new Query('args', null, [], [
+                        new RelationalField('args', null, [], [
                             new FragmentReference('InputValue', new Location(30, 28)),
                         ], [], new Location(29, 21)),
-                        new Query('type', null, [], [
+                        new RelationalField('type', null, [], [
                             new FragmentReference('TypeRef', new Location(33, 28)),
                         ], [], new Location(32, 21)),
                         new Field('isDeprecated', null, [], [], new Location(35, 21)),
                         new Field('deprecationReason', null, [], [], new Location(36, 21)),
                     ], [], new Location(26, 17)),
-                    new Query('inputFields', null, [], [
+                    new RelationalField('inputFields', null, [], [
                         new FragmentReference('InputValue', new Location(39, 24)),
                     ], [], new Location(38, 17)),
-                    new Query('interfaces', null, [], [
+                    new RelationalField('interfaces', null, [], [
                         new FragmentReference('TypeRef', new Location(42, 24)),
                     ], [], new Location(41, 17)),
-                    new Query('enumValues', null, [], [
+                    new RelationalField('enumValues', null, [], [
                         new Field('name', null, [], [], new Location(45, 21)),
                         new Field('description', null, [], [], new Location(46, 21)),
 
                         new Field('isDeprecated', null, [], [], new Location(47, 21)),
                         new Field('deprecationReason', null, [], [], new Location(48, 21)),
                     ], [], new Location(44, 17)),
-                    new Query('possibleTypes', null, [], [
+                    new RelationalField('possibleTypes', null, [], [
                         new FragmentReference('TypeRef', new Location(51, 24)),
                     ], [], new Location(50, 17)),
                 ], new Location(22, 22)),
                 new Fragment('InputValue', '__InputValue', [], [
                     new Field('name', null, [], [], new Location(56, 17)),
                     new Field('description', null, [], [], new Location(57, 17)),
-                    new Query('type', null, [], [
+                    new RelationalField('type', null, [], [
                         new FragmentReference('TypeRef', new Location(58, 27)),
                     ], [], new Location(58, 17)),
                     new Field('defaultValue', null, [], [], new Location(59, 17)),
@@ -359,13 +358,13 @@ GRAPHQL;
                 new Fragment('TypeRef', '__Type', [], [
                     new Field('kind', null, [], [], new Location(63, 17)),
                     new Field('name', null, [], [], new Location(64, 17)),
-                    new Query('ofType', null, [], [
+                    new RelationalField('ofType', null, [], [
                         new Field('kind', null, [], [], new Location(66, 21)),
                         new Field('name', null, [], [], new Location(67, 21)),
-                        new Query('ofType', null, [], [
+                        new RelationalField('ofType', null, [], [
                             new Field('kind', null, [], [], new Location(69, 25)),
                             new Field('name', null, [], [], new Location(70, 25)),
-                            new Query('ofType', null, [], [
+                            new RelationalField('ofType', null, [], [
                                 new Field('kind', null, [], [], new Location(72, 29)),
                                 new Field('name', null, [], [], new Location(73, 29)),
                             ], [], new Location(71, 25)),
@@ -431,7 +430,7 @@ GRAPHQL;
 
         $this->assertEquals($document->toArray(), [
             'operations'            => [
-                new Query(
+                new RelationalField(
                     'test',
                     'test',
                     [],
@@ -459,7 +458,7 @@ GRAPHQL;
                 'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
                 [
                     'operations'            => [
-                        new Query(
+                        new RelationalField(
                             'query',
                             null,
                             [
@@ -486,7 +485,7 @@ GRAPHQL;
                 '{ query { alias: name } }',
                 [
                     'operations'            => [
-                        new Query('query', null, [], [new Field('name', 'alias', [], [], new Location(1, 18))], [], new Location(1, 3)),
+                        new RelationalField('query', null, [], [new Field('name', 'alias', [], [], new Location(1, 18))], [], new Location(1, 3)),
                     ],
                     'fragments'          => [],
                     'fragmentReferences' => [],
@@ -561,7 +560,7 @@ GRAPHQL;
                 '{ film(id: 1 filmID: 2) { title } }',
                 [
                     'operations'            => [
-                        new Query('film', null, [
+                        new RelationalField('film', null, [
                             new Argument('id', new Literal(1, new Location(1, 12)), new Location(1, 8)),
                             new Argument('filmID', new Literal(2, new Location(1, 22)), new Location(1, 14)),
                         ], [
@@ -578,7 +577,7 @@ GRAPHQL;
                 '{ test (id: -5) { id } } ',
                 [
                     'operations'            => [
-                        new Query('test', null, [
+                        new RelationalField('test', null, [
                             new Argument('id', new Literal(-5, new Location(1, 13)), new Location(1, 9)),
                         ], [
                             new Field('id', null, [], [], new Location(1, 19)),
@@ -594,7 +593,7 @@ GRAPHQL;
                 "{ test (id: -5) \r\n { id } } ",
                 [
                     'operations'            => [
-                        new Query('test', null, [
+                        new RelationalField('test', null, [
                             new Argument('id', new Literal(-5, new Location(1, 13)), new Location(1, 9)),
                         ], [
                             new Field('id', null, [], [], new Location(2, 4)),
@@ -615,7 +614,7 @@ GRAPHQL;
                 }',
                 [
                     'operations'            => [
-                        new Query('hero', null, [
+                        new RelationalField('hero', null, [
                             new Argument('episode', new Literal('EMPIRE', new Location(2, 33)), new Location(2, 24)),
                         ], [
                             new Field('__typename', null, [], [], new Location(3, 21)),
@@ -632,7 +631,7 @@ GRAPHQL;
                 '{ test { __typename, id } }',
                 [
                     'operations'            => [
-                        new Query('test', null, [], [
+                        new RelationalField('test', null, [], [
                             new Field('__typename', null, [], [], new Location(1, 10)),
                             new Field('id', null, [], [], new Location(1, 22)),
                         ], [], new Location(1, 3)),
@@ -689,7 +688,7 @@ GRAPHQL;
                 '{ test { ...userDataFragment } } fragment userDataFragment on User { id, name, email }',
                 [
                     'operations'            => [
-                        new Query('test', null, [], [new FragmentReference('userDataFragment', new Location(1, 13))], [], new Location(1, 3)),
+                        new RelationalField('test', null, [], [new FragmentReference('userDataFragment', new Location(1, 13))], [], new Location(1, 3)),
                     ],
                     'fragments'          => [
                         new Fragment('userDataFragment', 'User', [], [
@@ -709,7 +708,7 @@ GRAPHQL;
                 '{ user (id: 10, name: "max", float: 123.123 ) { id, name } }',
                 [
                     'operations'            => [
-                        new Query(
+                        new RelationalField(
                             'user',
                             null,
                             [
@@ -735,7 +734,7 @@ GRAPHQL;
                 '{ allUsers : users ( id: [ 1, 2, 3] ) { id } }',
                 [
                     'operations'            => [
-                        new Query(
+                        new RelationalField(
                             'users',
                             'allUsers',
                             [
@@ -758,7 +757,7 @@ GRAPHQL;
                 '{ allUsers : users ( id: [ 1, "2", true, null] ) { id } }',
                 [
                     'operations'            => [
-                        new Query(
+                        new RelationalField(
                             'users',
                             'allUsers',
                             [
@@ -781,7 +780,7 @@ GRAPHQL;
                 '{ allUsers : users ( object: { "a": 123, "d": "asd",  "b" : [ 1, 2, 4 ], "c": { "a" : 123, "b":  "asd" } } ) { id } }',
                 [
                     'operations'            => [
-                        new Query(
+                        new RelationalField(
                             'users',
                             'allUsers',
                             [
