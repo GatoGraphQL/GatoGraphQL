@@ -15,7 +15,9 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Field;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
+use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
+use PoPBackbone\GraphQLParser\Parser\Ast\ShorthandMutationOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
 
 class ParserTest extends TestCase
@@ -468,19 +470,24 @@ GRAPHQL;
                 'mutation { createUser ( email: "test@test.com", active: true ) { id } }',
                 [
                     'operations'          => [
-                        new Mutation(
-                            'createUser',
-                            null,
+                        new ShorthandMutationOperation(
                             [
-                                new Argument('email', new Literal('test@test.com', new Location(1, 33)), new Location(1, 25)),
-                                new Argument('active', new Literal(true, new Location(1, 57)), new Location(1, 49)),
+                                new RelationalField(
+                                    'createUser',
+                                    null,
+                                    [
+                                        new Argument('email', new Literal('test@test.com', new Location(1, 33)), new Location(1, 25)),
+                                        new Argument('active', new Literal(true, new Location(1, 57)), new Location(1, 49)),
+                                    ],
+                                    [
+                                        new Field('id', null, [], [], new Location(1, 66)),
+                                    ],
+                                    [],
+                                    new Location(1, 12)
+                                ),
                             ],
-                            [
-                                new Field('id', null, [], [], new Location(1, 66)),
-                            ],
-                            [],
-                            new Location(1, 12)
-                        ),
+                            new Location(1, 0)
+                        )
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -490,16 +497,21 @@ GRAPHQL;
                 'mutation { test : createUser (id: 4) }',
                 [
                     'operations'            => [
-                        new Mutation(
-                            'createUser',
-                            'test',
+                        new ShorthandMutationOperation(
                             [
-                                new Argument('id', new Literal(4, new Location(1, 35)), new Location(1, 31)),
+                                new RelationalField(
+                                    'createUser',
+                                    'test',
+                                    [
+                                        new Argument('id', new Literal(4, new Location(1, 35)), new Location(1, 31)),
+                                    ],
+                                    [],
+                                    [],
+                                    new Location(1, 19)
+                                ),
                             ],
-                            [],
-                            [],
-                            new Location(1, 19)
-                        ),
+                            new Location(1, 0)
+                        )
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -627,7 +639,9 @@ GRAPHQL;
                 'mutation setName { setUserName }',
                 [
                     'operations'            => [
-                        new Mutation('setUserName', null, [], [], [], new Location(1, 20))
+                        new MutationOperation('setName', [], [], [
+                            new Field('setUserName', null, [], [], new Location(1, 20)),
+                        ], new Location(1, 10))
                     ],
                     'fragments'          => [],
                     'variables'          => [],
