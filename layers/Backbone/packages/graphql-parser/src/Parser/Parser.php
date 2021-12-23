@@ -43,11 +43,8 @@ class Parser extends Tokenizer implements ParserInterface
             switch ($tokenType) {
                 case Token::TYPE_LBRACE:
                 case Token::TYPE_QUERY:
-                    $this->data['queryOperations'][] = $this->parseOperation($tokenType);
-                    break;
-
                 case Token::TYPE_MUTATION:
-                    $this->data['mutationOperations'][] = $this->parseOperation($tokenType);
+                    $this->data['operations'][] = $this->parseOperation($tokenType);
                     break;
 
                 case Token::TYPE_FRAGMENT:
@@ -63,8 +60,7 @@ class Parser extends Tokenizer implements ParserInterface
         }
 
         return new ParsedData(
-            $this->data['queryOperations'],
-            $this->data['mutationOperations'],
+            $this->data['operations'],
             $this->data['fragments'],
             $this->data['fragmentReferences'],
             $this->data['variables'],
@@ -82,8 +78,7 @@ class Parser extends Tokenizer implements ParserInterface
         $this->initTokenizer($source);
 
         $this->data = [
-            'queryOperations'    => [],
-            'mutationOperations' => [],
+            'operations'    => [],
             'fragments'          => [],
             'fragmentReferences' => [],
             'variables'          => [],

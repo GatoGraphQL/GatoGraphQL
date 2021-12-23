@@ -10,19 +10,14 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Mutation;
-use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
-use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 use PoPBackbone\GraphQLParser\Parser\ParsedData;
 
 class Request implements RequestInterface
 {
-    /** @var Query[] */
-    private array $queryOperations = [];
-
-    /** @var Mutation[] */
-    private array $mutationOperations = [];
+    /** @var OperationInterface[] */
+    private array $operations = [];
 
     /** @var Fragment[] */
     private array $fragments = [];
@@ -47,12 +42,8 @@ class Request implements RequestInterface
             $data = $data->toArray();
         }
 
-        if (array_key_exists('queryOperations', $data)) {
-            $this->addQueryOperations($data['queryOperations']);
-        }
-
-        if (array_key_exists('mutationOperations', $data)) {
-            $this->addMutationOperations($data['mutationOperations']);
+        if (array_key_exists('operations', $data)) {
+            $this->addOperations($data['operations']);
         }
 
         if (array_key_exists('fragments', $data)) {
@@ -113,24 +104,13 @@ class Request implements RequestInterface
     }
 
     /**
-     * @param Query[] $queryOperations
+     * @param OperationInterface[] $operations
      */
-    public function addQueryOperations(array $queryOperations): void
+    public function addOperations(array $operations): void
     {
-        $this->queryOperations = array_merge(
-            $this->queryOperations,
-            $queryOperations
-        );
-    }
-
-    /**
-     * @param Mutation[] $mutationOperations
-     */
-    public function addMutationOperations(array $mutationOperations): void
-    {
-        $this->mutationOperations = array_merge(
-            $this->mutationOperations,
-            $mutationOperations
+        $this->operations = array_merge(
+            $this->operations,
+            $operations
         );
     }
 
@@ -177,35 +157,14 @@ class Request implements RequestInterface
     /**
      * @return OperationInterface[]
      */
-    public function getAllOperations(): array
+    public function getOperations(): array
     {
-        return array_merge($this->mutationOperations, $this->queryOperations);
+        return $this->operations;
     }
 
-    /**
-     * @return QueryOperation[]
-     */
-    public function getQueryOperations(): array
+    public function hasOperations(): bool
     {
-        return $this->queryOperations;
-    }
-
-    /**
-     * @return MutationOperation[]
-     */
-    public function getMutationOperations(): array
-    {
-        return $this->mutationOperations;
-    }
-
-    public function hasQueryOperations(): bool
-    {
-        return count($this->queryOperations) > 0;
-    }
-
-    public function hasMutationOperations(): bool
-    {
-        return count($this->mutationOperations) > 0;
+        return count($this->operations) > 0;
     }
 
     /**

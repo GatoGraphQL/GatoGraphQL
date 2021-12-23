@@ -10,10 +10,8 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Mutation;
-use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
-use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 use PoPBackbone\GraphQLParser\Parser\ParsedData;
 
 interface RequestInterface
@@ -29,13 +27,9 @@ interface RequestInterface
     ): self;
 
     /**
-     * @param QueryOperation[] $queryOperations
+     * @param OperationInterface[] $operations
      */
-    public function addQueryOperations(array $queryOperations): void;
-    /**
-     * @param MutationOperation[] $mutationOperations
-     */
-    public function addMutationOperations(array $mutationOperations): void;
+    public function addOperations(array $operations): void;
     /**
      * @param Variable[] $queryVariables
      */
@@ -55,23 +49,14 @@ interface RequestInterface
     /**
      * @return OperationInterface[]
      */
-    public function getAllOperations(): array;
-    /**
-     * @return QueryOperation[]
-     */
-    public function getQueryOperations(): array;
+    public function getOperations(): array;
     /**
      * @return Fragment[]
      */
     public function getFragments(): array;
     public function addFragment(Fragment $fragment): void;
     public function getFragment(string $name): ?Fragment;
-    /**
-     * @return MutationOperation[]
-     */
-    public function getMutationOperations(): array;
-    public function hasQueryOperations(): bool;
-    public function hasMutationOperations(): bool;
+    public function hasOperations(): bool;
     public function hasFragments(): bool;
     /**
      * @return array<string,mixed>

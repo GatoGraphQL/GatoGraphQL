@@ -8,16 +8,13 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
-use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
+use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 
 class ParsedData
 {
     public function __construct(
-        /** @var QueryOperation[] */
-        private array $queryOperations,
-        /** @var MutationOperation[] */
-        private array $mutationOperations,
+        /** @var OperationInterface[] */
+        private array $operations,
         /** @var Fragment[] */
         private array $fragments,
         /** @var FragmentReference[] */
@@ -30,19 +27,11 @@ class ParsedData
     }
 
     /**
-     * @return QueryOperation[]
+     * @return OperationInterface[]
      */
-    public function getQueryOperations(): array
+    public function getOperations(): array
     {
-        return $this->queryOperations;
-    }
-
-    /**
-     * @return MutationOperation[]
-     */
-    public function getMutationOperations(): array
-    {
-        return $this->mutationOperations;
+        return $this->operations;
     }
 
     /**
@@ -83,8 +72,7 @@ class ParsedData
     public function toArray(): array
     {
         return [
-            'queryOperations'    => $this->getQueryOperations(),
-            'mutationOperations' => $this->getMutationOperations(),
+            'operations'         => $this->getOperations(),
             'fragments'          => $this->getFragments(),
             'fragmentReferences' => $this->getFragmentReferences(),
             'variables'          => $this->getVariables(),
