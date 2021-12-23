@@ -10,19 +10,22 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Mutation;
+use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
+use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
+use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 use PoPBackbone\GraphQLParser\Parser\ParsedData;
 
 class Request implements RequestInterface
 {
     /** @var Query[] */
-    private array $queries = [];
+    private array $queryOperations = [];
+
+    /** @var Mutation[] */
+    private array $mutationOperations = [];
 
     /** @var Fragment[] */
     private array $fragments = [];
-
-    /** @var Mutation[] */
-    private array $mutations = [];
 
     /** @var array<string, mixed> */
     private $variableValues = [];
@@ -30,8 +33,8 @@ class Request implements RequestInterface
     /** @var VariableReference[] */
     private array $variableReferences = [];
 
-    /** @var Variable[] */
-    private array $queryVariables = [];
+    // /** @var Variable[] */
+    // private array $queryVariables = [];
 
     /** @var FragmentReference[] */
     private array $fragmentReferences = [];
@@ -44,12 +47,12 @@ class Request implements RequestInterface
             $data = $data->toArray();
         }
 
-        if (array_key_exists('queries', $data)) {
-            $this->addQueries($data['queries']);
+        if (array_key_exists('queryOperations', $data)) {
+            $this->addQueryOperations($data['queryOperations']);
         }
 
-        if (array_key_exists('mutations', $data)) {
-            $this->addMutations($data['mutations']);
+        if (array_key_exists('mutationOperations', $data)) {
+            $this->addMutationOperations($data['mutationOperations']);
         }
 
         if (array_key_exists('fragments', $data)) {
@@ -60,41 +63,41 @@ class Request implements RequestInterface
             $this->addFragmentReferences($data['fragmentReferences']);
         }
 
-        if (array_key_exists('variables', $data)) {
-            $this->addQueryVariables($data['variables']);
-        }
+        // if (array_key_exists('variables', $data)) {
+        //     $this->addQueryVariables($data['variables']);
+        // }
 
-        if (array_key_exists('variableReferences', $data)) {
-            /** @var VariableReference[] */
-            $variableReferences = $data['variableReferences'];
-            foreach ($variableReferences as $ref) {
-                if (!array_key_exists($ref->getName(), $variableValues)) {
-                    $variable = $ref->getVariable();
-                    /**
-                     * If $variable is null, then it was not declared in the operation arguments
-                     * @see https://graphql.org/learn/queries/#variables
-                     */
-                    if ($variable === null) {
-                        throw new InvalidRequestException(
-                            $this->getVariableHasntBeenDeclaredErrorMessage($ref->getName()),
-                            $ref->getLocation()
-                        );
-                    }
-                    if ($variable->hasDefaultValue()) {
-                        $variableValues[$variable->getName()] = $variable->getDefaultValue()->getValue();
-                        continue;
-                    }
-                    throw new InvalidRequestException(
-                        $this->getVariableHasntBeenSubmittedErrorMessage($ref->getName()),
-                        $ref->getLocation()
-                    );
-                }
-            }
+        // if (array_key_exists('variableReferences', $data)) {
+        //     /** @var VariableReference[] */
+        //     $variableReferences = $data['variableReferences'];
+        //     foreach ($variableReferences as $ref) {
+        //         if (!array_key_exists($ref->getName(), $variableValues)) {
+        //             $variable = $ref->getVariable();
+        //             /**
+        //              * If $variable is null, then it was not declared in the operation arguments
+        //              * @see https://graphql.org/learn/queries/#variables
+        //              */
+        //             if ($variable === null) {
+        //                 throw new InvalidRequestException(
+        //                     $this->getVariableHasntBeenDeclaredErrorMessage($ref->getName()),
+        //                     $ref->getLocation()
+        //                 );
+        //             }
+        //             if ($variable->hasDefaultValue()) {
+        //                 $variableValues[$variable->getName()] = $variable->getDefaultValue()->getValue();
+        //                 continue;
+        //             }
+        //             throw new InvalidRequestException(
+        //                 $this->getVariableHasntBeenSubmittedErrorMessage($ref->getName()),
+        //                 $ref->getLocation()
+        //             );
+        //         }
+        //     }
 
-            $this->addVariableReferences($variableReferences);
-        }
+        //     $this->addVariableReferences($variableReferences);
+        // }
 
-        $this->setVariableValues($variableValues);
+        // $this->setVariableValues($variableValues);
 
         return $this;
     }
@@ -110,23 +113,25 @@ class Request implements RequestInterface
     }
 
     /**
-     * @param Query[] $queries
+     * @param Query[] $queryOperations
      */
-    public function addQueries(array $queries): void
+    public function addQueryOperations(array $queryOperations): void
     {
-        foreach ($queries as $query) {
-            $this->queries[] = $query;
-        }
+        $this->queryOperations = array_merge(
+            $this->queryOperations,
+            $queryOperations
+        );
     }
 
     /**
-     * @param Mutation[] $mutations
+     * @param Mutation[] $mutationOperations
      */
-    public function addMutations(array $mutations): void
+    public function addMutationOperations(array $mutationOperations): void
     {
-        foreach ($mutations as $mutation) {
-            $this->mutations[] = $mutation;
-        }
+        $this->mutationOperations = array_merge(
+            $this->mutationOperations,
+            $mutationOperations
+        );
     }
 
     /**
@@ -170,19 +175,37 @@ class Request implements RequestInterface
     }
 
     /**
-     * @return Query[]
+     * @return OperationInterface[]
      */
     public function getAllOperations(): array
     {
-        return array_merge($this->mutations, $this->queries);
+        return array_merge($this->mutationOperations, $this->queryOperations);
     }
 
     /**
-     * @return Query[]
+     * @return QueryOperation[]
      */
-    public function getQueries(): array
+    public function getQueryOperations(): array
     {
-        return $this->queries;
+        return $this->queryOperations;
+    }
+
+    /**
+     * @return MutationOperation[]
+     */
+    public function getMutationOperations(): array
+    {
+        return $this->mutationOperations;
+    }
+
+    public function hasQueryOperations(): bool
+    {
+        return count($this->queryOperations) > 0;
+    }
+
+    public function hasMutationOperations(): bool
+    {
+        return count($this->mutationOperations) > 0;
     }
 
     /**
@@ -207,24 +230,6 @@ class Request implements RequestInterface
         }
 
         return null;
-    }
-
-    /**
-     * @return Mutation[]
-     */
-    public function getMutations(): array
-    {
-        return $this->mutations;
-    }
-
-    public function hasQueries(): bool
-    {
-        return count($this->queries) > 0;
-    }
-
-    public function hasMutations(): bool
-    {
-        return count($this->mutations) > 0;
     }
 
     public function hasFragments(): bool

@@ -10,7 +10,10 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Mutation;
+use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
+use PoPBackbone\GraphQLParser\Parser\Ast\OperationInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\Query;
+use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 use PoPBackbone\GraphQLParser\Parser\ParsedData;
 
 interface RequestInterface
@@ -26,13 +29,13 @@ interface RequestInterface
     ): self;
 
     /**
-     * @param Query[] $queries
+     * @param QueryOperation[] $queryOperations
      */
-    public function addQueries(array $queries): void;
+    public function addQueryOperations(array $queryOperations): void;
     /**
-     * @param Mutation[] $mutations
+     * @param MutationOperation[] $mutationOperations
      */
-    public function addMutations(array $mutations): void;
+    public function addMutationOperations(array $mutationOperations): void;
     /**
      * @param Variable[] $queryVariables
      */
@@ -50,13 +53,13 @@ interface RequestInterface
      */
     public function addFragments(array $fragments): void;
     /**
-     * @return Query[]
+     * @return OperationInterface[]
      */
     public function getAllOperations(): array;
     /**
-     * @return Query[]
+     * @return QueryOperation[]
      */
-    public function getQueries(): array;
+    public function getQueryOperations(): array;
     /**
      * @return Fragment[]
      */
@@ -64,11 +67,11 @@ interface RequestInterface
     public function addFragment(Fragment $fragment): void;
     public function getFragment(string $name): ?Fragment;
     /**
-     * @return Mutation[]
+     * @return MutationOperation[]
      */
-    public function getMutations(): array;
-    public function hasQueries(): bool;
-    public function hasMutations(): bool;
+    public function getMutationOperations(): array;
+    public function hasQueryOperations(): bool;
+    public function hasMutationOperations(): bool;
     public function hasFragments(): bool;
     /**
      * @return array<string,mixed>
