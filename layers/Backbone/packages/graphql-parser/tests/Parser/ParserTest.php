@@ -84,7 +84,7 @@ GRAPHQL;
                             new Location(5, 5)
                         ),
                     ],
-                    new Location(1, 0)
+                    new Location(1, 1)
                 )
             ],
             'fragments'          => [],
@@ -150,7 +150,7 @@ GRAPHQL;
                     new Field('foo', '', [], [], new Location(1, 3)),
                     new Field('bar', '', [], [], new Location(1, 20)),
                 ],
-                new Location(1, 0)
+                new Location(1, 1)
             )
         ], $document->toArray()['operations']);
     }
@@ -165,7 +165,7 @@ GRAPHQL;
                     [
                         new Field('name', '', [], [], new Location(1, 3)),
                     ],
-                    new Location(1, 0)
+                    new Location(1, 1)
                 )
             ],
             'fragments'          => [],
@@ -186,7 +186,7 @@ GRAPHQL;
                             new Field('name', null, [], [], new Location(1, 16)),
                         ], [], new Location(1, 9)),
                     ],
-                    new Location(1, 0)
+                    new Location(1, 1)
                 )
             ],
             'fragments'          => [],
@@ -330,7 +330,7 @@ GRAPHQL;
                             ], [], new Location(9, 21)),
                         ], [], new Location(3, 17)),
                     ],
-                    new Location(1, 0)
+                    new Location(1, 1)
                 )
             ],
             'fragments'          => [
@@ -453,7 +453,7 @@ GRAPHQL;
                             new Location(3, 23)
                         ),
                     ],
-                    new Location(1, 0)
+                    new Location(1, 1)
                 )
             ],
             'fragments'          => [],
@@ -490,7 +490,7 @@ GRAPHQL;
                                     new Location(1, 25)
                                 ),
                             ],
-                            new Location(1, 0)
+                            new Location(1, 1)
                         )
                     ],
                     'fragments'          => [],
@@ -505,7 +505,7 @@ GRAPHQL;
                     'operations'            => [
                         new QueryOperation('', [], [], [
                             new RelationalField('query', null, [], [new Field('name', 'alias', [], [], new Location(1, 18))], [], new Location(1, 3)),
-                        ], new Location(1, 0)),
+                        ], new Location(1, 1)),
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -531,7 +531,7 @@ GRAPHQL;
                                     new Location(1, 12)
                                 ),
                             ],
-                            new Location(1, 0)
+                            new Location(1, 1)
                         )
                     ],
                     'fragments'          => [],
@@ -555,7 +555,7 @@ GRAPHQL;
                                     new Location(1, 19)
                                 ),
                             ],
-                            new Location(1, 0)
+                            new Location(1, 1)
                         )
                     ],
                     'fragments'          => [],
@@ -591,7 +591,7 @@ GRAPHQL;
                             ], [
                                 new Field('title', null, [], [], new Location(1, 27)),
                             ], [], new Location(1, 3))
-                        ], new Location(1, 0)),
+                        ], new Location(1, 1)),
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -607,7 +607,7 @@ GRAPHQL;
                             ], [
                                 new Field('id', null, [], [], new Location(1, 19)),
                             ], [], new Location(1, 3)),
-                        ], new Location(1, 0))
+                        ], new Location(1, 1))
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -623,7 +623,7 @@ GRAPHQL;
                             ], [
                                 new Field('id', null, [], [], new Location(2, 4)),
                             ], [], new Location(1, 3)),
-                        ], new Location(1, 0))
+                        ], new Location(1, 1))
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -645,7 +645,7 @@ GRAPHQL;
                                 new Field('__typename', null, [], [], new Location(3, 21)),
                                 new Field('name', null, [], [], new Location(4, 21)),
                             ], [], new Location(2, 19)),
-                        ], new Location(1, 0))
+                        ], new Location(1, 1))
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -660,7 +660,7 @@ GRAPHQL;
                                 new Field('__typename', null, [], [], new Location(1, 10)),
                                 new Field('id', null, [], [], new Location(1, 22)),
                             ], [], new Location(1, 3)),
-                        ], new Location(1, 0))
+                        ], new Location(1, 1))
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -708,7 +708,7 @@ GRAPHQL;
                     'operations'            => [
                         new QueryOperation('', [], [], [
                             new RelationalField('test', null, [], [new FragmentReference('userDataFragment', new Location(1, 13))], [], new Location(1, 3)),
-                        ], new Location(1, 0))
+                        ], new Location(1, 1))
                     ],
                     'fragments'          => [
                         new Fragment('userDataFragment', 'User', [], [
@@ -740,7 +740,7 @@ GRAPHQL;
                                 [],
                                 new Location(1, 3)
                             ),
-                        ], new Location(1, 0))
+                        ], new Location(1, 1))
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -763,7 +763,7 @@ GRAPHQL;
                                 [],
                                 new Location(1, 14)
                             ),
-                        ], new Location(1, 0))
+                        ], new Location(1, 1))
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -786,7 +786,7 @@ GRAPHQL;
                                 [],
                                 new Location(1, 14)
                             )
-                        ], new Location(1, 0))
+                        ], new Location(1, 1))
                     ],
                     'fragments'          => [],
                     'variables'          => [],
@@ -817,7 +817,7 @@ GRAPHQL;
                                 [],
                                 new Location(1, 14)
                             ),
-                        ], new Location(1, 0))
+                        ], new Location(1, 1))
                     ],
                     'fragments'          => [],
                     'variables'          => [],
