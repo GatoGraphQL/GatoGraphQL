@@ -32,11 +32,11 @@ class RequestValidatorTest extends TestCase
     public function invalidRequestProvider()
     {
         $variable1 = new Variable('test', 'Int', false, false, true, new Location(1, 1));
-        $variable1->setUsed(true);
+        // $variable1->setUsed(true);
         $variable2 = new Variable('test2', 'Int', false, false, true, new Location(1, 1));
-        $variable2->setUsed(true);
+        // $variable2->setUsed(true);
         $variable3 = new Variable('test3', 'Int', false, false, true, new Location(1, 1));
-        $variable3->setUsed(false);
+        // $variable3->setUsed(false);
 
         return [
             [

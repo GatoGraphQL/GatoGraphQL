@@ -75,9 +75,9 @@ class AstTest extends TestCase
         $fragment->setFields($newField);
         $this->assertEquals($newField, $fragment->getFields());
 
-        $this->assertFalse($fragment->isUsed());
-        $fragment->setUsed(true);
-        $this->assertTrue($fragment->isUsed());
+        // $this->assertFalse($fragment->isUsed());
+        // $fragment->setUsed(true);
+        // $this->assertTrue($fragment->isUsed());
     }
 
     public function testFragmentReference()

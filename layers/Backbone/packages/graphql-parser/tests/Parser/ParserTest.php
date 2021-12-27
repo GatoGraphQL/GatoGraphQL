@@ -457,7 +457,7 @@ GRAPHQL;
     public function mutationProvider()
     {
         $variable = new Variable('variable', 'Int', false, false, true, new Location(1, 8));
-        $variable->setUsed(true);
+        // $variable->setUsed(true);
         return [
             [
                 'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
