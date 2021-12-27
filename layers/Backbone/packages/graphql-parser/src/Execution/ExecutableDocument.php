@@ -137,26 +137,16 @@ class ExecutableDocument implements ExecutableDocumentInterface
     {
         foreach ($operations as $operation) {
             foreach ($operation->getVariableReferences() as $variableReference) {
+                /** @var Variable */
                 $variable = $variableReference->getVariable();
-                /**
-                 * If $variable is null, then it was not declared in the operation arguments
-                 * @see https://graphql.org/learn/queries/#variables
-                 */
-                if ($variable === null) {
-                    throw new InvalidRequestException(
-                        $this->getVariableHasntBeenDeclaredErrorMessage($variableReference->getName()),
-                        $variableReference->getLocation()
-                    );
-                }
-                if (array_key_exists($variableReference->getName(), $this->variableValues)) {
+                if (array_key_exists($variableReference->getName(), $this->variableValues)
+                    || $variable->hasDefaultValue()) {
                     continue;
                 }
-                if (!$variable->hasDefaultValue()) {
-                    throw new InvalidRequestException(
-                        $this->getVariableHasntBeenSubmittedErrorMessage($variableReference->getName()),
-                        $variableReference->getLocation()
-                    );
-                }
+                throw new InvalidRequestException(
+                    $this->getVariableHasntBeenSubmittedErrorMessage($variableReference->getName()),
+                    $variableReference->getLocation()
+                );
             }
         }
     }
