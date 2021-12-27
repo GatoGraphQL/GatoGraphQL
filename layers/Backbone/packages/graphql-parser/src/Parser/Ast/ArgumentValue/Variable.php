@@ -104,6 +104,7 @@ class Variable extends AbstractAst implements WithValueInterface
     /**
      * Get the value from the context or from the variable
      *
+     * @return InputList|InputObject|Literal|null
      * @throws LogicException
      */
     public function getValue(): mixed
