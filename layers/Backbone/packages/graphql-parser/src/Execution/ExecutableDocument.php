@@ -11,17 +11,17 @@ use PoPBackbone\GraphQLParser\Parser\Location;
 
 class ExecutableDocument implements ExecutableDocumentInterface
 {
-    private string $operationName;
+    private Context $context;
     private ?array $executableOperations = null;
     private ?array $operationVariableValues = null;
 
     public function __construct(
         private Document $document,
         /** @var array<string, mixed> */
-        private array $variableValues = [],
+        array $variableValues = [],
         ?string $operationName = null,
     ) {
-        $this->operationName = $operationName ?? '';
+        $this->context = new Context($operationName, $variableValues);
     }
 
     /**
@@ -39,7 +39,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
 
         // Obtain the operations that must be executed
         $this->executableOperations = $this->assertAndGetRequestedOperations(
-            $this->operationName
+            $this->context->getOperationName()
         );
 
         // Inject the variable values into the objects
@@ -69,7 +69,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
             );
         }
 
-        if (empty($this->operationName)) {
+        if ($this->context->getOperationName() === '') {
             if ($operationCount > 1) {
                 throw new InvalidRequestException(
                     $this->getNoOperationNameProvidedErrorMessage(),
@@ -83,7 +83,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
         $selectedOperations = $this->getSelectedOperationsToExecute();
         if ($selectedOperations === []) {
             throw new InvalidRequestException(
-                $this->getNoOperationMatchesNameErrorMessage($this->operationName),
+                $this->getNoOperationMatchesNameErrorMessage($this->context->getOperationName()),
                 new Location(1, 1)
             );
         }
@@ -97,9 +97,10 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     protected function getSelectedOperationsToExecute(): array
     {
+        $operationName = $this->context->getOperationName();
         return array_values(array_filter(
             $this->document->getOperations(),
-            fn (OperationInterface $operation) => $operation->getName() === $this->operationName
+            fn (OperationInterface $operation) => $operation->getName() === $operationName
         ));
     }
 
@@ -130,7 +131,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
             foreach ($operation->getVariableReferences() as $variableReference) {
                 /** @var Variable */
                 $variable = $variableReference->getVariable();
-                if (array_key_exists($variable->getName(), $this->variableValues)
+                if (array_key_exists($variable->getName(), $this->context->getVariableValues())
                     || $variable->hasDefaultValue()
                 ) {
                     continue;
@@ -157,11 +158,12 @@ class ExecutableDocument implements ExecutableDocumentInterface
     {
         $this->operationVariableValues[$operation->getName()] = [];
         $variables = $operation->getVariables();
+        $variableValues = $this->context->getVariableValues();
         foreach ($operation->getVariableReferences() as $variableReference) {
             $variableName = $variableReference->getName();
             // If the value was provided, then use it
-            if (array_key_exists($variableName, $this->variableValues)) {
-                $this->operationVariableValues[$operation->getName()][$variableName] = $this->variableValues[$variableName];
+            if (array_key_exists($variableName, $variableValues)) {
+                $this->operationVariableValues[$operation->getName()][$variableName] = $variableValues[$variableName];
                 continue;
             }
             // Otherwise, use the variable's default value
