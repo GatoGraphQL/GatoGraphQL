@@ -669,7 +669,9 @@ GRAPHQL;
             [
                 'query {}',
                 [
-                    'operations'    => [],
+                    'operations'    => [
+                        new QueryOperation('', [], [], [], new Location(1, 7))
+                    ],
                     'fragments'          => [],
                 ],
             ],
