@@ -34,7 +34,7 @@ class Parser extends UpstreamParser implements ParserInterface
         string $type,
         bool $required,
         bool $isArray,
-        bool $arrayElementNullable,
+        bool $arrayElementRequired,
         Location $location,
     ): Variable {
         return new ExtendedVariable(
@@ -42,7 +42,7 @@ class Parser extends UpstreamParser implements ParserInterface
             $type,
             $required,
             $isArray,
-            $arrayElementNullable,
+            $arrayElementRequired,
             $location,
         );
     }

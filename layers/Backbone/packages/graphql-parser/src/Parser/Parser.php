@@ -217,7 +217,7 @@ class Parser extends Tokenizer implements ParserInterface
             $this->eat(Token::TYPE_COLON);
 
             $isArray              = false;
-            $arrayElementNullable = true;
+            $arrayElementRequired = false;
 
             if ($this->match(Token::TYPE_LSQUARE_BRACE)) {
                 $isArray = true;
@@ -226,7 +226,7 @@ class Parser extends Tokenizer implements ParserInterface
                 $type = $this->eatIdentifierToken()->getData();
 
                 if ($this->match(Token::TYPE_REQUIRED)) {
-                    $arrayElementNullable = false;
+                    $arrayElementRequired = true;
                     $this->eat(Token::TYPE_REQUIRED);
                 }
 
@@ -246,7 +246,7 @@ class Parser extends Tokenizer implements ParserInterface
                 (string)$type,
                 $required,
                 $isArray,
-                $arrayElementNullable,
+                $arrayElementRequired,
                 $this->getTokenLocation($variableToken),
             );
 
@@ -274,7 +274,7 @@ class Parser extends Tokenizer implements ParserInterface
         string $type,
         bool $required,
         bool $isArray,
-        bool $arrayElementNullable,
+        bool $arrayElementRequired,
         Location $location,
     ): Variable {
         return new Variable(
@@ -282,7 +282,7 @@ class Parser extends Tokenizer implements ParserInterface
             $type,
             $required,
             $isArray,
-            $arrayElementNullable,
+            $arrayElementRequired,
             $location
         );
     }
