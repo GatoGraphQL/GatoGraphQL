@@ -228,8 +228,14 @@ class ExecutableDocument implements ExecutableDocumentInterface
     protected function assertAllVariablesExist(): void
     {
         foreach ($this->document->getOperations() as $operation) {
+            $variableNames = [];
+            foreach ($operation->getVariables() as $variable) {
+                $variableNames[] = $variable->getName();
+            }
+            $variableNames = array_values(array_unique($variableNames));
+
             foreach ($operation->getVariableReferences() as $variableReference) {
-                if ($variableReference->getVariable() !== null) {
+                if (in_array($variableReference->getName(), $variableNames)) {
                     continue;
                 }
                 throw new InvalidRequestException(
@@ -251,8 +257,14 @@ class ExecutableDocument implements ExecutableDocumentInterface
     protected function assertAllVariablesAreUsed(): void
     {
         foreach ($this->document->getOperations() as $operation) {
+            $referencedVariableNames = [];
+            foreach ($operation->getVariableReferences() as $variableReference) {
+                $referencedVariableNames[] = $variableReference->getName();
+            }
+            $referencedVariableNames = array_values(array_unique($referencedVariableNames));
+
             foreach ($operation->getVariables() as $variable) {
-                if ($variable->isUsed()) {
+                if (in_array($variable->getName(), $referencedVariableNames)) {
                     continue;
                 }
                 throw new InvalidRequestException(
