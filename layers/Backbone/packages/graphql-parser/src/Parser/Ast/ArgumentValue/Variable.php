@@ -9,6 +9,7 @@ use PoPBackbone\GraphQLParser\Execution\Context;
 use PoPBackbone\GraphQLParser\Parser\Ast\AbstractAst;
 use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
+use stdClass;
 
 class Variable extends AbstractAst implements WithValueInterface
 {
@@ -111,7 +112,14 @@ class Variable extends AbstractAst implements WithValueInterface
             throw new LogicException($this->getContextNotSetErrorMessage($this->name));
         }
         if ($this->context->hasVariableValue($this->name)) {
-            return $this->context->getVariableValue($this->name);
+            $variableValue = $this->context->getVariableValue($this->name);
+            if (is_array($variableValue)) {
+                return new InputList($variableValue, $this->getLocation());    
+            }
+            if ($variableValue instanceof stdClass) {
+                return new InputObject($variableValue, $this->getLocation());    
+            }
+            return new Literal($variableValue, $this->getLocation());
         }
         if ($this->hasDefaultValue()) {
             return $this->getDefaultValue();
