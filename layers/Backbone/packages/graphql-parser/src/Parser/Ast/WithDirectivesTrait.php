@@ -9,9 +9,6 @@ trait WithDirectivesTrait
     /** @var array<string,Directive> */
     protected array $directives;
 
-    /** @var array<string,Directive>|null */
-    private ?array $directivesCache = null;
-
     public function hasDirectives(): bool
     {
         return count($this->directives) > 0;
@@ -40,9 +37,7 @@ trait WithDirectivesTrait
      */
     public function setDirectives(array $directives): void
     {
-        $this->directives      = [];
-        $this->directivesCache = null;
-
+        $this->directives = [];
         foreach ($directives as $directive) {
             $this->addDirective($directive);
         }
