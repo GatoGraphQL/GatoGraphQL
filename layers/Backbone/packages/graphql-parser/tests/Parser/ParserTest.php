@@ -83,7 +83,7 @@ GRAPHQL;
                             new Location(5, 5)
                         ),
                     ],
-                    new Location(1, 1)
+                    new Location(4, 7)
                 )
             ],
             'fragments'          => [],
@@ -456,7 +456,7 @@ GRAPHQL;
 
     public function mutationProvider()
     {
-        $variable = new Variable('variable', 'Int', false, false, true, new Location(1, 8));
+        $variable = new Variable('variable', 'Int', false, false, false, new Location(1, 8));
         // $variable->setUsed(true);
         return [
             [
@@ -466,7 +466,7 @@ GRAPHQL;
                         new QueryOperation(
                             '', 
                             [
-                                new Variable('variable', 'Int', false, false, false, new Location(1, 7)),
+                                $variable,
                             ],
                             [],
                             [
@@ -483,7 +483,7 @@ GRAPHQL;
                                     new Location(1, 25)
                                 ),
                             ],
-                            new Location(1, 1)
+                            new Location(1, 7)
                         )
                     ],
                     'fragments'          => [],

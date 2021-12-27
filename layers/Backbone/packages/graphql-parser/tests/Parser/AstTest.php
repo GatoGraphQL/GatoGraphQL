@@ -172,7 +172,7 @@ class AstTest extends TestCase
 
         $this->assertEquals('id', $variable->getName());
         $this->assertEquals('int', $variable->getTypeName());
-        $this->assertFalse($variable->isNullable());
+        $this->assertFalse($variable->isRequired());
         $this->assertFalse($variable->isArray());
 
         $variable->setTypeName('string');
@@ -182,9 +182,9 @@ class AstTest extends TestCase
         $this->assertEquals('limit', $variable->getName());
 
         $variable->setIsArray(true);
-        $variable->setNullable(true);
+        $variable->setRequired(true);
 
-        $this->assertTrue($variable->isNullable());
+        $this->assertTrue($variable->isRequired());
         $this->assertTrue($variable->isArray());
 
         $variable->setContext(new Context('', [$variable->getName() => 'text']));
