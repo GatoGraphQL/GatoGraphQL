@@ -4,15 +4,11 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue;
 
-use LogicException;
 use PoPBackbone\GraphQLParser\Parser\Ast\AbstractAst;
-use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class Variable extends AbstractAst implements WithValueInterface
+class Variable extends AbstractAst
 {
-    private mixed $value = null;
-
     private bool $hasDefaultValue = false;
 
     private mixed $defaultValue = null;
@@ -26,31 +22,6 @@ class Variable extends AbstractAst implements WithValueInterface
         Location $location,
     ) {
         parent::__construct($location);
-    }
-
-    /**
-     * @throws LogicException
-     */
-    public function getValue(): mixed
-    {
-        if (null === $this->value) {
-            if ($this->hasDefaultValue()) {
-                return $this->defaultValue;
-            }
-            throw new LogicException($this->getValueIsNotSetForVariableErrorMessage($this->name));
-        }
-
-        return $this->value;
-    }
-
-    protected function getValueIsNotSetForVariableErrorMessage(string $variableName): string
-    {
-        return sprintf('Value is not set for variable \'%s\'', $variableName);
-    }
-
-    public function setValue(mixed $value): void
-    {
-        $this->value = $value;
     }
 
     public function getName(): string
