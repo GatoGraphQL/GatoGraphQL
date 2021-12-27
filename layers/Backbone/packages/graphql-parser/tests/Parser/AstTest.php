@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser;
 
+use PHPUnit\Framework\TestCase;
+use PoPBackbone\GraphQLParser\Execution\Context;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
@@ -14,7 +16,6 @@ use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
 use PoPBackbone\GraphQLParser\Parser\Ast\TypedFragmentReference;
-use PHPUnit\Framework\TestCase;
 
 class AstTest extends TestCase
 {
@@ -186,7 +187,7 @@ class AstTest extends TestCase
         $this->assertTrue($variable->isNullable());
         $this->assertTrue($variable->isArray());
 
-        $variable->setValue(new Literal('text', new Location(1, 1)));
+        $variable->setContext(new Context('', [$variable->getName() => 'text']));
         $this->assertEquals(new Literal('text', new Location(1, 1)), $variable->getValue());
     }
 
