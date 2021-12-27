@@ -67,12 +67,12 @@ class Variable extends AbstractAst implements WithValueInterface
 
     public function isRequired(): bool
     {
-        return $this->required;
+        return $this->isRequired;
     }
 
     public function setRequired(bool $isRequired): void
     {
-        $this->required = $isRequired;
+        $this->isRequired = $isRequired;
     }
 
     public function hasDefaultValue(): bool
