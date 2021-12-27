@@ -42,7 +42,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
         $this->assertAllVariablesHaveValue();
 
         // Obtain the operations that must be executed
-        $requestedOperations = $this->getRequestedOperations(
+        $requestedOperations = $this->assertAndGetRequestedOperations(
             $this->document->getOperations(),
             $this->operationName
         );
@@ -64,7 +64,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
      *
      * @see https://spec.graphql.org/draft/#sec-Executing-Requests
      */
-    protected function getRequestedOperations(array $operations, ?string $operationName): array
+    protected function assertAndGetRequestedOperations(array $operations, ?string $operationName): array
     {
         $operationCount = count($operations);
         if ($operationCount === 0) {
