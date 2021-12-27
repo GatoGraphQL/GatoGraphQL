@@ -75,10 +75,6 @@ class AstTest extends TestCase
         ];
         $fragment->setFieldOrFragmentReferences($newField);
         $this->assertEquals($newField, $fragment->getFieldOrFragmentReferences());
-
-        // $this->assertFalse($fragment->isUsed());
-        // $fragment->setUsed(true);
-        // $this->assertTrue($fragment->isUsed());
     }
 
     public function testFragmentReference()
