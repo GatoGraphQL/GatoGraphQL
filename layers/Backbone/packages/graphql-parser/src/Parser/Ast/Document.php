@@ -33,17 +33,6 @@ class Document
         return $this->fragments;
     }
 
-    /**
-     * @return array<string, mixed>
-     */
-    public function toArray(): array
-    {
-        return [
-            'operations'         => $this->getOperations(),
-            'fragments'          => $this->getFragments(),
-        ];
-    }
-
     public function getFragment(string $name): ?Fragment
     {
         foreach ($this->fragments as $fragment) {

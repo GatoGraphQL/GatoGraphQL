@@ -13,16 +13,27 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
+use PoPBackbone\GraphQLParser\Parser\Ast\Document;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
+use PoPBackbone\GraphQLParser\Parser\Ast\InlineFragment;
+use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
 use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
 use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
-use PoPBackbone\GraphQLParser\Parser\Ast\InlineFragment;
 
 class ParserTest extends TestCase
 {
+    /**
+     * @return array<string, mixed>
+     */
+    protected function documentToArray(Document $document): array
+    {
+        return [
+            'operations'         => $document->getOperations(),
+            'fragments'          => $document->getFragments(),
+        ];
+    }
 
     public function testEmptyParser()
     {
@@ -32,7 +43,7 @@ class ParserTest extends TestCase
         $this->assertEquals([
             'operations'    => [],
             'fragments'          => [],
-        ], $document->toArray());
+        ], $this->documentToArray($document));
     }
 
     public function testInvalidSelection()
@@ -67,7 +78,7 @@ GRAPHQL;
         $parser     = new Parser();
         $document = $parser->parse($query);
 
-        $this->assertEquals($document->toArray(), [
+        $this->assertEquals($this->documentToArray($document), [
             'operations'            => [
                 new QueryOperation('', [], [],
                     [
@@ -151,7 +162,7 @@ GRAPHQL;
                 ],
                 new Location(1, 1)
             )
-        ], $document->toArray()['operations']);
+        ], $this->documentToArray($document)['operations']);
     }
 
     public function testQueryWithNoFields()
@@ -168,7 +179,7 @@ GRAPHQL;
                 )
             ],
             'fragments'          => [],
-        ], $document->toArray());
+        ], $this->documentToArray($document));
     }
 
     public function testQueryWithFields()
@@ -188,7 +199,7 @@ GRAPHQL;
                 )
             ],
             'fragments'          => [],
-        ], $document->toArray());
+        ], $this->documentToArray($document));
     }
 
     public function testFragmentWithFields()
@@ -211,7 +222,7 @@ GRAPHQL;
                     ], [], new Location(4, 17)),
                 ], new Location(2, 22)),
             ],
-        ], $document->toArray());
+        ], $this->documentToArray($document));
     }
 
     public function testInspectionQuery()
@@ -388,7 +399,7 @@ GRAPHQL;
                     ], [], new Location(65, 17)),
                 ], new Location(62, 22)),
             ],
-        ], $document->toArray());
+        ], $this->documentToArray($document));
     }
 
     public function wrongQueriesProvider()
@@ -415,7 +426,7 @@ GRAPHQL;
 
         $document = $parser->parse($query);
 
-        $this->assertEquals($document->toArray(), $structure);
+        $this->assertEquals($this->documentToArray($document), $structure);
     }
 
     public function testTypedFragment()
@@ -432,7 +443,7 @@ GRAPHQL;
             }
         ');
 
-        $this->assertEquals($document->toArray(), [
+        $this->assertEquals($this->documentToArray($document), [
             'operations'            => [
                 new QueryOperation('', [], [],
                     [
@@ -559,7 +570,7 @@ GRAPHQL;
         $parser          = new Parser();
         $document = $parser->parse($query);
 
-        $this->assertEquals($structure, $document->toArray());
+        $this->assertEquals($structure, $this->documentToArray($document));
     }
 
 
@@ -844,7 +855,7 @@ GRAPHQL;
             }
         ');
 
-        $this->assertArrayNotHasKey('errors', $document->toArray());
+        $this->assertArrayNotHasKey('errors', $this->documentToArray($document));
     }
 
     public function testVariableDefaultValue()
