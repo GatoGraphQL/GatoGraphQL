@@ -61,7 +61,7 @@ class AstTest extends TestCase
 
         $this->assertEquals('shipInfo', $fragment->getName());
         $this->assertEquals('Ship', $fragment->getModel());
-        $this->assertEquals($fields, $fragment->getFields());
+        $this->assertEquals($fields, $fragment->getFieldOrFragmentReferences());
 
         $fragment->setName('largeShipInfo');
         $this->assertEquals('largeShipInfo', $fragment->getName());
@@ -72,8 +72,8 @@ class AstTest extends TestCase
         $newField = [
             new Field('id', null, [], [], new Location(1, 1))
         ];
-        $fragment->setFields($newField);
-        $this->assertEquals($newField, $fragment->getFields());
+        $fragment->setFieldOrFragmentReferences($newField);
+        $this->assertEquals($newField, $fragment->getFieldOrFragmentReferences());
 
         // $this->assertFalse($fragment->isUsed());
         // $fragment->setUsed(true);
@@ -99,7 +99,7 @@ class AstTest extends TestCase
         $reference = new TypedFragmentReference('Ship', $fields, [], new Location(1, 1));
 
         $this->assertEquals('Ship', $reference->getTypeName());
-        $this->assertEquals($fields, $reference->getFields());
+        $this->assertEquals($fields, $reference->getFieldOrFragmentReferences());
 
         $reference->setTypeName('BigBoat');
         $this->assertEquals('BigBoat', $reference->getTypeName());
@@ -109,8 +109,8 @@ class AstTest extends TestCase
             new Field('id', null, [], [], new Location(1, 1))
         ];
 
-        $reference->setFields($newFields);
-        $this->assertEquals($newFields, $reference->getFields());
+        $reference->setFieldOrFragmentReferences($newFields);
+        $this->assertEquals($newFields, $reference->getFieldOrFragmentReferences());
     }
 
     public function testQuery()
@@ -129,19 +129,19 @@ class AstTest extends TestCase
         $this->assertEquals('lastShips', $query->getAlias());
         $this->assertEquals(['limit' => $arguments[0]], $query->getArguments());
         $this->assertEquals(['limit' => '10'], $query->getKeyValueArguments());
-        $this->assertEquals($fields, $query->getFields());
+        $this->assertEquals($fields, $query->getFieldOrFragmentReferences());
         $this->assertTrue($query->hasArguments());
-        $this->assertTrue($query->hasFields());
+        $this->assertTrue($query->hasFieldOrFragmentReferences());
 
-        $query->setFields([]);
+        $query->setFieldOrFragmentReferences([]);
         $query->setArguments([]);
 
         $this->assertEmpty($query->getArguments());
-        $this->assertEmpty($query->getFields());
+        $this->assertEmpty($query->getFieldOrFragmentReferences());
         $this->assertEmpty($query->getKeyValueArguments());
 
         $this->assertFalse($query->hasArguments());
-        $this->assertFalse($query->hasFields());
+        $this->assertFalse($query->hasFieldOrFragmentReferences());
 
         $query->addArgument(new Argument('offset', new Literal(10, new Location(1, 1)), new Location(1, 1)));
         $this->assertTrue($query->hasArguments());
