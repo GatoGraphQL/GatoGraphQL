@@ -13,6 +13,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
 {
     private string $operationName;
     private ?array $executableOperations = null;
+    private array $operationVariableValues = [];
 
     public function __construct(
         private Document $document,
@@ -50,8 +51,9 @@ class ExecutableDocument implements ExecutableDocumentInterface
         );
 
         // Inject the variable values into the objects
+        $this->operationVariableValues = [];
         foreach ($this->executableOperations as $operation) {
-            $this->mergeOperationVariables($operation);
+            $this->initializeOperationVariableValues($operation);
         }
     }
 
@@ -159,17 +161,25 @@ class ExecutableDocument implements ExecutableDocumentInterface
         return \sprintf('Variable \'%s\' hasn\'t been submitted', $variableName);
     }
 
-    protected function mergeOperationVariables(OperationInterface $operation): void
+    protected function initializeOperationVariableValues(OperationInterface $operation): void
     {
+        $this->operationVariableValues[$operation->getName()] = [];
+        $variables = $operation->getVariables();
         foreach ($operation->getVariableReferences() as $variableReference) {
-            $variable = $variableReference->getVariable();
-            $variableName = $variable->getName();
-            $variableValue = array_key_exists($variableName, $this->variableValues) ?
-                $this->variableValues[$variableName]
-                : $variable->getDefaultValue()->getValue();
-
-            $variableReference->getVariable()->setValue($variableValue);
-            $variableReference->setValue($variableValue);
+            $variableName = $variableReference->getName();
+            // If the value was provided, then use it
+            if (array_key_exists($variableName, $this->variableValues)) {
+                $this->operationVariableValues[$operation->getName()][$variableName] = $this->variableValues[$variableName];
+                continue;
+            }
+            // Otherwise, use the variable's default value
+            foreach ($variables as $variable) {
+                if ($variable->getName() !== $variableName) {
+                    continue;
+                }
+                $this->operationVariableValues[$operation->getName()][$variableName] = $variable->getDefaultValue();
+                break;
+            }
         }
     }
 
