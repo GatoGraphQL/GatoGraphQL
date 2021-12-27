@@ -170,19 +170,21 @@ class ExecutableDocument implements ExecutableDocumentInterface
         }
     }
 
-    /**=
+    /**
      * @throws InvalidRequestException
      */
     protected function assertFragmentsAreUsed(): void
     {
+        $referencedFragmentNames = [];
         foreach ($this->document->getOperations() as $operation) {
             foreach ($operation->getFragmentReferences() as $fragmentReference) {
-                $this->document->getFragment($fragmentReference->getName())?->setUsed(true);
+                $referencedFragmentNames[] = $fragmentReference->getName();
             }
         }
+        $referencedFragmentNames = array_values(array_unique($referencedFragmentNames));
 
         foreach ($this->document->getFragments() as $fragment) {
-            if ($fragment->isUsed()) {
+            if (in_array($fragment->getName(), $referencedFragmentNames)) {
                 continue;
             }
             throw new InvalidRequestException(
