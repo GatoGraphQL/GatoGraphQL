@@ -378,7 +378,7 @@ class Parser extends Tokenizer implements ParserInterface
     /**
      * @throws SyntaxErrorException
      */
-    protected function parseBodyItem(string $type, bool $highLevel): AbstractAst
+    protected function parseBodyItem(string $type): AbstractAst
     {
         $nameToken = $this->eatIdentifierToken();
         $alias     = null;
