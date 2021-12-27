@@ -128,7 +128,6 @@ class AstTest extends TestCase
         $this->assertEquals(['limit' => '10'], $query->getKeyValueArguments());
         $this->assertEquals($fields, $query->getFieldsOrFragmentBonds());
         $this->assertTrue($query->hasArguments());
-        $this->assertTrue($query->hasFieldsOrFragmentBonds());
 
         $query->setFieldsOrFragmentBonds([]);
         $query->setArguments([]);
@@ -138,7 +137,6 @@ class AstTest extends TestCase
         $this->assertEmpty($query->getKeyValueArguments());
 
         $this->assertFalse($query->hasArguments());
-        $this->assertFalse($query->hasFieldsOrFragmentBonds());
 
         $query->addArgument(new Argument('offset', new Literal(10, new Location(1, 1)), new Location(1, 1)));
         $this->assertTrue($query->hasArguments());

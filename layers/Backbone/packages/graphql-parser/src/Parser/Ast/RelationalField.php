@@ -46,11 +46,6 @@ class RelationalField extends AbstractAst implements FieldInterface
         return $this->fieldsOrFragmentBonds;
     }
 
-    public function hasFieldsOrFragmentBonds(): bool
-    {
-        return count($this->fieldsOrFragmentBonds) > 0;
-    }
-
     /**
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      */

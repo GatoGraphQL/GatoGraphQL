@@ -177,9 +177,4 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     {
         return $this->fieldsOrFragmentBonds;
     }
-
-    public function hasFieldsOrFragmentBonds(): bool
-    {
-        return count($this->fieldsOrFragmentBonds) > 0;
-    }
 }
