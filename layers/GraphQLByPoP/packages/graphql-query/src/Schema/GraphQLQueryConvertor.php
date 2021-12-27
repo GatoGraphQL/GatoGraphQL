@@ -14,11 +14,8 @@ use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\GraphQLParser\Execution\ExecutableDocument;
-use PoP\GraphQLParser\Execution\RequestInterface;
-use PoP\GraphQLParser\Parser\Parser;
 use PoP\GraphQLParser\Parser\ParserInterface;
 use PoP\GraphQLParser\Query\ClientSymbols;
-use PoP\GraphQLParser\Validator\RequestValidator\RequestValidatorInterface;
 use PoPBackbone\GraphQLParser\Exception\LocationableExceptionInterface;
 use PoPBackbone\GraphQLParser\Execution\ExecutableDocumentInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
@@ -40,8 +37,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?IncludeDirectiveResolver $includeDirectiveResolver = null;
     private ?ParserInterface $parser = null;
-    // private ?RequestInterface $request = null;
-    // private ?RequestValidatorInterface $requestValidator = null;
 
     final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
     {
@@ -75,22 +70,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     {
         return $this->parser ??= $this->instanceManager->getInstance(ParserInterface::class);
     }
-    // final public function setRequest(RequestInterface $request): void
-    // {
-    //     $this->request = $request;
-    // }
-    // final protected function getRequest(): RequestInterface
-    // {
-    //     return $this->request ??= $this->instanceManager->getInstance(RequestInterface::class);
-    // }
-    // final public function setRequestValidator(RequestValidatorInterface $requestValidator): void
-    // {
-    //     $this->requestValidator = $requestValidator;
-    // }
-    // final protected function getRequestValidator(): RequestValidatorInterface
-    // {
-    //     return $this->requestValidator ??= $this->instanceManager->getInstance(RequestValidatorInterface::class);
-    // }
 
     /**
      * Convert the GraphQL Query to PoP query in its requested form
@@ -728,13 +707,5 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         $executableDocument = new ExecutableDocument($document, $operationName, $variableValues);
         $executableDocument->validateAndInitialize();
         return $executableDocument;
-        // // /** @var RequestInterface */
-        // // $request = $this->getRequest()->process($documentData, $variableValues);
-
-        // // If the validation fails, it will throw an exception
-        // $this->getRequestValidator()->validate($request);
-
-        // // Return the request
-        // return $request;
     }
 }
