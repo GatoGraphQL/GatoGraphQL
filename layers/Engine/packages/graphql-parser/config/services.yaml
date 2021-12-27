@@ -12,3 +12,6 @@ services:
 
     PoP\GraphQLParser\Validator\RequestValidator\RequestValidatorInterface:
         class: \PoP\GraphQLParser\Validator\RequestValidator\RequestValidator
+
+    PoP\GraphQLParser\Query\QueryAugmenterServiceInterface:
+        class: \PoP\GraphQLParser\Query\QueryAugmenterService
