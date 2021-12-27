@@ -12,7 +12,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Document;
-use PoPBackbone\GraphQLParser\Parser\Ast\Field;
+use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\QueryOperation;
@@ -101,7 +101,7 @@ class RequestValidatorTest extends TestCase
                                         new Argument('test', new VariableReference('test', null, new Location(1, 1)), new Location(1, 1))
                                     ],
                                     [
-                                        new Field('test', null, [], [], new Location(1, 1))
+                                        new LeafField('test', null, [], [], new Location(1, 1))
                                     ],
                                     [],
                                     new Location(1, 1)
@@ -119,7 +119,7 @@ class RequestValidatorTest extends TestCase
                                     new Argument('test', new VariableReference('test', $variable1, new Location(1, 1)), new Location(1, 1)),
                                     new Argument('test2', new VariableReference('test2', $variable2, new Location(1, 1)), new Location(1, 1)),
                                 ], [
-                                    new Field('test', null, [], [], new Location(1, 1))
+                                    new LeafField('test', null, [], [], new Location(1, 1))
                                 ], [], new Location(1, 1))
                             ], new Location(1, 1))
                         ], []))

@@ -7,11 +7,11 @@ namespace PoP\GraphQLParser\Parser;
 use PoP\BasicService\BasicServiceTrait;
 use PoP\GraphQLParser\Parser\Ast\ArgumentValue\Variable as ExtendedVariable;
 use PoP\GraphQLParser\Parser\Ast\Directive as ExtendedDirective;
-use PoP\GraphQLParser\Parser\Ast\Field as ExtendedField;
+use PoP\GraphQLParser\Parser\Ast\LeafField as ExtendedLeafField;
 use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
-use PoPBackbone\GraphQLParser\Parser\Ast\Field;
+use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
 use PoPBackbone\GraphQLParser\Parser\Location;
 use PoPBackbone\GraphQLParser\Parser\Parser as UpstreamParser;
 
@@ -51,14 +51,14 @@ class Parser extends UpstreamParser implements ParserInterface
      * @param Argument[] $arguments
      * @param Directive[] $directives
      */
-    protected function createField(
+    protected function createLeafField(
         string $name,
         ?string $alias,
         array $arguments,
         array $directives,
         Location $location,
-    ): Field {
-        return new ExtendedField($name, $alias, $arguments, $directives, $location);
+    ): LeafField {
+        return new ExtendedLeafField($name, $alias, $arguments, $directives, $location);
     }
 
     /**

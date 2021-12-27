@@ -56,7 +56,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     {
         $fragmentReferences = [];
         foreach ($fieldOrFragmentReferences as $fieldOrFragmentReference) {
-            if ($fieldOrFragmentReference instanceof Field) {
+            if ($fieldOrFragmentReference instanceof LeafField) {
                 continue;
             }
             if ($fieldOrFragmentReference instanceof TypedFragmentReference) {

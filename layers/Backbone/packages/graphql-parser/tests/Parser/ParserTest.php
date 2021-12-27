@@ -13,7 +13,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
-use PoPBackbone\GraphQLParser\Parser\Ast\Field;
+use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\MutationOperation;
@@ -78,7 +78,7 @@ GRAPHQL;
                                 new Argument('category', new Literal('#2', new Location(5, 25)), new Location(5, 14)),
                             ],
                             [
-                                new Field('_id', null, [], [], new Location(6, 9)),
+                                new LeafField('_id', null, [], [], new Location(6, 9)),
                             ],
                             [],
                             new Location(5, 5)
@@ -146,8 +146,8 @@ GRAPHQL;
         $this->assertEquals([
             new QueryOperation('', [], [],
                 [
-                    new Field('foo', '', [], [], new Location(1, 3)),
-                    new Field('bar', '', [], [], new Location(1, 20)),
+                    new LeafField('foo', '', [], [], new Location(1, 3)),
+                    new LeafField('bar', '', [], [], new Location(1, 20)),
                 ],
                 new Location(1, 1)
             )
@@ -162,7 +162,7 @@ GRAPHQL;
             'operations'            => [
                 new QueryOperation('', [], [],
                     [
-                        new Field('name', '', [], [], new Location(1, 3)),
+                        new LeafField('name', '', [], [], new Location(1, 3)),
                     ],
                     new Location(1, 1)
                 )
@@ -179,9 +179,9 @@ GRAPHQL;
             'operations'            => [
                 new QueryOperation('', [], [],
                     [
-                        new Field('post', null, [], [], new Location(1, 3)),
+                        new LeafField('post', null, [], [], new Location(1, 3)),
                         new RelationalField('user', null, [], [
-                            new Field('name', null, [], [], new Location(1, 16)),
+                            new LeafField('name', null, [], [], new Location(1, 16)),
                         ], [], new Location(1, 9)),
                     ],
                     new Location(1, 1)
@@ -205,9 +205,9 @@ GRAPHQL;
             'operations'    => [],
             'fragments'          => [
                 new Fragment('FullType', '__Type', [], [
-                    new Field('kind', null, [], [], new Location(3, 17)),
+                    new LeafField('kind', null, [], [], new Location(3, 17)),
                     new RelationalField('fields', null, [], [
-                        new Field('name', null, [], [], new Location(5, 21)),
+                        new LeafField('name', null, [], [], new Location(5, 21)),
                     ], [], new Location(4, 17)),
                 ], new Location(2, 22)),
             ],
@@ -306,23 +306,23 @@ GRAPHQL;
                     [
                         new RelationalField('__schema', null, [], [
                             new RelationalField('queryType', null, [], [
-                                new Field('name', null, [], [], new Location(4, 33)),
+                                new LeafField('name', null, [], [], new Location(4, 33)),
                             ], [], new Location(4, 21)),
                             new RelationalField('mutationType', null, [], [
-                                new Field('name', null, [], [], new Location(5, 36)),
+                                new LeafField('name', null, [], [], new Location(5, 36)),
                             ], [], new Location(5, 21)),
                             new RelationalField('types', null, [], [
                                 new FragmentReference('FullType', new Location(7, 28)),
                             ], [], new Location(6, 21)),
                             new RelationalField('directives', null, [], [
-                                new Field('name', null, [], [], new Location(10, 25)),
-                                new Field('description', null, [], [], new Location(11, 25)),
+                                new LeafField('name', null, [], [], new Location(10, 25)),
+                                new LeafField('description', null, [], [], new Location(11, 25)),
                                 new RelationalField('args', null, [], [
                                     new FragmentReference('InputValue', new Location(13, 32)),
                                 ], [], new Location(12, 25)),
-                                new Field('onOperation', null, [], [], new Location(15, 25)),
-                                new Field('onFragment', null, [], [], new Location(16, 25)),
-                                new Field('onField', null, [], [], new Location(17, 25)),
+                                new LeafField('onOperation', null, [], [], new Location(15, 25)),
+                                new LeafField('onFragment', null, [], [], new Location(16, 25)),
+                                new LeafField('onField', null, [], [], new Location(17, 25)),
                             ], [], new Location(9, 21)),
                         ], [], new Location(3, 17)),
                     ],
@@ -331,20 +331,20 @@ GRAPHQL;
             ],
             'fragments'          => [
                 new Fragment('FullType', '__Type', [], [
-                    new Field('kind', null, [], [], new Location(23, 17)),
-                    new Field('name', null, [], [], new Location(24, 17)),
-                    new Field('description', null, [], [], new Location(25, 17)),
+                    new LeafField('kind', null, [], [], new Location(23, 17)),
+                    new LeafField('name', null, [], [], new Location(24, 17)),
+                    new LeafField('description', null, [], [], new Location(25, 17)),
                     new RelationalField('fields', null, [], [
-                        new Field('name', null, [], [], new Location(27, 21)),
-                        new Field('description', null, [], [], new Location(28, 21)),
+                        new LeafField('name', null, [], [], new Location(27, 21)),
+                        new LeafField('description', null, [], [], new Location(28, 21)),
                         new RelationalField('args', null, [], [
                             new FragmentReference('InputValue', new Location(30, 28)),
                         ], [], new Location(29, 21)),
                         new RelationalField('type', null, [], [
                             new FragmentReference('TypeRef', new Location(33, 28)),
                         ], [], new Location(32, 21)),
-                        new Field('isDeprecated', null, [], [], new Location(35, 21)),
-                        new Field('deprecationReason', null, [], [], new Location(36, 21)),
+                        new LeafField('isDeprecated', null, [], [], new Location(35, 21)),
+                        new LeafField('deprecationReason', null, [], [], new Location(36, 21)),
                     ], [], new Location(26, 17)),
                     new RelationalField('inputFields', null, [], [
                         new FragmentReference('InputValue', new Location(39, 24)),
@@ -353,36 +353,36 @@ GRAPHQL;
                         new FragmentReference('TypeRef', new Location(42, 24)),
                     ], [], new Location(41, 17)),
                     new RelationalField('enumValues', null, [], [
-                        new Field('name', null, [], [], new Location(45, 21)),
-                        new Field('description', null, [], [], new Location(46, 21)),
+                        new LeafField('name', null, [], [], new Location(45, 21)),
+                        new LeafField('description', null, [], [], new Location(46, 21)),
 
-                        new Field('isDeprecated', null, [], [], new Location(47, 21)),
-                        new Field('deprecationReason', null, [], [], new Location(48, 21)),
+                        new LeafField('isDeprecated', null, [], [], new Location(47, 21)),
+                        new LeafField('deprecationReason', null, [], [], new Location(48, 21)),
                     ], [], new Location(44, 17)),
                     new RelationalField('possibleTypes', null, [], [
                         new FragmentReference('TypeRef', new Location(51, 24)),
                     ], [], new Location(50, 17)),
                 ], new Location(22, 22)),
                 new Fragment('InputValue', '__InputValue', [], [
-                    new Field('name', null, [], [], new Location(56, 17)),
-                    new Field('description', null, [], [], new Location(57, 17)),
+                    new LeafField('name', null, [], [], new Location(56, 17)),
+                    new LeafField('description', null, [], [], new Location(57, 17)),
                     new RelationalField('type', null, [], [
                         new FragmentReference('TypeRef', new Location(58, 27)),
                     ], [], new Location(58, 17)),
-                    new Field('defaultValue', null, [], [], new Location(59, 17)),
+                    new LeafField('defaultValue', null, [], [], new Location(59, 17)),
                 ], new Location(55, 22)),
                 new Fragment('TypeRef', '__Type', [], [
-                    new Field('kind', null, [], [], new Location(63, 17)),
-                    new Field('name', null, [], [], new Location(64, 17)),
+                    new LeafField('kind', null, [], [], new Location(63, 17)),
+                    new LeafField('name', null, [], [], new Location(64, 17)),
                     new RelationalField('ofType', null, [], [
-                        new Field('kind', null, [], [], new Location(66, 21)),
-                        new Field('name', null, [], [], new Location(67, 21)),
+                        new LeafField('kind', null, [], [], new Location(66, 21)),
+                        new LeafField('name', null, [], [], new Location(67, 21)),
                         new RelationalField('ofType', null, [], [
-                            new Field('kind', null, [], [], new Location(69, 25)),
-                            new Field('name', null, [], [], new Location(70, 25)),
+                            new LeafField('kind', null, [], [], new Location(69, 25)),
+                            new LeafField('name', null, [], [], new Location(70, 25)),
                             new RelationalField('ofType', null, [], [
-                                new Field('kind', null, [], [], new Location(72, 29)),
-                                new Field('name', null, [], [], new Location(73, 29)),
+                                new LeafField('kind', null, [], [], new Location(72, 29)),
+                                new LeafField('name', null, [], [], new Location(73, 29)),
                             ], [], new Location(71, 25)),
                         ], [], new Location(68, 21)),
                     ], [], new Location(65, 17)),
@@ -441,8 +441,8 @@ GRAPHQL;
                             'test',
                             [],
                             [
-                                new Field('name', null, [], [], new Location(4, 21)),
-                                new TypedFragmentReference('UnionType', [new Field('unionName', null, [], [], new Location(6, 25))], [], new Location(5, 28)),
+                                new LeafField('name', null, [], [], new Location(4, 21)),
+                                new TypedFragmentReference('UnionType', [new LeafField('unionName', null, [], [], new Location(6, 25))], [], new Location(5, 28)),
                             ],
                             [],
                             new Location(3, 23)
@@ -477,7 +477,7 @@ GRAPHQL;
                                         new Argument('teas', new VariableReference('variable', $variable, new Location(1, 39)), new Location(1, 33)),
                                     ],
                                     [
-                                        new Field('name', 'alias', [], [], new Location(1, 60)),
+                                        new LeafField('name', 'alias', [], [], new Location(1, 60)),
                                     ],
                                     [],
                                     new Location(1, 25)
@@ -494,7 +494,7 @@ GRAPHQL;
                 [
                     'operations'            => [
                         new QueryOperation('', [], [], [
-                            new RelationalField('query', null, [], [new Field('name', 'alias', [], [], new Location(1, 18))], [], new Location(1, 3)),
+                            new RelationalField('query', null, [], [new LeafField('name', 'alias', [], [], new Location(1, 18))], [], new Location(1, 3)),
                         ], new Location(1, 1)),
                     ],
                     'fragments'          => [],
@@ -514,7 +514,7 @@ GRAPHQL;
                                         new Argument('active', new Literal(true, new Location(1, 57)), new Location(1, 49)),
                                     ],
                                     [
-                                        new Field('id', null, [], [], new Location(1, 66)),
+                                        new LeafField('id', null, [], [], new Location(1, 66)),
                                     ],
                                     [],
                                     new Location(1, 12)
@@ -532,7 +532,7 @@ GRAPHQL;
                     'operations'            => [
                         new MutationOperation('', [], [],
                             [
-                                new Field(
+                                new LeafField(
                                     'createUser',
                                     'test',
                                     [
@@ -575,7 +575,7 @@ GRAPHQL;
                                 new Argument('id', new Literal(1, new Location(1, 12)), new Location(1, 8)),
                                 new Argument('filmID', new Literal(2, new Location(1, 22)), new Location(1, 14)),
                             ], [
-                                new Field('title', null, [], [], new Location(1, 27)),
+                                new LeafField('title', null, [], [], new Location(1, 27)),
                             ], [], new Location(1, 3))
                         ], new Location(1, 1)),
                     ],
@@ -590,7 +590,7 @@ GRAPHQL;
                             new RelationalField('test', null, [
                                 new Argument('id', new Literal(-5, new Location(1, 13)), new Location(1, 9)),
                             ], [
-                                new Field('id', null, [], [], new Location(1, 19)),
+                                new LeafField('id', null, [], [], new Location(1, 19)),
                             ], [], new Location(1, 3)),
                         ], new Location(1, 1))
                     ],
@@ -605,7 +605,7 @@ GRAPHQL;
                             new RelationalField('test', null, [
                                 new Argument('id', new Literal(-5, new Location(1, 13)), new Location(1, 9)),
                             ], [
-                                new Field('id', null, [], [], new Location(2, 4)),
+                                new LeafField('id', null, [], [], new Location(2, 4)),
                             ], [], new Location(1, 3)),
                         ], new Location(1, 1))
                     ],
@@ -625,8 +625,8 @@ GRAPHQL;
                             new RelationalField('hero', null, [
                                 new Argument('episode', new Literal('EMPIRE', new Location(2, 33)), new Location(2, 24)),
                             ], [
-                                new Field('__typename', null, [], [], new Location(3, 21)),
-                                new Field('name', null, [], [], new Location(4, 21)),
+                                new LeafField('__typename', null, [], [], new Location(3, 21)),
+                                new LeafField('name', null, [], [], new Location(4, 21)),
                             ], [], new Location(2, 19)),
                         ], new Location(1, 7))
                     ],
@@ -639,8 +639,8 @@ GRAPHQL;
                     'operations'            => [
                         new QueryOperation('', [], [], [
                             new RelationalField('test', null, [], [
-                                new Field('__typename', null, [], [], new Location(1, 10)),
-                                new Field('id', null, [], [], new Location(1, 22)),
+                                new LeafField('__typename', null, [], [], new Location(1, 10)),
+                                new LeafField('id', null, [], [], new Location(1, 22)),
                             ], [], new Location(1, 3)),
                         ], new Location(1, 1))
                     ],
@@ -679,7 +679,7 @@ GRAPHQL;
                 [
                     'operations'            => [
                         new MutationOperation('setName', [], [], [
-                            new Field('setUserName', null, [], [], new Location(1, 20)),
+                            new LeafField('setUserName', null, [], [], new Location(1, 20)),
                         ], new Location(1, 10))
                     ],
                     'fragments'          => [],
@@ -695,9 +695,9 @@ GRAPHQL;
                     ],
                     'fragments'          => [
                         new Fragment('userDataFragment', 'User', [], [
-                            new Field('id', null, [], [], new Location(1, 70)),
-                            new Field('name', null, [], [], new Location(1, 74)),
-                            new Field('email', null, [], [], new Location(1, 80)),
+                            new LeafField('id', null, [], [], new Location(1, 70)),
+                            new LeafField('name', null, [], [], new Location(1, 74)),
+                            new LeafField('email', null, [], [], new Location(1, 80)),
                         ], new Location(1, 43)),
                     ],
                 ],
@@ -716,8 +716,8 @@ GRAPHQL;
                                     new Argument('float', new Literal('123.123', new Location(1, 37)), new Location(1, 30)),
                                 ],
                                 [
-                                    new Field('id', null, [], [], new Location(1, 49)),
-                                    new Field('name', null, [], [], new Location(1, 53)),
+                                    new LeafField('id', null, [], [], new Location(1, 49)),
+                                    new LeafField('name', null, [], [], new Location(1, 53)),
                                 ],
                                 [],
                                 new Location(1, 3)
@@ -739,7 +739,7 @@ GRAPHQL;
                                     new Argument('id', new InputList([1, 2, 3], new Location(1, 26)), new Location(1, 22)),
                                 ],
                                 [
-                                    new Field('id', null, [], [], new Location(1, 41)),
+                                    new LeafField('id', null, [], [], new Location(1, 41)),
                                 ],
                                 [],
                                 new Location(1, 14)
@@ -761,7 +761,7 @@ GRAPHQL;
                                     new Argument('id', new InputList([1, "2", true, null], new Location(1, 26)), new Location(1, 22)),
                                 ],
                                 [
-                                    new Field('id', null, [], [], new Location(1, 52)),
+                                    new LeafField('id', null, [], [], new Location(1, 52)),
                                 ],
                                 [],
                                 new Location(1, 14)
@@ -791,7 +791,7 @@ GRAPHQL;
                                     ], new Location(1, 30)), new Location(1, 22)),
                                 ],
                                 [
-                                    new Field('id', null, [], [], new Location(1, 112)),
+                                    new LeafField('id', null, [], [], new Location(1, 112)),
                                 ],
                                 [],
                                 new Location(1, 14)

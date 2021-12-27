@@ -14,7 +14,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\Directive;
 use PoPBackbone\GraphQLParser\Parser\Ast\Document;
-use PoPBackbone\GraphQLParser\Parser\Ast\Field;
+use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
 use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
@@ -407,7 +407,7 @@ class Parser extends Tokenizer implements ParserInterface
             return $this->createRelationalField($nameToken->getData(), $alias, $arguments, $fieldOrFragmentReferences, $directives, $bodyLocation);
         }
 
-        return $this->createField($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
+        return $this->createLeafField($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
     }
 
     /**
@@ -450,14 +450,14 @@ class Parser extends Tokenizer implements ParserInterface
      * @param Argument[] $arguments
      * @param Directive[] $directives
      */
-    protected function createField(
+    protected function createLeafField(
         string $name,
         ?string $alias,
         array $arguments,
         array $directives,
         Location $location,
-    ): Field {
-        return new Field($name, $alias, $arguments, $directives, $location);
+    ): LeafField {
+        return new LeafField($name, $alias, $arguments, $directives, $location);
     }
 
     /**

@@ -11,7 +11,7 @@ use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputList;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\InputObject;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Variable;
-use PoPBackbone\GraphQLParser\Parser\Ast\Field;
+use PoPBackbone\GraphQLParser\Parser\Ast\LeafField;
 use PoPBackbone\GraphQLParser\Parser\Ast\Fragment;
 use PoPBackbone\GraphQLParser\Parser\Ast\FragmentReference;
 use PoPBackbone\GraphQLParser\Parser\Ast\RelationalField;
@@ -36,7 +36,7 @@ class AstTest extends TestCase
 
     public function testField()
     {
-        $field = new Field('field', null, [], [], new Location(1, 1));
+        $field = new LeafField('field', null, [], [], new Location(1, 1));
 
         $this->assertEquals($field->getName(), 'field');
         $this->assertEmpty($field->getArguments());
@@ -55,7 +55,7 @@ class AstTest extends TestCase
     public function testFragment()
     {
         $fields = [
-            new Field('field', null, [], [], new Location(1, 1))
+            new LeafField('field', null, [], [], new Location(1, 1))
         ];
 
         $fragment = new Fragment('shipInfo', 'Ship', [], $fields, new Location(1, 1));
@@ -71,7 +71,7 @@ class AstTest extends TestCase
         $this->assertEquals('Boat', $fragment->getModel());
 
         $newField = [
-            new Field('id', null, [], [], new Location(1, 1))
+            new LeafField('id', null, [], [], new Location(1, 1))
         ];
         $fragment->setFieldOrFragmentReferences($newField);
         $this->assertEquals($newField, $fragment->getFieldOrFragmentReferences());
@@ -90,7 +90,7 @@ class AstTest extends TestCase
     public function testTypedFragmentReference()
     {
         $fields = [
-            new Field('id', null, [], [], new Location(1, 1))
+            new LeafField('id', null, [], [], new Location(1, 1))
         ];
 
         $reference = new TypedFragmentReference('Ship', $fields, [], new Location(1, 1));
@@ -102,8 +102,8 @@ class AstTest extends TestCase
         $this->assertEquals('BigBoat', $reference->getTypeName());
 
         $newFields = [
-            new Field('name', null, [], [], new Location(1, 1)),
-            new Field('id', null, [], [], new Location(1, 1))
+            new LeafField('name', null, [], [], new Location(1, 1)),
+            new LeafField('id', null, [], [], new Location(1, 1))
         ];
 
         $reference->setFieldOrFragmentReferences($newFields);
@@ -117,7 +117,7 @@ class AstTest extends TestCase
         ];
 
         $fields = [
-            new Field('id', null, [], [], new Location(1, 1))
+            new LeafField('id', null, [], [], new Location(1, 1))
         ];
 
         $query = new RelationalField('ships', 'lastShips', $arguments, $fields, [], new Location(1, 1));

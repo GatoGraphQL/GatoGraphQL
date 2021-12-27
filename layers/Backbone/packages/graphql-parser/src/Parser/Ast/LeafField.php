@@ -7,7 +7,7 @@ namespace PoPBackbone\GraphQLParser\Parser\Ast;
 use PoPBackbone\GraphQLParser\Parser\Ast\FieldInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class Field extends AbstractAst implements FieldInterface
+class LeafField extends AbstractAst implements FieldInterface
 {
     use AstArgumentsTrait;
     use AstDirectivesTrait;
