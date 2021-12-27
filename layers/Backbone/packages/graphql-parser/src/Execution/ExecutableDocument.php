@@ -35,17 +35,15 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     public function validateAndMerge(): void
     {
-        $documentOperations = $this->document->getOperations();
-
-        $this->assertFragmentReferencesAreValid($documentOperations);
-        $this->assertFragmentsAreUsed($documentOperations);
-        $this->assertAllVariablesExist($documentOperations);
-        $this->assertAllVariablesAreUsed($documentOperations);
-        $this->assertAllVariablesHaveValue($documentOperations);
+        $this->assertFragmentReferencesAreValid();
+        $this->assertFragmentsAreUsed();
+        $this->assertAllVariablesExist();
+        $this->assertAllVariablesAreUsed();
+        $this->assertAllVariablesHaveValue();
 
         // Obtain the operations that must be executed
         $requestedOperations = $this->getRequestedOperations(
-            $documentOperations,
+            $this->document->getOperations(),
             $this->operationName
         );
 
@@ -130,12 +128,11 @@ class ExecutableDocument implements ExecutableDocumentInterface
      * Validate that all referenced variable are provided a value,
      * or they have a default value. Otherwise, throw an exception.
      *
-     * @param OperationInterface[] $operations
      * @throws InvalidRequestException
      */
-    protected function assertAllVariablesHaveValue(array $operations): void
+    protected function assertAllVariablesHaveValue(): void
     {
-        foreach ($operations as $operation) {
+        foreach ($this->document->getOperations() as $operation) {
             foreach ($operation->getVariableReferences() as $variableReference) {
                 /** @var Variable */
                 $variable = $variableReference->getVariable();
@@ -176,13 +173,12 @@ class ExecutableDocument implements ExecutableDocumentInterface
         }
     }
 
-    /**
-     * @param OperationInterface[] $operations
+    /**=
      * @throws InvalidRequestException
      */
-    protected function assertFragmentsAreUsed(array $operations): void
+    protected function assertFragmentsAreUsed(): void
     {
-        foreach ($operations as $operation) {
+        foreach ($this->document->getOperations() as $operation) {
             foreach ($operation->getFragmentReferences() as $fragmentReference) {
                 $this->document->getFragment($fragmentReference->getName())?->setUsed(true);
             }
@@ -205,12 +201,11 @@ class ExecutableDocument implements ExecutableDocumentInterface
     }
 
     /**
-     * @param OperationInterface[] $operations
      * @throws InvalidRequestException
      */
-    protected function assertFragmentReferencesAreValid(array $operations): void
+    protected function assertFragmentReferencesAreValid(): void
     {
-        foreach ($operations as $operation) {
+        foreach ($this->document->getOperations() as $operation) {
             foreach ($operation->getFragmentReferences() as $fragmentReference) {
                 if ($this->document->getFragment($fragmentReference->getName()) !== null) {
                     continue;
@@ -229,12 +224,11 @@ class ExecutableDocument implements ExecutableDocumentInterface
     }
 
     /**
-     * @param OperationInterface[] $operations
      * @throws InvalidRequestException
      */
-    protected function assertAllVariablesExist(array $operations): void
+    protected function assertAllVariablesExist(): void
     {
-        foreach ($operations as $operation) {
+        foreach ($this->document->getOperations() as $operation) {
             foreach ($operation->getVariableReferences() as $variableReference) {
                 if ($variableReference->getVariable() !== null) {
                     continue;
@@ -253,12 +247,11 @@ class ExecutableDocument implements ExecutableDocumentInterface
     }
 
     /**
-     * @param OperationInterface[] $operations
      * @throws InvalidRequestException
      */
-    protected function assertAllVariablesAreUsed(array $operations): void
+    protected function assertAllVariablesAreUsed(): void
     {
-        foreach ($operations as $operation) {
+        foreach ($this->document->getOperations() as $operation) {
             foreach ($operation->getVariables() as $variable) {
                 if ($variable->isUsed()) {
                     continue;
