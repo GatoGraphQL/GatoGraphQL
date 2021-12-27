@@ -17,6 +17,7 @@ use PoP\GraphQLParser\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Execution\RequestInterface;
 use PoP\GraphQLParser\Parser\Parser;
 use PoP\GraphQLParser\Parser\ParserInterface;
+use PoP\GraphQLParser\Query\ClientSymbols;
 use PoP\GraphQLParser\Validator\RequestValidator\RequestValidatorInterface;
 use PoPBackbone\GraphQLParser\Exception\LocationableExceptionInterface;
 use PoPBackbone\GraphQLParser\Execution\ExecutableDocumentInterface;
