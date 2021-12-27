@@ -10,7 +10,7 @@ trait WithArgumentsTrait
     protected array $arguments;
 
     /** @var array<string,mixed>|null */
-    private ?array $argumentsCache = null;
+    private ?array $keyValueArguments = null;
 
 
     public function hasArguments(): bool
@@ -51,7 +51,7 @@ trait WithArgumentsTrait
     public function setArguments(array $arguments): void
     {
         $this->arguments = [];
-        $this->argumentsCache = null;
+        $this->keyValueArguments = null;
 
         foreach ($arguments as $argument) {
             $this->addArgument($argument);
@@ -68,16 +68,14 @@ trait WithArgumentsTrait
      */
     public function getKeyValueArguments(): array
     {
-        if ($this->argumentsCache !== null) {
-            return $this->argumentsCache;
+        if ($this->keyValueArguments !== null) {
+            return $this->keyValueArguments;
         }
 
-        $this->argumentsCache = [];
-
+        $this->keyValueArguments = [];
         foreach ($this->getArguments() as $argument) {
-            $this->argumentsCache[$argument->getName()] = $argument->getValue()->getValue();
+            $this->keyValueArguments[$argument->getName()] = $argument->getValue()->getValue();
         }
-
-        return $this->argumentsCache;
+        return $this->keyValueArguments;
     }
 }
