@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
-use PoPBackbone\GraphQLParser\Parser\Ast\WithDirectivesInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class Fragment extends AbstractAst implements WithDirectivesInterface
+class Fragment extends AbstractAst implements WithDirectivesInterface, WithFieldsOrFragmentBondsInterface
 {
     use AstDirectivesTrait;
+    use WithFieldsOrFragmentBondsTrait;
 
     /**
      * @param Directive[] $directives
@@ -19,11 +19,12 @@ class Fragment extends AbstractAst implements WithDirectivesInterface
         protected string $name,
         protected string $model,
         array $directives,
-        protected array $fieldsOrFragmentBonds,
+        array $fieldsOrFragmentBonds,
         Location $location,
     ) {
         parent::__construct($location);
         $this->setDirectives($directives);
+        $this->setFieldsOrFragmentBonds($fieldsOrFragmentBonds);
     }
 
     public function getName(): string
@@ -44,21 +45,5 @@ class Fragment extends AbstractAst implements WithDirectivesInterface
     public function setModel(string $model): void
     {
         $this->model = $model;
-    }
-
-    /**
-     * @return FieldInterface[]|FragmentBondInterface[]
-     */
-    public function getFieldsOrFragmentBonds(): array
-    {
-        return $this->fieldsOrFragmentBonds;
-    }
-
-    /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
-     */
-    public function setFieldsOrFragmentBonds(array $fieldsOrFragmentBonds): void
-    {
-        $this->fieldsOrFragmentBonds = $fieldsOrFragmentBonds;
     }
 }

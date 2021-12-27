@@ -6,13 +6,11 @@ namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class RelationalField extends AbstractAst implements FieldInterface
+class RelationalField extends AbstractAst implements FieldInterface, WithFieldsOrFragmentBondsInterface
 {
     use AstArgumentsTrait;
     use AstDirectivesTrait;
-
-    /** @var FieldInterface[]|FragmentBondInterface[] */
-    protected array $fieldsOrFragmentBonds = [];
+    use WithFieldsOrFragmentBondsTrait;
 
     /**
      * @param Argument[] $arguments
@@ -36,25 +34,6 @@ class RelationalField extends AbstractAst implements FieldInterface
     public function getName(): string
     {
         return $this->name;
-    }
-
-    /**
-     * @return FieldInterface[]|FragmentBondInterface[]
-     */
-    public function getFieldsOrFragmentBonds(): array
-    {
-        return $this->fieldsOrFragmentBonds;
-    }
-
-    /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
-     */
-    public function setFieldsOrFragmentBonds(array $fieldsOrFragmentBonds): void
-    {
-        /**
-         * we cannot store fields by name because of TypedFragments
-         */
-        $this->fieldsOrFragmentBonds = $fieldsOrFragmentBonds;
     }
 
     public function getAlias(): ?string

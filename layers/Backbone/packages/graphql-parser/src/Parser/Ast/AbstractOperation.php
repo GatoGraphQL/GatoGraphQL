@@ -7,9 +7,10 @@ namespace PoPBackbone\GraphQLParser\Parser\Ast;
 use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-abstract class AbstractOperation extends AbstractAst implements OperationInterface
+abstract class AbstractOperation extends AbstractAst implements OperationInterface, WithFieldsOrFragmentBondsInterface
 {
     use AstDirectivesTrait;
+    use WithFieldsOrFragmentBondsTrait;
 
     public function __construct(
         protected string $name,
@@ -18,11 +19,12 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         /** @var Directive[] $directives */
         array $directives,
         /** @var FieldInterface[]|FragmentBondInterface[] */
-        protected array $fieldsOrFragmentBonds,
+        array $fieldsOrFragmentBonds,
         Location $location,
     ) {
         parent::__construct($location);
         $this->setDirectives($directives);
+        $this->setFieldsOrFragmentBonds($fieldsOrFragmentBonds);
     }
 
     public function getName(): string
@@ -168,13 +170,5 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
             );
         }
         return $variableReferences;
-    }
-
-    /**
-     * @return FieldInterface[]|FragmentBondInterface[]
-     */
-    public function getFieldsOrFragmentBonds(): array
-    {
-        return $this->fieldsOrFragmentBonds;
     }
 }
