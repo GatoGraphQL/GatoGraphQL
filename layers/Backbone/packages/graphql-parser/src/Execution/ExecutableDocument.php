@@ -16,9 +16,9 @@ class ExecutableDocument implements ExecutableDocumentInterface
 
     public function __construct(
         private Document $document,
+        ?string $operationName = null,
         /** @var array<string, mixed> */
         array $variableValues = [],
-        ?string $operationName = null,
     ) {
         $this->context = new Context($operationName, $variableValues);
     }
