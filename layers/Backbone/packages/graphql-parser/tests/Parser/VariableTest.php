@@ -22,7 +22,7 @@ class VariableTest extends TestCase
     public function testGetNullValueException()
     {
         $this->expectException(\LogicException::class);
-        $this->expectExceptionMessage('Value is not set for variable \'foo\'');
+        $this->expectExceptionMessage('Context has not been set for variable \'foo\'');
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
         $var->getValue();
     }

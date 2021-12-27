@@ -12,7 +12,7 @@ use PoPBackbone\GraphQLParser\Parser\Location;
 
 class Variable extends AbstractAst implements WithValueInterface
 {
-    private Context $context;
+    private ?Context $context = null;
 
     private bool $hasDefaultValue = false;
 
@@ -107,6 +107,9 @@ class Variable extends AbstractAst implements WithValueInterface
      */
     public function getValue(): mixed
     {
+        if ($this->context === null) {
+            throw new LogicException($this->getContextNotSetErrorMessage($this->name));
+        }
         if ($this->context->hasVariableValue($this->name)) {
             return $this->context->getVariableValue($this->name);
         }
@@ -114,6 +117,11 @@ class Variable extends AbstractAst implements WithValueInterface
             return $this->getDefaultValue();
         }
         throw new LogicException($this->getValueIsNotSetForVariableErrorMessage($this->name));
+    }
+
+    protected function getContextNotSetErrorMessage(string $variableName): string
+    {
+        return sprintf('Context has not been set for variable \'%s\'', $variableName);
     }
 
     protected function getValueIsNotSetForVariableErrorMessage(string $variableName): string
