@@ -32,17 +32,17 @@ class Parser extends UpstreamParser implements ParserInterface
     protected function createVariable(
         string $name,
         string $type,
-        bool $required,
+        bool $isRequired,
         bool $isArray,
-        bool $arrayElementRequired,
+        bool $isArrayElementRequired,
         Location $location,
     ): Variable {
         return new ExtendedVariable(
             $name,
             $type,
-            $required,
+            $isRequired,
             $isArray,
-            $arrayElementRequired,
+            $isArrayElementRequired,
             $location,
         );
     }

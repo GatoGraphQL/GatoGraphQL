@@ -217,7 +217,7 @@ class Parser extends Tokenizer implements ParserInterface
             $this->eat(Token::TYPE_COLON);
 
             $isArray              = false;
-            $arrayElementRequired = false;
+            $isArrayElementRequired = false;
 
             if ($this->match(Token::TYPE_LSQUARE_BRACE)) {
                 $isArray = true;
@@ -226,7 +226,7 @@ class Parser extends Tokenizer implements ParserInterface
                 $type = $this->eatIdentifierToken()->getData();
 
                 if ($this->match(Token::TYPE_REQUIRED)) {
-                    $arrayElementRequired = true;
+                    $isArrayElementRequired = true;
                     $this->eat(Token::TYPE_REQUIRED);
                 }
 
@@ -235,18 +235,18 @@ class Parser extends Tokenizer implements ParserInterface
                 $type = $this->eatIdentifierToken()->getData();
             }
 
-            $required = false;
+            $isRequired = false;
             if ($this->match(Token::TYPE_REQUIRED)) {
-                $required = true;
+                $isRequired = true;
                 $this->eat(Token::TYPE_REQUIRED);
             }
 
             $variable = $this->createVariable(
                 (string)$nameToken->getData(),
                 (string)$type,
-                $required,
+                $isRequired,
                 $isArray,
-                $arrayElementRequired,
+                $isArrayElementRequired,
                 $this->getTokenLocation($variableToken),
             );
 
@@ -272,17 +272,17 @@ class Parser extends Tokenizer implements ParserInterface
     protected function createVariable(
         string $name,
         string $type,
-        bool $required,
+        bool $isRequired,
         bool $isArray,
-        bool $arrayElementRequired,
+        bool $isArrayElementRequired,
         Location $location,
     ): Variable {
         return new Variable(
             $name,
             $type,
-            $required,
+            $isRequired,
             $isArray,
-            $arrayElementRequired,
+            $isArrayElementRequired,
             $location
         );
     }
