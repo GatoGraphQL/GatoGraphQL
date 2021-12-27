@@ -6,7 +6,7 @@ namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class FragmentReference extends AbstractAst implements FragmentInterface
+class FragmentReference extends AbstractAst implements FragmentBondInterface
 {
     public function __construct(
         protected string $name,

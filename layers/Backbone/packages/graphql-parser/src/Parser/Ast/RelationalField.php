@@ -11,12 +11,12 @@ class RelationalField extends AbstractAst implements FieldInterface
     use AstArgumentsTrait;
     use AstDirectivesTrait;
 
-    /** @var FieldInterface[]|FragmentInterface[] */
+    /** @var FieldInterface[]|FragmentBondInterface[] */
     protected array $fieldOrFragmentReferences = [];
 
     /**
      * @param Argument[] $arguments
-     * @param FieldInterface[]|FragmentInterface[] $fieldOrFragmentReferences
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldOrFragmentReferences
      * @param Directive[] $directives
      */
     public function __construct(
@@ -39,7 +39,7 @@ class RelationalField extends AbstractAst implements FieldInterface
     }
 
     /**
-     * @return FieldInterface[]|FragmentInterface[]
+     * @return FieldInterface[]|FragmentBondInterface[]
      */
     public function getFieldOrFragmentReferences(): array
     {
@@ -52,7 +52,7 @@ class RelationalField extends AbstractAst implements FieldInterface
     }
 
     /**
-     * @param FieldInterface[]|FragmentInterface[] $fieldOrFragmentReferences
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldOrFragmentReferences
      */
     public function setFieldOrFragmentReferences(array $fieldOrFragmentReferences): void
     {

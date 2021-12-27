@@ -17,7 +17,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         protected array $variables,
         /** @var Directive[] $directives */
         array $directives,
-        /** @var FieldInterface[]|FragmentInterface[] */
+        /** @var FieldInterface[]|FragmentBondInterface[] */
         protected array $fieldOrFragmentReferences,
         Location $location,
     ) {
@@ -49,7 +49,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     }
 
     /**
-     * @param FieldInterface[]|FragmentInterface[] $fieldOrFragmentReferences
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldOrFragmentReferences
      * @return FragmentReference[]
      */
     protected function getFragmentReferencesInFieldsOrFragmentReferences(array $fieldOrFragmentReferences): array
@@ -98,7 +98,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     }
 
     /**
-     * @param FieldInterface[]|FragmentInterface[] $fieldOrFragmentReferences
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldOrFragmentReferences
      * @return VariableReference[]
      */
     protected function getVariableReferencesInFieldsOrFragments(array $fieldOrFragmentReferences): array
@@ -171,7 +171,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     }
 
     /**
-     * @return FieldInterface[]|FragmentInterface[]
+     * @return FieldInterface[]|FragmentBondInterface[]
      */
     public function getFieldOrFragmentReferences(): array
     {

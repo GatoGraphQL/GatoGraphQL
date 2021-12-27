@@ -6,12 +6,12 @@ namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class InlineFragment extends AbstractAst implements FragmentInterface, WithDirectivesInterface
+class InlineFragment extends AbstractAst implements FragmentBondInterface, WithDirectivesInterface
 {
     use AstDirectivesTrait;
 
     /**
-     * @param FieldInterface[]|FragmentInterface[] $fieldOrFragmentReferences
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldOrFragmentReferences
      * @param Directive[] $directives
      */
     public function __construct(
@@ -25,7 +25,7 @@ class InlineFragment extends AbstractAst implements FragmentInterface, WithDirec
     }
 
     /**
-     * @return FieldInterface[]|FragmentInterface[]
+     * @return FieldInterface[]|FragmentBondInterface[]
      */
     public function getFieldOrFragmentReferences(): array
     {
@@ -33,7 +33,7 @@ class InlineFragment extends AbstractAst implements FragmentInterface, WithDirec
     }
 
     /**
-     * @param FieldInterface[]|FragmentInterface[] $fieldOrFragmentReferences
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldOrFragmentReferences
      */
     public function setFieldOrFragmentReferences(array $fieldOrFragmentReferences): void
     {
