@@ -63,17 +63,48 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     protected function getOperationsToExecute(): array
     {
-        $operationsToExecute = [];
-        // Executing `__ALL`?
-        $executeAllOperations = $this->operationName === ClientSymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME;
-        foreach ($this->document->getOperations() as $operation) {
-            if (!($executeAllOperations || $operation->getName() === $this->operationName)) {
-                continue;
-            }
-            $operationsToExecute[] = $operation;
+        $operations = $this->document->getOperations();
+        $operationCount = count($operations);
+        if ($operationCount === 0) {
+            throw new InvalidRequestException(
+                $this->getNoOperationsProvidedErrorMessage(),
+                new Location(1, 1)
+            );
         }
 
-        return $operationsToExecute;
+        if (empty($this->operationName)) {
+            if ($operationCount > 1) {
+                throw new InvalidRequestException(
+                    $this->getNoOperationNameProvidedErrorMessage(),
+                    new Location(1, 1)
+                );
+            }
+            // There is exactly 1 operation
+            return $operations;
+        }
+
+        $selectedOperations = $this->getSelectedOperationsToExecute($operations, $this->operationName);
+        if ($selectedOperations === []) {
+            throw new InvalidRequestException(
+                $this->getNoOperationMatchesNameErrorMessage($this->operationName),
+                new Location(1, 1)
+            );
+        }
+
+        // There can be many operations
+        return $selectedOperations;
+    }
+
+    /**
+     * @param OperationInterface[] $operations
+     * @return OperationInterface[]
+     */
+    protected function getSelectedOperationsToExecute(array $operations, string $operationName): array
+    {
+        return array_values(array_filter(
+            $operations,
+            fn (OperationInterface $operation) => $operation->getName() === $operationName
+        ));
     }
 
     /**
@@ -91,7 +122,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
 
         if ($operations === []) {
             $errorMessage = $this->operationName !== null ?
-                $this->getNoOperationsMatchNameErrorMessage($this->operationName)
+                $this->getNoOperationMatchesNameErrorMessage($this->operationName)
                 : $this->getNoOperationsProvidedErrorMessage();
             throw new InvalidRequestException(
                 throw $errorMessage,
@@ -100,7 +131,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
         }
     }
 
-    protected function getNoOperationsMatchNameErrorMessage(string $operationName): string
+    protected function getNoOperationMatchesNameErrorMessage(string $operationName): string
     {
         return \sprintf('Operation with name \'%s\' does not exist', $operationName);
     }
@@ -108,6 +139,11 @@ class ExecutableDocument implements ExecutableDocumentInterface
     protected function getNoOperationsProvidedErrorMessage(): string
     {
         return \sprintf('No operations were provided in the query');
+    }
+
+    protected function getNoOperationNameProvidedErrorMessage(): string
+    {
+        return \sprintf('The operation name must be provided');
     }
 
     /**
