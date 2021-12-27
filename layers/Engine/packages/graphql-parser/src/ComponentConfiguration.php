@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLRequest;
+namespace PoP\GraphQLParser;
 
 use PoP\ComponentModel\ComponentConfiguration\ComponentConfigurationTrait;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
@@ -11,17 +11,21 @@ class ComponentConfiguration
 {
     use ComponentConfigurationTrait;
 
-    private static bool $disableGraphQLAPIForPoP = false;
+    private static bool $enableMultipleQueryExecution = false;
 
-    public static function disableGraphQLAPIForPoP(): bool
+    /**
+     * Disable hook, because it is invoked by `export-directive`
+     * on its Component's `resolveEnabled` function.
+     */
+    public static function enableMultipleQueryExecution(): bool
     {
         // Define properties
-        $envVariable = Environment::DISABLE_GRAPHQL_API_FOR_POP;
-        $selfProperty = &self::$disableGraphQLAPIForPoP;
+        $envVariable = Environment::ENABLE_MULTIPLE_QUERY_EXECUTION;
+        $selfProperty = &self::$enableMultipleQueryExecution;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
-        // Initialize property from the environment/hook
+        // Initialize property from the environment
         self::maybeInitializeConfigurationValue(
             $envVariable,
             $selfProperty,
