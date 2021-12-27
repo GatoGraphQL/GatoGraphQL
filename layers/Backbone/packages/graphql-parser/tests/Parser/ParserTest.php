@@ -533,18 +533,17 @@ GRAPHQL;
                     'operations'            => [
                         new MutationOperation('', [], [],
                             [
-                                new RelationalField(
+                                new Field(
                                     'createUser',
                                     'test',
                                     [
                                         new Argument('id', new Literal(4, new Location(1, 35)), new Location(1, 31)),
                                     ],
                                     [],
-                                    [],
                                     new Location(1, 19)
                                 ),
                             ],
-                            new Location(1, 1)
+                            new Location(1, 10)
                         )
                     ],
                     'fragments'          => [],
