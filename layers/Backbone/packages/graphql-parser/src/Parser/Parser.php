@@ -118,7 +118,7 @@ class Parser extends Tokenizer implements ParserInterface
             $operationLocation = $this->getTokenLocation($lbraceToken);
         }
 
-        $fieldOrFragmentReferences = [];
+        $fieldsOrFragmentBonds = [];
 
         while (!$this->match(Token::TYPE_RBRACE) && !$this->end()) {
             $this->eatMulti([Token::TYPE_COMMA]);
@@ -132,16 +132,16 @@ class Parser extends Tokenizer implements ParserInterface
                 )
             );
 
-            $fieldOrFragmentReferences[] = $operation;
+            $fieldsOrFragmentBonds[] = $operation;
         }
 
         $this->expect(Token::TYPE_RBRACE);
 
         if ($type === Token::TYPE_MUTATION) {
-            return $this->createMutationOperation($operationName, $variables, $directives, $fieldOrFragmentReferences, $operationLocation);
+            return $this->createMutationOperation($operationName, $variables, $directives, $fieldsOrFragmentBonds, $operationLocation);
         }
 
-        return $this->createQueryOperation($operationName, $variables, $directives, $fieldOrFragmentReferences, $operationLocation);
+        return $this->createQueryOperation($operationName, $variables, $directives, $fieldsOrFragmentBonds, $operationLocation);
     }
 
     public function createQueryOperation(
@@ -151,10 +151,10 @@ class Parser extends Tokenizer implements ParserInterface
         /** @var Directive[] $directives */
         array $directives,
         /** @var FieldInterface[]|FragmentBondInterface[] */
-        array $fieldOrFragmentReferences,
+        array $fieldsOrFragmentBonds,
         Location $location,
     ) {
-        return new QueryOperation($name, $variables, $directives, $fieldOrFragmentReferences, $location);
+        return new QueryOperation($name, $variables, $directives, $fieldsOrFragmentBonds, $location);
     }
 
     public function createMutationOperation(
@@ -164,10 +164,10 @@ class Parser extends Tokenizer implements ParserInterface
         /** @var Directive[] $directives */
         array $directives,
         /** @var FieldInterface[]|FragmentBondInterface[] */
-        array $fieldOrFragmentReferences,
+        array $fieldsOrFragmentBonds,
         Location $location,
     ) {
-        return new MutationOperation($name, $variables, $directives, $fieldOrFragmentReferences, $location);
+        return new MutationOperation($name, $variables, $directives, $fieldsOrFragmentBonds, $location);
     }
 
     /**
@@ -175,7 +175,7 @@ class Parser extends Tokenizer implements ParserInterface
      */
     protected function parseBody(string $token, bool $highLevel): array
     {
-        $fieldOrFragmentReferences = [];
+        $fieldsOrFragmentBonds = [];
 
         $this->lex();
 
@@ -186,18 +186,18 @@ class Parser extends Tokenizer implements ParserInterface
                 $this->lex();
 
                 if ($this->eat(Token::TYPE_ON)) {
-                    $fieldOrFragmentReferences[] = $this->parseBodyItem(Token::TYPE_INLINE_FRAGMENT, $highLevel);
+                    $fieldsOrFragmentBonds[] = $this->parseBodyItem(Token::TYPE_INLINE_FRAGMENT, $highLevel);
                 } else {
-                    $fieldOrFragmentReferences[] = $this->parseFragmentReference();
+                    $fieldsOrFragmentBonds[] = $this->parseFragmentReference();
                 }
             } else {
-                $fieldOrFragmentReferences[] = $this->parseBodyItem($token, $highLevel);
+                $fieldsOrFragmentBonds[] = $this->parseBodyItem($token, $highLevel);
             }
         }
 
         $this->expect(Token::TYPE_RBRACE);
 
-        return $fieldOrFragmentReferences;
+        return $fieldsOrFragmentBonds;
     }
 
     /**
@@ -394,17 +394,17 @@ class Parser extends Tokenizer implements ParserInterface
 
         if ($this->match(Token::TYPE_LBRACE)) {
             /** @var FieldInterface[]|FragmentBondInterface[] */
-            $fieldOrFragmentReferences = $this->parseBody($type === Token::TYPE_INLINE_FRAGMENT ? Token::TYPE_QUERY : $type, false);
+            $fieldsOrFragmentBonds = $this->parseBody($type === Token::TYPE_INLINE_FRAGMENT ? Token::TYPE_QUERY : $type, false);
 
-            if (!$fieldOrFragmentReferences) {
+            if (!$fieldsOrFragmentBonds) {
                 throw $this->createUnexpectedTokenTypeException($this->lookAhead->getType());
             }
 
             if ($type === Token::TYPE_INLINE_FRAGMENT) {
-                return $this->createInlineFragment($nameToken->getData(), $fieldOrFragmentReferences, $directives, $bodyLocation);
+                return $this->createInlineFragment($nameToken->getData(), $fieldsOrFragmentBonds, $directives, $bodyLocation);
             }
 
-            return $this->createRelationalField($nameToken->getData(), $alias, $arguments, $fieldOrFragmentReferences, $directives, $bodyLocation);
+            return $this->createRelationalField($nameToken->getData(), $alias, $arguments, $fieldsOrFragmentBonds, $directives, $bodyLocation);
         }
 
         return $this->createLeafField($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
@@ -412,14 +412,14 @@ class Parser extends Tokenizer implements ParserInterface
 
     /**
      * @param Argument[] $arguments
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldOrFragmentReferences
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      * @param Directive[] $directives
      */
     protected function createRelationalField(
         string $name,
         ?string $alias,
         array $arguments,
-        array $fieldOrFragmentReferences,
+        array $fieldsOrFragmentBonds,
         array $directives,
         Location $location
     ): RelationalField {
@@ -427,23 +427,23 @@ class Parser extends Tokenizer implements ParserInterface
             $name,
             $alias,
             $arguments,
-            $fieldOrFragmentReferences,
+            $fieldsOrFragmentBonds,
             $directives,
             $location
         );
     }
 
     /**
-     * @param FieldInterface[] $fieldOrFragmentReferences
+     * @param FieldInterface[] $fieldsOrFragmentBonds
      * @param Directive[] $directives
      */
     protected function createInlineFragment(
         string $typeName,
-        array $fieldOrFragmentReferences,
+        array $fieldsOrFragmentBonds,
         array $directives,
         Location $location,
     ): InlineFragment {
-        return new InlineFragment($typeName, $fieldOrFragmentReferences, $directives, $location);
+        return new InlineFragment($typeName, $fieldsOrFragmentBonds, $directives, $location);
     }
 
     /**
@@ -675,23 +675,23 @@ class Parser extends Tokenizer implements ParserInterface
         $directives = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
 
         /** @var FieldInterface[] */
-        $fieldOrFragmentReferences = $this->parseBody(Token::TYPE_QUERY, false);
+        $fieldsOrFragmentBonds = $this->parseBody(Token::TYPE_QUERY, false);
 
-        return $this->createFragment($nameToken->getData(), $model->getData(), $directives, $fieldOrFragmentReferences, $this->getTokenLocation($nameToken));
+        return $this->createFragment($nameToken->getData(), $model->getData(), $directives, $fieldsOrFragmentBonds, $this->getTokenLocation($nameToken));
     }
 
     /**
      * @param Directive[] $directives
-     * @param FieldInterface[] $fieldOrFragmentReferences
+     * @param FieldInterface[] $fieldsOrFragmentBonds
      */
     protected function createFragment(
         string $name,
         string $model,
         array $directives,
-        array $fieldOrFragmentReferences,
+        array $fieldsOrFragmentBonds,
         Location $location,
     ): Fragment {
-        return new Fragment($name, $model, $directives, $fieldOrFragmentReferences, $location);
+        return new Fragment($name, $model, $directives, $fieldsOrFragmentBonds, $location);
     }
 
     protected function eat(string $type): ?Token

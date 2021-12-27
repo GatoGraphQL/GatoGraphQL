@@ -11,12 +11,12 @@ class InlineFragment extends AbstractAst implements FragmentBondInterface, WithD
     use AstDirectivesTrait;
 
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldOrFragmentReferences
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      * @param Directive[] $directives
      */
     public function __construct(
         protected string $typeName,
-        protected array $fieldOrFragmentReferences,
+        protected array $fieldsOrFragmentBonds,
         array $directives,
         Location $location,
     ) {
@@ -27,17 +27,17 @@ class InlineFragment extends AbstractAst implements FragmentBondInterface, WithD
     /**
      * @return FieldInterface[]|FragmentBondInterface[]
      */
-    public function getFieldOrFragmentReferences(): array
+    public function getFieldsOrFragmentBonds(): array
     {
-        return $this->fieldOrFragmentReferences;
+        return $this->fieldsOrFragmentBonds;
     }
 
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldOrFragmentReferences
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      */
-    public function setFieldOrFragmentReferences(array $fieldOrFragmentReferences): void
+    public function setFieldsOrFragmentBonds(array $fieldsOrFragmentBonds): void
     {
-        $this->fieldOrFragmentReferences = $fieldOrFragmentReferences;
+        $this->fieldsOrFragmentBonds = $fieldsOrFragmentBonds;
     }
 
     public function getTypeName(): string

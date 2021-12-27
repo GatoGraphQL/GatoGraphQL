@@ -18,7 +18,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         /** @var Directive[] $directives */
         array $directives,
         /** @var FieldInterface[]|FragmentBondInterface[] */
-        protected array $fieldOrFragmentReferences,
+        protected array $fieldsOrFragmentBonds,
         Location $location,
     ) {
         parent::__construct($location);
@@ -45,17 +45,17 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
      */
     public function getFragmentReferences(): array
     {
-        return $this->getFragmentReferencesInFieldsOrFragmentReferences($this->fieldOrFragmentReferences);
+        return $this->getFragmentReferencesInFieldsOrFragmentBonds($this->fieldsOrFragmentBonds);
     }
 
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldOrFragmentReferences
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      * @return FragmentReference[]
      */
-    protected function getFragmentReferencesInFieldsOrFragmentReferences(array $fieldOrFragmentReferences): array
+    protected function getFragmentReferencesInFieldsOrFragmentBonds(array $fieldsOrFragmentBonds): array
     {
         $fragmentReferences = [];
-        foreach ($fieldOrFragmentReferences as $fieldOrFragmentReference) {
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentReference) {
             if ($fieldOrFragmentReference instanceof LeafField) {
                 continue;
             }
@@ -64,7 +64,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
                 $typedFragmentReference = $fieldOrFragmentReference;
                 $fragmentReferences = array_merge(
                     $fragmentReferences,
-                    $this->getFragmentReferencesInFieldsOrFragmentReferences($typedFragmentReference->getFieldOrFragmentReferences())
+                    $this->getFragmentReferencesInFieldsOrFragmentBonds($typedFragmentReference->getFieldsOrFragmentBonds())
                 );
                 continue;
             }
@@ -73,7 +73,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
                 $relationalField = $fieldOrFragmentReference;
                 $fragmentReferences = array_merge(
                     $fragmentReferences,
-                    $this->getFragmentReferencesInFieldsOrFragmentReferences($relationalField->getFieldOrFragmentReferences())
+                    $this->getFragmentReferencesInFieldsOrFragmentBonds($relationalField->getFieldsOrFragmentBonds())
                 );
                 continue;
             }
@@ -92,19 +92,19 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     public function getVariableReferences(): array
     {
         return array_merge(
-            $this->getVariableReferencesInFieldsOrFragments($this->fieldOrFragmentReferences),
+            $this->getVariableReferencesInFieldsOrFragments($this->fieldsOrFragmentBonds),
             $this->getVariableReferencesInDirectives($this->directives)
         );
     }
 
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldOrFragmentReferences
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      * @return VariableReference[]
      */
-    protected function getVariableReferencesInFieldsOrFragments(array $fieldOrFragmentReferences): array
+    protected function getVariableReferencesInFieldsOrFragments(array $fieldsOrFragmentBonds): array
     {
         $variableReferences = [];
-        foreach ($fieldOrFragmentReferences as $fieldOrFragmentReference) {
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentReference) {
             if ($fieldOrFragmentReference instanceof FragmentReference) {
                 continue;
             }
@@ -113,7 +113,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
                 $typedFragmentReference = $fieldOrFragmentReference;
                 $variableReferences = array_merge(
                     $variableReferences,
-                    $this->getVariableReferencesInFieldsOrFragments($typedFragmentReference->getFieldOrFragmentReferences())
+                    $this->getVariableReferencesInFieldsOrFragments($typedFragmentReference->getFieldsOrFragmentBonds())
                 );
                 continue;
             }
@@ -128,7 +128,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
                 $relationalField = $field;
                 $variableReferences = array_merge(
                     $variableReferences,
-                    $this->getVariableReferencesInFieldsOrFragments($relationalField->getFieldOrFragmentReferences())
+                    $this->getVariableReferencesInFieldsOrFragments($relationalField->getFieldsOrFragmentBonds())
                 );
                 continue;
             }
@@ -173,13 +173,13 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     /**
      * @return FieldInterface[]|FragmentBondInterface[]
      */
-    public function getFieldOrFragmentReferences(): array
+    public function getFieldsOrFragmentBonds(): array
     {
-        return $this->fieldOrFragmentReferences;
+        return $this->fieldsOrFragmentBonds;
     }
 
-    public function hasFieldOrFragmentReferences(): bool
+    public function hasFieldsOrFragmentBonds(): bool
     {
-        return count($this->fieldOrFragmentReferences) > 0;
+        return count($this->fieldsOrFragmentBonds) > 0;
     }
 }

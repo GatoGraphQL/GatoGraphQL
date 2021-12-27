@@ -452,10 +452,10 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 if ($fragmentReference instanceof FragmentReference) {
                     $fragmentName = $fragmentReference->getName();
                     $fragment = $executableDocument->getFragment($fragmentName);
-                    $fragmentFields = $fragment->getFieldOrFragmentReferences();
+                    $fragmentFields = $fragment->getFieldsOrFragmentBonds();
                     $fragmentType = $fragment->getModel();
                 } else {
-                    $fragmentFields = $fragmentReference->getFieldOrFragmentReferences();
+                    $fragmentFields = $fragmentReference->getFieldsOrFragmentBonds();
                     $fragmentType = $fragmentReference->getTypeName();
                 }
 
@@ -483,7 +483,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         $queryFieldPath = [$this->convertField($query)];
 
         // Iterate through the query's fields: properties and connections
-        if ($fields = $query->getFieldOrFragmentReferences()) {
+        if ($fields = $query->getFieldsOrFragmentBonds()) {
             $this->processAndAddFieldPaths($executableDocument, $queryFieldPaths, $fields, $queryFieldPath);
         } else {
             // Otherwise, just add the query field, which doesn't have subfields

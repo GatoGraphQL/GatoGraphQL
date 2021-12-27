@@ -12,23 +12,23 @@ class RelationalField extends AbstractAst implements FieldInterface
     use AstDirectivesTrait;
 
     /** @var FieldInterface[]|FragmentBondInterface[] */
-    protected array $fieldOrFragmentReferences = [];
+    protected array $fieldsOrFragmentBonds = [];
 
     /**
      * @param Argument[] $arguments
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldOrFragmentReferences
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      * @param Directive[] $directives
      */
     public function __construct(
         protected string $name,
         protected ?string $alias,
         array $arguments,
-        array $fieldOrFragmentReferences,
+        array $fieldsOrFragmentBonds,
         array $directives,
         Location $location,
     ) {
         parent::__construct($location);
-        $this->setFieldOrFragmentReferences($fieldOrFragmentReferences);
+        $this->setFieldsOrFragmentBonds($fieldsOrFragmentBonds);
         $this->setArguments($arguments);
         $this->setDirectives($directives);
     }
@@ -41,25 +41,25 @@ class RelationalField extends AbstractAst implements FieldInterface
     /**
      * @return FieldInterface[]|FragmentBondInterface[]
      */
-    public function getFieldOrFragmentReferences(): array
+    public function getFieldsOrFragmentBonds(): array
     {
-        return $this->fieldOrFragmentReferences;
+        return $this->fieldsOrFragmentBonds;
     }
 
-    public function hasFieldOrFragmentReferences(): bool
+    public function hasFieldsOrFragmentBonds(): bool
     {
-        return count($this->fieldOrFragmentReferences) > 0;
+        return count($this->fieldsOrFragmentBonds) > 0;
     }
 
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldOrFragmentReferences
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      */
-    public function setFieldOrFragmentReferences(array $fieldOrFragmentReferences): void
+    public function setFieldsOrFragmentBonds(array $fieldsOrFragmentBonds): void
     {
         /**
          * we cannot store fields by name because of TypedFragments
          */
-        $this->fieldOrFragmentReferences = $fieldOrFragmentReferences;
+        $this->fieldsOrFragmentBonds = $fieldsOrFragmentBonds;
     }
 
     public function getAlias(): ?string

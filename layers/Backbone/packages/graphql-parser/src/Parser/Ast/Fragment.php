@@ -13,13 +13,13 @@ class Fragment extends AbstractAst implements WithDirectivesInterface
 
     /**
      * @param Directive[] $directives
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldOrFragmentReferences
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      */
     public function __construct(
         protected string $name,
         protected string $model,
         array $directives,
-        protected array $fieldOrFragmentReferences,
+        protected array $fieldsOrFragmentBonds,
         Location $location,
     ) {
         parent::__construct($location);
@@ -49,16 +49,16 @@ class Fragment extends AbstractAst implements WithDirectivesInterface
     /**
      * @return FieldInterface[]|FragmentBondInterface[]
      */
-    public function getFieldOrFragmentReferences(): array
+    public function getFieldsOrFragmentBonds(): array
     {
-        return $this->fieldOrFragmentReferences;
+        return $this->fieldsOrFragmentBonds;
     }
 
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldOrFragmentReferences
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      */
-    public function setFieldOrFragmentReferences(array $fieldOrFragmentReferences): void
+    public function setFieldsOrFragmentBonds(array $fieldsOrFragmentBonds): void
     {
-        $this->fieldOrFragmentReferences = $fieldOrFragmentReferences;
+        $this->fieldsOrFragmentBonds = $fieldsOrFragmentBonds;
     }
 }
