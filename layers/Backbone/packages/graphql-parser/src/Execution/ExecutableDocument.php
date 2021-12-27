@@ -35,7 +35,10 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     public function validateAndMerge(): void
     {
-        $operations = $this->getOperationsToExecute();
+        $operations = $this->getOperationsToExecute(
+            $this->document->getOperations(),
+            $this->operationName
+        );
 
         $this->assertFragmentReferencesAreValid($operations);
         $this->assertFragmentsAreUsed($operations);
@@ -54,14 +57,14 @@ class ExecutableDocument implements ExecutableDocumentInterface
      * retrieve a list of Operations, allowing to override it
      * for the "multiple query execution" feature.
      *
+     * @param OperationInterface[] $operations
      * @return OperationInterface[]
      * @throws InvalidRequestException
      *
      * @see https://spec.graphql.org/draft/#sec-Executing-Requests
      */
-    protected function getOperationsToExecute(): array
+    protected function getOperationsToExecute(array $operations, ?string $operationName): array
     {
-        $operations = $this->document->getOperations();
         $operationCount = count($operations);
         if ($operationCount === 0) {
             throw new InvalidRequestException(
@@ -70,7 +73,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
             );
         }
 
-        if (empty($this->operationName)) {
+        if (empty($operationName)) {
             if ($operationCount > 1) {
                 throw new InvalidRequestException(
                     $this->getNoOperationNameProvidedErrorMessage(),
@@ -81,10 +84,10 @@ class ExecutableDocument implements ExecutableDocumentInterface
             return $operations;
         }
 
-        $selectedOperations = $this->getSelectedOperationsToExecute($operations, $this->operationName);
+        $selectedOperations = $this->getSelectedOperationsToExecute($operations, $operationName);
         if ($selectedOperations === []) {
             throw new InvalidRequestException(
-                $this->getNoOperationMatchesNameErrorMessage($this->operationName),
+                $this->getNoOperationMatchesNameErrorMessage($operationName),
                 new Location(1, 1)
             );
         }
