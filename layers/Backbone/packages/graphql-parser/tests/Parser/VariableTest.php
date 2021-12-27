@@ -26,17 +26,18 @@ class VariableTest extends TestCase
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('Context has not been set for variable \'foo\'');
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
-        $var->getValue();
+        $var->getValue()->getValue();
     }
 
     public function testGetValueReturnsDefaultValueIfNoValueSet()
     {
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
         $var->setDefaultValue(new Literal('default-value', new Location(1, 1)));
+        $var->setContext(new Context('', []));
 
         $this->assertEquals(
             'default-value',
-            $var->getValue()
+            $var->getValue()->getValue()
         );
     }
 
