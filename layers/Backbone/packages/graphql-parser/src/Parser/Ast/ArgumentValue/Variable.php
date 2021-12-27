@@ -21,7 +21,7 @@ class Variable extends AbstractAst implements WithValueInterface
     public function __construct(
         private string $name,
         private string $type,
-        private bool $nullable,
+        private bool $required,
         private bool $isArray,
         private bool $arrayElementNullable,
         Location $location,
@@ -64,14 +64,14 @@ class Variable extends AbstractAst implements WithValueInterface
         $this->isArray = $isArray;
     }
 
-    public function isNullable(): bool
+    public function isRequired(): bool
     {
-        return $this->nullable;
+        return $this->required;
     }
 
-    public function setNullable(bool $nullable): void
+    public function setRequired(bool $required): void
     {
-        $this->nullable = $nullable;
+        $this->required = $required;
     }
 
     public function hasDefaultValue(): bool
