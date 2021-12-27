@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
+use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\VariableReference;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
 abstract class AbstractOperation extends AbstractAst implements OperationInterface
@@ -44,21 +45,18 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
      */
     public function getFragmentReferences(): array
     {
-        return $this->addFragmentReferences([], $this->fieldOrFragmentReferences);
+        return $this->getFragmentReferencesInFieldsOrFragmentReferences($this->fieldOrFragmentReferences);
     }
 
     /**
-     * @param FragmentReference[] $fragmentReferences
-     * @param FieldInterface[]|FragmentInterface[] $fieldOrFragmentReferencesToIterate
+     * @param FieldInterface[]|FragmentInterface[] $fieldOrFragmentReferences
      * @return FragmentReference[]
      */
-    protected function addFragmentReferences(array $fragmentReferences, array $fieldOrFragmentReferencesToIterate): array
+    protected function getFragmentReferencesInFieldsOrFragmentReferences(array $fieldOrFragmentReferences): array
     {
-        foreach ($fieldOrFragmentReferencesToIterate as $fieldOrFragmentReference) {
-            if ($fieldOrFragmentReference instanceof FragmentReference) {
-                /** @var FragmentReference */
-                $fragmentReference = $fieldOrFragmentReference;
-                $fragmentReferences[] = $fragmentReference;
+        $fragmentReferences = [];
+        foreach ($fieldOrFragmentReferences as $fieldOrFragmentReference) {
+            if ($fieldOrFragmentReference instanceof Field) {
                 continue;
             }
             if ($fieldOrFragmentReference instanceof TypedFragmentReference) {
@@ -66,7 +64,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
                 $typedFragmentReference = $fieldOrFragmentReference;
                 $fragmentReferences = array_merge(
                     $fragmentReferences,
-                    $this->addFragmentReferences([], $typedFragmentReference->getFieldOrFragmentReferences)
+                    $this->getFragmentReferencesInFieldsOrFragmentReferences($typedFragmentReference->getFieldOrFragmentReferences())
                 );
                 continue;
             }
@@ -75,15 +73,17 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
                 $relationalField = $fieldOrFragmentReference;
                 $fragmentReferences = array_merge(
                     $fragmentReferences,
-                    $this->addFragmentReferences([], $relationalField->getFieldOrFragmentReferences)
+                    $this->getFragmentReferencesInFieldsOrFragmentReferences($relationalField->getFieldOrFragmentReferences())
                 );
                 continue;
             }
+            /** @var FragmentReference */
+            $fragmentReference = $fieldOrFragmentReference;
+            $fragmentReferences[] = $fragmentReference;
         }
         return $fragmentReferences;
     }
 
-    // @todo Calculate deep
     /**
      * Gather all the VariableReference within the Operation.
      *
@@ -91,11 +91,81 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
      */
     public function getVariableReferences(): array
     {
-        $variableReferences = [];
-        foreach ($this->fieldOrFragmentReferences as $fieldOrFragmentReference) {
-            if ($fieldOrFragmentReference instanceof FieldInterface) {
+        return array_merge(
+            $this->getVariableReferencesInFieldsOrFragments($this->fieldOrFragmentReferences),
+            $this->getVariableReferencesInDirectives($this->directives)
+        );
+    }
 
+    /**
+     * @param FieldInterface[]|FragmentInterface[] $fieldOrFragmentReferences
+     * @return VariableReference[]
+     */
+    protected function getVariableReferencesInFieldsOrFragments(array $fieldOrFragmentReferences): array
+    {
+        $variableReferences = [];
+        foreach ($fieldOrFragmentReferences as $fieldOrFragmentReference) {
+            if ($fieldOrFragmentReference instanceof FragmentReference) {
+                continue;
             }
+            if ($fieldOrFragmentReference instanceof TypedFragmentReference) {
+                /** @var TypedFragmentReference */
+                $typedFragmentReference = $fieldOrFragmentReference;
+                $variableReferences = array_merge(
+                    $variableReferences,
+                    $this->getVariableReferencesInFieldsOrFragments($typedFragmentReference->getFieldOrFragmentReferences())
+                );
+                continue;
+            }
+            /** @var FieldInterface */
+            $field = $fieldOrFragmentReference;
+            $variableReferences = array_merge(
+                $variableReferences,
+                $this->getVariableReferencesInArguments($field->getArguments())
+            );
+            if ($field instanceof RelationalField) {
+                /** @var RelationalField */
+                $relationalField = $field;
+                $variableReferences = array_merge(
+                    $variableReferences,
+                    $this->getVariableReferencesInFieldsOrFragments($relationalField->getFieldOrFragmentReferences())
+                );
+                continue;
+            }
+        }
+        return $variableReferences;
+    }
+
+    /**
+     * @param Argument[] $arguments
+     * @return VariableReference[]
+     */
+    protected function getVariableReferencesInArguments(array $arguments): array
+    {
+        $variableReferences = [];
+        foreach ($arguments as $argument) {
+            if (!($argument->getValue() instanceof VariableReference)) {
+                continue;
+            }
+            /** @var VariableReference */
+            $variableReference = $argument->getValue();
+            $variableReferences[] = $variableReference;
+        }
+        return $variableReferences;
+    }
+
+    /**
+     * @param Directive[] $directives
+     * @return VariableReference[]
+     */
+    protected function getVariableReferencesInDirectives(array $directives): array
+    {
+        $variableReferences = [];
+        foreach ($directives as $directive) {
+            $variableReferences = array_merge(
+                $variableReferences,
+                $this->getVariableReferencesInArguments($directive->getArguments())
+            );
         }
         return $variableReferences;
     }
