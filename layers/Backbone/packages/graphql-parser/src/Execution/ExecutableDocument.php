@@ -35,19 +35,20 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     public function validateAndMerge(): void
     {
-        $operations = $this->getOperationsToExecute(
-            $this->document->getOperations(),
+        $documentOperations = $this->document->getOperations();
+        $requestedOperations = $this->getRequestedOperations(
+            $documentOperations,
             $this->operationName
         );
 
-        $this->assertFragmentReferencesAreValid($operations);
-        $this->assertFragmentsAreUsed($operations);
-        $this->assertAllVariablesExist($operations);
-        $this->assertAllVariablesAreUsed($operations);
-        $this->assertAllVariablesHaveValue($operations);
+        $this->assertFragmentReferencesAreValid($requestedOperations);
+        $this->assertFragmentsAreUsed($requestedOperations);
+        $this->assertAllVariablesExist($requestedOperations);
+        $this->assertAllVariablesAreUsed($requestedOperations);
+        $this->assertAllVariablesHaveValue($requestedOperations);
 
         // Inject the variable values into the objects
-        foreach ($operations as $operation) {
+        foreach ($requestedOperations as $operation) {
             $this->mergeOperationVariables($operation);
         }
     }
@@ -63,7 +64,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
      *
      * @see https://spec.graphql.org/draft/#sec-Executing-Requests
      */
-    protected function getOperationsToExecute(array $operations, ?string $operationName): array
+    protected function getRequestedOperations(array $operations, ?string $operationName): array
     {
         $operationCount = count($operations);
         if ($operationCount === 0) {
