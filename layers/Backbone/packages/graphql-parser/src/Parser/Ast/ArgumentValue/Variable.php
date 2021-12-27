@@ -17,7 +17,7 @@ class Variable extends AbstractAst implements WithValueInterface
 
     private bool $hasDefaultValue = false;
 
-    private mixed $defaultValue = null;
+    private InputList|InputObject|Literal|null $defaultValue = null;
 
     public function __construct(
         private string $name,
@@ -80,12 +80,12 @@ class Variable extends AbstractAst implements WithValueInterface
         return $this->hasDefaultValue;
     }
 
-    public function getDefaultValue(): mixed
+    public function getDefaultValue(): InputList|InputObject|Literal|null
     {
         return $this->defaultValue;
     }
 
-    public function setDefaultValue(mixed $defaultValue): void
+    public function setDefaultValue(InputList|InputObject|Literal|null $defaultValue): void
     {
         $this->hasDefaultValue = true;
         $this->defaultValue = $defaultValue;
