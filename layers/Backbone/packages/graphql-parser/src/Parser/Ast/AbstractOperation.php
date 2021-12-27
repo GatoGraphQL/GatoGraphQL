@@ -9,7 +9,7 @@ use PoPBackbone\GraphQLParser\Parser\Location;
 
 abstract class AbstractOperation extends AbstractAst implements OperationInterface, WithFieldsOrFragmentBondsInterface
 {
-    use AstDirectivesTrait;
+    use WithDirectivesTrait;
     use WithFieldsOrFragmentBondsTrait;
 
     public function __construct(

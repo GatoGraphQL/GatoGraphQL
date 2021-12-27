@@ -8,7 +8,7 @@ use PoPBackbone\GraphQLParser\Parser\Location;
 
 class Fragment extends AbstractAst implements WithDirectivesInterface, WithFieldsOrFragmentBondsInterface
 {
-    use AstDirectivesTrait;
+    use WithDirectivesTrait;
     use WithFieldsOrFragmentBondsTrait;
 
     /**

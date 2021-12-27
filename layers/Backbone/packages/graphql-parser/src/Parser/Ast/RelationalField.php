@@ -8,8 +8,8 @@ use PoPBackbone\GraphQLParser\Parser\Location;
 
 class RelationalField extends AbstractAst implements FieldInterface, WithFieldsOrFragmentBondsInterface
 {
-    use AstArgumentsTrait;
-    use AstDirectivesTrait;
+    use WithArgumentsTrait;
+    use WithDirectivesTrait;
     use WithFieldsOrFragmentBondsTrait;
 
     /**

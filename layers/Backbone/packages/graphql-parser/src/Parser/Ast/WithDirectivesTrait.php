@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
-trait AstDirectivesTrait
+trait WithDirectivesTrait
 {
     /** @var array<string,Directive> */
     protected array $directives;

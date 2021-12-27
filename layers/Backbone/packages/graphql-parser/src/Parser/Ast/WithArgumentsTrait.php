@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
-trait AstArgumentsTrait
+trait WithArgumentsTrait
 {
     /** @var array<string,Argument> */
     protected array $arguments;

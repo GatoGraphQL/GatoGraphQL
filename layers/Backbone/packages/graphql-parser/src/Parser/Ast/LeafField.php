@@ -9,8 +9,8 @@ use PoPBackbone\GraphQLParser\Parser\Location;
 
 class LeafField extends AbstractAst implements FieldInterface
 {
-    use AstArgumentsTrait;
-    use AstDirectivesTrait;
+    use WithArgumentsTrait;
+    use WithDirectivesTrait;
 
     /**
      * @param Argument[] $arguments
