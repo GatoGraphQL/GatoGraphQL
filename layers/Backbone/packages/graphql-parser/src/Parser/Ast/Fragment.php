@@ -11,8 +11,6 @@ class Fragment extends AbstractAst implements WithDirectivesInterface
 {
     use AstDirectivesTrait;
 
-    private bool $used = false;
-
     /**
      * @param Directive[] $directives
      * @param FieldInterface[] $fields
@@ -26,16 +24,6 @@ class Fragment extends AbstractAst implements WithDirectivesInterface
     ) {
         parent::__construct($location);
         $this->setDirectives($directives);
-    }
-
-    public function isUsed(): bool
-    {
-        return $this->used;
-    }
-
-    public function setUsed(bool $used): void
-    {
-        $this->used = $used;
     }
 
     public function getName(): string

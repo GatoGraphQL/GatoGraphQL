@@ -311,10 +311,7 @@ class Parser extends Tokenizer implements ParserInterface
             $name = $this->lex()->getData();
 
             $variable = $this->findVariable($name);
-            if ($variable) {
-                $variable->setUsed(true);
-            }
-
+            
             return $this->createVariableReference(
                 $name,
                 $variable,

@@ -13,8 +13,6 @@ class Variable extends AbstractAst implements WithValueInterface
 {
     private mixed $value = null;
 
-    private bool $used = false;
-
     private bool $hasDefaultValue = false;
 
     private mixed $defaultValue = null;
@@ -109,16 +107,6 @@ class Variable extends AbstractAst implements WithValueInterface
     {
         $this->hasDefaultValue = true;
         $this->defaultValue = $defaultValue;
-    }
-
-    public function isUsed(): bool
-    {
-        return $this->used;
-    }
-
-    public function setUsed(bool $used): void
-    {
-        $this->used = $used;
     }
 
     public function isArrayElementNullable(): bool
