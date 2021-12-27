@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue;
 
 use LogicException;
-use PoPBackbone\GraphQLParser\Execution\Context;
 use PoPBackbone\GraphQLParser\Parser\Ast\AbstractAst;
 use PoPBackbone\GraphQLParser\Parser\Ast\WithValueInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
 class VariableReference extends AbstractAst implements WithValueInterface
 {
-    private Context $context;
-
     public function __construct(
         private string $name,
         private ?Variable $variable,
@@ -27,9 +24,9 @@ class VariableReference extends AbstractAst implements WithValueInterface
         return $this->variable;
     }
 
-    public function setContext(Context $context): void
+    public function getName(): string
     {
-        $this->context = $context;
+        return $this->name;
     }
 
     /**
@@ -39,22 +36,15 @@ class VariableReference extends AbstractAst implements WithValueInterface
      */
     public function getValue(): mixed
     {
-        if ($this->context->hasVariableValue($this->name)) {
-            return $this->context->getVariableValue($this->name);
+        if ($this->variable === null) {
+            throw new LogicException($this->getVariableDoesNotExistErrorMessage($this->name));
         }
-        if ($this->variable?->hasDefaultValue()) {
-            return $this->variable->getDefaultValue();
-        }
-        throw new LogicException($this->getValueIsNotSetForVariableErrorMessage($this->name));
+
+        return $this->variable->getValue();
     }
 
-    protected function getValueIsNotSetForVariableErrorMessage(string $variableName): string
+    protected function getVariableDoesNotExistErrorMessage(string $variableReferenceName): string
     {
-        return sprintf('Value is not set for variable \'%s\'', $variableName);
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
+        return sprintf('No variable exists for variable reference \'%s\'', $variableReferenceName);
     }
 }

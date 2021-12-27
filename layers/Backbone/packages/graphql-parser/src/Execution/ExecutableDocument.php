@@ -154,8 +154,8 @@ class ExecutableDocument implements ExecutableDocumentInterface
 
     protected function propagateContext(OperationInterface $operation): void
     {
-        foreach ($operation->getVariableReferences() as $variableReference) {
-            $variableReference->setContext($this->context);
+        foreach ($operation->getVariables() as $variable) {
+            $variable->setContext($this->context);
         }
     }
 
