@@ -37,7 +37,6 @@ class ExecutableDocument implements ExecutableDocumentInterface
     {
         $operations = $this->getOperationsToExecute();
 
-        $this->assertOperationToExecuteExists($operations);
         $this->assertFragmentReferencesAreValid($operations);
         $this->assertFragmentsAreUsed($operations);
         $this->assertAllVariablesExist($operations);
@@ -104,30 +103,6 @@ class ExecutableDocument implements ExecutableDocumentInterface
             $operations,
             fn (OperationInterface $operation) => $operation->getName() === $operationName
         ));
-    }
-
-    /**
-     * If there is more than one operation, check that the operationName
-     * corresponds to one of them, or is `__ALL`
-     *
-     * @param OperationInterface[] $operations
-     * @throws InvalidRequestException
-     */
-    protected function assertOperationToExecuteExists(array $operations): void
-    {
-        if (count($operations) === 1) {
-            return;
-        }
-
-        if ($operations === []) {
-            $errorMessage = $this->operationName !== null ?
-                $this->getNoOperationMatchesNameErrorMessage($this->operationName)
-                : $this->getNoOperationsProvidedErrorMessage();
-            throw new InvalidRequestException(
-                throw $errorMessage,
-                new Location(1, 1)
-            );
-        }
     }
 
     protected function getNoOperationMatchesNameErrorMessage(string $operationName): string
