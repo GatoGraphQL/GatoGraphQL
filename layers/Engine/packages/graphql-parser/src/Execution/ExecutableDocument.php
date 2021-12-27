@@ -59,4 +59,47 @@ class ExecutableDocument extends UpstreamExecutableDocument
             $variableName
         );
     }
+
+    protected function getNoOperationMatchesNameErrorMessage(string $operationName): string
+    {
+        return \sprintf(
+            $this->getTranslationAPI()->__('Operation with name \'%s\' does not exist', 'graphql-parser'),
+            $operationName
+        );
+    }
+
+    protected function getNoOperationsProvidedErrorMessage(): string
+    {
+        return $this->getTranslationAPI()->__('No operations were provided in the query', 'graphql-parser');
+    }
+
+    protected function getNoOperationNameProvidedErrorMessage(): string
+    {
+        return $this->getTranslationAPI()->__('The operation name must be provided', 'graphql-parser');
+    }
+
+    protected function getVariableHasntBeenDeclaredErrorMessage(string $variableName): string
+    {
+        return \sprintf(
+            $this->getTranslationAPI()->__('Variable \'%s\' hasn\'t been declared', 'graphql-parser'),
+            $variableName
+        );
+    }
+
+    protected function getVariableHasntBeenSubmittedErrorMessage(string $variableName): string
+    {
+        return \sprintf(
+            $this->getTranslationAPI()->__('Variable \'%s\' hasn\'t been submitted', 'graphql-parser'),
+            $variableName
+        );
+    }
+
+    protected function getExecuteValidationErrorMessage(string $methodName): string
+    {
+        return \sprintf(
+            $this->getTranslationAPI()->__('Before executing `%s`, must call `%s`', 'graphql-parser'),
+            $methodName,
+            'validateAndInitialize'
+        );
+    }
 }

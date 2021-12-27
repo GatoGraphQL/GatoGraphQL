@@ -109,12 +109,12 @@ class ExecutableDocument implements ExecutableDocumentInterface
 
     protected function getNoOperationsProvidedErrorMessage(): string
     {
-        return \sprintf('No operations were provided in the query');
+        return 'No operations were provided in the query';
     }
 
     protected function getNoOperationNameProvidedErrorMessage(): string
     {
-        return \sprintf('The operation name must be provided');
+        return 'The operation name must be provided';
     }
 
     /**
@@ -280,7 +280,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
 
     protected function getExecuteValidationErrorMessage(string $methodName): string
     {
-        return sprintf(
+        return \sprintf(
             'Before executing `%s`, must call `%s`',
             $methodName,
             'validateAndInitialize'
